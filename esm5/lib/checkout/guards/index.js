@@ -1,0 +1,8 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+import { OrderConfirmationPageGuard } from './order-confirmation-page.guard';
+/** @type {?} */
+export var guards = [OrderConfirmationPageGuard];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJsaWIvY2hlY2tvdXQvZ3VhcmRzL2luZGV4LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSxPQUFPLEVBQUUsMEJBQTBCLEVBQUUsTUFBTSxpQ0FBaUMsQ0FBQzs7QUFFN0UsTUFBTSxLQUFPLE1BQU0sR0FBVSxDQUFDLDBCQUEwQixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgT3JkZXJDb25maXJtYXRpb25QYWdlR3VhcmQgfSBmcm9tICcuL29yZGVyLWNvbmZpcm1hdGlvbi1wYWdlLmd1YXJkJztcblxuZXhwb3J0IGNvbnN0IGd1YXJkczogYW55W10gPSBbT3JkZXJDb25maXJtYXRpb25QYWdlR3VhcmRdO1xuIl19
