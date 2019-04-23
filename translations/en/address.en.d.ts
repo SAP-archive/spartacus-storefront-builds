@@ -1,33 +1,48 @@
 export declare const address: {
-    address: {
-        label: {
-            title: string;
-            firstName: string;
-            lastName: string;
-            address1: string;
-            address2: string;
-            country: string;
-            city: string;
-            state: string;
-            zipCode: string;
-            phoneNumber: string;
+    addressForm: {
+        title: string;
+        firstName: {
+            label: string;
+            placeholder: string;
         };
-        action: {
-            saveAsDefault: string;
-            chooseAddress: string;
-            backToAddressList: string;
-            addAddress: string;
-            updateAddress: string;
+        lastName: {
+            label: string;
+            placeholder: string;
         };
-        placeholder: {
-            firstName: string;
-            lastName: string;
-            streetAddress: string;
-            aptSuite: string;
-            selectOne: string;
-            city: string;
-            zipCode: string;
-            phoneNumber: string;
+        address1: string;
+        address2: string;
+        country: string;
+        city: {
+            label: string;
+            placeholder: string;
         };
+        state: string;
+        zipCode: {
+            label: string;
+            placeholder: string;
+        };
+        phoneNumber: {
+            label: string;
+            placeholder: string;
+        };
+        saveAsDefault: string;
+        chooseAddress: string;
+        streetAddress: string;
+        aptSuite: string;
+        selectOne: string;
+        setAsDefault: string;
+    };
+    addressBook: {
+        addNewShippingAddress: string;
+        editShippingAddress: string;
+        areYouSureToDeleteAddress: string;
+        addNewAddress: string;
+        addAddress: string;
+        updateAddress: string;
+        backToAddressList: string;
+    };
+    addressCard: {
+        default: string;
+        setAsDefault: string;
     };
 };

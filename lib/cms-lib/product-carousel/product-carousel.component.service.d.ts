@@ -1,4 +1,4 @@
-import { ProductService, Product, CmsProductCarouselComponent } from '@spartacus/core';
+import { CmsProductCarouselComponent, ProductService, UIProduct } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { CmsComponentData } from '../../../cms-structure/page/model/cms-component-data';
 export declare class ProductCarouselService {
@@ -17,7 +17,7 @@ export declare class ProductCarouselService {
     getActiveItemWithDelay(): Observable<number>;
     getTitle(): Observable<string>;
     setTitle(): void;
-    getItems(): Observable<Observable<Product>[]>;
+    getItems(): Observable<Observable<UIProduct>[]>;
     getItemSize(): Observable<number>;
     /**
      * Maps the item codes from CMS component to an array of `Product` observables.

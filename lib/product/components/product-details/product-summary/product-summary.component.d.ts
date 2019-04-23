@@ -1,13 +1,20 @@
-import { EventEmitter } from '@angular/core';
+import { OnInit } from '@angular/core';
 import { ProductDetailOutlets } from '../../../product-outlets.model';
-export declare class ProductSummaryComponent {
+import { TranslatePipe } from '@spartacus/core';
+export declare class ProductSummaryComponent implements OnInit {
+    protected translatePipe: TranslatePipe;
     static outlets: typeof ProductDetailOutlets;
     itemCount: number;
+    reviewsTabAvailable: boolean;
     product: any;
-    openReview: EventEmitter<{}>;
     readonly outlets: typeof ProductDetailOutlets;
     updateCount(value: any): void;
-    readonly stockInfo: string;
-    private hasStock;
-    launchReview(): void;
+    readonly hasStock: boolean;
+    private getReviewsComponent;
+    private getTabsComponent;
+    getTabByLabel(label: string, tabsComponent: Element): HTMLElement;
+    clickTabIfInactive(tab: HTMLElement): void;
+    showReviews(): void;
+    constructor(translatePipe: TranslatePipe);
+    ngOnInit(): void;
 }
