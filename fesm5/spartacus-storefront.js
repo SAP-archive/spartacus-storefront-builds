@@ -1,17 +1,2258 @@
 import { ServiceWorkerModule, ɵangular_packages_service_worker_service_worker_b } from '@angular/service-worker';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbTabsetModule, NgbAccordionModule, NgbTabsetConfig, NgbAccordionConfig, NgbRatingModule, NgbRatingConfig, NgbDropdownModule, NgbTypeaheadModule, NgbCollapseModule, NgbModalModule, NgbPaginationModule, NgbPaginationConfig, NgbModule, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { combineLatest, BehaviorSubject, concat, from, isObservable, of, fromEvent, ReplaySubject, Subscription, merge, Subject } from 'rxjs';
+import { concat, from, isObservable, of, fromEvent, BehaviorSubject, combineLatest, ReplaySubject, Subscription, merge, Subject } from 'rxjs';
 import { NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { debounceTime, tap, filter, map, takeWhile, endWith, first, skipWhile, startWith, distinctUntilChanged, switchMap, withLatestFrom, multicast, refCount, take, delay } from 'rxjs/operators';
-import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
-import { RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { __extends, __values, __spread, __read, __assign, __awaiter, __generator } from 'tslib';
-import { Component, Input, EventEmitter, Output, ElementRef, ChangeDetectorRef, Renderer2, NgModule, ChangeDetectionStrategy, forwardRef, ViewChild, Directive, HostListener, ViewEncapsulation, Injectable, APP_INITIALIZER, Inject, PLATFORM_ID, HostBinding, Optional, Injector, TemplateRef, defineInjectable, inject, INJECTOR, ViewContainerRef } from '@angular/core';
-import { I18nModule, CartService, UrlTranslationModule, ConfigModule, CartModule, CheckoutService, GlobalMessageService, GlobalMessageType, UserService, RoutingService, CartDataService, CheckoutModule, ServerConfig, WindowRef, Config, CmsConfig, provideConfigFactory, serverConfigFromMetaTagFactory, TranslationService, TranslationNamespaceService, AuthService, RoutingModule, AuthGuard, ProductService, UserModule, CmsService, StoreDataService, GoogleMapRendererService, StoreFinderService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, defaultCmsModuleConfig, CmsModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, ProductReviewService, SiteContextModule, StripHtmlModule, PageMetaService, CmsPageTitleModule, ProductModule, ProductSearchService, PageType, OccUserService, OccMiscsService, OccOrderService, OccConfig, GlobalMessageModule, StoreFinderCoreModule, DynamicAttributeService, CxApiService, ComponentMapperService, NotAuthGuard, PageRobotsMeta } from '@spartacus/core';
+import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { endWith, first, skipWhile, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, tap, withLatestFrom, takeWhile, multicast, refCount, take, delay } from 'rxjs/operators';
+import { isPlatformServer, CommonModule, DOCUMENT } from '@angular/common';
+import { Router, RouterModule, ActivatedRoute, NavigationStart } from '@angular/router';
+import { Injectable, NgModule, ElementRef, Input, Directive, Component, ChangeDetectionStrategy, EventEmitter, Output, ViewChild, HostListener, Renderer2, Inject, APP_INITIALIZER, Optional, Injector, TemplateRef, ChangeDetectorRef, ViewEncapsulation, forwardRef, defineInjectable, inject, INJECTOR, PLATFORM_ID, ViewContainerRef } from '@angular/core';
+import { AuthService, CmsService, PageType, provideConfigFactory, serverConfigFromMetaTagFactory, ServerConfig, GlobalMessageType, GlobalMessageService, WindowRef, UrlTranslationModule, I18nModule, ConfigModule, CheckoutService, RoutingService, UserService, TranslationService, TranslationNamespaceService, CartService, RoutingModule, CartModule, AuthGuard, ProductService, UserModule, StoreDataService, GoogleMapRendererService, StoreFinderService, CartDataService, CmsConfig, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, Config, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, ProductReviewService, defaultCmsModuleConfig, CmsModule, StripHtmlModule, GlobalMessageModule, OccUserService, OccMiscsService, OccOrderService, OccConfig, CheckoutModule, SiteContextModule, StoreFinderCoreModule, PageMetaService, CmsPageTitleModule, ProductModule, ProductSearchService, DynamicAttributeService, NotAuthGuard, PageRobotsMeta, CxApiService, ComponentMapperService } from '@spartacus/core';
 import { Title, Meta } from '@angular/platform-browser';
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var LogoutGuard = /** @class */ (function () {
+    function LogoutGuard(auth, cms) {
+        this.auth = auth;
+        this.cms = cms;
+    }
+    /**
+     * @return {?}
+     */
+    LogoutGuard.prototype.canActivate = /**
+     * @return {?}
+     */
+    function () {
+        this.logout();
+        return this.cms.hasPage({
+            id: '/logout',
+            type: PageType.CONTENT_PAGE,
+        });
+    };
+    /**
+     * @protected
+     * @return {?}
+     */
+    LogoutGuard.prototype.logout = /**
+     * @protected
+     * @return {?}
+     */
+    function () {
+        this.auth.logout();
+    };
+    LogoutGuard.GUARD_NAME = 'LogoutGuard';
+    LogoutGuard.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    LogoutGuard.ctorParameters = function () { return [
+        { type: AuthService },
+        { type: CmsService }
+    ]; };
+    /** @nocollapse */ LogoutGuard.ngInjectableDef = defineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(inject(AuthService), inject(CmsService)); }, token: LogoutGuard, providedIn: "root" });
+    return LogoutGuard;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CmsMappingService = /** @class */ (function () {
+    function CmsMappingService(config, platformId) {
+        this.config = config;
+        this.platformId = platformId;
+    }
+    /**
+     * @param {?} flexType
+     * @return {?}
+     */
+    CmsMappingService.prototype.isComponentEnabled = /**
+     * @param {?} flexType
+     * @return {?}
+     */
+    function (flexType) {
+        /** @type {?} */
+        var isSSR = isPlatformServer(this.platformId);
+        /** @type {?} */
+        var isComponentDisabledInSSR = (this.config.cmsComponents[flexType] || {})
+            .disableSSR;
+        return !(isSSR && isComponentDisabledInSSR);
+    };
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    CmsMappingService.prototype.getRoutesForComponents = /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    function (componentTypes) {
+        var e_1, _a;
+        /** @type {?} */
+        var routes = [];
+        try {
+            for (var componentTypes_1 = __values(componentTypes), componentTypes_1_1 = componentTypes_1.next(); !componentTypes_1_1.done; componentTypes_1_1 = componentTypes_1.next()) {
+                var componentType = componentTypes_1_1.value;
+                if (this.isComponentEnabled(componentType)) {
+                    routes.push.apply(routes, __spread(this.getRoutesForComponent(componentType)));
+                }
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (componentTypes_1_1 && !componentTypes_1_1.done && (_a = componentTypes_1.return)) _a.call(componentTypes_1);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        return routes;
+    };
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    CmsMappingService.prototype.getGuardsForComponents = /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    function (componentTypes) {
+        var e_2, _a;
+        /** @type {?} */
+        var guards = new Set();
+        try {
+            for (var componentTypes_2 = __values(componentTypes), componentTypes_2_1 = componentTypes_2.next(); !componentTypes_2_1.done; componentTypes_2_1 = componentTypes_2.next()) {
+                var componentType = componentTypes_2_1.value;
+                this.getGuardsForComponent(componentType).forEach(function (guard) {
+                    return guards.add(guard);
+                });
+            }
+        }
+        catch (e_2_1) { e_2 = { error: e_2_1 }; }
+        finally {
+            try {
+                if (componentTypes_2_1 && !componentTypes_2_1.done && (_a = componentTypes_2.return)) _a.call(componentTypes_2);
+            }
+            finally { if (e_2) throw e_2.error; }
+        }
+        return Array.from(guards);
+    };
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    CmsMappingService.prototype.getI18nKeysForComponents = /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    function (componentTypes) {
+        var e_3, _a;
+        /** @type {?} */
+        var namespaces = new Set();
+        try {
+            for (var componentTypes_3 = __values(componentTypes), componentTypes_3_1 = componentTypes_3.next(); !componentTypes_3_1.done; componentTypes_3_1 = componentTypes_3.next()) {
+                var componentType = componentTypes_3_1.value;
+                if (this.isComponentEnabled(componentType)) {
+                    this.getI18nKeysForComponent(componentType).forEach(function (namespace) {
+                        return namespaces.add(namespace);
+                    });
+                }
+            }
+        }
+        catch (e_3_1) { e_3 = { error: e_3_1 }; }
+        finally {
+            try {
+                if (componentTypes_3_1 && !componentTypes_3_1.done && (_a = componentTypes_3.return)) _a.call(componentTypes_3);
+            }
+            finally { if (e_3) throw e_3.error; }
+        }
+        return Array.from(namespaces);
+    };
+    /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    CmsMappingService.prototype.getRoutesForComponent = /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    function (componentType) {
+        /** @type {?} */
+        var mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.childRoutes) || [];
+    };
+    /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    CmsMappingService.prototype.getGuardsForComponent = /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    function (componentType) {
+        /** @type {?} */
+        var mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.guards) || [];
+    };
+    /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    CmsMappingService.prototype.getI18nKeysForComponent = /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    function (componentType) {
+        /** @type {?} */
+        var mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.i18nKeys) || [];
+    };
+    CmsMappingService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    CmsMappingService.ctorParameters = function () { return [
+        { type: CmsConfig },
+        { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
+    ]; };
+    /** @nocollapse */ CmsMappingService.ngInjectableDef = defineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(inject(CmsConfig), inject(PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
+    return CmsMappingService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CmsGuardsService = /** @class */ (function () {
+    function CmsGuardsService(cmsMapping, injector) {
+        this.cmsMapping = cmsMapping;
+        this.injector = injector;
+    }
+    /**
+     * @param {?} componentTypes
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    CmsGuardsService.prototype.cmsPageCanActivate = /**
+     * @param {?} componentTypes
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    function (componentTypes, route, state) {
+        var _this = this;
+        /** @type {?} */
+        var guards = this.cmsMapping.getGuardsForComponents(componentTypes);
+        if (guards.length) {
+            /** @type {?} */
+            var canActivateObservables = guards.map(function (guardClass) {
+                /** @type {?} */
+                var guard = _this.injector.get(guardClass, null);
+                if (isCanActivate(guard)) {
+                    return wrapIntoObservable(guard.canActivate(route, state)).pipe(first());
+                }
+                else {
+                    throw new Error('Invalid CanActivate guard in cmsMapping');
+                }
+            });
+            return concat.apply(void 0, __spread(canActivateObservables)).pipe(skipWhile(function (canActivate) { return canActivate === true; }), endWith(true), first());
+        }
+        else {
+            return of(true);
+        }
+    };
+    CmsGuardsService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    CmsGuardsService.ctorParameters = function () { return [
+        { type: CmsMappingService },
+        { type: Injector }
+    ]; };
+    /** @nocollapse */ CmsGuardsService.ngInjectableDef = defineInjectable({ factory: function CmsGuardsService_Factory() { return new CmsGuardsService(inject(CmsMappingService), inject(INJECTOR)); }, token: CmsGuardsService, providedIn: "root" });
+    return CmsGuardsService;
+}());
+/**
+ * @template T
+ * @param {?} value
+ * @return {?}
+ */
+function wrapIntoObservable(value) {
+    if (isObservable(value)) {
+        return value;
+    }
+    if (isPromise(value)) {
+        return from(Promise.resolve(value));
+    }
+    return of(value);
+}
+/**
+ * @param {?} obj
+ * @return {?}
+ */
+function isPromise(obj) {
+    return !!obj && typeof obj.then === 'function';
+}
+/**
+ * @param {?} guard
+ * @return {?}
+ */
+function isCanActivate(guard) {
+    return guard && isFunction(guard.canActivate);
+}
+/**
+ * @template T
+ * @param {?} v
+ * @return {?}
+ */
+function isFunction(v) {
+    return typeof v === 'function';
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CmsI18nService = /** @class */ (function () {
+    function CmsI18nService(cmsMapping, translation, translationNamespace) {
+        this.cmsMapping = cmsMapping;
+        this.translation = translation;
+        this.translationNamespace = translationNamespace;
+    }
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    CmsI18nService.prototype.loadNamespacesForComponents = /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    function (componentTypes) {
+        var e_1, _a;
+        /** @type {?} */
+        var i18nKeys = this.cmsMapping.getI18nKeysForComponents(componentTypes);
+        /** @type {?} */
+        var i18nNamespaces = new Set();
+        try {
+            for (var i18nKeys_1 = __values(i18nKeys), i18nKeys_1_1 = i18nKeys_1.next(); !i18nKeys_1_1.done; i18nKeys_1_1 = i18nKeys_1.next()) {
+                var key = i18nKeys_1_1.value;
+                i18nNamespaces.add(this.translationNamespace.getNamespace(key));
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (i18nKeys_1_1 && !i18nKeys_1_1.done && (_a = i18nKeys_1.return)) _a.call(i18nKeys_1);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        this.translation.loadNamespaces(Array.from(i18nNamespaces));
+    };
+    CmsI18nService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    CmsI18nService.ctorParameters = function () { return [
+        { type: CmsMappingService },
+        { type: TranslationService },
+        { type: TranslationNamespaceService }
+    ]; };
+    /** @nocollapse */ CmsI18nService.ngInjectableDef = defineInjectable({ factory: function CmsI18nService_Factory() { return new CmsI18nService(inject(CmsMappingService), inject(TranslationService), inject(TranslationNamespaceService)); }, token: CmsI18nService, providedIn: "root" });
+    return CmsI18nService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @enum {string} */
+var BREAKPOINT = {
+    xs: 'xs',
+    sm: 'sm',
+    md: 'md',
+    lg: 'lg',
+    xl: 'xl',
+};
+/**
+ * The LayoutConfig supports the configuration of page slots by page templates
+ * or page sections, such as headers and footers. The configuration also supports
+ * adaptive design per breadpoint (not per device type), so that the DOM is (re)rendered
+ * por a given breakpoint.
+ * @abstract
+ */
+var  /**
+ * The LayoutConfig supports the configuration of page slots by page templates
+ * or page sections, such as headers and footers. The configuration also supports
+ * adaptive design per breadpoint (not per device type), so that the DOM is (re)rendered
+ * por a given breakpoint.
+ * @abstract
+ */
+LayoutConfig = /** @class */ (function (_super) {
+    __extends(LayoutConfig, _super);
+    function LayoutConfig() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return LayoutConfig;
+}(ServerConfig));
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var BreakpointService = /** @class */ (function () {
+    function BreakpointService(winRef, config) {
+        this.winRef = winRef;
+        this.config = config;
+    }
+    Object.defineProperty(BreakpointService.prototype, "breakpoint$", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            if (!this.window) {
+                return of(BREAKPOINT.xs);
+            }
+            return fromEvent(this.window, 'resize').pipe(debounceTime(300), startWith({ target: this.window }), map(function (event) { return _this.getBreakpoint(((/** @type {?} */ (event.target))).innerWidth); }), distinctUntilChanged());
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BreakpointService.prototype, "breakpoints", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return [
+                BREAKPOINT.xs,
+                BREAKPOINT.sm,
+                BREAKPOINT.md,
+                BREAKPOINT.lg,
+                BREAKPOINT.xl,
+            ];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @protected
+     * @param {?} windowWidth
+     * @return {?}
+     */
+    BreakpointService.prototype.getBreakpoint = /**
+     * @protected
+     * @param {?} windowWidth
+     * @return {?}
+     */
+    function (windowWidth) {
+        /** @type {?} */
+        var breakpoint = this.getClosest(windowWidth);
+        return BREAKPOINT[breakpoint || BREAKPOINT.lg];
+    };
+    /**
+     * @protected
+     * @param {?=} windowWidth
+     * @return {?}
+     */
+    BreakpointService.prototype.getClosest = /**
+     * @protected
+     * @param {?=} windowWidth
+     * @return {?}
+     */
+    function (windowWidth) {
+        var _this = this;
+        if (!windowWidth) {
+            windowWidth = this.window.innerWidth;
+        }
+        return windowWidth < this.getSize(BREAKPOINT.xs)
+            ? BREAKPOINT.xs
+            : this.breakpoints.reverse().find(function (br) { return windowWidth >= _this.getSize(br); });
+    };
+    /**
+     * @protected
+     * @param {?} breakpoint
+     * @return {?}
+     */
+    BreakpointService.prototype.getSize = /**
+     * @protected
+     * @param {?} breakpoint
+     * @return {?}
+     */
+    function (breakpoint) {
+        return this.config.breakpoints ? this.config.breakpoints[breakpoint] : 576;
+    };
+    Object.defineProperty(BreakpointService.prototype, "window", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.winRef.nativeWindow;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    BreakpointService.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    BreakpointService.ctorParameters = function () { return [
+        { type: WindowRef },
+        { type: LayoutConfig }
+    ]; };
+    return BreakpointService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var PageLayoutService = /** @class */ (function () {
+    function PageLayoutService(cms, config, breakpointService) {
+        this.cms = cms;
+        this.config = config;
+        this.breakpointService = breakpointService;
+        // we print warn messages on missing layout configs
+        // only once to not polute the console log
+        this.warnLogMessages = {};
+        this.logSlots = {};
+    }
+    /**
+     * @param {?=} section
+     * @return {?}
+     */
+    PageLayoutService.prototype.getSlots = /**
+     * @param {?=} section
+     * @return {?}
+     */
+    function (section) {
+        var _this = this;
+        return this.breakpointService.breakpoint$.pipe(switchMap(function (breakpoint) {
+            return _this.page$.pipe(map(function (page) {
+                /** @type {?} */
+                var config = _this.getSlotConfig(page.template, 'slots', section, breakpoint);
+                if (config && config.slots) {
+                    return config.slots;
+                }
+                else if (!section) {
+                    _this.logMissingLayoutConfig(page);
+                    return Object.keys(page.slots);
+                }
+                else {
+                    _this.logMissingLayoutConfig(page, section);
+                    return [];
+                }
+            }));
+        }), distinctUntilChanged());
+    };
+    Object.defineProperty(PageLayoutService.prototype, "page$", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.cms.getCurrentPage().pipe(filter(Boolean));
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageLayoutService.prototype, "templateName$", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.page$.pipe(filter(function (page) { return !!page.template; }), map(function (page) { return page.template; }));
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * load slots from the layout configuration. The breakpoint is used
+     * to load a specific configuration for the given breakpoint. If there's
+     * no configuration available for the given breakpoint the default slot
+     * configuration is returned.
+     */
+    /**
+     * load slots from the layout configuration. The breakpoint is used
+     * to load a specific configuration for the given breakpoint. If there's
+     * no configuration available for the given breakpoint the default slot
+     * configuration is returned.
+     * @protected
+     * @param {?} templateUid
+     * @param {?} configAttribute
+     * @param {?=} section
+     * @param {?=} breakpoint
+     * @return {?}
+     */
+    PageLayoutService.prototype.getSlotConfig = /**
+     * load slots from the layout configuration. The breakpoint is used
+     * to load a specific configuration for the given breakpoint. If there's
+     * no configuration available for the given breakpoint the default slot
+     * configuration is returned.
+     * @protected
+     * @param {?} templateUid
+     * @param {?} configAttribute
+     * @param {?=} section
+     * @param {?=} breakpoint
+     * @return {?}
+     */
+    function (templateUid, configAttribute, section, breakpoint) {
+        /** @type {?} */
+        var pageTemplateConfig = this.config.layoutSlots[templateUid];
+        if (section) {
+            return this.getSlotConfigForSection(templateUid, configAttribute, section, breakpoint);
+        }
+        if (pageTemplateConfig) {
+            return this.getResponsiveSlotConfig((/** @type {?} */ (pageTemplateConfig)), configAttribute, breakpoint);
+        }
+    };
+    /**
+     * @protected
+     * @param {?} templateUid
+     * @param {?} configAttribute
+     * @param {?=} section
+     * @param {?=} breakpoint
+     * @return {?}
+     */
+    PageLayoutService.prototype.getSlotConfigForSection = /**
+     * @protected
+     * @param {?} templateUid
+     * @param {?} configAttribute
+     * @param {?=} section
+     * @param {?=} breakpoint
+     * @return {?}
+     */
+    function (templateUid, configAttribute, section, breakpoint) {
+        /** @type {?} */
+        var pageTemplateConfig = this.config.layoutSlots[templateUid];
+        if (!pageTemplateConfig) {
+            return null;
+        }
+        // if there's no section config on the page layout
+        // we fall back to the global section config
+        /** @type {?} */
+        var sectionConfig = pageTemplateConfig[section]
+            ? pageTemplateConfig[section]
+            : this.config.layoutSlots[section];
+        if (!sectionConfig) {
+            return null;
+        }
+        /** @type {?} */
+        var responsiveConfig = this.getResponsiveSlotConfig((/** @type {?} */ (sectionConfig)), configAttribute, breakpoint);
+        if (responsiveConfig.hasOwnProperty(configAttribute)) {
+            return responsiveConfig;
+        }
+        else if (pageTemplateConfig[section].hasOwnProperty(configAttribute)) {
+            return pageTemplateConfig[section];
+        }
+        else if (this.config.layoutSlots[section]) {
+            return (/** @type {?} */ (this.config.layoutSlots[section]));
+        }
+    };
+    /**
+     * Returns a list of slots for a breakpoint specific configuratoin
+     * If there's no specific configuration for the breakpoint,
+     * the closest available configuration will be returned.
+     */
+    /**
+     * Returns a list of slots for a breakpoint specific configuratoin
+     * If there's no specific configuration for the breakpoint,
+     * the closest available configuration will be returned.
+     * @protected
+     * @param {?} layoutSlotConfig
+     * @param {?} configAttribute
+     * @param {?=} breakpoint
+     * @return {?}
+     */
+    PageLayoutService.prototype.getResponsiveSlotConfig = /**
+     * Returns a list of slots for a breakpoint specific configuratoin
+     * If there's no specific configuration for the breakpoint,
+     * the closest available configuration will be returned.
+     * @protected
+     * @param {?} layoutSlotConfig
+     * @param {?} configAttribute
+     * @param {?=} breakpoint
+     * @return {?}
+     */
+    function (layoutSlotConfig, configAttribute, breakpoint) {
+        var e_1, _a;
+        /** @type {?} */
+        var slotConfig = (/** @type {?} */ (layoutSlotConfig));
+        // fallback to default slot config
+        if (!breakpoint) {
+            return slotConfig;
+        }
+        // we have a config for the specific breakpoint
+        if (layoutSlotConfig[breakpoint] &&
+            layoutSlotConfig[breakpoint].hasOwnProperty(configAttribute)) {
+            return (/** @type {?} */ (layoutSlotConfig[breakpoint]));
+        }
+        // find closest config
+        /** @type {?} */
+        var all = this.breakpointService.breakpoints;
+        try {
+            for (var _b = __values(all.splice(0, all.indexOf(breakpoint))), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var br = _c.value;
+                if (layoutSlotConfig[br] &&
+                    layoutSlotConfig[br].hasOwnProperty(configAttribute)) {
+                    slotConfig = (/** @type {?} */ (layoutSlotConfig[br]));
+                }
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        return slotConfig;
+    };
+    /**
+     * In order to help developers, we print some detailed log information in
+     * case there's no layout configuration available for the given page template
+     * or section. Additionally, the slot positions are printed in the console
+     * in a format that can be copied / paste to the configuration.
+     */
+    /**
+     * In order to help developers, we print some detailed log information in
+     * case there's no layout configuration available for the given page template
+     * or section. Additionally, the slot positions are printed in the console
+     * in a format that can be copied / paste to the configuration.
+     * @private
+     * @param {?} page
+     * @param {?=} section
+     * @return {?}
+     */
+    PageLayoutService.prototype.logMissingLayoutConfig = /**
+     * In order to help developers, we print some detailed log information in
+     * case there's no layout configuration available for the given page template
+     * or section. Additionally, the slot positions are printed in the console
+     * in a format that can be copied / paste to the configuration.
+     * @private
+     * @param {?} page
+     * @param {?=} section
+     * @return {?}
+     */
+    function (page, section) {
+        if (this.config.production) {
+            return;
+        }
+        if (!this.logSlots[page.template]) {
+            // the info log is not printed in production
+            // tslint:disable-next-line: no-console
+            console.info("Available CMS page slots: '" + Object.keys(page.slots).join("','") + "'");
+            this.logSlots[page.template] = true;
+        }
+        /** @type {?} */
+        var cacheKey = section || page.template;
+        if (!this.warnLogMessages[cacheKey]) {
+            console.warn("No layout config found for " + cacheKey + ", you can configure a 'LayoutConfig' to control the rendering of page slots.");
+            this.warnLogMessages[cacheKey] = true;
+        }
+    };
+    PageLayoutService.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    PageLayoutService.ctorParameters = function () { return [
+        { type: CmsService },
+        { type: LayoutConfig },
+        { type: BreakpointService }
+    ]; };
+    return PageLayoutService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var PageLayoutComponent = /** @class */ (function () {
+    function PageLayoutComponent(el, renderer, pageLayoutService) {
+        this.el = el;
+        this.renderer = renderer;
+        this.pageLayoutService = pageLayoutService;
+    }
+    /**
+     * @return {?}
+     */
+    PageLayoutComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        if (this.section) {
+            this.styleClass = this.section;
+        }
+    };
+    Object.defineProperty(PageLayoutComponent.prototype, "slots$", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.pageLayoutService.getSlots(this.section);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageLayoutComponent.prototype, "templateName$", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            return this.pageLayoutService.templateName$.pipe(
+            // intercept the observable to keep a clean DOM tree
+            tap(function (name) {
+                _this.styleClass = name;
+            }));
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageLayoutComponent.prototype, "styleClass", {
+        set: /**
+         * @param {?} cls
+         * @return {?}
+         */
+        function (cls) {
+            this.renderer.addClass(this.el.nativeElement, cls);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    PageLayoutComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-page-layout',
+                    template: "<ng-container *cxOutlet=\"section || (templateName$ | async)\">\n  <ng-content></ng-content>\n  <cx-page-slot\n    *ngFor=\"let slot of (slots$ | async)\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-container>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    /** @nocollapse */
+    PageLayoutComponent.ctorParameters = function () { return [
+        { type: ElementRef },
+        { type: Renderer2 },
+        { type: PageLayoutService }
+    ]; };
+    PageLayoutComponent.propDecorators = {
+        section: [{ type: Input }]
+    };
+    return PageLayoutComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CmsRoutesService = /** @class */ (function () {
+    function CmsRoutesService(router, cmsMapping) {
+        this.router = router;
+        this.cmsMapping = cmsMapping;
+    }
+    /**
+     * @param {?} url
+     * @return {?}
+     */
+    CmsRoutesService.prototype.cmsRouteExist = /**
+     * @param {?} url
+     * @return {?}
+     */
+    function (url) {
+        /** @type {?} */
+        var isCmsDrivenRoute = url.startsWith('/');
+        if (!isCmsDrivenRoute) {
+            return false;
+        }
+        /** @type {?} */
+        var routePath = url.substr(1);
+        return (isCmsDrivenRoute &&
+            !!this.router.config.find(function (route) {
+                return route.data && route.data.cxCmsRouteContext && route.path === routePath;
+            }));
+    };
+    /**
+     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
+     *
+     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
+     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
+     *
+     * @param pageContext
+     * @param currentUrl
+     */
+    /**
+     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
+     *
+     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
+     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
+     *
+     * @param {?} pageContext
+     * @param {?} componentTypes
+     * @param {?} currentUrl
+     * @return {?}
+     */
+    CmsRoutesService.prototype.handleCmsRoutesInGuard = /**
+     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
+     *
+     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
+     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
+     *
+     * @param {?} pageContext
+     * @param {?} componentTypes
+     * @param {?} currentUrl
+     * @return {?}
+     */
+    function (pageContext, componentTypes, currentUrl) {
+        /** @type {?} */
+        var componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
+        if (componentRoutes.length) {
+            if (this.updateRouting(pageContext, componentRoutes)) {
+                this.router.navigateByUrl(currentUrl);
+                return false;
+            }
+        }
+        return true;
+    };
+    /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} routes
+     * @return {?}
+     */
+    CmsRoutesService.prototype.updateRouting = /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} routes
+     * @return {?}
+     */
+    function (pageContext, routes) {
+        if (pageContext.type === PageType.CONTENT_PAGE &&
+            pageContext.id.startsWith('/') &&
+            pageContext.id.length > 1) {
+            /** @type {?} */
+            var newRoute = {
+                path: pageContext.id.substr(1),
+                component: PageLayoutComponent,
+                children: routes,
+                data: {
+                    cxCmsRouteContext: pageContext,
+                },
+            };
+            this.router.resetConfig(__spread([newRoute], this.router.config));
+            return true;
+        }
+        return false;
+    };
+    CmsRoutesService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    CmsRoutesService.ctorParameters = function () { return [
+        { type: Router },
+        { type: CmsMappingService }
+    ]; };
+    /** @nocollapse */ CmsRoutesService.ngInjectableDef = defineInjectable({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(inject(Router), inject(CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
+    return CmsRoutesService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CmsPageGuard = /** @class */ (function () {
+    function CmsPageGuard(routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards) {
+        this.routingService = routingService;
+        this.cmsService = cmsService;
+        this.cmsRoutes = cmsRoutes;
+        this.cmsI18n = cmsI18n;
+        this.cmsGuards = cmsGuards;
+    }
+    /**
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    CmsPageGuard.prototype.canActivate = /**
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    function (route, state) {
+        var _this = this;
+        return this.routingService.getPageContext().pipe(switchMap(function (pageContext) {
+            return _this.cmsService.hasPage(pageContext).pipe(first(), withLatestFrom(of(pageContext)));
+        }), switchMap(function (_a) {
+            var _b = __read(_a, 2), hasPage = _b[0], pageContext = _b[1];
+            if (hasPage) {
+                return _this.cmsService.getPageComponentTypes(pageContext).pipe(switchMap(function (componentTypes) {
+                    return _this.cmsGuards
+                        .cmsPageCanActivate(componentTypes, route, state)
+                        .pipe(withLatestFrom(of(componentTypes)));
+                }), tap(function (_a) {
+                    var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
+                    if (canActivate === true) {
+                        _this.cmsI18n.loadNamespacesForComponents(componentTypes);
+                    }
+                }), map(function (_a) {
+                    var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
+                    if (canActivate === true &&
+                        !route.data.cxCmsRouteContext &&
+                        !_this.cmsRoutes.cmsRouteExist(pageContext.id)) {
+                        return _this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url);
+                    }
+                    return canActivate;
+                }));
+            }
+            else {
+                if (pageContext.id !== '/not-found') {
+                    _this.routingService.go(['/not-found']);
+                }
+                return of(false);
+            }
+        }));
+    };
+    CmsPageGuard.guardName = 'CmsPageGuard';
+    CmsPageGuard.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    CmsPageGuard.ctorParameters = function () { return [
+        { type: RoutingService },
+        { type: CmsService },
+        { type: CmsRoutesService },
+        { type: CmsI18nService },
+        { type: CmsGuardsService }
+    ]; };
+    return CmsPageGuard;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+var guards = [CmsPageGuard];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var OutletStyleService = /** @class */ (function () {
+    function OutletStyleService() {
+        this.templateRefs = {};
+    }
+    /**
+     * @param {?} outlet
+     * @param {?} elem
+     * @return {?}
+     */
+    OutletStyleService.prototype.add = /**
+     * @param {?} outlet
+     * @param {?} elem
+     * @return {?}
+     */
+    function (outlet, elem) {
+        this.templateRefs[outlet] = elem;
+    };
+    /**
+     * @param {?} outlet
+     * @return {?}
+     */
+    OutletStyleService.prototype.get = /**
+     * @param {?} outlet
+     * @return {?}
+     */
+    function (outlet) {
+        return this.templateRefs[outlet];
+    };
+    OutletStyleService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */ OutletStyleService.ngInjectableDef = defineInjectable({ factory: function OutletStyleService_Factory() { return new OutletStyleService(); }, token: OutletStyleService, providedIn: "root" });
+    return OutletStyleService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @enum {string} */
+var OutletPosition = {
+    REPLACE: 'replace',
+    BEFORE: 'before',
+    AFTER: 'after',
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var OutletService = /** @class */ (function () {
+    function OutletService() {
+        this.templatesRefs = {};
+        this.templatesRefsBefore = {};
+        this.templatesRefsAfter = {};
+    }
+    /**
+     * @param {?} outlet
+     * @param {?} template
+     * @param {?=} position
+     * @return {?}
+     */
+    OutletService.prototype.add = /**
+     * @param {?} outlet
+     * @param {?} template
+     * @param {?=} position
+     * @return {?}
+     */
+    function (outlet, template, position) {
+        if (position === void 0) { position = OutletPosition.REPLACE; }
+        if (position === OutletPosition.BEFORE) {
+            this.templatesRefsBefore[outlet] = template;
+        }
+        if (position === OutletPosition.REPLACE) {
+            this.templatesRefs[outlet] = template;
+        }
+        if (position === OutletPosition.AFTER) {
+            this.templatesRefsAfter[outlet] = template;
+        }
+    };
+    /**
+     * @param {?} outlet
+     * @param {?=} position
+     * @return {?}
+     */
+    OutletService.prototype.get = /**
+     * @param {?} outlet
+     * @param {?=} position
+     * @return {?}
+     */
+    function (outlet, position) {
+        if (position === void 0) { position = OutletPosition.REPLACE; }
+        /** @type {?} */
+        var templateRef;
+        switch (position) {
+            case OutletPosition.BEFORE:
+                templateRef = this.templatesRefsBefore[outlet];
+                break;
+            case OutletPosition.AFTER:
+                templateRef = this.templatesRefsAfter[outlet];
+                break;
+            default:
+                templateRef = this.templatesRefs[outlet];
+        }
+        return templateRef;
+        // return this.templatesRefs[outlet] ? this.templatesRefs[outlet] : null;
+    };
+    OutletService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */ OutletService.ngInjectableDef = defineInjectable({ factory: function OutletService_Factory() { return new OutletService(); }, token: OutletService, providedIn: "root" });
+    return OutletService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var OutletDirective = /** @class */ (function () {
+    function OutletDirective(vcr, templateRef, outletService, outletStyleService, renderer) {
+        this.vcr = vcr;
+        this.templateRef = templateRef;
+        this.outletService = outletService;
+        this.outletStyleService = outletStyleService;
+        this.renderer = renderer;
+    }
+    Object.defineProperty(OutletDirective.prototype, "cxOutletContext", {
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._context = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    OutletDirective.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var nodes = [];
+        nodes.push.apply(nodes, __spread(this.renderTemplate(OutletPosition.BEFORE)));
+        nodes.push.apply(nodes, __spread(this.renderTemplate(OutletPosition.REPLACE, true)));
+        nodes.push.apply(nodes, __spread(this.renderTemplate(OutletPosition.AFTER)));
+        this.renderStyleLink(nodes);
+    };
+    /**
+     * @private
+     * @param {?} position
+     * @param {?=} replace
+     * @return {?}
+     */
+    OutletDirective.prototype.renderTemplate = /**
+     * @private
+     * @param {?} position
+     * @param {?=} replace
+     * @return {?}
+     */
+    function (position, replace) {
+        if (replace === void 0) { replace = false; }
+        /** @type {?} */
+        var nodes = [];
+        /** @type {?} */
+        var template = this.outletService.get(this.cxOutlet, position);
+        if (template || replace) {
+            /** @type {?} */
+            var ref = this.vcr.createEmbeddedView(template || this.templateRef, {
+                $implicit: this.context,
+            });
+            nodes.push.apply(nodes, __spread(ref.rootNodes));
+        }
+        return nodes;
+    };
+    /**
+     * @private
+     * @param {?} nodes
+     * @return {?}
+     */
+    OutletDirective.prototype.renderStyleLink = /**
+     * @private
+     * @param {?} nodes
+     * @return {?}
+     */
+    function (nodes) {
+        /** @type {?} */
+        var styleElement = this.outletStyleService.get(this.cxOutlet);
+        if (styleElement) {
+            /** @type {?} */
+            var parentElement = nodes.find(function (node) { return node instanceof HTMLElement; });
+            if (parentElement.shadowRoot) {
+                parentElement = parentElement.shadowRoot;
+            }
+            styleElement.nativeElement.rel = 'stylesheet';
+            this.renderer.appendChild(parentElement, styleElement.nativeElement);
+        }
+    };
+    Object.defineProperty(OutletDirective.prototype, "context", {
+        get: /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            // return specific context if provided
+            if (this._context) {
+                return this._context;
+            }
+            /** @type {?} */
+            var ctx = ((/** @type {?} */ (this.vcr.injector))).view.context;
+            // the context might already be given $implicit
+            // by a parent *ngIf or *ngFor
+            return ctx.$implicit || ctx;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    OutletDirective.decorators = [
+        { type: Directive, args: [{
+                    selector: '[cxOutlet]',
+                },] }
+    ];
+    /** @nocollapse */
+    OutletDirective.ctorParameters = function () { return [
+        { type: ViewContainerRef },
+        { type: TemplateRef },
+        { type: OutletService },
+        { type: OutletStyleService },
+        { type: Renderer2 }
+    ]; };
+    OutletDirective.propDecorators = {
+        cxOutlet: [{ type: Input }],
+        cxOutletContext: [{ type: Input }]
+    };
+    return OutletDirective;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var OutletModule = /** @class */ (function () {
+    function OutletModule() {
+    }
+    OutletModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule],
+                    declarations: [OutletDirective],
+                    providers: [OutletService],
+                    exports: [OutletDirective],
+                },] }
+    ];
+    return OutletModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CmsModule$1 = /** @class */ (function () {
+    function CmsModule$$1() {
+    }
+    CmsModule$$1.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        HttpClientModule,
+                        ConfigModule.withConfig(defaultCmsModuleConfig),
+                        OutletModule,
+                        CmsModule,
+                    ],
+                    providers: __spread(guards, [{ provide: CmsConfig, useExisting: Config }]),
+                    declarations: [],
+                    exports: [OutletDirective],
+                },] }
+    ];
+    return CmsModule$$1;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var PageSlotComponent = /** @class */ (function () {
+    function PageSlotComponent(cmsService, dynamicAttributeService, renderer, hostElement, cmsMapping) {
+        this.cmsService = cmsService;
+        this.dynamicAttributeService = dynamicAttributeService;
+        this.renderer = renderer;
+        this.hostElement = hostElement;
+        this.cmsMapping = cmsMapping;
+    }
+    /**
+     * @return {?}
+     */
+    PageSlotComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        // add the position name as a css class so that
+        // layout can be applied to it, using the position based class.
+        this.renderer.addClass(this.hostElement.nativeElement, this.position);
+    };
+    Object.defineProperty(PageSlotComponent.prototype, "slot$", {
+        /**
+         * returns an observable with `ContentSlotData` for the current position
+         */
+        get: /**
+         * returns an observable with `ContentSlotData` for the current position
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            return this.cmsService
+                .getContentSlot(this.position)
+                .pipe(tap(function (slot) { return _this.addSmartEditSlotClass(slot); }));
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageSlotComponent.prototype, "components$", {
+        /**
+         * returns an observable with components (`ContentSlotComponentData[]`)
+         * for the current slot
+         */
+        get: /**
+         * returns an observable with components (`ContentSlotComponentData[]`)
+         * for the current slot
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            return this.slot$.pipe(map(function (slot) { return (slot && slot.components ? slot.components : []); }), tap(function (components) { return _this.addComponentClass(components); }));
+        },
+        enumerable: true,
+        configurable: true
+    });
+    // add a class to indicate whether the class is empty or not
+    // add a class to indicate whether the class is empty or not
+    /**
+     * @private
+     * @param {?} components
+     * @return {?}
+     */
+    PageSlotComponent.prototype.addComponentClass = 
+    // add a class to indicate whether the class is empty or not
+    /**
+     * @private
+     * @param {?} components
+     * @return {?}
+     */
+    function (components) {
+        if (components && components.length > 0) {
+            this.renderer.addClass(this.hostElement.nativeElement, 'has-components');
+        }
+    };
+    /**
+     * @private
+     * @param {?} slot
+     * @return {?}
+     */
+    PageSlotComponent.prototype.addSmartEditSlotClass = /**
+     * @private
+     * @param {?} slot
+     * @return {?}
+     */
+    function (slot) {
+        if (this.cmsService.isLaunchInSmartEdit()) {
+            this.addSmartEditContract(slot);
+        }
+    };
+    /**
+     * @private
+     * @param {?} slot
+     * @return {?}
+     */
+    PageSlotComponent.prototype.addSmartEditContract = /**
+     * @private
+     * @param {?} slot
+     * @return {?}
+     */
+    function (slot) {
+        this.dynamicAttributeService.addDynamicAttributes(slot.properties, this.hostElement.nativeElement, this.renderer);
+    };
+    PageSlotComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-page-slot',
+                    template: "<ng-container *cxOutlet=\"position\">\n  <ng-container *ngFor=\"let component of (components$ | async)\">\n    <ng-container\n      *cxOutlet=\"component.flexType\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-container>\n  </ng-container>\n</ng-container>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    /** @nocollapse */
+    PageSlotComponent.ctorParameters = function () { return [
+        { type: CmsService },
+        { type: DynamicAttributeService },
+        { type: Renderer2 },
+        { type: ElementRef },
+        { type: CmsMappingService }
+    ]; };
+    PageSlotComponent.propDecorators = {
+        position: [{ type: Input }]
+    };
+    return PageSlotComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @abstract
+ * @template T
+ */
+var  /**
+ * @abstract
+ * @template T
+ */
+CmsComponentData = /** @class */ (function () {
+    function CmsComponentData() {
+    }
+    return CmsComponentData;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ComponentWrapperDirective = /** @class */ (function () {
+    function ComponentWrapperDirective(vcr, componentMapper, injector, cmsService, dynamicAttributeService, renderer, cd, config, platformId) {
+        this.vcr = vcr;
+        this.componentMapper = componentMapper;
+        this.injector = injector;
+        this.cmsService = cmsService;
+        this.dynamicAttributeService = dynamicAttributeService;
+        this.renderer = renderer;
+        this.cd = cd;
+        this.config = config;
+        this.platformId = platformId;
+    }
+    /**
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        if (!this.shouldRenderComponent()) {
+            return;
+        }
+        if (this.componentMapper.isWebComponent(this.cxComponentWrapper.flexType)) {
+            this.launchWebComponent();
+        }
+        else {
+            this.launchComponent();
+        }
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.shouldRenderComponent = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var isSSR = isPlatformServer(this.platformId);
+        /** @type {?} */
+        var isComponentDisabledInSSR = (this.config.cmsComponents[this.cxComponentWrapper.flexType] || {}).disableSSR;
+        return !(isSSR && isComponentDisabledInSSR);
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.launchComponent = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var factory = this.componentMapper.getComponentFactoryByCode(this.cxComponentWrapper.flexType);
+        if (factory) {
+            this.cmpRef = this.vcr.createComponent(factory, undefined, this.getInjectorForComponent());
+            this.cd.detectChanges();
+            if (this.cmsService.isLaunchInSmartEdit()) {
+                this.addSmartEditContract(this.cmpRef.location.nativeElement);
+            }
+        }
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.launchWebComponent = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var elementName;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.componentMapper.initWebComponent(this.cxComponentWrapper.flexType, this.renderer)];
+                    case 1:
+                        elementName = _a.sent();
+                        if (elementName) {
+                            this.webElement = this.renderer.createElement(elementName);
+                            this.webElement.cxApi = __assign({}, this.injector.get(CxApiService), { CmsComponentData: this.getCmsDataForComponent() });
+                            this.renderer.appendChild(this.vcr.element.nativeElement.parentElement, this.webElement);
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    /**
+     * @private
+     * @template T
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.getCmsDataForComponent = /**
+     * @private
+     * @template T
+     * @return {?}
+     */
+    function () {
+        return {
+            uid: this.cxComponentWrapper.uid,
+            data$: this.cmsService.getComponentData(this.cxComponentWrapper.uid),
+        };
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.getInjectorForComponent = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var configProviders = (this.config.cmsComponents[this.cxComponentWrapper.flexType] || {})
+            .providers || [];
+        return Injector.create({
+            providers: __spread([
+                {
+                    provide: CmsComponentData,
+                    useValue: this.getCmsDataForComponent(),
+                }
+            ], configProviders),
+            parent: this.injector,
+        });
+    };
+    /**
+     * @private
+     * @param {?} element
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.addSmartEditContract = /**
+     * @private
+     * @param {?} element
+     * @return {?}
+     */
+    function (element) {
+        this.dynamicAttributeService.addDynamicAttributes(this.cxComponentWrapper.properties, element, this.renderer);
+    };
+    /**
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        if (this.cmpRef) {
+            this.cmpRef.destroy();
+        }
+        if (this.webElement) {
+            this.renderer.removeChild(this.vcr.element.nativeElement.parentElement, this.webElement);
+        }
+    };
+    ComponentWrapperDirective.decorators = [
+        { type: Directive, args: [{
+                    selector: '[cxComponentWrapper]',
+                },] }
+    ];
+    /** @nocollapse */
+    ComponentWrapperDirective.ctorParameters = function () { return [
+        { type: ViewContainerRef },
+        { type: ComponentMapperService },
+        { type: Injector },
+        { type: CmsService },
+        { type: DynamicAttributeService },
+        { type: Renderer2 },
+        { type: ChangeDetectorRef },
+        { type: CmsConfig },
+        { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
+    ]; };
+    ComponentWrapperDirective.propDecorators = {
+        cxComponentWrapper: [{ type: Input }]
+    };
+    return ComponentWrapperDirective;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var PageComponentModule = /** @class */ (function () {
+    function PageComponentModule() {
+    }
+    PageComponentModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule],
+                    providers: [],
+                    declarations: [ComponentWrapperDirective],
+                    exports: [ComponentWrapperDirective],
+                },] }
+    ];
+    return PageComponentModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var PageSlotModule = /** @class */ (function () {
+    function PageSlotModule() {
+    }
+    PageSlotModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule, OutletModule, PageComponentModule],
+                    providers: [],
+                    declarations: [PageSlotComponent],
+                    exports: [PageSlotComponent],
+                },] }
+    ];
+    return PageSlotModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var PageLayoutModule = /** @class */ (function () {
+    function PageLayoutModule() {
+    }
+    PageLayoutModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule, CmsModule$1, PageSlotModule],
+                    declarations: [PageLayoutComponent],
+                    providers: [PageLayoutService],
+                    exports: [PageLayoutComponent],
+                },] }
+    ];
+    return PageLayoutModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var LogoutModule = /** @class */ (function () {
+    function LogoutModule() {
+    }
+    LogoutModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        RouterModule.forChild([
+                            {
+                                path: 'logout',
+                                canActivate: [LogoutGuard],
+                                component: PageLayoutComponent,
+                            },
+                        ]),
+                    ],
+                },] }
+    ];
+    return LogoutModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+var cartComponents = {
+    emptyCartText: {
+        flexType: 'CMSParagraphComponent',
+        typeCode: 'CMSParagraphComponent',
+        content: "\n      <h2>Your shopping cart is empty</h2>\n      <p>Suggestions</p>\n      <ul>\n          <li>\n          Browse our products by selecting a category above\n          </li>\n      </ul>",
+    },
+};
+/** @type {?} */
+var defaultCartPageConfig = {
+    ignoreBackend: false,
+    pageId: 'cartPage',
+    type: 'ContentPage',
+    template: 'CartPageTemplate',
+    title: 'Cart',
+    slots: {
+        EmptyCartMiddleContent: {
+            componentIds: ['emptyCartText'],
+        },
+    },
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+var headerComponents = {
+    SkipLinkComponent: {
+        typeCode: 'SkipLinkComponent',
+        flexType: 'SkipLinkComponent',
+        uid: 'SkipLinkComponent',
+    },
+    HamburgerMenuComponent: {
+        typeCode: 'HamburgerMenuComponent',
+        flexType: 'HamburgerMenuComponent',
+        uid: 'HamburgerMenuComponent',
+    },
+    LanguageComponent: {
+        typeCode: 'CMSSiteContextComponent',
+        flexType: 'CMSSiteContextComponent',
+        context: 'LANGUAGE',
+    },
+    CurrencyComponent: {
+        typeCode: 'CMSSiteContextComponent',
+        flexType: 'CMSSiteContextComponent',
+        context: 'CURRENCY',
+    },
+    StoreFinder: {
+        typeCode: 'CMSLinkComponent',
+        flexType: 'CMSLinkComponent',
+        linkName: 'Find a Store',
+        url: '/store-finder',
+    },
+    BreadcrumbComponent: {
+        typeCode: 'BreadcrumbComponent',
+        flexType: 'BreadcrumbComponent',
+    },
+    Logo: {
+        typeCode: 'SimpleBannerComponent',
+        flexType: 'SimpleBannerComponent',
+        uid: 'logo',
+        media: {
+            mime: 'svg/image/svg+xml',
+            url: 'https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg',
+        },
+        urlLink: '/',
+    },
+    SearchBox: {
+        typeCode: 'SearchBoxComponent',
+        flexType: 'SearchBoxComponent',
+        uid: 'SearchBoxComponent',
+    },
+    MiniCart: {
+        typeCode: 'MiniCartComponent',
+        flexType: 'MiniCartComponent',
+        uid: 'MiniCartComponent',
+    },
+    LoginComponent: {
+        typeCode: 'LoginComponent',
+        flexType: 'LoginComponent',
+        uid: 'LoginComponent',
+    },
+    CategoryNavigationComponent: {
+        typeCode: 'CategoryNavigationComponent',
+        flexType: 'CategoryNavigationComponent',
+        uid: 'ElectronicsCategoryNavComponent',
+        navigationNode: {
+            uid: 'ElectronicsCategoryNavNode',
+            children: [
+                {
+                    uid: 'CameraLensesNavNode',
+                    title: 'Electronic catalog',
+                    entries: [
+                        {
+                            itemId: 'CameraLensesCategoryLink',
+                            itemSuperType: 'AbstractCMSComponent',
+                            itemType: 'CMSLinkComponent',
+                        },
+                    ],
+                },
+            ],
+        },
+    },
+};
+/** @type {?} */
+var defaultPageHeaderConfig = {
+    PreHeader: {
+        componentIds: ['SkipLinkComponent', 'HamburgerMenuComponent'],
+    },
+    SiteContext: {
+        componentIds: ['LanguageComponent', 'CurrencyComponent'],
+    },
+    SiteLinks: {
+        componentIds: ['StoreFinder'],
+    },
+    SiteLogo: {
+        componentIds: ['Logo'],
+    },
+    SearchBox: {
+        componentIds: ['SearchBox'],
+    },
+    MiniCart: {
+        componentIds: ['MiniCart'],
+    },
+    SiteLogin: {
+        componentIds: ['LoginComponent'],
+    },
+    NavigationBar: {
+        componentIds: ['CategoryNavigationComponent'],
+    },
+    BottomHeaderSlot: {
+        componentIds: ['BreadcrumbComponent'],
+    },
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @return {?}
+ */
+function defaultCmsContentConfig() {
+    return {
+        cmsStructure: {
+            components: __assign({}, headerComponents, cartComponents),
+            slots: __assign({}, defaultPageHeaderConfig),
+            pages: [defaultCartPageConfig],
+        },
+    };
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var SeoMetaService = /** @class */ (function () {
+    function SeoMetaService(ngTitle, ngMeta, pageMetaService) {
+        this.ngTitle = ngTitle;
+        this.ngMeta = ngMeta;
+        this.pageMetaService = pageMetaService;
+    }
+    /**
+     * @return {?}
+     */
+    SeoMetaService.prototype.init = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.pageMetaService
+            .getMeta()
+            .pipe(filter(Boolean))
+            .subscribe(function (meta) { return (_this.meta = meta); });
+    };
+    Object.defineProperty(SeoMetaService.prototype, "meta", {
+        set: /**
+         * @protected
+         * @param {?} meta
+         * @return {?}
+         */
+        function (meta) {
+            this.title = meta.title;
+            this.description = meta.description;
+            this.image = meta.image;
+            this.robots = meta.robots || [PageRobotsMeta.INDEX, PageRobotsMeta.FOLLOW];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SeoMetaService.prototype, "title", {
+        set: /**
+         * @protected
+         * @param {?} title
+         * @return {?}
+         */
+        function (title) {
+            this.ngTitle.setTitle(title || '');
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SeoMetaService.prototype, "description", {
+        set: /**
+         * @protected
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this.addTag({ name: 'description', content: value });
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SeoMetaService.prototype, "image", {
+        set: /**
+         * @protected
+         * @param {?} imageUrl
+         * @return {?}
+         */
+        function (imageUrl) {
+            if (imageUrl) {
+                this.addTag({ name: 'og:image', content: imageUrl });
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SeoMetaService.prototype, "robots", {
+        set: /**
+         * @protected
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            if (value) {
+                this.addTag({ name: 'robots', content: value.join(', ') });
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @protected
+     * @param {?} meta
+     * @return {?}
+     */
+    SeoMetaService.prototype.addTag = /**
+     * @protected
+     * @param {?} meta
+     * @return {?}
+     */
+    function (meta) {
+        if (meta.content) {
+            this.ngMeta.updateTag(meta);
+        }
+    };
+    SeoMetaService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    SeoMetaService.ctorParameters = function () { return [
+        { type: Title },
+        { type: Meta },
+        { type: PageMetaService }
+    ]; };
+    /** @nocollapse */ SeoMetaService.ngInjectableDef = defineInjectable({ factory: function SeoMetaService_Factory() { return new SeoMetaService(inject(Title), inject(Meta), inject(PageMetaService)); }, token: SeoMetaService, providedIn: "root" });
+    return SeoMetaService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @param {?} injector
+ * @return {?}
+ */
+function initSeoService(injector) {
+    /** @type {?} */
+    var result = function () {
+        /** @type {?} */
+        var service = injector.get(SeoMetaService);
+        service.init();
+    };
+    return result;
+}
+var SeoModule = /** @class */ (function () {
+    function SeoModule() {
+    }
+    SeoModule.decorators = [
+        { type: NgModule, args: [{
+                    providers: [
+                        {
+                            provide: APP_INITIALIZER,
+                            useFactory: initSeoService,
+                            deps: [Injector],
+                            multi: true,
+                        },
+                    ],
+                },] }
+    ];
+    return SeoModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var HamburgerMenuService = /** @class */ (function () {
+    function HamburgerMenuService(router) {
+        var _this = this;
+        this.isExpanded = new BehaviorSubject(false);
+        router.events
+            .pipe(filter(function (event) { return event instanceof NavigationStart; }))
+            .subscribe(function () {
+            _this.toggle(true);
+        });
+    }
+    /**
+     * toggles the expand state of the hamburger menu
+     */
+    /**
+     * toggles the expand state of the hamburger menu
+     * @param {?=} forceCollapse
+     * @return {?}
+     */
+    HamburgerMenuService.prototype.toggle = /**
+     * toggles the expand state of the hamburger menu
+     * @param {?=} forceCollapse
+     * @return {?}
+     */
+    function (forceCollapse) {
+        if (forceCollapse) {
+            this.isExpanded.next(false);
+        }
+        else {
+            this.isExpanded.next(!this.isExpanded.value);
+        }
+    };
+    HamburgerMenuService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    HamburgerMenuService.ctorParameters = function () { return [
+        { type: Router }
+    ]; };
+    /** @nocollapse */ HamburgerMenuService.ngInjectableDef = defineInjectable({ factory: function HamburgerMenuService_Factory() { return new HamburgerMenuService(inject(Router)); }, token: HamburgerMenuService, providedIn: "root" });
+    return HamburgerMenuService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var HamburgerMenuComponent = /** @class */ (function () {
+    function HamburgerMenuComponent(hamburgerMenuService) {
+        this.hamburgerMenuService = hamburgerMenuService;
+    }
+    /**
+     * @return {?}
+     */
+    HamburgerMenuComponent.prototype.toggle = /**
+     * @return {?}
+     */
+    function () {
+        this.hamburgerMenuService.toggle();
+    };
+    Object.defineProperty(HamburgerMenuComponent.prototype, "isExpanded", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.hamburgerMenuService.isExpanded;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    HamburgerMenuComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-hamburger-menu',
+                    template: "<button\n  class=\"cx-hamburger\"\n  type=\"button\"\n  (click)=\"toggle()\"\n  [class.is-active]=\"isExpanded | async\"\n  [attr.aria-expanded]=\"isExpanded | async\"\n  aria-label=\"Menu\"\n  aria-controls=\"header-account-container, header-categories-container, header-locale-container\"\n>\n  <span class=\"hamburger-box\">\n    <span class=\"hamburger-inner\"></span>\n  </span>\n</button>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    /** @nocollapse */
+    HamburgerMenuComponent.ctorParameters = function () { return [
+        { type: HamburgerMenuService }
+    ]; };
+    return HamburgerMenuComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var HamburgerMenuModule = /** @class */ (function () {
+    function HamburgerMenuModule() {
+    }
+    HamburgerMenuModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        ConfigModule.withConfig((/** @type {?} */ ({
+                            cmsComponents: {
+                                HamburgerMenuComponent: { selector: 'cx-hamburger-menu' },
+                            },
+                        }))),
+                    ],
+                    declarations: [HamburgerMenuComponent],
+                    entryComponents: [HamburgerMenuComponent],
+                },] }
+    ];
+    return HamburgerMenuModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var SkipLinkComponent = /** @class */ (function () {
+    function SkipLinkComponent() {
+    }
+    SkipLinkComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-skip-link',
+                    template: "<a class=\"sr-only sr-only-focusable\" href=\"#header-categories-container\">\n  {{ 'common.action.skipToNavigation' | cxTranslate }}\n</a>\n<a class=\"sr-only sr-only-focusable\" href=\"#mini-cart\">{{\n  'common.action.skipToShoppingCart' | cxTranslate\n}}</a>\n<a class=\"sr-only sr-only-focusable\" href=\"#main-content\">{{\n  'common.action.skipToMainContent' | cxTranslate\n}}</a>\n<a class=\"sr-only sr-only-focusable\" href=\"#footer\">{{\n  'common.action.skipToFooter' | cxTranslate\n}}</a>\n",
+                    styles: [":host{position:absolute;top:0;left:0}"]
+                }] }
+    ];
+    return SkipLinkComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var SkipLinkModule = /** @class */ (function () {
+    function SkipLinkModule() {
+    }
+    SkipLinkModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        ConfigModule.withConfig((/** @type {?} */ ({
+                            cmsComponents: {
+                                SkipLinkComponent: { selector: 'cx-skip-link' },
+                            },
+                        }))),
+                        I18nModule,
+                    ],
+                    declarations: [SkipLinkComponent],
+                    entryComponents: [SkipLinkComponent],
+                },] }
+    ];
+    return SkipLinkModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -1011,13 +3252,6 @@ var PaginationComponent = /** @class */ (function () {
         this.viewPageEvent = new EventEmitter();
     }
     /**
-     * @return {?}
-     */
-    PaginationComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () { };
-    /**
      * @param {?} page
      * @return {?}
      */
@@ -1032,13 +3266,9 @@ var PaginationComponent = /** @class */ (function () {
         { type: Component, args: [{
                     selector: 'cx-pagination',
                     template: "<ngb-pagination\n  [collectionSize]=\"pagination.totalResults\"\n  [page]=\"pagination.currentPage + 1\"\n  (pageChange)=\"pageChange($event)\"\n  [maxSize]=\"3\"\n  [pageSize]=\"pagination.pageSize\"\n>\n</ngb-pagination>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    encapsulation: ViewEncapsulation.None,
-                    styles: ["ngb-pagination .pagination .page-item.active .page-link{background-color:var(--cx-background-color,var(--cx-g-color-primary));border-color:var(--cx-border-color,var(--cx-g-color-primary))}"]
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
-    /** @nocollapse */
-    PaginationComponent.ctorParameters = function () { return []; };
     PaginationComponent.propDecorators = {
         pagination: [{ type: Input }],
         viewPageEvent: [{ type: Output }]
@@ -3673,7 +5903,7 @@ var OrderConfirmationPageGuard = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-var guards = [OrderConfirmationPageGuard];
+var guards$1 = [OrderConfirmationPageGuard];
 
 /**
  * @fileoverview added by tsickle
@@ -3690,7 +5920,7 @@ var CheckoutComponentModule = /** @class */ (function () {
                         CartComponentModule,
                         CheckoutModule,
                     ],
-                    providers: __spread(guards),
+                    providers: __spread(guards$1),
                 },] }
     ];
     return CheckoutComponentModule;
@@ -4075,1647 +6305,6 @@ var OrderConfirmationModule = /** @class */ (function () {
                 },] }
     ];
     return OrderConfirmationModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CmsMappingService = /** @class */ (function () {
-    function CmsMappingService(config, platformId) {
-        this.config = config;
-        this.platformId = platformId;
-    }
-    /**
-     * @param {?} flexType
-     * @return {?}
-     */
-    CmsMappingService.prototype.isComponentEnabled = /**
-     * @param {?} flexType
-     * @return {?}
-     */
-    function (flexType) {
-        /** @type {?} */
-        var isSSR = isPlatformServer(this.platformId);
-        /** @type {?} */
-        var isComponentDisabledInSSR = (this.config.cmsComponents[flexType] || {})
-            .disableSSR;
-        return !(isSSR && isComponentDisabledInSSR);
-    };
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    CmsMappingService.prototype.getRoutesForComponents = /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    function (componentTypes) {
-        var e_1, _a;
-        /** @type {?} */
-        var routes = [];
-        try {
-            for (var componentTypes_1 = __values(componentTypes), componentTypes_1_1 = componentTypes_1.next(); !componentTypes_1_1.done; componentTypes_1_1 = componentTypes_1.next()) {
-                var componentType = componentTypes_1_1.value;
-                if (this.isComponentEnabled(componentType)) {
-                    routes.push.apply(routes, __spread(this.getRoutesForComponent(componentType)));
-                }
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (componentTypes_1_1 && !componentTypes_1_1.done && (_a = componentTypes_1.return)) _a.call(componentTypes_1);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        return routes;
-    };
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    CmsMappingService.prototype.getGuardsForComponents = /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    function (componentTypes) {
-        var e_2, _a;
-        /** @type {?} */
-        var guards = new Set();
-        try {
-            for (var componentTypes_2 = __values(componentTypes), componentTypes_2_1 = componentTypes_2.next(); !componentTypes_2_1.done; componentTypes_2_1 = componentTypes_2.next()) {
-                var componentType = componentTypes_2_1.value;
-                this.getGuardsForComponent(componentType).forEach(function (guard) {
-                    return guards.add(guard);
-                });
-            }
-        }
-        catch (e_2_1) { e_2 = { error: e_2_1 }; }
-        finally {
-            try {
-                if (componentTypes_2_1 && !componentTypes_2_1.done && (_a = componentTypes_2.return)) _a.call(componentTypes_2);
-            }
-            finally { if (e_2) throw e_2.error; }
-        }
-        return Array.from(guards);
-    };
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    CmsMappingService.prototype.getI18nKeysForComponents = /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    function (componentTypes) {
-        var e_3, _a;
-        /** @type {?} */
-        var namespaces = new Set();
-        try {
-            for (var componentTypes_3 = __values(componentTypes), componentTypes_3_1 = componentTypes_3.next(); !componentTypes_3_1.done; componentTypes_3_1 = componentTypes_3.next()) {
-                var componentType = componentTypes_3_1.value;
-                if (this.isComponentEnabled(componentType)) {
-                    this.getI18nKeysForComponent(componentType).forEach(function (namespace) {
-                        return namespaces.add(namespace);
-                    });
-                }
-            }
-        }
-        catch (e_3_1) { e_3 = { error: e_3_1 }; }
-        finally {
-            try {
-                if (componentTypes_3_1 && !componentTypes_3_1.done && (_a = componentTypes_3.return)) _a.call(componentTypes_3);
-            }
-            finally { if (e_3) throw e_3.error; }
-        }
-        return Array.from(namespaces);
-    };
-    /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    CmsMappingService.prototype.getRoutesForComponent = /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    function (componentType) {
-        /** @type {?} */
-        var mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.childRoutes) || [];
-    };
-    /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    CmsMappingService.prototype.getGuardsForComponent = /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    function (componentType) {
-        /** @type {?} */
-        var mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.guards) || [];
-    };
-    /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    CmsMappingService.prototype.getI18nKeysForComponent = /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    function (componentType) {
-        /** @type {?} */
-        var mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.i18nKeys) || [];
-    };
-    CmsMappingService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    CmsMappingService.ctorParameters = function () { return [
-        { type: CmsConfig },
-        { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
-    ]; };
-    /** @nocollapse */ CmsMappingService.ngInjectableDef = defineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(inject(CmsConfig), inject(PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
-    return CmsMappingService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CmsGuardsService = /** @class */ (function () {
-    function CmsGuardsService(cmsMapping, injector) {
-        this.cmsMapping = cmsMapping;
-        this.injector = injector;
-    }
-    /**
-     * @param {?} componentTypes
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    CmsGuardsService.prototype.cmsPageCanActivate = /**
-     * @param {?} componentTypes
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    function (componentTypes, route, state) {
-        var _this = this;
-        /** @type {?} */
-        var guards = this.cmsMapping.getGuardsForComponents(componentTypes);
-        if (guards.length) {
-            /** @type {?} */
-            var canActivateObservables = guards.map(function (guardClass) {
-                /** @type {?} */
-                var guard = _this.injector.get(guardClass, null);
-                if (isCanActivate(guard)) {
-                    return wrapIntoObservable(guard.canActivate(route, state)).pipe(first());
-                }
-                else {
-                    throw new Error('Invalid CanActivate guard in cmsMapping');
-                }
-            });
-            return concat.apply(void 0, __spread(canActivateObservables)).pipe(skipWhile(function (canActivate) { return canActivate === true; }), endWith(true), first());
-        }
-        else {
-            return of(true);
-        }
-    };
-    CmsGuardsService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    CmsGuardsService.ctorParameters = function () { return [
-        { type: CmsMappingService },
-        { type: Injector }
-    ]; };
-    /** @nocollapse */ CmsGuardsService.ngInjectableDef = defineInjectable({ factory: function CmsGuardsService_Factory() { return new CmsGuardsService(inject(CmsMappingService), inject(INJECTOR)); }, token: CmsGuardsService, providedIn: "root" });
-    return CmsGuardsService;
-}());
-/**
- * @template T
- * @param {?} value
- * @return {?}
- */
-function wrapIntoObservable(value) {
-    if (isObservable(value)) {
-        return value;
-    }
-    if (isPromise(value)) {
-        return from(Promise.resolve(value));
-    }
-    return of(value);
-}
-/**
- * @param {?} obj
- * @return {?}
- */
-function isPromise(obj) {
-    return !!obj && typeof obj.then === 'function';
-}
-/**
- * @param {?} guard
- * @return {?}
- */
-function isCanActivate(guard) {
-    return guard && isFunction(guard.canActivate);
-}
-/**
- * @template T
- * @param {?} v
- * @return {?}
- */
-function isFunction(v) {
-    return typeof v === 'function';
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CmsI18nService = /** @class */ (function () {
-    function CmsI18nService(cmsMapping, translation, translationNamespace) {
-        this.cmsMapping = cmsMapping;
-        this.translation = translation;
-        this.translationNamespace = translationNamespace;
-    }
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    CmsI18nService.prototype.loadNamespacesForComponents = /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    function (componentTypes) {
-        var e_1, _a;
-        /** @type {?} */
-        var i18nKeys = this.cmsMapping.getI18nKeysForComponents(componentTypes);
-        /** @type {?} */
-        var i18nNamespaces = new Set();
-        try {
-            for (var i18nKeys_1 = __values(i18nKeys), i18nKeys_1_1 = i18nKeys_1.next(); !i18nKeys_1_1.done; i18nKeys_1_1 = i18nKeys_1.next()) {
-                var key = i18nKeys_1_1.value;
-                i18nNamespaces.add(this.translationNamespace.getNamespace(key));
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (i18nKeys_1_1 && !i18nKeys_1_1.done && (_a = i18nKeys_1.return)) _a.call(i18nKeys_1);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        this.translation.loadNamespaces(Array.from(i18nNamespaces));
-    };
-    CmsI18nService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    CmsI18nService.ctorParameters = function () { return [
-        { type: CmsMappingService },
-        { type: TranslationService },
-        { type: TranslationNamespaceService }
-    ]; };
-    /** @nocollapse */ CmsI18nService.ngInjectableDef = defineInjectable({ factory: function CmsI18nService_Factory() { return new CmsI18nService(inject(CmsMappingService), inject(TranslationService), inject(TranslationNamespaceService)); }, token: CmsI18nService, providedIn: "root" });
-    return CmsI18nService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @enum {string} */
-var BREAKPOINT = {
-    xs: 'xs',
-    sm: 'sm',
-    md: 'md',
-    lg: 'lg',
-    xl: 'xl',
-};
-/**
- * @abstract
- */
-var  /**
- * @abstract
- */
-LayoutConfig = /** @class */ (function () {
-    function LayoutConfig() {
-    }
-    return LayoutConfig;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var BreakpointService = /** @class */ (function () {
-    function BreakpointService(winRef, config) {
-        this.winRef = winRef;
-        this.config = config;
-    }
-    Object.defineProperty(BreakpointService.prototype, "breakpoint$", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            if (!this.window) {
-                return of(BREAKPOINT.xs);
-            }
-            return fromEvent(this.window, 'resize').pipe(debounceTime(300), startWith({ target: this.window }), map(function (event) { return _this.getBreakpoint(((/** @type {?} */ (event.target))).innerWidth); }), distinctUntilChanged());
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(BreakpointService.prototype, "breakpoints", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return [
-                BREAKPOINT.xs,
-                BREAKPOINT.sm,
-                BREAKPOINT.md,
-                BREAKPOINT.lg,
-                BREAKPOINT.xl,
-            ];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @protected
-     * @param {?} windowWidth
-     * @return {?}
-     */
-    BreakpointService.prototype.getBreakpoint = /**
-     * @protected
-     * @param {?} windowWidth
-     * @return {?}
-     */
-    function (windowWidth) {
-        /** @type {?} */
-        var breakpoint = this.getClosest(windowWidth);
-        return BREAKPOINT[breakpoint || BREAKPOINT.lg];
-    };
-    /**
-     * @protected
-     * @param {?=} windowWidth
-     * @return {?}
-     */
-    BreakpointService.prototype.getClosest = /**
-     * @protected
-     * @param {?=} windowWidth
-     * @return {?}
-     */
-    function (windowWidth) {
-        var _this = this;
-        if (!windowWidth) {
-            windowWidth = this.window.innerWidth;
-        }
-        return windowWidth < this.getSize(BREAKPOINT.xs)
-            ? BREAKPOINT.xs
-            : this.breakpoints.reverse().find(function (br) { return windowWidth >= _this.getSize(br); });
-    };
-    /**
-     * @protected
-     * @param {?} breakpoint
-     * @return {?}
-     */
-    BreakpointService.prototype.getSize = /**
-     * @protected
-     * @param {?} breakpoint
-     * @return {?}
-     */
-    function (breakpoint) {
-        return this.config.breakpoints[breakpoint];
-    };
-    Object.defineProperty(BreakpointService.prototype, "window", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this.winRef.nativeWindow;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    BreakpointService.decorators = [
-        { type: Injectable }
-    ];
-    /** @nocollapse */
-    BreakpointService.ctorParameters = function () { return [
-        { type: WindowRef },
-        { type: LayoutConfig }
-    ]; };
-    return BreakpointService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var PageLayoutService = /** @class */ (function () {
-    function PageLayoutService(cms, config, breakpointService) {
-        this.cms = cms;
-        this.config = config;
-        this.breakpointService = breakpointService;
-        // we print warn messages on missing layout configs
-        // only once to not polute the console log
-        this.warnLogMessages = {};
-    }
-    // TODO:
-    // distinctUntilChanged is not enough here, probably because
-    // we use the startWith operator in the breakpoint service which
-    // doesn't seem to work well with distinctUntilChanged, see
-    // https://github.com/ReactiveX/rxjs/issues/4030
-    // TODO:
-    // distinctUntilChanged is not enough here, probably because
-    // we use the startWith operator in the breakpoint service which
-    // doesn't seem to work well with distinctUntilChanged, see
-    // https://github.com/ReactiveX/rxjs/issues/4030
-    /**
-     * @param {?=} section
-     * @return {?}
-     */
-    PageLayoutService.prototype.getSlots = 
-    // TODO:
-    // distinctUntilChanged is not enough here, probably because
-    // we use the startWith operator in the breakpoint service which
-    // doesn't seem to work well with distinctUntilChanged, see
-    // https://github.com/ReactiveX/rxjs/issues/4030
-    /**
-     * @param {?=} section
-     * @return {?}
-     */
-    function (section) {
-        var _this = this;
-        return this.breakpointService.breakpoint$.pipe(switchMap(function (breakpoint) {
-            return _this.page$.pipe(map(function (page) {
-                return _this.getSlotConfig(page.template, 'slots', section, breakpoint);
-            }), filter(Boolean), map(function (config) { return config.slots; }));
-        }), distinctUntilChanged());
-    };
-    Object.defineProperty(PageLayoutService.prototype, "page$", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this.cms.getCurrentPage().pipe(filter(Boolean));
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PageLayoutService.prototype, "templateName$", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this.page$.pipe(filter(function (page) { return !!page.template; }), map(function (page) { return page.template; }));
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * load slots from the layout configuration. The breakpoint is used
-     * to load a specific configuration for the given breakpoint. If there's
-     * no configuration available for the given breakpoint the default slot
-     * configuration is returned.
-     */
-    /**
-     * load slots from the layout configuration. The breakpoint is used
-     * to load a specific configuration for the given breakpoint. If there's
-     * no configuration available for the given breakpoint the default slot
-     * configuration is returned.
-     * @protected
-     * @param {?} templateUid
-     * @param {?} configAttribute
-     * @param {?=} section
-     * @param {?=} breakpoint
-     * @return {?}
-     */
-    PageLayoutService.prototype.getSlotConfig = /**
-     * load slots from the layout configuration. The breakpoint is used
-     * to load a specific configuration for the given breakpoint. If there's
-     * no configuration available for the given breakpoint the default slot
-     * configuration is returned.
-     * @protected
-     * @param {?} templateUid
-     * @param {?} configAttribute
-     * @param {?=} section
-     * @param {?=} breakpoint
-     * @return {?}
-     */
-    function (templateUid, configAttribute, section, breakpoint) {
-        /** @type {?} */
-        var pageTemplateConfig = this.config.layoutSlots[templateUid];
-        if (section) {
-            return this.getSlotConfigForSection(templateUid, configAttribute, section, breakpoint);
-        }
-        if (!pageTemplateConfig) {
-            return this.noConfigFound(templateUid);
-        }
-        else {
-            return this.getResponsiveSlotConfig((/** @type {?} */ (pageTemplateConfig)), configAttribute, breakpoint);
-        }
-    };
-    /**
-     * @protected
-     * @param {?} templateUid
-     * @param {?} configAttribute
-     * @param {?=} section
-     * @param {?=} breakpoint
-     * @return {?}
-     */
-    PageLayoutService.prototype.getSlotConfigForSection = /**
-     * @protected
-     * @param {?} templateUid
-     * @param {?} configAttribute
-     * @param {?=} section
-     * @param {?=} breakpoint
-     * @return {?}
-     */
-    function (templateUid, configAttribute, section, breakpoint) {
-        /** @type {?} */
-        var pageTemplateConfig = this.config.layoutSlots[templateUid];
-        if (!pageTemplateConfig) {
-            return null;
-        }
-        // if there's no section config on the page layout
-        // we fall back to the global section config
-        /** @type {?} */
-        var sectionConfig = pageTemplateConfig[section]
-            ? pageTemplateConfig[section]
-            : this.config.layoutSlots[section];
-        if (!sectionConfig) {
-            return null;
-        }
-        /** @type {?} */
-        var responsiveConfig = this.getResponsiveSlotConfig((/** @type {?} */ (sectionConfig)), configAttribute, breakpoint);
-        if (responsiveConfig.hasOwnProperty(configAttribute)) {
-            return responsiveConfig;
-        }
-        else if (pageTemplateConfig[section].hasOwnProperty(configAttribute)) {
-            return pageTemplateConfig[section];
-        }
-        else if (this.config.layoutSlots[section]) {
-            return (/** @type {?} */ (this.config.layoutSlots[section]));
-        }
-    };
-    /**
-     * Returns a list of slots for a breakpoint specific configuratoin
-     * If there's no specific configuration for the breakpoint,
-     * the closest available configuration will be returned.
-     */
-    /**
-     * Returns a list of slots for a breakpoint specific configuratoin
-     * If there's no specific configuration for the breakpoint,
-     * the closest available configuration will be returned.
-     * @protected
-     * @param {?} layoutSlotConfig
-     * @param {?} configAttribute
-     * @param {?=} breakpoint
-     * @return {?}
-     */
-    PageLayoutService.prototype.getResponsiveSlotConfig = /**
-     * Returns a list of slots for a breakpoint specific configuratoin
-     * If there's no specific configuration for the breakpoint,
-     * the closest available configuration will be returned.
-     * @protected
-     * @param {?} layoutSlotConfig
-     * @param {?} configAttribute
-     * @param {?=} breakpoint
-     * @return {?}
-     */
-    function (layoutSlotConfig, configAttribute, breakpoint) {
-        var e_1, _a;
-        /** @type {?} */
-        var slotConfig = (/** @type {?} */ (layoutSlotConfig));
-        // fallback to default slot config
-        if (!breakpoint) {
-            return slotConfig;
-        }
-        // we have a config for the specific breakpoint
-        if (layoutSlotConfig[breakpoint] &&
-            layoutSlotConfig[breakpoint].hasOwnProperty(configAttribute)) {
-            return (/** @type {?} */ (layoutSlotConfig[breakpoint]));
-        }
-        // find closest config
-        /** @type {?} */
-        var all = this.breakpointService.breakpoints;
-        try {
-            for (var _b = __values(all.splice(0, all.indexOf(breakpoint))), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var br = _c.value;
-                if (layoutSlotConfig[br] &&
-                    layoutSlotConfig[br].hasOwnProperty(configAttribute)) {
-                    slotConfig = (/** @type {?} */ (layoutSlotConfig[br]));
-                }
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        return slotConfig;
-    };
-    /**
-     * @private
-     * @param {?} template
-     * @param {?=} section
-     * @return {?}
-     */
-    PageLayoutService.prototype.noConfigFound = /**
-     * @private
-     * @param {?} template
-     * @param {?=} section
-     * @return {?}
-     */
-    function (template, section) {
-        if (section) {
-            if (!this.warnLogMessages[section + ':' + template]) {
-                console.warn("no layout config found for section " + section + " of template " + template);
-                this.warnLogMessages[section + ':' + template] = true;
-            }
-        }
-        else if (!this.warnLogMessages[template]) {
-            console.warn("no layout config found for " + template);
-            this.warnLogMessages[template] = true;
-        }
-        return null;
-    };
-    PageLayoutService.decorators = [
-        { type: Injectable }
-    ];
-    /** @nocollapse */
-    PageLayoutService.ctorParameters = function () { return [
-        { type: CmsService },
-        { type: LayoutConfig },
-        { type: BreakpointService }
-    ]; };
-    return PageLayoutService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var PageLayoutComponent = /** @class */ (function () {
-    function PageLayoutComponent(el, renderer, pageLayoutService) {
-        this.el = el;
-        this.renderer = renderer;
-        this.pageLayoutService = pageLayoutService;
-    }
-    /**
-     * @return {?}
-     */
-    PageLayoutComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        if (this.section) {
-            this.styleClass = this.section;
-        }
-    };
-    Object.defineProperty(PageLayoutComponent.prototype, "slots$", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this.pageLayoutService.getSlots(this.section);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PageLayoutComponent.prototype, "templateName$", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            return this.pageLayoutService.templateName$.pipe(
-            // intercept the observable to keep a clean DOM tree
-            tap(function (name) {
-                _this.styleClass = name;
-            }));
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PageLayoutComponent.prototype, "styleClass", {
-        set: /**
-         * @param {?} cls
-         * @return {?}
-         */
-        function (cls) {
-            this.renderer.addClass(this.el.nativeElement, cls);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    PageLayoutComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-page-layout',
-                    template: "<ng-container *cxOutlet=\"section || (templateName$ | async)\">\n  <ng-content></ng-content>\n  <cx-page-slot\n    *ngFor=\"let slot of (slots$ | async)\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-container>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                }] }
-    ];
-    /** @nocollapse */
-    PageLayoutComponent.ctorParameters = function () { return [
-        { type: ElementRef },
-        { type: Renderer2 },
-        { type: PageLayoutService }
-    ]; };
-    PageLayoutComponent.propDecorators = {
-        section: [{ type: Input }]
-    };
-    return PageLayoutComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CmsRoutesService = /** @class */ (function () {
-    function CmsRoutesService(router, cmsMapping) {
-        this.router = router;
-        this.cmsMapping = cmsMapping;
-    }
-    /**
-     * @param {?} url
-     * @return {?}
-     */
-    CmsRoutesService.prototype.cmsRouteExist = /**
-     * @param {?} url
-     * @return {?}
-     */
-    function (url) {
-        /** @type {?} */
-        var isCmsDrivenRoute = url.startsWith('/');
-        if (!isCmsDrivenRoute) {
-            return false;
-        }
-        /** @type {?} */
-        var routePath = url.substr(1);
-        return (isCmsDrivenRoute &&
-            !!this.router.config.find(function (route) {
-                return route.data && route.data.cxCmsRouteContext && route.path === routePath;
-            }));
-    };
-    /**
-     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
-     *
-     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
-     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
-     *
-     * @param pageContext
-     * @param currentUrl
-     */
-    /**
-     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
-     *
-     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
-     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
-     *
-     * @param {?} pageContext
-     * @param {?} componentTypes
-     * @param {?} currentUrl
-     * @return {?}
-     */
-    CmsRoutesService.prototype.handleCmsRoutesInGuard = /**
-     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
-     *
-     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
-     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
-     *
-     * @param {?} pageContext
-     * @param {?} componentTypes
-     * @param {?} currentUrl
-     * @return {?}
-     */
-    function (pageContext, componentTypes, currentUrl) {
-        /** @type {?} */
-        var componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
-        if (componentRoutes.length) {
-            if (this.updateRouting(pageContext, componentRoutes)) {
-                this.router.navigateByUrl(currentUrl);
-                return false;
-            }
-        }
-        return true;
-    };
-    /**
-     * @private
-     * @param {?} pageContext
-     * @param {?} routes
-     * @return {?}
-     */
-    CmsRoutesService.prototype.updateRouting = /**
-     * @private
-     * @param {?} pageContext
-     * @param {?} routes
-     * @return {?}
-     */
-    function (pageContext, routes) {
-        if (pageContext.type === PageType.CONTENT_PAGE &&
-            pageContext.id.startsWith('/') &&
-            pageContext.id.length > 1) {
-            /** @type {?} */
-            var newRoute = {
-                path: pageContext.id.substr(1),
-                component: PageLayoutComponent,
-                children: routes,
-                data: {
-                    cxCmsRouteContext: pageContext,
-                },
-            };
-            this.router.resetConfig(__spread([newRoute], this.router.config));
-            return true;
-        }
-        return false;
-    };
-    CmsRoutesService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    CmsRoutesService.ctorParameters = function () { return [
-        { type: Router },
-        { type: CmsMappingService }
-    ]; };
-    /** @nocollapse */ CmsRoutesService.ngInjectableDef = defineInjectable({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(inject(Router), inject(CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
-    return CmsRoutesService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CmsPageGuard = /** @class */ (function () {
-    function CmsPageGuard(routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards) {
-        this.routingService = routingService;
-        this.cmsService = cmsService;
-        this.cmsRoutes = cmsRoutes;
-        this.cmsI18n = cmsI18n;
-        this.cmsGuards = cmsGuards;
-    }
-    /**
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    CmsPageGuard.prototype.canActivate = /**
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    function (route, state) {
-        var _this = this;
-        return this.routingService.getPageContext().pipe(switchMap(function (pageContext) {
-            return _this.cmsService.hasPage(pageContext).pipe(first(), withLatestFrom(of(pageContext)));
-        }), switchMap(function (_a) {
-            var _b = __read(_a, 2), hasPage = _b[0], pageContext = _b[1];
-            if (hasPage) {
-                return _this.cmsService.getPageComponentTypes(pageContext).pipe(switchMap(function (componentTypes) {
-                    return _this.cmsGuards
-                        .cmsPageCanActivate(componentTypes, route, state)
-                        .pipe(withLatestFrom(of(componentTypes)));
-                }), tap(function (_a) {
-                    var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
-                    if (canActivate === true) {
-                        _this.cmsI18n.loadNamespacesForComponents(componentTypes);
-                    }
-                }), map(function (_a) {
-                    var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
-                    if (canActivate === true &&
-                        !route.data.cxCmsRouteContext &&
-                        !_this.cmsRoutes.cmsRouteExist(pageContext.id)) {
-                        return _this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url);
-                    }
-                    return canActivate;
-                }));
-            }
-            else {
-                if (pageContext.id !== '/not-found') {
-                    _this.routingService.go(['/not-found']);
-                }
-                return of(false);
-            }
-        }));
-    };
-    CmsPageGuard.guardName = 'CmsPageGuard';
-    CmsPageGuard.decorators = [
-        { type: Injectable }
-    ];
-    /** @nocollapse */
-    CmsPageGuard.ctorParameters = function () { return [
-        { type: RoutingService },
-        { type: CmsService },
-        { type: CmsRoutesService },
-        { type: CmsI18nService },
-        { type: CmsGuardsService }
-    ]; };
-    return CmsPageGuard;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-var guards$1 = [CmsPageGuard];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var OutletStyleService = /** @class */ (function () {
-    function OutletStyleService() {
-        this.templateRefs = {};
-    }
-    /**
-     * @param {?} outlet
-     * @param {?} elem
-     * @return {?}
-     */
-    OutletStyleService.prototype.add = /**
-     * @param {?} outlet
-     * @param {?} elem
-     * @return {?}
-     */
-    function (outlet, elem) {
-        this.templateRefs[outlet] = elem;
-    };
-    /**
-     * @param {?} outlet
-     * @return {?}
-     */
-    OutletStyleService.prototype.get = /**
-     * @param {?} outlet
-     * @return {?}
-     */
-    function (outlet) {
-        return this.templateRefs[outlet];
-    };
-    OutletStyleService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */ OutletStyleService.ngInjectableDef = defineInjectable({ factory: function OutletStyleService_Factory() { return new OutletStyleService(); }, token: OutletStyleService, providedIn: "root" });
-    return OutletStyleService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @enum {string} */
-var OutletPosition = {
-    REPLACE: 'replace',
-    BEFORE: 'before',
-    AFTER: 'after',
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var OutletService = /** @class */ (function () {
-    function OutletService() {
-        this.templatesRefs = {};
-        this.templatesRefsBefore = {};
-        this.templatesRefsAfter = {};
-    }
-    /**
-     * @param {?} outlet
-     * @param {?} template
-     * @param {?=} position
-     * @return {?}
-     */
-    OutletService.prototype.add = /**
-     * @param {?} outlet
-     * @param {?} template
-     * @param {?=} position
-     * @return {?}
-     */
-    function (outlet, template, position) {
-        if (position === void 0) { position = OutletPosition.REPLACE; }
-        if (position === OutletPosition.BEFORE) {
-            this.templatesRefsBefore[outlet] = template;
-        }
-        if (position === OutletPosition.REPLACE) {
-            this.templatesRefs[outlet] = template;
-        }
-        if (position === OutletPosition.AFTER) {
-            this.templatesRefsAfter[outlet] = template;
-        }
-    };
-    /**
-     * @param {?} outlet
-     * @param {?=} position
-     * @return {?}
-     */
-    OutletService.prototype.get = /**
-     * @param {?} outlet
-     * @param {?=} position
-     * @return {?}
-     */
-    function (outlet, position) {
-        if (position === void 0) { position = OutletPosition.REPLACE; }
-        /** @type {?} */
-        var templateRef;
-        switch (position) {
-            case OutletPosition.BEFORE:
-                templateRef = this.templatesRefsBefore[outlet];
-                break;
-            case OutletPosition.AFTER:
-                templateRef = this.templatesRefsAfter[outlet];
-                break;
-            default:
-                templateRef = this.templatesRefs[outlet];
-        }
-        return templateRef;
-        // return this.templatesRefs[outlet] ? this.templatesRefs[outlet] : null;
-    };
-    OutletService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */ OutletService.ngInjectableDef = defineInjectable({ factory: function OutletService_Factory() { return new OutletService(); }, token: OutletService, providedIn: "root" });
-    return OutletService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var OutletDirective = /** @class */ (function () {
-    function OutletDirective(vcr, templateRef, outletService, outletStyleService, renderer) {
-        this.vcr = vcr;
-        this.templateRef = templateRef;
-        this.outletService = outletService;
-        this.outletStyleService = outletStyleService;
-        this.renderer = renderer;
-    }
-    Object.defineProperty(OutletDirective.prototype, "cxOutletContext", {
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            this._context = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @return {?}
-     */
-    OutletDirective.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var nodes = [];
-        nodes.push.apply(nodes, __spread(this.renderTemplate(OutletPosition.BEFORE)));
-        nodes.push.apply(nodes, __spread(this.renderTemplate(OutletPosition.REPLACE, true)));
-        nodes.push.apply(nodes, __spread(this.renderTemplate(OutletPosition.AFTER)));
-        this.renderStyleLink(nodes);
-    };
-    /**
-     * @private
-     * @param {?} position
-     * @param {?=} replace
-     * @return {?}
-     */
-    OutletDirective.prototype.renderTemplate = /**
-     * @private
-     * @param {?} position
-     * @param {?=} replace
-     * @return {?}
-     */
-    function (position, replace) {
-        if (replace === void 0) { replace = false; }
-        /** @type {?} */
-        var nodes = [];
-        /** @type {?} */
-        var template = this.outletService.get(this.cxOutlet, position);
-        if (template || replace) {
-            /** @type {?} */
-            var ref = this.vcr.createEmbeddedView(template || this.templateRef, {
-                $implicit: this.context,
-            });
-            nodes.push.apply(nodes, __spread(ref.rootNodes));
-        }
-        return nodes;
-    };
-    /**
-     * @private
-     * @param {?} nodes
-     * @return {?}
-     */
-    OutletDirective.prototype.renderStyleLink = /**
-     * @private
-     * @param {?} nodes
-     * @return {?}
-     */
-    function (nodes) {
-        /** @type {?} */
-        var styleElement = this.outletStyleService.get(this.cxOutlet);
-        if (styleElement) {
-            /** @type {?} */
-            var parentElement = nodes.find(function (node) { return node instanceof HTMLElement; });
-            if (parentElement.shadowRoot) {
-                parentElement = parentElement.shadowRoot;
-            }
-            styleElement.nativeElement.rel = 'stylesheet';
-            this.renderer.appendChild(parentElement, styleElement.nativeElement);
-        }
-    };
-    Object.defineProperty(OutletDirective.prototype, "context", {
-        get: /**
-         * @private
-         * @return {?}
-         */
-        function () {
-            // return specific context if provided
-            if (this._context) {
-                return this._context;
-            }
-            /** @type {?} */
-            var ctx = ((/** @type {?} */ (this.vcr.injector))).view.context;
-            // the context might already be given $implicit
-            // by a parent *ngIf or *ngFor
-            return ctx.$implicit || ctx;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    OutletDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: '[cxOutlet]',
-                },] }
-    ];
-    /** @nocollapse */
-    OutletDirective.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: TemplateRef },
-        { type: OutletService },
-        { type: OutletStyleService },
-        { type: Renderer2 }
-    ]; };
-    OutletDirective.propDecorators = {
-        cxOutlet: [{ type: Input }],
-        cxOutletContext: [{ type: Input }]
-    };
-    return OutletDirective;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var OutletModule = /** @class */ (function () {
-    function OutletModule() {
-    }
-    OutletModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [CommonModule],
-                    declarations: [OutletDirective],
-                    providers: [OutletService],
-                    exports: [OutletDirective],
-                },] }
-    ];
-    return OutletModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CmsModule$1 = /** @class */ (function () {
-    function CmsModule$$1() {
-    }
-    CmsModule$$1.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        CommonModule,
-                        HttpClientModule,
-                        ConfigModule.withConfig(defaultCmsModuleConfig),
-                        OutletModule,
-                        CmsModule,
-                    ],
-                    providers: __spread(guards$1, [{ provide: CmsConfig, useExisting: Config }]),
-                    declarations: [],
-                    exports: [OutletDirective],
-                },] }
-    ];
-    return CmsModule$$1;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var PageSlotComponent = /** @class */ (function () {
-    function PageSlotComponent(cmsService, dynamicAttributeService, renderer, hostElement, cmsMapping) {
-        this.cmsService = cmsService;
-        this.dynamicAttributeService = dynamicAttributeService;
-        this.renderer = renderer;
-        this.hostElement = hostElement;
-        this.cmsMapping = cmsMapping;
-    }
-    /**
-     * @return {?}
-     */
-    PageSlotComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        // add the position name as a css class so that
-        // layout can be applied to it, using the position based class.
-        this.renderer.addClass(this.hostElement.nativeElement, this.position);
-    };
-    Object.defineProperty(PageSlotComponent.prototype, "slot$", {
-        /**
-         * returns an observable with `ContentSlotData` for the current position
-         */
-        get: /**
-         * returns an observable with `ContentSlotData` for the current position
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            return this.cmsService
-                .getContentSlot(this.position)
-                .pipe(tap(function (slot) { return _this.addSmartEditSlotClass(slot); }));
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PageSlotComponent.prototype, "components$", {
-        /**
-         * returns an observable with components (`ContentSlotComponentData[]`)
-         * for the current slot
-         */
-        get: /**
-         * returns an observable with components (`ContentSlotComponentData[]`)
-         * for the current slot
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            return this.slot$.pipe(map(function (slot) { return (slot && slot.components ? slot.components : []); }), tap(function (components) { return _this.addComponentClass(components); }));
-        },
-        enumerable: true,
-        configurable: true
-    });
-    // add a class to indicate whether the class is empty or not
-    // add a class to indicate whether the class is empty or not
-    /**
-     * @private
-     * @param {?} components
-     * @return {?}
-     */
-    PageSlotComponent.prototype.addComponentClass = 
-    // add a class to indicate whether the class is empty or not
-    /**
-     * @private
-     * @param {?} components
-     * @return {?}
-     */
-    function (components) {
-        if (components && components.length > 0) {
-            this.renderer.addClass(this.hostElement.nativeElement, 'has-components');
-        }
-    };
-    /**
-     * @private
-     * @param {?} slot
-     * @return {?}
-     */
-    PageSlotComponent.prototype.addSmartEditSlotClass = /**
-     * @private
-     * @param {?} slot
-     * @return {?}
-     */
-    function (slot) {
-        if (this.cmsService.isLaunchInSmartEdit()) {
-            this.addSmartEditContract(slot);
-        }
-    };
-    /**
-     * @private
-     * @param {?} slot
-     * @return {?}
-     */
-    PageSlotComponent.prototype.addSmartEditContract = /**
-     * @private
-     * @param {?} slot
-     * @return {?}
-     */
-    function (slot) {
-        this.dynamicAttributeService.addDynamicAttributes(slot.properties, this.hostElement.nativeElement, this.renderer);
-    };
-    PageSlotComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-page-slot',
-                    template: "<ng-container *cxOutlet=\"position\">\n  <ng-container *ngFor=\"let component of (components$ | async)\">\n    <ng-container\n      *cxOutlet=\"component.flexType\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-container>\n  </ng-container>\n</ng-container>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                }] }
-    ];
-    /** @nocollapse */
-    PageSlotComponent.ctorParameters = function () { return [
-        { type: CmsService },
-        { type: DynamicAttributeService },
-        { type: Renderer2 },
-        { type: ElementRef },
-        { type: CmsMappingService }
-    ]; };
-    PageSlotComponent.propDecorators = {
-        position: [{ type: Input }]
-    };
-    return PageSlotComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @abstract
- * @template T
- */
-var  /**
- * @abstract
- * @template T
- */
-CmsComponentData = /** @class */ (function () {
-    function CmsComponentData() {
-    }
-    return CmsComponentData;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var ComponentWrapperDirective = /** @class */ (function () {
-    function ComponentWrapperDirective(vcr, componentMapper, injector, cmsService, dynamicAttributeService, renderer, cd, config, platformId) {
-        this.vcr = vcr;
-        this.componentMapper = componentMapper;
-        this.injector = injector;
-        this.cmsService = cmsService;
-        this.dynamicAttributeService = dynamicAttributeService;
-        this.renderer = renderer;
-        this.cd = cd;
-        this.config = config;
-        this.platformId = platformId;
-    }
-    /**
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        if (!this.shouldRenderComponent()) {
-            return;
-        }
-        if (this.componentMapper.isWebComponent(this.cxComponentWrapper.flexType)) {
-            this.launchWebComponent();
-        }
-        else {
-            this.launchComponent();
-        }
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.shouldRenderComponent = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var isSSR = isPlatformServer(this.platformId);
-        /** @type {?} */
-        var isComponentDisabledInSSR = (this.config.cmsComponents[this.cxComponentWrapper.flexType] || {}).disableSSR;
-        return !(isSSR && isComponentDisabledInSSR);
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.launchComponent = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var factory = this.componentMapper.getComponentFactoryByCode(this.cxComponentWrapper.flexType);
-        if (factory) {
-            this.cmpRef = this.vcr.createComponent(factory, undefined, this.getInjectorForComponent());
-            this.cd.detectChanges();
-            if (this.cmsService.isLaunchInSmartEdit()) {
-                this.addSmartEditContract(this.cmpRef.location.nativeElement);
-            }
-        }
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.launchWebComponent = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var elementName;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.componentMapper.initWebComponent(this.cxComponentWrapper.flexType, this.renderer)];
-                    case 1:
-                        elementName = _a.sent();
-                        if (elementName) {
-                            this.webElement = this.renderer.createElement(elementName);
-                            this.webElement.cxApi = __assign({}, this.injector.get(CxApiService), { CmsComponentData: this.getCmsDataForComponent() });
-                            this.renderer.appendChild(this.vcr.element.nativeElement.parentElement, this.webElement);
-                        }
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    /**
-     * @private
-     * @template T
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.getCmsDataForComponent = /**
-     * @private
-     * @template T
-     * @return {?}
-     */
-    function () {
-        return {
-            uid: this.cxComponentWrapper.uid,
-            data$: this.cmsService.getComponentData(this.cxComponentWrapper.uid),
-        };
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.getInjectorForComponent = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var configProviders = (this.config.cmsComponents[this.cxComponentWrapper.flexType] || {})
-            .providers || [];
-        return Injector.create({
-            providers: __spread([
-                {
-                    provide: CmsComponentData,
-                    useValue: this.getCmsDataForComponent(),
-                }
-            ], configProviders),
-            parent: this.injector,
-        });
-    };
-    /**
-     * @private
-     * @param {?} element
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.addSmartEditContract = /**
-     * @private
-     * @param {?} element
-     * @return {?}
-     */
-    function (element) {
-        this.dynamicAttributeService.addDynamicAttributes(this.cxComponentWrapper.properties, element, this.renderer);
-    };
-    /**
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
-        if (this.cmpRef) {
-            this.cmpRef.destroy();
-        }
-        if (this.webElement) {
-            this.renderer.removeChild(this.vcr.element.nativeElement.parentElement, this.webElement);
-        }
-    };
-    ComponentWrapperDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: '[cxComponentWrapper]',
-                },] }
-    ];
-    /** @nocollapse */
-    ComponentWrapperDirective.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentMapperService },
-        { type: Injector },
-        { type: CmsService },
-        { type: DynamicAttributeService },
-        { type: Renderer2 },
-        { type: ChangeDetectorRef },
-        { type: CmsConfig },
-        { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
-    ]; };
-    ComponentWrapperDirective.propDecorators = {
-        cxComponentWrapper: [{ type: Input }]
-    };
-    return ComponentWrapperDirective;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var PageComponentModule = /** @class */ (function () {
-    function PageComponentModule() {
-    }
-    PageComponentModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [CommonModule],
-                    providers: [],
-                    declarations: [ComponentWrapperDirective],
-                    exports: [ComponentWrapperDirective],
-                },] }
-    ];
-    return PageComponentModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var PageSlotModule = /** @class */ (function () {
-    function PageSlotModule() {
-    }
-    PageSlotModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [CommonModule, OutletModule, PageComponentModule],
-                    providers: [],
-                    declarations: [PageSlotComponent],
-                    exports: [PageSlotComponent],
-                },] }
-    ];
-    return PageSlotModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var PageLayoutModule = /** @class */ (function () {
-    function PageLayoutModule() {
-    }
-    PageLayoutModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [CommonModule, CmsModule$1, PageSlotModule],
-                    declarations: [PageLayoutComponent],
-                    providers: [PageLayoutService],
-                    exports: [PageLayoutComponent],
-                },] }
-    ];
-    return PageLayoutModule;
 }());
 
 /**
@@ -6145,8 +6734,7 @@ var OrderHistoryComponent = /** @class */ (function () {
     OrderHistoryComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-order-history',
-                    template: "<ng-container *ngIf=\"(orders$ | async) as orders\">\n  <div class=\"container\">\n    <!-- HEADER -->\n    <div class=\"cx-order-history-header\">\n      <h3>{{ 'orderHistory.label.orderHistory' | cxTranslate }}</h3>\n    </div>\n\n    <!-- BODY -->\n    <div class=\"cx-order-history-body\">\n      <ng-container *ngIf=\"orders.pagination.totalResults > 0; else noOrder\">\n        <!-- Select Form and Pagination Top -->\n        <div class=\"cx-order-history-sort top row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"sortLabels\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{\n                'orderHistory.placeholder.sortByMostRecent' | cxTranslate\n              }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n        <!-- TABLE -->\n        <table class=\"table cx-order-history-table\">\n          <thead class=\"cx-order-history-thead-mobile\">\n            <th scope=\"col\">\n              {{ 'orderHistory.label.orderId' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.label.date' | cxTranslate }}</th>\n            <th scope=\"col\">\n              {{ 'orderHistory.label.status' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.label.total' | cxTranslate }}</th>\n          </thead>\n          <tbody>\n            <tr\n              *ngFor=\"let order of orders.orders\"\n              (click)=\"goToOrderDetail(order)\"\n            >\n              <td class=\"cx-order-history-code\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.label.orderId' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: [{ name: 'orderDetails', params: order }]\n                    } | cxTranslateUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.code }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-placed\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.label.date' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: [{ name: 'orderDetails', params: order }]\n                    } | cxTranslateUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                  >{{ order?.placed | cxDate: 'longDate' }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-status\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.label.status' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: [{ name: 'orderDetails', params: order }]\n                    } | cxTranslateUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.statusDisplay }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-total\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.label.total' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: [{ name: 'orderDetails', params: order }]\n                    } | cxTranslateUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.total.formattedValue }}</a\n                >\n              </td>\n            </tr>\n          </tbody>\n        </table>\n        <!-- Select Form and Pagination Bottom -->\n        <div class=\"cx-order-history-sort bottom row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"sortLabels\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{\n                'orderHistory.placeholder.sortByMostRecent' | cxTranslate\n              }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n      </ng-container>\n\n      <!-- NO ORDER CONTAINER -->\n      <ng-template #noOrder>\n        <div class=\"cx-order-history-no-order row\" *ngIf=\"(isLoaded$ | async)\">\n          <div class=\"col-sm-12 col-md-6 col-lg-4\">\n            <div>{{ 'orderHistory.label.noOrders' | cxTranslate }}</div>\n            <a\n              [routerLink]=\"{ route: ['home'] } | cxTranslateUrl\"\n              routerLinkActive=\"active\"\n              class=\"btn btn-primary btn-block\"\n              >{{ 'orderHistory.action.startShopping' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </ng-template>\n    </div>\n  </div>\n</ng-container>\n",
-                    styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/@media (max-width:767.98px){.cx-order-history{max-width:var(--cx-max-width,100%);padding:var(--cx-padding,0)}.cx-order-history-table tr{border-width:var(--cx-border-width,1px 0 0 0);border-color:var(--cx-border-color,var(--cx-g-color-light));border-style:var(--cx-border-style,solid)}.cx-order-history-table tr:first-child{border-width:var(--cx-border-width,0);padding:var(--cx-padding,1.25rem 0 0 0)}}.cx-order-history-table{padding:var(--cx-paddding,1.5rem 0 1.125rem 0);margin-bottom:var(--cx-margin,0);border-width:var(--cx-border-width,1px 0 1px 0);border-color:var(--cx-border-color,var(--cx-g-color-light));border-style:var(--cx-border-style,solid)}.cx-order-history-table tr{width:var(--cx-width,100%)}.cx-order-history-table th{padding:var(--cx-padding,1.5rem 0 1.125rem 0);text-align:var(--cx-text-align,left)}.cx-order-history-table th:last-child{text-align:var(--cx-text-align,right)}.cx-order-history-table td{width:var(--cx-width,25%);padding:var(--cx-padding,1.625rem 0)}@media (min-width:768px){.cx-order-history-table td{text-align:var(--cx-text-align,left)}.cx-order-history-table td:last-child{text-align:var(--cx-text-align,right)}}.cx-order-history-header{padding:var(--cx-padding,40px 0 0 0);color:var(--cx-color,var(--cx-g-color-text))}.cx-order-history-code{-webkit-text-decoration:var(--cx-text-decoration,underline);text-decoration:var(--cx-text-decoration,underline)}.cx-order-history-placed{text-align:var(--cx-text-align,center)}@media (max-width:767.98px){.cx-order-history-table td{width:var(--cx-width,100%);display:var(--cx-display,flex);border-width:var(--cx-border-width,0);padding:var(--cx-padding,0 1.25rem)}.cx-order-history-table td:first-child{padding-top:var(--cx-padding,1.25rem)}.cx-order-history-table td:last-child{padding-bottom:var(--cx-padding,1.25rem)}.cx-order-history-header{padding:var(cx-padding,40px 20px 0 20px)}.cx-order-history-thead-mobile{display:var(--cx-display,none)}.cx-order-history-placed{text-align:var(--cx-text-align,left)}}.cx-order-history-status{text-align:var(--cx-text-align,center)}@media (max-width:767.98px){.cx-order-history-status{text-align:var(--cx-text-align,left)}}.cx-order-history-total{text-align:var(--cx-text-align,right)}.cx-order-history-label{text-transform:var(--cx-text-transform,uppercase);color:var(--cx-color,var(--cx-g-color-secondary))}.cx-order-history-value{color:var(--cx-color,var(--cx-g-color-text))}.cx-order-history-form-group{padding:var(--cx-padding,0);margin-bottom:var(--cx-margin,0)}.cx-order-history-sort.top{display:var(--cx-display,flex);justify-content:var(--cx-justify-content,space-between);padding:var(--cx-padding,1rem 0);margin:var(--cx-margin,0)}@media (max-width:767.98px){.cx-order-history-total{text-align:var(--cx-text-align,left)}.cx-order-history-label{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);min-width:var(--cx-min-width,110px)}.cx-order-history-value{font-size:var(--cx-font-size,1rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);font-weight:400}.cx-order-history-form-group{padding:var(--cx-padding,1.25rem)}.cx-order-history-sort.top{flex-direction:var(--cx-flex-direction,column);padding-top:var(--cx-padding,0)}}.cx-order-history-sort.bottom{display:var(--cx-display,flex);justify-content:var(--cx-justify-content,space-between);padding:var(--cx-padding,2rem 0 1rem 0);margin:var(--cx-margin,0)}.cx-order-history-no-order{font-size:var(--cx-font-size,1rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);font-weight:400;min-height:var(--cx-min-height,415px)}@media (max-width:767.98px){.cx-order-history-sort.bottom{flex-direction:var(--cx-flex-direction,column);padding-top:var(--cx-padding,0)}.cx-order-history-pagination{margin:var(--cx-margin,0 auto)}.cx-order-history-no-order{min-height:var(--cx-min-height,474px);padding-left:var(--cx-padding,1.25rem);padding-right:var(--cx-padding,1.25rem)}}.cx-order-history-no-order .btn{margin:var(--cx-margin,1.25rem 0)}"]
+                    template: "<ng-container *ngIf=\"(orders$ | async) as orders\">\n  <div class=\"container\">\n    <!-- HEADER -->\n    <div class=\"cx-order-history-header\">\n      <h3>{{ 'orderHistory.label.orderHistory' | cxTranslate }}</h3>\n    </div>\n\n    <!-- BODY -->\n    <div class=\"cx-order-history-body\">\n      <ng-container *ngIf=\"orders.pagination.totalResults > 0; else noOrder\">\n        <!-- Select Form and Pagination Top -->\n        <div class=\"cx-order-history-sort top row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"sortLabels\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{\n                'orderHistory.placeholder.sortByMostRecent' | cxTranslate\n              }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n        <!-- TABLE -->\n        <table class=\"table cx-order-history-table\">\n          <thead class=\"cx-order-history-thead-mobile\">\n            <th scope=\"col\">\n              {{ 'orderHistory.label.orderId' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.label.date' | cxTranslate }}</th>\n            <th scope=\"col\">\n              {{ 'orderHistory.label.status' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.label.total' | cxTranslate }}</th>\n          </thead>\n          <tbody>\n            <tr\n              *ngFor=\"let order of orders.orders\"\n              (click)=\"goToOrderDetail(order)\"\n            >\n              <td class=\"cx-order-history-code\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.label.orderId' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: [{ name: 'orderDetails', params: order }]\n                    } | cxTranslateUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.code }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-placed\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.label.date' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: [{ name: 'orderDetails', params: order }]\n                    } | cxTranslateUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                  >{{ order?.placed | cxDate: 'longDate' }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-status\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.label.status' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: [{ name: 'orderDetails', params: order }]\n                    } | cxTranslateUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.statusDisplay }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-total\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.label.total' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: [{ name: 'orderDetails', params: order }]\n                    } | cxTranslateUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.total.formattedValue }}</a\n                >\n              </td>\n            </tr>\n          </tbody>\n        </table>\n        <!-- Select Form and Pagination Bottom -->\n        <div class=\"cx-order-history-sort bottom row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"sortLabels\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{\n                'orderHistory.placeholder.sortByMostRecent' | cxTranslate\n              }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n      </ng-container>\n\n      <!-- NO ORDER CONTAINER -->\n      <ng-template #noOrder>\n        <div class=\"cx-order-history-no-order row\" *ngIf=\"(isLoaded$ | async)\">\n          <div class=\"col-sm-12 col-md-6 col-lg-4\">\n            <div>{{ 'orderHistory.label.noOrders' | cxTranslate }}</div>\n            <a\n              [routerLink]=\"{ route: ['home'] } | cxTranslateUrl\"\n              routerLinkActive=\"active\"\n              class=\"btn btn-primary btn-block\"\n              >{{ 'orderHistory.action.startShopping' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </ng-template>\n    </div>\n  </div>\n</ng-container>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -6302,8 +6890,7 @@ var PaymentMethodsComponent = /** @class */ (function () {
     PaymentMethodsComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-payment-methods',
-                    template: "<div class=\"cx-payment container\">\n  <div class=\"cx-header\">\n    <h3>{{ 'paymentMethods.label.paymentMethods' | cxTranslate }}</h3>\n  </div>\n\n  <div class=\"cx-body\">\n    <div class=\"cx-msg\">\n      {{\n        'paymentMethods.label.newPaymentMethodsAreAddedDuringCheckout'\n          | cxTranslate\n      }}\n    </div>\n    <div *ngIf=\"(loading$ | async); else cards\"><cx-spinner></cx-spinner></div>\n    <ng-template #cards>\n      <div\n        *ngIf=\"(paymentMethods$ | async) as paymentMethods\"\n        class=\"cx-existing row\"\n      >\n        <div\n          class=\"cx-payment-card col-sm-12 col-md-12 col-lg-6\"\n          *ngFor=\"let paymentMethod of paymentMethods\"\n        >\n          <div class=\"cx-payment-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"getCardContent(paymentMethod)\"\n              (deleteCard)=\"deletePaymentMethod(paymentMethod)\"\n              (setDefaultCard)=\"setDefaultPaymentMethod(paymentMethod)\"\n              (editCard)=\"setEdit(paymentMethod)\"\n              [editMode]=\"editCard === paymentMethod.id\"\n              (cancelCard)=\"cancelCard()\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n    </ng-template>\n  </div>\n</div>\n",
-                    styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/@media (max-width:767.98px){.cx-payment{padding-left:var(--cx-padding,1.25rem);padding-right:var(--cx-padding,1.25rem)}}.cx-header{padding:var(--cx-padding,2.5rem 0 0 0)}.cx-existing{display:var(--cx-display,flex);padding:var(--cx-padding,0 0 2.5rem 0);align-items:var(--cx-align-items,stretch)}@media (max-width:991.98px){.cx-existing{padding:var(--cx-padding,0 0 3.125rem 0)}}@media (max-width:767.98px){.cx-existing{padding:var(--cx-padding,0 0 4.375rem 0)}}.cx-payment-card{padding-top:var(--cx-padding,1.875rem)}.cx-payment-inner{height:var(--cx-height,100%)}"]
+                    template: "<div class=\"cx-payment container\">\n  <div class=\"cx-header\">\n    <h3>{{ 'paymentMethods.label.paymentMethods' | cxTranslate }}</h3>\n  </div>\n\n  <div class=\"cx-body\">\n    <div class=\"cx-msg\">\n      {{\n        'paymentMethods.label.newPaymentMethodsAreAddedDuringCheckout'\n          | cxTranslate\n      }}\n    </div>\n    <div *ngIf=\"(loading$ | async); else cards\"><cx-spinner></cx-spinner></div>\n    <ng-template #cards>\n      <div\n        *ngIf=\"(paymentMethods$ | async) as paymentMethods\"\n        class=\"cx-existing row\"\n      >\n        <div\n          class=\"cx-payment-card col-sm-12 col-md-12 col-lg-6\"\n          *ngFor=\"let paymentMethod of paymentMethods\"\n        >\n          <div class=\"cx-payment-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"getCardContent(paymentMethod)\"\n              (deleteCard)=\"deletePaymentMethod(paymentMethod)\"\n              (setDefaultCard)=\"setDefaultPaymentMethod(paymentMethod)\"\n              (editCard)=\"setEdit(paymentMethod)\"\n              [editMode]=\"editCard === paymentMethod.id\"\n              (cancelCard)=\"cancelCard()\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n    </ng-template>\n  </div>\n</div>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -6449,6 +7036,232 @@ FormUtils = /** @class */ (function () {
                 (form.get(formControlName).touched && form.get(formControlName).dirty)));
     };
     return FormUtils;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var UpdateEmailFormComponent = /** @class */ (function () {
+    function UpdateEmailFormComponent(fb) {
+        this.fb = fb;
+        this.submited = false;
+        this.saveEmail = new EventEmitter();
+        this.cancelEmail = new EventEmitter();
+        this.form = this.fb.group({
+            email: ['', [Validators.required, CustomFormValidators.emailValidator]],
+            confirmEmail: ['', [Validators.required]],
+            password: ['', [Validators.required]],
+        }, { validator: this.matchEmail });
+    }
+    /**
+     * @param {?} formControlName
+     * @return {?}
+     */
+    UpdateEmailFormComponent.prototype.isEmailConfirmNotValid = /**
+     * @param {?} formControlName
+     * @return {?}
+     */
+    function (formControlName) {
+        return (this.form.hasError('NotEqual') &&
+            (this.submited ||
+                (this.form.get(formControlName).touched &&
+                    this.form.get(formControlName).dirty)));
+    };
+    /**
+     * @param {?} formControlName
+     * @return {?}
+     */
+    UpdateEmailFormComponent.prototype.isNotValid = /**
+     * @param {?} formControlName
+     * @return {?}
+     */
+    function (formControlName) {
+        return FormUtils.isNotValidField(this.form, formControlName, this.submited);
+    };
+    /**
+     * @return {?}
+     */
+    UpdateEmailFormComponent.prototype.onSubmit = /**
+     * @return {?}
+     */
+    function () {
+        this.submited = true;
+        if (this.form.invalid) {
+            return;
+        }
+        /** @type {?} */
+        var newUid = this.form.value.confirmEmail;
+        /** @type {?} */
+        var password = this.form.value.password;
+        this.saveEmail.emit({ newUid: newUid, password: password });
+    };
+    /**
+     * @return {?}
+     */
+    UpdateEmailFormComponent.prototype.onCancel = /**
+     * @return {?}
+     */
+    function () {
+        this.cancelEmail.emit();
+    };
+    /**
+     * @private
+     * @param {?} ac
+     * @return {?}
+     */
+    UpdateEmailFormComponent.prototype.matchEmail = /**
+     * @private
+     * @param {?} ac
+     * @return {?}
+     */
+    function (ac) {
+        if (ac.get('email').value !== ac.get('confirmEmail').value) {
+            return { NotEqual: true };
+        }
+    };
+    UpdateEmailFormComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-update-email-form',
+                    template: "<form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\">\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">New email address</span>\n        <input\n          type=\"email\"\n          name=\"email\"\n          formControlName=\"email\"\n          placeholder=\"Enter email\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('email')\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('email')\">\n          <span>Please enter a valid email.</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-sm-12\">\n      <label>\n        <span class=\"label-content\">Confirm new email address</span>\n        <input\n          type=\"email\"\n          name=\"confirmEmail\"\n          formControlName=\"confirmEmail\"\n          placeholder=\"Enter email\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isEmailConfirmNotValid('confirmEmail')\"\n        />\n        <div\n          class=\"invalid-feedback\"\n          *ngIf=\"isEmailConfirmNotValid('confirmEmail')\"\n        >\n          <span>Both email must match</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-sm-12\">\n      <label>\n        <span class=\"label-content\">Password</span>\n        <input\n          type=\"password\"\n          name=\"password\"\n          formControlName=\"password\"\n          placeholder=\"Enter password\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('password')\"\n          autocomplete=\"off\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('password')\">\n          <span>Please input password</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-lg-6\">\n      <button\n        class=\"btn btn-block btn-secondary\"\n        type=\"button\"\n        (click)=\"onCancel()\"\n      >\n        Cancel\n      </button>\n    </div>\n    <div class=\"col-lg-6\">\n      <button class=\"btn btn-block btn-primary\" type=\"submit\">\n        Save\n      </button>\n    </div>\n  </div>\n</form>\n",
+                    styles: [".form-group button:first-child{margin-bottom:1rem}"]
+                }] }
+    ];
+    /** @nocollapse */
+    UpdateEmailFormComponent.ctorParameters = function () { return [
+        { type: FormBuilder }
+    ]; };
+    UpdateEmailFormComponent.propDecorators = {
+        saveEmail: [{ type: Output }],
+        cancelEmail: [{ type: Output }]
+    };
+    return UpdateEmailFormComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var UpdateEmailComponent = /** @class */ (function () {
+    function UpdateEmailComponent(routingService, globalMessageService, userService, authService) {
+        this.routingService = routingService;
+        this.globalMessageService = globalMessageService;
+        this.userService = userService;
+        this.authService = authService;
+        this.subscription = new Subscription();
+    }
+    /**
+     * @return {?}
+     */
+    UpdateEmailComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.userService.resetUpdateEmailResultState();
+        this.subscription.add(this.userService.get().subscribe(function (result) { return (_this.uid = result.uid); }));
+        this.subscription.add(this.userService
+            .getUpdateEmailResultSuccess()
+            .subscribe(function (success) { return _this.onSuccess(success); }));
+        this.isLoading$ = this.userService.getUpdateEmailResultLoading();
+    };
+    /**
+     * @return {?}
+     */
+    UpdateEmailComponent.prototype.onCancel = /**
+     * @return {?}
+     */
+    function () {
+        this.routingService.go({ route: ['home'] });
+    };
+    /**
+     * @param {?} __0
+     * @return {?}
+     */
+    UpdateEmailComponent.prototype.onSubmit = /**
+     * @param {?} __0
+     * @return {?}
+     */
+    function (_a) {
+        var newUid = _a.newUid, password = _a.password;
+        this.newUid = newUid;
+        this.userService.updateEmail(this.uid, password, newUid);
+    };
+    /**
+     * @param {?} success
+     * @return {?}
+     */
+    UpdateEmailComponent.prototype.onSuccess = /**
+     * @param {?} success
+     * @return {?}
+     */
+    function (success) {
+        if (success) {
+            this.globalMessageService.add({
+                text: "Success. Please sign in with " + this.newUid,
+                type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
+            });
+            this.authService.logout();
+            this.routingService.go({ route: ['login'] });
+        }
+    };
+    /**
+     * @return {?}
+     */
+    UpdateEmailComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+        this.userService.resetUpdateEmailResultState();
+    };
+    UpdateEmailComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-update-email',
+                    template: "<ng-container>\n  <div *ngIf=\"(isLoading$ | async); else loaded\">\n    <div class=\"cx-spinner\">\n      <cx-spinner> </cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #loaded>\n    <div class=\"container\">\n      <div class=\"row d-flex justify-content-center\">\n        <cx-update-email-form\n          class=\"col-md-6\"\n          (saveEmail)=\"onSubmit($event)\"\n          (cancelEmail)=\"onCancel()\"\n        >\n        </cx-update-email-form>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n",
+                    styles: [""]
+                }] }
+    ];
+    /** @nocollapse */
+    UpdateEmailComponent.ctorParameters = function () { return [
+        { type: RoutingService },
+        { type: GlobalMessageService },
+        { type: UserService },
+        { type: AuthService }
+    ]; };
+    return UpdateEmailComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var UpdateEmailModule = /** @class */ (function () {
+    function UpdateEmailModule() {
+    }
+    UpdateEmailModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        ConfigModule.withConfig((/** @type {?} */ ({
+                            cmsComponents: {
+                                UpdateEmailComponent: {
+                                    selector: 'cx-update-email',
+                                },
+                            },
+                        }))),
+                        FormsModule,
+                        ReactiveFormsModule,
+                        SpinnerModule,
+                    ],
+                    declarations: [UpdateEmailFormComponent, UpdateEmailComponent],
+                    exports: [UpdateEmailComponent],
+                    entryComponents: [UpdateEmailComponent],
+                },] }
+    ];
+    return UpdateEmailModule;
 }());
 
 /**
@@ -7106,8 +7919,7 @@ var ProductListComponent = /** @class */ (function () {
     ProductListComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-product-list',
-                    template: "<ng-container *ngIf=\"(updateParams$ | async)\">\n  <div class=\"cx-page\" *ngIf=\"(model$ | async) as model\">\n    <section class=\"cx-page__section\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-12 col-lg-12\" *ngIf=\"(gridMode$ | async) as gridMode\">\n            <div class=\"cx-sorting top\">\n              <div class=\"row\">\n                <div class=\"col-12 col-lg-4 mr-auto\">\n                  <div class=\"form-group cx-sort-dropdown\">\n                    <cx-sorting\n                      [sortOptions]=\"model.sorts\"\n                      (sortListEvent)=\"sortList($event)\"\n                      [selectedOption]=\"model.pagination.sort\"\n                      placeholder=\"{{\n                        'productList.placeholder.sortByRelevance' | cxTranslate\n                      }}\"\n                    ></cx-sorting>\n                  </div>\n                </div>\n                <div class=\"col-auto\">\n                  <div\n                    class=\"cx-pagination\"\n                    aria-label=\"product search pagination\"\n                  >\n                    <cx-pagination\n                      [pagination]=\"model.pagination\"\n                      (viewPageEvent)=\"viewPage($event)\"\n                    ></cx-pagination>\n                  </div>\n                </div>\n                <div class=\"col-auto ml-auto ml-lg-0\">\n                  <cx-product-view\n                    (modeChange)=\"setGridMode($event)\"\n                    [mode]=\"gridMode\"\n                  ></cx-product-view>\n                </div>\n              </div>\n            </div>\n            <div class=\"cx-product-container\">\n              <ng-container *ngIf=\"gridMode === 'grid'\">\n                <div class=\"row\">\n                  <cx-product-grid-item\n                    *ngFor=\"let product of model?.products\"\n                    [product]=\"product\"\n                    class=\"col-12 col-sm-6 col-md-4\"\n                  ></cx-product-grid-item>\n                </div>\n              </ng-container>\n\n              <ng-container *ngIf=\"gridMode === 'list'\">\n                <cx-product-list-item\n                  *ngFor=\"let product of model?.products\"\n                  [product]=\"product\"\n                  class=\"cx-product-search-list\"\n                ></cx-product-list-item>\n              </ng-container>\n            </div>\n            <div class=\"cx-sorting bottom\">\n              <div class=\"row\">\n                <div class=\"col-12 col-lg-4 mr-auto\">\n                  <div class=\"form-group cx-sort-dropdown\">\n                    <cx-sorting\n                      [sortOptions]=\"model.sorts\"\n                      (sortListEvent)=\"sortList($event)\"\n                      [selectedOption]=\"model.pagination.sort\"\n                      placeholder=\"{{\n                        'productList.placeholder.sortByRelevance' | cxTranslate\n                      }}\"\n                    ></cx-sorting>\n                  </div>\n                </div>\n                <div class=\"col-auto\" aria-label=\"product search pagination\">\n                  <div class=\"cx-pagination\">\n                    <cx-pagination\n                      [pagination]=\"model.pagination\"\n                      (viewPageEvent)=\"viewPage($event)\"\n                    ></cx-pagination>\n                  </div>\n                </div>\n                <div class=\"col-auto ml-auto ml-lg-0\">\n                  <cx-product-view\n                    (modeChange)=\"setGridMode($event)\"\n                    [mode]=\"gridMode\"\n                  ></cx-product-view>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </section>\n  </div>\n</ng-container>\n",
-                    styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-product-search-list{display:block;border-width:var(--cx-border-width,0 0 1px 0);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light));margin:var(--cx-padding,0 0 25px 0)}.cx-product-search-list:last-of-type{border:var(--cx-border,none)}.cx-product-container{margin:var(--cx-margin,40px 0)}.cx-sorting{border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light))}@media (max-width:991.98px){.cx-sorting{border:var(--cx-border,none)}}.cx-sorting.top{border-width:var(--cx-border-width,0 0 1px 0);padding:var(--cx-padding,0 0 8px 0)}.cx-sorting.bottom{border-width:var(--cx-border-width,1px 0 0 0);padding:var(--cx-padding,25px 0 0 0)}.cx-pagination{display:var(--cx-dispaly,inline-block);vertical-align:var(--cx-vertical-align,top)}.cx-sort-dropdown{height:var(--cx-height,48px)}.cx-sort-dropdown .ng-arrow-wrapper{padding:var(--cx-padding,0 35px 0 0)}"]
+                    template: "<ng-container *ngIf=\"(updateParams$ | async)\">\n  <div class=\"cx-page\" *ngIf=\"(model$ | async) as model\">\n    <section class=\"cx-page__section\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-12 col-lg-12\" *ngIf=\"(gridMode$ | async) as gridMode\">\n            <div class=\"cx-sorting top\">\n              <div class=\"row\">\n                <div class=\"col-12 col-lg-4 mr-auto\">\n                  <div class=\"form-group cx-sort-dropdown\">\n                    <cx-sorting\n                      [sortOptions]=\"model.sorts\"\n                      (sortListEvent)=\"sortList($event)\"\n                      [selectedOption]=\"model.pagination.sort\"\n                      placeholder=\"{{\n                        'productList.placeholder.sortByRelevance' | cxTranslate\n                      }}\"\n                    ></cx-sorting>\n                  </div>\n                </div>\n                <div class=\"col-auto\">\n                  <div\n                    class=\"cx-pagination\"\n                    aria-label=\"product search pagination\"\n                  >\n                    <cx-pagination\n                      [pagination]=\"model.pagination\"\n                      (viewPageEvent)=\"viewPage($event)\"\n                    ></cx-pagination>\n                  </div>\n                </div>\n                <div class=\"col-auto ml-auto ml-lg-0\">\n                  <cx-product-view\n                    (modeChange)=\"setGridMode($event)\"\n                    [mode]=\"gridMode\"\n                  ></cx-product-view>\n                </div>\n              </div>\n            </div>\n            <div class=\"cx-product-container\">\n              <ng-container *ngIf=\"gridMode === 'grid'\">\n                <div class=\"row\">\n                  <cx-product-grid-item\n                    *ngFor=\"let product of model?.products\"\n                    [product]=\"product\"\n                    class=\"col-12 col-sm-6 col-md-4\"\n                  ></cx-product-grid-item>\n                </div>\n              </ng-container>\n\n              <ng-container *ngIf=\"gridMode === 'list'\">\n                <cx-product-list-item\n                  *ngFor=\"let product of model?.products\"\n                  [product]=\"product\"\n                  class=\"cx-product-search-list\"\n                ></cx-product-list-item>\n              </ng-container>\n            </div>\n            <div class=\"cx-sorting bottom\">\n              <div class=\"row\">\n                <div class=\"col-12 col-lg-4 mr-auto\">\n                  <div class=\"form-group cx-sort-dropdown\">\n                    <cx-sorting\n                      [sortOptions]=\"model.sorts\"\n                      (sortListEvent)=\"sortList($event)\"\n                      [selectedOption]=\"model.pagination.sort\"\n                      placeholder=\"{{\n                        'productList.placeholder.sortByRelevance' | cxTranslate\n                      }}\"\n                    ></cx-sorting>\n                  </div>\n                </div>\n                <div class=\"col-auto\" aria-label=\"product search pagination\">\n                  <div class=\"cx-pagination\">\n                    <cx-pagination\n                      [pagination]=\"model.pagination\"\n                      (viewPageEvent)=\"viewPage($event)\"\n                    ></cx-pagination>\n                  </div>\n                </div>\n                <div class=\"col-auto ml-auto ml-lg-0\">\n                  <cx-product-view\n                    (modeChange)=\"setGridMode($event)\"\n                    [mode]=\"gridMode\"\n                  ></cx-product-view>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </section>\n  </div>\n</ng-container>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -7269,8 +8081,7 @@ var ProductFacetNavigationComponent = /** @class */ (function () {
         { type: Component, args: [{
                     selector: 'cx-product-facet-navigation',
                     template: "<div class=\"cx-search-facet\" *ngIf=\"(searchResult$ | async) as searchResult\">\n  <ng-template [ngIf]=\"searchResult.breadcrumbs?.length\">\n    <h4 class=\"cx-facet-filter-header\">\n      {{ 'productList.label.filterBy' | cxTranslate }}\n    </h4>\n    <div class=\"cx-facet-filter-container\">\n      <div\n        *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n        [hidden]=\"breadcrumb.facetValueCode === activeFacetValueCode\"\n        class=\"cx-facet-filter-pill\"\n        role=\"filter\"\n      >\n        <span>{{ breadcrumb.facetValueName }}</span>\n        <button\n          type=\"button\"\n          class=\"close\"\n          aria-label=\"Close\"\n          (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n    </div>\n  </ng-template>\n\n  <ng-template ngFor let-facet [ngForOf]=\"visibleFacets\" let-facetId=\"index\">\n    <div class=\"cx-facet-group\">\n      <span class=\"cx-facet-header\">\n        <a\n          class=\"cx-facet-header-link\"\n          (click)=\"toggleFacet(facet.name)\"\n          [attr.aria-expanded]=\"!isFacetCollapsed(facet.name)\"\n          aria-controls=\"\"\n        >\n          {{ facet.name }}\n        </a>\n      </span>\n      <div [ngbCollapse]=\"isFacetCollapsed(facet.name)\">\n        <ul class=\"cx-facet-list\">\n          <li\n            *ngFor=\"\n              let value of getVisibleFacetValues(facet);\n              index as facetValueId\n            \"\n          >\n            <div class=\"form-check\">\n              <label class=\"form-checkbox cx-facet-label\">\n                <input\n                  class=\"form-check-input cx-facet-checkbox\"\n                  role=\"checkbox\"\n                  type=\"checkbox\"\n                  aria-checked=\"true\"\n                  [checked]=\"value.selected\"\n                  (change)=\"toggleValue(value.query.query.value)\"\n                />\n                <span class=\"cx-facet-text\"\n                  >{{ value.name }} ({{ value.count }})</span\n                >\n              </label>\n            </div>\n          </li>\n          <li\n            class=\"cx-facet-toggle-btn\"\n            (click)=\"showLess(facet.name)\"\n            *ngIf=\"showAllPerFacetMap.get(facet.name)\"\n          >\n            {{ 'productList.action.showLess' | cxTranslate }}\n          </li>\n          <li\n            class=\"cx-facet-toggle-btn\"\n            (click)=\"showMore(facet.name)\"\n            *ngIf=\"\n              !showAllPerFacetMap.get(facet.name) &&\n              facet.values.length > minPerFacet\n            \"\n          >\n            {{ 'productList.action.showMore' | cxTranslate }}\n          </li>\n        </ul>\n      </div>\n    </div>\n  </ng-template>\n</div>\n\n<div class=\"cx-facet-mobile\">\n  <button\n    class=\"btn btn-action btn-block cx-facet-mobile-btn\"\n    (click)=\"openFilterModal(content)\"\n  >\n    {{ 'productList.action.filterBy' | cxTranslate }}\n  </button>\n</div>\n\n<!-- START ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n<div *ngIf=\"(updateParams$ | async) as params\">\n  <div class=\"cx-facet-mobile\" *ngIf=\"searchResult.breadcrumbs?.length\">\n    <div class=\"cx-facet-filter-container\">\n      <h4 class=\"cx-facet-filter-header\">\n        {{ 'productList.label.appliedFilter' | cxTranslate }}\n      </h4>\n      <div\n        class=\"cx-facet-filter-pill\"\n        role=\"filter\"\n        *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n      >\n        {{ breadcrumb.facetValueName }}\n        <button\n          type=\"button\"\n          class=\"close\"\n          aria-label=\"Close\"\n          (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n<!-- END ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n\n<ng-template #content let-c=\"close\" let-d=\"dismiss\">\n  <div class=\"modal-header\">\n    <h4 class=\"cx-facet-modal-title\" id=\"modal-title\">\n      {{ 'productList.label.filterBy' | cxTranslate }}\n    </h4>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"d('Cross click')\"\n    >\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"modal-body cx-facet-modal-body\">\n    <form>\n      <div\n        class=\"form-group\"\n        *ngFor=\"let facet of searchResult.facets; index as facetId\"\n      >\n        <h4 class=\"cx-facet-modal-label\" for=\"megapixels\">{{ facet.name }}</h4>\n        <div class=\"input-group\">\n          <ul class=\"cx-facet-list\">\n            <li *ngFor=\"let value of facet.values; index as facetValueId\">\n              <div class=\"form-check\">\n                <label class=\"form-checkbox cx-facet-label\">\n                  <input\n                    class=\"form-check-input cx-facet-checkbox\"\n                    role=\"checkbox\"\n                    type=\"checkbox\"\n                    aria-checked=\"true\"\n                    [checked]=\"value.selected\"\n                    (change)=\"toggleValue(value.query.query.value)\"\n                  />\n                  <span class=\"cx-facet-text\"\n                    >{{ value.name }} ({{ value.count }})</span\n                  >\n                </label>\n              </div>\n            </li>\n          </ul>\n        </div>\n      </div>\n    </form>\n  </div>\n</ng-template>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/@media (max-width:991.98px){.cx-search-facet{display:var(--cx-display,none)}}.cx-facet-checkbox{position:var(--cx-position,relative);margin:var(--cx-margin,0 10px 0 0);min-width:var(--cx-min-width,22px);transition:var(--cx-transition,.3s)}.cx-facet-checkbox:checked+.cx-facet-text{color:var(--cx-color,var(--cx-g-color-primary))}.cx-facet-list{padding:var(--cx-padding,0);list-style:var(--cx-list-style,none);margin:var(--cx-margin,0 0 32px 0)}.cx-facet-list .form-check{padding:var(--cx-padding,0);margin:var(--cx-margin,0 0 20px 0)}.cx-facet-list .cx-facet-label{color:var(--cx-color,var(--cx-g-color-secondary));font-size:var(--cx-font-size,1rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.6);font-weight:var(--cx-font-weight,var(--cx-g-font-weight-normal,400));position:var(--cx-position,relative);margin:var(--cx-margin,0);display:var(--cx-display,flex);align-items:var(--cx-align-items,flex-start);justify-content:var(--cx-justify-content,flex-start);cursor:var(--cx-cursor,pointer)}.cx-facet-list .cx-facet-label:hover .cx-facet-checkbox:not(:checked){background-color:var(--cx-background-color,var(--cx-g-color-light))}.cx-facet-list .cx-facet-label .cx-facet-text{line-height:var(--cx-light-height,22px)}.cx-facet-list .cx-facet-toggle-btn{cursor:pointer}.cx-facet-header{border-width:var(--cx-border-width,0 0 1px 0);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light));font-size:var(--cx-font-size,1rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.6);color:var(--cx-color,var(--cx-g-color-text));padding:var(--cx-padding,0 0 10px 0);margin:var(--cx-margin,0 0 17px 0);display:var(--cx-display,block);font-weight:var(--cx-font-weight,var(--cx-g-font-weight-semi,600))}.cx-facet-header .cx-facet-header-link:after{float:var(--cx-float,right);font-size:var(--cx-font-size,25px);line-height:var(--cx-line-height,0);position:var(--cx-position,relative);top:var(--cx-top,10px);font-weight:var(--cx-font-weight,var(--cx-g-font-weight-normal,400));color:var(--cx-color,var(--cx-g-color-secondary))}.cx-facet-header .cx-facet-header-link[aria-expanded=false]:after{content:'+'}.cx-facet-header .cx-facet-header-link[aria-expanded=true]:after{content:'\\2013';height:var(--cx-height,2px)}.cx-facet-filter-container{margin:var(--cx-margin,0 0 40px 0)}@media (max-width:991.98px){.cx-facet-filter-container{margin:var(--cx-margin,0)}}.cx-facet-filter-header{font-size:var(--cx-font-size,1rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.6);color:var(--cx-color,var(--cx-g-color-text));padding:var(--cx-padding,0 0 10px 0);margin:var(--cx-margin,0 0 20px 0)}@media (max-width:991.98px){.cx-facet-filter-header{display:var(--cx-display,inline-block);margin:var(--cx-margin,0 20px 0 0)}.cx-facet-mobile .cx-facet-mobile-btn{margin:var(--cx-margin,0 0 20px 0)}}.cx-facet-filter-pill{background:var(--cx-background,var(--cx-g-color-light));padding:var(--cx-padding,10px 10px 10px 13px);margin:var(--cx-margin,10px 10px 5px 0);display:var(--cx-display,flex);align-items:var(--cx-align-items,flex-start);border-radius:var(--cx-border-radius,4px)}.cx-facet-filter-pill span{flex:var(--cx-flex,1 1 auto)}.cx-facet-filter-pill button{margin:var(--cx-margin,0 0 0 10px);flex:var(--cx-flex,0 0 1rem)}.cx-facet-modal-title{font-size:var(--cx-font-size,1rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.6)}@media (min-width:992px){.cx-facet-mobile{display:var(--cx-display,none)}}@media (max-width:991.98px){.cx-facet-modal-body{overflow-y:var(--cx-overflow-y,scroll);height:var(--cx-height,100vh)}.cx-facet-modal-label{font-size:var(--cx-font-size,1rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.6);font-weight:var(--cx-font-weight,var(--cx-g-font-weight-semi,600));margin:var(--cx-margin,0 0 27px 0)}}"]
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     /** @nocollapse */
@@ -7293,8 +8104,7 @@ var ProductGridItemComponent = /** @class */ (function () {
         { type: Component, args: [{
                     selector: 'cx-product-grid-item',
                     template: "<a\n  [routerLink]=\"\n    { route: [{ name: 'product', params: product | stripHtml }] }\n      | cxTranslateUrl\n  \"\n  class=\"cx-product-image-container\"\n>\n  <cx-picture\n    class=\"cx-product-image\"\n    [imageContainer]=\"product.images?.PRIMARY\"\n    imageFormat=\"product\"\n    [imageAlt]=\"product.summary\"\n  ></cx-picture>\n</a>\n<a\n  [routerLink]=\"\n    { route: [{ name: 'product', params: product | stripHtml }] }\n      | cxTranslateUrl\n  \"\n  class=\"cx-product-name\"\n  [innerHTML]=\"product.name\"\n  >{{ product.name }}</a\n>\n\n<div class=\"cx-product-rating\">\n  <cx-star-rating\n    [rating]=\"product?.averageRating\"\n    [disabled]=\"true\"\n  ></cx-star-rating>\n</div>\n<div class=\"cx-product-price-container\">\n  <div class=\"cx-product-price\" aria-label=\"Product price\">\n    {{ product.price.formattedValue }}\n  </div>\n</div>\n\n<cx-add-to-cart\n  *ngIf=\"product.stock.stockLevelStatus !== 'outOfStock'\"\n  [productCode]=\"product.code\"\n></cx-add-to-cart>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: ["@charset \"UTF-8\";/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-product-image-container{display:var(--cx-display,block);text-align:var(--cx-text-align,center)}.cx-product-image{width:var(--cx-width,100%);padding:var(--cx-padding,20px);display:var(--cx-display,block)}@media (max-width:767.98px){.cx-product-image{padding:var(--cx-padding,1.25rem 0 0 0)}}.cx-product-name{font-size:var(--cx-font-size,1rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);text-align:var(--cx-text-align,center);display:var(--cx-display,block);margin:var(--cx-margin,0 0 25px 0);color:var(--cx-color,--cx-g-color-dark);-webkit-text-decoration:var(--cx-text-decoration,none);text-decoration:var(--cx-text-decoration,none);height:var(--cx-height,2.4em);overflow:var(--cx-overflow,hidden);position:var(--cx-position,relative)}.cx-product-name:before{bottom:var(--cx-bottom,0);right:var(--cx-right,0);position:var(--cx-position,absolute);content:'\u2026'}.cx-product-name:after{content:'';background:var(--cx-background,none repeat scroll 0 0);background-color:var(--cx-background-color,--cx-g-color-inverse);position:var(--cx-position,absolute);height:var(--cx-height,50px);width:var(--cx-width,100%);z-index:var(--cx-z-index,1)}.cx-product-name:hover{color:var(--cx-color,--cx-g-color-primary)}.cx-product-price-container,.cx-product-rating{text-align:var(--cx-text-align,center)}.cx-product-price{font-size:var(--cx-font-size,1.375rem);font-weight:var(--cx-g-font-weight-semi);line-height:var(--cx-line-height,1.22222);text-align:var(--cx-text-align,center);display:var(--cx-display,inline-block);margin:var(--cx-margin,0 0 25px 0)}.cx-product-price .old{color:var(--cx-g-secondary);-webkit-text-decoration:var(--cx-text-decoration,line-through);text-decoration:var(--cx-text-decoration,line-through);margin:var(--cx-margin,0)}.cx-product-price .new{margin:var(--cx-margin,0 0 25px 5px);color:var(--cx-color,--cx-g-primary)}"]
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     ProductGridItemComponent.propDecorators = {
@@ -7314,8 +8124,7 @@ var ProductListItemComponent = /** @class */ (function () {
         { type: Component, args: [{
                     selector: 'cx-product-list-item',
                     template: "<div class=\"row\">\n  <div class=\"col-12 col-md-4\">\n    <a\n      [routerLink]=\"\n        { route: [{ name: 'product', params: product | stripHtml }] }\n          | cxTranslateUrl\n      \"\n      class=\"cx-product-image-container\"\n    >\n      <cx-picture\n        class=\"cx-product-image\"\n        [imageContainer]=\"product.images?.PRIMARY\"\n        imageFormat=\"product\"\n        [imageAlt]=\"product.summary\"\n      ></cx-picture>\n    </a>\n  </div>\n  <div class=\"col-12 col-md-8\">\n    <a\n      [routerLink]=\"\n        { route: [{ name: 'product', params: product | stripHtml }] }\n          | cxTranslateUrl\n      \"\n      class=\"cx-product-name\"\n      [innerHtml]=\"product.name\"\n      >{{ product.name }}</a\n    >\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"cx-product-price\" aria-label=\"Product price\">\n      {{ product.price?.formattedValue }}\n    </div>\n    <div class=\"row\">\n      <div class=\"col-12 col-md-8\">\n        <p class=\"cx-product-summary\" [innerHtml]=\"product.summary\">\n          {{ product.summary }}\n        </p>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <cx-add-to-cart\n          *ngIf=\"product.stock.stockLevelStatus !== 'outOfStock'\"\n          [productCode]=\"product.code\"\n        ></cx-add-to-cart>\n      </div>\n    </div>\n  </div>\n</div>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-product-search-list{border-width:var(--cx-border-width,0 0 1px 0);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light));margin:var(--cx-margin,0 0 25px 0)}.cx-product-search-list:last-of-type{border-width:var(--cx-border-width,0 0 0 0)}.cx-product-image-container{display:block;text-align:center}.cx-product-image{width:100%}.cx-product-name{font-size:var(--cx-font-size,1rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);text-align:left;display:block;margin:var(--cx-margin,0 0 3px 0);color:var(--cx-color,var(--cx-g-color-dark));text-decoration:none}.cx-product-name:hover{color:var(--cx-color,var(--cx-g-color-primary))}.cx-product-price{font-size:var(--cx-font-size,1.375rem);font-weight:var(--cx-g-font-weight-semi);line-height:var(--cx-line-height,1.22222);text-align:left;display:inline-block;margin:var(--cx-margin,0 0 25px 0)}.cx-product-price.old{color:var(--cx-color,var(--cx-g-color-secondary));-webkit-text-decoration:var(--cx-text-decoration,line-through);text-decoration:var(--cx-text-decoration,line-through)}.cx-product-price.new{margin:var(--cx-margin,0 0 0 5px);color:var(--cx-color,var(--cx-g-color-primary))}"]
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     ProductListItemComponent.propDecorators = {
@@ -7590,8 +8399,7 @@ var ProductTabsComponent = /** @class */ (function () {
     ProductTabsComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-product-tabs',
-                    template: "<div class=\"details\" *ngIf=\"(product$ | async) as product\">\n  <ng-container *cxOutlet=\"outlets.DESCRIPTION\">\n    <h3 #descriptionHeader (click)=\"select($event, description)\">\n      {{ 'productDetails.label.productDetails' | cxTranslate }}\n    </h3>\n    <div #description>\n      <div class=\"container\" [innerHTML]=\"product?.description\"></div>\n    </div>\n  </ng-container>\n\n  <ng-container *cxOutlet=\"outlets.SPECIFICATIONS\">\n    <h3 (click)=\"select($event, specifications)\">\n      {{ 'productDetails.label.specification' | cxTranslate }}\n    </h3>\n    <div #specifications>\n      <div class=\"container\">\n        <h2>{{ 'productDetails.label.specification' | cxTranslate }}</h2>\n        <cx-product-attributes [product]=\"product\"></cx-product-attributes>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-container *cxOutlet=\"outlets.REVIEWS\">\n    <h3 #reviewHeader (click)=\"select($event, reviews)\">\n      {{ 'productDetails.label.reviews' | cxTranslate }} ({{\n        product?.numberOfReviews\n      }})\n    </h3>\n    <div #reviews>\n      <div class=\"container\">\n        <h2>\n          {{ 'productDetails.label.reviews' | cxTranslate }} ({{\n            product?.numberOfReviews\n          }})\n        </h2>\n        <cx-product-reviews\n          class=\"container\"\n          [(isWritingReview)]=\"isWritingReview\"\n          [product]=\"product\"\n        ></cx-product-reviews>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-container *cxOutlet=\"outlets.SHIPPING\">\n    <h3 (click)=\"select($event, shipping)\">\n      {{ 'productDetails.label.shipping' | cxTranslate }}\n    </h3>\n    <div #shipping>\n      <div class=\"container\">\n        <h2>{{ 'productDetails.label.shipping' | cxTranslate }}</h2>\n        <ng-container\n          [cxComponentWrapper]=\"{\n            flexType: 'CMSTabParagraphComponent',\n            uid: 'deliveryTab'\n          }\"\n        ></ng-container>\n      </div>\n    </div>\n  </ng-container>\n</div>\n",
-                    styles: [""]
+                    template: "<div class=\"details\" *ngIf=\"(product$ | async) as product\">\n  <ng-container *cxOutlet=\"outlets.DESCRIPTION\">\n    <h3 #descriptionHeader (click)=\"select($event, description)\">\n      {{ 'productDetails.label.productDetails' | cxTranslate }}\n    </h3>\n    <div #description>\n      <div class=\"container\" [innerHTML]=\"product?.description\"></div>\n    </div>\n  </ng-container>\n\n  <ng-container *cxOutlet=\"outlets.SPECIFICATIONS\">\n    <h3 (click)=\"select($event, specifications)\">\n      {{ 'productDetails.label.specification' | cxTranslate }}\n    </h3>\n    <div #specifications>\n      <div class=\"container\">\n        <h2>{{ 'productDetails.label.specification' | cxTranslate }}</h2>\n        <cx-product-attributes [product]=\"product\"></cx-product-attributes>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-container *cxOutlet=\"outlets.REVIEWS\">\n    <h3 #reviewHeader (click)=\"select($event, reviews)\">\n      {{ 'productDetails.label.reviews' | cxTranslate }} ({{\n        product?.numberOfReviews\n      }})\n    </h3>\n    <div #reviews>\n      <div class=\"container\">\n        <h2>\n          {{ 'productDetails.label.reviews' | cxTranslate }} ({{\n            product?.numberOfReviews\n          }})\n        </h2>\n        <cx-product-reviews\n          class=\"container\"\n          [(isWritingReview)]=\"isWritingReview\"\n          [product]=\"product\"\n        ></cx-product-reviews>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-container *cxOutlet=\"outlets.SHIPPING\">\n    <h3 (click)=\"select($event, shipping)\">\n      {{ 'productDetails.label.shipping' | cxTranslate }}\n    </h3>\n    <div #shipping>\n      <div class=\"container\">\n        <h2>{{ 'productDetails.label.shipping' | cxTranslate }}</h2>\n        <ng-container\n          [cxComponentWrapper]=\"{\n            flexType: 'CMSTabParagraphComponent',\n            uid: 'deliveryTab'\n          }\"\n        ></ng-container>\n      </div>\n    </div>\n  </ng-container>\n</div>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -7617,8 +8425,7 @@ var ProductAttributesComponent = /** @class */ (function () {
         { type: Component, args: [{
                     selector: 'cx-product-attributes',
                     template: "<table *ngFor=\"let class of product?.classifications\">\n  <th>\n    <h3>{{ class.name }}</h3>\n  </th>\n  <tr *ngFor=\"let feature of class.features\">\n    <td>{{ feature.name }}</td>\n    <td>\n      <ul>\n        <li *ngFor=\"let featureValue of feature?.featureValues\">\n          {{ featureValue?.value }}\n        </li>\n      </ul>\n    </td>\n  </tr>\n</table>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: ["table{width:var(--cx-width,100%);margin:var(--cx-margin,0 0 30px 0)}table th h3{margin:var(--cx-margin,0 0 18px 0)}table tr{border-top:var(--cx-border-top,1px solid var(--cx-g-color-light));border-bottom:var(--cx-border-bottom,1px solid var(--cx-g-color-light))}table td{padding:var(--cx-padding,12px 0 12px 0);vertical-align:var(--cx-vertical-align,top);width:var(--cx-width,50%)}table ul{list-style:var(--cx-list-style,none);padding:var(--cx-padding,0 0 0 0)}"]
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     ProductAttributesComponent.propDecorators = {
@@ -7738,8 +8545,7 @@ var ProductReviewsComponent = /** @class */ (function () {
         { type: Component, args: [{
                     selector: 'cx-product-reviews',
                     template: "<ng-container *ngIf=\"!isWritingReview; else writeReview\">\n  <div class=\"header\">\n    <h3>{{ 'productReview.label.overallRating' | cxTranslate }}</h3>\n    <button class=\"btn btn-primary\" (click)=\"initiateWriteReview()\">\n      {{ 'productReview.action.writeReview' | cxTranslate }}\n    </button>\n    <cx-star-rating\n      class=\"rating\"\n      [rating]=\"product.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n  </div>\n\n  <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n    <ng-container *ngIf=\"(reviews$ | async) as reviews\">\n      <div\n        class=\"review\"\n        tabindex=\"0\"\n        *ngFor=\"let review of (reviews | slice: 0:maxListItems)\"\n      >\n        <div class=\"title\">{{ review.headline }}</div>\n        <cx-star-rating\n          [rating]=\"review.rating\"\n          [disabled]=\"true\"\n        ></cx-star-rating>\n        <div class=\"name\">\n          {{ review.alias ? review.alias : review.principal?.name }}\n        </div>\n        <div class=\"date\">{{ review.date | cxDate }}</div>\n        <div class=\"text\">{{ review.comment }}</div>\n      </div>\n      <div *ngIf=\"reviews.length > initialMaxListItems\">\n        <button\n          class=\"btn btn-primary\"\n          (click)=\"maxListItems = reviews.length\"\n          *ngIf=\"maxListItems === initialMaxListItems\"\n        >\n          {{ 'productReview.action.more' | cxTranslate }}\n        </button>\n        <button\n          class=\"btn btn-primary\"\n          (click)=\"maxListItems = initialMaxListItems\"\n          *ngIf=\"maxListItems !== initialMaxListItems\"\n        >\n          {{ 'productReview.action.less' | cxTranslate }}\n        </button>\n      </div>\n    </ng-container>\n  </ng-container>\n</ng-container>\n\n<ng-template #writeReview>\n  <form [formGroup]=\"reviewForm\" (ngSubmit)=\"submitReview()\">\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.label.reviewTitle' | cxTranslate\n        }}</span>\n        <input type=\"text\" class=\"form-control\" formControlName=\"title\" />\n      </label>\n    </div>\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.label.writeYourComments' | cxTranslate\n        }}</span>\n        <textarea\n          class=\"form-control\"\n          rows=\"3\"\n          formControlName=\"comment\"\n        ></textarea>\n      </label>\n    </div>\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.label.rating' | cxTranslate\n        }}</span>\n        <cx-star-rating formControlName=\"rating\" [steps]=\"0.5\"></cx-star-rating>\n      </label>\n    </div>\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.label.reviewerName' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          formControlName=\"reviewerName\"\n        />\n      </label>\n    </div>\n    <div class=\"form-group row\">\n      <div class=\"col-12 col-md-4\">\n        <button\n          type=\"submit\"\n          class=\"btn btn-block btn-secondary\"\n          (click)=\"cancelWriteReview()\"\n        >\n          {{ 'common.action.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <button\n          type=\"submit\"\n          class=\"btn btn-block btn-primary\"\n          [ngClass]=\"{ 'submit-btn': reviewForm.valid }\"\n          [disabled]=\"!reviewForm.valid\"\n        >\n          {{ 'common.action.submit' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </form>\n</ng-template>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.header{display:flex;flex-wrap:wrap;border-bottom:var(--cx-border-bottom,1px solid var(--cx-g-color-light));padding:var(--cx-padding,0 15px 15px);margin:var(--cx-margin,0 -15px 40px -15px)}.header button{margin:var(--cx-margin,0 0 0 auto)}.header .rating{flex-basis:100%}.review{display:-ms-grid;display:grid;-ms-grid-columns:var(--cx-grid-template-columns,auto auto 10vw);grid-template-columns:var(--cx-grid-template-columns,auto auto 10vw);-ms-grid-rows:var(--cx-grid-template-rows,repeat(3,minmax(10px,auto)) auto);grid-template-rows:var(--cx-grid-template-rows,repeat(3,minmax(10px,auto)) auto);grid-column-gap:1vw;margin:1vh 0}.review .text,.review .title,.review cx-star-rating{grid-column:var(--cx-grid-column,1/span 2)}@media (max-width:991.98px){.review .text{grid-column:var(--cx-grid-column,1/span 3)}}.review .date{grid-column:var(--cx-grid-column,2/span 3)}.review .name{grid-column:var(--cx-grid-column,2/span 3);grid-row:var(--cx-grid-row,5)}.review .text{grid-row:var(--cx-grid-row,0);margin:.5vh 0}.review .title{font-weight:700}.review .date,.review .name{text-align:var(--cx-text-align,right)}"]
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     /** @nocollapse */
@@ -8004,8 +8810,7 @@ var AddressBookComponent = /** @class */ (function () {
     AddressBookComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-address-book',
-                    template: "<div class=\"cx-section\">\n  <ng-container\n    *ngIf=\"\n      (addresses$ | async).length &&\n      !(showAddAddressForm || showEditAddressForm)\n    \"\n  >\n    <div class=\"row\">\n      <div class=\"col-md-6\">\n        <button\n          class=\"btn btn-block btn-action\"\n          (click)=\"addAddressButtonHandle()\"\n        >\n          {{ 'addressBook.action.addNewAddress' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n\n    <div\n      class=\"row cx-address-deck\"\n      *ngIf=\"!(addressesStateLoading$ | async); else loading\"\n    >\n      <div\n        *ngFor=\"let address of (addresses$ | async)\"\n        class=\"col-md-6 cx-address-card\"\n      >\n        <cx-address-card\n          (editEvent)=\"editAddressButtonHandle(address)\"\n          [userId]=\"userId\"\n          [address]=\"address\"\n        ></cx-address-card>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-container *ngIf=\"!(addresses$ | async).length || showAddAddressForm\">\n    <section>\n      <p class=\"cx-section-msg\">\n        {{ 'addressBook.label.addNewShippingAddress' | cxTranslate }}\n      </p>\n      <cx-address-form\n        class=\"cx-form\"\n        showTitleCode=\"true\"\n        actionBtnLabel=\"{{ 'address.action.addAddress' | cxTranslate }}\"\n        cancelBtnLabel=\"{{ 'address.action.backToAddressList' | cxTranslate }}\"\n        [setAsDefaultField]=\"!((addresses$ | async).length === 0)\"\n        (submitAddress)=\"addAddressSubmit($event)\"\n        (backToAddress)=\"addAddressCancel()\"\n      ></cx-address-form>\n    </section>\n  </ng-container>\n\n  <ng-container *ngIf=\"showEditAddressForm\">\n    <section>\n      <p class=\"cx-section-msg\">\n        {{ 'addressBook.label.editShippingAddress' | cxTranslate }}\n      </p>\n      <cx-address-form\n        showTitleCode=\"true\"\n        actionBtnLabel=\"{{ 'address.action.updateAddress' | cxTranslate }}\"\n        cancelBtnLabel=\"{{ 'address.action.backToAddressList' | cxTranslate }}\"\n        [addressData]=\"currentAddress\"\n        (submitAddress)=\"editAddressSubmit($event)\"\n        (backToAddress)=\"editAddressCancel()\"\n      ></cx-address-form>\n    </section>\n  </ng-container>\n</div>\n\n<ng-template #loading>\n  <div class=\"col-md-12 cx-address-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n",
-                    styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-address-deck{padding:var(--cx-padding,1.25rem 0 0 0)}.cx-address-deck-spinner{padding:var(--cx-padding,5rem 0 5rem 0)}.cx-address-card{padding-bottom:var(--cx-padding,30px)}.cx-form{padding-top:var(--cx-padding,30px)}"]
+                    template: "<div class=\"cx-section\">\n  <ng-container\n    *ngIf=\"\n      (addresses$ | async).length &&\n      !(showAddAddressForm || showEditAddressForm)\n    \"\n  >\n    <div class=\"row\">\n      <div class=\"col-md-6\">\n        <button\n          class=\"btn btn-block btn-action\"\n          (click)=\"addAddressButtonHandle()\"\n        >\n          {{ 'addressBook.action.addNewAddress' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n\n    <div\n      class=\"row cx-address-deck\"\n      *ngIf=\"!(addressesStateLoading$ | async); else loading\"\n    >\n      <div\n        *ngFor=\"let address of (addresses$ | async)\"\n        class=\"col-md-6 cx-address-card\"\n      >\n        <cx-address-card\n          (editEvent)=\"editAddressButtonHandle(address)\"\n          [userId]=\"userId\"\n          [address]=\"address\"\n        ></cx-address-card>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-container *ngIf=\"!(addresses$ | async).length || showAddAddressForm\">\n    <section>\n      <p class=\"cx-section-msg\">\n        {{ 'addressBook.label.addNewShippingAddress' | cxTranslate }}\n      </p>\n      <cx-address-form\n        class=\"cx-form\"\n        showTitleCode=\"true\"\n        actionBtnLabel=\"{{ 'address.action.addAddress' | cxTranslate }}\"\n        cancelBtnLabel=\"{{ 'address.action.backToAddressList' | cxTranslate }}\"\n        [setAsDefaultField]=\"!((addresses$ | async).length === 0)\"\n        (submitAddress)=\"addAddressSubmit($event)\"\n        (backToAddress)=\"addAddressCancel()\"\n      ></cx-address-form>\n    </section>\n  </ng-container>\n\n  <ng-container *ngIf=\"showEditAddressForm\">\n    <section>\n      <p class=\"cx-section-msg\">\n        {{ 'addressBook.label.editShippingAddress' | cxTranslate }}\n      </p>\n      <cx-address-form\n        showTitleCode=\"true\"\n        actionBtnLabel=\"{{ 'address.action.updateAddress' | cxTranslate }}\"\n        cancelBtnLabel=\"{{ 'address.action.backToAddressList' | cxTranslate }}\"\n        [addressData]=\"currentAddress\"\n        (submitAddress)=\"editAddressSubmit($event)\"\n        (backToAddress)=\"editAddressCancel()\"\n      ></cx-address-form>\n    </section>\n  </ng-container>\n</div>\n\n<ng-template #loading>\n  <div class=\"col-md-12 cx-address-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -8080,8 +8885,7 @@ var AddressCardComponent = /** @class */ (function () {
     AddressCardComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-address-card',
-                    template: "<div class=\"cx-address-card-inner card\">\n  <div class=\"card-header\" *ngIf=\"address?.defaultAddress && !editMode\">\n    &#10003; {{ 'common.label.default' | cxTranslate }}\n  </div>\n  <div\n    class=\"card-body cx-card-body\"\n    [class.cx-address-card-delete-mode]=\"editMode\"\n  >\n    <div *ngIf=\"editMode\" class=\"cx-address-card-delete-msg\">\n      {{ 'addressBook.label.areYouSureToDeleteAddress' | cxTranslate }}\n    </div>\n    <div class=\"cx-address-data\">\n      <div class=\"cx-address-card-label-name\">\n        {{ address?.firstName }} {{ address?.lastName }}\n      </div>\n      <div class=\"cx-address-card-label\">{{ address?.line1 }}</div>\n      <div class=\"cx-address-card-label\">{{ address?.line2 }}</div>\n      <div class=\"cx-address-card-label\">\n        {{ address?.town }},\n        <span *ngIf=\"!address?.region?.isocode\">{{\n          address?.country?.isocode\n        }}</span\n        ><span>{{ address?.region?.isocode }}</span>\n      </div>\n      <div class=\"cx-address-card-label\">{{ address?.postalCode }}</div>\n      <div class=\"cx-address-card-label\">{{ address?.phone }}</div>\n    </div>\n\n    <div *ngIf=\"editMode\" class=\"row cx-address-card-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.action.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button\n          (click)=\"deleteAddress(address.id)\"\n          class=\"btn btn-block btn-primary\"\n        >\n          {{ 'common.action.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <div *ngIf=\"!editMode\" class=\"cx-address-card-actions\">\n      <a\n        *ngIf=\"!address?.defaultAddress\"\n        (click)=\"setAddressAsDefault(address.id)\"\n        class=\"card-link btn-link set-default\"\n        >{{ 'common.action.setAsDefault' | cxTranslate }}</a\n      >\n      <a (click)=\"openEditFormEvent()\" class=\"card-link btn-link edit\">{{\n        'common.action.edit' | cxTranslate\n      }}</a>\n      <a (click)=\"setEditMode()\" class=\"card-link btn-link delete\">{{\n        'common.action.delete' | cxTranslate\n      }}</a>\n    </div>\n  </div>\n</div>\n",
-                    styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-address-card-inner{margin:var(--cx-margin,0 0 1.25rem 0);border-radius:var(--cx-border-radius,0);height:var(--cx-height,100%)}.cx-address-card-actions{display:var(--cx-display,flex);justify-content:var(--cx-justify-content,flex-end);padding:var(--cx-padding,1.25rem 0 0 0)}.cx-address-card-delete{padding:var(--cx-padding,1.25rem 0 0 0)}.cx-address-card-label-name{font-weight:var(--cx-g-font-weight-bold)}.cx-address-card-delete-msg{color:var(--cx-color,var(--cx-g-color-danger));padding:var(--cx-padding,0 0 1.25rem 0)}.cx-address-card-delete-mode{background-color:var(--cx-background-color,var(--cx-g-color-background))}.cx-card-body{justify-content:var(--cx-justify-content,space-between);display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column)}"]
+                    template: "<div class=\"card\">\n  <div class=\"card-header\" *ngIf=\"address?.defaultAddress && !editMode\">\n    &#10003; {{ 'common.label.default' | cxTranslate }}\n  </div>\n  <div\n    class=\"card-body cx-card-body\"\n    [class.cx-address-card-delete-mode]=\"editMode\"\n  >\n    <div *ngIf=\"editMode\" class=\"cx-address-card-delete-msg\">\n      {{ 'addressBook.label.areYouSureToDeleteAddress' | cxTranslate }}\n    </div>\n    <div class=\"cx-address-data\">\n      <div class=\"cx-address-card-label-name\">\n        {{ address?.firstName }} {{ address?.lastName }}\n      </div>\n      <div class=\"cx-address-card-label\">{{ address?.line1 }}</div>\n      <div class=\"cx-address-card-label\">{{ address?.line2 }}</div>\n      <div class=\"cx-address-card-label\">\n        {{ address?.town }},\n        <span *ngIf=\"!address?.region?.isocode\">{{\n          address?.country?.isocode\n        }}</span\n        ><span>{{ address?.region?.isocode }}</span>\n      </div>\n      <div class=\"cx-address-card-label\">{{ address?.postalCode }}</div>\n      <div class=\"cx-address-card-label\">{{ address?.phone }}</div>\n    </div>\n\n    <div *ngIf=\"editMode\" class=\"row cx-address-card-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.action.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button\n          (click)=\"deleteAddress(address.id)\"\n          class=\"btn btn-block btn-primary\"\n        >\n          {{ 'common.action.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <div *ngIf=\"!editMode\" class=\"card-actions\">\n      <a\n        *ngIf=\"!address?.defaultAddress\"\n        (click)=\"setAddressAsDefault(address.id)\"\n        class=\"card-link btn-link set-default\"\n        >{{ 'common.action.setAsDefault' | cxTranslate }}</a\n      >\n      <a (click)=\"openEditFormEvent()\" class=\"card-link btn-link edit\">{{\n        'common.action.edit' | cxTranslate\n      }}</a>\n      <a (click)=\"setEditMode()\" class=\"card-link btn-link delete\">{{\n        'common.action.delete' | cxTranslate\n      }}</a>\n    </div>\n  </div>\n</div>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -8144,7 +8948,9 @@ var BannerComponentService = /** @class */ (function () {
         var _this = this;
         this.component = component;
         this.config = config;
-        this.convertToAbsoluteUrl = map(function (url) { return _this.getBaseUrl() + url; });
+        this.convertToAbsoluteUrl = map(function (url) {
+            return url.startsWith('http') ? url : _this.getBaseUrl() + url;
+        });
         // TODO: move to a more generic location
         // TODO: Make configurable
         this.formats = [
@@ -8370,9 +9176,8 @@ var BannerComponent = /** @class */ (function () {
     BannerComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-banner',
-                    template: "<p class=\"cx-banner-headline\" *ngIf=\"(service.hasHeadline() | async)\">\n  {{ service.getHeadline() | async }}\n</p>\n<cx-generic-link\n  *ngIf=\"\n    (service.hasImage() | async) && (service.getComponentData() | async) as data\n  \"\n  [url]=\"{ url: data.urlLink } | cxTranslateUrl\"\n  [target]=\"service.getTarget() | async\"\n>\n  <img\n    [title]=\"service.getAltText() | async\"\n    [alt]=\"service.getAltText() | async\"\n    [src]=\"service.getImageAbsoluteUrl() | async\"\n    alt=\"\"\n  />\n</cx-generic-link>\n<p class=\"cx-banner-content\" *ngIf=\"(service.hasContent() | async)\">\n  {{ service.getContent() | async }}\n</p>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: ["img{width:var(--cx-width);margin:var(--cx-margin)}"]
+                    template: "<p class=\"cx-banner-headline\" *ngIf=\"(service.hasHeadline() | async)\">\n  {{ service.getHeadline() | async }}\n</p>\n<cx-generic-link\n  *ngIf=\"\n    (service.hasImage() | async) && (service.getComponentData() | async) as data\n  \"\n  [url]=\"data.urlLink\"\n  [target]=\"service.getTarget() | async\"\n>\n  <img\n    [title]=\"service.getAltText() | async\"\n    [alt]=\"service.getAltText() | async\"\n    [src]=\"service.getImageAbsoluteUrl() | async\"\n    alt=\"\"\n  />\n</cx-generic-link>\n<p class=\"cx-banner-content\" *ngIf=\"(service.hasContent() | async)\">\n  {{ service.getContent() | async }}\n</p>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     /** @nocollapse */
@@ -8405,9 +9210,8 @@ var ResponsiveBannerComponent = /** @class */ (function (_super) {
     ResponsiveBannerComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-responsive-banner',
-                    template: "<cx-generic-link\n  fxFlex\n  class=\"link\"\n  *ngIf=\"service.hasImage() && (service.getComponentData() | async) as data\"\n  [url]=\"{ url: data.urlLink } | cxTranslateUrl\"\n  [target]=\"service.getTarget() | async\"\n>\n  <picture [class]=\"getClass()\">\n    <img\n      [src]=\"service.getResponsiveImageAbsoluteUrl() | async\"\n      [srcset]=\"service.getResponsiveSrcSet() | async\"\n      sizes=\"100%\"\n      alt=\"\"\n    />\n  </picture>\n</cx-generic-link>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: [".link{flex:1 1 0%;box-sizing:border-box}.link picture.responsive-banner img{width:100%;display:block}"]
+                    template: "<cx-generic-link\n  fxFlex\n  class=\"link\"\n  *ngIf=\"service.hasImage() && (service.getComponentData() | async) as data\"\n  [url]=\"data.urlLink\"\n  [target]=\"service.getTarget() | async\"\n>\n  <picture [class]=\"getClass()\">\n    <img\n      [src]=\"service.getResponsiveImageAbsoluteUrl() | async\"\n      [srcset]=\"service.getResponsiveSrcSet() | async\"\n      sizes=\"100%\"\n      alt=\"\"\n    />\n  </picture>\n</cx-generic-link>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     return ResponsiveBannerComponent;
@@ -8460,7 +9264,6 @@ var BannerModule = /** @class */ (function () {
                                 },
                             },
                         }))),
-                        UrlTranslationModule,
                     ],
                     declarations: [BannerComponent, ResponsiveBannerComponent],
                     exports: [BannerComponent, ResponsiveBannerComponent],
@@ -8506,8 +9309,7 @@ var BreadcrumbComponent = /** @class */ (function () {
         { type: Component, args: [{
                     selector: 'cx-breadcrumb',
                     template: "<nav>\n  <a *ngFor=\"let crumb of (crumbs$ | async)\" [routerLink]=\"crumb.link\">\n    {{ crumb.label }}\n  </a>\n</nav>\n<h1>{{ title$ | async }}</h1>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: [":host{display:block;padding:20px 0;text-align:center;color:var(--cx-g-color-text,currentcolor);background-color:var(--cx-g-color-background)}nav{font-size:var(--cx-font-size-small,.85rem);padding:5px 0}nav a{color:var(--cx-g-color-secondary)}"]
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     /** @nocollapse */
@@ -8777,9 +9579,8 @@ var NavigationUIComponent = /** @class */ (function () {
     NavigationUIComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-navigation-ui',
-                    template: "<div *ngIf=\"node\" class=\"cx-nav-item nav-item\" ngbDropdown>\n  <a\n    *ngIf=\"node.children && !node.title; else nodeWithChildren\"\n    ngbDropdownToggle\n    >&nbsp;\n  </a>\n  <ng-template #nodeWithChildren>\n    <span\n      *ngIf=\"node.children; else noChildren\"\n      ngbDropdownToggle\n      class=\"cx-nav-link nav-link\"\n      role=\"link\"\n      id=\"{{ node.title }}\"\n      >{{ node.title }}</span\n    >\n  </ng-template>\n  <ng-template #noChildren>\n    <a\n      [routerLink]=\"{ url: node.url } | cxTranslateUrl\"\n      class=\"cx-nav-link nav-link\"\n      id=\"{{ node.title }}\"\n      >{{ node.title }}\n    </a>\n  </ng-template>\n  <ng-container [ngSwitch]=\"dropdownMode\">\n    <ng-container *ngSwitchCase=\"'list'\">\n      <div\n        ngbDropdownMenu\n        class=\"cx-nav-child-list\"\n        [attr.aria-label]=\"node.title\"\n        role=\"list\"\n      >\n        <div\n          role=\"listitem\"\n          *ngFor=\"let subCategory of node.children\"\n          class=\"dropdown-item cx-nav-child-item\"\n        >\n          <ng-container *ngIf=\"subCategory.url\">\n            <a\n              [routerLink]=\"{ url: subCategory.url } | cxTranslateUrl\"\n              class=\"cx-nav-child-link\"\n              >{{ subCategory.title }}\n            </a>\n          </ng-container>\n          <ng-container *ngIf=\"!subCategory.url\">\n            <a class=\"cx-nav-child-link\">{{ subCategory.title }} </a>\n          </ng-container>\n          <a\n            [routerLink]=\"{ url: subCategoryChild.url } | cxTranslateUrl\"\n            *ngFor=\"let subCategoryChild of subCategory.children\"\n            >{{ subCategoryChild.title }}\n          </a>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-container *ngSwitchCase=\"'column'\">\n      <div\n        ngbDropdownMenu\n        class=\"cx-nav-child-list-columns\"\n        [attr.aria-label]=\"node.title\"\n      >\n        <div\n          class=\"cx-nav-child-column\"\n          *ngFor=\"let subCategory of node.children\"\n        >\n          <ng-container *ngIf=\"subCategory.url\">\n            <a\n              role=\"link\"\n              [routerLink]=\"{ url: subCategory.url } | cxTranslateUrl\"\n              class=\"cx-nav-child-link cx-nav-column-title\"\n              >{{ subCategory.title }}\n            </a>\n          </ng-container>\n          <ng-container *ngIf=\"!subCategory.url\">\n            <a class=\"cx-nav-child-link cx-nav-column-title\"\n              >{{ subCategory.title }}\n            </a>\n          </ng-container>\n\n          <div\n            *ngFor=\"let subCategoryChild of subCategory.children\"\n            class=\"dropdown-item cx-nav-child-column-item\"\n          >\n            <a\n              role=\"link\"\n              [routerLink]=\"{ url: subCategoryChild.url } | cxTranslateUrl\"\n              class=\"cx-nav-child-link\"\n              >{{ subCategoryChild.title }}\n            </a>\n          </div>\n        </div>\n      </div>\n    </ng-container>\n  </ng-container>\n</div>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/@media (max-width:991.98px){.cx-nav-item{border-style:var(--cx-border-style,solid);border-width:var(--cx-border-width,0 0 1px);border-color:var(--cx-border-color,var(--cx-g-color-background));padding:var(--cx-padding,.5rem 0)}}.cx-nav-link{color:var(--cx-color,var(--cx-g-color-inverse));text-transform:var(--cx-text-transform,capitalize);padding:var(--cx-padding,.2rem 0)}.cx-nav-link:focus{color:var(--cx-color,var(--cx-g-color-primary))}.cx-nav-link:hover{color:var(--cx-color,var(--cx-g-color-primary));cursor:var(--cx-cursor,pointer)}@media (max-width:991.98px){.cx-nav-link{color:var(--cx-color,var(--cx-g-color-text));display:var(--cx-display,flex);justify-content:var(--cx-justify-content,space-between);padding:var(--cx-padding,.5rem 1rem)}.cx-nav-link::after{margin-right:20px;border-style:var(--cx-border-style,solid);border-width:var(--cx-border-width,3px);border-color:var(--cx-border-color,currentColor currentColor var(--cx-g-color-transparent) var(--cx-g-color-transparent));display:var(--cx-display,block);width:var(--cx-width,1rem);height:var(--cx-height,1rem)}.cx-nav-link[aria-expanded=false]::after{-webkit-transform:var(--cx-transform,rotate(45deg));transform:var(--cx-transform,rotate(45deg))}.cx-nav-link[aria-expanded=true]::after{-webkit-transform:var(--cx-transform,rotate(-45deg));transform:var(--cx-transform,rotate(-45deg))}.cx-nav-child-list{position:var(--cx-position,relative);background-color:var(--cx-background-color,var(--cx-g-color-background));border-style:var(--cx-border-style,none);border-width:var(--cx-border-width,0);width:var(--cx-width,100%);top:var(--cx-top,0)!important}}@media (min-width:992px) and (max-width:1199.98px){.cx-nav-link{padding:var(--cx-padding,.5rem 0)}}.cx-nav-child-list{border-radius:var(--cx-border-radius,0);text-transform:var(--cx-text-transform,capitalize);padding:var(--cx-padding,0)}.cx-nav-child-item{border-style:var(--cx-border-style,solid);border-width:var(--cx-border-width,0 0 1px);border-color:var(--cx-border-color,var(--cx-g-color-background));padding:var(--cx-padding,.45rem 1rem)}.cx-nav-child-item:hover{background-color:var(--cx-background-color,var(--cx-g-color-transparent))}.cx-nav-child-item:last-child{border-style:var(--cx-border-style,none);border-width:var(--cx-border-width,0)}.cx-nav-child-link{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.22222);color:var(--cx-color,var(--cx-g-color-text))}.cx-nav-child-link:hover{color:var(--cx-color,var(--cx-g-color-primary));-webkit-text-decoration:var(--cx-text-decoration,none);text-decoration:var(--cx-text-decoration,none)}.cx-nav-child-list-columns{border-radius:var(--cx-border-radius,0);padding:var(--cx-padding,.75rem);margin:var(--cx-margin,0)}.cx-nav-child-list-columns.show{display:var(--cx-display,flex)}.cx-nav-column-title{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.22222);text-transform:var(--cx-text-transform,capitalize);font-weight:var(--cx-font-weight,var(--cx-g-font-weight-bold));display:var(--cx-display,block);width:var(--cx-width,100%);padding:var(--cx-padding,.25rem 1.5rem)}.cx-nav-child-column{margin:var(--cx-margin,0)}@media (max-width:991.98px){.cx-nav-child-item{border-style:var(--cx-border-style,none);border-width:var(--cx-border-width,0)}.cx-nav-child-list-columns{flex-direction:var(--cx-flex-direction,column);position:var(--cx-position,static);width:var(--cx-width,100%);border-style:var(--cx-border-style,none);border-width:var(--cx-border-width,0);margin:var(--cx-margin,0)}.cx-nav-child-column{margin:var(--cx-margin,1rem unset 0 0)}}.cx-nav-child-column-item{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.22222);padding:var(--cx-padding,.25rem 1.5rem)}.cx-nav-child-column-item:hover{background-color:var(--cx-background-color,var(--cx-g-color-transparent))}"]
+                    template: "<div *ngIf=\"node\" class=\"cx-nav-item nav-item\" ngbDropdown>\n  <a\n    *ngIf=\"node.children && !node.title; else nodeWithChildren\"\n    ngbDropdownToggle\n    >&nbsp;\n  </a>\n  <ng-template #nodeWithChildren>\n    <span\n      *ngIf=\"node.children; else noChildren\"\n      ngbDropdownToggle\n      class=\"cx-nav-link nav-link\"\n      role=\"link\"\n      id=\"{{ node.title }}\"\n      >{{ node.title }}</span\n    >\n  </ng-template>\n  <ng-template #noChildren>\n    <a\n      [routerLink]=\"node.url\"\n      class=\"cx-nav-link nav-link\"\n      id=\"{{ node.title }}\"\n      >{{ node.title }}\n    </a>\n  </ng-template>\n  <ng-container [ngSwitch]=\"dropdownMode\">\n    <ng-container *ngSwitchCase=\"'list'\">\n      <div\n        ngbDropdownMenu\n        class=\"cx-nav-child-list\"\n        [attr.aria-label]=\"node.title\"\n        role=\"list\"\n      >\n        <div\n          role=\"listitem\"\n          *ngFor=\"let subCategory of node.children\"\n          class=\"dropdown-item cx-nav-child-item\"\n        >\n          <ng-container *ngIf=\"subCategory.url\">\n            <a [routerLink]=\"subCategory.url\" class=\"cx-nav-child-link\"\n              >{{ subCategory.title }}\n            </a>\n          </ng-container>\n          <ng-container *ngIf=\"!subCategory.url\">\n            <a class=\"cx-nav-child-link\">{{ subCategory.title }} </a>\n          </ng-container>\n          <a\n            [routerLink]=\"subCategoryChild.url\"\n            *ngFor=\"let subCategoryChild of subCategory.children\"\n            >{{ subCategoryChild.title }}\n          </a>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-container *ngSwitchCase=\"'column'\">\n      <div\n        ngbDropdownMenu\n        class=\"cx-nav-child-list-columns\"\n        [attr.aria-label]=\"node.title\"\n      >\n        <div\n          class=\"cx-nav-child-column\"\n          *ngFor=\"let subCategory of node.children\"\n        >\n          <ng-container *ngIf=\"subCategory.url\">\n            <a\n              role=\"link\"\n              [routerLink]=\"subCategory.url\"\n              class=\"cx-nav-child-link cx-nav-column-title\"\n              >{{ subCategory.title }}\n            </a>\n          </ng-container>\n          <ng-container *ngIf=\"!subCategory.url\">\n            <a class=\"cx-nav-child-link cx-nav-column-title\"\n              >{{ subCategory.title }}\n            </a>\n          </ng-container>\n\n          <div\n            *ngFor=\"let subCategoryChild of subCategory.children\"\n            class=\"dropdown-item cx-nav-child-column-item\"\n          >\n            <a\n              role=\"link\"\n              [routerLink]=\"subCategoryChild.url\"\n              class=\"cx-nav-child-link\"\n              >{{ subCategoryChild.title }}\n            </a>\n          </div>\n        </div>\n      </div>\n    </ng-container>\n  </ng-container>\n</div>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     NavigationUIComponent.propDecorators = {
@@ -8816,7 +9617,6 @@ var NavigationModule = /** @class */ (function () {
                                 },
                             },
                         }))),
-                        UrlTranslationModule,
                         I18nModule,
                     ],
                     declarations: [NavigationComponent, NavigationUIComponent],
@@ -8840,8 +9640,7 @@ var CategoryNavigationComponent = /** @class */ (function (_super) {
         { type: Component, args: [{
                     selector: 'cx-category-navigation',
                     template: "<nav *ngIf=\"(node$ | async) as node\">\n  <cx-navigation-ui\n    *ngFor=\"let child of node?.children\"\n    ngbDropdown\n    [node]=\"child\"\n    dropdownMode=\"column\"\n  ></cx-navigation-ui>\n</nav>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.nav{display:flex;flex-wrap:wrap;padding-left:0;margin-bottom:0;list-style:none}.nav-link{display:block;padding:.5rem 1rem}.nav-link:focus,.nav-link:hover{text-decoration:none}.nav-link.disabled{color:#6c757d;pointer-events:none;cursor:default}.nav-tabs{border-bottom:1px solid #dee2e6}.nav-tabs .nav-item{margin-bottom:-1px}.nav-tabs .nav-link{border:1px solid transparent;border-top-left-radius:.25rem;border-top-right-radius:.25rem}.nav-tabs .nav-link:focus,.nav-tabs .nav-link:hover{border-color:#e9ecef #e9ecef #dee2e6}.nav-tabs .nav-link.disabled{color:#6c757d;background-color:transparent;border-color:transparent}.nav-tabs .nav-item.show .nav-link,.nav-tabs .nav-link.active{color:#495057;background-color:#fff;border-color:#dee2e6 #dee2e6 #fff}.nav-tabs .dropdown-menu{margin-top:-1px;border-top-left-radius:0;border-top-right-radius:0}.nav-pills .nav-link{border-radius:.25rem}.nav-pills .nav-link.active,.nav-pills .show>.nav-link{color:#fff;background-color:#fe5757}.nav-fill .nav-item{flex:1 1 auto;text-align:center}.nav-justified .nav-item{flex-basis:0;flex-grow:1;text-align:center}.tab-content>.tab-pane{display:none}.tab-content>.active{display:block}.dropdown,.dropleft,.dropright,.dropup{position:relative}.dropdown-toggle{white-space:nowrap}.dropdown-toggle::after{display:inline-block;margin-left:.255em;vertical-align:.255em;content:\"\";border-top:.3em solid;border-right:.3em solid transparent;border-bottom:0;border-left:.3em solid transparent}.dropdown-toggle:empty::after{margin-left:0}.dropdown-menu{position:absolute;top:100%;left:0;z-index:1000;display:none;float:left;min-width:10rem;padding:.5rem 0;margin:.125rem 0 0;font-size:1rem;color:#212529;text-align:left;list-style:none;background-color:#fff;background-clip:padding-box;border:1px solid rgba(0,0,0,.15);border-radius:.25rem}.dropdown-menu-left{right:auto;left:0}.dropdown-menu-right{right:0;left:auto}@media (min-width:576px){.dropdown-menu-sm-left{right:auto;left:0}.dropdown-menu-sm-right{right:0;left:auto}}@media (min-width:768px){.dropdown-menu-md-left{right:auto;left:0}.dropdown-menu-md-right{right:0;left:auto}}@media (min-width:992px){.dropdown-menu-lg-left{right:auto;left:0}.dropdown-menu-lg-right{right:0;left:auto}}@media (min-width:1200px){.dropdown-menu-xl-left{right:auto;left:0}.dropdown-menu-xl-right{right:0;left:auto}}.dropup .dropdown-menu{top:auto;bottom:100%;margin-top:0;margin-bottom:.125rem}.dropup .dropdown-toggle::after{display:inline-block;margin-left:.255em;vertical-align:.255em;content:\"\";border-top:0;border-right:.3em solid transparent;border-bottom:.3em solid;border-left:.3em solid transparent}.dropup .dropdown-toggle:empty::after{margin-left:0}.dropright .dropdown-menu{top:0;right:auto;left:100%;margin-top:0;margin-left:.125rem}.dropright .dropdown-toggle::after{display:inline-block;margin-left:.255em;content:\"\";border-top:.3em solid transparent;border-right:0;border-bottom:.3em solid transparent;border-left:.3em solid;vertical-align:0}.dropright .dropdown-toggle:empty::after{margin-left:0}.dropleft .dropdown-menu{top:0;right:100%;left:auto;margin-top:0;margin-right:.125rem}.dropleft .dropdown-toggle::after{margin-left:.255em;vertical-align:.255em;content:\"\";display:none}.dropleft .dropdown-toggle::before{display:inline-block;margin-right:.255em;content:\"\";border-top:.3em solid transparent;border-right:.3em solid;border-bottom:.3em solid transparent;vertical-align:0}.dropleft .dropdown-toggle:empty::after{margin-left:0}.dropdown-menu[x-placement^=bottom],.dropdown-menu[x-placement^=left],.dropdown-menu[x-placement^=right],.dropdown-menu[x-placement^=top]{right:auto;bottom:auto}.dropdown-divider{height:0;margin:.5rem 0;overflow:hidden;border-top:1px solid #e9ecef}.dropdown-item{display:block;width:100%;padding:.25rem 1.5rem;clear:both;font-weight:400;color:#212529;text-align:inherit;white-space:nowrap;background-color:transparent;border:0}.dropdown-item:focus,.dropdown-item:hover{color:#16181b;text-decoration:none;background-color:#f8f9fa}.dropdown-item.active,.dropdown-item:active{color:#fff;text-decoration:none;background-color:#fe5757}.dropdown-item.disabled,.dropdown-item:disabled{color:#6c757d;pointer-events:none;background-color:transparent}.dropdown-menu.show{display:block}.dropdown-header{display:block;padding:.5rem 1.5rem;margin-bottom:0;font-size:.875rem;color:#6c757d;white-space:nowrap}.dropdown-item-text{display:block;padding:.25rem 1.5rem;color:#212529}nav{display:flex;justify-content:space-between;flex-wrap:wrap;padding:var(--cx-padding,1rem 0);min-height:63.38px}nav cx-navigation:not(:first-child){margin-left:10px}@media (max-width:991.98px){nav{padding:var(--cx-padding,0);flex-direction:column;background-color:var(--cx-background-color,var(--cx-g-color-inverse))}}"]
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     return CategoryNavigationComponent;
@@ -8895,9 +9694,8 @@ var FooterNavigationComponent = /** @class */ (function (_super) {
     FooterNavigationComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-footer-navigation',
-                    template: "<nav *ngIf=\"(node$ | async) as node\">\n  <div class=\"container\">\n    <div class=\"row\">\n      <div\n        class=\"col-xs-12 col-sm-4 col-md-3 navigation-elements\"\n        *ngFor=\"let child of node?.children\"\n      >\n        <h1>{{ child.title }}</h1>\n        <ul>\n          <li *ngFor=\"let link of child.children\">\n            <cx-generic-link\n              [url]=\"{ url: link.url } | cxTranslateUrl\"\n              [target]=\"link.target === true ? 'blank' : 'self'\"\n              >{{ link.title }}</cx-generic-link\n            >\n          </li>\n        </ul>\n      </div>\n    </div>\n  </div>\n</nav>\n<div class=\"notice\" *ngIf=\"(service.getComponentData() | async) as data\">\n  {{ data.notice }}\n</div>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/nav{padding:var(--cx-padding,34px 0 0)}@media (min-width:768px){nav{margin:var(--cx-margin,0 0 47px)}}nav h1{font-size:var(--cx-font-size,1rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);margin:var(--cx-margin,0 0 12px);text-transform:var(--cx-text-transform,capitalize)}nav ul{padding:var(--cx-padding,0)}@media (max-width:575.98px){nav h1{text-align:var(--cx-text-align,center)}nav ul{text-align:var(--cx-text-align,center);padding:var(--cx-padding,0 0 24px)}}nav li{padding-left:0;list-style:none}nav a{padding:var(--cx-padding,0);font-size:var(--cx-font-size,1rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.6)}nav a:hover{-webkit-text-decoration:var(--cx-text-decoration,none);text-decoration:var(--cx-text-decoration,none)}.notice{padding:var(--cx-padding,32px 0);text-align:var(--cx-text-align,center);font-size:var(--cx-font-size,1rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.6);color:var(--cx-color,var(--cx-g-color-dark));background-color:var(--cx-background-color,var(--cx-g-color-inverse))}"]
+                    template: "<nav *ngIf=\"(node$ | async) as node\">\n  <div class=\"container\">\n    <div class=\"row\">\n      <div\n        class=\"col-xs-12 col-sm-4 col-md-3 navigation-elements\"\n        *ngFor=\"let child of node?.children\"\n      >\n        <h1>{{ child.title }}</h1>\n        <ul>\n          <li *ngFor=\"let link of child.children\">\n            <cx-generic-link\n              [url]=\"link.url\"\n              [target]=\"link.target === true ? 'blank' : 'self'\"\n              >{{ link.title }}</cx-generic-link\n            >\n          </li>\n        </ul>\n      </div>\n    </div>\n  </div>\n</nav>\n<div class=\"notice\" *ngIf=\"(service.getComponentData() | async) as data\">\n  {{ data.notice }}\n</div>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     return FooterNavigationComponent;
@@ -8930,7 +9728,6 @@ var FooterNavigationModule = /** @class */ (function () {
                             },
                         }))),
                         GenericLinkModule,
-                        UrlTranslationModule,
                     ],
                     declarations: [FooterNavigationComponent],
                     entryComponents: [FooterNavigationComponent],
@@ -8951,9 +9748,8 @@ var LinkComponent = /** @class */ (function () {
     LinkComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-link',
-                    template: "<a\n  *ngIf=\"(component.data$ | async) as data\"\n  role=\"link\"\n  [routerLink]=\"{ url: data.url } | cxTranslateUrl\"\n  >{{ data.linkName }}</a\n>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: ["a{display:var(--cx-display,inline);padding:var(--cx-padding,0);margin:var(--cx-margin,0);color:currentColor;display:var(--cx-display)}"]
+                    template: "<a\n  *ngIf=\"(component.data$ | async) as data\"\n  role=\"link\"\n  [routerLink]=\"data.url\"\n  >{{ data.linkName }}</a\n>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     /** @nocollapse */
@@ -8980,7 +9776,6 @@ var LinkModule = /** @class */ (function () {
                                 CMSLinkComponent: { selector: 'cx-link' },
                             },
                         }))),
-                        UrlTranslationModule,
                     ],
                     declarations: [LinkComponent],
                     exports: [LinkComponent],
@@ -9005,7 +9800,7 @@ var MiniCartComponent = /** @class */ (function () {
                     selector: 'cx-mini-cart',
                     template: "<a\n  *ngIf=\"(cart$ | async) as cart\"\n  aria-label=\"Cart\"\n  [routerLink]=\"{ route: ['cart'] } | cxTranslateUrl\"\n>\n  <svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 35 28\">\n    <g transform=\"translate(-4758 4746)\">\n      <path\n        d=\"M4758.7-4746h4.7c0.3,0.1,0.6,0.3,0.7,0.5l1.7,7.5h23.6c0.4,0,0.7,0.4,0.7,0.8c0,0.1,0,0.1,0,0.2l-4,12\n c-0.1,0.2-0.4,0.4-0.7,0.4h-16.4l0.3,1.3h14.1c1.5,0,2.7,1.2,2.7,2.7c0,1.5-1.2,2.7-2.7,2.7l0,0c-1.5,0-2.6-1.2-2.6-2.6\n c0-0.5,0.1-1,0.4-1.4h-10.1c0.8,1.2,0.4,2.9-0.9,3.6c-0.4,0.3-0.9,0.4-1.4,0.4c-1.5,0-2.7-1.2-2.7-2.7c0-1.2,0.8-2.2,1.9-2.5\n l-5.1-21.4h-4.1c-0.3,0-0.6-0.2-0.7-0.6c0,0,0-0.1,0-0.1C4758-4745.7,4758.2-4746,4758.7-4746C4758.6-4746,4758.6-4746,4758.7-4746\n z\"\n      />\n    </g>\n  </svg>\n\n  <span\n    class=\"count\"\n    *ngIf=\"cart.deliveryItemsQuantity || '0' as qty\"\n    [attr.aria-label]=\"'My cart. ' + qty + ' items currently in your cart.'\"\n    >{{ qty }}</span\n  >\n</a>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/:host{margin-left:.75rem;display:block}a{display:flex;background:var(--cx-background,var(--cx-g-color-primary));padding:var(--cx-padding,0 .5rem);color:var(--cx-color,var(--cx-g-color-inverse));text-decoration:none}a svg{fill:currentColor;width:30px;height:30px;margin:9px 0}a span{color:currentColor;-ms-grid-row-align:center;align-self:center;padding:var(--cx-padding,0 .5rem)}@media (max-width:1199.98px){a{margin-right:.5rem}}@media (max-width:575.98px){a{margin-right:0;min-height:55px;flex-direction:column;padding:var(--cx-padding,.3rem .75rem)}a svg{margin:0;height:24px}}"]
+                    styles: [""]
                 }] }
     ];
     /** @nocollapse */
@@ -9058,8 +9853,7 @@ var ParagraphComponent = /** @class */ (function () {
         { type: Component, args: [{
                     selector: 'cx-paragraph',
                     template: "<p *ngIf=\"(component.data$ | async) as data\" [innerHTML]=\"data.content\"></p>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: [""]
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     /** @nocollapse */
@@ -9326,8 +10120,7 @@ var ProductCarouselComponent = /** @class */ (function () {
         { type: Component, args: [{
                     selector: 'cx-product-carousel',
                     template: "<h3 *ngIf=\"(service.getTitle() | async) as title\">{{ title }}</h3>\n\n<ng-container\n  *ngIf=\"{\n    maxItemSize: service.getItemSize() | async,\n    products: service.getItems() | async,\n    activeItem: service.getActiveItemWithDelay() | async,\n    active: service.getActiveItem() | async\n  } as carousel\"\n>\n  <div class=\"cx-carousel\" [ngClass]=\"'size-' + carousel.maxItemSize\">\n    <button\n      class=\"previous\"\n      (click)=\"service.setPreviousItemAsActive()\"\n      [disabled]=\"carousel.activeItem === 0\"\n    ></button>\n\n    <div class=\"groups\">\n      <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n        <div class=\"group\" *ngIf=\"i % carousel.maxItemSize === 0\">\n          <ng-container\n            *ngFor=\"\n              let product$ of (carousel.products\n                | slice: i:i + carousel.maxItemSize)\n            \"\n          >\n            <a\n              *ngIf=\"(product$ | async) as product\"\n              class=\"product\"\n              [class.active]=\"i === carousel.activeItem\"\n              [routerLink]=\"\n                { route: [{ name: 'product', params: product }] }\n                  | cxTranslateUrl\n              \"\n            >\n              <cx-picture\n                [imageContainer]=\"product.images?.PRIMARY\"\n                imageFormat=\"product\"\n              >\n              </cx-picture>\n\n              <h4>{{ product.name }}</h4>\n              <div class=\"price\">{{ product.price?.formattedValue }}</div>\n            </a>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      class=\"next\"\n      (click)=\"service.setNextItemAsActive()\"\n      [disabled]=\"\n        carousel.activeItem > carousel.products.length - carousel.maxItemSize\n      \"\n    ></button>\n  </div>\n\n  <div class=\"indicators\">\n    <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n      <button\n        *ngIf=\"i % carousel.maxItemSize === 0\"\n        (click)=\"service.setItemAsActive(i)\"\n        [disabled]=\"i === carousel.activeItem\"\n      ></button>\n    </ng-container></div\n></ng-container>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/:host{flex:100%;--cx-speed:0.5;display:flex;flex-direction:column}@media (max-width:991.98px){:host{padding:1rem}}:host>h3{font-size:var(--cx-font-size,1.375rem);font-weight:var(--cx-g-font-weight-semi);line-height:var(--cx-line-height,1.22222);font-weight:700;text-align:center;margin-top:2rem;margin-bottom:1rem}@media (min-width:1200px){:host>h3{margin-bottom:3rem}}.cx-carousel{display:flex;justify-content:space-between}.cx-carousel.size-1 .product{flex:0 0 100%}.cx-carousel.size-2 .product{flex:0 0 50%}.cx-carousel.size-4 .product{flex:0 0 25%}.cx-carousel .groups{flex:auto;position:relative}.cx-carousel .groups .group{transition:var(--cx-transition-duration,.6s) all;width:100%;display:flex;flex-wrap:nowrap;justify-content:flex-start}.cx-carousel .groups .group:not(:last-child){position:absolute}.cx-carousel .groups .group .product{display:flex;flex-direction:column;text-align:center;justify-content:space-between;padding-bottom:10px;color:var(--cx-color,var(--cx-g-color-text));opacity:0;z-index:-1;transition:var(--cx-transition-duration,.6s) all}.cx-carousel .groups .group .product cx-picture{height:var(--cx-height,20vmin)}.cx-carousel .groups .group .product.active{opacity:1;z-index:1}.cx-carousel .groups .group .product:nth-child(1){transition-delay:calc(var(--cx-speed,1) * .25s)}.cx-carousel .groups .group .product:nth-child(2){transition-delay:calc(var(--cx-speed,1) * .5s)}.cx-carousel .groups .group .product:nth-child(3){transition-delay:calc(var(--cx-speed,1) * .75s)}.cx-carousel .groups .group .product:nth-child(4){transition-delay:calc(var(--cx-speed,1) * 1s)}.cx-carousel .groups .group .product h4{font-size:.9rem;height:30px;font-weight:700;margin-top:5px}.cx-carousel .groups .group .product:hover{text-decoration:none}.cx-carousel .groups .group .product:hover h4{color:var(--cx-color,var(--cx-g-color-primary))}button{color:var(--cx-g-color-light)}button:focus{outline:0}button:not(:disabled){cursor:pointer}.indicators{display:flex;justify-content:center}.indicators button{border-radius:15px;width:15px;height:15px;border:none;padding:0;margin:10px;background-color:currentColor;transition:var(--cx-transition-duration,.6s) all}.indicators button[disabled]{color:var(--cx-background-color,var(--cx-g-color-primary))}.indicators button:not(:disabled):hover{color:var(--cx-g-color-secondary)}@media (max-width:575.98px){.indicators{display:none}}.next,.previous{background-color:transparent;border:none}.next:disabled,.previous:disabled{opacity:.5}.next:not(:disabled):hover,.previous:not(:disabled):hover{color:var(--cx-color,var(--cx-g-color-primary))}.next:after,.previous:after{content:'';border-style:solid;border-color:currentColor;border-width:var(--cx-border-width,4px);width:15px;height:15px;display:block;border-top:0}.previous:after{border-right:0;-webkit-transform:rotate(45deg);transform:rotate(45deg)}.next:after{border-left:0;-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}"]
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     /** @nocollapse */
@@ -9391,7 +10184,7 @@ var SearchBoxComponentService = /** @class */ (function () {
             displaySuggestions: true,
             maxSuggestions: 5,
             minCharactersBeforeRequest: 3,
-            displayProducts: false,
+            displayProducts: true,
         };
         this.config$ = of(this.defaultConfig);
         this.queryParam$ = this.routingService
@@ -9581,8 +10374,7 @@ var SearchBoxComponent = /** @class */ (function () {
                     selector: 'cx-searchbox',
                     template: "<form class=\"cx-form\">\n  <div class=\"cx-form-group form-group\">\n    <!-- searchbox input -->\n    <input\n      class=\"cx-input form-control dropdown-menu-toggle\"\n      [ngClass]=\"{ 'show-mobile': isMobileSearchVisible }\"\n      type=\"text\"\n      placeholder=\"{{ 'common.placeholder.searchHere' | cxTranslate }}\"\n      aria-label=\"search\"\n      [ngbTypeahead]=\"typeahead\"\n      [resultTemplate]=\"rt\"\n      [formControl]=\"searchBoxControl\"\n      (keyup)=\"onKey($event)\"\n      (selectItem)=\"selectSuggestion($event)\"\n    />\n    <!-- searchbox button desktop -->\n    <button\n      class=\"cx-button cx-button-desktop\"\n      type=\"submit\"\n      aria-label=\"Submit \"\n      (click)=\"submitSearch()\"\n      [disabled]=\"!searchBoxControl?.value\"\n    >\n      <svg\n        class=\"cx-icon \"\n        xmlns=\"http://www.w3.org/2000/svg \"\n        viewBox=\"-4472 4760 26 26 \"\n      >\n        <path\n          id=\"Trac\u00E9_982 \"\n          data-name=\"Trac\u00E9 982 \"\n          d=\"M9.75,19.5a9.241,9.241,0,0,0,6.067-2.167l8.342,8.342a1.072,1.072,0,0,0,1.517-1.517l-8.342-8.342A9.854,9.854,0,0,0,19.5,9.75,9.75,9.75,0,1,0,9.75,19.5Zm0-17.333A7.583,7.583,0,1,1,2.167,9.75,7.537,7.537,0,0,1,9.75,2.167Z \"\n          transform=\"translate(-4472 4760) \"\n        />\n      </svg>\n    </button>\n    <!-- searchbox button mobile -->\n    <button\n      class=\"cx-button cx-button-mobile\"\n      type=\"button\"\n      aria-label=\"Search \"\n      (click)=\"toggleMobileSearchInput()\"\n    >\n      <svg\n        class=\"cx-icon \"\n        xmlns=\"http://www.w3.org/2000/svg \"\n        viewBox=\"-4472 4760 26 26 \"\n      >\n        <path\n          id=\"Trac\u00E9_982 \"\n          data-name=\"Trac\u00E9 982 \"\n          d=\"M9.75,19.5a9.241,9.241,0,0,0,6.067-2.167l8.342,8.342a1.072,1.072,0,0,0,1.517-1.517l-8.342-8.342A9.854,9.854,0,0,0,19.5,9.75,9.75,9.75,0,1,0,9.75,19.5Zm0-17.333A7.583,7.583,0,1,1,2.167,9.75,7.537,7.537,0,0,1,9.75,2.167Z \"\n          transform=\"translate(-4472 4760) \"\n        />\n      </svg>\n    </button>\n    <!-- searchbox results -->\n    <ng-template #rt let-suggestion=\"result\">\n      <div\n        *ngIf=\"!suggestion.code; else productView\"\n        class=\"cx-dropdown-content\"\n      >\n        {{ suggestion }}\n      </div>\n      <ng-template #productView>\n        <div\n          [routerLink]=\"\n            {\n              route: [\n                {\n                  name: 'product',\n                  params: suggestion | stripHtml\n                }\n              ]\n            } | cxTranslateUrl\n          \"\n          class=\"cx-product\"\n        >\n          <cx-picture\n            [imageContainer]=\"suggestion.images?.PRIMARY\"\n            imageFormat=\"product\"\n            [imageAlt]=\"suggestion.summary\"\n          ></cx-picture>\n          <div [innerHtml]=\"suggestion.name\" class=\"cx-product-name\">\n            {{ suggestion.name }}\n          </div>\n          <div class=\"cx-product-price\">\n            {{ suggestion.price.formattedValue }}\n          </div>\n        </div>\n      </ng-template>\n    </ng-template>\n  </div>\n</form>\n",
                     encapsulation: ViewEncapsulation.None,
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/:host{display:var(--cx-display,block)}@media (max-width:575.98px){:host{margin:var(--cx-margin,0)}}.cx-form-group{background-color:var(--cx-background-color,var(--cx-g-color-secondary));padding:var(--cx-padding,0);display:var(--cx-display,flex);margin:var(--cx-margin,auto)}.cx-form{display:var(--cx-display,inline-block);vertical-align:var(--cx-vertical-align,middle)}.cx-input{background-color:var(--cx-background-color,var(--cx-g-color-transparent));color:var(--cx-color,var(--cx-g-color-inverse));border-radius:var(--cx-border-radius,0);border-style:var(--cx-border-style,none);border-width:var(--cx-border-width,0);margin:var(--cx-margin,0);z-index:var(--cx-z-index,1)}.cx-input::-webkit-input-placeholder{color:var(--cx-color,var(--cx-g-color-inverse))}.cx-input::-moz-placeholder{color:var(--cx-color,var(--cx-g-color-inverse))}.cx-input:-moz-placeholder{color:var(--cx-color,var(--cx-g-color-inverse))}.cx-input:-ms-input-placeholder{color:var(--cx-color,var(--cx-g-color-inverse))}.cx-input[aria-label=search]{width:var(--cx-width,22rem)}.cx-input[aria-label=search]:focus{background-color:var(--cx-background-color,var(--cx-g-color-transparent));color:var(--cx-color,var(--cx-g-color-inverse));box-shadow:var(--cx-box-shadow,none)}@media (max-width:1199.98px){.cx-input[aria-label=search]{width:var(--cx-width,18rem)}}@media (max-width:991.98px){.cx-input[aria-label=search]{width:var(--cx-width,16rem)}}@media (max-width:767.98px){.cx-input[aria-label=search]{width:var(--cx-width,7rem)}}@media (max-width:575.98px){.cx-form-group{background-color:var(--cx-background-color,var(--cx-g-color-transparent))}.cx-input[aria-label=search]{background-color:var(--cx-background-color,var(--cx-g-color-secondary));color:var(--cx-color,var(--cx-g-color-inverse));display:var(--cx-display,none);position:var(--cx-position,absolute);left:var(--cx-left,0);top:var(--cx-top,56px);width:var(--cx-width,100%)}.cx-input[aria-label=search]:focus{background-color:var(--cx-background-color,var(--cx-g-color-secondary));color:var(--cx-color,var(--cx-g-color-inverse))}.cx-input[aria-label=search]+.dropdown-menu{width:var(--cx-width,100%);border-radius:var(--cx-border-radius,0);border-style:var(--cx-border-style,none);border-width:var(--cx-border-width,0);margin:var(--cx-margin,0)}.cx-button-desktop{display:var(--cx-display,none)}}.cx-input.show-mobile{display:var(--cx-display,block)}.cx-button{border-style:var(--cx-border-style,none);border-width:var(--cx-border-width,0);padding:var(--cx-padding,5px);margin:var(--cx-margin,5px);background-color:var(--cx-background-color,var(--cx-g-color-transparent))}.cx-button-mobile{display:var(--cx-display,none)}.cx-icon{width:var(--cx-width,28px);height:var(--cx-height,28px);fill:var(--cx-fill,var(--cx-g-color-inverse));pointer-events:var(--cx-pointer-events,none)}.cx-dropdown-content{width:var(--cx-width,22rem)}@media (max-width:1199.98px){.cx-dropdown-content{width:var(--cx-width,18rem)}}@media (max-width:991.98px){.cx-dropdown-content{width:var(--cx-width,16rem)}}@media (max-width:767.98px){.cx-dropdown-content{width:var(--cx-width,7rem)}}@media (max-width:575.98px){.cx-button-mobile{display:var(--cx-display,block)}.cx-dropdown-content{width:var(--cx-width,auto)}}.cx-product{display:var(--cx-display,flex)}.cx-product cx-picture{min-width:var(--cx-min-width,80px);width:var(--cx-width,80px);flex-shrink:var(--cx-flex-shrink,0)}.cx-product-name{padding:var(--cx-padding,0 15px);flex-grow:var(--cx-flex-grow,1);flex-shrink:var(--cx-flex-shrink,1);height:var(--cx-height,80px);display:var(--cx-display,flex);align-items:var(--cx-align-items,center);overflow:var(--cx-overflow,hidden)}.cx-product-price{text-align:var(--cx-text-align,right);-ms-grid-row-align:var(--cx-align-self,center);align-self:var(--cx-align-self,center);flex-shrink:var(--cx-flex-shrink,0)}.dropdown-menu .dropdown-item.active{background-color:var(--cx-background-color,var(--cx-g-color-primary))}"]
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     /** @nocollapse */
@@ -9829,7 +10621,7 @@ var SiteContextSelectorComponent = /** @class */ (function () {
                     selector: 'cx-site-context-selector',
                     template: "<label *ngIf=\"(items$ | async)?.length > 1 && (items$ | async) as items\">\n  <span>{{ label$ | async }}</span>\n  <select (change)=\"active = $event.target.value\">\n    <option\n      *ngFor=\"let item of items\"\n      value=\"{{ item.isocode }}\"\n      [selected]=\"(activeItem$ | async) === item.isocode\"\n      >{{ item.label }}</option\n    >\n  </select>\n</label>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/:host{position:relative;margin:var(--cx-margin,8px)}@media (max-width:991.98px){:host{display:inline-block}:host:first-child{margin-left:0}:host:not(:first-child){padding-left:16px;border-left:1px solid var(--cx-border-color,var(--cx-g-color-secondary))}}label{display:inline}label span{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}label::after{content:'';border:2px solid currentColor;border-top:0;border-left:0;width:7px;height:7px;right:3.5px;top:3.5px;position:absolute;display:block;z-index:0;-webkit-transform:rotate(45deg);transform:rotate(45deg)}select{color:inherit;background-color:transparent;border:0;-webkit-appearance:none;-moz-appearance:none;appearance:none;padding-right:14px;outline:0;position:relative;z-index:1}"]
+                    styles: [""]
                 }] }
     ];
     /** @nocollapse */
@@ -9890,6 +10682,8 @@ var CmsLibModule = /** @class */ (function () {
         { type: NgModule, args: [{
                     imports: [
                         CommonModule,
+                        SkipLinkModule,
+                        HamburgerMenuModule,
                         CmsParagraphModule,
                         LinkModule,
                         BannerModule,
@@ -9911,6 +10705,7 @@ var CmsLibModule = /** @class */ (function () {
                         CartTotalsModule,
                         OrderDetailsModule,
                         PaymentMethodsModule,
+                        UpdateEmailModule,
                         UpdatePasswordModule,
                         UpdateProfileModule,
                     ],
@@ -10214,8 +11009,7 @@ var ProductDetailsComponent = /** @class */ (function () {
     ProductDetailsComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-product-details',
-                    template: "<ng-container *ngIf=\"(product$ | async) as product\">\n  <ng-container *cxOutlet=\"outlets.PAGE\">\n    <ng-container *cxOutlet=\"outlets.SUMMARY\">\n      <cx-product-summary\n        class=\"container\"\n        [product]=\"product\"\n        (openReview)=\"launchReview()\"\n      >\n        <cx-product-images [product]=\"product\"></cx-product-images>\n      </cx-product-summary>\n    </ng-container> </ng-container\n></ng-container>\n",
-                    styles: ["cx-product-summary{margin-bottom:var(--cx-margin-bottom,40px)}"]
+                    template: "<ng-container *ngIf=\"(product$ | async) as product\">\n  <ng-container *cxOutlet=\"outlets.PAGE\">\n    <ng-container *cxOutlet=\"outlets.SUMMARY\">\n      <cx-product-summary\n        class=\"container\"\n        [product]=\"product\"\n        (openReview)=\"launchReview()\"\n      >\n        <cx-product-images [product]=\"product\"></cx-product-images>\n      </cx-product-summary>\n    </ng-container> </ng-container\n></ng-container>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -10298,8 +11092,7 @@ var ProductSummaryComponent = /** @class */ (function () {
         { type: Component, args: [{
                     selector: 'cx-product-summary',
                     template: "<ng-container *cxOutlet=\"outlets.TITLE\">\n  <div class=\"name\">{{ product?.name }}</div>\n  <div class=\"code\">\n    {{ 'productDetails.label.id' | cxTranslate }} {{ product?.code }}\n  </div>\n</ng-container>\n\n<div class=\"images\"><ng-content></ng-content></div>\n\n<ng-container *cxOutlet=\"outlets.RATING\">\n  <div class=\"rating\">\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"count\">({{ product?.numberOfReviews }})</div>\n    <a class=\"btn-link\" (click)=\"launchReview()\">{{\n      'productDetails.action.showReviews' | cxTranslate\n    }}</a>\n  </div>\n</ng-container>\n\n<ng-container *cxOutlet=\"outlets.PRICE\">\n  <div class=\"price\" aria-label=\"new item price\">\n    {{ product?.price?.formattedValue }}\n  </div>\n</ng-container>\n\n<div class=\"description\"><p [innerHTML]=\"product?.summary\"></p></div>\n\n<ng-container *cxOutlet=\"outlets.ADDTOCART\">\n  <div class=\"quantity\">\n    <label>{{ 'productDetails.label.quantity' | cxTranslate }}</label>\n    <cx-item-counter\n      isValueChangeable=\"true\"\n      [min]=\"1\"\n      [max]=\"product.stock?.stockLevel || 1000\"\n      *ngIf=\"\n        product?.stock?.stockLevel > 0 ||\n        product?.stock?.stockLevelStatus === 'inStock'\n      \"\n      (update)=\"updateCount($event)\"\n    ></cx-item-counter>\n    <span class=\"info\">{{ stockInfo }}</span>\n  </div>\n  <cx-add-to-cart\n    *ngIf=\"product?.stock?.stockLevelStatus !== 'outOfStock'\"\n    [quantity]=\"itemCount\"\n    [productCode]=\"product?.code\"\n    [maxQuantity]=\"product.stock.stockLevel\"\n  ></cx-add-to-cart>\n</ng-container>\n\n<ng-container *cxOutlet=\"outlets.SHARE\">\n  <div>\n    <a href=\"#\" class=\"share btn-link\">\n      {{ 'productDetails.action.share' | cxTranslate }}\n    </a>\n  </div>\n</ng-container>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/:host{display:-ms-grid;display:grid;grid-column-gap:var(--cx-grid-column-gap,30px)}@media (min-width:992px){:host{-ms-grid-columns:var(--cx-grid-template-columns,50% auto);grid-template-columns:var(--cx-grid-template-columns,50% auto);-ms-grid-rows:var(--cx-grid-template-row,repeat(7,auto) 1fr);grid-template-rows:var(--cx-grid-template-row,repeat(7,auto) 1fr)}.images{grid-column:var(--cx-grid-column,1);grid-row:var(--cx-grid-row,1/span 8)}}.name{font-size:var(--cx-font-size,2.25rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.22222)}.code{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.22222);color:var(--cx-color,var(--cx-g-color-secondary))}.rating{display:flex;flex-direction:row;align-items:baseline;margin:var(--cx-margin,0 0 12px 0)}.rating .count{margin:var(--cx-margin,0 20px 0 5px)}.price{display:inline-block;font-size:var(--cx-font-size,1.375rem);font-weight:var(--cx-g-font-weight-semi);line-height:var(--cx-line-height,1.22222);font-weight:400}.quantity label{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);margin:var(--cx-margin,15px 0 10px 0)}.quantity .info{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.22222);margin:var(--cx-margin,0 15px 0 15px);color:var(--cx-color,var(--cx-g-color-secondary))}cx-add-to-cart{margin:var(--cx-margin,20px 0 10px 0)}"]
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     ProductSummaryComponent.propDecorators = {
@@ -10399,8 +11192,7 @@ var ProductImagesComponent = /** @class */ (function () {
     ProductImagesComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-product-images',
-                    template: "<ng-container *ngIf=\"product\">\n  <ng-container *cxOutlet=\"outlets.IMAGES\">\n    <cx-picture\n      [imageContainer]=\"mainImageContainer\"\n      imageFormat=\"zoom\"\n      (loaded)=\"loadHandler()\"\n    >\n    </cx-picture>\n\n    <ng-container *ngIf=\"product.images?.GALLERY.length > 1\">\n      <div class=\"thumbs\">\n        <cx-picture\n          *ngFor=\"let image of product.images.GALLERY\"\n          [imageContainer]=\"image\"\n          imageFormat=\"thumbnail\"\n          (focus)=\"showImage($event, image)\"\n          tabindex=\"0\"\n          [class.active]=\"isMainImageContainer(image)\"\n        >\n        </cx-picture>\n      </div>\n    </ng-container>\n  </ng-container>\n</ng-container>\n",
-                    styles: [":host{display:flex;flex-direction:var(--cx-flex-direction,column);height:100%}:host>cx-picture{height:100%;width:100%;position:relative}.thumbs{display:flex;justify-content:flex-start}.thumbs cx-picture{width:var(--cx-width,75px);height:var(--cx-width,75px);transition:all var(--cx-g-transition-duration);overflow:hidden;position:relative;border:var(--cx-border,2px solid var(--cx-g-color-light));margin:var(--cx-margin,.5vw);padding:var(--cx-padding,.5vw)}.thumbs cx-picture:not(.active){cursor:pointer}.thumbs cx-picture.active,.thumbs cx-picture:hover{border-color:var(--cx-border-color,var(--cx-g-color-primary))}"]
+                    template: "<ng-container *ngIf=\"product\">\n  <ng-container *cxOutlet=\"outlets.IMAGES\">\n    <cx-picture\n      [imageContainer]=\"mainImageContainer\"\n      imageFormat=\"zoom\"\n      (loaded)=\"loadHandler()\"\n    >\n    </cx-picture>\n\n    <ng-container *ngIf=\"product.images?.GALLERY.length > 1\">\n      <div class=\"thumbs\">\n        <cx-picture\n          *ngFor=\"let image of product.images.GALLERY\"\n          [imageContainer]=\"image\"\n          imageFormat=\"thumbnail\"\n          (focus)=\"showImage($event, image)\"\n          tabindex=\"0\"\n          [class.active]=\"isMainImageContainer(image)\"\n        >\n        </cx-picture>\n      </div>\n    </ng-container>\n  </ng-container>\n</ng-container>\n"
                 }] }
     ];
     ProductImagesComponent.propDecorators = {
@@ -11288,6 +12080,11 @@ var StoreFinderModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var StyleRefDirective = /** @class */ (function () {
     function StyleRefDirective(element, cssOutletService) {
         this.element = element;
@@ -11348,6 +12145,29 @@ var defaultLayoutConfig = {
         lg: 1200,
     },
     layoutSlots: {
+        header: {
+            md: {
+                slots: [
+                    'PreHeader',
+                    'SiteContext',
+                    'SiteLinks',
+                    'SiteLogo',
+                    'SearchBox',
+                    'SiteLogin',
+                    'MiniCart',
+                    'NavigationBar',
+                ],
+            },
+            xs: {
+                slots: ['PreHeader', 'SiteLogo', 'SearchBox', 'MiniCart'],
+            },
+        },
+        navigation: {
+            md: { slots: [] },
+            xs: {
+                slots: ['SiteLogin', 'NavigationBar', 'SiteContext', 'SiteLinks'],
+            },
+        },
         footer: {
             slots: ['Footer'],
         },
@@ -11415,56 +12235,78 @@ var defaultLayoutConfig = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var LoginComponentService = /** @class */ (function () {
+    function LoginComponentService() {
+        this._isLogin = false;
+    }
+    Object.defineProperty(LoginComponentService.prototype, "isLogin", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._isLogin;
+        },
+        set: /**
+         * @param {?} login
+         * @return {?}
+         */
+        function (login) {
+            this._isLogin = login;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    LoginComponentService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */ LoginComponentService.ngInjectableDef = defineInjectable({ factory: function LoginComponentService_Factory() { return new LoginComponentService(); }, token: LoginComponentService, providedIn: "root" });
+    return LoginComponentService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(auth, userService) {
+    function LoginComponent(auth, userService, loginService) {
         this.auth = auth;
         this.userService = userService;
-        this.isLogin = false;
+        this.loginService = loginService;
     }
-    /**
-     * @return {?}
-     */
-    LoginComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this.user$ = this.userService.get();
-        this.subscription = this.auth
-            .getUserToken()
-            .subscribe(function (token) {
-            if (token && token.access_token && !_this.isLogin) {
-                _this.isLogin = true;
-                _this.userService.load(token.userId);
-                _this.auth.login();
-            }
-            else if (token && !token.access_token && _this.isLogin) {
-                _this.isLogin = false;
-            }
-        });
-    };
-    /**
-     * @return {?}
-     */
-    LoginComponent.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
-    };
+    Object.defineProperty(LoginComponent.prototype, "user$", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            return this.auth.getUserToken().pipe(map(function (token) {
+                if (token && !!token.access_token && !_this.loginService.isLogin) {
+                    _this.loginService.isLogin = true;
+                    _this.userService.load(token.userId);
+                    _this.auth.login();
+                }
+                else if (token && !token.access_token && _this.loginService.isLogin) {
+                    _this.loginService.isLogin = false;
+                }
+                return token;
+            }), filter(function (token) { return token && !!token.access_token; }), switchMap(function () { return _this.userService.get(); }));
+        },
+        enumerable: true,
+        configurable: true
+    });
     LoginComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-login',
-                    template: "<ng-container *ngIf=\"(user$ | async) as user\">\n  <ng-container *ngIf=\"user?.name\">\n    <div class=\"cx-login-greet\">\n      {{ 'common.label.userGreeting' | cxTranslate: { name: user.name } }}\n    </div>\n    <cx-page-slot position=\"HeaderLinks\"></cx-page-slot>\n  </ng-container>\n\n  <ng-container *ngIf=\"!user?.name\">\n    <a role=\"link\" [routerLink]=\"{ route: ['login'] } | cxTranslateUrl\">{{\n      'common.action.signInRegister' | cxTranslate\n    }}</a>\n  </ng-container>\n</ng-container>\n",
-                    styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-login-greet{margin:var(--cx-margin,0);color:var(--cx-color,var(--cx-g-color-inverse));font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.22222);font-weight:var(--cx-font-weight,var(--cx-g-font-weight-semi));padding:var(--cx-padding,0)}@media (max-width:991.98px){.cx-login-greet{color:var(--cx-color,var(--cx-g-color-text));padding:var(--cx-padding,.5rem 1rem 0);font-size:var(--cx-font-size,1rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.6)}}"]
+                    template: "<ng-container *ngIf=\"(user$ | async) as user; else login\">\n  <div class=\"cx-login-greet\">\n    {{ 'common.label.userGreeting' | cxTranslate: { name: user.name } }}\n  </div>\n  <cx-page-slot position=\"HeaderLinks\"></cx-page-slot>\n</ng-container>\n\n<ng-template #login>\n  <a role=\"link\" [routerLink]=\"{ route: ['login'] } | cxTranslateUrl\">{{\n    'common.action.signInRegister' | cxTranslate\n  }}</a>\n</ng-template>\n"
                 }] }
     ];
     /** @nocollapse */
     LoginComponent.ctorParameters = function () { return [
         { type: AuthService },
-        { type: UserService }
+        { type: UserService },
+        { type: LoginComponentService }
     ]; };
     return LoginComponent;
 }());
@@ -11481,419 +12323,25 @@ var LoginModule = /** @class */ (function () {
                     imports: [
                         CommonModule,
                         RouterModule,
-                        CmsModule$1,
-                        BootstrapModule,
                         UserModule,
                         UrlTranslationModule,
                         PageSlotModule,
+                        ConfigModule.withConfig((/** @type {?} */ ({
+                            cmsComponents: {
+                                LoginComponent: {
+                                    selector: 'cx-login',
+                                },
+                            },
+                        }))),
                         I18nModule,
                     ],
                     declarations: [LoginComponent],
+                    entryComponents: [LoginComponent],
                     exports: [LoginComponent],
                 },] }
     ];
     return LoginModule;
 }());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var HeaderComponent = /** @class */ (function () {
-    function HeaderComponent(router) {
-        this.router = router;
-        this.showMenu = false;
-    }
-    /**
-     * @return {?}
-     */
-    HeaderComponent.prototype.toggleMenu = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this.showMenu = !this.showMenu;
-        if (this.showMenu) {
-            this.subscription = this.router.events.subscribe(function () {
-                _this.toggleMenu();
-            });
-        }
-        else {
-            this.subscription.unsubscribe();
-        }
-    };
-    /**
-     * @return {?}
-     */
-    HeaderComponent.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
-    };
-    HeaderComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-header',
-                    template: "<header class=\"cx-header\">\n  <button\n    class=\"cx-hamburger\"\n    type=\"button\"\n    (click)=\"toggleMenu()\"\n    [class.is-active]=\"showMenu\"\n    [attr.aria-expanded]=\"showMenu\"\n    aria-label=\"Menu\"\n    aria-controls=\"header-account-container, header-categories-container, header-locale-container\"\n  >\n    <span class=\"hamburger-box\"> <span class=\"hamburger-inner\"></span> </span>\n  </button>\n  <cx-header-skipper></cx-header-skipper>\n\n  <cx-page-slot position=\"SiteContext\"></cx-page-slot>\n  <cx-page-slot position=\"SiteLinks\"></cx-page-slot>\n  <cx-page-slot position=\"SiteLogo\"></cx-page-slot>\n  <cx-page-slot position=\"SearchBox\"></cx-page-slot>\n  <cx-login class=\"SiteLogin\"></cx-login>\n  <cx-page-slot position=\"MiniCart\"></cx-page-slot>\n  <cx-page-slot position=\"NavigationBar\"></cx-page-slot>\n</header>\n",
-                    styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/:host{background-color:var(--cx-background-color,var(--cx-g-color-dark));color:var(--cx-color,var(--cx-g-color-inverse));display:block}header{max-width:var(--cx-max-width,1140px);margin:auto;display:flex;flex-wrap:wrap}header>*{-ms-grid-row-align:center;align-self:center}.SiteContext,.SiteLinks{font-size:var(--cx-g-font-small,.75rem);color:var(--cx-color,var(--cx-g-color-light))}.SiteLinks{--cx-display:block}.SiteLogo{--cx-width:95px}.SearchBox{margin:.5rem auto}.NavigationBar{flex:100%}.cx-hamburger{display:block}@media (max-width:575.98px){.SearchBox{margin:0 0 0 auto}}@media (max-width:991.98px){.NavigationBar,.SiteContext,.SiteLinks,.SiteLogin{flex:100%}.NavigationBar,.SiteLogin{order:1}.SiteContext,.SiteLinks{order:2}.SiteContext,.SiteLinks,.SiteLogin{background-color:var(--cx-background-color,var(--cx-g-color-background));color:var(--cx-color,var(--cx-g-color-text));padding:var(--cx-padding,.25rem 0)}.SiteContext{padding:.5rem 1rem .25rem}.SiteLinks{padding:.25rem 1rem .5rem}:host:not(.mobile-nav) .NavigationBar,:host:not(.mobile-nav) .SiteContext,:host:not(.mobile-nav) .SiteLinks,:host:not(.mobile-nav) .SiteLogin{display:none}}@media (min-width:992px){header{padding:0 1rem}.cx-hamburger{display:none}.SiteContext,.SiteLinks{flex:50%;display:flex;--cx-margin:0.5rem 8px}.SiteContext.has-components:before,.SiteLinks.has-components:before{border-top:var(--cx-border-top,1px solid currentColor);content:'';position:absolute;right:0;left:0;margin-top:30px}.SiteLinks{justify-content:flex-end;--cx-padding:0 0.5rem}.SiteLogin{padding:.5rem 1rem}}"]
-                }] }
-    ];
-    /** @nocollapse */
-    HeaderComponent.ctorParameters = function () { return [
-        { type: Router }
-    ]; };
-    HeaderComponent.propDecorators = {
-        showMenu: [{ type: HostBinding, args: ['class.mobile-nav',] }]
-    };
-    return HeaderComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var HeaderSkipperComponent = /** @class */ (function () {
-    function HeaderSkipperComponent() {
-    }
-    /**
-     * @return {?}
-     */
-    HeaderSkipperComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () { };
-    HeaderSkipperComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-header-skipper',
-                    template: "<div class=\"cx-header-skipper\">\n  <a class=\"sr-only sr-only-focusable\" href=\"#header-categories-container\">{{\n    'common.action.skipToNavigation' | cxTranslate\n  }}</a>\n  <a class=\"sr-only sr-only-focusable\" href=\"#mini-cart\">{{\n    'common.action.skipToShoppingCart' | cxTranslate\n  }}</a>\n  <a class=\"sr-only sr-only-focusable\" href=\"#main-content\">{{\n    'common.action.skipToMainContent' | cxTranslate\n  }}</a>\n  <a class=\"sr-only sr-only-focusable\" href=\"#footer\">{{\n    'common.action.skipToFooter' | cxTranslate\n  }}</a>\n</div>\n",
-                    styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-header-skipper{position:absolute;top:0;left:0}"]
-                }] }
-    ];
-    /** @nocollapse */
-    HeaderSkipperComponent.ctorParameters = function () { return []; };
-    return HeaderSkipperComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var HeaderModule = /** @class */ (function () {
-    function HeaderModule() {
-    }
-    HeaderModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        CommonModule,
-                        CmsModule$1,
-                        LoginModule,
-                        RouterModule,
-                        PwaModule,
-                        UrlTranslationModule,
-                        PageSlotModule,
-                        I18nModule,
-                    ],
-                    declarations: [HeaderComponent, HeaderSkipperComponent],
-                    exports: [HeaderComponent],
-                },] }
-    ];
-    return HeaderModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var UiFrameworkModule = /** @class */ (function () {
-    function UiFrameworkModule() {
-    }
-    UiFrameworkModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [CommonModule, BrowserAnimationsModule],
-                    declarations: [],
-                },] }
-    ];
-    return UiFrameworkModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var StorefrontComponent = /** @class */ (function () {
-    function StorefrontComponent() {
-    }
-    StorefrontComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-storefront',
-                    template: "<cx-header></cx-header>\n\n<cx-page-slot position=\"BottomHeaderSlot\"></cx-page-slot>\n\n<cx-global-message></cx-global-message>\n\n<router-outlet></router-outlet>\n\n<footer>\n  <cx-page-layout section=\"footer\"></cx-page-layout>\n</footer>\n",
-                    styles: [""]
-                }] }
-    ];
-    /** @nocollapse */
-    StorefrontComponent.ctorParameters = function () { return []; };
-    return StorefrontComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-var cartComponents = {
-    emptyCartText: {
-        flexType: 'CMSParagraphComponent',
-        typeCode: 'CMSParagraphComponent',
-        content: "\n      <h2>Your shopping cart is empty</h2>\n      <p>Suggestions</p>\n      <ul>\n          <li>\n          Browse our products by selecting a category above\n          </li>\n      </ul>",
-    },
-};
-/** @type {?} */
-var defaultCartPageConfig = {
-    ignoreBackend: false,
-    pageId: 'cartPage',
-    type: 'ContentPage',
-    template: 'CartPageTemplate',
-    title: 'Cart',
-    slots: {
-        EmptyCartMiddleContent: {
-            componentIds: ['emptyCartText'],
-        },
-    },
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-var headerComponents = {
-    LanguageComponent: {
-        typeCode: 'CMSSiteContextComponent',
-        flexType: 'CMSSiteContextComponent',
-        context: 'LANGUAGE',
-    },
-    CurrencyComponent: {
-        typeCode: 'CMSSiteContextComponent',
-        flexType: 'CMSSiteContextComponent',
-        context: 'CURRENCY',
-    },
-    storeFinder: {
-        typeCode: 'CMSLinkComponent',
-        flexType: 'CMSLinkComponent',
-        linkName: 'Find a Store',
-        url: '/store-finder',
-    },
-    breadcrumbComponent: {
-        typeCode: 'BreadcrumbComponent',
-        flexType: 'BreadcrumbComponent',
-    },
-};
-/** @type {?} */
-var defaultPageHeaderConfig = {
-    SiteContext: {
-        componentIds: ['LanguageComponent', 'CurrencyComponent'],
-    },
-    SiteLinks: {
-        componentIds: ['storeFinder'],
-    },
-    BottomHeaderSlot: {
-        componentIds: ['breadcrumbComponent'],
-    },
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @return {?}
- */
-function defaultCmsContentConfig() {
-    return {
-        cmsStructure: {
-            components: __assign({}, headerComponents, cartComponents),
-            slots: __assign({}, defaultPageHeaderConfig),
-            pages: [defaultCartPageConfig],
-        },
-    };
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var SeoMetaService = /** @class */ (function () {
-    function SeoMetaService(ngTitle, ngMeta, pageMetaService) {
-        this.ngTitle = ngTitle;
-        this.ngMeta = ngMeta;
-        this.pageMetaService = pageMetaService;
-    }
-    /**
-     * @return {?}
-     */
-    SeoMetaService.prototype.init = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this.pageMetaService
-            .getMeta()
-            .pipe(filter(Boolean))
-            .subscribe(function (meta) { return (_this.meta = meta); });
-    };
-    Object.defineProperty(SeoMetaService.prototype, "meta", {
-        set: /**
-         * @protected
-         * @param {?} meta
-         * @return {?}
-         */
-        function (meta) {
-            this.title = meta.title;
-            this.description = meta.description;
-            this.image = meta.image;
-            this.robots = meta.robots || [PageRobotsMeta.INDEX, PageRobotsMeta.FOLLOW];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SeoMetaService.prototype, "title", {
-        set: /**
-         * @protected
-         * @param {?} title
-         * @return {?}
-         */
-        function (title) {
-            this.ngTitle.setTitle(title || '');
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SeoMetaService.prototype, "description", {
-        set: /**
-         * @protected
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            this.addTag({ name: 'description', content: value });
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SeoMetaService.prototype, "image", {
-        set: /**
-         * @protected
-         * @param {?} imageUrl
-         * @return {?}
-         */
-        function (imageUrl) {
-            if (imageUrl) {
-                this.addTag({ name: 'og:image', content: imageUrl });
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SeoMetaService.prototype, "robots", {
-        set: /**
-         * @protected
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            if (value) {
-                this.addTag({ name: 'robots', content: value.join(', ') });
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @protected
-     * @param {?} meta
-     * @return {?}
-     */
-    SeoMetaService.prototype.addTag = /**
-     * @protected
-     * @param {?} meta
-     * @return {?}
-     */
-    function (meta) {
-        if (meta.content) {
-            this.ngMeta.updateTag(meta);
-        }
-    };
-    SeoMetaService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    SeoMetaService.ctorParameters = function () { return [
-        { type: Title },
-        { type: Meta },
-        { type: PageMetaService }
-    ]; };
-    /** @nocollapse */ SeoMetaService.ngInjectableDef = defineInjectable({ factory: function SeoMetaService_Factory() { return new SeoMetaService(inject(Title), inject(Meta), inject(PageMetaService)); }, token: SeoMetaService, providedIn: "root" });
-    return SeoMetaService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @param {?} injector
- * @return {?}
- */
-function initSeoService(injector) {
-    /** @type {?} */
-    var result = function () {
-        /** @type {?} */
-        var service = injector.get(SeoMetaService);
-        service.init();
-    };
-    return result;
-}
-var SeoModule = /** @class */ (function () {
-    function SeoModule() {
-    }
-    SeoModule.decorators = [
-        { type: NgModule, args: [{
-                    providers: [
-                        {
-                            provide: APP_INITIALIZER,
-                            useFactory: initSeoService,
-                            deps: [Injector],
-                            multi: true,
-                        },
-                    ],
-                },] }
-    ];
-    return SeoModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 
 /**
  * @fileoverview added by tsickle
@@ -12015,8 +12463,7 @@ var RegisterComponent = /** @class */ (function () {
     RegisterComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-register',
-                    template: "<section class=\"cx-page__section container\">\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <h1 class=\"cx-section__title\">\n          {{ 'register.label.createAccount' | cxTranslate }}\n        </h1>\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.label.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.placeholder.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of (titles$ | async)\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.label.firstName' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.placeholder.firstName' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.label.lastName' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.placeholder.lastName' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.label.emailAddress' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  (userRegistrationForm.get('email').errors?.email ||\n                    userRegistrationForm.get('email').errors?.InvalidEmail) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.placeholder.emailAddress' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.label.password' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.placeholder.password' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.validation.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.label.confirmPassword' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.placeholder.confirmPassword' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.validation.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"newsletter\"\n                  class=\"form-check-input\"\n                  formControlName=\"newsletter\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.label.emailMarketing' | cxTranslate }}\n                </span>\n              </label>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.label.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"\n                      { route: ['termsAndConditions'] } | cxTranslateUrl\n                    \"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.action.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            [disabled]=\"userRegistrationForm.invalid\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.action.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ route: ['login'] } | cxTranslateUrl\"\n            >{{ 'register.action.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n",
-                    styles: ["form a{-webkit-text-decoration:var(--cx-text-decoration,underline);text-decoration:var(--cx-text-decoration,underline)}form .cx-login-link{margin:var(--cx-margin,1rem 0 0)}"]
+                    template: "<section class=\"cx-page__section container\">\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <h1 class=\"cx-section__title\">\n          {{ 'register.label.createAccount' | cxTranslate }}\n        </h1>\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.label.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.placeholder.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of (titles$ | async)\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.label.firstName' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.placeholder.firstName' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.label.lastName' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.placeholder.lastName' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.label.emailAddress' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  (userRegistrationForm.get('email').errors?.email ||\n                    userRegistrationForm.get('email').errors?.InvalidEmail) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.placeholder.emailAddress' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.label.password' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.placeholder.password' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.validation.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.label.confirmPassword' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.placeholder.confirmPassword' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.validation.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"newsletter\"\n                  class=\"form-check-input\"\n                  formControlName=\"newsletter\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.label.emailMarketing' | cxTranslate }}\n                </span>\n              </label>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.label.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"\n                      { route: ['termsAndConditions'] } | cxTranslateUrl\n                    \"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.action.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            [disabled]=\"userRegistrationForm.invalid\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.action.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ route: ['login'] } | cxTranslateUrl\"\n            >{{ 'register.action.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -12130,8 +12577,7 @@ var LoginFormComponent = /** @class */ (function () {
     LoginFormComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-login-form',
-                    template: "<form (submit)=\"login()\" [formGroup]=\"form\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'login.label.emailAddress' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.controls['userId'].invalid &&\n          (form.controls['userId'].touched || form.controls['userId'].dirty)\n        \"\n        formControlName=\"userId\"\n        placeholder=\"{{ 'login.placeholder.emailAddress' | cxTranslate }}\"\n      />\n    </label>\n    <div\n      class=\"invalid-feedback\"\n      *ngIf=\"\n        form.controls['userId'].invalid &&\n        (form.controls['userId'].touched || form.controls['userId'].dirty)\n      \"\n    >\n      <span>{{ 'login.validation.wrongEmailFormat' | cxTranslate }}</span>\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'login.label.password' | cxTranslate\n      }}</span>\n      <input\n        type=\"password\"\n        class=\"form-control\"\n        placeholder=\"{{ 'login.placeholder.password' | cxTranslate }}\"\n        formControlName=\"password\"\n      />\n    </label>\n  </div>\n  <p>\n    <a\n      [routerLink]=\"{ route: ['forgotPassword'] } | cxTranslateUrl\"\n      aria-controls=\"reset-password\"\n      class=\"btn-link\"\n      >{{ 'login.action.forgotPassword' | cxTranslate }}</a\n    >\n  </p>\n\n  <button\n    type=\"submit\"\n    class=\"btn btn-block btn-primary\"\n    [disabled]=\"form.invalid\"\n  >\n    {{ 'login.action.signIn' | cxTranslate }}\n  </button>\n</form>\n\n<div class=\"register\">\n  <h3 class=\"cx-section__title cx-section__title--alt\">\n    {{ 'login.label.dontHaveAccount' | cxTranslate }}\n  </h3>\n  <a\n    [routerLink]=\"{ route: ['register'] } | cxTranslateUrl\"\n    class=\"btn btn-block btn-secondary\"\n    >{{ 'login.action.register' | cxTranslate }}</a\n  >\n</div>\n",
-                    styles: [".register{margin-top:2rem}"]
+                    template: "<form (submit)=\"login()\" [formGroup]=\"form\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'login.label.emailAddress' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.controls['userId'].invalid &&\n          (form.controls['userId'].touched || form.controls['userId'].dirty)\n        \"\n        formControlName=\"userId\"\n        placeholder=\"{{ 'login.placeholder.emailAddress' | cxTranslate }}\"\n      />\n    </label>\n    <div\n      class=\"invalid-feedback\"\n      *ngIf=\"\n        form.controls['userId'].invalid &&\n        (form.controls['userId'].touched || form.controls['userId'].dirty)\n      \"\n    >\n      <span>{{ 'login.validation.wrongEmailFormat' | cxTranslate }}</span>\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'login.label.password' | cxTranslate\n      }}</span>\n      <input\n        type=\"password\"\n        class=\"form-control\"\n        placeholder=\"{{ 'login.placeholder.password' | cxTranslate }}\"\n        formControlName=\"password\"\n      />\n    </label>\n  </div>\n  <p>\n    <a\n      [routerLink]=\"{ route: ['forgotPassword'] } | cxTranslateUrl\"\n      aria-controls=\"reset-password\"\n      class=\"btn-link\"\n      >{{ 'login.action.forgotPassword' | cxTranslate }}</a\n    >\n  </p>\n\n  <button\n    type=\"submit\"\n    class=\"btn btn-block btn-primary\"\n    [disabled]=\"form.invalid\"\n  >\n    {{ 'login.action.signIn' | cxTranslate }}\n  </button>\n</form>\n\n<div class=\"register\">\n  <h3 class=\"cx-section__title cx-section__title--alt\">\n    {{ 'login.label.dontHaveAccount' | cxTranslate }}\n  </h3>\n  <a\n    [routerLink]=\"{ route: ['register'] } | cxTranslateUrl\"\n    class=\"btn btn-block btn-secondary\"\n    >{{ 'login.action.register' | cxTranslate }}</a\n  >\n</div>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -12415,6 +12861,63 @@ var UserComponentModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var UiFrameworkModule = /** @class */ (function () {
+    function UiFrameworkModule() {
+    }
+    UiFrameworkModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule, BrowserAnimationsModule],
+                    declarations: [],
+                },] }
+    ];
+    return UiFrameworkModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var StorefrontComponent = /** @class */ (function () {
+    function StorefrontComponent(hamburgerMenuService) {
+        this.hamburgerMenuService = hamburgerMenuService;
+    }
+    Object.defineProperty(StorefrontComponent.prototype, "isExpanded", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.hamburgerMenuService.isExpanded;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    StorefrontComponent.prototype.collapseMenu = /**
+     * @return {?}
+     */
+    function () {
+        this.hamburgerMenuService.toggle(true);
+    };
+    StorefrontComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-storefront',
+                    template: "<header\n  [class.is-expanded]=\"isExpanded | async\"\n  (keydown.escape)=\"collapseMenu()\"\n>\n  <cx-page-layout section=\"header\"></cx-page-layout>\n  <cx-page-layout section=\"navigation\"></cx-page-layout>\n</header>\n\n<cx-page-slot position=\"BottomHeaderSlot\"></cx-page-slot>\n\n<cx-global-message></cx-global-message>\n\n<router-outlet></router-outlet>\n\n<footer>\n  <cx-page-layout section=\"footer\"></cx-page-layout>\n</footer>\n",
+                    styles: [""]
+                }] }
+    ];
+    /** @nocollapse */
+    StorefrontComponent.ctorParameters = function () { return [
+        { type: HamburgerMenuService }
+    ]; };
+    return StorefrontComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var MainModule = /** @class */ (function () {
     function MainModule() {
     }
@@ -12426,8 +12929,6 @@ var MainModule = /** @class */ (function () {
                         GlobalMessageComponentModule,
                         UserComponentModule,
                         CmsModule$1,
-                        LoginModule,
-                        HeaderModule,
                         UiFrameworkModule,
                         OutletRefModule,
                         PwaModule,
@@ -12467,87 +12968,6 @@ var LayoutModule = /** @class */ (function () {
     ];
     return LayoutModule;
 }());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var LogoutGuard = /** @class */ (function () {
-    function LogoutGuard(auth, cms) {
-        this.auth = auth;
-        this.cms = cms;
-    }
-    /**
-     * @return {?}
-     */
-    LogoutGuard.prototype.canActivate = /**
-     * @return {?}
-     */
-    function () {
-        this.logout();
-        return this.cms.hasPage({
-            id: '/logout',
-            type: PageType.CONTENT_PAGE,
-        });
-    };
-    /**
-     * @protected
-     * @return {?}
-     */
-    LogoutGuard.prototype.logout = /**
-     * @protected
-     * @return {?}
-     */
-    function () {
-        this.auth.logout();
-    };
-    LogoutGuard.GUARD_NAME = 'LogoutGuard';
-    LogoutGuard.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    LogoutGuard.ctorParameters = function () { return [
-        { type: AuthService },
-        { type: CmsService }
-    ]; };
-    /** @nocollapse */ LogoutGuard.ngInjectableDef = defineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(inject(AuthService), inject(CmsService)); }, token: LogoutGuard, providedIn: "root" });
-    return LogoutGuard;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var LogoutModule = /** @class */ (function () {
-    function LogoutModule() {
-    }
-    LogoutModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        RouterModule.forChild([
-                            {
-                                path: 'logout',
-                                canActivate: [LogoutGuard],
-                                component: PageLayoutComponent,
-                            },
-                        ]),
-                    ],
-                },] }
-    ];
-    return LogoutModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 
 /**
  * @fileoverview added by tsickle
@@ -12854,7 +13274,7 @@ var pageModules = [
     ProductPageModule,
     GuardsModule,
 ];
-var ɵ0$3 = { pageLabel: 'homepage', cxPath: 'home' }, ɵ1$1 = { pageLabel: 'address-book', cxPath: 'addressBook' }, ɵ2 = { pageLabel: 'updatePassword', cxPath: 'updatePassword' }, ɵ3 = { pageLabel: 'orders', cxPath: 'orders' }, ɵ4 = { pageLabel: 'multiStepCheckoutSummaryPage', cxPath: 'checkout' }, ɵ5 = { pageLabel: 'login', cxPath: 'login' }, ɵ6 = { pageLabel: 'search', cxPath: 'search' }, ɵ7 = { cxPath: 'category' }, ɵ8 = { cxPath: 'brand' }, ɵ9 = { cxRedirectTo: 'category' }, ɵ10 = { cxRedirectTo: 'category' }, ɵ11 = { cxRedirectTo: 'category' }, ɵ12 = { cxRedirectTo: 'category' }, ɵ13 = { pageLabel: 'payment-details', cxPath: 'paymentManagement' }, ɵ14 = { pageLabel: 'order', cxPath: 'orderDetails' }, ɵ15 = { pageLabel: 'forgotPassword', cxPath: 'forgotPassword' }, ɵ16 = { pageLabel: 'resetPassword', cxPath: 'resetPassword' }, ɵ17 = {
+var ɵ0$3 = { pageLabel: 'homepage', cxPath: 'home' }, ɵ1$1 = { pageLabel: 'address-book', cxPath: 'addressBook' }, ɵ2 = { pageLabel: 'updatePassword', cxPath: 'updatePassword' }, ɵ3 = { pageLabel: 'orders', cxPath: 'orders' }, ɵ4 = { pageLabel: 'multiStepCheckoutSummaryPage', cxPath: 'checkout' }, ɵ5 = { pageLabel: 'login', cxPath: 'login' }, ɵ6 = { pageLabel: 'search', cxPath: 'search' }, ɵ7 = { cxPath: 'category' }, ɵ8 = { cxPath: 'brand' }, ɵ9 = { pageLabel: 'update-email', cxPath: 'updateEmail' }, ɵ10 = { cxRedirectTo: 'category' }, ɵ11 = { cxRedirectTo: 'category' }, ɵ12 = { cxRedirectTo: 'category' }, ɵ13 = { cxRedirectTo: 'category' }, ɵ14 = { pageLabel: 'payment-details', cxPath: 'paymentManagement' }, ɵ15 = { pageLabel: 'order', cxPath: 'orderDetails' }, ɵ16 = { pageLabel: 'forgotPassword', cxPath: 'forgotPassword' }, ɵ17 = { pageLabel: 'resetPassword', cxPath: 'resetPassword' }, ɵ18 = {
     pageLabel: 'update-profile',
     cxPath: 'updateProfile',
 };
@@ -12926,56 +13346,62 @@ var PagesModule = /** @class */ (function () {
                                 component: PageLayoutComponent,
                                 data: ɵ8,
                             },
+                            {
+                                path: null,
+                                component: PageLayoutComponent,
+                                canActivate: [AuthGuard, CmsPageGuard],
+                                data: ɵ9,
+                            },
                             // redirect OLD links
                             {
                                 path: 'Open-Catalogue/:title/c/:categoryCode',
                                 redirectTo: null,
-                                data: ɵ9,
+                                data: ɵ10,
                             },
                             {
                                 path: 'Open-Catalogue/:category1/:title/c/:categoryCode',
                                 redirectTo: null,
-                                data: ɵ10,
+                                data: ɵ11,
                             },
                             {
                                 path: 'Open-Catalogue/:category1/:category2/:title/c/:categoryCode',
                                 redirectTo: null,
-                                data: ɵ11,
+                                data: ɵ12,
                             },
                             {
                                 path: 'OpenCatalogue/:category1/:category2/:title/c/:categoryCode',
                                 redirectTo: null,
-                                data: ɵ12,
-                            },
-                            {
-                                path: null,
-                                canActivate: [AuthGuard, CmsPageGuard],
                                 data: ɵ13,
+                            },
+                            {
+                                path: null,
+                                canActivate: [AuthGuard, CmsPageGuard],
+                                data: ɵ14,
                                 component: PageLayoutComponent,
                             },
                             {
                                 path: null,
                                 canActivate: [AuthGuard, CmsPageGuard],
-                                component: PageLayoutComponent,
-                                data: ɵ14,
-                            },
-                            {
-                                path: null,
-                                canActivate: [NotAuthGuard, CmsPageGuard],
                                 component: PageLayoutComponent,
                                 data: ɵ15,
                             },
                             {
                                 path: null,
-                                component: PageLayoutComponent,
                                 canActivate: [NotAuthGuard, CmsPageGuard],
+                                component: PageLayoutComponent,
                                 data: ɵ16,
                             },
                             {
                                 path: null,
                                 component: PageLayoutComponent,
-                                canActivate: [AuthGuard, CmsPageGuard],
+                                canActivate: [NotAuthGuard, CmsPageGuard],
                                 data: ɵ17,
+                            },
+                            {
+                                path: null,
+                                component: PageLayoutComponent,
+                                canActivate: [AuthGuard, CmsPageGuard],
+                                data: ɵ18,
                             },
                             // PLEASE ADD ALL ROUTES ABOVE THIS LINE ===============================
                             {
@@ -13012,11 +13438,6 @@ var UiModule = /** @class */ (function () {
     ];
     return UiModule;
 }());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 
 /**
  * @fileoverview added by tsickle
@@ -13548,9 +13969,9 @@ var productList = {
             showMore: 'Show more...',
             filterBy: 'Filter by',
         },
-    },
-    placeholder: {
-        sortByRelevance: 'Sort by Relevance',
+        placeholder: {
+            sortByRelevance: 'Sort by Relevance',
+        },
     },
 };
 
@@ -13715,6 +14136,6 @@ var translations = {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { CartComponentModule, CartDetailsModule, AddToCartModule, CartItemComponent, CartDetailsComponent, CartTotalsComponent, OrderSummaryComponent, AddToCartComponent, CheckoutComponentModule, MultiStepCheckoutModule, ShippingAddressModule, OrderConfirmationModule, SuggestedAddressDialogComponent, AddressFormComponent, PaymentFormComponent, ReviewSubmitComponent, DeliveryModeComponent, MultiStepCheckoutComponent, OrderConfirmationComponent, CmsModule$1 as CmsModule, CmsPageGuard, PageLayoutModule, PageLayoutComponent, CmsMappingService, CmsRoutesService, CmsLibModule, MiniCartComponent, FooterNavigationComponent, ParagraphComponent, ProductCarouselComponent, TabParagraphContainerComponent, NavigationComponent, CategoryNavigationComponent, ProductReferencesComponent, LinkComponent, BreadcrumbComponent, BannerComponent, ResponsiveBannerComponent, MiniCartModule, FooterNavigationModule, CmsParagraphModule, ProductCarouselModule, TabParagraphContainerModule, NavigationModule, CategoryNavigationModule, ProductReferencesModule, LinkModule, SearchBoxModule, SearchBoxComponent, SearchBoxComponentService, BreadcrumbModule, BannerModule, SiteContextSelectorModule, SiteContextComponentService, GlobalMessageComponentModule, GlobalMessageComponent, OrderModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderHistoryComponent, PaymentMethodsComponent, OccModule, ProductModule$1 as ProductModule, ProductDetailsModule, ProductListModule, ProductTabsModule, ProductSummaryComponent, ProductDetailsComponent, ProductImagesComponent, ProductListItemComponent, ProductGridItemComponent, ProductListComponent, ProductFacetNavigationComponent, ProductAttributesComponent, ProductReviewsComponent, ProductTabsComponent, ProductDetailOutlets, ProductTabsOutlets, StoreFinderModule, UiModule, UiFrameworkModule, ComponentsModule, MediaModule, FormComponentsModule, PaginationAndSortingModule, SpinnerComponent, PictureComponent, StarRatingComponent, ItemCounterComponent, GenericLinkComponent, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, LayoutModule, MainModule, BREAKPOINT, LayoutConfig, defaultLayoutConfig, BreakpointService, StorefrontComponent, HeaderComponent, UserComponentModule, LoginModule, LoginComponent, LoginFormModule, LoginFormComponent, RegisterComponent, pwaConfigurationFactory, pwaFactory, PwaModule, StorefrontModule, OutletModule, OutletService, OutletDirective, OutletRefModule, OutletRefDirective, translations, CmsComponentData, PageSlotModule, PageSlotComponent, PageComponentModule, ComponentWrapperDirective, defaultCmsContentConfig, SeoMetaService, initSeoService, SeoModule, LogoutGuard, LogoutModule, defaultCartPageConfig as ɵeg, BootstrapModule as ɵb, AddedToCartDialogComponent as ɵm, CartItemListComponent as ɵl, CartSharedModule as ɵa, CartTotalsModule as ɵn, DeliveryModeModule as ɵq, BillingAddressFormComponent as ɵu, BillingAddressFormModule as ɵt, PaymentFormModule as ɵs, PaymentMethodComponent as ɵv, PaymentMethodModule as ɵr, ReviewSubmitModule as ɵw, AddressFormModule as ɵo, ShippingAddressComponent as ɵp, PromotionsComponent as ɵk, PromotionsModule as ɵj, guards as ɵx, OrderConfirmationPageGuard as ɵy, AddressBookComponent as ɵbr, AddressBookComponentService as ɵbq, AddressBookModule as ɵbp, AddressCardComponent as ɵbs, BannerComponentService as ɵbk, NavigationUIComponent as ɵbm, NavigationComponentService as ɵbl, ProductCarouselService as ɵbn, SiteContextSelectorComponent as ɵbo, guards$1 as ɵbg, PageLayoutService as ɵbj, CmsGuardsService as ɵbi, CmsI18nService as ɵbh, OrderDetailsModule as ɵbx, OrderDetailsService as ɵby, OrderHistoryModule as ɵbt, PaymentMethodsModule as ɵbz, UpdatePasswordFormComponent as ɵcc, UpdatePasswordComponent as ɵcb, UpdatePasswordModule as ɵca, UpdateProfileFormComponent as ɵcf, UpdateProfileComponent as ɵce, UpdateProfileModule as ɵcd, OutletStyleService as ɵbf, StyleRefDirective as ɵdb, StyleRefModule as ɵda, ProductViewComponent as ɵbu, ProductReviewsModule as ɵbv, provideConfigFromMetaTags as ɵdg, AddToHomeScreenBannerComponent as ɵbe, AddToHomeScreenBtnComponent as ɵbc, AddToHomeScreenComponent as ɵbd, PWAModuleConfig as ɵz, defaultPWAModuleConfig as ɵba, AddToHomeScreenService as ɵbb, AbstractStoreItemComponent as ɵck, ScheduleComponent as ɵcp, StoreFinderGridComponent as ɵci, StoreFinderHeaderComponent as ɵcq, StoreFinderListItemComponent as ɵco, StoreFinderMapComponent as ɵcn, StoreFinderPaginationDetailsComponent as ɵcs, StoreFinderListComponent as ɵcm, StoreFinderSearchResultComponent as ɵcg, StoreFinderSearchComponent as ɵcl, StoreFinderStoreDescriptionComponent as ɵcj, StoreFinderStoresCountComponent as ɵch, StoreFinderComponent as ɵcr, CardComponent as ɵe, CardModule as ɵd, GenericLinkModule as ɵi, PaginationComponent as ɵf, SortingComponent as ɵg, SpinnerModule as ɵh, OnlyNumberDirective as ɵc, HeaderSkipperComponent as ɵcz, HeaderModule as ɵcy, HardcodedCheckoutComponent as ɵdf, CartNotEmptyGuard as ɵde, GuardsModule as ɵdd, OrderConfirmationPageModule as ɵdc, CurrentProductService as ɵbw, ForgotPasswordComponent as ɵcx, ForgotPasswordModule as ɵcw, RegisterComponentModule as ɵct, ResetPasswordFormComponent as ɵcv, ResetPasswordModule as ɵcu, addToCart as ɵdh, addressBook as ɵdj, address as ɵdi, cartItems as ɵdl, cart as ɵdk, checkoutAddress as ɵdn, checkoutOrderConfirmation as ɵdo, checkoutReview as ɵdp, checkoutShipping as ɵdq, checkout as ɵdm, common as ɵdr, forgottenPassword as ɵds, login as ɵdt, orderCost as ɵdu, orderDetails as ɵdv, orderHistory as ɵdw, orderReview as ɵdx, paymentMethods as ɵdz, payment as ɵdy, productDetails as ɵea, productList as ɵeb, productReview as ɵec, pwa as ɵed, register as ɵee, storeFinder as ɵef };
+export { LogoutGuard, LogoutModule, CmsComponentData, PageSlotModule, PageSlotComponent, PageComponentModule, ComponentWrapperDirective, defaultCmsContentConfig, SeoMetaService, initSeoService, SeoModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, CartComponentModule, CartDetailsModule, AddToCartModule, CartItemComponent, CartDetailsComponent, CartTotalsComponent, OrderSummaryComponent, AddToCartComponent, CheckoutComponentModule, MultiStepCheckoutModule, ShippingAddressModule, OrderConfirmationModule, SuggestedAddressDialogComponent, AddressFormComponent, PaymentFormComponent, ReviewSubmitComponent, DeliveryModeComponent, MultiStepCheckoutComponent, OrderConfirmationComponent, CmsLibModule, MiniCartComponent, FooterNavigationComponent, ParagraphComponent, ProductCarouselComponent, TabParagraphContainerComponent, NavigationComponent, CategoryNavigationComponent, ProductReferencesComponent, LinkComponent, BreadcrumbComponent, BannerComponent, ResponsiveBannerComponent, MiniCartModule, FooterNavigationModule, CmsParagraphModule, ProductCarouselModule, TabParagraphContainerModule, NavigationModule, CategoryNavigationModule, ProductReferencesModule, LinkModule, SearchBoxModule, SearchBoxComponent, SearchBoxComponentService, BreadcrumbModule, BannerModule, SiteContextSelectorModule, SiteContextComponentService, CmsModule$1 as CmsModule, CmsPageGuard, PageLayoutModule, PageLayoutComponent, CmsMappingService, CmsRoutesService, GlobalMessageComponentModule, GlobalMessageComponent, OrderModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderHistoryComponent, PaymentMethodsComponent, OccModule, OutletModule, OutletService, OutletDirective, OutletRefModule, OutletRefDirective, ProductModule$1 as ProductModule, ProductDetailsModule, ProductListModule, ProductTabsModule, ProductSummaryComponent, ProductDetailsComponent, ProductImagesComponent, ProductListItemComponent, ProductGridItemComponent, ProductListComponent, ProductFacetNavigationComponent, ProductAttributesComponent, ProductReviewsComponent, ProductTabsComponent, ProductDetailOutlets, ProductTabsOutlets, pwaConfigurationFactory, pwaFactory, PwaModule, StoreFinderModule, StorefrontModule, UiModule, UiFrameworkModule, ComponentsModule, MediaModule, FormComponentsModule, PaginationAndSortingModule, SpinnerComponent, PictureComponent, StarRatingComponent, ItemCounterComponent, GenericLinkComponent, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, LayoutModule, MainModule, StorefrontComponent, UserComponentModule, LoginModule, LoginComponent, LoginFormModule, LoginFormComponent, RegisterComponent, translations, defaultCartPageConfig as ɵc, BootstrapModule as ɵe, AddedToCartDialogComponent as ɵp, CartItemListComponent as ɵo, CartSharedModule as ɵd, CartTotalsModule as ɵq, DeliveryModeModule as ɵt, BillingAddressFormComponent as ɵx, BillingAddressFormModule as ɵw, PaymentFormModule as ɵv, PaymentMethodComponent as ɵy, PaymentMethodModule as ɵu, ReviewSubmitModule as ɵz, AddressFormModule as ɵr, ShippingAddressComponent as ɵs, PromotionsComponent as ɵn, PromotionsModule as ɵm, guards$1 as ɵba, OrderConfirmationPageGuard as ɵbb, AddressBookComponent as ɵbp, AddressBookComponentService as ɵbo, AddressBookModule as ɵbn, AddressCardComponent as ɵbq, BannerComponentService as ɵbi, NavigationUIComponent as ɵbk, NavigationComponentService as ɵbj, ProductCarouselService as ɵbl, SiteContextSelectorComponent as ɵbm, guards as ɵbt, PageLayoutService as ɵa, CmsGuardsService as ɵbv, CmsI18nService as ɵbu, OrderDetailsModule as ɵby, OrderDetailsService as ɵbz, OrderHistoryModule as ɵbr, PaymentMethodsModule as ɵca, UpdateEmailFormComponent as ɵcc, UpdateEmailComponent as ɵcd, UpdateEmailModule as ɵcb, UpdatePasswordFormComponent as ɵcg, UpdatePasswordComponent as ɵcf, UpdatePasswordModule as ɵce, UpdateProfileFormComponent as ɵcj, UpdateProfileComponent as ɵci, UpdateProfileModule as ɵch, OutletStyleService as ɵb, StyleRefDirective as ɵde, StyleRefModule as ɵdd, ProductViewComponent as ɵbs, ProductReviewsModule as ɵbw, provideConfigFromMetaTags as ɵdj, AddToHomeScreenBannerComponent as ɵbh, AddToHomeScreenBtnComponent as ɵbf, AddToHomeScreenComponent as ɵbg, PWAModuleConfig as ɵbc, defaultPWAModuleConfig as ɵbd, AddToHomeScreenService as ɵbe, AbstractStoreItemComponent as ɵco, ScheduleComponent as ɵct, StoreFinderGridComponent as ɵcm, StoreFinderHeaderComponent as ɵcu, StoreFinderListItemComponent as ɵcs, StoreFinderMapComponent as ɵcr, StoreFinderPaginationDetailsComponent as ɵcw, StoreFinderListComponent as ɵcq, StoreFinderSearchResultComponent as ɵck, StoreFinderSearchComponent as ɵcp, StoreFinderStoreDescriptionComponent as ɵcn, StoreFinderStoresCountComponent as ɵcl, StoreFinderComponent as ɵcv, CardComponent as ɵh, CardModule as ɵg, GenericLinkModule as ɵl, PaginationComponent as ɵi, SortingComponent as ɵj, SpinnerModule as ɵk, OnlyNumberDirective as ɵf, HardcodedCheckoutComponent as ɵdi, CartNotEmptyGuard as ɵdh, GuardsModule as ɵdg, OrderConfirmationPageModule as ɵdf, CurrentProductService as ɵbx, ForgotPasswordComponent as ɵdc, ForgotPasswordModule as ɵdb, LoginComponentService as ɵcx, RegisterComponentModule as ɵcy, ResetPasswordFormComponent as ɵda, ResetPasswordModule as ɵcz, addToCart as ɵdk, addressBook as ɵdm, address as ɵdl, cartItems as ɵdo, cart as ɵdn, checkoutAddress as ɵdq, checkoutOrderConfirmation as ɵdr, checkoutReview as ɵds, checkoutShipping as ɵdt, checkout as ɵdp, common as ɵdu, forgottenPassword as ɵdv, login as ɵdw, orderCost as ɵdx, orderDetails as ɵdy, orderHistory as ɵdz, orderReview as ɵea, paymentMethods as ɵec, payment as ɵeb, productDetails as ɵed, productList as ɵee, productReview as ɵef, pwa as ɵeg, register as ɵeh, storeFinder as ɵei };
 
 //# sourceMappingURL=spartacus-storefront.js.map

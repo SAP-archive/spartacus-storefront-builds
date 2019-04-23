@@ -1,7 +1,6 @@
-import { CmsComponentData } from '../../../cms-structure/page/model/cms-component-data';
-import { ProductSearchService } from '@spartacus/core';
+import { CmsSearchBoxComponent, ProductSearchService, RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { RoutingService, CmsSearchBoxComponent } from '@spartacus/core';
+import { CmsComponentData } from '../../../cms-structure/page/model/cms-component-data';
 export interface SearchBoxConfig {
     maxProducts: number;
     displaySuggestions: boolean;

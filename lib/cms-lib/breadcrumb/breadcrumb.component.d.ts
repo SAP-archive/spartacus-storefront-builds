@@ -1,7 +1,6 @@
+import { CmsBreadcrumbsComponent, PageMetaService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { CmsBreadcrumbsComponent } from '@spartacus/core';
 import { CmsComponentData } from '../../../cms-structure/page/model/cms-component-data';
-import { PageMetaService } from '@spartacus/core';
 export declare class BreadcrumbComponent {
     component: CmsComponentData<CmsBreadcrumbsComponent>;
     protected pageMetaService: PageMetaService;

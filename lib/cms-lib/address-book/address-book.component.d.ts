@@ -1,6 +1,6 @@
 import { OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Address } from '@spartacus/core';
+import { Observable } from 'rxjs';
 import { AddressBookComponentService } from './address-book.component.service';
 export declare class AddressBookComponent implements OnInit {
     service: AddressBookComponentService;

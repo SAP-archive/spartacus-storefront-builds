@@ -1,5 +1,5 @@
-import { OnInit, OnDestroy } from '@angular/core';
-import { AuthService, RoutingService, UserService, OrderHistoryList, Order } from '@spartacus/core';
+import { OnDestroy, OnInit } from '@angular/core';
+import { AuthService, Order, OrderHistoryList, RoutingService, UserService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 export declare class OrderHistoryComponent implements OnInit, OnDestroy {
     private auth;

@@ -1,13 +1,10 @@
-import { OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
 import { AuthService, User, UserService } from '@spartacus/core';
-export declare class LoginComponent implements OnInit, OnDestroy {
+import { Observable } from 'rxjs';
+import { LoginComponentService } from './login.component.service';
+export declare class LoginComponent {
     private auth;
     private userService;
-    user$: Observable<User>;
-    isLogin: boolean;
-    subscription: Subscription;
-    constructor(auth: AuthService, userService: UserService);
-    ngOnInit(): void;
-    ngOnDestroy(): void;
+    private loginService;
+    constructor(auth: AuthService, userService: UserService, loginService: LoginComponentService);
+    readonly user$: Observable<User>;
 }

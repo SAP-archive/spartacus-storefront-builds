@@ -1,7 +1,7 @@
 import { OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AuthService, RoutingService, Title, UserService, GlobalMessageService } from '@spartacus/core';
-import { Subscription, Observable } from 'rxjs';
+import { AuthService, GlobalMessageService, RoutingService, Title, UserService } from '@spartacus/core';
+import { Observable, Subscription } from 'rxjs';
 export declare class RegisterComponent implements OnInit, OnDestroy {
     private auth;
     private routing;

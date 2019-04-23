@@ -1,7 +1,7 @@
 import { OnInit } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
-import { ProductSearchService, ProductSearchPage, SearchConfig } from '@spartacus/core';
+import { ProductSearchPage, ProductSearchService, SearchConfig } from '@spartacus/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { PageLayoutService } from '../../../../cms/page-layout/page-layout.service';
 import { ViewModes } from '../product-view/product-view.component';
 export declare class ProductListComponent implements OnInit {

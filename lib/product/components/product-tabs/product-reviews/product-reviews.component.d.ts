@@ -1,6 +1,6 @@
 import { EventEmitter, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ProductReviewService, Review, Product } from '@spartacus/core';
+import { Product, ProductReviewService, Review } from '@spartacus/core';
 import { Observable } from 'rxjs';
 export declare class ProductReviewsComponent implements OnChanges, OnInit {
     protected reviewService: ProductReviewService;

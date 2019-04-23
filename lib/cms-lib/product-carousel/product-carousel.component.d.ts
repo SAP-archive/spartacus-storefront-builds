@@ -1,4 +1,4 @@
-import { OnInit, ElementRef } from '@angular/core';
+import { ElementRef, OnInit } from '@angular/core';
 import { WindowRef } from '@spartacus/core';
 import { ProductCarouselService } from './product-carousel.component.service';
 export declare class ProductCarouselComponent implements OnInit {

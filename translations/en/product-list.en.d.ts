@@ -9,8 +9,8 @@ export declare const productList: {
             showMore: string;
             filterBy: string;
         };
-    };
-    placeholder: {
-        sortByRelevance: string;
+        placeholder: {
+            sortByRelevance: string;
+        };
     };
 };

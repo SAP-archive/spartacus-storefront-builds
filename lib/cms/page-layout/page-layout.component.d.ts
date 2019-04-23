@@ -1,4 +1,5 @@
-import { Renderer2, ElementRef, OnInit } from '@angular/core';
+import { ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { Observable } from 'rxjs';
 import { PageLayoutService } from './page-layout.service';
 export declare class PageLayoutComponent implements OnInit {
     private el;
@@ -7,7 +8,7 @@ export declare class PageLayoutComponent implements OnInit {
     section: string;
     constructor(el: ElementRef, renderer: Renderer2, pageLayoutService: PageLayoutService);
     ngOnInit(): void;
-    readonly slots$: import("rxjs").Observable<string[]>;
-    readonly templateName$: import("rxjs").Observable<string>;
+    readonly slots$: Observable<string[]>;
+    readonly templateName$: Observable<string>;
     styleClass: string;
 }

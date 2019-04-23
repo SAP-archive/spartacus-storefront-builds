@@ -1,6 +1,6 @@
 import { WindowRef } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { LayoutConfig, BREAKPOINT } from '../config/layout-config';
+import { BREAKPOINT, LayoutConfig } from '../config/layout-config';
 export declare class BreakpointService {
     private winRef;
     private config;

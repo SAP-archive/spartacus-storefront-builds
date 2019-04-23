@@ -1,6 +1,5 @@
-import { OnInit, OnDestroy } from '@angular/core';
-import { PaymentDetails } from '@spartacus/core';
-import { UserService } from '@spartacus/core';
+import { OnDestroy, OnInit } from '@angular/core';
+import { PaymentDetails, UserService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { Card } from '../../../ui/components/card/card.component';
 export declare class PaymentMethodsComponent implements OnInit, OnDestroy {

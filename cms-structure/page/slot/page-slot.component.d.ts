@@ -1,5 +1,5 @@
-import { OnInit, Renderer2, ElementRef } from '@angular/core';
-import { CmsService, DynamicAttributeService, ContentSlotData, ContentSlotComponentData } from '@spartacus/core';
+import { ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { CmsService, ContentSlotComponentData, ContentSlotData, DynamicAttributeService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { CmsMappingService } from '../../../lib/cms/services/cms-mapping.service';
 export declare class PageSlotComponent implements OnInit {

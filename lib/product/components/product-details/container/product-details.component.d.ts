@@ -1,6 +1,6 @@
 import { EventEmitter, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Product } from '@spartacus/core';
+import { Observable } from 'rxjs';
 import { CurrentProductService } from '../../../../ui/pages/product-page/current-product.service';
 import { ProductDetailOutlets } from '../../../product-outlets.model';
 export declare class ProductDetailsComponent implements OnInit {
@@ -8,7 +8,7 @@ export declare class ProductDetailsComponent implements OnInit {
     static outlets: typeof ProductDetailOutlets;
     openReview: EventEmitter<{}>;
     product$: Observable<Product>;
-    readonly outlets: typeof ProductDetailOutlets;
+    readonly outlets: any;
     constructor(currentPageService: CurrentProductService);
     ngOnInit(): void;
     launchReview(): void;

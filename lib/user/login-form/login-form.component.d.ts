@@ -1,8 +1,7 @@
 import { OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AuthService, RoutingService } from '@spartacus/core';
+import { AuthService, GlobalMessageService, RoutingService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
-import { GlobalMessageService } from '@spartacus/core';
 export declare class LoginFormComponent implements OnInit, OnDestroy {
     private auth;
     private routing;
