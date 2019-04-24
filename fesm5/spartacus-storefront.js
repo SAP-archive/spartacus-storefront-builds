@@ -1,5 +1,4 @@
 import { ServiceWorkerModule, ɵangular_packages_service_worker_service_worker_b } from '@angular/service-worker';
-import i18next from 'i18next';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbTabsetModule, NgbAccordionModule, NgbTabsetConfig, NgbAccordionConfig, NgbRatingModule, NgbRatingConfig, NgbDropdownModule, NgbTypeaheadModule, NgbCollapseModule, NgbModalModule, NgbPaginationModule, NgbPaginationConfig, NgbModule, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { concat, from, isObservable, of, fromEvent, BehaviorSubject, combineLatest, Subscription, ReplaySubject, merge, Subject } from 'rxjs';
@@ -9,9 +8,9 @@ import { __extends, __values, __spread, __read, __assign, __awaiter, __generator
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { endWith, first, skipWhile, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, tap, withLatestFrom, takeWhile, take, multicast, refCount, delay } from 'rxjs/operators';
 import { isPlatformServer, CommonModule, DOCUMENT } from '@angular/common';
-import { AuthService, CmsService, PageType, provideConfigFactory, serverConfigFromMetaTagFactory, ServerConfig, GlobalMessageType, GlobalMessageService, WindowRef, CheckoutService, RoutingService, I18nModule, UserService, ConfigModule, TranslationService, TranslationChunkService, UrlTranslationModule, CartService, RoutingModule, CartModule, ProductService, UserModule, AuthGuard, ContextServiceMap, SiteContextModule, StoreDataService, GoogleMapRendererService, StoreFinderService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, CartDataService, CmsConfig, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, Config, ProductReviewService, CheckoutModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, defaultCmsModuleConfig, CmsModule, GlobalMessageModule, OccUserService, OccMiscsService, OccOrderService, OccConfig, TranslatePipe, StoreFinderCoreModule, DynamicAttributeService, CxApiService, ComponentMapperService, NotAuthGuard, PageRobotsMeta } from '@spartacus/core';
+import { AuthService, CmsService, PageType, provideConfigFactory, serverConfigFromMetaTagFactory, ServerConfig, GlobalMessageType, GlobalMessageService, WindowRef, CheckoutService, RoutingService, I18nModule, UserService, ConfigModule, TranslationService, TranslationChunkService, UrlTranslationModule, CartService, RoutingModule, CartModule, AuthGuard, ProductService, UserModule, ContextServiceMap, SiteContextModule, StoreDataService, GoogleMapRendererService, StoreFinderService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, CartDataService, CmsConfig, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, Config, ProductReviewService, defaultCmsModuleConfig, CmsModule, CheckoutModule, GlobalMessageModule, OccUserService, OccMiscsService, OccOrderService, OccConfig, StripHtmlModule, StoreFinderCoreModule, PageMetaService, CmsPageTitleModule, ProductModule, ProductSearchService, TranslatePipe, DynamicAttributeService, CxApiService, ComponentMapperService, PageRobotsMeta, NotAuthGuard } from '@spartacus/core';
 import { Title, Meta } from '@angular/platform-browser';
-import { Injectable, NgModule, ElementRef, Input, Directive, Component, ChangeDetectionStrategy, EventEmitter, Output, ViewChild, HostListener, Renderer2, Injector, Optional, Inject, APP_INITIALIZER, ViewEncapsulation, TemplateRef, ChangeDetectorRef, forwardRef, defineInjectable, inject, INJECTOR, PLATFORM_ID, ViewContainerRef } from '@angular/core';
+import { Injectable, NgModule, ElementRef, Input, Directive, Component, ChangeDetectionStrategy, EventEmitter, Output, ViewChild, HostListener, Renderer2, Injector, Optional, Inject, APP_INITIALIZER, TemplateRef, ViewEncapsulation, ChangeDetectorRef, forwardRef, defineInjectable, inject, INJECTOR, PLATFORM_ID, ViewContainerRef } from '@angular/core';
 import { Router, RouterModule, ActivatedRoute, NavigationStart } from '@angular/router';
 
 /**
@@ -7395,12 +7394,13 @@ var SiteContextSelectorModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var CloseAccountModalComponent = /** @class */ (function () {
-    function CloseAccountModalComponent(activeModal, userService, authService, globalMessageService, routingService) {
+    function CloseAccountModalComponent(activeModal, userService, authService, globalMessageService, routingService, translationService) {
         this.activeModal = activeModal;
         this.userService = userService;
         this.authService = authService;
         this.globalMessageService = globalMessageService;
         this.routingService = routingService;
+        this.translationService = translationService;
         this.subscription = new Subscription();
     }
     /**
@@ -7427,11 +7427,17 @@ var CloseAccountModalComponent = /** @class */ (function () {
      * @return {?}
      */
     function (success) {
+        var _this = this;
         if (success) {
             this.closeModal();
-            this.globalMessageService.add({
-                text: "" + i18next.t('closeAccount:closeAccount.message.success'),
-                type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
+            this.translationService
+                .translate('closeAccount.message.success')
+                .pipe(first())
+                .subscribe(function (text) {
+                _this.globalMessageService.add({
+                    text: text,
+                    type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
+                });
             });
             this.routingService.go({ route: ['home'] });
         }
@@ -7481,7 +7487,8 @@ var CloseAccountModalComponent = /** @class */ (function () {
         { type: UserService },
         { type: AuthService },
         { type: GlobalMessageService },
-        { type: RoutingService }
+        { type: RoutingService },
+        { type: TranslationService }
     ]; };
     return CloseAccountModalComponent;
 }());

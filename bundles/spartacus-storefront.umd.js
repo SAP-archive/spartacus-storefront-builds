@@ -1,10 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/service-worker'), require('i18next'), require('@ng-select/ng-select'), require('@ng-bootstrap/ng-bootstrap'), require('rxjs'), require('@angular/forms'), require('@angular/platform-browser/animations'), require('@angular/common/http'), require('rxjs/operators'), require('@angular/common'), require('@spartacus/core'), require('@angular/platform-browser'), require('@angular/core'), require('@angular/router')) :
-    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@angular/service-worker', 'i18next', '@ng-select/ng-select', '@ng-bootstrap/ng-bootstrap', 'rxjs', '@angular/forms', '@angular/platform-browser/animations', '@angular/common/http', 'rxjs/operators', '@angular/common', '@spartacus/core', '@angular/platform-browser', '@angular/core', '@angular/router'], factory) :
-    (factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}),global.ng['service-worker'],global.i18next,global.ngSelect,global.ngBootstrap,global.rxjs,global.ng.forms,global.ng.platformBrowser.animations,global.ng.common.http,global.rxjs.operators,global.ng.common,global.core,global.ng.platformBrowser,global.ng.core,global.ng.router));
-}(this, (function (exports,serviceWorker,i18next,ngSelect,ngBootstrap,rxjs,forms,animations,http,operators,common,i1,i1$1,i0,i1$2) { 'use strict';
-
-    i18next = i18next && i18next.hasOwnProperty('default') ? i18next['default'] : i18next;
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/service-worker'), require('@ng-select/ng-select'), require('@ng-bootstrap/ng-bootstrap'), require('rxjs'), require('@angular/forms'), require('@angular/platform-browser/animations'), require('@angular/common/http'), require('rxjs/operators'), require('@angular/common'), require('@spartacus/core'), require('@angular/platform-browser'), require('@angular/core'), require('@angular/router')) :
+    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@angular/service-worker', '@ng-select/ng-select', '@ng-bootstrap/ng-bootstrap', 'rxjs', '@angular/forms', '@angular/platform-browser/animations', '@angular/common/http', 'rxjs/operators', '@angular/common', '@spartacus/core', '@angular/platform-browser', '@angular/core', '@angular/router'], factory) :
+    (factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}),global.ng['service-worker'],global.ngSelect,global.ngBootstrap,global.rxjs,global.ng.forms,global.ng.platformBrowser.animations,global.ng.common.http,global.rxjs.operators,global.ng.common,global.core,global.ng.platformBrowser,global.ng.core,global.ng.router));
+}(this, (function (exports,serviceWorker,ngSelect,ngBootstrap,rxjs,forms,animations,http,operators,common,i1,i1$1,i0,i1$2) { 'use strict';
 
     /**
      * @fileoverview added by tsickle
@@ -7678,12 +7676,13 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CloseAccountModalComponent = /** @class */ (function () {
-        function CloseAccountModalComponent(activeModal, userService, authService, globalMessageService, routingService) {
+        function CloseAccountModalComponent(activeModal, userService, authService, globalMessageService, routingService, translationService) {
             this.activeModal = activeModal;
             this.userService = userService;
             this.authService = authService;
             this.globalMessageService = globalMessageService;
             this.routingService = routingService;
+            this.translationService = translationService;
             this.subscription = new rxjs.Subscription();
         }
         /**
@@ -7710,11 +7709,17 @@
          * @return {?}
          */
             function (success) {
+                var _this = this;
                 if (success) {
                     this.closeModal();
-                    this.globalMessageService.add({
-                        text: "" + i18next.t('closeAccount:closeAccount.message.success'),
-                        type: i1.GlobalMessageType.MSG_TYPE_CONFIRMATION,
+                    this.translationService
+                        .translate('closeAccount.message.success')
+                        .pipe(operators.first())
+                        .subscribe(function (text) {
+                        _this.globalMessageService.add({
+                            text: text,
+                            type: i1.GlobalMessageType.MSG_TYPE_CONFIRMATION,
+                        });
                     });
                     this.routingService.go({ route: ['home'] });
                 }
@@ -7765,7 +7770,8 @@
                 { type: i1.UserService },
                 { type: i1.AuthService },
                 { type: i1.GlobalMessageService },
-                { type: i1.RoutingService }
+                { type: i1.RoutingService },
+                { type: i1.TranslationService }
             ];
         };
         return CloseAccountModalComponent;

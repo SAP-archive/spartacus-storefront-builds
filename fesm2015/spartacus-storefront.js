@@ -1,6 +1,5 @@
 import { __awaiter } from 'tslib';
 import { ServiceWorkerModule, ɵangular_packages_service_worker_service_worker_b } from '@angular/service-worker';
-import i18next from 'i18next';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbTabsetModule, NgbAccordionModule, NgbTabsetConfig, NgbAccordionConfig, NgbRatingModule, NgbRatingConfig, NgbDropdownModule, NgbTypeaheadModule, NgbCollapseModule, NgbModalModule, NgbPaginationModule, NgbPaginationConfig, NgbModule, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { concat, from, isObservable, of, fromEvent, BehaviorSubject, combineLatest, Subscription, ReplaySubject, merge, Subject } from 'rxjs';
@@ -9,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { endWith, first, skipWhile, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, tap, withLatestFrom, takeWhile, take, multicast, refCount, delay } from 'rxjs/operators';
 import { isPlatformServer, CommonModule, DOCUMENT } from '@angular/common';
-import { AuthService, CmsService, PageType, provideConfigFactory, serverConfigFromMetaTagFactory, ServerConfig, GlobalMessageType, GlobalMessageService, WindowRef, CheckoutService, RoutingService, I18nModule, UserService, ConfigModule, TranslationService, TranslationChunkService, UrlTranslationModule, CartService, AuthGuard, RoutingModule, CartModule, ProductService, UserModule, ContextServiceMap, SiteContextModule, CmsConfig, StoreDataService, StoreFinderService, GoogleMapRendererService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, Config, ProductReviewService, CheckoutModule, defaultCmsModuleConfig, CmsModule, StripHtmlModule, PageMetaService, CmsPageTitleModule, ProductModule, ProductSearchService, StoreFinderCoreModule, GlobalMessageModule, OccUserService, OccMiscsService, OccOrderService, OccConfig, TranslatePipe, DynamicAttributeService, CxApiService, ComponentMapperService, PageRobotsMeta, NotAuthGuard } from '@spartacus/core';
+import { AuthService, CmsService, PageType, provideConfigFactory, serverConfigFromMetaTagFactory, ServerConfig, GlobalMessageType, GlobalMessageService, WindowRef, CheckoutService, RoutingService, I18nModule, UserService, ConfigModule, UrlTranslationModule, TranslationService, TranslationChunkService, CartService, RoutingModule, CartModule, AuthGuard, ProductService, UserModule, ContextServiceMap, SiteContextModule, StoreFinderService, StoreDataService, GoogleMapRendererService, CmsConfig, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, Config, ProductReviewService, CheckoutModule, defaultCmsModuleConfig, CmsModule, StripHtmlModule, PageMetaService, CmsPageTitleModule, ProductModule, ProductSearchService, StoreFinderCoreModule, GlobalMessageModule, OccUserService, OccMiscsService, OccOrderService, OccConfig, TranslatePipe, DynamicAttributeService, CxApiService, ComponentMapperService, PageRobotsMeta, NotAuthGuard } from '@spartacus/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { Injectable, NgModule, ElementRef, Input, Directive, Component, ChangeDetectionStrategy, EventEmitter, Output, Optional, Injector, ViewChild, HostListener, Renderer2, ViewEncapsulation, Inject, APP_INITIALIZER, PLATFORM_ID, TemplateRef, ViewContainerRef, ChangeDetectorRef, forwardRef, defineInjectable, inject, INJECTOR } from '@angular/core';
 import { Router, RouterModule, ActivatedRoute, NavigationStart } from '@angular/router';
@@ -6116,13 +6115,15 @@ class CloseAccountModalComponent {
      * @param {?} authService
      * @param {?} globalMessageService
      * @param {?} routingService
+     * @param {?} translationService
      */
-    constructor(activeModal, userService, authService, globalMessageService, routingService) {
+    constructor(activeModal, userService, authService, globalMessageService, routingService, translationService) {
         this.activeModal = activeModal;
         this.userService = userService;
         this.authService = authService;
         this.globalMessageService = globalMessageService;
         this.routingService = routingService;
+        this.translationService = translationService;
         this.subscription = new Subscription();
     }
     /**
@@ -6143,9 +6144,14 @@ class CloseAccountModalComponent {
     onSuccess(success) {
         if (success) {
             this.closeModal();
-            this.globalMessageService.add({
-                text: `${i18next.t('closeAccount:closeAccount.message.success')}`,
-                type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
+            this.translationService
+                .translate('closeAccount.message.success')
+                .pipe(first())
+                .subscribe(text => {
+                this.globalMessageService.add({
+                    text,
+                    type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
+                });
             });
             this.routingService.go({ route: ['home'] });
         }
@@ -6186,7 +6192,8 @@ CloseAccountModalComponent.ctorParameters = () => [
     { type: UserService },
     { type: AuthService },
     { type: GlobalMessageService },
-    { type: RoutingService }
+    { type: RoutingService },
+    { type: TranslationService }
 ];
 
 /**
