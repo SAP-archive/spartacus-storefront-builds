@@ -1,5 +1,5 @@
 import { OnInit } from '@angular/core';
-import { CheckoutService, Address, CartService, UserService, OrderEntry, Cart, DeliveryMode, Country, PaymentDetails } from '@spartacus/core';
+import { CheckoutService, Address, CartService, UserService, UIOrderEntry, UICart, DeliveryMode, Country, PaymentDetails } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { Card } from '../../../../ui/components/card/card.component';
 export declare class ReviewSubmitComponent implements OnInit {
@@ -9,8 +9,8 @@ export declare class ReviewSubmitComponent implements OnInit {
     deliveryAddress: Address;
     shippingMethod: string;
     paymentDetails: PaymentDetails;
-    entries$: Observable<OrderEntry[]>;
-    cart$: Observable<Cart>;
+    entries$: Observable<UIOrderEntry[]>;
+    cart$: Observable<UICart>;
     deliveryMode$: Observable<DeliveryMode>;
     countryName$: Observable<Country>;
     constructor(checkoutService: CheckoutService, userService: UserService, cartService: CartService);

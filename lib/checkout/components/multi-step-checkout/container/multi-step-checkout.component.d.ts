@@ -1,6 +1,6 @@
-import { OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { CheckoutService, RoutingService, GlobalMessageService, CartService, CartDataService, PaymentDetails, Address, Cart } from '@spartacus/core';
-import { Subscription, Observable } from 'rxjs';
+import { ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
+import { Address, CartDataService, CartService, CheckoutService, GlobalMessageService, PaymentDetails, RoutingService, UICart } from '@spartacus/core';
+import { Observable, Subscription } from 'rxjs';
 import { CheckoutNavBarItem } from './checkout-navigation-bar';
 export declare class MultiStepCheckoutComponent implements OnInit, OnDestroy {
     protected checkoutService: CheckoutService;
@@ -15,7 +15,7 @@ export declare class MultiStepCheckoutComponent implements OnInit, OnDestroy {
     paymentDetails: PaymentDetails;
     shippingMethod: string;
     subscriptions: Subscription[];
-    cart$: Observable<Cart>;
+    cart$: Observable<UICart>;
     tAndCToggler: boolean;
     navs: CheckoutNavBarItem[];
     constructor(checkoutService: CheckoutService, cartService: CartService, cartDataService: CartDataService, routingService: RoutingService, globalMessageService: GlobalMessageService, cd: ChangeDetectorRef);
