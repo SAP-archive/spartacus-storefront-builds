@@ -1,9 +1,11 @@
 import { OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
+import { ICON_TYPES } from '../../../cms-components/misc/icon/index';
 import { SearchBoxComponentService } from './search-box-component.service';
 export declare class SearchBoxComponent implements OnInit {
     protected service: SearchBoxComponentService;
+    iconTypes: typeof ICON_TYPES;
     searchBoxControl: FormControl;
     isMobileSearchVisible: boolean;
     queryText$: Subject<string>;

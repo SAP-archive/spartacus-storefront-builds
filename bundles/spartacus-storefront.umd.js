@@ -8,6 +8,588 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /** @enum {string} */
+    var ICON_TYPES = {
+        CART: 'shopping-cart',
+        SEARCH: 'search',
+        GRID_MODE: 'th-large',
+        LIST_MODE: 'menu-hamburger',
+        CARET_DOWN: 'angle-down',
+    };
+    /**
+     * @abstract
+     */
+    var /**
+     * @abstract
+     */ IconConfig = /** @class */ (function () {
+        function IconConfig() {
+        }
+        return IconConfig;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var IconLoaderService = /** @class */ (function () {
+        function IconLoaderService(config) {
+            this.config = config;
+        }
+        /**
+         * @return {?}
+         */
+        IconLoaderService.prototype.useSvg = /**
+         * @return {?}
+         */
+            function () {
+                return this.config.icon && this.config.icon.useSvg;
+            };
+        /**
+         * Returns the path to the svg link. The link supports path names
+         * as well, if the config has been setup to support a svg file path.
+         * Additionally, the icon prefix will be taken into account to prefix the
+         * icon IDs in the SVG.
+         */
+        /**
+         * Returns the path to the svg link. The link supports path names
+         * as well, if the config has been setup to support a svg file path.
+         * Additionally, the icon prefix will be taken into account to prefix the
+         * icon IDs in the SVG.
+         * @param {?} iconType
+         * @return {?}
+         */
+        IconLoaderService.prototype.getSvgPath = /**
+         * Returns the path to the svg link. The link supports path names
+         * as well, if the config has been setup to support a svg file path.
+         * Additionally, the icon prefix will be taken into account to prefix the
+         * icon IDs in the SVG.
+         * @param {?} iconType
+         * @return {?}
+         */
+            function (iconType) {
+                if (!this.useSvg()) {
+                    return null;
+                }
+                /** @type {?} */
+                var path = '';
+                if (this.config.icon && this.config.icon.svgPath) {
+                    path = this.config.icon.svgPath;
+                }
+                // if there's no mapping configured, we use the default value
+                path += '#';
+                if (this.config.icon && this.config.icon.prefix) {
+                    path += this.config.icon.prefix;
+                }
+                path += this.getMappedType(iconType);
+                return path;
+            };
+        /**
+         *
+         * returns an array of css classes that can be used to
+         * render the icon by CSS / font. This is driven by the `iconType`
+         * and the icon configuration, so that multiple icon fonts are
+         * supported, such as font awesome, glypicons, Octicons, etc.
+         */
+        /**
+         *
+         * returns an array of css classes that can be used to
+         * render the icon by CSS / font. This is driven by the `iconType`
+         * and the icon configuration, so that multiple icon fonts are
+         * supported, such as font awesome, glypicons, Octicons, etc.
+         * @param {?} iconType
+         * @return {?}
+         */
+        IconLoaderService.prototype.getStyleClasses = /**
+         *
+         * returns an array of css classes that can be used to
+         * render the icon by CSS / font. This is driven by the `iconType`
+         * and the icon configuration, so that multiple icon fonts are
+         * supported, such as font awesome, glypicons, Octicons, etc.
+         * @param {?} iconType
+         * @return {?}
+         */
+            function (iconType) {
+                /** @type {?} */
+                var styleClasses = [];
+                if (this.config.icon && this.config.icon.iconClass) {
+                    styleClasses.push(this.config.icon.iconClass);
+                }
+                /** @type {?} */
+                var type = this.getMappedType(iconType);
+                if (this.config.icon && this.config.icon.prefix) {
+                    type = this.config.icon.prefix + type;
+                }
+                styleClasses.push(type);
+                return styleClasses;
+            };
+        /**
+         * @private
+         * @param {?} iconType
+         * @return {?}
+         */
+        IconLoaderService.prototype.getMappedType = /**
+         * @private
+         * @param {?} iconType
+         * @return {?}
+         */
+            function (iconType) {
+                return this.config.icon &&
+                    this.config.icon.icons &&
+                    this.config.icon.icons[iconType]
+                    ? this.config.icon.icons[iconType]
+                    : iconType;
+            };
+        IconLoaderService.decorators = [
+            { type: i0.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        IconLoaderService.ctorParameters = function () {
+            return [
+                { type: IconConfig }
+            ];
+        };
+        /** @nocollapse */ IconLoaderService.ngInjectableDef = i0.defineInjectable({ factory: function IconLoaderService_Factory() { return new IconLoaderService(i0.inject(IconConfig)); }, token: IconLoaderService, providedIn: "root" });
+        return IconLoaderService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var IconComponent = /** @class */ (function () {
+        function IconComponent(iconLoader, renderer, hostElement) {
+            this.iconLoader = iconLoader;
+            this.renderer = renderer;
+            this.hostElement = hostElement;
+            /**
+             * Keeps the given style classes so that we can
+             * clean them up when the icon changes
+             */
+            this.iconStyleClasses = [];
+        }
+        /**
+         * @return {?}
+         */
+        IconComponent.prototype.ngOnChanges = /**
+         * @return {?}
+         */
+            function () {
+                this.addStyleClasses();
+            };
+        Object.defineProperty(IconComponent.prototype, "useSvg", {
+            get: /**
+             * @return {?}
+             */ function () {
+                return this.iconLoader.useSvg();
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(IconComponent.prototype, "path", {
+            get: /**
+             * @return {?}
+             */ function () {
+                return this.iconLoader.getSvgPath(this.type);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * @private
+         * @return {?}
+         */
+        IconComponent.prototype.addStyleClasses = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                if (this.useSvg) {
+                    return;
+                }
+                this.clearStyleClasses();
+                this.iconStyleClasses = this.iconLoader.getStyleClasses(this.type);
+                this.iconStyleClasses.forEach(function (cls) {
+                    _this.renderer.addClass(_this.hostElement.nativeElement, cls);
+                });
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        IconComponent.prototype.clearStyleClasses = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.iconStyleClasses.forEach(function (cls) {
+                    _this.renderer.removeClass(_this.hostElement.nativeElement, cls);
+                });
+            };
+        IconComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-icon',
+                        template: "<ng-container *ngIf=\"useSvg\">\n  <svg>\n    <use [attr.xlink:href]=\"path\"></use>\n  </svg>\n</ng-container>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        IconComponent.ctorParameters = function () {
+            return [
+                { type: IconLoaderService },
+                { type: i0.Renderer2 },
+                { type: i0.ElementRef }
+            ];
+        };
+        IconComponent.propDecorators = {
+            type: [{ type: i0.Input }]
+        };
+        return IconComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var IconModule = /** @class */ (function () {
+        function IconModule() {
+        }
+        IconModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        declarations: [IconComponent],
+                        imports: [common.CommonModule],
+                        providers: [{ provide: IconConfig, useExisting: i1.Config }],
+                        exports: [IconComponent],
+                    },] }
+        ];
+        return IconModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var LanguageCurrencyComponent = /** @class */ (function () {
+        function LanguageCurrencyComponent() {
+        }
+        LanguageCurrencyComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-language-currency-selector',
+                        template: "\n    <cx-site-context-selector context=\"LANGUAGE\"></cx-site-context-selector>\n    <cx-site-context-selector context=\"CURRENCY\"></cx-site-context-selector>\n  ",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        return LanguageCurrencyComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @abstract
+     * @template T
+     */
+    var /**
+     * @abstract
+     * @template T
+     */ CmsComponentData = /** @class */ (function () {
+        function CmsComponentData() {
+        }
+        return CmsComponentData;
+    }());
+
+    var _a;
+    /** @type {?} */
+    var LABELS = (_a = {},
+        _a[i1.LANGUAGE_CONTEXT_ID] = 'Language',
+        _a[i1.CURRENCY_CONTEXT_ID] = 'Currency',
+        _a);
+    var SiteContextComponentService = /** @class */ (function () {
+        function SiteContextComponentService(componentData, contextServiceMap, injector) {
+            this.componentData = componentData;
+            this.contextServiceMap = contextServiceMap;
+            this.injector = injector;
+        }
+        /**
+         * @param {?=} context
+         * @return {?}
+         */
+        SiteContextComponentService.prototype.getItems = /**
+         * @param {?=} context
+         * @return {?}
+         */
+            function (context) {
+                var _this = this;
+                return this.getService(context).pipe(operators.switchMap(function (service) { return service.getAll(); }), operators.switchMap(function (items) {
+                    return _this.getContext(context).pipe(operators.switchMap(function (ctx) {
+                        items.forEach(function (item) {
+                            return (item.label = _this.getOptionLabel(item, ctx));
+                        });
+                        return rxjs.of(items);
+                    }));
+                }));
+            };
+        /**
+         * @param {?=} context
+         * @return {?}
+         */
+        SiteContextComponentService.prototype.getActiveItem = /**
+         * @param {?=} context
+         * @return {?}
+         */
+            function (context) {
+                return this.getService(context).pipe(operators.switchMap(function (service) { return service.getActive(); }));
+            };
+        /**
+         * @param {?=} context
+         * @return {?}
+         */
+        SiteContextComponentService.prototype.getLabel = /**
+         * @param {?=} context
+         * @return {?}
+         */
+            function (context) {
+                return this.getContext(context).pipe(operators.map(function (ctx) {
+                    return LABELS[ctx];
+                }));
+            };
+        /**
+         * @param {?} value
+         * @param {?=} context
+         * @return {?}
+         */
+        SiteContextComponentService.prototype.setActive = /**
+         * @param {?} value
+         * @param {?=} context
+         * @return {?}
+         */
+            function (value, context) {
+                this.getService(context)
+                    .pipe(operators.take(1))
+                    .subscribe(function (service) {
+                    service.setActive(value);
+                });
+            };
+        /**
+         * @protected
+         * @param {?=} context
+         * @return {?}
+         */
+        SiteContextComponentService.prototype.getService = /**
+         * @protected
+         * @param {?=} context
+         * @return {?}
+         */
+            function (context) {
+                var _this = this;
+                return this.getContext(context).pipe(operators.map(function (ctx) { return _this.getInjectedService(ctx); }), operators.filter(Boolean));
+            };
+        /**
+         * @protected
+         * @param {?=} context
+         * @return {?}
+         */
+        SiteContextComponentService.prototype.getContext = /**
+         * @protected
+         * @param {?=} context
+         * @return {?}
+         */
+            function (context) {
+                if (context) {
+                    return rxjs.of(context);
+                }
+                else if (this.componentData) {
+                    return this.componentData.data$.pipe(operators.map(function (data) { return data.context; }));
+                }
+            };
+        /**
+         * @protected
+         * @param {?} context
+         * @return {?}
+         */
+        SiteContextComponentService.prototype.getInjectedService = /**
+         * @protected
+         * @param {?} context
+         * @return {?}
+         */
+            function (context) {
+                return this.injector.get(this.contextServiceMap[context], null);
+            };
+        /**
+         * @protected
+         * @param {?} item
+         * @param {?=} context
+         * @return {?}
+         */
+        SiteContextComponentService.prototype.getOptionLabel = /**
+         * @protected
+         * @param {?} item
+         * @param {?=} context
+         * @return {?}
+         */
+            function (item, context) {
+                switch (context) {
+                    case i1.LANGUAGE_CONTEXT_ID:
+                        return item.nativeName;
+                        break;
+                    case i1.CURRENCY_CONTEXT_ID:
+                        return item.symbol + ' ' + item.isocode;
+                        break;
+                    default:
+                        return item.isocode;
+                }
+            };
+        SiteContextComponentService.decorators = [
+            { type: i0.Injectable }
+        ];
+        /** @nocollapse */
+        SiteContextComponentService.ctorParameters = function () {
+            return [
+                { type: CmsComponentData, decorators: [{ type: i0.Optional }] },
+                { type: i1.ContextServiceMap },
+                { type: i0.Injector }
+            ];
+        };
+        return SiteContextComponentService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var SiteContextSelectorComponent = /** @class */ (function () {
+        function SiteContextSelectorComponent(componentService) {
+            this.componentService = componentService;
+            this.iconTypes = ICON_TYPES;
+        }
+        Object.defineProperty(SiteContextSelectorComponent.prototype, "items$", {
+            get: /**
+             * @return {?}
+             */ function () {
+                return this.componentService.getItems(this.context);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(SiteContextSelectorComponent.prototype, "activeItem$", {
+            get: /**
+             * @return {?}
+             */ function () {
+                return this.componentService.getActiveItem(this.context);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(SiteContextSelectorComponent.prototype, "active", {
+            set: /**
+             * @param {?} value
+             * @return {?}
+             */ function (value) {
+                this.componentService.setActive(value, this.context);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(SiteContextSelectorComponent.prototype, "label$", {
+            get: /**
+             * @return {?}
+             */ function () {
+                return this.componentService.getLabel(this.context);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        SiteContextSelectorComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-site-context-selector',
+                        template: "<label *ngIf=\"(items$ | async)?.length > 1 && (items$ | async) as items\">\n  <span>{{ label$ | async }}</span>\n  <select (change)=\"active = $event.target.value\">\n    <option\n      *ngFor=\"let item of items\"\n      value=\"{{ item.isocode }}\"\n      [selected]=\"(activeItem$ | async) === item.isocode\"\n      >{{ item.label }}</option\n    > </select\n  ><cx-icon [type]=\"iconTypes.CARET_DOWN\"></cx-icon>\n</label>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        SiteContextSelectorComponent.ctorParameters = function () {
+            return [
+                { type: SiteContextComponentService }
+            ];
+        };
+        SiteContextSelectorComponent.propDecorators = {
+            context: [{ type: i0.Input }]
+        };
+        return SiteContextSelectorComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var SiteContextSelectorModule = /** @class */ (function () {
+        function SiteContextSelectorModule() {
+        }
+        SiteContextSelectorModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i1$2.RouterModule,
+                            i1.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    CMSSiteContextComponent: {
+                                        selector: 'cx-site-context-selector',
+                                        providers: [
+                                            {
+                                                provide: SiteContextComponentService,
+                                                useClass: SiteContextComponentService,
+                                                deps: [CmsComponentData, i1.ContextServiceMap, i0.Injector],
+                                            },
+                                        ],
+                                    },
+                                    LanguageCurrencyComponent: {
+                                        selector: 'cx-language-currency-selector',
+                                    },
+                                },
+                            }))),
+                            i1.SiteContextModule.forRoot(),
+                            IconModule,
+                        ],
+                        providers: [SiteContextComponentService],
+                        declarations: [SiteContextSelectorComponent, LanguageCurrencyComponent],
+                        entryComponents: [SiteContextSelectorComponent, LanguageCurrencyComponent],
+                    },] }
+        ];
+        return SiteContextSelectorModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @enum {string} */
+    var SiteContextType = {
+        LANGUAGE: 'LANGUAGE',
+        CURRENCY: 'CURRENCY',
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var LogoutGuard = /** @class */ (function () {
         function LogoutGuard(auth, cms) {
             this.auth = auth;
@@ -1669,23 +2251,6 @@
             position: [{ type: i0.Input }]
         };
         return PageSlotComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /**
-     * @abstract
-     * @template T
-     */
-    var /**
-     * @abstract
-     * @template T
-     */ CmsComponentData = /** @class */ (function () {
-        function CmsComponentData() {
-        }
-        return CmsComponentData;
     }());
 
     /**
@@ -4356,356 +4921,37 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var BannerComponentService = /** @class */ (function () {
-        function BannerComponentService(component, config) {
-            var _this = this;
-            this.component = component;
-            this.config = config;
-            this.convertToAbsoluteUrl = operators.map(function (url) {
-                return url.startsWith('http') ? url : _this.getBaseUrl() + url;
-            });
-            // TODO: move to a more generic location
-            // TODO: Make configurable
-            this.formats = [
-                { code: 'mobile', width: 200 },
-                { code: 'tablet', width: 500 },
-                { code: 'desktop', width: 800 },
-                { code: 'widescreen', width: 1200 },
-            ];
-        }
-        /**
-         * @param {?} data
-         * @return {?}
-         */
-        BannerComponentService.hasMedia = /**
-         * @param {?} data
-         * @return {?}
-         */
-            function (data) {
-                return !!data.media;
-            };
-        /**
-         * @param {?} data
-         * @return {?}
-         */
-        BannerComponentService.hasHeadline = /**
-         * @param {?} data
-         * @return {?}
-         */
-            function (data) {
-                return !!data.headline;
-            };
-        /**
-         * @param {?} data
-         * @return {?}
-         */
-        BannerComponentService.hasContent = /**
-         * @param {?} data
-         * @return {?}
-         */
-            function (data) {
-                return !!data.content;
-            };
-        /**
-         * @return {?}
-         */
-        BannerComponentService.prototype.getComponentData = /**
-         * @return {?}
-         */
-            function () {
-                return this.component.data$;
-            };
-        /**
-         * @return {?}
-         */
-        BannerComponentService.prototype.hasImage = /**
-         * @return {?}
-         */
-            function () {
-                return this.getComponentData().pipe(operators.map(BannerComponentService.hasMedia));
-            };
-        /**
-         * @return {?}
-         */
-        BannerComponentService.prototype.hasHeadline = /**
-         * @return {?}
-         */
-            function () {
-                return this.getComponentData().pipe(operators.map(BannerComponentService.hasHeadline));
-            };
-        /**
-         * @return {?}
-         */
-        BannerComponentService.prototype.hasContent = /**
-         * @return {?}
-         */
-            function () {
-                return this.getComponentData().pipe(operators.map(BannerComponentService.hasContent));
-            };
-        /**
-         * @return {?}
-         */
-        BannerComponentService.prototype.getImageUrl = /**
-         * @return {?}
-         */
-            function () {
-                return this.getComponentData().pipe(operators.map(function (data) {
-                    return BannerComponentService.hasMedia(data)
-                        ? (( /** @type {?} */(data.media))).url
-                        : '';
-                }));
-            };
-        /**
-         * @return {?}
-         */
-        BannerComponentService.prototype.getResponsiveImageUrl = /**
-         * @return {?}
-         */
-            function () {
-                return this.getComponentData().pipe(operators.map(function (data) {
-                    return BannerComponentService.hasMedia(data)
-                        ? (( /** @type {?} */(data.media))).desktop.url
-                        : '';
-                }));
-            };
-        /**
-         * @return {?}
-         */
-        BannerComponentService.prototype.getTarget = /**
-         * @return {?}
-         */
-            function () {
-                return this.getComponentData().pipe(operators.map(function (data) {
-                    return !data.external || data.external === 'false' ? '_self' : '_blank';
-                }));
-            };
-        /**
-         * @return {?}
-         */
-        BannerComponentService.prototype.getAltText = /**
-         * @return {?}
-         */
-            function () {
-                return this.getComponentData().pipe(operators.map(function (data) {
-                    return BannerComponentService.hasMedia(data)
-                        ? (( /** @type {?} */(data.media))).altText
-                        : '';
-                }));
-            };
-        /**
-         * @return {?}
-         */
-        BannerComponentService.prototype.getHeadline = /**
-         * @return {?}
-         */
-            function () {
-                return this.getComponentData().pipe(operators.map(function (data) {
-                    return BannerComponentService.hasHeadline(data) ? data.headline : '';
-                }));
-            };
-        /**
-         * @return {?}
-         */
-        BannerComponentService.prototype.getContent = /**
-         * @return {?}
-         */
-            function () {
-                return this.getComponentData().pipe(operators.map(function (data) { return (BannerComponentService.hasContent(data) ? data.content : ''); }));
-            };
-        /**
-         * @return {?}
-         */
-        BannerComponentService.prototype.getBaseUrl = /**
-         * @return {?}
-         */
-            function () {
-                return this.config.backend.occ.baseUrl || '';
-            };
-        /**
-         * @return {?}
-         */
-        BannerComponentService.prototype.getImageAbsoluteUrl = /**
-         * @return {?}
-         */
-            function () {
-                return this.getImageUrl().pipe(this.convertToAbsoluteUrl);
-            };
-        /**
-         * @return {?}
-         */
-        BannerComponentService.prototype.getResponsiveImageAbsoluteUrl = /**
-         * @return {?}
-         */
-            function () {
-                return this.getResponsiveImageUrl().pipe(this.convertToAbsoluteUrl);
-            };
-        /**
-         * @return {?}
-         */
-        BannerComponentService.prototype.getResponsiveSrcSet = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                return this.getComponentData().pipe(operators.map(function (data) {
-                    return _this.formats.reduce(function (srcset, format) {
-                        if (typeof data.media[format.code] !== 'undefined') {
-                            return (srcset += "" + _this.getBaseUrl() + data.media[format.code].url + " " + format.width + "w, ");
-                        }
-                        else {
-                            return srcset;
-                        }
-                    }, '');
-                }));
-            };
-        /**
-         * @return {?}
-         */
-        BannerComponentService.prototype.getComponentUID = /**
-         * @return {?}
-         */
-            function () {
-                return this.component.uid;
-            };
-        BannerComponentService.decorators = [
-            { type: i0.Injectable }
-        ];
-        /** @nocollapse */
-        BannerComponentService.ctorParameters = function () {
-            return [
-                { type: CmsComponentData },
-                { type: i1.CmsConfig }
-            ];
-        };
-        return BannerComponentService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var BannerComponent = /** @class */ (function () {
-        function BannerComponent(service) {
-            this.service = service;
-        }
-        BannerComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-banner',
-                        template: "<p class=\"cx-banner-headline\" *ngIf=\"(service.hasHeadline() | async)\">\n  {{ service.getHeadline() | async }}\n</p>\n<cx-generic-link\n  *ngIf=\"\n    (service.hasImage() | async) && (service.getComponentData() | async) as data\n  \"\n  [url]=\"data.urlLink\"\n  [target]=\"service.getTarget() | async\"\n>\n  <img\n    [title]=\"service.getAltText() | async\"\n    [alt]=\"service.getAltText() | async\"\n    [src]=\"service.getImageAbsoluteUrl() | async\"\n    alt=\"\"\n  />\n</cx-generic-link>\n<p class=\"cx-banner-content\" *ngIf=\"(service.hasContent() | async)\">\n  {{ service.getContent() | async }}\n</p>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        BannerComponent.ctorParameters = function () {
-            return [
-                { type: BannerComponentService }
-            ];
-        };
-        return BannerComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ResponsiveBannerComponent = /** @class */ (function (_super) {
-        __extends(ResponsiveBannerComponent, _super);
-        function ResponsiveBannerComponent() {
-            return _super !== null && _super.apply(this, arguments) || this;
-        }
-        /**
-         * @return {?}
-         */
-        ResponsiveBannerComponent.prototype.getClass = /**
-         * @return {?}
-         */
-            function () {
-                /** @type {?} */
-                var RESPONSIVE_BANNER_CLASS = 'responsive-banner';
-                return RESPONSIVE_BANNER_CLASS + " " + this.service.getComponentUID();
-            };
-        ResponsiveBannerComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-responsive-banner',
-                        template: "<cx-generic-link\n  fxFlex\n  class=\"link\"\n  *ngIf=\"service.hasImage() && (service.getComponentData() | async) as data\"\n  [url]=\"data.urlLink\"\n  [target]=\"service.getTarget() | async\"\n>\n  <picture [class]=\"getClass()\">\n    <img\n      [src]=\"service.getResponsiveImageAbsoluteUrl() | async\"\n      [srcset]=\"service.getResponsiveSrcSet() | async\"\n      sizes=\"100%\"\n      alt=\"\"\n    />\n  </picture>\n</cx-generic-link>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        return ResponsiveBannerComponent;
-    }(BannerComponent));
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var BannerModule = /** @class */ (function () {
-        function BannerModule() {
-        }
-        BannerModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i1$2.RouterModule,
-                            GenericLinkModule,
-                            i1.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    SimpleResponsiveBannerComponent: {
-                                        selector: 'cx-responsive-banner',
-                                        providers: [
-                                            {
-                                                provide: BannerComponentService,
-                                                useClass: BannerComponentService,
-                                                deps: [CmsComponentData, i1.CmsConfig],
-                                            },
-                                        ],
-                                    },
-                                    BannerComponent: {
-                                        selector: 'cx-banner',
-                                        providers: [
-                                            {
-                                                provide: BannerComponentService,
-                                                useClass: BannerComponentService,
-                                                deps: [CmsComponentData, i1.CmsConfig],
-                                            },
-                                        ],
-                                    },
-                                    SimpleBannerComponent: {
-                                        selector: 'cx-banner',
-                                        providers: [
-                                            {
-                                                provide: BannerComponentService,
-                                                useClass: BannerComponentService,
-                                                deps: [CmsComponentData, i1.CmsConfig],
-                                            },
-                                        ],
-                                    },
-                                },
-                            }))),
-                        ],
-                        declarations: [BannerComponent, ResponsiveBannerComponent],
-                        exports: [BannerComponent, ResponsiveBannerComponent],
-                        entryComponents: [BannerComponent, ResponsiveBannerComponent],
-                    },] }
-        ];
-        return BannerModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var MiniCartComponent = /** @class */ (function () {
         function MiniCartComponent(component, cartService) {
             this.component = component;
             this.cartService = cartService;
-            this.cart$ = this.cartService.getActive();
+            this.iconTypes = ICON_TYPES;
         }
+        Object.defineProperty(MiniCartComponent.prototype, "quantity$", {
+            get: /**
+             * @return {?}
+             */ function () {
+                return this.cartService
+                    .getActive()
+                    .pipe(operators.map(function (cart) { return cart.deliveryItemsQuantity || 0; }));
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(MiniCartComponent.prototype, "total$", {
+            get: /**
+             * @return {?}
+             */ function () {
+                return this.cartService.getActive().pipe(operators.filter(function (cart) { return !!cart.totalPrice; }), operators.map(function (cart) { return cart.totalPrice.formattedValue; }));
+            },
+            enumerable: true,
+            configurable: true
+        });
         MiniCartComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-mini-cart',
-                        template: "<a\n  *ngIf=\"(cart$ | async) as cart\"\n  aria-label=\"Cart\"\n  [routerLink]=\"{ route: 'cart' } | cxTranslateUrl\"\n>\n  <svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 35 28\">\n    <g transform=\"translate(-4758 4746)\">\n      <path\n        d=\"M4758.7-4746h4.7c0.3,0.1,0.6,0.3,0.7,0.5l1.7,7.5h23.6c0.4,0,0.7,0.4,0.7,0.8c0,0.1,0,0.1,0,0.2l-4,12\n c-0.1,0.2-0.4,0.4-0.7,0.4h-16.4l0.3,1.3h14.1c1.5,0,2.7,1.2,2.7,2.7c0,1.5-1.2,2.7-2.7,2.7l0,0c-1.5,0-2.6-1.2-2.6-2.6\n c0-0.5,0.1-1,0.4-1.4h-10.1c0.8,1.2,0.4,2.9-0.9,3.6c-0.4,0.3-0.9,0.4-1.4,0.4c-1.5,0-2.7-1.2-2.7-2.7c0-1.2,0.8-2.2,1.9-2.5\n l-5.1-21.4h-4.1c-0.3,0-0.6-0.2-0.7-0.6c0,0,0-0.1,0-0.1C4758-4745.7,4758.2-4746,4758.7-4746C4758.6-4746,4758.6-4746,4758.7-4746\n z\"\n      />\n    </g>\n  </svg>\n\n  <span\n    class=\"count\"\n    *ngIf=\"cart.deliveryItemsQuantity || '0' as qty\"\n    [attr.aria-label]=\"'My cart. ' + qty + ' items currently in your cart.'\"\n    >{{ qty }}</span\n  >\n</a>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
-                        styles: [""]
+                        template: "<a\n  [attr.aria-label]=\"(quantity$ | async) + ' items currently in your cart'\"\n  [routerLink]=\"{ route: ['cart'] } | cxTranslateUrl\"\n>\n  <cx-icon [type]=\"iconTypes.CART\"></cx-icon>\n\n  <span class=\"total\">{{ total$ | async }}</span>\n  <span class=\"count\">{{ quantity$ | async }}</span>\n</a>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
                     }] }
         ];
         /** @nocollapse */
@@ -4730,8 +4976,6 @@
                         imports: [
                             common.CommonModule,
                             i1$2.RouterModule,
-                            BannerModule,
-                            MediaModule,
                             i1.CartModule,
                             i1.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
@@ -4739,6 +4983,7 @@
                                 },
                             }))),
                             i1.UrlTranslationModule,
+                            IconModule,
                         ],
                         declarations: [MiniCartComponent],
                         entryComponents: [MiniCartComponent],
@@ -6973,6 +7218,344 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var BannerComponentService = /** @class */ (function () {
+        function BannerComponentService(component, config) {
+            var _this = this;
+            this.component = component;
+            this.config = config;
+            this.convertToAbsoluteUrl = operators.map(function (url) {
+                return url.startsWith('http') ? url : _this.getBaseUrl() + url;
+            });
+            // TODO: move to a more generic location
+            // TODO: Make configurable
+            this.formats = [
+                { code: 'mobile', width: 200 },
+                { code: 'tablet', width: 500 },
+                { code: 'desktop', width: 800 },
+                { code: 'widescreen', width: 1200 },
+            ];
+        }
+        /**
+         * @param {?} data
+         * @return {?}
+         */
+        BannerComponentService.hasMedia = /**
+         * @param {?} data
+         * @return {?}
+         */
+            function (data) {
+                return !!data.media;
+            };
+        /**
+         * @param {?} data
+         * @return {?}
+         */
+        BannerComponentService.hasHeadline = /**
+         * @param {?} data
+         * @return {?}
+         */
+            function (data) {
+                return !!data.headline;
+            };
+        /**
+         * @param {?} data
+         * @return {?}
+         */
+        BannerComponentService.hasContent = /**
+         * @param {?} data
+         * @return {?}
+         */
+            function (data) {
+                return !!data.content;
+            };
+        /**
+         * @return {?}
+         */
+        BannerComponentService.prototype.getComponentData = /**
+         * @return {?}
+         */
+            function () {
+                return this.component.data$;
+            };
+        /**
+         * @return {?}
+         */
+        BannerComponentService.prototype.hasImage = /**
+         * @return {?}
+         */
+            function () {
+                return this.getComponentData().pipe(operators.map(BannerComponentService.hasMedia));
+            };
+        /**
+         * @return {?}
+         */
+        BannerComponentService.prototype.hasHeadline = /**
+         * @return {?}
+         */
+            function () {
+                return this.getComponentData().pipe(operators.map(BannerComponentService.hasHeadline));
+            };
+        /**
+         * @return {?}
+         */
+        BannerComponentService.prototype.hasContent = /**
+         * @return {?}
+         */
+            function () {
+                return this.getComponentData().pipe(operators.map(BannerComponentService.hasContent));
+            };
+        /**
+         * @return {?}
+         */
+        BannerComponentService.prototype.getImageUrl = /**
+         * @return {?}
+         */
+            function () {
+                return this.getComponentData().pipe(operators.map(function (data) {
+                    return BannerComponentService.hasMedia(data)
+                        ? (( /** @type {?} */(data.media))).url
+                        : '';
+                }));
+            };
+        /**
+         * @return {?}
+         */
+        BannerComponentService.prototype.getResponsiveImageUrl = /**
+         * @return {?}
+         */
+            function () {
+                return this.getComponentData().pipe(operators.map(function (data) {
+                    return BannerComponentService.hasMedia(data)
+                        ? (( /** @type {?} */(data.media))).desktop.url
+                        : '';
+                }));
+            };
+        /**
+         * @return {?}
+         */
+        BannerComponentService.prototype.getTarget = /**
+         * @return {?}
+         */
+            function () {
+                return this.getComponentData().pipe(operators.map(function (data) {
+                    return !data.external || data.external === 'false' ? '_self' : '_blank';
+                }));
+            };
+        /**
+         * @return {?}
+         */
+        BannerComponentService.prototype.getAltText = /**
+         * @return {?}
+         */
+            function () {
+                return this.getComponentData().pipe(operators.map(function (data) {
+                    return BannerComponentService.hasMedia(data)
+                        ? (( /** @type {?} */(data.media))).altText
+                        : '';
+                }));
+            };
+        /**
+         * @return {?}
+         */
+        BannerComponentService.prototype.getHeadline = /**
+         * @return {?}
+         */
+            function () {
+                return this.getComponentData().pipe(operators.map(function (data) {
+                    return BannerComponentService.hasHeadline(data) ? data.headline : '';
+                }));
+            };
+        /**
+         * @return {?}
+         */
+        BannerComponentService.prototype.getContent = /**
+         * @return {?}
+         */
+            function () {
+                return this.getComponentData().pipe(operators.map(function (data) { return (BannerComponentService.hasContent(data) ? data.content : ''); }));
+            };
+        /**
+         * @return {?}
+         */
+        BannerComponentService.prototype.getBaseUrl = /**
+         * @return {?}
+         */
+            function () {
+                return this.config.backend.occ.baseUrl || '';
+            };
+        /**
+         * @return {?}
+         */
+        BannerComponentService.prototype.getImageAbsoluteUrl = /**
+         * @return {?}
+         */
+            function () {
+                return this.getImageUrl().pipe(this.convertToAbsoluteUrl);
+            };
+        /**
+         * @return {?}
+         */
+        BannerComponentService.prototype.getResponsiveImageAbsoluteUrl = /**
+         * @return {?}
+         */
+            function () {
+                return this.getResponsiveImageUrl().pipe(this.convertToAbsoluteUrl);
+            };
+        /**
+         * @return {?}
+         */
+        BannerComponentService.prototype.getResponsiveSrcSet = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                return this.getComponentData().pipe(operators.map(function (data) {
+                    return _this.formats.reduce(function (srcset, format) {
+                        if (typeof data.media[format.code] !== 'undefined') {
+                            return (srcset += "" + _this.getBaseUrl() + data.media[format.code].url + " " + format.width + "w, ");
+                        }
+                        else {
+                            return srcset;
+                        }
+                    }, '');
+                }));
+            };
+        /**
+         * @return {?}
+         */
+        BannerComponentService.prototype.getComponentUID = /**
+         * @return {?}
+         */
+            function () {
+                return this.component.uid;
+            };
+        BannerComponentService.decorators = [
+            { type: i0.Injectable }
+        ];
+        /** @nocollapse */
+        BannerComponentService.ctorParameters = function () {
+            return [
+                { type: CmsComponentData },
+                { type: i1.CmsConfig }
+            ];
+        };
+        return BannerComponentService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var BannerComponent = /** @class */ (function () {
+        function BannerComponent(service) {
+            this.service = service;
+        }
+        BannerComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-banner',
+                        template: "<p class=\"cx-banner-headline\" *ngIf=\"(service.hasHeadline() | async)\">\n  {{ service.getHeadline() | async }}\n</p>\n<cx-generic-link\n  *ngIf=\"\n    (service.hasImage() | async) && (service.getComponentData() | async) as data\n  \"\n  [url]=\"data.urlLink\"\n  [target]=\"service.getTarget() | async\"\n>\n  <img\n    [title]=\"service.getAltText() | async\"\n    [alt]=\"service.getAltText() | async\"\n    [src]=\"service.getImageAbsoluteUrl() | async\"\n    alt=\"\"\n  />\n</cx-generic-link>\n<p class=\"cx-banner-content\" *ngIf=\"(service.hasContent() | async)\">\n  {{ service.getContent() | async }}\n</p>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        BannerComponent.ctorParameters = function () {
+            return [
+                { type: BannerComponentService }
+            ];
+        };
+        return BannerComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ResponsiveBannerComponent = /** @class */ (function (_super) {
+        __extends(ResponsiveBannerComponent, _super);
+        function ResponsiveBannerComponent() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        /**
+         * @return {?}
+         */
+        ResponsiveBannerComponent.prototype.getClass = /**
+         * @return {?}
+         */
+            function () {
+                /** @type {?} */
+                var RESPONSIVE_BANNER_CLASS = 'responsive-banner';
+                return RESPONSIVE_BANNER_CLASS + " " + this.service.getComponentUID();
+            };
+        ResponsiveBannerComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-responsive-banner',
+                        template: "<cx-generic-link\n  fxFlex\n  class=\"link\"\n  *ngIf=\"service.hasImage() && (service.getComponentData() | async) as data\"\n  [url]=\"data.urlLink\"\n  [target]=\"service.getTarget() | async\"\n>\n  <picture [class]=\"getClass()\">\n    <img\n      [src]=\"service.getResponsiveImageAbsoluteUrl() | async\"\n      [srcset]=\"service.getResponsiveSrcSet() | async\"\n      sizes=\"100%\"\n      alt=\"\"\n    />\n  </picture>\n</cx-generic-link>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        return ResponsiveBannerComponent;
+    }(BannerComponent));
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var BannerModule = /** @class */ (function () {
+        function BannerModule() {
+        }
+        BannerModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i1$2.RouterModule,
+                            GenericLinkModule,
+                            i1.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    SimpleResponsiveBannerComponent: {
+                                        selector: 'cx-responsive-banner',
+                                        providers: [
+                                            {
+                                                provide: BannerComponentService,
+                                                useClass: BannerComponentService,
+                                                deps: [CmsComponentData, i1.CmsConfig],
+                                            },
+                                        ],
+                                    },
+                                    BannerComponent: {
+                                        selector: 'cx-banner',
+                                        providers: [
+                                            {
+                                                provide: BannerComponentService,
+                                                useClass: BannerComponentService,
+                                                deps: [CmsComponentData, i1.CmsConfig],
+                                            },
+                                        ],
+                                    },
+                                    SimpleBannerComponent: {
+                                        selector: 'cx-banner',
+                                        providers: [
+                                            {
+                                                provide: BannerComponentService,
+                                                useClass: BannerComponentService,
+                                                deps: [CmsComponentData, i1.CmsConfig],
+                                            },
+                                        ],
+                                    },
+                                },
+                            }))),
+                        ],
+                        declarations: [BannerComponent, ResponsiveBannerComponent],
+                        exports: [BannerComponent, ResponsiveBannerComponent],
+                        entryComponents: [BannerComponent, ResponsiveBannerComponent],
+                    },] }
+        ];
+        return BannerModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var BreadcrumbComponent = /** @class */ (function () {
         function BreadcrumbComponent(component, pageMetaService) {
             this.component = component;
@@ -7394,281 +7977,6 @@
                     },] }
         ];
         return CategoryNavigationModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var LanguageCurrencyComponent = /** @class */ (function () {
-        function LanguageCurrencyComponent() {
-        }
-        LanguageCurrencyComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-language-currency-selector',
-                        template: "\n    <cx-site-context-selector context=\"LANGUAGE\"></cx-site-context-selector>\n    <cx-site-context-selector context=\"CURRENCY\"></cx-site-context-selector>\n  ",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        return LanguageCurrencyComponent;
-    }());
-
-    var _a;
-    /** @type {?} */
-    var LABELS = (_a = {},
-        _a[i1.LANGUAGE_CONTEXT_ID] = 'Language',
-        _a[i1.CURRENCY_CONTEXT_ID] = 'Currency',
-        _a);
-    var SiteContextComponentService = /** @class */ (function () {
-        function SiteContextComponentService(componentData, contextServiceMap, injector) {
-            this.componentData = componentData;
-            this.contextServiceMap = contextServiceMap;
-            this.injector = injector;
-        }
-        /**
-         * @param {?=} context
-         * @return {?}
-         */
-        SiteContextComponentService.prototype.getItems = /**
-         * @param {?=} context
-         * @return {?}
-         */
-            function (context) {
-                var _this = this;
-                return this.getService(context).pipe(operators.switchMap(function (service) { return service.getAll(); }), operators.switchMap(function (items) {
-                    return _this.getContext(context).pipe(operators.switchMap(function (ctx) {
-                        items.forEach(function (item) {
-                            return (item.label = _this.getOptionLabel(item, ctx));
-                        });
-                        return rxjs.of(items);
-                    }));
-                }));
-            };
-        /**
-         * @param {?=} context
-         * @return {?}
-         */
-        SiteContextComponentService.prototype.getActiveItem = /**
-         * @param {?=} context
-         * @return {?}
-         */
-            function (context) {
-                return this.getService(context).pipe(operators.switchMap(function (service) { return service.getActive(); }));
-            };
-        /**
-         * @param {?=} context
-         * @return {?}
-         */
-        SiteContextComponentService.prototype.getLabel = /**
-         * @param {?=} context
-         * @return {?}
-         */
-            function (context) {
-                return this.getContext(context).pipe(operators.map(function (ctx) {
-                    return LABELS[ctx];
-                }));
-            };
-        /**
-         * @param {?} value
-         * @param {?=} context
-         * @return {?}
-         */
-        SiteContextComponentService.prototype.setActive = /**
-         * @param {?} value
-         * @param {?=} context
-         * @return {?}
-         */
-            function (value, context) {
-                this.getService(context)
-                    .pipe(operators.take(1))
-                    .subscribe(function (service) {
-                    service.setActive(value);
-                });
-            };
-        /**
-         * @protected
-         * @param {?=} context
-         * @return {?}
-         */
-        SiteContextComponentService.prototype.getService = /**
-         * @protected
-         * @param {?=} context
-         * @return {?}
-         */
-            function (context) {
-                var _this = this;
-                return this.getContext(context).pipe(operators.map(function (ctx) { return _this.getInjectedService(ctx); }), operators.filter(Boolean));
-            };
-        /**
-         * @protected
-         * @param {?=} context
-         * @return {?}
-         */
-        SiteContextComponentService.prototype.getContext = /**
-         * @protected
-         * @param {?=} context
-         * @return {?}
-         */
-            function (context) {
-                if (context) {
-                    return rxjs.of(context);
-                }
-                else if (this.componentData) {
-                    return this.componentData.data$.pipe(operators.map(function (data) { return data.context; }));
-                }
-            };
-        /**
-         * @protected
-         * @param {?} context
-         * @return {?}
-         */
-        SiteContextComponentService.prototype.getInjectedService = /**
-         * @protected
-         * @param {?} context
-         * @return {?}
-         */
-            function (context) {
-                return this.injector.get(this.contextServiceMap[context], null);
-            };
-        /**
-         * @protected
-         * @param {?} item
-         * @param {?=} context
-         * @return {?}
-         */
-        SiteContextComponentService.prototype.getOptionLabel = /**
-         * @protected
-         * @param {?} item
-         * @param {?=} context
-         * @return {?}
-         */
-            function (item, context) {
-                switch (context) {
-                    case i1.LANGUAGE_CONTEXT_ID:
-                        return item.nativeName;
-                        break;
-                    case i1.CURRENCY_CONTEXT_ID:
-                        return item.symbol + ' ' + item.isocode;
-                        break;
-                    default:
-                        return item.isocode;
-                }
-            };
-        SiteContextComponentService.decorators = [
-            { type: i0.Injectable }
-        ];
-        /** @nocollapse */
-        SiteContextComponentService.ctorParameters = function () {
-            return [
-                { type: CmsComponentData, decorators: [{ type: i0.Optional }] },
-                { type: i1.ContextServiceMap },
-                { type: i0.Injector }
-            ];
-        };
-        return SiteContextComponentService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var SiteContextSelectorComponent = /** @class */ (function () {
-        function SiteContextSelectorComponent(componentService) {
-            this.componentService = componentService;
-        }
-        Object.defineProperty(SiteContextSelectorComponent.prototype, "items$", {
-            get: /**
-             * @return {?}
-             */ function () {
-                return this.componentService.getItems(this.context);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(SiteContextSelectorComponent.prototype, "activeItem$", {
-            get: /**
-             * @return {?}
-             */ function () {
-                return this.componentService.getActiveItem(this.context);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(SiteContextSelectorComponent.prototype, "active", {
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */ function (value) {
-                this.componentService.setActive(value, this.context);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(SiteContextSelectorComponent.prototype, "label$", {
-            get: /**
-             * @return {?}
-             */ function () {
-                return this.componentService.getLabel(this.context);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        SiteContextSelectorComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-site-context-selector',
-                        template: "<label *ngIf=\"(items$ | async)?.length > 1 && (items$ | async) as items\">\n  <span>{{ label$ | async }}</span>\n  <select (change)=\"active = $event.target.value\">\n    <option\n      *ngFor=\"let item of items\"\n      value=\"{{ item.isocode }}\"\n      [selected]=\"(activeItem$ | async) === item.isocode\"\n      >{{ item.label }}</option\n    >\n  </select>\n</label>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        SiteContextSelectorComponent.ctorParameters = function () {
-            return [
-                { type: SiteContextComponentService }
-            ];
-        };
-        SiteContextSelectorComponent.propDecorators = {
-            context: [{ type: i0.Input }]
-        };
-        return SiteContextSelectorComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var SiteContextSelectorModule = /** @class */ (function () {
-        function SiteContextSelectorModule() {
-        }
-        SiteContextSelectorModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i1$2.RouterModule,
-                            i1.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    CMSSiteContextComponent: {
-                                        selector: 'cx-site-context-selector',
-                                        providers: [
-                                            {
-                                                provide: SiteContextComponentService,
-                                                useClass: SiteContextComponentService,
-                                                deps: [CmsComponentData, i1.ContextServiceMap, i0.Injector],
-                                            },
-                                        ],
-                                    },
-                                    LanguageCurrencyComponent: {
-                                        selector: 'cx-language-currency-selector',
-                                    },
-                                },
-                            }))),
-                            i1.SiteContextModule.forRoot(),
-                        ],
-                        providers: [SiteContextComponentService],
-                        declarations: [SiteContextSelectorComponent, LanguageCurrencyComponent],
-                        entryComponents: [SiteContextSelectorComponent, LanguageCurrencyComponent],
-                    },] }
-        ];
-        return SiteContextSelectorModule;
     }());
 
     /**
@@ -11076,6 +11384,7 @@
         function SearchBoxComponent(service) {
             var _this = this;
             this.service = service;
+            this.iconTypes = ICON_TYPES;
             this.searchBoxControl = new forms.FormControl();
             this.queryText$ = new rxjs.Subject();
             this.typeahead = function (text$) {
@@ -11158,7 +11467,7 @@
         SearchBoxComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-searchbox',
-                        template: "<form class=\"cx-form\">\n  <div class=\"cx-form-group form-group\">\n    <!-- searchbox input -->\n    <input\n      class=\"cx-input form-control dropdown-menu-toggle\"\n      [ngClass]=\"{ 'show-mobile': isMobileSearchVisible }\"\n      type=\"text\"\n      placeholder=\"{{ 'searchBox.searchHere' | cxTranslate }}\"\n      aria-label=\"search\"\n      [ngbTypeahead]=\"typeahead\"\n      [resultTemplate]=\"rt\"\n      [formControl]=\"searchBoxControl\"\n      (keyup)=\"onKey($event)\"\n      (selectItem)=\"selectSuggestion($event)\"\n    />\n    <!-- searchbox button desktop -->\n    <button\n      class=\"cx-button cx-button-desktop\"\n      type=\"submit\"\n      aria-label=\"Submit \"\n      (click)=\"submitSearch()\"\n      [disabled]=\"!searchBoxControl?.value\"\n    >\n      <svg\n        class=\"cx-icon \"\n        xmlns=\"http://www.w3.org/2000/svg \"\n        viewBox=\"-4472 4760 26 26 \"\n      >\n        <path\n          id=\"Trac\u00E9_982 \"\n          data-name=\"Trac\u00E9 982 \"\n          d=\"M9.75,19.5a9.241,9.241,0,0,0,6.067-2.167l8.342,8.342a1.072,1.072,0,0,0,1.517-1.517l-8.342-8.342A9.854,9.854,0,0,0,19.5,9.75,9.75,9.75,0,1,0,9.75,19.5Zm0-17.333A7.583,7.583,0,1,1,2.167,9.75,7.537,7.537,0,0,1,9.75,2.167Z \"\n          transform=\"translate(-4472 4760) \"\n        />\n      </svg>\n    </button>\n    <!-- searchbox button mobile -->\n    <button\n      class=\"cx-button cx-button-mobile\"\n      type=\"button\"\n      aria-label=\"Search \"\n      (click)=\"toggleMobileSearchInput()\"\n    >\n      <svg\n        class=\"cx-icon \"\n        xmlns=\"http://www.w3.org/2000/svg \"\n        viewBox=\"-4472 4760 26 26 \"\n      >\n        <path\n          id=\"Trac\u00E9_982 \"\n          data-name=\"Trac\u00E9 982 \"\n          d=\"M9.75,19.5a9.241,9.241,0,0,0,6.067-2.167l8.342,8.342a1.072,1.072,0,0,0,1.517-1.517l-8.342-8.342A9.854,9.854,0,0,0,19.5,9.75,9.75,9.75,0,1,0,9.75,19.5Zm0-17.333A7.583,7.583,0,1,1,2.167,9.75,7.537,7.537,0,0,1,9.75,2.167Z \"\n          transform=\"translate(-4472 4760) \"\n        />\n      </svg>\n    </button>\n    <!-- searchbox results -->\n    <ng-template #rt let-suggestion=\"result\">\n      <div\n        *ngIf=\"!suggestion.code; else productView\"\n        class=\"cx-dropdown-content\"\n      >\n        {{ suggestion }}\n      </div>\n      <ng-template #productView>\n        <div\n          [routerLink]=\"\n            {\n              route: 'product',\n              params: suggestion | stripHtml\n            } | cxTranslateUrl\n          \"\n          class=\"cx-product\"\n        >\n          <cx-picture\n            [imageContainer]=\"suggestion.images?.PRIMARY\"\n            imageFormat=\"product\"\n            [imageAlt]=\"suggestion.summary\"\n          ></cx-picture>\n          <div [innerHtml]=\"suggestion.name\" class=\"cx-product-name\">\n            {{ suggestion.name }}\n          </div>\n          <div class=\"cx-product-price\">\n            {{ suggestion.price.formattedValue }}\n          </div>\n        </div>\n      </ng-template>\n    </ng-template>\n  </div>\n</form>\n",
+                        template: "<form class=\"cx-form\">\n  <div class=\"cx-form-group form-group\">\n    <!-- searchbox input -->\n    <input\n      class=\"cx-input form-control dropdown-menu-toggle\"\n      [ngClass]=\"{ 'show-mobile': isMobileSearchVisible }\"\n      type=\"text\"\n      placeholder=\"{{ 'searchBox.searchHere' | cxTranslate }}\"\n      aria-label=\"search\"\n      [ngbTypeahead]=\"typeahead\"\n      [resultTemplate]=\"rt\"\n      [formControl]=\"searchBoxControl\"\n      (keyup)=\"onKey($event)\"\n      (selectItem)=\"selectSuggestion($event)\"\n    />\n\n    <!-- searchbox button desktop -->\n    <button\n      class=\"cx-button cx-button-desktop\"\n      type=\"submit\"\n      aria-label=\"Submit\"\n      (click)=\"submitSearch()\"\n      [disabled]=\"!searchBoxControl?.value\"\n    >\n      <cx-icon [type]=\"iconTypes.SEARCH\"></cx-icon>\n    </button>\n\n    <!-- searchbox button mobile -->\n    <button\n      class=\"cx-button cx-button-mobile\"\n      type=\"button\"\n      aria-label=\"Search\"\n      (click)=\"toggleMobileSearchInput()\"\n    >\n      <cx-icon [type]=\"iconTypes.SEARCH\"></cx-icon>\n    </button>\n\n    <!-- searchbox results -->\n    <ng-template #rt let-suggestion=\"result\">\n      <div\n        *ngIf=\"!suggestion.code; else productView\"\n        class=\"cx-dropdown-content\"\n      >\n        {{ suggestion }}\n      </div>\n      <ng-template #productView>\n        <div\n          [routerLink]=\"\n            {\n              route: 'product',\n              params: suggestion | stripHtml\n            } | cxTranslateUrl\n          \"\n          class=\"cx-product\"\n        >\n          <cx-picture\n            [imageContainer]=\"suggestion.images?.PRIMARY\"\n            imageFormat=\"product\"\n            [imageAlt]=\"suggestion.summary\"\n          ></cx-picture>\n          <div [innerHtml]=\"suggestion.name\" class=\"cx-product-name\">\n            {{ suggestion.name }}\n          </div>\n          <div class=\"cx-product-price\">\n            {{ suggestion.price.formattedValue }}\n          </div>\n        </div>\n      </ng-template>\n    </ng-template>\n  </div>\n</form>\n",
                         encapsulation: i0.ViewEncapsulation.None,
                         changeDetection: i0.ChangeDetectionStrategy.OnPush
                     }] }
@@ -11207,6 +11516,7 @@
                                     },
                                 },
                             }))),
+                            IconModule,
                             i1.UrlTranslationModule,
                             i1.I18nModule,
                         ],
@@ -14822,6 +15132,16 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
+    exports.IconLoaderService = IconLoaderService;
+    exports.IconComponent = IconComponent;
+    exports.ICON_TYPES = ICON_TYPES;
+    exports.IconConfig = IconConfig;
+    exports.IconModule = IconModule;
+    exports.LanguageCurrencyComponent = LanguageCurrencyComponent;
+    exports.SiteContextComponentService = SiteContextComponentService;
+    exports.SiteContextSelectorComponent = SiteContextSelectorComponent;
+    exports.SiteContextSelectorModule = SiteContextSelectorModule;
+    exports.SiteContextType = SiteContextType;
     exports.LogoutGuard = LogoutGuard;
     exports.LogoutModule = LogoutModule;
     exports.CmsComponentData = CmsComponentData;
@@ -14961,12 +15281,8 @@
     exports.ɵbe = CartTotalsComponent;
     exports.ɵbd = CartTotalsModule;
     exports.ɵba = CartComponentModule;
-    exports.ɵbk = MiniCartComponent;
+    exports.ɵbj = MiniCartComponent;
     exports.ɵbi = MiniCartModule;
-    exports.ɵbz = LanguageCurrencyComponent;
-    exports.ɵbx = SiteContextComponentService;
-    exports.ɵby = SiteContextSelectorComponent;
-    exports.ɵbw = SiteContextSelectorModule;
     exports.ɵc = defaultCartPageConfig;
     exports.ɵe = BootstrapModule;
     exports.ɵt = DeliveryModeModule;
@@ -14980,63 +15296,63 @@
     exports.ɵs = ShippingAddressComponent;
     exports.ɵn = PromotionsComponent;
     exports.ɵm = PromotionsModule;
-    exports.ɵbl = guards$1;
-    exports.ɵbm = OrderConfirmationPageGuard;
-    exports.ɵcc = AddressBookComponent;
-    exports.ɵcb = AddressBookComponentService;
-    exports.ɵca = AddressBookModule;
-    exports.ɵcd = AddressCardComponent;
-    exports.ɵbj = BannerComponentService;
+    exports.ɵbk = guards$1;
+    exports.ɵbl = OrderConfirmationPageGuard;
+    exports.ɵby = AddressBookComponent;
+    exports.ɵbx = AddressBookComponentService;
+    exports.ɵbw = AddressBookModule;
+    exports.ɵbz = AddressCardComponent;
+    exports.ɵbs = BannerComponentService;
     exports.ɵbu = NavigationUIComponent;
     exports.ɵbt = NavigationComponentService;
     exports.ɵbv = ProductCarouselService;
-    exports.ɵda = addCmsRoute;
-    exports.ɵcg = guards;
+    exports.ɵcw = addCmsRoute;
+    exports.ɵcc = guards;
     exports.ɵa = PageLayoutService;
-    exports.ɵci = CmsGuardsService;
-    exports.ɵch = CmsI18nService;
-    exports.ɵcx = CloseAccountModule;
-    exports.ɵcz = CloseAccountModalComponent;
-    exports.ɵcy = CloseAccountComponent;
-    exports.ɵcl = OrderDetailsModule;
-    exports.ɵcm = OrderDetailsService;
-    exports.ɵce = OrderHistoryModule;
-    exports.ɵcn = PaymentMethodsModule;
-    exports.ɵcp = UpdateEmailFormComponent;
-    exports.ɵcq = UpdateEmailComponent;
-    exports.ɵco = UpdateEmailModule;
-    exports.ɵct = UpdatePasswordFormComponent;
-    exports.ɵcs = UpdatePasswordComponent;
-    exports.ɵcr = UpdatePasswordModule;
-    exports.ɵcw = UpdateProfileFormComponent;
-    exports.ɵcv = UpdateProfileComponent;
-    exports.ɵcu = UpdateProfileModule;
+    exports.ɵce = CmsGuardsService;
+    exports.ɵcd = CmsI18nService;
+    exports.ɵct = CloseAccountModule;
+    exports.ɵcv = CloseAccountModalComponent;
+    exports.ɵcu = CloseAccountComponent;
+    exports.ɵch = OrderDetailsModule;
+    exports.ɵci = OrderDetailsService;
+    exports.ɵca = OrderHistoryModule;
+    exports.ɵcj = PaymentMethodsModule;
+    exports.ɵcl = UpdateEmailFormComponent;
+    exports.ɵcm = UpdateEmailComponent;
+    exports.ɵck = UpdateEmailModule;
+    exports.ɵcp = UpdatePasswordFormComponent;
+    exports.ɵco = UpdatePasswordComponent;
+    exports.ɵcn = UpdatePasswordModule;
+    exports.ɵcs = UpdateProfileFormComponent;
+    exports.ɵcr = UpdateProfileComponent;
+    exports.ɵcq = UpdateProfileModule;
     exports.ɵb = OutletStyleService;
-    exports.ɵdv = StyleRefDirective;
-    exports.ɵdu = StyleRefModule;
-    exports.ɵcf = ProductViewComponent;
-    exports.ɵcj = ProductReviewsModule;
-    exports.ɵeb = provideConfigFromMetaTags;
-    exports.ɵbs = AddToHomeScreenBannerComponent;
-    exports.ɵbq = AddToHomeScreenBtnComponent;
-    exports.ɵbr = AddToHomeScreenComponent;
-    exports.ɵbn = PWAModuleConfig;
-    exports.ɵbo = defaultPWAModuleConfig;
-    exports.ɵbp = AddToHomeScreenService;
-    exports.ɵdf = AbstractStoreItemComponent;
-    exports.ɵdk = ScheduleComponent;
-    exports.ɵdd = StoreFinderGridComponent;
-    exports.ɵdl = StoreFinderHeaderComponent;
-    exports.ɵdj = StoreFinderListItemComponent;
-    exports.ɵdi = StoreFinderMapComponent;
-    exports.ɵdn = StoreFinderPaginationDetailsComponent;
-    exports.ɵdh = StoreFinderListComponent;
-    exports.ɵdb = StoreFinderSearchResultComponent;
-    exports.ɵdg = StoreFinderSearchComponent;
-    exports.ɵde = StoreFinderStoreDescriptionComponent;
-    exports.ɵdc = StoreFinderStoresCountComponent;
-    exports.ɵdm = StoreFinderComponent;
-    exports.ɵea = suffixUrlMatcher;
+    exports.ɵdr = StyleRefDirective;
+    exports.ɵdq = StyleRefModule;
+    exports.ɵcb = ProductViewComponent;
+    exports.ɵcf = ProductReviewsModule;
+    exports.ɵdx = provideConfigFromMetaTags;
+    exports.ɵbr = AddToHomeScreenBannerComponent;
+    exports.ɵbp = AddToHomeScreenBtnComponent;
+    exports.ɵbq = AddToHomeScreenComponent;
+    exports.ɵbm = PWAModuleConfig;
+    exports.ɵbn = defaultPWAModuleConfig;
+    exports.ɵbo = AddToHomeScreenService;
+    exports.ɵdb = AbstractStoreItemComponent;
+    exports.ɵdg = ScheduleComponent;
+    exports.ɵcz = StoreFinderGridComponent;
+    exports.ɵdh = StoreFinderHeaderComponent;
+    exports.ɵdf = StoreFinderListItemComponent;
+    exports.ɵde = StoreFinderMapComponent;
+    exports.ɵdj = StoreFinderPaginationDetailsComponent;
+    exports.ɵdd = StoreFinderListComponent;
+    exports.ɵcx = StoreFinderSearchResultComponent;
+    exports.ɵdc = StoreFinderSearchComponent;
+    exports.ɵda = StoreFinderStoreDescriptionComponent;
+    exports.ɵcy = StoreFinderStoresCountComponent;
+    exports.ɵdi = StoreFinderComponent;
+    exports.ɵdw = suffixUrlMatcher;
     exports.ɵh = CardComponent;
     exports.ɵg = CardModule;
     exports.ɵl = GenericLinkModule;
@@ -15044,28 +15360,28 @@
     exports.ɵj = SortingComponent;
     exports.ɵk = SpinnerModule;
     exports.ɵf = OnlyNumberDirective;
-    exports.ɵdz = HardcodedCheckoutComponent;
-    exports.ɵdy = CartNotEmptyGuard;
-    exports.ɵdx = GuardsModule;
-    exports.ɵdw = OrderConfirmationPageModule;
-    exports.ɵck = CurrentProductService;
-    exports.ɵdt = ForgotPasswordComponent;
-    exports.ɵds = ForgotPasswordModule;
-    exports.ɵdo = LoginComponentService;
-    exports.ɵdp = RegisterComponentModule;
-    exports.ɵdr = ResetPasswordFormComponent;
-    exports.ɵdq = ResetPasswordModule;
-    exports.ɵec = address;
-    exports.ɵed = cart;
-    exports.ɵee = checkout;
-    exports.ɵef = closeAccount;
-    exports.ɵeg = common$1;
-    exports.ɵeh = myAccount;
-    exports.ɵei = payment;
-    exports.ɵej = product;
-    exports.ɵek = pwa;
-    exports.ɵel = storeFinder;
-    exports.ɵem = user;
+    exports.ɵdv = HardcodedCheckoutComponent;
+    exports.ɵdu = CartNotEmptyGuard;
+    exports.ɵdt = GuardsModule;
+    exports.ɵds = OrderConfirmationPageModule;
+    exports.ɵcg = CurrentProductService;
+    exports.ɵdp = ForgotPasswordComponent;
+    exports.ɵdo = ForgotPasswordModule;
+    exports.ɵdk = LoginComponentService;
+    exports.ɵdl = RegisterComponentModule;
+    exports.ɵdn = ResetPasswordFormComponent;
+    exports.ɵdm = ResetPasswordModule;
+    exports.ɵdy = address;
+    exports.ɵdz = cart;
+    exports.ɵea = checkout;
+    exports.ɵeb = closeAccount;
+    exports.ɵec = common$1;
+    exports.ɵed = myAccount;
+    exports.ɵee = payment;
+    exports.ɵef = product;
+    exports.ɵeg = pwa;
+    exports.ɵeh = storeFinder;
+    exports.ɵei = user;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

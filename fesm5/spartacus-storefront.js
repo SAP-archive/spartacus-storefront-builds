@@ -1,17 +1,599 @@
 import { ServiceWorkerModule, ɵangular_packages_service_worker_service_worker_b } from '@angular/service-worker';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbTabsetModule, NgbAccordionModule, NgbTabsetConfig, NgbAccordionConfig, NgbRatingModule, NgbRatingConfig, NgbDropdownModule, NgbTypeaheadModule, NgbCollapseModule, NgbModalModule, NgbPaginationModule, NgbPaginationConfig, NgbModule, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { concat, from, isObservable, of, fromEvent, BehaviorSubject, combineLatest, Subscription, ReplaySubject, merge, Subject } from 'rxjs';
+import { of, concat, from, isObservable, fromEvent, BehaviorSubject, combineLatest, Subscription, ReplaySubject, merge, Subject } from 'rxjs';
 import { NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { __extends, __values, __spread, __read, __assign, __awaiter, __generator } from 'tslib';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { endWith, first, skipWhile, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, tap, withLatestFrom, takeWhile, take, multicast, refCount, delay } from 'rxjs/operators';
-import { isPlatformServer, CommonModule, DOCUMENT } from '@angular/common';
-import { AuthService, CmsService, PageType, provideConfigFactory, serverConfigFromMetaTagFactory, ServerConfig, GlobalMessageType, GlobalMessageService, WindowRef, CheckoutService, RoutingService, I18nModule, UserService, ConfigModule, TranslationService, TranslationChunkService, UrlTranslationModule, CartService, RoutingModule, CartModule, AuthGuard, ProductService, UserModule, ContextServiceMap, SiteContextModule, StoreDataService, GoogleMapRendererService, StoreFinderService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, CartDataService, CmsConfig, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, Config, ProductReviewService, CheckoutModule, defaultCmsModuleConfig, CmsModule, StripHtmlModule, PageMetaService, CmsPageTitleModule, ProductModule, ProductSearchService, GlobalMessageModule, OccUserService, OccMiscsService, OccOrderService, OccConfig, TranslatePipe, StoreFinderCoreModule, DynamicAttributeService, CxApiService, ComponentMapperService, NotAuthGuard, PageRobotsMeta } from '@spartacus/core';
+import { filter, map, switchMap, take, endWith, first, skipWhile, debounceTime, distinctUntilChanged, startWith, tap, withLatestFrom, takeWhile, multicast, refCount, delay } from 'rxjs/operators';
+import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
+import { Config, ContextServiceMap, CURRENCY_CONTEXT_ID, LANGUAGE_CONTEXT_ID, ConfigModule, SiteContextModule, AuthService, CmsService, PageType, provideConfigFactory, serverConfigFromMetaTagFactory, ServerConfig, GlobalMessageType, GlobalMessageService, WindowRef, CheckoutService, RoutingService, I18nModule, UserService, TranslationService, TranslationChunkService, UrlTranslationModule, CartService, RoutingModule, CartModule, AuthGuard, ProductService, UserModule, StoreDataService, GoogleMapRendererService, StoreFinderService, CartDataService, CmsConfig, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, ProductReviewService, CheckoutModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, defaultCmsModuleConfig, CmsModule, OccUserService, OccMiscsService, OccOrderService, OccConfig, GlobalMessageModule, TranslatePipe, StoreFinderCoreModule, DynamicAttributeService, NotAuthGuard, PageRobotsMeta, CxApiService, ComponentMapperService } from '@spartacus/core';
 import { Title, Meta } from '@angular/platform-browser';
-import { Injectable, NgModule, ElementRef, Input, Directive, Component, ChangeDetectionStrategy, EventEmitter, Output, ViewChild, HostListener, Renderer2, Injector, Optional, Inject, APP_INITIALIZER, TemplateRef, ViewEncapsulation, ChangeDetectorRef, forwardRef, defineInjectable, inject, INJECTOR, PLATFORM_ID, ViewContainerRef } from '@angular/core';
-import { Router, RouterModule, ActivatedRoute, NavigationStart } from '@angular/router';
+import { Injectable, NgModule, ElementRef, Input, Directive, Component, ChangeDetectionStrategy, EventEmitter, Output, ViewChild, HostListener, Renderer2, Inject, APP_INITIALIZER, Injector, ViewEncapsulation, TemplateRef, ChangeDetectorRef, forwardRef, Optional, defineInjectable, inject, INJECTOR, PLATFORM_ID, ViewContainerRef } from '@angular/core';
+import { RouterModule, Router, ActivatedRoute, NavigationStart } from '@angular/router';
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @enum {string} */
+var ICON_TYPES = {
+    CART: 'shopping-cart',
+    SEARCH: 'search',
+    GRID_MODE: 'th-large',
+    LIST_MODE: 'menu-hamburger',
+    CARET_DOWN: 'angle-down',
+};
+/**
+ * @abstract
+ */
+var  /**
+ * @abstract
+ */
+IconConfig = /** @class */ (function () {
+    function IconConfig() {
+    }
+    return IconConfig;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var IconLoaderService = /** @class */ (function () {
+    function IconLoaderService(config) {
+        this.config = config;
+    }
+    /**
+     * @return {?}
+     */
+    IconLoaderService.prototype.useSvg = /**
+     * @return {?}
+     */
+    function () {
+        return this.config.icon && this.config.icon.useSvg;
+    };
+    /**
+     * Returns the path to the svg link. The link supports path names
+     * as well, if the config has been setup to support a svg file path.
+     * Additionally, the icon prefix will be taken into account to prefix the
+     * icon IDs in the SVG.
+     */
+    /**
+     * Returns the path to the svg link. The link supports path names
+     * as well, if the config has been setup to support a svg file path.
+     * Additionally, the icon prefix will be taken into account to prefix the
+     * icon IDs in the SVG.
+     * @param {?} iconType
+     * @return {?}
+     */
+    IconLoaderService.prototype.getSvgPath = /**
+     * Returns the path to the svg link. The link supports path names
+     * as well, if the config has been setup to support a svg file path.
+     * Additionally, the icon prefix will be taken into account to prefix the
+     * icon IDs in the SVG.
+     * @param {?} iconType
+     * @return {?}
+     */
+    function (iconType) {
+        if (!this.useSvg()) {
+            return null;
+        }
+        /** @type {?} */
+        var path = '';
+        if (this.config.icon && this.config.icon.svgPath) {
+            path = this.config.icon.svgPath;
+        }
+        // if there's no mapping configured, we use the default value
+        path += '#';
+        if (this.config.icon && this.config.icon.prefix) {
+            path += this.config.icon.prefix;
+        }
+        path += this.getMappedType(iconType);
+        return path;
+    };
+    /**
+     *
+     * returns an array of css classes that can be used to
+     * render the icon by CSS / font. This is driven by the `iconType`
+     * and the icon configuration, so that multiple icon fonts are
+     * supported, such as font awesome, glypicons, Octicons, etc.
+     */
+    /**
+     *
+     * returns an array of css classes that can be used to
+     * render the icon by CSS / font. This is driven by the `iconType`
+     * and the icon configuration, so that multiple icon fonts are
+     * supported, such as font awesome, glypicons, Octicons, etc.
+     * @param {?} iconType
+     * @return {?}
+     */
+    IconLoaderService.prototype.getStyleClasses = /**
+     *
+     * returns an array of css classes that can be used to
+     * render the icon by CSS / font. This is driven by the `iconType`
+     * and the icon configuration, so that multiple icon fonts are
+     * supported, such as font awesome, glypicons, Octicons, etc.
+     * @param {?} iconType
+     * @return {?}
+     */
+    function (iconType) {
+        /** @type {?} */
+        var styleClasses = [];
+        if (this.config.icon && this.config.icon.iconClass) {
+            styleClasses.push(this.config.icon.iconClass);
+        }
+        /** @type {?} */
+        var type = this.getMappedType(iconType);
+        if (this.config.icon && this.config.icon.prefix) {
+            type = this.config.icon.prefix + type;
+        }
+        styleClasses.push(type);
+        return styleClasses;
+    };
+    /**
+     * @private
+     * @param {?} iconType
+     * @return {?}
+     */
+    IconLoaderService.prototype.getMappedType = /**
+     * @private
+     * @param {?} iconType
+     * @return {?}
+     */
+    function (iconType) {
+        return this.config.icon &&
+            this.config.icon.icons &&
+            this.config.icon.icons[iconType]
+            ? this.config.icon.icons[iconType]
+            : iconType;
+    };
+    IconLoaderService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    IconLoaderService.ctorParameters = function () { return [
+        { type: IconConfig }
+    ]; };
+    /** @nocollapse */ IconLoaderService.ngInjectableDef = defineInjectable({ factory: function IconLoaderService_Factory() { return new IconLoaderService(inject(IconConfig)); }, token: IconLoaderService, providedIn: "root" });
+    return IconLoaderService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var IconComponent = /** @class */ (function () {
+    function IconComponent(iconLoader, renderer, hostElement) {
+        this.iconLoader = iconLoader;
+        this.renderer = renderer;
+        this.hostElement = hostElement;
+        /**
+         * Keeps the given style classes so that we can
+         * clean them up when the icon changes
+         */
+        this.iconStyleClasses = [];
+    }
+    /**
+     * @return {?}
+     */
+    IconComponent.prototype.ngOnChanges = /**
+     * @return {?}
+     */
+    function () {
+        this.addStyleClasses();
+    };
+    Object.defineProperty(IconComponent.prototype, "useSvg", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.iconLoader.useSvg();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(IconComponent.prototype, "path", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.iconLoader.getSvgPath(this.type);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @private
+     * @return {?}
+     */
+    IconComponent.prototype.addStyleClasses = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        if (this.useSvg) {
+            return;
+        }
+        this.clearStyleClasses();
+        this.iconStyleClasses = this.iconLoader.getStyleClasses(this.type);
+        this.iconStyleClasses.forEach(function (cls) {
+            _this.renderer.addClass(_this.hostElement.nativeElement, cls);
+        });
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    IconComponent.prototype.clearStyleClasses = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.iconStyleClasses.forEach(function (cls) {
+            _this.renderer.removeClass(_this.hostElement.nativeElement, cls);
+        });
+    };
+    IconComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-icon',
+                    template: "<ng-container *ngIf=\"useSvg\">\n  <svg>\n    <use [attr.xlink:href]=\"path\"></use>\n  </svg>\n</ng-container>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    IconComponent.ctorParameters = function () { return [
+        { type: IconLoaderService },
+        { type: Renderer2 },
+        { type: ElementRef }
+    ]; };
+    IconComponent.propDecorators = {
+        type: [{ type: Input }]
+    };
+    return IconComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var IconModule = /** @class */ (function () {
+    function IconModule() {
+    }
+    IconModule.decorators = [
+        { type: NgModule, args: [{
+                    declarations: [IconComponent],
+                    imports: [CommonModule],
+                    providers: [{ provide: IconConfig, useExisting: Config }],
+                    exports: [IconComponent],
+                },] }
+    ];
+    return IconModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var LanguageCurrencyComponent = /** @class */ (function () {
+    function LanguageCurrencyComponent() {
+    }
+    LanguageCurrencyComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-language-currency-selector',
+                    template: "\n    <cx-site-context-selector context=\"LANGUAGE\"></cx-site-context-selector>\n    <cx-site-context-selector context=\"CURRENCY\"></cx-site-context-selector>\n  ",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    return LanguageCurrencyComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @abstract
+ * @template T
+ */
+var  /**
+ * @abstract
+ * @template T
+ */
+CmsComponentData = /** @class */ (function () {
+    function CmsComponentData() {
+    }
+    return CmsComponentData;
+}());
+
+var _a;
+/** @type {?} */
+var LABELS = (_a = {},
+    _a[LANGUAGE_CONTEXT_ID] = 'Language',
+    _a[CURRENCY_CONTEXT_ID] = 'Currency',
+    _a);
+var SiteContextComponentService = /** @class */ (function () {
+    function SiteContextComponentService(componentData, contextServiceMap, injector) {
+        this.componentData = componentData;
+        this.contextServiceMap = contextServiceMap;
+        this.injector = injector;
+    }
+    /**
+     * @param {?=} context
+     * @return {?}
+     */
+    SiteContextComponentService.prototype.getItems = /**
+     * @param {?=} context
+     * @return {?}
+     */
+    function (context) {
+        var _this = this;
+        return this.getService(context).pipe(switchMap(function (service) { return service.getAll(); }), switchMap(function (items) {
+            return _this.getContext(context).pipe(switchMap(function (ctx) {
+                items.forEach(function (item) {
+                    return (item.label = _this.getOptionLabel(item, ctx));
+                });
+                return of(items);
+            }));
+        }));
+    };
+    /**
+     * @param {?=} context
+     * @return {?}
+     */
+    SiteContextComponentService.prototype.getActiveItem = /**
+     * @param {?=} context
+     * @return {?}
+     */
+    function (context) {
+        return this.getService(context).pipe(switchMap(function (service) { return service.getActive(); }));
+    };
+    /**
+     * @param {?=} context
+     * @return {?}
+     */
+    SiteContextComponentService.prototype.getLabel = /**
+     * @param {?=} context
+     * @return {?}
+     */
+    function (context) {
+        return this.getContext(context).pipe(map(function (ctx) {
+            return LABELS[ctx];
+        }));
+    };
+    /**
+     * @param {?} value
+     * @param {?=} context
+     * @return {?}
+     */
+    SiteContextComponentService.prototype.setActive = /**
+     * @param {?} value
+     * @param {?=} context
+     * @return {?}
+     */
+    function (value, context) {
+        this.getService(context)
+            .pipe(take(1))
+            .subscribe(function (service) {
+            service.setActive(value);
+        });
+    };
+    /**
+     * @protected
+     * @param {?=} context
+     * @return {?}
+     */
+    SiteContextComponentService.prototype.getService = /**
+     * @protected
+     * @param {?=} context
+     * @return {?}
+     */
+    function (context) {
+        var _this = this;
+        return this.getContext(context).pipe(map(function (ctx) { return _this.getInjectedService(ctx); }), filter(Boolean));
+    };
+    /**
+     * @protected
+     * @param {?=} context
+     * @return {?}
+     */
+    SiteContextComponentService.prototype.getContext = /**
+     * @protected
+     * @param {?=} context
+     * @return {?}
+     */
+    function (context) {
+        if (context) {
+            return of(context);
+        }
+        else if (this.componentData) {
+            return this.componentData.data$.pipe(map(function (data) { return data.context; }));
+        }
+    };
+    /**
+     * @protected
+     * @param {?} context
+     * @return {?}
+     */
+    SiteContextComponentService.prototype.getInjectedService = /**
+     * @protected
+     * @param {?} context
+     * @return {?}
+     */
+    function (context) {
+        return this.injector.get(this.contextServiceMap[context], null);
+    };
+    /**
+     * @protected
+     * @param {?} item
+     * @param {?=} context
+     * @return {?}
+     */
+    SiteContextComponentService.prototype.getOptionLabel = /**
+     * @protected
+     * @param {?} item
+     * @param {?=} context
+     * @return {?}
+     */
+    function (item, context) {
+        switch (context) {
+            case LANGUAGE_CONTEXT_ID:
+                return item.nativeName;
+                break;
+            case CURRENCY_CONTEXT_ID:
+                return item.symbol + ' ' + item.isocode;
+                break;
+            default:
+                return item.isocode;
+        }
+    };
+    SiteContextComponentService.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    SiteContextComponentService.ctorParameters = function () { return [
+        { type: CmsComponentData, decorators: [{ type: Optional }] },
+        { type: ContextServiceMap },
+        { type: Injector }
+    ]; };
+    return SiteContextComponentService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @enum {string} */
+var SiteContextType = {
+    LANGUAGE: 'LANGUAGE',
+    CURRENCY: 'CURRENCY',
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var SiteContextSelectorComponent = /** @class */ (function () {
+    function SiteContextSelectorComponent(componentService) {
+        this.componentService = componentService;
+        this.iconTypes = ICON_TYPES;
+    }
+    Object.defineProperty(SiteContextSelectorComponent.prototype, "items$", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.componentService.getItems(this.context);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SiteContextSelectorComponent.prototype, "activeItem$", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.componentService.getActiveItem(this.context);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SiteContextSelectorComponent.prototype, "active", {
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this.componentService.setActive(value, this.context);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SiteContextSelectorComponent.prototype, "label$", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.componentService.getLabel(this.context);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    SiteContextSelectorComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-site-context-selector',
+                    template: "<label *ngIf=\"(items$ | async)?.length > 1 && (items$ | async) as items\">\n  <span>{{ label$ | async }}</span>\n  <select (change)=\"active = $event.target.value\">\n    <option\n      *ngFor=\"let item of items\"\n      value=\"{{ item.isocode }}\"\n      [selected]=\"(activeItem$ | async) === item.isocode\"\n      >{{ item.label }}</option\n    > </select\n  ><cx-icon [type]=\"iconTypes.CARET_DOWN\"></cx-icon>\n</label>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    /** @nocollapse */
+    SiteContextSelectorComponent.ctorParameters = function () { return [
+        { type: SiteContextComponentService }
+    ]; };
+    SiteContextSelectorComponent.propDecorators = {
+        context: [{ type: Input }]
+    };
+    return SiteContextSelectorComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var SiteContextSelectorModule = /** @class */ (function () {
+    function SiteContextSelectorModule() {
+    }
+    SiteContextSelectorModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        RouterModule,
+                        ConfigModule.withConfig((/** @type {?} */ ({
+                            cmsComponents: {
+                                CMSSiteContextComponent: {
+                                    selector: 'cx-site-context-selector',
+                                    providers: [
+                                        {
+                                            provide: SiteContextComponentService,
+                                            useClass: SiteContextComponentService,
+                                            deps: [CmsComponentData, ContextServiceMap, Injector],
+                                        },
+                                    ],
+                                },
+                                LanguageCurrencyComponent: {
+                                    selector: 'cx-language-currency-selector',
+                                },
+                            },
+                        }))),
+                        SiteContextModule.forRoot(),
+                        IconModule,
+                    ],
+                    providers: [SiteContextComponentService],
+                    declarations: [SiteContextSelectorComponent, LanguageCurrencyComponent],
+                    entryComponents: [SiteContextSelectorComponent, LanguageCurrencyComponent],
+                },] }
+    ];
+    return SiteContextSelectorModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -1464,24 +2046,6 @@ var PageSlotComponent = /** @class */ (function () {
         position: [{ type: Input }]
     };
     return PageSlotComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @abstract
- * @template T
- */
-var  /**
- * @abstract
- * @template T
- */
-CmsComponentData = /** @class */ (function () {
-    function CmsComponentData() {
-    }
-    return CmsComponentData;
 }());
 
 /**
@@ -4118,352 +4682,39 @@ var CartTotalsModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var BannerComponentService = /** @class */ (function () {
-    function BannerComponentService(component, config) {
-        var _this = this;
-        this.component = component;
-        this.config = config;
-        this.convertToAbsoluteUrl = map(function (url) {
-            return url.startsWith('http') ? url : _this.getBaseUrl() + url;
-        });
-        // TODO: move to a more generic location
-        // TODO: Make configurable
-        this.formats = [
-            { code: 'mobile', width: 200 },
-            { code: 'tablet', width: 500 },
-            { code: 'desktop', width: 800 },
-            { code: 'widescreen', width: 1200 },
-        ];
-    }
-    /**
-     * @param {?} data
-     * @return {?}
-     */
-    BannerComponentService.hasMedia = /**
-     * @param {?} data
-     * @return {?}
-     */
-    function (data) {
-        return !!data.media;
-    };
-    /**
-     * @param {?} data
-     * @return {?}
-     */
-    BannerComponentService.hasHeadline = /**
-     * @param {?} data
-     * @return {?}
-     */
-    function (data) {
-        return !!data.headline;
-    };
-    /**
-     * @param {?} data
-     * @return {?}
-     */
-    BannerComponentService.hasContent = /**
-     * @param {?} data
-     * @return {?}
-     */
-    function (data) {
-        return !!data.content;
-    };
-    /**
-     * @return {?}
-     */
-    BannerComponentService.prototype.getComponentData = /**
-     * @return {?}
-     */
-    function () {
-        return this.component.data$;
-    };
-    /**
-     * @return {?}
-     */
-    BannerComponentService.prototype.hasImage = /**
-     * @return {?}
-     */
-    function () {
-        return this.getComponentData().pipe(map(BannerComponentService.hasMedia));
-    };
-    /**
-     * @return {?}
-     */
-    BannerComponentService.prototype.hasHeadline = /**
-     * @return {?}
-     */
-    function () {
-        return this.getComponentData().pipe(map(BannerComponentService.hasHeadline));
-    };
-    /**
-     * @return {?}
-     */
-    BannerComponentService.prototype.hasContent = /**
-     * @return {?}
-     */
-    function () {
-        return this.getComponentData().pipe(map(BannerComponentService.hasContent));
-    };
-    /**
-     * @return {?}
-     */
-    BannerComponentService.prototype.getImageUrl = /**
-     * @return {?}
-     */
-    function () {
-        return this.getComponentData().pipe(map(function (data) {
-            return BannerComponentService.hasMedia(data)
-                ? ((/** @type {?} */ (data.media))).url
-                : '';
-        }));
-    };
-    /**
-     * @return {?}
-     */
-    BannerComponentService.prototype.getResponsiveImageUrl = /**
-     * @return {?}
-     */
-    function () {
-        return this.getComponentData().pipe(map(function (data) {
-            return BannerComponentService.hasMedia(data)
-                ? ((/** @type {?} */ (data.media))).desktop.url
-                : '';
-        }));
-    };
-    /**
-     * @return {?}
-     */
-    BannerComponentService.prototype.getTarget = /**
-     * @return {?}
-     */
-    function () {
-        return this.getComponentData().pipe(map(function (data) {
-            return !data.external || data.external === 'false' ? '_self' : '_blank';
-        }));
-    };
-    /**
-     * @return {?}
-     */
-    BannerComponentService.prototype.getAltText = /**
-     * @return {?}
-     */
-    function () {
-        return this.getComponentData().pipe(map(function (data) {
-            return BannerComponentService.hasMedia(data)
-                ? ((/** @type {?} */ (data.media))).altText
-                : '';
-        }));
-    };
-    /**
-     * @return {?}
-     */
-    BannerComponentService.prototype.getHeadline = /**
-     * @return {?}
-     */
-    function () {
-        return this.getComponentData().pipe(map(function (data) {
-            return BannerComponentService.hasHeadline(data) ? data.headline : '';
-        }));
-    };
-    /**
-     * @return {?}
-     */
-    BannerComponentService.prototype.getContent = /**
-     * @return {?}
-     */
-    function () {
-        return this.getComponentData().pipe(map(function (data) { return (BannerComponentService.hasContent(data) ? data.content : ''); }));
-    };
-    /**
-     * @return {?}
-     */
-    BannerComponentService.prototype.getBaseUrl = /**
-     * @return {?}
-     */
-    function () {
-        return this.config.backend.occ.baseUrl || '';
-    };
-    /**
-     * @return {?}
-     */
-    BannerComponentService.prototype.getImageAbsoluteUrl = /**
-     * @return {?}
-     */
-    function () {
-        return this.getImageUrl().pipe(this.convertToAbsoluteUrl);
-    };
-    /**
-     * @return {?}
-     */
-    BannerComponentService.prototype.getResponsiveImageAbsoluteUrl = /**
-     * @return {?}
-     */
-    function () {
-        return this.getResponsiveImageUrl().pipe(this.convertToAbsoluteUrl);
-    };
-    /**
-     * @return {?}
-     */
-    BannerComponentService.prototype.getResponsiveSrcSet = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        return this.getComponentData().pipe(map(function (data) {
-            return _this.formats.reduce(function (srcset, format) {
-                if (typeof data.media[format.code] !== 'undefined') {
-                    return (srcset += "" + _this.getBaseUrl() + data.media[format.code].url + " " + format.width + "w, ");
-                }
-                else {
-                    return srcset;
-                }
-            }, '');
-        }));
-    };
-    /**
-     * @return {?}
-     */
-    BannerComponentService.prototype.getComponentUID = /**
-     * @return {?}
-     */
-    function () {
-        return this.component.uid;
-    };
-    BannerComponentService.decorators = [
-        { type: Injectable }
-    ];
-    /** @nocollapse */
-    BannerComponentService.ctorParameters = function () { return [
-        { type: CmsComponentData },
-        { type: CmsConfig }
-    ]; };
-    return BannerComponentService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var BannerComponent = /** @class */ (function () {
-    function BannerComponent(service) {
-        this.service = service;
-    }
-    BannerComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-banner',
-                    template: "<p class=\"cx-banner-headline\" *ngIf=\"(service.hasHeadline() | async)\">\n  {{ service.getHeadline() | async }}\n</p>\n<cx-generic-link\n  *ngIf=\"\n    (service.hasImage() | async) && (service.getComponentData() | async) as data\n  \"\n  [url]=\"data.urlLink\"\n  [target]=\"service.getTarget() | async\"\n>\n  <img\n    [title]=\"service.getAltText() | async\"\n    [alt]=\"service.getAltText() | async\"\n    [src]=\"service.getImageAbsoluteUrl() | async\"\n    alt=\"\"\n  />\n</cx-generic-link>\n<p class=\"cx-banner-content\" *ngIf=\"(service.hasContent() | async)\">\n  {{ service.getContent() | async }}\n</p>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                }] }
-    ];
-    /** @nocollapse */
-    BannerComponent.ctorParameters = function () { return [
-        { type: BannerComponentService }
-    ]; };
-    return BannerComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var ResponsiveBannerComponent = /** @class */ (function (_super) {
-    __extends(ResponsiveBannerComponent, _super);
-    function ResponsiveBannerComponent() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    /**
-     * @return {?}
-     */
-    ResponsiveBannerComponent.prototype.getClass = /**
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var RESPONSIVE_BANNER_CLASS = 'responsive-banner';
-        return RESPONSIVE_BANNER_CLASS + " " + this.service.getComponentUID();
-    };
-    ResponsiveBannerComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-responsive-banner',
-                    template: "<cx-generic-link\n  fxFlex\n  class=\"link\"\n  *ngIf=\"service.hasImage() && (service.getComponentData() | async) as data\"\n  [url]=\"data.urlLink\"\n  [target]=\"service.getTarget() | async\"\n>\n  <picture [class]=\"getClass()\">\n    <img\n      [src]=\"service.getResponsiveImageAbsoluteUrl() | async\"\n      [srcset]=\"service.getResponsiveSrcSet() | async\"\n      sizes=\"100%\"\n      alt=\"\"\n    />\n  </picture>\n</cx-generic-link>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                }] }
-    ];
-    return ResponsiveBannerComponent;
-}(BannerComponent));
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var BannerModule = /** @class */ (function () {
-    function BannerModule() {
-    }
-    BannerModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        CommonModule,
-                        RouterModule,
-                        GenericLinkModule,
-                        ConfigModule.withConfig((/** @type {?} */ ({
-                            cmsComponents: {
-                                SimpleResponsiveBannerComponent: {
-                                    selector: 'cx-responsive-banner',
-                                    providers: [
-                                        {
-                                            provide: BannerComponentService,
-                                            useClass: BannerComponentService,
-                                            deps: [CmsComponentData, CmsConfig],
-                                        },
-                                    ],
-                                },
-                                BannerComponent: {
-                                    selector: 'cx-banner',
-                                    providers: [
-                                        {
-                                            provide: BannerComponentService,
-                                            useClass: BannerComponentService,
-                                            deps: [CmsComponentData, CmsConfig],
-                                        },
-                                    ],
-                                },
-                                SimpleBannerComponent: {
-                                    selector: 'cx-banner',
-                                    providers: [
-                                        {
-                                            provide: BannerComponentService,
-                                            useClass: BannerComponentService,
-                                            deps: [CmsComponentData, CmsConfig],
-                                        },
-                                    ],
-                                },
-                            },
-                        }))),
-                    ],
-                    declarations: [BannerComponent, ResponsiveBannerComponent],
-                    exports: [BannerComponent, ResponsiveBannerComponent],
-                    entryComponents: [BannerComponent, ResponsiveBannerComponent],
-                },] }
-    ];
-    return BannerModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 var MiniCartComponent = /** @class */ (function () {
     function MiniCartComponent(component, cartService) {
         this.component = component;
         this.cartService = cartService;
-        this.cart$ = this.cartService.getActive();
+        this.iconTypes = ICON_TYPES;
     }
+    Object.defineProperty(MiniCartComponent.prototype, "quantity$", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.cartService
+                .getActive()
+                .pipe(map(function (cart) { return cart.deliveryItemsQuantity || 0; }));
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MiniCartComponent.prototype, "total$", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.cartService.getActive().pipe(filter(function (cart) { return !!cart.totalPrice; }), map(function (cart) { return cart.totalPrice.formattedValue; }));
+        },
+        enumerable: true,
+        configurable: true
+    });
     MiniCartComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-mini-cart',
-                    template: "<a\n  *ngIf=\"(cart$ | async) as cart\"\n  aria-label=\"Cart\"\n  [routerLink]=\"{ route: 'cart' } | cxTranslateUrl\"\n>\n  <svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 35 28\">\n    <g transform=\"translate(-4758 4746)\">\n      <path\n        d=\"M4758.7-4746h4.7c0.3,0.1,0.6,0.3,0.7,0.5l1.7,7.5h23.6c0.4,0,0.7,0.4,0.7,0.8c0,0.1,0,0.1,0,0.2l-4,12\n c-0.1,0.2-0.4,0.4-0.7,0.4h-16.4l0.3,1.3h14.1c1.5,0,2.7,1.2,2.7,2.7c0,1.5-1.2,2.7-2.7,2.7l0,0c-1.5,0-2.6-1.2-2.6-2.6\n c0-0.5,0.1-1,0.4-1.4h-10.1c0.8,1.2,0.4,2.9-0.9,3.6c-0.4,0.3-0.9,0.4-1.4,0.4c-1.5,0-2.7-1.2-2.7-2.7c0-1.2,0.8-2.2,1.9-2.5\n l-5.1-21.4h-4.1c-0.3,0-0.6-0.2-0.7-0.6c0,0,0-0.1,0-0.1C4758-4745.7,4758.2-4746,4758.7-4746C4758.6-4746,4758.6-4746,4758.7-4746\n z\"\n      />\n    </g>\n  </svg>\n\n  <span\n    class=\"count\"\n    *ngIf=\"cart.deliveryItemsQuantity || '0' as qty\"\n    [attr.aria-label]=\"'My cart. ' + qty + ' items currently in your cart.'\"\n    >{{ qty }}</span\n  >\n</a>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: [""]
+                    template: "<a\n  [attr.aria-label]=\"(quantity$ | async) + ' items currently in your cart'\"\n  [routerLink]=\"{ route: ['cart'] } | cxTranslateUrl\"\n>\n  <cx-icon [type]=\"iconTypes.CART\"></cx-icon>\n\n  <span class=\"total\">{{ total$ | async }}</span>\n  <span class=\"count\">{{ quantity$ | async }}</span>\n</a>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     /** @nocollapse */
@@ -4486,8 +4737,6 @@ var MiniCartModule = /** @class */ (function () {
                     imports: [
                         CommonModule,
                         RouterModule,
-                        BannerModule,
-                        MediaModule,
                         CartModule,
                         ConfigModule.withConfig((/** @type {?} */ ({
                             cmsComponents: {
@@ -4495,6 +4744,7 @@ var MiniCartModule = /** @class */ (function () {
                             },
                         }))),
                         UrlTranslationModule,
+                        IconModule,
                     ],
                     declarations: [MiniCartComponent],
                     entryComponents: [MiniCartComponent],
@@ -6704,6 +6954,340 @@ var OrderConfirmationModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var BannerComponentService = /** @class */ (function () {
+    function BannerComponentService(component, config) {
+        var _this = this;
+        this.component = component;
+        this.config = config;
+        this.convertToAbsoluteUrl = map(function (url) {
+            return url.startsWith('http') ? url : _this.getBaseUrl() + url;
+        });
+        // TODO: move to a more generic location
+        // TODO: Make configurable
+        this.formats = [
+            { code: 'mobile', width: 200 },
+            { code: 'tablet', width: 500 },
+            { code: 'desktop', width: 800 },
+            { code: 'widescreen', width: 1200 },
+        ];
+    }
+    /**
+     * @param {?} data
+     * @return {?}
+     */
+    BannerComponentService.hasMedia = /**
+     * @param {?} data
+     * @return {?}
+     */
+    function (data) {
+        return !!data.media;
+    };
+    /**
+     * @param {?} data
+     * @return {?}
+     */
+    BannerComponentService.hasHeadline = /**
+     * @param {?} data
+     * @return {?}
+     */
+    function (data) {
+        return !!data.headline;
+    };
+    /**
+     * @param {?} data
+     * @return {?}
+     */
+    BannerComponentService.hasContent = /**
+     * @param {?} data
+     * @return {?}
+     */
+    function (data) {
+        return !!data.content;
+    };
+    /**
+     * @return {?}
+     */
+    BannerComponentService.prototype.getComponentData = /**
+     * @return {?}
+     */
+    function () {
+        return this.component.data$;
+    };
+    /**
+     * @return {?}
+     */
+    BannerComponentService.prototype.hasImage = /**
+     * @return {?}
+     */
+    function () {
+        return this.getComponentData().pipe(map(BannerComponentService.hasMedia));
+    };
+    /**
+     * @return {?}
+     */
+    BannerComponentService.prototype.hasHeadline = /**
+     * @return {?}
+     */
+    function () {
+        return this.getComponentData().pipe(map(BannerComponentService.hasHeadline));
+    };
+    /**
+     * @return {?}
+     */
+    BannerComponentService.prototype.hasContent = /**
+     * @return {?}
+     */
+    function () {
+        return this.getComponentData().pipe(map(BannerComponentService.hasContent));
+    };
+    /**
+     * @return {?}
+     */
+    BannerComponentService.prototype.getImageUrl = /**
+     * @return {?}
+     */
+    function () {
+        return this.getComponentData().pipe(map(function (data) {
+            return BannerComponentService.hasMedia(data)
+                ? ((/** @type {?} */ (data.media))).url
+                : '';
+        }));
+    };
+    /**
+     * @return {?}
+     */
+    BannerComponentService.prototype.getResponsiveImageUrl = /**
+     * @return {?}
+     */
+    function () {
+        return this.getComponentData().pipe(map(function (data) {
+            return BannerComponentService.hasMedia(data)
+                ? ((/** @type {?} */ (data.media))).desktop.url
+                : '';
+        }));
+    };
+    /**
+     * @return {?}
+     */
+    BannerComponentService.prototype.getTarget = /**
+     * @return {?}
+     */
+    function () {
+        return this.getComponentData().pipe(map(function (data) {
+            return !data.external || data.external === 'false' ? '_self' : '_blank';
+        }));
+    };
+    /**
+     * @return {?}
+     */
+    BannerComponentService.prototype.getAltText = /**
+     * @return {?}
+     */
+    function () {
+        return this.getComponentData().pipe(map(function (data) {
+            return BannerComponentService.hasMedia(data)
+                ? ((/** @type {?} */ (data.media))).altText
+                : '';
+        }));
+    };
+    /**
+     * @return {?}
+     */
+    BannerComponentService.prototype.getHeadline = /**
+     * @return {?}
+     */
+    function () {
+        return this.getComponentData().pipe(map(function (data) {
+            return BannerComponentService.hasHeadline(data) ? data.headline : '';
+        }));
+    };
+    /**
+     * @return {?}
+     */
+    BannerComponentService.prototype.getContent = /**
+     * @return {?}
+     */
+    function () {
+        return this.getComponentData().pipe(map(function (data) { return (BannerComponentService.hasContent(data) ? data.content : ''); }));
+    };
+    /**
+     * @return {?}
+     */
+    BannerComponentService.prototype.getBaseUrl = /**
+     * @return {?}
+     */
+    function () {
+        return this.config.backend.occ.baseUrl || '';
+    };
+    /**
+     * @return {?}
+     */
+    BannerComponentService.prototype.getImageAbsoluteUrl = /**
+     * @return {?}
+     */
+    function () {
+        return this.getImageUrl().pipe(this.convertToAbsoluteUrl);
+    };
+    /**
+     * @return {?}
+     */
+    BannerComponentService.prototype.getResponsiveImageAbsoluteUrl = /**
+     * @return {?}
+     */
+    function () {
+        return this.getResponsiveImageUrl().pipe(this.convertToAbsoluteUrl);
+    };
+    /**
+     * @return {?}
+     */
+    BannerComponentService.prototype.getResponsiveSrcSet = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        return this.getComponentData().pipe(map(function (data) {
+            return _this.formats.reduce(function (srcset, format) {
+                if (typeof data.media[format.code] !== 'undefined') {
+                    return (srcset += "" + _this.getBaseUrl() + data.media[format.code].url + " " + format.width + "w, ");
+                }
+                else {
+                    return srcset;
+                }
+            }, '');
+        }));
+    };
+    /**
+     * @return {?}
+     */
+    BannerComponentService.prototype.getComponentUID = /**
+     * @return {?}
+     */
+    function () {
+        return this.component.uid;
+    };
+    BannerComponentService.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    BannerComponentService.ctorParameters = function () { return [
+        { type: CmsComponentData },
+        { type: CmsConfig }
+    ]; };
+    return BannerComponentService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var BannerComponent = /** @class */ (function () {
+    function BannerComponent(service) {
+        this.service = service;
+    }
+    BannerComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-banner',
+                    template: "<p class=\"cx-banner-headline\" *ngIf=\"(service.hasHeadline() | async)\">\n  {{ service.getHeadline() | async }}\n</p>\n<cx-generic-link\n  *ngIf=\"\n    (service.hasImage() | async) && (service.getComponentData() | async) as data\n  \"\n  [url]=\"data.urlLink\"\n  [target]=\"service.getTarget() | async\"\n>\n  <img\n    [title]=\"service.getAltText() | async\"\n    [alt]=\"service.getAltText() | async\"\n    [src]=\"service.getImageAbsoluteUrl() | async\"\n    alt=\"\"\n  />\n</cx-generic-link>\n<p class=\"cx-banner-content\" *ngIf=\"(service.hasContent() | async)\">\n  {{ service.getContent() | async }}\n</p>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    /** @nocollapse */
+    BannerComponent.ctorParameters = function () { return [
+        { type: BannerComponentService }
+    ]; };
+    return BannerComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ResponsiveBannerComponent = /** @class */ (function (_super) {
+    __extends(ResponsiveBannerComponent, _super);
+    function ResponsiveBannerComponent() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    /**
+     * @return {?}
+     */
+    ResponsiveBannerComponent.prototype.getClass = /**
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var RESPONSIVE_BANNER_CLASS = 'responsive-banner';
+        return RESPONSIVE_BANNER_CLASS + " " + this.service.getComponentUID();
+    };
+    ResponsiveBannerComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-responsive-banner',
+                    template: "<cx-generic-link\n  fxFlex\n  class=\"link\"\n  *ngIf=\"service.hasImage() && (service.getComponentData() | async) as data\"\n  [url]=\"data.urlLink\"\n  [target]=\"service.getTarget() | async\"\n>\n  <picture [class]=\"getClass()\">\n    <img\n      [src]=\"service.getResponsiveImageAbsoluteUrl() | async\"\n      [srcset]=\"service.getResponsiveSrcSet() | async\"\n      sizes=\"100%\"\n      alt=\"\"\n    />\n  </picture>\n</cx-generic-link>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    return ResponsiveBannerComponent;
+}(BannerComponent));
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var BannerModule = /** @class */ (function () {
+    function BannerModule() {
+    }
+    BannerModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        RouterModule,
+                        GenericLinkModule,
+                        ConfigModule.withConfig((/** @type {?} */ ({
+                            cmsComponents: {
+                                SimpleResponsiveBannerComponent: {
+                                    selector: 'cx-responsive-banner',
+                                    providers: [
+                                        {
+                                            provide: BannerComponentService,
+                                            useClass: BannerComponentService,
+                                            deps: [CmsComponentData, CmsConfig],
+                                        },
+                                    ],
+                                },
+                                BannerComponent: {
+                                    selector: 'cx-banner',
+                                    providers: [
+                                        {
+                                            provide: BannerComponentService,
+                                            useClass: BannerComponentService,
+                                            deps: [CmsComponentData, CmsConfig],
+                                        },
+                                    ],
+                                },
+                                SimpleBannerComponent: {
+                                    selector: 'cx-banner',
+                                    providers: [
+                                        {
+                                            provide: BannerComponentService,
+                                            useClass: BannerComponentService,
+                                            deps: [CmsComponentData, CmsConfig],
+                                        },
+                                    ],
+                                },
+                            },
+                        }))),
+                    ],
+                    declarations: [BannerComponent, ResponsiveBannerComponent],
+                    exports: [BannerComponent, ResponsiveBannerComponent],
+                    entryComponents: [BannerComponent, ResponsiveBannerComponent],
+                },] }
+    ];
+    return BannerModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var BreadcrumbComponent = /** @class */ (function () {
     function BreadcrumbComponent(component, pageMetaService) {
         this.component = component;
@@ -7107,286 +7691,6 @@ var CategoryNavigationModule = /** @class */ (function () {
                 },] }
     ];
     return CategoryNavigationModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var LanguageCurrencyComponent = /** @class */ (function () {
-    function LanguageCurrencyComponent() {
-    }
-    LanguageCurrencyComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-language-currency-selector',
-                    template: "\n    <cx-site-context-selector context=\"LANGUAGE\"></cx-site-context-selector>\n    <cx-site-context-selector context=\"CURRENCY\"></cx-site-context-selector>\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                }] }
-    ];
-    return LanguageCurrencyComponent;
-}());
-
-var _a;
-/** @type {?} */
-var LABELS = (_a = {},
-    _a[LANGUAGE_CONTEXT_ID] = 'Language',
-    _a[CURRENCY_CONTEXT_ID] = 'Currency',
-    _a);
-var SiteContextComponentService = /** @class */ (function () {
-    function SiteContextComponentService(componentData, contextServiceMap, injector) {
-        this.componentData = componentData;
-        this.contextServiceMap = contextServiceMap;
-        this.injector = injector;
-    }
-    /**
-     * @param {?=} context
-     * @return {?}
-     */
-    SiteContextComponentService.prototype.getItems = /**
-     * @param {?=} context
-     * @return {?}
-     */
-    function (context) {
-        var _this = this;
-        return this.getService(context).pipe(switchMap(function (service) { return service.getAll(); }), switchMap(function (items) {
-            return _this.getContext(context).pipe(switchMap(function (ctx) {
-                items.forEach(function (item) {
-                    return (item.label = _this.getOptionLabel(item, ctx));
-                });
-                return of(items);
-            }));
-        }));
-    };
-    /**
-     * @param {?=} context
-     * @return {?}
-     */
-    SiteContextComponentService.prototype.getActiveItem = /**
-     * @param {?=} context
-     * @return {?}
-     */
-    function (context) {
-        return this.getService(context).pipe(switchMap(function (service) { return service.getActive(); }));
-    };
-    /**
-     * @param {?=} context
-     * @return {?}
-     */
-    SiteContextComponentService.prototype.getLabel = /**
-     * @param {?=} context
-     * @return {?}
-     */
-    function (context) {
-        return this.getContext(context).pipe(map(function (ctx) {
-            return LABELS[ctx];
-        }));
-    };
-    /**
-     * @param {?} value
-     * @param {?=} context
-     * @return {?}
-     */
-    SiteContextComponentService.prototype.setActive = /**
-     * @param {?} value
-     * @param {?=} context
-     * @return {?}
-     */
-    function (value, context) {
-        this.getService(context)
-            .pipe(take(1))
-            .subscribe(function (service) {
-            service.setActive(value);
-        });
-    };
-    /**
-     * @protected
-     * @param {?=} context
-     * @return {?}
-     */
-    SiteContextComponentService.prototype.getService = /**
-     * @protected
-     * @param {?=} context
-     * @return {?}
-     */
-    function (context) {
-        var _this = this;
-        return this.getContext(context).pipe(map(function (ctx) { return _this.getInjectedService(ctx); }), filter(Boolean));
-    };
-    /**
-     * @protected
-     * @param {?=} context
-     * @return {?}
-     */
-    SiteContextComponentService.prototype.getContext = /**
-     * @protected
-     * @param {?=} context
-     * @return {?}
-     */
-    function (context) {
-        if (context) {
-            return of(context);
-        }
-        else if (this.componentData) {
-            return this.componentData.data$.pipe(map(function (data) { return data.context; }));
-        }
-    };
-    /**
-     * @protected
-     * @param {?} context
-     * @return {?}
-     */
-    SiteContextComponentService.prototype.getInjectedService = /**
-     * @protected
-     * @param {?} context
-     * @return {?}
-     */
-    function (context) {
-        return this.injector.get(this.contextServiceMap[context], null);
-    };
-    /**
-     * @protected
-     * @param {?} item
-     * @param {?=} context
-     * @return {?}
-     */
-    SiteContextComponentService.prototype.getOptionLabel = /**
-     * @protected
-     * @param {?} item
-     * @param {?=} context
-     * @return {?}
-     */
-    function (item, context) {
-        switch (context) {
-            case LANGUAGE_CONTEXT_ID:
-                return item.nativeName;
-                break;
-            case CURRENCY_CONTEXT_ID:
-                return item.symbol + ' ' + item.isocode;
-                break;
-            default:
-                return item.isocode;
-        }
-    };
-    SiteContextComponentService.decorators = [
-        { type: Injectable }
-    ];
-    /** @nocollapse */
-    SiteContextComponentService.ctorParameters = function () { return [
-        { type: CmsComponentData, decorators: [{ type: Optional }] },
-        { type: ContextServiceMap },
-        { type: Injector }
-    ]; };
-    return SiteContextComponentService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var SiteContextSelectorComponent = /** @class */ (function () {
-    function SiteContextSelectorComponent(componentService) {
-        this.componentService = componentService;
-    }
-    Object.defineProperty(SiteContextSelectorComponent.prototype, "items$", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this.componentService.getItems(this.context);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SiteContextSelectorComponent.prototype, "activeItem$", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this.componentService.getActiveItem(this.context);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SiteContextSelectorComponent.prototype, "active", {
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            this.componentService.setActive(value, this.context);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SiteContextSelectorComponent.prototype, "label$", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this.componentService.getLabel(this.context);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    SiteContextSelectorComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-site-context-selector',
-                    template: "<label *ngIf=\"(items$ | async)?.length > 1 && (items$ | async) as items\">\n  <span>{{ label$ | async }}</span>\n  <select (change)=\"active = $event.target.value\">\n    <option\n      *ngFor=\"let item of items\"\n      value=\"{{ item.isocode }}\"\n      [selected]=\"(activeItem$ | async) === item.isocode\"\n      >{{ item.label }}</option\n    >\n  </select>\n</label>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                }] }
-    ];
-    /** @nocollapse */
-    SiteContextSelectorComponent.ctorParameters = function () { return [
-        { type: SiteContextComponentService }
-    ]; };
-    SiteContextSelectorComponent.propDecorators = {
-        context: [{ type: Input }]
-    };
-    return SiteContextSelectorComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var SiteContextSelectorModule = /** @class */ (function () {
-    function SiteContextSelectorModule() {
-    }
-    SiteContextSelectorModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        CommonModule,
-                        RouterModule,
-                        ConfigModule.withConfig((/** @type {?} */ ({
-                            cmsComponents: {
-                                CMSSiteContextComponent: {
-                                    selector: 'cx-site-context-selector',
-                                    providers: [
-                                        {
-                                            provide: SiteContextComponentService,
-                                            useClass: SiteContextComponentService,
-                                            deps: [CmsComponentData, ContextServiceMap, Injector],
-                                        },
-                                    ],
-                                },
-                                LanguageCurrencyComponent: {
-                                    selector: 'cx-language-currency-selector',
-                                },
-                            },
-                        }))),
-                        SiteContextModule.forRoot(),
-                    ],
-                    providers: [SiteContextComponentService],
-                    declarations: [SiteContextSelectorComponent, LanguageCurrencyComponent],
-                    entryComponents: [SiteContextSelectorComponent, LanguageCurrencyComponent],
-                },] }
-    ];
-    return SiteContextSelectorModule;
 }());
 
 /**
@@ -10743,6 +11047,7 @@ var SearchBoxComponent = /** @class */ (function () {
     function SearchBoxComponent(service) {
         var _this = this;
         this.service = service;
+        this.iconTypes = ICON_TYPES;
         this.searchBoxControl = new FormControl();
         this.queryText$ = new Subject();
         this.typeahead = function (text$) {
@@ -10826,7 +11131,7 @@ var SearchBoxComponent = /** @class */ (function () {
     SearchBoxComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-searchbox',
-                    template: "<form class=\"cx-form\">\n  <div class=\"cx-form-group form-group\">\n    <!-- searchbox input -->\n    <input\n      class=\"cx-input form-control dropdown-menu-toggle\"\n      [ngClass]=\"{ 'show-mobile': isMobileSearchVisible }\"\n      type=\"text\"\n      placeholder=\"{{ 'searchBox.searchHere' | cxTranslate }}\"\n      aria-label=\"search\"\n      [ngbTypeahead]=\"typeahead\"\n      [resultTemplate]=\"rt\"\n      [formControl]=\"searchBoxControl\"\n      (keyup)=\"onKey($event)\"\n      (selectItem)=\"selectSuggestion($event)\"\n    />\n    <!-- searchbox button desktop -->\n    <button\n      class=\"cx-button cx-button-desktop\"\n      type=\"submit\"\n      aria-label=\"Submit \"\n      (click)=\"submitSearch()\"\n      [disabled]=\"!searchBoxControl?.value\"\n    >\n      <svg\n        class=\"cx-icon \"\n        xmlns=\"http://www.w3.org/2000/svg \"\n        viewBox=\"-4472 4760 26 26 \"\n      >\n        <path\n          id=\"Trac\u00E9_982 \"\n          data-name=\"Trac\u00E9 982 \"\n          d=\"M9.75,19.5a9.241,9.241,0,0,0,6.067-2.167l8.342,8.342a1.072,1.072,0,0,0,1.517-1.517l-8.342-8.342A9.854,9.854,0,0,0,19.5,9.75,9.75,9.75,0,1,0,9.75,19.5Zm0-17.333A7.583,7.583,0,1,1,2.167,9.75,7.537,7.537,0,0,1,9.75,2.167Z \"\n          transform=\"translate(-4472 4760) \"\n        />\n      </svg>\n    </button>\n    <!-- searchbox button mobile -->\n    <button\n      class=\"cx-button cx-button-mobile\"\n      type=\"button\"\n      aria-label=\"Search \"\n      (click)=\"toggleMobileSearchInput()\"\n    >\n      <svg\n        class=\"cx-icon \"\n        xmlns=\"http://www.w3.org/2000/svg \"\n        viewBox=\"-4472 4760 26 26 \"\n      >\n        <path\n          id=\"Trac\u00E9_982 \"\n          data-name=\"Trac\u00E9 982 \"\n          d=\"M9.75,19.5a9.241,9.241,0,0,0,6.067-2.167l8.342,8.342a1.072,1.072,0,0,0,1.517-1.517l-8.342-8.342A9.854,9.854,0,0,0,19.5,9.75,9.75,9.75,0,1,0,9.75,19.5Zm0-17.333A7.583,7.583,0,1,1,2.167,9.75,7.537,7.537,0,0,1,9.75,2.167Z \"\n          transform=\"translate(-4472 4760) \"\n        />\n      </svg>\n    </button>\n    <!-- searchbox results -->\n    <ng-template #rt let-suggestion=\"result\">\n      <div\n        *ngIf=\"!suggestion.code; else productView\"\n        class=\"cx-dropdown-content\"\n      >\n        {{ suggestion }}\n      </div>\n      <ng-template #productView>\n        <div\n          [routerLink]=\"\n            {\n              route: 'product',\n              params: suggestion | stripHtml\n            } | cxTranslateUrl\n          \"\n          class=\"cx-product\"\n        >\n          <cx-picture\n            [imageContainer]=\"suggestion.images?.PRIMARY\"\n            imageFormat=\"product\"\n            [imageAlt]=\"suggestion.summary\"\n          ></cx-picture>\n          <div [innerHtml]=\"suggestion.name\" class=\"cx-product-name\">\n            {{ suggestion.name }}\n          </div>\n          <div class=\"cx-product-price\">\n            {{ suggestion.price.formattedValue }}\n          </div>\n        </div>\n      </ng-template>\n    </ng-template>\n  </div>\n</form>\n",
+                    template: "<form class=\"cx-form\">\n  <div class=\"cx-form-group form-group\">\n    <!-- searchbox input -->\n    <input\n      class=\"cx-input form-control dropdown-menu-toggle\"\n      [ngClass]=\"{ 'show-mobile': isMobileSearchVisible }\"\n      type=\"text\"\n      placeholder=\"{{ 'searchBox.searchHere' | cxTranslate }}\"\n      aria-label=\"search\"\n      [ngbTypeahead]=\"typeahead\"\n      [resultTemplate]=\"rt\"\n      [formControl]=\"searchBoxControl\"\n      (keyup)=\"onKey($event)\"\n      (selectItem)=\"selectSuggestion($event)\"\n    />\n\n    <!-- searchbox button desktop -->\n    <button\n      class=\"cx-button cx-button-desktop\"\n      type=\"submit\"\n      aria-label=\"Submit\"\n      (click)=\"submitSearch()\"\n      [disabled]=\"!searchBoxControl?.value\"\n    >\n      <cx-icon [type]=\"iconTypes.SEARCH\"></cx-icon>\n    </button>\n\n    <!-- searchbox button mobile -->\n    <button\n      class=\"cx-button cx-button-mobile\"\n      type=\"button\"\n      aria-label=\"Search\"\n      (click)=\"toggleMobileSearchInput()\"\n    >\n      <cx-icon [type]=\"iconTypes.SEARCH\"></cx-icon>\n    </button>\n\n    <!-- searchbox results -->\n    <ng-template #rt let-suggestion=\"result\">\n      <div\n        *ngIf=\"!suggestion.code; else productView\"\n        class=\"cx-dropdown-content\"\n      >\n        {{ suggestion }}\n      </div>\n      <ng-template #productView>\n        <div\n          [routerLink]=\"\n            {\n              route: 'product',\n              params: suggestion | stripHtml\n            } | cxTranslateUrl\n          \"\n          class=\"cx-product\"\n        >\n          <cx-picture\n            [imageContainer]=\"suggestion.images?.PRIMARY\"\n            imageFormat=\"product\"\n            [imageAlt]=\"suggestion.summary\"\n          ></cx-picture>\n          <div [innerHtml]=\"suggestion.name\" class=\"cx-product-name\">\n            {{ suggestion.name }}\n          </div>\n          <div class=\"cx-product-price\">\n            {{ suggestion.price.formattedValue }}\n          </div>\n        </div>\n      </ng-template>\n    </ng-template>\n  </div>\n</form>\n",
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
@@ -10873,6 +11178,7 @@ var SearchBoxModule = /** @class */ (function () {
                                 },
                             },
                         }))),
+                        IconModule,
                         UrlTranslationModule,
                         I18nModule,
                     ],
@@ -14452,6 +14758,6 @@ var translations = {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { LogoutGuard, LogoutModule, CmsComponentData, PageSlotModule, PageSlotComponent, PageComponentModule, ComponentWrapperDirective, defaultCmsContentConfig, SeoMetaService, initSeoService, SeoModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, CheckoutComponentModule, MultiStepCheckoutModule, ShippingAddressModule, OrderConfirmationModule, SuggestedAddressDialogComponent, AddressFormComponent, PaymentFormComponent, ReviewSubmitComponent, DeliveryModeComponent, MultiStepCheckoutComponent, OrderConfirmationComponent, BannerComponent, BannerModule, ResponsiveBannerComponent, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, CmsLibModule, FooterNavigationComponent, FooterNavigationModule, LinkComponent, LinkModule, NavigationComponent, NavigationModule, ParagraphComponent, CmsParagraphModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, TabParagraphContainerComponent, TabParagraphContainerModule, CmsRouteModule, CmsModule$1 as CmsModule, CmsPageGuard, PageLayoutModule, PageLayoutComponent, CmsMappingService, CmsRoutesService, GlobalMessageComponentModule, GlobalMessageComponent, OrderModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderHistoryComponent, PaymentMethodsComponent, OccModule, OutletModule, OutletService, OutletDirective, OutletRefModule, OutletRefDirective, ProductModule$1 as ProductModule, ProductDetailsModule, ProductListModule, ProductTabsModule, ProductSummaryComponent, ProductDetailsComponent, ProductImagesComponent, ProductListItemComponent, ProductGridItemComponent, ProductListComponent, ProductFacetNavigationComponent, ProductAttributesComponent, ProductReviewsComponent, ProductTabsComponent, ProductDetailOutlets, ProductTabsOutlets, pwaConfigurationFactory, pwaFactory, PwaModule, StoreFinderModule, StorefrontModule, SuffixRoutesModule, UiModule, UiFrameworkModule, ComponentsModule, MediaModule, FormComponentsModule, PaginationAndSortingModule, SpinnerComponent, PictureComponent, StarRatingComponent, ItemCounterComponent, GenericLinkComponent, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, LayoutModule, MainModule, StorefrontComponent, UserComponentModule, LoginModule, LoginComponent, LoginFormModule, LoginFormComponent, RegisterComponent, translations, AddToCartComponent as ɵbg, AddToCartModule as ɵbf, AddedToCartDialogComponent as ɵbh, CartDetailsComponent as ɵbc, CartDetailsModule as ɵbb, CartItemListComponent as ɵq, CartItemComponent as ɵo, CartSharedModule as ɵd, OrderSummaryComponent as ɵp, CartTotalsComponent as ɵbe, CartTotalsModule as ɵbd, CartComponentModule as ɵba, MiniCartComponent as ɵbk, MiniCartModule as ɵbi, LanguageCurrencyComponent as ɵbz, SiteContextComponentService as ɵbx, SiteContextSelectorComponent as ɵby, SiteContextSelectorModule as ɵbw, defaultCartPageConfig as ɵc, BootstrapModule as ɵe, DeliveryModeModule as ɵt, BillingAddressFormComponent as ɵx, BillingAddressFormModule as ɵw, PaymentFormModule as ɵv, PaymentMethodComponent as ɵy, PaymentMethodModule as ɵu, ReviewSubmitModule as ɵz, AddressFormModule as ɵr, ShippingAddressComponent as ɵs, PromotionsComponent as ɵn, PromotionsModule as ɵm, guards$1 as ɵbl, OrderConfirmationPageGuard as ɵbm, AddressBookComponent as ɵcc, AddressBookComponentService as ɵcb, AddressBookModule as ɵca, AddressCardComponent as ɵcd, BannerComponentService as ɵbj, NavigationUIComponent as ɵbu, NavigationComponentService as ɵbt, ProductCarouselService as ɵbv, addCmsRoute as ɵda, guards as ɵcg, PageLayoutService as ɵa, CmsGuardsService as ɵci, CmsI18nService as ɵch, CloseAccountModule as ɵcx, CloseAccountModalComponent as ɵcz, CloseAccountComponent as ɵcy, OrderDetailsModule as ɵcl, OrderDetailsService as ɵcm, OrderHistoryModule as ɵce, PaymentMethodsModule as ɵcn, UpdateEmailFormComponent as ɵcp, UpdateEmailComponent as ɵcq, UpdateEmailModule as ɵco, UpdatePasswordFormComponent as ɵct, UpdatePasswordComponent as ɵcs, UpdatePasswordModule as ɵcr, UpdateProfileFormComponent as ɵcw, UpdateProfileComponent as ɵcv, UpdateProfileModule as ɵcu, OutletStyleService as ɵb, StyleRefDirective as ɵdv, StyleRefModule as ɵdu, ProductViewComponent as ɵcf, ProductReviewsModule as ɵcj, provideConfigFromMetaTags as ɵeb, AddToHomeScreenBannerComponent as ɵbs, AddToHomeScreenBtnComponent as ɵbq, AddToHomeScreenComponent as ɵbr, PWAModuleConfig as ɵbn, defaultPWAModuleConfig as ɵbo, AddToHomeScreenService as ɵbp, AbstractStoreItemComponent as ɵdf, ScheduleComponent as ɵdk, StoreFinderGridComponent as ɵdd, StoreFinderHeaderComponent as ɵdl, StoreFinderListItemComponent as ɵdj, StoreFinderMapComponent as ɵdi, StoreFinderPaginationDetailsComponent as ɵdn, StoreFinderListComponent as ɵdh, StoreFinderSearchResultComponent as ɵdb, StoreFinderSearchComponent as ɵdg, StoreFinderStoreDescriptionComponent as ɵde, StoreFinderStoresCountComponent as ɵdc, StoreFinderComponent as ɵdm, suffixUrlMatcher as ɵea, CardComponent as ɵh, CardModule as ɵg, GenericLinkModule as ɵl, PaginationComponent as ɵi, SortingComponent as ɵj, SpinnerModule as ɵk, OnlyNumberDirective as ɵf, HardcodedCheckoutComponent as ɵdz, CartNotEmptyGuard as ɵdy, GuardsModule as ɵdx, OrderConfirmationPageModule as ɵdw, CurrentProductService as ɵck, ForgotPasswordComponent as ɵdt, ForgotPasswordModule as ɵds, LoginComponentService as ɵdo, RegisterComponentModule as ɵdp, ResetPasswordFormComponent as ɵdr, ResetPasswordModule as ɵdq, address as ɵec, cart as ɵed, checkout as ɵee, closeAccount as ɵef, common as ɵeg, myAccount as ɵeh, payment as ɵei, product as ɵej, pwa as ɵek, storeFinder as ɵel, user as ɵem };
+export { IconLoaderService, IconComponent, ICON_TYPES, IconConfig, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, LogoutGuard, LogoutModule, CmsComponentData, PageSlotModule, PageSlotComponent, PageComponentModule, ComponentWrapperDirective, defaultCmsContentConfig, SeoMetaService, initSeoService, SeoModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, CheckoutComponentModule, MultiStepCheckoutModule, ShippingAddressModule, OrderConfirmationModule, SuggestedAddressDialogComponent, AddressFormComponent, PaymentFormComponent, ReviewSubmitComponent, DeliveryModeComponent, MultiStepCheckoutComponent, OrderConfirmationComponent, BannerComponent, BannerModule, ResponsiveBannerComponent, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, CmsLibModule, FooterNavigationComponent, FooterNavigationModule, LinkComponent, LinkModule, NavigationComponent, NavigationModule, ParagraphComponent, CmsParagraphModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, TabParagraphContainerComponent, TabParagraphContainerModule, CmsRouteModule, CmsModule$1 as CmsModule, CmsPageGuard, PageLayoutModule, PageLayoutComponent, CmsMappingService, CmsRoutesService, GlobalMessageComponentModule, GlobalMessageComponent, OrderModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderHistoryComponent, PaymentMethodsComponent, OccModule, OutletModule, OutletService, OutletDirective, OutletRefModule, OutletRefDirective, ProductModule$1 as ProductModule, ProductDetailsModule, ProductListModule, ProductTabsModule, ProductSummaryComponent, ProductDetailsComponent, ProductImagesComponent, ProductListItemComponent, ProductGridItemComponent, ProductListComponent, ProductFacetNavigationComponent, ProductAttributesComponent, ProductReviewsComponent, ProductTabsComponent, ProductDetailOutlets, ProductTabsOutlets, pwaConfigurationFactory, pwaFactory, PwaModule, StoreFinderModule, StorefrontModule, SuffixRoutesModule, UiModule, UiFrameworkModule, ComponentsModule, MediaModule, FormComponentsModule, PaginationAndSortingModule, SpinnerComponent, PictureComponent, StarRatingComponent, ItemCounterComponent, GenericLinkComponent, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, LayoutModule, MainModule, StorefrontComponent, UserComponentModule, LoginModule, LoginComponent, LoginFormModule, LoginFormComponent, RegisterComponent, translations, AddToCartComponent as ɵbg, AddToCartModule as ɵbf, AddedToCartDialogComponent as ɵbh, CartDetailsComponent as ɵbc, CartDetailsModule as ɵbb, CartItemListComponent as ɵq, CartItemComponent as ɵo, CartSharedModule as ɵd, OrderSummaryComponent as ɵp, CartTotalsComponent as ɵbe, CartTotalsModule as ɵbd, CartComponentModule as ɵba, MiniCartComponent as ɵbj, MiniCartModule as ɵbi, defaultCartPageConfig as ɵc, BootstrapModule as ɵe, DeliveryModeModule as ɵt, BillingAddressFormComponent as ɵx, BillingAddressFormModule as ɵw, PaymentFormModule as ɵv, PaymentMethodComponent as ɵy, PaymentMethodModule as ɵu, ReviewSubmitModule as ɵz, AddressFormModule as ɵr, ShippingAddressComponent as ɵs, PromotionsComponent as ɵn, PromotionsModule as ɵm, guards$1 as ɵbk, OrderConfirmationPageGuard as ɵbl, AddressBookComponent as ɵby, AddressBookComponentService as ɵbx, AddressBookModule as ɵbw, AddressCardComponent as ɵbz, BannerComponentService as ɵbs, NavigationUIComponent as ɵbu, NavigationComponentService as ɵbt, ProductCarouselService as ɵbv, addCmsRoute as ɵcw, guards as ɵcc, PageLayoutService as ɵa, CmsGuardsService as ɵce, CmsI18nService as ɵcd, CloseAccountModule as ɵct, CloseAccountModalComponent as ɵcv, CloseAccountComponent as ɵcu, OrderDetailsModule as ɵch, OrderDetailsService as ɵci, OrderHistoryModule as ɵca, PaymentMethodsModule as ɵcj, UpdateEmailFormComponent as ɵcl, UpdateEmailComponent as ɵcm, UpdateEmailModule as ɵck, UpdatePasswordFormComponent as ɵcp, UpdatePasswordComponent as ɵco, UpdatePasswordModule as ɵcn, UpdateProfileFormComponent as ɵcs, UpdateProfileComponent as ɵcr, UpdateProfileModule as ɵcq, OutletStyleService as ɵb, StyleRefDirective as ɵdr, StyleRefModule as ɵdq, ProductViewComponent as ɵcb, ProductReviewsModule as ɵcf, provideConfigFromMetaTags as ɵdx, AddToHomeScreenBannerComponent as ɵbr, AddToHomeScreenBtnComponent as ɵbp, AddToHomeScreenComponent as ɵbq, PWAModuleConfig as ɵbm, defaultPWAModuleConfig as ɵbn, AddToHomeScreenService as ɵbo, AbstractStoreItemComponent as ɵdb, ScheduleComponent as ɵdg, StoreFinderGridComponent as ɵcz, StoreFinderHeaderComponent as ɵdh, StoreFinderListItemComponent as ɵdf, StoreFinderMapComponent as ɵde, StoreFinderPaginationDetailsComponent as ɵdj, StoreFinderListComponent as ɵdd, StoreFinderSearchResultComponent as ɵcx, StoreFinderSearchComponent as ɵdc, StoreFinderStoreDescriptionComponent as ɵda, StoreFinderStoresCountComponent as ɵcy, StoreFinderComponent as ɵdi, suffixUrlMatcher as ɵdw, CardComponent as ɵh, CardModule as ɵg, GenericLinkModule as ɵl, PaginationComponent as ɵi, SortingComponent as ɵj, SpinnerModule as ɵk, OnlyNumberDirective as ɵf, HardcodedCheckoutComponent as ɵdv, CartNotEmptyGuard as ɵdu, GuardsModule as ɵdt, OrderConfirmationPageModule as ɵds, CurrentProductService as ɵcg, ForgotPasswordComponent as ɵdp, ForgotPasswordModule as ɵdo, LoginComponentService as ɵdk, RegisterComponentModule as ɵdl, ResetPasswordFormComponent as ɵdn, ResetPasswordModule as ɵdm, address as ɵdy, cart as ɵdz, checkout as ɵea, closeAccount as ɵeb, common as ɵec, myAccount as ɵed, payment as ɵee, product as ɵef, pwa as ɵeg, storeFinder as ɵeh, user as ɵei };
 
 //# sourceMappingURL=spartacus-storefront.js.map
