@@ -8,6 +8,2061 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var AddedToCartDialogComponent = /** @class */ (function () {
+        function AddedToCartDialogComponent(activeModal, cartService, fb) {
+            this.activeModal = activeModal;
+            this.cartService = cartService;
+            this.fb = fb;
+            this.quantity = 0;
+            this.form = this.fb.group({});
+        }
+        /**
+         * @return {?}
+         */
+        AddedToCartDialogComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.loaded$ = this.loaded$.pipe(operators.tap(function (res) {
+                    if (_this.previousLoaded !== res) {
+                        _this.finishedLoading = _this.previousLoaded === false;
+                        _this.previousLoaded = res;
+                    }
+                }));
+                this.entry$ = this.entry$.pipe(operators.tap(function (entry) {
+                    if (entry) {
+                        var code = entry.product.code;
+                        if (!_this.form.controls[code]) {
+                            _this.form.setControl(code, _this.createEntryFormGroup(entry));
+                        }
+                        else {
+                            /** @type {?} */
+                            var entryForm = ( /** @type {?} */(_this.form.controls[code]));
+                            entryForm.controls.quantity.setValue(entry.quantity);
+                        }
+                        _this.form.markAsPristine();
+                    }
+                }));
+            };
+        /**
+         * @return {?}
+         */
+        AddedToCartDialogComponent.prototype.ngAfterViewChecked = /**
+         * @return {?}
+         */
+            function () {
+                if (this.finishedLoading) {
+                    this.finishedLoading = false;
+                    /** @type {?} */
+                    var elementToFocus = ( /** @type {?} */(this.dialog.nativeElement.querySelector("[ngbAutofocus]")));
+                    if (elementToFocus) {
+                        elementToFocus.focus();
+                    }
+                }
+            };
+        /**
+         * @param {?} item
+         * @return {?}
+         */
+        AddedToCartDialogComponent.prototype.removeEntry = /**
+         * @param {?} item
+         * @return {?}
+         */
+            function (item) {
+                this.cartService.removeEntry(item);
+                delete this.form.controls[item.product.code];
+                this.activeModal.dismiss('Removed');
+            };
+        /**
+         * @param {?} __0
+         * @return {?}
+         */
+        AddedToCartDialogComponent.prototype.updateEntry = /**
+         * @param {?} __0
+         * @return {?}
+         */
+            function (_a) {
+                var item = _a.item, updatedQuantity = _a.updatedQuantity;
+                this.cartService.updateEntry(item.entryNumber, updatedQuantity);
+            };
+        /**
+         * @private
+         * @param {?} entry
+         * @return {?}
+         */
+        AddedToCartDialogComponent.prototype.createEntryFormGroup = /**
+         * @private
+         * @param {?} entry
+         * @return {?}
+         */
+            function (entry) {
+                return this.fb.group({
+                    entryNumber: entry.entryNumber,
+                    quantity: entry.quantity,
+                });
+            };
+        AddedToCartDialogComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-added-to-cart-dialog',
+                        template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) as loaded; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.itemsAddedToYourCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"activeModal.dismiss('Cross click')\"\n      >\n        <span aria-hidden=\"true\">&times;</span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"(entry$ | async) as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [isReadOnly]=\"false\"\n            [parent]=\"form.controls[entry.product.code]\"\n            [cartIsLoading]=\"!loaded\"\n            (remove)=\"removeEntry($event)\"\n            (update)=\"updateEntry($event)\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"(cart$ | async) as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n            <div>{{ cart.totalPrice.formattedValue }}</div>\n          </div>\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ route: 'cart' } | cxTranslateUrl\"\n              class=\"btn btn-primary\"\n              ngbAutoFocus\n              (click)=\"!form.dirty && activeModal.dismiss('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ route: 'checkout' } | cxTranslateUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"\n                !form.dirty && activeModal.dismiss('Proceed To Checkout click')\n              \"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"activeModal.dismiss('Cross click')\"\n      >\n        <span aria-hidden=\"true\">&times;</span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n",
+                        styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-dialog-header{padding:var(--cx-padding,2rem 1.75rem .85rem);border-width:var(--cx-border-width,0)}.cx-dialog-title{font-size:var(--cx-font-size,1.375rem);font-weight:var(--cx-g-font-weight-semi);line-height:var(--cx-line-height,1.22222)}.cx-dialog-body{padding:var(--cx-padding,1rem 1rem 0 1rem)}@media (max-width:767.98px){.cx-dialog-body{padding:var(--cx-padding,0)}}.cx-dialog-row{margin:var(--cx-margin,0);display:var(--cx-display,flex);padding:var(--cx-padding,0 .875rem 2.875rem);max-width:var(--cx-max-width,100%);flex-wrap:var(--cx-flex-wrap,wrap)}@media (max-width:767.98px){.cx-dialog-row{flex-direction:var(--cx-flex-direction,column);padding:var(--cx-padding,0)}.cx-dialog-item{padding:var(--cx-padding,2rem)}}.cx-dialog-separator{border-width:var(--cx-border-width,1px 0 0 0);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light))}.cx-dialog-actions{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column);padding:var(--cx-padding,0 1rem 0 2.5rem);border-width:var(--cx-border-width,0 0 0 1px);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light))}@media (max-width:767.98px){.cx-dialog-actions{border-width:var(--cx-border-width,0);padding:var(--cx-padding,1.875rem)}}.cx-dialog-total{font-size:var(--cx-font-size,1.125rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);display:var(--cx-display,flex);justify-content:var(--cx-justify-content,space-between);padding:var(--cx-padding,0 0 1.25rem 0)}.cx-dialog-buttons{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column)}.cx-dialog-buttons .btn-primary{margin:var(--cx-margin,0 0 .625rem 0)}"]
+                    }] }
+        ];
+        /** @nocollapse */
+        AddedToCartDialogComponent.ctorParameters = function () {
+            return [
+                { type: ngBootstrap.NgbActiveModal },
+                { type: i1.CartService },
+                { type: forms.FormBuilder }
+            ];
+        };
+        AddedToCartDialogComponent.propDecorators = {
+            dialog: [{ type: i0.ViewChild, args: ['dialog', { read: i0.ElementRef },] }]
+        };
+        return AddedToCartDialogComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var AddToCartComponent = /** @class */ (function () {
+        function AddToCartComponent(cartService, modalService) {
+            this.cartService = cartService;
+            this.modalService = modalService;
+        }
+        /**
+         * @return {?}
+         */
+        AddToCartComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                if (this.productCode) {
+                    this.loaded$ = this.cartService.getLoaded();
+                    this.cartEntry$ = this.cartService.getEntry(this.productCode);
+                }
+            };
+        /**
+         * @return {?}
+         */
+        AddToCartComponent.prototype.addToCart = /**
+         * @return {?}
+         */
+            function () {
+                if (!this.productCode || this.quantity <= 0) {
+                    return;
+                }
+                this.openModal();
+                this.cartService.addEntry(this.productCode, this.quantity);
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        AddToCartComponent.prototype.openModal = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                this.modalInstance = this.modalService.open(AddedToCartDialogComponent, {
+                    centered: true,
+                    size: 'lg',
+                }).componentInstance;
+                this.modalInstance.entry$ = this.cartEntry$;
+                this.modalInstance.cart$ = this.cartService.getActive();
+                this.modalInstance.loaded$ = this.loaded$;
+                this.modalInstance.quantity = this.quantity;
+            };
+        AddToCartComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-add-to-cart',
+                        template: "<button\n  class=\"btn btn-primary btn-block\"\n  type=\"button\"\n  [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  (click)=\"addToCart()\"\n>\n  {{ 'addToCart.addToCart' | cxTranslate }}\n</button>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        styles: [""]
+                    }] }
+        ];
+        /** @nocollapse */
+        AddToCartComponent.ctorParameters = function () {
+            return [
+                { type: i1.CartService },
+                { type: ngBootstrap.NgbModal }
+            ];
+        };
+        AddToCartComponent.propDecorators = {
+            iconOnly: [{ type: i0.Input }],
+            productCode: [{ type: i0.Input }],
+            quantity: [{ type: i0.Input }],
+            maxQuantity: [{ type: i0.Input }]
+        };
+        return AddToCartComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    // TODO: Improve a11y with better text appropriate to usage (example: loading cart spinner)
+    var SpinnerComponent = /** @class */ (function () {
+        function SpinnerComponent() {
+        }
+        SpinnerComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-spinner',
+                        template: "<div class=\"loader\">{{ 'spinner.loading' | cxTranslate }}</div>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        SpinnerComponent.ctorParameters = function () { return []; };
+        return SpinnerComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var SpinnerModule = /** @class */ (function () {
+        function SpinnerModule() {
+        }
+        SpinnerModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [common.CommonModule, i1.I18nModule],
+                        declarations: [SpinnerComponent],
+                        exports: [SpinnerComponent],
+                    },] }
+        ];
+        return SpinnerModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var PromotionsComponent = /** @class */ (function () {
+        function PromotionsComponent() {
+        }
+        PromotionsComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-promotions',
+                        template: "<div class=\"cx-promotions\" *ngIf=\"promotions\">\n  <strong *ngFor=\"let promotion of promotions\">\n    {{ promotion.description }}\n  </strong>\n</div>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-promotions{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.22222);color:var(--cx-color,var(--cx-g-color-success));padding:var(--cx-padding,.5rem 0)}"]
+                    }] }
+        ];
+        /** @nocollapse */
+        PromotionsComponent.ctorParameters = function () { return []; };
+        PromotionsComponent.propDecorators = {
+            promotions: [{ type: i0.Input }]
+        };
+        return PromotionsComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var PromotionsModule = /** @class */ (function () {
+        function PromotionsModule() {
+        }
+        PromotionsModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [common.CommonModule],
+                        declarations: [PromotionsComponent],
+                        exports: [PromotionsComponent],
+                    },] }
+        ];
+        return PromotionsModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var missingProductImgSrc = 
+    // tslint:disable-next-line:max-line-length
+    'data:image/jpg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABVAAD/4QOIaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjUtYzAyMSA3OS4xNTQ5MTEsIDIwMTMvMTAvMjktMTE6NDc6MTYgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6NjEwOTUyZjYtMmRmOS00ZmIxLWJmZDItODBlZDVjZDY3YjhjIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkU2RkNERDA2RDQyQjExRTVBRUE3REEyNEFBNDQxNDBDIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkU2RkNERDA1RDQyQjExRTVBRUE3REEyNEFBNDQxNDBDIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpiZjI5Zjc3Zi1hZWM5LWY0NDgtOTM0MC1iZGJkYjk2MDk3OTIiIHN0UmVmOmRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDo0MDcyNjk0NS0zNjQ0LTExNzgtODI2OC1mMDQzMTA0ZTU5MWIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7/7gAOQWRvYmUAZMAAAAAB/9sAhAACAQEBAQECAQECAwIBAgMDAgICAgMDAwMDAwMDBQMEBAQEAwUFBQYGBgUFBwcICAcHCgoKCgoMDAwMDAwMDAwMAQICAgQDBAcFBQcKCAcICgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAEsASwDAREAAhEBAxEB/8QArQABAAIDAQEBAQAAAAAAAAAAAAcIBAUGAwIBCQEBAAMBAQAAAAAAAAAAAAAAAAIDBAEFEAABAwMCAwQCCgwKBwgDAAABAAIDBAUGEQchEggxQVETYRRxgeEiMlKTFVYXkUKS0iNzs3S0FjY3obHRYnJTVJRVGPCCojNjJHXBo9M0ZCW1OLKkSBEBAAICAQQCAgMBAQAAAAAAAAECEQMxIVESEzIEQSLwYRRDcf/aAAwDAQACEQMRAD8A/v4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIPx72saXvIDANSTwAA7yg1D9wsBjeY5L5b2vadC01lMCD6RzrvjKPlHd+fWJt/8A47b/AO+033674z2PKO59Ym3/APjtv/vtN9+njPY8o7n1ibf/AOO2/wDvtN9+njPY8o7n1i7ff47b/wC+0336eM9jyju2Ntu1rvNP65aKmKqpCdBLTSMlZr/SYSFyYw7E5ZC46ICAgICAgICAgICAgICAgICAgICAgICAgICAgICDUZ1mlm29xWsy2/O0oKRnNyN055Hk8rI2A/bOcQAu1rmcI2tiMqebob455upcJJLxVPp7ESfItdM9zaeNmvAOA053eLne1oOC201xVivsmzjlNAQEBAQbHGstybDri27YvXTUNwaQfMp3lvNpx0cOxw9BBC5MRPLsWmOFsOnTfmPd6zy2y9NbDmtA1rqlkY0ZPETyiZg7uPBw7j2cDoMmzX4tmrZ5f+pKVS0QEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQV765cuLWWXBqd50d5l0qmA8OH4GHUfdrToj8s32LcQrwtDMmrGeivKr/AI7RXyqvFPST1kMdSaV0Mj3RiRoe1rnAjjoePDtVM74iV8aJmGd/kUyL6QU392l++XP9Ednf8/8AZ/kUyL6QU392l++T/RHY/wA/9n+RTIvpBTf3aX75P9Edj/P/AG/R0KZFrxyCm0/Npfv0/wBEdj/P/aHs9wy6be5dXYfeC11dRPDDJHryPa5oex7eYA6OaQVdW2YyptXxnDd9P+XHC93LNdXvLKKWYUNV4GKp/Anm9AJDvaUdlcw7rtiy7Cwt4gICAgICAgICAgICAgICAgICAgICAgICAgICAgpb1HZZ+uG8V4rY389FSyC3U+nYGUo8o6egvDj7a3aoxVh2zmzR7Y4s7NdwbPi2msVZVRMmH/BaeeU+0wFdvOIyjSMzhe1rWsaGMGjANAB2ABYHoP1AQEBBWXrfxL1DLrXmUDdIbhTupJnD+tpnagn0ljwPaWrRPTDL9ivXKD2PfG8SRkte0gtI4EEdhCvZ17ds8pbmu39oynXWWspYpJj/AMYN5JR7TwQsFoxOHoVnMZb1RSEBAQEBAQEBAQEBAQEBAQEBAQEBAQYOS5HacRsFXkt9k8q00Ubp536anlb3ADtJPADvK7EZcmcQrZlHW1n1bc3uxOipaKzNJETaljp5nN14F7g5rQT4AcPErTGiPyyzvn8Nb/nN3k/9D/dnffqXoq577H+c3eT/AND/AHZ336eip77NjjPWzuDR3NjsqoqStsxIErKZj4JmjXiWO5nN19BHHxC5OiPw7G+fynu77mWNu1NVuhZZfNtIopK2mcRoS8NIYxwPY7zPekeKzRXrhom/TKj080tTM+oncXzyOL3ud2lzjqSfbW9gTP0S4mbnnlflszNae103kxOI4CaqJaND+La77Ko3z0wv0R1ytCsrWICAgIIz6tMS/WbZ2rrYW81baZI7lH48jT5cv+w8n2lbpnFlW6uaqgLYxLQ9EuWfOeBV+JzO1qLXU+bE3XiIaoF44f02v+ysu+OuWvRPTCalQvEBAQEBAQEBAQEBAQEBAQEBAQEBB51NVS0cRnq5GxQjtfI4NaPbdwQRT1c3y21WzFTT2+rile+qpQ9kMrHEtEnNxDT4gFXaY/ZTun9VTlrYxAQEEo1OaG2dKNJiTJdau5XadhjDuLaaDlndwHHQylqq8f3yt8v0wi5Wqlruki22bEtp4664VMENzu08lc9sksbXiMHyYwQT2aMLvbWTdOZbNMYhKH6x49/b6b5eL+VVYlbmD9Y8e/t9N8vF/KmJMwfrHj39vpvl4v5UxJmD9Y8e/t9N8vF/KmJMwfrHj39vpvl4v5UxJmGNea/FL7aKqyVtdTuo6yGSllHnRcWSsLHd/gV2ImCZiVE7za5rJeKqzVJBqKSaSme5vEF0bywkEdx0W+Jy8+YwkrpBy5uN7uRWuofy0V3gkoTr2ea38NGfZ1aWj2VVurmFumcWWz9do/61n3TVjbD12j/rWfdN/lQPXaP+tZ903+VA9do/61n3Tf5UD12j/rWfdN/lQfTKmnldyxyNc7wa4E/wIPtAQEBAQEBAQEBAQEBAQc1u5uNRbWYNV5bUsEtVGBFSU5OnmzyHlY06dw7T6AVKlfKcI3t4xlTLNM+y7cG7PvGWVslVUuJcxjnERRA/axxj3rQPQFurWI4YbWmeWmXURAQEBAQEBB901NU1k7aakjdLUvOjI42lznHwAbxKDrbLsDvJf2Nlt+PVYid2OqWtpgR4/wDMFihOysflONdp/Ddt6SN8nN5jbImnwNZS6/wPUfdVL02YN06Y98LSC+WxSTRjjrSzU83+zG8u/gXY217uTqtH4cfesbyHG6j1XIaGooansDKuGSEnTwEgGqsiYlCYmGEjggIP3U+KBqfFA1PiganxQNT4oPSjrq231LK2gmfBWRnmjlhe5j2kd4c0ggoLQdKm+113Bp58JzGbz8looxPS1btA+opwQ1wf4vYSOPeDx4gk5d2vHWGvTsz0lMyoXiAgICAgICAgICAgIII66nuGM2BgPvDVVBI7iRE3T+NaPr8yz/Y4hWtaWUQEBAQEBBkWu1XK93CK02eCSquc7hHDTwNL5HuPcGt4lJnDsRlPW1vRZLPHFd91Kkxa6PFponDnHommGoHpDPulnvv7NFNHdOOKbf4Vg1MKXErZT0LNNC+GMeY7+nI7V7vbJVE2meV8ViOG4UUhAQeFxtdtvFI6gu1PFVUL+D4aiNsjHey14IKROCYyifcjo8wDKI5K7DXGx3s6uDI9ZKR7vAxk6t/1CAPAq6u6Y5U20RPCum4e1+abX3X5qy6kMPNr5FTH7+nnA745BwPpB0I7wFpreLcMtqTXlzykiICAgICAgk3pDc5u+FAGnQOgqwfSPV3H+MKrd8Vun5LfLG2iAgICAgICAgICAgIIH66v2cx/85qPyTVo+vzLP9jiFbFpZRAQEBAQbTDcNyDPcip8XxmAz3SoOgHYxjR8J73dzWjiT/2rlrREZdrWZnELgbM7GYttBaQKRrarKZmgVlzkaOd2vEsj1+AzXuHb3692O+ybNtNcVdnVVVNQ0z6ytkbDSRNMkssrgxjGtGpc5ztAAB3lVrEPbjdZeE43LJbcJp3Xu4t1aajmMNI09nB5Bc/T0AA9xV9dEzyotviOESZH1ab0X57vVa6K20xOoit8DBoPDnm53/wq2NNYUzutLSU+72+N3le6hv11nkaOZ4pp5yGjs1LY+ACl4V7I+du7NtnUhvnjtQA69TyFvwoa+OObX2fNaXfYK5OqsuxttCRcG64ahsjKTcS1NdCeDq21khw9JhlJB9Ojx7Crto7La/Y7pzw7OsTz+1C9YhXR1tDwD/LOj43Ea8sjHaOafQ4BUWrMctFbRPD2ynFcfzSyTY9k9KyrtE40fFIOw9zmkcWuHcQdQuRMxwTETyqPv1sJd9n7sKykL6vCap5bR1jh76Nx4+TNpwDgBwPY4cR3gbNezyY9mvx/8R4rFQgICAgIJN6Rf34278TWfozlXu+K3T8lvlibRAQEBAQEBAQEBAQEED9dX7OY/wDnNR+SatH1+ZZ/scQrYtLKICAgIPqGGWolbT07S+d5DGMYC5znOOgAA4kkoLj9PGzFLtNiTZLgxrszr2tluE4GpjB4tgafBnfp2nj2aLFsv5S3aqeMOwy3LLDg+P1GTZJOKe00zeaR54kk8GtaO0uceAAUIjM4TtOIyqJvTv8A5Vu7XvpS51Fhsbtaa2xu4O0PB85Hw39/gO7vJ2U1xVi2bJs4FWKxBO3Qt+1V+/NIfyxVH2OIaPr8ysReccx/Iqc0l/oaetpnDQx1cMcrfsPBWaJmGmYiUWbjdHWA5LDJW4U51kvXFzY2l0tI8+Do3Eubr4tOg8Cra7pjlTbRE8IFrKDdTp1zZj3mS23tmpimjPPT1UQPHQ/BkYe8EajvAK0Zi8M/WkrPbG752TeOyuAa2ky2laDXUGuo07PNi14lhPttPA9xOXZr8WvXs8nW5RjNlzKwVWM5BCJ7RVsMUsZ7ePEOae5zTxB7ioROE5jMYUn3X24um1ma1WJ3HV8LD5tHUEaCeneTyP8AZ4aEdxBW6lvKMsF6+M4c2pIiAgICCTekX9+Nu/E1n6M5V7vit0/Jb5Ym0QEBAQEBAQEBAQEBBA/XV+zmP/nNR+SatH1+ZZ/scQrYtLKICAgIJg6O9t48rzyTMLlHzWmxhskQcODquTXyvuAC72dFTutiML9FczlatZGtUPqe3kn3JzB9htMuuGWmR0VMGH3s8w94+c+Pe1vo495WzVTxhi238pRgrVQgIJN6Zt3MV2kvlzuGVNndT1kEcMXqkbZCHNk5jzBzm8NFVtpNuFuq8V5WIw3qI2iziobQ2m7MhuTzyspq9rqZ7iewNMoDHE+DXErNbXaGmu2su2UFjRbibd4zudjcuNZNCHwP1dBO0DzaeXTRskbj2EfYI4HgpVtNZ6I2rFoxKoV2tub9Ou6TWMk8u9W57Zqedmoiqqd/YdO9j26hw7jqO0LZExeGKYmkrg7f5tadxMQosvsx0pKtnM6MkF0UjTyvjdp3tcCPT2rHauJw21t5RlwPVzttFmG3Tsooo9b9Y+apa4D3z6U6ecw+wAHj2D4qzTbE4V7q5jKpa1sYgICAgk3pF/fjbvxNZ+jOVe74rdPyW+WJtEBAQEBAQEBAQEBAQQP11fs5j/5zUfkmrR9fmWf7HEK2LSyiAgICC43SxiUeK7N26UtArbnz3Sd2mhPnHSP/ALprVi22zZt0xirJ6ks7lwLaa4V1G/ku1bpbKRwOhD5wQ5w9LYw4j0pqrmXdtsVUwW1hEBAQEBBNfTf1K3PGblT4NntS6oxSctgpKydxdJRvJ0aHOPExE8OPwe7hwVG3VnrC/Vtx0laBZWtEvV7txDlm3TsspIx8+WPWo5gPfPpXECZp9DeD/RofFXabYnCndXMZcT0Q53LT3e5bd1b/APlahnzlRtJPvZY9GSgf0mkH/VU99fyr0W/CxlXS09dSS0NWwPpZmOilY7scx45XA+yCszUoZm2OS4hl9zxibXmoKmalBP2zY3lrXe23Qr0KzmMvOtGJw1a64ICAgk3pF/fjbvxNZ+jOVe74rdPyW+WJtEBAQEBAQEBAQEBAQQP11fs5j/5zUfkmrR9fmWf7HEK2LSyiAgIP1rS5wa3i48AEF/catrLPjlBaIxpHS00FM0DuEcQZ/wBi8+ZzL0YjEIG6671Jrj2OsP4I+s1sg8SOSJh//JaPrxyz/YnhXpaGYQEBAQEBBc7ppzOozfaG21tc4vuVHzW2oe46lzqfQMJPiYy0n0rFtrizdqtmrtbrbqe8WuptFYNaSqikppR26skYWO/gKhE4WTGVNNkauow/fezQudyyx15tspHDUSl1K7X7pbdnWrDr6WXTWFuU86sbVHbN77m+IaMqo6aq09LoGsd/C0rbpn9WLdH7I3VioQEBBJvSL+/G3fiaz9Gcq93xW6fkt8sTaICAgICAgICAgICAggfrq/ZzH/zmo/JNWj6/Ms/2OIVsWllEBAQetC5rK6F7/gB7CfYDgg/oLGQ6Nrm/BIBC856Ss/XOx4zKySn/AHZopGj2ROSf4wtX1+JZfscw2uy3TFtfuFtna8uu8lZ86VbZfPEE7GsDo53xaAGM6cG+K5fbMTh3Xqi0ZdBeejXamls9XVUDq91fHDLJA11RGQZGsJaD+D8VGN0pTohVhamQQEBAQdztl1BZ5tPY5sfxdtK6gnnNW81cT5HB7mNjOha9o00aO5Qvri3Kym2aujHWlvADr5VuPo9Wl/8AFUPRVL32cRg1bWZBu9aLlK0ev1l3pql7Yxo3nkrGyO5R3DUqy3SquvWy8ywPQVL6ynsdvM8N7W0VKHez74/xFbNHxY9/yRQrVIgICCTekX9+Nu/E1n6M5V7vit0/Jb5Ym0QEBAQEBAQEBAQEBBA/XV+zmP8A5zUfkmrR9fmWf7HEK2LSyiAgICC+m395jyLBrPfYjzNq6OmnJ/nOhaXD2jqFgtGJehWcwh7rmxySpx+yZVE0ltLPNRTOHcKhgkZr6NYz9lXaJ64U/YjpEtl0T5TFc9uqzF3uHrlrqnPDNePk1I52nT+mHrm+OuXdE9MJmVC9Sjfzbmp213JrrUIy2y1L3Vttfp70wSuLg0HxYdWn2Fu128oYdlfGXFqasQEBAQEHf9MeOy5FvVZmNGsFE99xmPxW07C5p+75Qq9s4qs1Rmy5ixNymXU7ehe97r3KwgxUz4qJund5ELY3D7sFbdUYrDDtnNpcCrFYgICCTekX9+Nu/E1n6M5V7vit0/Jb5Ym0QEBAQEBAQEBAQEBBA/XV+zmP/nNR+SatH1+ZZ/scQrYtLKICAgILYdHGaMyHa843M/W42WZ0BaSNfImJmiPsalzfaWTdXEtmi2Ydxu1gsW4+3tzxI6CrqIi+ke7sbURnzIjr3DmAB9BKrpbxnKy9fKMKrbCbi1Gz257H3sOhtM7nWy7RO4GIc+nOR4xvGp9GoWvZXyhj128ZXKiljmjbNC4PheA5j2kEOBGoII7QVibnMbs7TY3u7jZsV8BirIiZKGujaDJTyEaajXTVp+2brx9BAInS81lC9ItCp24+xW422VVJ89UL57M0ny7lRtdLTub3EuA1YfQ8Ba67Isx21zVxymgICAgILMdFO3Utpx+t3FuLC2ouX/KUPMND6tE7V7x6HyDT/VWXfbrhq0VxGUyZRkFDieOV2S3I6UNDBJVSekRtLtB6SeAVMRmV8ziMqGXe51V7u1Vea481bVyyVMzvF8ry938JXoRGHnzOWMjggICCTekX9+Nu/E1n6M5V7vit0/Jb5Ym0QEBAQEBAQEBAQEBBA/XV+zmP/nNR+SatH1+ZZ/scQrYtLKICAgIO96ctz2bYbjQVtwk5Mbrx6jcST71jHuBZKf6DtCfRqq9tPKFmq/jK5rXNe0PYQWEagjiCCsTcrr1dbGzQ1Mu7GKwl9NJob1BGNeRwGgqQB3Hsf4Hj3nTTp2fiWbdr/MMfpn6lqXHqaDbvcOfkszNI7ZcpD72AE8IZiexnxXfa9h4dndurPWHNW3HSVkY5I5o2zQuD4ngOa5pBBBGoII7llan0QCND2IIB63LLZrdjdlq7fSQQVctXMJJYYo2PePK10c5oBK0aJ6s2+OkK5LSzCAg7TZHZ68bvZWy3QB0WOUxbLc6zThHFr8Bp+O/TRo9vsChsv4ws108pXQtdsoLLbYLRaomwW2ljZBBCwaNZGxvK1o9gBYpnLdEYQZ1o7px0drg2stMmtbVclZdC0/AhaeaKM6d7nDmI8APFX6Kfln33/Cty0sogICAgk3pF/fjbvxNZ+jOVe74rdPyW+WJtEBAQEBAQEBAQEBAQQP11fs5j/wCc1H5Jq0fX5ln+xxCti0sogICAgILL9J2/MN5t8O12Wz6XymbyWmolI/DwtHCEk/bsHwfFvpHHNu146w1admekpyliinidDM0PheC17HAFrmkaEEHtBWdoV13z6RaqGabK9p4vMpXay1FlB9+w9pNMT2j+YeI7teAGnXu/Es2zT+YcBtzv/ufs9ObE1xqLPA4sltFza/SIg++awnR8Z9A4a9oVltcWVV2TVNGLdau2l1ia3JqaqtVZw5veesw6+h8Wj/ssVE6JXxvhxnVlutt/uNi9nhw25MraiCplkmjayVj2NdFoCRK1verNNJieqG68WjogpXs4gkTZ3pwzTdSeK4zsdbcN1BfcJ2kGVvhTsOheT8b4I8deCrvtiq2mqbLY4Tg+Nbe4/DjWLU4p7bFxJ7ZJXke+kkd2uce8+0NBoFjtaZnq2VrERiGo3i3asm0WKSXu4Fst3lDordRa6Onm04a6cQxva493skKVKeUo3v4wpdkWQXbKr5VZHfJTNdqyR088h73O7gO4AcAO4cFuiMMMzlhI4ICAgIJN6Rf34278TWfozlXu+K3T8lvlibRAQEBAQEBAQEBAQEED9dX7OY/+c1H5Jq0fX5ln+xxCti0sogICAgIPuCeelnZU0z3R1MbhJHJGS1zXNOoII4ggoLKbDdWNvvUMGI7ozNpr2NIqe7P0bDUdwEx7GP8A53wT6D25tmnHWGrXuz0lObXNe0PYQWEagjiCCs7Q5zO9o9vNyI9MttkU9WBysq2axVDQOzSWPRxA8CSPQpVvNeEbUi3KKMj6GLLO90uJ3yanaTq2GvhZONPDniMZ/wBkq6Psd4Uz9ftLnpOhrOw8iK80Do+4uFQ0/YDD/Gpe+Ef88tjZ+hSvdKHZBkEbIftmUdM57j7DpHtA+wuT9j+nY+v/AGkfBul7aTCJGVfqRul1ZoW1F0Im0I46tiAbEOPYeUkeKqttmVtdVYSG1rWtDWjRo4ADsAVaxw+8O/WHbRULoqx4rMre3mprXC4eYdRwdKRryM9J4nuBVlNc2V32RVUjP9wMm3KyOXJspn82tf72ONuoihjB1bHG3jo0fZPadStlaxWMQx2tNpzLSLqIgICAgIJN6Rf34278TWfozlXu+K3T8lvlibRAQEBAQEBAQEBAQEEI9cNnuFZhNpu9NGXUNHVPbUvH2nnRhrCfQSNFfonqo+xHRWJamQQEBAQEBAQd9tf1G7jbXsZbqOcV+Ns0At1cXPYxvhE8HmZ7APL6FXfVFllNs1TphXWLtbkbGQ5F51kuJ4OFS0zQa/zZYQTp6XNaqLaZhorviUh2XO8KyOMS2G7UdY13YKeoiefbAdqFVNZhbFoltgQ4atOo8QuOsW4XuzWmMy3Wrhpoh2uqJWRge28hdw5M4cVlfU3s1ikbue7Nr6tuulPa2moc4jwe3SMe24KcarShO2sIb3I6zMyyJkltwSnFmtrtWmqcRLWOaeHA6cjNR4AkdxV9dERyotvmeEN1dXVV9TJW10r5qyVxfLLK4ve9x4kuc7Ukn0q5Q80BAQEBAQEEp9HdvqqvemnqoGF0FLS1U0zgODWuj8ka/wCs8KrdP6rtEfstwsbYICAgICAgICAgICAgwMoxqz5jj9XjF/i860VkZhmZ2HQ8QWnuIIBB7iF2JxOXJjMYVY3G6SdyMSr3yYvF892F7tIZKbQVDWniBLEdOI8W6j2Oxa67onlktpmOHMfULvJ9HK35L3VL2V7oeu3Y+oXeT6OVvyXup7K9z127H1C7yfRyt+S91PZXueu3Y+oXeT6OVvyXup7K9z127H1C7yfRyt+S91PZXueu3Y+oXeT6OVvyXup7K9z127H1C7yfRyt+S91PZXueu3Y+oXeT6OVvyXup7K9z127H1C7yfRyt+S91PZXueu3Y+oXeT6OVvyXup7K9z127PZuyu+bG8jLHcQzwDXAfxp51PCzzfsTvPK7nkx6uc/xdGSf4Snsr3PXbs+fqF3k+jlb8l7qeyvc9dux9Qu8n0crfkvdT2V7nrt2PqF3k+jlb8l7qeyvc9dux9Qu8n0crfkvdT2V7nrt2PqF3k+jlb8l7qeyvc9dux9Qu8n0crfkvdT2V7nrt2PqF3k+jlb8l7qeyvc9dux9Qu8n0crfkvdT2V7nrt2PqF3k+jlb8l7qeyvc9duzNsXTZvNfbiy3tsstI13wqiu0hiYPEuOp+wCVydtYdjVaVltjNkLTs1YpIGyiryas5XV9by8oPLryxxg8QxuvfxJ4nuAzbNnk1a9fi7pVrBAQEBAQEBAQEBAQEHnU1DKaIyv7Ag0FdfauaQiE8rApRCOWN851/xyuuZPnOv+OUwZPnOv8AjlMGT5zr/jlMGT5zr/jlMGT5zr/jlMGT5zr/AI5TBk+c6/45TBk+c7h8cpgy+hX3N3Y4oPoVV3I11K46/DW3VvaSuj5NyuA7XlMOZfnznX/HKYMnznX/ABymDJ851/xymDJ851/xymDJ851/xymDJ851/wAcpgyfOdf8cpgyfOdf8cpgy+4bxXxP5i7UeCYMt7arm2uj0dwkHaozCUSzFx0QEBAQEBAQEBAQEBBrcgc7yQwdhXYclpfICllHB5ATJg8gJkweQEyYPICZMHkBMmGnrM4w6gyeLDaytazJp+XyqQskLnc4JboQ3l4geK7icZczGcPjKtwMIwioipcqr2Uc87TJE2RkjuZrToSORpHakVmeC1ojlvMcZRZPbIL3Z5Wz2mpaJYZm66Pae8a8VyejsdWHkW4u1GBXX5jy67RUl3DGymB7ZXEMfroT5bXDjp4rsVmeHJvWvLrqKK31FLHVUgDqaVrZY3aaatcOYHjx7FBY5247x7UWfJHYhcbvBFkTZWUzqZzZSRLJpytLg0t+2HfwUopMxlCb1icOndS07u1oUE3P5pk23+E0zKnL7jBb2S6+U2Z+j36dvKxurnad+gUqxM8I2mI5clbt6tmL/WtobNfoXVUjgxjKiKopuZzjoAHVEbBxPpU/C0fhCL1n8tjl2WYvgkEVTltW2igncY4nSNkcHOA1I94D3LkRM8O2mI5aL6+Nnf8AHIvk6j7xS8LdkfZXu7HyAoZTweQEyYPICZMHkBMmDyAmTB5ATJhnWJpZVADsXJdhvlFIQEBAQEBAQEBAQEBBgXlnO0BdhyWt8hScPIQPIQPIQPIQPIQQdm8RPV1ZIx2ltN+Ter6/CWe3zh99VWOsu+5WH2Cof5UdwIpHyfEE1WyIu9rXVc1T0l3dHWHY9HeTS1G3tbhl1Pl3TH6uWF8byNY4ZiZBzexIJB7ShujrnunonpjsgjdStnz6433dqRxNvqLqy20B7nQsgkIHHvbGyP7K0U6Yhnv1zK1seXUmNbfRX2t4UdFb2VMp101bFThxA9J00Cx4zLX5YhVr9TLrmW2uRb0V3MbyLnHOHt14se4moLe/4czDr3cpWvyxMQyeOYmVmdsdzI8t22t+X1TtZHU2tYdRwmgBZN29nvmkjXuWW9MThrpfMZQbs7izOpTdC75nuRK+e0UnJI6jbI5oPnOeIIAWkObG1rHfBIP2StF58IxDPSPOcylKnxTpIZdaG526qskN0opo56V1Pc4GkyRuDmhzBLo/iB8IFU5v/a3FP6c91zQsZiVkkaNHGskB+RKno5R+xxDQYtL0k1ltttvrmxPyKWKnhmaYbpqalzGtcOYN5fhntB0Up80Y8E5+QqGg8hA8hA8hA8hA8hBlWuLlqAVySG3UUhAQEBAQEBAQEBAQEGJcm8wXYGFyFMOHIUwHIUwHIUwHIUwP0Rk8EEHZnFydZVhY74tKf+6kWivwlnt84ZvVJoN6MDPd58P6dGuavjLu35Q5fde/V2ye7OXwWtpbQZTb3vgDOHJJVu0dLr4teJdNPFTpHlEf0hefC0/28d18LfhXTZitFOzkramsFfU6jQ+ZU00kmh9LWcrfaSls2kvXFIdn1PZRHjeyloxqneRcr0ynY4A6H1eniZLIeHi4sHpBKhqjNsp7ZxXDnLPsb1K0mDsxiguNHBidXC4voHvbry1I53tfrAXc3vuPvuHcVKdlc5RjXfGGb0mXiVrMg2kvhLaqB0k7IieI4+rVLRr4O5fslc3RxLumeYlotgsvoNj9wL5hO4LvUmVBjgdVPa7kbLTPfyE6Anke2QkO7OzuOqlsr5xEwjqt4TiWj3bx7afHskscW1lY2rhkeXVpjqPWA1wlZycewcNVKkzMdUbxWJjCUOuORsmG2Mj+2SfkCqdHK37HEPXEpekynxy1VVbJao8ijpqaSd7i4SNqGxNLif5welvPJXwwlqSF0buUqle+eQpgOQpgOQpgOQpgOQpge9CzSXVBsVx0QEBAQEBAQEBAQEBB41beYaIMfyV1w8lA8lA8lA8lB9w04LuKDU1+1eBXPNKfcKuoOfMKUMEFZ59Q3lDAWt/BteIzoCe1q75zjDk0jOXnl+2uE5reqDIMjofWbvbHB1DN51RH5ZbIJAeWJ7Wn3wB98ClbTBasS8cu2d293FrKe4ZpbhW1VK0xwvM1RFytLuYgiF7ARr46rsXmvDlqRPLPzbbfC9xbbDZ8yovXLdTyefDGJZ4eV4aWa6072HsJGhOi5W0xw7asW5YeVbM7aZrU0VXlNt9blt0TaajD6iqayONh5g3kjka13p5gSe9di8xw5NInl0NVpINAoJuWtm0WAWfMJs9tlB5OV1DpZJqpk9To903+8JjL/L466/B7ePapzeZjCEUjOTNdo9v9wy2TLbbHU1bG8jKhpfFM1vaB5kRa4gHuJ0St5jgtSLctPZumfZqx1Ta6ms4lqmHmY6qmqJmgjiPePeWfZClO20oxqrDocz22w3cWkgt+a0XrtHTPM0LPOnh5XlvKTrA9hPDxUa2mvCU1i3LRt6Vdg3DUWH/924/+Ou+63dz017O8qoA73wVax4eSuuHkoHkoHkoHkoPSmj5X8UGUuOiAgICAgICAgICAgIMK93iz2Kk9fvlXDRUTe2arlZCwey6QgLsRlyZwxbJlWLZLzfq5c6S4cvF3qVTDPp7PlOKTWYItEsyrqaagpn1ldKyGkjHM+WVzWMaOzUucQAuYday259gl5rRbbRe7fVXEnlEFNWU0smuumnKx5KlNZhGLRP5bfkcopNdbssxW71QobTc6SqrXAlsNPUwyPIA1JDWOJ4BdmsuRaJbMvhpYH1NQ4MhYC973kBrWtGpJJ4AALjrEt2VYxe5nUlluVLWVTWmR0VLURSvDAQC4tjcTpqQNV2YmHItEvlt9sLrv8wGup/nz+xedH5/wPM/3evN8H33Z2cUwZh93PKcYsU7aO83Glo6pzRI2KqqIonlhJaHBsjgdNQRqkRMk2iGa2WOSNssRDo3AOa5p1BB4gghcdYFBf7Leppae01sFVPBwmjppo5HR8SPfBhJHEHtXZjDkTl7VU9PRU7qqskbDSsHM+SVzWMaPEl2gC5h1qqTcTb64VfqFBfrdPXAlvkw11M+TUHQjla8lS8JR8o7tzyOUUnxUzwUcD6qskbFTMHM+SRwa1o8SXcAg1lqznCL9V+oWO80NbXDgYaSsp5pPuY3EqU1mHItEt1DqBoVF1p6jcjbqCr+bam/22Ov15fIfXUrZNezTlL9VLxnsj5R3bOMtmjbLC4PhcA5r2kEEEagghRSeVdW0VspnVtymjp6Nnw5p3tjY32XPIAXcGWvtGdYRkFV6jYbzQVtb/U0lZTzP+5jcT3Ls1mHItEtrI5sMbppiGRMBc5ziAAANSST3KLrCteS43fJ3UtluNLWVLW+Y6OlqIpXBoIHMRG4nTUjiuzEw5ExL3uF2tNjibV3uqho6VzhG2WqlZEwvILg0OeQNdAeCRGSZwzIZoaiFtRTuD4HgPY9hDmua4aggjgQQuOvpAQEBAQEBAQEBAQfMsscETppTpEwFzj4ADUoKxYLYLh1abpXTIMyqpo8PtgDoaSFwBjjme4QQM1Ba3VrCXu01JHp1Gq0+uOjJWPZPVK2JdLe3WD5xR5tj76ls1GJOSknkbLFzvjMYeCWh2oBPaSFVbbMxhdXVETlGe50t/wB/OocbTRVclNiFukfC9rNS1vq8ZfPM5p0BeXe8aT2cPTrbT9K5VXze2HQbldH2D23Cay64RLVRZHQQvqo/PlErajyW87muAaNHOA4FunHuUa7pz1SvpjHRvukjcW7Z3gE9sv8AK6ou1nlbTCokJc+SCRnNFzuPa4aObr4AaqO6uJS03zCvG19bVYPfLNui13/tlHc20VXpqC1j4gXcR8eJ0gHsLRfr0ZqdMSsp1VZm3FtnaympXj168OZa4OU66slBdKRp3GJrh7YWbTXNmrdbFUYdI9gqcY31vWO13/naO2VEM3DTSRtXTcw0PgdQrd05qq0xi0tmBp17af6fs6uf8/53d/6fzswOrLGa7Md+bNjNsLRcau1RR0/OdGukFTVOa0nu5iNPbXdM4rlzdGbYdt0l7nTZPi8u32QOc3KLCPKYyXUPfSNdyN1BHbG73h9Gir3UxOVmm+Yx2aLpGaDuLnI/47P0qdS3cQjp5locvnybqW34qNuIat9LhFplna5jOLWxUr/JlnLeAc97yGtJ7AR6dZVxSufyjbN7Y/Dvqrou2imo2U9NJXw1LNNZ/WGOc/Tt5muZy8f5oCr99lnoqlemo6ekp46SmbyU0TWxxsb2Na0aAD2AqVyBOty43eKbHrNNJLDh1QZpKp0TdQ6Vj2DiNQCWsOrQSO37GjRHLPvnhtsY6Ytg8tpaDJcIuNRU0VPJDNI6OojmbMGODnRzMLA5jnAaEDlI8Fydto5djVWesMXrHz/ILdHa9tcZkkinuodNWGElr5Yy/wAmOEEacHO15hrx0A7NU01jmXN9p4hnWnop24ixtlFeaqrlyRzPwtdDI1jGykceSMtI5Qe52pPik75y7GiMOe6YshyTBN1brsZfp3VFtiNQKUO15Y5qY8xdGDryskj1dp46enWW2ImPJHVMxPi1d+hvHUv1C1eEVdZLT4TaH1DfLi+0hpH+Q+RrXat55JCBzOHAH0aLsfpXLk/vbH4b3eLpQw/GMFq8uwGWpp71aYzXObNL5jZYoffyHUAOa5rRzAg6cOzvEabpmcSlfTERmHT7D7h3LcXYuvnvsjpr3bY6q3Tzv4umaynEkb3HvPK4AntJGveobK+NktdvKqvm29wyTbN9s3mtjfMs8VwltNVE06cwEEcr43/jI5HcvgW69y02iLdGaszXqmvrCvFsyLZCy3+zyCa11lxpaiCQfbMkoahw4dx8R3KjTGLNG+c1hK+3v7A2P/p9H+jMVVuZW04huFFIQEBAQEBAQEBAQeNxo23C3z0D/gTxvhPb2PaW93soSrh0e5Ja8DzPIsHyyZlDd6kwxR+svEbTNRSSxvi1doOY+ZqB36Fat0ZiJhl0ziZiViG5Ljr7lHZ2V9O67zcxipWzRmZ4a3ncQwHmIA4ngs2JacwrlQ3Oi2g6vq+tykilstwnqZPWpeDGx3AGZkmp4cvmHlJ7Bx8FpmPKnRmifG/VNe6+5mIYlt7cbtVV8D5JqaWKihjlY99RLJGWsawNOpGp4kdg4qilJmV97xEI76G8dq6HE71k08ZZT3Cohp4HO4c7aRj9SPRzSka+IPgrd89VX146ZR1tTiH647B5zTxNLq6hkorpTgDU81MyV79B4mPnHtqy9sWhVSM1lucUyabfzNdvcPn5n0VgpfWbsH6hrpKV+hLvHnZFGNf557OKjMeETKdZ85iOzo9k/wD7c5r+JuH/AMhTqOz4Q7r+csb/APvf/T6Orv8Az/nc/wCn87Mnez/7c4V+Jt//AMhULmv4SbPnDE34sty2N3ft29+Kx/8AstfLyXGBnBpmcPwzD+Oj1cPBwJ8F3XPnXEmyPC3lDI6OqyluGd5rX0Li+hnkimhe5paXMfUTuaSDxGoPYubuId0cy0W1t2t2z/VJfLbmD20dFWOraKKpnIZGxtRUMrIHvc7gGva0DU9mvFSvHlSMI0nxvOWF1QbS4viLn5/Z7qay43y4zzy02sJZG2o8ypJbycSAeAJXdV5no5tpEdVkdvf2Bsf/AE+j/RmLNbmWmnEMHPztdkQG3+4U1I6Sqj9Zho62VsT3AEsD4nEtIcOPFp19pK5jrBbE9JV33QxuPpr3Atd62qvT5vW+eV9AZGyPY2N7fwU3l8HxycxDdW68D3jVaaT5x1Zbx4T0dD1k2+utGc4zuKIHGlbEyndr2CWlqDVCNxGoBIkP2D4KOjrEwnv6TEpxtW5WCXjG2ZbSXWmFidGJnTSTRsEY01IkDj71w7CDxBVE1mJwvi0TGUDbIyt3J6qbnuDaY3GxUzqyrZKQWjkljNHFrr2F7Xa6ez4LRf8AWmGfX+18vDa67UGz3VJe7dl720dDWuraKOpqDyRtZUVDKuB7nO4APaxo1PAa8UvHlSMFJ8bzlLnUBuPimO7U3inmrYJLjcqOegoqaORj5JXVUZh5mtadeVodzE9nD2FTrrMyu2WiIcd0p49W2rYq+XmsYWMuTquWn5tRzwxU3lcw9HOHD2lPdP7IaY/VqemDB7XuNsXkuIXUAQ1da4RS6amKZtNG6OQelrgD6Rw71LbbFolHVXyrMIzyTJ71ZtuavY3LWujudlurayjGmoaBHNFNFr8UukEjT36n0K2IzPlCqZxHjK3e3v7A2P8A6fR/ozFjtzLZTiG4UUhAQEBAQEBAQEBAQR/uZ02bbboXJ19ucc1FkDwBLWW97WOl5Ryt8xsjXsJA4a6A+lWV2zVXfVFnhth0x4JtbkLMptVTWVV6ia+ON1VJF5bWyNLHaMiY3joe8ldvtm0Ycpqis5b/AHL2dwXdijjp8spiayEEU9bTO8uoiB7Q12hBHocCPQo1vNeErUi3LhLX0TbWUVc2qr6y4VlK06+rSSwxscPBzoo2v0/okKc75VxohLdptFssNths9mgZTWunaIoIIWhrGNHcAFVM5XRGHLbW7I4jtLb7hbLBLU1VJciw1Lbi+GTgxrmaDyo4xoQ4666qV9k2RprirH2q6fsH2gu1Xesalq566riFM51dJC/kj5xIQzyo4yNSBrqT2BdvsmzlNcV4ZeLbL4viW4t03NttRVPv12bNHUwzvhNO0TzMndyNbG1w98waauPBcm8zGHa64icvP6j8T+tz65/WKv8AWj+z+ZD6r/5L1H4Hl8/wOPw+30cE9k+OD1x5ZemU7L4vlu4tr3NuVRVMv1pbDHTQwPhFO4QTPnbztdG5x98866OHBIvMRgtriZy2+dYTYtxMXqsRyJrnWyqADnRENkjc1wc17HOBAc0jUag+ngo1ticu2rmMNDtNsRiOzlRW1OMVNZPJXtiZMK+SF4AiLi3l8qKP4x111Ur7JtyjTXFeHrufsbt/u15c+TwPjusLfLjr6J4inDNdeUlzXNcNezmadO5KbJrw7fXFuXFW7oj2wpqgTV9fcamJp18oyQRtd6HFkXN9ghTnfKuNEJetlvpbRbae00LS2ipY46eFpJJDI2hjRqeJ4BUzOV0Rhx+7GweE7wVEFwyJ9TT3SmjMENRRSNaeTmLw1zZGvaRzEnsB9KspsmqF9cWabBOkrbDCL1DkD3VNzuNO4S07a98Rhje3i13lxsbqQeI5iR6F226ZcrpiHf5XiWO5vZJcdymlZWWib4cUmo0I7HNc3RzXDuIIKriZjhZMRPKKp+iHbCSsM0VwuUdITr5IkpjoPAOdCTp7Oqu98qfRCSsC25xDbSzfMmIUgp6Zx55pCS+WZ+mnNI93Enw7h3AKq1ptytrWK8NZudsdt/uy1kuT072XWJvlxV9G8RVDWa68pLg5rhqexzTp3LtNk1cvri3LjrF0V7V2uvZW3OprrhCwhwpp5Yo4nadz/JY15HsOCnO+UI0QlU2S2ssZx2kjFPafJNIyKnDWCOIs8sBg00Gg7OCqytw0O1W0mObQWapsmNT1M9JVTetyOrnxPeH8jY9AYo4xpo0dyle82RpSK8NLuZ00bebp5H+tN7lrKW7OjZDM63yQsbL5fBrniWKT3wboNRpwAXa7ZrGHL6otOXdWa109jtFJZaQudS0cMVLE6QgvLImCNpcQANdBx0ChM5TiMMlcdEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEH/2Q==';
+    /** @type {?} */
+    var missingProductImageAlt = 'Image not available';
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var DEFAULT_FORMAT = 'product';
+    /** @type {?} */
+    var INITIALIZED_CLS = 'initialized';
+    /** @type {?} */
+    var LOADING_CLS = 'loading';
+    var PictureComponent = /** @class */ (function () {
+        function PictureComponent(elRef, cd, renderer) {
+            this.elRef = elRef;
+            this.cd = cd;
+            this.renderer = renderer;
+            this.loaded = new i0.EventEmitter();
+            this.missingProductImgSrc = missingProductImgSrc;
+            this.missingProductImageAlt = missingProductImageAlt;
+        }
+        /**
+         * @return {?}
+         */
+        PictureComponent.prototype.ngOnChanges = /**
+         * @return {?}
+         */
+            function () {
+                this.loadImage();
+            };
+        /**
+         * @return {?}
+         */
+        PictureComponent.prototype.loadImage = /**
+         * @return {?}
+         */
+            function () {
+                if (this.imageContainer) {
+                    /** @type {?} */
+                    var image = this.imageContainer[this.imageFormat || DEFAULT_FORMAT];
+                    if (image && image.url) {
+                        this.renderer.addClass(( /** @type {?} */(this.elRef.nativeElement)), LOADING_CLS);
+                        this.mainImage = image.url;
+                        this.cd.detectChanges();
+                    }
+                }
+            };
+        /**
+         * @return {?}
+         */
+        PictureComponent.prototype.loadHandler = /**
+         * @return {?}
+         */
+            function () {
+                this.renderer.addClass(( /** @type {?} */(this.elRef.nativeElement)), INITIALIZED_CLS);
+                this.renderer.removeClass(( /** @type {?} */(this.elRef.nativeElement)), LOADING_CLS);
+                this.loaded.emit(this.elRef.nativeElement);
+            };
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        PictureComponent.prototype.loadErrorHandler = /**
+         * @param {?} event
+         * @return {?}
+         */
+            function (event) {
+                event.target.src = missingProductImgSrc;
+            };
+        PictureComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-picture',
+                        template: "<picture>\n  <!--\n    <source *ngIf=\"xsImage\" [srcset]=\"xsImage\" media=\"(max-width: 500px)\" />\n    <source *ngIf=\"smImage\" [srcset]=\"smImage\" media=\"(max-width: 800px)\" />\n    <source *ngIf=\"mdImage\" [srcset]=\"mdImage\" media=\"(max-width: 1200px)\" />\n    <source *ngIf=\"lgImage\" [srcset]=\"lgImage\" media=\"(min-width: 1200px)\" />\n  -->\n  <img\n    *ngIf=\"mainImage\"\n    [src]=\"mainImage || missingProductImgSrc\"\n    (load)=\"loadHandler()\"\n    (error)=\"loadErrorHandler($event)\"\n    [alt]=\"imageAlt\"\n  />\n\n  <img\n    *ngIf=\"!imageContainer\"\n    [src]=\"missingProductImgSrc\"\n    [alt]=\"missingProductImageAlt\"\n  />\n</picture>\n",
+                        styles: ["img{max-width:100%;max-height:100%;-webkit-transform:scale(var(--cx-zoom,1));transform:scale(var(--cx-zoom,1));opacity:var(--cx-zoom,1);transition:all var(--cx-g-transition-duration,.6s);border-radius:var(--cx-border-radius)}"]
+                    }] }
+        ];
+        /** @nocollapse */
+        PictureComponent.ctorParameters = function () {
+            return [
+                { type: i0.ElementRef },
+                { type: i0.ChangeDetectorRef },
+                { type: i0.Renderer2 }
+            ];
+        };
+        PictureComponent.propDecorators = {
+            imageContainer: [{ type: i0.Input }],
+            imageFormat: [{ type: i0.Input }],
+            imagePosition: [{ type: i0.Input }],
+            imageAlt: [{ type: i0.Input }],
+            loaded: [{ type: i0.Output }]
+        };
+        return PictureComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var MediaModule = /** @class */ (function () {
+        function MediaModule() {
+        }
+        MediaModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [common.CommonModule],
+                        declarations: [PictureComponent],
+                        exports: [PictureComponent],
+                    },] }
+        ];
+        return MediaModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var BootstrapModule = /** @class */ (function () {
+        function BootstrapModule() {
+        }
+        BootstrapModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            ngBootstrap.NgbDropdownModule,
+                            ngBootstrap.NgbTypeaheadModule,
+                            ngBootstrap.NgbPaginationModule,
+                            ngBootstrap.NgbModalModule,
+                            ngBootstrap.NgbTabsetModule,
+                            ngBootstrap.NgbAccordionModule,
+                            ngBootstrap.NgbRatingModule,
+                            ngBootstrap.NgbCollapseModule,
+                        ],
+                        exports: [
+                            ngBootstrap.NgbDropdownModule,
+                            ngBootstrap.NgbTabsetModule,
+                            ngBootstrap.NgbAccordionModule,
+                            ngBootstrap.NgbRatingModule,
+                            ngBootstrap.NgbTypeaheadModule,
+                            ngBootstrap.NgbCollapseModule,
+                            ngBootstrap.NgbModalModule,
+                            ngBootstrap.NgbPaginationModule,
+                        ],
+                        providers: [
+                            ngBootstrap.NgbTabsetConfig,
+                            ngBootstrap.NgbAccordionConfig,
+                            ngBootstrap.NgbRatingConfig,
+                            ngBootstrap.NgbPaginationConfig,
+                        ],
+                    },] }
+        ];
+        return BootstrapModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var StarRatingComponent = /** @class */ (function () {
+        function StarRatingComponent() {
+            this.rating = 1;
+            this.disabled = false;
+            this.steps = 1;
+            this.onChange = function (_rating) { };
+            this.onTouched = function () { };
+        }
+        Object.defineProperty(StarRatingComponent.prototype, "value", {
+            get: /**
+             * @return {?}
+             */ function () {
+                return this.rating;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * @param {?} rating
+         * @return {?}
+         */
+        StarRatingComponent.prototype.setRating = /**
+         * @param {?} rating
+         * @return {?}
+         */
+            function (rating) {
+                if (!this.disabled) {
+                    this.writeValue(rating);
+                }
+            };
+        // ControlvalueAccessor interface
+        // ControlvalueAccessor interface
+        /**
+         * @param {?} rating
+         * @return {?}
+         */
+        StarRatingComponent.prototype.writeValue =
+            // ControlvalueAccessor interface
+            /**
+             * @param {?} rating
+             * @return {?}
+             */
+            function (rating) {
+                this.rating = rating;
+                this.onChange(this.rating);
+            };
+        /**
+         * @param {?} fn
+         * @return {?}
+         */
+        StarRatingComponent.prototype.registerOnChange = /**
+         * @param {?} fn
+         * @return {?}
+         */
+            function (fn) {
+                this.onChange = fn;
+            };
+        /**
+         * @param {?} fn
+         * @return {?}
+         */
+        StarRatingComponent.prototype.registerOnTouched = /**
+         * @param {?} fn
+         * @return {?}
+         */
+            function (fn) {
+                this.onTouched = fn;
+            };
+        StarRatingComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-star-rating',
+                        template: "<div class=\"cx-star-rating\" tabindex=\"0\">\n  <ng-template #template let-fill=\"fill\">\n    <span class=\"star\" [class.full]=\"fill === 100\">\n      <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span> &#9733;\n    </span>\n  </ng-template>\n  <ngb-rating\n    [(rate)]=\"rating\"\n    (rateChange)=\"onTouched(); setRating($event)\"\n    [starTemplate]=\"template\"\n    [readonly]=\"disabled\"\n    max=\"5\"\n  ></ngb-rating>\n</div>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        providers: [
+                            {
+                                provide: forms.NG_VALUE_ACCESSOR,
+                                multi: true,
+                                useExisting: i0.forwardRef(function () { return StarRatingComponent; }),
+                            },
+                        ]
+                    }] }
+        ];
+        StarRatingComponent.propDecorators = {
+            rating: [{ type: i0.Input }],
+            disabled: [{ type: i0.Input }],
+            steps: [{ type: i0.Input }]
+        };
+        return StarRatingComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var COUNTER_CONTROL_ACCESSOR = {
+        provide: forms.NG_VALUE_ACCESSOR,
+        /* tslint:disable-next-line */
+        useExisting: i0.forwardRef(function () { return ItemCounterComponent; }),
+        multi: true,
+    };
+    var ItemCounterComponent = /** @class */ (function () {
+        function ItemCounterComponent(renderer) {
+            this.renderer = renderer;
+            this.value = 0;
+            this.step = 1;
+            this.async = false;
+            this.cartIsLoading = false;
+            this.isValueChangeable = false;
+            this.update = new i0.EventEmitter();
+            this.isValueOutOfRange = false;
+            this.inputValue = new forms.FormControl({
+                disabled: this.isValueChangeable,
+            });
+            this.onTouch = function () { };
+            this.onModelChange = function (_rating) { };
+        }
+        /**
+         * @return {?}
+         */
+        ItemCounterComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.writeValue(this.min || 0);
+                this.inputValue.valueChanges.pipe(operators.debounceTime(300)).subscribe(function (value) {
+                    if (value) {
+                        _this.manualChange(Number(value));
+                    }
+                });
+            };
+        /**
+         * @return {?}
+         */
+        ItemCounterComponent.prototype.ngOnChanges = /**
+         * @return {?}
+         */
+            function () {
+                if (this.cartIsLoading) {
+                    this.inputValue.disable({
+                        onlySelf: true,
+                        emitEvent: false,
+                    });
+                }
+                else {
+                    this.inputValue.enable({
+                        onlySelf: true,
+                        emitEvent: false,
+                    });
+                }
+            };
+        /**
+         * If value is too small it will be set to min, if is too big it will be set to max.
+         */
+        /**
+         * If value is too small it will be set to min, if is too big it will be set to max.
+         * @param {?} incomingValue
+         * @return {?}
+         */
+        ItemCounterComponent.prototype.adjustValueInRange = /**
+         * If value is too small it will be set to min, if is too big it will be set to max.
+         * @param {?} incomingValue
+         * @return {?}
+         */
+            function (incomingValue) {
+                return incomingValue < this.min || !this.min
+                    ? this.min
+                    : incomingValue > this.max || !this.max
+                        ? this.max
+                        : incomingValue;
+            };
+        /**
+         * Function set 'isValueOutOfRange' flag and adjust value in range. Then update model value and refresh input
+         */
+        /**
+         * Function set 'isValueOutOfRange' flag and adjust value in range. Then update model value and refresh input
+         * @param {?} newValue
+         * @return {?}
+         */
+        ItemCounterComponent.prototype.manualChange = /**
+         * Function set 'isValueOutOfRange' flag and adjust value in range. Then update model value and refresh input
+         * @param {?} newValue
+         * @return {?}
+         */
+            function (newValue) {
+                this.isValueOutOfRange = this.isOutOfRange(newValue);
+                newValue = this.adjustValueInRange(newValue);
+                this.updateValue(newValue);
+                /* We use the value from the input, however, this value
+                  is not the correct value that should be displayed. The correct value to display
+                  is this.value, which the parent updates if the async call succeed. If the call
+                  fails, then the input will need to display this.value, and not what the user
+                  recently typed in */
+                this.renderer.setProperty(this.input.nativeElement, 'value', newValue);
+            };
+        /**
+         * Verify value for decision about displaying error about range
+         */
+        /**
+         * Verify value for decision about displaying error about range
+         * @param {?} value
+         * @return {?}
+         */
+        ItemCounterComponent.prototype.isOutOfRange = /**
+         * Verify value for decision about displaying error about range
+         * @param {?} value
+         * @return {?}
+         */
+            function (value) {
+                return value < this.min || value > this.max;
+            };
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        ItemCounterComponent.prototype.onKeyDown = /**
+         * @param {?} event
+         * @return {?}
+         */
+            function (event) {
+                var _this = this;
+                /** @type {?} */
+                var handlers = {
+                    ArrowDown: function () { return _this.decrement(); },
+                    ArrowUp: function () { return _this.increment(); },
+                };
+                if (handlers[event.code]) {
+                    handlers[event.code]();
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+            };
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        ItemCounterComponent.prototype.onBlur = /**
+         * @param {?} event
+         * @return {?}
+         */
+            function (event) {
+                this.focus = false;
+                event.preventDefault();
+                event.stopPropagation();
+                this.onTouch();
+            };
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        ItemCounterComponent.prototype.onFocus = /**
+         * @param {?} event
+         * @return {?}
+         */
+            function (event) {
+                this.focus = true;
+                event.preventDefault();
+                event.stopPropagation();
+                this.onTouch();
+            };
+        /**
+         * Verify value that it can be incremented, if yes it does that.
+         */
+        /**
+         * Verify value that it can be incremented, if yes it does that.
+         * @return {?}
+         */
+        ItemCounterComponent.prototype.increment = /**
+         * Verify value that it can be incremented, if yes it does that.
+         * @return {?}
+         */
+            function () {
+                this.manualChange(this.value + this.step);
+            };
+        /**
+         * Verify value that it can be decremented, if yes it does that.
+         */
+        /**
+         * Verify value that it can be decremented, if yes it does that.
+         * @return {?}
+         */
+        ItemCounterComponent.prototype.decrement = /**
+         * Verify value that it can be decremented, if yes it does that.
+         * @return {?}
+         */
+            function () {
+                this.manualChange(this.value - this.step);
+            };
+        // ControlValueAccessor interface
+        // ControlValueAccessor interface
+        /**
+         * @param {?} fn
+         * @return {?}
+         */
+        ItemCounterComponent.prototype.registerOnTouched =
+            // ControlValueAccessor interface
+            /**
+             * @param {?} fn
+             * @return {?}
+             */
+            function (fn) {
+                this.onTouch = fn;
+            };
+        /**
+         * @param {?} fn
+         * @return {?}
+         */
+        ItemCounterComponent.prototype.registerOnChange = /**
+         * @param {?} fn
+         * @return {?}
+         */
+            function (fn) {
+                this.onModelChange = fn;
+            };
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        ItemCounterComponent.prototype.writeValue = /**
+         * @param {?} value
+         * @return {?}
+         */
+            function (value) {
+                this.value = value || this.min || 0;
+                this.onModelChange(this.value);
+            };
+        /**
+         * Set up new value for input and emit event outside
+         */
+        /**
+         * Set up new value for input and emit event outside
+         * @param {?} updatedQuantity
+         * @return {?}
+         */
+        ItemCounterComponent.prototype.updateValue = /**
+         * Set up new value for input and emit event outside
+         * @param {?} updatedQuantity
+         * @return {?}
+         */
+            function (updatedQuantity) {
+                if (!this.async) {
+                    // If the async flag is true, then the parent component is responsible for updating the form
+                    this.writeValue(updatedQuantity);
+                }
+                // Additionally, we emit a change event, so that users may optionally do something on change
+                this.update.emit(updatedQuantity);
+                this.onTouch();
+            };
+        ItemCounterComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-item-counter',
+                        template: "<div class=\"cx-counter-wrapper\">\n  <div\n    class=\"cx-counter btn-group\"\n    role=\"group\"\n    tabindex=\"0\"\n    aria-label=\"Add more items\"\n    [class.focused]=\"focus\"\n    (keydown)=\"onKeyDown($event)\"\n    (blur)=\"onBlur($event)\"\n    (focus)=\"onFocus($event)\"\n  >\n    <button\n      type=\"button\"\n      class=\"cx-counter-action\"\n      (click)=\"decrement()\"\n      [disabled]=\"cartIsLoading || value <= min\"\n    >\n      -\n    </button>\n    <input\n      #itemCounterInput\n      class=\"cx-counter-value\"\n      type=\"text\"\n      name=\"value\"\n      cxOnlyNumber\n      [formControl]=\"inputValue\"\n      [value]=\"value\"\n      *ngIf=\"isValueChangeable\"\n    />\n    <div class=\"cx-counter-value\" *ngIf=\"!isValueChangeable\">\n      {{ value }}\n    </div>\n    <button\n      type=\"button\"\n      class=\"cx-counter-action\"\n      (click)=\"increment()\"\n      [disabled]=\"cartIsLoading || value >= max\"\n    >\n      +\n    </button>\n  </div>\n</div>\n",
+                        providers: [COUNTER_CONTROL_ACCESSOR]
+                    }] }
+        ];
+        /** @nocollapse */
+        ItemCounterComponent.ctorParameters = function () {
+            return [
+                { type: i0.Renderer2 }
+            ];
+        };
+        ItemCounterComponent.propDecorators = {
+            input: [{ type: i0.ViewChild, args: ['itemCounterInput',] }],
+            step: [{ type: i0.Input }],
+            min: [{ type: i0.Input }],
+            max: [{ type: i0.Input }],
+            async: [{ type: i0.Input }],
+            cartIsLoading: [{ type: i0.Input }],
+            isValueChangeable: [{ type: i0.Input }],
+            update: [{ type: i0.Output }]
+        };
+        return ItemCounterComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var OnlyNumberDirective = /** @class */ (function () {
+        /**
+         * Class constructor
+         * @param hostElement
+         */
+        function OnlyNumberDirective(hostElement, renderer) {
+            this.hostElement = hostElement;
+            this.renderer = renderer;
+            this.previousValue = '';
+            this.integerUnsigned = '^[0-9]*$';
+        }
+        /**
+         * Event handler for host's change event
+         */
+        /**
+         * Event handler for host's change event
+         * @return {?}
+         */
+        OnlyNumberDirective.prototype.onChange = /**
+         * Event handler for host's change event
+         * @return {?}
+         */
+            function () {
+                this.validateValue(this.hostElement.nativeElement.value);
+            };
+        /**
+         * Event handler for host's change event
+         */
+        /**
+         * Event handler for host's change event
+         * @return {?}
+         */
+        OnlyNumberDirective.prototype.onInput = /**
+         * Event handler for host's change event
+         * @return {?}
+         */
+            function () {
+                this.validateValue(this.hostElement.nativeElement.value);
+            };
+        /**
+         * Event handler for host's paste event
+         * @param e
+         */
+        /**
+         * Event handler for host's paste event
+         * @param {?} e
+         * @return {?}
+         */
+        OnlyNumberDirective.prototype.onPaste = /**
+         * Event handler for host's paste event
+         * @param {?} e
+         * @return {?}
+         */
+            function (e) {
+                /** @type {?} */
+                var value = e.clipboardData.getData('text/plain');
+                this.validateValue(value);
+                e.preventDefault();
+            };
+        /**
+         * Event handler for host's keyup event
+         * @param e
+         */
+        /**
+         * Event handler for host's keyup event
+         * @param {?} e
+         * @return {?}
+         */
+        OnlyNumberDirective.prototype.onKeyUp = /**
+         * Event handler for host's keyup event
+         * @param {?} e
+         * @return {?}
+         */
+            function (e) {
+                /** @type {?} */
+                var value = e.target['value'];
+                this.validateValue(value);
+            };
+        /**
+         * Event handler for host's keydown event
+         * @param e
+         */
+        /**
+         * Event handler for host's keydown event
+         * @param {?} e
+         * @return {?}
+         */
+        OnlyNumberDirective.prototype.onKeyDown = /**
+         * Event handler for host's keydown event
+         * @param {?} e
+         * @return {?}
+         */
+            function (e) {
+                /** @type {?} */
+                var originalValue = e.target['value'];
+                /** @type {?} */
+                var key = this.getName(e);
+                /** @type {?} */
+                var controlOrCommand = e.ctrlKey === true || e.metaKey === true;
+                // allowed keys apart from numeric characters
+                /** @type {?} */
+                var allowedKeys = [
+                    'Backspace',
+                    'ArrowLeft',
+                    'ArrowRight',
+                    'Escape',
+                    'Tab',
+                ];
+                // allow some non-numeric characters
+                if (allowedKeys.indexOf(key) !== -1 ||
+                    // Allow: Ctrl+A and Command+A
+                    (key === 'a' && controlOrCommand) ||
+                    // Allow: Ctrl+C and Command+C
+                    (key === 'c' && controlOrCommand) ||
+                    // Allow: Ctrl+V and Command+V
+                    (key === 'v' && controlOrCommand) ||
+                    // Allow: Ctrl+X and Command+X
+                    (key === 'x' && controlOrCommand)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // save value before keydown event
+                this.previousValue = originalValue;
+                // allow number characters only
+                /** @type {?} */
+                var isNumber = new RegExp(this.integerUnsigned).test(key);
+                if (isNumber) {
+                    return;
+                }
+                else {
+                    e.preventDefault();
+                }
+            };
+        /**
+         * Test whether value is a valid number or not
+         * @param value
+         */
+        /**
+         * Test whether value is a valid number or not
+         * @param {?} value
+         * @return {?}
+         */
+        OnlyNumberDirective.prototype.validateValue = /**
+         * Test whether value is a valid number or not
+         * @param {?} value
+         * @return {?}
+         */
+            function (value) {
+                value = value.replace(/[^0-9]+/g, '');
+                this.renderer.setProperty(this.hostElement.nativeElement, 'value', value);
+            };
+        /**
+         * Get key's name
+         * @param e
+         */
+        /**
+         * Get key's name
+         * @param {?} e
+         * @return {?}
+         */
+        OnlyNumberDirective.prototype.getName = /**
+         * Get key's name
+         * @param {?} e
+         * @return {?}
+         */
+            function (e) {
+                if (e.key) {
+                    return e.key;
+                }
+                else {
+                    // for old browsers
+                    if (e.keyCode && String.fromCharCode) {
+                        switch (e.keyCode) {
+                            case 8:
+                                return 'Backspace';
+                            case 9:
+                                return 'Tab';
+                            case 27:
+                                return 'Escape';
+                            case 37:
+                                return 'ArrowLeft';
+                            case 39:
+                                return 'ArrowRight';
+                            default:
+                                return String.fromCharCode(e.keyCode);
+                        }
+                    }
+                }
+            };
+        OnlyNumberDirective.decorators = [
+            { type: i0.Directive, args: [{
+                        selector: '[cxOnlyNumber]',
+                    },] }
+        ];
+        /** @nocollapse */
+        OnlyNumberDirective.ctorParameters = function () {
+            return [
+                { type: i0.ElementRef },
+                { type: i0.Renderer2 }
+            ];
+        };
+        OnlyNumberDirective.propDecorators = {
+            onChange: [{ type: i0.HostListener, args: ['change',] }],
+            onInput: [{ type: i0.HostListener, args: ['input',] }],
+            onPaste: [{ type: i0.HostListener, args: ['paste', ['$event'],] }],
+            onKeyUp: [{ type: i0.HostListener, args: ['keyup', ['$event'],] }],
+            onKeyDown: [{ type: i0.HostListener, args: ['keydown', ['$event'],] }]
+        };
+        return OnlyNumberDirective;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var FormComponentsModule = /** @class */ (function () {
+        function FormComponentsModule() {
+        }
+        FormComponentsModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [common.CommonModule, forms.FormsModule, forms.ReactiveFormsModule, BootstrapModule],
+                        declarations: [
+                            StarRatingComponent,
+                            ItemCounterComponent,
+                            OnlyNumberDirective,
+                        ],
+                        exports: [StarRatingComponent, ItemCounterComponent],
+                    },] }
+        ];
+        return FormComponentsModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CardComponent = /** @class */ (function () {
+        function CardComponent() {
+            this.deleteCard = new i0.EventEmitter();
+            this.setDefaultCard = new i0.EventEmitter();
+            this.sendCard = new i0.EventEmitter();
+            this.editCard = new i0.EventEmitter();
+            this.cancelCard = new i0.EventEmitter();
+            this.border = false;
+            this.editMode = false;
+            this.isDefault = false;
+            this.fitToContainer = false;
+        }
+        // ACTIONS
+        // ACTIONS
+        /**
+         * @return {?}
+         */
+        CardComponent.prototype.setEditMode =
+            // ACTIONS
+            /**
+             * @return {?}
+             */
+            function () {
+                this.editMode = true;
+            };
+        /**
+         * @return {?}
+         */
+        CardComponent.prototype.cancelEdit = /**
+         * @return {?}
+         */
+            function () {
+                this.editMode = false;
+                this.cancelCard.emit(5);
+            };
+        /**
+         * @return {?}
+         */
+        CardComponent.prototype.delete = /**
+         * @return {?}
+         */
+            function () {
+                this.deleteCard.emit(1);
+            };
+        /**
+         * @return {?}
+         */
+        CardComponent.prototype.setDefault = /**
+         * @return {?}
+         */
+            function () {
+                this.isDefault = true;
+                this.setDefaultCard.emit(2);
+            };
+        /**
+         * @return {?}
+         */
+        CardComponent.prototype.send = /**
+         * @return {?}
+         */
+            function () {
+                this.sendCard.emit(3);
+            };
+        /**
+         * @return {?}
+         */
+        CardComponent.prototype.edit = /**
+         * @return {?}
+         */
+            function () {
+                this.editCard.emit(4);
+            };
+        /**
+         * @return {?}
+         */
+        CardComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () { };
+        CardComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-card',
+                        template: "<div\n  *ngIf=\"content\"\n  class=\"cx-card\"\n  [class.cx-card-border]=\"border\"\n  [class.cx-card-fit-to-container]=\"fitToContainer\"\n>\n  <!-- Card Header -->\n  <div *ngIf=\"content.header && !editMode\" class=\"card-header\">\n    {{ content.header }}\n  </div>\n  <!-- Card Body -->\n  <div class=\"card-body cx-card-body\" [class.cx-card-delete]=\"editMode\">\n    <!-- Edit message -->\n    <div *ngIf=\"editMode\" class=\"cx-card-delete-msg\">\n      {{ content.deleteMsg }}\n    </div>\n    <!-- Card title -->\n    <h4 *ngIf=\"content.title\" class=\"cx-card-title\">\n      {{ content.title }}\n    </h4>\n    <!-- Card Content -->\n    <div class=\"cx-card-container\">\n      <!-- Card Label -->\n      <div class=\"cx-card-label-container\">\n        <div *ngIf=\"content.textBold\" class=\"cx-card-label-bold\">\n          {{ content.textBold }}\n        </div>\n        <div *ngFor=\"let line of content.text\">\n          <div class=\"cx-card-label\">{{ line }}</div>\n        </div>\n      </div>\n      <!-- Image -->\n      <div *ngIf=\"content.img\" class=\"cx-card-img-container\">\n        <img src=\"{{ content.img }}\" alt=\"\" />\n      </div>\n    </div>\n    <!-- Edit Mode Actions -->\n    <div *ngIf=\"editMode\" class=\"row cx-card-body-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-primary\" (click)=\"delete()\">\n          {{ 'common.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <!-- Actions -->\n    <div *ngIf=\"content.actions && !editMode\" class=\"cx-card-actions\">\n      <div *ngFor=\"let action of content.actions\">\n        <div [ngSwitch]=\"action.event\">\n          <a\n            *ngSwitchCase=\"'delete'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"delete()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'default'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"setDefault()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'send'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"send()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'edit'\"\n            class=\"card-link btn-link\"\n            (click)=\"edit()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchDefault\n            href=\"{{ action.link }}\"\n            class=\"card-link btn-link\"\n            >{{ action.name }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                        styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-card-border{border-width:var(--cx-border-width,1px);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light))}.cx-card-container{display:var(--cx-display,flex)}.cx-card-label-container{flex-grow:var(--cx-flex-grow,2)}.cx-card-fit-to-container{width:var(--cx-width,100%);height:var(--cx-height,100%);display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column)}.cx-card-body{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column);justify-content:var(--cx-justify-content,space-between)}.cx-card-delete{background-color:var(--cx-background-color,var(--cx-g-color-background))}.cx-card-body-delete{padding:var(--cx-padding,1rem 0 0 0)}.cx-card-delete-msg{color:var(--cx-color,var(--cx-g-color-danger));padding:var(--cx-padding,0 0 1.25rem 0)}.cx-card-actions{display:var(--cx-display,flex);justify-content:var(--cx-justify-content,flex-end);padding:var(--cx-padding,1.25rem 0 0 0)}.cx-card-link{padding:var(--cx-padding,0 0 0 1rem)}"]
+                    }] }
+        ];
+        /** @nocollapse */
+        CardComponent.ctorParameters = function () { return []; };
+        CardComponent.propDecorators = {
+            deleteCard: [{ type: i0.Output }],
+            setDefaultCard: [{ type: i0.Output }],
+            sendCard: [{ type: i0.Output }],
+            editCard: [{ type: i0.Output }],
+            cancelCard: [{ type: i0.Output }],
+            border: [{ type: i0.Input }],
+            editMode: [{ type: i0.Input }],
+            isDefault: [{ type: i0.Input }],
+            content: [{ type: i0.Input }],
+            fitToContainer: [{ type: i0.Input }]
+        };
+        return CardComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CardModule = /** @class */ (function () {
+        function CardModule() {
+        }
+        CardModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [common.CommonModule, i1.I18nModule],
+                        declarations: [CardComponent],
+                        exports: [CardComponent],
+                    },] }
+        ];
+        return CardModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var PaginationComponent = /** @class */ (function () {
+        function PaginationComponent() {
+            this.viewPageEvent = new i0.EventEmitter();
+        }
+        /**
+         * @param {?} page
+         * @return {?}
+         */
+        PaginationComponent.prototype.pageChange = /**
+         * @param {?} page
+         * @return {?}
+         */
+            function (page) {
+                this.viewPageEvent.emit(page - 1);
+            };
+        PaginationComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-pagination',
+                        template: "<ngb-pagination\n  [collectionSize]=\"pagination.totalResults\"\n  [page]=\"pagination.currentPage + 1\"\n  (pageChange)=\"pageChange($event)\"\n  [maxSize]=\"3\"\n  [pageSize]=\"pagination.pageSize\"\n>\n</ngb-pagination>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        PaginationComponent.propDecorators = {
+            pagination: [{ type: i0.Input }],
+            viewPageEvent: [{ type: i0.Output }]
+        };
+        return PaginationComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var SortingComponent = /** @class */ (function () {
+        function SortingComponent() {
+            this.sortListEvent = new i0.EventEmitter();
+        }
+        /**
+         * @param {?} sortCode
+         * @return {?}
+         */
+        SortingComponent.prototype.sortList = /**
+         * @param {?} sortCode
+         * @return {?}
+         */
+            function (sortCode) {
+                this.sortListEvent.emit(sortCode);
+            };
+        SortingComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-sorting',
+                        template: "<ng-select\n  [searchable]=\"false\"\n  [clearable]=\"false\"\n  placeholder=\"{{ placeholder }}\"\n  (change)=\"sortList($event)\"\n  [ngModel]=\"selectedOption\"\n>\n  <ng-option *ngFor=\"let sort of sortOptions\" [value]=\"sort.code\">{{\n    sort.name ? sort.name : sortLabels ? sortLabels[sort.code] : ''\n  }}</ng-option>\n</ng-select>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        styles: [""]
+                    }] }
+        ];
+        /** @nocollapse */
+        SortingComponent.ctorParameters = function () { return []; };
+        SortingComponent.propDecorators = {
+            sortOptions: [{ type: i0.Input }],
+            selectedOption: [{ type: i0.Input }],
+            placeholder: [{ type: i0.Input }],
+            sortLabels: [{ type: i0.Input }],
+            sortListEvent: [{ type: i0.Output }]
+        };
+        return SortingComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var PaginationAndSortingModule = /** @class */ (function () {
+        function PaginationAndSortingModule() {
+        }
+        PaginationAndSortingModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [common.CommonModule, ngSelect.NgSelectModule, forms.FormsModule, BootstrapModule],
+                        declarations: [PaginationComponent, SortingComponent],
+                        exports: [PaginationComponent, SortingComponent],
+                    },] }
+        ];
+        return PaginationAndSortingModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * This component navigates using [routerLink] attribute when input 'url' is a relative url. Otherwise (when it's absolute), [href] is used.
+     */
+    var GenericLinkComponent = /** @class */ (function () {
+        function GenericLinkComponent() {
+            this.protocolRegex = /^https?:\/\//i;
+        }
+        Object.defineProperty(GenericLinkComponent.prototype, "routerUrl", {
+            get: /**
+             * @return {?}
+             */ function () {
+                if (typeof this.url === 'string') {
+                    return [this.getAbsoluteUrl(this.url)];
+                }
+                return this.url;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * @return {?}
+         */
+        GenericLinkComponent.prototype.isExternalUrl = /**
+         * @return {?}
+         */
+            function () {
+                return typeof this.url === 'string' && this.protocolRegex.test(this.url);
+            };
+        /**
+         * @private
+         * @param {?} url
+         * @return {?}
+         */
+        GenericLinkComponent.prototype.getAbsoluteUrl = /**
+         * @private
+         * @param {?} url
+         * @return {?}
+         */
+            function (url) {
+                return url.startsWith('/') ? this.url : '/' + this.url;
+            };
+        GenericLinkComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-generic-link',
+                        template: "<ng-container *ngIf=\"isExternalUrl(); else isLocalUrl\">\n  <a\n    role=\"link\"\n    [href]=\"url\"\n    [target]=\"target\"\n    [class]=\"class ? class : ''\"\n    [id]=\"id ? id : ''\"\n    [style]=\"style\"\n    [title]=\"title ? title : ''\"\n  >\n    <ng-container *ngTemplateOutlet=\"templateOutlet\"></ng-container>\n  </a>\n</ng-container>\n<ng-template #isLocalUrl>\n  <a\n    role=\"link\"\n    [routerLink]=\"routerUrl\"\n    [target]=\"target\"\n    [class]=\"class ? class : ''\"\n    [id]=\"id ? id : ''\"\n    [style]=\"style\"\n    [title]=\"title ? title : ''\"\n  >\n    <ng-container *ngTemplateOutlet=\"templateOutlet\"></ng-container>\n  </a>\n</ng-template>\n<ng-template #templateOutlet> <ng-content></ng-content> </ng-template>\n",
+                        styles: [""]
+                    }] }
+        ];
+        GenericLinkComponent.propDecorators = {
+            url: [{ type: i0.Input }],
+            target: [{ type: i0.Input }],
+            class: [{ type: i0.Input }],
+            id: [{ type: i0.Input }],
+            style: [{ type: i0.Input }],
+            title: [{ type: i0.Input }]
+        };
+        return GenericLinkComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var GenericLinkModule = /** @class */ (function () {
+        function GenericLinkModule() {
+        }
+        GenericLinkModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [common.CommonModule, i1$2.RouterModule],
+                        declarations: [GenericLinkComponent],
+                        exports: [GenericLinkComponent],
+                    },] }
+        ];
+        return GenericLinkModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    // we include all UI component modules here, but in real live
+    // projects would only include those that are relevant.
+    // for "accelerators", we could include only those that are relevant, so this
+    // component module could be configurable or we could have separate component modules,
+    // i.e. powertools-components.module.
+    var ComponentsModule = /** @class */ (function () {
+        function ComponentsModule() {
+        }
+        ComponentsModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            MediaModule,
+                            FormComponentsModule,
+                            CardModule,
+                            PaginationAndSortingModule,
+                            SpinnerModule,
+                            GenericLinkModule,
+                        ],
+                        exports: [
+                            PictureComponent,
+                            StarRatingComponent,
+                            ItemCounterComponent,
+                            CardComponent,
+                            PaginationComponent,
+                            SortingComponent,
+                            SpinnerComponent,
+                            GenericLinkComponent,
+                        ],
+                    },] }
+        ];
+        return ComponentsModule;
+    }());
+
+    /*! *****************************************************************************
+    Copyright (c) Microsoft Corporation. All rights reserved.
+    Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+    this file except in compliance with the License. You may obtain a copy of the
+    License at http://www.apache.org/licenses/LICENSE-2.0
+
+    THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+    WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+    MERCHANTABLITY OR NON-INFRINGEMENT.
+
+    See the Apache Version 2.0 License for specific language governing permissions
+    and limitations under the License.
+    ***************************************************************************** */
+    /* global Reflect, Promise */
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b)
+                if (b.hasOwnProperty(p))
+                    d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    function __extends(d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    }
+    var __assign = function () {
+        __assign = Object.assign || function __assign(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) {
+                s = arguments[i];
+                for (var p in s)
+                    if (Object.prototype.hasOwnProperty.call(s, p))
+                        t[p] = s[p];
+            }
+            return t;
+        };
+        return __assign.apply(this, arguments);
+    };
+    function __awaiter(thisArg, _arguments, P, generator) {
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try {
+                step(generator.next(value));
+            }
+            catch (e) {
+                reject(e);
+            } }
+            function rejected(value) { try {
+                step(generator["throw"](value));
+            }
+            catch (e) {
+                reject(e);
+            } }
+            function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    }
+    function __generator(thisArg, body) {
+        var _ = { label: 0, sent: function () { if (t[0] & 1)
+                throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function () { return this; }), g;
+        function verb(n) { return function (v) { return step([n, v]); }; }
+        function step(op) {
+            if (f)
+                throw new TypeError("Generator is already executing.");
+            while (_)
+                try {
+                    if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
+                        return t;
+                    if (y = 0, t)
+                        op = [op[0] & 2, t.value];
+                    switch (op[0]) {
+                        case 0:
+                        case 1:
+                            t = op;
+                            break;
+                        case 4:
+                            _.label++;
+                            return { value: op[1], done: false };
+                        case 5:
+                            _.label++;
+                            y = op[1];
+                            op = [0];
+                            continue;
+                        case 7:
+                            op = _.ops.pop();
+                            _.trys.pop();
+                            continue;
+                        default:
+                            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+                                _ = 0;
+                                continue;
+                            }
+                            if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) {
+                                _.label = op[1];
+                                break;
+                            }
+                            if (op[0] === 6 && _.label < t[1]) {
+                                _.label = t[1];
+                                t = op;
+                                break;
+                            }
+                            if (t && _.label < t[2]) {
+                                _.label = t[2];
+                                _.ops.push(op);
+                                break;
+                            }
+                            if (t[2])
+                                _.ops.pop();
+                            _.trys.pop();
+                            continue;
+                    }
+                    op = body.call(thisArg, _);
+                }
+                catch (e) {
+                    op = [6, e];
+                    y = 0;
+                }
+                finally {
+                    f = t = 0;
+                }
+            if (op[0] & 5)
+                throw op[1];
+            return { value: op[0] ? op[1] : void 0, done: true };
+        }
+    }
+    function __values(o) {
+        var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+        if (m)
+            return m.call(o);
+        return {
+            next: function () {
+                if (o && i >= o.length)
+                    o = void 0;
+                return { value: o && o[i++], done: !o };
+            }
+        };
+    }
+    function __read(o, n) {
+        var m = typeof Symbol === "function" && o[Symbol.iterator];
+        if (!m)
+            return o;
+        var i = m.call(o), r, ar = [], e;
+        try {
+            while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
+                ar.push(r.value);
+        }
+        catch (error) {
+            e = { error: error };
+        }
+        finally {
+            try {
+                if (r && !r.done && (m = i["return"]))
+                    m.call(i);
+            }
+            finally {
+                if (e)
+                    throw e.error;
+            }
+        }
+        return ar;
+    }
+    function __spread() {
+        for (var ar = [], i = 0; i < arguments.length; i++)
+            ar = ar.concat(__read(arguments[i]));
+        return ar;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CartItemListComponent = /** @class */ (function () {
+        function CartItemListComponent(cartService, fb) {
+            this.cartService = cartService;
+            this.fb = fb;
+            this.isReadOnly = false;
+            this.hasHeader = true;
+            this.items = [];
+            this.potentialProductPromotions = [];
+            this.cartIsLoading = false;
+            this.form = this.fb.group({});
+        }
+        /**
+         * @return {?}
+         */
+        CartItemListComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.items.forEach(function (item) {
+                    var code = item.product.code;
+                    if (!_this.form.controls[code]) {
+                        _this.form.setControl(code, _this.createEntryFormGroup(item));
+                    }
+                    else {
+                        /** @type {?} */
+                        var entryForm = ( /** @type {?} */(_this.form.controls[code]));
+                        entryForm.controls.quantity.setValue(item.quantity);
+                    }
+                });
+            };
+        /**
+         * @param {?} item
+         * @return {?}
+         */
+        CartItemListComponent.prototype.removeEntry = /**
+         * @param {?} item
+         * @return {?}
+         */
+            function (item) {
+                this.cartService.removeEntry(item);
+                delete this.form.controls[item.product.code];
+            };
+        /**
+         * @param {?} __0
+         * @return {?}
+         */
+        CartItemListComponent.prototype.updateEntry = /**
+         * @param {?} __0
+         * @return {?}
+         */
+            function (_a) {
+                var item = _a.item, updatedQuantity = _a.updatedQuantity;
+                this.cartService.updateEntry(item.entryNumber, updatedQuantity);
+            };
+        /**
+         * @param {?} item
+         * @return {?}
+         */
+        CartItemListComponent.prototype.getPotentialProductPromotionsForItem = /**
+         * @param {?} item
+         * @return {?}
+         */
+            function (item) {
+                var e_1, _a, e_2, _b;
+                /** @type {?} */
+                var entryPromotions = [];
+                if (this.potentialProductPromotions &&
+                    this.potentialProductPromotions.length > 0) {
+                    try {
+                        for (var _c = __values(this.potentialProductPromotions), _d = _c.next(); !_d.done; _d = _c.next()) {
+                            var promotion = _d.value;
+                            if (promotion.description &&
+                                promotion.consumedEntries &&
+                                promotion.consumedEntries.length > 0) {
+                                try {
+                                    for (var _e = __values(promotion.consumedEntries), _f = _e.next(); !_f.done; _f = _e.next()) {
+                                        var consumedEntry = _f.value;
+                                        if (this.isConsumedByEntry(consumedEntry, item)) {
+                                            entryPromotions.push(promotion);
+                                        }
+                                    }
+                                }
+                                catch (e_2_1) {
+                                    e_2 = { error: e_2_1 };
+                                }
+                                finally {
+                                    try {
+                                        if (_f && !_f.done && (_b = _e.return))
+                                            _b.call(_e);
+                                    }
+                                    finally {
+                                        if (e_2)
+                                            throw e_2.error;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch (e_1_1) {
+                        e_1 = { error: e_1_1 };
+                    }
+                    finally {
+                        try {
+                            if (_d && !_d.done && (_a = _c.return))
+                                _a.call(_c);
+                        }
+                        finally {
+                            if (e_1)
+                                throw e_1.error;
+                        }
+                    }
+                }
+                return entryPromotions;
+            };
+        /**
+         * @private
+         * @param {?} entry
+         * @return {?}
+         */
+        CartItemListComponent.prototype.createEntryFormGroup = /**
+         * @private
+         * @param {?} entry
+         * @return {?}
+         */
+            function (entry) {
+                return this.fb.group({
+                    entryNumber: entry.entryNumber,
+                    quantity: entry.quantity,
+                });
+            };
+        /**
+         * @private
+         * @param {?} consumedEntry
+         * @param {?} entry
+         * @return {?}
+         */
+        CartItemListComponent.prototype.isConsumedByEntry = /**
+         * @private
+         * @param {?} consumedEntry
+         * @param {?} entry
+         * @return {?}
+         */
+            function (consumedEntry, entry) {
+                var e_3, _a;
+                /** @type {?} */
+                var consumendEntryNumber = consumedEntry.orderEntryNumber;
+                if (entry.entries && entry.entries.length > 0) {
+                    try {
+                        for (var _b = __values(entry.entries), _c = _b.next(); !_c.done; _c = _b.next()) {
+                            var subEntry = _c.value;
+                            if (subEntry.entryNumber === consumendEntryNumber) {
+                                return true;
+                            }
+                        }
+                    }
+                    catch (e_3_1) {
+                        e_3 = { error: e_3_1 };
+                    }
+                    finally {
+                        try {
+                            if (_c && !_c.done && (_a = _b.return))
+                                _a.call(_b);
+                        }
+                        finally {
+                            if (e_3)
+                                throw e_3.error;
+                        }
+                    }
+                    return false;
+                }
+                else {
+                    return consumendEntryNumber === entry.entryNumber;
+                }
+            };
+        CartItemListComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-cart-item-list',
+                        template: "<div *ngIf=\"hasHeader\" class=\"d-none d-md-block d-lg-block d-xl-block\">\n  <div class=\"cx-item-list-header row\">\n    <div class=\"cx-item-list-desc col-md-5 col-lg-5 col-xl-6\">\n      {{ 'cartItems.description' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-price col-md-3 col-lg-2 col-xl-2\">\n      {{ 'cartItems.itemPrice' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-qty col-md-2 col-lg-3 col-xl-2\">\n      {{ 'cartItems.quantity' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n      {{ 'cartItems.total' | cxTranslate }}\n    </div>\n  </div>\n</div>\n\n<div [formGroup]=\"form\">\n  <div class=\"cx-item-list-row\" *ngFor=\"let item of items\">\n    <div class=\"cx-item-list-items\">\n      <cx-cart-item\n        [parent]=\"form.controls[item.product.code]\"\n        [item]=\"item\"\n        [potentialProductPromotions]=\"\n          getPotentialProductPromotionsForItem(item)\n        \"\n        [isReadOnly]=\"isReadOnly\"\n        (remove)=\"removeEntry($event)\"\n        [cartIsLoading]=\"cartIsLoading\"\n        (update)=\"updateEntry($event)\"\n      >\n      </cx-cart-item>\n    </div>\n  </div>\n</div>\n",
+                        encapsulation: i0.ViewEncapsulation.None,
+                        styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-item-list-header{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);margin:var(--cx-margin,0);padding:var(--cx-padding,1.125rem 0);text-transform:var(--cx-text-transform,uppercase);color:var(--cx-color,var(--cx-g-color-secondary));border-width:var(--cx-border-width,0 0 1px 0);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light))}.cx-item-list-desc{text-align:var(--cx-text-align,left);padding:var(--cx-padding,0)}.cx-item-list-price,.cx-item-list-qty{text-align:var(--cx-text-align,center)}@media (max-width:991.98px){.cx-item-list-price,.cx-item-list-qty{text-align:var(--cx-text-align,left)}}.cx-item-list-total{text-align:var(--cx-text-align,right);padding:var(--cx-padding,0)}.cx-item-list-row{padding:var(--cx-padding,1.25rem 0);border-width:var(--cx-border-width,0 0 1px 0);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light))}@media (max-width:991.98px){.cx-item-list-header{padding:var(--cx-padding,1.125rem 2.5rem)}.cx-item-list-items{padding:var(--cx-padding,0 2.5rem)}}@media (max-width:767.98px){.cx-item-list-items{padding:var(--cx-padding,0 0 0 1rem)}}"]
+                    }] }
+        ];
+        /** @nocollapse */
+        CartItemListComponent.ctorParameters = function () {
+            return [
+                { type: i1.CartService },
+                { type: forms.FormBuilder }
+            ];
+        };
+        CartItemListComponent.propDecorators = {
+            isReadOnly: [{ type: i0.Input }],
+            hasHeader: [{ type: i0.Input }],
+            items: [{ type: i0.Input }],
+            potentialProductPromotions: [{ type: i0.Input }],
+            cartIsLoading: [{ type: i0.Input }]
+        };
+        return CartItemListComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CartItemComponent = /** @class */ (function () {
+        function CartItemComponent() {
+            this.compact = false;
+            this.isReadOnly = false;
+            this.cartIsLoading = false;
+            this.remove = new i0.EventEmitter();
+            this.update = new i0.EventEmitter();
+        }
+        /**
+         * @return {?}
+         */
+        CartItemComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () { };
+        /**
+         * @param {?} product
+         * @return {?}
+         */
+        CartItemComponent.prototype.isProductOutOfStock = /**
+         * @param {?} product
+         * @return {?}
+         */
+            function (product) {
+                // TODO Move stocklevelstatuses across the app to an enum
+                return (product &&
+                    product.stock &&
+                    product.stock.stockLevelStatus === 'outOfStock');
+            };
+        /**
+         * @param {?} updatedQuantity
+         * @return {?}
+         */
+        CartItemComponent.prototype.updateItem = /**
+         * @param {?} updatedQuantity
+         * @return {?}
+         */
+            function (updatedQuantity) {
+                this.update.emit({ item: this.item, updatedQuantity: updatedQuantity });
+            };
+        /**
+         * @return {?}
+         */
+        CartItemComponent.prototype.removeItem = /**
+         * @return {?}
+         */
+            function () {
+                this.remove.emit(this.item);
+            };
+        CartItemComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-cart-item',
+                        template: "<div [ngClass]=\"compact ? 'cx-compact row' : 'row'\">\n  <!-- Item Image -->\n  <div class=\"col-2 cx-image-container\">\n    <a\n      [routerLink]=\"{ route: 'product', params: item.product } | cxTranslateUrl\"\n    >\n      <cx-picture\n        [imageContainer]=\"item.product.images?.PRIMARY\"\n        imageFormat=\"thumbnail\"\n      ></cx-picture>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-5'\">\n        <div *ngIf=\"item.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"\n              { route: 'product', params: item.product } | cxTranslateUrl\n            \"\n            >{{ item.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"item.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n        </div>\n        <!-- Variants -->\n        <div\n          *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n          class=\"cx-property\"\n        >\n          <div class=\"cx-label\">{{ variant.name }}</div>\n          <div class=\"cx-value\">{{ variant.value }}</div>\n        </div>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"item.basePrice\"\n        class=\"cx-price\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.item' | cxTranslate }}\n        </div>\n        <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n          {{ item.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <div\n        *ngIf=\"item.quantity\"\n        class=\"cx-quantity\"\n        [ngClass]=\"compact ? '' : ' col-3'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          placement=\"left\"\n          ngbTooltip=\"The quantity represents the total number of this item in your cart.\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n        <div *ngIf=\"isReadOnly\" class=\"cx-value\">{{ item.quantity }}</div>\n        <div\n          *ngIf=\"!isReadOnly && parent\"\n          class=\"cx-value\"\n          [formGroup]=\"parent\"\n        >\n          <cx-item-counter\n            isValueChangeable=\"true\"\n            [step]=\"1\"\n            [min]=\"1\"\n            [max]=\"item.product.stock?.stockLevel || 1000\"\n            (update)=\"updateItem($event)\"\n            [cartIsLoading]=\"cartIsLoading\"\n            formControlName=\"quantity\"\n          >\n          </cx-item-counter>\n        </div>\n      </div>\n      <!-- Total -->\n      <div\n        *ngIf=\"item.totalPrice\"\n        class=\"cx-total\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.total' | cxTranslate }}\n        </div>\n        <div class=\"cx-value\">{{ item.totalPrice.formattedValue }}</div>\n      </div>\n    </div>\n    <!-- Availability -->\n    <div *ngIf=\"isProductOutOfStock(item)\" class=\"cx-availability col-12\">\n      {{ 'productSummary.outOfStock' | cxTranslate }}\n    </div>\n    <!-- Promotion -->\n    <cx-promotions [promotions]=\"potentialProductPromotions\"></cx-promotions>\n    <!-- Actions -->\n    <div *ngIf=\"!isReadOnly\" class=\"cx-actions col-12\">\n      <button\n        class=\"link\"\n        [class.disabled]=\"cartIsLoading\"\n        [disabled]=\"cartIsLoading\"\n        (click)=\"removeItem()\"\n      >\n        {{ 'common.remove' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n",
+                        styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-name{font-size:var(--cx-font-size,1rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);overflow-wrap:var(--cx-overflow-wrap,break-word);padding:var(--cx-padding,0)}.cx-name .cx-link{color:var(--cx-color,var(--cx-g-color-text));-webkit-text-decoration:var(--cx-text-decoration,none);text-decoration:var(--cx-text-decoration,none)}.cx-name .cx-link:hover{color:var(--cx-color,var(--cx-g-color-primary))}.cx-code{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.22222);color:var(--cx-color,var(--cx-g-color-secondary));padding:var(--cx-padding,.625rem 0)}.cx-property{display:var(--cx-display,flex)}.cx-label{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);overflow-wrap:var(--cx-overflow-wrap,break-word);padding-right:1rem}.cx-value{font-size:var(--cx-font-size,1rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);overflow-wrap:var(--cx-overflow-wrap,break-word);font-weight:var(--cx-g-font-weight-normal,400)}@media (max-width:767.98px){.cx-info-container{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column)}.cx-label{min-width:var(--cx-min-width,5rem)}.cx-value{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.22222)}}.cx-price{display:var(--cx-display,flex);justify-content:var(--cx-justify-content,center);align-items:var(--cx-align-items,center);font-size:var(--cx-font-size,1rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);font-weight:400}@media (max-width:767.98px){.cx-price{justify-content:var(--cx-justify-content,flex-start)}}.cx-price .cx-old{-webkit-text-decoration:var(--cx-text-decoration,line-through);text-decoration:var(--cx-text-decoration,line-through);color:var(--cx-color,var(--cx-g-color-secondary));padding:var(--cx-padding,0 1rem 0 0)}.cx-price .cx-new{color:var(--cx-color,var(--cx-g-color-primary))}.cx-quantity{display:var(--cx-display,flex);justify-content:var(--cx-justify-content,center);align-items:var(--cx-align-items,center)}@media (max-width:767.98px){.cx-quantity{justify-content:var(--cx-justify-content,flex-start)}}.cx-total{display:var(--cx-display,flex);justify-content:var(--cx-justify-content,flex-end);align-items:var(--cx-align-items,center)}@media (max-width:767.98px){.cx-total{justify-content:var(--cx-justify-content,flex-start)}}.cx-promo{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);color:var(--cx-color,var(--cx-g-color-success));padding:var(--cx-padding,.75rem 0);margin:var(--cx-margin,0)}.cx-availability{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);color:var(--cx-color,var(--cx-g-color-danger));padding:var(--cx-padding,.75rem 0);margin:var(--cx-margin,0)}.cx-actions{display:var(--cx-display,flex);justify-content:var(--cx-justify-content,flex-end);padding:var(--cx-padding,0)}@media (max-width:767.98px){.cx-actions{display:var(--cx-display,flex);justify-content:var(--cx-justify-content,flex-start);padding:var(--cx-padding,0)}}.cx-actions button.link{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);color:var(--cx-color,var(--cx-g-color-text))}.cx-compact{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,row)}.cx-compact .cx-image-container{padding:var(--cx-padding,0)}.cx-compact .cx-info-container{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column);margin:var(--cx-margin,0)}.cx-compact .cx-actions,.cx-compact .cx-price,.cx-compact .cx-quantity,.cx-compact .cx-total{justify-content:var(--cx-justify-content,flex-start);padding:var(--cx-padding,0)}.cx-compact .cx-actions .cx-label,.cx-compact .cx-price .cx-label,.cx-compact .cx-quantity .cx-label,.cx-compact .cx-total .cx-label{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);min-width:var(--cx-min-width,5rem)}.cx-compact .cx-actions .cx-value,.cx-compact .cx-price .cx-value,.cx-compact .cx-quantity .cx-value,.cx-compact .cx-total .cx-value{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.22222)}.cx-compact .cx-actions button.link,.cx-compact .cx-price button.link,.cx-compact .cx-quantity button.link,.cx-compact .cx-total button.link{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);color:var(--cx-color,var(--cx-g-color-text))}"]
+                    }] }
+        ];
+        CartItemComponent.propDecorators = {
+            compact: [{ type: i0.Input }],
+            item: [{ type: i0.Input }],
+            potentialProductPromotions: [{ type: i0.Input }],
+            isReadOnly: [{ type: i0.Input }],
+            cartIsLoading: [{ type: i0.Input }],
+            remove: [{ type: i0.Output }],
+            update: [{ type: i0.Output }],
+            parent: [{ type: i0.Input }]
+        };
+        return CartItemComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var OrderSummaryComponent = /** @class */ (function () {
+        function OrderSummaryComponent() {
+        }
+        OrderSummaryComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-order-summary',
+                        template: "<h4>{{ 'orderCost.orderSummary' | cxTranslate }}</h4>\n\n<div class=\"cx-summary-partials\" *ngIf=\"cart\">\n  <div class=\"cx-summary-row\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.subtotal' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.totalPrice?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.estimatedShipping' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{\n        cart.deliveryCost?.formattedValue\n          ? cart.deliveryCost.formattedValue\n          : 'TBD'\n      }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row cx-summary-savings\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.discount' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.totalDiscounts?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.salesTax' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.totalTax?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row cx-summary-total\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.total' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.totalPriceWithTax?.formattedValue }}\n    </div>\n  </div>\n</div>\n\n<cx-promotions [promotions]=\"cart.appliedOrderPromotions\"></cx-promotions>\n",
+                        styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/:host{display:block;padding:var(--cx-padding,1rem);margin:var(--cx-margin,0 0 1.5rem 0)}.cx-summary-label{text-align:var(--cx-text-align,start);padding:var(--cx-padding,0)}.cx-summary-amount{text-align:var(--cx-text-align,end);padding:var(--cx-padding,0)}.cx-summary-row{padding:var(--cx-padding,.5rem 0);display:var(--cx-display,flex);flex-wrap:var(--cx-flex-wrap,wrap)}.cx-summary-savings{color:var(--cx-color,var(--cx-g-color-success))}.cx-summary-total{font-weight:var(--cx-font-weight,var(--cx-g-font-weight-bold,700))}"]
+                    }] }
+        ];
+        OrderSummaryComponent.propDecorators = {
+            cart: [{ type: i0.Input }]
+        };
+        return OrderSummaryComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CartSharedModule = /** @class */ (function () {
+        function CartSharedModule() {
+        }
+        CartSharedModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i1$2.RouterModule,
+                            forms.ReactiveFormsModule,
+                            ComponentsModule,
+                            i1.UrlTranslationModule,
+                            ngBootstrap.NgbModule,
+                            PromotionsModule,
+                            i1.I18nModule,
+                        ],
+                        declarations: [
+                            CartItemComponent,
+                            OrderSummaryComponent,
+                            CartItemListComponent,
+                        ],
+                        exports: [CartItemComponent, CartItemListComponent, OrderSummaryComponent],
+                    },] }
+        ];
+        return CartSharedModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var AddToCartModule = /** @class */ (function () {
+        function AddToCartModule() {
+        }
+        AddToCartModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            CartSharedModule,
+                            common.CommonModule,
+                            i1$2.RouterModule,
+                            SpinnerModule,
+                            i1.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    ProductAddToCartComponent: { selector: 'cx-add-to-cart' },
+                                },
+                            }))),
+                            i1.UrlTranslationModule,
+                            i1.I18nModule,
+                        ],
+                        declarations: [AddToCartComponent, AddedToCartDialogComponent],
+                        entryComponents: [AddToCartComponent, AddedToCartDialogComponent],
+                        exports: [AddToCartComponent],
+                    },] }
+        ];
+        return AddToCartModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CartDetailsComponent = /** @class */ (function () {
+        function CartDetailsComponent(cartService) {
+            this.cartService = cartService;
+        }
+        /**
+         * @return {?}
+         */
+        CartDetailsComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                this.cart$ = this.cartService.getActive();
+                this.entries$ = this.cartService
+                    .getEntries()
+                    .pipe(operators.filter(function (entries) { return entries.length > 0; }));
+                this.cartLoaded$ = this.cartService.getLoaded();
+            };
+        /**
+         * @param {?} cart
+         * @return {?}
+         */
+        CartDetailsComponent.prototype.getAllPromotionsForCart = /**
+         * @param {?} cart
+         * @return {?}
+         */
+            function (cart) {
+                /** @type {?} */
+                var potentialPromotions = cart.potentialOrderPromotions || [];
+                /** @type {?} */
+                var appliedPromotions = cart.appliedOrderPromotions || [];
+                return __spread(potentialPromotions, appliedPromotions);
+            };
+        CartDetailsComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-cart-details',
+                        template: "<ng-container *ngIf=\"(cart$ | async) as cart\">\n  <ng-container *ngIf=\"(entries$ | async) as entries\">\n    <div class=\"cart-details-wrapper\">\n      <h1>\n        {{ 'cartDetails.shoppingCart' | cxTranslate }} ({{\n          'cartDetails.id' | cxTranslate\n        }}\n        {{ cart?.code }})\n      </h1>\n      <div class=\"cx-total\">\n        {{\n          'cartItems.cartTotal'\n            | cxTranslate: { count: cart.deliveryItemsQuantity }\n        }}:\n        {{ cart.totalPrice?.formattedValue }}\n      </div>\n      <cx-promotions\n        [promotions]=\"getAllPromotionsForCart(cart)\"\n      ></cx-promotions>\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n        [cartIsLoading]=\"!(cartLoaded$ | async)\"\n      ></cx-cart-item-list>\n      <!-- NOT FOR MVP  <cx-cart-coupon></cx-cart-coupon> -->\n    </div>\n  </ng-container>\n</ng-container>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/:host{display:block}.cart-details-wrapper{padding:2rem 1rem}.cx-total{font-size:var(--cx-font-size,1.125rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);margin:var(--cx-margin,0 0 1rem)}.cx-promotions{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.22222);color:var(--cx-color,var(--cx-g-color-success));padding:var(--cx-padding,.5rem 0)}"]
+                    }] }
+        ];
+        /** @nocollapse */
+        CartDetailsComponent.ctorParameters = function () {
+            return [
+                { type: i1.CartService }
+            ];
+        };
+        return CartDetailsComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CartDetailsModule = /** @class */ (function () {
+        function CartDetailsModule() {
+        }
+        CartDetailsModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            CartSharedModule,
+                            common.CommonModule,
+                            i1$2.RouterModule,
+                            i1.UrlTranslationModule,
+                            PromotionsModule,
+                            i1.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    CartComponent: {
+                                        selector: 'cx-cart-details',
+                                    },
+                                },
+                            }))),
+                            i1.I18nModule,
+                        ],
+                        declarations: [CartDetailsComponent],
+                        exports: [CartDetailsComponent],
+                        entryComponents: [CartDetailsComponent],
+                    },] }
+        ];
+        return CartDetailsModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CartTotalsComponent = /** @class */ (function () {
+        function CartTotalsComponent(cartService) {
+            this.cartService = cartService;
+        }
+        /**
+         * @return {?}
+         */
+        CartTotalsComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                this.cart$ = this.cartService.getActive();
+                this.entries$ = this.cartService
+                    .getEntries()
+                    .pipe(operators.filter(function (entries) { return entries.length > 0; }));
+            };
+        CartTotalsComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-cart-totals',
+                        template: "<ng-container *ngIf=\"(cart$ | async) as cart\">\n  <ng-container *ngIf=\"(entries$ | async) as entries\">\n    <div class=\"cart-totals-wrapper\">\n      <cx-order-summary [cart]=\"cart\"></cx-order-summary>\n      <button\n        [routerLink]=\"{ route: 'checkout' } | cxTranslateUrl\"\n        *ngIf=\"entries.length\"\n        class=\"btn btn-primary btn-block\"\n        type=\"button\"\n      >\n        {{ 'cartDetails.proceedToCheckout' | cxTranslate }}\n      </button>\n    </div>\n  </ng-container>\n</ng-container>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        styles: [".cart-totals-wrapper{padding:2rem 1rem}cx-order-summary{padding:0}"]
+                    }] }
+        ];
+        /** @nocollapse */
+        CartTotalsComponent.ctorParameters = function () {
+            return [
+                { type: i1.CartService }
+            ];
+        };
+        return CartTotalsComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CartTotalsModule = /** @class */ (function () {
+        function CartTotalsModule() {
+        }
+        CartTotalsModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i1$2.RouterModule,
+                            i1.UrlTranslationModule,
+                            i1.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    CartTotalsComponent: {
+                                        selector: 'cx-cart-totals',
+                                    },
+                                },
+                            }))),
+                            CartSharedModule,
+                            i1.I18nModule,
+                        ],
+                        declarations: [CartTotalsComponent],
+                        exports: [CartTotalsComponent],
+                        entryComponents: [CartTotalsComponent],
+                    },] }
+        ];
+        return CartTotalsModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     /** @enum {string} */
     var ICON_TYPES = {
         CART: 'shopping-cart',
@@ -266,6 +2321,101 @@
         ];
         return IconModule;
     }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var MiniCartComponent = /** @class */ (function () {
+        function MiniCartComponent(cartService) {
+            this.cartService = cartService;
+            this.iconTypes = ICON_TYPES;
+            this.quantity$ = this.cartService
+                .getActive()
+                .pipe(operators.map(function (cart) { return cart.deliveryItemsQuantity || 0; }));
+            this.total$ = this.cartService.getActive().pipe(operators.filter(function (cart) { return !!cart.totalPrice; }), operators.map(function (cart) { return cart.totalPrice.formattedValue; }));
+        }
+        MiniCartComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-mini-cart',
+                        template: "<a\n  [attr.aria-label]=\"(quantity$ | async) + ' items currently in your cart'\"\n  [routerLink]=\"{ route: ['cart'] } | cxTranslateUrl\"\n>\n  <cx-icon [type]=\"iconTypes.CART\"></cx-icon>\n\n  <span class=\"total\">{{ total$ | async }}</span>\n  <span class=\"count\">{{ quantity$ | async }}</span>\n</a>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        MiniCartComponent.ctorParameters = function () {
+            return [
+                { type: i1.CartService }
+            ];
+        };
+        return MiniCartComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var MiniCartModule = /** @class */ (function () {
+        function MiniCartModule() {
+        }
+        MiniCartModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i1$2.RouterModule,
+                            i1.CartModule,
+                            i1.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    MiniCartComponent: { selector: 'cx-mini-cart' },
+                                },
+                            }))),
+                            i1.UrlTranslationModule,
+                            IconModule,
+                        ],
+                        declarations: [MiniCartComponent],
+                        entryComponents: [MiniCartComponent],
+                    },] }
+        ];
+        return MiniCartModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CartComponentModule = /** @class */ (function () {
+        function CartComponentModule() {
+        }
+        CartComponentModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            CartDetailsModule,
+                            CartTotalsModule,
+                            CartSharedModule,
+                            ngBootstrap.NgbModule,
+                            i1.CartModule,
+                        ],
+                        exports: [
+                            CartDetailsModule,
+                            CartTotalsModule,
+                            CartSharedModule,
+                            AddToCartModule,
+                            MiniCartModule,
+                        ],
+                    },] }
+        ];
+        return CartComponentModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
 
     /**
      * @fileoverview added by tsickle
@@ -635,175 +2785,6 @@
         /** @nocollapse */ LogoutGuard.ngInjectableDef = i0.defineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(i0.inject(i1.AuthService), i0.inject(i1.CmsService)); }, token: LogoutGuard, providedIn: "root" });
         return LogoutGuard;
     }());
-
-    /*! *****************************************************************************
-    Copyright (c) Microsoft Corporation. All rights reserved.
-    Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-    this file except in compliance with the License. You may obtain a copy of the
-    License at http://www.apache.org/licenses/LICENSE-2.0
-
-    THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-    KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-    WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-    MERCHANTABLITY OR NON-INFRINGEMENT.
-
-    See the Apache Version 2.0 License for specific language governing permissions
-    and limitations under the License.
-    ***************************************************************************** */
-    /* global Reflect, Promise */
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b)
-                if (b.hasOwnProperty(p))
-                    d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    function __extends(d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    }
-    var __assign = function () {
-        __assign = Object.assign || function __assign(t) {
-            for (var s, i = 1, n = arguments.length; i < n; i++) {
-                s = arguments[i];
-                for (var p in s)
-                    if (Object.prototype.hasOwnProperty.call(s, p))
-                        t[p] = s[p];
-            }
-            return t;
-        };
-        return __assign.apply(this, arguments);
-    };
-    function __awaiter(thisArg, _arguments, P, generator) {
-        return new (P || (P = Promise))(function (resolve, reject) {
-            function fulfilled(value) { try {
-                step(generator.next(value));
-            }
-            catch (e) {
-                reject(e);
-            } }
-            function rejected(value) { try {
-                step(generator["throw"](value));
-            }
-            catch (e) {
-                reject(e);
-            } }
-            function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-            step((generator = generator.apply(thisArg, _arguments || [])).next());
-        });
-    }
-    function __generator(thisArg, body) {
-        var _ = { label: 0, sent: function () { if (t[0] & 1)
-                throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function () { return this; }), g;
-        function verb(n) { return function (v) { return step([n, v]); }; }
-        function step(op) {
-            if (f)
-                throw new TypeError("Generator is already executing.");
-            while (_)
-                try {
-                    if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
-                        return t;
-                    if (y = 0, t)
-                        op = [op[0] & 2, t.value];
-                    switch (op[0]) {
-                        case 0:
-                        case 1:
-                            t = op;
-                            break;
-                        case 4:
-                            _.label++;
-                            return { value: op[1], done: false };
-                        case 5:
-                            _.label++;
-                            y = op[1];
-                            op = [0];
-                            continue;
-                        case 7:
-                            op = _.ops.pop();
-                            _.trys.pop();
-                            continue;
-                        default:
-                            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-                                _ = 0;
-                                continue;
-                            }
-                            if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) {
-                                _.label = op[1];
-                                break;
-                            }
-                            if (op[0] === 6 && _.label < t[1]) {
-                                _.label = t[1];
-                                t = op;
-                                break;
-                            }
-                            if (t && _.label < t[2]) {
-                                _.label = t[2];
-                                _.ops.push(op);
-                                break;
-                            }
-                            if (t[2])
-                                _.ops.pop();
-                            _.trys.pop();
-                            continue;
-                    }
-                    op = body.call(thisArg, _);
-                }
-                catch (e) {
-                    op = [6, e];
-                    y = 0;
-                }
-                finally {
-                    f = t = 0;
-                }
-            if (op[0] & 5)
-                throw op[1];
-            return { value: op[0] ? op[1] : void 0, done: true };
-        }
-    }
-    function __values(o) {
-        var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-        if (m)
-            return m.call(o);
-        return {
-            next: function () {
-                if (o && i >= o.length)
-                    o = void 0;
-                return { value: o && o[i++], done: !o };
-            }
-        };
-    }
-    function __read(o, n) {
-        var m = typeof Symbol === "function" && o[Symbol.iterator];
-        if (!m)
-            return o;
-        var i = m.call(o), r, ar = [], e;
-        try {
-            while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
-                ar.push(r.value);
-        }
-        catch (error) {
-            e = { error: error };
-        }
-        finally {
-            try {
-                if (r && !r.done && (m = i["return"]))
-                    m.call(i);
-            }
-            finally {
-                if (e)
-                    throw e.error;
-            }
-        }
-        return ar;
-    }
-    function __spread() {
-        for (var ar = [], i = 0; i < arguments.length; i++)
-            ar = ar.concat(__read(arguments[i]));
-        return ar;
-    }
 
     /**
      * @fileoverview added by tsickle
@@ -3027,1996 +5008,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    // TODO: Improve a11y with better text appropriate to usage (example: loading cart spinner)
-    var SpinnerComponent = /** @class */ (function () {
-        function SpinnerComponent() {
-        }
-        SpinnerComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-spinner',
-                        template: "<div class=\"loader\">{{ 'spinner.loading' | cxTranslate }}</div>\n"
-                    }] }
-        ];
-        /** @nocollapse */
-        SpinnerComponent.ctorParameters = function () { return []; };
-        return SpinnerComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var SpinnerModule = /** @class */ (function () {
-        function SpinnerModule() {
-        }
-        SpinnerModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [common.CommonModule, i1.I18nModule],
-                        declarations: [SpinnerComponent],
-                        exports: [SpinnerComponent],
-                    },] }
-        ];
-        return SpinnerModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var PromotionsComponent = /** @class */ (function () {
-        function PromotionsComponent() {
-        }
-        PromotionsComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-promotions',
-                        template: "<div class=\"cx-promotions\" *ngIf=\"promotions\">\n  <strong *ngFor=\"let promotion of promotions\">\n    {{ promotion.description }}\n  </strong>\n</div>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
-                        styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-promotions{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.22222);color:var(--cx-color,var(--cx-g-color-success));padding:var(--cx-padding,.5rem 0)}"]
-                    }] }
-        ];
-        /** @nocollapse */
-        PromotionsComponent.ctorParameters = function () { return []; };
-        PromotionsComponent.propDecorators = {
-            promotions: [{ type: i0.Input }]
-        };
-        return PromotionsComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var PromotionsModule = /** @class */ (function () {
-        function PromotionsModule() {
-        }
-        PromotionsModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [common.CommonModule],
-                        declarations: [PromotionsComponent],
-                        exports: [PromotionsComponent],
-                    },] }
-        ];
-        return PromotionsModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @type {?} */
-    var missingProductImgSrc = 
-    // tslint:disable-next-line:max-line-length
-    'data:image/jpg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABVAAD/4QOIaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjUtYzAyMSA3OS4xNTQ5MTEsIDIwMTMvMTAvMjktMTE6NDc6MTYgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6NjEwOTUyZjYtMmRmOS00ZmIxLWJmZDItODBlZDVjZDY3YjhjIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkU2RkNERDA2RDQyQjExRTVBRUE3REEyNEFBNDQxNDBDIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkU2RkNERDA1RDQyQjExRTVBRUE3REEyNEFBNDQxNDBDIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpiZjI5Zjc3Zi1hZWM5LWY0NDgtOTM0MC1iZGJkYjk2MDk3OTIiIHN0UmVmOmRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDo0MDcyNjk0NS0zNjQ0LTExNzgtODI2OC1mMDQzMTA0ZTU5MWIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7/7gAOQWRvYmUAZMAAAAAB/9sAhAACAQEBAQECAQECAwIBAgMDAgICAgMDAwMDAwMDBQMEBAQEAwUFBQYGBgUFBwcICAcHCgoKCgoMDAwMDAwMDAwMAQICAgQDBAcFBQcKCAcICgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAEsASwDAREAAhEBAxEB/8QArQABAAIDAQEBAQAAAAAAAAAAAAcIBAUGAwIBCQEBAAMBAQAAAAAAAAAAAAAAAAIDBAEFEAABAwMCAwQCCgwKBwgDAAABAAIDBAUGEQchEggxQVETYRRxgeEiMlKTFVYXkUKS0iNzs3S0FjY3obHRYnJTVJRVGPCCojNjJHXBo9M0ZCW1OLKkSBEBAAICAQQCAgMBAQAAAAAAAAECEQMxIVESEzIEQSLwYRRDcf/aAAwDAQACEQMRAD8A/v4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIPx72saXvIDANSTwAA7yg1D9wsBjeY5L5b2vadC01lMCD6RzrvjKPlHd+fWJt/8A47b/AO+033674z2PKO59Ym3/APjtv/vtN9+njPY8o7n1ibf/AOO2/wDvtN9+njPY8o7n1i7ff47b/wC+0336eM9jyju2Ntu1rvNP65aKmKqpCdBLTSMlZr/SYSFyYw7E5ZC46ICAgICAgICAgICAgICAgICAgICAgICAgICAgICDUZ1mlm29xWsy2/O0oKRnNyN055Hk8rI2A/bOcQAu1rmcI2tiMqebob455upcJJLxVPp7ESfItdM9zaeNmvAOA053eLne1oOC201xVivsmzjlNAQEBAQbHGstybDri27YvXTUNwaQfMp3lvNpx0cOxw9BBC5MRPLsWmOFsOnTfmPd6zy2y9NbDmtA1rqlkY0Z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';
-    /** @type {?} */
-    var missingProductImageAlt = 'Image not available';
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @type {?} */
-    var DEFAULT_FORMAT = 'product';
-    /** @type {?} */
-    var INITIALIZED_CLS = 'initialized';
-    /** @type {?} */
-    var LOADING_CLS = 'loading';
-    var PictureComponent = /** @class */ (function () {
-        function PictureComponent(elRef, cd, renderer) {
-            this.elRef = elRef;
-            this.cd = cd;
-            this.renderer = renderer;
-            this.loaded = new i0.EventEmitter();
-            this.missingProductImgSrc = missingProductImgSrc;
-            this.missingProductImageAlt = missingProductImageAlt;
-        }
-        /**
-         * @return {?}
-         */
-        PictureComponent.prototype.ngOnChanges = /**
-         * @return {?}
-         */
-            function () {
-                this.loadImage();
-            };
-        /**
-         * @return {?}
-         */
-        PictureComponent.prototype.loadImage = /**
-         * @return {?}
-         */
-            function () {
-                if (this.imageContainer) {
-                    /** @type {?} */
-                    var image = this.imageContainer[this.imageFormat || DEFAULT_FORMAT];
-                    if (image && image.url) {
-                        this.renderer.addClass(( /** @type {?} */(this.elRef.nativeElement)), LOADING_CLS);
-                        this.mainImage = image.url;
-                        this.cd.detectChanges();
-                    }
-                }
-            };
-        /**
-         * @return {?}
-         */
-        PictureComponent.prototype.loadHandler = /**
-         * @return {?}
-         */
-            function () {
-                this.renderer.addClass(( /** @type {?} */(this.elRef.nativeElement)), INITIALIZED_CLS);
-                this.renderer.removeClass(( /** @type {?} */(this.elRef.nativeElement)), LOADING_CLS);
-                this.loaded.emit(this.elRef.nativeElement);
-            };
-        /**
-         * @param {?} event
-         * @return {?}
-         */
-        PictureComponent.prototype.loadErrorHandler = /**
-         * @param {?} event
-         * @return {?}
-         */
-            function (event) {
-                event.target.src = missingProductImgSrc;
-            };
-        PictureComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-picture',
-                        template: "<picture>\n  <!--\n    <source *ngIf=\"xsImage\" [srcset]=\"xsImage\" media=\"(max-width: 500px)\" />\n    <source *ngIf=\"smImage\" [srcset]=\"smImage\" media=\"(max-width: 800px)\" />\n    <source *ngIf=\"mdImage\" [srcset]=\"mdImage\" media=\"(max-width: 1200px)\" />\n    <source *ngIf=\"lgImage\" [srcset]=\"lgImage\" media=\"(min-width: 1200px)\" />\n  -->\n  <img\n    *ngIf=\"mainImage\"\n    [src]=\"mainImage || missingProductImgSrc\"\n    (load)=\"loadHandler()\"\n    (error)=\"loadErrorHandler($event)\"\n    [alt]=\"imageAlt\"\n  />\n\n  <img\n    *ngIf=\"!imageContainer\"\n    [src]=\"missingProductImgSrc\"\n    [alt]=\"missingProductImageAlt\"\n  />\n</picture>\n",
-                        styles: ["img{max-width:100%;max-height:100%;-webkit-transform:scale(var(--cx-zoom,1));transform:scale(var(--cx-zoom,1));opacity:var(--cx-zoom,1);transition:all var(--cx-g-transition-duration,.6s);border-radius:var(--cx-border-radius)}"]
-                    }] }
-        ];
-        /** @nocollapse */
-        PictureComponent.ctorParameters = function () {
-            return [
-                { type: i0.ElementRef },
-                { type: i0.ChangeDetectorRef },
-                { type: i0.Renderer2 }
-            ];
-        };
-        PictureComponent.propDecorators = {
-            imageContainer: [{ type: i0.Input }],
-            imageFormat: [{ type: i0.Input }],
-            imagePosition: [{ type: i0.Input }],
-            imageAlt: [{ type: i0.Input }],
-            loaded: [{ type: i0.Output }]
-        };
-        return PictureComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var MediaModule = /** @class */ (function () {
-        function MediaModule() {
-        }
-        MediaModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [common.CommonModule],
-                        declarations: [PictureComponent],
-                        exports: [PictureComponent],
-                    },] }
-        ];
-        return MediaModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var BootstrapModule = /** @class */ (function () {
-        function BootstrapModule() {
-        }
-        BootstrapModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            ngBootstrap.NgbDropdownModule,
-                            ngBootstrap.NgbTypeaheadModule,
-                            ngBootstrap.NgbPaginationModule,
-                            ngBootstrap.NgbModalModule,
-                            ngBootstrap.NgbTabsetModule,
-                            ngBootstrap.NgbAccordionModule,
-                            ngBootstrap.NgbRatingModule,
-                            ngBootstrap.NgbCollapseModule,
-                        ],
-                        exports: [
-                            ngBootstrap.NgbDropdownModule,
-                            ngBootstrap.NgbTabsetModule,
-                            ngBootstrap.NgbAccordionModule,
-                            ngBootstrap.NgbRatingModule,
-                            ngBootstrap.NgbTypeaheadModule,
-                            ngBootstrap.NgbCollapseModule,
-                            ngBootstrap.NgbModalModule,
-                            ngBootstrap.NgbPaginationModule,
-                        ],
-                        providers: [
-                            ngBootstrap.NgbTabsetConfig,
-                            ngBootstrap.NgbAccordionConfig,
-                            ngBootstrap.NgbRatingConfig,
-                            ngBootstrap.NgbPaginationConfig,
-                        ],
-                    },] }
-        ];
-        return BootstrapModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var StarRatingComponent = /** @class */ (function () {
-        function StarRatingComponent() {
-            this.rating = 1;
-            this.disabled = false;
-            this.steps = 1;
-            this.onChange = function (_rating) { };
-            this.onTouched = function () { };
-        }
-        Object.defineProperty(StarRatingComponent.prototype, "value", {
-            get: /**
-             * @return {?}
-             */ function () {
-                return this.rating;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        /**
-         * @param {?} rating
-         * @return {?}
-         */
-        StarRatingComponent.prototype.setRating = /**
-         * @param {?} rating
-         * @return {?}
-         */
-            function (rating) {
-                if (!this.disabled) {
-                    this.writeValue(rating);
-                }
-            };
-        // ControlvalueAccessor interface
-        // ControlvalueAccessor interface
-        /**
-         * @param {?} rating
-         * @return {?}
-         */
-        StarRatingComponent.prototype.writeValue =
-            // ControlvalueAccessor interface
-            /**
-             * @param {?} rating
-             * @return {?}
-             */
-            function (rating) {
-                this.rating = rating;
-                this.onChange(this.rating);
-            };
-        /**
-         * @param {?} fn
-         * @return {?}
-         */
-        StarRatingComponent.prototype.registerOnChange = /**
-         * @param {?} fn
-         * @return {?}
-         */
-            function (fn) {
-                this.onChange = fn;
-            };
-        /**
-         * @param {?} fn
-         * @return {?}
-         */
-        StarRatingComponent.prototype.registerOnTouched = /**
-         * @param {?} fn
-         * @return {?}
-         */
-            function (fn) {
-                this.onTouched = fn;
-            };
-        StarRatingComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-star-rating',
-                        template: "<div class=\"cx-star-rating\" tabindex=\"0\">\n  <ng-template #template let-fill=\"fill\">\n    <span class=\"star\" [class.full]=\"fill === 100\">\n      <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span> &#9733;\n    </span>\n  </ng-template>\n  <ngb-rating\n    [(rate)]=\"rating\"\n    (rateChange)=\"onTouched(); setRating($event)\"\n    [starTemplate]=\"template\"\n    [readonly]=\"disabled\"\n    max=\"5\"\n  ></ngb-rating>\n</div>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
-                        providers: [
-                            {
-                                provide: forms.NG_VALUE_ACCESSOR,
-                                multi: true,
-                                useExisting: i0.forwardRef(function () { return StarRatingComponent; }),
-                            },
-                        ]
-                    }] }
-        ];
-        StarRatingComponent.propDecorators = {
-            rating: [{ type: i0.Input }],
-            disabled: [{ type: i0.Input }],
-            steps: [{ type: i0.Input }]
-        };
-        return StarRatingComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @type {?} */
-    var COUNTER_CONTROL_ACCESSOR = {
-        provide: forms.NG_VALUE_ACCESSOR,
-        /* tslint:disable-next-line */
-        useExisting: i0.forwardRef(function () { return ItemCounterComponent; }),
-        multi: true,
-    };
-    var ItemCounterComponent = /** @class */ (function () {
-        function ItemCounterComponent(renderer) {
-            this.renderer = renderer;
-            this.value = 0;
-            this.step = 1;
-            this.async = false;
-            this.cartIsLoading = false;
-            this.isValueChangeable = false;
-            this.update = new i0.EventEmitter();
-            this.isValueOutOfRange = false;
-            this.inputValue = new forms.FormControl({
-                disabled: this.isValueChangeable,
-            });
-            this.onTouch = function () { };
-            this.onModelChange = function (_rating) { };
-        }
-        /**
-         * @return {?}
-         */
-        ItemCounterComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                this.writeValue(this.min || 0);
-                this.inputValue.valueChanges.pipe(operators.debounceTime(300)).subscribe(function (value) {
-                    if (value) {
-                        _this.manualChange(Number(value));
-                    }
-                });
-            };
-        /**
-         * @return {?}
-         */
-        ItemCounterComponent.prototype.ngOnChanges = /**
-         * @return {?}
-         */
-            function () {
-                if (this.cartIsLoading) {
-                    this.inputValue.disable({
-                        onlySelf: true,
-                        emitEvent: false,
-                    });
-                }
-                else {
-                    this.inputValue.enable({
-                        onlySelf: true,
-                        emitEvent: false,
-                    });
-                }
-            };
-        /**
-         * If value is too small it will be set to min, if is too big it will be set to max.
-         */
-        /**
-         * If value is too small it will be set to min, if is too big it will be set to max.
-         * @param {?} incomingValue
-         * @return {?}
-         */
-        ItemCounterComponent.prototype.adjustValueInRange = /**
-         * If value is too small it will be set to min, if is too big it will be set to max.
-         * @param {?} incomingValue
-         * @return {?}
-         */
-            function (incomingValue) {
-                return incomingValue < this.min || !this.min
-                    ? this.min
-                    : incomingValue > this.max || !this.max
-                        ? this.max
-                        : incomingValue;
-            };
-        /**
-         * Function set 'isValueOutOfRange' flag and adjust value in range. Then update model value and refresh input
-         */
-        /**
-         * Function set 'isValueOutOfRange' flag and adjust value in range. Then update model value and refresh input
-         * @param {?} newValue
-         * @return {?}
-         */
-        ItemCounterComponent.prototype.manualChange = /**
-         * Function set 'isValueOutOfRange' flag and adjust value in range. Then update model value and refresh input
-         * @param {?} newValue
-         * @return {?}
-         */
-            function (newValue) {
-                this.isValueOutOfRange = this.isOutOfRange(newValue);
-                newValue = this.adjustValueInRange(newValue);
-                this.updateValue(newValue);
-                /* We use the value from the input, however, this value
-                  is not the correct value that should be displayed. The correct value to display
-                  is this.value, which the parent updates if the async call succeed. If the call
-                  fails, then the input will need to display this.value, and not what the user
-                  recently typed in */
-                this.renderer.setProperty(this.input.nativeElement, 'value', newValue);
-            };
-        /**
-         * Verify value for decision about displaying error about range
-         */
-        /**
-         * Verify value for decision about displaying error about range
-         * @param {?} value
-         * @return {?}
-         */
-        ItemCounterComponent.prototype.isOutOfRange = /**
-         * Verify value for decision about displaying error about range
-         * @param {?} value
-         * @return {?}
-         */
-            function (value) {
-                return value < this.min || value > this.max;
-            };
-        /**
-         * @param {?} event
-         * @return {?}
-         */
-        ItemCounterComponent.prototype.onKeyDown = /**
-         * @param {?} event
-         * @return {?}
-         */
-            function (event) {
-                var _this = this;
-                /** @type {?} */
-                var handlers = {
-                    ArrowDown: function () { return _this.decrement(); },
-                    ArrowUp: function () { return _this.increment(); },
-                };
-                if (handlers[event.code]) {
-                    handlers[event.code]();
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-            };
-        /**
-         * @param {?} event
-         * @return {?}
-         */
-        ItemCounterComponent.prototype.onBlur = /**
-         * @param {?} event
-         * @return {?}
-         */
-            function (event) {
-                this.focus = false;
-                event.preventDefault();
-                event.stopPropagation();
-                this.onTouch();
-            };
-        /**
-         * @param {?} event
-         * @return {?}
-         */
-        ItemCounterComponent.prototype.onFocus = /**
-         * @param {?} event
-         * @return {?}
-         */
-            function (event) {
-                this.focus = true;
-                event.preventDefault();
-                event.stopPropagation();
-                this.onTouch();
-            };
-        /**
-         * Verify value that it can be incremented, if yes it does that.
-         */
-        /**
-         * Verify value that it can be incremented, if yes it does that.
-         * @return {?}
-         */
-        ItemCounterComponent.prototype.increment = /**
-         * Verify value that it can be incremented, if yes it does that.
-         * @return {?}
-         */
-            function () {
-                this.manualChange(this.value + this.step);
-            };
-        /**
-         * Verify value that it can be decremented, if yes it does that.
-         */
-        /**
-         * Verify value that it can be decremented, if yes it does that.
-         * @return {?}
-         */
-        ItemCounterComponent.prototype.decrement = /**
-         * Verify value that it can be decremented, if yes it does that.
-         * @return {?}
-         */
-            function () {
-                this.manualChange(this.value - this.step);
-            };
-        // ControlValueAccessor interface
-        // ControlValueAccessor interface
-        /**
-         * @param {?} fn
-         * @return {?}
-         */
-        ItemCounterComponent.prototype.registerOnTouched =
-            // ControlValueAccessor interface
-            /**
-             * @param {?} fn
-             * @return {?}
-             */
-            function (fn) {
-                this.onTouch = fn;
-            };
-        /**
-         * @param {?} fn
-         * @return {?}
-         */
-        ItemCounterComponent.prototype.registerOnChange = /**
-         * @param {?} fn
-         * @return {?}
-         */
-            function (fn) {
-                this.onModelChange = fn;
-            };
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        ItemCounterComponent.prototype.writeValue = /**
-         * @param {?} value
-         * @return {?}
-         */
-            function (value) {
-                this.value = value || this.min || 0;
-                this.onModelChange(this.value);
-            };
-        /**
-         * Set up new value for input and emit event outside
-         */
-        /**
-         * Set up new value for input and emit event outside
-         * @param {?} updatedQuantity
-         * @return {?}
-         */
-        ItemCounterComponent.prototype.updateValue = /**
-         * Set up new value for input and emit event outside
-         * @param {?} updatedQuantity
-         * @return {?}
-         */
-            function (updatedQuantity) {
-                if (!this.async) {
-                    // If the async flag is true, then the parent component is responsible for updating the form
-                    this.writeValue(updatedQuantity);
-                }
-                // Additionally, we emit a change event, so that users may optionally do something on change
-                this.update.emit(updatedQuantity);
-                this.onTouch();
-            };
-        ItemCounterComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-item-counter',
-                        template: "<div class=\"cx-counter-wrapper\">\n  <div\n    class=\"cx-counter btn-group\"\n    role=\"group\"\n    tabindex=\"0\"\n    aria-label=\"Add more items\"\n    [class.focused]=\"focus\"\n    (keydown)=\"onKeyDown($event)\"\n    (blur)=\"onBlur($event)\"\n    (focus)=\"onFocus($event)\"\n  >\n    <button\n      type=\"button\"\n      class=\"cx-counter-action\"\n      (click)=\"decrement()\"\n      [disabled]=\"cartIsLoading || value <= min\"\n    >\n      -\n    </button>\n    <input\n      #itemCounterInput\n      class=\"cx-counter-value\"\n      type=\"text\"\n      name=\"value\"\n      cxOnlyNumber\n      [formControl]=\"inputValue\"\n      [value]=\"value\"\n      *ngIf=\"isValueChangeable\"\n    />\n    <div class=\"cx-counter-value\" *ngIf=\"!isValueChangeable\">\n      {{ value }}\n    </div>\n    <button\n      type=\"button\"\n      class=\"cx-counter-action\"\n      (click)=\"increment()\"\n      [disabled]=\"cartIsLoading || value >= max\"\n    >\n      +\n    </button>\n  </div>\n</div>\n",
-                        providers: [COUNTER_CONTROL_ACCESSOR]
-                    }] }
-        ];
-        /** @nocollapse */
-        ItemCounterComponent.ctorParameters = function () {
-            return [
-                { type: i0.Renderer2 }
-            ];
-        };
-        ItemCounterComponent.propDecorators = {
-            input: [{ type: i0.ViewChild, args: ['itemCounterInput',] }],
-            step: [{ type: i0.Input }],
-            min: [{ type: i0.Input }],
-            max: [{ type: i0.Input }],
-            async: [{ type: i0.Input }],
-            cartIsLoading: [{ type: i0.Input }],
-            isValueChangeable: [{ type: i0.Input }],
-            update: [{ type: i0.Output }]
-        };
-        return ItemCounterComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var OnlyNumberDirective = /** @class */ (function () {
-        /**
-         * Class constructor
-         * @param hostElement
-         */
-        function OnlyNumberDirective(hostElement, renderer) {
-            this.hostElement = hostElement;
-            this.renderer = renderer;
-            this.previousValue = '';
-            this.integerUnsigned = '^[0-9]*$';
-        }
-        /**
-         * Event handler for host's change event
-         */
-        /**
-         * Event handler for host's change event
-         * @return {?}
-         */
-        OnlyNumberDirective.prototype.onChange = /**
-         * Event handler for host's change event
-         * @return {?}
-         */
-            function () {
-                this.validateValue(this.hostElement.nativeElement.value);
-            };
-        /**
-         * Event handler for host's change event
-         */
-        /**
-         * Event handler for host's change event
-         * @return {?}
-         */
-        OnlyNumberDirective.prototype.onInput = /**
-         * Event handler for host's change event
-         * @return {?}
-         */
-            function () {
-                this.validateValue(this.hostElement.nativeElement.value);
-            };
-        /**
-         * Event handler for host's paste event
-         * @param e
-         */
-        /**
-         * Event handler for host's paste event
-         * @param {?} e
-         * @return {?}
-         */
-        OnlyNumberDirective.prototype.onPaste = /**
-         * Event handler for host's paste event
-         * @param {?} e
-         * @return {?}
-         */
-            function (e) {
-                /** @type {?} */
-                var value = e.clipboardData.getData('text/plain');
-                this.validateValue(value);
-                e.preventDefault();
-            };
-        /**
-         * Event handler for host's keyup event
-         * @param e
-         */
-        /**
-         * Event handler for host's keyup event
-         * @param {?} e
-         * @return {?}
-         */
-        OnlyNumberDirective.prototype.onKeyUp = /**
-         * Event handler for host's keyup event
-         * @param {?} e
-         * @return {?}
-         */
-            function (e) {
-                /** @type {?} */
-                var value = e.target['value'];
-                this.validateValue(value);
-            };
-        /**
-         * Event handler for host's keydown event
-         * @param e
-         */
-        /**
-         * Event handler for host's keydown event
-         * @param {?} e
-         * @return {?}
-         */
-        OnlyNumberDirective.prototype.onKeyDown = /**
-         * Event handler for host's keydown event
-         * @param {?} e
-         * @return {?}
-         */
-            function (e) {
-                /** @type {?} */
-                var originalValue = e.target['value'];
-                /** @type {?} */
-                var key = this.getName(e);
-                /** @type {?} */
-                var controlOrCommand = e.ctrlKey === true || e.metaKey === true;
-                // allowed keys apart from numeric characters
-                /** @type {?} */
-                var allowedKeys = [
-                    'Backspace',
-                    'ArrowLeft',
-                    'ArrowRight',
-                    'Escape',
-                    'Tab',
-                ];
-                // allow some non-numeric characters
-                if (allowedKeys.indexOf(key) !== -1 ||
-                    // Allow: Ctrl+A and Command+A
-                    (key === 'a' && controlOrCommand) ||
-                    // Allow: Ctrl+C and Command+C
-                    (key === 'c' && controlOrCommand) ||
-                    // Allow: Ctrl+V and Command+V
-                    (key === 'v' && controlOrCommand) ||
-                    // Allow: Ctrl+X and Command+X
-                    (key === 'x' && controlOrCommand)) {
-                    // let it happen, don't do anything
-                    return;
-                }
-                // save value before keydown event
-                this.previousValue = originalValue;
-                // allow number characters only
-                /** @type {?} */
-                var isNumber = new RegExp(this.integerUnsigned).test(key);
-                if (isNumber) {
-                    return;
-                }
-                else {
-                    e.preventDefault();
-                }
-            };
-        /**
-         * Test whether value is a valid number or not
-         * @param value
-         */
-        /**
-         * Test whether value is a valid number or not
-         * @param {?} value
-         * @return {?}
-         */
-        OnlyNumberDirective.prototype.validateValue = /**
-         * Test whether value is a valid number or not
-         * @param {?} value
-         * @return {?}
-         */
-            function (value) {
-                value = value.replace(/[^0-9]+/g, '');
-                this.renderer.setProperty(this.hostElement.nativeElement, 'value', value);
-            };
-        /**
-         * Get key's name
-         * @param e
-         */
-        /**
-         * Get key's name
-         * @param {?} e
-         * @return {?}
-         */
-        OnlyNumberDirective.prototype.getName = /**
-         * Get key's name
-         * @param {?} e
-         * @return {?}
-         */
-            function (e) {
-                if (e.key) {
-                    return e.key;
-                }
-                else {
-                    // for old browsers
-                    if (e.keyCode && String.fromCharCode) {
-                        switch (e.keyCode) {
-                            case 8:
-                                return 'Backspace';
-                            case 9:
-                                return 'Tab';
-                            case 27:
-                                return 'Escape';
-                            case 37:
-                                return 'ArrowLeft';
-                            case 39:
-                                return 'ArrowRight';
-                            default:
-                                return String.fromCharCode(e.keyCode);
-                        }
-                    }
-                }
-            };
-        OnlyNumberDirective.decorators = [
-            { type: i0.Directive, args: [{
-                        selector: '[cxOnlyNumber]',
-                    },] }
-        ];
-        /** @nocollapse */
-        OnlyNumberDirective.ctorParameters = function () {
-            return [
-                { type: i0.ElementRef },
-                { type: i0.Renderer2 }
-            ];
-        };
-        OnlyNumberDirective.propDecorators = {
-            onChange: [{ type: i0.HostListener, args: ['change',] }],
-            onInput: [{ type: i0.HostListener, args: ['input',] }],
-            onPaste: [{ type: i0.HostListener, args: ['paste', ['$event'],] }],
-            onKeyUp: [{ type: i0.HostListener, args: ['keyup', ['$event'],] }],
-            onKeyDown: [{ type: i0.HostListener, args: ['keydown', ['$event'],] }]
-        };
-        return OnlyNumberDirective;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var FormComponentsModule = /** @class */ (function () {
-        function FormComponentsModule() {
-        }
-        FormComponentsModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [common.CommonModule, forms.FormsModule, forms.ReactiveFormsModule, BootstrapModule],
-                        declarations: [
-                            StarRatingComponent,
-                            ItemCounterComponent,
-                            OnlyNumberDirective,
-                        ],
-                        exports: [StarRatingComponent, ItemCounterComponent],
-                    },] }
-        ];
-        return FormComponentsModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CardComponent = /** @class */ (function () {
-        function CardComponent() {
-            this.deleteCard = new i0.EventEmitter();
-            this.setDefaultCard = new i0.EventEmitter();
-            this.sendCard = new i0.EventEmitter();
-            this.editCard = new i0.EventEmitter();
-            this.cancelCard = new i0.EventEmitter();
-            this.border = false;
-            this.editMode = false;
-            this.isDefault = false;
-            this.fitToContainer = false;
-        }
-        // ACTIONS
-        // ACTIONS
-        /**
-         * @return {?}
-         */
-        CardComponent.prototype.setEditMode =
-            // ACTIONS
-            /**
-             * @return {?}
-             */
-            function () {
-                this.editMode = true;
-            };
-        /**
-         * @return {?}
-         */
-        CardComponent.prototype.cancelEdit = /**
-         * @return {?}
-         */
-            function () {
-                this.editMode = false;
-                this.cancelCard.emit(5);
-            };
-        /**
-         * @return {?}
-         */
-        CardComponent.prototype.delete = /**
-         * @return {?}
-         */
-            function () {
-                this.deleteCard.emit(1);
-            };
-        /**
-         * @return {?}
-         */
-        CardComponent.prototype.setDefault = /**
-         * @return {?}
-         */
-            function () {
-                this.isDefault = true;
-                this.setDefaultCard.emit(2);
-            };
-        /**
-         * @return {?}
-         */
-        CardComponent.prototype.send = /**
-         * @return {?}
-         */
-            function () {
-                this.sendCard.emit(3);
-            };
-        /**
-         * @return {?}
-         */
-        CardComponent.prototype.edit = /**
-         * @return {?}
-         */
-            function () {
-                this.editCard.emit(4);
-            };
-        /**
-         * @return {?}
-         */
-        CardComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () { };
-        CardComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-card',
-                        template: "<div\n  *ngIf=\"content\"\n  class=\"cx-card\"\n  [class.cx-card-border]=\"border\"\n  [class.cx-card-fit-to-container]=\"fitToContainer\"\n>\n  <!-- Card Header -->\n  <div *ngIf=\"content.header && !editMode\" class=\"card-header\">\n    {{ content.header }}\n  </div>\n  <!-- Card Body -->\n  <div class=\"card-body cx-card-body\" [class.cx-card-delete]=\"editMode\">\n    <!-- Edit message -->\n    <div *ngIf=\"editMode\" class=\"cx-card-delete-msg\">\n      {{ content.deleteMsg }}\n    </div>\n    <!-- Card title -->\n    <h4 *ngIf=\"content.title\" class=\"cx-card-title\">\n      {{ content.title }}\n    </h4>\n    <!-- Card Content -->\n    <div class=\"cx-card-container\">\n      <!-- Card Label -->\n      <div class=\"cx-card-label-container\">\n        <div *ngIf=\"content.textBold\" class=\"cx-card-label-bold\">\n          {{ content.textBold }}\n        </div>\n        <div *ngFor=\"let line of content.text\">\n          <div class=\"cx-card-label\">{{ line }}</div>\n        </div>\n      </div>\n      <!-- Image -->\n      <div *ngIf=\"content.img\" class=\"cx-card-img-container\">\n        <img src=\"{{ content.img }}\" alt=\"\" />\n      </div>\n    </div>\n    <!-- Edit Mode Actions -->\n    <div *ngIf=\"editMode\" class=\"row cx-card-body-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-primary\" (click)=\"delete()\">\n          {{ 'common.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <!-- Actions -->\n    <div *ngIf=\"content.actions && !editMode\" class=\"cx-card-actions\">\n      <div *ngFor=\"let action of content.actions\">\n        <div [ngSwitch]=\"action.event\">\n          <a\n            *ngSwitchCase=\"'delete'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"delete()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'default'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"setDefault()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'send'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"send()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'edit'\"\n            class=\"card-link btn-link\"\n            (click)=\"edit()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchDefault\n            href=\"{{ action.link }}\"\n            class=\"card-link btn-link\"\n            >{{ action.name }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
-                        styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-card-border{border-width:var(--cx-border-width,1px);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light))}.cx-card-container{display:var(--cx-display,flex)}.cx-card-label-container{flex-grow:var(--cx-flex-grow,2)}.cx-card-fit-to-container{width:var(--cx-width,100%);height:var(--cx-height,100%);display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column)}.cx-card-body{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column);justify-content:var(--cx-justify-content,space-between)}.cx-card-delete{background-color:var(--cx-background-color,var(--cx-g-color-background))}.cx-card-body-delete{padding:var(--cx-padding,1rem 0 0 0)}.cx-card-delete-msg{color:var(--cx-color,var(--cx-g-color-danger));padding:var(--cx-padding,0 0 1.25rem 0)}.cx-card-actions{display:var(--cx-display,flex);justify-content:var(--cx-justify-content,flex-end);padding:var(--cx-padding,1.25rem 0 0 0)}.cx-card-link{padding:var(--cx-padding,0 0 0 1rem)}"]
-                    }] }
-        ];
-        /** @nocollapse */
-        CardComponent.ctorParameters = function () { return []; };
-        CardComponent.propDecorators = {
-            deleteCard: [{ type: i0.Output }],
-            setDefaultCard: [{ type: i0.Output }],
-            sendCard: [{ type: i0.Output }],
-            editCard: [{ type: i0.Output }],
-            cancelCard: [{ type: i0.Output }],
-            border: [{ type: i0.Input }],
-            editMode: [{ type: i0.Input }],
-            isDefault: [{ type: i0.Input }],
-            content: [{ type: i0.Input }],
-            fitToContainer: [{ type: i0.Input }]
-        };
-        return CardComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CardModule = /** @class */ (function () {
-        function CardModule() {
-        }
-        CardModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [common.CommonModule, i1.I18nModule],
-                        declarations: [CardComponent],
-                        exports: [CardComponent],
-                    },] }
-        ];
-        return CardModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var PaginationComponent = /** @class */ (function () {
-        function PaginationComponent() {
-            this.viewPageEvent = new i0.EventEmitter();
-        }
-        /**
-         * @param {?} page
-         * @return {?}
-         */
-        PaginationComponent.prototype.pageChange = /**
-         * @param {?} page
-         * @return {?}
-         */
-            function (page) {
-                this.viewPageEvent.emit(page - 1);
-            };
-        PaginationComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-pagination',
-                        template: "<ngb-pagination\n  [collectionSize]=\"pagination.totalResults\"\n  [page]=\"pagination.currentPage + 1\"\n  (pageChange)=\"pageChange($event)\"\n  [maxSize]=\"3\"\n  [pageSize]=\"pagination.pageSize\"\n>\n</ngb-pagination>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        PaginationComponent.propDecorators = {
-            pagination: [{ type: i0.Input }],
-            viewPageEvent: [{ type: i0.Output }]
-        };
-        return PaginationComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var SortingComponent = /** @class */ (function () {
-        function SortingComponent() {
-            this.sortListEvent = new i0.EventEmitter();
-        }
-        /**
-         * @param {?} sortCode
-         * @return {?}
-         */
-        SortingComponent.prototype.sortList = /**
-         * @param {?} sortCode
-         * @return {?}
-         */
-            function (sortCode) {
-                this.sortListEvent.emit(sortCode);
-            };
-        SortingComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-sorting',
-                        template: "<ng-select\n  [searchable]=\"false\"\n  [clearable]=\"false\"\n  placeholder=\"{{ placeholder }}\"\n  (change)=\"sortList($event)\"\n  [ngModel]=\"selectedOption\"\n>\n  <ng-option *ngFor=\"let sort of sortOptions\" [value]=\"sort.code\">{{\n    sort.name ? sort.name : sortLabels ? sortLabels[sort.code] : ''\n  }}</ng-option>\n</ng-select>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
-                        styles: [""]
-                    }] }
-        ];
-        /** @nocollapse */
-        SortingComponent.ctorParameters = function () { return []; };
-        SortingComponent.propDecorators = {
-            sortOptions: [{ type: i0.Input }],
-            selectedOption: [{ type: i0.Input }],
-            placeholder: [{ type: i0.Input }],
-            sortLabels: [{ type: i0.Input }],
-            sortListEvent: [{ type: i0.Output }]
-        };
-        return SortingComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var PaginationAndSortingModule = /** @class */ (function () {
-        function PaginationAndSortingModule() {
-        }
-        PaginationAndSortingModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [common.CommonModule, ngSelect.NgSelectModule, forms.FormsModule, BootstrapModule],
-                        declarations: [PaginationComponent, SortingComponent],
-                        exports: [PaginationComponent, SortingComponent],
-                    },] }
-        ];
-        return PaginationAndSortingModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /**
-     * This component navigates using [routerLink] attribute when input 'url' is a relative url. Otherwise (when it's absolute), [href] is used.
-     */
-    var GenericLinkComponent = /** @class */ (function () {
-        function GenericLinkComponent() {
-            this.protocolRegex = /^https?:\/\//i;
-        }
-        Object.defineProperty(GenericLinkComponent.prototype, "routerUrl", {
-            get: /**
-             * @return {?}
-             */ function () {
-                if (typeof this.url === 'string') {
-                    return [this.getAbsoluteUrl(this.url)];
-                }
-                return this.url;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        /**
-         * @return {?}
-         */
-        GenericLinkComponent.prototype.isExternalUrl = /**
-         * @return {?}
-         */
-            function () {
-                return typeof this.url === 'string' && this.protocolRegex.test(this.url);
-            };
-        /**
-         * @private
-         * @param {?} url
-         * @return {?}
-         */
-        GenericLinkComponent.prototype.getAbsoluteUrl = /**
-         * @private
-         * @param {?} url
-         * @return {?}
-         */
-            function (url) {
-                return url.startsWith('/') ? this.url : '/' + this.url;
-            };
-        GenericLinkComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-generic-link',
-                        template: "<ng-container *ngIf=\"isExternalUrl(); else isLocalUrl\">\n  <a\n    role=\"link\"\n    [href]=\"url\"\n    [target]=\"target\"\n    [class]=\"class ? class : ''\"\n    [id]=\"id ? id : ''\"\n    [style]=\"style\"\n    [title]=\"title ? title : ''\"\n  >\n    <ng-container *ngTemplateOutlet=\"templateOutlet\"></ng-container>\n  </a>\n</ng-container>\n<ng-template #isLocalUrl>\n  <a\n    role=\"link\"\n    [routerLink]=\"routerUrl\"\n    [target]=\"target\"\n    [class]=\"class ? class : ''\"\n    [id]=\"id ? id : ''\"\n    [style]=\"style\"\n    [title]=\"title ? title : ''\"\n  >\n    <ng-container *ngTemplateOutlet=\"templateOutlet\"></ng-container>\n  </a>\n</ng-template>\n<ng-template #templateOutlet> <ng-content></ng-content> </ng-template>\n",
-                        styles: [""]
-                    }] }
-        ];
-        GenericLinkComponent.propDecorators = {
-            url: [{ type: i0.Input }],
-            target: [{ type: i0.Input }],
-            class: [{ type: i0.Input }],
-            id: [{ type: i0.Input }],
-            style: [{ type: i0.Input }],
-            title: [{ type: i0.Input }]
-        };
-        return GenericLinkComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var GenericLinkModule = /** @class */ (function () {
-        function GenericLinkModule() {
-        }
-        GenericLinkModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [common.CommonModule, i1$2.RouterModule],
-                        declarations: [GenericLinkComponent],
-                        exports: [GenericLinkComponent],
-                    },] }
-        ];
-        return GenericLinkModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    // we include all UI component modules here, but in real live
-    // projects would only include those that are relevant.
-    // for "accelerators", we could include only those that are relevant, so this
-    // component module could be configurable or we could have separate component modules,
-    // i.e. powertools-components.module.
-    var ComponentsModule = /** @class */ (function () {
-        function ComponentsModule() {
-        }
-        ComponentsModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            MediaModule,
-                            FormComponentsModule,
-                            CardModule,
-                            PaginationAndSortingModule,
-                            SpinnerModule,
-                            GenericLinkModule,
-                        ],
-                        exports: [
-                            PictureComponent,
-                            StarRatingComponent,
-                            ItemCounterComponent,
-                            CardComponent,
-                            PaginationComponent,
-                            SortingComponent,
-                            SpinnerComponent,
-                            GenericLinkComponent,
-                        ],
-                    },] }
-        ];
-        return ComponentsModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CartItemListComponent = /** @class */ (function () {
-        function CartItemListComponent(cartService, fb) {
-            this.cartService = cartService;
-            this.fb = fb;
-            this.isReadOnly = false;
-            this.hasHeader = true;
-            this.items = [];
-            this.potentialProductPromotions = [];
-            this.cartIsLoading = false;
-            this.form = this.fb.group({});
-        }
-        /**
-         * @return {?}
-         */
-        CartItemListComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                this.items.forEach(function (item) {
-                    var code = item.product.code;
-                    if (!_this.form.controls[code]) {
-                        _this.form.setControl(code, _this.createEntryFormGroup(item));
-                    }
-                    else {
-                        /** @type {?} */
-                        var entryForm = ( /** @type {?} */(_this.form.controls[code]));
-                        entryForm.controls.quantity.setValue(item.quantity);
-                    }
-                });
-            };
-        /**
-         * @param {?} item
-         * @return {?}
-         */
-        CartItemListComponent.prototype.removeEntry = /**
-         * @param {?} item
-         * @return {?}
-         */
-            function (item) {
-                this.cartService.removeEntry(item);
-                delete this.form.controls[item.product.code];
-            };
-        /**
-         * @param {?} __0
-         * @return {?}
-         */
-        CartItemListComponent.prototype.updateEntry = /**
-         * @param {?} __0
-         * @return {?}
-         */
-            function (_a) {
-                var item = _a.item, updatedQuantity = _a.updatedQuantity;
-                this.cartService.updateEntry(item.entryNumber, updatedQuantity);
-            };
-        /**
-         * @param {?} item
-         * @return {?}
-         */
-        CartItemListComponent.prototype.getPotentialProductPromotionsForItem = /**
-         * @param {?} item
-         * @return {?}
-         */
-            function (item) {
-                var e_1, _a, e_2, _b;
-                /** @type {?} */
-                var entryPromotions = [];
-                if (this.potentialProductPromotions &&
-                    this.potentialProductPromotions.length > 0) {
-                    try {
-                        for (var _c = __values(this.potentialProductPromotions), _d = _c.next(); !_d.done; _d = _c.next()) {
-                            var promotion = _d.value;
-                            if (promotion.description &&
-                                promotion.consumedEntries &&
-                                promotion.consumedEntries.length > 0) {
-                                try {
-                                    for (var _e = __values(promotion.consumedEntries), _f = _e.next(); !_f.done; _f = _e.next()) {
-                                        var consumedEntry = _f.value;
-                                        if (this.isConsumedByEntry(consumedEntry, item)) {
-                                            entryPromotions.push(promotion);
-                                        }
-                                    }
-                                }
-                                catch (e_2_1) {
-                                    e_2 = { error: e_2_1 };
-                                }
-                                finally {
-                                    try {
-                                        if (_f && !_f.done && (_b = _e.return))
-                                            _b.call(_e);
-                                    }
-                                    finally {
-                                        if (e_2)
-                                            throw e_2.error;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    catch (e_1_1) {
-                        e_1 = { error: e_1_1 };
-                    }
-                    finally {
-                        try {
-                            if (_d && !_d.done && (_a = _c.return))
-                                _a.call(_c);
-                        }
-                        finally {
-                            if (e_1)
-                                throw e_1.error;
-                        }
-                    }
-                }
-                return entryPromotions;
-            };
-        /**
-         * @private
-         * @param {?} entry
-         * @return {?}
-         */
-        CartItemListComponent.prototype.createEntryFormGroup = /**
-         * @private
-         * @param {?} entry
-         * @return {?}
-         */
-            function (entry) {
-                return this.fb.group({
-                    entryNumber: entry.entryNumber,
-                    quantity: entry.quantity,
-                });
-            };
-        /**
-         * @private
-         * @param {?} consumedEntry
-         * @param {?} entry
-         * @return {?}
-         */
-        CartItemListComponent.prototype.isConsumedByEntry = /**
-         * @private
-         * @param {?} consumedEntry
-         * @param {?} entry
-         * @return {?}
-         */
-            function (consumedEntry, entry) {
-                var e_3, _a;
-                /** @type {?} */
-                var consumendEntryNumber = consumedEntry.orderEntryNumber;
-                if (entry.entries && entry.entries.length > 0) {
-                    try {
-                        for (var _b = __values(entry.entries), _c = _b.next(); !_c.done; _c = _b.next()) {
-                            var subEntry = _c.value;
-                            if (subEntry.entryNumber === consumendEntryNumber) {
-                                return true;
-                            }
-                        }
-                    }
-                    catch (e_3_1) {
-                        e_3 = { error: e_3_1 };
-                    }
-                    finally {
-                        try {
-                            if (_c && !_c.done && (_a = _b.return))
-                                _a.call(_b);
-                        }
-                        finally {
-                            if (e_3)
-                                throw e_3.error;
-                        }
-                    }
-                    return false;
-                }
-                else {
-                    return consumendEntryNumber === entry.entryNumber;
-                }
-            };
-        CartItemListComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-cart-item-list',
-                        template: "<div *ngIf=\"hasHeader\" class=\"d-none d-md-block d-lg-block d-xl-block\">\n  <div class=\"cx-item-list-header row\">\n    <div class=\"cx-item-list-desc col-md-5 col-lg-5 col-xl-6\">\n      {{ 'cartItems.description' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-price col-md-3 col-lg-2 col-xl-2\">\n      {{ 'cartItems.itemPrice' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-qty col-md-2 col-lg-3 col-xl-2\">\n      {{ 'cartItems.quantity' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n      {{ 'cartItems.total' | cxTranslate }}\n    </div>\n  </div>\n</div>\n\n<div [formGroup]=\"form\">\n  <div class=\"cx-item-list-row\" *ngFor=\"let item of items\">\n    <div class=\"cx-item-list-items\">\n      <cx-cart-item\n        [parent]=\"form.controls[item.product.code]\"\n        [item]=\"item\"\n        [potentialProductPromotions]=\"\n          getPotentialProductPromotionsForItem(item)\n        \"\n        [isReadOnly]=\"isReadOnly\"\n        (remove)=\"removeEntry($event)\"\n        [cartIsLoading]=\"cartIsLoading\"\n        (update)=\"updateEntry($event)\"\n      >\n      </cx-cart-item>\n    </div>\n  </div>\n</div>\n",
-                        encapsulation: i0.ViewEncapsulation.None,
-                        styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-item-list-header{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);margin:var(--cx-margin,0);padding:var(--cx-padding,1.125rem 0);text-transform:var(--cx-text-transform,uppercase);color:var(--cx-color,var(--cx-g-color-secondary));border-width:var(--cx-border-width,0 0 1px 0);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light))}.cx-item-list-desc{text-align:var(--cx-text-align,left);padding:var(--cx-padding,0)}.cx-item-list-price,.cx-item-list-qty{text-align:var(--cx-text-align,center)}@media (max-width:991.98px){.cx-item-list-price,.cx-item-list-qty{text-align:var(--cx-text-align,left)}}.cx-item-list-total{text-align:var(--cx-text-align,right);padding:var(--cx-padding,0)}.cx-item-list-row{padding:var(--cx-padding,1.25rem 0);border-width:var(--cx-border-width,0 0 1px 0);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light))}@media (max-width:991.98px){.cx-item-list-header{padding:var(--cx-padding,1.125rem 2.5rem)}.cx-item-list-items{padding:var(--cx-padding,0 2.5rem)}}@media (max-width:767.98px){.cx-item-list-items{padding:var(--cx-padding,0 0 0 1rem)}}"]
-                    }] }
-        ];
-        /** @nocollapse */
-        CartItemListComponent.ctorParameters = function () {
-            return [
-                { type: i1.CartService },
-                { type: forms.FormBuilder }
-            ];
-        };
-        CartItemListComponent.propDecorators = {
-            isReadOnly: [{ type: i0.Input }],
-            hasHeader: [{ type: i0.Input }],
-            items: [{ type: i0.Input }],
-            potentialProductPromotions: [{ type: i0.Input }],
-            cartIsLoading: [{ type: i0.Input }]
-        };
-        return CartItemListComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CartItemComponent = /** @class */ (function () {
-        function CartItemComponent() {
-            this.compact = false;
-            this.isReadOnly = false;
-            this.cartIsLoading = false;
-            this.remove = new i0.EventEmitter();
-            this.update = new i0.EventEmitter();
-        }
-        /**
-         * @return {?}
-         */
-        CartItemComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () { };
-        /**
-         * @param {?} product
-         * @return {?}
-         */
-        CartItemComponent.prototype.isProductOutOfStock = /**
-         * @param {?} product
-         * @return {?}
-         */
-            function (product) {
-                // TODO Move stocklevelstatuses across the app to an enum
-                return (product &&
-                    product.stock &&
-                    product.stock.stockLevelStatus === 'outOfStock');
-            };
-        /**
-         * @param {?} updatedQuantity
-         * @return {?}
-         */
-        CartItemComponent.prototype.updateItem = /**
-         * @param {?} updatedQuantity
-         * @return {?}
-         */
-            function (updatedQuantity) {
-                this.update.emit({ item: this.item, updatedQuantity: updatedQuantity });
-            };
-        /**
-         * @return {?}
-         */
-        CartItemComponent.prototype.removeItem = /**
-         * @return {?}
-         */
-            function () {
-                this.remove.emit(this.item);
-            };
-        CartItemComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-cart-item',
-                        template: "<div [ngClass]=\"compact ? 'cx-compact row' : 'row'\">\n  <!-- Item Image -->\n  <div class=\"col-2 cx-image-container\">\n    <a\n      [routerLink]=\"{ route: 'product', params: item.product } | cxTranslateUrl\"\n    >\n      <cx-picture\n        [imageContainer]=\"item.product.images?.PRIMARY\"\n        imageFormat=\"thumbnail\"\n      ></cx-picture>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-5'\">\n        <div *ngIf=\"item.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"\n              { route: 'product', params: item.product } | cxTranslateUrl\n            \"\n            >{{ item.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"item.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n        </div>\n        <!-- Variants -->\n        <div\n          *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n          class=\"cx-property\"\n        >\n          <div class=\"cx-label\">{{ variant.name }}</div>\n          <div class=\"cx-value\">{{ variant.value }}</div>\n        </div>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"item.basePrice\"\n        class=\"cx-price\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.item' | cxTranslate }}\n        </div>\n        <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n          {{ item.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <div\n        *ngIf=\"item.quantity\"\n        class=\"cx-quantity\"\n        [ngClass]=\"compact ? '' : ' col-3'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          placement=\"left\"\n          ngbTooltip=\"The quantity represents the total number of this item in your cart.\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n        <div *ngIf=\"isReadOnly\" class=\"cx-value\">{{ item.quantity }}</div>\n        <div\n          *ngIf=\"!isReadOnly && parent\"\n          class=\"cx-value\"\n          [formGroup]=\"parent\"\n        >\n          <cx-item-counter\n            isValueChangeable=\"true\"\n            [step]=\"1\"\n            [min]=\"1\"\n            [max]=\"item.product.stock?.stockLevel || 1000\"\n            (update)=\"updateItem($event)\"\n            [cartIsLoading]=\"cartIsLoading\"\n            formControlName=\"quantity\"\n          >\n          </cx-item-counter>\n        </div>\n      </div>\n      <!-- Total -->\n      <div\n        *ngIf=\"item.totalPrice\"\n        class=\"cx-total\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.total' | cxTranslate }}\n        </div>\n        <div class=\"cx-value\">{{ item.totalPrice.formattedValue }}</div>\n      </div>\n    </div>\n    <!-- Availability -->\n    <div *ngIf=\"isProductOutOfStock(item)\" class=\"cx-availability col-12\">\n      {{ 'productSummary.outOfStock' | cxTranslate }}\n    </div>\n    <!-- Promotion -->\n    <cx-promotions [promotions]=\"potentialProductPromotions\"></cx-promotions>\n    <!-- Actions -->\n    <div *ngIf=\"!isReadOnly\" class=\"cx-actions col-12\">\n      <button\n        class=\"link\"\n        [class.disabled]=\"cartIsLoading\"\n        [disabled]=\"cartIsLoading\"\n        (click)=\"removeItem()\"\n      >\n        {{ 'common.remove' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n",
-                        styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-name{font-size:var(--cx-font-size,1rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);overflow-wrap:var(--cx-overflow-wrap,break-word);padding:var(--cx-padding,0)}.cx-name .cx-link{color:var(--cx-color,var(--cx-g-color-text));-webkit-text-decoration:var(--cx-text-decoration,none);text-decoration:var(--cx-text-decoration,none)}.cx-name .cx-link:hover{color:var(--cx-color,var(--cx-g-color-primary))}.cx-code{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.22222);color:var(--cx-color,var(--cx-g-color-secondary));padding:var(--cx-padding,.625rem 0)}.cx-property{display:var(--cx-display,flex)}.cx-label{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);overflow-wrap:var(--cx-overflow-wrap,break-word);padding-right:1rem}.cx-value{font-size:var(--cx-font-size,1rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);overflow-wrap:var(--cx-overflow-wrap,break-word);font-weight:var(--cx-g-font-weight-normal,400)}@media (max-width:767.98px){.cx-info-container{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column)}.cx-label{min-width:var(--cx-min-width,5rem)}.cx-value{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.22222)}}.cx-price{display:var(--cx-display,flex);justify-content:var(--cx-justify-content,center);align-items:var(--cx-align-items,center);font-size:var(--cx-font-size,1rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);font-weight:400}@media (max-width:767.98px){.cx-price{justify-content:var(--cx-justify-content,flex-start)}}.cx-price .cx-old{-webkit-text-decoration:var(--cx-text-decoration,line-through);text-decoration:var(--cx-text-decoration,line-through);color:var(--cx-color,var(--cx-g-color-secondary));padding:var(--cx-padding,0 1rem 0 0)}.cx-price .cx-new{color:var(--cx-color,var(--cx-g-color-primary))}.cx-quantity{display:var(--cx-display,flex);justify-content:var(--cx-justify-content,center);align-items:var(--cx-align-items,center)}@media (max-width:767.98px){.cx-quantity{justify-content:var(--cx-justify-content,flex-start)}}.cx-total{display:var(--cx-display,flex);justify-content:var(--cx-justify-content,flex-end);align-items:var(--cx-align-items,center)}@media (max-width:767.98px){.cx-total{justify-content:var(--cx-justify-content,flex-start)}}.cx-promo{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);color:var(--cx-color,var(--cx-g-color-success));padding:var(--cx-padding,.75rem 0);margin:var(--cx-margin,0)}.cx-availability{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);color:var(--cx-color,var(--cx-g-color-danger));padding:var(--cx-padding,.75rem 0);margin:var(--cx-margin,0)}.cx-actions{display:var(--cx-display,flex);justify-content:var(--cx-justify-content,flex-end);padding:var(--cx-padding,0)}@media (max-width:767.98px){.cx-actions{display:var(--cx-display,flex);justify-content:var(--cx-justify-content,flex-start);padding:var(--cx-padding,0)}}.cx-actions button.link{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);color:var(--cx-color,var(--cx-g-color-text))}.cx-compact{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,row)}.cx-compact .cx-image-container{padding:var(--cx-padding,0)}.cx-compact .cx-info-container{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column);margin:var(--cx-margin,0)}.cx-compact .cx-actions,.cx-compact .cx-price,.cx-compact .cx-quantity,.cx-compact .cx-total{justify-content:var(--cx-justify-content,flex-start);padding:var(--cx-padding,0)}.cx-compact .cx-actions .cx-label,.cx-compact .cx-price .cx-label,.cx-compact .cx-quantity .cx-label,.cx-compact .cx-total .cx-label{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);min-width:var(--cx-min-width,5rem)}.cx-compact .cx-actions .cx-value,.cx-compact .cx-price .cx-value,.cx-compact .cx-quantity .cx-value,.cx-compact .cx-total .cx-value{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.22222)}.cx-compact .cx-actions button.link,.cx-compact .cx-price button.link,.cx-compact .cx-quantity button.link,.cx-compact .cx-total button.link{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);color:var(--cx-color,var(--cx-g-color-text))}"]
-                    }] }
-        ];
-        CartItemComponent.propDecorators = {
-            compact: [{ type: i0.Input }],
-            item: [{ type: i0.Input }],
-            potentialProductPromotions: [{ type: i0.Input }],
-            isReadOnly: [{ type: i0.Input }],
-            cartIsLoading: [{ type: i0.Input }],
-            remove: [{ type: i0.Output }],
-            update: [{ type: i0.Output }],
-            parent: [{ type: i0.Input }]
-        };
-        return CartItemComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var OrderSummaryComponent = /** @class */ (function () {
-        function OrderSummaryComponent() {
-        }
-        OrderSummaryComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-order-summary',
-                        template: "<h4>{{ 'orderCost.orderSummary' | cxTranslate }}</h4>\n\n<div class=\"cx-summary-partials\" *ngIf=\"cart\">\n  <div class=\"cx-summary-row\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.subtotal' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.totalPrice?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.estimatedShipping' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{\n        cart.deliveryCost?.formattedValue\n          ? cart.deliveryCost.formattedValue\n          : 'TBD'\n      }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row cx-summary-savings\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.discount' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.totalDiscounts?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.salesTax' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.totalTax?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row cx-summary-total\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.total' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.totalPriceWithTax?.formattedValue }}\n    </div>\n  </div>\n</div>\n\n<cx-promotions [promotions]=\"cart.appliedOrderPromotions\"></cx-promotions>\n",
-                        styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/:host{display:block;padding:var(--cx-padding,1rem);margin:var(--cx-margin,0 0 1.5rem 0)}.cx-summary-label{text-align:var(--cx-text-align,start);padding:var(--cx-padding,0)}.cx-summary-amount{text-align:var(--cx-text-align,end);padding:var(--cx-padding,0)}.cx-summary-row{padding:var(--cx-padding,.5rem 0);display:var(--cx-display,flex);flex-wrap:var(--cx-flex-wrap,wrap)}.cx-summary-savings{color:var(--cx-color,var(--cx-g-color-success))}.cx-summary-total{font-weight:var(--cx-font-weight,var(--cx-g-font-weight-bold,700))}"]
-                    }] }
-        ];
-        OrderSummaryComponent.propDecorators = {
-            cart: [{ type: i0.Input }]
-        };
-        return OrderSummaryComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CartSharedModule = /** @class */ (function () {
-        function CartSharedModule() {
-        }
-        CartSharedModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i1$2.RouterModule,
-                            forms.ReactiveFormsModule,
-                            ComponentsModule,
-                            i1.UrlTranslationModule,
-                            ngBootstrap.NgbModule,
-                            PromotionsModule,
-                            i1.I18nModule,
-                        ],
-                        declarations: [
-                            CartItemComponent,
-                            OrderSummaryComponent,
-                            CartItemListComponent,
-                        ],
-                        exports: [CartItemComponent, CartItemListComponent, OrderSummaryComponent],
-                    },] }
-        ];
-        return CartSharedModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var AddedToCartDialogComponent = /** @class */ (function () {
-        function AddedToCartDialogComponent(activeModal, cartService, fb) {
-            this.activeModal = activeModal;
-            this.cartService = cartService;
-            this.fb = fb;
-            this.quantity = 0;
-            this.form = this.fb.group({});
-        }
-        /**
-         * @return {?}
-         */
-        AddedToCartDialogComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                this.loaded$ = this.loaded$.pipe(operators.tap(function (res) {
-                    if (_this.previousLoaded !== res) {
-                        _this.finishedLoading = _this.previousLoaded === false;
-                        _this.previousLoaded = res;
-                    }
-                }));
-                this.entry$ = this.entry$.pipe(operators.tap(function (entry) {
-                    if (entry) {
-                        var code = entry.product.code;
-                        if (!_this.form.controls[code]) {
-                            _this.form.setControl(code, _this.createEntryFormGroup(entry));
-                        }
-                        else {
-                            /** @type {?} */
-                            var entryForm = ( /** @type {?} */(_this.form.controls[code]));
-                            entryForm.controls.quantity.setValue(entry.quantity);
-                        }
-                        _this.form.markAsPristine();
-                    }
-                }));
-            };
-        /**
-         * @return {?}
-         */
-        AddedToCartDialogComponent.prototype.ngAfterViewChecked = /**
-         * @return {?}
-         */
-            function () {
-                if (this.finishedLoading) {
-                    this.finishedLoading = false;
-                    /** @type {?} */
-                    var elementToFocus = ( /** @type {?} */(this.dialog.nativeElement.querySelector("[ngbAutofocus]")));
-                    if (elementToFocus) {
-                        elementToFocus.focus();
-                    }
-                }
-            };
-        /**
-         * @param {?} item
-         * @return {?}
-         */
-        AddedToCartDialogComponent.prototype.removeEntry = /**
-         * @param {?} item
-         * @return {?}
-         */
-            function (item) {
-                this.cartService.removeEntry(item);
-                delete this.form.controls[item.product.code];
-                this.activeModal.dismiss('Removed');
-            };
-        /**
-         * @param {?} __0
-         * @return {?}
-         */
-        AddedToCartDialogComponent.prototype.updateEntry = /**
-         * @param {?} __0
-         * @return {?}
-         */
-            function (_a) {
-                var item = _a.item, updatedQuantity = _a.updatedQuantity;
-                this.cartService.updateEntry(item.entryNumber, updatedQuantity);
-            };
-        /**
-         * @private
-         * @param {?} entry
-         * @return {?}
-         */
-        AddedToCartDialogComponent.prototype.createEntryFormGroup = /**
-         * @private
-         * @param {?} entry
-         * @return {?}
-         */
-            function (entry) {
-                return this.fb.group({
-                    entryNumber: entry.entryNumber,
-                    quantity: entry.quantity,
-                });
-            };
-        AddedToCartDialogComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-added-to-cart-dialog',
-                        template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) as loaded; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.itemsAddedToYourCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"activeModal.dismiss('Cross click')\"\n      >\n        <span aria-hidden=\"true\">&times;</span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"(entry$ | async) as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [isReadOnly]=\"false\"\n            [parent]=\"form.controls[entry.product.code]\"\n            [cartIsLoading]=\"!loaded\"\n            (remove)=\"removeEntry($event)\"\n            (update)=\"updateEntry($event)\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"(cart$ | async) as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n            <div>{{ cart.totalPrice.formattedValue }}</div>\n          </div>\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ route: 'cart' } | cxTranslateUrl\"\n              class=\"btn btn-primary\"\n              ngbAutoFocus\n              (click)=\"!form.dirty && activeModal.dismiss('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ route: 'checkout' } | cxTranslateUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"\n                !form.dirty && activeModal.dismiss('Proceed To Checkout click')\n              \"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"activeModal.dismiss('Cross click')\"\n      >\n        <span aria-hidden=\"true\">&times;</span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n",
-                        styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-dialog-header{padding:var(--cx-padding,2rem 1.75rem .85rem);border-width:var(--cx-border-width,0)}.cx-dialog-title{font-size:var(--cx-font-size,1.375rem);font-weight:var(--cx-g-font-weight-semi);line-height:var(--cx-line-height,1.22222)}.cx-dialog-body{padding:var(--cx-padding,1rem 1rem 0 1rem)}@media (max-width:767.98px){.cx-dialog-body{padding:var(--cx-padding,0)}}.cx-dialog-row{margin:var(--cx-margin,0);display:var(--cx-display,flex);padding:var(--cx-padding,0 .875rem 2.875rem);max-width:var(--cx-max-width,100%);flex-wrap:var(--cx-flex-wrap,wrap)}@media (max-width:767.98px){.cx-dialog-row{flex-direction:var(--cx-flex-direction,column);padding:var(--cx-padding,0)}.cx-dialog-item{padding:var(--cx-padding,2rem)}}.cx-dialog-separator{border-width:var(--cx-border-width,1px 0 0 0);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light))}.cx-dialog-actions{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column);padding:var(--cx-padding,0 1rem 0 2.5rem);border-width:var(--cx-border-width,0 0 0 1px);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light))}@media (max-width:767.98px){.cx-dialog-actions{border-width:var(--cx-border-width,0);padding:var(--cx-padding,1.875rem)}}.cx-dialog-total{font-size:var(--cx-font-size,1.125rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);display:var(--cx-display,flex);justify-content:var(--cx-justify-content,space-between);padding:var(--cx-padding,0 0 1.25rem 0)}.cx-dialog-buttons{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column)}.cx-dialog-buttons .btn-primary{margin:var(--cx-margin,0 0 .625rem 0)}"]
-                    }] }
-        ];
-        /** @nocollapse */
-        AddedToCartDialogComponent.ctorParameters = function () {
-            return [
-                { type: ngBootstrap.NgbActiveModal },
-                { type: i1.CartService },
-                { type: forms.FormBuilder }
-            ];
-        };
-        AddedToCartDialogComponent.propDecorators = {
-            dialog: [{ type: i0.ViewChild, args: ['dialog', { read: i0.ElementRef },] }]
-        };
-        return AddedToCartDialogComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var AddToCartComponent = /** @class */ (function () {
-        function AddToCartComponent(cartService, modalService) {
-            this.cartService = cartService;
-            this.modalService = modalService;
-        }
-        /**
-         * @return {?}
-         */
-        AddToCartComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                if (this.productCode) {
-                    this.loaded$ = this.cartService.getLoaded();
-                    this.cartEntry$ = this.cartService.getEntry(this.productCode);
-                }
-            };
-        /**
-         * @return {?}
-         */
-        AddToCartComponent.prototype.addToCart = /**
-         * @return {?}
-         */
-            function () {
-                if (!this.productCode || this.quantity <= 0) {
-                    return;
-                }
-                this.openModal();
-                this.cartService.addEntry(this.productCode, this.quantity);
-            };
-        /**
-         * @private
-         * @return {?}
-         */
-        AddToCartComponent.prototype.openModal = /**
-         * @private
-         * @return {?}
-         */
-            function () {
-                this.modalInstance = this.modalService.open(AddedToCartDialogComponent, {
-                    centered: true,
-                    size: 'lg',
-                }).componentInstance;
-                this.modalInstance.entry$ = this.cartEntry$;
-                this.modalInstance.cart$ = this.cartService.getActive();
-                this.modalInstance.loaded$ = this.loaded$;
-                this.modalInstance.quantity = this.quantity;
-            };
-        AddToCartComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-add-to-cart',
-                        template: "<button\n  class=\"btn btn-primary btn-block\"\n  type=\"button\"\n  [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  (click)=\"addToCart()\"\n>\n  {{ 'addToCart.addToCart' | cxTranslate }}\n</button>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
-                        styles: [""]
-                    }] }
-        ];
-        /** @nocollapse */
-        AddToCartComponent.ctorParameters = function () {
-            return [
-                { type: i1.CartService },
-                { type: ngBootstrap.NgbModal }
-            ];
-        };
-        AddToCartComponent.propDecorators = {
-            iconOnly: [{ type: i0.Input }],
-            productCode: [{ type: i0.Input }],
-            quantity: [{ type: i0.Input }],
-            maxQuantity: [{ type: i0.Input }]
-        };
-        return AddToCartComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var AddToCartModule = /** @class */ (function () {
-        function AddToCartModule() {
-        }
-        AddToCartModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            CartSharedModule,
-                            common.CommonModule,
-                            i1$2.RouterModule,
-                            SpinnerModule,
-                            i1.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    ProductAddToCartComponent: { selector: 'cx-add-to-cart' },
-                                },
-                            }))),
-                            i1.UrlTranslationModule,
-                            i1.I18nModule,
-                        ],
-                        declarations: [AddToCartComponent, AddedToCartDialogComponent],
-                        entryComponents: [AddToCartComponent, AddedToCartDialogComponent],
-                        exports: [AddToCartComponent],
-                    },] }
-        ];
-        return AddToCartModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CartDetailsComponent = /** @class */ (function () {
-        function CartDetailsComponent(cartService) {
-            this.cartService = cartService;
-        }
-        /**
-         * @return {?}
-         */
-        CartDetailsComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                this.cart$ = this.cartService.getActive();
-                this.entries$ = this.cartService
-                    .getEntries()
-                    .pipe(operators.filter(function (entries) { return entries.length > 0; }));
-                this.cartLoaded$ = this.cartService.getLoaded();
-            };
-        /**
-         * @param {?} cart
-         * @return {?}
-         */
-        CartDetailsComponent.prototype.getAllPromotionsForCart = /**
-         * @param {?} cart
-         * @return {?}
-         */
-            function (cart) {
-                /** @type {?} */
-                var potentialPromotions = cart.potentialOrderPromotions || [];
-                /** @type {?} */
-                var appliedPromotions = cart.appliedOrderPromotions || [];
-                return __spread(potentialPromotions, appliedPromotions);
-            };
-        CartDetailsComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-cart-details',
-                        template: "<ng-container *ngIf=\"(cart$ | async) as cart\">\n  <ng-container *ngIf=\"(entries$ | async) as entries\">\n    <div class=\"cart-details-wrapper\">\n      <h1>\n        {{ 'cartDetails.shoppingCart' | cxTranslate }} ({{\n          'cartDetails.id' | cxTranslate\n        }}\n        {{ cart?.code }})\n      </h1>\n      <div class=\"cx-total\">\n        {{\n          'cartItems.cartTotal'\n            | cxTranslate: { count: cart.deliveryItemsQuantity }\n        }}:\n        {{ cart.totalPrice?.formattedValue }}\n      </div>\n      <cx-promotions\n        [promotions]=\"getAllPromotionsForCart(cart)\"\n      ></cx-promotions>\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n        [cartIsLoading]=\"!(cartLoaded$ | async)\"\n      ></cx-cart-item-list>\n      <!-- NOT FOR MVP  <cx-cart-coupon></cx-cart-coupon> -->\n    </div>\n  </ng-container>\n</ng-container>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
-                        styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/:host{display:block}.cart-details-wrapper{padding:2rem 1rem}.cx-total{font-size:var(--cx-font-size,1.125rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);margin:var(--cx-margin,0 0 1rem)}.cx-promotions{font-size:var(--cx-font-size,.875rem);font-weight:var(--cx-g-font-weight-normal);line-height:var(--cx-line-height,1.22222);color:var(--cx-color,var(--cx-g-color-success));padding:var(--cx-padding,.5rem 0)}"]
-                    }] }
-        ];
-        /** @nocollapse */
-        CartDetailsComponent.ctorParameters = function () {
-            return [
-                { type: i1.CartService }
-            ];
-        };
-        return CartDetailsComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CartDetailsModule = /** @class */ (function () {
-        function CartDetailsModule() {
-        }
-        CartDetailsModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            CartSharedModule,
-                            common.CommonModule,
-                            i1$2.RouterModule,
-                            i1.UrlTranslationModule,
-                            PromotionsModule,
-                            i1.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    CartComponent: {
-                                        selector: 'cx-cart-details',
-                                    },
-                                },
-                            }))),
-                            i1.I18nModule,
-                        ],
-                        declarations: [CartDetailsComponent],
-                        exports: [CartDetailsComponent],
-                        entryComponents: [CartDetailsComponent],
-                    },] }
-        ];
-        return CartDetailsModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CartTotalsComponent = /** @class */ (function () {
-        function CartTotalsComponent(cartService) {
-            this.cartService = cartService;
-        }
-        /**
-         * @return {?}
-         */
-        CartTotalsComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                this.cart$ = this.cartService.getActive();
-                this.entries$ = this.cartService
-                    .getEntries()
-                    .pipe(operators.filter(function (entries) { return entries.length > 0; }));
-            };
-        CartTotalsComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-cart-totals',
-                        template: "<ng-container *ngIf=\"(cart$ | async) as cart\">\n  <ng-container *ngIf=\"(entries$ | async) as entries\">\n    <div class=\"cart-totals-wrapper\">\n      <cx-order-summary [cart]=\"cart\"></cx-order-summary>\n      <button\n        [routerLink]=\"{ route: 'checkout' } | cxTranslateUrl\"\n        *ngIf=\"entries.length\"\n        class=\"btn btn-primary btn-block\"\n        type=\"button\"\n      >\n        {{ 'cartDetails.proceedToCheckout' | cxTranslate }}\n      </button>\n    </div>\n  </ng-container>\n</ng-container>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
-                        styles: [".cart-totals-wrapper{padding:2rem 1rem}cx-order-summary{padding:0}"]
-                    }] }
-        ];
-        /** @nocollapse */
-        CartTotalsComponent.ctorParameters = function () {
-            return [
-                { type: i1.CartService }
-            ];
-        };
-        return CartTotalsComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CartTotalsModule = /** @class */ (function () {
-        function CartTotalsModule() {
-        }
-        CartTotalsModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i1$2.RouterModule,
-                            i1.UrlTranslationModule,
-                            i1.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    CartTotalsComponent: {
-                                        selector: 'cx-cart-totals',
-                                    },
-                                },
-                            }))),
-                            CartSharedModule,
-                            i1.I18nModule,
-                        ],
-                        declarations: [CartTotalsComponent],
-                        exports: [CartTotalsComponent],
-                        entryComponents: [CartTotalsComponent],
-                    },] }
-        ];
-        return CartTotalsModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var MiniCartComponent = /** @class */ (function () {
-        function MiniCartComponent(component, cartService) {
-            this.component = component;
-            this.cartService = cartService;
-            this.iconTypes = ICON_TYPES;
-        }
-        Object.defineProperty(MiniCartComponent.prototype, "quantity$", {
-            get: /**
-             * @return {?}
-             */ function () {
-                return this.cartService
-                    .getActive()
-                    .pipe(operators.map(function (cart) { return cart.deliveryItemsQuantity || 0; }));
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(MiniCartComponent.prototype, "total$", {
-            get: /**
-             * @return {?}
-             */ function () {
-                return this.cartService.getActive().pipe(operators.filter(function (cart) { return !!cart.totalPrice; }), operators.map(function (cart) { return cart.totalPrice.formattedValue; }));
-            },
-            enumerable: true,
-            configurable: true
-        });
-        MiniCartComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-mini-cart',
-                        template: "<a\n  [attr.aria-label]=\"(quantity$ | async) + ' items currently in your cart'\"\n  [routerLink]=\"{ route: ['cart'] } | cxTranslateUrl\"\n>\n  <cx-icon [type]=\"iconTypes.CART\"></cx-icon>\n\n  <span class=\"total\">{{ total$ | async }}</span>\n  <span class=\"count\">{{ quantity$ | async }}</span>\n</a>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        MiniCartComponent.ctorParameters = function () {
-            return [
-                { type: CmsComponentData },
-                { type: i1.CartService }
-            ];
-        };
-        return MiniCartComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var MiniCartModule = /** @class */ (function () {
-        function MiniCartModule() {
-        }
-        MiniCartModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i1$2.RouterModule,
-                            i1.CartModule,
-                            i1.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    MiniCartComponent: { selector: 'cx-mini-cart' },
-                                },
-                            }))),
-                            i1.UrlTranslationModule,
-                            IconModule,
-                        ],
-                        declarations: [MiniCartComponent],
-                        entryComponents: [MiniCartComponent],
-                        exports: [MiniCartComponent],
-                    },] }
-        ];
-        return MiniCartModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CartComponentModule = /** @class */ (function () {
-        function CartComponentModule() {
-        }
-        CartComponentModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            CartDetailsModule,
-                            CartTotalsModule,
-                            CartSharedModule,
-                            ngBootstrap.NgbModule,
-                            i1.CartModule,
-                        ],
-                        exports: [
-                            CartDetailsModule,
-                            CartTotalsModule,
-                            CartSharedModule,
-                            AddToCartModule,
-                            MiniCartModule,
-                        ],
-                    },] }
-        ];
-        return CartComponentModule;
-    }());
 
     /**
      * @fileoverview added by tsickle
@@ -9571,11 +9562,6 @@
         ];
         return UpdateProfileModule;
     }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
 
     /**
      * @fileoverview added by tsickle
@@ -15119,6 +15105,17 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
+    exports.AddToCartComponent = AddToCartComponent;
+    exports.AddToCartModule = AddToCartModule;
+    exports.AddedToCartDialogComponent = AddedToCartDialogComponent;
+    exports.CartDetailsComponent = CartDetailsComponent;
+    exports.CartDetailsModule = CartDetailsModule;
+    exports.CartItemComponent = CartItemComponent;
+    exports.OrderSummaryComponent = OrderSummaryComponent;
+    exports.CartTotalsComponent = CartTotalsComponent;
+    exports.CartComponentModule = CartComponentModule;
+    exports.MiniCartComponent = MiniCartComponent;
+    exports.MiniCartModule = MiniCartModule;
     exports.IconLoaderService = IconLoaderService;
     exports.IconComponent = IconComponent;
     exports.ICON_TYPES = ICON_TYPES;
@@ -15256,119 +15253,108 @@
     exports.LoginFormComponent = LoginFormComponent;
     exports.RegisterComponent = RegisterComponent;
     exports.translations = translations;
-    exports.ɵbg = AddToCartComponent;
-    exports.ɵbf = AddToCartModule;
-    exports.ɵbh = AddedToCartDialogComponent;
-    exports.ɵbc = CartDetailsComponent;
-    exports.ɵbb = CartDetailsModule;
-    exports.ɵq = CartItemListComponent;
-    exports.ɵo = CartItemComponent;
-    exports.ɵd = CartSharedModule;
-    exports.ɵp = OrderSummaryComponent;
-    exports.ɵbe = CartTotalsComponent;
-    exports.ɵbd = CartTotalsModule;
-    exports.ɵba = CartComponentModule;
-    exports.ɵbj = MiniCartComponent;
-    exports.ɵbi = MiniCartModule;
-    exports.ɵc = defaultCartPageConfig;
-    exports.ɵe = BootstrapModule;
-    exports.ɵt = DeliveryModeModule;
-    exports.ɵx = BillingAddressFormComponent;
-    exports.ɵw = BillingAddressFormModule;
-    exports.ɵv = PaymentFormModule;
-    exports.ɵy = PaymentMethodComponent;
-    exports.ɵu = PaymentMethodModule;
-    exports.ɵz = ReviewSubmitModule;
-    exports.ɵr = AddressFormModule;
-    exports.ɵs = ShippingAddressComponent;
-    exports.ɵn = PromotionsComponent;
-    exports.ɵm = PromotionsModule;
-    exports.ɵbk = guards$1;
-    exports.ɵbl = OrderConfirmationPageGuard;
-    exports.ɵby = AddressBookComponent;
-    exports.ɵbx = AddressBookComponentService;
-    exports.ɵbw = AddressBookModule;
-    exports.ɵbz = AddressCardComponent;
-    exports.ɵbs = BannerComponentService;
-    exports.ɵbu = NavigationUIComponent;
-    exports.ɵbt = NavigationComponentService;
-    exports.ɵbv = ProductCarouselService;
-    exports.ɵcw = addCmsRoute;
-    exports.ɵcc = guards;
-    exports.ɵa = PageLayoutService;
-    exports.ɵce = CmsGuardsService;
-    exports.ɵcd = CmsI18nService;
-    exports.ɵct = CloseAccountModule;
-    exports.ɵcv = CloseAccountModalComponent;
-    exports.ɵcu = CloseAccountComponent;
-    exports.ɵch = OrderDetailsModule;
-    exports.ɵci = OrderDetailsService;
-    exports.ɵca = OrderHistoryModule;
-    exports.ɵcj = PaymentMethodsModule;
-    exports.ɵcl = UpdateEmailFormComponent;
-    exports.ɵcm = UpdateEmailComponent;
-    exports.ɵck = UpdateEmailModule;
-    exports.ɵcp = UpdatePasswordFormComponent;
-    exports.ɵco = UpdatePasswordComponent;
-    exports.ɵcn = UpdatePasswordModule;
-    exports.ɵcs = UpdateProfileFormComponent;
-    exports.ɵcr = UpdateProfileComponent;
-    exports.ɵcq = UpdateProfileModule;
-    exports.ɵb = OutletStyleService;
-    exports.ɵdr = StyleRefDirective;
-    exports.ɵdq = StyleRefModule;
-    exports.ɵcb = ProductViewComponent;
-    exports.ɵcf = ProductReviewsModule;
-    exports.ɵdx = provideConfigFromMetaTags;
-    exports.ɵbr = AddToHomeScreenBannerComponent;
-    exports.ɵbp = AddToHomeScreenBtnComponent;
-    exports.ɵbq = AddToHomeScreenComponent;
-    exports.ɵbm = PWAModuleConfig;
-    exports.ɵbn = defaultPWAModuleConfig;
-    exports.ɵbo = AddToHomeScreenService;
-    exports.ɵdb = AbstractStoreItemComponent;
-    exports.ɵdg = ScheduleComponent;
-    exports.ɵcz = StoreFinderGridComponent;
-    exports.ɵdh = StoreFinderHeaderComponent;
-    exports.ɵdf = StoreFinderListItemComponent;
-    exports.ɵde = StoreFinderMapComponent;
-    exports.ɵdj = StoreFinderPaginationDetailsComponent;
-    exports.ɵdd = StoreFinderListComponent;
-    exports.ɵcx = StoreFinderSearchResultComponent;
-    exports.ɵdc = StoreFinderSearchComponent;
-    exports.ɵda = StoreFinderStoreDescriptionComponent;
-    exports.ɵcy = StoreFinderStoresCountComponent;
-    exports.ɵdi = StoreFinderComponent;
-    exports.ɵdw = suffixUrlMatcher;
-    exports.ɵh = CardComponent;
-    exports.ɵg = CardModule;
-    exports.ɵl = GenericLinkModule;
-    exports.ɵi = PaginationComponent;
-    exports.ɵj = SortingComponent;
-    exports.ɵk = SpinnerModule;
-    exports.ɵf = OnlyNumberDirective;
-    exports.ɵdv = HardcodedCheckoutComponent;
-    exports.ɵdu = CartNotEmptyGuard;
-    exports.ɵdt = GuardsModule;
-    exports.ɵds = OrderConfirmationPageModule;
-    exports.ɵcg = CurrentProductService;
-    exports.ɵdp = ForgotPasswordComponent;
-    exports.ɵdo = ForgotPasswordModule;
-    exports.ɵdk = LoginComponentService;
-    exports.ɵdl = RegisterComponentModule;
-    exports.ɵdn = ResetPasswordFormComponent;
-    exports.ɵdm = ResetPasswordModule;
-    exports.ɵdy = address;
-    exports.ɵdz = cart;
-    exports.ɵea = checkout;
-    exports.ɵeb = closeAccount;
-    exports.ɵec = common$1;
-    exports.ɵed = myAccount;
-    exports.ɵee = payment;
-    exports.ɵef = product;
-    exports.ɵeg = pwa;
-    exports.ɵeh = storeFinder;
-    exports.ɵei = user;
+    exports.ɵl = CartItemListComponent;
+    exports.ɵa = CartSharedModule;
+    exports.ɵm = CartTotalsModule;
+    exports.ɵp = defaultCartPageConfig;
+    exports.ɵb = BootstrapModule;
+    exports.ɵs = DeliveryModeModule;
+    exports.ɵw = BillingAddressFormComponent;
+    exports.ɵv = BillingAddressFormModule;
+    exports.ɵu = PaymentFormModule;
+    exports.ɵx = PaymentMethodComponent;
+    exports.ɵt = PaymentMethodModule;
+    exports.ɵy = ReviewSubmitModule;
+    exports.ɵq = AddressFormModule;
+    exports.ɵr = ShippingAddressComponent;
+    exports.ɵk = PromotionsComponent;
+    exports.ɵj = PromotionsModule;
+    exports.ɵz = guards$1;
+    exports.ɵba = OrderConfirmationPageGuard;
+    exports.ɵbn = AddressBookComponent;
+    exports.ɵbm = AddressBookComponentService;
+    exports.ɵbl = AddressBookModule;
+    exports.ɵbo = AddressCardComponent;
+    exports.ɵbh = BannerComponentService;
+    exports.ɵbj = NavigationUIComponent;
+    exports.ɵbi = NavigationComponentService;
+    exports.ɵbk = ProductCarouselService;
+    exports.ɵcl = addCmsRoute;
+    exports.ɵbr = guards;
+    exports.ɵn = PageLayoutService;
+    exports.ɵbt = CmsGuardsService;
+    exports.ɵbs = CmsI18nService;
+    exports.ɵci = CloseAccountModule;
+    exports.ɵck = CloseAccountModalComponent;
+    exports.ɵcj = CloseAccountComponent;
+    exports.ɵbw = OrderDetailsModule;
+    exports.ɵbx = OrderDetailsService;
+    exports.ɵbp = OrderHistoryModule;
+    exports.ɵby = PaymentMethodsModule;
+    exports.ɵca = UpdateEmailFormComponent;
+    exports.ɵcb = UpdateEmailComponent;
+    exports.ɵbz = UpdateEmailModule;
+    exports.ɵce = UpdatePasswordFormComponent;
+    exports.ɵcd = UpdatePasswordComponent;
+    exports.ɵcc = UpdatePasswordModule;
+    exports.ɵch = UpdateProfileFormComponent;
+    exports.ɵcg = UpdateProfileComponent;
+    exports.ɵcf = UpdateProfileModule;
+    exports.ɵo = OutletStyleService;
+    exports.ɵdg = StyleRefDirective;
+    exports.ɵdf = StyleRefModule;
+    exports.ɵbq = ProductViewComponent;
+    exports.ɵbu = ProductReviewsModule;
+    exports.ɵdm = provideConfigFromMetaTags;
+    exports.ɵbg = AddToHomeScreenBannerComponent;
+    exports.ɵbe = AddToHomeScreenBtnComponent;
+    exports.ɵbf = AddToHomeScreenComponent;
+    exports.ɵbb = PWAModuleConfig;
+    exports.ɵbc = defaultPWAModuleConfig;
+    exports.ɵbd = AddToHomeScreenService;
+    exports.ɵcq = AbstractStoreItemComponent;
+    exports.ɵcv = ScheduleComponent;
+    exports.ɵco = StoreFinderGridComponent;
+    exports.ɵcw = StoreFinderHeaderComponent;
+    exports.ɵcu = StoreFinderListItemComponent;
+    exports.ɵct = StoreFinderMapComponent;
+    exports.ɵcy = StoreFinderPaginationDetailsComponent;
+    exports.ɵcs = StoreFinderListComponent;
+    exports.ɵcm = StoreFinderSearchResultComponent;
+    exports.ɵcr = StoreFinderSearchComponent;
+    exports.ɵcp = StoreFinderStoreDescriptionComponent;
+    exports.ɵcn = StoreFinderStoresCountComponent;
+    exports.ɵcx = StoreFinderComponent;
+    exports.ɵdl = suffixUrlMatcher;
+    exports.ɵe = CardComponent;
+    exports.ɵd = CardModule;
+    exports.ɵi = GenericLinkModule;
+    exports.ɵf = PaginationComponent;
+    exports.ɵg = SortingComponent;
+    exports.ɵh = SpinnerModule;
+    exports.ɵc = OnlyNumberDirective;
+    exports.ɵdk = HardcodedCheckoutComponent;
+    exports.ɵdj = CartNotEmptyGuard;
+    exports.ɵdi = GuardsModule;
+    exports.ɵdh = OrderConfirmationPageModule;
+    exports.ɵbv = CurrentProductService;
+    exports.ɵde = ForgotPasswordComponent;
+    exports.ɵdd = ForgotPasswordModule;
+    exports.ɵcz = LoginComponentService;
+    exports.ɵda = RegisterComponentModule;
+    exports.ɵdc = ResetPasswordFormComponent;
+    exports.ɵdb = ResetPasswordModule;
+    exports.ɵdn = address;
+    exports.ɵdo = cart;
+    exports.ɵdp = checkout;
+    exports.ɵdq = closeAccount;
+    exports.ɵdr = common$1;
+    exports.ɵds = myAccount;
+    exports.ɵdt = payment;
+    exports.ɵdu = product;
+    exports.ɵdv = pwa;
+    exports.ɵdw = storeFinder;
+    exports.ɵdx = user;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
