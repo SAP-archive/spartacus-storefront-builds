@@ -14731,6 +14731,7 @@
                             i1.ConfigModule.forRoot(),
                             i1.CxApiModule,
                             i1.SmartEditModule.forRoot(),
+                            i1.PersonalizationModule.forRoot(),
                             MultiStepCheckoutModule,
                             i1.I18nModule.forRoot(),
                         ],
