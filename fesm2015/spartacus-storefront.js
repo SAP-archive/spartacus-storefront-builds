@@ -6,9 +6,9 @@ import { of, concat, from, isObservable, fromEvent, BehaviorSubject, combineLate
 import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { tap, debounceTime, filter, map, switchMap, take, endWith, first, skipWhile, distinctUntilChanged, startWith, withLatestFrom, takeWhile, multicast, refCount, delay } from 'rxjs/operators';
+import { tap, debounceTime, filter, map, switchMap, take, endWith, first, skipWhile, distinctUntilChanged, startWith, withLatestFrom, shareReplay, multicast, refCount, delay } from 'rxjs/operators';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
-import { CartService, I18nModule, UrlTranslationModule, ConfigModule, Config, CartModule, ContextServiceMap, CURRENCY_CONTEXT_ID, LANGUAGE_CONTEXT_ID, SiteContextModule, AuthService, CmsService, PageType, provideConfigFactory, serverConfigFromMetaTagFactory, ServerConfig, GlobalMessageType, GlobalMessageService, WindowRef, CheckoutService, RoutingService, UserService, TranslationService, TranslationChunkService, RoutingModule, AuthGuard, ProductService, UserModule, CmsConfig, StoreDataService, GoogleMapRendererService, StoreFinderService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, ProductReviewService, CheckoutModule, defaultCmsModuleConfig, CmsModule, StripHtmlModule, PageMetaService, CmsPageTitleModule, ProductModule, ProductSearchService, StoreFinderCoreModule, GlobalMessageModule, OccUserService, OccMiscsService, OccOrderService, OccConfig, TranslatePipe, DynamicAttributeService, PageRobotsMeta, CxApiService, ComponentMapperService, NotAuthGuard } from '@spartacus/core';
+import { CartService, I18nModule, UrlTranslationModule, ConfigModule, Config, CartModule, ContextServiceMap, CURRENCY_CONTEXT_ID, LANGUAGE_CONTEXT_ID, SiteContextModule, AuthService, CmsService, PageType, provideConfigFactory, serverConfigFromMetaTagFactory, ServerConfig, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, WindowRef, UserService, CheckoutModule, TranslationService, TranslationChunkService, RoutingModule, AuthGuard, ProductService, UserModule, CmsConfig, StoreDataService, StoreFinderService, GoogleMapRendererService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, ProductReviewService, defaultCmsModuleConfig, CmsModule, StripHtmlModule, PageMetaService, CmsPageTitleModule, ProductModule, ProductSearchService, StoreFinderCoreModule, GlobalMessageModule, OccUserService, OccMiscsService, OccOrderService, OccConfig, TranslatePipe, DynamicAttributeService, PageRobotsMeta, CxApiService, ComponentMapperService, NotAuthGuard } from '@spartacus/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { Component, ElementRef, ViewChild, Input, ChangeDetectionStrategy, NgModule, ChangeDetectorRef, Output, EventEmitter, Renderer2, forwardRef, Directive, HostListener, ViewEncapsulation, Injectable, Optional, Injector, Inject, APP_INITIALIZER, PLATFORM_ID, TemplateRef, ViewContainerRef, defineInjectable, inject, INJECTOR } from '@angular/core';
 import { RouterModule, Router, ActivatedRoute, NavigationStart } from '@angular/router';
@@ -3870,107 +3870,80 @@ SkipLinkModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class MultiStepCheckoutComponent {
+class CheckoutDetailsService {
     /**
+     * @param {?} authService
      * @param {?} checkoutService
      * @param {?} cartService
-     * @param {?} cartDataService
-     * @param {?} routingService
+     */
+    constructor(authService, checkoutService, cartService) {
+        this.authService = authService;
+        this.checkoutService = checkoutService;
+        this.cartService = cartService;
+        this.userId$ = this.authService
+            .getUserToken()
+            .pipe(map(userData => userData.userId));
+        this.cartId$ = this.cartService
+            .getActive()
+            .pipe(map(cartData => cartData.code));
+        this.getCheckoutDetailsLoaded$ = this.userId$.pipe(withLatestFrom(this.cartId$), tap(([userId, cartId]) => this.checkoutService.loadCheckoutDetails(userId, cartId)), shareReplay(1), switchMap(() => this.checkoutService.getCheckoutDetailsLoaded()), skipWhile(loaded => !loaded));
+    }
+    /**
+     * @return {?}
+     */
+    getDeliveryAddress() {
+        return this.getCheckoutDetailsLoaded$.pipe(switchMap(() => this.checkoutService.getDeliveryAddress()));
+    }
+    /**
+     * @return {?}
+     */
+    getSelectedDeliveryModeCode() {
+        return this.getCheckoutDetailsLoaded$.pipe(switchMap(() => this.checkoutService.getSelectedDeliveryModeCode()));
+    }
+    /**
+     * @return {?}
+     */
+    getPaymentDetails() {
+        return this.getCheckoutDetailsLoaded$.pipe(switchMap(() => this.checkoutService.getPaymentDetails()));
+    }
+}
+CheckoutDetailsService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+CheckoutDetailsService.ctorParameters = () => [
+    { type: AuthService },
+    { type: CheckoutService },
+    { type: CartService }
+];
+/** @nocollapse */ CheckoutDetailsService.ngInjectableDef = defineInjectable({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(inject(AuthService), inject(CheckoutService), inject(CartService)); }, token: CheckoutDetailsService, providedIn: "root" });
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class MultiStepCheckoutComponent {
+    /**
+     * @param {?} checkoutDetailsService
+     * @param {?} cartService
      * @param {?} globalMessageService
      * @param {?} cd
      */
-    constructor(checkoutService, cartService, cartDataService, routingService, globalMessageService, cd) {
-        this.checkoutService = checkoutService;
+    constructor(checkoutDetailsService, cartService, globalMessageService, cd) {
+        this.checkoutDetailsService = checkoutDetailsService;
         this.cartService = cartService;
-        this.cartDataService = cartDataService;
-        this.routingService = routingService;
         this.globalMessageService = globalMessageService;
         this.cd = cd;
         this.step = 1;
-        this.done = false;
-        this.subscriptions = [];
-        this.tAndCToggler = false;
         this.navs = this.initializeCheckoutNavBar();
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    refreshCart() {
-        this.cartService.loadDetails();
     }
     /**
      * @return {?}
      */
     ngOnInit() {
-        if (!this.cartDataService.getDetails) {
-            this.cartService.loadDetails();
-        }
         this.cart$ = this.cartService.getActive();
-        this.processSteps();
-    }
-    /**
-     * @return {?}
-     */
-    processSteps() {
-        // step1: set delivery address
-        this.subscriptions.push(this.checkoutService
-            .getDeliveryAddress()
-            .pipe(filter(deliveryAddress => Object.keys(deliveryAddress).length !== 0 && this.step === 1))
-            .subscribe(deliveryAddress => {
-            this.deliveryAddress = deliveryAddress;
-            this.nextStep(2);
-            this.refreshCart();
-            this.cd.detectChanges();
-        }));
-        // step2: select delivery mode
-        this.subscriptions.push(this.checkoutService
-            .getSelectedDeliveryModeCode()
-            .pipe(filter(selected => selected !== '' && this.step === 2))
-            .subscribe(selectedMode => {
-            this.nextStep(3);
-            this.refreshCart();
-            this.shippingMethod = selectedMode;
-            this.cd.detectChanges();
-        }));
-        // step3: set payment information
-        this.subscriptions.push(this.checkoutService
-            .getPaymentDetails()
-            .pipe(filter(paymentInfo => Object.keys(paymentInfo).length !== 0 && this.step === 3))
-            .subscribe(paymentInfo => {
-            if (!paymentInfo['hasError']) {
-                this.nextStep(4);
-                this.paymentDetails = paymentInfo;
-                this.cd.detectChanges();
-            }
-            else {
-                Object.keys(paymentInfo).forEach(key => {
-                    if (key.startsWith('InvalidField')) {
-                        this.globalMessageService.add({
-                            type: GlobalMessageType.MSG_TYPE_ERROR,
-                            text: 'InvalidField: ' + paymentInfo[key],
-                        });
-                    }
-                });
-                this.checkoutService.clearCheckoutStep(3);
-            }
-        }));
-        // step4: place order
-        this.subscriptions.push(this.checkoutService
-            .getOrderDetails()
-            .pipe(filter(order => Object.keys(order).length !== 0 && this.step === 4))
-            .subscribe(() => {
-            // checkout steps are done
-            this.done = true;
-            this.routingService.go({ route: 'orderConfirmation' });
-        }));
-    }
-    /**
-     * @param {?} backStep
-     * @return {?}
-     */
-    setStep(backStep) {
-        this.nextStep(backStep);
     }
     /**
      * @param {?} step
@@ -3993,68 +3966,6 @@ class MultiStepCheckoutComponent {
             nav.progressBar = nav.status.active || nav.status.completed;
         });
         this.step = step;
-        this.tAndCToggler = false;
-    }
-    /**
-     * @param {?} __0
-     * @return {?}
-     */
-    addAddress({ newAddress, address, }) {
-        if (newAddress) {
-            this.checkoutService.createAndSetAddress(address);
-            return;
-        }
-        // if the selected address is the same as the cart's one
-        if (this.deliveryAddress && address.id === this.deliveryAddress.id) {
-            this.nextStep(2);
-            return;
-        }
-        this.checkoutService.setDeliveryAddress(address);
-        return;
-    }
-    /**
-     * @param {?} __0
-     * @return {?}
-     */
-    setDeliveryMode({ deliveryModeId }) {
-        // if the selected shipping method is the same as the cart's one
-        if (this.shippingMethod && this.shippingMethod === deliveryModeId) {
-            this.nextStep(3);
-            return;
-        }
-        this.checkoutService.setDeliveryMode(deliveryModeId);
-        return;
-    }
-    /**
-     * @param {?} __0
-     * @return {?}
-     */
-    addPaymentInfo({ newPayment, payment, billingAddress, }) {
-        payment.billingAddress = billingAddress
-            ? billingAddress
-            : this.deliveryAddress;
-        if (newPayment) {
-            this.checkoutService.createPaymentDetails(payment);
-            return;
-        }
-        // if the selected payment is the same as the cart's one
-        if (this.paymentDetails && this.paymentDetails.id === payment.id) {
-            this.nextStep(4);
-            return;
-        }
-        this.checkoutService.setPaymentDetails(payment);
-    }
-    /**
-     * @return {?}
-     */
-    placeOrder() {
-        this.checkoutService.placeOrder();
-    }
-    /**
-     * @return {?}
-     */
-    toggleTAndC() {
-        this.tAndCToggler = !this.tAndCToggler;
     }
     /**
      * @return {?}
@@ -4113,27 +4024,21 @@ class MultiStepCheckoutComponent {
      * @return {?}
      */
     ngOnDestroy() {
-        this.subscriptions.forEach(subscription => subscription.unsubscribe());
-        if (!this.done) {
-            this.checkoutService.clearCheckoutData();
-        }
         this.clearCheckoutNavBar();
     }
 }
 MultiStepCheckoutComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-multi-step-checkout',
-                template: "<ng-container *ngIf=\"(cart$ | async) as cart\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-8\">\n      <!-- VISIBLE ONLY ON LG AND XL SCREENS -->\n      <!-- Navigation -->\n      <div class=\"cx-nav d-none d-lg-block d-xl-block\">\n        <ul class=\"cx-list\">\n          <li\n            *ngFor=\"let nav of navs\"\n            class=\"cx-item\"\n            [ngClass]=\"{\n              ' is-disabled': nav.status.disabled,\n              ' is-active': nav.status.active\n            }\"\n          >\n            <a\n              class=\"cx-link \"\n              [ngClass]=\"{\n                ' is-disabled': nav.status.disabled,\n                ' is-active': nav.status.active\n              }\"\n              (click)=\"nav.status.disabled === false ? setStep(nav.id) : false\"\n              >{{ nav.label }}</a\n            >\n          </li>\n        </ul>\n      </div>\n\n      <div class=\"cx-media\">\n        <div class=\"cx-list-media\">\n          {{ 'cartItems.cartTotal' | cxTranslate: { count: cart.totalItems } }}:\n          {{ cart.subTotal?.formattedValue }}\n        </div>\n\n        <div *ngFor=\"let nav of navs\">\n          <!-- Navigation -->\n          <div\n            class=\"cx-list-media\"\n            [ngClass]=\"{ ' is-active': nav.status.active }\"\n          >\n            <div>{{ nav.label }}</div>\n            <button\n              *ngIf=\"nav.status.completed && !nav.status.active\"\n              class=\"btn btn-link\"\n              (click)=\"setStep(nav.id)\"\n            >\n              {{ 'common.edit' | cxTranslate }}\n            </button>\n          </div>\n\n          <!-- Content -->\n          <div *ngIf=\"nav.status.active && step === 1\">\n            <cx-shipping-address\n              [selectedAddress]=\"deliveryAddress\"\n              (addAddress)=\"addAddress($event)\"\n            ></cx-shipping-address>\n          </div>\n          <div *ngIf=\"nav.status.active && step === 2\">\n            <cx-delivery-mode\n              [selectedShippingMethod]=\"shippingMethod\"\n              (selectMode)=\"setDeliveryMode($event)\"\n              (backStep)=\"setStep(1)\"\n            ></cx-delivery-mode>\n          </div>\n          <div *ngIf=\"nav.status.active && step === 3\">\n            <cx-payment-method\n              [selectedPayment]=\"paymentDetails\"\n              (addPaymentInfo)=\"addPaymentInfo($event)\"\n              (backStep)=\"setStep(2)\"\n            ></cx-payment-method>\n          </div>\n          <div *ngIf=\"nav.status.active && step === 4\">\n            <cx-review-submit\n              [deliveryAddress]=\"deliveryAddress\"\n              [shippingMethod]=\"shippingMethod\"\n              [paymentDetails]=\"paymentDetails\"\n            >\n            </cx-review-submit>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- ORDER SUMMARY SECTION -->\n    <div class=\"col-md-7 offset-md-5 col-lg-4 offset-lg-0\">\n      <cx-order-summary [cart]=\"cart\"></cx-order-summary>\n\n      <!-- CHECKBOX AND PLACE ORDER BUTTON -->\n      <div class=\"cx-place-order\" *ngIf=\"step === 4\">\n        <div class=\"cx-place-order-form form-check\">\n          <label>\n            <input\n              class=\"form-check-input\"\n              type=\"checkbox\"\n              (change)=\"toggleTAndC()\"\n            />\n            <span class=\"form-check-label\">\n              {{ 'checkoutReview.confirmThatRead' | cxTranslate }}\n              <a\n                [routerLink]=\"{ route: 'termsAndConditions' } | cxTranslateUrl\"\n                class=\"cx-tc-link\"\n                target=\"_blank\"\n              >\n                {{ 'checkoutReview.termsAndConditions' | cxTranslate }}\n              </a>\n            </span>\n          </label>\n        </div>\n        <button\n          [disabled]=\"!tAndCToggler\"\n          (click)=\"placeOrder()\"\n          class=\"btn btn-primary btn-block\"\n        >\n          {{ 'checkoutReview.placeOrder' | cxTranslate }}\n        </button>\n        <button class=\"btn btn-action btn-block\" (click)=\"setStep(3)\">\n          {{ 'common.back' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </div>\n</ng-container>\n",
+                template: "<ng-container\n  *ngIf=\"(checkoutDetailsService.getCheckoutDetailsLoaded$ | async)\"\n>\n  <div *ngIf=\"(cart$ | async) as cart\">\n    <div class=\"row\">\n      <div class=\"col-md-12 col-lg-8\">\n        <!-- VISIBLE ONLY ON LG AND XL SCREENS -->\n        <!-- Navigation -->\n        <div class=\"cx-nav d-none d-lg-block d-xl-block\">\n          <ul class=\"cx-list\">\n            <li\n              *ngFor=\"let nav of navs\"\n              class=\"cx-item\"\n              [ngClass]=\"{\n                ' is-disabled': nav.status.disabled,\n                ' is-active': nav.status.active\n              }\"\n            >\n              <a\n                class=\"cx-link \"\n                [ngClass]=\"{\n                  ' is-disabled': nav.status.disabled,\n                  ' is-active': nav.status.active\n                }\"\n                (click)=\"\n                  nav.status.disabled === false ? nextStep(nav.id) : false\n                \"\n                >{{ nav.label }}</a\n              >\n            </li>\n          </ul>\n        </div>\n\n        <div class=\"cx-media\">\n          <div class=\"cx-list-media\">\n            {{\n              'cartItems.cartTotal' | cxTranslate: { count: cart.totalItems }\n            }}:\n            {{ cart.subTotal?.formattedValue }}\n          </div>\n\n          <div *ngFor=\"let nav of navs\">\n            <!-- Navigation -->\n            <div\n              class=\"cx-list-media\"\n              [ngClass]=\"{ ' is-active': nav.status.active }\"\n            >\n              <div>{{ nav.label }}</div>\n              <button\n                *ngIf=\"nav.status.completed && !nav.status.active\"\n                class=\"btn btn-link\"\n                (click)=\"nextStep(nav.id)\"\n              >\n                {{ 'common.edit' | cxTranslate }}\n              </button>\n            </div>\n\n            <!-- Content -->\n            <div *ngIf=\"nav.status.active && step === 1\">\n              <cx-shipping-address\n                (goToStep)=\"nextStep($event)\"\n              ></cx-shipping-address>\n            </div>\n            <div *ngIf=\"nav.status.active && step === 2\">\n              <cx-delivery-mode\n                (goToStep)=\"nextStep($event)\"\n              ></cx-delivery-mode>\n            </div>\n            <div *ngIf=\"nav.status.active && step === 3\">\n              <cx-payment-method\n                (goToStep)=\"nextStep($event)\"\n              ></cx-payment-method>\n            </div>\n            <div *ngIf=\"nav.status.active && step === 4\">\n              <cx-review-submit></cx-review-submit>\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <!-- ORDER SUMMARY SECTION -->\n      <div class=\"col-md-7 offset-md-5 col-lg-4 offset-lg-0\">\n        <cx-order-summary [cart]=\"cart\"></cx-order-summary>\n\n        <!-- CHECKBOX AND PLACE ORDER BUTTON -->\n        <div class=\"cx-place-order\" *ngIf=\"step === 4\">\n          <cx-place-order></cx-place-order>\n\n          <button class=\"btn btn-action btn-block\" (click)=\"nextStep(3)\">\n            {{ 'common.back' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-nav{font-size:var(--cx-font-size,1.125rem);font-weight:var(--cx-g-font-weight-semi);line-height:var(--cx-line-height,1.22222);margin:var(--cx-margin,0)}.cx-nav .cx-list{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,row);list-style:var(--cx-list-style,none);padding:var(--cx-padding,0);margin:var(--cx-margin,0)}.cx-nav .cx-item{color:var(--cx-color,var(--cx-g-color-text));padding:var(--cx-padding,0 0 1.375rem 0)}.cx-nav .cx-item.progressbar{border-bottom:5px solid;border-color:var(--cx-border-color,var(--cx-g-color-primary))}.cx-nav .cx-item.progressbar ::before{color:var(--cx-color,var(--cx-g-color-text))}.cx-nav .cx-item ::before{padding:var(--cx-padding,0 .5rem);content:var(--cx-content, \">\")}.cx-nav .cx-item:first-child ::before{padding:var(--cx-padding,0);content:var(--cx-content, \"\")}.cx-link,.cx-link:hover{cursor:var(--cx-cursor,pointer)}.cx-link.is-disabled,.cx-link:hover.is-disabled{color:var(--cx-color,var(--cx-g-color-light));cursor:var(--cx-cursor,not-allowed)}.cx-link.is-active,.cx-link:hover.is-active{color:var(--cx-color,var(--cx-g-color-primary))}.cx-link.is-active ::before,.cx-link:hover.is-active ::before{color:var(--cx-color,var(--cx-g-color-text))}@media (max-width:991.98px){:host{padding:var(--cx-padding,1.5rem 0)}.cx-media>:last-child{border-width:var(--cx-border-width,0 0 1px 0);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light))}}.cx-media .cx-list-media{display:var(--cx-display,none);font-size:var(--cx-font-size,1.375rem);font-weight:var(--cx-g-font-weight-semi);line-height:var(--cx-line-height,1.22222);text-transform:var(--cx-text-transform,capitalize);justify-content:var(--cx-justify-content,space-between);align-items:var(--cx-align-items,center);line-height:var(--cx-line-height,4.75rem);min-width:var(--cx-min-width,100%);border-width:var(--cx-border-width,1px 0 0 0);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light));margin:var(--cx-margin,0)}.cx-media .cx-list-media button{text-transform:var(--cx-text-transform,capitalize);font-weight:var(--cx-font-weight,var(--cx-g-font-weight-semi))}@media (max-width:991.98px){.cx-media .cx-list-media{display:var(--cx-display,flex);padding:var(--cx-padding,0 3.5rem)}}@media (max-width:767.98px){.cx-media .cx-list-media{padding:var(--cx-padding,0 1.375rem)}}.cx-place-order{padding:var(--cx-padding,0 1rem)}.cx-place-order .cx-form{display:var(--cx-display,flex)}.cx-place-order .cx-form .form-check-input{min-height:var(--cx-min-height,1.375rem);min-width:var(--cx-min-width,1.375rem)}.cx-place-order button{margin:var(--cx-margin,1.25rem 0 0)}@media (max-width:991.98px){.col-md-12{max-width:var(--cx-max-width,100%);padding:var(--cx-padding,0 0 2rem)}.cx-list-media.is-active{background-color:var(--cx-background-color,var(--cx-g-color-background))}}"]
             }] }
 ];
 /** @nocollapse */
 MultiStepCheckoutComponent.ctorParameters = () => [
-    { type: CheckoutService },
+    { type: CheckoutDetailsService },
     { type: CartService },
-    { type: CartDataService },
-    { type: RoutingService },
     { type: GlobalMessageService },
     { type: ChangeDetectorRef }
 ];
@@ -4145,14 +4050,12 @@ MultiStepCheckoutComponent.ctorParameters = () => [
 class DeliveryModeComponent {
     /**
      * @param {?} fb
-     * @param {?} service
+     * @param {?} checkoutService
      */
-    constructor(fb, service) {
+    constructor(fb, checkoutService) {
         this.fb = fb;
-        this.service = service;
-        this.selectMode = new EventEmitter();
-        this.backStep = new EventEmitter();
-        this.leave = false;
+        this.checkoutService = checkoutService;
+        this.goToStep = new EventEmitter();
         this.mode = this.fb.group({
             deliveryModeId: ['', Validators.required],
         });
@@ -4161,31 +4064,49 @@ class DeliveryModeComponent {
      * @return {?}
      */
     ngOnInit() {
-        this.supportedDeliveryModes$ = this.service
-            .getSupportedDeliveryModes()
-            .pipe(takeWhile(() => !this.leave), tap(supportedModes => {
-            if (Object.keys(supportedModes).length === 0) {
-                this.service.loadSupportedDeliveryModes();
+        this.changedOption = false;
+        this.checkoutService.loadSupportedDeliveryModes();
+        this.supportedDeliveryModes$ = this.checkoutService.getSupportedDeliveryModes();
+        this.selectedDeliveryMode$ = this.checkoutService.getSelectedDeliveryMode();
+        this.selectedDeliveryMode$
+            .pipe(map((deliveryMode) => deliveryMode && deliveryMode.code ? deliveryMode.code : null))
+            .subscribe(code => {
+            if (code) {
+                this.mode.controls['deliveryModeId'].setValue(code);
+                this.currentDeliveryModeId = code;
             }
-            else {
-                if (this.selectedShippingMethod) {
-                    this.mode.controls['deliveryModeId'].setValue(this.selectedShippingMethod);
-                }
-            }
-        }));
+        });
+    }
+    /**
+     * @param {?} code
+     * @return {?}
+     */
+    changeMode(code) {
+        if (code !== this.currentDeliveryModeId) {
+            this.changedOption = true;
+            this.currentDeliveryModeId = code;
+        }
     }
     /**
      * @return {?}
      */
     next() {
-        this.selectMode.emit(this.mode.value);
+        if (this.changedOption) {
+            this.checkoutService.setDeliveryMode(this.currentDeliveryModeId);
+        }
+        this.deliveryModeSub = this.checkoutService
+            .getSelectedDeliveryMode()
+            .subscribe(data => {
+            if (data && data.code === this.currentDeliveryModeId) {
+                this.goToStep.emit(3);
+            }
+        });
     }
     /**
      * @return {?}
      */
     back() {
-        this.leave = true;
-        this.backStep.emit();
+        this.goToStep.emit(1);
     }
     /**
      * @return {?}
@@ -4193,13 +4114,21 @@ class DeliveryModeComponent {
     get deliveryModeInvalid() {
         return this.mode.controls['deliveryModeId'].invalid;
     }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        if (this.deliveryModeSub) {
+            this.deliveryModeSub.unsubscribe();
+        }
+    }
 }
 DeliveryModeComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-delivery-mode',
-                template: "<div [formGroup]=\"mode\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n        {{ 'checkoutShipping.shippingMethod' | cxTranslate }}\n      </h3>\n\n      <div\n        class=\"form-check\"\n        *ngFor=\"let mode of (supportedDeliveryModes$ | async)\"\n      >\n        <input\n          class=\"form-check-input\"\n          role=\"radio\"\n          type=\"radio\"\n          tabindex=\"0\"\n          id=\"deliveryMode-{{ mode.code }}\"\n          aria-checked=\"true\"\n          [value]=\"mode.code\"\n          formControlName=\"deliveryModeId\"\n        />\n        <label\n          class=\"cx-delivery-label form-check-label\n            form-radio-label\"\n          for=\"deliveryMode-{{ mode.code }}\"\n        >\n          <div class=\"cx-delivery-shipping\">{{ mode.name }}</div>\n          <div class=\"cx-delivery-price\">\n            {{ mode.deliveryCost.formattedValue }}\n          </div>\n          <div class=\"cx-delivery-details\">{{ mode.description }}</div>\n        </label>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"row cx-checkout-btns\">\n    <div class=\"col-md-12 col-lg-6\">\n      <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n        {{ 'common.back' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        class=\"btn btn-block btn-primary\"\n        [disabled]=\"deliveryModeInvalid\"\n        (click)=\"next()\"\n      >\n        {{ 'common.continue' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n",
+                template: "<div [formGroup]=\"mode\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n        {{ 'checkoutShipping.shippingMethod' | cxTranslate }}\n      </h3>\n\n      <ng-container\n        *ngIf=\"(supportedDeliveryModes$ | async)?.length; else loading\"\n      >\n        <div\n          class=\"form-check\"\n          *ngFor=\"let mode of (supportedDeliveryModes$ | async)\"\n        >\n          <input\n            class=\"form-check-input\"\n            role=\"radio\"\n            type=\"radio\"\n            id=\"deliveryMode-{{ mode.code }}\"\n            aria-checked=\"true\"\n            (change)=\"changeMode(mode.code)\"\n            [value]=\"mode.code\"\n            formControlName=\"deliveryModeId\"\n          />\n          <label\n            class=\"cx-delivery-label form-check-label\n              form-radio-label\"\n            for=\"deliveryMode-{{ mode.code }}\"\n          >\n            <div class=\"cx-delivery-mode\">{{ mode.name }}</div>\n            <div class=\"cx-delivery-price\">\n              {{ mode.deliveryCost.formattedValue }}\n            </div>\n            <div class=\"cx-delivery-details\">{{ mode.description }}</div>\n          </label>\n        </div>\n      </ng-container>\n    </div>\n  </div>\n\n  <div class=\"row cx-checkout-btns\">\n    <div class=\"col-md-12 col-lg-6\">\n      <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n        {{ 'common.back' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        class=\"btn btn-block btn-primary\"\n        [disabled]=\"deliveryModeInvalid\"\n        (click)=\"next()\"\n      >\n        {{ 'common.continue' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush,
-                styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/@media (max-width:991.98px){:host{display:var(--cx-display,block);background-color:var(--cx-background-color,var(--cx-g-color-background))}.col-md-12{padding:var(--cx-padding,0 4.375rem)}.container{width:var(--cx-width,100%)}}@media (max-width:767.98px){.col-md-12{padding:var(--cx-padding,0 2.25rem)}}.cx-checkout-btns{padding:var(--cx-padding,1rem 0);justify-content:var(--cx-justify-content,flex-end)}@media (max-width:767.98px){.cx-checkout-btns{padding:var(--cx-padding,1.25rem 0)}}@media (max-width:991.98px){.cx-checkout-btns{padding:var(--cx-padding,1.25rem 0)}.cx-checkout-btns .btn-action{margin:var(--cx-margin,0 0 1rem)}.cx-checkout-body.row{padding:var(--cx-padding,0)}}.cx-checkout-title{text-transform:var(--cx-text-transform,capitalize);margin:var(--cx-margin,0 auto);padding:var(--cx-padding,2.375rem 0 1.75rem 0)}.cx-checkout-body{display:var(--cx-display,flex);align-items:var(--cx-align-items,stretch)}.cx-checkout-text{margin-bottom:var(--cx-margin,1.25rem)}@media (max-width:991.98px){.cx-checkout-text{padding-left:var(--cx-padding,3.5rem)}}@media (max-width:767.98px){.cx-checkout-text{padding-left:var(--cx-padding,1.5rem)}}.cx-spinner{padding-top:var(--cx-padding,30px);padding-bottom:var(--cx-padding,30px)}.cx-delivery-label{padding:var(--cx-padding,0);margin:var(--cx-margin,0 auto 0 .75rem);width:var(--cx-width,100%);display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,row);justify-content:var(--cx-space-justify-content,space-between);flex-wrap:var(--cx-flex-wrap,wrap)}.cx-delivery-label .cx-delivery-shipping{flex:var(--cx-flex,50%)}.cx-delivery-label .cx-delivery-price{flex:var(--cx-flex,50%);text-align:var(--cx-text-align,right)}.cx-delivery-label .cx-delivery-details{flex:var(--cx-flex,100%);color:var(--cx-color,var(--cx-g-color-success))}.form-check{display:var(--cx-display,flex)}"]
+                styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/@media (max-width:991.98px){:host{display:var(--cx-display,block);background-color:var(--cx-background-color,var(--cx-g-color-background))}.col-md-12{padding:var(--cx-padding,0 4.375rem)}.container{width:var(--cx-width,100%)}}@media (max-width:767.98px){.col-md-12{padding:var(--cx-padding,0 2.25rem)}}.cx-checkout-btns{padding:var(--cx-padding,1rem 0);justify-content:var(--cx-justify-content,flex-end)}@media (max-width:767.98px){.cx-checkout-btns{padding:var(--cx-padding,1.25rem 0)}}@media (max-width:991.98px){.cx-checkout-btns{padding:var(--cx-padding,1.25rem 0)}.cx-checkout-btns .btn-action{margin:var(--cx-margin,0 0 1rem)}.cx-checkout-body.row{padding:var(--cx-padding,0)}}.cx-checkout-title{text-transform:var(--cx-text-transform,capitalize);margin:var(--cx-margin,0 auto);padding:var(--cx-padding,2.375rem 0 1.75rem 0)}.cx-checkout-body{display:var(--cx-display,flex);align-items:var(--cx-align-items,stretch)}.cx-checkout-text{margin-bottom:var(--cx-margin,1.25rem)}@media (max-width:991.98px){.cx-checkout-text{padding-left:var(--cx-padding,3.5rem)}}@media (max-width:767.98px){.cx-checkout-text{padding-left:var(--cx-padding,1.5rem)}}.cx-spinner{padding-top:var(--cx-padding,30px);padding-bottom:var(--cx-padding,30px)}.cx-delivery-label{padding:var(--cx-padding,0);margin:var(--cx-margin,0 auto 0 .75rem);width:var(--cx-width,100%);display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,row);justify-content:var(--cx-space-justify-content,space-between);flex-wrap:var(--cx-flex-wrap,wrap)}.cx-delivery-label .cx-delivery-mode{flex:var(--cx-flex,50%)}.cx-delivery-label .cx-delivery-price{flex:var(--cx-flex,50%);text-align:var(--cx-text-align,right)}.cx-delivery-label .cx-delivery-details{flex:var(--cx-flex,100%);color:var(--cx-color,var(--cx-g-color-success))}.form-check{display:var(--cx-display,flex)}"]
             }] }
 ];
 /** @nocollapse */
@@ -4208,9 +4137,7 @@ DeliveryModeComponent.ctorParameters = () => [
     { type: CheckoutService }
 ];
 DeliveryModeComponent.propDecorators = {
-    selectedShippingMethod: [{ type: Input }],
-    selectMode: [{ type: Output }],
-    backStep: [{ type: Output }]
+    goToStep: [{ type: Output }]
 };
 
 /**
@@ -4221,7 +4148,7 @@ class DeliveryModeModule {
 }
 DeliveryModeModule.decorators = [
     { type: NgModule, args: [{
-                imports: [CommonModule, ReactiveFormsModule, I18nModule],
+                imports: [CommonModule, ReactiveFormsModule, I18nModule, SpinnerModule],
                 declarations: [DeliveryModeComponent],
                 entryComponents: [DeliveryModeComponent],
                 exports: [DeliveryModeComponent],
@@ -4295,7 +4222,8 @@ class PaymentFormComponent {
         this.months = [];
         this.years = [];
         this.sameAsShippingAddress = true;
-        this.backToPayment = new EventEmitter();
+        this.goBack = new EventEmitter();
+        this.closeForm = new EventEmitter();
         this.addPaymentInfo = new EventEmitter();
         this.payment = this.fb.group({
             defaultPayment: [false],
@@ -4479,8 +4407,14 @@ class PaymentFormComponent {
     /**
      * @return {?}
      */
+    close() {
+        this.closeForm.emit();
+    }
+    /**
+     * @return {?}
+     */
     back() {
-        this.backToPayment.emit();
+        this.goBack.emit();
     }
     /**
      * @return {?}
@@ -4519,7 +4453,7 @@ class PaymentFormComponent {
 PaymentFormComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-payment-form',
-                template: "<!-- FORM -->\n<div [formGroup]=\"payment\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <div class=\"form-group\">\n        <ng-container *ngIf=\"(cardTypes$ | async) as cardTypes\">\n          <div *ngIf=\"cardTypes.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'paymentForm.paymentType' | cxTranslate\n              }}</span>\n              <ng-select\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"cardTypes\"\n                bindLabel=\"name\"\n                bindValue=\"code\"\n                placeholder=\"{{ 'paymentForm.selectOne' | cxTranslate }}\"\n                (change)=\"paymentSelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'paymentForm.accountHolderName.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            type=\"text\"\n            required\n            placeholder=\"{{\n              'paymentForm.accountHolderName.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"accountHolderName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'paymentForm.cardNumber' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            formControlName=\"cardNumber\"\n          />\n        </label>\n      </div>\n\n      <div class=\"row\">\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content\">{{\n              'paymentForm.expirationDate' | cxTranslate\n            }}</span>\n            <div class=\"cx-payment-form-exp-date row\">\n              <div class=\"col-sm-6 col-md-5\">\n                <ng-select\n                  [searchable]=\"false\"\n                  [clearable]=\"false\"\n                  [items]=\"months\"\n                  bindLabel=\"name\"\n                  bindValue=\"expiryMonth\"\n                  placeholder=\"{{ 'paymentForm.monthMask' | cxTranslate }}\"\n                  (change)=\"monthSelected($event)\"\n                >\n                </ng-select>\n              </div>\n              <div class=\"col-sm-6 col-md-7\">\n                <ng-select\n                  [searchable]=\"false\"\n                  [clearable]=\"false\"\n                  [items]=\"years\"\n                  bindLabel=\"name\"\n                  bindValue=\"expiryYear\"\n                  placeholder=\"{{ 'paymentForm.yearMask' | cxTranslate }}\"\n                  (change)=\"yearSelected($event)\"\n                >\n                </ng-select>\n              </div>\n            </div>\n          </label>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content\">\n              {{ 'paymentForm.securityCode' | cxTranslate }}\n              <img\n                class=\"cx-payment-form-tooltip\"\n                [src]=\"infoIconImgSrc\"\n                placement=\"right\"\n                ngbTooltip=\"Card Verification Value\"\n                alt=\"\"\n              />\n            </span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              id=\"cVVNumber\"\n              required\n              formControlName=\"cvn\"\n            />\n          </label>\n        </div>\n      </div>\n\n      <div class=\"form-group\">\n        <div class=\"form-check\">\n          <label>\n            <input\n              type=\"checkbox\"\n              class=\"form-check-input\"\n              (change)=\"toggleDefaultPaymentMethod()\"\n            />\n            <span class=\"form-check-label\">{{\n              'paymentForm.saveAsDefault' | cxTranslate\n            }}</span>\n          </label>\n        </div>\n      </div>\n\n      <!-- BILLING -->\n      <div class=\"cx-payment-form-billing\">\n        <div class=\"cx-payment-form-billing-address\">\n          {{ 'paymentForm.billingAddress' | cxTranslate }}\n        </div>\n\n        <!-- SAME AS SHIPPING CHECKBOX -->\n        <ng-container *ngIf=\"(showSameAsShippingAddressCheckbox() | async)\">\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  class=\"form-check-input\"\n                  [checked]=\"sameAsShippingAddress\"\n                  (change)=\"toggleSameAsShippingAddress()\"\n                />\n                <span class=\"form-check-label\">{{\n                  'paymentForm.sameAsShippingAddress' | cxTranslate\n                }}</span>\n              </label>\n            </div>\n          </div>\n        </ng-container>\n\n        <!-- BILLING INFO COMPONENT -->\n        <ng-container\n          *ngIf=\"\n            (sameAsShippingAddress && shippingAddress$\n              | async) as shippingAddress;\n            else billingAddressForm\n          \"\n        >\n          <cx-card [content]=\"getAddressCardContent(shippingAddress)\"></cx-card>\n        </ng-container>\n\n        <ng-template #billingAddressForm>\n          <cx-billing-address-form\n            [billingAddress]=\"billingAddress\"\n            [countries$]=\"countries$\"\n          ></cx-billing-address-form>\n        </ng-template>\n      </div>\n    </div>\n  </div>\n\n  <!-- BUTTON SECTION -->\n  <div class=\"cx-checkout-btns row\">\n    <div class=\"col-md-12 col-lg-6\">\n      <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n        {{ 'paymentForm.changePayment' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        class=\"btn btn-block btn-primary\"\n        [disabled]=\"isContinueButtonDisabled()\"\n        (click)=\"next()\"\n      >\n        {{ 'common.continue' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n",
+                template: "<!-- FORM -->\n<div [formGroup]=\"payment\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <div class=\"form-group\">\n        <ng-container *ngIf=\"(cardTypes$ | async) as cardTypes\">\n          <div *ngIf=\"cardTypes.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'paymentForm.paymentType' | cxTranslate\n              }}</span>\n              <ng-select\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"cardTypes\"\n                bindLabel=\"name\"\n                bindValue=\"code\"\n                placeholder=\"{{ 'paymentForm.selectOne' | cxTranslate }}\"\n                (change)=\"paymentSelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'paymentForm.accountHolderName.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            type=\"text\"\n            required\n            placeholder=\"{{\n              'paymentForm.accountHolderName.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"accountHolderName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'paymentForm.cardNumber' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            formControlName=\"cardNumber\"\n          />\n        </label>\n      </div>\n\n      <div class=\"row\">\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content\">{{\n              'paymentForm.expirationDate' | cxTranslate\n            }}</span>\n            <div class=\"cx-payment-form-exp-date row\">\n              <div class=\"col-sm-6 col-md-5\">\n                <ng-select\n                  [searchable]=\"false\"\n                  [clearable]=\"false\"\n                  [items]=\"months\"\n                  bindLabel=\"name\"\n                  bindValue=\"expiryMonth\"\n                  placeholder=\"{{ 'paymentForm.monthMask' | cxTranslate }}\"\n                  (change)=\"monthSelected($event)\"\n                >\n                </ng-select>\n              </div>\n              <div class=\"col-sm-6 col-md-7\">\n                <ng-select\n                  [searchable]=\"false\"\n                  [clearable]=\"false\"\n                  [items]=\"years\"\n                  bindLabel=\"name\"\n                  bindValue=\"expiryYear\"\n                  placeholder=\"{{ 'paymentForm.yearMask' | cxTranslate }}\"\n                  (change)=\"yearSelected($event)\"\n                >\n                </ng-select>\n              </div>\n            </div>\n          </label>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content\">\n              {{ 'paymentForm.securityCode' | cxTranslate }}\n              <img\n                class=\"cx-payment-form-tooltip\"\n                [src]=\"infoIconImgSrc\"\n                placement=\"right\"\n                ngbTooltip=\"Card Verification Value\"\n                alt=\"\"\n              />\n            </span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              id=\"cVVNumber\"\n              required\n              formControlName=\"cvn\"\n            />\n          </label>\n        </div>\n      </div>\n\n      <div class=\"form-group\">\n        <div class=\"form-check\">\n          <label>\n            <input\n              type=\"checkbox\"\n              class=\"form-check-input\"\n              (change)=\"toggleDefaultPaymentMethod()\"\n            />\n            <span class=\"form-check-label\">{{\n              'paymentForm.saveAsDefault' | cxTranslate\n            }}</span>\n          </label>\n        </div>\n      </div>\n\n      <!-- BILLING -->\n      <div class=\"cx-payment-form-billing\">\n        <div class=\"cx-payment-form-billing-address\">\n          {{ 'paymentForm.billingAddress' | cxTranslate }}\n        </div>\n\n        <!-- SAME AS SHIPPING CHECKBOX -->\n        <ng-container *ngIf=\"(showSameAsShippingAddressCheckbox() | async)\">\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  class=\"form-check-input\"\n                  [checked]=\"sameAsShippingAddress\"\n                  (change)=\"toggleSameAsShippingAddress()\"\n                />\n                <span class=\"form-check-label\">{{\n                  'paymentForm.sameAsShippingAddress' | cxTranslate\n                }}</span>\n              </label>\n            </div>\n          </div>\n        </ng-container>\n\n        <!-- BILLING INFO COMPONENT -->\n        <ng-container\n          *ngIf=\"\n            (sameAsShippingAddress && shippingAddress$\n              | async) as shippingAddress;\n            else billingAddressForm\n          \"\n        >\n          <cx-card [content]=\"getAddressCardContent(shippingAddress)\"></cx-card>\n        </ng-container>\n\n        <ng-template #billingAddressForm>\n          <cx-billing-address-form\n            [billingAddress]=\"billingAddress\"\n            [countries$]=\"countries$\"\n          ></cx-billing-address-form>\n        </ng-template>\n      </div>\n    </div>\n  </div>\n\n  <!-- BUTTON SECTION -->\n  <div class=\"cx-checkout-btns row\">\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        *ngIf=\"paymentMethodsCount === 0\"\n        class=\"btn btn-block btn-action\"\n        (click)=\"back()\"\n      >\n        {{ 'common.back' | cxTranslate }}\n      </button>\n      <button\n        *ngIf=\"paymentMethodsCount > 0\"\n        class=\"btn btn-block btn-action\"\n        (click)=\"close()\"\n      >\n        {{ 'paymentForm.changePayment' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        class=\"btn btn-block btn-primary\"\n        [disabled]=\"isContinueButtonDisabled()\"\n        (click)=\"next()\"\n      >\n        {{ 'common.continue' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/@media (max-width:991.98px){:host{display:var(--cx-display,block);background-color:var(--cx-background-color,var(--cx-g-color-background))}.col-md-12{padding:var(--cx-padding,0 4.375rem)}.container{width:var(--cx-width,100%)}}@media (max-width:767.98px){.col-md-12{padding:var(--cx-padding,0 2.25rem)}}.cx-checkout-btns{padding:var(--cx-padding,1rem 0);justify-content:var(--cx-justify-content,flex-end)}@media (max-width:767.98px){.cx-checkout-btns{padding:var(--cx-padding,1.25rem 0)}}@media (max-width:991.98px){.cx-checkout-btns{padding:var(--cx-padding,1.25rem 0)}.cx-checkout-btns .btn-action{margin:var(--cx-margin,0 0 1rem)}.cx-checkout-body.row{padding:var(--cx-padding,0)}}.cx-checkout-title{text-transform:var(--cx-text-transform,capitalize);margin:var(--cx-margin,0 auto);padding:var(--cx-padding,2.375rem 0 1.75rem 0)}.cx-checkout-body{display:var(--cx-display,flex);align-items:var(--cx-align-items,stretch)}.cx-checkout-text{margin-bottom:var(--cx-margin,1.25rem)}@media (max-width:991.98px){.cx-checkout-text{padding-left:var(--cx-padding,3.5rem)}}@media (max-width:767.98px){.cx-checkout-text{padding-left:var(--cx-padding,1.5rem)}}.cx-spinner{padding-top:var(--cx-padding,30px);padding-bottom:var(--cx-padding,30px)}.cx-payment-form-tooltip{margin:var(--cx-margin,0 0 0 .625rem);height:var(--cx-height,1.125rem);width:var(--cx-width,1.125rem)}.cx-payment-form-billing{margin:var(--cx-margin,0 0 1.25rem 0)}.cx-payment-form-billing-address{font-size:var(--cx-font-size,1.125rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);padding:var(--cx-padding,.875rem 0 1.25rem 0)}.cx-payment-form-exp-date{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,row);flex-wrap:var(--cx-flex-wrap,nowrap)}.form-check{margin:var(--cx-margin,0)}"]
             }] }
@@ -4533,7 +4467,9 @@ PaymentFormComponent.ctorParameters = () => [
     { type: NgbModal }
 ];
 PaymentFormComponent.propDecorators = {
-    backToPayment: [{ type: Output }],
+    paymentMethodsCount: [{ type: Input }],
+    goBack: [{ type: Output }],
+    closeForm: [{ type: Output }],
     addPaymentInfo: [{ type: Output }]
 };
 
@@ -4633,14 +4569,17 @@ class PaymentMethodComponent {
     /**
      * @param {?} cartData
      * @param {?} userService
+     * @param {?} checkoutService
+     * @param {?} globalMessageService
      */
-    constructor(cartData, userService) {
+    constructor(cartData, userService, checkoutService, globalMessageService) {
         this.cartData = cartData;
         this.userService = userService;
+        this.checkoutService = checkoutService;
+        this.globalMessageService = globalMessageService;
         this.newPaymentFormManuallyOpened = false;
         this.cards = [];
-        this.backStep = new EventEmitter();
-        this.addPaymentInfo = new EventEmitter();
+        this.goToStep = new EventEmitter();
     }
     /**
      * @return {?}
@@ -4660,6 +4599,25 @@ class PaymentMethodComponent {
                 });
             }
         }));
+        this.getPaymentDetailsSub = this.checkoutService
+            .getPaymentDetails()
+            .pipe(filter(paymentInfo => paymentInfo && Object.keys(paymentInfo).length !== 0))
+            .subscribe(paymentInfo => {
+            if (!paymentInfo['hasError']) {
+                this.selectedPayment = paymentInfo;
+            }
+            else {
+                Object.keys(paymentInfo).forEach(key => {
+                    if (key.startsWith('InvalidField')) {
+                        this.globalMessageService.add({
+                            type: GlobalMessageType.MSG_TYPE_ERROR,
+                            text: 'InvalidField: ' + paymentInfo[key],
+                        });
+                    }
+                });
+                this.checkoutService.clearCheckoutStep(3);
+            }
+        });
     }
     /**
      * @param {?} payment
@@ -4709,26 +4667,6 @@ class PaymentMethodComponent {
     /**
      * @return {?}
      */
-    next() {
-        this.addPaymentInfo.emit({
-            payment: this.selectedPayment,
-            newPayment: false,
-        });
-    }
-    /**
-     * @param {?} __0
-     * @return {?}
-     */
-    addNewPaymentMethod({ paymentDetails, billingAddress, }) {
-        this.addPaymentInfo.emit({
-            payment: paymentDetails,
-            billingAddress,
-            newPayment: true,
-        });
-    }
-    /**
-     * @return {?}
-     */
     showNewPaymentForm() {
         this.newPaymentFormManuallyOpened = true;
     }
@@ -4741,14 +4679,76 @@ class PaymentMethodComponent {
     /**
      * @return {?}
      */
+    next() {
+        this.addPaymentInfo({
+            payment: this.selectedPayment,
+            newPayment: false,
+        });
+    }
+    /**
+     * @return {?}
+     */
     back() {
-        this.backStep.emit();
+        this.goToStep.emit(2);
+    }
+    /**
+     * @param {?} __0
+     * @return {?}
+     */
+    addNewPaymentMethod({ paymentDetails, billingAddress, }) {
+        this.getDeliveryAddressSub = this.checkoutService
+            .getDeliveryAddress()
+            .subscribe(address => {
+            billingAddress = address;
+        });
+        this.addPaymentInfo({
+            payment: paymentDetails,
+            billingAddress,
+            newPayment: true,
+        });
+    }
+    /**
+     * @param {?} __0
+     * @return {?}
+     */
+    addPaymentInfo({ newPayment, payment, billingAddress, }) {
+        payment.billingAddress = billingAddress
+            ? billingAddress
+            : this.deliveryAddress;
+        if (newPayment) {
+            this.checkoutService.createPaymentDetails(payment);
+            this.checkoutService.clearCheckoutStep(3);
+        }
+        // if the selected payment is the same as the cart's one
+        if (this.selectedPayment && this.selectedPayment.id === payment.id) {
+            this.checkoutService.setPaymentDetails(payment);
+            this.checkoutService.clearCheckoutStep(3);
+        }
+        this.getPaymentDetailsSub = this.checkoutService
+            .getPaymentDetails()
+            .subscribe(data => {
+            if (data.accountHolderName && data.cardNumber) {
+                this.goToStep.emit(4);
+                return;
+            }
+        });
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        if (this.getPaymentDetailsSub) {
+            this.getPaymentDetailsSub.unsubscribe();
+        }
+        if (this.getDeliveryAddressSub) {
+            this.getDeliveryAddressSub.unsubscribe();
+        }
     }
 }
 PaymentMethodComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-payment-method',
-                template: "<ng-container\n  *ngIf=\"(existingPaymentMethods$ | async) as existingPaymentMethods\"\n>\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'paymentForm.payment' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        existingPaymentMethods?.length && !newPaymentFormManuallyOpened;\n        else newPaymentForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'paymentForm.choosePaymentMethod' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewPaymentForm()\"\n          >\n            {{ 'paymentForm.addNewPayment' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-payment-card col-md-12 col-lg-6\"\n          *ngFor=\"let method of existingPaymentMethods; let i = index\"\n        >\n          <div class=\"cx-payment-card-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"cards[i]\"\n              (sendCard)=\"paymentMethodSelected(method, i)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"row cx-checkout-btns\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'common.back' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-primary\"\n            [disabled]=\"!selectedPayment\"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newPaymentForm>\n      <cx-payment-form\n        (addPaymentInfo)=\"addNewPaymentMethod($event)\"\n        (backToPayment)=\"hideNewPaymentForm()\"\n      ></cx-payment-form>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n  </ng-template>\n</ng-container>\n",
+                template: "<ng-container\n  *ngIf=\"(existingPaymentMethods$ | async) as existingPaymentMethods\"\n>\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'paymentForm.payment' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        existingPaymentMethods?.length && !newPaymentFormManuallyOpened;\n        else newPaymentForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'paymentForm.choosePaymentMethod' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewPaymentForm()\"\n          >\n            {{ 'paymentForm.addNewPayment' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-payment-card col-md-12 col-lg-6\"\n          *ngFor=\"let method of existingPaymentMethods; let i = index\"\n        >\n          <div class=\"cx-payment-card-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"cards[i]\"\n              (sendCard)=\"paymentMethodSelected(method, i)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"row cx-checkout-btns\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'common.back' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-primary\"\n            [disabled]=\"!selectedPayment\"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newPaymentForm>\n      <cx-payment-form\n        (addPaymentInfo)=\"addNewPaymentMethod($event)\"\n        (closeForm)=\"hideNewPaymentForm()\"\n        (goBack)=\"back()\"\n        [paymentMethodsCount]=\"existingPaymentMethods?.length || 0\"\n      ></cx-payment-form>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n  </ng-template>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/@media (max-width:991.98px){:host{display:var(--cx-display,block);background-color:var(--cx-background-color,var(--cx-g-color-background))}.col-md-12{padding:var(--cx-padding,0 4.375rem)}.container{width:var(--cx-width,100%)}}@media (max-width:767.98px){.col-md-12{padding:var(--cx-padding,0 2.25rem)}}.cx-checkout-btns{padding:var(--cx-padding,1rem 0);justify-content:var(--cx-justify-content,flex-end)}@media (max-width:767.98px){.cx-checkout-btns{padding:var(--cx-padding,1.25rem 0)}}.cx-checkout-title{text-transform:var(--cx-text-transform,capitalize);margin:var(--cx-margin,0 auto);padding:var(--cx-padding,2.375rem 0 1.75rem 0)}.cx-checkout-text{margin-bottom:var(--cx-margin,1.25rem)}.cx-spinner{padding-top:var(--cx-padding,30px);padding-bottom:var(--cx-padding,30px)}.cx-payment.container{padding:var(--cx-padding,0)}.cx-payment-card{padding-bottom:var(--cxpadding,30px)}.cx-payment-card-inner{height:var(--cx-height,100%);background-color:var(--cx-background-color,var(--cx-g-color-inverse));cursor:pointer}.cx-checkout-title{text-transform:var(--cx-text-transform,uppercase);margin:var(--cx-margin,0 auto);padding:var(--cx-padding,2.375rem 0 1.75rem 0)}@media (max-width:991.98px){.cx-checkout-btns .btn-action{margin:var(--cx-margin,0 0 1rem)}.cx-payment-card-inner{background-color:var(--cx-background-color,var(--cx-g-color-inverse))}.cx-checkout-text{padding-left:var(--cx-padding,3.5rem)}}.cx-checkout-btns{padding-bottom:var(--cx-padding,1rem)}@media (max-width:767.98px){.cx-checkout-text{padding-left:var(--cx-padding,1.5rem)}.cx-checkout-btns .btn-action{margin-bottom:var(--cx-margin,1rem)}}.cx-checkout-body{display:var(--cx-display,flex);align-items:var(--cx-align-items,stretch)}@media (max-width:991.98px){.cx-checkout-btns{padding:var(--cx-padding,1.25rem 0)}.cx-checkout-body.row{padding:var(--cx-padding,0)}}"]
             }] }
@@ -4756,12 +4756,12 @@ PaymentMethodComponent.decorators = [
 /** @nocollapse */
 PaymentMethodComponent.ctorParameters = () => [
     { type: CartDataService },
-    { type: UserService }
+    { type: UserService },
+    { type: CheckoutService },
+    { type: GlobalMessageService }
 ];
 PaymentMethodComponent.propDecorators = {
-    selectedPayment: [{ type: Input }],
-    backStep: [{ type: Output }],
-    addPaymentInfo: [{ type: Output }]
+    goToStep: [{ type: Output }]
 };
 
 /**
@@ -4808,41 +4808,42 @@ class ReviewSubmitComponent {
     ngOnInit() {
         this.cart$ = this.cartService.getActive();
         this.entries$ = this.cartService.getEntries();
-        this.deliveryMode$ = this.checkoutService.getSelectedDeliveryMode().pipe(tap(selected => {
+        this.deliveryAddress$ = this.checkoutService.getDeliveryAddress();
+        this.paymentDetails$ = this.checkoutService.getPaymentDetails();
+        this.deliveryMode$ = this.checkoutService.getSelectedDeliveryMode().pipe(tap((selected) => {
             if (selected === null) {
                 this.checkoutService.loadSupportedDeliveryModes();
             }
         }));
-        this.countryName$ = this.userService
-            .getCountry(this.deliveryAddress.country.isocode)
-            .pipe(tap(country => {
+        this.countryName$ = this.deliveryAddress$.pipe(switchMap((address) => this.userService.getCountry(address.country.isocode)), tap((country) => {
             if (country === null) {
                 this.userService.loadDeliveryCountries();
             }
-        }));
+        }), map((country) => country && country.name));
     }
     /**
+     * @param {?} deliveryAddress
      * @param {?} countryName
      * @return {?}
      */
-    getShippingAddressCard(countryName) {
+    getShippingAddressCard(deliveryAddress, countryName) {
         if (!countryName) {
-            countryName = this.deliveryAddress.country.isocode;
+            countryName = deliveryAddress.country.isocode;
         }
         /** @type {?} */
         let region = '';
-        if (this.deliveryAddress.region && this.deliveryAddress.region.isocode) {
-            region = this.deliveryAddress.region.isocode + ', ';
+        if (deliveryAddress.region && deliveryAddress.region.isocode) {
+            region = deliveryAddress.region.isocode + ', ';
         }
         return {
             title: 'Ship To',
-            textBold: this.deliveryAddress.firstName + ' ' + this.deliveryAddress.lastName,
+            textBold: deliveryAddress.firstName + ' ' + deliveryAddress.lastName,
             text: [
-                this.deliveryAddress.line1,
-                this.deliveryAddress.line2,
-                this.deliveryAddress.town + ', ' + region + countryName,
-                this.deliveryAddress.postalCode,
-                this.deliveryAddress.phone,
+                deliveryAddress.line1,
+                deliveryAddress.line2,
+                deliveryAddress.town + ', ' + region + countryName,
+                deliveryAddress.postalCode,
+                deliveryAddress.phone,
             ],
         };
     }
@@ -4850,28 +4851,29 @@ class ReviewSubmitComponent {
      * @param {?} deliveryMode
      * @return {?}
      */
-    getShippingMethodCard(deliveryMode) {
+    getDeliveryModeCard(deliveryMode) {
         if (deliveryMode) {
             return {
                 title: 'Shipping Method',
-                textBold: this.shippingMethod,
+                textBold: deliveryMode.name,
                 text: [deliveryMode.description],
             };
         }
     }
     /**
+     * @param {?} paymentDetails
      * @return {?}
      */
-    getPaymentMethodCard() {
+    getPaymentMethodCard(paymentDetails) {
         return {
             title: 'Payment',
-            textBold: this.paymentDetails.accountHolderName,
+            textBold: paymentDetails.accountHolderName,
             text: [
-                this.paymentDetails.cardNumber,
+                paymentDetails.cardNumber,
                 'Expires: ' +
-                    this.paymentDetails.expiryMonth +
+                    paymentDetails.expiryMonth +
                     '/' +
-                    this.paymentDetails.expiryYear,
+                    paymentDetails.expiryYear,
             ],
         };
     }
@@ -4879,7 +4881,7 @@ class ReviewSubmitComponent {
 ReviewSubmitComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-review-submit',
-                template: "<div class=\"cx-review\">\n  <!-- TITLE -->\n  <h3 class=\"cx-review-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutReview.review' | cxTranslate }}\n  </h3>\n  <div class=\"cx-review-summary row\">\n    <!-- SHIPPING ADDRESS SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-address\">\n        <cx-card\n          [content]=\"getShippingAddressCard((countryName$ | async)?.name)\"\n        ></cx-card>\n      </div>\n    </div>\n\n    <!-- SHIPPING METHOD SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-shipping\">\n        <cx-card\n          [content]=\"getShippingMethodCard(deliveryMode$ | async)\"\n        ></cx-card>\n      </div>\n    </div>\n\n    <!-- PAYMENT METHOD SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-payment\">\n        <cx-card [content]=\"getPaymentMethodCard()\"></cx-card>\n      </div>\n    </div>\n  </div>\n\n  <!-- CART ITEM SECTION -->\n  <ng-container *ngIf=\"(cart$ | async) as cart\">\n    <div class=\"cx-review-cart-total d-none d-lg-block d-xl-block\">\n      {{\n        'cartItems.cartTotal'\n          | cxTranslate: { count: cart.deliveryItemsQuantity }\n      }}:\n      {{ cart.totalPrice?.formattedValue }}\n    </div>\n    <h4 class=\"cx-review-cart-heading d-block d-lg-none d-xl-none\">\n      {{ 'checkoutReview.placeOrder' | cxTranslate }}\n    </h4>\n    <div\n      class=\"cx-review-cart-item col-md-12\"\n      *ngIf=\"(entries$ | async) as entries\"\n    >\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [isReadOnly]=\"true\"\n        [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n      ></cx-cart-item-list>\n    </div>\n  </ng-container>\n</div>\n",
+                template: "<div class=\"cx-review\">\n  <!-- TITLE -->\n  <h3 class=\"cx-review-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutReview.review' | cxTranslate }}\n  </h3>\n  <div class=\"cx-review-summary row\">\n    <!-- SHIPPING ADDRESS SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-address\">\n        <cx-card\n          [content]=\"\n            getShippingAddressCard(\n              deliveryAddress$ | async,\n              countryName$ | async\n            )\n          \"\n        ></cx-card>\n      </div>\n    </div>\n\n    <!-- DELIVERY MODE SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-shipping\">\n        <cx-card\n          [content]=\"getDeliveryModeCard(deliveryMode$ | async)\"\n        ></cx-card>\n      </div>\n    </div>\n\n    <!-- PAYMENT METHOD SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-payment\">\n        <cx-card\n          [content]=\"getPaymentMethodCard(paymentDetails$ | async)\"\n        ></cx-card>\n      </div>\n    </div>\n  </div>\n\n  <!-- CART ITEM SECTION -->\n  <ng-container *ngIf=\"(cart$ | async) as cart\">\n    <div class=\"cx-review-cart-total d-none d-lg-block d-xl-block\">\n      {{\n        'cartItems.cartTotal'\n          | cxTranslate: { count: cart.deliveryItemsQuantity }\n      }}:\n      {{ cart.totalPrice?.formattedValue }}\n    </div>\n    <h4 class=\"cx-review-cart-heading d-block d-lg-none d-xl-none\">\n      {{ 'checkoutReview.placeOrder' | cxTranslate }}\n    </h4>\n    <div\n      class=\"cx-review-cart-item col-md-12\"\n      *ngIf=\"(entries$ | async) as entries\"\n    >\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [isReadOnly]=\"true\"\n        [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n      ></cx-cart-item-list>\n    </div>\n  </ng-container>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-review-title{text-transform:var(--cx-text-transform,uppercase);margin:var(--cx-margin,0 auto);padding:var(--cx-padding,2.375rem 0 1.25rem 0)}.cx-review-summary{margin:var(--cx-margin,0);background-color:var(--cx-background-color,var(--cx-g-color-background))}.row{margin:var(--cx-margin,0)}.form-check{padding:var(--cx-padding,0);margin:var(--cx-margin,0)}.col-md-4{padding:var(--cx-padding,0)}.cx-review-cart-total{font-size:var(--cx-font-size,1.125rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);margin:var(--cx-margin,2.625rem 0 .5rem 0)}.cx-review-cart-heading{font-size:var(--cx-font-size,1.125rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);padding:var(--cx-padding,1.375rem 0);margin:var(--cx-margin,0);border-style:var(--cx-border-style,solid);border-width:var(--cx-border-width,1px 0);border-color:var(--cx-border-color,var(--cx-g-color-light))}@media (max-width:991.98px){.cx-review-summary .cx-review-summary-card{background-color:#fff;border-style:var(--cx-border-style,solid);border-width:var(--cx-border-width,1px);border-color:var(--cx-border-color,var(--cx-g-color-light))}.cx-review-cart-heading{border-width:var(--cx-border-width,1px 0 0);max-width:var(--cx-max-width,100%);min-width:var(--cx-min-width,100%);padding:var(--cx-padding,1.375rem 0 1.375rem 3.5rem)}.cx-review-cart-item .col-md-12{padding:var(--cx-padding,0)}}@media (max-width:767.98px){.cx-review-cart-heading{max-width:var(--cx-max-width,100%);min-width:var(--cx-min-width,100%);padding:var(--cx-padding,1.375rem 0 1.375rem 1.25rem)}.cx-review-cart-item .col-md-12{padding:var(--cx-padding,0)}}.cx-review-cart-item{padding:var(--cx-padding,0)}@media (max-width:991.98px){.cx-review-cart-item{border-style:var(--cx-border-style,solid);border-width:var(--cx-border-width,1px 0 0);border-color:var(--cx-border-color,var(--cx-g-color-light))}:host{display:var(--cx-display,block);background-color:var(--cx-background-color,var(--cx-g-color-background))}.col-md-12{padding:var(--cx-padding,0 4.375rem)}.container{width:var(--cx-width,100%)}}@media (max-width:767.98px){.col-md-12{padding:var(--cx-padding,0 2.25rem)}}.cx-checkout-btns{padding:var(--cx-padding,1rem 0);justify-content:var(--cx-justify-content,flex-end)}@media (max-width:767.98px){.cx-checkout-btns{padding:var(--cx-padding,1.25rem 0)}}@media (max-width:991.98px){.cx-checkout-btns{padding:var(--cx-padding,1.25rem 0)}.cx-checkout-btns .btn-action{margin:var(--cx-margin,0 0 1rem)}.cx-checkout-body.row{padding:var(--cx-padding,0)}}.cx-checkout-title{text-transform:var(--cx-text-transform,capitalize);margin:var(--cx-margin,0 auto);padding:var(--cx-padding,2.375rem 0 1.75rem 0)}.cx-checkout-body{display:var(--cx-display,flex);align-items:var(--cx-align-items,stretch)}.cx-checkout-text{margin-bottom:var(--cx-margin,1.25rem)}@media (max-width:991.98px){.cx-checkout-text{padding-left:var(--cx-padding,3.5rem)}}@media (max-width:767.98px){.cx-checkout-text{padding-left:var(--cx-padding,1.5rem)}}.cx-spinner{padding-top:var(--cx-padding,30px);padding-bottom:var(--cx-padding,30px)}@media (max-width:991.98px){.col-md-12{padding:var(--cx-padding,0 3.5rem 3.5rem 3.5rem)}}@media (max-width:767.98px){.col-md-12{padding:var(--cx-padding,0 1.25rem 1.25rem 1.25rem)}}"]
             }] }
@@ -4890,11 +4892,6 @@ ReviewSubmitComponent.ctorParameters = () => [
     { type: UserService },
     { type: CartService }
 ];
-ReviewSubmitComponent.propDecorators = {
-    deliveryAddress: [{ type: Input }],
-    shippingMethod: [{ type: Input }],
-    paymentDetails: [{ type: Input }]
-};
 
 /**
  * @fileoverview added by tsickle
@@ -5164,40 +5161,60 @@ class ShippingAddressComponent {
     /**
      * @param {?} userService
      * @param {?} cartData
+     * @param {?} cartService
      * @param {?} routingService
+     * @param {?} checkoutService
      */
-    constructor(userService, cartData, routingService) {
+    constructor(userService, cartData, cartService, routingService, checkoutService) {
         this.userService = userService;
         this.cartData = cartData;
+        this.cartService = cartService;
         this.routingService = routingService;
+        this.checkoutService = checkoutService;
         this.newAddressFormManuallyOpened = false;
         this.cards = [];
-        this.addAddress = new EventEmitter();
+        this.selectedAddress$ = new BehaviorSubject(null);
+        this.goToStep = new EventEmitter();
     }
     /**
      * @return {?}
      */
     ngOnInit() {
+        this.goTo = null;
+        this.cartService.loadDetails();
         this.isLoading$ = this.userService.getAddressesLoading();
         this.userService.loadAddresses(this.cartData.userId);
-        this.existingAddresses$ = this.userService.getAddresses().pipe(tap(addresses => {
-            if (this.cards.length === 0 && addresses) {
-                addresses.forEach(address => {
-                    /** @type {?} */
-                    const card = this.getCardContent(address);
-                    if (this.selectedAddress &&
-                        this.selectedAddress.id === address.id) {
-                        card.header = 'SELECTED';
-                    }
-                });
+        this.setAddressSub = this.checkoutService
+            .getDeliveryAddress()
+            .subscribe(address => {
+            this.setAddress = address;
+            this.selectedAddress$.next(address);
+            if (this.goTo) {
+                this.goToStep.emit(this.goTo);
+                this.goTo = null;
             }
-        }), filter(Boolean));
+        });
+        this.selectedAddressSub = this.selectedAddress$.subscribe(address => {
+            this.selectedAddress = address;
+        });
+        this.existingAddresses$ = this.userService.getAddresses();
+        this.cards$ = combineLatest(this.existingAddresses$, this.selectedAddress$.asObservable()).pipe(map(([addresses, selected]) => {
+            return addresses.map(address => {
+                /** @type {?} */
+                const card = this.getCardContent(address, selected);
+                return {
+                    address,
+                    card,
+                };
+            });
+        }));
     }
     /**
      * @param {?} address
+     * @param {?} selected
      * @return {?}
      */
-    getCardContent(address) {
+    getCardContent(address, selected) {
         /** @type {?} */
         let region = '';
         if (address.region && address.region.isocode) {
@@ -5215,40 +5232,50 @@ class ShippingAddressComponent {
                 address.phone,
             ],
             actions: [{ name: 'Ship to this address', event: 'send' }],
+            header: selected && selected.id === address.id ? 'SELECTED' : '',
         };
         this.cards.push(card);
         return card;
     }
     /**
      * @param {?} address
-     * @param {?} index
      * @return {?}
      */
-    addressSelected(address, index) {
-        this.selectedAddress = address;
-        for (let i = 0; this.cards[i]; i++) {
-            /** @type {?} */
-            const card = this.cards[i];
-            if (i === index) {
-                card.header = 'SELECTED';
-            }
-            else {
-                card.header = '';
-            }
-        }
+    addressSelected(address) {
+        this.selectedAddress$.next(address);
     }
     /**
      * @return {?}
      */
     next() {
-        this.addAddress.emit({ address: this.selectedAddress, newAddress: false });
+        this.addAddress({ address: this.selectedAddress, newAddress: false });
+    }
+    /**
+     * @param {?} __0
+     * @return {?}
+     */
+    addAddress({ newAddress, address, }) {
+        if (newAddress) {
+            this.checkoutService.createAndSetAddress(address);
+            this.goTo = 2;
+            return;
+        }
+        if (this.setAddress &&
+            this.selectedAddress &&
+            this.setAddress.id === this.selectedAddress.id) {
+            this.goToStep.emit(2);
+        }
+        else {
+            this.goTo = 2;
+            this.checkoutService.setDeliveryAddress(address);
+        }
     }
     /**
      * @param {?} address
      * @return {?}
      */
     addNewAddress(address) {
-        this.addAddress.emit({ address: address, newAddress: true });
+        this.addAddress({ address, newAddress: true });
     }
     /**
      * @return {?}
@@ -5272,11 +5299,22 @@ class ShippingAddressComponent {
     back() {
         this.routingService.go({ route: 'cart' });
     }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        if (this.setAddressSub) {
+            this.setAddressSub.unsubscribe();
+        }
+        if (this.selectedAddressSub) {
+            this.selectedAddressSub.unsubscribe();
+        }
+    }
 }
 ShippingAddressComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-shipping-address',
-                template: "<ng-container *ngIf=\"(existingAddresses$ | async) as existingAddresses\">\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutAddress.shippingAddress' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        existingAddresses?.length && !newAddressFormManuallyOpened;\n        else newAddressForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'checkoutAddress.selectYourShippingAddress' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-sm-12 col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewAddressForm()\"\n          >\n            {{ 'checkoutAddress.addNewAddress' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-shipping-address-card col-md-12 col-lg-6\"\n          *ngFor=\"let address of existingAddresses; let i = index\"\n        >\n          <div\n            class=\"cx-shipping-address-card-inner\"\n            (click)=\"addressSelected(address, i)\"\n          >\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"cards[i]\"\n              (sendCard)=\"addressSelected(address, i)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"cx-btn btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'checkout.backToCart' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"cx-btn btn btn-block btn-primary\"\n            [disabled]=\"!selectedAddress\"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newAddressForm>\n      <ng-container *ngIf=\"existingAddresses.length; else initialAddressForm\">\n        <cx-address-form\n          showTitleCode=\"true\"\n          (backToAddress)=\"hideNewAddressForm(false)\"\n          (submitAddress)=\"addNewAddress($event)\"\n        ></cx-address-form>\n      </ng-container>\n      <ng-template #initialAddressForm>\n        <cx-address-form\n          showTitleCode=\"true\"\n          cancelBtnLabel=\"{{ 'checkout.backToCart' | cxTranslate }}\"\n          (backToAddress)=\"hideNewAddressForm(true)\"\n          (submitAddress)=\"addNewAddress($event)\"\n        ></cx-address-form>\n      </ng-template>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </ng-template>\n</ng-container>\n",
+                template: "<ng-container *ngIf=\"(cards$ | async) as cards\">\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutAddress.shippingAddress' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        cards?.length && !newAddressFormManuallyOpened;\n        else newAddressForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'checkoutAddress.selectYourShippingAddress' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-sm-12 col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewAddressForm()\"\n          >\n            {{ 'checkoutAddress.addNewAddress' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-shipping-address-card col-md-12 col-lg-6\"\n          *ngFor=\"let card of cards; let i = index\"\n        >\n          <div\n            class=\"cx-shipping-address-card-inner\"\n            (click)=\"addressSelected(card.address)\"\n          >\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"card.card\"\n              (sendCard)=\"addressSelected(card.address)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"cx-btn btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'checkout.backToCart' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"cx-btn btn btn-block btn-primary\"\n            [disabled]=\"!selectedAddress || !selectedAddress.id\"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newAddressForm>\n      <ng-container *ngIf=\"cards.length; else initialAddressForm\">\n        <cx-address-form\n          showTitleCode=\"true\"\n          (backToAddress)=\"hideNewAddressForm(false)\"\n          (submitAddress)=\"addNewAddress($event)\"\n        ></cx-address-form>\n      </ng-container>\n      <ng-template #initialAddressForm>\n        <cx-address-form\n          showTitleCode=\"true\"\n          cancelBtnLabel=\"{{ 'checkout.backToCart' | cxTranslate }}\"\n          (backToAddress)=\"hideNewAddressForm(true)\"\n          (submitAddress)=\"addNewAddress($event)\"\n        ></cx-address-form>\n      </ng-template>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </ng-template>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/@media (max-width:991.98px){:host{display:var(--cx-display,block);background-color:var(--cx-background-color,var(--cx-g-color-background))}.col-md-12{padding:var(--cx-padding,0 4.375rem)}.container{width:var(--cx-width,100%)}}@media (max-width:767.98px){.col-md-12{padding:var(--cx-padding,0 2.25rem)}}.cx-checkout-btns{padding:var(--cx-padding,1rem 0);justify-content:var(--cx-justify-content,flex-end)}@media (max-width:767.98px){.cx-checkout-btns{padding:var(--cx-padding,1.25rem 0)}}@media (max-width:991.98px){.cx-checkout-btns{padding:var(--cx-padding,1.25rem 0)}.cx-checkout-btns .btn-action{margin:var(--cx-margin,0 0 1rem)}.cx-checkout-body.row{padding:var(--cx-padding,0)}}.cx-checkout-title{text-transform:var(--cx-text-transform,capitalize);margin:var(--cx-margin,0 auto);padding:var(--cx-padding,2.375rem 0 1.75rem 0)}.cx-checkout-body{display:var(--cx-display,flex);align-items:var(--cx-align-items,stretch)}.cx-checkout-text{margin-bottom:var(--cx-margin,1.25rem)}@media (max-width:991.98px){.cx-checkout-text{padding-left:var(--cx-padding,3.5rem)}}@media (max-width:767.98px){.cx-checkout-text{padding-left:var(--cx-padding,1.5rem)}}.cx-spinner{padding-top:var(--cx-padding,30px);padding-bottom:var(--cx-padding,30px)}.cx-shipping-address-card{padding-bottom:var(--cx-padding,30px)}.cx-shipping-address-card .cx-shipping-address-card-inner{height:var(--cx-height,100%);background-color:var(--cx-background-color,var(--cx-g-color-inverse));cursor:pointer}"]
             }] }
@@ -5285,11 +5323,12 @@ ShippingAddressComponent.decorators = [
 ShippingAddressComponent.ctorParameters = () => [
     { type: UserService },
     { type: CartDataService },
-    { type: RoutingService }
+    { type: CartService },
+    { type: RoutingService },
+    { type: CheckoutService }
 ];
 ShippingAddressComponent.propDecorators = {
-    selectedAddress: [{ type: Input }],
-    addAddress: [{ type: Output }]
+    goToStep: [{ type: Output }]
 };
 
 /**
@@ -5318,6 +5357,86 @@ ShippingAddressModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class PlaceOrderComponent {
+    /**
+     * @param {?} checkoutService
+     * @param {?} routingService
+     */
+    constructor(checkoutService, routingService) {
+        this.checkoutService = checkoutService;
+        this.routingService = routingService;
+        this.tAndCToggler = false;
+    }
+    /**
+     * @return {?}
+     */
+    toggleTAndC() {
+        this.tAndCToggler = !this.tAndCToggler;
+    }
+    /**
+     * @return {?}
+     */
+    placeOrder() {
+        this.checkoutService.placeOrder();
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.placeOrderSubscription = this.checkoutService
+            .getOrderDetails()
+            .pipe(filter(order => Object.keys(order).length !== 0))
+            .subscribe(() => {
+            this.routingService.go({ route: ['orderConfirmation'] });
+        });
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        if (this.placeOrderSubscription) {
+            this.placeOrderSubscription.unsubscribe();
+        }
+    }
+}
+PlaceOrderComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-place-order',
+                template: "<div class=\"cx-place-order-form form-check\">\n  <label>\n    <input class=\"form-check-input\" type=\"checkbox\" (change)=\"toggleTAndC()\" />\n    <span class=\"form-check-label\">\n      {{ 'checkoutReview.confirmThatRead' | cxTranslate }}\n      <a\n        [routerLink]=\"{ route: ['termsAndConditions'] } | cxTranslateUrl\"\n        class=\"cx-tc-link\"\n        target=\"_blank\"\n      >\n        {{ 'checkoutReview.termsAndConditions' | cxTranslate }}\n      </a>\n    </span>\n  </label>\n</div>\n\n<button\n  [disabled]=\"!tAndCToggler\"\n  (click)=\"placeOrder()\"\n  class=\"btn btn-primary btn-block\"\n>\n  {{ 'checkoutReview.placeOrder' | cxTranslate }}\n</button>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                styles: [""]
+            }] }
+];
+/** @nocollapse */
+PlaceOrderComponent.ctorParameters = () => [
+    { type: CheckoutService },
+    { type: RoutingService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class PlaceOrderModule {
+}
+PlaceOrderModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    CheckoutModule,
+                    RouterModule,
+                    UrlTranslationModule,
+                    I18nModule,
+                ],
+                declarations: [PlaceOrderComponent],
+                exports: [PlaceOrderComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class MultiStepCheckoutModule {
 }
 MultiStepCheckoutModule.decorators = [
@@ -5329,6 +5448,7 @@ MultiStepCheckoutModule.decorators = [
                     DeliveryModeModule,
                     PaymentMethodModule,
                     ReviewSubmitModule,
+                    PlaceOrderModule,
                     RouterModule,
                     UrlTranslationModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
@@ -5663,7 +5783,7 @@ class OrderConfirmationComponent {
      * @param {?} deliveryMode
      * @return {?}
      */
-    getShippingCardContent(deliveryMode) {
+    getDeliveryModeCardContent(deliveryMode) {
         return {
             title: 'Shipping Method',
             textBold: deliveryMode.name,
@@ -5704,7 +5824,7 @@ class OrderConfirmationComponent {
 OrderConfirmationComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-order-confirmation',
-                template: "<div class=\"cx-page\" *ngIf=\"(order$ | async) as order\">\n  <header class=\"cx-page__header\">\n    <h1 class=\"cx-page__title\">\n      {{ 'checkoutOrderConfirmation.confirmationOfOrder' | cxTranslate }}\n      {{ order.code }}\n    </h1>\n  </header>\n\n  <div class=\"cx-order-confirmation\">\n    <div class=\"cx-order-confirmation-message\">\n      <h2>{{ 'checkoutOrderConfirmation.thankYou' | cxTranslate }}</h2>\n      <p>\n        {{\n          'checkoutOrderConfirmation.invoiceHasBeenSentByEmail' | cxTranslate\n        }}\n      </p>\n      <!-- <a href=\"#\" class=\"btn-link\">Print Page</a> -->\n    </div>\n\n    <cx-add-to-home-screen-banner></cx-add-to-home-screen-banner>\n\n    <div class=\"cx-order-review-summary\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getAddressCardContent(order.deliveryAddress)\"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"\n                  getBillingAddressCardContent(order.paymentInfo.billingAddress)\n                \"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getShippingCardContent(order.deliveryMode)\"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getPaymentInfoCardContent(order.paymentInfo)\"\n              ></cx-card>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"cx-order-items container\">\n      <h4 class=\"cx-order-items-header\">\n        {{ 'checkoutOrderConfirmation.orderItems' | cxTranslate }}\n      </h4>\n      <cx-cart-item-list\n        [items]=\"order.entries\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n\n    <div class=\"cx-order-summary container\">\n      <div class=\"row justify-content-end\">\n        <div class=\"col-sm-12 col-md-6 col-lg-5 col-xl-4\">\n          <cx-order-summary [cart]=\"order\"></cx-order-summary>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                template: "<div class=\"cx-page\" *ngIf=\"(order$ | async) as order\">\n  <header class=\"cx-page__header\">\n    <h1 class=\"cx-page__title\">\n      {{ 'checkoutOrderConfirmation.confirmationOfOrder' | cxTranslate }}\n      {{ order.code }}\n    </h1>\n  </header>\n\n  <div class=\"cx-order-confirmation\">\n    <div class=\"cx-order-confirmation-message\">\n      <h2>{{ 'checkoutOrderConfirmation.thankYou' | cxTranslate }}</h2>\n      <p>\n        {{\n          'checkoutOrderConfirmation.invoiceHasBeenSentByEmail' | cxTranslate\n        }}\n      </p>\n      <!-- <a href=\"#\" class=\"btn-link\">Print Page</a> -->\n    </div>\n\n    <cx-add-to-home-screen-banner></cx-add-to-home-screen-banner>\n\n    <div class=\"cx-order-review-summary\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getAddressCardContent(order.deliveryAddress)\"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"\n                  getBillingAddressCardContent(order.paymentInfo.billingAddress)\n                \"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getDeliveryModeCardContent(order.deliveryMode)\"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getPaymentInfoCardContent(order.paymentInfo)\"\n              ></cx-card>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"cx-order-items container\">\n      <h4 class=\"cx-order-items-header\">\n        {{ 'checkoutOrderConfirmation.orderItems' | cxTranslate }}\n      </h4>\n      <cx-cart-item-list\n        [items]=\"order.entries\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n\n    <div class=\"cx-order-summary container\">\n      <div class=\"row justify-content-end\">\n        <div class=\"col-sm-12 col-md-6 col-lg-5 col-xl-4\">\n          <cx-order-summary [cart]=\"order\"></cx-order-summary>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-order-confirmation-message{text-align:var(--cx-text-align,center);padding:var(--cx-padding,2.5rem)}.cx-order-confirmation-message h2{font-weight:400}.cx-order-confirmation-message .btn-link{font-size:.875rem;font-weight:700;text-transform:var(--cx-text-transform,uppercase)}.cx-order-review-summary{background-color:var(--cx-background-color,var(--cx-g-color-background));border-width:var(--cx-border-width,0 0 1px 0);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light))}.cx-order-review-summary .container{padding:var(--cx-padding,0)}@media (max-width:991.98px){.cx-order-review-summary{background-color:var(--cx-background-color,var(--cx-g-color-inverse))}.cx-order-review-summary .container{max-width:var(--cx-max-width,100%);min-width:var(--cx-min-width,100%);padding:var(--cx-padding,0 1.25rem)}}@media (max-width:767.98px){.cx-order-review-summary .summary-card{background-color:var(--cx-background-color,var(--cx-g-color-inverse));border-width:var(--cx-border-width,1px);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light));margin:var(--cx-margin,.625rem 0)}.cx-order-review-summary .container{padding:var(--cx-padding,1.25rem)}.cx-order-items.container{max-width:var(--cx-max-width,100%);min-width:var(--cx-min-width,100%);padding:var(--cx-padding,0)}}.cx-order-items-header{font-size:var(--cx-font-size,1.125rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);padding:var(--cx-padding,1.375rem 0);margin:var(--cx-margin,0);border-width:var(--cx-border-width,0 0 1px 0);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light))}.cx-order-summary{padding-right:var(--cx-padding,0)}@media (max-width:991.98px){.cx-order-items.container{max-width:var(--cx-max-width,100%);min-width:var(--cx-min-width,100%);padding:var(--cx-padding,0)}.cx-order-items-header{max-width:var(--cx-max-width,100%);min-width:var(--cx-min-width,100%);padding-left:var(--cx-padding,2.5rem)}.cx-order-summary.container{max-width:var(--cx-max-width,100%);min-width:var(--cx-min-width,100%);padding-right:var(--cx-padding,1.625rem)}}@media (max-width:767.98px){.cx-order-items-header{max-width:var(--cx-max-width,100%);min-width:var(--cx-min-width,100%);padding-left:var(--cx-padding,1rem)}.cx-order-summary.container{padding:var(--cx-padding,0)}}"]
             }] }
@@ -12433,6 +12553,6 @@ const translations = {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AddToCartComponent, AddToCartModule, AddedToCartDialogComponent, CartDetailsComponent, CartDetailsModule, CartItemComponent, OrderSummaryComponent, CartTotalsComponent, CartComponentModule, MiniCartComponent, MiniCartModule, IconLoaderService, IconComponent, ICON_TYPES, IconConfig, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, LogoutGuard, LogoutModule, CmsComponentData, PageSlotModule, PageSlotComponent, PageComponentModule, ComponentWrapperDirective, defaultCmsContentConfig, SeoMetaService, initSeoService, SeoModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, CheckoutComponentModule, MultiStepCheckoutModule, ShippingAddressModule, OrderConfirmationModule, SuggestedAddressDialogComponent, AddressFormComponent, PaymentFormComponent, ReviewSubmitComponent, DeliveryModeComponent, MultiStepCheckoutComponent, OrderConfirmationComponent, BannerComponent, BannerModule, ResponsiveBannerComponent, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, CmsLibModule, FooterNavigationComponent, FooterNavigationModule, LinkComponent, LinkModule, NavigationComponent, NavigationModule, ParagraphComponent, CmsParagraphModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, TabParagraphContainerComponent, TabParagraphContainerModule, CmsRouteModule, CmsModule$1 as CmsModule, CmsPageGuard, PageLayoutModule, PageLayoutComponent, CmsMappingService, CmsRoutesService, GlobalMessageComponentModule, GlobalMessageComponent, OrderModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderHistoryComponent, PaymentMethodsComponent, OccModule, OutletModule, OutletService, OutletDirective, OutletRefModule, OutletRefDirective, ProductModule$1 as ProductModule, ProductDetailsModule, ProductListModule, ProductTabsModule, ProductSummaryComponent, ProductDetailsComponent, ProductImagesComponent, ProductListItemComponent, ProductGridItemComponent, ProductListComponent, ProductFacetNavigationComponent, ProductAttributesComponent, ProductReviewsComponent, ProductTabsComponent, ProductDetailOutlets, ProductTabsOutlets, pwaConfigurationFactory, pwaFactory, PwaModule, StoreFinderModule, StorefrontModule, SuffixRoutesModule, UiModule, UiFrameworkModule, ComponentsModule, MediaModule, FormComponentsModule, PaginationAndSortingModule, SpinnerComponent, PictureComponent, StarRatingComponent, ItemCounterComponent, GenericLinkComponent, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, LayoutModule, MainModule, StorefrontComponent, UserComponentModule, LoginModule, LoginComponent, LoginFormModule, LoginFormComponent, RegisterComponent, translations, CartItemListComponent as ɵl, CartSharedModule as ɵa, CartTotalsModule as ɵm, defaultCartPageConfig as ɵp, BootstrapModule as ɵb, DeliveryModeModule as ɵs, BillingAddressFormComponent as ɵw, BillingAddressFormModule as ɵv, PaymentFormModule as ɵu, PaymentMethodComponent as ɵx, PaymentMethodModule as ɵt, ReviewSubmitModule as ɵy, AddressFormModule as ɵq, ShippingAddressComponent as ɵr, PromotionsComponent as ɵk, PromotionsModule as ɵj, guards$1 as ɵz, OrderConfirmationPageGuard as ɵba, AddressBookComponent as ɵbn, AddressBookComponentService as ɵbm, AddressBookModule as ɵbl, AddressCardComponent as ɵbo, BannerComponentService as ɵbh, NavigationUIComponent as ɵbj, NavigationComponentService as ɵbi, ProductCarouselService as ɵbk, addCmsRoute as ɵcl, guards as ɵbr, PageLayoutService as ɵn, CmsGuardsService as ɵbt, CmsI18nService as ɵbs, CloseAccountModule as ɵci, CloseAccountModalComponent as ɵck, CloseAccountComponent as ɵcj, OrderDetailsModule as ɵbw, OrderDetailsService as ɵbx, OrderHistoryModule as ɵbp, PaymentMethodsModule as ɵby, UpdateEmailFormComponent as ɵca, UpdateEmailComponent as ɵcb, UpdateEmailModule as ɵbz, UpdatePasswordFormComponent as ɵce, UpdatePasswordComponent as ɵcd, UpdatePasswordModule as ɵcc, UpdateProfileFormComponent as ɵch, UpdateProfileComponent as ɵcg, UpdateProfileModule as ɵcf, OutletStyleService as ɵo, StyleRefDirective as ɵdg, StyleRefModule as ɵdf, ProductViewComponent as ɵbq, ProductReviewsModule as ɵbu, provideConfigFromMetaTags as ɵdm, AddToHomeScreenBannerComponent as ɵbg, AddToHomeScreenBtnComponent as ɵbe, AddToHomeScreenComponent as ɵbf, PWAModuleConfig as ɵbb, defaultPWAModuleConfig as ɵbc, AddToHomeScreenService as ɵbd, AbstractStoreItemComponent as ɵcq, ScheduleComponent as ɵcv, StoreFinderGridComponent as ɵco, StoreFinderHeaderComponent as ɵcw, StoreFinderListItemComponent as ɵcu, StoreFinderMapComponent as ɵct, StoreFinderPaginationDetailsComponent as ɵcy, StoreFinderListComponent as ɵcs, StoreFinderSearchResultComponent as ɵcm, StoreFinderSearchComponent as ɵcr, StoreFinderStoreDescriptionComponent as ɵcp, StoreFinderStoresCountComponent as ɵcn, StoreFinderComponent as ɵcx, suffixUrlMatcher as ɵdl, CardComponent as ɵe, CardModule as ɵd, GenericLinkModule as ɵi, PaginationComponent as ɵf, SortingComponent as ɵg, SpinnerModule as ɵh, OnlyNumberDirective as ɵc, HardcodedCheckoutComponent as ɵdk, CartNotEmptyGuard as ɵdj, GuardsModule as ɵdi, OrderConfirmationPageModule as ɵdh, CurrentProductService as ɵbv, ForgotPasswordComponent as ɵde, ForgotPasswordModule as ɵdd, LoginComponentService as ɵcz, RegisterComponentModule as ɵda, ResetPasswordFormComponent as ɵdc, ResetPasswordModule as ɵdb, address as ɵdn, cart as ɵdo, checkout as ɵdp, closeAccount as ɵdq, common as ɵdr, myAccount as ɵds, payment as ɵdt, product as ɵdu, pwa as ɵdv, storeFinder as ɵdw, user as ɵdx };
+export { AddToCartComponent, AddToCartModule, AddedToCartDialogComponent, CartDetailsComponent, CartDetailsModule, CartItemComponent, OrderSummaryComponent, CartTotalsComponent, CartComponentModule, MiniCartComponent, MiniCartModule, IconLoaderService, IconComponent, ICON_TYPES, IconConfig, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, LogoutGuard, LogoutModule, CmsComponentData, PageSlotModule, PageSlotComponent, PageComponentModule, ComponentWrapperDirective, defaultCmsContentConfig, SeoMetaService, initSeoService, SeoModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, CheckoutComponentModule, MultiStepCheckoutModule, ShippingAddressModule, OrderConfirmationModule, SuggestedAddressDialogComponent, AddressFormComponent, PaymentFormComponent, ReviewSubmitComponent, DeliveryModeComponent, MultiStepCheckoutComponent, OrderConfirmationComponent, BannerComponent, BannerModule, ResponsiveBannerComponent, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, CmsLibModule, FooterNavigationComponent, FooterNavigationModule, LinkComponent, LinkModule, NavigationComponent, NavigationModule, ParagraphComponent, CmsParagraphModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, TabParagraphContainerComponent, TabParagraphContainerModule, CmsRouteModule, CmsModule$1 as CmsModule, CmsPageGuard, PageLayoutModule, PageLayoutComponent, CmsMappingService, CmsRoutesService, GlobalMessageComponentModule, GlobalMessageComponent, OrderModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderHistoryComponent, PaymentMethodsComponent, OccModule, OutletModule, OutletService, OutletDirective, OutletRefModule, OutletRefDirective, ProductModule$1 as ProductModule, ProductDetailsModule, ProductListModule, ProductTabsModule, ProductSummaryComponent, ProductDetailsComponent, ProductImagesComponent, ProductListItemComponent, ProductGridItemComponent, ProductListComponent, ProductFacetNavigationComponent, ProductAttributesComponent, ProductReviewsComponent, ProductTabsComponent, ProductDetailOutlets, ProductTabsOutlets, pwaConfigurationFactory, pwaFactory, PwaModule, StoreFinderModule, StorefrontModule, SuffixRoutesModule, UiModule, UiFrameworkModule, ComponentsModule, MediaModule, FormComponentsModule, PaginationAndSortingModule, SpinnerComponent, PictureComponent, StarRatingComponent, ItemCounterComponent, GenericLinkComponent, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, LayoutModule, MainModule, StorefrontComponent, UserComponentModule, LoginModule, LoginComponent, LoginFormModule, LoginFormComponent, RegisterComponent, translations, CartItemListComponent as ɵl, CartSharedModule as ɵa, CartTotalsModule as ɵm, defaultCartPageConfig as ɵp, BootstrapModule as ɵb, CheckoutDetailsService as ɵbb, DeliveryModeModule as ɵs, BillingAddressFormComponent as ɵw, BillingAddressFormModule as ɵv, PaymentFormModule as ɵu, PaymentMethodComponent as ɵx, PaymentMethodModule as ɵt, PlaceOrderComponent as ɵba, PlaceOrderModule as ɵz, ReviewSubmitModule as ɵy, AddressFormModule as ɵq, ShippingAddressComponent as ɵr, PromotionsComponent as ɵk, PromotionsModule as ɵj, guards$1 as ɵbc, OrderConfirmationPageGuard as ɵbd, AddressBookComponent as ɵbq, AddressBookComponentService as ɵbp, AddressBookModule as ɵbo, AddressCardComponent as ɵbr, BannerComponentService as ɵbk, NavigationUIComponent as ɵbm, NavigationComponentService as ɵbl, ProductCarouselService as ɵbn, addCmsRoute as ɵco, guards as ɵbu, PageLayoutService as ɵn, CmsGuardsService as ɵbw, CmsI18nService as ɵbv, CloseAccountModule as ɵcl, CloseAccountModalComponent as ɵcn, CloseAccountComponent as ɵcm, OrderDetailsModule as ɵbz, OrderDetailsService as ɵca, OrderHistoryModule as ɵbs, PaymentMethodsModule as ɵcb, UpdateEmailFormComponent as ɵcd, UpdateEmailComponent as ɵce, UpdateEmailModule as ɵcc, UpdatePasswordFormComponent as ɵch, UpdatePasswordComponent as ɵcg, UpdatePasswordModule as ɵcf, UpdateProfileFormComponent as ɵck, UpdateProfileComponent as ɵcj, UpdateProfileModule as ɵci, OutletStyleService as ɵo, StyleRefDirective as ɵdj, StyleRefModule as ɵdi, ProductViewComponent as ɵbt, ProductReviewsModule as ɵbx, provideConfigFromMetaTags as ɵdp, AddToHomeScreenBannerComponent as ɵbj, AddToHomeScreenBtnComponent as ɵbh, AddToHomeScreenComponent as ɵbi, PWAModuleConfig as ɵbe, defaultPWAModuleConfig as ɵbf, AddToHomeScreenService as ɵbg, AbstractStoreItemComponent as ɵct, ScheduleComponent as ɵcy, StoreFinderGridComponent as ɵcr, StoreFinderHeaderComponent as ɵcz, StoreFinderListItemComponent as ɵcx, StoreFinderMapComponent as ɵcw, StoreFinderPaginationDetailsComponent as ɵdb, StoreFinderListComponent as ɵcv, StoreFinderSearchResultComponent as ɵcp, StoreFinderSearchComponent as ɵcu, StoreFinderStoreDescriptionComponent as ɵcs, StoreFinderStoresCountComponent as ɵcq, StoreFinderComponent as ɵda, suffixUrlMatcher as ɵdo, CardComponent as ɵe, CardModule as ɵd, GenericLinkModule as ɵi, PaginationComponent as ɵf, SortingComponent as ɵg, SpinnerModule as ɵh, OnlyNumberDirective as ɵc, HardcodedCheckoutComponent as ɵdn, CartNotEmptyGuard as ɵdm, GuardsModule as ɵdl, OrderConfirmationPageModule as ɵdk, CurrentProductService as ɵby, ForgotPasswordComponent as ɵdh, ForgotPasswordModule as ɵdg, LoginComponentService as ɵdc, RegisterComponentModule as ɵdd, ResetPasswordFormComponent as ɵdf, ResetPasswordModule as ɵde, address as ɵdq, cart as ɵdr, checkout as ɵds, closeAccount as ɵdt, common as ɵdu, myAccount as ɵdv, payment as ɵdw, product as ɵdx, pwa as ɵdy, storeFinder as ɵdz, user as ɵea };
 
 //# sourceMappingURL=spartacus-storefront.js.map

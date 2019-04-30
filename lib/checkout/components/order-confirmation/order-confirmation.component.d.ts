@@ -9,7 +9,7 @@ export declare class OrderConfirmationComponent implements OnInit, OnDestroy {
     ngOnInit(): void;
     ngOnDestroy(): void;
     getAddressCardContent(deliveryAddress: Address): Card;
-    getShippingCardContent(deliveryMode: DeliveryMode): Card;
+    getDeliveryModeCardContent(deliveryMode: DeliveryMode): Card;
     getBillingAddressCardContent(billingAddress: Address): Card;
     getPaymentInfoCardContent(paymentInfo: PaymentDetails): Card;
 }

@@ -27,7 +27,9 @@ export declare class PaymentFormComponent implements OnInit, OnDestroy {
     shippingAddress$: Observable<Address>;
     countries$: Observable<Country[]>;
     sameAsShippingAddress: boolean;
-    backToPayment: EventEmitter<any>;
+    paymentMethodsCount: number;
+    goBack: EventEmitter<any>;
+    closeForm: EventEmitter<any>;
     addPaymentInfo: EventEmitter<any>;
     payment: FormGroup;
     billingAddress: FormGroup;
@@ -49,6 +51,7 @@ export declare class PaymentFormComponent implements OnInit, OnDestroy {
     showSameAsShippingAddressCheckbox(): Observable<boolean>;
     getAddressCardContent(address: Address): Card;
     openSuggestedAddress(results: AddressValidation): void;
+    close(): void;
     back(): void;
     verifyAddress(): void;
     next(): void;

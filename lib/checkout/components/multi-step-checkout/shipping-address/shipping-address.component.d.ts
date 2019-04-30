@@ -1,24 +1,41 @@
-import { OnInit, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs';
-import { RoutingService, Address, CartDataService, UserService } from '@spartacus/core';
+import { OnInit, OnDestroy, EventEmitter } from '@angular/core';
+import { Observable, BehaviorSubject, Subscription } from 'rxjs';
+import { RoutingService, Address, CartDataService, UserService, CheckoutService, CartService } from '@spartacus/core';
 import { Card } from '../../../../ui/components/card/card.component';
-export declare class ShippingAddressComponent implements OnInit {
+export interface CardWithAddress {
+    card: Card;
+    address: Address;
+}
+export declare class ShippingAddressComponent implements OnInit, OnDestroy {
     protected userService: UserService;
     protected cartData: CartDataService;
+    protected cartService: CartService;
     protected routingService: RoutingService;
+    protected checkoutService: CheckoutService;
     existingAddresses$: Observable<Address[]>;
     newAddressFormManuallyOpened: boolean;
     cards: Card[];
     isLoading$: Observable<boolean>;
     selectedAddress: Address;
-    addAddress: EventEmitter<any>;
-    constructor(userService: UserService, cartData: CartDataService, routingService: RoutingService);
+    goTo: number;
+    setAddress: Address;
+    setAddressSub: Subscription;
+    selectedAddressSub: Subscription;
+    selectedAddress$: BehaviorSubject<Address>;
+    cards$: Observable<CardWithAddress[]>;
+    goToStep: EventEmitter<any>;
+    constructor(userService: UserService, cartData: CartDataService, cartService: CartService, routingService: RoutingService, checkoutService: CheckoutService);
     ngOnInit(): void;
-    getCardContent(address: Address): Card;
-    addressSelected(address: Address, index: number): void;
+    getCardContent(address: Address, selected: any): Card;
+    addressSelected(address: Address): void;
     next(): void;
+    addAddress({ newAddress, address, }: {
+        newAddress: boolean;
+        address: Address;
+    }): void;
     addNewAddress(address: Address): void;
     showNewAddressForm(): void;
     hideNewAddressForm(goBack?: boolean): void;
     back(): void;
+    ngOnDestroy(): void;
 }
