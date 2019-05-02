@@ -5,6 +5,14 @@ export declare const myAccount: {
         status: string;
         shippedOn: string;
         inProcess: string;
+        statusDisplay_cancelled: string;
+        statusDisplay_cancelling: string;
+        statusDisplay_completed: string;
+        statusDisplay_created: string;
+        statusDisplay_error: string;
+        statusDisplay_Error: string;
+        statusDisplay_open: string;
+        statusDisplay_processing: string;
     };
     orderHistory: {
         orderHistory: string;
