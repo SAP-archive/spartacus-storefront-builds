@@ -49,6 +49,7 @@ export declare const product: {
     };
     addToCart: {
         itemsAddedToYourCart: string;
+        itemsIncrementedInYourCart: string;
         items: string;
         updatingCart: string;
         addToCart: string;

@@ -12,8 +12,10 @@ export declare class AddedToCartDialogComponent implements OnInit, AfterViewChec
     loaded$: Observable<boolean>;
     cartLoaded$: Observable<boolean>;
     quantity: number;
+    headerLabel: string;
     previousLoaded: boolean;
     finishedLoading: boolean;
+    private firstUpdate;
     dialog: ElementRef;
     form: FormGroup;
     constructor(activeModal: NgbActiveModal, cartService: CartService, fb: FormBuilder);
