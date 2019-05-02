@@ -1,7 +1,7 @@
-import { ElementRef, EventEmitter, OnChanges, Renderer2 } from '@angular/core';
+import { ElementRef, EventEmitter, OnChanges, OnInit, Renderer2 } from '@angular/core';
 import { Media } from './media.model';
 import { MediaService } from './media.service';
-export declare class MediaComponent implements OnChanges {
+export declare class MediaComponent implements OnChanges, OnInit {
     private elRef;
     private renderer;
     protected mediaService: MediaService;
@@ -31,6 +31,7 @@ export declare class MediaComponent implements OnChanges {
      */
     media: Media;
     constructor(elRef: ElementRef, renderer: Renderer2, mediaService: MediaService);
+    ngOnInit(): void;
     ngOnChanges(): void;
     private loadImage;
     loadHandler(): void;

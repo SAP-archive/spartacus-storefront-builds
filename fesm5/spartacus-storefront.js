@@ -2,14 +2,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule, ɵangular_packages_service_worker_service_worker_b } from '@angular/service-worker';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbActiveModal, NgbModal, NgbTabsetModule, NgbAccordionModule, NgbTabsetConfig, NgbAccordionConfig, NgbRatingModule, NgbRatingConfig, NgbDropdownModule, NgbTypeaheadModule, NgbCollapseModule, NgbModalModule, NgbPaginationModule, NgbPaginationConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { fromEvent, of, concat, from, isObservable, Subscription, BehaviorSubject, combineLatest, ReplaySubject, merge, Subject } from 'rxjs';
+import { fromEvent, of, concat, from, isObservable, Subscription, BehaviorSubject, combineLatest, merge, Subject } from 'rxjs';
 import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { __extends, __read, __values, __spread, __assign, __awaiter, __generator } from 'tslib';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, endWith, first, skipWhile, switchMap, withLatestFrom, take, shareReplay, multicast, refCount, delay } from 'rxjs/operators';
+import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, endWith, first, skipWhile, switchMap, withLatestFrom, take, shareReplay, delay } from 'rxjs/operators';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
-import { CartService, I18nModule, ServerConfig, WindowRef, CmsConfig, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, AuthService, UserService, CheckoutModule, UrlTranslationModule, ConfigModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ProductService, UserModule, CmsService, StoreDataService, StoreFinderService, GoogleMapRendererService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, Config, ProductReviewService, defaultCmsModuleConfig, CmsModule, StripHtmlModule, ProductModule, ProductSearchService, PageType, GlobalMessageModule, OccUserService, OccMiscsService, OccOrderService, OccConfig, TranslatePipe, StoreFinderCoreModule, DynamicAttributeService, NotAuthGuard, ContextServiceMap, SiteContextModule, PageMetaService, CmsPageTitleModule, PageRobotsMeta, CxApiService, ComponentMapperService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID } from '@spartacus/core';
+import { CartService, I18nModule, ServerConfig, WindowRef, CmsService, DynamicAttributeService, CmsConfig, ComponentMapperService, CxApiService, PageMetaService, PageRobotsMeta, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, AuthService, UserService, CheckoutModule, UrlTranslationModule, ConfigModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ProductService, UserModule, StoreDataService, StoreFinderService, GoogleMapRendererService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, Config, ProductReviewService, defaultCmsModuleConfig, CmsModule, StripHtmlModule, ProductModule, ProductSearchService, PageType, GlobalMessageModule, OccUserService, OccMiscsService, OccOrderService, OccConfig, TranslatePipe, StoreFinderCoreModule, NotAuthGuard, ContextServiceMap, SiteContextModule, CmsPageTitleModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID } from '@spartacus/core';
 import { Component, ElementRef, ViewChild, Input, ChangeDetectionStrategy, NgModule, Output, EventEmitter, forwardRef, Renderer2, Directive, HostListener, Injectable, Inject, APP_INITIALIZER, Injector, TemplateRef, ChangeDetectorRef, ViewEncapsulation, Optional, defineInjectable, inject, INJECTOR, PLATFORM_ID, ViewContainerRef } from '@angular/core';
 import { RouterModule, Router, ActivatedRoute, NavigationStart } from '@angular/router';
 
@@ -1796,186 +1796,12 @@ CmsComponentData = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var CmsMappingService = /** @class */ (function () {
-    function CmsMappingService(config, platformId) {
-        this.config = config;
-        this.platformId = platformId;
-    }
-    /**
-     * @param {?} flexType
-     * @return {?}
-     */
-    CmsMappingService.prototype.isComponentEnabled = /**
-     * @param {?} flexType
-     * @return {?}
-     */
-    function (flexType) {
-        /** @type {?} */
-        var isSSR = isPlatformServer(this.platformId);
-        /** @type {?} */
-        var isComponentDisabledInSSR = (this.config.cmsComponents[flexType] || {})
-            .disableSSR;
-        return !(isSSR && isComponentDisabledInSSR);
-    };
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    CmsMappingService.prototype.getRoutesForComponents = /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    function (componentTypes) {
-        var e_1, _a;
-        /** @type {?} */
-        var routes = [];
-        try {
-            for (var componentTypes_1 = __values(componentTypes), componentTypes_1_1 = componentTypes_1.next(); !componentTypes_1_1.done; componentTypes_1_1 = componentTypes_1.next()) {
-                var componentType = componentTypes_1_1.value;
-                if (this.isComponentEnabled(componentType)) {
-                    routes.push.apply(routes, __spread(this.getRoutesForComponent(componentType)));
-                }
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (componentTypes_1_1 && !componentTypes_1_1.done && (_a = componentTypes_1.return)) _a.call(componentTypes_1);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        return routes;
-    };
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    CmsMappingService.prototype.getGuardsForComponents = /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    function (componentTypes) {
-        var e_2, _a;
-        /** @type {?} */
-        var guards = new Set();
-        try {
-            for (var componentTypes_2 = __values(componentTypes), componentTypes_2_1 = componentTypes_2.next(); !componentTypes_2_1.done; componentTypes_2_1 = componentTypes_2.next()) {
-                var componentType = componentTypes_2_1.value;
-                this.getGuardsForComponent(componentType).forEach(function (guard) {
-                    return guards.add(guard);
-                });
-            }
-        }
-        catch (e_2_1) { e_2 = { error: e_2_1 }; }
-        finally {
-            try {
-                if (componentTypes_2_1 && !componentTypes_2_1.done && (_a = componentTypes_2.return)) _a.call(componentTypes_2);
-            }
-            finally { if (e_2) throw e_2.error; }
-        }
-        return Array.from(guards);
-    };
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    CmsMappingService.prototype.getI18nKeysForComponents = /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    function (componentTypes) {
-        var e_3, _a;
-        /** @type {?} */
-        var i18nKeys = new Set();
-        try {
-            for (var componentTypes_3 = __values(componentTypes), componentTypes_3_1 = componentTypes_3.next(); !componentTypes_3_1.done; componentTypes_3_1 = componentTypes_3.next()) {
-                var componentType = componentTypes_3_1.value;
-                if (this.isComponentEnabled(componentType)) {
-                    this.getI18nKeysForComponent(componentType).forEach(function (key) {
-                        return i18nKeys.add(key);
-                    });
-                }
-            }
-        }
-        catch (e_3_1) { e_3 = { error: e_3_1 }; }
-        finally {
-            try {
-                if (componentTypes_3_1 && !componentTypes_3_1.done && (_a = componentTypes_3.return)) _a.call(componentTypes_3);
-            }
-            finally { if (e_3) throw e_3.error; }
-        }
-        return Array.from(i18nKeys);
-    };
-    /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    CmsMappingService.prototype.getRoutesForComponent = /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    function (componentType) {
-        /** @type {?} */
-        var mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.childRoutes) || [];
-    };
-    /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    CmsMappingService.prototype.getGuardsForComponent = /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    function (componentType) {
-        /** @type {?} */
-        var mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.guards) || [];
-    };
-    /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    CmsMappingService.prototype.getI18nKeysForComponent = /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    function (componentType) {
-        /** @type {?} */
-        var mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.i18nKeys) || [];
-    };
-    CmsMappingService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    CmsMappingService.ctorParameters = function () { return [
-        { type: CmsConfig },
-        { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
-    ]; };
-    /** @nocollapse */ CmsMappingService.ngInjectableDef = defineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(inject(CmsConfig), inject(PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
-    return CmsMappingService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 var PageSlotComponent = /** @class */ (function () {
-    function PageSlotComponent(cmsService, dynamicAttributeService, renderer, hostElement, cmsMapping) {
+    function PageSlotComponent(cmsService, dynamicAttributeService, renderer, hostElement) {
         this.cmsService = cmsService;
         this.dynamicAttributeService = dynamicAttributeService;
         this.renderer = renderer;
         this.hostElement = hostElement;
-        this.cmsMapping = cmsMapping;
     }
     /**
      * @return {?}
@@ -1984,9 +1810,14 @@ var PageSlotComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
+        var _this = this;
         // add the position name as a css class so that
         // layout can be applied to it, using the position based class.
         this.renderer.addClass(this.hostElement.nativeElement, this.position);
+        this.components$ = this.slot$.pipe(map(function (slot) { return (slot && slot.components ? slot.components : []); }), distinctUntilChanged(function (a, b) {
+            return a.length === b.length &&
+                !a.find(function (el, index) { return el.uid !== b[index].uid; });
+        }), tap(function (components) { return _this.addComponentClass(components); }));
     };
     Object.defineProperty(PageSlotComponent.prototype, "slot$", {
         /**
@@ -2001,23 +1832,6 @@ var PageSlotComponent = /** @class */ (function () {
             return this.cmsService
                 .getContentSlot(this.position)
                 .pipe(tap(function (slot) { return _this.addSmartEditSlotClass(slot); }));
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PageSlotComponent.prototype, "components$", {
-        /**
-         * returns an observable with components (`ContentSlotComponentData[]`)
-         * for the current slot
-         */
-        get: /**
-         * returns an observable with components (`ContentSlotComponentData[]`)
-         * for the current slot
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            return this.slot$.pipe(map(function (slot) { return (slot && slot.components ? slot.components : []); }), tap(function (components) { return _this.addComponentClass(components); }));
         },
         enumerable: true,
         configurable: true
@@ -2081,8 +1895,7 @@ var PageSlotComponent = /** @class */ (function () {
         { type: CmsService },
         { type: DynamicAttributeService },
         { type: Renderer2 },
-        { type: ElementRef },
-        { type: CmsMappingService }
+        { type: ElementRef }
     ]; };
     PageSlotComponent.propDecorators = {
         position: [{ type: Input }]
@@ -2641,6 +2454,179 @@ var SeoModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var CmsMappingService = /** @class */ (function () {
+    function CmsMappingService(config, platformId) {
+        this.config = config;
+        this.platformId = platformId;
+    }
+    /**
+     * @param {?} flexType
+     * @return {?}
+     */
+    CmsMappingService.prototype.isComponentEnabled = /**
+     * @param {?} flexType
+     * @return {?}
+     */
+    function (flexType) {
+        /** @type {?} */
+        var isSSR = isPlatformServer(this.platformId);
+        /** @type {?} */
+        var isComponentDisabledInSSR = (this.config.cmsComponents[flexType] || {})
+            .disableSSR;
+        return !(isSSR && isComponentDisabledInSSR);
+    };
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    CmsMappingService.prototype.getRoutesForComponents = /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    function (componentTypes) {
+        var e_1, _a;
+        /** @type {?} */
+        var routes = [];
+        try {
+            for (var componentTypes_1 = __values(componentTypes), componentTypes_1_1 = componentTypes_1.next(); !componentTypes_1_1.done; componentTypes_1_1 = componentTypes_1.next()) {
+                var componentType = componentTypes_1_1.value;
+                if (this.isComponentEnabled(componentType)) {
+                    routes.push.apply(routes, __spread(this.getRoutesForComponent(componentType)));
+                }
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (componentTypes_1_1 && !componentTypes_1_1.done && (_a = componentTypes_1.return)) _a.call(componentTypes_1);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        return routes;
+    };
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    CmsMappingService.prototype.getGuardsForComponents = /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    function (componentTypes) {
+        var e_2, _a;
+        /** @type {?} */
+        var guards = new Set();
+        try {
+            for (var componentTypes_2 = __values(componentTypes), componentTypes_2_1 = componentTypes_2.next(); !componentTypes_2_1.done; componentTypes_2_1 = componentTypes_2.next()) {
+                var componentType = componentTypes_2_1.value;
+                this.getGuardsForComponent(componentType).forEach(function (guard) {
+                    return guards.add(guard);
+                });
+            }
+        }
+        catch (e_2_1) { e_2 = { error: e_2_1 }; }
+        finally {
+            try {
+                if (componentTypes_2_1 && !componentTypes_2_1.done && (_a = componentTypes_2.return)) _a.call(componentTypes_2);
+            }
+            finally { if (e_2) throw e_2.error; }
+        }
+        return Array.from(guards);
+    };
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    CmsMappingService.prototype.getI18nKeysForComponents = /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    function (componentTypes) {
+        var e_3, _a;
+        /** @type {?} */
+        var i18nKeys = new Set();
+        try {
+            for (var componentTypes_3 = __values(componentTypes), componentTypes_3_1 = componentTypes_3.next(); !componentTypes_3_1.done; componentTypes_3_1 = componentTypes_3.next()) {
+                var componentType = componentTypes_3_1.value;
+                if (this.isComponentEnabled(componentType)) {
+                    this.getI18nKeysForComponent(componentType).forEach(function (key) {
+                        return i18nKeys.add(key);
+                    });
+                }
+            }
+        }
+        catch (e_3_1) { e_3 = { error: e_3_1 }; }
+        finally {
+            try {
+                if (componentTypes_3_1 && !componentTypes_3_1.done && (_a = componentTypes_3.return)) _a.call(componentTypes_3);
+            }
+            finally { if (e_3) throw e_3.error; }
+        }
+        return Array.from(i18nKeys);
+    };
+    /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    CmsMappingService.prototype.getRoutesForComponent = /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    function (componentType) {
+        /** @type {?} */
+        var mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.childRoutes) || [];
+    };
+    /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    CmsMappingService.prototype.getGuardsForComponent = /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    function (componentType) {
+        /** @type {?} */
+        var mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.guards) || [];
+    };
+    /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    CmsMappingService.prototype.getI18nKeysForComponent = /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    function (componentType) {
+        /** @type {?} */
+        var mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.i18nKeys) || [];
+    };
+    CmsMappingService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    CmsMappingService.ctorParameters = function () { return [
+        { type: CmsConfig },
+        { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
+    ]; };
+    /** @nocollapse */ CmsMappingService.ngInjectableDef = defineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(inject(CmsConfig), inject(PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
+    return CmsMappingService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var CmsGuardsService = /** @class */ (function () {
     function CmsGuardsService(cmsMapping, injector) {
         this.cmsMapping = cmsMapping;
@@ -3095,7 +3081,11 @@ var PageLayoutComponent = /** @class */ (function () {
          * @return {?}
          */
         function (cls) {
+            if (this.currentClass) {
+                this.renderer.removeClass(this.el.nativeElement, this.currentClass);
+            }
             this.renderer.addClass(this.el.nativeElement, cls);
+            this.currentClass = cls;
         },
         enumerable: true,
         configurable: true
@@ -3259,8 +3249,8 @@ var CmsPageGuard = /** @class */ (function () {
      */
     function (route, state) {
         var _this = this;
-        return this.routingService.getPageContext().pipe(switchMap(function (pageContext) {
-            return _this.cmsService.hasPage(pageContext).pipe(first(), withLatestFrom(of(pageContext)));
+        return this.routingService.getNextPageContext().pipe(switchMap(function (pageContext) {
+            return _this.cmsService.hasPage(pageContext, true).pipe(first(), withLatestFrom(of(pageContext)));
         }), switchMap(function (_a) {
             var _b = __read(_a, 2), hasPage = _b[0], pageContext = _b[1];
             if (hasPage) {
@@ -4690,6 +4680,15 @@ var MediaComponent = /** @class */ (function () {
     /**
      * @return {?}
      */
+    MediaComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.renderer.addClass((/** @type {?} */ (this.elRef.nativeElement)), LOADING_CLS);
+    };
+    /**
+     * @return {?}
+     */
     MediaComponent.prototype.ngOnChanges = /**
      * @return {?}
      */
@@ -4705,7 +4704,6 @@ var MediaComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.renderer.addClass((/** @type {?} */ (this.elRef.nativeElement)), LOADING_CLS);
         this.media = this.mediaService.getImage(this.container, this.format, this.alt);
     };
     /**
@@ -6190,9 +6188,10 @@ var BreadcrumbModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var LogoutGuard = /** @class */ (function () {
-    function LogoutGuard(auth, cms) {
+    function LogoutGuard(auth, cms, routing) {
         this.auth = auth;
         this.cms = cms;
+        this.routing = routing;
     }
     /**
      * @return {?}
@@ -6201,11 +6200,18 @@ var LogoutGuard = /** @class */ (function () {
      * @return {?}
      */
     function () {
+        var _this = this;
         this.logout();
-        return this.cms.hasPage({
+        return this.cms
+            .hasPage({
             id: '/logout',
             type: PageType.CONTENT_PAGE,
-        });
+        })
+            .pipe(tap(function (hasPage) {
+            if (!hasPage) {
+                _this.routing.go(['/']);
+            }
+        }));
     };
     /**
      * @protected
@@ -6227,9 +6233,10 @@ var LogoutGuard = /** @class */ (function () {
     /** @nocollapse */
     LogoutGuard.ctorParameters = function () { return [
         { type: AuthService },
-        { type: CmsService }
+        { type: CmsService },
+        { type: RoutingService }
     ]; };
-    /** @nocollapse */ LogoutGuard.ngInjectableDef = defineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(inject(AuthService), inject(CmsService)); }, token: LogoutGuard, providedIn: "root" });
+    /** @nocollapse */ LogoutGuard.ngInjectableDef = defineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(inject(AuthService), inject(CmsService), inject(RoutingService)); }, token: LogoutGuard, providedIn: "root" });
     return LogoutGuard;
 }());
 
@@ -8974,9 +8981,7 @@ var OrderDetailsService = /** @class */ (function () {
             else {
                 _this.userService.clearOrderDetails();
             }
-        }), 
-        // TODO: Replace next two lines with shareReplay(1, undefined, true) when RxJS 6.4 will be in use
-        multicast(function () { return new ReplaySubject(1); }), refCount());
+        }), shareReplay({ bufferSize: 1, refCount: true }));
     }
     /**
      * @return {?}

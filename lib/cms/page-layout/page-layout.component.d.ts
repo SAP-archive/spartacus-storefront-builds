@@ -6,6 +6,7 @@ export declare class PageLayoutComponent implements OnInit {
     private renderer;
     private pageLayoutService;
     section: string;
+    private currentClass;
     constructor(el: ElementRef, renderer: Renderer2, pageLayoutService: PageLayoutService);
     ngOnInit(): void;
     readonly slots$: Observable<string[]>;
