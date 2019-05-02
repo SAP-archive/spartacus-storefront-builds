@@ -9,7 +9,7 @@ import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS
 import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, endWith, first, skipWhile, switchMap, withLatestFrom, take, shareReplay, multicast, refCount, delay } from 'rxjs/operators';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
-import { CartService, I18nModule, ServerConfig, WindowRef, CmsConfig, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, UserService, CheckoutModule, UrlTranslationModule, ConfigModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ProductService, UserModule, CmsService, StoreDataService, StoreFinderService, GoogleMapRendererService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, Config, ProductReviewService, defaultCmsModuleConfig, CmsModule, StripHtmlModule, PageMetaService, CmsPageTitleModule, ProductModule, ProductSearchService, StoreFinderCoreModule, PageType, GlobalMessageModule, OccUserService, OccMiscsService, OccOrderService, OccConfig, TranslatePipe, DynamicAttributeService, PageRobotsMeta, CxApiService, ComponentMapperService, NotAuthGuard, ContextServiceMap, SiteContextModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID } from '@spartacus/core';
+import { CartService, I18nModule, ServerConfig, WindowRef, CmsConfig, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, UserService, CheckoutModule, UrlTranslationModule, ConfigModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ProductService, UserModule, CmsService, StoreDataService, StoreFinderService, GoogleMapRendererService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, Config, ProductReviewService, defaultCmsModuleConfig, CmsModule, StripHtmlModule, ProductModule, ProductSearchService, StoreFinderCoreModule, PageType, GlobalMessageModule, OccUserService, OccMiscsService, OccOrderService, OccConfig, TranslatePipe, DynamicAttributeService, PageRobotsMeta, PageMetaService, CxApiService, ComponentMapperService, NotAuthGuard, ContextServiceMap, SiteContextModule, CmsPageTitleModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID } from '@spartacus/core';
 import { Component, ElementRef, ViewChild, Input, ChangeDetectionStrategy, NgModule, Output, EventEmitter, forwardRef, Renderer2, Directive, HostListener, Injectable, Optional, Injector, Inject, APP_INITIALIZER, PLATFORM_ID, TemplateRef, ViewContainerRef, ChangeDetectorRef, ViewEncapsulation, defineInjectable, inject, INJECTOR } from '@angular/core';
 import { RouterModule, Router, ActivatedRoute, NavigationStart } from '@angular/router';
 
@@ -4345,7 +4345,7 @@ class CartDetailsComponent {
 CartDetailsComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-cart-details',
-                template: "<ng-container *ngIf=\"(cart$ | async) as cart\">\n  <ng-container *ngIf=\"(entries$ | async) as entries\">\n    <div class=\"cart-details-wrapper\">\n      <h1>\n        {{ 'cartDetails.shoppingCart' | cxTranslate }} ({{\n          'cartDetails.id' | cxTranslate\n        }}\n        {{ cart?.code }})\n      </h1>\n      <div class=\"cx-total\">\n        {{\n          'cartItems.cartTotal'\n            | cxTranslate: { count: cart.deliveryItemsQuantity }\n        }}:\n        {{ cart.totalPrice?.formattedValue }}\n      </div>\n      <cx-promotions\n        [promotions]=\"getAllPromotionsForCart(cart)\"\n      ></cx-promotions>\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n        [cartIsLoading]=\"!(cartLoaded$ | async)\"\n      ></cx-cart-item-list>\n      <!-- NOT FOR MVP  <cx-cart-coupon></cx-cart-coupon> -->\n    </div>\n  </ng-container>\n</ng-container>\n",
+                template: "<ng-container *ngIf=\"(cart$ | async) as cart\">\n  <ng-container *ngIf=\"(entries$ | async) as entries\">\n    <div class=\"cart-details-wrapper\">\n      <div class=\"cx-total\">\n        {{\n          'cartItems.cartTotal'\n            | cxTranslate: { count: cart.deliveryItemsQuantity }\n        }}:\n        {{ cart.totalPrice?.formattedValue }}\n      </div>\n      <cx-promotions\n        [promotions]=\"getAllPromotionsForCart(cart)\"\n      ></cx-promotions>\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n        [cartIsLoading]=\"!(cartLoaded$ | async)\"\n      ></cx-cart-item-list>\n      <!-- NOT FOR MVP  <cx-cart-coupon></cx-cart-coupon> -->\n    </div>\n  </ng-container>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -5038,6 +5038,84 @@ SiteContextSelectorModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class BreadcrumbComponent {
+    /**
+     * @param {?} component
+     * @param {?} pageMetaService
+     */
+    constructor(component, pageMetaService) {
+        this.component = component;
+        this.pageMetaService = pageMetaService;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.setTitle();
+        this.setCrumbs();
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    setTitle() {
+        this.title$ = this.pageMetaService.getMeta().pipe(filter(Boolean), map((meta) => meta.heading || meta.title));
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    setCrumbs() {
+        this.crumbs$ = this.pageMetaService
+            .getMeta()
+            .pipe(map((meta) => meta.breadcrumbs ? meta.breadcrumbs : [{ label: 'Home', link: '/' }]));
+    }
+}
+BreadcrumbComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-breadcrumb',
+                template: "<nav>\n  <span *ngFor=\"let crumb of (crumbs$ | async)\">\n    <a [routerLink]=\"crumb.link\" [innerHTML]=\"crumb.label\"></a>\n  </span>\n</nav>\n<h1>{{ title$ | async }}</h1>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+BreadcrumbComponent.ctorParameters = () => [
+    { type: CmsComponentData },
+    { type: PageMetaService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class BreadcrumbModule {
+}
+BreadcrumbModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    RouterModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            BreadcrumbComponent: { selector: 'cx-breadcrumb' },
+                        },
+                    }))),
+                    CmsPageTitleModule,
+                ],
+                declarations: [BreadcrumbComponent],
+                entryComponents: [BreadcrumbComponent],
+            },] }
+];
 
 /**
  * @fileoverview added by tsickle
@@ -6996,71 +7074,6 @@ OrderConfirmationModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class BreadcrumbComponent {
-    /**
-     * @param {?} component
-     * @param {?} pageMetaService
-     */
-    constructor(component, pageMetaService) {
-        this.component = component;
-        this.pageMetaService = pageMetaService;
-    }
-    /**
-     * @return {?}
-     */
-    get title$() {
-        return this.pageMetaService.getMeta().pipe(filter(Boolean), map((meta) => meta.heading || meta.title));
-    }
-    /**
-     * @return {?}
-     */
-    get crumbs$() {
-        // initial version for the breadcrumb
-        // this must be done in such a way that
-        // other pages can contribute to a stream of crumbs
-        return of([{ label: 'Home', link: '/' }]);
-    }
-}
-BreadcrumbComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-breadcrumb',
-                template: "<nav>\n  <a *ngFor=\"let crumb of (crumbs$ | async)\" [routerLink]=\"crumb.link\">\n    {{ crumb.label }}\n  </a>\n</nav>\n<h1>{{ title$ | async }}</h1>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-/** @nocollapse */
-BreadcrumbComponent.ctorParameters = () => [
-    { type: CmsComponentData },
-    { type: PageMetaService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class BreadcrumbModule {
-}
-BreadcrumbModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    RouterModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            BreadcrumbComponent: { selector: 'cx-breadcrumb' },
-                        },
-                    }))),
-                    CmsPageTitleModule,
-                ],
-                declarations: [BreadcrumbComponent],
-                entryComponents: [BreadcrumbComponent],
-            },] }
-];
 
 /**
  * @fileoverview added by tsickle
@@ -11971,7 +11984,6 @@ StorefrontModule.decorators = [
 /** @type {?} */
 const cart = {
     cartDetails: {
-        shoppingCart: 'Shopping Cart',
         id: 'ID',
         proceedToCheckout: 'Proceed to Checkout',
     },
@@ -12471,6 +12483,6 @@ const translations = {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AddToCartComponent, AddToCartModule, AddedToCartDialogComponent, CartDetailsComponent, CartDetailsModule, CartItemComponent, OrderSummaryComponent, CartTotalsComponent, CartComponentModule, MiniCartComponent, MiniCartModule, BannerComponent, BannerModule, IconLoaderService, IconComponent, ICON_TYPES, IconConfig, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, LogoutGuard, LogoutModule, CmsComponentData, PageSlotModule, PageSlotComponent, PageComponentModule, ComponentWrapperDirective, defaultCmsContentConfig, SeoMetaService, initSeoService, SeoModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, CheckoutComponentModule, MultiStepCheckoutModule, ShippingAddressModule, OrderConfirmationModule, SuggestedAddressDialogComponent, AddressFormComponent, PaymentFormComponent, ReviewSubmitComponent, DeliveryModeComponent, MultiStepCheckoutComponent, OrderConfirmationComponent, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, CmsLibModule, FooterNavigationComponent, FooterNavigationModule, LinkComponent, LinkModule, NavigationComponent, NavigationModule, ParagraphComponent, CmsParagraphModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, TabParagraphContainerComponent, TabParagraphContainerModule, CmsRouteModule, CmsModule$1 as CmsModule, CmsPageGuard, PageLayoutModule, PageLayoutComponent, CmsMappingService, CmsRoutesService, GlobalMessageComponentModule, GlobalMessageComponent, OrderModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderHistoryComponent, PaymentMethodsComponent, OccModule, OutletModule, OutletService, OutletDirective, OutletRefModule, OutletRefDirective, ProductModule$1 as ProductModule, ProductDetailsModule, ProductListModule, ProductTabsModule, ProductSummaryComponent, ProductDetailsComponent, ProductImagesComponent, ProductListItemComponent, ProductGridItemComponent, ProductListComponent, ProductFacetNavigationComponent, ProductAttributesComponent, ProductReviewsComponent, ProductTabsComponent, ProductDetailOutlets, ProductTabsOutlets, pwaConfigurationFactory, pwaFactory, PwaModule, StoreFinderModule, StorefrontModule, SuffixRoutesModule, UiModule, UiFrameworkModule, ComponentsModule, FormComponentsModule, ItemCounterComponent, StarRatingComponent, GenericLinkComponent, MediaComponent, MediaModule, MediaService, PaginationAndSortingModule, SpinnerComponent, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, LayoutModule, MainModule, StorefrontComponent, UserComponentModule, LoginModule, LoginComponent, LoginFormModule, LoginFormComponent, RegisterComponent, translations, CartItemListComponent as ɵl, CartSharedModule as ɵa, CartTotalsModule as ɵm, defaultCartPageConfig as ɵp, BootstrapModule as ɵb, CheckoutDetailsService as ɵbb, DeliveryModeModule as ɵs, BillingAddressFormComponent as ɵw, BillingAddressFormModule as ɵv, PaymentFormModule as ɵu, PaymentMethodComponent as ɵx, PaymentMethodModule as ɵt, PlaceOrderComponent as ɵba, PlaceOrderModule as ɵz, ReviewSubmitModule as ɵy, AddressFormModule as ɵq, ShippingAddressComponent as ɵr, PromotionsComponent as ɵk, PromotionsModule as ɵj, guards$1 as ɵbc, OrderConfirmationPageGuard as ɵbd, AddressBookComponent as ɵbp, AddressBookComponentService as ɵbo, AddressBookModule as ɵbn, AddressCardComponent as ɵbq, NavigationUIComponent as ɵbl, NavigationComponentService as ɵbk, ProductCarouselService as ɵbm, addCmsRoute as ɵcn, guards as ɵbt, PageLayoutService as ɵn, CmsGuardsService as ɵbv, CmsI18nService as ɵbu, CloseAccountModule as ɵck, CloseAccountModalComponent as ɵcm, CloseAccountComponent as ɵcl, OrderDetailsModule as ɵby, OrderDetailsService as ɵbz, OrderHistoryModule as ɵbr, PaymentMethodsModule as ɵca, UpdateEmailFormComponent as ɵcc, UpdateEmailComponent as ɵcd, UpdateEmailModule as ɵcb, UpdatePasswordFormComponent as ɵcg, UpdatePasswordComponent as ɵcf, UpdatePasswordModule as ɵce, UpdateProfileFormComponent as ɵcj, UpdateProfileComponent as ɵci, UpdateProfileModule as ɵch, OutletStyleService as ɵo, StyleRefDirective as ɵdi, StyleRefModule as ɵdh, ProductViewComponent as ɵbs, ProductReviewsModule as ɵbw, provideConfigFromMetaTags as ɵdo, AddToHomeScreenBannerComponent as ɵbj, AddToHomeScreenBtnComponent as ɵbh, AddToHomeScreenComponent as ɵbi, PWAModuleConfig as ɵbe, defaultPWAModuleConfig as ɵbf, AddToHomeScreenService as ɵbg, AbstractStoreItemComponent as ɵcs, ScheduleComponent as ɵcx, StoreFinderGridComponent as ɵcq, StoreFinderHeaderComponent as ɵcy, StoreFinderListItemComponent as ɵcw, StoreFinderMapComponent as ɵcv, StoreFinderPaginationDetailsComponent as ɵda, StoreFinderListComponent as ɵcu, StoreFinderSearchResultComponent as ɵco, StoreFinderSearchComponent as ɵct, StoreFinderStoreDescriptionComponent as ɵcr, StoreFinderStoresCountComponent as ɵcp, StoreFinderComponent as ɵcz, suffixUrlMatcher as ɵdn, CardComponent as ɵe, CardModule as ɵd, GenericLinkModule as ɵi, PaginationComponent as ɵf, SortingComponent as ɵg, SpinnerModule as ɵh, OnlyNumberDirective as ɵc, HardcodedCheckoutComponent as ɵdm, CartNotEmptyGuard as ɵdl, GuardsModule as ɵdk, OrderConfirmationPageModule as ɵdj, CurrentProductService as ɵbx, ForgotPasswordComponent as ɵdg, ForgotPasswordModule as ɵdf, LoginComponentService as ɵdb, RegisterComponentModule as ɵdc, ResetPasswordFormComponent as ɵde, ResetPasswordModule as ɵdd, address as ɵdp, cart as ɵdq, checkout as ɵdr, closeAccount as ɵds, common as ɵdt, myAccount as ɵdu, payment as ɵdv, product as ɵdw, pwa as ɵdx, storeFinder as ɵdy, user as ɵdz };
+export { AddToCartComponent, AddToCartModule, AddedToCartDialogComponent, CartDetailsComponent, CartDetailsModule, CartItemComponent, OrderSummaryComponent, CartTotalsComponent, CartComponentModule, MiniCartComponent, MiniCartModule, BannerComponent, BannerModule, IconLoaderService, IconComponent, ICON_TYPES, IconConfig, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, BreadcrumbComponent, BreadcrumbModule, LogoutGuard, LogoutModule, CmsComponentData, PageSlotModule, PageSlotComponent, PageComponentModule, ComponentWrapperDirective, defaultCmsContentConfig, SeoMetaService, initSeoService, SeoModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, CheckoutComponentModule, MultiStepCheckoutModule, ShippingAddressModule, OrderConfirmationModule, SuggestedAddressDialogComponent, AddressFormComponent, PaymentFormComponent, ReviewSubmitComponent, DeliveryModeComponent, MultiStepCheckoutComponent, OrderConfirmationComponent, CategoryNavigationComponent, CategoryNavigationModule, CmsLibModule, FooterNavigationComponent, FooterNavigationModule, LinkComponent, LinkModule, NavigationComponent, NavigationModule, ParagraphComponent, CmsParagraphModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, TabParagraphContainerComponent, TabParagraphContainerModule, CmsRouteModule, CmsModule$1 as CmsModule, CmsPageGuard, PageLayoutModule, PageLayoutComponent, CmsMappingService, CmsRoutesService, GlobalMessageComponentModule, GlobalMessageComponent, OrderModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderHistoryComponent, PaymentMethodsComponent, OccModule, OutletModule, OutletService, OutletDirective, OutletRefModule, OutletRefDirective, ProductModule$1 as ProductModule, ProductDetailsModule, ProductListModule, ProductTabsModule, ProductSummaryComponent, ProductDetailsComponent, ProductImagesComponent, ProductListItemComponent, ProductGridItemComponent, ProductListComponent, ProductFacetNavigationComponent, ProductAttributesComponent, ProductReviewsComponent, ProductTabsComponent, ProductDetailOutlets, ProductTabsOutlets, pwaConfigurationFactory, pwaFactory, PwaModule, StoreFinderModule, StorefrontModule, SuffixRoutesModule, UiModule, UiFrameworkModule, ComponentsModule, FormComponentsModule, ItemCounterComponent, StarRatingComponent, GenericLinkComponent, MediaComponent, MediaModule, MediaService, PaginationAndSortingModule, SpinnerComponent, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, LayoutModule, MainModule, StorefrontComponent, UserComponentModule, LoginModule, LoginComponent, LoginFormModule, LoginFormComponent, RegisterComponent, translations, CartItemListComponent as ɵl, CartSharedModule as ɵa, CartTotalsModule as ɵm, defaultCartPageConfig as ɵp, BootstrapModule as ɵb, CheckoutDetailsService as ɵbb, DeliveryModeModule as ɵs, BillingAddressFormComponent as ɵw, BillingAddressFormModule as ɵv, PaymentFormModule as ɵu, PaymentMethodComponent as ɵx, PaymentMethodModule as ɵt, PlaceOrderComponent as ɵba, PlaceOrderModule as ɵz, ReviewSubmitModule as ɵy, AddressFormModule as ɵq, ShippingAddressComponent as ɵr, PromotionsComponent as ɵk, PromotionsModule as ɵj, guards$1 as ɵbc, OrderConfirmationPageGuard as ɵbd, AddressBookComponent as ɵbp, AddressBookComponentService as ɵbo, AddressBookModule as ɵbn, AddressCardComponent as ɵbq, NavigationUIComponent as ɵbl, NavigationComponentService as ɵbk, ProductCarouselService as ɵbm, addCmsRoute as ɵcn, guards as ɵbt, PageLayoutService as ɵn, CmsGuardsService as ɵbv, CmsI18nService as ɵbu, CloseAccountModule as ɵck, CloseAccountModalComponent as ɵcm, CloseAccountComponent as ɵcl, OrderDetailsModule as ɵby, OrderDetailsService as ɵbz, OrderHistoryModule as ɵbr, PaymentMethodsModule as ɵca, UpdateEmailFormComponent as ɵcc, UpdateEmailComponent as ɵcd, UpdateEmailModule as ɵcb, UpdatePasswordFormComponent as ɵcg, UpdatePasswordComponent as ɵcf, UpdatePasswordModule as ɵce, UpdateProfileFormComponent as ɵcj, UpdateProfileComponent as ɵci, UpdateProfileModule as ɵch, OutletStyleService as ɵo, StyleRefDirective as ɵdi, StyleRefModule as ɵdh, ProductViewComponent as ɵbs, ProductReviewsModule as ɵbw, provideConfigFromMetaTags as ɵdo, AddToHomeScreenBannerComponent as ɵbj, AddToHomeScreenBtnComponent as ɵbh, AddToHomeScreenComponent as ɵbi, PWAModuleConfig as ɵbe, defaultPWAModuleConfig as ɵbf, AddToHomeScreenService as ɵbg, AbstractStoreItemComponent as ɵcs, ScheduleComponent as ɵcx, StoreFinderGridComponent as ɵcq, StoreFinderHeaderComponent as ɵcy, StoreFinderListItemComponent as ɵcw, StoreFinderMapComponent as ɵcv, StoreFinderPaginationDetailsComponent as ɵda, StoreFinderListComponent as ɵcu, StoreFinderSearchResultComponent as ɵco, StoreFinderSearchComponent as ɵct, StoreFinderStoreDescriptionComponent as ɵcr, StoreFinderStoresCountComponent as ɵcp, StoreFinderComponent as ɵcz, suffixUrlMatcher as ɵdn, CardComponent as ɵe, CardModule as ɵd, GenericLinkModule as ɵi, PaginationComponent as ɵf, SortingComponent as ɵg, SpinnerModule as ɵh, OnlyNumberDirective as ɵc, HardcodedCheckoutComponent as ɵdm, CartNotEmptyGuard as ɵdl, GuardsModule as ɵdk, OrderConfirmationPageModule as ɵdj, CurrentProductService as ɵbx, ForgotPasswordComponent as ɵdg, ForgotPasswordModule as ɵdf, LoginComponentService as ɵdb, RegisterComponentModule as ɵdc, ResetPasswordFormComponent as ɵde, ResetPasswordModule as ɵdd, address as ɵdp, cart as ɵdq, checkout as ɵdr, closeAccount as ɵds, common as ɵdt, myAccount as ɵdu, payment as ɵdv, product as ɵdw, pwa as ɵdx, storeFinder as ɵdy, user as ɵdz };
 
 //# sourceMappingURL=spartacus-storefront.js.map

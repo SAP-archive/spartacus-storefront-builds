@@ -5507,7 +5507,7 @@
         CartDetailsComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-cart-details',
-                        template: "<ng-container *ngIf=\"(cart$ | async) as cart\">\n  <ng-container *ngIf=\"(entries$ | async) as entries\">\n    <div class=\"cart-details-wrapper\">\n      <h1>\n        {{ 'cartDetails.shoppingCart' | cxTranslate }} ({{\n          'cartDetails.id' | cxTranslate\n        }}\n        {{ cart?.code }})\n      </h1>\n      <div class=\"cx-total\">\n        {{\n          'cartItems.cartTotal'\n            | cxTranslate: { count: cart.deliveryItemsQuantity }\n        }}:\n        {{ cart.totalPrice?.formattedValue }}\n      </div>\n      <cx-promotions\n        [promotions]=\"getAllPromotionsForCart(cart)\"\n      ></cx-promotions>\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n        [cartIsLoading]=\"!(cartLoaded$ | async)\"\n      ></cx-cart-item-list>\n      <!-- NOT FOR MVP  <cx-cart-coupon></cx-cart-coupon> -->\n    </div>\n  </ng-container>\n</ng-container>\n",
+                        template: "<ng-container *ngIf=\"(cart$ | async) as cart\">\n  <ng-container *ngIf=\"(entries$ | async) as entries\">\n    <div class=\"cart-details-wrapper\">\n      <div class=\"cx-total\">\n        {{\n          'cartItems.cartTotal'\n            | cxTranslate: { count: cart.deliveryItemsQuantity }\n        }}:\n        {{ cart.totalPrice?.formattedValue }}\n      </div>\n      <cx-promotions\n        [promotions]=\"getAllPromotionsForCart(cart)\"\n      ></cx-promotions>\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n        [cartIsLoading]=\"!(cartLoaded$ | async)\"\n      ></cx-cart-item-list>\n      <!-- NOT FOR MVP  <cx-cart-coupon></cx-cart-coupon> -->\n    </div>\n  </ng-container>\n</ng-container>\n",
                         changeDetection: i0.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -6337,6 +6337,99 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var BreadcrumbComponent = /** @class */ (function () {
+        function BreadcrumbComponent(component, pageMetaService) {
+            this.component = component;
+            this.pageMetaService = pageMetaService;
+        }
+        /**
+         * @return {?}
+         */
+        BreadcrumbComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                this.setTitle();
+                this.setCrumbs();
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        BreadcrumbComponent.prototype.setTitle = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                this.title$ = this.pageMetaService.getMeta().pipe(operators.filter(Boolean), operators.map(function (meta) { return meta.heading || meta.title; }));
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        BreadcrumbComponent.prototype.setCrumbs = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                this.crumbs$ = this.pageMetaService
+                    .getMeta()
+                    .pipe(operators.map(function (meta) {
+                    return meta.breadcrumbs ? meta.breadcrumbs : [{ label: 'Home', link: '/' }];
+                }));
+            };
+        BreadcrumbComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-breadcrumb',
+                        template: "<nav>\n  <span *ngFor=\"let crumb of (crumbs$ | async)\">\n    <a [routerLink]=\"crumb.link\" [innerHTML]=\"crumb.label\"></a>\n  </span>\n</nav>\n<h1>{{ title$ | async }}</h1>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        BreadcrumbComponent.ctorParameters = function () {
+            return [
+                { type: CmsComponentData },
+                { type: i1$1.PageMetaService }
+            ];
+        };
+        return BreadcrumbComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var BreadcrumbModule = /** @class */ (function () {
+        function BreadcrumbModule() {
+        }
+        BreadcrumbModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i1$2.RouterModule,
+                            i1$1.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    BreadcrumbComponent: { selector: 'cx-breadcrumb' },
+                                },
+                            }))),
+                            i1$1.CmsPageTitleModule,
+                        ],
+                        declarations: [BreadcrumbComponent],
+                        entryComponents: [BreadcrumbComponent],
+                    },] }
+        ];
+        return BreadcrumbModule;
+    }());
 
     /**
      * @fileoverview added by tsickle
@@ -8630,79 +8723,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var BreadcrumbComponent = /** @class */ (function () {
-        function BreadcrumbComponent(component, pageMetaService) {
-            this.component = component;
-            this.pageMetaService = pageMetaService;
-        }
-        Object.defineProperty(BreadcrumbComponent.prototype, "title$", {
-            get: /**
-             * @return {?}
-             */ function () {
-                return this.pageMetaService.getMeta().pipe(operators.filter(Boolean), operators.map(function (meta) { return meta.heading || meta.title; }));
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(BreadcrumbComponent.prototype, "crumbs$", {
-            get: /**
-             * @return {?}
-             */ function () {
-                // initial version for the breadcrumb
-                // this must be done in such a way that
-                // other pages can contribute to a stream of crumbs
-                return rxjs.of([{ label: 'Home', link: '/' }]);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        BreadcrumbComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-breadcrumb',
-                        template: "<nav>\n  <a *ngFor=\"let crumb of (crumbs$ | async)\" [routerLink]=\"crumb.link\">\n    {{ crumb.label }}\n  </a>\n</nav>\n<h1>{{ title$ | async }}</h1>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        BreadcrumbComponent.ctorParameters = function () {
-            return [
-                { type: CmsComponentData },
-                { type: i1$1.PageMetaService }
-            ];
-        };
-        return BreadcrumbComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var BreadcrumbModule = /** @class */ (function () {
-        function BreadcrumbModule() {
-        }
-        BreadcrumbModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i1$2.RouterModule,
-                            i1$1.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    BreadcrumbComponent: { selector: 'cx-breadcrumb' },
-                                },
-                            }))),
-                            i1$1.CmsPageTitleModule,
-                        ],
-                        declarations: [BreadcrumbComponent],
-                        entryComponents: [BreadcrumbComponent],
-                    },] }
-        ];
-        return BreadcrumbModule;
-    }());
 
     /**
      * @fileoverview added by tsickle
@@ -14625,7 +14645,6 @@
     /** @type {?} */
     var cart = {
         cartDetails: {
-            shoppingCart: 'Shopping Cart',
             id: 'ID',
             proceedToCheckout: 'Proceed to Checkout',
         },
@@ -15148,6 +15167,8 @@
     exports.SiteContextSelectorComponent = SiteContextSelectorComponent;
     exports.SiteContextSelectorModule = SiteContextSelectorModule;
     exports.SiteContextType = SiteContextType;
+    exports.BreadcrumbComponent = BreadcrumbComponent;
+    exports.BreadcrumbModule = BreadcrumbModule;
     exports.LogoutGuard = LogoutGuard;
     exports.LogoutModule = LogoutModule;
     exports.CmsComponentData = CmsComponentData;
@@ -15175,8 +15196,6 @@
     exports.DeliveryModeComponent = DeliveryModeComponent;
     exports.MultiStepCheckoutComponent = MultiStepCheckoutComponent;
     exports.OrderConfirmationComponent = OrderConfirmationComponent;
-    exports.BreadcrumbComponent = BreadcrumbComponent;
-    exports.BreadcrumbModule = BreadcrumbModule;
     exports.CategoryNavigationComponent = CategoryNavigationComponent;
     exports.CategoryNavigationModule = CategoryNavigationModule;
     exports.CmsLibModule = CmsLibModule;

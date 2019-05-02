@@ -1,6 +1,5 @@
 export declare const cart: {
     cartDetails: {
-        shoppingCart: string;
         id: string;
         proceedToCheckout: string;
     };
