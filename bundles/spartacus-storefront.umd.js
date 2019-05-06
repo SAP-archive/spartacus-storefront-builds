@@ -1914,7 +1914,7 @@
         GlobalMessageComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-global-message',
-                        template: "<div *ngIf=\"(messages$ | async) as messages\">\n  <div\n    class=\"alert alert-success\"\n    *ngFor=\"\n      let confMsg of messages[messageType.MSG_TYPE_CONFIRMATION];\n      let i = index\n    \"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ confMsg }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_CONFIRMATION, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n  <div\n    class=\"alert alert-warning\"\n    *ngFor=\"let infoMsg of messages[messageType.MSG_TYPE_INFO]; let i = index\"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ infoMsg }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_INFO, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n  <div\n    class=\"alert alert-danger\"\n    *ngFor=\"let errorMsg of messages[messageType.MSG_TYPE_ERROR]; let i = index\"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ errorMsg }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_ERROR, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n</div>\n",
+                        template: "<div *ngIf=\"(messages$ | async) as messages\">\n  <div\n    class=\"alert alert-success\"\n    *ngFor=\"\n      let confMsg of messages[messageType.MSG_TYPE_CONFIRMATION];\n      let i = index\n    \"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ confMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_CONFIRMATION, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n  <div\n    class=\"alert alert-warning\"\n    *ngFor=\"let infoMsg of messages[messageType.MSG_TYPE_INFO]; let i = index\"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ infoMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_INFO, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n  <div\n    class=\"alert alert-danger\"\n    *ngFor=\"let errorMsg of messages[messageType.MSG_TYPE_ERROR]; let i = index\"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ errorMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_ERROR, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n</div>\n",
                         styles: [""]
                     }] }
         ];
@@ -1936,7 +1936,12 @@
         }
         GlobalMessageComponentModule.decorators = [
             { type: i0.NgModule, args: [{
-                        imports: [common.CommonModule, http.HttpClientModule, i1$1.GlobalMessageModule.forRoot()],
+                        imports: [
+                            common.CommonModule,
+                            http.HttpClientModule,
+                            i1$1.I18nModule,
+                            i1$1.GlobalMessageModule.forRoot(),
+                        ],
                         declarations: [GlobalMessageComponent],
                         exports: [GlobalMessageComponent],
                     },] }
@@ -3846,10 +3851,7 @@
                     .subscribe(function (globalMessageEntities) {
                     if (globalMessageEntities[i1$1.GlobalMessageType.MSG_TYPE_ERROR].some(function (message) { return message === 'This field is required.'; })) {
                         _this.globalMessageService.remove(i1$1.GlobalMessageType.MSG_TYPE_ERROR);
-                        _this.globalMessageService.add({
-                            type: i1$1.GlobalMessageType.MSG_TYPE_ERROR,
-                            text: 'Title is required.',
-                        });
+                        _this.globalMessageService.add('Title is required.', i1$1.GlobalMessageType.MSG_TYPE_ERROR);
                     }
                 });
             };
@@ -4014,10 +4016,7 @@
                         _this.enableAddToHomeScreen();
                     });
                     this.winRef.nativeWindow.addEventListener('appinstalled', function () {
-                        _this.globalMessageService.add({
-                            type: i1$1.GlobalMessageType.MSG_TYPE_CONFIRMATION,
-                            text: 'SAP Storefront was added to your home screen',
-                        });
+                        _this.globalMessageService.add('SAP Storefront was added to your home screen', i1$1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
                         _this.disableAddToHomeScreen();
                         _this.deferredEvent = null;
                     });
@@ -6674,16 +6673,10 @@
                     else if (results.decision === 'REJECT') {
                         // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
                         if (results.errors.errors.some(function (error) { return error.subject === 'titleCode'; })) {
-                            _this.globalMessageService.add({
-                                type: i1$1.GlobalMessageType.MSG_TYPE_ERROR,
-                                text: 'Title is required',
-                            });
+                            _this.globalMessageService.add('Title is required', i1$1.GlobalMessageType.MSG_TYPE_ERROR);
                         }
                         else {
-                            _this.globalMessageService.add({
-                                type: i1$1.GlobalMessageType.MSG_TYPE_ERROR,
-                                text: 'Invalid Address',
-                            });
+                            _this.globalMessageService.add('Invalid Address', i1$1.GlobalMessageType.MSG_TYPE_ERROR);
                         }
                         _this.checkoutService.clearAddressVerificationResults();
                     }
@@ -7162,10 +7155,7 @@
                         .translate('closeAccount.message.success')
                         .pipe(operators.first())
                         .subscribe(function (text) {
-                        _this.globalMessageService.add({
-                            text: text,
-                            type: i1$1.GlobalMessageType.MSG_TYPE_CONFIRMATION,
-                        });
+                        _this.globalMessageService.add(text, i1$1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
                     });
                     this.routingService.go({ route: 'home' });
                 }
@@ -8365,10 +8355,7 @@
          */
             function (success) {
                 if (success) {
-                    this.globalMessageService.add({
-                        text: "Success. Please sign in with " + this.newUid,
-                        type: i1$1.GlobalMessageType.MSG_TYPE_CONFIRMATION,
-                    });
+                    this.globalMessageService.add("Success. Please sign in with " + this.newUid, i1$1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
                     this.authService.logout();
                     this.routingService.go({ route: 'login' });
                 }
@@ -8593,10 +8580,7 @@
          */
             function (success) {
                 if (success) {
-                    this.globalMessageService.add({
-                        text: 'Password updated with success',
-                        type: i1$1.GlobalMessageType.MSG_TYPE_CONFIRMATION,
-                    });
+                    this.globalMessageService.add('Password updated with success', i1$1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
                     this.routingService.go({ route: 'home' });
                 }
             };
@@ -8811,10 +8795,7 @@
          */
             function (success) {
                 if (success) {
-                    this.globalMessageService.add({
-                        text: 'Personal details successfully updated',
-                        type: i1$1.GlobalMessageType.MSG_TYPE_CONFIRMATION,
-                    });
+                    this.globalMessageService.add('Personal details successfully updated', i1$1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
                     this.routingService.go({ route: 'home' });
                 }
             };
@@ -12663,10 +12644,7 @@
                         _this.next();
                     }
                     else if (results.decision === 'REJECT') {
-                        _this.globalMessageService.add({
-                            type: i1$1.GlobalMessageType.MSG_TYPE_ERROR,
-                            text: 'Invalid Address',
-                        });
+                        _this.globalMessageService.add('Invalid Address', i1$1.GlobalMessageType.MSG_TYPE_ERROR);
                         _this.checkoutService.clearAddressVerificationResults();
                     }
                     else if (results.decision === 'REVIEW') {
@@ -13009,10 +12987,7 @@
                     else {
                         Object.keys(paymentInfo).forEach(function (key) {
                             if (key.startsWith('InvalidField')) {
-                                _this.globalMessageService.add({
-                                    type: i1$1.GlobalMessageType.MSG_TYPE_ERROR,
-                                    text: 'InvalidField: ' + paymentInfo[key],
-                                });
+                                _this.globalMessageService.add('InvalidField: ' + paymentInfo[key], i1$1.GlobalMessageType.MSG_TYPE_ERROR);
                             }
                         });
                         _this.checkoutService.clearCheckoutStep(3);

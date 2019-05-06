@@ -1735,7 +1735,7 @@ var GlobalMessageComponent = /** @class */ (function () {
     GlobalMessageComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-global-message',
-                    template: "<div *ngIf=\"(messages$ | async) as messages\">\n  <div\n    class=\"alert alert-success\"\n    *ngFor=\"\n      let confMsg of messages[messageType.MSG_TYPE_CONFIRMATION];\n      let i = index\n    \"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ confMsg }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_CONFIRMATION, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n  <div\n    class=\"alert alert-warning\"\n    *ngFor=\"let infoMsg of messages[messageType.MSG_TYPE_INFO]; let i = index\"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ infoMsg }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_INFO, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n  <div\n    class=\"alert alert-danger\"\n    *ngFor=\"let errorMsg of messages[messageType.MSG_TYPE_ERROR]; let i = index\"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ errorMsg }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_ERROR, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n</div>\n",
+                    template: "<div *ngIf=\"(messages$ | async) as messages\">\n  <div\n    class=\"alert alert-success\"\n    *ngFor=\"\n      let confMsg of messages[messageType.MSG_TYPE_CONFIRMATION];\n      let i = index\n    \"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ confMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_CONFIRMATION, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n  <div\n    class=\"alert alert-warning\"\n    *ngFor=\"let infoMsg of messages[messageType.MSG_TYPE_INFO]; let i = index\"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ infoMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_INFO, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n  <div\n    class=\"alert alert-danger\"\n    *ngFor=\"let errorMsg of messages[messageType.MSG_TYPE_ERROR]; let i = index\"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ errorMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_ERROR, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n</div>\n",
                     styles: [""]
                 }] }
     ];
@@ -1755,7 +1755,12 @@ var GlobalMessageComponentModule = /** @class */ (function () {
     }
     GlobalMessageComponentModule.decorators = [
         { type: NgModule, args: [{
-                    imports: [CommonModule, HttpClientModule, GlobalMessageModule.forRoot()],
+                    imports: [
+                        CommonModule,
+                        HttpClientModule,
+                        I18nModule,
+                        GlobalMessageModule.forRoot(),
+                    ],
                     declarations: [GlobalMessageComponent],
                     exports: [GlobalMessageComponent],
                 },] }
@@ -3621,10 +3626,7 @@ var RegisterComponent = /** @class */ (function () {
             .subscribe(function (globalMessageEntities) {
             if (globalMessageEntities[GlobalMessageType.MSG_TYPE_ERROR].some(function (message) { return message === 'This field is required.'; })) {
                 _this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
-                _this.globalMessageService.add({
-                    type: GlobalMessageType.MSG_TYPE_ERROR,
-                    text: 'Title is required.',
-                });
+                _this.globalMessageService.add('Title is required.', GlobalMessageType.MSG_TYPE_ERROR);
             }
         });
     };
@@ -3788,10 +3790,7 @@ var AddToHomeScreenService = /** @class */ (function () {
                 _this.enableAddToHomeScreen();
             });
             this.winRef.nativeWindow.addEventListener('appinstalled', function () {
-                _this.globalMessageService.add({
-                    type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
-                    text: 'SAP Storefront was added to your home screen',
-                });
+                _this.globalMessageService.add('SAP Storefront was added to your home screen', GlobalMessageType.MSG_TYPE_CONFIRMATION);
                 _this.disableAddToHomeScreen();
                 _this.deferredEvent = null;
             });
@@ -6408,16 +6407,10 @@ var AddressFormComponent = /** @class */ (function () {
             else if (results.decision === 'REJECT') {
                 // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
                 if (results.errors.errors.some(function (error) { return error.subject === 'titleCode'; })) {
-                    _this.globalMessageService.add({
-                        type: GlobalMessageType.MSG_TYPE_ERROR,
-                        text: 'Title is required',
-                    });
+                    _this.globalMessageService.add('Title is required', GlobalMessageType.MSG_TYPE_ERROR);
                 }
                 else {
-                    _this.globalMessageService.add({
-                        type: GlobalMessageType.MSG_TYPE_ERROR,
-                        text: 'Invalid Address',
-                    });
+                    _this.globalMessageService.add('Invalid Address', GlobalMessageType.MSG_TYPE_ERROR);
                 }
                 _this.checkoutService.clearAddressVerificationResults();
             }
@@ -6892,10 +6885,7 @@ var CloseAccountModalComponent = /** @class */ (function () {
                 .translate('closeAccount.message.success')
                 .pipe(first())
                 .subscribe(function (text) {
-                _this.globalMessageService.add({
-                    text: text,
-                    type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
-                });
+                _this.globalMessageService.add(text, GlobalMessageType.MSG_TYPE_CONFIRMATION);
             });
             this.routingService.go({ route: 'home' });
         }
@@ -8072,10 +8062,7 @@ var UpdateEmailComponent = /** @class */ (function () {
      */
     function (success) {
         if (success) {
-            this.globalMessageService.add({
-                text: "Success. Please sign in with " + this.newUid,
-                type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
-            });
+            this.globalMessageService.add("Success. Please sign in with " + this.newUid, GlobalMessageType.MSG_TYPE_CONFIRMATION);
             this.authService.logout();
             this.routingService.go({ route: 'login' });
         }
@@ -8296,10 +8283,7 @@ var UpdatePasswordComponent = /** @class */ (function () {
      */
     function (success) {
         if (success) {
-            this.globalMessageService.add({
-                text: 'Password updated with success',
-                type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
-            });
+            this.globalMessageService.add('Password updated with success', GlobalMessageType.MSG_TYPE_CONFIRMATION);
             this.routingService.go({ route: 'home' });
         }
     };
@@ -8510,10 +8494,7 @@ var UpdateProfileComponent = /** @class */ (function () {
      */
     function (success) {
         if (success) {
-            this.globalMessageService.add({
-                text: 'Personal details successfully updated',
-                type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
-            });
+            this.globalMessageService.add('Personal details successfully updated', GlobalMessageType.MSG_TYPE_CONFIRMATION);
             this.routingService.go({ route: 'home' });
         }
     };
@@ -12299,10 +12280,7 @@ var PaymentFormComponent = /** @class */ (function () {
                 _this.next();
             }
             else if (results.decision === 'REJECT') {
-                _this.globalMessageService.add({
-                    type: GlobalMessageType.MSG_TYPE_ERROR,
-                    text: 'Invalid Address',
-                });
+                _this.globalMessageService.add('Invalid Address', GlobalMessageType.MSG_TYPE_ERROR);
                 _this.checkoutService.clearAddressVerificationResults();
             }
             else if (results.decision === 'REVIEW') {
@@ -12643,10 +12621,7 @@ var PaymentMethodComponent = /** @class */ (function () {
             else {
                 Object.keys(paymentInfo).forEach(function (key) {
                     if (key.startsWith('InvalidField')) {
-                        _this.globalMessageService.add({
-                            type: GlobalMessageType.MSG_TYPE_ERROR,
-                            text: 'InvalidField: ' + paymentInfo[key],
-                        });
+                        _this.globalMessageService.add('InvalidField: ' + paymentInfo[key], GlobalMessageType.MSG_TYPE_ERROR);
                     }
                 });
                 _this.checkoutService.clearCheckoutStep(3);

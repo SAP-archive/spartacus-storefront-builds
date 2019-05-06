@@ -7,7 +7,7 @@ import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscriptio
 import { Title, Meta } from '@angular/platform-browser';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
-import { CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlTranslationModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ConfigModule, CmsService, ProductService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, PageRobotsMeta, OccConfig, NotAuthGuard, StoreFinderCoreModule, GlobalMessageModule, ProductReviewService, ContextServiceMap, SiteContextModule, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID } from '@spartacus/core';
+import { CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlTranslationModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, CmsService, ProductService, ConfigModule, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, PageRobotsMeta, OccConfig, NotAuthGuard, StoreFinderCoreModule, GlobalMessageModule, ProductReviewService, ContextServiceMap, SiteContextModule, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { Component, ElementRef, ViewChild, Input, ChangeDetectionStrategy, NgModule, Directive, HostListener, Renderer2, EventEmitter, forwardRef, Output, Injectable, Injector, Optional, Inject, PLATFORM_ID, APP_INITIALIZER, ChangeDetectorRef, TemplateRef, ViewContainerRef, ViewEncapsulation, defineInjectable, inject, INJECTOR } from '@angular/core';
@@ -1428,7 +1428,7 @@ class GlobalMessageComponent {
 GlobalMessageComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-global-message',
-                template: "<div *ngIf=\"(messages$ | async) as messages\">\n  <div\n    class=\"alert alert-success\"\n    *ngFor=\"\n      let confMsg of messages[messageType.MSG_TYPE_CONFIRMATION];\n      let i = index\n    \"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ confMsg }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_CONFIRMATION, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n  <div\n    class=\"alert alert-warning\"\n    *ngFor=\"let infoMsg of messages[messageType.MSG_TYPE_INFO]; let i = index\"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ infoMsg }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_INFO, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n  <div\n    class=\"alert alert-danger\"\n    *ngFor=\"let errorMsg of messages[messageType.MSG_TYPE_ERROR]; let i = index\"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ errorMsg }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_ERROR, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n</div>\n",
+                template: "<div *ngIf=\"(messages$ | async) as messages\">\n  <div\n    class=\"alert alert-success\"\n    *ngFor=\"\n      let confMsg of messages[messageType.MSG_TYPE_CONFIRMATION];\n      let i = index\n    \"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ confMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_CONFIRMATION, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n  <div\n    class=\"alert alert-warning\"\n    *ngFor=\"let infoMsg of messages[messageType.MSG_TYPE_INFO]; let i = index\"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ infoMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_INFO, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n  <div\n    class=\"alert alert-danger\"\n    *ngFor=\"let errorMsg of messages[messageType.MSG_TYPE_ERROR]; let i = index\"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ errorMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_ERROR, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n</div>\n",
                 styles: [""]
             }] }
 ];
@@ -1445,7 +1445,12 @@ class GlobalMessageComponentModule {
 }
 GlobalMessageComponentModule.decorators = [
     { type: NgModule, args: [{
-                imports: [CommonModule, HttpClientModule, GlobalMessageModule.forRoot()],
+                imports: [
+                    CommonModule,
+                    HttpClientModule,
+                    I18nModule,
+                    GlobalMessageModule.forRoot(),
+                ],
                 declarations: [GlobalMessageComponent],
                 exports: [GlobalMessageComponent],
             },] }
@@ -2995,10 +3000,7 @@ class RegisterComponent {
             .subscribe((globalMessageEntities) => {
             if (globalMessageEntities[GlobalMessageType.MSG_TYPE_ERROR].some(message => message === 'This field is required.')) {
                 this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
-                this.globalMessageService.add({
-                    type: GlobalMessageType.MSG_TYPE_ERROR,
-                    text: 'Title is required.',
-                });
+                this.globalMessageService.add('Title is required.', GlobalMessageType.MSG_TYPE_ERROR);
             }
         });
     }
@@ -3140,10 +3142,7 @@ class AddToHomeScreenService {
                 this.enableAddToHomeScreen();
             });
             this.winRef.nativeWindow.addEventListener('appinstalled', () => {
-                this.globalMessageService.add({
-                    type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
-                    text: 'SAP Storefront was added to your home screen',
-                });
+                this.globalMessageService.add('SAP Storefront was added to your home screen', GlobalMessageType.MSG_TYPE_CONFIRMATION);
                 this.disableAddToHomeScreen();
                 this.deferredEvent = null;
             });
@@ -5346,16 +5345,10 @@ class AddressFormComponent {
             else if (results.decision === 'REJECT') {
                 // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
                 if (results.errors.errors.some(error => error.subject === 'titleCode')) {
-                    this.globalMessageService.add({
-                        type: GlobalMessageType.MSG_TYPE_ERROR,
-                        text: 'Title is required',
-                    });
+                    this.globalMessageService.add('Title is required', GlobalMessageType.MSG_TYPE_ERROR);
                 }
                 else {
-                    this.globalMessageService.add({
-                        type: GlobalMessageType.MSG_TYPE_ERROR,
-                        text: 'Invalid Address',
-                    });
+                    this.globalMessageService.add('Invalid Address', GlobalMessageType.MSG_TYPE_ERROR);
                 }
                 this.checkoutService.clearAddressVerificationResults();
             }
@@ -5750,10 +5743,7 @@ class CloseAccountModalComponent {
                 .translate('closeAccount.message.success')
                 .pipe(first())
                 .subscribe(text => {
-                this.globalMessageService.add({
-                    text,
-                    type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
-                });
+                this.globalMessageService.add(text, GlobalMessageType.MSG_TYPE_CONFIRMATION);
             });
             this.routingService.go({ route: 'home' });
         }
@@ -6759,10 +6749,7 @@ class UpdateEmailComponent {
      */
     onSuccess(success) {
         if (success) {
-            this.globalMessageService.add({
-                text: `Success. Please sign in with ${this.newUid}`,
-                type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
-            });
+            this.globalMessageService.add(`Success. Please sign in with ${this.newUid}`, GlobalMessageType.MSG_TYPE_CONFIRMATION);
             this.authService.logout();
             this.routingService.go({ route: 'login' });
         }
@@ -6954,10 +6941,7 @@ class UpdatePasswordComponent {
      */
     onSuccess(success) {
         if (success) {
-            this.globalMessageService.add({
-                text: 'Password updated with success',
-                type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
-            });
+            this.globalMessageService.add('Password updated with success', GlobalMessageType.MSG_TYPE_CONFIRMATION);
             this.routingService.go({ route: 'home' });
         }
     }
@@ -7139,10 +7123,7 @@ class UpdateProfileComponent {
      */
     onSuccess(success) {
         if (success) {
-            this.globalMessageService.add({
-                text: 'Personal details successfully updated',
-                type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
-            });
+            this.globalMessageService.add('Personal details successfully updated', GlobalMessageType.MSG_TYPE_CONFIRMATION);
             this.routingService.go({ route: 'home' });
         }
     }
@@ -10288,10 +10269,7 @@ class PaymentFormComponent {
                 this.next();
             }
             else if (results.decision === 'REJECT') {
-                this.globalMessageService.add({
-                    type: GlobalMessageType.MSG_TYPE_ERROR,
-                    text: 'Invalid Address',
-                });
+                this.globalMessageService.add('Invalid Address', GlobalMessageType.MSG_TYPE_ERROR);
                 this.checkoutService.clearAddressVerificationResults();
             }
             else if (results.decision === 'REVIEW') {
@@ -10568,10 +10546,7 @@ class PaymentMethodComponent {
             else {
                 Object.keys(paymentInfo).forEach(key => {
                     if (key.startsWith('InvalidField')) {
-                        this.globalMessageService.add({
-                            type: GlobalMessageType.MSG_TYPE_ERROR,
-                            text: 'InvalidField: ' + paymentInfo[key],
-                        });
+                        this.globalMessageService.add('InvalidField: ' + paymentInfo[key], GlobalMessageType.MSG_TYPE_ERROR);
                     }
                 });
                 this.checkoutService.clearCheckoutStep(3);
