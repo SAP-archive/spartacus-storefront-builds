@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, ComponentRef, Injector, OnDestroy, OnInit, Renderer2, ViewContainerRef } from '@angular/core';
-import { CmsConfig, CmsService, DynamicAttributeService, ComponentMapperService, ContentSlotComponentData } from '@spartacus/core';
+import { CmsConfig, CmsService, ComponentMapperService, ContentSlotComponentData, DynamicAttributeService } from '@spartacus/core';
 export declare class ComponentWrapperDirective implements OnInit, OnDestroy {
     private vcr;
     private componentMapper;

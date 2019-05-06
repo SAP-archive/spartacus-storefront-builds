@@ -1,7 +1,7 @@
 import { OnInit } from '@angular/core';
+import { Address, CartService, CheckoutService, DeliveryMode, PaymentDetails, UICart, UIOrderEntry, UserService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { CheckoutService, Address, CartService, UserService, UIOrderEntry, UICart, DeliveryMode, PaymentDetails } from '@spartacus/core';
-import { Card } from '../../../../ui/components/card/card.component';
+import { Card } from '../../../../../shared/components/card/card.component';
 export declare class ReviewSubmitComponent implements OnInit {
     protected checkoutService: CheckoutService;
     protected userService: UserService;

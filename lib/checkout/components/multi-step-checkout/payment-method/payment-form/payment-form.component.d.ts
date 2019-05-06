@@ -1,9 +1,9 @@
-import { OnInit, EventEmitter, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CheckoutService, CardType, Address, Country, UserService, GlobalMessageService, AddressValidation } from '@spartacus/core';
+import { EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Address, AddressValidation, CardType, CheckoutService, Country, GlobalMessageService, UserService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { Card } from '../../../../../ui/components/card/card.component';
+import { Card } from '../../../../../../shared/components/card/card.component';
 declare type monthType = {
     id: number;
     name: string;

@@ -1,17 +1,16 @@
 import { __awaiter } from 'tslib';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule, ɵangular_packages_service_worker_service_worker_b } from '@angular/service-worker';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { FormBuilder, FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal, NgbTabsetModule, NgbAccordionModule, NgbTabsetConfig, NgbAccordionConfig, NgbRatingModule, NgbRatingConfig, NgbDropdownModule, NgbTypeaheadModule, NgbCollapseModule, NgbModalModule, NgbPaginationModule, NgbPaginationConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { fromEvent, of, concat, from, isObservable, Subscription, BehaviorSubject, combineLatest, merge, Subject } from 'rxjs';
-import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, endWith, first, skipWhile, switchMap, withLatestFrom, take, shareReplay, delay } from 'rxjs/operators';
-import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
+import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscription, combineLatest, merge, Subject } from 'rxjs';
 import { Title, Meta } from '@angular/platform-browser';
-import { CartService, I18nModule, ServerConfig, WindowRef, CmsService, DynamicAttributeService, CmsConfig, ComponentMapperService, CxApiService, PageMetaService, PageRobotsMeta, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, UserService, CheckoutModule, UrlTranslationModule, ConfigModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ProductService, UserModule, StoreDataService, StoreFinderService, GoogleMapRendererService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, Config, ProductReviewService, defaultCmsModuleConfig, CmsModule, StripHtmlModule, ProductModule, ProductSearchService, StoreFinderCoreModule, PageType, GlobalMessageModule, OccUserService, OccMiscsService, OccOrderService, OccConfig, TranslatePipe, NotAuthGuard, ContextServiceMap, SiteContextModule, CmsPageTitleModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID } from '@spartacus/core';
-import { Component, ElementRef, ViewChild, Input, ChangeDetectionStrategy, NgModule, Output, EventEmitter, forwardRef, Renderer2, Directive, HostListener, Injectable, Optional, Injector, Inject, APP_INITIALIZER, PLATFORM_ID, TemplateRef, ViewContainerRef, ChangeDetectorRef, ViewEncapsulation, defineInjectable, inject, INJECTOR } from '@angular/core';
-import { RouterModule, Router, ActivatedRoute, NavigationStart } from '@angular/router';
+import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
+import { CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlTranslationModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ConfigModule, CmsService, ProductService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, PageRobotsMeta, OccConfig, NotAuthGuard, StoreFinderCoreModule, GlobalMessageModule, ProductReviewService, ContextServiceMap, SiteContextModule, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID } from '@spartacus/core';
+import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
+import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
+import { Component, ElementRef, ViewChild, Input, ChangeDetectionStrategy, NgModule, Directive, HostListener, Renderer2, EventEmitter, forwardRef, Output, Injectable, Injector, Optional, Inject, PLATFORM_ID, APP_INITIALIZER, ChangeDetectorRef, TemplateRef, ViewContainerRef, ViewEncapsulation, defineInjectable, inject, INJECTOR } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -194,167 +193,6 @@ AddToCartComponent.propDecorators = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-// TODO: Improve a11y with better text appropriate to usage (example: loading cart spinner)
-class SpinnerComponent {
-    constructor() { }
-}
-SpinnerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-spinner',
-                template: "<div class=\"loader\">{{ 'spinner.loading' | cxTranslate }}</div>\n"
-            }] }
-];
-/** @nocollapse */
-SpinnerComponent.ctorParameters = () => [];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class SpinnerModule {
-}
-SpinnerModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [CommonModule, I18nModule],
-                declarations: [SpinnerComponent],
-                exports: [SpinnerComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class PromotionsComponent {
-    constructor() { }
-}
-PromotionsComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-promotions',
-                template: "<div class=\"cx-promotions\" *ngIf=\"promotions\">\n  <strong *ngFor=\"let promotion of promotions\">\n    {{ promotion.description }}\n  </strong>\n</div>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-/** @nocollapse */
-PromotionsComponent.ctorParameters = () => [];
-PromotionsComponent.propDecorators = {
-    promotions: [{ type: Input }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class PromotionsModule {
-}
-PromotionsModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [CommonModule],
-                declarations: [PromotionsComponent],
-                exports: [PromotionsComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class CardComponent {
-    constructor() {
-        this.deleteCard = new EventEmitter();
-        this.setDefaultCard = new EventEmitter();
-        this.sendCard = new EventEmitter();
-        this.editCard = new EventEmitter();
-        this.cancelCard = new EventEmitter();
-        this.border = false;
-        this.editMode = false;
-        this.isDefault = false;
-        this.fitToContainer = false;
-    }
-    // ACTIONS
-    /**
-     * @return {?}
-     */
-    setEditMode() {
-        this.editMode = true;
-    }
-    /**
-     * @return {?}
-     */
-    cancelEdit() {
-        this.editMode = false;
-        this.cancelCard.emit(5);
-    }
-    /**
-     * @return {?}
-     */
-    delete() {
-        this.deleteCard.emit(1);
-    }
-    /**
-     * @return {?}
-     */
-    setDefault() {
-        this.isDefault = true;
-        this.setDefaultCard.emit(2);
-    }
-    /**
-     * @return {?}
-     */
-    send() {
-        this.sendCard.emit(3);
-    }
-    /**
-     * @return {?}
-     */
-    edit() {
-        this.editCard.emit(4);
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() { }
-}
-CardComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-card',
-                template: "<div\n  *ngIf=\"content\"\n  class=\"cx-card\"\n  [class.cx-card-border]=\"border\"\n  [class.cx-card-fit-to-container]=\"fitToContainer\"\n>\n  <!-- Card Header -->\n  <div *ngIf=\"content.header && !editMode\" class=\"card-header\">\n    {{ content.header }}\n  </div>\n  <!-- Card Body -->\n  <div class=\"card-body cx-card-body\" [class.cx-card-delete]=\"editMode\">\n    <!-- Edit message -->\n    <div *ngIf=\"editMode\" class=\"cx-card-delete-msg\">\n      {{ content.deleteMsg }}\n    </div>\n    <!-- Card title -->\n    <h4 *ngIf=\"content.title\" class=\"cx-card-title\">\n      {{ content.title }}\n    </h4>\n    <!-- Card Content -->\n    <div class=\"cx-card-container\">\n      <!-- Card Label -->\n      <div class=\"cx-card-label-container\">\n        <div *ngIf=\"content.textBold\" class=\"cx-card-label-bold\">\n          {{ content.textBold }}\n        </div>\n        <div *ngFor=\"let line of content.text\">\n          <div class=\"cx-card-label\">{{ line }}</div>\n        </div>\n      </div>\n      <!-- Image -->\n      <div *ngIf=\"content.img\" class=\"cx-card-img-container\">\n        <img src=\"{{ content.img }}\" alt=\"\" />\n      </div>\n    </div>\n    <!-- Edit Mode Actions -->\n    <div *ngIf=\"editMode\" class=\"row cx-card-body-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-primary\" (click)=\"delete()\">\n          {{ 'common.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <!-- Actions -->\n    <div *ngIf=\"content.actions && !editMode\" class=\"cx-card-actions\">\n      <div *ngFor=\"let action of content.actions\">\n        <div [ngSwitch]=\"action.event\">\n          <a\n            *ngSwitchCase=\"'delete'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"delete()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'default'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"setDefault()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'send'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"send()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'edit'\"\n            class=\"card-link btn-link\"\n            (click)=\"edit()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchDefault\n            href=\"{{ action.link }}\"\n            class=\"card-link btn-link\"\n            >{{ action.name }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
-                styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-card-border{border-width:var(--cx-border-width,1px);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light))}.cx-card-container{display:var(--cx-display,flex)}.cx-card-label-container{flex-grow:var(--cx-flex-grow,2)}.cx-card-fit-to-container{width:var(--cx-width,100%);height:var(--cx-height,100%);display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column)}.cx-card-body{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column);justify-content:var(--cx-justify-content,space-between)}.cx-card-delete{background-color:var(--cx-background-color,var(--cx-g-color-background))}.cx-card-body-delete{padding:var(--cx-padding,1rem 0 0 0)}.cx-card-delete-msg{color:var(--cx-color,var(--cx-g-color-danger));padding:var(--cx-padding,0 0 1.25rem 0)}.cx-card-actions{display:var(--cx-display,flex);justify-content:var(--cx-justify-content,flex-end);padding:var(--cx-padding,1.25rem 0 0 0)}.cx-card-link{padding:var(--cx-padding,0 0 0 1rem)}"]
-            }] }
-];
-/** @nocollapse */
-CardComponent.ctorParameters = () => [];
-CardComponent.propDecorators = {
-    deleteCard: [{ type: Output }],
-    setDefaultCard: [{ type: Output }],
-    sendCard: [{ type: Output }],
-    editCard: [{ type: Output }],
-    cancelCard: [{ type: Output }],
-    border: [{ type: Input }],
-    editMode: [{ type: Input }],
-    isDefault: [{ type: Input }],
-    content: [{ type: Input }],
-    fitToContainer: [{ type: Input }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class CardModule {
-}
-CardModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [CommonModule, I18nModule],
-                declarations: [CardComponent],
-                exports: [CardComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class BootstrapModule {
 }
 BootstrapModule.decorators = [
@@ -392,71 +230,154 @@ BootstrapModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class StarRatingComponent {
-    constructor() {
-        this.rating = 1;
-        this.disabled = false;
-        this.steps = 1;
-        this.onChange = (_rating) => { };
-        this.onTouched = () => { };
+class OnlyNumberDirective {
+    /**
+     * Class constructor
+     * @param {?} hostElement
+     * @param {?} renderer
+     */
+    constructor(hostElement, renderer) {
+        this.hostElement = hostElement;
+        this.renderer = renderer;
+        this.previousValue = '';
+        this.integerUnsigned = '^[0-9]*$';
     }
     /**
+     * Event handler for host's change event
      * @return {?}
      */
-    get value() {
-        return this.rating;
+    onChange() {
+        this.validateValue(this.hostElement.nativeElement.value);
     }
     /**
-     * @param {?} rating
+     * Event handler for host's change event
      * @return {?}
      */
-    setRating(rating) {
-        if (!this.disabled) {
-            this.writeValue(rating);
+    onInput() {
+        this.validateValue(this.hostElement.nativeElement.value);
+    }
+    /**
+     * Event handler for host's paste event
+     * @param {?} e
+     * @return {?}
+     */
+    onPaste(e) {
+        /** @type {?} */
+        const value = e.clipboardData.getData('text/plain');
+        this.validateValue(value);
+        e.preventDefault();
+    }
+    /**
+     * Event handler for host's keyup event
+     * @param {?} e
+     * @return {?}
+     */
+    onKeyUp(e) {
+        /** @type {?} */
+        const value = e.target['value'];
+        this.validateValue(value);
+    }
+    /**
+     * Event handler for host's keydown event
+     * @param {?} e
+     * @return {?}
+     */
+    onKeyDown(e) {
+        /** @type {?} */
+        const originalValue = e.target['value'];
+        /** @type {?} */
+        const key = this.getName(e);
+        /** @type {?} */
+        const controlOrCommand = e.ctrlKey === true || e.metaKey === true;
+        // allowed keys apart from numeric characters
+        /** @type {?} */
+        const allowedKeys = [
+            'Backspace',
+            'ArrowLeft',
+            'ArrowRight',
+            'Escape',
+            'Tab',
+        ];
+        // allow some non-numeric characters
+        if (allowedKeys.indexOf(key) !== -1 ||
+            // Allow: Ctrl+A and Command+A
+            (key === 'a' && controlOrCommand) ||
+            // Allow: Ctrl+C and Command+C
+            (key === 'c' && controlOrCommand) ||
+            // Allow: Ctrl+V and Command+V
+            (key === 'v' && controlOrCommand) ||
+            // Allow: Ctrl+X and Command+X
+            (key === 'x' && controlOrCommand)) {
+            // let it happen, don't do anything
+            return;
+        }
+        // save value before keydown event
+        this.previousValue = originalValue;
+        // allow number characters only
+        /** @type {?} */
+        const isNumber = new RegExp(this.integerUnsigned).test(key);
+        if (isNumber) {
+            return;
+        }
+        else {
+            e.preventDefault();
         }
     }
-    // ControlvalueAccessor interface
     /**
-     * @param {?} rating
+     * Test whether value is a valid number or not
+     * @param {?} value
      * @return {?}
      */
-    writeValue(rating) {
-        this.rating = rating;
-        this.onChange(this.rating);
+    validateValue(value) {
+        value = value.replace(/[^0-9]+/g, '');
+        this.renderer.setProperty(this.hostElement.nativeElement, 'value', value);
     }
     /**
-     * @param {?} fn
+     * Get key's name
+     * @param {?} e
      * @return {?}
      */
-    registerOnChange(fn) {
-        this.onChange = fn;
-    }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    registerOnTouched(fn) {
-        this.onTouched = fn;
+    getName(e) {
+        if (e.key) {
+            return e.key;
+        }
+        else {
+            // for old browsers
+            if (e.keyCode && String.fromCharCode) {
+                switch (e.keyCode) {
+                    case 8:
+                        return 'Backspace';
+                    case 9:
+                        return 'Tab';
+                    case 27:
+                        return 'Escape';
+                    case 37:
+                        return 'ArrowLeft';
+                    case 39:
+                        return 'ArrowRight';
+                    default:
+                        return String.fromCharCode(e.keyCode);
+                }
+            }
+        }
     }
 }
-StarRatingComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-star-rating',
-                template: "<div class=\"cx-star-rating\" tabindex=\"0\">\n  <ng-template #template let-fill=\"fill\">\n    <span class=\"star\" [class.full]=\"fill === 100\">\n      <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span> &#9733;\n    </span>\n  </ng-template>\n  <ngb-rating\n    [(rate)]=\"rating\"\n    (rateChange)=\"onTouched(); setRating($event)\"\n    [starTemplate]=\"template\"\n    [readonly]=\"disabled\"\n    max=\"5\"\n  ></ngb-rating>\n</div>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                providers: [
-                    {
-                        provide: NG_VALUE_ACCESSOR,
-                        multi: true,
-                        useExisting: forwardRef(() => StarRatingComponent),
-                    },
-                ]
-            }] }
+OnlyNumberDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[cxOnlyNumber]',
+            },] }
 ];
-StarRatingComponent.propDecorators = {
-    rating: [{ type: Input }],
-    disabled: [{ type: Input }],
-    steps: [{ type: Input }]
+/** @nocollapse */
+OnlyNumberDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 }
+];
+OnlyNumberDirective.propDecorators = {
+    onChange: [{ type: HostListener, args: ['change',] }],
+    onInput: [{ type: HostListener, args: ['input',] }],
+    onPaste: [{ type: HostListener, args: ['paste', ['$event'],] }],
+    onKeyUp: [{ type: HostListener, args: ['keyup', ['$event'],] }],
+    onKeyDown: [{ type: HostListener, args: ['keydown', ['$event'],] }]
 };
 
 /**
@@ -667,171 +588,13 @@ ItemCounterComponent.propDecorators = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class OnlyNumberDirective {
-    /**
-     * Class constructor
-     * @param {?} hostElement
-     * @param {?} renderer
-     */
-    constructor(hostElement, renderer) {
-        this.hostElement = hostElement;
-        this.renderer = renderer;
-        this.previousValue = '';
-        this.integerUnsigned = '^[0-9]*$';
-    }
-    /**
-     * Event handler for host's change event
-     * @return {?}
-     */
-    onChange() {
-        this.validateValue(this.hostElement.nativeElement.value);
-    }
-    /**
-     * Event handler for host's change event
-     * @return {?}
-     */
-    onInput() {
-        this.validateValue(this.hostElement.nativeElement.value);
-    }
-    /**
-     * Event handler for host's paste event
-     * @param {?} e
-     * @return {?}
-     */
-    onPaste(e) {
-        /** @type {?} */
-        const value = e.clipboardData.getData('text/plain');
-        this.validateValue(value);
-        e.preventDefault();
-    }
-    /**
-     * Event handler for host's keyup event
-     * @param {?} e
-     * @return {?}
-     */
-    onKeyUp(e) {
-        /** @type {?} */
-        const value = e.target['value'];
-        this.validateValue(value);
-    }
-    /**
-     * Event handler for host's keydown event
-     * @param {?} e
-     * @return {?}
-     */
-    onKeyDown(e) {
-        /** @type {?} */
-        const originalValue = e.target['value'];
-        /** @type {?} */
-        const key = this.getName(e);
-        /** @type {?} */
-        const controlOrCommand = e.ctrlKey === true || e.metaKey === true;
-        // allowed keys apart from numeric characters
-        /** @type {?} */
-        const allowedKeys = [
-            'Backspace',
-            'ArrowLeft',
-            'ArrowRight',
-            'Escape',
-            'Tab',
-        ];
-        // allow some non-numeric characters
-        if (allowedKeys.indexOf(key) !== -1 ||
-            // Allow: Ctrl+A and Command+A
-            (key === 'a' && controlOrCommand) ||
-            // Allow: Ctrl+C and Command+C
-            (key === 'c' && controlOrCommand) ||
-            // Allow: Ctrl+V and Command+V
-            (key === 'v' && controlOrCommand) ||
-            // Allow: Ctrl+X and Command+X
-            (key === 'x' && controlOrCommand)) {
-            // let it happen, don't do anything
-            return;
-        }
-        // save value before keydown event
-        this.previousValue = originalValue;
-        // allow number characters only
-        /** @type {?} */
-        const isNumber = new RegExp(this.integerUnsigned).test(key);
-        if (isNumber) {
-            return;
-        }
-        else {
-            e.preventDefault();
-        }
-    }
-    /**
-     * Test whether value is a valid number or not
-     * @param {?} value
-     * @return {?}
-     */
-    validateValue(value) {
-        value = value.replace(/[^0-9]+/g, '');
-        this.renderer.setProperty(this.hostElement.nativeElement, 'value', value);
-    }
-    /**
-     * Get key's name
-     * @param {?} e
-     * @return {?}
-     */
-    getName(e) {
-        if (e.key) {
-            return e.key;
-        }
-        else {
-            // for old browsers
-            if (e.keyCode && String.fromCharCode) {
-                switch (e.keyCode) {
-                    case 8:
-                        return 'Backspace';
-                    case 9:
-                        return 'Tab';
-                    case 27:
-                        return 'Escape';
-                    case 37:
-                        return 'ArrowLeft';
-                    case 39:
-                        return 'ArrowRight';
-                    default:
-                        return String.fromCharCode(e.keyCode);
-                }
-            }
-        }
-    }
-}
-OnlyNumberDirective.decorators = [
-    { type: Directive, args: [{
-                selector: '[cxOnlyNumber]',
-            },] }
-];
-/** @nocollapse */
-OnlyNumberDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: Renderer2 }
-];
-OnlyNumberDirective.propDecorators = {
-    onChange: [{ type: HostListener, args: ['change',] }],
-    onInput: [{ type: HostListener, args: ['input',] }],
-    onPaste: [{ type: HostListener, args: ['paste', ['$event'],] }],
-    onKeyUp: [{ type: HostListener, args: ['keyup', ['$event'],] }],
-    onKeyDown: [{ type: HostListener, args: ['keydown', ['$event'],] }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class FormComponentsModule {
 }
 FormComponentsModule.decorators = [
     { type: NgModule, args: [{
                 imports: [CommonModule, FormsModule, ReactiveFormsModule, BootstrapModule],
-                declarations: [
-                    StarRatingComponent,
-                    ItemCounterComponent,
-                    OnlyNumberDirective,
-                ],
-                exports: [StarRatingComponent, ItemCounterComponent],
+                declarations: [ItemCounterComponent, OnlyNumberDirective],
+                exports: [ItemCounterComponent],
             },] }
 ];
 
@@ -890,13 +653,75 @@ GenericLinkComponent.propDecorators = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class GenericLinkModule {
+class PaginationComponent {
+    constructor() {
+        this.viewPageEvent = new EventEmitter();
+    }
+    /**
+     * @param {?} page
+     * @return {?}
+     */
+    pageChange(page) {
+        this.viewPageEvent.emit(page - 1);
+    }
 }
-GenericLinkModule.decorators = [
+PaginationComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-pagination',
+                template: "<ngb-pagination\n  [collectionSize]=\"pagination.totalResults\"\n  [page]=\"pagination.currentPage + 1\"\n  (pageChange)=\"pageChange($event)\"\n  [maxSize]=\"3\"\n  [pageSize]=\"pagination.pageSize\"\n>\n</ngb-pagination>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+PaginationComponent.propDecorators = {
+    pagination: [{ type: Input }],
+    viewPageEvent: [{ type: Output }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class SortingComponent {
+    constructor() {
+        this.sortListEvent = new EventEmitter();
+    }
+    /**
+     * @param {?} sortCode
+     * @return {?}
+     */
+    sortList(sortCode) {
+        this.sortListEvent.emit(sortCode);
+    }
+}
+SortingComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-sorting',
+                template: "<ng-select\n  [searchable]=\"false\"\n  [clearable]=\"false\"\n  placeholder=\"{{ placeholder }}\"\n  (change)=\"sortList($event)\"\n  [ngModel]=\"selectedOption\"\n>\n  <ng-option *ngFor=\"let sort of sortOptions\" [value]=\"sort.code\">{{\n    sort.name ? sort.name : sortLabels ? sortLabels[sort.code] : ''\n  }}</ng-option>\n</ng-select>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                styles: [""]
+            }] }
+];
+/** @nocollapse */
+SortingComponent.ctorParameters = () => [];
+SortingComponent.propDecorators = {
+    sortOptions: [{ type: Input }],
+    selectedOption: [{ type: Input }],
+    placeholder: [{ type: Input }],
+    sortLabels: [{ type: Input }],
+    sortListEvent: [{ type: Output }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ListNavigationModule {
+}
+ListNavigationModule.decorators = [
     { type: NgModule, args: [{
-                imports: [CommonModule, RouterModule],
-                declarations: [GenericLinkComponent],
-                exports: [GenericLinkComponent],
+                imports: [CommonModule, NgSelectModule, FormsModule, BootstrapModule],
+                declarations: [PaginationComponent, SortingComponent],
+                exports: [PaginationComponent, SortingComponent],
             },] }
 ];
 
@@ -904,10 +729,6 @@ GenericLinkModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/** @type {?} */
-const missingProductImgSrc = 
-// tslint:disable-next-line:max-line-length
-'data:image/jpg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABVAAD/4QOIaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjUtYzAyMSA3OS4xNTQ5MTEsIDIwMTMvMTAvMjktMTE6NDc6MTYgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6NjEwOTUyZjYtMmRmOS00ZmIxLWJmZDItODBlZDVjZDY3YjhjIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkU2RkNERDA2RDQyQjExRTVBRUE3REEyNEFBNDQxNDBDIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkU2RkNERDA1RDQyQjExRTVBRUE3REEyNEFBNDQxNDBDIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpiZjI5Zjc3Zi1hZWM5LWY0NDgtOTM0MC1iZGJkYjk2MDk3OTIiIHN0UmVmOmRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDo0MDcyNjk0NS0zNjQ0LTExNzgtODI2OC1mMDQzMTA0ZTU5MWIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7/7gAOQWRvYmUAZMAAAAAB/9sAhAACAQEBAQECAQECAwIBAgMDAgICAgMDAwMDAwMDBQMEBAQEAwUFBQYGBgUFBwcICAcHCgoKCgoMDAwMDAwMDAwMAQICAgQDBAcFBQcKCAcICgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAEsASwDAREAAhEBAxEB/8QArQABAAIDAQEBAQAAAAAAAAAAAAcIBAUGAwIBCQEBAAMBAQAAAAAAAAAAAAAAAAIDBAEFEAABAwMCAwQCCgwKBwgDAAABAAIDBAUGEQchEggxQVETYRRxgeEiMlKTFVYXkUKS0iNzs3S0FjY3obHRYnJTVJRVGPCCojNjJHXBo9M0ZCW1OLKkSBEBAAICAQQCAgMBAQAAAAAAAAECEQMxIVESEzIEQSLwYRRDcf/aAAwDAQACEQMRAD8A/v4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIPx72saXvIDANSTwAA7yg1D9wsBjeY5L5b2vadC01lMCD6RzrvjKPlHd+fWJt/8A47b/AO+033674z2PKO59Ym3/APjtv/vtN9+njPY8o7n1ibf/AOO2/wDvtN9+njPY8o7n1i7ff47b/wC+0336eM9jyju2Ntu1rvNP65aKmKqpCdBLTSMlZr/SYSFyYw7E5ZC46ICAgICAgICAgICAgICAgICAgICAgICAgICAgICDUZ1mlm29xWsy2/O0oKRnNyN055Hk8rI2A/bOcQAu1rmcI2tiMqebob455upcJJLxVPp7ESfItdM9zaeNmvAOA053eLne1oOC201xVivsmzjlNAQEBAQbHGstybDri27YvXTUNwaQfMp3lvNpx0cOxw9BBC5MRPLsWmOFsOnTfmPd6zy2y9NbDmtA1rqlkY0Z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';
 
 /**
  * @fileoverview added by tsickle
@@ -1004,13 +825,16 @@ class BreakpointService {
     }
 }
 BreakpointService.decorators = [
-    { type: Injectable }
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
 ];
 /** @nocollapse */
 BreakpointService.ctorParameters = () => [
     { type: WindowRef },
     { type: LayoutConfig }
 ];
+/** @nocollapse */ BreakpointService.ngInjectableDef = defineInjectable({ factory: function BreakpointService_Factory() { return new BreakpointService(inject(WindowRef), inject(LayoutConfig)); }, token: BreakpointService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
@@ -1115,32 +939,140 @@ const defaultLayoutConfig = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class OutletStyleService {
-    constructor() {
-        this.templateRefs = {};
+class HamburgerMenuService {
+    /**
+     * @param {?} router
+     */
+    constructor(router) {
+        this.isExpanded = new BehaviorSubject(false);
+        router.events
+            .pipe(filter(event => event instanceof NavigationStart))
+            .subscribe(() => {
+            this.toggle(true);
+        });
     }
     /**
-     * @param {?} outlet
-     * @param {?} elem
+     * toggles the expand state of the hamburger menu
+     * @param {?=} forceCollapse
      * @return {?}
      */
-    add(outlet, elem) {
-        this.templateRefs[outlet] = elem;
-    }
-    /**
-     * @param {?} outlet
-     * @return {?}
-     */
-    get(outlet) {
-        return this.templateRefs[outlet];
+    toggle(forceCollapse) {
+        if (forceCollapse) {
+            this.isExpanded.next(false);
+        }
+        else {
+            this.isExpanded.next(!this.isExpanded.value);
+        }
     }
 }
-OutletStyleService.decorators = [
+HamburgerMenuService.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
             },] }
 ];
-/** @nocollapse */ OutletStyleService.ngInjectableDef = defineInjectable({ factory: function OutletStyleService_Factory() { return new OutletStyleService(); }, token: OutletStyleService, providedIn: "root" });
+/** @nocollapse */
+HamburgerMenuService.ctorParameters = () => [
+    { type: Router }
+];
+/** @nocollapse */ HamburgerMenuService.ngInjectableDef = defineInjectable({ factory: function HamburgerMenuService_Factory() { return new HamburgerMenuService(inject(Router)); }, token: HamburgerMenuService, providedIn: "root" });
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class HamburgerMenuComponent {
+    /**
+     * @param {?} hamburgerMenuService
+     */
+    constructor(hamburgerMenuService) {
+        this.hamburgerMenuService = hamburgerMenuService;
+    }
+    /**
+     * @return {?}
+     */
+    toggle() {
+        this.hamburgerMenuService.toggle();
+    }
+    /**
+     * @return {?}
+     */
+    get isExpanded() {
+        return this.hamburgerMenuService.isExpanded;
+    }
+}
+HamburgerMenuComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-hamburger-menu',
+                template: "<button\n  class=\"cx-hamburger\"\n  type=\"button\"\n  (click)=\"toggle()\"\n  [class.is-active]=\"isExpanded | async\"\n  [attr.aria-expanded]=\"isExpanded | async\"\n  aria-label=\"Menu\"\n  aria-controls=\"header-account-container, header-categories-container, header-locale-container\"\n>\n  <span class=\"hamburger-box\">\n    <span class=\"hamburger-inner\"></span>\n  </span>\n</button>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+HamburgerMenuComponent.ctorParameters = () => [
+    { type: HamburgerMenuService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class HamburgerMenuModule {
+}
+HamburgerMenuModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            HamburgerMenuComponent: { selector: 'cx-hamburger-menu' },
+                        },
+                    }))),
+                ],
+                declarations: [HamburgerMenuComponent],
+                entryComponents: [HamburgerMenuComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class SkipLinkComponent {
+}
+SkipLinkComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-skip-link',
+                template: "<a class=\"sr-only sr-only-focusable\" href=\"#header-categories-container\">\n  {{ 'header.skipToNavigation' | cxTranslate }}\n</a>\n<a class=\"sr-only sr-only-focusable\" href=\"#mini-cart\">{{\n  'header.skipToShoppingCart' | cxTranslate\n}}</a>\n<a class=\"sr-only sr-only-focusable\" href=\"#main-content\">{{\n  'header.skipToMainContent' | cxTranslate\n}}</a>\n<a class=\"sr-only sr-only-focusable\" href=\"#footer\">{{\n  'header.skipToFooter' | cxTranslate\n}}</a>\n",
+                styles: [":host{position:absolute;top:0;left:0}"]
+            }] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class SkipLinkModule {
+}
+SkipLinkModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            SkipLinkComponent: { selector: 'cx-skip-link' },
+                        },
+                    }))),
+                    I18nModule,
+                ],
+                declarations: [SkipLinkComponent],
+                entryComponents: [SkipLinkComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -1208,6 +1140,86 @@ OutletService.decorators = [
             },] }
 ];
 /** @nocollapse */ OutletService.ngInjectableDef = defineInjectable({ factory: function OutletService_Factory() { return new OutletService(); }, token: OutletService, providedIn: "root" });
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class OutletRefDirective {
+    /**
+     * @param {?} tpl
+     * @param {?} outletService
+     */
+    constructor(tpl, outletService) {
+        this.tpl = tpl;
+        this.outletService = outletService;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.outletService.add(this.cxOutletRef, this.tpl, this.cxOutletPos);
+    }
+}
+OutletRefDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[cxOutletRef]',
+            },] }
+];
+/** @nocollapse */
+OutletRefDirective.ctorParameters = () => [
+    { type: TemplateRef },
+    { type: OutletService }
+];
+OutletRefDirective.propDecorators = {
+    cxOutletRef: [{ type: Input }],
+    cxOutletPos: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class OutletRefModule {
+}
+OutletRefModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule],
+                declarations: [OutletRefDirective],
+                exports: [OutletRefDirective],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class OutletStyleService {
+    constructor() {
+        this.templateRefs = {};
+    }
+    /**
+     * @param {?} outlet
+     * @param {?} elem
+     * @return {?}
+     */
+    add(outlet, elem) {
+        this.templateRefs[outlet] = elem;
+    }
+    /**
+     * @param {?} outlet
+     * @return {?}
+     */
+    get(outlet) {
+        return this.templateRefs[outlet];
+    }
+}
+OutletStyleService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */ OutletStyleService.ngInjectableDef = defineInjectable({ factory: function OutletStyleService_Factory() { return new OutletStyleService(); }, token: OutletStyleService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
@@ -1337,60 +1349,6 @@ OutletModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class OutletRefDirective {
-    /**
-     * @param {?} tpl
-     * @param {?} outletService
-     */
-    constructor(tpl, outletService) {
-        this.tpl = tpl;
-        this.outletService = outletService;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.outletService.add(this.cxOutletRef, this.tpl, this.cxOutletPos);
-    }
-}
-OutletRefDirective.decorators = [
-    { type: Directive, args: [{
-                selector: '[cxOutletRef]',
-            },] }
-];
-/** @nocollapse */
-OutletRefDirective.ctorParameters = () => [
-    { type: TemplateRef },
-    { type: OutletService }
-];
-OutletRefDirective.propDecorators = {
-    cxOutletRef: [{ type: Input }],
-    cxOutletPos: [{ type: Input }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class OutletRefModule {
-}
-OutletRefModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [CommonModule],
-                declarations: [OutletRefDirective],
-                exports: [OutletRefDirective],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class StyleRefDirective {
     /**
      * @param {?} element
@@ -1439,593 +1397,175 @@ StyleRefModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/**
- * @abstract
- * @template T
- */
-class CmsComponentData {
-}
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class PageSlotComponent {
+class GlobalMessageComponent {
     /**
-     * @param {?} cmsService
-     * @param {?} dynamicAttributeService
-     * @param {?} renderer
-     * @param {?} hostElement
+     * @param {?} globalMessageService
      */
-    constructor(cmsService, dynamicAttributeService, renderer, hostElement) {
-        this.cmsService = cmsService;
-        this.dynamicAttributeService = dynamicAttributeService;
-        this.renderer = renderer;
-        this.hostElement = hostElement;
+    constructor(globalMessageService) {
+        this.globalMessageService = globalMessageService;
+        this.messageType = GlobalMessageType;
     }
     /**
      * @return {?}
      */
     ngOnInit() {
-        // add the position name as a css class so that
-        // layout can be applied to it, using the position based class.
-        this.renderer.addClass(this.hostElement.nativeElement, this.position);
-        this.components$ = this.slot$.pipe(map(slot => (slot && slot.components ? slot.components : [])), distinctUntilChanged((a, b) => a.length === b.length &&
-            !a.find((el, index) => el.uid !== b[index].uid)), tap(components => this.addComponentClass(components)));
+        this.messages$ = this.globalMessageService.get();
     }
     /**
-     * returns an observable with `ContentSlotData` for the current position
+     * @param {?} type
+     * @param {?} index
      * @return {?}
      */
-    get slot$() {
-        return this.cmsService
-            .getContentSlot(this.position)
-            .pipe(tap(slot => this.addSmartEditSlotClass(slot)));
-    }
-    // add a class to indicate whether the class is empty or not
-    /**
-     * @private
-     * @param {?} components
-     * @return {?}
-     */
-    addComponentClass(components) {
-        if (components && components.length > 0) {
-            this.renderer.addClass(this.hostElement.nativeElement, 'has-components');
-        }
-    }
-    /**
-     * @private
-     * @param {?} slot
-     * @return {?}
-     */
-    addSmartEditSlotClass(slot) {
-        if (this.cmsService.isLaunchInSmartEdit()) {
-            this.addSmartEditContract(slot);
-        }
-    }
-    /**
-     * @private
-     * @param {?} slot
-     * @return {?}
-     */
-    addSmartEditContract(slot) {
-        this.dynamicAttributeService.addDynamicAttributes(slot.properties, this.hostElement.nativeElement, this.renderer);
+    clear(type, index) {
+        this.globalMessageService.remove(type, index);
     }
 }
-PageSlotComponent.decorators = [
+GlobalMessageComponent.decorators = [
     { type: Component, args: [{
-                selector: 'cx-page-slot',
-                template: "<ng-container *cxOutlet=\"position\">\n  <ng-container *ngFor=\"let component of (components$ | async)\">\n    <ng-container\n      *cxOutlet=\"component.flexType\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-container>\n  </ng-container>\n</ng-container>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
+                selector: 'cx-global-message',
+                template: "<div *ngIf=\"(messages$ | async) as messages\">\n  <div\n    class=\"alert alert-success\"\n    *ngFor=\"\n      let confMsg of messages[messageType.MSG_TYPE_CONFIRMATION];\n      let i = index\n    \"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ confMsg }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_CONFIRMATION, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n  <div\n    class=\"alert alert-warning\"\n    *ngFor=\"let infoMsg of messages[messageType.MSG_TYPE_INFO]; let i = index\"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ infoMsg }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_INFO, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n  <div\n    class=\"alert alert-danger\"\n    *ngFor=\"let errorMsg of messages[messageType.MSG_TYPE_ERROR]; let i = index\"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ errorMsg }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_ERROR, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n</div>\n",
+                styles: [""]
             }] }
 ];
 /** @nocollapse */
-PageSlotComponent.ctorParameters = () => [
-    { type: CmsService },
-    { type: DynamicAttributeService },
-    { type: Renderer2 },
-    { type: ElementRef }
+GlobalMessageComponent.ctorParameters = () => [
+    { type: GlobalMessageService }
 ];
-PageSlotComponent.propDecorators = {
-    position: [{ type: Input }]
-};
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class ComponentWrapperDirective {
+class GlobalMessageComponentModule {
+}
+GlobalMessageComponentModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule, HttpClientModule, GlobalMessageModule.forRoot()],
+                declarations: [GlobalMessageComponent],
+                exports: [GlobalMessageComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CustomFormValidators {
     /**
-     * @param {?} vcr
-     * @param {?} componentMapper
-     * @param {?} injector
-     * @param {?} cmsService
-     * @param {?} dynamicAttributeService
-     * @param {?} renderer
-     * @param {?} cd
-     * @param {?} config
-     * @param {?} platformId
+     * @param {?} control
+     * @return {?}
      */
-    constructor(vcr, componentMapper, injector, cmsService, dynamicAttributeService, renderer, cd, config, platformId) {
-        this.vcr = vcr;
-        this.componentMapper = componentMapper;
-        this.injector = injector;
-        this.cmsService = cmsService;
-        this.dynamicAttributeService = dynamicAttributeService;
-        this.renderer = renderer;
-        this.cd = cd;
-        this.config = config;
-        this.platformId = platformId;
+    static emailDomainValidator(control) {
+        /** @type {?} */
+        const email = (/** @type {?} */ (control.value));
+        return email.match('[.][a-zA-Z]+$') ? null : { InvalidEmail: true };
+    }
+    /**
+     * @param {?} control
+     * @return {?}
+     */
+    static emailValidator(control) {
+        /** @type {?} */
+        const email = (/** @type {?} */ (control.value));
+        return email.match(
+        // Email Standard RFC 5322:
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ // tslint:disable-line
+        )
+            ? null
+            : { InvalidEmail: true };
+    }
+    /**
+     * @param {?} control
+     * @return {?}
+     */
+    static passwordValidator(control) {
+        /** @type {?} */
+        const password = (/** @type {?} */ (control.value));
+        return password.match('^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^*()_+{};:.,]).{6,}$')
+            ? null
+            : { InvalidPassword: true };
+    }
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class LoginFormComponent {
+    /**
+     * @param {?} auth
+     * @param {?} routing
+     * @param {?} globalMessageService
+     * @param {?} fb
+     */
+    constructor(auth, routing, globalMessageService, fb) {
+        this.auth = auth;
+        this.routing = routing;
+        this.globalMessageService = globalMessageService;
+        this.fb = fb;
     }
     /**
      * @return {?}
      */
     ngOnInit() {
-        if (!this.shouldRenderComponent()) {
-            return;
-        }
-        if (this.componentMapper.isWebComponent(this.cxComponentWrapper.flexType)) {
-            this.launchWebComponent();
-        }
-        else {
-            this.launchComponent();
-        }
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    shouldRenderComponent() {
-        /** @type {?} */
-        const isSSR = isPlatformServer(this.platformId);
-        /** @type {?} */
-        const isComponentDisabledInSSR = (this.config.cmsComponents[this.cxComponentWrapper.flexType] || {}).disableSSR;
-        return !(isSSR && isComponentDisabledInSSR);
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    launchComponent() {
-        /** @type {?} */
-        const factory = this.componentMapper.getComponentFactoryByCode(this.cxComponentWrapper.flexType);
-        if (factory) {
-            this.cmpRef = this.vcr.createComponent(factory, undefined, this.getInjectorForComponent());
-            this.cd.detectChanges();
-            if (this.cmsService.isLaunchInSmartEdit()) {
-                this.addSmartEditContract(this.cmpRef.location.nativeElement);
+        this.sub = this.auth
+            .getUserToken()
+            .pipe(switchMap(data => {
+            if (data && data.access_token) {
+                this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
+                return this.routing.getRedirectUrl().pipe(take(1));
             }
-        }
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    launchWebComponent() {
-        return __awaiter(this, void 0, void 0, function* () {
-            /** @type {?} */
-            const elementName = yield this.componentMapper.initWebComponent(this.cxComponentWrapper.flexType, this.renderer);
-            if (elementName) {
-                this.webElement = this.renderer.createElement(elementName);
-                this.webElement.cxApi = Object.assign({}, this.injector.get(CxApiService), { CmsComponentData: this.getCmsDataForComponent() });
-                this.renderer.appendChild(this.vcr.element.nativeElement.parentElement, this.webElement);
+            return of();
+        }))
+            .subscribe(url => {
+            if (url) {
+                // If forced to login due to AuthGuard, then redirect to intended destination
+                this.routing.goByUrl(url);
+                this.routing.clearRedirectUrl();
             }
+            else {
+                // User manual login
+                this.routing.back();
+            }
+        });
+        this.form = this.fb.group({
+            userId: ['', [Validators.required, CustomFormValidators.emailValidator]],
+            password: ['', Validators.required],
         });
     }
     /**
-     * @private
-     * @template T
      * @return {?}
      */
-    getCmsDataForComponent() {
-        return {
-            uid: this.cxComponentWrapper.uid,
-            data$: this.cmsService.getComponentData(this.cxComponentWrapper.uid),
-        };
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    getInjectorForComponent() {
-        /** @type {?} */
-        const configProviders = (this.config.cmsComponents[this.cxComponentWrapper.flexType] || {})
-            .providers || [];
-        return Injector.create({
-            providers: [
-                {
-                    provide: CmsComponentData,
-                    useValue: this.getCmsDataForComponent(),
-                },
-                ...configProviders,
-            ],
-            parent: this.injector,
-        });
-    }
-    /**
-     * @private
-     * @param {?} element
-     * @return {?}
-     */
-    addSmartEditContract(element) {
-        this.dynamicAttributeService.addDynamicAttributes(this.cxComponentWrapper.properties, element, this.renderer);
+    login() {
+        this.auth.authorize(this.form.controls.userId.value, this.form.controls.password.value);
     }
     /**
      * @return {?}
      */
     ngOnDestroy() {
-        if (this.cmpRef) {
-            this.cmpRef.destroy();
-        }
-        if (this.webElement) {
-            this.renderer.removeChild(this.vcr.element.nativeElement.parentElement, this.webElement);
+        if (this.sub) {
+            this.sub.unsubscribe();
         }
     }
 }
-ComponentWrapperDirective.decorators = [
-    { type: Directive, args: [{
-                selector: '[cxComponentWrapper]',
-            },] }
+LoginFormComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-login-form',
+                template: "<form (submit)=\"login()\" [formGroup]=\"form\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.controls['userId'].invalid &&\n          (form.controls['userId'].touched || form.controls['userId'].dirty)\n        \"\n        formControlName=\"userId\"\n        placeholder=\"{{ 'loginForm.emailAddress.placeholder' | cxTranslate }}\"\n      />\n    </label>\n    <div\n      class=\"invalid-feedback\"\n      *ngIf=\"\n        form.controls['userId'].invalid &&\n        (form.controls['userId'].touched || form.controls['userId'].dirty)\n      \"\n    >\n      <span>{{ 'loginForm.wrongEmailFormat' | cxTranslate }}</span>\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.password.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"password\"\n        class=\"form-control\"\n        placeholder=\"{{ 'loginForm.password.placeholder' | cxTranslate }}\"\n        formControlName=\"password\"\n      />\n    </label>\n  </div>\n  <p>\n    <a\n      [routerLink]=\"{ route: 'forgotPassword' } | cxTranslateUrl\"\n      aria-controls=\"reset-password\"\n      class=\"btn-link\"\n      >{{ 'loginForm.forgotPassword' | cxTranslate }}</a\n    >\n  </p>\n\n  <button\n    type=\"submit\"\n    class=\"btn btn-block btn-primary\"\n    [disabled]=\"form.invalid\"\n  >\n    {{ 'loginForm.signIn' | cxTranslate }}\n  </button>\n</form>\n\n<div class=\"register\">\n  <h3 class=\"cx-section__title cx-section__title--alt\">\n    {{ 'loginForm.dontHaveAccount' | cxTranslate }}\n  </h3>\n  <a\n    [routerLink]=\"{ route: 'register' } | cxTranslateUrl\"\n    class=\"btn btn-block btn-secondary\"\n    >{{ 'loginForm.register' | cxTranslate }}</a\n  >\n</div>\n"
+            }] }
 ];
 /** @nocollapse */
-ComponentWrapperDirective.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentMapperService },
-    { type: Injector },
-    { type: CmsService },
-    { type: DynamicAttributeService },
-    { type: Renderer2 },
-    { type: ChangeDetectorRef },
-    { type: CmsConfig },
-    { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
+LoginFormComponent.ctorParameters = () => [
+    { type: AuthService },
+    { type: RoutingService },
+    { type: GlobalMessageService },
+    { type: FormBuilder }
 ];
-ComponentWrapperDirective.propDecorators = {
-    cxComponentWrapper: [{ type: Input }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class PageComponentModule {
-}
-PageComponentModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [CommonModule],
-                providers: [],
-                declarations: [ComponentWrapperDirective],
-                exports: [ComponentWrapperDirective],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class PageSlotModule {
-}
-PageSlotModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [CommonModule, OutletModule, PageComponentModule],
-                providers: [],
-                declarations: [PageSlotComponent],
-                exports: [PageSlotComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-const cartComponents = {
-    emptyCartText: {
-        flexType: 'CMSParagraphComponent',
-        typeCode: 'CMSParagraphComponent',
-        content: `
-      <h2>Your shopping cart is empty</h2>
-      <p>Suggestions</p>
-      <ul>
-          <li>
-          Browse our products by selecting a category above
-          </li>
-      </ul>`,
-    },
-};
-/** @type {?} */
-const defaultCartPageConfig = {
-    ignoreBackend: false,
-    pageId: 'cartPage',
-    type: 'ContentPage',
-    template: 'CartPageTemplate',
-    title: 'Cart',
-    slots: {
-        EmptyCartMiddleContent: {
-            componentIds: ['emptyCartText'],
-        },
-    },
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-const headerComponents = {
-    SkipLinkComponent: {
-        typeCode: 'SkipLinkComponent',
-        flexType: 'SkipLinkComponent',
-        uid: 'SkipLinkComponent',
-    },
-    HamburgerMenuComponent: {
-        typeCode: 'HamburgerMenuComponent',
-        flexType: 'HamburgerMenuComponent',
-    },
-    LanguageComponent: {
-        typeCode: 'CMSSiteContextComponent',
-        flexType: 'CMSSiteContextComponent',
-        context: 'LANGUAGE',
-    },
-    CurrencyComponent: {
-        typeCode: 'CMSSiteContextComponent',
-        flexType: 'CMSSiteContextComponent',
-        context: 'CURRENCY',
-    },
-    LanguageCurrencyComponent: {
-        typeCode: 'LanguageCurrencyComponent',
-        flexType: 'LanguageCurrencyComponent',
-    },
-    StoreFinder: {
-        typeCode: 'CMSLinkComponent',
-        flexType: 'CMSLinkComponent',
-        linkName: 'Find a Store',
-        url: '/store-finder',
-    },
-    BreadcrumbComponent: {
-        typeCode: 'BreadcrumbComponent',
-        flexType: 'BreadcrumbComponent',
-    },
-    Logo: {
-        typeCode: 'SimpleBannerComponent',
-        flexType: 'SimpleBannerComponent',
-        uid: 'logo',
-        media: {
-            mime: 'svg/image/svg+xml',
-            url: 'https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg',
-        },
-        urlLink: '/',
-    },
-    SearchBox: {
-        typeCode: 'SearchBoxComponent',
-        flexType: 'SearchBoxComponent',
-        uid: 'SearchBoxComponent',
-    },
-    MiniCart: {
-        typeCode: 'MiniCartComponent',
-        flexType: 'MiniCartComponent',
-        uid: 'MiniCartComponent',
-    },
-    LoginComponent: {
-        typeCode: 'LoginComponent',
-        flexType: 'LoginComponent',
-        uid: 'LoginComponent',
-    },
-    CategoryNavigationComponent: {
-        typeCode: 'CategoryNavigationComponent',
-        flexType: 'CategoryNavigationComponent',
-        uid: 'ElectronicsCategoryNavComponent',
-        navigationNode: {
-            uid: 'ElectronicsCategoryNavNode',
-            children: [
-                {
-                    uid: 'CameraLensesNavNode',
-                    title: 'Electronic catalog',
-                    entries: [
-                        {
-                            itemId: 'CameraLensesCategoryLink',
-                            itemSuperType: 'AbstractCMSComponent',
-                            itemType: 'CMSLinkComponent',
-                        },
-                    ],
-                },
-            ],
-        },
-    },
-};
-/** @type {?} */
-const defaultPageHeaderConfig = {
-    PreHeader: {
-        componentIds: ['SkipLinkComponent', 'HamburgerMenuComponent'],
-    },
-    SiteContext: {
-        componentIds: ['LanguageComponent', 'CurrencyComponent'],
-    },
-    SiteLinks: {
-        componentIds: ['StoreFinder'],
-    },
-    SiteLogo: {
-        componentIds: ['Logo'],
-    },
-    SearchBox: {
-        componentIds: ['SearchBox'],
-    },
-    MiniCart: {
-        componentIds: ['MiniCart'],
-    },
-    SiteLogin: {
-        componentIds: ['LoginComponent'],
-    },
-    NavigationBar: {
-        componentIds: ['CategoryNavigationComponent'],
-    },
-    BottomHeaderSlot: {
-        componentIds: ['BreadcrumbComponent'],
-    },
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @return {?}
- */
-function defaultCmsContentConfig() {
-    return {
-        cmsStructure: {
-            components: Object.assign({}, headerComponents, cartComponents),
-            slots: Object.assign({}, defaultPageHeaderConfig),
-            pages: [defaultCartPageConfig],
-        },
-    };
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class SeoMetaService {
-    /**
-     * @param {?} ngTitle
-     * @param {?} ngMeta
-     * @param {?} pageMetaService
-     */
-    constructor(ngTitle, ngMeta, pageMetaService) {
-        this.ngTitle = ngTitle;
-        this.ngMeta = ngMeta;
-        this.pageMetaService = pageMetaService;
-    }
-    /**
-     * @return {?}
-     */
-    init() {
-        this.pageMetaService
-            .getMeta()
-            .pipe(filter(Boolean))
-            .subscribe((meta) => (this.meta = meta));
-    }
-    /**
-     * @protected
-     * @param {?} meta
-     * @return {?}
-     */
-    set meta(meta) {
-        this.title = meta.title;
-        this.description = meta.description;
-        this.image = meta.image;
-        this.robots = meta.robots || [PageRobotsMeta.INDEX, PageRobotsMeta.FOLLOW];
-    }
-    /**
-     * @protected
-     * @param {?} title
-     * @return {?}
-     */
-    set title(title) {
-        this.ngTitle.setTitle(title || '');
-    }
-    /**
-     * @protected
-     * @param {?} value
-     * @return {?}
-     */
-    set description(value) {
-        this.addTag({ name: 'description', content: value });
-    }
-    /**
-     * @protected
-     * @param {?} imageUrl
-     * @return {?}
-     */
-    set image(imageUrl) {
-        if (imageUrl) {
-            this.addTag({ name: 'og:image', content: imageUrl });
-        }
-    }
-    /**
-     * @protected
-     * @param {?} value
-     * @return {?}
-     */
-    set robots(value) {
-        if (value) {
-            this.addTag({ name: 'robots', content: value.join(', ') });
-        }
-    }
-    /**
-     * @protected
-     * @param {?} meta
-     * @return {?}
-     */
-    addTag(meta) {
-        if (meta.content) {
-            this.ngMeta.updateTag(meta);
-        }
-    }
-}
-SeoMetaService.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root',
-            },] }
-];
-/** @nocollapse */
-SeoMetaService.ctorParameters = () => [
-    { type: Title },
-    { type: Meta },
-    { type: PageMetaService }
-];
-/** @nocollapse */ SeoMetaService.ngInjectableDef = defineInjectable({ factory: function SeoMetaService_Factory() { return new SeoMetaService(inject(Title), inject(Meta), inject(PageMetaService)); }, token: SeoMetaService, providedIn: "root" });
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @param {?} injector
- * @return {?}
- */
-function initSeoService(injector) {
-    /** @type {?} */
-    const result = () => {
-        /** @type {?} */
-        const service = injector.get(SeoMetaService);
-        service.init();
-    };
-    return result;
-}
-class SeoModule {
-}
-SeoModule.decorators = [
-    { type: NgModule, args: [{
-                providers: [
-                    {
-                        provide: APP_INITIALIZER,
-                        useFactory: initSeoService,
-                        deps: [Injector],
-                        multi: true,
-                    },
-                ],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 
 /**
  * @fileoverview added by tsickle
@@ -2698,67 +2238,31 @@ CmsModule$1.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class PageLayoutModule {
+class LoginFormModule {
 }
-PageLayoutModule.decorators = [
+LoginFormModule.decorators = [
     { type: NgModule, args: [{
-                imports: [CommonModule, CmsModule$1, PageSlotModule],
-                declarations: [PageLayoutComponent],
-                providers: [PageLayoutService],
-                exports: [PageLayoutComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class GlobalMessageComponent {
-    /**
-     * @param {?} globalMessageService
-     */
-    constructor(globalMessageService) {
-        this.globalMessageService = globalMessageService;
-        this.messageType = GlobalMessageType;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.messages$ = this.globalMessageService.get();
-    }
-    /**
-     * @param {?} type
-     * @param {?} index
-     * @return {?}
-     */
-    clear(type, index) {
-        this.globalMessageService.remove(type, index);
-    }
-}
-GlobalMessageComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-global-message',
-                template: "<div *ngIf=\"(messages$ | async) as messages\">\n  <div\n    class=\"alert alert-success\"\n    *ngFor=\"\n      let confMsg of messages[messageType.MSG_TYPE_CONFIRMATION];\n      let i = index\n    \"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ confMsg }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_CONFIRMATION, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n  <div\n    class=\"alert alert-warning\"\n    *ngFor=\"let infoMsg of messages[messageType.MSG_TYPE_INFO]; let i = index\"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ infoMsg }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_INFO, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n  <div\n    class=\"alert alert-danger\"\n    *ngFor=\"let errorMsg of messages[messageType.MSG_TYPE_ERROR]; let i = index\"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ errorMsg }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_ERROR, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n</div>\n",
-                styles: [""]
-            }] }
-];
-/** @nocollapse */
-GlobalMessageComponent.ctorParameters = () => [
-    { type: GlobalMessageService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class GlobalMessageComponentModule {
-}
-GlobalMessageComponentModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [CommonModule, HttpClientModule, GlobalMessageModule.forRoot()],
-                declarations: [GlobalMessageComponent],
-                exports: [GlobalMessageComponent],
+                imports: [
+                    CommonModule,
+                    FormsModule,
+                    ReactiveFormsModule,
+                    RouterModule,
+                    CmsModule$1,
+                    BootstrapModule,
+                    UserModule,
+                    UrlTranslationModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            ReturningCustomerLoginComponent: {
+                                selector: 'cx-login-form',
+                            },
+                        },
+                    }))),
+                    I18nModule,
+                ],
+                declarations: [LoginFormComponent],
+                exports: [LoginFormComponent],
+                entryComponents: [LoginFormComponent],
             },] }
 ];
 
@@ -2840,6 +2344,284 @@ LoginComponent.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * @abstract
+ * @template T
+ */
+class CmsComponentData {
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ComponentWrapperDirective {
+    /**
+     * @param {?} vcr
+     * @param {?} componentMapper
+     * @param {?} injector
+     * @param {?} cmsService
+     * @param {?} dynamicAttributeService
+     * @param {?} renderer
+     * @param {?} cd
+     * @param {?} config
+     * @param {?} platformId
+     */
+    constructor(vcr, componentMapper, injector, cmsService, dynamicAttributeService, renderer, cd, config, platformId) {
+        this.vcr = vcr;
+        this.componentMapper = componentMapper;
+        this.injector = injector;
+        this.cmsService = cmsService;
+        this.dynamicAttributeService = dynamicAttributeService;
+        this.renderer = renderer;
+        this.cd = cd;
+        this.config = config;
+        this.platformId = platformId;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        if (!this.shouldRenderComponent()) {
+            return;
+        }
+        if (this.componentMapper.isWebComponent(this.cxComponentWrapper.flexType)) {
+            this.launchWebComponent();
+        }
+        else {
+            this.launchComponent();
+        }
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    shouldRenderComponent() {
+        /** @type {?} */
+        const isSSR = isPlatformServer(this.platformId);
+        /** @type {?} */
+        const isComponentDisabledInSSR = (this.config.cmsComponents[this.cxComponentWrapper.flexType] || {}).disableSSR;
+        return !(isSSR && isComponentDisabledInSSR);
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    launchComponent() {
+        /** @type {?} */
+        const factory = this.componentMapper.getComponentFactoryByCode(this.cxComponentWrapper.flexType);
+        if (factory) {
+            this.cmpRef = this.vcr.createComponent(factory, undefined, this.getInjectorForComponent());
+            this.cd.detectChanges();
+            if (this.cmsService.isLaunchInSmartEdit()) {
+                this.addSmartEditContract(this.cmpRef.location.nativeElement);
+            }
+        }
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    launchWebComponent() {
+        return __awaiter(this, void 0, void 0, function* () {
+            /** @type {?} */
+            const elementName = yield this.componentMapper.initWebComponent(this.cxComponentWrapper.flexType, this.renderer);
+            if (elementName) {
+                this.webElement = this.renderer.createElement(elementName);
+                this.webElement.cxApi = Object.assign({}, this.injector.get(CxApiService), { CmsComponentData: this.getCmsDataForComponent() });
+                this.renderer.appendChild(this.vcr.element.nativeElement.parentElement, this.webElement);
+            }
+        });
+    }
+    /**
+     * @private
+     * @template T
+     * @return {?}
+     */
+    getCmsDataForComponent() {
+        return {
+            uid: this.cxComponentWrapper.uid,
+            data$: this.cmsService.getComponentData(this.cxComponentWrapper.uid),
+        };
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    getInjectorForComponent() {
+        /** @type {?} */
+        const configProviders = (this.config.cmsComponents[this.cxComponentWrapper.flexType] || {})
+            .providers || [];
+        return Injector.create({
+            providers: [
+                {
+                    provide: CmsComponentData,
+                    useValue: this.getCmsDataForComponent(),
+                },
+                ...configProviders,
+            ],
+            parent: this.injector,
+        });
+    }
+    /**
+     * @private
+     * @param {?} element
+     * @return {?}
+     */
+    addSmartEditContract(element) {
+        this.dynamicAttributeService.addDynamicAttributes(this.cxComponentWrapper.properties, element, this.renderer);
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        if (this.cmpRef) {
+            this.cmpRef.destroy();
+        }
+        if (this.webElement) {
+            this.renderer.removeChild(this.vcr.element.nativeElement.parentElement, this.webElement);
+        }
+    }
+}
+ComponentWrapperDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[cxComponentWrapper]',
+            },] }
+];
+/** @nocollapse */
+ComponentWrapperDirective.ctorParameters = () => [
+    { type: ViewContainerRef },
+    { type: ComponentMapperService },
+    { type: Injector },
+    { type: CmsService },
+    { type: DynamicAttributeService },
+    { type: Renderer2 },
+    { type: ChangeDetectorRef },
+    { type: CmsConfig },
+    { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
+];
+ComponentWrapperDirective.propDecorators = {
+    cxComponentWrapper: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class PageComponentModule {
+}
+PageComponentModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule],
+                providers: [],
+                declarations: [ComponentWrapperDirective],
+                exports: [ComponentWrapperDirective],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class PageSlotComponent {
+    /**
+     * @param {?} cmsService
+     * @param {?} dynamicAttributeService
+     * @param {?} renderer
+     * @param {?} hostElement
+     */
+    constructor(cmsService, dynamicAttributeService, renderer, hostElement) {
+        this.cmsService = cmsService;
+        this.dynamicAttributeService = dynamicAttributeService;
+        this.renderer = renderer;
+        this.hostElement = hostElement;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        // add the position name as a css class so that
+        // layout can be applied to it, using the position based class.
+        this.renderer.addClass(this.hostElement.nativeElement, this.position);
+        this.components$ = this.slot$.pipe(map(slot => (slot && slot.components ? slot.components : [])), distinctUntilChanged((a, b) => a.length === b.length &&
+            !a.find((el, index) => el.uid !== b[index].uid)), tap(components => this.addComponentClass(components)));
+    }
+    /**
+     * returns an observable with `ContentSlotData` for the current position
+     * @return {?}
+     */
+    get slot$() {
+        return this.cmsService
+            .getContentSlot(this.position)
+            .pipe(tap(slot => this.addSmartEditSlotClass(slot)));
+    }
+    // add a class to indicate whether the class is empty or not
+    /**
+     * @private
+     * @param {?} components
+     * @return {?}
+     */
+    addComponentClass(components) {
+        if (components && components.length > 0) {
+            this.renderer.addClass(this.hostElement.nativeElement, 'has-components');
+        }
+    }
+    /**
+     * @private
+     * @param {?} slot
+     * @return {?}
+     */
+    addSmartEditSlotClass(slot) {
+        if (this.cmsService.isLaunchInSmartEdit()) {
+            this.addSmartEditContract(slot);
+        }
+    }
+    /**
+     * @private
+     * @param {?} slot
+     * @return {?}
+     */
+    addSmartEditContract(slot) {
+        this.dynamicAttributeService.addDynamicAttributes(slot.properties, this.hostElement.nativeElement, this.renderer);
+    }
+}
+PageSlotComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-page-slot',
+                template: "<ng-container *cxOutlet=\"position\">\n  <ng-container *ngFor=\"let component of (components$ | async)\">\n    <ng-container\n      *cxOutlet=\"component.flexType\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-container>\n  </ng-container>\n</ng-container>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+PageSlotComponent.ctorParameters = () => [
+    { type: CmsService },
+    { type: DynamicAttributeService },
+    { type: Renderer2 },
+    { type: ElementRef }
+];
+PageSlotComponent.propDecorators = {
+    position: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class PageSlotModule {
+}
+PageSlotModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule, OutletModule, PageComponentModule],
+                providers: [],
+                declarations: [PageSlotComponent],
+                exports: [PageSlotComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class LoginModule {
 }
 LoginModule.decorators = [
@@ -2869,42 +2651,266 @@ LoginModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class CustomFormValidators {
+class LogoutGuard {
     /**
-     * @param {?} control
-     * @return {?}
+     * @param {?} auth
+     * @param {?} cms
+     * @param {?} routing
      */
-    static emailDomainValidator(control) {
-        /** @type {?} */
-        const email = (/** @type {?} */ (control.value));
-        return email.match('[.][a-zA-Z]+$') ? null : { InvalidEmail: true };
+    constructor(auth, cms, routing) {
+        this.auth = auth;
+        this.cms = cms;
+        this.routing = routing;
     }
     /**
-     * @param {?} control
      * @return {?}
      */
-    static emailValidator(control) {
-        /** @type {?} */
-        const email = (/** @type {?} */ (control.value));
-        return email.match(
-        // Email Standard RFC 5322:
-        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ // tslint:disable-line
-        )
-            ? null
-            : { InvalidEmail: true };
+    canActivate() {
+        this.logout();
+        return this.cms
+            .hasPage({
+            id: '/logout',
+            type: PageType.CONTENT_PAGE,
+        })
+            .pipe(tap(hasPage => {
+            if (!hasPage) {
+                this.routing.go(['/']);
+            }
+        }));
     }
     /**
-     * @param {?} control
+     * @protected
      * @return {?}
      */
-    static passwordValidator(control) {
-        /** @type {?} */
-        const password = (/** @type {?} */ (control.value));
-        return password.match('^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^*()_+{};:.,]).{6,}$')
-            ? null
-            : { InvalidPassword: true };
+    logout() {
+        this.auth.logout();
     }
 }
+LogoutGuard.GUARD_NAME = 'LogoutGuard';
+LogoutGuard.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+LogoutGuard.ctorParameters = () => [
+    { type: AuthService },
+    { type: CmsService },
+    { type: RoutingService }
+];
+/** @nocollapse */ LogoutGuard.ngInjectableDef = defineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(inject(AuthService), inject(CmsService), inject(RoutingService)); }, token: LogoutGuard, providedIn: "root" });
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const cartComponents = {
+    emptyCartText: {
+        flexType: 'CMSParagraphComponent',
+        typeCode: 'CMSParagraphComponent',
+        content: `
+      <h2>Your shopping cart is empty</h2>
+      <p>Suggestions</p>
+      <ul>
+          <li>
+          Browse our products by selecting a category above
+          </li>
+      </ul>`,
+    },
+};
+/** @type {?} */
+const defaultCartPageConfig = {
+    ignoreBackend: false,
+    pageId: 'cartPage',
+    type: 'ContentPage',
+    template: 'CartPageTemplate',
+    title: 'Cart',
+    slots: {
+        EmptyCartMiddleContent: {
+            componentIds: ['emptyCartText'],
+        },
+    },
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const headerComponents = {
+    SkipLinkComponent: {
+        typeCode: 'SkipLinkComponent',
+        flexType: 'SkipLinkComponent',
+        uid: 'SkipLinkComponent',
+    },
+    HamburgerMenuComponent: {
+        typeCode: 'HamburgerMenuComponent',
+        flexType: 'HamburgerMenuComponent',
+    },
+    LanguageComponent: {
+        typeCode: 'CMSSiteContextComponent',
+        flexType: 'CMSSiteContextComponent',
+        context: 'LANGUAGE',
+    },
+    CurrencyComponent: {
+        typeCode: 'CMSSiteContextComponent',
+        flexType: 'CMSSiteContextComponent',
+        context: 'CURRENCY',
+    },
+    LanguageCurrencyComponent: {
+        typeCode: 'LanguageCurrencyComponent',
+        flexType: 'LanguageCurrencyComponent',
+    },
+    StoreFinder: {
+        typeCode: 'CMSLinkComponent',
+        flexType: 'CMSLinkComponent',
+        linkName: 'Find a Store',
+        url: '/store-finder',
+    },
+    BreadcrumbComponent: {
+        typeCode: 'BreadcrumbComponent',
+        flexType: 'BreadcrumbComponent',
+    },
+    Logo: {
+        typeCode: 'SimpleBannerComponent',
+        flexType: 'SimpleBannerComponent',
+        uid: 'logo',
+        media: {
+            mime: 'svg/image/svg+xml',
+            url: 'https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg',
+        },
+        urlLink: '/',
+    },
+    SearchBox: {
+        typeCode: 'SearchBoxComponent',
+        flexType: 'SearchBoxComponent',
+        uid: 'SearchBoxComponent',
+    },
+    MiniCart: {
+        typeCode: 'MiniCartComponent',
+        flexType: 'MiniCartComponent',
+        uid: 'MiniCartComponent',
+    },
+    LoginComponent: {
+        typeCode: 'LoginComponent',
+        flexType: 'LoginComponent',
+        uid: 'LoginComponent',
+    },
+    CategoryNavigationComponent: {
+        typeCode: 'CategoryNavigationComponent',
+        flexType: 'CategoryNavigationComponent',
+        uid: 'ElectronicsCategoryNavComponent',
+        navigationNode: {
+            uid: 'ElectronicsCategoryNavNode',
+            children: [
+                {
+                    uid: 'CameraLensesNavNode',
+                    title: 'Electronic catalog',
+                    entries: [
+                        {
+                            itemId: 'CameraLensesCategoryLink',
+                            itemSuperType: 'AbstractCMSComponent',
+                            itemType: 'CMSLinkComponent',
+                        },
+                    ],
+                },
+            ],
+        },
+    },
+};
+/** @type {?} */
+const defaultPageHeaderConfig = {
+    PreHeader: {
+        componentIds: ['SkipLinkComponent', 'HamburgerMenuComponent'],
+    },
+    SiteContext: {
+        componentIds: ['LanguageComponent', 'CurrencyComponent'],
+    },
+    SiteLinks: {
+        componentIds: ['StoreFinder'],
+    },
+    SiteLogo: {
+        componentIds: ['Logo'],
+    },
+    SearchBox: {
+        componentIds: ['SearchBox'],
+    },
+    MiniCart: {
+        componentIds: ['MiniCart'],
+    },
+    SiteLogin: {
+        componentIds: ['LoginComponent'],
+    },
+    NavigationBar: {
+        componentIds: ['CategoryNavigationComponent'],
+    },
+    BottomHeaderSlot: {
+        componentIds: ['BreadcrumbComponent'],
+    },
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @return {?}
+ */
+function defaultCmsContentConfig() {
+    return {
+        cmsStructure: {
+            components: Object.assign({}, headerComponents, cartComponents),
+            slots: Object.assign({}, defaultPageHeaderConfig),
+            pages: [defaultCartPageConfig],
+        },
+    };
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class PageLayoutModule {
+}
+PageLayoutModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule, OutletModule, PageSlotModule],
+                declarations: [PageLayoutComponent],
+                providers: [PageLayoutService],
+                exports: [PageLayoutComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class LogoutModule {
+}
+LogoutModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    RouterModule.forChild([
+                        {
+                            path: 'logout',
+                            canActivate: [LogoutGuard],
+                            component: PageLayoutComponent,
+                        },
+                    ]),
+                ],
+            },] }
+];
 
 /**
  * @fileoverview added by tsickle
@@ -3064,300 +3070,6 @@ RegisterComponentModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class LoginFormComponent {
-    /**
-     * @param {?} auth
-     * @param {?} routing
-     * @param {?} globalMessageService
-     * @param {?} fb
-     */
-    constructor(auth, routing, globalMessageService, fb) {
-        this.auth = auth;
-        this.routing = routing;
-        this.globalMessageService = globalMessageService;
-        this.fb = fb;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.sub = this.auth
-            .getUserToken()
-            .pipe(switchMap(data => {
-            if (data && data.access_token) {
-                this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
-                return this.routing.getRedirectUrl().pipe(take(1));
-            }
-            return of();
-        }))
-            .subscribe(url => {
-            if (url) {
-                // If forced to login due to AuthGuard, then redirect to intended destination
-                this.routing.goByUrl(url);
-                this.routing.clearRedirectUrl();
-            }
-            else {
-                // User manual login
-                this.routing.back();
-            }
-        });
-        this.form = this.fb.group({
-            userId: ['', [Validators.required, CustomFormValidators.emailValidator]],
-            password: ['', Validators.required],
-        });
-    }
-    /**
-     * @return {?}
-     */
-    login() {
-        this.auth.authorize(this.form.controls.userId.value, this.form.controls.password.value);
-    }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        if (this.sub) {
-            this.sub.unsubscribe();
-        }
-    }
-}
-LoginFormComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-login-form',
-                template: "<form (submit)=\"login()\" [formGroup]=\"form\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.controls['userId'].invalid &&\n          (form.controls['userId'].touched || form.controls['userId'].dirty)\n        \"\n        formControlName=\"userId\"\n        placeholder=\"{{ 'loginForm.emailAddress.placeholder' | cxTranslate }}\"\n      />\n    </label>\n    <div\n      class=\"invalid-feedback\"\n      *ngIf=\"\n        form.controls['userId'].invalid &&\n        (form.controls['userId'].touched || form.controls['userId'].dirty)\n      \"\n    >\n      <span>{{ 'loginForm.wrongEmailFormat' | cxTranslate }}</span>\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.password.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"password\"\n        class=\"form-control\"\n        placeholder=\"{{ 'loginForm.password.placeholder' | cxTranslate }}\"\n        formControlName=\"password\"\n      />\n    </label>\n  </div>\n  <p>\n    <a\n      [routerLink]=\"{ route: 'forgotPassword' } | cxTranslateUrl\"\n      aria-controls=\"reset-password\"\n      class=\"btn-link\"\n      >{{ 'loginForm.forgotPassword' | cxTranslate }}</a\n    >\n  </p>\n\n  <button\n    type=\"submit\"\n    class=\"btn btn-block btn-primary\"\n    [disabled]=\"form.invalid\"\n  >\n    {{ 'loginForm.signIn' | cxTranslate }}\n  </button>\n</form>\n\n<div class=\"register\">\n  <h3 class=\"cx-section__title cx-section__title--alt\">\n    {{ 'loginForm.dontHaveAccount' | cxTranslate }}\n  </h3>\n  <a\n    [routerLink]=\"{ route: 'register' } | cxTranslateUrl\"\n    class=\"btn btn-block btn-secondary\"\n    >{{ 'loginForm.register' | cxTranslate }}</a\n  >\n</div>\n"
-            }] }
-];
-/** @nocollapse */
-LoginFormComponent.ctorParameters = () => [
-    { type: AuthService },
-    { type: RoutingService },
-    { type: GlobalMessageService },
-    { type: FormBuilder }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class LoginFormModule {
-}
-LoginFormModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    FormsModule,
-                    ReactiveFormsModule,
-                    RouterModule,
-                    CmsModule$1,
-                    BootstrapModule,
-                    UserModule,
-                    UrlTranslationModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            ReturningCustomerLoginComponent: {
-                                selector: 'cx-login-form',
-                            },
-                        },
-                    }))),
-                    I18nModule,
-                ],
-                declarations: [LoginFormComponent],
-                exports: [LoginFormComponent],
-                entryComponents: [LoginFormComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ResetPasswordFormComponent {
-    /**
-     * @param {?} fb
-     * @param {?} routingService
-     * @param {?} userService
-     */
-    constructor(fb, routingService, userService) {
-        this.fb = fb;
-        this.routingService = routingService;
-        this.userService = userService;
-        this.subscription = new Subscription();
-        this.submited = false;
-        this.form = this.fb.group({
-            password: [
-                '',
-                [Validators.required, CustomFormValidators.passwordValidator],
-            ],
-            repassword: ['', [Validators.required]],
-        }, { validator: this.matchPassword });
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.subscription.add(this.routingService
-            .getRouterState()
-            .subscribe(state => (this.token = state.state.queryParams['token'])));
-        this.subscription.add(this.userService.isPasswordReset().subscribe(reset => {
-            if (reset) {
-                this.routingService.go({ route: 'login' });
-            }
-        }));
-    }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
-    }
-    /**
-     * @return {?}
-     */
-    resetPassword() {
-        this.submited = true;
-        if (this.form.invalid) {
-            return;
-        }
-        /** @type {?} */
-        const password = this.form.value['password'];
-        this.userService.resetPassword(this.token, password);
-    }
-    /**
-     * @private
-     * @param {?} ac
-     * @return {?}
-     */
-    matchPassword(ac) {
-        if (ac.get('password').value !== ac.get('repassword').value) {
-            return { NotEqual: true };
-        }
-    }
-}
-ResetPasswordFormComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-reset-password-form',
-                template: "<form\n  (submit)=\"resetPassword()\"\n  [formGroup]=\"form\"\n  class=\"cx-reset-password-form-component\"\n>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'register.newPassword' | cxTranslate\n      }}</span>\n      <input\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.get('password').invalid &&\n          (submited ||\n            (form.get('password').dirty && form.get('password').touched))\n        \"\n        type=\"password\"\n        name=\"password\"\n        placeholder=\"{{ 'register.password.placeholder' | cxTranslate }}\"\n        formControlName=\"password\"\n      />\n      <div\n        class=\"invalid-feedback\"\n        *ngIf=\"\n          form.get('password').invalid &&\n          (submited ||\n            (form.get('password').dirty && form.get('password').touched))\n        \"\n      >\n        <span>{{ 'register.passwordMinRequirements' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'register.passwordMinRequirements' | cxTranslate\n      }}</span>\n      <input\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.hasError('NotEqual') &&\n          (submited ||\n            (form.get('repassword').dirty && form.get('repassword').touched))\n        \"\n        type=\"password\"\n        name=\"confirmpassword\"\n        placeholder=\"{{ 'register.confirmPassword.placeholder' | cxTranslate }}\"\n        formControlName=\"repassword\"\n      />\n      <div\n        class=\"invalid-feedback\"\n        *ngIf=\"\n          form.hasError('NotEqual') &&\n          (submited ||\n            (form.get('repassword').dirty && form.get('repassword').touched))\n        \"\n      >\n        <span>{{ 'register.bothPasswordMustMatch' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <div class=\"form-group\">\n    <button class=\"btn btn-block btn-primary\" type=\"submit\">\n      {{ 'register.resetPassword' | cxTranslate }}\n    </button>\n  </div>\n</form>\n",
-                styles: [""]
-            }] }
-];
-/** @nocollapse */
-ResetPasswordFormComponent.ctorParameters = () => [
-    { type: FormBuilder },
-    { type: RoutingService },
-    { type: UserService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ResetPasswordModule {
-}
-ResetPasswordModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            ResetPasswordComponent: { selector: 'cx-reset-password-form' },
-                        },
-                    }))),
-                    FormsModule,
-                    ReactiveFormsModule,
-                    RouterModule,
-                    I18nModule,
-                ],
-                declarations: [ResetPasswordFormComponent],
-                exports: [ResetPasswordFormComponent],
-                entryComponents: [ResetPasswordFormComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ForgotPasswordComponent {
-    /**
-     * @param {?} fb
-     * @param {?} userService
-     * @param {?} routingService
-     */
-    constructor(fb, userService, routingService) {
-        this.fb = fb;
-        this.userService = userService;
-        this.routingService = routingService;
-        this.submited = false;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.form = this.fb.group({
-            userEmail: [
-                '',
-                [Validators.required, CustomFormValidators.emailValidator],
-            ],
-        });
-    }
-    /**
-     * @return {?}
-     */
-    requestForgotPasswordEmail() {
-        this.submited = true;
-        if (this.form.invalid) {
-            return;
-        }
-        this.userService.requestForgotPasswordEmail(this.form.value.userEmail);
-        this.routingService.go({ route: 'login' });
-    }
-}
-ForgotPasswordComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-forgot-password',
-                template: "<form (submit)=\"requestForgotPasswordEmail()\" [formGroup]=\"form\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'forgottenPassword.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        placeholder=\"{{\n          'forgottenPassword.emailAddress.placeholder' | cxTranslate\n        }}\"\n        formControlName=\"userEmail\"\n        [ngClass]=\"{\n          'is-invalid':\n            form.controls['userEmail'].invalid &&\n            (submited ||\n              (form.controls['userEmail'].touched &&\n                form.controls['userEmail'].dirty))\n        }\"\n      />\n      <div\n        class=\"invalid-feedback\"\n        *ngIf=\"\n          form.controls['userEmail'].invalid &&\n          (submited ||\n            (form.controls['userEmail'].touched &&\n              form.controls['userEmail'].dirty))\n        \"\n      >\n        <span>{{ 'forgottenPassword.enterValidEmail' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <button type=\"submit\" class=\"btn btn-block btn-primary\">\n    {{ 'common.submit' | cxTranslate }}\n  </button>\n  <a\n    class=\"btn btn-block btn-secondary\"\n    [routerLink]=\"{ route: 'login' } | cxTranslateUrl\"\n    >{{ 'common.cancel' | cxTranslate }}</a\n  >\n</form>\n",
-                styles: [".reset-password h1{margin:var(--cx-margin,0)}.reset-password button{margin:var(--cx-margin,30px 0 0)}.reset-password a{margin:var(--cx-margin,20px 0 0)}"]
-            }] }
-];
-/** @nocollapse */
-ForgotPasswordComponent.ctorParameters = () => [
-    { type: FormBuilder },
-    { type: UserService },
-    { type: RoutingService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ForgotPasswordModule {
-}
-ForgotPasswordModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    ReactiveFormsModule,
-                    RouterModule,
-                    UrlTranslationModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            ForgotPasswordComponent: { selector: 'cx-forgot-password' },
-                        },
-                    }))),
-                    I18nModule,
-                ],
-                declarations: [ForgotPasswordComponent],
-                exports: [ForgotPasswordComponent],
-                entryComponents: [ForgotPasswordComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class UserComponentModule {
 }
 UserComponentModule.decorators = [
@@ -3371,8 +3083,6 @@ UserComponentModule.decorators = [
                     UserModule,
                     UrlTranslationModule,
                     RegisterComponentModule,
-                    ResetPasswordModule,
-                    ForgotPasswordModule,
                 ],
             },] }
 ];
@@ -3381,14 +3091,6 @@ UserComponentModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class UiFrameworkModule {
-}
-UiFrameworkModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [CommonModule, BrowserAnimationsModule],
-                declarations: [],
-            },] }
-];
 
 /**
  * @fileoverview added by tsickle
@@ -3510,30 +3212,6 @@ class AddToHomeScreenComponent {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class AddToHomeScreenBtnComponent extends AddToHomeScreenComponent {
-    /**
-     * @param {?} addToHomeScreenService
-     */
-    constructor(addToHomeScreenService) {
-        super(addToHomeScreenService);
-        this.addToHomeScreenService = addToHomeScreenService;
-    }
-}
-AddToHomeScreenBtnComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-add-to-home-screen-btn',
-                template: "<span (click)=\"prompt()\">\n  <ng-content *ngIf=\"(canPrompt$ | async)\"></ng-content>\n</span>\n"
-            }] }
-];
-/** @nocollapse */
-AddToHomeScreenBtnComponent.ctorParameters = () => [
-    { type: AddToHomeScreenService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class AddToHomeScreenBannerComponent extends AddToHomeScreenComponent {
     /**
      * @param {?} addToHomeScreenService
@@ -3551,6 +3229,30 @@ AddToHomeScreenBannerComponent.decorators = [
 ];
 /** @nocollapse */
 AddToHomeScreenBannerComponent.ctorParameters = () => [
+    { type: AddToHomeScreenService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class AddToHomeScreenBtnComponent extends AddToHomeScreenComponent {
+    /**
+     * @param {?} addToHomeScreenService
+     */
+    constructor(addToHomeScreenService) {
+        super(addToHomeScreenService);
+        this.addToHomeScreenService = addToHomeScreenService;
+    }
+}
+AddToHomeScreenBtnComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-add-to-home-screen-btn',
+                template: "<span (click)=\"prompt()\">\n  <ng-content *ngIf=\"(canPrompt$ | async)\"></ng-content>\n</span>\n"
+            }] }
+];
+/** @nocollapse */
+AddToHomeScreenBtnComponent.ctorParameters = () => [
     { type: AddToHomeScreenService }
 ];
 
@@ -3608,42 +3310,143 @@ PwaModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class HamburgerMenuService {
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class SeoMetaService {
     /**
-     * @param {?} router
+     * @param {?} ngTitle
+     * @param {?} ngMeta
+     * @param {?} pageMetaService
      */
-    constructor(router) {
-        this.isExpanded = new BehaviorSubject(false);
-        router.events
-            .pipe(filter(event => event instanceof NavigationStart))
-            .subscribe(() => {
-            this.toggle(true);
-        });
+    constructor(ngTitle, ngMeta, pageMetaService) {
+        this.ngTitle = ngTitle;
+        this.ngMeta = ngMeta;
+        this.pageMetaService = pageMetaService;
     }
     /**
-     * toggles the expand state of the hamburger menu
-     * @param {?=} forceCollapse
      * @return {?}
      */
-    toggle(forceCollapse) {
-        if (forceCollapse) {
-            this.isExpanded.next(false);
+    init() {
+        this.pageMetaService
+            .getMeta()
+            .pipe(filter(Boolean))
+            .subscribe((meta) => (this.meta = meta));
+    }
+    /**
+     * @protected
+     * @param {?} meta
+     * @return {?}
+     */
+    set meta(meta) {
+        this.title = meta.title;
+        this.description = meta.description;
+        this.image = meta.image;
+        this.robots = meta.robots || [PageRobotsMeta.INDEX, PageRobotsMeta.FOLLOW];
+    }
+    /**
+     * @protected
+     * @param {?} title
+     * @return {?}
+     */
+    set title(title) {
+        this.ngTitle.setTitle(title || '');
+    }
+    /**
+     * @protected
+     * @param {?} value
+     * @return {?}
+     */
+    set description(value) {
+        this.addTag({ name: 'description', content: value });
+    }
+    /**
+     * @protected
+     * @param {?} imageUrl
+     * @return {?}
+     */
+    set image(imageUrl) {
+        if (imageUrl) {
+            this.addTag({ name: 'og:image', content: imageUrl });
         }
-        else {
-            this.isExpanded.next(!this.isExpanded.value);
+    }
+    /**
+     * @protected
+     * @param {?} value
+     * @return {?}
+     */
+    set robots(value) {
+        if (value) {
+            this.addTag({ name: 'robots', content: value.join(', ') });
+        }
+    }
+    /**
+     * @protected
+     * @param {?} meta
+     * @return {?}
+     */
+    addTag(meta) {
+        if (meta.content) {
+            this.ngMeta.updateTag(meta);
         }
     }
 }
-HamburgerMenuService.decorators = [
+SeoMetaService.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
             },] }
 ];
 /** @nocollapse */
-HamburgerMenuService.ctorParameters = () => [
-    { type: Router }
+SeoMetaService.ctorParameters = () => [
+    { type: Title },
+    { type: Meta },
+    { type: PageMetaService }
 ];
-/** @nocollapse */ HamburgerMenuService.ngInjectableDef = defineInjectable({ factory: function HamburgerMenuService_Factory() { return new HamburgerMenuService(inject(Router)); }, token: HamburgerMenuService, providedIn: "root" });
+/** @nocollapse */ SeoMetaService.ngInjectableDef = defineInjectable({ factory: function SeoMetaService_Factory() { return new SeoMetaService(inject(Title), inject(Meta), inject(PageMetaService)); }, token: SeoMetaService, providedIn: "root" });
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @param {?} injector
+ * @return {?}
+ */
+function initSeoService(injector) {
+    /** @type {?} */
+    const result = () => {
+        /** @type {?} */
+        const service = injector.get(SeoMetaService);
+        service.init();
+    };
+    return result;
+}
+class SeoModule {
+}
+SeoModule.decorators = [
+    { type: NgModule, args: [{
+                providers: [
+                    {
+                        provide: APP_INITIALIZER,
+                        useFactory: initSeoService,
+                        deps: [Injector],
+                        multi: true,
+                    },
+                ],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -3695,7 +3498,6 @@ MainModule.decorators = [
                     GlobalMessageComponentModule,
                     UserComponentModule,
                     CmsModule$1,
-                    UiFrameworkModule,
                     OutletRefModule,
                     PwaModule,
                     PageLayoutModule,
@@ -3722,10 +3524,7 @@ LayoutModule.decorators = [
                     ...layoutModules,
                     ConfigModule.withConfig(defaultLayoutConfig),
                 ],
-                providers: [
-                    { provide: LayoutConfig, useExisting: Config },
-                    BreakpointService,
-                ],
+                providers: [{ provide: LayoutConfig, useExisting: Config }],
                 exports: [MainModule, ...layoutModules],
             },] }
 ];
@@ -3734,6 +3533,15 @@ LayoutModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const missingProductImgSrc = 
+// tslint:disable-next-line:max-line-length
+'data:image/jpg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABVAAD/4QOIaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjUtYzAyMSA3OS4xNTQ5MTEsIDIwMTMvMTAvMjktMTE6NDc6MTYgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6NjEwOTUyZjYtMmRmOS00ZmIxLWJmZDItODBlZDVjZDY3YjhjIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkU2RkNERDA2RDQyQjExRTVBRUE3REEyNEFBNDQxNDBDIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkU2RkNERDA1RDQyQjExRTVBRUE3REEyNEFBNDQxNDBDIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpiZjI5Zjc3Zi1hZWM5LWY0NDgtOTM0MC1iZGJkYjk2MDk3OTIiIHN0UmVmOmRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDo0MDcyNjk0NS0zNjQ0LTExNzgtODI2OC1mMDQzMTA0ZTU5MWIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7/7gAOQWRvYmUAZMAAAAAB/9sAhAACAQEBAQECAQECAwIBAgMDAgICAgMDAwMDAwMDBQMEBAQEAwUFBQYGBgUFBwcICAcHCgoKCgoMDAwMDAwMDAwMAQICAgQDBAcFBQcKCAcICgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAEsASwDAREAAhEBAxEB/8QArQABAAIDAQEBAQAAAAAAAAAAAAcIBAUGAwIBCQEBAAMBAQAAAAAAAAAAAAAAAAIDBAEFEAABAwMCAwQCCgwKBwgDAAABAAIDBAUGEQchEggxQVETYRRxgeEiMlKTFVYXkUKS0iNzs3S0FjY3obHRYnJTVJRVGPCCojNjJHXBo9M0ZCW1OLKkSBEBAAICAQQCAgMBAQAAAAAAAAECEQMxIVESEzIEQSLwYRRDcf/aAAwDAQACEQMRAD8A/v4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIPx72saXvIDANSTwAA7yg1D9wsBjeY5L5b2vadC01lMCD6RzrvjKPlHd+fWJt/8A47b/AO+033674z2PKO59Ym3/APjtv/vtN9+njPY8o7n1ibf/AOO2/wDvtN9+njPY8o7n1i7ff47b/wC+0336eM9jyju2Ntu1rvNP65aKmKqpCdBLTSMlZr/SYSFyYw7E5ZC46ICAgICAgICAgICAgICAgICAgICAgICAgICAgICDUZ1mlm29xWsy2/O0oKRnNyN055Hk8rI2A/bOcQAu1rmcI2tiMqebob455upcJJLxVPp7ESfItdM9zaeNmvAOA053eLne1oOC201xVivsmzjlNAQEBAQbHGstybDri27YvXTUNwaQfMp3lvNpx0cOxw9BBC5MRPLsWmOFsOnTfmPd6zy2y9NbDmtA1rqlkY0Z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';
 
 /**
  * @fileoverview added by tsickle
@@ -3948,6 +3756,11 @@ MediaComponent.propDecorators = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class MediaModule {
 }
 MediaModule.decorators = [
@@ -3962,75 +3775,30 @@ MediaModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class PaginationComponent {
-    constructor() {
-        this.viewPageEvent = new EventEmitter();
-    }
-    /**
-     * @param {?} page
-     * @return {?}
-     */
-    pageChange(page) {
-        this.viewPageEvent.emit(page - 1);
-    }
+// TODO: Improve a11y with better text appropriate to usage (example: loading cart spinner)
+class SpinnerComponent {
+    constructor() { }
 }
-PaginationComponent.decorators = [
+SpinnerComponent.decorators = [
     { type: Component, args: [{
-                selector: 'cx-pagination',
-                template: "<ngb-pagination\n  [collectionSize]=\"pagination.totalResults\"\n  [page]=\"pagination.currentPage + 1\"\n  (pageChange)=\"pageChange($event)\"\n  [maxSize]=\"3\"\n  [pageSize]=\"pagination.pageSize\"\n>\n</ngb-pagination>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-PaginationComponent.propDecorators = {
-    pagination: [{ type: Input }],
-    viewPageEvent: [{ type: Output }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class SortingComponent {
-    constructor() {
-        this.sortListEvent = new EventEmitter();
-    }
-    /**
-     * @param {?} sortCode
-     * @return {?}
-     */
-    sortList(sortCode) {
-        this.sortListEvent.emit(sortCode);
-    }
-}
-SortingComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-sorting',
-                template: "<ng-select\n  [searchable]=\"false\"\n  [clearable]=\"false\"\n  placeholder=\"{{ placeholder }}\"\n  (change)=\"sortList($event)\"\n  [ngModel]=\"selectedOption\"\n>\n  <ng-option *ngFor=\"let sort of sortOptions\" [value]=\"sort.code\">{{\n    sort.name ? sort.name : sortLabels ? sortLabels[sort.code] : ''\n  }}</ng-option>\n</ng-select>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                styles: [""]
+                selector: 'cx-spinner',
+                template: "<div class=\"loader\">{{ 'spinner.loading' | cxTranslate }}</div>\n"
             }] }
 ];
 /** @nocollapse */
-SortingComponent.ctorParameters = () => [];
-SortingComponent.propDecorators = {
-    sortOptions: [{ type: Input }],
-    selectedOption: [{ type: Input }],
-    placeholder: [{ type: Input }],
-    sortLabels: [{ type: Input }],
-    sortListEvent: [{ type: Output }]
-};
+SpinnerComponent.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class PaginationAndSortingModule {
+class SpinnerModule {
 }
-PaginationAndSortingModule.decorators = [
+SpinnerModule.decorators = [
     { type: NgModule, args: [{
-                imports: [CommonModule, NgSelectModule, FormsModule, BootstrapModule],
-                declarations: [PaginationComponent, SortingComponent],
-                exports: [PaginationComponent, SortingComponent],
+                imports: [CommonModule, I18nModule],
+                declarations: [SpinnerComponent],
+                exports: [SpinnerComponent],
             },] }
 ];
 
@@ -4038,33 +3806,133 @@ PaginationAndSortingModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-// we include all UI component modules here, but in real live
-// projects would only include those that are relevant.
-// for "accelerators", we could include only those that are relevant, so this
-// component module could be configurable or we could have separate component modules,
-// i.e. powertools-components.module.
-class ComponentsModule {
+class StarRatingComponent {
+    constructor() {
+        this.rating = 1;
+        this.disabled = false;
+        this.steps = 1;
+        this.onChange = (_rating) => { };
+        this.onTouched = () => { };
+    }
+    /**
+     * @return {?}
+     */
+    get value() {
+        return this.rating;
+    }
+    /**
+     * @param {?} rating
+     * @return {?}
+     */
+    setRating(rating) {
+        if (!this.disabled) {
+            this.writeValue(rating);
+        }
+    }
+    // ControlvalueAccessor interface
+    /**
+     * @param {?} rating
+     * @return {?}
+     */
+    writeValue(rating) {
+        this.rating = rating;
+        this.onChange(this.rating);
+    }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    registerOnChange(fn) {
+        this.onChange = fn;
+    }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    registerOnTouched(fn) {
+        this.onTouched = fn;
+    }
 }
-ComponentsModule.decorators = [
+StarRatingComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-star-rating',
+                template: "<div class=\"cx-star-rating\" tabindex=\"0\">\n  <ng-template #template let-fill=\"fill\">\n    <span class=\"star\" [class.full]=\"fill === 100\">\n      <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span> &#9733;\n    </span>\n  </ng-template>\n  <ngb-rating\n    [(rate)]=\"rating\"\n    (rateChange)=\"onTouched(); setRating($event)\"\n    [starTemplate]=\"template\"\n    [readonly]=\"disabled\"\n    max=\"5\"\n  ></ngb-rating>\n</div>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                providers: [
+                    {
+                        provide: NG_VALUE_ACCESSOR,
+                        multi: true,
+                        useExisting: forwardRef(() => StarRatingComponent),
+                    },
+                ]
+            }] }
+];
+StarRatingComponent.propDecorators = {
+    rating: [{ type: Input }],
+    disabled: [{ type: Input }],
+    steps: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class StarRatingModule {
+}
+StarRatingModule.decorators = [
     { type: NgModule, args: [{
-                imports: [
-                    MediaModule,
-                    FormComponentsModule,
-                    CardModule,
-                    PaginationAndSortingModule,
-                    SpinnerModule,
-                    GenericLinkModule,
-                ],
-                exports: [
-                    MediaComponent,
-                    StarRatingComponent,
-                    ItemCounterComponent,
-                    CardComponent,
-                    PaginationComponent,
-                    SortingComponent,
-                    SpinnerComponent,
-                    GenericLinkComponent,
-                ],
+                imports: [CommonModule, FormsModule, ReactiveFormsModule, BootstrapModule],
+                declarations: [StarRatingComponent],
+                exports: [StarRatingComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class PromotionsComponent {
+    constructor() { }
+}
+PromotionsComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-promotions',
+                template: "<div class=\"cx-promotions\" *ngIf=\"promotions\">\n  <strong *ngFor=\"let promotion of promotions\">\n    {{ promotion.description }}\n  </strong>\n</div>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+PromotionsComponent.ctorParameters = () => [];
+PromotionsComponent.propDecorators = {
+    promotions: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class PromotionsModule {
+}
+PromotionsModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule],
+                declarations: [PromotionsComponent],
+                exports: [PromotionsComponent],
             },] }
 ];
 
@@ -4278,11 +4146,12 @@ CartSharedModule.decorators = [
                     CommonModule,
                     RouterModule,
                     ReactiveFormsModule,
-                    ComponentsModule,
                     UrlTranslationModule,
                     NgbModule,
                     PromotionsModule,
                     I18nModule,
+                    MediaModule,
+                    FormComponentsModule,
                 ],
                 declarations: [
                     CartItemComponent,
@@ -4393,6 +4262,11 @@ CartDetailsModule.decorators = [
                 entryComponents: [CartDetailsComponent],
             },] }
 ];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -4777,6 +4651,20 @@ BannerComponent.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class GenericLinkModule {
+}
+GenericLinkModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule, RouterModule],
+                declarations: [GenericLinkComponent],
+                exports: [GenericLinkComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class BannerModule {
 }
 BannerModule.decorators = [
@@ -4804,6 +4692,142 @@ BannerModule.decorators = [
                 entryComponents: [BannerComponent],
             },] }
 ];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class LinkComponent {
+    /**
+     * @param {?} component
+     */
+    constructor(component) {
+        this.component = component;
+    }
+}
+LinkComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-link',
+                template: "<a\n  *ngIf=\"(component.data$ | async) as data\"\n  role=\"link\"\n  [routerLink]=\"data.url\"\n  >{{ data.linkName }}</a\n>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+LinkComponent.ctorParameters = () => [
+    { type: CmsComponentData }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class LinkModule {
+}
+LinkModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    RouterModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            CMSLinkComponent: { selector: 'cx-link' },
+                        },
+                    }))),
+                ],
+                declarations: [LinkComponent],
+                exports: [LinkComponent],
+                entryComponents: [LinkComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ParagraphComponent {
+    /**
+     * @param {?} component
+     */
+    constructor(component) {
+        this.component = component;
+    }
+}
+ParagraphComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-paragraph',
+                template: "<p *ngIf=\"(component.data$ | async) as data\" [innerHTML]=\"data.content\"></p>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+ParagraphComponent.ctorParameters = () => [
+    { type: CmsComponentData }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CmsParagraphModule {
+}
+CmsParagraphModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            CMSParagraphComponent: { selector: 'cx-paragraph' },
+                        },
+                    }))),
+                ],
+                declarations: [ParagraphComponent],
+                exports: [ParagraphComponent],
+                entryComponents: [ParagraphComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+// import { AbstractProductComponent } from '../abstract-product-component';
+class TabParagraphContainerComponent {
+}
+TabParagraphContainerComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-tab-paragraph-container',
+                template: "<!--\n  <p #tabContent [innerHTML]=\"model?.content\">\n  </p>\n-->\n",
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                styles: [""]
+            }] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class TabParagraphContainerModule {
+}
+TabParagraphContainerModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            CMSTabParagraphComponent: { selector: 'cx-tab-paragraph-container' },
+                        },
+                    }))),
+                ],
+                declarations: [TabParagraphContainerComponent],
+                entryComponents: [TabParagraphContainerComponent],
+                exports: [TabParagraphContainerComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -5059,6 +5083,2148 @@ SiteContextSelectorModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class AddressBookComponentService {
+    /**
+     * @param {?} userService
+     */
+    constructor(userService) {
+        this.userService = userService;
+    }
+    /**
+     * @return {?}
+     */
+    getAddresses() {
+        return this.userService.getAddresses();
+    }
+    /**
+     * @return {?}
+     */
+    getAddressesStateLoading() {
+        return this.userService.getAddressesLoading();
+    }
+    /**
+     * @return {?}
+     */
+    getUserId() {
+        return this.userService.get().pipe(map(({ uid }) => uid));
+    }
+    /**
+     * @param {?} userId
+     * @return {?}
+     */
+    loadAddresses(userId) {
+        this.userService.loadAddresses(userId);
+    }
+    /**
+     * @param {?} userId
+     * @param {?} address
+     * @return {?}
+     */
+    addUserAddress(userId, address) {
+        this.userService.addUserAddress(userId, address);
+    }
+    /**
+     * @param {?} userId
+     * @param {?} addressId
+     * @param {?} address
+     * @return {?}
+     */
+    updateUserAddress(userId, addressId, address) {
+        this.userService.updateUserAddress(userId, addressId, address);
+    }
+}
+AddressBookComponentService.decorators = [
+    { type: Injectable }
+];
+/** @nocollapse */
+AddressBookComponentService.ctorParameters = () => [
+    { type: UserService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class AddressBookComponent {
+    /**
+     * @param {?} service
+     */
+    constructor(service) {
+        this.service = service;
+        this.showAddAddressForm = false;
+        this.showEditAddressForm = false;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.addresses$ = this.service.getAddresses();
+        this.addressesStateLoading$ = this.service.getAddressesStateLoading();
+        this.service
+            .getUserId()
+            .pipe(take(1))
+            .subscribe(id => {
+            this.userId = id;
+            this.service.loadAddresses(id);
+        });
+    }
+    /**
+     * @return {?}
+     */
+    addAddressButtonHandle() {
+        this.showEditAddressForm = false;
+        this.showAddAddressForm = true;
+    }
+    /**
+     * @param {?} address
+     * @return {?}
+     */
+    editAddressButtonHandle(address) {
+        this.showAddAddressForm = false;
+        this.showEditAddressForm = true;
+        this.currentAddress = address;
+    }
+    /**
+     * @param {?} address
+     * @return {?}
+     */
+    addAddressSubmit(address) {
+        this.showAddAddressForm = false;
+        this.service.addUserAddress(this.userId, address);
+    }
+    /**
+     * @return {?}
+     */
+    addAddressCancel() {
+        this.showAddAddressForm = false;
+    }
+    /**
+     * @param {?} address
+     * @return {?}
+     */
+    editAddressSubmit(address) {
+        this.showEditAddressForm = false;
+        this.service.updateUserAddress(this.userId, this.currentAddress['id'], address);
+    }
+    /**
+     * @return {?}
+     */
+    editAddressCancel() {
+        this.showEditAddressForm = false;
+    }
+}
+AddressBookComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-address-book',
+                template: "<div class=\"cx-section\">\n  <ng-container\n    *ngIf=\"\n      (addresses$ | async).length &&\n      !(showAddAddressForm || showEditAddressForm)\n    \"\n  >\n    <div class=\"row\">\n      <div class=\"col-md-6\">\n        <button\n          class=\"btn btn-block btn-action\"\n          (click)=\"addAddressButtonHandle()\"\n        >\n          {{ 'addressBook.addNewAddress' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n\n    <div\n      class=\"row cx-address-deck\"\n      *ngIf=\"!(addressesStateLoading$ | async); else loading\"\n    >\n      <div\n        *ngFor=\"let address of (addresses$ | async)\"\n        class=\"col-md-6 cx-address-card\"\n      >\n        <cx-address-card\n          (editEvent)=\"editAddressButtonHandle(address)\"\n          [userId]=\"userId\"\n          [address]=\"address\"\n        ></cx-address-card>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-container *ngIf=\"!(addresses$ | async).length || showAddAddressForm\">\n    <section>\n      <p class=\"cx-section-msg\">\n        {{ 'addressBook.addNewShippingAddress' | cxTranslate }}\n      </p>\n      <cx-address-form\n        class=\"cx-form\"\n        showTitleCode=\"true\"\n        [showCancelBtn]=\"!((addresses$ | async).length === 0)\"\n        actionBtnLabel=\"{{ 'addressBook.addAddress' | cxTranslate }}\"\n        cancelBtnLabel=\"{{ 'addressBook.backToAddressList' | cxTranslate }}\"\n        [setAsDefaultField]=\"!((addresses$ | async).length === 0)\"\n        (submitAddress)=\"addAddressSubmit($event)\"\n        (backToAddress)=\"addAddressCancel()\"\n      ></cx-address-form>\n    </section>\n  </ng-container>\n\n  <ng-container *ngIf=\"showEditAddressForm\">\n    <section>\n      <p class=\"cx-section-msg\">\n        {{ 'addressBook.editShippingAddress' | cxTranslate }}\n      </p>\n      <cx-address-form\n        showTitleCode=\"true\"\n        actionBtnLabel=\"{{ 'addressBook.updateAddress' | cxTranslate }}\"\n        cancelBtnLabel=\"{{ 'addressBook.backToAddressList' | cxTranslate }}\"\n        [addressData]=\"currentAddress\"\n        (submitAddress)=\"editAddressSubmit($event)\"\n        (backToAddress)=\"editAddressCancel()\"\n      ></cx-address-form>\n    </section>\n  </ng-container>\n</div>\n\n<ng-template #loading>\n  <div class=\"col-md-12 cx-address-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n"
+            }] }
+];
+/** @nocollapse */
+AddressBookComponent.ctorParameters = () => [
+    { type: AddressBookComponentService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class SuggestedAddressDialogComponent {
+    /**
+     * @param {?} activeModal
+     */
+    constructor(activeModal) {
+        this.activeModal = activeModal;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.selectedAddress = this.suggestedAddresses.length
+            ? this.suggestedAddresses[0]
+            : this.enteredAddress;
+    }
+}
+SuggestedAddressDialogComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-suggested-addresses-dialog',
+                template: "<div class=\"cx-dialog-header modal-header\">\n  <div class=\"cx-dialog-title modal-title\">\n    {{ 'checkoutAddress.verifyYourAddress' | cxTranslate }}\n  </div>\n  <button\n    type=\"button\"\n    class=\"close\"\n    aria-label=\"Close\"\n    (click)=\"activeModal.close()\"\n  >\n    <span aria-hidden=\"true\">&times;</span>\n  </button>\n</div>\n<div class=\"cx-dialog-body modal-body\" ngForm>\n  <div class=\"container\">\n    <div class=\"row\">\n      <div class=\"cx-dialog-info col-md-12\">\n        <p>\n          {{ 'checkoutAddress.ensureAccuracySuggestChange' | cxTranslate }}\n          {{ 'checkoutAddress.chooseAddressToUse' | cxTranslate }}\n        </p>\n      </div>\n    </div>\n\n    <div class=\"row\">\n      <div class=\"cx-dialog-options col-md-12\">\n        <div\n          class=\"form-check\"\n          *ngFor=\"let suggestedAddress of suggestedAddresses; let i = index\"\n        >\n          <input\n            class=\"form-check-input\"\n            type=\"radio\"\n            name=\"selectedAddress\"\n            [(ngModel)]=\"selectedAddress\"\n            [value]=\"suggestedAddress\"\n            [id]=\"'suggested-addresses--suggested-' + i\"\n          />\n          <label\n            class=\"form-check-label cx-dialog-label\"\n            [for]=\"'suggested-addresses--suggested-' + i\"\n          >\n            {{ 'checkoutAddress.suggestedAddress' | cxTranslate }}\n            {{ suggestedAddresses?.length > 1 ? i + 1 : null }}\n          </label>\n          <div class=\"cx-dialog-suggested\">\n            {{ suggestedAddress?.firstName }} {{ suggestedAddress?.lastName\n            }}<br />\n            {{ suggestedAddress?.line1 }}<br />\n            <span>{{ suggestedAddress?.line2 }}</span\n            ><br />\n            {{ suggestedAddress?.town }} {{ suggestedAddress?.region?.isocode\n            }}<br />\n            {{ suggestedAddress?.postalCode }}\n          </div>\n        </div>\n        <div class=\"form-check\">\n          <input\n            class=\"form-check-input\"\n            type=\"radio\"\n            name=\"selectedAddress\"\n            [(ngModel)]=\"selectedAddress\"\n            [value]=\"enteredAddress\"\n            id=\"suggested-addresses--entered\"\n          />\n          <label\n            class=\"form-check-label cx-dialog-label\"\n            for=\"suggested-addresses--entered\"\n          >\n            {{ 'checkoutAddress.enteredAddress' | cxTranslate }}\n          </label>\n          <div class=\"cx-dialog-entered\">\n            {{ enteredAddress?.firstName }} {{ enteredAddress?.lastName }}<br />\n            {{ enteredAddress?.line1 }}<br />\n            <span>{{ enteredAddress?.line2 }}</span\n            ><br />\n            {{ enteredAddress?.town }} {{ enteredAddress?.region?.isocode\n            }}<br />\n            {{ enteredAddress?.postalCode }}\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"cx-dialog-actions col-sm-12 col-md-6 offset-md-6\">\n        <button\n          class=\"btn btn-secondary btn-block cx-dialog-buttons\"\n          (click)=\"activeModal.close()\"\n        >\n          {{ 'common.editAddress' | cxTranslate }}\n        </button>\n        <button\n          ngbAutofocus\n          class=\"btn btn-primary btn-block cx-dialog-buttons\"\n          (click)=\"activeModal.close(selectedAddress)\"\n        >\n          {{ 'checkoutAddress.saveAddress' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+SuggestedAddressDialogComponent.ctorParameters = () => [
+    { type: NgbActiveModal }
+];
+SuggestedAddressDialogComponent.propDecorators = {
+    suggestedAddresses: [{ type: Input }],
+    enteredAddress: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class AddressFormComponent {
+    /**
+     * @param {?} fb
+     * @param {?} checkoutService
+     * @param {?} userService
+     * @param {?} globalMessageService
+     * @param {?} modalService
+     */
+    constructor(fb, checkoutService, userService, globalMessageService, modalService) {
+        this.fb = fb;
+        this.checkoutService = checkoutService;
+        this.userService = userService;
+        this.globalMessageService = globalMessageService;
+        this.modalService = modalService;
+        this.showCancelBtn = true;
+        this.submitAddress = new EventEmitter();
+        this.backToAddress = new EventEmitter();
+        this.address = this.fb.group({
+            defaultAddress: [false],
+            titleCode: [''],
+            firstName: ['', Validators.required],
+            lastName: ['', Validators.required],
+            line1: ['', Validators.required],
+            line2: [''],
+            town: ['', Validators.required],
+            region: this.fb.group({
+                isocode: [null, Validators.required],
+            }),
+            country: this.fb.group({
+                isocode: [null, Validators.required],
+            }),
+            postalCode: ['', Validators.required],
+            phone: '',
+        });
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        // Fetching countries
+        this.countries$ = this.userService.getDeliveryCountries().pipe(tap(countries => {
+            if (Object.keys(countries).length === 0) {
+                this.userService.loadDeliveryCountries();
+            }
+        }));
+        // Fetching titles
+        this.titles$ = this.userService.getTitles().pipe(tap(titles => {
+            if (Object.keys(titles).length === 0) {
+                this.userService.loadTitles();
+            }
+        }), map(titles => {
+            /** @type {?} */
+            const noneTitle = { code: '', name: 'Title' };
+            return [noneTitle, ...titles];
+        }));
+        // Fetching regions
+        this.regions$ = this.userService.getRegions().pipe(tap(regions => {
+            /** @type {?} */
+            const regionControl = this.address.get('region.isocode');
+            if (Object.keys(regions).length === 0) {
+                regionControl.disable();
+                /** @type {?} */
+                const countryIsoCode = this.address.get('country.isocode').value;
+                if (countryIsoCode) {
+                    this.userService.loadRegions(countryIsoCode);
+                }
+            }
+            else {
+                regionControl.enable();
+            }
+        }));
+        // verify the new added address
+        this.addressVerifySub = this.checkoutService
+            .getAddressVerificationResults()
+            .subscribe((results) => {
+            if (results === 'FAIL') {
+                this.checkoutService.clearAddressVerificationResults();
+            }
+            else if (results.decision === 'ACCEPT') {
+                this.submitAddress.emit(this.address.value);
+            }
+            else if (results.decision === 'REJECT') {
+                // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
+                if (results.errors.errors.some(error => error.subject === 'titleCode')) {
+                    this.globalMessageService.add({
+                        type: GlobalMessageType.MSG_TYPE_ERROR,
+                        text: 'Title is required',
+                    });
+                }
+                else {
+                    this.globalMessageService.add({
+                        type: GlobalMessageType.MSG_TYPE_ERROR,
+                        text: 'Invalid Address',
+                    });
+                }
+                this.checkoutService.clearAddressVerificationResults();
+            }
+            else if (results.decision === 'REVIEW') {
+                this.openSuggestedAddress(results);
+            }
+        });
+        if (this.addressData) {
+            this.address.patchValue(this.addressData);
+            this.countrySelected(this.addressData.country);
+            if (this.addressData.region) {
+                this.regionSelected(this.addressData.region);
+            }
+        }
+    }
+    /**
+     * @param {?} title
+     * @return {?}
+     */
+    titleSelected(title) {
+        this.address['controls'].titleCode.setValue(title.code);
+    }
+    /**
+     * @param {?} country
+     * @return {?}
+     */
+    countrySelected(country) {
+        this.address['controls'].country['controls'].isocode.setValue(country.isocode);
+        this.userService.loadRegions(country.isocode);
+    }
+    /**
+     * @param {?} region
+     * @return {?}
+     */
+    regionSelected(region) {
+        this.address['controls'].region['controls'].isocode.setValue(region.isocode);
+    }
+    /**
+     * @return {?}
+     */
+    toggleDefaultAddress() {
+        this.address['controls'].defaultAddress.setValue(this.address.value.defaultAddress);
+    }
+    /**
+     * @return {?}
+     */
+    back() {
+        this.backToAddress.emit();
+    }
+    /**
+     * @return {?}
+     */
+    verifyAddress() {
+        this.checkoutService.verifyAddress(this.address.value);
+    }
+    /**
+     * @param {?} results
+     * @return {?}
+     */
+    openSuggestedAddress(results) {
+        if (!this.suggestedAddressModalRef) {
+            this.suggestedAddressModalRef = this.modalService.open(SuggestedAddressDialogComponent, { centered: true, size: 'lg' });
+            this.suggestedAddressModalRef.componentInstance.enteredAddress = this.address.value;
+            this.suggestedAddressModalRef.componentInstance.suggestedAddresses =
+                results.suggestedAddresses;
+            this.suggestedAddressModalRef.result
+                .then(address => {
+                this.checkoutService.clearAddressVerificationResults();
+                if (address) {
+                    address = Object.assign({
+                        titleCode: this.address.value.titleCode,
+                        phone: this.address.value.phone,
+                        selected: true,
+                    }, address);
+                    this.submitAddress.emit(address);
+                }
+                this.suggestedAddressModalRef = null;
+            })
+                .catch(() => {
+                // this  callback is called when modal is closed with Esc key or clicking backdrop
+                this.checkoutService.clearAddressVerificationResults();
+                /** @type {?} */
+                const address = Object.assign({
+                    selected: true,
+                }, this.address.value);
+                this.submitAddress.emit(address);
+                this.suggestedAddressModalRef = null;
+            });
+        }
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        this.checkoutService.clearAddressVerificationResults();
+        if (this.addressVerifySub) {
+            this.addressVerifySub.unsubscribe();
+        }
+    }
+}
+AddressFormComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-address-form',
+                template: "<div [formGroup]=\"address\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <div class=\"form-group\" *ngIf=\"showTitleCode\">\n        <ng-container *ngIf=\"(titles$ | async) as titles\">\n          <div *ngIf=\"titles.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'addressForm.title' | cxTranslate\n              }}</span>\n              <ng-select\n                formControlName=\"titleCode\"\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"titles\"\n                bindLabel=\"name\"\n                bindValue=\"code\"\n                (change)=\"titleSelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.firstName.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            type=\"text\"\n            required\n            placeholder=\"{{\n              'addressForm.firstName.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"firstName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.lastName.label' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            placeholder=\"{{ 'addressForm.lastName.placeholder' | cxTranslate }}\"\n            formControlName=\"lastName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.address1' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            placeholder=\"{{ 'addressForm.streetAddress' | cxTranslate }}\"\n            formControlName=\"line1\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'addressForm.address2' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            placeholder=\"{{ 'addressForm.aptSuite' | cxTranslate }}\"\n            formControlName=\"line2\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\" formGroupName=\"country\">\n        <ng-container *ngIf=\"(countries$ | async) as countries\">\n          <div *ngIf=\"countries.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'addressForm.country' | cxTranslate\n              }}</span>\n              <ng-select\n                class=\"country-select\"\n                formControlName=\"isocode\"\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"countries\"\n                bindLabel=\"name\"\n                bindValue=\"isocode\"\n                placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                (change)=\"countrySelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"row\">\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content required\">{{\n              'addressForm.city.label' | cxTranslate\n            }}</span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              required\n              placeholder=\"{{ 'addressForm.city.placeholder' | cxTranslate }}\"\n              formControlName=\"town\"\n            />\n          </label>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <ng-container\n            *ngIf=\"(regions$ | async) as regions\"\n            formGroupName=\"region\"\n          >\n            <div *ngIf=\"regions.length !== 0\">\n              <label aria-required=\"true\">\n                <span class=\"label-content required\">{{\n                  'addressForm.state' | cxTranslate\n                }}</span>\n                <ng-container *ngIf=\"regions[0].name\">\n                  <ng-select\n                    class=\"region-select\"\n                    formControlName=\"isocode\"\n                    [searchable]=\"false\"\n                    [clearable]=\"false\"\n                    [items]=\"regions\"\n                    bindLabel=\"name\"\n                    bindValue=\"isocode\"\n                    placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                    (change)=\"regionSelected($event)\"\n                  >\n                  </ng-select>\n                </ng-container>\n                <ng-container *ngIf=\"!regions[0].name\">\n                  <ng-select\n                    class=\"region-select\"\n                    [searchable]=\"false\"\n                    [clearable]=\"false\"\n                    [items]=\"regions\"\n                    bindLabel=\"isocode\"\n                    bindValue=\"region\"\n                    placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                    (change)=\"regionSelected($event)\"\n                  >\n                  </ng-select>\n                </ng-container>\n              </label>\n            </div>\n          </ng-container>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content required\">{{\n              'addressForm.zipCode.label' | cxTranslate\n            }}</span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              required\n              placeholder=\"{{\n                'addressForm.zipCode.placeholder' | cxTranslate\n              }}\"\n              formControlName=\"postalCode\"\n            />\n          </label>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'addressForm.phoneNumber.label' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            placeholder=\"{{\n              'addressForm.phoneNumber.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"phone\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\" *ngIf=\"setAsDefaultField !== false\">\n        <div class=\"form-check\">\n          <label>\n            <input\n              type=\"checkbox\"\n              class=\"form-check-input\"\n              formControlName=\"defaultAddress\"\n              (change)=\"toggleDefaultAddress()\"\n            />\n            <span class=\"form-check-label\">{{\n              'addressForm.setAsDefault' | cxTranslate\n            }}</span>\n          </label>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"cx-checkout-btns row\">\n    <div class=\"col-md-12 col-lg-6\" *ngIf=\"showCancelBtn\">\n      <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n        {{ cancelBtnLabel || ('addressForm.chooseAddress' | cxTranslate) }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        class=\"btn btn-block btn-primary\"\n        [disabled]=\"address.invalid\"\n        (click)=\"verifyAddress()\"\n      >\n        {{ actionBtnLabel || ('common.continue' | cxTranslate) }}\n      </button>\n    </div>\n  </div>\n</div>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+AddressFormComponent.ctorParameters = () => [
+    { type: FormBuilder },
+    { type: CheckoutService },
+    { type: UserService },
+    { type: GlobalMessageService },
+    { type: NgbModal }
+];
+AddressFormComponent.propDecorators = {
+    addressData: [{ type: Input }],
+    actionBtnLabel: [{ type: Input }],
+    cancelBtnLabel: [{ type: Input }],
+    setAsDefaultField: [{ type: Input }],
+    showTitleCode: [{ type: Input }],
+    showCancelBtn: [{ type: Input }],
+    submitAddress: [{ type: Output }],
+    backToAddress: [{ type: Output }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class AddressFormModule {
+}
+AddressFormModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    ReactiveFormsModule,
+                    FormsModule,
+                    RouterModule,
+                    NgSelectModule,
+                    I18nModule,
+                ],
+                declarations: [AddressFormComponent, SuggestedAddressDialogComponent],
+                entryComponents: [SuggestedAddressDialogComponent],
+                exports: [AddressFormComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CardComponent {
+    constructor() {
+        this.deleteCard = new EventEmitter();
+        this.setDefaultCard = new EventEmitter();
+        this.sendCard = new EventEmitter();
+        this.editCard = new EventEmitter();
+        this.cancelCard = new EventEmitter();
+        this.border = false;
+        this.editMode = false;
+        this.isDefault = false;
+        this.fitToContainer = false;
+    }
+    // ACTIONS
+    /**
+     * @return {?}
+     */
+    setEditMode() {
+        this.editMode = true;
+    }
+    /**
+     * @return {?}
+     */
+    cancelEdit() {
+        this.editMode = false;
+        this.cancelCard.emit(5);
+    }
+    /**
+     * @return {?}
+     */
+    delete() {
+        this.deleteCard.emit(1);
+    }
+    /**
+     * @return {?}
+     */
+    setDefault() {
+        this.isDefault = true;
+        this.setDefaultCard.emit(2);
+    }
+    /**
+     * @return {?}
+     */
+    send() {
+        this.sendCard.emit(3);
+    }
+    /**
+     * @return {?}
+     */
+    edit() {
+        this.editCard.emit(4);
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() { }
+}
+CardComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-card',
+                template: "<div\n  *ngIf=\"content\"\n  class=\"cx-card\"\n  [class.cx-card-border]=\"border\"\n  [class.cx-card-fit-to-container]=\"fitToContainer\"\n>\n  <!-- Card Header -->\n  <div *ngIf=\"content.header && !editMode\" class=\"card-header\">\n    {{ content.header }}\n  </div>\n  <!-- Card Body -->\n  <div class=\"card-body cx-card-body\" [class.cx-card-delete]=\"editMode\">\n    <!-- Edit message -->\n    <div *ngIf=\"editMode\" class=\"cx-card-delete-msg\">\n      {{ content.deleteMsg }}\n    </div>\n    <!-- Card title -->\n    <h4 *ngIf=\"content.title\" class=\"cx-card-title\">\n      {{ content.title }}\n    </h4>\n    <!-- Card Content -->\n    <div class=\"cx-card-container\">\n      <!-- Card Label -->\n      <div class=\"cx-card-label-container\">\n        <div *ngIf=\"content.textBold\" class=\"cx-card-label-bold\">\n          {{ content.textBold }}\n        </div>\n        <div *ngFor=\"let line of content.text\">\n          <div class=\"cx-card-label\">{{ line }}</div>\n        </div>\n      </div>\n      <!-- Image -->\n      <div *ngIf=\"content.img\" class=\"cx-card-img-container\">\n        <img src=\"{{ content.img }}\" alt=\"\" />\n      </div>\n    </div>\n    <!-- Edit Mode Actions -->\n    <div *ngIf=\"editMode\" class=\"row cx-card-body-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-primary\" (click)=\"delete()\">\n          {{ 'common.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <!-- Actions -->\n    <div *ngIf=\"content.actions && !editMode\" class=\"cx-card-actions\">\n      <div *ngFor=\"let action of content.actions\">\n        <div [ngSwitch]=\"action.event\">\n          <a\n            *ngSwitchCase=\"'delete'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"delete()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'default'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"setDefault()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'send'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"send()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'edit'\"\n            class=\"card-link btn-link\"\n            (click)=\"edit()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchDefault\n            href=\"{{ action.link }}\"\n            class=\"card-link btn-link\"\n            >{{ action.name }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-card-border{border-width:var(--cx-border-width,1px);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light))}.cx-card-container{display:var(--cx-display,flex)}.cx-card-label-container{flex-grow:var(--cx-flex-grow,2)}.cx-card-fit-to-container{width:var(--cx-width,100%);height:var(--cx-height,100%);display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column)}.cx-card-body{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column);justify-content:var(--cx-justify-content,space-between)}.cx-card-delete{background-color:var(--cx-background-color,var(--cx-g-color-background))}.cx-card-body-delete{padding:var(--cx-padding,1rem 0 0 0)}.cx-card-delete-msg{color:var(--cx-color,var(--cx-g-color-danger));padding:var(--cx-padding,0 0 1.25rem 0)}.cx-card-actions{display:var(--cx-display,flex);justify-content:var(--cx-justify-content,flex-end);padding:var(--cx-padding,1.25rem 0 0 0)}.cx-card-link{padding:var(--cx-padding,0 0 0 1rem)}"]
+            }] }
+];
+/** @nocollapse */
+CardComponent.ctorParameters = () => [];
+CardComponent.propDecorators = {
+    deleteCard: [{ type: Output }],
+    setDefaultCard: [{ type: Output }],
+    sendCard: [{ type: Output }],
+    editCard: [{ type: Output }],
+    cancelCard: [{ type: Output }],
+    border: [{ type: Input }],
+    editMode: [{ type: Input }],
+    isDefault: [{ type: Input }],
+    content: [{ type: Input }],
+    fitToContainer: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CardModule {
+}
+CardModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule, I18nModule],
+                declarations: [CardComponent],
+                exports: [CardComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class AddressCardComponent {
+    /**
+     * @param {?} userService
+     */
+    constructor(userService) {
+        this.userService = userService;
+        this.editEvent = new EventEmitter();
+    }
+    /**
+     * @return {?}
+     */
+    openEditFormEvent() {
+        this.editEvent.emit();
+    }
+    /**
+     * @return {?}
+     */
+    cancelEdit() {
+        this.editMode = false;
+    }
+    /**
+     * @return {?}
+     */
+    setEditMode() {
+        this.editMode = true;
+    }
+    /**
+     * @param {?} addressId
+     * @return {?}
+     */
+    setAddressAsDefault(addressId) {
+        if (this.userId) {
+            this.userService.setAddressAsDefault(this.userId, addressId);
+        }
+    }
+    /**
+     * @param {?} addressId
+     * @return {?}
+     */
+    deleteAddress(addressId) {
+        if (this.userId) {
+            this.userService.deleteUserAddress(this.userId, addressId);
+        }
+    }
+}
+AddressCardComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-address-card',
+                template: "<div class=\"card\">\n  <div class=\"card-header\" *ngIf=\"address?.defaultAddress && !editMode\">\n    &#10003; {{ 'addressCard.default' | cxTranslate }}\n  </div>\n  <div\n    class=\"card-body cx-card-body\"\n    [class.cx-address-card-delete-mode]=\"editMode\"\n  >\n    <div *ngIf=\"editMode\" class=\"cx-address-card-delete-msg\">\n      {{ 'addressBook.areYouSureToDeleteAddress' | cxTranslate }}\n    </div>\n    <div class=\"cx-address-data\">\n      <div class=\"cx-address-card-label-name\">\n        {{ address?.firstName }} {{ address?.lastName }}\n      </div>\n      <div class=\"cx-address-card-label\">{{ address?.line1 }}</div>\n      <div class=\"cx-address-card-label\">{{ address?.line2 }}</div>\n      <div class=\"cx-address-card-label\">\n        {{ address?.town }},\n        <span *ngIf=\"!address?.region?.isocode\">{{\n          address?.country?.isocode\n        }}</span\n        ><span>{{ address?.region?.isocode }}</span>\n      </div>\n      <div class=\"cx-address-card-label\">{{ address?.postalCode }}</div>\n      <div class=\"cx-address-card-label\">{{ address?.phone }}</div>\n    </div>\n\n    <div *ngIf=\"editMode\" class=\"row cx-address-card-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button\n          (click)=\"deleteAddress(address.id)\"\n          class=\"btn btn-block btn-primary\"\n        >\n          {{ 'common.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <div *ngIf=\"!editMode\" class=\"card-actions\">\n      <a\n        *ngIf=\"!address?.defaultAddress\"\n        (click)=\"setAddressAsDefault(address.id)\"\n        class=\"card-link btn-link set-default\"\n        >{{ 'addressCard.setAsDefault' | cxTranslate }}</a\n      >\n      <a (click)=\"openEditFormEvent()\" class=\"card-link btn-link edit\">{{\n        'common.edit' | cxTranslate\n      }}</a>\n      <a (click)=\"setEditMode()\" class=\"card-link btn-link delete\">{{\n        'common.delete' | cxTranslate\n      }}</a>\n    </div>\n  </div>\n</div>\n"
+            }] }
+];
+/** @nocollapse */
+AddressCardComponent.ctorParameters = () => [
+    { type: UserService }
+];
+AddressCardComponent.propDecorators = {
+    userId: [{ type: Input }],
+    address: [{ type: Input }],
+    editEvent: [{ type: Output }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class AddressBookModule {
+}
+AddressBookModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            AccountAddressBookComponent: {
+                                selector: 'cx-address-book',
+                                providers: [
+                                    {
+                                        provide: AddressBookComponentService,
+                                        useClass: AddressBookComponentService,
+                                        deps: [UserService],
+                                    },
+                                ],
+                            },
+                        },
+                    }))),
+                    CardModule,
+                    AddressFormModule,
+                    SpinnerModule,
+                    I18nModule,
+                ],
+                declarations: [AddressBookComponent, AddressCardComponent],
+                exports: [AddressBookComponent, AddressCardComponent],
+                providers: [UserService, AddressBookComponentService],
+                entryComponents: [AddressBookComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CloseAccountModalComponent {
+    /**
+     * @param {?} activeModal
+     * @param {?} userService
+     * @param {?} authService
+     * @param {?} globalMessageService
+     * @param {?} routingService
+     * @param {?} translationService
+     */
+    constructor(activeModal, userService, authService, globalMessageService, routingService, translationService) {
+        this.activeModal = activeModal;
+        this.userService = userService;
+        this.authService = authService;
+        this.globalMessageService = globalMessageService;
+        this.routingService = routingService;
+        this.translationService = translationService;
+        this.subscription = new Subscription();
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.userToken$ = this.authService.getUserToken();
+        this.userService.resetRemoveUserProcessState();
+        this.subscription.add(this.userService
+            .getRemoveUserResultSuccess()
+            .subscribe(success => this.onSuccess(success)));
+        this.isLoading$ = this.userService.getRemoveUserResultLoading();
+    }
+    /**
+     * @param {?} success
+     * @return {?}
+     */
+    onSuccess(success) {
+        if (success) {
+            this.closeModal();
+            this.translationService
+                .translate('closeAccount.message.success')
+                .pipe(first())
+                .subscribe(text => {
+                this.globalMessageService.add({
+                    text,
+                    type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
+                });
+            });
+            this.routingService.go({ route: 'home' });
+        }
+    }
+    /**
+     * @return {?}
+     */
+    closeModal() {
+        this.activeModal.dismiss();
+    }
+    /**
+     * @param {?} userId
+     * @return {?}
+     */
+    closeAccount(userId) {
+        this.userService.remove(userId);
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+    }
+}
+CloseAccountModalComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-close-account-modal',
+                template: "<ng-container *ngIf=\"(userToken$ | async) as userToken\">\n  <div class=\"modal-header cx-dialog-header\">\n    <h3 class=\"modal-title\">\n      {{ 'closeAccount.modal.title' | cxTranslate }}\n    </h3>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"closeModal()\"\n    >\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n\n  <div *ngIf=\"(isLoading$ | async); else loaded\">\n    <div class=\"cx-spinner\">\n      <cx-spinner> </cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #loaded>\n    <div class=\"modal-body\">\n      <div class=\"cx-row\">\n        <p class=\"cx-confirmation\">\n          {{ 'closeAccount.modal.confirmation' | cxTranslate }}\n        </p>\n      </div>\n      <div class=\"cx-row\">\n        <div class=\"cx-btn-group\">\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"closeAccount(userToken.userId)\"\n          >\n            {{ 'closeAccount.action.closeMyAccount' | cxTranslate }}\n          </button>\n          <button (click)=\"closeModal()\" class=\"btn btn-block btn-secondary\">\n            {{ 'closeAccount.action.cancel' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/:host{display:flex;flex-direction:column;height:100%}.cx-dialog-header{padding:var(--cx-padding,2rem 1.75rem .85rem);border-width:var(--cx-border-width,0)}h3{font-weight:var(--cx-g-font-weight-semi)}.cx-row{display:flex}.cx-confirmation{margin:var(--cx-margin,0 0 3em 0)}.cx-btn-group{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column);width:var(--cx-width,100%)}.cx-btn-group button:first-child{margin:var(--cx-margin,0 0 1em 0)}@media (max-width:767.98px){.modal-body{top:-85px;flex:none;margin:auto 0}}"]
+            }] }
+];
+/** @nocollapse */
+CloseAccountModalComponent.ctorParameters = () => [
+    { type: NgbActiveModal },
+    { type: UserService },
+    { type: AuthService },
+    { type: GlobalMessageService },
+    { type: RoutingService },
+    { type: TranslationService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CloseAccountComponent {
+    /**
+     * @param {?} modalService
+     */
+    constructor(modalService) {
+        this.modalService = modalService;
+    }
+    /**
+     * @return {?}
+     */
+    openModal() {
+        this.modal = this.modalService.open(CloseAccountModalComponent, {
+            centered: true,
+        }).componentInstance;
+    }
+}
+CloseAccountComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-close-account',
+                template: "<div class=\"col-lg-8 col-md-9\">\n  <p\n    class=\"cx-info\"\n    [innerHTML]=\"'closeAccount.info.retention' | cxTranslate\"\n  ></p>\n  <div class=\"row cx-btn-group\">\n    <div class=\"col-sm-3\">\n      <a\n        [routerLink]=\"{ route: 'home' } | cxTranslateUrl\"\n        class=\"btn btn-block btn-secondary\"\n        >{{ 'closeAccount.action.cancel' | cxTranslate }}</a\n      >\n    </div>\n    <div class=\"col-sm-6\">\n      <button class=\"btn btn-primary\" (click)=\"openModal()\">\n        {{ 'closeAccount.action.closeMyAccount' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+CloseAccountComponent.ctorParameters = () => [
+    { type: NgbModal }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CloseAccountModule {
+}
+CloseAccountModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    RouterModule,
+                    UrlTranslationModule,
+                    I18nModule,
+                    SpinnerModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            CloseAccountComponent: { selector: 'cx-close-account' },
+                        },
+                    }))),
+                ],
+                declarations: [CloseAccountComponent, CloseAccountModalComponent],
+                exports: [CloseAccountComponent],
+                entryComponents: [CloseAccountComponent, CloseAccountModalComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ForgotPasswordComponent {
+    /**
+     * @param {?} fb
+     * @param {?} userService
+     * @param {?} routingService
+     */
+    constructor(fb, userService, routingService) {
+        this.fb = fb;
+        this.userService = userService;
+        this.routingService = routingService;
+        this.submited = false;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.form = this.fb.group({
+            userEmail: [
+                '',
+                [Validators.required, CustomFormValidators.emailValidator],
+            ],
+        });
+    }
+    /**
+     * @return {?}
+     */
+    requestForgotPasswordEmail() {
+        this.submited = true;
+        if (this.form.invalid) {
+            return;
+        }
+        this.userService.requestForgotPasswordEmail(this.form.value.userEmail);
+        this.routingService.go({ route: 'login' });
+    }
+}
+ForgotPasswordComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-forgot-password',
+                template: "<form (submit)=\"requestForgotPasswordEmail()\" [formGroup]=\"form\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'forgottenPassword.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        placeholder=\"{{\n          'forgottenPassword.emailAddress.placeholder' | cxTranslate\n        }}\"\n        formControlName=\"userEmail\"\n        [ngClass]=\"{\n          'is-invalid':\n            form.controls['userEmail'].invalid &&\n            (submited ||\n              (form.controls['userEmail'].touched &&\n                form.controls['userEmail'].dirty))\n        }\"\n      />\n      <div\n        class=\"invalid-feedback\"\n        *ngIf=\"\n          form.controls['userEmail'].invalid &&\n          (submited ||\n            (form.controls['userEmail'].touched &&\n              form.controls['userEmail'].dirty))\n        \"\n      >\n        <span>{{ 'forgottenPassword.enterValidEmail' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <button type=\"submit\" class=\"btn btn-block btn-primary\">\n    {{ 'common.submit' | cxTranslate }}\n  </button>\n  <a\n    class=\"btn btn-block btn-secondary\"\n    [routerLink]=\"{ route: 'login' } | cxTranslateUrl\"\n    >{{ 'common.cancel' | cxTranslate }}</a\n  >\n</form>\n",
+                styles: [".reset-password h1{margin:var(--cx-margin,0)}.reset-password button{margin:var(--cx-margin,30px 0 0)}.reset-password a{margin:var(--cx-margin,20px 0 0)}"]
+            }] }
+];
+/** @nocollapse */
+ForgotPasswordComponent.ctorParameters = () => [
+    { type: FormBuilder },
+    { type: UserService },
+    { type: RoutingService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ForgotPasswordModule {
+}
+ForgotPasswordModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    ReactiveFormsModule,
+                    RouterModule,
+                    UrlTranslationModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            ForgotPasswordComponent: { selector: 'cx-forgot-password' },
+                        },
+                    }))),
+                    I18nModule,
+                ],
+                declarations: [ForgotPasswordComponent],
+                exports: [ForgotPasswordComponent],
+                entryComponents: [ForgotPasswordComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class OrderDetailsService {
+    /**
+     * @param {?} authService
+     * @param {?} userService
+     * @param {?} routingService
+     */
+    constructor(authService, userService, routingService) {
+        this.authService = authService;
+        this.userService = userService;
+        this.routingService = routingService;
+        this.userId$ = this.authService
+            .getUserToken()
+            .pipe(map(userData => userData.userId));
+        this.orderCode$ = this.routingService
+            .getRouterState()
+            .pipe(map(routingData => routingData.state.params.orderCode));
+        this.orderLoad$ = combineLatest(this.userId$, this.orderCode$).pipe(tap(([userId, orderCode]) => {
+            if (userId && orderCode) {
+                this.userService.loadOrderDetails(userId, orderCode);
+            }
+            else {
+                this.userService.clearOrderDetails();
+            }
+        }), shareReplay({ bufferSize: 1, refCount: true }));
+    }
+    /**
+     * @return {?}
+     */
+    getOrderDetails() {
+        return this.orderLoad$.pipe(switchMap(() => this.userService.getOrderDetails()));
+    }
+}
+OrderDetailsService.decorators = [
+    { type: Injectable }
+];
+/** @nocollapse */
+OrderDetailsService.ctorParameters = () => [
+    { type: AuthService },
+    { type: UserService },
+    { type: RoutingService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class OrderDetailHeadlineComponent {
+    /**
+     * @param {?} orderDetailsService
+     */
+    constructor(orderDetailsService) {
+        this.orderDetailsService = orderDetailsService;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.order$ = this.orderDetailsService.getOrderDetails();
+    }
+}
+OrderDetailHeadlineComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-order-details-headline',
+                template: "<ng-container *ngIf=\"(order$ | async) as order\">\n  <div class=\"cx-header row\">\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.orderId' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">{{ order?.code }}</div>\n    </div>\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.placed' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">{{ order?.created | date }}</div>\n    </div>\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.status' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">\n        {{\n          'orderDetails.statusDisplay'\n            | cxTranslate: { context: order?.statusDisplay }\n        }}\n      </div>\n    </div>\n  </div>\n</ng-container>\n"
+            }] }
+];
+/** @nocollapse */
+OrderDetailHeadlineComponent.ctorParameters = () => [
+    { type: OrderDetailsService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class OrderDetailItemsComponent {
+    /**
+     * @param {?} orderDetailsService
+     */
+    constructor(orderDetailsService) {
+        this.orderDetailsService = orderDetailsService;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.order$ = this.orderDetailsService.getOrderDetails();
+    }
+    /**
+     * @param {?} consignment
+     * @return {?}
+     */
+    getConsignmentProducts(consignment) {
+        /** @type {?} */
+        const products = [];
+        consignment.entries.forEach(element => {
+            products.push(element.orderEntry);
+        });
+        return products;
+    }
+}
+OrderDetailItemsComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-order-details-items',
+                template: "<ng-container *ngIf=\"(order$ | async) as order\">\n  <div *ngFor=\"let consignment of order.consignments\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">{{ consignment?.status }}</div>\n      <div *ngIf=\"consignment?.statusDate\" class=\"cx-list-date\">\n        <div>{{ 'orderDetails.shippedOn' | cxTranslate }}&nbsp;</div>\n        <div>{{ consignment?.statusDate | date }}</div>\n      </div>\n    </div>\n    <div class=\"cx-list-item col-12\">\n      <cx-cart-item-list\n        [items]=\"getConsignmentProducts(consignment)\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n\n  <div *ngIf=\"order.unconsignedEntries?.length\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">\n        {{ 'orderDetails.inProcess' | cxTranslate }}\n      </div>\n    </div>\n    <div class=\"cx-list-item col-12\">\n      <cx-cart-item-list\n        [items]=\"order?.unconsignedEntries\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n</ng-container>\n"
+            }] }
+];
+/** @nocollapse */
+OrderDetailItemsComponent.ctorParameters = () => [
+    { type: OrderDetailsService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class OrderDetailShippingComponent {
+    /**
+     * @param {?} orderDetailsService
+     */
+    constructor(orderDetailsService) {
+        this.orderDetailsService = orderDetailsService;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.order$ = this.orderDetailsService.getOrderDetails();
+    }
+    /**
+     * @param {?} address
+     * @return {?}
+     */
+    getAddressCardContent(address) {
+        return {
+            title: 'Ship to',
+            textBold: `${address.firstName} ${address.lastName}`,
+            text: [
+                address.line1,
+                address.line2,
+                `${address.town}, ${address.country.isocode}, ${address.postalCode}`,
+                address.phone,
+            ],
+        };
+    }
+    /**
+     * @param {?} billingAddress
+     * @return {?}
+     */
+    getBillingAddressCardContent(billingAddress) {
+        return {
+            title: 'Bill To',
+            textBold: `${billingAddress.firstName} ${billingAddress.lastName}`,
+            text: [
+                billingAddress.line1,
+                billingAddress.line2,
+                `${billingAddress.town}, ${billingAddress.country.isocode}, ${billingAddress.postalCode}`,
+                billingAddress.phone,
+            ],
+        };
+    }
+    /**
+     * @param {?} payment
+     * @return {?}
+     */
+    getPaymentCardContent(payment) {
+        return {
+            title: 'Payment',
+            textBold: payment.accountHolderName,
+            text: [
+                payment.cardType.name,
+                payment.cardNumber,
+                `Expires: ${payment.expiryMonth} / ${payment.expiryYear}`,
+            ],
+        };
+    }
+    /**
+     * @param {?} shipping
+     * @return {?}
+     */
+    getShippingMethodCardContent(shipping) {
+        return {
+            title: 'Shipping Method',
+            textBold: shipping.name,
+            text: [shipping.description],
+        };
+    }
+}
+OrderDetailShippingComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-order-details-shipping',
+                template: "<ng-container *ngIf=\"(order$ | async) as order\">\n  <div class=\"cx-account-summary row\">\n    <div\n      *ngIf=\"order.deliveryAddress\"\n      class=\"cx-summary-card col-sm-12 col-md-4\"\n    >\n      <cx-card\n        [content]=\"getAddressCardContent(order.deliveryAddress)\"\n      ></cx-card>\n    </div>\n    <div\n      *ngIf=\"order.paymentInfo?.billingAddress\"\n      class=\"cx-summary-card col-sm-12 col-md-4\"\n    >\n      <cx-card\n        [content]=\"\n          getBillingAddressCardContent(order.paymentInfo.billingAddress)\n        \"\n      ></cx-card>\n    </div>\n    <div *ngIf=\"order.paymentInfo\" class=\"cx-summary-card col-sm-12 col-md-4\">\n      <cx-card [content]=\"getPaymentCardContent(order.paymentInfo)\"></cx-card>\n    </div>\n    <div *ngIf=\"order.deliveryMode\" class=\"cx-summary-card col-sm-12 col-md-4\">\n      <cx-card\n        [content]=\"getShippingMethodCardContent(order.deliveryMode)\"\n      ></cx-card>\n    </div>\n  </div>\n</ng-container>\n"
+            }] }
+];
+/** @nocollapse */
+OrderDetailShippingComponent.ctorParameters = () => [
+    { type: OrderDetailsService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class OrderDetailTotalsComponent {
+    /**
+     * @param {?} orderDetailsService
+     */
+    constructor(orderDetailsService) {
+        this.orderDetailsService = orderDetailsService;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.order$ = this.orderDetailsService.getOrderDetails();
+    }
+}
+OrderDetailTotalsComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-order-details-totals',
+                template: "<ng-container *ngIf=\"(order$ | async) as order\">\n  <div class=\"row justify-content-end\">\n    <div class=\"cx-summary col-sm-12 col-md-6 col-lg-5 col-xl-4\">\n      <cx-order-summary [cart]=\"order\"></cx-order-summary>\n    </div>\n  </div>\n</ng-container>\n"
+            }] }
+];
+/** @nocollapse */
+OrderDetailTotalsComponent.ctorParameters = () => [
+    { type: OrderDetailsService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const moduleComponents = [
+    OrderDetailHeadlineComponent,
+    OrderDetailItemsComponent,
+    OrderDetailTotalsComponent,
+    OrderDetailShippingComponent,
+];
+class OrderDetailsModule {
+}
+OrderDetailsModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CartSharedModule,
+                    CardModule,
+                    CommonModule,
+                    I18nModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            AccountOrderDetailsHeadlineComponent: {
+                                selector: 'cx-order-details-headline',
+                            },
+                            AccountOrderDetailsItemsComponent: {
+                                selector: 'cx-order-details-items',
+                            },
+                            AccountOrderDetailsTotalsComponent: {
+                                selector: 'cx-order-details-totals',
+                            },
+                            AccountOrderDetailsShippingComponent: {
+                                selector: 'cx-order-details-shipping',
+                            },
+                        },
+                    }))),
+                ],
+                providers: [OrderDetailsService],
+                declarations: [...moduleComponents],
+                exports: [...moduleComponents],
+                entryComponents: [...moduleComponents],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class OrderHistoryComponent {
+    /**
+     * @param {?} auth
+     * @param {?} routing
+     * @param {?} userService
+     */
+    constructor(auth, routing, userService) {
+        this.auth = auth;
+        this.routing = routing;
+        this.userService = userService;
+        this.PAGE_SIZE = 5;
+        this.sortLabels = {
+            byDate: 'Date',
+            byOrderNumber: 'Order Number',
+        };
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.subscription = this.auth.getUserToken().subscribe(userData => {
+            if (userData && userData.userId) {
+                this.user_id = userData.userId;
+            }
+        });
+        this.orders$ = this.userService
+            .getOrderHistoryList(this.user_id, this.PAGE_SIZE)
+            .pipe(tap((orders) => {
+            if (orders.pagination) {
+                this.sortType = orders.pagination.sort;
+            }
+        }));
+        this.isLoaded$ = this.userService.getOrderHistoryListLoaded();
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+        this.userService.clearOrderList();
+    }
+    /**
+     * @param {?} sortCode
+     * @return {?}
+     */
+    changeSortCode(sortCode) {
+        /** @type {?} */
+        const event = {
+            sortCode,
+            currentPage: 0,
+        };
+        this.sortType = sortCode;
+        this.fetchOrders(event);
+    }
+    /**
+     * @param {?} page
+     * @return {?}
+     */
+    pageChange(page) {
+        /** @type {?} */
+        const event = {
+            sortCode: this.sortType,
+            currentPage: page,
+        };
+        this.fetchOrders(event);
+    }
+    /**
+     * @param {?} order
+     * @return {?}
+     */
+    goToOrderDetail(order) {
+        this.routing.go({
+            route: 'orderDetails',
+            params: order,
+        });
+    }
+    /**
+     * @private
+     * @param {?} event
+     * @return {?}
+     */
+    fetchOrders(event) {
+        this.userService.loadOrderList(this.user_id, this.PAGE_SIZE, event.currentPage, event.sortCode);
+    }
+}
+OrderHistoryComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-order-history',
+                template: "<ng-container *ngIf=\"(orders$ | async) as orders\">\n  <div class=\"container\">\n    <!-- HEADER -->\n    <div class=\"cx-order-history-header\">\n      <h3>{{ 'orderHistory.orderHistory' | cxTranslate }}</h3>\n    </div>\n\n    <!-- BODY -->\n    <div class=\"cx-order-history-body\">\n      <ng-container *ngIf=\"orders.pagination.totalResults > 0; else noOrder\">\n        <!-- Select Form and Pagination Top -->\n        <div class=\"cx-order-history-sort top row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"sortLabels\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n        <!-- TABLE -->\n        <table class=\"table cx-order-history-table\">\n          <thead class=\"cx-order-history-thead-mobile\">\n            <th scope=\"col\">\n              {{ 'orderHistory.orderId' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.date' | cxTranslate }}</th>\n            <th scope=\"col\">\n              {{ 'orderHistory.status' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.total' | cxTranslate }}</th>\n          </thead>\n          <tbody>\n            <tr\n              *ngFor=\"let order of orders.orders\"\n              (click)=\"goToOrderDetail(order)\"\n            >\n              <td class=\"cx-order-history-code\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.orderId' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxTranslateUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.code }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-placed\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.date' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxTranslateUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                  >{{ order?.placed | cxDate: 'longDate' }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-status\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.status' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxTranslateUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{\n                    'orderDetails.statusDisplay'\n                      | cxTranslate: { context: order?.statusDisplay }\n                  }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-total\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.total' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxTranslateUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.total.formattedValue }}</a\n                >\n              </td>\n            </tr>\n          </tbody>\n        </table>\n        <!-- Select Form and Pagination Bottom -->\n        <div class=\"cx-order-history-sort bottom row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"sortLabels\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n      </ng-container>\n\n      <!-- NO ORDER CONTAINER -->\n      <ng-template #noOrder>\n        <div class=\"cx-order-history-no-order row\" *ngIf=\"(isLoaded$ | async)\">\n          <div class=\"col-sm-12 col-md-6 col-lg-4\">\n            <div>{{ 'orderHistory.noOrders' | cxTranslate }}</div>\n            <a\n              [routerLink]=\"{ route: 'home' } | cxTranslateUrl\"\n              routerLinkActive=\"active\"\n              class=\"btn btn-primary btn-block\"\n              >{{ 'orderHistory.startShopping' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </ng-template>\n    </div>\n  </div>\n</ng-container>\n"
+            }] }
+];
+/** @nocollapse */
+OrderHistoryComponent.ctorParameters = () => [
+    { type: AuthService },
+    { type: RoutingService },
+    { type: UserService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class OrderHistoryModule {
+}
+OrderHistoryModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            AccountOrderHistoryComponent: { selector: 'cx-order-history' },
+                        },
+                    }))),
+                    RouterModule,
+                    FormsModule,
+                    NgSelectModule,
+                    BootstrapModule,
+                    ListNavigationModule,
+                    UrlTranslationModule,
+                    I18nModule,
+                ],
+                declarations: [OrderHistoryComponent],
+                exports: [OrderHistoryComponent],
+                providers: [UserService],
+                entryComponents: [OrderHistoryComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class OrderModule {
+}
+OrderModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [OrderHistoryModule, OrderDetailsModule],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class PaymentMethodsComponent {
+    /**
+     * @param {?} userService
+     */
+    constructor(userService) {
+        this.userService = userService;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.paymentMethods$ = this.userService.getPaymentMethods();
+        this.editCard = null;
+        this.loading$ = this.userService.getPaymentMethodsLoading();
+        this.userServiceSub = this.userService.get().subscribe(data => {
+            this.userId = data.uid;
+            this.userService.loadPaymentMethods(this.userId);
+        });
+    }
+    /**
+     * @param {?} __0
+     * @return {?}
+     */
+    getCardContent({ defaultPayment, accountHolderName, expiryMonth, expiryYear, cardNumber, }) {
+        /** @type {?} */
+        const actions = [];
+        if (!defaultPayment) {
+            actions.push({ name: 'Set as default', event: 'default' });
+        }
+        actions.push({ name: 'Delete', event: 'edit' });
+        /** @type {?} */
+        const card = {
+            header: defaultPayment ? 'DEFAULT' : null,
+            textBold: accountHolderName,
+            text: [cardNumber, `Expires: ${expiryMonth}/${expiryYear}`],
+            actions,
+            deleteMsg: 'Are you sure you want to delete this payment method?',
+        };
+        return card;
+    }
+    /**
+     * @param {?} paymentMethod
+     * @return {?}
+     */
+    deletePaymentMethod(paymentMethod) {
+        if (this.userId) {
+            this.userService.deletePaymentMethod(this.userId, paymentMethod.id);
+        }
+        this.editCard = null;
+    }
+    /**
+     * @param {?} paymentMethod
+     * @return {?}
+     */
+    setEdit(paymentMethod) {
+        this.editCard = paymentMethod.id;
+    }
+    /**
+     * @return {?}
+     */
+    cancelCard() {
+        this.editCard = null;
+    }
+    /**
+     * @param {?} paymentMethod
+     * @return {?}
+     */
+    setDefaultPaymentMethod(paymentMethod) {
+        if (this.userId) {
+            this.userService.setPaymentMethodAsDefault(this.userId, paymentMethod.id);
+        }
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        if (this.userServiceSub) {
+            this.userServiceSub.unsubscribe();
+        }
+    }
+}
+PaymentMethodsComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-payment-methods',
+                template: "<div class=\"cx-payment container\">\n  <div class=\"cx-header\">\n    <h3>{{ 'paymentMethods.paymentMethods' | cxTranslate }}</h3>\n  </div>\n\n  <div class=\"cx-body\">\n    <div class=\"cx-msg\">\n      {{\n        'paymentMethods.newPaymentMethodsAreAddedDuringCheckout' | cxTranslate\n      }}\n    </div>\n    <div *ngIf=\"(loading$ | async); else cards\"><cx-spinner></cx-spinner></div>\n    <ng-template #cards>\n      <div\n        *ngIf=\"(paymentMethods$ | async) as paymentMethods\"\n        class=\"cx-existing row\"\n      >\n        <div\n          class=\"cx-payment-card col-sm-12 col-md-12 col-lg-6\"\n          *ngFor=\"let paymentMethod of paymentMethods\"\n        >\n          <div class=\"cx-payment-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"getCardContent(paymentMethod)\"\n              (deleteCard)=\"deletePaymentMethod(paymentMethod)\"\n              (setDefaultCard)=\"setDefaultPaymentMethod(paymentMethod)\"\n              (editCard)=\"setEdit(paymentMethod)\"\n              [editMode]=\"editCard === paymentMethod.id\"\n              (cancelCard)=\"cancelCard()\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n    </ng-template>\n  </div>\n</div>\n"
+            }] }
+];
+/** @nocollapse */
+PaymentMethodsComponent.ctorParameters = () => [
+    { type: UserService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class PaymentMethodsModule {
+}
+PaymentMethodsModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    CardModule,
+                    SpinnerModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            AccountPaymentDetailsComponent: { selector: 'cx-payment-methods' },
+                        },
+                    }))),
+                    I18nModule,
+                ],
+                providers: [UserService],
+                declarations: [PaymentMethodsComponent],
+                exports: [PaymentMethodsComponent],
+                entryComponents: [PaymentMethodsComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ResetPasswordFormComponent {
+    /**
+     * @param {?} fb
+     * @param {?} routingService
+     * @param {?} userService
+     */
+    constructor(fb, routingService, userService) {
+        this.fb = fb;
+        this.routingService = routingService;
+        this.userService = userService;
+        this.subscription = new Subscription();
+        this.submited = false;
+        this.form = this.fb.group({
+            password: [
+                '',
+                [Validators.required, CustomFormValidators.passwordValidator],
+            ],
+            repassword: ['', [Validators.required]],
+        }, { validator: this.matchPassword });
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.subscription.add(this.routingService
+            .getRouterState()
+            .subscribe(state => (this.token = state.state.queryParams['token'])));
+        this.subscription.add(this.userService.isPasswordReset().subscribe(reset => {
+            if (reset) {
+                this.routingService.go({ route: 'login' });
+            }
+        }));
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+    }
+    /**
+     * @return {?}
+     */
+    resetPassword() {
+        this.submited = true;
+        if (this.form.invalid) {
+            return;
+        }
+        /** @type {?} */
+        const password = this.form.value['password'];
+        this.userService.resetPassword(this.token, password);
+    }
+    /**
+     * @private
+     * @param {?} ac
+     * @return {?}
+     */
+    matchPassword(ac) {
+        if (ac.get('password').value !== ac.get('repassword').value) {
+            return { NotEqual: true };
+        }
+    }
+}
+ResetPasswordFormComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-reset-password-form',
+                template: "<form\n  (submit)=\"resetPassword()\"\n  [formGroup]=\"form\"\n  class=\"cx-reset-password-form-component\"\n>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'register.newPassword' | cxTranslate\n      }}</span>\n      <input\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.get('password').invalid &&\n          (submited ||\n            (form.get('password').dirty && form.get('password').touched))\n        \"\n        type=\"password\"\n        name=\"password\"\n        placeholder=\"{{ 'register.password.placeholder' | cxTranslate }}\"\n        formControlName=\"password\"\n      />\n      <div\n        class=\"invalid-feedback\"\n        *ngIf=\"\n          form.get('password').invalid &&\n          (submited ||\n            (form.get('password').dirty && form.get('password').touched))\n        \"\n      >\n        <span>{{ 'register.passwordMinRequirements' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'register.passwordMinRequirements' | cxTranslate\n      }}</span>\n      <input\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.hasError('NotEqual') &&\n          (submited ||\n            (form.get('repassword').dirty && form.get('repassword').touched))\n        \"\n        type=\"password\"\n        name=\"confirmpassword\"\n        placeholder=\"{{ 'register.confirmPassword.placeholder' | cxTranslate }}\"\n        formControlName=\"repassword\"\n      />\n      <div\n        class=\"invalid-feedback\"\n        *ngIf=\"\n          form.hasError('NotEqual') &&\n          (submited ||\n            (form.get('repassword').dirty && form.get('repassword').touched))\n        \"\n      >\n        <span>{{ 'register.bothPasswordMustMatch' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <div class=\"form-group\">\n    <button class=\"btn btn-block btn-primary\" type=\"submit\">\n      {{ 'register.resetPassword' | cxTranslate }}\n    </button>\n  </div>\n</form>\n"
+            }] }
+];
+/** @nocollapse */
+ResetPasswordFormComponent.ctorParameters = () => [
+    { type: FormBuilder },
+    { type: RoutingService },
+    { type: UserService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ResetPasswordModule {
+}
+ResetPasswordModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            ResetPasswordComponent: { selector: 'cx-reset-password-form' },
+                        },
+                    }))),
+                    FormsModule,
+                    ReactiveFormsModule,
+                    RouterModule,
+                    I18nModule,
+                ],
+                declarations: [ResetPasswordFormComponent],
+                exports: [ResetPasswordFormComponent],
+                entryComponents: [ResetPasswordFormComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Utility class when working with forms.
+ */
+class FormUtils {
+    /**
+     *
+     * Checks is the `formControlName` field valid in the provided `form`.
+     *
+     * If it's NOT valid, the method returns `true`.
+     *
+     * @param {?} form a form whose field to check
+     * @param {?} formControlName a field name
+     * @param {?} submitted is the form submitted
+     * @return {?}
+     */
+    static isNotValidField(form, formControlName, submitted) {
+        return (form.get(formControlName).invalid &&
+            (submitted ||
+                (form.get(formControlName).touched && form.get(formControlName).dirty)));
+    }
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class UpdateEmailFormComponent {
+    /**
+     * @param {?} fb
+     */
+    constructor(fb) {
+        this.fb = fb;
+        this.submited = false;
+        this.saveEmail = new EventEmitter();
+        this.cancelEmail = new EventEmitter();
+        this.form = this.fb.group({
+            email: ['', [Validators.required, CustomFormValidators.emailValidator]],
+            confirmEmail: ['', [Validators.required]],
+            password: ['', [Validators.required]],
+        }, { validator: this.matchEmail });
+    }
+    /**
+     * @param {?} formControlName
+     * @return {?}
+     */
+    isEmailConfirmNotValid(formControlName) {
+        return (this.form.hasError('NotEqual') &&
+            (this.submited ||
+                (this.form.get(formControlName).touched &&
+                    this.form.get(formControlName).dirty)));
+    }
+    /**
+     * @param {?} formControlName
+     * @return {?}
+     */
+    isNotValid(formControlName) {
+        return FormUtils.isNotValidField(this.form, formControlName, this.submited);
+    }
+    /**
+     * @return {?}
+     */
+    onSubmit() {
+        this.submited = true;
+        if (this.form.invalid) {
+            return;
+        }
+        /** @type {?} */
+        const newUid = this.form.value.confirmEmail;
+        /** @type {?} */
+        const password = this.form.value.password;
+        this.saveEmail.emit({ newUid, password });
+    }
+    /**
+     * @return {?}
+     */
+    onCancel() {
+        this.cancelEmail.emit();
+    }
+    /**
+     * @private
+     * @param {?} ac
+     * @return {?}
+     */
+    matchEmail(ac) {
+        if (ac.get('email').value !== ac.get('confirmEmail').value) {
+            return { NotEqual: true };
+        }
+    }
+}
+UpdateEmailFormComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-update-email-form',
+                template: "<form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\">\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateEmailForm.newEmailAddress.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"email\"\n          name=\"email\"\n          formControlName=\"email\"\n          placeholder=\"{{\n            'updateEmailForm.newEmailAddress.placeholder' | cxTranslate\n          }}\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('email')\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('email')\">\n          <span>{{ 'updateEmailForm.enterValidEmail' | cxTranslate }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-sm-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateEmailForm.confirmNewEmailAddress.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"email\"\n          name=\"confirmEmail\"\n          formControlName=\"confirmEmail\"\n          placeholder=\"{{\n            'updateEmailForm.confirmNewEmailAddress.placeholder' | cxTranslate\n          }}\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isEmailConfirmNotValid('confirmEmail')\"\n        />\n        <div\n          class=\"invalid-feedback\"\n          *ngIf=\"isEmailConfirmNotValid('confirmEmail')\"\n        >\n          <span>{{\n            'updateEmailForm.bothPasswordMustMatch' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-sm-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateEmailForm.password.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"password\"\n          name=\"password\"\n          formControlName=\"password\"\n          placeholder=\"{{\n            'updateEmailForm.password.placeholder' | cxTranslate\n          }}\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('password')\"\n          autocomplete=\"off\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('password')\">\n          <span>{{ 'updateEmailForm.pleaseInputPassword' | cxTranslate }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-lg-6\">\n      <button\n        class=\"btn btn-block btn-secondary\"\n        type=\"button\"\n        (click)=\"onCancel()\"\n      >\n        {{ 'common.cancel' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-lg-6\">\n      <button class=\"btn btn-block btn-primary\" type=\"submit\">\n        {{ 'common.save' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n",
+                styles: [".form-group button:first-child{margin-bottom:1rem}"]
+            }] }
+];
+/** @nocollapse */
+UpdateEmailFormComponent.ctorParameters = () => [
+    { type: FormBuilder }
+];
+UpdateEmailFormComponent.propDecorators = {
+    saveEmail: [{ type: Output }],
+    cancelEmail: [{ type: Output }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class UpdateEmailComponent {
+    /**
+     * @param {?} routingService
+     * @param {?} globalMessageService
+     * @param {?} userService
+     * @param {?} authService
+     */
+    constructor(routingService, globalMessageService, userService, authService) {
+        this.routingService = routingService;
+        this.globalMessageService = globalMessageService;
+        this.userService = userService;
+        this.authService = authService;
+        this.subscription = new Subscription();
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.userService.resetUpdateEmailResultState();
+        this.subscription.add(this.userService.get().subscribe(result => (this.uid = result.uid)));
+        this.subscription.add(this.userService
+            .getUpdateEmailResultSuccess()
+            .subscribe(success => this.onSuccess(success)));
+        this.isLoading$ = this.userService.getUpdateEmailResultLoading();
+    }
+    /**
+     * @return {?}
+     */
+    onCancel() {
+        this.routingService.go({ route: 'home' });
+    }
+    /**
+     * @param {?} __0
+     * @return {?}
+     */
+    onSubmit({ newUid, password }) {
+        this.newUid = newUid;
+        this.userService.updateEmail(this.uid, password, newUid);
+    }
+    /**
+     * @param {?} success
+     * @return {?}
+     */
+    onSuccess(success) {
+        if (success) {
+            this.globalMessageService.add({
+                text: `Success. Please sign in with ${this.newUid}`,
+                type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
+            });
+            this.authService.logout();
+            this.routingService.go({ route: 'login' });
+        }
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+        this.userService.resetUpdateEmailResultState();
+    }
+}
+UpdateEmailComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-update-email',
+                template: "<ng-container>\n  <div *ngIf=\"(isLoading$ | async); else loaded\">\n    <div class=\"cx-spinner\">\n      <cx-spinner> </cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #loaded>\n    <div class=\"container\">\n      <div class=\"row d-flex justify-content-center\">\n        <cx-update-email-form\n          class=\"col-md-6\"\n          (saveEmail)=\"onSubmit($event)\"\n          (cancelEmail)=\"onCancel()\"\n        >\n        </cx-update-email-form>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n",
+                styles: [""]
+            }] }
+];
+/** @nocollapse */
+UpdateEmailComponent.ctorParameters = () => [
+    { type: RoutingService },
+    { type: GlobalMessageService },
+    { type: UserService },
+    { type: AuthService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class UpdateEmailModule {
+}
+UpdateEmailModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            UpdateEmailComponent: {
+                                selector: 'cx-update-email',
+                            },
+                        },
+                    }))),
+                    FormsModule,
+                    ReactiveFormsModule,
+                    SpinnerModule,
+                    I18nModule,
+                ],
+                declarations: [UpdateEmailFormComponent, UpdateEmailComponent],
+                exports: [UpdateEmailComponent],
+                entryComponents: [UpdateEmailComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class UpdatePasswordFormComponent {
+    /**
+     * @param {?} fb
+     */
+    constructor(fb) {
+        this.fb = fb;
+        this.submitClicked = false;
+        this.submited = new EventEmitter();
+        this.cancelled = new EventEmitter();
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.form = this.fb.group({
+            oldPassword: ['', [Validators.required]],
+            newPassword: [
+                '',
+                [Validators.required, CustomFormValidators.passwordValidator],
+            ],
+            newPasswordConfirm: ['', [Validators.required]],
+        }, { validator: this.matchPassword });
+    }
+    /**
+     * @param {?} formControlName
+     * @return {?}
+     */
+    isNotValid(formControlName) {
+        return FormUtils.isNotValidField(this.form, formControlName, this.submitClicked);
+    }
+    /**
+     * @return {?}
+     */
+    isPasswordConfirmNotValid() {
+        return (this.form.hasError('NotEqual') &&
+            (this.submitClicked ||
+                (this.form.get('newPasswordConfirm').touched &&
+                    this.form.get('newPasswordConfirm').dirty)));
+    }
+    /**
+     * @return {?}
+     */
+    onSubmit() {
+        this.submitClicked = true;
+        if (this.form.invalid) {
+            return;
+        }
+        this.submited.emit({
+            oldPassword: this.form.value.oldPassword,
+            newPassword: this.form.value.newPassword,
+        });
+    }
+    /**
+     * @return {?}
+     */
+    onCancel() {
+        this.cancelled.emit();
+    }
+    /**
+     * @private
+     * @param {?} abstractControl
+     * @return {?}
+     */
+    matchPassword(abstractControl) {
+        if (abstractControl.get('newPassword').value !==
+            abstractControl.get('newPasswordConfirm').value) {
+            return { NotEqual: true };
+        }
+        return null;
+    }
+}
+UpdatePasswordFormComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-update-password-form',
+                template: "<form\n  (ngSubmit)=\"onSubmit()\"\n  [formGroup]=\"form\"\n  class=\"cx-update-password-component \"\n>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updatePasswordForm.oldPassword.label' | cxTranslate\n        }}</span>\n        <input\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('oldPassword')\"\n          type=\"password\"\n          name=\"oldPassword\"\n          placeholder=\"{{\n            'updatePasswordForm.oldPassword.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"oldPassword\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('oldPassword')\">\n          <span>{{\n            'updatePasswordForm.oldPasswordIsRequired' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updatePasswordForm.newPassword.label' | cxTranslate\n        }}</span>\n        <input\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('newPassword')\"\n          type=\"password\"\n          name=\"newPassword\"\n          placeholder=\"{{\n            'updatePasswordForm.newPassword.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"newPassword\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('newPassword')\">\n          <span>{{\n            'updatePasswordForm.passwordMinRequirements' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updatePasswordForm.confirmPassword.label' | cxTranslate\n        }}</span>\n        <input\n          class=\"form-control\"\n          [class.is-invalid]=\"isPasswordConfirmNotValid()\"\n          type=\"password\"\n          name=\"newPasswordConfirm\"\n          placeholder=\"{{\n            'updatePasswordForm.confirmPassword.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"newPasswordConfirm\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isPasswordConfirmNotValid()\">\n          <span>{{\n            'updatePasswordForm.bothPasswordMustMatch' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-lg-6 col-md-12\">\n      <button\n        class=\"btn btn-block btn-secondary\"\n        type=\"button\"\n        (click)=\"onCancel()\"\n      >\n        {{ 'common.cancel' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-lg-6 col-md-12\">\n      <button class=\"btn btn-block btn-primary\" type=\"submit\">\n        {{ 'common.save' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n",
+                styles: [".form-group button:first-child{margin-bottom:1rem}"]
+            }] }
+];
+/** @nocollapse */
+UpdatePasswordFormComponent.ctorParameters = () => [
+    { type: FormBuilder }
+];
+UpdatePasswordFormComponent.propDecorators = {
+    submited: [{ type: Output }],
+    cancelled: [{ type: Output }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class UpdatePasswordComponent {
+    /**
+     * @param {?} routingService
+     * @param {?} userService
+     * @param {?} globalMessageService
+     */
+    constructor(routingService, userService, globalMessageService) {
+        this.routingService = routingService;
+        this.userService = userService;
+        this.globalMessageService = globalMessageService;
+        this.subscription = new Subscription();
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.userService.resetUpdatePasswordProcessState();
+        this.loading$ = this.userService.getUpdatePasswordResultLoading();
+        this.userService
+            .get()
+            .pipe(take(1))
+            .subscribe(user => {
+            this.userId = user.uid;
+        });
+        this.subscription.add(this.userService
+            .getUpdatePasswordResultSuccess()
+            .subscribe(success => this.onSuccess(success)));
+    }
+    /**
+     * @param {?} success
+     * @return {?}
+     */
+    onSuccess(success) {
+        if (success) {
+            this.globalMessageService.add({
+                text: 'Password updated with success',
+                type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
+            });
+            this.routingService.go({ route: 'home' });
+        }
+    }
+    /**
+     * @return {?}
+     */
+    onCancel() {
+        this.routingService.go({ route: 'home' });
+    }
+    /**
+     * @param {?} __0
+     * @return {?}
+     */
+    onSubmit({ oldPassword, newPassword, }) {
+        this.userService.updatePassword(this.userId, oldPassword, newPassword);
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+        this.userService.resetUpdatePasswordProcessState();
+    }
+}
+UpdatePasswordComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-update-password',
+                template: "<ng-container>\n  <div *ngIf=\"(loading$ | async); else updateForm\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #updateForm>\n    <div class=\"container\">\n      <div class=\"row d-flex justify-content-center\">\n        <cx-update-password-form\n          class=\"col-md-6\"\n          (cancelled)=\"onCancel()\"\n          (submited)=\"onSubmit($event)\"\n        ></cx-update-password-form>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n"
+            }] }
+];
+/** @nocollapse */
+UpdatePasswordComponent.ctorParameters = () => [
+    { type: RoutingService },
+    { type: UserService },
+    { type: GlobalMessageService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class UpdatePasswordModule {
+}
+UpdatePasswordModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    FormsModule,
+                    ReactiveFormsModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            UpdatePasswordComponent: { selector: 'cx-update-password' },
+                        },
+                    }))),
+                    SpinnerModule,
+                    I18nModule,
+                ],
+                declarations: [UpdatePasswordComponent, UpdatePasswordFormComponent],
+                exports: [UpdatePasswordComponent],
+                entryComponents: [UpdatePasswordComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class UpdateProfileFormComponent {
+    /**
+     * @param {?} fb
+     */
+    constructor(fb) {
+        this.fb = fb;
+        this.submited = new EventEmitter();
+        this.cancelled = new EventEmitter();
+        this.form = this.fb.group({
+            titleCode: [''],
+            firstName: ['', Validators.required],
+            lastName: ['', Validators.required],
+        });
+        this.submitClicked = false;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        if (this.user) {
+            this.form.patchValue(this.user);
+        }
+    }
+    /**
+     * @param {?} formControlName
+     * @return {?}
+     */
+    isNotValid(formControlName) {
+        return FormUtils.isNotValidField(this.form, formControlName, this.submitClicked);
+    }
+    /**
+     * @return {?}
+     */
+    onSubmit() {
+        this.submitClicked = true;
+        if (this.form.invalid) {
+            return;
+        }
+        this.submited.emit({
+            uid: this.user.uid,
+            userUpdates: Object.assign({}, this.form.value),
+        });
+    }
+    /**
+     * @return {?}
+     */
+    onCancel() {
+        this.cancelled.emit();
+    }
+}
+UpdateProfileFormComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-update-profile-form',
+                template: "<form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\">\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateProfileForm.title' | cxTranslate\n        }}</span>\n        <select formControlName=\"titleCode\" class=\"form-control\">\n          <option value=\"\">{{ 'updateProfileForm.none' | cxTranslate }}</option>\n          <option *ngFor=\"let title of titles\" [value]=\"title.code\">{{\n            title.name\n          }}</option>\n        </select>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateProfileForm.firstName.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          name=\"firstName\"\n          placeholder=\"{{\n            'updateProfileForm.firstName.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"firstName\"\n          [class.is-invalid]=\"isNotValid('firstName')\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('firstName')\">\n          <span>{{\n            'updateProfileForm.firstNameIsRequired' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateProfileForm.LastName.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          name=\"lastName\"\n          placeholder=\"{{\n            'updateProfileForm.lastName.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"lastName\"\n          [class.is-invalid]=\"isNotValid('lastName')\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('lastName')\">\n          <span>{{\n            'updateProfileForm.lastNameIsRequired' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-lg-6 col-md-12\">\n      <button\n        class=\"btn btn-block btn-secondary\"\n        type=\"button\"\n        (click)=\"onCancel()\"\n      >\n        {{ 'common.cancel' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-lg-6 col-md-12\">\n      <button class=\"btn btn-block btn-primary\" type=\"submit\">\n        {{ 'common.save' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n",
+                styles: [".form-group button:first-child{margin-bottom:1rem}"]
+            }] }
+];
+/** @nocollapse */
+UpdateProfileFormComponent.ctorParameters = () => [
+    { type: FormBuilder }
+];
+UpdateProfileFormComponent.propDecorators = {
+    user: [{ type: Input }],
+    titles: [{ type: Input }],
+    submited: [{ type: Output }],
+    cancelled: [{ type: Output }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class UpdateProfileComponent {
+    /**
+     * @param {?} routingService
+     * @param {?} userService
+     * @param {?} globalMessageService
+     */
+    constructor(routingService, userService, globalMessageService) {
+        this.routingService = routingService;
+        this.userService = userService;
+        this.globalMessageService = globalMessageService;
+        this.subscription = new Subscription();
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        // reset the previous form processing state
+        this.userService.resetUpdatePersonalDetailsProcessingState();
+        this.user$ = this.userService.get();
+        this.titles$ = this.userService.getTitles().pipe(tap(titles => {
+            if (Object.keys(titles).length === 0) {
+                this.userService.loadTitles();
+            }
+        }));
+        this.loading$ = this.userService.getUpdatePersonalDetailsResultLoading();
+        this.subscription.add(this.userService
+            .getUpdatePersonalDetailsResultSuccess()
+            .subscribe(success => this.onSuccess(success)));
+    }
+    /**
+     * @param {?} success
+     * @return {?}
+     */
+    onSuccess(success) {
+        if (success) {
+            this.globalMessageService.add({
+                text: 'Personal details successfully updated',
+                type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
+            });
+            this.routingService.go({ route: 'home' });
+        }
+    }
+    /**
+     * @return {?}
+     */
+    onCancel() {
+        this.routingService.go({ route: 'home' });
+    }
+    /**
+     * @param {?} __0
+     * @return {?}
+     */
+    onSubmit({ uid, userUpdates }) {
+        this.userService.updatePersonalDetails(uid, userUpdates);
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+        // clean up the state
+        this.userService.resetUpdatePersonalDetailsProcessingState();
+    }
+}
+UpdateProfileComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-update-profile',
+                template: "<ng-container>\n  <div *ngIf=\"(loading$ | async); else updateForm\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #updateForm>\n    <div class=\"container\">\n      <div class=\"row d-flex justify-content-center\">\n        <cx-update-profile-form\n          class=\"col-md-6\"\n          [user]=\"user$ | async\"\n          [titles]=\"titles$ | async\"\n          (cancelled)=\"onCancel()\"\n          (submited)=\"onSubmit($event)\"\n        ></cx-update-profile-form>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n"
+            }] }
+];
+/** @nocollapse */
+UpdateProfileComponent.ctorParameters = () => [
+    { type: RoutingService },
+    { type: UserService },
+    { type: GlobalMessageService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class UpdateProfileModule {
+}
+UpdateProfileModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            UpdateProfileComponent: { selector: 'cx-update-profile' },
+                        },
+                    }))),
+                    FormsModule,
+                    ReactiveFormsModule,
+                    SpinnerModule,
+                    I18nModule,
+                ],
+                declarations: [UpdateProfileComponent, UpdateProfileFormComponent],
+                exports: [UpdateProfileComponent],
+                entryComponents: [UpdateProfileComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class BreadcrumbComponent {
     /**
      * @param {?} component
@@ -5132,149 +7298,774 @@ BreadcrumbModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class NavigationComponentService {
+    /**
+     * @param {?} cmsService
+     * @param {?} componentData
+     */
+    constructor(cmsService, componentData) {
+        this.cmsService = cmsService;
+        this.componentData = componentData;
+    }
+    /**
+     * Get all navigation entry items' type and id. Dispatch action to load all these items
+     * @param {?} nodeData
+     * @param {?} root
+     * @param {?=} itemsList
+     * @return {?}
+     */
+    getNavigationEntryItems(nodeData, root, itemsList = []) {
+        if (nodeData.children && nodeData.children.length > 0) {
+            this.processChildren(nodeData, itemsList);
+        }
+        else if (nodeData.entries && nodeData.entries.length > 0) {
+            nodeData.entries.forEach(entry => {
+                itemsList.push({
+                    superType: entry.itemSuperType,
+                    id: entry.itemId,
+                });
+            });
+        }
+        if (root) {
+            /** @type {?} */
+            const rootUid = nodeData.uid;
+            this.cmsService.loadNavigationItems(rootUid, itemsList);
+        }
+    }
+    /**
+     * @private
+     * @param {?} node
+     * @param {?} itemsList
+     * @return {?}
+     */
+    processChildren(node, itemsList) {
+        for (const child of node.children) {
+            this.getNavigationEntryItems(child, false, itemsList);
+        }
+    }
+    /**
+     * Create a new node tree for display
+     * @param {?} nodeData
+     * @param {?} items
+     * @return {?}
+     */
+    createNode(nodeData, items) {
+        /** @type {?} */
+        const node = {};
+        node['title'] = nodeData.title;
+        node['url'] = '';
+        if (nodeData.children && nodeData.children.length > 0) {
+            /** @type {?} */
+            const children = this.createChildren(nodeData, items);
+            node['children'] = children;
+        }
+        else if (nodeData.entries && nodeData.entries.length > 0) {
+            /** @type {?} */
+            const entry = nodeData.entries[0];
+            /** @type {?} */
+            const item = items[`${entry.itemId}_${entry.itemSuperType}`];
+            // now we only consider CMSLinkComponent
+            if (entry.itemType === 'CMSLinkComponent' && item !== undefined) {
+                if (!node['title']) {
+                    node['title'] = item.linkName;
+                }
+                node['url'] = item.url;
+                // if "NEWWINDOW", target is true
+                node['target'] = item.target;
+            }
+        }
+        return node;
+    }
+    /**
+     * @private
+     * @param {?} node
+     * @param {?} items
+     * @return {?}
+     */
+    createChildren(node, items) {
+        /** @type {?} */
+        const children = [];
+        for (const child of node.children) {
+            /** @type {?} */
+            const childNode = this.createNode(child, items);
+            children.push(childNode);
+        }
+        return children;
+    }
+    /**
+     * @return {?}
+     */
+    getComponentData() {
+        return this.componentData.data$;
+    }
+    /**
+     * @return {?}
+     */
+    getNodes() {
+        return this.getComponentData().pipe(switchMap(data => {
+            if (data) {
+                /** @type {?} */
+                const navigation = data.navigationNode ? data.navigationNode : data;
+                return this.cmsService.getNavigationEntryItems(navigation.uid).pipe(tap(items => {
+                    if (items === undefined) {
+                        this.getNavigationEntryItems(navigation, true, []);
+                    }
+                }), filter(items => items !== undefined), map(items => this.createNode(navigation, items)));
+            }
+        }));
+    }
+}
+NavigationComponentService.decorators = [
+    { type: Injectable }
+];
+/** @nocollapse */
+NavigationComponentService.ctorParameters = () => [
+    { type: CmsService },
+    { type: CmsComponentData, decorators: [{ type: Optional }] }
+];
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class LogoutGuard {
+class NavigationComponent {
     /**
-     * @param {?} auth
-     * @param {?} cms
-     * @param {?} routing
+     * @param {?} service
      */
-    constructor(auth, cms, routing) {
-        this.auth = auth;
-        this.cms = cms;
-        this.routing = routing;
-    }
-    /**
-     * @return {?}
-     */
-    canActivate() {
-        this.logout();
-        return this.cms
-            .hasPage({
-            id: '/logout',
-            type: PageType.CONTENT_PAGE,
-        })
-            .pipe(tap(hasPage => {
-            if (!hasPage) {
-                this.routing.go(['/']);
-            }
-        }));
-    }
-    /**
-     * @protected
-     * @return {?}
-     */
-    logout() {
-        this.auth.logout();
+    constructor(service) {
+        this.service = service;
+        this.dropdownMode = 'list';
+        this.node$ = this.service.getNodes();
     }
 }
-LogoutGuard.GUARD_NAME = 'LogoutGuard';
-LogoutGuard.decorators = [
+NavigationComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-navigation',
+                template: "<cx-navigation-ui [node]=\"node$ | async\" [dropdownMode]=\"dropdownMode\">\n</cx-navigation-ui>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+NavigationComponent.ctorParameters = () => [
+    { type: NavigationComponentService }
+];
+NavigationComponent.propDecorators = {
+    dropdownMode: [{ type: Input }],
+    node: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CategoryNavigationComponent extends NavigationComponent {
+}
+CategoryNavigationComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-category-navigation',
+                template: "<nav *ngIf=\"(node$ | async) as node\">\n  <cx-navigation-ui\n    *ngFor=\"let child of node?.children\"\n    ngbDropdown\n    [node]=\"child\"\n    dropdownMode=\"column\"\n  ></cx-navigation-ui>\n</nav>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class NavigationUIComponent {
+    constructor() {
+        this.dropdownMode = 'list';
+    }
+}
+NavigationUIComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-navigation-ui',
+                template: "<div *ngIf=\"node\" class=\"cx-nav-item nav-item\" ngbDropdown>\n  <a\n    *ngIf=\"node.children && !node.title; else nodeWithChildren\"\n    ngbDropdownToggle\n    >&nbsp;\n  </a>\n  <ng-template #nodeWithChildren>\n    <span\n      *ngIf=\"node.children; else noChildren\"\n      ngbDropdownToggle\n      class=\"cx-nav-link nav-link\"\n      role=\"link\"\n      id=\"{{ node.title }}\"\n      >{{ node.title }}</span\n    >\n  </ng-template>\n  <ng-template #noChildren>\n    <a\n      [routerLink]=\"node.url\"\n      class=\"cx-nav-link nav-link\"\n      id=\"{{ node.title }}\"\n      >{{ node.title }}\n    </a>\n  </ng-template>\n  <ng-container [ngSwitch]=\"dropdownMode\">\n    <ng-container *ngSwitchCase=\"'list'\">\n      <div\n        ngbDropdownMenu\n        class=\"cx-nav-child-list\"\n        [attr.aria-label]=\"node.title\"\n        role=\"list\"\n      >\n        <div\n          role=\"listitem\"\n          *ngFor=\"let subCategory of node.children\"\n          class=\"dropdown-item cx-nav-child-item\"\n        >\n          <ng-container *ngIf=\"subCategory.url\">\n            <a [routerLink]=\"subCategory.url\" class=\"cx-nav-child-link\"\n              >{{ subCategory.title }}\n            </a>\n          </ng-container>\n          <ng-container *ngIf=\"!subCategory.url\">\n            <a class=\"cx-nav-child-link\">{{ subCategory.title }} </a>\n          </ng-container>\n          <a\n            [routerLink]=\"subCategoryChild.url\"\n            *ngFor=\"let subCategoryChild of subCategory.children\"\n            >{{ subCategoryChild.title }}\n          </a>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-container *ngSwitchCase=\"'column'\">\n      <div\n        ngbDropdownMenu\n        class=\"cx-nav-child-list-columns\"\n        [attr.aria-label]=\"node.title\"\n      >\n        <div\n          class=\"cx-nav-child-column\"\n          *ngFor=\"let subCategory of node.children\"\n        >\n          <ng-container *ngIf=\"subCategory.url\">\n            <a\n              role=\"link\"\n              [routerLink]=\"subCategory.url\"\n              class=\"cx-nav-child-link cx-nav-column-title\"\n              >{{ subCategory.title }}\n            </a>\n          </ng-container>\n          <ng-container *ngIf=\"!subCategory.url\">\n            <a class=\"cx-nav-child-link cx-nav-column-title\"\n              >{{ subCategory.title }}\n            </a>\n          </ng-container>\n\n          <div\n            *ngFor=\"let subCategoryChild of subCategory.children\"\n            class=\"dropdown-item cx-nav-child-column-item\"\n          >\n            <a\n              role=\"link\"\n              [routerLink]=\"subCategoryChild.url\"\n              class=\"cx-nav-child-link\"\n              >{{ subCategoryChild.title }}\n            </a>\n          </div>\n        </div>\n      </div>\n    </ng-container>\n  </ng-container>\n</div>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+NavigationUIComponent.propDecorators = {
+    dropdownMode: [{ type: Input }],
+    node: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class NavigationModule {
+}
+NavigationModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    RouterModule,
+                    BootstrapModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            NavigationComponent: {
+                                selector: 'cx-navigation',
+                                providers: [
+                                    {
+                                        provide: NavigationComponentService,
+                                        useClass: NavigationComponentService,
+                                        deps: [CmsService, CmsComponentData],
+                                    },
+                                ],
+                            },
+                        },
+                    }))),
+                    I18nModule,
+                ],
+                declarations: [NavigationComponent, NavigationUIComponent],
+                entryComponents: [NavigationComponent],
+                exports: [NavigationComponent, NavigationUIComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CategoryNavigationModule {
+}
+CategoryNavigationModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    NavigationModule,
+                    BootstrapModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            CategoryNavigationComponent: {
+                                selector: 'cx-category-navigation',
+                                providers: [
+                                    {
+                                        provide: NavigationComponentService,
+                                        useClass: NavigationComponentService,
+                                        deps: [CmsService, CmsComponentData],
+                                    },
+                                ],
+                            },
+                        },
+                    }))),
+                ],
+                declarations: [CategoryNavigationComponent],
+                entryComponents: [CategoryNavigationComponent],
+                exports: [CategoryNavigationComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class FooterNavigationComponent extends NavigationComponent {
+}
+FooterNavigationComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-footer-navigation',
+                template: "<nav *ngIf=\"(node$ | async) as node\">\n  <div class=\"container\">\n    <div class=\"row\">\n      <div\n        class=\"col-xs-12 col-sm-4 col-md-3 navigation-elements\"\n        *ngFor=\"let child of node?.children\"\n      >\n        <h1>{{ child.title }}</h1>\n        <ul>\n          <li *ngFor=\"let link of child.children\">\n            <cx-generic-link\n              [url]=\"link.url\"\n              [target]=\"link.target === true ? 'blank' : 'self'\"\n              >{{ link.title }}</cx-generic-link\n            >\n          </li>\n        </ul>\n      </div>\n    </div>\n  </div>\n</nav>\n<div class=\"notice\" *ngIf=\"(service.getComponentData() | async) as data\">\n  {{ data.notice }}\n</div>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class FooterNavigationModule {
+}
+FooterNavigationModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    RouterModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            FooterNavigationComponent: {
+                                selector: 'cx-footer-navigation',
+                                providers: [
+                                    {
+                                        provide: NavigationComponentService,
+                                        useClass: NavigationComponentService,
+                                        deps: [CmsService, CmsComponentData],
+                                    },
+                                ],
+                            },
+                        },
+                    }))),
+                    GenericLinkModule,
+                ],
+                declarations: [FooterNavigationComponent],
+                entryComponents: [FooterNavigationComponent],
+                exports: [FooterNavigationComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class SearchBoxComponentService {
+    /**
+     * @param {?} componentData
+     * @param {?} searchService
+     * @param {?} routingService
+     */
+    constructor(componentData, searchService, routingService) {
+        this.componentData = componentData;
+        this.searchService = searchService;
+        this.routingService = routingService;
+        this.defaultConfig = {
+            maxProducts: 2,
+            displaySuggestions: true,
+            maxSuggestions: 5,
+            minCharactersBeforeRequest: 3,
+            displayProducts: true,
+        };
+        this.config$ = of(this.defaultConfig);
+        this.queryParam$ = this.routingService
+            .getRouterState()
+            .pipe(map(routingData => routingData.state.params.query));
+        this.typeahead = (text$) => combineLatest(text$.pipe(debounceTime(300), distinctUntilChanged()), this.config$).pipe(switchMap(([term, config]) => {
+            if (term.length >= config.minCharactersBeforeRequest) {
+                return this.fetch(term, config);
+            }
+            else {
+                return of([]);
+            }
+        }));
+        if (componentData) {
+            this.config$ = merge(this.config$, this.componentData.data$.pipe(map(config => (Object.assign({}, this.defaultConfig, config)))));
+        }
+    }
+    /**
+     * @param {?} query
+     * @return {?}
+     */
+    launchSearchPage(query) {
+        this.routingService.go({
+            route: 'search',
+            params: { query },
+        });
+    }
+    /**
+     * @private
+     * @param {?} text
+     * @param {?} config
+     * @return {?}
+     */
+    fetch(text, config) {
+        this.executeSearch(text, config);
+        /** @type {?} */
+        const suggestions = this.searchService
+            .getSearchSuggestions()
+            .pipe(map(res => res.map(suggestion => suggestion.value)));
+        /** @type {?} */
+        const products = this.searchService
+            .getAuxSearchResults()
+            .pipe(map(res => res.products || []));
+        return combineLatest(suggestions, products).pipe(map(([a, b]) => [...a, ...b]));
+    }
+    /**
+     * @private
+     * @param {?} search
+     * @param {?} config
+     * @return {?}
+     */
+    executeSearch(search, config) {
+        if (config.displayProducts) {
+            this.searchService.searchAuxiliary(search, {
+                pageSize: config.maxProducts,
+            });
+        }
+        if (config.displaySuggestions) {
+            this.searchService.getSuggestions(search, {
+                pageSize: config.maxSuggestions,
+            });
+        }
+    }
+}
+SearchBoxComponentService.decorators = [
+    { type: Injectable }
+];
+/** @nocollapse */
+SearchBoxComponentService.ctorParameters = () => [
+    { type: CmsComponentData, decorators: [{ type: Optional }] },
+    { type: ProductSearchService },
+    { type: RoutingService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class SearchBoxComponent {
+    /**
+     * @param {?} service
+     */
+    constructor(service) {
+        this.service = service;
+        this.iconTypes = ICON_TYPES;
+        this.searchBoxControl = new FormControl();
+        this.queryText$ = new Subject();
+        this.typeahead = (text$) => this.service.typeahead(merge(text$, this.queryText$));
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set queryText(value) {
+        this.queryText$.next(value);
+        this.searchBoxControl.setValue(value);
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.service.queryParam$.pipe(take(1)).subscribe(query => {
+            if (query) {
+                this.searchBoxControl.setValue(query);
+            }
+        });
+    }
+    /**
+     * @return {?}
+     */
+    submitSearch() {
+        this.service.launchSearchPage(this.searchBoxControl.value);
+    }
+    /**
+     * @param {?} item
+     * @return {?}
+     */
+    selectSuggestion(item) {
+        if (typeof item.item === 'string') {
+            this.searchBoxControl.setValue(item.item);
+            this.submitSearch();
+        }
+        else {
+            item.preventDefault();
+        }
+    }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    onKey(event) {
+        if (event.key === 'Enter') {
+            this.service.launchSearchPage(this.searchBoxControl.value);
+        }
+    }
+    /**
+     * @return {?}
+     */
+    toggleMobileSearchInput() {
+        this.isMobileSearchVisible = !this.isMobileSearchVisible;
+    }
+}
+SearchBoxComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-searchbox',
+                template: "<form class=\"cx-form\">\n  <div class=\"cx-form-group form-group\">\n    <!-- searchbox input -->\n    <input\n      class=\"cx-input form-control dropdown-menu-toggle\"\n      [ngClass]=\"{ 'show-mobile': isMobileSearchVisible }\"\n      type=\"text\"\n      placeholder=\"{{ 'searchBox.searchHere' | cxTranslate }}\"\n      aria-label=\"search\"\n      [ngbTypeahead]=\"typeahead\"\n      [resultTemplate]=\"rt\"\n      [formControl]=\"searchBoxControl\"\n      (keyup)=\"onKey($event)\"\n      (selectItem)=\"selectSuggestion($event)\"\n    />\n\n    <!-- searchbox button desktop -->\n    <button\n      class=\"cx-button cx-button-desktop\"\n      type=\"submit\"\n      aria-label=\"Submit\"\n      (click)=\"submitSearch()\"\n      [disabled]=\"!searchBoxControl?.value\"\n    >\n      <cx-icon [type]=\"iconTypes.SEARCH\"></cx-icon>\n    </button>\n\n    <!-- searchbox button mobile -->\n    <button\n      class=\"cx-button cx-button-mobile\"\n      type=\"button\"\n      aria-label=\"Search\"\n      (click)=\"toggleMobileSearchInput()\"\n    >\n      <cx-icon [type]=\"iconTypes.SEARCH\"></cx-icon>\n    </button>\n\n    <!-- searchbox results -->\n    <ng-template #rt let-suggestion=\"result\">\n      <div\n        *ngIf=\"!suggestion.code; else productView\"\n        class=\"cx-dropdown-content\"\n      >\n        {{ suggestion }}\n      </div>\n      <ng-template #productView>\n        <div\n          [routerLink]=\"\n            {\n              route: 'product',\n              params: suggestion | stripHtml\n            } | cxTranslateUrl\n          \"\n          class=\"cx-product\"\n        >\n          <cx-media\n            [container]=\"suggestion.images?.PRIMARY\"\n            format=\"product\"\n            [alt]=\"suggestion.summary\"\n          ></cx-media>\n          <div [innerHtml]=\"suggestion.name\" class=\"cx-product-name\">\n            {{ suggestion.name }}\n          </div>\n          <div class=\"cx-product-price\">\n            {{ suggestion.price.formattedValue }}\n          </div>\n        </div>\n      </ng-template>\n    </ng-template>\n  </div>\n</form>\n",
+                encapsulation: ViewEncapsulation.None,
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+SearchBoxComponent.ctorParameters = () => [
+    { type: SearchBoxComponentService }
+];
+SearchBoxComponent.propDecorators = {
+    queryText: [{ type: Input, args: ['queryText',] }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class SearchBoxModule {
+}
+SearchBoxModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    BootstrapModule,
+                    FormsModule,
+                    RouterModule,
+                    ReactiveFormsModule,
+                    MediaModule,
+                    ProductModule,
+                    StripHtmlModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            SearchBoxComponent: {
+                                selector: 'cx-searchbox',
+                                providers: [
+                                    {
+                                        provide: SearchBoxComponentService,
+                                        useClass: SearchBoxComponentService,
+                                        deps: [CmsComponentData, ProductSearchService, RoutingService],
+                                    },
+                                ],
+                            },
+                        },
+                    }))),
+                    IconModule,
+                    UrlTranslationModule,
+                    I18nModule,
+                ],
+                declarations: [SearchBoxComponent],
+                entryComponents: [SearchBoxComponent],
+                exports: [SearchBoxComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CurrentProductService {
+    /**
+     * @param {?} routingService
+     * @param {?} productService
+     */
+    constructor(routingService, productService) {
+        this.routingService = routingService;
+        this.productService = productService;
+    }
+    /**
+     * @return {?}
+     */
+    getProduct() {
+        return this.routingService.getRouterState().pipe(map(state => state.state.params['productCode']), filter(productCode => !!productCode), switchMap((productCode) => this.productService.get(productCode)));
+    }
+}
+CurrentProductService.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
             },] }
 ];
 /** @nocollapse */
-LogoutGuard.ctorParameters = () => [
-    { type: AuthService },
-    { type: CmsService },
-    { type: RoutingService }
+CurrentProductService.ctorParameters = () => [
+    { type: RoutingService },
+    { type: ProductService }
 ];
-/** @nocollapse */ LogoutGuard.ngInjectableDef = defineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(inject(AuthService), inject(CmsService), inject(RoutingService)); }, token: LogoutGuard, providedIn: "root" });
+/** @nocollapse */ CurrentProductService.ngInjectableDef = defineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(inject(RoutingService), inject(ProductService)); }, token: CurrentProductService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class LogoutModule {
-}
-LogoutModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    RouterModule.forChild([
-                        {
-                            path: 'logout',
-                            canActivate: [LogoutGuard],
-                            component: PageLayoutComponent,
-                        },
-                    ]),
-                ],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class HamburgerMenuComponent {
+class ProductCarouselService {
     /**
-     * @param {?} hamburgerMenuService
+     * @param {?} component
+     * @param {?} productService
      */
-    constructor(hamburgerMenuService) {
-        this.hamburgerMenuService = hamburgerMenuService;
+    constructor(component, productService) {
+        this.component = component;
+        this.productService = productService;
+        this.MAX_WIDTH = 360;
+        this.MAX_ITEM_SIZE = 4;
+        this.SPEED = 250;
+        this.itemSize$ = of(this.MAX_ITEM_SIZE);
+        this.activeItem$ = of(0);
+        this.activeItemWithDelay$ = of(0);
     }
     /**
      * @return {?}
      */
-    toggle() {
-        this.hamburgerMenuService.toggle();
+    getActiveItem() {
+        return this.activeItem$;
     }
     /**
      * @return {?}
      */
-    get isExpanded() {
-        return this.hamburgerMenuService.isExpanded;
+    getActiveItemWithDelay() {
+        return this.activeItemWithDelay$;
+    }
+    /**
+     * @return {?}
+     */
+    getTitle() {
+        return this.title$;
+    }
+    /**
+     * @return {?}
+     */
+    setTitle() {
+        this.title$ = this.component.data$.pipe(map(data => {
+            return data.title;
+        }));
+    }
+    /**
+     * @return {?}
+     */
+    getItems() {
+        return this.items$;
+    }
+    /**
+     * @return {?}
+     */
+    getItemSize() {
+        return this.itemSize$;
+    }
+    /**
+     * Maps the item codes from CMS component to an array of `Product` observables.
+     * @return {?}
+     */
+    setItems() {
+        this.items$ = this.component.data$.pipe(filter(data => data && !!data.productCodes), map(data => {
+            /** @type {?} */
+            const productCodes = data.productCodes.split(' ');
+            return productCodes.map(code => this.productService.get(code));
+        }));
+    }
+    /**
+     * The number of items shown in the carousel can be calculated
+     * the standard implemenattions uses the element size to calculate
+     * the items that fit in the carousel.
+     * This method is called in `ngOnInit`.
+     * @param {?} window
+     * @param {?} nativeElement
+     * @return {?}
+     */
+    setItemSize(window, nativeElement) {
+        this.itemSize$ = !window
+            ? of(this.MAX_ITEM_SIZE)
+            : fromEvent(window, 'resize').pipe(map(() => ((/** @type {?} */ (nativeElement))).clientWidth), startWith(((/** @type {?} */ (nativeElement))).clientWidth), 
+            // avoid to much calls
+            debounceTime(100), map((innerWidth) => {
+                /** @type {?} */
+                const itemsPerPage = Math.round(innerWidth / this.MAX_WIDTH);
+                return itemsPerPage > 2 ? this.MAX_ITEM_SIZE : itemsPerPage;
+            }), 
+            // only emit new size when the size changed
+            distinctUntilChanged());
+    }
+    /**
+     * @param {?} newActiveItem
+     * @return {?}
+     */
+    setItemAsActive(newActiveItem) {
+        this.activeItem$ = this.itemSize$.pipe(map(itemSize => this.setItem(newActiveItem, itemSize)));
+    }
+    /**
+     * @return {?}
+     */
+    setPreviousItemAsActive() {
+        this.activeItem$ = this.activeItem$.pipe(withLatestFrom(this.itemSize$), map(([activeItem, itemSize]) => this.setItem(activeItem - itemSize, itemSize)));
+    }
+    /**
+     * @return {?}
+     */
+    setNextItemAsActive() {
+        this.activeItem$ = this.activeItem$.pipe(withLatestFrom(this.itemSize$), map(([activeItem, itemSize]) => this.setItem(activeItem + itemSize, itemSize)));
+    }
+    /**
+     * @private
+     * @param {?} newActiveItem
+     * @param {?} itemSize
+     * @return {?}
+     */
+    setItem(newActiveItem, itemSize) {
+        this.activeItemWithDelay$ = of(newActiveItem).pipe(delay(this.getDelayValue(itemSize)));
+        return newActiveItem;
+    }
+    /**
+     * @private
+     * @param {?} itemSize
+     * @return {?}
+     */
+    getDelayValue(itemSize) {
+        return (itemSize - 1) * this.SPEED;
     }
 }
-HamburgerMenuComponent.decorators = [
+ProductCarouselService.decorators = [
+    { type: Injectable }
+];
+/** @nocollapse */
+ProductCarouselService.ctorParameters = () => [
+    { type: CmsComponentData },
+    { type: ProductService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ProductCarouselComponent {
+    /**
+     * @param {?} winRef
+     * @param {?} el
+     * @param {?} service
+     */
+    constructor(winRef, el, service) {
+        this.el = el;
+        this.service = service;
+        this.window = winRef.nativeWindow;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.service.setTitle();
+        this.service.setItemSize(this.window, this.el.nativeElement);
+        this.service.setItems();
+        this.service.setItemAsActive(0);
+    }
+}
+ProductCarouselComponent.decorators = [
     { type: Component, args: [{
-                selector: 'cx-hamburger-menu',
-                template: "<button\n  class=\"cx-hamburger\"\n  type=\"button\"\n  (click)=\"toggle()\"\n  [class.is-active]=\"isExpanded | async\"\n  [attr.aria-expanded]=\"isExpanded | async\"\n  aria-label=\"Menu\"\n  aria-controls=\"header-account-container, header-categories-container, header-locale-container\"\n>\n  <span class=\"hamburger-box\">\n    <span class=\"hamburger-inner\"></span>\n  </span>\n</button>\n",
+                selector: 'cx-product-carousel',
+                template: "<h3 *ngIf=\"(service.getTitle() | async) as title\">{{ title }}</h3>\n\n<ng-container\n  *ngIf=\"{\n    maxItemSize: service.getItemSize() | async,\n    products: service.getItems() | async,\n    activeItem: service.getActiveItemWithDelay() | async,\n    active: service.getActiveItem() | async\n  } as carousel\"\n>\n  <div class=\"cx-carousel\" [ngClass]=\"'size-' + carousel.maxItemSize\">\n    <button\n      class=\"previous\"\n      (click)=\"service.setPreviousItemAsActive()\"\n      [disabled]=\"carousel.activeItem === 0\"\n    ></button>\n\n    <div class=\"groups\">\n      <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n        <div class=\"group\" *ngIf=\"i % carousel.maxItemSize === 0\">\n          <ng-container\n            *ngFor=\"\n              let product$ of (carousel.products\n                | slice: i:i + carousel.maxItemSize)\n            \"\n          >\n            <a\n              *ngIf=\"(product$ | async) as product\"\n              class=\"product\"\n              [class.active]=\"i === carousel.activeItem\"\n              [routerLink]=\"\n                { route: 'product', params: product } | cxTranslateUrl\n              \"\n            >\n              <cx-media [container]=\"product.images?.PRIMARY\" format=\"product\">\n              </cx-media>\n\n              <h4>{{ product.name }}</h4>\n              <div class=\"price\">{{ product.price?.formattedValue }}</div>\n            </a>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      class=\"next\"\n      (click)=\"service.setNextItemAsActive()\"\n      [disabled]=\"\n        carousel.activeItem > carousel.products.length - carousel.maxItemSize\n      \"\n    ></button>\n  </div>\n\n  <div class=\"indicators\">\n    <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n      <button\n        *ngIf=\"i % carousel.maxItemSize === 0\"\n        (click)=\"service.setItemAsActive(i)\"\n        [disabled]=\"i === carousel.activeItem\"\n      ></button>\n    </ng-container></div\n></ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
 /** @nocollapse */
-HamburgerMenuComponent.ctorParameters = () => [
-    { type: HamburgerMenuService }
+ProductCarouselComponent.ctorParameters = () => [
+    { type: WindowRef },
+    { type: ElementRef },
+    { type: ProductCarouselService }
 ];
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class HamburgerMenuModule {
+class ProductCarouselModule {
 }
-HamburgerMenuModule.decorators = [
+ProductCarouselModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
                     CommonModule,
+                    RouterModule,
+                    MediaModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
-                            HamburgerMenuComponent: { selector: 'cx-hamburger-menu' },
+                            ProductCarouselComponent: {
+                                selector: 'cx-product-carousel',
+                                providers: [
+                                    {
+                                        provide: ProductCarouselService,
+                                        useClass: ProductCarouselService,
+                                        deps: [CmsComponentData, ProductService],
+                                    },
+                                ],
+                            },
                         },
                     }))),
+                    UrlTranslationModule,
                 ],
-                declarations: [HamburgerMenuComponent],
-                entryComponents: [HamburgerMenuComponent],
+                declarations: [ProductCarouselComponent],
+                entryComponents: [ProductCarouselComponent],
+                exports: [ProductCarouselComponent],
             },] }
 ];
 
@@ -5282,13 +8073,736 @@ HamburgerMenuModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class SkipLinkComponent {
+/** @enum {string} */
+const ProductDetailOutlets = {
+    PAGE: 'PDP.PAGE',
+    SUMMARY: 'PDP.SUMMARY',
+    IMAGES: 'PDP.IMAGES',
+    TITLE: 'PDP.TITLE',
+    RATING: 'PDP.RATING',
+    ADDTOCART: 'PDP.ADDTOCART',
+    PRICE: 'PDP.PRICE',
+    SHARE: 'PDP.SHARE',
+};
+/** @enum {string} */
+const ProductTabsOutlets = {
+    DESCRIPTION: 'PDP.DESCRIPTION',
+    SPECIFICATIONS: 'PDP.SPECIFICATIONS',
+    REVIEWS: 'PDP.REVIEWS',
+    SHIPPING: 'PDP.SHIPPING',
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ProductDetailsComponent {
+    /**
+     * @param {?} currentPageService
+     */
+    constructor(currentPageService) {
+        this.currentPageService = currentPageService;
+    }
+    /**
+     * @return {?}
+     */
+    get outlets() {
+        return ProductDetailsComponent.outlets;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.product$ = this.currentPageService.getProduct();
+    }
 }
-SkipLinkComponent.decorators = [
+ProductDetailsComponent.outlets = ProductDetailOutlets;
+ProductDetailsComponent.decorators = [
     { type: Component, args: [{
-                selector: 'cx-skip-link',
-                template: "<a class=\"sr-only sr-only-focusable\" href=\"#header-categories-container\">\n  {{ 'header.skipToNavigation' | cxTranslate }}\n</a>\n<a class=\"sr-only sr-only-focusable\" href=\"#mini-cart\">{{\n  'header.skipToShoppingCart' | cxTranslate\n}}</a>\n<a class=\"sr-only sr-only-focusable\" href=\"#main-content\">{{\n  'header.skipToMainContent' | cxTranslate\n}}</a>\n<a class=\"sr-only sr-only-focusable\" href=\"#footer\">{{\n  'header.skipToFooter' | cxTranslate\n}}</a>\n",
-                styles: [":host{position:absolute;top:0;left:0}"]
+                selector: 'cx-product-details',
+                template: "<ng-container *ngIf=\"(product$ | async) as product\">\n  <ng-container *cxOutlet=\"outlets.PAGE\">\n    <ng-container *cxOutlet=\"outlets.SUMMARY\">\n      <cx-product-summary class=\"container\" [product]=\"product\">\n        <cx-product-images [product]=\"product\"></cx-product-images>\n      </cx-product-summary>\n    </ng-container> </ng-container\n></ng-container>\n"
+            }] }
+];
+/** @nocollapse */
+ProductDetailsComponent.ctorParameters = () => [
+    { type: CurrentProductService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const WAITING_CLASS = 'waiting';
+class ProductImagesComponent {
+    constructor() {
+        this.outlets = ProductDetailOutlets;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnChanges() {
+        if (this.product && this.product.images) {
+            this.mainImageContainer = this.product.images.PRIMARY;
+        }
+    }
+    /**
+     * @param {?} event
+     * @param {?} imageContainer
+     * @return {?}
+     */
+    showImage(event, imageContainer) {
+        if (this.mainImageContainer === imageContainer) {
+            return;
+        }
+        this.startWaiting((/** @type {?} */ (event.target)));
+        this.mainImageContainer = imageContainer;
+    }
+    /**
+     * @param {?} imageContainer
+     * @return {?}
+     */
+    isMainImageContainer(imageContainer) {
+        return (this.mainImageContainer.zoom &&
+            imageContainer.zoom &&
+            imageContainer.zoom.url === this.mainImageContainer.zoom.url);
+    }
+    /**
+     * @return {?}
+     */
+    loadHandler() {
+        this.clearWaitList();
+    }
+    /**
+     * @private
+     * @param {?} el
+     * @return {?}
+     */
+    startWaiting(el) {
+        this.clearWaitList();
+        el.classList.add(WAITING_CLASS);
+        this.waiting = el;
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    clearWaitList() {
+        if (this.waiting) {
+            this.waiting.classList.remove(WAITING_CLASS);
+            delete this.waiting;
+        }
+    }
+}
+ProductImagesComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-product-images',
+                template: "<ng-container *ngIf=\"product\">\n  <ng-container *cxOutlet=\"outlets.IMAGES\">\n    <cx-media\n      [container]=\"mainImageContainer\"\n      format=\"zoom\"\n      (loaded)=\"loadHandler()\"\n    >\n    </cx-media>\n\n    <ng-container *ngIf=\"product.images?.GALLERY.length > 1\">\n      <div class=\"thumbs\">\n        <cx-media\n          *ngFor=\"let image of product.images.GALLERY\"\n          [container]=\"image\"\n          format=\"thumbnail\"\n          (focus)=\"showImage($event, image)\"\n          tabindex=\"0\"\n          [class.active]=\"isMainImageContainer(image)\"\n        >\n        </cx-media>\n      </div>\n    </ng-container>\n  </ng-container>\n</ng-container>\n"
+            }] }
+];
+ProductImagesComponent.propDecorators = {
+    product: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ProductSummaryComponent {
+    /**
+     * @param {?} translatePipe
+     */
+    constructor(translatePipe) {
+        this.translatePipe = translatePipe;
+        this.itemCount = 1;
+    }
+    /**
+     * @return {?}
+     */
+    get outlets() {
+        return ProductSummaryComponent.outlets;
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    updateCount(value) {
+        this.itemCount = value;
+    }
+    /**
+     * @return {?}
+     */
+    get hasStock() {
+        return (this.product &&
+            this.product.stock &&
+            (this.product.stock.stockLevel > 0 ||
+                this.product.stock.stockLevelStatus === 'inStock'));
+    }
+    // NOTE: Does not currently exists as its own component
+    // but part of tabs component. This is likely to change in refactor.
+    /**
+     * @private
+     * @return {?}
+     */
+    getReviewsComponent() {
+        return document.querySelector('cx-product-reviews');
+    }
+    // Get Tabs Component if exists on page
+    /**
+     * @private
+     * @return {?}
+     */
+    getTabsComponent() {
+        return document.querySelector('cx-product-tabs');
+    }
+    // Get Tab by label if exists on page
+    /**
+     * @param {?} label
+     * @param {?} tabsComponent
+     * @return {?}
+     */
+    getTabByLabel(label, tabsComponent) {
+        if (tabsComponent) {
+            // NOTE: Reads through h3 tags to click on correct tab
+            // There may be a better way of doing this now/after refactor
+            /** @type {?} */
+            const h3Elements = tabsComponent.getElementsByTagName('h3');
+            // Look through h3 tab elements until finding tab with label
+            for (const h3Element of Array.from(h3Elements)) {
+                if (h3Element.innerHTML.indexOf(label) > -1) {
+                    return h3Element;
+                }
+            }
+        }
+    }
+    // Click to activate tab if not already active
+    /**
+     * @param {?} tab
+     * @return {?}
+     */
+    clickTabIfInactive(tab) {
+        if (!tab.classList.contains('active') ||
+            tab.classList.contains('toggled')) {
+            tab.click();
+        }
+    }
+    // Scroll to views component on page and click "Reviews" tab
+    /**
+     * @return {?}
+     */
+    showReviews() {
+        // Use translated label for Reviews tab reference
+        /** @type {?} */
+        const reviewsTabLabel = this.translatePipe.transform('productDetails.label.reviews');
+        /** @type {?} */
+        const tabsComponent = this.getTabsComponent();
+        /** @type {?} */
+        const reviewsTab = this.getTabByLabel(reviewsTabLabel, tabsComponent);
+        /** @type {?} */
+        const reviewsComponent = this.getReviewsComponent();
+        if (reviewsTab && reviewsComponent) {
+            reviewsComponent.scrollIntoView();
+            this.clickTabIfInactive(reviewsTab);
+        }
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.reviewsTabAvailable = !!this.getReviewsComponent();
+    }
+}
+ProductSummaryComponent.outlets = ProductDetailOutlets;
+ProductSummaryComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-product-summary',
+                template: "<ng-container *cxOutlet=\"outlets.TITLE\">\n  <div class=\"name\">{{ product?.name }}</div>\n  <div class=\"code\">\n    {{ 'productSummary.id' | cxTranslate }} {{ product?.code }}\n  </div>\n</ng-container>\n\n<div class=\"images\"><ng-content></ng-content></div>\n\n<ng-container *cxOutlet=\"outlets.RATING\">\n  <div class=\"rating\">\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"count\">({{ product?.numberOfReviews }})</div>\n    <a class=\"btn-link\" *ngIf=\"reviewsTabAvailable\" (click)=\"showReviews()\">{{\n      'productSummary.showReviews' | cxTranslate\n    }}</a>\n  </div>\n</ng-container>\n\n<ng-container *cxOutlet=\"outlets.PRICE\">\n  <div class=\"price\" aria-label=\"new item price\">\n    {{ product?.price?.formattedValue }}\n  </div>\n</ng-container>\n\n<div class=\"description\"><p [innerHTML]=\"product?.summary\"></p></div>\n\n<ng-container *cxOutlet=\"outlets.ADDTOCART\">\n  <div class=\"quantity\">\n    <label>{{ 'productSummary.quantity' | cxTranslate }}</label>\n    <cx-item-counter\n      isValueChangeable=\"true\"\n      [min]=\"1\"\n      [max]=\"product.stock?.stockLevel || 1000\"\n      *ngIf=\"\n        product?.stock?.stockLevel > 0 ||\n        product?.stock?.stockLevelStatus === 'inStock'\n      \"\n      (update)=\"updateCount($event)\"\n    ></cx-item-counter>\n    <span class=\"info\">{{\n      hasStock\n        ? ('productSummary.inStock' | cxTranslate)\n        : ('productSummary.outOfStock' | cxTranslate)\n    }}</span>\n  </div>\n  <cx-add-to-cart\n    *ngIf=\"product?.stock?.stockLevelStatus !== 'outOfStock'\"\n    [quantity]=\"itemCount\"\n    [productCode]=\"product?.code\"\n    [maxQuantity]=\"product.stock.stockLevel\"\n  ></cx-add-to-cart>\n</ng-container>\n\n<!-- @TODO: Temp. Comment out share link while not in use by CMS -->\n<!-- <ng-container *cxOutlet=\"outlets.SHARE\">\n  <div>\n    <a href=\"#\" class=\"share btn-link\">\n      {{ 'productSummary.share' | cxTranslate }}\n    </a>\n  </div>\n</ng-container> -->\n",
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                providers: [TranslatePipe]
+            }] }
+];
+/** @nocollapse */
+ProductSummaryComponent.ctorParameters = () => [
+    { type: TranslatePipe }
+];
+ProductSummaryComponent.propDecorators = {
+    product: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ProductDetailsModule {
+}
+ProductDetailsModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    RouterModule,
+                    FormsModule,
+                    ReactiveFormsModule,
+                    CartSharedModule,
+                    CmsModule,
+                    AddToCartModule,
+                    OutletModule,
+                    I18nModule,
+                    FormComponentsModule,
+                    MediaModule,
+                    StarRatingModule,
+                ],
+                declarations: [
+                    ProductDetailsComponent,
+                    ProductSummaryComponent,
+                    ProductImagesComponent,
+                ],
+                exports: [
+                    ProductDetailsComponent,
+                    ProductSummaryComponent,
+                    ProductImagesComponent,
+                ],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @enum {string} */
+const ViewModes = {
+    Grid: 'grid',
+    List: 'list',
+};
+class ProductViewComponent {
+    constructor() {
+        this.modeChange = new EventEmitter();
+    }
+    /**
+     * @return {?}
+     */
+    get buttonClass() {
+        return `cx-product-${this.mode}`;
+    }
+    /**
+     * @return {?}
+     */
+    changeMode() {
+        /** @type {?} */
+        const newMode = this.mode === ViewModes.Grid ? ViewModes.List : ViewModes.Grid;
+        this.modeChange.emit(newMode);
+    }
+}
+ProductViewComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-product-view',
+                template: "<div class=\"cx-product-layout\" (click)=\"changeMode()\">\n  <div [ngClass]=\"buttonClass\"><span></span></div>\n</div>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+ProductViewComponent.propDecorators = {
+    mode: [{ type: Input }],
+    modeChange: [{ type: Output }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ProductListComponent {
+    /**
+     * @param {?} productSearchService
+     * @param {?} activatedRoute
+     * @param {?} pageLayoutService
+     */
+    constructor(productSearchService, activatedRoute, pageLayoutService) {
+        this.productSearchService = productSearchService;
+        this.activatedRoute = activatedRoute;
+        this.pageLayoutService = pageLayoutService;
+        this.searchConfig = {};
+        this.gridMode$ = new BehaviorSubject(ViewModes.Grid);
+    }
+    /**
+     * @return {?}
+     */
+    update() {
+        const { queryParams } = this.activatedRoute.snapshot;
+        this.options = this.createOptionsByUrlParams();
+        if (this.categoryCode && this.categoryCode !== queryParams.categoryCode) {
+            this.query = ':relevance:category:' + this.categoryCode;
+        }
+        if (this.brandCode && this.brandCode !== queryParams.brandCode) {
+            this.query = ':relevance:brand:' + this.brandCode;
+        }
+        if (!this.query && queryParams.query) {
+            this.query = queryParams.query;
+        }
+        this.search(this.query, this.options);
+    }
+    /**
+     * @return {?}
+     */
+    createOptionsByUrlParams() {
+        const { queryParams } = this.activatedRoute.snapshot;
+        /** @type {?} */
+        const newConfig = Object.assign({}, queryParams);
+        delete newConfig.query;
+        /** @type {?} */
+        const options = Object.assign({}, this.searchConfig, newConfig, { pageSize: this.itemPerPage || 10 });
+        if (this.categoryCode) {
+            options.categoryCode = this.categoryCode;
+        }
+        if (this.brandCode) {
+            options.brandCode = this.brandCode;
+        }
+        return options;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.updateParams$ = this.activatedRoute.params.pipe(tap(params => {
+            this.categoryCode = params.categoryCode;
+            this.brandCode = params.brandCode;
+            this.query = params.query;
+            this.update();
+        }));
+        this.pageLayoutService.templateName$.pipe(take(1)).subscribe(template => {
+            this.gridMode$.next(template === 'ProductGridPageTemplate' ? ViewModes.Grid : ViewModes.List);
+        });
+        // clean previous search result
+        this.productSearchService.clearSearchResults();
+        this.model$ = this.productSearchService.getSearchResults().pipe(tap(searchResult => {
+            if (Object.keys(searchResult).length === 0) {
+                this.search(this.query, this.options);
+            }
+            else {
+                this.getCategoryTitle(searchResult);
+            }
+        }), filter(searchResult => Object.keys(searchResult).length > 0));
+    }
+    /**
+     * @protected
+     * @param {?} data
+     * @return {?}
+     */
+    getCategoryTitle(data) {
+        if (data.breadcrumbs && data.breadcrumbs.length > 0) {
+            this.categoryTitle = data.breadcrumbs[0].facetValueName;
+        }
+        else if (!this.query.includes(':relevance:')) {
+            this.categoryTitle = this.query;
+        }
+        if (this.categoryTitle) {
+            this.categoryTitle =
+                data.pagination.totalResults + ' results for ' + this.categoryTitle;
+        }
+        return this.categoryTitle;
+    }
+    /**
+     * @param {?} pageNumber
+     * @return {?}
+     */
+    viewPage(pageNumber) {
+        this.search(this.query, { currentPage: pageNumber });
+    }
+    /**
+     * @param {?} sortCode
+     * @return {?}
+     */
+    sortList(sortCode) {
+        this.search(this.query, { sortCode: sortCode });
+    }
+    /**
+     * @param {?} mode
+     * @return {?}
+     */
+    setGridMode(mode) {
+        this.gridMode$.next(mode);
+    }
+    /**
+     * @protected
+     * @param {?} query
+     * @param {?=} options
+     * @return {?}
+     */
+    search(query, options) {
+        if (this.query) {
+            if (options) {
+                // Overide default options
+                this.searchConfig = Object.assign({}, this.searchConfig, options);
+            }
+            this.productSearchService.search(query, this.searchConfig);
+        }
+    }
+}
+ProductListComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-product-list',
+                template: "<ng-container *ngIf=\"(updateParams$ | async)\">\n  <div class=\"cx-page\" *ngIf=\"(model$ | async) as model\">\n    <section class=\"cx-page__section\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-12 col-lg-12\" *ngIf=\"(gridMode$ | async) as gridMode\">\n            <div class=\"cx-sorting top\">\n              <div class=\"row\">\n                <div class=\"col-12 col-lg-4 mr-auto\">\n                  <div class=\"form-group cx-sort-dropdown\">\n                    <cx-sorting\n                      [sortOptions]=\"model.sorts\"\n                      (sortListEvent)=\"sortList($event)\"\n                      [selectedOption]=\"model.pagination.sort\"\n                      placeholder=\"{{\n                        'productList.sortByRelevance' | cxTranslate\n                      }}\"\n                    ></cx-sorting>\n                  </div>\n                </div>\n                <div class=\"col-auto\">\n                  <div\n                    class=\"cx-pagination\"\n                    aria-label=\"product search pagination\"\n                  >\n                    <cx-pagination\n                      [pagination]=\"model.pagination\"\n                      (viewPageEvent)=\"viewPage($event)\"\n                    ></cx-pagination>\n                  </div>\n                </div>\n                <div class=\"col-auto ml-auto ml-lg-0\">\n                  <cx-product-view\n                    (modeChange)=\"setGridMode($event)\"\n                    [mode]=\"gridMode\"\n                  ></cx-product-view>\n                </div>\n              </div>\n            </div>\n            <div class=\"cx-product-container\">\n              <ng-container *ngIf=\"gridMode === 'grid'\">\n                <div class=\"row\">\n                  <cx-product-grid-item\n                    *ngFor=\"let product of model?.products\"\n                    [product]=\"product\"\n                    class=\"col-12 col-sm-6 col-md-4\"\n                  ></cx-product-grid-item>\n                </div>\n              </ng-container>\n\n              <ng-container *ngIf=\"gridMode === 'list'\">\n                <cx-product-list-item\n                  *ngFor=\"let product of model?.products\"\n                  [product]=\"product\"\n                  class=\"cx-product-search-list\"\n                ></cx-product-list-item>\n              </ng-container>\n            </div>\n            <div class=\"cx-sorting bottom\">\n              <div class=\"row\">\n                <div class=\"col-12 col-lg-4 mr-auto\">\n                  <div class=\"form-group cx-sort-dropdown\">\n                    <cx-sorting\n                      [sortOptions]=\"model.sorts\"\n                      (sortListEvent)=\"sortList($event)\"\n                      [selectedOption]=\"model.pagination.sort\"\n                      placeholder=\"{{\n                        'productList.sortByRelevance' | cxTranslate\n                      }}\"\n                    ></cx-sorting>\n                  </div>\n                </div>\n                <div class=\"col-auto\" aria-label=\"product search pagination\">\n                  <div class=\"cx-pagination\">\n                    <cx-pagination\n                      [pagination]=\"model.pagination\"\n                      (viewPageEvent)=\"viewPage($event)\"\n                    ></cx-pagination>\n                  </div>\n                </div>\n                <div class=\"col-auto ml-auto ml-lg-0\">\n                  <cx-product-view\n                    (modeChange)=\"setGridMode($event)\"\n                    [mode]=\"gridMode\"\n                  ></cx-product-view>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </section>\n  </div>\n</ng-container>\n"
+            }] }
+];
+/** @nocollapse */
+ProductListComponent.ctorParameters = () => [
+    { type: ProductSearchService },
+    { type: ActivatedRoute },
+    { type: PageLayoutService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ProductFacetNavigationComponent {
+    /**
+     * @param {?} modalService
+     * @param {?} activatedRoute
+     * @param {?} productSearchService
+     */
+    constructor(modalService, activatedRoute, productSearchService) {
+        this.modalService = modalService;
+        this.activatedRoute = activatedRoute;
+        this.productSearchService = productSearchService;
+        this.minPerFacet = 6;
+        this.collapsedFacets = new Set();
+        this.showAllPerFacetMap = new Map();
+        this.queryCodec = new HttpUrlEncodingCodec();
+    }
+    /**
+     * @return {?}
+     */
+    get visibleFacets() {
+        if (!this.searchResult.facets) {
+            return [];
+        }
+        return this.searchResult.facets.filter(facet => facet.visible);
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.updateParams$ = this.activatedRoute.params.pipe(tap(params => {
+            this.activeFacetValueCode = params.categoryCode || params.brandCode;
+        }));
+        this.searchResult$ = this.productSearchService.getSearchResults().pipe(tap(searchResult => {
+            this.searchResult = searchResult;
+            if (this.searchResult.facets) {
+                this.searchResult.facets.forEach(el => {
+                    this.showAllPerFacetMap.set(el.name, false);
+                });
+            }
+        }), filter(searchResult => Object.keys(searchResult).length > 0));
+    }
+    /**
+     * @param {?} content
+     * @return {?}
+     */
+    openFilterModal(content) {
+        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+    }
+    /**
+     * @param {?} query
+     * @return {?}
+     */
+    toggleValue(query) {
+        this.productSearchService.search(this.queryCodec.decodeValue(query));
+    }
+    /**
+     * @param {?} facetName
+     * @return {?}
+     */
+    showLess(facetName) {
+        this.updateShowAllPerFacetMap(facetName, false);
+    }
+    /**
+     * @param {?} facetName
+     * @return {?}
+     */
+    showMore(facetName) {
+        this.updateShowAllPerFacetMap(facetName, true);
+    }
+    /**
+     * @private
+     * @param {?} facetName
+     * @param {?} showAll
+     * @return {?}
+     */
+    updateShowAllPerFacetMap(facetName, showAll) {
+        this.showAllPerFacetMap.set(facetName, showAll);
+    }
+    /**
+     * @param {?} facetName
+     * @return {?}
+     */
+    isFacetCollapsed(facetName) {
+        return this.collapsedFacets.has(facetName);
+    }
+    /**
+     * @param {?} facetName
+     * @return {?}
+     */
+    toggleFacet(facetName) {
+        if (this.collapsedFacets.has(facetName)) {
+            this.collapsedFacets.delete(facetName);
+        }
+        else {
+            this.collapsedFacets.add(facetName);
+        }
+    }
+    /**
+     * @param {?} facet
+     * @return {?}
+     */
+    getVisibleFacetValues(facet) {
+        return facet.values.slice(0, this.showAllPerFacetMap.get(facet.name)
+            ? facet.values.length
+            : this.minPerFacet);
+    }
+}
+ProductFacetNavigationComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-product-facet-navigation',
+                template: "<div class=\"cx-search-facet\" *ngIf=\"(searchResult$ | async) as searchResult\">\n  <ng-template [ngIf]=\"searchResult.breadcrumbs?.length\">\n    <h4 class=\"cx-facet-filter-header\">\n      {{ 'productList.filterBy.label' | cxTranslate }}\n    </h4>\n    <div class=\"cx-facet-filter-container\">\n      <div\n        *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n        [hidden]=\"breadcrumb.facetValueCode === activeFacetValueCode\"\n        class=\"cx-facet-filter-pill\"\n        role=\"filter\"\n      >\n        <span>{{ breadcrumb.facetValueName }}</span>\n        <button\n          type=\"button\"\n          class=\"close\"\n          aria-label=\"Close\"\n          (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n    </div>\n  </ng-template>\n\n  <ng-template ngFor let-facet [ngForOf]=\"visibleFacets\" let-facetId=\"index\">\n    <div class=\"cx-facet-group\">\n      <span class=\"cx-facet-header\">\n        <a\n          class=\"cx-facet-header-link\"\n          (click)=\"toggleFacet(facet.name)\"\n          [attr.aria-expanded]=\"!isFacetCollapsed(facet.name)\"\n          aria-controls=\"\"\n        >\n          {{ facet.name }}\n        </a>\n      </span>\n      <div [ngbCollapse]=\"isFacetCollapsed(facet.name)\">\n        <ul class=\"cx-facet-list\">\n          <li\n            *ngFor=\"\n              let value of getVisibleFacetValues(facet);\n              index as facetValueId\n            \"\n          >\n            <div class=\"form-check\">\n              <label class=\"form-checkbox cx-facet-label\">\n                <input\n                  class=\"form-check-input cx-facet-checkbox\"\n                  role=\"checkbox\"\n                  type=\"checkbox\"\n                  aria-checked=\"true\"\n                  [checked]=\"value.selected\"\n                  (change)=\"toggleValue(value.query.query.value)\"\n                />\n                <span class=\"cx-facet-text\"\n                  >{{ value.name }} ({{ value.count }})</span\n                >\n              </label>\n            </div>\n          </li>\n          <li\n            class=\"cx-facet-toggle-btn\"\n            (click)=\"showLess(facet.name)\"\n            *ngIf=\"showAllPerFacetMap.get(facet.name)\"\n          >\n            {{ 'productList.showLess' | cxTranslate }}\n          </li>\n          <li\n            class=\"cx-facet-toggle-btn\"\n            (click)=\"showMore(facet.name)\"\n            *ngIf=\"\n              !showAllPerFacetMap.get(facet.name) &&\n              facet.values.length > minPerFacet\n            \"\n          >\n            {{ 'productList.showMore' | cxTranslate }}\n          </li>\n        </ul>\n      </div>\n    </div>\n  </ng-template>\n</div>\n\n<div class=\"cx-facet-mobile\">\n  <button\n    class=\"btn btn-action btn-block cx-facet-mobile-btn\"\n    (click)=\"openFilterModal(content)\"\n  >\n    {{ 'productList.filterBy.action' | cxTranslate }}\n  </button>\n</div>\n\n<!-- START ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n<div *ngIf=\"(updateParams$ | async) as params\">\n  <div class=\"cx-facet-mobile\" *ngIf=\"searchResult.breadcrumbs?.length\">\n    <div class=\"cx-facet-filter-container\">\n      <h4 class=\"cx-facet-filter-header\">\n        {{ 'productList.appliedFilter' | cxTranslate }}\n      </h4>\n      <div\n        class=\"cx-facet-filter-pill\"\n        role=\"filter\"\n        *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n      >\n        {{ breadcrumb.facetValueName }}\n        <button\n          type=\"button\"\n          class=\"close\"\n          aria-label=\"Close\"\n          (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n<!-- END ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n\n<ng-template #content let-c=\"close\" let-d=\"dismiss\">\n  <div class=\"modal-header\">\n    <h4 class=\"cx-facet-modal-title\" id=\"modal-title\">\n      {{ 'productList.filterBy.label' | cxTranslate }}\n    </h4>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"d('Cross click')\"\n    >\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"modal-body cx-facet-modal-body\">\n    <form>\n      <div\n        class=\"form-group\"\n        *ngFor=\"let facet of searchResult.facets; index as facetId\"\n      >\n        <h4 class=\"cx-facet-modal-label\" for=\"megapixels\">{{ facet.name }}</h4>\n        <div class=\"input-group\">\n          <ul class=\"cx-facet-list\">\n            <li *ngFor=\"let value of facet.values; index as facetValueId\">\n              <div class=\"form-check\">\n                <label class=\"form-checkbox cx-facet-label\">\n                  <input\n                    class=\"form-check-input cx-facet-checkbox\"\n                    role=\"checkbox\"\n                    type=\"checkbox\"\n                    aria-checked=\"true\"\n                    [checked]=\"value.selected\"\n                    (change)=\"toggleValue(value.query.query.value)\"\n                  />\n                  <span class=\"cx-facet-text\"\n                    >{{ value.name }} ({{ value.count }})</span\n                  >\n                </label>\n              </div>\n            </li>\n          </ul>\n        </div>\n      </div>\n    </form>\n  </div>\n</ng-template>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+ProductFacetNavigationComponent.ctorParameters = () => [
+    { type: NgbModal },
+    { type: ActivatedRoute },
+    { type: ProductSearchService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ProductGridItemComponent {
+}
+ProductGridItemComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-product-grid-item',
+                template: "<a\n  [routerLink]=\"\n    { route: 'product', params: product | stripHtml } | cxTranslateUrl\n  \"\n  class=\"cx-product-image-container\"\n>\n  <cx-media\n    class=\"cx-product-image\"\n    [container]=\"product.images?.PRIMARY\"\n    format=\"product\"\n    [alt]=\"product.summary\"\n  ></cx-media>\n</a>\n<a\n  [routerLink]=\"\n    { route: 'product', params: product | stripHtml } | cxTranslateUrl\n  \"\n  class=\"cx-product-name\"\n  [innerHTML]=\"product.name\"\n  >{{ product.name }}</a\n>\n\n<div class=\"cx-product-rating\">\n  <cx-star-rating\n    [rating]=\"product?.averageRating\"\n    [disabled]=\"true\"\n  ></cx-star-rating>\n</div>\n<div class=\"cx-product-price-container\">\n  <div class=\"cx-product-price\" aria-label=\"Product price\">\n    {{ product.price.formattedValue }}\n  </div>\n</div>\n\n<cx-add-to-cart\n  *ngIf=\"product.stock.stockLevelStatus !== 'outOfStock'\"\n  [productCode]=\"product.code\"\n></cx-add-to-cart>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+ProductGridItemComponent.propDecorators = {
+    product: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ProductListItemComponent {
+}
+ProductListItemComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-product-list-item',
+                template: "<div class=\"row\">\n  <div class=\"col-12 col-md-4\">\n    <a\n      [routerLink]=\"\n        { route: 'product', params: product | stripHtml } | cxTranslateUrl\n      \"\n      class=\"cx-product-image-container\"\n    >\n      <cx-media\n        class=\"cx-product-image\"\n        [container]=\"product.images?.PRIMARY\"\n        format=\"product\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n    </a>\n  </div>\n  <div class=\"col-12 col-md-8\">\n    <a\n      [routerLink]=\"\n        { route: 'product', params: product | stripHtml } | cxTranslateUrl\n      \"\n      class=\"cx-product-name\"\n      [innerHtml]=\"product.name\"\n      >{{ product.name }}</a\n    >\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"cx-product-price\" aria-label=\"Product price\">\n      {{ product.price?.formattedValue }}\n    </div>\n    <div class=\"row\">\n      <div class=\"col-12 col-md-8\">\n        <p class=\"cx-product-summary\" [innerHtml]=\"product.summary\">\n          {{ product.summary }}\n        </p>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <cx-add-to-cart\n          *ngIf=\"product.stock.stockLevelStatus !== 'outOfStock'\"\n          [productCode]=\"product.code\"\n        ></cx-add-to-cart>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+ProductListItemComponent.propDecorators = {
+    product: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ProductListModule {
+}
+ProductListModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            CMSProductListComponent: { selector: 'cx-product-list' },
+                            SearchResultsListComponent: { selector: 'cx-product-list' },
+                            ProductRefinementComponent: { selector: 'cx-product-facet-navigation' },
+                        },
+                    }))),
+                    RouterModule,
+                    MediaModule,
+                    BootstrapModule,
+                    AddToCartModule,
+                    FormComponentsModule,
+                    ListNavigationModule,
+                    StripHtmlModule,
+                    UrlTranslationModule,
+                    I18nModule,
+                    StarRatingModule,
+                ],
+                declarations: [
+                    ProductListComponent,
+                    ProductFacetNavigationComponent,
+                    ProductListItemComponent,
+                    ProductGridItemComponent,
+                    ProductViewComponent,
+                ],
+                exports: [
+                    ProductListComponent,
+                    ProductListItemComponent,
+                    ProductGridItemComponent,
+                ],
+                entryComponents: [ProductListComponent, ProductFacetNavigationComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+// import { AbstractProductComponent } from '../abstract-product-component';
+class ProductReferencesComponent {
+} /*extends AbstractProductComponent {
+
+    @Input() productCode;
+
+    productCodes: Array<String> = [];
+
+    protected fetchData() {
+        // load the product data by context parameters
+        if (this.contextParameters.productCode) {
+            this.productLoader.loadReferences(this.contextParameters.productCode);
+            this.productLoader.getSubscription(this.contextParameters.productCode + 'references').subscribe((refData) => {
+                if (refData) {
+                    this.createCodeList(refData);
+                    this.cd.detectChanges();
+                }
+            });
+        }
+        super.fetchData();
+    }
+
+    createCodeList(references) {
+        if (!this.component || !this.component.productReferenceTypes || !references[this.component.productReferenceTypes]) {
+            return;
+        }
+        references[this.component.productReferenceTypes].forEach((item, index) => {
+            if (!this.component.maximumNumberProducts || index < this.component.maximumNumberProducts) {
+                this.productCodes.push(item.target.code);
+            }
+        });
+    }
+}*/
+ProductReferencesComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-product-references',
+                template: "",
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                styles: [""]
             }] }
 ];
 
@@ -5296,21 +8810,24 @@ SkipLinkComponent.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class SkipLinkModule {
+class ProductReferencesModule {
 }
-SkipLinkModule.decorators = [
+ProductReferencesModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
                     CommonModule,
+                    RouterModule,
+                    // MediaModule,
+                    ProductCarouselModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
-                            SkipLinkComponent: { selector: 'cx-skip-link' },
+                            ProductReferencesComponent: { selector: 'cx-product-references' },
                         },
                     }))),
-                    I18nModule,
                 ],
-                declarations: [SkipLinkComponent],
-                entryComponents: [SkipLinkComponent],
+                declarations: [ProductReferencesComponent],
+                entryComponents: [ProductReferencesComponent],
+                exports: [ProductReferencesComponent],
             },] }
 ];
 
@@ -5318,6 +8835,1033 @@ SkipLinkModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class ProductAttributesComponent {
+}
+ProductAttributesComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-product-attributes',
+                template: "<table *ngFor=\"let class of product?.classifications\">\n  <th>\n    <h3>{{ class.name }}</h3>\n  </th>\n  <tr *ngFor=\"let feature of class.features\">\n    <td>{{ feature.name }}</td>\n    <td>\n      <ul>\n        <li *ngFor=\"let featureValue of feature?.featureValues\">\n          {{ featureValue?.value }}\n        </li>\n      </ul>\n    </td>\n  </tr>\n</table>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+ProductAttributesComponent.propDecorators = {
+    product: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ProductReviewsComponent {
+    /**
+     * @param {?} reviewService
+     * @param {?} fb
+     */
+    constructor(reviewService, fb) {
+        this.reviewService = reviewService;
+        this.fb = fb;
+        this.isWritingReviewChange = new EventEmitter();
+        this._isWritingReview = false;
+        // TODO: configurable
+        this.initialMaxListItems = 5;
+    }
+    /**
+     * @return {?}
+     */
+    get isWritingReview() {
+        return this._isWritingReview;
+    }
+    /**
+     * @param {?} val
+     * @return {?}
+     */
+    set isWritingReview(val) {
+        this._isWritingReview = val;
+        this.isWritingReviewChange.emit(this.isWritingReview);
+    }
+    /**
+     * @return {?}
+     */
+    ngOnChanges() {
+        this.maxListItems = this.initialMaxListItems;
+        if (this.product) {
+            this.reviews$ = this.reviewService.getByProductCode(this.product.code);
+        }
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.resetReviewForm();
+    }
+    /**
+     * @return {?}
+     */
+    initiateWriteReview() {
+        this.isWritingReview = true;
+    }
+    /**
+     * @return {?}
+     */
+    cancelWriteReview() {
+        this.isWritingReview = false;
+        this.resetReviewForm();
+    }
+    /**
+     * @return {?}
+     */
+    submitReview() {
+        /** @type {?} */
+        const reviewFormControls = this.reviewForm.controls;
+        /** @type {?} */
+        const review = {
+            headline: reviewFormControls.title.value,
+            comment: reviewFormControls.comment.value,
+            rating: reviewFormControls.rating.value,
+            alias: reviewFormControls.reviewerName.value,
+        };
+        this.reviewService.add(this.product.code, review);
+        this.isWritingReview = false;
+        this.resetReviewForm();
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    resetReviewForm() {
+        this.reviewForm = this.fb.group({
+            title: ['', Validators.required],
+            comment: ['', Validators.required],
+            rating: [0, [Validators.min(1), Validators.max(5)]],
+            reviewerName: '',
+        });
+    }
+}
+ProductReviewsComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-product-reviews',
+                template: "<ng-container *ngIf=\"!isWritingReview; else writeReview\">\n  <div class=\"header\">\n    <h3>{{ 'productReview.overallRating' | cxTranslate }}</h3>\n    <button class=\"btn btn-primary\" (click)=\"initiateWriteReview()\">\n      {{ 'productReview.writeReview' | cxTranslate }}\n    </button>\n    <cx-star-rating\n      class=\"rating\"\n      [rating]=\"product.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n  </div>\n\n  <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n    <ng-container *ngIf=\"(reviews$ | async) as reviews\">\n      <div\n        class=\"review\"\n        tabindex=\"0\"\n        *ngFor=\"let review of (reviews | slice: 0:maxListItems)\"\n      >\n        <div class=\"title\">{{ review.headline }}</div>\n        <cx-star-rating\n          [rating]=\"review.rating\"\n          [disabled]=\"true\"\n        ></cx-star-rating>\n        <div class=\"name\">\n          {{ review.alias ? review.alias : review.principal?.name }}\n        </div>\n        <div class=\"date\">{{ review.date | cxDate }}</div>\n        <div class=\"text\">{{ review.comment }}</div>\n      </div>\n      <div *ngIf=\"reviews.length > initialMaxListItems\">\n        <button\n          class=\"btn btn-primary\"\n          (click)=\"maxListItems = reviews.length\"\n          *ngIf=\"maxListItems === initialMaxListItems\"\n        >\n          {{ 'productReview.more' | cxTranslate }}\n        </button>\n        <button\n          class=\"btn btn-primary\"\n          (click)=\"maxListItems = initialMaxListItems\"\n          *ngIf=\"maxListItems !== initialMaxListItems\"\n        >\n          {{ 'productReview.less' | cxTranslate }}\n        </button>\n      </div>\n    </ng-container>\n  </ng-container>\n</ng-container>\n\n<ng-template #writeReview>\n  <form [formGroup]=\"reviewForm\" (ngSubmit)=\"submitReview()\">\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.reviewTitle' | cxTranslate\n        }}</span>\n        <input type=\"text\" class=\"form-control\" formControlName=\"title\" />\n      </label>\n    </div>\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.writeYourComments' | cxTranslate\n        }}</span>\n        <textarea\n          class=\"form-control\"\n          rows=\"3\"\n          formControlName=\"comment\"\n        ></textarea>\n      </label>\n    </div>\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.rating' | cxTranslate\n        }}</span>\n        <cx-star-rating formControlName=\"rating\" [steps]=\"0.5\"></cx-star-rating>\n      </label>\n    </div>\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.reviewerName' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          formControlName=\"reviewerName\"\n        />\n      </label>\n    </div>\n    <div class=\"form-group row\">\n      <div class=\"col-12 col-md-4\">\n        <button\n          type=\"submit\"\n          class=\"btn btn-block btn-secondary\"\n          (click)=\"cancelWriteReview()\"\n        >\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <button\n          type=\"submit\"\n          class=\"btn btn-block btn-primary\"\n          [ngClass]=\"{ 'submit-btn': reviewForm.valid }\"\n          [disabled]=\"!reviewForm.valid\"\n        >\n          {{ 'common.submit' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </form>\n</ng-template>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+ProductReviewsComponent.ctorParameters = () => [
+    { type: ProductReviewService },
+    { type: FormBuilder }
+];
+ProductReviewsComponent.propDecorators = {
+    product: [{ type: Input }],
+    isWritingReview: [{ type: Input }],
+    isWritingReviewChange: [{ type: Output }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ProductReviewsModule {
+}
+ProductReviewsModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    ReactiveFormsModule,
+                    FormsModule,
+                    FormComponentsModule,
+                    I18nModule,
+                    StarRatingModule,
+                ],
+                declarations: [ProductReviewsComponent],
+                exports: [ProductReviewsComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ProductTabsComponent {
+    /**
+     * @param {?} winRef
+     * @param {?} currentPageService
+     */
+    constructor(winRef, currentPageService) {
+        this.winRef = winRef;
+        this.currentPageService = currentPageService;
+        this.isWritingReview = false;
+        this.activatedElements = [];
+    }
+    /**
+     * @param {?} ref
+     * @return {?}
+     */
+    set initial(ref) {
+        if (ref) {
+            ref.nativeElement.click();
+        }
+    }
+    /**
+     * @return {?}
+     */
+    get outlets() {
+        return ProductTabsComponent.outlets;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.product$ = this.currentPageService.getProduct();
+    }
+    /**
+     * @param {?} event
+     * @param {?} tab
+     * @return {?}
+     */
+    select(event, tab) {
+        if (this.activatedElements.indexOf(tab) === -1) {
+            // remove active class on both header and content panel
+            this.activatedElements.forEach(el => el.classList.remove('active', 'toggled'));
+            this.activatedElements = [(/** @type {?} */ (event.target)), tab];
+            this.activatedElements.forEach(el => el.classList.add('active'));
+            // only scroll if the element is not yet visible
+            if (this.isElementOutViewport(tab)) {
+                tab.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                    inline: 'nearest',
+                });
+            }
+        }
+        else {
+            this.activatedElements.forEach(el => el.classList.toggle('toggled'));
+        }
+    }
+    /**
+     * @return {?}
+     */
+    openReview() {
+        if (this.reviewHeader.nativeElement) {
+            this.reviewHeader.nativeElement.click();
+        }
+    }
+    /**
+     * @private
+     * @param {?} el
+     * @return {?}
+     */
+    isElementOutViewport(el) {
+        if (!this.winRef.nativeWindow) {
+            return false;
+        }
+        /** @type {?} */
+        const rect = el.getBoundingClientRect();
+        return (rect.bottom < 0 ||
+            rect.right < 0 ||
+            rect.left > this.winRef.nativeWindow.innerWidth ||
+            rect.top > this.winRef.nativeWindow.innerHeight);
+    }
+}
+ProductTabsComponent.outlets = ProductTabsOutlets;
+ProductTabsComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-product-tabs',
+                template: "<div class=\"details\" *ngIf=\"(product$ | async) as product\">\n  <ng-container *cxOutlet=\"outlets.DESCRIPTION\">\n    <h3 #descriptionHeader (click)=\"select($event, description)\">\n      {{ 'productDetails.productDetails' | cxTranslate }}\n    </h3>\n    <div #description>\n      <div class=\"container\" [innerHTML]=\"product?.description\"></div>\n    </div>\n  </ng-container>\n\n  <ng-container *cxOutlet=\"outlets.SPECIFICATIONS\">\n    <h3 (click)=\"select($event, specifications)\">\n      {{ 'productDetails.specification' | cxTranslate }}\n    </h3>\n    <div #specifications>\n      <div class=\"container\">\n        <h2>{{ 'productDetails.specification' | cxTranslate }}</h2>\n        <cx-product-attributes [product]=\"product\"></cx-product-attributes>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-container *cxOutlet=\"outlets.REVIEWS\">\n    <h3 #reviewHeader (click)=\"select($event, reviews)\">\n      {{ 'productDetails.reviews' | cxTranslate }} ({{\n        product?.numberOfReviews\n      }})\n    </h3>\n    <div #reviews>\n      <div class=\"container\">\n        <h2>\n          {{ 'productDetails.reviews' | cxTranslate }} ({{\n            product?.numberOfReviews\n          }})\n        </h2>\n        <cx-product-reviews\n          class=\"container\"\n          [(isWritingReview)]=\"isWritingReview\"\n          [product]=\"product\"\n        ></cx-product-reviews>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-container *cxOutlet=\"outlets.SHIPPING\">\n    <h3 (click)=\"select($event, shipping)\">\n      {{ 'productDetails.shipping' | cxTranslate }}\n    </h3>\n    <div #shipping>\n      <div class=\"container\">\n        <h2>{{ 'productDetails.shipping' | cxTranslate }}</h2>\n        <ng-container\n          [cxComponentWrapper]=\"{\n            flexType: 'CMSTabParagraphComponent',\n            uid: 'deliveryTab'\n          }\"\n        ></ng-container>\n      </div>\n    </div>\n  </ng-container>\n</div>\n"
+            }] }
+];
+/** @nocollapse */
+ProductTabsComponent.ctorParameters = () => [
+    { type: WindowRef },
+    { type: CurrentProductService }
+];
+ProductTabsComponent.propDecorators = {
+    initial: [{ type: ViewChild, args: ['descriptionHeader',] }],
+    reviewHeader: [{ type: ViewChild, args: ['reviewHeader',] }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ProductTabsModule {
+}
+ProductTabsModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    RouterModule,
+                    FormsModule,
+                    ReactiveFormsModule,
+                    CartSharedModule,
+                    CmsModule,
+                    OutletModule,
+                    ProductReviewsModule,
+                    PageComponentModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            CMSTabParagraphContainer: {
+                                selector: 'cx-product-tabs',
+                            },
+                        },
+                    }))),
+                    I18nModule,
+                ],
+                declarations: [ProductAttributesComponent, ProductTabsComponent],
+                exports: [
+                    ProductAttributesComponent,
+                    ProductReviewsComponent,
+                    ProductTabsComponent,
+                ],
+                entryComponents: [ProductTabsComponent],
+                providers: [ProductService, WindowRef, RoutingService],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class AbstractStoreItemComponent {
+    /**
+     * @param {?} storeDataService
+     */
+    constructor(storeDataService) {
+        this.storeDataService = storeDataService;
+        this.current_date = new Date();
+    }
+    /**
+     * @param {?} location
+     * @return {?}
+     */
+    getDirections(location) {
+        /** @type {?} */
+        const google_map_url = 'https://www.google.com/maps/dir/Current+Location/';
+        /** @type {?} */
+        const latitude = this.storeDataService.getStoreLatitude(location);
+        /** @type {?} */
+        const longitude = this.storeDataService.getStoreLongitude(location);
+        return google_map_url + latitude + ',' + longitude;
+    }
+    /**
+     * @param {?} location
+     * @return {?}
+     */
+    getClosingTime(location) {
+        return this.storeDataService.getStoreClosingTime(location, this.current_date);
+    }
+    /**
+     * @param {?} location
+     * @return {?}
+     */
+    getOpeningTime(location) {
+        return this.storeDataService.getStoreOpeningTime(location, this.current_date);
+    }
+    /**
+     * @param {?} location
+     * @return {?}
+     */
+    isOpen(location) {
+        return this.storeDataService.isStoreOpen(location, this.current_date);
+    }
+}
+AbstractStoreItemComponent.propDecorators = {
+    location: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const WEEK_DAYS_NUMBER = 7;
+class ScheduleComponent {
+    /**
+     * @param {?} storeDataService
+     */
+    constructor(storeDataService) {
+        this.storeDataService = storeDataService;
+        this.displayDays = null;
+    }
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    ngOnChanges(changes) {
+        if (changes.location && this.location) {
+            /** @type {?} */
+            const initialDate = this.getInitialDate();
+            this.displayDays = [];
+            for (let i = 0; i < WEEK_DAYS_NUMBER; i++) {
+                /** @type {?} */
+                const date = new Date(initialDate.valueOf());
+                date.setDate(date.getDate() + i);
+                this.displayDays.push(date);
+            }
+        }
+    }
+    /**
+     * Returns the store's opening time for the given date
+     * @param {?} date date
+     * @return {?}
+     */
+    getStoreOpeningTime(date) {
+        return this.storeDataService.getStoreOpeningTime(this.location, date);
+    }
+    /**
+     * Returns the store's closing time for the given date
+     * @param {?} date date
+     * @return {?}
+     */
+    getStoreClosingTime(date) {
+        return this.storeDataService.getStoreClosingTime(this.location, date);
+    }
+    /**
+     * return initial (first) date to be displayed in the schedule
+     * @private
+     * @return {?}
+     */
+    getInitialDate() {
+        /** @type {?} */
+        const currentDate = new Date();
+        currentDate.setDate(currentDate.getDate() - currentDate.getDay());
+        return currentDate;
+    }
+}
+ScheduleComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-schedule',
+                template: "<ng-content></ng-content>\n<div class=\"container cx-store-hours\" *ngIf=\"location.openingHours\">\n  <div *ngFor=\"let day of displayDays\" class=\"row\">\n    <div class=\"cx-days col-6\">{{ day | cxDate: 'EEE' }}</div>\n    <div *ngIf=\"getStoreOpeningTime(day) !== null\" class=\"cx-hours col-6\">\n      {{ getStoreOpeningTime(day) | cxDate: 'HH:mm' }} -\n      {{ getStoreClosingTime(day) | cxDate: 'HH:mm' }}\n    </div>\n    <div *ngIf=\"getStoreOpeningTime(day) === null\" class=\"cx-hours col-6\">\n      {{ 'storeFinder.closed' | cxTranslate }}\n    </div>\n  </div>\n</div>\n"
+            }] }
+];
+/** @nocollapse */
+ScheduleComponent.ctorParameters = () => [
+    { type: StoreDataService }
+];
+ScheduleComponent.propDecorators = {
+    location: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class StoreFinderGridComponent {
+    /**
+     * @param {?} storeFinderService
+     * @param {?} route
+     * @param {?} routingService
+     */
+    constructor(storeFinderService, route, routingService) {
+        this.storeFinderService = storeFinderService;
+        this.route = route;
+        this.routingService = routingService;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.isLoading$ = this.storeFinderService.getViewAllStoresLoading();
+        this.locations$ = this.storeFinderService.getViewAllStoresEntities();
+        if (this.route.snapshot.params.country) {
+            this.storeFinderService.findStoresAction('', this.defaultLocation, {
+                pageSize: -1,
+            }, this.route.snapshot.params.country);
+        }
+    }
+    /**
+     * @param {?} location
+     * @return {?}
+     */
+    viewStore(location) {
+        if (this.route.snapshot.params.region) {
+            this.routingService.go(['region', this.route.snapshot.params.region, location.name], undefined, { relativeTo: this.route });
+            return;
+        }
+        this.routingService.go(['region', '', location.name], undefined, {
+            relativeTo: this.route,
+        });
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() { }
+}
+StoreFinderGridComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-store-finder-grid',
+                template: "<ng-container\n  *ngIf=\"\n    !(isLoading$ | async) && (locations$ | async) as locations;\n    else loading\n  \"\n>\n  <div class=\"container\">\n    <div class=\"row\">\n      <div\n        class=\"col-md-3 item\"\n        *ngFor=\"let location of locations?.stores\"\n        (click)=\"viewStore(location)\"\n      >\n        <cx-store-finder-list-item\n          [location]=\"location\"\n        ></cx-store-finder-list-item>\n      </div>\n    </div>\n  </div>\n</ng-container>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
+            }] }
+];
+/** @nocollapse */
+StoreFinderGridComponent.ctorParameters = () => [
+    { type: StoreFinderService },
+    { type: ActivatedRoute },
+    { type: RoutingService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class StoreFinderHeaderComponent {
+}
+StoreFinderHeaderComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-store-finder-header',
+                template: "<ng-container> <cx-store-finder-search></cx-store-finder-search> </ng-container>\n"
+            }] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class StoreFinderListItemComponent extends AbstractStoreItemComponent {
+    /**
+     * @param {?} storeDataService
+     */
+    constructor(storeDataService) {
+        super(storeDataService);
+        this.storeDataService = storeDataService;
+        this.locationIndex = null;
+        this.storeItemClick = new EventEmitter();
+    }
+    /**
+     * @return {?}
+     */
+    handleStoreItemClick() {
+        if (this.locationIndex !== null) {
+            this.storeItemClick.emit(this.locationIndex);
+        }
+    }
+}
+StoreFinderListItemComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-store-finder-list-item',
+                template: "<ng-container>\n  <div (click)=\"handleStoreItemClick()\">\n    <div class=\"cx-store-name\">\n      {{ location.displayName }}\n    </div>\n    <div class=\"cx-store-address\" *ngIf=\"location.address\">\n      {{ location.address.line1 }}<br />\n      {{ location.address.town }},\n      {{ location.address.region ? location.address.region.name + ',' : '' }}\n      {{ location.address.postalCode }}\n    </div>\n    <div *ngIf=\"location.openingHours\">\n      <div *ngIf=\"isOpen(location)\" class=\"cx-store-open\">\n        {{ getClosingTime(location) | cxDate: 'EEE' }}:\n        {{ 'storeFinder.openUntil' | cxTranslate }}\n        {{ getClosingTime(location) | cxDate: 'shortTime' }}\n      </div>\n      <div *ngIf=\"!isOpen(location)\" class=\"cx-store-closed\">\n        {{ getClosingTime(location) | cxDate: 'EEE' }}:\n        {{ 'storeFinder.closed' | cxTranslate }}\n      </div>\n    </div>\n    <a\n      href=\"{{ getDirections(location) }}\"\n      target=\"_blank\"\n      class=\"btn btn-sm btn-action btn-block cx-button\"\n      >{{ 'storeFinder.getDirections' | cxTranslate }}</a\n    >\n  </div>\n</ng-container>\n"
+            }] }
+];
+/** @nocollapse */
+StoreFinderListItemComponent.ctorParameters = () => [
+    { type: StoreDataService }
+];
+StoreFinderListItemComponent.propDecorators = {
+    locationIndex: [{ type: Input }],
+    storeItemClick: [{ type: Output }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class StoreFinderMapComponent {
+    /**
+     * @param {?} googleMapRendererService
+     */
+    constructor(googleMapRendererService) {
+        this.googleMapRendererService = googleMapRendererService;
+        this.selectedStoreItem = new EventEmitter();
+    }
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    ngOnChanges(changes) {
+        if (changes.locations && this.locations) {
+            this.googleMapRendererService.renderMap(this.mapElement.nativeElement, this.locations, markerIndex => {
+                this.selectStoreItemClickHandle(markerIndex);
+            });
+        }
+    }
+    /**
+     * Sets the center of the map to the given location
+     * @param {?} latitude latitude of the new center
+     * @param {?} longitude longitude of the new center
+     * @return {?}
+     */
+    centerMap(latitude, longitude) {
+        this.googleMapRendererService.centerMap(latitude, longitude);
+    }
+    /**
+     * @private
+     * @param {?} markerIndex
+     * @return {?}
+     */
+    selectStoreItemClickHandle(markerIndex) {
+        this.selectedStoreItem.emit(markerIndex);
+    }
+}
+StoreFinderMapComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-store-finder-map',
+                template: "<div #mapElement class=\"cx-store-map\"></div>\n"
+            }] }
+];
+/** @nocollapse */
+StoreFinderMapComponent.ctorParameters = () => [
+    { type: GoogleMapRendererService }
+];
+StoreFinderMapComponent.propDecorators = {
+    mapElement: [{ type: ViewChild, args: ['mapElement',] }],
+    locations: [{ type: Input }],
+    selectedStoreItem: [{ type: Output }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class StoreFinderPaginationDetailsComponent {
+    constructor() { }
+    /**
+     * @return {?}
+     */
+    getResultsPerPage() {
+        if (this.pagination.totalResults > this.pagination.pageSize) {
+            /** @type {?} */
+            const firstItem = this.pagination.currentPage * this.pagination.pageSize + 1;
+            /** @type {?} */
+            let resultsPerPage = (this.pagination.currentPage + 1) * this.pagination.pageSize;
+            if (resultsPerPage > this.pagination.totalResults) {
+                resultsPerPage = this.pagination.totalResults;
+            }
+            return `${firstItem} - ${resultsPerPage}`;
+        }
+        else {
+            return `1 - ${this.pagination.totalResults}`;
+        }
+    }
+}
+StoreFinderPaginationDetailsComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-store-finder-pagination-details',
+                template: "<span class=\"cx-pagination-details\">\n  {{ getResultsPerPage() }}\n  {{\n    'storeFinder.fromStoresFound'\n      | cxTranslate: { count: pagination.totalResults }\n  }}\n</span>\n",
+                styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-pagination-details{display:var(--cx-display,block);margin:var(--cx-margin,1rem 0)}@media (min-width:768px){.cx-pagination-details{text-align:var(--cx-text-align,left)}}"]
+            }] }
+];
+/** @nocollapse */
+StoreFinderPaginationDetailsComponent.ctorParameters = () => [];
+StoreFinderPaginationDetailsComponent.propDecorators = {
+    pagination: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class StoreFinderListComponent {
+    /**
+     * @param {?} storeDataService
+     * @param {?} document
+     */
+    constructor(storeDataService, document) {
+        this.storeDataService = storeDataService;
+        this.document = document;
+        this.selectedStore = 0;
+    }
+    /**
+     * @param {?} index
+     * @return {?}
+     */
+    centerStoreOnMapByIndex(index) {
+        this.selectedStore = index;
+        this.storeMap.centerMap(this.storeDataService.getStoreLatitude(this.locations.stores[index]), this.storeDataService.getStoreLongitude(this.locations.stores[index]));
+    }
+    /**
+     * @param {?} index
+     * @return {?}
+     */
+    selectStoreItemList(index) {
+        this.selectedStore = index;
+        /** @type {?} */
+        const storeListItem = this.document.getElementById('item-' + index);
+        storeListItem.scrollIntoView();
+    }
+}
+StoreFinderListComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-store-finder-list',
+                template: "<ng-container *ngIf=\"locations\">\n  <div class=\"container\">\n    <div class=\"row\" *ngIf=\"locations?.pagination\">\n      <div class=\"col-md-12\">\n        <cx-store-finder-pagination-details\n          [pagination]=\"locations.pagination\"\n        ></cx-store-finder-pagination-details>\n      </div>\n    </div>\n    <div *ngIf=\"locations?.stores\" class=\"row cx-columns\">\n      <div class=\"col-md-4 cx-address-col\">\n        <ol class=\"cx-list\">\n          <li\n            *ngFor=\"let location of locations?.stores; let i = index\"\n            id=\"{{ 'item-' + i }}\"\n            [ngClass]=\"{\n              'cx-selected-item': selectedStore === i\n            }\"\n            class=\"cx-list-items cx-ordered\"\n          >\n            <cx-store-finder-list-item\n              [location]=\"location\"\n              [locationIndex]=\"i\"\n              (storeItemClick)=\"centerStoreOnMapByIndex($event)\"\n            ></cx-store-finder-list-item>\n          </li>\n        </ol>\n      </div>\n      <div class=\"col-md-8 cx-map-col\">\n        <cx-store-finder-map\n          #storeMap\n          [locations]=\"locations.stores\"\n          (selectedStoreItem)=\"selectStoreItemList($event)\"\n        ></cx-store-finder-map>\n      </div>\n    </div>\n\n    <!-- mobile tabs for column set only -->\n\n    <div *ngIf=\"locations?.stores\" class=\"cx-columns-mobile\">\n      <ngb-tabset justify=\"center\">\n        <ngb-tab>\n          <ng-template ngbTabTitle>\n            {{ 'storeFinder.listView' | cxTranslate }}\n          </ng-template>\n          <ng-template ngbTabContent>\n            <div class=\"cx-address-col\">\n              <ol class=\"cx-list\">\n                <li\n                  *ngFor=\"let location of locations?.stores; let i = index\"\n                  id=\"{{ 'item-' + i }}\"\n                  [ngClass]=\"{\n                    'cx-selected-item': selectedStore === i\n                  }\"\n                  class=\"cx-list-items cx-ordered\"\n                >\n                  <cx-store-finder-list-item\n                    [location]=\"location\"\n                    [locationIndex]=\"i\"\n                    (storeItemClick)=\"centerStoreOnMapByIndex($event)\"\n                  ></cx-store-finder-list-item>\n                </li>\n              </ol>\n            </div>\n          </ng-template>\n        </ngb-tab>\n        <ngb-tab>\n          <ng-template ngbTabTitle>\n            {{ 'storeFinder.mapView' | cxTranslate }}\n          </ng-template>\n          <ng-template ngbTabContent>\n            <div class=\"cx-map-col\">\n              <cx-store-finder-map\n                #storeMap\n                [locations]=\"locations.stores\"\n                (selectedStoreItem)=\"selectStoreItemList($event)\"\n              ></cx-store-finder-map>\n            </div>\n          </ng-template>\n        </ngb-tab>\n      </ngb-tabset>\n    </div>\n\n    <!-- mobile tabs end -->\n\n    <div *ngIf=\"!locations?.stores\" class=\"row\">\n      <div class=\"col-md-12 cx-not-found\">\n        {{ 'storeFinder.noStoreFound' | cxTranslate }}\n      </div>\n    </div>\n  </div>\n</ng-container>\n",
+                styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-columns{display:var(--cx-display,none)}@media (min-width:768px){.cx-columns{display:var(--cx-display,flex);height:var(--cx-height,70vh)}}.cx-columns-mobile{display:var(--cx-display,block)}.cx-address-col{height:var(--cx-height,100%)}@media (min-width:768px){.cx-columns-mobile{display:var(--cx-display,none)}.cx-address-col{height:var(--cx-height,100%);overflow-y:var(--cx-overflow-y,scroll);padding:var(--cx-padding,inherit inherit inherit 0)}.cx-map-col{height:var(--cx-height,100%);overflow-y:var(--cx-overflow-y,scroll)}}.cx-list{font-size:var(--cx-font-size,1rem);font-weight:var(--cx-g-font-weight-semi);line-height:var(--cx-line-height,1.22222);list-style:var(--cx-list-style,none);padding:var(--cx-padding,inherit inherit inherit 0)}.cx-list-items{border-width:var(--cx-border-width,1px 0 0 0);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light));padding:var(--cx-padding,1rem 1.5rem)}.cx-list-items:hover{background-color:var(--cx-background-color,var(--cx-g-color-background))}.cx-list-items.cx-selected-item,.cx-list-items.cx-selected-item:hover{background-color:var(--cx-background-color,var(--cx-g-color-light))}.cx-ordered{counter-increment:var(--cx-counter-increment,resultCount)}.cx-ordered:before{content:var(--cx-content,counter(resultCount,decimal));position:var(--cx-position,absolute);left:var(--cx-left,1rem)}.cx-not-found{font-size:var(--cx-font-size,1.125rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);text-align:var(--cx-text-align,center);padding:var(--cx-padding,3rem 0)}"]
+            }] }
+];
+/** @nocollapse */
+StoreFinderListComponent.ctorParameters = () => [
+    { type: StoreDataService },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
+];
+StoreFinderListComponent.propDecorators = {
+    locations: [{ type: Input }],
+    storeMap: [{ type: ViewChild, args: ['storeMap',] }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class StoreFinderSearchResultComponent {
+    /**
+     * @param {?} storeFinderService
+     * @param {?} route
+     */
+    constructor(storeFinderService, route) {
+        this.storeFinderService = storeFinderService;
+        this.route = route;
+        this.searchConfig = {
+            currentPage: 0,
+        };
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.route.queryParams.subscribe(params => this.initialize(params));
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+    }
+    /**
+     * @param {?} pageNumber
+     * @return {?}
+     */
+    viewPage(pageNumber) {
+        this.searchConfig = Object.assign({}, this.searchConfig, { currentPage: pageNumber });
+        this.storeFinderService.findStoresAction(this.searchQuery.queryText, this.geolocation, this.searchConfig);
+    }
+    /**
+     * @private
+     * @param {?} params
+     * @return {?}
+     */
+    initialize(params) {
+        this.searchQuery = this.parseParameters(params);
+        this.storeFinderService.findStoresAction(this.searchQuery.queryText, this.geolocation, this.searchConfig);
+        this.isLoading$ = this.storeFinderService.getStoresLoading();
+        this.locations$ = this.storeFinderService.getFindStoresEntities();
+        this.subscription = this.locations$
+            .pipe(filter(Boolean), map(data => data.geolocation))
+            .subscribe(geoData => (this.geolocation = geoData));
+    }
+    /**
+     * @private
+     * @param {?} queryParams
+     * @return {?}
+     */
+    parseParameters(queryParams) {
+        /** @type {?} */
+        let searchQuery;
+        if (queryParams.query) {
+            searchQuery = { queryText: queryParams.query };
+        }
+        else {
+            searchQuery = { queryText: '' };
+        }
+        searchQuery.useMyLocation =
+            queryParams.useMyLocation != null &&
+                queryParams.useMyLocation.toUpperCase() === 'TRUE';
+        return searchQuery;
+    }
+}
+StoreFinderSearchResultComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-store-finder-search-result',
+                template: "<div\n  *ngIf=\"\n    !(isLoading$ | async) && (locations$ | async) as locations;\n    else loading\n  \"\n>\n  <cx-store-finder-list [locations]=\"locations\"></cx-store-finder-list>\n  <div *ngIf=\"locations?.stores\">\n    <div class=\"cx-pagination\">\n      <cx-pagination\n        [pagination]=\"locations.pagination\"\n        (viewPageEvent)=\"viewPage($event)\"\n      ></cx-pagination>\n    </div>\n  </div>\n</div>\n<ng-template #loading>\n  <div class=\"cx-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n"
+            }] }
+];
+/** @nocollapse */
+StoreFinderSearchResultComponent.ctorParameters = () => [
+    { type: StoreFinderService },
+    { type: ActivatedRoute }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class StoreFinderSearchComponent {
+    /**
+     * @param {?} routing
+     * @param {?} route
+     */
+    constructor(routing, route) {
+        this.routing = routing;
+        this.route = route;
+        this.searchBox = new FormControl();
+    }
+    /**
+     * @param {?} address
+     * @return {?}
+     */
+    findStores(address) {
+        this.routing.go(['find'], { query: address }, { relativeTo: this.route });
+    }
+    /**
+     * @return {?}
+     */
+    viewStoresWithMyLoc() {
+        this.routing.go(['find'], { useMyLocation: true }, { relativeTo: this.route });
+    }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    onKey(event) {
+        if (event.key === 'Enter') {
+            this.findStores(this.searchBox.value);
+        }
+    }
+}
+StoreFinderSearchComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-store-finder-search',
+                template: "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-6 offset-md-3\">\n      <div class=\"form-group\">\n        <input\n          #queryInput\n          [formControl]=\"searchBox\"\n          (keyup)=\"onKey($event)\"\n          type=\"text\"\n          class=\"form-control\"\n          placeholder=\"{{ 'storeFinder.searchBox' | cxTranslate }}\"\n          required\n        />\n      </div>\n      <button\n        type=\"button\"\n        class=\"btn btn-primary btn-block cx-find-store\"\n        [routerLink]=\"['find']\"\n        [queryParams]=\"{ query: queryInput.value }\"\n      >\n        {{ 'storeFinder.findStore' | cxTranslate }}\n      </button>\n\n      <div class=\"cx-bottom-links\">\n        <button (click)=\"viewStoresWithMyLoc()\" class=\"cx-link btn-link\">\n          {{ 'storeFinder.useMyLocation' | cxTranslate }}\n        </button>\n        |\n        <a [routerLink]=\"['view-all']\" class=\"cx-link btn-link\">{{\n          'storeFinder.viewAllStores' | cxTranslate\n        }}</a>\n      </div>\n    </div>\n  </div>\n</div>\n"
+            }] }
+];
+/** @nocollapse */
+StoreFinderSearchComponent.ctorParameters = () => [
+    { type: RoutingService },
+    { type: ActivatedRoute }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class StoreFinderStoreDescriptionComponent extends AbstractStoreItemComponent {
+    /**
+     * @param {?} storeDataService
+     * @param {?} storeFinderService
+     * @param {?} route
+     */
+    constructor(storeDataService, storeFinderService, route) {
+        super(storeDataService);
+        this.storeDataService = storeDataService;
+        this.storeFinderService = storeFinderService;
+        this.route = route;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.requestStoresData();
+        this.location$ = this.storeFinderService.getFindStoresEntities();
+        this.isLoading$ = this.storeFinderService.getStoresLoading();
+    }
+    /**
+     * @return {?}
+     */
+    requestStoresData() {
+        /** @type {?} */
+        const storeId = this.route.snapshot.params.store;
+        this.storeFinderService.viewStoreById(storeId);
+    }
+}
+StoreFinderStoreDescriptionComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-store-finder-store-description',
+                template: "<div\n  class=\"container\"\n  *ngIf=\"!(isLoading$ | async) && (location$ | async) as location; else loading\"\n>\n  <div class=\"row\">\n    <article class=\"cx-store col-lg-4\">\n      <h2>{{ location.displayName }}</h2>\n\n      <p *ngIf=\"location.address\" class=\"storeAddress\">\n        {{ location.address.line1 }} <br />\n        {{ location.address.town + ',' }}\n        {{ location.address.region ? location.address.region.name + ',' : '' }}\n        {{ location.address.postalCode }}\n      </p>\n\n      <section class=\"cx-contact\">\n        <ul class=\"cx-list\">\n          <li class=\"cx-item\">\n            <a\n              class=\"cx-link\"\n              [href]=\"getDirections(location)\"\n              target=\"_blank\"\n              >{{ 'storeFinder.getDirections' | cxTranslate }}</a\n            >\n          </li>\n          <li class=\"cx-item\">\n            {{ 'storeFinder.call' | cxTranslate }}\n            {{ location.address?.phone }}\n          </li>\n          <li class=\"cx-item\">\n            <a class=\"cx-link\" [routerLink]=\"['/contact']\">{{\n              'storeFinder.contactUs' | cxTranslate\n            }}</a>\n          </li>\n        </ul>\n      </section>\n      <div class=\"cx-schedule\">\n        <cx-schedule [location]=\"location\">\n          <h3>{{ 'storeFinder.storeHours' | cxTranslate }}</h3>\n        </cx-schedule>\n      </div>\n    </article>\n    <article class=\"cx-storeMap col-lg-8\">\n      <cx-store-finder-map [locations]=\"[location]\"></cx-store-finder-map>\n    </article>\n  </div>\n\n  <div class=\"row cx-feature\">\n    <div class=\"col-lg-12\">\n      <h3 class=\"cx-features-header\">\n        {{ 'storeFinder.storeFeatures' | cxTranslate }}\n      </h3>\n    </div>\n  </div>\n\n  <article class=\"row\">\n    <div class=\"col-lg-3\" *ngFor=\"let feature of location.features?.entry\">\n      <div class=\"cx-features\">{{ feature.value }}</div>\n    </div>\n  </article>\n</div>\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
+            }] }
+];
+/** @nocollapse */
+StoreFinderStoreDescriptionComponent.ctorParameters = () => [
+    { type: StoreDataService },
+    { type: StoreFinderService },
+    { type: ActivatedRoute }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class StoreFinderStoresCountComponent {
+    /**
+     * @param {?} storeFinderService
+     */
+    constructor(storeFinderService) {
+        this.storeFinderService = storeFinderService;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.storeFinderService.viewAllStores();
+        this.locations$ = this.storeFinderService.getViewAllStoresEntities();
+        this.isLoading$ = this.storeFinderService.getViewAllStoresLoading();
+    }
+}
+StoreFinderStoresCountComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-store-finder-stores-count',
+                template: "<ng-container\n  *ngIf=\"\n    !(isLoading$ | async) && (locations$ | async) as locations;\n    else loading\n  \"\n>\n  <div class=\"cx-count container\">\n    <div\n      *ngFor=\"let country of locations?.countriesAndRegionsStoreCount\"\n      class=\"cx-set\"\n    >\n      <a [routerLink]=\"['../country', country.isoCode]\" class=\"btn-link\">\n        <div class=\"cx-title\">\n          <span\n            [ngClass]=\"\n              country?.storeCountDataList\n                ? 'country-header'\n                : 'country-header-link'\n            \"\n            class=\"cx-name\"\n            >{{ country.name }}</span\n          >\n          <span\n            [ngClass]=\"\n              country?.storeCountDataList\n                ? 'country-header'\n                : 'country-header-link'\n            \"\n            *ngIf=\"!country?.storeCountDataList\"\n            class=\"cx-country-count\"\n            >({{ country.count }})</span\n          >\n        </div>\n      </a>\n    </div>\n  </div>\n</ng-container>\n<ng-template #loading>\n  <div class=\"cx-count-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
+            }] }
+];
+/** @nocollapse */
+StoreFinderStoresCountComponent.ctorParameters = () => [
+    { type: StoreFinderService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class StoreFinderComponent {
+}
+StoreFinderComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-store-finder',
+                template: "<ng-container>\n  <div class=\"wrapper\">\n    <cx-store-finder-header></cx-store-finder-header>\n    <router-outlet></router-outlet>\n  </div>\n</ng-container>\n",
+                styles: [".wrapper{text-align:center;padding-top:3%}"]
+            }] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class StoreFinderModule {
+}
+StoreFinderModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    CmsModule$1,
+                    ReactiveFormsModule,
+                    RouterModule,
+                    ListNavigationModule,
+                    BootstrapModule,
+                    SpinnerModule,
+                    UrlTranslationModule,
+                    StoreFinderCoreModule,
+                    I18nModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            StoreFinderComponent: {
+                                selector: 'cx-store-finder',
+                                childRoutes: [
+                                    {
+                                        path: 'find',
+                                        component: StoreFinderSearchResultComponent,
+                                    },
+                                    {
+                                        path: 'view-all',
+                                        component: StoreFinderStoresCountComponent,
+                                    },
+                                    {
+                                        path: 'country/:country',
+                                        component: StoreFinderGridComponent,
+                                    },
+                                    {
+                                        path: 'country/:country/region/:region',
+                                        component: StoreFinderGridComponent,
+                                    },
+                                    {
+                                        path: 'country/:country/region/:region/:store',
+                                        component: StoreFinderStoreDescriptionComponent,
+                                    },
+                                    {
+                                        path: 'country/:country/:store',
+                                        component: StoreFinderStoreDescriptionComponent,
+                                    },
+                                ],
+                            },
+                        },
+                        layoutSlots: {
+                            StoreFinderPageTemplate: {
+                                slots: ['MiddleContent', 'SideContent'],
+                            },
+                        },
+                    }))),
+                ],
+                declarations: [
+                    StoreFinderSearchComponent,
+                    StoreFinderListComponent,
+                    StoreFinderMapComponent,
+                    StoreFinderListItemComponent,
+                    StoreFinderStoresCountComponent,
+                    StoreFinderGridComponent,
+                    StoreFinderStoreDescriptionComponent,
+                    ScheduleComponent,
+                    StoreFinderHeaderComponent,
+                    StoreFinderSearchResultComponent,
+                    StoreFinderComponent,
+                    StoreFinderPaginationDetailsComponent,
+                ],
+                entryComponents: [
+                    StoreFinderComponent,
+                    StoreFinderSearchResultComponent,
+                    StoreFinderStoresCountComponent,
+                    StoreFinderGridComponent,
+                    StoreFinderStoreDescriptionComponent,
+                ],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CmsLibModule {
+}
+CmsLibModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    SkipLinkModule,
+                    HamburgerMenuModule,
+                    CmsParagraphModule,
+                    LinkModule,
+                    BannerModule,
+                    CategoryNavigationModule,
+                    NavigationModule,
+                    FooterNavigationModule,
+                    BreadcrumbModule,
+                    SearchBoxModule,
+                    SiteContextSelectorModule,
+                    AddressBookModule,
+                    OrderHistoryModule,
+                    ProductListModule,
+                    ProductTabsModule,
+                    ProductCarouselModule,
+                    OrderDetailsModule,
+                    PaymentMethodsModule,
+                    UpdateEmailModule,
+                    UpdatePasswordModule,
+                    UpdateProfileModule,
+                    CartComponentModule,
+                    CloseAccountModule,
+                    TabParagraphContainerModule,
+                    StoreFinderModule,
+                ],
+            },] }
+];
 
 /**
  * @fileoverview added by tsickle
@@ -5615,37 +10159,47 @@ DeliveryModeModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class SuggestedAddressDialogComponent {
+class BillingAddressFormComponent {
     /**
-     * @param {?} activeModal
-     */
-    constructor(activeModal) {
-        this.activeModal = activeModal;
-    }
-    /**
+     * @param {?} country
      * @return {?}
      */
-    ngOnInit() {
-        this.selectedAddress = this.suggestedAddresses.length
-            ? this.suggestedAddresses[0]
-            : this.enteredAddress;
+    countrySelected(country) {
+        this.billingAddress['controls'].country['controls'].isocode.setValue(country.isocode);
     }
 }
-SuggestedAddressDialogComponent.decorators = [
+BillingAddressFormComponent.decorators = [
     { type: Component, args: [{
-                selector: 'cx-suggested-addresses-dialog',
-                template: "<div class=\"cx-dialog-header modal-header\">\n  <div class=\"cx-dialog-title modal-title\">\n    {{ 'checkoutAddress.verifyYourAddress' | cxTranslate }}\n  </div>\n  <button\n    type=\"button\"\n    class=\"close\"\n    aria-label=\"Close\"\n    (click)=\"activeModal.close()\"\n  >\n    <span aria-hidden=\"true\">&times;</span>\n  </button>\n</div>\n<div class=\"cx-dialog-body modal-body\" ngForm>\n  <div class=\"container\">\n    <div class=\"row\">\n      <div class=\"cx-dialog-info col-md-12\">\n        <p>\n          {{ 'checkoutAddress.ensureAccuracySuggestChange' | cxTranslate }}\n          {{ 'checkoutAddress.chooseAddressToUse' | cxTranslate }}\n        </p>\n      </div>\n    </div>\n\n    <div class=\"row\">\n      <div class=\"cx-dialog-options col-md-12\">\n        <div\n          class=\"form-check\"\n          *ngFor=\"let suggestedAddress of suggestedAddresses; let i = index\"\n        >\n          <input\n            class=\"form-check-input\"\n            type=\"radio\"\n            name=\"selectedAddress\"\n            [(ngModel)]=\"selectedAddress\"\n            [value]=\"suggestedAddress\"\n            [id]=\"'suggested-addresses--suggested-' + i\"\n          />\n          <label\n            class=\"form-check-label cx-dialog-label\"\n            [for]=\"'suggested-addresses--suggested-' + i\"\n          >\n            {{ 'checkoutAddress.suggestedAddress' | cxTranslate }}\n            {{ suggestedAddresses?.length > 1 ? i + 1 : null }}\n          </label>\n          <div class=\"cx-dialog-suggested\">\n            {{ suggestedAddress?.firstName }} {{ suggestedAddress?.lastName\n            }}<br />\n            {{ suggestedAddress?.line1 }}<br />\n            <span>{{ suggestedAddress?.line2 }}</span\n            ><br />\n            {{ suggestedAddress?.town }} {{ suggestedAddress?.region?.isocode\n            }}<br />\n            {{ suggestedAddress?.postalCode }}\n          </div>\n        </div>\n        <div class=\"form-check\">\n          <input\n            class=\"form-check-input\"\n            type=\"radio\"\n            name=\"selectedAddress\"\n            [(ngModel)]=\"selectedAddress\"\n            [value]=\"enteredAddress\"\n            id=\"suggested-addresses--entered\"\n          />\n          <label\n            class=\"form-check-label cx-dialog-label\"\n            for=\"suggested-addresses--entered\"\n          >\n            {{ 'checkoutAddress.enteredAddress' | cxTranslate }}\n          </label>\n          <div class=\"cx-dialog-entered\">\n            {{ enteredAddress?.firstName }} {{ enteredAddress?.lastName }}<br />\n            {{ enteredAddress?.line1 }}<br />\n            <span>{{ enteredAddress?.line2 }}</span\n            ><br />\n            {{ enteredAddress?.town }} {{ enteredAddress?.region?.isocode\n            }}<br />\n            {{ enteredAddress?.postalCode }}\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"cx-dialog-actions col-sm-12 col-md-6 offset-md-6\">\n        <button\n          class=\"btn btn-secondary btn-block cx-dialog-buttons\"\n          (click)=\"activeModal.close()\"\n        >\n          {{ 'common.editAddress' | cxTranslate }}\n        </button>\n        <button\n          ngbAutofocus\n          class=\"btn btn-primary btn-block cx-dialog-buttons\"\n          (click)=\"activeModal.close(selectedAddress)\"\n        >\n          {{ 'checkoutAddress.saveAddress' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                selector: 'cx-billing-address-form',
+                template: "<div [formGroup]=\"billingAddress\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.firstName.label' | cxTranslate\n      }}</span>\n      <input\n        class=\"form-control\"\n        type=\"text\"\n        required\n        placeholder=\"{{ 'addressForm.firstName.placeholder' | cxTranslate }}\"\n        formControlName=\"firstName\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.lastName.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        required\n        placeholder=\"{{ 'addressForm.lastName.placeholder' | cxTranslate }}\"\n        formControlName=\"lastName\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.address1' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        required\n        placeholder=\"{{ 'addressForm.streetAddress' | cxTranslate }}\"\n        formControlName=\"line1\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'addressForm.address2' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        placeholder=\"{{ 'addressForm.aptSuite' | cxTranslate }}\"\n        formControlName=\"line2\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <ng-container *ngIf=\"(countries$ | async) as countries\">\n      <div *ngIf=\"countries.length !== 0\">\n        <label aria-required=\"true\">\n          <span class=\"label-content required\">{{\n            'addressForm.country' | cxTranslate\n          }}</span>\n          <ng-select\n            [searchable]=\"false\"\n            [clearable]=\"false\"\n            [items]=\"countries\"\n            bindLabel=\"name\"\n            bindValue=\"isocode\"\n            placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n            (change)=\"countrySelected($event)\"\n          >\n          </ng-select>\n        </label>\n      </div>\n    </ng-container>\n  </div>\n  <div class=\"row\">\n    <div class=\"form-group col-md-6\">\n      <label>\n        <span class=\"label-content required\">{{\n          'addressForm.city.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          required\n          placeholder=\"{{ 'addressForm.city.placeholder' | cxTranslate }}\"\n          formControlName=\"town\"\n        />\n      </label>\n    </div>\n    <div class=\"form-group col-md-6\">\n      <label>\n        <span class=\"label-content required\">{{\n          'addressForm.zipCode.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          required\n          placeholder=\"{{ 'addressForm.zipCode.placeholder' | cxTranslate }}\"\n          formControlName=\"postalCode\"\n        />\n      </label>\n    </div>\n  </div>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
-/** @nocollapse */
-SuggestedAddressDialogComponent.ctorParameters = () => [
-    { type: NgbActiveModal }
-];
-SuggestedAddressDialogComponent.propDecorators = {
-    suggestedAddresses: [{ type: Input }],
-    enteredAddress: [{ type: Input }]
+BillingAddressFormComponent.propDecorators = {
+    billingAddress: [{ type: Input }],
+    countries$: [{ type: Input }]
 };
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class BillingAddressFormModule {
+}
+BillingAddressFormModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    ReactiveFormsModule,
+                    FormsModule,
+                    RouterModule,
+                    NgSelectModule,
+                    I18nModule,
+                ],
+                declarations: [BillingAddressFormComponent],
+                exports: [BillingAddressFormComponent],
+            },] }
+];
 
 /**
  * @fileoverview added by tsickle
@@ -5926,52 +10480,6 @@ PaymentFormComponent.propDecorators = {
     closeForm: [{ type: Output }],
     addPaymentInfo: [{ type: Output }]
 };
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class BillingAddressFormComponent {
-    /**
-     * @param {?} country
-     * @return {?}
-     */
-    countrySelected(country) {
-        this.billingAddress['controls'].country['controls'].isocode.setValue(country.isocode);
-    }
-}
-BillingAddressFormComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-billing-address-form',
-                template: "<div [formGroup]=\"billingAddress\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.firstName.label' | cxTranslate\n      }}</span>\n      <input\n        class=\"form-control\"\n        type=\"text\"\n        required\n        placeholder=\"{{ 'addressForm.firstName.placeholder' | cxTranslate }}\"\n        formControlName=\"firstName\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.lastName.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        required\n        placeholder=\"{{ 'addressForm.lastName.placeholder' | cxTranslate }}\"\n        formControlName=\"lastName\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.address1' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        required\n        placeholder=\"{{ 'addressForm.streetAddress' | cxTranslate }}\"\n        formControlName=\"line1\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'addressForm.address2' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        placeholder=\"{{ 'addressForm.aptSuite' | cxTranslate }}\"\n        formControlName=\"line2\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <ng-container *ngIf=\"(countries$ | async) as countries\">\n      <div *ngIf=\"countries.length !== 0\">\n        <label aria-required=\"true\">\n          <span class=\"label-content required\">{{\n            'addressForm.country' | cxTranslate\n          }}</span>\n          <ng-select\n            [searchable]=\"false\"\n            [clearable]=\"false\"\n            [items]=\"countries\"\n            bindLabel=\"name\"\n            bindValue=\"isocode\"\n            placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n            (change)=\"countrySelected($event)\"\n          >\n          </ng-select>\n        </label>\n      </div>\n    </ng-container>\n  </div>\n  <div class=\"row\">\n    <div class=\"form-group col-md-6\">\n      <label>\n        <span class=\"label-content required\">{{\n          'addressForm.city.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          required\n          placeholder=\"{{ 'addressForm.city.placeholder' | cxTranslate }}\"\n          formControlName=\"town\"\n        />\n      </label>\n    </div>\n    <div class=\"form-group col-md-6\">\n      <label>\n        <span class=\"label-content required\">{{\n          'addressForm.zipCode.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          required\n          placeholder=\"{{ 'addressForm.zipCode.placeholder' | cxTranslate }}\"\n          formControlName=\"postalCode\"\n        />\n      </label>\n    </div>\n  </div>\n</div>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-BillingAddressFormComponent.propDecorators = {
-    billingAddress: [{ type: Input }],
-    countries$: [{ type: Input }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class BillingAddressFormModule {
-}
-BillingAddressFormModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    ReactiveFormsModule,
-                    FormsModule,
-                    RouterModule,
-                    NgSelectModule,
-                    I18nModule,
-                ],
-                declarations: [BillingAddressFormComponent],
-                exports: [BillingAddressFormComponent],
-            },] }
-];
 
 /**
  * @fileoverview added by tsickle
@@ -6356,252 +10864,6 @@ ReviewSubmitModule.decorators = [
                 declarations: [ReviewSubmitComponent],
                 entryComponents: [ReviewSubmitComponent],
                 exports: [ReviewSubmitComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class AddressFormComponent {
-    /**
-     * @param {?} fb
-     * @param {?} checkoutService
-     * @param {?} userService
-     * @param {?} globalMessageService
-     * @param {?} modalService
-     */
-    constructor(fb, checkoutService, userService, globalMessageService, modalService) {
-        this.fb = fb;
-        this.checkoutService = checkoutService;
-        this.userService = userService;
-        this.globalMessageService = globalMessageService;
-        this.modalService = modalService;
-        this.showCancelBtn = true;
-        this.submitAddress = new EventEmitter();
-        this.backToAddress = new EventEmitter();
-        this.address = this.fb.group({
-            defaultAddress: [false],
-            titleCode: [''],
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            line1: ['', Validators.required],
-            line2: [''],
-            town: ['', Validators.required],
-            region: this.fb.group({
-                isocode: [null, Validators.required],
-            }),
-            country: this.fb.group({
-                isocode: [null, Validators.required],
-            }),
-            postalCode: ['', Validators.required],
-            phone: '',
-        });
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        // Fetching countries
-        this.countries$ = this.userService.getDeliveryCountries().pipe(tap(countries => {
-            if (Object.keys(countries).length === 0) {
-                this.userService.loadDeliveryCountries();
-            }
-        }));
-        // Fetching titles
-        this.titles$ = this.userService.getTitles().pipe(tap(titles => {
-            if (Object.keys(titles).length === 0) {
-                this.userService.loadTitles();
-            }
-        }), map(titles => {
-            /** @type {?} */
-            const noneTitle = { code: '', name: 'Title' };
-            return [noneTitle, ...titles];
-        }));
-        // Fetching regions
-        this.regions$ = this.userService.getRegions().pipe(tap(regions => {
-            /** @type {?} */
-            const regionControl = this.address.get('region.isocode');
-            if (Object.keys(regions).length === 0) {
-                regionControl.disable();
-                /** @type {?} */
-                const countryIsoCode = this.address.get('country.isocode').value;
-                if (countryIsoCode) {
-                    this.userService.loadRegions(countryIsoCode);
-                }
-            }
-            else {
-                regionControl.enable();
-            }
-        }));
-        // verify the new added address
-        this.addressVerifySub = this.checkoutService
-            .getAddressVerificationResults()
-            .subscribe((results) => {
-            if (results === 'FAIL') {
-                this.checkoutService.clearAddressVerificationResults();
-            }
-            else if (results.decision === 'ACCEPT') {
-                this.submitAddress.emit(this.address.value);
-            }
-            else if (results.decision === 'REJECT') {
-                // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
-                if (results.errors.errors.some(error => error.subject === 'titleCode')) {
-                    this.globalMessageService.add({
-                        type: GlobalMessageType.MSG_TYPE_ERROR,
-                        text: 'Title is required',
-                    });
-                }
-                else {
-                    this.globalMessageService.add({
-                        type: GlobalMessageType.MSG_TYPE_ERROR,
-                        text: 'Invalid Address',
-                    });
-                }
-                this.checkoutService.clearAddressVerificationResults();
-            }
-            else if (results.decision === 'REVIEW') {
-                this.openSuggestedAddress(results);
-            }
-        });
-        if (this.addressData) {
-            this.address.patchValue(this.addressData);
-            this.countrySelected(this.addressData.country);
-            if (this.addressData.region) {
-                this.regionSelected(this.addressData.region);
-            }
-        }
-    }
-    /**
-     * @param {?} title
-     * @return {?}
-     */
-    titleSelected(title) {
-        this.address['controls'].titleCode.setValue(title.code);
-    }
-    /**
-     * @param {?} country
-     * @return {?}
-     */
-    countrySelected(country) {
-        this.address['controls'].country['controls'].isocode.setValue(country.isocode);
-        this.userService.loadRegions(country.isocode);
-    }
-    /**
-     * @param {?} region
-     * @return {?}
-     */
-    regionSelected(region) {
-        this.address['controls'].region['controls'].isocode.setValue(region.isocode);
-    }
-    /**
-     * @return {?}
-     */
-    toggleDefaultAddress() {
-        this.address['controls'].defaultAddress.setValue(this.address.value.defaultAddress);
-    }
-    /**
-     * @return {?}
-     */
-    back() {
-        this.backToAddress.emit();
-    }
-    /**
-     * @return {?}
-     */
-    verifyAddress() {
-        this.checkoutService.verifyAddress(this.address.value);
-    }
-    /**
-     * @param {?} results
-     * @return {?}
-     */
-    openSuggestedAddress(results) {
-        if (!this.suggestedAddressModalRef) {
-            this.suggestedAddressModalRef = this.modalService.open(SuggestedAddressDialogComponent, { centered: true, size: 'lg' });
-            this.suggestedAddressModalRef.componentInstance.enteredAddress = this.address.value;
-            this.suggestedAddressModalRef.componentInstance.suggestedAddresses =
-                results.suggestedAddresses;
-            this.suggestedAddressModalRef.result
-                .then(address => {
-                this.checkoutService.clearAddressVerificationResults();
-                if (address) {
-                    address = Object.assign({
-                        titleCode: this.address.value.titleCode,
-                        phone: this.address.value.phone,
-                        selected: true,
-                    }, address);
-                    this.submitAddress.emit(address);
-                }
-                this.suggestedAddressModalRef = null;
-            })
-                .catch(() => {
-                // this  callback is called when modal is closed with Esc key or clicking backdrop
-                this.checkoutService.clearAddressVerificationResults();
-                /** @type {?} */
-                const address = Object.assign({
-                    selected: true,
-                }, this.address.value);
-                this.submitAddress.emit(address);
-                this.suggestedAddressModalRef = null;
-            });
-        }
-    }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        this.checkoutService.clearAddressVerificationResults();
-        if (this.addressVerifySub) {
-            this.addressVerifySub.unsubscribe();
-        }
-    }
-}
-AddressFormComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-address-form',
-                template: "<div [formGroup]=\"address\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <div class=\"form-group\" *ngIf=\"showTitleCode\">\n        <ng-container *ngIf=\"(titles$ | async) as titles\">\n          <div *ngIf=\"titles.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'addressForm.title' | cxTranslate\n              }}</span>\n              <ng-select\n                formControlName=\"titleCode\"\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"titles\"\n                bindLabel=\"name\"\n                bindValue=\"code\"\n                (change)=\"titleSelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.firstName.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            type=\"text\"\n            required\n            placeholder=\"{{\n              'addressForm.firstName.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"firstName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.lastName.label' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            placeholder=\"{{ 'addressForm.lastName.placeholder' | cxTranslate }}\"\n            formControlName=\"lastName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.address1' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            placeholder=\"{{ 'addressForm.streetAddress' | cxTranslate }}\"\n            formControlName=\"line1\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'addressForm.address2' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            placeholder=\"{{ 'addressForm.aptSuite' | cxTranslate }}\"\n            formControlName=\"line2\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\" formGroupName=\"country\">\n        <ng-container *ngIf=\"(countries$ | async) as countries\">\n          <div *ngIf=\"countries.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'addressForm.country' | cxTranslate\n              }}</span>\n              <ng-select\n                class=\"country-select\"\n                formControlName=\"isocode\"\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"countries\"\n                bindLabel=\"name\"\n                bindValue=\"isocode\"\n                placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                (change)=\"countrySelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"row\">\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content required\">{{\n              'addressForm.city.label' | cxTranslate\n            }}</span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              required\n              placeholder=\"{{ 'addressForm.city.placeholder' | cxTranslate }}\"\n              formControlName=\"town\"\n            />\n          </label>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <ng-container\n            *ngIf=\"(regions$ | async) as regions\"\n            formGroupName=\"region\"\n          >\n            <div *ngIf=\"regions.length !== 0\">\n              <label aria-required=\"true\">\n                <span class=\"label-content required\">{{\n                  'addressForm.state' | cxTranslate\n                }}</span>\n                <ng-container *ngIf=\"regions[0].name\">\n                  <ng-select\n                    class=\"region-select\"\n                    formControlName=\"isocode\"\n                    [searchable]=\"false\"\n                    [clearable]=\"false\"\n                    [items]=\"regions\"\n                    bindLabel=\"name\"\n                    bindValue=\"isocode\"\n                    placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                    (change)=\"regionSelected($event)\"\n                  >\n                  </ng-select>\n                </ng-container>\n                <ng-container *ngIf=\"!regions[0].name\">\n                  <ng-select\n                    class=\"region-select\"\n                    [searchable]=\"false\"\n                    [clearable]=\"false\"\n                    [items]=\"regions\"\n                    bindLabel=\"isocode\"\n                    bindValue=\"region\"\n                    placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                    (change)=\"regionSelected($event)\"\n                  >\n                  </ng-select>\n                </ng-container>\n              </label>\n            </div>\n          </ng-container>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content required\">{{\n              'addressForm.zipCode.label' | cxTranslate\n            }}</span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              required\n              placeholder=\"{{\n                'addressForm.zipCode.placeholder' | cxTranslate\n              }}\"\n              formControlName=\"postalCode\"\n            />\n          </label>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'addressForm.phoneNumber.label' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            placeholder=\"{{\n              'addressForm.phoneNumber.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"phone\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\" *ngIf=\"setAsDefaultField !== false\">\n        <div class=\"form-check\">\n          <label>\n            <input\n              type=\"checkbox\"\n              class=\"form-check-input\"\n              formControlName=\"defaultAddress\"\n              (change)=\"toggleDefaultAddress()\"\n            />\n            <span class=\"form-check-label\">{{\n              'addressForm.setAsDefault' | cxTranslate\n            }}</span>\n          </label>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"cx-checkout-btns row\">\n    <div class=\"col-md-12 col-lg-6\" *ngIf=\"showCancelBtn\">\n      <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n        {{ cancelBtnLabel || ('addressForm.chooseAddress' | cxTranslate) }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        class=\"btn btn-block btn-primary\"\n        [disabled]=\"address.invalid\"\n        (click)=\"verifyAddress()\"\n      >\n        {{ actionBtnLabel || ('common.continue' | cxTranslate) }}\n      </button>\n    </div>\n  </div>\n</div>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-/** @nocollapse */
-AddressFormComponent.ctorParameters = () => [
-    { type: FormBuilder },
-    { type: CheckoutService },
-    { type: UserService },
-    { type: GlobalMessageService },
-    { type: NgbModal }
-];
-AddressFormComponent.propDecorators = {
-    addressData: [{ type: Input }],
-    actionBtnLabel: [{ type: Input }],
-    cancelBtnLabel: [{ type: Input }],
-    setAsDefaultField: [{ type: Input }],
-    showTitleCode: [{ type: Input }],
-    showCancelBtn: [{ type: Input }],
-    submitAddress: [{ type: Output }],
-    backToAddress: [{ type: Output }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class AddressFormModule {
-}
-AddressFormModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    ReactiveFormsModule,
-                    FormsModule,
-                    RouterModule,
-                    NgSelectModule,
-                    I18nModule,
-                ],
-                declarations: [AddressFormComponent, SuggestedAddressDialogComponent],
-                entryComponents: [SuggestedAddressDialogComponent],
-                exports: [AddressFormComponent],
             },] }
 ];
 
@@ -7080,7 +11342,6 @@ OrderConfirmationModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
                     CommonModule,
-                    MediaModule,
                     CartSharedModule,
                     CardModule,
                     PwaModule,
@@ -7089,3240 +11350,6 @@ OrderConfirmationModule.decorators = [
                 ],
                 declarations: [OrderConfirmationComponent],
                 exports: [OrderConfirmationComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class NavigationComponentService {
-    /**
-     * @param {?} cmsService
-     * @param {?} componentData
-     */
-    constructor(cmsService, componentData) {
-        this.cmsService = cmsService;
-        this.componentData = componentData;
-    }
-    /**
-     * Get all navigation entry items' type and id. Dispatch action to load all these items
-     * @param {?} nodeData
-     * @param {?} root
-     * @param {?=} itemsList
-     * @return {?}
-     */
-    getNavigationEntryItems(nodeData, root, itemsList = []) {
-        if (nodeData.children && nodeData.children.length > 0) {
-            this.processChildren(nodeData, itemsList);
-        }
-        else if (nodeData.entries && nodeData.entries.length > 0) {
-            nodeData.entries.forEach(entry => {
-                itemsList.push({
-                    superType: entry.itemSuperType,
-                    id: entry.itemId,
-                });
-            });
-        }
-        if (root) {
-            /** @type {?} */
-            const rootUid = nodeData.uid;
-            this.cmsService.loadNavigationItems(rootUid, itemsList);
-        }
-    }
-    /**
-     * @private
-     * @param {?} node
-     * @param {?} itemsList
-     * @return {?}
-     */
-    processChildren(node, itemsList) {
-        for (const child of node.children) {
-            this.getNavigationEntryItems(child, false, itemsList);
-        }
-    }
-    /**
-     * Create a new node tree for display
-     * @param {?} nodeData
-     * @param {?} items
-     * @return {?}
-     */
-    createNode(nodeData, items) {
-        /** @type {?} */
-        const node = {};
-        node['title'] = nodeData.title;
-        node['url'] = '';
-        if (nodeData.children && nodeData.children.length > 0) {
-            /** @type {?} */
-            const children = this.createChildren(nodeData, items);
-            node['children'] = children;
-        }
-        else if (nodeData.entries && nodeData.entries.length > 0) {
-            /** @type {?} */
-            const entry = nodeData.entries[0];
-            /** @type {?} */
-            const item = items[`${entry.itemId}_${entry.itemSuperType}`];
-            // now we only consider CMSLinkComponent
-            if (entry.itemType === 'CMSLinkComponent' && item !== undefined) {
-                if (!node['title']) {
-                    node['title'] = item.linkName;
-                }
-                node['url'] = item.url;
-                // if "NEWWINDOW", target is true
-                node['target'] = item.target;
-            }
-        }
-        return node;
-    }
-    /**
-     * @private
-     * @param {?} node
-     * @param {?} items
-     * @return {?}
-     */
-    createChildren(node, items) {
-        /** @type {?} */
-        const children = [];
-        for (const child of node.children) {
-            /** @type {?} */
-            const childNode = this.createNode(child, items);
-            children.push(childNode);
-        }
-        return children;
-    }
-    /**
-     * @return {?}
-     */
-    getComponentData() {
-        return this.componentData.data$;
-    }
-    /**
-     * @return {?}
-     */
-    getNodes() {
-        return this.getComponentData().pipe(switchMap(data => {
-            if (data) {
-                /** @type {?} */
-                const navigation = data.navigationNode ? data.navigationNode : data;
-                return this.cmsService.getNavigationEntryItems(navigation.uid).pipe(tap(items => {
-                    if (items === undefined) {
-                        this.getNavigationEntryItems(navigation, true, []);
-                    }
-                }), filter(items => items !== undefined), map(items => this.createNode(navigation, items)));
-            }
-        }));
-    }
-}
-NavigationComponentService.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-NavigationComponentService.ctorParameters = () => [
-    { type: CmsService },
-    { type: CmsComponentData, decorators: [{ type: Optional }] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class NavigationComponent {
-    /**
-     * @param {?} service
-     */
-    constructor(service) {
-        this.service = service;
-        this.dropdownMode = 'list';
-        this.node$ = this.service.getNodes();
-    }
-}
-NavigationComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-navigation',
-                template: "<cx-navigation-ui [node]=\"node$ | async\" [dropdownMode]=\"dropdownMode\">\n</cx-navigation-ui>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                styles: [""]
-            }] }
-];
-/** @nocollapse */
-NavigationComponent.ctorParameters = () => [
-    { type: NavigationComponentService }
-];
-NavigationComponent.propDecorators = {
-    dropdownMode: [{ type: Input }],
-    node: [{ type: Input }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class CategoryNavigationComponent extends NavigationComponent {
-}
-CategoryNavigationComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-category-navigation',
-                template: "<nav *ngIf=\"(node$ | async) as node\">\n  <cx-navigation-ui\n    *ngFor=\"let child of node?.children\"\n    ngbDropdown\n    [node]=\"child\"\n    dropdownMode=\"column\"\n  ></cx-navigation-ui>\n</nav>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class NavigationUIComponent {
-    constructor() {
-        this.dropdownMode = 'list';
-    }
-}
-NavigationUIComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-navigation-ui',
-                template: "<div *ngIf=\"node\" class=\"cx-nav-item nav-item\" ngbDropdown>\n  <a\n    *ngIf=\"node.children && !node.title; else nodeWithChildren\"\n    ngbDropdownToggle\n    >&nbsp;\n  </a>\n  <ng-template #nodeWithChildren>\n    <span\n      *ngIf=\"node.children; else noChildren\"\n      ngbDropdownToggle\n      class=\"cx-nav-link nav-link\"\n      role=\"link\"\n      id=\"{{ node.title }}\"\n      >{{ node.title }}</span\n    >\n  </ng-template>\n  <ng-template #noChildren>\n    <a\n      [routerLink]=\"node.url\"\n      class=\"cx-nav-link nav-link\"\n      id=\"{{ node.title }}\"\n      >{{ node.title }}\n    </a>\n  </ng-template>\n  <ng-container [ngSwitch]=\"dropdownMode\">\n    <ng-container *ngSwitchCase=\"'list'\">\n      <div\n        ngbDropdownMenu\n        class=\"cx-nav-child-list\"\n        [attr.aria-label]=\"node.title\"\n        role=\"list\"\n      >\n        <div\n          role=\"listitem\"\n          *ngFor=\"let subCategory of node.children\"\n          class=\"dropdown-item cx-nav-child-item\"\n        >\n          <ng-container *ngIf=\"subCategory.url\">\n            <a [routerLink]=\"subCategory.url\" class=\"cx-nav-child-link\"\n              >{{ subCategory.title }}\n            </a>\n          </ng-container>\n          <ng-container *ngIf=\"!subCategory.url\">\n            <a class=\"cx-nav-child-link\">{{ subCategory.title }} </a>\n          </ng-container>\n          <a\n            [routerLink]=\"subCategoryChild.url\"\n            *ngFor=\"let subCategoryChild of subCategory.children\"\n            >{{ subCategoryChild.title }}\n          </a>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-container *ngSwitchCase=\"'column'\">\n      <div\n        ngbDropdownMenu\n        class=\"cx-nav-child-list-columns\"\n        [attr.aria-label]=\"node.title\"\n      >\n        <div\n          class=\"cx-nav-child-column\"\n          *ngFor=\"let subCategory of node.children\"\n        >\n          <ng-container *ngIf=\"subCategory.url\">\n            <a\n              role=\"link\"\n              [routerLink]=\"subCategory.url\"\n              class=\"cx-nav-child-link cx-nav-column-title\"\n              >{{ subCategory.title }}\n            </a>\n          </ng-container>\n          <ng-container *ngIf=\"!subCategory.url\">\n            <a class=\"cx-nav-child-link cx-nav-column-title\"\n              >{{ subCategory.title }}\n            </a>\n          </ng-container>\n\n          <div\n            *ngFor=\"let subCategoryChild of subCategory.children\"\n            class=\"dropdown-item cx-nav-child-column-item\"\n          >\n            <a\n              role=\"link\"\n              [routerLink]=\"subCategoryChild.url\"\n              class=\"cx-nav-child-link\"\n              >{{ subCategoryChild.title }}\n            </a>\n          </div>\n        </div>\n      </div>\n    </ng-container>\n  </ng-container>\n</div>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-NavigationUIComponent.propDecorators = {
-    dropdownMode: [{ type: Input }],
-    node: [{ type: Input }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class NavigationModule {
-}
-NavigationModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    RouterModule,
-                    BootstrapModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            NavigationComponent: {
-                                selector: 'cx-navigation',
-                                providers: [
-                                    {
-                                        provide: NavigationComponentService,
-                                        useClass: NavigationComponentService,
-                                        deps: [CmsService, CmsComponentData],
-                                    },
-                                ],
-                            },
-                        },
-                    }))),
-                    I18nModule,
-                ],
-                declarations: [NavigationComponent, NavigationUIComponent],
-                entryComponents: [NavigationComponent],
-                exports: [NavigationComponent, NavigationUIComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class CategoryNavigationModule {
-}
-CategoryNavigationModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    NavigationModule,
-                    BootstrapModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            CategoryNavigationComponent: {
-                                selector: 'cx-category-navigation',
-                                providers: [
-                                    {
-                                        provide: NavigationComponentService,
-                                        useClass: NavigationComponentService,
-                                        deps: [CmsService, CmsComponentData],
-                                    },
-                                ],
-                            },
-                        },
-                    }))),
-                ],
-                declarations: [CategoryNavigationComponent],
-                entryComponents: [CategoryNavigationComponent],
-                exports: [CategoryNavigationComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class CloseAccountModalComponent {
-    /**
-     * @param {?} activeModal
-     * @param {?} userService
-     * @param {?} authService
-     * @param {?} globalMessageService
-     * @param {?} routingService
-     * @param {?} translationService
-     */
-    constructor(activeModal, userService, authService, globalMessageService, routingService, translationService) {
-        this.activeModal = activeModal;
-        this.userService = userService;
-        this.authService = authService;
-        this.globalMessageService = globalMessageService;
-        this.routingService = routingService;
-        this.translationService = translationService;
-        this.subscription = new Subscription();
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.userToken$ = this.authService.getUserToken();
-        this.userService.resetRemoveUserProcessState();
-        this.subscription.add(this.userService
-            .getRemoveUserResultSuccess()
-            .subscribe(success => this.onSuccess(success)));
-        this.isLoading$ = this.userService.getRemoveUserResultLoading();
-    }
-    /**
-     * @param {?} success
-     * @return {?}
-     */
-    onSuccess(success) {
-        if (success) {
-            this.closeModal();
-            this.translationService
-                .translate('closeAccount.message.success')
-                .pipe(first())
-                .subscribe(text => {
-                this.globalMessageService.add({
-                    text,
-                    type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
-                });
-            });
-            this.routingService.go({ route: 'home' });
-        }
-    }
-    /**
-     * @return {?}
-     */
-    closeModal() {
-        this.activeModal.dismiss();
-    }
-    /**
-     * @param {?} userId
-     * @return {?}
-     */
-    closeAccount(userId) {
-        this.userService.remove(userId);
-    }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
-    }
-}
-CloseAccountModalComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-close-account-modal',
-                template: "<ng-container *ngIf=\"(userToken$ | async) as userToken\">\n  <div class=\"modal-header cx-dialog-header\">\n    <h3 class=\"modal-title\">\n      {{ 'closeAccount.modal.title' | cxTranslate }}\n    </h3>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"closeModal()\"\n    >\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n\n  <div *ngIf=\"(isLoading$ | async); else loaded\">\n    <div class=\"cx-spinner\">\n      <cx-spinner> </cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #loaded>\n    <div class=\"modal-body\">\n      <div class=\"cx-row\">\n        <p class=\"cx-confirmation\">\n          {{ 'closeAccount.modal.confirmation' | cxTranslate }}\n        </p>\n      </div>\n      <div class=\"cx-row\">\n        <div class=\"cx-btn-group\">\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"closeAccount(userToken.userId)\"\n          >\n            {{ 'closeAccount.action.closeMyAccount' | cxTranslate }}\n          </button>\n          <button (click)=\"closeModal()\" class=\"btn btn-block btn-secondary\">\n            {{ 'closeAccount.action.cancel' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/:host{display:flex;flex-direction:column;height:100%}.cx-dialog-header{padding:var(--cx-padding,2rem 1.75rem .85rem);border-width:var(--cx-border-width,0)}h3{font-weight:var(--cx-g-font-weight-semi)}.cx-row{display:flex}.cx-confirmation{margin:var(--cx-margin,0 0 3em 0)}.cx-btn-group{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column);width:var(--cx-width,100%)}.cx-btn-group button:first-child{margin:var(--cx-margin,0 0 1em 0)}@media (max-width:767.98px){.modal-body{top:-85px;flex:none;margin:auto 0}}"]
-            }] }
-];
-/** @nocollapse */
-CloseAccountModalComponent.ctorParameters = () => [
-    { type: NgbActiveModal },
-    { type: UserService },
-    { type: AuthService },
-    { type: GlobalMessageService },
-    { type: RoutingService },
-    { type: TranslationService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class CloseAccountComponent {
-    /**
-     * @param {?} modalService
-     */
-    constructor(modalService) {
-        this.modalService = modalService;
-    }
-    /**
-     * @return {?}
-     */
-    openModal() {
-        this.modal = this.modalService.open(CloseAccountModalComponent, {
-            centered: true,
-        }).componentInstance;
-    }
-}
-CloseAccountComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-close-account',
-                template: "<div class=\"col-lg-8 col-md-9\">\n  <p\n    class=\"cx-info\"\n    [innerHTML]=\"'closeAccount.info.retention' | cxTranslate\"\n  ></p>\n  <div class=\"row cx-btn-group\">\n    <div class=\"col-sm-3\">\n      <a\n        [routerLink]=\"{ route: 'home' } | cxTranslateUrl\"\n        class=\"btn btn-block btn-secondary\"\n        >{{ 'closeAccount.action.cancel' | cxTranslate }}</a\n      >\n    </div>\n    <div class=\"col-sm-6\">\n      <button class=\"btn btn-primary\" (click)=\"openModal()\">\n        {{ 'closeAccount.action.closeMyAccount' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                styles: [""]
-            }] }
-];
-/** @nocollapse */
-CloseAccountComponent.ctorParameters = () => [
-    { type: NgbModal }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class CloseAccountModule {
-}
-CloseAccountModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    RouterModule,
-                    UrlTranslationModule,
-                    I18nModule,
-                    SpinnerModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            CloseAccountComponent: { selector: 'cx-close-account' },
-                        },
-                    }))),
-                ],
-                declarations: [CloseAccountComponent, CloseAccountModalComponent],
-                exports: [CloseAccountComponent],
-                entryComponents: [CloseAccountComponent, CloseAccountModalComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class OrderDetailsService {
-    /**
-     * @param {?} authService
-     * @param {?} userService
-     * @param {?} routingService
-     */
-    constructor(authService, userService, routingService) {
-        this.authService = authService;
-        this.userService = userService;
-        this.routingService = routingService;
-        this.userId$ = this.authService
-            .getUserToken()
-            .pipe(map(userData => userData.userId));
-        this.orderCode$ = this.routingService
-            .getRouterState()
-            .pipe(map(routingData => routingData.state.params.orderCode));
-        this.orderLoad$ = combineLatest(this.userId$, this.orderCode$).pipe(tap(([userId, orderCode]) => {
-            if (userId && orderCode) {
-                this.userService.loadOrderDetails(userId, orderCode);
-            }
-            else {
-                this.userService.clearOrderDetails();
-            }
-        }), shareReplay({ bufferSize: 1, refCount: true }));
-    }
-    /**
-     * @return {?}
-     */
-    getOrderDetails() {
-        return this.orderLoad$.pipe(switchMap(() => this.userService.getOrderDetails()));
-    }
-}
-OrderDetailsService.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-OrderDetailsService.ctorParameters = () => [
-    { type: AuthService },
-    { type: UserService },
-    { type: RoutingService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class OrderDetailHeadlineComponent {
-    /**
-     * @param {?} orderDetailsService
-     */
-    constructor(orderDetailsService) {
-        this.orderDetailsService = orderDetailsService;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.order$ = this.orderDetailsService.getOrderDetails();
-    }
-}
-OrderDetailHeadlineComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-order-details-headline',
-                template: "<ng-container *ngIf=\"(order$ | async) as order\">\n  <div class=\"cx-header row\">\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.orderId' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">{{ order?.code }}</div>\n    </div>\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.placed' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">{{ order?.created | date }}</div>\n    </div>\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.status' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">\n        {{\n          'orderDetails.statusDisplay'\n            | cxTranslate: { context: order?.statusDisplay }\n        }}\n      </div>\n    </div>\n  </div>\n</ng-container>\n"
-            }] }
-];
-/** @nocollapse */
-OrderDetailHeadlineComponent.ctorParameters = () => [
-    { type: OrderDetailsService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class OrderDetailItemsComponent {
-    /**
-     * @param {?} orderDetailsService
-     */
-    constructor(orderDetailsService) {
-        this.orderDetailsService = orderDetailsService;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.order$ = this.orderDetailsService.getOrderDetails();
-    }
-    /**
-     * @param {?} consignment
-     * @return {?}
-     */
-    getConsignmentProducts(consignment) {
-        /** @type {?} */
-        const products = [];
-        consignment.entries.forEach(element => {
-            products.push(element.orderEntry);
-        });
-        return products;
-    }
-}
-OrderDetailItemsComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-order-details-items',
-                template: "<ng-container *ngIf=\"(order$ | async) as order\">\n  <div *ngFor=\"let consignment of order.consignments\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">{{ consignment?.status }}</div>\n      <div *ngIf=\"consignment?.statusDate\" class=\"cx-list-date\">\n        <div>{{ 'orderDetails.shippedOn' | cxTranslate }}&nbsp;</div>\n        <div>{{ consignment?.statusDate | date }}</div>\n      </div>\n    </div>\n    <div class=\"cx-list-item col-12\">\n      <cx-cart-item-list\n        [items]=\"getConsignmentProducts(consignment)\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n\n  <div *ngIf=\"order.unconsignedEntries?.length\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">\n        {{ 'orderDetails.inProcess' | cxTranslate }}\n      </div>\n    </div>\n    <div class=\"cx-list-item col-12\">\n      <cx-cart-item-list\n        [items]=\"order?.unconsignedEntries\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n</ng-container>\n"
-            }] }
-];
-/** @nocollapse */
-OrderDetailItemsComponent.ctorParameters = () => [
-    { type: OrderDetailsService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class OrderDetailShippingComponent {
-    /**
-     * @param {?} orderDetailsService
-     */
-    constructor(orderDetailsService) {
-        this.orderDetailsService = orderDetailsService;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.order$ = this.orderDetailsService.getOrderDetails();
-    }
-    /**
-     * @param {?} address
-     * @return {?}
-     */
-    getAddressCardContent(address) {
-        return {
-            title: 'Ship to',
-            textBold: `${address.firstName} ${address.lastName}`,
-            text: [
-                address.line1,
-                address.line2,
-                `${address.town}, ${address.country.isocode}, ${address.postalCode}`,
-                address.phone,
-            ],
-        };
-    }
-    /**
-     * @param {?} billingAddress
-     * @return {?}
-     */
-    getBillingAddressCardContent(billingAddress) {
-        return {
-            title: 'Bill To',
-            textBold: `${billingAddress.firstName} ${billingAddress.lastName}`,
-            text: [
-                billingAddress.line1,
-                billingAddress.line2,
-                `${billingAddress.town}, ${billingAddress.country.isocode}, ${billingAddress.postalCode}`,
-                billingAddress.phone,
-            ],
-        };
-    }
-    /**
-     * @param {?} payment
-     * @return {?}
-     */
-    getPaymentCardContent(payment) {
-        return {
-            title: 'Payment',
-            textBold: payment.accountHolderName,
-            text: [
-                payment.cardType.name,
-                payment.cardNumber,
-                `Expires: ${payment.expiryMonth} / ${payment.expiryYear}`,
-            ],
-        };
-    }
-    /**
-     * @param {?} shipping
-     * @return {?}
-     */
-    getShippingMethodCardContent(shipping) {
-        return {
-            title: 'Shipping Method',
-            textBold: shipping.name,
-            text: [shipping.description],
-        };
-    }
-}
-OrderDetailShippingComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-order-details-shipping',
-                template: "<ng-container *ngIf=\"(order$ | async) as order\">\n  <div class=\"cx-account-summary row\">\n    <div\n      *ngIf=\"order.deliveryAddress\"\n      class=\"cx-summary-card col-sm-12 col-md-4\"\n    >\n      <cx-card\n        [content]=\"getAddressCardContent(order.deliveryAddress)\"\n      ></cx-card>\n    </div>\n    <div\n      *ngIf=\"order.paymentInfo?.billingAddress\"\n      class=\"cx-summary-card col-sm-12 col-md-4\"\n    >\n      <cx-card\n        [content]=\"\n          getBillingAddressCardContent(order.paymentInfo.billingAddress)\n        \"\n      ></cx-card>\n    </div>\n    <div *ngIf=\"order.paymentInfo\" class=\"cx-summary-card col-sm-12 col-md-4\">\n      <cx-card [content]=\"getPaymentCardContent(order.paymentInfo)\"></cx-card>\n    </div>\n    <div *ngIf=\"order.deliveryMode\" class=\"cx-summary-card col-sm-12 col-md-4\">\n      <cx-card\n        [content]=\"getShippingMethodCardContent(order.deliveryMode)\"\n      ></cx-card>\n    </div>\n  </div>\n</ng-container>\n"
-            }] }
-];
-/** @nocollapse */
-OrderDetailShippingComponent.ctorParameters = () => [
-    { type: OrderDetailsService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class OrderDetailTotalsComponent {
-    /**
-     * @param {?} orderDetailsService
-     */
-    constructor(orderDetailsService) {
-        this.orderDetailsService = orderDetailsService;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.order$ = this.orderDetailsService.getOrderDetails();
-    }
-}
-OrderDetailTotalsComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-order-details-totals',
-                template: "<ng-container *ngIf=\"(order$ | async) as order\">\n  <div class=\"row justify-content-end\">\n    <div class=\"cx-summary col-sm-12 col-md-6 col-lg-5 col-xl-4\">\n      <cx-order-summary [cart]=\"order\"></cx-order-summary>\n    </div>\n  </div>\n</ng-container>\n"
-            }] }
-];
-/** @nocollapse */
-OrderDetailTotalsComponent.ctorParameters = () => [
-    { type: OrderDetailsService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-const moduleComponents = [
-    OrderDetailHeadlineComponent,
-    OrderDetailItemsComponent,
-    OrderDetailTotalsComponent,
-    OrderDetailShippingComponent,
-];
-class OrderDetailsModule {
-}
-OrderDetailsModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CartSharedModule,
-                    CardModule,
-                    CommonModule,
-                    I18nModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            AccountOrderDetailsHeadlineComponent: {
-                                selector: 'cx-order-details-headline',
-                            },
-                            AccountOrderDetailsItemsComponent: {
-                                selector: 'cx-order-details-items',
-                            },
-                            AccountOrderDetailsTotalsComponent: {
-                                selector: 'cx-order-details-totals',
-                            },
-                            AccountOrderDetailsShippingComponent: {
-                                selector: 'cx-order-details-shipping',
-                            },
-                        },
-                    }))),
-                ],
-                providers: [OrderDetailsService],
-                declarations: [...moduleComponents],
-                exports: [...moduleComponents],
-                entryComponents: [...moduleComponents],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class OrderHistoryComponent {
-    /**
-     * @param {?} auth
-     * @param {?} routing
-     * @param {?} userService
-     */
-    constructor(auth, routing, userService) {
-        this.auth = auth;
-        this.routing = routing;
-        this.userService = userService;
-        this.PAGE_SIZE = 5;
-        this.sortLabels = {
-            byDate: 'Date',
-            byOrderNumber: 'Order Number',
-        };
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.subscription = this.auth.getUserToken().subscribe(userData => {
-            if (userData && userData.userId) {
-                this.user_id = userData.userId;
-            }
-        });
-        this.orders$ = this.userService
-            .getOrderHistoryList(this.user_id, this.PAGE_SIZE)
-            .pipe(tap((orders) => {
-            if (orders.pagination) {
-                this.sortType = orders.pagination.sort;
-            }
-        }));
-        this.isLoaded$ = this.userService.getOrderHistoryListLoaded();
-    }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
-        this.userService.clearOrderList();
-    }
-    /**
-     * @param {?} sortCode
-     * @return {?}
-     */
-    changeSortCode(sortCode) {
-        /** @type {?} */
-        const event = {
-            sortCode,
-            currentPage: 0,
-        };
-        this.sortType = sortCode;
-        this.fetchOrders(event);
-    }
-    /**
-     * @param {?} page
-     * @return {?}
-     */
-    pageChange(page) {
-        /** @type {?} */
-        const event = {
-            sortCode: this.sortType,
-            currentPage: page,
-        };
-        this.fetchOrders(event);
-    }
-    /**
-     * @param {?} order
-     * @return {?}
-     */
-    goToOrderDetail(order) {
-        this.routing.go({
-            route: 'orderDetails',
-            params: order,
-        });
-    }
-    /**
-     * @private
-     * @param {?} event
-     * @return {?}
-     */
-    fetchOrders(event) {
-        this.userService.loadOrderList(this.user_id, this.PAGE_SIZE, event.currentPage, event.sortCode);
-    }
-}
-OrderHistoryComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-order-history',
-                template: "<ng-container *ngIf=\"(orders$ | async) as orders\">\n  <div class=\"container\">\n    <!-- HEADER -->\n    <div class=\"cx-order-history-header\">\n      <h3>{{ 'orderHistory.orderHistory' | cxTranslate }}</h3>\n    </div>\n\n    <!-- BODY -->\n    <div class=\"cx-order-history-body\">\n      <ng-container *ngIf=\"orders.pagination.totalResults > 0; else noOrder\">\n        <!-- Select Form and Pagination Top -->\n        <div class=\"cx-order-history-sort top row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"sortLabels\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n        <!-- TABLE -->\n        <table class=\"table cx-order-history-table\">\n          <thead class=\"cx-order-history-thead-mobile\">\n            <th scope=\"col\">\n              {{ 'orderHistory.orderId' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.date' | cxTranslate }}</th>\n            <th scope=\"col\">\n              {{ 'orderHistory.status' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.total' | cxTranslate }}</th>\n          </thead>\n          <tbody>\n            <tr\n              *ngFor=\"let order of orders.orders\"\n              (click)=\"goToOrderDetail(order)\"\n            >\n              <td class=\"cx-order-history-code\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.orderId' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxTranslateUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.code }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-placed\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.date' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxTranslateUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                  >{{ order?.placed | cxDate: 'longDate' }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-status\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.status' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxTranslateUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{\n                    'orderDetails.statusDisplay'\n                      | cxTranslate: { context: order?.statusDisplay }\n                  }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-total\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.total' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxTranslateUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.total.formattedValue }}</a\n                >\n              </td>\n            </tr>\n          </tbody>\n        </table>\n        <!-- Select Form and Pagination Bottom -->\n        <div class=\"cx-order-history-sort bottom row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"sortLabels\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n      </ng-container>\n\n      <!-- NO ORDER CONTAINER -->\n      <ng-template #noOrder>\n        <div class=\"cx-order-history-no-order row\" *ngIf=\"(isLoaded$ | async)\">\n          <div class=\"col-sm-12 col-md-6 col-lg-4\">\n            <div>{{ 'orderHistory.noOrders' | cxTranslate }}</div>\n            <a\n              [routerLink]=\"{ route: 'home' } | cxTranslateUrl\"\n              routerLinkActive=\"active\"\n              class=\"btn btn-primary btn-block\"\n              >{{ 'orderHistory.startShopping' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </ng-template>\n    </div>\n  </div>\n</ng-container>\n"
-            }] }
-];
-/** @nocollapse */
-OrderHistoryComponent.ctorParameters = () => [
-    { type: AuthService },
-    { type: RoutingService },
-    { type: UserService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class OrderHistoryModule {
-}
-OrderHistoryModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            AccountOrderHistoryComponent: { selector: 'cx-order-history' },
-                        },
-                    }))),
-                    RouterModule,
-                    FormsModule,
-                    NgSelectModule,
-                    BootstrapModule,
-                    PaginationAndSortingModule,
-                    UrlTranslationModule,
-                    I18nModule,
-                ],
-                declarations: [OrderHistoryComponent],
-                exports: [OrderHistoryComponent],
-                providers: [UserService],
-                entryComponents: [OrderHistoryComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class PaymentMethodsComponent {
-    /**
-     * @param {?} userService
-     */
-    constructor(userService) {
-        this.userService = userService;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.paymentMethods$ = this.userService.getPaymentMethods();
-        this.editCard = null;
-        this.loading$ = this.userService.getPaymentMethodsLoading();
-        this.userServiceSub = this.userService.get().subscribe(data => {
-            this.userId = data.uid;
-            this.userService.loadPaymentMethods(this.userId);
-        });
-    }
-    /**
-     * @param {?} __0
-     * @return {?}
-     */
-    getCardContent({ defaultPayment, accountHolderName, expiryMonth, expiryYear, cardNumber, }) {
-        /** @type {?} */
-        const actions = [];
-        if (!defaultPayment) {
-            actions.push({ name: 'Set as default', event: 'default' });
-        }
-        actions.push({ name: 'Delete', event: 'edit' });
-        /** @type {?} */
-        const card = {
-            header: defaultPayment ? 'DEFAULT' : null,
-            textBold: accountHolderName,
-            text: [cardNumber, `Expires: ${expiryMonth}/${expiryYear}`],
-            actions,
-            deleteMsg: 'Are you sure you want to delete this payment method?',
-        };
-        return card;
-    }
-    /**
-     * @param {?} paymentMethod
-     * @return {?}
-     */
-    deletePaymentMethod(paymentMethod) {
-        if (this.userId) {
-            this.userService.deletePaymentMethod(this.userId, paymentMethod.id);
-        }
-        this.editCard = null;
-    }
-    /**
-     * @param {?} paymentMethod
-     * @return {?}
-     */
-    setEdit(paymentMethod) {
-        this.editCard = paymentMethod.id;
-    }
-    /**
-     * @return {?}
-     */
-    cancelCard() {
-        this.editCard = null;
-    }
-    /**
-     * @param {?} paymentMethod
-     * @return {?}
-     */
-    setDefaultPaymentMethod(paymentMethod) {
-        if (this.userId) {
-            this.userService.setPaymentMethodAsDefault(this.userId, paymentMethod.id);
-        }
-    }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        if (this.userServiceSub) {
-            this.userServiceSub.unsubscribe();
-        }
-    }
-}
-PaymentMethodsComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-payment-methods',
-                template: "<div class=\"cx-payment container\">\n  <div class=\"cx-header\">\n    <h3>{{ 'paymentMethods.paymentMethods' | cxTranslate }}</h3>\n  </div>\n\n  <div class=\"cx-body\">\n    <div class=\"cx-msg\">\n      {{\n        'paymentMethods.newPaymentMethodsAreAddedDuringCheckout' | cxTranslate\n      }}\n    </div>\n    <div *ngIf=\"(loading$ | async); else cards\"><cx-spinner></cx-spinner></div>\n    <ng-template #cards>\n      <div\n        *ngIf=\"(paymentMethods$ | async) as paymentMethods\"\n        class=\"cx-existing row\"\n      >\n        <div\n          class=\"cx-payment-card col-sm-12 col-md-12 col-lg-6\"\n          *ngFor=\"let paymentMethod of paymentMethods\"\n        >\n          <div class=\"cx-payment-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"getCardContent(paymentMethod)\"\n              (deleteCard)=\"deletePaymentMethod(paymentMethod)\"\n              (setDefaultCard)=\"setDefaultPaymentMethod(paymentMethod)\"\n              (editCard)=\"setEdit(paymentMethod)\"\n              [editMode]=\"editCard === paymentMethod.id\"\n              (cancelCard)=\"cancelCard()\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n    </ng-template>\n  </div>\n</div>\n"
-            }] }
-];
-/** @nocollapse */
-PaymentMethodsComponent.ctorParameters = () => [
-    { type: UserService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class PaymentMethodsModule {
-}
-PaymentMethodsModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    CardModule,
-                    SpinnerModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            AccountPaymentDetailsComponent: { selector: 'cx-payment-methods' },
-                        },
-                    }))),
-                    I18nModule,
-                ],
-                providers: [UserService],
-                declarations: [PaymentMethodsComponent],
-                exports: [PaymentMethodsComponent],
-                entryComponents: [PaymentMethodsComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Utility class when working with forms.
- */
-class FormUtils {
-    /**
-     *
-     * Checks is the `formControlName` field valid in the provided `form`.
-     *
-     * If it's NOT valid, the method returns `true`.
-     *
-     * @param {?} form a form whose field to check
-     * @param {?} formControlName a field name
-     * @param {?} submitted is the form submitted
-     * @return {?}
-     */
-    static isNotValidField(form, formControlName, submitted) {
-        return (form.get(formControlName).invalid &&
-            (submitted ||
-                (form.get(formControlName).touched && form.get(formControlName).dirty)));
-    }
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class UpdateEmailFormComponent {
-    /**
-     * @param {?} fb
-     */
-    constructor(fb) {
-        this.fb = fb;
-        this.submited = false;
-        this.saveEmail = new EventEmitter();
-        this.cancelEmail = new EventEmitter();
-        this.form = this.fb.group({
-            email: ['', [Validators.required, CustomFormValidators.emailValidator]],
-            confirmEmail: ['', [Validators.required]],
-            password: ['', [Validators.required]],
-        }, { validator: this.matchEmail });
-    }
-    /**
-     * @param {?} formControlName
-     * @return {?}
-     */
-    isEmailConfirmNotValid(formControlName) {
-        return (this.form.hasError('NotEqual') &&
-            (this.submited ||
-                (this.form.get(formControlName).touched &&
-                    this.form.get(formControlName).dirty)));
-    }
-    /**
-     * @param {?} formControlName
-     * @return {?}
-     */
-    isNotValid(formControlName) {
-        return FormUtils.isNotValidField(this.form, formControlName, this.submited);
-    }
-    /**
-     * @return {?}
-     */
-    onSubmit() {
-        this.submited = true;
-        if (this.form.invalid) {
-            return;
-        }
-        /** @type {?} */
-        const newUid = this.form.value.confirmEmail;
-        /** @type {?} */
-        const password = this.form.value.password;
-        this.saveEmail.emit({ newUid, password });
-    }
-    /**
-     * @return {?}
-     */
-    onCancel() {
-        this.cancelEmail.emit();
-    }
-    /**
-     * @private
-     * @param {?} ac
-     * @return {?}
-     */
-    matchEmail(ac) {
-        if (ac.get('email').value !== ac.get('confirmEmail').value) {
-            return { NotEqual: true };
-        }
-    }
-}
-UpdateEmailFormComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-update-email-form',
-                template: "<form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\">\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateEmailForm.newEmailAddress.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"email\"\n          name=\"email\"\n          formControlName=\"email\"\n          placeholder=\"{{\n            'updateEmailForm.newEmailAddress.placeholder' | cxTranslate\n          }}\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('email')\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('email')\">\n          <span>{{ 'updateEmailForm.enterValidEmail' | cxTranslate }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-sm-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateEmailForm.confirmNewEmailAddress.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"email\"\n          name=\"confirmEmail\"\n          formControlName=\"confirmEmail\"\n          placeholder=\"{{\n            'updateEmailForm.confirmNewEmailAddress.placeholder' | cxTranslate\n          }}\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isEmailConfirmNotValid('confirmEmail')\"\n        />\n        <div\n          class=\"invalid-feedback\"\n          *ngIf=\"isEmailConfirmNotValid('confirmEmail')\"\n        >\n          <span>{{\n            'updateEmailForm.bothPasswordMustMatch' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-sm-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateEmailForm.password.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"password\"\n          name=\"password\"\n          formControlName=\"password\"\n          placeholder=\"{{\n            'updateEmailForm.password.placeholder' | cxTranslate\n          }}\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('password')\"\n          autocomplete=\"off\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('password')\">\n          <span>{{ 'updateEmailForm.pleaseInputPassword' | cxTranslate }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-lg-6\">\n      <button\n        class=\"btn btn-block btn-secondary\"\n        type=\"button\"\n        (click)=\"onCancel()\"\n      >\n        {{ 'common.cancel' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-lg-6\">\n      <button class=\"btn btn-block btn-primary\" type=\"submit\">\n        {{ 'common.save' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n",
-                styles: [".form-group button:first-child{margin-bottom:1rem}"]
-            }] }
-];
-/** @nocollapse */
-UpdateEmailFormComponent.ctorParameters = () => [
-    { type: FormBuilder }
-];
-UpdateEmailFormComponent.propDecorators = {
-    saveEmail: [{ type: Output }],
-    cancelEmail: [{ type: Output }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class UpdateEmailComponent {
-    /**
-     * @param {?} routingService
-     * @param {?} globalMessageService
-     * @param {?} userService
-     * @param {?} authService
-     */
-    constructor(routingService, globalMessageService, userService, authService) {
-        this.routingService = routingService;
-        this.globalMessageService = globalMessageService;
-        this.userService = userService;
-        this.authService = authService;
-        this.subscription = new Subscription();
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.userService.resetUpdateEmailResultState();
-        this.subscription.add(this.userService.get().subscribe(result => (this.uid = result.uid)));
-        this.subscription.add(this.userService
-            .getUpdateEmailResultSuccess()
-            .subscribe(success => this.onSuccess(success)));
-        this.isLoading$ = this.userService.getUpdateEmailResultLoading();
-    }
-    /**
-     * @return {?}
-     */
-    onCancel() {
-        this.routingService.go({ route: 'home' });
-    }
-    /**
-     * @param {?} __0
-     * @return {?}
-     */
-    onSubmit({ newUid, password }) {
-        this.newUid = newUid;
-        this.userService.updateEmail(this.uid, password, newUid);
-    }
-    /**
-     * @param {?} success
-     * @return {?}
-     */
-    onSuccess(success) {
-        if (success) {
-            this.globalMessageService.add({
-                text: `Success. Please sign in with ${this.newUid}`,
-                type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
-            });
-            this.authService.logout();
-            this.routingService.go({ route: 'login' });
-        }
-    }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
-        this.userService.resetUpdateEmailResultState();
-    }
-}
-UpdateEmailComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-update-email',
-                template: "<ng-container>\n  <div *ngIf=\"(isLoading$ | async); else loaded\">\n    <div class=\"cx-spinner\">\n      <cx-spinner> </cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #loaded>\n    <div class=\"container\">\n      <div class=\"row d-flex justify-content-center\">\n        <cx-update-email-form\n          class=\"col-md-6\"\n          (saveEmail)=\"onSubmit($event)\"\n          (cancelEmail)=\"onCancel()\"\n        >\n        </cx-update-email-form>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n",
-                styles: [""]
-            }] }
-];
-/** @nocollapse */
-UpdateEmailComponent.ctorParameters = () => [
-    { type: RoutingService },
-    { type: GlobalMessageService },
-    { type: UserService },
-    { type: AuthService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class UpdateEmailModule {
-}
-UpdateEmailModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            UpdateEmailComponent: {
-                                selector: 'cx-update-email',
-                            },
-                        },
-                    }))),
-                    FormsModule,
-                    ReactiveFormsModule,
-                    SpinnerModule,
-                    I18nModule,
-                ],
-                declarations: [UpdateEmailFormComponent, UpdateEmailComponent],
-                exports: [UpdateEmailComponent],
-                entryComponents: [UpdateEmailComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class UpdatePasswordFormComponent {
-    /**
-     * @param {?} fb
-     */
-    constructor(fb) {
-        this.fb = fb;
-        this.submitClicked = false;
-        this.submited = new EventEmitter();
-        this.cancelled = new EventEmitter();
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.form = this.fb.group({
-            oldPassword: ['', [Validators.required]],
-            newPassword: [
-                '',
-                [Validators.required, CustomFormValidators.passwordValidator],
-            ],
-            newPasswordConfirm: ['', [Validators.required]],
-        }, { validator: this.matchPassword });
-    }
-    /**
-     * @param {?} formControlName
-     * @return {?}
-     */
-    isNotValid(formControlName) {
-        return FormUtils.isNotValidField(this.form, formControlName, this.submitClicked);
-    }
-    /**
-     * @return {?}
-     */
-    isPasswordConfirmNotValid() {
-        return (this.form.hasError('NotEqual') &&
-            (this.submitClicked ||
-                (this.form.get('newPasswordConfirm').touched &&
-                    this.form.get('newPasswordConfirm').dirty)));
-    }
-    /**
-     * @return {?}
-     */
-    onSubmit() {
-        this.submitClicked = true;
-        if (this.form.invalid) {
-            return;
-        }
-        this.submited.emit({
-            oldPassword: this.form.value.oldPassword,
-            newPassword: this.form.value.newPassword,
-        });
-    }
-    /**
-     * @return {?}
-     */
-    onCancel() {
-        this.cancelled.emit();
-    }
-    /**
-     * @private
-     * @param {?} abstractControl
-     * @return {?}
-     */
-    matchPassword(abstractControl) {
-        if (abstractControl.get('newPassword').value !==
-            abstractControl.get('newPasswordConfirm').value) {
-            return { NotEqual: true };
-        }
-        return null;
-    }
-}
-UpdatePasswordFormComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-update-password-form',
-                template: "<form\n  (ngSubmit)=\"onSubmit()\"\n  [formGroup]=\"form\"\n  class=\"cx-update-password-component \"\n>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updatePasswordForm.oldPassword.label' | cxTranslate\n        }}</span>\n        <input\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('oldPassword')\"\n          type=\"password\"\n          name=\"oldPassword\"\n          placeholder=\"{{\n            'updatePasswordForm.oldPassword.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"oldPassword\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('oldPassword')\">\n          <span>{{\n            'updatePasswordForm.oldPasswordIsRequired' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updatePasswordForm.newPassword.label' | cxTranslate\n        }}</span>\n        <input\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('newPassword')\"\n          type=\"password\"\n          name=\"newPassword\"\n          placeholder=\"{{\n            'updatePasswordForm.newPassword.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"newPassword\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('newPassword')\">\n          <span>{{\n            'updatePasswordForm.passwordMinRequirements' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updatePasswordForm.confirmPassword.label' | cxTranslate\n        }}</span>\n        <input\n          class=\"form-control\"\n          [class.is-invalid]=\"isPasswordConfirmNotValid()\"\n          type=\"password\"\n          name=\"newPasswordConfirm\"\n          placeholder=\"{{\n            'updatePasswordForm.confirmPassword.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"newPasswordConfirm\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isPasswordConfirmNotValid()\">\n          <span>{{\n            'updatePasswordForm.bothPasswordMustMatch' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-lg-6 col-md-12\">\n      <button\n        class=\"btn btn-block btn-secondary\"\n        type=\"button\"\n        (click)=\"onCancel()\"\n      >\n        {{ 'common.cancel' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-lg-6 col-md-12\">\n      <button class=\"btn btn-block btn-primary\" type=\"submit\">\n        {{ 'common.save' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n",
-                styles: [".form-group button:first-child{margin-bottom:1rem}"]
-            }] }
-];
-/** @nocollapse */
-UpdatePasswordFormComponent.ctorParameters = () => [
-    { type: FormBuilder }
-];
-UpdatePasswordFormComponent.propDecorators = {
-    submited: [{ type: Output }],
-    cancelled: [{ type: Output }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class UpdatePasswordComponent {
-    /**
-     * @param {?} routingService
-     * @param {?} userService
-     * @param {?} globalMessageService
-     */
-    constructor(routingService, userService, globalMessageService) {
-        this.routingService = routingService;
-        this.userService = userService;
-        this.globalMessageService = globalMessageService;
-        this.subscription = new Subscription();
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.userService.resetUpdatePasswordProcessState();
-        this.loading$ = this.userService.getUpdatePasswordResultLoading();
-        this.userService
-            .get()
-            .pipe(take(1))
-            .subscribe(user => {
-            this.userId = user.uid;
-        });
-        this.subscription.add(this.userService
-            .getUpdatePasswordResultSuccess()
-            .subscribe(success => this.onSuccess(success)));
-    }
-    /**
-     * @param {?} success
-     * @return {?}
-     */
-    onSuccess(success) {
-        if (success) {
-            this.globalMessageService.add({
-                text: 'Password updated with success',
-                type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
-            });
-            this.routingService.go({ route: 'home' });
-        }
-    }
-    /**
-     * @return {?}
-     */
-    onCancel() {
-        this.routingService.go({ route: 'home' });
-    }
-    /**
-     * @param {?} __0
-     * @return {?}
-     */
-    onSubmit({ oldPassword, newPassword, }) {
-        this.userService.updatePassword(this.userId, oldPassword, newPassword);
-    }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
-        this.userService.resetUpdatePasswordProcessState();
-    }
-}
-UpdatePasswordComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-update-password',
-                template: "<ng-container>\n  <div *ngIf=\"(loading$ | async); else updateForm\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #updateForm>\n    <div class=\"container\">\n      <div class=\"row d-flex justify-content-center\">\n        <cx-update-password-form\n          class=\"col-md-6\"\n          (cancelled)=\"onCancel()\"\n          (submited)=\"onSubmit($event)\"\n        ></cx-update-password-form>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n",
-                styles: [""]
-            }] }
-];
-/** @nocollapse */
-UpdatePasswordComponent.ctorParameters = () => [
-    { type: RoutingService },
-    { type: UserService },
-    { type: GlobalMessageService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class UpdatePasswordModule {
-}
-UpdatePasswordModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    FormsModule,
-                    ReactiveFormsModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            UpdatePasswordComponent: { selector: 'cx-update-password' },
-                        },
-                    }))),
-                    SpinnerModule,
-                    I18nModule,
-                ],
-                declarations: [UpdatePasswordComponent, UpdatePasswordFormComponent],
-                exports: [UpdatePasswordComponent],
-                entryComponents: [UpdatePasswordComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class UpdateProfileFormComponent {
-    /**
-     * @param {?} fb
-     */
-    constructor(fb) {
-        this.fb = fb;
-        this.submited = new EventEmitter();
-        this.cancelled = new EventEmitter();
-        this.form = this.fb.group({
-            titleCode: [''],
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-        });
-        this.submitClicked = false;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        if (this.user) {
-            this.form.patchValue(this.user);
-        }
-    }
-    /**
-     * @param {?} formControlName
-     * @return {?}
-     */
-    isNotValid(formControlName) {
-        return FormUtils.isNotValidField(this.form, formControlName, this.submitClicked);
-    }
-    /**
-     * @return {?}
-     */
-    onSubmit() {
-        this.submitClicked = true;
-        if (this.form.invalid) {
-            return;
-        }
-        this.submited.emit({
-            uid: this.user.uid,
-            userUpdates: Object.assign({}, this.form.value),
-        });
-    }
-    /**
-     * @return {?}
-     */
-    onCancel() {
-        this.cancelled.emit();
-    }
-}
-UpdateProfileFormComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-update-profile-form',
-                template: "<form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\">\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateProfileForm.title' | cxTranslate\n        }}</span>\n        <select formControlName=\"titleCode\" class=\"form-control\">\n          <option value=\"\">{{ 'updateProfileForm.none' | cxTranslate }}</option>\n          <option *ngFor=\"let title of titles\" [value]=\"title.code\">{{\n            title.name\n          }}</option>\n        </select>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateProfileForm.firstName.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          name=\"firstName\"\n          placeholder=\"{{\n            'updateProfileForm.firstName.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"firstName\"\n          [class.is-invalid]=\"isNotValid('firstName')\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('firstName')\">\n          <span>{{\n            'updateProfileForm.firstNameIsRequired' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateProfileForm.LastName.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          name=\"lastName\"\n          placeholder=\"{{\n            'updateProfileForm.lastName.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"lastName\"\n          [class.is-invalid]=\"isNotValid('lastName')\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('lastName')\">\n          <span>{{\n            'updateProfileForm.lastNameIsRequired' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-lg-6 col-md-12\">\n      <button\n        class=\"btn btn-block btn-secondary\"\n        type=\"button\"\n        (click)=\"onCancel()\"\n      >\n        {{ 'common.cancel' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-lg-6 col-md-12\">\n      <button class=\"btn btn-block btn-primary\" type=\"submit\">\n        {{ 'common.save' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n",
-                styles: [".form-group button:first-child{margin-bottom:1rem}"]
-            }] }
-];
-/** @nocollapse */
-UpdateProfileFormComponent.ctorParameters = () => [
-    { type: FormBuilder }
-];
-UpdateProfileFormComponent.propDecorators = {
-    user: [{ type: Input }],
-    titles: [{ type: Input }],
-    submited: [{ type: Output }],
-    cancelled: [{ type: Output }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class UpdateProfileComponent {
-    /**
-     * @param {?} routingService
-     * @param {?} userService
-     * @param {?} globalMessageService
-     */
-    constructor(routingService, userService, globalMessageService) {
-        this.routingService = routingService;
-        this.userService = userService;
-        this.globalMessageService = globalMessageService;
-        this.subscription = new Subscription();
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        // reset the previous form processing state
-        this.userService.resetUpdatePersonalDetailsProcessingState();
-        this.user$ = this.userService.get();
-        this.titles$ = this.userService.getTitles().pipe(tap(titles => {
-            if (Object.keys(titles).length === 0) {
-                this.userService.loadTitles();
-            }
-        }));
-        this.loading$ = this.userService.getUpdatePersonalDetailsResultLoading();
-        this.subscription.add(this.userService
-            .getUpdatePersonalDetailsResultSuccess()
-            .subscribe(success => this.onSuccess(success)));
-    }
-    /**
-     * @param {?} success
-     * @return {?}
-     */
-    onSuccess(success) {
-        if (success) {
-            this.globalMessageService.add({
-                text: 'Personal details successfully updated',
-                type: GlobalMessageType.MSG_TYPE_CONFIRMATION,
-            });
-            this.routingService.go({ route: 'home' });
-        }
-    }
-    /**
-     * @return {?}
-     */
-    onCancel() {
-        this.routingService.go({ route: 'home' });
-    }
-    /**
-     * @param {?} __0
-     * @return {?}
-     */
-    onSubmit({ uid, userUpdates }) {
-        this.userService.updatePersonalDetails(uid, userUpdates);
-    }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
-        // clean up the state
-        this.userService.resetUpdatePersonalDetailsProcessingState();
-    }
-}
-UpdateProfileComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-update-profile',
-                template: "<ng-container>\n  <div *ngIf=\"(loading$ | async); else updateForm\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #updateForm>\n    <div class=\"container\">\n      <div class=\"row d-flex justify-content-center\">\n        <cx-update-profile-form\n          class=\"col-md-6\"\n          [user]=\"user$ | async\"\n          [titles]=\"titles$ | async\"\n          (cancelled)=\"onCancel()\"\n          (submited)=\"onSubmit($event)\"\n        ></cx-update-profile-form>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n",
-                styles: [""]
-            }] }
-];
-/** @nocollapse */
-UpdateProfileComponent.ctorParameters = () => [
-    { type: RoutingService },
-    { type: UserService },
-    { type: GlobalMessageService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class UpdateProfileModule {
-}
-UpdateProfileModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            UpdateProfileComponent: { selector: 'cx-update-profile' },
-                        },
-                    }))),
-                    FormsModule,
-                    ReactiveFormsModule,
-                    SpinnerModule,
-                    I18nModule,
-                ],
-                declarations: [UpdateProfileComponent, UpdateProfileFormComponent],
-                exports: [UpdateProfileComponent],
-                entryComponents: [UpdateProfileComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @enum {string} */
-const ViewModes = {
-    Grid: 'grid',
-    List: 'list',
-};
-class ProductViewComponent {
-    constructor() {
-        this.modeChange = new EventEmitter();
-    }
-    /**
-     * @return {?}
-     */
-    get buttonClass() {
-        return `cx-product-${this.mode}`;
-    }
-    /**
-     * @return {?}
-     */
-    changeMode() {
-        /** @type {?} */
-        const newMode = this.mode === ViewModes.Grid ? ViewModes.List : ViewModes.Grid;
-        this.modeChange.emit(newMode);
-    }
-}
-ProductViewComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-product-view',
-                template: "<div class=\"cx-product-layout\" (click)=\"changeMode()\">\n  <div [ngClass]=\"buttonClass\"><span></span></div>\n</div>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-ProductViewComponent.propDecorators = {
-    mode: [{ type: Input }],
-    modeChange: [{ type: Output }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ProductListComponent {
-    /**
-     * @param {?} productSearchService
-     * @param {?} activatedRoute
-     * @param {?} pageLayoutService
-     */
-    constructor(productSearchService, activatedRoute, pageLayoutService) {
-        this.productSearchService = productSearchService;
-        this.activatedRoute = activatedRoute;
-        this.pageLayoutService = pageLayoutService;
-        this.searchConfig = {};
-        this.gridMode$ = new BehaviorSubject(ViewModes.Grid);
-    }
-    /**
-     * @return {?}
-     */
-    update() {
-        const { queryParams } = this.activatedRoute.snapshot;
-        this.options = this.createOptionsByUrlParams();
-        if (this.categoryCode && this.categoryCode !== queryParams.categoryCode) {
-            this.query = ':relevance:category:' + this.categoryCode;
-        }
-        if (this.brandCode && this.brandCode !== queryParams.brandCode) {
-            this.query = ':relevance:brand:' + this.brandCode;
-        }
-        if (!this.query && queryParams.query) {
-            this.query = queryParams.query;
-        }
-        this.search(this.query, this.options);
-    }
-    /**
-     * @return {?}
-     */
-    createOptionsByUrlParams() {
-        const { queryParams } = this.activatedRoute.snapshot;
-        /** @type {?} */
-        const newConfig = Object.assign({}, queryParams);
-        delete newConfig.query;
-        /** @type {?} */
-        const options = Object.assign({}, this.searchConfig, newConfig, { pageSize: this.itemPerPage || 10 });
-        if (this.categoryCode) {
-            options.categoryCode = this.categoryCode;
-        }
-        if (this.brandCode) {
-            options.brandCode = this.brandCode;
-        }
-        return options;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.updateParams$ = this.activatedRoute.params.pipe(tap(params => {
-            this.categoryCode = params.categoryCode;
-            this.brandCode = params.brandCode;
-            this.query = params.query;
-            this.update();
-        }));
-        this.pageLayoutService.templateName$.pipe(take(1)).subscribe(template => {
-            this.gridMode$.next(template === 'ProductGridPageTemplate' ? ViewModes.Grid : ViewModes.List);
-        });
-        // clean previous search result
-        this.productSearchService.clearSearchResults();
-        this.model$ = this.productSearchService.getSearchResults().pipe(tap(searchResult => {
-            if (Object.keys(searchResult).length === 0) {
-                this.search(this.query, this.options);
-            }
-            else {
-                this.getCategoryTitle(searchResult);
-            }
-        }), filter(searchResult => Object.keys(searchResult).length > 0));
-    }
-    /**
-     * @protected
-     * @param {?} data
-     * @return {?}
-     */
-    getCategoryTitle(data) {
-        if (data.breadcrumbs && data.breadcrumbs.length > 0) {
-            this.categoryTitle = data.breadcrumbs[0].facetValueName;
-        }
-        else if (!this.query.includes(':relevance:')) {
-            this.categoryTitle = this.query;
-        }
-        if (this.categoryTitle) {
-            this.categoryTitle =
-                data.pagination.totalResults + ' results for ' + this.categoryTitle;
-        }
-        return this.categoryTitle;
-    }
-    /**
-     * @param {?} pageNumber
-     * @return {?}
-     */
-    viewPage(pageNumber) {
-        this.search(this.query, { currentPage: pageNumber });
-    }
-    /**
-     * @param {?} sortCode
-     * @return {?}
-     */
-    sortList(sortCode) {
-        this.search(this.query, { sortCode: sortCode });
-    }
-    /**
-     * @param {?} mode
-     * @return {?}
-     */
-    setGridMode(mode) {
-        this.gridMode$.next(mode);
-    }
-    /**
-     * @protected
-     * @param {?} query
-     * @param {?=} options
-     * @return {?}
-     */
-    search(query, options) {
-        if (this.query) {
-            if (options) {
-                // Overide default options
-                this.searchConfig = Object.assign({}, this.searchConfig, options);
-            }
-            this.productSearchService.search(query, this.searchConfig);
-        }
-    }
-}
-ProductListComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-product-list',
-                template: "<ng-container *ngIf=\"(updateParams$ | async)\">\n  <div class=\"cx-page\" *ngIf=\"(model$ | async) as model\">\n    <section class=\"cx-page__section\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-12 col-lg-12\" *ngIf=\"(gridMode$ | async) as gridMode\">\n            <div class=\"cx-sorting top\">\n              <div class=\"row\">\n                <div class=\"col-12 col-lg-4 mr-auto\">\n                  <div class=\"form-group cx-sort-dropdown\">\n                    <cx-sorting\n                      [sortOptions]=\"model.sorts\"\n                      (sortListEvent)=\"sortList($event)\"\n                      [selectedOption]=\"model.pagination.sort\"\n                      placeholder=\"{{\n                        'productList.sortByRelevance' | cxTranslate\n                      }}\"\n                    ></cx-sorting>\n                  </div>\n                </div>\n                <div class=\"col-auto\">\n                  <div\n                    class=\"cx-pagination\"\n                    aria-label=\"product search pagination\"\n                  >\n                    <cx-pagination\n                      [pagination]=\"model.pagination\"\n                      (viewPageEvent)=\"viewPage($event)\"\n                    ></cx-pagination>\n                  </div>\n                </div>\n                <div class=\"col-auto ml-auto ml-lg-0\">\n                  <cx-product-view\n                    (modeChange)=\"setGridMode($event)\"\n                    [mode]=\"gridMode\"\n                  ></cx-product-view>\n                </div>\n              </div>\n            </div>\n            <div class=\"cx-product-container\">\n              <ng-container *ngIf=\"gridMode === 'grid'\">\n                <div class=\"row\">\n                  <cx-product-grid-item\n                    *ngFor=\"let product of model?.products\"\n                    [product]=\"product\"\n                    class=\"col-12 col-sm-6 col-md-4\"\n                  ></cx-product-grid-item>\n                </div>\n              </ng-container>\n\n              <ng-container *ngIf=\"gridMode === 'list'\">\n                <cx-product-list-item\n                  *ngFor=\"let product of model?.products\"\n                  [product]=\"product\"\n                  class=\"cx-product-search-list\"\n                ></cx-product-list-item>\n              </ng-container>\n            </div>\n            <div class=\"cx-sorting bottom\">\n              <div class=\"row\">\n                <div class=\"col-12 col-lg-4 mr-auto\">\n                  <div class=\"form-group cx-sort-dropdown\">\n                    <cx-sorting\n                      [sortOptions]=\"model.sorts\"\n                      (sortListEvent)=\"sortList($event)\"\n                      [selectedOption]=\"model.pagination.sort\"\n                      placeholder=\"{{\n                        'productList.sortByRelevance' | cxTranslate\n                      }}\"\n                    ></cx-sorting>\n                  </div>\n                </div>\n                <div class=\"col-auto\" aria-label=\"product search pagination\">\n                  <div class=\"cx-pagination\">\n                    <cx-pagination\n                      [pagination]=\"model.pagination\"\n                      (viewPageEvent)=\"viewPage($event)\"\n                    ></cx-pagination>\n                  </div>\n                </div>\n                <div class=\"col-auto ml-auto ml-lg-0\">\n                  <cx-product-view\n                    (modeChange)=\"setGridMode($event)\"\n                    [mode]=\"gridMode\"\n                  ></cx-product-view>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </section>\n  </div>\n</ng-container>\n"
-            }] }
-];
-/** @nocollapse */
-ProductListComponent.ctorParameters = () => [
-    { type: ProductSearchService },
-    { type: ActivatedRoute },
-    { type: PageLayoutService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ProductFacetNavigationComponent {
-    /**
-     * @param {?} modalService
-     * @param {?} activatedRoute
-     * @param {?} productSearchService
-     */
-    constructor(modalService, activatedRoute, productSearchService) {
-        this.modalService = modalService;
-        this.activatedRoute = activatedRoute;
-        this.productSearchService = productSearchService;
-        this.minPerFacet = 6;
-        this.collapsedFacets = new Set();
-        this.showAllPerFacetMap = new Map();
-        this.queryCodec = new HttpUrlEncodingCodec();
-    }
-    /**
-     * @return {?}
-     */
-    get visibleFacets() {
-        if (!this.searchResult.facets) {
-            return [];
-        }
-        return this.searchResult.facets.filter(facet => facet.visible);
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.updateParams$ = this.activatedRoute.params.pipe(tap(params => {
-            this.activeFacetValueCode = params.categoryCode || params.brandCode;
-        }));
-        this.searchResult$ = this.productSearchService.getSearchResults().pipe(tap(searchResult => {
-            this.searchResult = searchResult;
-            if (this.searchResult.facets) {
-                this.searchResult.facets.forEach(el => {
-                    this.showAllPerFacetMap.set(el.name, false);
-                });
-            }
-        }), filter(searchResult => Object.keys(searchResult).length > 0));
-    }
-    /**
-     * @param {?} content
-     * @return {?}
-     */
-    openFilterModal(content) {
-        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
-    }
-    /**
-     * @param {?} query
-     * @return {?}
-     */
-    toggleValue(query) {
-        this.productSearchService.search(this.queryCodec.decodeValue(query));
-    }
-    /**
-     * @param {?} facetName
-     * @return {?}
-     */
-    showLess(facetName) {
-        this.updateShowAllPerFacetMap(facetName, false);
-    }
-    /**
-     * @param {?} facetName
-     * @return {?}
-     */
-    showMore(facetName) {
-        this.updateShowAllPerFacetMap(facetName, true);
-    }
-    /**
-     * @private
-     * @param {?} facetName
-     * @param {?} showAll
-     * @return {?}
-     */
-    updateShowAllPerFacetMap(facetName, showAll) {
-        this.showAllPerFacetMap.set(facetName, showAll);
-    }
-    /**
-     * @param {?} facetName
-     * @return {?}
-     */
-    isFacetCollapsed(facetName) {
-        return this.collapsedFacets.has(facetName);
-    }
-    /**
-     * @param {?} facetName
-     * @return {?}
-     */
-    toggleFacet(facetName) {
-        if (this.collapsedFacets.has(facetName)) {
-            this.collapsedFacets.delete(facetName);
-        }
-        else {
-            this.collapsedFacets.add(facetName);
-        }
-    }
-    /**
-     * @param {?} facet
-     * @return {?}
-     */
-    getVisibleFacetValues(facet) {
-        return facet.values.slice(0, this.showAllPerFacetMap.get(facet.name)
-            ? facet.values.length
-            : this.minPerFacet);
-    }
-}
-ProductFacetNavigationComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-product-facet-navigation',
-                template: "<div class=\"cx-search-facet\" *ngIf=\"(searchResult$ | async) as searchResult\">\n  <ng-template [ngIf]=\"searchResult.breadcrumbs?.length\">\n    <h4 class=\"cx-facet-filter-header\">\n      {{ 'productList.filterBy.label' | cxTranslate }}\n    </h4>\n    <div class=\"cx-facet-filter-container\">\n      <div\n        *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n        [hidden]=\"breadcrumb.facetValueCode === activeFacetValueCode\"\n        class=\"cx-facet-filter-pill\"\n        role=\"filter\"\n      >\n        <span>{{ breadcrumb.facetValueName }}</span>\n        <button\n          type=\"button\"\n          class=\"close\"\n          aria-label=\"Close\"\n          (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n    </div>\n  </ng-template>\n\n  <ng-template ngFor let-facet [ngForOf]=\"visibleFacets\" let-facetId=\"index\">\n    <div class=\"cx-facet-group\">\n      <span class=\"cx-facet-header\">\n        <a\n          class=\"cx-facet-header-link\"\n          (click)=\"toggleFacet(facet.name)\"\n          [attr.aria-expanded]=\"!isFacetCollapsed(facet.name)\"\n          aria-controls=\"\"\n        >\n          {{ facet.name }}\n        </a>\n      </span>\n      <div [ngbCollapse]=\"isFacetCollapsed(facet.name)\">\n        <ul class=\"cx-facet-list\">\n          <li\n            *ngFor=\"\n              let value of getVisibleFacetValues(facet);\n              index as facetValueId\n            \"\n          >\n            <div class=\"form-check\">\n              <label class=\"form-checkbox cx-facet-label\">\n                <input\n                  class=\"form-check-input cx-facet-checkbox\"\n                  role=\"checkbox\"\n                  type=\"checkbox\"\n                  aria-checked=\"true\"\n                  [checked]=\"value.selected\"\n                  (change)=\"toggleValue(value.query.query.value)\"\n                />\n                <span class=\"cx-facet-text\"\n                  >{{ value.name }} ({{ value.count }})</span\n                >\n              </label>\n            </div>\n          </li>\n          <li\n            class=\"cx-facet-toggle-btn\"\n            (click)=\"showLess(facet.name)\"\n            *ngIf=\"showAllPerFacetMap.get(facet.name)\"\n          >\n            {{ 'productList.showLess' | cxTranslate }}\n          </li>\n          <li\n            class=\"cx-facet-toggle-btn\"\n            (click)=\"showMore(facet.name)\"\n            *ngIf=\"\n              !showAllPerFacetMap.get(facet.name) &&\n              facet.values.length > minPerFacet\n            \"\n          >\n            {{ 'productList.showMore' | cxTranslate }}\n          </li>\n        </ul>\n      </div>\n    </div>\n  </ng-template>\n</div>\n\n<div class=\"cx-facet-mobile\">\n  <button\n    class=\"btn btn-action btn-block cx-facet-mobile-btn\"\n    (click)=\"openFilterModal(content)\"\n  >\n    {{ 'productList.filterBy.action' | cxTranslate }}\n  </button>\n</div>\n\n<!-- START ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n<div *ngIf=\"(updateParams$ | async) as params\">\n  <div class=\"cx-facet-mobile\" *ngIf=\"searchResult.breadcrumbs?.length\">\n    <div class=\"cx-facet-filter-container\">\n      <h4 class=\"cx-facet-filter-header\">\n        {{ 'productList.appliedFilter' | cxTranslate }}\n      </h4>\n      <div\n        class=\"cx-facet-filter-pill\"\n        role=\"filter\"\n        *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n      >\n        {{ breadcrumb.facetValueName }}\n        <button\n          type=\"button\"\n          class=\"close\"\n          aria-label=\"Close\"\n          (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n<!-- END ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n\n<ng-template #content let-c=\"close\" let-d=\"dismiss\">\n  <div class=\"modal-header\">\n    <h4 class=\"cx-facet-modal-title\" id=\"modal-title\">\n      {{ 'productList.filterBy.label' | cxTranslate }}\n    </h4>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"d('Cross click')\"\n    >\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"modal-body cx-facet-modal-body\">\n    <form>\n      <div\n        class=\"form-group\"\n        *ngFor=\"let facet of searchResult.facets; index as facetId\"\n      >\n        <h4 class=\"cx-facet-modal-label\" for=\"megapixels\">{{ facet.name }}</h4>\n        <div class=\"input-group\">\n          <ul class=\"cx-facet-list\">\n            <li *ngFor=\"let value of facet.values; index as facetValueId\">\n              <div class=\"form-check\">\n                <label class=\"form-checkbox cx-facet-label\">\n                  <input\n                    class=\"form-check-input cx-facet-checkbox\"\n                    role=\"checkbox\"\n                    type=\"checkbox\"\n                    aria-checked=\"true\"\n                    [checked]=\"value.selected\"\n                    (change)=\"toggleValue(value.query.query.value)\"\n                  />\n                  <span class=\"cx-facet-text\"\n                    >{{ value.name }} ({{ value.count }})</span\n                  >\n                </label>\n              </div>\n            </li>\n          </ul>\n        </div>\n      </div>\n    </form>\n  </div>\n</ng-template>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-/** @nocollapse */
-ProductFacetNavigationComponent.ctorParameters = () => [
-    { type: NgbModal },
-    { type: ActivatedRoute },
-    { type: ProductSearchService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ProductGridItemComponent {
-}
-ProductGridItemComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-product-grid-item',
-                template: "<a\n  [routerLink]=\"\n    { route: 'product', params: product | stripHtml } | cxTranslateUrl\n  \"\n  class=\"cx-product-image-container\"\n>\n  <cx-media\n    class=\"cx-product-image\"\n    [container]=\"product.images?.PRIMARY\"\n    format=\"product\"\n    [alt]=\"product.summary\"\n  ></cx-media>\n</a>\n<a\n  [routerLink]=\"\n    { route: 'product', params: product | stripHtml } | cxTranslateUrl\n  \"\n  class=\"cx-product-name\"\n  [innerHTML]=\"product.name\"\n  >{{ product.name }}</a\n>\n\n<div class=\"cx-product-rating\">\n  <cx-star-rating\n    [rating]=\"product?.averageRating\"\n    [disabled]=\"true\"\n  ></cx-star-rating>\n</div>\n<div class=\"cx-product-price-container\">\n  <div class=\"cx-product-price\" aria-label=\"Product price\">\n    {{ product.price.formattedValue }}\n  </div>\n</div>\n\n<cx-add-to-cart\n  *ngIf=\"product.stock.stockLevelStatus !== 'outOfStock'\"\n  [productCode]=\"product.code\"\n></cx-add-to-cart>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-ProductGridItemComponent.propDecorators = {
-    product: [{ type: Input }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ProductListItemComponent {
-}
-ProductListItemComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-product-list-item',
-                template: "<div class=\"row\">\n  <div class=\"col-12 col-md-4\">\n    <a\n      [routerLink]=\"\n        { route: 'product', params: product | stripHtml } | cxTranslateUrl\n      \"\n      class=\"cx-product-image-container\"\n    >\n      <cx-media\n        class=\"cx-product-image\"\n        [container]=\"product.images?.PRIMARY\"\n        format=\"product\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n    </a>\n  </div>\n  <div class=\"col-12 col-md-8\">\n    <a\n      [routerLink]=\"\n        { route: 'product', params: product | stripHtml } | cxTranslateUrl\n      \"\n      class=\"cx-product-name\"\n      [innerHtml]=\"product.name\"\n      >{{ product.name }}</a\n    >\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"cx-product-price\" aria-label=\"Product price\">\n      {{ product.price?.formattedValue }}\n    </div>\n    <div class=\"row\">\n      <div class=\"col-12 col-md-8\">\n        <p class=\"cx-product-summary\" [innerHtml]=\"product.summary\">\n          {{ product.summary }}\n        </p>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <cx-add-to-cart\n          *ngIf=\"product.stock.stockLevelStatus !== 'outOfStock'\"\n          [productCode]=\"product.code\"\n        ></cx-add-to-cart>\n      </div>\n    </div>\n  </div>\n</div>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-ProductListItemComponent.propDecorators = {
-    product: [{ type: Input }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ProductListModule {
-}
-ProductListModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            CMSProductListComponent: { selector: 'cx-product-list' },
-                            SearchResultsListComponent: { selector: 'cx-product-list' },
-                            ProductRefinementComponent: { selector: 'cx-product-facet-navigation' },
-                        },
-                    }))),
-                    RouterModule,
-                    MediaModule,
-                    BootstrapModule,
-                    AddToCartModule,
-                    FormComponentsModule,
-                    PaginationAndSortingModule,
-                    StripHtmlModule,
-                    UrlTranslationModule,
-                    I18nModule,
-                ],
-                declarations: [
-                    ProductListComponent,
-                    ProductFacetNavigationComponent,
-                    ProductListItemComponent,
-                    ProductGridItemComponent,
-                    ProductViewComponent,
-                ],
-                exports: [
-                    ProductListComponent,
-                    ProductListItemComponent,
-                    ProductGridItemComponent,
-                ],
-                entryComponents: [ProductListComponent, ProductFacetNavigationComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class CurrentProductService {
-    /**
-     * @param {?} routingService
-     * @param {?} productService
-     */
-    constructor(routingService, productService) {
-        this.routingService = routingService;
-        this.productService = productService;
-    }
-    /**
-     * @return {?}
-     */
-    getProduct() {
-        return this.routingService.getRouterState().pipe(map(state => state.state.params['productCode']), filter(productCode => !!productCode), switchMap((productCode) => this.productService.get(productCode)));
-    }
-}
-CurrentProductService.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-CurrentProductService.ctorParameters = () => [
-    { type: RoutingService },
-    { type: ProductService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @enum {string} */
-const ProductDetailOutlets = {
-    PAGE: 'PDP.PAGE',
-    SUMMARY: 'PDP.SUMMARY',
-    IMAGES: 'PDP.IMAGES',
-    TITLE: 'PDP.TITLE',
-    RATING: 'PDP.RATING',
-    ADDTOCART: 'PDP.ADDTOCART',
-    PRICE: 'PDP.PRICE',
-    SHARE: 'PDP.SHARE',
-};
-/** @enum {string} */
-const ProductTabsOutlets = {
-    DESCRIPTION: 'PDP.DESCRIPTION',
-    SPECIFICATIONS: 'PDP.SPECIFICATIONS',
-    REVIEWS: 'PDP.REVIEWS',
-    SHIPPING: 'PDP.SHIPPING',
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ProductTabsComponent {
-    /**
-     * @param {?} winRef
-     * @param {?} currentPageService
-     */
-    constructor(winRef, currentPageService) {
-        this.winRef = winRef;
-        this.currentPageService = currentPageService;
-        this.isWritingReview = false;
-        this.activatedElements = [];
-    }
-    /**
-     * @param {?} ref
-     * @return {?}
-     */
-    set initial(ref) {
-        if (ref) {
-            ref.nativeElement.click();
-        }
-    }
-    /**
-     * @return {?}
-     */
-    get outlets() {
-        return ProductTabsComponent.outlets;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.product$ = this.currentPageService.getProduct();
-    }
-    /**
-     * @param {?} event
-     * @param {?} tab
-     * @return {?}
-     */
-    select(event, tab) {
-        if (this.activatedElements.indexOf(tab) === -1) {
-            // remove active class on both header and content panel
-            this.activatedElements.forEach(el => el.classList.remove('active', 'toggled'));
-            this.activatedElements = [(/** @type {?} */ (event.target)), tab];
-            this.activatedElements.forEach(el => el.classList.add('active'));
-            // only scroll if the element is not yet visible
-            if (this.isElementOutViewport(tab)) {
-                tab.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start',
-                    inline: 'nearest',
-                });
-            }
-        }
-        else {
-            this.activatedElements.forEach(el => el.classList.toggle('toggled'));
-        }
-    }
-    /**
-     * @return {?}
-     */
-    openReview() {
-        if (this.reviewHeader.nativeElement) {
-            this.reviewHeader.nativeElement.click();
-        }
-    }
-    /**
-     * @private
-     * @param {?} el
-     * @return {?}
-     */
-    isElementOutViewport(el) {
-        if (!this.winRef.nativeWindow) {
-            return false;
-        }
-        /** @type {?} */
-        const rect = el.getBoundingClientRect();
-        return (rect.bottom < 0 ||
-            rect.right < 0 ||
-            rect.left > this.winRef.nativeWindow.innerWidth ||
-            rect.top > this.winRef.nativeWindow.innerHeight);
-    }
-}
-ProductTabsComponent.outlets = ProductTabsOutlets;
-ProductTabsComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-product-tabs',
-                template: "<div class=\"details\" *ngIf=\"(product$ | async) as product\">\n  <ng-container *cxOutlet=\"outlets.DESCRIPTION\">\n    <h3 #descriptionHeader (click)=\"select($event, description)\">\n      {{ 'productDetails.productDetails' | cxTranslate }}\n    </h3>\n    <div #description>\n      <div class=\"container\" [innerHTML]=\"product?.description\"></div>\n    </div>\n  </ng-container>\n\n  <ng-container *cxOutlet=\"outlets.SPECIFICATIONS\">\n    <h3 (click)=\"select($event, specifications)\">\n      {{ 'productDetails.specification' | cxTranslate }}\n    </h3>\n    <div #specifications>\n      <div class=\"container\">\n        <h2>{{ 'productDetails.specification' | cxTranslate }}</h2>\n        <cx-product-attributes [product]=\"product\"></cx-product-attributes>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-container *cxOutlet=\"outlets.REVIEWS\">\n    <h3 #reviewHeader (click)=\"select($event, reviews)\">\n      {{ 'productDetails.reviews' | cxTranslate }} ({{\n        product?.numberOfReviews\n      }})\n    </h3>\n    <div #reviews>\n      <div class=\"container\">\n        <h2>\n          {{ 'productDetails.reviews' | cxTranslate }} ({{\n            product?.numberOfReviews\n          }})\n        </h2>\n        <cx-product-reviews\n          class=\"container\"\n          [(isWritingReview)]=\"isWritingReview\"\n          [product]=\"product\"\n        ></cx-product-reviews>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-container *cxOutlet=\"outlets.SHIPPING\">\n    <h3 (click)=\"select($event, shipping)\">\n      {{ 'productDetails.shipping' | cxTranslate }}\n    </h3>\n    <div #shipping>\n      <div class=\"container\">\n        <h2>{{ 'productDetails.shipping' | cxTranslate }}</h2>\n        <ng-container\n          [cxComponentWrapper]=\"{\n            flexType: 'CMSTabParagraphComponent',\n            uid: 'deliveryTab'\n          }\"\n        ></ng-container>\n      </div>\n    </div>\n  </ng-container>\n</div>\n"
-            }] }
-];
-/** @nocollapse */
-ProductTabsComponent.ctorParameters = () => [
-    { type: WindowRef },
-    { type: CurrentProductService }
-];
-ProductTabsComponent.propDecorators = {
-    initial: [{ type: ViewChild, args: ['descriptionHeader',] }],
-    reviewHeader: [{ type: ViewChild, args: ['reviewHeader',] }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ProductAttributesComponent {
-}
-ProductAttributesComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-product-attributes',
-                template: "<table *ngFor=\"let class of product?.classifications\">\n  <th>\n    <h3>{{ class.name }}</h3>\n  </th>\n  <tr *ngFor=\"let feature of class.features\">\n    <td>{{ feature.name }}</td>\n    <td>\n      <ul>\n        <li *ngFor=\"let featureValue of feature?.featureValues\">\n          {{ featureValue?.value }}\n        </li>\n      </ul>\n    </td>\n  </tr>\n</table>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-ProductAttributesComponent.propDecorators = {
-    product: [{ type: Input }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ProductReviewsComponent {
-    /**
-     * @param {?} reviewService
-     * @param {?} fb
-     */
-    constructor(reviewService, fb) {
-        this.reviewService = reviewService;
-        this.fb = fb;
-        this.isWritingReviewChange = new EventEmitter();
-        this._isWritingReview = false;
-        // TODO: configurable
-        this.initialMaxListItems = 5;
-    }
-    /**
-     * @return {?}
-     */
-    get isWritingReview() {
-        return this._isWritingReview;
-    }
-    /**
-     * @param {?} val
-     * @return {?}
-     */
-    set isWritingReview(val) {
-        this._isWritingReview = val;
-        this.isWritingReviewChange.emit(this.isWritingReview);
-    }
-    /**
-     * @return {?}
-     */
-    ngOnChanges() {
-        this.maxListItems = this.initialMaxListItems;
-        if (this.product) {
-            this.reviews$ = this.reviewService.getByProductCode(this.product.code);
-        }
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.resetReviewForm();
-    }
-    /**
-     * @return {?}
-     */
-    initiateWriteReview() {
-        this.isWritingReview = true;
-    }
-    /**
-     * @return {?}
-     */
-    cancelWriteReview() {
-        this.isWritingReview = false;
-        this.resetReviewForm();
-    }
-    /**
-     * @return {?}
-     */
-    submitReview() {
-        /** @type {?} */
-        const reviewFormControls = this.reviewForm.controls;
-        /** @type {?} */
-        const review = {
-            headline: reviewFormControls.title.value,
-            comment: reviewFormControls.comment.value,
-            rating: reviewFormControls.rating.value,
-            alias: reviewFormControls.reviewerName.value,
-        };
-        this.reviewService.add(this.product.code, review);
-        this.isWritingReview = false;
-        this.resetReviewForm();
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    resetReviewForm() {
-        this.reviewForm = this.fb.group({
-            title: ['', Validators.required],
-            comment: ['', Validators.required],
-            rating: [0, [Validators.min(1), Validators.max(5)]],
-            reviewerName: '',
-        });
-    }
-}
-ProductReviewsComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-product-reviews',
-                template: "<ng-container *ngIf=\"!isWritingReview; else writeReview\">\n  <div class=\"header\">\n    <h3>{{ 'productReview.overallRating' | cxTranslate }}</h3>\n    <button class=\"btn btn-primary\" (click)=\"initiateWriteReview()\">\n      {{ 'productReview.writeReview' | cxTranslate }}\n    </button>\n    <cx-star-rating\n      class=\"rating\"\n      [rating]=\"product.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n  </div>\n\n  <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n    <ng-container *ngIf=\"(reviews$ | async) as reviews\">\n      <div\n        class=\"review\"\n        tabindex=\"0\"\n        *ngFor=\"let review of (reviews | slice: 0:maxListItems)\"\n      >\n        <div class=\"title\">{{ review.headline }}</div>\n        <cx-star-rating\n          [rating]=\"review.rating\"\n          [disabled]=\"true\"\n        ></cx-star-rating>\n        <div class=\"name\">\n          {{ review.alias ? review.alias : review.principal?.name }}\n        </div>\n        <div class=\"date\">{{ review.date | cxDate }}</div>\n        <div class=\"text\">{{ review.comment }}</div>\n      </div>\n      <div *ngIf=\"reviews.length > initialMaxListItems\">\n        <button\n          class=\"btn btn-primary\"\n          (click)=\"maxListItems = reviews.length\"\n          *ngIf=\"maxListItems === initialMaxListItems\"\n        >\n          {{ 'productReview.more' | cxTranslate }}\n        </button>\n        <button\n          class=\"btn btn-primary\"\n          (click)=\"maxListItems = initialMaxListItems\"\n          *ngIf=\"maxListItems !== initialMaxListItems\"\n        >\n          {{ 'productReview.less' | cxTranslate }}\n        </button>\n      </div>\n    </ng-container>\n  </ng-container>\n</ng-container>\n\n<ng-template #writeReview>\n  <form [formGroup]=\"reviewForm\" (ngSubmit)=\"submitReview()\">\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.reviewTitle' | cxTranslate\n        }}</span>\n        <input type=\"text\" class=\"form-control\" formControlName=\"title\" />\n      </label>\n    </div>\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.writeYourComments' | cxTranslate\n        }}</span>\n        <textarea\n          class=\"form-control\"\n          rows=\"3\"\n          formControlName=\"comment\"\n        ></textarea>\n      </label>\n    </div>\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.rating' | cxTranslate\n        }}</span>\n        <cx-star-rating formControlName=\"rating\" [steps]=\"0.5\"></cx-star-rating>\n      </label>\n    </div>\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.reviewerName' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          formControlName=\"reviewerName\"\n        />\n      </label>\n    </div>\n    <div class=\"form-group row\">\n      <div class=\"col-12 col-md-4\">\n        <button\n          type=\"submit\"\n          class=\"btn btn-block btn-secondary\"\n          (click)=\"cancelWriteReview()\"\n        >\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <button\n          type=\"submit\"\n          class=\"btn btn-block btn-primary\"\n          [ngClass]=\"{ 'submit-btn': reviewForm.valid }\"\n          [disabled]=\"!reviewForm.valid\"\n        >\n          {{ 'common.submit' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </form>\n</ng-template>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-/** @nocollapse */
-ProductReviewsComponent.ctorParameters = () => [
-    { type: ProductReviewService },
-    { type: FormBuilder }
-];
-ProductReviewsComponent.propDecorators = {
-    product: [{ type: Input }],
-    isWritingReview: [{ type: Input }],
-    isWritingReviewChange: [{ type: Output }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ProductReviewsModule {
-}
-ProductReviewsModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    ReactiveFormsModule,
-                    FormsModule,
-                    FormComponentsModule,
-                    I18nModule,
-                ],
-                declarations: [ProductReviewsComponent],
-                exports: [ProductReviewsComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ProductTabsModule {
-}
-ProductTabsModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    RouterModule,
-                    FormsModule,
-                    ReactiveFormsModule,
-                    ComponentsModule,
-                    CartSharedModule,
-                    CmsModule$1,
-                    OutletModule,
-                    ProductReviewsModule,
-                    PageComponentModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            CMSTabParagraphContainer: {
-                                selector: 'cx-product-tabs',
-                            },
-                        },
-                    }))),
-                    I18nModule,
-                ],
-                declarations: [ProductAttributesComponent, ProductTabsComponent],
-                exports: [
-                    ProductAttributesComponent,
-                    ProductReviewsComponent,
-                    ProductTabsComponent,
-                ],
-                entryComponents: [ProductTabsComponent],
-                providers: [ProductService, WindowRef, RoutingService],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class AddressBookComponentService {
-    /**
-     * @param {?} userService
-     */
-    constructor(userService) {
-        this.userService = userService;
-    }
-    /**
-     * @return {?}
-     */
-    getAddresses() {
-        return this.userService.getAddresses();
-    }
-    /**
-     * @return {?}
-     */
-    getAddressesStateLoading() {
-        return this.userService.getAddressesLoading();
-    }
-    /**
-     * @return {?}
-     */
-    getUserId() {
-        return this.userService.get().pipe(map(({ uid }) => uid));
-    }
-    /**
-     * @param {?} userId
-     * @return {?}
-     */
-    loadAddresses(userId) {
-        this.userService.loadAddresses(userId);
-    }
-    /**
-     * @param {?} userId
-     * @param {?} address
-     * @return {?}
-     */
-    addUserAddress(userId, address) {
-        this.userService.addUserAddress(userId, address);
-    }
-    /**
-     * @param {?} userId
-     * @param {?} addressId
-     * @param {?} address
-     * @return {?}
-     */
-    updateUserAddress(userId, addressId, address) {
-        this.userService.updateUserAddress(userId, addressId, address);
-    }
-}
-AddressBookComponentService.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-AddressBookComponentService.ctorParameters = () => [
-    { type: UserService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class AddressBookComponent {
-    /**
-     * @param {?} service
-     */
-    constructor(service) {
-        this.service = service;
-        this.showAddAddressForm = false;
-        this.showEditAddressForm = false;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.addresses$ = this.service.getAddresses();
-        this.addressesStateLoading$ = this.service.getAddressesStateLoading();
-        this.service
-            .getUserId()
-            .pipe(take(1))
-            .subscribe(id => {
-            this.userId = id;
-            this.service.loadAddresses(id);
-        });
-    }
-    /**
-     * @return {?}
-     */
-    addAddressButtonHandle() {
-        this.showEditAddressForm = false;
-        this.showAddAddressForm = true;
-    }
-    /**
-     * @param {?} address
-     * @return {?}
-     */
-    editAddressButtonHandle(address) {
-        this.showAddAddressForm = false;
-        this.showEditAddressForm = true;
-        this.currentAddress = address;
-    }
-    /**
-     * @param {?} address
-     * @return {?}
-     */
-    addAddressSubmit(address) {
-        this.showAddAddressForm = false;
-        this.service.addUserAddress(this.userId, address);
-    }
-    /**
-     * @return {?}
-     */
-    addAddressCancel() {
-        this.showAddAddressForm = false;
-    }
-    /**
-     * @param {?} address
-     * @return {?}
-     */
-    editAddressSubmit(address) {
-        this.showEditAddressForm = false;
-        this.service.updateUserAddress(this.userId, this.currentAddress['id'], address);
-    }
-    /**
-     * @return {?}
-     */
-    editAddressCancel() {
-        this.showEditAddressForm = false;
-    }
-}
-AddressBookComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-address-book',
-                template: "<div class=\"cx-section\">\n  <ng-container\n    *ngIf=\"\n      (addresses$ | async).length &&\n      !(showAddAddressForm || showEditAddressForm)\n    \"\n  >\n    <div class=\"row\">\n      <div class=\"col-md-6\">\n        <button\n          class=\"btn btn-block btn-action\"\n          (click)=\"addAddressButtonHandle()\"\n        >\n          {{ 'addressBook.addNewAddress' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n\n    <div\n      class=\"row cx-address-deck\"\n      *ngIf=\"!(addressesStateLoading$ | async); else loading\"\n    >\n      <div\n        *ngFor=\"let address of (addresses$ | async)\"\n        class=\"col-md-6 cx-address-card\"\n      >\n        <cx-address-card\n          (editEvent)=\"editAddressButtonHandle(address)\"\n          [userId]=\"userId\"\n          [address]=\"address\"\n        ></cx-address-card>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-container *ngIf=\"!(addresses$ | async).length || showAddAddressForm\">\n    <section>\n      <p class=\"cx-section-msg\">\n        {{ 'addressBook.addNewShippingAddress' | cxTranslate }}\n      </p>\n      <cx-address-form\n        class=\"cx-form\"\n        showTitleCode=\"true\"\n        [showCancelBtn]=\"!((addresses$ | async).length === 0)\"\n        actionBtnLabel=\"{{ 'addressBook.addAddress' | cxTranslate }}\"\n        cancelBtnLabel=\"{{ 'addressBook.backToAddressList' | cxTranslate }}\"\n        [setAsDefaultField]=\"!((addresses$ | async).length === 0)\"\n        (submitAddress)=\"addAddressSubmit($event)\"\n        (backToAddress)=\"addAddressCancel()\"\n      ></cx-address-form>\n    </section>\n  </ng-container>\n\n  <ng-container *ngIf=\"showEditAddressForm\">\n    <section>\n      <p class=\"cx-section-msg\">\n        {{ 'addressBook.editShippingAddress' | cxTranslate }}\n      </p>\n      <cx-address-form\n        showTitleCode=\"true\"\n        actionBtnLabel=\"{{ 'addressBook.updateAddress' | cxTranslate }}\"\n        cancelBtnLabel=\"{{ 'addressBook.backToAddressList' | cxTranslate }}\"\n        [addressData]=\"currentAddress\"\n        (submitAddress)=\"editAddressSubmit($event)\"\n        (backToAddress)=\"editAddressCancel()\"\n      ></cx-address-form>\n    </section>\n  </ng-container>\n</div>\n\n<ng-template #loading>\n  <div class=\"col-md-12 cx-address-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n"
-            }] }
-];
-/** @nocollapse */
-AddressBookComponent.ctorParameters = () => [
-    { type: AddressBookComponentService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class AddressCardComponent {
-    /**
-     * @param {?} userService
-     */
-    constructor(userService) {
-        this.userService = userService;
-        this.editEvent = new EventEmitter();
-    }
-    /**
-     * @return {?}
-     */
-    openEditFormEvent() {
-        this.editEvent.emit();
-    }
-    /**
-     * @return {?}
-     */
-    cancelEdit() {
-        this.editMode = false;
-    }
-    /**
-     * @return {?}
-     */
-    setEditMode() {
-        this.editMode = true;
-    }
-    /**
-     * @param {?} addressId
-     * @return {?}
-     */
-    setAddressAsDefault(addressId) {
-        if (this.userId) {
-            this.userService.setAddressAsDefault(this.userId, addressId);
-        }
-    }
-    /**
-     * @param {?} addressId
-     * @return {?}
-     */
-    deleteAddress(addressId) {
-        if (this.userId) {
-            this.userService.deleteUserAddress(this.userId, addressId);
-        }
-    }
-}
-AddressCardComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-address-card',
-                template: "<div class=\"card\">\n  <div class=\"card-header\" *ngIf=\"address?.defaultAddress && !editMode\">\n    &#10003; {{ 'addressCard.default' | cxTranslate }}\n  </div>\n  <div\n    class=\"card-body cx-card-body\"\n    [class.cx-address-card-delete-mode]=\"editMode\"\n  >\n    <div *ngIf=\"editMode\" class=\"cx-address-card-delete-msg\">\n      {{ 'addressBook.areYouSureToDeleteAddress' | cxTranslate }}\n    </div>\n    <div class=\"cx-address-data\">\n      <div class=\"cx-address-card-label-name\">\n        {{ address?.firstName }} {{ address?.lastName }}\n      </div>\n      <div class=\"cx-address-card-label\">{{ address?.line1 }}</div>\n      <div class=\"cx-address-card-label\">{{ address?.line2 }}</div>\n      <div class=\"cx-address-card-label\">\n        {{ address?.town }},\n        <span *ngIf=\"!address?.region?.isocode\">{{\n          address?.country?.isocode\n        }}</span\n        ><span>{{ address?.region?.isocode }}</span>\n      </div>\n      <div class=\"cx-address-card-label\">{{ address?.postalCode }}</div>\n      <div class=\"cx-address-card-label\">{{ address?.phone }}</div>\n    </div>\n\n    <div *ngIf=\"editMode\" class=\"row cx-address-card-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button\n          (click)=\"deleteAddress(address.id)\"\n          class=\"btn btn-block btn-primary\"\n        >\n          {{ 'common.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <div *ngIf=\"!editMode\" class=\"card-actions\">\n      <a\n        *ngIf=\"!address?.defaultAddress\"\n        (click)=\"setAddressAsDefault(address.id)\"\n        class=\"card-link btn-link set-default\"\n        >{{ 'addressCard.setAsDefault' | cxTranslate }}</a\n      >\n      <a (click)=\"openEditFormEvent()\" class=\"card-link btn-link edit\">{{\n        'common.edit' | cxTranslate\n      }}</a>\n      <a (click)=\"setEditMode()\" class=\"card-link btn-link delete\">{{\n        'common.delete' | cxTranslate\n      }}</a>\n    </div>\n  </div>\n</div>\n"
-            }] }
-];
-/** @nocollapse */
-AddressCardComponent.ctorParameters = () => [
-    { type: UserService }
-];
-AddressCardComponent.propDecorators = {
-    userId: [{ type: Input }],
-    address: [{ type: Input }],
-    editEvent: [{ type: Output }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class AddressBookModule {
-}
-AddressBookModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            AccountAddressBookComponent: {
-                                selector: 'cx-address-book',
-                                providers: [
-                                    {
-                                        provide: AddressBookComponentService,
-                                        useClass: AddressBookComponentService,
-                                        deps: [UserService],
-                                    },
-                                ],
-                            },
-                        },
-                    }))),
-                    CardModule,
-                    AddressFormModule,
-                    SpinnerModule,
-                    I18nModule,
-                ],
-                declarations: [AddressBookComponent, AddressCardComponent],
-                exports: [AddressBookComponent, AddressCardComponent],
-                providers: [UserService, AddressBookComponentService],
-                entryComponents: [AddressBookComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class FooterNavigationComponent extends NavigationComponent {
-}
-FooterNavigationComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-footer-navigation',
-                template: "<nav *ngIf=\"(node$ | async) as node\">\n  <div class=\"container\">\n    <div class=\"row\">\n      <div\n        class=\"col-xs-12 col-sm-4 col-md-3 navigation-elements\"\n        *ngFor=\"let child of node?.children\"\n      >\n        <h1>{{ child.title }}</h1>\n        <ul>\n          <li *ngFor=\"let link of child.children\">\n            <cx-generic-link\n              [url]=\"link.url\"\n              [target]=\"link.target === true ? 'blank' : 'self'\"\n              >{{ link.title }}</cx-generic-link\n            >\n          </li>\n        </ul>\n      </div>\n    </div>\n  </div>\n</nav>\n<div class=\"notice\" *ngIf=\"(service.getComponentData() | async) as data\">\n  {{ data.notice }}\n</div>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class FooterNavigationModule {
-}
-FooterNavigationModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    RouterModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            FooterNavigationComponent: {
-                                selector: 'cx-footer-navigation',
-                                providers: [
-                                    {
-                                        provide: NavigationComponentService,
-                                        useClass: NavigationComponentService,
-                                        deps: [CmsService, CmsComponentData],
-                                    },
-                                ],
-                            },
-                        },
-                    }))),
-                    GenericLinkModule,
-                ],
-                declarations: [FooterNavigationComponent],
-                entryComponents: [FooterNavigationComponent],
-                exports: [FooterNavigationComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class LinkComponent {
-    /**
-     * @param {?} component
-     */
-    constructor(component) {
-        this.component = component;
-    }
-}
-LinkComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-link',
-                template: "<a\n  *ngIf=\"(component.data$ | async) as data\"\n  role=\"link\"\n  [routerLink]=\"data.url\"\n  >{{ data.linkName }}</a\n>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-/** @nocollapse */
-LinkComponent.ctorParameters = () => [
-    { type: CmsComponentData }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class LinkModule {
-}
-LinkModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    RouterModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            CMSLinkComponent: { selector: 'cx-link' },
-                        },
-                    }))),
-                ],
-                declarations: [LinkComponent],
-                exports: [LinkComponent],
-                entryComponents: [LinkComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ParagraphComponent {
-    /**
-     * @param {?} component
-     */
-    constructor(component) {
-        this.component = component;
-    }
-}
-ParagraphComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-paragraph',
-                template: "<p *ngIf=\"(component.data$ | async) as data\" [innerHTML]=\"data.content\"></p>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-/** @nocollapse */
-ParagraphComponent.ctorParameters = () => [
-    { type: CmsComponentData }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class CmsParagraphModule {
-}
-CmsParagraphModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            CMSParagraphComponent: { selector: 'cx-paragraph' },
-                        },
-                    }))),
-                ],
-                declarations: [ParagraphComponent],
-                exports: [ParagraphComponent],
-                entryComponents: [ParagraphComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ProductCarouselService {
-    /**
-     * @param {?} component
-     * @param {?} productService
-     */
-    constructor(component, productService) {
-        this.component = component;
-        this.productService = productService;
-        this.MAX_WIDTH = 360;
-        this.MAX_ITEM_SIZE = 4;
-        this.SPEED = 250;
-        this.itemSize$ = of(this.MAX_ITEM_SIZE);
-        this.activeItem$ = of(0);
-        this.activeItemWithDelay$ = of(0);
-    }
-    /**
-     * @return {?}
-     */
-    getActiveItem() {
-        return this.activeItem$;
-    }
-    /**
-     * @return {?}
-     */
-    getActiveItemWithDelay() {
-        return this.activeItemWithDelay$;
-    }
-    /**
-     * @return {?}
-     */
-    getTitle() {
-        return this.title$;
-    }
-    /**
-     * @return {?}
-     */
-    setTitle() {
-        this.title$ = this.component.data$.pipe(map(data => {
-            return data.title;
-        }));
-    }
-    /**
-     * @return {?}
-     */
-    getItems() {
-        return this.items$;
-    }
-    /**
-     * @return {?}
-     */
-    getItemSize() {
-        return this.itemSize$;
-    }
-    /**
-     * Maps the item codes from CMS component to an array of `Product` observables.
-     * @return {?}
-     */
-    setItems() {
-        this.items$ = this.component.data$.pipe(map(data => {
-            /** @type {?} */
-            const productCodes = data.productCodes.split(' ');
-            return productCodes.map(code => this.productService.get(code));
-        }));
-    }
-    /**
-     * The number of items shown in the carousel can be calculated
-     * the standard implemenattions uses the element size to calculate
-     * the items that fit in the carousel.
-     * This method is called in `ngOnInit`.
-     * @param {?} window
-     * @param {?} nativeElement
-     * @return {?}
-     */
-    setItemSize(window, nativeElement) {
-        this.itemSize$ = !window
-            ? of(this.MAX_ITEM_SIZE)
-            : fromEvent(window, 'resize').pipe(map(() => ((/** @type {?} */ (nativeElement))).clientWidth), startWith(((/** @type {?} */ (nativeElement))).clientWidth), 
-            // avoid to much calls
-            debounceTime(100), map((innerWidth) => {
-                /** @type {?} */
-                const itemsPerPage = Math.round(innerWidth / this.MAX_WIDTH);
-                return itemsPerPage > 2 ? this.MAX_ITEM_SIZE : itemsPerPage;
-            }), 
-            // only emit new size when the size changed
-            distinctUntilChanged());
-    }
-    /**
-     * @param {?} newActiveItem
-     * @return {?}
-     */
-    setItemAsActive(newActiveItem) {
-        this.activeItem$ = this.itemSize$.pipe(map(itemSize => this.setItem(newActiveItem, itemSize)));
-    }
-    /**
-     * @return {?}
-     */
-    setPreviousItemAsActive() {
-        this.activeItem$ = this.activeItem$.pipe(withLatestFrom(this.itemSize$), map(([activeItem, itemSize]) => this.setItem(activeItem - itemSize, itemSize)));
-    }
-    /**
-     * @return {?}
-     */
-    setNextItemAsActive() {
-        this.activeItem$ = this.activeItem$.pipe(withLatestFrom(this.itemSize$), map(([activeItem, itemSize]) => this.setItem(activeItem + itemSize, itemSize)));
-    }
-    /**
-     * @private
-     * @param {?} newActiveItem
-     * @param {?} itemSize
-     * @return {?}
-     */
-    setItem(newActiveItem, itemSize) {
-        this.activeItemWithDelay$ = of(newActiveItem).pipe(delay(this.getDelayValue(itemSize)));
-        return newActiveItem;
-    }
-    /**
-     * @private
-     * @param {?} itemSize
-     * @return {?}
-     */
-    getDelayValue(itemSize) {
-        return (itemSize - 1) * this.SPEED;
-    }
-}
-ProductCarouselService.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-ProductCarouselService.ctorParameters = () => [
-    { type: CmsComponentData },
-    { type: ProductService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ProductCarouselComponent {
-    /**
-     * @param {?} winRef
-     * @param {?} el
-     * @param {?} service
-     */
-    constructor(winRef, el, service) {
-        this.el = el;
-        this.service = service;
-        this.window = winRef.nativeWindow;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.service.setTitle();
-        this.service.setItemSize(this.window, this.el.nativeElement);
-        this.service.setItems();
-        this.service.setItemAsActive(0);
-    }
-}
-ProductCarouselComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-product-carousel',
-                template: "<h3 *ngIf=\"(service.getTitle() | async) as title\">{{ title }}</h3>\n\n<ng-container\n  *ngIf=\"{\n    maxItemSize: service.getItemSize() | async,\n    products: service.getItems() | async,\n    activeItem: service.getActiveItemWithDelay() | async,\n    active: service.getActiveItem() | async\n  } as carousel\"\n>\n  <div class=\"cx-carousel\" [ngClass]=\"'size-' + carousel.maxItemSize\">\n    <button\n      class=\"previous\"\n      (click)=\"service.setPreviousItemAsActive()\"\n      [disabled]=\"carousel.activeItem === 0\"\n    ></button>\n\n    <div class=\"groups\">\n      <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n        <div class=\"group\" *ngIf=\"i % carousel.maxItemSize === 0\">\n          <ng-container\n            *ngFor=\"\n              let product$ of (carousel.products\n                | slice: i:i + carousel.maxItemSize)\n            \"\n          >\n            <a\n              *ngIf=\"(product$ | async) as product\"\n              class=\"product\"\n              [class.active]=\"i === carousel.activeItem\"\n              [routerLink]=\"\n                { route: 'product', params: product } | cxTranslateUrl\n              \"\n            >\n              <cx-media [container]=\"product.images?.PRIMARY\" format=\"product\">\n              </cx-media>\n\n              <h4>{{ product.name }}</h4>\n              <div class=\"price\">{{ product.price?.formattedValue }}</div>\n            </a>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      class=\"next\"\n      (click)=\"service.setNextItemAsActive()\"\n      [disabled]=\"\n        carousel.activeItem > carousel.products.length - carousel.maxItemSize\n      \"\n    ></button>\n  </div>\n\n  <div class=\"indicators\">\n    <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n      <button\n        *ngIf=\"i % carousel.maxItemSize === 0\"\n        (click)=\"service.setItemAsActive(i)\"\n        [disabled]=\"i === carousel.activeItem\"\n      ></button>\n    </ng-container></div\n></ng-container>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-/** @nocollapse */
-ProductCarouselComponent.ctorParameters = () => [
-    { type: WindowRef },
-    { type: ElementRef },
-    { type: ProductCarouselService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ProductCarouselModule {
-}
-ProductCarouselModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    RouterModule,
-                    MediaModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            ProductCarouselComponent: {
-                                selector: 'cx-product-carousel',
-                                providers: [
-                                    {
-                                        provide: ProductCarouselService,
-                                        useClass: ProductCarouselService,
-                                        deps: [CmsComponentData, ProductService],
-                                    },
-                                ],
-                            },
-                        },
-                    }))),
-                    UrlTranslationModule,
-                ],
-                declarations: [ProductCarouselComponent],
-                entryComponents: [ProductCarouselComponent],
-                exports: [ProductCarouselComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class SearchBoxComponentService {
-    /**
-     * @param {?} componentData
-     * @param {?} searchService
-     * @param {?} routingService
-     */
-    constructor(componentData, searchService, routingService) {
-        this.componentData = componentData;
-        this.searchService = searchService;
-        this.routingService = routingService;
-        this.defaultConfig = {
-            maxProducts: 2,
-            displaySuggestions: true,
-            maxSuggestions: 5,
-            minCharactersBeforeRequest: 3,
-            displayProducts: true,
-        };
-        this.config$ = of(this.defaultConfig);
-        this.queryParam$ = this.routingService
-            .getRouterState()
-            .pipe(map(routingData => routingData.state.params.query));
-        this.typeahead = (text$) => combineLatest(text$.pipe(debounceTime(300), distinctUntilChanged()), this.config$).pipe(switchMap(([term, config]) => {
-            if (term.length >= config.minCharactersBeforeRequest) {
-                return this.fetch(term, config);
-            }
-            else {
-                return of([]);
-            }
-        }));
-        if (componentData) {
-            this.config$ = merge(this.config$, this.componentData.data$.pipe(map(config => (Object.assign({}, this.defaultConfig, config)))));
-        }
-    }
-    /**
-     * @param {?} query
-     * @return {?}
-     */
-    launchSearchPage(query) {
-        this.routingService.go({
-            route: 'search',
-            params: { query },
-        });
-    }
-    /**
-     * @private
-     * @param {?} text
-     * @param {?} config
-     * @return {?}
-     */
-    fetch(text, config) {
-        this.executeSearch(text, config);
-        /** @type {?} */
-        const suggestions = this.searchService
-            .getSearchSuggestions()
-            .pipe(map(res => res.map(suggestion => suggestion.value)));
-        /** @type {?} */
-        const products = this.searchService
-            .getAuxSearchResults()
-            .pipe(map(res => res.products || []));
-        return combineLatest(suggestions, products).pipe(map(([a, b]) => [...a, ...b]));
-    }
-    /**
-     * @private
-     * @param {?} search
-     * @param {?} config
-     * @return {?}
-     */
-    executeSearch(search, config) {
-        if (config.displayProducts) {
-            this.searchService.searchAuxiliary(search, {
-                pageSize: config.maxProducts,
-            });
-        }
-        if (config.displaySuggestions) {
-            this.searchService.getSuggestions(search, {
-                pageSize: config.maxSuggestions,
-            });
-        }
-    }
-}
-SearchBoxComponentService.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-SearchBoxComponentService.ctorParameters = () => [
-    { type: CmsComponentData, decorators: [{ type: Optional }] },
-    { type: ProductSearchService },
-    { type: RoutingService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class SearchBoxComponent {
-    /**
-     * @param {?} service
-     */
-    constructor(service) {
-        this.service = service;
-        this.iconTypes = ICON_TYPES;
-        this.searchBoxControl = new FormControl();
-        this.queryText$ = new Subject();
-        this.typeahead = (text$) => this.service.typeahead(merge(text$, this.queryText$));
-    }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    set queryText(value) {
-        this.queryText$.next(value);
-        this.searchBoxControl.setValue(value);
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.service.queryParam$.pipe(take(1)).subscribe(query => {
-            if (query) {
-                this.searchBoxControl.setValue(query);
-            }
-        });
-    }
-    /**
-     * @return {?}
-     */
-    submitSearch() {
-        this.service.launchSearchPage(this.searchBoxControl.value);
-    }
-    /**
-     * @param {?} item
-     * @return {?}
-     */
-    selectSuggestion(item) {
-        if (typeof item.item === 'string') {
-            this.searchBoxControl.setValue(item.item);
-            this.submitSearch();
-        }
-        else {
-            item.preventDefault();
-        }
-    }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    onKey(event) {
-        if (event.key === 'Enter') {
-            this.service.launchSearchPage(this.searchBoxControl.value);
-        }
-    }
-    /**
-     * @return {?}
-     */
-    toggleMobileSearchInput() {
-        this.isMobileSearchVisible = !this.isMobileSearchVisible;
-    }
-}
-SearchBoxComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-searchbox',
-                template: "<form class=\"cx-form\">\n  <div class=\"cx-form-group form-group\">\n    <!-- searchbox input -->\n    <input\n      class=\"cx-input form-control dropdown-menu-toggle\"\n      [ngClass]=\"{ 'show-mobile': isMobileSearchVisible }\"\n      type=\"text\"\n      placeholder=\"{{ 'searchBox.searchHere' | cxTranslate }}\"\n      aria-label=\"search\"\n      [ngbTypeahead]=\"typeahead\"\n      [resultTemplate]=\"rt\"\n      [formControl]=\"searchBoxControl\"\n      (keyup)=\"onKey($event)\"\n      (selectItem)=\"selectSuggestion($event)\"\n    />\n\n    <!-- searchbox button desktop -->\n    <button\n      class=\"cx-button cx-button-desktop\"\n      type=\"submit\"\n      aria-label=\"Submit\"\n      (click)=\"submitSearch()\"\n      [disabled]=\"!searchBoxControl?.value\"\n    >\n      <cx-icon [type]=\"iconTypes.SEARCH\"></cx-icon>\n    </button>\n\n    <!-- searchbox button mobile -->\n    <button\n      class=\"cx-button cx-button-mobile\"\n      type=\"button\"\n      aria-label=\"Search\"\n      (click)=\"toggleMobileSearchInput()\"\n    >\n      <cx-icon [type]=\"iconTypes.SEARCH\"></cx-icon>\n    </button>\n\n    <!-- searchbox results -->\n    <ng-template #rt let-suggestion=\"result\">\n      <div\n        *ngIf=\"!suggestion.code; else productView\"\n        class=\"cx-dropdown-content\"\n      >\n        {{ suggestion }}\n      </div>\n      <ng-template #productView>\n        <div\n          [routerLink]=\"\n            {\n              route: 'product',\n              params: suggestion | stripHtml\n            } | cxTranslateUrl\n          \"\n          class=\"cx-product\"\n        >\n          <cx-media\n            [container]=\"suggestion.images?.PRIMARY\"\n            format=\"product\"\n            [alt]=\"suggestion.summary\"\n          ></cx-media>\n          <div [innerHtml]=\"suggestion.name\" class=\"cx-product-name\">\n            {{ suggestion.name }}\n          </div>\n          <div class=\"cx-product-price\">\n            {{ suggestion.price.formattedValue }}\n          </div>\n        </div>\n      </ng-template>\n    </ng-template>\n  </div>\n</form>\n",
-                encapsulation: ViewEncapsulation.None,
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-/** @nocollapse */
-SearchBoxComponent.ctorParameters = () => [
-    { type: SearchBoxComponentService }
-];
-SearchBoxComponent.propDecorators = {
-    queryText: [{ type: Input, args: ['queryText',] }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class SearchBoxModule {
-}
-SearchBoxModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    BootstrapModule,
-                    FormsModule,
-                    RouterModule,
-                    ReactiveFormsModule,
-                    MediaModule,
-                    ProductModule,
-                    StripHtmlModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            SearchBoxComponent: {
-                                selector: 'cx-searchbox',
-                                providers: [
-                                    {
-                                        provide: SearchBoxComponentService,
-                                        useClass: SearchBoxComponentService,
-                                        deps: [CmsComponentData, ProductSearchService, RoutingService],
-                                    },
-                                ],
-                            },
-                        },
-                    }))),
-                    IconModule,
-                    UrlTranslationModule,
-                    I18nModule,
-                ],
-                declarations: [SearchBoxComponent],
-                entryComponents: [SearchBoxComponent],
-                exports: [SearchBoxComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class CmsLibModule {
-}
-CmsLibModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    SkipLinkModule,
-                    HamburgerMenuModule,
-                    CmsParagraphModule,
-                    LinkModule,
-                    BannerModule,
-                    CategoryNavigationModule,
-                    NavigationModule,
-                    FooterNavigationModule,
-                    BreadcrumbModule,
-                    ProductCarouselModule,
-                    SearchBoxModule,
-                    SiteContextSelectorModule,
-                    AddressBookModule,
-                    OrderHistoryModule,
-                    ProductListModule,
-                    ProductTabsModule,
-                    OrderDetailsModule,
-                    PaymentMethodsModule,
-                    UpdateEmailModule,
-                    UpdatePasswordModule,
-                    UpdateProfileModule,
-                    CartComponentModule,
-                    CloseAccountModule,
-                ],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-// import { AbstractProductComponent } from '../abstract-product-component';
-class ProductReferencesComponent {
-} /*extends AbstractProductComponent {
-
-    @Input() productCode;
-
-    productCodes: Array<String> = [];
-
-    protected fetchData() {
-        // load the product data by context parameters
-        if (this.contextParameters.productCode) {
-            this.productLoader.loadReferences(this.contextParameters.productCode);
-            this.productLoader.getSubscription(this.contextParameters.productCode + 'references').subscribe((refData) => {
-                if (refData) {
-                    this.createCodeList(refData);
-                    this.cd.detectChanges();
-                }
-            });
-        }
-        super.fetchData();
-    }
-
-    createCodeList(references) {
-        if (!this.component || !this.component.productReferenceTypes || !references[this.component.productReferenceTypes]) {
-            return;
-        }
-        references[this.component.productReferenceTypes].forEach((item, index) => {
-            if (!this.component.maximumNumberProducts || index < this.component.maximumNumberProducts) {
-                this.productCodes.push(item.target.code);
-            }
-        });
-    }
-}*/
-ProductReferencesComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-product-references',
-                template: "",
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                styles: [""]
-            }] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ProductReferencesModule {
-}
-ProductReferencesModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    RouterModule,
-                    // MediaModule,
-                    ProductCarouselModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            ProductReferencesComponent: { selector: 'cx-product-references' },
-                        },
-                    }))),
-                ],
-                declarations: [ProductReferencesComponent],
-                entryComponents: [ProductReferencesComponent],
-                exports: [ProductReferencesComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-// import { AbstractProductComponent } from '../abstract-product-component';
-class TabParagraphContainerComponent {
-}
-TabParagraphContainerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-tab-paragraph-container',
-                template: "<!--\n  <p #tabContent [innerHTML]=\"model?.content\">\n  </p>\n-->\n",
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                styles: [""]
-            }] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class TabParagraphContainerModule {
-}
-TabParagraphContainerModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            CMSTabParagraphComponent: { selector: 'cx-tab-paragraph-container' },
-                        },
-                    }))),
-                ],
-                declarations: [TabParagraphContainerComponent],
-                entryComponents: [TabParagraphContainerComponent],
-                exports: [TabParagraphContainerComponent],
             },] }
 ];
 
@@ -10389,1038 +11416,120 @@ CmsRouteModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class OrderModule {
+/**
+ * @return {?}
+ */
+function provideConfigFromMetaTags() {
+    return [
+        provideConfigFactory(occServerConfigFromMetaTagFactory, [Meta]),
+        provideConfigFactory(mediaServerConfigFromMetaTagFactory, [Meta]),
+    ];
 }
-OrderModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [OrderHistoryModule, OrderDetailsModule],
-            },] }
-];
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class OccModule {
-}
-OccModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [CommonModule, HttpClientModule],
-                providers: [
-                    OccUserService,
-                    OccMiscsService,
-                    OccOrderService,
-                    { provide: OccConfig, useExisting: Config },
-                ],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ProductModule$1 {
-}
-ProductModule$1.decorators = [
-    { type: NgModule, args: [{
-                imports: [CommonModule, RouterModule, MediaModule, CmsModule$1],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ProductDetailsComponent {
-    /**
-     * @param {?} currentPageService
-     */
-    constructor(currentPageService) {
-        this.currentPageService = currentPageService;
-    }
-    /**
-     * @return {?}
-     */
-    get outlets() {
-        return ProductDetailsComponent.outlets;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.product$ = this.currentPageService.getProduct();
-    }
-}
-ProductDetailsComponent.outlets = ProductDetailOutlets;
-ProductDetailsComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-product-details',
-                template: "<ng-container *ngIf=\"(product$ | async) as product\">\n  <ng-container *cxOutlet=\"outlets.PAGE\">\n    <ng-container *cxOutlet=\"outlets.SUMMARY\">\n      <cx-product-summary class=\"container\" [product]=\"product\">\n        <cx-product-images [product]=\"product\"></cx-product-images>\n      </cx-product-summary>\n    </ng-container> </ng-container\n></ng-container>\n"
-            }] }
-];
-/** @nocollapse */
-ProductDetailsComponent.ctorParameters = () => [
-    { type: CurrentProductService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-const WAITING_CLASS = 'waiting';
-class ProductImagesComponent {
-    constructor() {
-        this.outlets = ProductDetailOutlets;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnChanges() {
-        if (this.product && this.product.images) {
-            this.mainImageContainer = this.product.images.PRIMARY;
-        }
-    }
-    /**
-     * @param {?} event
-     * @param {?} imageContainer
-     * @return {?}
-     */
-    showImage(event, imageContainer) {
-        if (this.mainImageContainer === imageContainer) {
-            return;
-        }
-        this.startWaiting((/** @type {?} */ (event.target)));
-        this.mainImageContainer = imageContainer;
-    }
-    /**
-     * @param {?} imageContainer
-     * @return {?}
-     */
-    isMainImageContainer(imageContainer) {
-        return (this.mainImageContainer.zoom &&
-            imageContainer.zoom &&
-            imageContainer.zoom.url === this.mainImageContainer.zoom.url);
-    }
-    /**
-     * @return {?}
-     */
-    loadHandler() {
-        this.clearWaitList();
-    }
-    /**
-     * @private
-     * @param {?} el
-     * @return {?}
-     */
-    startWaiting(el) {
-        this.clearWaitList();
-        el.classList.add(WAITING_CLASS);
-        this.waiting = el;
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    clearWaitList() {
-        if (this.waiting) {
-            this.waiting.classList.remove(WAITING_CLASS);
-            delete this.waiting;
-        }
-    }
-}
-ProductImagesComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-product-images',
-                template: "<ng-container *ngIf=\"product\">\n  <ng-container *cxOutlet=\"outlets.IMAGES\">\n    <cx-media\n      [container]=\"mainImageContainer\"\n      format=\"zoom\"\n      (loaded)=\"loadHandler()\"\n    >\n    </cx-media>\n\n    <ng-container *ngIf=\"product.images?.GALLERY.length > 1\">\n      <div class=\"thumbs\">\n        <cx-media\n          *ngFor=\"let image of product.images.GALLERY\"\n          [container]=\"image\"\n          format=\"thumbnail\"\n          (focus)=\"showImage($event, image)\"\n          tabindex=\"0\"\n          [class.active]=\"isMainImageContainer(image)\"\n        >\n        </cx-media>\n      </div>\n    </ng-container>\n  </ng-container>\n</ng-container>\n"
-            }] }
-];
-ProductImagesComponent.propDecorators = {
-    product: [{ type: Input }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ProductSummaryComponent {
-    /**
-     * @param {?} translatePipe
-     */
-    constructor(translatePipe) {
-        this.translatePipe = translatePipe;
-        this.itemCount = 1;
-    }
-    /**
-     * @return {?}
-     */
-    get outlets() {
-        return ProductSummaryComponent.outlets;
-    }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    updateCount(value) {
-        this.itemCount = value;
-    }
-    /**
-     * @return {?}
-     */
-    get hasStock() {
-        return (this.product &&
-            this.product.stock &&
-            (this.product.stock.stockLevel > 0 ||
-                this.product.stock.stockLevelStatus === 'inStock'));
-    }
-    // NOTE: Does not currently exists as its own component
-    // but part of tabs component. This is likely to change in refactor.
-    /**
-     * @private
-     * @return {?}
-     */
-    getReviewsComponent() {
-        return document.querySelector('cx-product-reviews');
-    }
-    // Get Tabs Component if exists on page
-    /**
-     * @private
-     * @return {?}
-     */
-    getTabsComponent() {
-        return document.querySelector('cx-product-tabs');
-    }
-    // Get Tab by label if exists on page
-    /**
-     * @param {?} label
-     * @param {?} tabsComponent
-     * @return {?}
-     */
-    getTabByLabel(label, tabsComponent) {
-        if (tabsComponent) {
-            // NOTE: Reads through h3 tags to click on correct tab
-            // There may be a better way of doing this now/after refactor
-            /** @type {?} */
-            const h3Elements = tabsComponent.getElementsByTagName('h3');
-            // Look through h3 tab elements until finding tab with label
-            for (const h3Element of Array.from(h3Elements)) {
-                if (h3Element.innerHTML.indexOf(label) > -1) {
-                    return h3Element;
-                }
-            }
-        }
-    }
-    // Click to activate tab if not already active
-    /**
-     * @param {?} tab
-     * @return {?}
-     */
-    clickTabIfInactive(tab) {
-        if (!tab.classList.contains('active') ||
-            tab.classList.contains('toggled')) {
-            tab.click();
-        }
-    }
-    // Scroll to views component on page and click "Reviews" tab
-    /**
-     * @return {?}
-     */
-    showReviews() {
-        // Use translated label for Reviews tab reference
-        /** @type {?} */
-        const reviewsTabLabel = this.translatePipe.transform('productDetails.label.reviews');
-        /** @type {?} */
-        const tabsComponent = this.getTabsComponent();
-        /** @type {?} */
-        const reviewsTab = this.getTabByLabel(reviewsTabLabel, tabsComponent);
-        /** @type {?} */
-        const reviewsComponent = this.getReviewsComponent();
-        if (reviewsTab && reviewsComponent) {
-            reviewsComponent.scrollIntoView();
-            this.clickTabIfInactive(reviewsTab);
-        }
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.reviewsTabAvailable = !!this.getReviewsComponent();
-    }
-}
-ProductSummaryComponent.outlets = ProductDetailOutlets;
-ProductSummaryComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-product-summary',
-                template: "<ng-container *cxOutlet=\"outlets.TITLE\">\n  <div class=\"name\">{{ product?.name }}</div>\n  <div class=\"code\">\n    {{ 'productSummary.id' | cxTranslate }} {{ product?.code }}\n  </div>\n</ng-container>\n\n<div class=\"images\"><ng-content></ng-content></div>\n\n<ng-container *cxOutlet=\"outlets.RATING\">\n  <div class=\"rating\">\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"count\">({{ product?.numberOfReviews }})</div>\n    <a class=\"btn-link\" *ngIf=\"reviewsTabAvailable\" (click)=\"showReviews()\">{{\n      'productSummary.showReviews' | cxTranslate\n    }}</a>\n  </div>\n</ng-container>\n\n<ng-container *cxOutlet=\"outlets.PRICE\">\n  <div class=\"price\" aria-label=\"new item price\">\n    {{ product?.price?.formattedValue }}\n  </div>\n</ng-container>\n\n<div class=\"description\"><p [innerHTML]=\"product?.summary\"></p></div>\n\n<ng-container *cxOutlet=\"outlets.ADDTOCART\">\n  <div class=\"quantity\">\n    <label>{{ 'productSummary.quantity' | cxTranslate }}</label>\n    <cx-item-counter\n      isValueChangeable=\"true\"\n      [min]=\"1\"\n      [max]=\"product.stock?.stockLevel || 1000\"\n      *ngIf=\"\n        product?.stock?.stockLevel > 0 ||\n        product?.stock?.stockLevelStatus === 'inStock'\n      \"\n      (update)=\"updateCount($event)\"\n    ></cx-item-counter>\n    <span class=\"info\">{{\n      hasStock\n        ? ('productSummary.inStock' | cxTranslate)\n        : ('productSummary.outOfStock' | cxTranslate)\n    }}</span>\n  </div>\n  <cx-add-to-cart\n    *ngIf=\"product?.stock?.stockLevelStatus !== 'outOfStock'\"\n    [quantity]=\"itemCount\"\n    [productCode]=\"product?.code\"\n    [maxQuantity]=\"product.stock.stockLevel\"\n  ></cx-add-to-cart>\n</ng-container>\n\n<!-- @TODO: Temp. Comment out share link while not in use by CMS -->\n<!-- <ng-container *cxOutlet=\"outlets.SHARE\">\n  <div>\n    <a href=\"#\" class=\"share btn-link\">\n      {{ 'productSummary.share' | cxTranslate }}\n    </a>\n  </div>\n</ng-container> -->\n",
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                providers: [TranslatePipe]
-            }] }
-];
-/** @nocollapse */
-ProductSummaryComponent.ctorParameters = () => [
-    { type: TranslatePipe }
-];
-ProductSummaryComponent.propDecorators = {
-    product: [{ type: Input }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ProductDetailsModule {
-}
-ProductDetailsModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    RouterModule,
-                    FormsModule,
-                    ReactiveFormsModule,
-                    ComponentsModule,
-                    CartSharedModule,
-                    CmsModule$1,
-                    AddToCartModule,
-                    OutletModule,
-                    I18nModule,
-                ],
-                declarations: [
-                    ProductDetailsComponent,
-                    ProductSummaryComponent,
-                    ProductImagesComponent,
-                ],
-                exports: [
-                    ProductDetailsComponent,
-                    ProductSummaryComponent,
-                    ProductImagesComponent,
-                ],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class StoreFinderSearchComponent {
-    /**
-     * @param {?} routing
-     * @param {?} route
-     */
-    constructor(routing, route) {
-        this.routing = routing;
-        this.route = route;
-        this.searchBox = new FormControl();
-    }
-    /**
-     * @param {?} address
-     * @return {?}
-     */
-    findStores(address) {
-        this.routing.go(['find'], { query: address }, { relativeTo: this.route });
-    }
-    /**
-     * @return {?}
-     */
-    viewStoresWithMyLoc() {
-        this.routing.go(['find'], { useMyLocation: true }, { relativeTo: this.route });
-    }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    onKey(event) {
-        if (event.key === 'Enter') {
-            this.findStores(this.searchBox.value);
-        }
-    }
-}
-StoreFinderSearchComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-store-finder-search',
-                template: "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-6 offset-md-3\">\n      <div class=\"form-group\">\n        <input\n          #queryInput\n          [formControl]=\"searchBox\"\n          (keyup)=\"onKey($event)\"\n          type=\"text\"\n          class=\"form-control\"\n          placeholder=\"{{ 'storeFinder.searchBox' | cxTranslate }}\"\n          required\n        />\n      </div>\n      <button\n        type=\"button\"\n        class=\"btn btn-primary btn-block cx-find-store\"\n        [routerLink]=\"['find']\"\n        [queryParams]=\"{ query: queryInput.value }\"\n      >\n        {{ 'storeFinder.findStore' | cxTranslate }}\n      </button>\n\n      <div class=\"cx-bottom-links\">\n        <button (click)=\"viewStoresWithMyLoc()\" class=\"cx-link btn-link\">\n          {{ 'storeFinder.useMyLocation' | cxTranslate }}\n        </button>\n        |\n        <a [routerLink]=\"['view-all']\" class=\"cx-link btn-link\">{{\n          'storeFinder.viewAllStores' | cxTranslate\n        }}</a>\n      </div>\n    </div>\n  </div>\n</div>\n"
-            }] }
-];
-/** @nocollapse */
-StoreFinderSearchComponent.ctorParameters = () => [
-    { type: RoutingService },
-    { type: ActivatedRoute }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class StoreFinderMapComponent {
-    /**
-     * @param {?} googleMapRendererService
-     */
-    constructor(googleMapRendererService) {
-        this.googleMapRendererService = googleMapRendererService;
-        this.selectedStoreItem = new EventEmitter();
-    }
-    /**
-     * @param {?} changes
-     * @return {?}
-     */
-    ngOnChanges(changes) {
-        if (changes.locations && this.locations) {
-            this.googleMapRendererService.renderMap(this.mapElement.nativeElement, this.locations, markerIndex => {
-                this.selectStoreItemClickHandle(markerIndex);
-            });
-        }
-    }
-    /**
-     * Sets the center of the map to the given location
-     * @param {?} latitude latitude of the new center
-     * @param {?} longitude longitude of the new center
-     * @return {?}
-     */
-    centerMap(latitude, longitude) {
-        this.googleMapRendererService.centerMap(latitude, longitude);
-    }
-    /**
-     * @private
-     * @param {?} markerIndex
-     * @return {?}
-     */
-    selectStoreItemClickHandle(markerIndex) {
-        this.selectedStoreItem.emit(markerIndex);
-    }
-}
-StoreFinderMapComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-store-finder-map',
-                template: "<div #mapElement class=\"cx-store-map\"></div>\n"
-            }] }
-];
-/** @nocollapse */
-StoreFinderMapComponent.ctorParameters = () => [
-    { type: GoogleMapRendererService }
-];
-StoreFinderMapComponent.propDecorators = {
-    mapElement: [{ type: ViewChild, args: ['mapElement',] }],
-    locations: [{ type: Input }],
-    selectedStoreItem: [{ type: Output }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class StoreFinderListComponent {
-    /**
-     * @param {?} storeDataService
-     * @param {?} document
-     */
-    constructor(storeDataService, document) {
-        this.storeDataService = storeDataService;
-        this.document = document;
-        this.selectedStore = 0;
-    }
-    /**
-     * @param {?} index
-     * @return {?}
-     */
-    centerStoreOnMapByIndex(index) {
-        this.selectedStore = index;
-        this.storeMap.centerMap(this.storeDataService.getStoreLatitude(this.locations.stores[index]), this.storeDataService.getStoreLongitude(this.locations.stores[index]));
-    }
-    /**
-     * @param {?} index
-     * @return {?}
-     */
-    selectStoreItemList(index) {
-        this.selectedStore = index;
-        /** @type {?} */
-        const storeListItem = this.document.getElementById('item-' + index);
-        storeListItem.scrollIntoView();
-    }
-}
-StoreFinderListComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-store-finder-list',
-                template: "<ng-container *ngIf=\"locations\">\n  <div class=\"container\">\n    <div class=\"row\" *ngIf=\"locations?.pagination\">\n      <div class=\"col-md-12\">\n        <cx-store-finder-pagination-details\n          [pagination]=\"locations.pagination\"\n        ></cx-store-finder-pagination-details>\n      </div>\n    </div>\n    <div *ngIf=\"locations?.stores\" class=\"row cx-columns\">\n      <div class=\"col-md-4 cx-address-col\">\n        <ol class=\"cx-list\">\n          <li\n            *ngFor=\"let location of locations?.stores; let i = index\"\n            id=\"{{ 'item-' + i }}\"\n            [ngClass]=\"{\n              'cx-selected-item': selectedStore === i\n            }\"\n            class=\"cx-list-items cx-ordered\"\n          >\n            <cx-store-finder-list-item\n              [location]=\"location\"\n              [locationIndex]=\"i\"\n              (storeItemClick)=\"centerStoreOnMapByIndex($event)\"\n            ></cx-store-finder-list-item>\n          </li>\n        </ol>\n      </div>\n      <div class=\"col-md-8 cx-map-col\">\n        <cx-store-finder-map\n          #storeMap\n          [locations]=\"locations.stores\"\n          (selectedStoreItem)=\"selectStoreItemList($event)\"\n        ></cx-store-finder-map>\n      </div>\n    </div>\n\n    <!-- mobile tabs for column set only -->\n\n    <div *ngIf=\"locations?.stores\" class=\"cx-columns-mobile\">\n      <ngb-tabset justify=\"center\">\n        <ngb-tab>\n          <ng-template ngbTabTitle>\n            {{ 'storeFinder.listView' | cxTranslate }}\n          </ng-template>\n          <ng-template ngbTabContent>\n            <div class=\"cx-address-col\">\n              <ol class=\"cx-list\">\n                <li\n                  *ngFor=\"let location of locations?.stores; let i = index\"\n                  id=\"{{ 'item-' + i }}\"\n                  [ngClass]=\"{\n                    'cx-selected-item': selectedStore === i\n                  }\"\n                  class=\"cx-list-items cx-ordered\"\n                >\n                  <cx-store-finder-list-item\n                    [location]=\"location\"\n                    [locationIndex]=\"i\"\n                    (storeItemClick)=\"centerStoreOnMapByIndex($event)\"\n                  ></cx-store-finder-list-item>\n                </li>\n              </ol>\n            </div>\n          </ng-template>\n        </ngb-tab>\n        <ngb-tab>\n          <ng-template ngbTabTitle>\n            {{ 'storeFinder.mapView' | cxTranslate }}\n          </ng-template>\n          <ng-template ngbTabContent>\n            <div class=\"cx-map-col\">\n              <cx-store-finder-map\n                #storeMap\n                [locations]=\"locations.stores\"\n                (selectedStoreItem)=\"selectStoreItemList($event)\"\n              ></cx-store-finder-map>\n            </div>\n          </ng-template>\n        </ngb-tab>\n      </ngb-tabset>\n    </div>\n\n    <!-- mobile tabs end -->\n\n    <div *ngIf=\"!locations?.stores\" class=\"row\">\n      <div class=\"col-md-12 cx-not-found\">\n        {{ 'storeFinder.noStoreFound' | cxTranslate }}\n      </div>\n    </div>\n  </div>\n</ng-container>\n",
-                styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-columns{display:var(--cx-display,none)}@media (min-width:768px){.cx-columns{display:var(--cx-display,flex);height:var(--cx-height,70vh)}}.cx-columns-mobile{display:var(--cx-display,block)}.cx-address-col{height:var(--cx-height,100%)}@media (min-width:768px){.cx-columns-mobile{display:var(--cx-display,none)}.cx-address-col{height:var(--cx-height,100%);overflow-y:var(--cx-overflow-y,scroll);padding:var(--cx-padding,inherit inherit inherit 0)}.cx-map-col{height:var(--cx-height,100%);overflow-y:var(--cx-overflow-y,scroll)}}.cx-list{font-size:var(--cx-font-size,1rem);font-weight:var(--cx-g-font-weight-semi);line-height:var(--cx-line-height,1.22222);list-style:var(--cx-list-style,none);padding:var(--cx-padding,inherit inherit inherit 0)}.cx-list-items{border-width:var(--cx-border-width,1px 0 0 0);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light));padding:var(--cx-padding,1rem 1.5rem)}.cx-list-items:hover{background-color:var(--cx-background-color,var(--cx-g-color-background))}.cx-list-items.cx-selected-item,.cx-list-items.cx-selected-item:hover{background-color:var(--cx-background-color,var(--cx-g-color-light))}.cx-ordered{counter-increment:var(--cx-counter-increment,resultCount)}.cx-ordered:before{content:var(--cx-content,counter(resultCount,decimal));position:var(--cx-position,absolute);left:var(--cx-left,1rem)}.cx-not-found{font-size:var(--cx-font-size,1.125rem);font-weight:var(--cx-g-font-weight-bold);line-height:var(--cx-line-height,1.22222);text-align:var(--cx-text-align,center);padding:var(--cx-padding,3rem 0)}"]
-            }] }
-];
-/** @nocollapse */
-StoreFinderListComponent.ctorParameters = () => [
-    { type: StoreDataService },
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
-];
-StoreFinderListComponent.propDecorators = {
-    locations: [{ type: Input }],
-    storeMap: [{ type: ViewChild, args: ['storeMap',] }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class AbstractStoreItemComponent {
-    /**
-     * @param {?} storeDataService
-     */
-    constructor(storeDataService) {
-        this.storeDataService = storeDataService;
-        this.current_date = new Date();
-    }
-    /**
-     * @param {?} location
-     * @return {?}
-     */
-    getDirections(location) {
-        /** @type {?} */
-        const google_map_url = 'https://www.google.com/maps/dir/Current+Location/';
-        /** @type {?} */
-        const latitude = this.storeDataService.getStoreLatitude(location);
-        /** @type {?} */
-        const longitude = this.storeDataService.getStoreLongitude(location);
-        return google_map_url + latitude + ',' + longitude;
-    }
-    /**
-     * @param {?} location
-     * @return {?}
-     */
-    getClosingTime(location) {
-        return this.storeDataService.getStoreClosingTime(location, this.current_date);
-    }
-    /**
-     * @param {?} location
-     * @return {?}
-     */
-    getOpeningTime(location) {
-        return this.storeDataService.getStoreOpeningTime(location, this.current_date);
-    }
-    /**
-     * @param {?} location
-     * @return {?}
-     */
-    isOpen(location) {
-        return this.storeDataService.isStoreOpen(location, this.current_date);
-    }
-}
-AbstractStoreItemComponent.propDecorators = {
-    location: [{ type: Input }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class StoreFinderListItemComponent extends AbstractStoreItemComponent {
-    /**
-     * @param {?} storeDataService
-     */
-    constructor(storeDataService) {
-        super(storeDataService);
-        this.storeDataService = storeDataService;
-        this.locationIndex = null;
-        this.storeItemClick = new EventEmitter();
-    }
-    /**
-     * @return {?}
-     */
-    handleStoreItemClick() {
-        if (this.locationIndex !== null) {
-            this.storeItemClick.emit(this.locationIndex);
-        }
-    }
-}
-StoreFinderListItemComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-store-finder-list-item',
-                template: "<ng-container>\n  <div (click)=\"handleStoreItemClick()\">\n    <div class=\"cx-store-name\">\n      {{ location.displayName }}\n    </div>\n    <div class=\"cx-store-address\" *ngIf=\"location.address\">\n      {{ location.address.line1 }}<br />\n      {{ location.address.town }},\n      {{ location.address.region ? location.address.region.name + ',' : '' }}\n      {{ location.address.postalCode }}\n    </div>\n    <div *ngIf=\"location.openingHours\">\n      <div *ngIf=\"isOpen(location)\" class=\"cx-store-open\">\n        {{ getClosingTime(location) | cxDate: 'EEE' }}:\n        {{ 'storeFinder.openUntil' | cxTranslate }}\n        {{ getClosingTime(location) | cxDate: 'shortTime' }}\n      </div>\n      <div *ngIf=\"!isOpen(location)\" class=\"cx-store-closed\">\n        {{ getClosingTime(location) | cxDate: 'EEE' }}:\n        {{ 'storeFinder.closed' | cxTranslate }}\n      </div>\n    </div>\n    <a\n      href=\"{{ getDirections(location) }}\"\n      target=\"_blank\"\n      class=\"btn btn-sm btn-action btn-block cx-button\"\n      >{{ 'storeFinder.getDirections' | cxTranslate }}</a\n    >\n  </div>\n</ng-container>\n"
-            }] }
-];
-/** @nocollapse */
-StoreFinderListItemComponent.ctorParameters = () => [
-    { type: StoreDataService }
-];
-StoreFinderListItemComponent.propDecorators = {
-    locationIndex: [{ type: Input }],
-    storeItemClick: [{ type: Output }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class StoreFinderStoreDescriptionComponent extends AbstractStoreItemComponent {
-    /**
-     * @param {?} storeDataService
-     * @param {?} storeFinderService
-     * @param {?} route
-     */
-    constructor(storeDataService, storeFinderService, route) {
-        super(storeDataService);
-        this.storeDataService = storeDataService;
-        this.storeFinderService = storeFinderService;
-        this.route = route;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.requestStoresData();
-        this.location$ = this.storeFinderService.getFindStoresEntities();
-        this.isLoading$ = this.storeFinderService.getStoresLoading();
-    }
-    /**
-     * @return {?}
-     */
-    requestStoresData() {
-        /** @type {?} */
-        const storeId = this.route.snapshot.params.store;
-        this.storeFinderService.viewStoreById(storeId);
-    }
-}
-StoreFinderStoreDescriptionComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-store-finder-store-description',
-                template: "<div\n  class=\"container\"\n  *ngIf=\"!(isLoading$ | async) && (location$ | async) as location; else loading\"\n>\n  <div class=\"row\">\n    <article class=\"cx-store col-lg-4\">\n      <h2>{{ location.displayName }}</h2>\n\n      <p *ngIf=\"location.address\" class=\"storeAddress\">\n        {{ location.address.line1 }} <br />\n        {{ location.address.town + ',' }}\n        {{ location.address.region ? location.address.region.name + ',' : '' }}\n        {{ location.address.postalCode }}\n      </p>\n\n      <section class=\"cx-contact\">\n        <ul class=\"cx-list\">\n          <li class=\"cx-item\">\n            <a\n              class=\"cx-link\"\n              [href]=\"getDirections(location)\"\n              target=\"_blank\"\n              >{{ 'storeFinder.getDirections' | cxTranslate }}</a\n            >\n          </li>\n          <li class=\"cx-item\">\n            {{ 'storeFinder.call' | cxTranslate }}\n            {{ location.address?.phone }}\n          </li>\n          <li class=\"cx-item\">\n            <a class=\"cx-link\" [routerLink]=\"['/contact']\">{{\n              'storeFinder.contactUs' | cxTranslate\n            }}</a>\n          </li>\n        </ul>\n      </section>\n      <div class=\"cx-schedule\">\n        <cx-schedule [location]=\"location\">\n          <h3>{{ 'storeFinder.storeHours' | cxTranslate }}</h3>\n        </cx-schedule>\n      </div>\n    </article>\n    <article class=\"cx-storeMap col-lg-8\">\n      <cx-store-finder-map [locations]=\"[location]\"></cx-store-finder-map>\n    </article>\n  </div>\n\n  <div class=\"row cx-feature\">\n    <div class=\"col-lg-12\">\n      <h3 class=\"cx-features-header\">\n        {{ 'storeFinder.storeFeatures' | cxTranslate }}\n      </h3>\n    </div>\n  </div>\n\n  <article class=\"row\">\n    <div class=\"col-lg-3\" *ngFor=\"let feature of location.features?.entry\">\n      <div class=\"cx-features\">{{ feature.value }}</div>\n    </div>\n  </article>\n</div>\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
-            }] }
-];
-/** @nocollapse */
-StoreFinderStoreDescriptionComponent.ctorParameters = () => [
-    { type: StoreDataService },
-    { type: StoreFinderService },
-    { type: ActivatedRoute }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-const WEEK_DAYS_NUMBER = 7;
-class ScheduleComponent {
-    /**
-     * @param {?} storeDataService
-     */
-    constructor(storeDataService) {
-        this.storeDataService = storeDataService;
-        this.displayDays = null;
-    }
-    /**
-     * @param {?} changes
-     * @return {?}
-     */
-    ngOnChanges(changes) {
-        if (changes.location && this.location) {
-            /** @type {?} */
-            const initialDate = this.getInitialDate();
-            this.displayDays = [];
-            for (let i = 0; i < WEEK_DAYS_NUMBER; i++) {
-                /** @type {?} */
-                const date = new Date(initialDate.valueOf());
-                date.setDate(date.getDate() + i);
-                this.displayDays.push(date);
-            }
-        }
-    }
-    /**
-     * Returns the store's opening time for the given date
-     * @param {?} date date
-     * @return {?}
-     */
-    getStoreOpeningTime(date) {
-        return this.storeDataService.getStoreOpeningTime(this.location, date);
-    }
-    /**
-     * Returns the store's closing time for the given date
-     * @param {?} date date
-     * @return {?}
-     */
-    getStoreClosingTime(date) {
-        return this.storeDataService.getStoreClosingTime(this.location, date);
-    }
-    /**
-     * return initial (first) date to be displayed in the schedule
-     * @private
-     * @return {?}
-     */
-    getInitialDate() {
-        /** @type {?} */
-        const currentDate = new Date();
-        currentDate.setDate(currentDate.getDate() - currentDate.getDay());
-        return currentDate;
-    }
-}
-ScheduleComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-schedule',
-                template: "<ng-content></ng-content>\n<div class=\"container cx-store-hours\" *ngIf=\"location.openingHours\">\n  <div *ngFor=\"let day of displayDays\" class=\"row\">\n    <div class=\"cx-days col-6\">{{ day | cxDate: 'EEE' }}</div>\n    <div *ngIf=\"getStoreOpeningTime(day) !== null\" class=\"cx-hours col-6\">\n      {{ getStoreOpeningTime(day) | cxDate: 'HH:mm' }} -\n      {{ getStoreClosingTime(day) | cxDate: 'HH:mm' }}\n    </div>\n    <div *ngIf=\"getStoreOpeningTime(day) === null\" class=\"cx-hours col-6\">\n      {{ 'storeFinder.closed' | cxTranslate }}\n    </div>\n  </div>\n</div>\n"
-            }] }
-];
-/** @nocollapse */
-ScheduleComponent.ctorParameters = () => [
-    { type: StoreDataService }
-];
-ScheduleComponent.propDecorators = {
-    location: [{ type: Input }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class StoreFinderStoresCountComponent {
-    /**
-     * @param {?} storeFinderService
-     */
-    constructor(storeFinderService) {
-        this.storeFinderService = storeFinderService;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.storeFinderService.viewAllStores();
-        this.locations$ = this.storeFinderService.getViewAllStoresEntities();
-        this.isLoading$ = this.storeFinderService.getViewAllStoresLoading();
-    }
-}
-StoreFinderStoresCountComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-store-finder-stores-count',
-                template: "<ng-container\n  *ngIf=\"\n    !(isLoading$ | async) && (locations$ | async) as locations;\n    else loading\n  \"\n>\n  <div class=\"cx-count container\">\n    <div\n      *ngFor=\"let country of locations?.countriesAndRegionsStoreCount\"\n      class=\"cx-set\"\n    >\n      <a [routerLink]=\"['../country', country.isoCode]\" class=\"btn-link\">\n        <div class=\"cx-title\">\n          <span\n            [ngClass]=\"\n              country?.storeCountDataList\n                ? 'country-header'\n                : 'country-header-link'\n            \"\n            class=\"cx-name\"\n            >{{ country.name }}</span\n          >\n          <span\n            [ngClass]=\"\n              country?.storeCountDataList\n                ? 'country-header'\n                : 'country-header-link'\n            \"\n            *ngIf=\"!country?.storeCountDataList\"\n            class=\"cx-country-count\"\n            >({{ country.count }})</span\n          >\n        </div>\n      </a>\n    </div>\n  </div>\n</ng-container>\n<ng-template #loading>\n  <div class=\"cx-count-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
-            }] }
-];
-/** @nocollapse */
-StoreFinderStoresCountComponent.ctorParameters = () => [
-    { type: StoreFinderService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class StoreFinderGridComponent {
-    /**
-     * @param {?} storeFinderService
-     * @param {?} route
-     * @param {?} routingService
-     */
-    constructor(storeFinderService, route, routingService) {
-        this.storeFinderService = storeFinderService;
-        this.route = route;
-        this.routingService = routingService;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.isLoading$ = this.storeFinderService.getViewAllStoresLoading();
-        this.locations$ = this.storeFinderService.getViewAllStoresEntities();
-        if (this.route.snapshot.params.country) {
-            this.storeFinderService.findStoresAction('', this.defaultLocation, {
-                pageSize: -1,
-            }, this.route.snapshot.params.country);
-        }
-    }
-    /**
-     * @param {?} location
-     * @return {?}
-     */
-    viewStore(location) {
-        if (this.route.snapshot.params.region) {
-            this.routingService.go(['region', this.route.snapshot.params.region, location.name], undefined, { relativeTo: this.route });
-            return;
-        }
-        this.routingService.go(['region', '', location.name], undefined, {
-            relativeTo: this.route,
-        });
-    }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() { }
-}
-StoreFinderGridComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-store-finder-grid',
-                template: "<ng-container\n  *ngIf=\"\n    !(isLoading$ | async) && (locations$ | async) as locations;\n    else loading\n  \"\n>\n  <div class=\"container\">\n    <div class=\"row\">\n      <div\n        class=\"col-md-3 item\"\n        *ngFor=\"let location of locations?.stores\"\n        (click)=\"viewStore(location)\"\n      >\n        <cx-store-finder-list-item\n          [location]=\"location\"\n        ></cx-store-finder-list-item>\n      </div>\n    </div>\n  </div>\n</ng-container>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
-            }] }
-];
-/** @nocollapse */
-StoreFinderGridComponent.ctorParameters = () => [
-    { type: StoreFinderService },
-    { type: ActivatedRoute },
-    { type: RoutingService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class StoreFinderHeaderComponent {
-}
-StoreFinderHeaderComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-store-finder-header',
-                template: "<ng-container> <cx-store-finder-search></cx-store-finder-search> </ng-container>\n",
-                styles: [""]
-            }] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class StoreFinderSearchResultComponent {
-    /**
-     * @param {?} storeFinderService
-     * @param {?} route
-     */
-    constructor(storeFinderService, route) {
-        this.storeFinderService = storeFinderService;
-        this.route = route;
-        this.searchConfig = {
-            currentPage: 0,
-        };
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.route.queryParams.subscribe(params => this.initialize(params));
-    }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
-    }
-    /**
-     * @param {?} pageNumber
-     * @return {?}
-     */
-    viewPage(pageNumber) {
-        this.searchConfig = Object.assign({}, this.searchConfig, { currentPage: pageNumber });
-        this.storeFinderService.findStoresAction(this.searchQuery.queryText, this.geolocation, this.searchConfig);
-    }
-    /**
-     * @private
-     * @param {?} params
-     * @return {?}
-     */
-    initialize(params) {
-        this.searchQuery = this.parseParameters(params);
-        this.storeFinderService.findStoresAction(this.searchQuery.queryText, this.geolocation, this.searchConfig);
-        this.isLoading$ = this.storeFinderService.getStoresLoading();
-        this.locations$ = this.storeFinderService.getFindStoresEntities();
-        this.subscription = this.locations$
-            .pipe(map(data => data.geolocation))
-            .subscribe(geoData => (this.geolocation = geoData));
-    }
-    /**
-     * @private
-     * @param {?} queryParams
-     * @return {?}
-     */
-    parseParameters(queryParams) {
-        /** @type {?} */
-        let searchQuery;
-        if (queryParams.query) {
-            searchQuery = { queryText: queryParams.query };
-        }
-        else {
-            searchQuery = { queryText: '' };
-        }
-        searchQuery.useMyLocation =
-            queryParams.useMyLocation != null &&
-                queryParams.useMyLocation.toUpperCase() === 'TRUE';
-        return searchQuery;
-    }
-}
-StoreFinderSearchResultComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-store-finder-search-result',
-                template: "<div\n  *ngIf=\"\n    !(isLoading$ | async) && (locations$ | async) as locations;\n    else loading\n  \"\n>\n  <cx-store-finder-list [locations]=\"locations\"></cx-store-finder-list>\n  <div *ngIf=\"locations?.stores\">\n    <div class=\"cx-pagination\">\n      <cx-pagination\n        [pagination]=\"locations.pagination\"\n        (viewPageEvent)=\"viewPage($event)\"\n      ></cx-pagination>\n    </div>\n  </div>\n</div>\n<ng-template #loading>\n  <div class=\"cx-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n"
-            }] }
-];
-/** @nocollapse */
-StoreFinderSearchResultComponent.ctorParameters = () => [
-    { type: StoreFinderService },
-    { type: ActivatedRoute }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class StoreFinderPaginationDetailsComponent {
+class ProductPageComponent {
     constructor() { }
-    /**
-     * @return {?}
-     */
-    getResultsPerPage() {
-        if (this.pagination.totalResults > this.pagination.pageSize) {
-            /** @type {?} */
-            const firstItem = this.pagination.currentPage * this.pagination.pageSize + 1;
-            /** @type {?} */
-            let resultsPerPage = (this.pagination.currentPage + 1) * this.pagination.pageSize;
-            if (resultsPerPage > this.pagination.totalResults) {
-                resultsPerPage = this.pagination.totalResults;
-            }
-            return `${firstItem} - ${resultsPerPage}`;
-        }
-        else {
-            return `1 - ${this.pagination.totalResults}`;
-        }
-    }
 }
-StoreFinderPaginationDetailsComponent.decorators = [
+ProductPageComponent.decorators = [
     { type: Component, args: [{
-                selector: 'cx-store-finder-pagination-details',
-                template: "<span class=\"cx-pagination-details\">\n  {{ getResultsPerPage() }}\n  {{\n    'storeFinder.fromStoresFound'\n      | cxTranslate: { count: pagination.totalResults }\n  }}\n</span>\n",
-                styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-pagination-details{display:var(--cx-display,block);margin:var(--cx-margin,1rem 0)}@media (min-width:768px){.cx-pagination-details{text-align:var(--cx-text-align,left)}}"]
+                selector: 'cx-product-page',
+                template: "<cx-page-layout>\n  <cx-product-details></cx-product-details>\n</cx-page-layout>\n"
             }] }
 ];
 /** @nocollapse */
-StoreFinderPaginationDetailsComponent.ctorParameters = () => [];
-StoreFinderPaginationDetailsComponent.propDecorators = {
-    pagination: [{ type: Input }]
+ProductPageComponent.ctorParameters = () => [];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Matches the pattern '[ ** / ] marker / :paramName [ / ** ]'
+ *
+ * @param {?} segments
+ * @param {?} _segmentGroup
+ * @param {?} route
+ * @return {?}
+ */
+function suffixUrlMatcher(segments, _segmentGroup, route) {
+    /** @type {?} */
+    const config = route.data.cxSuffixUrlMatcher;
+    const { marker, paramName } = config;
+    /** @type {?} */
+    const precedingParamName = config.precedingParamName || 'param';
+    /** @type {?} */
+    const markerIndex = findLastIndex(segments, ({ path }) => path === marker);
+    /** @type {?} */
+    const isMarkerLastSegment = markerIndex === segments.length - 1;
+    if (markerIndex === -1 || isMarkerLastSegment) {
+        return null;
+    }
+    /** @type {?} */
+    const paramIndex = markerIndex + 1;
+    /** @type {?} */
+    const posParams = {
+        [paramName]: segments[paramIndex],
+    };
+    for (let i = 0; i < markerIndex; i++) {
+        posParams[`${precedingParamName}${i}`] = segments[i];
+    }
+    return { consumed: segments.slice(0, paramIndex + 1), posParams };
+}
+/**
+ * @template T
+ * @param {?} elements
+ * @param {?} predicate
+ * @return {?}
+ */
+function findLastIndex(elements, predicate) {
+    for (let index = elements.length - 1; index >= 0; index--) {
+        if (predicate(elements[index])) {
+            return index;
+        }
+    }
+    return -1;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+const ɵ0$1 = {
+    cxSuffixUrlMatcher: {
+        marker: 'p',
+        paramName: 'productCode',
+    },
+}, ɵ1 = {
+    cxSuffixUrlMatcher: {
+        marker: 'c',
+        paramName: 'categoryCode',
+    },
 };
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class StoreFinderComponent {
+class SuffixRoutesModule {
 }
-StoreFinderComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-store-finder',
-                template: "<ng-container>\n  <div class=\"wrapper\">\n    <cx-store-finder-header></cx-store-finder-header>\n    <router-outlet></router-outlet>\n  </div>\n</ng-container>\n",
-                styles: [".wrapper{text-align:center;padding-top:3%}"]
-            }] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class StoreFinderModule {
-}
-StoreFinderModule.decorators = [
+SuffixRoutesModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
-                    CommonModule,
-                    CmsModule$1,
-                    ReactiveFormsModule,
-                    RouterModule,
-                    PaginationAndSortingModule,
-                    BootstrapModule,
-                    SpinnerModule,
-                    UrlTranslationModule,
-                    StoreFinderCoreModule,
-                    I18nModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            StoreFinderComponent: {
-                                selector: 'cx-store-finder',
-                                childRoutes: [
-                                    {
-                                        path: 'find',
-                                        component: StoreFinderSearchResultComponent,
-                                    },
-                                    {
-                                        path: 'view-all',
-                                        component: StoreFinderStoresCountComponent,
-                                    },
-                                    {
-                                        path: 'country/:country',
-                                        component: StoreFinderGridComponent,
-                                    },
-                                    {
-                                        path: 'country/:country/region/:region',
-                                        component: StoreFinderGridComponent,
-                                    },
-                                    {
-                                        path: 'country/:country/region/:region/:store',
-                                        component: StoreFinderStoreDescriptionComponent,
-                                    },
-                                    {
-                                        path: 'country/:country/:store',
-                                        component: StoreFinderStoreDescriptionComponent,
-                                    },
-                                ],
-                            },
+                    RouterModule.forChild([
+                        {
+                            matcher: suffixUrlMatcher,
+                            canActivate: [CmsPageGuard],
+                            component: ProductPageComponent,
+                            data: ɵ0$1,
                         },
-                        layoutSlots: {
-                            StoreFinderPageTemplate: {
-                                slots: ['MiddleContent', 'SideContent'],
-                            },
+                        {
+                            matcher: suffixUrlMatcher,
+                            canActivate: [CmsPageGuard],
+                            component: PageLayoutComponent,
+                            data: ɵ1,
                         },
-                    }))),
-                ],
-                declarations: [
-                    StoreFinderSearchComponent,
-                    StoreFinderListComponent,
-                    StoreFinderMapComponent,
-                    StoreFinderListItemComponent,
-                    StoreFinderStoresCountComponent,
-                    StoreFinderGridComponent,
-                    StoreFinderStoreDescriptionComponent,
-                    ScheduleComponent,
-                    StoreFinderHeaderComponent,
-                    StoreFinderSearchResultComponent,
-                    StoreFinderComponent,
-                    StoreFinderPaginationDetailsComponent,
-                ],
-                exports: [
-                    StoreFinderSearchComponent,
-                    StoreFinderListComponent,
-                    StoreFinderMapComponent,
-                    StoreFinderListItemComponent,
-                    StoreFinderStoresCountComponent,
-                    StoreFinderGridComponent,
-                    StoreFinderStoreDescriptionComponent,
-                    ScheduleComponent,
-                    StoreFinderHeaderComponent,
-                    StoreFinderSearchResultComponent,
-                    StoreFinderComponent,
-                    StoreFinderPaginationDetailsComponent,
-                ],
-                entryComponents: [
-                    StoreFinderComponent,
-                    StoreFinderSearchResultComponent,
-                    StoreFinderStoresCountComponent,
-                    StoreFinderGridComponent,
-                    StoreFinderStoreDescriptionComponent,
-                    StoreFinderStoreDescriptionComponent,
+                    ]),
                 ],
             },] }
 ];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 
 /**
  * @fileoverview added by tsickle
@@ -11455,14 +11564,14 @@ CartPageComponent.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-const ɵ0$1 = { pageLabel: 'cartPage', cxPath: 'cart' };
+const ɵ0$2 = { pageLabel: 'cartPage', cxPath: 'cart' };
 /** @type {?} */
 const routes = [
     {
         path: null,
         canActivate: [CmsPageGuard],
         component: CartPageComponent,
-        data: ɵ0$1,
+        data: ɵ0$2,
     },
 ];
 class CartPageModule {
@@ -11599,7 +11708,7 @@ OrderConfirmationPageComponent.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-const ɵ0$2 = { pageLabel: 'orderConfirmationPage', cxPath: 'orderConfirmation' };
+const ɵ0$3 = { pageLabel: 'orderConfirmationPage', cxPath: 'orderConfirmation' };
 /** @type {?} */
 const routes$1 = [
     // TODO: as soon as the components are moved to CMS driven components we can drop this specific OrderConfirmationPageComponent
@@ -11607,7 +11716,7 @@ const routes$1 = [
         path: null,
         canActivate: [AuthGuard, CmsPageGuard, OrderConfirmationPageGuard],
         component: OrderConfirmationPageComponent,
-        data: ɵ0$2,
+        data: ɵ0$3,
     },
 ];
 class OrderConfirmationPageModule {
@@ -11631,31 +11740,14 @@ OrderConfirmationPageModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class ProductPageComponent {
-    constructor() { }
-}
-ProductPageComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-product-page',
-                template: "<cx-page-layout>\n  <cx-product-details></cx-product-details>\n</cx-page-layout>\n",
-                providers: [CurrentProductService]
-            }] }
-];
-/** @nocollapse */
-ProductPageComponent.ctorParameters = () => [];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-const ɵ0$3 = { cxPath: 'product' };
+const ɵ0$4 = { cxPath: 'product' };
 /** @type {?} */
 const routes$2 = [
     {
         path: null,
         canActivate: [CmsPageGuard],
         component: ProductPageComponent,
-        data: ɵ0$3,
+        data: ɵ0$4,
     },
 ];
 class ProductPageModule {
@@ -11684,7 +11776,7 @@ const pageModules = [
     ProductPageModule,
     GuardsModule,
 ];
-const ɵ0$4 = { pageLabel: 'homepage', cxPath: 'home' }, ɵ1 = { pageLabel: 'address-book', cxPath: 'addressBook' }, ɵ2 = { pageLabel: 'updatePassword', cxPath: 'updatePassword' }, ɵ3 = { pageLabel: 'orders', cxPath: 'orders' }, ɵ4 = { pageLabel: 'multiStepCheckoutSummaryPage', cxPath: 'checkout' }, ɵ5 = { pageLabel: 'login', cxPath: 'login' }, ɵ6 = { pageLabel: 'search', cxPath: 'search' }, ɵ7 = { cxPath: 'category' }, ɵ8 = { cxPath: 'brand' }, ɵ9 = { pageLabel: 'update-email', cxPath: 'updateEmail' }, ɵ10 = { pageLabel: 'payment-details', cxPath: 'paymentManagement' }, ɵ11 = { pageLabel: 'order', cxPath: 'orderDetails' }, ɵ12 = { pageLabel: 'forgotPassword', cxPath: 'forgotPassword' }, ɵ13 = { pageLabel: 'resetPassword', cxPath: 'resetPassword' }, ɵ14 = {
+const ɵ0$5 = { pageLabel: 'homepage', cxPath: 'home' }, ɵ1$1 = { pageLabel: 'address-book', cxPath: 'addressBook' }, ɵ2 = { pageLabel: 'updatePassword', cxPath: 'updatePassword' }, ɵ3 = { pageLabel: 'orders', cxPath: 'orders' }, ɵ4 = { pageLabel: 'multiStepCheckoutSummaryPage', cxPath: 'checkout' }, ɵ5 = { pageLabel: 'login', cxPath: 'login' }, ɵ6 = { pageLabel: 'search', cxPath: 'search' }, ɵ7 = { cxPath: 'category' }, ɵ8 = { cxPath: 'brand' }, ɵ9 = { pageLabel: 'update-email', cxPath: 'updateEmail' }, ɵ10 = { pageLabel: 'payment-details', cxPath: 'paymentManagement' }, ɵ11 = { pageLabel: 'order', cxPath: 'orderDetails' }, ɵ12 = { pageLabel: 'forgotPassword', cxPath: 'forgotPassword' }, ɵ13 = { pageLabel: 'resetPassword', cxPath: 'resetPassword' }, ɵ14 = {
     pageLabel: 'update-profile',
     cxPath: 'updateProfile',
 }, ɵ15 = { pageLabel: 'close-account', cxPath: 'closeAccount' };
@@ -11703,14 +11795,14 @@ PagesModule.decorators = [
                             path: null,
                             canActivate: [CmsPageGuard],
                             component: PageLayoutComponent,
-                            data: ɵ0$4,
+                            data: ɵ0$5,
                         },
                         {
                             // This route can be dropped only when the link from CMS in MyAccount dropdown menu ("my-account/address-book")
                             // is the same as the page label ("address-book"). Or when we have a mapping for content pages.
                             path: null,
                             canActivate: [AuthGuard, CmsPageGuard],
-                            data: ɵ1,
+                            data: ɵ1$1,
                             component: PageLayoutComponent,
                         },
                         {
@@ -11813,6 +11905,11 @@ PagesModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class UiModule {
 }
 UiModule.decorators = [
@@ -11826,124 +11923,6 @@ UiModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @return {?}
- */
-function provideConfigFromMetaTags() {
-    return [
-        provideConfigFactory(occServerConfigFromMetaTagFactory, [Meta]),
-        provideConfigFactory(mediaServerConfigFromMetaTagFactory, [Meta]),
-    ];
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Matches the pattern '[ ** / ] marker / :paramName [ / ** ]'
- *
- * @param {?} segments
- * @param {?} _segmentGroup
- * @param {?} route
- * @return {?}
- */
-function suffixUrlMatcher(segments, _segmentGroup, route) {
-    /** @type {?} */
-    const config = route.data.cxSuffixUrlMatcher;
-    const { marker, paramName } = config;
-    /** @type {?} */
-    const precedingParamName = config.precedingParamName || 'param';
-    /** @type {?} */
-    const markerIndex = findLastIndex(segments, ({ path }) => path === marker);
-    /** @type {?} */
-    const isMarkerLastSegment = markerIndex === segments.length - 1;
-    if (markerIndex === -1 || isMarkerLastSegment) {
-        return null;
-    }
-    /** @type {?} */
-    const paramIndex = markerIndex + 1;
-    /** @type {?} */
-    const posParams = {
-        [paramName]: segments[paramIndex],
-    };
-    for (let i = 0; i < markerIndex; i++) {
-        posParams[`${precedingParamName}${i}`] = segments[i];
-    }
-    return { consumed: segments.slice(0, paramIndex + 1), posParams };
-}
-/**
- * @template T
- * @param {?} elements
- * @param {?} predicate
- * @return {?}
- */
-function findLastIndex(elements, predicate) {
-    for (let index = elements.length - 1; index >= 0; index--) {
-        if (predicate(elements[index])) {
-            return index;
-        }
-    }
-    return -1;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-const ɵ0$5 = {
-    cxSuffixUrlMatcher: {
-        marker: 'p',
-        paramName: 'productCode',
-    },
-}, ɵ1$1 = {
-    cxSuffixUrlMatcher: {
-        marker: 'c',
-        paramName: 'categoryCode',
-    },
-};
-class SuffixRoutesModule {
-}
-SuffixRoutesModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    RouterModule.forChild([
-                        {
-                            matcher: suffixUrlMatcher,
-                            canActivate: [CmsPageGuard],
-                            component: ProductPageComponent,
-                            data: ɵ0$5,
-                        },
-                        {
-                            matcher: suffixUrlMatcher,
-                            canActivate: [CmsPageGuard],
-                            component: PageLayoutComponent,
-                            data: ɵ1$1,
-                        },
-                    ]),
-                ],
-            },] }
-];
 
 /**
  * @fileoverview added by tsickle
@@ -11967,14 +11946,11 @@ StorefrontModule.decorators = [
                     StateModule,
                     RoutingModule,
                     AuthModule.forRoot(),
-                    OccModule,
-                    StoreFinderModule,
                     CmsLibModule,
                     CmsModule$1,
                     UiModule,
                     SuffixRoutesModule,
                     CmsRouteModule,
-                    UiFrameworkModule,
                     ConfigModule.forRoot(),
                     CxApiModule,
                     SmartEditModule.forRoot(),
@@ -11986,11 +11962,6 @@ StorefrontModule.decorators = [
                 declarations: [],
             },] }
 ];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 
 /**
  * @fileoverview added by tsickle
@@ -12504,6 +12475,6 @@ const translations = {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AddToCartComponent, AddToCartModule, AddedToCartDialogComponent, CartDetailsComponent, CartDetailsModule, CartItemComponent, OrderSummaryComponent, CartTotalsComponent, CartComponentModule, MiniCartComponent, MiniCartModule, BannerComponent, BannerModule, IconLoaderService, IconComponent, ICON_TYPES, IconConfig, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, BreadcrumbComponent, BreadcrumbModule, LogoutGuard, LogoutModule, CmsComponentData, PageSlotModule, PageSlotComponent, PageComponentModule, ComponentWrapperDirective, defaultCmsContentConfig, SeoMetaService, initSeoService, SeoModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, CheckoutComponentModule, MultiStepCheckoutModule, ShippingAddressModule, OrderConfirmationModule, SuggestedAddressDialogComponent, AddressFormComponent, PaymentFormComponent, ReviewSubmitComponent, DeliveryModeComponent, MultiStepCheckoutComponent, OrderConfirmationComponent, CategoryNavigationComponent, CategoryNavigationModule, CmsLibModule, FooterNavigationComponent, FooterNavigationModule, LinkComponent, LinkModule, NavigationComponent, NavigationModule, ParagraphComponent, CmsParagraphModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, TabParagraphContainerComponent, TabParagraphContainerModule, CmsRouteModule, CmsModule$1 as CmsModule, CmsPageGuard, PageLayoutModule, PageLayoutComponent, CmsMappingService, CmsRoutesService, GlobalMessageComponentModule, GlobalMessageComponent, OrderModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderHistoryComponent, PaymentMethodsComponent, OccModule, OutletModule, OutletService, OutletDirective, OutletRefModule, OutletRefDirective, ProductModule$1 as ProductModule, ProductDetailsModule, ProductListModule, ProductTabsModule, ProductSummaryComponent, ProductDetailsComponent, ProductImagesComponent, ProductListItemComponent, ProductGridItemComponent, ProductListComponent, ProductFacetNavigationComponent, ProductAttributesComponent, ProductReviewsComponent, ProductTabsComponent, ProductDetailOutlets, ProductTabsOutlets, pwaConfigurationFactory, pwaFactory, PwaModule, StoreFinderModule, StorefrontModule, SuffixRoutesModule, UiModule, UiFrameworkModule, ComponentsModule, FormComponentsModule, ItemCounterComponent, StarRatingComponent, GenericLinkComponent, MediaComponent, MediaModule, MediaService, PaginationAndSortingModule, SpinnerComponent, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, LayoutModule, MainModule, StorefrontComponent, UserComponentModule, LoginModule, LoginComponent, LoginFormModule, LoginFormComponent, RegisterComponent, translations, CartItemListComponent as ɵl, CartSharedModule as ɵa, CartTotalsModule as ɵm, defaultCartPageConfig as ɵp, BootstrapModule as ɵb, CheckoutDetailsService as ɵbb, DeliveryModeModule as ɵs, BillingAddressFormComponent as ɵw, BillingAddressFormModule as ɵv, PaymentFormModule as ɵu, PaymentMethodComponent as ɵx, PaymentMethodModule as ɵt, PlaceOrderComponent as ɵba, PlaceOrderModule as ɵz, ReviewSubmitModule as ɵy, AddressFormModule as ɵq, ShippingAddressComponent as ɵr, PromotionsComponent as ɵk, PromotionsModule as ɵj, guards$1 as ɵbc, OrderConfirmationPageGuard as ɵbd, AddressBookComponent as ɵbp, AddressBookComponentService as ɵbo, AddressBookModule as ɵbn, AddressCardComponent as ɵbq, NavigationUIComponent as ɵbl, NavigationComponentService as ɵbk, ProductCarouselService as ɵbm, addCmsRoute as ɵcn, guards as ɵbt, PageLayoutService as ɵn, CmsGuardsService as ɵbv, CmsI18nService as ɵbu, CloseAccountModule as ɵck, CloseAccountModalComponent as ɵcm, CloseAccountComponent as ɵcl, OrderDetailsModule as ɵby, OrderDetailsService as ɵbz, OrderHistoryModule as ɵbr, PaymentMethodsModule as ɵca, UpdateEmailFormComponent as ɵcc, UpdateEmailComponent as ɵcd, UpdateEmailModule as ɵcb, UpdatePasswordFormComponent as ɵcg, UpdatePasswordComponent as ɵcf, UpdatePasswordModule as ɵce, UpdateProfileFormComponent as ɵcj, UpdateProfileComponent as ɵci, UpdateProfileModule as ɵch, OutletStyleService as ɵo, StyleRefDirective as ɵdi, StyleRefModule as ɵdh, ProductViewComponent as ɵbs, ProductReviewsModule as ɵbw, provideConfigFromMetaTags as ɵdo, AddToHomeScreenBannerComponent as ɵbj, AddToHomeScreenBtnComponent as ɵbh, AddToHomeScreenComponent as ɵbi, PWAModuleConfig as ɵbe, defaultPWAModuleConfig as ɵbf, AddToHomeScreenService as ɵbg, AbstractStoreItemComponent as ɵcs, ScheduleComponent as ɵcx, StoreFinderGridComponent as ɵcq, StoreFinderHeaderComponent as ɵcy, StoreFinderListItemComponent as ɵcw, StoreFinderMapComponent as ɵcv, StoreFinderPaginationDetailsComponent as ɵda, StoreFinderListComponent as ɵcu, StoreFinderSearchResultComponent as ɵco, StoreFinderSearchComponent as ɵct, StoreFinderStoreDescriptionComponent as ɵcr, StoreFinderStoresCountComponent as ɵcp, StoreFinderComponent as ɵcz, suffixUrlMatcher as ɵdn, CardComponent as ɵe, CardModule as ɵd, GenericLinkModule as ɵi, PaginationComponent as ɵf, SortingComponent as ɵg, SpinnerModule as ɵh, OnlyNumberDirective as ɵc, HardcodedCheckoutComponent as ɵdm, CartNotEmptyGuard as ɵdl, GuardsModule as ɵdk, OrderConfirmationPageModule as ɵdj, CurrentProductService as ɵbx, ForgotPasswordComponent as ɵdg, ForgotPasswordModule as ɵdf, LoginComponentService as ɵdb, RegisterComponentModule as ɵdc, ResetPasswordFormComponent as ɵde, ResetPasswordModule as ɵdd, address as ɵdp, cart as ɵdq, checkout as ɵdr, closeAccount as ɵds, common as ɵdt, myAccount as ɵdu, payment as ɵdv, product as ɵdw, pwa as ɵdx, storeFinder as ɵdy, user as ɵdz };
+export { AddToCartComponent, AddToCartModule, AddedToCartDialogComponent, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartSharedModule, OrderSummaryComponent, CartTotalsComponent, CartComponentModule, MiniCartComponent, MiniCartModule, CmsLibModule, BannerComponent, BannerModule, LinkComponent, LinkModule, ParagraphComponent, CmsParagraphModule, TabParagraphContainerComponent, TabParagraphContainerModule, GlobalMessageComponentModule, GlobalMessageComponent, IconLoaderService, IconComponent, ICON_TYPES, IconConfig, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, CloseAccountModule, CloseAccountModalComponent, CloseAccountComponent, ForgotPasswordComponent, ForgotPasswordModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, PaymentMethodsComponent, PaymentMethodsModule, ResetPasswordFormComponent, ResetPasswordModule, UpdateEmailFormComponent, UpdateEmailComponent, UpdateEmailModule, UpdatePasswordFormComponent, UpdatePasswordComponent, UpdatePasswordModule, UpdateProfileFormComponent, UpdateProfileComponent, UpdateProfileModule, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, FooterNavigationComponent, FooterNavigationModule, NavigationComponent, NavigationModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, CurrentProductService, ProductCarouselComponent, ProductCarouselModule, ProductDetailsComponent, ProductDetailsModule, ProductImagesComponent, ProductSummaryComponent, ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent, ProductDetailOutlets, ProductTabsOutlets, ProductReferencesComponent, ProductReferencesModule, ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule, AbstractStoreItemComponent, ScheduleComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderPaginationDetailsComponent, StoreFinderListComponent, StoreFinderSearchResultComponent, StoreFinderSearchComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StoreFinderComponent, StoreFinderModule, LoginFormComponent, LoginFormModule, LoginComponent, LoginModule, LogoutGuard, LogoutModule, RegisterComponent, RegisterComponentModule, UserComponentModule, OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService, StyleRefDirective, StyleRefModule, ComponentWrapperDirective, PageComponentModule, defaultCmsContentConfig, CmsComponentData, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, pwaConfigurationFactory, pwaFactory, PwaModule, PWAModuleConfig, defaultPWAModuleConfig, SeoMetaService, initSeoService, SeoModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, LayoutModule, MainModule, StorefrontComponent, CheckoutComponentModule, MultiStepCheckoutModule, ShippingAddressModule, OrderConfirmationModule, SuggestedAddressDialogComponent, AddressFormComponent, PaymentFormComponent, ReviewSubmitComponent, DeliveryModeComponent, MultiStepCheckoutComponent, OrderConfirmationComponent, CmsRouteModule, CmsModule$1 as CmsModule, CmsPageGuard, CmsMappingService, CmsRoutesService, StorefrontModule, SuffixRoutesModule, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, UiModule, FormComponentsModule, ItemCounterComponent, GenericLinkComponent, ListNavigationModule, PaginationComponent, SortingComponent, MediaComponent, MediaModule, MediaService, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, OnlyNumberDirective, translations, CartTotalsModule as ɵd, NavigationUIComponent as ɵg, NavigationComponentService as ɵf, ProductCarouselService as ɵm, ProductTabsComponent as ɵl, LoginComponentService as ɵq, OutletStyleService as ɵk, defaultCartPageConfig as ɵr, AddToHomeScreenService as ɵs, BootstrapModule as ɵc, CheckoutDetailsService as ɵbd, DeliveryModeModule as ɵu, BillingAddressFormComponent as ɵy, BillingAddressFormModule as ɵx, PaymentFormModule as ɵw, PaymentMethodComponent as ɵz, PaymentMethodModule as ɵv, PlaceOrderComponent as ɵbc, PlaceOrderModule as ɵbb, ReviewSubmitModule as ɵba, AddressFormModule as ɵj, ShippingAddressComponent as ɵt, PromotionsComponent as ɵb, PromotionsModule as ɵa, guards$1 as ɵbe, OrderConfirmationPageGuard as ɵbf, addCmsRoute as ɵbg, guards as ɵn, CmsGuardsService as ɵp, CmsI18nService as ɵo, provideConfigFromMetaTags as ɵbm, suffixUrlMatcher as ɵbl, HardcodedCheckoutComponent as ɵbk, CartNotEmptyGuard as ɵbj, GuardsModule as ɵbi, OrderConfirmationPageModule as ɵbh, CardComponent as ɵi, CardModule as ɵh, GenericLinkModule as ɵe, address as ɵbn, cart as ɵbo, checkout as ɵbp, closeAccount as ɵbq, common as ɵbr, myAccount as ɵbs, payment as ɵbt, product as ɵbu, pwa as ɵbv, storeFinder as ɵbw, user as ɵbx };
 
 //# sourceMappingURL=spartacus-storefront.js.map

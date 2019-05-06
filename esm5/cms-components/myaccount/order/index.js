@@ -1,0 +1,9 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export { OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService } from './order-details/index';
+export { OrderHistoryComponent } from './order-history/order-history.component';
+export { OrderHistoryModule } from './order-history/order-history.module';
+export { OrderModule } from './order.module';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJjbXMtY29tcG9uZW50cy9teWFjY291bnQvb3JkZXIvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLDJLQUFjLHVCQUF1QixDQUFDO0FBQ3RDLHNDQUFjLHlDQUF5QyxDQUFDO0FBQ3hELG1DQUFjLHNDQUFzQyxDQUFDO0FBQ3JELDRCQUFjLGdCQUFnQixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0ICogZnJvbSAnLi9vcmRlci1kZXRhaWxzL2luZGV4JztcbmV4cG9ydCAqIGZyb20gJy4vb3JkZXItaGlzdG9yeS9vcmRlci1oaXN0b3J5LmNvbXBvbmVudCc7XG5leHBvcnQgKiBmcm9tICcuL29yZGVyLWhpc3Rvcnkvb3JkZXItaGlzdG9yeS5tb2R1bGUnO1xuZXhwb3J0ICogZnJvbSAnLi9vcmRlci5tb2R1bGUnO1xuIl19

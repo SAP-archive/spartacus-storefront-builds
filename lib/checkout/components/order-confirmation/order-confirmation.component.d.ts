@@ -1,7 +1,7 @@
-import { OnInit, OnDestroy } from '@angular/core';
-import { Order, CheckoutService, Address, PaymentDetails, DeliveryMode } from '@spartacus/core';
+import { OnDestroy, OnInit } from '@angular/core';
+import { Address, CheckoutService, DeliveryMode, Order, PaymentDetails } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { Card } from '../../../ui/components/card/card.component';
+import { Card } from '../../../../shared/components/card/card.component';
 export declare class OrderConfirmationComponent implements OnInit, OnDestroy {
     protected checkoutService: CheckoutService;
     order$: Observable<Order>;

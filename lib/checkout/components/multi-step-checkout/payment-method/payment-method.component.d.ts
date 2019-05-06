@@ -1,9 +1,7 @@
-import { OnInit, EventEmitter, OnDestroy } from '@angular/core';
-import { PaymentDetails, Address, CheckoutService, GlobalMessageService } from '@spartacus/core';
-import { CartDataService } from '@spartacus/core';
-import { UserService } from '@spartacus/core';
+import { EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { Address, CartDataService, CheckoutService, GlobalMessageService, PaymentDetails, UserService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { Card } from '../../../../ui/components/card/card.component';
+import { Card } from '../../../../../shared/components/card/card.component';
 export declare class PaymentMethodComponent implements OnInit, OnDestroy {
     protected cartData: CartDataService;
     protected userService: UserService;

@@ -1,7 +1,7 @@
-import { OnInit, OnDestroy, EventEmitter } from '@angular/core';
-import { Observable, BehaviorSubject, Subscription } from 'rxjs';
-import { RoutingService, Address, CartDataService, UserService, CheckoutService, CartService } from '@spartacus/core';
-import { Card } from '../../../../ui/components/card/card.component';
+import { EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { Address, CartDataService, CartService, CheckoutService, RoutingService, UserService } from '@spartacus/core';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { Card } from '../../../../../shared/components/card/card.component';
 export interface CardWithAddress {
     card: Card;
     address: Address;
