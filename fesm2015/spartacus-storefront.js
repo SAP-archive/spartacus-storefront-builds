@@ -7,10 +7,10 @@ import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscriptio
 import { Title, Meta } from '@angular/platform-browser';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
-import { CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlTranslationModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, CmsService, ConfigModule, ProductService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, PageRobotsMeta, OccConfig, StoreFinderCoreModule, GlobalMessageModule, NotAuthGuard, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
+import { CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlTranslationModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, CmsService, ProductService, ConfigModule, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, PageRobotsMeta, OccConfig, NotAuthGuard, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
-import { Component, ElementRef, ViewChild, Input, ChangeDetectionStrategy, NgModule, Directive, HostListener, Renderer2, EventEmitter, forwardRef, Output, Injectable, Injector, Optional, Inject, PLATFORM_ID, APP_INITIALIZER, ChangeDetectorRef, TemplateRef, ViewContainerRef, HostBinding, ViewEncapsulation, defineInjectable, inject, INJECTOR } from '@angular/core';
+import { Component, ElementRef, ViewChild, Input, ChangeDetectionStrategy, NgModule, Directive, HostListener, Renderer2, EventEmitter, forwardRef, Output, Injectable, Injector, Optional, Inject, PLATFORM_ID, APP_INITIALIZER, ChangeDetectorRef, HostBinding, TemplateRef, ViewContainerRef, ViewEncapsulation, defineInjectable, inject, INJECTOR } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -3454,15 +3454,23 @@ SeoModule.decorators = [
 class StorefrontComponent {
     /**
      * @param {?} hamburgerMenuService
+     * @param {?} routingService
      */
-    constructor(hamburgerMenuService) {
+    constructor(hamburgerMenuService, routingService) {
         this.hamburgerMenuService = hamburgerMenuService;
+        this.routingService = routingService;
+        this.isExpanded$ = this.hamburgerMenuService.isExpanded;
     }
     /**
      * @return {?}
      */
-    get isExpanded() {
-        return this.hamburgerMenuService.isExpanded;
+    ngOnInit() {
+        this.navigateSubscription = this.routingService
+            .isNavigating()
+            .subscribe(val => {
+            this.startNavigating = val === true;
+            this.stopNavigating = val === false;
+        });
     }
     /**
      * @return {?}
@@ -3470,18 +3478,30 @@ class StorefrontComponent {
     collapseMenu() {
         this.hamburgerMenuService.toggle(true);
     }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        if (this.navigateSubscription) {
+            this.navigateSubscription.unsubscribe();
+        }
+    }
 }
 StorefrontComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-storefront',
-                template: "<header\n  [class.is-expanded]=\"isExpanded | async\"\n  (keydown.escape)=\"collapseMenu()\"\n>\n  <cx-page-layout section=\"header\"></cx-page-layout>\n  <cx-page-layout section=\"navigation\"></cx-page-layout>\n</header>\n\n<cx-page-slot position=\"BottomHeaderSlot\"></cx-page-slot>\n\n<cx-global-message></cx-global-message>\n\n<router-outlet></router-outlet>\n\n<footer>\n  <cx-page-layout section=\"footer\"></cx-page-layout>\n</footer>\n",
-                styles: [""]
+                template: "<header\n  [class.is-expanded]=\"isExpanded$ | async\"\n  (keydown.escape)=\"collapseMenu()\"\n>\n  <cx-page-layout section=\"header\"></cx-page-layout>\n  <cx-page-layout section=\"navigation\"></cx-page-layout>\n</header>\n\n<cx-page-slot position=\"BottomHeaderSlot\"></cx-page-slot>\n\n<cx-global-message></cx-global-message>\n\n<router-outlet></router-outlet>\n\n<footer>\n  <cx-page-layout section=\"footer\"></cx-page-layout>\n</footer>\n"
             }] }
 ];
 /** @nocollapse */
 StorefrontComponent.ctorParameters = () => [
-    { type: HamburgerMenuService }
+    { type: HamburgerMenuService },
+    { type: RoutingService }
 ];
+StorefrontComponent.propDecorators = {
+    startNavigating: [{ type: HostBinding, args: ['class.start-navigating',] }],
+    stopNavigating: [{ type: HostBinding, args: ['class.stop-navigating',] }]
+};
 
 /**
  * @fileoverview added by tsickle

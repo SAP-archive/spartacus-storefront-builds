@@ -7,10 +7,10 @@ import { Title, Meta } from '@angular/platform-browser';
 import { __read, __values, __spread, __extends, __assign, __awaiter, __generator } from 'tslib';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
-import { CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, AuthService, I18nModule, UserService, CheckoutModule, UrlTranslationModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ConfigModule, CmsService, CartDataService, ProductService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, DynamicAttributeService, CxApiService, ComponentMapperService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, OccConfig, NotAuthGuard, StoreFinderCoreModule, PageRobotsMeta, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
+import { CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, AuthService, I18nModule, UserService, CheckoutModule, UrlTranslationModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ConfigModule, CmsService, CartDataService, ProductService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, DynamicAttributeService, CxApiService, ComponentMapperService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, OccConfig, StoreFinderCoreModule, PageRobotsMeta, GlobalMessageModule, NotAuthGuard, ContextServiceMap, SiteContextModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ProductReviewService, StoreDataService, StoreFinderService, GoogleMapRendererService, TranslatePipe } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
-import { Component, ElementRef, ViewChild, Input, ChangeDetectionStrategy, NgModule, Directive, HostListener, Renderer2, EventEmitter, forwardRef, Output, Injectable, APP_INITIALIZER, Injector, ChangeDetectorRef, TemplateRef, HostBinding, ViewEncapsulation, Optional, defineInjectable, inject, INJECTOR, Inject, PLATFORM_ID, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, ViewChild, Input, ChangeDetectionStrategy, NgModule, Directive, HostListener, Renderer2, EventEmitter, forwardRef, Output, Injectable, APP_INITIALIZER, Injector, ChangeDetectorRef, HostBinding, TemplateRef, ViewEncapsulation, Optional, defineInjectable, inject, INJECTOR, Inject, PLATFORM_ID, ViewContainerRef } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -4148,19 +4148,26 @@ var SeoModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var StorefrontComponent = /** @class */ (function () {
-    function StorefrontComponent(hamburgerMenuService) {
+    function StorefrontComponent(hamburgerMenuService, routingService) {
         this.hamburgerMenuService = hamburgerMenuService;
+        this.routingService = routingService;
+        this.isExpanded$ = this.hamburgerMenuService.isExpanded;
     }
-    Object.defineProperty(StorefrontComponent.prototype, "isExpanded", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this.hamburgerMenuService.isExpanded;
-        },
-        enumerable: true,
-        configurable: true
-    });
+    /**
+     * @return {?}
+     */
+    StorefrontComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.navigateSubscription = this.routingService
+            .isNavigating()
+            .subscribe(function (val) {
+            _this.startNavigating = val === true;
+            _this.stopNavigating = val === false;
+        });
+    };
     /**
      * @return {?}
      */
@@ -4170,17 +4177,32 @@ var StorefrontComponent = /** @class */ (function () {
     function () {
         this.hamburgerMenuService.toggle(true);
     };
+    /**
+     * @return {?}
+     */
+    StorefrontComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        if (this.navigateSubscription) {
+            this.navigateSubscription.unsubscribe();
+        }
+    };
     StorefrontComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-storefront',
-                    template: "<header\n  [class.is-expanded]=\"isExpanded | async\"\n  (keydown.escape)=\"collapseMenu()\"\n>\n  <cx-page-layout section=\"header\"></cx-page-layout>\n  <cx-page-layout section=\"navigation\"></cx-page-layout>\n</header>\n\n<cx-page-slot position=\"BottomHeaderSlot\"></cx-page-slot>\n\n<cx-global-message></cx-global-message>\n\n<router-outlet></router-outlet>\n\n<footer>\n  <cx-page-layout section=\"footer\"></cx-page-layout>\n</footer>\n",
-                    styles: [""]
+                    template: "<header\n  [class.is-expanded]=\"isExpanded$ | async\"\n  (keydown.escape)=\"collapseMenu()\"\n>\n  <cx-page-layout section=\"header\"></cx-page-layout>\n  <cx-page-layout section=\"navigation\"></cx-page-layout>\n</header>\n\n<cx-page-slot position=\"BottomHeaderSlot\"></cx-page-slot>\n\n<cx-global-message></cx-global-message>\n\n<router-outlet></router-outlet>\n\n<footer>\n  <cx-page-layout section=\"footer\"></cx-page-layout>\n</footer>\n"
                 }] }
     ];
     /** @nocollapse */
     StorefrontComponent.ctorParameters = function () { return [
-        { type: HamburgerMenuService }
+        { type: HamburgerMenuService },
+        { type: RoutingService }
     ]; };
+    StorefrontComponent.propDecorators = {
+        startNavigating: [{ type: HostBinding, args: ['class.start-navigating',] }],
+        stopNavigating: [{ type: HostBinding, args: ['class.stop-navigating',] }]
+    };
     return StorefrontComponent;
 }());
 

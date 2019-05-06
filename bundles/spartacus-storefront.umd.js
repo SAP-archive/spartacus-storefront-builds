@@ -4376,18 +4376,26 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var StorefrontComponent = /** @class */ (function () {
-        function StorefrontComponent(hamburgerMenuService) {
+        function StorefrontComponent(hamburgerMenuService, routingService) {
             this.hamburgerMenuService = hamburgerMenuService;
+            this.routingService = routingService;
+            this.isExpanded$ = this.hamburgerMenuService.isExpanded;
         }
-        Object.defineProperty(StorefrontComponent.prototype, "isExpanded", {
-            get: /**
-             * @return {?}
-             */ function () {
-                return this.hamburgerMenuService.isExpanded;
-            },
-            enumerable: true,
-            configurable: true
-        });
+        /**
+         * @return {?}
+         */
+        StorefrontComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.navigateSubscription = this.routingService
+                    .isNavigating()
+                    .subscribe(function (val) {
+                    _this.startNavigating = val === true;
+                    _this.stopNavigating = val === false;
+                });
+            };
         /**
          * @return {?}
          */
@@ -4397,18 +4405,33 @@
             function () {
                 this.hamburgerMenuService.toggle(true);
             };
+        /**
+         * @return {?}
+         */
+        StorefrontComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+            function () {
+                if (this.navigateSubscription) {
+                    this.navigateSubscription.unsubscribe();
+                }
+            };
         StorefrontComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-storefront',
-                        template: "<header\n  [class.is-expanded]=\"isExpanded | async\"\n  (keydown.escape)=\"collapseMenu()\"\n>\n  <cx-page-layout section=\"header\"></cx-page-layout>\n  <cx-page-layout section=\"navigation\"></cx-page-layout>\n</header>\n\n<cx-page-slot position=\"BottomHeaderSlot\"></cx-page-slot>\n\n<cx-global-message></cx-global-message>\n\n<router-outlet></router-outlet>\n\n<footer>\n  <cx-page-layout section=\"footer\"></cx-page-layout>\n</footer>\n",
-                        styles: [""]
+                        template: "<header\n  [class.is-expanded]=\"isExpanded$ | async\"\n  (keydown.escape)=\"collapseMenu()\"\n>\n  <cx-page-layout section=\"header\"></cx-page-layout>\n  <cx-page-layout section=\"navigation\"></cx-page-layout>\n</header>\n\n<cx-page-slot position=\"BottomHeaderSlot\"></cx-page-slot>\n\n<cx-global-message></cx-global-message>\n\n<router-outlet></router-outlet>\n\n<footer>\n  <cx-page-layout section=\"footer\"></cx-page-layout>\n</footer>\n"
                     }] }
         ];
         /** @nocollapse */
         StorefrontComponent.ctorParameters = function () {
             return [
-                { type: HamburgerMenuService }
+                { type: HamburgerMenuService },
+                { type: i1$1.RoutingService }
             ];
+        };
+        StorefrontComponent.propDecorators = {
+            startNavigating: [{ type: i0.HostBinding, args: ['class.start-navigating',] }],
+            stopNavigating: [{ type: i0.HostBinding, args: ['class.stop-navigating',] }]
         };
         return StorefrontComponent;
     }());
