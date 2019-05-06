@@ -7,7 +7,7 @@ import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscriptio
 import { Title, Meta } from '@angular/platform-browser';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
-import { CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlTranslationModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ConfigModule, CmsService, CartDataService, ProductService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, PageRobotsMeta, OccConfig, NotAuthGuard, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
+import { CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlTranslationModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, CmsService, ConfigModule, ProductService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, PageRobotsMeta, OccConfig, StoreFinderCoreModule, GlobalMessageModule, NotAuthGuard, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { Component, ElementRef, ViewChild, Input, ChangeDetectionStrategy, NgModule, Directive, HostListener, Renderer2, EventEmitter, forwardRef, Output, Injectable, Injector, Optional, Inject, PLATFORM_ID, APP_INITIALIZER, ChangeDetectorRef, TemplateRef, ViewContainerRef, HostBinding, ViewEncapsulation, defineInjectable, inject, INJECTOR } from '@angular/core';
@@ -3815,7 +3815,7 @@ const ICON_TYPES = {
     CART: 'shopping-cart',
     SEARCH: 'search',
     GRID_MODE: 'th-large',
-    LIST_MODE: 'menu-hamburger',
+    LIST_MODE: 'bars',
     CARET_DOWN: 'angle-down',
     STAR: 'star',
 };
@@ -8369,6 +8369,7 @@ const ViewModes = {
 };
 class ProductViewComponent {
     constructor() {
+        this.iconTypes = ICON_TYPES;
         this.modeChange = new EventEmitter();
     }
     /**
@@ -8376,6 +8377,17 @@ class ProductViewComponent {
      */
     get buttonClass() {
         return `cx-product-${this.mode}`;
+    }
+    /**
+     * @return {?}
+     */
+    get viewMode() {
+        if (this.mode === 'list') {
+            return this.iconTypes.LIST_MODE;
+        }
+        else if (this.mode === 'grid') {
+            return this.iconTypes.GRID_MODE;
+        }
     }
     /**
      * @return {?}
@@ -8389,7 +8401,7 @@ class ProductViewComponent {
 ProductViewComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-product-view',
-                template: "<div class=\"cx-product-layout\" (click)=\"changeMode()\">\n  <div [ngClass]=\"buttonClass\"><span></span></div>\n</div>\n",
+                template: "<div class=\"cx-product-layout\" (click)=\"changeMode()\">\n  <div [ngClass]=\"buttonClass\">\n    <cx-icon [type]=\"viewMode\"></cx-icon>\n  </div>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -8727,6 +8739,7 @@ ProductListModule.decorators = [
                     UrlTranslationModule,
                     I18nModule,
                     StarRatingModule,
+                    IconModule,
                 ],
                 declarations: [
                     ProductListComponent,

@@ -4576,7 +4576,7 @@ var ICON_TYPES = {
     CART: 'shopping-cart',
     SEARCH: 'search',
     GRID_MODE: 'th-large',
-    LIST_MODE: 'menu-hamburger',
+    LIST_MODE: 'bars',
     CARET_DOWN: 'angle-down',
     STAR: 'star',
 };
@@ -10046,6 +10046,7 @@ var ViewModes = {
 };
 var ProductViewComponent = /** @class */ (function () {
     function ProductViewComponent() {
+        this.iconTypes = ICON_TYPES;
         this.modeChange = new EventEmitter();
     }
     Object.defineProperty(ProductViewComponent.prototype, "buttonClass", {
@@ -10054,6 +10055,21 @@ var ProductViewComponent = /** @class */ (function () {
          */
         function () {
             return "cx-product-" + this.mode;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProductViewComponent.prototype, "viewMode", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            if (this.mode === 'list') {
+                return this.iconTypes.LIST_MODE;
+            }
+            else if (this.mode === 'grid') {
+                return this.iconTypes.GRID_MODE;
+            }
         },
         enumerable: true,
         configurable: true
@@ -10072,7 +10088,7 @@ var ProductViewComponent = /** @class */ (function () {
     ProductViewComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-product-view',
-                    template: "<div class=\"cx-product-layout\" (click)=\"changeMode()\">\n  <div [ngClass]=\"buttonClass\"><span></span></div>\n</div>\n",
+                    template: "<div class=\"cx-product-layout\" (click)=\"changeMode()\">\n  <div [ngClass]=\"buttonClass\">\n    <cx-icon [type]=\"viewMode\"></cx-icon>\n  </div>\n</div>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -10486,6 +10502,7 @@ var ProductListModule = /** @class */ (function () {
                         UrlTranslationModule,
                         I18nModule,
                         StarRatingModule,
+                        IconModule,
                     ],
                     declarations: [
                         ProductListComponent,
