@@ -6208,10 +6208,8 @@
                 switch (context) {
                     case i1$1.LANGUAGE_CONTEXT_ID:
                         return item.nativeName;
-                        break;
                     case i1$1.CURRENCY_CONTEXT_ID:
                         return item.symbol + ' ' + item.isocode;
-                        break;
                     default:
                         return item.isocode;
                 }
