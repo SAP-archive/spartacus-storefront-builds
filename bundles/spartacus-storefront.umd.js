@@ -4794,92 +4794,659 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var StarRatingComponent = /** @class */ (function () {
-        function StarRatingComponent() {
-            this.rating = 1;
-            this.disabled = false;
-            this.steps = 1;
-            this.onChange = function (_rating) { };
-            this.onTouched = function () { };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @enum {string} */
+    var ICON_TYPES = {
+        CART: 'shopping-cart',
+        SEARCH: 'search',
+        GRID_MODE: 'th-large',
+        LIST_MODE: 'menu-hamburger',
+        CARET_DOWN: 'angle-down',
+        STAR: 'star',
+    };
+    /**
+     * @abstract
+     */
+    var /**
+     * @abstract
+     */ IconConfig = /** @class */ (function () {
+        function IconConfig() {
         }
-        Object.defineProperty(StarRatingComponent.prototype, "value", {
+        return IconConfig;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var IconLoaderService = /** @class */ (function () {
+        function IconLoaderService(config) {
+            this.config = config;
+        }
+        /**
+         * @return {?}
+         */
+        IconLoaderService.prototype.useSvg = /**
+         * @return {?}
+         */
+            function () {
+                return this.config.icon && this.config.icon.useSvg;
+            };
+        /**
+         * Returns the path to the svg link. The link supports path names
+         * as well, if the config has been setup to support a svg file path.
+         * Additionally, the icon prefix will be taken into account to prefix the
+         * icon IDs in the SVG.
+         */
+        /**
+         * Returns the path to the svg link. The link supports path names
+         * as well, if the config has been setup to support a svg file path.
+         * Additionally, the icon prefix will be taken into account to prefix the
+         * icon IDs in the SVG.
+         * @param {?} iconType
+         * @return {?}
+         */
+        IconLoaderService.prototype.getSvgPath = /**
+         * Returns the path to the svg link. The link supports path names
+         * as well, if the config has been setup to support a svg file path.
+         * Additionally, the icon prefix will be taken into account to prefix the
+         * icon IDs in the SVG.
+         * @param {?} iconType
+         * @return {?}
+         */
+            function (iconType) {
+                if (!this.useSvg()) {
+                    return null;
+                }
+                /** @type {?} */
+                var path = '';
+                if (this.config.icon && this.config.icon.svgPath) {
+                    path = this.config.icon.svgPath;
+                }
+                // if there's no mapping configured, we use the default value
+                path += '#';
+                if (this.config.icon && this.config.icon.prefix) {
+                    path += this.config.icon.prefix;
+                }
+                path += this.getMappedType(iconType);
+                return path;
+            };
+        /**
+         *
+         * returns an array of css classes that can be used to
+         * render the icon by CSS / font. This is driven by the `iconType`
+         * and the icon configuration, so that multiple icon fonts are
+         * supported, such as font awesome, glypicons, Octicons, etc.
+         */
+        /**
+         *
+         * returns an array of css classes that can be used to
+         * render the icon by CSS / font. This is driven by the `iconType`
+         * and the icon configuration, so that multiple icon fonts are
+         * supported, such as font awesome, glypicons, Octicons, etc.
+         * @param {?} iconType
+         * @return {?}
+         */
+        IconLoaderService.prototype.getStyleClasses = /**
+         *
+         * returns an array of css classes that can be used to
+         * render the icon by CSS / font. This is driven by the `iconType`
+         * and the icon configuration, so that multiple icon fonts are
+         * supported, such as font awesome, glypicons, Octicons, etc.
+         * @param {?} iconType
+         * @return {?}
+         */
+            function (iconType) {
+                /** @type {?} */
+                var styleClasses = [];
+                if (this.config.icon && this.config.icon.iconClass) {
+                    styleClasses.push(this.config.icon.iconClass);
+                }
+                /** @type {?} */
+                var type = this.getMappedType(iconType);
+                if (this.config.icon && this.config.icon.prefix) {
+                    type = this.config.icon.prefix + type;
+                }
+                styleClasses.push(type);
+                return styleClasses;
+            };
+        /**
+         * @private
+         * @param {?} iconType
+         * @return {?}
+         */
+        IconLoaderService.prototype.getMappedType = /**
+         * @private
+         * @param {?} iconType
+         * @return {?}
+         */
+            function (iconType) {
+                return this.config.icon &&
+                    this.config.icon.icons &&
+                    this.config.icon.icons[iconType]
+                    ? this.config.icon.icons[iconType]
+                    : iconType;
+            };
+        IconLoaderService.decorators = [
+            { type: i0.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        IconLoaderService.ctorParameters = function () {
+            return [
+                { type: IconConfig }
+            ];
+        };
+        /** @nocollapse */ IconLoaderService.ngInjectableDef = i0.defineInjectable({ factory: function IconLoaderService_Factory() { return new IconLoaderService(i0.inject(IconConfig)); }, token: IconLoaderService, providedIn: "root" });
+        return IconLoaderService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var IconComponent = /** @class */ (function () {
+        function IconComponent(iconLoader, renderer, hostElement) {
+            this.iconLoader = iconLoader;
+            this.renderer = renderer;
+            this.hostElement = hostElement;
+            /**
+             * Keeps the given style classes so that we can
+             * clean them up when the icon changes
+             */
+            this.iconStyleClasses = [];
+        }
+        /**
+         * @return {?}
+         */
+        IconComponent.prototype.ngOnChanges = /**
+         * @return {?}
+         */
+            function () {
+                this.addStyleClasses();
+            };
+        Object.defineProperty(IconComponent.prototype, "useSvg", {
             get: /**
              * @return {?}
              */ function () {
-                return this.rating;
+                return this.iconLoader.useSvg();
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(IconComponent.prototype, "path", {
+            get: /**
+             * @return {?}
+             */ function () {
+                return this.iconLoader.getSvgPath(this.type);
             },
             enumerable: true,
             configurable: true
         });
         /**
-         * @param {?} rating
+         * @private
          * @return {?}
          */
-        StarRatingComponent.prototype.setRating = /**
-         * @param {?} rating
+        IconComponent.prototype.addStyleClasses = /**
+         * @private
          * @return {?}
          */
-            function (rating) {
-                if (!this.disabled) {
-                    this.writeValue(rating);
+            function () {
+                var _this = this;
+                if (this.useSvg) {
+                    return;
+                }
+                this.clearStyleClasses();
+                this.iconStyleClasses = this.iconLoader.getStyleClasses(this.type);
+                this.iconStyleClasses.forEach(function (cls) {
+                    _this.renderer.addClass(_this.hostElement.nativeElement, cls);
+                });
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        IconComponent.prototype.clearStyleClasses = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.iconStyleClasses.forEach(function (cls) {
+                    _this.renderer.removeClass(_this.hostElement.nativeElement, cls);
+                });
+            };
+        IconComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-icon',
+                        template: "<ng-container *ngIf=\"useSvg\">\n  <svg>\n    <use [attr.xlink:href]=\"path\"></use>\n  </svg>\n</ng-container>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        IconComponent.ctorParameters = function () {
+            return [
+                { type: IconLoaderService },
+                { type: i0.Renderer2 },
+                { type: i0.ElementRef }
+            ];
+        };
+        IconComponent.propDecorators = {
+            type: [{ type: i0.Input }]
+        };
+        return IconComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var defaultIconConfig = {
+        icon: {
+            prefix: 'fa-',
+            iconClass: 'fas',
+        },
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var IconModule = /** @class */ (function () {
+        function IconModule() {
+        }
+        IconModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        declarations: [IconComponent],
+                        imports: [common.CommonModule, i1$1.ConfigModule.withConfig(defaultIconConfig)],
+                        providers: [{ provide: IconConfig, useExisting: i1$1.Config }],
+                        exports: [IconComponent],
+                    },] }
+        ];
+        return IconModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var LanguageCurrencyComponent = /** @class */ (function () {
+        function LanguageCurrencyComponent() {
+        }
+        LanguageCurrencyComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-language-currency-selector',
+                        template: "\n    <cx-site-context-selector context=\"LANGUAGE\"></cx-site-context-selector>\n    <cx-site-context-selector context=\"CURRENCY\"></cx-site-context-selector>\n  ",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        return LanguageCurrencyComponent;
+    }());
+
+    var _a;
+    /** @type {?} */
+    var LABELS = (_a = {},
+        _a[i1$1.LANGUAGE_CONTEXT_ID] = 'Language',
+        _a[i1$1.CURRENCY_CONTEXT_ID] = 'Currency',
+        _a);
+    var SiteContextComponentService = /** @class */ (function () {
+        function SiteContextComponentService(componentData, contextServiceMap, injector) {
+            this.componentData = componentData;
+            this.contextServiceMap = contextServiceMap;
+            this.injector = injector;
+        }
+        /**
+         * @param {?=} context
+         * @return {?}
+         */
+        SiteContextComponentService.prototype.getItems = /**
+         * @param {?=} context
+         * @return {?}
+         */
+            function (context) {
+                var _this = this;
+                return this.getService(context).pipe(operators.switchMap(function (service) { return service.getAll(); }), operators.switchMap(function (items) {
+                    return _this.getContext(context).pipe(operators.switchMap(function (ctx) {
+                        items.forEach(function (item) {
+                            return (item.label = _this.getOptionLabel(item, ctx));
+                        });
+                        return rxjs.of(items);
+                    }));
+                }));
+            };
+        /**
+         * @param {?=} context
+         * @return {?}
+         */
+        SiteContextComponentService.prototype.getActiveItem = /**
+         * @param {?=} context
+         * @return {?}
+         */
+            function (context) {
+                return this.getService(context).pipe(operators.switchMap(function (service) { return service.getActive(); }));
+            };
+        /**
+         * @param {?=} context
+         * @return {?}
+         */
+        SiteContextComponentService.prototype.getLabel = /**
+         * @param {?=} context
+         * @return {?}
+         */
+            function (context) {
+                return this.getContext(context).pipe(operators.map(function (ctx) {
+                    return LABELS[ctx];
+                }));
+            };
+        /**
+         * @param {?} value
+         * @param {?=} context
+         * @return {?}
+         */
+        SiteContextComponentService.prototype.setActive = /**
+         * @param {?} value
+         * @param {?=} context
+         * @return {?}
+         */
+            function (value, context) {
+                this.getService(context)
+                    .pipe(operators.take(1))
+                    .subscribe(function (service) {
+                    service.setActive(value);
+                });
+            };
+        /**
+         * @protected
+         * @param {?=} context
+         * @return {?}
+         */
+        SiteContextComponentService.prototype.getService = /**
+         * @protected
+         * @param {?=} context
+         * @return {?}
+         */
+            function (context) {
+                var _this = this;
+                return this.getContext(context).pipe(operators.map(function (ctx) { return _this.getInjectedService(ctx); }), operators.filter(Boolean));
+            };
+        /**
+         * @protected
+         * @param {?=} context
+         * @return {?}
+         */
+        SiteContextComponentService.prototype.getContext = /**
+         * @protected
+         * @param {?=} context
+         * @return {?}
+         */
+            function (context) {
+                if (context) {
+                    return rxjs.of(context);
+                }
+                else if (this.componentData) {
+                    return this.componentData.data$.pipe(operators.map(function (data) { return data.context; }));
                 }
             };
-        // ControlvalueAccessor interface
-        // ControlvalueAccessor interface
+        /**
+         * @protected
+         * @param {?} context
+         * @return {?}
+         */
+        SiteContextComponentService.prototype.getInjectedService = /**
+         * @protected
+         * @param {?} context
+         * @return {?}
+         */
+            function (context) {
+                return this.injector.get(this.contextServiceMap[context], null);
+            };
+        /**
+         * @protected
+         * @param {?} item
+         * @param {?=} context
+         * @return {?}
+         */
+        SiteContextComponentService.prototype.getOptionLabel = /**
+         * @protected
+         * @param {?} item
+         * @param {?=} context
+         * @return {?}
+         */
+            function (item, context) {
+                switch (context) {
+                    case i1$1.LANGUAGE_CONTEXT_ID:
+                        return item.nativeName;
+                    case i1$1.CURRENCY_CONTEXT_ID:
+                        return item.symbol + ' ' + item.isocode;
+                    default:
+                        return item.isocode;
+                }
+            };
+        SiteContextComponentService.decorators = [
+            { type: i0.Injectable }
+        ];
+        /** @nocollapse */
+        SiteContextComponentService.ctorParameters = function () {
+            return [
+                { type: CmsComponentData, decorators: [{ type: i0.Optional }] },
+                { type: i1$1.ContextServiceMap },
+                { type: i0.Injector }
+            ];
+        };
+        return SiteContextComponentService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var SiteContextSelectorComponent = /** @class */ (function () {
+        function SiteContextSelectorComponent(componentService) {
+            this.componentService = componentService;
+            this.iconTypes = ICON_TYPES;
+        }
+        Object.defineProperty(SiteContextSelectorComponent.prototype, "items$", {
+            get: /**
+             * @return {?}
+             */ function () {
+                return this.componentService.getItems(this.context);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(SiteContextSelectorComponent.prototype, "activeItem$", {
+            get: /**
+             * @return {?}
+             */ function () {
+                return this.componentService.getActiveItem(this.context);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(SiteContextSelectorComponent.prototype, "active", {
+            set: /**
+             * @param {?} value
+             * @return {?}
+             */ function (value) {
+                this.componentService.setActive(value, this.context);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(SiteContextSelectorComponent.prototype, "label$", {
+            get: /**
+             * @return {?}
+             */ function () {
+                return this.componentService.getLabel(this.context);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        SiteContextSelectorComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-site-context-selector',
+                        template: "<label *ngIf=\"(items$ | async)?.length > 1 && (items$ | async) as items\">\n  <span>{{ label$ | async }}</span>\n  <select (change)=\"active = $event.target.value\">\n    <option\n      *ngFor=\"let item of items\"\n      value=\"{{ item.isocode }}\"\n      [selected]=\"(activeItem$ | async) === item.isocode\"\n      >{{ item.label }}</option\n    > </select\n  ><cx-icon [type]=\"iconTypes.CARET_DOWN\"></cx-icon>\n</label>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        SiteContextSelectorComponent.ctorParameters = function () {
+            return [
+                { type: SiteContextComponentService }
+            ];
+        };
+        SiteContextSelectorComponent.propDecorators = {
+            context: [{ type: i0.Input }]
+        };
+        return SiteContextSelectorComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var SiteContextSelectorModule = /** @class */ (function () {
+        function SiteContextSelectorModule() {
+        }
+        SiteContextSelectorModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i1$2.RouterModule,
+                            i1$1.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    CMSSiteContextComponent: {
+                                        selector: 'cx-site-context-selector',
+                                        providers: [
+                                            {
+                                                provide: SiteContextComponentService,
+                                                useClass: SiteContextComponentService,
+                                                deps: [CmsComponentData, i1$1.ContextServiceMap, i0.Injector],
+                                            },
+                                        ],
+                                    },
+                                    LanguageCurrencyComponent: {
+                                        selector: 'cx-language-currency-selector',
+                                    },
+                                },
+                            }))),
+                            i1$1.SiteContextModule.forRoot(),
+                            IconModule,
+                        ],
+                        providers: [SiteContextComponentService],
+                        declarations: [SiteContextSelectorComponent, LanguageCurrencyComponent],
+                        entryComponents: [SiteContextSelectorComponent, LanguageCurrencyComponent],
+                    },] }
+        ];
+        return SiteContextSelectorModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @enum {string} */
+    var SiteContextType = {
+        LANGUAGE: 'LANGUAGE',
+        CURRENCY: 'CURRENCY',
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var StarRatingComponent = /** @class */ (function () {
+        function StarRatingComponent(el) {
+            this.el = el;
+            /**
+             * The rating component can be used in disabled mode,
+             * so that the interation is not provided.
+             */
+            this.disabled = false;
+            /**
+             * Emits the given rating when the user clicks on a star.
+             */
+            this.change = new i0.EventEmitter();
+            this.initialRate = 0;
+            this.iconTypes = ICON_TYPES;
+        }
+        /**
+         * @return {?}
+         */
+        StarRatingComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                this.setRate(this.rating, true);
+            };
+        /**
+         * @param {?} value
+         * @param {?=} force
+         * @return {?}
+         */
+        StarRatingComponent.prototype.setRate = /**
+         * @param {?} value
+         * @param {?=} force
+         * @return {?}
+         */
+            function (value, force) {
+                if (!this.disabled || force) {
+                    this.el.nativeElement.style.setProperty('--star-fill', value || this.initialRate);
+                }
+            };
         /**
          * @param {?} rating
          * @return {?}
          */
-        StarRatingComponent.prototype.writeValue =
-            // ControlvalueAccessor interface
-            /**
-             * @param {?} rating
-             * @return {?}
-             */
+        StarRatingComponent.prototype.saveRate = /**
+         * @param {?} rating
+         * @return {?}
+         */
             function (rating) {
-                this.rating = rating;
-                this.onChange(this.rating);
-            };
-        /**
-         * @param {?} fn
-         * @return {?}
-         */
-        StarRatingComponent.prototype.registerOnChange = /**
-         * @param {?} fn
-         * @return {?}
-         */
-            function (fn) {
-                this.onChange = fn;
-            };
-        /**
-         * @param {?} fn
-         * @return {?}
-         */
-        StarRatingComponent.prototype.registerOnTouched = /**
-         * @param {?} fn
-         * @return {?}
-         */
-            function (fn) {
-                this.onTouched = fn;
+                if (this.disabled) {
+                    return;
+                }
+                this.initialRate = rating;
+                this.setRate(rating);
+                this.change.emit(rating);
             };
         StarRatingComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-star-rating',
-                        template: "<div class=\"cx-star-rating\" tabindex=\"0\">\n  <ng-template #template let-fill=\"fill\">\n    <span class=\"star\" [class.full]=\"fill === 100\">\n      <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span> &#9733;\n    </span>\n  </ng-template>\n  <ngb-rating\n    [(rate)]=\"rating\"\n    (rateChange)=\"onTouched(); setRating($event)\"\n    [starTemplate]=\"template\"\n    [readonly]=\"disabled\"\n    max=\"5\"\n  ></ngb-rating>\n</div>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
-                        providers: [
-                            {
-                                provide: forms.NG_VALUE_ACCESSOR,
-                                multi: true,
-                                useExisting: i0.forwardRef(function () { return StarRatingComponent; }),
-                            },
-                        ]
+                        template: "<cx-icon\n  *ngFor=\"let i of [1, 2, 3, 4, 5]\"\n  [type]=\"iconTypes.STAR\"\n  class=\"star\"\n  (mouseover)=\"setRate(i)\"\n  (mouseout)=\"setRate(0)\"\n  (click)=\"saveRate(i)\"\n></cx-icon>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
                     }] }
         ];
+        /** @nocollapse */
+        StarRatingComponent.ctorParameters = function () {
+            return [
+                { type: i0.ElementRef }
+            ];
+        };
         StarRatingComponent.propDecorators = {
+            disabled: [{ type: i0.Input }, { type: i0.HostBinding, args: ['attr.disabled',] }],
             rating: [{ type: i0.Input }],
-            disabled: [{ type: i0.Input }],
-            steps: [{ type: i0.Input }]
+            change: [{ type: i0.Output }]
         };
         return StarRatingComponent;
     }());
@@ -4893,7 +5460,7 @@
         }
         StarRatingModule.decorators = [
             { type: i0.NgModule, args: [{
-                        imports: [common.CommonModule, forms.FormsModule, forms.ReactiveFormsModule, BootstrapModule],
+                        imports: [common.CommonModule, IconModule],
                         declarations: [StarRatingComponent],
                         exports: [StarRatingComponent],
                     },] }
@@ -5469,286 +6036,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    /** @enum {string} */
-    var ICON_TYPES = {
-        CART: 'shopping-cart',
-        SEARCH: 'search',
-        GRID_MODE: 'th-large',
-        LIST_MODE: 'menu-hamburger',
-        CARET_DOWN: 'angle-down',
-    };
-    /**
-     * @abstract
-     */
-    var /**
-     * @abstract
-     */ IconConfig = /** @class */ (function () {
-        function IconConfig() {
-        }
-        return IconConfig;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var IconLoaderService = /** @class */ (function () {
-        function IconLoaderService(config) {
-            this.config = config;
-        }
-        /**
-         * @return {?}
-         */
-        IconLoaderService.prototype.useSvg = /**
-         * @return {?}
-         */
-            function () {
-                return this.config.icon && this.config.icon.useSvg;
-            };
-        /**
-         * Returns the path to the svg link. The link supports path names
-         * as well, if the config has been setup to support a svg file path.
-         * Additionally, the icon prefix will be taken into account to prefix the
-         * icon IDs in the SVG.
-         */
-        /**
-         * Returns the path to the svg link. The link supports path names
-         * as well, if the config has been setup to support a svg file path.
-         * Additionally, the icon prefix will be taken into account to prefix the
-         * icon IDs in the SVG.
-         * @param {?} iconType
-         * @return {?}
-         */
-        IconLoaderService.prototype.getSvgPath = /**
-         * Returns the path to the svg link. The link supports path names
-         * as well, if the config has been setup to support a svg file path.
-         * Additionally, the icon prefix will be taken into account to prefix the
-         * icon IDs in the SVG.
-         * @param {?} iconType
-         * @return {?}
-         */
-            function (iconType) {
-                if (!this.useSvg()) {
-                    return null;
-                }
-                /** @type {?} */
-                var path = '';
-                if (this.config.icon && this.config.icon.svgPath) {
-                    path = this.config.icon.svgPath;
-                }
-                // if there's no mapping configured, we use the default value
-                path += '#';
-                if (this.config.icon && this.config.icon.prefix) {
-                    path += this.config.icon.prefix;
-                }
-                path += this.getMappedType(iconType);
-                return path;
-            };
-        /**
-         *
-         * returns an array of css classes that can be used to
-         * render the icon by CSS / font. This is driven by the `iconType`
-         * and the icon configuration, so that multiple icon fonts are
-         * supported, such as font awesome, glypicons, Octicons, etc.
-         */
-        /**
-         *
-         * returns an array of css classes that can be used to
-         * render the icon by CSS / font. This is driven by the `iconType`
-         * and the icon configuration, so that multiple icon fonts are
-         * supported, such as font awesome, glypicons, Octicons, etc.
-         * @param {?} iconType
-         * @return {?}
-         */
-        IconLoaderService.prototype.getStyleClasses = /**
-         *
-         * returns an array of css classes that can be used to
-         * render the icon by CSS / font. This is driven by the `iconType`
-         * and the icon configuration, so that multiple icon fonts are
-         * supported, such as font awesome, glypicons, Octicons, etc.
-         * @param {?} iconType
-         * @return {?}
-         */
-            function (iconType) {
-                /** @type {?} */
-                var styleClasses = [];
-                if (this.config.icon && this.config.icon.iconClass) {
-                    styleClasses.push(this.config.icon.iconClass);
-                }
-                /** @type {?} */
-                var type = this.getMappedType(iconType);
-                if (this.config.icon && this.config.icon.prefix) {
-                    type = this.config.icon.prefix + type;
-                }
-                styleClasses.push(type);
-                return styleClasses;
-            };
-        /**
-         * @private
-         * @param {?} iconType
-         * @return {?}
-         */
-        IconLoaderService.prototype.getMappedType = /**
-         * @private
-         * @param {?} iconType
-         * @return {?}
-         */
-            function (iconType) {
-                return this.config.icon &&
-                    this.config.icon.icons &&
-                    this.config.icon.icons[iconType]
-                    ? this.config.icon.icons[iconType]
-                    : iconType;
-            };
-        IconLoaderService.decorators = [
-            { type: i0.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */
-        IconLoaderService.ctorParameters = function () {
-            return [
-                { type: IconConfig }
-            ];
-        };
-        /** @nocollapse */ IconLoaderService.ngInjectableDef = i0.defineInjectable({ factory: function IconLoaderService_Factory() { return new IconLoaderService(i0.inject(IconConfig)); }, token: IconLoaderService, providedIn: "root" });
-        return IconLoaderService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var IconComponent = /** @class */ (function () {
-        function IconComponent(iconLoader, renderer, hostElement) {
-            this.iconLoader = iconLoader;
-            this.renderer = renderer;
-            this.hostElement = hostElement;
-            /**
-             * Keeps the given style classes so that we can
-             * clean them up when the icon changes
-             */
-            this.iconStyleClasses = [];
-        }
-        /**
-         * @return {?}
-         */
-        IconComponent.prototype.ngOnChanges = /**
-         * @return {?}
-         */
-            function () {
-                this.addStyleClasses();
-            };
-        Object.defineProperty(IconComponent.prototype, "useSvg", {
-            get: /**
-             * @return {?}
-             */ function () {
-                return this.iconLoader.useSvg();
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(IconComponent.prototype, "path", {
-            get: /**
-             * @return {?}
-             */ function () {
-                return this.iconLoader.getSvgPath(this.type);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        /**
-         * @private
-         * @return {?}
-         */
-        IconComponent.prototype.addStyleClasses = /**
-         * @private
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                if (this.useSvg) {
-                    return;
-                }
-                this.clearStyleClasses();
-                this.iconStyleClasses = this.iconLoader.getStyleClasses(this.type);
-                this.iconStyleClasses.forEach(function (cls) {
-                    _this.renderer.addClass(_this.hostElement.nativeElement, cls);
-                });
-            };
-        /**
-         * @private
-         * @return {?}
-         */
-        IconComponent.prototype.clearStyleClasses = /**
-         * @private
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                this.iconStyleClasses.forEach(function (cls) {
-                    _this.renderer.removeClass(_this.hostElement.nativeElement, cls);
-                });
-            };
-        IconComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-icon',
-                        template: "<ng-container *ngIf=\"useSvg\">\n  <svg>\n    <use [attr.xlink:href]=\"path\"></use>\n  </svg>\n</ng-container>\n"
-                    }] }
-        ];
-        /** @nocollapse */
-        IconComponent.ctorParameters = function () {
-            return [
-                { type: IconLoaderService },
-                { type: i0.Renderer2 },
-                { type: i0.ElementRef }
-            ];
-        };
-        IconComponent.propDecorators = {
-            type: [{ type: i0.Input }]
-        };
-        return IconComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @type {?} */
-    var defaultIconConfig = {
-        icon: {
-            prefix: 'fa-',
-            iconClass: 'fas',
-        },
-    };
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var IconModule = /** @class */ (function () {
-        function IconModule() {
-        }
-        IconModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        declarations: [IconComponent],
-                        imports: [common.CommonModule, i1$1.ConfigModule.withConfig(defaultIconConfig)],
-                        providers: [{ provide: IconConfig, useExisting: i1$1.Config }],
-                        exports: [IconComponent],
-                    },] }
-        ];
-        return IconModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var MiniCartComponent = /** @class */ (function () {
         function MiniCartComponent(cartService) {
             this.cartService = cartService;
@@ -6058,306 +6345,6 @@
         ];
         return TabParagraphContainerModule;
     }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var LanguageCurrencyComponent = /** @class */ (function () {
-        function LanguageCurrencyComponent() {
-        }
-        LanguageCurrencyComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-language-currency-selector',
-                        template: "\n    <cx-site-context-selector context=\"LANGUAGE\"></cx-site-context-selector>\n    <cx-site-context-selector context=\"CURRENCY\"></cx-site-context-selector>\n  ",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        return LanguageCurrencyComponent;
-    }());
-
-    var _a;
-    /** @type {?} */
-    var LABELS = (_a = {},
-        _a[i1$1.LANGUAGE_CONTEXT_ID] = 'Language',
-        _a[i1$1.CURRENCY_CONTEXT_ID] = 'Currency',
-        _a);
-    var SiteContextComponentService = /** @class */ (function () {
-        function SiteContextComponentService(componentData, contextServiceMap, injector) {
-            this.componentData = componentData;
-            this.contextServiceMap = contextServiceMap;
-            this.injector = injector;
-        }
-        /**
-         * @param {?=} context
-         * @return {?}
-         */
-        SiteContextComponentService.prototype.getItems = /**
-         * @param {?=} context
-         * @return {?}
-         */
-            function (context) {
-                var _this = this;
-                return this.getService(context).pipe(operators.switchMap(function (service) { return service.getAll(); }), operators.switchMap(function (items) {
-                    return _this.getContext(context).pipe(operators.switchMap(function (ctx) {
-                        items.forEach(function (item) {
-                            return (item.label = _this.getOptionLabel(item, ctx));
-                        });
-                        return rxjs.of(items);
-                    }));
-                }));
-            };
-        /**
-         * @param {?=} context
-         * @return {?}
-         */
-        SiteContextComponentService.prototype.getActiveItem = /**
-         * @param {?=} context
-         * @return {?}
-         */
-            function (context) {
-                return this.getService(context).pipe(operators.switchMap(function (service) { return service.getActive(); }));
-            };
-        /**
-         * @param {?=} context
-         * @return {?}
-         */
-        SiteContextComponentService.prototype.getLabel = /**
-         * @param {?=} context
-         * @return {?}
-         */
-            function (context) {
-                return this.getContext(context).pipe(operators.map(function (ctx) {
-                    return LABELS[ctx];
-                }));
-            };
-        /**
-         * @param {?} value
-         * @param {?=} context
-         * @return {?}
-         */
-        SiteContextComponentService.prototype.setActive = /**
-         * @param {?} value
-         * @param {?=} context
-         * @return {?}
-         */
-            function (value, context) {
-                this.getService(context)
-                    .pipe(operators.take(1))
-                    .subscribe(function (service) {
-                    service.setActive(value);
-                });
-            };
-        /**
-         * @protected
-         * @param {?=} context
-         * @return {?}
-         */
-        SiteContextComponentService.prototype.getService = /**
-         * @protected
-         * @param {?=} context
-         * @return {?}
-         */
-            function (context) {
-                var _this = this;
-                return this.getContext(context).pipe(operators.map(function (ctx) { return _this.getInjectedService(ctx); }), operators.filter(Boolean));
-            };
-        /**
-         * @protected
-         * @param {?=} context
-         * @return {?}
-         */
-        SiteContextComponentService.prototype.getContext = /**
-         * @protected
-         * @param {?=} context
-         * @return {?}
-         */
-            function (context) {
-                if (context) {
-                    return rxjs.of(context);
-                }
-                else if (this.componentData) {
-                    return this.componentData.data$.pipe(operators.map(function (data) { return data.context; }));
-                }
-            };
-        /**
-         * @protected
-         * @param {?} context
-         * @return {?}
-         */
-        SiteContextComponentService.prototype.getInjectedService = /**
-         * @protected
-         * @param {?} context
-         * @return {?}
-         */
-            function (context) {
-                return this.injector.get(this.contextServiceMap[context], null);
-            };
-        /**
-         * @protected
-         * @param {?} item
-         * @param {?=} context
-         * @return {?}
-         */
-        SiteContextComponentService.prototype.getOptionLabel = /**
-         * @protected
-         * @param {?} item
-         * @param {?=} context
-         * @return {?}
-         */
-            function (item, context) {
-                switch (context) {
-                    case i1$1.LANGUAGE_CONTEXT_ID:
-                        return item.nativeName;
-                    case i1$1.CURRENCY_CONTEXT_ID:
-                        return item.symbol + ' ' + item.isocode;
-                    default:
-                        return item.isocode;
-                }
-            };
-        SiteContextComponentService.decorators = [
-            { type: i0.Injectable }
-        ];
-        /** @nocollapse */
-        SiteContextComponentService.ctorParameters = function () {
-            return [
-                { type: CmsComponentData, decorators: [{ type: i0.Optional }] },
-                { type: i1$1.ContextServiceMap },
-                { type: i0.Injector }
-            ];
-        };
-        return SiteContextComponentService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var SiteContextSelectorComponent = /** @class */ (function () {
-        function SiteContextSelectorComponent(componentService) {
-            this.componentService = componentService;
-            this.iconTypes = ICON_TYPES;
-        }
-        Object.defineProperty(SiteContextSelectorComponent.prototype, "items$", {
-            get: /**
-             * @return {?}
-             */ function () {
-                return this.componentService.getItems(this.context);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(SiteContextSelectorComponent.prototype, "activeItem$", {
-            get: /**
-             * @return {?}
-             */ function () {
-                return this.componentService.getActiveItem(this.context);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(SiteContextSelectorComponent.prototype, "active", {
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */ function (value) {
-                this.componentService.setActive(value, this.context);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(SiteContextSelectorComponent.prototype, "label$", {
-            get: /**
-             * @return {?}
-             */ function () {
-                return this.componentService.getLabel(this.context);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        SiteContextSelectorComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-site-context-selector',
-                        template: "<label *ngIf=\"(items$ | async)?.length > 1 && (items$ | async) as items\">\n  <span>{{ label$ | async }}</span>\n  <select (change)=\"active = $event.target.value\">\n    <option\n      *ngFor=\"let item of items\"\n      value=\"{{ item.isocode }}\"\n      [selected]=\"(activeItem$ | async) === item.isocode\"\n      >{{ item.label }}</option\n    > </select\n  ><cx-icon [type]=\"iconTypes.CARET_DOWN\"></cx-icon>\n</label>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        SiteContextSelectorComponent.ctorParameters = function () {
-            return [
-                { type: SiteContextComponentService }
-            ];
-        };
-        SiteContextSelectorComponent.propDecorators = {
-            context: [{ type: i0.Input }]
-        };
-        return SiteContextSelectorComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var SiteContextSelectorModule = /** @class */ (function () {
-        function SiteContextSelectorModule() {
-        }
-        SiteContextSelectorModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i1$2.RouterModule,
-                            i1$1.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    CMSSiteContextComponent: {
-                                        selector: 'cx-site-context-selector',
-                                        providers: [
-                                            {
-                                                provide: SiteContextComponentService,
-                                                useClass: SiteContextComponentService,
-                                                deps: [CmsComponentData, i1$1.ContextServiceMap, i0.Injector],
-                                            },
-                                        ],
-                                    },
-                                    LanguageCurrencyComponent: {
-                                        selector: 'cx-language-currency-selector',
-                                    },
-                                },
-                            }))),
-                            i1$1.SiteContextModule.forRoot(),
-                            IconModule,
-                        ],
-                        providers: [SiteContextComponentService],
-                        declarations: [SiteContextSelectorComponent, LanguageCurrencyComponent],
-                        entryComponents: [SiteContextSelectorComponent, LanguageCurrencyComponent],
-                    },] }
-        ];
-        return SiteContextSelectorModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @enum {string} */
-    var SiteContextType = {
-        LANGUAGE: 'LANGUAGE',
-        CURRENCY: 'CURRENCY',
-    };
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
 
     /**
      * @fileoverview added by tsickle
@@ -11034,6 +11021,17 @@
                 this.resetReviewForm();
             };
         /**
+         * @param {?} rating
+         * @return {?}
+         */
+        ProductReviewsComponent.prototype.setRating = /**
+         * @param {?} rating
+         * @return {?}
+         */
+            function (rating) {
+                this.reviewForm.controls.rating.setValue(rating);
+            };
+        /**
          * @return {?}
          */
         ProductReviewsComponent.prototype.submitReview = /**
@@ -11072,7 +11070,7 @@
         ProductReviewsComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-product-reviews',
-                        template: "<ng-container *ngIf=\"!isWritingReview; else writeReview\">\n  <div class=\"header\">\n    <h3>{{ 'productReview.overallRating' | cxTranslate }}</h3>\n    <button class=\"btn btn-primary\" (click)=\"initiateWriteReview()\">\n      {{ 'productReview.writeReview' | cxTranslate }}\n    </button>\n    <cx-star-rating\n      class=\"rating\"\n      [rating]=\"product.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n  </div>\n\n  <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n    <ng-container *ngIf=\"(reviews$ | async) as reviews\">\n      <div\n        class=\"review\"\n        tabindex=\"0\"\n        *ngFor=\"let review of (reviews | slice: 0:maxListItems)\"\n      >\n        <div class=\"title\">{{ review.headline }}</div>\n        <cx-star-rating\n          [rating]=\"review.rating\"\n          [disabled]=\"true\"\n        ></cx-star-rating>\n        <div class=\"name\">\n          {{ review.alias ? review.alias : review.principal?.name }}\n        </div>\n        <div class=\"date\">{{ review.date | cxDate }}</div>\n        <div class=\"text\">{{ review.comment }}</div>\n      </div>\n      <div *ngIf=\"reviews.length > initialMaxListItems\">\n        <button\n          class=\"btn btn-primary\"\n          (click)=\"maxListItems = reviews.length\"\n          *ngIf=\"maxListItems === initialMaxListItems\"\n        >\n          {{ 'productReview.more' | cxTranslate }}\n        </button>\n        <button\n          class=\"btn btn-primary\"\n          (click)=\"maxListItems = initialMaxListItems\"\n          *ngIf=\"maxListItems !== initialMaxListItems\"\n        >\n          {{ 'productReview.less' | cxTranslate }}\n        </button>\n      </div>\n    </ng-container>\n  </ng-container>\n</ng-container>\n\n<ng-template #writeReview>\n  <form [formGroup]=\"reviewForm\" (ngSubmit)=\"submitReview()\">\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.reviewTitle' | cxTranslate\n        }}</span>\n        <input type=\"text\" class=\"form-control\" formControlName=\"title\" />\n      </label>\n    </div>\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.writeYourComments' | cxTranslate\n        }}</span>\n        <textarea\n          class=\"form-control\"\n          rows=\"3\"\n          formControlName=\"comment\"\n        ></textarea>\n      </label>\n    </div>\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.rating' | cxTranslate\n        }}</span>\n        <cx-star-rating formControlName=\"rating\" [steps]=\"0.5\"></cx-star-rating>\n      </label>\n    </div>\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.reviewerName' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          formControlName=\"reviewerName\"\n        />\n      </label>\n    </div>\n    <div class=\"form-group row\">\n      <div class=\"col-12 col-md-4\">\n        <button\n          type=\"submit\"\n          class=\"btn btn-block btn-secondary\"\n          (click)=\"cancelWriteReview()\"\n        >\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <button\n          type=\"submit\"\n          class=\"btn btn-block btn-primary\"\n          [ngClass]=\"{ 'submit-btn': reviewForm.valid }\"\n          [disabled]=\"!reviewForm.valid\"\n        >\n          {{ 'common.submit' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </form>\n</ng-template>\n",
+                        template: "<ng-container *ngIf=\"!isWritingReview; else writeReview\">\n  <div class=\"header\">\n    <h3>{{ 'productReview.overallRating' | cxTranslate }}</h3>\n    <button class=\"btn btn-primary\" (click)=\"initiateWriteReview()\">\n      {{ 'productReview.writeReview' | cxTranslate }}\n    </button>\n    <cx-star-rating\n      class=\"rating\"\n      [rating]=\"product.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n  </div>\n\n  <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n    <ng-container *ngIf=\"(reviews$ | async) as reviews\">\n      <div\n        class=\"review\"\n        tabindex=\"0\"\n        *ngFor=\"let review of (reviews | slice: 0:maxListItems)\"\n      >\n        <div class=\"title\">{{ review.headline }}</div>\n        <cx-star-rating\n          [rating]=\"review.rating\"\n          [disabled]=\"true\"\n        ></cx-star-rating>\n        <div class=\"name\">\n          {{ review.alias ? review.alias : review.principal?.name }}\n        </div>\n        <div class=\"date\">{{ review.date | cxDate }}</div>\n        <div class=\"text\">{{ review.comment }}</div>\n      </div>\n      <div *ngIf=\"reviews.length > initialMaxListItems\">\n        <button\n          class=\"btn btn-primary\"\n          (click)=\"maxListItems = reviews.length\"\n          *ngIf=\"maxListItems === initialMaxListItems\"\n        >\n          {{ 'productReview.more' | cxTranslate }}\n        </button>\n        <button\n          class=\"btn btn-primary\"\n          (click)=\"maxListItems = initialMaxListItems\"\n          *ngIf=\"maxListItems !== initialMaxListItems\"\n        >\n          {{ 'productReview.less' | cxTranslate }}\n        </button>\n      </div>\n    </ng-container>\n  </ng-container>\n</ng-container>\n\n<ng-template #writeReview>\n  <form [formGroup]=\"reviewForm\" (ngSubmit)=\"submitReview()\">\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.reviewTitle' | cxTranslate\n        }}</span>\n        <input type=\"text\" class=\"form-control\" formControlName=\"title\" />\n      </label>\n    </div>\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.writeYourComments' | cxTranslate\n        }}</span>\n        <textarea\n          class=\"form-control\"\n          rows=\"3\"\n          formControlName=\"comment\"\n        ></textarea>\n      </label>\n    </div>\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.rating' | cxTranslate\n        }}</span>\n        <cx-star-rating (change)=\"setRating($event)\"></cx-star-rating>\n      </label>\n    </div>\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.reviewerName' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          formControlName=\"reviewerName\"\n        />\n      </label>\n    </div>\n    <div class=\"form-group row\">\n      <div class=\"col-12 col-md-4\">\n        <button\n          type=\"submit\"\n          class=\"btn btn-block btn-secondary\"\n          (click)=\"cancelWriteReview()\"\n        >\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <button\n          type=\"submit\"\n          class=\"btn btn-block btn-primary\"\n          [ngClass]=\"{ 'submit-btn': reviewForm.valid }\"\n          [disabled]=\"!reviewForm.valid\"\n        >\n          {{ 'common.submit' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </form>\n</ng-template>\n",
                         changeDetection: i0.ChangeDetectionStrategy.OnPush
                     }] }
         ];

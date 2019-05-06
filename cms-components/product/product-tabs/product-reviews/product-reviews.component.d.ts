@@ -18,6 +18,7 @@ export declare class ProductReviewsComponent implements OnChanges, OnInit {
     ngOnInit(): void;
     initiateWriteReview(): void;
     cancelWriteReview(): void;
+    setRating(rating: any): void;
     submitReview(): void;
     private resetReviewForm;
 }

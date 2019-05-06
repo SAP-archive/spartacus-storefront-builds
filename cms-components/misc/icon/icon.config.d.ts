@@ -3,7 +3,8 @@ export declare enum ICON_TYPES {
     SEARCH = "search",
     GRID_MODE = "th-large",
     LIST_MODE = "menu-hamburger",
-    CARET_DOWN = "angle-down"
+    CARET_DOWN = "angle-down",
+    STAR = "star"
 }
 export declare abstract class IconConfig {
     icon?: {

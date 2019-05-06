@@ -2,84 +2,99 @@
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Component, Input, ChangeDetectionStrategy, forwardRef, } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostBinding, Input, Output, } from '@angular/core';
+import { ICON_TYPES } from '../../../cms-components/misc/index';
 export class StarRatingComponent {
-    constructor() {
-        this.rating = 1;
+    /**
+     * @param {?} el
+     */
+    constructor(el) {
+        this.el = el;
+        /**
+         * The rating component can be used in disabled mode,
+         * so that the interation is not provided.
+         */
         this.disabled = false;
-        this.steps = 1;
-        this.onChange = (_rating) => { };
-        this.onTouched = () => { };
+        /**
+         * Emits the given rating when the user clicks on a star.
+         */
+        this.change = new EventEmitter();
+        this.initialRate = 0;
+        this.iconTypes = ICON_TYPES;
     }
     /**
      * @return {?}
      */
-    get value() {
-        return this.rating;
+    ngOnInit() {
+        this.setRate(this.rating, true);
     }
     /**
-     * @param {?} rating
+     * @param {?} value
+     * @param {?=} force
      * @return {?}
      */
-    setRating(rating) {
-        if (!this.disabled) {
-            this.writeValue(rating);
+    setRate(value, force) {
+        if (!this.disabled || force) {
+            this.el.nativeElement.style.setProperty('--star-fill', value || this.initialRate);
         }
     }
-    // ControlvalueAccessor interface
     /**
      * @param {?} rating
      * @return {?}
      */
-    writeValue(rating) {
-        this.rating = rating;
-        this.onChange(this.rating);
-    }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    registerOnChange(fn) {
-        this.onChange = fn;
-    }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    registerOnTouched(fn) {
-        this.onTouched = fn;
+    saveRate(rating) {
+        if (this.disabled) {
+            return;
+        }
+        this.initialRate = rating;
+        this.setRate(rating);
+        this.change.emit(rating);
     }
 }
 StarRatingComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-star-rating',
-                template: "<div class=\"cx-star-rating\" tabindex=\"0\">\n  <ng-template #template let-fill=\"fill\">\n    <span class=\"star\" [class.full]=\"fill === 100\">\n      <span class=\"half\" [style.width.%]=\"fill\">&#9733;</span> &#9733;\n    </span>\n  </ng-template>\n  <ngb-rating\n    [(rate)]=\"rating\"\n    (rateChange)=\"onTouched(); setRating($event)\"\n    [starTemplate]=\"template\"\n    [readonly]=\"disabled\"\n    max=\"5\"\n  ></ngb-rating>\n</div>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                providers: [
-                    {
-                        provide: NG_VALUE_ACCESSOR,
-                        multi: true,
-                        useExisting: forwardRef(() => StarRatingComponent),
-                    },
-                ]
+                template: "<cx-icon\n  *ngFor=\"let i of [1, 2, 3, 4, 5]\"\n  [type]=\"iconTypes.STAR\"\n  class=\"star\"\n  (mouseover)=\"setRate(i)\"\n  (mouseout)=\"setRate(0)\"\n  (click)=\"saveRate(i)\"\n></cx-icon>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
+/** @nocollapse */
+StarRatingComponent.ctorParameters = () => [
+    { type: ElementRef }
+];
 StarRatingComponent.propDecorators = {
+    disabled: [{ type: Input }, { type: HostBinding, args: ['attr.disabled',] }],
     rating: [{ type: Input }],
-    disabled: [{ type: Input }],
-    steps: [{ type: Input }]
+    change: [{ type: Output }]
 };
 if (false) {
-    /** @type {?} */
-    StarRatingComponent.prototype.rating;
-    /** @type {?} */
+    /**
+     * The rating component can be used in disabled mode,
+     * so that the interation is not provided.
+     * @type {?}
+     */
     StarRatingComponent.prototype.disabled;
+    /**
+     * The rating will be used to render some colorful stars in the UI.
+     * @type {?}
+     */
+    StarRatingComponent.prototype.rating;
+    /**
+     * Emits the given rating when the user clicks on a star.
+     * @type {?}
+     */
+    StarRatingComponent.prototype.change;
+    /**
+     * @type {?}
+     * @private
+     */
+    StarRatingComponent.prototype.initialRate;
     /** @type {?} */
-    StarRatingComponent.prototype.steps;
-    /** @type {?} */
-    StarRatingComponent.prototype.onChange;
-    /** @type {?} */
-    StarRatingComponent.prototype.onTouched;
+    StarRatingComponent.prototype.iconTypes;
+    /**
+     * @type {?}
+     * @private
+     */
+    StarRatingComponent.prototype.el;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3Rhci1yYXRpbmcuY29tcG9uZW50LmpzIiwic291cmNlUm9vdCI6Im5nOi8vQHNwYXJ0YWN1cy9zdG9yZWZyb250LyIsInNvdXJjZXMiOlsic2hhcmVkL2NvbXBvbmVudHMvc3Rhci1yYXRpbmcvc3Rhci1yYXRpbmcuY29tcG9uZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSxPQUFPLEVBQUUsaUJBQWlCLEVBQXdCLE1BQU0sZ0JBQWdCLENBQUM7QUFDekUsT0FBTyxFQUNMLFNBQVMsRUFDVCxLQUFLLEVBQ0wsdUJBQXVCLEVBQ3ZCLFVBQVUsR0FDWCxNQUFNLGVBQWUsQ0FBQztBQWN2QixNQUFNLE9BQU8sbUJBQW1CO0lBWmhDO1FBY0UsV0FBTSxHQUFHLENBQUMsQ0FBQztRQUVYLGFBQVEsR0FBRyxLQUFLLENBQUM7UUFFakIsVUFBSyxHQUFHLENBQUMsQ0FBQztRQUVWLGFBQVEsR0FBRyxDQUFDLE9BQWUsRUFBRSxFQUFFLEdBQUUsQ0FBQyxDQUFDO1FBQ25DLGNBQVMsR0FBRyxHQUFHLEVBQUUsR0FBRSxDQUFDLENBQUM7SUEwQnZCLENBQUM7Ozs7SUF4QkMsSUFBSSxLQUFLO1FBQ1AsT0FBTyxJQUFJLENBQUMsTUFBTSxDQUFDO0lBQ3JCLENBQUM7Ozs7O0lBRUQsU0FBUyxDQUFDLE1BQWM7UUFDdEIsSUFBSSxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7WUFDbEIsSUFBSSxDQUFDLFVBQVUsQ0FBQyxNQUFNLENBQUMsQ0FBQztTQUN6QjtJQUNILENBQUM7Ozs7OztJQUlELFVBQVUsQ0FBQyxNQUFjO1FBQ3ZCLElBQUksQ0FBQyxNQUFNLEdBQUcsTUFBTSxDQUFDO1FBQ3JCLElBQUksQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDO0lBQzdCLENBQUM7Ozs7O0lBRUQsZ0JBQWdCLENBQUMsRUFBNEI7UUFDM0MsSUFBSSxDQUFDLFFBQVEsR0FBRyxFQUFFLENBQUM7SUFDckIsQ0FBQzs7Ozs7SUFFRCxpQkFBaUIsQ0FBQyxFQUFjO1FBQzlCLElBQUksQ0FBQyxTQUFTLEdBQUcsRUFBRSxDQUFDO0lBQ3RCLENBQUM7OztZQTlDRixTQUFTLFNBQUM7Z0JBQ1QsUUFBUSxFQUFFLGdCQUFnQjtnQkFDMUIsZ2RBQTJDO2dCQUMzQyxlQUFlLEVBQUUsdUJBQXVCLENBQUMsTUFBTTtnQkFDL0MsU0FBUyxFQUFFO29CQUNUO3dCQUNFLE9BQU8sRUFBRSxpQkFBaUI7d0JBQzFCLEtBQUssRUFBRSxJQUFJO3dCQUNYLFdBQVcsRUFBRSxVQUFVLENBQUMsR0FBRyxFQUFFLENBQUMsbUJBQW1CLENBQUM7cUJBQ25EO2lCQUNGO2FBQ0Y7OztxQkFFRSxLQUFLO3VCQUVMLEtBQUs7b0JBRUwsS0FBSzs7OztJQUpOLHFDQUNXOztJQUNYLHVDQUNpQjs7SUFDakIsb0NBQ1U7O0lBRVYsdUNBQW1DOztJQUNuQyx3Q0FBcUIiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBOR19WQUxVRV9BQ0NFU1NPUiwgQ29udHJvbFZhbHVlQWNjZXNzb3IgfSBmcm9tICdAYW5ndWxhci9mb3Jtcyc7XG5pbXBvcnQge1xuICBDb21wb25lbnQsXG4gIElucHV0LFxuICBDaGFuZ2VEZXRlY3Rpb25TdHJhdGVneSxcbiAgZm9yd2FyZFJlZixcbn0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5cbkBDb21wb25lbnQoe1xuICBzZWxlY3RvcjogJ2N4LXN0YXItcmF0aW5nJyxcbiAgdGVtcGxhdGVVcmw6ICcuL3N0YXItcmF0aW5nLmNvbXBvbmVudC5odG1sJyxcbiAgY2hhbmdlRGV0ZWN0aW9uOiBDaGFuZ2VEZXRlY3Rpb25TdHJhdGVneS5PblB1c2gsXG4gIHByb3ZpZGVyczogW1xuICAgIHtcbiAgICAgIHByb3ZpZGU6IE5HX1ZBTFVFX0FDQ0VTU09SLFxuICAgICAgbXVsdGk6IHRydWUsXG4gICAgICB1c2VFeGlzdGluZzogZm9yd2FyZFJlZigoKSA9PiBTdGFyUmF0aW5nQ29tcG9uZW50KSxcbiAgICB9LFxuICBdLFxufSlcbmV4cG9ydCBjbGFzcyBTdGFyUmF0aW5nQ29tcG9uZW50IGltcGxlbWVudHMgQ29udHJvbFZhbHVlQWNjZXNzb3Ige1xuICBASW5wdXQoKVxuICByYXRpbmcgPSAxO1xuICBASW5wdXQoKVxuICBkaXNhYmxlZCA9IGZhbHNlO1xuICBASW5wdXQoKVxuICBzdGVwcyA9IDE7XG5cbiAgb25DaGFuZ2UgPSAoX3JhdGluZzogbnVtYmVyKSA9PiB7fTtcbiAgb25Ub3VjaGVkID0gKCkgPT4ge307XG5cbiAgZ2V0IHZhbHVlKCk6IG51bWJlciB7XG4gICAgcmV0dXJuIHRoaXMucmF0aW5nO1xuICB9XG5cbiAgc2V0UmF0aW5nKHJhdGluZzogbnVtYmVyKTogdm9pZCB7XG4gICAgaWYgKCF0aGlzLmRpc2FibGVkKSB7XG4gICAgICB0aGlzLndyaXRlVmFsdWUocmF0aW5nKTtcbiAgICB9XG4gIH1cblxuICAvLyBDb250cm9sdmFsdWVBY2Nlc3NvciBpbnRlcmZhY2VcblxuICB3cml0ZVZhbHVlKHJhdGluZzogbnVtYmVyKTogdm9pZCB7XG4gICAgdGhpcy5yYXRpbmcgPSByYXRpbmc7XG4gICAgdGhpcy5vbkNoYW5nZSh0aGlzLnJhdGluZyk7XG4gIH1cblxuICByZWdpc3Rlck9uQ2hhbmdlKGZuOiAocmF0aW5nOiBudW1iZXIpID0+IHZvaWQpOiB2b2lkIHtcbiAgICB0aGlzLm9uQ2hhbmdlID0gZm47XG4gIH1cblxuICByZWdpc3Rlck9uVG91Y2hlZChmbjogKCkgPT4gdm9pZCk6IHZvaWQge1xuICAgIHRoaXMub25Ub3VjaGVkID0gZm47XG4gIH1cbn1cbiJdfQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3Rhci1yYXRpbmcuY29tcG9uZW50LmpzIiwic291cmNlUm9vdCI6Im5nOi8vQHNwYXJ0YWN1cy9zdG9yZWZyb250LyIsInNvdXJjZXMiOlsic2hhcmVkL2NvbXBvbmVudHMvc3Rhci1yYXRpbmcvc3Rhci1yYXRpbmcuY29tcG9uZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSxPQUFPLEVBQ0wsdUJBQXVCLEVBQ3ZCLFNBQVMsRUFDVCxVQUFVLEVBQ1YsWUFBWSxFQUNaLFdBQVcsRUFDWCxLQUFLLEVBRUwsTUFBTSxHQUNQLE1BQU0sZUFBZSxDQUFDO0FBQ3ZCLE9BQU8sRUFBRSxVQUFVLEVBQUUsTUFBTSxvQ0FBb0MsQ0FBQztBQU9oRSxNQUFNLE9BQU8sbUJBQW1COzs7O0lBcUI5QixZQUFvQixFQUFjO1FBQWQsT0FBRSxHQUFGLEVBQUUsQ0FBWTs7Ozs7UUFoQkssYUFBUSxHQUFHLEtBQUssQ0FBQzs7OztRQVU5QyxXQUFNLEdBQUcsSUFBSSxZQUFZLEVBQVUsQ0FBQztRQUV0QyxnQkFBVyxHQUFHLENBQUMsQ0FBQztRQUV4QixjQUFTLEdBQUcsVUFBVSxDQUFDO0lBRWMsQ0FBQzs7OztJQUV0QyxRQUFRO1FBQ04sSUFBSSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsTUFBTSxFQUFFLElBQUksQ0FBQyxDQUFDO0lBQ2xDLENBQUM7Ozs7OztJQUVELE9BQU8sQ0FBQyxLQUFhLEVBQUUsS0FBZTtRQUNwQyxJQUFJLENBQUMsSUFBSSxDQUFDLFFBQVEsSUFBSSxLQUFLLEVBQUU7WUFDM0IsSUFBSSxDQUFDLEVBQUUsQ0FBQyxhQUFhLENBQUMsS0FBSyxDQUFDLFdBQVcsQ0FDckMsYUFBYSxFQUNiLEtBQUssSUFBSSxJQUFJLENBQUMsV0FBVyxDQUMxQixDQUFDO1NBQ0g7SUFDSCxDQUFDOzs7OztJQUVELFFBQVEsQ0FBQyxNQUFjO1FBQ3JCLElBQUksSUFBSSxDQUFDLFFBQVEsRUFBRTtZQUNqQixPQUFPO1NBQ1I7UUFDRCxJQUFJLENBQUMsV0FBVyxHQUFHLE1BQU0sQ0FBQztRQUMxQixJQUFJLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxDQUFDO1FBQ3JCLElBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDO0lBQzNCLENBQUM7OztZQWhERixTQUFTLFNBQUM7Z0JBQ1QsUUFBUSxFQUFFLGdCQUFnQjtnQkFDMUIsK01BQTJDO2dCQUMzQyxlQUFlLEVBQUUsdUJBQXVCLENBQUMsTUFBTTthQUNoRDs7OztZQWJDLFVBQVU7Ozt1QkFtQlQsS0FBSyxZQUFJLFdBQVcsU0FBQyxlQUFlO3FCQUtwQyxLQUFLO3FCQUtMLE1BQU07Ozs7Ozs7O0lBVlAsdUNBQXdEOzs7OztJQUt4RCxxQ0FBd0I7Ozs7O0lBS3hCLHFDQUE4Qzs7Ozs7SUFFOUMsMENBQXdCOztJQUV4Qix3Q0FBdUI7Ozs7O0lBRVgsaUNBQXNCIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHtcbiAgQ2hhbmdlRGV0ZWN0aW9uU3RyYXRlZ3ksXG4gIENvbXBvbmVudCxcbiAgRWxlbWVudFJlZixcbiAgRXZlbnRFbWl0dGVyLFxuICBIb3N0QmluZGluZyxcbiAgSW5wdXQsXG4gIE9uSW5pdCxcbiAgT3V0cHV0LFxufSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IElDT05fVFlQRVMgfSBmcm9tICcuLi8uLi8uLi9jbXMtY29tcG9uZW50cy9taXNjL2luZGV4JztcblxuQENvbXBvbmVudCh7XG4gIHNlbGVjdG9yOiAnY3gtc3Rhci1yYXRpbmcnLFxuICB0ZW1wbGF0ZVVybDogJy4vc3Rhci1yYXRpbmcuY29tcG9uZW50Lmh0bWwnLFxuICBjaGFuZ2VEZXRlY3Rpb246IENoYW5nZURldGVjdGlvblN0cmF0ZWd5Lk9uUHVzaCxcbn0pXG5leHBvcnQgY2xhc3MgU3RhclJhdGluZ0NvbXBvbmVudCBpbXBsZW1lbnRzIE9uSW5pdCB7XG4gIC8qKlxuICAgKiBUaGUgcmF0aW5nIGNvbXBvbmVudCBjYW4gYmUgdXNlZCBpbiBkaXNhYmxlZCBtb2RlLFxuICAgKiBzbyB0aGF0IHRoZSBpbnRlcmF0aW9uIGlzIG5vdCBwcm92aWRlZC5cbiAgICovXG4gIEBJbnB1dCgpIEBIb3N0QmluZGluZygnYXR0ci5kaXNhYmxlZCcpIGRpc2FibGVkID0gZmFsc2U7XG5cbiAgLyoqXG4gICAqIFRoZSByYXRpbmcgd2lsbCBiZSB1c2VkIHRvIHJlbmRlciBzb21lIGNvbG9yZnVsIHN0YXJzIGluIHRoZSBVSS5cbiAgICovXG4gIEBJbnB1dCgpIHJhdGluZzogbnVtYmVyO1xuXG4gIC8qKlxuICAgKiBFbWl0cyB0aGUgZ2l2ZW4gcmF0aW5nIHdoZW4gdGhlIHVzZXIgY2xpY2tzIG9uIGEgc3Rhci5cbiAgICovXG4gIEBPdXRwdXQoKSBjaGFuZ2UgPSBuZXcgRXZlbnRFbWl0dGVyPG51bWJlcj4oKTtcblxuICBwcml2YXRlIGluaXRpYWxSYXRlID0gMDtcblxuICBpY29uVHlwZXMgPSBJQ09OX1RZUEVTO1xuXG4gIGNvbnN0cnVjdG9yKHByaXZhdGUgZWw6IEVsZW1lbnRSZWYpIHt9XG5cbiAgbmdPbkluaXQoKTogdm9pZCB7XG4gICAgdGhpcy5zZXRSYXRlKHRoaXMucmF0aW5nLCB0cnVlKTtcbiAgfVxuXG4gIHNldFJhdGUodmFsdWU6IG51bWJlciwgZm9yY2U/OiBib29sZWFuKTogdm9pZCB7XG4gICAgaWYgKCF0aGlzLmRpc2FibGVkIHx8IGZvcmNlKSB7XG4gICAgICB0aGlzLmVsLm5hdGl2ZUVsZW1lbnQuc3R5bGUuc2V0UHJvcGVydHkoXG4gICAgICAgICctLXN0YXItZmlsbCcsXG4gICAgICAgIHZhbHVlIHx8IHRoaXMuaW5pdGlhbFJhdGVcbiAgICAgICk7XG4gICAgfVxuICB9XG5cbiAgc2F2ZVJhdGUocmF0aW5nOiBudW1iZXIpOiB2b2lkIHtcbiAgICBpZiAodGhpcy5kaXNhYmxlZCkge1xuICAgICAgcmV0dXJuO1xuICAgIH1cbiAgICB0aGlzLmluaXRpYWxSYXRlID0gcmF0aW5nO1xuICAgIHRoaXMuc2V0UmF0ZShyYXRpbmcpO1xuICAgIHRoaXMuY2hhbmdlLmVtaXQocmF0aW5nKTtcbiAgfVxufVxuIl19
