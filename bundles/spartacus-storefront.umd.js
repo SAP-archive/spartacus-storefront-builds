@@ -5714,13 +5714,25 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /** @type {?} */
+    var defaultIconConfig = {
+        icon: {
+            prefix: 'fa-',
+            iconClass: 'fas',
+        },
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var IconModule = /** @class */ (function () {
         function IconModule() {
         }
         IconModule.decorators = [
             { type: i0.NgModule, args: [{
                         declarations: [IconComponent],
-                        imports: [common.CommonModule],
+                        imports: [common.CommonModule, i1$1.ConfigModule.withConfig(defaultIconConfig)],
                         providers: [{ provide: IconConfig, useExisting: i1$1.Config }],
                         exports: [IconComponent],
                     },] }
@@ -15302,55 +15314,56 @@
     exports.OnlyNumberDirective = OnlyNumberDirective;
     exports.translations = translations;
     exports.ɵd = CartTotalsModule;
-    exports.ɵg = NavigationUIComponent;
-    exports.ɵf = NavigationComponentService;
-    exports.ɵm = ProductCarouselService;
-    exports.ɵl = ProductTabsComponent;
-    exports.ɵq = LoginComponentService;
-    exports.ɵk = OutletStyleService;
-    exports.ɵr = defaultCartPageConfig;
-    exports.ɵs = AddToHomeScreenService;
+    exports.ɵe = defaultIconConfig;
+    exports.ɵh = NavigationUIComponent;
+    exports.ɵg = NavigationComponentService;
+    exports.ɵn = ProductCarouselService;
+    exports.ɵm = ProductTabsComponent;
+    exports.ɵr = LoginComponentService;
+    exports.ɵl = OutletStyleService;
+    exports.ɵs = defaultCartPageConfig;
+    exports.ɵt = AddToHomeScreenService;
     exports.ɵc = BootstrapModule;
-    exports.ɵbd = CheckoutDetailsService;
-    exports.ɵu = DeliveryModeModule;
-    exports.ɵy = BillingAddressFormComponent;
-    exports.ɵx = BillingAddressFormModule;
-    exports.ɵw = PaymentFormModule;
-    exports.ɵz = PaymentMethodComponent;
-    exports.ɵv = PaymentMethodModule;
-    exports.ɵbc = PlaceOrderComponent;
-    exports.ɵbb = PlaceOrderModule;
-    exports.ɵba = ReviewSubmitModule;
-    exports.ɵj = AddressFormModule;
-    exports.ɵt = ShippingAddressComponent;
+    exports.ɵbe = CheckoutDetailsService;
+    exports.ɵv = DeliveryModeModule;
+    exports.ɵz = BillingAddressFormComponent;
+    exports.ɵy = BillingAddressFormModule;
+    exports.ɵx = PaymentFormModule;
+    exports.ɵba = PaymentMethodComponent;
+    exports.ɵw = PaymentMethodModule;
+    exports.ɵbd = PlaceOrderComponent;
+    exports.ɵbc = PlaceOrderModule;
+    exports.ɵbb = ReviewSubmitModule;
+    exports.ɵk = AddressFormModule;
+    exports.ɵu = ShippingAddressComponent;
     exports.ɵb = PromotionsComponent;
     exports.ɵa = PromotionsModule;
-    exports.ɵbe = guards$1;
-    exports.ɵbf = OrderConfirmationPageGuard;
-    exports.ɵbg = addCmsRoute;
-    exports.ɵn = guards;
-    exports.ɵp = CmsGuardsService;
-    exports.ɵo = CmsI18nService;
-    exports.ɵbm = provideConfigFromMetaTags;
-    exports.ɵbl = suffixUrlMatcher;
-    exports.ɵbk = HardcodedCheckoutComponent;
-    exports.ɵbj = CartNotEmptyGuard;
-    exports.ɵbi = GuardsModule;
-    exports.ɵbh = OrderConfirmationPageModule;
-    exports.ɵi = CardComponent;
-    exports.ɵh = CardModule;
-    exports.ɵe = GenericLinkModule;
-    exports.ɵbn = address;
-    exports.ɵbo = cart;
-    exports.ɵbp = checkout;
-    exports.ɵbq = closeAccount;
-    exports.ɵbr = common$1;
-    exports.ɵbs = myAccount;
-    exports.ɵbt = payment;
-    exports.ɵbu = product;
-    exports.ɵbv = pwa;
-    exports.ɵbw = storeFinder;
-    exports.ɵbx = user;
+    exports.ɵbf = guards$1;
+    exports.ɵbg = OrderConfirmationPageGuard;
+    exports.ɵbh = addCmsRoute;
+    exports.ɵo = guards;
+    exports.ɵq = CmsGuardsService;
+    exports.ɵp = CmsI18nService;
+    exports.ɵbn = provideConfigFromMetaTags;
+    exports.ɵbm = suffixUrlMatcher;
+    exports.ɵbl = HardcodedCheckoutComponent;
+    exports.ɵbk = CartNotEmptyGuard;
+    exports.ɵbj = GuardsModule;
+    exports.ɵbi = OrderConfirmationPageModule;
+    exports.ɵj = CardComponent;
+    exports.ɵi = CardModule;
+    exports.ɵf = GenericLinkModule;
+    exports.ɵbo = address;
+    exports.ɵbp = cart;
+    exports.ɵbq = checkout;
+    exports.ɵbr = closeAccount;
+    exports.ɵbs = common$1;
+    exports.ɵbt = myAccount;
+    exports.ɵbu = payment;
+    exports.ɵbv = product;
+    exports.ɵbw = pwa;
+    exports.ɵbx = storeFinder;
+    exports.ɵby = user;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
