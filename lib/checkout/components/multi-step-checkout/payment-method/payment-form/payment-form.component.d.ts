@@ -4,6 +4,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Address, AddressValidation, CardType, CheckoutService, Country, GlobalMessageService, UserService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { Card } from '../../../../../../shared/components/card/card.component';
+import { ICON_TYPES } from '../../../../../../cms-components/misc/icon/index';
 declare type monthType = {
     id: number;
     name: string;
@@ -18,6 +19,7 @@ export declare class PaymentFormComponent implements OnInit, OnDestroy {
     protected globalMessageService: GlobalMessageService;
     private fb;
     private modalService;
+    iconTypes: typeof ICON_TYPES;
     private checkboxSub;
     private addressVerifySub;
     suggestedAddressModalRef: NgbModalRef;
@@ -33,7 +35,6 @@ export declare class PaymentFormComponent implements OnInit, OnDestroy {
     addPaymentInfo: EventEmitter<any>;
     payment: FormGroup;
     billingAddress: FormGroup;
-    infoIconImgSrc: string;
     constructor(checkoutService: CheckoutService, userService: UserService, globalMessageService: GlobalMessageService, fb: FormBuilder, modalService: NgbModal);
     ngOnInit(): void;
     expMonthAndYear(): void;
