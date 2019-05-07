@@ -7,7 +7,7 @@ import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscriptio
 import { Title, Meta } from '@angular/platform-browser';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
-import { CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, CmsService, ConfigModule, ProductService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, PageRobotsMeta, OccConfig, NotAuthGuard, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
+import { CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ConfigModule, CmsService, ProductService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, PageRobotsMeta, OccConfig, NotAuthGuard, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { Component, ElementRef, ViewChild, Input, ChangeDetectionStrategy, NgModule, Directive, HostListener, Renderer2, EventEmitter, forwardRef, Output, Injectable, Injector, Optional, Inject, PLATFORM_ID, APP_INITIALIZER, ChangeDetectorRef, HostBinding, TemplateRef, ViewContainerRef, ViewEncapsulation, defineInjectable, inject, INJECTOR } from '@angular/core';
@@ -2006,30 +2006,18 @@ class PageLayoutComponent {
         this.el = el;
         this.renderer = renderer;
         this.pageLayoutService = pageLayoutService;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        if (this.section) {
-            this.styleClass = this.section;
-        }
-    }
-    /**
-     * @return {?}
-     */
-    get slots$() {
-        return this.pageLayoutService.getSlots(this.section);
-    }
-    /**
-     * @return {?}
-     */
-    get templateName$() {
-        return this.pageLayoutService.templateName$.pipe(
-        // intercept the observable to keep a clean DOM tree
-        tap(name => {
+        this.section$ = new BehaviorSubject(undefined);
+        this.layoutName$ = this.section$.pipe(switchMap(section => section ? of(section) : this.pageLayoutService.templateName$), tap(name => {
             this.styleClass = name;
         }));
+        this.slots$ = this.section$.pipe(switchMap(section => this.pageLayoutService.getSlots(section)));
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set section(value) {
+        this.section$.next(value);
     }
     /**
      * @param {?} cls
@@ -2046,7 +2034,7 @@ class PageLayoutComponent {
 PageLayoutComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-page-layout',
-                template: "<ng-container *cxOutlet=\"section || (templateName$ | async)\">\n  <ng-content></ng-content>\n  <cx-page-slot\n    *ngFor=\"let slot of (slots$ | async)\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-container>\n",
+                template: "<ng-container *cxOutlet=\"(layoutName$ | async)\">\n  <ng-content></ng-content>\n  <cx-page-slot\n    *ngFor=\"let slot of (slots$ | async)\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -2323,7 +2311,6 @@ class LoginComponent {
             if (token && !!token.access_token && !this.loginService.isLogin) {
                 this.loginService.isLogin = true;
                 this.userService.load(token.userId);
-                this.auth.login();
             }
             else if (token && !token.access_token && this.loginService.isLogin) {
                 this.loginService.isLogin = false;
@@ -2540,25 +2527,26 @@ class PageSlotComponent {
         this.dynamicAttributeService = dynamicAttributeService;
         this.renderer = renderer;
         this.hostElement = hostElement;
+        this.position$ = new BehaviorSubject(undefined);
+        /**
+         * observable with `ContentSlotData` for the current position
+         */
+        this.slot$ = this.position$.pipe(switchMap(position => this.cmsService.getContentSlot(position)), tap(slot => this.addSmartEditSlotClass(slot)));
+        /**
+         * observable with components (`ContentSlotComponentData[]`)
+         * for the current slot
+         */
+        this.components$ = this.slot$.pipe(map(slot => (slot && slot.components ? slot.components : [])), distinctUntilChanged((a, b) => a.length === b.length && !a.find((el, index) => el.uid !== b[index].uid)), tap(components => this.addComponentClass(components)));
     }
     /**
+     * @param {?} position
      * @return {?}
      */
-    ngOnInit() {
+    set position(position) {
+        this.position$.next(position);
         // add the position name as a css class so that
         // layout can be applied to it, using the position based class.
-        this.renderer.addClass(this.hostElement.nativeElement, this.position);
-        this.components$ = this.slot$.pipe(map(slot => (slot && slot.components ? slot.components : [])), distinctUntilChanged((a, b) => a.length === b.length &&
-            !a.find((el, index) => el.uid !== b[index].uid)), tap(components => this.addComponentClass(components)));
-    }
-    /**
-     * returns an observable with `ContentSlotData` for the current position
-     * @return {?}
-     */
-    get slot$() {
-        return this.cmsService
-            .getContentSlot(this.position)
-            .pipe(tap(slot => this.addSmartEditSlotClass(slot)));
+        this.renderer.addClass(this.hostElement.nativeElement, position);
     }
     // add a class to indicate whether the class is empty or not
     /**
@@ -2593,7 +2581,7 @@ class PageSlotComponent {
 PageSlotComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-page-slot',
-                template: "<ng-container *cxOutlet=\"position\">\n  <ng-container *ngFor=\"let component of (components$ | async)\">\n    <ng-container\n      *cxOutlet=\"component.flexType\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-container>\n  </ng-container>\n</ng-container>\n",
+                template: "<ng-container *cxOutlet=\"(position$ | async)\">\n  <ng-container *ngFor=\"let component of (components$ | async)\">\n    <ng-container\n      *cxOutlet=\"component.flexType\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-container>\n  </ng-container>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];

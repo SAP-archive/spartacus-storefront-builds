@@ -7,7 +7,7 @@ import { Title, Meta } from '@angular/platform-browser';
 import { __read, __values, __spread, __extends, __assign, __awaiter, __generator } from 'tslib';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
-import { CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, AuthService, I18nModule, UserService, CheckoutModule, UrlModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ConfigModule, CmsService, CartDataService, ProductService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, DynamicAttributeService, CxApiService, ComponentMapperService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, OccConfig, NotAuthGuard, StoreFinderCoreModule, PageRobotsMeta, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
+import { CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, AuthService, I18nModule, UserService, CheckoutModule, UrlModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ConfigModule, CmsService, CartDataService, ProductService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, DynamicAttributeService, CxApiService, ComponentMapperService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, OccConfig, NotAuthGuard, StoreFinderCoreModule, PageRobotsMeta, GlobalMessageModule, ContextServiceMap, SiteContextModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ProductReviewService, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { Component, ElementRef, ViewChild, Input, ChangeDetectionStrategy, NgModule, Directive, HostListener, Renderer2, EventEmitter, forwardRef, Output, Injectable, APP_INITIALIZER, Injector, ChangeDetectorRef, HostBinding, TemplateRef, ViewEncapsulation, Optional, defineInjectable, inject, INJECTOR, Inject, PLATFORM_ID, ViewContainerRef } from '@angular/core';
@@ -2489,42 +2489,25 @@ var PageLayoutService = /** @class */ (function () {
  */
 var PageLayoutComponent = /** @class */ (function () {
     function PageLayoutComponent(el, renderer, pageLayoutService) {
+        var _this = this;
         this.el = el;
         this.renderer = renderer;
         this.pageLayoutService = pageLayoutService;
+        this.section$ = new BehaviorSubject(undefined);
+        this.layoutName$ = this.section$.pipe(switchMap(function (section) {
+            return section ? of(section) : _this.pageLayoutService.templateName$;
+        }), tap(function (name) {
+            _this.styleClass = name;
+        }));
+        this.slots$ = this.section$.pipe(switchMap(function (section) { return _this.pageLayoutService.getSlots(section); }));
     }
-    /**
-     * @return {?}
-     */
-    PageLayoutComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        if (this.section) {
-            this.styleClass = this.section;
-        }
-    };
-    Object.defineProperty(PageLayoutComponent.prototype, "slots$", {
-        get: /**
+    Object.defineProperty(PageLayoutComponent.prototype, "section", {
+        set: /**
+         * @param {?} value
          * @return {?}
          */
-        function () {
-            return this.pageLayoutService.getSlots(this.section);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PageLayoutComponent.prototype, "templateName$", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            return this.pageLayoutService.templateName$.pipe(
-            // intercept the observable to keep a clean DOM tree
-            tap(function (name) {
-                _this.styleClass = name;
-            }));
+        function (value) {
+            this.section$.next(value);
         },
         enumerable: true,
         configurable: true
@@ -2547,7 +2530,7 @@ var PageLayoutComponent = /** @class */ (function () {
     PageLayoutComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-page-layout',
-                    template: "<ng-container *cxOutlet=\"section || (templateName$ | async)\">\n  <ng-content></ng-content>\n  <cx-page-slot\n    *ngFor=\"let slot of (slots$ | async)\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-container>\n",
+                    template: "<ng-container *cxOutlet=\"(layoutName$ | async)\">\n  <ng-content></ng-content>\n  <cx-page-slot\n    *ngFor=\"let slot of (slots$ | async)\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-container>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -2870,7 +2853,6 @@ var LoginComponent = /** @class */ (function () {
                 if (token && !!token.access_token && !_this.loginService.isLogin) {
                     _this.loginService.isLogin = true;
                     _this.userService.load(token.userId);
-                    _this.auth.login();
                 }
                 else if (token && !token.access_token && _this.loginService.isLogin) {
                     _this.loginService.isLogin = false;
@@ -3119,40 +3101,34 @@ var PageComponentModule = /** @class */ (function () {
  */
 var PageSlotComponent = /** @class */ (function () {
     function PageSlotComponent(cmsService, dynamicAttributeService, renderer, hostElement) {
+        var _this = this;
         this.cmsService = cmsService;
         this.dynamicAttributeService = dynamicAttributeService;
         this.renderer = renderer;
         this.hostElement = hostElement;
-    }
-    /**
-     * @return {?}
-     */
-    PageSlotComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        // add the position name as a css class so that
-        // layout can be applied to it, using the position based class.
-        this.renderer.addClass(this.hostElement.nativeElement, this.position);
-        this.components$ = this.slot$.pipe(map(function (slot) { return (slot && slot.components ? slot.components : []); }), distinctUntilChanged(function (a, b) {
-            return a.length === b.length &&
-                !a.find(function (el, index) { return el.uid !== b[index].uid; });
-        }), tap(function (components) { return _this.addComponentClass(components); }));
-    };
-    Object.defineProperty(PageSlotComponent.prototype, "slot$", {
+        this.position$ = new BehaviorSubject(undefined);
         /**
-         * returns an observable with `ContentSlotData` for the current position
+         * observable with `ContentSlotData` for the current position
          */
-        get: /**
-         * returns an observable with `ContentSlotData` for the current position
+        this.slot$ = this.position$.pipe(switchMap(function (position) { return _this.cmsService.getContentSlot(position); }), tap(function (slot) { return _this.addSmartEditSlotClass(slot); }));
+        /**
+         * observable with components (`ContentSlotComponentData[]`)
+         * for the current slot
+         */
+        this.components$ = this.slot$.pipe(map(function (slot) { return (slot && slot.components ? slot.components : []); }), distinctUntilChanged(function (a, b) {
+            return a.length === b.length && !a.find(function (el, index) { return el.uid !== b[index].uid; });
+        }), tap(function (components) { return _this.addComponentClass(components); }));
+    }
+    Object.defineProperty(PageSlotComponent.prototype, "position", {
+        set: /**
+         * @param {?} position
          * @return {?}
          */
-        function () {
-            var _this = this;
-            return this.cmsService
-                .getContentSlot(this.position)
-                .pipe(tap(function (slot) { return _this.addSmartEditSlotClass(slot); }));
+        function (position) {
+            this.position$.next(position);
+            // add the position name as a css class so that
+            // layout can be applied to it, using the position based class.
+            this.renderer.addClass(this.hostElement.nativeElement, position);
         },
         enumerable: true,
         configurable: true
@@ -3207,7 +3183,7 @@ var PageSlotComponent = /** @class */ (function () {
     PageSlotComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-page-slot',
-                    template: "<ng-container *cxOutlet=\"position\">\n  <ng-container *ngFor=\"let component of (components$ | async)\">\n    <ng-container\n      *cxOutlet=\"component.flexType\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-container>\n  </ng-container>\n</ng-container>\n",
+                    template: "<ng-container *cxOutlet=\"(position$ | async)\">\n  <ng-container *ngFor=\"let component of (components$ | async)\">\n    <ng-container\n      *cxOutlet=\"component.flexType\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-container>\n  </ng-container>\n</ng-container>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
