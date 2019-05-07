@@ -7,7 +7,7 @@ import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscriptio
 import { Title, Meta } from '@angular/platform-browser';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
-import { CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlTranslationModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ConfigModule, CmsService, ProductService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, PageRobotsMeta, OccConfig, StoreFinderCoreModule, GlobalMessageModule, NotAuthGuard, ContextServiceMap, SiteContextModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ProductReviewService, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
+import { CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlTranslationModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, CmsService, ConfigModule, ProductService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, PageRobotsMeta, OccConfig, StoreFinderCoreModule, GlobalMessageModule, NotAuthGuard, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { Component, ElementRef, ViewChild, Input, ChangeDetectionStrategy, NgModule, Directive, HostListener, Renderer2, EventEmitter, forwardRef, Output, Injectable, Injector, Optional, Inject, PLATFORM_ID, APP_INITIALIZER, ChangeDetectorRef, HostBinding, TemplateRef, ViewContainerRef, ViewEncapsulation, defineInjectable, inject, INJECTOR } from '@angular/core';
@@ -11975,6 +11975,7 @@ StorefrontModule.decorators = [
                     I18nModule.forRoot(),
                 ],
                 exports: [UiModule],
+                providers: [...provideConfigFromMetaTags()],
                 declarations: [],
             },] }
 ];

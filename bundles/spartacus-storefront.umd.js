@@ -14624,6 +14624,7 @@
                             i1$1.I18nModule.forRoot(),
                         ],
                         exports: [UiModule],
+                        providers: __spread(provideConfigFromMetaTags()),
                         declarations: [],
                     },] }
         ];
