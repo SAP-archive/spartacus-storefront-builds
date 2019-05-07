@@ -362,7 +362,7 @@
                     'Tab',
                 ];
                 // allow some non-numeric characters
-                if (allowedKeys.indexOf(key) !== -1 ||
+                if (allowedKeys.includes(key) ||
                     // Allow: Ctrl+A and Command+A
                     (key === 'a' && controlOrCommand) ||
                     // Allow: Ctrl+C and Command+C
@@ -10265,7 +10265,7 @@
                         // Look through h3 tab elements until finding tab with label
                         for (var _b = __values(Array.from(h3Elements)), _c = _b.next(); !_c.done; _c = _b.next()) {
                             var h3Element = _c.value;
-                            if (h3Element.innerHTML.indexOf(label) > -1) {
+                            if (h3Element.innerHTML.includes(label)) {
                                 return h3Element;
                             }
                         }
@@ -11205,7 +11205,7 @@
          * @return {?}
          */
             function (event, tab) {
-                if (this.activatedElements.indexOf(tab) === -1) {
+                if (!this.activatedElements.includes(tab)) {
                     // remove active class on both header and content panel
                     this.activatedElements.forEach(function (el) {
                         return el.classList.remove('active', 'toggled');
@@ -14241,7 +14241,7 @@
          * @return {?}
          */
             function (event) {
-                return event.url.indexOf('pageLabelOrId=multiStepCheckoutSummaryPage') > -1;
+                return event.url.includes('pageLabelOrId=multiStepCheckoutSummaryPage');
             };
         /**
          * @private

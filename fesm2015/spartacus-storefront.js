@@ -7,7 +7,7 @@ import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscriptio
 import { Title, Meta } from '@angular/platform-browser';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
-import { CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ConfigModule, CmsService, ProductService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, PageRobotsMeta, OccConfig, NotAuthGuard, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
+import { CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, CmsService, ConfigModule, ProductService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, PageRobotsMeta, OccConfig, NotAuthGuard, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { Component, ElementRef, ViewChild, Input, ChangeDetectionStrategy, NgModule, Directive, HostListener, Renderer2, EventEmitter, forwardRef, Output, Injectable, Injector, Optional, Inject, PLATFORM_ID, APP_INITIALIZER, ChangeDetectorRef, HostBinding, TemplateRef, ViewContainerRef, ViewEncapsulation, defineInjectable, inject, INJECTOR } from '@angular/core';
@@ -299,7 +299,7 @@ class OnlyNumberDirective {
             'Tab',
         ];
         // allow some non-numeric characters
-        if (allowedKeys.indexOf(key) !== -1 ||
+        if (allowedKeys.includes(key) ||
             // Allow: Ctrl+A and Command+A
             (key === 'a' && controlOrCommand) ||
             // Allow: Ctrl+C and Command+C
@@ -8279,7 +8279,7 @@ class ProductSummaryComponent {
             const h3Elements = tabsComponent.getElementsByTagName('h3');
             // Look through h3 tab elements until finding tab with label
             for (const h3Element of Array.from(h3Elements)) {
-                if (h3Element.innerHTML.indexOf(label) > -1) {
+                if (h3Element.innerHTML.includes(label)) {
                     return h3Element;
                 }
             }
@@ -9048,7 +9048,7 @@ class ProductTabsComponent {
      * @return {?}
      */
     select(event, tab) {
-        if (this.activatedElements.indexOf(tab) === -1) {
+        if (!this.activatedElements.includes(tab)) {
             // remove active class on both header and content panel
             this.activatedElements.forEach(el => el.classList.remove('active', 'toggled'));
             this.activatedElements = [(/** @type {?} */ (event.target)), tab];
@@ -11624,7 +11624,7 @@ class HardcodedCheckoutComponent {
      * @return {?}
      */
     shouldBeIntercepted(event) {
-        return event.url.indexOf('pageLabelOrId=multiStepCheckoutSummaryPage') > -1;
+        return event.url.includes('pageLabelOrId=multiStepCheckoutSummaryPage');
     }
     /**
      * @private
