@@ -7,7 +7,7 @@ import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscriptio
 import { Title, Meta } from '@angular/platform-browser';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
-import { CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, CmsService, ConfigModule, ProductService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, PageRobotsMeta, OccConfig, NotAuthGuard, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
+import { CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ConfigModule, CmsService, CartDataService, ProductService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, PageRobotsMeta, OccConfig, NotAuthGuard, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { Component, ElementRef, ViewChild, Input, ChangeDetectionStrategy, NgModule, Directive, HostListener, Renderer2, EventEmitter, forwardRef, Output, Injectable, Injector, Optional, Inject, PLATFORM_ID, APP_INITIALIZER, ChangeDetectorRef, HostBinding, TemplateRef, ViewContainerRef, ViewEncapsulation, defineInjectable, inject, INJECTOR } from '@angular/core';
@@ -11562,7 +11562,7 @@ CartPageComponent.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-const ɵ0$2 = { pageLabel: 'cartPage', cxPath: 'cart' };
+const ɵ0$2 = { pageLabel: 'cartPage', cxRoute: 'cart' };
 /** @type {?} */
 const routes = [
     {
@@ -11706,7 +11706,7 @@ OrderConfirmationPageComponent.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-const ɵ0$3 = { pageLabel: 'orderConfirmationPage', cxPath: 'orderConfirmation' };
+const ɵ0$3 = { pageLabel: 'orderConfirmationPage', cxRoute: 'orderConfirmation' };
 /** @type {?} */
 const routes$1 = [
     // TODO: as soon as the components are moved to CMS driven components we can drop this specific OrderConfirmationPageComponent
@@ -11738,7 +11738,7 @@ OrderConfirmationPageModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-const ɵ0$4 = { cxPath: 'product' };
+const ɵ0$4 = { cxRoute: 'product' };
 /** @type {?} */
 const routes$2 = [
     {
@@ -11774,10 +11774,13 @@ const pageModules = [
     ProductPageModule,
     GuardsModule,
 ];
-const ɵ0$5 = { pageLabel: 'homepage', cxPath: 'home' }, ɵ1$1 = { pageLabel: 'address-book', cxPath: 'addressBook' }, ɵ2 = { pageLabel: 'updatePassword', cxPath: 'updatePassword' }, ɵ3 = { pageLabel: 'orders', cxPath: 'orders' }, ɵ4 = { pageLabel: 'multiStepCheckoutSummaryPage', cxPath: 'checkout' }, ɵ5 = { pageLabel: 'login', cxPath: 'login' }, ɵ6 = { pageLabel: 'search', cxPath: 'search' }, ɵ7 = { cxPath: 'category' }, ɵ8 = { cxPath: 'brand' }, ɵ9 = { pageLabel: 'update-email', cxPath: 'updateEmail' }, ɵ10 = { pageLabel: 'payment-details', cxPath: 'paymentManagement' }, ɵ11 = { pageLabel: 'order', cxPath: 'orderDetails' }, ɵ12 = { pageLabel: 'forgotPassword', cxPath: 'forgotPassword' }, ɵ13 = { pageLabel: 'resetPassword', cxPath: 'resetPassword' }, ɵ14 = {
+const ɵ0$5 = { pageLabel: 'homepage', cxRoute: 'home' }, ɵ1$1 = { pageLabel: 'address-book', cxRoute: 'addressBook' }, ɵ2 = { pageLabel: 'updatePassword', cxRoute: 'updatePassword' }, ɵ3 = { pageLabel: 'orders', cxRoute: 'orders' }, ɵ4 = {
+    pageLabel: 'multiStepCheckoutSummaryPage',
+    cxRoute: 'checkout',
+}, ɵ5 = { pageLabel: 'login', cxRoute: 'login' }, ɵ6 = { pageLabel: 'search', cxRoute: 'search' }, ɵ7 = { cxRoute: 'category' }, ɵ8 = { cxRoute: 'brand' }, ɵ9 = { pageLabel: 'update-email', cxRoute: 'updateEmail' }, ɵ10 = { pageLabel: 'payment-details', cxRoute: 'paymentManagement' }, ɵ11 = { pageLabel: 'order', cxRoute: 'orderDetails' }, ɵ12 = { pageLabel: 'forgotPassword', cxRoute: 'forgotPassword' }, ɵ13 = { pageLabel: 'resetPassword', cxRoute: 'resetPassword' }, ɵ14 = {
     pageLabel: 'update-profile',
-    cxPath: 'updateProfile',
-}, ɵ15 = { pageLabel: 'close-account', cxPath: 'closeAccount' };
+    cxRoute: 'updateProfile',
+}, ɵ15 = { pageLabel: 'close-account', cxRoute: 'closeAccount' };
 class PagesModule {
 }
 PagesModule.decorators = [

@@ -14152,7 +14152,7 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var ɵ0$2 = { pageLabel: 'cartPage', cxPath: 'cart' };
+    var ɵ0$2 = { pageLabel: 'cartPage', cxRoute: 'cart' };
     /** @type {?} */
     var routes = [
         {
@@ -14327,7 +14327,7 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var ɵ0$3 = { pageLabel: 'orderConfirmationPage', cxPath: 'orderConfirmation' };
+    var ɵ0$3 = { pageLabel: 'orderConfirmationPage', cxRoute: 'orderConfirmation' };
     /** @type {?} */
     var routes$1 = [
         // TODO: as soon as the components are moved to CMS driven components we can drop this specific OrderConfirmationPageComponent
@@ -14362,7 +14362,7 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var ɵ0$4 = { cxPath: 'product' };
+    var ɵ0$4 = { cxRoute: 'product' };
     /** @type {?} */
     var routes$2 = [
         {
@@ -14401,10 +14401,13 @@
         ProductPageModule,
         GuardsModule,
     ];
-    var ɵ0$5 = { pageLabel: 'homepage', cxPath: 'home' }, ɵ1$1 = { pageLabel: 'address-book', cxPath: 'addressBook' }, ɵ2 = { pageLabel: 'updatePassword', cxPath: 'updatePassword' }, ɵ3 = { pageLabel: 'orders', cxPath: 'orders' }, ɵ4 = { pageLabel: 'multiStepCheckoutSummaryPage', cxPath: 'checkout' }, ɵ5 = { pageLabel: 'login', cxPath: 'login' }, ɵ6 = { pageLabel: 'search', cxPath: 'search' }, ɵ7 = { cxPath: 'category' }, ɵ8 = { cxPath: 'brand' }, ɵ9 = { pageLabel: 'update-email', cxPath: 'updateEmail' }, ɵ10 = { pageLabel: 'payment-details', cxPath: 'paymentManagement' }, ɵ11 = { pageLabel: 'order', cxPath: 'orderDetails' }, ɵ12 = { pageLabel: 'forgotPassword', cxPath: 'forgotPassword' }, ɵ13 = { pageLabel: 'resetPassword', cxPath: 'resetPassword' }, ɵ14 = {
+    var ɵ0$5 = { pageLabel: 'homepage', cxRoute: 'home' }, ɵ1$1 = { pageLabel: 'address-book', cxRoute: 'addressBook' }, ɵ2 = { pageLabel: 'updatePassword', cxRoute: 'updatePassword' }, ɵ3 = { pageLabel: 'orders', cxRoute: 'orders' }, ɵ4 = {
+        pageLabel: 'multiStepCheckoutSummaryPage',
+        cxRoute: 'checkout',
+    }, ɵ5 = { pageLabel: 'login', cxRoute: 'login' }, ɵ6 = { pageLabel: 'search', cxRoute: 'search' }, ɵ7 = { cxRoute: 'category' }, ɵ8 = { cxRoute: 'brand' }, ɵ9 = { pageLabel: 'update-email', cxRoute: 'updateEmail' }, ɵ10 = { pageLabel: 'payment-details', cxRoute: 'paymentManagement' }, ɵ11 = { pageLabel: 'order', cxRoute: 'orderDetails' }, ɵ12 = { pageLabel: 'forgotPassword', cxRoute: 'forgotPassword' }, ɵ13 = { pageLabel: 'resetPassword', cxRoute: 'resetPassword' }, ɵ14 = {
         pageLabel: 'update-profile',
-        cxPath: 'updateProfile',
-    }, ɵ15 = { pageLabel: 'close-account', cxPath: 'closeAccount' };
+        cxRoute: 'updateProfile',
+    }, ɵ15 = { pageLabel: 'close-account', cxRoute: 'closeAccount' };
     var PagesModule = /** @class */ (function () {
         function PagesModule() {
         }
