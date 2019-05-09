@@ -1,17 +1,18 @@
 import { OnDestroy, OnInit } from '@angular/core';
-import { PaymentDetails, UserService } from '@spartacus/core';
+import { PaymentDetails, UserService, TranslationService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { Card } from '../../../shared/components/card/card.component';
 export declare class PaymentMethodsComponent implements OnInit, OnDestroy {
     private userService;
+    private translation;
     paymentMethods$: Observable<PaymentDetails[]>;
     editCard: string;
     loading$: Observable<boolean>;
     userId: string;
     userServiceSub: Subscription;
-    constructor(userService: UserService);
+    constructor(userService: UserService, translation: TranslationService);
     ngOnInit(): void;
-    getCardContent({ defaultPayment, accountHolderName, expiryMonth, expiryYear, cardNumber, }: PaymentDetails): Card;
+    getCardContent({ defaultPayment, accountHolderName, expiryMonth, expiryYear, cardNumber, }: PaymentDetails): Observable<Card>;
     deletePaymentMethod(paymentMethod: PaymentDetails): void;
     setEdit(paymentMethod: PaymentDetails): void;
     cancelCard(): void;

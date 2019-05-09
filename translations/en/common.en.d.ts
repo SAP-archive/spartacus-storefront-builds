@@ -21,4 +21,8 @@ export declare const common: {
     searchBox: {
         searchHere: string;
     };
+    sorting: {
+        date: string;
+        orderNumber: string;
+    };
 };

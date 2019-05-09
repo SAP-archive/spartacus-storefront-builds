@@ -2,8 +2,6 @@ export declare const payment: {
     paymentForm: {
         payment: string;
         choosePaymentMethod: string;
-        expires: string;
-        defaultPaymentMethod: string;
         paymentType: string;
         accountHolderName: {
             label: string;
@@ -25,5 +23,12 @@ export declare const payment: {
     paymentMethods: {
         paymentMethods: string;
         newPaymentMethodsAreAddedDuringCheckout: string;
+    };
+    paymentCard: {
+        deleteConfirmation: string;
+        setAsDefault: string;
+        expires: string;
+        defaultPaymentMethod: string;
+        selected: string;
     };
 };

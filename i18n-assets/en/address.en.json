@@ -43,6 +43,9 @@
   },
   "addressCard": {
     "default": "DEFAULT",
-    "setAsDefault": "Set as default"
+    "selected": "Selected",
+    "setAsDefault": "Set as default",
+    "shipTo": "Ship To",
+    "billTo": "Bill To"
   }
 }

@@ -43,6 +43,9 @@ export declare const address: {
     };
     addressCard: {
         default: string;
+        selected: string;
         setAsDefault: string;
+        shipTo: string;
+        billTo: string;
     };
 };

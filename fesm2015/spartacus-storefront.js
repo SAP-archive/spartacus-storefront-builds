@@ -7,7 +7,7 @@ import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscriptio
 import { Title, Meta } from '@angular/platform-browser';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
-import { CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, CmsService, ConfigModule, ProductService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, PageRobotsMeta, OccConfig, StoreFinderCoreModule, GlobalMessageModule, NotAuthGuard, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
+import { CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ConfigModule, CmsService, ProductService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, PageRobotsMeta, OccConfig, NotAuthGuard, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { Component, ElementRef, ViewChild, Input, ChangeDetectionStrategy, NgModule, Directive, HostListener, Renderer2, EventEmitter, forwardRef, Output, Injectable, Injector, Optional, Inject, PLATFORM_ID, APP_INITIALIZER, ChangeDetectorRef, HostBinding, TemplateRef, ViewContainerRef, ViewEncapsulation, defineInjectable, inject, INJECTOR } from '@angular/core';
@@ -6072,9 +6072,11 @@ OrderDetailItemsComponent.ctorParameters = () => [
 class OrderDetailShippingComponent {
     /**
      * @param {?} orderDetailsService
+     * @param {?} translation
      */
-    constructor(orderDetailsService) {
+    constructor(orderDetailsService, translation) {
         this.orderDetailsService = orderDetailsService;
+        this.translation = translation;
     }
     /**
      * @return {?}
@@ -6087,69 +6089,86 @@ class OrderDetailShippingComponent {
      * @return {?}
      */
     getAddressCardContent(address) {
-        return {
-            title: 'Ship to',
-            textBold: `${address.firstName} ${address.lastName}`,
-            text: [
-                address.line1,
-                address.line2,
-                `${address.town}, ${address.country.isocode}, ${address.postalCode}`,
-                address.phone,
-            ],
-        };
+        return combineLatest([
+            this.translation.translate('addressCard.shipTo'),
+        ]).pipe(map(([textTitle]) => {
+            return {
+                title: textTitle,
+                textBold: `${address.firstName} ${address.lastName}`,
+                text: [
+                    address.line1,
+                    address.line2,
+                    `${address.town}, ${address.country.isocode}, ${address.postalCode}`,
+                    address.phone,
+                ],
+            };
+        }));
     }
     /**
      * @param {?} billingAddress
      * @return {?}
      */
     getBillingAddressCardContent(billingAddress) {
-        return {
-            title: 'Bill To',
-            textBold: `${billingAddress.firstName} ${billingAddress.lastName}`,
-            text: [
-                billingAddress.line1,
-                billingAddress.line2,
-                `${billingAddress.town}, ${billingAddress.country.isocode}, ${billingAddress.postalCode}`,
-                billingAddress.phone,
-            ],
-        };
+        return combineLatest([
+            this.translation.translate('addressCard.billTo'),
+        ]).pipe(map(([textTitle]) => {
+            return {
+                title: textTitle,
+                textBold: `${billingAddress.firstName} ${billingAddress.lastName}`,
+                text: [
+                    billingAddress.line1,
+                    billingAddress.line2,
+                    `${billingAddress.town}, ${billingAddress.country.isocode}, ${billingAddress.postalCode}`,
+                    billingAddress.phone,
+                ],
+            };
+        }));
     }
     /**
      * @param {?} payment
      * @return {?}
      */
     getPaymentCardContent(payment) {
-        return {
-            title: 'Payment',
-            textBold: payment.accountHolderName,
-            text: [
-                payment.cardType.name,
-                payment.cardNumber,
-                `Expires: ${payment.expiryMonth} / ${payment.expiryYear}`,
-            ],
-        };
+        return combineLatest([
+            this.translation.translate('paymentForm.payment'),
+            this.translation.translate('paymentCard.expires', {
+                month: payment.expiryMonth,
+                year: payment.expiryYear,
+            }),
+        ]).pipe(map(([textTitle, textExpires]) => {
+            return {
+                title: textTitle,
+                textBold: payment.accountHolderName,
+                text: [payment.cardType.name, payment.cardNumber, textExpires],
+            };
+        }));
     }
     /**
      * @param {?} shipping
      * @return {?}
      */
     getShippingMethodCardContent(shipping) {
-        return {
-            title: 'Shipping Method',
-            textBold: shipping.name,
-            text: [shipping.description],
-        };
+        return combineLatest([
+            this.translation.translate('checkoutShipping.shippingMethod'),
+        ]).pipe(map(([textTitle]) => {
+            return {
+                title: textTitle,
+                textBold: shipping.name,
+                text: [shipping.description],
+            };
+        }));
     }
 }
 OrderDetailShippingComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-order-details-shipping',
-                template: "<ng-container *ngIf=\"(order$ | async) as order\">\n  <div class=\"cx-account-summary row\">\n    <div\n      *ngIf=\"order.deliveryAddress\"\n      class=\"cx-summary-card col-sm-12 col-md-4\"\n    >\n      <cx-card\n        [content]=\"getAddressCardContent(order.deliveryAddress)\"\n      ></cx-card>\n    </div>\n    <div\n      *ngIf=\"order.paymentInfo?.billingAddress\"\n      class=\"cx-summary-card col-sm-12 col-md-4\"\n    >\n      <cx-card\n        [content]=\"\n          getBillingAddressCardContent(order.paymentInfo.billingAddress)\n        \"\n      ></cx-card>\n    </div>\n    <div *ngIf=\"order.paymentInfo\" class=\"cx-summary-card col-sm-12 col-md-4\">\n      <cx-card [content]=\"getPaymentCardContent(order.paymentInfo)\"></cx-card>\n    </div>\n    <div *ngIf=\"order.deliveryMode\" class=\"cx-summary-card col-sm-12 col-md-4\">\n      <cx-card\n        [content]=\"getShippingMethodCardContent(order.deliveryMode)\"\n      ></cx-card>\n    </div>\n  </div>\n</ng-container>\n"
+                template: "<ng-container *ngIf=\"(order$ | async) as order\">\n  <div class=\"cx-account-summary row\">\n    <div\n      *ngIf=\"order.deliveryAddress\"\n      class=\"cx-summary-card col-sm-12 col-md-4\"\n    >\n      <cx-card\n        [content]=\"getAddressCardContent(order.deliveryAddress) | async\"\n      ></cx-card>\n    </div>\n    <div\n      *ngIf=\"order.paymentInfo?.billingAddress\"\n      class=\"cx-summary-card col-sm-12 col-md-4\"\n    >\n      <cx-card\n        [content]=\"\n          getBillingAddressCardContent(order.paymentInfo.billingAddress) | async\n        \"\n      ></cx-card>\n    </div>\n    <div *ngIf=\"order.paymentInfo\" class=\"cx-summary-card col-sm-12 col-md-4\">\n      <cx-card\n        [content]=\"getPaymentCardContent(order.paymentInfo) | async\"\n      ></cx-card>\n    </div>\n    <div *ngIf=\"order.deliveryMode\" class=\"cx-summary-card col-sm-12 col-md-4\">\n      <cx-card\n        [content]=\"getShippingMethodCardContent(order.deliveryMode) | async\"\n      ></cx-card>\n    </div>\n  </div>\n</ng-container>\n"
             }] }
 ];
 /** @nocollapse */
 OrderDetailShippingComponent.ctorParameters = () => [
-    { type: OrderDetailsService }
+    { type: OrderDetailsService },
+    { type: TranslationService }
 ];
 
 /**
@@ -6239,16 +6258,14 @@ class OrderHistoryComponent {
      * @param {?} auth
      * @param {?} routing
      * @param {?} userService
+     * @param {?} translation
      */
-    constructor(auth, routing, userService) {
+    constructor(auth, routing, userService, translation) {
         this.auth = auth;
         this.routing = routing;
         this.userService = userService;
+        this.translation = translation;
         this.PAGE_SIZE = 5;
-        this.sortLabels = {
-            byDate: 'Date',
-            byOrderNumber: 'Order Number',
-        };
     }
     /**
      * @return {?}
@@ -6313,6 +6330,20 @@ class OrderHistoryComponent {
         });
     }
     /**
+     * @return {?}
+     */
+    getSortLabels() {
+        return combineLatest([
+            this.translation.translate('sorting.date'),
+            this.translation.translate('sorting.orderNumber'),
+        ]).pipe(map(([textByDate, textByOrderNumber]) => {
+            return {
+                byDate: textByDate,
+                byOrderNumber: textByOrderNumber,
+            };
+        }));
+    }
+    /**
      * @private
      * @param {?} event
      * @return {?}
@@ -6324,14 +6355,15 @@ class OrderHistoryComponent {
 OrderHistoryComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-order-history',
-                template: "<ng-container *ngIf=\"(orders$ | async) as orders\">\n  <div class=\"container\">\n    <!-- HEADER -->\n    <div class=\"cx-order-history-header\">\n      <h3>{{ 'orderHistory.orderHistory' | cxTranslate }}</h3>\n    </div>\n\n    <!-- BODY -->\n    <div class=\"cx-order-history-body\">\n      <ng-container *ngIf=\"orders.pagination.totalResults > 0; else noOrder\">\n        <!-- Select Form and Pagination Top -->\n        <div class=\"cx-order-history-sort top row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"sortLabels\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n        <!-- TABLE -->\n        <table class=\"table cx-order-history-table\">\n          <thead class=\"cx-order-history-thead-mobile\">\n            <th scope=\"col\">\n              {{ 'orderHistory.orderId' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.date' | cxTranslate }}</th>\n            <th scope=\"col\">\n              {{ 'orderHistory.status' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.total' | cxTranslate }}</th>\n          </thead>\n          <tbody>\n            <tr\n              *ngFor=\"let order of orders.orders\"\n              (click)=\"goToOrderDetail(order)\"\n            >\n              <td class=\"cx-order-history-code\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.orderId' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.code }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-placed\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.date' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                  >{{ order?.placed | cxDate: 'longDate' }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-status\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.status' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{\n                    'orderDetails.statusDisplay'\n                      | cxTranslate: { context: order?.statusDisplay }\n                  }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-total\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.total' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.total.formattedValue }}</a\n                >\n              </td>\n            </tr>\n          </tbody>\n        </table>\n        <!-- Select Form and Pagination Bottom -->\n        <div class=\"cx-order-history-sort bottom row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"sortLabels\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n      </ng-container>\n\n      <!-- NO ORDER CONTAINER -->\n      <ng-template #noOrder>\n        <div class=\"cx-order-history-no-order row\" *ngIf=\"(isLoaded$ | async)\">\n          <div class=\"col-sm-12 col-md-6 col-lg-4\">\n            <div>{{ 'orderHistory.noOrders' | cxTranslate }}</div>\n            <a\n              [routerLink]=\"{ route: 'home' } | cxUrl\"\n              routerLinkActive=\"active\"\n              class=\"btn btn-primary btn-block\"\n              >{{ 'orderHistory.startShopping' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </ng-template>\n    </div>\n  </div>\n</ng-container>\n"
+                template: "<ng-container *ngIf=\"(orders$ | async) as orders\">\n  <div class=\"container\">\n    <!-- HEADER -->\n    <div class=\"cx-order-history-header\">\n      <h3>{{ 'orderHistory.orderHistory' | cxTranslate }}</h3>\n    </div>\n\n    <!-- BODY -->\n    <div class=\"cx-order-history-body\">\n      <ng-container *ngIf=\"orders.pagination.totalResults > 0; else noOrder\">\n        <!-- Select Form and Pagination Top -->\n        <div class=\"cx-order-history-sort top row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"getSortLabels() | async\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n        <!-- TABLE -->\n        <table class=\"table cx-order-history-table\">\n          <thead class=\"cx-order-history-thead-mobile\">\n            <th scope=\"col\">\n              {{ 'orderHistory.orderId' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.date' | cxTranslate }}</th>\n            <th scope=\"col\">\n              {{ 'orderHistory.status' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.total' | cxTranslate }}</th>\n          </thead>\n          <tbody>\n            <tr\n              *ngFor=\"let order of orders.orders\"\n              (click)=\"goToOrderDetail(order)\"\n            >\n              <td class=\"cx-order-history-code\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.orderId' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.code }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-placed\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.date' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                  >{{ order?.placed | cxDate: 'longDate' }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-status\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.status' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{\n                    'orderDetails.statusDisplay'\n                      | cxTranslate: { context: order?.statusDisplay }\n                  }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-total\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.total' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.total.formattedValue }}</a\n                >\n              </td>\n            </tr>\n          </tbody>\n        </table>\n        <!-- Select Form and Pagination Bottom -->\n        <div class=\"cx-order-history-sort bottom row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"getSortLabels() | async\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n      </ng-container>\n\n      <!-- NO ORDER CONTAINER -->\n      <ng-template #noOrder>\n        <div class=\"cx-order-history-no-order row\" *ngIf=\"(isLoaded$ | async)\">\n          <div class=\"col-sm-12 col-md-6 col-lg-4\">\n            <div>{{ 'orderHistory.noOrders' | cxTranslate }}</div>\n            <a\n              [routerLink]=\"{ route: 'home' } | cxUrl\"\n              routerLinkActive=\"active\"\n              class=\"btn btn-primary btn-block\"\n              >{{ 'orderHistory.startShopping' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </ng-template>\n    </div>\n  </div>\n</ng-container>\n"
             }] }
 ];
 /** @nocollapse */
 OrderHistoryComponent.ctorParameters = () => [
     { type: AuthService },
     { type: RoutingService },
-    { type: UserService }
+    { type: UserService },
+    { type: TranslationService }
 ];
 
 /**
@@ -6388,9 +6420,11 @@ OrderModule.decorators = [
 class PaymentMethodsComponent {
     /**
      * @param {?} userService
+     * @param {?} translation
      */
-    constructor(userService) {
+    constructor(userService, translation) {
         this.userService = userService;
+        this.translation = translation;
     }
     /**
      * @return {?}
@@ -6409,21 +6443,32 @@ class PaymentMethodsComponent {
      * @return {?}
      */
     getCardContent({ defaultPayment, accountHolderName, expiryMonth, expiryYear, cardNumber, }) {
-        /** @type {?} */
-        const actions = [];
-        if (!defaultPayment) {
-            actions.push({ name: 'Set as default', event: 'default' });
-        }
-        actions.push({ name: 'Delete', event: 'edit' });
-        /** @type {?} */
-        const card = {
-            header: defaultPayment ? 'DEFAULT' : null,
-            textBold: accountHolderName,
-            text: [cardNumber, `Expires: ${expiryMonth}/${expiryYear}`],
-            actions,
-            deleteMsg: 'Are you sure you want to delete this payment method?',
-        };
-        return card;
+        return combineLatest([
+            this.translation.translate('paymentCard.setAsDefault'),
+            this.translation.translate('common.delete'),
+            this.translation.translate('paymentCard.deleteConfirmation'),
+            this.translation.translate('paymentCard.expires', {
+                month: expiryMonth,
+                year: expiryYear,
+            }),
+            this.translation.translate('paymentCard.defaultPaymentMethod'),
+        ]).pipe(map(([textSetAsDefault, textDelete, textDeleteConfirmation, textExpires, textDefaultPaymentMethod,]) => {
+            /** @type {?} */
+            const actions = [];
+            if (!defaultPayment) {
+                actions.push({ name: textSetAsDefault, event: 'default' });
+            }
+            actions.push({ name: textDelete, event: 'edit' });
+            /** @type {?} */
+            const card = {
+                header: defaultPayment ? textDefaultPaymentMethod : null,
+                textBold: accountHolderName,
+                text: [cardNumber, textExpires],
+                actions,
+                deleteMsg: textDeleteConfirmation,
+            };
+            return card;
+        }));
     }
     /**
      * @param {?} paymentMethod
@@ -6469,12 +6514,13 @@ class PaymentMethodsComponent {
 PaymentMethodsComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-payment-methods',
-                template: "<div class=\"cx-payment container\">\n  <div class=\"cx-header\">\n    <h3>{{ 'paymentMethods.paymentMethods' | cxTranslate }}</h3>\n  </div>\n\n  <div class=\"cx-body\">\n    <div class=\"cx-msg\">\n      {{\n        'paymentMethods.newPaymentMethodsAreAddedDuringCheckout' | cxTranslate\n      }}\n    </div>\n    <div *ngIf=\"(loading$ | async); else cards\"><cx-spinner></cx-spinner></div>\n    <ng-template #cards>\n      <div\n        *ngIf=\"(paymentMethods$ | async) as paymentMethods\"\n        class=\"cx-existing row\"\n      >\n        <div\n          class=\"cx-payment-card col-sm-12 col-md-12 col-lg-6\"\n          *ngFor=\"let paymentMethod of paymentMethods\"\n        >\n          <div class=\"cx-payment-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"getCardContent(paymentMethod)\"\n              (deleteCard)=\"deletePaymentMethod(paymentMethod)\"\n              (setDefaultCard)=\"setDefaultPaymentMethod(paymentMethod)\"\n              (editCard)=\"setEdit(paymentMethod)\"\n              [editMode]=\"editCard === paymentMethod.id\"\n              (cancelCard)=\"cancelCard()\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n    </ng-template>\n  </div>\n</div>\n"
+                template: "<div class=\"cx-payment container\">\n  <div class=\"cx-header\">\n    <h3>{{ 'paymentMethods.paymentMethods' | cxTranslate }}</h3>\n  </div>\n\n  <div class=\"cx-body\">\n    <div class=\"cx-msg\">\n      {{\n        'paymentMethods.newPaymentMethodsAreAddedDuringCheckout' | cxTranslate\n      }}\n    </div>\n    <div *ngIf=\"(loading$ | async); else cards\"><cx-spinner></cx-spinner></div>\n    <ng-template #cards>\n      <div\n        *ngIf=\"(paymentMethods$ | async) as paymentMethods\"\n        class=\"cx-existing row\"\n      >\n        <div\n          class=\"cx-payment-card col-sm-12 col-md-12 col-lg-6\"\n          *ngFor=\"let paymentMethod of paymentMethods\"\n        >\n          <div class=\"cx-payment-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"getCardContent(paymentMethod) | async\"\n              (deleteCard)=\"deletePaymentMethod(paymentMethod)\"\n              (setDefaultCard)=\"setDefaultPaymentMethod(paymentMethod)\"\n              (editCard)=\"setEdit(paymentMethod)\"\n              [editMode]=\"editCard === paymentMethod.id\"\n              (cancelCard)=\"cancelCard()\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n    </ng-template>\n  </div>\n</div>\n"
             }] }
 ];
 /** @nocollapse */
 PaymentMethodsComponent.ctorParameters = () => [
-    { type: UserService }
+    { type: UserService },
+    { type: TranslationService }
 ];
 
 /**
@@ -8209,9 +8255,11 @@ ProductImagesComponent.propDecorators = {
 class ProductSummaryComponent {
     /**
      * @param {?} translatePipe
+     * @param {?} translationService
      */
-    constructor(translatePipe) {
+    constructor(translatePipe, translationService) {
         this.translatePipe = translatePipe;
+        this.translationService = translationService;
         this.itemCount = 1;
     }
     /**
@@ -8290,18 +8338,20 @@ class ProductSummaryComponent {
      */
     showReviews() {
         // Use translated label for Reviews tab reference
-        /** @type {?} */
-        const reviewsTabLabel = this.translatePipe.transform('productDetails.label.reviews');
-        /** @type {?} */
-        const tabsComponent = this.getTabsComponent();
-        /** @type {?} */
-        const reviewsTab = this.getTabByLabel(reviewsTabLabel, tabsComponent);
-        /** @type {?} */
-        const reviewsComponent = this.getReviewsComponent();
-        if (reviewsTab && reviewsComponent) {
-            reviewsComponent.scrollIntoView();
-            this.clickTabIfInactive(reviewsTab);
-        }
+        this.translationService
+            .translate('productDetails.reviews')
+            .subscribe(reviewsTabLabel => {
+            /** @type {?} */
+            const tabsComponent = this.getTabsComponent();
+            /** @type {?} */
+            const reviewsTab = this.getTabByLabel(reviewsTabLabel, tabsComponent);
+            /** @type {?} */
+            const reviewsComponent = this.getReviewsComponent();
+            if (reviewsTab && reviewsComponent) {
+                reviewsComponent.scrollIntoView();
+                this.clickTabIfInactive(reviewsTab);
+            }
+        });
     }
     /**
      * @return {?}
@@ -8321,7 +8371,8 @@ ProductSummaryComponent.decorators = [
 ];
 /** @nocollapse */
 ProductSummaryComponent.ctorParameters = () => [
-    { type: TranslatePipe }
+    { type: TranslatePipe },
+    { type: TranslationService }
 ];
 ProductSummaryComponent.propDecorators = {
     product: [{ type: Input }]
@@ -10539,14 +10590,15 @@ class PaymentMethodComponent {
      * @param {?} userService
      * @param {?} checkoutService
      * @param {?} globalMessageService
+     * @param {?} translation
      */
-    constructor(cartData, userService, checkoutService, globalMessageService) {
+    constructor(cartData, userService, checkoutService, globalMessageService, translation) {
         this.cartData = cartData;
         this.userService = userService;
         this.checkoutService = checkoutService;
         this.globalMessageService = globalMessageService;
+        this.translation = translation;
         this.newPaymentFormManuallyOpened = false;
-        this.cards = [];
         this.goToStep = new EventEmitter();
     }
     /**
@@ -10555,18 +10607,7 @@ class PaymentMethodComponent {
     ngOnInit() {
         this.isLoading$ = this.userService.getPaymentMethodsLoading();
         this.userService.loadPaymentMethods(this.cartData.userId);
-        this.existingPaymentMethods$ = this.userService.getPaymentMethods().pipe(tap(payments => {
-            if (this.cards.length === 0) {
-                payments.forEach(payment => {
-                    /** @type {?} */
-                    const card = this.getCardContent(payment);
-                    if (this.selectedPayment &&
-                        this.selectedPayment.id === payment.id) {
-                        card.header = 'SELECTED';
-                    }
-                });
-            }
-        }));
+        this.existingPaymentMethods$ = this.userService.getPaymentMethods();
         this.getPaymentDetailsSub = this.checkoutService
             .getPaymentDetails()
             .pipe(filter(paymentInfo => paymentInfo && Object.keys(paymentInfo).length !== 0))
@@ -10589,45 +10630,43 @@ class PaymentMethodComponent {
      * @return {?}
      */
     getCardContent(payment) {
-        /** @type {?} */
-        let ccImage;
-        if (payment.cardType.code === 'visa') {
-            ccImage = visaImgSrc;
-        }
-        else if (payment.cardType.code === 'master') {
-            ccImage = masterCardImgSrc;
-        }
-        /** @type {?} */
-        const card = {
-            title: payment.defaultPayment ? 'Default Payment Method' : '',
-            textBold: payment.accountHolderName,
-            text: [
-                payment.cardNumber,
-                'Expires: ' + payment.expiryMonth + '/' + payment.expiryYear,
-            ],
-            img: ccImage,
-            actions: [{ name: 'Use this payment', event: 'send' }],
-        };
-        this.cards.push(card);
-        return card;
+        return combineLatest([
+            this.translation.translate('paymentCard.expires', {
+                month: payment.expiryMonth,
+                year: payment.expiryYear,
+            }),
+            this.translation.translate('paymentForm.useThisPayment'),
+            this.translation.translate('paymentCard.defaultPaymentMethod'),
+            this.translation.translate('paymentCard.selected'),
+        ]).pipe(map(([textExpires, textUseThisPayment, textDefaultPaymentMethod, textSelected,]) => {
+            /** @type {?} */
+            let ccImage;
+            if (payment.cardType.code === 'visa') {
+                ccImage = visaImgSrc;
+            }
+            else if (payment.cardType.code === 'master') {
+                ccImage = masterCardImgSrc;
+            }
+            /** @type {?} */
+            const card = {
+                title: payment.defaultPayment ? textDefaultPaymentMethod : '',
+                textBold: payment.accountHolderName,
+                text: [payment.cardNumber, textExpires],
+                img: ccImage,
+                actions: [{ name: textUseThisPayment, event: 'send' }],
+            };
+            if (this.selectedPayment && this.selectedPayment.id === payment.id) {
+                card.header = textSelected;
+            }
+            return card;
+        }));
     }
     /**
      * @param {?} paymentDetails
-     * @param {?} index
      * @return {?}
      */
-    paymentMethodSelected(paymentDetails, index) {
+    paymentMethodSelected(paymentDetails) {
         this.selectedPayment = paymentDetails;
-        for (let i = 0; this.cards[i]; i++) {
-            /** @type {?} */
-            const card = this.cards[i];
-            if (i === index) {
-                card.header = 'SELECTED';
-            }
-            else {
-                card.header = '';
-            }
-        }
     }
     /**
      * @return {?}
@@ -10713,7 +10752,7 @@ class PaymentMethodComponent {
 PaymentMethodComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-payment-method',
-                template: "<ng-container\n  *ngIf=\"(existingPaymentMethods$ | async) as existingPaymentMethods\"\n>\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'paymentForm.payment' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        existingPaymentMethods?.length && !newPaymentFormManuallyOpened;\n        else newPaymentForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'paymentForm.choosePaymentMethod' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewPaymentForm()\"\n          >\n            {{ 'paymentForm.addNewPayment' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-payment-card col-md-12 col-lg-6\"\n          *ngFor=\"let method of existingPaymentMethods; let i = index\"\n        >\n          <div class=\"cx-payment-card-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"cards[i]\"\n              (sendCard)=\"paymentMethodSelected(method, i)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"row cx-checkout-btns\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'common.back' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-primary\"\n            [disabled]=\"!selectedPayment\"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newPaymentForm>\n      <cx-payment-form\n        (addPaymentInfo)=\"addNewPaymentMethod($event)\"\n        (closeForm)=\"hideNewPaymentForm()\"\n        (goBack)=\"back()\"\n        [paymentMethodsCount]=\"existingPaymentMethods?.length || 0\"\n      ></cx-payment-form>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n  </ng-template>\n</ng-container>\n",
+                template: "<ng-container\n  *ngIf=\"(existingPaymentMethods$ | async) as existingPaymentMethods\"\n>\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'paymentForm.payment' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        existingPaymentMethods?.length && !newPaymentFormManuallyOpened;\n        else newPaymentForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'paymentForm.choosePaymentMethod' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewPaymentForm()\"\n          >\n            {{ 'paymentForm.addNewPayment' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-payment-card col-md-12 col-lg-6\"\n          *ngFor=\"let method of existingPaymentMethods; let i = index\"\n        >\n          <div class=\"cx-payment-card-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"getCardContent(method) | async\"\n              (sendCard)=\"paymentMethodSelected(method)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"row cx-checkout-btns\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'common.back' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-primary\"\n            [disabled]=\"!selectedPayment\"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newPaymentForm>\n      <cx-payment-form\n        (addPaymentInfo)=\"addNewPaymentMethod($event)\"\n        (closeForm)=\"hideNewPaymentForm()\"\n        (goBack)=\"back()\"\n        [paymentMethodsCount]=\"existingPaymentMethods?.length || 0\"\n      ></cx-payment-form>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n  </ng-template>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -10722,7 +10761,8 @@ PaymentMethodComponent.ctorParameters = () => [
     { type: CartDataService },
     { type: UserService },
     { type: CheckoutService },
-    { type: GlobalMessageService }
+    { type: GlobalMessageService },
+    { type: TranslationService }
 ];
 PaymentMethodComponent.propDecorators = {
     goToStep: [{ type: Output }]
@@ -10760,11 +10800,13 @@ class ReviewSubmitComponent {
      * @param {?} checkoutService
      * @param {?} userService
      * @param {?} cartService
+     * @param {?} translation
      */
-    constructor(checkoutService, userService, cartService) {
+    constructor(checkoutService, userService, cartService, translation) {
         this.checkoutService = checkoutService;
         this.userService = userService;
         this.cartService = cartService;
+        this.translation = translation;
     }
     /**
      * @return {?}
@@ -10791,61 +10833,69 @@ class ReviewSubmitComponent {
      * @return {?}
      */
     getShippingAddressCard(deliveryAddress, countryName) {
-        if (!countryName) {
-            countryName = deliveryAddress.country.isocode;
-        }
-        /** @type {?} */
-        let region = '';
-        if (deliveryAddress.region && deliveryAddress.region.isocode) {
-            region = deliveryAddress.region.isocode + ', ';
-        }
-        return {
-            title: 'Ship To',
-            textBold: deliveryAddress.firstName + ' ' + deliveryAddress.lastName,
-            text: [
-                deliveryAddress.line1,
-                deliveryAddress.line2,
-                deliveryAddress.town + ', ' + region + countryName,
-                deliveryAddress.postalCode,
-                deliveryAddress.phone,
-            ],
-        };
+        return combineLatest([
+            this.translation.translate('addressCard.shipTo'),
+        ]).pipe(map(([textTitle]) => {
+            if (!countryName) {
+                countryName = deliveryAddress.country.isocode;
+            }
+            /** @type {?} */
+            let region = '';
+            if (deliveryAddress.region && deliveryAddress.region.isocode) {
+                region = deliveryAddress.region.isocode + ', ';
+            }
+            return {
+                title: textTitle,
+                textBold: deliveryAddress.firstName + ' ' + deliveryAddress.lastName,
+                text: [
+                    deliveryAddress.line1,
+                    deliveryAddress.line2,
+                    deliveryAddress.town + ', ' + region + countryName,
+                    deliveryAddress.postalCode,
+                    deliveryAddress.phone,
+                ],
+            };
+        }));
     }
     /**
      * @param {?} deliveryMode
      * @return {?}
      */
     getDeliveryModeCard(deliveryMode) {
-        if (deliveryMode) {
+        return combineLatest([
+            this.translation.translate('checkoutShipping.shippingMethod'),
+        ]).pipe(map(([textTitle]) => {
             return {
-                title: 'Shipping Method',
+                title: textTitle,
                 textBold: deliveryMode.name,
                 text: [deliveryMode.description],
             };
-        }
+        }));
     }
     /**
      * @param {?} paymentDetails
      * @return {?}
      */
     getPaymentMethodCard(paymentDetails) {
-        return {
-            title: 'Payment',
-            textBold: paymentDetails.accountHolderName,
-            text: [
-                paymentDetails.cardNumber,
-                'Expires: ' +
-                    paymentDetails.expiryMonth +
-                    '/' +
-                    paymentDetails.expiryYear,
-            ],
-        };
+        return combineLatest([
+            this.translation.translate('paymentForm.payment'),
+            this.translation.translate('paymentCard.expires', {
+                month: paymentDetails.expiryMonth,
+                year: paymentDetails.expiryYear,
+            }),
+        ]).pipe(map(([textTitle, textExpires]) => {
+            return {
+                title: textTitle,
+                textBold: paymentDetails.accountHolderName,
+                text: [paymentDetails.cardNumber, textExpires],
+            };
+        }));
     }
 }
 ReviewSubmitComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-review-submit',
-                template: "<div class=\"cx-review\">\n  <!-- TITLE -->\n  <h3 class=\"cx-review-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutReview.review' | cxTranslate }}\n  </h3>\n  <div class=\"cx-review-summary row\">\n    <!-- SHIPPING ADDRESS SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-address\">\n        <cx-card\n          [content]=\"\n            getShippingAddressCard(\n              deliveryAddress$ | async,\n              countryName$ | async\n            )\n          \"\n        ></cx-card>\n      </div>\n    </div>\n\n    <!-- DELIVERY MODE SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-shipping\">\n        <cx-card\n          [content]=\"getDeliveryModeCard(deliveryMode$ | async)\"\n        ></cx-card>\n      </div>\n    </div>\n\n    <!-- PAYMENT METHOD SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-payment\">\n        <cx-card\n          [content]=\"getPaymentMethodCard(paymentDetails$ | async)\"\n        ></cx-card>\n      </div>\n    </div>\n  </div>\n\n  <!-- CART ITEM SECTION -->\n  <ng-container *ngIf=\"(cart$ | async) as cart\">\n    <div class=\"cx-review-cart-total d-none d-lg-block d-xl-block\">\n      {{\n        'cartItems.cartTotal'\n          | cxTranslate: { count: cart.deliveryItemsQuantity }\n      }}:\n      {{ cart.totalPrice?.formattedValue }}\n    </div>\n    <h4 class=\"cx-review-cart-heading d-block d-lg-none d-xl-none\">\n      {{ 'checkoutReview.placeOrder' | cxTranslate }}\n    </h4>\n    <div\n      class=\"cx-review-cart-item col-md-12\"\n      *ngIf=\"(entries$ | async) as entries\"\n    >\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [isReadOnly]=\"true\"\n        [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n      ></cx-cart-item-list>\n    </div>\n  </ng-container>\n</div>\n",
+                template: "<div class=\"cx-review\">\n  <!-- TITLE -->\n  <h3 class=\"cx-review-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutReview.review' | cxTranslate }}\n  </h3>\n  <div class=\"cx-review-summary row\">\n    <!-- SHIPPING ADDRESS SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-address\">\n        <cx-card\n          [content]=\"\n            getShippingAddressCard(\n              deliveryAddress$ | async,\n              countryName$ | async\n            ) | async\n          \"\n        ></cx-card>\n      </div>\n    </div>\n\n    <!-- DELIVERY MODE SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-shipping\">\n        <cx-card\n          *ngIf=\"(deliveryMode$ | async) as deliveryMode\"\n          [content]=\"getDeliveryModeCard(deliveryMode) | async\"\n        ></cx-card>\n      </div>\n    </div>\n\n    <!-- PAYMENT METHOD SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-payment\">\n        <cx-card\n          [content]=\"getPaymentMethodCard(paymentDetails$ | async) | async\"\n        ></cx-card>\n      </div>\n    </div>\n  </div>\n\n  <!-- CART ITEM SECTION -->\n  <ng-container *ngIf=\"(cart$ | async) as cart\">\n    <div class=\"cx-review-cart-total d-none d-lg-block d-xl-block\">\n      {{\n        'cartItems.cartTotal'\n          | cxTranslate: { count: cart.deliveryItemsQuantity }\n      }}:\n      {{ cart.totalPrice?.formattedValue }}\n    </div>\n    <h4 class=\"cx-review-cart-heading d-block d-lg-none d-xl-none\">\n      {{ 'checkoutReview.placeOrder' | cxTranslate }}\n    </h4>\n    <div\n      class=\"cx-review-cart-item col-md-12\"\n      *ngIf=\"(entries$ | async) as entries\"\n    >\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [isReadOnly]=\"true\"\n        [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n      ></cx-cart-item-list>\n    </div>\n  </ng-container>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -10853,7 +10903,8 @@ ReviewSubmitComponent.decorators = [
 ReviewSubmitComponent.ctorParameters = () => [
     { type: CheckoutService },
     { type: UserService },
-    { type: CartService }
+    { type: CartService },
+    { type: TranslationService }
 ];
 
 /**
@@ -10882,13 +10933,15 @@ class ShippingAddressComponent {
      * @param {?} cartService
      * @param {?} routingService
      * @param {?} checkoutService
+     * @param {?} translation
      */
-    constructor(userService, cartData, cartService, routingService, checkoutService) {
+    constructor(userService, cartData, cartService, routingService, checkoutService, translation) {
         this.userService = userService;
         this.cartData = cartData;
         this.cartService = cartService;
         this.routingService = routingService;
         this.checkoutService = checkoutService;
+        this.translation = translation;
         this.newAddressFormManuallyOpened = false;
         this.cards = [];
         this.selectedAddress$ = new BehaviorSubject(null);
@@ -10916,10 +10969,10 @@ class ShippingAddressComponent {
             this.selectedAddress = address;
         });
         this.existingAddresses$ = this.userService.getAddresses();
-        this.cards$ = combineLatest(this.existingAddresses$, this.selectedAddress$.asObservable()).pipe(map(([addresses, selected]) => {
+        this.cards$ = combineLatest(this.existingAddresses$, this.selectedAddress$.asObservable(), this.translation.translate('checkoutAddress.defaultShippingAddress'), this.translation.translate('checkoutAddress.shipToThisAddress'), this.translation.translate('addressCard.selected')).pipe(map(([addresses, selected, textDefaultShippingAddress, textShipToThisAddress, textSelected,]) => {
             return addresses.map(address => {
                 /** @type {?} */
-                const card = this.getCardContent(address, selected);
+                const card = this.getCardContent(address, selected, textDefaultShippingAddress, textShipToThisAddress, textSelected);
                 return {
                     address,
                     card,
@@ -10930,9 +10983,12 @@ class ShippingAddressComponent {
     /**
      * @param {?} address
      * @param {?} selected
+     * @param {?} textDefaultShippingAddress
+     * @param {?} textShipToThisAddress
+     * @param {?} textSelected
      * @return {?}
      */
-    getCardContent(address, selected) {
+    getCardContent(address, selected, textDefaultShippingAddress, textShipToThisAddress, textSelected) {
         /** @type {?} */
         let region = '';
         if (address.region && address.region.isocode) {
@@ -10940,7 +10996,7 @@ class ShippingAddressComponent {
         }
         /** @type {?} */
         const card = {
-            title: address.defaultAddress ? 'Default Shipping Address' : '',
+            title: address.defaultAddress ? textDefaultShippingAddress : '',
             textBold: address.firstName + ' ' + address.lastName,
             text: [
                 address.line1,
@@ -10949,8 +11005,8 @@ class ShippingAddressComponent {
                 address.postalCode,
                 address.phone,
             ],
-            actions: [{ name: 'Ship to this address', event: 'send' }],
-            header: selected && selected.id === address.id ? 'SELECTED' : '',
+            actions: [{ name: textShipToThisAddress, event: 'send' }],
+            header: selected && selected.id === address.id ? textSelected : '',
         };
         this.cards.push(card);
         return card;
@@ -11042,7 +11098,8 @@ ShippingAddressComponent.ctorParameters = () => [
     { type: CartDataService },
     { type: CartService },
     { type: RoutingService },
-    { type: CheckoutService }
+    { type: CheckoutService },
+    { type: TranslationService }
 ];
 ShippingAddressComponent.propDecorators = {
     goToStep: [{ type: Output }]
@@ -11244,9 +11301,11 @@ CheckoutComponentModule.decorators = [
 class OrderConfirmationComponent {
     /**
      * @param {?} checkoutService
+     * @param {?} translation
      */
-    constructor(checkoutService) {
+    constructor(checkoutService, translation) {
         this.checkoutService = checkoutService;
+        this.translation = translation;
     }
     /**
      * @return {?}
@@ -11265,69 +11324,87 @@ class OrderConfirmationComponent {
      * @return {?}
      */
     getAddressCardContent(deliveryAddress) {
-        return {
-            title: 'Ship To',
-            textBold: `${deliveryAddress.firstName} ${deliveryAddress.lastName}`,
-            text: [
-                deliveryAddress.line1,
-                deliveryAddress.line2,
-                `${deliveryAddress.town}, ${deliveryAddress.country.isocode}, ${deliveryAddress.postalCode}`,
-                deliveryAddress.phone,
-            ],
-        };
+        return combineLatest([
+            this.translation.translate('addressCard.shipTo'),
+        ]).pipe(map(([textTitle]) => {
+            return {
+                title: textTitle,
+                textBold: `${deliveryAddress.firstName} ${deliveryAddress.lastName}`,
+                text: [
+                    deliveryAddress.line1,
+                    deliveryAddress.line2,
+                    `${deliveryAddress.town}, ${deliveryAddress.country.isocode}, ${deliveryAddress.postalCode}`,
+                    deliveryAddress.phone,
+                ],
+            };
+        }));
     }
     /**
      * @param {?} deliveryMode
      * @return {?}
      */
     getDeliveryModeCardContent(deliveryMode) {
-        return {
-            title: 'Shipping Method',
-            textBold: deliveryMode.name,
-            text: [deliveryMode.description],
-        };
+        return combineLatest([
+            this.translation.translate('checkoutShipping.shippingMethod'),
+        ]).pipe(map(([textTitle]) => {
+            return {
+                title: textTitle,
+                textBold: deliveryMode.name,
+                text: [deliveryMode.description],
+            };
+        }));
     }
     /**
      * @param {?} billingAddress
      * @return {?}
      */
     getBillingAddressCardContent(billingAddress) {
-        return {
-            title: 'Bill To',
-            textBold: `${billingAddress.firstName} ${billingAddress.lastName}`,
-            text: [
-                billingAddress.line1,
-                billingAddress.line2,
-                `${billingAddress.town}, ${billingAddress.country.isocode}, ${billingAddress.postalCode}`,
-                billingAddress.phone,
-            ],
-        };
+        return combineLatest([
+            this.translation.translate('addressCard.billTo'),
+        ]).pipe(map(([textTitle]) => {
+            return {
+                title: textTitle,
+                textBold: `${billingAddress.firstName} ${billingAddress.lastName}`,
+                text: [
+                    billingAddress.line1,
+                    billingAddress.line2,
+                    `${billingAddress.town}, ${billingAddress.country.isocode}, ${billingAddress.postalCode}`,
+                    billingAddress.phone,
+                ],
+            };
+        }));
     }
     /**
-     * @param {?} paymentInfo
+     * @param {?} payment
      * @return {?}
      */
-    getPaymentInfoCardContent(paymentInfo) {
-        return {
-            title: 'Payment',
-            textBold: paymentInfo.accountHolderName,
-            text: [
-                paymentInfo.cardNumber,
-                `Expires: ${paymentInfo.expiryMonth} / ${paymentInfo.expiryYear}`,
-            ],
-        };
+    getPaymentInfoCardContent(payment) {
+        return combineLatest([
+            this.translation.translate('paymentForm.payment'),
+            this.translation.translate('paymentCard.expires', {
+                month: payment.expiryMonth,
+                year: payment.expiryYear,
+            }),
+        ]).pipe(map(([textTitle, textExpires]) => {
+            return {
+                title: textTitle,
+                textBold: payment.accountHolderName,
+                text: [payment.cardNumber, textExpires],
+            };
+        }));
     }
 }
 OrderConfirmationComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-order-confirmation',
-                template: "<div class=\"cx-page\" *ngIf=\"(order$ | async) as order\">\n  <header class=\"cx-page__header\">\n    <h1 class=\"cx-page__title\">\n      {{ 'checkoutOrderConfirmation.confirmationOfOrder' | cxTranslate }}\n      {{ order.code }}\n    </h1>\n  </header>\n\n  <div class=\"cx-order-confirmation\">\n    <div class=\"cx-order-confirmation-message\">\n      <h2>{{ 'checkoutOrderConfirmation.thankYou' | cxTranslate }}</h2>\n      <p>\n        {{\n          'checkoutOrderConfirmation.invoiceHasBeenSentByEmail' | cxTranslate\n        }}\n      </p>\n      <!-- <a href=\"#\" class=\"btn-link\">Print Page</a> -->\n    </div>\n\n    <cx-add-to-home-screen-banner></cx-add-to-home-screen-banner>\n\n    <div class=\"cx-order-review-summary\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getAddressCardContent(order.deliveryAddress)\"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"\n                  getBillingAddressCardContent(order.paymentInfo.billingAddress)\n                \"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getDeliveryModeCardContent(order.deliveryMode)\"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getPaymentInfoCardContent(order.paymentInfo)\"\n              ></cx-card>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"cx-order-items container\">\n      <h4 class=\"cx-order-items-header\">\n        {{ 'checkoutOrderConfirmation.orderItems' | cxTranslate }}\n      </h4>\n      <cx-cart-item-list\n        [items]=\"order.entries\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n\n    <div class=\"cx-order-summary container\">\n      <div class=\"row justify-content-end\">\n        <div class=\"col-sm-12 col-md-6 col-lg-5 col-xl-4\">\n          <cx-order-summary [cart]=\"order\"></cx-order-summary>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                template: "<div class=\"cx-page\" *ngIf=\"(order$ | async) as order\">\n  <header class=\"cx-page__header\">\n    <h1 class=\"cx-page__title\">\n      {{ 'checkoutOrderConfirmation.confirmationOfOrder' | cxTranslate }}\n      {{ order.code }}\n    </h1>\n  </header>\n\n  <div class=\"cx-order-confirmation\">\n    <div class=\"cx-order-confirmation-message\">\n      <h2>{{ 'checkoutOrderConfirmation.thankYou' | cxTranslate }}</h2>\n      <p>\n        {{\n          'checkoutOrderConfirmation.invoiceHasBeenSentByEmail' | cxTranslate\n        }}\n      </p>\n      <!-- <a href=\"#\" class=\"btn-link\">Print Page</a> -->\n    </div>\n\n    <cx-add-to-home-screen-banner></cx-add-to-home-screen-banner>\n\n    <div class=\"cx-order-review-summary\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getAddressCardContent(order.deliveryAddress) | async\"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"\n                  getBillingAddressCardContent(\n                    order.paymentInfo.billingAddress\n                  ) | async\n                \"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"\n                  getDeliveryModeCardContent(order.deliveryMode) | async\n                \"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getPaymentInfoCardContent(order.paymentInfo) | async\"\n              ></cx-card>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"cx-order-items container\">\n      <h4 class=\"cx-order-items-header\">\n        {{ 'checkoutOrderConfirmation.orderItems' | cxTranslate }}\n      </h4>\n      <cx-cart-item-list\n        [items]=\"order.entries\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n\n    <div class=\"cx-order-summary container\">\n      <div class=\"row justify-content-end\">\n        <div class=\"col-sm-12 col-md-6 col-lg-5 col-xl-4\">\n          <cx-order-summary [cart]=\"order\"></cx-order-summary>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
 /** @nocollapse */
 OrderConfirmationComponent.ctorParameters = () => [
-    { type: CheckoutService }
+    { type: CheckoutService },
+    { type: TranslationService }
 ];
 
 /**
@@ -12071,6 +12148,10 @@ const common = {
     searchBox: {
         searchHere: 'Search here...',
     },
+    sorting: {
+        date: 'Date',
+        orderNumber: 'Order Number',
+    },
 };
 
 /**
@@ -12342,8 +12423,6 @@ const payment = {
     paymentForm: {
         payment: 'Payment',
         choosePaymentMethod: 'Choose a payment method',
-        expires: 'Expires:',
-        defaultPaymentMethod: 'Default Payment Method',
         paymentType: 'Payment Type',
         accountHolderName: {
             label: 'Account Holder Name',
@@ -12365,6 +12444,13 @@ const payment = {
     paymentMethods: {
         paymentMethods: 'Payment methods',
         newPaymentMethodsAreAddedDuringCheckout: 'New payment methods are added during checkout.',
+    },
+    paymentCard: {
+        deleteConfirmation: 'Are you sure you want to delete this payment method?',
+        setAsDefault: 'Set as default',
+        expires: 'Expires: {{ month }}/{{ year }}',
+        defaultPaymentMethod: 'Default Payment Method',
+        selected: 'Selected',
     },
 };
 
@@ -12418,7 +12504,10 @@ const address = {
     },
     addressCard: {
         default: 'DEFAULT',
+        selected: 'Selected',
         setAsDefault: 'Set as default',
+        shipTo: 'Ship To',
+        billTo: 'Bill To',
     },
 };
 

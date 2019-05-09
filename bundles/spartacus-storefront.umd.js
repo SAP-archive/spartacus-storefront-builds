@@ -7503,8 +7503,9 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var OrderDetailShippingComponent = /** @class */ (function () {
-        function OrderDetailShippingComponent(orderDetailsService) {
+        function OrderDetailShippingComponent(orderDetailsService, translation) {
             this.orderDetailsService = orderDetailsService;
+            this.translation = translation;
         }
         /**
          * @return {?}
@@ -7524,16 +7525,21 @@
          * @return {?}
          */
             function (address) {
-                return {
-                    title: 'Ship to',
-                    textBold: address.firstName + " " + address.lastName,
-                    text: [
-                        address.line1,
-                        address.line2,
-                        address.town + ", " + address.country.isocode + ", " + address.postalCode,
-                        address.phone,
-                    ],
-                };
+                return rxjs.combineLatest([
+                    this.translation.translate('addressCard.shipTo'),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 1), textTitle = _b[0];
+                    return {
+                        title: textTitle,
+                        textBold: address.firstName + " " + address.lastName,
+                        text: [
+                            address.line1,
+                            address.line2,
+                            address.town + ", " + address.country.isocode + ", " + address.postalCode,
+                            address.phone,
+                        ],
+                    };
+                }));
             };
         /**
          * @param {?} billingAddress
@@ -7544,16 +7550,21 @@
          * @return {?}
          */
             function (billingAddress) {
-                return {
-                    title: 'Bill To',
-                    textBold: billingAddress.firstName + " " + billingAddress.lastName,
-                    text: [
-                        billingAddress.line1,
-                        billingAddress.line2,
-                        billingAddress.town + ", " + billingAddress.country.isocode + ", " + billingAddress.postalCode,
-                        billingAddress.phone,
-                    ],
-                };
+                return rxjs.combineLatest([
+                    this.translation.translate('addressCard.billTo'),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 1), textTitle = _b[0];
+                    return {
+                        title: textTitle,
+                        textBold: billingAddress.firstName + " " + billingAddress.lastName,
+                        text: [
+                            billingAddress.line1,
+                            billingAddress.line2,
+                            billingAddress.town + ", " + billingAddress.country.isocode + ", " + billingAddress.postalCode,
+                            billingAddress.phone,
+                        ],
+                    };
+                }));
             };
         /**
          * @param {?} payment
@@ -7564,15 +7575,20 @@
          * @return {?}
          */
             function (payment) {
-                return {
-                    title: 'Payment',
-                    textBold: payment.accountHolderName,
-                    text: [
-                        payment.cardType.name,
-                        payment.cardNumber,
-                        "Expires: " + payment.expiryMonth + " / " + payment.expiryYear,
-                    ],
-                };
+                return rxjs.combineLatest([
+                    this.translation.translate('paymentForm.payment'),
+                    this.translation.translate('paymentCard.expires', {
+                        month: payment.expiryMonth,
+                        year: payment.expiryYear,
+                    }),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 2), textTitle = _b[0], textExpires = _b[1];
+                    return {
+                        title: textTitle,
+                        textBold: payment.accountHolderName,
+                        text: [payment.cardType.name, payment.cardNumber, textExpires],
+                    };
+                }));
             };
         /**
          * @param {?} shipping
@@ -7583,22 +7599,28 @@
          * @return {?}
          */
             function (shipping) {
-                return {
-                    title: 'Shipping Method',
-                    textBold: shipping.name,
-                    text: [shipping.description],
-                };
+                return rxjs.combineLatest([
+                    this.translation.translate('checkoutShipping.shippingMethod'),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 1), textTitle = _b[0];
+                    return {
+                        title: textTitle,
+                        textBold: shipping.name,
+                        text: [shipping.description],
+                    };
+                }));
             };
         OrderDetailShippingComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-order-details-shipping',
-                        template: "<ng-container *ngIf=\"(order$ | async) as order\">\n  <div class=\"cx-account-summary row\">\n    <div\n      *ngIf=\"order.deliveryAddress\"\n      class=\"cx-summary-card col-sm-12 col-md-4\"\n    >\n      <cx-card\n        [content]=\"getAddressCardContent(order.deliveryAddress)\"\n      ></cx-card>\n    </div>\n    <div\n      *ngIf=\"order.paymentInfo?.billingAddress\"\n      class=\"cx-summary-card col-sm-12 col-md-4\"\n    >\n      <cx-card\n        [content]=\"\n          getBillingAddressCardContent(order.paymentInfo.billingAddress)\n        \"\n      ></cx-card>\n    </div>\n    <div *ngIf=\"order.paymentInfo\" class=\"cx-summary-card col-sm-12 col-md-4\">\n      <cx-card [content]=\"getPaymentCardContent(order.paymentInfo)\"></cx-card>\n    </div>\n    <div *ngIf=\"order.deliveryMode\" class=\"cx-summary-card col-sm-12 col-md-4\">\n      <cx-card\n        [content]=\"getShippingMethodCardContent(order.deliveryMode)\"\n      ></cx-card>\n    </div>\n  </div>\n</ng-container>\n"
+                        template: "<ng-container *ngIf=\"(order$ | async) as order\">\n  <div class=\"cx-account-summary row\">\n    <div\n      *ngIf=\"order.deliveryAddress\"\n      class=\"cx-summary-card col-sm-12 col-md-4\"\n    >\n      <cx-card\n        [content]=\"getAddressCardContent(order.deliveryAddress) | async\"\n      ></cx-card>\n    </div>\n    <div\n      *ngIf=\"order.paymentInfo?.billingAddress\"\n      class=\"cx-summary-card col-sm-12 col-md-4\"\n    >\n      <cx-card\n        [content]=\"\n          getBillingAddressCardContent(order.paymentInfo.billingAddress) | async\n        \"\n      ></cx-card>\n    </div>\n    <div *ngIf=\"order.paymentInfo\" class=\"cx-summary-card col-sm-12 col-md-4\">\n      <cx-card\n        [content]=\"getPaymentCardContent(order.paymentInfo) | async\"\n      ></cx-card>\n    </div>\n    <div *ngIf=\"order.deliveryMode\" class=\"cx-summary-card col-sm-12 col-md-4\">\n      <cx-card\n        [content]=\"getShippingMethodCardContent(order.deliveryMode) | async\"\n      ></cx-card>\n    </div>\n  </div>\n</ng-container>\n"
                     }] }
         ];
         /** @nocollapse */
         OrderDetailShippingComponent.ctorParameters = function () {
             return [
-                { type: OrderDetailsService }
+                { type: OrderDetailsService },
+                { type: i1$1.TranslationService }
             ];
         };
         return OrderDetailShippingComponent;
@@ -7693,15 +7715,12 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var OrderHistoryComponent = /** @class */ (function () {
-        function OrderHistoryComponent(auth, routing, userService) {
+        function OrderHistoryComponent(auth, routing, userService, translation) {
             this.auth = auth;
             this.routing = routing;
             this.userService = userService;
+            this.translation = translation;
             this.PAGE_SIZE = 5;
-            this.sortLabels = {
-                byDate: 'Date',
-                byOrderNumber: 'Order Number',
-            };
         }
         /**
          * @return {?}
@@ -7785,6 +7804,24 @@
                 });
             };
         /**
+         * @return {?}
+         */
+        OrderHistoryComponent.prototype.getSortLabels = /**
+         * @return {?}
+         */
+            function () {
+                return rxjs.combineLatest([
+                    this.translation.translate('sorting.date'),
+                    this.translation.translate('sorting.orderNumber'),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 2), textByDate = _b[0], textByOrderNumber = _b[1];
+                    return {
+                        byDate: textByDate,
+                        byOrderNumber: textByOrderNumber,
+                    };
+                }));
+            };
+        /**
          * @private
          * @param {?} event
          * @return {?}
@@ -7800,7 +7837,7 @@
         OrderHistoryComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-order-history',
-                        template: "<ng-container *ngIf=\"(orders$ | async) as orders\">\n  <div class=\"container\">\n    <!-- HEADER -->\n    <div class=\"cx-order-history-header\">\n      <h3>{{ 'orderHistory.orderHistory' | cxTranslate }}</h3>\n    </div>\n\n    <!-- BODY -->\n    <div class=\"cx-order-history-body\">\n      <ng-container *ngIf=\"orders.pagination.totalResults > 0; else noOrder\">\n        <!-- Select Form and Pagination Top -->\n        <div class=\"cx-order-history-sort top row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"sortLabels\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n        <!-- TABLE -->\n        <table class=\"table cx-order-history-table\">\n          <thead class=\"cx-order-history-thead-mobile\">\n            <th scope=\"col\">\n              {{ 'orderHistory.orderId' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.date' | cxTranslate }}</th>\n            <th scope=\"col\">\n              {{ 'orderHistory.status' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.total' | cxTranslate }}</th>\n          </thead>\n          <tbody>\n            <tr\n              *ngFor=\"let order of orders.orders\"\n              (click)=\"goToOrderDetail(order)\"\n            >\n              <td class=\"cx-order-history-code\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.orderId' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.code }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-placed\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.date' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                  >{{ order?.placed | cxDate: 'longDate' }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-status\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.status' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{\n                    'orderDetails.statusDisplay'\n                      | cxTranslate: { context: order?.statusDisplay }\n                  }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-total\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.total' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.total.formattedValue }}</a\n                >\n              </td>\n            </tr>\n          </tbody>\n        </table>\n        <!-- Select Form and Pagination Bottom -->\n        <div class=\"cx-order-history-sort bottom row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"sortLabels\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n      </ng-container>\n\n      <!-- NO ORDER CONTAINER -->\n      <ng-template #noOrder>\n        <div class=\"cx-order-history-no-order row\" *ngIf=\"(isLoaded$ | async)\">\n          <div class=\"col-sm-12 col-md-6 col-lg-4\">\n            <div>{{ 'orderHistory.noOrders' | cxTranslate }}</div>\n            <a\n              [routerLink]=\"{ route: 'home' } | cxUrl\"\n              routerLinkActive=\"active\"\n              class=\"btn btn-primary btn-block\"\n              >{{ 'orderHistory.startShopping' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </ng-template>\n    </div>\n  </div>\n</ng-container>\n"
+                        template: "<ng-container *ngIf=\"(orders$ | async) as orders\">\n  <div class=\"container\">\n    <!-- HEADER -->\n    <div class=\"cx-order-history-header\">\n      <h3>{{ 'orderHistory.orderHistory' | cxTranslate }}</h3>\n    </div>\n\n    <!-- BODY -->\n    <div class=\"cx-order-history-body\">\n      <ng-container *ngIf=\"orders.pagination.totalResults > 0; else noOrder\">\n        <!-- Select Form and Pagination Top -->\n        <div class=\"cx-order-history-sort top row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"getSortLabels() | async\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n        <!-- TABLE -->\n        <table class=\"table cx-order-history-table\">\n          <thead class=\"cx-order-history-thead-mobile\">\n            <th scope=\"col\">\n              {{ 'orderHistory.orderId' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.date' | cxTranslate }}</th>\n            <th scope=\"col\">\n              {{ 'orderHistory.status' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.total' | cxTranslate }}</th>\n          </thead>\n          <tbody>\n            <tr\n              *ngFor=\"let order of orders.orders\"\n              (click)=\"goToOrderDetail(order)\"\n            >\n              <td class=\"cx-order-history-code\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.orderId' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.code }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-placed\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.date' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                  >{{ order?.placed | cxDate: 'longDate' }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-status\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.status' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{\n                    'orderDetails.statusDisplay'\n                      | cxTranslate: { context: order?.statusDisplay }\n                  }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-total\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.total' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.total.formattedValue }}</a\n                >\n              </td>\n            </tr>\n          </tbody>\n        </table>\n        <!-- Select Form and Pagination Bottom -->\n        <div class=\"cx-order-history-sort bottom row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"getSortLabels() | async\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n      </ng-container>\n\n      <!-- NO ORDER CONTAINER -->\n      <ng-template #noOrder>\n        <div class=\"cx-order-history-no-order row\" *ngIf=\"(isLoaded$ | async)\">\n          <div class=\"col-sm-12 col-md-6 col-lg-4\">\n            <div>{{ 'orderHistory.noOrders' | cxTranslate }}</div>\n            <a\n              [routerLink]=\"{ route: 'home' } | cxUrl\"\n              routerLinkActive=\"active\"\n              class=\"btn btn-primary btn-block\"\n              >{{ 'orderHistory.startShopping' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </ng-template>\n    </div>\n  </div>\n</ng-container>\n"
                     }] }
         ];
         /** @nocollapse */
@@ -7808,7 +7845,8 @@
             return [
                 { type: i1$1.AuthService },
                 { type: i1$1.RoutingService },
-                { type: i1$1.UserService }
+                { type: i1$1.UserService },
+                { type: i1$1.TranslationService }
             ];
         };
         return OrderHistoryComponent;
@@ -7872,8 +7910,9 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var PaymentMethodsComponent = /** @class */ (function () {
-        function PaymentMethodsComponent(userService) {
+        function PaymentMethodsComponent(userService, translation) {
             this.userService = userService;
+            this.translation = translation;
         }
         /**
          * @return {?}
@@ -7901,21 +7940,33 @@
          */
             function (_a) {
                 var defaultPayment = _a.defaultPayment, accountHolderName = _a.accountHolderName, expiryMonth = _a.expiryMonth, expiryYear = _a.expiryYear, cardNumber = _a.cardNumber;
-                /** @type {?} */
-                var actions = [];
-                if (!defaultPayment) {
-                    actions.push({ name: 'Set as default', event: 'default' });
-                }
-                actions.push({ name: 'Delete', event: 'edit' });
-                /** @type {?} */
-                var card = {
-                    header: defaultPayment ? 'DEFAULT' : null,
-                    textBold: accountHolderName,
-                    text: [cardNumber, "Expires: " + expiryMonth + "/" + expiryYear],
-                    actions: actions,
-                    deleteMsg: 'Are you sure you want to delete this payment method?',
-                };
-                return card;
+                return rxjs.combineLatest([
+                    this.translation.translate('paymentCard.setAsDefault'),
+                    this.translation.translate('common.delete'),
+                    this.translation.translate('paymentCard.deleteConfirmation'),
+                    this.translation.translate('paymentCard.expires', {
+                        month: expiryMonth,
+                        year: expiryYear,
+                    }),
+                    this.translation.translate('paymentCard.defaultPaymentMethod'),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 5), textSetAsDefault = _b[0], textDelete = _b[1], textDeleteConfirmation = _b[2], textExpires = _b[3], textDefaultPaymentMethod = _b[4];
+                    /** @type {?} */
+                    var actions = [];
+                    if (!defaultPayment) {
+                        actions.push({ name: textSetAsDefault, event: 'default' });
+                    }
+                    actions.push({ name: textDelete, event: 'edit' });
+                    /** @type {?} */
+                    var card = {
+                        header: defaultPayment ? textDefaultPaymentMethod : null,
+                        textBold: accountHolderName,
+                        text: [cardNumber, textExpires],
+                        actions: actions,
+                        deleteMsg: textDeleteConfirmation,
+                    };
+                    return card;
+                }));
             };
         /**
          * @param {?} paymentMethod
@@ -7978,13 +8029,14 @@
         PaymentMethodsComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-payment-methods',
-                        template: "<div class=\"cx-payment container\">\n  <div class=\"cx-header\">\n    <h3>{{ 'paymentMethods.paymentMethods' | cxTranslate }}</h3>\n  </div>\n\n  <div class=\"cx-body\">\n    <div class=\"cx-msg\">\n      {{\n        'paymentMethods.newPaymentMethodsAreAddedDuringCheckout' | cxTranslate\n      }}\n    </div>\n    <div *ngIf=\"(loading$ | async); else cards\"><cx-spinner></cx-spinner></div>\n    <ng-template #cards>\n      <div\n        *ngIf=\"(paymentMethods$ | async) as paymentMethods\"\n        class=\"cx-existing row\"\n      >\n        <div\n          class=\"cx-payment-card col-sm-12 col-md-12 col-lg-6\"\n          *ngFor=\"let paymentMethod of paymentMethods\"\n        >\n          <div class=\"cx-payment-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"getCardContent(paymentMethod)\"\n              (deleteCard)=\"deletePaymentMethod(paymentMethod)\"\n              (setDefaultCard)=\"setDefaultPaymentMethod(paymentMethod)\"\n              (editCard)=\"setEdit(paymentMethod)\"\n              [editMode]=\"editCard === paymentMethod.id\"\n              (cancelCard)=\"cancelCard()\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n    </ng-template>\n  </div>\n</div>\n"
+                        template: "<div class=\"cx-payment container\">\n  <div class=\"cx-header\">\n    <h3>{{ 'paymentMethods.paymentMethods' | cxTranslate }}</h3>\n  </div>\n\n  <div class=\"cx-body\">\n    <div class=\"cx-msg\">\n      {{\n        'paymentMethods.newPaymentMethodsAreAddedDuringCheckout' | cxTranslate\n      }}\n    </div>\n    <div *ngIf=\"(loading$ | async); else cards\"><cx-spinner></cx-spinner></div>\n    <ng-template #cards>\n      <div\n        *ngIf=\"(paymentMethods$ | async) as paymentMethods\"\n        class=\"cx-existing row\"\n      >\n        <div\n          class=\"cx-payment-card col-sm-12 col-md-12 col-lg-6\"\n          *ngFor=\"let paymentMethod of paymentMethods\"\n        >\n          <div class=\"cx-payment-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"getCardContent(paymentMethod) | async\"\n              (deleteCard)=\"deletePaymentMethod(paymentMethod)\"\n              (setDefaultCard)=\"setDefaultPaymentMethod(paymentMethod)\"\n              (editCard)=\"setEdit(paymentMethod)\"\n              [editMode]=\"editCard === paymentMethod.id\"\n              (cancelCard)=\"cancelCard()\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n    </ng-template>\n  </div>\n</div>\n"
                     }] }
         ];
         /** @nocollapse */
         PaymentMethodsComponent.ctorParameters = function () {
             return [
-                { type: i1$1.UserService }
+                { type: i1$1.UserService },
+                { type: i1$1.TranslationService }
             ];
         };
         return PaymentMethodsComponent;
@@ -10148,8 +10200,9 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ProductSummaryComponent = /** @class */ (function () {
-        function ProductSummaryComponent(translatePipe) {
+        function ProductSummaryComponent(translatePipe, translationService) {
             this.translatePipe = translatePipe;
+            this.translationService = translationService;
             this.itemCount = 1;
         }
         Object.defineProperty(ProductSummaryComponent.prototype, "outlets", {
@@ -10291,19 +10344,22 @@
              * @return {?}
              */
             function () {
+                var _this = this;
                 // Use translated label for Reviews tab reference
-                /** @type {?} */
-                var reviewsTabLabel = this.translatePipe.transform('productDetails.label.reviews');
-                /** @type {?} */
-                var tabsComponent = this.getTabsComponent();
-                /** @type {?} */
-                var reviewsTab = this.getTabByLabel(reviewsTabLabel, tabsComponent);
-                /** @type {?} */
-                var reviewsComponent = this.getReviewsComponent();
-                if (reviewsTab && reviewsComponent) {
-                    reviewsComponent.scrollIntoView();
-                    this.clickTabIfInactive(reviewsTab);
-                }
+                this.translationService
+                    .translate('productDetails.reviews')
+                    .subscribe(function (reviewsTabLabel) {
+                    /** @type {?} */
+                    var tabsComponent = _this.getTabsComponent();
+                    /** @type {?} */
+                    var reviewsTab = _this.getTabByLabel(reviewsTabLabel, tabsComponent);
+                    /** @type {?} */
+                    var reviewsComponent = _this.getReviewsComponent();
+                    if (reviewsTab && reviewsComponent) {
+                        reviewsComponent.scrollIntoView();
+                        _this.clickTabIfInactive(reviewsTab);
+                    }
+                });
             };
         /**
          * @return {?}
@@ -10326,7 +10382,8 @@
         /** @nocollapse */
         ProductSummaryComponent.ctorParameters = function () {
             return [
-                { type: i1$1.TranslatePipe }
+                { type: i1$1.TranslatePipe },
+                { type: i1$1.TranslationService }
             ];
         };
         ProductSummaryComponent.propDecorators = {
@@ -12965,13 +13022,13 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var PaymentMethodComponent = /** @class */ (function () {
-        function PaymentMethodComponent(cartData, userService, checkoutService, globalMessageService) {
+        function PaymentMethodComponent(cartData, userService, checkoutService, globalMessageService, translation) {
             this.cartData = cartData;
             this.userService = userService;
             this.checkoutService = checkoutService;
             this.globalMessageService = globalMessageService;
+            this.translation = translation;
             this.newPaymentFormManuallyOpened = false;
-            this.cards = [];
             this.goToStep = new i0.EventEmitter();
         }
         /**
@@ -12984,18 +13041,7 @@
                 var _this = this;
                 this.isLoading$ = this.userService.getPaymentMethodsLoading();
                 this.userService.loadPaymentMethods(this.cartData.userId);
-                this.existingPaymentMethods$ = this.userService.getPaymentMethods().pipe(operators.tap(function (payments) {
-                    if (_this.cards.length === 0) {
-                        payments.forEach(function (payment) {
-                            /** @type {?} */
-                            var card = _this.getCardContent(payment);
-                            if (_this.selectedPayment &&
-                                _this.selectedPayment.id === payment.id) {
-                                card.header = 'SELECTED';
-                            }
-                        });
-                    }
-                }));
+                this.existingPaymentMethods$ = this.userService.getPaymentMethods();
                 this.getPaymentDetailsSub = this.checkoutService
                     .getPaymentDetails()
                     .pipe(operators.filter(function (paymentInfo) { return paymentInfo && Object.keys(paymentInfo).length !== 0; }))
@@ -13022,50 +13068,49 @@
          * @return {?}
          */
             function (payment) {
-                /** @type {?} */
-                var ccImage;
-                if (payment.cardType.code === 'visa') {
-                    ccImage = visaImgSrc;
-                }
-                else if (payment.cardType.code === 'master') {
-                    ccImage = masterCardImgSrc;
-                }
-                /** @type {?} */
-                var card = {
-                    title: payment.defaultPayment ? 'Default Payment Method' : '',
-                    textBold: payment.accountHolderName,
-                    text: [
-                        payment.cardNumber,
-                        'Expires: ' + payment.expiryMonth + '/' + payment.expiryYear,
-                    ],
-                    img: ccImage,
-                    actions: [{ name: 'Use this payment', event: 'send' }],
-                };
-                this.cards.push(card);
-                return card;
+                var _this = this;
+                return rxjs.combineLatest([
+                    this.translation.translate('paymentCard.expires', {
+                        month: payment.expiryMonth,
+                        year: payment.expiryYear,
+                    }),
+                    this.translation.translate('paymentForm.useThisPayment'),
+                    this.translation.translate('paymentCard.defaultPaymentMethod'),
+                    this.translation.translate('paymentCard.selected'),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 4), textExpires = _b[0], textUseThisPayment = _b[1], textDefaultPaymentMethod = _b[2], textSelected = _b[3];
+                    /** @type {?} */
+                    var ccImage;
+                    if (payment.cardType.code === 'visa') {
+                        ccImage = visaImgSrc;
+                    }
+                    else if (payment.cardType.code === 'master') {
+                        ccImage = masterCardImgSrc;
+                    }
+                    /** @type {?} */
+                    var card = {
+                        title: payment.defaultPayment ? textDefaultPaymentMethod : '',
+                        textBold: payment.accountHolderName,
+                        text: [payment.cardNumber, textExpires],
+                        img: ccImage,
+                        actions: [{ name: textUseThisPayment, event: 'send' }],
+                    };
+                    if (_this.selectedPayment && _this.selectedPayment.id === payment.id) {
+                        card.header = textSelected;
+                    }
+                    return card;
+                }));
             };
         /**
          * @param {?} paymentDetails
-         * @param {?} index
          * @return {?}
          */
         PaymentMethodComponent.prototype.paymentMethodSelected = /**
          * @param {?} paymentDetails
-         * @param {?} index
          * @return {?}
          */
-            function (paymentDetails, index) {
+            function (paymentDetails) {
                 this.selectedPayment = paymentDetails;
-                for (var i = 0; this.cards[i]; i++) {
-                    /** @type {?} */
-                    var card = this.cards[i];
-                    if (i === index) {
-                        card.header = 'SELECTED';
-                    }
-                    else {
-                        card.header = '';
-                    }
-                }
             };
         /**
          * @return {?}
@@ -13176,7 +13221,7 @@
         PaymentMethodComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-payment-method',
-                        template: "<ng-container\n  *ngIf=\"(existingPaymentMethods$ | async) as existingPaymentMethods\"\n>\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'paymentForm.payment' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        existingPaymentMethods?.length && !newPaymentFormManuallyOpened;\n        else newPaymentForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'paymentForm.choosePaymentMethod' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewPaymentForm()\"\n          >\n            {{ 'paymentForm.addNewPayment' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-payment-card col-md-12 col-lg-6\"\n          *ngFor=\"let method of existingPaymentMethods; let i = index\"\n        >\n          <div class=\"cx-payment-card-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"cards[i]\"\n              (sendCard)=\"paymentMethodSelected(method, i)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"row cx-checkout-btns\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'common.back' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-primary\"\n            [disabled]=\"!selectedPayment\"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newPaymentForm>\n      <cx-payment-form\n        (addPaymentInfo)=\"addNewPaymentMethod($event)\"\n        (closeForm)=\"hideNewPaymentForm()\"\n        (goBack)=\"back()\"\n        [paymentMethodsCount]=\"existingPaymentMethods?.length || 0\"\n      ></cx-payment-form>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n  </ng-template>\n</ng-container>\n",
+                        template: "<ng-container\n  *ngIf=\"(existingPaymentMethods$ | async) as existingPaymentMethods\"\n>\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'paymentForm.payment' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        existingPaymentMethods?.length && !newPaymentFormManuallyOpened;\n        else newPaymentForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'paymentForm.choosePaymentMethod' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewPaymentForm()\"\n          >\n            {{ 'paymentForm.addNewPayment' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-payment-card col-md-12 col-lg-6\"\n          *ngFor=\"let method of existingPaymentMethods; let i = index\"\n        >\n          <div class=\"cx-payment-card-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"getCardContent(method) | async\"\n              (sendCard)=\"paymentMethodSelected(method)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"row cx-checkout-btns\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'common.back' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-primary\"\n            [disabled]=\"!selectedPayment\"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newPaymentForm>\n      <cx-payment-form\n        (addPaymentInfo)=\"addNewPaymentMethod($event)\"\n        (closeForm)=\"hideNewPaymentForm()\"\n        (goBack)=\"back()\"\n        [paymentMethodsCount]=\"existingPaymentMethods?.length || 0\"\n      ></cx-payment-form>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n  </ng-template>\n</ng-container>\n",
                         changeDetection: i0.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -13186,7 +13231,8 @@
                 { type: i1$1.CartDataService },
                 { type: i1$1.UserService },
                 { type: i1$1.CheckoutService },
-                { type: i1$1.GlobalMessageService }
+                { type: i1$1.GlobalMessageService },
+                { type: i1$1.TranslationService }
             ];
         };
         PaymentMethodComponent.propDecorators = {
@@ -13226,10 +13272,11 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ReviewSubmitComponent = /** @class */ (function () {
-        function ReviewSubmitComponent(checkoutService, userService, cartService) {
+        function ReviewSubmitComponent(checkoutService, userService, cartService, translation) {
             this.checkoutService = checkoutService;
             this.userService = userService;
             this.cartService = cartService;
+            this.translation = translation;
         }
         /**
          * @return {?}
@@ -13267,25 +13314,30 @@
          * @return {?}
          */
             function (deliveryAddress, countryName) {
-                if (!countryName) {
-                    countryName = deliveryAddress.country.isocode;
-                }
-                /** @type {?} */
-                var region = '';
-                if (deliveryAddress.region && deliveryAddress.region.isocode) {
-                    region = deliveryAddress.region.isocode + ', ';
-                }
-                return {
-                    title: 'Ship To',
-                    textBold: deliveryAddress.firstName + ' ' + deliveryAddress.lastName,
-                    text: [
-                        deliveryAddress.line1,
-                        deliveryAddress.line2,
-                        deliveryAddress.town + ', ' + region + countryName,
-                        deliveryAddress.postalCode,
-                        deliveryAddress.phone,
-                    ],
-                };
+                return rxjs.combineLatest([
+                    this.translation.translate('addressCard.shipTo'),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 1), textTitle = _b[0];
+                    if (!countryName) {
+                        countryName = deliveryAddress.country.isocode;
+                    }
+                    /** @type {?} */
+                    var region = '';
+                    if (deliveryAddress.region && deliveryAddress.region.isocode) {
+                        region = deliveryAddress.region.isocode + ', ';
+                    }
+                    return {
+                        title: textTitle,
+                        textBold: deliveryAddress.firstName + ' ' + deliveryAddress.lastName,
+                        text: [
+                            deliveryAddress.line1,
+                            deliveryAddress.line2,
+                            deliveryAddress.town + ', ' + region + countryName,
+                            deliveryAddress.postalCode,
+                            deliveryAddress.phone,
+                        ],
+                    };
+                }));
             };
         /**
          * @param {?} deliveryMode
@@ -13296,13 +13348,16 @@
          * @return {?}
          */
             function (deliveryMode) {
-                if (deliveryMode) {
+                return rxjs.combineLatest([
+                    this.translation.translate('checkoutShipping.shippingMethod'),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 1), textTitle = _b[0];
                     return {
-                        title: 'Shipping Method',
+                        title: textTitle,
                         textBold: deliveryMode.name,
                         text: [deliveryMode.description],
                     };
-                }
+                }));
             };
         /**
          * @param {?} paymentDetails
@@ -13313,22 +13368,25 @@
          * @return {?}
          */
             function (paymentDetails) {
-                return {
-                    title: 'Payment',
-                    textBold: paymentDetails.accountHolderName,
-                    text: [
-                        paymentDetails.cardNumber,
-                        'Expires: ' +
-                            paymentDetails.expiryMonth +
-                            '/' +
-                            paymentDetails.expiryYear,
-                    ],
-                };
+                return rxjs.combineLatest([
+                    this.translation.translate('paymentForm.payment'),
+                    this.translation.translate('paymentCard.expires', {
+                        month: paymentDetails.expiryMonth,
+                        year: paymentDetails.expiryYear,
+                    }),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 2), textTitle = _b[0], textExpires = _b[1];
+                    return {
+                        title: textTitle,
+                        textBold: paymentDetails.accountHolderName,
+                        text: [paymentDetails.cardNumber, textExpires],
+                    };
+                }));
             };
         ReviewSubmitComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-review-submit',
-                        template: "<div class=\"cx-review\">\n  <!-- TITLE -->\n  <h3 class=\"cx-review-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutReview.review' | cxTranslate }}\n  </h3>\n  <div class=\"cx-review-summary row\">\n    <!-- SHIPPING ADDRESS SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-address\">\n        <cx-card\n          [content]=\"\n            getShippingAddressCard(\n              deliveryAddress$ | async,\n              countryName$ | async\n            )\n          \"\n        ></cx-card>\n      </div>\n    </div>\n\n    <!-- DELIVERY MODE SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-shipping\">\n        <cx-card\n          [content]=\"getDeliveryModeCard(deliveryMode$ | async)\"\n        ></cx-card>\n      </div>\n    </div>\n\n    <!-- PAYMENT METHOD SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-payment\">\n        <cx-card\n          [content]=\"getPaymentMethodCard(paymentDetails$ | async)\"\n        ></cx-card>\n      </div>\n    </div>\n  </div>\n\n  <!-- CART ITEM SECTION -->\n  <ng-container *ngIf=\"(cart$ | async) as cart\">\n    <div class=\"cx-review-cart-total d-none d-lg-block d-xl-block\">\n      {{\n        'cartItems.cartTotal'\n          | cxTranslate: { count: cart.deliveryItemsQuantity }\n      }}:\n      {{ cart.totalPrice?.formattedValue }}\n    </div>\n    <h4 class=\"cx-review-cart-heading d-block d-lg-none d-xl-none\">\n      {{ 'checkoutReview.placeOrder' | cxTranslate }}\n    </h4>\n    <div\n      class=\"cx-review-cart-item col-md-12\"\n      *ngIf=\"(entries$ | async) as entries\"\n    >\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [isReadOnly]=\"true\"\n        [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n      ></cx-cart-item-list>\n    </div>\n  </ng-container>\n</div>\n",
+                        template: "<div class=\"cx-review\">\n  <!-- TITLE -->\n  <h3 class=\"cx-review-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutReview.review' | cxTranslate }}\n  </h3>\n  <div class=\"cx-review-summary row\">\n    <!-- SHIPPING ADDRESS SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-address\">\n        <cx-card\n          [content]=\"\n            getShippingAddressCard(\n              deliveryAddress$ | async,\n              countryName$ | async\n            ) | async\n          \"\n        ></cx-card>\n      </div>\n    </div>\n\n    <!-- DELIVERY MODE SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-shipping\">\n        <cx-card\n          *ngIf=\"(deliveryMode$ | async) as deliveryMode\"\n          [content]=\"getDeliveryModeCard(deliveryMode) | async\"\n        ></cx-card>\n      </div>\n    </div>\n\n    <!-- PAYMENT METHOD SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-payment\">\n        <cx-card\n          [content]=\"getPaymentMethodCard(paymentDetails$ | async) | async\"\n        ></cx-card>\n      </div>\n    </div>\n  </div>\n\n  <!-- CART ITEM SECTION -->\n  <ng-container *ngIf=\"(cart$ | async) as cart\">\n    <div class=\"cx-review-cart-total d-none d-lg-block d-xl-block\">\n      {{\n        'cartItems.cartTotal'\n          | cxTranslate: { count: cart.deliveryItemsQuantity }\n      }}:\n      {{ cart.totalPrice?.formattedValue }}\n    </div>\n    <h4 class=\"cx-review-cart-heading d-block d-lg-none d-xl-none\">\n      {{ 'checkoutReview.placeOrder' | cxTranslate }}\n    </h4>\n    <div\n      class=\"cx-review-cart-item col-md-12\"\n      *ngIf=\"(entries$ | async) as entries\"\n    >\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [isReadOnly]=\"true\"\n        [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n      ></cx-cart-item-list>\n    </div>\n  </ng-container>\n</div>\n",
                         changeDetection: i0.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -13337,7 +13395,8 @@
             return [
                 { type: i1$1.CheckoutService },
                 { type: i1$1.UserService },
-                { type: i1$1.CartService }
+                { type: i1$1.CartService },
+                { type: i1$1.TranslationService }
             ];
         };
         return ReviewSubmitComponent;
@@ -13366,12 +13425,13 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ShippingAddressComponent = /** @class */ (function () {
-        function ShippingAddressComponent(userService, cartData, cartService, routingService, checkoutService) {
+        function ShippingAddressComponent(userService, cartData, cartService, routingService, checkoutService, translation) {
             this.userService = userService;
             this.cartData = cartData;
             this.cartService = cartService;
             this.routingService = routingService;
             this.checkoutService = checkoutService;
+            this.translation = translation;
             this.newAddressFormManuallyOpened = false;
             this.cards = [];
             this.selectedAddress$ = new rxjs.BehaviorSubject(null);
@@ -13403,11 +13463,11 @@
                     _this.selectedAddress = address;
                 });
                 this.existingAddresses$ = this.userService.getAddresses();
-                this.cards$ = rxjs.combineLatest(this.existingAddresses$, this.selectedAddress$.asObservable()).pipe(operators.map(function (_a) {
-                    var _b = __read(_a, 2), addresses = _b[0], selected = _b[1];
+                this.cards$ = rxjs.combineLatest(this.existingAddresses$, this.selectedAddress$.asObservable(), this.translation.translate('checkoutAddress.defaultShippingAddress'), this.translation.translate('checkoutAddress.shipToThisAddress'), this.translation.translate('addressCard.selected')).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 5), addresses = _b[0], selected = _b[1], textDefaultShippingAddress = _b[2], textShipToThisAddress = _b[3], textSelected = _b[4];
                     return addresses.map(function (address) {
                         /** @type {?} */
-                        var card = _this.getCardContent(address, selected);
+                        var card = _this.getCardContent(address, selected, textDefaultShippingAddress, textShipToThisAddress, textSelected);
                         return {
                             address: address,
                             card: card,
@@ -13418,14 +13478,20 @@
         /**
          * @param {?} address
          * @param {?} selected
+         * @param {?} textDefaultShippingAddress
+         * @param {?} textShipToThisAddress
+         * @param {?} textSelected
          * @return {?}
          */
         ShippingAddressComponent.prototype.getCardContent = /**
          * @param {?} address
          * @param {?} selected
+         * @param {?} textDefaultShippingAddress
+         * @param {?} textShipToThisAddress
+         * @param {?} textSelected
          * @return {?}
          */
-            function (address, selected) {
+            function (address, selected, textDefaultShippingAddress, textShipToThisAddress, textSelected) {
                 /** @type {?} */
                 var region = '';
                 if (address.region && address.region.isocode) {
@@ -13433,7 +13499,7 @@
                 }
                 /** @type {?} */
                 var card = {
-                    title: address.defaultAddress ? 'Default Shipping Address' : '',
+                    title: address.defaultAddress ? textDefaultShippingAddress : '',
                     textBold: address.firstName + ' ' + address.lastName,
                     text: [
                         address.line1,
@@ -13442,8 +13508,8 @@
                         address.postalCode,
                         address.phone,
                     ],
-                    actions: [{ name: 'Ship to this address', event: 'send' }],
-                    header: selected && selected.id === address.id ? 'SELECTED' : '',
+                    actions: [{ name: textShipToThisAddress, event: 'send' }],
+                    header: selected && selected.id === address.id ? textSelected : '',
                 };
                 this.cards.push(card);
                 return card;
@@ -13567,7 +13633,8 @@
                 { type: i1$1.CartDataService },
                 { type: i1$1.CartService },
                 { type: i1$1.RoutingService },
-                { type: i1$1.CheckoutService }
+                { type: i1$1.CheckoutService },
+                { type: i1$1.TranslationService }
             ];
         };
         ShippingAddressComponent.propDecorators = {
@@ -13797,8 +13864,9 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var OrderConfirmationComponent = /** @class */ (function () {
-        function OrderConfirmationComponent(checkoutService) {
+        function OrderConfirmationComponent(checkoutService, translation) {
             this.checkoutService = checkoutService;
+            this.translation = translation;
         }
         /**
          * @return {?}
@@ -13827,16 +13895,21 @@
          * @return {?}
          */
             function (deliveryAddress) {
-                return {
-                    title: 'Ship To',
-                    textBold: deliveryAddress.firstName + " " + deliveryAddress.lastName,
-                    text: [
-                        deliveryAddress.line1,
-                        deliveryAddress.line2,
-                        deliveryAddress.town + ", " + deliveryAddress.country.isocode + ", " + deliveryAddress.postalCode,
-                        deliveryAddress.phone,
-                    ],
-                };
+                return rxjs.combineLatest([
+                    this.translation.translate('addressCard.shipTo'),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 1), textTitle = _b[0];
+                    return {
+                        title: textTitle,
+                        textBold: deliveryAddress.firstName + " " + deliveryAddress.lastName,
+                        text: [
+                            deliveryAddress.line1,
+                            deliveryAddress.line2,
+                            deliveryAddress.town + ", " + deliveryAddress.country.isocode + ", " + deliveryAddress.postalCode,
+                            deliveryAddress.phone,
+                        ],
+                    };
+                }));
             };
         /**
          * @param {?} deliveryMode
@@ -13847,11 +13920,16 @@
          * @return {?}
          */
             function (deliveryMode) {
-                return {
-                    title: 'Shipping Method',
-                    textBold: deliveryMode.name,
-                    text: [deliveryMode.description],
-                };
+                return rxjs.combineLatest([
+                    this.translation.translate('checkoutShipping.shippingMethod'),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 1), textTitle = _b[0];
+                    return {
+                        title: textTitle,
+                        textBold: deliveryMode.name,
+                        text: [deliveryMode.description],
+                    };
+                }));
             };
         /**
          * @param {?} billingAddress
@@ -13862,46 +13940,58 @@
          * @return {?}
          */
             function (billingAddress) {
-                return {
-                    title: 'Bill To',
-                    textBold: billingAddress.firstName + " " + billingAddress.lastName,
-                    text: [
-                        billingAddress.line1,
-                        billingAddress.line2,
-                        billingAddress.town + ", " + billingAddress.country.isocode + ", " + billingAddress.postalCode,
-                        billingAddress.phone,
-                    ],
-                };
+                return rxjs.combineLatest([
+                    this.translation.translate('addressCard.billTo'),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 1), textTitle = _b[0];
+                    return {
+                        title: textTitle,
+                        textBold: billingAddress.firstName + " " + billingAddress.lastName,
+                        text: [
+                            billingAddress.line1,
+                            billingAddress.line2,
+                            billingAddress.town + ", " + billingAddress.country.isocode + ", " + billingAddress.postalCode,
+                            billingAddress.phone,
+                        ],
+                    };
+                }));
             };
         /**
-         * @param {?} paymentInfo
+         * @param {?} payment
          * @return {?}
          */
         OrderConfirmationComponent.prototype.getPaymentInfoCardContent = /**
-         * @param {?} paymentInfo
+         * @param {?} payment
          * @return {?}
          */
-            function (paymentInfo) {
-                return {
-                    title: 'Payment',
-                    textBold: paymentInfo.accountHolderName,
-                    text: [
-                        paymentInfo.cardNumber,
-                        "Expires: " + paymentInfo.expiryMonth + " / " + paymentInfo.expiryYear,
-                    ],
-                };
+            function (payment) {
+                return rxjs.combineLatest([
+                    this.translation.translate('paymentForm.payment'),
+                    this.translation.translate('paymentCard.expires', {
+                        month: payment.expiryMonth,
+                        year: payment.expiryYear,
+                    }),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 2), textTitle = _b[0], textExpires = _b[1];
+                    return {
+                        title: textTitle,
+                        textBold: payment.accountHolderName,
+                        text: [payment.cardNumber, textExpires],
+                    };
+                }));
             };
         OrderConfirmationComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-order-confirmation',
-                        template: "<div class=\"cx-page\" *ngIf=\"(order$ | async) as order\">\n  <header class=\"cx-page__header\">\n    <h1 class=\"cx-page__title\">\n      {{ 'checkoutOrderConfirmation.confirmationOfOrder' | cxTranslate }}\n      {{ order.code }}\n    </h1>\n  </header>\n\n  <div class=\"cx-order-confirmation\">\n    <div class=\"cx-order-confirmation-message\">\n      <h2>{{ 'checkoutOrderConfirmation.thankYou' | cxTranslate }}</h2>\n      <p>\n        {{\n          'checkoutOrderConfirmation.invoiceHasBeenSentByEmail' | cxTranslate\n        }}\n      </p>\n      <!-- <a href=\"#\" class=\"btn-link\">Print Page</a> -->\n    </div>\n\n    <cx-add-to-home-screen-banner></cx-add-to-home-screen-banner>\n\n    <div class=\"cx-order-review-summary\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getAddressCardContent(order.deliveryAddress)\"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"\n                  getBillingAddressCardContent(order.paymentInfo.billingAddress)\n                \"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getDeliveryModeCardContent(order.deliveryMode)\"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getPaymentInfoCardContent(order.paymentInfo)\"\n              ></cx-card>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"cx-order-items container\">\n      <h4 class=\"cx-order-items-header\">\n        {{ 'checkoutOrderConfirmation.orderItems' | cxTranslate }}\n      </h4>\n      <cx-cart-item-list\n        [items]=\"order.entries\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n\n    <div class=\"cx-order-summary container\">\n      <div class=\"row justify-content-end\">\n        <div class=\"col-sm-12 col-md-6 col-lg-5 col-xl-4\">\n          <cx-order-summary [cart]=\"order\"></cx-order-summary>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                        template: "<div class=\"cx-page\" *ngIf=\"(order$ | async) as order\">\n  <header class=\"cx-page__header\">\n    <h1 class=\"cx-page__title\">\n      {{ 'checkoutOrderConfirmation.confirmationOfOrder' | cxTranslate }}\n      {{ order.code }}\n    </h1>\n  </header>\n\n  <div class=\"cx-order-confirmation\">\n    <div class=\"cx-order-confirmation-message\">\n      <h2>{{ 'checkoutOrderConfirmation.thankYou' | cxTranslate }}</h2>\n      <p>\n        {{\n          'checkoutOrderConfirmation.invoiceHasBeenSentByEmail' | cxTranslate\n        }}\n      </p>\n      <!-- <a href=\"#\" class=\"btn-link\">Print Page</a> -->\n    </div>\n\n    <cx-add-to-home-screen-banner></cx-add-to-home-screen-banner>\n\n    <div class=\"cx-order-review-summary\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getAddressCardContent(order.deliveryAddress) | async\"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"\n                  getBillingAddressCardContent(\n                    order.paymentInfo.billingAddress\n                  ) | async\n                \"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"\n                  getDeliveryModeCardContent(order.deliveryMode) | async\n                \"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getPaymentInfoCardContent(order.paymentInfo) | async\"\n              ></cx-card>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"cx-order-items container\">\n      <h4 class=\"cx-order-items-header\">\n        {{ 'checkoutOrderConfirmation.orderItems' | cxTranslate }}\n      </h4>\n      <cx-cart-item-list\n        [items]=\"order.entries\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n\n    <div class=\"cx-order-summary container\">\n      <div class=\"row justify-content-end\">\n        <div class=\"col-sm-12 col-md-6 col-lg-5 col-xl-4\">\n          <cx-order-summary [cart]=\"order\"></cx-order-summary>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
                         changeDetection: i0.ChangeDetectionStrategy.OnPush
                     }] }
         ];
         /** @nocollapse */
         OrderConfirmationComponent.ctorParameters = function () {
             return [
-                { type: i1$1.CheckoutService }
+                { type: i1$1.CheckoutService },
+                { type: i1$1.TranslationService }
             ];
         };
         return OrderConfirmationComponent;
@@ -14711,6 +14801,10 @@
         searchBox: {
             searchHere: 'Search here...',
         },
+        sorting: {
+            date: 'Date',
+            orderNumber: 'Order Number',
+        },
     };
 
     /**
@@ -14982,8 +15076,6 @@
         paymentForm: {
             payment: 'Payment',
             choosePaymentMethod: 'Choose a payment method',
-            expires: 'Expires:',
-            defaultPaymentMethod: 'Default Payment Method',
             paymentType: 'Payment Type',
             accountHolderName: {
                 label: 'Account Holder Name',
@@ -15005,6 +15097,13 @@
         paymentMethods: {
             paymentMethods: 'Payment methods',
             newPaymentMethodsAreAddedDuringCheckout: 'New payment methods are added during checkout.',
+        },
+        paymentCard: {
+            deleteConfirmation: 'Are you sure you want to delete this payment method?',
+            setAsDefault: 'Set as default',
+            expires: 'Expires: {{ month }}/{{ year }}',
+            defaultPaymentMethod: 'Default Payment Method',
+            selected: 'Selected',
         },
     };
 
@@ -15058,7 +15157,10 @@
         },
         addressCard: {
             default: 'DEFAULT',
+            selected: 'Selected',
             setAsDefault: 'Set as default',
+            shipTo: 'Ship To',
+            billTo: 'Bill To',
         },
     };
 
