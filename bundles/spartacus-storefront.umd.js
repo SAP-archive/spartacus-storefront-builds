@@ -14485,6 +14485,50 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
+    var defaultStorefrontRoutesConfig = {
+        home: { paths: [''] },
+        cart: { paths: ['cart'] },
+        search: { paths: ['search/:query'] },
+        login: { paths: ['login'] },
+        register: { paths: ['register'] },
+        resetPassword: { paths: ['login/pw/change'] },
+        forgotPassword: { paths: ['forgot-password'] },
+        checkout: { paths: ['checkout'] },
+        orderConfirmation: { paths: ['order-confirmation'] },
+        product: {
+            paths: ['product/:productCode'],
+            paramsMapping: { productCode: 'code' },
+        },
+        category: {
+            paths: ['category/:categoryCode'],
+            paramsMapping: { categoryCode: 'code' },
+        },
+        brand: { paths: ['Brands/:brandName/c/:brandCode'] },
+        termsAndConditions: { paths: ['termsAndConditions'] },
+        orders: { paths: ['my-account/orders'] },
+        orderDetails: {
+            paths: ['my-account/orders/:orderCode'],
+            paramsMapping: { orderCode: 'code' },
+        },
+        addressBook: { paths: ['my-account/address-book'] },
+        updatePassword: { paths: ['my-account/update-password'] },
+        paymentManagement: { paths: ['my-account/payment-details'] },
+        updateEmail: { paths: ['my-account/update-email'] },
+        updateProfile: { paths: ['my-account/update-profile'] },
+        closeAccount: { paths: ['my-account/close-account'] },
+    };
+    /** @type {?} */
+    var defaultRoutingConfig = {
+        routing: {
+            routes: defaultStorefrontRoutesConfig,
+        },
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
     var pageModules = [
         CartPageModule,
         OrderConfirmationPageModule,
@@ -14504,6 +14548,7 @@
         PagesModule.decorators = [
             { type: i0.NgModule, args: [{
                         imports: __spread([
+                            i1$1.ConfigModule.withConfig(defaultRoutingConfig),
                             common.CommonModule
                         ], pageModules, [
                             PageLayoutModule,
@@ -15451,26 +15496,28 @@
     exports.ɵo = guards;
     exports.ɵq = CmsGuardsService;
     exports.ɵp = CmsI18nService;
-    exports.ɵbn = provideConfigFromMetaTags;
-    exports.ɵbm = suffixUrlMatcher;
-    exports.ɵbl = HardcodedCheckoutComponent;
-    exports.ɵbk = CartNotEmptyGuard;
-    exports.ɵbj = GuardsModule;
-    exports.ɵbi = OrderConfirmationPageModule;
+    exports.ɵbp = provideConfigFromMetaTags;
+    exports.ɵbo = suffixUrlMatcher;
+    exports.ɵbn = HardcodedCheckoutComponent;
+    exports.ɵbj = defaultRoutingConfig;
+    exports.ɵbi = defaultStorefrontRoutesConfig;
+    exports.ɵbm = CartNotEmptyGuard;
+    exports.ɵbl = GuardsModule;
+    exports.ɵbk = OrderConfirmationPageModule;
     exports.ɵj = CardComponent;
     exports.ɵi = CardModule;
     exports.ɵf = GenericLinkModule;
-    exports.ɵbo = address;
-    exports.ɵbp = cart;
-    exports.ɵbq = checkout;
-    exports.ɵbr = closeAccount;
-    exports.ɵbs = common$1;
-    exports.ɵbt = myAccount;
-    exports.ɵbu = payment;
-    exports.ɵbv = product;
-    exports.ɵbw = pwa;
-    exports.ɵbx = storeFinder;
-    exports.ɵby = user;
+    exports.ɵbq = address;
+    exports.ɵbr = cart;
+    exports.ɵbs = checkout;
+    exports.ɵbt = closeAccount;
+    exports.ɵbu = common$1;
+    exports.ɵbv = myAccount;
+    exports.ɵbw = payment;
+    exports.ɵbx = product;
+    exports.ɵby = pwa;
+    exports.ɵbz = storeFinder;
+    exports.ɵca = user;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
