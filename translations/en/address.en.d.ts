@@ -31,6 +31,11 @@ export declare const address: {
         aptSuite: string;
         selectOne: string;
         setAsDefault: string;
+        titleRequired: string;
+        userAddressAddSuccess: string;
+        userAddressUpdateSuccess: string;
+        userAddressDeleteSuccess: string;
+        invalidAddress: string;
     };
     addressBook: {
         addNewShippingAddress: string;

@@ -6,7 +6,9 @@
       "label": "Email address",
       "placeholder": "Enter email"
     },
-    "enterValidEmail": "Please enter a valid email."
+    "enterValidEmail": "Please enter a valid email.",
+    "passwordResetEmailSent": "An email has been sent to you with information on how to reset your password.",
+    "passwordResetSuccess": "Success! You can now login using your new password."
   },
   "loginForm": {
     "forgotPassword": "Forgot password?",
@@ -58,7 +60,8 @@
     "confirmThatRead": "I am confirming that I have read and agreed with the",
     "selectTitle": "Select Title",
     "passwordMinRequirements": "Password must be six characters minimum, with one uppercase letter, one number, one symbol",
-    "bothPasswordMustMatch": "Both password must match"
+    "bothPasswordMustMatch": "Both password must match",
+    "titleRequired": "Title is required."
   },
   "login": {
     "userGreeting": "Hi, {{name}}",
@@ -74,12 +77,13 @@
       "placeholder": "Enter email"
     },
     "enterValidEmail": "Please enter a valid email.",
-    "bothPasswordMustMatch": "Both password must match",
+    "bothEmailMustMatch": "Both emails must match",
     "password": {
       "label": "Password",
       "placeholder": "Enter password"
     },
-    "pleaseInputPassword": "Please input password"
+    "pleaseInputPassword": "Please input password",
+    "emailUpdateSuccess": "Success. Please sign in with {{ newUid }}"
   },
   "updatePasswordForm": {
     "oldPassword": {
@@ -96,7 +100,8 @@
       "label": "Confirm New Password",
       "placeholder": "Confirm Password"
     },
-    "bothPasswordMustMatch": "Both password must match"
+    "bothPasswordMustMatch": "Both password must match",
+    "passwordUpdateSuccess": "Password updated with success"
   },
   "updateProfileForm": {
     "title": "",
@@ -110,6 +115,7 @@
       "label": "Last name",
       "placeholder": "Last name"
     },
-    "lastNameIsRequired": "Last name is required."
+    "lastNameIsRequired": "Last name is required.",
+    "profileUpdateSuccess": "Personal details successfully updated"
   }
 }

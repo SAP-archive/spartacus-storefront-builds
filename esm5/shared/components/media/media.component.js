@@ -2,21 +2,22 @@
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, Renderer2, } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, } from '@angular/core';
 import { MediaService } from './media.service';
-/** @type {?} */
-var INITIALIZED_CLS = 'initialized';
-/** @type {?} */
-var LOADING_CLS = 'loading';
 var MediaComponent = /** @class */ (function () {
-    function MediaComponent(elRef, renderer, mediaService) {
-        this.elRef = elRef;
-        this.renderer = renderer;
+    function MediaComponent(mediaService) {
         this.mediaService = mediaService;
         /**
          * Once the media is loaded, we emit an event.
          */
         this.loaded = new EventEmitter();
+        /**
+         * The `cx-media` component has a `loading` class as long as the
+         * media is loaded. Wehn the media is loaded, the `initialized` class
+         * is added.
+         */
+        this.isLoading = true;
+        this.isInitialized = false;
     }
     /**
      * @return {?}
@@ -25,22 +26,18 @@ var MediaComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.renderer.addClass((/** @type {?} */ (this.elRef.nativeElement)), LOADING_CLS);
+        this.create();
     };
     /**
-     * @return {?}
+     * Creates the `Media` object
      */
-    MediaComponent.prototype.ngOnChanges = /**
-     * @return {?}
-     */
-    function () {
-        this.loadImage();
-    };
     /**
+     * Creates the `Media` object
      * @private
      * @return {?}
      */
-    MediaComponent.prototype.loadImage = /**
+    MediaComponent.prototype.create = /**
+     * Creates the `Media` object
      * @private
      * @return {?}
      */
@@ -48,45 +45,62 @@ var MediaComponent = /** @class */ (function () {
         this.media = this.mediaService.getImage(this.container, this.format, this.alt);
     };
     /**
+     * This handler is called from the UI when the image is loaded.
+     * The
+     */
+    /**
+     * This handler is called from the UI when the image is loaded.
+     * The
      * @return {?}
      */
     MediaComponent.prototype.loadHandler = /**
+     * This handler is called from the UI when the image is loaded.
+     * The
      * @return {?}
      */
     function () {
-        this.renderer.addClass((/** @type {?} */ (this.elRef.nativeElement)), INITIALIZED_CLS);
-        this.renderer.removeClass((/** @type {?} */ (this.elRef.nativeElement)), LOADING_CLS);
-        this.loaded.emit(this.elRef.nativeElement);
+        this.isLoading = false;
+        this.isInitialized = true;
+        this.loaded.emit(true);
     };
     /**
-     * @param {?} event
+     * Whenever an error happens during load, we fall back to a missing image.
+     * This means we need to update the local media object. In this scenario we
+     * do not provide a `srcset` for responsive images.
+     */
+    /**
+     * Whenever an error happens during load, we fall back to a missing image.
+     * This means we need to update the local media object. In this scenario we
+     * do not provide a `srcset` for responsive images.
      * @return {?}
      */
-    MediaComponent.prototype.loadErrorHandler = /**
-     * @param {?} event
+    MediaComponent.prototype.errorHandler = /**
+     * Whenever an error happens during load, we fall back to a missing image.
+     * This means we need to update the local media object. In this scenario we
+     * do not provide a `srcset` for responsive images.
      * @return {?}
      */
-    function (event) {
-        event.target.src = this.mediaService.getMissingImage();
+    function () {
+        this.media = this.mediaService.getMissingImage();
     };
     MediaComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-media',
-                    template: "<img\n  *ngIf=\"media\"\n  [attr.src]=\"media.src\"\n  [attr.srcset]=\"media.srcset\"\n  [attr.alt]=\"media.alt\"\n  (load)=\"loadHandler()\"\n  (error)=\"loadErrorHandler($event)\"\n/>\n",
+                    template: "<img\n  *ngIf=\"media\"\n  [attr.src]=\"media.src\"\n  [attr.srcset]=\"media.srcset\"\n  [attr.alt]=\"media.alt\"\n  (load)=\"loadHandler()\"\n  (error)=\"errorHandler()\"\n/>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     /** @nocollapse */
     MediaComponent.ctorParameters = function () { return [
-        { type: ElementRef },
-        { type: Renderer2 },
         { type: MediaService }
     ]; };
     MediaComponent.propDecorators = {
         container: [{ type: Input }],
         format: [{ type: Input }],
         alt: [{ type: Input }],
-        loaded: [{ type: Output }]
+        loaded: [{ type: Output }],
+        isLoading: [{ type: HostBinding, args: ['class.loading',] }],
+        isInitialized: [{ type: HostBinding, args: ['class.initialized',] }]
     };
     return MediaComponent;
 }());
@@ -123,19 +137,18 @@ if (false) {
      */
     MediaComponent.prototype.media;
     /**
+     * The `cx-media` component has a `loading` class as long as the
+     * media is loaded. Wehn the media is loaded, the `initialized` class
+     * is added.
      * @type {?}
-     * @private
      */
-    MediaComponent.prototype.elRef;
-    /**
-     * @type {?}
-     * @private
-     */
-    MediaComponent.prototype.renderer;
+    MediaComponent.prototype.isLoading;
+    /** @type {?} */
+    MediaComponent.prototype.isInitialized;
     /**
      * @type {?}
      * @protected
      */
     MediaComponent.prototype.mediaService;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWVkaWEuY29tcG9uZW50LmpzIiwic291cmNlUm9vdCI6Im5nOi8vQHNwYXJ0YWN1cy9zdG9yZWZyb250LyIsInNvdXJjZXMiOlsic2hhcmVkL2NvbXBvbmVudHMvbWVkaWEvbWVkaWEuY29tcG9uZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSxPQUFPLEVBQ0wsdUJBQXVCLEVBQ3ZCLFNBQVMsRUFDVCxVQUFVLEVBQ1YsWUFBWSxFQUNaLEtBQUssRUFHTCxNQUFNLEVBQ04sU0FBUyxHQUNWLE1BQU0sZUFBZSxDQUFDO0FBRXZCLE9BQU8sRUFBRSxZQUFZLEVBQUUsTUFBTSxpQkFBaUIsQ0FBQzs7SUFFekMsZUFBZSxHQUFHLGFBQWE7O0lBQy9CLFdBQVcsR0FBRyxTQUFTO0FBRTdCO0lBb0NFLHdCQUNVLEtBQWlCLEVBQ2pCLFFBQW1CLEVBQ2pCLFlBQTBCO1FBRjVCLFVBQUssR0FBTCxLQUFLLENBQVk7UUFDakIsYUFBUSxHQUFSLFFBQVEsQ0FBVztRQUNqQixpQkFBWSxHQUFaLFlBQVksQ0FBYzs7OztRQVg1QixXQUFNLEdBQThCLElBQUksWUFBWSxFQUFlLENBQUM7SUFZM0UsQ0FBQzs7OztJQUVKLGlDQUFROzs7SUFBUjtRQUNFLElBQUksQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDLG1CQUFhLElBQUksQ0FBQyxLQUFLLENBQUMsYUFBYSxFQUFBLEVBQUUsV0FBVyxDQUFDLENBQUM7SUFDN0UsQ0FBQzs7OztJQUVELG9DQUFXOzs7SUFBWDtRQUNFLElBQUksQ0FBQyxTQUFTLEVBQUUsQ0FBQztJQUNuQixDQUFDOzs7OztJQUVPLGtDQUFTOzs7O0lBQWpCO1FBQ0UsSUFBSSxDQUFDLEtBQUssR0FBRyxJQUFJLENBQUMsWUFBWSxDQUFDLFFBQVEsQ0FDckMsSUFBSSxDQUFDLFNBQVMsRUFDZCxJQUFJLENBQUMsTUFBTSxFQUNYLElBQUksQ0FBQyxHQUFHLENBQ1QsQ0FBQztJQUNKLENBQUM7Ozs7SUFFRCxvQ0FBVzs7O0lBQVg7UUFDRSxJQUFJLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FDcEIsbUJBQWEsSUFBSSxDQUFDLEtBQUssQ0FBQyxhQUFhLEVBQUEsRUFDckMsZUFBZSxDQUNoQixDQUFDO1FBQ0YsSUFBSSxDQUFDLFFBQVEsQ0FBQyxXQUFXLENBQ3ZCLG1CQUFhLElBQUksQ0FBQyxLQUFLLENBQUMsYUFBYSxFQUFBLEVBQ3JDLFdBQVcsQ0FDWixDQUFDO1FBQ0YsSUFBSSxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxhQUFhLENBQUMsQ0FBQztJQUM3QyxDQUFDOzs7OztJQUVELHlDQUFnQjs7OztJQUFoQixVQUFpQixLQUFLO1FBQ3BCLEtBQUssQ0FBQyxNQUFNLENBQUMsR0FBRyxHQUFHLElBQUksQ0FBQyxZQUFZLENBQUMsZUFBZSxFQUFFLENBQUM7SUFDekQsQ0FBQzs7Z0JBeEVGLFNBQVMsU0FBQztvQkFDVCxRQUFRLEVBQUUsVUFBVTtvQkFDcEIsdU1BQXFDO29CQUNyQyxlQUFlLEVBQUUsdUJBQXVCLENBQUMsTUFBTTtpQkFDaEQ7Ozs7Z0JBbEJDLFVBQVU7Z0JBTVYsU0FBUztnQkFHRixZQUFZOzs7NEJBaUJsQixLQUFLO3lCQUtMLEtBQUs7c0JBTUwsS0FBSzt5QkFLTCxNQUFNOztJQTZDVCxxQkFBQztDQUFBLEFBekVELElBeUVDO1NBcEVZLGNBQWM7Ozs7Ozs7OztJQU96QixtQ0FBd0I7Ozs7O0lBS3hCLGdDQUF3Qjs7Ozs7O0lBTXhCLDZCQUFxQjs7Ozs7SUFLckIsZ0NBQThFOzs7Ozs7SUFNOUUsK0JBQWE7Ozs7O0lBR1gsK0JBQXlCOzs7OztJQUN6QixrQ0FBMkI7Ozs7O0lBQzNCLHNDQUFvQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7XG4gIENoYW5nZURldGVjdGlvblN0cmF0ZWd5LFxuICBDb21wb25lbnQsXG4gIEVsZW1lbnRSZWYsXG4gIEV2ZW50RW1pdHRlcixcbiAgSW5wdXQsXG4gIE9uQ2hhbmdlcyxcbiAgT25Jbml0LFxuICBPdXRwdXQsXG4gIFJlbmRlcmVyMixcbn0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBNZWRpYSB9IGZyb20gJy4vbWVkaWEubW9kZWwnO1xuaW1wb3J0IHsgTWVkaWFTZXJ2aWNlIH0gZnJvbSAnLi9tZWRpYS5zZXJ2aWNlJztcblxuY29uc3QgSU5JVElBTElaRURfQ0xTID0gJ2luaXRpYWxpemVkJztcbmNvbnN0IExPQURJTkdfQ0xTID0gJ2xvYWRpbmcnO1xuXG5AQ29tcG9uZW50KHtcbiAgc2VsZWN0b3I6ICdjeC1tZWRpYScsXG4gIHRlbXBsYXRlVXJsOiAnLi9tZWRpYS5jb21wb25lbnQuaHRtbCcsXG4gIGNoYW5nZURldGVjdGlvbjogQ2hhbmdlRGV0ZWN0aW9uU3RyYXRlZ3kuT25QdXNoLFxufSlcbmV4cG9ydCBjbGFzcyBNZWRpYUNvbXBvbmVudCBpbXBsZW1lbnRzIE9uQ2hhbmdlcywgT25Jbml0IHtcbiAgLyoqXG4gICAqIFRoZSBtZWRpYSBjb250YWluZXIgY2FuIGhvbGQgbXVsdGlwbGUgbWVkaWEgaXRlbXMsIHNvIHRoYXRcbiAgICogYSBzcGVjaWZpYyBtZWRpYSAoYnkgZm9ybWF0KSBjYW4gYmUgdXNlZCBvciBtdWx0aXBsZSBtZWRpYVxuICAgKiBjYW4gYmUgcHJvdmlkZWQgaW4gYSBgc3Jjc2V0YCBzbyB0aGUgYnJvd3NlciB3aWxsIGZpZ3VyZSBvdXRcbiAgICogdGhlIGJlc3QgbWVkaWEgZm9yIHRoZSBkZXZpY2UuXG4gICAqL1xuICBASW5wdXQoKSBjb250YWluZXI6IGFueTtcblxuICAvKipcbiAgICogaWYgYSBtZWRpYSBmb3JtYXQgaXMgZ2l2ZW4sIGEgbWVkaWEgZm9yIHRoZSBnaXZlbiBmb3JtYXQgd2lsbCBiZSByZW5kZXJlZFxuICAgKi9cbiAgQElucHV0KCkgZm9ybWF0OiBzdHJpbmc7XG5cbiAgLyoqXG4gICAqIEEgc3BlY2lmaWMgYWx0IHRleHQgZm9yIGFuIGltYWdlLCB3aGljaCBvdmVycnVsZXMgdGhlIGFsdCB0ZXh0XG4gICAqIGZyb20gdGhlIGNvbnRhaW5lciBkYXRhLlxuICAgKi9cbiAgQElucHV0KCkgYWx0OiBzdHJpbmc7XG5cbiAgLyoqXG4gICAqIE9uY2UgdGhlIG1lZGlhIGlzIGxvYWRlZCwgd2UgZW1pdCBhbiBldmVudC5cbiAgICovXG4gIEBPdXRwdXQoKSBsb2FkZWQ6IEV2ZW50RW1pdHRlcjxIVE1MRWxlbWVudD4gPSBuZXcgRXZlbnRFbWl0dGVyPEhUTUxFbGVtZW50PigpO1xuXG4gIC8qKlxuICAgKiBUaGUgbWVkaWEgY29udGFpbnMgdGhlIGluZm8gZm9yIHRoZSBVSSB0byBjcmVhdGUgdGhlIGltYWdlLiBUaGlzIG1lZGlhXG4gICAqIG9iamVjdCBtaWdodCBjb250YWluIG1vcmUgaW5mbyBvbmNlIG90aGVyIG1lZGlhIHR5cGVzIChpLmUuIHZpZGVvKSBpcyBzdXBwb3J0ZWQuXG4gICAqL1xuICBtZWRpYTogTWVkaWE7XG5cbiAgY29uc3RydWN0b3IoXG4gICAgcHJpdmF0ZSBlbFJlZjogRWxlbWVudFJlZixcbiAgICBwcml2YXRlIHJlbmRlcmVyOiBSZW5kZXJlcjIsXG4gICAgcHJvdGVjdGVkIG1lZGlhU2VydmljZTogTWVkaWFTZXJ2aWNlXG4gICkge31cblxuICBuZ09uSW5pdCgpOiB2b2lkIHtcbiAgICB0aGlzLnJlbmRlcmVyLmFkZENsYXNzKDxIVE1MRWxlbWVudD50aGlzLmVsUmVmLm5hdGl2ZUVsZW1lbnQsIExPQURJTkdfQ0xTKTtcbiAgfVxuXG4gIG5nT25DaGFuZ2VzKCk6IHZvaWQge1xuICAgIHRoaXMubG9hZEltYWdlKCk7XG4gIH1cblxuICBwcml2YXRlIGxvYWRJbWFnZSgpOiB2b2lkIHtcbiAgICB0aGlzLm1lZGlhID0gdGhpcy5tZWRpYVNlcnZpY2UuZ2V0SW1hZ2UoXG4gICAgICB0aGlzLmNvbnRhaW5lcixcbiAgICAgIHRoaXMuZm9ybWF0LFxuICAgICAgdGhpcy5hbHRcbiAgICApO1xuICB9XG5cbiAgbG9hZEhhbmRsZXIoKTogdm9pZCB7XG4gICAgdGhpcy5yZW5kZXJlci5hZGRDbGFzcyhcbiAgICAgIDxIVE1MRWxlbWVudD50aGlzLmVsUmVmLm5hdGl2ZUVsZW1lbnQsXG4gICAgICBJTklUSUFMSVpFRF9DTFNcbiAgICApO1xuICAgIHRoaXMucmVuZGVyZXIucmVtb3ZlQ2xhc3MoXG4gICAgICA8SFRNTEVsZW1lbnQ+dGhpcy5lbFJlZi5uYXRpdmVFbGVtZW50LFxuICAgICAgTE9BRElOR19DTFNcbiAgICApO1xuICAgIHRoaXMubG9hZGVkLmVtaXQodGhpcy5lbFJlZi5uYXRpdmVFbGVtZW50KTtcbiAgfVxuXG4gIGxvYWRFcnJvckhhbmRsZXIoZXZlbnQpOiB2b2lkIHtcbiAgICBldmVudC50YXJnZXQuc3JjID0gdGhpcy5tZWRpYVNlcnZpY2UuZ2V0TWlzc2luZ0ltYWdlKCk7XG4gIH1cbn1cbiJdfQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWVkaWEuY29tcG9uZW50LmpzIiwic291cmNlUm9vdCI6Im5nOi8vQHNwYXJ0YWN1cy9zdG9yZWZyb250LyIsInNvdXJjZXMiOlsic2hhcmVkL2NvbXBvbmVudHMvbWVkaWEvbWVkaWEuY29tcG9uZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSxPQUFPLEVBQ0wsdUJBQXVCLEVBQ3ZCLFNBQVMsRUFDVCxZQUFZLEVBQ1osV0FBVyxFQUNYLEtBQUssRUFFTCxNQUFNLEdBQ1AsTUFBTSxlQUFlLENBQUM7QUFFdkIsT0FBTyxFQUFFLFlBQVksRUFBRSxNQUFNLGlCQUFpQixDQUFDO0FBRS9DO0lBNENFLHdCQUFzQixZQUEwQjtRQUExQixpQkFBWSxHQUFaLFlBQVksQ0FBYzs7OztRQWhCdEMsV0FBTSxHQUEwQixJQUFJLFlBQVksRUFBVyxDQUFDOzs7Ozs7UUFheEMsY0FBUyxHQUFHLElBQUksQ0FBQztRQUNiLGtCQUFhLEdBQUcsS0FBSyxDQUFDO0lBRUwsQ0FBQzs7OztJQUVwRCxpQ0FBUTs7O0lBQVI7UUFDRSxJQUFJLENBQUMsTUFBTSxFQUFFLENBQUM7SUFDaEIsQ0FBQztJQUVEOztPQUVHOzs7Ozs7SUFDSywrQkFBTTs7Ozs7SUFBZDtRQUNFLElBQUksQ0FBQyxLQUFLLEdBQUcsSUFBSSxDQUFDLFlBQVksQ0FBQyxRQUFRLENBQ3JDLElBQUksQ0FBQyxTQUFTLEVBQ2QsSUFBSSxDQUFDLE1BQU0sRUFDWCxJQUFJLENBQUMsR0FBRyxDQUNULENBQUM7SUFDSixDQUFDO0lBRUQ7OztPQUdHOzs7Ozs7SUFDSCxvQ0FBVzs7Ozs7SUFBWDtRQUNFLElBQUksQ0FBQyxTQUFTLEdBQUcsS0FBSyxDQUFDO1FBQ3ZCLElBQUksQ0FBQyxhQUFhLEdBQUcsSUFBSSxDQUFDO1FBQzFCLElBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ3pCLENBQUM7SUFFRDs7OztPQUlHOzs7Ozs7O0lBQ0gscUNBQVk7Ozs7OztJQUFaO1FBQ0UsSUFBSSxDQUFDLEtBQUssR0FBRyxJQUFJLENBQUMsWUFBWSxDQUFDLGVBQWUsRUFBRSxDQUFDO0lBQ25ELENBQUM7O2dCQTlFRixTQUFTLFNBQUM7b0JBQ1QsUUFBUSxFQUFFLFVBQVU7b0JBQ3BCLDZMQUFxQztvQkFDckMsZUFBZSxFQUFFLHVCQUF1QixDQUFDLE1BQU07aUJBQ2hEOzs7O2dCQU5RLFlBQVk7Ozs0QkFjbEIsS0FBSzt5QkFLTCxLQUFLO3NCQU1MLEtBQUs7eUJBS0wsTUFBTTs0QkFhTixXQUFXLFNBQUMsZUFBZTtnQ0FDM0IsV0FBVyxTQUFDLG1CQUFtQjs7SUFxQ2xDLHFCQUFDO0NBQUEsQUEvRUQsSUErRUM7U0ExRVksY0FBYzs7Ozs7Ozs7O0lBT3pCLG1DQUF3Qjs7Ozs7SUFLeEIsZ0NBQXdCOzs7Ozs7SUFNeEIsNkJBQXFCOzs7OztJQUtyQixnQ0FBc0U7Ozs7OztJQU10RSwrQkFBYTs7Ozs7OztJQU9iLG1DQUErQzs7SUFDL0MsdUNBQXdEOzs7OztJQUU1QyxzQ0FBb0MiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQge1xuICBDaGFuZ2VEZXRlY3Rpb25TdHJhdGVneSxcbiAgQ29tcG9uZW50LFxuICBFdmVudEVtaXR0ZXIsXG4gIEhvc3RCaW5kaW5nLFxuICBJbnB1dCxcbiAgT25Jbml0LFxuICBPdXRwdXQsXG59IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgTWVkaWEgfSBmcm9tICcuL21lZGlhLm1vZGVsJztcbmltcG9ydCB7IE1lZGlhU2VydmljZSB9IGZyb20gJy4vbWVkaWEuc2VydmljZSc7XG5cbkBDb21wb25lbnQoe1xuICBzZWxlY3RvcjogJ2N4LW1lZGlhJyxcbiAgdGVtcGxhdGVVcmw6ICcuL21lZGlhLmNvbXBvbmVudC5odG1sJyxcbiAgY2hhbmdlRGV0ZWN0aW9uOiBDaGFuZ2VEZXRlY3Rpb25TdHJhdGVneS5PblB1c2gsXG59KVxuZXhwb3J0IGNsYXNzIE1lZGlhQ29tcG9uZW50IGltcGxlbWVudHMgT25Jbml0IHtcbiAgLyoqXG4gICAqIFRoZSBtZWRpYSBjb250YWluZXIgY2FuIGhvbGQgbXVsdGlwbGUgbWVkaWEgaXRlbXMsIHNvIHRoYXRcbiAgICogYSBzcGVjaWZpYyBtZWRpYSAoYnkgZm9ybWF0KSBjYW4gYmUgdXNlZCBvciBtdWx0aXBsZSBtZWRpYVxuICAgKiBjYW4gYmUgcHJvdmlkZWQgaW4gYSBgc3Jjc2V0YCBzbyB0aGUgYnJvd3NlciB3aWxsIGZpZ3VyZSBvdXRcbiAgICogdGhlIGJlc3QgbWVkaWEgZm9yIHRoZSBkZXZpY2UuXG4gICAqL1xuICBASW5wdXQoKSBjb250YWluZXI6IGFueTtcblxuICAvKipcbiAgICogaWYgYSBtZWRpYSBmb3JtYXQgaXMgZ2l2ZW4sIGEgbWVkaWEgZm9yIHRoZSBnaXZlbiBmb3JtYXQgd2lsbCBiZSByZW5kZXJlZFxuICAgKi9cbiAgQElucHV0KCkgZm9ybWF0OiBzdHJpbmc7XG5cbiAgLyoqXG4gICAqIEEgc3BlY2lmaWMgYWx0IHRleHQgZm9yIGFuIGltYWdlLCB3aGljaCBvdmVycnVsZXMgdGhlIGFsdCB0ZXh0XG4gICAqIGZyb20gdGhlIGNvbnRhaW5lciBkYXRhLlxuICAgKi9cbiAgQElucHV0KCkgYWx0OiBzdHJpbmc7XG5cbiAgLyoqXG4gICAqIE9uY2UgdGhlIG1lZGlhIGlzIGxvYWRlZCwgd2UgZW1pdCBhbiBldmVudC5cbiAgICovXG4gIEBPdXRwdXQoKSBsb2FkZWQ6IEV2ZW50RW1pdHRlcjxCb29sZWFuPiA9IG5ldyBFdmVudEVtaXR0ZXI8Qm9vbGVhbj4oKTtcblxuICAvKipcbiAgICogVGhlIG1lZGlhIGNvbnRhaW5zIHRoZSBpbmZvIGZvciB0aGUgVUkgdG8gY3JlYXRlIHRoZSBpbWFnZS4gVGhpcyBtZWRpYVxuICAgKiBvYmplY3QgbWlnaHQgY29udGFpbiBtb3JlIGluZm8gb25jZSBvdGhlciBtZWRpYSB0eXBlcyAoaS5lLiB2aWRlbykgaXMgc3VwcG9ydGVkLlxuICAgKi9cbiAgbWVkaWE6IE1lZGlhO1xuXG4gIC8qKlxuICAgKiBUaGUgYGN4LW1lZGlhYCBjb21wb25lbnQgaGFzIGEgYGxvYWRpbmdgIGNsYXNzIGFzIGxvbmcgYXMgdGhlXG4gICAqIG1lZGlhIGlzIGxvYWRlZC4gV2VobiB0aGUgbWVkaWEgaXMgbG9hZGVkLCB0aGUgYGluaXRpYWxpemVkYCBjbGFzc1xuICAgKiBpcyBhZGRlZC5cbiAgICovXG4gIEBIb3N0QmluZGluZygnY2xhc3MubG9hZGluZycpIGlzTG9hZGluZyA9IHRydWU7XG4gIEBIb3N0QmluZGluZygnY2xhc3MuaW5pdGlhbGl6ZWQnKSBpc0luaXRpYWxpemVkID0gZmFsc2U7XG5cbiAgY29uc3RydWN0b3IocHJvdGVjdGVkIG1lZGlhU2VydmljZTogTWVkaWFTZXJ2aWNlKSB7fVxuXG4gIG5nT25Jbml0KCk6IHZvaWQge1xuICAgIHRoaXMuY3JlYXRlKCk7XG4gIH1cblxuICAvKipcbiAgICogQ3JlYXRlcyB0aGUgYE1lZGlhYCBvYmplY3RcbiAgICovXG4gIHByaXZhdGUgY3JlYXRlKCk6IHZvaWQge1xuICAgIHRoaXMubWVkaWEgPSB0aGlzLm1lZGlhU2VydmljZS5nZXRJbWFnZShcbiAgICAgIHRoaXMuY29udGFpbmVyLFxuICAgICAgdGhpcy5mb3JtYXQsXG4gICAgICB0aGlzLmFsdFxuICAgICk7XG4gIH1cblxuICAvKipcbiAgICogVGhpcyBoYW5kbGVyIGlzIGNhbGxlZCBmcm9tIHRoZSBVSSB3aGVuIHRoZSBpbWFnZSBpcyBsb2FkZWQuXG4gICAqIFRoZVxuICAgKi9cbiAgbG9hZEhhbmRsZXIoKTogdm9pZCB7XG4gICAgdGhpcy5pc0xvYWRpbmcgPSBmYWxzZTtcbiAgICB0aGlzLmlzSW5pdGlhbGl6ZWQgPSB0cnVlO1xuICAgIHRoaXMubG9hZGVkLmVtaXQodHJ1ZSk7XG4gIH1cblxuICAvKipcbiAgICogV2hlbmV2ZXIgYW4gZXJyb3IgaGFwcGVucyBkdXJpbmcgbG9hZCwgd2UgZmFsbCBiYWNrIHRvIGEgbWlzc2luZyBpbWFnZS5cbiAgICogVGhpcyBtZWFucyB3ZSBuZWVkIHRvIHVwZGF0ZSB0aGUgbG9jYWwgbWVkaWEgb2JqZWN0LiBJbiB0aGlzIHNjZW5hcmlvIHdlXG4gICAqIGRvIG5vdCBwcm92aWRlIGEgYHNyY3NldGAgZm9yIHJlc3BvbnNpdmUgaW1hZ2VzLlxuICAgKi9cbiAgZXJyb3JIYW5kbGVyKCk6IHZvaWQge1xuICAgIHRoaXMubWVkaWEgPSB0aGlzLm1lZGlhU2VydmljZS5nZXRNaXNzaW5nSW1hZ2UoKTtcbiAgfVxufVxuIl19

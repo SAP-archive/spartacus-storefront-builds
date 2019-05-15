@@ -1,9 +1,9 @@
 import { OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UICart, CartService } from '@spartacus/core';
+import { Cart, CartService } from '@spartacus/core';
 export declare class CartPageComponent implements OnInit {
     protected cartService: CartService;
-    cart$: Observable<UICart>;
+    cart$: Observable<Cart>;
     constructor(cartService: CartService);
     ngOnInit(): void;
 }

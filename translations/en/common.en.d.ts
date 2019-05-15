@@ -25,4 +25,13 @@ export declare const common: {
         date: string;
         orderNumber: string;
     };
+    httpHandlers: {
+        badGateway: string;
+        badRequestPleaseLoginAgain: string;
+        badRequestOldPasswordIncorrect: string;
+        conflict: string;
+        forbidden: string;
+        gatewayTimeout: string;
+        unknownError: string;
+    };
 };

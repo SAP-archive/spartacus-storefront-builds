@@ -9,6 +9,6 @@ export declare class ProductViewComponent {
     mode: ViewModes;
     modeChange: EventEmitter<string>;
     readonly buttonClass: string;
-    readonly viewMode: ICON_TYPES.GRID_MODE | ICON_TYPES.LIST_MODE;
+    readonly viewMode: ICON_TYPES.GRID | ICON_TYPES.LIST;
     changeMode(): void;
 }

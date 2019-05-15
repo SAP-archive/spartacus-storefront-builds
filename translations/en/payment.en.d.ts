@@ -23,6 +23,7 @@ export declare const payment: {
     paymentMethods: {
         paymentMethods: string;
         newPaymentMethodsAreAddedDuringCheckout: string;
+        invalidField: string;
     };
     paymentCard: {
         deleteConfirmation: string;

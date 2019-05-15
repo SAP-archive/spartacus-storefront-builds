@@ -1,9 +1,7 @@
-import { ElementRef, EventEmitter, OnChanges, OnInit, Renderer2 } from '@angular/core';
+import { EventEmitter, OnInit } from '@angular/core';
 import { Media } from './media.model';
 import { MediaService } from './media.service';
-export declare class MediaComponent implements OnChanges, OnInit {
-    private elRef;
-    private renderer;
+export declare class MediaComponent implements OnInit {
     protected mediaService: MediaService;
     /**
      * The media container can hold multiple media items, so that
@@ -24,16 +22,34 @@ export declare class MediaComponent implements OnChanges, OnInit {
     /**
      * Once the media is loaded, we emit an event.
      */
-    loaded: EventEmitter<HTMLElement>;
+    loaded: EventEmitter<Boolean>;
     /**
      * The media contains the info for the UI to create the image. This media
      * object might contain more info once other media types (i.e. video) is supported.
      */
     media: Media;
-    constructor(elRef: ElementRef, renderer: Renderer2, mediaService: MediaService);
+    /**
+     * The `cx-media` component has a `loading` class as long as the
+     * media is loaded. Wehn the media is loaded, the `initialized` class
+     * is added.
+     */
+    isLoading: boolean;
+    isInitialized: boolean;
+    constructor(mediaService: MediaService);
     ngOnInit(): void;
-    ngOnChanges(): void;
-    private loadImage;
+    /**
+     * Creates the `Media` object
+     */
+    private create;
+    /**
+     * This handler is called from the UI when the image is loaded.
+     * The
+     */
     loadHandler(): void;
-    loadErrorHandler(event: any): void;
+    /**
+     * Whenever an error happens during load, we fall back to a missing image.
+     * This means we need to update the local media object. In this scenario we
+     * do not provide a `srcset` for responsive images.
+     */
+    errorHandler(): void;
 }

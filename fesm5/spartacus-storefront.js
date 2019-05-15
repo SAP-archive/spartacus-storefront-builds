@@ -7,10 +7,312 @@ import { Title, Meta } from '@angular/platform-browser';
 import { __read, __values, __spread, __extends, __assign, __awaiter, __generator } from 'tslib';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
-import { CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, RoutingService, GlobalMessageType, GlobalMessageService, I18nModule, CheckoutModule, UrlModule, AuthService, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ConfigModule, UserService, CmsService, ProductService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, DynamicAttributeService, CxApiService, ComponentMapperService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, OccConfig, NotAuthGuard, StoreFinderCoreModule, PageRobotsMeta, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, StoreDataService, StoreFinderService, GoogleMapRendererService, TranslatePipe } from '@spartacus/core';
+import { Config, ConfigModule, CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, RoutingService, LanguageService, GlobalMessageType, GlobalMessageService, AuthService, I18nModule, UserService, CheckoutModule, UrlModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ProductService, CmsService, ProductReferenceService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, PageType, DynamicAttributeService, NotAuthGuard, CxApiService, ComponentMapperService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, PageRobotsMeta, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, OccConfig, StoreDataService, StoreFinderService, GoogleMapRendererService, TranslatePipe } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
-import { Component, ElementRef, ViewChild, Input, ChangeDetectionStrategy, NgModule, Directive, HostListener, Renderer2, EventEmitter, forwardRef, Output, Injectable, APP_INITIALIZER, Injector, ChangeDetectorRef, HostBinding, TemplateRef, ViewEncapsulation, Optional, defineInjectable, inject, INJECTOR, Inject, PLATFORM_ID, ViewContainerRef } from '@angular/core';
+import { Injectable, NgModule, APP_INITIALIZER, ChangeDetectionStrategy, Component, Input, ElementRef, ViewChild, Output, EventEmitter, Injector, Renderer2, ChangeDetectorRef, HostBinding, Directive, TemplateRef, ViewEncapsulation, forwardRef, HostListener, Optional, defineInjectable, inject, INJECTOR, Inject, PLATFORM_ID, ViewContainerRef } from '@angular/core';
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+var fontawesomeIconConfig = {
+    icon: {
+        iconClass: 'fas',
+        prefix: 'fa-',
+        icons: {
+            SEARCH: 'search',
+            CART: 'shopping-cart',
+            INFO: 'info-circle',
+            STAR: 'star',
+            GRID: 'th-large',
+            LIST: 'bars',
+            CARET_DOWN: 'angle-down',
+            ERROR: 'exclamation-circle',
+            WARNING: 'exclamation-triangle',
+            SUCCESS: 'check-circle',
+            TIMES: 'times',
+            MINUS: 'minus',
+            PLUS: 'plus',
+        },
+    },
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @enum {string} */
+var ICON_TYPES = {
+    STAR: 'STAR',
+    SEARCH: 'SEARCH',
+    CART: 'CART',
+    INFO: 'INFO',
+    GRID: 'GRID',
+    LIST: 'LIST',
+    CARET_DOWN: 'CARET_DOWN',
+    TIMES: 'TIMES',
+    ERROR: 'ERROR',
+    WARNING: 'WARNING',
+    SUCCESS: 'SUCCESS',
+    PLUS: 'PLUS',
+    MINUS: 'MINUS',
+};
+/**
+ * @abstract
+ */
+var  /**
+ * @abstract
+ */
+IconConfig = /** @class */ (function () {
+    function IconConfig() {
+    }
+    return IconConfig;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var IconLoaderService = /** @class */ (function () {
+    function IconLoaderService(config) {
+        this.config = config;
+    }
+    /**
+     * @return {?}
+     */
+    IconLoaderService.prototype.useSvg = /**
+     * @return {?}
+     */
+    function () {
+        return this.config.icon && this.config.icon.useSvg;
+    };
+    /**
+     * Returns the path to the svg link. The link supports path names
+     * as well, if the config has been setup to support a svg file path.
+     * Additionally, the icon prefix will be taken into account to prefix the
+     * icon IDs in the SVG.
+     */
+    /**
+     * Returns the path to the svg link. The link supports path names
+     * as well, if the config has been setup to support a svg file path.
+     * Additionally, the icon prefix will be taken into account to prefix the
+     * icon IDs in the SVG.
+     * @param {?} iconType
+     * @return {?}
+     */
+    IconLoaderService.prototype.getSvgPath = /**
+     * Returns the path to the svg link. The link supports path names
+     * as well, if the config has been setup to support a svg file path.
+     * Additionally, the icon prefix will be taken into account to prefix the
+     * icon IDs in the SVG.
+     * @param {?} iconType
+     * @return {?}
+     */
+    function (iconType) {
+        if (!this.useSvg()) {
+            return null;
+        }
+        /** @type {?} */
+        var path = '';
+        if (this.config.icon && this.config.icon.svgPath) {
+            path = this.config.icon.svgPath;
+        }
+        // if there's no mapping configured, we use the default value
+        path += '#';
+        if (this.config.icon && this.config.icon.prefix) {
+            path += this.config.icon.prefix;
+        }
+        path += this.getMappedType(iconType);
+        return path;
+    };
+    /**
+     *
+     * returns an array of css classes that can be used to
+     * render the icon by CSS / font. This is driven by the `iconType`
+     * and the icon configuration, so that multiple icon fonts are
+     * supported, such as font awesome, glypicons, Octicons, etc.
+     */
+    /**
+     *
+     * returns an array of css classes that can be used to
+     * render the icon by CSS / font. This is driven by the `iconType`
+     * and the icon configuration, so that multiple icon fonts are
+     * supported, such as font awesome, glypicons, Octicons, etc.
+     * @param {?} iconType
+     * @return {?}
+     */
+    IconLoaderService.prototype.getStyleClasses = /**
+     *
+     * returns an array of css classes that can be used to
+     * render the icon by CSS / font. This is driven by the `iconType`
+     * and the icon configuration, so that multiple icon fonts are
+     * supported, such as font awesome, glypicons, Octicons, etc.
+     * @param {?} iconType
+     * @return {?}
+     */
+    function (iconType) {
+        /** @type {?} */
+        var styleClasses = [];
+        if (this.config.icon && this.config.icon.iconClass) {
+            styleClasses.push(this.config.icon.iconClass);
+        }
+        /** @type {?} */
+        var type = this.getMappedType(iconType);
+        if (this.config.icon && this.config.icon.prefix) {
+            type = this.config.icon.prefix + type;
+        }
+        styleClasses.push(type);
+        return styleClasses;
+    };
+    /**
+     * @private
+     * @param {?} iconType
+     * @return {?}
+     */
+    IconLoaderService.prototype.getMappedType = /**
+     * @private
+     * @param {?} iconType
+     * @return {?}
+     */
+    function (iconType) {
+        return this.config.icon &&
+            this.config.icon.icons &&
+            this.config.icon.icons[iconType]
+            ? this.config.icon.icons[iconType]
+            : iconType;
+    };
+    IconLoaderService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    IconLoaderService.ctorParameters = function () { return [
+        { type: IconConfig }
+    ]; };
+    /** @nocollapse */ IconLoaderService.ngInjectableDef = defineInjectable({ factory: function IconLoaderService_Factory() { return new IconLoaderService(inject(IconConfig)); }, token: IconLoaderService, providedIn: "root" });
+    return IconLoaderService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var IconComponent = /** @class */ (function () {
+    function IconComponent(iconLoader, renderer, hostElement) {
+        this.iconLoader = iconLoader;
+        this.renderer = renderer;
+        this.hostElement = hostElement;
+        /**
+         * Keeps the given style classes so that we can
+         * clean them up when the icon changes
+         */
+        this.iconStyleClasses = [];
+    }
+    /**
+     * @return {?}
+     */
+    IconComponent.prototype.ngOnChanges = /**
+     * @return {?}
+     */
+    function () {
+        this.addStyleClasses();
+    };
+    Object.defineProperty(IconComponent.prototype, "useSvg", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.iconLoader.useSvg();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(IconComponent.prototype, "path", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.iconLoader.getSvgPath(this.type);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @private
+     * @return {?}
+     */
+    IconComponent.prototype.addStyleClasses = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        if (this.useSvg) {
+            return;
+        }
+        this.clearStyleClasses();
+        this.iconStyleClasses = this.iconLoader.getStyleClasses(this.type);
+        this.iconStyleClasses.forEach(function (cls) {
+            _this.renderer.addClass(_this.hostElement.nativeElement, cls);
+        });
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    IconComponent.prototype.clearStyleClasses = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.iconStyleClasses.forEach(function (cls) {
+            _this.renderer.removeClass(_this.hostElement.nativeElement, cls);
+        });
+    };
+    IconComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-icon',
+                    template: "<ng-container *ngIf=\"useSvg\">\n  <svg>\n    <use [attr.xlink:href]=\"path\"></use>\n  </svg>\n</ng-container>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    IconComponent.ctorParameters = function () { return [
+        { type: IconLoaderService },
+        { type: Renderer2 },
+        { type: ElementRef }
+    ]; };
+    IconComponent.propDecorators = {
+        type: [{ type: Input }]
+    };
+    return IconComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var IconModule = /** @class */ (function () {
+    function IconModule() {
+    }
+    IconModule.decorators = [
+        { type: NgModule, args: [{
+                    declarations: [IconComponent],
+                    imports: [CommonModule, ConfigModule.withConfig(fontawesomeIconConfig)],
+                    providers: [{ provide: IconConfig, useExisting: Config }],
+                    exports: [IconComponent],
+                },] }
+    ];
+    return IconModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -21,8 +323,8 @@ var AddedToCartDialogComponent = /** @class */ (function () {
         this.activeModal = activeModal;
         this.cartService = cartService;
         this.fb = fb;
+        this.iconTypes = ICON_TYPES;
         this.quantity = 0;
-        this.headerLabel = "addToCart.itemsAddedToYourCart";
         this.firstUpdate = true;
         this.form = this.fb.group({});
     }
@@ -53,12 +355,7 @@ var AddedToCartDialogComponent = /** @class */ (function () {
                 }
                 _this.form.markAsPristine();
                 // Announce in header if Add To Cart button has incremented product
-                if (_this.firstUpdate && entry.quantity > 1) {
-                    _this.headerLabel = "addToCart.itemsIncrementedInYourCart";
-                }
-                else {
-                    _this.headerLabel = "addToCart.itemsAddedToYourCart";
-                }
+                _this.showItemIncrLabel = _this.firstUpdate && entry.quantity > 1;
                 // Any updates after the first will be flagged as false
                 _this.firstUpdate = false;
             }
@@ -124,7 +421,7 @@ var AddedToCartDialogComponent = /** @class */ (function () {
     AddedToCartDialogComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-added-to-cart-dialog',
-                    template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) as loaded; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ headerLabel | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"activeModal.dismiss('Cross click')\"\n      >\n        <span aria-hidden=\"true\">&times;</span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"(entry$ | async) as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [isReadOnly]=\"false\"\n            [parent]=\"form.controls[entry.product.code]\"\n            [cartIsLoading]=\"!loaded\"\n            (remove)=\"removeEntry($event)\"\n            (update)=\"updateEntry($event)\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"(cart$ | async) as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n            <div>{{ cart.totalPrice.formattedValue }}</div>\n          </div>\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ route: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              ngbAutoFocus\n              (click)=\"!form.dirty && activeModal.dismiss('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ route: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"\n                !form.dirty && activeModal.dismiss('Proceed To Checkout click')\n              \"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"activeModal.dismiss('Cross click')\"\n      >\n        <span aria-hidden=\"true\">&times;</span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
+                    template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) as loaded; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (showItemIncrLabel\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart') | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"activeModal.dismiss('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"(entry$ | async) as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [isReadOnly]=\"false\"\n            [parent]=\"form.controls[entry.product.code]\"\n            [cartIsLoading]=\"!loaded\"\n            (remove)=\"removeEntry($event)\"\n            (update)=\"updateEntry($event)\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"(cart$ | async) as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n            <div>{{ cart.totalPrice.formattedValue }}</div>\n          </div>\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              ngbAutoFocus\n              (click)=\"!form.dirty && activeModal.dismiss('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"\n                !form.dirty && activeModal.dismiss('Proceed To Checkout click')\n              \"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"activeModal.dismiss('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -1708,6 +2005,7 @@ var StyleRefModule = /** @class */ (function () {
 var GlobalMessageComponent = /** @class */ (function () {
     function GlobalMessageComponent(globalMessageService) {
         this.globalMessageService = globalMessageService;
+        this.iconTypes = ICON_TYPES;
         this.messageType = GlobalMessageType;
     }
     /**
@@ -1735,7 +2033,7 @@ var GlobalMessageComponent = /** @class */ (function () {
     GlobalMessageComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-global-message',
-                    template: "<div *ngIf=\"(messages$ | async) as messages\">\n  <div\n    class=\"alert alert-success\"\n    *ngFor=\"\n      let confMsg of messages[messageType.MSG_TYPE_CONFIRMATION];\n      let i = index\n    \"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ confMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_CONFIRMATION, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n  <div\n    class=\"alert alert-warning\"\n    *ngFor=\"let infoMsg of messages[messageType.MSG_TYPE_INFO]; let i = index\"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ infoMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_INFO, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n  <div\n    class=\"alert alert-danger\"\n    *ngFor=\"let errorMsg of messages[messageType.MSG_TYPE_ERROR]; let i = index\"\n  >\n    <span class=\"alert-icon\"></span> <span>{{ errorMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_ERROR, i)\"\n    >\n      \u00D7\n    </button>\n  </div>\n</div>\n",
+                    template: "<div *ngIf=\"(messages$ | async) as messages\">\n  <div\n    class=\"alert alert-success\"\n    *ngFor=\"\n      let confMsg of messages[messageType.MSG_TYPE_CONFIRMATION];\n      let i = index\n    \"\n  >\n    <span class=\"alert-icon\">\n      <cx-icon [type]=\"iconTypes.SUCCESS\"></cx-icon>\n    </span>\n    <span>{{ confMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_CONFIRMATION, i)\"\n    >\n      <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n    </button>\n  </div>\n  <div\n    class=\"alert alert-warning\"\n    *ngFor=\"let infoMsg of messages[messageType.MSG_TYPE_INFO]; let i = index\"\n  >\n    <span class=\"alert-icon\">\n      <cx-icon [type]=\"iconTypes.WARNING\"></cx-icon>\n    </span>\n    <span>{{ infoMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_INFO, i)\"\n    >\n      <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n    </button>\n  </div>\n  <div\n    class=\"alert alert-danger\"\n    *ngFor=\"let errorMsg of messages[messageType.MSG_TYPE_ERROR]; let i = index\"\n  >\n    <span class=\"alert-icon\">\n      <cx-icon [type]=\"iconTypes.ERROR\"></cx-icon>\n    </span>\n    <span>{{ errorMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_ERROR, i)\"\n    >\n      <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n    </button>\n  </div>\n</div>\n",
                     styles: [""]
                 }] }
     ];
@@ -1758,6 +2056,7 @@ var GlobalMessageComponentModule = /** @class */ (function () {
                     imports: [
                         CommonModule,
                         HttpClientModule,
+                        IconModule,
                         I18nModule,
                         GlobalMessageModule.forRoot(),
                     ],
@@ -1891,7 +2190,7 @@ var LoginFormComponent = /** @class */ (function () {
     LoginFormComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-login-form',
-                    template: "<form (submit)=\"login()\" [formGroup]=\"form\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.controls['userId'].invalid &&\n          (form.controls['userId'].touched || form.controls['userId'].dirty)\n        \"\n        formControlName=\"userId\"\n        placeholder=\"{{ 'loginForm.emailAddress.placeholder' | cxTranslate }}\"\n      />\n    </label>\n    <div\n      class=\"invalid-feedback\"\n      *ngIf=\"\n        form.controls['userId'].invalid &&\n        (form.controls['userId'].touched || form.controls['userId'].dirty)\n      \"\n    >\n      <span>{{ 'loginForm.wrongEmailFormat' | cxTranslate }}</span>\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.password.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"password\"\n        class=\"form-control\"\n        placeholder=\"{{ 'loginForm.password.placeholder' | cxTranslate }}\"\n        formControlName=\"password\"\n      />\n    </label>\n  </div>\n  <p>\n    <a\n      [routerLink]=\"{ route: 'forgotPassword' } | cxUrl\"\n      aria-controls=\"reset-password\"\n      class=\"btn-link\"\n      >{{ 'loginForm.forgotPassword' | cxTranslate }}</a\n    >\n  </p>\n\n  <button\n    type=\"submit\"\n    class=\"btn btn-block btn-primary\"\n    [disabled]=\"form.invalid\"\n  >\n    {{ 'loginForm.signIn' | cxTranslate }}\n  </button>\n</form>\n\n<div class=\"register\">\n  <h3 class=\"cx-section__title cx-section__title--alt\">\n    {{ 'loginForm.dontHaveAccount' | cxTranslate }}\n  </h3>\n  <a\n    [routerLink]=\"{ route: 'register' } | cxUrl\"\n    class=\"btn btn-block btn-secondary\"\n    >{{ 'loginForm.register' | cxTranslate }}</a\n  >\n</div>\n"
+                    template: "<form (submit)=\"login()\" [formGroup]=\"form\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.controls['userId'].invalid &&\n          (form.controls['userId'].touched || form.controls['userId'].dirty)\n        \"\n        formControlName=\"userId\"\n        placeholder=\"{{ 'loginForm.emailAddress.placeholder' | cxTranslate }}\"\n      />\n    </label>\n    <div\n      class=\"invalid-feedback\"\n      *ngIf=\"\n        form.controls['userId'].invalid &&\n        (form.controls['userId'].touched || form.controls['userId'].dirty)\n      \"\n    >\n      <span>{{ 'loginForm.wrongEmailFormat' | cxTranslate }}</span>\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.password.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"password\"\n        class=\"form-control\"\n        placeholder=\"{{ 'loginForm.password.placeholder' | cxTranslate }}\"\n        formControlName=\"password\"\n      />\n    </label>\n  </div>\n  <p>\n    <a\n      [routerLink]=\"{ cxRoute: 'forgotPassword' } | cxUrl\"\n      aria-controls=\"reset-password\"\n      class=\"btn-link\"\n      >{{ 'loginForm.forgotPassword' | cxTranslate }}</a\n    >\n  </p>\n\n  <button\n    type=\"submit\"\n    class=\"btn btn-block btn-primary\"\n    [disabled]=\"form.invalid\"\n  >\n    {{ 'loginForm.signIn' | cxTranslate }}\n  </button>\n</form>\n\n<div class=\"register\">\n  <h3 class=\"cx-section__title cx-section__title--alt\">\n    {{ 'loginForm.dontHaveAccount' | cxTranslate }}\n  </h3>\n  <a\n    [routerLink]=\"{ cxRoute: 'register' } | cxUrl\"\n    class=\"btn btn-block btn-secondary\"\n    >{{ 'loginForm.register' | cxTranslate }}</a\n  >\n</div>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -2786,6 +3085,7 @@ var LoginFormModule = /** @class */ (function () {
                             cmsComponents: {
                                 ReturningCustomerLoginComponent: {
                                     selector: 'cx-login-form',
+                                    guard: [NotAuthGuard],
                                 },
                             },
                         }))),
@@ -2866,7 +3166,7 @@ var LoginComponent = /** @class */ (function () {
     LoginComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-login',
-                    template: "<ng-container *ngIf=\"(user$ | async) as user; else login\">\n  <div class=\"cx-login-greet\">\n    {{ 'login.userGreeting' | cxTranslate: { name: user.name } }}\n  </div>\n  <cx-page-slot position=\"HeaderLinks\"></cx-page-slot>\n</ng-container>\n\n<ng-template #login>\n  <a role=\"link\" [routerLink]=\"{ route: 'login' } | cxUrl\">{{\n    'login.signInRegister' | cxTranslate\n  }}</a>\n</ng-template>\n"
+                    template: "<ng-container *ngIf=\"(user$ | async) as user; else login\">\n  <div class=\"cx-login-greet\">\n    {{ 'login.userGreeting' | cxTranslate: { name: user.name } }}\n  </div>\n  <cx-page-slot position=\"HeaderLinks\"></cx-page-slot>\n</ng-container>\n\n<ng-template #login>\n  <a role=\"link\" [routerLink]=\"{ cxRoute: 'login' } | cxUrl\">{{\n    'login.signInRegister' | cxTranslate\n  }}</a>\n</ng-template>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -3573,7 +3873,7 @@ var RegisterComponent = /** @class */ (function () {
             }
             else {
                 // User manual login
-                _this.routing.back();
+                _this.routing.go(['/']);
             }
         });
     };
@@ -3602,7 +3902,7 @@ var RegisterComponent = /** @class */ (function () {
             .subscribe(function (globalMessageEntities) {
             if (globalMessageEntities[GlobalMessageType.MSG_TYPE_ERROR].some(function (message) { return message === 'This field is required.'; })) {
                 _this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
-                _this.globalMessageService.add('Title is required.', GlobalMessageType.MSG_TYPE_ERROR);
+                _this.globalMessageService.add({ key: 'register.titleRequired' }, GlobalMessageType.MSG_TYPE_ERROR);
             }
         });
     };
@@ -3635,7 +3935,7 @@ var RegisterComponent = /** @class */ (function () {
     RegisterComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-register',
-                    template: "<section class=\"cx-page__section container\">\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <h1 class=\"cx-section__title\">\n          {{ 'register.createAccount' | cxTranslate }}\n        </h1>\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of (titles$ | async)\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  (userRegistrationForm.get('email').errors?.email ||\n                    userRegistrationForm.get('email').errors?.InvalidEmail) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"newsletter\"\n                  class=\"form-check-input\"\n                  formControlName=\"newsletter\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.emailMarketing' | cxTranslate }}\n                </span>\n              </label>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ route: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            [disabled]=\"userRegistrationForm.invalid\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ route: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n"
+                    template: "<section class=\"cx-page__section container\">\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <h1 class=\"cx-section__title\">\n          {{ 'register.createAccount' | cxTranslate }}\n        </h1>\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of (titles$ | async)\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  (userRegistrationForm.get('email').errors?.email ||\n                    userRegistrationForm.get('email').errors?.InvalidEmail) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"newsletter\"\n                  class=\"form-check-input\"\n                  formControlName=\"newsletter\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.emailMarketing' | cxTranslate }}\n                </span>\n              </label>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            [disabled]=\"userRegistrationForm.invalid\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -3669,6 +3969,7 @@ var RegisterComponentModule = /** @class */ (function () {
                             cmsComponents: {
                                 RegisterCustomerComponent: {
                                     selector: 'cx-register',
+                                    guards: [NotAuthGuard],
                                 },
                             },
                         }))),
@@ -3766,7 +4067,7 @@ var AddToHomeScreenService = /** @class */ (function () {
                 _this.enableAddToHomeScreen();
             });
             this.winRef.nativeWindow.addEventListener('appinstalled', function () {
-                _this.globalMessageService.add('SAP Storefront was added to your home screen', GlobalMessageType.MSG_TYPE_CONFIRMATION);
+                _this.globalMessageService.add({ key: 'pwa.addedToHomeScreen' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
                 _this.disableAddToHomeScreen();
                 _this.deferredEvent = null;
             });
@@ -4078,6 +4379,33 @@ var SeoMetaService = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @type {?} */
+var htmlLangProvider = {
+    provide: APP_INITIALIZER,
+    multi: true,
+    useFactory: setHtmlLangAttribute,
+    deps: [WindowRef, LanguageService],
+};
+/**
+ * Sets active language in <html lang="">
+ * @param {?} winRef
+ * @param {?} languageService
+ * @return {?}
+ */
+function setHtmlLangAttribute(winRef, languageService) {
+    /** @type {?} */
+    var result = function () {
+        languageService.getActive().subscribe(function (lang) {
+            winRef.document.documentElement.lang = lang;
+        });
+    };
+    return result;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 /**
  * @param {?} injector
  * @return {?}
@@ -4103,6 +4431,7 @@ var SeoModule = /** @class */ (function () {
                             deps: [Injector],
                             multi: true,
                         },
+                        htmlLangProvider,
                     ],
                 },] }
     ];
@@ -4297,9 +4626,25 @@ var MediaService = /** @class */ (function () {
         };
     };
     /**
+     * @param {?=} alt
      * @return {?}
      */
     MediaService.prototype.getMissingImage = /**
+     * @param {?=} alt
+     * @return {?}
+     */
+    function (alt) {
+        return {
+            src: this.getMissingImageSrc(),
+            alt: alt || undefined,
+        };
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    MediaService.prototype.getMissingImageSrc = /**
+     * @private
      * @return {?}
      */
     function () {
@@ -4319,7 +4664,7 @@ var MediaService = /** @class */ (function () {
      */
     function (media, format) {
         if (!media) {
-            return this.getMissingImage();
+            return this.getMissingImageSrc();
         }
         else if (media[format || DEFAULT_MEDIA_FORMAT]) {
             return this.getImageUrl(media[format || DEFAULT_MEDIA_FORMAT].url);
@@ -4328,7 +4673,7 @@ var MediaService = /** @class */ (function () {
             return this.getImageUrl(media.url);
         }
         else {
-            return this.getMissingImage();
+            return this.getMissingImageSrc();
         }
     };
     /**
@@ -4415,19 +4760,20 @@ var MediaService = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/** @type {?} */
-var INITIALIZED_CLS = 'initialized';
-/** @type {?} */
-var LOADING_CLS = 'loading';
 var MediaComponent = /** @class */ (function () {
-    function MediaComponent(elRef, renderer, mediaService) {
-        this.elRef = elRef;
-        this.renderer = renderer;
+    function MediaComponent(mediaService) {
         this.mediaService = mediaService;
         /**
          * Once the media is loaded, we emit an event.
          */
         this.loaded = new EventEmitter();
+        /**
+         * The `cx-media` component has a `loading` class as long as the
+         * media is loaded. Wehn the media is loaded, the `initialized` class
+         * is added.
+         */
+        this.isLoading = true;
+        this.isInitialized = false;
     }
     /**
      * @return {?}
@@ -4436,22 +4782,18 @@ var MediaComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.renderer.addClass((/** @type {?} */ (this.elRef.nativeElement)), LOADING_CLS);
+        this.create();
     };
     /**
-     * @return {?}
+     * Creates the `Media` object
      */
-    MediaComponent.prototype.ngOnChanges = /**
-     * @return {?}
-     */
-    function () {
-        this.loadImage();
-    };
     /**
+     * Creates the `Media` object
      * @private
      * @return {?}
      */
-    MediaComponent.prototype.loadImage = /**
+    MediaComponent.prototype.create = /**
+     * Creates the `Media` object
      * @private
      * @return {?}
      */
@@ -4459,45 +4801,62 @@ var MediaComponent = /** @class */ (function () {
         this.media = this.mediaService.getImage(this.container, this.format, this.alt);
     };
     /**
+     * This handler is called from the UI when the image is loaded.
+     * The
+     */
+    /**
+     * This handler is called from the UI when the image is loaded.
+     * The
      * @return {?}
      */
     MediaComponent.prototype.loadHandler = /**
+     * This handler is called from the UI when the image is loaded.
+     * The
      * @return {?}
      */
     function () {
-        this.renderer.addClass((/** @type {?} */ (this.elRef.nativeElement)), INITIALIZED_CLS);
-        this.renderer.removeClass((/** @type {?} */ (this.elRef.nativeElement)), LOADING_CLS);
-        this.loaded.emit(this.elRef.nativeElement);
+        this.isLoading = false;
+        this.isInitialized = true;
+        this.loaded.emit(true);
     };
     /**
-     * @param {?} event
+     * Whenever an error happens during load, we fall back to a missing image.
+     * This means we need to update the local media object. In this scenario we
+     * do not provide a `srcset` for responsive images.
+     */
+    /**
+     * Whenever an error happens during load, we fall back to a missing image.
+     * This means we need to update the local media object. In this scenario we
+     * do not provide a `srcset` for responsive images.
      * @return {?}
      */
-    MediaComponent.prototype.loadErrorHandler = /**
-     * @param {?} event
+    MediaComponent.prototype.errorHandler = /**
+     * Whenever an error happens during load, we fall back to a missing image.
+     * This means we need to update the local media object. In this scenario we
+     * do not provide a `srcset` for responsive images.
      * @return {?}
      */
-    function (event) {
-        event.target.src = this.mediaService.getMissingImage();
+    function () {
+        this.media = this.mediaService.getMissingImage();
     };
     MediaComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-media',
-                    template: "<img\n  *ngIf=\"media\"\n  [attr.src]=\"media.src\"\n  [attr.srcset]=\"media.srcset\"\n  [attr.alt]=\"media.alt\"\n  (load)=\"loadHandler()\"\n  (error)=\"loadErrorHandler($event)\"\n/>\n",
+                    template: "<img\n  *ngIf=\"media\"\n  [attr.src]=\"media.src\"\n  [attr.srcset]=\"media.srcset\"\n  [attr.alt]=\"media.alt\"\n  (load)=\"loadHandler()\"\n  (error)=\"errorHandler()\"\n/>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     /** @nocollapse */
     MediaComponent.ctorParameters = function () { return [
-        { type: ElementRef },
-        { type: Renderer2 },
         { type: MediaService }
     ]; };
     MediaComponent.propDecorators = {
         container: [{ type: Input }],
         format: [{ type: Input }],
         alt: [{ type: Input }],
-        loaded: [{ type: Output }]
+        loaded: [{ type: Output }],
+        isLoading: [{ type: HostBinding, args: ['class.loading',] }],
+        isInitialized: [{ type: HostBinding, args: ['class.initialized',] }]
     };
     return MediaComponent;
 }());
@@ -4523,6 +4882,11 @@ var MediaModule = /** @class */ (function () {
     ];
     return MediaModule;
 }());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -4558,287 +4922,6 @@ var SpinnerModule = /** @class */ (function () {
                 },] }
     ];
     return SpinnerModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @enum {string} */
-var ICON_TYPES = {
-    CART: 'shopping-cart',
-    SEARCH: 'search',
-    GRID_MODE: 'th-large',
-    LIST_MODE: 'bars',
-    CARET_DOWN: 'angle-down',
-    INFO: 'info-circle',
-    STAR: 'star',
-};
-/**
- * @abstract
- */
-var  /**
- * @abstract
- */
-IconConfig = /** @class */ (function () {
-    function IconConfig() {
-    }
-    return IconConfig;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var IconLoaderService = /** @class */ (function () {
-    function IconLoaderService(config) {
-        this.config = config;
-    }
-    /**
-     * @return {?}
-     */
-    IconLoaderService.prototype.useSvg = /**
-     * @return {?}
-     */
-    function () {
-        return this.config.icon && this.config.icon.useSvg;
-    };
-    /**
-     * Returns the path to the svg link. The link supports path names
-     * as well, if the config has been setup to support a svg file path.
-     * Additionally, the icon prefix will be taken into account to prefix the
-     * icon IDs in the SVG.
-     */
-    /**
-     * Returns the path to the svg link. The link supports path names
-     * as well, if the config has been setup to support a svg file path.
-     * Additionally, the icon prefix will be taken into account to prefix the
-     * icon IDs in the SVG.
-     * @param {?} iconType
-     * @return {?}
-     */
-    IconLoaderService.prototype.getSvgPath = /**
-     * Returns the path to the svg link. The link supports path names
-     * as well, if the config has been setup to support a svg file path.
-     * Additionally, the icon prefix will be taken into account to prefix the
-     * icon IDs in the SVG.
-     * @param {?} iconType
-     * @return {?}
-     */
-    function (iconType) {
-        if (!this.useSvg()) {
-            return null;
-        }
-        /** @type {?} */
-        var path = '';
-        if (this.config.icon && this.config.icon.svgPath) {
-            path = this.config.icon.svgPath;
-        }
-        // if there's no mapping configured, we use the default value
-        path += '#';
-        if (this.config.icon && this.config.icon.prefix) {
-            path += this.config.icon.prefix;
-        }
-        path += this.getMappedType(iconType);
-        return path;
-    };
-    /**
-     *
-     * returns an array of css classes that can be used to
-     * render the icon by CSS / font. This is driven by the `iconType`
-     * and the icon configuration, so that multiple icon fonts are
-     * supported, such as font awesome, glypicons, Octicons, etc.
-     */
-    /**
-     *
-     * returns an array of css classes that can be used to
-     * render the icon by CSS / font. This is driven by the `iconType`
-     * and the icon configuration, so that multiple icon fonts are
-     * supported, such as font awesome, glypicons, Octicons, etc.
-     * @param {?} iconType
-     * @return {?}
-     */
-    IconLoaderService.prototype.getStyleClasses = /**
-     *
-     * returns an array of css classes that can be used to
-     * render the icon by CSS / font. This is driven by the `iconType`
-     * and the icon configuration, so that multiple icon fonts are
-     * supported, such as font awesome, glypicons, Octicons, etc.
-     * @param {?} iconType
-     * @return {?}
-     */
-    function (iconType) {
-        /** @type {?} */
-        var styleClasses = [];
-        if (this.config.icon && this.config.icon.iconClass) {
-            styleClasses.push(this.config.icon.iconClass);
-        }
-        /** @type {?} */
-        var type = this.getMappedType(iconType);
-        if (this.config.icon && this.config.icon.prefix) {
-            type = this.config.icon.prefix + type;
-        }
-        styleClasses.push(type);
-        return styleClasses;
-    };
-    /**
-     * @private
-     * @param {?} iconType
-     * @return {?}
-     */
-    IconLoaderService.prototype.getMappedType = /**
-     * @private
-     * @param {?} iconType
-     * @return {?}
-     */
-    function (iconType) {
-        return this.config.icon &&
-            this.config.icon.icons &&
-            this.config.icon.icons[iconType]
-            ? this.config.icon.icons[iconType]
-            : iconType;
-    };
-    IconLoaderService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    IconLoaderService.ctorParameters = function () { return [
-        { type: IconConfig }
-    ]; };
-    /** @nocollapse */ IconLoaderService.ngInjectableDef = defineInjectable({ factory: function IconLoaderService_Factory() { return new IconLoaderService(inject(IconConfig)); }, token: IconLoaderService, providedIn: "root" });
-    return IconLoaderService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var IconComponent = /** @class */ (function () {
-    function IconComponent(iconLoader, renderer, hostElement) {
-        this.iconLoader = iconLoader;
-        this.renderer = renderer;
-        this.hostElement = hostElement;
-        /**
-         * Keeps the given style classes so that we can
-         * clean them up when the icon changes
-         */
-        this.iconStyleClasses = [];
-    }
-    /**
-     * @return {?}
-     */
-    IconComponent.prototype.ngOnChanges = /**
-     * @return {?}
-     */
-    function () {
-        this.addStyleClasses();
-    };
-    Object.defineProperty(IconComponent.prototype, "useSvg", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this.iconLoader.useSvg();
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(IconComponent.prototype, "path", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this.iconLoader.getSvgPath(this.type);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @private
-     * @return {?}
-     */
-    IconComponent.prototype.addStyleClasses = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        if (this.useSvg) {
-            return;
-        }
-        this.clearStyleClasses();
-        this.iconStyleClasses = this.iconLoader.getStyleClasses(this.type);
-        this.iconStyleClasses.forEach(function (cls) {
-            _this.renderer.addClass(_this.hostElement.nativeElement, cls);
-        });
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    IconComponent.prototype.clearStyleClasses = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this.iconStyleClasses.forEach(function (cls) {
-            _this.renderer.removeClass(_this.hostElement.nativeElement, cls);
-        });
-    };
-    IconComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-icon',
-                    template: "<ng-container *ngIf=\"useSvg\">\n  <svg>\n    <use [attr.xlink:href]=\"path\"></use>\n  </svg>\n</ng-container>\n"
-                }] }
-    ];
-    /** @nocollapse */
-    IconComponent.ctorParameters = function () { return [
-        { type: IconLoaderService },
-        { type: Renderer2 },
-        { type: ElementRef }
-    ]; };
-    IconComponent.propDecorators = {
-        type: [{ type: Input }]
-    };
-    return IconComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-var defaultIconConfig = {
-    icon: {
-        prefix: 'fa-',
-        iconClass: 'fas',
-    },
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var IconModule = /** @class */ (function () {
-    function IconModule() {
-    }
-    IconModule.decorators = [
-        { type: NgModule, args: [{
-                    declarations: [IconComponent],
-                    imports: [CommonModule, ConfigModule.withConfig(defaultIconConfig)],
-                    providers: [{ provide: IconConfig, useExisting: Config }],
-                    exports: [IconComponent],
-                },] }
-    ];
-    return IconModule;
 }());
 
 /**
@@ -5077,7 +5160,7 @@ var SiteContextSelectorComponent = /** @class */ (function () {
     SiteContextSelectorComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-site-context-selector',
-                    template: "<label *ngIf=\"(items$ | async)?.length > 1 && (items$ | async) as items\">\n  <span>{{ label$ | async }}</span>\n  <select (change)=\"active = $event.target.value\">\n    <option\n      *ngFor=\"let item of items\"\n      value=\"{{ item.isocode }}\"\n      [selected]=\"(activeItem$ | async) === item.isocode\"\n      >{{ item.label }}</option\n    > </select\n  ><cx-icon [type]=\"iconTypes.CARET_DOWN\"></cx-icon>\n</label>\n",
+                    template: "<label *ngIf=\"(items$ | async)?.length > 1 && (items$ | async) as items\">\n  <span>{{ label$ | async }}</span>\n  <select (change)=\"active = $event.target.value\">\n    <option\n      *ngFor=\"let item of items\"\n      value=\"{{ item.isocode }}\"\n      [selected]=\"(activeItem$ | async) === item.isocode\"\n      >{{ item.label }}</option\n    > </select\n  ><cx-icon [type]=\"iconTypes.CARET_DOWN\" class=\"small\"></cx-icon>\n</label>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -5528,7 +5611,7 @@ var CartItemComponent = /** @class */ (function () {
     CartItemComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-cart-item',
-                    template: "<div [ngClass]=\"compact ? 'cx-compact row' : 'row'\">\n  <!-- Item Image -->\n  <div class=\"col-2 cx-image-container\">\n    <a [routerLink]=\"{ route: 'product', params: item.product } | cxUrl\">\n      <cx-media\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-5'\">\n        <div *ngIf=\"item.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"{ route: 'product', params: item.product } | cxUrl\"\n            >{{ item.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"item.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n        </div>\n        <!-- Variants -->\n        <div\n          *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n          class=\"cx-property\"\n        >\n          <div class=\"cx-label\">{{ variant.name }}</div>\n          <div class=\"cx-value\">{{ variant.value }}</div>\n        </div>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"item.basePrice\"\n        class=\"cx-price\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.item' | cxTranslate }}\n        </div>\n        <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n          {{ item.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <div\n        *ngIf=\"item.quantity\"\n        class=\"cx-quantity\"\n        [ngClass]=\"compact ? '' : ' col-3'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          placement=\"left\"\n          ngbTooltip=\"The quantity represents the total number of this item in your cart.\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n        <div *ngIf=\"isReadOnly\" class=\"cx-value\">{{ item.quantity }}</div>\n        <div\n          *ngIf=\"!isReadOnly && parent\"\n          class=\"cx-value\"\n          [formGroup]=\"parent\"\n        >\n          <cx-item-counter\n            isValueChangeable=\"true\"\n            [step]=\"1\"\n            [min]=\"1\"\n            [max]=\"item.product.stock?.stockLevel || 1000\"\n            (update)=\"updateItem($event)\"\n            [cartIsLoading]=\"cartIsLoading\"\n            formControlName=\"quantity\"\n          >\n          </cx-item-counter>\n        </div>\n      </div>\n      <!-- Total -->\n      <div\n        *ngIf=\"item.totalPrice\"\n        class=\"cx-total\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.total' | cxTranslate }}\n        </div>\n        <div class=\"cx-value\">{{ item.totalPrice.formattedValue }}</div>\n      </div>\n    </div>\n    <!-- Availability -->\n    <div *ngIf=\"isProductOutOfStock(item)\" class=\"cx-availability col-12\">\n      {{ 'productSummary.outOfStock' | cxTranslate }}\n    </div>\n    <!-- Promotion -->\n    <cx-promotions [promotions]=\"potentialProductPromotions\"></cx-promotions>\n    <!-- Actions -->\n    <div *ngIf=\"!isReadOnly\" class=\"cx-actions col-12\">\n      <button\n        class=\"link\"\n        [class.disabled]=\"cartIsLoading\"\n        [disabled]=\"cartIsLoading\"\n        (click)=\"removeItem()\"\n      >\n        {{ 'common.remove' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n"
+                    template: "<div [ngClass]=\"compact ? 'cx-compact row' : 'row'\">\n  <!-- Item Image -->\n  <div class=\"col-2 cx-image-container\">\n    <a [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\">\n      <cx-media\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-5'\">\n        <div *ngIf=\"item.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n            >{{ item.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"item.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n        </div>\n        <!-- Variants -->\n        <div\n          *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n          class=\"cx-property\"\n        >\n          <div class=\"cx-label\">{{ variant.name }}</div>\n          <div class=\"cx-value\">{{ variant.value }}</div>\n        </div>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"item.basePrice\"\n        class=\"cx-price\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.item' | cxTranslate }}\n        </div>\n        <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n          {{ item.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <div\n        *ngIf=\"item.quantity\"\n        class=\"cx-quantity\"\n        [ngClass]=\"compact ? '' : ' col-3'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          placement=\"left\"\n          ngbTooltip=\"The quantity represents the total number of this item in your cart.\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n        <div *ngIf=\"isReadOnly\" class=\"cx-value\">{{ item.quantity }}</div>\n        <div\n          *ngIf=\"!isReadOnly && parent\"\n          class=\"cx-value\"\n          [formGroup]=\"parent\"\n        >\n          <cx-item-counter\n            isValueChangeable=\"true\"\n            [step]=\"1\"\n            [min]=\"1\"\n            [max]=\"item.product.stock?.stockLevel || 1000\"\n            (update)=\"updateItem($event)\"\n            [cartIsLoading]=\"cartIsLoading\"\n            formControlName=\"quantity\"\n          >\n          </cx-item-counter>\n        </div>\n      </div>\n      <!-- Total -->\n      <div\n        *ngIf=\"item.totalPrice\"\n        class=\"cx-total\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.total' | cxTranslate }}\n        </div>\n        <div class=\"cx-value\">{{ item.totalPrice.formattedValue }}</div>\n      </div>\n    </div>\n    <!-- Availability -->\n    <div *ngIf=\"isProductOutOfStock(item)\" class=\"cx-availability col-12\">\n      {{ 'productSummary.outOfStock' | cxTranslate }}\n    </div>\n    <!-- Promotion -->\n    <cx-promotions [promotions]=\"potentialProductPromotions\"></cx-promotions>\n    <!-- Actions -->\n    <div *ngIf=\"!isReadOnly\" class=\"cx-actions col-12\">\n      <button\n        class=\"link\"\n        [class.disabled]=\"cartIsLoading\"\n        [disabled]=\"cartIsLoading\"\n        (click)=\"removeItem()\"\n      >\n        {{ 'common.remove' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n"
                 }] }
     ];
     CartItemComponent.propDecorators = {
@@ -5614,6 +5697,7 @@ var AddToCartModule = /** @class */ (function () {
                             },
                         }))),
                         UrlModule,
+                        IconModule,
                         I18nModule,
                     ],
                     declarations: [AddToCartComponent, AddedToCartDialogComponent],
@@ -5734,7 +5818,7 @@ var CartTotalsComponent = /** @class */ (function () {
     CartTotalsComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-cart-totals',
-                    template: "<ng-container *ngIf=\"(cart$ | async) as cart\">\n  <ng-container *ngIf=\"(entries$ | async) as entries\">\n    <cx-order-summary [cart]=\"cart\"></cx-order-summary>\n    <button\n      [routerLink]=\"{ route: 'checkout' } | cxUrl\"\n      *ngIf=\"entries.length\"\n      class=\"btn btn-primary btn-block\"\n      type=\"button\"\n    >\n      {{ 'cartDetails.proceedToCheckout' | cxTranslate }}\n    </button>\n  </ng-container>\n</ng-container>\n",
+                    template: "<ng-container *ngIf=\"(cart$ | async) as cart\">\n  <ng-container *ngIf=\"(entries$ | async) as entries\">\n    <cx-order-summary [cart]=\"cart\"></cx-order-summary>\n    <button\n      [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n      *ngIf=\"entries.length\"\n      class=\"btn btn-primary btn-block\"\n      type=\"button\"\n    >\n      {{ 'cartDetails.proceedToCheckout' | cxTranslate }}\n    </button>\n  </ng-container>\n</ng-container>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -5792,7 +5876,7 @@ var MiniCartComponent = /** @class */ (function () {
     MiniCartComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-mini-cart',
-                    template: "<a\n  [attr.aria-label]=\"(quantity$ | async) + ' items currently in your cart'\"\n  [routerLink]=\"{ route: ['cart'] } | cxUrl\"\n>\n  <cx-icon [type]=\"iconTypes.CART\"></cx-icon>\n\n  <span class=\"total\">{{ total$ | async }}</span>\n  <span class=\"count\">{{ quantity$ | async }}</span>\n</a>\n",
+                    template: "<a\n  [attr.aria-label]=\"\n    'miniCart.item' | cxTranslate: { count: quantity$ | async }\n  \"\n  [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n>\n  <cx-icon [type]=\"iconTypes.CART\"></cx-icon>\n\n  <span class=\"total\">{{ total$ | async }}</span>\n  <span class=\"count\">{{ quantity$ | async }}</span>\n</a>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -5823,6 +5907,7 @@ var MiniCartModule = /** @class */ (function () {
                         }))),
                         UrlModule,
                         IconModule,
+                        I18nModule,
                     ],
                     declarations: [MiniCartComponent],
                     entryComponents: [MiniCartComponent],
@@ -6287,6 +6372,7 @@ var AddressBookComponent = /** @class */ (function () {
 var SuggestedAddressDialogComponent = /** @class */ (function () {
     function SuggestedAddressDialogComponent(activeModal) {
         this.activeModal = activeModal;
+        this.iconTypes = ICON_TYPES;
     }
     /**
      * @return {?}
@@ -6302,7 +6388,7 @@ var SuggestedAddressDialogComponent = /** @class */ (function () {
     SuggestedAddressDialogComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-suggested-addresses-dialog',
-                    template: "<div class=\"cx-dialog-header modal-header\">\n  <div class=\"cx-dialog-title modal-title\">\n    {{ 'checkoutAddress.verifyYourAddress' | cxTranslate }}\n  </div>\n  <button\n    type=\"button\"\n    class=\"close\"\n    aria-label=\"Close\"\n    (click)=\"activeModal.close()\"\n  >\n    <span aria-hidden=\"true\">&times;</span>\n  </button>\n</div>\n<div class=\"cx-dialog-body modal-body\" ngForm>\n  <div class=\"container\">\n    <div class=\"row\">\n      <div class=\"cx-dialog-info col-md-12\">\n        <p>\n          {{ 'checkoutAddress.ensureAccuracySuggestChange' | cxTranslate }}\n          {{ 'checkoutAddress.chooseAddressToUse' | cxTranslate }}\n        </p>\n      </div>\n    </div>\n\n    <div class=\"row\">\n      <div class=\"cx-dialog-options col-md-12\">\n        <div\n          class=\"form-check\"\n          *ngFor=\"let suggestedAddress of suggestedAddresses; let i = index\"\n        >\n          <input\n            class=\"form-check-input\"\n            type=\"radio\"\n            name=\"selectedAddress\"\n            [(ngModel)]=\"selectedAddress\"\n            [value]=\"suggestedAddress\"\n            [id]=\"'suggested-addresses--suggested-' + i\"\n          />\n          <label\n            class=\"form-check-label cx-dialog-label\"\n            [for]=\"'suggested-addresses--suggested-' + i\"\n          >\n            {{ 'checkoutAddress.suggestedAddress' | cxTranslate }}\n            {{ suggestedAddresses?.length > 1 ? i + 1 : null }}\n          </label>\n          <div class=\"cx-dialog-suggested\">\n            {{ suggestedAddress?.firstName }} {{ suggestedAddress?.lastName\n            }}<br />\n            {{ suggestedAddress?.line1 }}<br />\n            <span>{{ suggestedAddress?.line2 }}</span\n            ><br />\n            {{ suggestedAddress?.town }} {{ suggestedAddress?.region?.isocode\n            }}<br />\n            {{ suggestedAddress?.postalCode }}\n          </div>\n        </div>\n        <div class=\"form-check\">\n          <input\n            class=\"form-check-input\"\n            type=\"radio\"\n            name=\"selectedAddress\"\n            [(ngModel)]=\"selectedAddress\"\n            [value]=\"enteredAddress\"\n            id=\"suggested-addresses--entered\"\n          />\n          <label\n            class=\"form-check-label cx-dialog-label\"\n            for=\"suggested-addresses--entered\"\n          >\n            {{ 'checkoutAddress.enteredAddress' | cxTranslate }}\n          </label>\n          <div class=\"cx-dialog-entered\">\n            {{ enteredAddress?.firstName }} {{ enteredAddress?.lastName }}<br />\n            {{ enteredAddress?.line1 }}<br />\n            <span>{{ enteredAddress?.line2 }}</span\n            ><br />\n            {{ enteredAddress?.town }} {{ enteredAddress?.region?.isocode\n            }}<br />\n            {{ enteredAddress?.postalCode }}\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"cx-dialog-actions col-sm-12 col-md-6 offset-md-6\">\n        <button\n          class=\"btn btn-secondary btn-block cx-dialog-buttons\"\n          (click)=\"activeModal.close()\"\n        >\n          {{ 'common.editAddress' | cxTranslate }}\n        </button>\n        <button\n          ngbAutofocus\n          class=\"btn btn-primary btn-block cx-dialog-buttons\"\n          (click)=\"activeModal.close(selectedAddress)\"\n        >\n          {{ 'checkoutAddress.saveAddress' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                    template: "<div class=\"cx-dialog-header modal-header\">\n  <div class=\"cx-dialog-title modal-title\">\n    {{ 'checkoutAddress.verifyYourAddress' | cxTranslate }}\n  </div>\n  <button\n    type=\"button\"\n    class=\"close\"\n    aria-label=\"Close\"\n    (click)=\"activeModal.close()\"\n  >\n    <span aria-hidden=\"true\">\n      <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n    </span>\n  </button>\n</div>\n<div class=\"cx-dialog-body modal-body\" ngForm>\n  <div class=\"container\">\n    <div class=\"row\">\n      <div class=\"cx-dialog-info col-md-12\">\n        <p>\n          {{ 'checkoutAddress.ensureAccuracySuggestChange' | cxTranslate }}\n          {{ 'checkoutAddress.chooseAddressToUse' | cxTranslate }}\n        </p>\n      </div>\n    </div>\n\n    <div class=\"row\">\n      <div class=\"cx-dialog-options col-md-12\">\n        <div\n          class=\"form-check\"\n          *ngFor=\"let suggestedAddress of suggestedAddresses; let i = index\"\n        >\n          <input\n            class=\"form-check-input\"\n            type=\"radio\"\n            name=\"selectedAddress\"\n            [(ngModel)]=\"selectedAddress\"\n            [value]=\"suggestedAddress\"\n            [id]=\"'suggested-addresses--suggested-' + i\"\n          />\n          <label\n            class=\"form-check-label cx-dialog-label\"\n            [for]=\"'suggested-addresses--suggested-' + i\"\n          >\n            {{ 'checkoutAddress.suggestedAddress' | cxTranslate }}\n            {{ suggestedAddresses?.length > 1 ? i + 1 : null }}\n          </label>\n          <div class=\"cx-dialog-suggested\">\n            {{ suggestedAddress?.firstName }} {{ suggestedAddress?.lastName\n            }}<br />\n            {{ suggestedAddress?.line1 }}<br />\n            <span>{{ suggestedAddress?.line2 }}</span\n            ><br />\n            {{ suggestedAddress?.town }} {{ suggestedAddress?.region?.isocode\n            }}<br />\n            {{ suggestedAddress?.postalCode }}\n          </div>\n        </div>\n        <div class=\"form-check\">\n          <input\n            class=\"form-check-input\"\n            type=\"radio\"\n            name=\"selectedAddress\"\n            [(ngModel)]=\"selectedAddress\"\n            [value]=\"enteredAddress\"\n            id=\"suggested-addresses--entered\"\n          />\n          <label\n            class=\"form-check-label cx-dialog-label\"\n            for=\"suggested-addresses--entered\"\n          >\n            {{ 'checkoutAddress.enteredAddress' | cxTranslate }}\n          </label>\n          <div class=\"cx-dialog-entered\">\n            {{ enteredAddress?.firstName }} {{ enteredAddress?.lastName }}<br />\n            {{ enteredAddress?.line1 }}<br />\n            <span>{{ enteredAddress?.line2 }}</span\n            ><br />\n            {{ enteredAddress?.town }} {{ enteredAddress?.region?.isocode\n            }}<br />\n            {{ enteredAddress?.postalCode }}\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"cx-dialog-actions col-sm-12 col-md-6 offset-md-6\">\n        <button\n          class=\"btn btn-secondary btn-block cx-dialog-buttons\"\n          (click)=\"activeModal.close()\"\n        >\n          {{ 'common.editAddress' | cxTranslate }}\n        </button>\n        <button\n          ngbAutofocus\n          class=\"btn btn-primary btn-block cx-dialog-buttons\"\n          (click)=\"activeModal.close(selectedAddress)\"\n        >\n          {{ 'checkoutAddress.saveAddress' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -6402,10 +6488,10 @@ var AddressFormComponent = /** @class */ (function () {
             else if (results.decision === 'REJECT') {
                 // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
                 if (results.errors.errors.some(function (error) { return error.subject === 'titleCode'; })) {
-                    _this.globalMessageService.add('Title is required', GlobalMessageType.MSG_TYPE_ERROR);
+                    _this.globalMessageService.add({ key: 'addressForm.titleRequired' }, GlobalMessageType.MSG_TYPE_ERROR);
                 }
                 else {
-                    _this.globalMessageService.add('Invalid Address', GlobalMessageType.MSG_TYPE_ERROR);
+                    _this.globalMessageService.add({ key: 'addressForm.invalidAddress' }, GlobalMessageType.MSG_TYPE_ERROR);
                 }
                 _this.checkoutService.clearAddressVerificationResults();
             }
@@ -6577,6 +6663,7 @@ var AddressFormModule = /** @class */ (function () {
                         FormsModule,
                         RouterModule,
                         NgSelectModule,
+                        IconModule,
                         I18nModule,
                     ],
                     declarations: [AddressFormComponent, SuggestedAddressDialogComponent],
@@ -6813,6 +6900,7 @@ var AddressBookModule = /** @class */ (function () {
                                             deps: [UserService],
                                         },
                                     ],
+                                    guards: [AuthGuard],
                                 },
                             },
                         }))),
@@ -6847,6 +6935,7 @@ var CloseAccountModalComponent = /** @class */ (function () {
         this.globalMessageService = globalMessageService;
         this.routingService = routingService;
         this.translationService = translationService;
+        this.iconTypes = ICON_TYPES;
         this.subscription = new Subscription();
     }
     /**
@@ -6877,12 +6966,12 @@ var CloseAccountModalComponent = /** @class */ (function () {
         if (success) {
             this.closeModal();
             this.translationService
-                .translate('closeAccount.message.success')
+                .translate('closeAccount.accountClosedSuccessfully')
                 .pipe(first())
                 .subscribe(function (text) {
                 _this.globalMessageService.add(text, GlobalMessageType.MSG_TYPE_CONFIRMATION);
             });
-            this.routingService.go({ route: 'home' });
+            this.routingService.go({ cxRoute: 'home' });
         }
     };
     /**
@@ -6919,7 +7008,7 @@ var CloseAccountModalComponent = /** @class */ (function () {
     CloseAccountModalComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-close-account-modal',
-                    template: "<ng-container *ngIf=\"(userToken$ | async) as userToken\">\n  <div class=\"modal-header cx-dialog-header\">\n    <h3 class=\"modal-title\">\n      {{ 'closeAccount.modal.title' | cxTranslate }}\n    </h3>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"closeModal()\"\n    >\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n\n  <div *ngIf=\"(isLoading$ | async); else loaded\">\n    <div class=\"cx-spinner\">\n      <cx-spinner> </cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #loaded>\n    <div class=\"modal-body\">\n      <div class=\"cx-row\">\n        <p class=\"cx-confirmation\">\n          {{ 'closeAccount.modal.confirmation' | cxTranslate }}\n        </p>\n      </div>\n      <div class=\"cx-row\">\n        <div class=\"cx-btn-group\">\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"closeAccount(userToken.userId)\"\n          >\n            {{ 'closeAccount.action.closeMyAccount' | cxTranslate }}\n          </button>\n          <button (click)=\"closeModal()\" class=\"btn btn-block btn-secondary\">\n            {{ 'closeAccount.action.cancel' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n",
+                    template: "<ng-container *ngIf=\"(userToken$ | async) as userToken\">\n  <div class=\"modal-header cx-dialog-header\">\n    <h3 class=\"modal-title\">\n      {{ 'closeAccount.confirmAccountClosure' | cxTranslate }}\n    </h3>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"closeModal()\"\n    >\n      <span aria-hidden=\"true\">\n        <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n      </span>\n    </button>\n  </div>\n\n  <div *ngIf=\"(isLoading$ | async); else loaded\">\n    <div class=\"cx-spinner\">\n      <cx-spinner> </cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #loaded>\n    <div class=\"modal-body\">\n      <div class=\"cx-row\">\n        <p class=\"cx-confirmation\">\n          {{ 'closeAccount.confirmAccountClosureMessage' | cxTranslate }}\n        </p>\n      </div>\n      <div class=\"cx-row\">\n        <div class=\"cx-btn-group\">\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"closeAccount(userToken.userId)\"\n          >\n            {{ 'closeAccount.closeMyAccount' | cxTranslate }}\n          </button>\n          <button (click)=\"closeModal()\" class=\"btn btn-block btn-secondary\">\n            {{ 'common.cancel' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/:host{display:flex;flex-direction:column;height:100%}.cx-dialog-header{padding:var(--cx-padding,2rem 1.75rem .85rem);border-width:var(--cx-border-width,0)}h3{font-weight:var(--cx-g-font-weight-semi)}.cx-row{display:flex}.cx-confirmation{margin:var(--cx-margin,0 0 3em 0)}.cx-btn-group{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column);width:var(--cx-width,100%)}.cx-btn-group button:first-child{margin:var(--cx-margin,0 0 1em 0)}@media (max-width:767.98px){.modal-body{top:-85px;flex:none;margin:auto 0}}"]
                 }] }
@@ -6958,7 +7047,7 @@ var CloseAccountComponent = /** @class */ (function () {
     CloseAccountComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-close-account',
-                    template: "<div class=\"col-lg-8 col-md-9\">\n  <p\n    class=\"cx-info\"\n    [innerHTML]=\"'closeAccount.info.retention' | cxTranslate\"\n  ></p>\n  <div class=\"row cx-btn-group\">\n    <div class=\"col-sm-3\">\n      <a\n        [routerLink]=\"{ route: 'home' } | cxUrl\"\n        class=\"btn btn-block btn-secondary\"\n        >{{ 'closeAccount.action.cancel' | cxTranslate }}</a\n      >\n    </div>\n    <div class=\"col-sm-6\">\n      <button class=\"btn btn-primary\" (click)=\"openModal()\">\n        {{ 'closeAccount.action.closeMyAccount' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n",
+                    template: "<div class=\"col-lg-8 col-md-9\">\n  <p\n    class=\"cx-info\"\n    [innerHTML]=\"'closeAccount.closeAccountRetentionInfo' | cxTranslate\"\n  ></p>\n  <div class=\"row cx-btn-group\">\n    <div class=\"col-sm-3\">\n      <a\n        [routerLink]=\"{ cxRoute: 'home' } | cxUrl\"\n        class=\"btn btn-block btn-secondary\"\n        >{{ 'common.cancel' | cxTranslate }}</a\n      >\n    </div>\n    <div class=\"col-sm-6\">\n      <button class=\"btn btn-primary\" (click)=\"openModal()\">\n        {{ 'closeAccount.closeMyAccount' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -6983,10 +7072,14 @@ var CloseAccountModule = /** @class */ (function () {
                         RouterModule,
                         UrlModule,
                         I18nModule,
+                        IconModule,
                         SpinnerModule,
                         ConfigModule.withConfig((/** @type {?} */ ({
                             cmsComponents: {
-                                CloseAccountComponent: { selector: 'cx-close-account' },
+                                CloseAccountComponent: {
+                                    selector: 'cx-close-account',
+                                    guards: [AuthGuard],
+                                },
                             },
                         }))),
                     ],
@@ -7040,12 +7133,12 @@ var ForgotPasswordComponent = /** @class */ (function () {
             return;
         }
         this.userService.requestForgotPasswordEmail(this.form.value.userEmail);
-        this.routingService.go({ route: 'login' });
+        this.routingService.go({ cxRoute: 'login' });
     };
     ForgotPasswordComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-forgot-password',
-                    template: "<form (submit)=\"requestForgotPasswordEmail()\" [formGroup]=\"form\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'forgottenPassword.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        placeholder=\"{{\n          'forgottenPassword.emailAddress.placeholder' | cxTranslate\n        }}\"\n        formControlName=\"userEmail\"\n        [ngClass]=\"{\n          'is-invalid':\n            form.controls['userEmail'].invalid &&\n            (submited ||\n              (form.controls['userEmail'].touched &&\n                form.controls['userEmail'].dirty))\n        }\"\n      />\n      <div\n        class=\"invalid-feedback\"\n        *ngIf=\"\n          form.controls['userEmail'].invalid &&\n          (submited ||\n            (form.controls['userEmail'].touched &&\n              form.controls['userEmail'].dirty))\n        \"\n      >\n        <span>{{ 'forgottenPassword.enterValidEmail' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <button type=\"submit\" class=\"btn btn-block btn-primary\">\n    {{ 'common.submit' | cxTranslate }}\n  </button>\n  <a\n    class=\"btn btn-block btn-secondary\"\n    [routerLink]=\"{ route: 'login' } | cxUrl\"\n    >{{ 'common.cancel' | cxTranslate }}</a\n  >\n</form>\n",
+                    template: "<form (submit)=\"requestForgotPasswordEmail()\" [formGroup]=\"form\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'forgottenPassword.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        placeholder=\"{{\n          'forgottenPassword.emailAddress.placeholder' | cxTranslate\n        }}\"\n        formControlName=\"userEmail\"\n        [ngClass]=\"{\n          'is-invalid':\n            form.controls['userEmail'].invalid &&\n            (submited ||\n              (form.controls['userEmail'].touched &&\n                form.controls['userEmail'].dirty))\n        }\"\n      />\n      <div\n        class=\"invalid-feedback\"\n        *ngIf=\"\n          form.controls['userEmail'].invalid &&\n          (submited ||\n            (form.controls['userEmail'].touched &&\n              form.controls['userEmail'].dirty))\n        \"\n      >\n        <span>{{ 'forgottenPassword.enterValidEmail' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <button type=\"submit\" class=\"btn btn-block btn-primary\">\n    {{ 'common.submit' | cxTranslate }}\n  </button>\n  <a\n    class=\"btn btn-block btn-secondary\"\n    [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n    >{{ 'common.cancel' | cxTranslate }}</a\n  >\n</form>\n",
                     styles: [".reset-password h1{margin:var(--cx-margin,0)}.reset-password button{margin:var(--cx-margin,30px 0 0)}.reset-password a{margin:var(--cx-margin,20px 0 0)}"]
                 }] }
     ];
@@ -7074,7 +7167,10 @@ var ForgotPasswordModule = /** @class */ (function () {
                         UrlModule,
                         ConfigModule.withConfig((/** @type {?} */ ({
                             cmsComponents: {
-                                ForgotPasswordComponent: { selector: 'cx-forgot-password' },
+                                ForgotPasswordComponent: {
+                                    selector: 'cx-forgot-password',
+                                    guards: [NotAuthGuard],
+                                },
                             },
                         }))),
                         I18nModule,
@@ -7155,7 +7251,7 @@ var OrderDetailHeadlineComponent = /** @class */ (function () {
     OrderDetailHeadlineComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-order-details-headline',
-                    template: "<ng-container *ngIf=\"(order$ | async) as order\">\n  <div class=\"cx-header row\">\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.orderId' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">{{ order?.code }}</div>\n    </div>\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.placed' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">{{ order?.created | date }}</div>\n    </div>\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.status' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">\n        {{\n          'orderDetails.statusDisplay'\n            | cxTranslate: { context: order?.statusDisplay }\n        }}\n      </div>\n    </div>\n  </div>\n</ng-container>\n"
+                    template: "<ng-container *ngIf=\"(order$ | async) as order\">\n  <div class=\"cx-header row\">\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.orderId' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">{{ order?.code }}</div>\n    </div>\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.placed' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">{{ order?.created | date }}</div>\n    </div>\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.status' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\" *ngIf=\"order?.statusDisplay\">\n        {{\n          'orderDetails.statusDisplay'\n            | cxTranslate: { context: order?.statusDisplay }\n        }}\n      </div>\n    </div>\n  </div>\n</ng-container>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -7201,7 +7297,7 @@ var OrderDetailItemsComponent = /** @class */ (function () {
     OrderDetailItemsComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-order-details-items',
-                    template: "<ng-container *ngIf=\"(order$ | async) as order\">\n  <div *ngFor=\"let consignment of order.consignments\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">{{ consignment?.status }}</div>\n      <div *ngIf=\"consignment?.statusDate\" class=\"cx-list-date\">\n        <div>{{ 'orderDetails.shippedOn' | cxTranslate }}&nbsp;</div>\n        <div>{{ consignment?.statusDate | date }}</div>\n      </div>\n    </div>\n    <div class=\"cx-list-item col-12\">\n      <cx-cart-item-list\n        [items]=\"getConsignmentProducts(consignment)\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n\n  <div *ngIf=\"order.unconsignedEntries?.length\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">\n        {{ 'orderDetails.inProcess' | cxTranslate }}\n      </div>\n    </div>\n    <div class=\"cx-list-item col-12\">\n      <cx-cart-item-list\n        [items]=\"order?.unconsignedEntries\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n</ng-container>\n"
+                    template: "<ng-container *ngIf=\"(order$ | async) as order\">\n  <div *ngFor=\"let consignment of order.consignments\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">\n        <span *ngIf=\"consignment\">\n          {{\n            'orderDetails.deliveryStatus'\n              | cxTranslate: { context: consignment.status }\n          }}\n        </span>\n      </div>\n      <div *ngIf=\"consignment?.statusDate\" class=\"cx-list-date\">\n        <div>{{ 'orderDetails.shippedOn' | cxTranslate }}&nbsp;</div>\n        <div>{{ consignment?.statusDate | date }}</div>\n      </div>\n    </div>\n    <div class=\"cx-list-item col-12\">\n      <cx-cart-item-list\n        [items]=\"getConsignmentProducts(consignment)\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n\n  <div *ngIf=\"order.unconsignedEntries?.length\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">\n        {{ 'orderDetails.inProcess' | cxTranslate }}\n      </div>\n    </div>\n    <div class=\"cx-list-item col-12\">\n      <cx-cart-item-list\n        [items]=\"order?.unconsignedEntries\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n</ng-container>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -7508,7 +7604,7 @@ var OrderHistoryComponent = /** @class */ (function () {
      */
     function (order) {
         this.routing.go({
-            route: 'orderDetails',
+            cxRoute: 'orderDetails',
             params: order,
         });
     };
@@ -7546,7 +7642,7 @@ var OrderHistoryComponent = /** @class */ (function () {
     OrderHistoryComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-order-history',
-                    template: "<ng-container *ngIf=\"(orders$ | async) as orders\">\n  <div class=\"container\">\n    <!-- HEADER -->\n    <div class=\"cx-order-history-header\">\n      <h3>{{ 'orderHistory.orderHistory' | cxTranslate }}</h3>\n    </div>\n\n    <!-- BODY -->\n    <div class=\"cx-order-history-body\">\n      <ng-container *ngIf=\"orders.pagination.totalResults > 0; else noOrder\">\n        <!-- Select Form and Pagination Top -->\n        <div class=\"cx-order-history-sort top row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"getSortLabels() | async\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n        <!-- TABLE -->\n        <table class=\"table cx-order-history-table\">\n          <thead class=\"cx-order-history-thead-mobile\">\n            <th scope=\"col\">\n              {{ 'orderHistory.orderId' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.date' | cxTranslate }}</th>\n            <th scope=\"col\">\n              {{ 'orderHistory.status' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.total' | cxTranslate }}</th>\n          </thead>\n          <tbody>\n            <tr\n              *ngFor=\"let order of orders.orders\"\n              (click)=\"goToOrderDetail(order)\"\n            >\n              <td class=\"cx-order-history-code\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.orderId' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.code }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-placed\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.date' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                  >{{ order?.placed | cxDate: 'longDate' }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-status\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.status' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{\n                    'orderDetails.statusDisplay'\n                      | cxTranslate: { context: order?.statusDisplay }\n                  }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-total\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.total' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      route: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.total.formattedValue }}</a\n                >\n              </td>\n            </tr>\n          </tbody>\n        </table>\n        <!-- Select Form and Pagination Bottom -->\n        <div class=\"cx-order-history-sort bottom row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"getSortLabels() | async\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n      </ng-container>\n\n      <!-- NO ORDER CONTAINER -->\n      <ng-template #noOrder>\n        <div class=\"cx-order-history-no-order row\" *ngIf=\"(isLoaded$ | async)\">\n          <div class=\"col-sm-12 col-md-6 col-lg-4\">\n            <div>{{ 'orderHistory.noOrders' | cxTranslate }}</div>\n            <a\n              [routerLink]=\"{ route: 'home' } | cxUrl\"\n              routerLinkActive=\"active\"\n              class=\"btn btn-primary btn-block\"\n              >{{ 'orderHistory.startShopping' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </ng-template>\n    </div>\n  </div>\n</ng-container>\n"
+                    template: "<ng-container *ngIf=\"(orders$ | async) as orders\">\n  <div class=\"container\">\n    <!-- HEADER -->\n    <div class=\"cx-order-history-header\">\n      <h3>{{ 'orderHistory.orderHistory' | cxTranslate }}</h3>\n    </div>\n\n    <!-- BODY -->\n    <div class=\"cx-order-history-body\">\n      <ng-container *ngIf=\"orders.pagination.totalResults > 0; else noOrder\">\n        <!-- Select Form and Pagination Top -->\n        <div class=\"cx-order-history-sort top row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"getSortLabels() | async\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n        <!-- TABLE -->\n        <table class=\"table cx-order-history-table\">\n          <thead class=\"cx-order-history-thead-mobile\">\n            <th scope=\"col\">\n              {{ 'orderHistory.orderId' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.date' | cxTranslate }}</th>\n            <th scope=\"col\">\n              {{ 'orderHistory.status' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.total' | cxTranslate }}</th>\n          </thead>\n          <tbody>\n            <tr\n              *ngFor=\"let order of orders.orders\"\n              (click)=\"goToOrderDetail(order)\"\n            >\n              <td class=\"cx-order-history-code\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.orderId' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.code }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-placed\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.date' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                  >{{ order?.placed | cxDate: 'longDate' }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-status\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.status' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{\n                    'orderDetails.statusDisplay'\n                      | cxTranslate: { context: order?.statusDisplay }\n                  }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-total\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.total' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.total.formattedValue }}</a\n                >\n              </td>\n            </tr>\n          </tbody>\n        </table>\n        <!-- Select Form and Pagination Bottom -->\n        <div class=\"cx-order-history-sort bottom row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"getSortLabels() | async\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n      </ng-container>\n\n      <!-- NO ORDER CONTAINER -->\n      <ng-template #noOrder>\n        <div class=\"cx-order-history-no-order row\" *ngIf=\"(isLoaded$ | async)\">\n          <div class=\"col-sm-12 col-md-6 col-lg-4\">\n            <div>{{ 'orderHistory.noOrders' | cxTranslate }}</div>\n            <a\n              [routerLink]=\"{ cxRoute: 'home' } | cxUrl\"\n              routerLinkActive=\"active\"\n              class=\"btn btn-primary btn-block\"\n              >{{ 'orderHistory.startShopping' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </ng-template>\n    </div>\n  </div>\n</ng-container>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -7572,7 +7668,10 @@ var OrderHistoryModule = /** @class */ (function () {
                         CommonModule,
                         ConfigModule.withConfig((/** @type {?} */ ({
                             cmsComponents: {
-                                AccountOrderHistoryComponent: { selector: 'cx-order-history' },
+                                AccountOrderHistoryComponent: {
+                                    selector: 'cx-order-history',
+                                    guards: [AuthGuard],
+                                },
                             },
                         }))),
                         RouterModule,
@@ -7629,7 +7728,13 @@ var PaymentMethodsComponent = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        this.paymentMethods$ = this.userService.getPaymentMethods();
+        this.paymentMethods$ = this.userService.getPaymentMethods().pipe(tap(function (paymentDetails) {
+            // Set first payment method to DEFAULT if none is set
+            if (paymentDetails.length > 0 &&
+                !paymentDetails.find(function (paymentDetail) { return paymentDetail.defaultPayment; })) {
+                _this.setDefaultPaymentMethod(paymentDetails[0]);
+            }
+        }));
         this.editCard = null;
         this.loading$ = this.userService.getPaymentMethodsLoading();
         this.userServiceSub = this.userService.get().subscribe(function (data) {
@@ -7762,7 +7867,10 @@ var PaymentMethodsModule = /** @class */ (function () {
                         SpinnerModule,
                         ConfigModule.withConfig((/** @type {?} */ ({
                             cmsComponents: {
-                                AccountPaymentDetailsComponent: { selector: 'cx-payment-methods' },
+                                AccountPaymentDetailsComponent: {
+                                    selector: 'cx-payment-methods',
+                                    guards: [AuthGuard],
+                                },
                             },
                         }))),
                         I18nModule,
@@ -7808,7 +7916,7 @@ var ResetPasswordFormComponent = /** @class */ (function () {
             .subscribe(function (state) { return (_this.token = state.state.queryParams['token']); }));
         this.subscription.add(this.userService.isPasswordReset().subscribe(function (reset) {
             if (reset) {
-                _this.routingService.go({ route: 'login' });
+                _this.routingService.go({ cxRoute: 'login' });
             }
         }));
     };
@@ -7881,7 +7989,10 @@ var ResetPasswordModule = /** @class */ (function () {
                         CommonModule,
                         ConfigModule.withConfig((/** @type {?} */ ({
                             cmsComponents: {
-                                ResetPasswordComponent: { selector: 'cx-reset-password-form' },
+                                ResetPasswordComponent: {
+                                    selector: 'cx-reset-password-form',
+                                    guards: [NotAuthGuard],
+                                },
                             },
                         }))),
                         FormsModule,
@@ -8035,7 +8146,7 @@ var UpdateEmailFormComponent = /** @class */ (function () {
     UpdateEmailFormComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-update-email-form',
-                    template: "<form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\">\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateEmailForm.newEmailAddress.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"email\"\n          name=\"email\"\n          formControlName=\"email\"\n          placeholder=\"{{\n            'updateEmailForm.newEmailAddress.placeholder' | cxTranslate\n          }}\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('email')\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('email')\">\n          <span>{{ 'updateEmailForm.enterValidEmail' | cxTranslate }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-sm-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateEmailForm.confirmNewEmailAddress.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"email\"\n          name=\"confirmEmail\"\n          formControlName=\"confirmEmail\"\n          placeholder=\"{{\n            'updateEmailForm.confirmNewEmailAddress.placeholder' | cxTranslate\n          }}\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isEmailConfirmNotValid('confirmEmail')\"\n        />\n        <div\n          class=\"invalid-feedback\"\n          *ngIf=\"isEmailConfirmNotValid('confirmEmail')\"\n        >\n          <span>{{\n            'updateEmailForm.bothPasswordMustMatch' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-sm-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateEmailForm.password.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"password\"\n          name=\"password\"\n          formControlName=\"password\"\n          placeholder=\"{{\n            'updateEmailForm.password.placeholder' | cxTranslate\n          }}\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('password')\"\n          autocomplete=\"off\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('password')\">\n          <span>{{ 'updateEmailForm.pleaseInputPassword' | cxTranslate }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-lg-6\">\n      <button\n        class=\"btn btn-block btn-secondary\"\n        type=\"button\"\n        (click)=\"onCancel()\"\n      >\n        {{ 'common.cancel' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-lg-6\">\n      <button class=\"btn btn-block btn-primary\" type=\"submit\">\n        {{ 'common.save' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n",
+                    template: "<form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\">\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateEmailForm.newEmailAddress.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"email\"\n          name=\"email\"\n          formControlName=\"email\"\n          placeholder=\"{{\n            'updateEmailForm.newEmailAddress.placeholder' | cxTranslate\n          }}\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('email')\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('email')\">\n          <span>{{ 'updateEmailForm.enterValidEmail' | cxTranslate }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-sm-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateEmailForm.confirmNewEmailAddress.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"email\"\n          name=\"confirmEmail\"\n          formControlName=\"confirmEmail\"\n          placeholder=\"{{\n            'updateEmailForm.confirmNewEmailAddress.placeholder' | cxTranslate\n          }}\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isEmailConfirmNotValid('confirmEmail')\"\n        />\n        <div\n          class=\"invalid-feedback\"\n          *ngIf=\"isEmailConfirmNotValid('confirmEmail')\"\n        >\n          <span>{{ 'updateEmailForm.bothEmailMustMatch' | cxTranslate }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-sm-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateEmailForm.password.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"password\"\n          name=\"password\"\n          formControlName=\"password\"\n          placeholder=\"{{\n            'updateEmailForm.password.placeholder' | cxTranslate\n          }}\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('password')\"\n          autocomplete=\"off\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('password')\">\n          <span>{{ 'updateEmailForm.pleaseInputPassword' | cxTranslate }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-lg-6\">\n      <button\n        class=\"btn btn-block btn-secondary\"\n        type=\"button\"\n        (click)=\"onCancel()\"\n      >\n        {{ 'common.cancel' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-lg-6\">\n      <button class=\"btn btn-block btn-primary\" type=\"submit\">\n        {{ 'common.save' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n",
                     styles: [".form-group button:first-child{margin-bottom:1rem}"]
                 }] }
     ];
@@ -8084,7 +8195,7 @@ var UpdateEmailComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.routingService.go({ route: 'home' });
+        this.routingService.go({ cxRoute: 'home' });
     };
     /**
      * @param {?} __0
@@ -8109,9 +8220,12 @@ var UpdateEmailComponent = /** @class */ (function () {
      */
     function (success) {
         if (success) {
-            this.globalMessageService.add("Success. Please sign in with " + this.newUid, GlobalMessageType.MSG_TYPE_CONFIRMATION);
+            this.globalMessageService.add({
+                key: 'updateEmailForm.emailUpdateSuccess',
+                params: { newUid: this.newUid },
+            }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
             this.authService.logout();
-            this.routingService.go({ route: 'login' });
+            this.routingService.go({ cxRoute: 'login' });
         }
     };
     /**
@@ -8158,6 +8272,7 @@ var UpdateEmailModule = /** @class */ (function () {
                             cmsComponents: {
                                 UpdateEmailComponent: {
                                     selector: 'cx-update-email',
+                                    guards: [AuthGuard],
                                 },
                             },
                         }))),
@@ -8330,8 +8445,8 @@ var UpdatePasswordComponent = /** @class */ (function () {
      */
     function (success) {
         if (success) {
-            this.globalMessageService.add('Password updated with success', GlobalMessageType.MSG_TYPE_CONFIRMATION);
-            this.routingService.go({ route: 'home' });
+            this.globalMessageService.add({ key: 'updatePasswordForm.passwordUpdateSuccess' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
+            this.routingService.go({ cxRoute: 'home' });
         }
     };
     /**
@@ -8341,7 +8456,7 @@ var UpdatePasswordComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.routingService.go({ route: 'home' });
+        this.routingService.go({ cxRoute: 'home' });
     };
     /**
      * @param {?} __0
@@ -8397,7 +8512,10 @@ var UpdatePasswordModule = /** @class */ (function () {
                         ReactiveFormsModule,
                         ConfigModule.withConfig((/** @type {?} */ ({
                             cmsComponents: {
-                                UpdatePasswordComponent: { selector: 'cx-update-password' },
+                                UpdatePasswordComponent: {
+                                    selector: 'cx-update-password',
+                                    guards: [AuthGuard],
+                                },
                             },
                         }))),
                         SpinnerModule,
@@ -8541,8 +8659,8 @@ var UpdateProfileComponent = /** @class */ (function () {
      */
     function (success) {
         if (success) {
-            this.globalMessageService.add('Personal details successfully updated', GlobalMessageType.MSG_TYPE_CONFIRMATION);
-            this.routingService.go({ route: 'home' });
+            this.globalMessageService.add({ key: 'updateProfileForm.profileUpdateSuccess' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
+            this.routingService.go({ cxRoute: 'home' });
         }
     };
     /**
@@ -8552,7 +8670,7 @@ var UpdateProfileComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.routingService.go({ route: 'home' });
+        this.routingService.go({ cxRoute: 'home' });
     };
     /**
      * @param {?} __0
@@ -8607,7 +8725,10 @@ var UpdateProfileModule = /** @class */ (function () {
                         CommonModule,
                         ConfigModule.withConfig((/** @type {?} */ ({
                             cmsComponents: {
-                                UpdateProfileComponent: { selector: 'cx-update-profile' },
+                                UpdateProfileComponent: {
+                                    selector: 'cx-update-profile',
+                                    guards: [AuthGuard],
+                                },
                             },
                         }))),
                         FormsModule,
@@ -9155,7 +9276,7 @@ var SearchBoxComponentService = /** @class */ (function () {
      */
     function (query) {
         this.routingService.go({
-            route: 'search',
+            cxRoute: 'search',
             params: { query: query },
         });
     };
@@ -9314,7 +9435,7 @@ var SearchBoxComponent = /** @class */ (function () {
     SearchBoxComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-searchbox',
-                    template: "<form class=\"cx-form\">\n  <div class=\"cx-form-group form-group\">\n    <!-- searchbox input -->\n    <input\n      class=\"cx-input form-control dropdown-menu-toggle\"\n      [ngClass]=\"{ 'show-mobile': isMobileSearchVisible }\"\n      type=\"text\"\n      placeholder=\"{{ 'searchBox.searchHere' | cxTranslate }}\"\n      aria-label=\"search\"\n      [ngbTypeahead]=\"typeahead\"\n      [resultTemplate]=\"rt\"\n      [formControl]=\"searchBoxControl\"\n      (keyup)=\"onKey($event)\"\n      (selectItem)=\"selectSuggestion($event)\"\n    />\n\n    <!-- searchbox button desktop -->\n    <button\n      class=\"cx-button cx-button-desktop\"\n      type=\"submit\"\n      aria-label=\"Submit\"\n      (click)=\"submitSearch()\"\n      [disabled]=\"!searchBoxControl?.value\"\n    >\n      <cx-icon [type]=\"iconTypes.SEARCH\"></cx-icon>\n    </button>\n\n    <!-- searchbox button mobile -->\n    <button\n      class=\"cx-button cx-button-mobile\"\n      type=\"button\"\n      aria-label=\"Search\"\n      (click)=\"toggleMobileSearchInput()\"\n    >\n      <cx-icon [type]=\"iconTypes.SEARCH\"></cx-icon>\n    </button>\n\n    <!-- searchbox results -->\n    <ng-template #rt let-suggestion=\"result\">\n      <div\n        *ngIf=\"!suggestion.code; else productView\"\n        class=\"cx-dropdown-content\"\n      >\n        {{ suggestion }}\n      </div>\n      <ng-template #productView>\n        <div\n          [routerLink]=\"\n            {\n              route: 'product',\n              params: suggestion | stripHtml\n            } | cxUrl\n          \"\n          class=\"cx-product\"\n        >\n          <cx-media\n            [container]=\"suggestion.images?.PRIMARY\"\n            format=\"product\"\n            [alt]=\"suggestion.summary\"\n          ></cx-media>\n          <div [innerHtml]=\"suggestion.name\" class=\"cx-product-name\">\n            {{ suggestion.name }}\n          </div>\n          <div class=\"cx-product-price\">\n            {{ suggestion.price.formattedValue }}\n          </div>\n        </div>\n      </ng-template>\n    </ng-template>\n  </div>\n</form>\n",
+                    template: "<form class=\"cx-form\">\n  <div class=\"cx-form-group form-group\">\n    <!-- searchbox input -->\n    <input\n      class=\"cx-input form-control dropdown-menu-toggle\"\n      [ngClass]=\"{ 'show-mobile': isMobileSearchVisible }\"\n      type=\"text\"\n      placeholder=\"{{ 'searchBox.searchHere' | cxTranslate }}\"\n      aria-label=\"search\"\n      [ngbTypeahead]=\"typeahead\"\n      [resultTemplate]=\"rt\"\n      [formControl]=\"searchBoxControl\"\n      (keyup)=\"onKey($event)\"\n      (selectItem)=\"selectSuggestion($event)\"\n    />\n\n    <!-- searchbox button desktop -->\n    <button\n      class=\"cx-button cx-button-desktop\"\n      type=\"submit\"\n      aria-label=\"Submit\"\n      (click)=\"submitSearch()\"\n      [disabled]=\"!searchBoxControl?.value\"\n    >\n      <cx-icon [type]=\"iconTypes.SEARCH\"></cx-icon>\n    </button>\n\n    <!-- searchbox button mobile -->\n    <button\n      class=\"cx-button cx-button-mobile\"\n      type=\"button\"\n      aria-label=\"Search\"\n      (click)=\"toggleMobileSearchInput()\"\n    >\n      <cx-icon [type]=\"iconTypes.SEARCH\"></cx-icon>\n    </button>\n\n    <!-- searchbox results -->\n    <ng-template #rt let-suggestion=\"result\">\n      <div\n        *ngIf=\"!suggestion.code; else productView\"\n        class=\"cx-dropdown-content\"\n      >\n        {{ suggestion }}\n      </div>\n      <ng-template #productView>\n        <div\n          [routerLink]=\"\n            {\n              cxRoute: 'product',\n              params: suggestion | stripHtml\n            } | cxUrl\n          \"\n          class=\"cx-product\"\n        >\n          <cx-media\n            [container]=\"suggestion.images?.PRIMARY\"\n            format=\"product\"\n            [alt]=\"suggestion.summary\"\n          ></cx-media>\n          <div [innerHtml]=\"suggestion.name\" class=\"cx-product-name\">\n            {{ suggestion.name }}\n          </div>\n          <div class=\"cx-product-price\">\n            {{ suggestion.price.formattedValue }}\n          </div>\n        </div>\n      </ng-template>\n    </ng-template>\n  </div>\n</form>\n",
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
@@ -9382,43 +9503,8 @@ var SearchBoxModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var CurrentProductService = /** @class */ (function () {
-    function CurrentProductService(routingService, productService) {
-        this.routingService = routingService;
-        this.productService = productService;
-    }
-    /**
-     * @return {?}
-     */
-    CurrentProductService.prototype.getProduct = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        return this.routingService.getRouterState().pipe(map(function (state) { return state.state.params['productCode']; }), filter(function (productCode) { return !!productCode; }), switchMap(function (productCode) { return _this.productService.get(productCode); }));
-    };
-    CurrentProductService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    CurrentProductService.ctorParameters = function () { return [
-        { type: RoutingService },
-        { type: ProductService }
-    ]; };
-    /** @nocollapse */ CurrentProductService.ngInjectableDef = defineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(inject(RoutingService), inject(ProductService)); }, token: CurrentProductService, providedIn: "root" });
-    return CurrentProductService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var ProductCarouselService = /** @class */ (function () {
-    function ProductCarouselService(component, productService) {
-        this.component = component;
-        this.productService = productService;
+var SharedCarouselService = /** @class */ (function () {
+    function SharedCarouselService() {
         this.MAX_WIDTH = 360;
         this.MAX_ITEM_SIZE = 4;
         this.SPEED = 250;
@@ -9429,7 +9515,7 @@ var ProductCarouselService = /** @class */ (function () {
     /**
      * @return {?}
      */
-    ProductCarouselService.prototype.getActiveItem = /**
+    SharedCarouselService.prototype.getActiveItem = /**
      * @return {?}
      */
     function () {
@@ -9438,7 +9524,7 @@ var ProductCarouselService = /** @class */ (function () {
     /**
      * @return {?}
      */
-    ProductCarouselService.prototype.getActiveItemWithDelay = /**
+    SharedCarouselService.prototype.getActiveItemWithDelay = /**
      * @return {?}
      */
     function () {
@@ -9447,59 +9533,11 @@ var ProductCarouselService = /** @class */ (function () {
     /**
      * @return {?}
      */
-    ProductCarouselService.prototype.getTitle = /**
-     * @return {?}
-     */
-    function () {
-        return this.title$;
-    };
-    /**
-     * @return {?}
-     */
-    ProductCarouselService.prototype.setTitle = /**
-     * @return {?}
-     */
-    function () {
-        this.title$ = this.component.data$.pipe(map(function (data) {
-            return data.title;
-        }));
-    };
-    /**
-     * @return {?}
-     */
-    ProductCarouselService.prototype.getItems = /**
-     * @return {?}
-     */
-    function () {
-        return this.items$;
-    };
-    /**
-     * @return {?}
-     */
-    ProductCarouselService.prototype.getItemSize = /**
+    SharedCarouselService.prototype.getItemSize = /**
      * @return {?}
      */
     function () {
         return this.itemSize$;
-    };
-    /**
-     * Maps the item codes from CMS component to an array of `Product` observables.
-     */
-    /**
-     * Maps the item codes from CMS component to an array of `Product` observables.
-     * @return {?}
-     */
-    ProductCarouselService.prototype.setItems = /**
-     * Maps the item codes from CMS component to an array of `Product` observables.
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this.items$ = this.component.data$.pipe(filter(function (data) { return data && !!data.productCodes; }), map(function (data) {
-            /** @type {?} */
-            var productCodes = data.productCodes.split(' ');
-            return productCodes.map(function (code) { return _this.productService.get(code); });
-        }));
     };
     /**
      * The number of items shown in the carousel can be calculated
@@ -9516,7 +9554,7 @@ var ProductCarouselService = /** @class */ (function () {
      * @param {?} nativeElement
      * @return {?}
      */
-    ProductCarouselService.prototype.setItemSize = /**
+    SharedCarouselService.prototype.setItemSize = /**
      * The number of items shown in the carousel can be calculated
      * the standard implemenattions uses the element size to calculate
      * the items that fit in the carousel.
@@ -9543,7 +9581,7 @@ var ProductCarouselService = /** @class */ (function () {
      * @param {?} newActiveItem
      * @return {?}
      */
-    ProductCarouselService.prototype.setItemAsActive = /**
+    SharedCarouselService.prototype.setItemAsActive = /**
      * @param {?} newActiveItem
      * @return {?}
      */
@@ -9554,7 +9592,7 @@ var ProductCarouselService = /** @class */ (function () {
     /**
      * @return {?}
      */
-    ProductCarouselService.prototype.setPreviousItemAsActive = /**
+    SharedCarouselService.prototype.setPreviousItemAsActive = /**
      * @return {?}
      */
     function () {
@@ -9567,7 +9605,7 @@ var ProductCarouselService = /** @class */ (function () {
     /**
      * @return {?}
      */
-    ProductCarouselService.prototype.setNextItemAsActive = /**
+    SharedCarouselService.prototype.setNextItemAsActive = /**
      * @return {?}
      */
     function () {
@@ -9583,7 +9621,7 @@ var ProductCarouselService = /** @class */ (function () {
      * @param {?} itemSize
      * @return {?}
      */
-    ProductCarouselService.prototype.setItem = /**
+    SharedCarouselService.prototype.setItem = /**
      * @private
      * @param {?} newActiveItem
      * @param {?} itemSize
@@ -9598,13 +9636,78 @@ var ProductCarouselService = /** @class */ (function () {
      * @param {?} itemSize
      * @return {?}
      */
-    ProductCarouselService.prototype.getDelayValue = /**
+    SharedCarouselService.prototype.getDelayValue = /**
      * @private
      * @param {?} itemSize
      * @return {?}
      */
     function (itemSize) {
         return (itemSize - 1) * this.SPEED;
+    };
+    SharedCarouselService.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    SharedCarouselService.ctorParameters = function () { return []; };
+    return SharedCarouselService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ProductCarouselService = /** @class */ (function () {
+    function ProductCarouselService(component, productService) {
+        this.component = component;
+        this.productService = productService;
+    }
+    /**
+     * @return {?}
+     */
+    ProductCarouselService.prototype.getTitle = /**
+     * @return {?}
+     */
+    function () {
+        return this.title$;
+    };
+    /**
+     * @return {?}
+     */
+    ProductCarouselService.prototype.fetchTitle = /**
+     * @return {?}
+     */
+    function () {
+        this.title$ = this.component.data$.pipe(map(function (data) {
+            return data.title;
+        }));
+    };
+    /**
+     * @return {?}
+     */
+    ProductCarouselService.prototype.getItems = /**
+     * @return {?}
+     */
+    function () {
+        return this.items$;
+    };
+    /**
+     * Maps the item codes from CMS component to an array of `Product` observables.
+     */
+    /**
+     * Maps the item codes from CMS component to an array of `Product` observables.
+     * @return {?}
+     */
+    ProductCarouselService.prototype.fetchItems = /**
+     * Maps the item codes from CMS component to an array of `Product` observables.
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.items$ = this.component.data$.pipe(filter(function (data) { return data && !!data.productCodes; }), map(function (data) {
+            /** @type {?} */
+            var productCodes = data.productCodes.split(' ');
+            return productCodes.map(function (code) { return _this.productService.get(code); });
+        }));
     };
     ProductCarouselService.decorators = [
         { type: Injectable }
@@ -9622,9 +9725,10 @@ var ProductCarouselService = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var ProductCarouselComponent = /** @class */ (function () {
-    function ProductCarouselComponent(winRef, el, service) {
+    function ProductCarouselComponent(winRef, el, productCarouselService, sharedCarouselService) {
         this.el = el;
-        this.service = service;
+        this.productCarouselService = productCarouselService;
+        this.sharedCarouselService = sharedCarouselService;
         this.window = winRef.nativeWindow;
     }
     /**
@@ -9634,15 +9738,15 @@ var ProductCarouselComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.service.setTitle();
-        this.service.setItemSize(this.window, this.el.nativeElement);
-        this.service.setItems();
-        this.service.setItemAsActive(0);
+        this.productCarouselService.fetchTitle();
+        this.sharedCarouselService.setItemSize(this.window, this.el.nativeElement);
+        this.productCarouselService.fetchItems();
+        this.sharedCarouselService.setItemAsActive(0);
     };
     ProductCarouselComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-product-carousel',
-                    template: "<h3 *ngIf=\"(service.getTitle() | async) as title\">{{ title }}</h3>\n\n<ng-container\n  *ngIf=\"{\n    maxItemSize: service.getItemSize() | async,\n    products: service.getItems() | async,\n    activeItem: service.getActiveItemWithDelay() | async,\n    active: service.getActiveItem() | async\n  } as carousel\"\n>\n  <div class=\"cx-carousel\" [ngClass]=\"'size-' + carousel.maxItemSize\">\n    <button\n      class=\"previous\"\n      (click)=\"service.setPreviousItemAsActive()\"\n      [disabled]=\"carousel.activeItem === 0\"\n    ></button>\n\n    <div class=\"groups\">\n      <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n        <div class=\"group\" *ngIf=\"i % carousel.maxItemSize === 0\">\n          <ng-container\n            *ngFor=\"\n              let product$ of (carousel.products\n                | slice: i:i + carousel.maxItemSize)\n            \"\n          >\n            <a\n              *ngIf=\"(product$ | async) as product\"\n              class=\"product\"\n              [class.active]=\"i === carousel.activeItem\"\n              [routerLink]=\"{ route: 'product', params: product } | cxUrl\"\n            >\n              <cx-media [container]=\"product.images?.PRIMARY\" format=\"product\">\n              </cx-media>\n\n              <h4>{{ product.name }}</h4>\n              <div class=\"price\">{{ product.price?.formattedValue }}</div>\n            </a>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      class=\"next\"\n      (click)=\"service.setNextItemAsActive()\"\n      [disabled]=\"\n        carousel.activeItem > carousel.products.length - carousel.maxItemSize\n      \"\n    ></button>\n  </div>\n\n  <div class=\"indicators\">\n    <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n      <button\n        *ngIf=\"i % carousel.maxItemSize === 0\"\n        (click)=\"service.setItemAsActive(i)\"\n        [disabled]=\"i === carousel.activeItem\"\n      ></button>\n    </ng-container></div\n></ng-container>\n",
+                    template: "<h3 *ngIf=\"(productCarouselService.getTitle() | async) as title\">\n  {{ title }}\n</h3>\n\n<ng-container\n  *ngIf=\"{\n    maxItemSize: sharedCarouselService.getItemSize() | async,\n    products: productCarouselService.getItems() | async,\n    activeItem: sharedCarouselService.getActiveItemWithDelay() | async,\n    active: sharedCarouselService.getActiveItem() | async\n  } as carousel\"\n>\n  <div class=\"cx-carousel\" [ngClass]=\"'size-' + carousel.maxItemSize\">\n    <button\n      class=\"previous\"\n      (click)=\"sharedCarouselService.setPreviousItemAsActive()\"\n      [disabled]=\"carousel.activeItem === 0\"\n    ></button>\n\n    <div class=\"groups\">\n      <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n        <div class=\"group\" *ngIf=\"i % carousel.maxItemSize === 0\">\n          <ng-container\n            *ngFor=\"\n              let product$ of (carousel.products\n                | slice: i:i + carousel.maxItemSize)\n            \"\n          >\n            <a\n              *ngIf=\"(product$ | async) as product\"\n              class=\"product\"\n              [class.active]=\"i === carousel.activeItem\"\n              [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n            >\n              <cx-media [container]=\"product.images?.PRIMARY\" format=\"product\">\n              </cx-media>\n\n              <h4>{{ product.name }}</h4>\n              <div class=\"price\">{{ product.price?.formattedValue }}</div>\n            </a>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      class=\"next\"\n      (click)=\"sharedCarouselService.setNextItemAsActive()\"\n      [disabled]=\"\n        carousel.activeItem > carousel.products.length - carousel.maxItemSize\n      \"\n    ></button>\n  </div>\n\n  <div class=\"indicators\">\n    <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n      <button\n        *ngIf=\"i % carousel.maxItemSize === 0\"\n        (click)=\"sharedCarouselService.setItemAsActive(i)\"\n        [disabled]=\"i === carousel.activeItem\"\n      ></button>\n    </ng-container></div\n></ng-container>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -9650,7 +9754,8 @@ var ProductCarouselComponent = /** @class */ (function () {
     ProductCarouselComponent.ctorParameters = function () { return [
         { type: WindowRef },
         { type: ElementRef },
-        { type: ProductCarouselService }
+        { type: ProductCarouselService },
+        { type: SharedCarouselService }
     ]; };
     return ProductCarouselComponent;
 }());
@@ -9678,6 +9783,11 @@ var ProductCarouselModule = /** @class */ (function () {
                                             useClass: ProductCarouselService,
                                             deps: [CmsComponentData, ProductService],
                                         },
+                                        {
+                                            provide: SharedCarouselService,
+                                            useClass: SharedCarouselService,
+                                            deps: [],
+                                        },
                                     ],
                                 },
                             },
@@ -9690,6 +9800,248 @@ var ProductCarouselModule = /** @class */ (function () {
                 },] }
     ];
     return ProductCarouselModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ProductReferencesService = /** @class */ (function () {
+    function ProductReferencesService(component, referenceService, routerService) {
+        this.component = component;
+        this.referenceService = referenceService;
+        this.routerService = routerService;
+    }
+    /**
+     * @return {?}
+     */
+    ProductReferencesService.prototype.getTitle = /**
+     * @return {?}
+     */
+    function () {
+        return this.title$;
+    };
+    /**
+     * @return {?}
+     */
+    ProductReferencesService.prototype.fetchTitle = /**
+     * @return {?}
+     */
+    function () {
+        this.title$ = this.component.data$.pipe(map(function (data) {
+            return data.title;
+        }));
+    };
+    /**
+     * @return {?}
+     */
+    ProductReferencesService.prototype.getDisplayProductTitles = /**
+     * @return {?}
+     */
+    function () {
+        return this.displayProductTitles$.pipe(map(function (data) { return Boolean(JSON.parse(data.toLowerCase())); }));
+    };
+    /**
+     * @return {?}
+     */
+    ProductReferencesService.prototype.fetchDisplayProductTitles = /**
+     * @return {?}
+     */
+    function () {
+        this.displayProductTitles$ = this.component.data$.pipe(map(function (data) {
+            return data.displayProductTitles;
+        }));
+    };
+    /**
+     * @return {?}
+     */
+    ProductReferencesService.prototype.getDisplayProductPrices = /**
+     * @return {?}
+     */
+    function () {
+        return this.displayProductPrices$.pipe(map(function (data) { return Boolean(JSON.parse(data.toLowerCase())); }));
+    };
+    /**
+     * @return {?}
+     */
+    ProductReferencesService.prototype.fetchDisplayProductPrices = /**
+     * @return {?}
+     */
+    function () {
+        this.displayProductPrices$ = this.component.data$.pipe(map(function (data) {
+            return data.displayProductPrices;
+        }));
+    };
+    /**
+     * @return {?}
+     */
+    ProductReferencesService.prototype.getReferenceType = /**
+     * @return {?}
+     */
+    function () {
+        return this.component.data$.pipe(map(function (data) { return data.productReferenceTypes; }));
+    };
+    /**
+     * @return {?}
+     */
+    ProductReferencesService.prototype.getProductCode = /**
+     * @return {?}
+     */
+    function () {
+        return this.routerService
+            .getRouterState()
+            .pipe(map(function (data) { return data.state.params.productCode; }));
+    };
+    /**
+     * @return {?}
+     */
+    ProductReferencesService.prototype.getReferenceList = /**
+     * @return {?}
+     */
+    function () {
+        return this.items$;
+    };
+    /**
+     * @param {?=} pageSize
+     * @return {?}
+     */
+    ProductReferencesService.prototype.setReferenceList = /**
+     * @param {?=} pageSize
+     * @return {?}
+     */
+    function (pageSize) {
+        var _this = this;
+        this.items$ = combineLatest(this.getProductCode(), this.getReferenceType()).pipe(map(function (data) { return ({ productCode: data[0], referenceType: data[1] }); }), switchMap(function (data) {
+            return _this.referenceService.get(data.productCode, data.referenceType, pageSize);
+        }));
+    };
+    ProductReferencesService.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    ProductReferencesService.ctorParameters = function () { return [
+        { type: CmsComponentData },
+        { type: ProductReferenceService },
+        { type: RoutingService }
+    ]; };
+    return ProductReferencesService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ProductReferencesComponent = /** @class */ (function () {
+    function ProductReferencesComponent(winRef, el, productReferencesService, sharedCarouselService) {
+        this.el = el;
+        this.productReferencesService = productReferencesService;
+        this.sharedCarouselService = sharedCarouselService;
+        this.window = winRef.nativeWindow;
+    }
+    /**
+     * @return {?}
+     */
+    ProductReferencesComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.productReferencesService.fetchTitle();
+        this.productReferencesService.fetchDisplayProductTitles();
+        this.productReferencesService.fetchDisplayProductPrices();
+        this.sharedCarouselService.setItemSize(this.window, this.el.nativeElement);
+        this.productReferencesService.setReferenceList();
+        this.sharedCarouselService.setItemAsActive(0);
+    };
+    ProductReferencesComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-product-references',
+                    template: "<ng-container\n  *ngIf=\"(productReferencesService.getReferenceList() | async) as productList\"\n>\n  <ng-container *ngIf=\"productList.length !== 0\">\n    <h3\n      *ngIf=\"\n        (productReferencesService.getDisplayProductTitles() | async) &&\n        (productReferencesService.getTitle() | async) as title\n      \"\n    >\n      {{ title }}\n    </h3>\n\n    <ng-container\n      *ngIf=\"{\n        maxItemSize: sharedCarouselService.getItemSize() | async,\n        products: productList,\n        activeItem: sharedCarouselService.getActiveItemWithDelay() | async,\n        active: sharedCarouselService.getActiveItem() | async\n      } as carousel\"\n    >\n      <div class=\"cx-carousel\" [ngClass]=\"'size-' + carousel.maxItemSize\">\n        <button\n          class=\"previous\"\n          (click)=\"sharedCarouselService.setPreviousItemAsActive()\"\n          [disabled]=\"carousel.activeItem === 0\"\n        ></button>\n\n        <div class=\"groups\">\n          <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n            <div class=\"group\" *ngIf=\"i % carousel.maxItemSize === 0\">\n              <ng-container\n                *ngFor=\"\n                  let products of (carousel.products\n                    | slice: i:i + carousel.maxItemSize)\n                \"\n              >\n                <a\n                  *ngIf=\"products.target as product\"\n                  class=\"product\"\n                  [class.active]=\"i === carousel.activeItem\"\n                  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n                >\n                  <cx-media\n                    [container]=\"product.images?.PRIMARY\"\n                    format=\"product\"\n                  >\n                  </cx-media>\n\n                  <h4>{{ product.name }}</h4>\n                  <div\n                    *ngIf=\"\n                      (productReferencesService.getDisplayProductPrices()\n                        | async)\n                    \"\n                    class=\"price\"\n                  >\n                    {{ product.price?.formattedValue }}\n                  </div>\n                </a>\n              </ng-container>\n            </div>\n          </ng-container>\n        </div>\n        <button\n          class=\"next\"\n          (click)=\"sharedCarouselService.setNextItemAsActive()\"\n          [disabled]=\"\n            carousel.activeItem >\n            carousel.products.length - carousel.maxItemSize\n          \"\n        ></button>\n      </div>\n      <div class=\"indicators\">\n        <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n          <button\n            *ngIf=\"i % carousel.maxItemSize === 0\"\n            (click)=\"sharedCarouselService.setItemAsActive(i)\"\n            [disabled]=\"i === carousel.activeItem\"\n          ></button>\n        </ng-container>\n      </div>\n    </ng-container>\n  </ng-container>\n</ng-container>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    /** @nocollapse */
+    ProductReferencesComponent.ctorParameters = function () { return [
+        { type: WindowRef },
+        { type: ElementRef },
+        { type: ProductReferencesService },
+        { type: SharedCarouselService }
+    ]; };
+    return ProductReferencesComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ProductReferencesModule = /** @class */ (function () {
+    function ProductReferencesModule() {
+    }
+    ProductReferencesModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        RouterModule,
+                        MediaModule,
+                        UrlModule,
+                        ConfigModule.withConfig((/** @type {?} */ ({
+                            cmsComponents: {
+                                ProductReferencesComponent: {
+                                    selector: 'cx-product-references',
+                                    providers: [
+                                        {
+                                            provide: ProductReferencesService,
+                                            useClass: ProductReferencesService,
+                                            deps: [CmsComponentData, ProductReferenceService, RoutingService],
+                                        },
+                                        {
+                                            provide: SharedCarouselService,
+                                            useClass: SharedCarouselService,
+                                            deps: [],
+                                        },
+                                    ],
+                                },
+                            },
+                        }))),
+                    ],
+                    declarations: [ProductReferencesComponent],
+                    entryComponents: [ProductReferencesComponent],
+                    exports: [ProductReferencesComponent],
+                },] }
+    ];
+    return ProductReferencesModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CurrentProductService = /** @class */ (function () {
+    function CurrentProductService(routingService, productService) {
+        this.routingService = routingService;
+        this.productService = productService;
+    }
+    /**
+     * @return {?}
+     */
+    CurrentProductService.prototype.getProduct = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        return this.routingService.getRouterState().pipe(map(function (state) { return state.state.params['productCode']; }), filter(function (productCode) { return !!productCode; }), switchMap(function (productCode) { return _this.productService.get(productCode); }));
+    };
+    CurrentProductService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    CurrentProductService.ctorParameters = function () { return [
+        { type: RoutingService },
+        { type: ProductService }
+    ]; };
+    /** @nocollapse */ CurrentProductService.ngInjectableDef = defineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(inject(RoutingService), inject(ProductService)); }, token: CurrentProductService, providedIn: "root" });
+    return CurrentProductService;
 }());
 
 /**
@@ -10121,10 +10473,10 @@ var ProductViewComponent = /** @class */ (function () {
          */
         function () {
             if (this.mode === 'list') {
-                return this.iconTypes.LIST_MODE;
+                return this.iconTypes.LIST;
             }
             else if (this.mode === 'grid') {
-                return this.iconTypes.GRID_MODE;
+                return this.iconTypes.GRID;
             }
         },
         enumerable: true,
@@ -10337,6 +10689,7 @@ var ProductFacetNavigationComponent = /** @class */ (function () {
         this.modalService = modalService;
         this.activatedRoute = activatedRoute;
         this.productSearchService = productSearchService;
+        this.iconTypes = ICON_TYPES;
         this.minPerFacet = 6;
         this.collapsedFacets = new Set();
         this.showAllPerFacetMap = new Map();
@@ -10477,7 +10830,7 @@ var ProductFacetNavigationComponent = /** @class */ (function () {
     ProductFacetNavigationComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-product-facet-navigation',
-                    template: "<div class=\"cx-search-facet\" *ngIf=\"(searchResult$ | async) as searchResult\">\n  <ng-template [ngIf]=\"searchResult.breadcrumbs?.length\">\n    <h4 class=\"cx-facet-filter-header\">\n      {{ 'productList.filterBy.label' | cxTranslate }}\n    </h4>\n    <div class=\"cx-facet-filter-container\">\n      <div\n        *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n        [hidden]=\"breadcrumb.facetValueCode === activeFacetValueCode\"\n        class=\"cx-facet-filter-pill\"\n        role=\"filter\"\n      >\n        <span>{{ breadcrumb.facetValueName }}</span>\n        <button\n          type=\"button\"\n          class=\"close\"\n          aria-label=\"Close\"\n          (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n    </div>\n  </ng-template>\n\n  <ng-template ngFor let-facet [ngForOf]=\"visibleFacets\" let-facetId=\"index\">\n    <div class=\"cx-facet-group\">\n      <span class=\"cx-facet-header\">\n        <a\n          class=\"cx-facet-header-link\"\n          (click)=\"toggleFacet(facet.name)\"\n          [attr.aria-expanded]=\"!isFacetCollapsed(facet.name)\"\n          aria-controls=\"\"\n        >\n          {{ facet.name }}\n        </a>\n      </span>\n      <div [ngbCollapse]=\"isFacetCollapsed(facet.name)\">\n        <ul class=\"cx-facet-list\">\n          <li\n            *ngFor=\"\n              let value of getVisibleFacetValues(facet);\n              index as facetValueId\n            \"\n          >\n            <div class=\"form-check\">\n              <label class=\"form-checkbox cx-facet-label\">\n                <input\n                  class=\"form-check-input cx-facet-checkbox\"\n                  role=\"checkbox\"\n                  type=\"checkbox\"\n                  aria-checked=\"true\"\n                  [checked]=\"value.selected\"\n                  (change)=\"toggleValue(value.query.query.value)\"\n                />\n                <span class=\"cx-facet-text\"\n                  >{{ value.name }} ({{ value.count }})</span\n                >\n              </label>\n            </div>\n          </li>\n          <li\n            class=\"cx-facet-toggle-btn\"\n            (click)=\"showLess(facet.name)\"\n            *ngIf=\"showAllPerFacetMap.get(facet.name)\"\n          >\n            {{ 'productList.showLess' | cxTranslate }}\n          </li>\n          <li\n            class=\"cx-facet-toggle-btn\"\n            (click)=\"showMore(facet.name)\"\n            *ngIf=\"\n              !showAllPerFacetMap.get(facet.name) &&\n              facet.values.length > minPerFacet\n            \"\n          >\n            {{ 'productList.showMore' | cxTranslate }}\n          </li>\n        </ul>\n      </div>\n    </div>\n  </ng-template>\n</div>\n\n<div class=\"cx-facet-mobile\">\n  <button\n    class=\"btn btn-action btn-block cx-facet-mobile-btn\"\n    (click)=\"openFilterModal(content)\"\n  >\n    {{ 'productList.filterBy.action' | cxTranslate }}\n  </button>\n</div>\n\n<!-- START ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n<div *ngIf=\"(updateParams$ | async) as params\">\n  <div class=\"cx-facet-mobile\" *ngIf=\"searchResult.breadcrumbs?.length\">\n    <div class=\"cx-facet-filter-container\">\n      <h4 class=\"cx-facet-filter-header\">\n        {{ 'productList.appliedFilter' | cxTranslate }}\n      </h4>\n      <div\n        class=\"cx-facet-filter-pill\"\n        role=\"filter\"\n        *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n      >\n        {{ breadcrumb.facetValueName }}\n        <button\n          type=\"button\"\n          class=\"close\"\n          aria-label=\"Close\"\n          (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n<!-- END ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n\n<ng-template #content let-c=\"close\" let-d=\"dismiss\">\n  <div class=\"modal-header\">\n    <h4 class=\"cx-facet-modal-title\" id=\"modal-title\">\n      {{ 'productList.filterBy.label' | cxTranslate }}\n    </h4>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"d('Cross click')\"\n    >\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"modal-body cx-facet-modal-body\">\n    <form>\n      <div\n        class=\"form-group\"\n        *ngFor=\"let facet of searchResult.facets; index as facetId\"\n      >\n        <h4 class=\"cx-facet-modal-label\" for=\"megapixels\">{{ facet.name }}</h4>\n        <div class=\"input-group\">\n          <ul class=\"cx-facet-list\">\n            <li *ngFor=\"let value of facet.values; index as facetValueId\">\n              <div class=\"form-check\">\n                <label class=\"form-checkbox cx-facet-label\">\n                  <input\n                    class=\"form-check-input cx-facet-checkbox\"\n                    role=\"checkbox\"\n                    type=\"checkbox\"\n                    aria-checked=\"true\"\n                    [checked]=\"value.selected\"\n                    (change)=\"toggleValue(value.query.query.value)\"\n                  />\n                  <span class=\"cx-facet-text\"\n                    >{{ value.name }} ({{ value.count }})</span\n                  >\n                </label>\n              </div>\n            </li>\n          </ul>\n        </div>\n      </div>\n    </form>\n  </div>\n</ng-template>\n",
+                    template: "<div class=\"cx-search-facet\" *ngIf=\"(searchResult$ | async) as searchResult\">\n  <ng-template [ngIf]=\"searchResult.breadcrumbs?.length\">\n    <h4 class=\"cx-facet-filter-header\">\n      {{ 'productList.filterBy.label' | cxTranslate }}\n    </h4>\n    <div class=\"cx-facet-filter-container\">\n      <div\n        *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n        [hidden]=\"breadcrumb.facetValueCode === activeFacetValueCode\"\n        class=\"cx-facet-filter-pill\"\n        role=\"filter\"\n      >\n        <span>{{ breadcrumb.facetValueName }}</span>\n        <button\n          type=\"button\"\n          class=\"close\"\n          aria-label=\"Close\"\n          (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n        >\n          <span aria-hidden=\"true\">\n            <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n          </span>\n        </button>\n      </div>\n    </div>\n  </ng-template>\n\n  <ng-template ngFor let-facet [ngForOf]=\"visibleFacets\" let-facetId=\"index\">\n    <div class=\"cx-facet-group\">\n      <span class=\"cx-facet-header\">\n        <a\n          class=\"cx-facet-header-link\"\n          (click)=\"toggleFacet(facet.name)\"\n          [attr.aria-expanded]=\"!isFacetCollapsed(facet.name)\"\n          aria-controls=\"\"\n        >\n          {{ facet.name }}\n          <cx-icon\n            [type]=\"\n              isFacetCollapsed(facet.name) ? iconTypes.PLUS : iconTypes.MINUS\n            \"\n          ></cx-icon>\n        </a>\n      </span>\n      <div [ngbCollapse]=\"isFacetCollapsed(facet.name)\">\n        <ul class=\"cx-facet-list\">\n          <li\n            *ngFor=\"\n              let value of getVisibleFacetValues(facet);\n              index as facetValueId\n            \"\n          >\n            <div class=\"form-check\">\n              <label class=\"form-checkbox cx-facet-label\">\n                <input\n                  class=\"form-check-input cx-facet-checkbox\"\n                  role=\"checkbox\"\n                  type=\"checkbox\"\n                  aria-checked=\"true\"\n                  [checked]=\"value.selected\"\n                  (change)=\"toggleValue(value.query.query.value)\"\n                />\n                <span class=\"cx-facet-text\"\n                  >{{ value.name }} ({{ value.count }})</span\n                >\n              </label>\n            </div>\n          </li>\n          <li\n            class=\"cx-facet-toggle-btn\"\n            (click)=\"showLess(facet.name)\"\n            *ngIf=\"showAllPerFacetMap.get(facet.name)\"\n          >\n            {{ 'productList.showLess' | cxTranslate }}\n          </li>\n          <li\n            class=\"cx-facet-toggle-btn\"\n            (click)=\"showMore(facet.name)\"\n            *ngIf=\"\n              !showAllPerFacetMap.get(facet.name) &&\n              facet.values.length > minPerFacet\n            \"\n          >\n            {{ 'productList.showMore' | cxTranslate }}\n          </li>\n        </ul>\n      </div>\n    </div>\n  </ng-template>\n</div>\n\n<div class=\"cx-facet-mobile\">\n  <button\n    class=\"btn btn-action btn-block cx-facet-mobile-btn\"\n    (click)=\"openFilterModal(content)\"\n  >\n    {{ 'productList.filterBy.action' | cxTranslate }}\n  </button>\n</div>\n\n<!-- START ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n<div *ngIf=\"(updateParams$ | async) as params\">\n  <div class=\"cx-facet-mobile\" *ngIf=\"searchResult.breadcrumbs?.length\">\n    <div class=\"cx-facet-filter-container\">\n      <h4 class=\"cx-facet-filter-header\">\n        {{ 'productList.appliedFilter' | cxTranslate }}\n      </h4>\n      <div\n        class=\"cx-facet-filter-pill\"\n        role=\"filter\"\n        *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n      >\n        {{ breadcrumb.facetValueName }}\n        <button\n          type=\"button\"\n          class=\"close\"\n          aria-label=\"Close\"\n          (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n        >\n          <span aria-hidden=\"true\">\n            <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n          </span>\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n<!-- END ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n\n<ng-template #content let-c=\"close\" let-d=\"dismiss\">\n  <div class=\"modal-header\">\n    <h4 class=\"cx-facet-modal-title\" id=\"modal-title\">\n      {{ 'productList.filterBy.label' | cxTranslate }}\n    </h4>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"d('Cross click')\"\n    >\n      <span aria-hidden=\"true\">\n        <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n      </span>\n    </button>\n  </div>\n  <div class=\"modal-body cx-facet-modal-body\">\n    <form>\n      <div\n        class=\"form-group\"\n        *ngFor=\"let facet of searchResult.facets; index as facetId\"\n      >\n        <h4 class=\"cx-facet-modal-label\" for=\"megapixels\">{{ facet.name }}</h4>\n        <div class=\"input-group\">\n          <ul class=\"cx-facet-list\">\n            <li *ngFor=\"let value of facet.values; index as facetValueId\">\n              <div class=\"form-check\">\n                <label class=\"form-checkbox cx-facet-label\">\n                  <input\n                    class=\"form-check-input cx-facet-checkbox\"\n                    role=\"checkbox\"\n                    type=\"checkbox\"\n                    aria-checked=\"true\"\n                    [checked]=\"value.selected\"\n                    (change)=\"toggleValue(value.query.query.value)\"\n                  />\n                  <span class=\"cx-facet-text\"\n                    >{{ value.name }} ({{ value.count }})</span\n                  >\n                </label>\n              </div>\n            </li>\n          </ul>\n        </div>\n      </div>\n    </form>\n  </div>\n</ng-template>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -10500,7 +10853,7 @@ var ProductGridItemComponent = /** @class */ (function () {
     ProductGridItemComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-product-grid-item',
-                    template: "<a\n  [routerLink]=\"{ route: 'product', params: product | stripHtml } | cxUrl\"\n  class=\"cx-product-image-container\"\n>\n  <cx-media\n    class=\"cx-product-image\"\n    [container]=\"product.images?.PRIMARY\"\n    format=\"product\"\n    [alt]=\"product.summary\"\n  ></cx-media>\n</a>\n<a\n  [routerLink]=\"{ route: 'product', params: product | stripHtml } | cxUrl\"\n  class=\"cx-product-name\"\n  [innerHTML]=\"product.name\"\n  >{{ product.name }}</a\n>\n\n<div class=\"cx-product-rating\">\n  <cx-star-rating\n    [rating]=\"product?.averageRating\"\n    [disabled]=\"true\"\n  ></cx-star-rating>\n</div>\n<div class=\"cx-product-price-container\">\n  <div class=\"cx-product-price\" aria-label=\"Product price\">\n    {{ product.price.formattedValue }}\n  </div>\n</div>\n\n<cx-add-to-cart\n  *ngIf=\"product.stock.stockLevelStatus !== 'outOfStock'\"\n  [productCode]=\"product.code\"\n></cx-add-to-cart>\n",
+                    template: "<a\n  [routerLink]=\"{ cxRoute: 'product', params: product | stripHtml } | cxUrl\"\n  class=\"cx-product-image-container\"\n>\n  <cx-media\n    class=\"cx-product-image\"\n    [container]=\"product.images?.PRIMARY\"\n    format=\"product\"\n    [alt]=\"product.summary\"\n  ></cx-media>\n</a>\n<a\n  [routerLink]=\"{ cxRoute: 'product', params: product | stripHtml } | cxUrl\"\n  class=\"cx-product-name\"\n  [innerHTML]=\"product.name\"\n  >{{ product.name }}</a\n>\n\n<div class=\"cx-product-rating\">\n  <cx-star-rating\n    [rating]=\"product?.averageRating\"\n    [disabled]=\"true\"\n  ></cx-star-rating>\n</div>\n<div class=\"cx-product-price-container\">\n  <div class=\"cx-product-price\" aria-label=\"Product price\">\n    {{ product.price.formattedValue }}\n  </div>\n</div>\n\n<cx-add-to-cart\n  *ngIf=\"product.stock.stockLevelStatus !== 'outOfStock'\"\n  [productCode]=\"product.code\"\n></cx-add-to-cart>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -10520,7 +10873,7 @@ var ProductListItemComponent = /** @class */ (function () {
     ProductListItemComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-product-list-item',
-                    template: "<div class=\"row\">\n  <div class=\"col-12 col-md-4\">\n    <a\n      [routerLink]=\"{ route: 'product', params: product | stripHtml } | cxUrl\"\n      class=\"cx-product-image-container\"\n    >\n      <cx-media\n        class=\"cx-product-image\"\n        [container]=\"product.images?.PRIMARY\"\n        format=\"product\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n    </a>\n  </div>\n  <div class=\"col-12 col-md-8\">\n    <a\n      [routerLink]=\"{ route: 'product', params: product | stripHtml } | cxUrl\"\n      class=\"cx-product-name\"\n      [innerHtml]=\"product.name\"\n      >{{ product.name }}</a\n    >\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"cx-product-price\" aria-label=\"Product price\">\n      {{ product.price?.formattedValue }}\n    </div>\n    <div class=\"row\">\n      <div class=\"col-12 col-md-8\">\n        <p class=\"cx-product-summary\" [innerHtml]=\"product.summary\">\n          {{ product.summary }}\n        </p>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <cx-add-to-cart\n          *ngIf=\"product.stock.stockLevelStatus !== 'outOfStock'\"\n          [productCode]=\"product.code\"\n        ></cx-add-to-cart>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                    template: "<div class=\"row\">\n  <div class=\"col-12 col-md-4\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product | stripHtml } | cxUrl\"\n      class=\"cx-product-image-container\"\n    >\n      <cx-media\n        class=\"cx-product-image\"\n        [container]=\"product.images?.PRIMARY\"\n        format=\"product\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n    </a>\n  </div>\n  <div class=\"col-12 col-md-8\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product | stripHtml } | cxUrl\"\n      class=\"cx-product-name\"\n      [innerHtml]=\"product.name\"\n      >{{ product.name }}</a\n    >\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"cx-product-price\" aria-label=\"Product price\">\n      {{ product.price?.formattedValue }}\n    </div>\n    <div class=\"row\">\n      <div class=\"col-12 col-md-8\">\n        <p class=\"cx-product-summary\" [innerHtml]=\"product.summary\">\n          {{ product.summary }}\n        </p>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <cx-add-to-cart\n          *ngIf=\"product.stock.stockLevelStatus !== 'outOfStock'\"\n          [productCode]=\"product.code\"\n        ></cx-add-to-cart>\n      </div>\n    </div>\n  </div>\n</div>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -10582,83 +10935,6 @@ var ProductListModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-// import { AbstractProductComponent } from '../abstract-product-component';
-var ProductReferencesComponent = /** @class */ (function () {
-    function ProductReferencesComponent() {
-    }
-    ProductReferencesComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-product-references',
-                    template: "",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: [""]
-                }] }
-    ];
-    return ProductReferencesComponent;
-}()); /*extends AbstractProductComponent {
-
-    @Input() productCode;
-
-    productCodes: Array<String> = [];
-
-    protected fetchData() {
-        // load the product data by context parameters
-        if (this.contextParameters.productCode) {
-            this.productLoader.loadReferences(this.contextParameters.productCode);
-            this.productLoader.getSubscription(this.contextParameters.productCode + 'references').subscribe((refData) => {
-                if (refData) {
-                    this.createCodeList(refData);
-                    this.cd.detectChanges();
-                }
-            });
-        }
-        super.fetchData();
-    }
-
-    createCodeList(references) {
-        if (!this.component || !this.component.productReferenceTypes || !references[this.component.productReferenceTypes]) {
-            return;
-        }
-        references[this.component.productReferenceTypes].forEach((item, index) => {
-            if (!this.component.maximumNumberProducts || index < this.component.maximumNumberProducts) {
-                this.productCodes.push(item.target.code);
-            }
-        });
-    }
-}*/
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var ProductReferencesModule = /** @class */ (function () {
-    function ProductReferencesModule() {
-    }
-    ProductReferencesModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        CommonModule,
-                        RouterModule,
-                        // MediaModule,
-                        ProductCarouselModule,
-                        ConfigModule.withConfig((/** @type {?} */ ({
-                            cmsComponents: {
-                                ProductReferencesComponent: { selector: 'cx-product-references' },
-                            },
-                        }))),
-                    ],
-                    declarations: [ProductReferencesComponent],
-                    entryComponents: [ProductReferencesComponent],
-                    exports: [ProductReferencesComponent],
-                },] }
-    ];
-    return ProductReferencesModule;
-}());
 
 /**
  * @fileoverview added by tsickle
@@ -11864,6 +12140,7 @@ var CmsLibModule = /** @class */ (function () {
                         ProductListModule,
                         ProductTabsModule,
                         ProductCarouselModule,
+                        ProductReferencesModule,
                         OrderDetailsModule,
                         PaymentMethodsModule,
                         UpdateEmailModule,
@@ -12353,7 +12630,7 @@ var PaymentFormComponent = /** @class */ (function () {
                 _this.next();
             }
             else if (results.decision === 'REJECT') {
-                _this.globalMessageService.add('Invalid Address', GlobalMessageType.MSG_TYPE_ERROR);
+                _this.globalMessageService.add({ key: 'addressForm.invalidAddress' }, GlobalMessageType.MSG_TYPE_ERROR);
                 _this.checkoutService.clearAddressVerificationResults();
             }
             else if (results.decision === 'REVIEW') {
@@ -12684,7 +12961,10 @@ var PaymentMethodComponent = /** @class */ (function () {
             else {
                 Object.keys(paymentInfo).forEach(function (key) {
                     if (key.startsWith('InvalidField')) {
-                        _this.globalMessageService.add('InvalidField: ' + paymentInfo[key], GlobalMessageType.MSG_TYPE_ERROR);
+                        _this.globalMessageService.add({
+                            key: 'paymentMethods.invalidField',
+                            params: { field: paymentInfo[key] },
+                        }, GlobalMessageType.MSG_TYPE_ERROR);
                     }
                 });
                 _this.checkoutService.clearCheckoutStep(3);
@@ -13229,7 +13509,7 @@ var ShippingAddressComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.routingService.go({ route: 'cart' });
+        this.routingService.go({ cxRoute: 'cart' });
     };
     /**
      * @return {?}
@@ -13332,7 +13612,7 @@ var PlaceOrderComponent = /** @class */ (function () {
             .getOrderDetails()
             .pipe(filter(function (order) { return Object.keys(order).length !== 0; }))
             .subscribe(function () {
-            _this.routingService.go({ route: ['orderConfirmation'] });
+            _this.routingService.go({ cxRoute: 'orderConfirmation' });
         });
     };
     /**
@@ -13349,7 +13629,7 @@ var PlaceOrderComponent = /** @class */ (function () {
     PlaceOrderComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-place-order',
-                    template: "<div class=\"cx-place-order-form form-check\">\n  <label>\n    <input class=\"form-check-input\" type=\"checkbox\" (change)=\"toggleTAndC()\" />\n    <span class=\"form-check-label\">\n      {{ 'checkoutReview.confirmThatRead' | cxTranslate }}\n      <a\n        [routerLink]=\"{ route: ['termsAndConditions'] } | cxUrl\"\n        class=\"cx-tc-link\"\n        target=\"_blank\"\n      >\n        {{ 'checkoutReview.termsAndConditions' | cxTranslate }}\n      </a>\n    </span>\n  </label>\n</div>\n\n<button\n  [disabled]=\"!tAndCToggler\"\n  (click)=\"placeOrder()\"\n  class=\"btn btn-primary btn-block\"\n>\n  {{ 'checkoutReview.placeOrder' | cxTranslate }}\n</button>\n",
+                    template: "<div class=\"cx-place-order-form form-check\">\n  <label>\n    <input class=\"form-check-input\" type=\"checkbox\" (change)=\"toggleTAndC()\" />\n    <span class=\"form-check-label\">\n      {{ 'checkoutReview.confirmThatRead' | cxTranslate }}\n      <a\n        [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n        class=\"cx-tc-link\"\n        target=\"_blank\"\n      >\n        {{ 'checkoutReview.termsAndConditions' | cxTranslate }}\n      </a>\n    </span>\n  </label>\n</div>\n\n<button\n  [disabled]=\"!tAndCToggler\"\n  (click)=\"placeOrder()\"\n  class=\"btn btn-primary btn-block\"\n>\n  {{ 'checkoutReview.placeOrder' | cxTranslate }}\n</button>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     styles: [""]
                 }] }
@@ -13435,7 +13715,7 @@ var OrderConfirmationPageGuard = /** @class */ (function () {
                 return true;
             }
             else {
-                _this.routingService.go({ route: 'orders' });
+                _this.routingService.go({ cxRoute: 'orders' });
                 return false;
             }
         }));
@@ -13603,7 +13883,7 @@ var OrderConfirmationComponent = /** @class */ (function () {
     OrderConfirmationComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-order-confirmation',
-                    template: "<div class=\"cx-page\" *ngIf=\"(order$ | async) as order\">\n  <header class=\"cx-page__header\">\n    <h1 class=\"cx-page__title\">\n      {{ 'checkoutOrderConfirmation.confirmationOfOrder' | cxTranslate }}\n      {{ order.code }}\n    </h1>\n  </header>\n\n  <div class=\"cx-order-confirmation\">\n    <div class=\"cx-order-confirmation-message\">\n      <h2>{{ 'checkoutOrderConfirmation.thankYou' | cxTranslate }}</h2>\n      <p>\n        {{\n          'checkoutOrderConfirmation.invoiceHasBeenSentByEmail' | cxTranslate\n        }}\n      </p>\n      <!-- <a href=\"#\" class=\"btn-link\">Print Page</a> -->\n    </div>\n\n    <cx-add-to-home-screen-banner></cx-add-to-home-screen-banner>\n\n    <div class=\"cx-order-review-summary\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getAddressCardContent(order.deliveryAddress) | async\"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"\n                  getBillingAddressCardContent(\n                    order.paymentInfo.billingAddress\n                  ) | async\n                \"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"\n                  getDeliveryModeCardContent(order.deliveryMode) | async\n                \"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getPaymentInfoCardContent(order.paymentInfo) | async\"\n              ></cx-card>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"cx-order-items container\">\n      <h4 class=\"cx-order-items-header\">\n        {{ 'checkoutOrderConfirmation.orderItems' | cxTranslate }}\n      </h4>\n      <cx-cart-item-list\n        [items]=\"order.entries\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n\n    <div class=\"cx-order-summary container\">\n      <div class=\"row justify-content-end\">\n        <div class=\"col-sm-12 col-md-6 col-lg-5 col-xl-4\">\n          <cx-order-summary [cart]=\"order\"></cx-order-summary>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                    template: "<div class=\"cx-page\" *ngIf=\"(order$ | async) as order\">\n  <header class=\"cx-page-header\">\n    <h1 class=\"cx-page-title\">\n      {{ 'checkoutOrderConfirmation.confirmationOfOrder' | cxTranslate }}\n      {{ order.code }}\n    </h1>\n  </header>\n\n  <div class=\"cx-order-confirmation\">\n    <div class=\"cx-order-confirmation-message\">\n      <h2>{{ 'checkoutOrderConfirmation.thankYou' | cxTranslate }}</h2>\n      <p>\n        {{\n          'checkoutOrderConfirmation.invoiceHasBeenSentByEmail' | cxTranslate\n        }}\n      </p>\n      <!-- <a href=\"#\" class=\"btn-link\">Print Page</a> -->\n    </div>\n\n    <cx-add-to-home-screen-banner></cx-add-to-home-screen-banner>\n\n    <div class=\"cx-order-review-summary\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getAddressCardContent(order.deliveryAddress) | async\"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"\n                  getBillingAddressCardContent(\n                    order.paymentInfo.billingAddress\n                  ) | async\n                \"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"\n                  getDeliveryModeCardContent(order.deliveryMode) | async\n                \"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getPaymentInfoCardContent(order.paymentInfo) | async\"\n              ></cx-card>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"cx-order-items container\">\n      <h4 class=\"cx-order-items-header\">\n        {{ 'checkoutOrderConfirmation.orderItems' | cxTranslate }}\n      </h4>\n      <cx-cart-item-list\n        [items]=\"order.entries\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n\n    <div class=\"cx-order-summary container\">\n      <div class=\"row justify-content-end\">\n        <div class=\"col-sm-12 col-md-6 col-lg-5 col-xl-4\">\n          <cx-order-summary [cart]=\"order\"></cx-order-summary>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -13967,6 +14247,43 @@ var HardcodedCheckoutComponent = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @type {?} */
+var defaultStorefrontRoutesConfig = {
+    home: { paths: [''] },
+    cart: { paths: ['cart'] },
+    search: { paths: ['search/:query'] },
+    // semantic links for login related pages
+    login: { paths: ['login'] },
+    register: { paths: ['login/register'] },
+    forgotPassword: { paths: ['login/forgot-password'] },
+    checkout: { paths: ['checkout'] },
+    orderConfirmation: { paths: ['order-confirmation'] },
+    product: {
+        paths: ['product/:productCode'],
+        paramsMapping: { productCode: 'code' },
+    },
+    category: {
+        paths: ['category/:categoryCode'],
+        paramsMapping: { categoryCode: 'code' },
+    },
+    brand: { paths: ['Brands/:brandName/c/:brandCode'] },
+    termsAndConditions: { paths: ['termsAndConditions'] },
+    orderDetails: {
+        paths: ['my-account/orders/:orderCode'],
+        paramsMapping: { orderCode: 'code' },
+    },
+};
+/** @type {?} */
+var defaultRoutingConfig = {
+    routing: {
+        routes: defaultStorefrontRoutesConfig,
+    },
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var CartNotEmptyGuard = /** @class */ (function () {
     function CartNotEmptyGuard(cartService, routingService) {
         this.cartService = cartService;
@@ -13982,7 +14299,7 @@ var CartNotEmptyGuard = /** @class */ (function () {
         var _this = this;
         return this.cartService.getLoaded().pipe(skipWhile(function (loaded) { return !loaded; }), switchMap(function () { return _this.cartService.getActive(); }), map(function (cart) {
             if (_this.cartService.isEmpty(cart)) {
-                _this.routingService.go({ route: 'home' });
+                _this.routingService.go({ cxRoute: 'home' });
                 return false;
             }
             return true;
@@ -14104,63 +14421,16 @@ var ProductPageModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-var defaultStorefrontRoutesConfig = {
-    home: { paths: [''] },
-    cart: { paths: ['cart'] },
-    search: { paths: ['search/:query'] },
-    login: { paths: ['login'] },
-    register: { paths: ['register'] },
-    resetPassword: { paths: ['login/pw/change'] },
-    forgotPassword: { paths: ['forgot-password'] },
-    checkout: { paths: ['checkout'] },
-    orderConfirmation: { paths: ['order-confirmation'] },
-    product: {
-        paths: ['product/:productCode'],
-        paramsMapping: { productCode: 'code' },
-    },
-    category: {
-        paths: ['category/:categoryCode'],
-        paramsMapping: { categoryCode: 'code' },
-    },
-    brand: { paths: ['Brands/:brandName/c/:brandCode'] },
-    termsAndConditions: { paths: ['termsAndConditions'] },
-    orders: { paths: ['my-account/orders'] },
-    orderDetails: {
-        paths: ['my-account/orders/:orderCode'],
-        paramsMapping: { orderCode: 'code' },
-    },
-    addressBook: { paths: ['my-account/address-book'] },
-    updatePassword: { paths: ['my-account/update-password'] },
-    paymentManagement: { paths: ['my-account/payment-details'] },
-    updateEmail: { paths: ['my-account/update-email'] },
-    updateProfile: { paths: ['my-account/update-profile'] },
-    closeAccount: { paths: ['my-account/close-account'] },
-};
-/** @type {?} */
-var defaultRoutingConfig = {
-    routing: {
-        routes: defaultStorefrontRoutesConfig,
-    },
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
 var pageModules = [
     CartPageModule,
     OrderConfirmationPageModule,
     ProductPageModule,
     GuardsModule,
 ];
-var ɵ0$5 = { pageLabel: 'homepage', cxRoute: 'home' }, ɵ1$1 = { pageLabel: 'address-book', cxRoute: 'addressBook' }, ɵ2 = { pageLabel: 'updatePassword', cxRoute: 'updatePassword' }, ɵ3 = { pageLabel: 'orders', cxRoute: 'orders' }, ɵ4 = {
+var ɵ0$5 = { pageLabel: 'homepage', cxRoute: 'home' }, ɵ1$1 = {
     pageLabel: 'multiStepCheckoutSummaryPage',
     cxRoute: 'checkout',
-}, ɵ5 = { pageLabel: 'login', cxRoute: 'login' }, ɵ6 = { pageLabel: 'search', cxRoute: 'search' }, ɵ7 = { cxRoute: 'category' }, ɵ8 = { cxRoute: 'brand' }, ɵ9 = { pageLabel: 'update-email', cxRoute: 'updateEmail' }, ɵ10 = { pageLabel: 'payment-details', cxRoute: 'paymentManagement' }, ɵ11 = { pageLabel: 'order', cxRoute: 'orderDetails' }, ɵ12 = { pageLabel: 'forgotPassword', cxRoute: 'forgotPassword' }, ɵ13 = { pageLabel: 'resetPassword', cxRoute: 'resetPassword' }, ɵ14 = {
-    pageLabel: 'update-profile',
-    cxRoute: 'updateProfile',
-}, ɵ15 = { pageLabel: 'close-account', cxRoute: 'closeAccount' };
+}, ɵ2 = { pageLabel: 'search', cxRoute: 'search' }, ɵ3 = { cxRoute: 'category' }, ɵ4 = { cxRoute: 'brand' }, ɵ5 = { pageLabel: 'order', cxRoute: 'orderDetails' };
 var PagesModule = /** @class */ (function () {
     function PagesModule() {
     }
@@ -14181,96 +14451,34 @@ var PagesModule = /** @class */ (function () {
                                 data: ɵ0$5,
                             },
                             {
-                                // This route can be dropped only when the link from CMS in MyAccount dropdown menu ("my-account/address-book")
-                                // is the same as the page label ("address-book"). Or when we have a mapping for content pages.
                                 path: null,
-                                canActivate: [AuthGuard, CmsPageGuard],
-                                data: ɵ1$1,
+                                canActivate: [AuthGuard, CmsPageGuard, CartNotEmptyGuard],
                                 component: PageLayoutComponent,
+                                data: ɵ1$1,
                             },
                             {
                                 path: null,
+                                canActivate: [CmsPageGuard],
                                 component: PageLayoutComponent,
-                                canActivate: [AuthGuard, CmsPageGuard],
                                 data: ɵ2,
                             },
                             {
                                 path: null,
-                                canActivate: [AuthGuard, CmsPageGuard],
+                                canActivate: [CmsPageGuard],
                                 component: PageLayoutComponent,
                                 data: ɵ3,
                             },
                             {
                                 path: null,
-                                canActivate: [AuthGuard, CmsPageGuard, CartNotEmptyGuard],
+                                canActivate: [CmsPageGuard],
                                 component: PageLayoutComponent,
                                 data: ɵ4,
                             },
                             {
                                 path: null,
-                                canActivate: [NotAuthGuard, CmsPageGuard],
+                                canActivate: [AuthGuard, CmsPageGuard],
                                 component: PageLayoutComponent,
                                 data: ɵ5,
-                            },
-                            {
-                                path: null,
-                                canActivate: [CmsPageGuard],
-                                component: PageLayoutComponent,
-                                data: ɵ6,
-                            },
-                            {
-                                path: null,
-                                canActivate: [CmsPageGuard],
-                                component: PageLayoutComponent,
-                                data: ɵ7,
-                            },
-                            {
-                                path: null,
-                                canActivate: [CmsPageGuard],
-                                component: PageLayoutComponent,
-                                data: ɵ8,
-                            },
-                            {
-                                path: null,
-                                component: PageLayoutComponent,
-                                canActivate: [AuthGuard, CmsPageGuard],
-                                data: ɵ9,
-                            },
-                            {
-                                path: null,
-                                canActivate: [AuthGuard, CmsPageGuard],
-                                data: ɵ10,
-                                component: PageLayoutComponent,
-                            },
-                            {
-                                path: null,
-                                canActivate: [AuthGuard, CmsPageGuard],
-                                component: PageLayoutComponent,
-                                data: ɵ11,
-                            },
-                            {
-                                path: null,
-                                canActivate: [NotAuthGuard, CmsPageGuard],
-                                component: PageLayoutComponent,
-                                data: ɵ12,
-                            },
-                            {
-                                path: null,
-                                component: PageLayoutComponent,
-                                canActivate: [NotAuthGuard, CmsPageGuard],
-                                data: ɵ13,
-                            },
-                            {
-                                path: null,
-                                component: PageLayoutComponent,
-                                canActivate: [AuthGuard, CmsPageGuard],
-                                data: ɵ14,
-                            },
-                            {
-                                path: null,
-                                component: PageLayoutComponent,
-                                canActivate: [AuthGuard, CmsPageGuard],
-                                data: ɵ15,
                             },
                         ]),
                     ]),
@@ -14392,6 +14600,10 @@ var cart = {
         salesTax: 'Sales Tax:',
         total: 'Total:',
     },
+    miniCart: {
+        item: '{{count}} item currently in your cart',
+        item_plural: '{{count}} items currently in your cart',
+    },
 };
 
 /**
@@ -14419,6 +14631,7 @@ var checkout = {
         thankYou: 'Thank you for your order!',
         invoiceHasBeenSentByEmail: 'An invoice has been sent by email. You should receive it soon.',
         orderItems: 'Order Items',
+        orderPlacedSuccessfully: 'Order placed successfully',
     },
     checkoutReview: {
         review: 'Review',
@@ -14469,6 +14682,15 @@ var common = {
         date: 'Date',
         orderNumber: 'Order Number',
     },
+    httpHandlers: {
+        badGateway: 'A server error occurred. Please try again later.',
+        badRequestPleaseLoginAgain: '{{ errorMessage }}. Please login again.',
+        badRequestOldPasswordIncorrect: 'Old password incorrect.',
+        conflict: 'Already exists',
+        forbidden: 'You are not authorized to perform this action.',
+        gatewayTimeout: 'The server did not responded, please try again later.',
+        unknownError: 'An unknown error occured',
+    },
 };
 
 /**
@@ -14483,6 +14705,10 @@ var myAccount = {
         status: 'Status',
         shippedOn: 'Shipped on',
         inProcess: 'In process...',
+        deliveryStatus_READY_FOR_PICKUP: 'Ready for pickup',
+        deliveryStatus_PICKUP_COMPLETE: 'Picked up',
+        deliveryStatus_SHIPPED: 'Shipped',
+        deliveryStatus_CANCELLED: 'Cancelled',
         statusDisplay_cancelled: 'Cancelled',
         statusDisplay_cancelling: 'Cancel Pending',
         statusDisplay_completed: 'Completed',
@@ -14501,6 +14727,13 @@ var myAccount = {
         noOrders: 'We have no order records for this account.',
         startShopping: 'Start Shopping',
         sortByMostRecent: 'Sort by Most recent',
+    },
+    closeAccount: {
+        confirmAccountClosure: 'Confirm Account Closure',
+        confirmAccountClosureMessage: 'Are you sure you want to close your account?',
+        closeMyAccount: 'CLOSE MY ACCOUNT',
+        accountClosedSuccessfully: 'Account closed with success',
+        closeAccountRetentionInfo: 'When you close your account, your profile information will be kept for the retention period mandated by the laws and regulations of your country. Customer Support will be able to assist you with any order history or proof of purchase needs during this time.<br/><br/>At the end of the retention period, the following profile information will be deleted and will no longer be accessible to you or anyone else:<br/><br/><ul><li>email addresses</li><li>contact information</li><li>shipping details</li><li>delivery preferences</li><li>consent management settings</li><li>account history</li><li>payment details</li><li>order history</li></ul>',
     },
 };
 
@@ -14580,6 +14813,7 @@ var pwa = {
         noInstallationNeeded: 'No installation needed',
         fastAccessToApplication: 'Fast access to application',
         addToHomeScreen: 'Add to home screen',
+        addedToHomeScreen: 'SAP Storefront was added to your home screen',
     },
 };
 
@@ -14623,6 +14857,8 @@ var user = {
             placeholder: 'Enter email',
         },
         enterValidEmail: 'Please enter a valid email.',
+        passwordResetEmailSent: 'An email has been sent to you with information on how to reset your password.',
+        passwordResetSuccess: 'Success! You can now login using your new password.',
     },
     loginForm: {
         forgotPassword: 'Forgot password?',
@@ -14676,8 +14912,10 @@ var user = {
         selectTitle: 'Select Title',
         passwordMinRequirements: 'Password must be six characters minimum, with one uppercase letter, one number, one symbol',
         bothPasswordMustMatch: 'Both password must match',
+        titleRequired: 'Title is required.',
     },
     login: {
+        // pick another name or move it to common?
         userGreeting: 'Hi, {{name}}',
         signInRegister: 'Sign In / Register',
     },
@@ -14691,12 +14929,13 @@ var user = {
             placeholder: 'Enter email',
         },
         enterValidEmail: 'Please enter a valid email.',
-        bothPasswordMustMatch: 'Both password must match',
+        bothEmailMustMatch: 'Both emails must match',
         password: {
             label: 'Password',
             placeholder: 'Enter password',
         },
         pleaseInputPassword: 'Please input password',
+        emailUpdateSuccess: 'Success. Please sign in with {{ newUid }}',
     },
     updatePasswordForm: {
         oldPassword: {
@@ -14714,6 +14953,7 @@ var user = {
             placeholder: 'Confirm Password',
         },
         bothPasswordMustMatch: 'Both password must match',
+        passwordUpdateSuccess: 'Password updated with success',
     },
     updateProfileForm: {
         title: '',
@@ -14728,6 +14968,7 @@ var user = {
             placeholder: 'Last name',
         },
         lastNameIsRequired: 'Last name is required.',
+        profileUpdateSuccess: 'Personal details successfully updated',
     },
 };
 
@@ -14761,6 +15002,7 @@ var payment = {
     paymentMethods: {
         paymentMethods: 'Payment methods',
         newPaymentMethodsAreAddedDuringCheckout: 'New payment methods are added during checkout.',
+        invalidField: 'InvalidField: {{ field }}',
     },
     paymentCard: {
         deleteConfirmation: 'Are you sure you want to delete this payment method?',
@@ -14809,6 +15051,11 @@ var address = {
         aptSuite: 'Apt, Suite',
         selectOne: 'Select One...',
         setAsDefault: 'Set as default',
+        titleRequired: 'Title is required.',
+        userAddressAddSuccess: 'New address was added successfully!',
+        userAddressUpdateSuccess: 'Address updated successfully!',
+        userAddressDeleteSuccess: 'Address deleted successfully!',
+        invalidAddress: 'Invalid Address',
     },
     addressBook: {
         addNewShippingAddress: 'Add a new shipping address',
@@ -14833,36 +15080,11 @@ var address = {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-var closeAccount = {
-    closeAccount: {
-        info: {
-            retention: 'When you close your account, your profile information will be kept for the retention period mandated by the laws and regulations of your country. Customer Support will be able to assist you with any order history or proof of purchase needs during this time.<br/><br/>At the end of the retention period, the following profile information will be deleted and will no longer be accessible to you or anyone else:<br/><br/><ul><li>email addresses</li><li>contact information</li><li>shipping details</li><li>delivery preferences</li><li>consent management settings</li><li>account history</li><li>payment details</li><li>order history</li></ul>',
-        },
-        message: {
-            success: 'Account closed with success',
-        },
-        modal: {
-            title: 'Confirm Account Closure',
-            confirmation: 'Are you sure you want to close your account?',
-        },
-        action: {
-            cancel: 'Cancel',
-            closeMyAccount: 'CLOSE MY ACCOUNT',
-        },
-    },
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
 var translations = {
     en: {
         address: address,
         cart: cart,
         checkout: checkout,
-        closeAccount: closeAccount,
         common: common,
         myAccount: myAccount,
         payment: payment,
@@ -14883,6 +15105,6 @@ var translations = {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AddToCartComponent, AddToCartModule, AddedToCartDialogComponent, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartSharedModule, OrderSummaryComponent, CartTotalsComponent, CartComponentModule, MiniCartComponent, MiniCartModule, CmsLibModule, BannerComponent, BannerModule, LinkComponent, LinkModule, ParagraphComponent, CmsParagraphModule, TabParagraphContainerComponent, TabParagraphContainerModule, GlobalMessageComponentModule, GlobalMessageComponent, IconLoaderService, IconComponent, ICON_TYPES, IconConfig, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, CloseAccountModule, CloseAccountModalComponent, CloseAccountComponent, ForgotPasswordComponent, ForgotPasswordModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, PaymentMethodsComponent, PaymentMethodsModule, ResetPasswordFormComponent, ResetPasswordModule, UpdateEmailFormComponent, UpdateEmailComponent, UpdateEmailModule, UpdatePasswordFormComponent, UpdatePasswordComponent, UpdatePasswordModule, UpdateProfileFormComponent, UpdateProfileComponent, UpdateProfileModule, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, FooterNavigationComponent, FooterNavigationModule, NavigationComponent, NavigationModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, CurrentProductService, ProductCarouselComponent, ProductCarouselModule, ProductDetailsComponent, ProductDetailsModule, ProductImagesComponent, ProductSummaryComponent, ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent, ProductDetailOutlets, ProductTabsOutlets, ProductReferencesComponent, ProductReferencesModule, ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule, AbstractStoreItemComponent, ScheduleComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderPaginationDetailsComponent, StoreFinderListComponent, StoreFinderSearchResultComponent, StoreFinderSearchComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StoreFinderComponent, StoreFinderModule, LoginFormComponent, LoginFormModule, LoginComponent, LoginModule, LogoutGuard, LogoutModule, RegisterComponent, RegisterComponentModule, UserComponentModule, OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService, StyleRefDirective, StyleRefModule, ComponentWrapperDirective, PageComponentModule, defaultCmsContentConfig, CmsComponentData, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, pwaConfigurationFactory, pwaFactory, PwaModule, PWAModuleConfig, defaultPWAModuleConfig, SeoMetaService, initSeoService, SeoModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, LayoutModule, MainModule, StorefrontComponent, CheckoutComponentModule, MultiStepCheckoutModule, ShippingAddressModule, OrderConfirmationModule, SuggestedAddressDialogComponent, AddressFormComponent, PaymentFormComponent, ReviewSubmitComponent, DeliveryModeComponent, MultiStepCheckoutComponent, OrderConfirmationComponent, CmsRouteModule, CmsModule$1 as CmsModule, CmsPageGuard, CmsMappingService, CmsRoutesService, StorefrontModule, SuffixRoutesModule, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, UiModule, FormComponentsModule, ItemCounterComponent, GenericLinkComponent, ListNavigationModule, PaginationComponent, SortingComponent, MediaComponent, MediaModule, MediaService, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, OnlyNumberDirective, translations, CartTotalsModule as ɵd, defaultIconConfig as ɵe, NavigationUIComponent as ɵh, NavigationComponentService as ɵg, ProductCarouselService as ɵn, ProductTabsComponent as ɵm, LoginComponentService as ɵr, OutletStyleService as ɵl, defaultCartPageConfig as ɵs, AddToHomeScreenService as ɵt, BootstrapModule as ɵc, CheckoutDetailsService as ɵbe, DeliveryModeModule as ɵv, BillingAddressFormComponent as ɵz, BillingAddressFormModule as ɵy, PaymentFormModule as ɵx, PaymentMethodComponent as ɵba, PaymentMethodModule as ɵw, PlaceOrderComponent as ɵbd, PlaceOrderModule as ɵbc, ReviewSubmitModule as ɵbb, AddressFormModule as ɵk, ShippingAddressComponent as ɵu, PromotionsComponent as ɵb, PromotionsModule as ɵa, guards$1 as ɵbf, OrderConfirmationPageGuard as ɵbg, addCmsRoute as ɵbh, guards as ɵo, CmsGuardsService as ɵq, CmsI18nService as ɵp, provideConfigFromMetaTags as ɵbp, suffixUrlMatcher as ɵbo, HardcodedCheckoutComponent as ɵbn, defaultRoutingConfig as ɵbj, defaultStorefrontRoutesConfig as ɵbi, CartNotEmptyGuard as ɵbm, GuardsModule as ɵbl, OrderConfirmationPageModule as ɵbk, CardComponent as ɵj, CardModule as ɵi, GenericLinkModule as ɵf, address as ɵbq, cart as ɵbr, checkout as ɵbs, closeAccount as ɵbt, common as ɵbu, myAccount as ɵbv, payment as ɵbw, product as ɵbx, pwa as ɵby, storeFinder as ɵbz, user as ɵca };
+export { AddToCartComponent, AddToCartModule, AddedToCartDialogComponent, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartSharedModule, OrderSummaryComponent, CartTotalsComponent, CartComponentModule, MiniCartComponent, MiniCartModule, CmsLibModule, BannerComponent, BannerModule, LinkComponent, LinkModule, ParagraphComponent, CmsParagraphModule, TabParagraphContainerComponent, TabParagraphContainerModule, GlobalMessageComponentModule, GlobalMessageComponent, fontawesomeIconConfig, IconLoaderService, IconComponent, ICON_TYPES, IconConfig, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, CloseAccountModule, CloseAccountModalComponent, CloseAccountComponent, ForgotPasswordComponent, ForgotPasswordModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, PaymentMethodsComponent, PaymentMethodsModule, ResetPasswordFormComponent, ResetPasswordModule, UpdateEmailFormComponent, UpdateEmailComponent, UpdateEmailModule, UpdatePasswordFormComponent, UpdatePasswordComponent, UpdatePasswordModule, UpdateProfileFormComponent, UpdateProfileComponent, UpdateProfileModule, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, FooterNavigationComponent, FooterNavigationModule, NavigationComponent, NavigationModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, CurrentProductService, ProductDetailsComponent, ProductDetailsModule, ProductImagesComponent, ProductSummaryComponent, ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent, ProductDetailOutlets, ProductTabsOutlets, ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule, AbstractStoreItemComponent, ScheduleComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderPaginationDetailsComponent, StoreFinderListComponent, StoreFinderSearchResultComponent, StoreFinderSearchComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StoreFinderComponent, StoreFinderModule, LoginFormComponent, LoginFormModule, LoginComponent, LoginModule, LogoutGuard, LogoutModule, RegisterComponent, RegisterComponentModule, UserComponentModule, OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService, StyleRefDirective, StyleRefModule, ComponentWrapperDirective, PageComponentModule, defaultCmsContentConfig, CmsComponentData, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, pwaConfigurationFactory, pwaFactory, PwaModule, PWAModuleConfig, defaultPWAModuleConfig, SeoMetaService, initSeoService, SeoModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, LayoutModule, MainModule, StorefrontComponent, CheckoutComponentModule, MultiStepCheckoutModule, ShippingAddressModule, OrderConfirmationModule, SuggestedAddressDialogComponent, AddressFormComponent, PaymentFormComponent, ReviewSubmitComponent, DeliveryModeComponent, MultiStepCheckoutComponent, OrderConfirmationComponent, CmsRouteModule, CmsModule$1 as CmsModule, CmsPageGuard, CmsMappingService, CmsRoutesService, StorefrontModule, SuffixRoutesModule, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, UiModule, FormComponentsModule, ItemCounterComponent, GenericLinkComponent, ListNavigationModule, PaginationComponent, SortingComponent, MediaComponent, MediaModule, MediaService, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, OnlyNumberDirective, translations, CartTotalsModule as ɵd, NavigationUIComponent as ɵg, NavigationComponentService as ɵf, ProductCarouselService as ɵm, ProductReferencesService as ɵo, SharedCarouselService as ɵn, ProductTabsComponent as ɵl, LoginComponentService as ɵs, OutletStyleService as ɵk, defaultCartPageConfig as ɵt, AddToHomeScreenService as ɵu, htmlLangProvider as ɵv, setHtmlLangAttribute as ɵw, BootstrapModule as ɵc, CheckoutDetailsService as ɵbh, DeliveryModeModule as ɵy, BillingAddressFormComponent as ɵbc, BillingAddressFormModule as ɵbb, PaymentFormModule as ɵba, PaymentMethodComponent as ɵbd, PaymentMethodModule as ɵz, PlaceOrderComponent as ɵbg, PlaceOrderModule as ɵbf, ReviewSubmitModule as ɵbe, AddressFormModule as ɵj, ShippingAddressComponent as ɵx, PromotionsComponent as ɵb, PromotionsModule as ɵa, guards$1 as ɵbi, OrderConfirmationPageGuard as ɵbj, addCmsRoute as ɵbk, guards as ɵp, CmsGuardsService as ɵr, CmsI18nService as ɵq, provideConfigFromMetaTags as ɵbs, suffixUrlMatcher as ɵbr, HardcodedCheckoutComponent as ɵbq, defaultRoutingConfig as ɵbm, defaultStorefrontRoutesConfig as ɵbl, CartNotEmptyGuard as ɵbp, GuardsModule as ɵbo, OrderConfirmationPageModule as ɵbn, CardComponent as ɵi, CardModule as ɵh, GenericLinkModule as ɵe, address as ɵbt, cart as ɵbu, checkout as ɵbv, common as ɵbw, myAccount as ɵbx, payment as ɵby, product as ɵbz, pwa as ɵca, storeFinder as ɵcb, user as ɵcc };
 
 //# sourceMappingURL=spartacus-storefront.js.map

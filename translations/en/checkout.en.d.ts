@@ -18,6 +18,7 @@ export declare const checkout: {
         thankYou: string;
         invoiceHasBeenSentByEmail: string;
         orderItems: string;
+        orderPlacedSuccessfully: string;
     };
     checkoutReview: {
         review: string;

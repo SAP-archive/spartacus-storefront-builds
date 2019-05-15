@@ -7,6 +7,8 @@ export declare const user: {
             placeholder: string;
         };
         enterValidEmail: string;
+        passwordResetEmailSent: string;
+        passwordResetSuccess: string;
     };
     loginForm: {
         forgotPassword: string;
@@ -59,6 +61,7 @@ export declare const user: {
         selectTitle: string;
         passwordMinRequirements: string;
         bothPasswordMustMatch: string;
+        titleRequired: string;
     };
     login: {
         userGreeting: string;
@@ -74,12 +77,13 @@ export declare const user: {
             placeholder: string;
         };
         enterValidEmail: string;
-        bothPasswordMustMatch: string;
+        bothEmailMustMatch: string;
         password: {
             label: string;
             placeholder: string;
         };
         pleaseInputPassword: string;
+        emailUpdateSuccess: string;
     };
     updatePasswordForm: {
         oldPassword: {
@@ -97,6 +101,7 @@ export declare const user: {
             placeholder: string;
         };
         bothPasswordMustMatch: string;
+        passwordUpdateSuccess: string;
     };
     updateProfileForm: {
         title: string;
@@ -111,5 +116,6 @@ export declare const user: {
             placeholder: string;
         };
         lastNameIsRequired: string;
+        profileUpdateSuccess: string;
     };
 };

@@ -4,5 +4,6 @@ export declare const pwa: {
         noInstallationNeeded: string;
         fastAccessToApplication: string;
         addToHomeScreen: string;
+        addedToHomeScreen: string;
     };
 };

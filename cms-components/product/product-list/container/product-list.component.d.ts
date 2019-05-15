@@ -1,6 +1,6 @@
 import { OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { ProductSearchService, SearchConfig, UIProductSearchPage } from '@spartacus/core';
+import { ProductSearchService, SearchConfig, ProductSearchPage } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { PageLayoutService } from '../../../../cms-structure/page/index';
 import { ViewModes } from '../product-view/product-view.component';
@@ -12,7 +12,7 @@ export declare class ProductListComponent implements OnInit {
     categoryCode: string;
     brandCode: string;
     itemPerPage: number;
-    model$: Observable<UIProductSearchPage>;
+    model$: Observable<ProductSearchPage>;
     searchConfig: SearchConfig;
     categoryTitle: string;
     options: SearchConfig;
@@ -22,7 +22,7 @@ export declare class ProductListComponent implements OnInit {
     update(): void;
     createOptionsByUrlParams(): SearchConfig;
     ngOnInit(): void;
-    protected getCategoryTitle(data: UIProductSearchPage): string;
+    protected getCategoryTitle(data: ProductSearchPage): string;
     viewPage(pageNumber: number): void;
     sortList(sortCode: string): void;
     setGridMode(mode: ViewModes): void;

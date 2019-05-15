@@ -21,4 +21,8 @@ export declare const cart: {
         salesTax: string;
         total: string;
     };
+    miniCart: {
+        item: string;
+        item_plural: string;
+    };
 };

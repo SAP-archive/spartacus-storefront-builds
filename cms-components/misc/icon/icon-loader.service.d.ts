@@ -1,4 +1,4 @@
-import { IconConfig, ICON_TYPES } from './icon.config';
+import { IconConfig, ICON_TYPES } from './icon.model';
 export declare class IconLoaderService {
     private config;
     constructor(config: IconConfig);

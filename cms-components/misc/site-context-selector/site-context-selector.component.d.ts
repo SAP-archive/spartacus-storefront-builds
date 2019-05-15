@@ -1,6 +1,6 @@
 import { SiteContext } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { ICON_TYPES } from '../icon/icon.config';
+import { ICON_TYPES } from '../icon/icon.model';
 import { SiteContextComponentService } from './site-context-component.service';
 import { SiteContextType } from './site-context.model';
 export declare class SiteContextSelectorComponent {

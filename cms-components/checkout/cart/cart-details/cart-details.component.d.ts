@@ -1,12 +1,12 @@
 import { OnInit } from '@angular/core';
-import { CartService, UICart, UIOrderEntry } from '@spartacus/core';
+import { CartService, Cart, OrderEntry } from '@spartacus/core';
 import { Observable } from 'rxjs';
 export declare class CartDetailsComponent implements OnInit {
     protected cartService: CartService;
-    cart$: Observable<UICart>;
-    entries$: Observable<UIOrderEntry[]>;
+    cart$: Observable<Cart>;
+    entries$: Observable<OrderEntry[]>;
     cartLoaded$: Observable<boolean>;
     constructor(cartService: CartService);
     ngOnInit(): void;
-    getAllPromotionsForCart(cart: UICart): UICart[];
+    getAllPromotionsForCart(cart: Cart): Cart[];
 }

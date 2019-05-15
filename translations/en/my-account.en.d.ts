@@ -5,6 +5,10 @@ export declare const myAccount: {
         status: string;
         shippedOn: string;
         inProcess: string;
+        deliveryStatus_READY_FOR_PICKUP: string;
+        deliveryStatus_PICKUP_COMPLETE: string;
+        deliveryStatus_SHIPPED: string;
+        deliveryStatus_CANCELLED: string;
         statusDisplay_cancelled: string;
         statusDisplay_cancelling: string;
         statusDisplay_completed: string;
@@ -23,5 +27,12 @@ export declare const myAccount: {
         noOrders: string;
         startShopping: string;
         sortByMostRecent: string;
+    };
+    closeAccount: {
+        confirmAccountClosure: string;
+        confirmAccountClosureMessage: string;
+        closeMyAccount: string;
+        accountClosedSuccessfully: string;
+        closeAccountRetentionInfo: string;
     };
 };

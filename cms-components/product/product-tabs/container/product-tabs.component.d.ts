@@ -1,5 +1,5 @@
 import { ElementRef, OnInit } from '@angular/core';
-import { UIProduct, WindowRef } from '@spartacus/core';
+import { Product, WindowRef } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { CurrentProductService } from '../../current-product.service';
 import { ProductTabsOutlets } from '../../product-outlets.model';
@@ -7,7 +7,7 @@ export declare class ProductTabsComponent implements OnInit {
     protected winRef: WindowRef;
     protected currentPageService: CurrentProductService;
     static outlets: typeof ProductTabsOutlets;
-    product$: Observable<UIProduct>;
+    product$: Observable<Product>;
     isWritingReview: boolean;
     activatedElements: HTMLElement[];
     initial: ElementRef;
