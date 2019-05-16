@@ -4,6 +4,7 @@ export * from './category-navigation/category-navigation.component';
 export * from './category-navigation/category-navigation.module';
 export * from './footer-navigation/footer-navigation.component';
 export * from './footer-navigation/footer-navigation.module';
+export * from './navigation/navigation.component.service';
 export * from './navigation/navigation.component';
 export * from './navigation/navigation.module';
 export * from './search-box/search-box-component.service';
