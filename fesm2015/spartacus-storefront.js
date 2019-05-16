@@ -7,10 +7,10 @@ import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscriptio
 import { Title, Meta } from '@angular/platform-browser';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
-import { WindowRef, ServerConfig, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, CartService, RoutingService, LanguageService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ProductService, ConfigModule, CmsService, ProductReferenceService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, NotAuthGuard, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, OccConfig, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
+import { WindowRef, ServerConfig, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, CartService, RoutingService, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlModule, AuthGuard, ConfigModule, CmsConfig, ProductService, PageType, CmsService, ProductReferenceService, CartDataService, provideConfig, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, defaultCmsModuleConfig, CmsModule, Config, NotAuthGuard, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, CartModule, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, OccConfig, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
-import { Injectable, NgModule, APP_INITIALIZER, ChangeDetectionStrategy, Component, Input, Injector, Optional, EventEmitter, Output, ElementRef, ViewChild, Inject, PLATFORM_ID, Renderer2, ChangeDetectorRef, HostBinding, Directive, TemplateRef, ViewContainerRef, ViewEncapsulation, forwardRef, HostListener, defineInjectable, inject, INJECTOR } from '@angular/core';
+import { Injectable, NgModule, APP_INITIALIZER, ChangeDetectionStrategy, Component, Input, Injector, Inject, PLATFORM_ID, Optional, ElementRef, ViewChild, EventEmitter, Output, Renderer2, ChangeDetectorRef, HostBinding, Directive, TemplateRef, ViewContainerRef, ViewEncapsulation, forwardRef, HostListener, defineInjectable, inject, INJECTOR } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -2480,8 +2480,6 @@ CmsPageGuard.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/** @type {?} */
-const guards = [CmsPageGuard];
 
 /**
  * @fileoverview added by tsickle
@@ -2493,14 +2491,10 @@ CmsModule$1.decorators = [
     { type: NgModule, args: [{
                 imports: [
                     CommonModule,
-                    HttpClientModule,
                     ConfigModule.withConfig(defaultCmsModuleConfig),
-                    OutletModule,
                     CmsModule,
                 ],
-                providers: [...guards, { provide: CmsConfig, useExisting: Config }],
-                declarations: [],
-                exports: [OutletDirective],
+                providers: [CmsPageGuard, { provide: CmsConfig, useExisting: Config }],
             },] }
 ];
 
@@ -3551,6 +3545,170 @@ PwaModule.decorators = [
                 exports: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
             },] }
 ];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const cmsRoute = {
+    path: '**',
+    canActivate: [CmsPageGuard],
+    component: PageLayoutComponent,
+};
+/**
+ * @param {?} injector
+ * @return {?}
+ */
+function addCmsRoute(injector) {
+    /** @type {?} */
+    const result = () => {
+        /** @type {?} */
+        const router = injector.get(Router);
+        router.config.push(cmsRoute);
+    };
+    return result;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+const ɵ0 = addCmsRoute;
+class CmsRouteModule {
+}
+CmsRouteModule.decorators = [
+    { type: NgModule, args: [{
+                providers: [
+                    {
+                        provide: APP_INITIALIZER,
+                        multi: true,
+                        deps: [Injector],
+                        useFactory: ɵ0,
+                    },
+                ],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ProductPageComponent {
+    constructor() { }
+}
+ProductPageComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-product-page',
+                template: "<cx-page-layout>\n  <cx-product-details></cx-product-details>\n</cx-page-layout>\n"
+            }] }
+];
+/** @nocollapse */
+ProductPageComponent.ctorParameters = () => [];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Matches the pattern '[ ** / ] marker / :paramName [ / ** ]'
+ *
+ * @param {?} segments
+ * @param {?} _segmentGroup
+ * @param {?} route
+ * @return {?}
+ */
+function suffixUrlMatcher(segments, _segmentGroup, route) {
+    /** @type {?} */
+    const config = route.data.cxSuffixUrlMatcher;
+    const { marker, paramName } = config;
+    /** @type {?} */
+    const precedingParamName = config.precedingParamName || 'param';
+    /** @type {?} */
+    const markerIndex = findLastIndex(segments, ({ path }) => path === marker);
+    /** @type {?} */
+    const isMarkerLastSegment = markerIndex === segments.length - 1;
+    if (markerIndex === -1 || isMarkerLastSegment) {
+        return null;
+    }
+    /** @type {?} */
+    const paramIndex = markerIndex + 1;
+    /** @type {?} */
+    const posParams = {
+        [paramName]: segments[paramIndex],
+    };
+    for (let i = 0; i < markerIndex; i++) {
+        posParams[`${precedingParamName}${i}`] = segments[i];
+    }
+    return { consumed: segments.slice(0, paramIndex + 1), posParams };
+}
+/**
+ * @template T
+ * @param {?} elements
+ * @param {?} predicate
+ * @return {?}
+ */
+function findLastIndex(elements, predicate) {
+    for (let index = elements.length - 1; index >= 0; index--) {
+        if (predicate(elements[index])) {
+            return index;
+        }
+    }
+    return -1;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+const ɵ0$1 = {
+    cxSuffixUrlMatcher: {
+        marker: 'p',
+        paramName: 'productCode',
+    },
+}, ɵ1 = {
+    cxSuffixUrlMatcher: {
+        marker: 'c',
+        paramName: 'categoryCode',
+    },
+};
+class SuffixRoutesModule {
+}
+SuffixRoutesModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    RouterModule.forChild([
+                        {
+                            matcher: suffixUrlMatcher,
+                            canActivate: [CmsPageGuard],
+                            component: ProductPageComponent,
+                            data: ɵ0$1,
+                        },
+                        {
+                            matcher: suffixUrlMatcher,
+                            canActivate: [CmsPageGuard],
+                            component: PageLayoutComponent,
+                            data: ɵ1,
+                        },
+                    ]),
+                ],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -4829,6 +4987,41 @@ CartDetailsModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class CartNotEmptyGuard {
+    /**
+     * @param {?} cartService
+     * @param {?} routingService
+     */
+    constructor(cartService, routingService) {
+        this.cartService = cartService;
+        this.routingService = routingService;
+    }
+    /**
+     * @return {?}
+     */
+    canActivate() {
+        return this.cartService.getLoaded().pipe(skipWhile(loaded => !loaded), switchMap(() => this.cartService.getActive()), map(cart => {
+            if (this.cartService.isEmpty(cart)) {
+                this.routingService.go({ cxRoute: 'home' });
+                return false;
+            }
+            return true;
+        }));
+    }
+}
+CartNotEmptyGuard.decorators = [
+    { type: Injectable }
+];
+/** @nocollapse */
+CartNotEmptyGuard.ctorParameters = () => [
+    { type: CartService },
+    { type: RoutingService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -4955,11 +5148,11 @@ class CartComponentModule {
 CartComponentModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
+                    CartModule,
+                    NgbModule,
                     CartDetailsModule,
                     CartTotalsModule,
                     CartSharedModule,
-                    NgbModule,
-                    CartModule,
                 ],
                 exports: [
                     CartDetailsModule,
@@ -4968,6 +5161,7 @@ CartComponentModule.decorators = [
                     AddToCartModule,
                     MiniCartModule,
                 ],
+                providers: [CartNotEmptyGuard],
             },] }
 ];
 
@@ -10067,11 +10261,6 @@ StoreFinderComponent.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class StoreFinderModule {
 }
 StoreFinderModule.decorators = [
@@ -11541,7 +11730,7 @@ OrderConfirmationPageGuard.ctorParameters = () => [
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-const guards$1 = [OrderConfirmationPageGuard];
+const guards = [OrderConfirmationPageGuard];
 
 /**
  * @fileoverview added by tsickle
@@ -11557,7 +11746,7 @@ CheckoutComponentModule.decorators = [
                     CartComponentModule,
                     CheckoutModule,
                 ],
-                providers: [...guards$1],
+                providers: [...guards],
             },] }
 ];
 
@@ -11704,55 +11893,6 @@ OrderConfirmationModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/** @type {?} */
-const cmsRoute = {
-    path: '**',
-    canActivate: [CmsPageGuard],
-    component: PageLayoutComponent,
-};
-/**
- * @param {?} injector
- * @return {?}
- */
-function addCmsRoute(injector) {
-    /** @type {?} */
-    const result = () => {
-        /** @type {?} */
-        const router = injector.get(Router);
-        router.config.push(cmsRoute);
-    };
-    return result;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-const ɵ0 = addCmsRoute;
-class CmsRouteModule {
-}
-CmsRouteModule.decorators = [
-    { type: NgModule, args: [{
-                providers: [
-                    {
-                        provide: APP_INITIALIZER,
-                        multi: true,
-                        deps: [Injector],
-                        useFactory: ɵ0,
-                    },
-                ],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 
 /**
  * @fileoverview added by tsickle
@@ -11767,111 +11907,6 @@ function provideConfigFromMetaTags() {
         provideConfigFactory(mediaServerConfigFromMetaTagFactory, [Meta]),
     ];
 }
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ProductPageComponent {
-    constructor() { }
-}
-ProductPageComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-product-page',
-                template: "<cx-page-layout>\n  <cx-product-details></cx-product-details>\n</cx-page-layout>\n"
-            }] }
-];
-/** @nocollapse */
-ProductPageComponent.ctorParameters = () => [];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Matches the pattern '[ ** / ] marker / :paramName [ / ** ]'
- *
- * @param {?} segments
- * @param {?} _segmentGroup
- * @param {?} route
- * @return {?}
- */
-function suffixUrlMatcher(segments, _segmentGroup, route) {
-    /** @type {?} */
-    const config = route.data.cxSuffixUrlMatcher;
-    const { marker, paramName } = config;
-    /** @type {?} */
-    const precedingParamName = config.precedingParamName || 'param';
-    /** @type {?} */
-    const markerIndex = findLastIndex(segments, ({ path }) => path === marker);
-    /** @type {?} */
-    const isMarkerLastSegment = markerIndex === segments.length - 1;
-    if (markerIndex === -1 || isMarkerLastSegment) {
-        return null;
-    }
-    /** @type {?} */
-    const paramIndex = markerIndex + 1;
-    /** @type {?} */
-    const posParams = {
-        [paramName]: segments[paramIndex],
-    };
-    for (let i = 0; i < markerIndex; i++) {
-        posParams[`${precedingParamName}${i}`] = segments[i];
-    }
-    return { consumed: segments.slice(0, paramIndex + 1), posParams };
-}
-/**
- * @template T
- * @param {?} elements
- * @param {?} predicate
- * @return {?}
- */
-function findLastIndex(elements, predicate) {
-    for (let index = elements.length - 1; index >= 0; index--) {
-        if (predicate(elements[index])) {
-            return index;
-        }
-    }
-    return -1;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-const ɵ0$1 = {
-    cxSuffixUrlMatcher: {
-        marker: 'p',
-        paramName: 'productCode',
-    },
-}, ɵ1 = {
-    cxSuffixUrlMatcher: {
-        marker: 'c',
-        paramName: 'categoryCode',
-    },
-};
-class SuffixRoutesModule {
-}
-SuffixRoutesModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    RouterModule.forChild([
-                        {
-                            matcher: suffixUrlMatcher,
-                            canActivate: [CmsPageGuard],
-                            component: ProductPageComponent,
-                            data: ɵ0$1,
-                        },
-                        {
-                            matcher: suffixUrlMatcher,
-                            canActivate: [CmsPageGuard],
-                            component: PageLayoutComponent,
-                            data: ɵ1,
-                        },
-                    ]),
-                ],
-            },] }
-];
 
 /**
  * @fileoverview added by tsickle
@@ -12026,54 +12061,6 @@ const defaultRoutingConfig = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class CartNotEmptyGuard {
-    /**
-     * @param {?} cartService
-     * @param {?} routingService
-     */
-    constructor(cartService, routingService) {
-        this.cartService = cartService;
-        this.routingService = routingService;
-    }
-    /**
-     * @return {?}
-     */
-    canActivate() {
-        return this.cartService.getLoaded().pipe(skipWhile(loaded => !loaded), switchMap(() => this.cartService.getActive()), map(cart => {
-            if (this.cartService.isEmpty(cart)) {
-                this.routingService.go({ cxRoute: 'home' });
-                return false;
-            }
-            return true;
-        }));
-    }
-}
-CartNotEmptyGuard.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-CartNotEmptyGuard.ctorParameters = () => [
-    { type: CartService },
-    { type: RoutingService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class GuardsModule {
-}
-GuardsModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [RoutingModule, CartModule],
-                providers: [CartNotEmptyGuard],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class OrderConfirmationPageComponent {
 }
 OrderConfirmationPageComponent.decorators = [
@@ -12154,7 +12141,6 @@ const pageModules = [
     CartPageModule,
     OrderConfirmationPageModule,
     ProductPageModule,
-    GuardsModule,
 ];
 const ɵ0$5 = { pageLabel: 'homepage', cxRoute: 'home' }, ɵ1$1 = {
     pageLabel: 'multiStepCheckoutSummaryPage',
@@ -12169,6 +12155,7 @@ PagesModule.decorators = [
                     CommonModule,
                     ...pageModules,
                     PageLayoutModule,
+                    CartComponentModule,
                     RouterModule.forChild([
                         {
                             // This route can be dropped only when we have a mapping path to page label for content pages
@@ -12287,11 +12274,6 @@ StorefrontModule.decorators = [
                 declarations: [],
             },] }
 ];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 
 /**
  * @fileoverview added by tsickle
@@ -12827,6 +12809,6 @@ const translations = {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AddToCartComponent, AddToCartModule, AddedToCartDialogComponent, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartSharedModule, OrderSummaryComponent, CartTotalsComponent, CartComponentModule, MiniCartComponent, MiniCartModule, CmsLibModule, BannerComponent, BannerModule, LinkComponent, LinkModule, ParagraphComponent, CmsParagraphModule, TabParagraphContainerComponent, TabParagraphContainerModule, GlobalMessageComponentModule, GlobalMessageComponent, fontawesomeIconConfig, IconLoaderService, IconComponent, ICON_TYPE, IconConfig, IconResourceType, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, CloseAccountModule, CloseAccountModalComponent, CloseAccountComponent, ForgotPasswordComponent, ForgotPasswordModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, PaymentMethodsComponent, PaymentMethodsModule, ResetPasswordFormComponent, ResetPasswordModule, UpdateEmailFormComponent, UpdateEmailComponent, UpdateEmailModule, UpdatePasswordFormComponent, UpdatePasswordComponent, UpdatePasswordModule, UpdateProfileFormComponent, UpdateProfileComponent, UpdateProfileModule, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, FooterNavigationComponent, FooterNavigationModule, NavigationComponent, NavigationModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, CurrentProductService, ProductDetailsComponent, ProductDetailsModule, ProductImagesComponent, ProductSummaryComponent, ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent, ProductDetailOutlets, ProductTabsOutlets, ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule, AbstractStoreItemComponent, ScheduleComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderPaginationDetailsComponent, StoreFinderListComponent, StoreFinderSearchResultComponent, StoreFinderSearchComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StoreFinderComponent, StoreFinderModule, LoginFormComponent, LoginFormModule, LoginComponent, LoginModule, LogoutGuard, RegisterComponent, RegisterComponentModule, UserComponentModule, OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService, StyleRefDirective, StyleRefModule, ComponentWrapperDirective, PageComponentModule, defaultCmsContentConfig, CmsComponentData, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, pwaConfigurationFactory, pwaFactory, PwaModule, PWAModuleConfig, defaultPWAModuleConfig, SeoMetaService, initSeoService, SeoModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, LayoutModule, MainModule, StorefrontComponent, CheckoutComponentModule, MultiStepCheckoutModule, ShippingAddressModule, OrderConfirmationModule, SuggestedAddressDialogComponent, AddressFormComponent, PaymentFormComponent, ReviewSubmitComponent, DeliveryModeComponent, MultiStepCheckoutComponent, OrderConfirmationComponent, CmsRouteModule, CmsModule$1 as CmsModule, CmsPageGuard, CmsMappingService, CmsRoutesService, StorefrontModule, SuffixRoutesModule, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, UiModule, FormComponentsModule, ItemCounterComponent, GenericLinkComponent, ListNavigationModule, PaginationComponent, SortingComponent, MediaComponent, MediaModule, MediaService, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, OnlyNumberDirective, translations, CartTotalsModule as ɵd, NavigationUIComponent as ɵg, NavigationComponentService as ɵf, ProductCarouselService as ɵm, ProductReferencesService as ɵo, SharedCarouselService as ɵn, ProductTabsComponent as ɵl, LoginComponentService as ɵs, OutletStyleService as ɵk, defaultCartPageConfig as ɵt, AddToHomeScreenService as ɵu, htmlLangProvider as ɵv, setHtmlLangAttribute as ɵw, BootstrapModule as ɵc, CheckoutDetailsService as ɵbh, DeliveryModeModule as ɵy, BillingAddressFormComponent as ɵbc, BillingAddressFormModule as ɵbb, PaymentFormModule as ɵba, PaymentMethodComponent as ɵbd, PaymentMethodModule as ɵz, PlaceOrderComponent as ɵbg, PlaceOrderModule as ɵbf, ReviewSubmitModule as ɵbe, AddressFormModule as ɵj, ShippingAddressComponent as ɵx, PromotionsComponent as ɵb, PromotionsModule as ɵa, guards$1 as ɵbi, OrderConfirmationPageGuard as ɵbj, addCmsRoute as ɵbk, guards as ɵp, CmsGuardsService as ɵr, CmsI18nService as ɵq, provideConfigFromMetaTags as ɵbs, suffixUrlMatcher as ɵbr, HardcodedCheckoutComponent as ɵbq, defaultRoutingConfig as ɵbm, defaultStorefrontRoutesConfig as ɵbl, CartNotEmptyGuard as ɵbp, GuardsModule as ɵbo, OrderConfirmationPageModule as ɵbn, CardComponent as ɵi, CardModule as ɵh, GenericLinkModule as ɵe, address as ɵbt, cart as ɵbu, checkout as ɵbv, common as ɵbw, myAccount as ɵbx, payment as ɵby, product as ɵbz, pwa as ɵca, storeFinder as ɵcb, user as ɵcc };
+export { AddToCartComponent, AddToCartModule, AddedToCartDialogComponent, CartDetailsComponent, CartDetailsModule, CartNotEmptyGuard, CartItemComponent, CartItemListComponent, CartSharedModule, OrderSummaryComponent, CartTotalsComponent, CartComponentModule, MiniCartComponent, MiniCartModule, CmsLibModule, BannerComponent, BannerModule, LinkComponent, LinkModule, ParagraphComponent, CmsParagraphModule, TabParagraphContainerComponent, TabParagraphContainerModule, GlobalMessageComponentModule, GlobalMessageComponent, fontawesomeIconConfig, IconLoaderService, IconComponent, ICON_TYPE, IconConfig, IconResourceType, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, CloseAccountModule, CloseAccountModalComponent, CloseAccountComponent, ForgotPasswordComponent, ForgotPasswordModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, PaymentMethodsComponent, PaymentMethodsModule, ResetPasswordFormComponent, ResetPasswordModule, UpdateEmailFormComponent, UpdateEmailComponent, UpdateEmailModule, UpdatePasswordFormComponent, UpdatePasswordComponent, UpdatePasswordModule, UpdateProfileFormComponent, UpdateProfileComponent, UpdateProfileModule, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, FooterNavigationComponent, FooterNavigationModule, NavigationComponent, NavigationModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, CurrentProductService, ProductDetailsComponent, ProductDetailsModule, ProductImagesComponent, ProductSummaryComponent, ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent, ProductDetailOutlets, ProductTabsOutlets, ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule, AbstractStoreItemComponent, ScheduleComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderPaginationDetailsComponent, StoreFinderListComponent, StoreFinderSearchResultComponent, StoreFinderSearchComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StoreFinderComponent, StoreFinderModule, LoginFormComponent, LoginFormModule, LoginComponent, LoginModule, LogoutGuard, RegisterComponent, RegisterComponentModule, UserComponentModule, CmsModule$1 as CmsModule, CmsPageGuard, OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService, StyleRefDirective, StyleRefModule, ComponentWrapperDirective, PageComponentModule, defaultCmsContentConfig, CmsComponentData, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, pwaConfigurationFactory, pwaFactory, PwaModule, PWAModuleConfig, defaultPWAModuleConfig, CmsRouteModule, SuffixRoutesModule, SeoMetaService, initSeoService, SeoModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, LayoutModule, MainModule, StorefrontComponent, CheckoutComponentModule, MultiStepCheckoutModule, ShippingAddressModule, OrderConfirmationModule, SuggestedAddressDialogComponent, AddressFormComponent, PaymentFormComponent, ReviewSubmitComponent, DeliveryModeComponent, MultiStepCheckoutComponent, OrderConfirmationComponent, StorefrontModule, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, UiModule, FormComponentsModule, ItemCounterComponent, GenericLinkComponent, ListNavigationModule, PaginationComponent, SortingComponent, MediaComponent, MediaModule, MediaService, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, OnlyNumberDirective, translations, CartTotalsModule as ɵd, NavigationUIComponent as ɵg, NavigationComponentService as ɵf, ProductCarouselService as ɵm, ProductReferencesService as ɵo, SharedCarouselService as ɵn, ProductTabsComponent as ɵl, LoginComponentService as ɵt, OutletStyleService as ɵk, defaultCartPageConfig as ɵu, AddToHomeScreenService as ɵv, addCmsRoute as ɵw, suffixUrlMatcher as ɵx, htmlLangProvider as ɵy, setHtmlLangAttribute as ɵz, CmsGuardsService as ɵs, CmsI18nService as ɵr, CmsMappingService as ɵq, CmsRoutesService as ɵp, BootstrapModule as ɵc, CheckoutDetailsService as ɵbk, DeliveryModeModule as ɵbb, BillingAddressFormComponent as ɵbf, BillingAddressFormModule as ɵbe, PaymentFormModule as ɵbd, PaymentMethodComponent as ɵbg, PaymentMethodModule as ɵbc, PlaceOrderComponent as ɵbj, PlaceOrderModule as ɵbi, ReviewSubmitModule as ɵbh, AddressFormModule as ɵj, ShippingAddressComponent as ɵba, PromotionsComponent as ɵb, PromotionsModule as ɵa, guards as ɵbl, OrderConfirmationPageGuard as ɵbm, provideConfigFromMetaTags as ɵbr, HardcodedCheckoutComponent as ɵbq, defaultRoutingConfig as ɵbo, defaultStorefrontRoutesConfig as ɵbn, OrderConfirmationPageModule as ɵbp, CardComponent as ɵi, CardModule as ɵh, GenericLinkModule as ɵe, address as ɵbs, cart as ɵbt, checkout as ɵbu, common as ɵbv, myAccount as ɵbw, payment as ɵbx, product as ɵby, pwa as ɵbz, storeFinder as ɵca, user as ɵcb };
 
 //# sourceMappingURL=spartacus-storefront.js.map

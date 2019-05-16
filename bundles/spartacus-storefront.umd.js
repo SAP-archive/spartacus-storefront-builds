@@ -3335,8 +3335,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    /** @type {?} */
-    var guards = [CmsPageGuard];
 
     /**
      * @fileoverview added by tsickle
@@ -3349,14 +3347,10 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            http.HttpClientModule,
                             i1$1.ConfigModule.withConfig(i1$1.defaultCmsModuleConfig),
-                            OutletModule,
                             i1$1.CmsModule,
                         ],
-                        providers: __spread(guards, [{ provide: i1$1.CmsConfig, useExisting: i1$1.Config }]),
-                        declarations: [],
-                        exports: [OutletDirective],
+                        providers: [CmsPageGuard, { provide: i1$1.CmsConfig, useExisting: i1$1.Config }],
                     },] }
         ];
         return CmsModule;
@@ -4534,6 +4528,182 @@
         ];
         return PwaModule;
     }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var cmsRoute = {
+        path: '**',
+        canActivate: [CmsPageGuard],
+        component: PageLayoutComponent,
+    };
+    /**
+     * @param {?} injector
+     * @return {?}
+     */
+    function addCmsRoute(injector) {
+        /** @type {?} */
+        var result = function () {
+            /** @type {?} */
+            var router = injector.get(i1$2.Router);
+            router.config.push(cmsRoute);
+        };
+        return result;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ɵ0 = addCmsRoute;
+    var CmsRouteModule = /** @class */ (function () {
+        function CmsRouteModule() {
+        }
+        CmsRouteModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        providers: [
+                            {
+                                provide: i0.APP_INITIALIZER,
+                                multi: true,
+                                deps: [i0.Injector],
+                                useFactory: ɵ0,
+                            },
+                        ],
+                    },] }
+        ];
+        return CmsRouteModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductPageComponent = /** @class */ (function () {
+        function ProductPageComponent() {
+        }
+        ProductPageComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-product-page',
+                        template: "<cx-page-layout>\n  <cx-product-details></cx-product-details>\n</cx-page-layout>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        ProductPageComponent.ctorParameters = function () { return []; };
+        return ProductPageComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Matches the pattern '[ ** / ] marker / :paramName [ / ** ]'
+     *
+     * @param {?} segments
+     * @param {?} _segmentGroup
+     * @param {?} route
+     * @return {?}
+     */
+    function suffixUrlMatcher(segments, _segmentGroup, route) {
+        var _a;
+        /** @type {?} */
+        var config = route.data.cxSuffixUrlMatcher;
+        var marker = config.marker, paramName = config.paramName;
+        /** @type {?} */
+        var precedingParamName = config.precedingParamName || 'param';
+        /** @type {?} */
+        var markerIndex = findLastIndex(segments, function (_a) {
+            var path = _a.path;
+            return path === marker;
+        });
+        /** @type {?} */
+        var isMarkerLastSegment = markerIndex === segments.length - 1;
+        if (markerIndex === -1 || isMarkerLastSegment) {
+            return null;
+        }
+        /** @type {?} */
+        var paramIndex = markerIndex + 1;
+        /** @type {?} */
+        var posParams = (_a = {},
+            _a[paramName] = segments[paramIndex],
+            _a);
+        for (var i = 0; i < markerIndex; i++) {
+            posParams["" + precedingParamName + i] = segments[i];
+        }
+        return { consumed: segments.slice(0, paramIndex + 1), posParams: posParams };
+    }
+    /**
+     * @template T
+     * @param {?} elements
+     * @param {?} predicate
+     * @return {?}
+     */
+    function findLastIndex(elements, predicate) {
+        for (var index = elements.length - 1; index >= 0; index--) {
+            if (predicate(elements[index])) {
+                return index;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ɵ0$1 = {
+        cxSuffixUrlMatcher: {
+            marker: 'p',
+            paramName: 'productCode',
+        },
+    }, ɵ1 = {
+        cxSuffixUrlMatcher: {
+            marker: 'c',
+            paramName: 'categoryCode',
+        },
+    };
+    var SuffixRoutesModule = /** @class */ (function () {
+        function SuffixRoutesModule() {
+        }
+        SuffixRoutesModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            i1$2.RouterModule.forChild([
+                                {
+                                    matcher: suffixUrlMatcher,
+                                    canActivate: [CmsPageGuard],
+                                    component: ProductPageComponent,
+                                    data: ɵ0$1,
+                                },
+                                {
+                                    matcher: suffixUrlMatcher,
+                                    canActivate: [CmsPageGuard],
+                                    component: PageLayoutComponent,
+                                    data: ɵ1,
+                                },
+                            ]),
+                        ],
+                    },] }
+        ];
+        return SuffixRoutesModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
 
     /**
      * @fileoverview added by tsickle
@@ -6112,6 +6282,44 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var CartNotEmptyGuard = /** @class */ (function () {
+        function CartNotEmptyGuard(cartService, routingService) {
+            this.cartService = cartService;
+            this.routingService = routingService;
+        }
+        /**
+         * @return {?}
+         */
+        CartNotEmptyGuard.prototype.canActivate = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                return this.cartService.getLoaded().pipe(operators.skipWhile(function (loaded) { return !loaded; }), operators.switchMap(function () { return _this.cartService.getActive(); }), operators.map(function (cart) {
+                    if (_this.cartService.isEmpty(cart)) {
+                        _this.routingService.go({ cxRoute: 'home' });
+                        return false;
+                    }
+                    return true;
+                }));
+            };
+        CartNotEmptyGuard.decorators = [
+            { type: i0.Injectable }
+        ];
+        /** @nocollapse */
+        CartNotEmptyGuard.ctorParameters = function () {
+            return [
+                { type: i1$1.CartService },
+                { type: i1$1.RoutingService }
+            ];
+        };
+        return CartNotEmptyGuard;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
 
     /**
      * @fileoverview added by tsickle
@@ -6248,11 +6456,11 @@
         CartComponentModule.decorators = [
             { type: i0.NgModule, args: [{
                         imports: [
+                            i1$1.CartModule,
+                            ngBootstrap.NgbModule,
                             CartDetailsModule,
                             CartTotalsModule,
                             CartSharedModule,
-                            ngBootstrap.NgbModule,
-                            i1$1.CartModule,
                         ],
                         exports: [
                             CartDetailsModule,
@@ -6261,6 +6469,7 @@
                             AddToCartModule,
                             MiniCartModule,
                         ],
+                        providers: [CartNotEmptyGuard],
                     },] }
         ];
         return CartComponentModule;
@@ -12454,11 +12663,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var StoreFinderModule = /** @class */ (function () {
         function StoreFinderModule() {
         }
@@ -14186,7 +14390,7 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
-    var guards$1 = [OrderConfirmationPageGuard];
+    var guards = [OrderConfirmationPageGuard];
 
     /**
      * @fileoverview added by tsickle
@@ -14203,7 +14407,7 @@
                             CartComponentModule,
                             i1$1.CheckoutModule,
                         ],
-                        providers: __spread(guards$1),
+                        providers: __spread(guards),
                     },] }
         ];
         return CheckoutComponentModule;
@@ -14380,58 +14584,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    /** @type {?} */
-    var cmsRoute = {
-        path: '**',
-        canActivate: [CmsPageGuard],
-        component: PageLayoutComponent,
-    };
-    /**
-     * @param {?} injector
-     * @return {?}
-     */
-    function addCmsRoute(injector) {
-        /** @type {?} */
-        var result = function () {
-            /** @type {?} */
-            var router = injector.get(i1$2.Router);
-            router.config.push(cmsRoute);
-        };
-        return result;
-    }
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ɵ0 = addCmsRoute;
-    var CmsRouteModule = /** @class */ (function () {
-        function CmsRouteModule() {
-        }
-        CmsRouteModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        providers: [
-                            {
-                                provide: i0.APP_INITIALIZER,
-                                multi: true,
-                                deps: [i0.Injector],
-                                useFactory: ɵ0,
-                            },
-                        ],
-                    },] }
-        ];
-        return CmsRouteModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     /**
      * @return {?}
      */
@@ -14441,120 +14593,6 @@
             i1$1.provideConfigFactory(i1$1.mediaServerConfigFromMetaTagFactory, [i1.Meta]),
         ];
     }
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ProductPageComponent = /** @class */ (function () {
-        function ProductPageComponent() {
-        }
-        ProductPageComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-product-page',
-                        template: "<cx-page-layout>\n  <cx-product-details></cx-product-details>\n</cx-page-layout>\n"
-                    }] }
-        ];
-        /** @nocollapse */
-        ProductPageComponent.ctorParameters = function () { return []; };
-        return ProductPageComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /**
-     * Matches the pattern '[ ** / ] marker / :paramName [ / ** ]'
-     *
-     * @param {?} segments
-     * @param {?} _segmentGroup
-     * @param {?} route
-     * @return {?}
-     */
-    function suffixUrlMatcher(segments, _segmentGroup, route) {
-        var _a;
-        /** @type {?} */
-        var config = route.data.cxSuffixUrlMatcher;
-        var marker = config.marker, paramName = config.paramName;
-        /** @type {?} */
-        var precedingParamName = config.precedingParamName || 'param';
-        /** @type {?} */
-        var markerIndex = findLastIndex(segments, function (_a) {
-            var path = _a.path;
-            return path === marker;
-        });
-        /** @type {?} */
-        var isMarkerLastSegment = markerIndex === segments.length - 1;
-        if (markerIndex === -1 || isMarkerLastSegment) {
-            return null;
-        }
-        /** @type {?} */
-        var paramIndex = markerIndex + 1;
-        /** @type {?} */
-        var posParams = (_a = {},
-            _a[paramName] = segments[paramIndex],
-            _a);
-        for (var i = 0; i < markerIndex; i++) {
-            posParams["" + precedingParamName + i] = segments[i];
-        }
-        return { consumed: segments.slice(0, paramIndex + 1), posParams: posParams };
-    }
-    /**
-     * @template T
-     * @param {?} elements
-     * @param {?} predicate
-     * @return {?}
-     */
-    function findLastIndex(elements, predicate) {
-        for (var index = elements.length - 1; index >= 0; index--) {
-            if (predicate(elements[index])) {
-                return index;
-            }
-        }
-        return -1;
-    }
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ɵ0$1 = {
-        cxSuffixUrlMatcher: {
-            marker: 'p',
-            paramName: 'productCode',
-        },
-    }, ɵ1 = {
-        cxSuffixUrlMatcher: {
-            marker: 'c',
-            paramName: 'categoryCode',
-        },
-    };
-    var SuffixRoutesModule = /** @class */ (function () {
-        function SuffixRoutesModule() {
-        }
-        SuffixRoutesModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            i1$2.RouterModule.forChild([
-                                {
-                                    matcher: suffixUrlMatcher,
-                                    canActivate: [CmsPageGuard],
-                                    component: ProductPageComponent,
-                                    data: ɵ0$1,
-                                },
-                                {
-                                    matcher: suffixUrlMatcher,
-                                    canActivate: [CmsPageGuard],
-                                    component: PageLayoutComponent,
-                                    data: ɵ1,
-                                },
-                            ]),
-                        ],
-                    },] }
-        ];
-        return SuffixRoutesModule;
-    }());
 
     /**
      * @fileoverview added by tsickle
@@ -14734,60 +14772,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var CartNotEmptyGuard = /** @class */ (function () {
-        function CartNotEmptyGuard(cartService, routingService) {
-            this.cartService = cartService;
-            this.routingService = routingService;
-        }
-        /**
-         * @return {?}
-         */
-        CartNotEmptyGuard.prototype.canActivate = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                return this.cartService.getLoaded().pipe(operators.skipWhile(function (loaded) { return !loaded; }), operators.switchMap(function () { return _this.cartService.getActive(); }), operators.map(function (cart) {
-                    if (_this.cartService.isEmpty(cart)) {
-                        _this.routingService.go({ cxRoute: 'home' });
-                        return false;
-                    }
-                    return true;
-                }));
-            };
-        CartNotEmptyGuard.decorators = [
-            { type: i0.Injectable }
-        ];
-        /** @nocollapse */
-        CartNotEmptyGuard.ctorParameters = function () {
-            return [
-                { type: i1$1.CartService },
-                { type: i1$1.RoutingService }
-            ];
-        };
-        return CartNotEmptyGuard;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var GuardsModule = /** @class */ (function () {
-        function GuardsModule() {
-        }
-        GuardsModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [i1$1.RoutingModule, i1$1.CartModule],
-                        providers: [CartNotEmptyGuard],
-                    },] }
-        ];
-        return GuardsModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var OrderConfirmationPageComponent = /** @class */ (function () {
         function OrderConfirmationPageComponent() {
         }
@@ -14877,7 +14861,6 @@
         CartPageModule,
         OrderConfirmationPageModule,
         ProductPageModule,
-        GuardsModule,
     ];
     var ɵ0$5 = { pageLabel: 'homepage', cxRoute: 'home' }, ɵ1$1 = {
         pageLabel: 'multiStepCheckoutSummaryPage',
@@ -14893,6 +14876,7 @@
                             common.CommonModule
                         ], pageModules, [
                             PageLayoutModule,
+                            CartComponentModule,
                             i1$2.RouterModule.forChild([
                                 {
                                     // This route can be dropped only when we have a mapping path to page label for content pages
@@ -15023,11 +15007,6 @@
         ];
         return StorefrontModule;
     }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
 
     /**
      * @fileoverview added by tsickle
@@ -15568,6 +15547,7 @@
     exports.AddedToCartDialogComponent = AddedToCartDialogComponent;
     exports.CartDetailsComponent = CartDetailsComponent;
     exports.CartDetailsModule = CartDetailsModule;
+    exports.CartNotEmptyGuard = CartNotEmptyGuard;
     exports.CartItemComponent = CartItemComponent;
     exports.CartItemListComponent = CartItemListComponent;
     exports.CartSharedModule = CartSharedModule;
@@ -15685,6 +15665,8 @@
     exports.RegisterComponent = RegisterComponent;
     exports.RegisterComponentModule = RegisterComponentModule;
     exports.UserComponentModule = UserComponentModule;
+    exports.CmsModule = CmsModule;
+    exports.CmsPageGuard = CmsPageGuard;
     exports.OutletRefDirective = OutletRefDirective;
     exports.OutletRefModule = OutletRefModule;
     exports.OutletDirective = OutletDirective;
@@ -15710,6 +15692,8 @@
     exports.PwaModule = PwaModule;
     exports.PWAModuleConfig = PWAModuleConfig;
     exports.defaultPWAModuleConfig = defaultPWAModuleConfig;
+    exports.CmsRouteModule = CmsRouteModule;
+    exports.SuffixRoutesModule = SuffixRoutesModule;
     exports.SeoMetaService = SeoMetaService;
     exports.initSeoService = initSeoService;
     exports.SeoModule = SeoModule;
@@ -15736,13 +15720,7 @@
     exports.DeliveryModeComponent = DeliveryModeComponent;
     exports.MultiStepCheckoutComponent = MultiStepCheckoutComponent;
     exports.OrderConfirmationComponent = OrderConfirmationComponent;
-    exports.CmsRouteModule = CmsRouteModule;
-    exports.CmsModule = CmsModule;
-    exports.CmsPageGuard = CmsPageGuard;
-    exports.CmsMappingService = CmsMappingService;
-    exports.CmsRoutesService = CmsRoutesService;
     exports.StorefrontModule = StorefrontModule;
-    exports.SuffixRoutesModule = SuffixRoutesModule;
     exports.PagesModule = PagesModule;
     exports.ProductPageComponent = ProductPageComponent;
     exports.CartPageComponent = CartPageComponent;
@@ -15772,54 +15750,53 @@
     exports.ɵo = ProductReferencesService;
     exports.ɵn = SharedCarouselService;
     exports.ɵl = ProductTabsComponent;
-    exports.ɵs = LoginComponentService;
+    exports.ɵt = LoginComponentService;
     exports.ɵk = OutletStyleService;
-    exports.ɵt = defaultCartPageConfig;
-    exports.ɵu = AddToHomeScreenService;
-    exports.ɵv = htmlLangProvider;
-    exports.ɵw = setHtmlLangAttribute;
+    exports.ɵu = defaultCartPageConfig;
+    exports.ɵv = AddToHomeScreenService;
+    exports.ɵw = addCmsRoute;
+    exports.ɵx = suffixUrlMatcher;
+    exports.ɵy = htmlLangProvider;
+    exports.ɵz = setHtmlLangAttribute;
+    exports.ɵs = CmsGuardsService;
+    exports.ɵr = CmsI18nService;
+    exports.ɵq = CmsMappingService;
+    exports.ɵp = CmsRoutesService;
     exports.ɵc = BootstrapModule;
-    exports.ɵbh = CheckoutDetailsService;
-    exports.ɵy = DeliveryModeModule;
-    exports.ɵbc = BillingAddressFormComponent;
-    exports.ɵbb = BillingAddressFormModule;
-    exports.ɵba = PaymentFormModule;
-    exports.ɵbd = PaymentMethodComponent;
-    exports.ɵz = PaymentMethodModule;
-    exports.ɵbg = PlaceOrderComponent;
-    exports.ɵbf = PlaceOrderModule;
-    exports.ɵbe = ReviewSubmitModule;
+    exports.ɵbk = CheckoutDetailsService;
+    exports.ɵbb = DeliveryModeModule;
+    exports.ɵbf = BillingAddressFormComponent;
+    exports.ɵbe = BillingAddressFormModule;
+    exports.ɵbd = PaymentFormModule;
+    exports.ɵbg = PaymentMethodComponent;
+    exports.ɵbc = PaymentMethodModule;
+    exports.ɵbj = PlaceOrderComponent;
+    exports.ɵbi = PlaceOrderModule;
+    exports.ɵbh = ReviewSubmitModule;
     exports.ɵj = AddressFormModule;
-    exports.ɵx = ShippingAddressComponent;
+    exports.ɵba = ShippingAddressComponent;
     exports.ɵb = PromotionsComponent;
     exports.ɵa = PromotionsModule;
-    exports.ɵbi = guards$1;
-    exports.ɵbj = OrderConfirmationPageGuard;
-    exports.ɵbk = addCmsRoute;
-    exports.ɵp = guards;
-    exports.ɵr = CmsGuardsService;
-    exports.ɵq = CmsI18nService;
-    exports.ɵbs = provideConfigFromMetaTags;
-    exports.ɵbr = suffixUrlMatcher;
+    exports.ɵbl = guards;
+    exports.ɵbm = OrderConfirmationPageGuard;
+    exports.ɵbr = provideConfigFromMetaTags;
     exports.ɵbq = HardcodedCheckoutComponent;
-    exports.ɵbm = defaultRoutingConfig;
-    exports.ɵbl = defaultStorefrontRoutesConfig;
-    exports.ɵbp = CartNotEmptyGuard;
-    exports.ɵbo = GuardsModule;
-    exports.ɵbn = OrderConfirmationPageModule;
+    exports.ɵbo = defaultRoutingConfig;
+    exports.ɵbn = defaultStorefrontRoutesConfig;
+    exports.ɵbp = OrderConfirmationPageModule;
     exports.ɵi = CardComponent;
     exports.ɵh = CardModule;
     exports.ɵe = GenericLinkModule;
-    exports.ɵbt = address;
-    exports.ɵbu = cart;
-    exports.ɵbv = checkout;
-    exports.ɵbw = common$1;
-    exports.ɵbx = myAccount;
-    exports.ɵby = payment;
-    exports.ɵbz = product;
-    exports.ɵca = pwa;
-    exports.ɵcb = storeFinder;
-    exports.ɵcc = user;
+    exports.ɵbs = address;
+    exports.ɵbt = cart;
+    exports.ɵbu = checkout;
+    exports.ɵbv = common$1;
+    exports.ɵbw = myAccount;
+    exports.ɵbx = payment;
+    exports.ɵby = product;
+    exports.ɵbz = pwa;
+    exports.ɵca = storeFinder;
+    exports.ɵcb = user;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
