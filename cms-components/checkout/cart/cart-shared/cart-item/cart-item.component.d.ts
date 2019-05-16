@@ -14,9 +14,11 @@ export declare class CartItemComponent implements OnInit {
     cartIsLoading: boolean;
     remove: EventEmitter<any>;
     update: EventEmitter<any>;
+    view: EventEmitter<any>;
     parent: FormGroup;
     ngOnInit(): void;
     isProductOutOfStock(product: any): boolean;
     updateItem(updatedQuantity: number): void;
     removeItem(): void;
+    viewItem(): void;
 }
