@@ -2,14 +2,14 @@ import { HttpUrlEncodingCodec } from '@angular/common/http';
 import { OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Facet, ProductSearchService, ProductSearchPage } from '@spartacus/core';
+import { Facet, ProductSearchPage, ProductSearchService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { ICON_TYPES } from '../../../../cms-components/misc/icon/index';
+import { ICON_TYPE } from '../../../../cms-components/misc/icon/index';
 export declare class ProductFacetNavigationComponent implements OnInit {
     private modalService;
     private activatedRoute;
     private productSearchService;
-    iconTypes: typeof ICON_TYPES;
+    iconTypes: typeof ICON_TYPE;
     activeFacetValueCode: string;
     searchResult: ProductSearchPage;
     minPerFacet: number;

@@ -2,40 +2,53 @@
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-import { Component, ElementRef, Input, Renderer2, } from '@angular/core';
+import { Component, ElementRef, HostBinding, Input, } from '@angular/core';
 import { IconLoaderService } from './icon-loader.service';
+import { ICON_TYPE } from './icon.model';
 var IconComponent = /** @class */ (function () {
-    function IconComponent(iconLoader, renderer, hostElement) {
+    function IconComponent(iconLoader, elementRef) {
         this.iconLoader = iconLoader;
-        this.renderer = renderer;
-        this.hostElement = hostElement;
+        this.elementRef = elementRef;
         /**
          * Keeps the given style classes so that we can
          * clean them up when the icon changes
          */
-        this.iconStyleClasses = [];
+        this.styleClasses = '';
     }
     /**
      * @return {?}
      */
-    IconComponent.prototype.ngOnChanges = /**
+    IconComponent.prototype.ngOnInit = /**
      * @return {?}
      */
     function () {
+        this.staticStyleClasses = this.elementRef.nativeElement.classList.value;
         this.addStyleClasses();
     };
     Object.defineProperty(IconComponent.prototype, "useSvg", {
+        /**
+         * Indicates whether the icon is configured to use SVG or not.
+         */
         get: /**
+         * Indicates whether the icon is configured to use SVG or not.
          * @return {?}
          */
         function () {
-            return this.iconLoader.useSvg();
+            return this.iconLoader.useSvg(this.type);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(IconComponent.prototype, "path", {
+    Object.defineProperty(IconComponent.prototype, "svgPath", {
+        /**
+         * Returns the path to the svg symbol. The path could include an
+         * external URL to an svg (sprite) file, but can also reference
+         * an existing SVG symbol in the DOM.
+         */
         get: /**
+         * Returns the path to the svg symbol. The path could include an
+         * external URL to an svg (sprite) file, but can also reference
+         * an existing SVG symbol in the DOM.
          * @return {?}
          */
         function () {
@@ -45,64 +58,47 @@ var IconComponent = /** @class */ (function () {
         configurable: true
     });
     /**
+     * Adds the style classes and the link resource (if availabe).
+     */
+    /**
+     * Adds the style classes and the link resource (if availabe).
      * @private
      * @return {?}
      */
     IconComponent.prototype.addStyleClasses = /**
+     * Adds the style classes and the link resource (if availabe).
      * @private
      * @return {?}
      */
     function () {
-        var _this = this;
+        if (this.staticStyleClasses) {
+            this.styleClasses = this.staticStyleClasses + ' ';
+        }
         if (this.useSvg) {
             return;
         }
-        this.clearStyleClasses();
-        this.iconStyleClasses = this.iconLoader.getStyleClasses(this.type);
-        this.iconStyleClasses.forEach(function (cls) {
-            _this.renderer.addClass(_this.hostElement.nativeElement, cls);
-        });
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    IconComponent.prototype.clearStyleClasses = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this.iconStyleClasses.forEach(function (cls) {
-            _this.renderer.removeClass(_this.hostElement.nativeElement, cls);
-        });
+        this.styleClasses += this.iconLoader.getStyleClasses(this.type);
+        this.iconLoader.addLinkResource(this.type);
     };
     IconComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-icon',
-                    template: "<ng-container *ngIf=\"useSvg\">\n  <svg>\n    <use [attr.xlink:href]=\"path\"></use>\n  </svg>\n</ng-container>\n"
+                    template: "<ng-container *ngIf=\"useSvg\">\n  <svg>\n    <use [attr.xlink:href]=\"svgPath\"></use>\n  </svg>\n</ng-container>\n"
                 }] }
     ];
     /** @nocollapse */
     IconComponent.ctorParameters = function () { return [
         { type: IconLoaderService },
-        { type: Renderer2 },
         { type: ElementRef }
     ]; };
     IconComponent.propDecorators = {
-        type: [{ type: Input }]
+        type: [{ type: Input }],
+        styleClasses: [{ type: HostBinding, args: ['class',] }]
     };
     return IconComponent;
 }());
 export { IconComponent };
 if (false) {
-    /**
-     * Keeps the given style classes so that we can
-     * clean them up when the icon changes
-     * @type {?}
-     * @private
-     */
-    IconComponent.prototype.iconStyleClasses;
     /**
      * The type of the icon which maps to the icon link
      * in the svg icon sprite.
@@ -110,19 +106,25 @@ if (false) {
      */
     IconComponent.prototype.type;
     /**
+     * Keeps the given style classes so that we can
+     * clean them up when the icon changes
+     * @type {?}
+     */
+    IconComponent.prototype.styleClasses;
+    /**
      * @type {?}
      * @private
+     */
+    IconComponent.prototype.staticStyleClasses;
+    /**
+     * @type {?}
+     * @protected
      */
     IconComponent.prototype.iconLoader;
     /**
      * @type {?}
      * @protected
      */
-    IconComponent.prototype.renderer;
-    /**
-     * @type {?}
-     * @protected
-     */
-    IconComponent.prototype.hostElement;
+    IconComponent.prototype.elementRef;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaWNvbi5jb21wb25lbnQuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJjbXMtY29tcG9uZW50cy9taXNjL2ljb24vaWNvbi5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE9BQU8sRUFDTCxTQUFTLEVBQ1QsVUFBVSxFQUNWLEtBQUssRUFFTCxTQUFTLEdBQ1YsTUFBTSxlQUFlLENBQUM7QUFDdkIsT0FBTyxFQUFFLGlCQUFpQixFQUFFLE1BQU0sdUJBQXVCLENBQUM7QUFHMUQ7SUFpQkUsdUJBQ1UsVUFBNkIsRUFDM0IsUUFBbUIsRUFDbkIsV0FBdUI7UUFGekIsZUFBVSxHQUFWLFVBQVUsQ0FBbUI7UUFDM0IsYUFBUSxHQUFSLFFBQVEsQ0FBVztRQUNuQixnQkFBVyxHQUFYLFdBQVcsQ0FBWTs7Ozs7UUFYM0IscUJBQWdCLEdBQUcsRUFBRSxDQUFDO0lBWTNCLENBQUM7Ozs7SUFFSixtQ0FBVzs7O0lBQVg7UUFDRSxJQUFJLENBQUMsZUFBZSxFQUFFLENBQUM7SUFDekIsQ0FBQztJQUVELHNCQUFJLGlDQUFNOzs7O1FBQVY7WUFDRSxPQUFPLElBQUksQ0FBQyxVQUFVLENBQUMsTUFBTSxFQUFFLENBQUM7UUFDbEMsQ0FBQzs7O09BQUE7SUFFRCxzQkFBSSwrQkFBSTs7OztRQUFSO1lBQ0UsT0FBTyxJQUFJLENBQUMsVUFBVSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDL0MsQ0FBQzs7O09BQUE7Ozs7O0lBRU8sdUNBQWU7Ozs7SUFBdkI7UUFBQSxpQkFTQztRQVJDLElBQUksSUFBSSxDQUFDLE1BQU0sRUFBRTtZQUNmLE9BQU87U0FDUjtRQUNELElBQUksQ0FBQyxpQkFBaUIsRUFBRSxDQUFDO1FBQ3pCLElBQUksQ0FBQyxnQkFBZ0IsR0FBRyxJQUFJLENBQUMsVUFBVSxDQUFDLGVBQWUsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDbkUsSUFBSSxDQUFDLGdCQUFnQixDQUFDLE9BQU8sQ0FBQyxVQUFBLEdBQUc7WUFDL0IsS0FBSSxDQUFDLFFBQVEsQ0FBQyxRQUFRLENBQUMsS0FBSSxDQUFDLFdBQVcsQ0FBQyxhQUFhLEVBQUUsR0FBRyxDQUFDLENBQUM7UUFDOUQsQ0FBQyxDQUFDLENBQUM7SUFDTCxDQUFDOzs7OztJQUVPLHlDQUFpQjs7OztJQUF6QjtRQUFBLGlCQUlDO1FBSEMsSUFBSSxDQUFDLGdCQUFnQixDQUFDLE9BQU8sQ0FBQyxVQUFBLEdBQUc7WUFDL0IsS0FBSSxDQUFDLFFBQVEsQ0FBQyxXQUFXLENBQUMsS0FBSSxDQUFDLFdBQVcsQ0FBQyxhQUFhLEVBQUUsR0FBRyxDQUFDLENBQUM7UUFDakUsQ0FBQyxDQUFDLENBQUM7SUFDTCxDQUFDOztnQkFsREYsU0FBUyxTQUFDO29CQUNULFFBQVEsRUFBRSxTQUFTO29CQUNuQiw2SEFBb0M7aUJBQ3JDOzs7O2dCQU5RLGlCQUFpQjtnQkFGeEIsU0FBUztnQkFIVCxVQUFVOzs7dUJBdUJULEtBQUs7O0lBb0NSLG9CQUFDO0NBQUEsQUFuREQsSUFtREM7U0EvQ1ksYUFBYTs7Ozs7Ozs7SUFLeEIseUNBQThCOzs7Ozs7SUFNOUIsNkJBQW1DOzs7OztJQUdqQyxtQ0FBcUM7Ozs7O0lBQ3JDLGlDQUE2Qjs7Ozs7SUFDN0Isb0NBQWlDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHtcbiAgQ29tcG9uZW50LFxuICBFbGVtZW50UmVmLFxuICBJbnB1dCxcbiAgT25DaGFuZ2VzLFxuICBSZW5kZXJlcjIsXG59IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgSWNvbkxvYWRlclNlcnZpY2UgfSBmcm9tICcuL2ljb24tbG9hZGVyLnNlcnZpY2UnO1xuaW1wb3J0IHsgSUNPTl9UWVBFUyB9IGZyb20gJy4vaWNvbi5tb2RlbCc7XG5cbkBDb21wb25lbnQoe1xuICBzZWxlY3RvcjogJ2N4LWljb24nLFxuICB0ZW1wbGF0ZVVybDogJy4vaWNvbi5jb21wb25lbnQuaHRtbCcsXG59KVxuZXhwb3J0IGNsYXNzIEljb25Db21wb25lbnQgaW1wbGVtZW50cyBPbkNoYW5nZXMge1xuICAvKipcbiAgICogS2VlcHMgdGhlIGdpdmVuIHN0eWxlIGNsYXNzZXMgc28gdGhhdCB3ZSBjYW5cbiAgICogY2xlYW4gdGhlbSB1cCB3aGVuIHRoZSBpY29uIGNoYW5nZXNcbiAgICovXG4gIHByaXZhdGUgaWNvblN0eWxlQ2xhc3NlcyA9IFtdO1xuXG4gIC8qKlxuICAgKiBUaGUgdHlwZSBvZiB0aGUgaWNvbiB3aGljaCBtYXBzIHRvIHRoZSBpY29uIGxpbmtcbiAgICogaW4gdGhlIHN2ZyBpY29uIHNwcml0ZS5cbiAgICovXG4gIEBJbnB1dCgpIHR5cGU6IElDT05fVFlQRVMgfCBzdHJpbmc7XG5cbiAgY29uc3RydWN0b3IoXG4gICAgcHJpdmF0ZSBpY29uTG9hZGVyOiBJY29uTG9hZGVyU2VydmljZSxcbiAgICBwcm90ZWN0ZWQgcmVuZGVyZXI6IFJlbmRlcmVyMixcbiAgICBwcm90ZWN0ZWQgaG9zdEVsZW1lbnQ6IEVsZW1lbnRSZWZcbiAgKSB7fVxuXG4gIG5nT25DaGFuZ2VzKCkge1xuICAgIHRoaXMuYWRkU3R5bGVDbGFzc2VzKCk7XG4gIH1cblxuICBnZXQgdXNlU3ZnKCk6IGJvb2xlYW4ge1xuICAgIHJldHVybiB0aGlzLmljb25Mb2FkZXIudXNlU3ZnKCk7XG4gIH1cblxuICBnZXQgcGF0aCgpOiBzdHJpbmcge1xuICAgIHJldHVybiB0aGlzLmljb25Mb2FkZXIuZ2V0U3ZnUGF0aCh0aGlzLnR5cGUpO1xuICB9XG5cbiAgcHJpdmF0ZSBhZGRTdHlsZUNsYXNzZXMoKSB7XG4gICAgaWYgKHRoaXMudXNlU3ZnKSB7XG4gICAgICByZXR1cm47XG4gICAgfVxuICAgIHRoaXMuY2xlYXJTdHlsZUNsYXNzZXMoKTtcbiAgICB0aGlzLmljb25TdHlsZUNsYXNzZXMgPSB0aGlzLmljb25Mb2FkZXIuZ2V0U3R5bGVDbGFzc2VzKHRoaXMudHlwZSk7XG4gICAgdGhpcy5pY29uU3R5bGVDbGFzc2VzLmZvckVhY2goY2xzID0+IHtcbiAgICAgIHRoaXMucmVuZGVyZXIuYWRkQ2xhc3ModGhpcy5ob3N0RWxlbWVudC5uYXRpdmVFbGVtZW50LCBjbHMpO1xuICAgIH0pO1xuICB9XG5cbiAgcHJpdmF0ZSBjbGVhclN0eWxlQ2xhc3NlcygpIHtcbiAgICB0aGlzLmljb25TdHlsZUNsYXNzZXMuZm9yRWFjaChjbHMgPT4ge1xuICAgICAgdGhpcy5yZW5kZXJlci5yZW1vdmVDbGFzcyh0aGlzLmhvc3RFbGVtZW50Lm5hdGl2ZUVsZW1lbnQsIGNscyk7XG4gICAgfSk7XG4gIH1cbn1cbiJdfQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaWNvbi5jb21wb25lbnQuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJjbXMtY29tcG9uZW50cy9taXNjL2ljb24vaWNvbi5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE9BQU8sRUFDTCxTQUFTLEVBQ1QsVUFBVSxFQUNWLFdBQVcsRUFDWCxLQUFLLEdBRU4sTUFBTSxlQUFlLENBQUM7QUFDdkIsT0FBTyxFQUFFLGlCQUFpQixFQUFFLE1BQU0sdUJBQXVCLENBQUM7QUFDMUQsT0FBTyxFQUFFLFNBQVMsRUFBRSxNQUFNLGNBQWMsQ0FBQztBQUV6QztJQW1CRSx1QkFDWSxVQUE2QixFQUM3QixVQUFtQztRQURuQyxlQUFVLEdBQVYsVUFBVSxDQUFtQjtRQUM3QixlQUFVLEdBQVYsVUFBVSxDQUF5Qjs7Ozs7UUFOekIsaUJBQVksR0FBRyxFQUFFLENBQUM7SUFPckMsQ0FBQzs7OztJQUVKLGdDQUFROzs7SUFBUjtRQUNFLElBQUksQ0FBQyxrQkFBa0IsR0FBRyxJQUFJLENBQUMsVUFBVSxDQUFDLGFBQWEsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDO1FBQ3hFLElBQUksQ0FBQyxlQUFlLEVBQUUsQ0FBQztJQUN6QixDQUFDO0lBS0Qsc0JBQUksaUNBQU07UUFIVjs7V0FFRzs7Ozs7UUFDSDtZQUNFLE9BQU8sSUFBSSxDQUFDLFVBQVUsQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQzNDLENBQUM7OztPQUFBO0lBT0Qsc0JBQUksa0NBQU87UUFMWDs7OztXQUlHOzs7Ozs7O1FBQ0g7WUFDRSxPQUFPLElBQUksQ0FBQyxVQUFVLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUMvQyxDQUFDOzs7T0FBQTtJQUVEOztPQUVHOzs7Ozs7SUFDSyx1Q0FBZTs7Ozs7SUFBdkI7UUFDRSxJQUFJLElBQUksQ0FBQyxrQkFBa0IsRUFBRTtZQUMzQixJQUFJLENBQUMsWUFBWSxHQUFHLElBQUksQ0FBQyxrQkFBa0IsR0FBRyxHQUFHLENBQUM7U0FDbkQ7UUFFRCxJQUFJLElBQUksQ0FBQyxNQUFNLEVBQUU7WUFDZixPQUFPO1NBQ1I7UUFFRCxJQUFJLENBQUMsWUFBWSxJQUFJLElBQUksQ0FBQyxVQUFVLENBQUMsZUFBZSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUNoRSxJQUFJLENBQUMsVUFBVSxDQUFDLGVBQWUsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDN0MsQ0FBQzs7Z0JBM0RGLFNBQVMsU0FBQztvQkFDVCxRQUFRLEVBQUUsU0FBUztvQkFDbkIsZ0lBQW9DO2lCQUNyQzs7OztnQkFOUSxpQkFBaUI7Z0JBTHhCLFVBQVU7Ozt1QkFpQlQsS0FBSzsrQkFNTCxXQUFXLFNBQUMsT0FBTzs7SUE2Q3RCLG9CQUFDO0NBQUEsQUE1REQsSUE0REM7U0F4RFksYUFBYTs7Ozs7OztJQUt4Qiw2QkFBeUI7Ozs7OztJQU16QixxQ0FBd0M7Ozs7O0lBRXhDLDJDQUFtQzs7Ozs7SUFHakMsbUNBQXVDOzs7OztJQUN2QyxtQ0FBNkMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQge1xuICBDb21wb25lbnQsXG4gIEVsZW1lbnRSZWYsXG4gIEhvc3RCaW5kaW5nLFxuICBJbnB1dCxcbiAgT25Jbml0LFxufSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IEljb25Mb2FkZXJTZXJ2aWNlIH0gZnJvbSAnLi9pY29uLWxvYWRlci5zZXJ2aWNlJztcbmltcG9ydCB7IElDT05fVFlQRSB9IGZyb20gJy4vaWNvbi5tb2RlbCc7XG5cbkBDb21wb25lbnQoe1xuICBzZWxlY3RvcjogJ2N4LWljb24nLFxuICB0ZW1wbGF0ZVVybDogJy4vaWNvbi5jb21wb25lbnQuaHRtbCcsXG59KVxuZXhwb3J0IGNsYXNzIEljb25Db21wb25lbnQgaW1wbGVtZW50cyBPbkluaXQge1xuICAvKipcbiAgICogVGhlIHR5cGUgb2YgdGhlIGljb24gd2hpY2ggbWFwcyB0byB0aGUgaWNvbiBsaW5rXG4gICAqIGluIHRoZSBzdmcgaWNvbiBzcHJpdGUuXG4gICAqL1xuICBASW5wdXQoKSB0eXBlOiBJQ09OX1RZUEU7XG5cbiAgLyoqXG4gICAqIEtlZXBzIHRoZSBnaXZlbiBzdHlsZSBjbGFzc2VzIHNvIHRoYXQgd2UgY2FuXG4gICAqIGNsZWFuIHRoZW0gdXAgd2hlbiB0aGUgaWNvbiBjaGFuZ2VzXG4gICAqL1xuICBASG9zdEJpbmRpbmcoJ2NsYXNzJykgc3R5bGVDbGFzc2VzID0gJyc7XG5cbiAgcHJpdmF0ZSBzdGF0aWNTdHlsZUNsYXNzZXM6IHN0cmluZztcblxuICBjb25zdHJ1Y3RvcihcbiAgICBwcm90ZWN0ZWQgaWNvbkxvYWRlcjogSWNvbkxvYWRlclNlcnZpY2UsXG4gICAgcHJvdGVjdGVkIGVsZW1lbnRSZWY6IEVsZW1lbnRSZWY8SFRNTEVsZW1lbnQ+XG4gICkge31cblxuICBuZ09uSW5pdCgpIHtcbiAgICB0aGlzLnN0YXRpY1N0eWxlQ2xhc3NlcyA9IHRoaXMuZWxlbWVudFJlZi5uYXRpdmVFbGVtZW50LmNsYXNzTGlzdC52YWx1ZTtcbiAgICB0aGlzLmFkZFN0eWxlQ2xhc3NlcygpO1xuICB9XG5cbiAgLyoqXG4gICAqIEluZGljYXRlcyB3aGV0aGVyIHRoZSBpY29uIGlzIGNvbmZpZ3VyZWQgdG8gdXNlIFNWRyBvciBub3QuXG4gICAqL1xuICBnZXQgdXNlU3ZnKCk6IGJvb2xlYW4ge1xuICAgIHJldHVybiB0aGlzLmljb25Mb2FkZXIudXNlU3ZnKHRoaXMudHlwZSk7XG4gIH1cblxuICAvKipcbiAgICogUmV0dXJucyB0aGUgcGF0aCB0byB0aGUgc3ZnIHN5bWJvbC4gVGhlIHBhdGggY291bGQgaW5jbHVkZSBhblxuICAgKiBleHRlcm5hbCBVUkwgdG8gYW4gc3ZnIChzcHJpdGUpIGZpbGUsIGJ1dCBjYW4gYWxzbyByZWZlcmVuY2VcbiAgICogYW4gZXhpc3RpbmcgU1ZHIHN5bWJvbCBpbiB0aGUgRE9NLlxuICAgKi9cbiAgZ2V0IHN2Z1BhdGgoKTogc3RyaW5nIHtcbiAgICByZXR1cm4gdGhpcy5pY29uTG9hZGVyLmdldFN2Z1BhdGgodGhpcy50eXBlKTtcbiAgfVxuXG4gIC8qKlxuICAgKiBBZGRzIHRoZSBzdHlsZSBjbGFzc2VzIGFuZCB0aGUgbGluayByZXNvdXJjZSAoaWYgYXZhaWxhYmUpLlxuICAgKi9cbiAgcHJpdmF0ZSBhZGRTdHlsZUNsYXNzZXMoKSB7XG4gICAgaWYgKHRoaXMuc3RhdGljU3R5bGVDbGFzc2VzKSB7XG4gICAgICB0aGlzLnN0eWxlQ2xhc3NlcyA9IHRoaXMuc3RhdGljU3R5bGVDbGFzc2VzICsgJyAnO1xuICAgIH1cblxuICAgIGlmICh0aGlzLnVzZVN2Zykge1xuICAgICAgcmV0dXJuO1xuICAgIH1cblxuICAgIHRoaXMuc3R5bGVDbGFzc2VzICs9IHRoaXMuaWNvbkxvYWRlci5nZXRTdHlsZUNsYXNzZXModGhpcy50eXBlKTtcbiAgICB0aGlzLmljb25Mb2FkZXIuYWRkTGlua1Jlc291cmNlKHRoaXMudHlwZSk7XG4gIH1cbn1cbiJdfQ==

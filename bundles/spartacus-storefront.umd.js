@@ -8,35 +8,8 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    /** @type {?} */
-    var fontawesomeIconConfig = {
-        icon: {
-            iconClass: 'fas',
-            prefix: 'fa-',
-            icons: {
-                SEARCH: 'search',
-                CART: 'shopping-cart',
-                INFO: 'info-circle',
-                STAR: 'star',
-                GRID: 'th-large',
-                LIST: 'bars',
-                CARET_DOWN: 'angle-down',
-                ERROR: 'exclamation-circle',
-                WARNING: 'exclamation-triangle',
-                SUCCESS: 'check-circle',
-                TIMES: 'times',
-                MINUS: 'minus',
-                PLUS: 'plus',
-            },
-        },
-    };
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     /** @enum {string} */
-    var ICON_TYPES = {
+    var ICON_TYPE = {
         STAR: 'STAR',
         SEARCH: 'SEARCH',
         CART: 'CART',
@@ -48,6 +21,7 @@
         ERROR: 'ERROR',
         WARNING: 'WARNING',
         SUCCESS: 'SUCCESS',
+        VISA: 'VISA',
         PLUS: 'PLUS',
         MINUS: 'MINUS',
     };
@@ -61,23 +35,74 @@
         }
         return IconConfig;
     }());
+    /** @enum {string} */
+    var IconResourceType = {
+        SVG: 'svg',
+        LINK: 'link',
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var fontawesomeIconConfig = {
+        icon: {
+            symbols: {
+                SEARCH: 'fas fa-search',
+                CART: 'fas fa-shopping-cart',
+                INFO: 'fas fa-info-circle',
+                STAR: 'fas fa-star',
+                GRID: 'fas fa-th-large',
+                LIST: 'fas fa-bars',
+                CARET_DOWN: 'fas fa-angle-down',
+                ERROR: 'fas fa-exclamation-circle',
+                WARNING: 'fas fa-exclamation-triangle',
+                SUCCESS: 'fas fa-check-circle',
+                TIMES: 'fas fa-times',
+                VISA: 'fab fa-cc-visa',
+                MINUS: 'fas fa-minus',
+                PLUS: 'fas fa-plus',
+            },
+            resources: [
+                {
+                    type: IconResourceType.LINK,
+                    url: 'https://use.fontawesome.com/releases/v5.8.1/css/all.css',
+                },
+            ],
+        },
+    };
 
     /**
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var IconLoaderService = /** @class */ (function () {
-        function IconLoaderService(config) {
+        function IconLoaderService(winRef, config) {
+            this.winRef = winRef;
             this.config = config;
+            this.loadedResources = [];
         }
         /**
+         * Indicates whether the given icon type is configured to use SVG.
+         */
+        /**
+         * Indicates whether the given icon type is configured to use SVG.
+         * @param {?} iconType
          * @return {?}
          */
         IconLoaderService.prototype.useSvg = /**
+         * Indicates whether the given icon type is configured to use SVG.
+         * @param {?} iconType
          * @return {?}
          */
-            function () {
-                return this.config.icon && this.config.icon.useSvg;
+            function (iconType) {
+                return (this.config.icon.resources &&
+                    !!this.config.icon.resources.find(function (res) {
+                        return res.types &&
+                            res.type === IconResourceType.SVG &&
+                            res.types.includes(iconType);
+                    }));
             };
         /**
          * Returns the path to the svg link. The link supports path names
@@ -102,77 +127,124 @@
          * @return {?}
          */
             function (iconType) {
-                if (!this.useSvg()) {
-                    return null;
-                }
                 /** @type {?} */
-                var path = '';
-                if (this.config.icon && this.config.icon.svgPath) {
-                    path = this.config.icon.svgPath;
+                var svgResource = this.config.icon.resources.find(function (res) {
+                    return res.type === IconResourceType.SVG &&
+                        res.types &&
+                        res.types.includes(iconType);
+                });
+                if (svgResource) {
+                    return svgResource.url
+                        ? svgResource.url + "#" + this.getSymbol(iconType)
+                        : "#" + this.getSymbol(iconType);
                 }
-                // if there's no mapping configured, we use the default value
-                path += '#';
-                if (this.config.icon && this.config.icon.prefix) {
-                    path += this.config.icon.prefix;
-                }
-                path += this.getMappedType(iconType);
-                return path;
             };
         /**
          *
-         * returns an array of css classes that can be used to
-         * render the icon by CSS / font. This is driven by the `iconType`
-         * and the icon configuration, so that multiple icon fonts are
-         * supported, such as font awesome, glypicons, Octicons, etc.
+         * Returns the symbol class(es) for the icon type.
          */
         /**
          *
-         * returns an array of css classes that can be used to
-         * render the icon by CSS / font. This is driven by the `iconType`
-         * and the icon configuration, so that multiple icon fonts are
-         * supported, such as font awesome, glypicons, Octicons, etc.
+         * Returns the symbol class(es) for the icon type.
          * @param {?} iconType
          * @return {?}
          */
         IconLoaderService.prototype.getStyleClasses = /**
          *
-         * returns an array of css classes that can be used to
-         * render the icon by CSS / font. This is driven by the `iconType`
-         * and the icon configuration, so that multiple icon fonts are
-         * supported, such as font awesome, glypicons, Octicons, etc.
+         * Returns the symbol class(es) for the icon type.
+         * @param {?} iconType
+         * @return {?}
+         */
+            function (iconType) {
+                return this.getSymbol(iconType) || '';
+            };
+        /**
+         * Loads the resource url (if any) for the given icon.
+         * The icon will only be loaded once.
+         *
+         * NOTE: this is not working when the shadow is used as there's
+         * no head element available and the link must be loaded for every
+         * web component.
+         */
+        /**
+         * Loads the resource url (if any) for the given icon.
+         * The icon will only be loaded once.
+         *
+         * NOTE: this is not working when the shadow is used as there's
+         * no head element available and the link must be loaded for every
+         * web component.
+         * @param {?} iconType
+         * @return {?}
+         */
+        IconLoaderService.prototype.addLinkResource = /**
+         * Loads the resource url (if any) for the given icon.
+         * The icon will only be loaded once.
+         *
+         * NOTE: this is not working when the shadow is used as there's
+         * no head element available and the link must be loaded for every
+         * web component.
          * @param {?} iconType
          * @return {?}
          */
             function (iconType) {
                 /** @type {?} */
-                var styleClasses = [];
-                if (this.config.icon && this.config.icon.iconClass) {
-                    styleClasses.push(this.config.icon.iconClass);
+                var resource = this.findResource(iconType, IconResourceType.LINK);
+                if (resource && resource.url) {
+                    if (!this.loadedResources.includes(resource.url)) {
+                        this.loadedResources.push(resource.url);
+                        /** @type {?} */
+                        var head = this.winRef.document.getElementsByTagName('head')[0];
+                        /** @type {?} */
+                        var link = this.winRef.document.createElement('link');
+                        link.rel = 'stylesheet';
+                        link.type = 'text/css';
+                        link.href = resource.url;
+                        head.appendChild(link);
+                    }
+                }
+            };
+        /**
+         * @private
+         * @param {?} iconType
+         * @param {?} resourceType
+         * @return {?}
+         */
+        IconLoaderService.prototype.findResource = /**
+         * @private
+         * @param {?} iconType
+         * @param {?} resourceType
+         * @return {?}
+         */
+            function (iconType, resourceType) {
+                if (!this.config.icon.resources) {
+                    return;
                 }
                 /** @type {?} */
-                var type = this.getMappedType(iconType);
-                if (this.config.icon && this.config.icon.prefix) {
-                    type = this.config.icon.prefix + type;
+                var resource = this.config.icon.resources.find(function (res) {
+                    return res.type === resourceType && res.types && res.types.includes(iconType);
+                });
+                // no specific resource found, let's try to find a one-size-fits-all resource
+                if (!resource) {
+                    resource = this.config.icon.resources.find(function (res) { return (res.type === resourceType && !res.types) || res.types === []; });
                 }
-                styleClasses.push(type);
-                return styleClasses;
+                return resource;
             };
         /**
          * @private
          * @param {?} iconType
          * @return {?}
          */
-        IconLoaderService.prototype.getMappedType = /**
+        IconLoaderService.prototype.getSymbol = /**
          * @private
          * @param {?} iconType
          * @return {?}
          */
             function (iconType) {
-                return this.config.icon &&
-                    this.config.icon.icons &&
-                    this.config.icon.icons[iconType]
-                    ? this.config.icon.icons[iconType]
-                    : iconType;
+                if (this.config.icon &&
+                    this.config.icon.symbols &&
+                    this.config.icon.symbols[iconType]) {
+                    return this.config.icon.symbols[iconType];
+                }
             };
         IconLoaderService.decorators = [
             { type: i0.Injectable, args: [{
@@ -182,10 +254,11 @@
         /** @nocollapse */
         IconLoaderService.ctorParameters = function () {
             return [
+                { type: i1$1.WindowRef },
                 { type: IconConfig }
             ];
         };
-        /** @nocollapse */ IconLoaderService.ngInjectableDef = i0.defineInjectable({ factory: function IconLoaderService_Factory() { return new IconLoaderService(i0.inject(IconConfig)); }, token: IconLoaderService, providedIn: "root" });
+        /** @nocollapse */ IconLoaderService.ngInjectableDef = i0.defineInjectable({ factory: function IconLoaderService_Factory() { return new IconLoaderService(i0.inject(i1$1.WindowRef), i0.inject(IconConfig)); }, token: IconLoaderService, providedIn: "root" });
         return IconLoaderService;
     }());
 
@@ -194,36 +267,48 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var IconComponent = /** @class */ (function () {
-        function IconComponent(iconLoader, renderer, hostElement) {
+        function IconComponent(iconLoader, elementRef) {
             this.iconLoader = iconLoader;
-            this.renderer = renderer;
-            this.hostElement = hostElement;
+            this.elementRef = elementRef;
             /**
              * Keeps the given style classes so that we can
              * clean them up when the icon changes
              */
-            this.iconStyleClasses = [];
+            this.styleClasses = '';
         }
         /**
          * @return {?}
          */
-        IconComponent.prototype.ngOnChanges = /**
+        IconComponent.prototype.ngOnInit = /**
          * @return {?}
          */
             function () {
+                this.staticStyleClasses = this.elementRef.nativeElement.classList.value;
                 this.addStyleClasses();
             };
         Object.defineProperty(IconComponent.prototype, "useSvg", {
+            /**
+             * Indicates whether the icon is configured to use SVG or not.
+             */
             get: /**
+             * Indicates whether the icon is configured to use SVG or not.
              * @return {?}
              */ function () {
-                return this.iconLoader.useSvg();
+                return this.iconLoader.useSvg(this.type);
             },
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(IconComponent.prototype, "path", {
+        Object.defineProperty(IconComponent.prototype, "svgPath", {
+            /**
+             * Returns the path to the svg symbol. The path could include an
+             * external URL to an svg (sprite) file, but can also reference
+             * an existing SVG symbol in the DOM.
+             */
             get: /**
+             * Returns the path to the svg symbol. The path could include an
+             * external URL to an svg (sprite) file, but can also reference
+             * an existing SVG symbol in the DOM.
              * @return {?}
              */ function () {
                 return this.iconLoader.getSvgPath(this.type);
@@ -232,54 +317,44 @@
             configurable: true
         });
         /**
+         * Adds the style classes and the link resource (if availabe).
+         */
+        /**
+         * Adds the style classes and the link resource (if availabe).
          * @private
          * @return {?}
          */
         IconComponent.prototype.addStyleClasses = /**
+         * Adds the style classes and the link resource (if availabe).
          * @private
          * @return {?}
          */
             function () {
-                var _this = this;
+                if (this.staticStyleClasses) {
+                    this.styleClasses = this.staticStyleClasses + ' ';
+                }
                 if (this.useSvg) {
                     return;
                 }
-                this.clearStyleClasses();
-                this.iconStyleClasses = this.iconLoader.getStyleClasses(this.type);
-                this.iconStyleClasses.forEach(function (cls) {
-                    _this.renderer.addClass(_this.hostElement.nativeElement, cls);
-                });
-            };
-        /**
-         * @private
-         * @return {?}
-         */
-        IconComponent.prototype.clearStyleClasses = /**
-         * @private
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                this.iconStyleClasses.forEach(function (cls) {
-                    _this.renderer.removeClass(_this.hostElement.nativeElement, cls);
-                });
+                this.styleClasses += this.iconLoader.getStyleClasses(this.type);
+                this.iconLoader.addLinkResource(this.type);
             };
         IconComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-icon',
-                        template: "<ng-container *ngIf=\"useSvg\">\n  <svg>\n    <use [attr.xlink:href]=\"path\"></use>\n  </svg>\n</ng-container>\n"
+                        template: "<ng-container *ngIf=\"useSvg\">\n  <svg>\n    <use [attr.xlink:href]=\"svgPath\"></use>\n  </svg>\n</ng-container>\n"
                     }] }
         ];
         /** @nocollapse */
         IconComponent.ctorParameters = function () {
             return [
                 { type: IconLoaderService },
-                { type: i0.Renderer2 },
                 { type: i0.ElementRef }
             ];
         };
         IconComponent.propDecorators = {
-            type: [{ type: i0.Input }]
+            type: [{ type: i0.Input }],
+            styleClasses: [{ type: i0.HostBinding, args: ['class',] }]
         };
         return IconComponent;
     }());
@@ -316,7 +391,7 @@
             this.activeModal = activeModal;
             this.cartService = cartService;
             this.fb = fb;
-            this.iconTypes = ICON_TYPES;
+            this.iconTypes = ICON_TYPE;
             this.quantity = 0;
             this.firstUpdate = true;
             this.form = this.fb.group({});
@@ -2185,7 +2260,7 @@
     var GlobalMessageComponent = /** @class */ (function () {
         function GlobalMessageComponent(globalMessageService) {
             this.globalMessageService = globalMessageService;
-            this.iconTypes = ICON_TYPES;
+            this.iconTypes = ICON_TYPE;
             this.messageType = i1$1.GlobalMessageType;
         }
         /**
@@ -5337,7 +5412,7 @@
     var SiteContextSelectorComponent = /** @class */ (function () {
         function SiteContextSelectorComponent(componentService) {
             this.componentService = componentService;
-            this.iconTypes = ICON_TYPES;
+            this.iconTypes = ICON_TYPE;
         }
         Object.defineProperty(SiteContextSelectorComponent.prototype, "items$", {
             get: /**
@@ -5472,7 +5547,7 @@
              */
             this.change = new i0.EventEmitter();
             this.initialRate = 0;
-            this.iconTypes = ICON_TYPES;
+            this.iconTypes = ICON_TYPE;
         }
         /**
          * @return {?}
@@ -6135,7 +6210,7 @@
     var MiniCartComponent = /** @class */ (function () {
         function MiniCartComponent(cartService) {
             this.cartService = cartService;
-            this.iconTypes = ICON_TYPES;
+            this.iconTypes = ICON_TYPE;
             this.quantity$ = this.cartService
                 .getActive()
                 .pipe(operators.map(function (cart) { return cart.deliveryItemsQuantity || 0; }));
@@ -6652,7 +6727,7 @@
     var SuggestedAddressDialogComponent = /** @class */ (function () {
         function SuggestedAddressDialogComponent(activeModal) {
             this.activeModal = activeModal;
-            this.iconTypes = ICON_TYPES;
+            this.iconTypes = ICON_TYPE;
         }
         /**
          * @return {?}
@@ -7221,7 +7296,7 @@
             this.globalMessageService = globalMessageService;
             this.routingService = routingService;
             this.translationService = translationService;
-            this.iconTypes = ICON_TYPES;
+            this.iconTypes = ICON_TYPE;
             this.subscription = new rxjs.Subscription();
         }
         /**
@@ -9692,7 +9767,7 @@
         function SearchBoxComponent(service) {
             var _this = this;
             this.service = service;
-            this.iconTypes = ICON_TYPES;
+            this.iconTypes = ICON_TYPE;
             this.searchBoxControl = new forms.FormControl();
             this.queryText$ = new rxjs.Subject();
             this.typeahead = function (text$) {
@@ -10813,7 +10888,7 @@
     };
     var ProductViewComponent = /** @class */ (function () {
         function ProductViewComponent() {
-            this.iconTypes = ICON_TYPES;
+            this.iconTypes = ICON_TYPE;
             this.modeChange = new i0.EventEmitter();
         }
         Object.defineProperty(ProductViewComponent.prototype, "buttonClass", {
@@ -11048,7 +11123,7 @@
             this.modalService = modalService;
             this.activatedRoute = activatedRoute;
             this.productSearchService = productSearchService;
-            this.iconTypes = ICON_TYPES;
+            this.iconTypes = ICON_TYPE;
             this.minPerFacet = 6;
             this.collapsedFacets = new Set();
             this.showAllPerFacetMap = new Map();
@@ -12947,7 +13022,7 @@
             this.globalMessageService = globalMessageService;
             this.fb = fb;
             this.modalService = modalService;
-            this.iconTypes = ICON_TYPES;
+            this.iconTypes = ICON_TYPE;
             this.months = [];
             this.years = [];
             this.sameAsShippingAddress = true;
@@ -15530,8 +15605,9 @@
     exports.fontawesomeIconConfig = fontawesomeIconConfig;
     exports.IconLoaderService = IconLoaderService;
     exports.IconComponent = IconComponent;
-    exports.ICON_TYPES = ICON_TYPES;
+    exports.ICON_TYPE = ICON_TYPE;
     exports.IconConfig = IconConfig;
+    exports.IconResourceType = IconResourceType;
     exports.IconModule = IconModule;
     exports.LanguageCurrencyComponent = LanguageCurrencyComponent;
     exports.SiteContextComponentService = SiteContextComponentService;

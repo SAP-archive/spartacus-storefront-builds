@@ -7,7 +7,7 @@ import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscriptio
 import { Title, Meta } from '@angular/platform-browser';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
-import { Config, ConfigModule, CartService, ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, RoutingService, LanguageService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ProductService, CmsService, ProductReferenceService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, PageType, NotAuthGuard, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, OccConfig, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
+import { WindowRef, ServerConfig, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, CartService, RoutingService, LanguageService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ConfigModule, CmsService, ProductService, ProductReferenceService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, NotAuthGuard, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, OccConfig, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { Injectable, NgModule, APP_INITIALIZER, ChangeDetectionStrategy, Component, Input, Injector, Optional, EventEmitter, Output, ElementRef, ViewChild, Inject, PLATFORM_ID, Renderer2, ChangeDetectorRef, HostBinding, Directive, TemplateRef, ViewContainerRef, ViewEncapsulation, forwardRef, HostListener, defineInjectable, inject, INJECTOR } from '@angular/core';
@@ -16,35 +16,8 @@ import { Injectable, NgModule, APP_INITIALIZER, ChangeDetectionStrategy, Compone
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/** @type {?} */
-const fontawesomeIconConfig = {
-    icon: {
-        iconClass: 'fas',
-        prefix: 'fa-',
-        icons: {
-            SEARCH: 'search',
-            CART: 'shopping-cart',
-            INFO: 'info-circle',
-            STAR: 'star',
-            GRID: 'th-large',
-            LIST: 'bars',
-            CARET_DOWN: 'angle-down',
-            ERROR: 'exclamation-circle',
-            WARNING: 'exclamation-triangle',
-            SUCCESS: 'check-circle',
-            TIMES: 'times',
-            MINUS: 'minus',
-            PLUS: 'plus',
-        },
-    },
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 /** @enum {string} */
-const ICON_TYPES = {
+const ICON_TYPE = {
     STAR: 'STAR',
     SEARCH: 'SEARCH',
     CART: 'CART',
@@ -56,6 +29,7 @@ const ICON_TYPES = {
     ERROR: 'ERROR',
     WARNING: 'WARNING',
     SUCCESS: 'SUCCESS',
+    VISA: 'VISA',
     PLUS: 'PLUS',
     MINUS: 'MINUS',
 };
@@ -64,6 +38,43 @@ const ICON_TYPES = {
  */
 class IconConfig {
 }
+/** @enum {string} */
+const IconResourceType = {
+    SVG: 'svg',
+    LINK: 'link',
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const fontawesomeIconConfig = {
+    icon: {
+        symbols: {
+            SEARCH: 'fas fa-search',
+            CART: 'fas fa-shopping-cart',
+            INFO: 'fas fa-info-circle',
+            STAR: 'fas fa-star',
+            GRID: 'fas fa-th-large',
+            LIST: 'fas fa-bars',
+            CARET_DOWN: 'fas fa-angle-down',
+            ERROR: 'fas fa-exclamation-circle',
+            WARNING: 'fas fa-exclamation-triangle',
+            SUCCESS: 'fas fa-check-circle',
+            TIMES: 'fas fa-times',
+            VISA: 'fab fa-cc-visa',
+            MINUS: 'fas fa-minus',
+            PLUS: 'fas fa-plus',
+        },
+        resources: [
+            {
+                type: IconResourceType.LINK,
+                url: 'https://use.fontawesome.com/releases/v5.8.1/css/all.css',
+            },
+        ],
+    },
+};
 
 /**
  * @fileoverview added by tsickle
@@ -71,16 +82,24 @@ class IconConfig {
  */
 class IconLoaderService {
     /**
+     * @param {?} winRef
      * @param {?} config
      */
-    constructor(config) {
+    constructor(winRef, config) {
+        this.winRef = winRef;
         this.config = config;
+        this.loadedResources = [];
     }
     /**
+     * Indicates whether the given icon type is configured to use SVG.
+     * @param {?} iconType
      * @return {?}
      */
-    useSvg() {
-        return this.config.icon && this.config.icon.useSvg;
+    useSvg(iconType) {
+        return (this.config.icon.resources &&
+            !!this.config.icon.resources.find(res => res.types &&
+                res.type === IconResourceType.SVG &&
+                res.types.includes(iconType)));
     }
     /**
      * Returns the path to the svg link. The link supports path names
@@ -91,56 +110,81 @@ class IconLoaderService {
      * @return {?}
      */
     getSvgPath(iconType) {
-        if (!this.useSvg()) {
-            return null;
-        }
         /** @type {?} */
-        let path = '';
-        if (this.config.icon && this.config.icon.svgPath) {
-            path = this.config.icon.svgPath;
+        const svgResource = this.config.icon.resources.find(res => res.type === IconResourceType.SVG &&
+            res.types &&
+            res.types.includes(iconType));
+        if (svgResource) {
+            return svgResource.url
+                ? `${svgResource.url}#${this.getSymbol(iconType)}`
+                : `#${this.getSymbol(iconType)}`;
         }
-        // if there's no mapping configured, we use the default value
-        path += '#';
-        if (this.config.icon && this.config.icon.prefix) {
-            path += this.config.icon.prefix;
-        }
-        path += this.getMappedType(iconType);
-        return path;
     }
     /**
      *
-     * returns an array of css classes that can be used to
-     * render the icon by CSS / font. This is driven by the `iconType`
-     * and the icon configuration, so that multiple icon fonts are
-     * supported, such as font awesome, glypicons, Octicons, etc.
+     * Returns the symbol class(es) for the icon type.
      * @param {?} iconType
      * @return {?}
      */
     getStyleClasses(iconType) {
+        return this.getSymbol(iconType) || '';
+    }
+    /**
+     * Loads the resource url (if any) for the given icon.
+     * The icon will only be loaded once.
+     *
+     * NOTE: this is not working when the shadow is used as there's
+     * no head element available and the link must be loaded for every
+     * web component.
+     * @param {?} iconType
+     * @return {?}
+     */
+    addLinkResource(iconType) {
         /** @type {?} */
-        const styleClasses = [];
-        if (this.config.icon && this.config.icon.iconClass) {
-            styleClasses.push(this.config.icon.iconClass);
+        const resource = this.findResource(iconType, IconResourceType.LINK);
+        if (resource && resource.url) {
+            if (!this.loadedResources.includes(resource.url)) {
+                this.loadedResources.push(resource.url);
+                /** @type {?} */
+                const head = this.winRef.document.getElementsByTagName('head')[0];
+                /** @type {?} */
+                const link = this.winRef.document.createElement('link');
+                link.rel = 'stylesheet';
+                link.type = 'text/css';
+                link.href = resource.url;
+                head.appendChild(link);
+            }
+        }
+    }
+    /**
+     * @private
+     * @param {?} iconType
+     * @param {?} resourceType
+     * @return {?}
+     */
+    findResource(iconType, resourceType) {
+        if (!this.config.icon.resources) {
+            return;
         }
         /** @type {?} */
-        let type = this.getMappedType(iconType);
-        if (this.config.icon && this.config.icon.prefix) {
-            type = this.config.icon.prefix + type;
+        let resource = this.config.icon.resources.find(res => res.type === resourceType && res.types && res.types.includes(iconType));
+        // no specific resource found, let's try to find a one-size-fits-all resource
+        if (!resource) {
+            resource = this.config.icon.resources.find(res => (res.type === resourceType && !res.types) || res.types === []);
         }
-        styleClasses.push(type);
-        return styleClasses;
+        return resource;
     }
     /**
      * @private
      * @param {?} iconType
      * @return {?}
      */
-    getMappedType(iconType) {
-        return this.config.icon &&
-            this.config.icon.icons &&
-            this.config.icon.icons[iconType]
-            ? this.config.icon.icons[iconType]
-            : iconType;
+    getSymbol(iconType) {
+        if (this.config.icon &&
+            this.config.icon.symbols &&
+            this.config.icon.symbols[iconType]) {
+            return this.config.icon.symbols[iconType];
+        }
     }
 }
 IconLoaderService.decorators = [
@@ -150,9 +194,10 @@ IconLoaderService.decorators = [
 ];
 /** @nocollapse */
 IconLoaderService.ctorParameters = () => [
+    { type: WindowRef },
     { type: IconConfig }
 ];
-/** @nocollapse */ IconLoaderService.ngInjectableDef = defineInjectable({ factory: function IconLoaderService_Factory() { return new IconLoaderService(inject(IconConfig)); }, token: IconLoaderService, providedIn: "root" });
+/** @nocollapse */ IconLoaderService.ngInjectableDef = defineInjectable({ factory: function IconLoaderService_Factory() { return new IconLoaderService(inject(WindowRef), inject(IconConfig)); }, token: IconLoaderService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
@@ -161,75 +206,70 @@ IconLoaderService.ctorParameters = () => [
 class IconComponent {
     /**
      * @param {?} iconLoader
-     * @param {?} renderer
-     * @param {?} hostElement
+     * @param {?} elementRef
      */
-    constructor(iconLoader, renderer, hostElement) {
+    constructor(iconLoader, elementRef) {
         this.iconLoader = iconLoader;
-        this.renderer = renderer;
-        this.hostElement = hostElement;
+        this.elementRef = elementRef;
         /**
          * Keeps the given style classes so that we can
          * clean them up when the icon changes
          */
-        this.iconStyleClasses = [];
+        this.styleClasses = '';
     }
     /**
      * @return {?}
      */
-    ngOnChanges() {
+    ngOnInit() {
+        this.staticStyleClasses = this.elementRef.nativeElement.classList.value;
         this.addStyleClasses();
     }
     /**
+     * Indicates whether the icon is configured to use SVG or not.
      * @return {?}
      */
     get useSvg() {
-        return this.iconLoader.useSvg();
+        return this.iconLoader.useSvg(this.type);
     }
     /**
+     * Returns the path to the svg symbol. The path could include an
+     * external URL to an svg (sprite) file, but can also reference
+     * an existing SVG symbol in the DOM.
      * @return {?}
      */
-    get path() {
+    get svgPath() {
         return this.iconLoader.getSvgPath(this.type);
     }
     /**
+     * Adds the style classes and the link resource (if availabe).
      * @private
      * @return {?}
      */
     addStyleClasses() {
+        if (this.staticStyleClasses) {
+            this.styleClasses = this.staticStyleClasses + ' ';
+        }
         if (this.useSvg) {
             return;
         }
-        this.clearStyleClasses();
-        this.iconStyleClasses = this.iconLoader.getStyleClasses(this.type);
-        this.iconStyleClasses.forEach(cls => {
-            this.renderer.addClass(this.hostElement.nativeElement, cls);
-        });
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    clearStyleClasses() {
-        this.iconStyleClasses.forEach(cls => {
-            this.renderer.removeClass(this.hostElement.nativeElement, cls);
-        });
+        this.styleClasses += this.iconLoader.getStyleClasses(this.type);
+        this.iconLoader.addLinkResource(this.type);
     }
 }
 IconComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-icon',
-                template: "<ng-container *ngIf=\"useSvg\">\n  <svg>\n    <use [attr.xlink:href]=\"path\"></use>\n  </svg>\n</ng-container>\n"
+                template: "<ng-container *ngIf=\"useSvg\">\n  <svg>\n    <use [attr.xlink:href]=\"svgPath\"></use>\n  </svg>\n</ng-container>\n"
             }] }
 ];
 /** @nocollapse */
 IconComponent.ctorParameters = () => [
     { type: IconLoaderService },
-    { type: Renderer2 },
     { type: ElementRef }
 ];
 IconComponent.propDecorators = {
-    type: [{ type: Input }]
+    type: [{ type: Input }],
+    styleClasses: [{ type: HostBinding, args: ['class',] }]
 };
 
 /**
@@ -266,7 +306,7 @@ class AddedToCartDialogComponent {
         this.activeModal = activeModal;
         this.cartService = cartService;
         this.fb = fb;
-        this.iconTypes = ICON_TYPES;
+        this.iconTypes = ICON_TYPE;
         this.quantity = 0;
         this.firstUpdate = true;
         this.form = this.fb.group({});
@@ -1643,7 +1683,7 @@ class GlobalMessageComponent {
      */
     constructor(globalMessageService) {
         this.globalMessageService = globalMessageService;
-        this.iconTypes = ICON_TYPES;
+        this.iconTypes = ICON_TYPE;
         this.messageType = GlobalMessageType;
     }
     /**
@@ -4248,7 +4288,7 @@ class SiteContextSelectorComponent {
      */
     constructor(componentService) {
         this.componentService = componentService;
-        this.iconTypes = ICON_TYPES;
+        this.iconTypes = ICON_TYPE;
     }
     /**
      * @return {?}
@@ -4358,7 +4398,7 @@ class StarRatingComponent {
          */
         this.change = new EventEmitter();
         this.initialRate = 0;
-        this.iconTypes = ICON_TYPES;
+        this.iconTypes = ICON_TYPE;
     }
     /**
      * @return {?}
@@ -4881,7 +4921,7 @@ class MiniCartComponent {
      */
     constructor(cartService) {
         this.cartService = cartService;
-        this.iconTypes = ICON_TYPES;
+        this.iconTypes = ICON_TYPE;
         this.quantity$ = this.cartService
             .getActive()
             .pipe(map(cart => cart.deliveryItemsQuantity || 0));
@@ -5322,7 +5362,7 @@ class SuggestedAddressDialogComponent {
      */
     constructor(activeModal) {
         this.activeModal = activeModal;
-        this.iconTypes = ICON_TYPES;
+        this.iconTypes = ICON_TYPE;
     }
     /**
      * @return {?}
@@ -5813,7 +5853,7 @@ class CloseAccountModalComponent {
         this.globalMessageService = globalMessageService;
         this.routingService = routingService;
         this.translationService = translationService;
-        this.iconTypes = ICON_TYPES;
+        this.iconTypes = ICON_TYPE;
         this.subscription = new Subscription();
     }
     /**
@@ -7859,7 +7899,7 @@ class SearchBoxComponent {
      */
     constructor(service) {
         this.service = service;
-        this.iconTypes = ICON_TYPES;
+        this.iconTypes = ICON_TYPE;
         this.searchBoxControl = new FormControl();
         this.queryText$ = new Subject();
         this.typeahead = (text$) => this.service.typeahead(merge(text$, this.queryText$));
@@ -8739,7 +8779,7 @@ const ViewModes = {
 };
 class ProductViewComponent {
     constructor() {
-        this.iconTypes = ICON_TYPES;
+        this.iconTypes = ICON_TYPE;
         this.modeChange = new EventEmitter();
     }
     /**
@@ -8938,7 +8978,7 @@ class ProductFacetNavigationComponent {
         this.modalService = modalService;
         this.activatedRoute = activatedRoute;
         this.productSearchService = productSearchService;
-        this.iconTypes = ICON_TYPES;
+        this.iconTypes = ICON_TYPE;
         this.minPerFacet = 6;
         this.collapsedFacets = new Set();
         this.showAllPerFacetMap = new Map();
@@ -10531,7 +10571,7 @@ class PaymentFormComponent {
         this.globalMessageService = globalMessageService;
         this.fb = fb;
         this.modalService = modalService;
-        this.iconTypes = ICON_TYPES;
+        this.iconTypes = ICON_TYPE;
         this.months = [];
         this.years = [];
         this.sameAsShippingAddress = true;
@@ -12799,6 +12839,6 @@ const translations = {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AddToCartComponent, AddToCartModule, AddedToCartDialogComponent, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartSharedModule, OrderSummaryComponent, CartTotalsComponent, CartComponentModule, MiniCartComponent, MiniCartModule, CmsLibModule, BannerComponent, BannerModule, LinkComponent, LinkModule, ParagraphComponent, CmsParagraphModule, TabParagraphContainerComponent, TabParagraphContainerModule, GlobalMessageComponentModule, GlobalMessageComponent, fontawesomeIconConfig, IconLoaderService, IconComponent, ICON_TYPES, IconConfig, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, CloseAccountModule, CloseAccountModalComponent, CloseAccountComponent, ForgotPasswordComponent, ForgotPasswordModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, PaymentMethodsComponent, PaymentMethodsModule, ResetPasswordFormComponent, ResetPasswordModule, UpdateEmailFormComponent, UpdateEmailComponent, UpdateEmailModule, UpdatePasswordFormComponent, UpdatePasswordComponent, UpdatePasswordModule, UpdateProfileFormComponent, UpdateProfileComponent, UpdateProfileModule, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, FooterNavigationComponent, FooterNavigationModule, NavigationComponent, NavigationModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, CurrentProductService, ProductDetailsComponent, ProductDetailsModule, ProductImagesComponent, ProductSummaryComponent, ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent, ProductDetailOutlets, ProductTabsOutlets, ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule, AbstractStoreItemComponent, ScheduleComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderPaginationDetailsComponent, StoreFinderListComponent, StoreFinderSearchResultComponent, StoreFinderSearchComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StoreFinderComponent, StoreFinderModule, LoginFormComponent, LoginFormModule, LoginComponent, LoginModule, LogoutGuard, LogoutModule, RegisterComponent, RegisterComponentModule, UserComponentModule, OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService, StyleRefDirective, StyleRefModule, ComponentWrapperDirective, PageComponentModule, defaultCmsContentConfig, CmsComponentData, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, pwaConfigurationFactory, pwaFactory, PwaModule, PWAModuleConfig, defaultPWAModuleConfig, SeoMetaService, initSeoService, SeoModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, LayoutModule, MainModule, StorefrontComponent, CheckoutComponentModule, MultiStepCheckoutModule, ShippingAddressModule, OrderConfirmationModule, SuggestedAddressDialogComponent, AddressFormComponent, PaymentFormComponent, ReviewSubmitComponent, DeliveryModeComponent, MultiStepCheckoutComponent, OrderConfirmationComponent, CmsRouteModule, CmsModule$1 as CmsModule, CmsPageGuard, CmsMappingService, CmsRoutesService, StorefrontModule, SuffixRoutesModule, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, UiModule, FormComponentsModule, ItemCounterComponent, GenericLinkComponent, ListNavigationModule, PaginationComponent, SortingComponent, MediaComponent, MediaModule, MediaService, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, OnlyNumberDirective, translations, CartTotalsModule as ɵd, NavigationUIComponent as ɵg, NavigationComponentService as ɵf, ProductCarouselService as ɵm, ProductReferencesService as ɵo, SharedCarouselService as ɵn, ProductTabsComponent as ɵl, LoginComponentService as ɵs, OutletStyleService as ɵk, defaultCartPageConfig as ɵt, AddToHomeScreenService as ɵu, htmlLangProvider as ɵv, setHtmlLangAttribute as ɵw, BootstrapModule as ɵc, CheckoutDetailsService as ɵbh, DeliveryModeModule as ɵy, BillingAddressFormComponent as ɵbc, BillingAddressFormModule as ɵbb, PaymentFormModule as ɵba, PaymentMethodComponent as ɵbd, PaymentMethodModule as ɵz, PlaceOrderComponent as ɵbg, PlaceOrderModule as ɵbf, ReviewSubmitModule as ɵbe, AddressFormModule as ɵj, ShippingAddressComponent as ɵx, PromotionsComponent as ɵb, PromotionsModule as ɵa, guards$1 as ɵbi, OrderConfirmationPageGuard as ɵbj, addCmsRoute as ɵbk, guards as ɵp, CmsGuardsService as ɵr, CmsI18nService as ɵq, provideConfigFromMetaTags as ɵbs, suffixUrlMatcher as ɵbr, HardcodedCheckoutComponent as ɵbq, defaultRoutingConfig as ɵbm, defaultStorefrontRoutesConfig as ɵbl, CartNotEmptyGuard as ɵbp, GuardsModule as ɵbo, OrderConfirmationPageModule as ɵbn, CardComponent as ɵi, CardModule as ɵh, GenericLinkModule as ɵe, address as ɵbt, cart as ɵbu, checkout as ɵbv, common as ɵbw, myAccount as ɵbx, payment as ɵby, product as ɵbz, pwa as ɵca, storeFinder as ɵcb, user as ɵcc };
+export { AddToCartComponent, AddToCartModule, AddedToCartDialogComponent, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartSharedModule, OrderSummaryComponent, CartTotalsComponent, CartComponentModule, MiniCartComponent, MiniCartModule, CmsLibModule, BannerComponent, BannerModule, LinkComponent, LinkModule, ParagraphComponent, CmsParagraphModule, TabParagraphContainerComponent, TabParagraphContainerModule, GlobalMessageComponentModule, GlobalMessageComponent, fontawesomeIconConfig, IconLoaderService, IconComponent, ICON_TYPE, IconConfig, IconResourceType, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, CloseAccountModule, CloseAccountModalComponent, CloseAccountComponent, ForgotPasswordComponent, ForgotPasswordModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, PaymentMethodsComponent, PaymentMethodsModule, ResetPasswordFormComponent, ResetPasswordModule, UpdateEmailFormComponent, UpdateEmailComponent, UpdateEmailModule, UpdatePasswordFormComponent, UpdatePasswordComponent, UpdatePasswordModule, UpdateProfileFormComponent, UpdateProfileComponent, UpdateProfileModule, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, FooterNavigationComponent, FooterNavigationModule, NavigationComponent, NavigationModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, CurrentProductService, ProductDetailsComponent, ProductDetailsModule, ProductImagesComponent, ProductSummaryComponent, ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent, ProductDetailOutlets, ProductTabsOutlets, ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule, AbstractStoreItemComponent, ScheduleComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderPaginationDetailsComponent, StoreFinderListComponent, StoreFinderSearchResultComponent, StoreFinderSearchComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StoreFinderComponent, StoreFinderModule, LoginFormComponent, LoginFormModule, LoginComponent, LoginModule, LogoutGuard, LogoutModule, RegisterComponent, RegisterComponentModule, UserComponentModule, OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService, StyleRefDirective, StyleRefModule, ComponentWrapperDirective, PageComponentModule, defaultCmsContentConfig, CmsComponentData, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, pwaConfigurationFactory, pwaFactory, PwaModule, PWAModuleConfig, defaultPWAModuleConfig, SeoMetaService, initSeoService, SeoModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, LayoutModule, MainModule, StorefrontComponent, CheckoutComponentModule, MultiStepCheckoutModule, ShippingAddressModule, OrderConfirmationModule, SuggestedAddressDialogComponent, AddressFormComponent, PaymentFormComponent, ReviewSubmitComponent, DeliveryModeComponent, MultiStepCheckoutComponent, OrderConfirmationComponent, CmsRouteModule, CmsModule$1 as CmsModule, CmsPageGuard, CmsMappingService, CmsRoutesService, StorefrontModule, SuffixRoutesModule, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, UiModule, FormComponentsModule, ItemCounterComponent, GenericLinkComponent, ListNavigationModule, PaginationComponent, SortingComponent, MediaComponent, MediaModule, MediaService, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, OnlyNumberDirective, translations, CartTotalsModule as ɵd, NavigationUIComponent as ɵg, NavigationComponentService as ɵf, ProductCarouselService as ɵm, ProductReferencesService as ɵo, SharedCarouselService as ɵn, ProductTabsComponent as ɵl, LoginComponentService as ɵs, OutletStyleService as ɵk, defaultCartPageConfig as ɵt, AddToHomeScreenService as ɵu, htmlLangProvider as ɵv, setHtmlLangAttribute as ɵw, BootstrapModule as ɵc, CheckoutDetailsService as ɵbh, DeliveryModeModule as ɵy, BillingAddressFormComponent as ɵbc, BillingAddressFormModule as ɵbb, PaymentFormModule as ɵba, PaymentMethodComponent as ɵbd, PaymentMethodModule as ɵz, PlaceOrderComponent as ɵbg, PlaceOrderModule as ɵbf, ReviewSubmitModule as ɵbe, AddressFormModule as ɵj, ShippingAddressComponent as ɵx, PromotionsComponent as ɵb, PromotionsModule as ɵa, guards$1 as ɵbi, OrderConfirmationPageGuard as ɵbj, addCmsRoute as ɵbk, guards as ɵp, CmsGuardsService as ɵr, CmsI18nService as ɵq, provideConfigFromMetaTags as ɵbs, suffixUrlMatcher as ɵbr, HardcodedCheckoutComponent as ɵbq, defaultRoutingConfig as ɵbm, defaultStorefrontRoutesConfig as ɵbl, CartNotEmptyGuard as ɵbp, GuardsModule as ɵbo, OrderConfirmationPageModule as ɵbn, CardComponent as ɵi, CardModule as ɵh, GenericLinkModule as ɵe, address as ɵbt, cart as ɵbu, checkout as ɵbv, common as ɵbw, myAccount as ɵbx, payment as ɵby, product as ɵbz, pwa as ɵca, storeFinder as ɵcb, user as ɵcc };
 
 //# sourceMappingURL=spartacus-storefront.js.map

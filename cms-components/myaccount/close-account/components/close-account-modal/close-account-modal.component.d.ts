@@ -1,8 +1,8 @@
-import { OnInit, OnDestroy } from '@angular/core';
+import { OnDestroy, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { GlobalMessageService, RoutingService, UserService, UserToken, AuthService, TranslationService } from '@spartacus/core';
+import { AuthService, GlobalMessageService, RoutingService, TranslationService, UserService, UserToken } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { ICON_TYPES } from '../../../../../cms-components/misc/icon/index';
+import { ICON_TYPE } from '../../../../../cms-components/misc/icon/index';
 export declare class CloseAccountModalComponent implements OnInit, OnDestroy {
     private activeModal;
     private userService;
@@ -10,7 +10,7 @@ export declare class CloseAccountModalComponent implements OnInit, OnDestroy {
     private globalMessageService;
     private routingService;
     private translationService;
-    iconTypes: typeof ICON_TYPES;
+    iconTypes: typeof ICON_TYPE;
     private subscription;
     userToken$: Observable<UserToken>;
     isLoading$: Observable<boolean>;

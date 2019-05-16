@@ -1,5 +1,5 @@
 import { ElementRef, EventEmitter, OnInit } from '@angular/core';
-import { ICON_TYPES } from '../../../cms-components/misc/index';
+import { ICON_TYPE } from '../../../cms-components/misc/index';
 export declare class StarRatingComponent implements OnInit {
     private el;
     /**
@@ -16,7 +16,7 @@ export declare class StarRatingComponent implements OnInit {
      */
     change: EventEmitter<number>;
     private initialRate;
-    iconTypes: typeof ICON_TYPES;
+    iconTypes: typeof ICON_TYPE;
     constructor(el: ElementRef);
     ngOnInit(): void;
     setRate(value: number, force?: boolean): void;
