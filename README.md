@@ -1,11 +1,11 @@
-# Spartacus Storefront
+# Spartacus storefront snapshot builds
 
-Spartacus Storefront is a package that you can include in your application, which allows you to add default storefront features.
+Snapshot builds for the Spartacus storefront library
 
-The Spartacus Storefront is extendable and upgradable by changing the version of the library you are using. Furthermore, the storefront can be styled by using the [Spartacus Styles](https://www.npmjs.com/package/@spartacus/styles) package.
+The sources for this package are in the `storefront` library of the [cloud-commerce-spartacus-storefront](https://github.com/SAP/cloud-commerce-spartacus-storefront) repo. Please file issues and pull requests against that repo.
 
-For more informations, see [Cloud Commerce Spartacus Storefront](https://github.com/SAP/cloud-commerce-spartacus-storefront).
+Information about snapshot builds can be found [here](https://github.com/SAP/cloud-commerce-spartacus-storefront/blob/develop/docs/snapshot_builds.md)
 
-#### Related projects
+## License
 
-[Spartacus Styles](https://www.npmjs.com/package/@spartacus/styles)
+Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved. This file is licensed under the Apache Software License, v. 2 except as noted otherwise in the [LICENSE](https://github.com/SAP/cloud-commerce-spartacus-storefront-storefront-builds/blob/master/LICENSE) file
