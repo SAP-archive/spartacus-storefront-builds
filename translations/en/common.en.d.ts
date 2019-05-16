@@ -8,6 +8,7 @@ export declare const common: {
         submit: string;
         continue: string;
         save: string;
+        home: string;
     };
     spinner: {
         loading: string;

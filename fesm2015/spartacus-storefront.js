@@ -7,7 +7,7 @@ import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscriptio
 import { Title, Meta } from '@angular/platform-browser';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
-import { WindowRef, ServerConfig, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, CartService, RoutingService, LanguageService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ConfigModule, CmsService, ProductService, CartDataService, ProductReferenceService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, NotAuthGuard, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, OccConfig, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
+import { WindowRef, ServerConfig, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, CartService, RoutingService, LanguageService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ProductService, ConfigModule, CmsService, CartDataService, ProductReferenceService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, NotAuthGuard, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, OccConfig, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { Injectable, NgModule, APP_INITIALIZER, ChangeDetectionStrategy, Component, Input, Injector, Optional, ElementRef, ViewChild, EventEmitter, Output, Inject, PLATFORM_ID, Renderer2, ChangeDetectorRef, HostBinding, Directive, TemplateRef, ViewContainerRef, ViewEncapsulation, forwardRef, HostListener, defineInjectable, inject, INJECTOR } from '@angular/core';
@@ -7421,10 +7421,12 @@ class BreadcrumbComponent {
     /**
      * @param {?} component
      * @param {?} pageMetaService
+     * @param {?} translation
      */
-    constructor(component, pageMetaService) {
+    constructor(component, pageMetaService, translation) {
         this.component = component;
         this.pageMetaService = pageMetaService;
+        this.translation = translation;
     }
     /**
      * @return {?}
@@ -7445,9 +7447,7 @@ class BreadcrumbComponent {
      * @return {?}
      */
     setCrumbs() {
-        this.crumbs$ = this.pageMetaService
-            .getMeta()
-            .pipe(map((meta) => meta.breadcrumbs ? meta.breadcrumbs : [{ label: 'Home', link: '/' }]));
+        this.crumbs$ = combineLatest(this.pageMetaService.getMeta(), this.translation.translate('common.home')).pipe(map(([meta, textHome]) => meta.breadcrumbs ? meta.breadcrumbs : [{ label: textHome, link: '/' }]));
     }
 }
 BreadcrumbComponent.decorators = [
@@ -7460,7 +7460,8 @@ BreadcrumbComponent.decorators = [
 /** @nocollapse */
 BreadcrumbComponent.ctorParameters = () => [
     { type: CmsComponentData },
-    { type: PageMetaService }
+    { type: PageMetaService },
+    { type: TranslationService }
 ];
 
 /**
@@ -12399,6 +12400,7 @@ const common = {
         submit: 'Submit',
         continue: 'Continue',
         save: 'Save',
+        home: 'Home',
     },
     spinner: {
         loading: 'Loading...',

@@ -8845,9 +8845,10 @@ var UpdateProfileModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var BreadcrumbComponent = /** @class */ (function () {
-    function BreadcrumbComponent(component, pageMetaService) {
+    function BreadcrumbComponent(component, pageMetaService, translation) {
         this.component = component;
         this.pageMetaService = pageMetaService;
+        this.translation = translation;
     }
     /**
      * @return {?}
@@ -8879,10 +8880,9 @@ var BreadcrumbComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.crumbs$ = this.pageMetaService
-            .getMeta()
-            .pipe(map(function (meta) {
-            return meta.breadcrumbs ? meta.breadcrumbs : [{ label: 'Home', link: '/' }];
+        this.crumbs$ = combineLatest(this.pageMetaService.getMeta(), this.translation.translate('common.home')).pipe(map(function (_a) {
+            var _b = __read(_a, 2), meta = _b[0], textHome = _b[1];
+            return meta.breadcrumbs ? meta.breadcrumbs : [{ label: textHome, link: '/' }];
         }));
     };
     BreadcrumbComponent.decorators = [
@@ -8895,7 +8895,8 @@ var BreadcrumbComponent = /** @class */ (function () {
     /** @nocollapse */
     BreadcrumbComponent.ctorParameters = function () { return [
         { type: CmsComponentData },
-        { type: PageMetaService }
+        { type: PageMetaService },
+        { type: TranslationService }
     ]; };
     return BreadcrumbComponent;
 }());
@@ -14751,6 +14752,7 @@ var common = {
         submit: 'Submit',
         continue: 'Continue',
         save: 'Save',
+        home: 'Home',
     },
     spinner: {
         loading: 'Loading...',
