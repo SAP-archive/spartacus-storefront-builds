@@ -3876,7 +3876,7 @@
                 })
                     .pipe(operators.tap(function (hasPage) {
                     if (!hasPage) {
-                        _this.routing.go(['/']);
+                        _this.routing.go({ cxRoute: 'home' });
                     }
                 }));
             };
@@ -3907,217 +3907,6 @@
         };
         /** @nocollapse */ LogoutGuard.ngInjectableDef = i0.defineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(i0.inject(i1$1.AuthService), i0.inject(i1$1.CmsService), i0.inject(i1$1.RoutingService)); }, token: LogoutGuard, providedIn: "root" });
         return LogoutGuard;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @type {?} */
-    var cartComponents = {
-        emptyCartText: {
-            flexType: 'CMSParagraphComponent',
-            typeCode: 'CMSParagraphComponent',
-            content: "\n      <h2>Your shopping cart is empty</h2>\n      <p>Suggestions</p>\n      <ul>\n          <li>\n          Browse our products by selecting a category above\n          </li>\n      </ul>",
-        },
-    };
-    /** @type {?} */
-    var defaultCartPageConfig = {
-        ignoreBackend: false,
-        pageId: 'cartPage',
-        type: 'ContentPage',
-        template: 'CartPageTemplate',
-        title: 'Cart',
-        slots: {
-            EmptyCartMiddleContent: {
-                componentIds: ['emptyCartText'],
-            },
-        },
-    };
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @type {?} */
-    var headerComponents = {
-        SkipLinkComponent: {
-            typeCode: 'SkipLinkComponent',
-            flexType: 'SkipLinkComponent',
-            uid: 'SkipLinkComponent',
-        },
-        HamburgerMenuComponent: {
-            typeCode: 'HamburgerMenuComponent',
-            flexType: 'HamburgerMenuComponent',
-        },
-        LanguageComponent: {
-            typeCode: 'CMSSiteContextComponent',
-            flexType: 'CMSSiteContextComponent',
-            context: 'LANGUAGE',
-        },
-        CurrencyComponent: {
-            typeCode: 'CMSSiteContextComponent',
-            flexType: 'CMSSiteContextComponent',
-            context: 'CURRENCY',
-        },
-        LanguageCurrencyComponent: {
-            typeCode: 'LanguageCurrencyComponent',
-            flexType: 'LanguageCurrencyComponent',
-        },
-        StoreFinder: {
-            typeCode: 'CMSLinkComponent',
-            flexType: 'CMSLinkComponent',
-            linkName: 'Find a Store',
-            url: '/store-finder',
-        },
-        BreadcrumbComponent: {
-            typeCode: 'BreadcrumbComponent',
-            flexType: 'BreadcrumbComponent',
-        },
-        Logo: {
-            typeCode: 'SimpleBannerComponent',
-            flexType: 'SimpleBannerComponent',
-            uid: 'logo',
-            media: {
-                mime: 'svg/image/svg+xml',
-                url: 'https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg',
-            },
-            urlLink: '/',
-        },
-        SearchBox: {
-            typeCode: 'SearchBoxComponent',
-            flexType: 'SearchBoxComponent',
-            uid: 'SearchBoxComponent',
-        },
-        MiniCart: {
-            typeCode: 'MiniCartComponent',
-            flexType: 'MiniCartComponent',
-            uid: 'MiniCartComponent',
-        },
-        LoginComponent: {
-            typeCode: 'LoginComponent',
-            flexType: 'LoginComponent',
-            uid: 'LoginComponent',
-        },
-        CategoryNavigationComponent: {
-            typeCode: 'CategoryNavigationComponent',
-            flexType: 'CategoryNavigationComponent',
-            uid: 'ElectronicsCategoryNavComponent',
-            navigationNode: {
-                uid: 'ElectronicsCategoryNavNode',
-                children: [
-                    {
-                        uid: 'CameraLensesNavNode',
-                        title: 'Electronic catalog',
-                        entries: [
-                            {
-                                itemId: 'CameraLensesCategoryLink',
-                                itemSuperType: 'AbstractCMSComponent',
-                                itemType: 'CMSLinkComponent',
-                            },
-                        ],
-                    },
-                ],
-            },
-        },
-    };
-    /** @type {?} */
-    var defaultPageHeaderConfig = {
-        PreHeader: {
-            componentIds: ['SkipLinkComponent', 'HamburgerMenuComponent'],
-        },
-        SiteContext: {
-            componentIds: ['LanguageComponent', 'CurrencyComponent'],
-        },
-        SiteLinks: {
-            componentIds: ['StoreFinder'],
-        },
-        SiteLogo: {
-            componentIds: ['Logo'],
-        },
-        SearchBox: {
-            componentIds: ['SearchBox'],
-        },
-        MiniCart: {
-            componentIds: ['MiniCart'],
-        },
-        SiteLogin: {
-            componentIds: ['LoginComponent'],
-        },
-        NavigationBar: {
-            componentIds: ['CategoryNavigationComponent'],
-        },
-        BottomHeaderSlot: {
-            componentIds: ['BreadcrumbComponent'],
-        },
-    };
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /**
-     * @return {?}
-     */
-    function defaultCmsContentConfig() {
-        return {
-            cmsStructure: {
-                components: __assign({}, headerComponents, cartComponents),
-                slots: __assign({}, defaultPageHeaderConfig),
-                pages: [defaultCartPageConfig],
-            },
-        };
-    }
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var PageLayoutModule = /** @class */ (function () {
-        function PageLayoutModule() {
-        }
-        PageLayoutModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [common.CommonModule, OutletModule, PageSlotModule],
-                        declarations: [PageLayoutComponent],
-                        providers: [PageLayoutService],
-                        exports: [PageLayoutComponent],
-                    },] }
-        ];
-        return PageLayoutModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var LogoutModule = /** @class */ (function () {
-        function LogoutModule() {
-        }
-        LogoutModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            i1$2.RouterModule.forChild([
-                                {
-                                    path: 'logout',
-                                    canActivate: [LogoutGuard],
-                                    component: PageLayoutComponent,
-                                },
-                            ]),
-                        ],
-                    },] }
-        ];
-        return LogoutModule;
     }());
 
     /**
@@ -4309,6 +4098,194 @@
                     },] }
         ];
         return UserComponentModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var cartComponents = {
+        emptyCartText: {
+            flexType: 'CMSParagraphComponent',
+            typeCode: 'CMSParagraphComponent',
+            content: "\n      <h2>Your shopping cart is empty</h2>\n      <p>Suggestions</p>\n      <ul>\n          <li>\n          Browse our products by selecting a category above\n          </li>\n      </ul>",
+        },
+    };
+    /** @type {?} */
+    var defaultCartPageConfig = {
+        ignoreBackend: false,
+        pageId: 'cartPage',
+        type: 'ContentPage',
+        template: 'CartPageTemplate',
+        title: 'Cart',
+        slots: {
+            EmptyCartMiddleContent: {
+                componentIds: ['emptyCartText'],
+            },
+        },
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var headerComponents = {
+        SkipLinkComponent: {
+            typeCode: 'SkipLinkComponent',
+            flexType: 'SkipLinkComponent',
+            uid: 'SkipLinkComponent',
+        },
+        HamburgerMenuComponent: {
+            typeCode: 'HamburgerMenuComponent',
+            flexType: 'HamburgerMenuComponent',
+        },
+        LanguageComponent: {
+            typeCode: 'CMSSiteContextComponent',
+            flexType: 'CMSSiteContextComponent',
+            context: 'LANGUAGE',
+        },
+        CurrencyComponent: {
+            typeCode: 'CMSSiteContextComponent',
+            flexType: 'CMSSiteContextComponent',
+            context: 'CURRENCY',
+        },
+        LanguageCurrencyComponent: {
+            typeCode: 'LanguageCurrencyComponent',
+            flexType: 'LanguageCurrencyComponent',
+        },
+        StoreFinder: {
+            typeCode: 'CMSLinkComponent',
+            flexType: 'CMSLinkComponent',
+            linkName: 'Find a Store',
+            url: '/store-finder',
+        },
+        BreadcrumbComponent: {
+            typeCode: 'BreadcrumbComponent',
+            flexType: 'BreadcrumbComponent',
+        },
+        Logo: {
+            typeCode: 'SimpleBannerComponent',
+            flexType: 'SimpleBannerComponent',
+            uid: 'logo',
+            media: {
+                mime: 'svg/image/svg+xml',
+                url: 'https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg',
+            },
+            urlLink: '/',
+        },
+        SearchBox: {
+            typeCode: 'SearchBoxComponent',
+            flexType: 'SearchBoxComponent',
+            uid: 'SearchBoxComponent',
+        },
+        MiniCart: {
+            typeCode: 'MiniCartComponent',
+            flexType: 'MiniCartComponent',
+            uid: 'MiniCartComponent',
+        },
+        LoginComponent: {
+            typeCode: 'LoginComponent',
+            flexType: 'LoginComponent',
+            uid: 'LoginComponent',
+        },
+        CategoryNavigationComponent: {
+            typeCode: 'CategoryNavigationComponent',
+            flexType: 'CategoryNavigationComponent',
+            uid: 'ElectronicsCategoryNavComponent',
+            navigationNode: {
+                uid: 'ElectronicsCategoryNavNode',
+                children: [
+                    {
+                        uid: 'CameraLensesNavNode',
+                        title: 'Electronic catalog',
+                        entries: [
+                            {
+                                itemId: 'CameraLensesCategoryLink',
+                                itemSuperType: 'AbstractCMSComponent',
+                                itemType: 'CMSLinkComponent',
+                            },
+                        ],
+                    },
+                ],
+            },
+        },
+    };
+    /** @type {?} */
+    var defaultPageHeaderConfig = {
+        PreHeader: {
+            componentIds: ['SkipLinkComponent', 'HamburgerMenuComponent'],
+        },
+        SiteContext: {
+            componentIds: ['LanguageComponent', 'CurrencyComponent'],
+        },
+        SiteLinks: {
+            componentIds: ['StoreFinder'],
+        },
+        SiteLogo: {
+            componentIds: ['Logo'],
+        },
+        SearchBox: {
+            componentIds: ['SearchBox'],
+        },
+        MiniCart: {
+            componentIds: ['MiniCart'],
+        },
+        SiteLogin: {
+            componentIds: ['LoginComponent'],
+        },
+        NavigationBar: {
+            componentIds: ['CategoryNavigationComponent'],
+        },
+        BottomHeaderSlot: {
+            componentIds: ['BreadcrumbComponent'],
+        },
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @return {?}
+     */
+    function defaultCmsContentConfig() {
+        return {
+            cmsStructure: {
+                components: __assign({}, headerComponents, cartComponents),
+                slots: __assign({}, defaultPageHeaderConfig),
+                pages: [defaultCartPageConfig],
+            },
+        };
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var PageLayoutModule = /** @class */ (function () {
+        function PageLayoutModule() {
+        }
+        PageLayoutModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [common.CommonModule, OutletModule, PageSlotModule],
+                        declarations: [PageLayoutComponent],
+                        providers: [PageLayoutService],
+                        exports: [PageLayoutComponent],
+                    },] }
+        ];
+        return PageLayoutModule;
     }());
 
     /**
@@ -14726,6 +14703,7 @@
         search: { paths: ['search/:query'] },
         // semantic links for login related pages
         login: { paths: ['login'] },
+        logout: { paths: ['logout'] },
         register: { paths: ['login/register'] },
         forgotPassword: { paths: ['login/forgot-password'] },
         checkout: { paths: ['checkout'] },
@@ -14904,7 +14882,7 @@
     var ɵ0$5 = { pageLabel: 'homepage', cxRoute: 'home' }, ɵ1$1 = {
         pageLabel: 'multiStepCheckoutSummaryPage',
         cxRoute: 'checkout',
-    }, ɵ2 = { pageLabel: 'search', cxRoute: 'search' }, ɵ3 = { cxRoute: 'category' }, ɵ4 = { cxRoute: 'brand' }, ɵ5 = { pageLabel: 'order', cxRoute: 'orderDetails' };
+    }, ɵ2 = { cxRoute: 'logout' }, ɵ3 = { pageLabel: 'search', cxRoute: 'search' }, ɵ4 = { cxRoute: 'category' }, ɵ5 = { cxRoute: 'brand' }, ɵ6 = { pageLabel: 'order', cxRoute: 'orderDetails' };
     var PagesModule = /** @class */ (function () {
         function PagesModule() {
         }
@@ -14915,7 +14893,6 @@
                             common.CommonModule
                         ], pageModules, [
                             PageLayoutModule,
-                            LogoutModule,
                             i1$2.RouterModule.forChild([
                                 {
                                     // This route can be dropped only when we have a mapping path to page label for content pages
@@ -14932,7 +14909,7 @@
                                 },
                                 {
                                     path: null,
-                                    canActivate: [CmsPageGuard],
+                                    canActivate: [LogoutGuard],
                                     component: PageLayoutComponent,
                                     data: ɵ2,
                                 },
@@ -14950,9 +14927,15 @@
                                 },
                                 {
                                     path: null,
-                                    canActivate: [i1$1.AuthGuard, CmsPageGuard],
+                                    canActivate: [CmsPageGuard],
                                     component: PageLayoutComponent,
                                     data: ɵ5,
+                                },
+                                {
+                                    path: null,
+                                    canActivate: [i1$1.AuthGuard, CmsPageGuard],
+                                    component: PageLayoutComponent,
+                                    data: ɵ6,
                                 },
                             ]),
                         ]),
@@ -15699,7 +15682,6 @@
     exports.LoginComponent = LoginComponent;
     exports.LoginModule = LoginModule;
     exports.LogoutGuard = LogoutGuard;
-    exports.LogoutModule = LogoutModule;
     exports.RegisterComponent = RegisterComponent;
     exports.RegisterComponentModule = RegisterComponentModule;
     exports.UserComponentModule = UserComponentModule;

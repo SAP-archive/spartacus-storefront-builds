@@ -7,10 +7,10 @@ import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscriptio
 import { Title, Meta } from '@angular/platform-browser';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
-import { WindowRef, ServerConfig, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, CartService, RoutingService, LanguageService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ConfigModule, CmsService, ProductService, ProductReferenceService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, NotAuthGuard, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, OccConfig, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
+import { WindowRef, ServerConfig, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, CartService, RoutingService, LanguageService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ProductService, ConfigModule, CmsService, CartDataService, ProductReferenceService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, NotAuthGuard, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, OccConfig, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
-import { Injectable, NgModule, APP_INITIALIZER, ChangeDetectionStrategy, Component, Input, Injector, Optional, ElementRef, ViewChild, EventEmitter, Output, Inject, PLATFORM_ID, Renderer2, ChangeDetectorRef, HostBinding, Directive, TemplateRef, ViewContainerRef, ViewEncapsulation, forwardRef, HostListener, defineInjectable, inject, INJECTOR } from '@angular/core';
+import { Injectable, NgModule, APP_INITIALIZER, ChangeDetectionStrategy, Component, Input, Injector, Optional, EventEmitter, Output, ElementRef, ViewChild, Inject, PLATFORM_ID, Renderer2, ChangeDetectorRef, HostBinding, Directive, TemplateRef, ViewContainerRef, ViewEncapsulation, forwardRef, HostListener, defineInjectable, inject, INJECTOR } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -2945,7 +2945,7 @@ class LogoutGuard {
         })
             .pipe(tap(hasPage => {
             if (!hasPage) {
-                this.routing.go(['/']);
+                this.routing.go({ cxRoute: 'home' });
             }
         }));
     }
@@ -2970,6 +2970,184 @@ LogoutGuard.ctorParameters = () => [
     { type: RoutingService }
 ];
 /** @nocollapse */ LogoutGuard.ngInjectableDef = defineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(inject(AuthService), inject(CmsService), inject(RoutingService)); }, token: LogoutGuard, providedIn: "root" });
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class RegisterComponent {
+    /**
+     * @param {?} auth
+     * @param {?} routing
+     * @param {?} userService
+     * @param {?} globalMessageService
+     * @param {?} fb
+     */
+    constructor(auth, routing, userService, globalMessageService, fb) {
+        this.auth = auth;
+        this.routing = routing;
+        this.userService = userService;
+        this.globalMessageService = globalMessageService;
+        this.fb = fb;
+        this.userRegistrationForm = this.fb.group({
+            titleCode: [''],
+            firstName: ['', Validators.required],
+            lastName: ['', Validators.required],
+            email: ['', [Validators.required, CustomFormValidators.emailValidator]],
+            password: [
+                '',
+                [Validators.required, CustomFormValidators.passwordValidator],
+            ],
+            passwordconf: ['', Validators.required],
+            newsletter: [false],
+            termsandconditions: [false, Validators.requiredTrue],
+        }, { validator: this.matchPassword });
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.titles$ = this.userService.getTitles().pipe(tap(titles => {
+            if (Object.keys(titles).length === 0) {
+                this.userService.loadTitles();
+            }
+        }));
+        this.subscription = this.auth
+            .getUserToken()
+            .pipe(switchMap(data => {
+            if (data && data.access_token) {
+                this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
+                return this.routing.getRedirectUrl().pipe(take(1));
+            }
+            return of();
+        }))
+            .subscribe(url => {
+            if (url) {
+                // If forced to login due to AuthGuard, then redirect to intended destination
+                this.routing.goByUrl(url);
+                this.routing.clearRedirectUrl();
+            }
+            else {
+                // User manual login
+                this.routing.go(['/']);
+            }
+        });
+    }
+    /**
+     * @return {?}
+     */
+    submit() {
+        const { firstName, lastName, email, password, titleCode, } = this.userRegistrationForm.value;
+        /** @type {?} */
+        const userRegisterFormData = {
+            firstName,
+            lastName,
+            uid: email,
+            password,
+            titleCode,
+        };
+        this.userService.register(userRegisterFormData);
+        // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
+        this.globalMessageService
+            .get()
+            .pipe(filter(data => Object.keys(data).length > 0))
+            .subscribe((globalMessageEntities) => {
+            if (globalMessageEntities[GlobalMessageType.MSG_TYPE_ERROR].some(message => message === 'This field is required.')) {
+                this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
+                this.globalMessageService.add({ key: 'register.titleRequired' }, GlobalMessageType.MSG_TYPE_ERROR);
+            }
+        });
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+    }
+    /**
+     * @private
+     * @param {?} ac
+     * @return {?}
+     */
+    matchPassword(ac) {
+        if (ac.get('password').value !== ac.get('passwordconf').value) {
+            return { NotEqual: true };
+        }
+    }
+}
+RegisterComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-register',
+                template: "<section class=\"cx-page__section container\">\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <h1 class=\"cx-section__title\">\n          {{ 'register.createAccount' | cxTranslate }}\n        </h1>\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of (titles$ | async)\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  (userRegistrationForm.get('email').errors?.email ||\n                    userRegistrationForm.get('email').errors?.InvalidEmail) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"newsletter\"\n                  class=\"form-check-input\"\n                  formControlName=\"newsletter\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.emailMarketing' | cxTranslate }}\n                </span>\n              </label>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            [disabled]=\"userRegistrationForm.invalid\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n"
+            }] }
+];
+/** @nocollapse */
+RegisterComponent.ctorParameters = () => [
+    { type: AuthService },
+    { type: RoutingService },
+    { type: UserService },
+    { type: GlobalMessageService },
+    { type: FormBuilder }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class RegisterComponentModule {
+}
+RegisterComponentModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    LoginModule,
+                    ReactiveFormsModule,
+                    RouterModule,
+                    UserModule,
+                    UrlModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            RegisterCustomerComponent: {
+                                selector: 'cx-register',
+                                guards: [NotAuthGuard],
+                            },
+                        },
+                    }))),
+                    I18nModule,
+                ],
+                declarations: [RegisterComponent],
+                exports: [RegisterComponent],
+                entryComponents: [RegisterComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class UserComponentModule {
+}
+UserComponentModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    LoginModule,
+                    LoginFormModule,
+                    ReactiveFormsModule,
+                    RouterModule,
+                    UserModule,
+                    UrlModule,
+                    RegisterComponentModule,
+                ],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -3155,204 +3333,6 @@ PageLayoutModule.decorators = [
                 declarations: [PageLayoutComponent],
                 providers: [PageLayoutService],
                 exports: [PageLayoutComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class LogoutModule {
-}
-LogoutModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    RouterModule.forChild([
-                        {
-                            path: 'logout',
-                            canActivate: [LogoutGuard],
-                            component: PageLayoutComponent,
-                        },
-                    ]),
-                ],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class RegisterComponent {
-    /**
-     * @param {?} auth
-     * @param {?} routing
-     * @param {?} userService
-     * @param {?} globalMessageService
-     * @param {?} fb
-     */
-    constructor(auth, routing, userService, globalMessageService, fb) {
-        this.auth = auth;
-        this.routing = routing;
-        this.userService = userService;
-        this.globalMessageService = globalMessageService;
-        this.fb = fb;
-        this.userRegistrationForm = this.fb.group({
-            titleCode: [''],
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            email: ['', [Validators.required, CustomFormValidators.emailValidator]],
-            password: [
-                '',
-                [Validators.required, CustomFormValidators.passwordValidator],
-            ],
-            passwordconf: ['', Validators.required],
-            newsletter: [false],
-            termsandconditions: [false, Validators.requiredTrue],
-        }, { validator: this.matchPassword });
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.titles$ = this.userService.getTitles().pipe(tap(titles => {
-            if (Object.keys(titles).length === 0) {
-                this.userService.loadTitles();
-            }
-        }));
-        this.subscription = this.auth
-            .getUserToken()
-            .pipe(switchMap(data => {
-            if (data && data.access_token) {
-                this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
-                return this.routing.getRedirectUrl().pipe(take(1));
-            }
-            return of();
-        }))
-            .subscribe(url => {
-            if (url) {
-                // If forced to login due to AuthGuard, then redirect to intended destination
-                this.routing.goByUrl(url);
-                this.routing.clearRedirectUrl();
-            }
-            else {
-                // User manual login
-                this.routing.go(['/']);
-            }
-        });
-    }
-    /**
-     * @return {?}
-     */
-    submit() {
-        const { firstName, lastName, email, password, titleCode, } = this.userRegistrationForm.value;
-        /** @type {?} */
-        const userRegisterFormData = {
-            firstName,
-            lastName,
-            uid: email,
-            password,
-            titleCode,
-        };
-        this.userService.register(userRegisterFormData);
-        // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
-        this.globalMessageService
-            .get()
-            .pipe(filter(data => Object.keys(data).length > 0))
-            .subscribe((globalMessageEntities) => {
-            if (globalMessageEntities[GlobalMessageType.MSG_TYPE_ERROR].some(message => message === 'This field is required.')) {
-                this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
-                this.globalMessageService.add({ key: 'register.titleRequired' }, GlobalMessageType.MSG_TYPE_ERROR);
-            }
-        });
-    }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
-    }
-    /**
-     * @private
-     * @param {?} ac
-     * @return {?}
-     */
-    matchPassword(ac) {
-        if (ac.get('password').value !== ac.get('passwordconf').value) {
-            return { NotEqual: true };
-        }
-    }
-}
-RegisterComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-register',
-                template: "<section class=\"cx-page__section container\">\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <h1 class=\"cx-section__title\">\n          {{ 'register.createAccount' | cxTranslate }}\n        </h1>\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of (titles$ | async)\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  (userRegistrationForm.get('email').errors?.email ||\n                    userRegistrationForm.get('email').errors?.InvalidEmail) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"newsletter\"\n                  class=\"form-check-input\"\n                  formControlName=\"newsletter\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.emailMarketing' | cxTranslate }}\n                </span>\n              </label>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            [disabled]=\"userRegistrationForm.invalid\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n"
-            }] }
-];
-/** @nocollapse */
-RegisterComponent.ctorParameters = () => [
-    { type: AuthService },
-    { type: RoutingService },
-    { type: UserService },
-    { type: GlobalMessageService },
-    { type: FormBuilder }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class RegisterComponentModule {
-}
-RegisterComponentModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    LoginModule,
-                    ReactiveFormsModule,
-                    RouterModule,
-                    UserModule,
-                    UrlModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            RegisterCustomerComponent: {
-                                selector: 'cx-register',
-                                guards: [NotAuthGuard],
-                            },
-                        },
-                    }))),
-                    I18nModule,
-                ],
-                declarations: [RegisterComponent],
-                exports: [RegisterComponent],
-                entryComponents: [RegisterComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class UserComponentModule {
-}
-UserComponentModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    LoginModule,
-                    LoginFormModule,
-                    ReactiveFormsModule,
-                    RouterModule,
-                    UserModule,
-                    UrlModule,
-                    RegisterComponentModule,
-                ],
             },] }
 ];
 
@@ -12015,6 +11995,7 @@ const defaultStorefrontRoutesConfig = {
     search: { paths: ['search/:query'] },
     // semantic links for login related pages
     login: { paths: ['login'] },
+    logout: { paths: ['logout'] },
     register: { paths: ['login/register'] },
     forgotPassword: { paths: ['login/forgot-password'] },
     checkout: { paths: ['checkout'] },
@@ -12178,7 +12159,7 @@ const pageModules = [
 const ɵ0$5 = { pageLabel: 'homepage', cxRoute: 'home' }, ɵ1$1 = {
     pageLabel: 'multiStepCheckoutSummaryPage',
     cxRoute: 'checkout',
-}, ɵ2 = { pageLabel: 'search', cxRoute: 'search' }, ɵ3 = { cxRoute: 'category' }, ɵ4 = { cxRoute: 'brand' }, ɵ5 = { pageLabel: 'order', cxRoute: 'orderDetails' };
+}, ɵ2 = { cxRoute: 'logout' }, ɵ3 = { pageLabel: 'search', cxRoute: 'search' }, ɵ4 = { cxRoute: 'category' }, ɵ5 = { cxRoute: 'brand' }, ɵ6 = { pageLabel: 'order', cxRoute: 'orderDetails' };
 class PagesModule {
 }
 PagesModule.decorators = [
@@ -12188,7 +12169,6 @@ PagesModule.decorators = [
                     CommonModule,
                     ...pageModules,
                     PageLayoutModule,
-                    LogoutModule,
                     RouterModule.forChild([
                         {
                             // This route can be dropped only when we have a mapping path to page label for content pages
@@ -12205,7 +12185,7 @@ PagesModule.decorators = [
                         },
                         {
                             path: null,
-                            canActivate: [CmsPageGuard],
+                            canActivate: [LogoutGuard],
                             component: PageLayoutComponent,
                             data: ɵ2,
                         },
@@ -12223,9 +12203,15 @@ PagesModule.decorators = [
                         },
                         {
                             path: null,
-                            canActivate: [AuthGuard, CmsPageGuard],
+                            canActivate: [CmsPageGuard],
                             component: PageLayoutComponent,
                             data: ɵ5,
+                        },
+                        {
+                            path: null,
+                            canActivate: [AuthGuard, CmsPageGuard],
+                            component: PageLayoutComponent,
+                            data: ɵ6,
                         },
                     ]),
                 ],
@@ -12841,6 +12827,6 @@ const translations = {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AddToCartComponent, AddToCartModule, AddedToCartDialogComponent, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartSharedModule, OrderSummaryComponent, CartTotalsComponent, CartComponentModule, MiniCartComponent, MiniCartModule, CmsLibModule, BannerComponent, BannerModule, LinkComponent, LinkModule, ParagraphComponent, CmsParagraphModule, TabParagraphContainerComponent, TabParagraphContainerModule, GlobalMessageComponentModule, GlobalMessageComponent, fontawesomeIconConfig, IconLoaderService, IconComponent, ICON_TYPE, IconConfig, IconResourceType, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, CloseAccountModule, CloseAccountModalComponent, CloseAccountComponent, ForgotPasswordComponent, ForgotPasswordModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, PaymentMethodsComponent, PaymentMethodsModule, ResetPasswordFormComponent, ResetPasswordModule, UpdateEmailFormComponent, UpdateEmailComponent, UpdateEmailModule, UpdatePasswordFormComponent, UpdatePasswordComponent, UpdatePasswordModule, UpdateProfileFormComponent, UpdateProfileComponent, UpdateProfileModule, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, FooterNavigationComponent, FooterNavigationModule, NavigationComponent, NavigationModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, CurrentProductService, ProductDetailsComponent, ProductDetailsModule, ProductImagesComponent, ProductSummaryComponent, ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent, ProductDetailOutlets, ProductTabsOutlets, ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule, AbstractStoreItemComponent, ScheduleComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderPaginationDetailsComponent, StoreFinderListComponent, StoreFinderSearchResultComponent, StoreFinderSearchComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StoreFinderComponent, StoreFinderModule, LoginFormComponent, LoginFormModule, LoginComponent, LoginModule, LogoutGuard, LogoutModule, RegisterComponent, RegisterComponentModule, UserComponentModule, OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService, StyleRefDirective, StyleRefModule, ComponentWrapperDirective, PageComponentModule, defaultCmsContentConfig, CmsComponentData, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, pwaConfigurationFactory, pwaFactory, PwaModule, PWAModuleConfig, defaultPWAModuleConfig, SeoMetaService, initSeoService, SeoModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, LayoutModule, MainModule, StorefrontComponent, CheckoutComponentModule, MultiStepCheckoutModule, ShippingAddressModule, OrderConfirmationModule, SuggestedAddressDialogComponent, AddressFormComponent, PaymentFormComponent, ReviewSubmitComponent, DeliveryModeComponent, MultiStepCheckoutComponent, OrderConfirmationComponent, CmsRouteModule, CmsModule$1 as CmsModule, CmsPageGuard, CmsMappingService, CmsRoutesService, StorefrontModule, SuffixRoutesModule, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, UiModule, FormComponentsModule, ItemCounterComponent, GenericLinkComponent, ListNavigationModule, PaginationComponent, SortingComponent, MediaComponent, MediaModule, MediaService, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, OnlyNumberDirective, translations, CartTotalsModule as ɵd, NavigationUIComponent as ɵg, NavigationComponentService as ɵf, ProductCarouselService as ɵm, ProductReferencesService as ɵo, SharedCarouselService as ɵn, ProductTabsComponent as ɵl, LoginComponentService as ɵs, OutletStyleService as ɵk, defaultCartPageConfig as ɵt, AddToHomeScreenService as ɵu, htmlLangProvider as ɵv, setHtmlLangAttribute as ɵw, BootstrapModule as ɵc, CheckoutDetailsService as ɵbh, DeliveryModeModule as ɵy, BillingAddressFormComponent as ɵbc, BillingAddressFormModule as ɵbb, PaymentFormModule as ɵba, PaymentMethodComponent as ɵbd, PaymentMethodModule as ɵz, PlaceOrderComponent as ɵbg, PlaceOrderModule as ɵbf, ReviewSubmitModule as ɵbe, AddressFormModule as ɵj, ShippingAddressComponent as ɵx, PromotionsComponent as ɵb, PromotionsModule as ɵa, guards$1 as ɵbi, OrderConfirmationPageGuard as ɵbj, addCmsRoute as ɵbk, guards as ɵp, CmsGuardsService as ɵr, CmsI18nService as ɵq, provideConfigFromMetaTags as ɵbs, suffixUrlMatcher as ɵbr, HardcodedCheckoutComponent as ɵbq, defaultRoutingConfig as ɵbm, defaultStorefrontRoutesConfig as ɵbl, CartNotEmptyGuard as ɵbp, GuardsModule as ɵbo, OrderConfirmationPageModule as ɵbn, CardComponent as ɵi, CardModule as ɵh, GenericLinkModule as ɵe, address as ɵbt, cart as ɵbu, checkout as ɵbv, common as ɵbw, myAccount as ɵbx, payment as ɵby, product as ɵbz, pwa as ɵca, storeFinder as ɵcb, user as ɵcc };
+export { AddToCartComponent, AddToCartModule, AddedToCartDialogComponent, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartSharedModule, OrderSummaryComponent, CartTotalsComponent, CartComponentModule, MiniCartComponent, MiniCartModule, CmsLibModule, BannerComponent, BannerModule, LinkComponent, LinkModule, ParagraphComponent, CmsParagraphModule, TabParagraphContainerComponent, TabParagraphContainerModule, GlobalMessageComponentModule, GlobalMessageComponent, fontawesomeIconConfig, IconLoaderService, IconComponent, ICON_TYPE, IconConfig, IconResourceType, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, CloseAccountModule, CloseAccountModalComponent, CloseAccountComponent, ForgotPasswordComponent, ForgotPasswordModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, PaymentMethodsComponent, PaymentMethodsModule, ResetPasswordFormComponent, ResetPasswordModule, UpdateEmailFormComponent, UpdateEmailComponent, UpdateEmailModule, UpdatePasswordFormComponent, UpdatePasswordComponent, UpdatePasswordModule, UpdateProfileFormComponent, UpdateProfileComponent, UpdateProfileModule, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, FooterNavigationComponent, FooterNavigationModule, NavigationComponent, NavigationModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, CurrentProductService, ProductDetailsComponent, ProductDetailsModule, ProductImagesComponent, ProductSummaryComponent, ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent, ProductDetailOutlets, ProductTabsOutlets, ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule, AbstractStoreItemComponent, ScheduleComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderPaginationDetailsComponent, StoreFinderListComponent, StoreFinderSearchResultComponent, StoreFinderSearchComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StoreFinderComponent, StoreFinderModule, LoginFormComponent, LoginFormModule, LoginComponent, LoginModule, LogoutGuard, RegisterComponent, RegisterComponentModule, UserComponentModule, OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService, StyleRefDirective, StyleRefModule, ComponentWrapperDirective, PageComponentModule, defaultCmsContentConfig, CmsComponentData, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, pwaConfigurationFactory, pwaFactory, PwaModule, PWAModuleConfig, defaultPWAModuleConfig, SeoMetaService, initSeoService, SeoModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, LayoutModule, MainModule, StorefrontComponent, CheckoutComponentModule, MultiStepCheckoutModule, ShippingAddressModule, OrderConfirmationModule, SuggestedAddressDialogComponent, AddressFormComponent, PaymentFormComponent, ReviewSubmitComponent, DeliveryModeComponent, MultiStepCheckoutComponent, OrderConfirmationComponent, CmsRouteModule, CmsModule$1 as CmsModule, CmsPageGuard, CmsMappingService, CmsRoutesService, StorefrontModule, SuffixRoutesModule, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, UiModule, FormComponentsModule, ItemCounterComponent, GenericLinkComponent, ListNavigationModule, PaginationComponent, SortingComponent, MediaComponent, MediaModule, MediaService, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, OnlyNumberDirective, translations, CartTotalsModule as ɵd, NavigationUIComponent as ɵg, NavigationComponentService as ɵf, ProductCarouselService as ɵm, ProductReferencesService as ɵo, SharedCarouselService as ɵn, ProductTabsComponent as ɵl, LoginComponentService as ɵs, OutletStyleService as ɵk, defaultCartPageConfig as ɵt, AddToHomeScreenService as ɵu, htmlLangProvider as ɵv, setHtmlLangAttribute as ɵw, BootstrapModule as ɵc, CheckoutDetailsService as ɵbh, DeliveryModeModule as ɵy, BillingAddressFormComponent as ɵbc, BillingAddressFormModule as ɵbb, PaymentFormModule as ɵba, PaymentMethodComponent as ɵbd, PaymentMethodModule as ɵz, PlaceOrderComponent as ɵbg, PlaceOrderModule as ɵbf, ReviewSubmitModule as ɵbe, AddressFormModule as ɵj, ShippingAddressComponent as ɵx, PromotionsComponent as ɵb, PromotionsModule as ɵa, guards$1 as ɵbi, OrderConfirmationPageGuard as ɵbj, addCmsRoute as ɵbk, guards as ɵp, CmsGuardsService as ɵr, CmsI18nService as ɵq, provideConfigFromMetaTags as ɵbs, suffixUrlMatcher as ɵbr, HardcodedCheckoutComponent as ɵbq, defaultRoutingConfig as ɵbm, defaultStorefrontRoutesConfig as ɵbl, CartNotEmptyGuard as ɵbp, GuardsModule as ɵbo, OrderConfirmationPageModule as ɵbn, CardComponent as ɵi, CardModule as ɵh, GenericLinkModule as ɵe, address as ɵbt, cart as ɵbu, checkout as ɵbv, common as ɵbw, myAccount as ɵbx, payment as ɵby, product as ɵbz, pwa as ɵca, storeFinder as ɵcb, user as ɵcc };
 
 //# sourceMappingURL=spartacus-storefront.js.map
