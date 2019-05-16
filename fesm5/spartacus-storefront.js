@@ -7,7 +7,7 @@ import { Title, Meta } from '@angular/platform-browser';
 import { __read, __values, __spread, __extends, __assign, __awaiter, __generator } from 'tslib';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
-import { WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, RoutingService, LanguageService, GlobalMessageType, GlobalMessageService, AuthService, CartService, I18nModule, UserService, CheckoutModule, UrlModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ProductService, ConfigModule, CmsService, ProductReferenceService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, ServerConfig, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, DynamicAttributeService, NotAuthGuard, CxApiService, ComponentMapperService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, PageRobotsMeta, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, OccConfig, StoreDataService, StoreFinderService, GoogleMapRendererService, TranslatePipe } from '@spartacus/core';
+import { WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, RoutingService, LanguageService, GlobalMessageType, GlobalMessageService, AuthService, CartService, I18nModule, UserService, CheckoutModule, UrlModule, TranslationService, TranslationChunkService, RoutingModule, CartModule, AuthGuard, ProductService, ConfigModule, CmsService, ProductReferenceService, CartDataService, provideConfig, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, ServerConfig, CmsConfig, defaultCmsModuleConfig, CmsModule, Config, PageType, DynamicAttributeService, NotAuthGuard, CxApiService, ComponentMapperService, UserModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, PageRobotsMeta, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ProductReviewService, OccConfig, StoreDataService, StoreFinderService, GoogleMapRendererService, TranslatePipe } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { Injectable, NgModule, APP_INITIALIZER, ChangeDetectionStrategy, Component, Input, ElementRef, ViewChild, Output, EventEmitter, Injector, Renderer2, ChangeDetectorRef, HostBinding, Directive, TemplateRef, ViewEncapsulation, forwardRef, HostListener, Optional, defineInjectable, inject, INJECTOR, Inject, PLATFORM_ID, ViewContainerRef } from '@angular/core';
@@ -4682,22 +4682,22 @@ var MediaService = /** @class */ (function () {
         };
     }
     /**
-     * @param {?} media
+     * @param {?} container
      * @param {?=} format
      * @param {?=} alt
      * @return {?}
      */
-    MediaService.prototype.getImage = /**
-     * @param {?} media
+    MediaService.prototype.getMedia = /**
+     * @param {?} container
      * @param {?=} format
      * @param {?=} alt
      * @return {?}
      */
-    function (media, format, alt) {
+    function (container, format, alt) {
         return {
-            src: this.getMainImage(media, format),
-            srcset: this.getSrcSet(media),
-            alt: alt || this.getAlt(media, format),
+            src: this.getMainImage(container, format),
+            srcset: this.getSrcSet(container),
+            alt: alt || this.getAlt(container, format),
         };
     };
     /**
@@ -4853,7 +4853,7 @@ var MediaComponent = /** @class */ (function () {
     /**
      * @return {?}
      */
-    MediaComponent.prototype.ngOnInit = /**
+    MediaComponent.prototype.ngOnChanges = /**
      * @return {?}
      */
     function () {
@@ -4873,7 +4873,7 @@ var MediaComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.media = this.mediaService.getImage(this.container, this.format, this.alt);
+        this.media = this.mediaService.getMedia(this.container, this.format, this.alt);
     };
     /**
      * This handler is called from the UI when the image is loaded.
@@ -10287,7 +10287,7 @@ var ProductImagesComponent = /** @class */ (function () {
     ProductImagesComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-product-images',
-                    template: "<ng-container *ngIf=\"product\">\n  <ng-container *cxOutlet=\"outlets.IMAGES\">\n    <cx-media\n      [container]=\"mainImageContainer\"\n      format=\"zoom\"\n      (loaded)=\"loadHandler()\"\n    >\n    </cx-media>\n\n    <ng-container *ngIf=\"product.images?.GALLERY.length > 1\">\n      <div class=\"thumbs\">\n        <cx-media\n          *ngFor=\"let image of product.images.GALLERY\"\n          [container]=\"image\"\n          format=\"thumbnail\"\n          (focus)=\"showImage($event, image)\"\n          tabindex=\"0\"\n          [class.active]=\"isMainImageContainer(image)\"\n        >\n        </cx-media>\n      </div>\n    </ng-container>\n  </ng-container>\n</ng-container>\n"
+                    template: "<ng-container *ngIf=\"product\">\n  <ng-container *cxOutlet=\"outlets.IMAGES\">\n    <cx-media\n      [container]=\"mainImageContainer\"\n      format=\"zoom\"\n      (loaded)=\"loadHandler()\"\n    >\n    </cx-media>\n    <ng-container *ngIf=\"product.images?.GALLERY.length > 1\">\n      <div class=\"thumbs\">\n        <cx-media\n          *ngFor=\"let image of product.images.GALLERY\"\n          [container]=\"image\"\n          format=\"thumbnail\"\n          (focus)=\"showImage($event, image)\"\n          tabindex=\"0\"\n          [class.active]=\"isMainImageContainer(image)\"\n        >\n        </cx-media>\n      </div>\n    </ng-container>\n  </ng-container>\n</ng-container>\n"
                 }] }
     ];
     ProductImagesComponent.propDecorators = {

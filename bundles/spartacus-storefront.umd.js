@@ -4914,22 +4914,22 @@
             };
         }
         /**
-         * @param {?} media
+         * @param {?} container
          * @param {?=} format
          * @param {?=} alt
          * @return {?}
          */
-        MediaService.prototype.getImage = /**
-         * @param {?} media
+        MediaService.prototype.getMedia = /**
+         * @param {?} container
          * @param {?=} format
          * @param {?=} alt
          * @return {?}
          */
-            function (media, format, alt) {
+            function (container, format, alt) {
                 return {
-                    src: this.getMainImage(media, format),
-                    srcset: this.getSrcSet(media),
-                    alt: alt || this.getAlt(media, format),
+                    src: this.getMainImage(container, format),
+                    srcset: this.getSrcSet(container),
+                    alt: alt || this.getAlt(container, format),
                 };
             };
         /**
@@ -5087,7 +5087,7 @@
         /**
          * @return {?}
          */
-        MediaComponent.prototype.ngOnInit = /**
+        MediaComponent.prototype.ngOnChanges = /**
          * @return {?}
          */
             function () {
@@ -5107,7 +5107,7 @@
          * @return {?}
          */
             function () {
-                this.media = this.mediaService.getImage(this.container, this.format, this.alt);
+                this.media = this.mediaService.getMedia(this.container, this.format, this.alt);
             };
         /**
          * This handler is called from the UI when the image is loaded.
@@ -10629,7 +10629,7 @@
         ProductImagesComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-product-images',
-                        template: "<ng-container *ngIf=\"product\">\n  <ng-container *cxOutlet=\"outlets.IMAGES\">\n    <cx-media\n      [container]=\"mainImageContainer\"\n      format=\"zoom\"\n      (loaded)=\"loadHandler()\"\n    >\n    </cx-media>\n\n    <ng-container *ngIf=\"product.images?.GALLERY.length > 1\">\n      <div class=\"thumbs\">\n        <cx-media\n          *ngFor=\"let image of product.images.GALLERY\"\n          [container]=\"image\"\n          format=\"thumbnail\"\n          (focus)=\"showImage($event, image)\"\n          tabindex=\"0\"\n          [class.active]=\"isMainImageContainer(image)\"\n        >\n        </cx-media>\n      </div>\n    </ng-container>\n  </ng-container>\n</ng-container>\n"
+                        template: "<ng-container *ngIf=\"product\">\n  <ng-container *cxOutlet=\"outlets.IMAGES\">\n    <cx-media\n      [container]=\"mainImageContainer\"\n      format=\"zoom\"\n      (loaded)=\"loadHandler()\"\n    >\n    </cx-media>\n    <ng-container *ngIf=\"product.images?.GALLERY.length > 1\">\n      <div class=\"thumbs\">\n        <cx-media\n          *ngFor=\"let image of product.images.GALLERY\"\n          [container]=\"image\"\n          format=\"thumbnail\"\n          (focus)=\"showImage($event, image)\"\n          tabindex=\"0\"\n          [class.active]=\"isMainImageContainer(image)\"\n        >\n        </cx-media>\n      </div>\n    </ng-container>\n  </ng-container>\n</ng-container>\n"
                     }] }
         ];
         ProductImagesComponent.propDecorators = {

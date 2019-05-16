@@ -1,7 +1,7 @@
-import { EventEmitter, OnInit } from '@angular/core';
+import { EventEmitter, OnChanges } from '@angular/core';
 import { Media } from './media.model';
 import { MediaService } from './media.service';
-export declare class MediaComponent implements OnInit {
+export declare class MediaComponent implements OnChanges {
     protected mediaService: MediaService;
     /**
      * The media container can hold multiple media items, so that
@@ -36,7 +36,7 @@ export declare class MediaComponent implements OnInit {
     isLoading: boolean;
     isInitialized: boolean;
     constructor(mediaService: MediaService);
-    ngOnInit(): void;
+    ngOnChanges(): void;
     /**
      * Creates the `Media` object
      */
