@@ -1,6 +1,6 @@
 import { OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LongitudeLatitude, SearchConfig, StoreFinderSearchQuery, StoreFinderService } from '@spartacus/core';
+import { SearchConfig, StoreFinderSearchQuery, StoreFinderService, GeoPoint } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 export declare class StoreFinderSearchResultComponent implements OnInit, OnDestroy {
     private storeFinderService;
@@ -9,7 +9,7 @@ export declare class StoreFinderSearchResultComponent implements OnInit, OnDestr
     searchQuery: StoreFinderSearchQuery;
     locations$: Observable<any>;
     isLoading$: Observable<any>;
-    geolocation: LongitudeLatitude;
+    geolocation: GeoPoint;
     subscription: Subscription;
     searchConfig: SearchConfig;
     constructor(storeFinderService: StoreFinderService, route: ActivatedRoute);

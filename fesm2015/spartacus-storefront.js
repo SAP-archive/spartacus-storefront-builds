@@ -10,7 +10,7 @@ import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, switch
 import { WindowRef, ServerConfig, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, CartService, RoutingService, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlModule, AuthGuard, ProductService, CmsConfig, PageType, ConfigModule, ProductReferenceService, CartDataService, provideConfig, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsService, defaultCmsModuleConfig, CmsModule, Config, NotAuthGuard, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, CartModule, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, OccConfig, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
-import { Injectable, NgModule, APP_INITIALIZER, ChangeDetectionStrategy, Component, Input, Injector, Inject, PLATFORM_ID, EventEmitter, Output, ElementRef, ViewChild, Renderer2, ChangeDetectorRef, HostBinding, Directive, TemplateRef, ViewContainerRef, Optional, ViewEncapsulation, forwardRef, HostListener, defineInjectable, inject, INJECTOR } from '@angular/core';
+import { Injectable, NgModule, APP_INITIALIZER, ChangeDetectionStrategy, Component, Input, Injector, Inject, PLATFORM_ID, ElementRef, ViewChild, EventEmitter, Output, Renderer2, ChangeDetectorRef, HostBinding, Directive, TemplateRef, ViewContainerRef, Optional, ViewEncapsulation, forwardRef, HostListener, defineInjectable, inject, INJECTOR } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -10077,7 +10077,7 @@ class StoreFinderSearchResultComponent {
         this.isLoading$ = this.storeFinderService.getStoresLoading();
         this.locations$ = this.storeFinderService.getFindStoresEntities();
         this.subscription = this.locations$
-            .pipe(filter(Boolean), map(data => data.geolocation))
+            .pipe(filter(Boolean), map(data => data.longitudeLatitude))
             .subscribe(geoData => (this.geolocation = geoData));
     }
     /**
@@ -10230,7 +10230,7 @@ class StoreFinderStoresCountComponent {
 StoreFinderStoresCountComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-store-finder-stores-count',
-                template: "<ng-container\n  *ngIf=\"\n    !(isLoading$ | async) && (locations$ | async) as locations;\n    else loading\n  \"\n>\n  <div class=\"cx-count container\">\n    <div\n      *ngFor=\"let country of locations?.countriesAndRegionsStoreCount\"\n      class=\"cx-set\"\n    >\n      <a [routerLink]=\"['../country', country.isoCode]\" class=\"btn-link\">\n        <div class=\"cx-title\">\n          <span\n            [ngClass]=\"\n              country?.storeCountDataList\n                ? 'country-header'\n                : 'country-header-link'\n            \"\n            class=\"cx-name\"\n            >{{ country.name }}</span\n          >\n          <span\n            [ngClass]=\"\n              country?.storeCountDataList\n                ? 'country-header'\n                : 'country-header-link'\n            \"\n            *ngIf=\"!country?.storeCountDataList\"\n            class=\"cx-country-count\"\n            >({{ country.count }})</span\n          >\n        </div>\n      </a>\n    </div>\n  </div>\n</ng-container>\n<ng-template #loading>\n  <div class=\"cx-count-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
+                template: "<ng-container\n  *ngIf=\"\n    !(isLoading$ | async) && (locations$ | async) as locations;\n    else loading\n  \"\n>\n  <div class=\"cx-count container\">\n    <div *ngFor=\"let country of locations\" class=\"cx-set\">\n      <a [routerLink]=\"['../country', country.isoCode]\" class=\"btn-link\">\n        <div class=\"cx-title\">\n          <span\n            [ngClass]=\"\n              country?.storeCountDataList\n                ? 'country-header'\n                : 'country-header-link'\n            \"\n            class=\"cx-name\"\n            >{{ country.name }}</span\n          >\n          <span\n            [ngClass]=\"\n              country?.storeCountDataList\n                ? 'country-header'\n                : 'country-header-link'\n            \"\n            *ngIf=\"!country?.storeCountDataList\"\n            class=\"cx-country-count\"\n            >({{ country.count }})</span\n          >\n        </div>\n      </a>\n    </div>\n  </div>\n</ng-container>\n<ng-template #loading>\n  <div class=\"cx-count-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
             }] }
 ];
 /** @nocollapse */

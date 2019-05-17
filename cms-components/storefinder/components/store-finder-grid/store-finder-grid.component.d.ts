@@ -1,6 +1,6 @@
 import { OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LongitudeLatitude, RoutingService, StoreFinderService } from '@spartacus/core';
+import { RoutingService, StoreFinderService, GeoPoint } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 export declare class StoreFinderGridComponent implements OnInit, OnDestroy {
     private storeFinderService;
@@ -9,7 +9,7 @@ export declare class StoreFinderGridComponent implements OnInit, OnDestroy {
     locations$: any;
     isLoading$: Observable<boolean>;
     locationsSub: Subscription;
-    defaultLocation: LongitudeLatitude;
+    defaultLocation: GeoPoint;
     country: string;
     region: string;
     constructor(storeFinderService: StoreFinderService, route: ActivatedRoute, routingService: RoutingService);
