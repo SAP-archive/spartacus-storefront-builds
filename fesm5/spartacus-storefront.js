@@ -1,589 +1,16 @@
 import { ServiceWorkerModule, ɵangular_packages_service_worker_service_worker_b } from '@angular/service-worker';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { FormBuilder, FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NgbActiveModal, NgbModal, NgbTabsetModule, NgbAccordionModule, NgbTabsetConfig, NgbAccordionConfig, NgbRatingModule, NgbRatingConfig, NgbDropdownModule, NgbTypeaheadModule, NgbCollapseModule, NgbModalModule, NgbPaginationModule, NgbPaginationConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { NgbTabsetModule, NgbAccordionModule, NgbTabsetConfig, NgbAccordionConfig, NgbRatingModule, NgbRatingConfig, NgbDropdownModule, NgbTypeaheadModule, NgbCollapseModule, NgbModalModule, NgbPaginationModule, NgbPaginationConfig, NgbModule, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscription, combineLatest, merge, Subject } from 'rxjs';
 import { Title, Meta } from '@angular/platform-browser';
 import { __values, __read, __spread, __extends, __assign, __awaiter, __generator } from 'tslib';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
-import { WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, RoutingService, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, AuthService, CartService, I18nModule, UserService, CheckoutModule, UrlModule, AuthGuard, ProductService, ConfigModule, CmsConfig, PageType, ProductReferenceService, CartDataService, provideConfig, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, ServerConfig, CmsService, defaultCmsModuleConfig, CmsModule, Config, NotAuthGuard, DynamicAttributeService, CxApiService, ComponentMapperService, UserModule, CartModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, PageRobotsMeta, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, OccConfig, StoreDataService, StoreFinderService, GoogleMapRendererService, TranslatePipe } from '@spartacus/core';
+import { debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, tap, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
+import { ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, RoutingService, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, AuthService, CartService, I18nModule, UserService, CheckoutModule, UrlModule, AuthGuard, ProductService, CmsConfig, PageType, ProductReferenceService, CartDataService, provideConfig, StateModule, RoutingModule, AuthModule, ConfigModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsService, defaultCmsModuleConfig, CmsModule, Config, DynamicAttributeService, CxApiService, ComponentMapperService, UserModule, CartModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, NotAuthGuard, PageRobotsMeta, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, OccConfig, StoreDataService, StoreFinderService, GoogleMapRendererService, TranslatePipe } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
-import { Injectable, NgModule, APP_INITIALIZER, ChangeDetectionStrategy, Component, Input, ElementRef, ViewChild, Output, EventEmitter, Renderer2, Injector, ChangeDetectorRef, HostBinding, Directive, TemplateRef, ViewEncapsulation, forwardRef, HostListener, Optional, defineInjectable, inject, INJECTOR, Inject, PLATFORM_ID, ViewContainerRef } from '@angular/core';
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @enum {string} */
-var ICON_TYPE = {
-    STAR: 'STAR',
-    SEARCH: 'SEARCH',
-    CART: 'CART',
-    INFO: 'INFO',
-    GRID: 'GRID',
-    LIST: 'LIST',
-    CARET_DOWN: 'CARET_DOWN',
-    TIMES: 'TIMES',
-    ERROR: 'ERROR',
-    WARNING: 'WARNING',
-    SUCCESS: 'SUCCESS',
-    VISA: 'VISA',
-    PLUS: 'PLUS',
-    MINUS: 'MINUS',
-};
-/**
- * @abstract
- */
-var  /**
- * @abstract
- */
-IconConfig = /** @class */ (function () {
-    function IconConfig() {
-    }
-    return IconConfig;
-}());
-/** @enum {string} */
-var IconResourceType = {
-    SVG: 'svg',
-    LINK: 'link',
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-var fontawesomeIconConfig = {
-    icon: {
-        symbols: {
-            SEARCH: 'fas fa-search',
-            CART: 'fas fa-shopping-cart',
-            INFO: 'fas fa-info-circle',
-            STAR: 'fas fa-star',
-            GRID: 'fas fa-th-large',
-            LIST: 'fas fa-bars',
-            CARET_DOWN: 'fas fa-angle-down',
-            ERROR: 'fas fa-exclamation-circle',
-            WARNING: 'fas fa-exclamation-triangle',
-            SUCCESS: 'fas fa-check-circle',
-            TIMES: 'fas fa-times',
-            VISA: 'fab fa-cc-visa',
-            MINUS: 'fas fa-minus',
-            PLUS: 'fas fa-plus',
-        },
-        resources: [
-            {
-                type: IconResourceType.LINK,
-                url: 'https://use.fontawesome.com/releases/v5.8.1/css/all.css',
-            },
-        ],
-    },
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var IconLoaderService = /** @class */ (function () {
-    function IconLoaderService(winRef, config) {
-        this.winRef = winRef;
-        this.config = config;
-        this.loadedResources = [];
-    }
-    /**
-     * Indicates whether the given icon type is configured to use SVG.
-     */
-    /**
-     * Indicates whether the given icon type is configured to use SVG.
-     * @param {?} iconType
-     * @return {?}
-     */
-    IconLoaderService.prototype.useSvg = /**
-     * Indicates whether the given icon type is configured to use SVG.
-     * @param {?} iconType
-     * @return {?}
-     */
-    function (iconType) {
-        return (this.config.icon.resources &&
-            !!this.config.icon.resources.find(function (res) {
-                return res.types &&
-                    res.type === IconResourceType.SVG &&
-                    res.types.includes(iconType);
-            }));
-    };
-    /**
-     * Returns the path to the svg link. The link supports path names
-     * as well, if the config has been setup to support a svg file path.
-     * Additionally, the icon prefix will be taken into account to prefix the
-     * icon IDs in the SVG.
-     */
-    /**
-     * Returns the path to the svg link. The link supports path names
-     * as well, if the config has been setup to support a svg file path.
-     * Additionally, the icon prefix will be taken into account to prefix the
-     * icon IDs in the SVG.
-     * @param {?} iconType
-     * @return {?}
-     */
-    IconLoaderService.prototype.getSvgPath = /**
-     * Returns the path to the svg link. The link supports path names
-     * as well, if the config has been setup to support a svg file path.
-     * Additionally, the icon prefix will be taken into account to prefix the
-     * icon IDs in the SVG.
-     * @param {?} iconType
-     * @return {?}
-     */
-    function (iconType) {
-        /** @type {?} */
-        var svgResource = this.config.icon.resources.find(function (res) {
-            return res.type === IconResourceType.SVG &&
-                res.types &&
-                res.types.includes(iconType);
-        });
-        if (svgResource) {
-            return svgResource.url
-                ? svgResource.url + "#" + this.getSymbol(iconType)
-                : "#" + this.getSymbol(iconType);
-        }
-    };
-    /**
-     *
-     * Returns the symbol class(es) for the icon type.
-     */
-    /**
-     *
-     * Returns the symbol class(es) for the icon type.
-     * @param {?} iconType
-     * @return {?}
-     */
-    IconLoaderService.prototype.getStyleClasses = /**
-     *
-     * Returns the symbol class(es) for the icon type.
-     * @param {?} iconType
-     * @return {?}
-     */
-    function (iconType) {
-        return this.getSymbol(iconType) || '';
-    };
-    /**
-     * Loads the resource url (if any) for the given icon.
-     * The icon will only be loaded once.
-     *
-     * NOTE: this is not working when the shadow is used as there's
-     * no head element available and the link must be loaded for every
-     * web component.
-     */
-    /**
-     * Loads the resource url (if any) for the given icon.
-     * The icon will only be loaded once.
-     *
-     * NOTE: this is not working when the shadow is used as there's
-     * no head element available and the link must be loaded for every
-     * web component.
-     * @param {?} iconType
-     * @return {?}
-     */
-    IconLoaderService.prototype.addLinkResource = /**
-     * Loads the resource url (if any) for the given icon.
-     * The icon will only be loaded once.
-     *
-     * NOTE: this is not working when the shadow is used as there's
-     * no head element available and the link must be loaded for every
-     * web component.
-     * @param {?} iconType
-     * @return {?}
-     */
-    function (iconType) {
-        /** @type {?} */
-        var resource = this.findResource(iconType, IconResourceType.LINK);
-        if (resource && resource.url) {
-            if (!this.loadedResources.includes(resource.url)) {
-                this.loadedResources.push(resource.url);
-                /** @type {?} */
-                var head = this.winRef.document.getElementsByTagName('head')[0];
-                /** @type {?} */
-                var link = this.winRef.document.createElement('link');
-                link.rel = 'stylesheet';
-                link.type = 'text/css';
-                link.href = resource.url;
-                head.appendChild(link);
-            }
-        }
-    };
-    /**
-     * @private
-     * @param {?} iconType
-     * @param {?} resourceType
-     * @return {?}
-     */
-    IconLoaderService.prototype.findResource = /**
-     * @private
-     * @param {?} iconType
-     * @param {?} resourceType
-     * @return {?}
-     */
-    function (iconType, resourceType) {
-        if (!this.config.icon.resources) {
-            return;
-        }
-        /** @type {?} */
-        var resource = this.config.icon.resources.find(function (res) {
-            return res.type === resourceType && res.types && res.types.includes(iconType);
-        });
-        // no specific resource found, let's try to find a one-size-fits-all resource
-        if (!resource) {
-            resource = this.config.icon.resources.find(function (res) { return (res.type === resourceType && !res.types) || res.types === []; });
-        }
-        return resource;
-    };
-    /**
-     * @private
-     * @param {?} iconType
-     * @return {?}
-     */
-    IconLoaderService.prototype.getSymbol = /**
-     * @private
-     * @param {?} iconType
-     * @return {?}
-     */
-    function (iconType) {
-        if (this.config.icon &&
-            this.config.icon.symbols &&
-            this.config.icon.symbols[iconType]) {
-            return this.config.icon.symbols[iconType];
-        }
-    };
-    IconLoaderService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    IconLoaderService.ctorParameters = function () { return [
-        { type: WindowRef },
-        { type: IconConfig }
-    ]; };
-    /** @nocollapse */ IconLoaderService.ngInjectableDef = defineInjectable({ factory: function IconLoaderService_Factory() { return new IconLoaderService(inject(WindowRef), inject(IconConfig)); }, token: IconLoaderService, providedIn: "root" });
-    return IconLoaderService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var IconComponent = /** @class */ (function () {
-    function IconComponent(iconLoader, elementRef) {
-        this.iconLoader = iconLoader;
-        this.elementRef = elementRef;
-        /**
-         * Keeps the given style classes so that we can
-         * clean them up when the icon changes
-         */
-        this.styleClasses = '';
-    }
-    /**
-     * @return {?}
-     */
-    IconComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        this.staticStyleClasses = this.elementRef.nativeElement.classList.value;
-        this.addStyleClasses();
-    };
-    Object.defineProperty(IconComponent.prototype, "useSvg", {
-        /**
-         * Indicates whether the icon is configured to use SVG or not.
-         */
-        get: /**
-         * Indicates whether the icon is configured to use SVG or not.
-         * @return {?}
-         */
-        function () {
-            return this.iconLoader.useSvg(this.type);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(IconComponent.prototype, "svgPath", {
-        /**
-         * Returns the path to the svg symbol. The path could include an
-         * external URL to an svg (sprite) file, but can also reference
-         * an existing SVG symbol in the DOM.
-         */
-        get: /**
-         * Returns the path to the svg symbol. The path could include an
-         * external URL to an svg (sprite) file, but can also reference
-         * an existing SVG symbol in the DOM.
-         * @return {?}
-         */
-        function () {
-            return this.iconLoader.getSvgPath(this.type);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * Adds the style classes and the link resource (if availabe).
-     */
-    /**
-     * Adds the style classes and the link resource (if availabe).
-     * @private
-     * @return {?}
-     */
-    IconComponent.prototype.addStyleClasses = /**
-     * Adds the style classes and the link resource (if availabe).
-     * @private
-     * @return {?}
-     */
-    function () {
-        if (this.staticStyleClasses) {
-            this.styleClasses = this.staticStyleClasses + ' ';
-        }
-        if (this.useSvg) {
-            return;
-        }
-        this.styleClasses += this.iconLoader.getStyleClasses(this.type);
-        this.iconLoader.addLinkResource(this.type);
-    };
-    IconComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-icon',
-                    template: "<ng-container *ngIf=\"useSvg\">\n  <svg>\n    <use [attr.xlink:href]=\"svgPath\"></use>\n  </svg>\n</ng-container>\n"
-                }] }
-    ];
-    /** @nocollapse */
-    IconComponent.ctorParameters = function () { return [
-        { type: IconLoaderService },
-        { type: ElementRef }
-    ]; };
-    IconComponent.propDecorators = {
-        type: [{ type: Input }],
-        styleClasses: [{ type: HostBinding, args: ['class',] }]
-    };
-    return IconComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var IconModule = /** @class */ (function () {
-    function IconModule() {
-    }
-    IconModule.decorators = [
-        { type: NgModule, args: [{
-                    declarations: [IconComponent],
-                    imports: [CommonModule, ConfigModule.withConfig(fontawesomeIconConfig)],
-                    providers: [{ provide: IconConfig, useExisting: Config }],
-                    exports: [IconComponent],
-                },] }
-    ];
-    return IconModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var AddedToCartDialogComponent = /** @class */ (function () {
-    function AddedToCartDialogComponent(activeModal, cartService, fb) {
-        this.activeModal = activeModal;
-        this.cartService = cartService;
-        this.fb = fb;
-        this.iconTypes = ICON_TYPE;
-        this.quantity = 0;
-        this.firstUpdate = true;
-        this.form = this.fb.group({});
-    }
-    /**
-     * @return {?}
-     */
-    AddedToCartDialogComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this.loaded$ = this.loaded$.pipe(tap(function (res) {
-            if (_this.previousLoaded !== res) {
-                _this.finishedLoading = _this.previousLoaded === false;
-                _this.previousLoaded = res;
-            }
-        }));
-        this.entry$ = this.entry$.pipe(tap(function (entry) {
-            if (entry) {
-                var code = entry.product.code;
-                if (!_this.form.controls[code]) {
-                    _this.form.setControl(code, _this.createEntryFormGroup(entry));
-                }
-                else {
-                    /** @type {?} */
-                    var entryForm = (/** @type {?} */ (_this.form.controls[code]));
-                    entryForm.controls.quantity.setValue(entry.quantity);
-                }
-                _this.form.markAsPristine();
-                // Announce in header if Add To Cart button has incremented product
-                _this.showItemIncrLabel = _this.firstUpdate && entry.quantity > 1;
-                // Any updates after the first will be flagged as false
-                _this.firstUpdate = false;
-            }
-        }));
-    };
-    /**
-     * @return {?}
-     */
-    AddedToCartDialogComponent.prototype.ngAfterViewChecked = /**
-     * @return {?}
-     */
-    function () {
-        if (this.finishedLoading) {
-            this.finishedLoading = false;
-            /** @type {?} */
-            var elementToFocus = (/** @type {?} */ (this.dialog.nativeElement.querySelector("[ngbAutofocus]")));
-            if (elementToFocus) {
-                elementToFocus.focus();
-            }
-        }
-    };
-    /**
-     * @param {?} item
-     * @return {?}
-     */
-    AddedToCartDialogComponent.prototype.removeEntry = /**
-     * @param {?} item
-     * @return {?}
-     */
-    function (item) {
-        this.cartService.removeEntry(item);
-        delete this.form.controls[item.product.code];
-        this.activeModal.dismiss('Removed');
-    };
-    /**
-     * @param {?} __0
-     * @return {?}
-     */
-    AddedToCartDialogComponent.prototype.updateEntry = /**
-     * @param {?} __0
-     * @return {?}
-     */
-    function (_a) {
-        var item = _a.item, updatedQuantity = _a.updatedQuantity;
-        this.cartService.updateEntry(item.entryNumber, updatedQuantity);
-    };
-    /**
-     * @private
-     * @param {?} entry
-     * @return {?}
-     */
-    AddedToCartDialogComponent.prototype.createEntryFormGroup = /**
-     * @private
-     * @param {?} entry
-     * @return {?}
-     */
-    function (entry) {
-        return this.fb.group({
-            entryNumber: entry.entryNumber,
-            quantity: entry.quantity,
-        });
-    };
-    AddedToCartDialogComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-added-to-cart-dialog',
-                    template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) as loaded; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (showItemIncrLabel\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart') | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"activeModal.dismiss('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"(entry$ | async) as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [isReadOnly]=\"false\"\n            [parent]=\"form.controls[entry.product.code]\"\n            [cartIsLoading]=\"!loaded\"\n            (remove)=\"removeEntry($event)\"\n            (update)=\"updateEntry($event)\"\n            (view)=\"activeModal.dismiss('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"(cart$ | async) as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n            <div>{{ cart.totalPrice.formattedValue }}</div>\n          </div>\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              ngbAutoFocus\n              (click)=\"!form.dirty && activeModal.dismiss('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"\n                !form.dirty && activeModal.dismiss('Proceed To Checkout click')\n              \"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"activeModal.dismiss('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
-                }] }
-    ];
-    /** @nocollapse */
-    AddedToCartDialogComponent.ctorParameters = function () { return [
-        { type: NgbActiveModal },
-        { type: CartService },
-        { type: FormBuilder }
-    ]; };
-    AddedToCartDialogComponent.propDecorators = {
-        dialog: [{ type: ViewChild, args: ['dialog', { read: ElementRef },] }]
-    };
-    return AddedToCartDialogComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var AddToCartComponent = /** @class */ (function () {
-    function AddToCartComponent(cartService, modalService) {
-        this.cartService = cartService;
-        this.modalService = modalService;
-    }
-    /**
-     * @return {?}
-     */
-    AddToCartComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        if (this.productCode) {
-            this.loaded$ = this.cartService.getLoaded();
-            this.cartEntry$ = this.cartService.getEntry(this.productCode);
-        }
-    };
-    /**
-     * @return {?}
-     */
-    AddToCartComponent.prototype.addToCart = /**
-     * @return {?}
-     */
-    function () {
-        if (!this.productCode || this.quantity <= 0) {
-            return;
-        }
-        this.openModal();
-        this.cartService.addEntry(this.productCode, this.quantity);
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    AddToCartComponent.prototype.openModal = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        this.modalInstance = this.modalService.open(AddedToCartDialogComponent, {
-            centered: true,
-            size: 'lg',
-        }).componentInstance;
-        this.modalInstance.entry$ = this.cartEntry$;
-        this.modalInstance.cart$ = this.cartService.getActive();
-        this.modalInstance.loaded$ = this.loaded$;
-        this.modalInstance.quantity = this.quantity;
-    };
-    AddToCartComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-add-to-cart',
-                    template: "<button\n  class=\"btn btn-primary btn-block\"\n  type=\"button\"\n  [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  (click)=\"addToCart()\"\n>\n  {{ 'addToCart.addToCart' | cxTranslate }}\n</button>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: [""]
-                }] }
-    ];
-    /** @nocollapse */
-    AddToCartComponent.ctorParameters = function () { return [
-        { type: CartService },
-        { type: NgbModal }
-    ]; };
-    AddToCartComponent.propDecorators = {
-        iconOnly: [{ type: Input }],
-        productCode: [{ type: Input }],
-        quantity: [{ type: Input }],
-        maxQuantity: [{ type: Input }]
-    };
-    return AddToCartComponent;
-}());
+import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Injector, ChangeDetectorRef, HostBinding, TemplateRef, ViewEncapsulation, Optional, defineInjectable, inject, INJECTOR, Inject, PLATFORM_ID, ViewContainerRef } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -2066,6 +1493,383 @@ var StyleRefModule = /** @class */ (function () {
                 },] }
     ];
     return StyleRefModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @enum {string} */
+var ICON_TYPE = {
+    STAR: 'STAR',
+    SEARCH: 'SEARCH',
+    CART: 'CART',
+    INFO: 'INFO',
+    GRID: 'GRID',
+    LIST: 'LIST',
+    CARET_DOWN: 'CARET_DOWN',
+    TIMES: 'TIMES',
+    ERROR: 'ERROR',
+    WARNING: 'WARNING',
+    SUCCESS: 'SUCCESS',
+    VISA: 'VISA',
+    PLUS: 'PLUS',
+    MINUS: 'MINUS',
+};
+/**
+ * @abstract
+ */
+var  /**
+ * @abstract
+ */
+IconConfig = /** @class */ (function () {
+    function IconConfig() {
+    }
+    return IconConfig;
+}());
+/** @enum {string} */
+var IconResourceType = {
+    SVG: 'svg',
+    LINK: 'link',
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+var fontawesomeIconConfig = {
+    icon: {
+        symbols: {
+            SEARCH: 'fas fa-search',
+            CART: 'fas fa-shopping-cart',
+            INFO: 'fas fa-info-circle',
+            STAR: 'fas fa-star',
+            GRID: 'fas fa-th-large',
+            LIST: 'fas fa-bars',
+            CARET_DOWN: 'fas fa-angle-down',
+            ERROR: 'fas fa-exclamation-circle',
+            WARNING: 'fas fa-exclamation-triangle',
+            SUCCESS: 'fas fa-check-circle',
+            TIMES: 'fas fa-times',
+            VISA: 'fab fa-cc-visa',
+            MINUS: 'fas fa-minus',
+            PLUS: 'fas fa-plus',
+        },
+        resources: [
+            {
+                type: IconResourceType.LINK,
+                url: 'https://use.fontawesome.com/releases/v5.8.1/css/all.css',
+            },
+        ],
+    },
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var IconLoaderService = /** @class */ (function () {
+    function IconLoaderService(winRef, config) {
+        this.winRef = winRef;
+        this.config = config;
+        this.loadedResources = [];
+    }
+    /**
+     * Indicates whether the given icon type is configured to use SVG.
+     */
+    /**
+     * Indicates whether the given icon type is configured to use SVG.
+     * @param {?} iconType
+     * @return {?}
+     */
+    IconLoaderService.prototype.useSvg = /**
+     * Indicates whether the given icon type is configured to use SVG.
+     * @param {?} iconType
+     * @return {?}
+     */
+    function (iconType) {
+        return (this.config.icon.resources &&
+            !!this.config.icon.resources.find(function (res) {
+                return res.types &&
+                    res.type === IconResourceType.SVG &&
+                    res.types.includes(iconType);
+            }));
+    };
+    /**
+     * Returns the path to the svg link. The link supports path names
+     * as well, if the config has been setup to support a svg file path.
+     * Additionally, the icon prefix will be taken into account to prefix the
+     * icon IDs in the SVG.
+     */
+    /**
+     * Returns the path to the svg link. The link supports path names
+     * as well, if the config has been setup to support a svg file path.
+     * Additionally, the icon prefix will be taken into account to prefix the
+     * icon IDs in the SVG.
+     * @param {?} iconType
+     * @return {?}
+     */
+    IconLoaderService.prototype.getSvgPath = /**
+     * Returns the path to the svg link. The link supports path names
+     * as well, if the config has been setup to support a svg file path.
+     * Additionally, the icon prefix will be taken into account to prefix the
+     * icon IDs in the SVG.
+     * @param {?} iconType
+     * @return {?}
+     */
+    function (iconType) {
+        /** @type {?} */
+        var svgResource = this.config.icon.resources.find(function (res) {
+            return res.type === IconResourceType.SVG &&
+                res.types &&
+                res.types.includes(iconType);
+        });
+        if (svgResource) {
+            return svgResource.url
+                ? svgResource.url + "#" + this.getSymbol(iconType)
+                : "#" + this.getSymbol(iconType);
+        }
+    };
+    /**
+     *
+     * Returns the symbol class(es) for the icon type.
+     */
+    /**
+     *
+     * Returns the symbol class(es) for the icon type.
+     * @param {?} iconType
+     * @return {?}
+     */
+    IconLoaderService.prototype.getStyleClasses = /**
+     *
+     * Returns the symbol class(es) for the icon type.
+     * @param {?} iconType
+     * @return {?}
+     */
+    function (iconType) {
+        return this.getSymbol(iconType) || '';
+    };
+    /**
+     * Loads the resource url (if any) for the given icon.
+     * The icon will only be loaded once.
+     *
+     * NOTE: this is not working when the shadow is used as there's
+     * no head element available and the link must be loaded for every
+     * web component.
+     */
+    /**
+     * Loads the resource url (if any) for the given icon.
+     * The icon will only be loaded once.
+     *
+     * NOTE: this is not working when the shadow is used as there's
+     * no head element available and the link must be loaded for every
+     * web component.
+     * @param {?} iconType
+     * @return {?}
+     */
+    IconLoaderService.prototype.addLinkResource = /**
+     * Loads the resource url (if any) for the given icon.
+     * The icon will only be loaded once.
+     *
+     * NOTE: this is not working when the shadow is used as there's
+     * no head element available and the link must be loaded for every
+     * web component.
+     * @param {?} iconType
+     * @return {?}
+     */
+    function (iconType) {
+        /** @type {?} */
+        var resource = this.findResource(iconType, IconResourceType.LINK);
+        if (resource && resource.url) {
+            if (!this.loadedResources.includes(resource.url)) {
+                this.loadedResources.push(resource.url);
+                /** @type {?} */
+                var head = this.winRef.document.getElementsByTagName('head')[0];
+                /** @type {?} */
+                var link = this.winRef.document.createElement('link');
+                link.rel = 'stylesheet';
+                link.type = 'text/css';
+                link.href = resource.url;
+                head.appendChild(link);
+            }
+        }
+    };
+    /**
+     * @private
+     * @param {?} iconType
+     * @param {?} resourceType
+     * @return {?}
+     */
+    IconLoaderService.prototype.findResource = /**
+     * @private
+     * @param {?} iconType
+     * @param {?} resourceType
+     * @return {?}
+     */
+    function (iconType, resourceType) {
+        if (!this.config.icon.resources) {
+            return;
+        }
+        /** @type {?} */
+        var resource = this.config.icon.resources.find(function (res) {
+            return res.type === resourceType && res.types && res.types.includes(iconType);
+        });
+        // no specific resource found, let's try to find a one-size-fits-all resource
+        if (!resource) {
+            resource = this.config.icon.resources.find(function (res) { return (res.type === resourceType && !res.types) || res.types === []; });
+        }
+        return resource;
+    };
+    /**
+     * @private
+     * @param {?} iconType
+     * @return {?}
+     */
+    IconLoaderService.prototype.getSymbol = /**
+     * @private
+     * @param {?} iconType
+     * @return {?}
+     */
+    function (iconType) {
+        if (this.config.icon &&
+            this.config.icon.symbols &&
+            this.config.icon.symbols[iconType]) {
+            return this.config.icon.symbols[iconType];
+        }
+    };
+    IconLoaderService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    IconLoaderService.ctorParameters = function () { return [
+        { type: WindowRef },
+        { type: IconConfig }
+    ]; };
+    /** @nocollapse */ IconLoaderService.ngInjectableDef = defineInjectable({ factory: function IconLoaderService_Factory() { return new IconLoaderService(inject(WindowRef), inject(IconConfig)); }, token: IconLoaderService, providedIn: "root" });
+    return IconLoaderService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var IconComponent = /** @class */ (function () {
+    function IconComponent(iconLoader, elementRef) {
+        this.iconLoader = iconLoader;
+        this.elementRef = elementRef;
+        /**
+         * Keeps the given style classes so that we can
+         * clean them up when the icon changes
+         */
+        this.styleClasses = '';
+    }
+    /**
+     * @return {?}
+     */
+    IconComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.staticStyleClasses = this.elementRef.nativeElement.classList.value;
+        this.addStyleClasses();
+    };
+    Object.defineProperty(IconComponent.prototype, "useSvg", {
+        /**
+         * Indicates whether the icon is configured to use SVG or not.
+         */
+        get: /**
+         * Indicates whether the icon is configured to use SVG or not.
+         * @return {?}
+         */
+        function () {
+            return this.iconLoader.useSvg(this.type);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(IconComponent.prototype, "svgPath", {
+        /**
+         * Returns the path to the svg symbol. The path could include an
+         * external URL to an svg (sprite) file, but can also reference
+         * an existing SVG symbol in the DOM.
+         */
+        get: /**
+         * Returns the path to the svg symbol. The path could include an
+         * external URL to an svg (sprite) file, but can also reference
+         * an existing SVG symbol in the DOM.
+         * @return {?}
+         */
+        function () {
+            return this.iconLoader.getSvgPath(this.type);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Adds the style classes and the link resource (if availabe).
+     */
+    /**
+     * Adds the style classes and the link resource (if availabe).
+     * @private
+     * @return {?}
+     */
+    IconComponent.prototype.addStyleClasses = /**
+     * Adds the style classes and the link resource (if availabe).
+     * @private
+     * @return {?}
+     */
+    function () {
+        if (this.staticStyleClasses) {
+            this.styleClasses = this.staticStyleClasses + ' ';
+        }
+        if (this.useSvg) {
+            return;
+        }
+        this.styleClasses += this.iconLoader.getStyleClasses(this.type);
+        this.iconLoader.addLinkResource(this.type);
+    };
+    IconComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-icon',
+                    template: "<ng-container *ngIf=\"useSvg\">\n  <svg>\n    <use [attr.xlink:href]=\"svgPath\"></use>\n  </svg>\n</ng-container>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    IconComponent.ctorParameters = function () { return [
+        { type: IconLoaderService },
+        { type: ElementRef }
+    ]; };
+    IconComponent.propDecorators = {
+        type: [{ type: Input }],
+        styleClasses: [{ type: HostBinding, args: ['class',] }]
+    };
+    return IconComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var IconModule = /** @class */ (function () {
+    function IconModule() {
+    }
+    IconModule.decorators = [
+        { type: NgModule, args: [{
+                    declarations: [IconComponent],
+                    imports: [CommonModule, ConfigModule.withConfig(fontawesomeIconConfig)],
+                    providers: [{ provide: IconConfig, useExisting: Config }],
+                    exports: [IconComponent],
+                },] }
+    ];
+    return IconModule;
 }());
 
 /**
@@ -5972,6 +5776,202 @@ var CartSharedModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var AddedToCartDialogComponent = /** @class */ (function () {
+    function AddedToCartDialogComponent(activeModal, cartService, fb) {
+        this.activeModal = activeModal;
+        this.cartService = cartService;
+        this.fb = fb;
+        this.iconTypes = ICON_TYPE;
+        this.quantity = 0;
+        this.firstUpdate = true;
+        this.form = this.fb.group({});
+    }
+    /**
+     * @return {?}
+     */
+    AddedToCartDialogComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.loaded$ = this.loaded$.pipe(tap(function (res) {
+            if (_this.previousLoaded !== res) {
+                _this.finishedLoading = _this.previousLoaded === false;
+                _this.previousLoaded = res;
+            }
+        }));
+        this.entry$ = this.entry$.pipe(tap(function (entry) {
+            if (entry) {
+                var code = entry.product.code;
+                if (!_this.form.controls[code]) {
+                    _this.form.setControl(code, _this.createEntryFormGroup(entry));
+                }
+                else {
+                    /** @type {?} */
+                    var entryForm = (/** @type {?} */ (_this.form.controls[code]));
+                    entryForm.controls.quantity.setValue(entry.quantity);
+                }
+                _this.form.markAsPristine();
+                // Announce in header if Add To Cart button has incremented product
+                _this.showItemIncrLabel = _this.firstUpdate && entry.quantity > 1;
+                // Any updates after the first will be flagged as false
+                _this.firstUpdate = false;
+            }
+        }));
+    };
+    /**
+     * @return {?}
+     */
+    AddedToCartDialogComponent.prototype.ngAfterViewChecked = /**
+     * @return {?}
+     */
+    function () {
+        if (this.finishedLoading) {
+            this.finishedLoading = false;
+            /** @type {?} */
+            var elementToFocus = (/** @type {?} */ (this.dialog.nativeElement.querySelector("[ngbAutofocus]")));
+            if (elementToFocus) {
+                elementToFocus.focus();
+            }
+        }
+    };
+    /**
+     * @param {?} item
+     * @return {?}
+     */
+    AddedToCartDialogComponent.prototype.removeEntry = /**
+     * @param {?} item
+     * @return {?}
+     */
+    function (item) {
+        this.cartService.removeEntry(item);
+        delete this.form.controls[item.product.code];
+        this.activeModal.dismiss('Removed');
+    };
+    /**
+     * @param {?} __0
+     * @return {?}
+     */
+    AddedToCartDialogComponent.prototype.updateEntry = /**
+     * @param {?} __0
+     * @return {?}
+     */
+    function (_a) {
+        var item = _a.item, updatedQuantity = _a.updatedQuantity;
+        this.cartService.updateEntry(item.entryNumber, updatedQuantity);
+    };
+    /**
+     * @private
+     * @param {?} entry
+     * @return {?}
+     */
+    AddedToCartDialogComponent.prototype.createEntryFormGroup = /**
+     * @private
+     * @param {?} entry
+     * @return {?}
+     */
+    function (entry) {
+        return this.fb.group({
+            entryNumber: entry.entryNumber,
+            quantity: entry.quantity,
+        });
+    };
+    AddedToCartDialogComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-added-to-cart-dialog',
+                    template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) as loaded; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (showItemIncrLabel\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart') | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"activeModal.dismiss('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"(entry$ | async) as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [isReadOnly]=\"false\"\n            [parent]=\"form.controls[entry.product.code]\"\n            [cartIsLoading]=\"!loaded\"\n            (remove)=\"removeEntry($event)\"\n            (update)=\"updateEntry($event)\"\n            (view)=\"activeModal.dismiss('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"(cart$ | async) as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n            <div>{{ cart.totalPrice.formattedValue }}</div>\n          </div>\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              ngbAutoFocus\n              (click)=\"!form.dirty && activeModal.dismiss('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"\n                !form.dirty && activeModal.dismiss('Proceed To Checkout click')\n              \"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"activeModal.dismiss('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    AddedToCartDialogComponent.ctorParameters = function () { return [
+        { type: NgbActiveModal },
+        { type: CartService },
+        { type: FormBuilder }
+    ]; };
+    AddedToCartDialogComponent.propDecorators = {
+        dialog: [{ type: ViewChild, args: ['dialog', { read: ElementRef },] }]
+    };
+    return AddedToCartDialogComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var AddToCartComponent = /** @class */ (function () {
+    function AddToCartComponent(cartService, modalService) {
+        this.cartService = cartService;
+        this.modalService = modalService;
+    }
+    /**
+     * @return {?}
+     */
+    AddToCartComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        if (this.productCode) {
+            this.loaded$ = this.cartService.getLoaded();
+            this.cartEntry$ = this.cartService.getEntry(this.productCode);
+        }
+    };
+    /**
+     * @return {?}
+     */
+    AddToCartComponent.prototype.addToCart = /**
+     * @return {?}
+     */
+    function () {
+        if (!this.productCode || this.quantity <= 0) {
+            return;
+        }
+        this.openModal();
+        this.cartService.addEntry(this.productCode, this.quantity);
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    AddToCartComponent.prototype.openModal = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        this.modalInstance = this.modalService.open(AddedToCartDialogComponent, {
+            centered: true,
+            size: 'lg',
+        }).componentInstance;
+        this.modalInstance.entry$ = this.cartEntry$;
+        this.modalInstance.cart$ = this.cartService.getActive();
+        this.modalInstance.loaded$ = this.loaded$;
+        this.modalInstance.quantity = this.quantity;
+    };
+    AddToCartComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-add-to-cart',
+                    template: "<button\n  class=\"btn btn-primary btn-block\"\n  type=\"button\"\n  [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  (click)=\"addToCart()\"\n>\n  {{ 'addToCart.addToCart' | cxTranslate }}\n</button>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    styles: [""]
+                }] }
+    ];
+    /** @nocollapse */
+    AddToCartComponent.ctorParameters = function () { return [
+        { type: CartService },
+        { type: NgbModal }
+    ]; };
+    AddToCartComponent.propDecorators = {
+        iconOnly: [{ type: Input }],
+        productCode: [{ type: Input }],
+        quantity: [{ type: Input }],
+        maxQuantity: [{ type: Input }]
+    };
+    return AddToCartComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var AddToCartModule = /** @class */ (function () {
     function AddToCartModule() {
     }
@@ -5993,7 +5993,7 @@ var AddToCartModule = /** @class */ (function () {
                     ],
                     declarations: [AddToCartComponent, AddedToCartDialogComponent],
                     entryComponents: [AddToCartComponent, AddedToCartDialogComponent],
-                    exports: [AddToCartComponent],
+                    exports: [AddToCartComponent, AddedToCartDialogComponent],
                 },] }
     ];
     return AddToCartModule;
@@ -6116,11 +6116,6 @@ var CartNotEmptyGuard = /** @class */ (function () {
     ]; };
     return CartNotEmptyGuard;
 }());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 
 /**
  * @fileoverview added by tsickle
@@ -6271,6 +6266,11 @@ var CartComponentModule = /** @class */ (function () {
     ];
     return CartComponentModule;
 }());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -15455,6 +15455,6 @@ var translations = {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AddToCartComponent, AddToCartModule, AddedToCartDialogComponent, CartDetailsComponent, CartDetailsModule, CartNotEmptyGuard, CartItemComponent, CartItemListComponent, CartSharedModule, OrderSummaryComponent, CartTotalsComponent, CartComponentModule, MiniCartComponent, MiniCartModule, CmsLibModule, BannerComponent, BannerModule, LinkComponent, LinkModule, ParagraphComponent, CmsParagraphModule, TabParagraphContainerComponent, TabParagraphContainerModule, GlobalMessageComponentModule, GlobalMessageComponent, fontawesomeIconConfig, IconLoaderService, IconComponent, ICON_TYPE, IconConfig, IconResourceType, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, CloseAccountModule, CloseAccountModalComponent, CloseAccountComponent, ConsentManagementFormComponent, ConsentManagementComponent, ConsentManagementModule, ForgotPasswordComponent, ForgotPasswordModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, PaymentMethodsComponent, PaymentMethodsModule, ResetPasswordFormComponent, ResetPasswordModule, UpdateEmailFormComponent, UpdateEmailComponent, UpdateEmailModule, UpdatePasswordFormComponent, UpdatePasswordComponent, UpdatePasswordModule, UpdateProfileFormComponent, UpdateProfileComponent, UpdateProfileModule, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, FooterNavigationComponent, FooterNavigationModule, NavigationComponentService, NavigationComponent, NavigationModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, CurrentProductService, ProductDetailsComponent, ProductDetailsModule, ProductImagesComponent, ProductSummaryComponent, ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent, ProductDetailOutlets, ProductTabsOutlets, ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule, AbstractStoreItemComponent, ScheduleComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderPaginationDetailsComponent, StoreFinderListComponent, StoreFinderSearchResultComponent, StoreFinderSearchComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StoreFinderComponent, StoreFinderModule, LoginFormComponent, LoginFormModule, LoginComponent, LoginModule, LogoutGuard, RegisterComponent, RegisterComponentModule, UserComponentModule, CmsModule$1 as CmsModule, CmsPageGuard, OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService, StyleRefDirective, StyleRefModule, ComponentWrapperDirective, PageComponentModule, defaultCmsContentConfig, CmsComponentData, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, pwaConfigurationFactory, pwaFactory, PwaModule, PWAModuleConfig, defaultPWAModuleConfig, CmsRouteModule, SuffixRoutesModule, SeoMetaService, initSeoService, SeoModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, LayoutModule, MainModule, StorefrontComponent, CheckoutComponentModule, MultiStepCheckoutModule, ShippingAddressModule, OrderConfirmationModule, SuggestedAddressDialogComponent, AddressFormComponent, PaymentFormComponent, ReviewSubmitComponent, DeliveryModeComponent, MultiStepCheckoutComponent, OrderConfirmationComponent, StorefrontModule, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, UiModule, FormComponentsModule, ItemCounterComponent, GenericLinkComponent, ListNavigationModule, PaginationComponent, SortingComponent, MediaComponent, MediaModule, MediaService, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, OnlyNumberDirective, FormUtils, translations, CartTotalsModule as ɵd, NavigationUIComponent as ɵf, ProductCarouselService as ɵl, ProductReferencesService as ɵn, SharedCarouselService as ɵm, ProductTabsComponent as ɵk, LoginComponentService as ɵs, OutletStyleService as ɵj, defaultCartPageConfig as ɵt, AddToHomeScreenService as ɵu, addCmsRoute as ɵv, suffixUrlMatcher as ɵw, htmlLangProvider as ɵx, setHtmlLangAttribute as ɵy, CmsGuardsService as ɵr, CmsI18nService as ɵq, CmsMappingService as ɵp, CmsRoutesService as ɵo, BootstrapModule as ɵc, CheckoutDetailsService as ɵbj, DeliveryModeModule as ɵba, BillingAddressFormComponent as ɵbe, BillingAddressFormModule as ɵbd, PaymentFormModule as ɵbc, PaymentMethodComponent as ɵbf, PaymentMethodModule as ɵbb, PlaceOrderComponent as ɵbi, PlaceOrderModule as ɵbh, ReviewSubmitModule as ɵbg, AddressFormModule as ɵi, ShippingAddressComponent as ɵz, PromotionsComponent as ɵb, PromotionsModule as ɵa, guards as ɵbk, OrderConfirmationPageGuard as ɵbl, provideConfigFromMetaTags as ɵbq, HardcodedCheckoutComponent as ɵbp, defaultRoutingConfig as ɵbn, defaultStorefrontRoutesConfig as ɵbm, OrderConfirmationPageModule as ɵbo, CardComponent as ɵh, CardModule as ɵg, GenericLinkModule as ɵe, address as ɵbr, cart as ɵbs, checkout as ɵbt, common as ɵbu, myAccount as ɵbv, payment as ɵbw, product as ɵbx, pwa as ɵby, storeFinder as ɵbz, user as ɵca };
+export { CartComponentModule, AddedToCartDialogComponent, AddToCartComponent, AddToCartModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, OrderSummaryComponent, CartSharedModule, CartNotEmptyGuard, CartTotalsComponent, CartTotalsModule, MiniCartComponent, MiniCartModule, CmsLibModule, BannerComponent, BannerModule, LinkComponent, LinkModule, ParagraphComponent, CmsParagraphModule, TabParagraphContainerComponent, TabParagraphContainerModule, GlobalMessageComponentModule, GlobalMessageComponent, fontawesomeIconConfig, IconLoaderService, IconComponent, ICON_TYPE, IconConfig, IconResourceType, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, CloseAccountModule, CloseAccountModalComponent, CloseAccountComponent, ConsentManagementFormComponent, ConsentManagementComponent, ConsentManagementModule, ForgotPasswordComponent, ForgotPasswordModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, PaymentMethodsComponent, PaymentMethodsModule, ResetPasswordFormComponent, ResetPasswordModule, UpdateEmailFormComponent, UpdateEmailComponent, UpdateEmailModule, UpdatePasswordFormComponent, UpdatePasswordComponent, UpdatePasswordModule, UpdateProfileFormComponent, UpdateProfileComponent, UpdateProfileModule, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, FooterNavigationComponent, FooterNavigationModule, NavigationComponentService, NavigationComponent, NavigationModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, CurrentProductService, ProductDetailsComponent, ProductDetailsModule, ProductImagesComponent, ProductSummaryComponent, ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent, ProductDetailOutlets, ProductTabsOutlets, ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule, AbstractStoreItemComponent, ScheduleComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderPaginationDetailsComponent, StoreFinderListComponent, StoreFinderSearchResultComponent, StoreFinderSearchComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StoreFinderComponent, StoreFinderModule, LoginFormComponent, LoginFormModule, LoginComponent, LoginModule, LogoutGuard, RegisterComponent, RegisterComponentModule, UserComponentModule, CmsModule$1 as CmsModule, CmsPageGuard, OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService, StyleRefDirective, StyleRefModule, ComponentWrapperDirective, PageComponentModule, defaultCmsContentConfig, CmsComponentData, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, pwaConfigurationFactory, pwaFactory, PwaModule, PWAModuleConfig, defaultPWAModuleConfig, CmsRouteModule, SuffixRoutesModule, SeoMetaService, initSeoService, SeoModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, LayoutModule, MainModule, StorefrontComponent, CheckoutComponentModule, MultiStepCheckoutModule, ShippingAddressModule, OrderConfirmationModule, SuggestedAddressDialogComponent, AddressFormComponent, PaymentFormComponent, ReviewSubmitComponent, DeliveryModeComponent, MultiStepCheckoutComponent, OrderConfirmationComponent, StorefrontModule, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, UiModule, FormComponentsModule, ItemCounterComponent, GenericLinkComponent, ListNavigationModule, PaginationComponent, SortingComponent, MediaComponent, MediaModule, MediaService, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, OnlyNumberDirective, FormUtils, translations, NavigationUIComponent as ɵe, ProductCarouselService as ɵk, ProductReferencesService as ɵm, SharedCarouselService as ɵl, ProductTabsComponent as ɵj, LoginComponentService as ɵr, OutletStyleService as ɵi, defaultCartPageConfig as ɵs, AddToHomeScreenService as ɵt, addCmsRoute as ɵu, suffixUrlMatcher as ɵv, htmlLangProvider as ɵw, setHtmlLangAttribute as ɵx, CmsGuardsService as ɵq, CmsI18nService as ɵp, CmsMappingService as ɵo, CmsRoutesService as ɵn, BootstrapModule as ɵc, CheckoutDetailsService as ɵbi, DeliveryModeModule as ɵz, BillingAddressFormComponent as ɵbd, BillingAddressFormModule as ɵbc, PaymentFormModule as ɵbb, PaymentMethodComponent as ɵbe, PaymentMethodModule as ɵba, PlaceOrderComponent as ɵbh, PlaceOrderModule as ɵbg, ReviewSubmitModule as ɵbf, AddressFormModule as ɵh, ShippingAddressComponent as ɵy, PromotionsComponent as ɵb, PromotionsModule as ɵa, guards as ɵbj, OrderConfirmationPageGuard as ɵbk, provideConfigFromMetaTags as ɵbp, HardcodedCheckoutComponent as ɵbo, defaultRoutingConfig as ɵbm, defaultStorefrontRoutesConfig as ɵbl, OrderConfirmationPageModule as ɵbn, CardComponent as ɵg, CardModule as ɵf, GenericLinkModule as ɵd, address as ɵbq, cart as ɵbr, checkout as ɵbs, common as ɵbt, myAccount as ɵbu, payment as ɵbv, product as ɵbw, pwa as ɵbx, storeFinder as ɵby, user as ɵbz };
 
 //# sourceMappingURL=spartacus-storefront.js.map
