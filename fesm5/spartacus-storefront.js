@@ -5555,6 +5555,64 @@ var StarRatingModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * Utility class when working with forms.
+ */
+var  /**
+ * Utility class when working with forms.
+ */
+FormUtils = /** @class */ (function () {
+    function FormUtils() {
+    }
+    /**
+     *
+     * Checks is the `formControlName` field valid in the provided `form`.
+     *
+     * If it's NOT valid, the method returns `true`.
+     *
+     * @param form a form whose field to check
+     * @param formControlName a field name
+     * @param submitted is the form submitted
+     */
+    /**
+     *
+     * Checks is the `formControlName` field valid in the provided `form`.
+     *
+     * If it's NOT valid, the method returns `true`.
+     *
+     * @param {?} form a form whose field to check
+     * @param {?} formControlName a field name
+     * @param {?} submitted is the form submitted
+     * @return {?}
+     */
+    FormUtils.isNotValidField = /**
+     *
+     * Checks is the `formControlName` field valid in the provided `form`.
+     *
+     * If it's NOT valid, the method returns `true`.
+     *
+     * @param {?} form a form whose field to check
+     * @param {?} formControlName a field name
+     * @param {?} submitted is the form submitted
+     * @return {?}
+     */
+    function (form, formControlName, submitted) {
+        return (form.get(formControlName).invalid &&
+            (submitted ||
+                (form.get(formControlName).touched && form.get(formControlName).dirty)));
+    };
+    return FormUtils;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -7370,6 +7428,289 @@ var CloseAccountModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var ConsentManagementFormComponent = /** @class */ (function () {
+    function ConsentManagementFormComponent() {
+        this.consentChanged = new EventEmitter();
+        this.consentGiven = false;
+    }
+    /**
+     * @return {?}
+     */
+    ConsentManagementFormComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        if (this.consentTemplate && this.consentTemplate.currentConsent) {
+            if (this.consentTemplate.currentConsent.consentWithdrawnDate) {
+                this.consentGiven = false;
+            }
+            else if (this.consentTemplate.currentConsent.consentGivenDate) {
+                this.consentGiven = true;
+            }
+        }
+    };
+    /**
+     * @return {?}
+     */
+    ConsentManagementFormComponent.prototype.onConsentChange = /**
+     * @return {?}
+     */
+    function () {
+        this.consentChanged.emit({
+            given: !this.consentGiven,
+            template: this.consentTemplate,
+        });
+    };
+    ConsentManagementFormComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-consent-management-form',
+                    template: "<div class=\"form-check\">\n  <label>\n    <input\n      type=\"checkbox\"\n      class=\"form-check-input\"\n      [checked]=\"consentGiven\"\n      (change)=\"onConsentChange()\"\n    />\n    <span class=\"form-check-label\">\n      {{ consentTemplate?.description }}\n    </span>\n  </label>\n</div>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    ConsentManagementFormComponent.ctorParameters = function () { return []; };
+    ConsentManagementFormComponent.propDecorators = {
+        consentTemplate: [{ type: Input }],
+        consentChanged: [{ type: Output }]
+    };
+    return ConsentManagementFormComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ConsentManagementComponent = /** @class */ (function () {
+    function ConsentManagementComponent(userService, routingService, globalMessageService) {
+        this.userService = userService;
+        this.routingService = routingService;
+        this.globalMessageService = globalMessageService;
+        this.subscriptions = new Subscription();
+    }
+    /**
+     * @return {?}
+     */
+    ConsentManagementComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.loading$ = combineLatest(this.userService.getConsentsResultLoading(), this.userService.getGiveConsentResultLoading(), this.userService.getWithdrawConsentResultLoading()).pipe(map(function (_a) {
+            var _b = __read(_a, 3), consentLoading = _b[0], giveConsentLoading = _b[1], withdrawConsentLoading = _b[2];
+            return consentLoading || giveConsentLoading || withdrawConsentLoading;
+        }));
+        this.consentListInit();
+        this.giveConsentInit();
+        this.withdrawConsentInit();
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    ConsentManagementComponent.prototype.consentListInit = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.templateList$ = combineLatest(this.userService.get(), this.userService.getConsents()).pipe(filter(function (_a) {
+            var _b = __read(_a, 1), user = _b[0];
+            return Boolean(user) && Boolean(user.uid);
+        }), tap(function (_a) {
+            var _b = __read(_a, 2), user = _b[0], templateList = _b[1];
+            if (!_this.consentsExists(templateList)) {
+                _this.userService.loadConsents(user.uid);
+            }
+        }), map(function (_a) {
+            var _b = __read(_a, 2), _ = _b[0], templateList = _b[1];
+            return templateList;
+        }));
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    ConsentManagementComponent.prototype.giveConsentInit = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.userService.resetGiveConsentProcessState();
+        this.subscriptions.add(this.userService
+            .getGiveConsentResultSuccess()
+            .subscribe(function (success) { return _this.onConsentGivenSuccess(success); }));
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    ConsentManagementComponent.prototype.withdrawConsentInit = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.userService.resetWithdrawConsentProcessState();
+        this.subscriptions.add(this.userService
+            .getWithdrawConsentResultLoading()
+            .pipe(skipWhile(Boolean), withLatestFrom(this.userService.getWithdrawConsentResultSuccess(), this.userService.get()), map(function (_a) {
+            var _b = __read(_a, 3), _loading = _b[0], withdrawalSuccess = _b[1], user = _b[2];
+            return { withdrawalSuccess: withdrawalSuccess, user: user };
+        }), tap(function (data) {
+            if (data.withdrawalSuccess) {
+                _this.userService.loadConsents(data.user.uid);
+            }
+        }))
+            .subscribe(function (data) {
+            return _this.onConsentWithdrawnSuccess(data.withdrawalSuccess);
+        }));
+    };
+    /**
+     * @private
+     * @param {?} templateList
+     * @return {?}
+     */
+    ConsentManagementComponent.prototype.consentsExists = /**
+     * @private
+     * @param {?} templateList
+     * @return {?}
+     */
+    function (templateList) {
+        return (Boolean(templateList) &&
+            Boolean(templateList.consentTemplates) &&
+            templateList.consentTemplates.length > 0);
+    };
+    /**
+     * @param {?} __0
+     * @return {?}
+     */
+    ConsentManagementComponent.prototype.onConsentChange = /**
+     * @param {?} __0
+     * @return {?}
+     */
+    function (_a) {
+        var _this = this;
+        var given = _a.given, template = _a.template;
+        this.userService
+            .get()
+            .pipe(map(function (user) { return user.uid; }), tap(function (userId) {
+            if (given) {
+                _this.userService.giveConsent(userId, template.id, template.version);
+            }
+            else {
+                _this.userService.withdrawConsent(userId, template.currentConsent.code);
+            }
+        }), take(1))
+            .subscribe();
+    };
+    /**
+     * @return {?}
+     */
+    ConsentManagementComponent.prototype.onDone = /**
+     * @return {?}
+     */
+    function () {
+        this.routingService.go({ cxRoute: 'home' });
+    };
+    /**
+     * @private
+     * @param {?} success
+     * @return {?}
+     */
+    ConsentManagementComponent.prototype.onConsentGivenSuccess = /**
+     * @private
+     * @param {?} success
+     * @return {?}
+     */
+    function (success) {
+        if (success) {
+            this.userService.resetGiveConsentProcessState();
+            this.globalMessageService.add({ key: 'consentManagementForm.message.success.given' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
+        }
+    };
+    /**
+     * @private
+     * @param {?} success
+     * @return {?}
+     */
+    ConsentManagementComponent.prototype.onConsentWithdrawnSuccess = /**
+     * @private
+     * @param {?} success
+     * @return {?}
+     */
+    function (success) {
+        if (success) {
+            this.userService.resetWithdrawConsentProcessState();
+            this.globalMessageService.add({ key: 'consentManagementForm.message.success.withdrawn' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
+        }
+    };
+    /**
+     * @return {?}
+     */
+    ConsentManagementComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this.subscriptions.unsubscribe();
+        this.userService.resetGiveConsentProcessState();
+        this.userService.resetWithdrawConsentProcessState();
+    };
+    ConsentManagementComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-consent-management',
+                    template: "<ng-container>\n  <div *ngIf=\"(loading$ | async); else consentManagementForm\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #consentManagementForm>\n    <div class=\"row d-flex justify-content-center\">\n      <div class=\"col-md-8\">\n        <cx-consent-management-form\n          *ngFor=\"\n            let consentTemplate of (templateList$ | async)?.consentTemplates\n          \"\n          [consentTemplate]=\"consentTemplate\"\n          (consentChanged)=\"onConsentChange($event)\"\n        ></cx-consent-management-form>\n        <div class=\"cx-checkout-btns row\">\n          <div class=\"col-lg-12\">\n            <button class=\"btn btn-block btn-primary\" (click)=\"onDone()\">\n              {{ 'common.done' | cxTranslate }}\n            </button>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    ConsentManagementComponent.ctorParameters = function () { return [
+        { type: UserService },
+        { type: RoutingService },
+        { type: GlobalMessageService }
+    ]; };
+    return ConsentManagementComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ConsentManagementModule = /** @class */ (function () {
+    function ConsentManagementModule() {
+    }
+    ConsentManagementModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        ConfigModule.withConfig((/** @type {?} */ ({
+                            cmsComponents: {
+                                ConsentManagementComponent: {
+                                    selector: 'cx-consent-management',
+                                    guards: [AuthGuard],
+                                },
+                            },
+                        }))),
+                        FormsModule,
+                        ReactiveFormsModule,
+                        SpinnerModule,
+                        I18nModule,
+                    ],
+                    declarations: [ConsentManagementComponent, ConsentManagementFormComponent],
+                    exports: [ConsentManagementComponent],
+                    entryComponents: [ConsentManagementComponent],
+                },] }
+    ];
+    return ConsentManagementModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var ForgotPasswordComponent = /** @class */ (function () {
     function ForgotPasswordComponent(fb, userService, routingService) {
         this.fb = fb;
@@ -8276,59 +8617,6 @@ var ResetPasswordModule = /** @class */ (function () {
                 },] }
     ];
     return ResetPasswordModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Utility class when working with forms.
- */
-var /**
- * Utility class when working with forms.
- */
-FormUtils = /** @class */ (function () {
-    function FormUtils() {
-    }
-    /**
-     *
-     * Checks is the `formControlName` field valid in the provided `form`.
-     *
-     * If it's NOT valid, the method returns `true`.
-     *
-     * @param form a form whose field to check
-     * @param formControlName a field name
-     * @param submitted is the form submitted
-     */
-    /**
-     *
-     * Checks is the `formControlName` field valid in the provided `form`.
-     *
-     * If it's NOT valid, the method returns `true`.
-     *
-     * @param {?} form a form whose field to check
-     * @param {?} formControlName a field name
-     * @param {?} submitted is the form submitted
-     * @return {?}
-     */
-    FormUtils.isNotValidField = /**
-     *
-     * Checks is the `formControlName` field valid in the provided `form`.
-     *
-     * If it's NOT valid, the method returns `true`.
-     *
-     * @param {?} form a form whose field to check
-     * @param {?} formControlName a field name
-     * @param {?} submitted is the form submitted
-     * @return {?}
-     */
-    function (form, formControlName, submitted) {
-        return (form.get(formControlName).invalid &&
-            (submitted ||
-                (form.get(formControlName).touched && form.get(formControlName).dirty)));
-    };
-    return FormUtils;
 }());
 
 /**
@@ -12412,8 +12700,9 @@ var CmsLibModule = /** @class */ (function () {
                         UpdateEmailModule,
                         UpdatePasswordModule,
                         UpdateProfileModule,
-                        CartComponentModule,
+                        ConsentManagementModule,
                         CloseAccountModule,
+                        CartComponentModule,
                         TabParagraphContainerModule,
                         StoreFinderModule,
                         ForgotPasswordModule,
@@ -14714,6 +15003,7 @@ var common = {
         submit: 'Submit',
         continue: 'Continue',
         save: 'Save',
+        done: 'Done',
         home: 'Home',
     },
     spinner: {
@@ -15020,6 +15310,14 @@ var user = {
         lastNameIsRequired: 'Last name is required.',
         profileUpdateSuccess: 'Personal details successfully updated',
     },
+    consentManagementForm: {
+        message: {
+            success: {
+                given: 'Consent successfully given.',
+                withdrawn: 'Consent successfully withdrawn.',
+            },
+        },
+    },
 };
 
 /**
@@ -15156,6 +15454,6 @@ var translations = {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AddToCartComponent, AddToCartModule, AddedToCartDialogComponent, CartDetailsComponent, CartDetailsModule, CartNotEmptyGuard, CartItemComponent, CartItemListComponent, CartSharedModule, OrderSummaryComponent, CartTotalsComponent, CartComponentModule, MiniCartComponent, MiniCartModule, CmsLibModule, BannerComponent, BannerModule, LinkComponent, LinkModule, ParagraphComponent, CmsParagraphModule, TabParagraphContainerComponent, TabParagraphContainerModule, GlobalMessageComponentModule, GlobalMessageComponent, fontawesomeIconConfig, IconLoaderService, IconComponent, ICON_TYPE, IconConfig, IconResourceType, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, CloseAccountModule, CloseAccountModalComponent, CloseAccountComponent, ForgotPasswordComponent, ForgotPasswordModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, PaymentMethodsComponent, PaymentMethodsModule, ResetPasswordFormComponent, ResetPasswordModule, UpdateEmailFormComponent, UpdateEmailComponent, UpdateEmailModule, UpdatePasswordFormComponent, UpdatePasswordComponent, UpdatePasswordModule, UpdateProfileFormComponent, UpdateProfileComponent, UpdateProfileModule, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, FooterNavigationComponent, FooterNavigationModule, NavigationComponentService, NavigationComponent, NavigationModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, CurrentProductService, ProductDetailsComponent, ProductDetailsModule, ProductImagesComponent, ProductSummaryComponent, ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent, ProductDetailOutlets, ProductTabsOutlets, ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule, AbstractStoreItemComponent, ScheduleComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderPaginationDetailsComponent, StoreFinderListComponent, StoreFinderSearchResultComponent, StoreFinderSearchComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StoreFinderComponent, StoreFinderModule, LoginFormComponent, LoginFormModule, LoginComponent, LoginModule, LogoutGuard, RegisterComponent, RegisterComponentModule, UserComponentModule, CmsModule$1 as CmsModule, CmsPageGuard, OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService, StyleRefDirective, StyleRefModule, ComponentWrapperDirective, PageComponentModule, defaultCmsContentConfig, CmsComponentData, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, pwaConfigurationFactory, pwaFactory, PwaModule, PWAModuleConfig, defaultPWAModuleConfig, CmsRouteModule, SuffixRoutesModule, SeoMetaService, initSeoService, SeoModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, LayoutModule, MainModule, StorefrontComponent, CheckoutComponentModule, MultiStepCheckoutModule, ShippingAddressModule, OrderConfirmationModule, SuggestedAddressDialogComponent, AddressFormComponent, PaymentFormComponent, ReviewSubmitComponent, DeliveryModeComponent, MultiStepCheckoutComponent, OrderConfirmationComponent, StorefrontModule, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, UiModule, FormComponentsModule, ItemCounterComponent, GenericLinkComponent, ListNavigationModule, PaginationComponent, SortingComponent, MediaComponent, MediaModule, MediaService, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, OnlyNumberDirective, translations, CartTotalsModule as ɵd, NavigationUIComponent as ɵf, ProductCarouselService as ɵl, ProductReferencesService as ɵn, SharedCarouselService as ɵm, ProductTabsComponent as ɵk, LoginComponentService as ɵs, OutletStyleService as ɵj, defaultCartPageConfig as ɵt, AddToHomeScreenService as ɵu, addCmsRoute as ɵv, suffixUrlMatcher as ɵw, htmlLangProvider as ɵx, setHtmlLangAttribute as ɵy, CmsGuardsService as ɵr, CmsI18nService as ɵq, CmsMappingService as ɵp, CmsRoutesService as ɵo, BootstrapModule as ɵc, CheckoutDetailsService as ɵbj, DeliveryModeModule as ɵba, BillingAddressFormComponent as ɵbe, BillingAddressFormModule as ɵbd, PaymentFormModule as ɵbc, PaymentMethodComponent as ɵbf, PaymentMethodModule as ɵbb, PlaceOrderComponent as ɵbi, PlaceOrderModule as ɵbh, ReviewSubmitModule as ɵbg, AddressFormModule as ɵi, ShippingAddressComponent as ɵz, PromotionsComponent as ɵb, PromotionsModule as ɵa, guards as ɵbk, OrderConfirmationPageGuard as ɵbl, provideConfigFromMetaTags as ɵbq, HardcodedCheckoutComponent as ɵbp, defaultRoutingConfig as ɵbn, defaultStorefrontRoutesConfig as ɵbm, OrderConfirmationPageModule as ɵbo, CardComponent as ɵh, CardModule as ɵg, GenericLinkModule as ɵe, address as ɵbr, cart as ɵbs, checkout as ɵbt, common as ɵbu, myAccount as ɵbv, payment as ɵbw, product as ɵbx, pwa as ɵby, storeFinder as ɵbz, user as ɵca };
+export { AddToCartComponent, AddToCartModule, AddedToCartDialogComponent, CartDetailsComponent, CartDetailsModule, CartNotEmptyGuard, CartItemComponent, CartItemListComponent, CartSharedModule, OrderSummaryComponent, CartTotalsComponent, CartComponentModule, MiniCartComponent, MiniCartModule, CmsLibModule, BannerComponent, BannerModule, LinkComponent, LinkModule, ParagraphComponent, CmsParagraphModule, TabParagraphContainerComponent, TabParagraphContainerModule, GlobalMessageComponentModule, GlobalMessageComponent, fontawesomeIconConfig, IconLoaderService, IconComponent, ICON_TYPE, IconConfig, IconResourceType, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, CloseAccountModule, CloseAccountModalComponent, CloseAccountComponent, ConsentManagementFormComponent, ConsentManagementComponent, ConsentManagementModule, ForgotPasswordComponent, ForgotPasswordModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, PaymentMethodsComponent, PaymentMethodsModule, ResetPasswordFormComponent, ResetPasswordModule, UpdateEmailFormComponent, UpdateEmailComponent, UpdateEmailModule, UpdatePasswordFormComponent, UpdatePasswordComponent, UpdatePasswordModule, UpdateProfileFormComponent, UpdateProfileComponent, UpdateProfileModule, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, FooterNavigationComponent, FooterNavigationModule, NavigationComponentService, NavigationComponent, NavigationModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, CurrentProductService, ProductDetailsComponent, ProductDetailsModule, ProductImagesComponent, ProductSummaryComponent, ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent, ProductDetailOutlets, ProductTabsOutlets, ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule, AbstractStoreItemComponent, ScheduleComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderPaginationDetailsComponent, StoreFinderListComponent, StoreFinderSearchResultComponent, StoreFinderSearchComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StoreFinderComponent, StoreFinderModule, LoginFormComponent, LoginFormModule, LoginComponent, LoginModule, LogoutGuard, RegisterComponent, RegisterComponentModule, UserComponentModule, CmsModule$1 as CmsModule, CmsPageGuard, OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService, StyleRefDirective, StyleRefModule, ComponentWrapperDirective, PageComponentModule, defaultCmsContentConfig, CmsComponentData, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, pwaConfigurationFactory, pwaFactory, PwaModule, PWAModuleConfig, defaultPWAModuleConfig, CmsRouteModule, SuffixRoutesModule, SeoMetaService, initSeoService, SeoModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, LayoutModule, MainModule, StorefrontComponent, CheckoutComponentModule, MultiStepCheckoutModule, ShippingAddressModule, OrderConfirmationModule, SuggestedAddressDialogComponent, AddressFormComponent, PaymentFormComponent, ReviewSubmitComponent, DeliveryModeComponent, MultiStepCheckoutComponent, OrderConfirmationComponent, StorefrontModule, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, UiModule, FormComponentsModule, ItemCounterComponent, GenericLinkComponent, ListNavigationModule, PaginationComponent, SortingComponent, MediaComponent, MediaModule, MediaService, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, OnlyNumberDirective, FormUtils, translations, CartTotalsModule as ɵd, NavigationUIComponent as ɵf, ProductCarouselService as ɵl, ProductReferencesService as ɵn, SharedCarouselService as ɵm, ProductTabsComponent as ɵk, LoginComponentService as ɵs, OutletStyleService as ɵj, defaultCartPageConfig as ɵt, AddToHomeScreenService as ɵu, addCmsRoute as ɵv, suffixUrlMatcher as ɵw, htmlLangProvider as ɵx, setHtmlLangAttribute as ɵy, CmsGuardsService as ɵr, CmsI18nService as ɵq, CmsMappingService as ɵp, CmsRoutesService as ɵo, BootstrapModule as ɵc, CheckoutDetailsService as ɵbj, DeliveryModeModule as ɵba, BillingAddressFormComponent as ɵbe, BillingAddressFormModule as ɵbd, PaymentFormModule as ɵbc, PaymentMethodComponent as ɵbf, PaymentMethodModule as ɵbb, PlaceOrderComponent as ɵbi, PlaceOrderModule as ɵbh, ReviewSubmitModule as ɵbg, AddressFormModule as ɵi, ShippingAddressComponent as ɵz, PromotionsComponent as ɵb, PromotionsModule as ɵa, guards as ɵbk, OrderConfirmationPageGuard as ɵbl, provideConfigFromMetaTags as ɵbq, HardcodedCheckoutComponent as ɵbp, defaultRoutingConfig as ɵbn, defaultStorefrontRoutesConfig as ɵbm, OrderConfirmationPageModule as ɵbo, CardComponent as ɵh, CardModule as ɵg, GenericLinkModule as ɵe, address as ɵbr, cart as ɵbs, checkout as ɵbt, common as ɵbu, myAccount as ɵbv, payment as ɵbw, product as ɵbx, pwa as ɵby, storeFinder as ɵbz, user as ɵca };
 
 //# sourceMappingURL=spartacus-storefront.js.map

@@ -118,4 +118,12 @@ export declare const user: {
         lastNameIsRequired: string;
         profileUpdateSuccess: string;
     };
+    consentManagementForm: {
+        message: {
+            success: {
+                given: string;
+                withdrawn: string;
+            };
+        };
+    };
 };

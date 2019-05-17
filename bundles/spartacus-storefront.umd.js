@@ -5788,6 +5788,63 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /**
+     * Utility class when working with forms.
+     */
+    var /**
+     * Utility class when working with forms.
+     */ FormUtils = /** @class */ (function () {
+        function FormUtils() {
+        }
+        /**
+         *
+         * Checks is the `formControlName` field valid in the provided `form`.
+         *
+         * If it's NOT valid, the method returns `true`.
+         *
+         * @param form a form whose field to check
+         * @param formControlName a field name
+         * @param submitted is the form submitted
+         */
+        /**
+         *
+         * Checks is the `formControlName` field valid in the provided `form`.
+         *
+         * If it's NOT valid, the method returns `true`.
+         *
+         * @param {?} form a form whose field to check
+         * @param {?} formControlName a field name
+         * @param {?} submitted is the form submitted
+         * @return {?}
+         */
+        FormUtils.isNotValidField = /**
+         *
+         * Checks is the `formControlName` field valid in the provided `form`.
+         *
+         * If it's NOT valid, the method returns `true`.
+         *
+         * @param {?} form a form whose field to check
+         * @param {?} formControlName a field name
+         * @param {?} submitted is the form submitted
+         * @return {?}
+         */
+            function (form, formControlName, submitted) {
+                return (form.get(formControlName).invalid &&
+                    (submitted ||
+                        (form.get(formControlName).touched && form.get(formControlName).dirty)));
+            };
+        return FormUtils;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
 
     /**
      * @fileoverview added by tsickle
@@ -7651,6 +7708,291 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var ConsentManagementFormComponent = /** @class */ (function () {
+        function ConsentManagementFormComponent() {
+            this.consentChanged = new i0.EventEmitter();
+            this.consentGiven = false;
+        }
+        /**
+         * @return {?}
+         */
+        ConsentManagementFormComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                if (this.consentTemplate && this.consentTemplate.currentConsent) {
+                    if (this.consentTemplate.currentConsent.consentWithdrawnDate) {
+                        this.consentGiven = false;
+                    }
+                    else if (this.consentTemplate.currentConsent.consentGivenDate) {
+                        this.consentGiven = true;
+                    }
+                }
+            };
+        /**
+         * @return {?}
+         */
+        ConsentManagementFormComponent.prototype.onConsentChange = /**
+         * @return {?}
+         */
+            function () {
+                this.consentChanged.emit({
+                    given: !this.consentGiven,
+                    template: this.consentTemplate,
+                });
+            };
+        ConsentManagementFormComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-consent-management-form',
+                        template: "<div class=\"form-check\">\n  <label>\n    <input\n      type=\"checkbox\"\n      class=\"form-check-input\"\n      [checked]=\"consentGiven\"\n      (change)=\"onConsentChange()\"\n    />\n    <span class=\"form-check-label\">\n      {{ consentTemplate?.description }}\n    </span>\n  </label>\n</div>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        ConsentManagementFormComponent.ctorParameters = function () { return []; };
+        ConsentManagementFormComponent.propDecorators = {
+            consentTemplate: [{ type: i0.Input }],
+            consentChanged: [{ type: i0.Output }]
+        };
+        return ConsentManagementFormComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ConsentManagementComponent = /** @class */ (function () {
+        function ConsentManagementComponent(userService, routingService, globalMessageService) {
+            this.userService = userService;
+            this.routingService = routingService;
+            this.globalMessageService = globalMessageService;
+            this.subscriptions = new rxjs.Subscription();
+        }
+        /**
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                this.loading$ = rxjs.combineLatest(this.userService.getConsentsResultLoading(), this.userService.getGiveConsentResultLoading(), this.userService.getWithdrawConsentResultLoading()).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 3), consentLoading = _b[0], giveConsentLoading = _b[1], withdrawConsentLoading = _b[2];
+                    return consentLoading || giveConsentLoading || withdrawConsentLoading;
+                }));
+                this.consentListInit();
+                this.giveConsentInit();
+                this.withdrawConsentInit();
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.consentListInit = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.templateList$ = rxjs.combineLatest(this.userService.get(), this.userService.getConsents()).pipe(operators.filter(function (_a) {
+                    var _b = __read(_a, 1), user = _b[0];
+                    return Boolean(user) && Boolean(user.uid);
+                }), operators.tap(function (_a) {
+                    var _b = __read(_a, 2), user = _b[0], templateList = _b[1];
+                    if (!_this.consentsExists(templateList)) {
+                        _this.userService.loadConsents(user.uid);
+                    }
+                }), operators.map(function (_a) {
+                    var _b = __read(_a, 2), _ = _b[0], templateList = _b[1];
+                    return templateList;
+                }));
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.giveConsentInit = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.userService.resetGiveConsentProcessState();
+                this.subscriptions.add(this.userService
+                    .getGiveConsentResultSuccess()
+                    .subscribe(function (success) { return _this.onConsentGivenSuccess(success); }));
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.withdrawConsentInit = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.userService.resetWithdrawConsentProcessState();
+                this.subscriptions.add(this.userService
+                    .getWithdrawConsentResultLoading()
+                    .pipe(operators.skipWhile(Boolean), operators.withLatestFrom(this.userService.getWithdrawConsentResultSuccess(), this.userService.get()), operators.map(function (_a) {
+                    var _b = __read(_a, 3), _loading = _b[0], withdrawalSuccess = _b[1], user = _b[2];
+                    return { withdrawalSuccess: withdrawalSuccess, user: user };
+                }), operators.tap(function (data) {
+                    if (data.withdrawalSuccess) {
+                        _this.userService.loadConsents(data.user.uid);
+                    }
+                }))
+                    .subscribe(function (data) {
+                    return _this.onConsentWithdrawnSuccess(data.withdrawalSuccess);
+                }));
+            };
+        /**
+         * @private
+         * @param {?} templateList
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.consentsExists = /**
+         * @private
+         * @param {?} templateList
+         * @return {?}
+         */
+            function (templateList) {
+                return (Boolean(templateList) &&
+                    Boolean(templateList.consentTemplates) &&
+                    templateList.consentTemplates.length > 0);
+            };
+        /**
+         * @param {?} __0
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.onConsentChange = /**
+         * @param {?} __0
+         * @return {?}
+         */
+            function (_a) {
+                var _this = this;
+                var given = _a.given, template = _a.template;
+                this.userService
+                    .get()
+                    .pipe(operators.map(function (user) { return user.uid; }), operators.tap(function (userId) {
+                    if (given) {
+                        _this.userService.giveConsent(userId, template.id, template.version);
+                    }
+                    else {
+                        _this.userService.withdrawConsent(userId, template.currentConsent.code);
+                    }
+                }), operators.take(1))
+                    .subscribe();
+            };
+        /**
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.onDone = /**
+         * @return {?}
+         */
+            function () {
+                this.routingService.go({ cxRoute: 'home' });
+            };
+        /**
+         * @private
+         * @param {?} success
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.onConsentGivenSuccess = /**
+         * @private
+         * @param {?} success
+         * @return {?}
+         */
+            function (success) {
+                if (success) {
+                    this.userService.resetGiveConsentProcessState();
+                    this.globalMessageService.add({ key: 'consentManagementForm.message.success.given' }, i1$1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
+                }
+            };
+        /**
+         * @private
+         * @param {?} success
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.onConsentWithdrawnSuccess = /**
+         * @private
+         * @param {?} success
+         * @return {?}
+         */
+            function (success) {
+                if (success) {
+                    this.userService.resetWithdrawConsentProcessState();
+                    this.globalMessageService.add({ key: 'consentManagementForm.message.success.withdrawn' }, i1$1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
+                }
+            };
+        /**
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+            function () {
+                this.subscriptions.unsubscribe();
+                this.userService.resetGiveConsentProcessState();
+                this.userService.resetWithdrawConsentProcessState();
+            };
+        ConsentManagementComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-consent-management',
+                        template: "<ng-container>\n  <div *ngIf=\"(loading$ | async); else consentManagementForm\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #consentManagementForm>\n    <div class=\"row d-flex justify-content-center\">\n      <div class=\"col-md-8\">\n        <cx-consent-management-form\n          *ngFor=\"\n            let consentTemplate of (templateList$ | async)?.consentTemplates\n          \"\n          [consentTemplate]=\"consentTemplate\"\n          (consentChanged)=\"onConsentChange($event)\"\n        ></cx-consent-management-form>\n        <div class=\"cx-checkout-btns row\">\n          <div class=\"col-lg-12\">\n            <button class=\"btn btn-block btn-primary\" (click)=\"onDone()\">\n              {{ 'common.done' | cxTranslate }}\n            </button>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        ConsentManagementComponent.ctorParameters = function () {
+            return [
+                { type: i1$1.UserService },
+                { type: i1$1.RoutingService },
+                { type: i1$1.GlobalMessageService }
+            ];
+        };
+        return ConsentManagementComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ConsentManagementModule = /** @class */ (function () {
+        function ConsentManagementModule() {
+        }
+        ConsentManagementModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i1$1.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    ConsentManagementComponent: {
+                                        selector: 'cx-consent-management',
+                                        guards: [i1$1.AuthGuard],
+                                    },
+                                },
+                            }))),
+                            forms.FormsModule,
+                            forms.ReactiveFormsModule,
+                            SpinnerModule,
+                            i1$1.I18nModule,
+                        ],
+                        declarations: [ConsentManagementComponent, ConsentManagementFormComponent],
+                        exports: [ConsentManagementComponent],
+                        entryComponents: [ConsentManagementComponent],
+                    },] }
+        ];
+        return ConsentManagementModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var ForgotPasswordComponent = /** @class */ (function () {
         function ForgotPasswordComponent(fb, userService, routingService) {
             this.fb = fb;
@@ -8575,58 +8917,6 @@
                     },] }
         ];
         return ResetPasswordModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /**
-     * Utility class when working with forms.
-     */
-    var /**
-     * Utility class when working with forms.
-     */ FormUtils = /** @class */ (function () {
-        function FormUtils() {
-        }
-        /**
-         *
-         * Checks is the `formControlName` field valid in the provided `form`.
-         *
-         * If it's NOT valid, the method returns `true`.
-         *
-         * @param form a form whose field to check
-         * @param formControlName a field name
-         * @param submitted is the form submitted
-         */
-        /**
-         *
-         * Checks is the `formControlName` field valid in the provided `form`.
-         *
-         * If it's NOT valid, the method returns `true`.
-         *
-         * @param {?} form a form whose field to check
-         * @param {?} formControlName a field name
-         * @param {?} submitted is the form submitted
-         * @return {?}
-         */
-        FormUtils.isNotValidField = /**
-         *
-         * Checks is the `formControlName` field valid in the provided `form`.
-         *
-         * If it's NOT valid, the method returns `true`.
-         *
-         * @param {?} form a form whose field to check
-         * @param {?} formControlName a field name
-         * @param {?} submitted is the form submitted
-         * @return {?}
-         */
-            function (form, formControlName, submitted) {
-                return (form.get(formControlName).invalid &&
-                    (submitted ||
-                        (form.get(formControlName).touched && form.get(formControlName).dirty)));
-            };
-        return FormUtils;
     }());
 
     /**
@@ -12781,8 +13071,9 @@
                             UpdateEmailModule,
                             UpdatePasswordModule,
                             UpdateProfileModule,
-                            CartComponentModule,
+                            ConsentManagementModule,
                             CloseAccountModule,
+                            CartComponentModule,
                             TabParagraphContainerModule,
                             StoreFinderModule,
                             ForgotPasswordModule,
@@ -15101,6 +15392,7 @@
             submit: 'Submit',
             continue: 'Continue',
             save: 'Save',
+            done: 'Done',
             home: 'Home',
         },
         spinner: {
@@ -15407,6 +15699,14 @@
             lastNameIsRequired: 'Last name is required.',
             profileUpdateSuccess: 'Personal details successfully updated',
         },
+        consentManagementForm: {
+            message: {
+                success: {
+                    given: 'Consent successfully given.',
+                    withdrawn: 'Consent successfully withdrawn.',
+                },
+            },
+        },
     };
 
     /**
@@ -15587,6 +15887,9 @@
     exports.CloseAccountModule = CloseAccountModule;
     exports.CloseAccountModalComponent = CloseAccountModalComponent;
     exports.CloseAccountComponent = CloseAccountComponent;
+    exports.ConsentManagementFormComponent = ConsentManagementFormComponent;
+    exports.ConsentManagementComponent = ConsentManagementComponent;
+    exports.ConsentManagementModule = ConsentManagementModule;
     exports.ForgotPasswordComponent = ForgotPasswordComponent;
     exports.ForgotPasswordModule = ForgotPasswordModule;
     exports.OrderDetailHeadlineComponent = OrderDetailHeadlineComponent;
@@ -15744,6 +16047,7 @@
     exports.StarRatingComponent = StarRatingComponent;
     exports.StarRatingModule = StarRatingModule;
     exports.OnlyNumberDirective = OnlyNumberDirective;
+    exports.FormUtils = FormUtils;
     exports.translations = translations;
     exports.ɵd = CartTotalsModule;
     exports.ɵf = NavigationUIComponent;
