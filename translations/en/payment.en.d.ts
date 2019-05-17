@@ -10,6 +10,7 @@ export declare const payment: {
         cardNumber: string;
         expirationDate: string;
         securityCode: string;
+        securityCodeTitle: string;
         saveAsDefault: string;
         billingAddress: string;
         sameAsShippingAddress: string;

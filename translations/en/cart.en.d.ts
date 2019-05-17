@@ -9,6 +9,7 @@ export declare const cart: {
         item: string;
         itemPrice: string;
         quantity: string;
+        quantityTitle: string;
         total: string;
         cartTotal: string;
         cartTotal_plural: string;
