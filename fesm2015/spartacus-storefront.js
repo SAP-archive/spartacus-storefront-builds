@@ -7,10 +7,10 @@ import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscriptio
 import { Title, Meta } from '@angular/platform-browser';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { tap, debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
-import { WindowRef, ServerConfig, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, CartService, RoutingService, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlModule, AuthGuard, ProductService, CmsConfig, PageType, ConfigModule, ProductReferenceService, CartDataService, provideConfig, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsService, defaultCmsModuleConfig, CmsModule, Config, NotAuthGuard, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, CartModule, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, OccConfig, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
+import { WindowRef, ServerConfig, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthService, CheckoutService, CartService, RoutingService, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlModule, AuthGuard, ProductService, ConfigModule, CmsConfig, PageType, ProductReferenceService, CartDataService, provideConfig, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsService, defaultCmsModuleConfig, CmsModule, Config, NotAuthGuard, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, CartModule, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, OccConfig, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
-import { Injectable, NgModule, APP_INITIALIZER, ChangeDetectionStrategy, Component, Input, Injector, Inject, PLATFORM_ID, ElementRef, ViewChild, EventEmitter, Output, Renderer2, ChangeDetectorRef, HostBinding, Directive, TemplateRef, ViewContainerRef, Optional, ViewEncapsulation, forwardRef, HostListener, defineInjectable, inject, INJECTOR } from '@angular/core';
+import { Injectable, NgModule, APP_INITIALIZER, ChangeDetectionStrategy, Component, Input, Injector, Inject, PLATFORM_ID, EventEmitter, Output, ElementRef, ViewChild, Renderer2, ChangeDetectorRef, HostBinding, Directive, TemplateRef, ViewContainerRef, Optional, ViewEncapsulation, forwardRef, HostListener, defineInjectable, inject, INJECTOR } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -6151,7 +6151,7 @@ class CloseAccountComponent {
 CloseAccountComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-close-account',
-                template: "<div class=\"col-lg-8 col-md-9\">\n  <p\n    class=\"cx-info\"\n    [innerHTML]=\"'closeAccount.closeAccountRetentionInfo' | cxTranslate\"\n  ></p>\n  <div class=\"row cx-btn-group\">\n    <div class=\"col-sm-3\">\n      <a\n        [routerLink]=\"{ cxRoute: 'home' } | cxUrl\"\n        class=\"btn btn-block btn-secondary\"\n        >{{ 'common.cancel' | cxTranslate }}</a\n      >\n    </div>\n    <div class=\"col-sm-6\">\n      <button class=\"btn btn-primary\" (click)=\"openModal()\">\n        {{ 'closeAccount.closeMyAccount' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n",
+                template: "<div class=\"col-lg-8 col-md-9\">\n  <div class=\"row cx-btn-group\">\n    <div class=\"col-sm-3\">\n      <a\n        [routerLink]=\"{ cxRoute: 'home' } | cxUrl\"\n        class=\"btn btn-block btn-secondary\"\n        >{{ 'common.cancel' | cxTranslate }}</a\n      >\n    </div>\n    <div class=\"col-sm-6\">\n      <button class=\"btn btn-primary\" (click)=\"openModal()\">\n        {{ 'closeAccount.closeMyAccount' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -12663,7 +12663,6 @@ const myAccount = {
         confirmAccountClosureMessage: 'Are you sure you want to close your account?',
         closeMyAccount: 'CLOSE MY ACCOUNT',
         accountClosedSuccessfully: 'Account closed with success',
-        closeAccountRetentionInfo: 'When you close your account, your profile information will be kept for the retention period mandated by the laws and regulations of your country. Customer Support will be able to assist you with any order history or proof of purchase needs during this time.<br/><br/>At the end of the retention period, the following profile information will be deleted and will no longer be accessible to you or anyone else:<br/><br/><ul><li>email addresses</li><li>contact information</li><li>shipping details</li><li>delivery preferences</li><li>consent management settings</li><li>account history</li><li>payment details</li><li>order history</li></ul>',
     },
 };
 
