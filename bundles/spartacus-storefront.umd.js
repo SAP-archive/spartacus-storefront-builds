@@ -11380,14 +11380,20 @@
             configurable: true
         });
         Object.defineProperty(ProductViewComponent.prototype, "viewMode", {
+            /**
+             * Display icons inversely to allow users to
+             * see the view they will navigate to
+             */
             get: /**
+             * Display icons inversely to allow users to
+             * see the view they will navigate to
              * @return {?}
              */ function () {
                 if (this.mode === 'list') {
-                    return this.iconTypes.LIST;
+                    return this.iconTypes.GRID;
                 }
                 else if (this.mode === 'grid') {
-                    return this.iconTypes.GRID;
+                    return this.iconTypes.LIST;
                 }
             },
             enumerable: true,
