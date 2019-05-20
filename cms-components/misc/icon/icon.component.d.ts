@@ -1,7 +1,7 @@
-import { ElementRef, OnInit } from '@angular/core';
+import { ElementRef } from '@angular/core';
 import { IconLoaderService } from './icon-loader.service';
 import { ICON_TYPE } from './icon.model';
-export declare class IconComponent implements OnInit {
+export declare class IconComponent {
     protected iconLoader: IconLoaderService;
     protected elementRef: ElementRef<HTMLElement>;
     /**
@@ -14,9 +14,12 @@ export declare class IconComponent implements OnInit {
      * clean them up when the icon changes
      */
     styleClasses: string;
+    /**
+     * Style class names from the host element are taken into account
+     * when classes are set dynamically.
+     */
     private staticStyleClasses;
     constructor(iconLoader: IconLoaderService, elementRef: ElementRef<HTMLElement>);
-    ngOnInit(): void;
     /**
      * Indicates whether the icon is configured to use SVG or not.
      */

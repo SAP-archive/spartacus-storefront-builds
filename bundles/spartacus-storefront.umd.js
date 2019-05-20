@@ -1947,16 +1947,22 @@
              */
             this.styleClasses = '';
         }
-        /**
-         * @return {?}
-         */
-        IconComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                this.staticStyleClasses = this.elementRef.nativeElement.classList.value;
-                this.addStyleClasses();
-            };
+        Object.defineProperty(IconComponent.prototype, "type", {
+            /**
+             * The type of the icon which maps to the icon link
+             * in the svg icon sprite.
+             */
+            set: /**
+             * The type of the icon which maps to the icon link
+             * in the svg icon sprite.
+             * @param {?} type
+             * @return {?}
+             */ function (type) {
+                this.addStyleClasses(type);
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(IconComponent.prototype, "useSvg", {
             /**
              * Indicates whether the icon is configured to use SVG or not.
@@ -1993,22 +1999,27 @@
         /**
          * Adds the style classes and the link resource (if availabe).
          * @private
+         * @param {?} type
          * @return {?}
          */
         IconComponent.prototype.addStyleClasses = /**
          * Adds the style classes and the link resource (if availabe).
          * @private
+         * @param {?} type
          * @return {?}
          */
-            function () {
-                if (this.staticStyleClasses) {
-                    this.styleClasses = this.staticStyleClasses + ' ';
-                }
+            function (type) {
                 if (this.useSvg) {
                     return;
                 }
-                this.styleClasses += this.iconLoader.getStyleClasses(this.type);
-                this.iconLoader.addLinkResource(this.type);
+                if (!this.staticStyleClasses) {
+                    // add static styles only once
+                    this.staticStyleClasses =
+                        this.elementRef.nativeElement.classList.value || '';
+                }
+                this.styleClasses =
+                    this.staticStyleClasses + ' ' + this.iconLoader.getStyleClasses(type);
+                this.iconLoader.addLinkResource(type);
             };
         IconComponent.decorators = [
             { type: i0.Component, args: [{
@@ -2024,7 +2035,7 @@
             ];
         };
         IconComponent.propDecorators = {
-            type: [{ type: i0.Input }],
+            type: [{ type: i0.Input, args: ['type',] }],
             styleClasses: [{ type: i0.HostBinding, args: ['class',] }]
         };
         return IconComponent;
