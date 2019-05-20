@@ -4,10 +4,10 @@ import { FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, FormB
 import { NgbTabsetModule, NgbAccordionModule, NgbTabsetConfig, NgbAccordionConfig, NgbRatingModule, NgbRatingConfig, NgbDropdownModule, NgbTypeaheadModule, NgbCollapseModule, NgbModalModule, NgbPaginationModule, NgbPaginationConfig, NgbModule, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscription, combineLatest, merge, Subject } from 'rxjs';
 import { Title, Meta } from '@angular/platform-browser';
-import { __values, __read, __spread, __extends, __assign, __awaiter, __generator } from 'tslib';
+import { __values, __spread, __read, __extends, __assign, __awaiter, __generator } from 'tslib';
 import { HttpClientModule, HttpUrlEncodingCodec, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, tap, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
-import { ServerConfig, WindowRef, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, RoutingService, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, AuthService, CartService, I18nModule, UserService, CheckoutModule, UrlModule, AuthGuard, ProductService, CmsConfig, PageType, ProductReferenceService, CartDataService, provideConfig, StateModule, RoutingModule, AuthModule, ConfigModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsService, defaultCmsModuleConfig, CmsModule, Config, DynamicAttributeService, CxApiService, ComponentMapperService, UserModule, CartModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, NotAuthGuard, PageRobotsMeta, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, OccConfig, StoreDataService, StoreFinderService, GoogleMapRendererService, TranslatePipe } from '@spartacus/core';
+import { ServerConfig, WindowRef, CheckoutService, RoutingService, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, I18nModule, UserService, CheckoutModule, UrlModule, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, AuthGuard, ProductService, CmsConfig, PageType, AuthService, CartService, ProductReferenceService, CartDataService, provideConfig, StateModule, RoutingModule, AuthModule, ConfigModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsService, defaultCmsModuleConfig, CmsModule, Config, DynamicAttributeService, CxApiService, ComponentMapperService, UserModule, CartModule, PageMetaService, CmsPageTitleModule, ProductModule, StripHtmlModule, ProductSearchService, NotAuthGuard, PageRobotsMeta, StoreFinderCoreModule, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, OccConfig, StoreDataService, StoreFinderService, GoogleMapRendererService, TranslatePipe } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Injector, ChangeDetectorRef, HostBinding, TemplateRef, ViewEncapsulation, Optional, defineInjectable, inject, INJECTOR, Inject, PLATFORM_ID, ViewContainerRef } from '@angular/core';
@@ -2958,7 +2958,7 @@ var LoginFormModule = /** @class */ (function () {
                             cmsComponents: {
                                 ReturningCustomerLoginComponent: {
                                     selector: 'cx-login-form',
-                                    guard: [NotAuthGuard],
+                                    guards: [NotAuthGuard],
                                 },
                             },
                         }))),

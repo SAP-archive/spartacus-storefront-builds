@@ -3178,7 +3178,7 @@
                                 cmsComponents: {
                                     ReturningCustomerLoginComponent: {
                                         selector: 'cx-login-form',
-                                        guard: [i1$1.NotAuthGuard],
+                                        guards: [i1$1.NotAuthGuard],
                                     },
                                 },
                             }))),

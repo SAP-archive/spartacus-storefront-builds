@@ -2347,7 +2347,7 @@ LoginFormModule.decorators = [
                         cmsComponents: {
                             ReturningCustomerLoginComponent: {
                                 selector: 'cx-login-form',
-                                guard: [NotAuthGuard],
+                                guards: [NotAuthGuard],
                             },
                         },
                     }))),
