@@ -2,4 +2,5 @@ import { AuthConfig, CmsConfig, I18nConfig, OccConfig, RoutingConfig, Personaliz
 import { IconConfig } from '../cms-components/misc/icon/index';
 import { PWAModuleConfig } from '../cms-structure/pwa/index';
 import { LayoutConfig } from '../layout/config/layout-config';
-export declare type StorefrontModuleConfig = AuthConfig | CmsConfig | OccConfig | StateConfig | PWAModuleConfig | SiteContextConfig | LayoutConfig | RoutingConfig | I18nConfig | PersonalizationConfig | IconConfig;
+import { CheckoutConfig } from './checkout/config/checkout-config';
+export declare type StorefrontModuleConfig = AuthConfig | CmsConfig | OccConfig | StateConfig | PWAModuleConfig | SiteContextConfig | LayoutConfig | RoutingConfig | I18nConfig | PersonalizationConfig | IconConfig | CheckoutConfig;

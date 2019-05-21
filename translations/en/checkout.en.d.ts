@@ -35,4 +35,10 @@ export declare const checkout: {
     checkout: {
         backToCart: string;
     };
+    checkoutProgress: {
+        shippingAddress: string;
+        deliveryMode: string;
+        paymentDetails: string;
+        reviewOrder: string;
+    };
 };
