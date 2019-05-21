@@ -7811,10 +7811,7 @@
                     if (!_this.consentsExists(templateList)) {
                         _this.userService.loadConsents(user.uid);
                     }
-                }), operators.map(function (_a) {
-                    var _b = __read(_a, 2), _ = _b[0], templateList = _b[1];
-                    return templateList;
-                }));
+                }), operators.pluck(1));
             };
         /**
          * @private
@@ -7845,8 +7842,8 @@
                 this.subscriptions.add(this.userService
                     .getWithdrawConsentResultLoading()
                     .pipe(operators.skipWhile(Boolean), operators.withLatestFrom(this.userService.getWithdrawConsentResultSuccess(), this.userService.get()), operators.map(function (_a) {
-                    var _b = __read(_a, 3), _loading = _b[0], withdrawalSuccess = _b[1], user = _b[2];
-                    return { withdrawalSuccess: withdrawalSuccess, user: user };
+                    var _b = __read(_a, 3), withdrawalSuccess = _b[1], user = _b[2];
+                    return ({ withdrawalSuccess: withdrawalSuccess, user: user });
                 }), operators.tap(function (data) {
                     if (data.withdrawalSuccess) {
                         _this.userService.loadConsents(data.user.uid);
@@ -7884,7 +7881,7 @@
                 var given = _a.given, template = _a.template;
                 this.userService
                     .get()
-                    .pipe(operators.map(function (user) { return user.uid; }), operators.tap(function (userId) {
+                    .pipe(operators.pluck('uid'), operators.tap(function (userId) {
                     if (given) {
                         _this.userService.giveConsent(userId, template.id, template.version);
                     }

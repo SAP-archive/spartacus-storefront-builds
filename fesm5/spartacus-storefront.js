@@ -6,7 +6,7 @@ import { FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, FormB
 import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscription, combineLatest, merge, Subject } from 'rxjs';
 import { Title, Meta } from '@angular/platform-browser';
 import { __values, __spread, __read, __extends, __assign, __awaiter, __generator } from 'tslib';
-import { debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, tap, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, tap, withLatestFrom, pluck, shareReplay, delay } from 'rxjs/operators';
 import { ServerConfig, WindowRef, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, AuthService, CartService, CmsService, defaultCmsModuleConfig, CmsModule, Config, CheckoutModule, DynamicAttributeService, CxApiService, ComponentMapperService, UserModule, UserService, CartModule, PageMetaService, CmsPageTitleModule, ProductModule, ProductSearchService, NotAuthGuard, PageRobotsMeta, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductReviewService, OccConfig, ContextServiceMap, SiteContextModule, StoreDataService, StoreFinderService, GoogleMapRendererService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
@@ -7532,10 +7532,7 @@ var ConsentManagementComponent = /** @class */ (function () {
             if (!_this.consentsExists(templateList)) {
                 _this.userService.loadConsents(user.uid);
             }
-        }), map(function (_a) {
-            var _b = __read(_a, 2), _ = _b[0], templateList = _b[1];
-            return templateList;
-        }));
+        }), pluck(1));
     };
     /**
      * @private
@@ -7566,8 +7563,8 @@ var ConsentManagementComponent = /** @class */ (function () {
         this.subscriptions.add(this.userService
             .getWithdrawConsentResultLoading()
             .pipe(skipWhile(Boolean), withLatestFrom(this.userService.getWithdrawConsentResultSuccess(), this.userService.get()), map(function (_a) {
-            var _b = __read(_a, 3), _loading = _b[0], withdrawalSuccess = _b[1], user = _b[2];
-            return { withdrawalSuccess: withdrawalSuccess, user: user };
+            var _b = __read(_a, 3), withdrawalSuccess = _b[1], user = _b[2];
+            return ({ withdrawalSuccess: withdrawalSuccess, user: user });
         }), tap(function (data) {
             if (data.withdrawalSuccess) {
                 _this.userService.loadConsents(data.user.uid);
@@ -7605,7 +7602,7 @@ var ConsentManagementComponent = /** @class */ (function () {
         var given = _a.given, template = _a.template;
         this.userService
             .get()
-            .pipe(map(function (user) { return user.uid; }), tap(function (userId) {
+            .pipe(pluck('uid'), tap(function (userId) {
             if (given) {
                 _this.userService.giveConsent(userId, template.id, template.version);
             }

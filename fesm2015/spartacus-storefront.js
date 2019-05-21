@@ -6,8 +6,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscription, combineLatest, merge, Subject } from 'rxjs';
 import { Title, Meta } from '@angular/platform-browser';
-import { debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, tap, withLatestFrom, shareReplay, delay } from 'rxjs/operators';
-import { ServerConfig, WindowRef, RoutingService, RoutingConfigService, UrlModule, I18nModule, ConfigModule, AuthGuard, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, AuthService, CartService, CmsService, defaultCmsModuleConfig, CmsModule, Config, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, UserService, CartModule, CmsPageTitleModule, ProductModule, ProductSearchService, NotAuthGuard, StoreFinderCoreModule, CartDataService, GlobalMessageModule, ProductReviewService, ContextServiceMap, SiteContextModule, StoreDataService, StoreFinderService, GoogleMapRendererService, OccConfig, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe } from '@spartacus/core';
+import { debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, tap, withLatestFrom, pluck, shareReplay, delay } from 'rxjs/operators';
+import { ServerConfig, WindowRef, RoutingService, RoutingConfigService, UrlModule, I18nModule, ConfigModule, AuthGuard, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, AuthService, CartService, CmsService, defaultCmsModuleConfig, CmsModule, Config, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, UserService, CartModule, CmsPageTitleModule, ProductModule, ProductSearchService, NotAuthGuard, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ContextServiceMap, SiteContextModule, ProductReviewService, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService, OccConfig, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Injector, Inject, PLATFORM_ID, HostBinding, TemplateRef, ViewContainerRef, Optional, ViewEncapsulation, defineInjectable, inject, INJECTOR, ChangeDetectorRef } from '@angular/core';
@@ -6280,7 +6280,7 @@ class ConsentManagementComponent {
             if (!this.consentsExists(templateList)) {
                 this.userService.loadConsents(user.uid);
             }
-        }), map(([_, templateList]) => templateList));
+        }), pluck(1));
     }
     /**
      * @private
@@ -6300,9 +6300,7 @@ class ConsentManagementComponent {
         this.userService.resetWithdrawConsentProcessState();
         this.subscriptions.add(this.userService
             .getWithdrawConsentResultLoading()
-            .pipe(skipWhile(Boolean), withLatestFrom(this.userService.getWithdrawConsentResultSuccess(), this.userService.get()), map(([_loading, withdrawalSuccess, user]) => {
-            return { withdrawalSuccess, user };
-        }), tap(data => {
+            .pipe(skipWhile(Boolean), withLatestFrom(this.userService.getWithdrawConsentResultSuccess(), this.userService.get()), map(([, withdrawalSuccess, user]) => ({ withdrawalSuccess, user })), tap(data => {
             if (data.withdrawalSuccess) {
                 this.userService.loadConsents(data.user.uid);
             }
@@ -6326,7 +6324,7 @@ class ConsentManagementComponent {
     onConsentChange({ given, template, }) {
         this.userService
             .get()
-            .pipe(map(user => user.uid), tap(userId => {
+            .pipe(pluck('uid'), tap(userId => {
             if (given) {
                 this.userService.giveConsent(userId, template.id, template.version);
             }
