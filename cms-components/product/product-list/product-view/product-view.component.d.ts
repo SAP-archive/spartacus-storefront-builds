@@ -9,10 +9,6 @@ export declare class ProductViewComponent {
     mode: ViewModes;
     modeChange: EventEmitter<string>;
     readonly buttonClass: string;
-    /**
-     * Display icons inversely to allow users to
-     * see the view they will navigate to
-     */
     readonly viewMode: ICON_TYPE.GRID | ICON_TYPE.LIST;
     changeMode(): void;
 }
