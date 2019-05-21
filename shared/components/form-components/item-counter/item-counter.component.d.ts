@@ -3,6 +3,8 @@ import { ControlValueAccessor, FormControl } from '@angular/forms';
 export declare class ItemCounterComponent implements OnInit, ControlValueAccessor, OnChanges {
     private renderer;
     input: ElementRef;
+    incrementBtn: ElementRef;
+    decrementBtn: ElementRef;
     value: number;
     step: number;
     min: number;
@@ -24,13 +26,9 @@ export declare class ItemCounterComponent implements OnInit, ControlValueAccesso
      */
     adjustValueInRange(incomingValue: number): number;
     /**
-     * Function set 'isValueOutOfRange' flag and adjust value in range. Then update model value and refresh input
+     * Update model value and refresh input
      */
     manualChange(newValue: number): void;
-    /**
-     * Verify value for decision about displaying error about range
-     */
-    isOutOfRange(value: number): boolean;
     onKeyDown(event: KeyboardEvent): void;
     onBlur(event: FocusEvent): void;
     onFocus(event: FocusEvent): void;
@@ -49,4 +47,9 @@ export declare class ItemCounterComponent implements OnInit, ControlValueAccesso
      * Set up new value for input and emit event outside
      */
     updateValue(updatedQuantity: number): void;
+    /**
+     * Determines which HTML element should have focus at a given time
+     */
+    setFocus(isIncremented: boolean): void;
+    isMaxOrMinValueOrBeyond(): boolean;
 }

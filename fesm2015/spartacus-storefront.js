@@ -7,7 +7,7 @@ import { FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, FormB
 import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscription, combineLatest, merge, Subject } from 'rxjs';
 import { Title, Meta } from '@angular/platform-browser';
 import { debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, tap, withLatestFrom, pluck, shareReplay, delay } from 'rxjs/operators';
-import { ServerConfig, WindowRef, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, AuthService, CartService, CmsService, defaultCmsModuleConfig, CmsModule, Config, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, UserService, CartModule, CmsPageTitleModule, ProductModule, ProductSearchService, NotAuthGuard, StoreFinderCoreModule, CartDataService, GlobalMessageModule, ProductReviewService, OccConfig, ContextServiceMap, SiteContextModule, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID } from '@spartacus/core';
+import { ServerConfig, WindowRef, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, AuthService, CartService, CmsService, defaultCmsModuleConfig, CmsModule, Config, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, UserService, CartModule, CmsPageTitleModule, ProductModule, ProductSearchService, NotAuthGuard, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductReviewService, OccConfig, ContextServiceMap, SiteContextModule, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Injector, Inject, PLATFORM_ID, HostBinding, TemplateRef, ViewContainerRef, Optional, ViewEncapsulation, defineInjectable, inject, INJECTOR, ChangeDetectorRef } from '@angular/core';
@@ -274,12 +274,11 @@ class ItemCounterComponent {
                 : incomingValue;
     }
     /**
-     * Function set 'isValueOutOfRange' flag and adjust value in range. Then update model value and refresh input
+     * Update model value and refresh input
      * @param {?} newValue
      * @return {?}
      */
     manualChange(newValue) {
-        this.isValueOutOfRange = this.isOutOfRange(newValue);
         newValue = this.adjustValueInRange(newValue);
         this.updateValue(newValue);
         /* We use the value from the input, however, this value
@@ -288,14 +287,6 @@ class ItemCounterComponent {
           fails, then the input will need to display this.value, and not what the user
           recently typed in */
         this.renderer.setProperty(this.input.nativeElement, 'value', newValue);
-    }
-    /**
-     * Verify value for decision about displaying error about range
-     * @param {?} value
-     * @return {?}
-     */
-    isOutOfRange(value) {
-        return value < this.min || value > this.max;
     }
     /**
      * @param {?} event
@@ -339,6 +330,7 @@ class ItemCounterComponent {
      */
     increment() {
         this.manualChange(this.value + this.step);
+        this.setFocus(true);
     }
     /**
      * Verify value that it can be decremented, if yes it does that.
@@ -346,6 +338,7 @@ class ItemCounterComponent {
      */
     decrement() {
         this.manualChange(this.value - this.step);
+        this.setFocus(false);
     }
     // ControlValueAccessor interface
     /**
@@ -384,11 +377,33 @@ class ItemCounterComponent {
         this.update.emit(updatedQuantity);
         this.onTouch();
     }
+    /**
+     * Determines which HTML element should have focus at a given time
+     * @param {?} isIncremented
+     * @return {?}
+     */
+    setFocus(isIncremented) {
+        if (this.isMaxOrMinValueOrBeyond()) {
+            this.input.nativeElement.focus();
+        }
+        else if (isIncremented) {
+            this.incrementBtn.nativeElement.focus();
+        }
+        else {
+            this.decrementBtn.nativeElement.focus();
+        }
+    }
+    /**
+     * @return {?}
+     */
+    isMaxOrMinValueOrBeyond() {
+        return this.value >= this.max || this.value <= this.min;
+    }
 }
 ItemCounterComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-item-counter',
-                template: "<div class=\"cx-counter-wrapper\">\n  <div\n    class=\"cx-counter btn-group\"\n    role=\"group\"\n    tabindex=\"0\"\n    aria-label=\"Add more items\"\n    [class.focused]=\"focus\"\n    (keydown)=\"onKeyDown($event)\"\n    (blur)=\"onBlur($event)\"\n    (focus)=\"onFocus($event)\"\n  >\n    <button\n      type=\"button\"\n      class=\"cx-counter-action\"\n      (click)=\"decrement()\"\n      [disabled]=\"cartIsLoading || value <= min\"\n    >\n      -\n    </button>\n    <input\n      #itemCounterInput\n      class=\"cx-counter-value\"\n      type=\"text\"\n      name=\"value\"\n      cxOnlyNumber\n      [formControl]=\"inputValue\"\n      [value]=\"value\"\n      *ngIf=\"isValueChangeable\"\n    />\n    <div class=\"cx-counter-value\" *ngIf=\"!isValueChangeable\">\n      {{ value }}\n    </div>\n    <button\n      type=\"button\"\n      class=\"cx-counter-action\"\n      (click)=\"increment()\"\n      [disabled]=\"cartIsLoading || value >= max\"\n    >\n      +\n    </button>\n  </div>\n</div>\n",
+                template: "<div class=\"cx-counter-wrapper\">\n  <div\n    class=\"cx-counter btn-group\"\n    role=\"group\"\n    tabindex=\"0\"\n    aria-label=\"Add more items\"\n    [class.focused]=\"focus\"\n    (keydown)=\"onKeyDown($event)\"\n    (blur)=\"onBlur($event)\"\n    (focus)=\"onFocus($event)\"\n  >\n    <button\n      #decrementBtn\n      type=\"button\"\n      class=\"cx-counter-action\"\n      (click)=\"decrement()\"\n      [disabled]=\"cartIsLoading || value <= min\"\n    >\n      -\n    </button>\n    <input\n      #itemCounterInput\n      class=\"cx-counter-value\"\n      type=\"text\"\n      name=\"value\"\n      cxOnlyNumber\n      [formControl]=\"inputValue\"\n      [value]=\"value\"\n      *ngIf=\"isValueChangeable\"\n    />\n    <div class=\"cx-counter-value\" *ngIf=\"!isValueChangeable\">\n      {{ value }}\n    </div>\n    <button\n      #incrementBtn\n      type=\"button\"\n      class=\"cx-counter-action\"\n      (click)=\"increment()\"\n      [disabled]=\"cartIsLoading || value >= max\"\n    >\n      +\n    </button>\n  </div>\n</div>\n",
                 providers: [COUNTER_CONTROL_ACCESSOR]
             }] }
 ];
@@ -398,6 +413,8 @@ ItemCounterComponent.ctorParameters = () => [
 ];
 ItemCounterComponent.propDecorators = {
     input: [{ type: ViewChild, args: ['itemCounterInput',] }],
+    incrementBtn: [{ type: ViewChild, args: ['incrementBtn',] }],
+    decrementBtn: [{ type: ViewChild, args: ['decrementBtn',] }],
     step: [{ type: Input }],
     min: [{ type: Input }],
     max: [{ type: Input }],

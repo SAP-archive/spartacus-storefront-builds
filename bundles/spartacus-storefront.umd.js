@@ -342,20 +342,19 @@
                         : incomingValue;
             };
         /**
-         * Function set 'isValueOutOfRange' flag and adjust value in range. Then update model value and refresh input
+         * Update model value and refresh input
          */
         /**
-         * Function set 'isValueOutOfRange' flag and adjust value in range. Then update model value and refresh input
+         * Update model value and refresh input
          * @param {?} newValue
          * @return {?}
          */
         ItemCounterComponent.prototype.manualChange = /**
-         * Function set 'isValueOutOfRange' flag and adjust value in range. Then update model value and refresh input
+         * Update model value and refresh input
          * @param {?} newValue
          * @return {?}
          */
             function (newValue) {
-                this.isValueOutOfRange = this.isOutOfRange(newValue);
                 newValue = this.adjustValueInRange(newValue);
                 this.updateValue(newValue);
                 /* We use the value from the input, however, this value
@@ -364,22 +363,6 @@
                   fails, then the input will need to display this.value, and not what the user
                   recently typed in */
                 this.renderer.setProperty(this.input.nativeElement, 'value', newValue);
-            };
-        /**
-         * Verify value for decision about displaying error about range
-         */
-        /**
-         * Verify value for decision about displaying error about range
-         * @param {?} value
-         * @return {?}
-         */
-        ItemCounterComponent.prototype.isOutOfRange = /**
-         * Verify value for decision about displaying error about range
-         * @param {?} value
-         * @return {?}
-         */
-            function (value) {
-                return value < this.min || value > this.max;
             };
         /**
          * @param {?} event
@@ -443,6 +426,7 @@
          */
             function () {
                 this.manualChange(this.value + this.step);
+                this.setFocus(true);
             };
         /**
          * Verify value that it can be decremented, if yes it does that.
@@ -457,6 +441,7 @@
          */
             function () {
                 this.manualChange(this.value - this.step);
+                this.setFocus(false);
             };
         // ControlValueAccessor interface
         // ControlValueAccessor interface
@@ -518,10 +503,43 @@
                 this.update.emit(updatedQuantity);
                 this.onTouch();
             };
+        /**
+         * Determines which HTML element should have focus at a given time
+         */
+        /**
+         * Determines which HTML element should have focus at a given time
+         * @param {?} isIncremented
+         * @return {?}
+         */
+        ItemCounterComponent.prototype.setFocus = /**
+         * Determines which HTML element should have focus at a given time
+         * @param {?} isIncremented
+         * @return {?}
+         */
+            function (isIncremented) {
+                if (this.isMaxOrMinValueOrBeyond()) {
+                    this.input.nativeElement.focus();
+                }
+                else if (isIncremented) {
+                    this.incrementBtn.nativeElement.focus();
+                }
+                else {
+                    this.decrementBtn.nativeElement.focus();
+                }
+            };
+        /**
+         * @return {?}
+         */
+        ItemCounterComponent.prototype.isMaxOrMinValueOrBeyond = /**
+         * @return {?}
+         */
+            function () {
+                return this.value >= this.max || this.value <= this.min;
+            };
         ItemCounterComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-item-counter',
-                        template: "<div class=\"cx-counter-wrapper\">\n  <div\n    class=\"cx-counter btn-group\"\n    role=\"group\"\n    tabindex=\"0\"\n    aria-label=\"Add more items\"\n    [class.focused]=\"focus\"\n    (keydown)=\"onKeyDown($event)\"\n    (blur)=\"onBlur($event)\"\n    (focus)=\"onFocus($event)\"\n  >\n    <button\n      type=\"button\"\n      class=\"cx-counter-action\"\n      (click)=\"decrement()\"\n      [disabled]=\"cartIsLoading || value <= min\"\n    >\n      -\n    </button>\n    <input\n      #itemCounterInput\n      class=\"cx-counter-value\"\n      type=\"text\"\n      name=\"value\"\n      cxOnlyNumber\n      [formControl]=\"inputValue\"\n      [value]=\"value\"\n      *ngIf=\"isValueChangeable\"\n    />\n    <div class=\"cx-counter-value\" *ngIf=\"!isValueChangeable\">\n      {{ value }}\n    </div>\n    <button\n      type=\"button\"\n      class=\"cx-counter-action\"\n      (click)=\"increment()\"\n      [disabled]=\"cartIsLoading || value >= max\"\n    >\n      +\n    </button>\n  </div>\n</div>\n",
+                        template: "<div class=\"cx-counter-wrapper\">\n  <div\n    class=\"cx-counter btn-group\"\n    role=\"group\"\n    tabindex=\"0\"\n    aria-label=\"Add more items\"\n    [class.focused]=\"focus\"\n    (keydown)=\"onKeyDown($event)\"\n    (blur)=\"onBlur($event)\"\n    (focus)=\"onFocus($event)\"\n  >\n    <button\n      #decrementBtn\n      type=\"button\"\n      class=\"cx-counter-action\"\n      (click)=\"decrement()\"\n      [disabled]=\"cartIsLoading || value <= min\"\n    >\n      -\n    </button>\n    <input\n      #itemCounterInput\n      class=\"cx-counter-value\"\n      type=\"text\"\n      name=\"value\"\n      cxOnlyNumber\n      [formControl]=\"inputValue\"\n      [value]=\"value\"\n      *ngIf=\"isValueChangeable\"\n    />\n    <div class=\"cx-counter-value\" *ngIf=\"!isValueChangeable\">\n      {{ value }}\n    </div>\n    <button\n      #incrementBtn\n      type=\"button\"\n      class=\"cx-counter-action\"\n      (click)=\"increment()\"\n      [disabled]=\"cartIsLoading || value >= max\"\n    >\n      +\n    </button>\n  </div>\n</div>\n",
                         providers: [COUNTER_CONTROL_ACCESSOR]
                     }] }
         ];
@@ -533,6 +551,8 @@
         };
         ItemCounterComponent.propDecorators = {
             input: [{ type: i0.ViewChild, args: ['itemCounterInput',] }],
+            incrementBtn: [{ type: i0.ViewChild, args: ['incrementBtn',] }],
+            decrementBtn: [{ type: i0.ViewChild, args: ['decrementBtn',] }],
             step: [{ type: i0.Input }],
             min: [{ type: i0.Input }],
             max: [{ type: i0.Input }],
