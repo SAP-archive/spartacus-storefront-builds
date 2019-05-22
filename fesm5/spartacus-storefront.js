@@ -7,7 +7,7 @@ import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscriptio
 import { Title, Meta } from '@angular/platform-browser';
 import { __values, __spread, __read, __extends, __assign, __awaiter, __generator } from 'tslib';
 import { debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, tap, endWith, first, skipWhile, withLatestFrom, pluck, shareReplay, delay } from 'rxjs/operators';
-import { ServerConfig, WindowRef, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, AuthService, CartService, CmsService, defaultCmsModuleConfig, CmsModule, Config, CheckoutModule, DynamicAttributeService, CxApiService, ComponentMapperService, UserModule, UserService, CartModule, PageMetaService, CmsPageTitleModule, ProductModule, ProductSearchService, NotAuthGuard, PageRobotsMeta, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductReviewService, OccConfig, ContextServiceMap, SiteContextModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
+import { ServerConfig, WindowRef, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, AuthService, CartService, CmsService, defaultCmsModuleConfig, CmsModule, Config, CheckoutModule, DynamicAttributeService, CxApiService, ComponentMapperService, UserModule, UserService, CartModule, PageMetaService, CmsPageTitleModule, ProductModule, ProductSearchService, NotAuthGuard, PageRobotsMeta, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductReviewService, OccConfig, ContextServiceMap, SiteContextModule, StoreDataService, StoreFinderService, GoogleMapRendererService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Injector, HostBinding, TemplateRef, ViewEncapsulation, Optional, defineInjectable, inject, INJECTOR, Inject, PLATFORM_ID, ViewContainerRef, ChangeDetectorRef } from '@angular/core';
@@ -11092,21 +11092,29 @@ var ProductViewComponent = /** @class */ (function () {
          * @return {?}
          */
         function () {
-            return "cx-product-" + this.mode;
+            /** @type {?} */
+            var viewName = this.viewMode.toLowerCase();
+            return "cx-product-" + viewName;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(ProductViewComponent.prototype, "viewMode", {
+        /**
+         *   Display icons inversely to allow users
+         *   to see the view they will navigate to
+         */
         get: /**
+         *   Display icons inversely to allow users
+         *   to see the view they will navigate to
          * @return {?}
          */
         function () {
             if (this.mode === 'list') {
-                return this.iconTypes.LIST;
+                return this.iconTypes.GRID;
             }
             else if (this.mode === 'grid') {
-                return this.iconTypes.GRID;
+                return this.iconTypes.LIST;
             }
         },
         enumerable: true,
@@ -11126,7 +11134,7 @@ var ProductViewComponent = /** @class */ (function () {
     ProductViewComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-product-view',
-                    template: "<div class=\"cx-product-layout\" (click)=\"changeMode()\">\n  <div [ngClass]=\"buttonClass\">\n    <!--\n        Display icons inversely to allow users\n        to see the view they will navigate to\n    -->\n    <cx-icon\n      *ngIf=\"viewMode === iconTypes.LIST\"\n      [type]=\"iconTypes.GRID\"\n    ></cx-icon>\n    <cx-icon\n      *ngIf=\"viewMode === iconTypes.GRID\"\n      [type]=\"iconTypes.LIST\"\n    ></cx-icon>\n  </div>\n</div>\n",
+                    template: "<div class=\"cx-product-layout\" (click)=\"changeMode()\">\n  <div [ngClass]=\"buttonClass\">\n    <cx-icon\n      *ngIf=\"viewMode === iconTypes.GRID\"\n      [type]=\"iconTypes.GRID\"\n    ></cx-icon>\n    <cx-icon\n      *ngIf=\"viewMode === iconTypes.LIST\"\n      [type]=\"iconTypes.LIST\"\n    ></cx-icon>\n  </div>\n</div>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];

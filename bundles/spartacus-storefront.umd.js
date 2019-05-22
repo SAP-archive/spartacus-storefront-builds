@@ -11443,20 +11443,28 @@
             get: /**
              * @return {?}
              */ function () {
-                return "cx-product-" + this.mode;
+                /** @type {?} */
+                var viewName = this.viewMode.toLowerCase();
+                return "cx-product-" + viewName;
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(ProductViewComponent.prototype, "viewMode", {
+            /**
+             *   Display icons inversely to allow users
+             *   to see the view they will navigate to
+             */
             get: /**
+             *   Display icons inversely to allow users
+             *   to see the view they will navigate to
              * @return {?}
              */ function () {
                 if (this.mode === 'list') {
-                    return this.iconTypes.LIST;
+                    return this.iconTypes.GRID;
                 }
                 else if (this.mode === 'grid') {
-                    return this.iconTypes.GRID;
+                    return this.iconTypes.LIST;
                 }
             },
             enumerable: true,
@@ -11476,7 +11484,7 @@
         ProductViewComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-product-view',
-                        template: "<div class=\"cx-product-layout\" (click)=\"changeMode()\">\n  <div [ngClass]=\"buttonClass\">\n    <!--\n        Display icons inversely to allow users\n        to see the view they will navigate to\n    -->\n    <cx-icon\n      *ngIf=\"viewMode === iconTypes.LIST\"\n      [type]=\"iconTypes.GRID\"\n    ></cx-icon>\n    <cx-icon\n      *ngIf=\"viewMode === iconTypes.GRID\"\n      [type]=\"iconTypes.LIST\"\n    ></cx-icon>\n  </div>\n</div>\n",
+                        template: "<div class=\"cx-product-layout\" (click)=\"changeMode()\">\n  <div [ngClass]=\"buttonClass\">\n    <cx-icon\n      *ngIf=\"viewMode === iconTypes.GRID\"\n      [type]=\"iconTypes.GRID\"\n    ></cx-icon>\n    <cx-icon\n      *ngIf=\"viewMode === iconTypes.LIST\"\n      [type]=\"iconTypes.LIST\"\n    ></cx-icon>\n  </div>\n</div>\n",
                         changeDetection: i0.ChangeDetectionStrategy.OnPush
                     }] }
         ];
