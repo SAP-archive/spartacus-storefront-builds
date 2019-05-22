@@ -1,24 +1,21 @@
-import { EventEmitter, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Product, ProductReviewService, Review } from '@spartacus/core';
+import { ProductReviewService, Review, Product } from '@spartacus/core';
 import { Observable } from 'rxjs';
-export declare class ProductReviewsComponent implements OnChanges, OnInit {
+import { CurrentProductService } from '../../current-product.service';
+export declare class ProductReviewsComponent {
     protected reviewService: ProductReviewService;
+    protected currentProductService: CurrentProductService;
     private fb;
-    product: Product;
     isWritingReview: boolean;
-    isWritingReviewChange: EventEmitter<{}>;
-    private _isWritingReview;
     initialMaxListItems: number;
     maxListItems: number;
     reviewForm: FormGroup;
+    product$: Observable<Product>;
     reviews$: Observable<Review[]>;
-    constructor(reviewService: ProductReviewService, fb: FormBuilder);
-    ngOnChanges(): void;
-    ngOnInit(): void;
+    constructor(reviewService: ProductReviewService, currentProductService: CurrentProductService, fb: FormBuilder);
     initiateWriteReview(): void;
     cancelWriteReview(): void;
     setRating(rating: any): void;
-    submitReview(): void;
+    submitReview(product: Product): void;
     private resetReviewForm;
 }
