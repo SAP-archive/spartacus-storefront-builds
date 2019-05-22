@@ -6,7 +6,7 @@ import { FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, FormB
 import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscription, combineLatest, merge, Subject } from 'rxjs';
 import { Title, Meta } from '@angular/platform-browser';
 import { __values, __spread, __read, __extends, __assign, __awaiter, __generator } from 'tslib';
-import { debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, tap, withLatestFrom, pluck, shareReplay, delay } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, tap, endWith, first, skipWhile, withLatestFrom, pluck, shareReplay, delay } from 'rxjs/operators';
 import { ServerConfig, WindowRef, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, AuthService, CartService, CmsService, defaultCmsModuleConfig, CmsModule, Config, CheckoutModule, DynamicAttributeService, CxApiService, ComponentMapperService, UserModule, UserService, CartModule, PageMetaService, CmsPageTitleModule, ProductModule, ProductSearchService, NotAuthGuard, PageRobotsMeta, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductReviewService, OccConfig, ContextServiceMap, SiteContextModule, StoreDataService, StoreFinderService, GoogleMapRendererService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
@@ -2118,6 +2118,764 @@ var LoginFormComponent = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var CmsModule$1 = /** @class */ (function () {
+    function CmsModule$$1() {
+    }
+    CmsModule$$1.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        ConfigModule.withConfig(defaultCmsModuleConfig),
+                        CmsModule,
+                    ],
+                    providers: [{ provide: CmsConfig, useExisting: Config }],
+                },] }
+    ];
+    return CmsModule$$1;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var LoginFormModule = /** @class */ (function () {
+    function LoginFormModule() {
+    }
+    LoginFormModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        FormsModule,
+                        ReactiveFormsModule,
+                        RouterModule,
+                        CmsModule$1,
+                        BootstrapModule,
+                        UserModule,
+                        UrlModule,
+                        ConfigModule.withConfig((/** @type {?} */ ({
+                            cmsComponents: {
+                                ReturningCustomerLoginComponent: {
+                                    selector: 'cx-login-form',
+                                    guards: [NotAuthGuard],
+                                },
+                            },
+                        }))),
+                        I18nModule,
+                    ],
+                    declarations: [LoginFormComponent],
+                    exports: [LoginFormComponent],
+                    entryComponents: [LoginFormComponent],
+                },] }
+    ];
+    return LoginFormModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var LoginComponentService = /** @class */ (function () {
+    function LoginComponentService() {
+        this._isLogin = false;
+    }
+    Object.defineProperty(LoginComponentService.prototype, "isLogin", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._isLogin;
+        },
+        set: /**
+         * @param {?} login
+         * @return {?}
+         */
+        function (login) {
+            this._isLogin = login;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    LoginComponentService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */ LoginComponentService.ngInjectableDef = defineInjectable({ factory: function LoginComponentService_Factory() { return new LoginComponentService(); }, token: LoginComponentService, providedIn: "root" });
+    return LoginComponentService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var LoginComponent = /** @class */ (function () {
+    function LoginComponent(auth, userService, loginService) {
+        this.auth = auth;
+        this.userService = userService;
+        this.loginService = loginService;
+    }
+    Object.defineProperty(LoginComponent.prototype, "user$", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            return this.auth.getUserToken().pipe(map(function (token) {
+                if (token && !!token.access_token && !_this.loginService.isLogin) {
+                    _this.loginService.isLogin = true;
+                    _this.userService.load(token.userId);
+                }
+                else if (token && !token.access_token && _this.loginService.isLogin) {
+                    _this.loginService.isLogin = false;
+                }
+                return token;
+            }), filter(function (token) { return token && !!token.access_token; }), switchMap(function () { return _this.userService.get(); }));
+        },
+        enumerable: true,
+        configurable: true
+    });
+    LoginComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-login',
+                    template: "<ng-container *ngIf=\"(user$ | async) as user; else login\">\n  <div class=\"cx-login-greet\">\n    {{ 'login.userGreeting' | cxTranslate: { name: user.name } }}\n  </div>\n  <cx-page-slot position=\"HeaderLinks\"></cx-page-slot>\n</ng-container>\n\n<ng-template #login>\n  <a role=\"link\" [routerLink]=\"{ cxRoute: 'login' } | cxUrl\">{{\n    'login.signInRegister' | cxTranslate\n  }}</a>\n</ng-template>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    LoginComponent.ctorParameters = function () { return [
+        { type: AuthService },
+        { type: UserService },
+        { type: LoginComponentService }
+    ]; };
+    return LoginComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @abstract
+ * @template T
+ */
+var  /**
+ * @abstract
+ * @template T
+ */
+CmsComponentData = /** @class */ (function () {
+    function CmsComponentData() {
+    }
+    return CmsComponentData;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ComponentWrapperDirective = /** @class */ (function () {
+    function ComponentWrapperDirective(vcr, componentMapper, injector, cmsService, dynamicAttributeService, renderer, cd, config, platformId) {
+        this.vcr = vcr;
+        this.componentMapper = componentMapper;
+        this.injector = injector;
+        this.cmsService = cmsService;
+        this.dynamicAttributeService = dynamicAttributeService;
+        this.renderer = renderer;
+        this.cd = cd;
+        this.config = config;
+        this.platformId = platformId;
+    }
+    /**
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        if (!this.shouldRenderComponent()) {
+            return;
+        }
+        if (this.componentMapper.isWebComponent(this.cxComponentWrapper.flexType)) {
+            this.launchWebComponent();
+        }
+        else {
+            this.launchComponent();
+        }
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.shouldRenderComponent = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var isSSR = isPlatformServer(this.platformId);
+        /** @type {?} */
+        var isComponentDisabledInSSR = (this.config.cmsComponents[this.cxComponentWrapper.flexType] || {}).disableSSR;
+        return !(isSSR && isComponentDisabledInSSR);
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.launchComponent = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var factory = this.componentMapper.getComponentFactoryByCode(this.cxComponentWrapper.flexType);
+        if (factory) {
+            this.cmpRef = this.vcr.createComponent(factory, undefined, this.getInjectorForComponent());
+            this.cd.detectChanges();
+            if (this.cmsService.isLaunchInSmartEdit()) {
+                this.addSmartEditContract(this.cmpRef.location.nativeElement);
+            }
+        }
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.launchWebComponent = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var elementName;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.componentMapper.initWebComponent(this.cxComponentWrapper.flexType, this.renderer)];
+                    case 1:
+                        elementName = _a.sent();
+                        if (elementName) {
+                            this.webElement = this.renderer.createElement(elementName);
+                            this.webElement.cxApi = __assign({}, this.injector.get(CxApiService), { CmsComponentData: this.getCmsDataForComponent() });
+                            this.renderer.appendChild(this.vcr.element.nativeElement.parentElement, this.webElement);
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    /**
+     * @private
+     * @template T
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.getCmsDataForComponent = /**
+     * @private
+     * @template T
+     * @return {?}
+     */
+    function () {
+        return {
+            uid: this.cxComponentWrapper.uid,
+            data$: this.cmsService.getComponentData(this.cxComponentWrapper.uid),
+        };
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.getInjectorForComponent = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var configProviders = (this.config.cmsComponents[this.cxComponentWrapper.flexType] || {})
+            .providers || [];
+        return Injector.create({
+            providers: __spread([
+                {
+                    provide: CmsComponentData,
+                    useValue: this.getCmsDataForComponent(),
+                }
+            ], configProviders),
+            parent: this.injector,
+        });
+    };
+    /**
+     * @private
+     * @param {?} element
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.addSmartEditContract = /**
+     * @private
+     * @param {?} element
+     * @return {?}
+     */
+    function (element) {
+        this.dynamicAttributeService.addDynamicAttributes(this.cxComponentWrapper.properties, element, this.renderer);
+    };
+    /**
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        if (this.cmpRef) {
+            this.cmpRef.destroy();
+        }
+        if (this.webElement) {
+            this.renderer.removeChild(this.vcr.element.nativeElement.parentElement, this.webElement);
+        }
+    };
+    ComponentWrapperDirective.decorators = [
+        { type: Directive, args: [{
+                    selector: '[cxComponentWrapper]',
+                },] }
+    ];
+    /** @nocollapse */
+    ComponentWrapperDirective.ctorParameters = function () { return [
+        { type: ViewContainerRef },
+        { type: ComponentMapperService },
+        { type: Injector },
+        { type: CmsService },
+        { type: DynamicAttributeService },
+        { type: Renderer2 },
+        { type: ChangeDetectorRef },
+        { type: CmsConfig },
+        { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
+    ]; };
+    ComponentWrapperDirective.propDecorators = {
+        cxComponentWrapper: [{ type: Input }]
+    };
+    return ComponentWrapperDirective;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var PageComponentModule = /** @class */ (function () {
+    function PageComponentModule() {
+    }
+    PageComponentModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule],
+                    providers: [],
+                    declarations: [ComponentWrapperDirective],
+                    exports: [ComponentWrapperDirective],
+                },] }
+    ];
+    return PageComponentModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var PageSlotComponent = /** @class */ (function () {
+    function PageSlotComponent(cmsService, dynamicAttributeService, renderer, hostElement) {
+        var _this = this;
+        this.cmsService = cmsService;
+        this.dynamicAttributeService = dynamicAttributeService;
+        this.renderer = renderer;
+        this.hostElement = hostElement;
+        this.position$ = new BehaviorSubject(undefined);
+        /**
+         * observable with `ContentSlotData` for the current position
+         */
+        this.slot$ = this.position$.pipe(switchMap(function (position) { return _this.cmsService.getContentSlot(position); }), tap(function (slot) { return _this.addSmartEditSlotClass(slot); }));
+        /**
+         * observable with components (`ContentSlotComponentData[]`)
+         * for the current slot
+         */
+        this.components$ = this.slot$.pipe(map(function (slot) { return (slot && slot.components ? slot.components : []); }), distinctUntilChanged(function (a, b) {
+            return a.length === b.length && !a.find(function (el, index) { return el.uid !== b[index].uid; });
+        }), tap(function (components) { return _this.addComponentClass(components); }));
+    }
+    Object.defineProperty(PageSlotComponent.prototype, "position", {
+        set: /**
+         * @param {?} position
+         * @return {?}
+         */
+        function (position) {
+            this.position$.next(position);
+            // add the position name as a css class so that
+            // layout can be applied to it, using the position based class.
+            this.renderer.addClass(this.hostElement.nativeElement, position);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    // add a class to indicate whether the class is empty or not
+    // add a class to indicate whether the class is empty or not
+    /**
+     * @private
+     * @param {?} components
+     * @return {?}
+     */
+    PageSlotComponent.prototype.addComponentClass = 
+    // add a class to indicate whether the class is empty or not
+    /**
+     * @private
+     * @param {?} components
+     * @return {?}
+     */
+    function (components) {
+        if (components && components.length > 0) {
+            this.renderer.addClass(this.hostElement.nativeElement, 'has-components');
+        }
+    };
+    /**
+     * @private
+     * @param {?} slot
+     * @return {?}
+     */
+    PageSlotComponent.prototype.addSmartEditSlotClass = /**
+     * @private
+     * @param {?} slot
+     * @return {?}
+     */
+    function (slot) {
+        if (this.cmsService.isLaunchInSmartEdit()) {
+            this.addSmartEditContract(slot);
+        }
+    };
+    /**
+     * @private
+     * @param {?} slot
+     * @return {?}
+     */
+    PageSlotComponent.prototype.addSmartEditContract = /**
+     * @private
+     * @param {?} slot
+     * @return {?}
+     */
+    function (slot) {
+        this.dynamicAttributeService.addDynamicAttributes(slot.properties, this.hostElement.nativeElement, this.renderer);
+    };
+    PageSlotComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-page-slot',
+                    template: "<ng-container *cxOutlet=\"(position$ | async)\">\n  <ng-container *ngFor=\"let component of (components$ | async)\">\n    <ng-container\n      *cxOutlet=\"component.flexType\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-container>\n  </ng-container>\n</ng-container>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    /** @nocollapse */
+    PageSlotComponent.ctorParameters = function () { return [
+        { type: CmsService },
+        { type: DynamicAttributeService },
+        { type: Renderer2 },
+        { type: ElementRef }
+    ]; };
+    PageSlotComponent.propDecorators = {
+        position: [{ type: Input }]
+    };
+    return PageSlotComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var PageSlotModule = /** @class */ (function () {
+    function PageSlotModule() {
+    }
+    PageSlotModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule, OutletModule, PageComponentModule],
+                    providers: [],
+                    declarations: [PageSlotComponent],
+                    exports: [PageSlotComponent],
+                },] }
+    ];
+    return PageSlotModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var LoginModule = /** @class */ (function () {
+    function LoginModule() {
+    }
+    LoginModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        RouterModule,
+                        UserModule,
+                        UrlModule,
+                        PageSlotModule,
+                        ConfigModule.withConfig((/** @type {?} */ ({
+                            cmsComponents: {
+                                LoginComponent: {
+                                    selector: 'cx-login',
+                                },
+                            },
+                        }))),
+                        I18nModule,
+                    ],
+                    declarations: [LoginComponent],
+                    entryComponents: [LoginComponent],
+                    exports: [LoginComponent],
+                },] }
+    ];
+    return LoginModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var LogoutGuard = /** @class */ (function () {
+    function LogoutGuard(auth, cms, routing) {
+        this.auth = auth;
+        this.cms = cms;
+        this.routing = routing;
+    }
+    /**
+     * @return {?}
+     */
+    LogoutGuard.prototype.canActivate = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.logout();
+        return this.cms
+            .hasPage({
+            id: '/logout',
+            type: PageType.CONTENT_PAGE,
+        })
+            .pipe(tap(function (hasPage) {
+            if (!hasPage) {
+                _this.routing.go({ cxRoute: 'home' });
+            }
+        }));
+    };
+    /**
+     * @protected
+     * @return {?}
+     */
+    LogoutGuard.prototype.logout = /**
+     * @protected
+     * @return {?}
+     */
+    function () {
+        this.auth.logout();
+    };
+    LogoutGuard.GUARD_NAME = 'LogoutGuard';
+    LogoutGuard.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    LogoutGuard.ctorParameters = function () { return [
+        { type: AuthService },
+        { type: CmsService },
+        { type: RoutingService }
+    ]; };
+    /** @nocollapse */ LogoutGuard.ngInjectableDef = defineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(inject(AuthService), inject(CmsService), inject(RoutingService)); }, token: LogoutGuard, providedIn: "root" });
+    return LogoutGuard;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var RegisterComponent = /** @class */ (function () {
+    function RegisterComponent(auth, routing, userService, globalMessageService, fb) {
+        this.auth = auth;
+        this.routing = routing;
+        this.userService = userService;
+        this.globalMessageService = globalMessageService;
+        this.fb = fb;
+        this.userRegistrationForm = this.fb.group({
+            titleCode: [''],
+            firstName: ['', Validators.required],
+            lastName: ['', Validators.required],
+            email: ['', [Validators.required, CustomFormValidators.emailValidator]],
+            password: [
+                '',
+                [Validators.required, CustomFormValidators.passwordValidator],
+            ],
+            passwordconf: ['', Validators.required],
+            newsletter: [false],
+            termsandconditions: [false, Validators.requiredTrue],
+        }, { validator: this.matchPassword });
+    }
+    /**
+     * @return {?}
+     */
+    RegisterComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.titles$ = this.userService.getTitles().pipe(tap(function (titles) {
+            if (Object.keys(titles).length === 0) {
+                _this.userService.loadTitles();
+            }
+        }));
+        this.subscription = this.auth
+            .getUserToken()
+            .pipe(switchMap(function (data) {
+            if (data && data.access_token) {
+                _this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
+                return _this.routing.getRedirectUrl().pipe(take(1));
+            }
+            return of();
+        }))
+            .subscribe(function (url) {
+            if (url) {
+                // If forced to login due to AuthGuard, then redirect to intended destination
+                _this.routing.goByUrl(url);
+                _this.routing.clearRedirectUrl();
+            }
+            else {
+                // User manual login
+                _this.routing.go(['/']);
+            }
+        });
+    };
+    /**
+     * @return {?}
+     */
+    RegisterComponent.prototype.submit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        var _a = this.userRegistrationForm.value, firstName = _a.firstName, lastName = _a.lastName, email = _a.email, password = _a.password, titleCode = _a.titleCode;
+        /** @type {?} */
+        var userRegisterFormData = {
+            firstName: firstName,
+            lastName: lastName,
+            uid: email,
+            password: password,
+            titleCode: titleCode,
+        };
+        this.userService.register(userRegisterFormData);
+        // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
+        this.globalMessageService
+            .get()
+            .pipe(filter(function (data) { return Object.keys(data).length > 0; }))
+            .subscribe(function (globalMessageEntities) {
+            if (globalMessageEntities[GlobalMessageType.MSG_TYPE_ERROR].some(function (message) { return message === 'This field is required.'; })) {
+                _this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
+                _this.globalMessageService.add({ key: 'register.titleRequired' }, GlobalMessageType.MSG_TYPE_ERROR);
+            }
+        });
+    };
+    /**
+     * @return {?}
+     */
+    RegisterComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+    };
+    /**
+     * @private
+     * @param {?} ac
+     * @return {?}
+     */
+    RegisterComponent.prototype.matchPassword = /**
+     * @private
+     * @param {?} ac
+     * @return {?}
+     */
+    function (ac) {
+        if (ac.get('password').value !== ac.get('passwordconf').value) {
+            return { NotEqual: true };
+        }
+    };
+    RegisterComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-register',
+                    template: "<section class=\"cx-page-section container\">\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <h1 class=\"cx-section-title\">\n          {{ 'register.createAccount' | cxTranslate }}\n        </h1>\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of (titles$ | async)\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  (userRegistrationForm.get('email').errors?.email ||\n                    userRegistrationForm.get('email').errors?.InvalidEmail) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"newsletter\"\n                  class=\"form-check-input\"\n                  formControlName=\"newsletter\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.emailMarketing' | cxTranslate }}\n                </span>\n              </label>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            [disabled]=\"userRegistrationForm.invalid\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    RegisterComponent.ctorParameters = function () { return [
+        { type: AuthService },
+        { type: RoutingService },
+        { type: UserService },
+        { type: GlobalMessageService },
+        { type: FormBuilder }
+    ]; };
+    return RegisterComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var RegisterComponentModule = /** @class */ (function () {
+    function RegisterComponentModule() {
+    }
+    RegisterComponentModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        LoginModule,
+                        ReactiveFormsModule,
+                        RouterModule,
+                        UserModule,
+                        UrlModule,
+                        ConfigModule.withConfig((/** @type {?} */ ({
+                            cmsComponents: {
+                                RegisterCustomerComponent: {
+                                    selector: 'cx-register',
+                                    guards: [NotAuthGuard],
+                                },
+                            },
+                        }))),
+                        I18nModule,
+                    ],
+                    declarations: [RegisterComponent],
+                    exports: [RegisterComponent],
+                    entryComponents: [RegisterComponent],
+                },] }
+    ];
+    return RegisterComponentModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var UserComponentModule = /** @class */ (function () {
+    function UserComponentModule() {
+    }
+    UserComponentModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        LoginModule,
+                        LoginFormModule,
+                        ReactiveFormsModule,
+                        RouterModule,
+                        UserModule,
+                        UrlModule,
+                        RegisterComponentModule,
+                    ],
+                },] }
+    ];
+    return UserComponentModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var CmsMappingService = /** @class */ (function () {
     function CmsMappingService(config, platformId) {
         this.config = config;
@@ -2930,7 +3688,9 @@ var CmsPageGuard = /** @class */ (function () {
     };
     CmsPageGuard.guardName = 'CmsPageGuard';
     CmsPageGuard.decorators = [
-        { type: Injectable }
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
     ];
     /** @nocollapse */
     CmsPageGuard.ctorParameters = function () { return [
@@ -2940,765 +3700,8 @@ var CmsPageGuard = /** @class */ (function () {
         { type: CmsI18nService },
         { type: CmsGuardsService }
     ]; };
+    /** @nocollapse */ CmsPageGuard.ngInjectableDef = defineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(inject(RoutingService), inject(CmsService), inject(CmsRoutesService), inject(CmsI18nService), inject(CmsGuardsService)); }, token: CmsPageGuard, providedIn: "root" });
     return CmsPageGuard;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CmsModule$1 = /** @class */ (function () {
-    function CmsModule$$1() {
-    }
-    CmsModule$$1.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        CommonModule,
-                        ConfigModule.withConfig(defaultCmsModuleConfig),
-                        CmsModule,
-                    ],
-                    providers: [CmsPageGuard, { provide: CmsConfig, useExisting: Config }],
-                },] }
-    ];
-    return CmsModule$$1;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var LoginFormModule = /** @class */ (function () {
-    function LoginFormModule() {
-    }
-    LoginFormModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        CommonModule,
-                        FormsModule,
-                        ReactiveFormsModule,
-                        RouterModule,
-                        CmsModule$1,
-                        BootstrapModule,
-                        UserModule,
-                        UrlModule,
-                        ConfigModule.withConfig((/** @type {?} */ ({
-                            cmsComponents: {
-                                ReturningCustomerLoginComponent: {
-                                    selector: 'cx-login-form',
-                                    guards: [NotAuthGuard],
-                                },
-                            },
-                        }))),
-                        I18nModule,
-                    ],
-                    declarations: [LoginFormComponent],
-                    exports: [LoginFormComponent],
-                    entryComponents: [LoginFormComponent],
-                },] }
-    ];
-    return LoginFormModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var LoginComponentService = /** @class */ (function () {
-    function LoginComponentService() {
-        this._isLogin = false;
-    }
-    Object.defineProperty(LoginComponentService.prototype, "isLogin", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this._isLogin;
-        },
-        set: /**
-         * @param {?} login
-         * @return {?}
-         */
-        function (login) {
-            this._isLogin = login;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    LoginComponentService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */ LoginComponentService.ngInjectableDef = defineInjectable({ factory: function LoginComponentService_Factory() { return new LoginComponentService(); }, token: LoginComponentService, providedIn: "root" });
-    return LoginComponentService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var LoginComponent = /** @class */ (function () {
-    function LoginComponent(auth, userService, loginService) {
-        this.auth = auth;
-        this.userService = userService;
-        this.loginService = loginService;
-    }
-    Object.defineProperty(LoginComponent.prototype, "user$", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            return this.auth.getUserToken().pipe(map(function (token) {
-                if (token && !!token.access_token && !_this.loginService.isLogin) {
-                    _this.loginService.isLogin = true;
-                    _this.userService.load(token.userId);
-                }
-                else if (token && !token.access_token && _this.loginService.isLogin) {
-                    _this.loginService.isLogin = false;
-                }
-                return token;
-            }), filter(function (token) { return token && !!token.access_token; }), switchMap(function () { return _this.userService.get(); }));
-        },
-        enumerable: true,
-        configurable: true
-    });
-    LoginComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-login',
-                    template: "<ng-container *ngIf=\"(user$ | async) as user; else login\">\n  <div class=\"cx-login-greet\">\n    {{ 'login.userGreeting' | cxTranslate: { name: user.name } }}\n  </div>\n  <cx-page-slot position=\"HeaderLinks\"></cx-page-slot>\n</ng-container>\n\n<ng-template #login>\n  <a role=\"link\" [routerLink]=\"{ cxRoute: 'login' } | cxUrl\">{{\n    'login.signInRegister' | cxTranslate\n  }}</a>\n</ng-template>\n"
-                }] }
-    ];
-    /** @nocollapse */
-    LoginComponent.ctorParameters = function () { return [
-        { type: AuthService },
-        { type: UserService },
-        { type: LoginComponentService }
-    ]; };
-    return LoginComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @abstract
- * @template T
- */
-var  /**
- * @abstract
- * @template T
- */
-CmsComponentData = /** @class */ (function () {
-    function CmsComponentData() {
-    }
-    return CmsComponentData;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var ComponentWrapperDirective = /** @class */ (function () {
-    function ComponentWrapperDirective(vcr, componentMapper, injector, cmsService, dynamicAttributeService, renderer, cd, config, platformId) {
-        this.vcr = vcr;
-        this.componentMapper = componentMapper;
-        this.injector = injector;
-        this.cmsService = cmsService;
-        this.dynamicAttributeService = dynamicAttributeService;
-        this.renderer = renderer;
-        this.cd = cd;
-        this.config = config;
-        this.platformId = platformId;
-    }
-    /**
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        if (!this.shouldRenderComponent()) {
-            return;
-        }
-        if (this.componentMapper.isWebComponent(this.cxComponentWrapper.flexType)) {
-            this.launchWebComponent();
-        }
-        else {
-            this.launchComponent();
-        }
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.shouldRenderComponent = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var isSSR = isPlatformServer(this.platformId);
-        /** @type {?} */
-        var isComponentDisabledInSSR = (this.config.cmsComponents[this.cxComponentWrapper.flexType] || {}).disableSSR;
-        return !(isSSR && isComponentDisabledInSSR);
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.launchComponent = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var factory = this.componentMapper.getComponentFactoryByCode(this.cxComponentWrapper.flexType);
-        if (factory) {
-            this.cmpRef = this.vcr.createComponent(factory, undefined, this.getInjectorForComponent());
-            this.cd.detectChanges();
-            if (this.cmsService.isLaunchInSmartEdit()) {
-                this.addSmartEditContract(this.cmpRef.location.nativeElement);
-            }
-        }
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.launchWebComponent = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var elementName;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.componentMapper.initWebComponent(this.cxComponentWrapper.flexType, this.renderer)];
-                    case 1:
-                        elementName = _a.sent();
-                        if (elementName) {
-                            this.webElement = this.renderer.createElement(elementName);
-                            this.webElement.cxApi = __assign({}, this.injector.get(CxApiService), { CmsComponentData: this.getCmsDataForComponent() });
-                            this.renderer.appendChild(this.vcr.element.nativeElement.parentElement, this.webElement);
-                        }
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    /**
-     * @private
-     * @template T
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.getCmsDataForComponent = /**
-     * @private
-     * @template T
-     * @return {?}
-     */
-    function () {
-        return {
-            uid: this.cxComponentWrapper.uid,
-            data$: this.cmsService.getComponentData(this.cxComponentWrapper.uid),
-        };
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.getInjectorForComponent = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var configProviders = (this.config.cmsComponents[this.cxComponentWrapper.flexType] || {})
-            .providers || [];
-        return Injector.create({
-            providers: __spread([
-                {
-                    provide: CmsComponentData,
-                    useValue: this.getCmsDataForComponent(),
-                }
-            ], configProviders),
-            parent: this.injector,
-        });
-    };
-    /**
-     * @private
-     * @param {?} element
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.addSmartEditContract = /**
-     * @private
-     * @param {?} element
-     * @return {?}
-     */
-    function (element) {
-        this.dynamicAttributeService.addDynamicAttributes(this.cxComponentWrapper.properties, element, this.renderer);
-    };
-    /**
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
-        if (this.cmpRef) {
-            this.cmpRef.destroy();
-        }
-        if (this.webElement) {
-            this.renderer.removeChild(this.vcr.element.nativeElement.parentElement, this.webElement);
-        }
-    };
-    ComponentWrapperDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: '[cxComponentWrapper]',
-                },] }
-    ];
-    /** @nocollapse */
-    ComponentWrapperDirective.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentMapperService },
-        { type: Injector },
-        { type: CmsService },
-        { type: DynamicAttributeService },
-        { type: Renderer2 },
-        { type: ChangeDetectorRef },
-        { type: CmsConfig },
-        { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
-    ]; };
-    ComponentWrapperDirective.propDecorators = {
-        cxComponentWrapper: [{ type: Input }]
-    };
-    return ComponentWrapperDirective;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var PageComponentModule = /** @class */ (function () {
-    function PageComponentModule() {
-    }
-    PageComponentModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [CommonModule],
-                    providers: [],
-                    declarations: [ComponentWrapperDirective],
-                    exports: [ComponentWrapperDirective],
-                },] }
-    ];
-    return PageComponentModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var PageSlotComponent = /** @class */ (function () {
-    function PageSlotComponent(cmsService, dynamicAttributeService, renderer, hostElement) {
-        var _this = this;
-        this.cmsService = cmsService;
-        this.dynamicAttributeService = dynamicAttributeService;
-        this.renderer = renderer;
-        this.hostElement = hostElement;
-        this.position$ = new BehaviorSubject(undefined);
-        /**
-         * observable with `ContentSlotData` for the current position
-         */
-        this.slot$ = this.position$.pipe(switchMap(function (position) { return _this.cmsService.getContentSlot(position); }), tap(function (slot) { return _this.addSmartEditSlotClass(slot); }));
-        /**
-         * observable with components (`ContentSlotComponentData[]`)
-         * for the current slot
-         */
-        this.components$ = this.slot$.pipe(map(function (slot) { return (slot && slot.components ? slot.components : []); }), distinctUntilChanged(function (a, b) {
-            return a.length === b.length && !a.find(function (el, index) { return el.uid !== b[index].uid; });
-        }), tap(function (components) { return _this.addComponentClass(components); }));
-    }
-    Object.defineProperty(PageSlotComponent.prototype, "position", {
-        set: /**
-         * @param {?} position
-         * @return {?}
-         */
-        function (position) {
-            this.position$.next(position);
-            // add the position name as a css class so that
-            // layout can be applied to it, using the position based class.
-            this.renderer.addClass(this.hostElement.nativeElement, position);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    // add a class to indicate whether the class is empty or not
-    // add a class to indicate whether the class is empty or not
-    /**
-     * @private
-     * @param {?} components
-     * @return {?}
-     */
-    PageSlotComponent.prototype.addComponentClass = 
-    // add a class to indicate whether the class is empty or not
-    /**
-     * @private
-     * @param {?} components
-     * @return {?}
-     */
-    function (components) {
-        if (components && components.length > 0) {
-            this.renderer.addClass(this.hostElement.nativeElement, 'has-components');
-        }
-    };
-    /**
-     * @private
-     * @param {?} slot
-     * @return {?}
-     */
-    PageSlotComponent.prototype.addSmartEditSlotClass = /**
-     * @private
-     * @param {?} slot
-     * @return {?}
-     */
-    function (slot) {
-        if (this.cmsService.isLaunchInSmartEdit()) {
-            this.addSmartEditContract(slot);
-        }
-    };
-    /**
-     * @private
-     * @param {?} slot
-     * @return {?}
-     */
-    PageSlotComponent.prototype.addSmartEditContract = /**
-     * @private
-     * @param {?} slot
-     * @return {?}
-     */
-    function (slot) {
-        this.dynamicAttributeService.addDynamicAttributes(slot.properties, this.hostElement.nativeElement, this.renderer);
-    };
-    PageSlotComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-page-slot',
-                    template: "<ng-container *cxOutlet=\"(position$ | async)\">\n  <ng-container *ngFor=\"let component of (components$ | async)\">\n    <ng-container\n      *cxOutlet=\"component.flexType\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-container>\n  </ng-container>\n</ng-container>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                }] }
-    ];
-    /** @nocollapse */
-    PageSlotComponent.ctorParameters = function () { return [
-        { type: CmsService },
-        { type: DynamicAttributeService },
-        { type: Renderer2 },
-        { type: ElementRef }
-    ]; };
-    PageSlotComponent.propDecorators = {
-        position: [{ type: Input }]
-    };
-    return PageSlotComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var PageSlotModule = /** @class */ (function () {
-    function PageSlotModule() {
-    }
-    PageSlotModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [CommonModule, OutletModule, PageComponentModule],
-                    providers: [],
-                    declarations: [PageSlotComponent],
-                    exports: [PageSlotComponent],
-                },] }
-    ];
-    return PageSlotModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var LoginModule = /** @class */ (function () {
-    function LoginModule() {
-    }
-    LoginModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        CommonModule,
-                        RouterModule,
-                        UserModule,
-                        UrlModule,
-                        PageSlotModule,
-                        ConfigModule.withConfig((/** @type {?} */ ({
-                            cmsComponents: {
-                                LoginComponent: {
-                                    selector: 'cx-login',
-                                },
-                            },
-                        }))),
-                        I18nModule,
-                    ],
-                    declarations: [LoginComponent],
-                    entryComponents: [LoginComponent],
-                    exports: [LoginComponent],
-                },] }
-    ];
-    return LoginModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var LogoutGuard = /** @class */ (function () {
-    function LogoutGuard(auth, cms, routing) {
-        this.auth = auth;
-        this.cms = cms;
-        this.routing = routing;
-    }
-    /**
-     * @return {?}
-     */
-    LogoutGuard.prototype.canActivate = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this.logout();
-        return this.cms
-            .hasPage({
-            id: '/logout',
-            type: PageType.CONTENT_PAGE,
-        })
-            .pipe(tap(function (hasPage) {
-            if (!hasPage) {
-                _this.routing.go({ cxRoute: 'home' });
-            }
-        }));
-    };
-    /**
-     * @protected
-     * @return {?}
-     */
-    LogoutGuard.prototype.logout = /**
-     * @protected
-     * @return {?}
-     */
-    function () {
-        this.auth.logout();
-    };
-    LogoutGuard.GUARD_NAME = 'LogoutGuard';
-    LogoutGuard.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    LogoutGuard.ctorParameters = function () { return [
-        { type: AuthService },
-        { type: CmsService },
-        { type: RoutingService }
-    ]; };
-    /** @nocollapse */ LogoutGuard.ngInjectableDef = defineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(inject(AuthService), inject(CmsService), inject(RoutingService)); }, token: LogoutGuard, providedIn: "root" });
-    return LogoutGuard;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var RegisterComponent = /** @class */ (function () {
-    function RegisterComponent(auth, routing, userService, globalMessageService, fb) {
-        this.auth = auth;
-        this.routing = routing;
-        this.userService = userService;
-        this.globalMessageService = globalMessageService;
-        this.fb = fb;
-        this.userRegistrationForm = this.fb.group({
-            titleCode: [''],
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            email: ['', [Validators.required, CustomFormValidators.emailValidator]],
-            password: [
-                '',
-                [Validators.required, CustomFormValidators.passwordValidator],
-            ],
-            passwordconf: ['', Validators.required],
-            newsletter: [false],
-            termsandconditions: [false, Validators.requiredTrue],
-        }, { validator: this.matchPassword });
-    }
-    /**
-     * @return {?}
-     */
-    RegisterComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this.titles$ = this.userService.getTitles().pipe(tap(function (titles) {
-            if (Object.keys(titles).length === 0) {
-                _this.userService.loadTitles();
-            }
-        }));
-        this.subscription = this.auth
-            .getUserToken()
-            .pipe(switchMap(function (data) {
-            if (data && data.access_token) {
-                _this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
-                return _this.routing.getRedirectUrl().pipe(take(1));
-            }
-            return of();
-        }))
-            .subscribe(function (url) {
-            if (url) {
-                // If forced to login due to AuthGuard, then redirect to intended destination
-                _this.routing.goByUrl(url);
-                _this.routing.clearRedirectUrl();
-            }
-            else {
-                // User manual login
-                _this.routing.go(['/']);
-            }
-        });
-    };
-    /**
-     * @return {?}
-     */
-    RegisterComponent.prototype.submit = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        var _a = this.userRegistrationForm.value, firstName = _a.firstName, lastName = _a.lastName, email = _a.email, password = _a.password, titleCode = _a.titleCode;
-        /** @type {?} */
-        var userRegisterFormData = {
-            firstName: firstName,
-            lastName: lastName,
-            uid: email,
-            password: password,
-            titleCode: titleCode,
-        };
-        this.userService.register(userRegisterFormData);
-        // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
-        this.globalMessageService
-            .get()
-            .pipe(filter(function (data) { return Object.keys(data).length > 0; }))
-            .subscribe(function (globalMessageEntities) {
-            if (globalMessageEntities[GlobalMessageType.MSG_TYPE_ERROR].some(function (message) { return message === 'This field is required.'; })) {
-                _this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
-                _this.globalMessageService.add({ key: 'register.titleRequired' }, GlobalMessageType.MSG_TYPE_ERROR);
-            }
-        });
-    };
-    /**
-     * @return {?}
-     */
-    RegisterComponent.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
-    };
-    /**
-     * @private
-     * @param {?} ac
-     * @return {?}
-     */
-    RegisterComponent.prototype.matchPassword = /**
-     * @private
-     * @param {?} ac
-     * @return {?}
-     */
-    function (ac) {
-        if (ac.get('password').value !== ac.get('passwordconf').value) {
-            return { NotEqual: true };
-        }
-    };
-    RegisterComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-register',
-                    template: "<section class=\"cx-page-section container\">\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <h1 class=\"cx-section-title\">\n          {{ 'register.createAccount' | cxTranslate }}\n        </h1>\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of (titles$ | async)\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  (userRegistrationForm.get('email').errors?.email ||\n                    userRegistrationForm.get('email').errors?.InvalidEmail) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"newsletter\"\n                  class=\"form-check-input\"\n                  formControlName=\"newsletter\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.emailMarketing' | cxTranslate }}\n                </span>\n              </label>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            [disabled]=\"userRegistrationForm.invalid\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n"
-                }] }
-    ];
-    /** @nocollapse */
-    RegisterComponent.ctorParameters = function () { return [
-        { type: AuthService },
-        { type: RoutingService },
-        { type: UserService },
-        { type: GlobalMessageService },
-        { type: FormBuilder }
-    ]; };
-    return RegisterComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var RegisterComponentModule = /** @class */ (function () {
-    function RegisterComponentModule() {
-    }
-    RegisterComponentModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        CommonModule,
-                        LoginModule,
-                        ReactiveFormsModule,
-                        RouterModule,
-                        UserModule,
-                        UrlModule,
-                        ConfigModule.withConfig((/** @type {?} */ ({
-                            cmsComponents: {
-                                RegisterCustomerComponent: {
-                                    selector: 'cx-register',
-                                    guards: [NotAuthGuard],
-                                },
-                            },
-                        }))),
-                        I18nModule,
-                    ],
-                    declarations: [RegisterComponent],
-                    exports: [RegisterComponent],
-                    entryComponents: [RegisterComponent],
-                },] }
-    ];
-    return RegisterComponentModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var UserComponentModule = /** @class */ (function () {
-    function UserComponentModule() {
-    }
-    UserComponentModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        CommonModule,
-                        LoginModule,
-                        LoginFormModule,
-                        ReactiveFormsModule,
-                        RouterModule,
-                        UserModule,
-                        UrlModule,
-                        RegisterComponentModule,
-                    ],
-                },] }
-    ];
-    return UserComponentModule;
 }());
 
 /**
@@ -6141,42 +6144,6 @@ var CartDetailsModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var CartNotEmptyGuard = /** @class */ (function () {
-    function CartNotEmptyGuard(cartService, routingService) {
-        this.cartService = cartService;
-        this.routingService = routingService;
-    }
-    /**
-     * @return {?}
-     */
-    CartNotEmptyGuard.prototype.canActivate = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        return this.cartService.getLoaded().pipe(skipWhile(function (loaded) { return !loaded; }), switchMap(function () { return _this.cartService.getActive(); }), map(function (cart) {
-            if (_this.cartService.isEmpty(cart)) {
-                _this.routingService.go({ cxRoute: 'home' });
-                return false;
-            }
-            return true;
-        }));
-    };
-    CartNotEmptyGuard.decorators = [
-        { type: Injectable }
-    ];
-    /** @nocollapse */
-    CartNotEmptyGuard.ctorParameters = function () { return [
-        { type: CartService },
-        { type: RoutingService }
-    ]; };
-    return CartNotEmptyGuard;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 var CartTotalsComponent = /** @class */ (function () {
     function CartTotalsComponent(cartService) {
         this.cartService = cartService;
@@ -6317,7 +6284,6 @@ var CartComponentModule = /** @class */ (function () {
                         AddToCartModule,
                         MiniCartModule,
                     ],
-                    providers: [CartNotEmptyGuard],
                 },] }
     ];
     return CartComponentModule;
@@ -6327,6 +6293,45 @@ var CartComponentModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CartNotEmptyGuard = /** @class */ (function () {
+    function CartNotEmptyGuard(cartService, routingService) {
+        this.cartService = cartService;
+        this.routingService = routingService;
+    }
+    /**
+     * @return {?}
+     */
+    CartNotEmptyGuard.prototype.canActivate = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        return this.cartService.getLoaded().pipe(skipWhile(function (loaded) { return !loaded; }), switchMap(function () { return _this.cartService.getActive(); }), map(function (cart) {
+            if (_this.cartService.isEmpty(cart)) {
+                _this.routingService.go({ cxRoute: 'home' });
+                return false;
+            }
+            return true;
+        }));
+    };
+    CartNotEmptyGuard.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    CartNotEmptyGuard.ctorParameters = function () { return [
+        { type: CartService },
+        { type: RoutingService }
+    ]; };
+    /** @nocollapse */ CartNotEmptyGuard.ngInjectableDef = defineInjectable({ factory: function CartNotEmptyGuard_Factory() { return new CartNotEmptyGuard(inject(CartService), inject(RoutingService)); }, token: CartNotEmptyGuard, providedIn: "root" });
+    return CartNotEmptyGuard;
+}());
 
 /**
  * @fileoverview added by tsickle
@@ -15424,7 +15429,6 @@ var PagesModule = /** @class */ (function () {
                         CommonModule
                     ], pageModules, [
                         PageLayoutModule,
-                        CartComponentModule,
                         RouterModule.forChild([
                             {
                                 // This route can be dropped only when we have a mapping path to page label for content pages
@@ -15553,6 +15557,6 @@ var StorefrontModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { CartComponentModule, AddedToCartDialogComponent, AddToCartComponent, AddToCartModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, OrderSummaryComponent, CartSharedModule, CartNotEmptyGuard, CartTotalsComponent, CartTotalsModule, MiniCartComponent, MiniCartModule, CmsLibModule, BannerComponent, BannerModule, LinkComponent, LinkModule, ParagraphComponent, CmsParagraphModule, TabParagraphContainerComponent, TabParagraphContainerModule, GlobalMessageComponentModule, GlobalMessageComponent, fontawesomeIconConfig, IconLoaderService, IconComponent, ICON_TYPE, IconConfig, IconResourceType, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, CloseAccountModule, CloseAccountModalComponent, CloseAccountComponent, ConsentManagementFormComponent, ConsentManagementComponent, ConsentManagementModule, ForgotPasswordComponent, ForgotPasswordModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, PaymentMethodsComponent, PaymentMethodsModule, ResetPasswordFormComponent, ResetPasswordModule, UpdateEmailFormComponent, UpdateEmailComponent, UpdateEmailModule, UpdatePasswordFormComponent, UpdatePasswordComponent, UpdatePasswordModule, UpdateProfileFormComponent, UpdateProfileComponent, UpdateProfileModule, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, FooterNavigationComponent, FooterNavigationModule, NavigationComponentService, NavigationComponent, NavigationModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, CurrentProductService, ProductDetailsComponent, ProductDetailsModule, ProductImagesComponent, ProductSummaryComponent, ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent, ProductDetailOutlets, ProductTabsOutlets, ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule, AbstractStoreItemComponent, ScheduleComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderPaginationDetailsComponent, StoreFinderListComponent, StoreFinderSearchResultComponent, StoreFinderSearchComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StoreFinderComponent, StoreFinderModule, LoginFormComponent, LoginFormModule, LoginComponent, LoginModule, LogoutGuard, RegisterComponent, RegisterComponentModule, UserComponentModule, CmsModule$1 as CmsModule, CmsPageGuard, OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService, StyleRefDirective, StyleRefModule, ComponentWrapperDirective, PageComponentModule, defaultCmsContentConfig, CmsComponentData, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, pwaConfigurationFactory, pwaFactory, PwaModule, PWAModuleConfig, defaultPWAModuleConfig, CmsRouteModule, SuffixRoutesModule, SeoMetaService, initSeoService, SeoModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, LayoutModule, MainModule, StorefrontComponent, CheckoutComponentModule, CheckoutDetailsService, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressComponent, CheckoutProgressModule, DeliveryModeComponent, DeliveryModeModule, OrderConfirmationComponent, OrderConfirmationModule, BillingAddressFormComponent, BillingAddressFormModule, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PlaceOrderComponent, PlaceOrderModule, PromotionsComponent, PromotionsModule, ReviewSubmitComponent, ReviewSubmitModule, SuggestedAddressDialogComponent, AddressFormComponent, AddressFormModule, ShippingAddressComponent, ShippingAddressModule, CheckoutConfig, CheckoutStepType, StorefrontModule, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, UiModule, FormComponentsModule, ItemCounterComponent, GenericLinkComponent, ListNavigationModule, PaginationComponent, SortingComponent, MediaComponent, MediaModule, MediaService, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, OnlyNumberDirective, AutoFocusDirective, FormUtils, NavigationUIComponent as ɵd, ProductCarouselService as ɵi, ProductReferencesService as ɵk, SharedCarouselService as ɵj, ProductTabsComponent as ɵh, LoginComponentService as ɵw, OutletStyleService as ɵg, defaultCartPageConfig as ɵx, AddToHomeScreenService as ɵt, addCmsRoute as ɵy, suffixUrlMatcher as ɵz, htmlLangProvider as ɵba, setHtmlLangAttribute as ɵbb, CmsGuardsService as ɵo, CmsI18nService as ɵn, CmsMappingService as ɵm, CmsRoutesService as ɵl, BootstrapModule as ɵa, CheckoutConfigService as ɵs, defaultCheckoutConfig as ɵp, CheckoutGuard as ɵq, DeliveryModeSetGuard as ɵu, OrderConfirmationPageGuard as ɵbf, PaymentDetailsSetGuard as ɵv, ShippingAddressSetGuard as ɵr, provideConfigFromMetaTags as ɵbg, defaultRoutingConfig as ɵbd, defaultStorefrontRoutesConfig as ɵbc, OrderConfirmationPageModule as ɵbe, CardComponent as ɵf, CardModule as ɵe, GenericLinkModule as ɵc, AutoFocusDirectiveModule as ɵb };
+export { CartComponentModule, AddedToCartDialogComponent, AddToCartComponent, AddToCartModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, OrderSummaryComponent, CartSharedModule, CartNotEmptyGuard, CartTotalsComponent, CartTotalsModule, MiniCartComponent, MiniCartModule, CmsLibModule, BannerComponent, BannerModule, LinkComponent, LinkModule, ParagraphComponent, CmsParagraphModule, TabParagraphContainerComponent, TabParagraphContainerModule, GlobalMessageComponentModule, GlobalMessageComponent, fontawesomeIconConfig, IconLoaderService, IconComponent, ICON_TYPE, IconConfig, IconResourceType, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, CloseAccountModule, CloseAccountModalComponent, CloseAccountComponent, ConsentManagementFormComponent, ConsentManagementComponent, ConsentManagementModule, ForgotPasswordComponent, ForgotPasswordModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, PaymentMethodsComponent, PaymentMethodsModule, ResetPasswordFormComponent, ResetPasswordModule, UpdateEmailFormComponent, UpdateEmailComponent, UpdateEmailModule, UpdatePasswordFormComponent, UpdatePasswordComponent, UpdatePasswordModule, UpdateProfileFormComponent, UpdateProfileComponent, UpdateProfileModule, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, FooterNavigationComponent, FooterNavigationModule, NavigationComponentService, NavigationComponent, NavigationModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, CurrentProductService, ProductDetailsComponent, ProductDetailsModule, ProductImagesComponent, ProductSummaryComponent, ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent, ProductDetailOutlets, ProductTabsOutlets, ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule, AbstractStoreItemComponent, ScheduleComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderPaginationDetailsComponent, StoreFinderListComponent, StoreFinderSearchResultComponent, StoreFinderSearchComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StoreFinderComponent, StoreFinderModule, LoginFormComponent, LoginFormModule, LoginComponent, LoginModule, LogoutGuard, RegisterComponent, RegisterComponentModule, UserComponentModule, CmsModule$1 as CmsModule, CmsPageGuard, OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService, StyleRefDirective, StyleRefModule, ComponentWrapperDirective, PageComponentModule, defaultCmsContentConfig, CmsComponentData, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, pwaConfigurationFactory, pwaFactory, PwaModule, PWAModuleConfig, defaultPWAModuleConfig, CmsRouteModule, SuffixRoutesModule, SeoMetaService, initSeoService, SeoModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, LayoutModule, MainModule, StorefrontComponent, CheckoutComponentModule, CheckoutDetailsService, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressComponent, CheckoutProgressModule, DeliveryModeComponent, DeliveryModeModule, OrderConfirmationComponent, OrderConfirmationModule, BillingAddressFormComponent, BillingAddressFormModule, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PlaceOrderComponent, PlaceOrderModule, PromotionsComponent, PromotionsModule, ReviewSubmitComponent, ReviewSubmitModule, SuggestedAddressDialogComponent, AddressFormComponent, AddressFormModule, ShippingAddressComponent, ShippingAddressModule, CheckoutConfig, CheckoutStepType, StorefrontModule, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, UiModule, FormComponentsModule, ItemCounterComponent, GenericLinkComponent, ListNavigationModule, PaginationComponent, SortingComponent, MediaComponent, MediaModule, MediaService, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, OnlyNumberDirective, AutoFocusDirective, FormUtils, NavigationUIComponent as ɵd, ProductCarouselService as ɵi, ProductReferencesService as ɵk, SharedCarouselService as ɵj, ProductTabsComponent as ɵh, LoginComponentService as ɵs, OutletStyleService as ɵg, defaultCartPageConfig as ɵx, AddToHomeScreenService as ɵp, addCmsRoute as ɵy, suffixUrlMatcher as ɵz, htmlLangProvider as ɵba, setHtmlLangAttribute as ɵbb, CmsGuardsService as ɵw, CmsI18nService as ɵv, CmsMappingService as ɵu, CmsRoutesService as ɵt, BootstrapModule as ɵa, CheckoutConfigService as ɵo, defaultCheckoutConfig as ɵl, CheckoutGuard as ɵm, DeliveryModeSetGuard as ɵq, OrderConfirmationPageGuard as ɵbf, PaymentDetailsSetGuard as ɵr, ShippingAddressSetGuard as ɵn, provideConfigFromMetaTags as ɵbg, defaultRoutingConfig as ɵbd, defaultStorefrontRoutesConfig as ɵbc, OrderConfirmationPageModule as ɵbe, CardComponent as ɵf, CardModule as ɵe, GenericLinkModule as ɵc, AutoFocusDirectiveModule as ɵb };
 
 //# sourceMappingURL=spartacus-storefront.js.map
