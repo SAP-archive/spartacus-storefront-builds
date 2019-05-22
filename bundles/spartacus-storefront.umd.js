@@ -592,6 +592,15 @@
         function GenericLinkComponent() {
             this.protocolRegex = /^https?:\/\//i;
         }
+        Object.defineProperty(GenericLinkComponent.prototype, "rel", {
+            get: /**
+             * @return {?}
+             */ function () {
+                return this.target === '_blank' ? 'noopener' : null;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(GenericLinkComponent.prototype, "routerUrl", {
             get: /**
              * @return {?}
@@ -629,7 +638,7 @@
         GenericLinkComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-generic-link',
-                        template: "<!-- https://github.com/angular/angular/issues/24567 -->\n\n<ng-container *ngIf=\"isExternalUrl(); else isLocalUrl\">\n  <a\n    role=\"link\"\n    [href]=\"url\"\n    [attr.target]=\"target\"\n    [attr.class]=\"class\"\n    [attr.id]=\"id\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-content></ng-content>\n  </a>\n</ng-container>\n\n<ng-template #isLocalUrl>\n  <a\n    role=\"link\"\n    [routerLink]=\"routerUrl\"\n    [attr.target]=\"target\"\n    [attr.class]=\"class\"\n    [attr.id]=\"id\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-content></ng-content>\n  </a>\n</ng-template>\n",
+                        template: "<!-- https://github.com/angular/angular/issues/24567 -->\n\n<ng-container *ngIf=\"isExternalUrl(); else isLocalUrl\">\n  <a\n    role=\"link\"\n    [href]=\"url\"\n    [attr.target]=\"target\"\n    [attr.rel]=\"rel\"\n    [attr.class]=\"class\"\n    [attr.id]=\"id\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-content></ng-content>\n  </a>\n</ng-container>\n\n<ng-template #isLocalUrl>\n  <a\n    role=\"link\"\n    [routerLink]=\"routerUrl\"\n    [attr.target]=\"target\"\n    [attr.class]=\"class\"\n    [attr.id]=\"id\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-content></ng-content>\n  </a>\n</ng-template>\n",
                         styles: [""]
                     }] }
         ];
@@ -6691,7 +6700,7 @@
         LinkComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-link',
-                        template: "<a\n  *ngIf=\"(component.data$ | async) as data\"\n  role=\"link\"\n  [routerLink]=\"data.url\"\n  >{{ data.linkName }}</a\n>\n",
+                        template: "<cx-generic-link\n  *ngIf=\"(component.data$ | async) as data\"\n  [url]=\"data.url\"\n  [style]=\"data.styleAttributes\"\n  >{{ data.linkName }}</cx-generic-link\n>\n",
                         changeDetection: i0.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -6716,6 +6725,7 @@
                         imports: [
                             common.CommonModule,
                             i4.RouterModule,
+                            GenericLinkModule,
                             i1$1.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     CMSLinkComponent: { selector: 'cx-link' },

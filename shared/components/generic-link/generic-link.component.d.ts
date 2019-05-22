@@ -9,6 +9,7 @@ export declare class GenericLinkComponent {
     id: string;
     style: string;
     title: string;
+    readonly rel: string;
     readonly routerUrl: any[];
     isExternalUrl(): boolean;
     private getAbsoluteUrl;

@@ -7,7 +7,7 @@ import { FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, FormB
 import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscription, combineLatest, merge, Subject } from 'rxjs';
 import { Title, Meta } from '@angular/platform-browser';
 import { debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, tap, endWith, first, skipWhile, withLatestFrom, pluck, shareReplay, delay } from 'rxjs/operators';
-import { ServerConfig, WindowRef, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, AuthService, CartService, CmsService, defaultCmsModuleConfig, CmsModule, Config, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, UserService, CartModule, CmsPageTitleModule, ProductModule, ProductSearchService, NotAuthGuard, StoreFinderCoreModule, CartDataService, GlobalMessageModule, ProductReviewService, OccConfig, ContextServiceMap, SiteContextModule, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID } from '@spartacus/core';
+import { ServerConfig, WindowRef, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, AuthService, CartService, CmsService, defaultCmsModuleConfig, CmsModule, Config, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, UserService, CartModule, CmsPageTitleModule, ProductModule, ProductSearchService, NotAuthGuard, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductReviewService, OccConfig, ContextServiceMap, SiteContextModule, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Injector, Inject, PLATFORM_ID, HostBinding, TemplateRef, ViewContainerRef, Optional, ViewEncapsulation, defineInjectable, inject, INJECTOR, ChangeDetectorRef } from '@angular/core';
@@ -452,6 +452,12 @@ class GenericLinkComponent {
     /**
      * @return {?}
      */
+    get rel() {
+        return this.target === '_blank' ? 'noopener' : null;
+    }
+    /**
+     * @return {?}
+     */
     get routerUrl() {
         if (typeof this.url === 'string') {
             return [this.getAbsoluteUrl(this.url)];
@@ -476,7 +482,7 @@ class GenericLinkComponent {
 GenericLinkComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-generic-link',
-                template: "<!-- https://github.com/angular/angular/issues/24567 -->\n\n<ng-container *ngIf=\"isExternalUrl(); else isLocalUrl\">\n  <a\n    role=\"link\"\n    [href]=\"url\"\n    [attr.target]=\"target\"\n    [attr.class]=\"class\"\n    [attr.id]=\"id\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-content></ng-content>\n  </a>\n</ng-container>\n\n<ng-template #isLocalUrl>\n  <a\n    role=\"link\"\n    [routerLink]=\"routerUrl\"\n    [attr.target]=\"target\"\n    [attr.class]=\"class\"\n    [attr.id]=\"id\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-content></ng-content>\n  </a>\n</ng-template>\n",
+                template: "<!-- https://github.com/angular/angular/issues/24567 -->\n\n<ng-container *ngIf=\"isExternalUrl(); else isLocalUrl\">\n  <a\n    role=\"link\"\n    [href]=\"url\"\n    [attr.target]=\"target\"\n    [attr.rel]=\"rel\"\n    [attr.class]=\"class\"\n    [attr.id]=\"id\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-content></ng-content>\n  </a>\n</ng-container>\n\n<ng-template #isLocalUrl>\n  <a\n    role=\"link\"\n    [routerLink]=\"routerUrl\"\n    [attr.target]=\"target\"\n    [attr.class]=\"class\"\n    [attr.id]=\"id\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-content></ng-content>\n  </a>\n</ng-template>\n",
                 styles: [""]
             }] }
 ];
@@ -5342,7 +5348,7 @@ class LinkComponent {
 LinkComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-link',
-                template: "<a\n  *ngIf=\"(component.data$ | async) as data\"\n  role=\"link\"\n  [routerLink]=\"data.url\"\n  >{{ data.linkName }}</a\n>\n",
+                template: "<cx-generic-link\n  *ngIf=\"(component.data$ | async) as data\"\n  [url]=\"data.url\"\n  [style]=\"data.styleAttributes\"\n  >{{ data.linkName }}</cx-generic-link\n>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -5362,6 +5368,7 @@ LinkModule.decorators = [
                 imports: [
                     CommonModule,
                     RouterModule,
+                    GenericLinkModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             CMSLinkComponent: { selector: 'cx-link' },
