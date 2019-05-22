@@ -5477,7 +5477,7 @@
                                     },
                                 },
                             }))),
-                            i1$1.SiteContextModule.forRoot(),
+                            i1$1.SiteContextModule,
                             IconModule,
                         ],
                         providers: [SiteContextComponentService],
@@ -15928,6 +15928,7 @@
         StorefrontModule.decorators = [
             { type: i0.NgModule, args: [{
                         imports: [
+                            i1$1.OccModule,
                             i1$1.StateModule,
                             i1$1.RoutingModule,
                             i1$1.AuthModule.forRoot(),
