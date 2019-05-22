@@ -5614,6 +5614,37 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var AutoFocusDirective = /** @class */ (function () {
+        function AutoFocusDirective(hostElement) {
+            this.hostElement = hostElement;
+        }
+        /**
+         * @return {?}
+         */
+        AutoFocusDirective.prototype.ngAfterViewInit = /**
+         * @return {?}
+         */
+            function () {
+                this.hostElement.nativeElement.focus();
+            };
+        AutoFocusDirective.decorators = [
+            { type: i0.Directive, args: [{
+                        selector: '[cxAutoFocus]',
+                    },] }
+        ];
+        /** @nocollapse */
+        AutoFocusDirective.ctorParameters = function () {
+            return [
+                { type: i0.ElementRef }
+            ];
+        };
+        return AutoFocusDirective;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
 
     /**
      * @fileoverview added by tsickle
@@ -6073,12 +6104,6 @@
          */
             function () {
                 var _this = this;
-                this.loaded$ = this.loaded$.pipe(operators.tap(function (res) {
-                    if (_this.previousLoaded !== res) {
-                        _this.finishedLoading = _this.previousLoaded === false;
-                        _this.previousLoaded = res;
-                    }
-                }));
                 this.entry$ = this.entry$.pipe(operators.tap(function (entry) {
                     if (entry) {
                         var code = entry.product.code;
@@ -6097,22 +6122,6 @@
                         _this.firstUpdate = false;
                     }
                 }));
-            };
-        /**
-         * @return {?}
-         */
-        AddedToCartDialogComponent.prototype.ngAfterViewChecked = /**
-         * @return {?}
-         */
-            function () {
-                if (this.finishedLoading) {
-                    this.finishedLoading = false;
-                    /** @type {?} */
-                    var elementToFocus = ( /** @type {?} */(this.dialog.nativeElement.querySelector("[ngbAutofocus]")));
-                    if (elementToFocus) {
-                        elementToFocus.focus();
-                    }
-                }
             };
         /**
          * @param {?} item
@@ -6158,7 +6167,7 @@
         AddedToCartDialogComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-added-to-cart-dialog',
-                        template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) as loaded; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (showItemIncrLabel\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart') | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"activeModal.dismiss('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"(entry$ | async) as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [isReadOnly]=\"false\"\n            [parent]=\"form.controls[entry.product.code]\"\n            [cartIsLoading]=\"!loaded\"\n            (remove)=\"removeEntry($event)\"\n            (update)=\"updateEntry($event)\"\n            (view)=\"activeModal.dismiss('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"(cart$ | async) as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n            <div>{{ cart.totalPrice.formattedValue }}</div>\n          </div>\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              ngbAutoFocus\n              (click)=\"!form.dirty && activeModal.dismiss('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"\n                !form.dirty && activeModal.dismiss('Proceed To Checkout click')\n              \"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"activeModal.dismiss('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
+                        template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) as loaded; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (showItemIncrLabel\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart') | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"activeModal.dismiss('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"(entry$ | async) as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [isReadOnly]=\"false\"\n            [parent]=\"form.controls[entry.product.code]\"\n            [cartIsLoading]=\"!loaded\"\n            (remove)=\"removeEntry($event)\"\n            (update)=\"updateEntry($event)\"\n            (view)=\"activeModal.dismiss('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"(cart$ | async) as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n            <div>{{ cart.totalPrice.formattedValue }}</div>\n          </div>\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              cxAutoFocus\n              (click)=\"!form.dirty && activeModal.dismiss('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"\n                !form.dirty && activeModal.dismiss('Proceed To Checkout click')\n              \"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"activeModal.dismiss('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
                     }] }
         ];
         /** @nocollapse */
@@ -6255,6 +6264,22 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var AutoFocusDirectiveModule = /** @class */ (function () {
+        function AutoFocusDirectiveModule() {
+        }
+        AutoFocusDirectiveModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        declarations: [AutoFocusDirective],
+                        exports: [AutoFocusDirective],
+                    },] }
+        ];
+        return AutoFocusDirectiveModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var AddToCartModule = /** @class */ (function () {
         function AddToCartModule() {
         }
@@ -6273,6 +6298,7 @@
                             i1$1.UrlModule,
                             IconModule,
                             i1$1.I18nModule,
+                            AutoFocusDirectiveModule,
                         ],
                         declarations: [AddToCartComponent, AddedToCartDialogComponent],
                         entryComponents: [AddToCartComponent, AddedToCartDialogComponent],
@@ -7017,7 +7043,7 @@
         SuggestedAddressDialogComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-suggested-addresses-dialog',
-                        template: "<div class=\"cx-dialog-header modal-header\">\n  <div class=\"cx-dialog-title modal-title\">\n    {{ 'checkoutAddress.verifyYourAddress' | cxTranslate }}\n  </div>\n  <button\n    type=\"button\"\n    class=\"close\"\n    aria-label=\"Close\"\n    (click)=\"activeModal.close()\"\n  >\n    <span aria-hidden=\"true\">\n      <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n    </span>\n  </button>\n</div>\n<div class=\"cx-dialog-body modal-body\" ngForm>\n  <div class=\"container\">\n    <div class=\"row\">\n      <div class=\"cx-dialog-info col-md-12\">\n        <p>\n          {{ 'checkoutAddress.ensureAccuracySuggestChange' | cxTranslate }}\n          {{ 'checkoutAddress.chooseAddressToUse' | cxTranslate }}\n        </p>\n      </div>\n    </div>\n\n    <div class=\"row\">\n      <div class=\"cx-dialog-options col-md-12\">\n        <div\n          class=\"form-check\"\n          *ngFor=\"let suggestedAddress of suggestedAddresses; let i = index\"\n        >\n          <input\n            class=\"form-check-input\"\n            type=\"radio\"\n            name=\"selectedAddress\"\n            [(ngModel)]=\"selectedAddress\"\n            [value]=\"suggestedAddress\"\n            [id]=\"'suggested-addresses--suggested-' + i\"\n          />\n          <label\n            class=\"form-check-label cx-dialog-label\"\n            [for]=\"'suggested-addresses--suggested-' + i\"\n          >\n            {{ 'checkoutAddress.suggestedAddress' | cxTranslate }}\n            {{ suggestedAddresses?.length > 1 ? i + 1 : null }}\n          </label>\n          <div class=\"cx-dialog-suggested\">\n            {{ suggestedAddress?.firstName }} {{ suggestedAddress?.lastName\n            }}<br />\n            {{ suggestedAddress?.line1 }}<br />\n            <span>{{ suggestedAddress?.line2 }}</span\n            ><br />\n            {{ suggestedAddress?.town }} {{ suggestedAddress?.region?.isocode\n            }}<br />\n            {{ suggestedAddress?.postalCode }}\n          </div>\n        </div>\n        <div class=\"form-check\">\n          <input\n            class=\"form-check-input\"\n            type=\"radio\"\n            name=\"selectedAddress\"\n            [(ngModel)]=\"selectedAddress\"\n            [value]=\"enteredAddress\"\n            id=\"suggested-addresses--entered\"\n          />\n          <label\n            class=\"form-check-label cx-dialog-label\"\n            for=\"suggested-addresses--entered\"\n          >\n            {{ 'checkoutAddress.enteredAddress' | cxTranslate }}\n          </label>\n          <div class=\"cx-dialog-entered\">\n            {{ enteredAddress?.firstName }} {{ enteredAddress?.lastName }}<br />\n            {{ enteredAddress?.line1 }}<br />\n            <span>{{ enteredAddress?.line2 }}</span\n            ><br />\n            {{ enteredAddress?.town }} {{ enteredAddress?.region?.isocode\n            }}<br />\n            {{ enteredAddress?.postalCode }}\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"cx-dialog-actions col-sm-12 col-md-6 offset-md-6\">\n        <button\n          class=\"btn btn-secondary btn-block cx-dialog-buttons\"\n          (click)=\"activeModal.close()\"\n        >\n          {{ 'common.editAddress' | cxTranslate }}\n        </button>\n        <button\n          ngbAutofocus\n          class=\"btn btn-primary btn-block cx-dialog-buttons\"\n          (click)=\"activeModal.close(selectedAddress)\"\n        >\n          {{ 'checkoutAddress.saveAddress' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                        template: "<div class=\"cx-dialog-header modal-header\">\n  <div class=\"cx-dialog-title modal-title\">\n    {{ 'checkoutAddress.verifyYourAddress' | cxTranslate }}\n  </div>\n  <button\n    type=\"button\"\n    class=\"close\"\n    aria-label=\"Close\"\n    (click)=\"activeModal.close()\"\n  >\n    <span aria-hidden=\"true\">\n      <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n    </span>\n  </button>\n</div>\n<div class=\"cx-dialog-body modal-body\" ngForm>\n  <div class=\"container\">\n    <div class=\"row\">\n      <div class=\"cx-dialog-info col-md-12\">\n        <p>\n          {{ 'checkoutAddress.ensureAccuracySuggestChange' | cxTranslate }}\n          {{ 'checkoutAddress.chooseAddressToUse' | cxTranslate }}\n        </p>\n      </div>\n    </div>\n\n    <div class=\"row\">\n      <div class=\"cx-dialog-options col-md-12\">\n        <div\n          class=\"form-check\"\n          *ngFor=\"let suggestedAddress of suggestedAddresses; let i = index\"\n        >\n          <input\n            class=\"form-check-input\"\n            type=\"radio\"\n            name=\"selectedAddress\"\n            [(ngModel)]=\"selectedAddress\"\n            [value]=\"suggestedAddress\"\n            [id]=\"'suggested-addresses--suggested-' + i\"\n          />\n          <label\n            class=\"form-check-label cx-dialog-label\"\n            [for]=\"'suggested-addresses--suggested-' + i\"\n          >\n            {{ 'checkoutAddress.suggestedAddress' | cxTranslate }}\n            {{ suggestedAddresses?.length > 1 ? i + 1 : null }}\n          </label>\n          <div class=\"cx-dialog-suggested\">\n            {{ suggestedAddress?.firstName }} {{ suggestedAddress?.lastName\n            }}<br />\n            {{ suggestedAddress?.line1 }}<br />\n            <span>{{ suggestedAddress?.line2 }}</span\n            ><br />\n            {{ suggestedAddress?.town }} {{ suggestedAddress?.region?.isocode\n            }}<br />\n            {{ suggestedAddress?.postalCode }}\n          </div>\n        </div>\n        <div class=\"form-check\">\n          <input\n            class=\"form-check-input\"\n            type=\"radio\"\n            name=\"selectedAddress\"\n            [(ngModel)]=\"selectedAddress\"\n            [value]=\"enteredAddress\"\n            id=\"suggested-addresses--entered\"\n          />\n          <label\n            class=\"form-check-label cx-dialog-label\"\n            for=\"suggested-addresses--entered\"\n          >\n            {{ 'checkoutAddress.enteredAddress' | cxTranslate }}\n          </label>\n          <div class=\"cx-dialog-entered\">\n            {{ enteredAddress?.firstName }} {{ enteredAddress?.lastName }}<br />\n            {{ enteredAddress?.line1 }}<br />\n            <span>{{ enteredAddress?.line2 }}</span\n            ><br />\n            {{ enteredAddress?.town }} {{ enteredAddress?.region?.isocode\n            }}<br />\n            {{ enteredAddress?.postalCode }}\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"cx-dialog-actions col-sm-12 col-md-6 offset-md-6\">\n        <button\n          class=\"btn btn-secondary btn-block cx-dialog-buttons\"\n          (click)=\"activeModal.close()\"\n        >\n          {{ 'checkoutAddress.editAddress' | cxTranslate }}\n        </button>\n        <button\n          cxAutoFocus\n          class=\"btn btn-primary btn-block cx-dialog-buttons\"\n          (click)=\"activeModal.close(selectedAddress)\"\n        >\n          {{ 'checkoutAddress.saveAddress' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n",
                         changeDetection: i0.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -7298,6 +7324,7 @@
                             ngSelect.NgSelectModule,
                             IconModule,
                             i1$1.I18nModule,
+                            AutoFocusDirectiveModule,
                         ],
                         declarations: [AddressFormComponent, SuggestedAddressDialogComponent],
                         entryComponents: [SuggestedAddressDialogComponent],
@@ -16702,50 +16729,52 @@
     exports.StarRatingComponent = StarRatingComponent;
     exports.StarRatingModule = StarRatingModule;
     exports.OnlyNumberDirective = OnlyNumberDirective;
+    exports.AutoFocusDirective = AutoFocusDirective;
     exports.FormUtils = FormUtils;
     exports.translations = translations;
-    exports.ɵc = NavigationUIComponent;
-    exports.ɵh = ProductCarouselService;
-    exports.ɵj = ProductReferencesService;
-    exports.ɵi = SharedCarouselService;
-    exports.ɵg = ProductTabsComponent;
-    exports.ɵv = LoginComponentService;
-    exports.ɵf = OutletStyleService;
-    exports.ɵw = defaultCartPageConfig;
-    exports.ɵs = AddToHomeScreenService;
-    exports.ɵx = addCmsRoute;
-    exports.ɵy = suffixUrlMatcher;
-    exports.ɵz = htmlLangProvider;
-    exports.ɵba = setHtmlLangAttribute;
-    exports.ɵn = CmsGuardsService;
-    exports.ɵm = CmsI18nService;
-    exports.ɵl = CmsMappingService;
-    exports.ɵk = CmsRoutesService;
+    exports.ɵd = NavigationUIComponent;
+    exports.ɵi = ProductCarouselService;
+    exports.ɵk = ProductReferencesService;
+    exports.ɵj = SharedCarouselService;
+    exports.ɵh = ProductTabsComponent;
+    exports.ɵw = LoginComponentService;
+    exports.ɵg = OutletStyleService;
+    exports.ɵx = defaultCartPageConfig;
+    exports.ɵt = AddToHomeScreenService;
+    exports.ɵy = addCmsRoute;
+    exports.ɵz = suffixUrlMatcher;
+    exports.ɵba = htmlLangProvider;
+    exports.ɵbb = setHtmlLangAttribute;
+    exports.ɵo = CmsGuardsService;
+    exports.ɵn = CmsI18nService;
+    exports.ɵm = CmsMappingService;
+    exports.ɵl = CmsRoutesService;
     exports.ɵa = BootstrapModule;
-    exports.ɵr = CheckoutConfigService;
-    exports.ɵo = defaultCheckoutConfig;
-    exports.ɵp = CheckoutGuard;
-    exports.ɵt = DeliveryModeSetGuard;
-    exports.ɵbe = OrderConfirmationPageGuard;
-    exports.ɵu = PaymentDetailsSetGuard;
-    exports.ɵq = ShippingAddressSetGuard;
-    exports.ɵbf = provideConfigFromMetaTags;
-    exports.ɵbc = defaultRoutingConfig;
-    exports.ɵbb = defaultStorefrontRoutesConfig;
-    exports.ɵbd = OrderConfirmationPageModule;
-    exports.ɵe = CardComponent;
-    exports.ɵd = CardModule;
-    exports.ɵb = GenericLinkModule;
-    exports.ɵbg = address;
-    exports.ɵbh = cart;
-    exports.ɵbi = checkout;
-    exports.ɵbj = common$1;
-    exports.ɵbk = myAccount;
-    exports.ɵbl = payment;
-    exports.ɵbm = product;
-    exports.ɵbn = pwa;
-    exports.ɵbo = storeFinder;
-    exports.ɵbp = user;
+    exports.ɵs = CheckoutConfigService;
+    exports.ɵp = defaultCheckoutConfig;
+    exports.ɵq = CheckoutGuard;
+    exports.ɵu = DeliveryModeSetGuard;
+    exports.ɵbf = OrderConfirmationPageGuard;
+    exports.ɵv = PaymentDetailsSetGuard;
+    exports.ɵr = ShippingAddressSetGuard;
+    exports.ɵbg = provideConfigFromMetaTags;
+    exports.ɵbd = defaultRoutingConfig;
+    exports.ɵbc = defaultStorefrontRoutesConfig;
+    exports.ɵbe = OrderConfirmationPageModule;
+    exports.ɵf = CardComponent;
+    exports.ɵe = CardModule;
+    exports.ɵc = GenericLinkModule;
+    exports.ɵb = AutoFocusDirectiveModule;
+    exports.ɵbh = address;
+    exports.ɵbi = cart;
+    exports.ɵbj = checkout;
+    exports.ɵbk = common$1;
+    exports.ɵbl = myAccount;
+    exports.ɵbm = payment;
+    exports.ɵbn = product;
+    exports.ɵbo = pwa;
+    exports.ɵbp = storeFinder;
+    exports.ɵbq = user;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
