@@ -13145,7 +13145,7 @@
          * @return {?}
          */
             function () {
-                return rxjs.of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.config.checkout.steps[0].route).paths[0]));
+                return rxjs.of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.config.checkout.steps[0].routeName).paths[0]));
             };
         CheckoutGuard.decorators = [
             { type: i0.Injectable, args: [{
@@ -13170,10 +13170,10 @@
      */
     /** @enum {string} */
     var CheckoutStepType = {
-        shippingAddress: 'shippingAddress',
-        deliveryMode: 'deliveryMode',
-        paymentDetails: 'paymentDetails',
-        reviewOrder: 'reviewOrder',
+        SHIPPING_ADDRESS: 'shippingAddress',
+        DELIVERY_MODE: 'deliveryMode',
+        PAYMENT_DETAILS: 'paymentDetails',
+        REVIEW_ORDER: 'reviewOrder',
     };
 
     /**
@@ -13187,26 +13187,26 @@
                 {
                     id: 'shippingAddress',
                     name: 'checkoutProgress.shippingAddress',
-                    route: 'checkoutShippingAddress',
-                    type: [CheckoutStepType.shippingAddress],
+                    routeName: 'checkoutShippingAddress',
+                    type: [CheckoutStepType.SHIPPING_ADDRESS],
                 },
                 {
                     id: 'deliveryMode',
                     name: 'checkoutProgress.deliveryMode',
-                    route: 'checkoutDeliveryMode',
-                    type: [CheckoutStepType.deliveryMode],
+                    routeName: 'checkoutDeliveryMode',
+                    type: [CheckoutStepType.DELIVERY_MODE],
                 },
                 {
                     id: 'paymentDetails',
                     name: 'checkoutProgress.paymentDetails',
-                    route: 'checkoutPaymentDetails',
-                    type: [CheckoutStepType.paymentDetails],
+                    routeName: 'checkoutPaymentDetails',
+                    type: [CheckoutStepType.PAYMENT_DETAILS],
                 },
                 {
                     id: 'reviewOrder',
                     name: 'checkoutProgress.reviewOrder',
-                    route: 'checkoutReviewOrder',
-                    type: [CheckoutStepType.reviewOrder],
+                    routeName: 'checkoutReviewOrder',
+                    type: [CheckoutStepType.REVIEW_ORDER],
                 },
             ],
         },
@@ -13318,7 +13318,7 @@
                     _this.activeStepUrl = router.state.context.id;
                     _this.steps.forEach(function (step, index) {
                         /** @type {?} */
-                        var routeUrl = "/" + _this.routingConfigService.getRouteConfig(step.route).paths[0];
+                        var routeUrl = "/" + _this.routingConfigService.getRouteConfig(step.routeName).paths[0];
                         if (routeUrl === _this.activeStepUrl) {
                             _this.activeStepIndex = index;
                         }
@@ -13401,7 +13401,7 @@
                     _this.activeStepUrl = router.state.context.id;
                     _this.steps.forEach(function (step, index) {
                         /** @type {?} */
-                        var routeUrl = "/" + _this.routingConfigService.getRouteConfig(step.route).paths[0];
+                        var routeUrl = "/" + _this.routingConfigService.getRouteConfig(step.routeName).paths[0];
                         if (routeUrl === _this.activeStepUrl) {
                             _this.activeStepIndex = index;
                         }
@@ -13481,7 +13481,7 @@
                     _this.activeStepUrl = router.state.context.id;
                     _this.steps.forEach(function (step, index) {
                         /** @type {?} */
-                        var routeUrl = "/" + _this.routingConfigService.getRouteConfig(step.route).paths[0];
+                        var routeUrl = "/" + _this.routingConfigService.getRouteConfig(step.routeName).paths[0];
                         if (routeUrl === _this.activeStepUrl) {
                             _this.activeStepIndex = index;
                         }
@@ -13573,12 +13573,12 @@
                 /** @type {?} */
                 var stepIndex;
                 this.steps.forEach(function (step, index) {
-                    if (currentStepUrl === "/" + _this.getStepUrlFromStepRoute(step.route)) {
+                    if (currentStepUrl === "/" + _this.getStepUrlFromStepRoute(step.routeName)) {
                         stepIndex = index;
                     }
                 });
                 return stepIndex >= 0 && this.steps[stepIndex + 1]
-                    ? this.getStepUrlFromStepRoute(this.steps[stepIndex + 1].route)
+                    ? this.getStepUrlFromStepRoute(this.steps[stepIndex + 1].routeName)
                     : null;
             };
         /**
@@ -13596,12 +13596,12 @@
                 /** @type {?} */
                 var stepIndex;
                 this.steps.forEach(function (step, index) {
-                    if (currentStepUrl === "/" + _this.getStepUrlFromStepRoute(step.route)) {
+                    if (currentStepUrl === "/" + _this.getStepUrlFromStepRoute(step.routeName)) {
                         stepIndex = index;
                     }
                 });
                 return stepIndex >= 1 && this.steps[stepIndex - 1]
-                    ? this.getStepUrlFromStepRoute(this.steps[stepIndex - 1].route)
+                    ? this.getStepUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
                     : null;
             };
         /**
@@ -13875,9 +13875,9 @@
             function () {
                 var _this = this;
                 /** @type {?} */
-                var checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.shippingAddress);
+                var checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.SHIPPING_ADDRESS);
                 if (!checkoutStep && !this.serverConfig.production) {
-                    console.warn("Missing step with type " + CheckoutStepType.shippingAddress + " in checkout configuration.");
+                    console.warn("Missing step with type " + CheckoutStepType.SHIPPING_ADDRESS + " in checkout configuration.");
                 }
                 return this.checkoutDetailsService
                     .getDeliveryAddress()
@@ -13885,8 +13885,7 @@
                     return deliveryAddress && Object.keys(deliveryAddress).length
                         ? true
                         : _this.router.parseUrl(checkoutStep &&
-                            _this.routingConfigService.getRouteConfig(checkoutStep.route)
-                                .paths[0]);
+                            _this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0]);
                 }));
             };
         ShippingAddressSetGuard.decorators = [
@@ -14785,9 +14784,9 @@
             function () {
                 var _this = this;
                 /** @type {?} */
-                var checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.deliveryMode);
+                var checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.DELIVERY_MODE);
                 if (!checkoutStep && !this.serverConfig.production) {
-                    console.warn("Missing step with type " + CheckoutStepType.deliveryMode + " in checkout configuration.");
+                    console.warn("Missing step with type " + CheckoutStepType.DELIVERY_MODE + " in checkout configuration.");
                 }
                 return this.checkoutDetailsService
                     .getSelectedDeliveryModeCode()
@@ -14795,8 +14794,7 @@
                     return mode && mode.length
                         ? true
                         : _this.router.parseUrl(checkoutStep &&
-                            _this.routingConfigService.getRouteConfig(checkoutStep.route)
-                                .paths[0]);
+                            _this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0]);
                 }));
             };
         DeliveryModeSetGuard.decorators = [
@@ -15116,9 +15114,9 @@
             function () {
                 var _this = this;
                 /** @type {?} */
-                var checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.paymentDetails);
+                var checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.PAYMENT_DETAILS);
                 if (!checkoutStep && !this.serverConfig.production) {
-                    console.warn("Missing step with type " + CheckoutStepType.paymentDetails + " in checkout configuration.");
+                    console.warn("Missing step with type " + CheckoutStepType.PAYMENT_DETAILS + " in checkout configuration.");
                 }
                 return this.checkoutDetailsService
                     .getPaymentDetails()
@@ -15126,8 +15124,7 @@
                     return paymentDetails && Object.keys(paymentDetails).length !== 0
                         ? true
                         : _this.router.parseUrl(checkoutStep &&
-                            _this.routingConfigService.getRouteConfig(checkoutStep.route)
-                                .paths[0]);
+                            _this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0]);
                 }));
             };
         PaymentDetailsSetGuard.decorators = [
@@ -15315,7 +15312,7 @@
                 var newAddress = _a.newAddress, address = _a.address;
                 if (newAddress) {
                     this.checkoutService.createAndSetAddress(address);
-                    this.goTo = CheckoutStepType.deliveryMode;
+                    this.goTo = CheckoutStepType.DELIVERY_MODE;
                     return;
                 }
                 if (this.setAddress &&
@@ -15324,7 +15321,7 @@
                     this.goNext();
                 }
                 else {
-                    this.goTo = CheckoutStepType.deliveryMode;
+                    this.goTo = CheckoutStepType.DELIVERY_MODE;
                     this.checkoutService.setDeliveryAddress(address);
                 }
             };

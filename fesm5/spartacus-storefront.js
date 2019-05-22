@@ -7,7 +7,7 @@ import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscriptio
 import { Title, Meta } from '@angular/platform-browser';
 import { __values, __spread, __read, __extends, __assign, __awaiter, __generator } from 'tslib';
 import { debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, endWith, first, skipWhile, tap, withLatestFrom, pluck, shareReplay, delay } from 'rxjs/operators';
-import { ServerConfig, WindowRef, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, AuthService, CartService, CmsService, defaultCmsModuleConfig, CmsModule, Config, CheckoutModule, DynamicAttributeService, CxApiService, ComponentMapperService, UserModule, UserService, CartModule, PageMetaService, CmsPageTitleModule, ProductModule, ProductSearchService, NotAuthGuard, PageRobotsMeta, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductReviewService, ContextServiceMap, SiteContextModule, StoreDataService, StoreFinderService, GoogleMapRendererService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, OccConfig, TranslatePipe } from '@spartacus/core';
+import { ServerConfig, WindowRef, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, AuthService, CartService, CmsService, defaultCmsModuleConfig, CmsModule, Config, CheckoutModule, DynamicAttributeService, CxApiService, ComponentMapperService, UserModule, UserService, CartModule, PageMetaService, CmsPageTitleModule, ProductModule, ProductSearchService, NotAuthGuard, PageRobotsMeta, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductReviewService, OccConfig, ContextServiceMap, SiteContextModule, StoreDataService, StoreFinderService, GoogleMapRendererService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Injector, HostBinding, TemplateRef, ViewEncapsulation, Optional, defineInjectable, inject, INJECTOR, Inject, PLATFORM_ID, ViewContainerRef, ChangeDetectorRef } from '@angular/core';
@@ -12774,7 +12774,7 @@ var CheckoutGuard = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        return of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.config.checkout.steps[0].route).paths[0]));
+        return of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.config.checkout.steps[0].routeName).paths[0]));
     };
     CheckoutGuard.decorators = [
         { type: Injectable, args: [{
@@ -12797,10 +12797,10 @@ var CheckoutGuard = /** @class */ (function () {
  */
 /** @enum {string} */
 var CheckoutStepType = {
-    shippingAddress: 'shippingAddress',
-    deliveryMode: 'deliveryMode',
-    paymentDetails: 'paymentDetails',
-    reviewOrder: 'reviewOrder',
+    SHIPPING_ADDRESS: 'shippingAddress',
+    DELIVERY_MODE: 'deliveryMode',
+    PAYMENT_DETAILS: 'paymentDetails',
+    REVIEW_ORDER: 'reviewOrder',
 };
 
 /**
@@ -12814,26 +12814,26 @@ var defaultCheckoutConfig = {
             {
                 id: 'shippingAddress',
                 name: 'checkoutProgress.shippingAddress',
-                route: 'checkoutShippingAddress',
-                type: [CheckoutStepType.shippingAddress],
+                routeName: 'checkoutShippingAddress',
+                type: [CheckoutStepType.SHIPPING_ADDRESS],
             },
             {
                 id: 'deliveryMode',
                 name: 'checkoutProgress.deliveryMode',
-                route: 'checkoutDeliveryMode',
-                type: [CheckoutStepType.deliveryMode],
+                routeName: 'checkoutDeliveryMode',
+                type: [CheckoutStepType.DELIVERY_MODE],
             },
             {
                 id: 'paymentDetails',
                 name: 'checkoutProgress.paymentDetails',
-                route: 'checkoutPaymentDetails',
-                type: [CheckoutStepType.paymentDetails],
+                routeName: 'checkoutPaymentDetails',
+                type: [CheckoutStepType.PAYMENT_DETAILS],
             },
             {
                 id: 'reviewOrder',
                 name: 'checkoutProgress.reviewOrder',
-                route: 'checkoutReviewOrder',
-                type: [CheckoutStepType.reviewOrder],
+                routeName: 'checkoutReviewOrder',
+                type: [CheckoutStepType.REVIEW_ORDER],
             },
         ],
     },
@@ -12943,7 +12943,7 @@ var CheckoutProgressComponent = /** @class */ (function () {
             _this.activeStepUrl = router.state.context.id;
             _this.steps.forEach(function (step, index) {
                 /** @type {?} */
-                var routeUrl = "/" + _this.routingConfigService.getRouteConfig(step.route).paths[0];
+                var routeUrl = "/" + _this.routingConfigService.getRouteConfig(step.routeName).paths[0];
                 if (routeUrl === _this.activeStepUrl) {
                     _this.activeStepIndex = index;
                 }
@@ -13024,7 +13024,7 @@ var CheckoutProgressMobileTopComponent = /** @class */ (function () {
             _this.activeStepUrl = router.state.context.id;
             _this.steps.forEach(function (step, index) {
                 /** @type {?} */
-                var routeUrl = "/" + _this.routingConfigService.getRouteConfig(step.route).paths[0];
+                var routeUrl = "/" + _this.routingConfigService.getRouteConfig(step.routeName).paths[0];
                 if (routeUrl === _this.activeStepUrl) {
                     _this.activeStepIndex = index;
                 }
@@ -13102,7 +13102,7 @@ var CheckoutProgressMobileBottomComponent = /** @class */ (function () {
             _this.activeStepUrl = router.state.context.id;
             _this.steps.forEach(function (step, index) {
                 /** @type {?} */
-                var routeUrl = "/" + _this.routingConfigService.getRouteConfig(step.route).paths[0];
+                var routeUrl = "/" + _this.routingConfigService.getRouteConfig(step.routeName).paths[0];
                 if (routeUrl === _this.activeStepUrl) {
                     _this.activeStepIndex = index;
                 }
@@ -13192,12 +13192,12 @@ var CheckoutConfigService = /** @class */ (function () {
         /** @type {?} */
         var stepIndex;
         this.steps.forEach(function (step, index) {
-            if (currentStepUrl === "/" + _this.getStepUrlFromStepRoute(step.route)) {
+            if (currentStepUrl === "/" + _this.getStepUrlFromStepRoute(step.routeName)) {
                 stepIndex = index;
             }
         });
         return stepIndex >= 0 && this.steps[stepIndex + 1]
-            ? this.getStepUrlFromStepRoute(this.steps[stepIndex + 1].route)
+            ? this.getStepUrlFromStepRoute(this.steps[stepIndex + 1].routeName)
             : null;
     };
     /**
@@ -13215,12 +13215,12 @@ var CheckoutConfigService = /** @class */ (function () {
         /** @type {?} */
         var stepIndex;
         this.steps.forEach(function (step, index) {
-            if (currentStepUrl === "/" + _this.getStepUrlFromStepRoute(step.route)) {
+            if (currentStepUrl === "/" + _this.getStepUrlFromStepRoute(step.routeName)) {
                 stepIndex = index;
             }
         });
         return stepIndex >= 1 && this.steps[stepIndex - 1]
-            ? this.getStepUrlFromStepRoute(this.steps[stepIndex - 1].route)
+            ? this.getStepUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
             : null;
     };
     /**
@@ -13489,9 +13489,9 @@ var ShippingAddressSetGuard = /** @class */ (function () {
     function () {
         var _this = this;
         /** @type {?} */
-        var checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.shippingAddress);
+        var checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.SHIPPING_ADDRESS);
         if (!checkoutStep && !this.serverConfig.production) {
-            console.warn("Missing step with type " + CheckoutStepType.shippingAddress + " in checkout configuration.");
+            console.warn("Missing step with type " + CheckoutStepType.SHIPPING_ADDRESS + " in checkout configuration.");
         }
         return this.checkoutDetailsService
             .getDeliveryAddress()
@@ -13499,8 +13499,7 @@ var ShippingAddressSetGuard = /** @class */ (function () {
             return deliveryAddress && Object.keys(deliveryAddress).length
                 ? true
                 : _this.router.parseUrl(checkoutStep &&
-                    _this.routingConfigService.getRouteConfig(checkoutStep.route)
-                        .paths[0]);
+                    _this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0]);
         }));
     };
     ShippingAddressSetGuard.decorators = [
@@ -14391,9 +14390,9 @@ var DeliveryModeSetGuard = /** @class */ (function () {
     function () {
         var _this = this;
         /** @type {?} */
-        var checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.deliveryMode);
+        var checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.DELIVERY_MODE);
         if (!checkoutStep && !this.serverConfig.production) {
-            console.warn("Missing step with type " + CheckoutStepType.deliveryMode + " in checkout configuration.");
+            console.warn("Missing step with type " + CheckoutStepType.DELIVERY_MODE + " in checkout configuration.");
         }
         return this.checkoutDetailsService
             .getSelectedDeliveryModeCode()
@@ -14401,8 +14400,7 @@ var DeliveryModeSetGuard = /** @class */ (function () {
             return mode && mode.length
                 ? true
                 : _this.router.parseUrl(checkoutStep &&
-                    _this.routingConfigService.getRouteConfig(checkoutStep.route)
-                        .paths[0]);
+                    _this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0]);
         }));
     };
     DeliveryModeSetGuard.decorators = [
@@ -14716,9 +14714,9 @@ var PaymentDetailsSetGuard = /** @class */ (function () {
     function () {
         var _this = this;
         /** @type {?} */
-        var checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.paymentDetails);
+        var checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.PAYMENT_DETAILS);
         if (!checkoutStep && !this.serverConfig.production) {
-            console.warn("Missing step with type " + CheckoutStepType.paymentDetails + " in checkout configuration.");
+            console.warn("Missing step with type " + CheckoutStepType.PAYMENT_DETAILS + " in checkout configuration.");
         }
         return this.checkoutDetailsService
             .getPaymentDetails()
@@ -14726,8 +14724,7 @@ var PaymentDetailsSetGuard = /** @class */ (function () {
             return paymentDetails && Object.keys(paymentDetails).length !== 0
                 ? true
                 : _this.router.parseUrl(checkoutStep &&
-                    _this.routingConfigService.getRouteConfig(checkoutStep.route)
-                        .paths[0]);
+                    _this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0]);
         }));
     };
     PaymentDetailsSetGuard.decorators = [
@@ -14913,7 +14910,7 @@ var ShippingAddressComponent = /** @class */ (function () {
         var newAddress = _a.newAddress, address = _a.address;
         if (newAddress) {
             this.checkoutService.createAndSetAddress(address);
-            this.goTo = CheckoutStepType.deliveryMode;
+            this.goTo = CheckoutStepType.DELIVERY_MODE;
             return;
         }
         if (this.setAddress &&
@@ -14922,7 +14919,7 @@ var ShippingAddressComponent = /** @class */ (function () {
             this.goNext();
         }
         else {
-            this.goTo = CheckoutStepType.deliveryMode;
+            this.goTo = CheckoutStepType.DELIVERY_MODE;
             this.checkoutService.setDeliveryAddress(address);
         }
     };

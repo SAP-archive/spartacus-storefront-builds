@@ -10659,7 +10659,7 @@ class CheckoutGuard {
      * @return {?}
      */
     canActivate() {
-        return of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.config.checkout.steps[0].route).paths[0]));
+        return of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.config.checkout.steps[0].routeName).paths[0]));
     }
 }
 CheckoutGuard.decorators = [
@@ -10681,10 +10681,10 @@ CheckoutGuard.ctorParameters = () => [
  */
 /** @enum {string} */
 const CheckoutStepType = {
-    shippingAddress: 'shippingAddress',
-    deliveryMode: 'deliveryMode',
-    paymentDetails: 'paymentDetails',
-    reviewOrder: 'reviewOrder',
+    SHIPPING_ADDRESS: 'shippingAddress',
+    DELIVERY_MODE: 'deliveryMode',
+    PAYMENT_DETAILS: 'paymentDetails',
+    REVIEW_ORDER: 'reviewOrder',
 };
 
 /**
@@ -10698,26 +10698,26 @@ const defaultCheckoutConfig = {
             {
                 id: 'shippingAddress',
                 name: 'checkoutProgress.shippingAddress',
-                route: 'checkoutShippingAddress',
-                type: [CheckoutStepType.shippingAddress],
+                routeName: 'checkoutShippingAddress',
+                type: [CheckoutStepType.SHIPPING_ADDRESS],
             },
             {
                 id: 'deliveryMode',
                 name: 'checkoutProgress.deliveryMode',
-                route: 'checkoutDeliveryMode',
-                type: [CheckoutStepType.deliveryMode],
+                routeName: 'checkoutDeliveryMode',
+                type: [CheckoutStepType.DELIVERY_MODE],
             },
             {
                 id: 'paymentDetails',
                 name: 'checkoutProgress.paymentDetails',
-                route: 'checkoutPaymentDetails',
-                type: [CheckoutStepType.paymentDetails],
+                routeName: 'checkoutPaymentDetails',
+                type: [CheckoutStepType.PAYMENT_DETAILS],
             },
             {
                 id: 'reviewOrder',
                 name: 'checkoutProgress.reviewOrder',
-                route: 'checkoutReviewOrder',
-                type: [CheckoutStepType.reviewOrder],
+                routeName: 'checkoutReviewOrder',
+                type: [CheckoutStepType.REVIEW_ORDER],
             },
         ],
     },
@@ -10824,7 +10824,7 @@ class CheckoutProgressComponent {
             this.activeStepUrl = router.state.context.id;
             this.steps.forEach((step, index) => {
                 /** @type {?} */
-                const routeUrl = `/${this.routingConfigService.getRouteConfig(step.route).paths[0]}`;
+                const routeUrl = `/${this.routingConfigService.getRouteConfig(step.routeName).paths[0]}`;
                 if (routeUrl === this.activeStepUrl) {
                     this.activeStepIndex = index;
                 }
@@ -10903,7 +10903,7 @@ class CheckoutProgressMobileTopComponent {
             this.activeStepUrl = router.state.context.id;
             this.steps.forEach((step, index) => {
                 /** @type {?} */
-                const routeUrl = `/${this.routingConfigService.getRouteConfig(step.route).paths[0]}`;
+                const routeUrl = `/${this.routingConfigService.getRouteConfig(step.routeName).paths[0]}`;
                 if (routeUrl === this.activeStepUrl) {
                     this.activeStepIndex = index;
                 }
@@ -10978,7 +10978,7 @@ class CheckoutProgressMobileBottomComponent {
             this.activeStepUrl = router.state.context.id;
             this.steps.forEach((step, index) => {
                 /** @type {?} */
-                const routeUrl = `/${this.routingConfigService.getRouteConfig(step.route).paths[0]}`;
+                const routeUrl = `/${this.routingConfigService.getRouteConfig(step.routeName).paths[0]}`;
                 if (routeUrl === this.activeStepUrl) {
                     this.activeStepIndex = index;
                 }
@@ -11059,12 +11059,12 @@ class CheckoutConfigService {
         /** @type {?} */
         let stepIndex;
         this.steps.forEach((step, index) => {
-            if (currentStepUrl === `/${this.getStepUrlFromStepRoute(step.route)}`) {
+            if (currentStepUrl === `/${this.getStepUrlFromStepRoute(step.routeName)}`) {
                 stepIndex = index;
             }
         });
         return stepIndex >= 0 && this.steps[stepIndex + 1]
-            ? this.getStepUrlFromStepRoute(this.steps[stepIndex + 1].route)
+            ? this.getStepUrlFromStepRoute(this.steps[stepIndex + 1].routeName)
             : null;
     }
     /**
@@ -11077,12 +11077,12 @@ class CheckoutConfigService {
         /** @type {?} */
         let stepIndex;
         this.steps.forEach((step, index) => {
-            if (currentStepUrl === `/${this.getStepUrlFromStepRoute(step.route)}`) {
+            if (currentStepUrl === `/${this.getStepUrlFromStepRoute(step.routeName)}`) {
                 stepIndex = index;
             }
         });
         return stepIndex >= 1 && this.steps[stepIndex - 1]
-            ? this.getStepUrlFromStepRoute(this.steps[stepIndex - 1].route)
+            ? this.getStepUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
             : null;
     }
     /**
@@ -11307,17 +11307,16 @@ class ShippingAddressSetGuard {
      */
     canActivate() {
         /** @type {?} */
-        const checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.shippingAddress);
+        const checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.SHIPPING_ADDRESS);
         if (!checkoutStep && !this.serverConfig.production) {
-            console.warn(`Missing step with type ${CheckoutStepType.shippingAddress} in checkout configuration.`);
+            console.warn(`Missing step with type ${CheckoutStepType.SHIPPING_ADDRESS} in checkout configuration.`);
         }
         return this.checkoutDetailsService
             .getDeliveryAddress()
             .pipe(map((deliveryAddress) => deliveryAddress && Object.keys(deliveryAddress).length
             ? true
             : this.router.parseUrl(checkoutStep &&
-                this.routingConfigService.getRouteConfig(checkoutStep.route)
-                    .paths[0])));
+                this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0])));
     }
 }
 ShippingAddressSetGuard.decorators = [
@@ -12077,17 +12076,16 @@ class DeliveryModeSetGuard {
      */
     canActivate() {
         /** @type {?} */
-        const checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.deliveryMode);
+        const checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.DELIVERY_MODE);
         if (!checkoutStep && !this.serverConfig.production) {
-            console.warn(`Missing step with type ${CheckoutStepType.deliveryMode} in checkout configuration.`);
+            console.warn(`Missing step with type ${CheckoutStepType.DELIVERY_MODE} in checkout configuration.`);
         }
         return this.checkoutDetailsService
             .getSelectedDeliveryModeCode()
             .pipe(map((mode) => mode && mode.length
             ? true
             : this.router.parseUrl(checkoutStep &&
-                this.routingConfigService.getRouteConfig(checkoutStep.route)
-                    .paths[0])));
+                this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0])));
     }
 }
 DeliveryModeSetGuard.decorators = [
@@ -12369,17 +12367,16 @@ class PaymentDetailsSetGuard {
      */
     canActivate() {
         /** @type {?} */
-        const checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.paymentDetails);
+        const checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.PAYMENT_DETAILS);
         if (!checkoutStep && !this.serverConfig.production) {
-            console.warn(`Missing step with type ${CheckoutStepType.paymentDetails} in checkout configuration.`);
+            console.warn(`Missing step with type ${CheckoutStepType.PAYMENT_DETAILS} in checkout configuration.`);
         }
         return this.checkoutDetailsService
             .getPaymentDetails()
             .pipe(map(paymentDetails => paymentDetails && Object.keys(paymentDetails).length !== 0
             ? true
             : this.router.parseUrl(checkoutStep &&
-                this.routingConfigService.getRouteConfig(checkoutStep.route)
-                    .paths[0])));
+                this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0])));
     }
 }
 PaymentDetailsSetGuard.decorators = [
@@ -12545,7 +12542,7 @@ class ShippingAddressComponent {
     addAddress({ newAddress, address, }) {
         if (newAddress) {
             this.checkoutService.createAndSetAddress(address);
-            this.goTo = CheckoutStepType.deliveryMode;
+            this.goTo = CheckoutStepType.DELIVERY_MODE;
             return;
         }
         if (this.setAddress &&
@@ -12554,7 +12551,7 @@ class ShippingAddressComponent {
             this.goNext();
         }
         else {
-            this.goTo = CheckoutStepType.deliveryMode;
+            this.goTo = CheckoutStepType.DELIVERY_MODE;
             this.checkoutService.setDeliveryAddress(address);
         }
     }

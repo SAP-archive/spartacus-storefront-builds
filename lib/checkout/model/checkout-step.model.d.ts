@@ -1,12 +1,12 @@
 export declare enum CheckoutStepType {
-    shippingAddress = "shippingAddress",
-    deliveryMode = "deliveryMode",
-    paymentDetails = "paymentDetails",
-    reviewOrder = "reviewOrder"
+    SHIPPING_ADDRESS = "shippingAddress",
+    DELIVERY_MODE = "deliveryMode",
+    PAYMENT_DETAILS = "paymentDetails",
+    REVIEW_ORDER = "reviewOrder"
 }
 export interface CheckoutStep {
     id: string;
     name: string;
-    route: string;
+    routeName: string;
     type: Array<CheckoutStepType>;
 }
