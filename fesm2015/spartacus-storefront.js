@@ -5443,7 +5443,7 @@ TabParagraphContainerModule.decorators = [
                     CommonModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
-                            CMSTabParagraphComponent: { selector: 'cx-tab-paragraph-container' },
+                            CMSTabParagraphComponent: { selector: 'cx-paragraph' },
                         },
                     }))),
                 ],

@@ -6806,7 +6806,7 @@
                             common.CommonModule,
                             i1$1.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
-                                    CMSTabParagraphComponent: { selector: 'cx-tab-paragraph-container' },
+                                    CMSTabParagraphComponent: { selector: 'cx-paragraph' },
                                 },
                             }))),
                         ],
