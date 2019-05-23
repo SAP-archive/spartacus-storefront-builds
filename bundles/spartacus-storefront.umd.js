@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/service-worker'), require('@angular/common/http'), require('@ng-bootstrap/ng-bootstrap'), require('@ng-select/ng-select'), require('rxjs'), require('projects/storefrontlib/src/cms-structure/page/model/cms-component-data'), require('@angular/forms'), require('rxjs/operators'), require('@angular/platform-browser'), require('@angular/router'), require('@spartacus/core'), require('@angular/common'), require('@angular/core')) :
-    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@angular/service-worker', '@angular/common/http', '@ng-bootstrap/ng-bootstrap', '@ng-select/ng-select', 'rxjs', 'projects/storefrontlib/src/cms-structure/page/model/cms-component-data', '@angular/forms', 'rxjs/operators', '@angular/platform-browser', '@angular/router', '@spartacus/core', '@angular/common', '@angular/core'], factory) :
-    (factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}),global.ng['service-worker'],global.ng.common.http,global.ngBootstrap,global.ngSelect,global.rxjs,global.cmsComponentData,global.ng.forms,global.rxjs.operators,global.ng.platformBrowser,global.ng.router,global.core,global.ng.common,global.ng.core));
-}(this, (function (exports,serviceWorker,http,ngBootstrap,ngSelect,rxjs,cmsComponentData,forms,operators,i1,i4,i1$1,common,i0) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/service-worker'), require('@angular/common/http'), require('@ng-bootstrap/ng-bootstrap'), require('@ng-select/ng-select'), require('rxjs'), require('@angular/forms'), require('rxjs/operators'), require('@angular/platform-browser'), require('@angular/router'), require('@spartacus/core'), require('@angular/common'), require('@angular/core')) :
+    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@angular/service-worker', '@angular/common/http', '@ng-bootstrap/ng-bootstrap', '@ng-select/ng-select', 'rxjs', '@angular/forms', 'rxjs/operators', '@angular/platform-browser', '@angular/router', '@spartacus/core', '@angular/common', '@angular/core'], factory) :
+    (factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}),global.ng['service-worker'],global.ng.common.http,global.ngBootstrap,global.ngSelect,global.rxjs,global.ng.forms,global.rxjs.operators,global.ng.platformBrowser,global.ng.router,global.core,global.ng.common,global.ng.core));
+}(this, (function (exports,serviceWorker,http,ngBootstrap,ngSelect,rxjs,forms,operators,i1,i4,i1$1,common,i0) { 'use strict';
 
     /**
      * @fileoverview added by tsickle
@@ -14902,7 +14902,7 @@
         SearchBoxComponent.ctorParameters = function () {
             return [
                 { type: SearchBoxComponentService },
-                { type: cmsComponentData.CmsComponentData, decorators: [{ type: i0.Optional }] }
+                { type: CmsComponentData, decorators: [{ type: i0.Optional }] }
             ];
         };
         SearchBoxComponent.propDecorators = {

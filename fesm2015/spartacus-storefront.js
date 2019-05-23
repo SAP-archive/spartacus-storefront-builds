@@ -4,7 +4,6 @@ import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
 import { NgbTabsetModule, NgbAccordionModule, NgbTabsetConfig, NgbAccordionConfig, NgbRatingModule, NgbRatingConfig, NgbDropdownModule, NgbTypeaheadModule, NgbCollapseModule, NgbModalModule, NgbPaginationModule, NgbPaginationConfig, NgbModule, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { of, fromEvent, BehaviorSubject, concat, from, isObservable, combineLatest, Subscription } from 'rxjs';
-import { CmsComponentData } from 'projects/storefrontlib/src/cms-structure/page/model/cms-component-data';
 import { FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { debounceTime, filter, map, switchMap, take, tap, skipWhile, distinctUntilChanged, startWith, endWith, first, withLatestFrom, delay, shareReplay, pluck } from 'rxjs/operators';
 import { Title, Meta } from '@angular/platform-browser';
@@ -1278,7 +1277,7 @@ LanguageCurrencyComponent.decorators = [
  * @abstract
  * @template T
  */
-class CmsComponentData$1 {
+class CmsComponentData {
 }
 
 /**
@@ -1392,7 +1391,7 @@ SiteContextComponentService.decorators = [
 ];
 /** @nocollapse */
 SiteContextComponentService.ctorParameters = () => [
-    { type: CmsComponentData$1, decorators: [{ type: Optional }] },
+    { type: CmsComponentData, decorators: [{ type: Optional }] },
     { type: ContextServiceMap },
     { type: Injector }
 ];
@@ -1479,7 +1478,7 @@ SiteContextSelectorModule.decorators = [
                                     {
                                         provide: SiteContextComponentService,
                                         useClass: SiteContextComponentService,
-                                        deps: [CmsComponentData$1, ContextServiceMap, Injector],
+                                        deps: [CmsComponentData, ContextServiceMap, Injector],
                                     },
                                 ],
                             },
@@ -3383,7 +3382,7 @@ class ComponentWrapperDirective {
         return Injector.create({
             providers: [
                 {
-                    provide: CmsComponentData$1,
+                    provide: CmsComponentData,
                     useValue: this.getCmsDataForComponent(),
                 },
                 ...configProviders,
@@ -5062,7 +5061,7 @@ ProductCarouselService.decorators = [
 ];
 /** @nocollapse */
 ProductCarouselService.ctorParameters = () => [
-    { type: CmsComponentData$1 },
+    { type: CmsComponentData },
     { type: ProductService }
 ];
 
@@ -5128,7 +5127,7 @@ ProductCarouselModule.decorators = [
                                     {
                                         provide: ProductCarouselService,
                                         useClass: ProductCarouselService,
-                                        deps: [CmsComponentData$1, ProductService],
+                                        deps: [CmsComponentData, ProductService],
                                     },
                                     {
                                         provide: SharedCarouselService,
@@ -5239,7 +5238,7 @@ ProductReferencesService.decorators = [
 ];
 /** @nocollapse */
 ProductReferencesService.ctorParameters = () => [
-    { type: CmsComponentData$1 },
+    { type: CmsComponentData },
     { type: ProductReferenceService },
     { type: RoutingService }
 ];
@@ -5309,7 +5308,7 @@ ProductReferencesModule.decorators = [
                                     {
                                         provide: ProductReferencesService,
                                         useClass: ProductReferencesService,
-                                        deps: [CmsComponentData$1, ProductReferenceService, RoutingService],
+                                        deps: [CmsComponentData, ProductReferenceService, RoutingService],
                                     },
                                     {
                                         provide: SharedCarouselService,
@@ -9241,7 +9240,7 @@ BannerComponent.decorators = [
 ];
 /** @nocollapse */
 BannerComponent.ctorParameters = () => [
-    { type: CmsComponentData$1 }
+    { type: CmsComponentData }
 ];
 
 /**
@@ -9297,7 +9296,7 @@ LinkComponent.decorators = [
 ];
 /** @nocollapse */
 LinkComponent.ctorParameters = () => [
-    { type: CmsComponentData$1 }
+    { type: CmsComponentData }
 ];
 
 /**
@@ -9345,7 +9344,7 @@ ParagraphComponent.decorators = [
 ];
 /** @nocollapse */
 ParagraphComponent.ctorParameters = () => [
-    { type: CmsComponentData$1 }
+    { type: CmsComponentData }
 ];
 
 /**
@@ -11482,7 +11481,7 @@ BreadcrumbComponent.decorators = [
 ];
 /** @nocollapse */
 BreadcrumbComponent.ctorParameters = () => [
-    { type: CmsComponentData$1 },
+    { type: CmsComponentData },
     { type: PageMetaService },
     { type: TranslationService }
 ];
@@ -11637,7 +11636,7 @@ NavigationComponentService.decorators = [
 /** @nocollapse */
 NavigationComponentService.ctorParameters = () => [
     { type: CmsService },
-    { type: CmsComponentData$1, decorators: [{ type: Optional }] }
+    { type: CmsComponentData, decorators: [{ type: Optional }] }
 ];
 
 /**
@@ -11725,7 +11724,7 @@ NavigationModule.decorators = [
                                     {
                                         provide: NavigationComponentService,
                                         useClass: NavigationComponentService,
-                                        deps: [CmsService, CmsComponentData$1],
+                                        deps: [CmsService, CmsComponentData],
                                     },
                                 ],
                             },
@@ -11759,7 +11758,7 @@ CategoryNavigationModule.decorators = [
                                     {
                                         provide: NavigationComponentService,
                                         useClass: NavigationComponentService,
-                                        deps: [CmsService, CmsComponentData$1],
+                                        deps: [CmsService, CmsComponentData],
                                     },
                                 ],
                             },
@@ -11805,7 +11804,7 @@ FooterNavigationModule.decorators = [
                                     {
                                         provide: NavigationComponentService,
                                         useClass: NavigationComponentService,
-                                        deps: [CmsService, CmsComponentData$1],
+                                        deps: [CmsService, CmsComponentData],
                                     },
                                 ],
                             },
@@ -13313,6 +13312,6 @@ StorefrontModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { CartComponentModule, AddedToCartDialogComponent, AddToCartComponent, AddToCartModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, OrderSummaryComponent, CartSharedModule, CartNotEmptyGuard, CartTotalsComponent, CartTotalsModule, MiniCartComponent, MiniCartModule, CmsLibModule, BannerComponent, BannerModule, LinkComponent, LinkModule, ParagraphComponent, CmsParagraphModule, TabParagraphContainerComponent, TabParagraphContainerModule, GlobalMessageComponentModule, GlobalMessageComponent, fontawesomeIconConfig, IconLoaderService, IconComponent, ICON_TYPE, IconConfig, IconResourceType, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, CloseAccountModule, CloseAccountModalComponent, CloseAccountComponent, ConsentManagementFormComponent, ConsentManagementComponent, ConsentManagementModule, ForgotPasswordComponent, ForgotPasswordModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, PaymentMethodsComponent, PaymentMethodsModule, ResetPasswordFormComponent, ResetPasswordModule, UpdateEmailFormComponent, UpdateEmailComponent, UpdateEmailModule, UpdatePasswordFormComponent, UpdatePasswordComponent, UpdatePasswordModule, UpdateProfileFormComponent, UpdateProfileComponent, UpdateProfileModule, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, FooterNavigationComponent, FooterNavigationModule, NavigationComponentService, NavigationComponent, NavigationModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, CurrentProductService, ProductDetailsComponent, ProductDetailsModule, ProductImagesComponent, ProductSummaryComponent, ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent, ProductDetailOutlets, ProductTabsOutlets, ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule, AbstractStoreItemComponent, ScheduleComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderPaginationDetailsComponent, StoreFinderListComponent, StoreFinderSearchResultComponent, StoreFinderSearchComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StoreFinderComponent, StoreFinderModule, LoginFormComponent, LoginFormModule, LoginComponent, LoginModule, LogoutGuard, RegisterComponent, RegisterComponentModule, UserComponentModule, CmsModule$1 as CmsModule, CmsPageGuard, OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService, StyleRefDirective, StyleRefModule, ComponentWrapperDirective, PageComponentModule, defaultCmsContentConfig, CmsComponentData$1 as CmsComponentData, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, pwaConfigurationFactory, pwaFactory, PwaModule, PWAModuleConfig, defaultPWAModuleConfig, CmsRouteModule, SuffixRoutesModule, SeoMetaService, initSeoService, SeoModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, LayoutModule, MainModule, StorefrontComponent, CheckoutComponentModule, CheckoutDetailsService, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressComponent, CheckoutProgressModule, DeliveryModeComponent, DeliveryModeModule, OrderConfirmationComponent, OrderConfirmationModule, BillingAddressFormComponent, BillingAddressFormModule, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PlaceOrderComponent, PlaceOrderModule, PromotionsComponent, PromotionsModule, ReviewSubmitComponent, ReviewSubmitModule, SuggestedAddressDialogComponent, AddressFormComponent, AddressFormModule, ShippingAddressComponent, ShippingAddressModule, CheckoutConfig, CheckoutStepType, OrderConfirmationPageGuard, CheckoutGuard, DeliveryModeSetGuard, ShippingAddressSetGuard, PaymentDetailsSetGuard, StorefrontModule, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, UiModule, FormComponentsModule, ItemCounterComponent, GenericLinkComponent, GenericLinkModule, ListNavigationModule, PaginationComponent, SortingComponent, MediaComponent, MediaModule, MediaService, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, OnlyNumberDirective, AutoFocusDirective, FormUtils, NavigationUIComponent as ɵc, HighlightPipe as ɵd, ProductCarouselService as ɵi, ProductReferencesService as ɵk, SharedCarouselService as ɵj, ProductTabsComponent as ɵh, LoginComponentService as ɵo, OutletStyleService as ɵg, defaultCartPageConfig as ɵt, AddToHomeScreenService as ɵn, addCmsRoute as ɵu, suffixUrlMatcher as ɵv, htmlLangProvider as ɵw, setHtmlLangAttribute as ɵx, CmsGuardsService as ɵs, CmsI18nService as ɵr, CmsMappingService as ɵq, CmsRoutesService as ɵp, BootstrapModule as ɵa, CheckoutConfigService as ɵm, defaultCheckoutConfig as ɵl, provideConfigFromMetaTags as ɵbb, defaultRoutingConfig as ɵz, defaultStorefrontRoutesConfig as ɵy, OrderConfirmationPageModule as ɵba, CardComponent as ɵf, CardModule as ɵe, AutoFocusDirectiveModule as ɵb };
+export { CartComponentModule, AddedToCartDialogComponent, AddToCartComponent, AddToCartModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, OrderSummaryComponent, CartSharedModule, CartNotEmptyGuard, CartTotalsComponent, CartTotalsModule, MiniCartComponent, MiniCartModule, CmsLibModule, BannerComponent, BannerModule, LinkComponent, LinkModule, ParagraphComponent, CmsParagraphModule, TabParagraphContainerComponent, TabParagraphContainerModule, GlobalMessageComponentModule, GlobalMessageComponent, fontawesomeIconConfig, IconLoaderService, IconComponent, ICON_TYPE, IconConfig, IconResourceType, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, CloseAccountModule, CloseAccountModalComponent, CloseAccountComponent, ConsentManagementFormComponent, ConsentManagementComponent, ConsentManagementModule, ForgotPasswordComponent, ForgotPasswordModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, PaymentMethodsComponent, PaymentMethodsModule, ResetPasswordFormComponent, ResetPasswordModule, UpdateEmailFormComponent, UpdateEmailComponent, UpdateEmailModule, UpdatePasswordFormComponent, UpdatePasswordComponent, UpdatePasswordModule, UpdateProfileFormComponent, UpdateProfileComponent, UpdateProfileModule, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, FooterNavigationComponent, FooterNavigationModule, NavigationComponentService, NavigationComponent, NavigationModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, CurrentProductService, ProductDetailsComponent, ProductDetailsModule, ProductImagesComponent, ProductSummaryComponent, ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent, ProductDetailOutlets, ProductTabsOutlets, ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule, AbstractStoreItemComponent, ScheduleComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderPaginationDetailsComponent, StoreFinderListComponent, StoreFinderSearchResultComponent, StoreFinderSearchComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StoreFinderComponent, StoreFinderModule, LoginFormComponent, LoginFormModule, LoginComponent, LoginModule, LogoutGuard, RegisterComponent, RegisterComponentModule, UserComponentModule, CmsModule$1 as CmsModule, CmsPageGuard, OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService, StyleRefDirective, StyleRefModule, ComponentWrapperDirective, PageComponentModule, defaultCmsContentConfig, CmsComponentData, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, pwaConfigurationFactory, pwaFactory, PwaModule, PWAModuleConfig, defaultPWAModuleConfig, CmsRouteModule, SuffixRoutesModule, SeoMetaService, initSeoService, SeoModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, LayoutModule, MainModule, StorefrontComponent, CheckoutComponentModule, CheckoutDetailsService, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressComponent, CheckoutProgressModule, DeliveryModeComponent, DeliveryModeModule, OrderConfirmationComponent, OrderConfirmationModule, BillingAddressFormComponent, BillingAddressFormModule, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PlaceOrderComponent, PlaceOrderModule, PromotionsComponent, PromotionsModule, ReviewSubmitComponent, ReviewSubmitModule, SuggestedAddressDialogComponent, AddressFormComponent, AddressFormModule, ShippingAddressComponent, ShippingAddressModule, CheckoutConfig, CheckoutStepType, OrderConfirmationPageGuard, CheckoutGuard, DeliveryModeSetGuard, ShippingAddressSetGuard, PaymentDetailsSetGuard, StorefrontModule, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, UiModule, FormComponentsModule, ItemCounterComponent, GenericLinkComponent, GenericLinkModule, ListNavigationModule, PaginationComponent, SortingComponent, MediaComponent, MediaModule, MediaService, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, OnlyNumberDirective, AutoFocusDirective, FormUtils, NavigationUIComponent as ɵc, HighlightPipe as ɵd, ProductCarouselService as ɵi, ProductReferencesService as ɵk, SharedCarouselService as ɵj, ProductTabsComponent as ɵh, LoginComponentService as ɵo, OutletStyleService as ɵg, defaultCartPageConfig as ɵt, AddToHomeScreenService as ɵn, addCmsRoute as ɵu, suffixUrlMatcher as ɵv, htmlLangProvider as ɵw, setHtmlLangAttribute as ɵx, CmsGuardsService as ɵs, CmsI18nService as ɵr, CmsMappingService as ɵq, CmsRoutesService as ɵp, BootstrapModule as ɵa, CheckoutConfigService as ɵm, defaultCheckoutConfig as ɵl, provideConfigFromMetaTags as ɵbb, defaultRoutingConfig as ɵz, defaultStorefrontRoutesConfig as ɵy, OrderConfirmationPageModule as ɵba, CardComponent as ɵf, CardModule as ɵe, AutoFocusDirectiveModule as ɵb };
 
 //# sourceMappingURL=spartacus-storefront.js.map

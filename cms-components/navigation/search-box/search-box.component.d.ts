@@ -1,6 +1,6 @@
 import { OnInit } from '@angular/core';
 import { CmsSearchBoxComponent } from '@spartacus/core';
-import { CmsComponentData } from 'projects/storefrontlib/src/cms-structure/page/model/cms-component-data';
+import { CmsComponentData } from '../../../cms-structure/page/model/cms-component-data';
 import { Observable } from 'rxjs';
 import { ICON_TYPE } from '../../../cms-components/misc/icon/index';
 import { SearchBoxComponentService } from './search-box-component.service';
