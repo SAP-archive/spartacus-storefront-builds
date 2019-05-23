@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/service-worker'), require('@angular/common/http'), require('@ng-bootstrap/ng-bootstrap'), require('@angular/forms'), require('@ng-select/ng-select'), require('rxjs'), require('@angular/platform-browser'), require('rxjs/operators'), require('@spartacus/core'), require('@angular/router'), require('@angular/common'), require('@angular/core')) :
-    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@angular/service-worker', '@angular/common/http', '@ng-bootstrap/ng-bootstrap', '@angular/forms', '@ng-select/ng-select', 'rxjs', '@angular/platform-browser', 'rxjs/operators', '@spartacus/core', '@angular/router', '@angular/common', '@angular/core'], factory) :
-    (factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}),global.ng['service-worker'],global.ng.common.http,global.ngBootstrap,global.ng.forms,global.ngSelect,global.rxjs,global.ng.platformBrowser,global.rxjs.operators,global.core,global.ng.router,global.ng.common,global.ng.core));
-}(this, (function (exports,serviceWorker,http,ngBootstrap,forms,ngSelect,rxjs,i1,operators,i1$1,i4,common,i0) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/service-worker'), require('@angular/common/http'), require('@ng-bootstrap/ng-bootstrap'), require('@angular/forms'), require('@ng-select/ng-select'), require('rxjs'), require('rxjs/operators'), require('@angular/platform-browser'), require('@spartacus/core'), require('@angular/router'), require('@angular/common'), require('@angular/core')) :
+    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@angular/service-worker', '@angular/common/http', '@ng-bootstrap/ng-bootstrap', '@angular/forms', '@ng-select/ng-select', 'rxjs', 'rxjs/operators', '@angular/platform-browser', '@spartacus/core', '@angular/router', '@angular/common', '@angular/core'], factory) :
+    (factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}),global.ng['service-worker'],global.ng.common.http,global.ngBootstrap,global.ng.forms,global.ngSelect,global.rxjs,global.rxjs.operators,global.ng.platformBrowser,global.core,global.ng.router,global.ng.common,global.ng.core));
+}(this, (function (exports,serviceWorker,http,ngBootstrap,forms,ngSelect,rxjs,operators,i1,i1$1,i4,common,i0) { 'use strict';
 
     /**
      * @fileoverview added by tsickle
@@ -15594,6 +15594,54 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var OrderConfirmationPageGuard = /** @class */ (function () {
+        function OrderConfirmationPageGuard(checkoutService, routingService) {
+            this.checkoutService = checkoutService;
+            this.routingService = routingService;
+        }
+        /**
+         * @return {?}
+         */
+        OrderConfirmationPageGuard.prototype.canActivate = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                return this.checkoutService.getOrderDetails().pipe(operators.map(function (orderDetails) {
+                    if (orderDetails && Object.keys(orderDetails).length !== 0) {
+                        return true;
+                    }
+                    else {
+                        _this.routingService.go({ cxRoute: 'orders' });
+                        return false;
+                    }
+                }));
+            };
+        OrderConfirmationPageGuard.decorators = [
+            { type: i0.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        OrderConfirmationPageGuard.ctorParameters = function () {
+            return [
+                { type: i1$1.CheckoutService },
+                { type: i1$1.RoutingService }
+            ];
+        };
+        /** @nocollapse */ OrderConfirmationPageGuard.ngInjectableDef = i0.defineInjectable({ factory: function OrderConfirmationPageGuard_Factory() { return new OrderConfirmationPageGuard(i0.inject(i1$1.CheckoutService), i0.inject(i1$1.RoutingService)); }, token: OrderConfirmationPageGuard, providedIn: "root" });
+        return OrderConfirmationPageGuard;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
 
     /**
      * @fileoverview added by tsickle
@@ -15672,49 +15720,6 @@
                     },] }
         ];
         return CartPageModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var OrderConfirmationPageGuard = /** @class */ (function () {
-        function OrderConfirmationPageGuard(checkoutService, routingService) {
-            this.checkoutService = checkoutService;
-            this.routingService = routingService;
-        }
-        /**
-         * @return {?}
-         */
-        OrderConfirmationPageGuard.prototype.canActivate = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                return this.checkoutService.getOrderDetails().pipe(operators.map(function (orderDetails) {
-                    if (orderDetails && Object.keys(orderDetails).length !== 0) {
-                        return true;
-                    }
-                    else {
-                        _this.routingService.go({ cxRoute: 'orders' });
-                        return false;
-                    }
-                }));
-            };
-        OrderConfirmationPageGuard.decorators = [
-            { type: i0.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */
-        OrderConfirmationPageGuard.ctorParameters = function () {
-            return [
-                { type: i1$1.CheckoutService },
-                { type: i1$1.RoutingService }
-            ];
-        };
-        /** @nocollapse */ OrderConfirmationPageGuard.ngInjectableDef = i0.defineInjectable({ factory: function OrderConfirmationPageGuard_Factory() { return new OrderConfirmationPageGuard(i0.inject(i1$1.CheckoutService), i0.inject(i1$1.RoutingService)); }, token: OrderConfirmationPageGuard, providedIn: "root" });
-        return OrderConfirmationPageGuard;
     }());
 
     /**
@@ -16198,6 +16203,11 @@
     exports.ShippingAddressModule = ShippingAddressModule;
     exports.CheckoutConfig = CheckoutConfig;
     exports.CheckoutStepType = CheckoutStepType;
+    exports.OrderConfirmationPageGuard = OrderConfirmationPageGuard;
+    exports.CheckoutGuard = CheckoutGuard;
+    exports.DeliveryModeSetGuard = DeliveryModeSetGuard;
+    exports.ShippingAddressSetGuard = ShippingAddressSetGuard;
+    exports.PaymentDetailsSetGuard = PaymentDetailsSetGuard;
     exports.StorefrontModule = StorefrontModule;
     exports.PagesModule = PagesModule;
     exports.ProductPageComponent = ProductPageComponent;
@@ -16227,30 +16237,25 @@
     exports.ɵk = ProductReferencesService;
     exports.ɵj = SharedCarouselService;
     exports.ɵh = ProductTabsComponent;
-    exports.ɵs = LoginComponentService;
+    exports.ɵo = LoginComponentService;
     exports.ɵg = OutletStyleService;
-    exports.ɵx = defaultCartPageConfig;
-    exports.ɵp = AddToHomeScreenService;
-    exports.ɵy = addCmsRoute;
-    exports.ɵz = suffixUrlMatcher;
-    exports.ɵba = htmlLangProvider;
-    exports.ɵbb = setHtmlLangAttribute;
-    exports.ɵw = CmsGuardsService;
-    exports.ɵv = CmsI18nService;
-    exports.ɵu = CmsMappingService;
-    exports.ɵt = CmsRoutesService;
+    exports.ɵt = defaultCartPageConfig;
+    exports.ɵn = AddToHomeScreenService;
+    exports.ɵu = addCmsRoute;
+    exports.ɵv = suffixUrlMatcher;
+    exports.ɵw = htmlLangProvider;
+    exports.ɵx = setHtmlLangAttribute;
+    exports.ɵs = CmsGuardsService;
+    exports.ɵr = CmsI18nService;
+    exports.ɵq = CmsMappingService;
+    exports.ɵp = CmsRoutesService;
     exports.ɵa = BootstrapModule;
-    exports.ɵo = CheckoutConfigService;
+    exports.ɵm = CheckoutConfigService;
     exports.ɵl = defaultCheckoutConfig;
-    exports.ɵm = CheckoutGuard;
-    exports.ɵq = DeliveryModeSetGuard;
-    exports.ɵbf = OrderConfirmationPageGuard;
-    exports.ɵr = PaymentDetailsSetGuard;
-    exports.ɵn = ShippingAddressSetGuard;
-    exports.ɵbg = provideConfigFromMetaTags;
-    exports.ɵbd = defaultRoutingConfig;
-    exports.ɵbc = defaultStorefrontRoutesConfig;
-    exports.ɵbe = OrderConfirmationPageModule;
+    exports.ɵbb = provideConfigFromMetaTags;
+    exports.ɵz = defaultRoutingConfig;
+    exports.ɵy = defaultStorefrontRoutesConfig;
+    exports.ɵba = OrderConfirmationPageModule;
     exports.ɵf = CardComponent;
     exports.ɵe = CardModule;
     exports.ɵc = GenericLinkModule;
