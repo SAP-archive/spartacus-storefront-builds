@@ -2,7 +2,8 @@
  * Generated bundle index. Do not edit.
  */
 export * from './public_api';
-export { NavigationUIComponent as ɵd } from './cms-components/navigation/navigation/navigation-ui.component';
+export { NavigationUIComponent as ɵc } from './cms-components/navigation/navigation/navigation-ui.component';
+export { HighlightPipe as ɵd } from './cms-components/navigation/search-box/highlight.pipe';
 export { ProductCarouselService as ɵi } from './cms-components/product/carousel/product-carousel/product-carousel.component.service';
 export { ProductReferencesService as ɵk } from './cms-components/product/carousel/product-references/product-references.component.service';
 export { SharedCarouselService as ɵj } from './cms-components/product/carousel/shared-carousel.service';
@@ -26,5 +27,4 @@ export { defaultRoutingConfig as ɵz, defaultStorefrontRoutesConfig as ɵy } fro
 export { OrderConfirmationPageModule as ɵba } from './lib/ui/pages/order-confirmation-page/order-confirmation-page.module';
 export { CardComponent as ɵf } from './shared/components/card/card.component';
 export { CardModule as ɵe } from './shared/components/card/card.module';
-export { GenericLinkModule as ɵc } from './shared/components/generic-link/generic-link.module';
 export { AutoFocusDirectiveModule as ɵb } from './shared/directives/auto-focus/auto-focus.directive.module';

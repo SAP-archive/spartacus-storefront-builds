@@ -1,6 +1,6 @@
 import { OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { ProductSearchService, SearchConfig, ProductSearchPage } from '@spartacus/core';
+import { ProductSearchPage, ProductSearchService, SearchConfig } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { PageLayoutService } from '../../../../cms-structure/page/index';
 import { ViewModes } from '../product-view/product-view.component';

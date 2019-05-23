@@ -1,5 +1,5 @@
 import { OccConfig } from '@spartacus/core';
-import { LayoutConfig } from '../../../layout/index';
+import { LayoutConfig } from '../../../layout/config/layout-config';
 import { Media } from './media.model';
 export declare class MediaService {
     protected config: OccConfig;

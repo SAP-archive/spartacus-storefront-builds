@@ -1,0 +1,9 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export { SearchBoxComponentService } from './search-box-component.service';
+export { SearchBoxComponent } from './search-box.component';
+export {} from './search-box.model';
+export { SearchBoxModule } from './search-box.module';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJjbXMtY29tcG9uZW50cy9uYXZpZ2F0aW9uL3NlYXJjaC1ib3gvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLDBDQUFjLGdDQUFnQyxDQUFDO0FBQy9DLG1DQUFjLHdCQUF3QixDQUFDO0FBQ3ZDLGVBQWMsb0JBQW9CLENBQUM7QUFDbkMsZ0NBQWMscUJBQXFCLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgKiBmcm9tICcuL3NlYXJjaC1ib3gtY29tcG9uZW50LnNlcnZpY2UnO1xuZXhwb3J0ICogZnJvbSAnLi9zZWFyY2gtYm94LmNvbXBvbmVudCc7XG5leHBvcnQgKiBmcm9tICcuL3NlYXJjaC1ib3gubW9kZWwnO1xuZXhwb3J0ICogZnJvbSAnLi9zZWFyY2gtYm94Lm1vZHVsZSc7XG4iXX0=
