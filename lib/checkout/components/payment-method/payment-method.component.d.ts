@@ -4,6 +4,7 @@ import { Address, CartDataService, CheckoutService, GlobalMessageService, Routin
 import { ActivatedRoute } from '@angular/router';
 import { Card } from '../../../../shared/components/card/card.component';
 import { CheckoutConfigService } from '../../checkout-config.service';
+import { ICON_TYPE } from '../../../../cms-components/misc/icon';
 export declare class PaymentMethodComponent implements OnInit, OnDestroy {
     protected cartData: CartDataService;
     protected userService: UserService;
@@ -14,6 +15,7 @@ export declare class PaymentMethodComponent implements OnInit, OnDestroy {
     private checkoutConfigService;
     private activatedRoute;
     private translation;
+    iconTypes: typeof ICON_TYPE;
     newPaymentFormManuallyOpened: boolean;
     existingPaymentMethods$: Observable<PaymentDetails[]>;
     isLoading$: Observable<boolean>;
@@ -41,4 +43,5 @@ export declare class PaymentMethodComponent implements OnInit, OnDestroy {
         billingAddress?: Address;
     }): void;
     ngOnDestroy(): void;
+    protected getCardIcon(code: string): string;
 }

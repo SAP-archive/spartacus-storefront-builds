@@ -1,4 +1,5 @@
 import { OnInit, EventEmitter } from '@angular/core';
+import { ICON_TYPE } from '../../../cms-components/misc/icon';
 export interface CardAction {
     event: string;
     name: string;
@@ -17,6 +18,7 @@ export interface Card {
     deleteMsg?: string;
 }
 export declare class CardComponent implements OnInit {
+    iconTypes: typeof ICON_TYPE;
     deleteCard: EventEmitter<number>;
     setDefaultCard: EventEmitter<number>;
     sendCard: EventEmitter<number>;

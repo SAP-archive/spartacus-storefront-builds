@@ -7,7 +7,7 @@ import { FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, FormB
 import { fromEvent, of, BehaviorSubject, concat, from, isObservable, Subscription, combineLatest, merge, Subject } from 'rxjs';
 import { Title, Meta } from '@angular/platform-browser';
 import { debounceTime, distinctUntilChanged, map, startWith, filter, switchMap, take, tap, endWith, first, skipWhile, withLatestFrom, pluck, shareReplay, delay } from 'rxjs/operators';
-import { ServerConfig, WindowRef, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, AuthService, CartService, CmsService, defaultCmsModuleConfig, CmsModule, Config, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, UserService, CartModule, CmsPageTitleModule, ProductModule, ProductSearchService, NotAuthGuard, StoreFinderCoreModule, CartDataService, GlobalMessageModule, ProductReviewService, OccConfig, ContextServiceMap, SiteContextModule, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID } from '@spartacus/core';
+import { ServerConfig, WindowRef, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CheckoutService, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, AuthService, CartService, CmsService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, UserService, CartModule, CmsPageTitleModule, ProductModule, ProductSearchService, NotAuthGuard, StoreFinderCoreModule, CartDataService, GlobalMessageModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, OccConfig, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Injector, Inject, PLATFORM_ID, HostBinding, TemplateRef, ViewContainerRef, Optional, ViewEncapsulation, defineInjectable, inject, INJECTOR, ChangeDetectorRef } from '@angular/core';
@@ -1262,6 +1262,10 @@ const ICON_TYPE = {
     WARNING: 'WARNING',
     SUCCESS: 'SUCCESS',
     VISA: 'VISA',
+    MASTER_CARD: 'MASTER_CARD',
+    AMEX: 'AMEX',
+    DINERS_CLUB: 'DINERS_CLUB',
+    CREDIT_CARD: 'CREDIT_CARD',
     PLUS: 'PLUS',
     MINUS: 'MINUS',
 };
@@ -1296,6 +1300,10 @@ const fontawesomeIconConfig = {
             SUCCESS: 'fas fa-check-circle',
             TIMES: 'fas fa-times',
             VISA: 'fab fa-cc-visa',
+            MASTER_CARD: 'fab fa-cc-mastercard',
+            AMEX: 'fab fa-cc-amex',
+            DINERS_CLUB: 'fab fa-cc-diners-club',
+            CREDIT_CARD: 'fas fa-credit-card',
             MINUS: 'fas fa-minus',
             PLUS: 'fas fa-plus',
         },
@@ -5900,6 +5908,7 @@ AddressFormModule.decorators = [
  */
 class CardComponent {
     constructor() {
+        this.iconTypes = ICON_TYPE;
         this.deleteCard = new EventEmitter();
         this.setDefaultCard = new EventEmitter();
         this.sendCard = new EventEmitter();
@@ -5957,7 +5966,7 @@ class CardComponent {
 CardComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-card',
-                template: "<div\n  *ngIf=\"content\"\n  class=\"cx-card\"\n  [class.cx-card-border]=\"border\"\n  [class.cx-card-fit-to-container]=\"fitToContainer\"\n>\n  <!-- Card Header -->\n  <div *ngIf=\"content.header && !editMode\" class=\"card-header\">\n    {{ content.header }}\n  </div>\n  <!-- Card Body -->\n  <div class=\"card-body cx-card-body\" [class.cx-card-delete]=\"editMode\">\n    <!-- Edit message -->\n    <div *ngIf=\"editMode\" class=\"cx-card-delete-msg\">\n      {{ content.deleteMsg }}\n    </div>\n    <!-- Card title -->\n    <h4 *ngIf=\"content.title\" class=\"cx-card-title\">\n      {{ content.title }}\n    </h4>\n    <!-- Card Content -->\n    <div class=\"cx-card-container\">\n      <!-- Card Label -->\n      <div class=\"cx-card-label-container\">\n        <div *ngIf=\"content.textBold\" class=\"cx-card-label-bold\">\n          {{ content.textBold }}\n        </div>\n        <div *ngFor=\"let line of content.text\">\n          <div class=\"cx-card-label\">{{ line }}</div>\n        </div>\n      </div>\n      <!-- Image -->\n      <div *ngIf=\"content.img\" class=\"cx-card-img-container\">\n        <img src=\"{{ content.img }}\" alt=\"\" />\n      </div>\n    </div>\n    <!-- Edit Mode Actions -->\n    <div *ngIf=\"editMode\" class=\"row cx-card-body-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-primary\" (click)=\"delete()\">\n          {{ 'common.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <!-- Actions -->\n    <div *ngIf=\"content.actions && !editMode\" class=\"cx-card-actions\">\n      <div *ngFor=\"let action of content.actions\">\n        <div [ngSwitch]=\"action.event\">\n          <a\n            *ngSwitchCase=\"'delete'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"delete()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'default'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"setDefault()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'send'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"send()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'edit'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"edit()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchDefault\n            href=\"{{ action.link }}\"\n            class=\"card-link btn-link\"\n            >{{ action.name }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                template: "<div\n  *ngIf=\"content\"\n  class=\"cx-card\"\n  [class.cx-card-border]=\"border\"\n  [class.cx-card-fit-to-container]=\"fitToContainer\"\n>\n  <!-- Card Header -->\n  <div *ngIf=\"content.header && !editMode\" class=\"card-header\">\n    {{ content.header }}\n  </div>\n  <!-- Card Body -->\n  <div class=\"card-body cx-card-body\" [class.cx-card-delete]=\"editMode\">\n    <!-- Edit message -->\n    <div *ngIf=\"editMode\" class=\"cx-card-delete-msg\">\n      {{ content.deleteMsg }}\n    </div>\n    <!-- Card title -->\n    <h4 *ngIf=\"content.title\" class=\"cx-card-title\">\n      {{ content.title }}\n    </h4>\n    <!-- Card Content -->\n    <div class=\"cx-card-container\">\n      <!-- Card Label -->\n      <div class=\"cx-card-label-container\">\n        <div *ngIf=\"content.textBold\" class=\"cx-card-label-bold\">\n          {{ content.textBold }}\n        </div>\n        <div *ngFor=\"let line of content.text\">\n          <div class=\"cx-card-label\">{{ line }}</div>\n        </div>\n      </div>\n      <!-- Image -->\n      <div *ngIf=\"content.img\" class=\"cx-card-img-container\">\n        <cx-icon [type]=\"content.img\"></cx-icon>\n      </div>\n    </div>\n    <!-- Edit Mode Actions -->\n    <div *ngIf=\"editMode\" class=\"row cx-card-body-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-primary\" (click)=\"delete()\">\n          {{ 'common.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <!-- Actions -->\n    <div *ngIf=\"content.actions && !editMode\" class=\"cx-card-actions\">\n      <div *ngFor=\"let action of content.actions\">\n        <div [ngSwitch]=\"action.event\">\n          <a\n            *ngSwitchCase=\"'delete'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"delete()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'default'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"setDefault()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'send'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"send()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'edit'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"edit()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchDefault\n            href=\"{{ action.link }}\"\n            class=\"card-link btn-link\"\n            >{{ action.name }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
                 styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-card-border{border-width:var(--cx-border-width,1px);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light))}.cx-card-container{display:var(--cx-display,flex)}.cx-card-label-container{flex-grow:var(--cx-flex-grow,2)}.cx-card-fit-to-container{width:var(--cx-width,100%);height:var(--cx-height,100%);display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column)}.cx-card-body{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column);justify-content:var(--cx-justify-content,space-between)}.cx-card-delete{background-color:var(--cx-background-color,var(--cx-g-color-background))}.cx-card-body-delete{padding:var(--cx-padding,1rem 0 0 0)}.cx-card-delete-msg{color:var(--cx-color,var(--cx-g-color-danger));padding:var(--cx-padding,0 0 1.25rem 0)}.cx-card-actions{display:var(--cx-display,flex);justify-content:var(--cx-justify-content,flex-end);padding:var(--cx-padding,1.25rem 0 0 0)}.cx-card-link{padding:var(--cx-padding,0 0 0 1rem)}"]
             }] }
 ];
@@ -5984,7 +5993,7 @@ class CardModule {
 }
 CardModule.decorators = [
     { type: NgModule, args: [{
-                imports: [CommonModule, I18nModule],
+                imports: [CommonModule, I18nModule, IconModule],
                 declarations: [CardComponent],
                 exports: [CardComponent],
             },] }
@@ -11850,24 +11859,6 @@ PaymentFormModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/** @type {?} */
-const masterCardImgSrc = 
-// tslint:disable-next-line:max-line-length
-'data:image/gif;base64,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';
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-const visaImgSrc = 
-// tslint:disable-next-line:max-line-length
-'data:image/gif;base64,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';
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class PaymentMethodComponent {
     /**
      * @param {?} cartData
@@ -11890,6 +11881,7 @@ class PaymentMethodComponent {
         this.checkoutConfigService = checkoutConfigService;
         this.activatedRoute = activatedRoute;
         this.translation = translation;
+        this.iconTypes = ICON_TYPE;
         this.newPaymentFormManuallyOpened = false;
     }
     /**
@@ -11936,19 +11928,11 @@ class PaymentMethodComponent {
             this.translation.translate('paymentCard.selected'),
         ]).pipe(map(([textExpires, textUseThisPayment, textDefaultPaymentMethod, textSelected,]) => {
             /** @type {?} */
-            let ccImage;
-            if (payment.cardType.code === 'visa') {
-                ccImage = visaImgSrc;
-            }
-            else if (payment.cardType.code === 'master') {
-                ccImage = masterCardImgSrc;
-            }
-            /** @type {?} */
             const card = {
                 title: payment.defaultPayment ? textDefaultPaymentMethod : '',
                 textBold: payment.accountHolderName,
                 text: [payment.cardNumber, textExpires],
-                img: ccImage,
+                img: this.getCardIcon(payment.cardType.code),
                 actions: [{ name: textUseThisPayment, event: 'send' }],
             };
             if (this.selectedPayment && this.selectedPayment.id === payment.id) {
@@ -12043,6 +12027,31 @@ class PaymentMethodComponent {
         if (this.getDeliveryAddressSub) {
             this.getDeliveryAddressSub.unsubscribe();
         }
+    }
+    /**
+     * @protected
+     * @param {?} code
+     * @return {?}
+     */
+    getCardIcon(code) {
+        /** @type {?} */
+        let ccIcon;
+        if (code === 'visa') {
+            ccIcon = this.iconTypes.VISA;
+        }
+        else if (code === 'master' || code === 'mastercard_eurocard') {
+            ccIcon = this.iconTypes.MASTER_CARD;
+        }
+        else if (code === 'diners') {
+            ccIcon = this.iconTypes.DINERS_CLUB;
+        }
+        else if (code === 'amex') {
+            ccIcon = this.iconTypes.AMEX;
+        }
+        else {
+            ccIcon = this.iconTypes.CREDIT_CARD;
+        }
+        return ccIcon;
     }
 }
 PaymentMethodComponent.decorators = [
