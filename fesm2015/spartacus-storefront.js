@@ -1141,13 +1141,13 @@ class IconComponent {
         if (this.useSvg) {
             return;
         }
-        if (!this.staticStyleClasses) {
-            // add static styles only once
-            this.staticStyleClasses =
-                this.elementRef.nativeElement.classList.value || '';
+        if (this.staticStyleClasses === undefined) {
+            this.staticStyleClasses = this.elementRef.nativeElement.classList.value
+                ? this.elementRef.nativeElement.classList.value + ' '
+                : '';
         }
         this.styleClasses =
-            this.staticStyleClasses + ' ' + this.iconLoader.getStyleClasses(type);
+            this.staticStyleClasses + this.iconLoader.getStyleClasses(type);
         this.iconLoader.addLinkResource(type);
     }
 }
