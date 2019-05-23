@@ -8,7 +8,7 @@ import { FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, FormB
 import { debounceTime, filter, map, switchMap, take, tap, skipWhile, distinctUntilChanged, startWith, endWith, first, withLatestFrom, delay, shareReplay, pluck } from 'rxjs/operators';
 import { Title, Meta } from '@angular/platform-browser';
 import { RouterModule, NavigationStart, Router, ActivatedRoute } from '@angular/router';
-import { ServerConfig, OccConfig, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsService, CheckoutService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CartModule, CmsPageTitleModule, NotAuthGuard, CartService, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, ProductSearchService, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
+import { ServerConfig, OccConfig, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, PageType, CmsConfig, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsService, CheckoutService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CartModule, CmsPageTitleModule, NotAuthGuard, CartService, GlobalMessageModule, StoreFinderCoreModule, CartDataService, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, ProductSearchService, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Pipe, Injector, Inject, PLATFORM_ID, HostBinding, TemplateRef, ViewContainerRef, Optional, defineInjectable, inject, INJECTOR, ChangeDetectorRef } from '@angular/core';
 
@@ -2547,8 +2547,9 @@ const defaultLayoutConfig = {
         ProductDetailsPageTemplate: {
             slots: [
                 'TopHeaderSlot',
+                'ProductDetails',
                 'VariantSelectorSlot',
-                // 'AddToCart', the add to cart is currently hard coded in the PDP component
+                // 'AddToCart', // the add to cart is currently hard coded in the PDP component
                 'UpSelling',
                 'CrossSelling',
                 'Tabs',
@@ -3516,7 +3517,7 @@ class PageSlotComponent {
 PageSlotComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-page-slot',
-                template: "<ng-container *cxOutlet=\"(position$ | async)\">\n  <ng-container *ngFor=\"let component of (components$ | async)\">\n    <ng-container\n      *cxOutlet=\"component.flexType\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-container>\n  </ng-container>\n</ng-container>\n",
+                template: "<ng-container *cxOutlet=\"(position$ | async)\">\n  <!-- position: {{ position$ | async }} -->\n  <ng-container *ngFor=\"let component of (components$ | async)\">\n    <!-- flexType: {{ component.flexType }} -->\n    <ng-container\n      *cxOutlet=\"component.flexType\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-container>\n  </ng-container>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -4268,7 +4269,7 @@ class PageLayoutComponent {
 PageLayoutComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-page-layout',
-                template: "<ng-container *cxOutlet=\"(layoutName$ | async)\">\n  <ng-content></ng-content>\n  <cx-page-slot\n    *ngFor=\"let slot of (slots$ | async)\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-container>\n",
+                template: "<!-- ???? {{ layoutName$ | async }} -->\n<ng-container *cxOutlet=\"(layoutName$ | async)\">\n  <ng-content></ng-content>\n\n  <!-- {{ slots$ | async }} -->\n  <cx-page-slot\n    *ngFor=\"let slot of (slots$ | async)\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -4595,14 +4596,33 @@ const defaultPageHeaderConfig = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @type {?} */
+const defaultPdpComponents = {
+    CMSProductImages: {
+        typeCode: 'CMSProductImages',
+        flexType: 'CMSProductImages',
+        uid: 'CMSProductImages',
+    },
+};
+/** @type {?} */
+const defaultPdpSlots = {
+    ProductDetails: {
+        componentIds: ['CMSProductImages'],
+    },
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 /**
  * @return {?}
  */
 function defaultCmsContentConfig() {
     return {
         cmsStructure: {
-            components: Object.assign({}, headerComponents, cartComponents),
-            slots: Object.assign({}, defaultPageHeaderConfig),
+            components: Object.assign({}, headerComponents, cartComponents, defaultPdpComponents),
+            slots: Object.assign({}, defaultPageHeaderConfig, defaultPdpSlots),
             pages: [defaultCartPageConfig],
         },
     };
@@ -4903,16 +4923,13 @@ CmsRouteModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductPageComponent {
-    constructor() { }
 }
 ProductPageComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-product-page',
-                template: "<cx-page-layout>\n  <cx-product-details></cx-product-details>\n</cx-page-layout>\n"
+                template: "<cx-page-layout>\n  <ng-template cxOutletRef=\"ProductDetails\" cxOutletPos=\"after\">\n    <cx-product-details></cx-product-details>\n  </ng-template>\n</cx-page-layout>\n"
             }] }
 ];
-/** @nocollapse */
-ProductPageComponent.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
@@ -5362,78 +5379,25 @@ CurrentProductService.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/** @enum {string} */
-const ProductDetailOutlets = {
-    PAGE: 'PDP.PAGE',
-    SUMMARY: 'PDP.SUMMARY',
-    IMAGES: 'PDP.IMAGES',
-    TITLE: 'PDP.TITLE',
-    RATING: 'PDP.RATING',
-    ADDTOCART: 'PDP.ADDTOCART',
-    PRICE: 'PDP.PRICE',
-    SHARE: 'PDP.SHARE',
-};
-/** @enum {string} */
-const ProductTabsOutlets = {
-    DESCRIPTION: 'PDP.DESCRIPTION',
-    SPECIFICATIONS: 'PDP.SPECIFICATIONS',
-    REVIEWS: 'PDP.REVIEWS',
-    SHIPPING: 'PDP.SHIPPING',
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ProductDetailsComponent {
+/** @type {?} */
+const WAITING_CLASS = 'waiting';
+class ProductImagesComponent {
     /**
-     * @param {?} currentPageService
+     * @param {?} currentProductService
      */
-    constructor(currentPageService) {
-        this.currentPageService = currentPageService;
-    }
-    /**
-     * @return {?}
-     */
-    get outlets() {
-        return ProductDetailsComponent.outlets;
+    constructor(currentProductService) {
+        this.currentProductService = currentProductService;
+        this.imageContainer$ = new BehaviorSubject(null);
     }
     /**
      * @return {?}
      */
     ngOnInit() {
-        this.product$ = this.currentPageService.getProduct();
-    }
-}
-ProductDetailsComponent.outlets = ProductDetailOutlets;
-ProductDetailsComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-product-details',
-                template: "<ng-container *ngIf=\"(product$ | async) as product\">\n  <ng-container *cxOutlet=\"outlets.PAGE\">\n    <ng-container *cxOutlet=\"outlets.SUMMARY\">\n      <cx-product-summary class=\"container\" [product]=\"product\">\n        <cx-product-images [product]=\"product\"></cx-product-images>\n      </cx-product-summary>\n    </ng-container> </ng-container\n></ng-container>\n"
-            }] }
-];
-/** @nocollapse */
-ProductDetailsComponent.ctorParameters = () => [
-    { type: CurrentProductService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-const WAITING_CLASS = 'waiting';
-class ProductImagesComponent {
-    constructor() {
-        this.outlets = ProductDetailOutlets;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnChanges() {
-        if (this.product && this.product.images) {
-            this.mainImageContainer = this.product.images.PRIMARY;
-        }
+        this.product$ = this.currentProductService.getProduct().pipe(filter(Boolean), tap(p => {
+            if (!this.imageContainer$.value) {
+                this.imageContainer$.next(p.images.PRIMARY);
+            }
+        }));
     }
     /**
      * @param {?} event
@@ -5441,20 +5405,18 @@ class ProductImagesComponent {
      * @return {?}
      */
     showImage(event, imageContainer) {
-        if (this.mainImageContainer === imageContainer) {
+        if (this.imageContainer$.value === imageContainer) {
             return;
         }
         this.startWaiting((/** @type {?} */ (event.target)));
-        this.mainImageContainer = imageContainer;
+        this.imageContainer$.next(imageContainer);
     }
     /**
-     * @param {?} imageContainer
+     * @param {?} currentContainer
      * @return {?}
      */
-    isMainImageContainer(imageContainer) {
-        return (this.mainImageContainer.zoom &&
-            imageContainer.zoom &&
-            imageContainer.zoom.url === this.mainImageContainer.zoom.url);
+    isMainImageContainer(currentContainer) {
+        return this.imageContainer$.pipe(map((container) => container.zoom && container.zoom.url === currentContainer.zoom.url));
     }
     /**
      * @return {?}
@@ -5486,12 +5448,75 @@ class ProductImagesComponent {
 ProductImagesComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-product-images',
-                template: "<ng-container *ngIf=\"product\">\n  <ng-container *cxOutlet=\"outlets.IMAGES\">\n    <cx-media\n      [container]=\"mainImageContainer\"\n      format=\"zoom\"\n      (loaded)=\"loadHandler()\"\n    >\n    </cx-media>\n    <ng-container *ngIf=\"product.images?.GALLERY.length > 1\">\n      <div class=\"thumbs\">\n        <cx-media\n          *ngFor=\"let image of product.images.GALLERY\"\n          [container]=\"image\"\n          format=\"thumbnail\"\n          (focus)=\"showImage($event, image)\"\n          tabindex=\"0\"\n          [class.active]=\"isMainImageContainer(image)\"\n        >\n        </cx-media>\n      </div>\n    </ng-container>\n  </ng-container>\n</ng-container>\n"
+                template: "<cx-media\n  [container]=\"imageContainer$ | async\"\n  format=\"zoom\"\n  (loaded)=\"loadHandler()\"\n>\n</cx-media>\n\n<div\n  class=\"thumbs\"\n  *ngIf=\"(product$ | async) as product\"\n  [class.hidden]=\"product.images?.GALLERY?.length === 1\"\n>\n  <cx-media\n    *ngFor=\"let image of product.images?.GALLERY\"\n    [container]=\"image\"\n    format=\"thumbnail\"\n    (focus)=\"showImage($event, image)\"\n    tabindex=\"0\"\n    [class.active]=\"isMainImageContainer(image) | async\"\n  >\n  </cx-media>\n</div>\n"
             }] }
 ];
-ProductImagesComponent.propDecorators = {
-    product: [{ type: Input }]
+/** @nocollapse */
+ProductImagesComponent.ctorParameters = () => [
+    { type: CurrentProductService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @enum {string} */
+const ProductDetailOutlets = {
+    SUMMARY: 'PDP.SUMMARY',
+    IMAGES: 'PDP.IMAGES',
+    TITLE: 'PDP.TITLE',
+    RATING: 'PDP.RATING',
+    ADDTOCART: 'PDP.ADDTOCART',
+    PRICE: 'PDP.PRICE',
+    SHARE: 'PDP.SHARE',
 };
+/** @enum {string} */
+const ProductTabsOutlets = {
+    DESCRIPTION: 'PDP.DESCRIPTION',
+    SPECIFICATIONS: 'PDP.SPECIFICATIONS',
+    REVIEWS: 'PDP.REVIEWS',
+    SHIPPING: 'PDP.SHIPPING',
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ProductDetailsComponent {
+    /**
+     * @param {?} currentPageService
+     * @param {?} cmsService
+     */
+    constructor(currentPageService, cmsService) {
+        this.currentPageService = currentPageService;
+        this.cmsService = cmsService;
+    }
+    /**
+     * @return {?}
+     */
+    get outlets() {
+        return ProductDetailsComponent.outlets;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.product$ = this.currentPageService.getProduct();
+        this.page$ = this.cmsService.getCurrentPage();
+    }
+}
+ProductDetailsComponent.outlets = ProductDetailOutlets;
+ProductDetailsComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-product-details',
+                template: "<ng-container *ngIf=\"(product$ | async) as product\">\n  <ng-container *cxOutlet=\"outlets.SUMMARY\">\n    <cx-product-summary [product]=\"product\"> </cx-product-summary>\n  </ng-container>\n</ng-container>\n"
+            }] }
+];
+/** @nocollapse */
+ProductDetailsComponent.ctorParameters = () => [
+    { type: CurrentProductService },
+    { type: CmsService }
+];
 
 /**
  * @fileoverview added by tsickle
@@ -5544,7 +5569,7 @@ class ProductSummaryComponent {
      * @return {?}
      */
     getTabsComponent() {
-        return document.querySelector('cx-product-tabs');
+        return document.querySelector('cx-tab-paragraph-container');
     }
     // Get Tab by label if exists on page
     /**
@@ -5593,8 +5618,8 @@ class ProductSummaryComponent {
             /** @type {?} */
             const reviewsComponent = this.getReviewsComponent();
             if (reviewsTab && reviewsComponent) {
-                reviewsComponent.scrollIntoView();
                 this.clickTabIfInactive(reviewsTab);
+                reviewsComponent.scrollIntoView();
             }
         });
     }
@@ -5609,7 +5634,7 @@ ProductSummaryComponent.outlets = ProductDetailOutlets;
 ProductSummaryComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-product-summary',
-                template: "<ng-container *cxOutlet=\"outlets.TITLE\">\n  <div class=\"name\">{{ product?.name }}</div>\n  <div class=\"code\">\n    {{ 'productSummary.id' | cxTranslate }} {{ product?.code }}\n  </div>\n</ng-container>\n\n<div class=\"images\"><ng-content></ng-content></div>\n\n<ng-container *cxOutlet=\"outlets.RATING\">\n  <div class=\"rating\">\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"count\">({{ product?.numberOfReviews }})</div>\n    <a class=\"btn-link\" *ngIf=\"reviewsTabAvailable\" (click)=\"showReviews()\">{{\n      'productSummary.showReviews' | cxTranslate\n    }}</a>\n  </div>\n</ng-container>\n\n<ng-container *cxOutlet=\"outlets.PRICE\">\n  <div class=\"price\" aria-label=\"new item price\">\n    {{ product?.price?.formattedValue }}\n  </div>\n</ng-container>\n\n<div class=\"description\"><p [innerHTML]=\"product?.summary\"></p></div>\n\n<ng-container *cxOutlet=\"outlets.ADDTOCART\">\n  <div class=\"quantity\">\n    <label>{{ 'productSummary.quantity' | cxTranslate }}</label>\n    <cx-item-counter\n      isValueChangeable=\"true\"\n      [min]=\"1\"\n      [max]=\"product.stock?.stockLevel || 1000\"\n      *ngIf=\"\n        product?.stock?.stockLevel > 0 ||\n        product?.stock?.stockLevelStatus === 'inStock'\n      \"\n      (update)=\"updateCount($event)\"\n    ></cx-item-counter>\n    <span class=\"info\">{{\n      hasStock\n        ? ('productSummary.inStock' | cxTranslate)\n        : ('productSummary.outOfStock' | cxTranslate)\n    }}</span>\n  </div>\n  <cx-add-to-cart\n    *ngIf=\"product?.stock?.stockLevelStatus !== 'outOfStock'\"\n    [quantity]=\"itemCount\"\n    [productCode]=\"product?.code\"\n    [maxQuantity]=\"product.stock.stockLevel\"\n  ></cx-add-to-cart>\n</ng-container>\n\n<!-- @TODO: Temp. Comment out share link while not in use by CMS -->\n<!-- <ng-container *cxOutlet=\"outlets.SHARE\">\n  <div>\n    <a href=\"#\" class=\"share btn-link\">\n      {{ 'productSummary.share' | cxTranslate }}\n    </a>\n  </div>\n</ng-container> -->\n",
+                template: "<ng-container *cxOutlet=\"outlets.TITLE\">\n  <div class=\"name\">{{ product?.name }}</div>\n  <div class=\"code\">\n    {{ 'productSummary.id' | cxTranslate }} {{ product?.code }}\n  </div>\n</ng-container>\n\n<ng-container *cxOutlet=\"outlets.RATING\">\n  <div class=\"rating\">\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"count\">({{ product?.numberOfReviews }})</div>\n    <a class=\"btn-link\" *ngIf=\"reviewsTabAvailable\" (click)=\"showReviews()\">{{\n      'productSummary.showReviews' | cxTranslate\n    }}</a>\n  </div>\n</ng-container>\n\n<ng-container *cxOutlet=\"outlets.PRICE\">\n  <div class=\"price\" aria-label=\"new item price\">\n    {{ product?.price?.formattedValue }}\n  </div>\n</ng-container>\n\n<div class=\"description\"><p [innerHTML]=\"product?.summary\"></p></div>\n\n<ng-container *cxOutlet=\"outlets.ADDTOCART\">\n  <div class=\"quantity\">\n    <label>{{ 'productSummary.quantity' | cxTranslate }}</label>\n    <cx-item-counter\n      isValueChangeable=\"true\"\n      [min]=\"1\"\n      [max]=\"product.stock?.stockLevel || 1000\"\n      *ngIf=\"\n        product?.stock?.stockLevel > 0 ||\n        product?.stock?.stockLevelStatus === 'inStock'\n      \"\n      (update)=\"updateCount($event)\"\n    ></cx-item-counter>\n    <span class=\"info\">{{\n      hasStock\n        ? ('productSummary.inStock' | cxTranslate)\n        : ('productSummary.outOfStock' | cxTranslate)\n    }}</span>\n  </div>\n  <cx-add-to-cart\n    *ngIf=\"product?.stock?.stockLevelStatus !== 'outOfStock'\"\n    [quantity]=\"itemCount\"\n    [productCode]=\"product?.code\"\n    [maxQuantity]=\"product.stock.stockLevel\"\n  ></cx-add-to-cart>\n</ng-container>\n\n<!-- @TODO: Temp. Comment out share link while not in use by CMS -->\n<!-- <ng-container *cxOutlet=\"outlets.SHARE\">\n  <div>\n    <a href=\"#\" class=\"share btn-link\">\n      {{ 'productSummary.share' | cxTranslate }}\n    </a>\n  </div>\n</ng-container> -->\n",
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 providers: [TranslatePipe]
             }] }
@@ -5644,17 +5669,10 @@ ProductDetailsModule.decorators = [
                     FormComponentsModule,
                     MediaModule,
                     StarRatingModule,
+                    UrlModule,
                 ],
-                declarations: [
-                    ProductDetailsComponent,
-                    ProductSummaryComponent,
-                    ProductImagesComponent,
-                ],
-                exports: [
-                    ProductDetailsComponent,
-                    ProductSummaryComponent,
-                    ProductImagesComponent,
-                ],
+                declarations: [ProductDetailsComponent, ProductSummaryComponent],
+                exports: [ProductDetailsComponent, ProductSummaryComponent],
             },] }
 ];
 
@@ -6076,17 +6094,30 @@ ProductListModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductAttributesComponent {
+    /**
+     * @param {?} currentProductService
+     */
+    constructor(currentProductService) {
+        this.currentProductService = currentProductService;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.product$ = this.currentProductService.getProduct();
+    }
 }
 ProductAttributesComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-product-attributes',
-                template: "<table *ngFor=\"let class of product?.classifications\">\n  <th>\n    <h3>{{ class.name }}</h3>\n  </th>\n  <tr *ngFor=\"let feature of class.features\">\n    <td>{{ feature.name }}</td>\n    <td>\n      <ul>\n        <li *ngFor=\"let featureValue of feature?.featureValues\">\n          {{ featureValue?.value }}\n        </li>\n      </ul>\n    </td>\n  </tr>\n</table>\n",
+                template: "<ng-container *ngIf=\"(product$ | async) as product\">\n  <div class=\"container\">\n    <h2>{{ 'productDetails.specification' | cxTranslate }}</h2>\n    <table *ngFor=\"let class of product?.classifications\">\n      <th>\n        <h3>{{ class.name }}</h3>\n      </th>\n      <tr *ngFor=\"let feature of class.features\">\n        <td>{{ feature.name }}</td>\n        <td>\n          <ul>\n            <li *ngFor=\"let featureValue of feature?.featureValues\">\n              {{ featureValue?.value }}\n            </li>\n          </ul>\n        </td>\n      </tr>\n    </table>\n  </div>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
-ProductAttributesComponent.propDecorators = {
-    product: [{ type: Input }]
-};
+/** @nocollapse */
+ProductAttributesComponent.ctorParameters = () => [
+    { type: CurrentProductService }
+];
 
 /**
  * @fileoverview added by tsickle
@@ -6095,44 +6126,21 @@ ProductAttributesComponent.propDecorators = {
 class ProductReviewsComponent {
     /**
      * @param {?} reviewService
+     * @param {?} currentProductService
      * @param {?} fb
      */
-    constructor(reviewService, fb) {
+    constructor(reviewService, currentProductService, fb) {
         this.reviewService = reviewService;
+        this.currentProductService = currentProductService;
         this.fb = fb;
-        this.isWritingReviewChange = new EventEmitter();
-        this._isWritingReview = false;
+        this.isWritingReview = false;
         // TODO: configurable
         this.initialMaxListItems = 5;
-    }
-    /**
-     * @return {?}
-     */
-    get isWritingReview() {
-        return this._isWritingReview;
-    }
-    /**
-     * @param {?} val
-     * @return {?}
-     */
-    set isWritingReview(val) {
-        this._isWritingReview = val;
-        this.isWritingReviewChange.emit(this.isWritingReview);
-    }
-    /**
-     * @return {?}
-     */
-    ngOnChanges() {
-        this.maxListItems = this.initialMaxListItems;
-        if (this.product) {
-            this.reviews$ = this.reviewService.getByProductCode(this.product.code);
-        }
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.resetReviewForm();
+        this.product$ = this.currentProductService.getProduct();
+        this.reviews$ = this.product$.pipe(switchMap(product => this.reviewService.getByProductCode(product.code)), tap(() => {
+            this.resetReviewForm();
+            this.maxListItems = this.initialMaxListItems;
+        }));
     }
     /**
      * @return {?}
@@ -6155,9 +6163,10 @@ class ProductReviewsComponent {
         this.reviewForm.controls.rating.setValue(rating);
     }
     /**
+     * @param {?} product
      * @return {?}
      */
-    submitReview() {
+    submitReview(product) {
         /** @type {?} */
         const reviewFormControls = this.reviewForm.controls;
         /** @type {?} */
@@ -6167,7 +6176,7 @@ class ProductReviewsComponent {
             rating: reviewFormControls.rating.value,
             alias: reviewFormControls.reviewerName.value,
         };
-        this.reviewService.add(this.product.code, review);
+        this.reviewService.add(product.code, review);
         this.isWritingReview = false;
         this.resetReviewForm();
     }
@@ -6187,20 +6196,16 @@ class ProductReviewsComponent {
 ProductReviewsComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-product-reviews',
-                template: "<ng-container *ngIf=\"!isWritingReview; else writeReview\">\n  <div class=\"header\">\n    <h3>{{ 'productReview.overallRating' | cxTranslate }}</h3>\n    <button class=\"btn btn-primary\" (click)=\"initiateWriteReview()\">\n      {{ 'productReview.writeReview' | cxTranslate }}\n    </button>\n    <cx-star-rating\n      class=\"rating\"\n      [rating]=\"product.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n  </div>\n\n  <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n    <ng-container *ngIf=\"(reviews$ | async) as reviews\">\n      <div\n        class=\"review\"\n        tabindex=\"0\"\n        *ngFor=\"let review of (reviews | slice: 0:maxListItems)\"\n      >\n        <div class=\"title\">{{ review.headline }}</div>\n        <cx-star-rating\n          [rating]=\"review.rating\"\n          [disabled]=\"true\"\n        ></cx-star-rating>\n        <div class=\"name\">\n          {{ review.alias ? review.alias : review.principal?.name }}\n        </div>\n        <div class=\"date\">{{ review.date | cxDate }}</div>\n        <div class=\"text\">{{ review.comment }}</div>\n      </div>\n      <div *ngIf=\"reviews.length > initialMaxListItems\">\n        <button\n          class=\"btn btn-primary\"\n          (click)=\"maxListItems = reviews.length\"\n          *ngIf=\"maxListItems === initialMaxListItems\"\n        >\n          {{ 'productReview.more' | cxTranslate }}\n        </button>\n        <button\n          class=\"btn btn-primary\"\n          (click)=\"maxListItems = initialMaxListItems\"\n          *ngIf=\"maxListItems !== initialMaxListItems\"\n        >\n          {{ 'productReview.less' | cxTranslate }}\n        </button>\n      </div>\n    </ng-container>\n  </ng-container>\n</ng-container>\n\n<ng-template #writeReview>\n  <form [formGroup]=\"reviewForm\" (ngSubmit)=\"submitReview()\">\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.reviewTitle' | cxTranslate\n        }}</span>\n        <input type=\"text\" class=\"form-control\" formControlName=\"title\" />\n      </label>\n    </div>\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.writeYourComments' | cxTranslate\n        }}</span>\n        <textarea\n          class=\"form-control\"\n          rows=\"3\"\n          formControlName=\"comment\"\n        ></textarea>\n      </label>\n    </div>\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.rating' | cxTranslate\n        }}</span>\n        <cx-star-rating (change)=\"setRating($event)\"></cx-star-rating>\n      </label>\n    </div>\n    <div class=\"form-group\">\n      <label>\n        <span class=\"label-content\">{{\n          'productReview.reviewerName' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          formControlName=\"reviewerName\"\n        />\n      </label>\n    </div>\n    <div class=\"form-group row\">\n      <div class=\"col-12 col-md-4\">\n        <button\n          type=\"submit\"\n          class=\"btn btn-block btn-secondary\"\n          (click)=\"cancelWriteReview()\"\n        >\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <button\n          type=\"submit\"\n          class=\"btn btn-block btn-primary\"\n          [ngClass]=\"{ 'submit-btn': reviewForm.valid }\"\n          [disabled]=\"!reviewForm.valid\"\n        >\n          {{ 'common.submit' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </form>\n</ng-template>\n",
+                template: "<div class=\"container\" *ngIf=\"(product$ | async) as product\">\n  <h2>\n    {{ 'productDetails.reviews' | cxTranslate }} ({{ product.numberOfReviews }})\n  </h2>\n  <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n    <div class=\"header\">\n      <h3>{{ 'productReview.overallRating' | cxTranslate }}</h3>\n      <button class=\"btn btn-primary\" (click)=\"initiateWriteReview()\">\n        {{ 'productReview.writeReview' | cxTranslate }}\n      </button>\n      <cx-star-rating\n        class=\"rating\"\n        [rating]=\"product.averageRating\"\n        [disabled]=\"true\"\n      ></cx-star-rating>\n    </div>\n\n    <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n      <ng-container *ngIf=\"(reviews$ | async) as reviews\">\n        <div\n          class=\"review\"\n          tabindex=\"0\"\n          *ngFor=\"let review of (reviews | slice: 0:maxListItems)\"\n        >\n          <div class=\"title\">{{ review.headline }}</div>\n          <cx-star-rating\n            [rating]=\"review.rating\"\n            [disabled]=\"true\"\n          ></cx-star-rating>\n          <div class=\"name\">\n            {{ review.alias ? review.alias : review.principal?.name }}\n          </div>\n          <div class=\"date\">{{ review.date | cxDate }}</div>\n          <div class=\"text\">{{ review.comment }}</div>\n        </div>\n        <div *ngIf=\"reviews.length > initialMaxListItems\">\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"maxListItems = reviews.length\"\n            *ngIf=\"maxListItems === initialMaxListItems\"\n          >\n            {{ 'productReview.more' | cxTranslate }}\n          </button>\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"maxListItems = initialMaxListItems\"\n            *ngIf=\"maxListItems !== initialMaxListItems\"\n          >\n            {{ 'productReview.less' | cxTranslate }}\n          </button>\n        </div>\n      </ng-container>\n    </ng-container>\n  </ng-container>\n\n  <ng-template #writeReview>\n    <form [formGroup]=\"reviewForm\" (ngSubmit)=\"submitReview(product)\">\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.reviewTitle' | cxTranslate\n          }}</span>\n          <input type=\"text\" class=\"form-control\" formControlName=\"title\" />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.writeYourComments' | cxTranslate\n          }}</span>\n          <textarea\n            class=\"form-control\"\n            rows=\"3\"\n            formControlName=\"comment\"\n          ></textarea>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.rating' | cxTranslate\n          }}</span>\n          <cx-star-rating (change)=\"setRating($event)\"></cx-star-rating>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.reviewerName' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            formControlName=\"reviewerName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group row\">\n        <div class=\"col-12 col-md-4\">\n          <button\n            type=\"submit\"\n            class=\"btn btn-block btn-secondary\"\n            (click)=\"cancelWriteReview()\"\n          >\n            {{ 'common.cancel' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-12 col-md-4\">\n          <button\n            type=\"submit\"\n            class=\"btn btn-block btn-primary\"\n            [ngClass]=\"{ 'submit-btn': reviewForm.valid }\"\n            [disabled]=\"!reviewForm.valid\"\n          >\n            {{ 'common.submit' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </form>\n  </ng-template>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
 /** @nocollapse */
 ProductReviewsComponent.ctorParameters = () => [
     { type: ProductReviewService },
+    { type: CurrentProductService },
     { type: FormBuilder }
 ];
-ProductReviewsComponent.propDecorators = {
-    product: [{ type: Input }],
-    isWritingReview: [{ type: Input }],
-    isWritingReviewChange: [{ type: Output }]
-};
 
 /**
  * @fileoverview added by tsickle
@@ -6219,6 +6224,7 @@ ProductReviewsModule.decorators = [
                     StarRatingModule,
                 ],
                 declarations: [ProductReviewsComponent],
+                entryComponents: [ProductReviewsComponent],
                 exports: [ProductReviewsComponent],
             },] }
 ];
@@ -6227,103 +6233,46 @@ ProductReviewsModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class ProductTabsComponent {
+class ProductDetailsTabComponent {
     /**
-     * @param {?} winRef
-     * @param {?} currentPageService
+     * @param {?} currentProductService
      */
-    constructor(winRef, currentPageService) {
-        this.winRef = winRef;
-        this.currentPageService = currentPageService;
-        this.isWritingReview = false;
-        this.activatedElements = [];
-    }
-    /**
-     * @param {?} ref
-     * @return {?}
-     */
-    set initial(ref) {
-        if (ref) {
-            ref.nativeElement.click();
-        }
-    }
-    /**
-     * @return {?}
-     */
-    get outlets() {
-        return ProductTabsComponent.outlets;
+    constructor(currentProductService) {
+        this.currentProductService = currentProductService;
     }
     /**
      * @return {?}
      */
     ngOnInit() {
-        this.product$ = this.currentPageService.getProduct();
-    }
-    /**
-     * @param {?} event
-     * @param {?} tab
-     * @return {?}
-     */
-    select(event, tab) {
-        if (!this.activatedElements.includes(tab)) {
-            // remove active class on both header and content panel
-            this.activatedElements.forEach(el => el.classList.remove('active', 'toggled'));
-            this.activatedElements = [(/** @type {?} */ (event.target)), tab];
-            this.activatedElements.forEach(el => el.classList.add('active'));
-            // only scroll if the element is not yet visible
-            if (this.isElementOutViewport(tab)) {
-                tab.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start',
-                    inline: 'nearest',
-                });
-            }
-        }
-        else {
-            this.activatedElements.forEach(el => el.classList.toggle('toggled'));
-        }
-    }
-    /**
-     * @return {?}
-     */
-    openReview() {
-        if (this.reviewHeader.nativeElement) {
-            this.reviewHeader.nativeElement.click();
-        }
-    }
-    /**
-     * @private
-     * @param {?} el
-     * @return {?}
-     */
-    isElementOutViewport(el) {
-        if (!this.winRef.nativeWindow) {
-            return false;
-        }
-        /** @type {?} */
-        const rect = el.getBoundingClientRect();
-        return (rect.bottom < 0 ||
-            rect.right < 0 ||
-            rect.left > this.winRef.nativeWindow.innerWidth ||
-            rect.top > this.winRef.nativeWindow.innerHeight);
+        this.product$ = this.currentProductService.getProduct();
     }
 }
-ProductTabsComponent.outlets = ProductTabsOutlets;
-ProductTabsComponent.decorators = [
+ProductDetailsTabComponent.decorators = [
     { type: Component, args: [{
-                selector: 'cx-product-tabs',
-                template: "<div class=\"details\" *ngIf=\"(product$ | async) as product\">\n  <ng-container *cxOutlet=\"outlets.DESCRIPTION\">\n    <h3 #descriptionHeader (click)=\"select($event, description)\">\n      {{ 'productDetails.productDetails' | cxTranslate }}\n    </h3>\n    <div #description>\n      <div class=\"container\" [innerHTML]=\"product?.description\"></div>\n    </div>\n  </ng-container>\n\n  <ng-container *cxOutlet=\"outlets.SPECIFICATIONS\">\n    <h3 (click)=\"select($event, specifications)\">\n      {{ 'productDetails.specification' | cxTranslate }}\n    </h3>\n    <div #specifications>\n      <div class=\"container\">\n        <h2>{{ 'productDetails.specification' | cxTranslate }}</h2>\n        <cx-product-attributes [product]=\"product\"></cx-product-attributes>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-container *cxOutlet=\"outlets.REVIEWS\">\n    <h3 #reviewHeader (click)=\"select($event, reviews)\">\n      {{ 'productDetails.reviews' | cxTranslate }} ({{\n        product?.numberOfReviews\n      }})\n    </h3>\n    <div #reviews>\n      <div class=\"container\">\n        <h2>\n          {{ 'productDetails.reviews' | cxTranslate }} ({{\n            product?.numberOfReviews\n          }})\n        </h2>\n        <cx-product-reviews\n          class=\"container\"\n          [(isWritingReview)]=\"isWritingReview\"\n          [product]=\"product\"\n        ></cx-product-reviews>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-container *cxOutlet=\"outlets.SHIPPING\">\n    <h3 (click)=\"select($event, shipping)\">\n      {{ 'productDetails.shipping' | cxTranslate }}\n    </h3>\n    <div #shipping>\n      <div class=\"container\">\n        <h2>{{ 'productDetails.shipping' | cxTranslate }}</h2>\n        <ng-container\n          [cxComponentWrapper]=\"{\n            flexType: 'CMSTabParagraphComponent',\n            uid: 'deliveryTab'\n          }\"\n        ></ng-container>\n      </div>\n    </div>\n  </ng-container>\n</div>\n"
+                selector: 'cx-product-details-tab',
+                template: "<ng-container *ngIf=\"(product$ | async) as product\">\n  <div class=\"container\" [innerHTML]=\"product?.description\"></div>\n</ng-container>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
 /** @nocollapse */
-ProductTabsComponent.ctorParameters = () => [
-    { type: WindowRef },
+ProductDetailsTabComponent.ctorParameters = () => [
     { type: CurrentProductService }
 ];
-ProductTabsComponent.propDecorators = {
-    initial: [{ type: ViewChild, args: ['descriptionHeader',] }],
-    reviewHeader: [{ type: ViewChild, args: ['reviewHeader',] }]
-};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ProductDetailsTabModule {
+}
+ProductDetailsTabModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule],
+                declarations: [ProductDetailsTabComponent],
+                entryComponents: [ProductDetailsTabComponent],
+                exports: [ProductDetailsTabComponent],
+            },] }
+];
 
 /**
  * @fileoverview added by tsickle
@@ -6342,23 +6291,26 @@ ProductTabsModule.decorators = [
                     CmsModule,
                     OutletModule,
                     ProductReviewsModule,
+                    ProductDetailsTabModule,
                     PageComponentModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
-                            CMSTabParagraphContainer: {
-                                selector: 'cx-product-tabs',
+                            ProductDetailsTabComponent: {
+                                selector: 'cx-product-details-tab',
+                            },
+                            ProductSpecsTabComponent: {
+                                selector: 'cx-product-attributes',
+                            },
+                            ProductReviewsTabComponent: {
+                                selector: 'cx-product-reviews',
                             },
                         },
                     }))),
                     I18nModule,
                 ],
-                declarations: [ProductAttributesComponent, ProductTabsComponent],
-                exports: [
-                    ProductAttributesComponent,
-                    ProductReviewsComponent,
-                    ProductTabsComponent,
-                ],
-                entryComponents: [ProductTabsComponent],
+                declarations: [ProductAttributesComponent],
+                exports: [ProductAttributesComponent, ProductReviewsComponent],
+                entryComponents: [ProductAttributesComponent],
                 providers: [ProductService, WindowRef, RoutingService],
             },] }
 ];
@@ -6396,6 +6348,7 @@ ProductPageModule.decorators = [
                     RouterModule.forChild(routes),
                     ProductDetailsModule,
                     PageLayoutModule,
+                    OutletRefModule,
                 ],
                 declarations: [ProductPageComponent],
                 exports: [ProductPageComponent],
@@ -9360,6 +9313,7 @@ CmsParagraphModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             CMSParagraphComponent: { selector: 'cx-paragraph' },
+                            CMSTabParagraphComponent: { selector: 'cx-paragraph' },
                         },
                     }))),
                 ],
@@ -9373,16 +9327,41 @@ CmsParagraphModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-// import { AbstractProductComponent } from '../abstract-product-component';
 class TabParagraphContainerComponent {
+    /**
+     * @param {?} componentData
+     * @param {?} cmsService
+     */
+    constructor(componentData, cmsService) {
+        this.componentData = componentData;
+        this.cmsService = cmsService;
+        this.activeTabNum = 0;
+        this.components$ = this.componentData.data$.pipe(switchMap(data => combineLatest(data.components.split(' ').map(component => this.cmsService.getComponentData(component).pipe(map(tab => {
+            if (!tab.flexType) {
+                tab.flexType = tab.typeCode;
+            }
+            return Object.assign({}, tab, { title: `CMSTabParagraphContainer.tabs.${tab.uid}` });
+        }))))));
+    }
+    /**
+     * @param {?} tabNum
+     * @return {?}
+     */
+    select(tabNum) {
+        this.activeTabNum = tabNum;
+    }
 }
 TabParagraphContainerComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-tab-paragraph-container',
-                template: "<!--\n  <p #tabContent [innerHTML]=\"model?.content\">\n  </p>\n-->\n",
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                styles: [""]
+                template: "<ng-container *ngFor=\"let component of (components$ | async); let i = index\">\n  <h3 [class.active]=\"i === activeTabNum\" (click)=\"select(i)\">\n    {{ component.title | cxTranslate }}\n  </h3>\n  <div [class.active]=\"i === activeTabNum\">\n    <ng-container\n      *cxOutlet=\"component.flexType\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-container>\n  </div>\n</ng-container>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
             }] }
+];
+/** @nocollapse */
+TabParagraphContainerComponent.ctorParameters = () => [
+    { type: CmsComponentData },
+    { type: CmsService }
 ];
 
 /**
@@ -9397,9 +9376,12 @@ TabParagraphContainerModule.decorators = [
                     CommonModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
-                            CMSTabParagraphComponent: { selector: 'cx-paragraph' },
+                            CMSTabParagraphContainer: { selector: 'cx-tab-paragraph-container' },
                         },
                     }))),
+                    PageComponentModule,
+                    OutletModule,
+                    I18nModule,
                 ],
                 declarations: [TabParagraphContainerComponent],
                 entryComponents: [TabParagraphContainerComponent],
@@ -12206,6 +12188,32 @@ SearchBoxModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class ProductImagesModule {
+}
+ProductImagesModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    RouterModule,
+                    MediaModule,
+                    OutletModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            CMSProductImages: {
+                                selector: 'cx-product-images',
+                            },
+                        },
+                    }))),
+                ],
+                declarations: [ProductImagesComponent],
+                entryComponents: [ProductImagesComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class AbstractStoreItemComponent {
     /**
      * @param {?} storeDataService
@@ -12929,6 +12937,7 @@ CmsLibModule.decorators = [
                     CartComponentModule,
                     TabParagraphContainerModule,
                     StoreFinderModule,
+                    ProductImagesModule,
                     CheckoutComponentModule,
                     ForgotPasswordModule,
                     ResetPasswordModule,
@@ -13312,6 +13321,6 @@ StorefrontModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { CartComponentModule, AddedToCartDialogComponent, AddToCartComponent, AddToCartModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, OrderSummaryComponent, CartSharedModule, CartNotEmptyGuard, CartTotalsComponent, CartTotalsModule, MiniCartComponent, MiniCartModule, CmsLibModule, BannerComponent, BannerModule, LinkComponent, LinkModule, ParagraphComponent, CmsParagraphModule, TabParagraphContainerComponent, TabParagraphContainerModule, GlobalMessageComponentModule, GlobalMessageComponent, fontawesomeIconConfig, IconLoaderService, IconComponent, ICON_TYPE, IconConfig, IconResourceType, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, CloseAccountModule, CloseAccountModalComponent, CloseAccountComponent, ConsentManagementFormComponent, ConsentManagementComponent, ConsentManagementModule, ForgotPasswordComponent, ForgotPasswordModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, PaymentMethodsComponent, PaymentMethodsModule, ResetPasswordFormComponent, ResetPasswordModule, UpdateEmailFormComponent, UpdateEmailComponent, UpdateEmailModule, UpdatePasswordFormComponent, UpdatePasswordComponent, UpdatePasswordModule, UpdateProfileFormComponent, UpdateProfileComponent, UpdateProfileModule, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, FooterNavigationComponent, FooterNavigationModule, NavigationComponentService, NavigationComponent, NavigationModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, CurrentProductService, ProductDetailsComponent, ProductDetailsModule, ProductImagesComponent, ProductSummaryComponent, ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent, ProductDetailOutlets, ProductTabsOutlets, ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule, AbstractStoreItemComponent, ScheduleComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderPaginationDetailsComponent, StoreFinderListComponent, StoreFinderSearchResultComponent, StoreFinderSearchComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StoreFinderComponent, StoreFinderModule, LoginFormComponent, LoginFormModule, LoginComponent, LoginModule, LogoutGuard, RegisterComponent, RegisterComponentModule, UserComponentModule, CmsModule$1 as CmsModule, CmsPageGuard, OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService, StyleRefDirective, StyleRefModule, ComponentWrapperDirective, PageComponentModule, defaultCmsContentConfig, CmsComponentData, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, pwaConfigurationFactory, pwaFactory, PwaModule, PWAModuleConfig, defaultPWAModuleConfig, CmsRouteModule, SuffixRoutesModule, SeoMetaService, initSeoService, SeoModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, LayoutModule, MainModule, StorefrontComponent, CheckoutComponentModule, CheckoutDetailsService, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressComponent, CheckoutProgressModule, DeliveryModeComponent, DeliveryModeModule, OrderConfirmationComponent, OrderConfirmationModule, BillingAddressFormComponent, BillingAddressFormModule, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PlaceOrderComponent, PlaceOrderModule, PromotionsComponent, PromotionsModule, ReviewSubmitComponent, ReviewSubmitModule, SuggestedAddressDialogComponent, AddressFormComponent, AddressFormModule, ShippingAddressComponent, ShippingAddressModule, CheckoutConfig, CheckoutStepType, OrderConfirmationPageGuard, CheckoutGuard, DeliveryModeSetGuard, ShippingAddressSetGuard, PaymentDetailsSetGuard, StorefrontModule, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, UiModule, FormComponentsModule, ItemCounterComponent, GenericLinkComponent, GenericLinkModule, ListNavigationModule, PaginationComponent, SortingComponent, MediaComponent, MediaModule, MediaService, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, OnlyNumberDirective, AutoFocusDirective, FormUtils, NavigationUIComponent as ɵc, HighlightPipe as ɵd, ProductCarouselService as ɵi, ProductReferencesService as ɵk, SharedCarouselService as ɵj, ProductTabsComponent as ɵh, LoginComponentService as ɵo, OutletStyleService as ɵg, defaultCartPageConfig as ɵt, AddToHomeScreenService as ɵn, addCmsRoute as ɵu, suffixUrlMatcher as ɵv, htmlLangProvider as ɵw, setHtmlLangAttribute as ɵx, CmsGuardsService as ɵs, CmsI18nService as ɵr, CmsMappingService as ɵq, CmsRoutesService as ɵp, BootstrapModule as ɵa, CheckoutConfigService as ɵm, defaultCheckoutConfig as ɵl, provideConfigFromMetaTags as ɵbb, defaultRoutingConfig as ɵz, defaultStorefrontRoutesConfig as ɵy, OrderConfirmationPageModule as ɵba, CardComponent as ɵf, CardModule as ɵe, AutoFocusDirectiveModule as ɵb };
+export { CartComponentModule, AddedToCartDialogComponent, AddToCartComponent, AddToCartModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, OrderSummaryComponent, CartSharedModule, CartNotEmptyGuard, CartTotalsComponent, CartTotalsModule, MiniCartComponent, MiniCartModule, CmsLibModule, BannerComponent, BannerModule, LinkComponent, LinkModule, ParagraphComponent, CmsParagraphModule, TabParagraphContainerComponent, TabParagraphContainerModule, GlobalMessageComponentModule, GlobalMessageComponent, fontawesomeIconConfig, IconLoaderService, IconComponent, ICON_TYPE, IconConfig, IconResourceType, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, CloseAccountModule, CloseAccountModalComponent, CloseAccountComponent, ConsentManagementFormComponent, ConsentManagementComponent, ConsentManagementModule, ForgotPasswordComponent, ForgotPasswordModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, PaymentMethodsComponent, PaymentMethodsModule, ResetPasswordFormComponent, ResetPasswordModule, UpdateEmailFormComponent, UpdateEmailComponent, UpdateEmailModule, UpdatePasswordFormComponent, UpdatePasswordComponent, UpdatePasswordModule, UpdateProfileFormComponent, UpdateProfileComponent, UpdateProfileModule, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, FooterNavigationComponent, FooterNavigationModule, NavigationComponentService, NavigationComponent, NavigationModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, CurrentProductService, ProductImagesComponent, ProductDetailsComponent, ProductDetailsModule, ProductSummaryComponent, ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent, ProductDetailOutlets, ProductTabsOutlets, ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule, AbstractStoreItemComponent, ScheduleComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderPaginationDetailsComponent, StoreFinderListComponent, StoreFinderSearchResultComponent, StoreFinderSearchComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StoreFinderComponent, StoreFinderModule, LoginFormComponent, LoginFormModule, LoginComponent, LoginModule, LogoutGuard, RegisterComponent, RegisterComponentModule, UserComponentModule, CmsModule$1 as CmsModule, CmsPageGuard, OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService, StyleRefDirective, StyleRefModule, ComponentWrapperDirective, PageComponentModule, defaultCmsContentConfig, CmsComponentData, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, pwaConfigurationFactory, pwaFactory, PwaModule, PWAModuleConfig, defaultPWAModuleConfig, CmsRouteModule, SuffixRoutesModule, SeoMetaService, initSeoService, SeoModule, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, SkipLinkComponent, SkipLinkModule, LayoutModule, MainModule, StorefrontComponent, CheckoutComponentModule, CheckoutDetailsService, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressComponent, CheckoutProgressModule, DeliveryModeComponent, DeliveryModeModule, OrderConfirmationComponent, OrderConfirmationModule, BillingAddressFormComponent, BillingAddressFormModule, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PlaceOrderComponent, PlaceOrderModule, PromotionsComponent, PromotionsModule, ReviewSubmitComponent, ReviewSubmitModule, SuggestedAddressDialogComponent, AddressFormComponent, AddressFormModule, ShippingAddressComponent, ShippingAddressModule, CheckoutConfig, CheckoutStepType, OrderConfirmationPageGuard, CheckoutGuard, DeliveryModeSetGuard, ShippingAddressSetGuard, PaymentDetailsSetGuard, StorefrontModule, PagesModule, ProductPageComponent, CartPageComponent, OrderConfirmationPageComponent, CartPageModule, ProductPageModule, UiModule, FormComponentsModule, ItemCounterComponent, GenericLinkComponent, GenericLinkModule, ListNavigationModule, PaginationComponent, SortingComponent, MediaComponent, MediaModule, MediaService, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, OnlyNumberDirective, AutoFocusDirective, FormUtils, NavigationUIComponent as ɵc, HighlightPipe as ɵd, ProductCarouselService as ɵj, ProductReferencesService as ɵl, SharedCarouselService as ɵk, ProductImagesModule as ɵm, ProductDetailsTabComponent as ɵi, ProductDetailsTabModule as ɵh, LoginComponentService as ɵq, OutletStyleService as ɵg, defaultCartPageConfig as ɵv, AddToHomeScreenService as ɵp, addCmsRoute as ɵw, suffixUrlMatcher as ɵx, htmlLangProvider as ɵy, setHtmlLangAttribute as ɵz, CmsGuardsService as ɵu, CmsI18nService as ɵt, CmsMappingService as ɵs, CmsRoutesService as ɵr, BootstrapModule as ɵa, CheckoutConfigService as ɵo, defaultCheckoutConfig as ɵn, provideConfigFromMetaTags as ɵbd, defaultRoutingConfig as ɵbb, defaultStorefrontRoutesConfig as ɵba, OrderConfirmationPageModule as ɵbc, CardComponent as ɵf, CardModule as ɵe, AutoFocusDirectiveModule as ɵb };
 
 //# sourceMappingURL=spartacus-storefront.js.map

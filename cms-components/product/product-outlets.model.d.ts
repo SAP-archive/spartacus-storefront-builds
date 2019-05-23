@@ -1,5 +1,4 @@
 export declare enum ProductDetailOutlets {
-    PAGE = "PDP.PAGE",
     SUMMARY = "PDP.SUMMARY",
     IMAGES = "PDP.IMAGES",
     TITLE = "PDP.TITLE",

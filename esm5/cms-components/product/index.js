@@ -7,7 +7,7 @@ export { ProductCarouselModule } from './carousel/product-carousel/product-carou
 export { ProductReferencesComponent } from './carousel/product-references/product-references.component';
 export { ProductReferencesModule } from './carousel/product-references/product-references.module';
 export { CurrentProductService } from './current-product.service';
-export { ProductDetailsComponent, ProductDetailsModule, ProductImagesComponent, ProductSummaryComponent } from './product-details/index';
+export { ProductImagesComponent, ProductDetailsComponent, ProductDetailsModule, ProductSummaryComponent } from './product-details/index';
 export { ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent } from './product-list/index';
 export { ProductDetailOutlets, ProductTabsOutlets } from './product-outlets.model';
 export { ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule } from './product-tabs/index';
