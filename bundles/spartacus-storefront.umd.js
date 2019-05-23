@@ -1985,16 +1985,11 @@
             this.styleClasses = '';
         }
         Object.defineProperty(IconComponent.prototype, "type", {
-            /**
-             * The type of the icon which maps to the icon link
-             * in the svg icon sprite.
-             */
             set: /**
-             * The type of the icon which maps to the icon link
-             * in the svg icon sprite.
              * @param {?} type
              * @return {?}
              */ function (type) {
+                this._type = type;
                 this.addStyleClasses(type);
             },
             enumerable: true,
@@ -2008,7 +2003,7 @@
              * Indicates whether the icon is configured to use SVG or not.
              * @return {?}
              */ function () {
-                return this.iconLoader.useSvg(this.type);
+                return this.iconLoader.useSvg(this._type);
             },
             enumerable: true,
             configurable: true
@@ -2025,7 +2020,7 @@
              * an existing SVG symbol in the DOM.
              * @return {?}
              */ function () {
-                return this.iconLoader.getSvgPath(this.type);
+                return this.iconLoader.getSvgPath(this._type);
             },
             enumerable: true,
             configurable: true

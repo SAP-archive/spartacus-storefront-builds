@@ -10,7 +10,7 @@ import { __values, __spread, __read, __extends, __assign, __awaiter, __generator
 import { ServerConfig, WindowRef, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CheckoutService, CmsService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, DynamicAttributeService, CxApiService, ComponentMapperService, UserModule, AuthService, UserService, CartModule, PageMetaService, CmsPageTitleModule, ProductModule, ProductSearchService, NotAuthGuard, CartService, PageRobotsMeta, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, OccConfig, StoreDataService, StoreFinderService, GoogleMapRendererService, TranslatePipe } from '@spartacus/core';
 import { NavigationStart, Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
-import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Injector, TemplateRef, HostBinding, ViewEncapsulation, Optional, defineInjectable, inject, INJECTOR, Inject, PLATFORM_ID, ViewContainerRef, ChangeDetectorRef } from '@angular/core';
+import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Injector, HostBinding, TemplateRef, ViewEncapsulation, Optional, defineInjectable, inject, INJECTOR, Inject, PLATFORM_ID, ViewContainerRef, ChangeDetectorRef } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -1810,17 +1810,12 @@ var IconComponent = /** @class */ (function () {
         this.styleClasses = '';
     }
     Object.defineProperty(IconComponent.prototype, "type", {
-        /**
-         * The type of the icon which maps to the icon link
-         * in the svg icon sprite.
-         */
         set: /**
-         * The type of the icon which maps to the icon link
-         * in the svg icon sprite.
          * @param {?} type
          * @return {?}
          */
         function (type) {
+            this._type = type;
             this.addStyleClasses(type);
         },
         enumerable: true,
@@ -1835,7 +1830,7 @@ var IconComponent = /** @class */ (function () {
          * @return {?}
          */
         function () {
-            return this.iconLoader.useSvg(this.type);
+            return this.iconLoader.useSvg(this._type);
         },
         enumerable: true,
         configurable: true
@@ -1853,7 +1848,7 @@ var IconComponent = /** @class */ (function () {
          * @return {?}
          */
         function () {
-            return this.iconLoader.getSvgPath(this.type);
+            return this.iconLoader.getSvgPath(this._type);
         },
         enumerable: true,
         configurable: true

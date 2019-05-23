@@ -8,6 +8,7 @@ export declare class IconComponent {
      * The type of the icon which maps to the icon link
      * in the svg icon sprite.
      */
+    _type: ICON_TYPE;
     type: ICON_TYPE;
     /**
      * Keeps the given style classes so that we can
