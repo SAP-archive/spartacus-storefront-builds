@@ -8,7 +8,7 @@ import { FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, FormB
 import { debounceTime, filter, map, switchMap, take, tap, skipWhile, distinctUntilChanged, startWith, endWith, first, withLatestFrom, delay, shareReplay, pluck } from 'rxjs/operators';
 import { Title, Meta } from '@angular/platform-browser';
 import { RouterModule, NavigationStart, Router, ActivatedRoute } from '@angular/router';
-import { ServerConfig, OccConfig, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsService, CheckoutService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CartModule, CmsPageTitleModule, NotAuthGuard, CartService, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, ProductSearchService, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
+import { ServerConfig, OccConfig, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CheckoutService, CmsService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CartModule, CmsPageTitleModule, NotAuthGuard, CartService, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService, ProductSearchService } from '@spartacus/core';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Pipe, Injector, Inject, PLATFORM_ID, HostBinding, TemplateRef, ViewContainerRef, Optional, defineInjectable, inject, INJECTOR, ChangeDetectorRef } from '@angular/core';
 
@@ -11799,14 +11799,6 @@ FooterNavigationModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-const DEFAULT_SEARCHBOCH_CONFIG = {
-    minCharactersBeforeRequest: 1,
-    maxProducts: 5,
-    displaySuggestions: true,
-    maxSuggestions: 5,
-    displayProducts: true,
-};
-/** @type {?} */
 const HAS_SEARCH_RESULT_CLASS = 'has-searchbox-results';
 class SearchBoxComponentService {
     /**
@@ -11826,10 +11818,10 @@ class SearchBoxComponentService {
      * unless the configuration is setup to not search for
      * products or suggestions.
      * @param {?} query
-     * @param {?=} config
+     * @param {?} config
      * @return {?}
      */
-    search(query, config = DEFAULT_SEARCHBOCH_CONFIG) {
+    search(query, config) {
         if (!query || query === '') {
             this.clearResults();
             return;
@@ -11853,10 +11845,11 @@ class SearchBoxComponentService {
      * Returns an observable with the SearchResults. When there's any
      * result, the body tag will get a classname, so that specific style
      * rules can be applied.
+     * @param {?} config
      * @return {?}
      */
-    getResults() {
-        return combineLatest(this.productResults$, this.productSuggestions$, this.searchMessage$).pipe(map(([productResults, suggestions, message]) => {
+    getResults(config) {
+        return combineLatest(this.getProductResults(config), this.getProductSuggestions(config), this.getSearchMessage(config)).pipe(map(([productResults, suggestions, message]) => {
             return {
                 products: productResults ? productResults.products : null,
                 suggestions,
@@ -11907,38 +11900,67 @@ class SearchBoxComponentService {
     }
     /**
      * @private
+     * @param {?} config
      * @return {?}
      */
-    get productResults$() {
-        return this.searchService.getResults();
+    getProductResults(config) {
+        if (config.displayProducts) {
+            return this.searchService.getResults();
+        }
+        else {
+            return of({});
+        }
     }
     /**
+     * Loads suggestions from the backend. In case there's no suggestion
+     * available, we try to get an exact match suggestion.
      * @private
+     * @param {?} config
      * @return {?}
      */
-    get productSuggestions$() {
-        return this.searchService
-            .getSuggestionResults()
-            .pipe(map(res => res.map(suggestion => suggestion.value)));
+    getProductSuggestions(config) {
+        if (!config.displaySuggestions) {
+            return of([]);
+        }
+        else {
+            return this.searchService.getSuggestionResults().pipe(map(res => res.map(suggestion => suggestion.value)), switchMap(suggestions => {
+                if (suggestions.length === 0) {
+                    return this.getExactSuggestion(config).pipe(map(match => (match ? [match] : [])));
+                }
+                else {
+                    return of(suggestions);
+                }
+            }));
+        }
     }
     /**
+     * whenever there is at least 1 product, we simulate
+     * a suggestion to provide easy access to the search result page
      * @private
+     * @param {?} config
      * @return {?}
      */
-    get searchMessage$() {
-        return combineLatest(this.productResults$, this.productSuggestions$).pipe(switchMap(([productResult, suggestions]) => {
-            if (!productResult || !productResult.products || !suggestions) {
-                return of(null);
-            }
-            else if (suggestions.length === 0 &&
-                productResult.products.length === 0) {
-                return this.fetchTranslation('searchBox.help.noMatch');
-            }
-            else if (suggestions.length === 0 &&
-                productResult.products.length > 0) {
-                return this.fetchTranslation('searchBox.help.exactMatch', {
+    getExactSuggestion(config) {
+        return this.getProductResults(config).pipe(switchMap(productResult => {
+            return productResult.products && productResult.products.length > 0
+                ? this.fetchTranslation('searchBox.help.exactMatch', {
                     term: productResult.freeTextSearch,
-                });
+                })
+                : of(null);
+        }));
+    }
+    /**
+     * @private
+     * @param {?} config
+     * @return {?}
+     */
+    getSearchMessage(config) {
+        return combineLatest(this.getProductResults(config), this.getProductSuggestions(config)).pipe(switchMap(([productResult, suggestions]) => {
+            if (productResult &&
+                productResult.products &&
+                productResult.products.length === 0 &&
+                (suggestions && suggestions.length === 0)) {
+                return this.fetchTranslation('searchBox.help.noMatch');
             }
             else {
                 return of(null);
@@ -11984,6 +12006,15 @@ SearchBoxComponentService.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @type {?} */
+const DEFAULT_SEARCHBOX_CONFIG = {
+    minCharactersBeforeRequest: 1,
+    displayProducts: true,
+    displaySuggestions: true,
+    maxProducts: 5,
+    maxSuggestions: 5,
+    displayProductImages: false,
+};
 class SearchBoxComponent {
     /**
      * The component data is optional, so that this component
@@ -12000,7 +12031,7 @@ class SearchBoxComponent {
          * for example when we click inside the search result section.
          */
         this.ignoreCloseEvent = false;
-        this.results$ = this.searchBoxComponentService.getResults();
+        this.results$ = this.config$.pipe(tap(c => (this.config = c)), switchMap(config => this.searchBoxComponentService.getResults(config)));
     }
     /**
      * Sets the search box input field
@@ -12015,11 +12046,12 @@ class SearchBoxComponent {
     /**
      * @return {?}
      */
-    ngOnInit() {
+    get config$() {
         if (this.componentData) {
-            this.componentData.data$
-                .pipe(first())
-                .subscribe(c => (this.config = (/** @type {?} */ (c))));
+            return (/** @type {?} */ (this.componentData.data$));
+        }
+        else {
+            return of(DEFAULT_SEARCHBOX_CONFIG);
         }
     }
     /**
@@ -12099,7 +12131,7 @@ class SearchBoxComponent {
 SearchBoxComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-searchbox',
-                template: "<label class=\"searchbox\" [class.dirty]=\"!!searchInput.value\">\n  <input\n    #searchInput\n    [placeholder]=\"'searchBox.placeholder' | cxTranslate\"\n    aria-label=\"search\"\n    (focus)=\"open()\"\n    (input)=\"search(searchInput.value)\"\n    (blur)=\"close($event)\"\n    (keydown.escape)=\"close($event)\"\n    (keydown.enter)=\"launchSearchResult($event, searchInput.value)\"\n  />\n\n  <cx-icon\n    [type]=\"iconTypes.RESET\"\n    aria-label=\"reset\"\n    (mousedown)=\"clear(searchInput)\"\n    class=\"reset\"\n  ></cx-icon>\n\n  <cx-icon\n    [type]=\"iconTypes.SEARCH\"\n    aria-label=\"search\"\n    class=\"search\"\n    (mousedown)=\"avoidReopen($event)\"\n  ></cx-icon>\n</label>\n\n<div\n  *ngIf=\"(results$ | async) as result\"\n  class=\"results\"\n  (click)=\"close($event)\"\n>\n  <div\n    *ngIf=\"result.message\"\n    class=\"message\"\n    [innerHTML]=\"result.message\"\n  ></div>\n\n  <div class=\"suggestions\" (mousedown)=\"disableClose()\">\n    <a\n      *ngFor=\"let suggestion of result.suggestions\"\n      [innerHTML]=\"suggestion | cxHighlight: searchInput.value\"\n      [routerLink]=\"\n        {\n          cxRoute: 'search',\n          params: { query: suggestion }\n        } | cxUrl\n      \"\n    >\n    </a>\n  </div>\n\n  <div class=\"products\" (mousedown)=\"disableClose()\" *ngIf=\"result.products\">\n    <a\n      *ngFor=\"let product of result.products\"\n      [routerLink]=\"\n        {\n          cxRoute: 'product',\n          params: product\n        } | cxUrl\n      \"\n    >\n      <cx-media\n        [container]=\"product.images?.PRIMARY\"\n        format=\"product\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n      <h4 class=\"name\" [innerHTML]=\"product.nameHtml\"></h4>\n      <span class=\"price\">{{ product.price?.formattedValue }}</span>\n    </a>\n  </div>\n</div>\n",
+                template: "<label class=\"searchbox\" [class.dirty]=\"!!searchInput.value\">\n  <input\n    #searchInput\n    [placeholder]=\"'searchBox.placeholder' | cxTranslate\"\n    aria-label=\"search\"\n    (focus)=\"open()\"\n    (input)=\"search(searchInput.value)\"\n    (blur)=\"close($event)\"\n    (keydown.escape)=\"close($event)\"\n    (keydown.enter)=\"launchSearchResult($event, searchInput.value)\"\n  />\n\n  <cx-icon\n    [type]=\"iconTypes.RESET\"\n    aria-label=\"reset\"\n    (mousedown)=\"clear(searchInput)\"\n    class=\"reset\"\n  ></cx-icon>\n\n  <cx-icon\n    [type]=\"iconTypes.SEARCH\"\n    aria-label=\"search\"\n    class=\"search\"\n    (mousedown)=\"avoidReopen($event)\"\n  ></cx-icon>\n</label>\n\n<div\n  *ngIf=\"(results$ | async) as result\"\n  class=\"results\"\n  (click)=\"close($event)\"\n>\n  <div\n    *ngIf=\"result.message\"\n    class=\"message\"\n    [innerHTML]=\"result.message\"\n  ></div>\n\n  <div class=\"suggestions\" (mousedown)=\"disableClose()\">\n    <a\n      *ngFor=\"let suggestion of result.suggestions\"\n      [innerHTML]=\"suggestion | cxHighlight: searchInput.value\"\n      [routerLink]=\"\n        {\n          cxRoute: 'search',\n          params: { query: suggestion }\n        } | cxUrl\n      \"\n    >\n    </a>\n  </div>\n\n  <div class=\"products\" (mousedown)=\"disableClose()\" *ngIf=\"result.products\">\n    <a\n      *ngFor=\"let product of result.products\"\n      [routerLink]=\"\n        {\n          cxRoute: 'product',\n          params: product\n        } | cxUrl\n      \"\n      [class.has-media]=\"\n        config?.displayProductImages && product.images?.PRIMARY\n      \"\n    >\n      <cx-media\n        *ngIf=\"config?.displayProductImages\"\n        [container]=\"product.images?.PRIMARY\"\n        format=\"product\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n      <h4 class=\"name\" [innerHTML]=\"product.nameHtml\"></h4>\n      <span class=\"price\">{{ product.price?.formattedValue }}</span>\n    </a>\n  </div>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];

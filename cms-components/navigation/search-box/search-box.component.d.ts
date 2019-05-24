@@ -1,19 +1,18 @@
-import { OnInit } from '@angular/core';
 import { CmsSearchBoxComponent } from '@spartacus/core';
-import { CmsComponentData } from '../../../cms-structure/page/model/cms-component-data';
 import { Observable } from 'rxjs';
 import { ICON_TYPE } from '../../../cms-components/misc/icon/index';
+import { CmsComponentData } from '../../../cms-structure/page/model/cms-component-data';
 import { SearchBoxComponentService } from './search-box-component.service';
-import { SearchResults } from './search-box.model';
-export declare class SearchBoxComponent implements OnInit {
+import { SearchBoxConfig, SearchResults } from './search-box.model';
+export declare class SearchBoxComponent {
     protected searchBoxComponentService: SearchBoxComponentService;
     protected componentData: CmsComponentData<CmsSearchBoxComponent>;
+    config: SearchBoxConfig;
     /**
      * Sets the search box input field
      */
     queryText: string;
     iconTypes: typeof ICON_TYPE;
-    private config;
     /**
      * In some occasions we need to ignore the close event,
      * for example when we click inside the search result section.
@@ -25,7 +24,7 @@ export declare class SearchBoxComponent implements OnInit {
      */
     constructor(searchBoxComponentService: SearchBoxComponentService, componentData: CmsComponentData<CmsSearchBoxComponent>);
     results$: Observable<SearchResults>;
-    ngOnInit(): void;
+    readonly config$: Observable<SearchBoxConfig>;
     /**
      * Closes the searchbox and opens the search result page.
      */

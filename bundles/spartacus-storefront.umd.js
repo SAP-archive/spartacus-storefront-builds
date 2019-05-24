@@ -14406,14 +14406,6 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
-    var DEFAULT_SEARCHBOCH_CONFIG = {
-        minCharactersBeforeRequest: 1,
-        maxProducts: 5,
-        displaySuggestions: true,
-        maxSuggestions: 5,
-        displayProducts: true,
-    };
-    /** @type {?} */
     var HAS_SEARCH_RESULT_CLASS = 'has-searchbox-results';
     var SearchBoxComponentService = /** @class */ (function () {
         function SearchBoxComponentService(searchService, routingService, translationService, winRef) {
@@ -14432,7 +14424,7 @@
          * unless the configuration is setup to not search for
          * products or suggestions.
          * @param {?} query
-         * @param {?=} config
+         * @param {?} config
          * @return {?}
          */
         SearchBoxComponentService.prototype.search = /**
@@ -14440,13 +14432,10 @@
          * unless the configuration is setup to not search for
          * products or suggestions.
          * @param {?} query
-         * @param {?=} config
+         * @param {?} config
          * @return {?}
          */
             function (query, config) {
-                if (config === void 0) {
-                    config = DEFAULT_SEARCHBOCH_CONFIG;
-                }
                 if (!query || query === '') {
                     this.clearResults();
                     return;
@@ -14475,17 +14464,19 @@
          * Returns an observable with the SearchResults. When there's any
          * result, the body tag will get a classname, so that specific style
          * rules can be applied.
+         * @param {?} config
          * @return {?}
          */
         SearchBoxComponentService.prototype.getResults = /**
          * Returns an observable with the SearchResults. When there's any
          * result, the body tag will get a classname, so that specific style
          * rules can be applied.
+         * @param {?} config
          * @return {?}
          */
-            function () {
+            function (config) {
                 var _this = this;
-                return rxjs.combineLatest(this.productResults$, this.productSuggestions$, this.searchMessage$).pipe(operators.map(function (_a) {
+                return rxjs.combineLatest(this.getProductResults(config), this.getProductSuggestions(config), this.getSearchMessage(config)).pipe(operators.map(function (_a) {
                     var _b = __read(_a, 3), productResults = _b[0], suggestions = _b[1], message = _b[2];
                     return {
                         products: productResults ? productResults.products : null,
@@ -14560,57 +14551,111 @@
                     (!!results.suggestions && results.suggestions.length > 0) ||
                     !!results.message);
             };
-        Object.defineProperty(SearchBoxComponentService.prototype, "productResults$", {
-            get: /**
-             * @private
-             * @return {?}
-             */ function () {
-                return this.searchService.getResults();
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(SearchBoxComponentService.prototype, "productSuggestions$", {
-            get: /**
-             * @private
-             * @return {?}
-             */ function () {
-                return this.searchService
-                    .getSuggestionResults()
-                    .pipe(operators.map(function (res) { return res.map(function (suggestion) { return suggestion.value; }); }));
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(SearchBoxComponentService.prototype, "searchMessage$", {
-            get: /**
-             * @private
-             * @return {?}
-             */ function () {
+        /**
+         * @private
+         * @param {?} config
+         * @return {?}
+         */
+        SearchBoxComponentService.prototype.getProductResults = /**
+         * @private
+         * @param {?} config
+         * @return {?}
+         */
+            function (config) {
+                if (config.displayProducts) {
+                    return this.searchService.getResults();
+                }
+                else {
+                    return rxjs.of({});
+                }
+            };
+        /**
+         * Loads suggestions from the backend. In case there's no suggestion
+         * available, we try to get an exact match suggestion.
+         */
+        /**
+         * Loads suggestions from the backend. In case there's no suggestion
+         * available, we try to get an exact match suggestion.
+         * @private
+         * @param {?} config
+         * @return {?}
+         */
+        SearchBoxComponentService.prototype.getProductSuggestions = /**
+         * Loads suggestions from the backend. In case there's no suggestion
+         * available, we try to get an exact match suggestion.
+         * @private
+         * @param {?} config
+         * @return {?}
+         */
+            function (config) {
                 var _this = this;
-                return rxjs.combineLatest(this.productResults$, this.productSuggestions$).pipe(operators.switchMap(function (_a) {
-                    var _b = __read(_a, 2), productResult = _b[0], suggestions = _b[1];
-                    if (!productResult || !productResult.products || !suggestions) {
-                        return rxjs.of(null);
-                    }
-                    else if (suggestions.length === 0 &&
-                        productResult.products.length === 0) {
-                        return _this.fetchTranslation('searchBox.help.noMatch');
-                    }
-                    else if (suggestions.length === 0 &&
-                        productResult.products.length > 0) {
-                        return _this.fetchTranslation('searchBox.help.exactMatch', {
+                if (!config.displaySuggestions) {
+                    return rxjs.of([]);
+                }
+                else {
+                    return this.searchService.getSuggestionResults().pipe(operators.map(function (res) { return res.map(function (suggestion) { return suggestion.value; }); }), operators.switchMap(function (suggestions) {
+                        if (suggestions.length === 0) {
+                            return _this.getExactSuggestion(config).pipe(operators.map(function (match) { return (match ? [match] : []); }));
+                        }
+                        else {
+                            return rxjs.of(suggestions);
+                        }
+                    }));
+                }
+            };
+        /**
+         * whenever there is at least 1 product, we simulate
+         * a suggestion to provide easy access to the search result page
+         */
+        /**
+         * whenever there is at least 1 product, we simulate
+         * a suggestion to provide easy access to the search result page
+         * @private
+         * @param {?} config
+         * @return {?}
+         */
+        SearchBoxComponentService.prototype.getExactSuggestion = /**
+         * whenever there is at least 1 product, we simulate
+         * a suggestion to provide easy access to the search result page
+         * @private
+         * @param {?} config
+         * @return {?}
+         */
+            function (config) {
+                var _this = this;
+                return this.getProductResults(config).pipe(operators.switchMap(function (productResult) {
+                    return productResult.products && productResult.products.length > 0
+                        ? _this.fetchTranslation('searchBox.help.exactMatch', {
                             term: productResult.freeTextSearch,
-                        });
+                        })
+                        : rxjs.of(null);
+                }));
+            };
+        /**
+         * @private
+         * @param {?} config
+         * @return {?}
+         */
+        SearchBoxComponentService.prototype.getSearchMessage = /**
+         * @private
+         * @param {?} config
+         * @return {?}
+         */
+            function (config) {
+                var _this = this;
+                return rxjs.combineLatest(this.getProductResults(config), this.getProductSuggestions(config)).pipe(operators.switchMap(function (_a) {
+                    var _b = __read(_a, 2), productResult = _b[0], suggestions = _b[1];
+                    if (productResult &&
+                        productResult.products &&
+                        productResult.products.length === 0 &&
+                        (suggestions && suggestions.length === 0)) {
+                        return _this.fetchTranslation('searchBox.help.noMatch');
                     }
                     else {
                         return rxjs.of(null);
                     }
                 }));
-            },
-            enumerable: true,
-            configurable: true
-        });
+            };
         /**
          * Navigates to the search result page with a given query
          */
@@ -14667,12 +14712,22 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /** @type {?} */
+    var DEFAULT_SEARCHBOX_CONFIG = {
+        minCharactersBeforeRequest: 1,
+        displayProducts: true,
+        displaySuggestions: true,
+        maxProducts: 5,
+        maxSuggestions: 5,
+        displayProductImages: false,
+    };
     var SearchBoxComponent = /** @class */ (function () {
         /**
          * The component data is optional, so that this component
          * can be reused without CMS integration.
          */
         function SearchBoxComponent(searchBoxComponentService, componentData) {
+            var _this = this;
             this.searchBoxComponentService = searchBoxComponentService;
             this.componentData = componentData;
             this.iconTypes = ICON_TYPE;
@@ -14681,7 +14736,7 @@
              * for example when we click inside the search result section.
              */
             this.ignoreCloseEvent = false;
-            this.results$ = this.searchBoxComponentService.getResults();
+            this.results$ = this.config$.pipe(operators.tap(function (c) { return (_this.config = c); }), operators.switchMap(function (config) { return _this.searchBoxComponentService.getResults(config); }));
         }
         Object.defineProperty(SearchBoxComponent.prototype, "queryText", {
             /**
@@ -14699,20 +14754,20 @@
             enumerable: true,
             configurable: true
         });
-        /**
-         * @return {?}
-         */
-        SearchBoxComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
+        Object.defineProperty(SearchBoxComponent.prototype, "config$", {
+            get: /**
+             * @return {?}
+             */ function () {
                 if (this.componentData) {
-                    this.componentData.data$
-                        .pipe(operators.first())
-                        .subscribe(function (c) { return (_this.config = ( /** @type {?} */(c))); });
+                    return ( /** @type {?} */(this.componentData.data$));
                 }
-            };
+                else {
+                    return rxjs.of(DEFAULT_SEARCHBOX_CONFIG);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
         /**
          * Closes the searchbox and opens the search result page.
          */
@@ -14851,7 +14906,7 @@
         SearchBoxComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-searchbox',
-                        template: "<label class=\"searchbox\" [class.dirty]=\"!!searchInput.value\">\n  <input\n    #searchInput\n    [placeholder]=\"'searchBox.placeholder' | cxTranslate\"\n    aria-label=\"search\"\n    (focus)=\"open()\"\n    (input)=\"search(searchInput.value)\"\n    (blur)=\"close($event)\"\n    (keydown.escape)=\"close($event)\"\n    (keydown.enter)=\"launchSearchResult($event, searchInput.value)\"\n  />\n\n  <cx-icon\n    [type]=\"iconTypes.RESET\"\n    aria-label=\"reset\"\n    (mousedown)=\"clear(searchInput)\"\n    class=\"reset\"\n  ></cx-icon>\n\n  <cx-icon\n    [type]=\"iconTypes.SEARCH\"\n    aria-label=\"search\"\n    class=\"search\"\n    (mousedown)=\"avoidReopen($event)\"\n  ></cx-icon>\n</label>\n\n<div\n  *ngIf=\"(results$ | async) as result\"\n  class=\"results\"\n  (click)=\"close($event)\"\n>\n  <div\n    *ngIf=\"result.message\"\n    class=\"message\"\n    [innerHTML]=\"result.message\"\n  ></div>\n\n  <div class=\"suggestions\" (mousedown)=\"disableClose()\">\n    <a\n      *ngFor=\"let suggestion of result.suggestions\"\n      [innerHTML]=\"suggestion | cxHighlight: searchInput.value\"\n      [routerLink]=\"\n        {\n          cxRoute: 'search',\n          params: { query: suggestion }\n        } | cxUrl\n      \"\n    >\n    </a>\n  </div>\n\n  <div class=\"products\" (mousedown)=\"disableClose()\" *ngIf=\"result.products\">\n    <a\n      *ngFor=\"let product of result.products\"\n      [routerLink]=\"\n        {\n          cxRoute: 'product',\n          params: product\n        } | cxUrl\n      \"\n    >\n      <cx-media\n        [container]=\"product.images?.PRIMARY\"\n        format=\"product\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n      <h4 class=\"name\" [innerHTML]=\"product.nameHtml\"></h4>\n      <span class=\"price\">{{ product.price?.formattedValue }}</span>\n    </a>\n  </div>\n</div>\n",
+                        template: "<label class=\"searchbox\" [class.dirty]=\"!!searchInput.value\">\n  <input\n    #searchInput\n    [placeholder]=\"'searchBox.placeholder' | cxTranslate\"\n    aria-label=\"search\"\n    (focus)=\"open()\"\n    (input)=\"search(searchInput.value)\"\n    (blur)=\"close($event)\"\n    (keydown.escape)=\"close($event)\"\n    (keydown.enter)=\"launchSearchResult($event, searchInput.value)\"\n  />\n\n  <cx-icon\n    [type]=\"iconTypes.RESET\"\n    aria-label=\"reset\"\n    (mousedown)=\"clear(searchInput)\"\n    class=\"reset\"\n  ></cx-icon>\n\n  <cx-icon\n    [type]=\"iconTypes.SEARCH\"\n    aria-label=\"search\"\n    class=\"search\"\n    (mousedown)=\"avoidReopen($event)\"\n  ></cx-icon>\n</label>\n\n<div\n  *ngIf=\"(results$ | async) as result\"\n  class=\"results\"\n  (click)=\"close($event)\"\n>\n  <div\n    *ngIf=\"result.message\"\n    class=\"message\"\n    [innerHTML]=\"result.message\"\n  ></div>\n\n  <div class=\"suggestions\" (mousedown)=\"disableClose()\">\n    <a\n      *ngFor=\"let suggestion of result.suggestions\"\n      [innerHTML]=\"suggestion | cxHighlight: searchInput.value\"\n      [routerLink]=\"\n        {\n          cxRoute: 'search',\n          params: { query: suggestion }\n        } | cxUrl\n      \"\n    >\n    </a>\n  </div>\n\n  <div class=\"products\" (mousedown)=\"disableClose()\" *ngIf=\"result.products\">\n    <a\n      *ngFor=\"let product of result.products\"\n      [routerLink]=\"\n        {\n          cxRoute: 'product',\n          params: product\n        } | cxUrl\n      \"\n      [class.has-media]=\"\n        config?.displayProductImages && product.images?.PRIMARY\n      \"\n    >\n      <cx-media\n        *ngIf=\"config?.displayProductImages\"\n        [container]=\"product.images?.PRIMARY\"\n        format=\"product\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n      <h4 class=\"name\" [innerHTML]=\"product.nameHtml\"></h4>\n      <span class=\"price\">{{ product.price?.formattedValue }}</span>\n    </a>\n  </div>\n</div>\n",
                         changeDetection: i0.ChangeDetectionStrategy.OnPush
                     }] }
         ];
