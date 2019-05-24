@@ -9114,21 +9114,14 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CheckoutDetailsService = /** @class */ (function () {
-        function CheckoutDetailsService(authService, checkoutService, cartService) {
+        function CheckoutDetailsService(checkoutService, cartService) {
             var _this = this;
-            this.authService = authService;
             this.checkoutService = checkoutService;
             this.cartService = cartService;
-            this.userId$ = this.authService
-                .getUserToken()
-                .pipe(operators.map(function (userData) { return userData.userId; }));
             this.cartId$ = this.cartService
                 .getActive()
                 .pipe(operators.map(function (cartData) { return cartData.code; }));
-            this.getCheckoutDetailsLoaded$ = this.userId$.pipe(operators.withLatestFrom(this.cartId$), operators.tap(function (_a) {
-                var _b = __read(_a, 2), userId = _b[0], cartId = _b[1];
-                return _this.checkoutService.loadCheckoutDetails(userId, cartId);
-            }), operators.shareReplay(1), operators.switchMap(function () { return _this.checkoutService.getCheckoutDetailsLoaded(); }), operators.skipWhile(function (loaded) { return !loaded; }));
+            this.getCheckoutDetailsLoaded$ = this.cartId$.pipe(operators.tap(function (cartId) { return _this.checkoutService.loadCheckoutDetails(cartId); }), operators.shareReplay(1), operators.switchMap(function () { return _this.checkoutService.getCheckoutDetailsLoaded(); }), operators.skipWhile(function (loaded) { return !loaded; }));
         }
         /**
          * @return {?}
@@ -9168,12 +9161,11 @@
         /** @nocollapse */
         CheckoutDetailsService.ctorParameters = function () {
             return [
-                { type: i1$1.AuthService },
                 { type: i1$1.CheckoutService },
                 { type: i1$1.CartService }
             ];
         };
-        /** @nocollapse */ CheckoutDetailsService.ngInjectableDef = i0.defineInjectable({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(i0.inject(i1$1.AuthService), i0.inject(i1$1.CheckoutService), i0.inject(i1$1.CartService)); }, token: CheckoutDetailsService, providedIn: "root" });
+        /** @nocollapse */ CheckoutDetailsService.ngInjectableDef = i0.defineInjectable({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(i0.inject(i1$1.CheckoutService), i0.inject(i1$1.CartService)); }, token: CheckoutDetailsService, providedIn: "root" });
         return CheckoutDetailsService;
     }());
 

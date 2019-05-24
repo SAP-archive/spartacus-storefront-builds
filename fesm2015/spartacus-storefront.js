@@ -7348,21 +7348,16 @@ DeliveryModeComponent.ctorParameters = () => [
  */
 class CheckoutDetailsService {
     /**
-     * @param {?} authService
      * @param {?} checkoutService
      * @param {?} cartService
      */
-    constructor(authService, checkoutService, cartService) {
-        this.authService = authService;
+    constructor(checkoutService, cartService) {
         this.checkoutService = checkoutService;
         this.cartService = cartService;
-        this.userId$ = this.authService
-            .getUserToken()
-            .pipe(map(userData => userData.userId));
         this.cartId$ = this.cartService
             .getActive()
             .pipe(map(cartData => cartData.code));
-        this.getCheckoutDetailsLoaded$ = this.userId$.pipe(withLatestFrom(this.cartId$), tap(([userId, cartId]) => this.checkoutService.loadCheckoutDetails(userId, cartId)), shareReplay(1), switchMap(() => this.checkoutService.getCheckoutDetailsLoaded()), skipWhile(loaded => !loaded));
+        this.getCheckoutDetailsLoaded$ = this.cartId$.pipe(tap(cartId => this.checkoutService.loadCheckoutDetails(cartId)), shareReplay(1), switchMap(() => this.checkoutService.getCheckoutDetailsLoaded()), skipWhile(loaded => !loaded));
     }
     /**
      * @return {?}
@@ -7390,11 +7385,10 @@ CheckoutDetailsService.decorators = [
 ];
 /** @nocollapse */
 CheckoutDetailsService.ctorParameters = () => [
-    { type: AuthService },
     { type: CheckoutService },
     { type: CartService }
 ];
-/** @nocollapse */ CheckoutDetailsService.ngInjectableDef = defineInjectable({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(inject(AuthService), inject(CheckoutService), inject(CartService)); }, token: CheckoutDetailsService, providedIn: "root" });
+/** @nocollapse */ CheckoutDetailsService.ngInjectableDef = defineInjectable({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(inject(CheckoutService), inject(CartService)); }, token: CheckoutDetailsService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
