@@ -10,7 +10,6 @@ export declare class ProductSummaryComponent implements OnInit {
     product: any;
     readonly outlets: typeof ProductDetailOutlets;
     updateCount(value: any): void;
-    readonly hasStock: boolean;
     private getReviewsComponent;
     private getTabsComponent;
     getTabByLabel(label: string, tabsComponent: Element): HTMLElement;
