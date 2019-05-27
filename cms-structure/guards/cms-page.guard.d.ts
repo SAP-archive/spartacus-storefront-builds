@@ -1,5 +1,5 @@
 import { CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { CmsActivatedRouteSnapshot, CmsService, RoutingService } from '@spartacus/core';
+import { CmsActivatedRouteSnapshot, CmsService, RoutingService, SemanticPathService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { CmsGuardsService } from '../services/cms-guards.service';
 import { CmsI18nService } from '../services/cms-i18n.service';
@@ -10,7 +10,8 @@ export declare class CmsPageGuard implements CanActivate {
     private cmsRoutes;
     private cmsI18n;
     private cmsGuards;
+    private semanticPathService;
     static guardName: string;
-    constructor(routingService: RoutingService, cmsService: CmsService, cmsRoutes: CmsRoutesService, cmsI18n: CmsI18nService, cmsGuards: CmsGuardsService);
+    constructor(routingService: RoutingService, cmsService: CmsService, cmsRoutes: CmsRoutesService, cmsI18n: CmsI18nService, cmsGuards: CmsGuardsService, semanticPathService: SemanticPathService);
     canActivate(route: CmsActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree>;
 }

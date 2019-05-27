@@ -8,7 +8,7 @@ import { FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, FormB
 import { debounceTime, filter, map, switchMap, take, tap, skipWhile, distinctUntilChanged, startWith, endWith, first, withLatestFrom, delay, shareReplay, pluck } from 'rxjs/operators';
 import { Title, Meta } from '@angular/platform-browser';
 import { RouterModule, NavigationStart, Router, ActivatedRoute } from '@angular/router';
-import { ServerConfig, OccConfig, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CheckoutService, CmsService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CartModule, CmsPageTitleModule, NotAuthGuard, CartService, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService, ProductSearchService } from '@spartacus/core';
+import { ServerConfig, OccConfig, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CheckoutService, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CartModule, CmsPageTitleModule, NotAuthGuard, CartService, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService, ProductSearchService } from '@spartacus/core';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Pipe, Injector, Inject, PLATFORM_ID, HostBinding, TemplateRef, ViewContainerRef, Optional, ChangeDetectorRef, defineInjectable, inject, INJECTOR } from '@angular/core';
 
@@ -3650,11 +3650,13 @@ class LogoutGuard {
      * @param {?} auth
      * @param {?} cms
      * @param {?} routing
+     * @param {?} semanticPathService
      */
-    constructor(auth, cms, routing) {
+    constructor(auth, cms, routing, semanticPathService) {
         this.auth = auth;
         this.cms = cms;
         this.routing = routing;
+        this.semanticPathService = semanticPathService;
     }
     /**
      * @return {?}
@@ -3663,7 +3665,7 @@ class LogoutGuard {
         this.logout();
         return this.cms
             .hasPage({
-            id: '/logout',
+            id: this.semanticPathService.get('logout'),
             type: PageType.CONTENT_PAGE,
         })
             .pipe(tap(hasPage => {
@@ -3680,7 +3682,6 @@ class LogoutGuard {
         this.auth.logout();
     }
 }
-LogoutGuard.GUARD_NAME = 'LogoutGuard';
 LogoutGuard.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
@@ -3690,9 +3691,10 @@ LogoutGuard.decorators = [
 LogoutGuard.ctorParameters = () => [
     { type: AuthService },
     { type: CmsService },
-    { type: RoutingService }
+    { type: RoutingService },
+    { type: SemanticPathService }
 ];
-/** @nocollapse */ LogoutGuard.ngInjectableDef = defineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(inject(AuthService), inject(CmsService), inject(RoutingService)); }, token: LogoutGuard, providedIn: "root" });
+/** @nocollapse */ LogoutGuard.ngInjectableDef = defineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(inject(AuthService), inject(CmsService), inject(RoutingService), inject(SemanticPathService)); }, token: LogoutGuard, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
@@ -4446,13 +4448,15 @@ class CmsPageGuard {
      * @param {?} cmsRoutes
      * @param {?} cmsI18n
      * @param {?} cmsGuards
+     * @param {?} semanticPathService
      */
-    constructor(routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards) {
+    constructor(routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService) {
         this.routingService = routingService;
         this.cmsService = cmsService;
         this.cmsRoutes = cmsRoutes;
         this.cmsI18n = cmsI18n;
         this.cmsGuards = cmsGuards;
+        this.semanticPathService = semanticPathService;
     }
     /**
      * @param {?} route
@@ -4478,8 +4482,8 @@ class CmsPageGuard {
                 }));
             }
             else {
-                if (pageContext.id !== '/not-found') {
-                    this.routingService.go(['/not-found']);
+                if (pageContext.id !== this.semanticPathService.get('notFound')) {
+                    this.routingService.go({ cxRoute: 'notFound' });
                 }
                 return of(false);
             }
@@ -4498,9 +4502,10 @@ CmsPageGuard.ctorParameters = () => [
     { type: CmsService },
     { type: CmsRoutesService },
     { type: CmsI18nService },
-    { type: CmsGuardsService }
+    { type: CmsGuardsService },
+    { type: SemanticPathService }
 ];
-/** @nocollapse */ CmsPageGuard.ngInjectableDef = defineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(inject(RoutingService), inject(CmsService), inject(CmsRoutesService), inject(CmsI18nService), inject(CmsGuardsService)); }, token: CmsPageGuard, providedIn: "root" });
+/** @nocollapse */ CmsPageGuard.ngInjectableDef = defineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(inject(RoutingService), inject(CmsService), inject(CmsRoutesService), inject(CmsI18nService), inject(CmsGuardsService), inject(SemanticPathService)); }, token: CmsPageGuard, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
@@ -13207,6 +13212,7 @@ OrderConfirmationPageModule.decorators = [
 /** @type {?} */
 const defaultStorefrontRoutesConfig = {
     home: { paths: [''] },
+    notFound: { paths: ['not-found'] },
     cart: { paths: ['cart'] },
     search: { paths: ['search/:query'] },
     // semantic links for login related pages

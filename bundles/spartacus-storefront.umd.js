@@ -4656,10 +4656,11 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var LogoutGuard = /** @class */ (function () {
-        function LogoutGuard(auth, cms, routing) {
+        function LogoutGuard(auth, cms, routing, semanticPathService) {
             this.auth = auth;
             this.cms = cms;
             this.routing = routing;
+            this.semanticPathService = semanticPathService;
         }
         /**
          * @return {?}
@@ -4672,7 +4673,7 @@
                 this.logout();
                 return this.cms
                     .hasPage({
-                    id: '/logout',
+                    id: this.semanticPathService.get('logout'),
                     type: i1$1.PageType.CONTENT_PAGE,
                 })
                     .pipe(operators.tap(function (hasPage) {
@@ -4692,7 +4693,6 @@
             function () {
                 this.auth.logout();
             };
-        LogoutGuard.GUARD_NAME = 'LogoutGuard';
         LogoutGuard.decorators = [
             { type: i0.Injectable, args: [{
                         providedIn: 'root',
@@ -4703,10 +4703,11 @@
             return [
                 { type: i1$1.AuthService },
                 { type: i1$1.CmsService },
-                { type: i1$1.RoutingService }
+                { type: i1$1.RoutingService },
+                { type: i1$1.SemanticPathService }
             ];
         };
-        /** @nocollapse */ LogoutGuard.ngInjectableDef = i0.defineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(i0.inject(i1$1.AuthService), i0.inject(i1$1.CmsService), i0.inject(i1$1.RoutingService)); }, token: LogoutGuard, providedIn: "root" });
+        /** @nocollapse */ LogoutGuard.ngInjectableDef = i0.defineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(i0.inject(i1$1.AuthService), i0.inject(i1$1.CmsService), i0.inject(i1$1.RoutingService), i0.inject(i1$1.SemanticPathService)); }, token: LogoutGuard, providedIn: "root" });
         return LogoutGuard;
     }());
 
@@ -5707,12 +5708,13 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CmsPageGuard = /** @class */ (function () {
-        function CmsPageGuard(routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards) {
+        function CmsPageGuard(routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService) {
             this.routingService = routingService;
             this.cmsService = cmsService;
             this.cmsRoutes = cmsRoutes;
             this.cmsI18n = cmsI18n;
             this.cmsGuards = cmsGuards;
+            this.semanticPathService = semanticPathService;
         }
         /**
          * @param {?} route
@@ -5751,8 +5753,8 @@
                         }));
                     }
                     else {
-                        if (pageContext.id !== '/not-found') {
-                            _this.routingService.go(['/not-found']);
+                        if (pageContext.id !== _this.semanticPathService.get('notFound')) {
+                            _this.routingService.go({ cxRoute: 'notFound' });
                         }
                         return rxjs.of(false);
                     }
@@ -5771,10 +5773,11 @@
                 { type: i1$1.CmsService },
                 { type: CmsRoutesService },
                 { type: CmsI18nService },
-                { type: CmsGuardsService }
+                { type: CmsGuardsService },
+                { type: i1$1.SemanticPathService }
             ];
         };
-        /** @nocollapse */ CmsPageGuard.ngInjectableDef = i0.defineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(i0.inject(i1$1.RoutingService), i0.inject(i1$1.CmsService), i0.inject(CmsRoutesService), i0.inject(CmsI18nService), i0.inject(CmsGuardsService)); }, token: CmsPageGuard, providedIn: "root" });
+        /** @nocollapse */ CmsPageGuard.ngInjectableDef = i0.defineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(i0.inject(i1$1.RoutingService), i0.inject(i1$1.CmsService), i0.inject(CmsRoutesService), i0.inject(CmsI18nService), i0.inject(CmsGuardsService), i0.inject(i1$1.SemanticPathService)); }, token: CmsPageGuard, providedIn: "root" });
         return CmsPageGuard;
     }());
 
@@ -16150,6 +16153,7 @@
     /** @type {?} */
     var defaultStorefrontRoutesConfig = {
         home: { paths: [''] },
+        notFound: { paths: ['not-found'] },
         cart: { paths: ['cart'] },
         search: { paths: ['search/:query'] },
         // semantic links for login related pages
