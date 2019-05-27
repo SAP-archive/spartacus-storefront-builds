@@ -6,7 +6,6 @@ export declare class UpdateProfileFormComponent implements OnInit {
     user: User;
     titles: Title[];
     submited: EventEmitter<{
-        uid: string;
         userUpdates: User;
     }>;
     cancelled: EventEmitter<void>;

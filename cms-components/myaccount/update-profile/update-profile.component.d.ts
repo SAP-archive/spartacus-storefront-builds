@@ -13,8 +13,7 @@ export declare class UpdateProfileComponent implements OnInit, OnDestroy {
     ngOnInit(): void;
     onSuccess(success: boolean): void;
     onCancel(): void;
-    onSubmit({ uid, userUpdates }: {
-        uid: string;
+    onSubmit({ userUpdates }: {
         userUpdates: User;
     }): void;
     ngOnDestroy(): void;

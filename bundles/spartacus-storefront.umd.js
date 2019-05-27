@@ -13753,7 +13753,6 @@
                     return;
                 }
                 this.submited.emit({
-                    uid: this.user.uid,
                     userUpdates: __assign({}, this.form.value),
                 });
             };
@@ -13852,8 +13851,8 @@
          * @return {?}
          */
             function (_a) {
-                var uid = _a.uid, userUpdates = _a.userUpdates;
-                this.userService.updatePersonalDetails(uid, userUpdates);
+                var userUpdates = _a.userUpdates;
+                this.userService.updatePersonalDetails(userUpdates);
             };
         /**
          * @return {?}
