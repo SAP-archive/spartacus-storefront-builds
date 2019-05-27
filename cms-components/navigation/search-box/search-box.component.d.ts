@@ -24,7 +24,10 @@ export declare class SearchBoxComponent {
      */
     constructor(searchBoxComponentService: SearchBoxComponentService, componentData: CmsComponentData<CmsSearchBoxComponent>);
     results$: Observable<SearchResults>;
-    readonly config$: Observable<SearchBoxConfig>;
+    /**
+     * Returns the backend configuration or default configuration for the searchbox.
+     */
+    private readonly config$;
     /**
      * Closes the searchbox and opens the search result page.
      */
