@@ -1,12 +1,12 @@
 import { OnDestroy, OnInit } from '@angular/core';
-import { ConsentTemplate, ConsentTemplateList, GlobalMessageService, RoutingService, UserService } from '@spartacus/core';
+import { ConsentTemplate, GlobalMessageService, RoutingService, UserService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 export declare class ConsentManagementComponent implements OnInit, OnDestroy {
     private userService;
     private routingService;
     private globalMessageService;
     private subscriptions;
-    templateList$: Observable<ConsentTemplateList>;
+    templateList$: Observable<ConsentTemplate[]>;
     loading$: Observable<boolean>;
     constructor(userService: UserService, routingService: RoutingService, globalMessageService: GlobalMessageService);
     ngOnInit(): void;

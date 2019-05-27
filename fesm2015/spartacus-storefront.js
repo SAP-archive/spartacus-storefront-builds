@@ -8,7 +8,7 @@ import { FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, FormB
 import { debounceTime, filter, map, switchMap, take, tap, skipWhile, distinctUntilChanged, startWith, endWith, first, withLatestFrom, delay, shareReplay, pluck } from 'rxjs/operators';
 import { Title, Meta } from '@angular/platform-browser';
 import { RouterModule, NavigationStart, Router, ActivatedRoute } from '@angular/router';
-import { ServerConfig, OccConfig, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsService, CheckoutService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CartModule, CmsPageTitleModule, NotAuthGuard, CartService, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, ProductSearchService, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
+import { ServerConfig, OccConfig, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CheckoutService, CmsService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CartModule, CmsPageTitleModule, NotAuthGuard, CartService, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductModule, ContextServiceMap, SiteContextModule, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ProductReviewService, TranslatePipe, ProductSearchService, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Pipe, Injector, Inject, PLATFORM_ID, HostBinding, TemplateRef, ViewContainerRef, Optional, ChangeDetectorRef, defineInjectable, inject, INJECTOR } from '@angular/core';
 
@@ -9933,9 +9933,7 @@ class ConsentManagementComponent {
      * @return {?}
      */
     consentsExists(templateList) {
-        return (Boolean(templateList) &&
-            Boolean(templateList.consentTemplates) &&
-            templateList.consentTemplates.length > 0);
+        return Boolean(templateList) && templateList.length > 0;
     }
     /**
      * @param {?} __0
@@ -9994,7 +9992,7 @@ class ConsentManagementComponent {
 ConsentManagementComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-consent-management',
-                template: "<ng-container>\n  <div *ngIf=\"(loading$ | async); else consentManagementForm\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #consentManagementForm>\n    <div class=\"row d-flex justify-content-center\">\n      <div class=\"col-md-8\">\n        <cx-consent-management-form\n          *ngFor=\"\n            let consentTemplate of (templateList$ | async)?.consentTemplates\n          \"\n          [consentTemplate]=\"consentTemplate\"\n          (consentChanged)=\"onConsentChange($event)\"\n        ></cx-consent-management-form>\n        <div class=\"cx-checkout-btns row\">\n          <div class=\"col-lg-12\">\n            <button class=\"btn btn-block btn-primary\" (click)=\"onDone()\">\n              {{ 'common.done' | cxTranslate }}\n            </button>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n"
+                template: "<ng-container>\n  <div *ngIf=\"(loading$ | async); else consentManagementForm\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #consentManagementForm>\n    <div class=\"row d-flex justify-content-center\">\n      <div class=\"col-md-8\">\n        <cx-consent-management-form\n          *ngFor=\"let consentTemplate of (templateList$ | async)\"\n          [consentTemplate]=\"consentTemplate\"\n          (consentChanged)=\"onConsentChange($event)\"\n        ></cx-consent-management-form>\n        <div class=\"cx-checkout-btns row\">\n          <div class=\"col-lg-12\">\n            <button class=\"btn btn-block btn-primary\" (click)=\"onDone()\">\n              {{ 'common.done' | cxTranslate }}\n            </button>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n"
             }] }
 ];
 /** @nocollapse */
