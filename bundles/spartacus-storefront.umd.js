@@ -13592,12 +13592,6 @@
                 var _this = this;
                 this.userService.resetUpdatePasswordProcessState();
                 this.loading$ = this.userService.getUpdatePasswordResultLoading();
-                this.userService
-                    .get()
-                    .pipe(operators.take(1))
-                    .subscribe(function (user) {
-                    _this.userId = user.uid;
-                });
                 this.subscription.add(this.userService
                     .getUpdatePasswordResultSuccess()
                     .subscribe(function (success) { return _this.onSuccess(success); }));
@@ -13635,7 +13629,7 @@
          */
             function (_a) {
                 var oldPassword = _a.oldPassword, newPassword = _a.newPassword;
-                this.userService.updatePassword(this.userId, oldPassword, newPassword);
+                this.userService.updatePassword(oldPassword, newPassword);
             };
         /**
          * @return {?}

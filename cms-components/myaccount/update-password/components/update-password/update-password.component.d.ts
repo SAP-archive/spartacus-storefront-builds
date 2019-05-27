@@ -6,7 +6,6 @@ export declare class UpdatePasswordComponent implements OnInit, OnDestroy {
     private userService;
     private globalMessageService;
     private subscription;
-    private userId;
     loading$: Observable<boolean>;
     constructor(routingService: RoutingService, userService: UserService, globalMessageService: GlobalMessageService);
     ngOnInit(): void;
