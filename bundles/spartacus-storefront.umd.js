@@ -13312,7 +13312,6 @@
             function () {
                 var _this = this;
                 this.userService.resetUpdateEmailResultState();
-                this.subscription.add(this.userService.get().subscribe(function (result) { return (_this.uid = result.uid); }));
                 this.subscription.add(this.userService
                     .getUpdateEmailResultSuccess()
                     .subscribe(function (success) { return _this.onSuccess(success); }));
@@ -13338,7 +13337,7 @@
             function (_a) {
                 var newUid = _a.newUid, password = _a.password;
                 this.newUid = newUid;
-                this.userService.updateEmail(this.uid, password, newUid);
+                this.userService.updateEmail(password, newUid);
             };
         /**
          * @param {?} success

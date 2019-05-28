@@ -8,7 +8,6 @@ export declare class UpdateEmailComponent implements OnInit, OnDestroy {
     private authService;
     constructor(routingService: RoutingService, globalMessageService: GlobalMessageService, userService: UserService, authService: AuthService);
     private subscription;
-    private uid;
     private newUid;
     isLoading$: Observable<boolean>;
     ngOnInit(): void;
