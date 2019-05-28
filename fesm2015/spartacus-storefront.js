@@ -3547,7 +3547,7 @@ class PageSlotComponent {
      * @return {?}
      */
     addSmartEditSlotClass(slot) {
-        if (this.cmsService.isLaunchInSmartEdit()) {
+        if (slot && this.cmsService.isLaunchInSmartEdit()) {
             this.addSmartEditContract(slot);
         }
     }
