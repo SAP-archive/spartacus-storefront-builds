@@ -8,7 +8,7 @@ import { FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, FormB
 import { debounceTime, filter, map, switchMap, take, tap, skipWhile, distinctUntilChanged, startWith, endWith, first, withLatestFrom, delay, shareReplay, pluck } from 'rxjs/operators';
 import { Title, Meta } from '@angular/platform-browser';
 import { RouterModule, NavigationStart, Router, ActivatedRoute } from '@angular/router';
-import { ServerConfig, OccConfig, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsService, SemanticPathService, CheckoutService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CartModule, CmsPageTitleModule, NotAuthGuard, CartService, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, ProductSearchService, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
+import { ServerConfig, OccConfig, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CheckoutService, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CartModule, CmsPageTitleModule, NotAuthGuard, CartService, AuthRedirectService, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService, ProductSearchService } from '@spartacus/core';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Pipe, Injector, Inject, PLATFORM_ID, HostBinding, TemplateRef, ViewContainerRef, Optional, ChangeDetectorRef, defineInjectable, inject, INJECTOR } from '@angular/core';
 
@@ -3146,40 +3146,20 @@ class CustomFormValidators {
 class LoginFormComponent {
     /**
      * @param {?} auth
-     * @param {?} routing
      * @param {?} globalMessageService
      * @param {?} fb
+     * @param {?} authRedirectService
      */
-    constructor(auth, routing, globalMessageService, fb) {
+    constructor(auth, globalMessageService, fb, authRedirectService) {
         this.auth = auth;
-        this.routing = routing;
         this.globalMessageService = globalMessageService;
         this.fb = fb;
+        this.authRedirectService = authRedirectService;
     }
     /**
      * @return {?}
      */
     ngOnInit() {
-        this.sub = this.auth
-            .getUserToken()
-            .pipe(switchMap(data => {
-            if (data && data.access_token) {
-                this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
-                return this.routing.getRedirectUrl().pipe(take(1));
-            }
-            return of();
-        }))
-            .subscribe(url => {
-            if (url) {
-                // If forced to login due to AuthGuard, then redirect to intended destination
-                this.routing.goByUrl(url);
-                this.routing.clearRedirectUrl();
-            }
-            else {
-                // User manual login
-                this.routing.back();
-            }
-        });
         this.form = this.fb.group({
             userId: ['', [Validators.required, CustomFormValidators.emailValidator]],
             password: ['', Validators.required],
@@ -3190,6 +3170,14 @@ class LoginFormComponent {
      */
     login() {
         this.auth.authorize(this.form.controls.userId.value, this.form.controls.password.value);
+        if (!this.sub) {
+            this.sub = this.auth.getUserToken().subscribe(data => {
+                if (data && data.access_token) {
+                    this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
+                    this.authRedirectService.redirect();
+                }
+            });
+        }
     }
     /**
      * @return {?}
@@ -3209,9 +3197,9 @@ LoginFormComponent.decorators = [
 /** @nocollapse */
 LoginFormComponent.ctorParameters = () => [
     { type: AuthService },
-    { type: RoutingService },
     { type: GlobalMessageService },
-    { type: FormBuilder }
+    { type: FormBuilder },
+    { type: AuthRedirectService }
 ];
 
 /**
@@ -3696,14 +3684,14 @@ LogoutGuard.ctorParameters = () => [
 class RegisterComponent {
     /**
      * @param {?} auth
-     * @param {?} routing
+     * @param {?} authRedirectService
      * @param {?} userService
      * @param {?} globalMessageService
      * @param {?} fb
      */
-    constructor(auth, routing, userService, globalMessageService, fb) {
+    constructor(auth, authRedirectService, userService, globalMessageService, fb) {
         this.auth = auth;
-        this.routing = routing;
+        this.authRedirectService = authRedirectService;
         this.userService = userService;
         this.globalMessageService = globalMessageService;
         this.fb = fb;
@@ -3730,26 +3718,6 @@ class RegisterComponent {
                 this.userService.loadTitles();
             }
         }));
-        this.subscription = this.auth
-            .getUserToken()
-            .pipe(switchMap(data => {
-            if (data && data.access_token) {
-                this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
-                return this.routing.getRedirectUrl().pipe(take(1));
-            }
-            return of();
-        }))
-            .subscribe(url => {
-            if (url) {
-                // If forced to login due to AuthGuard, then redirect to intended destination
-                this.routing.goByUrl(url);
-                this.routing.clearRedirectUrl();
-            }
-            else {
-                // User manual login
-                this.routing.go(['/']);
-            }
-        });
     }
     /**
      * @return {?}
@@ -3765,6 +3733,14 @@ class RegisterComponent {
             titleCode,
         };
         this.userService.register(userRegisterFormData);
+        if (!this.subscription) {
+            this.subscription = this.auth.getUserToken().subscribe(data => {
+                if (data && data.access_token) {
+                    this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
+                    this.authRedirectService.redirect();
+                }
+            });
+        }
         // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
         this.globalMessageService
             .get()
@@ -3804,7 +3780,7 @@ RegisterComponent.decorators = [
 /** @nocollapse */
 RegisterComponent.ctorParameters = () => [
     { type: AuthService },
-    { type: RoutingService },
+    { type: AuthRedirectService },
     { type: UserService },
     { type: GlobalMessageService },
     { type: FormBuilder }

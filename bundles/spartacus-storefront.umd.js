@@ -4068,11 +4068,11 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var LoginFormComponent = /** @class */ (function () {
-        function LoginFormComponent(auth, routing, globalMessageService, fb) {
+        function LoginFormComponent(auth, globalMessageService, fb, authRedirectService) {
             this.auth = auth;
-            this.routing = routing;
             this.globalMessageService = globalMessageService;
             this.fb = fb;
+            this.authRedirectService = authRedirectService;
         }
         /**
          * @return {?}
@@ -4081,27 +4081,6 @@
          * @return {?}
          */
             function () {
-                var _this = this;
-                this.sub = this.auth
-                    .getUserToken()
-                    .pipe(operators.switchMap(function (data) {
-                    if (data && data.access_token) {
-                        _this.globalMessageService.remove(i1$1.GlobalMessageType.MSG_TYPE_ERROR);
-                        return _this.routing.getRedirectUrl().pipe(operators.take(1));
-                    }
-                    return rxjs.of();
-                }))
-                    .subscribe(function (url) {
-                    if (url) {
-                        // If forced to login due to AuthGuard, then redirect to intended destination
-                        _this.routing.goByUrl(url);
-                        _this.routing.clearRedirectUrl();
-                    }
-                    else {
-                        // User manual login
-                        _this.routing.back();
-                    }
-                });
                 this.form = this.fb.group({
                     userId: ['', [forms.Validators.required, CustomFormValidators.emailValidator]],
                     password: ['', forms.Validators.required],
@@ -4114,7 +4093,16 @@
          * @return {?}
          */
             function () {
+                var _this = this;
                 this.auth.authorize(this.form.controls.userId.value, this.form.controls.password.value);
+                if (!this.sub) {
+                    this.sub = this.auth.getUserToken().subscribe(function (data) {
+                        if (data && data.access_token) {
+                            _this.globalMessageService.remove(i1$1.GlobalMessageType.MSG_TYPE_ERROR);
+                            _this.authRedirectService.redirect();
+                        }
+                    });
+                }
             };
         /**
          * @return {?}
@@ -4137,9 +4125,9 @@
         LoginFormComponent.ctorParameters = function () {
             return [
                 { type: i1$1.AuthService },
-                { type: i1$1.RoutingService },
                 { type: i1$1.GlobalMessageService },
-                { type: forms.FormBuilder }
+                { type: forms.FormBuilder },
+                { type: i1$1.AuthRedirectService }
             ];
         };
         return LoginFormComponent;
@@ -4701,9 +4689,9 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var RegisterComponent = /** @class */ (function () {
-        function RegisterComponent(auth, routing, userService, globalMessageService, fb) {
+        function RegisterComponent(auth, authRedirectService, userService, globalMessageService, fb) {
             this.auth = auth;
-            this.routing = routing;
+            this.authRedirectService = authRedirectService;
             this.userService = userService;
             this.globalMessageService = globalMessageService;
             this.fb = fb;
@@ -4734,26 +4722,6 @@
                         _this.userService.loadTitles();
                     }
                 }));
-                this.subscription = this.auth
-                    .getUserToken()
-                    .pipe(operators.switchMap(function (data) {
-                    if (data && data.access_token) {
-                        _this.globalMessageService.remove(i1$1.GlobalMessageType.MSG_TYPE_ERROR);
-                        return _this.routing.getRedirectUrl().pipe(operators.take(1));
-                    }
-                    return rxjs.of();
-                }))
-                    .subscribe(function (url) {
-                    if (url) {
-                        // If forced to login due to AuthGuard, then redirect to intended destination
-                        _this.routing.goByUrl(url);
-                        _this.routing.clearRedirectUrl();
-                    }
-                    else {
-                        // User manual login
-                        _this.routing.go(['/']);
-                    }
-                });
             };
         /**
          * @return {?}
@@ -4773,6 +4741,14 @@
                     titleCode: titleCode,
                 };
                 this.userService.register(userRegisterFormData);
+                if (!this.subscription) {
+                    this.subscription = this.auth.getUserToken().subscribe(function (data) {
+                        if (data && data.access_token) {
+                            _this.globalMessageService.remove(i1$1.GlobalMessageType.MSG_TYPE_ERROR);
+                            _this.authRedirectService.redirect();
+                        }
+                    });
+                }
                 // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
                 this.globalMessageService
                     .get()
@@ -4820,7 +4796,7 @@
         RegisterComponent.ctorParameters = function () {
             return [
                 { type: i1$1.AuthService },
-                { type: i1$1.RoutingService },
+                { type: i1$1.AuthRedirectService },
                 { type: i1$1.UserService },
                 { type: i1$1.GlobalMessageService },
                 { type: forms.FormBuilder }
