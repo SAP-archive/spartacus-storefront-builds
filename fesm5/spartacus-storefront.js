@@ -8,7 +8,7 @@ import { debounceTime, filter, map, switchMap, take, tap, skipWhile, distinctUnt
 import { Title, Meta } from '@angular/platform-browser';
 import { __values, __spread, __read, __extends, __assign, __awaiter, __generator } from 'tslib';
 import { RouterModule, NavigationStart, Router, ActivatedRoute } from '@angular/router';
-import { ServerConfig, OccConfig, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CheckoutService, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, DynamicAttributeService, CxApiService, ComponentMapperService, UserModule, AuthService, UserService, CartModule, PageMetaService, CmsPageTitleModule, NotAuthGuard, CartService, PageRobotsMeta, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, SearchboxService, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService, ProductSearchService } from '@spartacus/core';
+import { ServerConfig, OccConfig, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CheckoutService, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, DynamicAttributeService, CxApiService, ComponentMapperService, UserModule, AuthService, UserService, CartModule, CmsPageTitleModule, PageMetaService, NotAuthGuard, CartService, PageRobotsMeta, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, SearchboxService, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService, ProductSearchService } from '@spartacus/core';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Pipe, Injector, HostBinding, TemplateRef, Optional, ChangeDetectorRef, defineInjectable, inject, INJECTOR, Inject, PLATFORM_ID, ViewContainerRef } from '@angular/core';
 
@@ -8621,16 +8621,8 @@ var CheckoutConfigService = /** @class */ (function () {
      * @return {?}
      */
     function (activatedRoute) {
-        var _this = this;
         /** @type {?} */
-        var currentStepUrl = this.getStepUrlFromActivatedRoute(activatedRoute);
-        /** @type {?} */
-        var stepIndex;
-        this.steps.forEach(function (step, index) {
-            if (currentStepUrl === "/" + _this.getStepUrlFromStepRoute(step.routeName)) {
-                stepIndex = index;
-            }
-        });
+        var stepIndex = this.getCurrentStepIndex(activatedRoute);
         return stepIndex >= 0 && this.steps[stepIndex + 1]
             ? this.getStepUrlFromStepRoute(this.steps[stepIndex + 1].routeName)
             : null;
@@ -8644,19 +8636,47 @@ var CheckoutConfigService = /** @class */ (function () {
      * @return {?}
      */
     function (activatedRoute) {
-        var _this = this;
+        /** @type {?} */
+        var stepIndex = this.getCurrentStepIndex(activatedRoute);
+        return stepIndex >= 0 && this.steps[stepIndex - 1]
+            ? this.getStepUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
+            : null;
+    };
+    /**
+     * @param {?} activatedRoute
+     * @return {?}
+     */
+    CheckoutConfigService.prototype.getCurrentStepIndex = /**
+     * @param {?} activatedRoute
+     * @return {?}
+     */
+    function (activatedRoute) {
+        var e_1, _a;
         /** @type {?} */
         var currentStepUrl = this.getStepUrlFromActivatedRoute(activatedRoute);
         /** @type {?} */
         var stepIndex;
-        this.steps.forEach(function (step, index) {
-            if (currentStepUrl === "/" + _this.getStepUrlFromStepRoute(step.routeName)) {
-                stepIndex = index;
+        /** @type {?} */
+        var index = 0;
+        try {
+            for (var _b = __values(this.steps), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var step = _c.value;
+                if (currentStepUrl === "/" + this.getStepUrlFromStepRoute(step.routeName)) {
+                    stepIndex = index;
+                }
+                else {
+                    index++;
+                }
             }
-        });
-        return stepIndex >= 1 && this.steps[stepIndex - 1]
-            ? this.getStepUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
-            : null;
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        return stepIndex >= 0 ? stepIndex : null;
     };
     /**
      * @private

@@ -8917,16 +8917,8 @@
          * @return {?}
          */
             function (activatedRoute) {
-                var _this = this;
                 /** @type {?} */
-                var currentStepUrl = this.getStepUrlFromActivatedRoute(activatedRoute);
-                /** @type {?} */
-                var stepIndex;
-                this.steps.forEach(function (step, index) {
-                    if (currentStepUrl === "/" + _this.getStepUrlFromStepRoute(step.routeName)) {
-                        stepIndex = index;
-                    }
-                });
+                var stepIndex = this.getCurrentStepIndex(activatedRoute);
                 return stepIndex >= 0 && this.steps[stepIndex + 1]
                     ? this.getStepUrlFromStepRoute(this.steps[stepIndex + 1].routeName)
                     : null;
@@ -8940,19 +8932,53 @@
          * @return {?}
          */
             function (activatedRoute) {
-                var _this = this;
+                /** @type {?} */
+                var stepIndex = this.getCurrentStepIndex(activatedRoute);
+                return stepIndex >= 0 && this.steps[stepIndex - 1]
+                    ? this.getStepUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
+                    : null;
+            };
+        /**
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getCurrentStepIndex = /**
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+            function (activatedRoute) {
+                var e_1, _a;
                 /** @type {?} */
                 var currentStepUrl = this.getStepUrlFromActivatedRoute(activatedRoute);
                 /** @type {?} */
                 var stepIndex;
-                this.steps.forEach(function (step, index) {
-                    if (currentStepUrl === "/" + _this.getStepUrlFromStepRoute(step.routeName)) {
-                        stepIndex = index;
+                /** @type {?} */
+                var index = 0;
+                try {
+                    for (var _b = __values(this.steps), _c = _b.next(); !_c.done; _c = _b.next()) {
+                        var step = _c.value;
+                        if (currentStepUrl === "/" + this.getStepUrlFromStepRoute(step.routeName)) {
+                            stepIndex = index;
+                        }
+                        else {
+                            index++;
+                        }
                     }
-                });
-                return stepIndex >= 1 && this.steps[stepIndex - 1]
-                    ? this.getStepUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
-                    : null;
+                }
+                catch (e_1_1) {
+                    e_1 = { error: e_1_1 };
+                }
+                finally {
+                    try {
+                        if (_c && !_c.done && (_a = _b.return))
+                            _a.call(_b);
+                    }
+                    finally {
+                        if (e_1)
+                            throw e_1.error;
+                    }
+                }
+                return stepIndex >= 0 ? stepIndex : null;
             };
         /**
          * @private

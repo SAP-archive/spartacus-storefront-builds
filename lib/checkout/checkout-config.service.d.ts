@@ -10,6 +10,7 @@ export declare class CheckoutConfigService {
     getCheckoutStep(currentStepType: CheckoutStepType): CheckoutStep;
     getNextCheckoutStepUrl(activatedRoute: ActivatedRoute): string;
     getPreviousCheckoutStepUrl(activatedRoute: ActivatedRoute): string;
+    getCurrentStepIndex(activatedRoute: ActivatedRoute): number;
     private getStepUrlFromActivatedRoute;
     private getStepUrlFromStepRoute;
     private getCheckoutStepIndex;
