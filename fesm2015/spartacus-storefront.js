@@ -8,7 +8,7 @@ import { FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, FormB
 import { debounceTime, filter, map, switchMap, take, tap, skipWhile, distinctUntilChanged, startWith, endWith, first, withLatestFrom, delay, shareReplay, pluck } from 'rxjs/operators';
 import { Title, Meta } from '@angular/platform-browser';
 import { RouterModule, NavigationStart, Router, ActivatedRoute } from '@angular/router';
-import { ServerConfig, OccConfig, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsService, SemanticPathService, CheckoutService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CartModule, CmsPageTitleModule, NotAuthGuard, CartService, AuthRedirectService, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, ProductSearchService, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
+import { ServerConfig, OccConfig, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CheckoutService, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CartModule, CmsPageTitleModule, NotAuthGuard, CartService, AuthRedirectService, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService, ProductSearchService } from '@spartacus/core';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Pipe, Injector, Inject, PLATFORM_ID, HostBinding, TemplateRef, ViewContainerRef, Optional, ChangeDetectorRef, defineInjectable, inject, INJECTOR } from '@angular/core';
 
@@ -10103,23 +10103,18 @@ ForgotPasswordModule.decorators = [
  */
 class OrderDetailsService {
     /**
-     * @param {?} authService
      * @param {?} userService
      * @param {?} routingService
      */
-    constructor(authService, userService, routingService) {
-        this.authService = authService;
+    constructor(userService, routingService) {
         this.userService = userService;
         this.routingService = routingService;
-        this.userId$ = this.authService
-            .getUserToken()
-            .pipe(map(userData => userData.userId));
         this.orderCode$ = this.routingService
             .getRouterState()
             .pipe(map(routingData => routingData.state.params.orderCode));
-        this.orderLoad$ = combineLatest(this.userId$, this.orderCode$).pipe(tap(([userId, orderCode]) => {
-            if (userId && orderCode) {
-                this.userService.loadOrderDetails(userId, orderCode);
+        this.orderLoad$ = this.orderCode$.pipe(tap(orderCode => {
+            if (orderCode) {
+                this.userService.loadOrderDetails(orderCode);
             }
             else {
                 this.userService.clearOrderDetails();
@@ -10138,7 +10133,6 @@ OrderDetailsService.decorators = [
 ];
 /** @nocollapse */
 OrderDetailsService.ctorParameters = () => [
-    { type: AuthService },
     { type: UserService },
     { type: RoutingService }
 ];
@@ -10403,13 +10397,11 @@ OrderDetailsModule.decorators = [
  */
 class OrderHistoryComponent {
     /**
-     * @param {?} auth
      * @param {?} routing
      * @param {?} userService
      * @param {?} translation
      */
-    constructor(auth, routing, userService, translation) {
-        this.auth = auth;
+    constructor(routing, userService, translation) {
         this.routing = routing;
         this.userService = userService;
         this.translation = translation;
@@ -10419,14 +10411,7 @@ class OrderHistoryComponent {
      * @return {?}
      */
     ngOnInit() {
-        this.subscription = this.auth.getUserToken().subscribe(userData => {
-            if (userData && userData.userId) {
-                this.user_id = userData.userId;
-            }
-        });
-        this.orders$ = this.userService
-            .getOrderHistoryList(this.user_id, this.PAGE_SIZE)
-            .pipe(tap((orders) => {
+        this.orders$ = this.userService.getOrderHistoryList(this.PAGE_SIZE).pipe(tap((orders) => {
             if (orders.pagination) {
                 this.sortType = orders.pagination.sort;
             }
@@ -10437,9 +10422,6 @@ class OrderHistoryComponent {
      * @return {?}
      */
     ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
         this.userService.clearOrderList();
     }
     /**
@@ -10497,7 +10479,7 @@ class OrderHistoryComponent {
      * @return {?}
      */
     fetchOrders(event) {
-        this.userService.loadOrderList(this.user_id, this.PAGE_SIZE, event.currentPage, event.sortCode);
+        this.userService.loadOrderList(this.PAGE_SIZE, event.currentPage, event.sortCode);
     }
 }
 OrderHistoryComponent.decorators = [
@@ -10508,7 +10490,6 @@ OrderHistoryComponent.decorators = [
 ];
 /** @nocollapse */
 OrderHistoryComponent.ctorParameters = () => [
-    { type: AuthService },
     { type: RoutingService },
     { type: UserService },
     { type: TranslationService }

@@ -12018,21 +12018,16 @@ var ForgotPasswordModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var OrderDetailsService = /** @class */ (function () {
-    function OrderDetailsService(authService, userService, routingService) {
+    function OrderDetailsService(userService, routingService) {
         var _this = this;
-        this.authService = authService;
         this.userService = userService;
         this.routingService = routingService;
-        this.userId$ = this.authService
-            .getUserToken()
-            .pipe(map(function (userData) { return userData.userId; }));
         this.orderCode$ = this.routingService
             .getRouterState()
             .pipe(map(function (routingData) { return routingData.state.params.orderCode; }));
-        this.orderLoad$ = combineLatest(this.userId$, this.orderCode$).pipe(tap(function (_a) {
-            var _b = __read(_a, 2), userId = _b[0], orderCode = _b[1];
-            if (userId && orderCode) {
-                _this.userService.loadOrderDetails(userId, orderCode);
+        this.orderLoad$ = this.orderCode$.pipe(tap(function (orderCode) {
+            if (orderCode) {
+                _this.userService.loadOrderDetails(orderCode);
             }
             else {
                 _this.userService.clearOrderDetails();
@@ -12054,7 +12049,6 @@ var OrderDetailsService = /** @class */ (function () {
     ];
     /** @nocollapse */
     OrderDetailsService.ctorParameters = function () { return [
-        { type: AuthService },
         { type: UserService },
         { type: RoutingService }
     ]; };
@@ -12350,8 +12344,7 @@ var OrderDetailsModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var OrderHistoryComponent = /** @class */ (function () {
-    function OrderHistoryComponent(auth, routing, userService, translation) {
-        this.auth = auth;
+    function OrderHistoryComponent(routing, userService, translation) {
         this.routing = routing;
         this.userService = userService;
         this.translation = translation;
@@ -12365,14 +12358,7 @@ var OrderHistoryComponent = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        this.subscription = this.auth.getUserToken().subscribe(function (userData) {
-            if (userData && userData.userId) {
-                _this.user_id = userData.userId;
-            }
-        });
-        this.orders$ = this.userService
-            .getOrderHistoryList(this.user_id, this.PAGE_SIZE)
-            .pipe(tap(function (orders) {
+        this.orders$ = this.userService.getOrderHistoryList(this.PAGE_SIZE).pipe(tap(function (orders) {
             if (orders.pagination) {
                 _this.sortType = orders.pagination.sort;
             }
@@ -12386,9 +12372,6 @@ var OrderHistoryComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
         this.userService.clearOrderList();
     };
     /**
@@ -12467,7 +12450,7 @@ var OrderHistoryComponent = /** @class */ (function () {
      * @return {?}
      */
     function (event) {
-        this.userService.loadOrderList(this.user_id, this.PAGE_SIZE, event.currentPage, event.sortCode);
+        this.userService.loadOrderList(this.PAGE_SIZE, event.currentPage, event.sortCode);
     };
     OrderHistoryComponent.decorators = [
         { type: Component, args: [{
@@ -12477,7 +12460,6 @@ var OrderHistoryComponent = /** @class */ (function () {
     ];
     /** @nocollapse */
     OrderHistoryComponent.ctorParameters = function () { return [
-        { type: AuthService },
         { type: RoutingService },
         { type: UserService },
         { type: TranslationService }

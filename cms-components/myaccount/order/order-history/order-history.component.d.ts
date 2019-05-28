@@ -1,16 +1,13 @@
 import { OnDestroy, OnInit } from '@angular/core';
-import { AuthService, Order, OrderHistoryList, RoutingService, UserService, TranslationService } from '@spartacus/core';
-import { Observable, Subscription } from 'rxjs';
+import { Order, OrderHistoryList, RoutingService, TranslationService, UserService } from '@spartacus/core';
+import { Observable } from 'rxjs';
 export declare class OrderHistoryComponent implements OnInit, OnDestroy {
-    private auth;
     private routing;
     private userService;
     private translation;
-    constructor(auth: AuthService, routing: RoutingService, userService: UserService, translation: TranslationService);
+    constructor(routing: RoutingService, userService: UserService, translation: TranslationService);
     orders$: Observable<OrderHistoryList>;
     isLoaded$: Observable<boolean>;
-    subscription: Subscription;
-    private user_id;
     private PAGE_SIZE;
     sortType: string;
     ngOnInit(): void;

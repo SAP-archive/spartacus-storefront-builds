@@ -12371,21 +12371,16 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var OrderDetailsService = /** @class */ (function () {
-        function OrderDetailsService(authService, userService, routingService) {
+        function OrderDetailsService(userService, routingService) {
             var _this = this;
-            this.authService = authService;
             this.userService = userService;
             this.routingService = routingService;
-            this.userId$ = this.authService
-                .getUserToken()
-                .pipe(operators.map(function (userData) { return userData.userId; }));
             this.orderCode$ = this.routingService
                 .getRouterState()
                 .pipe(operators.map(function (routingData) { return routingData.state.params.orderCode; }));
-            this.orderLoad$ = rxjs.combineLatest(this.userId$, this.orderCode$).pipe(operators.tap(function (_a) {
-                var _b = __read(_a, 2), userId = _b[0], orderCode = _b[1];
-                if (userId && orderCode) {
-                    _this.userService.loadOrderDetails(userId, orderCode);
+            this.orderLoad$ = this.orderCode$.pipe(operators.tap(function (orderCode) {
+                if (orderCode) {
+                    _this.userService.loadOrderDetails(orderCode);
                 }
                 else {
                     _this.userService.clearOrderDetails();
@@ -12408,7 +12403,6 @@
         /** @nocollapse */
         OrderDetailsService.ctorParameters = function () {
             return [
-                { type: i1$1.AuthService },
                 { type: i1$1.UserService },
                 { type: i1$1.RoutingService }
             ];
@@ -12713,8 +12707,7 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var OrderHistoryComponent = /** @class */ (function () {
-        function OrderHistoryComponent(auth, routing, userService, translation) {
-            this.auth = auth;
+        function OrderHistoryComponent(routing, userService, translation) {
             this.routing = routing;
             this.userService = userService;
             this.translation = translation;
@@ -12728,14 +12721,7 @@
          */
             function () {
                 var _this = this;
-                this.subscription = this.auth.getUserToken().subscribe(function (userData) {
-                    if (userData && userData.userId) {
-                        _this.user_id = userData.userId;
-                    }
-                });
-                this.orders$ = this.userService
-                    .getOrderHistoryList(this.user_id, this.PAGE_SIZE)
-                    .pipe(operators.tap(function (orders) {
+                this.orders$ = this.userService.getOrderHistoryList(this.PAGE_SIZE).pipe(operators.tap(function (orders) {
                     if (orders.pagination) {
                         _this.sortType = orders.pagination.sort;
                     }
@@ -12749,9 +12735,6 @@
          * @return {?}
          */
             function () {
-                if (this.subscription) {
-                    this.subscription.unsubscribe();
-                }
                 this.userService.clearOrderList();
             };
         /**
@@ -12830,7 +12813,7 @@
          * @return {?}
          */
             function (event) {
-                this.userService.loadOrderList(this.user_id, this.PAGE_SIZE, event.currentPage, event.sortCode);
+                this.userService.loadOrderList(this.PAGE_SIZE, event.currentPage, event.sortCode);
             };
         OrderHistoryComponent.decorators = [
             { type: i0.Component, args: [{
@@ -12841,7 +12824,6 @@
         /** @nocollapse */
         OrderHistoryComponent.ctorParameters = function () {
             return [
-                { type: i1$1.AuthService },
                 { type: i1$1.RoutingService },
                 { type: i1$1.UserService },
                 { type: i1$1.TranslationService }
