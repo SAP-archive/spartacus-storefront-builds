@@ -7,7 +7,6 @@ export declare class AddressBookComponent implements OnInit {
     addresses$: Observable<Address[]>;
     addressesStateLoading$: Observable<boolean>;
     currentAddress: Address;
-    userId: string;
     showAddAddressForm: boolean;
     showEditAddressForm: boolean;
     constructor(service: AddressBookComponentService);

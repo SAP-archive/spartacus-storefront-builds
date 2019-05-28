@@ -10959,9 +10959,8 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ShippingAddressComponent = /** @class */ (function () {
-        function ShippingAddressComponent(userService, cartData, cartService, routingService, checkoutService, checkoutConfigService, activatedRoute, translation) {
+        function ShippingAddressComponent(userService, cartService, routingService, checkoutService, checkoutConfigService, activatedRoute, translation) {
             this.userService = userService;
-            this.cartData = cartData;
             this.cartService = cartService;
             this.routingService = routingService;
             this.checkoutService = checkoutService;
@@ -10997,7 +10996,7 @@
                     });
                 }));
                 this.cartService.loadDetails();
-                this.userService.loadAddresses(this.cartData.userId);
+                this.userService.loadAddresses();
                 this.setAddressSub = this.checkoutService
                     .getDeliveryAddress()
                     .subscribe(function (address) {
@@ -11176,7 +11175,6 @@
         ShippingAddressComponent.ctorParameters = function () {
             return [
                 { type: i1$1.UserService },
-                { type: i1$1.CartDataService },
                 { type: i1$1.CartService },
                 { type: i1$1.RoutingService },
                 { type: i1$1.CheckoutService },
@@ -11527,53 +11525,35 @@
         /**
          * @return {?}
          */
-        AddressBookComponentService.prototype.getUserId = /**
+        AddressBookComponentService.prototype.loadAddresses = /**
          * @return {?}
          */
             function () {
-                return this.userService.get().pipe(operators.map(function (_a) {
-                    var uid = _a.uid;
-                    return uid;
-                }));
+                this.userService.loadAddresses();
             };
         /**
-         * @param {?} userId
-         * @return {?}
-         */
-        AddressBookComponentService.prototype.loadAddresses = /**
-         * @param {?} userId
-         * @return {?}
-         */
-            function (userId) {
-                this.userService.loadAddresses(userId);
-            };
-        /**
-         * @param {?} userId
          * @param {?} address
          * @return {?}
          */
         AddressBookComponentService.prototype.addUserAddress = /**
-         * @param {?} userId
          * @param {?} address
          * @return {?}
          */
-            function (userId, address) {
-                this.userService.addUserAddress(userId, address);
+            function (address) {
+                this.userService.addUserAddress(address);
             };
         /**
-         * @param {?} userId
          * @param {?} addressId
          * @param {?} address
          * @return {?}
          */
         AddressBookComponentService.prototype.updateUserAddress = /**
-         * @param {?} userId
          * @param {?} addressId
          * @param {?} address
          * @return {?}
          */
-            function (userId, addressId, address) {
-                this.userService.updateUserAddress(userId, addressId, address);
+            function (addressId, address) {
+                this.userService.updateUserAddress(addressId, address);
             };
         AddressBookComponentService.decorators = [
             { type: i0.Injectable }
@@ -11604,16 +11584,9 @@
          * @return {?}
          */
             function () {
-                var _this = this;
                 this.addresses$ = this.service.getAddresses();
                 this.addressesStateLoading$ = this.service.getAddressesStateLoading();
-                this.service
-                    .getUserId()
-                    .pipe(operators.take(1))
-                    .subscribe(function (id) {
-                    _this.userId = id;
-                    _this.service.loadAddresses(id);
-                });
+                this.service.loadAddresses();
             };
         /**
          * @return {?}
@@ -11648,7 +11621,7 @@
          */
             function (address) {
                 this.showAddAddressForm = false;
-                this.service.addUserAddress(this.userId, address);
+                this.service.addUserAddress(address);
             };
         /**
          * @return {?}
@@ -11669,7 +11642,7 @@
          */
             function (address) {
                 this.showEditAddressForm = false;
-                this.service.updateUserAddress(this.userId, this.currentAddress['id'], address);
+                this.service.updateUserAddress(this.currentAddress['id'], address);
             };
         /**
          * @return {?}
@@ -11683,7 +11656,7 @@
         AddressBookComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-address-book',
-                        template: "<div class=\"cx-section\">\n  <ng-container\n    *ngIf=\"\n      (addresses$ | async).length &&\n      !(showAddAddressForm || showEditAddressForm)\n    \"\n  >\n    <div class=\"row\">\n      <div class=\"col-md-6\">\n        <button\n          class=\"btn btn-block btn-action\"\n          (click)=\"addAddressButtonHandle()\"\n        >\n          {{ 'addressBook.addNewAddress' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n\n    <div\n      class=\"row cx-address-deck\"\n      *ngIf=\"!(addressesStateLoading$ | async); else loading\"\n    >\n      <div\n        *ngFor=\"let address of (addresses$ | async)\"\n        class=\"col-md-6 cx-address-card\"\n      >\n        <cx-address-card\n          (editEvent)=\"editAddressButtonHandle(address)\"\n          [userId]=\"userId\"\n          [address]=\"address\"\n        ></cx-address-card>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-container *ngIf=\"!(addresses$ | async).length || showAddAddressForm\">\n    <section>\n      <p class=\"cx-section-msg\">\n        {{ 'addressBook.addNewShippingAddress' | cxTranslate }}\n      </p>\n      <cx-address-form\n        class=\"cx-form\"\n        showTitleCode=\"true\"\n        [showCancelBtn]=\"!((addresses$ | async).length === 0)\"\n        actionBtnLabel=\"{{ 'addressBook.addAddress' | cxTranslate }}\"\n        cancelBtnLabel=\"{{ 'addressBook.backToAddressList' | cxTranslate }}\"\n        [setAsDefaultField]=\"!((addresses$ | async).length === 0)\"\n        (submitAddress)=\"addAddressSubmit($event)\"\n        (backToAddress)=\"addAddressCancel()\"\n      ></cx-address-form>\n    </section>\n  </ng-container>\n\n  <ng-container *ngIf=\"showEditAddressForm\">\n    <section>\n      <p class=\"cx-section-msg\">\n        {{ 'addressBook.editShippingAddress' | cxTranslate }}\n      </p>\n      <cx-address-form\n        showTitleCode=\"true\"\n        actionBtnLabel=\"{{ 'addressBook.updateAddress' | cxTranslate }}\"\n        cancelBtnLabel=\"{{ 'addressBook.backToAddressList' | cxTranslate }}\"\n        [addressData]=\"currentAddress\"\n        (submitAddress)=\"editAddressSubmit($event)\"\n        (backToAddress)=\"editAddressCancel()\"\n      ></cx-address-form>\n    </section>\n  </ng-container>\n</div>\n\n<ng-template #loading>\n  <div class=\"col-md-12 cx-address-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n"
+                        template: "<div class=\"cx-section\">\n  <ng-container\n    *ngIf=\"\n      (addresses$ | async).length &&\n      !(showAddAddressForm || showEditAddressForm)\n    \"\n  >\n    <div class=\"row\">\n      <div class=\"col-md-6\">\n        <button\n          class=\"btn btn-block btn-action\"\n          (click)=\"addAddressButtonHandle()\"\n        >\n          {{ 'addressBook.addNewAddress' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n\n    <div\n      class=\"row cx-address-deck\"\n      *ngIf=\"!(addressesStateLoading$ | async); else loading\"\n    >\n      <div\n        *ngFor=\"let address of (addresses$ | async)\"\n        class=\"col-md-6 cx-address-card\"\n      >\n        <cx-address-card\n          (editEvent)=\"editAddressButtonHandle(address)\"\n          [address]=\"address\"\n        ></cx-address-card>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-container *ngIf=\"!(addresses$ | async).length || showAddAddressForm\">\n    <section>\n      <p class=\"cx-section-msg\">\n        {{ 'addressBook.addNewShippingAddress' | cxTranslate }}\n      </p>\n      <cx-address-form\n        class=\"cx-form\"\n        showTitleCode=\"true\"\n        [showCancelBtn]=\"!((addresses$ | async).length === 0)\"\n        actionBtnLabel=\"{{ 'addressBook.addAddress' | cxTranslate }}\"\n        cancelBtnLabel=\"{{ 'addressBook.backToAddressList' | cxTranslate }}\"\n        [setAsDefaultField]=\"!((addresses$ | async).length === 0)\"\n        (submitAddress)=\"addAddressSubmit($event)\"\n        (backToAddress)=\"addAddressCancel()\"\n      ></cx-address-form>\n    </section>\n  </ng-container>\n\n  <ng-container *ngIf=\"showEditAddressForm\">\n    <section>\n      <p class=\"cx-section-msg\">\n        {{ 'addressBook.editShippingAddress' | cxTranslate }}\n      </p>\n      <cx-address-form\n        showTitleCode=\"true\"\n        actionBtnLabel=\"{{ 'addressBook.updateAddress' | cxTranslate }}\"\n        cancelBtnLabel=\"{{ 'addressBook.backToAddressList' | cxTranslate }}\"\n        [addressData]=\"currentAddress\"\n        (submitAddress)=\"editAddressSubmit($event)\"\n        (backToAddress)=\"editAddressCancel()\"\n      ></cx-address-form>\n    </section>\n  </ng-container>\n</div>\n\n<ng-template #loading>\n  <div class=\"col-md-12 cx-address-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n"
                     }] }
         ];
         /** @nocollapse */
@@ -11740,9 +11713,7 @@
          * @return {?}
          */
             function (addressId) {
-                if (this.userId) {
-                    this.userService.setAddressAsDefault(this.userId, addressId);
-                }
+                this.userService.setAddressAsDefault(addressId);
             };
         /**
          * @param {?} addressId
@@ -11753,9 +11724,7 @@
          * @return {?}
          */
             function (addressId) {
-                if (this.userId) {
-                    this.userService.deleteUserAddress(this.userId, addressId);
-                }
+                this.userService.deleteUserAddress(addressId);
             };
         AddressCardComponent.decorators = [
             { type: i0.Component, args: [{
@@ -11770,7 +11739,6 @@
             ];
         };
         AddressCardComponent.propDecorators = {
-            userId: [{ type: i0.Input }],
             address: [{ type: i0.Input }],
             editEvent: [{ type: i0.Output }]
         };

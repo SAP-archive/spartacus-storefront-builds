@@ -4,7 +4,6 @@ export declare class AddressCardComponent {
     private userService;
     editMode: boolean;
     isDefault: boolean;
-    userId: string;
     address: Address;
     editEvent: EventEmitter<any>;
     constructor(userService: UserService);
