@@ -8,7 +8,7 @@ import { FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, FormB
 import { debounceTime, filter, map, switchMap, take, tap, skipWhile, distinctUntilChanged, startWith, endWith, first, withLatestFrom, delay, shareReplay } from 'rxjs/operators';
 import { Title, Meta } from '@angular/platform-browser';
 import { RouterModule, NavigationStart, Router, ActivatedRoute } from '@angular/router';
-import { ServerConfig, OccConfig, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CheckoutService, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CartModule, CmsPageTitleModule, NotAuthGuard, CartService, AuthRedirectService, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService, ProductSearchService } from '@spartacus/core';
+import { ServerConfig, OccConfig, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsService, SemanticPathService, CheckoutService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CartModule, CmsPageTitleModule, NotAuthGuard, CartService, AuthRedirectService, StoreFinderCoreModule, GlobalMessageModule, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, ProductSearchService, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Pipe, Injector, Inject, PLATFORM_ID, HostBinding, TemplateRef, ViewContainerRef, Optional, ChangeDetectorRef, defineInjectable, inject, INJECTOR } from '@angular/core';
 
@@ -8084,7 +8084,6 @@ PaymentFormModule.decorators = [
  */
 class PaymentMethodComponent {
     /**
-     * @param {?} cartData
      * @param {?} userService
      * @param {?} checkoutService
      * @param {?} globalMessageService
@@ -8094,8 +8093,7 @@ class PaymentMethodComponent {
      * @param {?} activatedRoute
      * @param {?} translation
      */
-    constructor(cartData, userService, checkoutService, globalMessageService, routingConfigService, routingService, checkoutConfigService, activatedRoute, translation) {
-        this.cartData = cartData;
+    constructor(userService, checkoutService, globalMessageService, routingConfigService, routingService, checkoutConfigService, activatedRoute, translation) {
         this.userService = userService;
         this.checkoutService = checkoutService;
         this.globalMessageService = globalMessageService;
@@ -8112,7 +8110,7 @@ class PaymentMethodComponent {
      */
     ngOnInit() {
         this.isLoading$ = this.userService.getPaymentMethodsLoading();
-        this.userService.loadPaymentMethods(this.cartData.userId);
+        this.userService.loadPaymentMethods();
         this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
         this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
         this.existingPaymentMethods$ = this.userService.getPaymentMethods();
@@ -8286,7 +8284,6 @@ PaymentMethodComponent.decorators = [
 ];
 /** @nocollapse */
 PaymentMethodComponent.ctorParameters = () => [
-    { type: CartDataService },
     { type: UserService },
     { type: CheckoutService },
     { type: GlobalMessageService },
@@ -10543,10 +10540,7 @@ class PaymentMethodsComponent {
         }));
         this.editCard = null;
         this.loading$ = this.userService.getPaymentMethodsLoading();
-        this.userServiceSub = this.userService.get().subscribe(data => {
-            this.userId = data.uid;
-            this.userService.loadPaymentMethods(this.userId);
-        });
+        this.userService.loadPaymentMethods();
     }
     /**
      * @param {?} __0
@@ -10585,9 +10579,7 @@ class PaymentMethodsComponent {
      * @return {?}
      */
     deletePaymentMethod(paymentMethod) {
-        if (this.userId) {
-            this.userService.deletePaymentMethod(this.userId, paymentMethod.id);
-        }
+        this.userService.deletePaymentMethod(paymentMethod.id);
         this.editCard = null;
     }
     /**
@@ -10608,9 +10600,7 @@ class PaymentMethodsComponent {
      * @return {?}
      */
     setDefaultPaymentMethod(paymentMethod) {
-        if (this.userId) {
-            this.userService.setPaymentMethodAsDefault(this.userId, paymentMethod.id);
-        }
+        this.userService.setPaymentMethodAsDefault(paymentMethod.id);
     }
     /**
      * @return {?}

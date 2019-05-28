@@ -1,12 +1,11 @@
 import { OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { Address, CartDataService, CheckoutService, GlobalMessageService, RoutingService, PaymentDetails, UserService, TranslationService, RoutingConfigService } from '@spartacus/core';
 import { ActivatedRoute } from '@angular/router';
+import { Address, CheckoutService, GlobalMessageService, PaymentDetails, RoutingConfigService, RoutingService, TranslationService, UserService } from '@spartacus/core';
+import { Observable, Subscription } from 'rxjs';
+import { ICON_TYPE } from '../../../../cms-components/misc/icon';
 import { Card } from '../../../../shared/components/card/card.component';
 import { CheckoutConfigService } from '../../checkout-config.service';
-import { ICON_TYPE } from '../../../../cms-components/misc/icon';
 export declare class PaymentMethodComponent implements OnInit, OnDestroy {
-    protected cartData: CartDataService;
     protected userService: UserService;
     protected checkoutService: CheckoutService;
     protected globalMessageService: GlobalMessageService;
@@ -25,7 +24,7 @@ export declare class PaymentMethodComponent implements OnInit, OnDestroy {
     deliveryAddress: Address;
     checkoutStepUrlNext: string;
     checkoutStepUrlPrevious: string;
-    constructor(cartData: CartDataService, userService: UserService, checkoutService: CheckoutService, globalMessageService: GlobalMessageService, routingConfigService: RoutingConfigService, routingService: RoutingService, checkoutConfigService: CheckoutConfigService, activatedRoute: ActivatedRoute, translation: TranslationService);
+    constructor(userService: UserService, checkoutService: CheckoutService, globalMessageService: GlobalMessageService, routingConfigService: RoutingConfigService, routingService: RoutingService, checkoutConfigService: CheckoutConfigService, activatedRoute: ActivatedRoute, translation: TranslationService);
     ngOnInit(): void;
     getCardContent(payment: PaymentDetails): Observable<Card>;
     paymentMethodSelected(paymentDetails: PaymentDetails): void;

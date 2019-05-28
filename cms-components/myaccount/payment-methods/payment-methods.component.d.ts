@@ -1,5 +1,5 @@
 import { OnDestroy, OnInit } from '@angular/core';
-import { PaymentDetails, UserService, TranslationService } from '@spartacus/core';
+import { PaymentDetails, TranslationService, UserService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { Card } from '../../../shared/components/card/card.component';
 export declare class PaymentMethodsComponent implements OnInit, OnDestroy {
@@ -8,7 +8,6 @@ export declare class PaymentMethodsComponent implements OnInit, OnDestroy {
     paymentMethods$: Observable<PaymentDetails[]>;
     editCard: string;
     loading$: Observable<boolean>;
-    userId: string;
     userServiceSub: Subscription;
     constructor(userService: UserService, translation: TranslationService);
     ngOnInit(): void;

@@ -10009,8 +10009,7 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var PaymentMethodComponent = /** @class */ (function () {
-        function PaymentMethodComponent(cartData, userService, checkoutService, globalMessageService, routingConfigService, routingService, checkoutConfigService, activatedRoute, translation) {
-            this.cartData = cartData;
+        function PaymentMethodComponent(userService, checkoutService, globalMessageService, routingConfigService, routingService, checkoutConfigService, activatedRoute, translation) {
             this.userService = userService;
             this.checkoutService = checkoutService;
             this.globalMessageService = globalMessageService;
@@ -10031,7 +10030,7 @@
             function () {
                 var _this = this;
                 this.isLoading$ = this.userService.getPaymentMethodsLoading();
-                this.userService.loadPaymentMethods(this.cartData.userId);
+                this.userService.loadPaymentMethods();
                 this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
                 this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
                 this.existingPaymentMethods$ = this.userService.getPaymentMethods();
@@ -10246,7 +10245,6 @@
         /** @nocollapse */
         PaymentMethodComponent.ctorParameters = function () {
             return [
-                { type: i1$1.CartDataService },
                 { type: i1$1.UserService },
                 { type: i1$1.CheckoutService },
                 { type: i1$1.GlobalMessageService },
@@ -12872,10 +12870,7 @@
                 }));
                 this.editCard = null;
                 this.loading$ = this.userService.getPaymentMethodsLoading();
-                this.userServiceSub = this.userService.get().subscribe(function (data) {
-                    _this.userId = data.uid;
-                    _this.userService.loadPaymentMethods(_this.userId);
-                });
+                this.userService.loadPaymentMethods();
             };
         /**
          * @param {?} __0
@@ -12924,9 +12919,7 @@
          * @return {?}
          */
             function (paymentMethod) {
-                if (this.userId) {
-                    this.userService.deletePaymentMethod(this.userId, paymentMethod.id);
-                }
+                this.userService.deletePaymentMethod(paymentMethod.id);
                 this.editCard = null;
             };
         /**
@@ -12958,9 +12951,7 @@
          * @return {?}
          */
             function (paymentMethod) {
-                if (this.userId) {
-                    this.userService.setPaymentMethodAsDefault(this.userId, paymentMethod.id);
-                }
+                this.userService.setPaymentMethodAsDefault(paymentMethod.id);
             };
         /**
          * @return {?}
