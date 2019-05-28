@@ -7,8 +7,6 @@ export declare class MediaService {
     constructor(config: OccConfig, layoutConfig: LayoutConfig);
     private mediaFormats;
     getMedia(container: any, format?: string, alt?: string): Media;
-    getMissingImage(alt?: string): Media;
-    private getMissingImageSrc;
     private getMainImage;
     private getAlt;
     /**

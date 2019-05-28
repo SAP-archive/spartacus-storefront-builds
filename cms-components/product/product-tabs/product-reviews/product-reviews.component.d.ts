@@ -1,5 +1,5 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ProductReviewService, Review, Product } from '@spartacus/core';
+import { Product, ProductReviewService, Review } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { CurrentProductService } from '../../current-product.service';
 export declare class ProductReviewsComponent {

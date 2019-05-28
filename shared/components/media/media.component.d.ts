@@ -29,12 +29,22 @@ export declare class MediaComponent implements OnChanges {
      */
     media: Media;
     /**
-     * The `cx-media` component has a `loading` class as long as the
-     * media is loaded. Wehn the media is loaded, the `initialized` class
+     * The `cx-media` component has an `is-initialized` class as long as the
+     * media is being initialized.
+     */
+    isInitialized: boolean;
+    /**
+     * The `cx-media` component has a `is-loading` class as long as the
+     * media is loaded. Wehn the media is loaded, the `is-initialized` class
      * is added.
      */
     isLoading: boolean;
-    isInitialized: boolean;
+    /**
+     * When there's no media provided for the content, or in case an error
+     * happened during loading, we add the `is-missing` class. Visual effects
+     * can be controlled by CSS.
+     */
+    isMissing: boolean;
     constructor(mediaService: MediaService);
     ngOnChanges(): void;
     /**
@@ -43,13 +53,12 @@ export declare class MediaComponent implements OnChanges {
     private create;
     /**
      * This handler is called from the UI when the image is loaded.
-     * The
      */
     loadHandler(): void;
     /**
-     * Whenever an error happens during load, we fall back to a missing image.
-     * This means we need to update the local media object. In this scenario we
-     * do not provide a `srcset` for responsive images.
+     * Whenever an error happens during load, we mark the component
+     * with css classes to have a missing media.
      */
     errorHandler(): void;
+    private handleMissing;
 }
