@@ -4,13 +4,13 @@ import { NgbTabsetModule, NgbAccordionModule, NgbTabsetConfig, NgbAccordionConfi
 import { NgSelectModule } from '@ng-select/ng-select';
 import { of, fromEvent, BehaviorSubject, concat, from, isObservable, combineLatest, Subscription } from 'rxjs';
 import { FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { debounceTime, filter, map, switchMap, take, tap, skipWhile, distinctUntilChanged, startWith, endWith, first, withLatestFrom, delay, shareReplay, pluck } from 'rxjs/operators';
+import { debounceTime, filter, map, switchMap, take, tap, skipWhile, distinctUntilChanged, startWith, endWith, first, withLatestFrom, delay, shareReplay } from 'rxjs/operators';
 import { Title, Meta } from '@angular/platform-browser';
 import { __values, __spread, __read, __extends, __assign, __awaiter, __generator } from 'tslib';
 import { RouterModule, NavigationStart, Router, ActivatedRoute } from '@angular/router';
-import { ServerConfig, OccConfig, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsService, SemanticPathService, CheckoutService, Config, CheckoutModule, defaultCmsModuleConfig, CmsModule, DynamicAttributeService, CxApiService, ComponentMapperService, UserModule, AuthService, UserService, CartModule, PageMetaService, CmsPageTitleModule, NotAuthGuard, AuthRedirectService, CartService, StoreFinderCoreModule, GlobalMessageModule, PageRobotsMeta, CartDataService, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, SearchboxService, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService, ProductSearchService } from '@spartacus/core';
+import { ServerConfig, OccConfig, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CheckoutService, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, DynamicAttributeService, CxApiService, ComponentMapperService, UserModule, AuthService, UserService, CartModule, PageMetaService, CmsPageTitleModule, NotAuthGuard, CartService, PageRobotsMeta, AuthRedirectService, StoreFinderCoreModule, GlobalMessageModule, CartDataService, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, SearchboxService, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService, ProductSearchService } from '@spartacus/core';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
-import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Pipe, HostBinding, Injector, TemplateRef, Optional, ChangeDetectorRef, defineInjectable, inject, INJECTOR, Inject, PLATFORM_ID, ViewContainerRef } from '@angular/core';
+import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Pipe, Injector, HostBinding, TemplateRef, Optional, ChangeDetectorRef, defineInjectable, inject, INJECTOR, Inject, PLATFORM_ID, ViewContainerRef } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -11704,15 +11704,11 @@ var ConsentManagementComponent = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        this.templateList$ = combineLatest(this.userService.get(), this.userService.getConsents()).pipe(filter(function (_a) {
-            var _b = __read(_a, 1), user = _b[0];
-            return Boolean(user) && Boolean(user.uid);
-        }), tap(function (_a) {
-            var _b = __read(_a, 2), user = _b[0], templateList = _b[1];
+        this.templateList$ = this.userService.getConsents().pipe(tap(function (templateList) {
             if (!_this.consentsExists(templateList)) {
-                _this.userService.loadConsents(user.uid);
+                _this.userService.loadConsents();
             }
-        }), pluck(1));
+        }));
     };
     /**
      * @private
@@ -11742,16 +11738,16 @@ var ConsentManagementComponent = /** @class */ (function () {
         this.userService.resetWithdrawConsentProcessState();
         this.subscriptions.add(this.userService
             .getWithdrawConsentResultLoading()
-            .pipe(skipWhile(Boolean), withLatestFrom(this.userService.getWithdrawConsentResultSuccess(), this.userService.get()), map(function (_a) {
-            var _b = __read(_a, 3), withdrawalSuccess = _b[1], user = _b[2];
-            return ({ withdrawalSuccess: withdrawalSuccess, user: user });
-        }), tap(function (data) {
-            if (data.withdrawalSuccess) {
-                _this.userService.loadConsents(data.user.uid);
+            .pipe(skipWhile(Boolean), withLatestFrom(this.userService.getWithdrawConsentResultSuccess()), map(function (_a) {
+            var _b = __read(_a, 2), withdrawalSuccess = _b[1];
+            return withdrawalSuccess;
+        }), tap(function (withdrawalSuccess) {
+            if (withdrawalSuccess) {
+                _this.userService.loadConsents();
             }
         }))
-            .subscribe(function (data) {
-            return _this.onConsentWithdrawnSuccess(data.withdrawalSuccess);
+            .subscribe(function (withdrawalSuccess) {
+            return _this.onConsentWithdrawnSuccess(withdrawalSuccess);
         }));
     };
     /**
@@ -11776,19 +11772,13 @@ var ConsentManagementComponent = /** @class */ (function () {
      * @return {?}
      */
     function (_a) {
-        var _this = this;
         var given = _a.given, template = _a.template;
-        this.userService
-            .get()
-            .pipe(pluck('uid'), tap(function (userId) {
-            if (given) {
-                _this.userService.giveConsent(userId, template.id, template.version);
-            }
-            else {
-                _this.userService.withdrawConsent(userId, template.currentConsent.code);
-            }
-        }), take(1))
-            .subscribe();
+        if (given) {
+            this.userService.giveConsent(template.id, template.version);
+        }
+        else {
+            this.userService.withdrawConsent(template.currentConsent.code);
+        }
     };
     /**
      * @return {?}

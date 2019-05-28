@@ -12053,15 +12053,11 @@
          */
             function () {
                 var _this = this;
-                this.templateList$ = rxjs.combineLatest(this.userService.get(), this.userService.getConsents()).pipe(operators.filter(function (_a) {
-                    var _b = __read(_a, 1), user = _b[0];
-                    return Boolean(user) && Boolean(user.uid);
-                }), operators.tap(function (_a) {
-                    var _b = __read(_a, 2), user = _b[0], templateList = _b[1];
+                this.templateList$ = this.userService.getConsents().pipe(operators.tap(function (templateList) {
                     if (!_this.consentsExists(templateList)) {
-                        _this.userService.loadConsents(user.uid);
+                        _this.userService.loadConsents();
                     }
-                }), operators.pluck(1));
+                }));
             };
         /**
          * @private
@@ -12091,16 +12087,16 @@
                 this.userService.resetWithdrawConsentProcessState();
                 this.subscriptions.add(this.userService
                     .getWithdrawConsentResultLoading()
-                    .pipe(operators.skipWhile(Boolean), operators.withLatestFrom(this.userService.getWithdrawConsentResultSuccess(), this.userService.get()), operators.map(function (_a) {
-                    var _b = __read(_a, 3), withdrawalSuccess = _b[1], user = _b[2];
-                    return ({ withdrawalSuccess: withdrawalSuccess, user: user });
-                }), operators.tap(function (data) {
-                    if (data.withdrawalSuccess) {
-                        _this.userService.loadConsents(data.user.uid);
+                    .pipe(operators.skipWhile(Boolean), operators.withLatestFrom(this.userService.getWithdrawConsentResultSuccess()), operators.map(function (_a) {
+                    var _b = __read(_a, 2), withdrawalSuccess = _b[1];
+                    return withdrawalSuccess;
+                }), operators.tap(function (withdrawalSuccess) {
+                    if (withdrawalSuccess) {
+                        _this.userService.loadConsents();
                     }
                 }))
-                    .subscribe(function (data) {
-                    return _this.onConsentWithdrawnSuccess(data.withdrawalSuccess);
+                    .subscribe(function (withdrawalSuccess) {
+                    return _this.onConsentWithdrawnSuccess(withdrawalSuccess);
                 }));
             };
         /**
@@ -12125,19 +12121,13 @@
          * @return {?}
          */
             function (_a) {
-                var _this = this;
                 var given = _a.given, template = _a.template;
-                this.userService
-                    .get()
-                    .pipe(operators.pluck('uid'), operators.tap(function (userId) {
-                    if (given) {
-                        _this.userService.giveConsent(userId, template.id, template.version);
-                    }
-                    else {
-                        _this.userService.withdrawConsent(userId, template.currentConsent.code);
-                    }
-                }), operators.take(1))
-                    .subscribe();
+                if (given) {
+                    this.userService.giveConsent(template.id, template.version);
+                }
+                else {
+                    this.userService.withdrawConsent(template.currentConsent.code);
+                }
             };
         /**
          * @return {?}
