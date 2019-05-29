@@ -3170,6 +3170,7 @@ class LoginFormComponent {
      */
     login() {
         this.auth.authorize(this.form.controls.userId.value, this.form.controls.password.value);
+        this.auth.authorizeOpenId(this.form.controls.userId.value, this.form.controls.password.value);
         if (!this.sub) {
             this.sub = this.auth.getUserToken().subscribe(data => {
                 if (data && data.access_token) {
