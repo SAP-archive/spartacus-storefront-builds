@@ -3580,48 +3580,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var SkipLinkComponent = /** @class */ (function () {
-        function SkipLinkComponent() {
-        }
-        SkipLinkComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-skip-link',
-                        template: "<a class=\"sr-only sr-only-focusable\" href=\"#header-categories-container\">\n  {{ 'header.skipToNavigation' | cxTranslate }}\n</a>\n<a class=\"sr-only sr-only-focusable\" href=\"#mini-cart\">{{\n  'header.skipToShoppingCart' | cxTranslate\n}}</a>\n<a class=\"sr-only sr-only-focusable\" href=\"#main-content\">{{\n  'header.skipToMainContent' | cxTranslate\n}}</a>\n<a class=\"sr-only sr-only-focusable\" href=\"#footer\">{{\n  'header.skipToFooter' | cxTranslate\n}}</a>\n",
-                        styles: [":host{position:absolute;top:0;left:0}"]
-                    }] }
-        ];
-        return SkipLinkComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var SkipLinkModule = /** @class */ (function () {
-        function SkipLinkModule() {
-        }
-        SkipLinkModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i1$1.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    SkipLinkComponent: { selector: 'cx-skip-link' },
-                                },
-                            }))),
-                            i1$1.I18nModule,
-                        ],
-                        declarations: [SkipLinkComponent],
-                        entryComponents: [SkipLinkComponent],
-                    },] }
-        ];
-        return SkipLinkModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
 
     /**
      * @fileoverview added by tsickle
@@ -15808,7 +15766,6 @@
         CmsLibModule.decorators = [
             { type: i0.NgModule, args: [{
                         imports: [
-                            SkipLinkModule,
                             HamburgerMenuModule,
                             CmsParagraphModule,
                             LinkModule,
@@ -16412,8 +16369,6 @@
     exports.HamburgerMenuComponent = HamburgerMenuComponent;
     exports.HamburgerMenuModule = HamburgerMenuModule;
     exports.HamburgerMenuService = HamburgerMenuService;
-    exports.SkipLinkComponent = SkipLinkComponent;
-    exports.SkipLinkModule = SkipLinkModule;
     exports.LayoutModule = LayoutModule;
     exports.MainModule = MainModule;
     exports.StorefrontComponent = StorefrontComponent;
