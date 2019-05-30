@@ -512,9 +512,115 @@ GenericLinkModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @type {?} */
+const PAGE_FIRST = 1;
+/** @type {?} */
+const PAGE_WINDOW_SIZE = 3;
 class PaginationComponent {
     constructor() {
         this.viewPageEvent = new EventEmitter();
+    }
+    // Because pagination model uses indexes starting from 0,
+    // add 1 to get current page number
+    /**
+     * @private
+     * @return {?}
+     */
+    getCurrentPageNumber() {
+        return this.pagination.currentPage + 1;
+    }
+    /**
+     * @return {?}
+     */
+    getPagePrevious() {
+        return this.getCurrentPageNumber() - 1;
+    }
+    /**
+     * @return {?}
+     */
+    getPageNext() {
+        return this.getCurrentPageNumber() + 1;
+    }
+    /**
+     * @return {?}
+     */
+    getPageIndicies() {
+        return Array(this.pagination.totalPages);
+    }
+    // Gets the minimum index of page numbers that can be shown by being within the page window range
+    /**
+     * @return {?}
+     */
+    getPageWindowMinIndex() {
+        return (Math.floor(this.pagination.currentPage / PAGE_WINDOW_SIZE) *
+            PAGE_WINDOW_SIZE);
+    }
+    // Gets the maximum index of page numbers that can be shown by being within the page window range
+    /**
+     * @return {?}
+     */
+    getPageWindowMaxIndex() {
+        return (Math.floor(this.pagination.currentPage / PAGE_WINDOW_SIZE) *
+            PAGE_WINDOW_SIZE +
+            2);
+    }
+    /**
+     * @return {?}
+     */
+    hasPages() {
+        return this.pagination.totalPages > 0;
+    }
+    /**
+     * @return {?}
+     */
+    onFirstPage() {
+        return this.pagination.currentPage === 0;
+    }
+    /**
+     * @return {?}
+     */
+    onLastPage() {
+        return this.pagination.currentPage === this.pagination.totalPages - 1;
+    }
+    /**
+     * @param {?} index
+     * @return {?}
+     */
+    onPageIndex(index) {
+        return this.pagination.currentPage === index;
+    }
+    /**
+     * @param {?} index
+     * @return {?}
+     */
+    hidePageIndex(index) {
+        return ((this.getPageWindowMinIndex() > index ||
+            this.getPageWindowMaxIndex() < index) &&
+            (index > 0 && index < this.pagination.totalPages - 1));
+    }
+    /**
+     * @param {?} index
+     * @return {?}
+     */
+    showDots(index) {
+        return (this.hidePageIndex(index) &&
+            (index === this.getPageWindowMaxIndex() + 1 ||
+                index === this.getPageWindowMinIndex() - 1));
+    }
+    /**
+     * @param {?} page
+     * @return {?}
+     */
+    clickPageNo(page) {
+        // Change page on valid index
+        if (page >= PAGE_FIRST &&
+            page <= this.pagination.totalPages &&
+            page !== this.getCurrentPageNumber()) {
+            this.pageChange(page);
+            return page;
+        }
+        // Page stays the same on invalid index
+        return this.pagination.currentPage;
     }
     /**
      * @param {?} page
@@ -527,7 +633,7 @@ class PaginationComponent {
 PaginationComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-pagination',
-                template: "<ngb-pagination\n  [collectionSize]=\"pagination.totalResults\"\n  [page]=\"pagination.currentPage + 1\"\n  (pageChange)=\"pageChange($event)\"\n  [maxSize]=\"3\"\n  [pageSize]=\"pagination.pageSize\"\n>\n</ngb-pagination>\n",
+                template: "<ul class=\"pagination\">\n  <!-- Previous -->\n  <li class=\"page-item\" [ngClass]=\"{ disabled: onFirstPage() || !hasPages() }\">\n    <a class=\"page-link\" (click)=\"clickPageNo(getPagePrevious())\">\u00AB</a>\n  </li>\n\n  <!-- Page Index -->\n  <li\n    class=\"page-item\"\n    *ngFor=\"let page of getPageIndicies(); let i = index\"\n    [ngClass]=\"{ active: onPageIndex(i), disabled: showDots(i) }\"\n  >\n    <a class=\"page-link\" *ngIf=\"showDots(i)\">...</a>\n    <a\n      class=\"page-link\"\n      *ngIf=\"!hidePageIndex(i)\"\n      (click)=\"clickPageNo(i + 1)\"\n      >{{ i + 1 }}</a\n    >\n  </li>\n\n  <!-- Next -->\n  <li class=\"page-item\" [ngClass]=\"{ disabled: onLastPage() || !hasPages() }\">\n    <a class=\"page-link\" (click)=\"clickPageNo(getPageNext())\">\u00BB</a>\n  </li>\n</ul>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];

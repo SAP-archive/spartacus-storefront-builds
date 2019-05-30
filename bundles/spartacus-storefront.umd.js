@@ -673,10 +673,171 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /** @type {?} */
+    var PAGE_FIRST = 1;
+    /** @type {?} */
+    var PAGE_WINDOW_SIZE = 3;
     var PaginationComponent = /** @class */ (function () {
         function PaginationComponent() {
             this.viewPageEvent = new i0.EventEmitter();
         }
+        // Because pagination model uses indexes starting from 0,
+        // add 1 to get current page number
+        // Because pagination model uses indexes starting from 0,
+        // add 1 to get current page number
+        /**
+         * @private
+         * @return {?}
+         */
+        PaginationComponent.prototype.getCurrentPageNumber =
+            // Because pagination model uses indexes starting from 0,
+            // add 1 to get current page number
+            /**
+             * @private
+             * @return {?}
+             */
+            function () {
+                return this.pagination.currentPage + 1;
+            };
+        /**
+         * @return {?}
+         */
+        PaginationComponent.prototype.getPagePrevious = /**
+         * @return {?}
+         */
+            function () {
+                return this.getCurrentPageNumber() - 1;
+            };
+        /**
+         * @return {?}
+         */
+        PaginationComponent.prototype.getPageNext = /**
+         * @return {?}
+         */
+            function () {
+                return this.getCurrentPageNumber() + 1;
+            };
+        /**
+         * @return {?}
+         */
+        PaginationComponent.prototype.getPageIndicies = /**
+         * @return {?}
+         */
+            function () {
+                return Array(this.pagination.totalPages);
+            };
+        // Gets the minimum index of page numbers that can be shown by being within the page window range
+        // Gets the minimum index of page numbers that can be shown by being within the page window range
+        /**
+         * @return {?}
+         */
+        PaginationComponent.prototype.getPageWindowMinIndex =
+            // Gets the minimum index of page numbers that can be shown by being within the page window range
+            /**
+             * @return {?}
+             */
+            function () {
+                return (Math.floor(this.pagination.currentPage / PAGE_WINDOW_SIZE) *
+                    PAGE_WINDOW_SIZE);
+            };
+        // Gets the maximum index of page numbers that can be shown by being within the page window range
+        // Gets the maximum index of page numbers that can be shown by being within the page window range
+        /**
+         * @return {?}
+         */
+        PaginationComponent.prototype.getPageWindowMaxIndex =
+            // Gets the maximum index of page numbers that can be shown by being within the page window range
+            /**
+             * @return {?}
+             */
+            function () {
+                return (Math.floor(this.pagination.currentPage / PAGE_WINDOW_SIZE) *
+                    PAGE_WINDOW_SIZE +
+                    2);
+            };
+        /**
+         * @return {?}
+         */
+        PaginationComponent.prototype.hasPages = /**
+         * @return {?}
+         */
+            function () {
+                return this.pagination.totalPages > 0;
+            };
+        /**
+         * @return {?}
+         */
+        PaginationComponent.prototype.onFirstPage = /**
+         * @return {?}
+         */
+            function () {
+                return this.pagination.currentPage === 0;
+            };
+        /**
+         * @return {?}
+         */
+        PaginationComponent.prototype.onLastPage = /**
+         * @return {?}
+         */
+            function () {
+                return this.pagination.currentPage === this.pagination.totalPages - 1;
+            };
+        /**
+         * @param {?} index
+         * @return {?}
+         */
+        PaginationComponent.prototype.onPageIndex = /**
+         * @param {?} index
+         * @return {?}
+         */
+            function (index) {
+                return this.pagination.currentPage === index;
+            };
+        /**
+         * @param {?} index
+         * @return {?}
+         */
+        PaginationComponent.prototype.hidePageIndex = /**
+         * @param {?} index
+         * @return {?}
+         */
+            function (index) {
+                return ((this.getPageWindowMinIndex() > index ||
+                    this.getPageWindowMaxIndex() < index) &&
+                    (index > 0 && index < this.pagination.totalPages - 1));
+            };
+        /**
+         * @param {?} index
+         * @return {?}
+         */
+        PaginationComponent.prototype.showDots = /**
+         * @param {?} index
+         * @return {?}
+         */
+            function (index) {
+                return (this.hidePageIndex(index) &&
+                    (index === this.getPageWindowMaxIndex() + 1 ||
+                        index === this.getPageWindowMinIndex() - 1));
+            };
+        /**
+         * @param {?} page
+         * @return {?}
+         */
+        PaginationComponent.prototype.clickPageNo = /**
+         * @param {?} page
+         * @return {?}
+         */
+            function (page) {
+                // Change page on valid index
+                if (page >= PAGE_FIRST &&
+                    page <= this.pagination.totalPages &&
+                    page !== this.getCurrentPageNumber()) {
+                    this.pageChange(page);
+                    return page;
+                }
+                // Page stays the same on invalid index
+                return this.pagination.currentPage;
+            };
         /**
          * @param {?} page
          * @return {?}
@@ -691,7 +852,7 @@
         PaginationComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-pagination',
-                        template: "<ngb-pagination\n  [collectionSize]=\"pagination.totalResults\"\n  [page]=\"pagination.currentPage + 1\"\n  (pageChange)=\"pageChange($event)\"\n  [maxSize]=\"3\"\n  [pageSize]=\"pagination.pageSize\"\n>\n</ngb-pagination>\n",
+                        template: "<ul class=\"pagination\">\n  <!-- Previous -->\n  <li class=\"page-item\" [ngClass]=\"{ disabled: onFirstPage() || !hasPages() }\">\n    <a class=\"page-link\" (click)=\"clickPageNo(getPagePrevious())\">\u00AB</a>\n  </li>\n\n  <!-- Page Index -->\n  <li\n    class=\"page-item\"\n    *ngFor=\"let page of getPageIndicies(); let i = index\"\n    [ngClass]=\"{ active: onPageIndex(i), disabled: showDots(i) }\"\n  >\n    <a class=\"page-link\" *ngIf=\"showDots(i)\">...</a>\n    <a\n      class=\"page-link\"\n      *ngIf=\"!hidePageIndex(i)\"\n      (click)=\"clickPageNo(i + 1)\"\n      >{{ i + 1 }}</a\n    >\n  </li>\n\n  <!-- Next -->\n  <li class=\"page-item\" [ngClass]=\"{ disabled: onLastPage() || !hasPages() }\">\n    <a class=\"page-link\" (click)=\"clickPageNo(getPageNext())\">\u00BB</a>\n  </li>\n</ul>\n",
                         changeDetection: i0.ChangeDetectionStrategy.OnPush
                     }] }
         ];
