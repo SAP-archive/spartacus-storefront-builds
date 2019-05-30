@@ -3374,7 +3374,7 @@ class LoginComponent {
         return this.auth.getUserToken().pipe(map(token => {
             if (token && !!token.access_token && !this.loginService.isLogin) {
                 this.loginService.isLogin = true;
-                this.userService.load(token.userId);
+                this.userService.load();
             }
             else if (token && !token.access_token && this.loginService.isLogin) {
                 this.loginService.isLogin = false;

@@ -4359,7 +4359,7 @@
                 return this.auth.getUserToken().pipe(operators.map(function (token) {
                     if (token && !!token.access_token && !_this.loginService.isLogin) {
                         _this.loginService.isLogin = true;
-                        _this.userService.load(token.userId);
+                        _this.userService.load();
                     }
                     else if (token && !token.access_token && _this.loginService.isLogin) {
                         _this.loginService.isLogin = false;
