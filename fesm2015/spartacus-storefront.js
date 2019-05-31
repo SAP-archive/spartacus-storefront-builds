@@ -971,7 +971,7 @@ class SpinnerComponent {
 SpinnerComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-spinner',
-                template: "<div class=\"loader\">{{ 'spinner.loading' | cxTranslate }}</div>\n"
+                template: "<div class=\"loader-container\">\n  <div class=\"loader\">{{ 'spinner.loading' | cxTranslate }}</div>\n</div>\n"
             }] }
 ];
 /** @nocollapse */
