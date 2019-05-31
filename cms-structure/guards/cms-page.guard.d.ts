@@ -14,4 +14,6 @@ export declare class CmsPageGuard implements CanActivate {
     static guardName: string;
     constructor(routingService: RoutingService, cmsService: CmsService, cmsRoutes: CmsRoutesService, cmsI18n: CmsI18nService, cmsGuards: CmsGuardsService, semanticPathService: SemanticPathService);
     canActivate(route: CmsActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree>;
+    private resolveCmsPageLogic;
+    private handleNotFoundPage;
 }

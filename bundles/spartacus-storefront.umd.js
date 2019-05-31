@@ -5940,32 +5940,78 @@
                     return _this.cmsService.hasPage(pageContext, true).pipe(operators.first(), operators.withLatestFrom(rxjs.of(pageContext)));
                 }), operators.switchMap(function (_a) {
                     var _b = __read(_a, 2), hasPage = _b[0], pageContext = _b[1];
-                    if (hasPage) {
-                        return _this.cmsService.getPageComponentTypes(pageContext).pipe(operators.switchMap(function (componentTypes) {
-                            return _this.cmsGuards
-                                .cmsPageCanActivate(componentTypes, route, state)
-                                .pipe(operators.withLatestFrom(rxjs.of(componentTypes)));
-                        }), operators.tap(function (_a) {
-                            var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
-                            if (canActivate === true) {
-                                _this.cmsI18n.loadChunksForComponents(componentTypes);
-                            }
-                        }), operators.map(function (_a) {
-                            var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
-                            if (canActivate === true &&
-                                !route.data.cxCmsRouteContext &&
-                                !_this.cmsRoutes.cmsRouteExist(pageContext.id)) {
-                                return _this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url);
-                            }
-                            return canActivate;
-                        }));
+                    return hasPage
+                        ? _this.resolveCmsPageLogic(pageContext, route, state)
+                        : _this.handleNotFoundPage(pageContext, route, state);
+                }));
+            };
+        /**
+         * @private
+         * @param {?} pageContext
+         * @param {?} route
+         * @param {?} state
+         * @return {?}
+         */
+        CmsPageGuard.prototype.resolveCmsPageLogic = /**
+         * @private
+         * @param {?} pageContext
+         * @param {?} route
+         * @param {?} state
+         * @return {?}
+         */
+            function (pageContext, route, state) {
+                var _this = this;
+                return this.cmsService.getPageComponentTypes(pageContext).pipe(operators.switchMap(function (componentTypes) {
+                    return _this.cmsGuards
+                        .cmsPageCanActivate(componentTypes, route, state)
+                        .pipe(operators.withLatestFrom(rxjs.of(componentTypes)));
+                }), operators.tap(function (_a) {
+                    var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
+                    if (canActivate === true) {
+                        _this.cmsI18n.loadChunksForComponents(componentTypes);
                     }
-                    else {
-                        if (pageContext.id !== _this.semanticPathService.get('notFound')) {
-                            _this.routingService.go({ cxRoute: 'notFound' });
-                        }
-                        return rxjs.of(false);
+                }), operators.map(function (_a) {
+                    var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
+                    if (canActivate === true &&
+                        !route.data.cxCmsRouteContext &&
+                        !_this.cmsRoutes.cmsRouteExist(pageContext.id)) {
+                        return _this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url);
                     }
+                    return canActivate;
+                }));
+            };
+        /**
+         * @private
+         * @param {?} pageContext
+         * @param {?} route
+         * @param {?} state
+         * @return {?}
+         */
+        CmsPageGuard.prototype.handleNotFoundPage = /**
+         * @private
+         * @param {?} pageContext
+         * @param {?} route
+         * @param {?} state
+         * @return {?}
+         */
+            function (pageContext, route, state) {
+                var _this = this;
+                /** @type {?} */
+                var notFoundCmsPageContext = {
+                    type: i1$2.PageType.CONTENT_PAGE,
+                    id: this.semanticPathService.get('notFound'),
+                };
+                return this.cmsService.hasPage(notFoundCmsPageContext).pipe(operators.switchMap(function (hasNotFoundPage) {
+                    if (hasNotFoundPage) {
+                        return _this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(operators.tap(function (notFoundIndex) {
+                            _this.cmsService.setPageFailIndex(pageContext, notFoundIndex);
+                        }), operators.switchMap(function (notFoundIndex) {
+                            return _this.cmsService.getPageIndex(pageContext).pipe(
+                            // we have to wait for page index update
+                            operators.filter(function (index) { return index === notFoundIndex; }));
+                        }), operators.switchMap(function () { return _this.resolveCmsPageLogic(pageContext, route, state); }));
+                    }
+                    return rxjs.of(false);
                 }));
             };
         CmsPageGuard.guardName = 'CmsPageGuard';

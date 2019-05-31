@@ -8,9 +8,9 @@ import { debounceTime, filter, map, switchMap, take, tap, skipWhile, distinctUnt
 import { Title, Meta } from '@angular/platform-browser';
 import { __values, __spread, __read, __extends, __assign, __awaiter, __generator } from 'tslib';
 import { RouterModule, NavigationStart, Router, ActivatedRoute } from '@angular/router';
-import { ServerConfig, OccConfig, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CheckoutService, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, DynamicAttributeService, CxApiService, ComponentMapperService, UserModule, AuthService, UserService, CartModule, PageMetaService, CmsPageTitleModule, NotAuthGuard, CartService, PageRobotsMeta, AuthRedirectService, StoreFinderCoreModule, GlobalMessageModule, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, SearchboxService, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService, ProductSearchService } from '@spartacus/core';
+import { ServerConfig, OccConfig, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CheckoutService, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, DynamicAttributeService, CxApiService, ComponentMapperService, UserModule, AuthService, UserService, CartModule, PageMetaService, CmsPageTitleModule, NotAuthGuard, PageRobotsMeta, CartService, AuthRedirectService, StoreFinderCoreModule, GlobalMessageModule, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, SearchboxService, TranslatePipe, StoreDataService, StoreFinderService, GoogleMapRendererService, ProductSearchService } from '@spartacus/core';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
-import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Pipe, Injector, HostBinding, TemplateRef, Optional, ChangeDetectorRef, defineInjectable, inject, INJECTOR, Inject, PLATFORM_ID, ViewContainerRef } from '@angular/core';
+import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Pipe, Injector, TemplateRef, HostBinding, Optional, ChangeDetectorRef, defineInjectable, inject, INJECTOR, Inject, PLATFORM_ID, ViewContainerRef } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -5687,32 +5687,78 @@ var CmsPageGuard = /** @class */ (function () {
             return _this.cmsService.hasPage(pageContext, true).pipe(first(), withLatestFrom(of(pageContext)));
         }), switchMap(function (_a) {
             var _b = __read(_a, 2), hasPage = _b[0], pageContext = _b[1];
-            if (hasPage) {
-                return _this.cmsService.getPageComponentTypes(pageContext).pipe(switchMap(function (componentTypes) {
-                    return _this.cmsGuards
-                        .cmsPageCanActivate(componentTypes, route, state)
-                        .pipe(withLatestFrom(of(componentTypes)));
-                }), tap(function (_a) {
-                    var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
-                    if (canActivate === true) {
-                        _this.cmsI18n.loadChunksForComponents(componentTypes);
-                    }
-                }), map(function (_a) {
-                    var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
-                    if (canActivate === true &&
-                        !route.data.cxCmsRouteContext &&
-                        !_this.cmsRoutes.cmsRouteExist(pageContext.id)) {
-                        return _this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url);
-                    }
-                    return canActivate;
-                }));
+            return hasPage
+                ? _this.resolveCmsPageLogic(pageContext, route, state)
+                : _this.handleNotFoundPage(pageContext, route, state);
+        }));
+    };
+    /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    CmsPageGuard.prototype.resolveCmsPageLogic = /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    function (pageContext, route, state) {
+        var _this = this;
+        return this.cmsService.getPageComponentTypes(pageContext).pipe(switchMap(function (componentTypes) {
+            return _this.cmsGuards
+                .cmsPageCanActivate(componentTypes, route, state)
+                .pipe(withLatestFrom(of(componentTypes)));
+        }), tap(function (_a) {
+            var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
+            if (canActivate === true) {
+                _this.cmsI18n.loadChunksForComponents(componentTypes);
             }
-            else {
-                if (pageContext.id !== _this.semanticPathService.get('notFound')) {
-                    _this.routingService.go({ cxRoute: 'notFound' });
-                }
-                return of(false);
+        }), map(function (_a) {
+            var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
+            if (canActivate === true &&
+                !route.data.cxCmsRouteContext &&
+                !_this.cmsRoutes.cmsRouteExist(pageContext.id)) {
+                return _this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url);
             }
+            return canActivate;
+        }));
+    };
+    /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    CmsPageGuard.prototype.handleNotFoundPage = /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    function (pageContext, route, state) {
+        var _this = this;
+        /** @type {?} */
+        var notFoundCmsPageContext = {
+            type: PageType.CONTENT_PAGE,
+            id: this.semanticPathService.get('notFound'),
+        };
+        return this.cmsService.hasPage(notFoundCmsPageContext).pipe(switchMap(function (hasNotFoundPage) {
+            if (hasNotFoundPage) {
+                return _this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(tap(function (notFoundIndex) {
+                    _this.cmsService.setPageFailIndex(pageContext, notFoundIndex);
+                }), switchMap(function (notFoundIndex) {
+                    return _this.cmsService.getPageIndex(pageContext).pipe(
+                    // we have to wait for page index update
+                    filter(function (index) { return index === notFoundIndex; }));
+                }), switchMap(function () { return _this.resolveCmsPageLogic(pageContext, route, state); }));
+            }
+            return of(false);
         }));
     };
     CmsPageGuard.guardName = 'CmsPageGuard';

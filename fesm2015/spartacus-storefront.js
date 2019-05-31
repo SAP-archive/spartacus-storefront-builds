@@ -8,7 +8,7 @@ import { FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, FormB
 import { debounceTime, filter, map, switchMap, take, tap, skipWhile, distinctUntilChanged, startWith, endWith, first, withLatestFrom, delay, shareReplay } from 'rxjs/operators';
 import { Title, Meta } from '@angular/platform-browser';
 import { RouterModule, NavigationStart, Router, ActivatedRoute } from '@angular/router';
-import { ServerConfig, OccConfig, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CheckoutService, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CartModule, CmsPageTitleModule, NotAuthGuard, CartService, AuthRedirectService, StoreFinderCoreModule, GlobalMessageModule, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, ProductSearchService, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
+import { ServerConfig, OccConfig, UrlModule, I18nModule, ConfigModule, AuthGuard, RoutingService, RoutingConfigService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductService, CmsConfig, PageType, ProductReferenceService, provideConfig, OccModule, StateModule, RoutingModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsService, SemanticPathService, CheckoutService, Config, defaultCmsModuleConfig, CmsModule, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, UserModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CartModule, CmsPageTitleModule, NotAuthGuard, CartService, AuthRedirectService, StoreFinderCoreModule, GlobalMessageModule, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, ProductSearchService, StoreDataService, StoreFinderService, GoogleMapRendererService } from '@spartacus/core';
 import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
 import { NgModule, Directive, ElementRef, HostListener, Renderer2, Component, EventEmitter, forwardRef, Input, Output, ViewChild, ChangeDetectionStrategy, Injectable, APP_INITIALIZER, Pipe, Injector, Inject, PLATFORM_ID, HostBinding, TemplateRef, ViewContainerRef, Optional, ChangeDetectorRef, defineInjectable, inject, INJECTOR } from '@angular/core';
 
@@ -4607,29 +4607,55 @@ class CmsPageGuard {
      * @return {?}
      */
     canActivate(route, state) {
-        return this.routingService.getNextPageContext().pipe(switchMap(pageContext => this.cmsService.hasPage(pageContext, true).pipe(first(), withLatestFrom(of(pageContext)))), switchMap(([hasPage, pageContext]) => {
-            if (hasPage) {
-                return this.cmsService.getPageComponentTypes(pageContext).pipe(switchMap(componentTypes => this.cmsGuards
-                    .cmsPageCanActivate(componentTypes, route, state)
-                    .pipe(withLatestFrom(of(componentTypes)))), tap(([canActivate, componentTypes]) => {
-                    if (canActivate === true) {
-                        this.cmsI18n.loadChunksForComponents(componentTypes);
-                    }
-                }), map(([canActivate, componentTypes]) => {
-                    if (canActivate === true &&
-                        !route.data.cxCmsRouteContext &&
-                        !this.cmsRoutes.cmsRouteExist(pageContext.id)) {
-                        return this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url);
-                    }
-                    return canActivate;
-                }));
+        return this.routingService.getNextPageContext().pipe(switchMap(pageContext => this.cmsService.hasPage(pageContext, true).pipe(first(), withLatestFrom(of(pageContext)))), switchMap(([hasPage, pageContext]) => hasPage
+            ? this.resolveCmsPageLogic(pageContext, route, state)
+            : this.handleNotFoundPage(pageContext, route, state)));
+    }
+    /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    resolveCmsPageLogic(pageContext, route, state) {
+        return this.cmsService.getPageComponentTypes(pageContext).pipe(switchMap(componentTypes => this.cmsGuards
+            .cmsPageCanActivate(componentTypes, route, state)
+            .pipe(withLatestFrom(of(componentTypes)))), tap(([canActivate, componentTypes]) => {
+            if (canActivate === true) {
+                this.cmsI18n.loadChunksForComponents(componentTypes);
             }
-            else {
-                if (pageContext.id !== this.semanticPathService.get('notFound')) {
-                    this.routingService.go({ cxRoute: 'notFound' });
-                }
-                return of(false);
+        }), map(([canActivate, componentTypes]) => {
+            if (canActivate === true &&
+                !route.data.cxCmsRouteContext &&
+                !this.cmsRoutes.cmsRouteExist(pageContext.id)) {
+                return this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url);
             }
+            return canActivate;
+        }));
+    }
+    /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    handleNotFoundPage(pageContext, route, state) {
+        /** @type {?} */
+        const notFoundCmsPageContext = {
+            type: PageType.CONTENT_PAGE,
+            id: this.semanticPathService.get('notFound'),
+        };
+        return this.cmsService.hasPage(notFoundCmsPageContext).pipe(switchMap(hasNotFoundPage => {
+            if (hasNotFoundPage) {
+                return this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(tap(notFoundIndex => {
+                    this.cmsService.setPageFailIndex(pageContext, notFoundIndex);
+                }), switchMap(notFoundIndex => this.cmsService.getPageIndex(pageContext).pipe(
+                // we have to wait for page index update
+                filter(index => index === notFoundIndex))), switchMap(() => this.resolveCmsPageLogic(pageContext, route, state)));
+            }
+            return of(false);
         }));
     }
 }
