@@ -1,10 +1,10 @@
 import { EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { Address, AddressValidation, CardType, CheckoutService, Country, GlobalMessageService, UserService } from '@spartacus/core';
 import { ICON_TYPE } from '../../../../../cms-components/misc/icon/index';
 import { Card } from '../../../../../shared/components/card/card.component';
+import { ModalRef, ModalService } from '../../../../../shared/components/modal/index';
 declare type monthType = {
     id: number;
     name: string;
@@ -22,7 +22,7 @@ export declare class PaymentFormComponent implements OnInit, OnDestroy {
     iconTypes: typeof ICON_TYPE;
     private checkboxSub;
     private addressVerifySub;
-    suggestedAddressModalRef: NgbModalRef;
+    suggestedAddressModalRef: ModalRef;
     months: monthType[];
     years: yearType[];
     cardTypes$: Observable<CardType[]>;
@@ -35,7 +35,7 @@ export declare class PaymentFormComponent implements OnInit, OnDestroy {
     addPaymentInfo: EventEmitter<any>;
     payment: FormGroup;
     billingAddress: FormGroup;
-    constructor(checkoutService: CheckoutService, userService: UserService, globalMessageService: GlobalMessageService, fb: FormBuilder, modalService: NgbModal);
+    constructor(checkoutService: CheckoutService, userService: UserService, globalMessageService: GlobalMessageService, fb: FormBuilder, modalService: ModalService);
     ngOnInit(): void;
     expMonthAndYear(): void;
     toggleDefaultPaymentMethod(): void;

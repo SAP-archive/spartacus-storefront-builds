@@ -1,8 +1,8 @@
 import { EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subscription } from 'rxjs';
 import { Address, AddressValidation, CheckoutService, Country, GlobalMessageService, Region, Title, UserService } from '@spartacus/core';
+import { ModalRef, ModalService } from '../../../../../shared/components/modal/index';
 export declare class AddressFormComponent implements OnInit, OnDestroy {
     private fb;
     protected checkoutService: CheckoutService;
@@ -21,9 +21,9 @@ export declare class AddressFormComponent implements OnInit, OnDestroy {
     submitAddress: EventEmitter<any>;
     backToAddress: EventEmitter<any>;
     addressVerifySub: Subscription;
-    suggestedAddressModalRef: NgbModalRef;
+    suggestedAddressModalRef: ModalRef;
     address: FormGroup;
-    constructor(fb: FormBuilder, checkoutService: CheckoutService, userService: UserService, globalMessageService: GlobalMessageService, modalService: NgbModal);
+    constructor(fb: FormBuilder, checkoutService: CheckoutService, userService: UserService, globalMessageService: GlobalMessageService, modalService: ModalService);
     ngOnInit(): void;
     titleSelected(title: Title): void;
     countrySelected(country: Country): void;

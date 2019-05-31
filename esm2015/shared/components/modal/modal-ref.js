@@ -1,0 +1,13 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+/**
+ * A reference to a newly opened modal
+ *
+ * \@todo remove ngb dependency and create our own implementation of ModalRef
+ */
+export class ModalRef extends NgbModalRef {
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kYWwtcmVmLmpzIiwic291cmNlUm9vdCI6Im5nOi8vQHNwYXJ0YWN1cy9zdG9yZWZyb250LyIsInNvdXJjZXMiOlsic2hhcmVkL2NvbXBvbmVudHMvbW9kYWwvbW9kYWwtcmVmLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSxPQUFPLEVBQUUsV0FBVyxFQUFFLE1BQU0sNEJBQTRCLENBQUM7Ozs7OztBQU96RCxNQUFNLE9BQU8sUUFBUyxTQUFRLFdBQVc7Q0FBRyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IE5nYk1vZGFsUmVmIH0gZnJvbSAnQG5nLWJvb3RzdHJhcC9uZy1ib290c3RyYXAnO1xuXG4vKipcbiAqIEEgcmVmZXJlbmNlIHRvIGEgbmV3bHkgb3BlbmVkIG1vZGFsXG4gKlxuICogQHRvZG8gcmVtb3ZlIG5nYiBkZXBlbmRlbmN5IGFuZCBjcmVhdGUgb3VyIG93biBpbXBsZW1lbnRhdGlvbiBvZiBNb2RhbFJlZlxuICovXG5leHBvcnQgY2xhc3MgTW9kYWxSZWYgZXh0ZW5kcyBOZ2JNb2RhbFJlZiB7fVxuIl19
