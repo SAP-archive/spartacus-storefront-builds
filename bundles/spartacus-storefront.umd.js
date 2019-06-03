@@ -1,47 +1,987 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@ng-bootstrap/ng-bootstrap'), require('@angular/service-worker'), require('@angular/common/http'), require('@ng-select/ng-select'), require('rxjs'), require('@angular/forms'), require('rxjs/operators'), require('@angular/platform-browser'), require('@angular/router'), require('@spartacus/core'), require('@angular/common'), require('@angular/core')) :
-    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@ng-bootstrap/ng-bootstrap', '@angular/service-worker', '@angular/common/http', '@ng-select/ng-select', 'rxjs', '@angular/forms', 'rxjs/operators', '@angular/platform-browser', '@angular/router', '@spartacus/core', '@angular/common', '@angular/core'], factory) :
-    (factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}),global.ngBootstrap,global.ng['service-worker'],global.ng.common.http,global.ngSelect,global.rxjs,global.ng.forms,global.rxjs.operators,global.ng.platformBrowser,global.ng.router,global.core,global.ng.common,global.ng.core));
-}(this, (function (exports,i1,serviceWorker,http,ngSelect,rxjs,forms,operators,i1$1,i4,i1$2,common,i0) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/service-worker'), require('@ng-select/ng-select'), require('rxjs'), require('@angular/common/http'), require('rxjs/operators'), require('@angular/forms'), require('@ng-bootstrap/ng-bootstrap'), require('@angular/platform-browser'), require('@angular/common'), require('@angular/router'), require('@angular/core'), require('@spartacus/core')) :
+    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@angular/service-worker', '@ng-select/ng-select', 'rxjs', '@angular/common/http', 'rxjs/operators', '@angular/forms', '@ng-bootstrap/ng-bootstrap', '@angular/platform-browser', '@angular/common', '@angular/router', '@angular/core', '@spartacus/core'], factory) :
+    (factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}),global.ng['service-worker'],global.ngSelect,global.rxjs,global.ng.common.http,global.rxjs.operators,global.ng.forms,global.ngBootstrap,global.ng.platformBrowser,global.ng.common,global.ng.router,global.ng.core,global.core));
+}(this, (function (exports,serviceWorker,ngSelect,rxjs,http,operators,forms,i1,i1$1,common,i4,i0,i1$2) { 'use strict';
+
+    /*! *****************************************************************************
+    Copyright (c) Microsoft Corporation. All rights reserved.
+    Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+    this file except in compliance with the License. You may obtain a copy of the
+    License at http://www.apache.org/licenses/LICENSE-2.0
+
+    THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+    WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+    MERCHANTABLITY OR NON-INFRINGEMENT.
+
+    See the Apache Version 2.0 License for specific language governing permissions
+    and limitations under the License.
+    ***************************************************************************** */
+    /* global Reflect, Promise */
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b)
+                if (b.hasOwnProperty(p))
+                    d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    function __extends(d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    }
+    var __assign = function () {
+        __assign = Object.assign || function __assign(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) {
+                s = arguments[i];
+                for (var p in s)
+                    if (Object.prototype.hasOwnProperty.call(s, p))
+                        t[p] = s[p];
+            }
+            return t;
+        };
+        return __assign.apply(this, arguments);
+    };
+    function __awaiter(thisArg, _arguments, P, generator) {
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try {
+                step(generator.next(value));
+            }
+            catch (e) {
+                reject(e);
+            } }
+            function rejected(value) { try {
+                step(generator["throw"](value));
+            }
+            catch (e) {
+                reject(e);
+            } }
+            function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    }
+    function __generator(thisArg, body) {
+        var _ = { label: 0, sent: function () { if (t[0] & 1)
+                throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function () { return this; }), g;
+        function verb(n) { return function (v) { return step([n, v]); }; }
+        function step(op) {
+            if (f)
+                throw new TypeError("Generator is already executing.");
+            while (_)
+                try {
+                    if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
+                        return t;
+                    if (y = 0, t)
+                        op = [op[0] & 2, t.value];
+                    switch (op[0]) {
+                        case 0:
+                        case 1:
+                            t = op;
+                            break;
+                        case 4:
+                            _.label++;
+                            return { value: op[1], done: false };
+                        case 5:
+                            _.label++;
+                            y = op[1];
+                            op = [0];
+                            continue;
+                        case 7:
+                            op = _.ops.pop();
+                            _.trys.pop();
+                            continue;
+                        default:
+                            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+                                _ = 0;
+                                continue;
+                            }
+                            if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) {
+                                _.label = op[1];
+                                break;
+                            }
+                            if (op[0] === 6 && _.label < t[1]) {
+                                _.label = t[1];
+                                t = op;
+                                break;
+                            }
+                            if (t && _.label < t[2]) {
+                                _.label = t[2];
+                                _.ops.push(op);
+                                break;
+                            }
+                            if (t[2])
+                                _.ops.pop();
+                            _.trys.pop();
+                            continue;
+                    }
+                    op = body.call(thisArg, _);
+                }
+                catch (e) {
+                    op = [6, e];
+                    y = 0;
+                }
+                finally {
+                    f = t = 0;
+                }
+            if (op[0] & 5)
+                throw op[1];
+            return { value: op[0] ? op[1] : void 0, done: true };
+        }
+    }
+    function __values(o) {
+        var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+        if (m)
+            return m.call(o);
+        return {
+            next: function () {
+                if (o && i >= o.length)
+                    o = void 0;
+                return { value: o && o[i++], done: !o };
+            }
+        };
+    }
+    function __read(o, n) {
+        var m = typeof Symbol === "function" && o[Symbol.iterator];
+        if (!m)
+            return o;
+        var i = m.call(o), r, ar = [], e;
+        try {
+            while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
+                ar.push(r.value);
+        }
+        catch (error) {
+            e = { error: error };
+        }
+        finally {
+            try {
+                if (r && !r.done && (m = i["return"]))
+                    m.call(i);
+            }
+            finally {
+                if (e)
+                    throw e.error;
+            }
+        }
+        return ar;
+    }
+    function __spread() {
+        for (var ar = [], i = 0; i < arguments.length; i++)
+            ar = ar.concat(__read(arguments[i]));
+        return ar;
+    }
 
     /**
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var BootstrapModule = /** @class */ (function () {
-        function BootstrapModule() {
+    /**
+     * A reference to a newly opened modal
+     *
+     * \@todo remove ngb dependency and create our own implementation of ModalRef
+     */
+    var /**
+     * A reference to a newly opened modal
+     *
+     * \@todo remove ngb dependency and create our own implementation of ModalRef
+     */ ModalRef = /** @class */ (function (_super) {
+        __extends(ModalRef, _super);
+        function ModalRef() {
+            return _super !== null && _super.apply(this, arguments) || this;
         }
-        BootstrapModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            i1.NgbDropdownModule,
-                            i1.NgbTypeaheadModule,
-                            i1.NgbPaginationModule,
-                            i1.NgbModalModule,
-                            i1.NgbTabsetModule,
-                            i1.NgbAccordionModule,
-                            i1.NgbRatingModule,
-                            i1.NgbCollapseModule,
-                        ],
-                        exports: [
-                            i1.NgbDropdownModule,
-                            i1.NgbTabsetModule,
-                            i1.NgbAccordionModule,
-                            i1.NgbRatingModule,
-                            i1.NgbTypeaheadModule,
-                            i1.NgbCollapseModule,
-                            i1.NgbModalModule,
-                            i1.NgbPaginationModule,
-                        ],
-                        providers: [
-                            i1.NgbTabsetConfig,
-                            i1.NgbAccordionConfig,
-                            i1.NgbRatingConfig,
-                            i1.NgbPaginationConfig,
-                        ],
+        return ModalRef;
+    }(i1.NgbModalRef));
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * A service to handle modal
+     */
+    var ModalService = /** @class */ (function () {
+        function ModalService(ngbModalService) {
+            this.ngbModalService = ngbModalService;
+            this.modals = [];
+        }
+        /**
+         * @param {?} content
+         * @param {?=} options
+         * @return {?}
+         */
+        ModalService.prototype.open = /**
+         * @param {?} content
+         * @param {?=} options
+         * @return {?}
+         */
+            function (content, options) {
+                /** @type {?} */
+                var activeModal;
+                activeModal = this.ngbModalService.open(content, options);
+                this.modals.push(activeModal);
+                return activeModal;
+            };
+        /**
+         * @return {?}
+         */
+        ModalService.prototype.getActiveModal = /**
+         * @return {?}
+         */
+            function () {
+                /** @type {?} */
+                var modal = this.modals[this.modals.length - 1];
+                return modal ? modal : null;
+            };
+        /**
+         * @param {?=} reason
+         * @return {?}
+         */
+        ModalService.prototype.dismissActiveModal = /**
+         * @param {?=} reason
+         * @return {?}
+         */
+            function (reason) {
+                /** @type {?} */
+                var modal = this.getActiveModal();
+                if (modal) {
+                    modal.dismiss(reason);
+                    this.modals.pop();
+                }
+            };
+        /**
+         * @param {?=} reason
+         * @return {?}
+         */
+        ModalService.prototype.closeActiveModal = /**
+         * @param {?=} reason
+         * @return {?}
+         */
+            function (reason) {
+                /** @type {?} */
+                var modal = this.getActiveModal();
+                if (modal) {
+                    modal.close(reason);
+                    this.modals.pop();
+                }
+            };
+        ModalService.decorators = [
+            { type: i0.Injectable, args: [{
+                        providedIn: 'root',
                     },] }
         ];
-        return BootstrapModule;
+        /** @nocollapse */
+        ModalService.ctorParameters = function () {
+            return [
+                { type: i1.NgbModal }
+            ];
+        };
+        /** @nocollapse */ ModalService.ngInjectableDef = i0.defineInjectable({ factory: function ModalService_Factory() { return new ModalService(i0.inject(i1.NgbModal)); }, token: ModalService, providedIn: "root" });
+        return ModalService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CurrentProductService = /** @class */ (function () {
+        function CurrentProductService(routingService, productService) {
+            this.routingService = routingService;
+            this.productService = productService;
+        }
+        /**
+         * @return {?}
+         */
+        CurrentProductService.prototype.getProduct = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                return this.routingService.getRouterState().pipe(operators.map(function (state) { return state.state.params['productCode']; }), operators.filter(function (productCode) { return !!productCode; }), operators.switchMap(function (productCode) { return _this.productService.get(productCode); }));
+            };
+        CurrentProductService.decorators = [
+            { type: i0.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        CurrentProductService.ctorParameters = function () {
+            return [
+                { type: i1$2.RoutingService },
+                { type: i1$2.ProductService }
+            ];
+        };
+        /** @nocollapse */ CurrentProductService.ngInjectableDef = i0.defineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(i0.inject(i1$2.RoutingService), i0.inject(i1$2.ProductService)); }, token: CurrentProductService, providedIn: "root" });
+        return CurrentProductService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @enum {string} */
+    var ICON_TYPE = {
+        STAR: 'STAR',
+        SEARCH: 'SEARCH',
+        CART: 'CART',
+        INFO: 'INFO',
+        GRID: 'GRID',
+        LIST: 'LIST',
+        CARET_DOWN: 'CARET_DOWN',
+        TIMES: 'TIMES',
+        ERROR: 'ERROR',
+        WARNING: 'WARNING',
+        SUCCESS: 'SUCCESS',
+        VISA: 'VISA',
+        MASTER_CARD: 'MASTER_CARD',
+        AMEX: 'AMEX',
+        DINERS_CLUB: 'DINERS_CLUB',
+        CREDIT_CARD: 'CREDIT_CARD',
+        PLUS: 'PLUS',
+        MINUS: 'MINUS',
+        RESET: 'RESET',
+    };
+    /**
+     * @abstract
+     */
+    var /**
+     * @abstract
+     */ IconConfig = /** @class */ (function () {
+        function IconConfig() {
+        }
+        return IconConfig;
+    }());
+    /** @enum {string} */
+    var IconResourceType = {
+        SVG: 'svg',
+        LINK: 'link',
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var fontawesomeIconConfig = {
+        icon: {
+            symbols: {
+                SEARCH: 'fas fa-search',
+                CART: 'fas fa-shopping-cart',
+                INFO: 'fas fa-info-circle',
+                STAR: 'fas fa-star',
+                GRID: 'fas fa-th-large',
+                LIST: 'fas fa-bars',
+                CARET_DOWN: 'fas fa-angle-down',
+                ERROR: 'fas fa-exclamation-circle',
+                WARNING: 'fas fa-exclamation-triangle',
+                SUCCESS: 'fas fa-check-circle',
+                TIMES: 'fas fa-times',
+                VISA: 'fab fa-cc-visa',
+                MASTER_CARD: 'fab fa-cc-mastercard',
+                AMEX: 'fab fa-cc-amex',
+                DINERS_CLUB: 'fab fa-cc-diners-club',
+                CREDIT_CARD: 'fas fa-credit-card',
+                MINUS: 'fas fa-minus',
+                PLUS: 'fas fa-plus',
+                RESET: 'fas fa-times-circle',
+            },
+            resources: [
+                {
+                    type: IconResourceType.LINK,
+                    url: 'https://use.fontawesome.com/releases/v5.8.1/css/all.css',
+                },
+            ],
+        },
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var IconLoaderService = /** @class */ (function () {
+        function IconLoaderService(winRef, config) {
+            this.winRef = winRef;
+            this.config = config;
+            this.loadedResources = [];
+        }
+        /**
+         * Indicates whether the given icon type is configured to use SVG.
+         */
+        /**
+         * Indicates whether the given icon type is configured to use SVG.
+         * @param {?} iconType
+         * @return {?}
+         */
+        IconLoaderService.prototype.useSvg = /**
+         * Indicates whether the given icon type is configured to use SVG.
+         * @param {?} iconType
+         * @return {?}
+         */
+            function (iconType) {
+                return (this.config.icon.resources &&
+                    !!this.config.icon.resources.find(function (res) {
+                        return res.types &&
+                            res.type === IconResourceType.SVG &&
+                            res.types.includes(iconType);
+                    }));
+            };
+        /**
+         * Returns the path to the svg link. The link supports path names
+         * as well, if the config has been setup to support a svg file path.
+         * Additionally, the icon prefix will be taken into account to prefix the
+         * icon IDs in the SVG.
+         */
+        /**
+         * Returns the path to the svg link. The link supports path names
+         * as well, if the config has been setup to support a svg file path.
+         * Additionally, the icon prefix will be taken into account to prefix the
+         * icon IDs in the SVG.
+         * @param {?} iconType
+         * @return {?}
+         */
+        IconLoaderService.prototype.getSvgPath = /**
+         * Returns the path to the svg link. The link supports path names
+         * as well, if the config has been setup to support a svg file path.
+         * Additionally, the icon prefix will be taken into account to prefix the
+         * icon IDs in the SVG.
+         * @param {?} iconType
+         * @return {?}
+         */
+            function (iconType) {
+                /** @type {?} */
+                var svgResource = this.config.icon.resources.find(function (res) {
+                    return res.type === IconResourceType.SVG &&
+                        res.types &&
+                        res.types.includes(iconType);
+                });
+                if (svgResource) {
+                    return svgResource.url
+                        ? svgResource.url + "#" + this.getSymbol(iconType)
+                        : "#" + this.getSymbol(iconType);
+                }
+            };
+        /**
+         *
+         * Returns the symbol class(es) for the icon type.
+         */
+        /**
+         *
+         * Returns the symbol class(es) for the icon type.
+         * @param {?} iconType
+         * @return {?}
+         */
+        IconLoaderService.prototype.getStyleClasses = /**
+         *
+         * Returns the symbol class(es) for the icon type.
+         * @param {?} iconType
+         * @return {?}
+         */
+            function (iconType) {
+                return this.getSymbol(iconType) || '';
+            };
+        /**
+         * Loads the resource url (if any) for the given icon.
+         * The icon will only be loaded once.
+         *
+         * NOTE: this is not working when the shadow is used as there's
+         * no head element available and the link must be loaded for every
+         * web component.
+         */
+        /**
+         * Loads the resource url (if any) for the given icon.
+         * The icon will only be loaded once.
+         *
+         * NOTE: this is not working when the shadow is used as there's
+         * no head element available and the link must be loaded for every
+         * web component.
+         * @param {?} iconType
+         * @return {?}
+         */
+        IconLoaderService.prototype.addLinkResource = /**
+         * Loads the resource url (if any) for the given icon.
+         * The icon will only be loaded once.
+         *
+         * NOTE: this is not working when the shadow is used as there's
+         * no head element available and the link must be loaded for every
+         * web component.
+         * @param {?} iconType
+         * @return {?}
+         */
+            function (iconType) {
+                /** @type {?} */
+                var resource = this.findResource(iconType, IconResourceType.LINK);
+                if (resource && resource.url) {
+                    if (!this.loadedResources.includes(resource.url)) {
+                        this.loadedResources.push(resource.url);
+                        /** @type {?} */
+                        var head = this.winRef.document.getElementsByTagName('head')[0];
+                        /** @type {?} */
+                        var link = this.winRef.document.createElement('link');
+                        link.rel = 'stylesheet';
+                        link.type = 'text/css';
+                        link.href = resource.url;
+                        head.appendChild(link);
+                    }
+                }
+            };
+        /**
+         * @private
+         * @param {?} iconType
+         * @param {?} resourceType
+         * @return {?}
+         */
+        IconLoaderService.prototype.findResource = /**
+         * @private
+         * @param {?} iconType
+         * @param {?} resourceType
+         * @return {?}
+         */
+            function (iconType, resourceType) {
+                if (!this.config.icon.resources) {
+                    return;
+                }
+                /** @type {?} */
+                var resource = this.config.icon.resources.find(function (res) {
+                    return res.type === resourceType && res.types && res.types.includes(iconType);
+                });
+                // no specific resource found, let's try to find a one-size-fits-all resource
+                if (!resource) {
+                    resource = this.config.icon.resources.find(function (res) { return (res.type === resourceType && !res.types) || res.types === []; });
+                }
+                return resource;
+            };
+        /**
+         * @private
+         * @param {?} iconType
+         * @return {?}
+         */
+        IconLoaderService.prototype.getSymbol = /**
+         * @private
+         * @param {?} iconType
+         * @return {?}
+         */
+            function (iconType) {
+                if (this.config.icon &&
+                    this.config.icon.symbols &&
+                    this.config.icon.symbols[iconType]) {
+                    return this.config.icon.symbols[iconType];
+                }
+            };
+        IconLoaderService.decorators = [
+            { type: i0.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        IconLoaderService.ctorParameters = function () {
+            return [
+                { type: i1$2.WindowRef },
+                { type: IconConfig }
+            ];
+        };
+        /** @nocollapse */ IconLoaderService.ngInjectableDef = i0.defineInjectable({ factory: function IconLoaderService_Factory() { return new IconLoaderService(i0.inject(i1$2.WindowRef), i0.inject(IconConfig)); }, token: IconLoaderService, providedIn: "root" });
+        return IconLoaderService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var IconComponent = /** @class */ (function () {
+        function IconComponent(iconLoader, elementRef) {
+            this.iconLoader = iconLoader;
+            this.elementRef = elementRef;
+            /**
+             * Keeps the given style classes so that we can
+             * clean them up when the icon changes
+             */
+            this.styleClasses = '';
+        }
+        Object.defineProperty(IconComponent.prototype, "type", {
+            set: /**
+             * @param {?} type
+             * @return {?}
+             */ function (type) {
+                this._type = type;
+                this.addStyleClasses(type);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(IconComponent.prototype, "useSvg", {
+            /**
+             * Indicates whether the icon is configured to use SVG or not.
+             */
+            get: /**
+             * Indicates whether the icon is configured to use SVG or not.
+             * @return {?}
+             */ function () {
+                return this.iconLoader.useSvg(this._type);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(IconComponent.prototype, "svgPath", {
+            /**
+             * Returns the path to the svg symbol. The path could include an
+             * external URL to an svg (sprite) file, but can also reference
+             * an existing SVG symbol in the DOM.
+             */
+            get: /**
+             * Returns the path to the svg symbol. The path could include an
+             * external URL to an svg (sprite) file, but can also reference
+             * an existing SVG symbol in the DOM.
+             * @return {?}
+             */ function () {
+                return this.iconLoader.getSvgPath(this._type);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * Adds the style classes and the link resource (if availabe).
+         */
+        /**
+         * Adds the style classes and the link resource (if availabe).
+         * @private
+         * @param {?} type
+         * @return {?}
+         */
+        IconComponent.prototype.addStyleClasses = /**
+         * Adds the style classes and the link resource (if availabe).
+         * @private
+         * @param {?} type
+         * @return {?}
+         */
+            function (type) {
+                if (this.useSvg) {
+                    return;
+                }
+                if (this.staticStyleClasses === undefined) {
+                    this.staticStyleClasses = this.elementRef.nativeElement.classList.value
+                        ? this.elementRef.nativeElement.classList.value + ' '
+                        : '';
+                }
+                this.styleClasses =
+                    this.staticStyleClasses + this.iconLoader.getStyleClasses(type);
+                this.iconLoader.addLinkResource(type);
+            };
+        IconComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-icon',
+                        template: "<ng-container *ngIf=\"useSvg\">\n  <svg>\n    <use [attr.xlink:href]=\"svgPath\"></use>\n  </svg>\n</ng-container>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        IconComponent.ctorParameters = function () {
+            return [
+                { type: IconLoaderService },
+                { type: i0.ElementRef }
+            ];
+        };
+        IconComponent.propDecorators = {
+            type: [{ type: i0.Input, args: ['type',] }],
+            styleClasses: [{ type: i0.HostBinding, args: ['class',] }]
+        };
+        return IconComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var IconModule = /** @class */ (function () {
+        function IconModule() {
+        }
+        IconModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        declarations: [IconComponent],
+                        imports: [common.CommonModule, i1$2.ConfigModule.withConfig(fontawesomeIconConfig)],
+                        providers: [{ provide: IconConfig, useExisting: i1$2.Config }],
+                        exports: [IconComponent],
+                    },] }
+        ];
+        return IconModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var AddedToCartDialogComponent = /** @class */ (function () {
+        function AddedToCartDialogComponent(modalService, cartService, fb) {
+            this.modalService = modalService;
+            this.cartService = cartService;
+            this.fb = fb;
+            this.iconTypes = ICON_TYPE;
+            this.quantity = 0;
+            this.firstUpdate = true;
+            this.form = this.fb.group({});
+        }
+        /**
+         * @return {?}
+         */
+        AddedToCartDialogComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.entry$ = this.entry$.pipe(operators.tap(function (entry) {
+                    if (entry) {
+                        var code = entry.product.code;
+                        if (!_this.form.controls[code]) {
+                            _this.form.setControl(code, _this.createEntryFormGroup(entry));
+                        }
+                        else {
+                            /** @type {?} */
+                            var entryForm = ( /** @type {?} */(_this.form.controls[code]));
+                            entryForm.controls.quantity.setValue(entry.quantity);
+                        }
+                        _this.form.markAsPristine();
+                        // Announce in header if Add To Cart button has incremented product
+                        _this.showItemIncrLabel = _this.firstUpdate && entry.quantity > 1;
+                        // Any updates after the first will be flagged as false
+                        _this.firstUpdate = false;
+                    }
+                }));
+            };
+        /**
+         * @param {?=} reason
+         * @return {?}
+         */
+        AddedToCartDialogComponent.prototype.dismissModal = /**
+         * @param {?=} reason
+         * @return {?}
+         */
+            function (reason) {
+                this.modalService.dismissActiveModal(reason);
+            };
+        /**
+         * @param {?} item
+         * @return {?}
+         */
+        AddedToCartDialogComponent.prototype.removeEntry = /**
+         * @param {?} item
+         * @return {?}
+         */
+            function (item) {
+                this.cartService.removeEntry(item);
+                delete this.form.controls[item.product.code];
+                this.dismissModal('Removed');
+            };
+        /**
+         * @param {?} __0
+         * @return {?}
+         */
+        AddedToCartDialogComponent.prototype.updateEntry = /**
+         * @param {?} __0
+         * @return {?}
+         */
+            function (_a) {
+                var item = _a.item, updatedQuantity = _a.updatedQuantity;
+                this.cartService.updateEntry(item.entryNumber, updatedQuantity);
+            };
+        /**
+         * @private
+         * @param {?} entry
+         * @return {?}
+         */
+        AddedToCartDialogComponent.prototype.createEntryFormGroup = /**
+         * @private
+         * @param {?} entry
+         * @return {?}
+         */
+            function (entry) {
+                return this.fb.group({
+                    entryNumber: entry.entryNumber,
+                    quantity: entry.quantity,
+                });
+            };
+        AddedToCartDialogComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-added-to-cart-dialog',
+                        template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) as loaded; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (showItemIncrLabel\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart') | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"(entry$ | async) as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [isReadOnly]=\"false\"\n            [parent]=\"form.controls[entry.product.code]\"\n            [cartIsLoading]=\"!loaded\"\n            (remove)=\"removeEntry($event)\"\n            (update)=\"updateEntry($event)\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"(cart$ | async) as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n            <div>{{ cart.totalPrice.formattedValue }}</div>\n          </div>\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              cxAutoFocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        AddedToCartDialogComponent.ctorParameters = function () {
+            return [
+                { type: ModalService },
+                { type: i1$2.CartService },
+                { type: forms.FormBuilder }
+            ];
+        };
+        AddedToCartDialogComponent.propDecorators = {
+            dialog: [{ type: i0.ViewChild, args: ['dialog', { read: i0.ElementRef },] }]
+        };
+        return AddedToCartDialogComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var AddToCartComponent = /** @class */ (function () {
+        function AddToCartComponent(cartService, modalService, currentProductService, cd) {
+            this.cartService = cartService;
+            this.modalService = modalService;
+            this.currentProductService = currentProductService;
+            this.cd = cd;
+            this.showQuantity = true;
+            this.hasStock = false;
+            this.quantity = 1;
+        }
+        /**
+         * @return {?}
+         */
+        AddToCartComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                if (this.productCode) {
+                    this.cartEntry$ = this.cartService.getEntry(this.productCode);
+                    this.hasStock = true;
+                }
+                else {
+                    this.currentProductService
+                        .getProduct()
+                        .pipe(operators.filter(Boolean))
+                        .subscribe(function (product) {
+                        _this.productCode = product.code;
+                        if (product.stock &&
+                            product.stock.stockLevelStatus !== 'outOfStock' &&
+                            product.stock.stockLevel > 0) {
+                            _this.maxQuantity = product.stock.stockLevel;
+                            _this.hasStock = true;
+                        }
+                        else {
+                            _this.hasStock = false;
+                        }
+                        _this.cartEntry$ = _this.cartService.getEntry(_this.productCode);
+                        _this.cd.markForCheck();
+                    });
+                }
+            };
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        AddToCartComponent.prototype.updateCount = /**
+         * @param {?} value
+         * @return {?}
+         */
+            function (value) {
+                this.quantity = value;
+            };
+        /**
+         * @return {?}
+         */
+        AddToCartComponent.prototype.addToCart = /**
+         * @return {?}
+         */
+            function () {
+                if (!this.productCode || this.quantity <= 0) {
+                    return;
+                }
+                this.openModal();
+                this.cartService.addEntry(this.productCode, this.quantity);
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        AddToCartComponent.prototype.openModal = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                /** @type {?} */
+                var modalInstance;
+                this.modalRef = this.modalService.open(AddedToCartDialogComponent, {
+                    centered: true,
+                    size: 'lg',
+                });
+                modalInstance = this.modalRef.componentInstance;
+                modalInstance.entry$ = this.cartEntry$;
+                modalInstance.cart$ = this.cartService.getActive();
+                modalInstance.loaded$ = this.cartService.getLoaded();
+                modalInstance.quantity = this.quantity;
+            };
+        AddToCartComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-add-to-cart',
+                        template: "<div class=\"quantity\" *ngIf=\"showQuantity\">\n  <label>{{ 'addToCart.quantity' | cxTranslate }}</label>\n  <cx-item-counter\n    isValueChangeable=\"true\"\n    [min]=\"1\"\n    [max]=\"maxQuantity\"\n    *ngIf=\"hasStock\"\n    (update)=\"updateCount($event)\"\n  ></cx-item-counter>\n  <span class=\"info\">{{\n    hasStock\n      ? ('addToCart.inStock' | cxTranslate)\n      : ('addToCart.outOfStock' | cxTranslate)\n  }}</span>\n</div>\n<button\n  *ngIf=\"hasStock\"\n  class=\"btn btn-primary btn-block\"\n  type=\"button\"\n  [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  (click)=\"addToCart()\"\n>\n  {{ 'addToCart.addToCart' | cxTranslate }}\n</button>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        AddToCartComponent.ctorParameters = function () {
+            return [
+                { type: i1$2.CartService },
+                { type: ModalService },
+                { type: CurrentProductService },
+                { type: i0.ChangeDetectorRef }
+            ];
+        };
+        AddToCartComponent.propDecorators = {
+            productCode: [{ type: i0.Input }],
+            showQuantity: [{ type: i0.Input }]
+        };
+        return AddToCartComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var AutoFocusDirective = /** @class */ (function () {
+        function AutoFocusDirective(hostElement) {
+            this.hostElement = hostElement;
+        }
+        /**
+         * @return {?}
+         */
+        AutoFocusDirective.prototype.ngAfterViewInit = /**
+         * @return {?}
+         */
+            function () {
+                this.hostElement.nativeElement.focus();
+            };
+        AutoFocusDirective.decorators = [
+            { type: i0.Directive, args: [{
+                        selector: '[cxAutoFocus]',
+                    },] }
+        ];
+        /** @nocollapse */
+        AutoFocusDirective.ctorParameters = function () {
+            return [
+                { type: i0.ElementRef }
+            ];
+        };
+        return AutoFocusDirective;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var AutoFocusDirectiveModule = /** @class */ (function () {
+        function AutoFocusDirectiveModule() {
+        }
+        AutoFocusDirectiveModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        declarations: [AutoFocusDirective],
+                        exports: [AutoFocusDirective],
+                    },] }
+        ];
+        return AutoFocusDirectiveModule;
     }());
 
     /**
@@ -573,7 +1513,7 @@
         }
         FormComponentsModule.decorators = [
             { type: i0.NgModule, args: [{
-                        imports: [common.CommonModule, forms.FormsModule, forms.ReactiveFormsModule, BootstrapModule],
+                        imports: [common.CommonModule, forms.FormsModule, forms.ReactiveFormsModule],
                         declarations: [ItemCounterComponent, OnlyNumberDirective],
                         exports: [ItemCounterComponent],
                     },] }
@@ -910,7 +1850,7 @@
         }
         ListNavigationModule.decorators = [
             { type: i0.NgModule, args: [{
-                        imports: [common.CommonModule, ngSelect.NgSelectModule, forms.FormsModule, BootstrapModule],
+                        imports: [common.CommonModule, ngSelect.NgSelectModule, forms.FormsModule],
                         declarations: [PaginationComponent, SortingComponent],
                         exports: [PaginationComponent, SortingComponent],
                     },] }
@@ -922,175 +1862,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-
-    /*! *****************************************************************************
-    Copyright (c) Microsoft Corporation. All rights reserved.
-    Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-    this file except in compliance with the License. You may obtain a copy of the
-    License at http://www.apache.org/licenses/LICENSE-2.0
-
-    THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-    KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-    WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-    MERCHANTABLITY OR NON-INFRINGEMENT.
-
-    See the Apache Version 2.0 License for specific language governing permissions
-    and limitations under the License.
-    ***************************************************************************** */
-    /* global Reflect, Promise */
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b)
-                if (b.hasOwnProperty(p))
-                    d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    function __extends(d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    }
-    var __assign = function () {
-        __assign = Object.assign || function __assign(t) {
-            for (var s, i = 1, n = arguments.length; i < n; i++) {
-                s = arguments[i];
-                for (var p in s)
-                    if (Object.prototype.hasOwnProperty.call(s, p))
-                        t[p] = s[p];
-            }
-            return t;
-        };
-        return __assign.apply(this, arguments);
-    };
-    function __awaiter(thisArg, _arguments, P, generator) {
-        return new (P || (P = Promise))(function (resolve, reject) {
-            function fulfilled(value) { try {
-                step(generator.next(value));
-            }
-            catch (e) {
-                reject(e);
-            } }
-            function rejected(value) { try {
-                step(generator["throw"](value));
-            }
-            catch (e) {
-                reject(e);
-            } }
-            function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-            step((generator = generator.apply(thisArg, _arguments || [])).next());
-        });
-    }
-    function __generator(thisArg, body) {
-        var _ = { label: 0, sent: function () { if (t[0] & 1)
-                throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function () { return this; }), g;
-        function verb(n) { return function (v) { return step([n, v]); }; }
-        function step(op) {
-            if (f)
-                throw new TypeError("Generator is already executing.");
-            while (_)
-                try {
-                    if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
-                        return t;
-                    if (y = 0, t)
-                        op = [op[0] & 2, t.value];
-                    switch (op[0]) {
-                        case 0:
-                        case 1:
-                            t = op;
-                            break;
-                        case 4:
-                            _.label++;
-                            return { value: op[1], done: false };
-                        case 5:
-                            _.label++;
-                            y = op[1];
-                            op = [0];
-                            continue;
-                        case 7:
-                            op = _.ops.pop();
-                            _.trys.pop();
-                            continue;
-                        default:
-                            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-                                _ = 0;
-                                continue;
-                            }
-                            if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) {
-                                _.label = op[1];
-                                break;
-                            }
-                            if (op[0] === 6 && _.label < t[1]) {
-                                _.label = t[1];
-                                t = op;
-                                break;
-                            }
-                            if (t && _.label < t[2]) {
-                                _.label = t[2];
-                                _.ops.push(op);
-                                break;
-                            }
-                            if (t[2])
-                                _.ops.pop();
-                            _.trys.pop();
-                            continue;
-                    }
-                    op = body.call(thisArg, _);
-                }
-                catch (e) {
-                    op = [6, e];
-                    y = 0;
-                }
-                finally {
-                    f = t = 0;
-                }
-            if (op[0] & 5)
-                throw op[1];
-            return { value: op[0] ? op[1] : void 0, done: true };
-        }
-    }
-    function __values(o) {
-        var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-        if (m)
-            return m.call(o);
-        return {
-            next: function () {
-                if (o && i >= o.length)
-                    o = void 0;
-                return { value: o && o[i++], done: !o };
-            }
-        };
-    }
-    function __read(o, n) {
-        var m = typeof Symbol === "function" && o[Symbol.iterator];
-        if (!m)
-            return o;
-        var i = m.call(o), r, ar = [], e;
-        try {
-            while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
-                ar.push(r.value);
-        }
-        catch (error) {
-            e = { error: error };
-        }
-        finally {
-            try {
-                if (r && !r.done && (m = i["return"]))
-                    m.call(i);
-            }
-            finally {
-                if (e)
-                    throw e.error;
-            }
-        }
-        return ar;
-    }
-    function __spread() {
-        for (var ar = [], i = 0; i < arguments.length; i++)
-            ar = ar.concat(__read(arguments[i]));
-        return ar;
-    }
 
     /**
      * @fileoverview added by tsickle
@@ -1465,400 +2236,6 @@
         ];
         return SpinnerModule;
     }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @enum {string} */
-    var ICON_TYPE = {
-        STAR: 'STAR',
-        SEARCH: 'SEARCH',
-        CART: 'CART',
-        INFO: 'INFO',
-        GRID: 'GRID',
-        LIST: 'LIST',
-        CARET_DOWN: 'CARET_DOWN',
-        TIMES: 'TIMES',
-        ERROR: 'ERROR',
-        WARNING: 'WARNING',
-        SUCCESS: 'SUCCESS',
-        VISA: 'VISA',
-        MASTER_CARD: 'MASTER_CARD',
-        AMEX: 'AMEX',
-        DINERS_CLUB: 'DINERS_CLUB',
-        CREDIT_CARD: 'CREDIT_CARD',
-        PLUS: 'PLUS',
-        MINUS: 'MINUS',
-        RESET: 'RESET',
-    };
-    /**
-     * @abstract
-     */
-    var /**
-     * @abstract
-     */ IconConfig = /** @class */ (function () {
-        function IconConfig() {
-        }
-        return IconConfig;
-    }());
-    /** @enum {string} */
-    var IconResourceType = {
-        SVG: 'svg',
-        LINK: 'link',
-    };
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @type {?} */
-    var fontawesomeIconConfig = {
-        icon: {
-            symbols: {
-                SEARCH: 'fas fa-search',
-                CART: 'fas fa-shopping-cart',
-                INFO: 'fas fa-info-circle',
-                STAR: 'fas fa-star',
-                GRID: 'fas fa-th-large',
-                LIST: 'fas fa-bars',
-                CARET_DOWN: 'fas fa-angle-down',
-                ERROR: 'fas fa-exclamation-circle',
-                WARNING: 'fas fa-exclamation-triangle',
-                SUCCESS: 'fas fa-check-circle',
-                TIMES: 'fas fa-times',
-                VISA: 'fab fa-cc-visa',
-                MASTER_CARD: 'fab fa-cc-mastercard',
-                AMEX: 'fab fa-cc-amex',
-                DINERS_CLUB: 'fab fa-cc-diners-club',
-                CREDIT_CARD: 'fas fa-credit-card',
-                MINUS: 'fas fa-minus',
-                PLUS: 'fas fa-plus',
-                RESET: 'fas fa-times-circle',
-            },
-            resources: [
-                {
-                    type: IconResourceType.LINK,
-                    url: 'https://use.fontawesome.com/releases/v5.8.1/css/all.css',
-                },
-            ],
-        },
-    };
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var IconLoaderService = /** @class */ (function () {
-        function IconLoaderService(winRef, config) {
-            this.winRef = winRef;
-            this.config = config;
-            this.loadedResources = [];
-        }
-        /**
-         * Indicates whether the given icon type is configured to use SVG.
-         */
-        /**
-         * Indicates whether the given icon type is configured to use SVG.
-         * @param {?} iconType
-         * @return {?}
-         */
-        IconLoaderService.prototype.useSvg = /**
-         * Indicates whether the given icon type is configured to use SVG.
-         * @param {?} iconType
-         * @return {?}
-         */
-            function (iconType) {
-                return (this.config.icon.resources &&
-                    !!this.config.icon.resources.find(function (res) {
-                        return res.types &&
-                            res.type === IconResourceType.SVG &&
-                            res.types.includes(iconType);
-                    }));
-            };
-        /**
-         * Returns the path to the svg link. The link supports path names
-         * as well, if the config has been setup to support a svg file path.
-         * Additionally, the icon prefix will be taken into account to prefix the
-         * icon IDs in the SVG.
-         */
-        /**
-         * Returns the path to the svg link. The link supports path names
-         * as well, if the config has been setup to support a svg file path.
-         * Additionally, the icon prefix will be taken into account to prefix the
-         * icon IDs in the SVG.
-         * @param {?} iconType
-         * @return {?}
-         */
-        IconLoaderService.prototype.getSvgPath = /**
-         * Returns the path to the svg link. The link supports path names
-         * as well, if the config has been setup to support a svg file path.
-         * Additionally, the icon prefix will be taken into account to prefix the
-         * icon IDs in the SVG.
-         * @param {?} iconType
-         * @return {?}
-         */
-            function (iconType) {
-                /** @type {?} */
-                var svgResource = this.config.icon.resources.find(function (res) {
-                    return res.type === IconResourceType.SVG &&
-                        res.types &&
-                        res.types.includes(iconType);
-                });
-                if (svgResource) {
-                    return svgResource.url
-                        ? svgResource.url + "#" + this.getSymbol(iconType)
-                        : "#" + this.getSymbol(iconType);
-                }
-            };
-        /**
-         *
-         * Returns the symbol class(es) for the icon type.
-         */
-        /**
-         *
-         * Returns the symbol class(es) for the icon type.
-         * @param {?} iconType
-         * @return {?}
-         */
-        IconLoaderService.prototype.getStyleClasses = /**
-         *
-         * Returns the symbol class(es) for the icon type.
-         * @param {?} iconType
-         * @return {?}
-         */
-            function (iconType) {
-                return this.getSymbol(iconType) || '';
-            };
-        /**
-         * Loads the resource url (if any) for the given icon.
-         * The icon will only be loaded once.
-         *
-         * NOTE: this is not working when the shadow is used as there's
-         * no head element available and the link must be loaded for every
-         * web component.
-         */
-        /**
-         * Loads the resource url (if any) for the given icon.
-         * The icon will only be loaded once.
-         *
-         * NOTE: this is not working when the shadow is used as there's
-         * no head element available and the link must be loaded for every
-         * web component.
-         * @param {?} iconType
-         * @return {?}
-         */
-        IconLoaderService.prototype.addLinkResource = /**
-         * Loads the resource url (if any) for the given icon.
-         * The icon will only be loaded once.
-         *
-         * NOTE: this is not working when the shadow is used as there's
-         * no head element available and the link must be loaded for every
-         * web component.
-         * @param {?} iconType
-         * @return {?}
-         */
-            function (iconType) {
-                /** @type {?} */
-                var resource = this.findResource(iconType, IconResourceType.LINK);
-                if (resource && resource.url) {
-                    if (!this.loadedResources.includes(resource.url)) {
-                        this.loadedResources.push(resource.url);
-                        /** @type {?} */
-                        var head = this.winRef.document.getElementsByTagName('head')[0];
-                        /** @type {?} */
-                        var link = this.winRef.document.createElement('link');
-                        link.rel = 'stylesheet';
-                        link.type = 'text/css';
-                        link.href = resource.url;
-                        head.appendChild(link);
-                    }
-                }
-            };
-        /**
-         * @private
-         * @param {?} iconType
-         * @param {?} resourceType
-         * @return {?}
-         */
-        IconLoaderService.prototype.findResource = /**
-         * @private
-         * @param {?} iconType
-         * @param {?} resourceType
-         * @return {?}
-         */
-            function (iconType, resourceType) {
-                if (!this.config.icon.resources) {
-                    return;
-                }
-                /** @type {?} */
-                var resource = this.config.icon.resources.find(function (res) {
-                    return res.type === resourceType && res.types && res.types.includes(iconType);
-                });
-                // no specific resource found, let's try to find a one-size-fits-all resource
-                if (!resource) {
-                    resource = this.config.icon.resources.find(function (res) { return (res.type === resourceType && !res.types) || res.types === []; });
-                }
-                return resource;
-            };
-        /**
-         * @private
-         * @param {?} iconType
-         * @return {?}
-         */
-        IconLoaderService.prototype.getSymbol = /**
-         * @private
-         * @param {?} iconType
-         * @return {?}
-         */
-            function (iconType) {
-                if (this.config.icon &&
-                    this.config.icon.symbols &&
-                    this.config.icon.symbols[iconType]) {
-                    return this.config.icon.symbols[iconType];
-                }
-            };
-        IconLoaderService.decorators = [
-            { type: i0.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */
-        IconLoaderService.ctorParameters = function () {
-            return [
-                { type: i1$2.WindowRef },
-                { type: IconConfig }
-            ];
-        };
-        /** @nocollapse */ IconLoaderService.ngInjectableDef = i0.defineInjectable({ factory: function IconLoaderService_Factory() { return new IconLoaderService(i0.inject(i1$2.WindowRef), i0.inject(IconConfig)); }, token: IconLoaderService, providedIn: "root" });
-        return IconLoaderService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var IconComponent = /** @class */ (function () {
-        function IconComponent(iconLoader, elementRef) {
-            this.iconLoader = iconLoader;
-            this.elementRef = elementRef;
-            /**
-             * Keeps the given style classes so that we can
-             * clean them up when the icon changes
-             */
-            this.styleClasses = '';
-        }
-        Object.defineProperty(IconComponent.prototype, "type", {
-            set: /**
-             * @param {?} type
-             * @return {?}
-             */ function (type) {
-                this._type = type;
-                this.addStyleClasses(type);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(IconComponent.prototype, "useSvg", {
-            /**
-             * Indicates whether the icon is configured to use SVG or not.
-             */
-            get: /**
-             * Indicates whether the icon is configured to use SVG or not.
-             * @return {?}
-             */ function () {
-                return this.iconLoader.useSvg(this._type);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(IconComponent.prototype, "svgPath", {
-            /**
-             * Returns the path to the svg symbol. The path could include an
-             * external URL to an svg (sprite) file, but can also reference
-             * an existing SVG symbol in the DOM.
-             */
-            get: /**
-             * Returns the path to the svg symbol. The path could include an
-             * external URL to an svg (sprite) file, but can also reference
-             * an existing SVG symbol in the DOM.
-             * @return {?}
-             */ function () {
-                return this.iconLoader.getSvgPath(this._type);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        /**
-         * Adds the style classes and the link resource (if availabe).
-         */
-        /**
-         * Adds the style classes and the link resource (if availabe).
-         * @private
-         * @param {?} type
-         * @return {?}
-         */
-        IconComponent.prototype.addStyleClasses = /**
-         * Adds the style classes and the link resource (if availabe).
-         * @private
-         * @param {?} type
-         * @return {?}
-         */
-            function (type) {
-                if (this.useSvg) {
-                    return;
-                }
-                if (this.staticStyleClasses === undefined) {
-                    this.staticStyleClasses = this.elementRef.nativeElement.classList.value
-                        ? this.elementRef.nativeElement.classList.value + ' '
-                        : '';
-                }
-                this.styleClasses =
-                    this.staticStyleClasses + this.iconLoader.getStyleClasses(type);
-                this.iconLoader.addLinkResource(type);
-            };
-        IconComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-icon',
-                        template: "<ng-container *ngIf=\"useSvg\">\n  <svg>\n    <use [attr.xlink:href]=\"svgPath\"></use>\n  </svg>\n</ng-container>\n"
-                    }] }
-        ];
-        /** @nocollapse */
-        IconComponent.ctorParameters = function () {
-            return [
-                { type: IconLoaderService },
-                { type: i0.ElementRef }
-            ];
-        };
-        IconComponent.propDecorators = {
-            type: [{ type: i0.Input, args: ['type',] }],
-            styleClasses: [{ type: i0.HostBinding, args: ['class',] }]
-        };
-        return IconComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var IconModule = /** @class */ (function () {
-        function IconModule() {
-        }
-        IconModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        declarations: [IconComponent],
-                        imports: [common.CommonModule, i1$2.ConfigModule.withConfig(fontawesomeIconConfig)],
-                        providers: [{ provide: IconConfig, useExisting: i1$2.Config }],
-                        exports: [IconComponent],
-                    },] }
-        ];
-        return IconModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
 
     /**
      * @fileoverview added by tsickle
@@ -2349,150 +2726,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    /**
-     * A service to handle modal
-     */
-    var ModalService = /** @class */ (function () {
-        function ModalService(ngbModalService) {
-            this.ngbModalService = ngbModalService;
-            this.modals = [];
-        }
-        /**
-         * @param {?} content
-         * @param {?=} options
-         * @return {?}
-         */
-        ModalService.prototype.open = /**
-         * @param {?} content
-         * @param {?=} options
-         * @return {?}
-         */
-            function (content, options) {
-                /** @type {?} */
-                var activeModal;
-                activeModal = this.ngbModalService.open(content, options);
-                this.modals.push(activeModal);
-                return activeModal;
-            };
-        /**
-         * @return {?}
-         */
-        ModalService.prototype.getActiveModal = /**
-         * @return {?}
-         */
-            function () {
-                /** @type {?} */
-                var modal = this.modals[this.modals.length - 1];
-                return modal ? modal : null;
-            };
-        /**
-         * @param {?=} reason
-         * @return {?}
-         */
-        ModalService.prototype.dismissActiveModal = /**
-         * @param {?=} reason
-         * @return {?}
-         */
-            function (reason) {
-                /** @type {?} */
-                var modal = this.getActiveModal();
-                if (modal) {
-                    modal.dismiss(reason);
-                    this.modals.pop();
-                }
-            };
-        /**
-         * @param {?=} reason
-         * @return {?}
-         */
-        ModalService.prototype.closeActiveModal = /**
-         * @param {?=} reason
-         * @return {?}
-         */
-            function (reason) {
-                /** @type {?} */
-                var modal = this.getActiveModal();
-                if (modal) {
-                    modal.close(reason);
-                    this.modals.pop();
-                }
-            };
-        ModalService.decorators = [
-            { type: i0.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */
-        ModalService.ctorParameters = function () {
-            return [
-                { type: i1.NgbModal }
-            ];
-        };
-        /** @nocollapse */ ModalService.ngInjectableDef = i0.defineInjectable({ factory: function ModalService_Factory() { return new ModalService(i0.inject(i1.NgbModal)); }, token: ModalService, providedIn: "root" });
-        return ModalService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /**
-     * A reference to a newly opened modal
-     *
-     * \@todo remove ngb dependency and create our own implementation of ModalRef
-     */
-    var /**
-     * A reference to a newly opened modal
-     *
-     * \@todo remove ngb dependency and create our own implementation of ModalRef
-     */ ModalRef = /** @class */ (function (_super) {
-        __extends(ModalRef, _super);
-        function ModalRef() {
-            return _super !== null && _super.apply(this, arguments) || this;
-        }
-        return ModalRef;
-    }(i1.NgbModalRef));
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var AutoFocusDirective = /** @class */ (function () {
-        function AutoFocusDirective(hostElement) {
-            this.hostElement = hostElement;
-        }
-        /**
-         * @return {?}
-         */
-        AutoFocusDirective.prototype.ngAfterViewInit = /**
-         * @return {?}
-         */
-            function () {
-                this.hostElement.nativeElement.focus();
-            };
-        AutoFocusDirective.decorators = [
-            { type: i0.Directive, args: [{
-                        selector: '[cxAutoFocus]',
-                    },] }
-        ];
-        /** @nocollapse */
-        AutoFocusDirective.ctorParameters = function () {
-            return [
-                { type: i0.ElementRef }
-            ];
-        };
-        return AutoFocusDirective;
-    }());
 
     /**
      * @fileoverview added by tsickle
@@ -2939,284 +3172,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var AddedToCartDialogComponent = /** @class */ (function () {
-        function AddedToCartDialogComponent(modalService, cartService, fb) {
-            this.modalService = modalService;
-            this.cartService = cartService;
-            this.fb = fb;
-            this.iconTypes = ICON_TYPE;
-            this.quantity = 0;
-            this.firstUpdate = true;
-            this.form = this.fb.group({});
-        }
-        /**
-         * @return {?}
-         */
-        AddedToCartDialogComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                this.entry$ = this.entry$.pipe(operators.tap(function (entry) {
-                    if (entry) {
-                        var code = entry.product.code;
-                        if (!_this.form.controls[code]) {
-                            _this.form.setControl(code, _this.createEntryFormGroup(entry));
-                        }
-                        else {
-                            /** @type {?} */
-                            var entryForm = ( /** @type {?} */(_this.form.controls[code]));
-                            entryForm.controls.quantity.setValue(entry.quantity);
-                        }
-                        _this.form.markAsPristine();
-                        // Announce in header if Add To Cart button has incremented product
-                        _this.showItemIncrLabel = _this.firstUpdate && entry.quantity > 1;
-                        // Any updates after the first will be flagged as false
-                        _this.firstUpdate = false;
-                    }
-                }));
-            };
-        /**
-         * @param {?=} reason
-         * @return {?}
-         */
-        AddedToCartDialogComponent.prototype.dismissModal = /**
-         * @param {?=} reason
-         * @return {?}
-         */
-            function (reason) {
-                this.modalService.dismissActiveModal(reason);
-            };
-        /**
-         * @param {?} item
-         * @return {?}
-         */
-        AddedToCartDialogComponent.prototype.removeEntry = /**
-         * @param {?} item
-         * @return {?}
-         */
-            function (item) {
-                this.cartService.removeEntry(item);
-                delete this.form.controls[item.product.code];
-                this.dismissModal('Removed');
-            };
-        /**
-         * @param {?} __0
-         * @return {?}
-         */
-        AddedToCartDialogComponent.prototype.updateEntry = /**
-         * @param {?} __0
-         * @return {?}
-         */
-            function (_a) {
-                var item = _a.item, updatedQuantity = _a.updatedQuantity;
-                this.cartService.updateEntry(item.entryNumber, updatedQuantity);
-            };
-        /**
-         * @private
-         * @param {?} entry
-         * @return {?}
-         */
-        AddedToCartDialogComponent.prototype.createEntryFormGroup = /**
-         * @private
-         * @param {?} entry
-         * @return {?}
-         */
-            function (entry) {
-                return this.fb.group({
-                    entryNumber: entry.entryNumber,
-                    quantity: entry.quantity,
-                });
-            };
-        AddedToCartDialogComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-added-to-cart-dialog',
-                        template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) as loaded; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (showItemIncrLabel\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart') | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"(entry$ | async) as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [isReadOnly]=\"false\"\n            [parent]=\"form.controls[entry.product.code]\"\n            [cartIsLoading]=\"!loaded\"\n            (remove)=\"removeEntry($event)\"\n            (update)=\"updateEntry($event)\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"(cart$ | async) as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n            <div>{{ cart.totalPrice.formattedValue }}</div>\n          </div>\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              cxAutoFocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
-                    }] }
-        ];
-        /** @nocollapse */
-        AddedToCartDialogComponent.ctorParameters = function () {
-            return [
-                { type: ModalService },
-                { type: i1$2.CartService },
-                { type: forms.FormBuilder }
-            ];
-        };
-        AddedToCartDialogComponent.propDecorators = {
-            dialog: [{ type: i0.ViewChild, args: ['dialog', { read: i0.ElementRef },] }]
-        };
-        return AddedToCartDialogComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CurrentProductService = /** @class */ (function () {
-        function CurrentProductService(routingService, productService) {
-            this.routingService = routingService;
-            this.productService = productService;
-        }
-        /**
-         * @return {?}
-         */
-        CurrentProductService.prototype.getProduct = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                return this.routingService.getRouterState().pipe(operators.map(function (state) { return state.state.params['productCode']; }), operators.filter(function (productCode) { return !!productCode; }), operators.switchMap(function (productCode) { return _this.productService.get(productCode); }));
-            };
-        CurrentProductService.decorators = [
-            { type: i0.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */
-        CurrentProductService.ctorParameters = function () {
-            return [
-                { type: i1$2.RoutingService },
-                { type: i1$2.ProductService }
-            ];
-        };
-        /** @nocollapse */ CurrentProductService.ngInjectableDef = i0.defineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(i0.inject(i1$2.RoutingService), i0.inject(i1$2.ProductService)); }, token: CurrentProductService, providedIn: "root" });
-        return CurrentProductService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var AddToCartComponent = /** @class */ (function () {
-        function AddToCartComponent(cartService, modalService, currentProductService, cd) {
-            this.cartService = cartService;
-            this.modalService = modalService;
-            this.currentProductService = currentProductService;
-            this.cd = cd;
-            this.showQuantity = true;
-            this.hasStock = false;
-            this.quantity = 1;
-        }
-        /**
-         * @return {?}
-         */
-        AddToCartComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                if (this.productCode) {
-                    this.cartEntry$ = this.cartService.getEntry(this.productCode);
-                    this.hasStock = true;
-                }
-                else {
-                    this.currentProductService
-                        .getProduct()
-                        .pipe(operators.filter(Boolean))
-                        .subscribe(function (product) {
-                        _this.productCode = product.code;
-                        if (product.stock &&
-                            product.stock.stockLevelStatus !== 'outOfStock' &&
-                            product.stock.stockLevel > 0) {
-                            _this.maxQuantity = product.stock.stockLevel;
-                            _this.hasStock = true;
-                        }
-                        else {
-                            _this.hasStock = false;
-                        }
-                        _this.cartEntry$ = _this.cartService.getEntry(_this.productCode);
-                        _this.cd.markForCheck();
-                    });
-                }
-            };
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        AddToCartComponent.prototype.updateCount = /**
-         * @param {?} value
-         * @return {?}
-         */
-            function (value) {
-                this.quantity = value;
-            };
-        /**
-         * @return {?}
-         */
-        AddToCartComponent.prototype.addToCart = /**
-         * @return {?}
-         */
-            function () {
-                if (!this.productCode || this.quantity <= 0) {
-                    return;
-                }
-                this.openModal();
-                this.cartService.addEntry(this.productCode, this.quantity);
-            };
-        /**
-         * @private
-         * @return {?}
-         */
-        AddToCartComponent.prototype.openModal = /**
-         * @private
-         * @return {?}
-         */
-            function () {
-                /** @type {?} */
-                var modalInstance;
-                this.modalRef = this.modalService.open(AddedToCartDialogComponent, {
-                    centered: true,
-                    size: 'lg',
-                });
-                modalInstance = this.modalRef.componentInstance;
-                modalInstance.entry$ = this.cartEntry$;
-                modalInstance.cart$ = this.cartService.getActive();
-                modalInstance.loaded$ = this.cartService.getLoaded();
-                modalInstance.quantity = this.quantity;
-            };
-        AddToCartComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-add-to-cart',
-                        template: "<div class=\"quantity\" *ngIf=\"showQuantity\">\n  <label>{{ 'addToCart.quantity' | cxTranslate }}</label>\n  <cx-item-counter\n    isValueChangeable=\"true\"\n    [min]=\"1\"\n    [max]=\"maxQuantity\"\n    *ngIf=\"hasStock\"\n    (update)=\"updateCount($event)\"\n  ></cx-item-counter>\n  <span class=\"info\">{{\n    hasStock\n      ? ('addToCart.inStock' | cxTranslate)\n      : ('addToCart.outOfStock' | cxTranslate)\n  }}</span>\n</div>\n<button\n  *ngIf=\"hasStock\"\n  class=\"btn btn-primary btn-block\"\n  type=\"button\"\n  [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  (click)=\"addToCart()\"\n>\n  {{ 'addToCart.addToCart' | cxTranslate }}\n</button>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        AddToCartComponent.ctorParameters = function () {
-            return [
-                { type: i1$2.CartService },
-                { type: ModalService },
-                { type: CurrentProductService },
-                { type: i0.ChangeDetectorRef }
-            ];
-        };
-        AddToCartComponent.propDecorators = {
-            productCode: [{ type: i0.Input }],
-            showQuantity: [{ type: i0.Input }]
-        };
-        return AddToCartComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var AutoFocusDirectiveModule = /** @class */ (function () {
-        function AutoFocusDirectiveModule() {
-        }
-        AutoFocusDirectiveModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        declarations: [AutoFocusDirective],
-                        exports: [AutoFocusDirective],
-                    },] }
-        ];
-        return AutoFocusDirectiveModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var AddToCartModule = /** @class */ (function () {
         function AddToCartModule() {
         }
@@ -3329,6 +3284,52 @@
         ];
         return CartDetailsModule;
     }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CartNotEmptyGuard = /** @class */ (function () {
+        function CartNotEmptyGuard(cartService, routingService) {
+            this.cartService = cartService;
+            this.routingService = routingService;
+        }
+        /**
+         * @return {?}
+         */
+        CartNotEmptyGuard.prototype.canActivate = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                return this.cartService.getLoaded().pipe(operators.skipWhile(function (loaded) { return !loaded; }), operators.switchMap(function () { return _this.cartService.getActive(); }), operators.map(function (cart) {
+                    if (_this.cartService.isEmpty(cart)) {
+                        _this.routingService.go({ cxRoute: 'home' });
+                        return false;
+                    }
+                    return true;
+                }));
+            };
+        CartNotEmptyGuard.decorators = [
+            { type: i0.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        CartNotEmptyGuard.ctorParameters = function () {
+            return [
+                { type: i1$2.CartService },
+                { type: i1$2.RoutingService }
+            ];
+        };
+        /** @nocollapse */ CartNotEmptyGuard.ngInjectableDef = i0.defineInjectable({ factory: function CartNotEmptyGuard_Factory() { return new CartNotEmptyGuard(i0.inject(i1$2.CartService), i0.inject(i1$2.RoutingService)); }, token: CartNotEmptyGuard, providedIn: "root" });
+        return CartNotEmptyGuard;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
 
     /**
      * @fileoverview added by tsickle
@@ -3492,41 +3493,3170 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var CartNotEmptyGuard = /** @class */ (function () {
-        function CartNotEmptyGuard(cartService, routingService) {
-            this.cartService = cartService;
-            this.routingService = routingService;
+    /**
+     * @abstract
+     */
+    var /**
+     * @abstract
+     */ CheckoutConfig = /** @class */ (function () {
+        function CheckoutConfig() {
+        }
+        return CheckoutConfig;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CheckoutConfigService = /** @class */ (function () {
+        function CheckoutConfigService(checkoutConfig, routingConfigService) {
+            this.checkoutConfig = checkoutConfig;
+            this.routingConfigService = routingConfigService;
+            this.steps = this.checkoutConfig.checkout.steps;
+        }
+        /**
+         * @param {?} currentStepType
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getCheckoutStep = /**
+         * @param {?} currentStepType
+         * @return {?}
+         */
+            function (currentStepType) {
+                return this.steps[this.getCheckoutStepIndex('type', currentStepType)];
+            };
+        /**
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getNextCheckoutStepUrl = /**
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+            function (activatedRoute) {
+                /** @type {?} */
+                var stepIndex = this.getCurrentStepIndex(activatedRoute);
+                return stepIndex >= 0 && this.steps[stepIndex + 1]
+                    ? this.getStepUrlFromStepRoute(this.steps[stepIndex + 1].routeName)
+                    : null;
+            };
+        /**
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getPreviousCheckoutStepUrl = /**
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+            function (activatedRoute) {
+                /** @type {?} */
+                var stepIndex = this.getCurrentStepIndex(activatedRoute);
+                return stepIndex >= 0 && this.steps[stepIndex - 1]
+                    ? this.getStepUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
+                    : null;
+            };
+        /**
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getCurrentStepIndex = /**
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+            function (activatedRoute) {
+                var e_1, _a;
+                /** @type {?} */
+                var currentStepUrl = this.getStepUrlFromActivatedRoute(activatedRoute);
+                /** @type {?} */
+                var stepIndex;
+                /** @type {?} */
+                var index = 0;
+                try {
+                    for (var _b = __values(this.steps), _c = _b.next(); !_c.done; _c = _b.next()) {
+                        var step = _c.value;
+                        if (currentStepUrl === "/" + this.getStepUrlFromStepRoute(step.routeName)) {
+                            stepIndex = index;
+                        }
+                        else {
+                            index++;
+                        }
+                    }
+                }
+                catch (e_1_1) {
+                    e_1 = { error: e_1_1 };
+                }
+                finally {
+                    try {
+                        if (_c && !_c.done && (_a = _b.return))
+                            _a.call(_b);
+                    }
+                    finally {
+                        if (e_1)
+                            throw e_1.error;
+                    }
+                }
+                return stepIndex >= 0 ? stepIndex : null;
+            };
+        /**
+         * @private
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getStepUrlFromActivatedRoute = /**
+         * @private
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+            function (activatedRoute) {
+                return activatedRoute &&
+                    activatedRoute.snapshot &&
+                    activatedRoute.snapshot.url
+                    ? "/" + activatedRoute.snapshot.url.join('/')
+                    : null;
+            };
+        /**
+         * @private
+         * @param {?} stepRoute
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getStepUrlFromStepRoute = /**
+         * @private
+         * @param {?} stepRoute
+         * @return {?}
+         */
+            function (stepRoute) {
+                return this.routingConfigService.getRouteConfig(stepRoute).paths[0];
+            };
+        /**
+         * @private
+         * @param {?} key
+         * @param {?} value
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getCheckoutStepIndex = /**
+         * @private
+         * @param {?} key
+         * @param {?} value
+         * @return {?}
+         */
+            function (key, value) {
+                return key && value
+                    ? this.steps.findIndex(function (step) { return step[key].includes(value); })
+                    : null;
+            };
+        CheckoutConfigService.decorators = [
+            { type: i0.Injectable }
+        ];
+        /** @nocollapse */
+        CheckoutConfigService.ctorParameters = function () {
+            return [
+                { type: CheckoutConfig },
+                { type: i1$2.RoutingConfigService }
+            ];
+        };
+        return CheckoutConfigService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @enum {string} */
+    var CheckoutStepType = {
+        SHIPPING_ADDRESS: 'shippingAddress',
+        DELIVERY_MODE: 'deliveryMode',
+        PAYMENT_DETAILS: 'paymentDetails',
+        REVIEW_ORDER: 'reviewOrder',
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var defaultCheckoutConfig = {
+        checkout: {
+            steps: [
+                {
+                    id: 'shippingAddress',
+                    name: 'checkoutProgress.shippingAddress',
+                    routeName: 'checkoutShippingAddress',
+                    type: [CheckoutStepType.SHIPPING_ADDRESS],
+                },
+                {
+                    id: 'deliveryMode',
+                    name: 'checkoutProgress.deliveryMode',
+                    routeName: 'checkoutDeliveryMode',
+                    type: [CheckoutStepType.DELIVERY_MODE],
+                },
+                {
+                    id: 'paymentDetails',
+                    name: 'checkoutProgress.paymentDetails',
+                    routeName: 'checkoutPaymentDetails',
+                    type: [CheckoutStepType.PAYMENT_DETAILS],
+                },
+                {
+                    id: 'reviewOrder',
+                    name: 'checkoutProgress.reviewOrder',
+                    routeName: 'checkoutReviewOrder',
+                    type: [CheckoutStepType.REVIEW_ORDER],
+                },
+            ],
+        },
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CheckoutGuard = /** @class */ (function () {
+        function CheckoutGuard(router, config, routingConfigService) {
+            this.router = router;
+            this.config = config;
+            this.routingConfigService = routingConfigService;
         }
         /**
          * @return {?}
          */
-        CartNotEmptyGuard.prototype.canActivate = /**
+        CheckoutGuard.prototype.canActivate = /**
          * @return {?}
          */
             function () {
-                var _this = this;
-                return this.cartService.getLoaded().pipe(operators.skipWhile(function (loaded) { return !loaded; }), operators.switchMap(function () { return _this.cartService.getActive(); }), operators.map(function (cart) {
-                    if (_this.cartService.isEmpty(cart)) {
-                        _this.routingService.go({ cxRoute: 'home' });
-                        return false;
-                    }
-                    return true;
-                }));
+                return rxjs.of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.config.checkout.steps[0].routeName).paths[0]));
             };
-        CartNotEmptyGuard.decorators = [
+        CheckoutGuard.decorators = [
             { type: i0.Injectable, args: [{
                         providedIn: 'root',
                     },] }
         ];
         /** @nocollapse */
-        CartNotEmptyGuard.ctorParameters = function () {
+        CheckoutGuard.ctorParameters = function () {
             return [
+                { type: i4.Router },
+                { type: CheckoutConfig },
+                { type: i1$2.RoutingConfigService }
+            ];
+        };
+        /** @nocollapse */ CheckoutGuard.ngInjectableDef = i0.defineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(i0.inject(i4.Router), i0.inject(CheckoutConfig), i0.inject(i1$2.RoutingConfigService)); }, token: CheckoutGuard, providedIn: "root" });
+        return CheckoutGuard;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CheckoutOrchestratorComponent = /** @class */ (function () {
+        function CheckoutOrchestratorComponent() {
+        }
+        CheckoutOrchestratorComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-checkout-orchestrator',
+                        template: "",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        CheckoutOrchestratorComponent.ctorParameters = function () { return []; };
+        return CheckoutOrchestratorComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CheckoutOrchestratorModule = /** @class */ (function () {
+        function CheckoutOrchestratorModule() {
+        }
+        CheckoutOrchestratorModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i1$2.ConfigModule.withConfig(defaultCheckoutConfig),
+                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    CheckoutOrchestrator: {
+                                        selector: 'cx-checkout-orchestrator',
+                                        guards: [i1$2.AuthGuard, CartNotEmptyGuard, CheckoutGuard],
+                                    },
+                                },
+                            }))),
+                        ],
+                        providers: [{ provide: CheckoutConfig, useExisting: i1$2.Config }],
+                        declarations: [CheckoutOrchestratorComponent],
+                        entryComponents: [CheckoutOrchestratorComponent],
+                        exports: [CheckoutOrchestratorComponent],
+                    },] }
+        ];
+        return CheckoutOrchestratorModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CheckoutOrderSummaryComponent = /** @class */ (function () {
+        function CheckoutOrderSummaryComponent(cartService) {
+            this.cartService = cartService;
+            this.cart$ = this.cartService.getActive();
+        }
+        CheckoutOrderSummaryComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-checkout-order-summary',
+                        template: "<cx-order-summary [cart]=\"cart$ | async\"></cx-order-summary>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        CheckoutOrderSummaryComponent.ctorParameters = function () {
+            return [
+                { type: i1$2.CartService }
+            ];
+        };
+        return CheckoutOrderSummaryComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CheckoutOrderSummaryModule = /** @class */ (function () {
+        function CheckoutOrderSummaryModule() {
+        }
+        CheckoutOrderSummaryModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            CartSharedModule,
+                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    CheckoutOrderSummary: {
+                                        selector: 'cx-checkout-order-summary',
+                                    },
+                                },
+                            }))),
+                        ],
+                        declarations: [CheckoutOrderSummaryComponent],
+                        entryComponents: [CheckoutOrderSummaryComponent],
+                        exports: [CheckoutOrderSummaryComponent],
+                    },] }
+        ];
+        return CheckoutOrderSummaryModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CheckoutProgressMobileBottomComponent = /** @class */ (function () {
+        function CheckoutProgressMobileBottomComponent(config, routingService, routingConfigService) {
+            this.config = config;
+            this.routingService = routingService;
+            this.routingConfigService = routingConfigService;
+        }
+        /**
+         * @return {?}
+         */
+        CheckoutProgressMobileBottomComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.steps = this.config.checkout.steps;
+                this.routerState$ = this.routingService.getRouterState().pipe(operators.tap(function (router) {
+                    _this.activeStepUrl = router.state.context.id;
+                    _this.steps.forEach(function (step, index) {
+                        /** @type {?} */
+                        var routeUrl = "/" + _this.routingConfigService.getRouteConfig(step.routeName).paths[0];
+                        if (routeUrl === _this.activeStepUrl) {
+                            _this.activeStepIndex = index;
+                        }
+                    });
+                }));
+            };
+        CheckoutProgressMobileBottomComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-checkout-progress-mobile-bottom',
+                        template: "<div *ngIf=\"(routerState$ | async) as routerState\">\n  <div class=\"cx-media\">\n    <div *ngFor=\"let step of steps; let i = index\">\n      <div class=\"cx-list-media\" *ngIf=\"i > activeStepIndex\">\n        <div>{{ i + 1 }}. {{ step.name | cxTranslate }}</div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        CheckoutProgressMobileBottomComponent.ctorParameters = function () {
+            return [
+                { type: CheckoutConfig },
+                { type: i1$2.RoutingService },
+                { type: i1$2.RoutingConfigService }
+            ];
+        };
+        return CheckoutProgressMobileBottomComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CheckoutProgressMobileBottomModule = /** @class */ (function () {
+        function CheckoutProgressMobileBottomModule() {
+        }
+        CheckoutProgressMobileBottomModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i1$2.UrlModule,
+                            i1$2.I18nModule,
+                            i4.RouterModule,
+                            i1$2.ConfigModule.withConfig(defaultCheckoutConfig),
+                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    CheckoutProgressMobileBottom: {
+                                        selector: 'cx-checkout-progress-mobile-bottom',
+                                        guards: [i1$2.AuthGuard, CartNotEmptyGuard],
+                                    },
+                                },
+                            }))),
+                        ],
+                        declarations: [CheckoutProgressMobileBottomComponent],
+                        entryComponents: [CheckoutProgressMobileBottomComponent],
+                        exports: [CheckoutProgressMobileBottomComponent],
+                    },] }
+        ];
+        return CheckoutProgressMobileBottomModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CheckoutProgressMobileTopComponent = /** @class */ (function () {
+        function CheckoutProgressMobileTopComponent(config, routingService, cartService, routingConfigService) {
+            this.config = config;
+            this.routingService = routingService;
+            this.cartService = cartService;
+            this.routingConfigService = routingConfigService;
+        }
+        /**
+         * @return {?}
+         */
+        CheckoutProgressMobileTopComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.steps = this.config.checkout.steps;
+                this.cart$ = this.cartService.getActive();
+                this.routerState$ = this.routingService.getRouterState().pipe(operators.tap(function (router) {
+                    _this.activeStepUrl = router.state.context.id;
+                    _this.steps.forEach(function (step, index) {
+                        /** @type {?} */
+                        var routeUrl = "/" + _this.routingConfigService.getRouteConfig(step.routeName).paths[0];
+                        if (routeUrl === _this.activeStepUrl) {
+                            _this.activeStepIndex = index;
+                        }
+                    });
+                }));
+            };
+        CheckoutProgressMobileTopComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-checkout-progress-mobile-top',
+                        template: "<div *ngIf=\"(routerState$ | async) as routerState\">\n  <div *ngIf=\"(cart$ | async) as cart\">\n    <div class=\"cx-media\">\n      <div class=\"cx-list-media\" *ngIf=\"cart?.totalItems && cart?.subTotal\">\n        {{ 'cartItems.cartTotal' | cxTranslate: { count: cart.totalItems } }}:\n        {{ cart.subTotal.formattedValue }}\n      </div>\n      <div *ngFor=\"let step of steps; let i = index\">\n        <div class=\"cx-list-media\" *ngIf=\"i < activeStepIndex\">\n          <div>{{ i + 1 }}. {{ step.name | cxTranslate }}</div>\n          <button\n            class=\"btn btn-link\"\n            [routerLink]=\"{ cxRoute: step.routeName } | cxUrl\"\n          >\n            {{ 'common.edit' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"cx-list-media is-active\" *ngIf=\"i === activeStepIndex\">\n          <div>{{ i + 1 }}. {{ step.name | cxTranslate }}</div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        CheckoutProgressMobileTopComponent.ctorParameters = function () {
+            return [
+                { type: CheckoutConfig },
+                { type: i1$2.RoutingService },
                 { type: i1$2.CartService },
+                { type: i1$2.RoutingConfigService }
+            ];
+        };
+        return CheckoutProgressMobileTopComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CheckoutProgressMobileTopModule = /** @class */ (function () {
+        function CheckoutProgressMobileTopModule() {
+        }
+        CheckoutProgressMobileTopModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i1$2.UrlModule,
+                            i1$2.I18nModule,
+                            i4.RouterModule,
+                            i1$2.ConfigModule.withConfig(defaultCheckoutConfig),
+                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    CheckoutProgressMobileTop: {
+                                        selector: 'cx-checkout-progress-mobile-top',
+                                        guards: [i1$2.AuthGuard, CartNotEmptyGuard],
+                                    },
+                                },
+                            }))),
+                        ],
+                        declarations: [CheckoutProgressMobileTopComponent],
+                        entryComponents: [CheckoutProgressMobileTopComponent],
+                        exports: [CheckoutProgressMobileTopComponent],
+                    },] }
+        ];
+        return CheckoutProgressMobileTopModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CheckoutProgressComponent = /** @class */ (function () {
+        function CheckoutProgressComponent(config, routingService, routingConfigService) {
+            this.config = config;
+            this.routingService = routingService;
+            this.routingConfigService = routingConfigService;
+        }
+        /**
+         * @return {?}
+         */
+        CheckoutProgressComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.steps = this.config.checkout.steps;
+                this.routerState$ = this.routingService.getRouterState().pipe(operators.tap(function (router) {
+                    _this.activeStepUrl = router.state.context.id;
+                    _this.steps.forEach(function (step, index) {
+                        /** @type {?} */
+                        var routeUrl = "/" + _this.routingConfigService.getRouteConfig(step.routeName).paths[0];
+                        if (routeUrl === _this.activeStepUrl) {
+                            _this.activeStepIndex = index;
+                        }
+                    });
+                }));
+            };
+        CheckoutProgressComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-checkout-progress',
+                        template: "<section *ngIf=\"(routerState$ | async) as routerState\">\n  <div class=\"cx-nav d-none d-lg-block d-xl-block\">\n    <ul class=\"cx-list\">\n      <li class=\"cx-item\" *ngFor=\"let step of steps; let i = index\">\n        <a\n          [routerLink]=\"{ cxRoute: step.routeName } | cxUrl\"\n          class=\"cx-link\"\n          [ngClass]=\"{\n            ' is-active': i === activeStepIndex,\n            ' is-disabled': i > activeStepIndex\n          }\"\n        >\n          {{ i + 1 }}. {{ step.name | cxTranslate }}\n        </a>\n      </li>\n    </ul>\n  </div>\n</section>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        CheckoutProgressComponent.ctorParameters = function () {
+            return [
+                { type: CheckoutConfig },
+                { type: i1$2.RoutingService },
+                { type: i1$2.RoutingConfigService }
+            ];
+        };
+        return CheckoutProgressComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CheckoutProgressModule = /** @class */ (function () {
+        function CheckoutProgressModule() {
+        }
+        CheckoutProgressModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i1$2.UrlModule,
+                            i1$2.I18nModule,
+                            i4.RouterModule,
+                            i1$2.ConfigModule.withConfig(defaultCheckoutConfig),
+                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    CheckoutProgress: {
+                                        selector: 'cx-checkout-progress',
+                                        guards: [i1$2.AuthGuard, CartNotEmptyGuard],
+                                    },
+                                },
+                            }))),
+                        ],
+                        declarations: [CheckoutProgressComponent],
+                        entryComponents: [CheckoutProgressComponent],
+                        exports: [CheckoutProgressComponent],
+                        providers: [{ provide: CheckoutConfig, useExisting: i1$2.Config }],
+                    },] }
+        ];
+        return CheckoutProgressModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CheckoutDetailsService = /** @class */ (function () {
+        function CheckoutDetailsService(checkoutService, cartService) {
+            var _this = this;
+            this.checkoutService = checkoutService;
+            this.cartService = cartService;
+            this.cartId$ = this.cartService
+                .getActive()
+                .pipe(operators.map(function (cartData) { return cartData.code; }));
+            this.getCheckoutDetailsLoaded$ = this.cartId$.pipe(operators.tap(function (cartId) { return _this.checkoutService.loadCheckoutDetails(cartId); }), operators.shareReplay(1), operators.switchMap(function () { return _this.checkoutService.getCheckoutDetailsLoaded(); }), operators.skipWhile(function (loaded) { return !loaded; }));
+        }
+        /**
+         * @return {?}
+         */
+        CheckoutDetailsService.prototype.getDeliveryAddress = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                return this.getCheckoutDetailsLoaded$.pipe(operators.switchMap(function () { return _this.checkoutService.getDeliveryAddress(); }));
+            };
+        /**
+         * @return {?}
+         */
+        CheckoutDetailsService.prototype.getSelectedDeliveryModeCode = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                return this.getCheckoutDetailsLoaded$.pipe(operators.switchMap(function () { return _this.checkoutService.getSelectedDeliveryModeCode(); }));
+            };
+        /**
+         * @return {?}
+         */
+        CheckoutDetailsService.prototype.getPaymentDetails = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                return this.getCheckoutDetailsLoaded$.pipe(operators.switchMap(function () { return _this.checkoutService.getPaymentDetails(); }));
+            };
+        CheckoutDetailsService.decorators = [
+            { type: i0.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        CheckoutDetailsService.ctorParameters = function () {
+            return [
+                { type: i1$2.CheckoutService },
+                { type: i1$2.CartService }
+            ];
+        };
+        /** @nocollapse */ CheckoutDetailsService.ngInjectableDef = i0.defineInjectable({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(i0.inject(i1$2.CheckoutService), i0.inject(i1$2.CartService)); }, token: CheckoutDetailsService, providedIn: "root" });
+        return CheckoutDetailsService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ShippingAddressSetGuard = /** @class */ (function () {
+        function ShippingAddressSetGuard(checkoutDetailsService, checkoutConfigService, routingConfigService, router, serverConfig) {
+            this.checkoutDetailsService = checkoutDetailsService;
+            this.checkoutConfigService = checkoutConfigService;
+            this.routingConfigService = routingConfigService;
+            this.router = router;
+            this.serverConfig = serverConfig;
+        }
+        /**
+         * @return {?}
+         */
+        ShippingAddressSetGuard.prototype.canActivate = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                /** @type {?} */
+                var checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.SHIPPING_ADDRESS);
+                if (!checkoutStep && !this.serverConfig.production) {
+                    console.warn("Missing step with type " + CheckoutStepType.SHIPPING_ADDRESS + " in checkout configuration.");
+                }
+                return this.checkoutDetailsService
+                    .getDeliveryAddress()
+                    .pipe(operators.map(function (deliveryAddress) {
+                    return deliveryAddress && Object.keys(deliveryAddress).length
+                        ? true
+                        : _this.router.parseUrl(checkoutStep &&
+                            _this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0]);
+                }));
+            };
+        ShippingAddressSetGuard.decorators = [
+            { type: i0.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        ShippingAddressSetGuard.ctorParameters = function () {
+            return [
+                { type: CheckoutDetailsService },
+                { type: CheckoutConfigService },
+                { type: i1$2.RoutingConfigService },
+                { type: i4.Router },
+                { type: i1$2.ServerConfig }
+            ];
+        };
+        /** @nocollapse */ ShippingAddressSetGuard.ngInjectableDef = i0.defineInjectable({ factory: function ShippingAddressSetGuard_Factory() { return new ShippingAddressSetGuard(i0.inject(CheckoutDetailsService), i0.inject(CheckoutConfigService), i0.inject(i1$2.RoutingConfigService), i0.inject(i4.Router), i0.inject(i1$2.ServerConfig)); }, token: ShippingAddressSetGuard, providedIn: "root" });
+        return ShippingAddressSetGuard;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var DeliveryModeComponent = /** @class */ (function () {
+        function DeliveryModeComponent(fb, checkoutService, routingService, checkoutConfigService, activatedRoute) {
+            this.fb = fb;
+            this.checkoutService = checkoutService;
+            this.routingService = routingService;
+            this.checkoutConfigService = checkoutConfigService;
+            this.activatedRoute = activatedRoute;
+            this.mode = this.fb.group({
+                deliveryModeId: ['', forms.Validators.required],
+            });
+        }
+        /**
+         * @return {?}
+         */
+        DeliveryModeComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
+                this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
+                this.changedOption = false;
+                this.supportedDeliveryModes$ = this.checkoutService.getSupportedDeliveryModes();
+                this.selectedDeliveryMode$ = this.checkoutService.getSelectedDeliveryMode();
+                this.checkoutService.loadSupportedDeliveryModes();
+                this.selectedDeliveryMode$
+                    .pipe(operators.map(function (deliveryMode) {
+                    return deliveryMode && deliveryMode.code ? deliveryMode.code : null;
+                }))
+                    .subscribe(function (code) {
+                    if (code) {
+                        _this.mode.controls['deliveryModeId'].setValue(code);
+                        _this.currentDeliveryModeId = code;
+                    }
+                });
+            };
+        /**
+         * @param {?} code
+         * @return {?}
+         */
+        DeliveryModeComponent.prototype.changeMode = /**
+         * @param {?} code
+         * @return {?}
+         */
+            function (code) {
+                if (code !== this.currentDeliveryModeId) {
+                    this.changedOption = true;
+                    this.currentDeliveryModeId = code;
+                }
+            };
+        /**
+         * @return {?}
+         */
+        DeliveryModeComponent.prototype.next = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                if (this.changedOption) {
+                    this.checkoutService.setDeliveryMode(this.currentDeliveryModeId);
+                }
+                this.deliveryModeSub = this.checkoutService
+                    .getSelectedDeliveryMode()
+                    .subscribe(function (data) {
+                    if (data && data.code === _this.currentDeliveryModeId) {
+                        _this.routingService.go(_this.checkoutStepUrlNext);
+                    }
+                });
+            };
+        /**
+         * @return {?}
+         */
+        DeliveryModeComponent.prototype.back = /**
+         * @return {?}
+         */
+            function () {
+                this.routingService.go(this.checkoutStepUrlPrevious);
+            };
+        Object.defineProperty(DeliveryModeComponent.prototype, "deliveryModeInvalid", {
+            get: /**
+             * @return {?}
+             */ function () {
+                return this.mode.controls['deliveryModeId'].invalid;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * @return {?}
+         */
+        DeliveryModeComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+            function () {
+                if (this.deliveryModeSub) {
+                    this.deliveryModeSub.unsubscribe();
+                }
+            };
+        DeliveryModeComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-delivery-mode',
+                        template: "<div [formGroup]=\"mode\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n        {{ 'checkoutShipping.shippingMethod' | cxTranslate }}\n      </h3>\n\n      <ng-container\n        *ngIf=\"(supportedDeliveryModes$ | async)?.length; else loading\"\n      >\n        <div\n          class=\"form-check\"\n          *ngFor=\"let mode of (supportedDeliveryModes$ | async)\"\n        >\n          <input\n            class=\"form-check-input\"\n            role=\"radio\"\n            type=\"radio\"\n            id=\"deliveryMode-{{ mode.code }}\"\n            aria-checked=\"true\"\n            (change)=\"changeMode(mode.code)\"\n            [value]=\"mode.code\"\n            formControlName=\"deliveryModeId\"\n          />\n          <label\n            class=\"cx-delivery-label form-check-label\n                form-radio-label\"\n            for=\"deliveryMode-{{ mode.code }}\"\n          >\n            <div class=\"cx-delivery-mode\">{{ mode.name }}</div>\n            <div class=\"cx-delivery-price\">\n              {{ mode.deliveryCost.formattedValue }}\n            </div>\n            <div class=\"cx-delivery-details\">{{ mode.description }}</div>\n          </label>\n        </div>\n      </ng-container>\n    </div>\n  </div>\n\n  <div class=\"row cx-checkout-btns\">\n    <div class=\"col-md-12 col-lg-6\">\n      <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n        {{ 'common.back' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        class=\"btn btn-block btn-primary\"\n        [disabled]=\"deliveryModeInvalid\"\n        (click)=\"next()\"\n      >\n        {{ 'common.continue' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        DeliveryModeComponent.ctorParameters = function () {
+            return [
+                { type: forms.FormBuilder },
+                { type: i1$2.CheckoutService },
+                { type: i1$2.RoutingService },
+                { type: CheckoutConfigService },
+                { type: i4.ActivatedRoute }
+            ];
+        };
+        return DeliveryModeComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var DeliveryModeModule = /** @class */ (function () {
+        function DeliveryModeModule() {
+        }
+        DeliveryModeModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            forms.ReactiveFormsModule,
+                            i1$2.I18nModule,
+                            SpinnerModule,
+                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    CheckoutDeliveryMode: {
+                                        selector: 'cx-delivery-mode',
+                                        guards: [i1$2.AuthGuard, CartNotEmptyGuard, ShippingAddressSetGuard],
+                                    },
+                                },
+                            }))),
+                        ],
+                        declarations: [DeliveryModeComponent],
+                        entryComponents: [DeliveryModeComponent],
+                        exports: [DeliveryModeComponent],
+                    },] }
+        ];
+        return DeliveryModeModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @abstract
+     */
+    var /**
+     * @abstract
+     */ PWAModuleConfig = /** @class */ (function (_super) {
+        __extends(PWAModuleConfig, _super);
+        function PWAModuleConfig() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        return PWAModuleConfig;
+    }(i1$2.ServerConfig));
+    /** @type {?} */
+    var defaultPWAModuleConfig = {
+        pwa: {
+            enabled: false,
+            addToHomeScreen: false,
+        },
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var AddToHomeScreenService = /** @class */ (function () {
+        function AddToHomeScreenService(config, globalMessageService, winRef) {
+            this.config = config;
+            this.globalMessageService = globalMessageService;
+            this.winRef = winRef;
+            this.canPrompt = new rxjs.BehaviorSubject(false);
+            this.canPrompt$ = this.canPrompt.asObservable();
+            if (this.config.pwa.addToHomeScreen) {
+                this.init();
+            }
+        }
+        /**
+         * @return {?}
+         */
+        AddToHomeScreenService.prototype.init = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                if (this.winRef.nativeWindow) {
+                    this.winRef.nativeWindow.addEventListener('beforeinstallprompt', function (event) {
+                        event.preventDefault();
+                        _this.deferredEvent = event;
+                        _this.enableAddToHomeScreen();
+                    });
+                    this.winRef.nativeWindow.addEventListener('appinstalled', function () {
+                        _this.globalMessageService.add({ key: 'pwa.addedToHomeScreen' }, i1$2.GlobalMessageType.MSG_TYPE_CONFIRMATION);
+                        _this.disableAddToHomeScreen();
+                        _this.deferredEvent = null;
+                    });
+                }
+            };
+        /**
+         * @return {?}
+         */
+        AddToHomeScreenService.prototype.enableAddToHomeScreen = /**
+         * @return {?}
+         */
+            function () {
+                this.canPrompt.next(true);
+            };
+        /**
+         * @return {?}
+         */
+        AddToHomeScreenService.prototype.disableAddToHomeScreen = /**
+         * @return {?}
+         */
+            function () {
+                this.canPrompt.next(false);
+            };
+        /**
+         * @return {?}
+         */
+        AddToHomeScreenService.prototype.firePrompt = /**
+         * @return {?}
+         */
+            function () {
+                if (this.deferredEvent) {
+                    this.deferredEvent.prompt();
+                }
+            };
+        AddToHomeScreenService.decorators = [
+            { type: i0.Injectable }
+        ];
+        /** @nocollapse */
+        AddToHomeScreenService.ctorParameters = function () {
+            return [
+                { type: PWAModuleConfig },
+                { type: i1$2.GlobalMessageService },
+                { type: i1$2.WindowRef }
+            ];
+        };
+        return AddToHomeScreenService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @abstract
+     */
+    var /**
+     * @abstract
+     */ AddToHomeScreenComponent = /** @class */ (function () {
+        function AddToHomeScreenComponent(addToHomeScreenService) {
+            this.addToHomeScreenService = addToHomeScreenService;
+        }
+        /**
+         * @return {?}
+         */
+        AddToHomeScreenComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                this.canPrompt$ = this.addToHomeScreenService.canPrompt$;
+            };
+        /**
+         * @return {?}
+         */
+        AddToHomeScreenComponent.prototype.prompt = /**
+         * @return {?}
+         */
+            function () {
+                this.addToHomeScreenService.firePrompt();
+            };
+        return AddToHomeScreenComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var AddToHomeScreenBannerComponent = /** @class */ (function (_super) {
+        __extends(AddToHomeScreenBannerComponent, _super);
+        function AddToHomeScreenBannerComponent(addToHomeScreenService) {
+            var _this = _super.call(this, addToHomeScreenService) || this;
+            _this.addToHomeScreenService = addToHomeScreenService;
+            return _this;
+        }
+        AddToHomeScreenBannerComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-add-to-home-screen-banner',
+                        template: "<div *ngIf=\"(canPrompt$ | async)\">\n  <div class=\"cx-add-to-home-screen-banner\">\n    <div class=\"cx-add-to-home-screen-banner-inner\">\n      <p>\n        {{ 'pwa.addSapStorefront' | cxTranslate }}\n      </p>\n      <ul>\n        <li>{{ 'pwa.noInstallationNeeded' | cxTranslate }}</li>\n        <li>{{ 'pwa.fastAccessToApplication' | cxTranslate }}</li>\n      </ul>\n      <button (click)=\"prompt()\" class=\"btn btn-primary\">\n        {{ 'pwa.addToHomeScreen' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        AddToHomeScreenBannerComponent.ctorParameters = function () {
+            return [
+                { type: AddToHomeScreenService }
+            ];
+        };
+        return AddToHomeScreenBannerComponent;
+    }(AddToHomeScreenComponent));
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var AddToHomeScreenBtnComponent = /** @class */ (function (_super) {
+        __extends(AddToHomeScreenBtnComponent, _super);
+        function AddToHomeScreenBtnComponent(addToHomeScreenService) {
+            var _this = _super.call(this, addToHomeScreenService) || this;
+            _this.addToHomeScreenService = addToHomeScreenService;
+            return _this;
+        }
+        AddToHomeScreenBtnComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-add-to-home-screen-btn',
+                        template: "<span (click)=\"prompt()\">\n  <ng-content *ngIf=\"(canPrompt$ | async)\"></ng-content>\n</span>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        AddToHomeScreenBtnComponent.ctorParameters = function () {
+            return [
+                { type: AddToHomeScreenService }
+            ];
+        };
+        return AddToHomeScreenBtnComponent;
+    }(AddToHomeScreenComponent));
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} pwaConfig
+     * @return {?}
+     */
+    function pwaConfigurationFactory(pwaConfig) {
+        return { enabled: (pwaConfig.production && pwaConfig.pwa.enabled) || false };
+    }
+    /**
+     * @param {?} addToHomeScreenService
+     * @return {?}
+     */
+    function pwaFactory(addToHomeScreenService) {
+        /** @type {?} */
+        var result = function () { return addToHomeScreenService; };
+        return result;
+    }
+    var PwaModule = /** @class */ (function () {
+        function PwaModule() {
+        }
+        PwaModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i1$2.ConfigModule.withConfig(defaultPWAModuleConfig),
+                            serviceWorker.ServiceWorkerModule.register('/ngsw-worker.js'),
+                            i1$2.I18nModule,
+                        ],
+                        providers: [
+                            { provide: PWAModuleConfig, useExisting: i1$2.Config },
+                            {
+                                provide: serviceWorker.ɵangular_packages_service_worker_service_worker_b,
+                                useFactory: pwaConfigurationFactory,
+                                deps: [i1$2.Config],
+                            },
+                            {
+                                provide: i0.APP_INITIALIZER,
+                                useFactory: pwaFactory,
+                                deps: [AddToHomeScreenService],
+                                multi: true,
+                            },
+                            AddToHomeScreenService,
+                        ],
+                        declarations: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
+                        exports: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
+                    },] }
+        ];
+        return PwaModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CardComponent = /** @class */ (function () {
+        function CardComponent() {
+            this.iconTypes = ICON_TYPE;
+            this.deleteCard = new i0.EventEmitter();
+            this.setDefaultCard = new i0.EventEmitter();
+            this.sendCard = new i0.EventEmitter();
+            this.editCard = new i0.EventEmitter();
+            this.cancelCard = new i0.EventEmitter();
+            this.border = false;
+            this.editMode = false;
+            this.isDefault = false;
+            this.fitToContainer = false;
+        }
+        // ACTIONS
+        // ACTIONS
+        /**
+         * @return {?}
+         */
+        CardComponent.prototype.setEditMode =
+            // ACTIONS
+            /**
+             * @return {?}
+             */
+            function () {
+                this.editMode = true;
+            };
+        /**
+         * @return {?}
+         */
+        CardComponent.prototype.cancelEdit = /**
+         * @return {?}
+         */
+            function () {
+                this.editMode = false;
+                this.cancelCard.emit(5);
+            };
+        /**
+         * @return {?}
+         */
+        CardComponent.prototype.delete = /**
+         * @return {?}
+         */
+            function () {
+                this.deleteCard.emit(1);
+            };
+        /**
+         * @return {?}
+         */
+        CardComponent.prototype.setDefault = /**
+         * @return {?}
+         */
+            function () {
+                this.isDefault = true;
+                this.setDefaultCard.emit(2);
+            };
+        /**
+         * @return {?}
+         */
+        CardComponent.prototype.send = /**
+         * @return {?}
+         */
+            function () {
+                this.sendCard.emit(3);
+            };
+        /**
+         * @return {?}
+         */
+        CardComponent.prototype.edit = /**
+         * @return {?}
+         */
+            function () {
+                this.editCard.emit(4);
+            };
+        /**
+         * @return {?}
+         */
+        CardComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () { };
+        CardComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-card',
+                        template: "<div\n  *ngIf=\"content\"\n  class=\"cx-card\"\n  [class.cx-card-border]=\"border\"\n  [class.cx-card-fit-to-container]=\"fitToContainer\"\n>\n  <!-- Card Header -->\n  <div *ngIf=\"content.header && !editMode\" class=\"card-header\">\n    {{ content.header }}\n  </div>\n  <!-- Card Body -->\n  <div class=\"card-body cx-card-body\" [class.cx-card-delete]=\"editMode\">\n    <!-- Edit message -->\n    <div *ngIf=\"editMode\" class=\"cx-card-delete-msg\">\n      {{ content.deleteMsg }}\n    </div>\n    <!-- Card title -->\n    <h4 *ngIf=\"content.title\" class=\"cx-card-title\">\n      {{ content.title }}\n    </h4>\n    <!-- Card Content -->\n    <div class=\"cx-card-container\">\n      <!-- Card Label -->\n      <div class=\"cx-card-label-container\">\n        <div *ngIf=\"content.textBold\" class=\"cx-card-label-bold\">\n          {{ content.textBold }}\n        </div>\n        <div *ngFor=\"let line of content.text\">\n          <div class=\"cx-card-label\">{{ line }}</div>\n        </div>\n      </div>\n      <!-- Image -->\n      <div *ngIf=\"content.img\" class=\"cx-card-img-container\">\n        <cx-icon [type]=\"content.img\"></cx-icon>\n      </div>\n    </div>\n    <!-- Edit Mode Actions -->\n    <div *ngIf=\"editMode\" class=\"row cx-card-body-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-primary\" (click)=\"delete()\">\n          {{ 'common.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <!-- Actions -->\n    <div *ngIf=\"content.actions && !editMode\" class=\"cx-card-actions\">\n      <div *ngFor=\"let action of content.actions\">\n        <div [ngSwitch]=\"action.event\">\n          <a\n            *ngSwitchCase=\"'delete'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"delete()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'default'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"setDefault()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'send'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"send()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'edit'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"edit()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchDefault\n            href=\"{{ action.link }}\"\n            class=\"card-link btn-link\"\n            >{{ action.name }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                        styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-card-border{border-width:var(--cx-border-width,1px);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light))}.cx-card-container{display:var(--cx-display,flex)}.cx-card-label-container{flex-grow:var(--cx-flex-grow,2)}.cx-card-fit-to-container{width:var(--cx-width,100%);height:var(--cx-height,100%);display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column)}.cx-card-body{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column);justify-content:var(--cx-justify-content,space-between)}.cx-card-delete{background-color:var(--cx-background-color,var(--cx-g-color-background))}.cx-card-body-delete{padding:var(--cx-padding,1rem 0 0 0)}.cx-card-delete-msg{color:var(--cx-color,var(--cx-g-color-danger));padding:var(--cx-padding,0 0 1.25rem 0)}.cx-card-actions{display:var(--cx-display,flex);justify-content:var(--cx-justify-content,flex-end);padding:var(--cx-padding,1.25rem 0 0 0)}.cx-card-link{padding:var(--cx-padding,0 0 0 1rem)}"]
+                    }] }
+        ];
+        /** @nocollapse */
+        CardComponent.ctorParameters = function () { return []; };
+        CardComponent.propDecorators = {
+            deleteCard: [{ type: i0.Output }],
+            setDefaultCard: [{ type: i0.Output }],
+            sendCard: [{ type: i0.Output }],
+            editCard: [{ type: i0.Output }],
+            cancelCard: [{ type: i0.Output }],
+            border: [{ type: i0.Input }],
+            editMode: [{ type: i0.Input }],
+            isDefault: [{ type: i0.Input }],
+            content: [{ type: i0.Input }],
+            fitToContainer: [{ type: i0.Input }]
+        };
+        return CardComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CardModule = /** @class */ (function () {
+        function CardModule() {
+        }
+        CardModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [common.CommonModule, i1$2.I18nModule, IconModule],
+                        declarations: [CardComponent],
+                        exports: [CardComponent],
+                    },] }
+        ];
+        return CardModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var OrderConfirmationComponent = /** @class */ (function () {
+        function OrderConfirmationComponent(checkoutService, translation) {
+            this.checkoutService = checkoutService;
+            this.translation = translation;
+        }
+        /**
+         * @return {?}
+         */
+        OrderConfirmationComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                this.order$ = this.checkoutService.getOrderDetails();
+            };
+        /**
+         * @return {?}
+         */
+        OrderConfirmationComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+            function () {
+                this.checkoutService.clearCheckoutData();
+            };
+        /**
+         * @param {?} deliveryAddress
+         * @return {?}
+         */
+        OrderConfirmationComponent.prototype.getAddressCardContent = /**
+         * @param {?} deliveryAddress
+         * @return {?}
+         */
+            function (deliveryAddress) {
+                return rxjs.combineLatest([
+                    this.translation.translate('addressCard.shipTo'),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 1), textTitle = _b[0];
+                    return {
+                        title: textTitle,
+                        textBold: deliveryAddress.firstName + " " + deliveryAddress.lastName,
+                        text: [
+                            deliveryAddress.line1,
+                            deliveryAddress.line2,
+                            deliveryAddress.town + ", " + deliveryAddress.country.isocode + ", " + deliveryAddress.postalCode,
+                            deliveryAddress.phone,
+                        ],
+                    };
+                }));
+            };
+        /**
+         * @param {?} deliveryMode
+         * @return {?}
+         */
+        OrderConfirmationComponent.prototype.getDeliveryModeCardContent = /**
+         * @param {?} deliveryMode
+         * @return {?}
+         */
+            function (deliveryMode) {
+                return rxjs.combineLatest([
+                    this.translation.translate('checkoutShipping.shippingMethod'),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 1), textTitle = _b[0];
+                    return {
+                        title: textTitle,
+                        textBold: deliveryMode.name,
+                        text: [deliveryMode.description],
+                    };
+                }));
+            };
+        /**
+         * @param {?} billingAddress
+         * @return {?}
+         */
+        OrderConfirmationComponent.prototype.getBillingAddressCardContent = /**
+         * @param {?} billingAddress
+         * @return {?}
+         */
+            function (billingAddress) {
+                return rxjs.combineLatest([
+                    this.translation.translate('addressCard.billTo'),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 1), textTitle = _b[0];
+                    return {
+                        title: textTitle,
+                        textBold: billingAddress.firstName + " " + billingAddress.lastName,
+                        text: [
+                            billingAddress.line1,
+                            billingAddress.line2,
+                            billingAddress.town + ", " + billingAddress.country.isocode + ", " + billingAddress.postalCode,
+                            billingAddress.phone,
+                        ],
+                    };
+                }));
+            };
+        /**
+         * @param {?} payment
+         * @return {?}
+         */
+        OrderConfirmationComponent.prototype.getPaymentInfoCardContent = /**
+         * @param {?} payment
+         * @return {?}
+         */
+            function (payment) {
+                return rxjs.combineLatest([
+                    this.translation.translate('paymentForm.payment'),
+                    this.translation.translate('paymentCard.expires', {
+                        month: payment.expiryMonth,
+                        year: payment.expiryYear,
+                    }),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 2), textTitle = _b[0], textExpires = _b[1];
+                    return {
+                        title: textTitle,
+                        textBold: payment.accountHolderName,
+                        text: [payment.cardNumber, textExpires],
+                    };
+                }));
+            };
+        OrderConfirmationComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-order-confirmation',
+                        template: "<div class=\"cx-page\" *ngIf=\"(order$ | async) as order\">\n  <header class=\"cx-page-header\">\n    <h1 class=\"cx-page-title\">\n      {{ 'checkoutOrderConfirmation.confirmationOfOrder' | cxTranslate }}\n      {{ order.code }}\n    </h1>\n  </header>\n\n  <div class=\"cx-order-confirmation\">\n    <div class=\"cx-order-confirmation-message\">\n      <h2>{{ 'checkoutOrderConfirmation.thankYou' | cxTranslate }}</h2>\n      <p>\n        {{\n          'checkoutOrderConfirmation.invoiceHasBeenSentByEmail' | cxTranslate\n        }}\n      </p>\n      <!-- <a href=\"#\" class=\"btn-link\">Print Page</a> -->\n    </div>\n\n    <cx-add-to-home-screen-banner></cx-add-to-home-screen-banner>\n\n    <div class=\"cx-order-review-summary\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getAddressCardContent(order.deliveryAddress) | async\"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"\n                  getBillingAddressCardContent(\n                    order.paymentInfo.billingAddress\n                  ) | async\n                \"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"\n                  getDeliveryModeCardContent(order.deliveryMode) | async\n                \"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getPaymentInfoCardContent(order.paymentInfo) | async\"\n              ></cx-card>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"cx-order-items container\">\n      <h4 class=\"cx-order-items-header\">\n        {{ 'checkoutOrderConfirmation.orderItems' | cxTranslate }}\n      </h4>\n      <cx-cart-item-list\n        [items]=\"order.entries\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n\n    <div class=\"cx-order-summary container\">\n      <div class=\"row justify-content-end\">\n        <div class=\"col-sm-12 col-md-6 col-lg-5 col-xl-4\">\n          <cx-order-summary [cart]=\"order\"></cx-order-summary>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        OrderConfirmationComponent.ctorParameters = function () {
+            return [
+                { type: i1$2.CheckoutService },
+                { type: i1$2.TranslationService }
+            ];
+        };
+        return OrderConfirmationComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var OrderConfirmationModule = /** @class */ (function () {
+        function OrderConfirmationModule() {
+        }
+        OrderConfirmationModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            CartSharedModule,
+                            CardModule,
+                            PwaModule,
+                            i1$2.CheckoutModule,
+                            i1$2.I18nModule,
+                        ],
+                        declarations: [OrderConfirmationComponent],
+                        exports: [OrderConfirmationComponent],
+                    },] }
+        ];
+        return OrderConfirmationModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var DeliveryModeSetGuard = /** @class */ (function () {
+        function DeliveryModeSetGuard(checkoutDetailsService, checkoutConfigService, routingConfigService, router, serverConfig) {
+            this.checkoutDetailsService = checkoutDetailsService;
+            this.checkoutConfigService = checkoutConfigService;
+            this.routingConfigService = routingConfigService;
+            this.router = router;
+            this.serverConfig = serverConfig;
+        }
+        /**
+         * @return {?}
+         */
+        DeliveryModeSetGuard.prototype.canActivate = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                /** @type {?} */
+                var checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.DELIVERY_MODE);
+                if (!checkoutStep && !this.serverConfig.production) {
+                    console.warn("Missing step with type " + CheckoutStepType.DELIVERY_MODE + " in checkout configuration.");
+                }
+                return this.checkoutDetailsService
+                    .getSelectedDeliveryModeCode()
+                    .pipe(operators.map(function (mode) {
+                    return mode && mode.length
+                        ? true
+                        : _this.router.parseUrl(checkoutStep &&
+                            _this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0]);
+                }));
+            };
+        DeliveryModeSetGuard.decorators = [
+            { type: i0.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        DeliveryModeSetGuard.ctorParameters = function () {
+            return [
+                { type: CheckoutDetailsService },
+                { type: CheckoutConfigService },
+                { type: i1$2.RoutingConfigService },
+                { type: i4.Router },
+                { type: i1$2.ServerConfig }
+            ];
+        };
+        /** @nocollapse */ DeliveryModeSetGuard.ngInjectableDef = i0.defineInjectable({ factory: function DeliveryModeSetGuard_Factory() { return new DeliveryModeSetGuard(i0.inject(CheckoutDetailsService), i0.inject(CheckoutConfigService), i0.inject(i1$2.RoutingConfigService), i0.inject(i4.Router), i0.inject(i1$2.ServerConfig)); }, token: DeliveryModeSetGuard, providedIn: "root" });
+        return DeliveryModeSetGuard;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var BillingAddressFormComponent = /** @class */ (function () {
+        function BillingAddressFormComponent() {
+        }
+        /**
+         * @param {?} country
+         * @return {?}
+         */
+        BillingAddressFormComponent.prototype.countrySelected = /**
+         * @param {?} country
+         * @return {?}
+         */
+            function (country) {
+                this.billingAddress['controls'].country['controls'].isocode.setValue(country.isocode);
+            };
+        BillingAddressFormComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-billing-address-form',
+                        template: "<div [formGroup]=\"billingAddress\">\n  <div class=\"form-group\">\n    <ng-container *ngIf=\"(countries$ | async) as countries\">\n      <div *ngIf=\"countries.length !== 0\">\n        <label aria-required=\"true\">\n          <span class=\"label-content required\">{{\n            'addressForm.country' | cxTranslate\n          }}</span>\n          <ng-select\n            [searchable]=\"false\"\n            [clearable]=\"false\"\n            [items]=\"countries\"\n            bindLabel=\"name\"\n            bindValue=\"isocode\"\n            placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n            (change)=\"countrySelected($event)\"\n          >\n          </ng-select>\n        </label>\n      </div>\n    </ng-container>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.firstName.label' | cxTranslate\n      }}</span>\n      <input\n        class=\"form-control\"\n        type=\"text\"\n        required\n        placeholder=\"{{ 'addressForm.firstName.placeholder' | cxTranslate }}\"\n        formControlName=\"firstName\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.lastName.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        required\n        placeholder=\"{{ 'addressForm.lastName.placeholder' | cxTranslate }}\"\n        formControlName=\"lastName\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.address1' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        required\n        placeholder=\"{{ 'addressForm.streetAddress' | cxTranslate }}\"\n        formControlName=\"line1\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'addressForm.address2' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        placeholder=\"{{ 'addressForm.aptSuite' | cxTranslate }}\"\n        formControlName=\"line2\"\n      />\n    </label>\n  </div>\n  <div class=\"row\">\n    <div class=\"form-group col-md-6\">\n      <label>\n        <span class=\"label-content required\">{{\n          'addressForm.city.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          required\n          placeholder=\"{{ 'addressForm.city.placeholder' | cxTranslate }}\"\n          formControlName=\"town\"\n        />\n      </label>\n    </div>\n    <div class=\"form-group col-md-6\">\n      <label>\n        <span class=\"label-content required\">{{\n          'addressForm.zipCode.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          required\n          placeholder=\"{{ 'addressForm.zipCode.placeholder' | cxTranslate }}\"\n          formControlName=\"postalCode\"\n        />\n      </label>\n    </div>\n  </div>\n</div>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        BillingAddressFormComponent.propDecorators = {
+            billingAddress: [{ type: i0.Input }],
+            countries$: [{ type: i0.Input }]
+        };
+        return BillingAddressFormComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var BillingAddressFormModule = /** @class */ (function () {
+        function BillingAddressFormModule() {
+        }
+        BillingAddressFormModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            forms.ReactiveFormsModule,
+                            forms.FormsModule,
+                            i4.RouterModule,
+                            ngSelect.NgSelectModule,
+                            i1$2.I18nModule,
+                        ],
+                        declarations: [BillingAddressFormComponent],
+                        exports: [BillingAddressFormComponent],
+                    },] }
+        ];
+        return BillingAddressFormModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var SuggestedAddressDialogComponent = /** @class */ (function () {
+        function SuggestedAddressDialogComponent(modalService) {
+            this.modalService = modalService;
+            this.iconTypes = ICON_TYPE;
+        }
+        /**
+         * @return {?}
+         */
+        SuggestedAddressDialogComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                this.selectedAddress = this.suggestedAddresses.length
+                    ? this.suggestedAddresses[0]
+                    : this.enteredAddress;
+            };
+        /**
+         * @param {?=} reason
+         * @return {?}
+         */
+        SuggestedAddressDialogComponent.prototype.closeModal = /**
+         * @param {?=} reason
+         * @return {?}
+         */
+            function (reason) {
+                this.modalService.closeActiveModal(reason);
+            };
+        SuggestedAddressDialogComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-suggested-addresses-dialog',
+                        template: "<div class=\"cx-dialog-header modal-header\">\n  <div class=\"cx-dialog-title modal-title\">\n    {{ 'checkoutAddress.verifyYourAddress' | cxTranslate }}\n  </div>\n  <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"closeModal()\">\n    <span aria-hidden=\"true\">\n      <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n    </span>\n  </button>\n</div>\n<div class=\"cx-dialog-body modal-body\" ngForm>\n  <div class=\"container\">\n    <div class=\"row\">\n      <div class=\"cx-dialog-info col-md-12\">\n        <p>\n          {{ 'checkoutAddress.ensureAccuracySuggestChange' | cxTranslate }}\n          {{ 'checkoutAddress.chooseAddressToUse' | cxTranslate }}\n        </p>\n      </div>\n    </div>\n\n    <div class=\"row\">\n      <div class=\"cx-dialog-options col-md-12\">\n        <div\n          class=\"form-check\"\n          *ngFor=\"let suggestedAddress of suggestedAddresses; let i = index\"\n        >\n          <input\n            class=\"form-check-input\"\n            type=\"radio\"\n            name=\"selectedAddress\"\n            [(ngModel)]=\"selectedAddress\"\n            [value]=\"suggestedAddress\"\n            [id]=\"'suggested-addresses--suggested-' + i\"\n          />\n          <label\n            class=\"form-check-label cx-dialog-label\"\n            [for]=\"'suggested-addresses--suggested-' + i\"\n          >\n            {{ 'checkoutAddress.suggestedAddress' | cxTranslate }}\n            {{ suggestedAddresses?.length > 1 ? i + 1 : null }}\n          </label>\n          <div class=\"cx-dialog-suggested\">\n            {{ suggestedAddress?.firstName }} {{ suggestedAddress?.lastName\n            }}<br />\n            {{ suggestedAddress?.line1 }}<br />\n            <span>{{ suggestedAddress?.line2 }}</span\n            ><br />\n            {{ suggestedAddress?.town }} {{ suggestedAddress?.region?.isocode\n            }}<br />\n            {{ suggestedAddress?.postalCode }}\n          </div>\n        </div>\n        <div class=\"form-check\">\n          <input\n            class=\"form-check-input\"\n            type=\"radio\"\n            name=\"selectedAddress\"\n            [(ngModel)]=\"selectedAddress\"\n            [value]=\"enteredAddress\"\n            id=\"suggested-addresses--entered\"\n          />\n          <label\n            class=\"form-check-label cx-dialog-label\"\n            for=\"suggested-addresses--entered\"\n          >\n            {{ 'checkoutAddress.enteredAddress' | cxTranslate }}\n          </label>\n          <div class=\"cx-dialog-entered\">\n            {{ enteredAddress?.firstName }} {{ enteredAddress?.lastName }}<br />\n            {{ enteredAddress?.line1 }}<br />\n            <span>{{ enteredAddress?.line2 }}</span\n            ><br />\n            {{ enteredAddress?.town }} {{ enteredAddress?.region?.isocode\n            }}<br />\n            {{ enteredAddress?.postalCode }}\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"cx-dialog-actions col-sm-12 col-md-6 offset-md-6\">\n        <button\n          class=\"btn btn-secondary btn-block cx-dialog-buttons\"\n          (click)=\"closeModal()\"\n        >\n          {{ 'checkoutAddress.editAddress' | cxTranslate }}\n        </button>\n        <button\n          cxAutoFocus\n          class=\"btn btn-primary btn-block cx-dialog-buttons\"\n          (click)=\"closeModal(selectedAddress)\"\n        >\n          {{ 'checkoutAddress.saveAddress' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        SuggestedAddressDialogComponent.ctorParameters = function () {
+            return [
+                { type: ModalService }
+            ];
+        };
+        SuggestedAddressDialogComponent.propDecorators = {
+            suggestedAddresses: [{ type: i0.Input }],
+            enteredAddress: [{ type: i0.Input }]
+        };
+        return SuggestedAddressDialogComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var PaymentFormComponent = /** @class */ (function () {
+        function PaymentFormComponent(checkoutService, userService, globalMessageService, fb, modalService) {
+            this.checkoutService = checkoutService;
+            this.userService = userService;
+            this.globalMessageService = globalMessageService;
+            this.fb = fb;
+            this.modalService = modalService;
+            this.iconTypes = ICON_TYPE;
+            this.months = [];
+            this.years = [];
+            this.sameAsShippingAddress = true;
+            this.goBack = new i0.EventEmitter();
+            this.closeForm = new i0.EventEmitter();
+            this.addPaymentInfo = new i0.EventEmitter();
+            this.payment = this.fb.group({
+                defaultPayment: [false],
+                accountHolderName: ['', forms.Validators.required],
+                cardNumber: ['', forms.Validators.required],
+                cardType: this.fb.group({
+                    code: ['', forms.Validators.required],
+                }),
+                expiryMonth: ['', forms.Validators.required],
+                expiryYear: ['', forms.Validators.required],
+                cvn: ['', forms.Validators.required],
+            });
+            this.billingAddress = this.fb.group({
+                firstName: ['', forms.Validators.required],
+                lastName: ['', forms.Validators.required],
+                line1: ['', forms.Validators.required],
+                line2: [''],
+                town: ['', forms.Validators.required],
+                country: this.fb.group({
+                    isocode: ['', forms.Validators.required],
+                }),
+                postalCode: ['', forms.Validators.required],
+            });
+        }
+        /**
+         * @return {?}
+         */
+        PaymentFormComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.expMonthAndYear();
+                this.countries$ = this.userService.getAllBillingCountries().pipe(operators.tap(function (countries) {
+                    // If the store is empty fetch countries. This is also used when changing language.
+                    if (Object.keys(countries).length === 0) {
+                        _this.userService.loadBillingCountries();
+                    }
+                }));
+                this.cardTypes$ = this.checkoutService.getCardTypes().pipe(operators.tap(function (cardTypes) {
+                    if (Object.keys(cardTypes).length === 0) {
+                        _this.checkoutService.loadSupportedCardTypes();
+                    }
+                }));
+                this.shippingAddress$ = this.checkoutService.getDeliveryAddress();
+                this.checkboxSub = this.showSameAsShippingAddressCheckbox().subscribe(function (shouldShowCheckbox) {
+                    // this operation makes sure the checkbox is not checked if not shown and vice versa
+                    _this.sameAsShippingAddress = shouldShowCheckbox;
+                });
+                // verify the new added address
+                this.addressVerifySub = this.checkoutService
+                    .getAddressVerificationResults()
+                    .subscribe(function (results) {
+                    if (results === 'FAIL') {
+                        _this.checkoutService.clearAddressVerificationResults();
+                    }
+                    else if (results.decision === 'ACCEPT') {
+                        _this.next();
+                    }
+                    else if (results.decision === 'REJECT') {
+                        _this.globalMessageService.add({ key: 'addressForm.invalidAddress' }, i1$2.GlobalMessageType.MSG_TYPE_ERROR);
+                        _this.checkoutService.clearAddressVerificationResults();
+                    }
+                    else if (results.decision === 'REVIEW') {
+                        _this.openSuggestedAddress(results);
+                    }
+                });
+            };
+        /**
+         * @return {?}
+         */
+        PaymentFormComponent.prototype.expMonthAndYear = /**
+         * @return {?}
+         */
+            function () {
+                /** @type {?} */
+                var year = new Date().getFullYear();
+                for (var i = 0; i < 10; i++) {
+                    this.years.push({ id: i + 1, name: year + i });
+                }
+                for (var j = 1; j <= 12; j++) {
+                    if (j < 10) {
+                        this.months.push({ id: j, name: '0' + j.toString() });
+                    }
+                    else {
+                        this.months.push({ id: j, name: j.toString() });
+                    }
+                }
+            };
+        /**
+         * @return {?}
+         */
+        PaymentFormComponent.prototype.toggleDefaultPaymentMethod = /**
+         * @return {?}
+         */
+            function () {
+                this.payment.value.defaultPayment = !this.payment.value.defaultPayment;
+            };
+        /**
+         * @param {?} card
+         * @return {?}
+         */
+        PaymentFormComponent.prototype.paymentSelected = /**
+         * @param {?} card
+         * @return {?}
+         */
+            function (card) {
+                this.payment['controls'].cardType['controls'].code.setValue(card.code);
+            };
+        /**
+         * @param {?} month
+         * @return {?}
+         */
+        PaymentFormComponent.prototype.monthSelected = /**
+         * @param {?} month
+         * @return {?}
+         */
+            function (month) {
+                this.payment['controls'].expiryMonth.setValue(month.name);
+            };
+        /**
+         * @param {?} year
+         * @return {?}
+         */
+        PaymentFormComponent.prototype.yearSelected = /**
+         * @param {?} year
+         * @return {?}
+         */
+            function (year) {
+                this.payment['controls'].expiryYear.setValue(year.name);
+            };
+        /**
+         * @return {?}
+         */
+        PaymentFormComponent.prototype.toggleSameAsShippingAddress = /**
+         * @return {?}
+         */
+            function () {
+                this.sameAsShippingAddress = !this.sameAsShippingAddress;
+            };
+        /**
+         * @return {?}
+         */
+        PaymentFormComponent.prototype.isContinueButtonDisabled = /**
+         * @return {?}
+         */
+            function () {
+                return (this.payment.invalid ||
+                    (!this.sameAsShippingAddress && this.billingAddress.invalid));
+            };
+        /**
+         * Check if the shipping address can also be a billing address
+         *
+         * @memberof PaymentFormComponent
+         */
+        /**
+         * Check if the shipping address can also be a billing address
+         *
+         * \@memberof PaymentFormComponent
+         * @return {?}
+         */
+        PaymentFormComponent.prototype.showSameAsShippingAddressCheckbox = /**
+         * Check if the shipping address can also be a billing address
+         *
+         * \@memberof PaymentFormComponent
+         * @return {?}
+         */
+            function () {
+                return rxjs.combineLatest(this.countries$, this.shippingAddress$).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 2), countries = _b[0], address = _b[1];
+                    return !!countries.filter(function (country) {
+                        return country.isocode === address.country.isocode;
+                    }).length;
+                }));
+            };
+        /**
+         * @param {?} address
+         * @return {?}
+         */
+        PaymentFormComponent.prototype.getAddressCardContent = /**
+         * @param {?} address
+         * @return {?}
+         */
+            function (address) {
+                /** @type {?} */
+                var region = '';
+                if (address.region && address.region.isocode) {
+                    region = address.region.isocode + ', ';
+                }
+                return {
+                    textBold: address.firstName + ' ' + address.lastName,
+                    text: [
+                        address.line1,
+                        address.line2,
+                        address.town + ', ' + region + address.country.isocode,
+                        address.postalCode,
+                        address.phone,
+                    ],
+                };
+            };
+        /**
+         * @param {?} results
+         * @return {?}
+         */
+        PaymentFormComponent.prototype.openSuggestedAddress = /**
+         * @param {?} results
+         * @return {?}
+         */
+            function (results) {
+                var _this = this;
+                if (!this.suggestedAddressModalRef) {
+                    this.suggestedAddressModalRef = this.modalService.open(SuggestedAddressDialogComponent, { centered: true, size: 'lg' });
+                    this.suggestedAddressModalRef.componentInstance.enteredAddress = this.billingAddress.value;
+                    this.suggestedAddressModalRef.componentInstance.suggestedAddresses =
+                        results.suggestedAddresses;
+                    this.suggestedAddressModalRef.result
+                        .then(function () {
+                        _this.checkoutService.clearAddressVerificationResults();
+                        _this.suggestedAddressModalRef = null;
+                    })
+                        .catch(function () {
+                        // this  callback is called when modal is closed with Esc key or clicking backdrop
+                        _this.checkoutService.clearAddressVerificationResults();
+                        _this.suggestedAddressModalRef = null;
+                    });
+                }
+            };
+        /**
+         * @return {?}
+         */
+        PaymentFormComponent.prototype.close = /**
+         * @return {?}
+         */
+            function () {
+                this.closeForm.emit();
+            };
+        /**
+         * @return {?}
+         */
+        PaymentFormComponent.prototype.back = /**
+         * @return {?}
+         */
+            function () {
+                this.goBack.emit();
+            };
+        /**
+         * @return {?}
+         */
+        PaymentFormComponent.prototype.verifyAddress = /**
+         * @return {?}
+         */
+            function () {
+                if (this.sameAsShippingAddress) {
+                    this.next();
+                }
+                else {
+                    this.checkoutService.verifyAddress(this.billingAddress.value);
+                }
+            };
+        /**
+         * @return {?}
+         */
+        PaymentFormComponent.prototype.next = /**
+         * @return {?}
+         */
+            function () {
+                this.addPaymentInfo.emit({
+                    paymentDetails: this.payment.value,
+                    billingAddress: this.sameAsShippingAddress
+                        ? null
+                        : this.billingAddress.value,
+                });
+            };
+        /**
+         * @return {?}
+         */
+        PaymentFormComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+            function () {
+                if (this.checkboxSub) {
+                    this.checkboxSub.unsubscribe();
+                }
+                if (this.addressVerifySub) {
+                    this.addressVerifySub.unsubscribe();
+                }
+            };
+        PaymentFormComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-payment-form',
+                        template: "<!-- FORM -->\n<div [formGroup]=\"payment\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <div class=\"form-group\">\n        <ng-container *ngIf=\"(cardTypes$ | async) as cardTypes\">\n          <div *ngIf=\"cardTypes.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'paymentForm.paymentType' | cxTranslate\n              }}</span>\n              <ng-select\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"cardTypes\"\n                bindLabel=\"name\"\n                bindValue=\"code\"\n                placeholder=\"{{ 'paymentForm.selectOne' | cxTranslate }}\"\n                (change)=\"paymentSelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'paymentForm.accountHolderName.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            type=\"text\"\n            required\n            placeholder=\"{{\n              'paymentForm.accountHolderName.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"accountHolderName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'paymentForm.cardNumber' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            formControlName=\"cardNumber\"\n          />\n        </label>\n      </div>\n\n      <div class=\"row\">\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content\">{{\n              'paymentForm.expirationDate' | cxTranslate\n            }}</span>\n            <div class=\"cx-payment-form-exp-date row\">\n              <div class=\"col-sm-6 col-md-5\">\n                <ng-select\n                  [searchable]=\"false\"\n                  [clearable]=\"false\"\n                  [items]=\"months\"\n                  bindLabel=\"name\"\n                  bindValue=\"expiryMonth\"\n                  placeholder=\"{{ 'paymentForm.monthMask' | cxTranslate }}\"\n                  (change)=\"monthSelected($event)\"\n                >\n                </ng-select>\n              </div>\n              <div class=\"col-sm-6 col-md-7\">\n                <ng-select\n                  [searchable]=\"false\"\n                  [clearable]=\"false\"\n                  [items]=\"years\"\n                  bindLabel=\"name\"\n                  bindValue=\"expiryYear\"\n                  placeholder=\"{{ 'paymentForm.yearMask' | cxTranslate }}\"\n                  (change)=\"yearSelected($event)\"\n                >\n                </ng-select>\n              </div>\n            </div>\n          </label>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content\">\n              {{ 'paymentForm.securityCode' | cxTranslate }}\n              <cx-icon\n                [type]=\"iconTypes.INFO\"\n                class=\"cx-payment-form-tooltip\"\n                placement=\"right\"\n                title=\"{{ 'paymentForm.securityCodeTitle' | cxTranslate }}\"\n                alt=\"\"\n              ></cx-icon>\n            </span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              id=\"cVVNumber\"\n              required\n              formControlName=\"cvn\"\n            />\n          </label>\n        </div>\n      </div>\n\n      <div class=\"form-group\">\n        <div class=\"form-check\">\n          <label>\n            <input\n              type=\"checkbox\"\n              class=\"form-check-input\"\n              (change)=\"toggleDefaultPaymentMethod()\"\n            />\n            <span class=\"form-check-label\">{{\n              'paymentForm.setAsDefault' | cxTranslate\n            }}</span>\n          </label>\n        </div>\n      </div>\n\n      <!-- BILLING -->\n      <div class=\"cx-payment-form-billing\">\n        <div class=\"cx-payment-form-billing-address\">\n          {{ 'paymentForm.billingAddress' | cxTranslate }}\n        </div>\n\n        <!-- SAME AS SHIPPING CHECKBOX -->\n        <ng-container *ngIf=\"(showSameAsShippingAddressCheckbox() | async)\">\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  class=\"form-check-input\"\n                  [checked]=\"sameAsShippingAddress\"\n                  (change)=\"toggleSameAsShippingAddress()\"\n                />\n                <span class=\"form-check-label\">{{\n                  'paymentForm.sameAsShippingAddress' | cxTranslate\n                }}</span>\n              </label>\n            </div>\n          </div>\n        </ng-container>\n\n        <!-- BILLING INFO COMPONENT -->\n        <ng-container\n          *ngIf=\"\n            (sameAsShippingAddress && shippingAddress$\n              | async) as shippingAddress;\n            else billingAddressForm\n          \"\n        >\n          <cx-card [content]=\"getAddressCardContent(shippingAddress)\"></cx-card>\n        </ng-container>\n\n        <ng-template #billingAddressForm>\n          <cx-billing-address-form\n            [billingAddress]=\"billingAddress\"\n            [countries$]=\"countries$\"\n          >\n          </cx-billing-address-form>\n        </ng-template>\n      </div>\n    </div>\n  </div>\n\n  <!-- BUTTON SECTION -->\n  <div class=\"cx-checkout-btns row\">\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        *ngIf=\"paymentMethodsCount === 0\"\n        class=\"btn btn-block btn-action\"\n        (click)=\"back()\"\n      >\n        {{ 'common.back' | cxTranslate }}\n      </button>\n      <button\n        *ngIf=\"paymentMethodsCount > 0\"\n        class=\"btn btn-block btn-action\"\n        (click)=\"close()\"\n      >\n        {{ 'paymentForm.changePayment' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        class=\"btn btn-block btn-primary\"\n        [disabled]=\"isContinueButtonDisabled()\"\n        (click)=\"next()\"\n      >\n        {{ 'common.continue' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        PaymentFormComponent.ctorParameters = function () {
+            return [
+                { type: i1$2.CheckoutService },
+                { type: i1$2.UserService },
+                { type: i1$2.GlobalMessageService },
+                { type: forms.FormBuilder },
+                { type: ModalService }
+            ];
+        };
+        PaymentFormComponent.propDecorators = {
+            paymentMethodsCount: [{ type: i0.Input }],
+            goBack: [{ type: i0.Output }],
+            closeForm: [{ type: i0.Output }],
+            addPaymentInfo: [{ type: i0.Output }]
+        };
+        return PaymentFormComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var PaymentFormModule = /** @class */ (function () {
+        function PaymentFormModule() {
+        }
+        PaymentFormModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            forms.ReactiveFormsModule,
+                            ngSelect.NgSelectModule,
+                            CardModule,
+                            BillingAddressFormModule,
+                            i1$2.I18nModule,
+                            IconModule,
+                        ],
+                        declarations: [PaymentFormComponent],
+                        entryComponents: [PaymentFormComponent],
+                        exports: [PaymentFormComponent],
+                    },] }
+        ];
+        return PaymentFormModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var PaymentMethodComponent = /** @class */ (function () {
+        function PaymentMethodComponent(userService, checkoutService, globalMessageService, routingConfigService, routingService, checkoutConfigService, activatedRoute, translation) {
+            this.userService = userService;
+            this.checkoutService = checkoutService;
+            this.globalMessageService = globalMessageService;
+            this.routingConfigService = routingConfigService;
+            this.routingService = routingService;
+            this.checkoutConfigService = checkoutConfigService;
+            this.activatedRoute = activatedRoute;
+            this.translation = translation;
+            this.iconTypes = ICON_TYPE;
+            this.newPaymentFormManuallyOpened = false;
+        }
+        /**
+         * @return {?}
+         */
+        PaymentMethodComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.isLoading$ = this.userService.getPaymentMethodsLoading();
+                this.userService.loadPaymentMethods();
+                this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
+                this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
+                this.existingPaymentMethods$ = this.userService.getPaymentMethods();
+                this.getPaymentDetailsSub = this.checkoutService
+                    .getPaymentDetails()
+                    .pipe(operators.filter(function (paymentInfo) { return paymentInfo && Object.keys(paymentInfo).length !== 0; }))
+                    .subscribe(function (paymentInfo) {
+                    if (!paymentInfo['hasError']) {
+                        _this.selectedPayment = paymentInfo;
+                    }
+                    else {
+                        Object.keys(paymentInfo).forEach(function (key) {
+                            if (key.startsWith('InvalidField')) {
+                                _this.globalMessageService.add({
+                                    key: 'paymentMethods.invalidField',
+                                    params: { field: paymentInfo[key] },
+                                }, i1$2.GlobalMessageType.MSG_TYPE_ERROR);
+                            }
+                        });
+                        _this.checkoutService.clearCheckoutStep(3);
+                    }
+                });
+            };
+        /**
+         * @param {?} payment
+         * @return {?}
+         */
+        PaymentMethodComponent.prototype.getCardContent = /**
+         * @param {?} payment
+         * @return {?}
+         */
+            function (payment) {
+                var _this = this;
+                return rxjs.combineLatest([
+                    this.translation.translate('paymentCard.expires', {
+                        month: payment.expiryMonth,
+                        year: payment.expiryYear,
+                    }),
+                    this.translation.translate('paymentForm.useThisPayment'),
+                    this.translation.translate('paymentCard.defaultPaymentMethod'),
+                    this.translation.translate('paymentCard.selected'),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 4), textExpires = _b[0], textUseThisPayment = _b[1], textDefaultPaymentMethod = _b[2], textSelected = _b[3];
+                    /** @type {?} */
+                    var card = {
+                        title: payment.defaultPayment ? textDefaultPaymentMethod : '',
+                        textBold: payment.accountHolderName,
+                        text: [payment.cardNumber, textExpires],
+                        img: _this.getCardIcon(payment.cardType.code),
+                        actions: [{ name: textUseThisPayment, event: 'send' }],
+                    };
+                    if (_this.selectedPayment && _this.selectedPayment.id === payment.id) {
+                        card.header = textSelected;
+                    }
+                    return card;
+                }));
+            };
+        /**
+         * @param {?} paymentDetails
+         * @return {?}
+         */
+        PaymentMethodComponent.prototype.paymentMethodSelected = /**
+         * @param {?} paymentDetails
+         * @return {?}
+         */
+            function (paymentDetails) {
+                this.selectedPayment = paymentDetails;
+            };
+        /**
+         * @return {?}
+         */
+        PaymentMethodComponent.prototype.showNewPaymentForm = /**
+         * @return {?}
+         */
+            function () {
+                this.newPaymentFormManuallyOpened = true;
+            };
+        /**
+         * @return {?}
+         */
+        PaymentMethodComponent.prototype.hideNewPaymentForm = /**
+         * @return {?}
+         */
+            function () {
+                this.newPaymentFormManuallyOpened = false;
+            };
+        /**
+         * @return {?}
+         */
+        PaymentMethodComponent.prototype.next = /**
+         * @return {?}
+         */
+            function () {
+                this.addPaymentInfo({
+                    payment: this.selectedPayment,
+                    newPayment: false,
+                });
+            };
+        /**
+         * @return {?}
+         */
+        PaymentMethodComponent.prototype.back = /**
+         * @return {?}
+         */
+            function () {
+                this.routingService.go(this.checkoutStepUrlPrevious);
+            };
+        /**
+         * @param {?} __0
+         * @return {?}
+         */
+        PaymentMethodComponent.prototype.addNewPaymentMethod = /**
+         * @param {?} __0
+         * @return {?}
+         */
+            function (_a) {
+                var paymentDetails = _a.paymentDetails, billingAddress = _a.billingAddress;
+                this.getDeliveryAddressSub = this.checkoutService
+                    .getDeliveryAddress()
+                    .subscribe(function (address) {
+                    billingAddress = address;
+                });
+                this.addPaymentInfo({
+                    payment: paymentDetails,
+                    billingAddress: billingAddress,
+                    newPayment: true,
+                });
+            };
+        /**
+         * @param {?} __0
+         * @return {?}
+         */
+        PaymentMethodComponent.prototype.addPaymentInfo = /**
+         * @param {?} __0
+         * @return {?}
+         */
+            function (_a) {
+                var _this = this;
+                var newPayment = _a.newPayment, payment = _a.payment, billingAddress = _a.billingAddress;
+                payment.billingAddress = billingAddress
+                    ? billingAddress
+                    : this.deliveryAddress;
+                if (newPayment) {
+                    this.checkoutService.createPaymentDetails(payment);
+                    this.checkoutService.clearCheckoutStep(3);
+                }
+                // if the selected payment is the same as the cart's one
+                if (this.selectedPayment && this.selectedPayment.id === payment.id) {
+                    this.checkoutService.setPaymentDetails(payment);
+                    this.checkoutService.clearCheckoutStep(3);
+                }
+                this.getPaymentDetailsSub = this.checkoutService
+                    .getPaymentDetails()
+                    .subscribe(function (data) {
+                    if (data.accountHolderName && data.cardNumber) {
+                        _this.routingService.go(_this.checkoutStepUrlNext);
+                        return;
+                    }
+                });
+            };
+        /**
+         * @return {?}
+         */
+        PaymentMethodComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+            function () {
+                if (this.getPaymentDetailsSub) {
+                    this.getPaymentDetailsSub.unsubscribe();
+                }
+                if (this.getDeliveryAddressSub) {
+                    this.getDeliveryAddressSub.unsubscribe();
+                }
+            };
+        /**
+         * @protected
+         * @param {?} code
+         * @return {?}
+         */
+        PaymentMethodComponent.prototype.getCardIcon = /**
+         * @protected
+         * @param {?} code
+         * @return {?}
+         */
+            function (code) {
+                /** @type {?} */
+                var ccIcon;
+                if (code === 'visa') {
+                    ccIcon = this.iconTypes.VISA;
+                }
+                else if (code === 'master' || code === 'mastercard_eurocard') {
+                    ccIcon = this.iconTypes.MASTER_CARD;
+                }
+                else if (code === 'diners') {
+                    ccIcon = this.iconTypes.DINERS_CLUB;
+                }
+                else if (code === 'amex') {
+                    ccIcon = this.iconTypes.AMEX;
+                }
+                else {
+                    ccIcon = this.iconTypes.CREDIT_CARD;
+                }
+                return ccIcon;
+            };
+        PaymentMethodComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-payment-method',
+                        template: "<ng-container\n  *ngIf=\"(existingPaymentMethods$ | async) as existingPaymentMethods\"\n>\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'paymentForm.payment' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        existingPaymentMethods?.length && !newPaymentFormManuallyOpened;\n        else newPaymentForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'paymentForm.choosePaymentMethod' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewPaymentForm()\"\n          >\n            {{ 'paymentForm.addNewPayment' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-payment-card col-md-12 col-lg-6\"\n          *ngFor=\"let method of existingPaymentMethods; let i = index\"\n        >\n          <div class=\"cx-payment-card-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"getCardContent(method) | async\"\n              (sendCard)=\"paymentMethodSelected(method)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"row cx-checkout-btns\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'common.back' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-primary\"\n            [disabled]=\"!selectedPayment\"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newPaymentForm>\n      <cx-payment-form\n        (addPaymentInfo)=\"addNewPaymentMethod($event)\"\n        (closeForm)=\"hideNewPaymentForm()\"\n        (goBack)=\"back()\"\n        [paymentMethodsCount]=\"existingPaymentMethods?.length || 0\"\n      ></cx-payment-form>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n  </ng-template>\n</ng-container>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        PaymentMethodComponent.ctorParameters = function () {
+            return [
+                { type: i1$2.UserService },
+                { type: i1$2.CheckoutService },
+                { type: i1$2.GlobalMessageService },
+                { type: i1$2.RoutingConfigService },
+                { type: i1$2.RoutingService },
+                { type: CheckoutConfigService },
+                { type: i4.ActivatedRoute },
+                { type: i1$2.TranslationService }
+            ];
+        };
+        return PaymentMethodComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var PaymentMethodModule = /** @class */ (function () {
+        function PaymentMethodModule() {
+        }
+        PaymentMethodModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i4.RouterModule,
+                            PaymentFormModule,
+                            CardModule,
+                            SpinnerModule,
+                            i1$2.I18nModule,
+                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    CheckoutPaymentDetails: {
+                                        selector: 'cx-payment-method',
+                                        guards: [
+                                            i1$2.AuthGuard,
+                                            CartNotEmptyGuard,
+                                            ShippingAddressSetGuard,
+                                            DeliveryModeSetGuard,
+                                        ],
+                                    },
+                                },
+                            }))),
+                        ],
+                        providers: [i1$2.UserService],
+                        declarations: [PaymentMethodComponent],
+                        entryComponents: [PaymentMethodComponent],
+                        exports: [PaymentMethodComponent],
+                    },] }
+        ];
+        return PaymentMethodModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var PlaceOrderComponent = /** @class */ (function () {
+        function PlaceOrderComponent(checkoutService, routingService) {
+            this.checkoutService = checkoutService;
+            this.routingService = routingService;
+            this.tAndCToggler = false;
+        }
+        /**
+         * @return {?}
+         */
+        PlaceOrderComponent.prototype.toggleTAndC = /**
+         * @return {?}
+         */
+            function () {
+                this.tAndCToggler = !this.tAndCToggler;
+            };
+        /**
+         * @return {?}
+         */
+        PlaceOrderComponent.prototype.placeOrder = /**
+         * @return {?}
+         */
+            function () {
+                this.checkoutService.placeOrder();
+            };
+        /**
+         * @return {?}
+         */
+        PlaceOrderComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.placeOrderSubscription = this.checkoutService
+                    .getOrderDetails()
+                    .pipe(operators.filter(function (order) { return Object.keys(order).length !== 0; }))
+                    .subscribe(function () {
+                    _this.routingService.go({ cxRoute: 'orderConfirmation' });
+                });
+            };
+        /**
+         * @return {?}
+         */
+        PlaceOrderComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+            function () {
+                if (this.placeOrderSubscription) {
+                    this.placeOrderSubscription.unsubscribe();
+                }
+            };
+        PlaceOrderComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-place-order',
+                        template: "<div class=\"cx-place-order-form form-check\">\n  <label>\n    <input class=\"form-check-input\" type=\"checkbox\" (change)=\"toggleTAndC()\" />\n    <span class=\"form-check-label\">\n      {{ 'checkoutReview.confirmThatRead' | cxTranslate }}\n      <a\n        [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n        class=\"cx-tc-link\"\n        target=\"_blank\"\n      >\n        {{ 'checkoutReview.termsAndConditions' | cxTranslate }}\n      </a>\n    </span>\n  </label>\n</div>\n<button\n  [disabled]=\"!tAndCToggler\"\n  (click)=\"placeOrder()\"\n  class=\"btn btn-primary btn-block\"\n>\n  {{ 'checkoutReview.placeOrder' | cxTranslate }}\n</button>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        PlaceOrderComponent.ctorParameters = function () {
+            return [
+                { type: i1$2.CheckoutService },
                 { type: i1$2.RoutingService }
             ];
         };
-        /** @nocollapse */ CartNotEmptyGuard.ngInjectableDef = i0.defineInjectable({ factory: function CartNotEmptyGuard_Factory() { return new CartNotEmptyGuard(i0.inject(i1$2.CartService), i0.inject(i1$2.RoutingService)); }, token: CartNotEmptyGuard, providedIn: "root" });
-        return CartNotEmptyGuard;
+        return PlaceOrderComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var PlaceOrderModule = /** @class */ (function () {
+        function PlaceOrderModule() {
+        }
+        PlaceOrderModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i1$2.CheckoutModule,
+                            i4.RouterModule,
+                            i1$2.UrlModule,
+                            i1$2.I18nModule,
+                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    CheckoutPlaceOrder: {
+                                        selector: 'cx-place-order',
+                                        guards: [i1$2.AuthGuard, CartNotEmptyGuard],
+                                    },
+                                },
+                            }))),
+                        ],
+                        declarations: [PlaceOrderComponent],
+                        entryComponents: [PlaceOrderComponent],
+                        exports: [PlaceOrderComponent],
+                    },] }
+        ];
+        return PlaceOrderModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var PaymentDetailsSetGuard = /** @class */ (function () {
+        function PaymentDetailsSetGuard(checkoutDetailsService, checkoutConfigService, routingConfigService, router, serverConfig) {
+            this.checkoutDetailsService = checkoutDetailsService;
+            this.checkoutConfigService = checkoutConfigService;
+            this.routingConfigService = routingConfigService;
+            this.router = router;
+            this.serverConfig = serverConfig;
+        }
+        /**
+         * @return {?}
+         */
+        PaymentDetailsSetGuard.prototype.canActivate = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                /** @type {?} */
+                var checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.PAYMENT_DETAILS);
+                if (!checkoutStep && !this.serverConfig.production) {
+                    console.warn("Missing step with type " + CheckoutStepType.PAYMENT_DETAILS + " in checkout configuration.");
+                }
+                return this.checkoutDetailsService
+                    .getPaymentDetails()
+                    .pipe(operators.map(function (paymentDetails) {
+                    return paymentDetails && Object.keys(paymentDetails).length !== 0
+                        ? true
+                        : _this.router.parseUrl(checkoutStep &&
+                            _this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0]);
+                }));
+            };
+        PaymentDetailsSetGuard.decorators = [
+            { type: i0.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        PaymentDetailsSetGuard.ctorParameters = function () {
+            return [
+                { type: CheckoutDetailsService },
+                { type: CheckoutConfigService },
+                { type: i1$2.RoutingConfigService },
+                { type: i4.Router },
+                { type: i1$2.ServerConfig }
+            ];
+        };
+        /** @nocollapse */ PaymentDetailsSetGuard.ngInjectableDef = i0.defineInjectable({ factory: function PaymentDetailsSetGuard_Factory() { return new PaymentDetailsSetGuard(i0.inject(CheckoutDetailsService), i0.inject(CheckoutConfigService), i0.inject(i1$2.RoutingConfigService), i0.inject(i4.Router), i0.inject(i1$2.ServerConfig)); }, token: PaymentDetailsSetGuard, providedIn: "root" });
+        return PaymentDetailsSetGuard;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ReviewSubmitComponent = /** @class */ (function () {
+        function ReviewSubmitComponent(checkoutService, userService, cartService, translation) {
+            this.checkoutService = checkoutService;
+            this.userService = userService;
+            this.cartService = cartService;
+            this.translation = translation;
+        }
+        /**
+         * @return {?}
+         */
+        ReviewSubmitComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.cart$ = this.cartService.getActive();
+                this.entries$ = this.cartService.getEntries();
+                this.deliveryAddress$ = this.checkoutService.getDeliveryAddress();
+                this.paymentDetails$ = this.checkoutService.getPaymentDetails();
+                this.deliveryMode$ = this.checkoutService.getSelectedDeliveryMode().pipe(operators.tap(function (selected) {
+                    if (selected === null) {
+                        _this.checkoutService.loadSupportedDeliveryModes();
+                    }
+                }));
+                this.countryName$ = this.deliveryAddress$.pipe(operators.switchMap(function (address) {
+                    return _this.userService.getCountry(address.country.isocode);
+                }), operators.tap(function (country) {
+                    if (country === null) {
+                        _this.userService.loadDeliveryCountries();
+                    }
+                }), operators.map(function (country) { return country && country.name; }));
+            };
+        /**
+         * @param {?} deliveryAddress
+         * @param {?} countryName
+         * @return {?}
+         */
+        ReviewSubmitComponent.prototype.getShippingAddressCard = /**
+         * @param {?} deliveryAddress
+         * @param {?} countryName
+         * @return {?}
+         */
+            function (deliveryAddress, countryName) {
+                return rxjs.combineLatest([
+                    this.translation.translate('addressCard.shipTo'),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 1), textTitle = _b[0];
+                    if (!countryName) {
+                        countryName = deliveryAddress.country.isocode;
+                    }
+                    /** @type {?} */
+                    var region = '';
+                    if (deliveryAddress.region && deliveryAddress.region.isocode) {
+                        region = deliveryAddress.region.isocode + ', ';
+                    }
+                    return {
+                        title: textTitle,
+                        textBold: deliveryAddress.firstName + ' ' + deliveryAddress.lastName,
+                        text: [
+                            deliveryAddress.line1,
+                            deliveryAddress.line2,
+                            deliveryAddress.town + ', ' + region + countryName,
+                            deliveryAddress.postalCode,
+                            deliveryAddress.phone,
+                        ],
+                    };
+                }));
+            };
+        /**
+         * @param {?} deliveryMode
+         * @return {?}
+         */
+        ReviewSubmitComponent.prototype.getDeliveryModeCard = /**
+         * @param {?} deliveryMode
+         * @return {?}
+         */
+            function (deliveryMode) {
+                return rxjs.combineLatest([
+                    this.translation.translate('checkoutShipping.shippingMethod'),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 1), textTitle = _b[0];
+                    return {
+                        title: textTitle,
+                        textBold: deliveryMode.name,
+                        text: [deliveryMode.description],
+                    };
+                }));
+            };
+        /**
+         * @param {?} paymentDetails
+         * @return {?}
+         */
+        ReviewSubmitComponent.prototype.getPaymentMethodCard = /**
+         * @param {?} paymentDetails
+         * @return {?}
+         */
+            function (paymentDetails) {
+                return rxjs.combineLatest([
+                    this.translation.translate('paymentForm.payment'),
+                    this.translation.translate('paymentCard.expires', {
+                        month: paymentDetails.expiryMonth,
+                        year: paymentDetails.expiryYear,
+                    }),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 2), textTitle = _b[0], textExpires = _b[1];
+                    return {
+                        title: textTitle,
+                        textBold: paymentDetails.accountHolderName,
+                        text: [paymentDetails.cardNumber, textExpires],
+                    };
+                }));
+            };
+        ReviewSubmitComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-review-submit',
+                        template: "<div class=\"cx-review\">\n  <!-- TITLE -->\n  <h3 class=\"cx-review-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutReview.review' | cxTranslate }}\n  </h3>\n  <div class=\"cx-review-summary row\">\n    <!-- SHIPPING ADDRESS SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-address\">\n        <cx-card\n          [content]=\"\n            getShippingAddressCard(\n              deliveryAddress$ | async,\n              countryName$ | async\n            ) | async\n          \"\n        ></cx-card>\n      </div>\n    </div>\n\n    <!-- DELIVERY MODE SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-shipping\">\n        <cx-card\n          *ngIf=\"(deliveryMode$ | async) as deliveryMode\"\n          [content]=\"getDeliveryModeCard(deliveryMode) | async\"\n        ></cx-card>\n      </div>\n    </div>\n\n    <!-- PAYMENT METHOD SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-payment\">\n        <cx-card\n          [content]=\"getPaymentMethodCard(paymentDetails$ | async) | async\"\n        ></cx-card>\n      </div>\n    </div>\n  </div>\n\n  <!-- CART ITEM SECTION -->\n  <ng-container *ngIf=\"(cart$ | async) as cart\">\n    <div class=\"cx-review-cart-total d-none d-lg-block d-xl-block\">\n      {{\n        'cartItems.cartTotal'\n          | cxTranslate: { count: cart.deliveryItemsQuantity }\n      }}:\n      {{ cart.totalPrice?.formattedValue }}\n    </div>\n    <h4 class=\"cx-review-cart-heading d-block d-lg-none d-xl-none\">\n      {{ 'checkoutReview.placeOrder' | cxTranslate }}\n    </h4>\n    <div\n      class=\"cx-review-cart-item col-md-12\"\n      *ngIf=\"(entries$ | async) as entries\"\n    >\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [isReadOnly]=\"true\"\n        [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n      ></cx-cart-item-list>\n    </div>\n  </ng-container>\n</div>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        ReviewSubmitComponent.ctorParameters = function () {
+            return [
+                { type: i1$2.CheckoutService },
+                { type: i1$2.UserService },
+                { type: i1$2.CartService },
+                { type: i1$2.TranslationService }
+            ];
+        };
+        return ReviewSubmitComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ReviewSubmitModule = /** @class */ (function () {
+        function ReviewSubmitModule() {
+        }
+        ReviewSubmitModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            CardModule,
+                            CartSharedModule,
+                            i1$2.I18nModule,
+                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    CheckoutReviewOrder: {
+                                        selector: 'cx-review-submit',
+                                        guards: [
+                                            i1$2.AuthGuard,
+                                            CartNotEmptyGuard,
+                                            ShippingAddressSetGuard,
+                                            DeliveryModeSetGuard,
+                                            PaymentDetailsSetGuard,
+                                        ],
+                                    },
+                                },
+                            }))),
+                        ],
+                        declarations: [ReviewSubmitComponent],
+                        entryComponents: [ReviewSubmitComponent],
+                        exports: [ReviewSubmitComponent],
+                    },] }
+        ];
+        return ReviewSubmitModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var AddressFormComponent = /** @class */ (function () {
+        function AddressFormComponent(fb, checkoutService, userService, globalMessageService, modalService) {
+            this.fb = fb;
+            this.checkoutService = checkoutService;
+            this.userService = userService;
+            this.globalMessageService = globalMessageService;
+            this.modalService = modalService;
+            this.showCancelBtn = true;
+            this.submitAddress = new i0.EventEmitter();
+            this.backToAddress = new i0.EventEmitter();
+            this.address = this.fb.group({
+                defaultAddress: [false],
+                titleCode: [''],
+                firstName: ['', forms.Validators.required],
+                lastName: ['', forms.Validators.required],
+                line1: ['', forms.Validators.required],
+                line2: [''],
+                town: ['', forms.Validators.required],
+                region: this.fb.group({
+                    isocode: [null, forms.Validators.required],
+                }),
+                country: this.fb.group({
+                    isocode: [null, forms.Validators.required],
+                }),
+                postalCode: ['', forms.Validators.required],
+                phone: '',
+            });
+        }
+        /**
+         * @return {?}
+         */
+        AddressFormComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                // Fetching countries
+                this.countries$ = this.userService.getDeliveryCountries().pipe(operators.tap(function (countries) {
+                    if (Object.keys(countries).length === 0) {
+                        _this.userService.loadDeliveryCountries();
+                    }
+                }));
+                // Fetching titles
+                this.titles$ = this.userService.getTitles().pipe(operators.tap(function (titles) {
+                    if (Object.keys(titles).length === 0) {
+                        _this.userService.loadTitles();
+                    }
+                }), operators.map(function (titles) {
+                    /** @type {?} */
+                    var noneTitle = { code: '', name: 'Title' };
+                    return __spread([noneTitle], titles);
+                }));
+                // Fetching regions
+                this.regions$ = this.userService.getRegions().pipe(operators.tap(function (regions) {
+                    /** @type {?} */
+                    var regionControl = _this.address.get('region.isocode');
+                    if (Object.keys(regions).length === 0) {
+                        regionControl.disable();
+                        /** @type {?} */
+                        var countryIsoCode = _this.address.get('country.isocode').value;
+                        if (countryIsoCode) {
+                            _this.userService.loadRegions(countryIsoCode);
+                        }
+                    }
+                    else {
+                        regionControl.enable();
+                    }
+                }));
+                // verify the new added address
+                this.addressVerifySub = this.checkoutService
+                    .getAddressVerificationResults()
+                    .subscribe(function (results) {
+                    if (results === 'FAIL') {
+                        _this.checkoutService.clearAddressVerificationResults();
+                    }
+                    else if (results.decision === 'ACCEPT') {
+                        _this.submitAddress.emit(_this.address.value);
+                    }
+                    else if (results.decision === 'REJECT') {
+                        // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
+                        if (results.errors.errors.some(function (error) { return error.subject === 'titleCode'; })) {
+                            _this.globalMessageService.add({ key: 'addressForm.titleRequired' }, i1$2.GlobalMessageType.MSG_TYPE_ERROR);
+                        }
+                        else {
+                            _this.globalMessageService.add({ key: 'addressForm.invalidAddress' }, i1$2.GlobalMessageType.MSG_TYPE_ERROR);
+                        }
+                        _this.checkoutService.clearAddressVerificationResults();
+                    }
+                    else if (results.decision === 'REVIEW') {
+                        _this.openSuggestedAddress(results);
+                    }
+                });
+                if (this.addressData) {
+                    this.address.patchValue(this.addressData);
+                    this.countrySelected(this.addressData.country);
+                    if (this.addressData.region) {
+                        this.regionSelected(this.addressData.region);
+                    }
+                }
+            };
+        /**
+         * @param {?} title
+         * @return {?}
+         */
+        AddressFormComponent.prototype.titleSelected = /**
+         * @param {?} title
+         * @return {?}
+         */
+            function (title) {
+                this.address['controls'].titleCode.setValue(title.code);
+            };
+        /**
+         * @param {?} country
+         * @return {?}
+         */
+        AddressFormComponent.prototype.countrySelected = /**
+         * @param {?} country
+         * @return {?}
+         */
+            function (country) {
+                this.address['controls'].country['controls'].isocode.setValue(country.isocode);
+                this.userService.loadRegions(country.isocode);
+            };
+        /**
+         * @param {?} region
+         * @return {?}
+         */
+        AddressFormComponent.prototype.regionSelected = /**
+         * @param {?} region
+         * @return {?}
+         */
+            function (region) {
+                this.address['controls'].region['controls'].isocode.setValue(region.isocode);
+            };
+        /**
+         * @return {?}
+         */
+        AddressFormComponent.prototype.toggleDefaultAddress = /**
+         * @return {?}
+         */
+            function () {
+                this.address['controls'].defaultAddress.setValue(this.address.value.defaultAddress);
+            };
+        /**
+         * @return {?}
+         */
+        AddressFormComponent.prototype.back = /**
+         * @return {?}
+         */
+            function () {
+                this.backToAddress.emit();
+            };
+        /**
+         * @return {?}
+         */
+        AddressFormComponent.prototype.verifyAddress = /**
+         * @return {?}
+         */
+            function () {
+                this.checkoutService.verifyAddress(this.address.value);
+            };
+        /**
+         * @param {?} results
+         * @return {?}
+         */
+        AddressFormComponent.prototype.openSuggestedAddress = /**
+         * @param {?} results
+         * @return {?}
+         */
+            function (results) {
+                var _this = this;
+                if (!this.suggestedAddressModalRef) {
+                    this.suggestedAddressModalRef = this.modalService.open(SuggestedAddressDialogComponent, { centered: true, size: 'lg' });
+                    this.suggestedAddressModalRef.componentInstance.enteredAddress = this.address.value;
+                    this.suggestedAddressModalRef.componentInstance.suggestedAddresses =
+                        results.suggestedAddresses;
+                    this.suggestedAddressModalRef.result
+                        .then(function (address) {
+                        _this.checkoutService.clearAddressVerificationResults();
+                        if (address) {
+                            address = Object.assign({
+                                titleCode: _this.address.value.titleCode,
+                                phone: _this.address.value.phone,
+                                selected: true,
+                            }, address);
+                            _this.submitAddress.emit(address);
+                        }
+                        _this.suggestedAddressModalRef = null;
+                    })
+                        .catch(function () {
+                        // this  callback is called when modal is closed with Esc key or clicking backdrop
+                        _this.checkoutService.clearAddressVerificationResults();
+                        /** @type {?} */
+                        var address = Object.assign({
+                            selected: true,
+                        }, _this.address.value);
+                        _this.submitAddress.emit(address);
+                        _this.suggestedAddressModalRef = null;
+                    });
+                }
+            };
+        /**
+         * @return {?}
+         */
+        AddressFormComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+            function () {
+                this.checkoutService.clearAddressVerificationResults();
+                if (this.addressVerifySub) {
+                    this.addressVerifySub.unsubscribe();
+                }
+            };
+        AddressFormComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-address-form',
+                        template: "<div [formGroup]=\"address\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <div class=\"form-group\" formGroupName=\"country\">\n        <ng-container *ngIf=\"(countries$ | async) as countries\">\n          <div *ngIf=\"countries.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'addressForm.country' | cxTranslate\n              }}</span>\n              <ng-select\n                class=\"country-select\"\n                formControlName=\"isocode\"\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"countries\"\n                bindLabel=\"name\"\n                bindValue=\"isocode\"\n                placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                (change)=\"countrySelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\" *ngIf=\"showTitleCode\">\n        <ng-container *ngIf=\"(titles$ | async) as titles\">\n          <div *ngIf=\"titles.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'addressForm.title' | cxTranslate\n              }}</span>\n              <ng-select\n                formControlName=\"titleCode\"\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"titles\"\n                bindLabel=\"name\"\n                bindValue=\"code\"\n                (change)=\"titleSelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.firstName.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            type=\"text\"\n            required\n            placeholder=\"{{\n              'addressForm.firstName.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"firstName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.lastName.label' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            placeholder=\"{{ 'addressForm.lastName.placeholder' | cxTranslate }}\"\n            formControlName=\"lastName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.address1' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            placeholder=\"{{ 'addressForm.streetAddress' | cxTranslate }}\"\n            formControlName=\"line1\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'addressForm.address2' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            placeholder=\"{{ 'addressForm.aptSuite' | cxTranslate }}\"\n            formControlName=\"line2\"\n          />\n        </label>\n      </div>\n      <div class=\"row\">\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content required\">{{\n              'addressForm.city.label' | cxTranslate\n            }}</span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              required\n              placeholder=\"{{ 'addressForm.city.placeholder' | cxTranslate }}\"\n              formControlName=\"town\"\n            />\n          </label>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <ng-container\n            *ngIf=\"(regions$ | async) as regions\"\n            formGroupName=\"region\"\n          >\n            <div *ngIf=\"regions.length !== 0\">\n              <label aria-required=\"true\">\n                <span class=\"label-content required\">{{\n                  'addressForm.state' | cxTranslate\n                }}</span>\n                <ng-container *ngIf=\"regions[0].name\">\n                  <ng-select\n                    class=\"region-select\"\n                    formControlName=\"isocode\"\n                    [searchable]=\"false\"\n                    [clearable]=\"false\"\n                    [items]=\"regions\"\n                    bindLabel=\"name\"\n                    bindValue=\"isocode\"\n                    placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                    (change)=\"regionSelected($event)\"\n                  >\n                  </ng-select>\n                </ng-container>\n                <ng-container *ngIf=\"!regions[0].name\">\n                  <ng-select\n                    class=\"region-select\"\n                    [searchable]=\"false\"\n                    [clearable]=\"false\"\n                    [items]=\"regions\"\n                    bindLabel=\"isocode\"\n                    bindValue=\"region\"\n                    placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                    (change)=\"regionSelected($event)\"\n                  >\n                  </ng-select>\n                </ng-container>\n              </label>\n            </div>\n          </ng-container>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content required\">{{\n              'addressForm.zipCode.label' | cxTranslate\n            }}</span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              required\n              placeholder=\"{{\n                'addressForm.zipCode.placeholder' | cxTranslate\n              }}\"\n              formControlName=\"postalCode\"\n            />\n          </label>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'addressForm.phoneNumber.label' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            placeholder=\"{{\n              'addressForm.phoneNumber.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"phone\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\" *ngIf=\"setAsDefaultField !== false\">\n        <div class=\"form-check\">\n          <label>\n            <input\n              type=\"checkbox\"\n              class=\"form-check-input\"\n              formControlName=\"defaultAddress\"\n              (change)=\"toggleDefaultAddress()\"\n            />\n            <span class=\"form-check-label\">{{\n              'addressForm.setAsDefault' | cxTranslate\n            }}</span>\n          </label>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"cx-checkout-btns row\">\n    <div class=\"col-md-12 col-lg-6\" *ngIf=\"showCancelBtn\">\n      <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n        {{ cancelBtnLabel || ('addressForm.chooseAddress' | cxTranslate) }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        class=\"btn btn-block btn-primary\"\n        [disabled]=\"address.invalid\"\n        (click)=\"verifyAddress()\"\n      >\n        {{ actionBtnLabel || ('common.continue' | cxTranslate) }}\n      </button>\n    </div>\n  </div>\n</div>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        AddressFormComponent.ctorParameters = function () {
+            return [
+                { type: forms.FormBuilder },
+                { type: i1$2.CheckoutService },
+                { type: i1$2.UserService },
+                { type: i1$2.GlobalMessageService },
+                { type: ModalService }
+            ];
+        };
+        AddressFormComponent.propDecorators = {
+            addressData: [{ type: i0.Input }],
+            actionBtnLabel: [{ type: i0.Input }],
+            cancelBtnLabel: [{ type: i0.Input }],
+            setAsDefaultField: [{ type: i0.Input }],
+            showTitleCode: [{ type: i0.Input }],
+            showCancelBtn: [{ type: i0.Input }],
+            submitAddress: [{ type: i0.Output }],
+            backToAddress: [{ type: i0.Output }]
+        };
+        return AddressFormComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var AddressFormModule = /** @class */ (function () {
+        function AddressFormModule() {
+        }
+        AddressFormModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            forms.ReactiveFormsModule,
+                            forms.FormsModule,
+                            i4.RouterModule,
+                            ngSelect.NgSelectModule,
+                            IconModule,
+                            i1$2.I18nModule,
+                            AutoFocusDirectiveModule,
+                        ],
+                        declarations: [AddressFormComponent, SuggestedAddressDialogComponent],
+                        entryComponents: [SuggestedAddressDialogComponent],
+                        exports: [AddressFormComponent],
+                    },] }
+        ];
+        return AddressFormModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ShippingAddressComponent = /** @class */ (function () {
+        function ShippingAddressComponent(userService, cartService, routingService, checkoutService, checkoutConfigService, activatedRoute, translation) {
+            this.userService = userService;
+            this.cartService = cartService;
+            this.routingService = routingService;
+            this.checkoutService = checkoutService;
+            this.checkoutConfigService = checkoutConfigService;
+            this.activatedRoute = activatedRoute;
+            this.translation = translation;
+            this.newAddressFormManuallyOpened = false;
+            this.cards = [];
+            this.selectedAddress$ = new rxjs.BehaviorSubject(null);
+        }
+        /**
+         * @return {?}
+         */
+        ShippingAddressComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.goTo = null;
+                this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
+                this.checkoutStepUrlPrevious = 'cart';
+                this.isLoading$ = this.userService.getAddressesLoading();
+                this.existingAddresses$ = this.userService.getAddresses();
+                this.cards$ = rxjs.combineLatest(this.existingAddresses$, this.selectedAddress$.asObservable(), this.translation.translate('checkoutAddress.defaultShippingAddress'), this.translation.translate('checkoutAddress.shipToThisAddress'), this.translation.translate('addressCard.selected')).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 5), addresses = _b[0], selected = _b[1], textDefaultShippingAddress = _b[2], textShipToThisAddress = _b[3], textSelected = _b[4];
+                    return addresses.map(function (address) {
+                        /** @type {?} */
+                        var card = _this.getCardContent(address, selected, textDefaultShippingAddress, textShipToThisAddress, textSelected);
+                        return {
+                            address: address,
+                            card: card,
+                        };
+                    });
+                }));
+                this.cartService.loadDetails();
+                this.userService.loadAddresses();
+                this.setAddressSub = this.checkoutService
+                    .getDeliveryAddress()
+                    .subscribe(function (address) {
+                    _this.setAddress = address;
+                    _this.selectedAddress$.next(address);
+                    if (_this.goTo) {
+                        _this.goNext();
+                        _this.goTo = null;
+                    }
+                });
+                this.selectedAddressSub = this.selectedAddress$.subscribe(function (address) {
+                    _this.selectedAddress = address;
+                });
+            };
+        /**
+         * @param {?} address
+         * @param {?} selected
+         * @param {?} textDefaultShippingAddress
+         * @param {?} textShipToThisAddress
+         * @param {?} textSelected
+         * @return {?}
+         */
+        ShippingAddressComponent.prototype.getCardContent = /**
+         * @param {?} address
+         * @param {?} selected
+         * @param {?} textDefaultShippingAddress
+         * @param {?} textShipToThisAddress
+         * @param {?} textSelected
+         * @return {?}
+         */
+            function (address, selected, textDefaultShippingAddress, textShipToThisAddress, textSelected) {
+                /** @type {?} */
+                var region = '';
+                if (address.region && address.region.isocode) {
+                    region = address.region.isocode + ', ';
+                }
+                /** @type {?} */
+                var card = {
+                    title: address.defaultAddress ? textDefaultShippingAddress : '',
+                    textBold: address.firstName + ' ' + address.lastName,
+                    text: [
+                        address.line1,
+                        address.line2,
+                        address.town + ', ' + region + address.country.isocode,
+                        address.postalCode,
+                        address.phone,
+                    ],
+                    actions: [{ name: textShipToThisAddress, event: 'send' }],
+                    header: selected && selected.id === address.id ? textSelected : '',
+                };
+                this.cards.push(card);
+                return card;
+            };
+        /**
+         * @param {?} address
+         * @return {?}
+         */
+        ShippingAddressComponent.prototype.addressSelected = /**
+         * @param {?} address
+         * @return {?}
+         */
+            function (address) {
+                this.selectedAddress$.next(address);
+            };
+        /**
+         * @return {?}
+         */
+        ShippingAddressComponent.prototype.next = /**
+         * @return {?}
+         */
+            function () {
+                this.addAddress({ address: this.selectedAddress, newAddress: false });
+            };
+        /**
+         * @param {?} __0
+         * @return {?}
+         */
+        ShippingAddressComponent.prototype.addAddress = /**
+         * @param {?} __0
+         * @return {?}
+         */
+            function (_a) {
+                var newAddress = _a.newAddress, address = _a.address;
+                if (newAddress) {
+                    this.checkoutService.createAndSetAddress(address);
+                    this.goTo = CheckoutStepType.DELIVERY_MODE;
+                    return;
+                }
+                if (this.setAddress &&
+                    this.selectedAddress &&
+                    this.setAddress.id === this.selectedAddress.id) {
+                    this.goNext();
+                }
+                else {
+                    this.goTo = CheckoutStepType.DELIVERY_MODE;
+                    this.checkoutService.setDeliveryAddress(address);
+                }
+            };
+        /**
+         * @param {?} address
+         * @return {?}
+         */
+        ShippingAddressComponent.prototype.addNewAddress = /**
+         * @param {?} address
+         * @return {?}
+         */
+            function (address) {
+                this.addAddress({ address: address, newAddress: true });
+            };
+        /**
+         * @return {?}
+         */
+        ShippingAddressComponent.prototype.showNewAddressForm = /**
+         * @return {?}
+         */
+            function () {
+                this.newAddressFormManuallyOpened = true;
+            };
+        /**
+         * @param {?=} goBack
+         * @return {?}
+         */
+        ShippingAddressComponent.prototype.hideNewAddressForm = /**
+         * @param {?=} goBack
+         * @return {?}
+         */
+            function (goBack) {
+                if (goBack === void 0) {
+                    goBack = false;
+                }
+                this.newAddressFormManuallyOpened = false;
+                if (goBack) {
+                    this.back();
+                }
+            };
+        /**
+         * @return {?}
+         */
+        ShippingAddressComponent.prototype.goNext = /**
+         * @return {?}
+         */
+            function () {
+                this.routingService.go(this.checkoutStepUrlNext);
+            };
+        /**
+         * @return {?}
+         */
+        ShippingAddressComponent.prototype.back = /**
+         * @return {?}
+         */
+            function () {
+                this.routingService.go(this.checkoutStepUrlPrevious);
+            };
+        /**
+         * @return {?}
+         */
+        ShippingAddressComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+            function () {
+                if (this.setAddressSub) {
+                    this.setAddressSub.unsubscribe();
+                }
+                if (this.selectedAddressSub) {
+                    this.selectedAddressSub.unsubscribe();
+                }
+            };
+        ShippingAddressComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-shipping-address',
+                        template: "<ng-container *ngIf=\"(cards$ | async) as cards\">\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutAddress.shippingAddress' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        cards?.length && !newAddressFormManuallyOpened;\n        else newAddressForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'checkoutAddress.selectYourShippingAddress' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-sm-12 col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewAddressForm()\"\n          >\n            {{ 'checkoutAddress.addNewAddress' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-shipping-address-card col-md-12 col-lg-6\"\n          *ngFor=\"let card of cards; let i = index\"\n        >\n          <div\n            class=\"cx-shipping-address-card-inner\"\n            (click)=\"addressSelected(card.address)\"\n          >\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"card.card\"\n              (sendCard)=\"addressSelected(card.address)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"cx-btn btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'checkout.backToCart' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"cx-btn btn btn-block btn-primary\"\n            [disabled]=\"!selectedAddress || !selectedAddress.id\"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newAddressForm>\n      <ng-container *ngIf=\"cards.length; else initialAddressForm\">\n        <cx-address-form\n          showTitleCode=\"true\"\n          (backToAddress)=\"hideNewAddressForm(false)\"\n          (submitAddress)=\"addNewAddress($event)\"\n        ></cx-address-form>\n      </ng-container>\n      <ng-template #initialAddressForm>\n        <cx-address-form\n          showTitleCode=\"true\"\n          cancelBtnLabel=\"{{ 'checkout.backToCart' | cxTranslate }}\"\n          (backToAddress)=\"hideNewAddressForm(true)\"\n          (submitAddress)=\"addNewAddress($event)\"\n        ></cx-address-form>\n      </ng-template>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </ng-template>\n</ng-container>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        ShippingAddressComponent.ctorParameters = function () {
+            return [
+                { type: i1$2.UserService },
+                { type: i1$2.CartService },
+                { type: i1$2.RoutingService },
+                { type: i1$2.CheckoutService },
+                { type: CheckoutConfigService },
+                { type: i4.ActivatedRoute },
+                { type: i1$2.TranslationService }
+            ];
+        };
+        return ShippingAddressComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ShippingAddressModule = /** @class */ (function () {
+        function ShippingAddressModule() {
+        }
+        ShippingAddressModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i4.RouterModule,
+                            AddressFormModule,
+                            CardModule,
+                            SpinnerModule,
+                            i1$2.I18nModule,
+                            CheckoutProgressMobileTopModule,
+                            CheckoutProgressMobileBottomModule,
+                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    CheckoutShippingAddress: {
+                                        selector: 'cx-shipping-address',
+                                        guards: [i1$2.AuthGuard, CartNotEmptyGuard],
+                                    },
+                                },
+                            }))),
+                        ],
+                        declarations: [ShippingAddressComponent],
+                        entryComponents: [ShippingAddressComponent],
+                        exports: [ShippingAddressComponent],
+                    },] }
+        ];
+        return ShippingAddressModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CheckoutComponentModule = /** @class */ (function () {
+        function CheckoutComponentModule() {
+        }
+        CheckoutComponentModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            CartComponentModule,
+                            i1$2.CheckoutModule,
+                            CheckoutOrchestratorModule,
+                            CheckoutOrderSummaryModule,
+                            CheckoutProgressModule,
+                            CheckoutProgressMobileTopModule,
+                            CheckoutProgressMobileBottomModule,
+                            DeliveryModeModule,
+                            OrderConfirmationModule,
+                            PaymentMethodModule,
+                            PlaceOrderModule,
+                            PromotionsModule,
+                            ReviewSubmitModule,
+                            ShippingAddressModule,
+                        ],
+                        // @todo: should we keep below provider here?
+                        providers: [CheckoutConfigService],
+                    },] }
+        ];
+        return CheckoutComponentModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var OrderConfirmationPageGuard = /** @class */ (function () {
+        function OrderConfirmationPageGuard(checkoutService, routingService) {
+            this.checkoutService = checkoutService;
+            this.routingService = routingService;
+        }
+        /**
+         * @return {?}
+         */
+        OrderConfirmationPageGuard.prototype.canActivate = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                return this.checkoutService.getOrderDetails().pipe(operators.map(function (orderDetails) {
+                    if (orderDetails && Object.keys(orderDetails).length !== 0) {
+                        return true;
+                    }
+                    else {
+                        _this.routingService.go({ cxRoute: 'orders' });
+                        return false;
+                    }
+                }));
+            };
+        OrderConfirmationPageGuard.decorators = [
+            { type: i0.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        OrderConfirmationPageGuard.ctorParameters = function () {
+            return [
+                { type: i1$2.CheckoutService },
+                { type: i1$2.RoutingService }
+            ];
+        };
+        /** @nocollapse */ OrderConfirmationPageGuard.ngInjectableDef = i0.defineInjectable({ factory: function OrderConfirmationPageGuard_Factory() { return new OrderConfirmationPageGuard(i0.inject(i1$2.CheckoutService), i0.inject(i1$2.RoutingService)); }, token: OrderConfirmationPageGuard, providedIn: "root" });
+        return OrderConfirmationPageGuard;
     }());
 
     /**
@@ -4414,7 +7544,6 @@
                             forms.ReactiveFormsModule,
                             i4.RouterModule,
                             CmsModule,
-                            BootstrapModule,
                             i1$2.UserModule,
                             i1$2.UrlModule,
                             i1$2.ConfigModule.withConfig(( /** @type {?} */({
@@ -4934,6 +8063,567 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /** @type {?} */
+    var cartComponents = {
+        emptyCartText: {
+            flexType: 'CMSParagraphComponent',
+            typeCode: 'CMSParagraphComponent',
+            content: "\n      <h2>Your shopping cart is empty</h2>\n      <p>Suggestions</p>\n      <ul>\n          <li>\n          Browse our products by selecting a category above\n          </li>\n      </ul>",
+        },
+    };
+    /** @type {?} */
+    var defaultCartPageConfig = {
+        ignoreBackend: false,
+        pageId: 'cartPage',
+        type: 'ContentPage',
+        template: 'CartPageTemplate',
+        title: 'Cart',
+        slots: {
+            EmptyCartMiddleContent: {
+                componentIds: ['emptyCartText'],
+            },
+        },
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var headerComponents = {
+        SkipLinkComponent: {
+            typeCode: 'SkipLinkComponent',
+            flexType: 'SkipLinkComponent',
+            uid: 'SkipLinkComponent',
+        },
+        HamburgerMenuComponent: {
+            typeCode: 'HamburgerMenuComponent',
+            flexType: 'HamburgerMenuComponent',
+        },
+        LanguageComponent: {
+            typeCode: 'CMSSiteContextComponent',
+            flexType: 'CMSSiteContextComponent',
+            context: 'LANGUAGE',
+        },
+        CurrencyComponent: {
+            typeCode: 'CMSSiteContextComponent',
+            flexType: 'CMSSiteContextComponent',
+            context: 'CURRENCY',
+        },
+        LanguageCurrencyComponent: {
+            typeCode: 'LanguageCurrencyComponent',
+            flexType: 'LanguageCurrencyComponent',
+        },
+        StoreFinder: {
+            typeCode: 'CMSLinkComponent',
+            flexType: 'CMSLinkComponent',
+            linkName: 'Find a Store',
+            url: '/store-finder',
+        },
+        BreadcrumbComponent: {
+            typeCode: 'BreadcrumbComponent',
+            flexType: 'BreadcrumbComponent',
+        },
+        Logo: {
+            typeCode: 'SimpleBannerComponent',
+            flexType: 'SimpleBannerComponent',
+            uid: 'logo',
+            media: {
+                mime: 'svg/image/svg+xml',
+                url: 'https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg',
+            },
+            urlLink: '/',
+        },
+        SearchBox: {
+            typeCode: 'SearchBoxComponent',
+            flexType: 'SearchBoxComponent',
+            uid: 'SearchBoxComponent',
+        },
+        MiniCart: {
+            typeCode: 'MiniCartComponent',
+            flexType: 'MiniCartComponent',
+            uid: 'MiniCartComponent',
+        },
+        LoginComponent: {
+            typeCode: 'LoginComponent',
+            flexType: 'LoginComponent',
+            uid: 'LoginComponent',
+        },
+        CategoryNavigationComponent: {
+            typeCode: 'CategoryNavigationComponent',
+            flexType: 'CategoryNavigationComponent',
+            uid: 'ElectronicsCategoryNavComponent',
+            navigationNode: {
+                uid: 'ElectronicsCategoryNavNode',
+                children: [
+                    {
+                        uid: 'CameraLensesNavNode',
+                        title: 'Electronic catalog',
+                        entries: [
+                            {
+                                itemId: 'CameraLensesCategoryLink',
+                                itemSuperType: 'AbstractCMSComponent',
+                                itemType: 'CMSLinkComponent',
+                            },
+                        ],
+                    },
+                ],
+            },
+        },
+    };
+    /** @type {?} */
+    var defaultPageHeaderConfig = {
+        PreHeader: {
+            componentIds: ['SkipLinkComponent', 'HamburgerMenuComponent'],
+        },
+        SiteContext: {
+            componentIds: ['LanguageComponent', 'CurrencyComponent'],
+        },
+        SiteLinks: {
+            componentIds: ['StoreFinder'],
+        },
+        SiteLogo: {
+            componentIds: ['Logo'],
+        },
+        SearchBox: {
+            componentIds: ['SearchBox'],
+        },
+        MiniCart: {
+            componentIds: ['MiniCart'],
+        },
+        SiteLogin: {
+            componentIds: ['LoginComponent'],
+        },
+        NavigationBar: {
+            componentIds: ['CategoryNavigationComponent'],
+        },
+        BottomHeaderSlot: {
+            componentIds: ['BreadcrumbComponent'],
+        },
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var defaultPdpComponents = {
+        CMSProductImages: {
+            typeCode: 'CMSProductImages',
+            flexType: 'CMSProductImages',
+            uid: 'CMSProductImages',
+        },
+    };
+    /** @type {?} */
+    var defaultPdpSlots = {
+        ProductDetails: {
+            componentIds: ['CMSProductImages'],
+        },
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @return {?}
+     */
+    function defaultCmsContentConfig() {
+        return {
+            cmsStructure: {
+                components: __assign({}, headerComponents, cartComponents, defaultPdpComponents),
+                slots: __assign({}, defaultPageHeaderConfig, defaultPdpSlots),
+                pages: [defaultCartPageConfig],
+            },
+        };
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var PageLayoutService = /** @class */ (function () {
+        function PageLayoutService(cms, config, breakpointService) {
+            this.cms = cms;
+            this.config = config;
+            this.breakpointService = breakpointService;
+            // we print warn messages on missing layout configs
+            // only once to not polute the console log
+            this.warnLogMessages = {};
+            this.logSlots = {};
+        }
+        /**
+         * @param {?=} section
+         * @return {?}
+         */
+        PageLayoutService.prototype.getSlots = /**
+         * @param {?=} section
+         * @return {?}
+         */
+            function (section) {
+                var _this = this;
+                return this.breakpointService.breakpoint$.pipe(operators.switchMap(function (breakpoint) {
+                    return _this.page$.pipe(operators.map(function (page) {
+                        /** @type {?} */
+                        var config = _this.getSlotConfig(page.template, 'slots', section, breakpoint);
+                        if (config && config.slots) {
+                            return config.slots;
+                        }
+                        else if (!section) {
+                            _this.logMissingLayoutConfig(page);
+                            return Object.keys(page.slots);
+                        }
+                        else {
+                            _this.logMissingLayoutConfig(page, section);
+                            return [];
+                        }
+                    }));
+                }), operators.distinctUntilChanged());
+            };
+        Object.defineProperty(PageLayoutService.prototype, "page$", {
+            get: /**
+             * @return {?}
+             */ function () {
+                return this.cms.getCurrentPage().pipe(operators.filter(Boolean));
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PageLayoutService.prototype, "templateName$", {
+            get: /**
+             * @return {?}
+             */ function () {
+                return this.page$.pipe(operators.filter(function (page) { return !!page.template; }), operators.map(function (page) { return page.template; }));
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * load slots from the layout configuration. The breakpoint is used
+         * to load a specific configuration for the given breakpoint. If there's
+         * no configuration available for the given breakpoint the default slot
+         * configuration is returned.
+         */
+        /**
+         * load slots from the layout configuration. The breakpoint is used
+         * to load a specific configuration for the given breakpoint. If there's
+         * no configuration available for the given breakpoint the default slot
+         * configuration is returned.
+         * @protected
+         * @param {?} templateUid
+         * @param {?} configAttribute
+         * @param {?=} section
+         * @param {?=} breakpoint
+         * @return {?}
+         */
+        PageLayoutService.prototype.getSlotConfig = /**
+         * load slots from the layout configuration. The breakpoint is used
+         * to load a specific configuration for the given breakpoint. If there's
+         * no configuration available for the given breakpoint the default slot
+         * configuration is returned.
+         * @protected
+         * @param {?} templateUid
+         * @param {?} configAttribute
+         * @param {?=} section
+         * @param {?=} breakpoint
+         * @return {?}
+         */
+            function (templateUid, configAttribute, section, breakpoint) {
+                /** @type {?} */
+                var pageTemplateConfig = this.config.layoutSlots[templateUid];
+                if (section) {
+                    return this.getSlotConfigForSection(templateUid, configAttribute, section, breakpoint);
+                }
+                if (pageTemplateConfig) {
+                    return this.getResponsiveSlotConfig(( /** @type {?} */(pageTemplateConfig)), configAttribute, breakpoint);
+                }
+            };
+        /**
+         * @protected
+         * @param {?} templateUid
+         * @param {?} configAttribute
+         * @param {?=} section
+         * @param {?=} breakpoint
+         * @return {?}
+         */
+        PageLayoutService.prototype.getSlotConfigForSection = /**
+         * @protected
+         * @param {?} templateUid
+         * @param {?} configAttribute
+         * @param {?=} section
+         * @param {?=} breakpoint
+         * @return {?}
+         */
+            function (templateUid, configAttribute, section, breakpoint) {
+                /** @type {?} */
+                var pageTemplateConfig = this.config.layoutSlots[templateUid];
+                if (!pageTemplateConfig) {
+                    return null;
+                }
+                // if there's no section config on the page layout
+                // we fall back to the global section config
+                /** @type {?} */
+                var sectionConfig = pageTemplateConfig[section]
+                    ? pageTemplateConfig[section]
+                    : this.config.layoutSlots[section];
+                if (!sectionConfig) {
+                    return null;
+                }
+                /** @type {?} */
+                var responsiveConfig = this.getResponsiveSlotConfig(( /** @type {?} */(sectionConfig)), configAttribute, breakpoint);
+                if (responsiveConfig.hasOwnProperty(configAttribute)) {
+                    return responsiveConfig;
+                }
+                else if (pageTemplateConfig[section].hasOwnProperty(configAttribute)) {
+                    return pageTemplateConfig[section];
+                }
+                else if (this.config.layoutSlots[section]) {
+                    return ( /** @type {?} */(this.config.layoutSlots[section]));
+                }
+            };
+        /**
+         * Returns a list of slots for a breakpoint specific configuratoin
+         * If there's no specific configuration for the breakpoint,
+         * the closest available configuration will be returned.
+         */
+        /**
+         * Returns a list of slots for a breakpoint specific configuratoin
+         * If there's no specific configuration for the breakpoint,
+         * the closest available configuration will be returned.
+         * @protected
+         * @param {?} layoutSlotConfig
+         * @param {?} configAttribute
+         * @param {?=} breakpoint
+         * @return {?}
+         */
+        PageLayoutService.prototype.getResponsiveSlotConfig = /**
+         * Returns a list of slots for a breakpoint specific configuratoin
+         * If there's no specific configuration for the breakpoint,
+         * the closest available configuration will be returned.
+         * @protected
+         * @param {?} layoutSlotConfig
+         * @param {?} configAttribute
+         * @param {?=} breakpoint
+         * @return {?}
+         */
+            function (layoutSlotConfig, configAttribute, breakpoint) {
+                var e_1, _a;
+                /** @type {?} */
+                var slotConfig = ( /** @type {?} */(layoutSlotConfig));
+                // fallback to default slot config
+                if (!breakpoint) {
+                    return slotConfig;
+                }
+                // we have a config for the specific breakpoint
+                if (layoutSlotConfig[breakpoint] &&
+                    layoutSlotConfig[breakpoint].hasOwnProperty(configAttribute)) {
+                    return ( /** @type {?} */(layoutSlotConfig[breakpoint]));
+                }
+                // find closest config
+                /** @type {?} */
+                var all = this.breakpointService.breakpoints;
+                try {
+                    for (var _b = __values(all.splice(0, all.indexOf(breakpoint))), _c = _b.next(); !_c.done; _c = _b.next()) {
+                        var br = _c.value;
+                        if (layoutSlotConfig[br] &&
+                            layoutSlotConfig[br].hasOwnProperty(configAttribute)) {
+                            slotConfig = ( /** @type {?} */(layoutSlotConfig[br]));
+                        }
+                    }
+                }
+                catch (e_1_1) {
+                    e_1 = { error: e_1_1 };
+                }
+                finally {
+                    try {
+                        if (_c && !_c.done && (_a = _b.return))
+                            _a.call(_b);
+                    }
+                    finally {
+                        if (e_1)
+                            throw e_1.error;
+                    }
+                }
+                return slotConfig;
+            };
+        /**
+         * In order to help developers, we print some detailed log information in
+         * case there's no layout configuration available for the given page template
+         * or section. Additionally, the slot positions are printed in the console
+         * in a format that can be copied / paste to the configuration.
+         */
+        /**
+         * In order to help developers, we print some detailed log information in
+         * case there's no layout configuration available for the given page template
+         * or section. Additionally, the slot positions are printed in the console
+         * in a format that can be copied / paste to the configuration.
+         * @private
+         * @param {?} page
+         * @param {?=} section
+         * @return {?}
+         */
+        PageLayoutService.prototype.logMissingLayoutConfig = /**
+         * In order to help developers, we print some detailed log information in
+         * case there's no layout configuration available for the given page template
+         * or section. Additionally, the slot positions are printed in the console
+         * in a format that can be copied / paste to the configuration.
+         * @private
+         * @param {?} page
+         * @param {?=} section
+         * @return {?}
+         */
+            function (page, section) {
+                if (this.config.production) {
+                    return;
+                }
+                if (!this.logSlots[page.template]) {
+                    // the info log is not printed in production
+                    // tslint:disable-next-line: no-console
+                    console.info("Available CMS page slots: '" + Object.keys(page.slots).join("','") + "'");
+                    this.logSlots[page.template] = true;
+                }
+                /** @type {?} */
+                var cacheKey = section || page.template;
+                if (!this.warnLogMessages[cacheKey]) {
+                    console.warn("No layout config found for " + cacheKey + ", you can configure a 'LayoutConfig' to control the rendering of page slots.");
+                    this.warnLogMessages[cacheKey] = true;
+                }
+            };
+        PageLayoutService.decorators = [
+            { type: i0.Injectable }
+        ];
+        /** @nocollapse */
+        PageLayoutService.ctorParameters = function () {
+            return [
+                { type: i1$2.CmsService },
+                { type: LayoutConfig },
+                { type: BreakpointService }
+            ];
+        };
+        return PageLayoutService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var PageLayoutComponent = /** @class */ (function () {
+        function PageLayoutComponent(el, renderer, pageLayoutService) {
+            var _this = this;
+            this.el = el;
+            this.renderer = renderer;
+            this.pageLayoutService = pageLayoutService;
+            this.section$ = new rxjs.BehaviorSubject(undefined);
+            this.layoutName$ = this.section$.pipe(operators.switchMap(function (section) {
+                return section ? rxjs.of(section) : _this.pageLayoutService.templateName$;
+            }), operators.tap(function (name) {
+                _this.styleClass = name;
+            }));
+            this.slots$ = this.section$.pipe(operators.switchMap(function (section) { return _this.pageLayoutService.getSlots(section); }));
+        }
+        Object.defineProperty(PageLayoutComponent.prototype, "section", {
+            set: /**
+             * @param {?} value
+             * @return {?}
+             */ function (value) {
+                this.section$.next(value);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PageLayoutComponent.prototype, "styleClass", {
+            set: /**
+             * @param {?} cls
+             * @return {?}
+             */ function (cls) {
+                if (this.currentClass) {
+                    this.renderer.removeClass(this.el.nativeElement, this.currentClass);
+                }
+                this.renderer.addClass(this.el.nativeElement, cls);
+                this.currentClass = cls;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        PageLayoutComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-page-layout',
+                        template: "<!-- ???? {{ layoutName$ | async }} -->\n<ng-container *cxOutlet=\"(layoutName$ | async)\">\n  <ng-content></ng-content>\n\n  <!-- {{ slots$ | async }} -->\n  <cx-page-slot\n    *ngFor=\"let slot of (slots$ | async)\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-container>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        PageLayoutComponent.ctorParameters = function () {
+            return [
+                { type: i0.ElementRef },
+                { type: i0.Renderer2 },
+                { type: PageLayoutService }
+            ];
+        };
+        PageLayoutComponent.propDecorators = {
+            section: [{ type: i0.Input }]
+        };
+        return PageLayoutComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var PageLayoutModule = /** @class */ (function () {
+        function PageLayoutModule() {
+        }
+        PageLayoutModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [common.CommonModule, OutletModule, PageSlotModule],
+                        declarations: [PageLayoutComponent],
+                        providers: [PageLayoutService],
+                        exports: [PageLayoutComponent],
+                    },] }
+        ];
+        return PageLayoutModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ɵ0 = { cxRoute: 'logout' };
+    var LogoutModule = /** @class */ (function () {
+        function LogoutModule() {
+        }
+        LogoutModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            PageLayoutModule,
+                            i4.RouterModule.forChild([
+                                {
+                                    path: null,
+                                    canActivate: [LogoutGuard],
+                                    component: PageLayoutComponent,
+                                    data: ɵ0,
+                                },
+                            ]),
+                        ],
+                    },] }
+        ];
+        return LogoutModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var RegisterComponent = /** @class */ (function () {
         function RegisterComponent(auth, authRedirectService, userService, globalMessageService, fb) {
             this.auth = auth;
@@ -5098,6 +8788,7 @@
                             common.CommonModule,
                             LoginModule,
                             LoginFormModule,
+                            LogoutModule,
                             forms.ReactiveFormsModule,
                             i4.RouterModule,
                             i1$2.UserModule,
@@ -5468,334 +9159,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var PageLayoutService = /** @class */ (function () {
-        function PageLayoutService(cms, config, breakpointService) {
-            this.cms = cms;
-            this.config = config;
-            this.breakpointService = breakpointService;
-            // we print warn messages on missing layout configs
-            // only once to not polute the console log
-            this.warnLogMessages = {};
-            this.logSlots = {};
-        }
-        /**
-         * @param {?=} section
-         * @return {?}
-         */
-        PageLayoutService.prototype.getSlots = /**
-         * @param {?=} section
-         * @return {?}
-         */
-            function (section) {
-                var _this = this;
-                return this.breakpointService.breakpoint$.pipe(operators.switchMap(function (breakpoint) {
-                    return _this.page$.pipe(operators.map(function (page) {
-                        /** @type {?} */
-                        var config = _this.getSlotConfig(page.template, 'slots', section, breakpoint);
-                        if (config && config.slots) {
-                            return config.slots;
-                        }
-                        else if (!section) {
-                            _this.logMissingLayoutConfig(page);
-                            return Object.keys(page.slots);
-                        }
-                        else {
-                            _this.logMissingLayoutConfig(page, section);
-                            return [];
-                        }
-                    }));
-                }), operators.distinctUntilChanged());
-            };
-        Object.defineProperty(PageLayoutService.prototype, "page$", {
-            get: /**
-             * @return {?}
-             */ function () {
-                return this.cms.getCurrentPage().pipe(operators.filter(Boolean));
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(PageLayoutService.prototype, "templateName$", {
-            get: /**
-             * @return {?}
-             */ function () {
-                return this.page$.pipe(operators.filter(function (page) { return !!page.template; }), operators.map(function (page) { return page.template; }));
-            },
-            enumerable: true,
-            configurable: true
-        });
-        /**
-         * load slots from the layout configuration. The breakpoint is used
-         * to load a specific configuration for the given breakpoint. If there's
-         * no configuration available for the given breakpoint the default slot
-         * configuration is returned.
-         */
-        /**
-         * load slots from the layout configuration. The breakpoint is used
-         * to load a specific configuration for the given breakpoint. If there's
-         * no configuration available for the given breakpoint the default slot
-         * configuration is returned.
-         * @protected
-         * @param {?} templateUid
-         * @param {?} configAttribute
-         * @param {?=} section
-         * @param {?=} breakpoint
-         * @return {?}
-         */
-        PageLayoutService.prototype.getSlotConfig = /**
-         * load slots from the layout configuration. The breakpoint is used
-         * to load a specific configuration for the given breakpoint. If there's
-         * no configuration available for the given breakpoint the default slot
-         * configuration is returned.
-         * @protected
-         * @param {?} templateUid
-         * @param {?} configAttribute
-         * @param {?=} section
-         * @param {?=} breakpoint
-         * @return {?}
-         */
-            function (templateUid, configAttribute, section, breakpoint) {
-                /** @type {?} */
-                var pageTemplateConfig = this.config.layoutSlots[templateUid];
-                if (section) {
-                    return this.getSlotConfigForSection(templateUid, configAttribute, section, breakpoint);
-                }
-                if (pageTemplateConfig) {
-                    return this.getResponsiveSlotConfig(( /** @type {?} */(pageTemplateConfig)), configAttribute, breakpoint);
-                }
-            };
-        /**
-         * @protected
-         * @param {?} templateUid
-         * @param {?} configAttribute
-         * @param {?=} section
-         * @param {?=} breakpoint
-         * @return {?}
-         */
-        PageLayoutService.prototype.getSlotConfigForSection = /**
-         * @protected
-         * @param {?} templateUid
-         * @param {?} configAttribute
-         * @param {?=} section
-         * @param {?=} breakpoint
-         * @return {?}
-         */
-            function (templateUid, configAttribute, section, breakpoint) {
-                /** @type {?} */
-                var pageTemplateConfig = this.config.layoutSlots[templateUid];
-                if (!pageTemplateConfig) {
-                    return null;
-                }
-                // if there's no section config on the page layout
-                // we fall back to the global section config
-                /** @type {?} */
-                var sectionConfig = pageTemplateConfig[section]
-                    ? pageTemplateConfig[section]
-                    : this.config.layoutSlots[section];
-                if (!sectionConfig) {
-                    return null;
-                }
-                /** @type {?} */
-                var responsiveConfig = this.getResponsiveSlotConfig(( /** @type {?} */(sectionConfig)), configAttribute, breakpoint);
-                if (responsiveConfig.hasOwnProperty(configAttribute)) {
-                    return responsiveConfig;
-                }
-                else if (pageTemplateConfig[section].hasOwnProperty(configAttribute)) {
-                    return pageTemplateConfig[section];
-                }
-                else if (this.config.layoutSlots[section]) {
-                    return ( /** @type {?} */(this.config.layoutSlots[section]));
-                }
-            };
-        /**
-         * Returns a list of slots for a breakpoint specific configuratoin
-         * If there's no specific configuration for the breakpoint,
-         * the closest available configuration will be returned.
-         */
-        /**
-         * Returns a list of slots for a breakpoint specific configuratoin
-         * If there's no specific configuration for the breakpoint,
-         * the closest available configuration will be returned.
-         * @protected
-         * @param {?} layoutSlotConfig
-         * @param {?} configAttribute
-         * @param {?=} breakpoint
-         * @return {?}
-         */
-        PageLayoutService.prototype.getResponsiveSlotConfig = /**
-         * Returns a list of slots for a breakpoint specific configuratoin
-         * If there's no specific configuration for the breakpoint,
-         * the closest available configuration will be returned.
-         * @protected
-         * @param {?} layoutSlotConfig
-         * @param {?} configAttribute
-         * @param {?=} breakpoint
-         * @return {?}
-         */
-            function (layoutSlotConfig, configAttribute, breakpoint) {
-                var e_1, _a;
-                /** @type {?} */
-                var slotConfig = ( /** @type {?} */(layoutSlotConfig));
-                // fallback to default slot config
-                if (!breakpoint) {
-                    return slotConfig;
-                }
-                // we have a config for the specific breakpoint
-                if (layoutSlotConfig[breakpoint] &&
-                    layoutSlotConfig[breakpoint].hasOwnProperty(configAttribute)) {
-                    return ( /** @type {?} */(layoutSlotConfig[breakpoint]));
-                }
-                // find closest config
-                /** @type {?} */
-                var all = this.breakpointService.breakpoints;
-                try {
-                    for (var _b = __values(all.splice(0, all.indexOf(breakpoint))), _c = _b.next(); !_c.done; _c = _b.next()) {
-                        var br = _c.value;
-                        if (layoutSlotConfig[br] &&
-                            layoutSlotConfig[br].hasOwnProperty(configAttribute)) {
-                            slotConfig = ( /** @type {?} */(layoutSlotConfig[br]));
-                        }
-                    }
-                }
-                catch (e_1_1) {
-                    e_1 = { error: e_1_1 };
-                }
-                finally {
-                    try {
-                        if (_c && !_c.done && (_a = _b.return))
-                            _a.call(_b);
-                    }
-                    finally {
-                        if (e_1)
-                            throw e_1.error;
-                    }
-                }
-                return slotConfig;
-            };
-        /**
-         * In order to help developers, we print some detailed log information in
-         * case there's no layout configuration available for the given page template
-         * or section. Additionally, the slot positions are printed in the console
-         * in a format that can be copied / paste to the configuration.
-         */
-        /**
-         * In order to help developers, we print some detailed log information in
-         * case there's no layout configuration available for the given page template
-         * or section. Additionally, the slot positions are printed in the console
-         * in a format that can be copied / paste to the configuration.
-         * @private
-         * @param {?} page
-         * @param {?=} section
-         * @return {?}
-         */
-        PageLayoutService.prototype.logMissingLayoutConfig = /**
-         * In order to help developers, we print some detailed log information in
-         * case there's no layout configuration available for the given page template
-         * or section. Additionally, the slot positions are printed in the console
-         * in a format that can be copied / paste to the configuration.
-         * @private
-         * @param {?} page
-         * @param {?=} section
-         * @return {?}
-         */
-            function (page, section) {
-                if (this.config.production) {
-                    return;
-                }
-                if (!this.logSlots[page.template]) {
-                    // the info log is not printed in production
-                    // tslint:disable-next-line: no-console
-                    console.info("Available CMS page slots: '" + Object.keys(page.slots).join("','") + "'");
-                    this.logSlots[page.template] = true;
-                }
-                /** @type {?} */
-                var cacheKey = section || page.template;
-                if (!this.warnLogMessages[cacheKey]) {
-                    console.warn("No layout config found for " + cacheKey + ", you can configure a 'LayoutConfig' to control the rendering of page slots.");
-                    this.warnLogMessages[cacheKey] = true;
-                }
-            };
-        PageLayoutService.decorators = [
-            { type: i0.Injectable }
-        ];
-        /** @nocollapse */
-        PageLayoutService.ctorParameters = function () {
-            return [
-                { type: i1$2.CmsService },
-                { type: LayoutConfig },
-                { type: BreakpointService }
-            ];
-        };
-        return PageLayoutService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var PageLayoutComponent = /** @class */ (function () {
-        function PageLayoutComponent(el, renderer, pageLayoutService) {
-            var _this = this;
-            this.el = el;
-            this.renderer = renderer;
-            this.pageLayoutService = pageLayoutService;
-            this.section$ = new rxjs.BehaviorSubject(undefined);
-            this.layoutName$ = this.section$.pipe(operators.switchMap(function (section) {
-                return section ? rxjs.of(section) : _this.pageLayoutService.templateName$;
-            }), operators.tap(function (name) {
-                _this.styleClass = name;
-            }));
-            this.slots$ = this.section$.pipe(operators.switchMap(function (section) { return _this.pageLayoutService.getSlots(section); }));
-        }
-        Object.defineProperty(PageLayoutComponent.prototype, "section", {
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */ function (value) {
-                this.section$.next(value);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(PageLayoutComponent.prototype, "styleClass", {
-            set: /**
-             * @param {?} cls
-             * @return {?}
-             */ function (cls) {
-                if (this.currentClass) {
-                    this.renderer.removeClass(this.el.nativeElement, this.currentClass);
-                }
-                this.renderer.addClass(this.el.nativeElement, cls);
-                this.currentClass = cls;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        PageLayoutComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-page-layout',
-                        template: "<!-- ???? {{ layoutName$ | async }} -->\n<ng-container *cxOutlet=\"(layoutName$ | async)\">\n  <ng-content></ng-content>\n\n  <!-- {{ slots$ | async }} -->\n  <cx-page-slot\n    *ngFor=\"let slot of (slots$ | async)\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-container>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        PageLayoutComponent.ctorParameters = function () {
-            return [
-                { type: i0.ElementRef },
-                { type: i0.Renderer2 },
-                { type: PageLayoutService }
-            ];
-        };
-        PageLayoutComponent.propDecorators = {
-            section: [{ type: i0.Input }]
-        };
-        return PageLayoutComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var CmsRoutesService = /** @class */ (function () {
         function CmsRoutesService(router, cmsMapping) {
             this.router = router;
@@ -6044,460 +9407,6 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
-    var cartComponents = {
-        emptyCartText: {
-            flexType: 'CMSParagraphComponent',
-            typeCode: 'CMSParagraphComponent',
-            content: "\n      <h2>Your shopping cart is empty</h2>\n      <p>Suggestions</p>\n      <ul>\n          <li>\n          Browse our products by selecting a category above\n          </li>\n      </ul>",
-        },
-    };
-    /** @type {?} */
-    var defaultCartPageConfig = {
-        ignoreBackend: false,
-        pageId: 'cartPage',
-        type: 'ContentPage',
-        template: 'CartPageTemplate',
-        title: 'Cart',
-        slots: {
-            EmptyCartMiddleContent: {
-                componentIds: ['emptyCartText'],
-            },
-        },
-    };
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @type {?} */
-    var headerComponents = {
-        SkipLinkComponent: {
-            typeCode: 'SkipLinkComponent',
-            flexType: 'SkipLinkComponent',
-            uid: 'SkipLinkComponent',
-        },
-        HamburgerMenuComponent: {
-            typeCode: 'HamburgerMenuComponent',
-            flexType: 'HamburgerMenuComponent',
-        },
-        LanguageComponent: {
-            typeCode: 'CMSSiteContextComponent',
-            flexType: 'CMSSiteContextComponent',
-            context: 'LANGUAGE',
-        },
-        CurrencyComponent: {
-            typeCode: 'CMSSiteContextComponent',
-            flexType: 'CMSSiteContextComponent',
-            context: 'CURRENCY',
-        },
-        LanguageCurrencyComponent: {
-            typeCode: 'LanguageCurrencyComponent',
-            flexType: 'LanguageCurrencyComponent',
-        },
-        StoreFinder: {
-            typeCode: 'CMSLinkComponent',
-            flexType: 'CMSLinkComponent',
-            linkName: 'Find a Store',
-            url: '/store-finder',
-        },
-        BreadcrumbComponent: {
-            typeCode: 'BreadcrumbComponent',
-            flexType: 'BreadcrumbComponent',
-        },
-        Logo: {
-            typeCode: 'SimpleBannerComponent',
-            flexType: 'SimpleBannerComponent',
-            uid: 'logo',
-            media: {
-                mime: 'svg/image/svg+xml',
-                url: 'https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg',
-            },
-            urlLink: '/',
-        },
-        SearchBox: {
-            typeCode: 'SearchBoxComponent',
-            flexType: 'SearchBoxComponent',
-            uid: 'SearchBoxComponent',
-        },
-        MiniCart: {
-            typeCode: 'MiniCartComponent',
-            flexType: 'MiniCartComponent',
-            uid: 'MiniCartComponent',
-        },
-        LoginComponent: {
-            typeCode: 'LoginComponent',
-            flexType: 'LoginComponent',
-            uid: 'LoginComponent',
-        },
-        CategoryNavigationComponent: {
-            typeCode: 'CategoryNavigationComponent',
-            flexType: 'CategoryNavigationComponent',
-            uid: 'ElectronicsCategoryNavComponent',
-            navigationNode: {
-                uid: 'ElectronicsCategoryNavNode',
-                children: [
-                    {
-                        uid: 'CameraLensesNavNode',
-                        title: 'Electronic catalog',
-                        entries: [
-                            {
-                                itemId: 'CameraLensesCategoryLink',
-                                itemSuperType: 'AbstractCMSComponent',
-                                itemType: 'CMSLinkComponent',
-                            },
-                        ],
-                    },
-                ],
-            },
-        },
-    };
-    /** @type {?} */
-    var defaultPageHeaderConfig = {
-        PreHeader: {
-            componentIds: ['SkipLinkComponent', 'HamburgerMenuComponent'],
-        },
-        SiteContext: {
-            componentIds: ['LanguageComponent', 'CurrencyComponent'],
-        },
-        SiteLinks: {
-            componentIds: ['StoreFinder'],
-        },
-        SiteLogo: {
-            componentIds: ['Logo'],
-        },
-        SearchBox: {
-            componentIds: ['SearchBox'],
-        },
-        MiniCart: {
-            componentIds: ['MiniCart'],
-        },
-        SiteLogin: {
-            componentIds: ['LoginComponent'],
-        },
-        NavigationBar: {
-            componentIds: ['CategoryNavigationComponent'],
-        },
-        BottomHeaderSlot: {
-            componentIds: ['BreadcrumbComponent'],
-        },
-    };
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @type {?} */
-    var defaultPdpComponents = {
-        CMSProductImages: {
-            typeCode: 'CMSProductImages',
-            flexType: 'CMSProductImages',
-            uid: 'CMSProductImages',
-        },
-    };
-    /** @type {?} */
-    var defaultPdpSlots = {
-        ProductDetails: {
-            componentIds: ['CMSProductImages'],
-        },
-    };
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /**
-     * @return {?}
-     */
-    function defaultCmsContentConfig() {
-        return {
-            cmsStructure: {
-                components: __assign({}, headerComponents, cartComponents, defaultPdpComponents),
-                slots: __assign({}, defaultPageHeaderConfig, defaultPdpSlots),
-                pages: [defaultCartPageConfig],
-            },
-        };
-    }
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var PageLayoutModule = /** @class */ (function () {
-        function PageLayoutModule() {
-        }
-        PageLayoutModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [common.CommonModule, OutletModule, PageSlotModule],
-                        declarations: [PageLayoutComponent],
-                        providers: [PageLayoutService],
-                        exports: [PageLayoutComponent],
-                    },] }
-        ];
-        return PageLayoutModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /**
-     * @abstract
-     */
-    var /**
-     * @abstract
-     */ PWAModuleConfig = /** @class */ (function (_super) {
-        __extends(PWAModuleConfig, _super);
-        function PWAModuleConfig() {
-            return _super !== null && _super.apply(this, arguments) || this;
-        }
-        return PWAModuleConfig;
-    }(i1$2.ServerConfig));
-    /** @type {?} */
-    var defaultPWAModuleConfig = {
-        pwa: {
-            enabled: false,
-            addToHomeScreen: false,
-        },
-    };
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var AddToHomeScreenService = /** @class */ (function () {
-        function AddToHomeScreenService(config, globalMessageService, winRef) {
-            this.config = config;
-            this.globalMessageService = globalMessageService;
-            this.winRef = winRef;
-            this.canPrompt = new rxjs.BehaviorSubject(false);
-            this.canPrompt$ = this.canPrompt.asObservable();
-            if (this.config.pwa.addToHomeScreen) {
-                this.init();
-            }
-        }
-        /**
-         * @return {?}
-         */
-        AddToHomeScreenService.prototype.init = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                if (this.winRef.nativeWindow) {
-                    this.winRef.nativeWindow.addEventListener('beforeinstallprompt', function (event) {
-                        event.preventDefault();
-                        _this.deferredEvent = event;
-                        _this.enableAddToHomeScreen();
-                    });
-                    this.winRef.nativeWindow.addEventListener('appinstalled', function () {
-                        _this.globalMessageService.add({ key: 'pwa.addedToHomeScreen' }, i1$2.GlobalMessageType.MSG_TYPE_CONFIRMATION);
-                        _this.disableAddToHomeScreen();
-                        _this.deferredEvent = null;
-                    });
-                }
-            };
-        /**
-         * @return {?}
-         */
-        AddToHomeScreenService.prototype.enableAddToHomeScreen = /**
-         * @return {?}
-         */
-            function () {
-                this.canPrompt.next(true);
-            };
-        /**
-         * @return {?}
-         */
-        AddToHomeScreenService.prototype.disableAddToHomeScreen = /**
-         * @return {?}
-         */
-            function () {
-                this.canPrompt.next(false);
-            };
-        /**
-         * @return {?}
-         */
-        AddToHomeScreenService.prototype.firePrompt = /**
-         * @return {?}
-         */
-            function () {
-                if (this.deferredEvent) {
-                    this.deferredEvent.prompt();
-                }
-            };
-        AddToHomeScreenService.decorators = [
-            { type: i0.Injectable }
-        ];
-        /** @nocollapse */
-        AddToHomeScreenService.ctorParameters = function () {
-            return [
-                { type: PWAModuleConfig },
-                { type: i1$2.GlobalMessageService },
-                { type: i1$2.WindowRef }
-            ];
-        };
-        return AddToHomeScreenService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /**
-     * @abstract
-     */
-    var /**
-     * @abstract
-     */ AddToHomeScreenComponent = /** @class */ (function () {
-        function AddToHomeScreenComponent(addToHomeScreenService) {
-            this.addToHomeScreenService = addToHomeScreenService;
-        }
-        /**
-         * @return {?}
-         */
-        AddToHomeScreenComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                this.canPrompt$ = this.addToHomeScreenService.canPrompt$;
-            };
-        /**
-         * @return {?}
-         */
-        AddToHomeScreenComponent.prototype.prompt = /**
-         * @return {?}
-         */
-            function () {
-                this.addToHomeScreenService.firePrompt();
-            };
-        return AddToHomeScreenComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var AddToHomeScreenBannerComponent = /** @class */ (function (_super) {
-        __extends(AddToHomeScreenBannerComponent, _super);
-        function AddToHomeScreenBannerComponent(addToHomeScreenService) {
-            var _this = _super.call(this, addToHomeScreenService) || this;
-            _this.addToHomeScreenService = addToHomeScreenService;
-            return _this;
-        }
-        AddToHomeScreenBannerComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-add-to-home-screen-banner',
-                        template: "<div *ngIf=\"(canPrompt$ | async)\">\n  <div class=\"cx-add-to-home-screen-banner\">\n    <div class=\"cx-add-to-home-screen-banner-inner\">\n      <p>\n        {{ 'pwa.addSapStorefront' | cxTranslate }}\n      </p>\n      <ul>\n        <li>{{ 'pwa.noInstallationNeeded' | cxTranslate }}</li>\n        <li>{{ 'pwa.fastAccessToApplication' | cxTranslate }}</li>\n      </ul>\n      <button (click)=\"prompt()\" class=\"btn btn-primary\">\n        {{ 'pwa.addToHomeScreen' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n"
-                    }] }
-        ];
-        /** @nocollapse */
-        AddToHomeScreenBannerComponent.ctorParameters = function () {
-            return [
-                { type: AddToHomeScreenService }
-            ];
-        };
-        return AddToHomeScreenBannerComponent;
-    }(AddToHomeScreenComponent));
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var AddToHomeScreenBtnComponent = /** @class */ (function (_super) {
-        __extends(AddToHomeScreenBtnComponent, _super);
-        function AddToHomeScreenBtnComponent(addToHomeScreenService) {
-            var _this = _super.call(this, addToHomeScreenService) || this;
-            _this.addToHomeScreenService = addToHomeScreenService;
-            return _this;
-        }
-        AddToHomeScreenBtnComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-add-to-home-screen-btn',
-                        template: "<span (click)=\"prompt()\">\n  <ng-content *ngIf=\"(canPrompt$ | async)\"></ng-content>\n</span>\n"
-                    }] }
-        ];
-        /** @nocollapse */
-        AddToHomeScreenBtnComponent.ctorParameters = function () {
-            return [
-                { type: AddToHomeScreenService }
-            ];
-        };
-        return AddToHomeScreenBtnComponent;
-    }(AddToHomeScreenComponent));
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /**
-     * @param {?} pwaConfig
-     * @return {?}
-     */
-    function pwaConfigurationFactory(pwaConfig) {
-        return { enabled: (pwaConfig.production && pwaConfig.pwa.enabled) || false };
-    }
-    /**
-     * @param {?} addToHomeScreenService
-     * @return {?}
-     */
-    function pwaFactory(addToHomeScreenService) {
-        /** @type {?} */
-        var result = function () { return addToHomeScreenService; };
-        return result;
-    }
-    var PwaModule = /** @class */ (function () {
-        function PwaModule() {
-        }
-        PwaModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i1$2.ConfigModule.withConfig(defaultPWAModuleConfig),
-                            serviceWorker.ServiceWorkerModule.register('/ngsw-worker.js'),
-                            i1$2.I18nModule,
-                        ],
-                        providers: [
-                            { provide: PWAModuleConfig, useExisting: i1$2.Config },
-                            {
-                                provide: serviceWorker.ɵangular_packages_service_worker_service_worker_b,
-                                useFactory: pwaConfigurationFactory,
-                                deps: [i1$2.Config],
-                            },
-                            {
-                                provide: i0.APP_INITIALIZER,
-                                useFactory: pwaFactory,
-                                deps: [AddToHomeScreenService],
-                                multi: true,
-                            },
-                            AddToHomeScreenService,
-                        ],
-                        declarations: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
-                        exports: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
-                    },] }
-        ];
-        return PwaModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @type {?} */
     var cmsRoute = {
         path: '**',
         canActivate: [CmsPageGuard],
@@ -6521,7 +9430,7 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var ɵ0 = addCmsRoute;
+    var ɵ0$1 = addCmsRoute;
     var CmsRouteModule = /** @class */ (function () {
         function CmsRouteModule() {
         }
@@ -6532,1846 +9441,12 @@
                                 provide: i0.APP_INITIALIZER,
                                 multi: true,
                                 deps: [i0.Injector],
-                                useFactory: ɵ0,
+                                useFactory: ɵ0$1,
                             },
                         ],
                     },] }
         ];
         return CmsRouteModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ProductPageComponent = /** @class */ (function () {
-        function ProductPageComponent() {
-        }
-        ProductPageComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-product-page',
-                        template: "<cx-page-layout>\n  <ng-template cxOutletRef=\"ProductDetails\" cxOutletPos=\"after\">\n    <cx-product-details></cx-product-details>\n  </ng-template>\n</cx-page-layout>\n"
-                    }] }
-        ];
-        return ProductPageComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var SharedCarouselService = /** @class */ (function () {
-        function SharedCarouselService() {
-            this.MAX_WIDTH = 360;
-            this.MAX_ITEM_SIZE = 4;
-            this.SPEED = 250;
-            this.itemSize$ = rxjs.of(this.MAX_ITEM_SIZE);
-            this.activeItem$ = rxjs.of(0);
-            this.activeItemWithDelay$ = rxjs.of(0);
-        }
-        /**
-         * @return {?}
-         */
-        SharedCarouselService.prototype.getActiveItem = /**
-         * @return {?}
-         */
-            function () {
-                return this.activeItem$;
-            };
-        /**
-         * @return {?}
-         */
-        SharedCarouselService.prototype.getActiveItemWithDelay = /**
-         * @return {?}
-         */
-            function () {
-                return this.activeItemWithDelay$;
-            };
-        /**
-         * @return {?}
-         */
-        SharedCarouselService.prototype.getItemSize = /**
-         * @return {?}
-         */
-            function () {
-                return this.itemSize$;
-            };
-        /**
-         * The number of items shown in the carousel can be calculated
-         * the standard implemenattions uses the element size to calculate
-         * the items that fit in the carousel.
-         * This method is called in `ngOnInit`.
-         */
-        /**
-         * The number of items shown in the carousel can be calculated
-         * the standard implemenattions uses the element size to calculate
-         * the items that fit in the carousel.
-         * This method is called in `ngOnInit`.
-         * @param {?} window
-         * @param {?} nativeElement
-         * @return {?}
-         */
-        SharedCarouselService.prototype.setItemSize = /**
-         * The number of items shown in the carousel can be calculated
-         * the standard implemenattions uses the element size to calculate
-         * the items that fit in the carousel.
-         * This method is called in `ngOnInit`.
-         * @param {?} window
-         * @param {?} nativeElement
-         * @return {?}
-         */
-            function (window, nativeElement) {
-                var _this = this;
-                this.itemSize$ = !window
-                    ? rxjs.of(this.MAX_ITEM_SIZE)
-                    : rxjs.fromEvent(window, 'resize').pipe(operators.map(function () { return (( /** @type {?} */(nativeElement))).clientWidth; }), operators.startWith((( /** @type {?} */(nativeElement))).clientWidth), 
-                    // avoid to much calls
-                    operators.debounceTime(100), operators.map(function (innerWidth) {
-                        /** @type {?} */
-                        var itemsPerPage = Math.round(innerWidth / _this.MAX_WIDTH);
-                        return itemsPerPage > 2 ? _this.MAX_ITEM_SIZE : itemsPerPage;
-                    }), 
-                    // only emit new size when the size changed
-                    operators.distinctUntilChanged());
-            };
-        /**
-         * @param {?} newActiveItem
-         * @return {?}
-         */
-        SharedCarouselService.prototype.setItemAsActive = /**
-         * @param {?} newActiveItem
-         * @return {?}
-         */
-            function (newActiveItem) {
-                var _this = this;
-                this.activeItem$ = this.itemSize$.pipe(operators.map(function (itemSize) { return _this.setItem(newActiveItem, itemSize); }));
-            };
-        /**
-         * @return {?}
-         */
-        SharedCarouselService.prototype.setPreviousItemAsActive = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                this.activeItem$ = this.activeItem$.pipe(operators.withLatestFrom(this.itemSize$), operators.map(function (_a) {
-                    var _b = __read(_a, 2), activeItem = _b[0], itemSize = _b[1];
-                    return _this.setItem(activeItem - itemSize, itemSize);
-                }));
-            };
-        /**
-         * @return {?}
-         */
-        SharedCarouselService.prototype.setNextItemAsActive = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                this.activeItem$ = this.activeItem$.pipe(operators.withLatestFrom(this.itemSize$), operators.map(function (_a) {
-                    var _b = __read(_a, 2), activeItem = _b[0], itemSize = _b[1];
-                    return _this.setItem(activeItem + itemSize, itemSize);
-                }));
-            };
-        /**
-         * @private
-         * @param {?} newActiveItem
-         * @param {?} itemSize
-         * @return {?}
-         */
-        SharedCarouselService.prototype.setItem = /**
-         * @private
-         * @param {?} newActiveItem
-         * @param {?} itemSize
-         * @return {?}
-         */
-            function (newActiveItem, itemSize) {
-                this.activeItemWithDelay$ = rxjs.of(newActiveItem).pipe(operators.delay(this.getDelayValue(itemSize)));
-                return newActiveItem;
-            };
-        /**
-         * @private
-         * @param {?} itemSize
-         * @return {?}
-         */
-        SharedCarouselService.prototype.getDelayValue = /**
-         * @private
-         * @param {?} itemSize
-         * @return {?}
-         */
-            function (itemSize) {
-                return (itemSize - 1) * this.SPEED;
-            };
-        SharedCarouselService.decorators = [
-            { type: i0.Injectable }
-        ];
-        /** @nocollapse */
-        SharedCarouselService.ctorParameters = function () { return []; };
-        return SharedCarouselService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ProductCarouselService = /** @class */ (function () {
-        function ProductCarouselService(component, productService) {
-            this.component = component;
-            this.productService = productService;
-        }
-        /**
-         * @return {?}
-         */
-        ProductCarouselService.prototype.getTitle = /**
-         * @return {?}
-         */
-            function () {
-                return this.title$;
-            };
-        /**
-         * @return {?}
-         */
-        ProductCarouselService.prototype.fetchTitle = /**
-         * @return {?}
-         */
-            function () {
-                this.title$ = this.component.data$.pipe(operators.map(function (data) {
-                    return data.title;
-                }));
-            };
-        /**
-         * @return {?}
-         */
-        ProductCarouselService.prototype.getItems = /**
-         * @return {?}
-         */
-            function () {
-                return this.items$;
-            };
-        /**
-         * Maps the item codes from CMS component to an array of `Product` observables.
-         */
-        /**
-         * Maps the item codes from CMS component to an array of `Product` observables.
-         * @return {?}
-         */
-        ProductCarouselService.prototype.fetchItems = /**
-         * Maps the item codes from CMS component to an array of `Product` observables.
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                this.items$ = this.component.data$.pipe(operators.filter(function (data) { return data && !!data.productCodes; }), operators.map(function (data) {
-                    /** @type {?} */
-                    var productCodes = data.productCodes.split(' ');
-                    return productCodes.map(function (code) { return _this.productService.get(code); });
-                }));
-            };
-        ProductCarouselService.decorators = [
-            { type: i0.Injectable }
-        ];
-        /** @nocollapse */
-        ProductCarouselService.ctorParameters = function () {
-            return [
-                { type: CmsComponentData },
-                { type: i1$2.ProductService }
-            ];
-        };
-        return ProductCarouselService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ProductCarouselComponent = /** @class */ (function () {
-        function ProductCarouselComponent(winRef, el, productCarouselService, sharedCarouselService) {
-            this.el = el;
-            this.productCarouselService = productCarouselService;
-            this.sharedCarouselService = sharedCarouselService;
-            this.window = winRef.nativeWindow;
-        }
-        /**
-         * @return {?}
-         */
-        ProductCarouselComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                this.productCarouselService.fetchTitle();
-                this.sharedCarouselService.setItemSize(this.window, this.el.nativeElement);
-                this.productCarouselService.fetchItems();
-                this.sharedCarouselService.setItemAsActive(0);
-            };
-        ProductCarouselComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-product-carousel',
-                        template: "<h3 *ngIf=\"(productCarouselService.getTitle() | async) as title\">\n  {{ title }}\n</h3>\n\n<ng-container\n  *ngIf=\"{\n    maxItemSize: sharedCarouselService.getItemSize() | async,\n    products: productCarouselService.getItems() | async,\n    activeItem: sharedCarouselService.getActiveItemWithDelay() | async,\n    active: sharedCarouselService.getActiveItem() | async\n  } as carousel\"\n>\n  <div class=\"cx-carousel\" [ngClass]=\"'size-' + carousel.maxItemSize\">\n    <button\n      class=\"previous\"\n      (click)=\"sharedCarouselService.setPreviousItemAsActive()\"\n      [disabled]=\"carousel.activeItem === 0\"\n    ></button>\n\n    <div class=\"groups\">\n      <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n        <div class=\"group\" *ngIf=\"i % carousel.maxItemSize === 0\">\n          <ng-container\n            *ngFor=\"\n              let product$ of (carousel.products\n                | slice: i:i + carousel.maxItemSize)\n            \"\n          >\n            <a\n              *ngIf=\"(product$ | async) as product\"\n              class=\"product\"\n              [class.active]=\"i === carousel.activeItem\"\n              [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n            >\n              <cx-media [container]=\"product.images?.PRIMARY\" format=\"product\">\n              </cx-media>\n\n              <h4>{{ product.name }}</h4>\n              <div class=\"price\">{{ product.price?.formattedValue }}</div>\n            </a>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      class=\"next\"\n      (click)=\"sharedCarouselService.setNextItemAsActive()\"\n      [disabled]=\"\n        carousel.activeItem > carousel.products.length - carousel.maxItemSize\n      \"\n    ></button>\n  </div>\n\n  <div class=\"indicators\">\n    <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n      <button\n        *ngIf=\"i % carousel.maxItemSize === 0\"\n        (click)=\"sharedCarouselService.setItemAsActive(i)\"\n        [disabled]=\"i === carousel.activeItem\"\n      ></button>\n    </ng-container></div\n></ng-container>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        ProductCarouselComponent.ctorParameters = function () {
-            return [
-                { type: i1$2.WindowRef },
-                { type: i0.ElementRef },
-                { type: ProductCarouselService },
-                { type: SharedCarouselService }
-            ];
-        };
-        return ProductCarouselComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ProductCarouselModule = /** @class */ (function () {
-        function ProductCarouselModule() {
-        }
-        ProductCarouselModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i4.RouterModule,
-                            MediaModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    ProductCarouselComponent: {
-                                        selector: 'cx-product-carousel',
-                                        providers: [
-                                            {
-                                                provide: ProductCarouselService,
-                                                useClass: ProductCarouselService,
-                                                deps: [CmsComponentData, i1$2.ProductService],
-                                            },
-                                            {
-                                                provide: SharedCarouselService,
-                                                useClass: SharedCarouselService,
-                                                deps: [],
-                                            },
-                                        ],
-                                    },
-                                },
-                            }))),
-                            i1$2.UrlModule,
-                        ],
-                        declarations: [ProductCarouselComponent],
-                        entryComponents: [ProductCarouselComponent],
-                        exports: [ProductCarouselComponent],
-                    },] }
-        ];
-        return ProductCarouselModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ProductReferencesService = /** @class */ (function () {
-        function ProductReferencesService(component, referenceService, routerService) {
-            this.component = component;
-            this.referenceService = referenceService;
-            this.routerService = routerService;
-        }
-        /**
-         * @return {?}
-         */
-        ProductReferencesService.prototype.getTitle = /**
-         * @return {?}
-         */
-            function () {
-                return this.title$;
-            };
-        /**
-         * @return {?}
-         */
-        ProductReferencesService.prototype.fetchTitle = /**
-         * @return {?}
-         */
-            function () {
-                this.title$ = this.component.data$.pipe(operators.map(function (data) {
-                    return data.title;
-                }));
-            };
-        /**
-         * @return {?}
-         */
-        ProductReferencesService.prototype.getDisplayProductTitles = /**
-         * @return {?}
-         */
-            function () {
-                return this.displayProductTitles$.pipe(operators.map(function (data) { return Boolean(JSON.parse(data.toLowerCase())); }));
-            };
-        /**
-         * @return {?}
-         */
-        ProductReferencesService.prototype.fetchDisplayProductTitles = /**
-         * @return {?}
-         */
-            function () {
-                this.displayProductTitles$ = this.component.data$.pipe(operators.map(function (data) {
-                    return data.displayProductTitles;
-                }));
-            };
-        /**
-         * @return {?}
-         */
-        ProductReferencesService.prototype.getDisplayProductPrices = /**
-         * @return {?}
-         */
-            function () {
-                return this.displayProductPrices$.pipe(operators.map(function (data) { return Boolean(JSON.parse(data.toLowerCase())); }));
-            };
-        /**
-         * @return {?}
-         */
-        ProductReferencesService.prototype.fetchDisplayProductPrices = /**
-         * @return {?}
-         */
-            function () {
-                this.displayProductPrices$ = this.component.data$.pipe(operators.map(function (data) {
-                    return data.displayProductPrices;
-                }));
-            };
-        /**
-         * @return {?}
-         */
-        ProductReferencesService.prototype.getReferenceType = /**
-         * @return {?}
-         */
-            function () {
-                return this.component.data$.pipe(operators.map(function (data) { return data.productReferenceTypes; }));
-            };
-        /**
-         * @return {?}
-         */
-        ProductReferencesService.prototype.getProductCode = /**
-         * @return {?}
-         */
-            function () {
-                return this.routerService
-                    .getRouterState()
-                    .pipe(operators.map(function (data) { return data.state.params.productCode; }));
-            };
-        /**
-         * @return {?}
-         */
-        ProductReferencesService.prototype.getReferenceList = /**
-         * @return {?}
-         */
-            function () {
-                return this.items$;
-            };
-        /**
-         * @param {?=} pageSize
-         * @return {?}
-         */
-        ProductReferencesService.prototype.setReferenceList = /**
-         * @param {?=} pageSize
-         * @return {?}
-         */
-            function (pageSize) {
-                var _this = this;
-                this.items$ = rxjs.combineLatest(this.getProductCode(), this.getReferenceType()).pipe(operators.map(function (data) { return ({ productCode: data[0], referenceType: data[1] }); }), operators.switchMap(function (data) {
-                    return _this.referenceService.get(data.productCode, data.referenceType, pageSize);
-                }));
-            };
-        ProductReferencesService.decorators = [
-            { type: i0.Injectable }
-        ];
-        /** @nocollapse */
-        ProductReferencesService.ctorParameters = function () {
-            return [
-                { type: CmsComponentData },
-                { type: i1$2.ProductReferenceService },
-                { type: i1$2.RoutingService }
-            ];
-        };
-        return ProductReferencesService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ProductReferencesComponent = /** @class */ (function () {
-        function ProductReferencesComponent(winRef, el, productReferencesService, sharedCarouselService) {
-            this.el = el;
-            this.productReferencesService = productReferencesService;
-            this.sharedCarouselService = sharedCarouselService;
-            this.window = winRef.nativeWindow;
-        }
-        /**
-         * @return {?}
-         */
-        ProductReferencesComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                this.productReferencesService.fetchTitle();
-                this.productReferencesService.fetchDisplayProductTitles();
-                this.productReferencesService.fetchDisplayProductPrices();
-                this.sharedCarouselService.setItemSize(this.window, this.el.nativeElement);
-                this.productReferencesService.setReferenceList();
-                this.sharedCarouselService.setItemAsActive(0);
-            };
-        ProductReferencesComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-product-references',
-                        template: "<ng-container\n  *ngIf=\"(productReferencesService.getReferenceList() | async) as productList\"\n>\n  <ng-container *ngIf=\"productList.length !== 0\">\n    <h3\n      *ngIf=\"\n        (productReferencesService.getDisplayProductTitles() | async) &&\n        (productReferencesService.getTitle() | async) as title\n      \"\n    >\n      {{ title }}\n    </h3>\n\n    <ng-container\n      *ngIf=\"{\n        maxItemSize: sharedCarouselService.getItemSize() | async,\n        products: productList,\n        activeItem: sharedCarouselService.getActiveItemWithDelay() | async,\n        active: sharedCarouselService.getActiveItem() | async\n      } as carousel\"\n    >\n      <div class=\"cx-carousel\" [ngClass]=\"'size-' + carousel.maxItemSize\">\n        <button\n          class=\"previous\"\n          (click)=\"sharedCarouselService.setPreviousItemAsActive()\"\n          [disabled]=\"carousel.activeItem === 0\"\n        ></button>\n\n        <div class=\"groups\">\n          <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n            <div class=\"group\" *ngIf=\"i % carousel.maxItemSize === 0\">\n              <ng-container\n                *ngFor=\"\n                  let products of (carousel.products\n                    | slice: i:i + carousel.maxItemSize)\n                \"\n              >\n                <a\n                  *ngIf=\"products.target as product\"\n                  class=\"product\"\n                  [class.active]=\"i === carousel.activeItem\"\n                  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n                >\n                  <cx-media\n                    [container]=\"product.images?.PRIMARY\"\n                    format=\"product\"\n                  >\n                  </cx-media>\n\n                  <h4>{{ product.name }}</h4>\n                  <div\n                    *ngIf=\"\n                      (productReferencesService.getDisplayProductPrices()\n                        | async)\n                    \"\n                    class=\"price\"\n                  >\n                    {{ product.price?.formattedValue }}\n                  </div>\n                </a>\n              </ng-container>\n            </div>\n          </ng-container>\n        </div>\n        <button\n          class=\"next\"\n          (click)=\"sharedCarouselService.setNextItemAsActive()\"\n          [disabled]=\"\n            carousel.activeItem >\n            carousel.products.length - carousel.maxItemSize\n          \"\n        ></button>\n      </div>\n      <div class=\"indicators\">\n        <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n          <button\n            *ngIf=\"i % carousel.maxItemSize === 0\"\n            (click)=\"sharedCarouselService.setItemAsActive(i)\"\n            [disabled]=\"i === carousel.activeItem\"\n          ></button>\n        </ng-container>\n      </div>\n    </ng-container>\n  </ng-container>\n</ng-container>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        ProductReferencesComponent.ctorParameters = function () {
-            return [
-                { type: i1$2.WindowRef },
-                { type: i0.ElementRef },
-                { type: ProductReferencesService },
-                { type: SharedCarouselService }
-            ];
-        };
-        return ProductReferencesComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ProductReferencesModule = /** @class */ (function () {
-        function ProductReferencesModule() {
-        }
-        ProductReferencesModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i4.RouterModule,
-                            MediaModule,
-                            i1$2.UrlModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    ProductReferencesComponent: {
-                                        selector: 'cx-product-references',
-                                        providers: [
-                                            {
-                                                provide: ProductReferencesService,
-                                                useClass: ProductReferencesService,
-                                                deps: [CmsComponentData, i1$2.ProductReferenceService, i1$2.RoutingService],
-                                            },
-                                            {
-                                                provide: SharedCarouselService,
-                                                useClass: SharedCarouselService,
-                                                deps: [],
-                                            },
-                                        ],
-                                    },
-                                },
-                            }))),
-                        ],
-                        declarations: [ProductReferencesComponent],
-                        entryComponents: [ProductReferencesComponent],
-                        exports: [ProductReferencesComponent],
-                    },] }
-        ];
-        return ProductReferencesModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @type {?} */
-    var WAITING_CLASS = 'is-waiting';
-    var ProductImagesComponent = /** @class */ (function () {
-        function ProductImagesComponent(currentProductService) {
-            this.currentProductService = currentProductService;
-            this.product$ = this.currentProductService
-                .getProduct()
-                .pipe(operators.filter(Boolean));
-            this._imageContainer$ = new rxjs.BehaviorSubject(null);
-            this.imageContainer$ = rxjs.combineLatest(this.product$, this._imageContainer$).pipe(operators.map(function (_a) {
-                var _b = __read(_a, 2), product = _b[0], container = _b[1];
-                return container
-                    ? container
-                    : product.images && product.images.PRIMARY
-                        ? product.images.PRIMARY
-                        : {};
-            }));
-        }
-        /**
-         * @param {?} event
-         * @param {?} imageContainer
-         * @return {?}
-         */
-        ProductImagesComponent.prototype.showImage = /**
-         * @param {?} event
-         * @param {?} imageContainer
-         * @return {?}
-         */
-            function (event, imageContainer) {
-                this.startWaiting(( /** @type {?} */(event.target)));
-                this._imageContainer$.next(imageContainer);
-            };
-        /**
-         * @param {?} currentContainer
-         * @return {?}
-         */
-        ProductImagesComponent.prototype.isMainImageContainer = /**
-         * @param {?} currentContainer
-         * @return {?}
-         */
-            function (currentContainer) {
-                return this.imageContainer$.pipe(operators.map(function (container) {
-                    return container &&
-                        container.zoom &&
-                        currentContainer.zoom &&
-                        container.zoom.url === currentContainer.zoom.url;
-                }));
-            };
-        /**
-         * @return {?}
-         */
-        ProductImagesComponent.prototype.loadHandler = /**
-         * @return {?}
-         */
-            function () {
-                this.clearWaitList();
-            };
-        /**
-         * @private
-         * @param {?} el
-         * @return {?}
-         */
-        ProductImagesComponent.prototype.startWaiting = /**
-         * @private
-         * @param {?} el
-         * @return {?}
-         */
-            function (el) {
-                this.clearWaitList();
-                el.classList.add(WAITING_CLASS);
-                this.waiting = el;
-            };
-        /**
-         * @private
-         * @return {?}
-         */
-        ProductImagesComponent.prototype.clearWaitList = /**
-         * @private
-         * @return {?}
-         */
-            function () {
-                if (this.waiting) {
-                    this.waiting.classList.remove(WAITING_CLASS);
-                    delete this.waiting;
-                }
-            };
-        ProductImagesComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-product-images',
-                        template: "<ng-container *ngIf=\"(imageContainer$ | async) as container\">\n  <cx-media [container]=\"container\" format=\"zoom\" (loaded)=\"loadHandler()\">\n  </cx-media>\n\n  <div\n    class=\"thumbs\"\n    *ngIf=\"(product$ | async) as product\"\n    [class.hidden]=\"product.images?.GALLERY?.length === 1\"\n  >\n    <cx-media\n      *ngFor=\"let image of product.images?.GALLERY\"\n      [container]=\"image\"\n      format=\"thumbnail\"\n      (focus)=\"showImage($event, image)\"\n      tabindex=\"0\"\n      [class.active]=\"isMainImageContainer(image) | async\"\n    >\n    </cx-media>\n  </div>\n</ng-container>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        ProductImagesComponent.ctorParameters = function () {
-            return [
-                { type: CurrentProductService }
-            ];
-        };
-        return ProductImagesComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @enum {string} */
-    var ProductDetailOutlets = {
-        SUMMARY: 'PDP.SUMMARY',
-        IMAGES: 'PDP.IMAGES',
-        TITLE: 'PDP.TITLE',
-        RATING: 'PDP.RATING',
-        PRICE: 'PDP.PRICE',
-        SHARE: 'PDP.SHARE',
-    };
-    /** @enum {string} */
-    var ProductTabsOutlets = {
-        DESCRIPTION: 'PDP.DESCRIPTION',
-        SPECIFICATIONS: 'PDP.SPECIFICATIONS',
-        REVIEWS: 'PDP.REVIEWS',
-        SHIPPING: 'PDP.SHIPPING',
-    };
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ProductDetailsComponent = /** @class */ (function () {
-        function ProductDetailsComponent(currentPageService, cmsService) {
-            this.currentPageService = currentPageService;
-            this.cmsService = cmsService;
-        }
-        Object.defineProperty(ProductDetailsComponent.prototype, "outlets", {
-            get: /**
-             * @return {?}
-             */ function () {
-                return ProductDetailsComponent.outlets;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        /**
-         * @return {?}
-         */
-        ProductDetailsComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                this.product$ = this.currentPageService.getProduct();
-                this.page$ = this.cmsService.getCurrentPage();
-            };
-        ProductDetailsComponent.outlets = ProductDetailOutlets;
-        ProductDetailsComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-product-details',
-                        template: "<ng-container *ngIf=\"(product$ | async) as product\">\n  <ng-container *cxOutlet=\"outlets.SUMMARY\">\n    <cx-product-summary [product]=\"product\"> </cx-product-summary>\n  </ng-container>\n</ng-container>\n"
-                    }] }
-        ];
-        /** @nocollapse */
-        ProductDetailsComponent.ctorParameters = function () {
-            return [
-                { type: CurrentProductService },
-                { type: i1$2.CmsService }
-            ];
-        };
-        return ProductDetailsComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ProductSummaryComponent = /** @class */ (function () {
-        function ProductSummaryComponent(translatePipe, translationService) {
-            this.translatePipe = translatePipe;
-            this.translationService = translationService;
-            this.itemCount = 1;
-        }
-        Object.defineProperty(ProductSummaryComponent.prototype, "outlets", {
-            get: /**
-             * @return {?}
-             */ function () {
-                return ProductSummaryComponent.outlets;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        ProductSummaryComponent.prototype.updateCount = /**
-         * @param {?} value
-         * @return {?}
-         */
-            function (value) {
-                this.itemCount = value;
-            };
-        // NOTE: Does not currently exists as its own component
-        // but part of tabs component. This is likely to change in refactor.
-        // NOTE: Does not currently exists as its own component
-        // but part of tabs component. This is likely to change in refactor.
-        /**
-         * @private
-         * @return {?}
-         */
-        ProductSummaryComponent.prototype.getReviewsComponent =
-            // NOTE: Does not currently exists as its own component
-            // but part of tabs component. This is likely to change in refactor.
-            /**
-             * @private
-             * @return {?}
-             */
-            function () {
-                return document.querySelector('cx-product-reviews');
-            };
-        // Get Tabs Component if exists on page
-        // Get Tabs Component if exists on page
-        /**
-         * @private
-         * @return {?}
-         */
-        ProductSummaryComponent.prototype.getTabsComponent =
-            // Get Tabs Component if exists on page
-            /**
-             * @private
-             * @return {?}
-             */
-            function () {
-                return document.querySelector('cx-tab-paragraph-container');
-            };
-        // Get Tab by label if exists on page
-        // Get Tab by label if exists on page
-        /**
-         * @param {?} label
-         * @param {?} tabsComponent
-         * @return {?}
-         */
-        ProductSummaryComponent.prototype.getTabByLabel =
-            // Get Tab by label if exists on page
-            /**
-             * @param {?} label
-             * @param {?} tabsComponent
-             * @return {?}
-             */
-            function (label, tabsComponent) {
-                var e_1, _a;
-                if (tabsComponent) {
-                    // NOTE: Reads through h3 tags to click on correct tab
-                    // There may be a better way of doing this now/after refactor
-                    /** @type {?} */
-                    var h3Elements = tabsComponent.getElementsByTagName('h3');
-                    try {
-                        // Look through h3 tab elements until finding tab with label
-                        for (var _b = __values(Array.from(h3Elements)), _c = _b.next(); !_c.done; _c = _b.next()) {
-                            var h3Element = _c.value;
-                            if (h3Element.innerHTML.includes(label)) {
-                                return h3Element;
-                            }
-                        }
-                    }
-                    catch (e_1_1) {
-                        e_1 = { error: e_1_1 };
-                    }
-                    finally {
-                        try {
-                            if (_c && !_c.done && (_a = _b.return))
-                                _a.call(_b);
-                        }
-                        finally {
-                            if (e_1)
-                                throw e_1.error;
-                        }
-                    }
-                }
-            };
-        // Click to activate tab if not already active
-        // Click to activate tab if not already active
-        /**
-         * @param {?} tab
-         * @return {?}
-         */
-        ProductSummaryComponent.prototype.clickTabIfInactive =
-            // Click to activate tab if not already active
-            /**
-             * @param {?} tab
-             * @return {?}
-             */
-            function (tab) {
-                if (!tab.classList.contains('active') ||
-                    tab.classList.contains('toggled')) {
-                    tab.click();
-                }
-            };
-        // Scroll to views component on page and click "Reviews" tab
-        // Scroll to views component on page and click "Reviews" tab
-        /**
-         * @return {?}
-         */
-        ProductSummaryComponent.prototype.showReviews =
-            // Scroll to views component on page and click "Reviews" tab
-            /**
-             * @return {?}
-             */
-            function () {
-                var _this = this;
-                // Use translated label for Reviews tab reference
-                this.translationService
-                    .translate('productDetails.reviews')
-                    .subscribe(function (reviewsTabLabel) {
-                    /** @type {?} */
-                    var tabsComponent = _this.getTabsComponent();
-                    /** @type {?} */
-                    var reviewsTab = _this.getTabByLabel(reviewsTabLabel, tabsComponent);
-                    /** @type {?} */
-                    var reviewsComponent = _this.getReviewsComponent();
-                    if (reviewsTab && reviewsComponent) {
-                        _this.clickTabIfInactive(reviewsTab);
-                        reviewsComponent.scrollIntoView();
-                    }
-                });
-            };
-        /**
-         * @return {?}
-         */
-        ProductSummaryComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                this.reviewsTabAvailable = !!this.getReviewsComponent();
-            };
-        ProductSummaryComponent.outlets = ProductDetailOutlets;
-        ProductSummaryComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-product-summary',
-                        template: "<ng-container *cxOutlet=\"outlets.TITLE\">\n  <div class=\"name\">{{ product?.name }}</div>\n  <div class=\"code\">\n    {{ 'productSummary.id' | cxTranslate }} {{ product?.code }}\n  </div>\n</ng-container>\n\n<ng-container *cxOutlet=\"outlets.RATING\">\n  <div class=\"rating\">\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"count\">({{ product?.numberOfReviews }})</div>\n    <a class=\"btn-link\" *ngIf=\"reviewsTabAvailable\" (click)=\"showReviews()\">{{\n      'productSummary.showReviews' | cxTranslate\n    }}</a>\n  </div>\n</ng-container>\n\n<ng-container *cxOutlet=\"outlets.PRICE\">\n  <div class=\"price\" aria-label=\"new item price\">\n    {{ product?.price?.formattedValue }}\n  </div>\n</ng-container>\n\n<div class=\"description\"><p [innerHTML]=\"product?.summary\"></p></div>\n\n<cx-page-slot position=\"AddToCart\"></cx-page-slot>\n\n<!-- @TODO: Temp. Comment out share link while not in use by CMS -->\n<!-- <ng-container *cxOutlet=\"outlets.SHARE\">\n  <div>\n    <a href=\"#\" class=\"share btn-link\">\n      {{ 'productSummary.share' | cxTranslate }}\n    </a>\n  </div>\n</ng-container> -->\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
-                        providers: [i1$2.TranslatePipe]
-                    }] }
-        ];
-        /** @nocollapse */
-        ProductSummaryComponent.ctorParameters = function () {
-            return [
-                { type: i1$2.TranslatePipe },
-                { type: i1$2.TranslationService }
-            ];
-        };
-        ProductSummaryComponent.propDecorators = {
-            product: [{ type: i0.Input }]
-        };
-        return ProductSummaryComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ProductDetailsModule = /** @class */ (function () {
-        function ProductDetailsModule() {
-        }
-        ProductDetailsModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i4.RouterModule,
-                            forms.FormsModule,
-                            forms.ReactiveFormsModule,
-                            CartSharedModule,
-                            i1$2.CmsModule,
-                            AddToCartModule,
-                            OutletModule,
-                            i1$2.I18nModule,
-                            FormComponentsModule,
-                            MediaModule,
-                            StarRatingModule,
-                            i1$2.UrlModule,
-                            PageSlotModule,
-                        ],
-                        declarations: [ProductDetailsComponent, ProductSummaryComponent],
-                        exports: [ProductDetailsComponent, ProductSummaryComponent],
-                    },] }
-        ];
-        return ProductDetailsModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @enum {string} */
-    var ViewModes = {
-        Grid: 'grid',
-        List: 'list',
-    };
-    var ProductViewComponent = /** @class */ (function () {
-        function ProductViewComponent() {
-            this.iconTypes = ICON_TYPE;
-            this.modeChange = new i0.EventEmitter();
-        }
-        Object.defineProperty(ProductViewComponent.prototype, "buttonClass", {
-            get: /**
-             * @return {?}
-             */ function () {
-                /** @type {?} */
-                var viewName = this.viewMode.toLowerCase();
-                return "cx-product-" + viewName;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(ProductViewComponent.prototype, "viewMode", {
-            /**
-             *   Display icons inversely to allow users
-             *   to see the view they will navigate to
-             */
-            get: /**
-             *   Display icons inversely to allow users
-             *   to see the view they will navigate to
-             * @return {?}
-             */ function () {
-                if (this.mode === 'list') {
-                    return this.iconTypes.GRID;
-                }
-                else if (this.mode === 'grid') {
-                    return this.iconTypes.LIST;
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-        /**
-         * @return {?}
-         */
-        ProductViewComponent.prototype.changeMode = /**
-         * @return {?}
-         */
-            function () {
-                /** @type {?} */
-                var newMode = this.mode === ViewModes.Grid ? ViewModes.List : ViewModes.Grid;
-                this.modeChange.emit(newMode);
-            };
-        ProductViewComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-product-view',
-                        template: "<div class=\"cx-product-layout\" (click)=\"changeMode()\">\n  <div [ngClass]=\"buttonClass\">\n    <cx-icon\n      *ngIf=\"viewMode === iconTypes.GRID\"\n      [type]=\"iconTypes.GRID\"\n    ></cx-icon>\n    <cx-icon\n      *ngIf=\"viewMode === iconTypes.LIST\"\n      [type]=\"iconTypes.LIST\"\n    ></cx-icon>\n  </div>\n</div>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        ProductViewComponent.propDecorators = {
-            mode: [{ type: i0.Input }],
-            modeChange: [{ type: i0.Output }]
-        };
-        return ProductViewComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ProductListComponent = /** @class */ (function () {
-        function ProductListComponent(productSearchService, activatedRoute, pageLayoutService) {
-            this.productSearchService = productSearchService;
-            this.activatedRoute = activatedRoute;
-            this.pageLayoutService = pageLayoutService;
-            this.searchConfig = {};
-            this.gridMode$ = new rxjs.BehaviorSubject(ViewModes.Grid);
-        }
-        /**
-         * @return {?}
-         */
-        ProductListComponent.prototype.update = /**
-         * @return {?}
-         */
-            function () {
-                var queryParams = this.activatedRoute.snapshot.queryParams;
-                this.options = this.createOptionsByUrlParams();
-                if (this.categoryCode && this.categoryCode !== queryParams.categoryCode) {
-                    this.query = ':relevance:category:' + this.categoryCode;
-                }
-                if (this.brandCode && this.brandCode !== queryParams.brandCode) {
-                    this.query = ':relevance:brand:' + this.brandCode;
-                }
-                if (!this.query && queryParams.query) {
-                    this.query = queryParams.query;
-                }
-                this.search(this.query, this.options);
-            };
-        /**
-         * @return {?}
-         */
-        ProductListComponent.prototype.createOptionsByUrlParams = /**
-         * @return {?}
-         */
-            function () {
-                var queryParams = this.activatedRoute.snapshot.queryParams;
-                /** @type {?} */
-                var newConfig = __assign({}, queryParams);
-                delete newConfig.query;
-                /** @type {?} */
-                var options = __assign({}, this.searchConfig, newConfig, { pageSize: this.itemPerPage || 10 });
-                if (this.categoryCode) {
-                    options.categoryCode = this.categoryCode;
-                }
-                if (this.brandCode) {
-                    options.brandCode = this.brandCode;
-                }
-                return options;
-            };
-        /**
-         * @return {?}
-         */
-        ProductListComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                this.updateParams$ = this.activatedRoute.params.pipe(operators.tap(function (params) {
-                    _this.categoryCode = params.categoryCode;
-                    _this.brandCode = params.brandCode;
-                    _this.query = params.query;
-                    _this.update();
-                }));
-                this.pageLayoutService.templateName$.pipe(operators.take(1)).subscribe(function (template) {
-                    _this.gridMode$.next(template === 'ProductGridPageTemplate' ? ViewModes.Grid : ViewModes.List);
-                });
-                // clean previous search result
-                this.productSearchService.clearResults();
-                this.model$ = this.productSearchService.getResults().pipe(operators.tap(function (searchResult) {
-                    if (Object.keys(searchResult).length === 0) {
-                        _this.search(_this.query, _this.options);
-                    }
-                    else {
-                        _this.getCategoryTitle(searchResult);
-                    }
-                }), operators.filter(function (searchResult) { return Object.keys(searchResult).length > 0; }));
-            };
-        /**
-         * @protected
-         * @param {?} data
-         * @return {?}
-         */
-        ProductListComponent.prototype.getCategoryTitle = /**
-         * @protected
-         * @param {?} data
-         * @return {?}
-         */
-            function (data) {
-                if (data.breadcrumbs && data.breadcrumbs.length > 0) {
-                    this.categoryTitle = data.breadcrumbs[0].facetValueName;
-                }
-                else if (!this.query.includes(':relevance:')) {
-                    this.categoryTitle = this.query;
-                }
-                if (this.categoryTitle) {
-                    this.categoryTitle =
-                        data.pagination.totalResults + ' results for ' + this.categoryTitle;
-                }
-                return this.categoryTitle;
-            };
-        /**
-         * @param {?} pageNumber
-         * @return {?}
-         */
-        ProductListComponent.prototype.viewPage = /**
-         * @param {?} pageNumber
-         * @return {?}
-         */
-            function (pageNumber) {
-                this.search(this.query, { currentPage: pageNumber });
-            };
-        /**
-         * @param {?} sortCode
-         * @return {?}
-         */
-        ProductListComponent.prototype.sortList = /**
-         * @param {?} sortCode
-         * @return {?}
-         */
-            function (sortCode) {
-                this.search(this.query, { sortCode: sortCode });
-            };
-        /**
-         * @param {?} mode
-         * @return {?}
-         */
-        ProductListComponent.prototype.setGridMode = /**
-         * @param {?} mode
-         * @return {?}
-         */
-            function (mode) {
-                this.gridMode$.next(mode);
-            };
-        /**
-         * @protected
-         * @param {?} query
-         * @param {?=} options
-         * @return {?}
-         */
-        ProductListComponent.prototype.search = /**
-         * @protected
-         * @param {?} query
-         * @param {?=} options
-         * @return {?}
-         */
-            function (query, options) {
-                if (this.query) {
-                    if (options) {
-                        // Overide default options
-                        this.searchConfig = __assign({}, this.searchConfig, options);
-                    }
-                    this.productSearchService.search(query, this.searchConfig);
-                }
-            };
-        ProductListComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-product-list',
-                        template: "<ng-container *ngIf=\"(updateParams$ | async)\">\n  <div class=\"cx-page\" *ngIf=\"(model$ | async) as model\">\n    <section class=\"cx-page-section\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-12 col-lg-12\" *ngIf=\"(gridMode$ | async) as gridMode\">\n            <div class=\"cx-sorting top\">\n              <div class=\"row\">\n                <div class=\"col-12 col-lg-4 mr-auto\">\n                  <div class=\"form-group cx-sort-dropdown\">\n                    <cx-sorting\n                      [sortOptions]=\"model.sorts\"\n                      (sortListEvent)=\"sortList($event)\"\n                      [selectedOption]=\"model.pagination.sort\"\n                      placeholder=\"{{\n                        'productList.sortByRelevance' | cxTranslate\n                      }}\"\n                    ></cx-sorting>\n                  </div>\n                </div>\n                <div class=\"col-auto\">\n                  <div\n                    class=\"cx-pagination\"\n                    aria-label=\"product search pagination\"\n                  >\n                    <cx-pagination\n                      [pagination]=\"model.pagination\"\n                      (viewPageEvent)=\"viewPage($event)\"\n                    ></cx-pagination>\n                  </div>\n                </div>\n                <div class=\"col-auto ml-auto ml-lg-0\">\n                  <cx-product-view\n                    (modeChange)=\"setGridMode($event)\"\n                    [mode]=\"gridMode\"\n                  ></cx-product-view>\n                </div>\n              </div>\n            </div>\n            <div class=\"cx-product-container\">\n              <ng-container *ngIf=\"gridMode === 'grid'\">\n                <div class=\"row\">\n                  <cx-product-grid-item\n                    *ngFor=\"let product of model?.products\"\n                    [product]=\"product\"\n                    class=\"col-12 col-sm-6 col-md-4\"\n                  ></cx-product-grid-item>\n                </div>\n              </ng-container>\n\n              <ng-container *ngIf=\"gridMode === 'list'\">\n                <cx-product-list-item\n                  *ngFor=\"let product of model?.products\"\n                  [product]=\"product\"\n                  class=\"cx-product-search-list\"\n                ></cx-product-list-item>\n              </ng-container>\n            </div>\n            <div class=\"cx-sorting bottom\">\n              <div class=\"row\">\n                <div class=\"col-12 col-lg-4 mr-auto\">\n                  <div class=\"form-group cx-sort-dropdown\">\n                    <cx-sorting\n                      [sortOptions]=\"model.sorts\"\n                      (sortListEvent)=\"sortList($event)\"\n                      [selectedOption]=\"model.pagination.sort\"\n                      placeholder=\"{{\n                        'productList.sortByRelevance' | cxTranslate\n                      }}\"\n                    ></cx-sorting>\n                  </div>\n                </div>\n                <div class=\"col-auto\" aria-label=\"product search pagination\">\n                  <div class=\"cx-pagination\">\n                    <cx-pagination\n                      [pagination]=\"model.pagination\"\n                      (viewPageEvent)=\"viewPage($event)\"\n                    ></cx-pagination>\n                  </div>\n                </div>\n                <div class=\"col-auto ml-auto ml-lg-0\">\n                  <cx-product-view\n                    (modeChange)=\"setGridMode($event)\"\n                    [mode]=\"gridMode\"\n                  ></cx-product-view>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </section>\n  </div>\n</ng-container>\n"
-                    }] }
-        ];
-        /** @nocollapse */
-        ProductListComponent.ctorParameters = function () {
-            return [
-                { type: i1$2.ProductSearchService },
-                { type: i4.ActivatedRoute },
-                { type: PageLayoutService }
-            ];
-        };
-        return ProductListComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ProductFacetNavigationComponent = /** @class */ (function () {
-        function ProductFacetNavigationComponent(modalService, activatedRoute, productSearchService) {
-            this.modalService = modalService;
-            this.activatedRoute = activatedRoute;
-            this.productSearchService = productSearchService;
-            this.iconTypes = ICON_TYPE;
-            this.minPerFacet = 6;
-            this.collapsedFacets = new Set();
-            this.showAllPerFacetMap = new Map();
-            this.queryCodec = new http.HttpUrlEncodingCodec();
-        }
-        Object.defineProperty(ProductFacetNavigationComponent.prototype, "visibleFacets", {
-            get: /**
-             * @return {?}
-             */ function () {
-                if (!this.searchResult.facets) {
-                    return [];
-                }
-                return this.searchResult.facets.filter(function (facet) { return facet.visible; });
-            },
-            enumerable: true,
-            configurable: true
-        });
-        /**
-         * @return {?}
-         */
-        ProductFacetNavigationComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                this.updateParams$ = this.activatedRoute.params.pipe(operators.tap(function (params) {
-                    _this.activeFacetValueCode = params.categoryCode || params.brandCode;
-                }));
-                this.searchResult$ = this.productSearchService.getResults().pipe(operators.tap(function (searchResult) {
-                    _this.searchResult = searchResult;
-                    if (_this.searchResult.facets) {
-                        _this.searchResult.facets.forEach(function (el) {
-                            _this.showAllPerFacetMap.set(el.name, false);
-                        });
-                    }
-                }), operators.filter(function (searchResult) { return Object.keys(searchResult).length > 0; }));
-            };
-        /**
-         * @param {?} content
-         * @return {?}
-         */
-        ProductFacetNavigationComponent.prototype.openFilterModal = /**
-         * @param {?} content
-         * @return {?}
-         */
-            function (content) {
-                this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
-            };
-        /**
-         * @param {?} query
-         * @return {?}
-         */
-        ProductFacetNavigationComponent.prototype.toggleValue = /**
-         * @param {?} query
-         * @return {?}
-         */
-            function (query) {
-                this.productSearchService.search(this.queryCodec.decodeValue(query));
-            };
-        /**
-         * @param {?} facetName
-         * @return {?}
-         */
-        ProductFacetNavigationComponent.prototype.showLess = /**
-         * @param {?} facetName
-         * @return {?}
-         */
-            function (facetName) {
-                this.updateShowAllPerFacetMap(facetName, false);
-            };
-        /**
-         * @param {?} facetName
-         * @return {?}
-         */
-        ProductFacetNavigationComponent.prototype.showMore = /**
-         * @param {?} facetName
-         * @return {?}
-         */
-            function (facetName) {
-                this.updateShowAllPerFacetMap(facetName, true);
-            };
-        /**
-         * @private
-         * @param {?} facetName
-         * @param {?} showAll
-         * @return {?}
-         */
-        ProductFacetNavigationComponent.prototype.updateShowAllPerFacetMap = /**
-         * @private
-         * @param {?} facetName
-         * @param {?} showAll
-         * @return {?}
-         */
-            function (facetName, showAll) {
-                this.showAllPerFacetMap.set(facetName, showAll);
-            };
-        /**
-         * @param {?} facetName
-         * @return {?}
-         */
-        ProductFacetNavigationComponent.prototype.isFacetCollapsed = /**
-         * @param {?} facetName
-         * @return {?}
-         */
-            function (facetName) {
-                return this.collapsedFacets.has(facetName);
-            };
-        /**
-         * @param {?} facetName
-         * @return {?}
-         */
-        ProductFacetNavigationComponent.prototype.toggleFacet = /**
-         * @param {?} facetName
-         * @return {?}
-         */
-            function (facetName) {
-                if (this.collapsedFacets.has(facetName)) {
-                    this.collapsedFacets.delete(facetName);
-                }
-                else {
-                    this.collapsedFacets.add(facetName);
-                }
-            };
-        /**
-         * @param {?} facet
-         * @return {?}
-         */
-        ProductFacetNavigationComponent.prototype.getVisibleFacetValues = /**
-         * @param {?} facet
-         * @return {?}
-         */
-            function (facet) {
-                return facet.values.slice(0, this.showAllPerFacetMap.get(facet.name)
-                    ? facet.values.length
-                    : this.minPerFacet);
-            };
-        ProductFacetNavigationComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-product-facet-navigation',
-                        template: "<div class=\"cx-search-facet\" *ngIf=\"(searchResult$ | async) as searchResult\">\n  <ng-container *ngIf=\"searchResult.breadcrumbs?.length\">\n    <h4 class=\"cx-facet-filter-header\">\n      {{ 'productList.filterBy.label' | cxTranslate }}\n    </h4>\n    <div class=\"cx-facet-filter-container\">\n      <div\n        *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n        [hidden]=\"breadcrumb.facetValueCode === activeFacetValueCode\"\n        class=\"cx-facet-filter-pill\"\n        role=\"filter\"\n      >\n        <span class=\"cx-facet-pill-value\">{{ breadcrumb.facetValueName }}</span>\n        <button\n          type=\"button\"\n          class=\"close\"\n          aria-label=\"Close\"\n          (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n        >\n          <span aria-hidden=\"true\">\n            <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n          </span>\n        </button>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-container *ngFor=\"let facet of visibleFacets; let facetId = index\">\n    <div class=\"cx-facet-group\">\n      <div class=\"cx-facet-header\">\n        <a\n          class=\"cx-facet-header-link\"\n          (click)=\"toggleFacet(facet.name)\"\n          [attr.aria-expanded]=\"!isFacetCollapsed(facet.name)\"\n          aria-controls=\"\"\n        >\n          {{ facet.name }}\n          <cx-icon\n            [type]=\"\n              isFacetCollapsed(facet.name) ? iconTypes.PLUS : iconTypes.MINUS\n            \"\n          ></cx-icon>\n        </a>\n      </div>\n      <ng-container *ngIf=\"!isFacetCollapsed(facet.name)\">\n        <ul class=\"cx-facet-list\">\n          <li\n            *ngFor=\"\n              let value of getVisibleFacetValues(facet);\n              index as facetValueId\n            \"\n          >\n            <div class=\"form-check\">\n              <label class=\"form-checkbox cx-facet-label\">\n                <input\n                  class=\"form-check-input cx-facet-checkbox\"\n                  role=\"checkbox\"\n                  type=\"checkbox\"\n                  aria-checked=\"true\"\n                  [checked]=\"value.selected\"\n                  (change)=\"toggleValue(value.query.query.value)\"\n                />\n                <span class=\"cx-facet-text\"\n                  >{{ value.name }} ({{ value.count }})</span\n                >\n              </label>\n            </div>\n          </li>\n          <li\n            class=\"cx-facet-toggle-btn\"\n            (click)=\"showLess(facet.name)\"\n            *ngIf=\"showAllPerFacetMap.get(facet.name)\"\n          >\n            {{ 'productList.showLess' | cxTranslate }}\n          </li>\n          <li\n            class=\"cx-facet-toggle-btn\"\n            (click)=\"showMore(facet.name)\"\n            *ngIf=\"\n              !showAllPerFacetMap.get(facet.name) &&\n              facet.values.length > minPerFacet\n            \"\n          >\n            {{ 'productList.showMore' | cxTranslate }}\n          </li>\n        </ul>\n      </ng-container>\n    </div>\n  </ng-container>\n</div>\n\n<div class=\"cx-facet-mobile\">\n  <div class=\"container\">\n    <button\n      class=\"btn btn-action btn-block cx-facet-mobile-btn\"\n      (click)=\"openFilterModal(content)\"\n    >\n      {{ 'productList.filterBy.action' | cxTranslate }}\n    </button>\n  </div>\n</div>\n\n<!-- START ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n<ng-container *ngIf=\"(updateParams$ | async) as params\">\n  <div class=\"container\">\n    <div class=\"cx-facet-mobile\" *ngIf=\"searchResult.breadcrumbs?.length\">\n      <div class=\"cx-facet-filter-container\">\n        <h4 class=\"cx-facet-filter-header\">\n          {{ 'productList.appliedFilter' | cxTranslate }}\n        </h4>\n        <div\n          class=\"cx-facet-filter-pill\"\n          role=\"filter\"\n          *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n        >\n          {{ breadcrumb.facetValueName }}\n          <button\n            type=\"button\"\n            class=\"close\"\n            aria-label=\"Close\"\n            (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n          >\n            <span aria-hidden=\"true\">\n              <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n            </span>\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</ng-container>\n<!-- END ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n\n<ng-template #content let-c=\"close\" let-d=\"dismiss\">\n  <div class=\"modal-header\">\n    <h4 class=\"cx-facet-modal-title\" id=\"modal-title\">\n      {{ 'productList.filterBy.label' | cxTranslate }}\n    </h4>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"d('Cross click')\"\n    >\n      <span aria-hidden=\"true\">\n        <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n      </span>\n    </button>\n  </div>\n  <div class=\"modal-body cx-facet-modal-body\">\n    <form>\n      <div\n        class=\"form-group\"\n        *ngFor=\"let facet of searchResult.facets; index as facetId\"\n      >\n        <h4 class=\"cx-facet-modal-label\" for=\"megapixels\">{{ facet.name }}</h4>\n        <div class=\"input-group\">\n          <ul class=\"cx-facet-list\">\n            <li *ngFor=\"let value of facet.values; index as facetValueId\">\n              <div class=\"form-check\">\n                <label class=\"form-checkbox cx-facet-label\">\n                  <input\n                    class=\"form-check-input cx-facet-checkbox\"\n                    role=\"checkbox\"\n                    type=\"checkbox\"\n                    aria-checked=\"true\"\n                    [checked]=\"value.selected\"\n                    (change)=\"toggleValue(value.query.query.value)\"\n                  />\n                  <span class=\"cx-facet-text\"\n                    >{{ value.name }} ({{ value.count }})</span\n                  >\n                </label>\n              </div>\n            </li>\n          </ul>\n        </div>\n      </div>\n    </form>\n  </div>\n</ng-template>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        ProductFacetNavigationComponent.ctorParameters = function () {
-            return [
-                { type: ModalService },
-                { type: i4.ActivatedRoute },
-                { type: i1$2.ProductSearchService }
-            ];
-        };
-        return ProductFacetNavigationComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ProductGridItemComponent = /** @class */ (function () {
-        function ProductGridItemComponent() {
-        }
-        ProductGridItemComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-product-grid-item',
-                        template: "<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-image-container\"\n>\n  <cx-media\n    class=\"cx-product-image\"\n    [container]=\"product.images?.PRIMARY\"\n    format=\"product\"\n    [alt]=\"product.summary\"\n  ></cx-media>\n</a>\n<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-name\"\n  [innerHTML]=\"product.nameHtml\"\n></a>\n\n<div class=\"cx-product-rating\">\n  <cx-star-rating\n    [rating]=\"product?.averageRating\"\n    [disabled]=\"true\"\n  ></cx-star-rating>\n</div>\n<div class=\"cx-product-price-container\">\n  <div class=\"cx-product-price\" aria-label=\"Product price\">\n    {{ product.price.formattedValue }}\n  </div>\n</div>\n\n<cx-add-to-cart\n  *ngIf=\"product.stock.stockLevelStatus !== 'outOfStock'\"\n  [showQuantity]=\"false\"\n  [productCode]=\"product.code\"\n></cx-add-to-cart>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        ProductGridItemComponent.propDecorators = {
-            product: [{ type: i0.Input }]
-        };
-        return ProductGridItemComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ProductListItemComponent = /** @class */ (function () {
-        function ProductListItemComponent() {
-        }
-        ProductListItemComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-product-list-item',
-                        template: "<div class=\"row\">\n  <div class=\"col-12 col-md-4\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-image-container\"\n    >\n      <cx-media\n        class=\"cx-product-image\"\n        [container]=\"product.images?.PRIMARY\"\n        format=\"product\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n    </a>\n  </div>\n  <div class=\"col-12 col-md-8\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-name\"\n      [innerHtml]=\"product.nameHtml\"\n    ></a>\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"cx-product-price\" aria-label=\"Product price\">\n      {{ product.price?.formattedValue }}\n    </div>\n    <div class=\"row\">\n      <div class=\"col-12 col-md-8\">\n        <p class=\"cx-product-summary\" [innerHtml]=\"product.summary\">\n          {{ product.summary }}\n        </p>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <cx-add-to-cart\n          *ngIf=\"product.stock.stockLevelStatus !== 'outOfStock'\"\n          [showQuantity]=\"false\"\n          [productCode]=\"product.code\"\n        ></cx-add-to-cart>\n      </div>\n    </div>\n  </div>\n</div>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        ProductListItemComponent.propDecorators = {
-            product: [{ type: i0.Input }]
-        };
-        return ProductListItemComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ProductListModule = /** @class */ (function () {
-        function ProductListModule() {
-        }
-        ProductListModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    CMSProductListComponent: { selector: 'cx-product-list' },
-                                    SearchResultsListComponent: { selector: 'cx-product-list' },
-                                    ProductRefinementComponent: { selector: 'cx-product-facet-navigation' },
-                                },
-                            }))),
-                            i4.RouterModule,
-                            MediaModule,
-                            BootstrapModule,
-                            AddToCartModule,
-                            FormComponentsModule,
-                            ListNavigationModule,
-                            i1$2.UrlModule,
-                            i1$2.I18nModule,
-                            StarRatingModule,
-                            IconModule,
-                        ],
-                        declarations: [
-                            ProductListComponent,
-                            ProductFacetNavigationComponent,
-                            ProductListItemComponent,
-                            ProductGridItemComponent,
-                            ProductViewComponent,
-                        ],
-                        exports: [
-                            ProductListComponent,
-                            ProductListItemComponent,
-                            ProductGridItemComponent,
-                        ],
-                        entryComponents: [ProductListComponent, ProductFacetNavigationComponent],
-                    },] }
-        ];
-        return ProductListModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ProductAttributesComponent = /** @class */ (function () {
-        function ProductAttributesComponent(currentProductService) {
-            this.currentProductService = currentProductService;
-        }
-        /**
-         * @return {?}
-         */
-        ProductAttributesComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                this.product$ = this.currentProductService.getProduct();
-            };
-        ProductAttributesComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-product-attributes',
-                        template: "<ng-container *ngIf=\"(product$ | async) as product\">\n  <div class=\"container\">\n    <h2>{{ 'productDetails.specification' | cxTranslate }}</h2>\n    <table *ngFor=\"let class of product?.classifications\">\n      <th>\n        <h3>{{ class.name }}</h3>\n      </th>\n      <tr *ngFor=\"let feature of class.features\">\n        <td>{{ feature.name }}</td>\n        <td>\n          <ul>\n            <li *ngFor=\"let featureValue of feature?.featureValues\">\n              {{ featureValue?.value }}\n            </li>\n          </ul>\n        </td>\n      </tr>\n    </table>\n  </div>\n</ng-container>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        ProductAttributesComponent.ctorParameters = function () {
-            return [
-                { type: CurrentProductService }
-            ];
-        };
-        return ProductAttributesComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ProductReviewsComponent = /** @class */ (function () {
-        function ProductReviewsComponent(reviewService, currentProductService, fb) {
-            var _this = this;
-            this.reviewService = reviewService;
-            this.currentProductService = currentProductService;
-            this.fb = fb;
-            this.isWritingReview = false;
-            // TODO: configurable
-            this.initialMaxListItems = 5;
-            this.product$ = this.currentProductService.getProduct();
-            this.reviews$ = this.product$.pipe(operators.filter(Boolean), operators.switchMap(function (product) { return _this.reviewService.getByProductCode(product.code); }), operators.tap(function () {
-                _this.resetReviewForm();
-                _this.maxListItems = _this.initialMaxListItems;
-            }));
-        }
-        /**
-         * @return {?}
-         */
-        ProductReviewsComponent.prototype.initiateWriteReview = /**
-         * @return {?}
-         */
-            function () {
-                this.isWritingReview = true;
-            };
-        /**
-         * @return {?}
-         */
-        ProductReviewsComponent.prototype.cancelWriteReview = /**
-         * @return {?}
-         */
-            function () {
-                this.isWritingReview = false;
-                this.resetReviewForm();
-            };
-        /**
-         * @param {?} rating
-         * @return {?}
-         */
-        ProductReviewsComponent.prototype.setRating = /**
-         * @param {?} rating
-         * @return {?}
-         */
-            function (rating) {
-                this.reviewForm.controls.rating.setValue(rating);
-            };
-        /**
-         * @param {?} product
-         * @return {?}
-         */
-        ProductReviewsComponent.prototype.submitReview = /**
-         * @param {?} product
-         * @return {?}
-         */
-            function (product) {
-                /** @type {?} */
-                var reviewFormControls = this.reviewForm.controls;
-                /** @type {?} */
-                var review = {
-                    headline: reviewFormControls.title.value,
-                    comment: reviewFormControls.comment.value,
-                    rating: reviewFormControls.rating.value,
-                    alias: reviewFormControls.reviewerName.value,
-                };
-                this.reviewService.add(product.code, review);
-                this.isWritingReview = false;
-                this.resetReviewForm();
-            };
-        /**
-         * @private
-         * @return {?}
-         */
-        ProductReviewsComponent.prototype.resetReviewForm = /**
-         * @private
-         * @return {?}
-         */
-            function () {
-                this.reviewForm = this.fb.group({
-                    title: ['', forms.Validators.required],
-                    comment: ['', forms.Validators.required],
-                    rating: [0, [forms.Validators.min(1), forms.Validators.max(5)]],
-                    reviewerName: '',
-                });
-            };
-        ProductReviewsComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-product-reviews',
-                        template: "<div class=\"container\" *ngIf=\"(product$ | async) as product\">\n  <h2>\n    {{ 'productDetails.reviews' | cxTranslate }} ({{ product.numberOfReviews }})\n  </h2>\n  <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n    <div class=\"header\">\n      <h3>{{ 'productReview.overallRating' | cxTranslate }}</h3>\n      <button class=\"btn btn-primary\" (click)=\"initiateWriteReview()\">\n        {{ 'productReview.writeReview' | cxTranslate }}\n      </button>\n      <cx-star-rating\n        class=\"rating\"\n        [rating]=\"product.averageRating\"\n        [disabled]=\"true\"\n      ></cx-star-rating>\n    </div>\n\n    <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n      <ng-container *ngIf=\"(reviews$ | async) as reviews\">\n        <div\n          class=\"review\"\n          tabindex=\"0\"\n          *ngFor=\"let review of (reviews | slice: 0:maxListItems)\"\n        >\n          <div class=\"title\">{{ review.headline }}</div>\n          <cx-star-rating\n            [rating]=\"review.rating\"\n            [disabled]=\"true\"\n          ></cx-star-rating>\n          <div class=\"name\">\n            {{ review.alias ? review.alias : review.principal?.name }}\n          </div>\n          <div class=\"date\">{{ review.date | cxDate }}</div>\n          <div class=\"text\">{{ review.comment }}</div>\n        </div>\n        <div *ngIf=\"reviews.length > initialMaxListItems\">\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"maxListItems = reviews.length\"\n            *ngIf=\"maxListItems === initialMaxListItems\"\n          >\n            {{ 'productReview.more' | cxTranslate }}\n          </button>\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"maxListItems = initialMaxListItems\"\n            *ngIf=\"maxListItems !== initialMaxListItems\"\n          >\n            {{ 'productReview.less' | cxTranslate }}\n          </button>\n        </div>\n      </ng-container>\n    </ng-container>\n  </ng-container>\n\n  <ng-template #writeReview>\n    <form [formGroup]=\"reviewForm\" (ngSubmit)=\"submitReview(product)\">\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.reviewTitle' | cxTranslate\n          }}</span>\n          <input type=\"text\" class=\"form-control\" formControlName=\"title\" />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.writeYourComments' | cxTranslate\n          }}</span>\n          <textarea\n            class=\"form-control\"\n            rows=\"3\"\n            formControlName=\"comment\"\n          ></textarea>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.rating' | cxTranslate\n          }}</span>\n          <cx-star-rating (change)=\"setRating($event)\"></cx-star-rating>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.reviewerName' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            formControlName=\"reviewerName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group row\">\n        <div class=\"col-12 col-md-4\">\n          <button\n            type=\"submit\"\n            class=\"btn btn-block btn-secondary\"\n            (click)=\"cancelWriteReview()\"\n          >\n            {{ 'common.cancel' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-12 col-md-4\">\n          <button\n            type=\"submit\"\n            class=\"btn btn-block btn-primary\"\n            [ngClass]=\"{ 'submit-btn': reviewForm.valid }\"\n            [disabled]=\"!reviewForm.valid\"\n          >\n            {{ 'common.submit' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </form>\n  </ng-template>\n</div>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        ProductReviewsComponent.ctorParameters = function () {
-            return [
-                { type: i1$2.ProductReviewService },
-                { type: CurrentProductService },
-                { type: forms.FormBuilder }
-            ];
-        };
-        return ProductReviewsComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ProductReviewsModule = /** @class */ (function () {
-        function ProductReviewsModule() {
-        }
-        ProductReviewsModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            forms.ReactiveFormsModule,
-                            forms.FormsModule,
-                            FormComponentsModule,
-                            i1$2.I18nModule,
-                            StarRatingModule,
-                        ],
-                        declarations: [ProductReviewsComponent],
-                        entryComponents: [ProductReviewsComponent],
-                        exports: [ProductReviewsComponent],
-                    },] }
-        ];
-        return ProductReviewsModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ProductDetailsTabComponent = /** @class */ (function () {
-        function ProductDetailsTabComponent(currentProductService) {
-            this.currentProductService = currentProductService;
-        }
-        /**
-         * @return {?}
-         */
-        ProductDetailsTabComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                this.product$ = this.currentProductService.getProduct();
-            };
-        ProductDetailsTabComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-product-details-tab',
-                        template: "<ng-container *ngIf=\"(product$ | async) as product\">\n  <div class=\"container\" [innerHTML]=\"product?.description\"></div>\n</ng-container>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        ProductDetailsTabComponent.ctorParameters = function () {
-            return [
-                { type: CurrentProductService }
-            ];
-        };
-        return ProductDetailsTabComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ProductDetailsTabModule = /** @class */ (function () {
-        function ProductDetailsTabModule() {
-        }
-        ProductDetailsTabModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [common.CommonModule],
-                        declarations: [ProductDetailsTabComponent],
-                        entryComponents: [ProductDetailsTabComponent],
-                        exports: [ProductDetailsTabComponent],
-                    },] }
-        ];
-        return ProductDetailsTabModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ProductTabsModule = /** @class */ (function () {
-        function ProductTabsModule() {
-        }
-        ProductTabsModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i4.RouterModule,
-                            forms.FormsModule,
-                            forms.ReactiveFormsModule,
-                            CartSharedModule,
-                            i1$2.CmsModule,
-                            OutletModule,
-                            ProductReviewsModule,
-                            ProductDetailsTabModule,
-                            PageComponentModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    ProductDetailsTabComponent: {
-                                        selector: 'cx-product-details-tab',
-                                    },
-                                    ProductSpecsTabComponent: {
-                                        selector: 'cx-product-attributes',
-                                    },
-                                    ProductReviewsTabComponent: {
-                                        selector: 'cx-product-reviews',
-                                    },
-                                },
-                            }))),
-                            i1$2.I18nModule,
-                        ],
-                        declarations: [ProductAttributesComponent],
-                        exports: [ProductAttributesComponent, ProductReviewsComponent],
-                        entryComponents: [ProductAttributesComponent],
-                        providers: [i1$2.ProductService, i1$2.WindowRef, i1$2.RoutingService],
-                    },] }
-        ];
-        return ProductTabsModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ɵ0$1 = { cxRoute: 'product' };
-    /** @type {?} */
-    var routes = [
-        {
-            path: null,
-            canActivate: [CmsPageGuard],
-            component: ProductPageComponent,
-            data: ɵ0$1,
-        },
-    ];
-    var ProductPageModule = /** @class */ (function () {
-        function ProductPageModule() {
-        }
-        ProductPageModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i4.RouterModule.forChild(routes),
-                            ProductDetailsModule,
-                            PageLayoutModule,
-                            OutletRefModule,
-                        ],
-                        declarations: [ProductPageComponent],
-                        exports: [ProductPageComponent],
-                    },] }
-        ];
-        return ProductPageModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /**
-     * Matches the pattern '[ ** / ] marker / :paramName [ / ** ]'
-     *
-     * @param {?} segments
-     * @param {?} _segmentGroup
-     * @param {?} route
-     * @return {?}
-     */
-    function suffixUrlMatcher(segments, _segmentGroup, route) {
-        var _a;
-        /** @type {?} */
-        var config = route.data.cxSuffixUrlMatcher;
-        var marker = config.marker, paramName = config.paramName;
-        /** @type {?} */
-        var precedingParamName = config.precedingParamName || 'param';
-        /** @type {?} */
-        var markerIndex = findLastIndex(segments, function (_a) {
-            var path = _a.path;
-            return path === marker;
-        });
-        /** @type {?} */
-        var isMarkerLastSegment = markerIndex === segments.length - 1;
-        if (markerIndex === -1 || isMarkerLastSegment) {
-            return null;
-        }
-        /** @type {?} */
-        var paramIndex = markerIndex + 1;
-        /** @type {?} */
-        var posParams = (_a = {},
-            _a[paramName] = segments[paramIndex],
-            _a);
-        for (var i = 0; i < markerIndex; i++) {
-            posParams["" + precedingParamName + i] = segments[i];
-        }
-        return { consumed: segments.slice(0, paramIndex + 1), posParams: posParams };
-    }
-    /**
-     * @template T
-     * @param {?} elements
-     * @param {?} predicate
-     * @return {?}
-     */
-    function findLastIndex(elements, predicate) {
-        for (var index = elements.length - 1; index >= 0; index--) {
-            if (predicate(elements[index])) {
-                return index;
-            }
-        }
-        return -1;
-    }
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ɵ0$2 = {
-        cxSuffixUrlMatcher: {
-            marker: 'p',
-            paramName: 'productCode',
-        },
-    }, ɵ1 = {
-        cxSuffixUrlMatcher: {
-            marker: 'c',
-            paramName: 'categoryCode',
-        },
-    };
-    var SuffixRoutesModule = /** @class */ (function () {
-        function SuffixRoutesModule() {
-        }
-        SuffixRoutesModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            ProductPageModule,
-                            i4.RouterModule.forChild([
-                                {
-                                    matcher: suffixUrlMatcher,
-                                    canActivate: [CmsPageGuard],
-                                    component: ProductPageComponent,
-                                    data: ɵ0$2,
-                                },
-                                {
-                                    matcher: suffixUrlMatcher,
-                                    canActivate: [CmsPageGuard],
-                                    component: PageLayoutComponent,
-                                    data: ɵ1,
-                                },
-                            ]),
-                        ],
-                    },] }
-        ];
-        return SuffixRoutesModule;
     }());
 
     /**
@@ -8694,2866 +9769,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CheckoutOrchestratorComponent = /** @class */ (function () {
-        function CheckoutOrchestratorComponent() {
-        }
-        CheckoutOrchestratorComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-checkout-orchestrator',
-                        template: "",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        CheckoutOrchestratorComponent.ctorParameters = function () { return []; };
-        return CheckoutOrchestratorComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /**
-     * @abstract
-     */
-    var /**
-     * @abstract
-     */ CheckoutConfig = /** @class */ (function () {
-        function CheckoutConfig() {
-        }
-        return CheckoutConfig;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CheckoutGuard = /** @class */ (function () {
-        function CheckoutGuard(router, config, routingConfigService) {
-            this.router = router;
-            this.config = config;
-            this.routingConfigService = routingConfigService;
-        }
-        /**
-         * @return {?}
-         */
-        CheckoutGuard.prototype.canActivate = /**
-         * @return {?}
-         */
-            function () {
-                return rxjs.of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.config.checkout.steps[0].routeName).paths[0]));
-            };
-        CheckoutGuard.decorators = [
-            { type: i0.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */
-        CheckoutGuard.ctorParameters = function () {
-            return [
-                { type: i4.Router },
-                { type: CheckoutConfig },
-                { type: i1$2.RoutingConfigService }
-            ];
-        };
-        /** @nocollapse */ CheckoutGuard.ngInjectableDef = i0.defineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(i0.inject(i4.Router), i0.inject(CheckoutConfig), i0.inject(i1$2.RoutingConfigService)); }, token: CheckoutGuard, providedIn: "root" });
-        return CheckoutGuard;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @enum {string} */
-    var CheckoutStepType = {
-        SHIPPING_ADDRESS: 'shippingAddress',
-        DELIVERY_MODE: 'deliveryMode',
-        PAYMENT_DETAILS: 'paymentDetails',
-        REVIEW_ORDER: 'reviewOrder',
-    };
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @type {?} */
-    var defaultCheckoutConfig = {
-        checkout: {
-            steps: [
-                {
-                    id: 'shippingAddress',
-                    name: 'checkoutProgress.shippingAddress',
-                    routeName: 'checkoutShippingAddress',
-                    type: [CheckoutStepType.SHIPPING_ADDRESS],
-                },
-                {
-                    id: 'deliveryMode',
-                    name: 'checkoutProgress.deliveryMode',
-                    routeName: 'checkoutDeliveryMode',
-                    type: [CheckoutStepType.DELIVERY_MODE],
-                },
-                {
-                    id: 'paymentDetails',
-                    name: 'checkoutProgress.paymentDetails',
-                    routeName: 'checkoutPaymentDetails',
-                    type: [CheckoutStepType.PAYMENT_DETAILS],
-                },
-                {
-                    id: 'reviewOrder',
-                    name: 'checkoutProgress.reviewOrder',
-                    routeName: 'checkoutReviewOrder',
-                    type: [CheckoutStepType.REVIEW_ORDER],
-                },
-            ],
-        },
-    };
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CheckoutOrchestratorModule = /** @class */ (function () {
-        function CheckoutOrchestratorModule() {
-        }
-        CheckoutOrchestratorModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i1$2.ConfigModule.withConfig(defaultCheckoutConfig),
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    CheckoutOrchestrator: {
-                                        selector: 'cx-checkout-orchestrator',
-                                        guards: [i1$2.AuthGuard, CartNotEmptyGuard, CheckoutGuard],
-                                    },
-                                },
-                            }))),
-                        ],
-                        providers: [{ provide: CheckoutConfig, useExisting: i1$2.Config }],
-                        declarations: [CheckoutOrchestratorComponent],
-                        entryComponents: [CheckoutOrchestratorComponent],
-                        exports: [CheckoutOrchestratorComponent],
-                    },] }
-        ];
-        return CheckoutOrchestratorModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CheckoutOrderSummaryComponent = /** @class */ (function () {
-        function CheckoutOrderSummaryComponent(cartService) {
-            this.cartService = cartService;
-            this.cart$ = this.cartService.getActive();
-        }
-        CheckoutOrderSummaryComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-checkout-order-summary',
-                        template: "<cx-order-summary [cart]=\"cart$ | async\"></cx-order-summary>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        CheckoutOrderSummaryComponent.ctorParameters = function () {
-            return [
-                { type: i1$2.CartService }
-            ];
-        };
-        return CheckoutOrderSummaryComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CheckoutOrderSummaryModule = /** @class */ (function () {
-        function CheckoutOrderSummaryModule() {
-        }
-        CheckoutOrderSummaryModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            CartSharedModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    CheckoutOrderSummary: {
-                                        selector: 'cx-checkout-order-summary',
-                                    },
-                                },
-                            }))),
-                        ],
-                        declarations: [CheckoutOrderSummaryComponent],
-                        entryComponents: [CheckoutOrderSummaryComponent],
-                        exports: [CheckoutOrderSummaryComponent],
-                    },] }
-        ];
-        return CheckoutOrderSummaryModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CheckoutProgressComponent = /** @class */ (function () {
-        function CheckoutProgressComponent(config, routingService, routingConfigService) {
-            this.config = config;
-            this.routingService = routingService;
-            this.routingConfigService = routingConfigService;
-        }
-        /**
-         * @return {?}
-         */
-        CheckoutProgressComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                this.steps = this.config.checkout.steps;
-                this.routerState$ = this.routingService.getRouterState().pipe(operators.tap(function (router) {
-                    _this.activeStepUrl = router.state.context.id;
-                    _this.steps.forEach(function (step, index) {
-                        /** @type {?} */
-                        var routeUrl = "/" + _this.routingConfigService.getRouteConfig(step.routeName).paths[0];
-                        if (routeUrl === _this.activeStepUrl) {
-                            _this.activeStepIndex = index;
-                        }
-                    });
-                }));
-            };
-        CheckoutProgressComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-checkout-progress',
-                        template: "<section *ngIf=\"(routerState$ | async) as routerState\">\n  <div class=\"cx-nav d-none d-lg-block d-xl-block\">\n    <ul class=\"cx-list\">\n      <li class=\"cx-item\" *ngFor=\"let step of steps; let i = index\">\n        <a\n          [routerLink]=\"{ cxRoute: step.routeName } | cxUrl\"\n          class=\"cx-link\"\n          [ngClass]=\"{\n            ' is-active': i === activeStepIndex,\n            ' is-disabled': i > activeStepIndex\n          }\"\n        >\n          {{ i + 1 }}. {{ step.name | cxTranslate }}\n        </a>\n      </li>\n    </ul>\n  </div>\n</section>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        CheckoutProgressComponent.ctorParameters = function () {
-            return [
-                { type: CheckoutConfig },
-                { type: i1$2.RoutingService },
-                { type: i1$2.RoutingConfigService }
-            ];
-        };
-        return CheckoutProgressComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CheckoutProgressModule = /** @class */ (function () {
-        function CheckoutProgressModule() {
-        }
-        CheckoutProgressModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i1$2.UrlModule,
-                            i1$2.I18nModule,
-                            i4.RouterModule,
-                            i1$2.ConfigModule.withConfig(defaultCheckoutConfig),
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    CheckoutProgress: {
-                                        selector: 'cx-checkout-progress',
-                                        guards: [i1$2.AuthGuard, CartNotEmptyGuard],
-                                    },
-                                },
-                            }))),
-                        ],
-                        declarations: [CheckoutProgressComponent],
-                        entryComponents: [CheckoutProgressComponent],
-                        exports: [CheckoutProgressComponent],
-                        providers: [{ provide: CheckoutConfig, useExisting: i1$2.Config }],
-                    },] }
-        ];
-        return CheckoutProgressModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CheckoutProgressMobileTopComponent = /** @class */ (function () {
-        function CheckoutProgressMobileTopComponent(config, routingService, cartService, routingConfigService) {
-            this.config = config;
-            this.routingService = routingService;
-            this.cartService = cartService;
-            this.routingConfigService = routingConfigService;
-        }
-        /**
-         * @return {?}
-         */
-        CheckoutProgressMobileTopComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                this.steps = this.config.checkout.steps;
-                this.cart$ = this.cartService.getActive();
-                this.routerState$ = this.routingService.getRouterState().pipe(operators.tap(function (router) {
-                    _this.activeStepUrl = router.state.context.id;
-                    _this.steps.forEach(function (step, index) {
-                        /** @type {?} */
-                        var routeUrl = "/" + _this.routingConfigService.getRouteConfig(step.routeName).paths[0];
-                        if (routeUrl === _this.activeStepUrl) {
-                            _this.activeStepIndex = index;
-                        }
-                    });
-                }));
-            };
-        CheckoutProgressMobileTopComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-checkout-progress-mobile-top',
-                        template: "<div *ngIf=\"(routerState$ | async) as routerState\">\n  <div *ngIf=\"(cart$ | async) as cart\">\n    <div class=\"cx-media\">\n      <div class=\"cx-list-media\" *ngIf=\"cart?.totalItems && cart?.subTotal\">\n        {{ 'cartItems.cartTotal' | cxTranslate: { count: cart.totalItems } }}:\n        {{ cart.subTotal.formattedValue }}\n      </div>\n      <div *ngFor=\"let step of steps; let i = index\">\n        <div class=\"cx-list-media\" *ngIf=\"i < activeStepIndex\">\n          <div>{{ i + 1 }}. {{ step.name | cxTranslate }}</div>\n          <button\n            class=\"btn btn-link\"\n            [routerLink]=\"{ cxRoute: step.routeName } | cxUrl\"\n          >\n            {{ 'common.edit' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"cx-list-media is-active\" *ngIf=\"i === activeStepIndex\">\n          <div>{{ i + 1 }}. {{ step.name | cxTranslate }}</div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
-                    }] }
-        ];
-        /** @nocollapse */
-        CheckoutProgressMobileTopComponent.ctorParameters = function () {
-            return [
-                { type: CheckoutConfig },
-                { type: i1$2.RoutingService },
-                { type: i1$2.CartService },
-                { type: i1$2.RoutingConfigService }
-            ];
-        };
-        return CheckoutProgressMobileTopComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CheckoutProgressMobileTopModule = /** @class */ (function () {
-        function CheckoutProgressMobileTopModule() {
-        }
-        CheckoutProgressMobileTopModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i1$2.UrlModule,
-                            i1$2.I18nModule,
-                            i4.RouterModule,
-                            i1$2.ConfigModule.withConfig(defaultCheckoutConfig),
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    CheckoutProgressMobileTop: {
-                                        selector: 'cx-checkout-progress-mobile-top',
-                                        guards: [i1$2.AuthGuard, CartNotEmptyGuard],
-                                    },
-                                },
-                            }))),
-                        ],
-                        declarations: [CheckoutProgressMobileTopComponent],
-                        entryComponents: [CheckoutProgressMobileTopComponent],
-                        exports: [CheckoutProgressMobileTopComponent],
-                    },] }
-        ];
-        return CheckoutProgressMobileTopModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CheckoutProgressMobileBottomComponent = /** @class */ (function () {
-        function CheckoutProgressMobileBottomComponent(config, routingService, routingConfigService) {
-            this.config = config;
-            this.routingService = routingService;
-            this.routingConfigService = routingConfigService;
-        }
-        /**
-         * @return {?}
-         */
-        CheckoutProgressMobileBottomComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                this.steps = this.config.checkout.steps;
-                this.routerState$ = this.routingService.getRouterState().pipe(operators.tap(function (router) {
-                    _this.activeStepUrl = router.state.context.id;
-                    _this.steps.forEach(function (step, index) {
-                        /** @type {?} */
-                        var routeUrl = "/" + _this.routingConfigService.getRouteConfig(step.routeName).paths[0];
-                        if (routeUrl === _this.activeStepUrl) {
-                            _this.activeStepIndex = index;
-                        }
-                    });
-                }));
-            };
-        CheckoutProgressMobileBottomComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-checkout-progress-mobile-bottom',
-                        template: "<div *ngIf=\"(routerState$ | async) as routerState\">\n  <div class=\"cx-media\">\n    <div *ngFor=\"let step of steps; let i = index\">\n      <div class=\"cx-list-media\" *ngIf=\"i > activeStepIndex\">\n        <div>{{ i + 1 }}. {{ step.name | cxTranslate }}</div>\n      </div>\n    </div>\n  </div>\n</div>\n"
-                    }] }
-        ];
-        /** @nocollapse */
-        CheckoutProgressMobileBottomComponent.ctorParameters = function () {
-            return [
-                { type: CheckoutConfig },
-                { type: i1$2.RoutingService },
-                { type: i1$2.RoutingConfigService }
-            ];
-        };
-        return CheckoutProgressMobileBottomComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CheckoutProgressMobileBottomModule = /** @class */ (function () {
-        function CheckoutProgressMobileBottomModule() {
-        }
-        CheckoutProgressMobileBottomModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i1$2.UrlModule,
-                            i1$2.I18nModule,
-                            i4.RouterModule,
-                            i1$2.ConfigModule.withConfig(defaultCheckoutConfig),
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    CheckoutProgressMobileBottom: {
-                                        selector: 'cx-checkout-progress-mobile-bottom',
-                                        guards: [i1$2.AuthGuard, CartNotEmptyGuard],
-                                    },
-                                },
-                            }))),
-                        ],
-                        declarations: [CheckoutProgressMobileBottomComponent],
-                        entryComponents: [CheckoutProgressMobileBottomComponent],
-                        exports: [CheckoutProgressMobileBottomComponent],
-                    },] }
-        ];
-        return CheckoutProgressMobileBottomModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CheckoutConfigService = /** @class */ (function () {
-        function CheckoutConfigService(checkoutConfig, routingConfigService) {
-            this.checkoutConfig = checkoutConfig;
-            this.routingConfigService = routingConfigService;
-            this.steps = this.checkoutConfig.checkout.steps;
-        }
-        /**
-         * @param {?} currentStepType
-         * @return {?}
-         */
-        CheckoutConfigService.prototype.getCheckoutStep = /**
-         * @param {?} currentStepType
-         * @return {?}
-         */
-            function (currentStepType) {
-                return this.steps[this.getCheckoutStepIndex('type', currentStepType)];
-            };
-        /**
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-        CheckoutConfigService.prototype.getNextCheckoutStepUrl = /**
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-            function (activatedRoute) {
-                /** @type {?} */
-                var stepIndex = this.getCurrentStepIndex(activatedRoute);
-                return stepIndex >= 0 && this.steps[stepIndex + 1]
-                    ? this.getStepUrlFromStepRoute(this.steps[stepIndex + 1].routeName)
-                    : null;
-            };
-        /**
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-        CheckoutConfigService.prototype.getPreviousCheckoutStepUrl = /**
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-            function (activatedRoute) {
-                /** @type {?} */
-                var stepIndex = this.getCurrentStepIndex(activatedRoute);
-                return stepIndex >= 0 && this.steps[stepIndex - 1]
-                    ? this.getStepUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
-                    : null;
-            };
-        /**
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-        CheckoutConfigService.prototype.getCurrentStepIndex = /**
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-            function (activatedRoute) {
-                var e_1, _a;
-                /** @type {?} */
-                var currentStepUrl = this.getStepUrlFromActivatedRoute(activatedRoute);
-                /** @type {?} */
-                var stepIndex;
-                /** @type {?} */
-                var index = 0;
-                try {
-                    for (var _b = __values(this.steps), _c = _b.next(); !_c.done; _c = _b.next()) {
-                        var step = _c.value;
-                        if (currentStepUrl === "/" + this.getStepUrlFromStepRoute(step.routeName)) {
-                            stepIndex = index;
-                        }
-                        else {
-                            index++;
-                        }
-                    }
-                }
-                catch (e_1_1) {
-                    e_1 = { error: e_1_1 };
-                }
-                finally {
-                    try {
-                        if (_c && !_c.done && (_a = _b.return))
-                            _a.call(_b);
-                    }
-                    finally {
-                        if (e_1)
-                            throw e_1.error;
-                    }
-                }
-                return stepIndex >= 0 ? stepIndex : null;
-            };
-        /**
-         * @private
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-        CheckoutConfigService.prototype.getStepUrlFromActivatedRoute = /**
-         * @private
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-            function (activatedRoute) {
-                return activatedRoute &&
-                    activatedRoute.snapshot &&
-                    activatedRoute.snapshot.url
-                    ? "/" + activatedRoute.snapshot.url.join('/')
-                    : null;
-            };
-        /**
-         * @private
-         * @param {?} stepRoute
-         * @return {?}
-         */
-        CheckoutConfigService.prototype.getStepUrlFromStepRoute = /**
-         * @private
-         * @param {?} stepRoute
-         * @return {?}
-         */
-            function (stepRoute) {
-                return this.routingConfigService.getRouteConfig(stepRoute).paths[0];
-            };
-        /**
-         * @private
-         * @param {?} key
-         * @param {?} value
-         * @return {?}
-         */
-        CheckoutConfigService.prototype.getCheckoutStepIndex = /**
-         * @private
-         * @param {?} key
-         * @param {?} value
-         * @return {?}
-         */
-            function (key, value) {
-                return key && value
-                    ? this.steps.findIndex(function (step) { return step[key].includes(value); })
-                    : null;
-            };
-        CheckoutConfigService.decorators = [
-            { type: i0.Injectable }
-        ];
-        /** @nocollapse */
-        CheckoutConfigService.ctorParameters = function () {
-            return [
-                { type: CheckoutConfig },
-                { type: i1$2.RoutingConfigService }
-            ];
-        };
-        return CheckoutConfigService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var DeliveryModeComponent = /** @class */ (function () {
-        function DeliveryModeComponent(fb, checkoutService, routingService, checkoutConfigService, activatedRoute) {
-            this.fb = fb;
-            this.checkoutService = checkoutService;
-            this.routingService = routingService;
-            this.checkoutConfigService = checkoutConfigService;
-            this.activatedRoute = activatedRoute;
-            this.mode = this.fb.group({
-                deliveryModeId: ['', forms.Validators.required],
-            });
-        }
-        /**
-         * @return {?}
-         */
-        DeliveryModeComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
-                this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
-                this.changedOption = false;
-                this.supportedDeliveryModes$ = this.checkoutService.getSupportedDeliveryModes();
-                this.selectedDeliveryMode$ = this.checkoutService.getSelectedDeliveryMode();
-                this.checkoutService.loadSupportedDeliveryModes();
-                this.selectedDeliveryMode$
-                    .pipe(operators.map(function (deliveryMode) {
-                    return deliveryMode && deliveryMode.code ? deliveryMode.code : null;
-                }))
-                    .subscribe(function (code) {
-                    if (code) {
-                        _this.mode.controls['deliveryModeId'].setValue(code);
-                        _this.currentDeliveryModeId = code;
-                    }
-                });
-            };
-        /**
-         * @param {?} code
-         * @return {?}
-         */
-        DeliveryModeComponent.prototype.changeMode = /**
-         * @param {?} code
-         * @return {?}
-         */
-            function (code) {
-                if (code !== this.currentDeliveryModeId) {
-                    this.changedOption = true;
-                    this.currentDeliveryModeId = code;
-                }
-            };
-        /**
-         * @return {?}
-         */
-        DeliveryModeComponent.prototype.next = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                if (this.changedOption) {
-                    this.checkoutService.setDeliveryMode(this.currentDeliveryModeId);
-                }
-                this.deliveryModeSub = this.checkoutService
-                    .getSelectedDeliveryMode()
-                    .subscribe(function (data) {
-                    if (data && data.code === _this.currentDeliveryModeId) {
-                        _this.routingService.go(_this.checkoutStepUrlNext);
-                    }
-                });
-            };
-        /**
-         * @return {?}
-         */
-        DeliveryModeComponent.prototype.back = /**
-         * @return {?}
-         */
-            function () {
-                this.routingService.go(this.checkoutStepUrlPrevious);
-            };
-        Object.defineProperty(DeliveryModeComponent.prototype, "deliveryModeInvalid", {
-            get: /**
-             * @return {?}
-             */ function () {
-                return this.mode.controls['deliveryModeId'].invalid;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        /**
-         * @return {?}
-         */
-        DeliveryModeComponent.prototype.ngOnDestroy = /**
-         * @return {?}
-         */
-            function () {
-                if (this.deliveryModeSub) {
-                    this.deliveryModeSub.unsubscribe();
-                }
-            };
-        DeliveryModeComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-delivery-mode',
-                        template: "<div [formGroup]=\"mode\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n        {{ 'checkoutShipping.shippingMethod' | cxTranslate }}\n      </h3>\n\n      <ng-container\n        *ngIf=\"(supportedDeliveryModes$ | async)?.length; else loading\"\n      >\n        <div\n          class=\"form-check\"\n          *ngFor=\"let mode of (supportedDeliveryModes$ | async)\"\n        >\n          <input\n            class=\"form-check-input\"\n            role=\"radio\"\n            type=\"radio\"\n            id=\"deliveryMode-{{ mode.code }}\"\n            aria-checked=\"true\"\n            (change)=\"changeMode(mode.code)\"\n            [value]=\"mode.code\"\n            formControlName=\"deliveryModeId\"\n          />\n          <label\n            class=\"cx-delivery-label form-check-label\n                form-radio-label\"\n            for=\"deliveryMode-{{ mode.code }}\"\n          >\n            <div class=\"cx-delivery-mode\">{{ mode.name }}</div>\n            <div class=\"cx-delivery-price\">\n              {{ mode.deliveryCost.formattedValue }}\n            </div>\n            <div class=\"cx-delivery-details\">{{ mode.description }}</div>\n          </label>\n        </div>\n      </ng-container>\n    </div>\n  </div>\n\n  <div class=\"row cx-checkout-btns\">\n    <div class=\"col-md-12 col-lg-6\">\n      <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n        {{ 'common.back' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        class=\"btn btn-block btn-primary\"\n        [disabled]=\"deliveryModeInvalid\"\n        (click)=\"next()\"\n      >\n        {{ 'common.continue' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        DeliveryModeComponent.ctorParameters = function () {
-            return [
-                { type: forms.FormBuilder },
-                { type: i1$2.CheckoutService },
-                { type: i1$2.RoutingService },
-                { type: CheckoutConfigService },
-                { type: i4.ActivatedRoute }
-            ];
-        };
-        return DeliveryModeComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CheckoutDetailsService = /** @class */ (function () {
-        function CheckoutDetailsService(checkoutService, cartService) {
-            var _this = this;
-            this.checkoutService = checkoutService;
-            this.cartService = cartService;
-            this.cartId$ = this.cartService
-                .getActive()
-                .pipe(operators.map(function (cartData) { return cartData.code; }));
-            this.getCheckoutDetailsLoaded$ = this.cartId$.pipe(operators.tap(function (cartId) { return _this.checkoutService.loadCheckoutDetails(cartId); }), operators.shareReplay(1), operators.switchMap(function () { return _this.checkoutService.getCheckoutDetailsLoaded(); }), operators.skipWhile(function (loaded) { return !loaded; }));
-        }
-        /**
-         * @return {?}
-         */
-        CheckoutDetailsService.prototype.getDeliveryAddress = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                return this.getCheckoutDetailsLoaded$.pipe(operators.switchMap(function () { return _this.checkoutService.getDeliveryAddress(); }));
-            };
-        /**
-         * @return {?}
-         */
-        CheckoutDetailsService.prototype.getSelectedDeliveryModeCode = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                return this.getCheckoutDetailsLoaded$.pipe(operators.switchMap(function () { return _this.checkoutService.getSelectedDeliveryModeCode(); }));
-            };
-        /**
-         * @return {?}
-         */
-        CheckoutDetailsService.prototype.getPaymentDetails = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                return this.getCheckoutDetailsLoaded$.pipe(operators.switchMap(function () { return _this.checkoutService.getPaymentDetails(); }));
-            };
-        CheckoutDetailsService.decorators = [
-            { type: i0.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */
-        CheckoutDetailsService.ctorParameters = function () {
-            return [
-                { type: i1$2.CheckoutService },
-                { type: i1$2.CartService }
-            ];
-        };
-        /** @nocollapse */ CheckoutDetailsService.ngInjectableDef = i0.defineInjectable({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(i0.inject(i1$2.CheckoutService), i0.inject(i1$2.CartService)); }, token: CheckoutDetailsService, providedIn: "root" });
-        return CheckoutDetailsService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ShippingAddressSetGuard = /** @class */ (function () {
-        function ShippingAddressSetGuard(checkoutDetailsService, checkoutConfigService, routingConfigService, router, serverConfig) {
-            this.checkoutDetailsService = checkoutDetailsService;
-            this.checkoutConfigService = checkoutConfigService;
-            this.routingConfigService = routingConfigService;
-            this.router = router;
-            this.serverConfig = serverConfig;
-        }
-        /**
-         * @return {?}
-         */
-        ShippingAddressSetGuard.prototype.canActivate = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                /** @type {?} */
-                var checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.SHIPPING_ADDRESS);
-                if (!checkoutStep && !this.serverConfig.production) {
-                    console.warn("Missing step with type " + CheckoutStepType.SHIPPING_ADDRESS + " in checkout configuration.");
-                }
-                return this.checkoutDetailsService
-                    .getDeliveryAddress()
-                    .pipe(operators.map(function (deliveryAddress) {
-                    return deliveryAddress && Object.keys(deliveryAddress).length
-                        ? true
-                        : _this.router.parseUrl(checkoutStep &&
-                            _this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0]);
-                }));
-            };
-        ShippingAddressSetGuard.decorators = [
-            { type: i0.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */
-        ShippingAddressSetGuard.ctorParameters = function () {
-            return [
-                { type: CheckoutDetailsService },
-                { type: CheckoutConfigService },
-                { type: i1$2.RoutingConfigService },
-                { type: i4.Router },
-                { type: i1$2.ServerConfig }
-            ];
-        };
-        /** @nocollapse */ ShippingAddressSetGuard.ngInjectableDef = i0.defineInjectable({ factory: function ShippingAddressSetGuard_Factory() { return new ShippingAddressSetGuard(i0.inject(CheckoutDetailsService), i0.inject(CheckoutConfigService), i0.inject(i1$2.RoutingConfigService), i0.inject(i4.Router), i0.inject(i1$2.ServerConfig)); }, token: ShippingAddressSetGuard, providedIn: "root" });
-        return ShippingAddressSetGuard;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var DeliveryModeModule = /** @class */ (function () {
-        function DeliveryModeModule() {
-        }
-        DeliveryModeModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            forms.ReactiveFormsModule,
-                            i1$2.I18nModule,
-                            SpinnerModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    CheckoutDeliveryMode: {
-                                        selector: 'cx-delivery-mode',
-                                        guards: [i1$2.AuthGuard, CartNotEmptyGuard, ShippingAddressSetGuard],
-                                    },
-                                },
-                            }))),
-                        ],
-                        declarations: [DeliveryModeComponent],
-                        entryComponents: [DeliveryModeComponent],
-                        exports: [DeliveryModeComponent],
-                    },] }
-        ];
-        return DeliveryModeModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CardComponent = /** @class */ (function () {
-        function CardComponent() {
-            this.iconTypes = ICON_TYPE;
-            this.deleteCard = new i0.EventEmitter();
-            this.setDefaultCard = new i0.EventEmitter();
-            this.sendCard = new i0.EventEmitter();
-            this.editCard = new i0.EventEmitter();
-            this.cancelCard = new i0.EventEmitter();
-            this.border = false;
-            this.editMode = false;
-            this.isDefault = false;
-            this.fitToContainer = false;
-        }
-        // ACTIONS
-        // ACTIONS
-        /**
-         * @return {?}
-         */
-        CardComponent.prototype.setEditMode =
-            // ACTIONS
-            /**
-             * @return {?}
-             */
-            function () {
-                this.editMode = true;
-            };
-        /**
-         * @return {?}
-         */
-        CardComponent.prototype.cancelEdit = /**
-         * @return {?}
-         */
-            function () {
-                this.editMode = false;
-                this.cancelCard.emit(5);
-            };
-        /**
-         * @return {?}
-         */
-        CardComponent.prototype.delete = /**
-         * @return {?}
-         */
-            function () {
-                this.deleteCard.emit(1);
-            };
-        /**
-         * @return {?}
-         */
-        CardComponent.prototype.setDefault = /**
-         * @return {?}
-         */
-            function () {
-                this.isDefault = true;
-                this.setDefaultCard.emit(2);
-            };
-        /**
-         * @return {?}
-         */
-        CardComponent.prototype.send = /**
-         * @return {?}
-         */
-            function () {
-                this.sendCard.emit(3);
-            };
-        /**
-         * @return {?}
-         */
-        CardComponent.prototype.edit = /**
-         * @return {?}
-         */
-            function () {
-                this.editCard.emit(4);
-            };
-        /**
-         * @return {?}
-         */
-        CardComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () { };
-        CardComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-card',
-                        template: "<div\n  *ngIf=\"content\"\n  class=\"cx-card\"\n  [class.cx-card-border]=\"border\"\n  [class.cx-card-fit-to-container]=\"fitToContainer\"\n>\n  <!-- Card Header -->\n  <div *ngIf=\"content.header && !editMode\" class=\"card-header\">\n    {{ content.header }}\n  </div>\n  <!-- Card Body -->\n  <div class=\"card-body cx-card-body\" [class.cx-card-delete]=\"editMode\">\n    <!-- Edit message -->\n    <div *ngIf=\"editMode\" class=\"cx-card-delete-msg\">\n      {{ content.deleteMsg }}\n    </div>\n    <!-- Card title -->\n    <h4 *ngIf=\"content.title\" class=\"cx-card-title\">\n      {{ content.title }}\n    </h4>\n    <!-- Card Content -->\n    <div class=\"cx-card-container\">\n      <!-- Card Label -->\n      <div class=\"cx-card-label-container\">\n        <div *ngIf=\"content.textBold\" class=\"cx-card-label-bold\">\n          {{ content.textBold }}\n        </div>\n        <div *ngFor=\"let line of content.text\">\n          <div class=\"cx-card-label\">{{ line }}</div>\n        </div>\n      </div>\n      <!-- Image -->\n      <div *ngIf=\"content.img\" class=\"cx-card-img-container\">\n        <cx-icon [type]=\"content.img\"></cx-icon>\n      </div>\n    </div>\n    <!-- Edit Mode Actions -->\n    <div *ngIf=\"editMode\" class=\"row cx-card-body-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-primary\" (click)=\"delete()\">\n          {{ 'common.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <!-- Actions -->\n    <div *ngIf=\"content.actions && !editMode\" class=\"cx-card-actions\">\n      <div *ngFor=\"let action of content.actions\">\n        <div [ngSwitch]=\"action.event\">\n          <a\n            *ngSwitchCase=\"'delete'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"delete()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'default'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"setDefault()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'send'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"send()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'edit'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"edit()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchDefault\n            href=\"{{ action.link }}\"\n            class=\"card-link btn-link\"\n            >{{ action.name }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
-                        styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-card-border{border-width:var(--cx-border-width,1px);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light))}.cx-card-container{display:var(--cx-display,flex)}.cx-card-label-container{flex-grow:var(--cx-flex-grow,2)}.cx-card-fit-to-container{width:var(--cx-width,100%);height:var(--cx-height,100%);display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column)}.cx-card-body{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column);justify-content:var(--cx-justify-content,space-between)}.cx-card-delete{background-color:var(--cx-background-color,var(--cx-g-color-background))}.cx-card-body-delete{padding:var(--cx-padding,1rem 0 0 0)}.cx-card-delete-msg{color:var(--cx-color,var(--cx-g-color-danger));padding:var(--cx-padding,0 0 1.25rem 0)}.cx-card-actions{display:var(--cx-display,flex);justify-content:var(--cx-justify-content,flex-end);padding:var(--cx-padding,1.25rem 0 0 0)}.cx-card-link{padding:var(--cx-padding,0 0 0 1rem)}"]
-                    }] }
-        ];
-        /** @nocollapse */
-        CardComponent.ctorParameters = function () { return []; };
-        CardComponent.propDecorators = {
-            deleteCard: [{ type: i0.Output }],
-            setDefaultCard: [{ type: i0.Output }],
-            sendCard: [{ type: i0.Output }],
-            editCard: [{ type: i0.Output }],
-            cancelCard: [{ type: i0.Output }],
-            border: [{ type: i0.Input }],
-            editMode: [{ type: i0.Input }],
-            isDefault: [{ type: i0.Input }],
-            content: [{ type: i0.Input }],
-            fitToContainer: [{ type: i0.Input }]
-        };
-        return CardComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CardModule = /** @class */ (function () {
-        function CardModule() {
-        }
-        CardModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [common.CommonModule, i1$2.I18nModule, IconModule],
-                        declarations: [CardComponent],
-                        exports: [CardComponent],
-                    },] }
-        ];
-        return CardModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var OrderConfirmationComponent = /** @class */ (function () {
-        function OrderConfirmationComponent(checkoutService, translation) {
-            this.checkoutService = checkoutService;
-            this.translation = translation;
-        }
-        /**
-         * @return {?}
-         */
-        OrderConfirmationComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                this.order$ = this.checkoutService.getOrderDetails();
-            };
-        /**
-         * @return {?}
-         */
-        OrderConfirmationComponent.prototype.ngOnDestroy = /**
-         * @return {?}
-         */
-            function () {
-                this.checkoutService.clearCheckoutData();
-            };
-        /**
-         * @param {?} deliveryAddress
-         * @return {?}
-         */
-        OrderConfirmationComponent.prototype.getAddressCardContent = /**
-         * @param {?} deliveryAddress
-         * @return {?}
-         */
-            function (deliveryAddress) {
-                return rxjs.combineLatest([
-                    this.translation.translate('addressCard.shipTo'),
-                ]).pipe(operators.map(function (_a) {
-                    var _b = __read(_a, 1), textTitle = _b[0];
-                    return {
-                        title: textTitle,
-                        textBold: deliveryAddress.firstName + " " + deliveryAddress.lastName,
-                        text: [
-                            deliveryAddress.line1,
-                            deliveryAddress.line2,
-                            deliveryAddress.town + ", " + deliveryAddress.country.isocode + ", " + deliveryAddress.postalCode,
-                            deliveryAddress.phone,
-                        ],
-                    };
-                }));
-            };
-        /**
-         * @param {?} deliveryMode
-         * @return {?}
-         */
-        OrderConfirmationComponent.prototype.getDeliveryModeCardContent = /**
-         * @param {?} deliveryMode
-         * @return {?}
-         */
-            function (deliveryMode) {
-                return rxjs.combineLatest([
-                    this.translation.translate('checkoutShipping.shippingMethod'),
-                ]).pipe(operators.map(function (_a) {
-                    var _b = __read(_a, 1), textTitle = _b[0];
-                    return {
-                        title: textTitle,
-                        textBold: deliveryMode.name,
-                        text: [deliveryMode.description],
-                    };
-                }));
-            };
-        /**
-         * @param {?} billingAddress
-         * @return {?}
-         */
-        OrderConfirmationComponent.prototype.getBillingAddressCardContent = /**
-         * @param {?} billingAddress
-         * @return {?}
-         */
-            function (billingAddress) {
-                return rxjs.combineLatest([
-                    this.translation.translate('addressCard.billTo'),
-                ]).pipe(operators.map(function (_a) {
-                    var _b = __read(_a, 1), textTitle = _b[0];
-                    return {
-                        title: textTitle,
-                        textBold: billingAddress.firstName + " " + billingAddress.lastName,
-                        text: [
-                            billingAddress.line1,
-                            billingAddress.line2,
-                            billingAddress.town + ", " + billingAddress.country.isocode + ", " + billingAddress.postalCode,
-                            billingAddress.phone,
-                        ],
-                    };
-                }));
-            };
-        /**
-         * @param {?} payment
-         * @return {?}
-         */
-        OrderConfirmationComponent.prototype.getPaymentInfoCardContent = /**
-         * @param {?} payment
-         * @return {?}
-         */
-            function (payment) {
-                return rxjs.combineLatest([
-                    this.translation.translate('paymentForm.payment'),
-                    this.translation.translate('paymentCard.expires', {
-                        month: payment.expiryMonth,
-                        year: payment.expiryYear,
-                    }),
-                ]).pipe(operators.map(function (_a) {
-                    var _b = __read(_a, 2), textTitle = _b[0], textExpires = _b[1];
-                    return {
-                        title: textTitle,
-                        textBold: payment.accountHolderName,
-                        text: [payment.cardNumber, textExpires],
-                    };
-                }));
-            };
-        OrderConfirmationComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-order-confirmation',
-                        template: "<div class=\"cx-page\" *ngIf=\"(order$ | async) as order\">\n  <header class=\"cx-page-header\">\n    <h1 class=\"cx-page-title\">\n      {{ 'checkoutOrderConfirmation.confirmationOfOrder' | cxTranslate }}\n      {{ order.code }}\n    </h1>\n  </header>\n\n  <div class=\"cx-order-confirmation\">\n    <div class=\"cx-order-confirmation-message\">\n      <h2>{{ 'checkoutOrderConfirmation.thankYou' | cxTranslate }}</h2>\n      <p>\n        {{\n          'checkoutOrderConfirmation.invoiceHasBeenSentByEmail' | cxTranslate\n        }}\n      </p>\n      <!-- <a href=\"#\" class=\"btn-link\">Print Page</a> -->\n    </div>\n\n    <cx-add-to-home-screen-banner></cx-add-to-home-screen-banner>\n\n    <div class=\"cx-order-review-summary\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getAddressCardContent(order.deliveryAddress) | async\"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"\n                  getBillingAddressCardContent(\n                    order.paymentInfo.billingAddress\n                  ) | async\n                \"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"\n                  getDeliveryModeCardContent(order.deliveryMode) | async\n                \"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                [content]=\"getPaymentInfoCardContent(order.paymentInfo) | async\"\n              ></cx-card>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"cx-order-items container\">\n      <h4 class=\"cx-order-items-header\">\n        {{ 'checkoutOrderConfirmation.orderItems' | cxTranslate }}\n      </h4>\n      <cx-cart-item-list\n        [items]=\"order.entries\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n\n    <div class=\"cx-order-summary container\">\n      <div class=\"row justify-content-end\">\n        <div class=\"col-sm-12 col-md-6 col-lg-5 col-xl-4\">\n          <cx-order-summary [cart]=\"order\"></cx-order-summary>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        OrderConfirmationComponent.ctorParameters = function () {
-            return [
-                { type: i1$2.CheckoutService },
-                { type: i1$2.TranslationService }
-            ];
-        };
-        return OrderConfirmationComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var OrderConfirmationModule = /** @class */ (function () {
-        function OrderConfirmationModule() {
-        }
-        OrderConfirmationModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            CartSharedModule,
-                            CardModule,
-                            PwaModule,
-                            i1$2.CheckoutModule,
-                            i1$2.I18nModule,
-                        ],
-                        declarations: [OrderConfirmationComponent],
-                        exports: [OrderConfirmationComponent],
-                    },] }
-        ];
-        return OrderConfirmationModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var SuggestedAddressDialogComponent = /** @class */ (function () {
-        function SuggestedAddressDialogComponent(modalService) {
-            this.modalService = modalService;
-            this.iconTypes = ICON_TYPE;
-        }
-        /**
-         * @return {?}
-         */
-        SuggestedAddressDialogComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                this.selectedAddress = this.suggestedAddresses.length
-                    ? this.suggestedAddresses[0]
-                    : this.enteredAddress;
-            };
-        /**
-         * @param {?=} reason
-         * @return {?}
-         */
-        SuggestedAddressDialogComponent.prototype.closeModal = /**
-         * @param {?=} reason
-         * @return {?}
-         */
-            function (reason) {
-                this.modalService.closeActiveModal(reason);
-            };
-        SuggestedAddressDialogComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-suggested-addresses-dialog',
-                        template: "<div class=\"cx-dialog-header modal-header\">\n  <div class=\"cx-dialog-title modal-title\">\n    {{ 'checkoutAddress.verifyYourAddress' | cxTranslate }}\n  </div>\n  <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"closeModal()\">\n    <span aria-hidden=\"true\">\n      <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n    </span>\n  </button>\n</div>\n<div class=\"cx-dialog-body modal-body\" ngForm>\n  <div class=\"container\">\n    <div class=\"row\">\n      <div class=\"cx-dialog-info col-md-12\">\n        <p>\n          {{ 'checkoutAddress.ensureAccuracySuggestChange' | cxTranslate }}\n          {{ 'checkoutAddress.chooseAddressToUse' | cxTranslate }}\n        </p>\n      </div>\n    </div>\n\n    <div class=\"row\">\n      <div class=\"cx-dialog-options col-md-12\">\n        <div\n          class=\"form-check\"\n          *ngFor=\"let suggestedAddress of suggestedAddresses; let i = index\"\n        >\n          <input\n            class=\"form-check-input\"\n            type=\"radio\"\n            name=\"selectedAddress\"\n            [(ngModel)]=\"selectedAddress\"\n            [value]=\"suggestedAddress\"\n            [id]=\"'suggested-addresses--suggested-' + i\"\n          />\n          <label\n            class=\"form-check-label cx-dialog-label\"\n            [for]=\"'suggested-addresses--suggested-' + i\"\n          >\n            {{ 'checkoutAddress.suggestedAddress' | cxTranslate }}\n            {{ suggestedAddresses?.length > 1 ? i + 1 : null }}\n          </label>\n          <div class=\"cx-dialog-suggested\">\n            {{ suggestedAddress?.firstName }} {{ suggestedAddress?.lastName\n            }}<br />\n            {{ suggestedAddress?.line1 }}<br />\n            <span>{{ suggestedAddress?.line2 }}</span\n            ><br />\n            {{ suggestedAddress?.town }} {{ suggestedAddress?.region?.isocode\n            }}<br />\n            {{ suggestedAddress?.postalCode }}\n          </div>\n        </div>\n        <div class=\"form-check\">\n          <input\n            class=\"form-check-input\"\n            type=\"radio\"\n            name=\"selectedAddress\"\n            [(ngModel)]=\"selectedAddress\"\n            [value]=\"enteredAddress\"\n            id=\"suggested-addresses--entered\"\n          />\n          <label\n            class=\"form-check-label cx-dialog-label\"\n            for=\"suggested-addresses--entered\"\n          >\n            {{ 'checkoutAddress.enteredAddress' | cxTranslate }}\n          </label>\n          <div class=\"cx-dialog-entered\">\n            {{ enteredAddress?.firstName }} {{ enteredAddress?.lastName }}<br />\n            {{ enteredAddress?.line1 }}<br />\n            <span>{{ enteredAddress?.line2 }}</span\n            ><br />\n            {{ enteredAddress?.town }} {{ enteredAddress?.region?.isocode\n            }}<br />\n            {{ enteredAddress?.postalCode }}\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"cx-dialog-actions col-sm-12 col-md-6 offset-md-6\">\n        <button\n          class=\"btn btn-secondary btn-block cx-dialog-buttons\"\n          (click)=\"closeModal()\"\n        >\n          {{ 'checkoutAddress.editAddress' | cxTranslate }}\n        </button>\n        <button\n          cxAutoFocus\n          class=\"btn btn-primary btn-block cx-dialog-buttons\"\n          (click)=\"closeModal(selectedAddress)\"\n        >\n          {{ 'checkoutAddress.saveAddress' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        SuggestedAddressDialogComponent.ctorParameters = function () {
-            return [
-                { type: ModalService }
-            ];
-        };
-        SuggestedAddressDialogComponent.propDecorators = {
-            suggestedAddresses: [{ type: i0.Input }],
-            enteredAddress: [{ type: i0.Input }]
-        };
-        return SuggestedAddressDialogComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var PaymentFormComponent = /** @class */ (function () {
-        function PaymentFormComponent(checkoutService, userService, globalMessageService, fb, modalService) {
-            this.checkoutService = checkoutService;
-            this.userService = userService;
-            this.globalMessageService = globalMessageService;
-            this.fb = fb;
-            this.modalService = modalService;
-            this.iconTypes = ICON_TYPE;
-            this.months = [];
-            this.years = [];
-            this.sameAsShippingAddress = true;
-            this.goBack = new i0.EventEmitter();
-            this.closeForm = new i0.EventEmitter();
-            this.addPaymentInfo = new i0.EventEmitter();
-            this.payment = this.fb.group({
-                defaultPayment: [false],
-                accountHolderName: ['', forms.Validators.required],
-                cardNumber: ['', forms.Validators.required],
-                cardType: this.fb.group({
-                    code: ['', forms.Validators.required],
-                }),
-                expiryMonth: ['', forms.Validators.required],
-                expiryYear: ['', forms.Validators.required],
-                cvn: ['', forms.Validators.required],
-            });
-            this.billingAddress = this.fb.group({
-                firstName: ['', forms.Validators.required],
-                lastName: ['', forms.Validators.required],
-                line1: ['', forms.Validators.required],
-                line2: [''],
-                town: ['', forms.Validators.required],
-                country: this.fb.group({
-                    isocode: ['', forms.Validators.required],
-                }),
-                postalCode: ['', forms.Validators.required],
-            });
-        }
-        /**
-         * @return {?}
-         */
-        PaymentFormComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                this.expMonthAndYear();
-                this.countries$ = this.userService.getAllBillingCountries().pipe(operators.tap(function (countries) {
-                    // If the store is empty fetch countries. This is also used when changing language.
-                    if (Object.keys(countries).length === 0) {
-                        _this.userService.loadBillingCountries();
-                    }
-                }));
-                this.cardTypes$ = this.checkoutService.getCardTypes().pipe(operators.tap(function (cardTypes) {
-                    if (Object.keys(cardTypes).length === 0) {
-                        _this.checkoutService.loadSupportedCardTypes();
-                    }
-                }));
-                this.shippingAddress$ = this.checkoutService.getDeliveryAddress();
-                this.checkboxSub = this.showSameAsShippingAddressCheckbox().subscribe(function (shouldShowCheckbox) {
-                    // this operation makes sure the checkbox is not checked if not shown and vice versa
-                    _this.sameAsShippingAddress = shouldShowCheckbox;
-                });
-                // verify the new added address
-                this.addressVerifySub = this.checkoutService
-                    .getAddressVerificationResults()
-                    .subscribe(function (results) {
-                    if (results === 'FAIL') {
-                        _this.checkoutService.clearAddressVerificationResults();
-                    }
-                    else if (results.decision === 'ACCEPT') {
-                        _this.next();
-                    }
-                    else if (results.decision === 'REJECT') {
-                        _this.globalMessageService.add({ key: 'addressForm.invalidAddress' }, i1$2.GlobalMessageType.MSG_TYPE_ERROR);
-                        _this.checkoutService.clearAddressVerificationResults();
-                    }
-                    else if (results.decision === 'REVIEW') {
-                        _this.openSuggestedAddress(results);
-                    }
-                });
-            };
-        /**
-         * @return {?}
-         */
-        PaymentFormComponent.prototype.expMonthAndYear = /**
-         * @return {?}
-         */
-            function () {
-                /** @type {?} */
-                var year = new Date().getFullYear();
-                for (var i = 0; i < 10; i++) {
-                    this.years.push({ id: i + 1, name: year + i });
-                }
-                for (var j = 1; j <= 12; j++) {
-                    if (j < 10) {
-                        this.months.push({ id: j, name: '0' + j.toString() });
-                    }
-                    else {
-                        this.months.push({ id: j, name: j.toString() });
-                    }
-                }
-            };
-        /**
-         * @return {?}
-         */
-        PaymentFormComponent.prototype.toggleDefaultPaymentMethod = /**
-         * @return {?}
-         */
-            function () {
-                this.payment.value.defaultPayment = !this.payment.value.defaultPayment;
-            };
-        /**
-         * @param {?} card
-         * @return {?}
-         */
-        PaymentFormComponent.prototype.paymentSelected = /**
-         * @param {?} card
-         * @return {?}
-         */
-            function (card) {
-                this.payment['controls'].cardType['controls'].code.setValue(card.code);
-            };
-        /**
-         * @param {?} month
-         * @return {?}
-         */
-        PaymentFormComponent.prototype.monthSelected = /**
-         * @param {?} month
-         * @return {?}
-         */
-            function (month) {
-                this.payment['controls'].expiryMonth.setValue(month.name);
-            };
-        /**
-         * @param {?} year
-         * @return {?}
-         */
-        PaymentFormComponent.prototype.yearSelected = /**
-         * @param {?} year
-         * @return {?}
-         */
-            function (year) {
-                this.payment['controls'].expiryYear.setValue(year.name);
-            };
-        /**
-         * @return {?}
-         */
-        PaymentFormComponent.prototype.toggleSameAsShippingAddress = /**
-         * @return {?}
-         */
-            function () {
-                this.sameAsShippingAddress = !this.sameAsShippingAddress;
-            };
-        /**
-         * @return {?}
-         */
-        PaymentFormComponent.prototype.isContinueButtonDisabled = /**
-         * @return {?}
-         */
-            function () {
-                return (this.payment.invalid ||
-                    (!this.sameAsShippingAddress && this.billingAddress.invalid));
-            };
-        /**
-         * Check if the shipping address can also be a billing address
-         *
-         * @memberof PaymentFormComponent
-         */
-        /**
-         * Check if the shipping address can also be a billing address
-         *
-         * \@memberof PaymentFormComponent
-         * @return {?}
-         */
-        PaymentFormComponent.prototype.showSameAsShippingAddressCheckbox = /**
-         * Check if the shipping address can also be a billing address
-         *
-         * \@memberof PaymentFormComponent
-         * @return {?}
-         */
-            function () {
-                return rxjs.combineLatest(this.countries$, this.shippingAddress$).pipe(operators.map(function (_a) {
-                    var _b = __read(_a, 2), countries = _b[0], address = _b[1];
-                    return !!countries.filter(function (country) {
-                        return country.isocode === address.country.isocode;
-                    }).length;
-                }));
-            };
-        /**
-         * @param {?} address
-         * @return {?}
-         */
-        PaymentFormComponent.prototype.getAddressCardContent = /**
-         * @param {?} address
-         * @return {?}
-         */
-            function (address) {
-                /** @type {?} */
-                var region = '';
-                if (address.region && address.region.isocode) {
-                    region = address.region.isocode + ', ';
-                }
-                return {
-                    textBold: address.firstName + ' ' + address.lastName,
-                    text: [
-                        address.line1,
-                        address.line2,
-                        address.town + ', ' + region + address.country.isocode,
-                        address.postalCode,
-                        address.phone,
-                    ],
-                };
-            };
-        /**
-         * @param {?} results
-         * @return {?}
-         */
-        PaymentFormComponent.prototype.openSuggestedAddress = /**
-         * @param {?} results
-         * @return {?}
-         */
-            function (results) {
-                var _this = this;
-                if (!this.suggestedAddressModalRef) {
-                    this.suggestedAddressModalRef = this.modalService.open(SuggestedAddressDialogComponent, { centered: true, size: 'lg' });
-                    this.suggestedAddressModalRef.componentInstance.enteredAddress = this.billingAddress.value;
-                    this.suggestedAddressModalRef.componentInstance.suggestedAddresses =
-                        results.suggestedAddresses;
-                    this.suggestedAddressModalRef.result
-                        .then(function () {
-                        _this.checkoutService.clearAddressVerificationResults();
-                        _this.suggestedAddressModalRef = null;
-                    })
-                        .catch(function () {
-                        // this  callback is called when modal is closed with Esc key or clicking backdrop
-                        _this.checkoutService.clearAddressVerificationResults();
-                        _this.suggestedAddressModalRef = null;
-                    });
-                }
-            };
-        /**
-         * @return {?}
-         */
-        PaymentFormComponent.prototype.close = /**
-         * @return {?}
-         */
-            function () {
-                this.closeForm.emit();
-            };
-        /**
-         * @return {?}
-         */
-        PaymentFormComponent.prototype.back = /**
-         * @return {?}
-         */
-            function () {
-                this.goBack.emit();
-            };
-        /**
-         * @return {?}
-         */
-        PaymentFormComponent.prototype.verifyAddress = /**
-         * @return {?}
-         */
-            function () {
-                if (this.sameAsShippingAddress) {
-                    this.next();
-                }
-                else {
-                    this.checkoutService.verifyAddress(this.billingAddress.value);
-                }
-            };
-        /**
-         * @return {?}
-         */
-        PaymentFormComponent.prototype.next = /**
-         * @return {?}
-         */
-            function () {
-                this.addPaymentInfo.emit({
-                    paymentDetails: this.payment.value,
-                    billingAddress: this.sameAsShippingAddress
-                        ? null
-                        : this.billingAddress.value,
-                });
-            };
-        /**
-         * @return {?}
-         */
-        PaymentFormComponent.prototype.ngOnDestroy = /**
-         * @return {?}
-         */
-            function () {
-                if (this.checkboxSub) {
-                    this.checkboxSub.unsubscribe();
-                }
-                if (this.addressVerifySub) {
-                    this.addressVerifySub.unsubscribe();
-                }
-            };
-        PaymentFormComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-payment-form',
-                        template: "<!-- FORM -->\n<div [formGroup]=\"payment\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <div class=\"form-group\">\n        <ng-container *ngIf=\"(cardTypes$ | async) as cardTypes\">\n          <div *ngIf=\"cardTypes.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'paymentForm.paymentType' | cxTranslate\n              }}</span>\n              <ng-select\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"cardTypes\"\n                bindLabel=\"name\"\n                bindValue=\"code\"\n                placeholder=\"{{ 'paymentForm.selectOne' | cxTranslate }}\"\n                (change)=\"paymentSelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'paymentForm.accountHolderName.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            type=\"text\"\n            required\n            placeholder=\"{{\n              'paymentForm.accountHolderName.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"accountHolderName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'paymentForm.cardNumber' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            formControlName=\"cardNumber\"\n          />\n        </label>\n      </div>\n\n      <div class=\"row\">\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content\">{{\n              'paymentForm.expirationDate' | cxTranslate\n            }}</span>\n            <div class=\"cx-payment-form-exp-date row\">\n              <div class=\"col-sm-6 col-md-5\">\n                <ng-select\n                  [searchable]=\"false\"\n                  [clearable]=\"false\"\n                  [items]=\"months\"\n                  bindLabel=\"name\"\n                  bindValue=\"expiryMonth\"\n                  placeholder=\"{{ 'paymentForm.monthMask' | cxTranslate }}\"\n                  (change)=\"monthSelected($event)\"\n                >\n                </ng-select>\n              </div>\n              <div class=\"col-sm-6 col-md-7\">\n                <ng-select\n                  [searchable]=\"false\"\n                  [clearable]=\"false\"\n                  [items]=\"years\"\n                  bindLabel=\"name\"\n                  bindValue=\"expiryYear\"\n                  placeholder=\"{{ 'paymentForm.yearMask' | cxTranslate }}\"\n                  (change)=\"yearSelected($event)\"\n                >\n                </ng-select>\n              </div>\n            </div>\n          </label>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content\">\n              {{ 'paymentForm.securityCode' | cxTranslate }}\n              <cx-icon\n                [type]=\"iconTypes.INFO\"\n                class=\"cx-payment-form-tooltip\"\n                placement=\"right\"\n                title=\"{{ 'paymentForm.securityCodeTitle' | cxTranslate }}\"\n                alt=\"\"\n              ></cx-icon>\n            </span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              id=\"cVVNumber\"\n              required\n              formControlName=\"cvn\"\n            />\n          </label>\n        </div>\n      </div>\n\n      <div class=\"form-group\">\n        <div class=\"form-check\">\n          <label>\n            <input\n              type=\"checkbox\"\n              class=\"form-check-input\"\n              (change)=\"toggleDefaultPaymentMethod()\"\n            />\n            <span class=\"form-check-label\">{{\n              'paymentForm.setAsDefault' | cxTranslate\n            }}</span>\n          </label>\n        </div>\n      </div>\n\n      <!-- BILLING -->\n      <div class=\"cx-payment-form-billing\">\n        <div class=\"cx-payment-form-billing-address\">\n          {{ 'paymentForm.billingAddress' | cxTranslate }}\n        </div>\n\n        <!-- SAME AS SHIPPING CHECKBOX -->\n        <ng-container *ngIf=\"(showSameAsShippingAddressCheckbox() | async)\">\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  class=\"form-check-input\"\n                  [checked]=\"sameAsShippingAddress\"\n                  (change)=\"toggleSameAsShippingAddress()\"\n                />\n                <span class=\"form-check-label\">{{\n                  'paymentForm.sameAsShippingAddress' | cxTranslate\n                }}</span>\n              </label>\n            </div>\n          </div>\n        </ng-container>\n\n        <!-- BILLING INFO COMPONENT -->\n        <ng-container\n          *ngIf=\"\n            (sameAsShippingAddress && shippingAddress$\n              | async) as shippingAddress;\n            else billingAddressForm\n          \"\n        >\n          <cx-card [content]=\"getAddressCardContent(shippingAddress)\"></cx-card>\n        </ng-container>\n\n        <ng-template #billingAddressForm>\n          <cx-billing-address-form\n            [billingAddress]=\"billingAddress\"\n            [countries$]=\"countries$\"\n          >\n          </cx-billing-address-form>\n        </ng-template>\n      </div>\n    </div>\n  </div>\n\n  <!-- BUTTON SECTION -->\n  <div class=\"cx-checkout-btns row\">\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        *ngIf=\"paymentMethodsCount === 0\"\n        class=\"btn btn-block btn-action\"\n        (click)=\"back()\"\n      >\n        {{ 'common.back' | cxTranslate }}\n      </button>\n      <button\n        *ngIf=\"paymentMethodsCount > 0\"\n        class=\"btn btn-block btn-action\"\n        (click)=\"close()\"\n      >\n        {{ 'paymentForm.changePayment' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        class=\"btn btn-block btn-primary\"\n        [disabled]=\"isContinueButtonDisabled()\"\n        (click)=\"next()\"\n      >\n        {{ 'common.continue' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        PaymentFormComponent.ctorParameters = function () {
-            return [
-                { type: i1$2.CheckoutService },
-                { type: i1$2.UserService },
-                { type: i1$2.GlobalMessageService },
-                { type: forms.FormBuilder },
-                { type: ModalService }
-            ];
-        };
-        PaymentFormComponent.propDecorators = {
-            paymentMethodsCount: [{ type: i0.Input }],
-            goBack: [{ type: i0.Output }],
-            closeForm: [{ type: i0.Output }],
-            addPaymentInfo: [{ type: i0.Output }]
-        };
-        return PaymentFormComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var BillingAddressFormComponent = /** @class */ (function () {
-        function BillingAddressFormComponent() {
-        }
-        /**
-         * @param {?} country
-         * @return {?}
-         */
-        BillingAddressFormComponent.prototype.countrySelected = /**
-         * @param {?} country
-         * @return {?}
-         */
-            function (country) {
-                this.billingAddress['controls'].country['controls'].isocode.setValue(country.isocode);
-            };
-        BillingAddressFormComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-billing-address-form',
-                        template: "<div [formGroup]=\"billingAddress\">\n  <div class=\"form-group\">\n    <ng-container *ngIf=\"(countries$ | async) as countries\">\n      <div *ngIf=\"countries.length !== 0\">\n        <label aria-required=\"true\">\n          <span class=\"label-content required\">{{\n            'addressForm.country' | cxTranslate\n          }}</span>\n          <ng-select\n            [searchable]=\"false\"\n            [clearable]=\"false\"\n            [items]=\"countries\"\n            bindLabel=\"name\"\n            bindValue=\"isocode\"\n            placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n            (change)=\"countrySelected($event)\"\n          >\n          </ng-select>\n        </label>\n      </div>\n    </ng-container>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.firstName.label' | cxTranslate\n      }}</span>\n      <input\n        class=\"form-control\"\n        type=\"text\"\n        required\n        placeholder=\"{{ 'addressForm.firstName.placeholder' | cxTranslate }}\"\n        formControlName=\"firstName\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.lastName.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        required\n        placeholder=\"{{ 'addressForm.lastName.placeholder' | cxTranslate }}\"\n        formControlName=\"lastName\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.address1' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        required\n        placeholder=\"{{ 'addressForm.streetAddress' | cxTranslate }}\"\n        formControlName=\"line1\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'addressForm.address2' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        placeholder=\"{{ 'addressForm.aptSuite' | cxTranslate }}\"\n        formControlName=\"line2\"\n      />\n    </label>\n  </div>\n  <div class=\"row\">\n    <div class=\"form-group col-md-6\">\n      <label>\n        <span class=\"label-content required\">{{\n          'addressForm.city.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          required\n          placeholder=\"{{ 'addressForm.city.placeholder' | cxTranslate }}\"\n          formControlName=\"town\"\n        />\n      </label>\n    </div>\n    <div class=\"form-group col-md-6\">\n      <label>\n        <span class=\"label-content required\">{{\n          'addressForm.zipCode.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          required\n          placeholder=\"{{ 'addressForm.zipCode.placeholder' | cxTranslate }}\"\n          formControlName=\"postalCode\"\n        />\n      </label>\n    </div>\n  </div>\n</div>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        BillingAddressFormComponent.propDecorators = {
-            billingAddress: [{ type: i0.Input }],
-            countries$: [{ type: i0.Input }]
-        };
-        return BillingAddressFormComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var BillingAddressFormModule = /** @class */ (function () {
-        function BillingAddressFormModule() {
-        }
-        BillingAddressFormModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            forms.ReactiveFormsModule,
-                            forms.FormsModule,
-                            i4.RouterModule,
-                            ngSelect.NgSelectModule,
-                            i1$2.I18nModule,
-                        ],
-                        declarations: [BillingAddressFormComponent],
-                        exports: [BillingAddressFormComponent],
-                    },] }
-        ];
-        return BillingAddressFormModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var PaymentFormModule = /** @class */ (function () {
-        function PaymentFormModule() {
-        }
-        PaymentFormModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            forms.ReactiveFormsModule,
-                            ngSelect.NgSelectModule,
-                            CardModule,
-                            BillingAddressFormModule,
-                            i1$2.I18nModule,
-                            IconModule,
-                        ],
-                        declarations: [PaymentFormComponent],
-                        entryComponents: [PaymentFormComponent],
-                        exports: [PaymentFormComponent],
-                    },] }
-        ];
-        return PaymentFormModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var PaymentMethodComponent = /** @class */ (function () {
-        function PaymentMethodComponent(userService, checkoutService, globalMessageService, routingConfigService, routingService, checkoutConfigService, activatedRoute, translation) {
-            this.userService = userService;
-            this.checkoutService = checkoutService;
-            this.globalMessageService = globalMessageService;
-            this.routingConfigService = routingConfigService;
-            this.routingService = routingService;
-            this.checkoutConfigService = checkoutConfigService;
-            this.activatedRoute = activatedRoute;
-            this.translation = translation;
-            this.iconTypes = ICON_TYPE;
-            this.newPaymentFormManuallyOpened = false;
-        }
-        /**
-         * @return {?}
-         */
-        PaymentMethodComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                this.isLoading$ = this.userService.getPaymentMethodsLoading();
-                this.userService.loadPaymentMethods();
-                this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
-                this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
-                this.existingPaymentMethods$ = this.userService.getPaymentMethods();
-                this.getPaymentDetailsSub = this.checkoutService
-                    .getPaymentDetails()
-                    .pipe(operators.filter(function (paymentInfo) { return paymentInfo && Object.keys(paymentInfo).length !== 0; }))
-                    .subscribe(function (paymentInfo) {
-                    if (!paymentInfo['hasError']) {
-                        _this.selectedPayment = paymentInfo;
-                    }
-                    else {
-                        Object.keys(paymentInfo).forEach(function (key) {
-                            if (key.startsWith('InvalidField')) {
-                                _this.globalMessageService.add({
-                                    key: 'paymentMethods.invalidField',
-                                    params: { field: paymentInfo[key] },
-                                }, i1$2.GlobalMessageType.MSG_TYPE_ERROR);
-                            }
-                        });
-                        _this.checkoutService.clearCheckoutStep(3);
-                    }
-                });
-            };
-        /**
-         * @param {?} payment
-         * @return {?}
-         */
-        PaymentMethodComponent.prototype.getCardContent = /**
-         * @param {?} payment
-         * @return {?}
-         */
-            function (payment) {
-                var _this = this;
-                return rxjs.combineLatest([
-                    this.translation.translate('paymentCard.expires', {
-                        month: payment.expiryMonth,
-                        year: payment.expiryYear,
-                    }),
-                    this.translation.translate('paymentForm.useThisPayment'),
-                    this.translation.translate('paymentCard.defaultPaymentMethod'),
-                    this.translation.translate('paymentCard.selected'),
-                ]).pipe(operators.map(function (_a) {
-                    var _b = __read(_a, 4), textExpires = _b[0], textUseThisPayment = _b[1], textDefaultPaymentMethod = _b[2], textSelected = _b[3];
-                    /** @type {?} */
-                    var card = {
-                        title: payment.defaultPayment ? textDefaultPaymentMethod : '',
-                        textBold: payment.accountHolderName,
-                        text: [payment.cardNumber, textExpires],
-                        img: _this.getCardIcon(payment.cardType.code),
-                        actions: [{ name: textUseThisPayment, event: 'send' }],
-                    };
-                    if (_this.selectedPayment && _this.selectedPayment.id === payment.id) {
-                        card.header = textSelected;
-                    }
-                    return card;
-                }));
-            };
-        /**
-         * @param {?} paymentDetails
-         * @return {?}
-         */
-        PaymentMethodComponent.prototype.paymentMethodSelected = /**
-         * @param {?} paymentDetails
-         * @return {?}
-         */
-            function (paymentDetails) {
-                this.selectedPayment = paymentDetails;
-            };
-        /**
-         * @return {?}
-         */
-        PaymentMethodComponent.prototype.showNewPaymentForm = /**
-         * @return {?}
-         */
-            function () {
-                this.newPaymentFormManuallyOpened = true;
-            };
-        /**
-         * @return {?}
-         */
-        PaymentMethodComponent.prototype.hideNewPaymentForm = /**
-         * @return {?}
-         */
-            function () {
-                this.newPaymentFormManuallyOpened = false;
-            };
-        /**
-         * @return {?}
-         */
-        PaymentMethodComponent.prototype.next = /**
-         * @return {?}
-         */
-            function () {
-                this.addPaymentInfo({
-                    payment: this.selectedPayment,
-                    newPayment: false,
-                });
-            };
-        /**
-         * @return {?}
-         */
-        PaymentMethodComponent.prototype.back = /**
-         * @return {?}
-         */
-            function () {
-                this.routingService.go(this.checkoutStepUrlPrevious);
-            };
-        /**
-         * @param {?} __0
-         * @return {?}
-         */
-        PaymentMethodComponent.prototype.addNewPaymentMethod = /**
-         * @param {?} __0
-         * @return {?}
-         */
-            function (_a) {
-                var paymentDetails = _a.paymentDetails, billingAddress = _a.billingAddress;
-                this.getDeliveryAddressSub = this.checkoutService
-                    .getDeliveryAddress()
-                    .subscribe(function (address) {
-                    billingAddress = address;
-                });
-                this.addPaymentInfo({
-                    payment: paymentDetails,
-                    billingAddress: billingAddress,
-                    newPayment: true,
-                });
-            };
-        /**
-         * @param {?} __0
-         * @return {?}
-         */
-        PaymentMethodComponent.prototype.addPaymentInfo = /**
-         * @param {?} __0
-         * @return {?}
-         */
-            function (_a) {
-                var _this = this;
-                var newPayment = _a.newPayment, payment = _a.payment, billingAddress = _a.billingAddress;
-                payment.billingAddress = billingAddress
-                    ? billingAddress
-                    : this.deliveryAddress;
-                if (newPayment) {
-                    this.checkoutService.createPaymentDetails(payment);
-                    this.checkoutService.clearCheckoutStep(3);
-                }
-                // if the selected payment is the same as the cart's one
-                if (this.selectedPayment && this.selectedPayment.id === payment.id) {
-                    this.checkoutService.setPaymentDetails(payment);
-                    this.checkoutService.clearCheckoutStep(3);
-                }
-                this.getPaymentDetailsSub = this.checkoutService
-                    .getPaymentDetails()
-                    .subscribe(function (data) {
-                    if (data.accountHolderName && data.cardNumber) {
-                        _this.routingService.go(_this.checkoutStepUrlNext);
-                        return;
-                    }
-                });
-            };
-        /**
-         * @return {?}
-         */
-        PaymentMethodComponent.prototype.ngOnDestroy = /**
-         * @return {?}
-         */
-            function () {
-                if (this.getPaymentDetailsSub) {
-                    this.getPaymentDetailsSub.unsubscribe();
-                }
-                if (this.getDeliveryAddressSub) {
-                    this.getDeliveryAddressSub.unsubscribe();
-                }
-            };
-        /**
-         * @protected
-         * @param {?} code
-         * @return {?}
-         */
-        PaymentMethodComponent.prototype.getCardIcon = /**
-         * @protected
-         * @param {?} code
-         * @return {?}
-         */
-            function (code) {
-                /** @type {?} */
-                var ccIcon;
-                if (code === 'visa') {
-                    ccIcon = this.iconTypes.VISA;
-                }
-                else if (code === 'master' || code === 'mastercard_eurocard') {
-                    ccIcon = this.iconTypes.MASTER_CARD;
-                }
-                else if (code === 'diners') {
-                    ccIcon = this.iconTypes.DINERS_CLUB;
-                }
-                else if (code === 'amex') {
-                    ccIcon = this.iconTypes.AMEX;
-                }
-                else {
-                    ccIcon = this.iconTypes.CREDIT_CARD;
-                }
-                return ccIcon;
-            };
-        PaymentMethodComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-payment-method',
-                        template: "<ng-container\n  *ngIf=\"(existingPaymentMethods$ | async) as existingPaymentMethods\"\n>\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'paymentForm.payment' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        existingPaymentMethods?.length && !newPaymentFormManuallyOpened;\n        else newPaymentForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'paymentForm.choosePaymentMethod' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewPaymentForm()\"\n          >\n            {{ 'paymentForm.addNewPayment' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-payment-card col-md-12 col-lg-6\"\n          *ngFor=\"let method of existingPaymentMethods; let i = index\"\n        >\n          <div class=\"cx-payment-card-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"getCardContent(method) | async\"\n              (sendCard)=\"paymentMethodSelected(method)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"row cx-checkout-btns\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'common.back' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-primary\"\n            [disabled]=\"!selectedPayment\"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newPaymentForm>\n      <cx-payment-form\n        (addPaymentInfo)=\"addNewPaymentMethod($event)\"\n        (closeForm)=\"hideNewPaymentForm()\"\n        (goBack)=\"back()\"\n        [paymentMethodsCount]=\"existingPaymentMethods?.length || 0\"\n      ></cx-payment-form>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n  </ng-template>\n</ng-container>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        PaymentMethodComponent.ctorParameters = function () {
-            return [
-                { type: i1$2.UserService },
-                { type: i1$2.CheckoutService },
-                { type: i1$2.GlobalMessageService },
-                { type: i1$2.RoutingConfigService },
-                { type: i1$2.RoutingService },
-                { type: CheckoutConfigService },
-                { type: i4.ActivatedRoute },
-                { type: i1$2.TranslationService }
-            ];
-        };
-        return PaymentMethodComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var DeliveryModeSetGuard = /** @class */ (function () {
-        function DeliveryModeSetGuard(checkoutDetailsService, checkoutConfigService, routingConfigService, router, serverConfig) {
-            this.checkoutDetailsService = checkoutDetailsService;
-            this.checkoutConfigService = checkoutConfigService;
-            this.routingConfigService = routingConfigService;
-            this.router = router;
-            this.serverConfig = serverConfig;
-        }
-        /**
-         * @return {?}
-         */
-        DeliveryModeSetGuard.prototype.canActivate = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                /** @type {?} */
-                var checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.DELIVERY_MODE);
-                if (!checkoutStep && !this.serverConfig.production) {
-                    console.warn("Missing step with type " + CheckoutStepType.DELIVERY_MODE + " in checkout configuration.");
-                }
-                return this.checkoutDetailsService
-                    .getSelectedDeliveryModeCode()
-                    .pipe(operators.map(function (mode) {
-                    return mode && mode.length
-                        ? true
-                        : _this.router.parseUrl(checkoutStep &&
-                            _this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0]);
-                }));
-            };
-        DeliveryModeSetGuard.decorators = [
-            { type: i0.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */
-        DeliveryModeSetGuard.ctorParameters = function () {
-            return [
-                { type: CheckoutDetailsService },
-                { type: CheckoutConfigService },
-                { type: i1$2.RoutingConfigService },
-                { type: i4.Router },
-                { type: i1$2.ServerConfig }
-            ];
-        };
-        /** @nocollapse */ DeliveryModeSetGuard.ngInjectableDef = i0.defineInjectable({ factory: function DeliveryModeSetGuard_Factory() { return new DeliveryModeSetGuard(i0.inject(CheckoutDetailsService), i0.inject(CheckoutConfigService), i0.inject(i1$2.RoutingConfigService), i0.inject(i4.Router), i0.inject(i1$2.ServerConfig)); }, token: DeliveryModeSetGuard, providedIn: "root" });
-        return DeliveryModeSetGuard;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var PaymentMethodModule = /** @class */ (function () {
-        function PaymentMethodModule() {
-        }
-        PaymentMethodModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i4.RouterModule,
-                            PaymentFormModule,
-                            CardModule,
-                            SpinnerModule,
-                            i1$2.I18nModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    CheckoutPaymentDetails: {
-                                        selector: 'cx-payment-method',
-                                        guards: [
-                                            i1$2.AuthGuard,
-                                            CartNotEmptyGuard,
-                                            ShippingAddressSetGuard,
-                                            DeliveryModeSetGuard,
-                                        ],
-                                    },
-                                },
-                            }))),
-                        ],
-                        providers: [i1$2.UserService],
-                        declarations: [PaymentMethodComponent],
-                        entryComponents: [PaymentMethodComponent],
-                        exports: [PaymentMethodComponent],
-                    },] }
-        ];
-        return PaymentMethodModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var PlaceOrderComponent = /** @class */ (function () {
-        function PlaceOrderComponent(checkoutService, routingService) {
-            this.checkoutService = checkoutService;
-            this.routingService = routingService;
-            this.tAndCToggler = false;
-        }
-        /**
-         * @return {?}
-         */
-        PlaceOrderComponent.prototype.toggleTAndC = /**
-         * @return {?}
-         */
-            function () {
-                this.tAndCToggler = !this.tAndCToggler;
-            };
-        /**
-         * @return {?}
-         */
-        PlaceOrderComponent.prototype.placeOrder = /**
-         * @return {?}
-         */
-            function () {
-                this.checkoutService.placeOrder();
-            };
-        /**
-         * @return {?}
-         */
-        PlaceOrderComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                this.placeOrderSubscription = this.checkoutService
-                    .getOrderDetails()
-                    .pipe(operators.filter(function (order) { return Object.keys(order).length !== 0; }))
-                    .subscribe(function () {
-                    _this.routingService.go({ cxRoute: 'orderConfirmation' });
-                });
-            };
-        /**
-         * @return {?}
-         */
-        PlaceOrderComponent.prototype.ngOnDestroy = /**
-         * @return {?}
-         */
-            function () {
-                if (this.placeOrderSubscription) {
-                    this.placeOrderSubscription.unsubscribe();
-                }
-            };
-        PlaceOrderComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-place-order',
-                        template: "<div class=\"cx-place-order-form form-check\">\n  <label>\n    <input class=\"form-check-input\" type=\"checkbox\" (change)=\"toggleTAndC()\" />\n    <span class=\"form-check-label\">\n      {{ 'checkoutReview.confirmThatRead' | cxTranslate }}\n      <a\n        [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n        class=\"cx-tc-link\"\n        target=\"_blank\"\n      >\n        {{ 'checkoutReview.termsAndConditions' | cxTranslate }}\n      </a>\n    </span>\n  </label>\n</div>\n<button\n  [disabled]=\"!tAndCToggler\"\n  (click)=\"placeOrder()\"\n  class=\"btn btn-primary btn-block\"\n>\n  {{ 'checkoutReview.placeOrder' | cxTranslate }}\n</button>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        PlaceOrderComponent.ctorParameters = function () {
-            return [
-                { type: i1$2.CheckoutService },
-                { type: i1$2.RoutingService }
-            ];
-        };
-        return PlaceOrderComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var PlaceOrderModule = /** @class */ (function () {
-        function PlaceOrderModule() {
-        }
-        PlaceOrderModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i1$2.CheckoutModule,
-                            i4.RouterModule,
-                            i1$2.UrlModule,
-                            i1$2.I18nModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    CheckoutPlaceOrder: {
-                                        selector: 'cx-place-order',
-                                        guards: [i1$2.AuthGuard, CartNotEmptyGuard],
-                                    },
-                                },
-                            }))),
-                        ],
-                        declarations: [PlaceOrderComponent],
-                        entryComponents: [PlaceOrderComponent],
-                        exports: [PlaceOrderComponent],
-                    },] }
-        ];
-        return PlaceOrderModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ReviewSubmitComponent = /** @class */ (function () {
-        function ReviewSubmitComponent(checkoutService, userService, cartService, translation) {
-            this.checkoutService = checkoutService;
-            this.userService = userService;
-            this.cartService = cartService;
-            this.translation = translation;
-        }
-        /**
-         * @return {?}
-         */
-        ReviewSubmitComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                this.cart$ = this.cartService.getActive();
-                this.entries$ = this.cartService.getEntries();
-                this.deliveryAddress$ = this.checkoutService.getDeliveryAddress();
-                this.paymentDetails$ = this.checkoutService.getPaymentDetails();
-                this.deliveryMode$ = this.checkoutService.getSelectedDeliveryMode().pipe(operators.tap(function (selected) {
-                    if (selected === null) {
-                        _this.checkoutService.loadSupportedDeliveryModes();
-                    }
-                }));
-                this.countryName$ = this.deliveryAddress$.pipe(operators.switchMap(function (address) {
-                    return _this.userService.getCountry(address.country.isocode);
-                }), operators.tap(function (country) {
-                    if (country === null) {
-                        _this.userService.loadDeliveryCountries();
-                    }
-                }), operators.map(function (country) { return country && country.name; }));
-            };
-        /**
-         * @param {?} deliveryAddress
-         * @param {?} countryName
-         * @return {?}
-         */
-        ReviewSubmitComponent.prototype.getShippingAddressCard = /**
-         * @param {?} deliveryAddress
-         * @param {?} countryName
-         * @return {?}
-         */
-            function (deliveryAddress, countryName) {
-                return rxjs.combineLatest([
-                    this.translation.translate('addressCard.shipTo'),
-                ]).pipe(operators.map(function (_a) {
-                    var _b = __read(_a, 1), textTitle = _b[0];
-                    if (!countryName) {
-                        countryName = deliveryAddress.country.isocode;
-                    }
-                    /** @type {?} */
-                    var region = '';
-                    if (deliveryAddress.region && deliveryAddress.region.isocode) {
-                        region = deliveryAddress.region.isocode + ', ';
-                    }
-                    return {
-                        title: textTitle,
-                        textBold: deliveryAddress.firstName + ' ' + deliveryAddress.lastName,
-                        text: [
-                            deliveryAddress.line1,
-                            deliveryAddress.line2,
-                            deliveryAddress.town + ', ' + region + countryName,
-                            deliveryAddress.postalCode,
-                            deliveryAddress.phone,
-                        ],
-                    };
-                }));
-            };
-        /**
-         * @param {?} deliveryMode
-         * @return {?}
-         */
-        ReviewSubmitComponent.prototype.getDeliveryModeCard = /**
-         * @param {?} deliveryMode
-         * @return {?}
-         */
-            function (deliveryMode) {
-                return rxjs.combineLatest([
-                    this.translation.translate('checkoutShipping.shippingMethod'),
-                ]).pipe(operators.map(function (_a) {
-                    var _b = __read(_a, 1), textTitle = _b[0];
-                    return {
-                        title: textTitle,
-                        textBold: deliveryMode.name,
-                        text: [deliveryMode.description],
-                    };
-                }));
-            };
-        /**
-         * @param {?} paymentDetails
-         * @return {?}
-         */
-        ReviewSubmitComponent.prototype.getPaymentMethodCard = /**
-         * @param {?} paymentDetails
-         * @return {?}
-         */
-            function (paymentDetails) {
-                return rxjs.combineLatest([
-                    this.translation.translate('paymentForm.payment'),
-                    this.translation.translate('paymentCard.expires', {
-                        month: paymentDetails.expiryMonth,
-                        year: paymentDetails.expiryYear,
-                    }),
-                ]).pipe(operators.map(function (_a) {
-                    var _b = __read(_a, 2), textTitle = _b[0], textExpires = _b[1];
-                    return {
-                        title: textTitle,
-                        textBold: paymentDetails.accountHolderName,
-                        text: [paymentDetails.cardNumber, textExpires],
-                    };
-                }));
-            };
-        ReviewSubmitComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-review-submit',
-                        template: "<div class=\"cx-review\">\n  <!-- TITLE -->\n  <h3 class=\"cx-review-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutReview.review' | cxTranslate }}\n  </h3>\n  <div class=\"cx-review-summary row\">\n    <!-- SHIPPING ADDRESS SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-address\">\n        <cx-card\n          [content]=\"\n            getShippingAddressCard(\n              deliveryAddress$ | async,\n              countryName$ | async\n            ) | async\n          \"\n        ></cx-card>\n      </div>\n    </div>\n\n    <!-- DELIVERY MODE SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-shipping\">\n        <cx-card\n          *ngIf=\"(deliveryMode$ | async) as deliveryMode\"\n          [content]=\"getDeliveryModeCard(deliveryMode) | async\"\n        ></cx-card>\n      </div>\n    </div>\n\n    <!-- PAYMENT METHOD SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-card cx-review-card-payment\">\n        <cx-card\n          [content]=\"getPaymentMethodCard(paymentDetails$ | async) | async\"\n        ></cx-card>\n      </div>\n    </div>\n  </div>\n\n  <!-- CART ITEM SECTION -->\n  <ng-container *ngIf=\"(cart$ | async) as cart\">\n    <div class=\"cx-review-cart-total d-none d-lg-block d-xl-block\">\n      {{\n        'cartItems.cartTotal'\n          | cxTranslate: { count: cart.deliveryItemsQuantity }\n      }}:\n      {{ cart.totalPrice?.formattedValue }}\n    </div>\n    <h4 class=\"cx-review-cart-heading d-block d-lg-none d-xl-none\">\n      {{ 'checkoutReview.placeOrder' | cxTranslate }}\n    </h4>\n    <div\n      class=\"cx-review-cart-item col-md-12\"\n      *ngIf=\"(entries$ | async) as entries\"\n    >\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [isReadOnly]=\"true\"\n        [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n      ></cx-cart-item-list>\n    </div>\n  </ng-container>\n</div>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        ReviewSubmitComponent.ctorParameters = function () {
-            return [
-                { type: i1$2.CheckoutService },
-                { type: i1$2.UserService },
-                { type: i1$2.CartService },
-                { type: i1$2.TranslationService }
-            ];
-        };
-        return ReviewSubmitComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var PaymentDetailsSetGuard = /** @class */ (function () {
-        function PaymentDetailsSetGuard(checkoutDetailsService, checkoutConfigService, routingConfigService, router, serverConfig) {
-            this.checkoutDetailsService = checkoutDetailsService;
-            this.checkoutConfigService = checkoutConfigService;
-            this.routingConfigService = routingConfigService;
-            this.router = router;
-            this.serverConfig = serverConfig;
-        }
-        /**
-         * @return {?}
-         */
-        PaymentDetailsSetGuard.prototype.canActivate = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                /** @type {?} */
-                var checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.PAYMENT_DETAILS);
-                if (!checkoutStep && !this.serverConfig.production) {
-                    console.warn("Missing step with type " + CheckoutStepType.PAYMENT_DETAILS + " in checkout configuration.");
-                }
-                return this.checkoutDetailsService
-                    .getPaymentDetails()
-                    .pipe(operators.map(function (paymentDetails) {
-                    return paymentDetails && Object.keys(paymentDetails).length !== 0
-                        ? true
-                        : _this.router.parseUrl(checkoutStep &&
-                            _this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0]);
-                }));
-            };
-        PaymentDetailsSetGuard.decorators = [
-            { type: i0.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */
-        PaymentDetailsSetGuard.ctorParameters = function () {
-            return [
-                { type: CheckoutDetailsService },
-                { type: CheckoutConfigService },
-                { type: i1$2.RoutingConfigService },
-                { type: i4.Router },
-                { type: i1$2.ServerConfig }
-            ];
-        };
-        /** @nocollapse */ PaymentDetailsSetGuard.ngInjectableDef = i0.defineInjectable({ factory: function PaymentDetailsSetGuard_Factory() { return new PaymentDetailsSetGuard(i0.inject(CheckoutDetailsService), i0.inject(CheckoutConfigService), i0.inject(i1$2.RoutingConfigService), i0.inject(i4.Router), i0.inject(i1$2.ServerConfig)); }, token: PaymentDetailsSetGuard, providedIn: "root" });
-        return PaymentDetailsSetGuard;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ReviewSubmitModule = /** @class */ (function () {
-        function ReviewSubmitModule() {
-        }
-        ReviewSubmitModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            CardModule,
-                            CartSharedModule,
-                            i1$2.I18nModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    CheckoutReviewOrder: {
-                                        selector: 'cx-review-submit',
-                                        guards: [
-                                            i1$2.AuthGuard,
-                                            CartNotEmptyGuard,
-                                            ShippingAddressSetGuard,
-                                            DeliveryModeSetGuard,
-                                            PaymentDetailsSetGuard,
-                                        ],
-                                    },
-                                },
-                            }))),
-                        ],
-                        declarations: [ReviewSubmitComponent],
-                        entryComponents: [ReviewSubmitComponent],
-                        exports: [ReviewSubmitComponent],
-                    },] }
-        ];
-        return ReviewSubmitModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var AddressFormComponent = /** @class */ (function () {
-        function AddressFormComponent(fb, checkoutService, userService, globalMessageService, modalService) {
-            this.fb = fb;
-            this.checkoutService = checkoutService;
-            this.userService = userService;
-            this.globalMessageService = globalMessageService;
-            this.modalService = modalService;
-            this.showCancelBtn = true;
-            this.submitAddress = new i0.EventEmitter();
-            this.backToAddress = new i0.EventEmitter();
-            this.address = this.fb.group({
-                defaultAddress: [false],
-                titleCode: [''],
-                firstName: ['', forms.Validators.required],
-                lastName: ['', forms.Validators.required],
-                line1: ['', forms.Validators.required],
-                line2: [''],
-                town: ['', forms.Validators.required],
-                region: this.fb.group({
-                    isocode: [null, forms.Validators.required],
-                }),
-                country: this.fb.group({
-                    isocode: [null, forms.Validators.required],
-                }),
-                postalCode: ['', forms.Validators.required],
-                phone: '',
-            });
-        }
-        /**
-         * @return {?}
-         */
-        AddressFormComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                // Fetching countries
-                this.countries$ = this.userService.getDeliveryCountries().pipe(operators.tap(function (countries) {
-                    if (Object.keys(countries).length === 0) {
-                        _this.userService.loadDeliveryCountries();
-                    }
-                }));
-                // Fetching titles
-                this.titles$ = this.userService.getTitles().pipe(operators.tap(function (titles) {
-                    if (Object.keys(titles).length === 0) {
-                        _this.userService.loadTitles();
-                    }
-                }), operators.map(function (titles) {
-                    /** @type {?} */
-                    var noneTitle = { code: '', name: 'Title' };
-                    return __spread([noneTitle], titles);
-                }));
-                // Fetching regions
-                this.regions$ = this.userService.getRegions().pipe(operators.tap(function (regions) {
-                    /** @type {?} */
-                    var regionControl = _this.address.get('region.isocode');
-                    if (Object.keys(regions).length === 0) {
-                        regionControl.disable();
-                        /** @type {?} */
-                        var countryIsoCode = _this.address.get('country.isocode').value;
-                        if (countryIsoCode) {
-                            _this.userService.loadRegions(countryIsoCode);
-                        }
-                    }
-                    else {
-                        regionControl.enable();
-                    }
-                }));
-                // verify the new added address
-                this.addressVerifySub = this.checkoutService
-                    .getAddressVerificationResults()
-                    .subscribe(function (results) {
-                    if (results === 'FAIL') {
-                        _this.checkoutService.clearAddressVerificationResults();
-                    }
-                    else if (results.decision === 'ACCEPT') {
-                        _this.submitAddress.emit(_this.address.value);
-                    }
-                    else if (results.decision === 'REJECT') {
-                        // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
-                        if (results.errors.errors.some(function (error) { return error.subject === 'titleCode'; })) {
-                            _this.globalMessageService.add({ key: 'addressForm.titleRequired' }, i1$2.GlobalMessageType.MSG_TYPE_ERROR);
-                        }
-                        else {
-                            _this.globalMessageService.add({ key: 'addressForm.invalidAddress' }, i1$2.GlobalMessageType.MSG_TYPE_ERROR);
-                        }
-                        _this.checkoutService.clearAddressVerificationResults();
-                    }
-                    else if (results.decision === 'REVIEW') {
-                        _this.openSuggestedAddress(results);
-                    }
-                });
-                if (this.addressData) {
-                    this.address.patchValue(this.addressData);
-                    this.countrySelected(this.addressData.country);
-                    if (this.addressData.region) {
-                        this.regionSelected(this.addressData.region);
-                    }
-                }
-            };
-        /**
-         * @param {?} title
-         * @return {?}
-         */
-        AddressFormComponent.prototype.titleSelected = /**
-         * @param {?} title
-         * @return {?}
-         */
-            function (title) {
-                this.address['controls'].titleCode.setValue(title.code);
-            };
-        /**
-         * @param {?} country
-         * @return {?}
-         */
-        AddressFormComponent.prototype.countrySelected = /**
-         * @param {?} country
-         * @return {?}
-         */
-            function (country) {
-                this.address['controls'].country['controls'].isocode.setValue(country.isocode);
-                this.userService.loadRegions(country.isocode);
-            };
-        /**
-         * @param {?} region
-         * @return {?}
-         */
-        AddressFormComponent.prototype.regionSelected = /**
-         * @param {?} region
-         * @return {?}
-         */
-            function (region) {
-                this.address['controls'].region['controls'].isocode.setValue(region.isocode);
-            };
-        /**
-         * @return {?}
-         */
-        AddressFormComponent.prototype.toggleDefaultAddress = /**
-         * @return {?}
-         */
-            function () {
-                this.address['controls'].defaultAddress.setValue(this.address.value.defaultAddress);
-            };
-        /**
-         * @return {?}
-         */
-        AddressFormComponent.prototype.back = /**
-         * @return {?}
-         */
-            function () {
-                this.backToAddress.emit();
-            };
-        /**
-         * @return {?}
-         */
-        AddressFormComponent.prototype.verifyAddress = /**
-         * @return {?}
-         */
-            function () {
-                this.checkoutService.verifyAddress(this.address.value);
-            };
-        /**
-         * @param {?} results
-         * @return {?}
-         */
-        AddressFormComponent.prototype.openSuggestedAddress = /**
-         * @param {?} results
-         * @return {?}
-         */
-            function (results) {
-                var _this = this;
-                if (!this.suggestedAddressModalRef) {
-                    this.suggestedAddressModalRef = this.modalService.open(SuggestedAddressDialogComponent, { centered: true, size: 'lg' });
-                    this.suggestedAddressModalRef.componentInstance.enteredAddress = this.address.value;
-                    this.suggestedAddressModalRef.componentInstance.suggestedAddresses =
-                        results.suggestedAddresses;
-                    this.suggestedAddressModalRef.result
-                        .then(function (address) {
-                        _this.checkoutService.clearAddressVerificationResults();
-                        if (address) {
-                            address = Object.assign({
-                                titleCode: _this.address.value.titleCode,
-                                phone: _this.address.value.phone,
-                                selected: true,
-                            }, address);
-                            _this.submitAddress.emit(address);
-                        }
-                        _this.suggestedAddressModalRef = null;
-                    })
-                        .catch(function () {
-                        // this  callback is called when modal is closed with Esc key or clicking backdrop
-                        _this.checkoutService.clearAddressVerificationResults();
-                        /** @type {?} */
-                        var address = Object.assign({
-                            selected: true,
-                        }, _this.address.value);
-                        _this.submitAddress.emit(address);
-                        _this.suggestedAddressModalRef = null;
-                    });
-                }
-            };
-        /**
-         * @return {?}
-         */
-        AddressFormComponent.prototype.ngOnDestroy = /**
-         * @return {?}
-         */
-            function () {
-                this.checkoutService.clearAddressVerificationResults();
-                if (this.addressVerifySub) {
-                    this.addressVerifySub.unsubscribe();
-                }
-            };
-        AddressFormComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-address-form',
-                        template: "<div [formGroup]=\"address\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <div class=\"form-group\" formGroupName=\"country\">\n        <ng-container *ngIf=\"(countries$ | async) as countries\">\n          <div *ngIf=\"countries.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'addressForm.country' | cxTranslate\n              }}</span>\n              <ng-select\n                class=\"country-select\"\n                formControlName=\"isocode\"\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"countries\"\n                bindLabel=\"name\"\n                bindValue=\"isocode\"\n                placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                (change)=\"countrySelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\" *ngIf=\"showTitleCode\">\n        <ng-container *ngIf=\"(titles$ | async) as titles\">\n          <div *ngIf=\"titles.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'addressForm.title' | cxTranslate\n              }}</span>\n              <ng-select\n                formControlName=\"titleCode\"\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"titles\"\n                bindLabel=\"name\"\n                bindValue=\"code\"\n                (change)=\"titleSelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.firstName.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            type=\"text\"\n            required\n            placeholder=\"{{\n              'addressForm.firstName.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"firstName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.lastName.label' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            placeholder=\"{{ 'addressForm.lastName.placeholder' | cxTranslate }}\"\n            formControlName=\"lastName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.address1' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            placeholder=\"{{ 'addressForm.streetAddress' | cxTranslate }}\"\n            formControlName=\"line1\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'addressForm.address2' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            placeholder=\"{{ 'addressForm.aptSuite' | cxTranslate }}\"\n            formControlName=\"line2\"\n          />\n        </label>\n      </div>\n      <div class=\"row\">\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content required\">{{\n              'addressForm.city.label' | cxTranslate\n            }}</span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              required\n              placeholder=\"{{ 'addressForm.city.placeholder' | cxTranslate }}\"\n              formControlName=\"town\"\n            />\n          </label>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <ng-container\n            *ngIf=\"(regions$ | async) as regions\"\n            formGroupName=\"region\"\n          >\n            <div *ngIf=\"regions.length !== 0\">\n              <label aria-required=\"true\">\n                <span class=\"label-content required\">{{\n                  'addressForm.state' | cxTranslate\n                }}</span>\n                <ng-container *ngIf=\"regions[0].name\">\n                  <ng-select\n                    class=\"region-select\"\n                    formControlName=\"isocode\"\n                    [searchable]=\"false\"\n                    [clearable]=\"false\"\n                    [items]=\"regions\"\n                    bindLabel=\"name\"\n                    bindValue=\"isocode\"\n                    placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                    (change)=\"regionSelected($event)\"\n                  >\n                  </ng-select>\n                </ng-container>\n                <ng-container *ngIf=\"!regions[0].name\">\n                  <ng-select\n                    class=\"region-select\"\n                    [searchable]=\"false\"\n                    [clearable]=\"false\"\n                    [items]=\"regions\"\n                    bindLabel=\"isocode\"\n                    bindValue=\"region\"\n                    placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                    (change)=\"regionSelected($event)\"\n                  >\n                  </ng-select>\n                </ng-container>\n              </label>\n            </div>\n          </ng-container>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content required\">{{\n              'addressForm.zipCode.label' | cxTranslate\n            }}</span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              required\n              placeholder=\"{{\n                'addressForm.zipCode.placeholder' | cxTranslate\n              }}\"\n              formControlName=\"postalCode\"\n            />\n          </label>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'addressForm.phoneNumber.label' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            placeholder=\"{{\n              'addressForm.phoneNumber.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"phone\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\" *ngIf=\"setAsDefaultField !== false\">\n        <div class=\"form-check\">\n          <label>\n            <input\n              type=\"checkbox\"\n              class=\"form-check-input\"\n              formControlName=\"defaultAddress\"\n              (change)=\"toggleDefaultAddress()\"\n            />\n            <span class=\"form-check-label\">{{\n              'addressForm.setAsDefault' | cxTranslate\n            }}</span>\n          </label>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"cx-checkout-btns row\">\n    <div class=\"col-md-12 col-lg-6\" *ngIf=\"showCancelBtn\">\n      <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n        {{ cancelBtnLabel || ('addressForm.chooseAddress' | cxTranslate) }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        class=\"btn btn-block btn-primary\"\n        [disabled]=\"address.invalid\"\n        (click)=\"verifyAddress()\"\n      >\n        {{ actionBtnLabel || ('common.continue' | cxTranslate) }}\n      </button>\n    </div>\n  </div>\n</div>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        AddressFormComponent.ctorParameters = function () {
-            return [
-                { type: forms.FormBuilder },
-                { type: i1$2.CheckoutService },
-                { type: i1$2.UserService },
-                { type: i1$2.GlobalMessageService },
-                { type: ModalService }
-            ];
-        };
-        AddressFormComponent.propDecorators = {
-            addressData: [{ type: i0.Input }],
-            actionBtnLabel: [{ type: i0.Input }],
-            cancelBtnLabel: [{ type: i0.Input }],
-            setAsDefaultField: [{ type: i0.Input }],
-            showTitleCode: [{ type: i0.Input }],
-            showCancelBtn: [{ type: i0.Input }],
-            submitAddress: [{ type: i0.Output }],
-            backToAddress: [{ type: i0.Output }]
-        };
-        return AddressFormComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var AddressFormModule = /** @class */ (function () {
-        function AddressFormModule() {
-        }
-        AddressFormModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            forms.ReactiveFormsModule,
-                            forms.FormsModule,
-                            i4.RouterModule,
-                            ngSelect.NgSelectModule,
-                            IconModule,
-                            i1$2.I18nModule,
-                            AutoFocusDirectiveModule,
-                        ],
-                        declarations: [AddressFormComponent, SuggestedAddressDialogComponent],
-                        entryComponents: [SuggestedAddressDialogComponent],
-                        exports: [AddressFormComponent],
-                    },] }
-        ];
-        return AddressFormModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ShippingAddressComponent = /** @class */ (function () {
-        function ShippingAddressComponent(userService, cartService, routingService, checkoutService, checkoutConfigService, activatedRoute, translation) {
-            this.userService = userService;
-            this.cartService = cartService;
-            this.routingService = routingService;
-            this.checkoutService = checkoutService;
-            this.checkoutConfigService = checkoutConfigService;
-            this.activatedRoute = activatedRoute;
-            this.translation = translation;
-            this.newAddressFormManuallyOpened = false;
-            this.cards = [];
-            this.selectedAddress$ = new rxjs.BehaviorSubject(null);
-        }
-        /**
-         * @return {?}
-         */
-        ShippingAddressComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                this.goTo = null;
-                this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
-                this.checkoutStepUrlPrevious = 'cart';
-                this.isLoading$ = this.userService.getAddressesLoading();
-                this.existingAddresses$ = this.userService.getAddresses();
-                this.cards$ = rxjs.combineLatest(this.existingAddresses$, this.selectedAddress$.asObservable(), this.translation.translate('checkoutAddress.defaultShippingAddress'), this.translation.translate('checkoutAddress.shipToThisAddress'), this.translation.translate('addressCard.selected')).pipe(operators.map(function (_a) {
-                    var _b = __read(_a, 5), addresses = _b[0], selected = _b[1], textDefaultShippingAddress = _b[2], textShipToThisAddress = _b[3], textSelected = _b[4];
-                    return addresses.map(function (address) {
-                        /** @type {?} */
-                        var card = _this.getCardContent(address, selected, textDefaultShippingAddress, textShipToThisAddress, textSelected);
-                        return {
-                            address: address,
-                            card: card,
-                        };
-                    });
-                }));
-                this.cartService.loadDetails();
-                this.userService.loadAddresses();
-                this.setAddressSub = this.checkoutService
-                    .getDeliveryAddress()
-                    .subscribe(function (address) {
-                    _this.setAddress = address;
-                    _this.selectedAddress$.next(address);
-                    if (_this.goTo) {
-                        _this.goNext();
-                        _this.goTo = null;
-                    }
-                });
-                this.selectedAddressSub = this.selectedAddress$.subscribe(function (address) {
-                    _this.selectedAddress = address;
-                });
-            };
-        /**
-         * @param {?} address
-         * @param {?} selected
-         * @param {?} textDefaultShippingAddress
-         * @param {?} textShipToThisAddress
-         * @param {?} textSelected
-         * @return {?}
-         */
-        ShippingAddressComponent.prototype.getCardContent = /**
-         * @param {?} address
-         * @param {?} selected
-         * @param {?} textDefaultShippingAddress
-         * @param {?} textShipToThisAddress
-         * @param {?} textSelected
-         * @return {?}
-         */
-            function (address, selected, textDefaultShippingAddress, textShipToThisAddress, textSelected) {
-                /** @type {?} */
-                var region = '';
-                if (address.region && address.region.isocode) {
-                    region = address.region.isocode + ', ';
-                }
-                /** @type {?} */
-                var card = {
-                    title: address.defaultAddress ? textDefaultShippingAddress : '',
-                    textBold: address.firstName + ' ' + address.lastName,
-                    text: [
-                        address.line1,
-                        address.line2,
-                        address.town + ', ' + region + address.country.isocode,
-                        address.postalCode,
-                        address.phone,
-                    ],
-                    actions: [{ name: textShipToThisAddress, event: 'send' }],
-                    header: selected && selected.id === address.id ? textSelected : '',
-                };
-                this.cards.push(card);
-                return card;
-            };
-        /**
-         * @param {?} address
-         * @return {?}
-         */
-        ShippingAddressComponent.prototype.addressSelected = /**
-         * @param {?} address
-         * @return {?}
-         */
-            function (address) {
-                this.selectedAddress$.next(address);
-            };
-        /**
-         * @return {?}
-         */
-        ShippingAddressComponent.prototype.next = /**
-         * @return {?}
-         */
-            function () {
-                this.addAddress({ address: this.selectedAddress, newAddress: false });
-            };
-        /**
-         * @param {?} __0
-         * @return {?}
-         */
-        ShippingAddressComponent.prototype.addAddress = /**
-         * @param {?} __0
-         * @return {?}
-         */
-            function (_a) {
-                var newAddress = _a.newAddress, address = _a.address;
-                if (newAddress) {
-                    this.checkoutService.createAndSetAddress(address);
-                    this.goTo = CheckoutStepType.DELIVERY_MODE;
-                    return;
-                }
-                if (this.setAddress &&
-                    this.selectedAddress &&
-                    this.setAddress.id === this.selectedAddress.id) {
-                    this.goNext();
-                }
-                else {
-                    this.goTo = CheckoutStepType.DELIVERY_MODE;
-                    this.checkoutService.setDeliveryAddress(address);
-                }
-            };
-        /**
-         * @param {?} address
-         * @return {?}
-         */
-        ShippingAddressComponent.prototype.addNewAddress = /**
-         * @param {?} address
-         * @return {?}
-         */
-            function (address) {
-                this.addAddress({ address: address, newAddress: true });
-            };
-        /**
-         * @return {?}
-         */
-        ShippingAddressComponent.prototype.showNewAddressForm = /**
-         * @return {?}
-         */
-            function () {
-                this.newAddressFormManuallyOpened = true;
-            };
-        /**
-         * @param {?=} goBack
-         * @return {?}
-         */
-        ShippingAddressComponent.prototype.hideNewAddressForm = /**
-         * @param {?=} goBack
-         * @return {?}
-         */
-            function (goBack) {
-                if (goBack === void 0) {
-                    goBack = false;
-                }
-                this.newAddressFormManuallyOpened = false;
-                if (goBack) {
-                    this.back();
-                }
-            };
-        /**
-         * @return {?}
-         */
-        ShippingAddressComponent.prototype.goNext = /**
-         * @return {?}
-         */
-            function () {
-                this.routingService.go(this.checkoutStepUrlNext);
-            };
-        /**
-         * @return {?}
-         */
-        ShippingAddressComponent.prototype.back = /**
-         * @return {?}
-         */
-            function () {
-                this.routingService.go(this.checkoutStepUrlPrevious);
-            };
-        /**
-         * @return {?}
-         */
-        ShippingAddressComponent.prototype.ngOnDestroy = /**
-         * @return {?}
-         */
-            function () {
-                if (this.setAddressSub) {
-                    this.setAddressSub.unsubscribe();
-                }
-                if (this.selectedAddressSub) {
-                    this.selectedAddressSub.unsubscribe();
-                }
-            };
-        ShippingAddressComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-shipping-address',
-                        template: "<ng-container *ngIf=\"(cards$ | async) as cards\">\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutAddress.shippingAddress' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        cards?.length && !newAddressFormManuallyOpened;\n        else newAddressForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'checkoutAddress.selectYourShippingAddress' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-sm-12 col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewAddressForm()\"\n          >\n            {{ 'checkoutAddress.addNewAddress' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-shipping-address-card col-md-12 col-lg-6\"\n          *ngFor=\"let card of cards; let i = index\"\n        >\n          <div\n            class=\"cx-shipping-address-card-inner\"\n            (click)=\"addressSelected(card.address)\"\n          >\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"card.card\"\n              (sendCard)=\"addressSelected(card.address)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"cx-btn btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'checkout.backToCart' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"cx-btn btn btn-block btn-primary\"\n            [disabled]=\"!selectedAddress || !selectedAddress.id\"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newAddressForm>\n      <ng-container *ngIf=\"cards.length; else initialAddressForm\">\n        <cx-address-form\n          showTitleCode=\"true\"\n          (backToAddress)=\"hideNewAddressForm(false)\"\n          (submitAddress)=\"addNewAddress($event)\"\n        ></cx-address-form>\n      </ng-container>\n      <ng-template #initialAddressForm>\n        <cx-address-form\n          showTitleCode=\"true\"\n          cancelBtnLabel=\"{{ 'checkout.backToCart' | cxTranslate }}\"\n          (backToAddress)=\"hideNewAddressForm(true)\"\n          (submitAddress)=\"addNewAddress($event)\"\n        ></cx-address-form>\n      </ng-template>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </ng-template>\n</ng-container>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        ShippingAddressComponent.ctorParameters = function () {
-            return [
-                { type: i1$2.UserService },
-                { type: i1$2.CartService },
-                { type: i1$2.RoutingService },
-                { type: i1$2.CheckoutService },
-                { type: CheckoutConfigService },
-                { type: i4.ActivatedRoute },
-                { type: i1$2.TranslationService }
-            ];
-        };
-        return ShippingAddressComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ShippingAddressModule = /** @class */ (function () {
-        function ShippingAddressModule() {
-        }
-        ShippingAddressModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i4.RouterModule,
-                            AddressFormModule,
-                            CardModule,
-                            SpinnerModule,
-                            i1$2.I18nModule,
-                            CheckoutProgressMobileTopModule,
-                            CheckoutProgressMobileBottomModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
-                                cmsComponents: {
-                                    CheckoutShippingAddress: {
-                                        selector: 'cx-shipping-address',
-                                        guards: [i1$2.AuthGuard, CartNotEmptyGuard],
-                                    },
-                                },
-                            }))),
-                        ],
-                        declarations: [ShippingAddressComponent],
-                        entryComponents: [ShippingAddressComponent],
-                        exports: [ShippingAddressComponent],
-                    },] }
-        ];
-        return ShippingAddressModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CheckoutComponentModule = /** @class */ (function () {
-        function CheckoutComponentModule() {
-        }
-        CheckoutComponentModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            CartComponentModule,
-                            i1$2.CheckoutModule,
-                            CheckoutOrchestratorModule,
-                            CheckoutOrderSummaryModule,
-                            CheckoutProgressModule,
-                            CheckoutProgressMobileTopModule,
-                            CheckoutProgressMobileBottomModule,
-                            DeliveryModeModule,
-                            OrderConfirmationModule,
-                            PaymentMethodModule,
-                            PlaceOrderModule,
-                            PromotionsModule,
-                            ReviewSubmitModule,
-                            ShippingAddressModule,
-                        ],
-                        // @todo: should we keep below provider here?
-                        providers: [CheckoutConfigService],
-                    },] }
-        ];
-        return CheckoutComponentModule;
-    }());
 
     /**
      * @fileoverview added by tsickle
@@ -12922,6 +11137,7 @@
         OrderDetailTotalsComponent,
         OrderDetailShippingComponent,
     ];
+    var ɵ0$2 = { pageLabel: 'order', cxRoute: 'orderDetails' };
     var OrderDetailsModule = /** @class */ (function () {
         function OrderDetailsModule() {
         }
@@ -12932,6 +11148,14 @@
                             CardModule,
                             common.CommonModule,
                             i1$2.I18nModule,
+                            i4.RouterModule.forChild([
+                                {
+                                    path: null,
+                                    canActivate: [i1$2.AuthGuard, CmsPageGuard],
+                                    component: PageLayoutComponent,
+                                    data: ɵ0$2,
+                                },
+                            ]),
                             i1$2.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     AccountOrderDetailsHeadlineComponent: {
@@ -13115,7 +11339,6 @@
                             i4.RouterModule,
                             forms.FormsModule,
                             ngSelect.NgSelectModule,
-                            BootstrapModule,
                             ListNavigationModule,
                             i1$2.UrlModule,
                             i1$2.I18nModule,
@@ -14521,7 +12744,7 @@
                         imports: [
                             common.CommonModule,
                             i4.RouterModule,
-                            BootstrapModule,
+                            i1.NgbDropdownModule,
                             i1$2.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     NavigationComponent: {
@@ -14558,7 +12781,6 @@
                         imports: [
                             common.CommonModule,
                             NavigationModule,
-                            BootstrapModule,
                             i1$2.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     CategoryNavigationComponent: {
@@ -15231,6 +13453,1688 @@
                     },] }
         ];
         return SearchBoxModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var SharedCarouselService = /** @class */ (function () {
+        function SharedCarouselService() {
+            this.MAX_WIDTH = 360;
+            this.MAX_ITEM_SIZE = 4;
+            this.SPEED = 250;
+            this.itemSize$ = rxjs.of(this.MAX_ITEM_SIZE);
+            this.activeItem$ = rxjs.of(0);
+            this.activeItemWithDelay$ = rxjs.of(0);
+        }
+        /**
+         * @return {?}
+         */
+        SharedCarouselService.prototype.getActiveItem = /**
+         * @return {?}
+         */
+            function () {
+                return this.activeItem$;
+            };
+        /**
+         * @return {?}
+         */
+        SharedCarouselService.prototype.getActiveItemWithDelay = /**
+         * @return {?}
+         */
+            function () {
+                return this.activeItemWithDelay$;
+            };
+        /**
+         * @return {?}
+         */
+        SharedCarouselService.prototype.getItemSize = /**
+         * @return {?}
+         */
+            function () {
+                return this.itemSize$;
+            };
+        /**
+         * The number of items shown in the carousel can be calculated
+         * the standard implemenattions uses the element size to calculate
+         * the items that fit in the carousel.
+         * This method is called in `ngOnInit`.
+         */
+        /**
+         * The number of items shown in the carousel can be calculated
+         * the standard implemenattions uses the element size to calculate
+         * the items that fit in the carousel.
+         * This method is called in `ngOnInit`.
+         * @param {?} window
+         * @param {?} nativeElement
+         * @return {?}
+         */
+        SharedCarouselService.prototype.setItemSize = /**
+         * The number of items shown in the carousel can be calculated
+         * the standard implemenattions uses the element size to calculate
+         * the items that fit in the carousel.
+         * This method is called in `ngOnInit`.
+         * @param {?} window
+         * @param {?} nativeElement
+         * @return {?}
+         */
+            function (window, nativeElement) {
+                var _this = this;
+                this.itemSize$ = !window
+                    ? rxjs.of(this.MAX_ITEM_SIZE)
+                    : rxjs.fromEvent(window, 'resize').pipe(operators.map(function () { return (( /** @type {?} */(nativeElement))).clientWidth; }), operators.startWith((( /** @type {?} */(nativeElement))).clientWidth), 
+                    // avoid to much calls
+                    operators.debounceTime(100), operators.map(function (innerWidth) {
+                        /** @type {?} */
+                        var itemsPerPage = Math.round(innerWidth / _this.MAX_WIDTH);
+                        return itemsPerPage > 2 ? _this.MAX_ITEM_SIZE : itemsPerPage;
+                    }), 
+                    // only emit new size when the size changed
+                    operators.distinctUntilChanged());
+            };
+        /**
+         * @param {?} newActiveItem
+         * @return {?}
+         */
+        SharedCarouselService.prototype.setItemAsActive = /**
+         * @param {?} newActiveItem
+         * @return {?}
+         */
+            function (newActiveItem) {
+                var _this = this;
+                this.activeItem$ = this.itemSize$.pipe(operators.map(function (itemSize) { return _this.setItem(newActiveItem, itemSize); }));
+            };
+        /**
+         * @return {?}
+         */
+        SharedCarouselService.prototype.setPreviousItemAsActive = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.activeItem$ = this.activeItem$.pipe(operators.withLatestFrom(this.itemSize$), operators.map(function (_a) {
+                    var _b = __read(_a, 2), activeItem = _b[0], itemSize = _b[1];
+                    return _this.setItem(activeItem - itemSize, itemSize);
+                }));
+            };
+        /**
+         * @return {?}
+         */
+        SharedCarouselService.prototype.setNextItemAsActive = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.activeItem$ = this.activeItem$.pipe(operators.withLatestFrom(this.itemSize$), operators.map(function (_a) {
+                    var _b = __read(_a, 2), activeItem = _b[0], itemSize = _b[1];
+                    return _this.setItem(activeItem + itemSize, itemSize);
+                }));
+            };
+        /**
+         * @private
+         * @param {?} newActiveItem
+         * @param {?} itemSize
+         * @return {?}
+         */
+        SharedCarouselService.prototype.setItem = /**
+         * @private
+         * @param {?} newActiveItem
+         * @param {?} itemSize
+         * @return {?}
+         */
+            function (newActiveItem, itemSize) {
+                this.activeItemWithDelay$ = rxjs.of(newActiveItem).pipe(operators.delay(this.getDelayValue(itemSize)));
+                return newActiveItem;
+            };
+        /**
+         * @private
+         * @param {?} itemSize
+         * @return {?}
+         */
+        SharedCarouselService.prototype.getDelayValue = /**
+         * @private
+         * @param {?} itemSize
+         * @return {?}
+         */
+            function (itemSize) {
+                return (itemSize - 1) * this.SPEED;
+            };
+        SharedCarouselService.decorators = [
+            { type: i0.Injectable }
+        ];
+        /** @nocollapse */
+        SharedCarouselService.ctorParameters = function () { return []; };
+        return SharedCarouselService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductCarouselService = /** @class */ (function () {
+        function ProductCarouselService(component, productService) {
+            this.component = component;
+            this.productService = productService;
+        }
+        /**
+         * @return {?}
+         */
+        ProductCarouselService.prototype.getTitle = /**
+         * @return {?}
+         */
+            function () {
+                return this.title$;
+            };
+        /**
+         * @return {?}
+         */
+        ProductCarouselService.prototype.fetchTitle = /**
+         * @return {?}
+         */
+            function () {
+                this.title$ = this.component.data$.pipe(operators.map(function (data) {
+                    return data.title;
+                }));
+            };
+        /**
+         * @return {?}
+         */
+        ProductCarouselService.prototype.getItems = /**
+         * @return {?}
+         */
+            function () {
+                return this.items$;
+            };
+        /**
+         * Maps the item codes from CMS component to an array of `Product` observables.
+         */
+        /**
+         * Maps the item codes from CMS component to an array of `Product` observables.
+         * @return {?}
+         */
+        ProductCarouselService.prototype.fetchItems = /**
+         * Maps the item codes from CMS component to an array of `Product` observables.
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.items$ = this.component.data$.pipe(operators.filter(function (data) { return data && !!data.productCodes; }), operators.map(function (data) {
+                    /** @type {?} */
+                    var productCodes = data.productCodes.split(' ');
+                    return productCodes.map(function (code) { return _this.productService.get(code); });
+                }));
+            };
+        ProductCarouselService.decorators = [
+            { type: i0.Injectable }
+        ];
+        /** @nocollapse */
+        ProductCarouselService.ctorParameters = function () {
+            return [
+                { type: CmsComponentData },
+                { type: i1$2.ProductService }
+            ];
+        };
+        return ProductCarouselService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductCarouselComponent = /** @class */ (function () {
+        function ProductCarouselComponent(winRef, el, productCarouselService, sharedCarouselService) {
+            this.el = el;
+            this.productCarouselService = productCarouselService;
+            this.sharedCarouselService = sharedCarouselService;
+            this.window = winRef.nativeWindow;
+        }
+        /**
+         * @return {?}
+         */
+        ProductCarouselComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                this.productCarouselService.fetchTitle();
+                this.sharedCarouselService.setItemSize(this.window, this.el.nativeElement);
+                this.productCarouselService.fetchItems();
+                this.sharedCarouselService.setItemAsActive(0);
+            };
+        ProductCarouselComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-product-carousel',
+                        template: "<h3 *ngIf=\"(productCarouselService.getTitle() | async) as title\">\n  {{ title }}\n</h3>\n\n<ng-container\n  *ngIf=\"{\n    maxItemSize: sharedCarouselService.getItemSize() | async,\n    products: productCarouselService.getItems() | async,\n    activeItem: sharedCarouselService.getActiveItemWithDelay() | async,\n    active: sharedCarouselService.getActiveItem() | async\n  } as carousel\"\n>\n  <div class=\"cx-carousel\" [ngClass]=\"'size-' + carousel.maxItemSize\">\n    <button\n      class=\"previous\"\n      (click)=\"sharedCarouselService.setPreviousItemAsActive()\"\n      [disabled]=\"carousel.activeItem === 0\"\n    ></button>\n\n    <div class=\"groups\">\n      <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n        <div class=\"group\" *ngIf=\"i % carousel.maxItemSize === 0\">\n          <ng-container\n            *ngFor=\"\n              let product$ of (carousel.products\n                | slice: i:i + carousel.maxItemSize)\n            \"\n          >\n            <a\n              *ngIf=\"(product$ | async) as product\"\n              class=\"product\"\n              [class.active]=\"i === carousel.activeItem\"\n              [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n            >\n              <cx-media [container]=\"product.images?.PRIMARY\" format=\"product\">\n              </cx-media>\n\n              <h4>{{ product.name }}</h4>\n              <div class=\"price\">{{ product.price?.formattedValue }}</div>\n            </a>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      class=\"next\"\n      (click)=\"sharedCarouselService.setNextItemAsActive()\"\n      [disabled]=\"\n        carousel.activeItem > carousel.products.length - carousel.maxItemSize\n      \"\n    ></button>\n  </div>\n\n  <div class=\"indicators\">\n    <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n      <button\n        *ngIf=\"i % carousel.maxItemSize === 0\"\n        (click)=\"sharedCarouselService.setItemAsActive(i)\"\n        [disabled]=\"i === carousel.activeItem\"\n      ></button>\n    </ng-container></div\n></ng-container>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        ProductCarouselComponent.ctorParameters = function () {
+            return [
+                { type: i1$2.WindowRef },
+                { type: i0.ElementRef },
+                { type: ProductCarouselService },
+                { type: SharedCarouselService }
+            ];
+        };
+        return ProductCarouselComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductCarouselModule = /** @class */ (function () {
+        function ProductCarouselModule() {
+        }
+        ProductCarouselModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i4.RouterModule,
+                            MediaModule,
+                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    ProductCarouselComponent: {
+                                        selector: 'cx-product-carousel',
+                                        providers: [
+                                            {
+                                                provide: ProductCarouselService,
+                                                useClass: ProductCarouselService,
+                                                deps: [CmsComponentData, i1$2.ProductService],
+                                            },
+                                            {
+                                                provide: SharedCarouselService,
+                                                useClass: SharedCarouselService,
+                                                deps: [],
+                                            },
+                                        ],
+                                    },
+                                },
+                            }))),
+                            i1$2.UrlModule,
+                        ],
+                        declarations: [ProductCarouselComponent],
+                        entryComponents: [ProductCarouselComponent],
+                        exports: [ProductCarouselComponent],
+                    },] }
+        ];
+        return ProductCarouselModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductReferencesService = /** @class */ (function () {
+        function ProductReferencesService(component, referenceService, routerService) {
+            this.component = component;
+            this.referenceService = referenceService;
+            this.routerService = routerService;
+        }
+        /**
+         * @return {?}
+         */
+        ProductReferencesService.prototype.getTitle = /**
+         * @return {?}
+         */
+            function () {
+                return this.title$;
+            };
+        /**
+         * @return {?}
+         */
+        ProductReferencesService.prototype.fetchTitle = /**
+         * @return {?}
+         */
+            function () {
+                this.title$ = this.component.data$.pipe(operators.map(function (data) {
+                    return data.title;
+                }));
+            };
+        /**
+         * @return {?}
+         */
+        ProductReferencesService.prototype.getDisplayProductTitles = /**
+         * @return {?}
+         */
+            function () {
+                return this.displayProductTitles$.pipe(operators.map(function (data) { return Boolean(JSON.parse(data.toLowerCase())); }));
+            };
+        /**
+         * @return {?}
+         */
+        ProductReferencesService.prototype.fetchDisplayProductTitles = /**
+         * @return {?}
+         */
+            function () {
+                this.displayProductTitles$ = this.component.data$.pipe(operators.map(function (data) {
+                    return data.displayProductTitles;
+                }));
+            };
+        /**
+         * @return {?}
+         */
+        ProductReferencesService.prototype.getDisplayProductPrices = /**
+         * @return {?}
+         */
+            function () {
+                return this.displayProductPrices$.pipe(operators.map(function (data) { return Boolean(JSON.parse(data.toLowerCase())); }));
+            };
+        /**
+         * @return {?}
+         */
+        ProductReferencesService.prototype.fetchDisplayProductPrices = /**
+         * @return {?}
+         */
+            function () {
+                this.displayProductPrices$ = this.component.data$.pipe(operators.map(function (data) {
+                    return data.displayProductPrices;
+                }));
+            };
+        /**
+         * @return {?}
+         */
+        ProductReferencesService.prototype.getReferenceType = /**
+         * @return {?}
+         */
+            function () {
+                return this.component.data$.pipe(operators.map(function (data) { return data.productReferenceTypes; }));
+            };
+        /**
+         * @return {?}
+         */
+        ProductReferencesService.prototype.getProductCode = /**
+         * @return {?}
+         */
+            function () {
+                return this.routerService
+                    .getRouterState()
+                    .pipe(operators.map(function (data) { return data.state.params.productCode; }));
+            };
+        /**
+         * @return {?}
+         */
+        ProductReferencesService.prototype.getReferenceList = /**
+         * @return {?}
+         */
+            function () {
+                return this.items$;
+            };
+        /**
+         * @param {?=} pageSize
+         * @return {?}
+         */
+        ProductReferencesService.prototype.setReferenceList = /**
+         * @param {?=} pageSize
+         * @return {?}
+         */
+            function (pageSize) {
+                var _this = this;
+                this.items$ = rxjs.combineLatest(this.getProductCode(), this.getReferenceType()).pipe(operators.map(function (data) { return ({ productCode: data[0], referenceType: data[1] }); }), operators.switchMap(function (data) {
+                    return _this.referenceService.get(data.productCode, data.referenceType, pageSize);
+                }));
+            };
+        ProductReferencesService.decorators = [
+            { type: i0.Injectable }
+        ];
+        /** @nocollapse */
+        ProductReferencesService.ctorParameters = function () {
+            return [
+                { type: CmsComponentData },
+                { type: i1$2.ProductReferenceService },
+                { type: i1$2.RoutingService }
+            ];
+        };
+        return ProductReferencesService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductReferencesComponent = /** @class */ (function () {
+        function ProductReferencesComponent(winRef, el, productReferencesService, sharedCarouselService) {
+            this.el = el;
+            this.productReferencesService = productReferencesService;
+            this.sharedCarouselService = sharedCarouselService;
+            this.window = winRef.nativeWindow;
+        }
+        /**
+         * @return {?}
+         */
+        ProductReferencesComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                this.productReferencesService.fetchTitle();
+                this.productReferencesService.fetchDisplayProductTitles();
+                this.productReferencesService.fetchDisplayProductPrices();
+                this.sharedCarouselService.setItemSize(this.window, this.el.nativeElement);
+                this.productReferencesService.setReferenceList();
+                this.sharedCarouselService.setItemAsActive(0);
+            };
+        ProductReferencesComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-product-references',
+                        template: "<ng-container\n  *ngIf=\"(productReferencesService.getReferenceList() | async) as productList\"\n>\n  <ng-container *ngIf=\"productList.length !== 0\">\n    <h3\n      *ngIf=\"\n        (productReferencesService.getDisplayProductTitles() | async) &&\n        (productReferencesService.getTitle() | async) as title\n      \"\n    >\n      {{ title }}\n    </h3>\n\n    <ng-container\n      *ngIf=\"{\n        maxItemSize: sharedCarouselService.getItemSize() | async,\n        products: productList,\n        activeItem: sharedCarouselService.getActiveItemWithDelay() | async,\n        active: sharedCarouselService.getActiveItem() | async\n      } as carousel\"\n    >\n      <div class=\"cx-carousel\" [ngClass]=\"'size-' + carousel.maxItemSize\">\n        <button\n          class=\"previous\"\n          (click)=\"sharedCarouselService.setPreviousItemAsActive()\"\n          [disabled]=\"carousel.activeItem === 0\"\n        ></button>\n\n        <div class=\"groups\">\n          <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n            <div class=\"group\" *ngIf=\"i % carousel.maxItemSize === 0\">\n              <ng-container\n                *ngFor=\"\n                  let products of (carousel.products\n                    | slice: i:i + carousel.maxItemSize)\n                \"\n              >\n                <a\n                  *ngIf=\"products.target as product\"\n                  class=\"product\"\n                  [class.active]=\"i === carousel.activeItem\"\n                  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n                >\n                  <cx-media\n                    [container]=\"product.images?.PRIMARY\"\n                    format=\"product\"\n                  >\n                  </cx-media>\n\n                  <h4>{{ product.name }}</h4>\n                  <div\n                    *ngIf=\"\n                      (productReferencesService.getDisplayProductPrices()\n                        | async)\n                    \"\n                    class=\"price\"\n                  >\n                    {{ product.price?.formattedValue }}\n                  </div>\n                </a>\n              </ng-container>\n            </div>\n          </ng-container>\n        </div>\n        <button\n          class=\"next\"\n          (click)=\"sharedCarouselService.setNextItemAsActive()\"\n          [disabled]=\"\n            carousel.activeItem >\n            carousel.products.length - carousel.maxItemSize\n          \"\n        ></button>\n      </div>\n      <div class=\"indicators\">\n        <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n          <button\n            *ngIf=\"i % carousel.maxItemSize === 0\"\n            (click)=\"sharedCarouselService.setItemAsActive(i)\"\n            [disabled]=\"i === carousel.activeItem\"\n          ></button>\n        </ng-container>\n      </div>\n    </ng-container>\n  </ng-container>\n</ng-container>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        ProductReferencesComponent.ctorParameters = function () {
+            return [
+                { type: i1$2.WindowRef },
+                { type: i0.ElementRef },
+                { type: ProductReferencesService },
+                { type: SharedCarouselService }
+            ];
+        };
+        return ProductReferencesComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductReferencesModule = /** @class */ (function () {
+        function ProductReferencesModule() {
+        }
+        ProductReferencesModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i4.RouterModule,
+                            MediaModule,
+                            i1$2.UrlModule,
+                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    ProductReferencesComponent: {
+                                        selector: 'cx-product-references',
+                                        providers: [
+                                            {
+                                                provide: ProductReferencesService,
+                                                useClass: ProductReferencesService,
+                                                deps: [CmsComponentData, i1$2.ProductReferenceService, i1$2.RoutingService],
+                                            },
+                                            {
+                                                provide: SharedCarouselService,
+                                                useClass: SharedCarouselService,
+                                                deps: [],
+                                            },
+                                        ],
+                                    },
+                                },
+                            }))),
+                        ],
+                        declarations: [ProductReferencesComponent],
+                        entryComponents: [ProductReferencesComponent],
+                        exports: [ProductReferencesComponent],
+                    },] }
+        ];
+        return ProductReferencesModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var WAITING_CLASS = 'is-waiting';
+    var ProductImagesComponent = /** @class */ (function () {
+        function ProductImagesComponent(currentProductService) {
+            this.currentProductService = currentProductService;
+            this.product$ = this.currentProductService
+                .getProduct()
+                .pipe(operators.filter(Boolean));
+            this._imageContainer$ = new rxjs.BehaviorSubject(null);
+            this.imageContainer$ = rxjs.combineLatest(this.product$, this._imageContainer$).pipe(operators.map(function (_a) {
+                var _b = __read(_a, 2), product = _b[0], container = _b[1];
+                return container
+                    ? container
+                    : product.images && product.images.PRIMARY
+                        ? product.images.PRIMARY
+                        : {};
+            }));
+        }
+        /**
+         * @param {?} event
+         * @param {?} imageContainer
+         * @return {?}
+         */
+        ProductImagesComponent.prototype.showImage = /**
+         * @param {?} event
+         * @param {?} imageContainer
+         * @return {?}
+         */
+            function (event, imageContainer) {
+                this.startWaiting(( /** @type {?} */(event.target)));
+                this._imageContainer$.next(imageContainer);
+            };
+        /**
+         * @param {?} currentContainer
+         * @return {?}
+         */
+        ProductImagesComponent.prototype.isMainImageContainer = /**
+         * @param {?} currentContainer
+         * @return {?}
+         */
+            function (currentContainer) {
+                return this.imageContainer$.pipe(operators.map(function (container) {
+                    return container &&
+                        container.zoom &&
+                        currentContainer.zoom &&
+                        container.zoom.url === currentContainer.zoom.url;
+                }));
+            };
+        /**
+         * @return {?}
+         */
+        ProductImagesComponent.prototype.loadHandler = /**
+         * @return {?}
+         */
+            function () {
+                this.clearWaitList();
+            };
+        /**
+         * @private
+         * @param {?} el
+         * @return {?}
+         */
+        ProductImagesComponent.prototype.startWaiting = /**
+         * @private
+         * @param {?} el
+         * @return {?}
+         */
+            function (el) {
+                this.clearWaitList();
+                el.classList.add(WAITING_CLASS);
+                this.waiting = el;
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        ProductImagesComponent.prototype.clearWaitList = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                if (this.waiting) {
+                    this.waiting.classList.remove(WAITING_CLASS);
+                    delete this.waiting;
+                }
+            };
+        ProductImagesComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-product-images',
+                        template: "<ng-container *ngIf=\"(imageContainer$ | async) as container\">\n  <cx-media [container]=\"container\" format=\"zoom\" (loaded)=\"loadHandler()\">\n  </cx-media>\n\n  <div\n    class=\"thumbs\"\n    *ngIf=\"(product$ | async) as product\"\n    [class.hidden]=\"product.images?.GALLERY?.length === 1\"\n  >\n    <cx-media\n      *ngFor=\"let image of product.images?.GALLERY\"\n      [container]=\"image\"\n      format=\"thumbnail\"\n      (focus)=\"showImage($event, image)\"\n      tabindex=\"0\"\n      [class.active]=\"isMainImageContainer(image) | async\"\n    >\n    </cx-media>\n  </div>\n</ng-container>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        ProductImagesComponent.ctorParameters = function () {
+            return [
+                { type: CurrentProductService }
+            ];
+        };
+        return ProductImagesComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @enum {string} */
+    var ProductDetailOutlets = {
+        SUMMARY: 'PDP.SUMMARY',
+        IMAGES: 'PDP.IMAGES',
+        TITLE: 'PDP.TITLE',
+        RATING: 'PDP.RATING',
+        PRICE: 'PDP.PRICE',
+        SHARE: 'PDP.SHARE',
+    };
+    /** @enum {string} */
+    var ProductTabsOutlets = {
+        DESCRIPTION: 'PDP.DESCRIPTION',
+        SPECIFICATIONS: 'PDP.SPECIFICATIONS',
+        REVIEWS: 'PDP.REVIEWS',
+        SHIPPING: 'PDP.SHIPPING',
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductDetailsComponent = /** @class */ (function () {
+        function ProductDetailsComponent(currentPageService, cmsService) {
+            this.currentPageService = currentPageService;
+            this.cmsService = cmsService;
+        }
+        Object.defineProperty(ProductDetailsComponent.prototype, "outlets", {
+            get: /**
+             * @return {?}
+             */ function () {
+                return ProductDetailsComponent.outlets;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * @return {?}
+         */
+        ProductDetailsComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                this.product$ = this.currentPageService.getProduct();
+                this.page$ = this.cmsService.getCurrentPage();
+            };
+        ProductDetailsComponent.outlets = ProductDetailOutlets;
+        ProductDetailsComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-product-details',
+                        template: "<ng-container *ngIf=\"(product$ | async) as product\">\n  <ng-container *cxOutlet=\"outlets.SUMMARY\">\n    <cx-product-summary [product]=\"product\"> </cx-product-summary>\n  </ng-container>\n</ng-container>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        ProductDetailsComponent.ctorParameters = function () {
+            return [
+                { type: CurrentProductService },
+                { type: i1$2.CmsService }
+            ];
+        };
+        return ProductDetailsComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductSummaryComponent = /** @class */ (function () {
+        function ProductSummaryComponent(translatePipe, translationService) {
+            this.translatePipe = translatePipe;
+            this.translationService = translationService;
+            this.itemCount = 1;
+        }
+        Object.defineProperty(ProductSummaryComponent.prototype, "outlets", {
+            get: /**
+             * @return {?}
+             */ function () {
+                return ProductSummaryComponent.outlets;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        ProductSummaryComponent.prototype.updateCount = /**
+         * @param {?} value
+         * @return {?}
+         */
+            function (value) {
+                this.itemCount = value;
+            };
+        // NOTE: Does not currently exists as its own component
+        // but part of tabs component. This is likely to change in refactor.
+        // NOTE: Does not currently exists as its own component
+        // but part of tabs component. This is likely to change in refactor.
+        /**
+         * @private
+         * @return {?}
+         */
+        ProductSummaryComponent.prototype.getReviewsComponent =
+            // NOTE: Does not currently exists as its own component
+            // but part of tabs component. This is likely to change in refactor.
+            /**
+             * @private
+             * @return {?}
+             */
+            function () {
+                return document.querySelector('cx-product-reviews');
+            };
+        // Get Tabs Component if exists on page
+        // Get Tabs Component if exists on page
+        /**
+         * @private
+         * @return {?}
+         */
+        ProductSummaryComponent.prototype.getTabsComponent =
+            // Get Tabs Component if exists on page
+            /**
+             * @private
+             * @return {?}
+             */
+            function () {
+                return document.querySelector('cx-tab-paragraph-container');
+            };
+        // Get Tab by label if exists on page
+        // Get Tab by label if exists on page
+        /**
+         * @param {?} label
+         * @param {?} tabsComponent
+         * @return {?}
+         */
+        ProductSummaryComponent.prototype.getTabByLabel =
+            // Get Tab by label if exists on page
+            /**
+             * @param {?} label
+             * @param {?} tabsComponent
+             * @return {?}
+             */
+            function (label, tabsComponent) {
+                var e_1, _a;
+                if (tabsComponent) {
+                    // NOTE: Reads through h3 tags to click on correct tab
+                    // There may be a better way of doing this now/after refactor
+                    /** @type {?} */
+                    var h3Elements = tabsComponent.getElementsByTagName('h3');
+                    try {
+                        // Look through h3 tab elements until finding tab with label
+                        for (var _b = __values(Array.from(h3Elements)), _c = _b.next(); !_c.done; _c = _b.next()) {
+                            var h3Element = _c.value;
+                            if (h3Element.innerHTML.includes(label)) {
+                                return h3Element;
+                            }
+                        }
+                    }
+                    catch (e_1_1) {
+                        e_1 = { error: e_1_1 };
+                    }
+                    finally {
+                        try {
+                            if (_c && !_c.done && (_a = _b.return))
+                                _a.call(_b);
+                        }
+                        finally {
+                            if (e_1)
+                                throw e_1.error;
+                        }
+                    }
+                }
+            };
+        // Click to activate tab if not already active
+        // Click to activate tab if not already active
+        /**
+         * @param {?} tab
+         * @return {?}
+         */
+        ProductSummaryComponent.prototype.clickTabIfInactive =
+            // Click to activate tab if not already active
+            /**
+             * @param {?} tab
+             * @return {?}
+             */
+            function (tab) {
+                if (!tab.classList.contains('active') ||
+                    tab.classList.contains('toggled')) {
+                    tab.click();
+                }
+            };
+        // Scroll to views component on page and click "Reviews" tab
+        // Scroll to views component on page and click "Reviews" tab
+        /**
+         * @return {?}
+         */
+        ProductSummaryComponent.prototype.showReviews =
+            // Scroll to views component on page and click "Reviews" tab
+            /**
+             * @return {?}
+             */
+            function () {
+                var _this = this;
+                // Use translated label for Reviews tab reference
+                this.translationService
+                    .translate('productDetails.reviews')
+                    .subscribe(function (reviewsTabLabel) {
+                    /** @type {?} */
+                    var tabsComponent = _this.getTabsComponent();
+                    /** @type {?} */
+                    var reviewsTab = _this.getTabByLabel(reviewsTabLabel, tabsComponent);
+                    /** @type {?} */
+                    var reviewsComponent = _this.getReviewsComponent();
+                    if (reviewsTab && reviewsComponent) {
+                        _this.clickTabIfInactive(reviewsTab);
+                        reviewsComponent.scrollIntoView();
+                    }
+                });
+            };
+        /**
+         * @return {?}
+         */
+        ProductSummaryComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                this.reviewsTabAvailable = !!this.getReviewsComponent();
+            };
+        ProductSummaryComponent.outlets = ProductDetailOutlets;
+        ProductSummaryComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-product-summary',
+                        template: "<ng-container *cxOutlet=\"outlets.TITLE\">\n  <div class=\"name\">{{ product?.name }}</div>\n  <div class=\"code\">\n    {{ 'productSummary.id' | cxTranslate }} {{ product?.code }}\n  </div>\n</ng-container>\n\n<ng-container *cxOutlet=\"outlets.RATING\">\n  <div class=\"rating\">\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"count\">({{ product?.numberOfReviews }})</div>\n    <a class=\"btn-link\" *ngIf=\"reviewsTabAvailable\" (click)=\"showReviews()\">{{\n      'productSummary.showReviews' | cxTranslate\n    }}</a>\n  </div>\n</ng-container>\n\n<ng-container *cxOutlet=\"outlets.PRICE\">\n  <div class=\"price\" aria-label=\"new item price\">\n    {{ product?.price?.formattedValue }}\n  </div>\n</ng-container>\n\n<div class=\"description\"><p [innerHTML]=\"product?.summary\"></p></div>\n\n<cx-page-slot position=\"AddToCart\"></cx-page-slot>\n\n<!-- @TODO: Temp. Comment out share link while not in use by CMS -->\n<!-- <ng-container *cxOutlet=\"outlets.SHARE\">\n  <div>\n    <a href=\"#\" class=\"share btn-link\">\n      {{ 'productSummary.share' | cxTranslate }}\n    </a>\n  </div>\n</ng-container> -->\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        providers: [i1$2.TranslatePipe]
+                    }] }
+        ];
+        /** @nocollapse */
+        ProductSummaryComponent.ctorParameters = function () {
+            return [
+                { type: i1$2.TranslatePipe },
+                { type: i1$2.TranslationService }
+            ];
+        };
+        ProductSummaryComponent.propDecorators = {
+            product: [{ type: i0.Input }]
+        };
+        return ProductSummaryComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductDetailsModule = /** @class */ (function () {
+        function ProductDetailsModule() {
+        }
+        ProductDetailsModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i4.RouterModule,
+                            forms.FormsModule,
+                            forms.ReactiveFormsModule,
+                            CartSharedModule,
+                            i1$2.CmsModule,
+                            AddToCartModule,
+                            OutletModule,
+                            i1$2.I18nModule,
+                            FormComponentsModule,
+                            MediaModule,
+                            StarRatingModule,
+                            i1$2.UrlModule,
+                            PageSlotModule,
+                        ],
+                        declarations: [ProductDetailsComponent, ProductSummaryComponent],
+                        exports: [ProductDetailsComponent, ProductSummaryComponent],
+                    },] }
+        ];
+        return ProductDetailsModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @enum {string} */
+    var ViewModes = {
+        Grid: 'grid',
+        List: 'list',
+    };
+    var ProductViewComponent = /** @class */ (function () {
+        function ProductViewComponent() {
+            this.iconTypes = ICON_TYPE;
+            this.modeChange = new i0.EventEmitter();
+        }
+        Object.defineProperty(ProductViewComponent.prototype, "buttonClass", {
+            get: /**
+             * @return {?}
+             */ function () {
+                /** @type {?} */
+                var viewName = this.viewMode.toLowerCase();
+                return "cx-product-" + viewName;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(ProductViewComponent.prototype, "viewMode", {
+            /**
+             *   Display icons inversely to allow users
+             *   to see the view they will navigate to
+             */
+            get: /**
+             *   Display icons inversely to allow users
+             *   to see the view they will navigate to
+             * @return {?}
+             */ function () {
+                if (this.mode === 'list') {
+                    return this.iconTypes.GRID;
+                }
+                else if (this.mode === 'grid') {
+                    return this.iconTypes.LIST;
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * @return {?}
+         */
+        ProductViewComponent.prototype.changeMode = /**
+         * @return {?}
+         */
+            function () {
+                /** @type {?} */
+                var newMode = this.mode === ViewModes.Grid ? ViewModes.List : ViewModes.Grid;
+                this.modeChange.emit(newMode);
+            };
+        ProductViewComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-product-view',
+                        template: "<div class=\"cx-product-layout\" (click)=\"changeMode()\">\n  <div [ngClass]=\"buttonClass\">\n    <cx-icon\n      *ngIf=\"viewMode === iconTypes.GRID\"\n      [type]=\"iconTypes.GRID\"\n    ></cx-icon>\n    <cx-icon\n      *ngIf=\"viewMode === iconTypes.LIST\"\n      [type]=\"iconTypes.LIST\"\n    ></cx-icon>\n  </div>\n</div>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        ProductViewComponent.propDecorators = {
+            mode: [{ type: i0.Input }],
+            modeChange: [{ type: i0.Output }]
+        };
+        return ProductViewComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductListComponent = /** @class */ (function () {
+        function ProductListComponent(productSearchService, activatedRoute, pageLayoutService) {
+            this.productSearchService = productSearchService;
+            this.activatedRoute = activatedRoute;
+            this.pageLayoutService = pageLayoutService;
+            this.searchConfig = {};
+            this.gridMode$ = new rxjs.BehaviorSubject(ViewModes.Grid);
+        }
+        /**
+         * @return {?}
+         */
+        ProductListComponent.prototype.update = /**
+         * @return {?}
+         */
+            function () {
+                var queryParams = this.activatedRoute.snapshot.queryParams;
+                this.options = this.createOptionsByUrlParams();
+                if (this.categoryCode && this.categoryCode !== queryParams.categoryCode) {
+                    this.query = ':relevance:category:' + this.categoryCode;
+                }
+                if (this.brandCode && this.brandCode !== queryParams.brandCode) {
+                    this.query = ':relevance:brand:' + this.brandCode;
+                }
+                if (!this.query && queryParams.query) {
+                    this.query = queryParams.query;
+                }
+                this.search(this.query, this.options);
+            };
+        /**
+         * @return {?}
+         */
+        ProductListComponent.prototype.createOptionsByUrlParams = /**
+         * @return {?}
+         */
+            function () {
+                var queryParams = this.activatedRoute.snapshot.queryParams;
+                /** @type {?} */
+                var newConfig = __assign({}, queryParams);
+                delete newConfig.query;
+                /** @type {?} */
+                var options = __assign({}, this.searchConfig, newConfig, { pageSize: this.itemPerPage || 10 });
+                if (this.categoryCode) {
+                    options.categoryCode = this.categoryCode;
+                }
+                if (this.brandCode) {
+                    options.brandCode = this.brandCode;
+                }
+                return options;
+            };
+        /**
+         * @return {?}
+         */
+        ProductListComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.updateParams$ = this.activatedRoute.params.pipe(operators.tap(function (params) {
+                    _this.categoryCode = params.categoryCode;
+                    _this.brandCode = params.brandCode;
+                    _this.query = params.query;
+                    _this.update();
+                }));
+                this.pageLayoutService.templateName$.pipe(operators.take(1)).subscribe(function (template) {
+                    _this.gridMode$.next(template === 'ProductGridPageTemplate' ? ViewModes.Grid : ViewModes.List);
+                });
+                // clean previous search result
+                this.productSearchService.clearResults();
+                this.model$ = this.productSearchService.getResults().pipe(operators.tap(function (searchResult) {
+                    if (Object.keys(searchResult).length === 0) {
+                        _this.search(_this.query, _this.options);
+                    }
+                    else {
+                        _this.getCategoryTitle(searchResult);
+                    }
+                }), operators.filter(function (searchResult) { return Object.keys(searchResult).length > 0; }));
+            };
+        /**
+         * @protected
+         * @param {?} data
+         * @return {?}
+         */
+        ProductListComponent.prototype.getCategoryTitle = /**
+         * @protected
+         * @param {?} data
+         * @return {?}
+         */
+            function (data) {
+                if (data.breadcrumbs && data.breadcrumbs.length > 0) {
+                    this.categoryTitle = data.breadcrumbs[0].facetValueName;
+                }
+                else if (!this.query.includes(':relevance:')) {
+                    this.categoryTitle = this.query;
+                }
+                if (this.categoryTitle) {
+                    this.categoryTitle =
+                        data.pagination.totalResults + ' results for ' + this.categoryTitle;
+                }
+                return this.categoryTitle;
+            };
+        /**
+         * @param {?} pageNumber
+         * @return {?}
+         */
+        ProductListComponent.prototype.viewPage = /**
+         * @param {?} pageNumber
+         * @return {?}
+         */
+            function (pageNumber) {
+                this.search(this.query, { currentPage: pageNumber });
+            };
+        /**
+         * @param {?} sortCode
+         * @return {?}
+         */
+        ProductListComponent.prototype.sortList = /**
+         * @param {?} sortCode
+         * @return {?}
+         */
+            function (sortCode) {
+                this.search(this.query, { sortCode: sortCode });
+            };
+        /**
+         * @param {?} mode
+         * @return {?}
+         */
+        ProductListComponent.prototype.setGridMode = /**
+         * @param {?} mode
+         * @return {?}
+         */
+            function (mode) {
+                this.gridMode$.next(mode);
+            };
+        /**
+         * @protected
+         * @param {?} query
+         * @param {?=} options
+         * @return {?}
+         */
+        ProductListComponent.prototype.search = /**
+         * @protected
+         * @param {?} query
+         * @param {?=} options
+         * @return {?}
+         */
+            function (query, options) {
+                if (this.query) {
+                    if (options) {
+                        // Overide default options
+                        this.searchConfig = __assign({}, this.searchConfig, options);
+                    }
+                    this.productSearchService.search(query, this.searchConfig);
+                }
+            };
+        ProductListComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-product-list',
+                        template: "<ng-container *ngIf=\"(updateParams$ | async)\">\n  <div class=\"cx-page\" *ngIf=\"(model$ | async) as model\">\n    <section class=\"cx-page-section\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-12 col-lg-12\" *ngIf=\"(gridMode$ | async) as gridMode\">\n            <div class=\"cx-sorting top\">\n              <div class=\"row\">\n                <div class=\"col-12 col-lg-4 mr-auto\">\n                  <div class=\"form-group cx-sort-dropdown\">\n                    <cx-sorting\n                      [sortOptions]=\"model.sorts\"\n                      (sortListEvent)=\"sortList($event)\"\n                      [selectedOption]=\"model.pagination.sort\"\n                      placeholder=\"{{\n                        'productList.sortByRelevance' | cxTranslate\n                      }}\"\n                    ></cx-sorting>\n                  </div>\n                </div>\n                <div class=\"col-auto\">\n                  <div\n                    class=\"cx-pagination\"\n                    aria-label=\"product search pagination\"\n                  >\n                    <cx-pagination\n                      [pagination]=\"model.pagination\"\n                      (viewPageEvent)=\"viewPage($event)\"\n                    ></cx-pagination>\n                  </div>\n                </div>\n                <div class=\"col-auto ml-auto ml-lg-0\">\n                  <cx-product-view\n                    (modeChange)=\"setGridMode($event)\"\n                    [mode]=\"gridMode\"\n                  ></cx-product-view>\n                </div>\n              </div>\n            </div>\n            <div class=\"cx-product-container\">\n              <ng-container *ngIf=\"gridMode === 'grid'\">\n                <div class=\"row\">\n                  <cx-product-grid-item\n                    *ngFor=\"let product of model?.products\"\n                    [product]=\"product\"\n                    class=\"col-12 col-sm-6 col-md-4\"\n                  ></cx-product-grid-item>\n                </div>\n              </ng-container>\n\n              <ng-container *ngIf=\"gridMode === 'list'\">\n                <cx-product-list-item\n                  *ngFor=\"let product of model?.products\"\n                  [product]=\"product\"\n                  class=\"cx-product-search-list\"\n                ></cx-product-list-item>\n              </ng-container>\n            </div>\n            <div class=\"cx-sorting bottom\">\n              <div class=\"row\">\n                <div class=\"col-12 col-lg-4 mr-auto\">\n                  <div class=\"form-group cx-sort-dropdown\">\n                    <cx-sorting\n                      [sortOptions]=\"model.sorts\"\n                      (sortListEvent)=\"sortList($event)\"\n                      [selectedOption]=\"model.pagination.sort\"\n                      placeholder=\"{{\n                        'productList.sortByRelevance' | cxTranslate\n                      }}\"\n                    ></cx-sorting>\n                  </div>\n                </div>\n                <div class=\"col-auto\" aria-label=\"product search pagination\">\n                  <div class=\"cx-pagination\">\n                    <cx-pagination\n                      [pagination]=\"model.pagination\"\n                      (viewPageEvent)=\"viewPage($event)\"\n                    ></cx-pagination>\n                  </div>\n                </div>\n                <div class=\"col-auto ml-auto ml-lg-0\">\n                  <cx-product-view\n                    (modeChange)=\"setGridMode($event)\"\n                    [mode]=\"gridMode\"\n                  ></cx-product-view>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </section>\n  </div>\n</ng-container>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        ProductListComponent.ctorParameters = function () {
+            return [
+                { type: i1$2.ProductSearchService },
+                { type: i4.ActivatedRoute },
+                { type: PageLayoutService }
+            ];
+        };
+        return ProductListComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductFacetNavigationComponent = /** @class */ (function () {
+        function ProductFacetNavigationComponent(modalService, activatedRoute, productSearchService) {
+            this.modalService = modalService;
+            this.activatedRoute = activatedRoute;
+            this.productSearchService = productSearchService;
+            this.iconTypes = ICON_TYPE;
+            this.minPerFacet = 6;
+            this.collapsedFacets = new Set();
+            this.showAllPerFacetMap = new Map();
+            this.queryCodec = new http.HttpUrlEncodingCodec();
+        }
+        Object.defineProperty(ProductFacetNavigationComponent.prototype, "visibleFacets", {
+            get: /**
+             * @return {?}
+             */ function () {
+                if (!this.searchResult.facets) {
+                    return [];
+                }
+                return this.searchResult.facets.filter(function (facet) { return facet.visible; });
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * @return {?}
+         */
+        ProductFacetNavigationComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.updateParams$ = this.activatedRoute.params.pipe(operators.tap(function (params) {
+                    _this.activeFacetValueCode = params.categoryCode || params.brandCode;
+                }));
+                this.searchResult$ = this.productSearchService.getResults().pipe(operators.tap(function (searchResult) {
+                    _this.searchResult = searchResult;
+                    if (_this.searchResult.facets) {
+                        _this.searchResult.facets.forEach(function (el) {
+                            _this.showAllPerFacetMap.set(el.name, false);
+                        });
+                    }
+                }), operators.filter(function (searchResult) { return Object.keys(searchResult).length > 0; }));
+            };
+        /**
+         * @param {?} content
+         * @return {?}
+         */
+        ProductFacetNavigationComponent.prototype.openFilterModal = /**
+         * @param {?} content
+         * @return {?}
+         */
+            function (content) {
+                this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+            };
+        /**
+         * @param {?} query
+         * @return {?}
+         */
+        ProductFacetNavigationComponent.prototype.toggleValue = /**
+         * @param {?} query
+         * @return {?}
+         */
+            function (query) {
+                this.productSearchService.search(this.queryCodec.decodeValue(query));
+            };
+        /**
+         * @param {?} facetName
+         * @return {?}
+         */
+        ProductFacetNavigationComponent.prototype.showLess = /**
+         * @param {?} facetName
+         * @return {?}
+         */
+            function (facetName) {
+                this.updateShowAllPerFacetMap(facetName, false);
+            };
+        /**
+         * @param {?} facetName
+         * @return {?}
+         */
+        ProductFacetNavigationComponent.prototype.showMore = /**
+         * @param {?} facetName
+         * @return {?}
+         */
+            function (facetName) {
+                this.updateShowAllPerFacetMap(facetName, true);
+            };
+        /**
+         * @private
+         * @param {?} facetName
+         * @param {?} showAll
+         * @return {?}
+         */
+        ProductFacetNavigationComponent.prototype.updateShowAllPerFacetMap = /**
+         * @private
+         * @param {?} facetName
+         * @param {?} showAll
+         * @return {?}
+         */
+            function (facetName, showAll) {
+                this.showAllPerFacetMap.set(facetName, showAll);
+            };
+        /**
+         * @param {?} facetName
+         * @return {?}
+         */
+        ProductFacetNavigationComponent.prototype.isFacetCollapsed = /**
+         * @param {?} facetName
+         * @return {?}
+         */
+            function (facetName) {
+                return this.collapsedFacets.has(facetName);
+            };
+        /**
+         * @param {?} facetName
+         * @return {?}
+         */
+        ProductFacetNavigationComponent.prototype.toggleFacet = /**
+         * @param {?} facetName
+         * @return {?}
+         */
+            function (facetName) {
+                if (this.collapsedFacets.has(facetName)) {
+                    this.collapsedFacets.delete(facetName);
+                }
+                else {
+                    this.collapsedFacets.add(facetName);
+                }
+            };
+        /**
+         * @param {?} facet
+         * @return {?}
+         */
+        ProductFacetNavigationComponent.prototype.getVisibleFacetValues = /**
+         * @param {?} facet
+         * @return {?}
+         */
+            function (facet) {
+                return facet.values.slice(0, this.showAllPerFacetMap.get(facet.name)
+                    ? facet.values.length
+                    : this.minPerFacet);
+            };
+        ProductFacetNavigationComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-product-facet-navigation',
+                        template: "<div class=\"cx-search-facet\" *ngIf=\"(searchResult$ | async) as searchResult\">\n  <ng-container *ngIf=\"searchResult.breadcrumbs?.length\">\n    <h4 class=\"cx-facet-filter-header\">\n      {{ 'productList.filterBy.label' | cxTranslate }}\n    </h4>\n    <div class=\"cx-facet-filter-container\">\n      <div\n        *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n        [hidden]=\"breadcrumb.facetValueCode === activeFacetValueCode\"\n        class=\"cx-facet-filter-pill\"\n        role=\"filter\"\n      >\n        <span class=\"cx-facet-pill-value\">{{ breadcrumb.facetValueName }}</span>\n        <button\n          type=\"button\"\n          class=\"close\"\n          aria-label=\"Close\"\n          (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n        >\n          <span aria-hidden=\"true\">\n            <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n          </span>\n        </button>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-container *ngFor=\"let facet of visibleFacets; let facetId = index\">\n    <div class=\"cx-facet-group\">\n      <div class=\"cx-facet-header\">\n        <a\n          class=\"cx-facet-header-link\"\n          (click)=\"toggleFacet(facet.name)\"\n          [attr.aria-expanded]=\"!isFacetCollapsed(facet.name)\"\n          aria-controls=\"\"\n        >\n          {{ facet.name }}\n          <cx-icon\n            [type]=\"\n              isFacetCollapsed(facet.name) ? iconTypes.PLUS : iconTypes.MINUS\n            \"\n          ></cx-icon>\n        </a>\n      </div>\n      <ng-container *ngIf=\"!isFacetCollapsed(facet.name)\">\n        <ul class=\"cx-facet-list\">\n          <li\n            *ngFor=\"\n              let value of getVisibleFacetValues(facet);\n              index as facetValueId\n            \"\n          >\n            <div class=\"form-check\">\n              <label class=\"form-checkbox cx-facet-label\">\n                <input\n                  class=\"form-check-input cx-facet-checkbox\"\n                  role=\"checkbox\"\n                  type=\"checkbox\"\n                  aria-checked=\"true\"\n                  [checked]=\"value.selected\"\n                  (change)=\"toggleValue(value.query.query.value)\"\n                />\n                <span class=\"cx-facet-text\"\n                  >{{ value.name }} ({{ value.count }})</span\n                >\n              </label>\n            </div>\n          </li>\n          <li\n            class=\"cx-facet-toggle-btn\"\n            (click)=\"showLess(facet.name)\"\n            *ngIf=\"showAllPerFacetMap.get(facet.name)\"\n          >\n            {{ 'productList.showLess' | cxTranslate }}\n          </li>\n          <li\n            class=\"cx-facet-toggle-btn\"\n            (click)=\"showMore(facet.name)\"\n            *ngIf=\"\n              !showAllPerFacetMap.get(facet.name) &&\n              facet.values.length > minPerFacet\n            \"\n          >\n            {{ 'productList.showMore' | cxTranslate }}\n          </li>\n        </ul>\n      </ng-container>\n    </div>\n  </ng-container>\n</div>\n\n<div class=\"cx-facet-mobile\">\n  <div class=\"container\">\n    <button\n      class=\"btn btn-action btn-block cx-facet-mobile-btn\"\n      (click)=\"openFilterModal(content)\"\n    >\n      {{ 'productList.filterBy.action' | cxTranslate }}\n    </button>\n  </div>\n</div>\n\n<!-- START ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n<ng-container *ngIf=\"(updateParams$ | async) as params\">\n  <div class=\"container\">\n    <div class=\"cx-facet-mobile\" *ngIf=\"searchResult.breadcrumbs?.length\">\n      <div class=\"cx-facet-filter-container\">\n        <h4 class=\"cx-facet-filter-header\">\n          {{ 'productList.appliedFilter' | cxTranslate }}\n        </h4>\n        <div\n          class=\"cx-facet-filter-pill\"\n          role=\"filter\"\n          *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n        >\n          {{ breadcrumb.facetValueName }}\n          <button\n            type=\"button\"\n            class=\"close\"\n            aria-label=\"Close\"\n            (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n          >\n            <span aria-hidden=\"true\">\n              <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n            </span>\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</ng-container>\n<!-- END ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n\n<ng-template #content let-c=\"close\" let-d=\"dismiss\">\n  <div class=\"modal-header\">\n    <h4 class=\"cx-facet-modal-title\" id=\"modal-title\">\n      {{ 'productList.filterBy.label' | cxTranslate }}\n    </h4>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"d('Cross click')\"\n    >\n      <span aria-hidden=\"true\">\n        <cx-icon [type]=\"iconTypes.TIMES\"></cx-icon>\n      </span>\n    </button>\n  </div>\n  <div class=\"modal-body cx-facet-modal-body\">\n    <form>\n      <div\n        class=\"form-group\"\n        *ngFor=\"let facet of searchResult.facets; index as facetId\"\n      >\n        <h4 class=\"cx-facet-modal-label\" for=\"megapixels\">{{ facet.name }}</h4>\n        <div class=\"input-group\">\n          <ul class=\"cx-facet-list\">\n            <li *ngFor=\"let value of facet.values; index as facetValueId\">\n              <div class=\"form-check\">\n                <label class=\"form-checkbox cx-facet-label\">\n                  <input\n                    class=\"form-check-input cx-facet-checkbox\"\n                    role=\"checkbox\"\n                    type=\"checkbox\"\n                    aria-checked=\"true\"\n                    [checked]=\"value.selected\"\n                    (change)=\"toggleValue(value.query.query.value)\"\n                  />\n                  <span class=\"cx-facet-text\"\n                    >{{ value.name }} ({{ value.count }})</span\n                  >\n                </label>\n              </div>\n            </li>\n          </ul>\n        </div>\n      </div>\n    </form>\n  </div>\n</ng-template>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        ProductFacetNavigationComponent.ctorParameters = function () {
+            return [
+                { type: ModalService },
+                { type: i4.ActivatedRoute },
+                { type: i1$2.ProductSearchService }
+            ];
+        };
+        return ProductFacetNavigationComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductGridItemComponent = /** @class */ (function () {
+        function ProductGridItemComponent() {
+        }
+        ProductGridItemComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-product-grid-item',
+                        template: "<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-image-container\"\n>\n  <cx-media\n    class=\"cx-product-image\"\n    [container]=\"product.images?.PRIMARY\"\n    format=\"product\"\n    [alt]=\"product.summary\"\n  ></cx-media>\n</a>\n<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-name\"\n  [innerHTML]=\"product.nameHtml\"\n></a>\n\n<div class=\"cx-product-rating\">\n  <cx-star-rating\n    [rating]=\"product?.averageRating\"\n    [disabled]=\"true\"\n  ></cx-star-rating>\n</div>\n<div class=\"cx-product-price-container\">\n  <div class=\"cx-product-price\" aria-label=\"Product price\">\n    {{ product.price.formattedValue }}\n  </div>\n</div>\n\n<cx-add-to-cart\n  *ngIf=\"product.stock.stockLevelStatus !== 'outOfStock'\"\n  [showQuantity]=\"false\"\n  [productCode]=\"product.code\"\n></cx-add-to-cart>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        ProductGridItemComponent.propDecorators = {
+            product: [{ type: i0.Input }]
+        };
+        return ProductGridItemComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductListItemComponent = /** @class */ (function () {
+        function ProductListItemComponent() {
+        }
+        ProductListItemComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-product-list-item',
+                        template: "<div class=\"row\">\n  <div class=\"col-12 col-md-4\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-image-container\"\n    >\n      <cx-media\n        class=\"cx-product-image\"\n        [container]=\"product.images?.PRIMARY\"\n        format=\"product\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n    </a>\n  </div>\n  <div class=\"col-12 col-md-8\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-name\"\n      [innerHtml]=\"product.nameHtml\"\n    ></a>\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"cx-product-price\" aria-label=\"Product price\">\n      {{ product.price?.formattedValue }}\n    </div>\n    <div class=\"row\">\n      <div class=\"col-12 col-md-8\">\n        <p class=\"cx-product-summary\" [innerHtml]=\"product.summary\">\n          {{ product.summary }}\n        </p>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <cx-add-to-cart\n          *ngIf=\"product.stock.stockLevelStatus !== 'outOfStock'\"\n          [showQuantity]=\"false\"\n          [productCode]=\"product.code\"\n        ></cx-add-to-cart>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        ProductListItemComponent.propDecorators = {
+            product: [{ type: i0.Input }]
+        };
+        return ProductListItemComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductListModule = /** @class */ (function () {
+        function ProductListModule() {
+        }
+        ProductListModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    CMSProductListComponent: { selector: 'cx-product-list' },
+                                    SearchResultsListComponent: { selector: 'cx-product-list' },
+                                    ProductRefinementComponent: { selector: 'cx-product-facet-navigation' },
+                                },
+                            }))),
+                            i4.RouterModule,
+                            MediaModule,
+                            AddToCartModule,
+                            FormComponentsModule,
+                            ListNavigationModule,
+                            i1$2.UrlModule,
+                            i1$2.I18nModule,
+                            StarRatingModule,
+                            IconModule,
+                        ],
+                        declarations: [
+                            ProductListComponent,
+                            ProductFacetNavigationComponent,
+                            ProductListItemComponent,
+                            ProductGridItemComponent,
+                            ProductViewComponent,
+                        ],
+                        exports: [
+                            ProductListComponent,
+                            ProductListItemComponent,
+                            ProductGridItemComponent,
+                        ],
+                        entryComponents: [ProductListComponent, ProductFacetNavigationComponent],
+                    },] }
+        ];
+        return ProductListModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductAttributesComponent = /** @class */ (function () {
+        function ProductAttributesComponent(currentProductService) {
+            this.currentProductService = currentProductService;
+        }
+        /**
+         * @return {?}
+         */
+        ProductAttributesComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                this.product$ = this.currentProductService.getProduct();
+            };
+        ProductAttributesComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-product-attributes',
+                        template: "<ng-container *ngIf=\"(product$ | async) as product\">\n  <div class=\"container\">\n    <h2>{{ 'productDetails.specification' | cxTranslate }}</h2>\n    <table *ngFor=\"let class of product?.classifications\">\n      <th>\n        <h3>{{ class.name }}</h3>\n      </th>\n      <tr *ngFor=\"let feature of class.features\">\n        <td>{{ feature.name }}</td>\n        <td>\n          <ul>\n            <li *ngFor=\"let featureValue of feature?.featureValues\">\n              {{ featureValue?.value }}\n            </li>\n          </ul>\n        </td>\n      </tr>\n    </table>\n  </div>\n</ng-container>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        ProductAttributesComponent.ctorParameters = function () {
+            return [
+                { type: CurrentProductService }
+            ];
+        };
+        return ProductAttributesComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductReviewsComponent = /** @class */ (function () {
+        function ProductReviewsComponent(reviewService, currentProductService, fb) {
+            var _this = this;
+            this.reviewService = reviewService;
+            this.currentProductService = currentProductService;
+            this.fb = fb;
+            this.isWritingReview = false;
+            // TODO: configurable
+            this.initialMaxListItems = 5;
+            this.product$ = this.currentProductService.getProduct();
+            this.reviews$ = this.product$.pipe(operators.filter(Boolean), operators.switchMap(function (product) { return _this.reviewService.getByProductCode(product.code); }), operators.tap(function () {
+                _this.resetReviewForm();
+                _this.maxListItems = _this.initialMaxListItems;
+            }));
+        }
+        /**
+         * @return {?}
+         */
+        ProductReviewsComponent.prototype.initiateWriteReview = /**
+         * @return {?}
+         */
+            function () {
+                this.isWritingReview = true;
+            };
+        /**
+         * @return {?}
+         */
+        ProductReviewsComponent.prototype.cancelWriteReview = /**
+         * @return {?}
+         */
+            function () {
+                this.isWritingReview = false;
+                this.resetReviewForm();
+            };
+        /**
+         * @param {?} rating
+         * @return {?}
+         */
+        ProductReviewsComponent.prototype.setRating = /**
+         * @param {?} rating
+         * @return {?}
+         */
+            function (rating) {
+                this.reviewForm.controls.rating.setValue(rating);
+            };
+        /**
+         * @param {?} product
+         * @return {?}
+         */
+        ProductReviewsComponent.prototype.submitReview = /**
+         * @param {?} product
+         * @return {?}
+         */
+            function (product) {
+                /** @type {?} */
+                var reviewFormControls = this.reviewForm.controls;
+                /** @type {?} */
+                var review = {
+                    headline: reviewFormControls.title.value,
+                    comment: reviewFormControls.comment.value,
+                    rating: reviewFormControls.rating.value,
+                    alias: reviewFormControls.reviewerName.value,
+                };
+                this.reviewService.add(product.code, review);
+                this.isWritingReview = false;
+                this.resetReviewForm();
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        ProductReviewsComponent.prototype.resetReviewForm = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                this.reviewForm = this.fb.group({
+                    title: ['', forms.Validators.required],
+                    comment: ['', forms.Validators.required],
+                    rating: [0, [forms.Validators.min(1), forms.Validators.max(5)]],
+                    reviewerName: '',
+                });
+            };
+        ProductReviewsComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-product-reviews',
+                        template: "<div class=\"container\" *ngIf=\"(product$ | async) as product\">\n  <h2>\n    {{ 'productDetails.reviews' | cxTranslate }} ({{ product.numberOfReviews }})\n  </h2>\n  <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n    <div class=\"header\">\n      <h3>{{ 'productReview.overallRating' | cxTranslate }}</h3>\n      <button class=\"btn btn-primary\" (click)=\"initiateWriteReview()\">\n        {{ 'productReview.writeReview' | cxTranslate }}\n      </button>\n      <cx-star-rating\n        class=\"rating\"\n        [rating]=\"product.averageRating\"\n        [disabled]=\"true\"\n      ></cx-star-rating>\n    </div>\n\n    <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n      <ng-container *ngIf=\"(reviews$ | async) as reviews\">\n        <div\n          class=\"review\"\n          tabindex=\"0\"\n          *ngFor=\"let review of (reviews | slice: 0:maxListItems)\"\n        >\n          <div class=\"title\">{{ review.headline }}</div>\n          <cx-star-rating\n            [rating]=\"review.rating\"\n            [disabled]=\"true\"\n          ></cx-star-rating>\n          <div class=\"name\">\n            {{ review.alias ? review.alias : review.principal?.name }}\n          </div>\n          <div class=\"date\">{{ review.date | cxDate }}</div>\n          <div class=\"text\">{{ review.comment }}</div>\n        </div>\n        <div *ngIf=\"reviews.length > initialMaxListItems\">\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"maxListItems = reviews.length\"\n            *ngIf=\"maxListItems === initialMaxListItems\"\n          >\n            {{ 'productReview.more' | cxTranslate }}\n          </button>\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"maxListItems = initialMaxListItems\"\n            *ngIf=\"maxListItems !== initialMaxListItems\"\n          >\n            {{ 'productReview.less' | cxTranslate }}\n          </button>\n        </div>\n      </ng-container>\n    </ng-container>\n  </ng-container>\n\n  <ng-template #writeReview>\n    <form [formGroup]=\"reviewForm\" (ngSubmit)=\"submitReview(product)\">\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.reviewTitle' | cxTranslate\n          }}</span>\n          <input type=\"text\" class=\"form-control\" formControlName=\"title\" />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.writeYourComments' | cxTranslate\n          }}</span>\n          <textarea\n            class=\"form-control\"\n            rows=\"3\"\n            formControlName=\"comment\"\n          ></textarea>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.rating' | cxTranslate\n          }}</span>\n          <cx-star-rating (change)=\"setRating($event)\"></cx-star-rating>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.reviewerName' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            formControlName=\"reviewerName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group row\">\n        <div class=\"col-12 col-md-4\">\n          <button\n            type=\"submit\"\n            class=\"btn btn-block btn-secondary\"\n            (click)=\"cancelWriteReview()\"\n          >\n            {{ 'common.cancel' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-12 col-md-4\">\n          <button\n            type=\"submit\"\n            class=\"btn btn-block btn-primary\"\n            [ngClass]=\"{ 'submit-btn': reviewForm.valid }\"\n            [disabled]=\"!reviewForm.valid\"\n          >\n            {{ 'common.submit' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </form>\n  </ng-template>\n</div>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        ProductReviewsComponent.ctorParameters = function () {
+            return [
+                { type: i1$2.ProductReviewService },
+                { type: CurrentProductService },
+                { type: forms.FormBuilder }
+            ];
+        };
+        return ProductReviewsComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductReviewsModule = /** @class */ (function () {
+        function ProductReviewsModule() {
+        }
+        ProductReviewsModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            forms.ReactiveFormsModule,
+                            forms.FormsModule,
+                            FormComponentsModule,
+                            i1$2.I18nModule,
+                            StarRatingModule,
+                        ],
+                        declarations: [ProductReviewsComponent],
+                        entryComponents: [ProductReviewsComponent],
+                        exports: [ProductReviewsComponent],
+                    },] }
+        ];
+        return ProductReviewsModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductDetailsTabComponent = /** @class */ (function () {
+        function ProductDetailsTabComponent(currentProductService) {
+            this.currentProductService = currentProductService;
+        }
+        /**
+         * @return {?}
+         */
+        ProductDetailsTabComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                this.product$ = this.currentProductService.getProduct();
+            };
+        ProductDetailsTabComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-product-details-tab',
+                        template: "<ng-container *ngIf=\"(product$ | async) as product\">\n  <div class=\"container\" [innerHTML]=\"product?.description\"></div>\n</ng-container>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        ProductDetailsTabComponent.ctorParameters = function () {
+            return [
+                { type: CurrentProductService }
+            ];
+        };
+        return ProductDetailsTabComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductDetailsTabModule = /** @class */ (function () {
+        function ProductDetailsTabModule() {
+        }
+        ProductDetailsTabModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [common.CommonModule],
+                        declarations: [ProductDetailsTabComponent],
+                        entryComponents: [ProductDetailsTabComponent],
+                        exports: [ProductDetailsTabComponent],
+                    },] }
+        ];
+        return ProductDetailsTabModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductTabsModule = /** @class */ (function () {
+        function ProductTabsModule() {
+        }
+        ProductTabsModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i4.RouterModule,
+                            forms.FormsModule,
+                            forms.ReactiveFormsModule,
+                            CartSharedModule,
+                            i1$2.CmsModule,
+                            OutletModule,
+                            ProductReviewsModule,
+                            ProductDetailsTabModule,
+                            PageComponentModule,
+                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    ProductDetailsTabComponent: {
+                                        selector: 'cx-product-details-tab',
+                                    },
+                                    ProductSpecsTabComponent: {
+                                        selector: 'cx-product-attributes',
+                                    },
+                                    ProductReviewsTabComponent: {
+                                        selector: 'cx-product-reviews',
+                                    },
+                                },
+                            }))),
+                            i1$2.I18nModule,
+                        ],
+                        declarations: [ProductAttributesComponent],
+                        exports: [ProductAttributesComponent, ProductReviewsComponent],
+                        entryComponents: [ProductAttributesComponent],
+                        providers: [i1$2.ProductService, i1$2.WindowRef, i1$2.RoutingService],
+                    },] }
+        ];
+        return ProductTabsModule;
     }());
 
     /**
@@ -16027,7 +15931,7 @@
                             forms.ReactiveFormsModule,
                             i4.RouterModule,
                             ListNavigationModule,
-                            BootstrapModule,
+                            i1.NgbTabsetModule,
                             SpinnerModule,
                             i1$2.UrlModule,
                             i1$2.StoreFinderCoreModule,
@@ -16157,93 +16061,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var OrderConfirmationPageGuard = /** @class */ (function () {
-        function OrderConfirmationPageGuard(checkoutService, routingService) {
-            this.checkoutService = checkoutService;
-            this.routingService = routingService;
-        }
-        /**
-         * @return {?}
-         */
-        OrderConfirmationPageGuard.prototype.canActivate = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                return this.checkoutService.getOrderDetails().pipe(operators.map(function (orderDetails) {
-                    if (orderDetails && Object.keys(orderDetails).length !== 0) {
-                        return true;
-                    }
-                    else {
-                        _this.routingService.go({ cxRoute: 'orders' });
-                        return false;
-                    }
-                }));
-            };
-        OrderConfirmationPageGuard.decorators = [
-            { type: i0.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */
-        OrderConfirmationPageGuard.ctorParameters = function () {
-            return [
-                { type: i1$2.CheckoutService },
-                { type: i1$2.RoutingService }
-            ];
-        };
-        /** @nocollapse */ OrderConfirmationPageGuard.ngInjectableDef = i0.defineInjectable({ factory: function OrderConfirmationPageGuard_Factory() { return new OrderConfirmationPageGuard(i0.inject(i1$2.CheckoutService), i0.inject(i1$2.RoutingService)); }, token: OrderConfirmationPageGuard, providedIn: "root" });
-        return OrderConfirmationPageGuard;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /**
-     * @return {?}
-     */
-    function provideConfigFromMetaTags() {
-        return [
-            i1$2.provideConfigFactory(i1$2.occServerConfigFromMetaTagFactory, [i1$1.Meta]),
-            i1$2.provideConfigFactory(i1$2.mediaServerConfigFromMetaTagFactory, [i1$1.Meta]),
-        ];
-    }
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var CartPageComponent = /** @class */ (function () {
         function CartPageComponent(cartService) {
             this.cartService = cartService;
@@ -16278,7 +16095,7 @@
      */
     var ɵ0$3 = { pageLabel: 'cartPage', cxRoute: 'cart' };
     /** @type {?} */
-    var routes$1 = [
+    var routes = [
         {
             path: null,
             canActivate: [CmsPageGuard],
@@ -16293,7 +16110,7 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule.forChild(routes$1),
+                            i4.RouterModule.forChild(routes),
                             PageLayoutModule,
                             CartDetailsModule,
                             OutletRefModule,
@@ -16304,6 +16121,193 @@
         ];
         return CartPageModule;
     }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductDetailsPageComponent = /** @class */ (function () {
+        function ProductDetailsPageComponent() {
+        }
+        ProductDetailsPageComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-product-details-page',
+                        template: "<cx-page-layout>\n  <ng-template cxOutletRef=\"ProductDetails\" cxOutletPos=\"after\">\n    <cx-product-details></cx-product-details>\n  </ng-template>\n</cx-page-layout>\n"
+                    }] }
+        ];
+        return ProductDetailsPageComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Matches the pattern '[ ** / ] marker / :paramName [ / ** ]'
+     *
+     * @param {?} segments
+     * @param {?} _segmentGroup
+     * @param {?} route
+     * @return {?}
+     */
+    function suffixUrlMatcher(segments, _segmentGroup, route) {
+        var _a;
+        /** @type {?} */
+        var config = route.data.cxSuffixUrlMatcher;
+        var marker = config.marker, paramName = config.paramName;
+        /** @type {?} */
+        var precedingParamName = config.precedingParamName || 'param';
+        /** @type {?} */
+        var markerIndex = findLastIndex(segments, function (_a) {
+            var path = _a.path;
+            return path === marker;
+        });
+        /** @type {?} */
+        var isMarkerLastSegment = markerIndex === segments.length - 1;
+        if (markerIndex === -1 || isMarkerLastSegment) {
+            return null;
+        }
+        /** @type {?} */
+        var paramIndex = markerIndex + 1;
+        /** @type {?} */
+        var posParams = (_a = {},
+            _a[paramName] = segments[paramIndex],
+            _a);
+        for (var i = 0; i < markerIndex; i++) {
+            posParams["" + precedingParamName + i] = segments[i];
+        }
+        return { consumed: segments.slice(0, paramIndex + 1), posParams: posParams };
+    }
+    /**
+     * @template T
+     * @param {?} elements
+     * @param {?} predicate
+     * @return {?}
+     */
+    function findLastIndex(elements, predicate) {
+        for (var index = elements.length - 1; index >= 0; index--) {
+            if (predicate(elements[index])) {
+                return index;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ɵ0$4 = { cxRoute: 'product' }, ɵ1 = {
+        cxSuffixUrlMatcher: {
+            marker: 'p',
+            paramName: 'productCode',
+        },
+    };
+    /** @type {?} */
+    var routes$1 = [
+        {
+            path: null,
+            canActivate: [CmsPageGuard],
+            component: ProductDetailsPageComponent,
+            data: ɵ0$4,
+        },
+        {
+            matcher: suffixUrlMatcher,
+            canActivate: [CmsPageGuard],
+            component: ProductDetailsPageComponent,
+            data: ɵ1,
+        },
+    ];
+    var ProductDetailsPageModule = /** @class */ (function () {
+        function ProductDetailsPageModule() {
+        }
+        ProductDetailsPageModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i4.RouterModule.forChild(routes$1),
+                            ProductDetailsModule,
+                            PageLayoutModule,
+                            OutletRefModule,
+                        ],
+                        declarations: [ProductDetailsPageComponent],
+                        exports: [ProductDetailsPageComponent],
+                    },] }
+        ];
+        return ProductDetailsPageModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ɵ0$5 = { cxRoute: 'category' }, ɵ1$1 = { pageLabel: 'search', cxRoute: 'search' }, ɵ2 = { cxRoute: 'brand' }, ɵ3 = {
+        cxSuffixUrlMatcher: {
+            marker: 'c',
+            paramName: 'categoryCode',
+        },
+    };
+    var ProductListingPageModule = /** @class */ (function () {
+        function ProductListingPageModule() {
+        }
+        ProductListingPageModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            i4.RouterModule.forChild([
+                                {
+                                    path: null,
+                                    canActivate: [CmsPageGuard],
+                                    component: PageLayoutComponent,
+                                    data: ɵ0$5,
+                                },
+                                {
+                                    path: null,
+                                    canActivate: [CmsPageGuard],
+                                    component: PageLayoutComponent,
+                                    data: ɵ1$1,
+                                },
+                                {
+                                    path: null,
+                                    canActivate: [CmsPageGuard],
+                                    component: PageLayoutComponent,
+                                    data: ɵ2,
+                                },
+                                {
+                                    matcher: suffixUrlMatcher,
+                                    canActivate: [CmsPageGuard],
+                                    component: PageLayoutComponent,
+                                    data: ɵ3,
+                                },
+                            ]),
+                        ],
+                    },] }
+        ];
+        return ProductListingPageModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @return {?}
+     */
+    function provideConfigFromMetaTags() {
+        return [
+            i1$2.provideConfigFactory(i1$2.occServerConfigFromMetaTagFactory, [i1$1.Meta]),
+            i1$2.provideConfigFactory(i1$2.mediaServerConfigFromMetaTagFactory, [i1$1.Meta]),
+        ];
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
 
     /**
      * @fileoverview added by tsickle
@@ -16326,7 +16330,7 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var ɵ0$4 = { pageLabel: 'orderConfirmationPage', cxRoute: 'orderConfirmation' };
+    var ɵ0$6 = { pageLabel: 'orderConfirmationPage', cxRoute: 'orderConfirmation' };
     /** @type {?} */
     var routes$2 = [
         // TODO: as soon as the components are moved to CMS driven components we can drop this specific OrderConfirmationPageComponent
@@ -16334,7 +16338,7 @@
             path: null,
             canActivate: [i1$2.AuthGuard, CmsPageGuard, OrderConfirmationPageGuard],
             component: OrderConfirmationPageComponent,
-            data: ɵ0$4,
+            data: ɵ0$6,
         },
     ];
     var OrderConfirmationPageModule = /** @class */ (function () {
@@ -16403,93 +16407,20 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    /** @type {?} */
-    var pageModules = [
-        CartPageModule,
-        OrderConfirmationPageModule,
-        ProductPageModule,
-    ];
-    var ɵ0$5 = { pageLabel: 'homepage', cxRoute: 'home' }, ɵ1$1 = { cxRoute: 'logout' }, ɵ2 = { pageLabel: 'search', cxRoute: 'search' }, ɵ3 = { cxRoute: 'category' }, ɵ4 = { cxRoute: 'brand' }, ɵ5 = { pageLabel: 'order', cxRoute: 'orderDetails' };
-    var PagesModule = /** @class */ (function () {
-        function PagesModule() {
+    var RoutingModule = /** @class */ (function () {
+        function RoutingModule() {
         }
-        PagesModule.decorators = [
+        RoutingModule.decorators = [
             { type: i0.NgModule, args: [{
-                        imports: __spread([
+                        imports: [
+                            i1$2.RoutingModule,
                             i1$2.ConfigModule.withConfig(defaultRoutingConfig),
-                            common.CommonModule
-                        ], pageModules, [
-                            PageLayoutModule,
-                            i4.RouterModule.forChild([
-                                {
-                                    // This route can be dropped only when we have a mapping path to page label for content pages
-                                    path: null,
-                                    canActivate: [CmsPageGuard],
-                                    component: PageLayoutComponent,
-                                    data: ɵ0$5,
-                                },
-                                {
-                                    path: null,
-                                    canActivate: [LogoutGuard],
-                                    component: PageLayoutComponent,
-                                    data: ɵ1$1,
-                                },
-                                {
-                                    path: null,
-                                    canActivate: [CmsPageGuard],
-                                    component: PageLayoutComponent,
-                                    data: ɵ2,
-                                },
-                                {
-                                    path: null,
-                                    canActivate: [CmsPageGuard],
-                                    component: PageLayoutComponent,
-                                    data: ɵ3,
-                                },
-                                {
-                                    path: null,
-                                    canActivate: [CmsPageGuard],
-                                    component: PageLayoutComponent,
-                                    data: ɵ4,
-                                },
-                                {
-                                    path: null,
-                                    canActivate: [i1$2.AuthGuard, CmsPageGuard],
-                                    component: PageLayoutComponent,
-                                    data: ɵ5,
-                                },
-                            ]),
-                        ]),
+                            CmsRouteModule,
+                        ],
                     },] }
         ];
-        return PagesModule;
+        return RoutingModule;
     }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var UiModule = /** @class */ (function () {
-        function UiModule() {
-        }
-        UiModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [common.CommonModule, LayoutModule, PagesModule],
-                        exports: [LayoutModule, PagesModule],
-                    },] }
-        ];
-        return UiModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
 
     /**
      * @fileoverview added by tsickle
@@ -16517,20 +16448,23 @@
                         imports: [
                             i1$2.OccModule,
                             i1$2.StateModule,
-                            i1$2.RoutingModule,
                             i1$2.AuthModule.forRoot(),
                             CmsLibModule,
                             CmsModule,
-                            UiModule,
-                            SuffixRoutesModule,
                             CmsRouteModule,
                             i1$2.ConfigModule.forRoot(),
+                            RoutingModule,
                             i1$2.CxApiModule,
                             i1$2.SmartEditModule.forRoot(),
                             i1$2.PersonalizationModule.forRoot(),
                             i1$2.I18nModule.forRoot(),
+                            LayoutModule,
+                            // pages
+                            ProductDetailsPageModule,
+                            ProductListingPageModule,
+                            CartPageModule,
+                            OrderConfirmationPageModule,
                         ],
-                        exports: [UiModule],
                         providers: __spread(provideConfigFromMetaTags()),
                         declarations: [],
                     },] }
@@ -16548,21 +16482,61 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
-    exports.CartComponentModule = CartComponentModule;
-    exports.AddedToCartDialogComponent = AddedToCartDialogComponent;
     exports.AddToCartComponent = AddToCartComponent;
     exports.AddToCartModule = AddToCartModule;
+    exports.AddedToCartDialogComponent = AddedToCartDialogComponent;
     exports.CartDetailsComponent = CartDetailsComponent;
     exports.CartDetailsModule = CartDetailsModule;
+    exports.CartNotEmptyGuard = CartNotEmptyGuard;
     exports.CartItemComponent = CartItemComponent;
     exports.CartItemListComponent = CartItemListComponent;
     exports.OrderSummaryComponent = OrderSummaryComponent;
     exports.CartSharedModule = CartSharedModule;
-    exports.CartNotEmptyGuard = CartNotEmptyGuard;
     exports.CartTotalsComponent = CartTotalsComponent;
     exports.CartTotalsModule = CartTotalsModule;
+    exports.CartComponentModule = CartComponentModule;
     exports.MiniCartComponent = MiniCartComponent;
     exports.MiniCartModule = MiniCartModule;
+    exports.CheckoutComponentModule = CheckoutComponentModule;
+    exports.CheckoutDetailsService = CheckoutDetailsService;
+    exports.CheckoutOrchestratorComponent = CheckoutOrchestratorComponent;
+    exports.CheckoutOrchestratorModule = CheckoutOrchestratorModule;
+    exports.CheckoutOrderSummaryComponent = CheckoutOrderSummaryComponent;
+    exports.CheckoutOrderSummaryModule = CheckoutOrderSummaryModule;
+    exports.CheckoutProgressMobileBottomComponent = CheckoutProgressMobileBottomComponent;
+    exports.CheckoutProgressMobileBottomModule = CheckoutProgressMobileBottomModule;
+    exports.CheckoutProgressMobileTopComponent = CheckoutProgressMobileTopComponent;
+    exports.CheckoutProgressMobileTopModule = CheckoutProgressMobileTopModule;
+    exports.CheckoutProgressComponent = CheckoutProgressComponent;
+    exports.CheckoutProgressModule = CheckoutProgressModule;
+    exports.DeliveryModeComponent = DeliveryModeComponent;
+    exports.DeliveryModeModule = DeliveryModeModule;
+    exports.OrderConfirmationComponent = OrderConfirmationComponent;
+    exports.OrderConfirmationModule = OrderConfirmationModule;
+    exports.BillingAddressFormComponent = BillingAddressFormComponent;
+    exports.BillingAddressFormModule = BillingAddressFormModule;
+    exports.PaymentFormComponent = PaymentFormComponent;
+    exports.PaymentFormModule = PaymentFormModule;
+    exports.PaymentMethodComponent = PaymentMethodComponent;
+    exports.PaymentMethodModule = PaymentMethodModule;
+    exports.PlaceOrderComponent = PlaceOrderComponent;
+    exports.PlaceOrderModule = PlaceOrderModule;
+    exports.PromotionsComponent = PromotionsComponent;
+    exports.PromotionsModule = PromotionsModule;
+    exports.ReviewSubmitComponent = ReviewSubmitComponent;
+    exports.ReviewSubmitModule = ReviewSubmitModule;
+    exports.SuggestedAddressDialogComponent = SuggestedAddressDialogComponent;
+    exports.AddressFormComponent = AddressFormComponent;
+    exports.AddressFormModule = AddressFormModule;
+    exports.ShippingAddressComponent = ShippingAddressComponent;
+    exports.ShippingAddressModule = ShippingAddressModule;
+    exports.CheckoutConfig = CheckoutConfig;
+    exports.CheckoutStepType = CheckoutStepType;
+    exports.OrderConfirmationPageGuard = OrderConfirmationPageGuard;
+    exports.CheckoutGuard = CheckoutGuard;
+    exports.DeliveryModeSetGuard = DeliveryModeSetGuard;
+    exports.ShippingAddressSetGuard = ShippingAddressSetGuard;
+    exports.PaymentDetailsSetGuard = PaymentDetailsSetGuard;
     exports.CmsLibModule = CmsLibModule;
     exports.BannerComponent = BannerComponent;
     exports.BannerModule = BannerModule;
@@ -16673,9 +16647,15 @@
     exports.LoginComponent = LoginComponent;
     exports.LoginModule = LoginModule;
     exports.LogoutGuard = LogoutGuard;
+    exports.LogoutModule = LogoutModule;
     exports.RegisterComponent = RegisterComponent;
     exports.RegisterComponentModule = RegisterComponentModule;
     exports.UserComponentModule = UserComponentModule;
+    exports.CartPageComponent = CartPageComponent;
+    exports.CartPageModule = CartPageModule;
+    exports.ProductDetailsPageComponent = ProductDetailsPageComponent;
+    exports.ProductDetailsPageModule = ProductDetailsPageModule;
+    exports.ProductListingPageModule = ProductListingPageModule;
     exports.CmsModule = CmsModule;
     exports.CmsPageGuard = CmsPageGuard;
     exports.OutletRefDirective = OutletRefDirective;
@@ -16704,10 +16684,10 @@
     exports.PWAModuleConfig = PWAModuleConfig;
     exports.defaultPWAModuleConfig = defaultPWAModuleConfig;
     exports.CmsRouteModule = CmsRouteModule;
-    exports.SuffixRoutesModule = SuffixRoutesModule;
     exports.SeoMetaService = SeoMetaService;
     exports.initSeoService = initSeoService;
     exports.SeoModule = SeoModule;
+    exports.provideConfigFromMetaTags = provideConfigFromMetaTags;
     exports.BreakpointService = BreakpointService;
     exports.defaultLayoutConfig = defaultLayoutConfig;
     exports.BREAKPOINT = BREAKPOINT;
@@ -16718,54 +16698,6 @@
     exports.LayoutModule = LayoutModule;
     exports.MainModule = MainModule;
     exports.StorefrontComponent = StorefrontComponent;
-    exports.CheckoutComponentModule = CheckoutComponentModule;
-    exports.CheckoutDetailsService = CheckoutDetailsService;
-    exports.CheckoutOrchestratorComponent = CheckoutOrchestratorComponent;
-    exports.CheckoutOrchestratorModule = CheckoutOrchestratorModule;
-    exports.CheckoutOrderSummaryComponent = CheckoutOrderSummaryComponent;
-    exports.CheckoutOrderSummaryModule = CheckoutOrderSummaryModule;
-    exports.CheckoutProgressMobileBottomComponent = CheckoutProgressMobileBottomComponent;
-    exports.CheckoutProgressMobileBottomModule = CheckoutProgressMobileBottomModule;
-    exports.CheckoutProgressMobileTopComponent = CheckoutProgressMobileTopComponent;
-    exports.CheckoutProgressMobileTopModule = CheckoutProgressMobileTopModule;
-    exports.CheckoutProgressComponent = CheckoutProgressComponent;
-    exports.CheckoutProgressModule = CheckoutProgressModule;
-    exports.DeliveryModeComponent = DeliveryModeComponent;
-    exports.DeliveryModeModule = DeliveryModeModule;
-    exports.OrderConfirmationComponent = OrderConfirmationComponent;
-    exports.OrderConfirmationModule = OrderConfirmationModule;
-    exports.BillingAddressFormComponent = BillingAddressFormComponent;
-    exports.BillingAddressFormModule = BillingAddressFormModule;
-    exports.PaymentFormComponent = PaymentFormComponent;
-    exports.PaymentFormModule = PaymentFormModule;
-    exports.PaymentMethodComponent = PaymentMethodComponent;
-    exports.PaymentMethodModule = PaymentMethodModule;
-    exports.PlaceOrderComponent = PlaceOrderComponent;
-    exports.PlaceOrderModule = PlaceOrderModule;
-    exports.PromotionsComponent = PromotionsComponent;
-    exports.PromotionsModule = PromotionsModule;
-    exports.ReviewSubmitComponent = ReviewSubmitComponent;
-    exports.ReviewSubmitModule = ReviewSubmitModule;
-    exports.SuggestedAddressDialogComponent = SuggestedAddressDialogComponent;
-    exports.AddressFormComponent = AddressFormComponent;
-    exports.AddressFormModule = AddressFormModule;
-    exports.ShippingAddressComponent = ShippingAddressComponent;
-    exports.ShippingAddressModule = ShippingAddressModule;
-    exports.CheckoutConfig = CheckoutConfig;
-    exports.CheckoutStepType = CheckoutStepType;
-    exports.OrderConfirmationPageGuard = OrderConfirmationPageGuard;
-    exports.CheckoutGuard = CheckoutGuard;
-    exports.DeliveryModeSetGuard = DeliveryModeSetGuard;
-    exports.ShippingAddressSetGuard = ShippingAddressSetGuard;
-    exports.PaymentDetailsSetGuard = PaymentDetailsSetGuard;
-    exports.StorefrontModule = StorefrontModule;
-    exports.PagesModule = PagesModule;
-    exports.ProductPageComponent = ProductPageComponent;
-    exports.CartPageComponent = CartPageComponent;
-    exports.OrderConfirmationPageComponent = OrderConfirmationPageComponent;
-    exports.CartPageModule = CartPageModule;
-    exports.ProductPageModule = ProductPageModule;
-    exports.UiModule = UiModule;
     exports.FormComponentsModule = FormComponentsModule;
     exports.ItemCounterComponent = ItemCounterComponent;
     exports.GenericLinkComponent = GenericLinkComponent;
@@ -16780,41 +16712,42 @@
     exports.SpinnerModule = SpinnerModule;
     exports.StarRatingComponent = StarRatingComponent;
     exports.StarRatingModule = StarRatingModule;
-    exports.ModalService = ModalService;
     exports.ModalRef = ModalRef;
+    exports.ModalService = ModalService;
     exports.OnlyNumberDirective = OnlyNumberDirective;
     exports.AutoFocusDirective = AutoFocusDirective;
     exports.FormUtils = FormUtils;
-    exports.ɵc = NavigationUIComponent;
-    exports.ɵd = HighlightPipe;
-    exports.ɵj = ProductCarouselService;
-    exports.ɵl = ProductReferencesService;
-    exports.ɵk = SharedCarouselService;
-    exports.ɵm = ProductImagesModule;
-    exports.ɵi = ProductDetailsTabComponent;
-    exports.ɵh = ProductDetailsTabModule;
-    exports.ɵq = LoginComponentService;
-    exports.ɵg = OutletStyleService;
+    exports.StorefrontModule = StorefrontModule;
+    exports.ɵc = CheckoutConfigService;
+    exports.ɵb = defaultCheckoutConfig;
+    exports.ɵg = NavigationUIComponent;
+    exports.ɵh = HighlightPipe;
+    exports.ɵl = ProductCarouselService;
+    exports.ɵn = ProductReferencesService;
+    exports.ɵm = SharedCarouselService;
+    exports.ɵs = ProductImagesModule;
+    exports.ɵk = ProductDetailsTabComponent;
+    exports.ɵj = ProductDetailsTabModule;
+    exports.ɵt = LoginComponentService;
+    exports.ɵbd = OrderConfirmationPageComponent;
+    exports.ɵbc = OrderConfirmationPageModule;
+    exports.ɵi = OutletStyleService;
     exports.ɵv = defaultCartPageConfig;
-    exports.ɵp = AddToHomeScreenService;
+    exports.ɵf = AddToHomeScreenService;
     exports.ɵw = addCmsRoute;
-    exports.ɵx = suffixUrlMatcher;
-    exports.ɵy = htmlLangProvider;
-    exports.ɵz = setHtmlLangAttribute;
-    exports.ɵu = CmsGuardsService;
-    exports.ɵt = CmsI18nService;
-    exports.ɵs = CmsMappingService;
-    exports.ɵr = CmsRoutesService;
-    exports.ɵa = BootstrapModule;
-    exports.ɵo = CheckoutConfigService;
-    exports.ɵn = defaultCheckoutConfig;
-    exports.ɵbd = provideConfigFromMetaTags;
     exports.ɵbb = defaultRoutingConfig;
     exports.ɵba = defaultStorefrontRoutesConfig;
-    exports.ɵbc = OrderConfirmationPageModule;
-    exports.ɵf = CardComponent;
-    exports.ɵe = CardModule;
-    exports.ɵb = AutoFocusDirectiveModule;
+    exports.ɵz = RoutingModule;
+    exports.ɵu = suffixUrlMatcher;
+    exports.ɵx = htmlLangProvider;
+    exports.ɵy = setHtmlLangAttribute;
+    exports.ɵr = CmsGuardsService;
+    exports.ɵq = CmsI18nService;
+    exports.ɵp = CmsMappingService;
+    exports.ɵo = CmsRoutesService;
+    exports.ɵe = CardComponent;
+    exports.ɵd = CardModule;
+    exports.ɵa = AutoFocusDirectiveModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
