@@ -1,16 +1,16 @@
 import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ServiceWorkerModule, ɵangular_packages_service_worker_service_worker_b } from '@angular/service-worker';
 import { __awaiter } from 'tslib';
+import { ServiceWorkerModule, ɵangular_packages_service_worker_service_worker_b } from '@angular/service-worker';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { of, BehaviorSubject, combineLatest, fromEvent, concat, from, isObservable, Subscription } from 'rxjs';
 import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
-import { filter, map, switchMap, tap, debounceTime, take, skipWhile, shareReplay, distinctUntilChanged, startWith, endWith, first, withLatestFrom, delay } from 'rxjs/operators';
 import { FormBuilder, FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Title, Meta } from '@angular/platform-browser';
+import { of, combineLatest, BehaviorSubject, fromEvent, concat, from, isObservable, Subscription } from 'rxjs';
+import { filter, map, switchMap, tap, debounceTime, take, skipWhile, shareReplay, distinctUntilChanged, startWith, endWith, first, withLatestFrom, delay } from 'rxjs/operators';
 import { CommonModule, isPlatformServer } from '@angular/common';
 import { RouterModule, Router, NavigationEnd, NavigationStart, ActivatedRoute } from '@angular/router';
-import { Injectable, Pipe, ChangeDetectionStrategy, Component, NgModule, APP_INITIALIZER, HostBinding, Input, Renderer2, Injector, Inject, PLATFORM_ID, Output, EventEmitter, ElementRef, Directive, TemplateRef, ViewContainerRef, Optional, HostListener, forwardRef, ViewChild, ChangeDetectorRef, defineInjectable, inject, INJECTOR } from '@angular/core';
-import { ProductService, RoutingService, ServerConfig, RoutingConfigService, ConfigModule, AuthGuard, RoutingModule, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductReferenceService, CmsConfig, PageType, I18nModule, provideConfig, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CheckoutService, CmsService, SemanticPathService, Config, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, defaultCmsModuleConfig, CmsModule, CartService, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, CartModule, UserModule, UrlModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CmsPageTitleModule, NotAuthGuard, AuthRedirectService, GlobalMessageModule, OccConfig, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, ProductSearchService } from '@spartacus/core';
+import { Title, Meta } from '@angular/platform-browser';
+import { Injectable, Pipe, ChangeDetectionStrategy, Component, NgModule, APP_INITIALIZER, HostBinding, Input, Renderer2, Injector, Inject, PLATFORM_ID, Output, EventEmitter, Directive, ElementRef, TemplateRef, ViewContainerRef, Optional, HostListener, forwardRef, ViewChild, ChangeDetectorRef, defineInjectable, inject, INJECTOR } from '@angular/core';
+import { ProductService, RoutingService, ServerConfig, RoutingConfigService, ConfigModule, RoutingModule, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductReferenceService, CmsConfig, PageType, I18nModule, provideConfig, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CartService, CxApiService, ComponentMapperService, DynamicAttributeService, CartModule, CheckoutModule, UserModule, UrlModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CmsPageTitleModule, NotAuthGuard, AuthRedirectService, AuthGuard, GlobalMessageModule, OccConfig, ProductModule, CheckoutService, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, ProductSearchService } from '@spartacus/core';
 
 /**
  * @fileoverview added by tsickle
@@ -3374,222 +3374,6 @@ DeliveryModeModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/**
- * @abstract
- */
-class PWAModuleConfig extends ServerConfig {
-}
-/** @type {?} */
-const defaultPWAModuleConfig = {
-    pwa: {
-        enabled: false,
-        addToHomeScreen: false,
-    },
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class AddToHomeScreenService {
-    /**
-     * @param {?} config
-     * @param {?} globalMessageService
-     * @param {?} winRef
-     */
-    constructor(config, globalMessageService, winRef) {
-        this.config = config;
-        this.globalMessageService = globalMessageService;
-        this.winRef = winRef;
-        this.canPrompt = new BehaviorSubject(false);
-        this.canPrompt$ = this.canPrompt.asObservable();
-        if (this.config.pwa.addToHomeScreen) {
-            this.init();
-        }
-    }
-    /**
-     * @return {?}
-     */
-    init() {
-        if (this.winRef.nativeWindow) {
-            this.winRef.nativeWindow.addEventListener('beforeinstallprompt', event => {
-                event.preventDefault();
-                this.deferredEvent = event;
-                this.enableAddToHomeScreen();
-            });
-            this.winRef.nativeWindow.addEventListener('appinstalled', () => {
-                this.globalMessageService.add({ key: 'pwa.addedToHomeScreen' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
-                this.disableAddToHomeScreen();
-                this.deferredEvent = null;
-            });
-        }
-    }
-    /**
-     * @return {?}
-     */
-    enableAddToHomeScreen() {
-        this.canPrompt.next(true);
-    }
-    /**
-     * @return {?}
-     */
-    disableAddToHomeScreen() {
-        this.canPrompt.next(false);
-    }
-    /**
-     * @return {?}
-     */
-    firePrompt() {
-        if (this.deferredEvent) {
-            this.deferredEvent.prompt();
-        }
-    }
-}
-AddToHomeScreenService.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-AddToHomeScreenService.ctorParameters = () => [
-    { type: PWAModuleConfig },
-    { type: GlobalMessageService },
-    { type: WindowRef }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @abstract
- */
-class AddToHomeScreenComponent {
-    /**
-     * @param {?} addToHomeScreenService
-     */
-    constructor(addToHomeScreenService) {
-        this.addToHomeScreenService = addToHomeScreenService;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.canPrompt$ = this.addToHomeScreenService.canPrompt$;
-    }
-    /**
-     * @return {?}
-     */
-    prompt() {
-        this.addToHomeScreenService.firePrompt();
-    }
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class AddToHomeScreenBannerComponent extends AddToHomeScreenComponent {
-    /**
-     * @param {?} addToHomeScreenService
-     */
-    constructor(addToHomeScreenService) {
-        super(addToHomeScreenService);
-        this.addToHomeScreenService = addToHomeScreenService;
-    }
-}
-AddToHomeScreenBannerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-add-to-home-screen-banner',
-                template: "<div *ngIf=\"(canPrompt$ | async)\">\n  <div class=\"cx-add-to-home-screen-banner\">\n    <div class=\"cx-add-to-home-screen-banner-inner\">\n      <p>\n        {{ 'pwa.addSapStorefront' | cxTranslate }}\n      </p>\n      <ul>\n        <li>{{ 'pwa.noInstallationNeeded' | cxTranslate }}</li>\n        <li>{{ 'pwa.fastAccessToApplication' | cxTranslate }}</li>\n      </ul>\n      <button (click)=\"prompt()\" class=\"btn btn-primary\">\n        {{ 'pwa.addToHomeScreen' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n"
-            }] }
-];
-/** @nocollapse */
-AddToHomeScreenBannerComponent.ctorParameters = () => [
-    { type: AddToHomeScreenService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class AddToHomeScreenBtnComponent extends AddToHomeScreenComponent {
-    /**
-     * @param {?} addToHomeScreenService
-     */
-    constructor(addToHomeScreenService) {
-        super(addToHomeScreenService);
-        this.addToHomeScreenService = addToHomeScreenService;
-    }
-}
-AddToHomeScreenBtnComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-add-to-home-screen-btn',
-                template: "<span (click)=\"prompt()\">\n  <ng-content *ngIf=\"(canPrompt$ | async)\"></ng-content>\n</span>\n"
-            }] }
-];
-/** @nocollapse */
-AddToHomeScreenBtnComponent.ctorParameters = () => [
-    { type: AddToHomeScreenService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @param {?} pwaConfig
- * @return {?}
- */
-function pwaConfigurationFactory(pwaConfig) {
-    return { enabled: (pwaConfig.production && pwaConfig.pwa.enabled) || false };
-}
-/**
- * @param {?} addToHomeScreenService
- * @return {?}
- */
-function pwaFactory(addToHomeScreenService) {
-    /** @type {?} */
-    const result = () => addToHomeScreenService;
-    return result;
-}
-class PwaModule {
-}
-PwaModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    ConfigModule.withConfig(defaultPWAModuleConfig),
-                    ServiceWorkerModule.register('/ngsw-worker.js'),
-                    I18nModule,
-                ],
-                providers: [
-                    { provide: PWAModuleConfig, useExisting: Config },
-                    {
-                        provide: ɵangular_packages_service_worker_service_worker_b,
-                        useFactory: pwaConfigurationFactory,
-                        deps: [Config],
-                    },
-                    {
-                        provide: APP_INITIALIZER,
-                        useFactory: pwaFactory,
-                        deps: [AddToHomeScreenService],
-                        multi: true,
-                    },
-                    AddToHomeScreenService,
-                ],
-                declarations: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
-                exports: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class CardComponent {
     constructor() {
         this.iconTypes = ICON_TYPE;
@@ -3680,140 +3464,6 @@ CardModule.decorators = [
                 imports: [CommonModule, I18nModule, IconModule],
                 declarations: [CardComponent],
                 exports: [CardComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class OrderConfirmationComponent {
-    /**
-     * @param {?} checkoutService
-     * @param {?} translation
-     */
-    constructor(checkoutService, translation) {
-        this.checkoutService = checkoutService;
-        this.translation = translation;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.order$ = this.checkoutService.getOrderDetails();
-    }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        this.checkoutService.clearCheckoutData();
-    }
-    /**
-     * @param {?} deliveryAddress
-     * @return {?}
-     */
-    getAddressCardContent(deliveryAddress) {
-        return combineLatest([
-            this.translation.translate('addressCard.shipTo'),
-        ]).pipe(map(([textTitle]) => {
-            return {
-                title: textTitle,
-                textBold: `${deliveryAddress.firstName} ${deliveryAddress.lastName}`,
-                text: [
-                    deliveryAddress.line1,
-                    deliveryAddress.line2,
-                    `${deliveryAddress.town}, ${deliveryAddress.country.isocode}, ${deliveryAddress.postalCode}`,
-                    deliveryAddress.phone,
-                ],
-            };
-        }));
-    }
-    /**
-     * @param {?} deliveryMode
-     * @return {?}
-     */
-    getDeliveryModeCardContent(deliveryMode) {
-        return combineLatest([
-            this.translation.translate('checkoutShipping.shippingMethod'),
-        ]).pipe(map(([textTitle]) => {
-            return {
-                title: textTitle,
-                textBold: deliveryMode.name,
-                text: [deliveryMode.description],
-            };
-        }));
-    }
-    /**
-     * @param {?} billingAddress
-     * @return {?}
-     */
-    getBillingAddressCardContent(billingAddress) {
-        return combineLatest([
-            this.translation.translate('addressCard.billTo'),
-        ]).pipe(map(([textTitle]) => {
-            return {
-                title: textTitle,
-                textBold: `${billingAddress.firstName} ${billingAddress.lastName}`,
-                text: [
-                    billingAddress.line1,
-                    billingAddress.line2,
-                    `${billingAddress.town}, ${billingAddress.country.isocode}, ${billingAddress.postalCode}`,
-                    billingAddress.phone,
-                ],
-            };
-        }));
-    }
-    /**
-     * @param {?} payment
-     * @return {?}
-     */
-    getPaymentInfoCardContent(payment) {
-        return combineLatest([
-            this.translation.translate('paymentForm.payment'),
-            this.translation.translate('paymentCard.expires', {
-                month: payment.expiryMonth,
-                year: payment.expiryYear,
-            }),
-        ]).pipe(map(([textTitle, textExpires]) => {
-            return {
-                title: textTitle,
-                textBold: payment.accountHolderName,
-                text: [payment.cardNumber, textExpires],
-            };
-        }));
-    }
-}
-OrderConfirmationComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-order-confirmation',
-                template: "<div class=\"cx-page\" *ngIf=\"(order$ | async) as order\">\n  <header class=\"cx-page-header\">\n    <h1 class=\"cx-page-title\">\n      {{ 'checkoutOrderConfirmation.confirmationOfOrder' | cxTranslate }}\n      {{ order.code }}\n    </h1>\n  </header>\n\n  <div class=\"cx-order-confirmation\">\n    <div class=\"cx-order-confirmation-message\">\n      <h2>{{ 'checkoutOrderConfirmation.thankYou' | cxTranslate }}</h2>\n      <p>\n        {{\n          'checkoutOrderConfirmation.invoiceHasBeenSentByEmail' | cxTranslate\n        }}\n      </p>\n      <!-- <a href=\"#\" class=\"btn-link\">Print Page</a> -->\n    </div>\n\n    <cx-add-to-home-screen-banner></cx-add-to-home-screen-banner>\n\n    <div class=\"cx-order-review-summary\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                *ngIf=\"order.deliveryAddress\"\n                [content]=\"getAddressCardContent(order.deliveryAddress) | async\"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                *ngIf=\"order.paymentInfo\"\n                [content]=\"\n                  getBillingAddressCardContent(\n                    order.paymentInfo.billingAddress\n                  ) | async\n                \"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                *ngIf=\"order.deliveryMode\"\n                [content]=\"\n                  getDeliveryModeCardContent(order.deliveryMode) | async\n                \"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                *ngIf=\"order.paymentInfo\"\n                [content]=\"getPaymentInfoCardContent(order.paymentInfo) | async\"\n              ></cx-card>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"cx-order-items container\">\n      <h4 class=\"cx-order-items-header\">\n        {{ 'checkoutOrderConfirmation.orderItems' | cxTranslate }}\n      </h4>\n      <cx-cart-item-list\n        [items]=\"order.entries\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n\n    <div class=\"cx-order-summary container\">\n      <div class=\"row justify-content-end\">\n        <div class=\"col-sm-12 col-md-6 col-lg-5 col-xl-4\">\n          <cx-order-summary [cart]=\"order\"></cx-order-summary>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-/** @nocollapse */
-OrderConfirmationComponent.ctorParameters = () => [
-    { type: CheckoutService },
-    { type: TranslationService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class OrderConfirmationModule {
-}
-OrderConfirmationModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    CartSharedModule,
-                    CardModule,
-                    PwaModule,
-                    CheckoutModule,
-                    I18nModule,
-                ],
-                declarations: [OrderConfirmationComponent],
-                exports: [OrderConfirmationComponent],
             },] }
 ];
 
@@ -5268,7 +4918,6 @@ CheckoutComponentModule.decorators = [
                     CheckoutProgressMobileTopModule,
                     CheckoutProgressMobileBottomModule,
                     DeliveryModeModule,
-                    OrderConfirmationModule,
                     PaymentMethodModule,
                     PlaceOrderModule,
                     PromotionsModule,
@@ -5299,46 +4948,6 @@ CheckoutComponentModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class OrderConfirmationPageGuard {
-    /**
-     * @param {?} checkoutService
-     * @param {?} routingService
-     */
-    constructor(checkoutService, routingService) {
-        this.checkoutService = checkoutService;
-        this.routingService = routingService;
-    }
-    /**
-     * @return {?}
-     */
-    canActivate() {
-        return this.checkoutService.getOrderDetails().pipe(map(orderDetails => {
-            if (orderDetails && Object.keys(orderDetails).length !== 0) {
-                return true;
-            }
-            else {
-                this.routingService.go({ cxRoute: 'orders' });
-                return false;
-            }
-        }));
-    }
-}
-OrderConfirmationPageGuard.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root',
-            },] }
-];
-/** @nocollapse */
-OrderConfirmationPageGuard.ctorParameters = () => [
-    { type: CheckoutService },
-    { type: RoutingService }
-];
-/** @nocollapse */ OrderConfirmationPageGuard.ngInjectableDef = defineInjectable({ factory: function OrderConfirmationPageGuard_Factory() { return new OrderConfirmationPageGuard(inject(CheckoutService), inject(RoutingService)); }, token: OrderConfirmationPageGuard, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
@@ -7594,6 +7203,222 @@ CmsPageGuard.ctorParameters = () => [
     { type: SemanticPathService }
 ];
 /** @nocollapse */ CmsPageGuard.ngInjectableDef = defineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(inject(RoutingService), inject(CmsService), inject(CmsRoutesService), inject(CmsI18nService), inject(CmsGuardsService), inject(SemanticPathService)); }, token: CmsPageGuard, providedIn: "root" });
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @abstract
+ */
+class PWAModuleConfig extends ServerConfig {
+}
+/** @type {?} */
+const defaultPWAModuleConfig = {
+    pwa: {
+        enabled: false,
+        addToHomeScreen: false,
+    },
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class AddToHomeScreenService {
+    /**
+     * @param {?} config
+     * @param {?} globalMessageService
+     * @param {?} winRef
+     */
+    constructor(config, globalMessageService, winRef) {
+        this.config = config;
+        this.globalMessageService = globalMessageService;
+        this.winRef = winRef;
+        this.canPrompt = new BehaviorSubject(false);
+        this.canPrompt$ = this.canPrompt.asObservable();
+        if (this.config.pwa.addToHomeScreen) {
+            this.init();
+        }
+    }
+    /**
+     * @return {?}
+     */
+    init() {
+        if (this.winRef.nativeWindow) {
+            this.winRef.nativeWindow.addEventListener('beforeinstallprompt', event => {
+                event.preventDefault();
+                this.deferredEvent = event;
+                this.enableAddToHomeScreen();
+            });
+            this.winRef.nativeWindow.addEventListener('appinstalled', () => {
+                this.globalMessageService.add({ key: 'pwa.addedToHomeScreen' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
+                this.disableAddToHomeScreen();
+                this.deferredEvent = null;
+            });
+        }
+    }
+    /**
+     * @return {?}
+     */
+    enableAddToHomeScreen() {
+        this.canPrompt.next(true);
+    }
+    /**
+     * @return {?}
+     */
+    disableAddToHomeScreen() {
+        this.canPrompt.next(false);
+    }
+    /**
+     * @return {?}
+     */
+    firePrompt() {
+        if (this.deferredEvent) {
+            this.deferredEvent.prompt();
+        }
+    }
+}
+AddToHomeScreenService.decorators = [
+    { type: Injectable }
+];
+/** @nocollapse */
+AddToHomeScreenService.ctorParameters = () => [
+    { type: PWAModuleConfig },
+    { type: GlobalMessageService },
+    { type: WindowRef }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @abstract
+ */
+class AddToHomeScreenComponent {
+    /**
+     * @param {?} addToHomeScreenService
+     */
+    constructor(addToHomeScreenService) {
+        this.addToHomeScreenService = addToHomeScreenService;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.canPrompt$ = this.addToHomeScreenService.canPrompt$;
+    }
+    /**
+     * @return {?}
+     */
+    prompt() {
+        this.addToHomeScreenService.firePrompt();
+    }
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class AddToHomeScreenBannerComponent extends AddToHomeScreenComponent {
+    /**
+     * @param {?} addToHomeScreenService
+     */
+    constructor(addToHomeScreenService) {
+        super(addToHomeScreenService);
+        this.addToHomeScreenService = addToHomeScreenService;
+    }
+}
+AddToHomeScreenBannerComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-add-to-home-screen-banner',
+                template: "<div *ngIf=\"(canPrompt$ | async)\">\n  <div class=\"cx-add-to-home-screen-banner\">\n    <div class=\"cx-add-to-home-screen-banner-inner\">\n      <p>\n        {{ 'pwa.addSapStorefront' | cxTranslate }}\n      </p>\n      <ul>\n        <li>{{ 'pwa.noInstallationNeeded' | cxTranslate }}</li>\n        <li>{{ 'pwa.fastAccessToApplication' | cxTranslate }}</li>\n      </ul>\n      <button (click)=\"prompt()\" class=\"btn btn-primary\">\n        {{ 'pwa.addToHomeScreen' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n"
+            }] }
+];
+/** @nocollapse */
+AddToHomeScreenBannerComponent.ctorParameters = () => [
+    { type: AddToHomeScreenService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class AddToHomeScreenBtnComponent extends AddToHomeScreenComponent {
+    /**
+     * @param {?} addToHomeScreenService
+     */
+    constructor(addToHomeScreenService) {
+        super(addToHomeScreenService);
+        this.addToHomeScreenService = addToHomeScreenService;
+    }
+}
+AddToHomeScreenBtnComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-add-to-home-screen-btn',
+                template: "<span (click)=\"prompt()\">\n  <ng-content *ngIf=\"(canPrompt$ | async)\"></ng-content>\n</span>\n"
+            }] }
+];
+/** @nocollapse */
+AddToHomeScreenBtnComponent.ctorParameters = () => [
+    { type: AddToHomeScreenService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @param {?} pwaConfig
+ * @return {?}
+ */
+function pwaConfigurationFactory(pwaConfig) {
+    return { enabled: (pwaConfig.production && pwaConfig.pwa.enabled) || false };
+}
+/**
+ * @param {?} addToHomeScreenService
+ * @return {?}
+ */
+function pwaFactory(addToHomeScreenService) {
+    /** @type {?} */
+    const result = () => addToHomeScreenService;
+    return result;
+}
+class PwaModule {
+}
+PwaModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    ConfigModule.withConfig(defaultPWAModuleConfig),
+                    ServiceWorkerModule.register('/ngsw-worker.js'),
+                    I18nModule,
+                ],
+                providers: [
+                    { provide: PWAModuleConfig, useExisting: Config },
+                    {
+                        provide: ɵangular_packages_service_worker_service_worker_b,
+                        useFactory: pwaConfigurationFactory,
+                        deps: [Config],
+                    },
+                    {
+                        provide: APP_INITIALIZER,
+                        useFactory: pwaFactory,
+                        deps: [AddToHomeScreenService],
+                        multi: true,
+                    },
+                    AddToHomeScreenService,
+                ],
+                declarations: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
+                exports: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
+            },] }
+];
 
 /**
  * @fileoverview added by tsickle
@@ -12439,6 +12264,319 @@ ProductImagesModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class OrderConfirmationItemsComponent {
+    /**
+     * @param {?} checkoutService
+     */
+    constructor(checkoutService) {
+        this.checkoutService = checkoutService;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.order$ = this.checkoutService.getOrderDetails();
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        this.checkoutService.clearCheckoutData();
+    }
+}
+OrderConfirmationItemsComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-order-confirmation-items',
+                template: "<div class=\"cx-order-items container\" *ngIf=\"(order$ | async) as order\">\n  <h4 class=\"cx-order-items-header\">\n    {{ 'checkoutOrderConfirmation.orderItems' | cxTranslate }}\n  </h4>\n  <cx-cart-item-list\n    [items]=\"order.entries\"\n    [isReadOnly]=\"true\"\n  ></cx-cart-item-list>\n</div>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+OrderConfirmationItemsComponent.ctorParameters = () => [
+    { type: CheckoutService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class OrderConfirmationThankYouMessageComponent {
+    /**
+     * @param {?} checkoutService
+     */
+    constructor(checkoutService) {
+        this.checkoutService = checkoutService;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.order$ = this.checkoutService.getOrderDetails();
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        this.checkoutService.clearCheckoutData();
+    }
+}
+OrderConfirmationThankYouMessageComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-order-confirmation-thank-you-message',
+                template: "<header class=\"cx-page-header\" *ngIf=\"(order$ | async) as order\">\n  <h1 class=\"cx-page-title\">\n    {{ 'checkoutOrderConfirmation.confirmationOfOrder' | cxTranslate }}\n    {{ order.code }}\n  </h1>\n</header>\n\n<div class=\"cx-order-confirmation-message\">\n  <h2>{{ 'checkoutOrderConfirmation.thankYou' | cxTranslate }}</h2>\n  <p>\n    {{ 'checkoutOrderConfirmation.invoiceHasBeenSentByEmail' | cxTranslate }}\n  </p>\n  <!-- <a href=\"#\" class=\"btn-link\">Print Page</a> -->\n</div>\n\n<cx-add-to-home-screen-banner></cx-add-to-home-screen-banner>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+OrderConfirmationThankYouMessageComponent.ctorParameters = () => [
+    { type: CheckoutService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class OrderConfirmationOverviewComponent {
+    /**
+     * @param {?} checkoutService
+     * @param {?} translation
+     */
+    constructor(checkoutService, translation) {
+        this.checkoutService = checkoutService;
+        this.translation = translation;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.order$ = this.checkoutService.getOrderDetails();
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        this.checkoutService.clearCheckoutData();
+    }
+    /**
+     * @param {?} deliveryAddress
+     * @return {?}
+     */
+    getAddressCardContent(deliveryAddress) {
+        return this.translation.translate('addressCard.shipTo').pipe(map(textTitle => ({
+            title: textTitle,
+            textBold: `${deliveryAddress.firstName} ${deliveryAddress.lastName}`,
+            text: [
+                deliveryAddress.line1,
+                deliveryAddress.line2,
+                `${deliveryAddress.town}, ${deliveryAddress.country.isocode}, ${deliveryAddress.postalCode}`,
+                deliveryAddress.phone,
+            ],
+        })));
+    }
+    /**
+     * @param {?} deliveryMode
+     * @return {?}
+     */
+    getDeliveryModeCardContent(deliveryMode) {
+        return this.translation.translate('checkoutShipping.shippingMethod').pipe(map(textTitle => ({
+            title: textTitle,
+            textBold: deliveryMode.name,
+            text: [deliveryMode.description],
+        })));
+    }
+    /**
+     * @param {?} billingAddress
+     * @return {?}
+     */
+    getBillingAddressCardContent(billingAddress) {
+        return this.translation.translate('addressCard.billTo').pipe(map(textTitle => ({
+            title: textTitle,
+            textBold: `${billingAddress.firstName} ${billingAddress.lastName}`,
+            text: [
+                billingAddress.line1,
+                billingAddress.line2,
+                `${billingAddress.town}, ${billingAddress.country.isocode}, ${billingAddress.postalCode}`,
+                billingAddress.phone,
+            ],
+        })));
+    }
+    /**
+     * @param {?} payment
+     * @return {?}
+     */
+    getPaymentInfoCardContent(payment) {
+        return combineLatest([
+            this.translation.translate('paymentForm.payment'),
+            this.translation.translate('paymentCard.expires', {
+                month: payment.expiryMonth,
+                year: payment.expiryYear,
+            }),
+        ]).pipe(map(([textTitle, textExpires]) => ({
+            title: textTitle,
+            textBold: payment.accountHolderName,
+            text: [payment.cardNumber, textExpires],
+        })));
+    }
+}
+OrderConfirmationOverviewComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-order-confirmation-overview',
+                template: "<div class=\"cx-order-review-summary\" *ngIf=\"(order$ | async) as order\">\n  <div class=\"container\">\n    <div class=\"row\">\n      <div class=\"col-sm-12 col-md-4 col-lg-3\">\n        <div class=\"summary-card\">\n          <cx-card\n            [content]=\"getAddressCardContent(order.deliveryAddress) | async\"\n          ></cx-card>\n        </div>\n      </div>\n\n      <div class=\"col-sm-12 col-md-4 col-lg-3\">\n        <div class=\"summary-card\">\n          <cx-card\n            [content]=\"\n              getBillingAddressCardContent(order.paymentInfo.billingAddress)\n                | async\n            \"\n          ></cx-card>\n        </div>\n      </div>\n\n      <div class=\"col-sm-12 col-md-4 col-lg-3\">\n        <div class=\"summary-card\">\n          <cx-card\n            [content]=\"getDeliveryModeCardContent(order.deliveryMode) | async\"\n          ></cx-card>\n        </div>\n      </div>\n\n      <div class=\"col-sm-12 col-md-4 col-lg-3\">\n        <div class=\"summary-card\">\n          <cx-card\n            [content]=\"getPaymentInfoCardContent(order.paymentInfo) | async\"\n          ></cx-card>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+OrderConfirmationOverviewComponent.ctorParameters = () => [
+    { type: CheckoutService },
+    { type: TranslationService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class OrderConfirmationTotalsComponent {
+    /**
+     * @param {?} checkoutService
+     */
+    constructor(checkoutService) {
+        this.checkoutService = checkoutService;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.order$ = this.checkoutService.getOrderDetails();
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        this.checkoutService.clearCheckoutData();
+    }
+}
+OrderConfirmationTotalsComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-order-confirmation-totals',
+                template: "<div class=\"cx-order-summary container\" *ngIf=\"(order$ | async) as order\">\n  <div class=\"row justify-content-end\">\n    <div class=\"col-sm-12 col-md-6 col-lg-5 col-xl-4\">\n      <cx-order-summary [cart]=\"order\"></cx-order-summary>\n    </div>\n  </div>\n</div>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+OrderConfirmationTotalsComponent.ctorParameters = () => [
+    { type: CheckoutService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class OrderConfirmationGuard {
+    /**
+     * @param {?} checkoutService
+     * @param {?} router
+     * @param {?} semanticPathService
+     */
+    constructor(checkoutService, router, semanticPathService) {
+        this.checkoutService = checkoutService;
+        this.router = router;
+        this.semanticPathService = semanticPathService;
+    }
+    /**
+     * @return {?}
+     */
+    canActivate() {
+        return this.checkoutService.getOrderDetails().pipe(map(orderDetails => {
+            if (orderDetails && Object.keys(orderDetails).length !== 0) {
+                return true;
+            }
+            else {
+                return this.router.parseUrl(this.semanticPathService.get('orders'));
+            }
+        }));
+    }
+}
+OrderConfirmationGuard.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+OrderConfirmationGuard.ctorParameters = () => [
+    { type: CheckoutService },
+    { type: Router },
+    { type: SemanticPathService }
+];
+/** @nocollapse */ OrderConfirmationGuard.ngInjectableDef = defineInjectable({ factory: function OrderConfirmationGuard_Factory() { return new OrderConfirmationGuard(inject(CheckoutService), inject(Router), inject(SemanticPathService)); }, token: OrderConfirmationGuard, providedIn: "root" });
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const orderConfirmationComponents = [
+    OrderConfirmationItemsComponent,
+    OrderConfirmationOverviewComponent,
+    OrderConfirmationThankYouMessageComponent,
+    OrderConfirmationTotalsComponent,
+];
+class OrderConfirmationModule {
+}
+OrderConfirmationModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    CartSharedModule,
+                    CardModule,
+                    PwaModule,
+                    CheckoutModule,
+                    I18nModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            OrderConfirmationThankMessageComponent: {
+                                selector: 'cx-order-confirmation-thank-you-message',
+                                guards: [AuthGuard, OrderConfirmationGuard],
+                            },
+                            OrderConfirmationItemsComponent: {
+                                selector: 'cx-order-confirmation-items',
+                                guards: [AuthGuard, OrderConfirmationGuard],
+                            },
+                            OrderConfirmationTotalsComponent: {
+                                selector: 'cx-order-confirmation-totals',
+                                guards: [AuthGuard, OrderConfirmationGuard],
+                            },
+                            OrderConfirmationOverviewComponent: {
+                                selector: 'cx-order-confirmation-overview',
+                                guards: [AuthGuard, OrderConfirmationGuard],
+                            },
+                        },
+                    }))),
+                ],
+                declarations: [...orderConfirmationComponents],
+                exports: [...orderConfirmationComponents],
+                entryComponents: [...orderConfirmationComponents],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class CmsLibModule {
 }
 CmsLibModule.decorators = [
@@ -12469,6 +12607,7 @@ CmsLibModule.decorators = [
                     CloseAccountModule,
                     CartComponentModule,
                     TabParagraphContainerModule,
+                    OrderConfirmationModule,
                     // TODO:#2811 - uncomment to enable
                     // StoreFinderModule,
                     ProductImagesModule,
@@ -12726,51 +12865,6 @@ function provideConfigFromMetaTags() {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class OrderConfirmationPageComponent {
-}
-OrderConfirmationPageComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-order-confirmation-page',
-                template: "<cx-page-layout>\n  <!-- \n    TODO: as long as order confirmation isn't a cms component we render\n    the hard-coded version to  OrderConfirmationOverviewComponent\n  -->\n  <ng-template cxOutletRef=\"OrderConfirmationOverviewComponent\">\n    <cx-order-confirmation></cx-order-confirmation>\n  </ng-template>\n</cx-page-layout>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-const ɵ0$6 = { cxRoute: 'orderConfirmation' };
-/** @type {?} */
-const routes$2 = [
-    // TODO: as soon as the components are moved to CMS driven components we can drop this specific OrderConfirmationPageComponent
-    {
-        path: null,
-        canActivate: [AuthGuard, CmsPageGuard, OrderConfirmationPageGuard],
-        component: OrderConfirmationPageComponent,
-        data: ɵ0$6,
-    },
-];
-class OrderConfirmationPageModule {
-}
-OrderConfirmationPageModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    OrderConfirmationModule,
-                    PageLayoutModule,
-                    OutletRefModule,
-                    RouterModule.forChild(routes$2),
-                ],
-                declarations: [OrderConfirmationPageComponent],
-                exports: [OrderConfirmationPageComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 /** @type {?} */
 const defaultStorefrontRoutesConfig = {
     home: { paths: [''] },
@@ -12801,6 +12895,9 @@ const defaultStorefrontRoutesConfig = {
     orderDetails: {
         paths: ['my-account/order/:orderCode'],
         paramsMapping: { orderCode: 'code' },
+    },
+    orders: {
+        paths: ['my-account/orders'],
     },
 };
 /** @type {?} */
@@ -12862,7 +12959,6 @@ StorefrontModule.decorators = [
                     ProductDetailsPageModule,
                     ProductListingPageModule,
                     CartPageModule,
-                    OrderConfirmationPageModule,
                 ],
                 providers: [...provideConfigFromMetaTags()],
                 declarations: [],
@@ -12879,6 +12975,6 @@ StorefrontModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AddToCartComponent, AddToCartModule, AddedToCartDialogComponent, CartDetailsComponent, CartDetailsModule, CartNotEmptyGuard, CartItemComponent, CartItemListComponent, OrderSummaryComponent, CartSharedModule, CartTotalsComponent, CartTotalsModule, CartComponentModule, MiniCartComponent, MiniCartModule, CheckoutComponentModule, CheckoutDetailsService, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressComponent, CheckoutProgressModule, DeliveryModeComponent, DeliveryModeModule, OrderConfirmationComponent, OrderConfirmationModule, BillingAddressFormComponent, BillingAddressFormModule, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PlaceOrderComponent, PlaceOrderModule, PromotionsComponent, PromotionsModule, ReviewSubmitComponent, ReviewSubmitModule, SuggestedAddressDialogComponent, AddressFormComponent, AddressFormModule, ShippingAddressComponent, ShippingAddressModule, CheckoutConfig, CheckoutStepType, OrderConfirmationPageGuard, CheckoutGuard, DeliveryModeSetGuard, ShippingAddressSetGuard, PaymentDetailsSetGuard, CmsLibModule, BannerComponent, BannerModule, LinkComponent, LinkModule, ParagraphComponent, CmsParagraphModule, TabParagraphContainerComponent, TabParagraphContainerModule, GlobalMessageComponentModule, GlobalMessageComponent, fontawesomeIconConfig, IconLoaderService, IconComponent, ICON_TYPE, IconConfig, IconResourceType, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, CloseAccountModule, CloseAccountModalComponent, CloseAccountComponent, ConsentManagementFormComponent, ConsentManagementComponent, ConsentManagementModule, ForgotPasswordComponent, ForgotPasswordModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, PaymentMethodsComponent, PaymentMethodsModule, ResetPasswordFormComponent, ResetPasswordModule, UpdateEmailFormComponent, UpdateEmailComponent, UpdateEmailModule, UpdatePasswordFormComponent, UpdatePasswordComponent, UpdatePasswordModule, UpdateProfileFormComponent, UpdateProfileComponent, UpdateProfileModule, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, FooterNavigationComponent, FooterNavigationModule, NavigationComponentService, NavigationComponent, NavigationModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, CurrentProductService, ProductImagesComponent, ProductDetailsComponent, ProductDetailsModule, ProductSummaryComponent, ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent, ProductDetailOutlets, ProductTabsOutlets, ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule, LoginFormComponent, LoginFormModule, LoginComponent, LoginModule, LogoutGuard, LogoutModule, RegisterComponent, RegisterComponentModule, UserComponentModule, CartPageComponent, CartPageModule, ProductDetailsPageComponent, ProductDetailsPageModule, ProductListingPageModule, CmsModule$1 as CmsModule, CmsPageGuard, OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService, StyleRefDirective, StyleRefModule, ComponentWrapperDirective, PageComponentModule, defaultCmsContentConfig, CmsComponentData, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, pwaConfigurationFactory, pwaFactory, PwaModule, PWAModuleConfig, defaultPWAModuleConfig, CmsRouteModule, SeoMetaService, initSeoService, SeoModule, provideConfigFromMetaTags, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, LayoutModule, MainModule, StorefrontComponent, FormComponentsModule, ItemCounterComponent, GenericLinkComponent, GenericLinkModule, ListNavigationModule, PaginationComponent, SortingComponent, MediaComponent, MediaModule, MediaService, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, ModalRef, ModalService, OnlyNumberDirective, AutoFocusDirective, FormUtils, StorefrontModule, CheckoutConfigService as ɵc, defaultCheckoutConfig as ɵb, NavigationUIComponent as ɵg, HighlightPipe as ɵh, ProductCarouselService as ɵl, ProductReferencesService as ɵn, SharedCarouselService as ɵm, ProductImagesModule as ɵs, ProductDetailsTabComponent as ɵk, ProductDetailsTabModule as ɵj, LoginComponentService as ɵt, OrderConfirmationPageComponent as ɵbd, OrderConfirmationPageModule as ɵbc, OutletStyleService as ɵi, defaultCartPageConfig as ɵv, AddToHomeScreenService as ɵf, addCmsRoute as ɵw, defaultRoutingConfig as ɵbb, defaultStorefrontRoutesConfig as ɵba, RoutingModule$1 as ɵz, suffixUrlMatcher as ɵu, htmlLangProvider as ɵx, setHtmlLangAttribute as ɵy, CmsGuardsService as ɵr, CmsI18nService as ɵq, CmsMappingService as ɵp, CmsRoutesService as ɵo, CardComponent as ɵe, CardModule as ɵd, AutoFocusDirectiveModule as ɵa };
+export { AddToCartComponent, AddToCartModule, AddedToCartDialogComponent, CartDetailsComponent, CartDetailsModule, CartNotEmptyGuard, CartItemComponent, CartItemListComponent, OrderSummaryComponent, CartSharedModule, CartTotalsComponent, CartTotalsModule, CartComponentModule, MiniCartComponent, MiniCartModule, CheckoutComponentModule, CheckoutDetailsService, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressComponent, CheckoutProgressModule, DeliveryModeComponent, DeliveryModeModule, BillingAddressFormComponent, BillingAddressFormModule, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PlaceOrderComponent, PlaceOrderModule, PromotionsComponent, PromotionsModule, ReviewSubmitComponent, ReviewSubmitModule, SuggestedAddressDialogComponent, AddressFormComponent, AddressFormModule, ShippingAddressComponent, ShippingAddressModule, CheckoutConfig, CheckoutStepType, CheckoutGuard, DeliveryModeSetGuard, ShippingAddressSetGuard, PaymentDetailsSetGuard, CmsLibModule, BannerComponent, BannerModule, LinkComponent, LinkModule, ParagraphComponent, CmsParagraphModule, TabParagraphContainerComponent, TabParagraphContainerModule, GlobalMessageComponentModule, GlobalMessageComponent, fontawesomeIconConfig, IconLoaderService, IconComponent, ICON_TYPE, IconConfig, IconResourceType, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, CloseAccountModule, CloseAccountModalComponent, CloseAccountComponent, ConsentManagementFormComponent, ConsentManagementComponent, ConsentManagementModule, ForgotPasswordComponent, ForgotPasswordModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, PaymentMethodsComponent, PaymentMethodsModule, ResetPasswordFormComponent, ResetPasswordModule, UpdateEmailFormComponent, UpdateEmailComponent, UpdateEmailModule, UpdatePasswordFormComponent, UpdatePasswordComponent, UpdatePasswordModule, UpdateProfileFormComponent, UpdateProfileComponent, UpdateProfileModule, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, FooterNavigationComponent, FooterNavigationModule, NavigationComponentService, NavigationComponent, NavigationModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, CurrentProductService, ProductImagesComponent, ProductDetailsComponent, ProductDetailsModule, ProductSummaryComponent, ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent, ProductDetailOutlets, ProductTabsOutlets, ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule, LoginFormComponent, LoginFormModule, LoginComponent, LoginModule, LogoutGuard, LogoutModule, RegisterComponent, RegisterComponentModule, UserComponentModule, OrderConfirmationModule, OrderConfirmationItemsComponent, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConfirmationGuard, CartPageComponent, CartPageModule, ProductDetailsPageComponent, ProductDetailsPageModule, ProductListingPageModule, CmsModule$1 as CmsModule, CmsPageGuard, OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService, StyleRefDirective, StyleRefModule, ComponentWrapperDirective, PageComponentModule, defaultCmsContentConfig, CmsComponentData, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, pwaConfigurationFactory, pwaFactory, PwaModule, PWAModuleConfig, defaultPWAModuleConfig, CmsRouteModule, SeoMetaService, initSeoService, SeoModule, provideConfigFromMetaTags, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, LayoutModule, MainModule, StorefrontComponent, FormComponentsModule, ItemCounterComponent, GenericLinkComponent, GenericLinkModule, ListNavigationModule, PaginationComponent, SortingComponent, MediaComponent, MediaModule, MediaService, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, ModalRef, ModalService, OnlyNumberDirective, AutoFocusDirective, FormUtils, StorefrontModule, CheckoutConfigService as ɵc, defaultCheckoutConfig as ɵb, NavigationUIComponent as ɵf, HighlightPipe as ɵg, ProductCarouselService as ɵk, ProductReferencesService as ɵm, SharedCarouselService as ɵl, ProductImagesModule as ɵs, ProductDetailsTabComponent as ɵj, ProductDetailsTabModule as ɵi, LoginComponentService as ɵt, OutletStyleService as ɵh, defaultCartPageConfig as ɵv, AddToHomeScreenService as ɵr, addCmsRoute as ɵw, defaultRoutingConfig as ɵbb, defaultStorefrontRoutesConfig as ɵba, RoutingModule$1 as ɵz, suffixUrlMatcher as ɵu, htmlLangProvider as ɵx, setHtmlLangAttribute as ɵy, CmsGuardsService as ɵq, CmsI18nService as ɵp, CmsMappingService as ɵo, CmsRoutesService as ɵn, CardComponent as ɵe, CardModule as ɵd, AutoFocusDirectiveModule as ɵa };
 
 //# sourceMappingURL=spartacus-storefront.js.map

@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@ng-bootstrap/ng-bootstrap'), require('@angular/service-worker'), require('@ng-select/ng-select'), require('rxjs'), require('@angular/common/http'), require('rxjs/operators'), require('@angular/forms'), require('@angular/platform-browser'), require('@angular/common'), require('@angular/router'), require('@angular/core'), require('@spartacus/core')) :
-    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@ng-bootstrap/ng-bootstrap', '@angular/service-worker', '@ng-select/ng-select', 'rxjs', '@angular/common/http', 'rxjs/operators', '@angular/forms', '@angular/platform-browser', '@angular/common', '@angular/router', '@angular/core', '@spartacus/core'], factory) :
-    (factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}),global.ngBootstrap,global.ng['service-worker'],global.ngSelect,global.rxjs,global.ng.common.http,global.rxjs.operators,global.ng.forms,global.ng.platformBrowser,global.ng.common,global.ng.router,global.ng.core,global.core));
-}(this, (function (exports,i1,serviceWorker,ngSelect,rxjs,http,operators,forms,i1$1,common,i4,i0,i1$2) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@ng-bootstrap/ng-bootstrap'), require('@angular/service-worker'), require('@ng-select/ng-select'), require('@angular/common/http'), require('@angular/forms'), require('rxjs'), require('rxjs/operators'), require('@angular/common'), require('@angular/router'), require('@angular/platform-browser'), require('@angular/core'), require('@spartacus/core')) :
+    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@ng-bootstrap/ng-bootstrap', '@angular/service-worker', '@ng-select/ng-select', '@angular/common/http', '@angular/forms', 'rxjs', 'rxjs/operators', '@angular/common', '@angular/router', '@angular/platform-browser', '@angular/core', '@spartacus/core'], factory) :
+    (factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}),global.ngBootstrap,global.ng['service-worker'],global.ngSelect,global.ng.common.http,global.ng.forms,global.rxjs,global.rxjs.operators,global.ng.common,global.ng.router,global.ng.platformBrowser,global.ng.core,global.core));
+}(this, (function (exports,i1,serviceWorker,ngSelect,http,forms,rxjs,operators,common,i1$1,i1$2,i0,i1$3) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -308,11 +308,11 @@
         /** @nocollapse */
         CurrentProductService.ctorParameters = function () {
             return [
-                { type: i1$2.RoutingService },
-                { type: i1$2.ProductService }
+                { type: i1$3.RoutingService },
+                { type: i1$3.ProductService }
             ];
         };
-        /** @nocollapse */ CurrentProductService.ngInjectableDef = i0.defineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(i0.inject(i1$2.RoutingService), i0.inject(i1$2.ProductService)); }, token: CurrentProductService, providedIn: "root" });
+        /** @nocollapse */ CurrentProductService.ngInjectableDef = i0.defineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(i0.inject(i1$3.RoutingService), i0.inject(i1$3.ProductService)); }, token: CurrentProductService, providedIn: "root" });
         return CurrentProductService;
     }());
 
@@ -580,11 +580,11 @@
         /** @nocollapse */
         IconLoaderService.ctorParameters = function () {
             return [
-                { type: i1$2.WindowRef },
+                { type: i1$3.WindowRef },
                 { type: IconConfig }
             ];
         };
-        /** @nocollapse */ IconLoaderService.ngInjectableDef = i0.defineInjectable({ factory: function IconLoaderService_Factory() { return new IconLoaderService(i0.inject(i1$2.WindowRef), i0.inject(IconConfig)); }, token: IconLoaderService, providedIn: "root" });
+        /** @nocollapse */ IconLoaderService.ngInjectableDef = i0.defineInjectable({ factory: function IconLoaderService_Factory() { return new IconLoaderService(i0.inject(i1$3.WindowRef), i0.inject(IconConfig)); }, token: IconLoaderService, providedIn: "root" });
         return IconLoaderService;
     }());
 
@@ -701,8 +701,8 @@
         IconModule.decorators = [
             { type: i0.NgModule, args: [{
                         declarations: [IconComponent],
-                        imports: [common.CommonModule, i1$2.ConfigModule.withConfig(fontawesomeIconConfig)],
-                        providers: [{ provide: IconConfig, useExisting: i1$2.Config }],
+                        imports: [common.CommonModule, i1$3.ConfigModule.withConfig(fontawesomeIconConfig)],
+                        providers: [{ provide: IconConfig, useExisting: i1$3.Config }],
                         exports: [IconComponent],
                     },] }
         ];
@@ -817,7 +817,7 @@
         AddedToCartDialogComponent.ctorParameters = function () {
             return [
                 { type: ModalService },
-                { type: i1$2.CartService },
+                { type: i1$3.CartService },
                 { type: forms.FormBuilder }
             ];
         };
@@ -928,7 +928,7 @@
         /** @nocollapse */
         AddToCartComponent.ctorParameters = function () {
             return [
-                { type: i1$2.CartService },
+                { type: i1$3.CartService },
                 { type: ModalService },
                 { type: CurrentProductService },
                 { type: i0.ChangeDetectorRef }
@@ -1605,7 +1605,7 @@
         }
         GenericLinkModule.decorators = [
             { type: i0.NgModule, args: [{
-                        imports: [common.CommonModule, i4.RouterModule],
+                        imports: [common.CommonModule, i1$1.RouterModule],
                         declarations: [GenericLinkComponent],
                         exports: [GenericLinkComponent],
                     },] }
@@ -1898,7 +1898,7 @@
             return _super !== null && _super.apply(this, arguments) || this;
         }
         return LayoutConfig;
-    }(i1$2.ServerConfig));
+    }(i1$3.ServerConfig));
 
     /**
      * @fileoverview added by tsickle
@@ -2046,11 +2046,11 @@
         /** @nocollapse */
         MediaService.ctorParameters = function () {
             return [
-                { type: i1$2.OccConfig },
+                { type: i1$3.OccConfig },
                 { type: LayoutConfig }
             ];
         };
-        /** @nocollapse */ MediaService.ngInjectableDef = i0.defineInjectable({ factory: function MediaService_Factory() { return new MediaService(i0.inject(i1$2.OccConfig), i0.inject(LayoutConfig)); }, token: MediaService, providedIn: "root" });
+        /** @nocollapse */ MediaService.ngInjectableDef = i0.defineInjectable({ factory: function MediaService_Factory() { return new MediaService(i0.inject(i1$3.OccConfig), i0.inject(LayoutConfig)); }, token: MediaService, providedIn: "root" });
         return MediaService;
     }());
 
@@ -2233,7 +2233,7 @@
         }
         SpinnerModule.decorators = [
             { type: i0.NgModule, args: [{
-                        imports: [common.CommonModule, i1$2.I18nModule],
+                        imports: [common.CommonModule, i1$3.I18nModule],
                         declarations: [SpinnerComponent],
                         exports: [SpinnerComponent],
                     },] }
@@ -2249,7 +2249,7 @@
         function GlobalMessageComponent(globalMessageService) {
             this.globalMessageService = globalMessageService;
             this.iconTypes = ICON_TYPE;
-            this.messageType = i1$2.GlobalMessageType;
+            this.messageType = i1$3.GlobalMessageType;
         }
         /**
          * @return {?}
@@ -2283,7 +2283,7 @@
         /** @nocollapse */
         GlobalMessageComponent.ctorParameters = function () {
             return [
-                { type: i1$2.GlobalMessageService }
+                { type: i1$3.GlobalMessageService }
             ];
         };
         return GlobalMessageComponent;
@@ -2302,8 +2302,8 @@
                             common.CommonModule,
                             http.HttpClientModule,
                             IconModule,
-                            i1$2.I18nModule,
-                            i1$2.GlobalMessageModule.forRoot(),
+                            i1$3.I18nModule,
+                            i1$3.GlobalMessageModule.forRoot(),
                         ],
                         declarations: [GlobalMessageComponent],
                         exports: [GlobalMessageComponent],
@@ -2354,8 +2354,8 @@
     var _a;
     /** @type {?} */
     var LABELS = (_a = {},
-        _a[i1$2.LANGUAGE_CONTEXT_ID] = 'Language',
-        _a[i1$2.CURRENCY_CONTEXT_ID] = 'Currency',
+        _a[i1$3.LANGUAGE_CONTEXT_ID] = 'Language',
+        _a[i1$3.CURRENCY_CONTEXT_ID] = 'Currency',
         _a);
     var SiteContextComponentService = /** @class */ (function () {
         function SiteContextComponentService(componentData, contextServiceMap, injector) {
@@ -2482,9 +2482,9 @@
          */
             function (item, context) {
                 switch (context) {
-                    case i1$2.LANGUAGE_CONTEXT_ID:
+                    case i1$3.LANGUAGE_CONTEXT_ID:
                         return item.nativeName;
-                    case i1$2.CURRENCY_CONTEXT_ID:
+                    case i1$3.CURRENCY_CONTEXT_ID:
                         return item.symbol + ' ' + item.isocode;
                     default:
                         return item.isocode;
@@ -2497,7 +2497,7 @@
         SiteContextComponentService.ctorParameters = function () {
             return [
                 { type: CmsComponentData, decorators: [{ type: i0.Optional }] },
-                { type: i1$2.ContextServiceMap },
+                { type: i1$3.ContextServiceMap },
                 { type: i0.Injector }
             ];
         };
@@ -2580,8 +2580,8 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$1.RouterModule,
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     CMSSiteContextComponent: {
                                         selector: 'cx-site-context-selector',
@@ -2589,7 +2589,7 @@
                                             {
                                                 provide: SiteContextComponentService,
                                                 useClass: SiteContextComponentService,
-                                                deps: [CmsComponentData, i1$2.ContextServiceMap, i0.Injector],
+                                                deps: [CmsComponentData, i1$3.ContextServiceMap, i0.Injector],
                                             },
                                         ],
                                     },
@@ -2598,7 +2598,7 @@
                                     },
                                 },
                             }))),
-                            i1$2.SiteContextModule,
+                            i1$3.SiteContextModule,
                             IconModule,
                         ],
                         providers: [SiteContextComponentService],
@@ -3025,7 +3025,7 @@
         /** @nocollapse */
         CartItemListComponent.ctorParameters = function () {
             return [
-                { type: i1$2.CartService },
+                { type: i1$3.CartService },
                 { type: forms.FormBuilder }
             ];
         };
@@ -3152,12 +3152,12 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule,
+                            i1$1.RouterModule,
                             forms.ReactiveFormsModule,
-                            i1$2.UrlModule,
+                            i1$3.UrlModule,
                             i1.NgbModule,
                             PromotionsModule,
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                             MediaModule,
                             FormComponentsModule,
                         ],
@@ -3184,16 +3184,16 @@
                         imports: [
                             CartSharedModule,
                             common.CommonModule,
-                            i4.RouterModule,
+                            i1$1.RouterModule,
                             SpinnerModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     ProductAddToCartComponent: { selector: 'cx-add-to-cart' },
                                 },
                             }))),
-                            i1$2.UrlModule,
+                            i1$3.UrlModule,
                             IconModule,
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                             FormComponentsModule,
                             AutoFocusDirectiveModule,
                         ],
@@ -3251,7 +3251,7 @@
         /** @nocollapse */
         CartDetailsComponent.ctorParameters = function () {
             return [
-                { type: i1$2.CartService }
+                { type: i1$3.CartService }
             ];
         };
         return CartDetailsComponent;
@@ -3269,17 +3269,17 @@
                         imports: [
                             CartSharedModule,
                             common.CommonModule,
-                            i4.RouterModule,
-                            i1$2.UrlModule,
+                            i1$1.RouterModule,
+                            i1$3.UrlModule,
                             PromotionsModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     CartComponent: {
                                         selector: 'cx-cart-details',
                                     },
                                 },
                             }))),
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                         ],
                         declarations: [CartDetailsComponent],
                         exports: [CartDetailsComponent],
@@ -3322,11 +3322,11 @@
         /** @nocollapse */
         CartNotEmptyGuard.ctorParameters = function () {
             return [
-                { type: i1$2.CartService },
-                { type: i1$2.RoutingService }
+                { type: i1$3.CartService },
+                { type: i1$3.RoutingService }
             ];
         };
-        /** @nocollapse */ CartNotEmptyGuard.ngInjectableDef = i0.defineInjectable({ factory: function CartNotEmptyGuard_Factory() { return new CartNotEmptyGuard(i0.inject(i1$2.CartService), i0.inject(i1$2.RoutingService)); }, token: CartNotEmptyGuard, providedIn: "root" });
+        /** @nocollapse */ CartNotEmptyGuard.ngInjectableDef = i0.defineInjectable({ factory: function CartNotEmptyGuard_Factory() { return new CartNotEmptyGuard(i0.inject(i1$3.CartService), i0.inject(i1$3.RoutingService)); }, token: CartNotEmptyGuard, providedIn: "root" });
         return CartNotEmptyGuard;
     }());
 
@@ -3365,7 +3365,7 @@
         /** @nocollapse */
         CartTotalsComponent.ctorParameters = function () {
             return [
-                { type: i1$2.CartService }
+                { type: i1$3.CartService }
             ];
         };
         return CartTotalsComponent;
@@ -3382,9 +3382,9 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule,
-                            i1$2.UrlModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$1.RouterModule,
+                            i1$3.UrlModule,
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     CartTotalsComponent: {
                                         selector: 'cx-cart-totals',
@@ -3392,7 +3392,7 @@
                                 },
                             }))),
                             CartSharedModule,
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                         ],
                         declarations: [CartTotalsComponent],
                         exports: [CartTotalsComponent],
@@ -3425,7 +3425,7 @@
         /** @nocollapse */
         MiniCartComponent.ctorParameters = function () {
             return [
-                { type: i1$2.CartService }
+                { type: i1$3.CartService }
             ];
         };
         return MiniCartComponent;
@@ -3442,16 +3442,16 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule,
-                            i1$2.CartModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$1.RouterModule,
+                            i1$3.CartModule,
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     MiniCartComponent: { selector: 'cx-mini-cart' },
                                 },
                             }))),
-                            i1$2.UrlModule,
+                            i1$3.UrlModule,
                             IconModule,
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                         ],
                         declarations: [MiniCartComponent],
                         entryComponents: [MiniCartComponent],
@@ -3470,7 +3470,7 @@
         CartComponentModule.decorators = [
             { type: i0.NgModule, args: [{
                         imports: [
-                            i1$2.CartModule,
+                            i1$3.CartModule,
                             i1.NgbModule,
                             CartDetailsModule,
                             CartTotalsModule,
@@ -3655,7 +3655,7 @@
         CheckoutConfigService.ctorParameters = function () {
             return [
                 { type: CheckoutConfig },
-                { type: i1$2.RoutingConfigService }
+                { type: i1$3.RoutingConfigService }
             ];
         };
         return CheckoutConfigService;
@@ -3736,12 +3736,12 @@
         /** @nocollapse */
         CheckoutGuard.ctorParameters = function () {
             return [
-                { type: i4.Router },
+                { type: i1$1.Router },
                 { type: CheckoutConfig },
-                { type: i1$2.RoutingConfigService }
+                { type: i1$3.RoutingConfigService }
             ];
         };
-        /** @nocollapse */ CheckoutGuard.ngInjectableDef = i0.defineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(i0.inject(i4.Router), i0.inject(CheckoutConfig), i0.inject(i1$2.RoutingConfigService)); }, token: CheckoutGuard, providedIn: "root" });
+        /** @nocollapse */ CheckoutGuard.ngInjectableDef = i0.defineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(i0.inject(i1$1.Router), i0.inject(CheckoutConfig), i0.inject(i1$3.RoutingConfigService)); }, token: CheckoutGuard, providedIn: "root" });
         return CheckoutGuard;
     }());
 
@@ -3775,17 +3775,17 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i1$2.ConfigModule.withConfig(defaultCheckoutConfig),
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(defaultCheckoutConfig),
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     CheckoutOrchestrator: {
                                         selector: 'cx-checkout-orchestrator',
-                                        guards: [i1$2.AuthGuard, CartNotEmptyGuard, CheckoutGuard],
+                                        guards: [i1$3.AuthGuard, CartNotEmptyGuard, CheckoutGuard],
                                     },
                                 },
                             }))),
                         ],
-                        providers: [{ provide: CheckoutConfig, useExisting: i1$2.Config }],
+                        providers: [{ provide: CheckoutConfig, useExisting: i1$3.Config }],
                         declarations: [CheckoutOrchestratorComponent],
                         entryComponents: [CheckoutOrchestratorComponent],
                         exports: [CheckoutOrchestratorComponent],
@@ -3813,7 +3813,7 @@
         /** @nocollapse */
         CheckoutOrderSummaryComponent.ctorParameters = function () {
             return [
-                { type: i1$2.CartService }
+                { type: i1$3.CartService }
             ];
         };
         return CheckoutOrderSummaryComponent;
@@ -3831,7 +3831,7 @@
                         imports: [
                             common.CommonModule,
                             CartSharedModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     CheckoutOrderSummary: {
                                         selector: 'cx-checkout-order-summary',
@@ -3887,8 +3887,8 @@
         CheckoutProgressMobileBottomComponent.ctorParameters = function () {
             return [
                 { type: CheckoutConfig },
-                { type: i1$2.RoutingService },
-                { type: i1$2.RoutingConfigService }
+                { type: i1$3.RoutingService },
+                { type: i1$3.RoutingConfigService }
             ];
         };
         return CheckoutProgressMobileBottomComponent;
@@ -3905,15 +3905,15 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i1$2.UrlModule,
-                            i1$2.I18nModule,
-                            i4.RouterModule,
-                            i1$2.ConfigModule.withConfig(defaultCheckoutConfig),
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.UrlModule,
+                            i1$3.I18nModule,
+                            i1$1.RouterModule,
+                            i1$3.ConfigModule.withConfig(defaultCheckoutConfig),
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     CheckoutProgressMobileBottom: {
                                         selector: 'cx-checkout-progress-mobile-bottom',
-                                        guards: [i1$2.AuthGuard, CartNotEmptyGuard],
+                                        guards: [i1$3.AuthGuard, CartNotEmptyGuard],
                                     },
                                 },
                             }))),
@@ -3968,9 +3968,9 @@
         CheckoutProgressMobileTopComponent.ctorParameters = function () {
             return [
                 { type: CheckoutConfig },
-                { type: i1$2.RoutingService },
-                { type: i1$2.CartService },
-                { type: i1$2.RoutingConfigService }
+                { type: i1$3.RoutingService },
+                { type: i1$3.CartService },
+                { type: i1$3.RoutingConfigService }
             ];
         };
         return CheckoutProgressMobileTopComponent;
@@ -3987,15 +3987,15 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i1$2.UrlModule,
-                            i1$2.I18nModule,
-                            i4.RouterModule,
-                            i1$2.ConfigModule.withConfig(defaultCheckoutConfig),
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.UrlModule,
+                            i1$3.I18nModule,
+                            i1$1.RouterModule,
+                            i1$3.ConfigModule.withConfig(defaultCheckoutConfig),
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     CheckoutProgressMobileTop: {
                                         selector: 'cx-checkout-progress-mobile-top',
-                                        guards: [i1$2.AuthGuard, CartNotEmptyGuard],
+                                        guards: [i1$3.AuthGuard, CartNotEmptyGuard],
                                     },
                                 },
                             }))),
@@ -4049,8 +4049,8 @@
         CheckoutProgressComponent.ctorParameters = function () {
             return [
                 { type: CheckoutConfig },
-                { type: i1$2.RoutingService },
-                { type: i1$2.RoutingConfigService }
+                { type: i1$3.RoutingService },
+                { type: i1$3.RoutingConfigService }
             ];
         };
         return CheckoutProgressComponent;
@@ -4067,15 +4067,15 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i1$2.UrlModule,
-                            i1$2.I18nModule,
-                            i4.RouterModule,
-                            i1$2.ConfigModule.withConfig(defaultCheckoutConfig),
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.UrlModule,
+                            i1$3.I18nModule,
+                            i1$1.RouterModule,
+                            i1$3.ConfigModule.withConfig(defaultCheckoutConfig),
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     CheckoutProgress: {
                                         selector: 'cx-checkout-progress',
-                                        guards: [i1$2.AuthGuard, CartNotEmptyGuard],
+                                        guards: [i1$3.AuthGuard, CartNotEmptyGuard],
                                     },
                                 },
                             }))),
@@ -4083,7 +4083,7 @@
                         declarations: [CheckoutProgressComponent],
                         entryComponents: [CheckoutProgressComponent],
                         exports: [CheckoutProgressComponent],
-                        providers: [{ provide: CheckoutConfig, useExisting: i1$2.Config }],
+                        providers: [{ provide: CheckoutConfig, useExisting: i1$3.Config }],
                     },] }
         ];
         return CheckoutProgressModule;
@@ -4139,11 +4139,11 @@
         /** @nocollapse */
         CheckoutDetailsService.ctorParameters = function () {
             return [
-                { type: i1$2.CheckoutService },
-                { type: i1$2.CartService }
+                { type: i1$3.CheckoutService },
+                { type: i1$3.CartService }
             ];
         };
-        /** @nocollapse */ CheckoutDetailsService.ngInjectableDef = i0.defineInjectable({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(i0.inject(i1$2.CheckoutService), i0.inject(i1$2.CartService)); }, token: CheckoutDetailsService, providedIn: "root" });
+        /** @nocollapse */ CheckoutDetailsService.ngInjectableDef = i0.defineInjectable({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(i0.inject(i1$3.CheckoutService), i0.inject(i1$3.CartService)); }, token: CheckoutDetailsService, providedIn: "root" });
         return CheckoutDetailsService;
     }());
 
@@ -4191,12 +4191,12 @@
             return [
                 { type: CheckoutDetailsService },
                 { type: CheckoutConfigService },
-                { type: i1$2.RoutingConfigService },
-                { type: i4.Router },
-                { type: i1$2.ServerConfig }
+                { type: i1$3.RoutingConfigService },
+                { type: i1$1.Router },
+                { type: i1$3.ServerConfig }
             ];
         };
-        /** @nocollapse */ ShippingAddressSetGuard.ngInjectableDef = i0.defineInjectable({ factory: function ShippingAddressSetGuard_Factory() { return new ShippingAddressSetGuard(i0.inject(CheckoutDetailsService), i0.inject(CheckoutConfigService), i0.inject(i1$2.RoutingConfigService), i0.inject(i4.Router), i0.inject(i1$2.ServerConfig)); }, token: ShippingAddressSetGuard, providedIn: "root" });
+        /** @nocollapse */ ShippingAddressSetGuard.ngInjectableDef = i0.defineInjectable({ factory: function ShippingAddressSetGuard_Factory() { return new ShippingAddressSetGuard(i0.inject(CheckoutDetailsService), i0.inject(CheckoutConfigService), i0.inject(i1$3.RoutingConfigService), i0.inject(i1$1.Router), i0.inject(i1$3.ServerConfig)); }, token: ShippingAddressSetGuard, providedIn: "root" });
         return ShippingAddressSetGuard;
     }());
 
@@ -4313,10 +4313,10 @@
         DeliveryModeComponent.ctorParameters = function () {
             return [
                 { type: forms.FormBuilder },
-                { type: i1$2.CheckoutService },
-                { type: i1$2.RoutingService },
+                { type: i1$3.CheckoutService },
+                { type: i1$3.RoutingService },
                 { type: CheckoutConfigService },
-                { type: i4.ActivatedRoute }
+                { type: i1$1.ActivatedRoute }
             ];
         };
         return DeliveryModeComponent;
@@ -4334,13 +4334,13 @@
                         imports: [
                             common.CommonModule,
                             forms.ReactiveFormsModule,
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                             SpinnerModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     CheckoutDeliveryMode: {
                                         selector: 'cx-delivery-mode',
-                                        guards: [i1$2.AuthGuard, CartNotEmptyGuard, ShippingAddressSetGuard],
+                                        guards: [i1$3.AuthGuard, CartNotEmptyGuard, ShippingAddressSetGuard],
                                     },
                                 },
                             }))),
@@ -4352,253 +4352,6 @@
         ];
         return DeliveryModeModule;
     }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /**
-     * @abstract
-     */
-    var /**
-     * @abstract
-     */ PWAModuleConfig = /** @class */ (function (_super) {
-        __extends(PWAModuleConfig, _super);
-        function PWAModuleConfig() {
-            return _super !== null && _super.apply(this, arguments) || this;
-        }
-        return PWAModuleConfig;
-    }(i1$2.ServerConfig));
-    /** @type {?} */
-    var defaultPWAModuleConfig = {
-        pwa: {
-            enabled: false,
-            addToHomeScreen: false,
-        },
-    };
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var AddToHomeScreenService = /** @class */ (function () {
-        function AddToHomeScreenService(config, globalMessageService, winRef) {
-            this.config = config;
-            this.globalMessageService = globalMessageService;
-            this.winRef = winRef;
-            this.canPrompt = new rxjs.BehaviorSubject(false);
-            this.canPrompt$ = this.canPrompt.asObservable();
-            if (this.config.pwa.addToHomeScreen) {
-                this.init();
-            }
-        }
-        /**
-         * @return {?}
-         */
-        AddToHomeScreenService.prototype.init = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                if (this.winRef.nativeWindow) {
-                    this.winRef.nativeWindow.addEventListener('beforeinstallprompt', function (event) {
-                        event.preventDefault();
-                        _this.deferredEvent = event;
-                        _this.enableAddToHomeScreen();
-                    });
-                    this.winRef.nativeWindow.addEventListener('appinstalled', function () {
-                        _this.globalMessageService.add({ key: 'pwa.addedToHomeScreen' }, i1$2.GlobalMessageType.MSG_TYPE_CONFIRMATION);
-                        _this.disableAddToHomeScreen();
-                        _this.deferredEvent = null;
-                    });
-                }
-            };
-        /**
-         * @return {?}
-         */
-        AddToHomeScreenService.prototype.enableAddToHomeScreen = /**
-         * @return {?}
-         */
-            function () {
-                this.canPrompt.next(true);
-            };
-        /**
-         * @return {?}
-         */
-        AddToHomeScreenService.prototype.disableAddToHomeScreen = /**
-         * @return {?}
-         */
-            function () {
-                this.canPrompt.next(false);
-            };
-        /**
-         * @return {?}
-         */
-        AddToHomeScreenService.prototype.firePrompt = /**
-         * @return {?}
-         */
-            function () {
-                if (this.deferredEvent) {
-                    this.deferredEvent.prompt();
-                }
-            };
-        AddToHomeScreenService.decorators = [
-            { type: i0.Injectable }
-        ];
-        /** @nocollapse */
-        AddToHomeScreenService.ctorParameters = function () {
-            return [
-                { type: PWAModuleConfig },
-                { type: i1$2.GlobalMessageService },
-                { type: i1$2.WindowRef }
-            ];
-        };
-        return AddToHomeScreenService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /**
-     * @abstract
-     */
-    var /**
-     * @abstract
-     */ AddToHomeScreenComponent = /** @class */ (function () {
-        function AddToHomeScreenComponent(addToHomeScreenService) {
-            this.addToHomeScreenService = addToHomeScreenService;
-        }
-        /**
-         * @return {?}
-         */
-        AddToHomeScreenComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                this.canPrompt$ = this.addToHomeScreenService.canPrompt$;
-            };
-        /**
-         * @return {?}
-         */
-        AddToHomeScreenComponent.prototype.prompt = /**
-         * @return {?}
-         */
-            function () {
-                this.addToHomeScreenService.firePrompt();
-            };
-        return AddToHomeScreenComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var AddToHomeScreenBannerComponent = /** @class */ (function (_super) {
-        __extends(AddToHomeScreenBannerComponent, _super);
-        function AddToHomeScreenBannerComponent(addToHomeScreenService) {
-            var _this = _super.call(this, addToHomeScreenService) || this;
-            _this.addToHomeScreenService = addToHomeScreenService;
-            return _this;
-        }
-        AddToHomeScreenBannerComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-add-to-home-screen-banner',
-                        template: "<div *ngIf=\"(canPrompt$ | async)\">\n  <div class=\"cx-add-to-home-screen-banner\">\n    <div class=\"cx-add-to-home-screen-banner-inner\">\n      <p>\n        {{ 'pwa.addSapStorefront' | cxTranslate }}\n      </p>\n      <ul>\n        <li>{{ 'pwa.noInstallationNeeded' | cxTranslate }}</li>\n        <li>{{ 'pwa.fastAccessToApplication' | cxTranslate }}</li>\n      </ul>\n      <button (click)=\"prompt()\" class=\"btn btn-primary\">\n        {{ 'pwa.addToHomeScreen' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n"
-                    }] }
-        ];
-        /** @nocollapse */
-        AddToHomeScreenBannerComponent.ctorParameters = function () {
-            return [
-                { type: AddToHomeScreenService }
-            ];
-        };
-        return AddToHomeScreenBannerComponent;
-    }(AddToHomeScreenComponent));
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var AddToHomeScreenBtnComponent = /** @class */ (function (_super) {
-        __extends(AddToHomeScreenBtnComponent, _super);
-        function AddToHomeScreenBtnComponent(addToHomeScreenService) {
-            var _this = _super.call(this, addToHomeScreenService) || this;
-            _this.addToHomeScreenService = addToHomeScreenService;
-            return _this;
-        }
-        AddToHomeScreenBtnComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-add-to-home-screen-btn',
-                        template: "<span (click)=\"prompt()\">\n  <ng-content *ngIf=\"(canPrompt$ | async)\"></ng-content>\n</span>\n"
-                    }] }
-        ];
-        /** @nocollapse */
-        AddToHomeScreenBtnComponent.ctorParameters = function () {
-            return [
-                { type: AddToHomeScreenService }
-            ];
-        };
-        return AddToHomeScreenBtnComponent;
-    }(AddToHomeScreenComponent));
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /**
-     * @param {?} pwaConfig
-     * @return {?}
-     */
-    function pwaConfigurationFactory(pwaConfig) {
-        return { enabled: (pwaConfig.production && pwaConfig.pwa.enabled) || false };
-    }
-    /**
-     * @param {?} addToHomeScreenService
-     * @return {?}
-     */
-    function pwaFactory(addToHomeScreenService) {
-        /** @type {?} */
-        var result = function () { return addToHomeScreenService; };
-        return result;
-    }
-    var PwaModule = /** @class */ (function () {
-        function PwaModule() {
-        }
-        PwaModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            i1$2.ConfigModule.withConfig(defaultPWAModuleConfig),
-                            serviceWorker.ServiceWorkerModule.register('/ngsw-worker.js'),
-                            i1$2.I18nModule,
-                        ],
-                        providers: [
-                            { provide: PWAModuleConfig, useExisting: i1$2.Config },
-                            {
-                                provide: serviceWorker.ɵangular_packages_service_worker_service_worker_b,
-                                useFactory: pwaConfigurationFactory,
-                                deps: [i1$2.Config],
-                            },
-                            {
-                                provide: i0.APP_INITIALIZER,
-                                useFactory: pwaFactory,
-                                deps: [AddToHomeScreenService],
-                                multi: true,
-                            },
-                            AddToHomeScreenService,
-                        ],
-                        declarations: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
-                        exports: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
-                    },] }
-        ];
-        return PwaModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
 
     /**
      * @fileoverview added by tsickle
@@ -4717,174 +4470,12 @@
         }
         CardModule.decorators = [
             { type: i0.NgModule, args: [{
-                        imports: [common.CommonModule, i1$2.I18nModule, IconModule],
+                        imports: [common.CommonModule, i1$3.I18nModule, IconModule],
                         declarations: [CardComponent],
                         exports: [CardComponent],
                     },] }
         ];
         return CardModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var OrderConfirmationComponent = /** @class */ (function () {
-        function OrderConfirmationComponent(checkoutService, translation) {
-            this.checkoutService = checkoutService;
-            this.translation = translation;
-        }
-        /**
-         * @return {?}
-         */
-        OrderConfirmationComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                this.order$ = this.checkoutService.getOrderDetails();
-            };
-        /**
-         * @return {?}
-         */
-        OrderConfirmationComponent.prototype.ngOnDestroy = /**
-         * @return {?}
-         */
-            function () {
-                this.checkoutService.clearCheckoutData();
-            };
-        /**
-         * @param {?} deliveryAddress
-         * @return {?}
-         */
-        OrderConfirmationComponent.prototype.getAddressCardContent = /**
-         * @param {?} deliveryAddress
-         * @return {?}
-         */
-            function (deliveryAddress) {
-                return rxjs.combineLatest([
-                    this.translation.translate('addressCard.shipTo'),
-                ]).pipe(operators.map(function (_a) {
-                    var _b = __read(_a, 1), textTitle = _b[0];
-                    return {
-                        title: textTitle,
-                        textBold: deliveryAddress.firstName + " " + deliveryAddress.lastName,
-                        text: [
-                            deliveryAddress.line1,
-                            deliveryAddress.line2,
-                            deliveryAddress.town + ", " + deliveryAddress.country.isocode + ", " + deliveryAddress.postalCode,
-                            deliveryAddress.phone,
-                        ],
-                    };
-                }));
-            };
-        /**
-         * @param {?} deliveryMode
-         * @return {?}
-         */
-        OrderConfirmationComponent.prototype.getDeliveryModeCardContent = /**
-         * @param {?} deliveryMode
-         * @return {?}
-         */
-            function (deliveryMode) {
-                return rxjs.combineLatest([
-                    this.translation.translate('checkoutShipping.shippingMethod'),
-                ]).pipe(operators.map(function (_a) {
-                    var _b = __read(_a, 1), textTitle = _b[0];
-                    return {
-                        title: textTitle,
-                        textBold: deliveryMode.name,
-                        text: [deliveryMode.description],
-                    };
-                }));
-            };
-        /**
-         * @param {?} billingAddress
-         * @return {?}
-         */
-        OrderConfirmationComponent.prototype.getBillingAddressCardContent = /**
-         * @param {?} billingAddress
-         * @return {?}
-         */
-            function (billingAddress) {
-                return rxjs.combineLatest([
-                    this.translation.translate('addressCard.billTo'),
-                ]).pipe(operators.map(function (_a) {
-                    var _b = __read(_a, 1), textTitle = _b[0];
-                    return {
-                        title: textTitle,
-                        textBold: billingAddress.firstName + " " + billingAddress.lastName,
-                        text: [
-                            billingAddress.line1,
-                            billingAddress.line2,
-                            billingAddress.town + ", " + billingAddress.country.isocode + ", " + billingAddress.postalCode,
-                            billingAddress.phone,
-                        ],
-                    };
-                }));
-            };
-        /**
-         * @param {?} payment
-         * @return {?}
-         */
-        OrderConfirmationComponent.prototype.getPaymentInfoCardContent = /**
-         * @param {?} payment
-         * @return {?}
-         */
-            function (payment) {
-                return rxjs.combineLatest([
-                    this.translation.translate('paymentForm.payment'),
-                    this.translation.translate('paymentCard.expires', {
-                        month: payment.expiryMonth,
-                        year: payment.expiryYear,
-                    }),
-                ]).pipe(operators.map(function (_a) {
-                    var _b = __read(_a, 2), textTitle = _b[0], textExpires = _b[1];
-                    return {
-                        title: textTitle,
-                        textBold: payment.accountHolderName,
-                        text: [payment.cardNumber, textExpires],
-                    };
-                }));
-            };
-        OrderConfirmationComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-order-confirmation',
-                        template: "<div class=\"cx-page\" *ngIf=\"(order$ | async) as order\">\n  <header class=\"cx-page-header\">\n    <h1 class=\"cx-page-title\">\n      {{ 'checkoutOrderConfirmation.confirmationOfOrder' | cxTranslate }}\n      {{ order.code }}\n    </h1>\n  </header>\n\n  <div class=\"cx-order-confirmation\">\n    <div class=\"cx-order-confirmation-message\">\n      <h2>{{ 'checkoutOrderConfirmation.thankYou' | cxTranslate }}</h2>\n      <p>\n        {{\n          'checkoutOrderConfirmation.invoiceHasBeenSentByEmail' | cxTranslate\n        }}\n      </p>\n      <!-- <a href=\"#\" class=\"btn-link\">Print Page</a> -->\n    </div>\n\n    <cx-add-to-home-screen-banner></cx-add-to-home-screen-banner>\n\n    <div class=\"cx-order-review-summary\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                *ngIf=\"order.deliveryAddress\"\n                [content]=\"getAddressCardContent(order.deliveryAddress) | async\"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                *ngIf=\"order.paymentInfo\"\n                [content]=\"\n                  getBillingAddressCardContent(\n                    order.paymentInfo.billingAddress\n                  ) | async\n                \"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                *ngIf=\"order.deliveryMode\"\n                [content]=\"\n                  getDeliveryModeCardContent(order.deliveryMode) | async\n                \"\n              ></cx-card>\n            </div>\n          </div>\n\n          <div class=\"col-sm-12 col-md-4 col-lg-3\">\n            <div class=\"summary-card\">\n              <cx-card\n                *ngIf=\"order.paymentInfo\"\n                [content]=\"getPaymentInfoCardContent(order.paymentInfo) | async\"\n              ></cx-card>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"cx-order-items container\">\n      <h4 class=\"cx-order-items-header\">\n        {{ 'checkoutOrderConfirmation.orderItems' | cxTranslate }}\n      </h4>\n      <cx-cart-item-list\n        [items]=\"order.entries\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n\n    <div class=\"cx-order-summary container\">\n      <div class=\"row justify-content-end\">\n        <div class=\"col-sm-12 col-md-6 col-lg-5 col-xl-4\">\n          <cx-order-summary [cart]=\"order\"></cx-order-summary>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        /** @nocollapse */
-        OrderConfirmationComponent.ctorParameters = function () {
-            return [
-                { type: i1$2.CheckoutService },
-                { type: i1$2.TranslationService }
-            ];
-        };
-        return OrderConfirmationComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var OrderConfirmationModule = /** @class */ (function () {
-        function OrderConfirmationModule() {
-        }
-        OrderConfirmationModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            CartSharedModule,
-                            CardModule,
-                            PwaModule,
-                            i1$2.CheckoutModule,
-                            i1$2.I18nModule,
-                        ],
-                        declarations: [OrderConfirmationComponent],
-                        exports: [OrderConfirmationComponent],
-                    },] }
-        ];
-        return OrderConfirmationModule;
     }());
 
     /**
@@ -4931,12 +4522,12 @@
             return [
                 { type: CheckoutDetailsService },
                 { type: CheckoutConfigService },
-                { type: i1$2.RoutingConfigService },
-                { type: i4.Router },
-                { type: i1$2.ServerConfig }
+                { type: i1$3.RoutingConfigService },
+                { type: i1$1.Router },
+                { type: i1$3.ServerConfig }
             ];
         };
-        /** @nocollapse */ DeliveryModeSetGuard.ngInjectableDef = i0.defineInjectable({ factory: function DeliveryModeSetGuard_Factory() { return new DeliveryModeSetGuard(i0.inject(CheckoutDetailsService), i0.inject(CheckoutConfigService), i0.inject(i1$2.RoutingConfigService), i0.inject(i4.Router), i0.inject(i1$2.ServerConfig)); }, token: DeliveryModeSetGuard, providedIn: "root" });
+        /** @nocollapse */ DeliveryModeSetGuard.ngInjectableDef = i0.defineInjectable({ factory: function DeliveryModeSetGuard_Factory() { return new DeliveryModeSetGuard(i0.inject(CheckoutDetailsService), i0.inject(CheckoutConfigService), i0.inject(i1$3.RoutingConfigService), i0.inject(i1$1.Router), i0.inject(i1$3.ServerConfig)); }, token: DeliveryModeSetGuard, providedIn: "root" });
         return DeliveryModeSetGuard;
     }());
 
@@ -4985,9 +4576,9 @@
                             common.CommonModule,
                             forms.ReactiveFormsModule,
                             forms.FormsModule,
-                            i4.RouterModule,
+                            i1$1.RouterModule,
                             ngSelect.NgSelectModule,
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                         ],
                         declarations: [BillingAddressFormComponent],
                         exports: [BillingAddressFormComponent],
@@ -5124,7 +4715,7 @@
                         _this.next();
                     }
                     else if (results.decision === 'REJECT') {
-                        _this.globalMessageService.add({ key: 'addressForm.invalidAddress' }, i1$2.GlobalMessageType.MSG_TYPE_ERROR);
+                        _this.globalMessageService.add({ key: 'addressForm.invalidAddress' }, i1$3.GlobalMessageType.MSG_TYPE_ERROR);
                         _this.checkoutService.clearAddressVerificationResults();
                     }
                     else if (results.decision === 'REVIEW') {
@@ -5361,9 +4952,9 @@
         /** @nocollapse */
         PaymentFormComponent.ctorParameters = function () {
             return [
-                { type: i1$2.CheckoutService },
-                { type: i1$2.UserService },
-                { type: i1$2.GlobalMessageService },
+                { type: i1$3.CheckoutService },
+                { type: i1$3.UserService },
+                { type: i1$3.GlobalMessageService },
                 { type: forms.FormBuilder },
                 { type: ModalService }
             ];
@@ -5392,7 +4983,7 @@
                             ngSelect.NgSelectModule,
                             CardModule,
                             BillingAddressFormModule,
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                             IconModule,
                         ],
                         declarations: [PaymentFormComponent],
@@ -5446,7 +5037,7 @@
                                 _this.globalMessageService.add({
                                     key: 'paymentMethods.invalidField',
                                     params: { field: paymentInfo[key] },
-                                }, i1$2.GlobalMessageType.MSG_TYPE_ERROR);
+                                }, i1$3.GlobalMessageType.MSG_TYPE_ERROR);
                             }
                         });
                         _this.checkoutService.clearCheckoutStep(3);
@@ -5644,14 +5235,14 @@
         /** @nocollapse */
         PaymentMethodComponent.ctorParameters = function () {
             return [
-                { type: i1$2.UserService },
-                { type: i1$2.CheckoutService },
-                { type: i1$2.GlobalMessageService },
-                { type: i1$2.RoutingConfigService },
-                { type: i1$2.RoutingService },
+                { type: i1$3.UserService },
+                { type: i1$3.CheckoutService },
+                { type: i1$3.GlobalMessageService },
+                { type: i1$3.RoutingConfigService },
+                { type: i1$3.RoutingService },
                 { type: CheckoutConfigService },
-                { type: i4.ActivatedRoute },
-                { type: i1$2.TranslationService }
+                { type: i1$1.ActivatedRoute },
+                { type: i1$3.TranslationService }
             ];
         };
         return PaymentMethodComponent;
@@ -5668,17 +5259,17 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule,
+                            i1$1.RouterModule,
                             PaymentFormModule,
                             CardModule,
                             SpinnerModule,
-                            i1$2.I18nModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.I18nModule,
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     CheckoutPaymentDetails: {
                                         selector: 'cx-payment-method',
                                         guards: [
-                                            i1$2.AuthGuard,
+                                            i1$3.AuthGuard,
                                             CartNotEmptyGuard,
                                             ShippingAddressSetGuard,
                                             DeliveryModeSetGuard,
@@ -5687,7 +5278,7 @@
                                 },
                             }))),
                         ],
-                        providers: [i1$2.UserService],
+                        providers: [i1$3.UserService],
                         declarations: [PaymentMethodComponent],
                         entryComponents: [PaymentMethodComponent],
                         exports: [PaymentMethodComponent],
@@ -5760,8 +5351,8 @@
         /** @nocollapse */
         PlaceOrderComponent.ctorParameters = function () {
             return [
-                { type: i1$2.CheckoutService },
-                { type: i1$2.RoutingService }
+                { type: i1$3.CheckoutService },
+                { type: i1$3.RoutingService }
             ];
         };
         return PlaceOrderComponent;
@@ -5778,15 +5369,15 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i1$2.CheckoutModule,
-                            i4.RouterModule,
-                            i1$2.UrlModule,
-                            i1$2.I18nModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.CheckoutModule,
+                            i1$1.RouterModule,
+                            i1$3.UrlModule,
+                            i1$3.I18nModule,
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     CheckoutPlaceOrder: {
                                         selector: 'cx-place-order',
-                                        guards: [i1$2.AuthGuard, CartNotEmptyGuard],
+                                        guards: [i1$3.AuthGuard, CartNotEmptyGuard],
                                     },
                                 },
                             }))),
@@ -5843,12 +5434,12 @@
             return [
                 { type: CheckoutDetailsService },
                 { type: CheckoutConfigService },
-                { type: i1$2.RoutingConfigService },
-                { type: i4.Router },
-                { type: i1$2.ServerConfig }
+                { type: i1$3.RoutingConfigService },
+                { type: i1$1.Router },
+                { type: i1$3.ServerConfig }
             ];
         };
-        /** @nocollapse */ PaymentDetailsSetGuard.ngInjectableDef = i0.defineInjectable({ factory: function PaymentDetailsSetGuard_Factory() { return new PaymentDetailsSetGuard(i0.inject(CheckoutDetailsService), i0.inject(CheckoutConfigService), i0.inject(i1$2.RoutingConfigService), i0.inject(i4.Router), i0.inject(i1$2.ServerConfig)); }, token: PaymentDetailsSetGuard, providedIn: "root" });
+        /** @nocollapse */ PaymentDetailsSetGuard.ngInjectableDef = i0.defineInjectable({ factory: function PaymentDetailsSetGuard_Factory() { return new PaymentDetailsSetGuard(i0.inject(CheckoutDetailsService), i0.inject(CheckoutConfigService), i0.inject(i1$3.RoutingConfigService), i0.inject(i1$1.Router), i0.inject(i1$3.ServerConfig)); }, token: PaymentDetailsSetGuard, providedIn: "root" });
         return PaymentDetailsSetGuard;
     }());
 
@@ -5978,10 +5569,10 @@
         /** @nocollapse */
         ReviewSubmitComponent.ctorParameters = function () {
             return [
-                { type: i1$2.CheckoutService },
-                { type: i1$2.UserService },
-                { type: i1$2.CartService },
-                { type: i1$2.TranslationService }
+                { type: i1$3.CheckoutService },
+                { type: i1$3.UserService },
+                { type: i1$3.CartService },
+                { type: i1$3.TranslationService }
             ];
         };
         return ReviewSubmitComponent;
@@ -6000,13 +5591,13 @@
                             common.CommonModule,
                             CardModule,
                             CartSharedModule,
-                            i1$2.I18nModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.I18nModule,
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     CheckoutReviewOrder: {
                                         selector: 'cx-review-submit',
                                         guards: [
-                                            i1$2.AuthGuard,
+                                            i1$3.AuthGuard,
                                             CartNotEmptyGuard,
                                             ShippingAddressSetGuard,
                                             DeliveryModeSetGuard,
@@ -6105,10 +5696,10 @@
                     else if (results.decision === 'REJECT') {
                         // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
                         if (results.errors.errors.some(function (error) { return error.subject === 'titleCode'; })) {
-                            _this.globalMessageService.add({ key: 'addressForm.titleRequired' }, i1$2.GlobalMessageType.MSG_TYPE_ERROR);
+                            _this.globalMessageService.add({ key: 'addressForm.titleRequired' }, i1$3.GlobalMessageType.MSG_TYPE_ERROR);
                         }
                         else {
-                            _this.globalMessageService.add({ key: 'addressForm.invalidAddress' }, i1$2.GlobalMessageType.MSG_TYPE_ERROR);
+                            _this.globalMessageService.add({ key: 'addressForm.invalidAddress' }, i1$3.GlobalMessageType.MSG_TYPE_ERROR);
                         }
                         _this.checkoutService.clearAddressVerificationResults();
                     }
@@ -6248,9 +5839,9 @@
         AddressFormComponent.ctorParameters = function () {
             return [
                 { type: forms.FormBuilder },
-                { type: i1$2.CheckoutService },
-                { type: i1$2.UserService },
-                { type: i1$2.GlobalMessageService },
+                { type: i1$3.CheckoutService },
+                { type: i1$3.UserService },
+                { type: i1$3.GlobalMessageService },
                 { type: ModalService }
             ];
         };
@@ -6280,10 +5871,10 @@
                             common.CommonModule,
                             forms.ReactiveFormsModule,
                             forms.FormsModule,
-                            i4.RouterModule,
+                            i1$1.RouterModule,
                             ngSelect.NgSelectModule,
                             IconModule,
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                             AutoFocusDirectiveModule,
                         ],
                         declarations: [AddressFormComponent, SuggestedAddressDialogComponent],
@@ -6514,13 +6105,13 @@
         /** @nocollapse */
         ShippingAddressComponent.ctorParameters = function () {
             return [
-                { type: i1$2.UserService },
-                { type: i1$2.CartService },
-                { type: i1$2.RoutingService },
-                { type: i1$2.CheckoutService },
+                { type: i1$3.UserService },
+                { type: i1$3.CartService },
+                { type: i1$3.RoutingService },
+                { type: i1$3.CheckoutService },
                 { type: CheckoutConfigService },
-                { type: i4.ActivatedRoute },
-                { type: i1$2.TranslationService }
+                { type: i1$1.ActivatedRoute },
+                { type: i1$3.TranslationService }
             ];
         };
         return ShippingAddressComponent;
@@ -6537,18 +6128,18 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule,
+                            i1$1.RouterModule,
                             AddressFormModule,
                             CardModule,
                             SpinnerModule,
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                             CheckoutProgressMobileTopModule,
                             CheckoutProgressMobileBottomModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     CheckoutShippingAddress: {
                                         selector: 'cx-shipping-address',
-                                        guards: [i1$2.AuthGuard, CartNotEmptyGuard],
+                                        guards: [i1$3.AuthGuard, CartNotEmptyGuard],
                                     },
                                 },
                             }))),
@@ -6573,14 +6164,13 @@
                         imports: [
                             common.CommonModule,
                             CartComponentModule,
-                            i1$2.CheckoutModule,
+                            i1$3.CheckoutModule,
                             CheckoutOrchestratorModule,
                             CheckoutOrderSummaryModule,
                             CheckoutProgressModule,
                             CheckoutProgressMobileTopModule,
                             CheckoutProgressMobileBottomModule,
                             DeliveryModeModule,
-                            OrderConfirmationModule,
                             PaymentMethodModule,
                             PlaceOrderModule,
                             PromotionsModule,
@@ -6613,49 +6203,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var OrderConfirmationPageGuard = /** @class */ (function () {
-        function OrderConfirmationPageGuard(checkoutService, routingService) {
-            this.checkoutService = checkoutService;
-            this.routingService = routingService;
-        }
-        /**
-         * @return {?}
-         */
-        OrderConfirmationPageGuard.prototype.canActivate = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                return this.checkoutService.getOrderDetails().pipe(operators.map(function (orderDetails) {
-                    if (orderDetails && Object.keys(orderDetails).length !== 0) {
-                        return true;
-                    }
-                    else {
-                        _this.routingService.go({ cxRoute: 'orders' });
-                        return false;
-                    }
-                }));
-            };
-        OrderConfirmationPageGuard.decorators = [
-            { type: i0.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */
-        OrderConfirmationPageGuard.ctorParameters = function () {
-            return [
-                { type: i1$2.CheckoutService },
-                { type: i1$2.RoutingService }
-            ];
-        };
-        /** @nocollapse */ OrderConfirmationPageGuard.ngInjectableDef = i0.defineInjectable({ factory: function OrderConfirmationPageGuard_Factory() { return new OrderConfirmationPageGuard(i0.inject(i1$2.CheckoutService), i0.inject(i1$2.RoutingService)); }, token: OrderConfirmationPageGuard, providedIn: "root" });
-        return OrderConfirmationPageGuard;
-    }());
 
     /**
      * @fileoverview added by tsickle
@@ -6768,11 +6315,11 @@
         /** @nocollapse */
         BreakpointService.ctorParameters = function () {
             return [
-                { type: i1$2.WindowRef },
+                { type: i1$3.WindowRef },
                 { type: LayoutConfig }
             ];
         };
-        /** @nocollapse */ BreakpointService.ngInjectableDef = i0.defineInjectable({ factory: function BreakpointService_Factory() { return new BreakpointService(i0.inject(i1$2.WindowRef), i0.inject(LayoutConfig)); }, token: BreakpointService, providedIn: "root" });
+        /** @nocollapse */ BreakpointService.ngInjectableDef = i0.defineInjectable({ factory: function BreakpointService_Factory() { return new BreakpointService(i0.inject(i1$3.WindowRef), i0.inject(LayoutConfig)); }, token: BreakpointService, providedIn: "root" });
         return BreakpointService;
     }());
 
@@ -6885,7 +6432,7 @@
             var _this = this;
             this.isExpanded = new rxjs.BehaviorSubject(false);
             router.events
-                .pipe(operators.filter(function (event) { return event instanceof i4.NavigationStart; }))
+                .pipe(operators.filter(function (event) { return event instanceof i1$1.NavigationStart; }))
                 .subscribe(function () {
                 _this.toggle(true);
             });
@@ -6919,10 +6466,10 @@
         /** @nocollapse */
         HamburgerMenuService.ctorParameters = function () {
             return [
-                { type: i4.Router }
+                { type: i1$1.Router }
             ];
         };
-        /** @nocollapse */ HamburgerMenuService.ngInjectableDef = i0.defineInjectable({ factory: function HamburgerMenuService_Factory() { return new HamburgerMenuService(i0.inject(i4.Router)); }, token: HamburgerMenuService, providedIn: "root" });
+        /** @nocollapse */ HamburgerMenuService.ngInjectableDef = i0.defineInjectable({ factory: function HamburgerMenuService_Factory() { return new HamburgerMenuService(i0.inject(i1$1.Router)); }, token: HamburgerMenuService, providedIn: "root" });
         return HamburgerMenuService;
     }());
 
@@ -6979,7 +6526,7 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     HamburgerMenuComponent: { selector: 'cx-hamburger-menu' },
                                 },
@@ -7472,7 +7019,7 @@
                 if (!this.sub) {
                     this.sub = this.auth.getUserToken().subscribe(function (data) {
                         if (data && data.access_token) {
-                            _this.globalMessageService.remove(i1$2.GlobalMessageType.MSG_TYPE_ERROR);
+                            _this.globalMessageService.remove(i1$3.GlobalMessageType.MSG_TYPE_ERROR);
                             _this.authRedirectService.redirect();
                         }
                     });
@@ -7498,10 +7045,10 @@
         /** @nocollapse */
         LoginFormComponent.ctorParameters = function () {
             return [
-                { type: i1$2.AuthService },
-                { type: i1$2.GlobalMessageService },
+                { type: i1$3.AuthService },
+                { type: i1$3.GlobalMessageService },
                 { type: forms.FormBuilder },
-                { type: i1$2.AuthRedirectService }
+                { type: i1$3.AuthRedirectService }
             ];
         };
         return LoginFormComponent;
@@ -7518,10 +7065,10 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i1$2.ConfigModule.withConfig(i1$2.defaultCmsModuleConfig),
-                            i1$2.CmsModule,
+                            i1$3.ConfigModule.withConfig(i1$3.defaultCmsModuleConfig),
+                            i1$3.CmsModule,
                         ],
-                        providers: [{ provide: i1$2.CmsConfig, useExisting: i1$2.Config }],
+                        providers: [{ provide: i1$3.CmsConfig, useExisting: i1$3.Config }],
                     },] }
         ];
         return CmsModule;
@@ -7540,19 +7087,19 @@
                             common.CommonModule,
                             forms.FormsModule,
                             forms.ReactiveFormsModule,
-                            i4.RouterModule,
+                            i1$1.RouterModule,
                             CmsModule,
-                            i1$2.UserModule,
-                            i1$2.UrlModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.UserModule,
+                            i1$3.UrlModule,
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     ReturningCustomerLoginComponent: {
                                         selector: 'cx-login-form',
-                                        guards: [i1$2.NotAuthGuard],
+                                        guards: [i1$3.NotAuthGuard],
                                     },
                                 },
                             }))),
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                         ],
                         declarations: [LoginFormComponent],
                         exports: [LoginFormComponent],
@@ -7632,8 +7179,8 @@
         /** @nocollapse */
         LoginComponent.ctorParameters = function () {
             return [
-                { type: i1$2.AuthService },
-                { type: i1$2.UserService },
+                { type: i1$3.AuthService },
+                { type: i1$3.UserService },
                 { type: LoginComponentService }
             ];
         };
@@ -7725,7 +7272,7 @@
                                 elementName = _a.sent();
                                 if (elementName) {
                                     this.webElement = this.renderer.createElement(elementName);
-                                    this.webElement.cxApi = __assign({}, this.injector.get(i1$2.CxApiService), { CmsComponentData: this.getCmsDataForComponent() });
+                                    this.webElement.cxApi = __assign({}, this.injector.get(i1$3.CxApiService), { CmsComponentData: this.getCmsDataForComponent() });
                                     this.renderer.appendChild(this.vcr.element.nativeElement.parentElement, this.webElement);
                                 }
                                 return [2 /*return*/];
@@ -7807,13 +7354,13 @@
         ComponentWrapperDirective.ctorParameters = function () {
             return [
                 { type: i0.ViewContainerRef },
-                { type: i1$2.ComponentMapperService },
+                { type: i1$3.ComponentMapperService },
                 { type: i0.Injector },
-                { type: i1$2.CmsService },
-                { type: i1$2.DynamicAttributeService },
+                { type: i1$3.CmsService },
+                { type: i1$3.DynamicAttributeService },
                 { type: i0.Renderer2 },
                 { type: i0.ChangeDetectorRef },
-                { type: i1$2.CmsConfig },
+                { type: i1$3.CmsConfig },
                 { type: Object, decorators: [{ type: i0.Inject, args: [i0.PLATFORM_ID,] }] }
             ];
         };
@@ -7935,8 +7482,8 @@
         /** @nocollapse */
         PageSlotComponent.ctorParameters = function () {
             return [
-                { type: i1$2.CmsService },
-                { type: i1$2.DynamicAttributeService },
+                { type: i1$3.CmsService },
+                { type: i1$3.DynamicAttributeService },
                 { type: i0.Renderer2 },
                 { type: i0.ElementRef }
             ];
@@ -7976,18 +7523,18 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule,
-                            i1$2.UserModule,
-                            i1$2.UrlModule,
+                            i1$1.RouterModule,
+                            i1$3.UserModule,
+                            i1$3.UrlModule,
                             PageSlotModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     LoginComponent: {
                                         selector: 'cx-login',
                                     },
                                 },
                             }))),
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                         ],
                         declarations: [LoginComponent],
                         entryComponents: [LoginComponent],
@@ -8020,7 +7567,7 @@
                 return this.cms
                     .hasPage({
                     id: this.semanticPathService.get('logout'),
-                    type: i1$2.PageType.CONTENT_PAGE,
+                    type: i1$3.PageType.CONTENT_PAGE,
                 })
                     .pipe(operators.tap(function (hasPage) {
                     if (!hasPage) {
@@ -8047,13 +7594,13 @@
         /** @nocollapse */
         LogoutGuard.ctorParameters = function () {
             return [
-                { type: i1$2.AuthService },
-                { type: i1$2.CmsService },
-                { type: i1$2.RoutingService },
-                { type: i1$2.SemanticPathService }
+                { type: i1$3.AuthService },
+                { type: i1$3.CmsService },
+                { type: i1$3.RoutingService },
+                { type: i1$3.SemanticPathService }
             ];
         };
-        /** @nocollapse */ LogoutGuard.ngInjectableDef = i0.defineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(i0.inject(i1$2.AuthService), i0.inject(i1$2.CmsService), i0.inject(i1$2.RoutingService), i0.inject(i1$2.SemanticPathService)); }, token: LogoutGuard, providedIn: "root" });
+        /** @nocollapse */ LogoutGuard.ngInjectableDef = i0.defineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(i0.inject(i1$3.AuthService), i0.inject(i1$3.CmsService), i0.inject(i1$3.RoutingService), i0.inject(i1$3.SemanticPathService)); }, token: LogoutGuard, providedIn: "root" });
         return LogoutGuard;
     }());
 
@@ -8494,7 +8041,7 @@
         /** @nocollapse */
         PageLayoutService.ctorParameters = function () {
             return [
-                { type: i1$2.CmsService },
+                { type: i1$3.CmsService },
                 { type: LayoutConfig },
                 { type: BreakpointService }
             ];
@@ -8600,7 +8147,7 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             PageLayoutModule,
-                            i4.RouterModule.forChild([
+                            i1$1.RouterModule.forChild([
                                 {
                                     path: null,
                                     canActivate: [LogoutGuard],
@@ -8674,7 +8221,7 @@
                 if (!this.subscription) {
                     this.subscription = this.auth.getUserToken().subscribe(function (data) {
                         if (data && data.access_token) {
-                            _this.globalMessageService.remove(i1$2.GlobalMessageType.MSG_TYPE_ERROR);
+                            _this.globalMessageService.remove(i1$3.GlobalMessageType.MSG_TYPE_ERROR);
                             _this.authRedirectService.redirect();
                         }
                     });
@@ -8684,9 +8231,9 @@
                     .get()
                     .pipe(operators.filter(function (data) { return Object.keys(data).length > 0; }))
                     .subscribe(function (globalMessageEntities) {
-                    if (globalMessageEntities[i1$2.GlobalMessageType.MSG_TYPE_ERROR].some(function (message) { return message === 'This field is required.'; })) {
-                        _this.globalMessageService.remove(i1$2.GlobalMessageType.MSG_TYPE_ERROR);
-                        _this.globalMessageService.add({ key: 'register.titleRequired' }, i1$2.GlobalMessageType.MSG_TYPE_ERROR);
+                    if (globalMessageEntities[i1$3.GlobalMessageType.MSG_TYPE_ERROR].some(function (message) { return message === 'This field is required.'; })) {
+                        _this.globalMessageService.remove(i1$3.GlobalMessageType.MSG_TYPE_ERROR);
+                        _this.globalMessageService.add({ key: 'register.titleRequired' }, i1$3.GlobalMessageType.MSG_TYPE_ERROR);
                     }
                 });
             };
@@ -8725,10 +8272,10 @@
         /** @nocollapse */
         RegisterComponent.ctorParameters = function () {
             return [
-                { type: i1$2.AuthService },
-                { type: i1$2.AuthRedirectService },
-                { type: i1$2.UserService },
-                { type: i1$2.GlobalMessageService },
+                { type: i1$3.AuthService },
+                { type: i1$3.AuthRedirectService },
+                { type: i1$3.UserService },
+                { type: i1$3.GlobalMessageService },
                 { type: forms.FormBuilder }
             ];
         };
@@ -8748,18 +8295,18 @@
                             common.CommonModule,
                             LoginModule,
                             forms.ReactiveFormsModule,
-                            i4.RouterModule,
-                            i1$2.UserModule,
-                            i1$2.UrlModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$1.RouterModule,
+                            i1$3.UserModule,
+                            i1$3.UrlModule,
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     RegisterCustomerComponent: {
                                         selector: 'cx-register',
-                                        guards: [i1$2.NotAuthGuard],
+                                        guards: [i1$3.NotAuthGuard],
                                     },
                                 },
                             }))),
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                         ],
                         declarations: [RegisterComponent],
                         exports: [RegisterComponent],
@@ -8784,9 +8331,9 @@
                             LoginFormModule,
                             LogoutModule,
                             forms.ReactiveFormsModule,
-                            i4.RouterModule,
-                            i1$2.UserModule,
-                            i1$2.UrlModule,
+                            i1$1.RouterModule,
+                            i1$3.UserModule,
+                            i1$3.UrlModule,
                             RegisterComponentModule,
                         ],
                     },] }
@@ -8984,11 +8531,11 @@
         /** @nocollapse */
         CmsMappingService.ctorParameters = function () {
             return [
-                { type: i1$2.CmsConfig },
+                { type: i1$3.CmsConfig },
                 { type: Object, decorators: [{ type: i0.Inject, args: [i0.PLATFORM_ID,] }] }
             ];
         };
-        /** @nocollapse */ CmsMappingService.ngInjectableDef = i0.defineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(i0.inject(i1$2.CmsConfig), i0.inject(i0.PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
+        /** @nocollapse */ CmsMappingService.ngInjectableDef = i0.defineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(i0.inject(i1$3.CmsConfig), i0.inject(i0.PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
         return CmsMappingService;
     }());
 
@@ -9141,11 +8688,11 @@
         CmsI18nService.ctorParameters = function () {
             return [
                 { type: CmsMappingService },
-                { type: i1$2.TranslationService },
-                { type: i1$2.TranslationChunkService }
+                { type: i1$3.TranslationService },
+                { type: i1$3.TranslationChunkService }
             ];
         };
-        /** @nocollapse */ CmsI18nService.ngInjectableDef = i0.defineInjectable({ factory: function CmsI18nService_Factory() { return new CmsI18nService(i0.inject(CmsMappingService), i0.inject(i1$2.TranslationService), i0.inject(i1$2.TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
+        /** @nocollapse */ CmsI18nService.ngInjectableDef = i0.defineInjectable({ factory: function CmsI18nService_Factory() { return new CmsI18nService(i0.inject(CmsMappingService), i0.inject(i1$3.TranslationService), i0.inject(i1$3.TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
         return CmsI18nService;
     }());
 
@@ -9234,7 +8781,7 @@
          * @return {?}
          */
             function (pageContext, routes) {
-                if (pageContext.type === i1$2.PageType.CONTENT_PAGE &&
+                if (pageContext.type === i1$3.PageType.CONTENT_PAGE &&
                     pageContext.id.startsWith('/') &&
                     pageContext.id.length > 1) {
                     /** @type {?} */
@@ -9259,11 +8806,11 @@
         /** @nocollapse */
         CmsRoutesService.ctorParameters = function () {
             return [
-                { type: i4.Router },
+                { type: i1$1.Router },
                 { type: CmsMappingService }
             ];
         };
-        /** @nocollapse */ CmsRoutesService.ngInjectableDef = i0.defineInjectable({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(i0.inject(i4.Router), i0.inject(CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
+        /** @nocollapse */ CmsRoutesService.ngInjectableDef = i0.defineInjectable({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(i0.inject(i1$1.Router), i0.inject(CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
         return CmsRoutesService;
     }());
 
@@ -9354,7 +8901,7 @@
                 var _this = this;
                 /** @type {?} */
                 var notFoundCmsPageContext = {
-                    type: i1$2.PageType.CONTENT_PAGE,
+                    type: i1$3.PageType.CONTENT_PAGE,
                     id: this.semanticPathService.get('notFound'),
                 };
                 return this.cmsService.hasPage(notFoundCmsPageContext).pipe(operators.switchMap(function (hasNotFoundPage) {
@@ -9379,16 +8926,263 @@
         /** @nocollapse */
         CmsPageGuard.ctorParameters = function () {
             return [
-                { type: i1$2.RoutingService },
-                { type: i1$2.CmsService },
+                { type: i1$3.RoutingService },
+                { type: i1$3.CmsService },
                 { type: CmsRoutesService },
                 { type: CmsI18nService },
                 { type: CmsGuardsService },
-                { type: i1$2.SemanticPathService }
+                { type: i1$3.SemanticPathService }
             ];
         };
-        /** @nocollapse */ CmsPageGuard.ngInjectableDef = i0.defineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(i0.inject(i1$2.RoutingService), i0.inject(i1$2.CmsService), i0.inject(CmsRoutesService), i0.inject(CmsI18nService), i0.inject(CmsGuardsService), i0.inject(i1$2.SemanticPathService)); }, token: CmsPageGuard, providedIn: "root" });
+        /** @nocollapse */ CmsPageGuard.ngInjectableDef = i0.defineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(i0.inject(i1$3.RoutingService), i0.inject(i1$3.CmsService), i0.inject(CmsRoutesService), i0.inject(CmsI18nService), i0.inject(CmsGuardsService), i0.inject(i1$3.SemanticPathService)); }, token: CmsPageGuard, providedIn: "root" });
         return CmsPageGuard;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @abstract
+     */
+    var /**
+     * @abstract
+     */ PWAModuleConfig = /** @class */ (function (_super) {
+        __extends(PWAModuleConfig, _super);
+        function PWAModuleConfig() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        return PWAModuleConfig;
+    }(i1$3.ServerConfig));
+    /** @type {?} */
+    var defaultPWAModuleConfig = {
+        pwa: {
+            enabled: false,
+            addToHomeScreen: false,
+        },
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var AddToHomeScreenService = /** @class */ (function () {
+        function AddToHomeScreenService(config, globalMessageService, winRef) {
+            this.config = config;
+            this.globalMessageService = globalMessageService;
+            this.winRef = winRef;
+            this.canPrompt = new rxjs.BehaviorSubject(false);
+            this.canPrompt$ = this.canPrompt.asObservable();
+            if (this.config.pwa.addToHomeScreen) {
+                this.init();
+            }
+        }
+        /**
+         * @return {?}
+         */
+        AddToHomeScreenService.prototype.init = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                if (this.winRef.nativeWindow) {
+                    this.winRef.nativeWindow.addEventListener('beforeinstallprompt', function (event) {
+                        event.preventDefault();
+                        _this.deferredEvent = event;
+                        _this.enableAddToHomeScreen();
+                    });
+                    this.winRef.nativeWindow.addEventListener('appinstalled', function () {
+                        _this.globalMessageService.add({ key: 'pwa.addedToHomeScreen' }, i1$3.GlobalMessageType.MSG_TYPE_CONFIRMATION);
+                        _this.disableAddToHomeScreen();
+                        _this.deferredEvent = null;
+                    });
+                }
+            };
+        /**
+         * @return {?}
+         */
+        AddToHomeScreenService.prototype.enableAddToHomeScreen = /**
+         * @return {?}
+         */
+            function () {
+                this.canPrompt.next(true);
+            };
+        /**
+         * @return {?}
+         */
+        AddToHomeScreenService.prototype.disableAddToHomeScreen = /**
+         * @return {?}
+         */
+            function () {
+                this.canPrompt.next(false);
+            };
+        /**
+         * @return {?}
+         */
+        AddToHomeScreenService.prototype.firePrompt = /**
+         * @return {?}
+         */
+            function () {
+                if (this.deferredEvent) {
+                    this.deferredEvent.prompt();
+                }
+            };
+        AddToHomeScreenService.decorators = [
+            { type: i0.Injectable }
+        ];
+        /** @nocollapse */
+        AddToHomeScreenService.ctorParameters = function () {
+            return [
+                { type: PWAModuleConfig },
+                { type: i1$3.GlobalMessageService },
+                { type: i1$3.WindowRef }
+            ];
+        };
+        return AddToHomeScreenService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @abstract
+     */
+    var /**
+     * @abstract
+     */ AddToHomeScreenComponent = /** @class */ (function () {
+        function AddToHomeScreenComponent(addToHomeScreenService) {
+            this.addToHomeScreenService = addToHomeScreenService;
+        }
+        /**
+         * @return {?}
+         */
+        AddToHomeScreenComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                this.canPrompt$ = this.addToHomeScreenService.canPrompt$;
+            };
+        /**
+         * @return {?}
+         */
+        AddToHomeScreenComponent.prototype.prompt = /**
+         * @return {?}
+         */
+            function () {
+                this.addToHomeScreenService.firePrompt();
+            };
+        return AddToHomeScreenComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var AddToHomeScreenBannerComponent = /** @class */ (function (_super) {
+        __extends(AddToHomeScreenBannerComponent, _super);
+        function AddToHomeScreenBannerComponent(addToHomeScreenService) {
+            var _this = _super.call(this, addToHomeScreenService) || this;
+            _this.addToHomeScreenService = addToHomeScreenService;
+            return _this;
+        }
+        AddToHomeScreenBannerComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-add-to-home-screen-banner',
+                        template: "<div *ngIf=\"(canPrompt$ | async)\">\n  <div class=\"cx-add-to-home-screen-banner\">\n    <div class=\"cx-add-to-home-screen-banner-inner\">\n      <p>\n        {{ 'pwa.addSapStorefront' | cxTranslate }}\n      </p>\n      <ul>\n        <li>{{ 'pwa.noInstallationNeeded' | cxTranslate }}</li>\n        <li>{{ 'pwa.fastAccessToApplication' | cxTranslate }}</li>\n      </ul>\n      <button (click)=\"prompt()\" class=\"btn btn-primary\">\n        {{ 'pwa.addToHomeScreen' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        AddToHomeScreenBannerComponent.ctorParameters = function () {
+            return [
+                { type: AddToHomeScreenService }
+            ];
+        };
+        return AddToHomeScreenBannerComponent;
+    }(AddToHomeScreenComponent));
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var AddToHomeScreenBtnComponent = /** @class */ (function (_super) {
+        __extends(AddToHomeScreenBtnComponent, _super);
+        function AddToHomeScreenBtnComponent(addToHomeScreenService) {
+            var _this = _super.call(this, addToHomeScreenService) || this;
+            _this.addToHomeScreenService = addToHomeScreenService;
+            return _this;
+        }
+        AddToHomeScreenBtnComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-add-to-home-screen-btn',
+                        template: "<span (click)=\"prompt()\">\n  <ng-content *ngIf=\"(canPrompt$ | async)\"></ng-content>\n</span>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        AddToHomeScreenBtnComponent.ctorParameters = function () {
+            return [
+                { type: AddToHomeScreenService }
+            ];
+        };
+        return AddToHomeScreenBtnComponent;
+    }(AddToHomeScreenComponent));
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @param {?} pwaConfig
+     * @return {?}
+     */
+    function pwaConfigurationFactory(pwaConfig) {
+        return { enabled: (pwaConfig.production && pwaConfig.pwa.enabled) || false };
+    }
+    /**
+     * @param {?} addToHomeScreenService
+     * @return {?}
+     */
+    function pwaFactory(addToHomeScreenService) {
+        /** @type {?} */
+        var result = function () { return addToHomeScreenService; };
+        return result;
+    }
+    var PwaModule = /** @class */ (function () {
+        function PwaModule() {
+        }
+        PwaModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            i1$3.ConfigModule.withConfig(defaultPWAModuleConfig),
+                            serviceWorker.ServiceWorkerModule.register('/ngsw-worker.js'),
+                            i1$3.I18nModule,
+                        ],
+                        providers: [
+                            { provide: PWAModuleConfig, useExisting: i1$3.Config },
+                            {
+                                provide: serviceWorker.ɵangular_packages_service_worker_service_worker_b,
+                                useFactory: pwaConfigurationFactory,
+                                deps: [i1$3.Config],
+                            },
+                            {
+                                provide: i0.APP_INITIALIZER,
+                                useFactory: pwaFactory,
+                                deps: [AddToHomeScreenService],
+                                multi: true,
+                            },
+                            AddToHomeScreenService,
+                        ],
+                        declarations: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
+                        exports: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
+                    },] }
+        ];
+        return PwaModule;
     }());
 
     /**
@@ -9414,7 +9208,7 @@
         /** @type {?} */
         var result = function () {
             /** @type {?} */
-            var router = injector.get(i4.Router);
+            var router = injector.get(i1$1.Router);
             router.config.push(cmsRoute);
         };
         return result;
@@ -9485,7 +9279,7 @@
                 this.title = meta.title;
                 this.description = meta.description;
                 this.image = meta.image;
-                this.robots = meta.robots || [i1$2.PageRobotsMeta.INDEX, i1$2.PageRobotsMeta.FOLLOW];
+                this.robots = meta.robots || [i1$3.PageRobotsMeta.INDEX, i1$3.PageRobotsMeta.FOLLOW];
             },
             enumerable: true,
             configurable: true
@@ -9561,12 +9355,12 @@
         /** @nocollapse */
         SeoMetaService.ctorParameters = function () {
             return [
-                { type: i1$1.Title },
-                { type: i1$1.Meta },
-                { type: i1$2.PageMetaService }
+                { type: i1$2.Title },
+                { type: i1$2.Meta },
+                { type: i1$3.PageMetaService }
             ];
         };
-        /** @nocollapse */ SeoMetaService.ngInjectableDef = i0.defineInjectable({ factory: function SeoMetaService_Factory() { return new SeoMetaService(i0.inject(i1$1.Title), i0.inject(i1$1.Meta), i0.inject(i1$2.PageMetaService)); }, token: SeoMetaService, providedIn: "root" });
+        /** @nocollapse */ SeoMetaService.ngInjectableDef = i0.defineInjectable({ factory: function SeoMetaService_Factory() { return new SeoMetaService(i0.inject(i1$2.Title), i0.inject(i1$2.Meta), i0.inject(i1$3.PageMetaService)); }, token: SeoMetaService, providedIn: "root" });
         return SeoMetaService;
     }());
 
@@ -9579,7 +9373,7 @@
         provide: i0.APP_INITIALIZER,
         multi: true,
         useFactory: setHtmlLangAttribute,
-        deps: [i1$2.WindowRef, i1$2.LanguageService],
+        deps: [i1$3.WindowRef, i1$3.LanguageService],
     };
     /**
      * Sets active language in <html lang="">
@@ -9698,7 +9492,7 @@
         StorefrontComponent.ctorParameters = function () {
             return [
                 { type: HamburgerMenuService },
-                { type: i1$2.RoutingService }
+                { type: i1$3.RoutingService }
             ];
         };
         StorefrontComponent.propDecorators = {
@@ -9719,7 +9513,7 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule,
+                            i1$1.RouterModule,
                             GlobalMessageComponentModule,
                             UserComponentModule,
                             CmsModule,
@@ -9750,9 +9544,9 @@
                         imports: __spread([
                             MainModule
                         ], layoutModules, [
-                            i1$2.ConfigModule.withConfig(defaultLayoutConfig),
+                            i1$3.ConfigModule.withConfig(defaultLayoutConfig),
                         ]),
-                        providers: [{ provide: LayoutConfig, useExisting: i1$2.Config }],
+                        providers: [{ provide: LayoutConfig, useExisting: i1$3.Config }],
                         exports: __spread([MainModule], layoutModules),
                     },] }
         ];
@@ -9799,10 +9593,10 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule,
+                            i1$1.RouterModule,
                             GenericLinkModule,
                             MediaModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     SimpleResponsiveBannerComponent: {
                                         selector: 'cx-banner',
@@ -9858,9 +9652,9 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule,
+                            i1$1.RouterModule,
                             GenericLinkModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     CMSLinkComponent: { selector: 'cx-link' },
                                 },
@@ -9909,7 +9703,7 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     CMSParagraphComponent: { selector: 'cx-paragraph' },
                                     CMSTabParagraphComponent: { selector: 'cx-paragraph' },
@@ -9967,7 +9761,7 @@
         TabParagraphContainerComponent.ctorParameters = function () {
             return [
                 { type: CmsComponentData },
-                { type: i1$2.CmsService }
+                { type: i1$3.CmsService }
             ];
         };
         return TabParagraphContainerComponent;
@@ -9984,14 +9778,14 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     CMSTabParagraphContainer: { selector: 'cx-tab-paragraph-container' },
                                 },
                             }))),
                             PageComponentModule,
                             OutletModule,
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                         ],
                         declarations: [TabParagraphContainerComponent],
                         entryComponents: [TabParagraphContainerComponent],
@@ -10071,7 +9865,7 @@
         /** @nocollapse */
         AddressBookComponentService.ctorParameters = function () {
             return [
-                { type: i1$2.UserService }
+                { type: i1$3.UserService }
             ];
         };
         return AddressBookComponentService;
@@ -10245,7 +10039,7 @@
         /** @nocollapse */
         AddressCardComponent.ctorParameters = function () {
             return [
-                { type: i1$2.UserService }
+                { type: i1$3.UserService }
             ];
         };
         AddressCardComponent.propDecorators = {
@@ -10266,7 +10060,7 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     AccountAddressBookComponent: {
                                         selector: 'cx-address-book',
@@ -10274,21 +10068,21 @@
                                             {
                                                 provide: AddressBookComponentService,
                                                 useClass: AddressBookComponentService,
-                                                deps: [i1$2.UserService],
+                                                deps: [i1$3.UserService],
                                             },
                                         ],
-                                        guards: [i1$2.AuthGuard],
+                                        guards: [i1$3.AuthGuard],
                                     },
                                 },
                             }))),
                             CardModule,
                             AddressFormModule,
                             SpinnerModule,
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                         ],
                         declarations: [AddressBookComponent, AddressCardComponent],
                         exports: [AddressBookComponent, AddressCardComponent],
-                        providers: [i1$2.UserService, AddressBookComponentService],
+                        providers: [i1$3.UserService, AddressBookComponentService],
                         entryComponents: [AddressBookComponent],
                     },] }
         ];
@@ -10346,7 +10140,7 @@
                         .translate('closeAccount.accountClosedSuccessfully')
                         .pipe(operators.first())
                         .subscribe(function (text) {
-                        _this.globalMessageService.add(text, i1$2.GlobalMessageType.MSG_TYPE_CONFIRMATION);
+                        _this.globalMessageService.add(text, i1$3.GlobalMessageType.MSG_TYPE_CONFIRMATION);
                     });
                     this.routingService.go({ cxRoute: 'home' });
                 }
@@ -10394,11 +10188,11 @@
         CloseAccountModalComponent.ctorParameters = function () {
             return [
                 { type: ModalService },
-                { type: i1$2.UserService },
-                { type: i1$2.AuthService },
-                { type: i1$2.GlobalMessageService },
-                { type: i1$2.RoutingService },
-                { type: i1$2.TranslationService }
+                { type: i1$3.UserService },
+                { type: i1$3.AuthService },
+                { type: i1$3.GlobalMessageService },
+                { type: i1$3.RoutingService },
+                { type: i1$3.TranslationService }
             ];
         };
         return CloseAccountModalComponent;
@@ -10450,16 +10244,16 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule,
-                            i1$2.UrlModule,
-                            i1$2.I18nModule,
+                            i1$1.RouterModule,
+                            i1$3.UrlModule,
+                            i1$3.I18nModule,
                             IconModule,
                             SpinnerModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     CloseAccountComponent: {
                                         selector: 'cx-close-account',
-                                        guards: [i1$2.AuthGuard],
+                                        guards: [i1$3.AuthGuard],
                                     },
                                 },
                             }))),
@@ -10663,7 +10457,7 @@
             function (success) {
                 if (success) {
                     this.userService.resetGiveConsentProcessState();
-                    this.globalMessageService.add({ key: 'consentManagementForm.message.success.given' }, i1$2.GlobalMessageType.MSG_TYPE_CONFIRMATION);
+                    this.globalMessageService.add({ key: 'consentManagementForm.message.success.given' }, i1$3.GlobalMessageType.MSG_TYPE_CONFIRMATION);
                 }
             };
         /**
@@ -10679,7 +10473,7 @@
             function (success) {
                 if (success) {
                     this.userService.resetWithdrawConsentProcessState();
-                    this.globalMessageService.add({ key: 'consentManagementForm.message.success.withdrawn' }, i1$2.GlobalMessageType.MSG_TYPE_CONFIRMATION);
+                    this.globalMessageService.add({ key: 'consentManagementForm.message.success.withdrawn' }, i1$3.GlobalMessageType.MSG_TYPE_CONFIRMATION);
                 }
             };
         /**
@@ -10702,9 +10496,9 @@
         /** @nocollapse */
         ConsentManagementComponent.ctorParameters = function () {
             return [
-                { type: i1$2.UserService },
-                { type: i1$2.RoutingService },
-                { type: i1$2.GlobalMessageService }
+                { type: i1$3.UserService },
+                { type: i1$3.RoutingService },
+                { type: i1$3.GlobalMessageService }
             ];
         };
         return ConsentManagementComponent;
@@ -10721,18 +10515,18 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     ConsentManagementComponent: {
                                         selector: 'cx-consent-management',
-                                        guards: [i1$2.AuthGuard],
+                                        guards: [i1$3.AuthGuard],
                                     },
                                 },
                             }))),
                             forms.FormsModule,
                             forms.ReactiveFormsModule,
                             SpinnerModule,
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                         ],
                         declarations: [ConsentManagementComponent, ConsentManagementFormComponent],
                         exports: [ConsentManagementComponent],
@@ -10797,8 +10591,8 @@
         ForgotPasswordComponent.ctorParameters = function () {
             return [
                 { type: forms.FormBuilder },
-                { type: i1$2.UserService },
-                { type: i1$2.RoutingService }
+                { type: i1$3.UserService },
+                { type: i1$3.RoutingService }
             ];
         };
         return ForgotPasswordComponent;
@@ -10816,17 +10610,17 @@
                         imports: [
                             common.CommonModule,
                             forms.ReactiveFormsModule,
-                            i4.RouterModule,
-                            i1$2.UrlModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$1.RouterModule,
+                            i1$3.UrlModule,
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     ForgotPasswordComponent: {
                                         selector: 'cx-forgot-password',
-                                        guards: [i1$2.NotAuthGuard],
+                                        guards: [i1$3.NotAuthGuard],
                                     },
                                 },
                             }))),
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                         ],
                         declarations: [ForgotPasswordComponent],
                         exports: [ForgotPasswordComponent],
@@ -10873,8 +10667,8 @@
         /** @nocollapse */
         OrderDetailsService.ctorParameters = function () {
             return [
-                { type: i1$2.UserService },
-                { type: i1$2.RoutingService }
+                { type: i1$3.UserService },
+                { type: i1$3.RoutingService }
             ];
         };
         return OrderDetailsService;
@@ -11082,7 +10876,7 @@
         OrderDetailShippingComponent.ctorParameters = function () {
             return [
                 { type: OrderDetailsService },
-                { type: i1$2.TranslationService }
+                { type: i1$3.TranslationService }
             ];
         };
         return OrderDetailShippingComponent;
@@ -11141,16 +10935,16 @@
                             CartSharedModule,
                             CardModule,
                             common.CommonModule,
-                            i1$2.I18nModule,
-                            i4.RouterModule.forChild([
+                            i1$3.I18nModule,
+                            i1$1.RouterModule.forChild([
                                 {
                                     path: null,
-                                    canActivate: [i1$2.AuthGuard, CmsPageGuard],
+                                    canActivate: [i1$3.AuthGuard, CmsPageGuard],
                                     component: PageLayoutComponent,
                                     data: ɵ0$2,
                                 },
                             ]),
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     AccountOrderDetailsHeadlineComponent: {
                                         selector: 'cx-order-details-headline',
@@ -11303,9 +11097,9 @@
         /** @nocollapse */
         OrderHistoryComponent.ctorParameters = function () {
             return [
-                { type: i1$2.RoutingService },
-                { type: i1$2.UserService },
-                { type: i1$2.TranslationService }
+                { type: i1$3.RoutingService },
+                { type: i1$3.UserService },
+                { type: i1$3.TranslationService }
             ];
         };
         return OrderHistoryComponent;
@@ -11322,24 +11116,24 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     AccountOrderHistoryComponent: {
                                         selector: 'cx-order-history',
-                                        guards: [i1$2.AuthGuard],
+                                        guards: [i1$3.AuthGuard],
                                     },
                                 },
                             }))),
-                            i4.RouterModule,
+                            i1$1.RouterModule,
                             forms.FormsModule,
                             ngSelect.NgSelectModule,
                             ListNavigationModule,
-                            i1$2.UrlModule,
-                            i1$2.I18nModule,
+                            i1$3.UrlModule,
+                            i1$3.I18nModule,
                         ],
                         declarations: [OrderHistoryComponent],
                         exports: [OrderHistoryComponent],
-                        providers: [i1$2.UserService],
+                        providers: [i1$3.UserService],
                         entryComponents: [OrderHistoryComponent],
                     },] }
         ];
@@ -11495,8 +11289,8 @@
         /** @nocollapse */
         PaymentMethodsComponent.ctorParameters = function () {
             return [
-                { type: i1$2.UserService },
-                { type: i1$2.TranslationService }
+                { type: i1$3.UserService },
+                { type: i1$3.TranslationService }
             ];
         };
         return PaymentMethodsComponent;
@@ -11515,17 +11309,17 @@
                             common.CommonModule,
                             CardModule,
                             SpinnerModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     AccountPaymentDetailsComponent: {
                                         selector: 'cx-payment-methods',
-                                        guards: [i1$2.AuthGuard],
+                                        guards: [i1$3.AuthGuard],
                                     },
                                 },
                             }))),
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                         ],
-                        providers: [i1$2.UserService],
+                        providers: [i1$3.UserService],
                         declarations: [PaymentMethodsComponent],
                         exports: [PaymentMethodsComponent],
                         entryComponents: [PaymentMethodsComponent],
@@ -11621,8 +11415,8 @@
         ResetPasswordFormComponent.ctorParameters = function () {
             return [
                 { type: forms.FormBuilder },
-                { type: i1$2.RoutingService },
-                { type: i1$2.UserService }
+                { type: i1$3.RoutingService },
+                { type: i1$3.UserService }
             ];
         };
         return ResetPasswordFormComponent;
@@ -11639,18 +11433,18 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     ResetPasswordComponent: {
                                         selector: 'cx-reset-password-form',
-                                        guards: [i1$2.NotAuthGuard],
+                                        guards: [i1$3.NotAuthGuard],
                                     },
                                 },
                             }))),
                             forms.FormsModule,
                             forms.ReactiveFormsModule,
-                            i4.RouterModule,
-                            i1$2.I18nModule,
+                            i1$1.RouterModule,
+                            i1$3.I18nModule,
                         ],
                         declarations: [ResetPasswordFormComponent],
                         exports: [ResetPasswordFormComponent],
@@ -11823,7 +11617,7 @@
                     this.globalMessageService.add({
                         key: 'updateEmailForm.emailUpdateSuccess',
                         params: { newUid: this.newUid },
-                    }, i1$2.GlobalMessageType.MSG_TYPE_CONFIRMATION);
+                    }, i1$3.GlobalMessageType.MSG_TYPE_CONFIRMATION);
                     this.authService.logout();
                     this.routingService.go({ cxRoute: 'login' });
                 }
@@ -11850,10 +11644,10 @@
         /** @nocollapse */
         UpdateEmailComponent.ctorParameters = function () {
             return [
-                { type: i1$2.RoutingService },
-                { type: i1$2.GlobalMessageService },
-                { type: i1$2.UserService },
-                { type: i1$2.AuthService }
+                { type: i1$3.RoutingService },
+                { type: i1$3.GlobalMessageService },
+                { type: i1$3.UserService },
+                { type: i1$3.AuthService }
             ];
         };
         return UpdateEmailComponent;
@@ -11870,18 +11664,18 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     UpdateEmailComponent: {
                                         selector: 'cx-update-email',
-                                        guards: [i1$2.AuthGuard],
+                                        guards: [i1$3.AuthGuard],
                                     },
                                 },
                             }))),
                             forms.FormsModule,
                             forms.ReactiveFormsModule,
                             SpinnerModule,
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                         ],
                         declarations: [UpdateEmailFormComponent, UpdateEmailComponent],
                         exports: [UpdateEmailComponent],
@@ -12043,7 +11837,7 @@
          */
             function (success) {
                 if (success) {
-                    this.globalMessageService.add({ key: 'updatePasswordForm.passwordUpdateSuccess' }, i1$2.GlobalMessageType.MSG_TYPE_CONFIRMATION);
+                    this.globalMessageService.add({ key: 'updatePasswordForm.passwordUpdateSuccess' }, i1$3.GlobalMessageType.MSG_TYPE_CONFIRMATION);
                     this.routingService.go({ cxRoute: 'home' });
                 }
             };
@@ -12089,9 +11883,9 @@
         /** @nocollapse */
         UpdatePasswordComponent.ctorParameters = function () {
             return [
-                { type: i1$2.RoutingService },
-                { type: i1$2.UserService },
-                { type: i1$2.GlobalMessageService }
+                { type: i1$3.RoutingService },
+                { type: i1$3.UserService },
+                { type: i1$3.GlobalMessageService }
             ];
         };
         return UpdatePasswordComponent;
@@ -12110,16 +11904,16 @@
                             common.CommonModule,
                             forms.FormsModule,
                             forms.ReactiveFormsModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     UpdatePasswordComponent: {
                                         selector: 'cx-update-password',
-                                        guards: [i1$2.AuthGuard],
+                                        guards: [i1$3.AuthGuard],
                                     },
                                 },
                             }))),
                             SpinnerModule,
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                         ],
                         declarations: [UpdatePasswordComponent, UpdatePasswordFormComponent],
                         exports: [UpdatePasswordComponent],
@@ -12260,7 +12054,7 @@
          */
             function (success) {
                 if (success) {
-                    this.globalMessageService.add({ key: 'updateProfileForm.profileUpdateSuccess' }, i1$2.GlobalMessageType.MSG_TYPE_CONFIRMATION);
+                    this.globalMessageService.add({ key: 'updateProfileForm.profileUpdateSuccess' }, i1$3.GlobalMessageType.MSG_TYPE_CONFIRMATION);
                     this.routingService.go({ cxRoute: 'home' });
                 }
             };
@@ -12307,9 +12101,9 @@
         /** @nocollapse */
         UpdateProfileComponent.ctorParameters = function () {
             return [
-                { type: i1$2.RoutingService },
-                { type: i1$2.UserService },
-                { type: i1$2.GlobalMessageService }
+                { type: i1$3.RoutingService },
+                { type: i1$3.UserService },
+                { type: i1$3.GlobalMessageService }
             ];
         };
         return UpdateProfileComponent;
@@ -12326,18 +12120,18 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     UpdateProfileComponent: {
                                         selector: 'cx-update-profile',
-                                        guards: [i1$2.AuthGuard],
+                                        guards: [i1$3.AuthGuard],
                                     },
                                 },
                             }))),
                             forms.FormsModule,
                             forms.ReactiveFormsModule,
                             SpinnerModule,
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                         ],
                         declarations: [UpdateProfileComponent, UpdateProfileFormComponent],
                         exports: [UpdateProfileComponent],
@@ -12413,8 +12207,8 @@
         BreadcrumbComponent.ctorParameters = function () {
             return [
                 { type: CmsComponentData },
-                { type: i1$2.PageMetaService },
-                { type: i1$2.TranslationService }
+                { type: i1$3.PageMetaService },
+                { type: i1$3.TranslationService }
             ];
         };
         return BreadcrumbComponent;
@@ -12431,13 +12225,13 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$1.RouterModule,
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     BreadcrumbComponent: { selector: 'cx-breadcrumb' },
                                 },
                             }))),
-                            i1$2.CmsPageTitleModule,
+                            i1$3.CmsPageTitleModule,
                         ],
                         declarations: [BreadcrumbComponent],
                         entryComponents: [BreadcrumbComponent],
@@ -12679,7 +12473,7 @@
         /** @nocollapse */
         NavigationComponentService.ctorParameters = function () {
             return [
-                { type: i1$2.CmsService },
+                { type: i1$3.CmsService },
                 { type: CmsComponentData, decorators: [{ type: i0.Optional }] }
             ];
         };
@@ -12737,7 +12531,7 @@
             this.isOpen = false;
             this.openNodes = [];
             this.router.events
-                .pipe(operators.filter(function (event) { return event instanceof i4.NavigationEnd; }))
+                .pipe(operators.filter(function (event) { return event instanceof i1$1.NavigationEnd; }))
                 .subscribe(function () { return _this.clear(); });
         }
         /**
@@ -12835,7 +12629,7 @@
         /** @nocollapse */
         NavigationUIComponent.ctorParameters = function () {
             return [
-                { type: i4.Router },
+                { type: i1$1.Router },
                 { type: i0.Renderer2 }
             ];
         };
@@ -12886,10 +12680,10 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule,
+                            i1$1.RouterModule,
                             IconModule,
                             GenericLinkModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     NavigationComponent: {
                                         selector: 'cx-navigation',
@@ -12897,13 +12691,13 @@
                                             {
                                                 provide: NavigationComponentService,
                                                 useClass: NavigationComponentService,
-                                                deps: [i1$2.CmsService, CmsComponentData],
+                                                deps: [i1$3.CmsService, CmsComponentData],
                                             },
                                         ],
                                     },
                                 },
                             }))),
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                         ],
                         declarations: [NavigationComponent, NavigationUIComponent],
                         entryComponents: [NavigationComponent],
@@ -12925,7 +12719,7 @@
                         imports: [
                             common.CommonModule,
                             NavigationModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     CategoryNavigationComponent: {
                                         selector: 'cx-category-navigation',
@@ -12933,7 +12727,7 @@
                                             {
                                                 provide: NavigationComponentService,
                                                 useClass: NavigationComponentService,
-                                                deps: [i1$2.CmsService, CmsComponentData],
+                                                deps: [i1$3.CmsService, CmsComponentData],
                                             },
                                         ],
                                     },
@@ -12987,9 +12781,9 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule,
+                            i1$1.RouterModule,
                             NavigationModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     FooterNavigationComponent: {
                                         selector: 'cx-footer-navigation',
@@ -12997,7 +12791,7 @@
                                             {
                                                 provide: NavigationComponentService,
                                                 useClass: NavigationComponentService,
-                                                deps: [i1$2.CmsService, CmsComponentData],
+                                                deps: [i1$3.CmsService, CmsComponentData],
                                             },
                                         ],
                                     },
@@ -13310,13 +13104,13 @@
         /** @nocollapse */
         SearchBoxComponentService.ctorParameters = function () {
             return [
-                { type: i1$2.SearchboxService },
-                { type: i1$2.RoutingService },
-                { type: i1$2.TranslationService },
-                { type: i1$2.WindowRef }
+                { type: i1$3.SearchboxService },
+                { type: i1$3.RoutingService },
+                { type: i1$3.TranslationService },
+                { type: i1$3.WindowRef }
             ];
         };
-        /** @nocollapse */ SearchBoxComponentService.ngInjectableDef = i0.defineInjectable({ factory: function SearchBoxComponentService_Factory() { return new SearchBoxComponentService(i0.inject(i1$2.SearchboxService), i0.inject(i1$2.RoutingService), i0.inject(i1$2.TranslationService), i0.inject(i1$2.WindowRef)); }, token: SearchBoxComponentService, providedIn: "root" });
+        /** @nocollapse */ SearchBoxComponentService.ngInjectableDef = i0.defineInjectable({ factory: function SearchBoxComponentService_Factory() { return new SearchBoxComponentService(i0.inject(i1$3.SearchboxService), i0.inject(i1$3.RoutingService), i0.inject(i1$3.TranslationService), i0.inject(i1$3.WindowRef)); }, token: SearchBoxComponentService, providedIn: "root" });
         return SearchBoxComponentService;
     }());
 
@@ -13587,10 +13381,10 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule,
+                            i1$1.RouterModule,
                             MediaModule,
-                            i1$2.ProductModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ProductModule,
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     SearchBoxComponent: {
                                         selector: 'cx-searchbox',
@@ -13598,8 +13392,8 @@
                                 },
                             }))),
                             IconModule,
-                            i1$2.UrlModule,
-                            i1$2.I18nModule,
+                            i1$3.UrlModule,
+                            i1$3.I18nModule,
                         ],
                         declarations: [SearchBoxComponent, HighlightPipe],
                         entryComponents: [SearchBoxComponent],
@@ -13836,7 +13630,7 @@
         ProductCarouselService.ctorParameters = function () {
             return [
                 { type: CmsComponentData },
-                { type: i1$2.ProductService }
+                { type: i1$3.ProductService }
             ];
         };
         return ProductCarouselService;
@@ -13875,7 +13669,7 @@
         /** @nocollapse */
         ProductCarouselComponent.ctorParameters = function () {
             return [
-                { type: i1$2.WindowRef },
+                { type: i1$3.WindowRef },
                 { type: i0.ElementRef },
                 { type: ProductCarouselService },
                 { type: SharedCarouselService }
@@ -13895,9 +13689,9 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule,
+                            i1$1.RouterModule,
                             MediaModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     ProductCarouselComponent: {
                                         selector: 'cx-product-carousel',
@@ -13905,7 +13699,7 @@
                                             {
                                                 provide: ProductCarouselService,
                                                 useClass: ProductCarouselService,
-                                                deps: [CmsComponentData, i1$2.ProductService],
+                                                deps: [CmsComponentData, i1$3.ProductService],
                                             },
                                             {
                                                 provide: SharedCarouselService,
@@ -13916,7 +13710,7 @@
                                     },
                                 },
                             }))),
-                            i1$2.UrlModule,
+                            i1$3.UrlModule,
                         ],
                         declarations: [ProductCarouselComponent],
                         entryComponents: [ProductCarouselComponent],
@@ -14046,8 +13840,8 @@
         ProductReferencesService.ctorParameters = function () {
             return [
                 { type: CmsComponentData },
-                { type: i1$2.ProductReferenceService },
-                { type: i1$2.RoutingService }
+                { type: i1$3.ProductReferenceService },
+                { type: i1$3.RoutingService }
             ];
         };
         return ProductReferencesService;
@@ -14088,7 +13882,7 @@
         /** @nocollapse */
         ProductReferencesComponent.ctorParameters = function () {
             return [
-                { type: i1$2.WindowRef },
+                { type: i1$3.WindowRef },
                 { type: i0.ElementRef },
                 { type: ProductReferencesService },
                 { type: SharedCarouselService }
@@ -14108,10 +13902,10 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule,
+                            i1$1.RouterModule,
                             MediaModule,
-                            i1$2.UrlModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.UrlModule,
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     ProductReferencesComponent: {
                                         selector: 'cx-product-references',
@@ -14119,7 +13913,7 @@
                                             {
                                                 provide: ProductReferencesService,
                                                 useClass: ProductReferencesService,
-                                                deps: [CmsComponentData, i1$2.ProductReferenceService, i1$2.RoutingService],
+                                                deps: [CmsComponentData, i1$3.ProductReferenceService, i1$3.RoutingService],
                                             },
                                             {
                                                 provide: SharedCarouselService,
@@ -14305,7 +14099,7 @@
         ProductDetailsComponent.ctorParameters = function () {
             return [
                 { type: CurrentProductService },
-                { type: i1$2.CmsService }
+                { type: i1$3.CmsService }
             ];
         };
         return ProductDetailsComponent;
@@ -14480,14 +14274,14 @@
                         selector: 'cx-product-summary',
                         template: "<ng-container *cxOutlet=\"outlets.RATING\">\n  <div class=\"rating\">\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"count\">({{ product?.numberOfReviews }})</div>\n    <a class=\"btn-link\" *ngIf=\"reviewsTabAvailable\" (click)=\"showReviews()\">{{\n      'productSummary.showReviews' | cxTranslate\n    }}</a>\n  </div>\n</ng-container>\n<ng-container *cxOutlet=\"outlets.TITLE\">\n  <!-- <div class=\"name\">{{ product?.name }}</div> -->\n  <div class=\"code\">\n    {{ 'productSummary.id' | cxTranslate }} {{ product?.code }}\n  </div>\n</ng-container>\n\n<ng-container *cxOutlet=\"outlets.PRICE\">\n  <div class=\"price\" aria-label=\"new item price\">\n    {{ product?.price?.formattedValue }}\n  </div>\n</ng-container>\n\n<div class=\"description\"><p [innerHTML]=\"product?.summary\"></p></div>\n\n<cx-page-slot position=\"AddToCart\"></cx-page-slot>\n\n<!-- @TODO: Temp. Comment out share link while not in use by CMS -->\n<!-- <ng-container *cxOutlet=\"outlets.SHARE\">\n  <div>\n    <a href=\"#\" class=\"share btn-link\">\n      {{ 'productSummary.share' | cxTranslate }}\n    </a>\n  </div>\n</ng-container> -->\n",
                         changeDetection: i0.ChangeDetectionStrategy.OnPush,
-                        providers: [i1$2.TranslatePipe]
+                        providers: [i1$3.TranslatePipe]
                     }] }
         ];
         /** @nocollapse */
         ProductSummaryComponent.ctorParameters = function () {
             return [
-                { type: i1$2.TranslatePipe },
-                { type: i1$2.TranslationService }
+                { type: i1$3.TranslatePipe },
+                { type: i1$3.TranslationService }
             ];
         };
         ProductSummaryComponent.propDecorators = {
@@ -14507,18 +14301,18 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule,
+                            i1$1.RouterModule,
                             forms.FormsModule,
                             forms.ReactiveFormsModule,
                             CartSharedModule,
-                            i1$2.CmsModule,
+                            i1$3.CmsModule,
                             AddToCartModule,
                             OutletModule,
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                             FormComponentsModule,
                             MediaModule,
                             StarRatingModule,
-                            i1$2.UrlModule,
+                            i1$3.UrlModule,
                             PageSlotModule,
                         ],
                         declarations: [ProductDetailsComponent, ProductSummaryComponent],
@@ -14770,8 +14564,8 @@
         /** @nocollapse */
         ProductListComponent.ctorParameters = function () {
             return [
-                { type: i1$2.ProductSearchService },
-                { type: i4.ActivatedRoute },
+                { type: i1$3.ProductSearchService },
+                { type: i1$1.ActivatedRoute },
                 { type: PageLayoutService }
             ];
         };
@@ -14935,8 +14729,8 @@
         ProductFacetNavigationComponent.ctorParameters = function () {
             return [
                 { type: ModalService },
-                { type: i4.ActivatedRoute },
-                { type: i1$2.ProductSearchService }
+                { type: i1$1.ActivatedRoute },
+                { type: i1$3.ProductSearchService }
             ];
         };
         return ProductFacetNavigationComponent;
@@ -14993,20 +14787,20 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     CMSProductListComponent: { selector: 'cx-product-list' },
                                     SearchResultsListComponent: { selector: 'cx-product-list' },
                                     ProductRefinementComponent: { selector: 'cx-product-facet-navigation' },
                                 },
                             }))),
-                            i4.RouterModule,
+                            i1$1.RouterModule,
                             MediaModule,
                             AddToCartModule,
                             FormComponentsModule,
                             ListNavigationModule,
-                            i1$2.UrlModule,
-                            i1$2.I18nModule,
+                            i1$3.UrlModule,
+                            i1$3.I18nModule,
                             StarRatingModule,
                             IconModule,
                         ],
@@ -15163,7 +14957,7 @@
         /** @nocollapse */
         ProductReviewsComponent.ctorParameters = function () {
             return [
-                { type: i1$2.ProductReviewService },
+                { type: i1$3.ProductReviewService },
                 { type: CurrentProductService },
                 { type: forms.FormBuilder }
             ];
@@ -15185,7 +14979,7 @@
                             forms.ReactiveFormsModule,
                             forms.FormsModule,
                             FormComponentsModule,
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                             StarRatingModule,
                         ],
                         declarations: [ProductReviewsComponent],
@@ -15258,16 +15052,16 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule,
+                            i1$1.RouterModule,
                             forms.FormsModule,
                             forms.ReactiveFormsModule,
                             CartSharedModule,
-                            i1$2.CmsModule,
+                            i1$3.CmsModule,
                             OutletModule,
                             ProductReviewsModule,
                             ProductDetailsTabModule,
                             PageComponentModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     ProductDetailsTabComponent: {
                                         selector: 'cx-product-details-tab',
@@ -15280,12 +15074,12 @@
                                     },
                                 },
                             }))),
-                            i1$2.I18nModule,
+                            i1$3.I18nModule,
                         ],
                         declarations: [ProductAttributesComponent],
                         exports: [ProductAttributesComponent, ProductReviewsComponent],
                         entryComponents: [ProductAttributesComponent],
-                        providers: [i1$2.ProductService, i1$2.WindowRef, i1$2.RoutingService],
+                        providers: [i1$3.ProductService, i1$3.WindowRef, i1$3.RoutingService],
                     },] }
         ];
         return ProductTabsModule;
@@ -15312,10 +15106,10 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule,
+                            i1$1.RouterModule,
                             MediaModule,
                             OutletModule,
-                            i1$2.ConfigModule.withConfig(( /** @type {?} */({
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     CMSProductImages: {
                                         selector: 'cx-product-images',
@@ -15329,6 +15123,372 @@
         ];
         return ProductImagesModule;
     }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var OrderConfirmationItemsComponent = /** @class */ (function () {
+        function OrderConfirmationItemsComponent(checkoutService) {
+            this.checkoutService = checkoutService;
+        }
+        /**
+         * @return {?}
+         */
+        OrderConfirmationItemsComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                this.order$ = this.checkoutService.getOrderDetails();
+            };
+        /**
+         * @return {?}
+         */
+        OrderConfirmationItemsComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+            function () {
+                this.checkoutService.clearCheckoutData();
+            };
+        OrderConfirmationItemsComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-order-confirmation-items',
+                        template: "<div class=\"cx-order-items container\" *ngIf=\"(order$ | async) as order\">\n  <h4 class=\"cx-order-items-header\">\n    {{ 'checkoutOrderConfirmation.orderItems' | cxTranslate }}\n  </h4>\n  <cx-cart-item-list\n    [items]=\"order.entries\"\n    [isReadOnly]=\"true\"\n  ></cx-cart-item-list>\n</div>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        OrderConfirmationItemsComponent.ctorParameters = function () {
+            return [
+                { type: i1$3.CheckoutService }
+            ];
+        };
+        return OrderConfirmationItemsComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var OrderConfirmationThankYouMessageComponent = /** @class */ (function () {
+        function OrderConfirmationThankYouMessageComponent(checkoutService) {
+            this.checkoutService = checkoutService;
+        }
+        /**
+         * @return {?}
+         */
+        OrderConfirmationThankYouMessageComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                this.order$ = this.checkoutService.getOrderDetails();
+            };
+        /**
+         * @return {?}
+         */
+        OrderConfirmationThankYouMessageComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+            function () {
+                this.checkoutService.clearCheckoutData();
+            };
+        OrderConfirmationThankYouMessageComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-order-confirmation-thank-you-message',
+                        template: "<header class=\"cx-page-header\" *ngIf=\"(order$ | async) as order\">\n  <h1 class=\"cx-page-title\">\n    {{ 'checkoutOrderConfirmation.confirmationOfOrder' | cxTranslate }}\n    {{ order.code }}\n  </h1>\n</header>\n\n<div class=\"cx-order-confirmation-message\">\n  <h2>{{ 'checkoutOrderConfirmation.thankYou' | cxTranslate }}</h2>\n  <p>\n    {{ 'checkoutOrderConfirmation.invoiceHasBeenSentByEmail' | cxTranslate }}\n  </p>\n  <!-- <a href=\"#\" class=\"btn-link\">Print Page</a> -->\n</div>\n\n<cx-add-to-home-screen-banner></cx-add-to-home-screen-banner>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        OrderConfirmationThankYouMessageComponent.ctorParameters = function () {
+            return [
+                { type: i1$3.CheckoutService }
+            ];
+        };
+        return OrderConfirmationThankYouMessageComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var OrderConfirmationOverviewComponent = /** @class */ (function () {
+        function OrderConfirmationOverviewComponent(checkoutService, translation) {
+            this.checkoutService = checkoutService;
+            this.translation = translation;
+        }
+        /**
+         * @return {?}
+         */
+        OrderConfirmationOverviewComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                this.order$ = this.checkoutService.getOrderDetails();
+            };
+        /**
+         * @return {?}
+         */
+        OrderConfirmationOverviewComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+            function () {
+                this.checkoutService.clearCheckoutData();
+            };
+        /**
+         * @param {?} deliveryAddress
+         * @return {?}
+         */
+        OrderConfirmationOverviewComponent.prototype.getAddressCardContent = /**
+         * @param {?} deliveryAddress
+         * @return {?}
+         */
+            function (deliveryAddress) {
+                return this.translation.translate('addressCard.shipTo').pipe(operators.map(function (textTitle) {
+                    return ({
+                        title: textTitle,
+                        textBold: deliveryAddress.firstName + " " + deliveryAddress.lastName,
+                        text: [
+                            deliveryAddress.line1,
+                            deliveryAddress.line2,
+                            deliveryAddress.town + ", " + deliveryAddress.country.isocode + ", " + deliveryAddress.postalCode,
+                            deliveryAddress.phone,
+                        ],
+                    });
+                }));
+            };
+        /**
+         * @param {?} deliveryMode
+         * @return {?}
+         */
+        OrderConfirmationOverviewComponent.prototype.getDeliveryModeCardContent = /**
+         * @param {?} deliveryMode
+         * @return {?}
+         */
+            function (deliveryMode) {
+                return this.translation.translate('checkoutShipping.shippingMethod').pipe(operators.map(function (textTitle) {
+                    return ({
+                        title: textTitle,
+                        textBold: deliveryMode.name,
+                        text: [deliveryMode.description],
+                    });
+                }));
+            };
+        /**
+         * @param {?} billingAddress
+         * @return {?}
+         */
+        OrderConfirmationOverviewComponent.prototype.getBillingAddressCardContent = /**
+         * @param {?} billingAddress
+         * @return {?}
+         */
+            function (billingAddress) {
+                return this.translation.translate('addressCard.billTo').pipe(operators.map(function (textTitle) {
+                    return ({
+                        title: textTitle,
+                        textBold: billingAddress.firstName + " " + billingAddress.lastName,
+                        text: [
+                            billingAddress.line1,
+                            billingAddress.line2,
+                            billingAddress.town + ", " + billingAddress.country.isocode + ", " + billingAddress.postalCode,
+                            billingAddress.phone,
+                        ],
+                    });
+                }));
+            };
+        /**
+         * @param {?} payment
+         * @return {?}
+         */
+        OrderConfirmationOverviewComponent.prototype.getPaymentInfoCardContent = /**
+         * @param {?} payment
+         * @return {?}
+         */
+            function (payment) {
+                return rxjs.combineLatest([
+                    this.translation.translate('paymentForm.payment'),
+                    this.translation.translate('paymentCard.expires', {
+                        month: payment.expiryMonth,
+                        year: payment.expiryYear,
+                    }),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 2), textTitle = _b[0], textExpires = _b[1];
+                    return ({
+                        title: textTitle,
+                        textBold: payment.accountHolderName,
+                        text: [payment.cardNumber, textExpires],
+                    });
+                }));
+            };
+        OrderConfirmationOverviewComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-order-confirmation-overview',
+                        template: "<div class=\"cx-order-review-summary\" *ngIf=\"(order$ | async) as order\">\n  <div class=\"container\">\n    <div class=\"row\">\n      <div class=\"col-sm-12 col-md-4 col-lg-3\">\n        <div class=\"summary-card\">\n          <cx-card\n            [content]=\"getAddressCardContent(order.deliveryAddress) | async\"\n          ></cx-card>\n        </div>\n      </div>\n\n      <div class=\"col-sm-12 col-md-4 col-lg-3\">\n        <div class=\"summary-card\">\n          <cx-card\n            [content]=\"\n              getBillingAddressCardContent(order.paymentInfo.billingAddress)\n                | async\n            \"\n          ></cx-card>\n        </div>\n      </div>\n\n      <div class=\"col-sm-12 col-md-4 col-lg-3\">\n        <div class=\"summary-card\">\n          <cx-card\n            [content]=\"getDeliveryModeCardContent(order.deliveryMode) | async\"\n          ></cx-card>\n        </div>\n      </div>\n\n      <div class=\"col-sm-12 col-md-4 col-lg-3\">\n        <div class=\"summary-card\">\n          <cx-card\n            [content]=\"getPaymentInfoCardContent(order.paymentInfo) | async\"\n          ></cx-card>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        OrderConfirmationOverviewComponent.ctorParameters = function () {
+            return [
+                { type: i1$3.CheckoutService },
+                { type: i1$3.TranslationService }
+            ];
+        };
+        return OrderConfirmationOverviewComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var OrderConfirmationTotalsComponent = /** @class */ (function () {
+        function OrderConfirmationTotalsComponent(checkoutService) {
+            this.checkoutService = checkoutService;
+        }
+        /**
+         * @return {?}
+         */
+        OrderConfirmationTotalsComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                this.order$ = this.checkoutService.getOrderDetails();
+            };
+        /**
+         * @return {?}
+         */
+        OrderConfirmationTotalsComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+            function () {
+                this.checkoutService.clearCheckoutData();
+            };
+        OrderConfirmationTotalsComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-order-confirmation-totals',
+                        template: "<div class=\"cx-order-summary container\" *ngIf=\"(order$ | async) as order\">\n  <div class=\"row justify-content-end\">\n    <div class=\"col-sm-12 col-md-6 col-lg-5 col-xl-4\">\n      <cx-order-summary [cart]=\"order\"></cx-order-summary>\n    </div>\n  </div>\n</div>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        OrderConfirmationTotalsComponent.ctorParameters = function () {
+            return [
+                { type: i1$3.CheckoutService }
+            ];
+        };
+        return OrderConfirmationTotalsComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var OrderConfirmationGuard = /** @class */ (function () {
+        function OrderConfirmationGuard(checkoutService, router, semanticPathService) {
+            this.checkoutService = checkoutService;
+            this.router = router;
+            this.semanticPathService = semanticPathService;
+        }
+        /**
+         * @return {?}
+         */
+        OrderConfirmationGuard.prototype.canActivate = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                return this.checkoutService.getOrderDetails().pipe(operators.map(function (orderDetails) {
+                    if (orderDetails && Object.keys(orderDetails).length !== 0) {
+                        return true;
+                    }
+                    else {
+                        return _this.router.parseUrl(_this.semanticPathService.get('orders'));
+                    }
+                }));
+            };
+        OrderConfirmationGuard.decorators = [
+            { type: i0.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        OrderConfirmationGuard.ctorParameters = function () {
+            return [
+                { type: i1$3.CheckoutService },
+                { type: i1$1.Router },
+                { type: i1$3.SemanticPathService }
+            ];
+        };
+        /** @nocollapse */ OrderConfirmationGuard.ngInjectableDef = i0.defineInjectable({ factory: function OrderConfirmationGuard_Factory() { return new OrderConfirmationGuard(i0.inject(i1$3.CheckoutService), i0.inject(i1$1.Router), i0.inject(i1$3.SemanticPathService)); }, token: OrderConfirmationGuard, providedIn: "root" });
+        return OrderConfirmationGuard;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var orderConfirmationComponents = [
+        OrderConfirmationItemsComponent,
+        OrderConfirmationOverviewComponent,
+        OrderConfirmationThankYouMessageComponent,
+        OrderConfirmationTotalsComponent,
+    ];
+    var OrderConfirmationModule = /** @class */ (function () {
+        function OrderConfirmationModule() {
+        }
+        OrderConfirmationModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            CartSharedModule,
+                            CardModule,
+                            PwaModule,
+                            i1$3.CheckoutModule,
+                            i1$3.I18nModule,
+                            i1$3.ConfigModule.withConfig(( /** @type {?} */({
+                                cmsComponents: {
+                                    OrderConfirmationThankMessageComponent: {
+                                        selector: 'cx-order-confirmation-thank-you-message',
+                                        guards: [i1$3.AuthGuard, OrderConfirmationGuard],
+                                    },
+                                    OrderConfirmationItemsComponent: {
+                                        selector: 'cx-order-confirmation-items',
+                                        guards: [i1$3.AuthGuard, OrderConfirmationGuard],
+                                    },
+                                    OrderConfirmationTotalsComponent: {
+                                        selector: 'cx-order-confirmation-totals',
+                                        guards: [i1$3.AuthGuard, OrderConfirmationGuard],
+                                    },
+                                    OrderConfirmationOverviewComponent: {
+                                        selector: 'cx-order-confirmation-overview',
+                                        guards: [i1$3.AuthGuard, OrderConfirmationGuard],
+                                    },
+                                },
+                            }))),
+                        ],
+                        declarations: __spread(orderConfirmationComponents),
+                        exports: __spread(orderConfirmationComponents),
+                        entryComponents: __spread(orderConfirmationComponents),
+                    },] }
+        ];
+        return OrderConfirmationModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
 
     /**
      * @fileoverview added by tsickle
@@ -15365,6 +15525,7 @@
                             CloseAccountModule,
                             CartComponentModule,
                             TabParagraphContainerModule,
+                            OrderConfirmationModule,
                             // TODO:#2811 - uncomment to enable
                             // StoreFinderModule,
                             ProductImagesModule,
@@ -15408,7 +15569,7 @@
         /** @nocollapse */
         CartPageComponent.ctorParameters = function () {
             return [
-                { type: i1$2.CartService }
+                { type: i1$3.CartService }
             ];
         };
         return CartPageComponent;
@@ -15435,7 +15596,7 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule.forChild(routes),
+                            i1$1.RouterModule.forChild(routes),
                             PageLayoutModule,
                             CartDetailsModule,
                             OutletRefModule,
@@ -15550,7 +15711,7 @@
             { type: i0.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            i4.RouterModule.forChild(routes$1),
+                            i1$1.RouterModule.forChild(routes$1),
                             ProductDetailsModule,
                             PageLayoutModule,
                             OutletRefModule,
@@ -15578,7 +15739,7 @@
         ProductListingPageModule.decorators = [
             { type: i0.NgModule, args: [{
                         imports: [
-                            i4.RouterModule.forChild([
+                            i1$1.RouterModule.forChild([
                                 {
                                     path: null,
                                     canActivate: [CmsPageGuard],
@@ -15624,8 +15785,8 @@
      */
     function provideConfigFromMetaTags() {
         return [
-            i1$2.provideConfigFactory(i1$2.occServerConfigFromMetaTagFactory, [i1$1.Meta]),
-            i1$2.provideConfigFactory(i1$2.mediaServerConfigFromMetaTagFactory, [i1$1.Meta]),
+            i1$3.provideConfigFactory(i1$3.occServerConfigFromMetaTagFactory, [i1$2.Meta]),
+            i1$3.provideConfigFactory(i1$3.mediaServerConfigFromMetaTagFactory, [i1$2.Meta]),
         ];
     }
 
@@ -15633,57 +15794,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var OrderConfirmationPageComponent = /** @class */ (function () {
-        function OrderConfirmationPageComponent() {
-        }
-        OrderConfirmationPageComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-order-confirmation-page',
-                        template: "<cx-page-layout>\n  <!-- \n    TODO: as long as order confirmation isn't a cms component we render\n    the hard-coded version to  OrderConfirmationOverviewComponent\n  -->\n  <ng-template cxOutletRef=\"OrderConfirmationOverviewComponent\">\n    <cx-order-confirmation></cx-order-confirmation>\n  </ng-template>\n</cx-page-layout>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        return OrderConfirmationPageComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ɵ0$6 = { cxRoute: 'orderConfirmation' };
-    /** @type {?} */
-    var routes$2 = [
-        // TODO: as soon as the components are moved to CMS driven components we can drop this specific OrderConfirmationPageComponent
-        {
-            path: null,
-            canActivate: [i1$2.AuthGuard, CmsPageGuard, OrderConfirmationPageGuard],
-            component: OrderConfirmationPageComponent,
-            data: ɵ0$6,
-        },
-    ];
-    var OrderConfirmationPageModule = /** @class */ (function () {
-        function OrderConfirmationPageModule() {
-        }
-        OrderConfirmationPageModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            OrderConfirmationModule,
-                            PageLayoutModule,
-                            OutletRefModule,
-                            i4.RouterModule.forChild(routes$2),
-                        ],
-                        declarations: [OrderConfirmationPageComponent],
-                        exports: [OrderConfirmationPageComponent],
-                    },] }
-        ];
-        return OrderConfirmationPageModule;
-    }());
 
     /**
      * @fileoverview added by tsickle
@@ -15720,6 +15830,9 @@
             paths: ['my-account/order/:orderCode'],
             paramsMapping: { orderCode: 'code' },
         },
+        orders: {
+            paths: ['my-account/orders'],
+        },
     };
     /** @type {?} */
     var defaultRoutingConfig = {
@@ -15738,8 +15851,8 @@
         RoutingModule.decorators = [
             { type: i0.NgModule, args: [{
                         imports: [
-                            i1$2.RoutingModule,
-                            i1$2.ConfigModule.withConfig(defaultRoutingConfig),
+                            i1$3.RoutingModule,
+                            i1$3.ConfigModule.withConfig(defaultRoutingConfig),
                             CmsRouteModule,
                         ],
                     },] }
@@ -15765,30 +15878,29 @@
             function (config) {
                 return {
                     ngModule: StorefrontModule,
-                    providers: __spread([i1$2.provideConfig(config)], provideConfigFromMetaTags()),
+                    providers: __spread([i1$3.provideConfig(config)], provideConfigFromMetaTags()),
                 };
             };
         StorefrontModule.decorators = [
             { type: i0.NgModule, args: [{
                         imports: [
-                            i1$2.OccModule,
-                            i1$2.StateModule,
-                            i1$2.AuthModule.forRoot(),
+                            i1$3.OccModule,
+                            i1$3.StateModule,
+                            i1$3.AuthModule.forRoot(),
                             CmsLibModule,
                             CmsModule,
                             CmsRouteModule,
-                            i1$2.ConfigModule.forRoot(),
+                            i1$3.ConfigModule.forRoot(),
                             RoutingModule,
-                            i1$2.CxApiModule,
-                            i1$2.SmartEditModule.forRoot(),
-                            i1$2.PersonalizationModule.forRoot(),
-                            i1$2.I18nModule.forRoot(),
+                            i1$3.CxApiModule,
+                            i1$3.SmartEditModule.forRoot(),
+                            i1$3.PersonalizationModule.forRoot(),
+                            i1$3.I18nModule.forRoot(),
                             LayoutModule,
                             // pages
                             ProductDetailsPageModule,
                             ProductListingPageModule,
                             CartPageModule,
-                            OrderConfirmationPageModule,
                         ],
                         providers: __spread(provideConfigFromMetaTags()),
                         declarations: [],
@@ -15836,8 +15948,6 @@
     exports.CheckoutProgressModule = CheckoutProgressModule;
     exports.DeliveryModeComponent = DeliveryModeComponent;
     exports.DeliveryModeModule = DeliveryModeModule;
-    exports.OrderConfirmationComponent = OrderConfirmationComponent;
-    exports.OrderConfirmationModule = OrderConfirmationModule;
     exports.BillingAddressFormComponent = BillingAddressFormComponent;
     exports.BillingAddressFormModule = BillingAddressFormModule;
     exports.PaymentFormComponent = PaymentFormComponent;
@@ -15857,7 +15967,6 @@
     exports.ShippingAddressModule = ShippingAddressModule;
     exports.CheckoutConfig = CheckoutConfig;
     exports.CheckoutStepType = CheckoutStepType;
-    exports.OrderConfirmationPageGuard = OrderConfirmationPageGuard;
     exports.CheckoutGuard = CheckoutGuard;
     exports.DeliveryModeSetGuard = DeliveryModeSetGuard;
     exports.ShippingAddressSetGuard = ShippingAddressSetGuard;
@@ -15962,6 +16071,12 @@
     exports.RegisterComponent = RegisterComponent;
     exports.RegisterComponentModule = RegisterComponentModule;
     exports.UserComponentModule = UserComponentModule;
+    exports.OrderConfirmationModule = OrderConfirmationModule;
+    exports.OrderConfirmationItemsComponent = OrderConfirmationItemsComponent;
+    exports.OrderConfirmationOverviewComponent = OrderConfirmationOverviewComponent;
+    exports.OrderConfirmationThankYouMessageComponent = OrderConfirmationThankYouMessageComponent;
+    exports.OrderConfirmationTotalsComponent = OrderConfirmationTotalsComponent;
+    exports.OrderConfirmationGuard = OrderConfirmationGuard;
     exports.CartPageComponent = CartPageComponent;
     exports.CartPageModule = CartPageModule;
     exports.ProductDetailsPageComponent = ProductDetailsPageComponent;
@@ -16031,20 +16146,18 @@
     exports.StorefrontModule = StorefrontModule;
     exports.ɵc = CheckoutConfigService;
     exports.ɵb = defaultCheckoutConfig;
-    exports.ɵg = NavigationUIComponent;
-    exports.ɵh = HighlightPipe;
-    exports.ɵl = ProductCarouselService;
-    exports.ɵn = ProductReferencesService;
-    exports.ɵm = SharedCarouselService;
+    exports.ɵf = NavigationUIComponent;
+    exports.ɵg = HighlightPipe;
+    exports.ɵk = ProductCarouselService;
+    exports.ɵm = ProductReferencesService;
+    exports.ɵl = SharedCarouselService;
     exports.ɵs = ProductImagesModule;
-    exports.ɵk = ProductDetailsTabComponent;
-    exports.ɵj = ProductDetailsTabModule;
+    exports.ɵj = ProductDetailsTabComponent;
+    exports.ɵi = ProductDetailsTabModule;
     exports.ɵt = LoginComponentService;
-    exports.ɵbd = OrderConfirmationPageComponent;
-    exports.ɵbc = OrderConfirmationPageModule;
-    exports.ɵi = OutletStyleService;
+    exports.ɵh = OutletStyleService;
     exports.ɵv = defaultCartPageConfig;
-    exports.ɵf = AddToHomeScreenService;
+    exports.ɵr = AddToHomeScreenService;
     exports.ɵw = addCmsRoute;
     exports.ɵbb = defaultRoutingConfig;
     exports.ɵba = defaultStorefrontRoutesConfig;
@@ -16052,10 +16165,10 @@
     exports.ɵu = suffixUrlMatcher;
     exports.ɵx = htmlLangProvider;
     exports.ɵy = setHtmlLangAttribute;
-    exports.ɵr = CmsGuardsService;
-    exports.ɵq = CmsI18nService;
-    exports.ɵp = CmsMappingService;
-    exports.ɵo = CmsRoutesService;
+    exports.ɵq = CmsGuardsService;
+    exports.ɵp = CmsI18nService;
+    exports.ɵo = CmsMappingService;
+    exports.ɵn = CmsRoutesService;
     exports.ɵe = CardComponent;
     exports.ɵd = CardModule;
     exports.ɵa = AutoFocusDirectiveModule;
