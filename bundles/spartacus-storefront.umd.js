@@ -7113,63 +7113,28 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var LoginComponentService = /** @class */ (function () {
-        function LoginComponentService() {
-            this._isLogin = false;
-        }
-        Object.defineProperty(LoginComponentService.prototype, "isLogin", {
-            get: /**
-             * @return {?}
-             */ function () {
-                return this._isLogin;
-            },
-            set: /**
-             * @param {?} login
-             * @return {?}
-             */ function (login) {
-                this._isLogin = login;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        LoginComponentService.decorators = [
-            { type: i0.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */ LoginComponentService.ngInjectableDef = i0.defineInjectable({ factory: function LoginComponentService_Factory() { return new LoginComponentService(); }, token: LoginComponentService, providedIn: "root" });
-        return LoginComponentService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var LoginComponent = /** @class */ (function () {
-        function LoginComponent(auth, userService, loginService) {
+        function LoginComponent(auth, userService) {
             this.auth = auth;
             this.userService = userService;
-            this.loginService = loginService;
         }
-        Object.defineProperty(LoginComponent.prototype, "user$", {
-            get: /**
-             * @return {?}
-             */ function () {
+        /**
+         * @return {?}
+         */
+        LoginComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
                 var _this = this;
-                return this.auth.getUserToken().pipe(operators.map(function (token) {
-                    if (token && !!token.access_token && !_this.loginService.isLogin) {
-                        _this.loginService.isLogin = true;
-                        _this.userService.load();
+                this.user$ = this.auth.getUserToken().pipe(operators.switchMap(function (token) {
+                    if (token && !!token.access_token) {
+                        return _this.userService.get();
                     }
-                    else if (token && !token.access_token && _this.loginService.isLogin) {
-                        _this.loginService.isLogin = false;
+                    else {
+                        return rxjs.of(undefined);
                     }
-                    return token;
-                }), operators.filter(function (token) { return token && !!token.access_token; }), operators.switchMap(function () { return _this.userService.get(); }));
-            },
-            enumerable: true,
-            configurable: true
-        });
+                }));
+            };
         LoginComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-login',
@@ -7180,8 +7145,7 @@
         LoginComponent.ctorParameters = function () {
             return [
                 { type: i1$3.AuthService },
-                { type: i1$3.UserService },
-                { type: LoginComponentService }
+                { type: i1$3.UserService }
             ];
         };
         return LoginComponent;
@@ -16147,17 +16111,16 @@
     exports.ɵs = ProductImagesModule;
     exports.ɵj = ProductDetailsTabComponent;
     exports.ɵi = ProductDetailsTabModule;
-    exports.ɵt = LoginComponentService;
     exports.ɵh = OutletStyleService;
-    exports.ɵv = defaultCartPageConfig;
+    exports.ɵu = defaultCartPageConfig;
     exports.ɵr = AddToHomeScreenService;
-    exports.ɵw = addCmsRoute;
-    exports.ɵbb = defaultRoutingConfig;
-    exports.ɵba = defaultStorefrontRoutesConfig;
-    exports.ɵz = RoutingModule;
-    exports.ɵu = suffixUrlMatcher;
-    exports.ɵx = htmlLangProvider;
-    exports.ɵy = setHtmlLangAttribute;
+    exports.ɵv = addCmsRoute;
+    exports.ɵba = defaultRoutingConfig;
+    exports.ɵz = defaultStorefrontRoutesConfig;
+    exports.ɵy = RoutingModule;
+    exports.ɵt = suffixUrlMatcher;
+    exports.ɵw = htmlLangProvider;
+    exports.ɵx = setHtmlLangAttribute;
     exports.ɵq = CmsGuardsService;
     exports.ɵp = CmsI18nService;
     exports.ɵo = CmsMappingService;
