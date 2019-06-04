@@ -15895,6 +15895,7 @@
                             ProductListingPageModule,
                             CartPageModule,
                         ],
+                        exports: [LayoutModule],
                         providers: __spread(provideConfigFromMetaTags()),
                         declarations: [],
                     },] }

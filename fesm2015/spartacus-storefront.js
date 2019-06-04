@@ -10,7 +10,7 @@ import { CommonModule, isPlatformServer } from '@angular/common';
 import { RouterModule, Router, NavigationEnd, NavigationStart, ActivatedRoute } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
 import { Injectable, Pipe, ChangeDetectionStrategy, Component, NgModule, APP_INITIALIZER, HostBinding, Input, Renderer2, Injector, Inject, PLATFORM_ID, Output, EventEmitter, Directive, ElementRef, TemplateRef, ViewContainerRef, Optional, HostListener, forwardRef, ViewChild, ChangeDetectorRef, defineInjectable, inject, INJECTOR } from '@angular/core';
-import { ProductService, RoutingService, ServerConfig, RoutingConfigService, ConfigModule, RoutingModule, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductReferenceService, CmsConfig, PageType, I18nModule, provideConfig, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CartService, CxApiService, ComponentMapperService, DynamicAttributeService, CartModule, CheckoutModule, UserModule, UrlModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CmsPageTitleModule, NotAuthGuard, GlobalMessageModule, AuthRedirectService, AuthGuard, OccConfig, ProductModule, CheckoutService, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, ProductSearchService } from '@spartacus/core';
+import { ProductService, RoutingService, ServerConfig, RoutingConfigService, ConfigModule, RoutingModule, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductReferenceService, CmsConfig, PageType, I18nModule, provideConfig, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CartService, CxApiService, ComponentMapperService, DynamicAttributeService, CartModule, CheckoutModule, UserModule, UrlModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CmsPageTitleModule, NotAuthGuard, AuthRedirectService, AuthGuard, GlobalMessageModule, OccConfig, ProductModule, CheckoutService, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, ProductSearchService } from '@spartacus/core';
 
 /**
  * @fileoverview added by tsickle
@@ -12953,6 +12953,7 @@ StorefrontModule.decorators = [
                     ProductListingPageModule,
                     CartPageModule,
                 ],
+                exports: [LayoutModule],
                 providers: [...provideConfigFromMetaTags()],
                 declarations: [],
             },] }
