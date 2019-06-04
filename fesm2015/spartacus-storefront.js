@@ -6582,11 +6582,6 @@ const defaultCartPageConfig = {
  */
 /** @type {?} */
 const headerComponents = {
-    SkipLinkComponent: {
-        typeCode: 'SkipLinkComponent',
-        flexType: 'SkipLinkComponent',
-        uid: 'SkipLinkComponent',
-    },
     HamburgerMenuComponent: {
         typeCode: 'HamburgerMenuComponent',
         flexType: 'HamburgerMenuComponent',

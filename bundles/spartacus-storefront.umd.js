@@ -8093,11 +8093,6 @@
      */
     /** @type {?} */
     var headerComponents = {
-        SkipLinkComponent: {
-            typeCode: 'SkipLinkComponent',
-            flexType: 'SkipLinkComponent',
-            uid: 'SkipLinkComponent',
-        },
         HamburgerMenuComponent: {
             typeCode: 'HamburgerMenuComponent',
             flexType: 'HamburgerMenuComponent',

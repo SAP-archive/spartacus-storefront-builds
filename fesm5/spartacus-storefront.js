@@ -9,8 +9,8 @@ import { Title, Meta } from '@angular/platform-browser';
 import { __values, __spread, __read, __extends, __assign, __awaiter, __generator } from 'tslib';
 import { CommonModule, isPlatformServer } from '@angular/common';
 import { RouterModule, Router, NavigationEnd, NavigationStart, ActivatedRoute } from '@angular/router';
-import { Injectable, Pipe, ChangeDetectionStrategy, Component, NgModule, APP_INITIALIZER, Input, Output, EventEmitter, Injector, ElementRef, Renderer2, Directive, HostBinding, TemplateRef, ChangeDetectorRef, ViewChild, HostListener, forwardRef, Optional, defineInjectable, inject, INJECTOR, Inject, PLATFORM_ID, ViewContainerRef } from '@angular/core';
-import { ProductService, RoutingService, RoutingConfigService, ConfigModule, AuthGuard, RoutingModule, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductReferenceService, CmsConfig, PageType, I18nModule, provideConfig, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CheckoutService, ServerConfig, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CartService, CheckoutModule, DynamicAttributeService, CxApiService, ComponentMapperService, CartModule, UserModule, UrlModule, AuthService, UserService, PageMetaService, CmsPageTitleModule, NotAuthGuard, PageRobotsMeta, AuthRedirectService, GlobalMessageModule, OccConfig, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, SearchboxService, TranslatePipe, ProductSearchService } from '@spartacus/core';
+import { Injectable, Pipe, ChangeDetectionStrategy, Component, NgModule, APP_INITIALIZER, Input, Output, EventEmitter, Injector, ElementRef, Renderer2, Directive, HostBinding, TemplateRef, HostListener, forwardRef, ViewChild, ChangeDetectorRef, Optional, defineInjectable, inject, INJECTOR, Inject, PLATFORM_ID, ViewContainerRef } from '@angular/core';
+import { ProductService, RoutingService, RoutingConfigService, ConfigModule, AuthGuard, RoutingModule, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductReferenceService, CmsConfig, PageType, I18nModule, provideConfig, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, ServerConfig, CheckoutService, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CartService, CheckoutModule, DynamicAttributeService, CxApiService, ComponentMapperService, CartModule, UserModule, UrlModule, AuthService, UserService, PageMetaService, CmsPageTitleModule, NotAuthGuard, PageRobotsMeta, AuthRedirectService, GlobalMessageModule, OccConfig, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, SearchboxService, TranslatePipe, ProductSearchService } from '@spartacus/core';
 
 /**
  * @fileoverview added by tsickle
@@ -7835,11 +7835,6 @@ var defaultCartPageConfig = {
  */
 /** @type {?} */
 var headerComponents = {
-    SkipLinkComponent: {
-        typeCode: 'SkipLinkComponent',
-        flexType: 'SkipLinkComponent',
-        uid: 'SkipLinkComponent',
-    },
     HamburgerMenuComponent: {
         typeCode: 'HamburgerMenuComponent',
         flexType: 'HamburgerMenuComponent',
