@@ -1,6 +1,6 @@
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -40,7 +40,7 @@ CheckoutGuard.ctorParameters = () => [
     { type: CheckoutConfig },
     { type: RoutingConfigService }
 ];
-/** @nocollapse */ CheckoutGuard.ngInjectableDef = i0.defineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(i0.inject(i1.Router), i0.inject(i2.CheckoutConfig), i0.inject(i3.RoutingConfigService)); }, token: CheckoutGuard, providedIn: "root" });
+/** @nocollapse */ CheckoutGuard.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(i0.ɵɵinject(i1.Router), i0.ɵɵinject(i2.CheckoutConfig), i0.ɵɵinject(i3.RoutingConfigService)); }, token: CheckoutGuard, providedIn: "root" });
 if (false) {
     /**
      * @type {?}

@@ -1,6 +1,6 @@
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 import { Injectable } from '@angular/core';
 import { OutletPosition } from './outlet.model';
@@ -55,7 +55,7 @@ OutletService.decorators = [
                 providedIn: 'root',
             },] }
 ];
-/** @nocollapse */ OutletService.ngInjectableDef = i0.defineInjectable({ factory: function OutletService_Factory() { return new OutletService(); }, token: OutletService, providedIn: "root" });
+/** @nocollapse */ OutletService.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: function OutletService_Factory() { return new OutletService(); }, token: OutletService, providedIn: "root" });
 if (false) {
     /**
      * @type {?}

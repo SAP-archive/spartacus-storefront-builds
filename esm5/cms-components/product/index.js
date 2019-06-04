@@ -1,6 +1,6 @@
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 export { ProductCarouselComponent } from './carousel/product-carousel/product-carousel.component';
 export { ProductCarouselModule } from './carousel/product-carousel/product-carousel.module';

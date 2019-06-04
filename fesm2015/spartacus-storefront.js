@@ -1,25 +1,25 @@
+import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, Renderer2, HostListener, forwardRef, EventEmitter, Output, Optional, Injector, TemplateRef, ViewContainerRef, Inject, PLATFORM_ID, INJECTOR, APP_INITIALIZER, Pipe } from '@angular/core';
+import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, ServerConfig, OccConfig, I18nModule, GlobalMessageType, GlobalMessageService, GlobalMessageModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UrlModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, UserService, TranslationService, CheckoutModule, AuthService, AuthRedirectService, defaultCmsModuleConfig, CmsModule as CmsModule$1, CmsConfig, UserModule, NotAuthGuard, CxApiService, ComponentMapperService, CmsService, DynamicAttributeService, PageType, SemanticPathService, TranslationChunkService, PageRobotsMeta, PageMetaService, LanguageService, CmsPageTitleModule, SearchboxService, ProductModule, ProductReferenceService, TranslatePipe, ProductSearchService, ProductReviewService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, RoutingModule as RoutingModule$1, provideConfig, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, KymaModule } from '@spartacus/core';
+import { map, filter, switchMap, tap, debounceTime, take, skipWhile, shareReplay, startWith, distinctUntilChanged, first, endWith, withLatestFrom, delay } from 'rxjs/operators';
 import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { __awaiter } from 'tslib';
-import { ServiceWorkerModule, ɵangular_packages_service_worker_service_worker_b } from '@angular/service-worker';
+import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule, isPlatformServer } from '@angular/common';
+import { RouterModule, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
-import { FormBuilder, FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { of, combineLatest, BehaviorSubject, fromEvent, concat, from, isObservable, Subscription } from 'rxjs';
-import { filter, map, switchMap, tap, debounceTime, take, skipWhile, shareReplay, distinctUntilChanged, startWith, endWith, first, withLatestFrom, delay } from 'rxjs/operators';
-import { CommonModule, isPlatformServer } from '@angular/common';
-import { RouterModule, Router, NavigationEnd, NavigationStart, ActivatedRoute } from '@angular/router';
+import { of, combineLatest, BehaviorSubject, fromEvent, concat, isObservable, from, Subscription } from 'rxjs';
+import { __awaiter } from 'tslib';
+import { ServiceWorkerModule, SwRegistrationOptions } from '@angular/service-worker';
 import { Title, Meta } from '@angular/platform-browser';
-import { Injectable, Pipe, ChangeDetectionStrategy, Component, NgModule, APP_INITIALIZER, HostBinding, Input, Renderer2, Injector, Inject, PLATFORM_ID, Output, EventEmitter, ElementRef, Directive, TemplateRef, ViewContainerRef, Optional, HostListener, forwardRef, ViewChild, ChangeDetectorRef, defineInjectable, inject, INJECTOR } from '@angular/core';
-import { ProductService, RoutingService, ServerConfig, RoutingConfigService, ConfigModule, RoutingModule, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductReferenceService, CmsConfig, PageType, I18nModule, provideConfig, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, KymaModule, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CartService, CxApiService, ComponentMapperService, DynamicAttributeService, CartModule, CheckoutModule, PageRobotsMeta, PageMetaService, UrlModule, CmsPageTitleModule, UserService, NotAuthGuard, AuthGuard, UserModule, AuthService, GlobalMessageModule, AuthRedirectService, OccConfig, ProductModule, CheckoutService, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, ProductSearchService } from '@spartacus/core';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * A reference to a newly opened modal
@@ -31,7 +31,7 @@ class ModalRef extends NgbModalRef {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * A service to handle modal
@@ -98,16 +98,16 @@ ModalService.decorators = [
 ModalService.ctorParameters = () => [
     { type: NgbModal }
 ];
-/** @nocollapse */ ModalService.ngInjectableDef = defineInjectable({ factory: function ModalService_Factory() { return new ModalService(inject(NgbModal)); }, token: ModalService, providedIn: "root" });
+/** @nocollapse */ ModalService.ngInjectableDef = ɵɵdefineInjectable({ factory: function ModalService_Factory() { return new ModalService(ɵɵinject(NgbModal)); }, token: ModalService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CurrentProductService {
     /**
@@ -122,7 +122,19 @@ class CurrentProductService {
      * @return {?}
      */
     getProduct() {
-        return this.routingService.getRouterState().pipe(map(state => state.state.params['productCode']), filter(productCode => !!productCode), switchMap((productCode) => this.productService.get(productCode)));
+        return this.routingService.getRouterState().pipe(map((/**
+         * @param {?} state
+         * @return {?}
+         */
+        state => state.state.params['productCode'])), filter((/**
+         * @param {?} productCode
+         * @return {?}
+         */
+        productCode => !!productCode)), switchMap((/**
+         * @param {?} productCode
+         * @return {?}
+         */
+        (productCode) => this.productService.get(productCode))));
     }
 }
 CurrentProductService.decorators = [
@@ -135,11 +147,11 @@ CurrentProductService.ctorParameters = () => [
     { type: RoutingService },
     { type: ProductService }
 ];
-/** @nocollapse */ CurrentProductService.ngInjectableDef = defineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(inject(RoutingService), inject(ProductService)); }, token: CurrentProductService, providedIn: "root" });
+/** @nocollapse */ CurrentProductService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(ɵɵinject(RoutingService), ɵɵinject(ProductService)); }, token: CurrentProductService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {string} */
 const ICON_TYPE = {
@@ -178,7 +190,7 @@ const IconResourceType = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const fontawesomeIconConfig = {
@@ -217,7 +229,7 @@ const fontawesomeIconConfig = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class IconLoaderService {
     /**
@@ -236,9 +248,13 @@ class IconLoaderService {
      */
     useSvg(iconType) {
         return (this.config.icon.resources &&
-            !!this.config.icon.resources.find(res => res.types &&
+            !!this.config.icon.resources.find((/**
+             * @param {?} res
+             * @return {?}
+             */
+            res => res.types &&
                 res.type === IconResourceType.SVG &&
-                res.types.includes(iconType)));
+                res.types.includes(iconType))));
     }
     /**
      * Returns the path to the svg link. The link supports path names
@@ -250,9 +266,13 @@ class IconLoaderService {
      */
     getSvgPath(iconType) {
         /** @type {?} */
-        const svgResource = this.config.icon.resources.find(res => res.type === IconResourceType.SVG &&
+        const svgResource = this.config.icon.resources.find((/**
+         * @param {?} res
+         * @return {?}
+         */
+        res => res.type === IconResourceType.SVG &&
             res.types &&
-            res.types.includes(iconType));
+            res.types.includes(iconType)));
         if (svgResource) {
             return svgResource.url
                 ? `${svgResource.url}#${this.getSymbol(iconType)}`
@@ -306,10 +326,18 @@ class IconLoaderService {
             return;
         }
         /** @type {?} */
-        let resource = this.config.icon.resources.find(res => res.type === resourceType && res.types && res.types.includes(iconType));
+        let resource = this.config.icon.resources.find((/**
+         * @param {?} res
+         * @return {?}
+         */
+        res => res.type === resourceType && res.types && res.types.includes(iconType)));
         // no specific resource found, let's try to find a one-size-fits-all resource
         if (!resource) {
-            resource = this.config.icon.resources.find(res => (res.type === resourceType && !res.types) || res.types === []);
+            resource = this.config.icon.resources.find((/**
+             * @param {?} res
+             * @return {?}
+             */
+            res => (res.type === resourceType && !res.types) || res.types === []));
         }
         return resource;
     }
@@ -336,11 +364,11 @@ IconLoaderService.ctorParameters = () => [
     { type: WindowRef },
     { type: IconConfig }
 ];
-/** @nocollapse */ IconLoaderService.ngInjectableDef = defineInjectable({ factory: function IconLoaderService_Factory() { return new IconLoaderService(inject(WindowRef), inject(IconConfig)); }, token: IconLoaderService, providedIn: "root" });
+/** @nocollapse */ IconLoaderService.ngInjectableDef = ɵɵdefineInjectable({ factory: function IconLoaderService_Factory() { return new IconLoaderService(ɵɵinject(WindowRef), ɵɵinject(IconConfig)); }, token: IconLoaderService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class IconComponent {
     /**
@@ -418,7 +446,7 @@ IconComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class IconModule {
 }
@@ -433,12 +461,12 @@ IconModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class AddedToCartDialogComponent {
     /**
@@ -459,7 +487,11 @@ class AddedToCartDialogComponent {
      * @return {?}
      */
     ngOnInit() {
-        this.entry$ = this.entry$.pipe(tap(entry => {
+        this.entry$ = this.entry$.pipe(tap((/**
+         * @param {?} entry
+         * @return {?}
+         */
+        entry => {
             if (entry) {
                 const { code } = entry.product;
                 if (!this.form.controls[code]) {
@@ -476,7 +508,7 @@ class AddedToCartDialogComponent {
                 // Any updates after the first will be flagged as false
                 this.firstUpdate = false;
             }
-        }));
+        })));
     }
     /**
      * @param {?=} reason
@@ -526,12 +558,12 @@ AddedToCartDialogComponent.ctorParameters = () => [
     { type: FormBuilder }
 ];
 AddedToCartDialogComponent.propDecorators = {
-    dialog: [{ type: ViewChild, args: ['dialog', { read: ElementRef },] }]
+    dialog: [{ type: ViewChild, args: ['dialog', { static: false, read: ElementRef },] }]
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class AddToCartComponent {
     /**
@@ -561,7 +593,11 @@ class AddToCartComponent {
             this.currentProductService
                 .getProduct()
                 .pipe(filter(Boolean))
-                .subscribe(product => {
+                .subscribe((/**
+             * @param {?} product
+             * @return {?}
+             */
+            product => {
                 this.productCode = product.code;
                 if (product.stock &&
                     product.stock.stockLevelStatus !== 'outOfStock' &&
@@ -574,7 +610,7 @@ class AddToCartComponent {
                 }
                 this.cartEntry$ = this.cartService.getEntry(this.productCode);
                 this.cd.markForCheck();
-            });
+            }));
         }
     }
     /**
@@ -633,7 +669,7 @@ AddToCartComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class AutoFocusDirective {
     /**
@@ -661,7 +697,7 @@ AutoFocusDirective.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class AutoFocusDirectiveModule {
 }
@@ -674,7 +710,7 @@ AutoFocusDirectiveModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class OnlyNumberDirective {
     /**
@@ -828,13 +864,16 @@ OnlyNumberDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const COUNTER_CONTROL_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
     /* tslint:disable-next-line */
-    useExisting: forwardRef(() => ItemCounterComponent),
+    useExisting: forwardRef((/**
+     * @return {?}
+     */
+    () => ItemCounterComponent)),
     multi: true,
 };
 class ItemCounterComponent {
@@ -853,19 +892,30 @@ class ItemCounterComponent {
         this.inputValue = new FormControl({
             disabled: this.isValueChangeable,
         });
-        this.onTouch = () => { };
-        this.onModelChange = (_rating) => { };
+        this.onTouch = (/**
+         * @return {?}
+         */
+        () => { });
+        this.onModelChange = (/**
+         * @param {?} _rating
+         * @return {?}
+         */
+        (_rating) => { });
     }
     /**
      * @return {?}
      */
     ngOnInit() {
         this.writeValue(this.min || 0);
-        this.inputValue.valueChanges.pipe(debounceTime(300)).subscribe(value => {
+        this.inputValue.valueChanges.pipe(debounceTime(300)).subscribe((/**
+         * @param {?} value
+         * @return {?}
+         */
+        value => {
             if (value) {
                 this.manualChange(Number(value));
             }
-        });
+        }));
     }
     /**
      * @return {?}
@@ -918,8 +968,14 @@ class ItemCounterComponent {
     onKeyDown(event) {
         /** @type {?} */
         const handlers = {
-            ArrowDown: () => this.decrement(),
-            ArrowUp: () => this.increment(),
+            ArrowDown: (/**
+             * @return {?}
+             */
+            () => this.decrement()),
+            ArrowUp: (/**
+             * @return {?}
+             */
+            () => this.increment()),
         };
         if (handlers[event.code]) {
             handlers[event.code]();
@@ -1035,9 +1091,9 @@ ItemCounterComponent.ctorParameters = () => [
     { type: Renderer2 }
 ];
 ItemCounterComponent.propDecorators = {
-    input: [{ type: ViewChild, args: ['itemCounterInput',] }],
-    incrementBtn: [{ type: ViewChild, args: ['incrementBtn',] }],
-    decrementBtn: [{ type: ViewChild, args: ['decrementBtn',] }],
+    input: [{ type: ViewChild, args: ['itemCounterInput', { static: false },] }],
+    incrementBtn: [{ type: ViewChild, args: ['incrementBtn', { static: false },] }],
+    decrementBtn: [{ type: ViewChild, args: ['decrementBtn', { static: false },] }],
     step: [{ type: Input }],
     min: [{ type: Input }],
     max: [{ type: Input }],
@@ -1049,7 +1105,7 @@ ItemCounterComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class FormComponentsModule {
 }
@@ -1063,7 +1119,7 @@ FormComponentsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * This component navigates using [routerLink] attribute when input 'url' is a relative url. Otherwise (when it's absolute), [href] is used.
@@ -1119,7 +1175,7 @@ GenericLinkComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class GenericLinkModule {
 }
@@ -1133,7 +1189,7 @@ GenericLinkModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const PAGE_FIRST = 1;
@@ -1267,7 +1323,7 @@ PaginationComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class SortingComponent {
     constructor() {
@@ -1300,7 +1356,7 @@ SortingComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ListNavigationModule {
 }
@@ -1314,12 +1370,12 @@ ListNavigationModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {string} */
 const BREAKPOINT = {
@@ -1341,7 +1397,7 @@ class LayoutConfig extends ServerConfig {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * the default format is used for browsers that do not support
@@ -1368,9 +1424,13 @@ class MediaService {
                 threshold: this.layoutConfig.breakpoints[BREAKPOINT.lg],
             },
         ];
-        this.getImageUrl = (url) => {
+        this.getImageUrl = (/**
+         * @param {?} url
+         * @return {?}
+         */
+        (url) => {
             return url.startsWith('http') ? url : this.getBaseUrl() + url;
-        };
+        });
     }
     /**
      * @param {?} container
@@ -1430,7 +1490,12 @@ class MediaService {
             return undefined;
         }
         /** @type {?} */
-        const srcset = this.mediaFormats.reduce((set, format) => {
+        const srcset = this.mediaFormats.reduce((/**
+         * @param {?} set
+         * @param {?} format
+         * @return {?}
+         */
+        (set, format) => {
             if (!!media[format.code]) {
                 if (set) {
                     set += ', ';
@@ -1438,7 +1503,7 @@ class MediaService {
                 set += `${this.getImageUrl(media[format.code].url)} ${format.threshold}w`;
             }
             return set;
-        }, '');
+        }), '');
         return srcset === '' ? undefined : srcset;
     }
     /**
@@ -1459,11 +1524,11 @@ MediaService.ctorParameters = () => [
     { type: OccConfig },
     { type: LayoutConfig }
 ];
-/** @nocollapse */ MediaService.ngInjectableDef = defineInjectable({ factory: function MediaService_Factory() { return new MediaService(inject(OccConfig), inject(LayoutConfig)); }, token: MediaService, providedIn: "root" });
+/** @nocollapse */ MediaService.ngInjectableDef = ɵɵdefineInjectable({ factory: function MediaService_Factory() { return new MediaService(ɵɵinject(OccConfig), ɵɵinject(LayoutConfig)); }, token: MediaService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MediaComponent {
     /**
@@ -1561,12 +1626,12 @@ MediaComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MediaModule {
 }
@@ -1580,12 +1645,12 @@ MediaModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // TODO: Improve a11y with better text appropriate to usage (example: loading cart spinner)
 class SpinnerComponent {
@@ -1602,7 +1667,7 @@ SpinnerComponent.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class SpinnerModule {
 }
@@ -1616,7 +1681,7 @@ SpinnerModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class GlobalMessageComponent {
     /**
@@ -1656,7 +1721,7 @@ GlobalMessageComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class GlobalMessageComponentModule {
 }
@@ -1676,12 +1741,12 @@ GlobalMessageComponentModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class LanguageCurrencyComponent {
 }
@@ -1698,7 +1763,7 @@ LanguageCurrencyComponent.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @abstract
@@ -1709,7 +1774,7 @@ class CmsComponentData {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const LABELS = {
@@ -1732,28 +1797,52 @@ class SiteContextComponentService {
      * @return {?}
      */
     getItems(context) {
-        return this.getService(context).pipe(switchMap((service) => service.getAll()), switchMap(items => this.getContext(context).pipe(switchMap(ctx => {
-            items.forEach(item => {
+        return this.getService(context).pipe(switchMap((/**
+         * @param {?} service
+         * @return {?}
+         */
+        (service) => service.getAll())), switchMap((/**
+         * @param {?} items
+         * @return {?}
+         */
+        items => this.getContext(context).pipe(switchMap((/**
+         * @param {?} ctx
+         * @return {?}
+         */
+        ctx => {
+            items.forEach((/**
+             * @param {?} item
+             * @return {?}
+             */
+            item => {
                 return (item.label = this.getOptionLabel(item, ctx));
-            });
+            }));
             return of(items);
-        }))));
+        }))))));
     }
     /**
      * @param {?=} context
      * @return {?}
      */
     getActiveItem(context) {
-        return this.getService(context).pipe(switchMap((service) => service.getActive()));
+        return this.getService(context).pipe(switchMap((/**
+         * @param {?} service
+         * @return {?}
+         */
+        (service) => service.getActive())));
     }
     /**
      * @param {?=} context
      * @return {?}
      */
     getLabel(context) {
-        return this.getContext(context).pipe(map(ctx => {
+        return this.getContext(context).pipe(map((/**
+         * @param {?} ctx
+         * @return {?}
+         */
+        ctx => {
             return LABELS[ctx];
-        }));
+        })));
     }
     /**
      * @param {?} value
@@ -1763,9 +1852,13 @@ class SiteContextComponentService {
     setActive(value, context) {
         this.getService(context)
             .pipe(take(1))
-            .subscribe(service => {
+            .subscribe((/**
+         * @param {?} service
+         * @return {?}
+         */
+        service => {
             service.setActive(value);
-        });
+        }));
     }
     /**
      * @protected
@@ -1773,7 +1866,11 @@ class SiteContextComponentService {
      * @return {?}
      */
     getService(context) {
-        return this.getContext(context).pipe(map(ctx => this.getInjectedService(ctx)), filter(Boolean));
+        return this.getContext(context).pipe(map((/**
+         * @param {?} ctx
+         * @return {?}
+         */
+        ctx => this.getInjectedService(ctx))), filter(Boolean));
     }
     /**
      * @protected
@@ -1785,7 +1882,11 @@ class SiteContextComponentService {
             return of(context);
         }
         else if (this.componentData) {
-            return this.componentData.data$.pipe(map(data => data.context));
+            return this.componentData.data$.pipe(map((/**
+             * @param {?} data
+             * @return {?}
+             */
+            data => data.context)));
         }
     }
     /**
@@ -1825,7 +1926,7 @@ SiteContextComponentService.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {string} */
 const SiteContextType = {
@@ -1835,7 +1936,7 @@ const SiteContextType = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class SiteContextSelectorComponent {
     /**
@@ -1888,7 +1989,7 @@ SiteContextSelectorComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class SiteContextSelectorModule {
 }
@@ -1925,17 +2026,17 @@ SiteContextSelectorModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class StarRatingComponent {
     /**
@@ -2003,7 +2104,7 @@ StarRatingComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class StarRatingModule {
 }
@@ -2017,17 +2118,17 @@ StarRatingModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Utility class when working with forms.
@@ -2053,17 +2154,17 @@ class FormUtils {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PromotionsComponent {
     constructor() { }
@@ -2083,7 +2184,7 @@ PromotionsComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PromotionsModule {
 }
@@ -2097,7 +2198,7 @@ PromotionsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CartItemListComponent {
     /**
@@ -2118,7 +2219,11 @@ class CartItemListComponent {
      * @return {?}
      */
     ngOnInit() {
-        this.items.forEach(item => {
+        this.items.forEach((/**
+         * @param {?} item
+         * @return {?}
+         */
+        item => {
             const { code } = item.product;
             if (!this.form.controls[code]) {
                 this.form.setControl(code, this.createEntryFormGroup(item));
@@ -2128,7 +2233,7 @@ class CartItemListComponent {
                 const entryForm = (/** @type {?} */ (this.form.controls[code]));
                 entryForm.controls.quantity.setValue(item.quantity);
             }
-        });
+        }));
     }
     /**
      * @param {?} item
@@ -2222,7 +2327,7 @@ CartItemListComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CartItemComponent {
     constructor() {
@@ -2287,7 +2392,7 @@ CartItemComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class OrderSummaryComponent {
 }
@@ -2303,7 +2408,7 @@ OrderSummaryComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CartSharedModule {
 }
@@ -2331,7 +2436,7 @@ CartSharedModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class AddToCartModule {
 }
@@ -2361,7 +2466,7 @@ AddToCartModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CartDetailsComponent {
     /**
@@ -2377,7 +2482,11 @@ class CartDetailsComponent {
         this.cart$ = this.cartService.getActive();
         this.entries$ = this.cartService
             .getEntries()
-            .pipe(filter(entries => entries.length > 0));
+            .pipe(filter((/**
+         * @param {?} entries
+         * @return {?}
+         */
+        entries => entries.length > 0)));
         this.cartLoaded$ = this.cartService.getLoaded();
     }
     /**
@@ -2406,7 +2515,7 @@ CartDetailsComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CartDetailsModule {
 }
@@ -2435,7 +2544,7 @@ CartDetailsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CartNotEmptyGuard {
     /**
@@ -2450,13 +2559,24 @@ class CartNotEmptyGuard {
      * @return {?}
      */
     canActivate() {
-        return this.cartService.getLoaded().pipe(skipWhile(loaded => !loaded), switchMap(() => this.cartService.getActive()), map(cart => {
+        return this.cartService.getLoaded().pipe(skipWhile((/**
+         * @param {?} loaded
+         * @return {?}
+         */
+        loaded => !loaded)), switchMap((/**
+         * @return {?}
+         */
+        () => this.cartService.getActive())), map((/**
+         * @param {?} cart
+         * @return {?}
+         */
+        cart => {
             if (this.cartService.isEmpty(cart)) {
                 this.routingService.go({ cxRoute: 'home' });
                 return false;
             }
             return true;
-        }));
+        })));
     }
 }
 CartNotEmptyGuard.decorators = [
@@ -2469,16 +2589,16 @@ CartNotEmptyGuard.ctorParameters = () => [
     { type: CartService },
     { type: RoutingService }
 ];
-/** @nocollapse */ CartNotEmptyGuard.ngInjectableDef = defineInjectable({ factory: function CartNotEmptyGuard_Factory() { return new CartNotEmptyGuard(inject(CartService), inject(RoutingService)); }, token: CartNotEmptyGuard, providedIn: "root" });
+/** @nocollapse */ CartNotEmptyGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function CartNotEmptyGuard_Factory() { return new CartNotEmptyGuard(ɵɵinject(CartService), ɵɵinject(RoutingService)); }, token: CartNotEmptyGuard, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CartTotalsComponent {
     /**
@@ -2494,7 +2614,11 @@ class CartTotalsComponent {
         this.cart$ = this.cartService.getActive();
         this.entries$ = this.cartService
             .getEntries()
-            .pipe(filter(entries => entries.length > 0));
+            .pipe(filter((/**
+         * @param {?} entries
+         * @return {?}
+         */
+        entries => entries.length > 0)));
     }
 }
 CartTotalsComponent.decorators = [
@@ -2511,7 +2635,7 @@ CartTotalsComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CartTotalsModule {
 }
@@ -2539,7 +2663,7 @@ CartTotalsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MiniCartComponent {
     /**
@@ -2550,8 +2674,20 @@ class MiniCartComponent {
         this.iconTypes = ICON_TYPE;
         this.quantity$ = this.cartService
             .getActive()
-            .pipe(map(cart => cart.deliveryItemsQuantity || 0));
-        this.total$ = this.cartService.getActive().pipe(filter(cart => !!cart.totalPrice), map(cart => cart.totalPrice.formattedValue));
+            .pipe(map((/**
+         * @param {?} cart
+         * @return {?}
+         */
+        cart => cart.deliveryItemsQuantity || 0)));
+        this.total$ = this.cartService.getActive().pipe(filter((/**
+         * @param {?} cart
+         * @return {?}
+         */
+        cart => !!cart.totalPrice)), map((/**
+         * @param {?} cart
+         * @return {?}
+         */
+        cart => cart.totalPrice.formattedValue)));
     }
 }
 MiniCartComponent.decorators = [
@@ -2568,7 +2704,7 @@ MiniCartComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MiniCartModule {
 }
@@ -2594,7 +2730,7 @@ MiniCartModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CartComponentModule {
 }
@@ -2619,12 +2755,12 @@ CartComponentModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @abstract
@@ -2634,7 +2770,7 @@ class CheckoutConfig {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CheckoutConfigService {
     /**
@@ -2724,7 +2860,11 @@ class CheckoutConfigService {
      */
     getCheckoutStepIndex(key, value) {
         return key && value
-            ? this.steps.findIndex((step) => step[key].includes(value))
+            ? this.steps.findIndex((/**
+             * @param {?} step
+             * @return {?}
+             */
+            (step) => step[key].includes(value)))
             : null;
     }
 }
@@ -2739,7 +2879,7 @@ CheckoutConfigService.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {string} */
 const CheckoutStepType = {
@@ -2751,7 +2891,7 @@ const CheckoutStepType = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const defaultCheckoutConfig = {
@@ -2787,7 +2927,7 @@ const defaultCheckoutConfig = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CheckoutGuard {
     /**
@@ -2818,11 +2958,11 @@ CheckoutGuard.ctorParameters = () => [
     { type: CheckoutConfig },
     { type: RoutingConfigService }
 ];
-/** @nocollapse */ CheckoutGuard.ngInjectableDef = defineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(inject(Router), inject(CheckoutConfig), inject(RoutingConfigService)); }, token: CheckoutGuard, providedIn: "root" });
+/** @nocollapse */ CheckoutGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(ɵɵinject(Router), ɵɵinject(CheckoutConfig), ɵɵinject(RoutingConfigService)); }, token: CheckoutGuard, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CheckoutOrchestratorComponent {
     constructor() { }
@@ -2839,7 +2979,7 @@ CheckoutOrchestratorComponent.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CheckoutOrchestratorModule {
 }
@@ -2866,7 +3006,7 @@ CheckoutOrchestratorModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CheckoutOrderSummaryComponent {
     /**
@@ -2891,7 +3031,7 @@ CheckoutOrderSummaryComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CheckoutOrderSummaryModule {
 }
@@ -2916,7 +3056,7 @@ CheckoutOrderSummaryModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CheckoutProgressMobileBottomComponent {
     /**
@@ -2934,16 +3074,25 @@ class CheckoutProgressMobileBottomComponent {
      */
     ngOnInit() {
         this.steps = this.config.checkout.steps;
-        this.routerState$ = this.routingService.getRouterState().pipe(tap(router => {
+        this.routerState$ = this.routingService.getRouterState().pipe(tap((/**
+         * @param {?} router
+         * @return {?}
+         */
+        router => {
             this.activeStepUrl = router.state.context.id;
-            this.steps.forEach((step, index) => {
+            this.steps.forEach((/**
+             * @param {?} step
+             * @param {?} index
+             * @return {?}
+             */
+            (step, index) => {
                 /** @type {?} */
                 const routeUrl = `/${this.routingConfigService.getRouteConfig(step.routeName).paths[0]}`;
                 if (routeUrl === this.activeStepUrl) {
                     this.activeStepIndex = index;
                 }
-            });
-        }));
+            }));
+        })));
     }
 }
 CheckoutProgressMobileBottomComponent.decorators = [
@@ -2961,7 +3110,7 @@ CheckoutProgressMobileBottomComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CheckoutProgressMobileBottomModule {
 }
@@ -2990,7 +3139,7 @@ CheckoutProgressMobileBottomModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CheckoutProgressMobileTopComponent {
     /**
@@ -3011,16 +3160,25 @@ class CheckoutProgressMobileTopComponent {
     ngOnInit() {
         this.steps = this.config.checkout.steps;
         this.cart$ = this.cartService.getActive();
-        this.routerState$ = this.routingService.getRouterState().pipe(tap(router => {
+        this.routerState$ = this.routingService.getRouterState().pipe(tap((/**
+         * @param {?} router
+         * @return {?}
+         */
+        router => {
             this.activeStepUrl = router.state.context.id;
-            this.steps.forEach((step, index) => {
+            this.steps.forEach((/**
+             * @param {?} step
+             * @param {?} index
+             * @return {?}
+             */
+            (step, index) => {
                 /** @type {?} */
                 const routeUrl = `/${this.routingConfigService.getRouteConfig(step.routeName).paths[0]}`;
                 if (routeUrl === this.activeStepUrl) {
                     this.activeStepIndex = index;
                 }
-            });
-        }));
+            }));
+        })));
     }
 }
 CheckoutProgressMobileTopComponent.decorators = [
@@ -3039,7 +3197,7 @@ CheckoutProgressMobileTopComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CheckoutProgressMobileTopModule {
 }
@@ -3068,7 +3226,7 @@ CheckoutProgressMobileTopModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CheckoutProgressComponent {
     /**
@@ -3086,16 +3244,25 @@ class CheckoutProgressComponent {
      */
     ngOnInit() {
         this.steps = this.config.checkout.steps;
-        this.routerState$ = this.routingService.getRouterState().pipe(tap(router => {
+        this.routerState$ = this.routingService.getRouterState().pipe(tap((/**
+         * @param {?} router
+         * @return {?}
+         */
+        router => {
             this.activeStepUrl = router.state.context.id;
-            this.steps.forEach((step, index) => {
+            this.steps.forEach((/**
+             * @param {?} step
+             * @param {?} index
+             * @return {?}
+             */
+            (step, index) => {
                 /** @type {?} */
                 const routeUrl = `/${this.routingConfigService.getRouteConfig(step.routeName).paths[0]}`;
                 if (routeUrl === this.activeStepUrl) {
                     this.activeStepIndex = index;
                 }
-            });
-        }));
+            }));
+        })));
     }
 }
 CheckoutProgressComponent.decorators = [
@@ -3114,7 +3281,7 @@ CheckoutProgressComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CheckoutProgressModule {
 }
@@ -3144,7 +3311,7 @@ CheckoutProgressModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CheckoutDetailsService {
     /**
@@ -3154,26 +3321,54 @@ class CheckoutDetailsService {
     constructor(checkoutService, cartService) {
         this.checkoutService = checkoutService;
         this.cartService = cartService;
-        this.cartId$ = this.cartService.getActive().pipe(map(cartData => cartData.code), filter(cartId => !!cartId));
-        this.getCheckoutDetailsLoaded$ = this.cartId$.pipe(tap(cartId => this.checkoutService.loadCheckoutDetails(cartId)), shareReplay(1), switchMap(() => this.checkoutService.getCheckoutDetailsLoaded()), skipWhile(loaded => !loaded));
+        this.cartId$ = this.cartService.getActive().pipe(map((/**
+         * @param {?} cartData
+         * @return {?}
+         */
+        cartData => cartData.code)), filter((/**
+         * @param {?} cartId
+         * @return {?}
+         */
+        cartId => !!cartId)));
+        this.getCheckoutDetailsLoaded$ = this.cartId$.pipe(tap((/**
+         * @param {?} cartId
+         * @return {?}
+         */
+        cartId => this.checkoutService.loadCheckoutDetails(cartId))), shareReplay(1), switchMap((/**
+         * @return {?}
+         */
+        () => this.checkoutService.getCheckoutDetailsLoaded())), skipWhile((/**
+         * @param {?} loaded
+         * @return {?}
+         */
+        loaded => !loaded)));
     }
     /**
      * @return {?}
      */
     getDeliveryAddress() {
-        return this.getCheckoutDetailsLoaded$.pipe(switchMap(() => this.checkoutService.getDeliveryAddress()));
+        return this.getCheckoutDetailsLoaded$.pipe(switchMap((/**
+         * @return {?}
+         */
+        () => this.checkoutService.getDeliveryAddress())));
     }
     /**
      * @return {?}
      */
     getSelectedDeliveryModeCode() {
-        return this.getCheckoutDetailsLoaded$.pipe(switchMap(() => this.checkoutService.getSelectedDeliveryModeCode()));
+        return this.getCheckoutDetailsLoaded$.pipe(switchMap((/**
+         * @return {?}
+         */
+        () => this.checkoutService.getSelectedDeliveryModeCode())));
     }
     /**
      * @return {?}
      */
     getPaymentDetails() {
-        return this.getCheckoutDetailsLoaded$.pipe(switchMap(() => this.checkoutService.getPaymentDetails()));
+        return this.getCheckoutDetailsLoaded$.pipe(switchMap((/**
+         * @return {?}
+         */
+        () => this.checkoutService.getPaymentDetails())));
     }
 }
 CheckoutDetailsService.decorators = [
@@ -3186,11 +3381,11 @@ CheckoutDetailsService.ctorParameters = () => [
     { type: CheckoutService },
     { type: CartService }
 ];
-/** @nocollapse */ CheckoutDetailsService.ngInjectableDef = defineInjectable({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(inject(CheckoutService), inject(CartService)); }, token: CheckoutDetailsService, providedIn: "root" });
+/** @nocollapse */ CheckoutDetailsService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(ɵɵinject(CheckoutService), ɵɵinject(CartService)); }, token: CheckoutDetailsService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ShippingAddressSetGuard {
     /**
@@ -3218,10 +3413,14 @@ class ShippingAddressSetGuard {
         }
         return this.checkoutDetailsService
             .getDeliveryAddress()
-            .pipe(map((deliveryAddress) => deliveryAddress && Object.keys(deliveryAddress).length
+            .pipe(map((/**
+         * @param {?} deliveryAddress
+         * @return {?}
+         */
+        (deliveryAddress) => deliveryAddress && Object.keys(deliveryAddress).length
             ? true
             : this.router.parseUrl(checkoutStep &&
-                this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0])));
+                this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0]))));
     }
 }
 ShippingAddressSetGuard.decorators = [
@@ -3237,11 +3436,11 @@ ShippingAddressSetGuard.ctorParameters = () => [
     { type: Router },
     { type: ServerConfig }
 ];
-/** @nocollapse */ ShippingAddressSetGuard.ngInjectableDef = defineInjectable({ factory: function ShippingAddressSetGuard_Factory() { return new ShippingAddressSetGuard(inject(CheckoutDetailsService), inject(CheckoutConfigService), inject(RoutingConfigService), inject(Router), inject(ServerConfig)); }, token: ShippingAddressSetGuard, providedIn: "root" });
+/** @nocollapse */ ShippingAddressSetGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function ShippingAddressSetGuard_Factory() { return new ShippingAddressSetGuard(ɵɵinject(CheckoutDetailsService), ɵɵinject(CheckoutConfigService), ɵɵinject(RoutingConfigService), ɵɵinject(Router), ɵɵinject(ServerConfig)); }, token: ShippingAddressSetGuard, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class DeliveryModeComponent {
     /**
@@ -3272,13 +3471,21 @@ class DeliveryModeComponent {
         this.selectedDeliveryMode$ = this.checkoutService.getSelectedDeliveryMode();
         this.checkoutService.loadSupportedDeliveryModes();
         this.selectedDeliveryMode$
-            .pipe(map((deliveryMode) => deliveryMode && deliveryMode.code ? deliveryMode.code : null))
-            .subscribe(code => {
+            .pipe(map((/**
+         * @param {?} deliveryMode
+         * @return {?}
+         */
+        (deliveryMode) => deliveryMode && deliveryMode.code ? deliveryMode.code : null)))
+            .subscribe((/**
+         * @param {?} code
+         * @return {?}
+         */
+        code => {
             if (code) {
                 this.mode.controls['deliveryModeId'].setValue(code);
                 this.currentDeliveryModeId = code;
             }
-        });
+        }));
     }
     /**
      * @param {?} code
@@ -3299,11 +3506,15 @@ class DeliveryModeComponent {
         }
         this.deliveryModeSub = this.checkoutService
             .getSelectedDeliveryMode()
-            .subscribe(data => {
+            .subscribe((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => {
             if (data && data.code === this.currentDeliveryModeId) {
                 this.routingService.go(this.checkoutStepUrlNext);
             }
-        });
+        }));
     }
     /**
      * @return {?}
@@ -3344,7 +3555,7 @@ DeliveryModeComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class DeliveryModeModule {
 }
@@ -3372,7 +3583,7 @@ DeliveryModeModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CardComponent {
     constructor() {
@@ -3455,7 +3666,7 @@ CardComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CardModule {
 }
@@ -3469,7 +3680,7 @@ CardModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class DeliveryModeSetGuard {
     /**
@@ -3497,10 +3708,14 @@ class DeliveryModeSetGuard {
         }
         return this.checkoutDetailsService
             .getSelectedDeliveryModeCode()
-            .pipe(map((mode) => mode && mode.length
+            .pipe(map((/**
+         * @param {?} mode
+         * @return {?}
+         */
+        (mode) => mode && mode.length
             ? true
             : this.router.parseUrl(checkoutStep &&
-                this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0])));
+                this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0]))));
     }
 }
 DeliveryModeSetGuard.decorators = [
@@ -3516,11 +3731,11 @@ DeliveryModeSetGuard.ctorParameters = () => [
     { type: Router },
     { type: ServerConfig }
 ];
-/** @nocollapse */ DeliveryModeSetGuard.ngInjectableDef = defineInjectable({ factory: function DeliveryModeSetGuard_Factory() { return new DeliveryModeSetGuard(inject(CheckoutDetailsService), inject(CheckoutConfigService), inject(RoutingConfigService), inject(Router), inject(ServerConfig)); }, token: DeliveryModeSetGuard, providedIn: "root" });
+/** @nocollapse */ DeliveryModeSetGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function DeliveryModeSetGuard_Factory() { return new DeliveryModeSetGuard(ɵɵinject(CheckoutDetailsService), ɵɵinject(CheckoutConfigService), ɵɵinject(RoutingConfigService), ɵɵinject(Router), ɵɵinject(ServerConfig)); }, token: DeliveryModeSetGuard, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class BillingAddressFormComponent {
     /**
@@ -3545,7 +3760,7 @@ BillingAddressFormComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class BillingAddressFormModule {
 }
@@ -3566,7 +3781,7 @@ BillingAddressFormModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class SuggestedAddressDialogComponent {
     /**
@@ -3610,7 +3825,7 @@ SuggestedAddressDialogComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PaymentFormComponent {
     /**
@@ -3661,26 +3876,42 @@ class PaymentFormComponent {
      */
     ngOnInit() {
         this.expMonthAndYear();
-        this.countries$ = this.userService.getAllBillingCountries().pipe(tap(countries => {
+        this.countries$ = this.userService.getAllBillingCountries().pipe(tap((/**
+         * @param {?} countries
+         * @return {?}
+         */
+        countries => {
             // If the store is empty fetch countries. This is also used when changing language.
             if (Object.keys(countries).length === 0) {
                 this.userService.loadBillingCountries();
             }
-        }));
-        this.cardTypes$ = this.checkoutService.getCardTypes().pipe(tap(cardTypes => {
+        })));
+        this.cardTypes$ = this.checkoutService.getCardTypes().pipe(tap((/**
+         * @param {?} cardTypes
+         * @return {?}
+         */
+        cardTypes => {
             if (Object.keys(cardTypes).length === 0) {
                 this.checkoutService.loadSupportedCardTypes();
             }
-        }));
+        })));
         this.shippingAddress$ = this.checkoutService.getDeliveryAddress();
-        this.checkboxSub = this.showSameAsShippingAddressCheckbox().subscribe((shouldShowCheckbox) => {
+        this.checkboxSub = this.showSameAsShippingAddressCheckbox().subscribe((/**
+         * @param {?} shouldShowCheckbox
+         * @return {?}
+         */
+        (shouldShowCheckbox) => {
             // this operation makes sure the checkbox is not checked if not shown and vice versa
             this.sameAsShippingAddress = shouldShowCheckbox;
-        });
+        }));
         // verify the new added address
         this.addressVerifySub = this.checkoutService
             .getAddressVerificationResults()
-            .subscribe((results) => {
+            .subscribe((/**
+         * @param {?} results
+         * @return {?}
+         */
+        (results) => {
             if (results === 'FAIL') {
                 this.checkoutService.clearAddressVerificationResults();
             }
@@ -3694,7 +3925,7 @@ class PaymentFormComponent {
             else if (results.decision === 'REVIEW') {
                 this.openSuggestedAddress(results);
             }
-        });
+        }));
     }
     /**
      * @return {?}
@@ -3761,9 +3992,17 @@ class PaymentFormComponent {
      * @return {?}
      */
     showSameAsShippingAddressCheckbox() {
-        return combineLatest(this.countries$, this.shippingAddress$).pipe(map(([countries, address]) => {
-            return !!countries.filter((country) => country.isocode === address.country.isocode).length;
-        }));
+        return combineLatest(this.countries$, this.shippingAddress$).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([countries, address]) => {
+            return !!countries.filter((/**
+             * @param {?} country
+             * @return {?}
+             */
+            (country) => country.isocode === address.country.isocode)).length;
+        })));
     }
     /**
      * @param {?} address
@@ -3797,15 +4036,21 @@ class PaymentFormComponent {
             this.suggestedAddressModalRef.componentInstance.suggestedAddresses =
                 results.suggestedAddresses;
             this.suggestedAddressModalRef.result
-                .then(() => {
+                .then((/**
+             * @return {?}
+             */
+            () => {
                 this.checkoutService.clearAddressVerificationResults();
                 this.suggestedAddressModalRef = null;
-            })
-                .catch(() => {
+            }))
+                .catch((/**
+             * @return {?}
+             */
+            () => {
                 // this  callback is called when modal is closed with Esc key or clicking backdrop
                 this.checkoutService.clearAddressVerificationResults();
                 this.suggestedAddressModalRef = null;
-            });
+            }));
         }
     }
     /**
@@ -3878,7 +4123,7 @@ PaymentFormComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PaymentFormModule {
 }
@@ -3901,7 +4146,7 @@ PaymentFormModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PaymentMethodComponent {
     /**
@@ -3937,23 +4182,35 @@ class PaymentMethodComponent {
         this.existingPaymentMethods$ = this.userService.getPaymentMethods();
         this.getPaymentDetailsSub = this.checkoutService
             .getPaymentDetails()
-            .pipe(filter(paymentInfo => paymentInfo && Object.keys(paymentInfo).length !== 0))
-            .subscribe(paymentInfo => {
+            .pipe(filter((/**
+         * @param {?} paymentInfo
+         * @return {?}
+         */
+        paymentInfo => paymentInfo && Object.keys(paymentInfo).length !== 0)))
+            .subscribe((/**
+         * @param {?} paymentInfo
+         * @return {?}
+         */
+        paymentInfo => {
             if (!paymentInfo['hasError']) {
                 this.selectedPayment = paymentInfo;
             }
             else {
-                Object.keys(paymentInfo).forEach(key => {
+                Object.keys(paymentInfo).forEach((/**
+                 * @param {?} key
+                 * @return {?}
+                 */
+                key => {
                     if (key.startsWith('InvalidField')) {
                         this.globalMessageService.add({
                             key: 'paymentMethods.invalidField',
                             params: { field: paymentInfo[key] },
                         }, GlobalMessageType.MSG_TYPE_ERROR);
                     }
-                });
+                }));
                 this.checkoutService.clearCheckoutStep(3);
             }
-        });
+        }));
     }
     /**
      * @param {?} payment
@@ -3968,7 +4225,11 @@ class PaymentMethodComponent {
             this.translation.translate('paymentForm.useThisPayment'),
             this.translation.translate('paymentCard.defaultPaymentMethod'),
             this.translation.translate('paymentCard.selected'),
-        ]).pipe(map(([textExpires, textUseThisPayment, textDefaultPaymentMethod, textSelected,]) => {
+        ]).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([textExpires, textUseThisPayment, textDefaultPaymentMethod, textSelected,]) => {
             /** @type {?} */
             const card = {
                 title: payment.defaultPayment ? textDefaultPaymentMethod : '',
@@ -3981,7 +4242,7 @@ class PaymentMethodComponent {
                 card.header = textSelected;
             }
             return card;
-        }));
+        })));
     }
     /**
      * @param {?} paymentDetails
@@ -4024,9 +4285,13 @@ class PaymentMethodComponent {
     addNewPaymentMethod({ paymentDetails, billingAddress, }) {
         this.getDeliveryAddressSub = this.checkoutService
             .getDeliveryAddress()
-            .subscribe(address => {
+            .subscribe((/**
+         * @param {?} address
+         * @return {?}
+         */
+        address => {
             billingAddress = address;
-        });
+        }));
         this.addPaymentInfo({
             payment: paymentDetails,
             billingAddress,
@@ -4052,12 +4317,16 @@ class PaymentMethodComponent {
         }
         this.getPaymentDetailsSub = this.checkoutService
             .getPaymentDetails()
-            .subscribe(data => {
+            .subscribe((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => {
             if (data.accountHolderName && data.cardNumber) {
                 this.routingService.go(this.checkoutStepUrlNext);
                 return;
             }
-        });
+        }));
     }
     /**
      * @return {?}
@@ -4117,7 +4386,7 @@ PaymentMethodComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PaymentMethodModule {
 }
@@ -4153,7 +4422,7 @@ PaymentMethodModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PlaceOrderComponent {
     /**
@@ -4183,10 +4452,17 @@ class PlaceOrderComponent {
     ngOnInit() {
         this.placeOrderSubscription = this.checkoutService
             .getOrderDetails()
-            .pipe(filter(order => Object.keys(order).length !== 0))
-            .subscribe(() => {
+            .pipe(filter((/**
+         * @param {?} order
+         * @return {?}
+         */
+        order => Object.keys(order).length !== 0)))
+            .subscribe((/**
+         * @return {?}
+         */
+        () => {
             this.routingService.go({ cxRoute: 'orderConfirmation' });
-        });
+        }));
     }
     /**
      * @return {?}
@@ -4212,7 +4488,7 @@ PlaceOrderComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PlaceOrderModule {
 }
@@ -4241,7 +4517,7 @@ PlaceOrderModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PaymentDetailsSetGuard {
     /**
@@ -4269,10 +4545,14 @@ class PaymentDetailsSetGuard {
         }
         return this.checkoutDetailsService
             .getPaymentDetails()
-            .pipe(map(paymentDetails => paymentDetails && Object.keys(paymentDetails).length !== 0
+            .pipe(map((/**
+         * @param {?} paymentDetails
+         * @return {?}
+         */
+        paymentDetails => paymentDetails && Object.keys(paymentDetails).length !== 0
             ? true
             : this.router.parseUrl(checkoutStep &&
-                this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0])));
+                this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0]))));
     }
 }
 PaymentDetailsSetGuard.decorators = [
@@ -4288,11 +4568,11 @@ PaymentDetailsSetGuard.ctorParameters = () => [
     { type: Router },
     { type: ServerConfig }
 ];
-/** @nocollapse */ PaymentDetailsSetGuard.ngInjectableDef = defineInjectable({ factory: function PaymentDetailsSetGuard_Factory() { return new PaymentDetailsSetGuard(inject(CheckoutDetailsService), inject(CheckoutConfigService), inject(RoutingConfigService), inject(Router), inject(ServerConfig)); }, token: PaymentDetailsSetGuard, providedIn: "root" });
+/** @nocollapse */ PaymentDetailsSetGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function PaymentDetailsSetGuard_Factory() { return new PaymentDetailsSetGuard(ɵɵinject(CheckoutDetailsService), ɵɵinject(CheckoutConfigService), ɵɵinject(RoutingConfigService), ɵɵinject(Router), ɵɵinject(ServerConfig)); }, token: PaymentDetailsSetGuard, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ReviewSubmitComponent {
     /**
@@ -4315,16 +4595,32 @@ class ReviewSubmitComponent {
         this.entries$ = this.cartService.getEntries();
         this.deliveryAddress$ = this.checkoutService.getDeliveryAddress();
         this.paymentDetails$ = this.checkoutService.getPaymentDetails();
-        this.deliveryMode$ = this.checkoutService.getSelectedDeliveryMode().pipe(tap((selected) => {
+        this.deliveryMode$ = this.checkoutService.getSelectedDeliveryMode().pipe(tap((/**
+         * @param {?} selected
+         * @return {?}
+         */
+        (selected) => {
             if (selected === null) {
                 this.checkoutService.loadSupportedDeliveryModes();
             }
-        }));
-        this.countryName$ = this.deliveryAddress$.pipe(switchMap((address) => this.userService.getCountry(address.country.isocode)), tap((country) => {
+        })));
+        this.countryName$ = this.deliveryAddress$.pipe(switchMap((/**
+         * @param {?} address
+         * @return {?}
+         */
+        (address) => this.userService.getCountry(address.country.isocode))), tap((/**
+         * @param {?} country
+         * @return {?}
+         */
+        (country) => {
             if (country === null) {
                 this.userService.loadDeliveryCountries();
             }
-        }), map((country) => country && country.name));
+        })), map((/**
+         * @param {?} country
+         * @return {?}
+         */
+        (country) => country && country.name)));
     }
     /**
      * @param {?} deliveryAddress
@@ -4334,7 +4630,11 @@ class ReviewSubmitComponent {
     getShippingAddressCard(deliveryAddress, countryName) {
         return combineLatest([
             this.translation.translate('addressCard.shipTo'),
-        ]).pipe(map(([textTitle]) => {
+        ]).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([textTitle]) => {
             if (!countryName) {
                 countryName = deliveryAddress.country.isocode;
             }
@@ -4354,7 +4654,7 @@ class ReviewSubmitComponent {
                     deliveryAddress.phone,
                 ],
             };
-        }));
+        })));
     }
     /**
      * @param {?} deliveryMode
@@ -4363,13 +4663,17 @@ class ReviewSubmitComponent {
     getDeliveryModeCard(deliveryMode) {
         return combineLatest([
             this.translation.translate('checkoutShipping.shippingMethod'),
-        ]).pipe(map(([textTitle]) => {
+        ]).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([textTitle]) => {
             return {
                 title: textTitle,
                 textBold: deliveryMode.name,
                 text: [deliveryMode.description],
             };
-        }));
+        })));
     }
     /**
      * @param {?} paymentDetails
@@ -4382,13 +4686,17 @@ class ReviewSubmitComponent {
                 month: paymentDetails.expiryMonth,
                 year: paymentDetails.expiryYear,
             }),
-        ]).pipe(map(([textTitle, textExpires]) => {
+        ]).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([textTitle, textExpires]) => {
             return {
                 title: textTitle,
                 textBold: paymentDetails.accountHolderName,
                 text: [paymentDetails.cardNumber, textExpires],
             };
-        }));
+        })));
     }
 }
 ReviewSubmitComponent.decorators = [
@@ -4408,7 +4716,7 @@ ReviewSubmitComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ReviewSubmitModule {
 }
@@ -4442,7 +4750,7 @@ ReviewSubmitModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class AddressFormComponent {
     /**
@@ -4485,23 +4793,43 @@ class AddressFormComponent {
      */
     ngOnInit() {
         // Fetching countries
-        this.countries$ = this.userService.getDeliveryCountries().pipe(tap(countries => {
+        this.countries$ = this.userService.getDeliveryCountries().pipe(tap((/**
+         * @param {?} countries
+         * @return {?}
+         */
+        countries => {
             if (Object.keys(countries).length === 0) {
                 this.userService.loadDeliveryCountries();
             }
-        }));
+        })));
         // Fetching titles
-        this.titles$ = this.userService.getTitles().pipe(tap(titles => {
+        this.titles$ = this.userService.getTitles().pipe(tap((/**
+         * @param {?} titles
+         * @return {?}
+         */
+        titles => {
             if (Object.keys(titles).length === 0) {
                 this.userService.loadTitles();
             }
-        }), map(titles => {
+        })), map((/**
+         * @param {?} titles
+         * @return {?}
+         */
+        titles => {
             /** @type {?} */
             const noneTitle = { code: '', name: 'Title' };
             return [noneTitle, ...titles];
-        }));
+        })));
         // Fetching regions
-        this.regions$ = this.selectedCountry$.pipe(switchMap(country => this.userService.getRegions(country)), tap(regions => {
+        this.regions$ = this.selectedCountry$.pipe(switchMap((/**
+         * @param {?} country
+         * @return {?}
+         */
+        country => this.userService.getRegions(country))), tap((/**
+         * @param {?} regions
+         * @return {?}
+         */
+        regions => {
             /** @type {?} */
             const regionControl = this.address.get('region.isocode');
             if (regions.length > 0) {
@@ -4510,11 +4838,15 @@ class AddressFormComponent {
             else {
                 regionControl.disable();
             }
-        }));
+        })));
         // verify the new added address
         this.addressVerifySub = this.checkoutService
             .getAddressVerificationResults()
-            .subscribe((results) => {
+            .subscribe((/**
+         * @param {?} results
+         * @return {?}
+         */
+        (results) => {
             if (results === 'FAIL') {
                 this.checkoutService.clearAddressVerificationResults();
             }
@@ -4523,7 +4855,11 @@ class AddressFormComponent {
             }
             else if (results.decision === 'REJECT') {
                 // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
-                if (results.errors.errors.some(error => error.subject === 'titleCode')) {
+                if (results.errors.errors.some((/**
+                 * @param {?} error
+                 * @return {?}
+                 */
+                error => error.subject === 'titleCode'))) {
                     this.globalMessageService.add({ key: 'addressForm.titleRequired' }, GlobalMessageType.MSG_TYPE_ERROR);
                 }
                 else {
@@ -4534,7 +4870,7 @@ class AddressFormComponent {
             else if (results.decision === 'REVIEW') {
                 this.openSuggestedAddress(results);
             }
-        });
+        }));
         if (this.addressData) {
             this.address.patchValue(this.addressData);
             this.countrySelected(this.addressData.country);
@@ -4594,7 +4930,11 @@ class AddressFormComponent {
             this.suggestedAddressModalRef.componentInstance.suggestedAddresses =
                 results.suggestedAddresses;
             this.suggestedAddressModalRef.result
-                .then(address => {
+                .then((/**
+             * @param {?} address
+             * @return {?}
+             */
+            address => {
                 this.checkoutService.clearAddressVerificationResults();
                 if (address) {
                     address = Object.assign({
@@ -4605,8 +4945,11 @@ class AddressFormComponent {
                     this.submitAddress.emit(address);
                 }
                 this.suggestedAddressModalRef = null;
-            })
-                .catch(() => {
+            }))
+                .catch((/**
+             * @return {?}
+             */
+            () => {
                 // this  callback is called when modal is closed with Esc key or clicking backdrop
                 this.checkoutService.clearAddressVerificationResults();
                 /** @type {?} */
@@ -4615,7 +4958,7 @@ class AddressFormComponent {
                 }, this.address.value);
                 this.submitAddress.emit(address);
                 this.suggestedAddressModalRef = null;
-            });
+            }));
         }
     }
     /**
@@ -4656,7 +4999,7 @@ AddressFormComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class AddressFormModule {
 }
@@ -4680,7 +5023,7 @@ AddressFormModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ShippingAddressComponent {
     /**
@@ -4713,31 +5056,47 @@ class ShippingAddressComponent {
         this.checkoutStepUrlPrevious = 'cart';
         this.isLoading$ = this.userService.getAddressesLoading();
         this.existingAddresses$ = this.userService.getAddresses();
-        this.cards$ = combineLatest(this.existingAddresses$, this.selectedAddress$.asObservable(), this.translation.translate('checkoutAddress.defaultShippingAddress'), this.translation.translate('checkoutAddress.shipToThisAddress'), this.translation.translate('addressCard.selected')).pipe(map(([addresses, selected, textDefaultShippingAddress, textShipToThisAddress, textSelected,]) => {
-            return addresses.map(address => {
+        this.cards$ = combineLatest(this.existingAddresses$, this.selectedAddress$.asObservable(), this.translation.translate('checkoutAddress.defaultShippingAddress'), this.translation.translate('checkoutAddress.shipToThisAddress'), this.translation.translate('addressCard.selected')).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([addresses, selected, textDefaultShippingAddress, textShipToThisAddress, textSelected,]) => {
+            return addresses.map((/**
+             * @param {?} address
+             * @return {?}
+             */
+            address => {
                 /** @type {?} */
                 const card = this.getCardContent(address, selected, textDefaultShippingAddress, textShipToThisAddress, textSelected);
                 return {
                     address,
                     card,
                 };
-            });
-        }));
+            }));
+        })));
         this.cartService.loadDetails();
         this.userService.loadAddresses();
         this.setAddressSub = this.checkoutService
             .getDeliveryAddress()
-            .subscribe(address => {
+            .subscribe((/**
+         * @param {?} address
+         * @return {?}
+         */
+        address => {
             this.setAddress = address;
             this.selectedAddress$.next(address);
             if (this.goTo) {
                 this.goNext();
                 this.goTo = null;
             }
-        });
-        this.selectedAddressSub = this.selectedAddress$.subscribe(address => {
+        }));
+        this.selectedAddressSub = this.selectedAddress$.subscribe((/**
+         * @param {?} address
+         * @return {?}
+         */
+        address => {
             this.selectedAddress = address;
-        });
+        }));
     }
     /**
      * @param {?} address
@@ -4870,7 +5229,7 @@ ShippingAddressComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ShippingAddressModule {
 }
@@ -4902,7 +5261,7 @@ ShippingAddressModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CheckoutComponentModule {
 }
@@ -4931,37 +5290,37 @@ CheckoutComponentModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class BreakpointService {
     /**
@@ -4979,7 +5338,11 @@ class BreakpointService {
         if (!this.window) {
             return of(BREAKPOINT.xs);
         }
-        return fromEvent(this.window, 'resize').pipe(debounceTime(300), startWith({ target: this.window }), map(event => this.getBreakpoint(((/** @type {?} */ (event.target))).innerWidth)), distinctUntilChanged());
+        return fromEvent(this.window, 'resize').pipe(debounceTime(300), startWith({ target: this.window }), map((/**
+         * @param {?} event
+         * @return {?}
+         */
+        event => this.getBreakpoint(((/** @type {?} */ (event.target))).innerWidth))), distinctUntilChanged());
     }
     /**
      * @return {?}
@@ -5014,7 +5377,11 @@ class BreakpointService {
         }
         return windowWidth < this.getSize(BREAKPOINT.xs)
             ? BREAKPOINT.xs
-            : this.breakpoints.reverse().find(br => windowWidth >= this.getSize(br));
+            : this.breakpoints.reverse().find((/**
+             * @param {?} br
+             * @return {?}
+             */
+            br => windowWidth >= this.getSize(br)));
     }
     /**
      * @protected
@@ -5041,11 +5408,11 @@ BreakpointService.ctorParameters = () => [
     { type: WindowRef },
     { type: LayoutConfig }
 ];
-/** @nocollapse */ BreakpointService.ngInjectableDef = defineInjectable({ factory: function BreakpointService_Factory() { return new BreakpointService(inject(WindowRef), inject(LayoutConfig)); }, token: BreakpointService, providedIn: "root" });
+/** @nocollapse */ BreakpointService.ngInjectableDef = ɵɵdefineInjectable({ factory: function BreakpointService_Factory() { return new BreakpointService(ɵɵinject(WindowRef), ɵɵinject(LayoutConfig)); }, token: BreakpointService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const defaultLayoutConfig = {
@@ -5145,7 +5512,7 @@ const defaultLayoutConfig = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class HamburgerMenuService {
     /**
@@ -5154,10 +5521,17 @@ class HamburgerMenuService {
     constructor(router) {
         this.isExpanded = new BehaviorSubject(false);
         router.events
-            .pipe(filter(event => event instanceof NavigationStart))
-            .subscribe(() => {
+            .pipe(filter((/**
+         * @param {?} event
+         * @return {?}
+         */
+        event => event instanceof NavigationStart)))
+            .subscribe((/**
+         * @return {?}
+         */
+        () => {
             this.toggle(true);
-        });
+        }));
     }
     /**
      * toggles the expand state of the hamburger menu
@@ -5182,11 +5556,11 @@ HamburgerMenuService.decorators = [
 HamburgerMenuService.ctorParameters = () => [
     { type: Router }
 ];
-/** @nocollapse */ HamburgerMenuService.ngInjectableDef = defineInjectable({ factory: function HamburgerMenuService_Factory() { return new HamburgerMenuService(inject(Router)); }, token: HamburgerMenuService, providedIn: "root" });
+/** @nocollapse */ HamburgerMenuService.ngInjectableDef = ɵɵdefineInjectable({ factory: function HamburgerMenuService_Factory() { return new HamburgerMenuService(ɵɵinject(Router)); }, token: HamburgerMenuService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class HamburgerMenuComponent {
     /**
@@ -5222,7 +5596,7 @@ HamburgerMenuComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class HamburgerMenuModule {
 }
@@ -5243,12 +5617,12 @@ HamburgerMenuModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {string} */
 const OutletPosition = {
@@ -5259,7 +5633,7 @@ const OutletPosition = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class OutletService {
     constructor() {
@@ -5311,11 +5685,11 @@ OutletService.decorators = [
                 providedIn: 'root',
             },] }
 ];
-/** @nocollapse */ OutletService.ngInjectableDef = defineInjectable({ factory: function OutletService_Factory() { return new OutletService(); }, token: OutletService, providedIn: "root" });
+/** @nocollapse */ OutletService.ngInjectableDef = ɵɵdefineInjectable({ factory: function OutletService_Factory() { return new OutletService(); }, token: OutletService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class OutletRefDirective {
     /**
@@ -5350,7 +5724,7 @@ OutletRefDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class OutletRefModule {
 }
@@ -5364,7 +5738,7 @@ OutletRefModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class OutletDirective {
     /**
@@ -5448,7 +5822,7 @@ OutletDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class OutletModule {
 }
@@ -5463,12 +5837,12 @@ OutletModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CustomFormValidators {
     /**
@@ -5509,7 +5883,7 @@ class CustomFormValidators {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class LoginFormComponent {
     /**
@@ -5539,12 +5913,16 @@ class LoginFormComponent {
     login() {
         this.auth.authorize(this.form.controls.userId.value, this.form.controls.password.value);
         if (!this.sub) {
-            this.sub = this.auth.getUserToken().subscribe(data => {
+            this.sub = this.auth.getUserToken().subscribe((/**
+             * @param {?} data
+             * @return {?}
+             */
+            data => {
                 if (data && data.access_token) {
                     this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
                     this.authRedirectService.redirect();
                 }
-            });
+            }));
         }
     }
     /**
@@ -5572,16 +5950,16 @@ LoginFormComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class CmsModule$1 {
+class CmsModule {
 }
-CmsModule$1.decorators = [
+CmsModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
                     CommonModule,
                     ConfigModule.withConfig(defaultCmsModuleConfig),
-                    CmsModule,
+                    CmsModule$1,
                 ],
                 providers: [{ provide: CmsConfig, useExisting: Config }],
             },] }
@@ -5589,7 +5967,7 @@ CmsModule$1.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class LoginFormModule {
 }
@@ -5600,7 +5978,7 @@ LoginFormModule.decorators = [
                     FormsModule,
                     ReactiveFormsModule,
                     RouterModule,
-                    CmsModule$1,
+                    CmsModule,
                     UserModule,
                     UrlModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
@@ -5621,7 +5999,7 @@ LoginFormModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class LoginComponent {
     /**
@@ -5636,14 +6014,18 @@ class LoginComponent {
      * @return {?}
      */
     ngOnInit() {
-        this.user$ = this.auth.getUserToken().pipe(switchMap(token => {
+        this.user$ = this.auth.getUserToken().pipe(switchMap((/**
+         * @param {?} token
+         * @return {?}
+         */
+        token => {
             if (token && !!token.access_token) {
                 return this.userService.get();
             }
             else {
                 return of(undefined);
             }
-        }));
+        })));
     }
 }
 LoginComponent.decorators = [
@@ -5660,7 +6042,7 @@ LoginComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ComponentWrapperDirective {
     /**
@@ -5813,7 +6195,7 @@ ComponentWrapperDirective.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PageComponentModule {
 }
@@ -5828,7 +6210,7 @@ PageComponentModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PageSlotComponent {
     /**
@@ -5846,12 +6228,38 @@ class PageSlotComponent {
         /**
          * observable with `ContentSlotData` for the current position
          */
-        this.slot$ = this.position$.pipe(switchMap(position => this.cmsService.getContentSlot(position)), tap(slot => this.addSmartEditSlotClass(slot)));
+        this.slot$ = this.position$.pipe(switchMap((/**
+         * @param {?} position
+         * @return {?}
+         */
+        position => this.cmsService.getContentSlot(position))), tap((/**
+         * @param {?} slot
+         * @return {?}
+         */
+        slot => this.addSmartEditSlotClass(slot))));
         /**
          * observable with components (`ContentSlotComponentData[]`)
          * for the current slot
          */
-        this.components$ = this.slot$.pipe(map(slot => (slot && slot.components ? slot.components : [])), distinctUntilChanged((a, b) => a.length === b.length && !a.find((el, index) => el.uid !== b[index].uid)), tap(components => this.addComponentClass(components)));
+        this.components$ = this.slot$.pipe(map((/**
+         * @param {?} slot
+         * @return {?}
+         */
+        slot => (slot && slot.components ? slot.components : []))), distinctUntilChanged((/**
+         * @param {?} a
+         * @param {?} b
+         * @return {?}
+         */
+        (a, b) => a.length === b.length && !a.find((/**
+         * @param {?} el
+         * @param {?} index
+         * @return {?}
+         */
+        (el, index) => el.uid !== b[index].uid)))), tap((/**
+         * @param {?} components
+         * @return {?}
+         */
+        components => this.addComponentClass(components))));
     }
     /**
      * @param {?} position
@@ -5913,7 +6321,7 @@ PageSlotComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PageSlotModule {
 }
@@ -5928,7 +6336,7 @@ PageSlotModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class LoginModule {
 }
@@ -5957,7 +6365,7 @@ LoginModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class LogoutGuard {
     /**
@@ -5982,11 +6390,15 @@ class LogoutGuard {
             id: this.semanticPathService.get('logout'),
             type: PageType.CONTENT_PAGE,
         })
-            .pipe(tap(hasPage => {
+            .pipe(tap((/**
+         * @param {?} hasPage
+         * @return {?}
+         */
+        hasPage => {
             if (!hasPage) {
                 this.routing.go({ cxRoute: 'home' });
             }
-        }));
+        })));
     }
     /**
      * @protected
@@ -6008,11 +6420,11 @@ LogoutGuard.ctorParameters = () => [
     { type: RoutingService },
     { type: SemanticPathService }
 ];
-/** @nocollapse */ LogoutGuard.ngInjectableDef = defineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(inject(AuthService), inject(CmsService), inject(RoutingService), inject(SemanticPathService)); }, token: LogoutGuard, providedIn: "root" });
+/** @nocollapse */ LogoutGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(ɵɵinject(AuthService), ɵɵinject(CmsService), ɵɵinject(RoutingService), ɵɵinject(SemanticPathService)); }, token: LogoutGuard, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const cartComponents = {
@@ -6045,7 +6457,7 @@ const defaultCartPageConfig = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const headerComponents = {
@@ -6158,7 +6570,7 @@ const defaultPageHeaderConfig = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const defaultPdpComponents = {
@@ -6177,7 +6589,7 @@ const defaultPdpSlots = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @return {?}
@@ -6194,12 +6606,12 @@ function defaultCmsContentConfig() {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PageLayoutService {
     /**
@@ -6221,7 +6633,15 @@ class PageLayoutService {
      * @return {?}
      */
     getSlots(section) {
-        return this.breakpointService.breakpoint$.pipe(switchMap(breakpoint => this.page$.pipe(map(page => {
+        return this.breakpointService.breakpoint$.pipe(switchMap((/**
+         * @param {?} breakpoint
+         * @return {?}
+         */
+        breakpoint => this.page$.pipe(map((/**
+         * @param {?} page
+         * @return {?}
+         */
+        page => {
             /** @type {?} */
             const config = this.getSlotConfig(page.template, 'slots', section, breakpoint);
             if (config && config.slots) {
@@ -6235,7 +6655,7 @@ class PageLayoutService {
                 this.logMissingLayoutConfig(page, section);
                 return [];
             }
-        }))), distinctUntilChanged());
+        }))))), distinctUntilChanged());
     }
     /**
      * @return {?}
@@ -6247,7 +6667,15 @@ class PageLayoutService {
      * @return {?}
      */
     get templateName$() {
-        return this.page$.pipe(filter(page => !!page.template), map((page) => page.template));
+        return this.page$.pipe(filter((/**
+         * @param {?} page
+         * @return {?}
+         */
+        page => !!page.template)), map((/**
+         * @param {?} page
+         * @return {?}
+         */
+        (page) => page.template)));
     }
     /**
      * load slots from the layout configuration. The breakpoint is used
@@ -6379,7 +6807,7 @@ PageLayoutService.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PageLayoutComponent {
     /**
@@ -6392,10 +6820,22 @@ class PageLayoutComponent {
         this.renderer = renderer;
         this.pageLayoutService = pageLayoutService;
         this.section$ = new BehaviorSubject(undefined);
-        this.layoutName$ = this.section$.pipe(switchMap(section => section ? of(section) : this.pageLayoutService.templateName$), tap(name => {
+        this.layoutName$ = this.section$.pipe(switchMap((/**
+         * @param {?} section
+         * @return {?}
+         */
+        section => section ? of(section) : this.pageLayoutService.templateName$)), tap((/**
+         * @param {?} name
+         * @return {?}
+         */
+        name => {
             this.styleClass = name;
-        }));
-        this.slots$ = this.section$.pipe(switchMap(section => this.pageLayoutService.getSlots(section)));
+        })));
+        this.slots$ = this.section$.pipe(switchMap((/**
+         * @param {?} section
+         * @return {?}
+         */
+        section => this.pageLayoutService.getSlots(section))));
     }
     /**
      * @param {?} value
@@ -6435,7 +6875,7 @@ PageLayoutComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PageLayoutModule {
 }
@@ -6450,12 +6890,12 @@ PageLayoutModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 const ɵ0 = { cxRoute: 'logout' };
 class LogoutModule {
@@ -6478,7 +6918,7 @@ LogoutModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class RegisterComponent {
     /**
@@ -6512,11 +6952,15 @@ class RegisterComponent {
      * @return {?}
      */
     ngOnInit() {
-        this.titles$ = this.userService.getTitles().pipe(tap(titles => {
+        this.titles$ = this.userService.getTitles().pipe(tap((/**
+         * @param {?} titles
+         * @return {?}
+         */
+        titles => {
             if (Object.keys(titles).length === 0) {
                 this.userService.loadTitles();
             }
-        }));
+        })));
     }
     /**
      * @return {?}
@@ -6533,23 +6977,39 @@ class RegisterComponent {
         };
         this.userService.register(userRegisterFormData);
         if (!this.subscription) {
-            this.subscription = this.auth.getUserToken().subscribe(data => {
+            this.subscription = this.auth.getUserToken().subscribe((/**
+             * @param {?} data
+             * @return {?}
+             */
+            data => {
                 if (data && data.access_token) {
                     this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
                     this.authRedirectService.redirect();
                 }
-            });
+            }));
         }
         // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
         this.globalMessageService
             .get()
-            .pipe(filter(data => Object.keys(data).length > 0))
-            .subscribe((globalMessageEntities) => {
-            if (globalMessageEntities[GlobalMessageType.MSG_TYPE_ERROR].some(message => message === 'This field is required.')) {
+            .pipe(filter((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => Object.keys(data).length > 0)))
+            .subscribe((/**
+         * @param {?} globalMessageEntities
+         * @return {?}
+         */
+        (globalMessageEntities) => {
+            if (globalMessageEntities[GlobalMessageType.MSG_TYPE_ERROR].some((/**
+             * @param {?} message
+             * @return {?}
+             */
+            message => message === 'This field is required.'))) {
                 this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
                 this.globalMessageService.add({ key: 'register.titleRequired' }, GlobalMessageType.MSG_TYPE_ERROR);
             }
-        });
+        }));
     }
     /**
      * @return {?}
@@ -6587,7 +7047,7 @@ RegisterComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class RegisterComponentModule {
 }
@@ -6618,7 +7078,7 @@ RegisterComponentModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class UserComponentModule {
 }
@@ -6640,12 +7100,12 @@ UserComponentModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CmsMappingService {
     /**
@@ -6690,7 +7150,11 @@ class CmsMappingService {
         /** @type {?} */
         const guards = new Set();
         for (const componentType of componentTypes) {
-            this.getGuardsForComponent(componentType).forEach(guard => guards.add(guard));
+            this.getGuardsForComponent(componentType).forEach((/**
+             * @param {?} guard
+             * @return {?}
+             */
+            guard => guards.add(guard)));
         }
         return Array.from(guards);
     }
@@ -6703,7 +7167,11 @@ class CmsMappingService {
         const i18nKeys = new Set();
         for (const componentType of componentTypes) {
             if (this.isComponentEnabled(componentType)) {
-                this.getI18nKeysForComponent(componentType).forEach(key => i18nKeys.add(key));
+                this.getI18nKeysForComponent(componentType).forEach((/**
+                 * @param {?} key
+                 * @return {?}
+                 */
+                key => i18nKeys.add(key)));
             }
         }
         return Array.from(i18nKeys);
@@ -6749,11 +7217,11 @@ CmsMappingService.ctorParameters = () => [
     { type: CmsConfig },
     { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ];
-/** @nocollapse */ CmsMappingService.ngInjectableDef = defineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(inject(CmsConfig), inject(PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
+/** @nocollapse */ CmsMappingService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(ɵɵinject(CmsConfig), ɵɵinject(PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CmsGuardsService {
     /**
@@ -6775,7 +7243,11 @@ class CmsGuardsService {
         const guards = this.cmsMapping.getGuardsForComponents(componentTypes);
         if (guards.length) {
             /** @type {?} */
-            const canActivateObservables = guards.map(guardClass => {
+            const canActivateObservables = guards.map((/**
+             * @param {?} guardClass
+             * @return {?}
+             */
+            guardClass => {
                 /** @type {?} */
                 const guard = this.injector.get(guardClass, null);
                 if (isCanActivate(guard)) {
@@ -6784,8 +7256,12 @@ class CmsGuardsService {
                 else {
                     throw new Error('Invalid CanActivate guard in cmsMapping');
                 }
-            });
-            return concat(...canActivateObservables).pipe(skipWhile((canActivate) => canActivate === true), endWith(true), first());
+            }));
+            return concat(...canActivateObservables).pipe(skipWhile((/**
+             * @param {?} canActivate
+             * @return {?}
+             */
+            (canActivate) => canActivate === true)), endWith(true), first());
         }
         else {
             return of(true);
@@ -6802,7 +7278,7 @@ CmsGuardsService.ctorParameters = () => [
     { type: CmsMappingService },
     { type: Injector }
 ];
-/** @nocollapse */ CmsGuardsService.ngInjectableDef = defineInjectable({ factory: function CmsGuardsService_Factory() { return new CmsGuardsService(inject(CmsMappingService), inject(INJECTOR)); }, token: CmsGuardsService, providedIn: "root" });
+/** @nocollapse */ CmsGuardsService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsGuardsService_Factory() { return new CmsGuardsService(ɵɵinject(CmsMappingService), ɵɵinject(INJECTOR)); }, token: CmsGuardsService, providedIn: "root" });
 /**
  * @template T
  * @param {?} value
@@ -6842,7 +7318,7 @@ function isFunction(v) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CmsI18nService {
     /**
@@ -6881,11 +7357,11 @@ CmsI18nService.ctorParameters = () => [
     { type: TranslationService },
     { type: TranslationChunkService }
 ];
-/** @nocollapse */ CmsI18nService.ngInjectableDef = defineInjectable({ factory: function CmsI18nService_Factory() { return new CmsI18nService(inject(CmsMappingService), inject(TranslationService), inject(TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
+/** @nocollapse */ CmsI18nService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsI18nService_Factory() { return new CmsI18nService(ɵɵinject(CmsMappingService), ɵɵinject(TranslationService), ɵɵinject(TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CmsRoutesService {
     /**
@@ -6909,7 +7385,11 @@ class CmsRoutesService {
         /** @type {?} */
         const routePath = url.substr(1);
         return (isCmsDrivenRoute &&
-            !!this.router.config.find((route) => route.data && route.data.cxCmsRouteContext && route.path === routePath));
+            !!this.router.config.find((/**
+             * @param {?} route
+             * @return {?}
+             */
+            (route) => route.data && route.data.cxCmsRouteContext && route.path === routePath)));
     }
     /**
      * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
@@ -6968,11 +7448,11 @@ CmsRoutesService.ctorParameters = () => [
     { type: Router },
     { type: CmsMappingService }
 ];
-/** @nocollapse */ CmsRoutesService.ngInjectableDef = defineInjectable({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(inject(Router), inject(CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
+/** @nocollapse */ CmsRoutesService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(ɵɵinject(Router), ɵɵinject(CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CmsPageGuard {
     /**
@@ -6997,9 +7477,17 @@ class CmsPageGuard {
      * @return {?}
      */
     canActivate(route, state) {
-        return this.routingService.getNextPageContext().pipe(switchMap(pageContext => this.cmsService.hasPage(pageContext, true).pipe(first(), withLatestFrom(of(pageContext)))), switchMap(([hasPage, pageContext]) => hasPage
+        return this.routingService.getNextPageContext().pipe(switchMap((/**
+         * @param {?} pageContext
+         * @return {?}
+         */
+        pageContext => this.cmsService.hasPage(pageContext, true).pipe(first(), withLatestFrom(of(pageContext))))), switchMap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([hasPage, pageContext]) => hasPage
             ? this.resolveCmsPageLogic(pageContext, route, state)
-            : this.handleNotFoundPage(pageContext, route, state)));
+            : this.handleNotFoundPage(pageContext, route, state))));
     }
     /**
      * @private
@@ -7009,20 +7497,32 @@ class CmsPageGuard {
      * @return {?}
      */
     resolveCmsPageLogic(pageContext, route, state) {
-        return this.cmsService.getPageComponentTypes(pageContext).pipe(switchMap(componentTypes => this.cmsGuards
+        return this.cmsService.getPageComponentTypes(pageContext).pipe(switchMap((/**
+         * @param {?} componentTypes
+         * @return {?}
+         */
+        componentTypes => this.cmsGuards
             .cmsPageCanActivate(componentTypes, route, state)
-            .pipe(withLatestFrom(of(componentTypes)))), tap(([canActivate, componentTypes]) => {
+            .pipe(withLatestFrom(of(componentTypes))))), tap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([canActivate, componentTypes]) => {
             if (canActivate === true) {
                 this.cmsI18n.loadChunksForComponents(componentTypes);
             }
-        }), map(([canActivate, componentTypes]) => {
+        })), map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([canActivate, componentTypes]) => {
             if (canActivate === true &&
                 !route.data.cxCmsRouteContext &&
                 !this.cmsRoutes.cmsRouteExist(pageContext.id)) {
                 return this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url);
             }
             return canActivate;
-        }));
+        })));
     }
     /**
      * @private
@@ -7037,16 +7537,35 @@ class CmsPageGuard {
             type: PageType.CONTENT_PAGE,
             id: this.semanticPathService.get('notFound'),
         };
-        return this.cmsService.hasPage(notFoundCmsPageContext).pipe(switchMap(hasNotFoundPage => {
+        return this.cmsService.hasPage(notFoundCmsPageContext).pipe(switchMap((/**
+         * @param {?} hasNotFoundPage
+         * @return {?}
+         */
+        hasNotFoundPage => {
             if (hasNotFoundPage) {
-                return this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(tap(notFoundIndex => {
+                return this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(tap((/**
+                 * @param {?} notFoundIndex
+                 * @return {?}
+                 */
+                notFoundIndex => {
                     this.cmsService.setPageFailIndex(pageContext, notFoundIndex);
-                }), switchMap(notFoundIndex => this.cmsService.getPageIndex(pageContext).pipe(
+                })), switchMap((/**
+                 * @param {?} notFoundIndex
+                 * @return {?}
+                 */
+                notFoundIndex => this.cmsService.getPageIndex(pageContext).pipe(
                 // we have to wait for page index update
-                filter(index => index === notFoundIndex))), switchMap(() => this.resolveCmsPageLogic(pageContext, route, state)));
+                filter((/**
+                 * @param {?} index
+                 * @return {?}
+                 */
+                index => index === notFoundIndex))))), switchMap((/**
+                 * @return {?}
+                 */
+                () => this.resolveCmsPageLogic(pageContext, route, state))));
             }
             return of(false);
-        }));
+        })));
     }
 }
 CmsPageGuard.guardName = 'CmsPageGuard';
@@ -7064,16 +7583,16 @@ CmsPageGuard.ctorParameters = () => [
     { type: CmsGuardsService },
     { type: SemanticPathService }
 ];
-/** @nocollapse */ CmsPageGuard.ngInjectableDef = defineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(inject(RoutingService), inject(CmsService), inject(CmsRoutesService), inject(CmsI18nService), inject(CmsGuardsService), inject(SemanticPathService)); }, token: CmsPageGuard, providedIn: "root" });
+/** @nocollapse */ CmsPageGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(ɵɵinject(RoutingService), ɵɵinject(CmsService), ɵɵinject(CmsRoutesService), ɵɵinject(CmsI18nService), ɵɵinject(CmsGuardsService), ɵɵinject(SemanticPathService)); }, token: CmsPageGuard, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @abstract
@@ -7090,7 +7609,7 @@ const defaultPWAModuleConfig = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class AddToHomeScreenService {
     /**
@@ -7113,16 +7632,23 @@ class AddToHomeScreenService {
      */
     init() {
         if (this.winRef.nativeWindow) {
-            this.winRef.nativeWindow.addEventListener('beforeinstallprompt', event => {
+            this.winRef.nativeWindow.addEventListener('beforeinstallprompt', (/**
+             * @param {?} event
+             * @return {?}
+             */
+            event => {
                 event.preventDefault();
                 this.deferredEvent = event;
                 this.enableAddToHomeScreen();
-            });
-            this.winRef.nativeWindow.addEventListener('appinstalled', () => {
+            }));
+            this.winRef.nativeWindow.addEventListener('appinstalled', (/**
+             * @return {?}
+             */
+            () => {
                 this.globalMessageService.add({ key: 'pwa.addedToHomeScreen' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
                 this.disableAddToHomeScreen();
                 this.deferredEvent = null;
-            });
+            }));
         }
     }
     /**
@@ -7158,7 +7684,7 @@ AddToHomeScreenService.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @abstract
@@ -7186,7 +7712,7 @@ class AddToHomeScreenComponent {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class AddToHomeScreenBannerComponent extends AddToHomeScreenComponent {
     /**
@@ -7210,7 +7736,7 @@ AddToHomeScreenBannerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class AddToHomeScreenBtnComponent extends AddToHomeScreenComponent {
     /**
@@ -7234,7 +7760,7 @@ AddToHomeScreenBtnComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @param {?} pwaConfig
@@ -7249,7 +7775,10 @@ function pwaConfigurationFactory(pwaConfig) {
  */
 function pwaFactory(addToHomeScreenService) {
     /** @type {?} */
-    const result = () => addToHomeScreenService;
+    const result = (/**
+     * @return {?}
+     */
+    () => addToHomeScreenService);
     return result;
 }
 class PwaModule {
@@ -7265,7 +7794,7 @@ PwaModule.decorators = [
                 providers: [
                     { provide: PWAModuleConfig, useExisting: Config },
                     {
-                        provide: ɵangular_packages_service_worker_service_worker_b,
+                        provide: SwRegistrationOptions,
                         useFactory: pwaConfigurationFactory,
                         deps: [Config],
                     },
@@ -7284,12 +7813,12 @@ PwaModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const cmsRoute = {
@@ -7303,17 +7832,20 @@ const cmsRoute = {
  */
 function addCmsRoute(injector) {
     /** @type {?} */
-    const result = () => {
+    const result = (/**
+     * @return {?}
+     */
+    () => {
         /** @type {?} */
         const router = injector.get(Router);
         router.config.push(cmsRoute);
-    };
+    });
     return result;
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 const ɵ0$1 = addCmsRoute;
 class CmsRouteModule {
@@ -7333,17 +7865,17 @@ CmsRouteModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class SeoMetaService {
     /**
@@ -7363,7 +7895,11 @@ class SeoMetaService {
         this.pageMetaService
             .getMeta()
             .pipe(filter(Boolean))
-            .subscribe((meta) => (this.meta = meta));
+            .subscribe((/**
+         * @param {?} meta
+         * @return {?}
+         */
+        (meta) => (this.meta = meta)));
     }
     /**
      * @protected
@@ -7434,11 +7970,11 @@ SeoMetaService.ctorParameters = () => [
     { type: Meta },
     { type: PageMetaService }
 ];
-/** @nocollapse */ SeoMetaService.ngInjectableDef = defineInjectable({ factory: function SeoMetaService_Factory() { return new SeoMetaService(inject(Title), inject(Meta), inject(PageMetaService)); }, token: SeoMetaService, providedIn: "root" });
+/** @nocollapse */ SeoMetaService.ngInjectableDef = ɵɵdefineInjectable({ factory: function SeoMetaService_Factory() { return new SeoMetaService(ɵɵinject(Title), ɵɵinject(Meta), ɵɵinject(PageMetaService)); }, token: SeoMetaService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const htmlLangProvider = {
@@ -7455,17 +7991,24 @@ const htmlLangProvider = {
  */
 function setHtmlLangAttribute(winRef, languageService) {
     /** @type {?} */
-    const result = () => {
-        languageService.getActive().subscribe(lang => {
+    const result = (/**
+     * @return {?}
+     */
+    () => {
+        languageService.getActive().subscribe((/**
+         * @param {?} lang
+         * @return {?}
+         */
+        lang => {
             winRef.document.documentElement.lang = lang;
-        });
-    };
+        }));
+    });
     return result;
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @param {?} injector
@@ -7473,11 +8016,14 @@ function setHtmlLangAttribute(winRef, languageService) {
  */
 function initSeoService(injector) {
     /** @type {?} */
-    const result = () => {
+    const result = (/**
+     * @return {?}
+     */
+    () => {
         /** @type {?} */
         const service = injector.get(SeoMetaService);
         service.init();
-    };
+    });
     return result;
 }
 class SeoModule {
@@ -7498,17 +8044,17 @@ SeoModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class StorefrontComponent {
     /**
@@ -7526,10 +8072,14 @@ class StorefrontComponent {
     ngOnInit() {
         this.navigateSubscription = this.routingService
             .isNavigating()
-            .subscribe(val => {
+            .subscribe((/**
+         * @param {?} val
+         * @return {?}
+         */
+        val => {
             this.startNavigating = val === true;
             this.stopNavigating = val === false;
-        });
+        }));
     }
     /**
      * @return {?}
@@ -7564,7 +8114,7 @@ StorefrontComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class MainModule {
 }
@@ -7575,7 +8125,7 @@ MainModule.decorators = [
                     RouterModule,
                     GlobalMessageComponentModule,
                     UserComponentModule,
-                    CmsModule$1,
+                    CmsModule,
                     OutletRefModule,
                     PwaModule,
                     PageLayoutModule,
@@ -7589,7 +8139,7 @@ MainModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const layoutModules = [OutletRefModule];
@@ -7609,12 +8159,12 @@ LayoutModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class BannerComponent {
     /**
@@ -7638,7 +8188,7 @@ BannerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class BannerModule {
 }
@@ -7670,7 +8220,7 @@ BannerModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class LinkComponent {
     /**
@@ -7694,7 +8244,7 @@ LinkComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class LinkModule {
 }
@@ -7718,7 +8268,7 @@ LinkModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ParagraphComponent {
     /**
@@ -7742,7 +8292,7 @@ ParagraphComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CmsParagraphModule {
 }
@@ -7765,7 +8315,7 @@ CmsParagraphModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class TabParagraphContainerComponent {
     /**
@@ -7776,12 +8326,24 @@ class TabParagraphContainerComponent {
         this.componentData = componentData;
         this.cmsService = cmsService;
         this.activeTabNum = 0;
-        this.components$ = this.componentData.data$.pipe(switchMap(data => combineLatest(data.components.split(' ').map(component => this.cmsService.getComponentData(component).pipe(map(tab => {
+        this.components$ = this.componentData.data$.pipe(switchMap((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => combineLatest(data.components.split(' ').map((/**
+         * @param {?} component
+         * @return {?}
+         */
+        component => this.cmsService.getComponentData(component).pipe(map((/**
+         * @param {?} tab
+         * @return {?}
+         */
+        tab => {
             if (!tab.flexType) {
                 tab.flexType = tab.typeCode;
             }
             return Object.assign({}, tab, { title: `CMSTabParagraphContainer.tabs.${tab.uid}` });
-        }))))));
+        })))))))));
     }
     /**
      * @param {?} tabNum
@@ -7806,7 +8368,7 @@ TabParagraphContainerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class TabParagraphContainerModule {
 }
@@ -7831,12 +8393,12 @@ TabParagraphContainerModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class AddressBookComponentService {
     /**
@@ -7889,7 +8451,7 @@ AddressBookComponentService.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class AddressBookComponent {
     /**
@@ -7966,7 +8528,7 @@ AddressBookComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class AddressCardComponent {
     /**
@@ -8026,7 +8588,7 @@ AddressCardComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class AddressBookModule {
 }
@@ -8063,12 +8625,12 @@ AddressBookModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CloseAccountModalComponent {
     /**
@@ -8097,7 +8659,11 @@ class CloseAccountModalComponent {
         this.userService.resetRemoveUserProcessState();
         this.subscription.add(this.userService
             .getRemoveUserResultSuccess()
-            .subscribe(success => this.onSuccess(success)));
+            .subscribe((/**
+         * @param {?} success
+         * @return {?}
+         */
+        success => this.onSuccess(success))));
         this.isLoading$ = this.userService.getRemoveUserResultLoading();
     }
     /**
@@ -8110,9 +8676,13 @@ class CloseAccountModalComponent {
             this.translationService
                 .translate('closeAccount.accountClosedSuccessfully')
                 .pipe(first())
-                .subscribe(text => {
+                .subscribe((/**
+             * @param {?} text
+             * @return {?}
+             */
+            text => {
                 this.globalMessageService.add(text, GlobalMessageType.MSG_TYPE_CONFIRMATION);
-            });
+            }));
             this.routingService.go({ cxRoute: 'home' });
         }
     }
@@ -8158,7 +8728,7 @@ CloseAccountModalComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CloseAccountComponent {
     /**
@@ -8190,7 +8760,7 @@ CloseAccountComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CloseAccountModule {
 }
@@ -8220,12 +8790,12 @@ CloseAccountModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ConsentManagementFormComponent {
     constructor() {
@@ -8270,7 +8840,7 @@ ConsentManagementFormComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ConsentManagementComponent {
     /**
@@ -8288,7 +8858,11 @@ class ConsentManagementComponent {
      * @return {?}
      */
     ngOnInit() {
-        this.loading$ = combineLatest(this.userService.getConsentsResultLoading(), this.userService.getGiveConsentResultLoading(), this.userService.getWithdrawConsentResultLoading()).pipe(map(([consentLoading, giveConsentLoading, withdrawConsentLoading]) => consentLoading || giveConsentLoading || withdrawConsentLoading));
+        this.loading$ = combineLatest(this.userService.getConsentsResultLoading(), this.userService.getGiveConsentResultLoading(), this.userService.getWithdrawConsentResultLoading()).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([consentLoading, giveConsentLoading, withdrawConsentLoading]) => consentLoading || giveConsentLoading || withdrawConsentLoading)));
         this.consentListInit();
         this.giveConsentInit();
         this.withdrawConsentInit();
@@ -8298,11 +8872,15 @@ class ConsentManagementComponent {
      * @return {?}
      */
     consentListInit() {
-        this.templateList$ = this.userService.getConsents().pipe(tap(templateList => {
+        this.templateList$ = this.userService.getConsents().pipe(tap((/**
+         * @param {?} templateList
+         * @return {?}
+         */
+        templateList => {
             if (!this.consentsExists(templateList)) {
                 this.userService.loadConsents();
             }
-        }));
+        })));
     }
     /**
      * @private
@@ -8312,7 +8890,11 @@ class ConsentManagementComponent {
         this.userService.resetGiveConsentProcessState();
         this.subscriptions.add(this.userService
             .getGiveConsentResultSuccess()
-            .subscribe(success => this.onConsentGivenSuccess(success)));
+            .subscribe((/**
+         * @param {?} success
+         * @return {?}
+         */
+        success => this.onConsentGivenSuccess(success))));
     }
     /**
      * @private
@@ -8322,12 +8904,24 @@ class ConsentManagementComponent {
         this.userService.resetWithdrawConsentProcessState();
         this.subscriptions.add(this.userService
             .getWithdrawConsentResultLoading()
-            .pipe(skipWhile(Boolean), withLatestFrom(this.userService.getWithdrawConsentResultSuccess()), map(([, withdrawalSuccess]) => withdrawalSuccess), tap(withdrawalSuccess => {
+            .pipe(skipWhile(Boolean), withLatestFrom(this.userService.getWithdrawConsentResultSuccess()), map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([, withdrawalSuccess]) => withdrawalSuccess)), tap((/**
+         * @param {?} withdrawalSuccess
+         * @return {?}
+         */
+        withdrawalSuccess => {
             if (withdrawalSuccess) {
                 this.userService.loadConsents();
             }
-        }))
-            .subscribe(withdrawalSuccess => this.onConsentWithdrawnSuccess(withdrawalSuccess)));
+        })))
+            .subscribe((/**
+         * @param {?} withdrawalSuccess
+         * @return {?}
+         */
+        withdrawalSuccess => this.onConsentWithdrawnSuccess(withdrawalSuccess))));
     }
     /**
      * @private
@@ -8401,7 +8995,7 @@ ConsentManagementComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ConsentManagementModule {
 }
@@ -8430,12 +9024,12 @@ ConsentManagementModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ForgotPasswordComponent {
     /**
@@ -8488,7 +9082,7 @@ ForgotPasswordComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ForgotPasswordModule {
 }
@@ -8517,7 +9111,7 @@ ForgotPasswordModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class OrderDetailsService {
     /**
@@ -8529,21 +9123,32 @@ class OrderDetailsService {
         this.routingService = routingService;
         this.orderCode$ = this.routingService
             .getRouterState()
-            .pipe(map(routingData => routingData.state.params.orderCode));
-        this.orderLoad$ = this.orderCode$.pipe(tap(orderCode => {
+            .pipe(map((/**
+         * @param {?} routingData
+         * @return {?}
+         */
+        routingData => routingData.state.params.orderCode)));
+        this.orderLoad$ = this.orderCode$.pipe(tap((/**
+         * @param {?} orderCode
+         * @return {?}
+         */
+        orderCode => {
             if (orderCode) {
                 this.userService.loadOrderDetails(orderCode);
             }
             else {
                 this.userService.clearOrderDetails();
             }
-        }), shareReplay({ bufferSize: 1, refCount: true }));
+        })), shareReplay({ bufferSize: 1, refCount: true }));
     }
     /**
      * @return {?}
      */
     getOrderDetails() {
-        return this.orderLoad$.pipe(switchMap(() => this.userService.getOrderDetails()));
+        return this.orderLoad$.pipe(switchMap((/**
+         * @return {?}
+         */
+        () => this.userService.getOrderDetails())));
     }
 }
 OrderDetailsService.decorators = [
@@ -8557,7 +9162,7 @@ OrderDetailsService.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class OrderDetailHeadlineComponent {
     /**
@@ -8586,7 +9191,7 @@ OrderDetailHeadlineComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class OrderDetailItemsComponent {
     /**
@@ -8608,9 +9213,13 @@ class OrderDetailItemsComponent {
     getConsignmentProducts(consignment) {
         /** @type {?} */
         const products = [];
-        consignment.entries.forEach(element => {
+        consignment.entries.forEach((/**
+         * @param {?} element
+         * @return {?}
+         */
+        element => {
             products.push(element.orderEntry);
-        });
+        }));
         return products;
     }
 }
@@ -8627,7 +9236,7 @@ OrderDetailItemsComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class OrderDetailShippingComponent {
     /**
@@ -8651,7 +9260,11 @@ class OrderDetailShippingComponent {
     getAddressCardContent(address) {
         return combineLatest([
             this.translation.translate('addressCard.shipTo'),
-        ]).pipe(map(([textTitle]) => {
+        ]).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([textTitle]) => {
             return {
                 title: textTitle,
                 textBold: `${address.firstName} ${address.lastName}`,
@@ -8662,7 +9275,7 @@ class OrderDetailShippingComponent {
                     address.phone,
                 ],
             };
-        }));
+        })));
     }
     /**
      * @param {?} billingAddress
@@ -8671,7 +9284,11 @@ class OrderDetailShippingComponent {
     getBillingAddressCardContent(billingAddress) {
         return combineLatest([
             this.translation.translate('addressCard.billTo'),
-        ]).pipe(map(([textTitle]) => {
+        ]).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([textTitle]) => {
             return {
                 title: textTitle,
                 textBold: `${billingAddress.firstName} ${billingAddress.lastName}`,
@@ -8682,7 +9299,7 @@ class OrderDetailShippingComponent {
                     billingAddress.phone,
                 ],
             };
-        }));
+        })));
     }
     /**
      * @param {?} payment
@@ -8695,13 +9312,17 @@ class OrderDetailShippingComponent {
                 month: payment.expiryMonth,
                 year: payment.expiryYear,
             }),
-        ]).pipe(map(([textTitle, textExpires]) => {
+        ]).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([textTitle, textExpires]) => {
             return {
                 title: textTitle,
                 textBold: payment.accountHolderName,
                 text: [payment.cardType.name, payment.cardNumber, textExpires],
             };
-        }));
+        })));
     }
     /**
      * @param {?} shipping
@@ -8710,13 +9331,17 @@ class OrderDetailShippingComponent {
     getShippingMethodCardContent(shipping) {
         return combineLatest([
             this.translation.translate('checkoutShipping.shippingMethod'),
-        ]).pipe(map(([textTitle]) => {
+        ]).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([textTitle]) => {
             return {
                 title: textTitle,
                 textBold: shipping.name,
                 text: [shipping.description],
             };
-        }));
+        })));
     }
 }
 OrderDetailShippingComponent.decorators = [
@@ -8733,7 +9358,7 @@ OrderDetailShippingComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class OrderDetailTotalsComponent {
     /**
@@ -8762,7 +9387,7 @@ OrderDetailTotalsComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const moduleComponents = [
@@ -8815,12 +9440,12 @@ OrderDetailsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class OrderHistoryComponent {
     /**
@@ -8838,11 +9463,15 @@ class OrderHistoryComponent {
      * @return {?}
      */
     ngOnInit() {
-        this.orders$ = this.userService.getOrderHistoryList(this.PAGE_SIZE).pipe(tap((orders) => {
+        this.orders$ = this.userService.getOrderHistoryList(this.PAGE_SIZE).pipe(tap((/**
+         * @param {?} orders
+         * @return {?}
+         */
+        (orders) => {
             if (orders.pagination) {
                 this.sortType = orders.pagination.sort;
             }
-        }));
+        })));
         this.isLoaded$ = this.userService.getOrderHistoryListLoaded();
     }
     /**
@@ -8893,12 +9522,16 @@ class OrderHistoryComponent {
         return combineLatest([
             this.translation.translate('sorting.date'),
             this.translation.translate('sorting.orderNumber'),
-        ]).pipe(map(([textByDate, textByOrderNumber]) => {
+        ]).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([textByDate, textByOrderNumber]) => {
             return {
                 byDate: textByDate,
                 byOrderNumber: textByOrderNumber,
             };
-        }));
+        })));
     }
     /**
      * @private
@@ -8924,7 +9557,7 @@ OrderHistoryComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class OrderHistoryModule {
 }
@@ -8956,7 +9589,7 @@ OrderHistoryModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class OrderModule {
 }
@@ -8968,12 +9601,12 @@ OrderModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PaymentMethodsComponent {
     /**
@@ -8988,13 +9621,21 @@ class PaymentMethodsComponent {
      * @return {?}
      */
     ngOnInit() {
-        this.paymentMethods$ = this.userService.getPaymentMethods().pipe(tap(paymentDetails => {
+        this.paymentMethods$ = this.userService.getPaymentMethods().pipe(tap((/**
+         * @param {?} paymentDetails
+         * @return {?}
+         */
+        paymentDetails => {
             // Set first payment method to DEFAULT if none is set
             if (paymentDetails.length > 0 &&
-                !paymentDetails.find(paymentDetail => paymentDetail.defaultPayment)) {
+                !paymentDetails.find((/**
+                 * @param {?} paymentDetail
+                 * @return {?}
+                 */
+                paymentDetail => paymentDetail.defaultPayment))) {
                 this.setDefaultPaymentMethod(paymentDetails[0]);
             }
-        }));
+        })));
         this.editCard = null;
         this.loading$ = this.userService.getPaymentMethodsLoading();
         this.userService.loadPaymentMethods();
@@ -9013,7 +9654,11 @@ class PaymentMethodsComponent {
                 year: expiryYear,
             }),
             this.translation.translate('paymentCard.defaultPaymentMethod'),
-        ]).pipe(map(([textSetAsDefault, textDelete, textDeleteConfirmation, textExpires, textDefaultPaymentMethod,]) => {
+        ]).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([textSetAsDefault, textDelete, textDeleteConfirmation, textExpires, textDefaultPaymentMethod,]) => {
             /** @type {?} */
             const actions = [];
             if (!defaultPayment) {
@@ -9029,7 +9674,7 @@ class PaymentMethodsComponent {
                 deleteMsg: textDeleteConfirmation,
             };
             return card;
-        }));
+        })));
     }
     /**
      * @param {?} paymentMethod
@@ -9082,7 +9727,7 @@ PaymentMethodsComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class PaymentMethodsModule {
 }
@@ -9111,7 +9756,7 @@ PaymentMethodsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ResetPasswordFormComponent {
     /**
@@ -9139,12 +9784,20 @@ class ResetPasswordFormComponent {
     ngOnInit() {
         this.subscription.add(this.routingService
             .getRouterState()
-            .subscribe(state => (this.token = state.state.queryParams['token'])));
-        this.subscription.add(this.userService.isPasswordReset().subscribe(reset => {
+            .subscribe((/**
+         * @param {?} state
+         * @return {?}
+         */
+        state => (this.token = state.state.queryParams['token']))));
+        this.subscription.add(this.userService.isPasswordReset().subscribe((/**
+         * @param {?} reset
+         * @return {?}
+         */
+        reset => {
             if (reset) {
                 this.routingService.go({ cxRoute: 'login' });
             }
-        }));
+        })));
     }
     /**
      * @return {?}
@@ -9192,7 +9845,7 @@ ResetPasswordFormComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ResetPasswordModule {
 }
@@ -9221,7 +9874,7 @@ ResetPasswordModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class UpdateEmailFormComponent {
     /**
@@ -9304,7 +9957,7 @@ UpdateEmailFormComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class UpdateEmailComponent {
     /**
@@ -9327,7 +9980,11 @@ class UpdateEmailComponent {
         this.userService.resetUpdateEmailResultState();
         this.subscription.add(this.userService
             .getUpdateEmailResultSuccess()
-            .subscribe(success => this.onSuccess(success)));
+            .subscribe((/**
+         * @param {?} success
+         * @return {?}
+         */
+        success => this.onSuccess(success))));
         this.isLoading$ = this.userService.getUpdateEmailResultLoading();
     }
     /**
@@ -9385,7 +10042,7 @@ UpdateEmailComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class UpdateEmailModule {
 }
@@ -9414,12 +10071,12 @@ UpdateEmailModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class UpdatePasswordFormComponent {
     /**
@@ -9510,7 +10167,7 @@ UpdatePasswordFormComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class UpdatePasswordComponent {
     /**
@@ -9532,7 +10189,11 @@ class UpdatePasswordComponent {
         this.loading$ = this.userService.getUpdatePasswordResultLoading();
         this.subscription.add(this.userService
             .getUpdatePasswordResultSuccess()
-            .subscribe(success => this.onSuccess(success)));
+            .subscribe((/**
+         * @param {?} success
+         * @return {?}
+         */
+        success => this.onSuccess(success))));
     }
     /**
      * @param {?} success
@@ -9582,7 +10243,7 @@ UpdatePasswordComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class UpdatePasswordModule {
 }
@@ -9611,12 +10272,12 @@ UpdatePasswordModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class UpdateProfileFormComponent {
     /**
@@ -9687,7 +10348,7 @@ UpdateProfileFormComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class UpdateProfileComponent {
     /**
@@ -9708,15 +10369,23 @@ class UpdateProfileComponent {
         // reset the previous form processing state
         this.userService.resetUpdatePersonalDetailsProcessingState();
         this.user$ = this.userService.get();
-        this.titles$ = this.userService.getTitles().pipe(tap(titles => {
+        this.titles$ = this.userService.getTitles().pipe(tap((/**
+         * @param {?} titles
+         * @return {?}
+         */
+        titles => {
             if (Object.keys(titles).length === 0) {
                 this.userService.loadTitles();
             }
-        }));
+        })));
         this.loading$ = this.userService.getUpdatePersonalDetailsResultLoading();
         this.subscription.add(this.userService
             .getUpdatePersonalDetailsResultSuccess()
-            .subscribe(success => this.onSuccess(success)));
+            .subscribe((/**
+         * @param {?} success
+         * @return {?}
+         */
+        success => this.onSuccess(success))));
     }
     /**
      * @param {?} success
@@ -9767,7 +10436,7 @@ UpdateProfileComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class UpdateProfileModule {
 }
@@ -9796,17 +10465,17 @@ UpdateProfileModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class BreadcrumbComponent {
     /**
@@ -9831,14 +10500,22 @@ class BreadcrumbComponent {
      * @return {?}
      */
     setTitle() {
-        this.title$ = this.pageMetaService.getMeta().pipe(filter(Boolean), map((meta) => meta.heading || meta.title));
+        this.title$ = this.pageMetaService.getMeta().pipe(filter(Boolean), map((/**
+         * @param {?} meta
+         * @return {?}
+         */
+        (meta) => meta.heading || meta.title)));
     }
     /**
      * @private
      * @return {?}
      */
     setCrumbs() {
-        this.crumbs$ = combineLatest(this.pageMetaService.getMeta(), this.translation.translate('common.home')).pipe(map(([meta, textHome]) => meta.breadcrumbs ? meta.breadcrumbs : [{ label: textHome, link: '/' }]));
+        this.crumbs$ = combineLatest(this.pageMetaService.getMeta(), this.translation.translate('common.home')).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([meta, textHome]) => meta.breadcrumbs ? meta.breadcrumbs : [{ label: textHome, link: '/' }])));
     }
 }
 BreadcrumbComponent.decorators = [
@@ -9857,7 +10534,7 @@ BreadcrumbComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class BreadcrumbModule {
 }
@@ -9880,7 +10557,7 @@ BreadcrumbModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class NavigationComponentService {
     /**
@@ -9901,26 +10578,42 @@ class NavigationComponentService {
      * @return {?}
      */
     createNavigation() {
-        return combineLatest(this.getComponentData(), this.getNavigationNode()).pipe(map(([data, nav]) => {
+        return combineLatest(this.getComponentData(), this.getNavigationNode()).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([data, nav]) => {
             return {
                 title: data.name,
                 children: [nav],
             };
-        }));
+        })));
     }
     /**
      * @return {?}
      */
     getNavigationNode() {
-        return this.getComponentData().pipe(filter(Boolean), switchMap(data => {
+        return this.getComponentData().pipe(filter(Boolean), switchMap((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => {
             /** @type {?} */
             const navigation = data.navigationNode ? data.navigationNode : data;
-            return this.cmsService.getNavigationEntryItems(navigation.uid).pipe(tap(items => {
+            return this.cmsService.getNavigationEntryItems(navigation.uid).pipe(tap((/**
+             * @param {?} items
+             * @return {?}
+             */
+            items => {
                 if (items === undefined) {
                     this.getNavigationEntryItems(navigation, true);
                 }
-            }), filter(Boolean), map(items => this.createNode(navigation, items)));
-        }));
+            })), filter(Boolean), map((/**
+             * @param {?} items
+             * @return {?}
+             */
+            items => this.createNode(navigation, items))));
+        })));
     }
     /**
      * Get all navigation entry items' type and id. Dispatch action to load all these items
@@ -9932,12 +10625,16 @@ class NavigationComponentService {
      */
     getNavigationEntryItems(nodeData, root, itemsList = []) {
         if (nodeData.entries && nodeData.entries.length > 0) {
-            nodeData.entries.forEach(entry => {
+            nodeData.entries.forEach((/**
+             * @param {?} entry
+             * @return {?}
+             */
+            entry => {
                 itemsList.push({
                     superType: entry.itemSuperType,
                     id: entry.itemId,
                 });
-            });
+            }));
         }
         if (nodeData.children && nodeData.children.length > 0) {
             this.processChildren(nodeData, itemsList);
@@ -10028,7 +10725,7 @@ NavigationComponentService.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CategoryNavigationComponent {
     /**
@@ -10039,7 +10736,11 @@ class CategoryNavigationComponent {
         this.node$ = this.service.getNavigationNode();
         this.styleClass$ = this.service
             .getComponentData()
-            .pipe(map(d => d.styleClass));
+            .pipe(map((/**
+         * @param {?} d
+         * @return {?}
+         */
+        d => d.styleClass)));
     }
 }
 CategoryNavigationComponent.decorators = [
@@ -10056,7 +10757,7 @@ CategoryNavigationComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class NavigationUIComponent {
     /**
@@ -10080,8 +10781,15 @@ class NavigationUIComponent {
         this.isOpen = false;
         this.openNodes = [];
         this.router.events
-            .pipe(filter(event => event instanceof NavigationEnd))
-            .subscribe(() => this.clear());
+            .pipe(filter((/**
+         * @param {?} event
+         * @return {?}
+         */
+        event => event instanceof NavigationEnd)))
+            .subscribe((/**
+         * @return {?}
+         */
+        () => this.clear()));
     }
     /**
      * @param {?} event
@@ -10089,7 +10797,11 @@ class NavigationUIComponent {
      */
     toggleOpen(event) {
         if (this.openNodes.includes((/** @type {?} */ (event.currentTarget)))) {
-            this.openNodes = this.openNodes.filter(n => n !== event.currentTarget);
+            this.openNodes = this.openNodes.filter((/**
+             * @param {?} n
+             * @return {?}
+             */
+            n => n !== event.currentTarget));
             this.renderer.removeClass((/** @type {?} */ (event.currentTarget)), 'is-open');
         }
         else {
@@ -10119,7 +10831,12 @@ class NavigationUIComponent {
      * @return {?}
      */
     updateClasses() {
-        this.openNodes.forEach((node, i) => {
+        this.openNodes.forEach((/**
+         * @param {?} node
+         * @param {?} i
+         * @return {?}
+         */
+        (node, i) => {
             if (i + 1 < this.openNodes.length) {
                 this.renderer.addClass(node, 'is-opened');
                 this.renderer.removeClass(node, 'is-open');
@@ -10128,7 +10845,7 @@ class NavigationUIComponent {
                 this.renderer.removeClass(node, 'is-opened');
                 this.renderer.addClass(node, 'is-open');
             }
-        });
+        }));
         this.isOpen = this.openNodes.length > 0;
     }
     /**
@@ -10138,7 +10855,11 @@ class NavigationUIComponent {
      */
     getDepth(node, depth = 0) {
         if (node.children && node.children.length > 0) {
-            return Math.max(...node.children.map(n => this.getDepth(n, depth + 1)));
+            return Math.max(...node.children.map((/**
+             * @param {?} n
+             * @return {?}
+             */
+            n => this.getDepth(n, depth + 1))));
         }
         else {
             return depth;
@@ -10165,7 +10886,7 @@ NavigationUIComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class NavigationComponent {
     /**
@@ -10176,7 +10897,11 @@ class NavigationComponent {
         this.node$ = this.service.createNavigation();
         this.styleClass$ = this.service
             .getComponentData()
-            .pipe(map(d => d.styleClass));
+            .pipe(map((/**
+         * @param {?} d
+         * @return {?}
+         */
+        d => d.styleClass)));
     }
 }
 NavigationComponent.decorators = [
@@ -10193,7 +10918,7 @@ NavigationComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class NavigationModule {
 }
@@ -10228,7 +10953,7 @@ NavigationModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CategoryNavigationModule {
 }
@@ -10260,7 +10985,7 @@ CategoryNavigationModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class FooterNavigationComponent {
     /**
@@ -10271,7 +10996,11 @@ class FooterNavigationComponent {
         this.node$ = this.service.getNavigationNode();
         this.styleClass$ = this.service
             .getComponentData()
-            .pipe(map(d => d.styleClass));
+            .pipe(map((/**
+         * @param {?} d
+         * @return {?}
+         */
+        d => d.styleClass)));
     }
 }
 FooterNavigationComponent.decorators = [
@@ -10288,7 +11017,7 @@ FooterNavigationComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class FooterNavigationModule {
 }
@@ -10322,7 +11051,7 @@ FooterNavigationModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const HAS_SEARCH_RESULT_CLASS = 'has-searchbox-results';
@@ -10375,13 +11104,21 @@ class SearchBoxComponentService {
      * @return {?}
      */
     getResults(config) {
-        return combineLatest(this.getProductResults(config), this.getProductSuggestions(config), this.getSearchMessage(config)).pipe(map(([productResults, suggestions, message]) => {
+        return combineLatest(this.getProductResults(config), this.getProductSuggestions(config), this.getSearchMessage(config)).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([productResults, suggestions, message]) => {
             return {
                 products: productResults ? productResults.products : null,
                 suggestions,
                 message,
             };
-        }), tap(results => this.toggleBodyClass(HAS_SEARCH_RESULT_CLASS, this.hasResults(results))));
+        })), tap((/**
+         * @param {?} results
+         * @return {?}
+         */
+        results => this.toggleBodyClass(HAS_SEARCH_RESULT_CLASS, this.hasResults(results)))));
     }
     /**
      * Clears the searchbox results, so that old values are
@@ -10449,14 +11186,30 @@ class SearchBoxComponentService {
             return of([]);
         }
         else {
-            return this.searchService.getSuggestionResults().pipe(map(res => res.map(suggestion => suggestion.value)), switchMap(suggestions => {
+            return this.searchService.getSuggestionResults().pipe(map((/**
+             * @param {?} res
+             * @return {?}
+             */
+            res => res.map((/**
+             * @param {?} suggestion
+             * @return {?}
+             */
+            suggestion => suggestion.value)))), switchMap((/**
+             * @param {?} suggestions
+             * @return {?}
+             */
+            suggestions => {
                 if (suggestions.length === 0) {
-                    return this.getExactSuggestion(config).pipe(map(match => (match ? [match] : [])));
+                    return this.getExactSuggestion(config).pipe(map((/**
+                     * @param {?} match
+                     * @return {?}
+                     */
+                    match => (match ? [match] : []))));
                 }
                 else {
                     return of(suggestions);
                 }
-            }));
+            })));
         }
     }
     /**
@@ -10467,13 +11220,17 @@ class SearchBoxComponentService {
      * @return {?}
      */
     getExactSuggestion(config) {
-        return this.getProductResults(config).pipe(switchMap(productResult => {
+        return this.getProductResults(config).pipe(switchMap((/**
+         * @param {?} productResult
+         * @return {?}
+         */
+        productResult => {
             return productResult.products && productResult.products.length > 0
                 ? this.fetchTranslation('searchBox.help.exactMatch', {
                     term: productResult.freeTextSearch,
                 })
                 : of(null);
-        }));
+        })));
     }
     /**
      * @private
@@ -10481,7 +11238,11 @@ class SearchBoxComponentService {
      * @return {?}
      */
     getSearchMessage(config) {
-        return combineLatest(this.getProductResults(config), this.getProductSuggestions(config)).pipe(switchMap(([productResult, suggestions]) => {
+        return combineLatest(this.getProductResults(config), this.getProductSuggestions(config)).pipe(switchMap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([productResult, suggestions]) => {
             if (productResult &&
                 productResult.products &&
                 productResult.products.length === 0 &&
@@ -10491,7 +11252,7 @@ class SearchBoxComponentService {
             else {
                 return of(null);
             }
-        }));
+        })));
     }
     /**
      * Navigates to the search result page with a given query
@@ -10526,11 +11287,11 @@ SearchBoxComponentService.ctorParameters = () => [
     { type: TranslationService },
     { type: WindowRef }
 ];
-/** @nocollapse */ SearchBoxComponentService.ngInjectableDef = defineInjectable({ factory: function SearchBoxComponentService_Factory() { return new SearchBoxComponentService(inject(SearchboxService), inject(RoutingService), inject(TranslationService), inject(WindowRef)); }, token: SearchBoxComponentService, providedIn: "root" });
+/** @nocollapse */ SearchBoxComponentService.ngInjectableDef = ɵɵdefineInjectable({ factory: function SearchBoxComponentService_Factory() { return new SearchBoxComponentService(ɵɵinject(SearchboxService), ɵɵinject(RoutingService), ɵɵinject(TranslationService), ɵɵinject(WindowRef)); }, token: SearchBoxComponentService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const DEFAULT_SEARCHBOX_CONFIG = {
@@ -10557,7 +11318,15 @@ class SearchBoxComponent {
          * for example when we click inside the search result section.
          */
         this.ignoreCloseEvent = false;
-        this.results$ = this.config$.pipe(tap(c => (this.config = c)), switchMap(config => this.searchBoxComponentService.getResults(config)));
+        this.results$ = this.config$.pipe(tap((/**
+         * @param {?} c
+         * @return {?}
+         */
+        c => (this.config = c))), switchMap((/**
+         * @param {?} config
+         * @return {?}
+         */
+        config => this.searchBoxComponentService.getResults(config))));
     }
     /**
      * Sets the search box input field
@@ -10579,11 +11348,15 @@ class SearchBoxComponent {
             return (/** @type {?} */ (this.componentData.data$.pipe(
             // Since the backend returns string values (i.e. displayProducts: "true") for
             // boolean values, we replace them with boolean values.
-            map(c => {
+            map((/**
+             * @param {?} c
+             * @return {?}
+             */
+            c => {
                 return Object.assign({}, c, { displayProducts: (/** @type {?} */ (c.displayProducts)) === 'true' || c.displayProducts === true, displayProductImages: (/** @type {?} */ (c.displayProductImages)) === 'true' ||
                         c.displayProductImages === true, displaySuggestions: (/** @type {?} */ (c.displaySuggestions)) === 'true' ||
                         c.displaySuggestions === true });
-            }))));
+            })))));
         }
         else {
             return of(DEFAULT_SEARCHBOX_CONFIG);
@@ -10681,12 +11454,12 @@ SearchBoxComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class HighlightPipe {
     /**
@@ -10707,7 +11480,7 @@ HighlightPipe.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class SearchBoxModule {
 }
@@ -10737,17 +11510,17 @@ SearchBoxModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class SharedCarouselService {
     constructor() {
@@ -10788,13 +11561,20 @@ class SharedCarouselService {
     setItemSize(window, nativeElement) {
         this.itemSize$ = !window
             ? of(this.MAX_ITEM_SIZE)
-            : fromEvent(window, 'resize').pipe(map(() => ((/** @type {?} */ (nativeElement))).clientWidth), startWith(((/** @type {?} */ (nativeElement))).clientWidth), 
+            : fromEvent(window, 'resize').pipe(map((/**
+             * @return {?}
+             */
+            () => ((/** @type {?} */ (nativeElement))).clientWidth)), startWith(((/** @type {?} */ (nativeElement))).clientWidth), 
             // avoid to much calls
-            debounceTime(100), map((innerWidth) => {
+            debounceTime(100), map((/**
+             * @param {?} innerWidth
+             * @return {?}
+             */
+            (innerWidth) => {
                 /** @type {?} */
                 const itemsPerPage = Math.round(innerWidth / this.MAX_WIDTH);
                 return itemsPerPage > 2 ? this.MAX_ITEM_SIZE : itemsPerPage;
-            }), 
+            })), 
             // only emit new size when the size changed
             distinctUntilChanged());
     }
@@ -10803,19 +11583,31 @@ class SharedCarouselService {
      * @return {?}
      */
     setItemAsActive(newActiveItem) {
-        this.activeItem$ = this.itemSize$.pipe(map(itemSize => this.setItem(newActiveItem, itemSize)));
+        this.activeItem$ = this.itemSize$.pipe(map((/**
+         * @param {?} itemSize
+         * @return {?}
+         */
+        itemSize => this.setItem(newActiveItem, itemSize))));
     }
     /**
      * @return {?}
      */
     setPreviousItemAsActive() {
-        this.activeItem$ = this.activeItem$.pipe(withLatestFrom(this.itemSize$), map(([activeItem, itemSize]) => this.setItem(activeItem - itemSize, itemSize)));
+        this.activeItem$ = this.activeItem$.pipe(withLatestFrom(this.itemSize$), map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([activeItem, itemSize]) => this.setItem(activeItem - itemSize, itemSize))));
     }
     /**
      * @return {?}
      */
     setNextItemAsActive() {
-        this.activeItem$ = this.activeItem$.pipe(withLatestFrom(this.itemSize$), map(([activeItem, itemSize]) => this.setItem(activeItem + itemSize, itemSize)));
+        this.activeItem$ = this.activeItem$.pipe(withLatestFrom(this.itemSize$), map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([activeItem, itemSize]) => this.setItem(activeItem + itemSize, itemSize))));
     }
     /**
      * @private
@@ -10844,7 +11636,7 @@ SharedCarouselService.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductCarouselService {
     /**
@@ -10865,9 +11657,13 @@ class ProductCarouselService {
      * @return {?}
      */
     fetchTitle() {
-        this.title$ = this.component.data$.pipe(map(data => {
+        this.title$ = this.component.data$.pipe(map((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => {
             return data.title;
-        }));
+        })));
     }
     /**
      * @return {?}
@@ -10880,11 +11676,23 @@ class ProductCarouselService {
      * @return {?}
      */
     fetchItems() {
-        this.items$ = this.component.data$.pipe(filter(data => data && !!data.productCodes), map(data => {
+        this.items$ = this.component.data$.pipe(filter((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => data && !!data.productCodes)), map((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => {
             /** @type {?} */
             const productCodes = data.productCodes.split(' ');
-            return productCodes.map(code => this.productService.get(code));
-        }));
+            return productCodes.map((/**
+             * @param {?} code
+             * @return {?}
+             */
+            code => this.productService.get(code)));
+        })));
     }
 }
 ProductCarouselService.decorators = [
@@ -10898,7 +11706,7 @@ ProductCarouselService.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductCarouselComponent {
     /**
@@ -10940,7 +11748,7 @@ ProductCarouselComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductCarouselModule {
 }
@@ -10979,7 +11787,7 @@ ProductCarouselModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductReferencesService {
     /**
@@ -11002,43 +11810,67 @@ class ProductReferencesService {
      * @return {?}
      */
     fetchTitle() {
-        this.title$ = this.component.data$.pipe(map(data => {
+        this.title$ = this.component.data$.pipe(map((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => {
             return data.title;
-        }));
+        })));
     }
     /**
      * @return {?}
      */
     getDisplayProductTitles() {
-        return this.displayProductTitles$.pipe(map(data => Boolean(JSON.parse(data.toLowerCase()))));
+        return this.displayProductTitles$.pipe(map((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => Boolean(JSON.parse(data.toLowerCase())))));
     }
     /**
      * @return {?}
      */
     fetchDisplayProductTitles() {
-        this.displayProductTitles$ = this.component.data$.pipe(map(data => {
+        this.displayProductTitles$ = this.component.data$.pipe(map((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => {
             return data.displayProductTitles;
-        }));
+        })));
     }
     /**
      * @return {?}
      */
     getDisplayProductPrices() {
-        return this.displayProductPrices$.pipe(map(data => Boolean(JSON.parse(data.toLowerCase()))));
+        return this.displayProductPrices$.pipe(map((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => Boolean(JSON.parse(data.toLowerCase())))));
     }
     /**
      * @return {?}
      */
     fetchDisplayProductPrices() {
-        this.displayProductPrices$ = this.component.data$.pipe(map(data => {
+        this.displayProductPrices$ = this.component.data$.pipe(map((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => {
             return data.displayProductPrices;
-        }));
+        })));
     }
     /**
      * @return {?}
      */
     getReferenceType() {
-        return this.component.data$.pipe(map(data => data.productReferenceTypes));
+        return this.component.data$.pipe(map((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => data.productReferenceTypes)));
     }
     /**
      * @return {?}
@@ -11046,7 +11878,11 @@ class ProductReferencesService {
     getProductCode() {
         return this.routerService
             .getRouterState()
-            .pipe(map(data => data.state.params.productCode));
+            .pipe(map((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => data.state.params.productCode)));
     }
     /**
      * @return {?}
@@ -11059,9 +11895,17 @@ class ProductReferencesService {
      * @return {?}
      */
     setReferenceList(pageSize) {
-        this.items$ = combineLatest(this.getProductCode(), this.getReferenceType()).pipe(map(data => ({ productCode: data[0], referenceType: data[1] })), switchMap(data => {
+        this.items$ = combineLatest(this.getProductCode(), this.getReferenceType()).pipe(map((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => ({ productCode: data[0], referenceType: data[1] }))), switchMap((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => {
             return this.referenceService.get(data.productCode, data.referenceType, pageSize);
-        }));
+        })));
     }
 }
 ProductReferencesService.decorators = [
@@ -11076,7 +11920,7 @@ ProductReferencesService.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductReferencesComponent {
     /**
@@ -11120,7 +11964,7 @@ ProductReferencesComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductReferencesModule {
 }
@@ -11159,7 +12003,7 @@ ProductReferencesModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const WAITING_CLASS = 'is-waiting';
@@ -11173,11 +12017,15 @@ class ProductImagesComponent {
             .getProduct()
             .pipe(filter(Boolean));
         this._imageContainer$ = new BehaviorSubject(null);
-        this.imageContainer$ = combineLatest(this.product$, this._imageContainer$).pipe(map(([product, container]) => container
+        this.imageContainer$ = combineLatest(this.product$, this._imageContainer$).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([product, container]) => container
             ? container
             : product.images && product.images.PRIMARY
                 ? product.images.PRIMARY
-                : {}));
+                : {})));
     }
     /**
      * @param {?} event
@@ -11193,10 +12041,14 @@ class ProductImagesComponent {
      * @return {?}
      */
     isMainImageContainer(currentContainer) {
-        return this.imageContainer$.pipe(map((container) => container &&
+        return this.imageContainer$.pipe(map((/**
+         * @param {?} container
+         * @return {?}
+         */
+        (container) => container &&
             container.zoom &&
             currentContainer.zoom &&
-            container.zoom.url === currentContainer.zoom.url));
+            container.zoom.url === currentContainer.zoom.url)));
     }
     /**
      * @return {?}
@@ -11239,7 +12091,7 @@ ProductImagesComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {string} */
 const ProductDetailOutlets = {
@@ -11253,7 +12105,7 @@ const ProductDetailOutlets = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductDetailsComponent {
     /**
@@ -11293,7 +12145,7 @@ ProductDetailsComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductSummaryComponent {
     /**
@@ -11374,7 +12226,11 @@ class ProductSummaryComponent {
         // Use translated label for Reviews tab reference
         this.translationService
             .translate('productDetails.reviews')
-            .subscribe(reviewsTabLabel => {
+            .subscribe((/**
+         * @param {?} reviewsTabLabel
+         * @return {?}
+         */
+        reviewsTabLabel => {
             /** @type {?} */
             const tabsComponent = this.getTabsComponent();
             /** @type {?} */
@@ -11385,7 +12241,7 @@ class ProductSummaryComponent {
                 this.clickTabIfInactive(reviewsTab);
                 reviewsComponent.scrollIntoView();
             }
-        });
+        }));
     }
     /**
      * @return {?}
@@ -11414,7 +12270,7 @@ ProductSummaryComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductDetailsModule {
 }
@@ -11426,7 +12282,7 @@ ProductDetailsModule.decorators = [
                     FormsModule,
                     ReactiveFormsModule,
                     CartSharedModule,
-                    CmsModule,
+                    CmsModule$1,
                     AddToCartModule,
                     OutletModule,
                     I18nModule,
@@ -11443,12 +12299,12 @@ ProductDetailsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {string} */
 const ViewModes = {
@@ -11504,7 +12360,7 @@ ProductViewComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductListComponent {
     /**
@@ -11558,25 +12414,41 @@ class ProductListComponent {
      * @return {?}
      */
     ngOnInit() {
-        this.updateParams$ = this.activatedRoute.params.pipe(tap(params => {
+        this.updateParams$ = this.activatedRoute.params.pipe(tap((/**
+         * @param {?} params
+         * @return {?}
+         */
+        params => {
             this.categoryCode = params.categoryCode;
             this.brandCode = params.brandCode;
             this.query = params.query;
             this.update();
-        }));
-        this.pageLayoutService.templateName$.pipe(take(1)).subscribe(template => {
+        })));
+        this.pageLayoutService.templateName$.pipe(take(1)).subscribe((/**
+         * @param {?} template
+         * @return {?}
+         */
+        template => {
             this.gridMode$.next(template === 'ProductGridPageTemplate' ? ViewModes.Grid : ViewModes.List);
-        });
+        }));
         // clean previous search result
         this.productSearchService.clearResults();
-        this.model$ = this.productSearchService.getResults().pipe(tap(searchResult => {
+        this.model$ = this.productSearchService.getResults().pipe(tap((/**
+         * @param {?} searchResult
+         * @return {?}
+         */
+        searchResult => {
             if (Object.keys(searchResult).length === 0) {
                 this.search(this.query, this.options);
             }
             else {
                 this.getCategoryTitle(searchResult);
             }
-        }), filter(searchResult => Object.keys(searchResult).length > 0));
+        })), filter((/**
+         * @param {?} searchResult
+         * @return {?}
+         */
+        searchResult => Object.keys(searchResult).length > 0)));
     }
     /**
      * @protected
@@ -11648,7 +12520,7 @@ ProductListComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductFacetNavigationComponent {
     /**
@@ -11673,23 +12545,43 @@ class ProductFacetNavigationComponent {
         if (!this.searchResult.facets) {
             return [];
         }
-        return this.searchResult.facets.filter(facet => facet.visible);
+        return this.searchResult.facets.filter((/**
+         * @param {?} facet
+         * @return {?}
+         */
+        facet => facet.visible));
     }
     /**
      * @return {?}
      */
     ngOnInit() {
-        this.updateParams$ = this.activatedRoute.params.pipe(tap(params => {
+        this.updateParams$ = this.activatedRoute.params.pipe(tap((/**
+         * @param {?} params
+         * @return {?}
+         */
+        params => {
             this.activeFacetValueCode = params.categoryCode || params.brandCode;
-        }));
-        this.searchResult$ = this.productSearchService.getResults().pipe(tap(searchResult => {
+        })));
+        this.searchResult$ = this.productSearchService.getResults().pipe(tap((/**
+         * @param {?} searchResult
+         * @return {?}
+         */
+        searchResult => {
             this.searchResult = searchResult;
             if (this.searchResult.facets) {
-                this.searchResult.facets.forEach(el => {
+                this.searchResult.facets.forEach((/**
+                 * @param {?} el
+                 * @return {?}
+                 */
+                el => {
                     this.showAllPerFacetMap.set(el.name, false);
-                });
+                }));
             }
-        }), filter(searchResult => Object.keys(searchResult).length > 0));
+        })), filter((/**
+         * @param {?} searchResult
+         * @return {?}
+         */
+        searchResult => Object.keys(searchResult).length > 0)));
     }
     /**
      * @param {?} content
@@ -11773,7 +12665,7 @@ ProductFacetNavigationComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductGridItemComponent {
 }
@@ -11790,7 +12682,7 @@ ProductGridItemComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductListItemComponent {
 }
@@ -11807,7 +12699,7 @@ ProductListItemComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductListModule {
 }
@@ -11850,12 +12742,12 @@ ProductListModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductAttributesComponent {
     /**
@@ -11885,7 +12777,7 @@ ProductAttributesComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductReviewsComponent {
     /**
@@ -11901,10 +12793,17 @@ class ProductReviewsComponent {
         // TODO: configurable
         this.initialMaxListItems = 5;
         this.product$ = this.currentProductService.getProduct();
-        this.reviews$ = this.product$.pipe(filter(Boolean), switchMap(product => this.reviewService.getByProductCode(product.code)), tap(() => {
+        this.reviews$ = this.product$.pipe(filter(Boolean), switchMap((/**
+         * @param {?} product
+         * @return {?}
+         */
+        product => this.reviewService.getByProductCode(product.code))), tap((/**
+         * @return {?}
+         */
+        () => {
             this.resetReviewForm();
             this.maxListItems = this.initialMaxListItems;
-        }));
+        })));
     }
     /**
      * @return {?}
@@ -11973,7 +12872,7 @@ ProductReviewsComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductReviewsModule {
 }
@@ -11995,7 +12894,7 @@ ProductReviewsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductDetailsTabComponent {
     /**
@@ -12025,7 +12924,7 @@ ProductDetailsTabComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductDetailsTabModule {
 }
@@ -12040,7 +12939,7 @@ ProductDetailsTabModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductTabsModule {
 }
@@ -12052,7 +12951,7 @@ ProductTabsModule.decorators = [
                     FormsModule,
                     ReactiveFormsModule,
                     CartSharedModule,
-                    CmsModule,
+                    CmsModule$1,
                     OutletModule,
                     ProductReviewsModule,
                     ProductDetailsTabModule,
@@ -12081,17 +12980,17 @@ ProductTabsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductImagesModule {
 }
@@ -12117,7 +13016,7 @@ ProductImagesModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class OrderConfirmationItemsComponent {
     /**
@@ -12153,7 +13052,7 @@ OrderConfirmationItemsComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class OrderConfirmationThankYouMessageComponent {
     /**
@@ -12189,7 +13088,7 @@ OrderConfirmationThankYouMessageComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class OrderConfirmationOverviewComponent {
     /**
@@ -12217,7 +13116,11 @@ class OrderConfirmationOverviewComponent {
      * @return {?}
      */
     getAddressCardContent(deliveryAddress) {
-        return this.translation.translate('addressCard.shipTo').pipe(map(textTitle => ({
+        return this.translation.translate('addressCard.shipTo').pipe(map((/**
+         * @param {?} textTitle
+         * @return {?}
+         */
+        textTitle => ({
             title: textTitle,
             textBold: `${deliveryAddress.firstName} ${deliveryAddress.lastName}`,
             text: [
@@ -12226,25 +13129,33 @@ class OrderConfirmationOverviewComponent {
                 `${deliveryAddress.town}, ${deliveryAddress.country.isocode}, ${deliveryAddress.postalCode}`,
                 deliveryAddress.phone,
             ],
-        })));
+        }))));
     }
     /**
      * @param {?} deliveryMode
      * @return {?}
      */
     getDeliveryModeCardContent(deliveryMode) {
-        return this.translation.translate('checkoutShipping.shippingMethod').pipe(map(textTitle => ({
+        return this.translation.translate('checkoutShipping.shippingMethod').pipe(map((/**
+         * @param {?} textTitle
+         * @return {?}
+         */
+        textTitle => ({
             title: textTitle,
             textBold: deliveryMode.name,
             text: [deliveryMode.description],
-        })));
+        }))));
     }
     /**
      * @param {?} billingAddress
      * @return {?}
      */
     getBillingAddressCardContent(billingAddress) {
-        return this.translation.translate('addressCard.billTo').pipe(map(textTitle => ({
+        return this.translation.translate('addressCard.billTo').pipe(map((/**
+         * @param {?} textTitle
+         * @return {?}
+         */
+        textTitle => ({
             title: textTitle,
             textBold: `${billingAddress.firstName} ${billingAddress.lastName}`,
             text: [
@@ -12253,7 +13164,7 @@ class OrderConfirmationOverviewComponent {
                 `${billingAddress.town}, ${billingAddress.country.isocode}, ${billingAddress.postalCode}`,
                 billingAddress.phone,
             ],
-        })));
+        }))));
     }
     /**
      * @param {?} payment
@@ -12266,11 +13177,15 @@ class OrderConfirmationOverviewComponent {
                 month: payment.expiryMonth,
                 year: payment.expiryYear,
             }),
-        ]).pipe(map(([textTitle, textExpires]) => ({
+        ]).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([textTitle, textExpires]) => ({
             title: textTitle,
             textBold: payment.accountHolderName,
             text: [payment.cardNumber, textExpires],
-        })));
+        }))));
     }
 }
 OrderConfirmationOverviewComponent.decorators = [
@@ -12288,7 +13203,7 @@ OrderConfirmationOverviewComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class OrderConfirmationTotalsComponent {
     /**
@@ -12324,7 +13239,7 @@ OrderConfirmationTotalsComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class OrderConfirmationGuard {
     /**
@@ -12341,14 +13256,18 @@ class OrderConfirmationGuard {
      * @return {?}
      */
     canActivate() {
-        return this.checkoutService.getOrderDetails().pipe(map(orderDetails => {
+        return this.checkoutService.getOrderDetails().pipe(map((/**
+         * @param {?} orderDetails
+         * @return {?}
+         */
+        orderDetails => {
             if (orderDetails && Object.keys(orderDetails).length !== 0) {
                 return true;
             }
             else {
                 return this.router.parseUrl(this.semanticPathService.get('orders'));
             }
-        }));
+        })));
     }
 }
 OrderConfirmationGuard.decorators = [
@@ -12362,16 +13281,16 @@ OrderConfirmationGuard.ctorParameters = () => [
     { type: Router },
     { type: SemanticPathService }
 ];
-/** @nocollapse */ OrderConfirmationGuard.ngInjectableDef = defineInjectable({ factory: function OrderConfirmationGuard_Factory() { return new OrderConfirmationGuard(inject(CheckoutService), inject(Router), inject(SemanticPathService)); }, token: OrderConfirmationGuard, providedIn: "root" });
+/** @nocollapse */ OrderConfirmationGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function OrderConfirmationGuard_Factory() { return new OrderConfirmationGuard(ɵɵinject(CheckoutService), ɵɵinject(Router), ɵɵinject(SemanticPathService)); }, token: OrderConfirmationGuard, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const orderConfirmationComponents = [
@@ -12420,17 +13339,17 @@ OrderConfirmationModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CmsLibModule {
 }
@@ -12475,12 +13394,12 @@ CmsLibModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CartPageComponent {
     /**
@@ -12509,7 +13428,7 @@ CartPageComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 const ɵ0$3 = { cxRoute: 'cart' };
 /** @type {?} */
@@ -12531,7 +13450,7 @@ CartPageModule.decorators = [
                     PageLayoutModule,
                     CartDetailsModule,
                     OutletRefModule,
-                    CmsModule$1,
+                    CmsModule,
                 ],
                 declarations: [CartPageComponent],
             },] }
@@ -12539,7 +13458,7 @@ CartPageModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ProductDetailsPageComponent {
 }
@@ -12552,7 +13471,7 @@ ProductDetailsPageComponent.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Matches the pattern '[ ** / ] marker / :paramName [ / ** ]'
@@ -12569,7 +13488,11 @@ function suffixUrlMatcher(segments, _segmentGroup, route) {
     /** @type {?} */
     const precedingParamName = config.precedingParamName || 'param';
     /** @type {?} */
-    const markerIndex = findLastIndex(segments, ({ path }) => path === marker);
+    const markerIndex = findLastIndex(segments, (/**
+     * @param {?} __0
+     * @return {?}
+     */
+    ({ path }) => path === marker));
     /** @type {?} */
     const isMarkerLastSegment = markerIndex === segments.length - 1;
     if (markerIndex === -1 || isMarkerLastSegment) {
@@ -12603,7 +13526,7 @@ function findLastIndex(elements, predicate) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 const ɵ0$4 = { cxRoute: 'product' }, ɵ1 = {
     cxSuffixUrlMatcher: {
@@ -12644,7 +13567,7 @@ ProductDetailsPageModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 const ɵ0$5 = { cxRoute: 'category' }, ɵ1$1 = { pageLabel: 'search', cxRoute: 'search' }, ɵ2 = { cxRoute: 'brand' }, ɵ3 = {
     cxSuffixUrlMatcher: {
@@ -12689,12 +13612,12 @@ ProductListingPageModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @return {?}
@@ -12708,17 +13631,17 @@ function provideConfigFromMetaTags() {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const defaultStorefrontRoutesConfig = {
@@ -12764,14 +13687,14 @@ const defaultRoutingConfig = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class RoutingModule$1 {
+class RoutingModule {
 }
-RoutingModule$1.decorators = [
+RoutingModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
-                    RoutingModule,
+                    RoutingModule$1,
                     ConfigModule.withConfig(defaultRoutingConfig),
                     CmsRouteModule,
                 ],
@@ -12780,7 +13703,7 @@ RoutingModule$1.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class StorefrontModule {
     /**
@@ -12801,10 +13724,10 @@ StorefrontModule.decorators = [
                     StateModule,
                     AuthModule.forRoot(),
                     CmsLibModule,
-                    CmsModule$1,
+                    CmsModule,
                     CmsRouteModule,
                     ConfigModule.forRoot(),
-                    RoutingModule$1,
+                    RoutingModule,
                     CxApiModule,
                     SmartEditModule.forRoot(),
                     PersonalizationModule.forRoot(),
@@ -12824,14 +13747,13 @@ StorefrontModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AddToCartComponent, AddToCartModule, AddedToCartDialogComponent, CartDetailsComponent, CartDetailsModule, CartNotEmptyGuard, CartItemComponent, CartItemListComponent, OrderSummaryComponent, CartSharedModule, CartTotalsComponent, CartTotalsModule, CartComponentModule, MiniCartComponent, MiniCartModule, CheckoutComponentModule, CheckoutDetailsService, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressComponent, CheckoutProgressModule, DeliveryModeComponent, DeliveryModeModule, BillingAddressFormComponent, BillingAddressFormModule, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PlaceOrderComponent, PlaceOrderModule, PromotionsComponent, PromotionsModule, ReviewSubmitComponent, ReviewSubmitModule, SuggestedAddressDialogComponent, AddressFormComponent, AddressFormModule, ShippingAddressComponent, ShippingAddressModule, CheckoutConfig, CheckoutStepType, CheckoutGuard, DeliveryModeSetGuard, ShippingAddressSetGuard, PaymentDetailsSetGuard, CmsLibModule, BannerComponent, BannerModule, LinkComponent, LinkModule, ParagraphComponent, CmsParagraphModule, TabParagraphContainerComponent, TabParagraphContainerModule, GlobalMessageComponentModule, GlobalMessageComponent, fontawesomeIconConfig, IconLoaderService, IconComponent, ICON_TYPE, IconConfig, IconResourceType, IconModule, LanguageCurrencyComponent, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, CloseAccountModule, CloseAccountModalComponent, CloseAccountComponent, ConsentManagementFormComponent, ConsentManagementComponent, ConsentManagementModule, ForgotPasswordComponent, ForgotPasswordModule, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, PaymentMethodsComponent, PaymentMethodsModule, ResetPasswordFormComponent, ResetPasswordModule, UpdateEmailFormComponent, UpdateEmailComponent, UpdateEmailModule, UpdatePasswordFormComponent, UpdatePasswordComponent, UpdatePasswordModule, UpdateProfileFormComponent, UpdateProfileComponent, UpdateProfileModule, BreadcrumbComponent, BreadcrumbModule, CategoryNavigationComponent, CategoryNavigationModule, FooterNavigationComponent, FooterNavigationModule, NavigationComponentService, NavigationComponent, NavigationModule, SearchBoxComponentService, SearchBoxComponent, SearchBoxModule, ProductCarouselComponent, ProductCarouselModule, ProductReferencesComponent, ProductReferencesModule, CurrentProductService, ProductImagesComponent, ProductDetailsComponent, ProductDetailsModule, ProductSummaryComponent, ProductListComponent, ProductFacetNavigationComponent, ProductGridItemComponent, ProductListItemComponent, ProductListModule, ViewModes, ProductViewComponent, ProductDetailOutlets, ProductAttributesComponent, ProductReviewsComponent, ProductReviewsModule, ProductTabsModule, LoginFormComponent, LoginFormModule, LoginComponent, LoginModule, LogoutGuard, LogoutModule, RegisterComponent, RegisterComponentModule, UserComponentModule, OrderConfirmationModule, OrderConfirmationItemsComponent, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConfirmationGuard, CartPageComponent, CartPageModule, ProductDetailsPageComponent, ProductDetailsPageModule, ProductListingPageModule, CmsModule$1 as CmsModule, CmsPageGuard, OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService, ComponentWrapperDirective, PageComponentModule, defaultCmsContentConfig, CmsComponentData, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, pwaConfigurationFactory, pwaFactory, PwaModule, PWAModuleConfig, defaultPWAModuleConfig, CmsRouteModule, SeoMetaService, initSeoService, SeoModule, provideConfigFromMetaTags, BreakpointService, defaultLayoutConfig, BREAKPOINT, LayoutConfig, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, LayoutModule, MainModule, StorefrontComponent, FormComponentsModule, ItemCounterComponent, GenericLinkComponent, GenericLinkModule, ListNavigationModule, PaginationComponent, SortingComponent, MediaComponent, MediaModule, MediaService, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, ModalRef, ModalService, OnlyNumberDirective, AutoFocusDirective, FormUtils, StorefrontModule, CheckoutConfigService as ɵc, defaultCheckoutConfig as ɵb, NavigationUIComponent as ɵf, HighlightPipe as ɵg, ProductCarouselService as ɵj, ProductReferencesService as ɵl, SharedCarouselService as ɵk, ProductImagesModule as ɵr, ProductDetailsTabComponent as ɵi, ProductDetailsTabModule as ɵh, defaultCartPageConfig as ɵt, AddToHomeScreenService as ɵq, addCmsRoute as ɵu, defaultRoutingConfig as ɵz, defaultStorefrontRoutesConfig as ɵy, RoutingModule$1 as ɵx, suffixUrlMatcher as ɵs, htmlLangProvider as ɵv, setHtmlLangAttribute as ɵw, CmsGuardsService as ɵp, CmsI18nService as ɵo, CmsMappingService as ɵn, CmsRoutesService as ɵm, CardComponent as ɵe, CardModule as ɵd, AutoFocusDirectiveModule as ɵa };
-
+export { AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, BREAKPOINT, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageComponent, CartPageModule, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormComponentsModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationComponentService, NavigationModule, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductDetailOutlets, ProductDetailsComponent, ProductDetailsModule, ProductDetailsPageComponent, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StorefrontComponent, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, defaultCmsContentConfig, defaultLayoutConfig, defaultPWAModuleConfig, fontawesomeIconConfig, initSeoService, provideConfigFromMetaTags, pwaConfigurationFactory, pwaFactory, AutoFocusDirectiveModule as ɵa, defaultCheckoutConfig as ɵb, CheckoutConfigService as ɵc, CardModule as ɵd, CardComponent as ɵe, NavigationUIComponent as ɵf, HighlightPipe as ɵg, ProductDetailsTabModule as ɵh, ProductDetailsTabComponent as ɵi, ProductCarouselService as ɵj, SharedCarouselService as ɵk, ProductReferencesService as ɵl, CmsRoutesService as ɵm, CmsMappingService as ɵn, CmsI18nService as ɵo, CmsGuardsService as ɵp, AddToHomeScreenService as ɵq, ProductImagesModule as ɵr, suffixUrlMatcher as ɵs, defaultCartPageConfig as ɵt, addCmsRoute as ɵu, htmlLangProvider as ɵv, setHtmlLangAttribute as ɵw, RoutingModule as ɵx, defaultStorefrontRoutesConfig as ɵy, defaultRoutingConfig as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map

@@ -1,6 +1,6 @@
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 import * as tslib_1 from "tslib";
 import { Injectable } from '@angular/core';
@@ -55,7 +55,7 @@ var CmsI18nService = /** @class */ (function () {
         { type: TranslationService },
         { type: TranslationChunkService }
     ]; };
-    /** @nocollapse */ CmsI18nService.ngInjectableDef = i0.defineInjectable({ factory: function CmsI18nService_Factory() { return new CmsI18nService(i0.inject(i1.CmsMappingService), i0.inject(i2.TranslationService), i0.inject(i2.TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
+    /** @nocollapse */ CmsI18nService.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: function CmsI18nService_Factory() { return new CmsI18nService(i0.ɵɵinject(i1.CmsMappingService), i0.ɵɵinject(i2.TranslationService), i0.ɵɵinject(i2.TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
     return CmsI18nService;
 }());
 export { CmsI18nService };

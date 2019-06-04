@@ -1,6 +1,6 @@
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 export { OrderDetailHeadlineComponent } from './order-detail-headline/order-detail-headline.component';
 export { OrderDetailItemsComponent } from './order-detail-items/order-detail-items.component';
