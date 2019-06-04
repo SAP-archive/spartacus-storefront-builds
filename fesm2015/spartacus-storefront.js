@@ -9,8 +9,8 @@ import { FormBuilder, FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveForms
 import { Title, Meta } from '@angular/platform-browser';
 import { CommonModule, isPlatformServer } from '@angular/common';
 import { RouterModule, Router, NavigationEnd, NavigationStart, ActivatedRoute } from '@angular/router';
-import { Injectable, Pipe, ChangeDetectionStrategy, Component, NgModule, APP_INITIALIZER, HostBinding, Input, Renderer2, Injector, Inject, PLATFORM_ID, Output, EventEmitter, ElementRef, Directive, TemplateRef, ViewContainerRef, Optional, forwardRef, ViewChild, HostListener, ChangeDetectorRef, defineInjectable, inject, INJECTOR } from '@angular/core';
-import { ProductService, RoutingService, ServerConfig, RoutingConfigService, ConfigModule, AuthGuard, RoutingModule, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductReferenceService, CmsConfig, PageType, I18nModule, provideConfig, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CheckoutService, CmsService, SemanticPathService, Config, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, defaultCmsModuleConfig, CmsModule, CartService, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, CartModule, UserModule, UrlModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CmsPageTitleModule, NotAuthGuard, AuthRedirectService, GlobalMessageModule, OccConfig, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, ProductSearchService } from '@spartacus/core';
+import { Injectable, Pipe, ChangeDetectionStrategy, Component, NgModule, APP_INITIALIZER, HostBinding, Input, Renderer2, Injector, Inject, PLATFORM_ID, Output, EventEmitter, ElementRef, Directive, TemplateRef, ViewContainerRef, Optional, HostListener, forwardRef, ViewChild, ChangeDetectorRef, defineInjectable, inject, INJECTOR } from '@angular/core';
+import { ProductService, RoutingService, ServerConfig, RoutingConfigService, ConfigModule, AuthGuard, RoutingModule, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductReferenceService, CmsConfig, PageType, I18nModule, provideConfig, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CheckoutService, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CartService, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, CartModule, UserModule, UrlModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CmsPageTitleModule, NotAuthGuard, AuthRedirectService, GlobalMessageModule, OccConfig, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, ProductSearchService } from '@spartacus/core';
 
 /**
  * @fileoverview added by tsickle
@@ -4808,6 +4808,7 @@ class AddressFormComponent {
         this.userService = userService;
         this.globalMessageService = globalMessageService;
         this.modalService = modalService;
+        this.selectedCountry$ = new BehaviorSubject('');
         this.showCancelBtn = true;
         this.submitAddress = new EventEmitter();
         this.backToAddress = new EventEmitter();
@@ -4850,19 +4851,14 @@ class AddressFormComponent {
             return [noneTitle, ...titles];
         }));
         // Fetching regions
-        this.regions$ = this.userService.getRegions().pipe(tap(regions => {
+        this.regions$ = this.selectedCountry$.pipe(switchMap(country => this.userService.getRegions(country)), tap(regions => {
             /** @type {?} */
             const regionControl = this.address.get('region.isocode');
-            if (Object.keys(regions).length === 0) {
-                regionControl.disable();
-                /** @type {?} */
-                const countryIsoCode = this.address.get('country.isocode').value;
-                if (countryIsoCode) {
-                    this.userService.loadRegions(countryIsoCode);
-                }
+            if (regions.length > 0) {
+                regionControl.enable();
             }
             else {
-                regionControl.enable();
+                regionControl.disable();
             }
         }));
         // verify the new added address
@@ -4910,7 +4906,7 @@ class AddressFormComponent {
      */
     countrySelected(country) {
         this.address['controls'].country['controls'].isocode.setValue(country.isocode);
-        this.userService.loadRegions(country.isocode);
+        this.selectedCountry$.next(country.isocode);
     }
     /**
      * @param {?} region

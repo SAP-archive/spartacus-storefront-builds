@@ -6035,6 +6035,7 @@
             this.userService = userService;
             this.globalMessageService = globalMessageService;
             this.modalService = modalService;
+            this.selectedCountry$ = new rxjs.BehaviorSubject('');
             this.showCancelBtn = true;
             this.submitAddress = new i0.EventEmitter();
             this.backToAddress = new i0.EventEmitter();
@@ -6081,19 +6082,14 @@
                     return __spread([noneTitle], titles);
                 }));
                 // Fetching regions
-                this.regions$ = this.userService.getRegions().pipe(operators.tap(function (regions) {
+                this.regions$ = this.selectedCountry$.pipe(operators.switchMap(function (country) { return _this.userService.getRegions(country); }), operators.tap(function (regions) {
                     /** @type {?} */
                     var regionControl = _this.address.get('region.isocode');
-                    if (Object.keys(regions).length === 0) {
-                        regionControl.disable();
-                        /** @type {?} */
-                        var countryIsoCode = _this.address.get('country.isocode').value;
-                        if (countryIsoCode) {
-                            _this.userService.loadRegions(countryIsoCode);
-                        }
+                    if (regions.length > 0) {
+                        regionControl.enable();
                     }
                     else {
-                        regionControl.enable();
+                        regionControl.disable();
                     }
                 }));
                 // verify the new added address
@@ -6149,7 +6145,7 @@
          */
             function (country) {
                 this.address['controls'].country['controls'].isocode.setValue(country.isocode);
-                this.userService.loadRegions(country.isocode);
+                this.selectedCountry$.next(country.isocode);
             };
         /**
          * @param {?} region

@@ -1,6 +1,6 @@
 import { EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { Address, AddressValidation, CheckoutService, Country, GlobalMessageService, Region, Title, UserService } from '@spartacus/core';
 import { ModalRef, ModalService } from '../../../../../shared/components/modal/index';
 export declare class AddressFormComponent implements OnInit, OnDestroy {
@@ -12,6 +12,7 @@ export declare class AddressFormComponent implements OnInit, OnDestroy {
     countries$: Observable<Country[]>;
     titles$: Observable<Title[]>;
     regions$: Observable<Region[]>;
+    selectedCountry$: BehaviorSubject<string>;
     addressData: Address;
     actionBtnLabel: string;
     cancelBtnLabel: string;
