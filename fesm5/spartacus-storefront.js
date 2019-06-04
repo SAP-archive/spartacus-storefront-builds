@@ -9,8 +9,8 @@ import { Title, Meta } from '@angular/platform-browser';
 import { __values, __read, __spread, __extends, __assign, __awaiter, __generator } from 'tslib';
 import { CommonModule, isPlatformServer } from '@angular/common';
 import { RouterModule, Router, NavigationStart, ActivatedRoute } from '@angular/router';
-import { Injectable, ChangeDetectionStrategy, Component, Input, Pipe, NgModule, APP_INITIALIZER, Output, EventEmitter, Injector, ElementRef, Renderer2, Directive, HostBinding, TemplateRef, ChangeDetectorRef, ViewChild, HostListener, forwardRef, Optional, defineInjectable, inject, INJECTOR, Inject, PLATFORM_ID, ViewContainerRef } from '@angular/core';
-import { ProductService, RoutingService, RoutingConfigService, ConfigModule, AuthGuard, RoutingModule, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductReferenceService, CmsConfig, PageType, I18nModule, provideConfig, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, ServerConfig, CheckoutService, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CartService, CheckoutModule, DynamicAttributeService, CxApiService, ComponentMapperService, CartModule, UserModule, UrlModule, AuthService, UserService, CmsPageTitleModule, PageMetaService, NotAuthGuard, PageRobotsMeta, AuthRedirectService, GlobalMessageModule, OccConfig, ProductModule, ContextServiceMap, SiteContextModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ProductReviewService, TranslatePipe, ProductSearchService, SearchboxService } from '@spartacus/core';
+import { Injectable, ChangeDetectionStrategy, Component, Input, Pipe, NgModule, APP_INITIALIZER, Output, EventEmitter, Injector, ElementRef, Renderer2, Directive, HostBinding, TemplateRef, HostListener, forwardRef, ViewChild, ChangeDetectorRef, Optional, defineInjectable, inject, INJECTOR, Inject, PLATFORM_ID, ViewContainerRef } from '@angular/core';
+import { ProductService, RoutingService, RoutingConfigService, ConfigModule, AuthGuard, RoutingModule, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductReferenceService, CmsConfig, PageType, I18nModule, provideConfig, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CheckoutService, ServerConfig, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CartService, CheckoutModule, DynamicAttributeService, CxApiService, ComponentMapperService, CartModule, UserModule, UrlModule, AuthService, UserService, PageMetaService, CmsPageTitleModule, NotAuthGuard, PageRobotsMeta, AuthRedirectService, GlobalMessageModule, OccConfig, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, SearchboxService, TranslatePipe, ProductSearchService } from '@spartacus/core';
 
 /**
  * @fileoverview added by tsickle
@@ -10805,7 +10805,7 @@ var moduleComponents = [
     OrderDetailTotalsComponent,
     OrderDetailShippingComponent,
 ];
-var ɵ0$2 = { pageLabel: 'order', cxRoute: 'orderDetails' };
+var ɵ0$2 = { cxRoute: 'orderDetails' };
 var OrderDetailsModule = /** @class */ (function () {
     function OrderDetailsModule() {
     }
@@ -14870,7 +14870,7 @@ var CartPageComponent = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var ɵ0$3 = { pageLabel: 'cartPage', cxRoute: 'cart' };
+var ɵ0$3 = { cxRoute: 'cart' };
 /** @type {?} */
 var routes = [
     {
@@ -15112,7 +15112,7 @@ var OrderConfirmationPageComponent = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var ɵ0$6 = { pageLabel: 'orderConfirmationPage', cxRoute: 'orderConfirmation' };
+var ɵ0$6 = { cxRoute: 'orderConfirmation' };
 /** @type {?} */
 var routes$2 = [
     // TODO: as soon as the components are moved to CMS driven components we can drop this specific OrderConfirmationPageComponent
@@ -15174,7 +15174,7 @@ var defaultStorefrontRoutesConfig = {
     brand: { paths: ['Brands/:brandName/c/:brandCode'] },
     termsAndConditions: { paths: ['termsAndConditions'] },
     orderDetails: {
-        paths: ['my-account/orders/:orderCode'],
+        paths: ['my-account/order/:orderCode'],
         paramsMapping: { orderCode: 'code' },
     },
 };

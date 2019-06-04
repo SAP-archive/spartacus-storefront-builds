@@ -9089,7 +9089,7 @@ const moduleComponents = [
     OrderDetailTotalsComponent,
     OrderDetailShippingComponent,
 ];
-const ɵ0$2 = { pageLabel: 'order', cxRoute: 'orderDetails' };
+const ɵ0$2 = { cxRoute: 'orderDetails' };
 class OrderDetailsModule {
 }
 OrderDetailsModule.decorators = [
@@ -12388,7 +12388,7 @@ CartPageComponent.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-const ɵ0$3 = { pageLabel: 'cartPage', cxRoute: 'cart' };
+const ɵ0$3 = { cxRoute: 'cart' };
 /** @type {?} */
 const routes = [
     {
@@ -12611,7 +12611,7 @@ OrderConfirmationPageComponent.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-const ɵ0$6 = { pageLabel: 'orderConfirmationPage', cxRoute: 'orderConfirmation' };
+const ɵ0$6 = { cxRoute: 'orderConfirmation' };
 /** @type {?} */
 const routes$2 = [
     // TODO: as soon as the components are moved to CMS driven components we can drop this specific OrderConfirmationPageComponent
@@ -12670,7 +12670,7 @@ const defaultStorefrontRoutesConfig = {
     brand: { paths: ['Brands/:brandName/c/:brandCode'] },
     termsAndConditions: { paths: ['termsAndConditions'] },
     orderDetails: {
-        paths: ['my-account/orders/:orderCode'],
+        paths: ['my-account/order/:orderCode'],
         paramsMapping: { orderCode: 'code' },
     },
 };

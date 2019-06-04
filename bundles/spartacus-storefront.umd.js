@@ -11136,7 +11136,7 @@
         OrderDetailTotalsComponent,
         OrderDetailShippingComponent,
     ];
-    var ɵ0$2 = { pageLabel: 'order', cxRoute: 'orderDetails' };
+    var ɵ0$2 = { cxRoute: 'orderDetails' };
     var OrderDetailsModule = /** @class */ (function () {
         function OrderDetailsModule() {
         }
@@ -15263,7 +15263,7 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var ɵ0$3 = { pageLabel: 'cartPage', cxRoute: 'cart' };
+    var ɵ0$3 = { cxRoute: 'cart' };
     /** @type {?} */
     var routes = [
         {
@@ -15500,7 +15500,7 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var ɵ0$6 = { pageLabel: 'orderConfirmationPage', cxRoute: 'orderConfirmation' };
+    var ɵ0$6 = { cxRoute: 'orderConfirmation' };
     /** @type {?} */
     var routes$2 = [
         // TODO: as soon as the components are moved to CMS driven components we can drop this specific OrderConfirmationPageComponent
@@ -15562,7 +15562,7 @@
         brand: { paths: ['Brands/:brandName/c/:brandCode'] },
         termsAndConditions: { paths: ['termsAndConditions'] },
         orderDetails: {
-            paths: ['my-account/orders/:orderCode'],
+            paths: ['my-account/order/:orderCode'],
             paramsMapping: { orderCode: 'code' },
         },
     };
