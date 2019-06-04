@@ -1,18 +1,14 @@
-import { OnInit, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
-import { OutletStyleService } from './outlet-style.service';
+import { OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { OutletService } from './outlet.service';
 export declare class OutletDirective implements OnInit {
     private vcr;
     private templateRef;
     private outletService;
-    private outletStyleService;
-    private renderer;
     cxOutlet: string;
     private _context;
     cxOutletContext: string;
-    constructor(vcr: ViewContainerRef, templateRef: TemplateRef<any>, outletService: OutletService, outletStyleService: OutletStyleService, renderer: Renderer2);
+    constructor(vcr: ViewContainerRef, templateRef: TemplateRef<any>, outletService: OutletService);
     ngOnInit(): void;
     private renderTemplate;
-    private renderStyleLink;
     private readonly context;
 }

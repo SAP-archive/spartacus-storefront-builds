@@ -6687,54 +6687,11 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var OutletStyleService = /** @class */ (function () {
-        function OutletStyleService() {
-            this.templateRefs = {};
-        }
-        /**
-         * @param {?} outlet
-         * @param {?} elem
-         * @return {?}
-         */
-        OutletStyleService.prototype.add = /**
-         * @param {?} outlet
-         * @param {?} elem
-         * @return {?}
-         */
-            function (outlet, elem) {
-                this.templateRefs[outlet] = elem;
-            };
-        /**
-         * @param {?} outlet
-         * @return {?}
-         */
-        OutletStyleService.prototype.get = /**
-         * @param {?} outlet
-         * @return {?}
-         */
-            function (outlet) {
-                return this.templateRefs[outlet];
-            };
-        OutletStyleService.decorators = [
-            { type: i0.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */ OutletStyleService.ngInjectableDef = i0.defineInjectable({ factory: function OutletStyleService_Factory() { return new OutletStyleService(); }, token: OutletStyleService, providedIn: "root" });
-        return OutletStyleService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var OutletDirective = /** @class */ (function () {
-        function OutletDirective(vcr, templateRef, outletService, outletStyleService, renderer) {
+        function OutletDirective(vcr, templateRef, outletService) {
             this.vcr = vcr;
             this.templateRef = templateRef;
             this.outletService = outletService;
-            this.outletStyleService = outletStyleService;
-            this.renderer = renderer;
         }
         Object.defineProperty(OutletDirective.prototype, "cxOutletContext", {
             set: /**
@@ -6758,7 +6715,6 @@
                 nodes.push.apply(nodes, __spread(this.renderTemplate(OutletPosition.BEFORE)));
                 nodes.push.apply(nodes, __spread(this.renderTemplate(OutletPosition.REPLACE, true)));
                 nodes.push.apply(nodes, __spread(this.renderTemplate(OutletPosition.AFTER)));
-                this.renderStyleLink(nodes);
             };
         /**
          * @private
@@ -6789,29 +6745,6 @@
                 }
                 return nodes;
             };
-        /**
-         * @private
-         * @param {?} nodes
-         * @return {?}
-         */
-        OutletDirective.prototype.renderStyleLink = /**
-         * @private
-         * @param {?} nodes
-         * @return {?}
-         */
-            function (nodes) {
-                /** @type {?} */
-                var styleElement = this.outletStyleService.get(this.cxOutlet);
-                if (styleElement) {
-                    /** @type {?} */
-                    var parentElement = nodes.find(function (node) { return node instanceof HTMLElement; });
-                    if (parentElement.shadowRoot) {
-                        parentElement = parentElement.shadowRoot;
-                    }
-                    styleElement.nativeElement.rel = 'stylesheet';
-                    this.renderer.appendChild(parentElement, styleElement.nativeElement);
-                }
-            };
         Object.defineProperty(OutletDirective.prototype, "context", {
             get: /**
              * @private
@@ -6840,9 +6773,7 @@
             return [
                 { type: i0.ViewContainerRef },
                 { type: i0.TemplateRef },
-                { type: OutletService },
-                { type: OutletStyleService },
-                { type: i0.Renderer2 }
+                { type: OutletService }
             ];
         };
         OutletDirective.propDecorators = {
@@ -6868,59 +6799,6 @@
                     },] }
         ];
         return OutletModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var StyleRefDirective = /** @class */ (function () {
-        function StyleRefDirective(element, cssOutletService) {
-            this.element = element;
-            this.cssOutletService = cssOutletService;
-        }
-        /**
-         * @return {?}
-         */
-        StyleRefDirective.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () {
-                this.cssOutletService.add(this.cxCssRef, this.element);
-            };
-        StyleRefDirective.decorators = [
-            { type: i0.Directive, args: [{
-                        selector: '[cxCssRef]',
-                    },] }
-        ];
-        /** @nocollapse */
-        StyleRefDirective.ctorParameters = function () {
-            return [
-                { type: i0.ElementRef },
-                { type: OutletStyleService }
-            ];
-        };
-        StyleRefDirective.propDecorators = {
-            cxCssRef: [{ type: i0.Input }]
-        };
-        return StyleRefDirective;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var StyleRefModule = /** @class */ (function () {
-        function StyleRefModule() {
-        }
-        StyleRefModule.decorators = [
-            { type: i0.NgModule, args: [{
-                        imports: [common.CommonModule],
-                        declarations: [StyleRefDirective],
-                        exports: [StyleRefDirective],
-                    },] }
-        ];
-        return StyleRefModule;
     }());
 
     /**
@@ -9499,7 +9377,7 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
-    var layoutModules = [OutletRefModule, StyleRefModule];
+    var layoutModules = [OutletRefModule];
     var LayoutModule = /** @class */ (function () {
         function LayoutModule() {
         }
@@ -16047,8 +15925,6 @@
     exports.OutletPosition = OutletPosition;
     exports.OutletModule = OutletModule;
     exports.OutletService = OutletService;
-    exports.StyleRefDirective = StyleRefDirective;
-    exports.StyleRefModule = StyleRefModule;
     exports.ComponentWrapperDirective = ComponentWrapperDirective;
     exports.PageComponentModule = PageComponentModule;
     exports.defaultCmsContentConfig = defaultCmsContentConfig;
@@ -16105,26 +15981,25 @@
     exports.ɵb = defaultCheckoutConfig;
     exports.ɵf = NavigationUIComponent;
     exports.ɵg = HighlightPipe;
-    exports.ɵk = ProductCarouselService;
-    exports.ɵm = ProductReferencesService;
-    exports.ɵl = SharedCarouselService;
-    exports.ɵs = ProductImagesModule;
-    exports.ɵj = ProductDetailsTabComponent;
-    exports.ɵi = ProductDetailsTabModule;
-    exports.ɵh = OutletStyleService;
-    exports.ɵu = defaultCartPageConfig;
-    exports.ɵr = AddToHomeScreenService;
-    exports.ɵv = addCmsRoute;
-    exports.ɵba = defaultRoutingConfig;
-    exports.ɵz = defaultStorefrontRoutesConfig;
-    exports.ɵy = RoutingModule;
-    exports.ɵt = suffixUrlMatcher;
-    exports.ɵw = htmlLangProvider;
-    exports.ɵx = setHtmlLangAttribute;
-    exports.ɵq = CmsGuardsService;
-    exports.ɵp = CmsI18nService;
-    exports.ɵo = CmsMappingService;
-    exports.ɵn = CmsRoutesService;
+    exports.ɵj = ProductCarouselService;
+    exports.ɵl = ProductReferencesService;
+    exports.ɵk = SharedCarouselService;
+    exports.ɵr = ProductImagesModule;
+    exports.ɵi = ProductDetailsTabComponent;
+    exports.ɵh = ProductDetailsTabModule;
+    exports.ɵt = defaultCartPageConfig;
+    exports.ɵq = AddToHomeScreenService;
+    exports.ɵu = addCmsRoute;
+    exports.ɵz = defaultRoutingConfig;
+    exports.ɵy = defaultStorefrontRoutesConfig;
+    exports.ɵx = RoutingModule;
+    exports.ɵs = suffixUrlMatcher;
+    exports.ɵv = htmlLangProvider;
+    exports.ɵw = setHtmlLangAttribute;
+    exports.ɵp = CmsGuardsService;
+    exports.ɵo = CmsI18nService;
+    exports.ɵn = CmsMappingService;
+    exports.ɵm = CmsRoutesService;
     exports.ɵe = CardComponent;
     exports.ɵd = CardModule;
     exports.ɵa = AutoFocusDirectiveModule;
