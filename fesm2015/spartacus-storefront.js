@@ -1,16 +1,16 @@
+import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ServiceWorkerModule, ɵangular_packages_service_worker_service_worker_b } from '@angular/service-worker';
 import { __awaiter } from 'tslib';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { NgbModalRef, NgbModal, NgbModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { of, BehaviorSubject, combineLatest, fromEvent, concat, from, isObservable, Subscription } from 'rxjs';
 import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
 import { filter, map, switchMap, tap, debounceTime, take, skipWhile, shareReplay, distinctUntilChanged, startWith, endWith, first, withLatestFrom, delay } from 'rxjs/operators';
 import { FormBuilder, FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Title, Meta } from '@angular/platform-browser';
 import { CommonModule, isPlatformServer } from '@angular/common';
-import { RouterModule, Router, NavigationStart, ActivatedRoute } from '@angular/router';
-import { Injectable, ChangeDetectionStrategy, Component, Input, Pipe, NgModule, APP_INITIALIZER, Injector, Inject, PLATFORM_ID, Output, EventEmitter, ElementRef, Renderer2, Directive, HostBinding, TemplateRef, ViewContainerRef, Optional, HostListener, forwardRef, ViewChild, ChangeDetectorRef, defineInjectable, inject, INJECTOR } from '@angular/core';
-import { ProductService, RoutingService, ServerConfig, RoutingConfigService, ConfigModule, AuthGuard, RoutingModule, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductReferenceService, CmsConfig, PageType, I18nModule, provideConfig, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CheckoutService, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CartService, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, CartModule, UserModule, UrlModule, PageRobotsMeta, PageMetaService, AuthService, UserService, CmsPageTitleModule, NotAuthGuard, AuthRedirectService, GlobalMessageModule, OccConfig, ProductModule, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, ProductSearchService } from '@spartacus/core';
+import { RouterModule, Router, NavigationEnd, NavigationStart, ActivatedRoute } from '@angular/router';
+import { Injectable, Pipe, ChangeDetectionStrategy, Component, NgModule, APP_INITIALIZER, HostBinding, Input, Renderer2, Injector, Inject, PLATFORM_ID, Output, EventEmitter, ElementRef, Directive, TemplateRef, ViewContainerRef, Optional, HostListener, ChangeDetectorRef, ViewChild, forwardRef, defineInjectable, inject, INJECTOR } from '@angular/core';
+import { ProductService, RoutingService, ServerConfig, RoutingConfigService, ConfigModule, AuthGuard, RoutingModule, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductReferenceService, CmsConfig, PageType, I18nModule, provideConfig, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CheckoutService, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CartService, CheckoutModule, CxApiService, ComponentMapperService, DynamicAttributeService, CartModule, UserModule, UrlModule, AuthService, UserService, NotAuthGuard, PageRobotsMeta, PageMetaService, AuthRedirectService, CmsPageTitleModule, GlobalMessageModule, OccConfig, ContextServiceMap, SiteContextModule, ProductModule, ProductReviewService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, SearchboxService, ProductSearchService } from '@spartacus/core';
 
 /**
  * @fileoverview added by tsickle
@@ -150,6 +150,8 @@ const ICON_TYPE = {
     GRID: 'GRID',
     LIST: 'LIST',
     CARET_DOWN: 'CARET_DOWN',
+    CARET_LEFT: 'CARET_LEFT',
+    CARET_RIGHT: 'CARET_RIGHT',
     TIMES: 'TIMES',
     ERROR: 'ERROR',
     WARNING: 'WARNING',
@@ -189,6 +191,8 @@ const fontawesomeIconConfig = {
             GRID: 'fas fa-th-large',
             LIST: 'fas fa-bars',
             CARET_DOWN: 'fas fa-angle-down',
+            CARET_RIGHT: 'fas fa-angle-right',
+            CARET_LEFT: 'fas fa-angle-left',
             ERROR: 'fas fa-exclamation-circle',
             WARNING: 'fas fa-exclamation-triangle',
             SUCCESS: 'fas fa-check-circle',
@@ -10210,23 +10214,55 @@ class NavigationComponentService {
         this.componentData = componentData;
     }
     /**
+     * @return {?}
+     */
+    getComponentData() {
+        return this.componentData.data$;
+    }
+    /**
+     * @return {?}
+     */
+    createNavigation() {
+        return combineLatest(this.getComponentData(), this.getNavigationNode()).pipe(map(([data, nav]) => {
+            return {
+                title: data.name,
+                children: [nav],
+            };
+        }));
+    }
+    /**
+     * @return {?}
+     */
+    getNavigationNode() {
+        return this.getComponentData().pipe(filter(Boolean), switchMap(data => {
+            /** @type {?} */
+            const navigation = data.navigationNode ? data.navigationNode : data;
+            return this.cmsService.getNavigationEntryItems(navigation.uid).pipe(tap(items => {
+                if (items === undefined) {
+                    this.getNavigationEntryItems(navigation, true);
+                }
+            }), filter(Boolean), map(items => this.createNode(navigation, items)));
+        }));
+    }
+    /**
      * Get all navigation entry items' type and id. Dispatch action to load all these items
+     * @private
      * @param {?} nodeData
      * @param {?} root
      * @param {?=} itemsList
      * @return {?}
      */
     getNavigationEntryItems(nodeData, root, itemsList = []) {
-        if (nodeData.children && nodeData.children.length > 0) {
-            this.processChildren(nodeData, itemsList);
-        }
-        else if (nodeData.entries && nodeData.entries.length > 0) {
+        if (nodeData.entries && nodeData.entries.length > 0) {
             nodeData.entries.forEach(entry => {
                 itemsList.push({
                     superType: entry.itemSuperType,
                     id: entry.itemId,
                 });
             });
+        }
+        if (nodeData.children && nodeData.children.length > 0) {
+            this.processChildren(nodeData, itemsList);
         }
         if (root) {
             /** @type {?} */
@@ -10247,6 +10283,7 @@ class NavigationComponentService {
     }
     /**
      * Create a new node tree for display
+     * @private
      * @param {?} nodeData
      * @param {?} items
      * @return {?}
@@ -10255,28 +10292,35 @@ class NavigationComponentService {
         /** @type {?} */
         const node = {};
         node['title'] = nodeData.title;
-        node['url'] = '';
+        if (nodeData.entries && nodeData.entries.length > 0) {
+            this.addLinkToNode(node, nodeData.entries[0], items);
+        }
         if (nodeData.children && nodeData.children.length > 0) {
             /** @type {?} */
             const children = this.createChildren(nodeData, items);
             node['children'] = children;
         }
-        else if (nodeData.entries && nodeData.entries.length > 0) {
-            /** @type {?} */
-            const entry = nodeData.entries[0];
-            /** @type {?} */
-            const item = items[`${entry.itemId}_${entry.itemSuperType}`];
-            // now we only consider CMSLinkComponent
-            if (entry.itemType === 'CMSLinkComponent' && item !== undefined) {
-                if (!node['title']) {
-                    node['title'] = item.linkName;
-                }
-                node['url'] = item.url;
-                // if "NEWWINDOW", target is true
-                node['target'] = item.target;
-            }
-        }
         return node;
+    }
+    /**
+     * @private
+     * @param {?} node
+     * @param {?} entry
+     * @param {?} items
+     * @return {?}
+     */
+    addLinkToNode(node, entry, items) {
+        /** @type {?} */
+        const item = items[`${entry.itemId}_${entry.itemSuperType}`];
+        // now we only consider CMSLinkComponent
+        if (entry.itemType === 'CMSLinkComponent' && item !== undefined) {
+            if (!node['title']) {
+                node['title'] = item.linkName;
+            }
+            node['url'] = item.url;
+            // if "NEWWINDOW", target is true
+            node['target'] = item.target;
+        }
     }
     /**
      * @private
@@ -10294,28 +10338,6 @@ class NavigationComponentService {
         }
         return children;
     }
-    /**
-     * @return {?}
-     */
-    getComponentData() {
-        return this.componentData.data$;
-    }
-    /**
-     * @return {?}
-     */
-    getNodes() {
-        return this.getComponentData().pipe(switchMap(data => {
-            if (data) {
-                /** @type {?} */
-                const navigation = data.navigationNode ? data.navigationNode : data;
-                return this.cmsService.getNavigationEntryItems(navigation.uid).pipe(tap(items => {
-                    if (items === undefined) {
-                        this.getNavigationEntryItems(navigation, true, []);
-                    }
-                }), filter(items => items !== undefined), map(items => this.createNode(navigation, items)));
-            }
-        }));
-    }
 }
 NavigationComponentService.decorators = [
     { type: Injectable }
@@ -10330,44 +10352,28 @@ NavigationComponentService.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class NavigationComponent {
+class CategoryNavigationComponent {
     /**
      * @param {?} service
      */
     constructor(service) {
         this.service = service;
-        this.dropdownMode = 'list';
-        this.node$ = this.service.getNodes();
+        this.node$ = this.service.getNavigationNode();
+        this.styleClass$ = this.service
+            .getComponentData()
+            .pipe(map(d => d.styleClass));
     }
-}
-NavigationComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-navigation',
-                template: "<cx-navigation-ui [node]=\"node$ | async\" [dropdownMode]=\"dropdownMode\">\n</cx-navigation-ui>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-/** @nocollapse */
-NavigationComponent.ctorParameters = () => [
-    { type: NavigationComponentService }
-];
-NavigationComponent.propDecorators = {
-    dropdownMode: [{ type: Input }],
-    node: [{ type: Input }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class CategoryNavigationComponent extends NavigationComponent {
 }
 CategoryNavigationComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-category-navigation',
-                template: "<nav *ngIf=\"(node$ | async) as node\">\n  <cx-navigation-ui\n    *ngFor=\"let child of node?.children\"\n    ngbDropdown\n    [node]=\"child\"\n    dropdownMode=\"column\"\n  ></cx-navigation-ui>\n</nav>\n",
+                template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [ngClass]=\"styleClass$ | async\"\n></cx-navigation-ui>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
+];
+/** @nocollapse */
+CategoryNavigationComponent.ctorParameters = () => [
+    { type: NavigationComponentService }
 ];
 
 /**
@@ -10375,21 +10381,137 @@ CategoryNavigationComponent.decorators = [
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class NavigationUIComponent {
-    constructor() {
-        this.dropdownMode = 'list';
+    /**
+     * @param {?} router
+     * @param {?} renderer
+     */
+    constructor(router, renderer) {
+        this.router = router;
+        this.renderer = renderer;
+        /**
+         * the icon type that will be used for navigation nodes
+         * with children.
+         */
+        this.iconType = ICON_TYPE;
+        /**
+         * Indicates whether the navigation should support flyout.
+         * If flyout is set to true, the
+         * nested child navitation nodes will only appear on hover or focus.
+         */
+        this.flyout = true;
+        this.isOpen = false;
+        this.openNodes = [];
+        this.router.events
+            .pipe(filter(event => event instanceof NavigationEnd))
+            .subscribe(() => this.clear());
+    }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    toggleOpen(event) {
+        if (this.openNodes.includes((/** @type {?} */ (event.currentTarget)))) {
+            this.openNodes = this.openNodes.filter(n => n !== event.currentTarget);
+            this.renderer.removeClass((/** @type {?} */ (event.currentTarget)), 'is-open');
+        }
+        else {
+            this.openNodes.push((/** @type {?} */ (event.currentTarget)));
+        }
+        this.updateClasses();
+        event.stopImmediatePropagation();
+        event.stopPropagation();
+    }
+    /**
+     * @return {?}
+     */
+    back() {
+        this.renderer.removeClass(this.openNodes[this.openNodes.length - 1], 'is-open');
+        this.openNodes.pop();
+        this.updateClasses();
+    }
+    /**
+     * @return {?}
+     */
+    clear() {
+        this.openNodes = [];
+        this.updateClasses();
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    updateClasses() {
+        this.openNodes.forEach((node, i) => {
+            if (i + 1 < this.openNodes.length) {
+                this.renderer.addClass(node, 'is-opened');
+                this.renderer.removeClass(node, 'is-open');
+            }
+            else {
+                this.renderer.removeClass(node, 'is-opened');
+                this.renderer.addClass(node, 'is-open');
+            }
+        });
+        this.isOpen = this.openNodes.length > 0;
+    }
+    /**
+     * @param {?} node
+     * @param {?=} depth
+     * @return {?}
+     */
+    getDepth(node, depth = 0) {
+        if (node.children && node.children.length > 0) {
+            return Math.max(...node.children.map(n => this.getDepth(n, depth + 1)));
+        }
+        else {
+            return depth;
+        }
     }
 }
 NavigationUIComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-navigation-ui',
-                template: "<div *ngIf=\"node\" class=\"cx-nav-item nav-item\" ngbDropdown>\n  <a\n    *ngIf=\"node.children && !node.title; else nodeWithChildren\"\n    ngbDropdownToggle\n    >&nbsp;\n  </a>\n  <ng-template #nodeWithChildren>\n    <span\n      *ngIf=\"node.children; else noChildren\"\n      ngbDropdownToggle\n      class=\"cx-nav-link nav-link\"\n      role=\"link\"\n      id=\"{{ node.title }}\"\n      >{{ node.title }}</span\n    >\n  </ng-template>\n  <ng-template #noChildren>\n    <a\n      [routerLink]=\"node.url\"\n      class=\"cx-nav-link nav-link\"\n      id=\"{{ node.title }}\"\n      >{{ node.title }}\n    </a>\n  </ng-template>\n  <ng-container [ngSwitch]=\"dropdownMode\">\n    <ng-container *ngSwitchCase=\"'list'\">\n      <div\n        ngbDropdownMenu\n        class=\"cx-nav-child-list\"\n        [attr.aria-label]=\"node.title\"\n        role=\"list\"\n      >\n        <div\n          role=\"listitem\"\n          *ngFor=\"let subCategory of node.children\"\n          class=\"dropdown-item cx-nav-child-item\"\n        >\n          <ng-container *ngIf=\"subCategory.url\">\n            <a [routerLink]=\"subCategory.url\" class=\"cx-nav-child-link\"\n              >{{ subCategory.title }}\n            </a>\n          </ng-container>\n          <ng-container *ngIf=\"!subCategory.url\">\n            <a class=\"cx-nav-child-link\">{{ subCategory.title }} </a>\n          </ng-container>\n          <a\n            [routerLink]=\"subCategoryChild.url\"\n            *ngFor=\"let subCategoryChild of subCategory.children\"\n            >{{ subCategoryChild.title }}\n          </a>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-container *ngSwitchCase=\"'column'\">\n      <div\n        ngbDropdownMenu\n        class=\"cx-nav-child-list-columns\"\n        [attr.aria-label]=\"node.title\"\n      >\n        <div\n          class=\"cx-nav-child-column\"\n          *ngFor=\"let subCategory of node.children\"\n        >\n          <ng-container *ngIf=\"subCategory.url\">\n            <a\n              role=\"link\"\n              [routerLink]=\"subCategory.url\"\n              class=\"cx-nav-child-link cx-nav-column-title\"\n              >{{ subCategory.title }}\n            </a>\n          </ng-container>\n          <ng-container *ngIf=\"!subCategory.url\">\n            <a class=\"cx-nav-child-link cx-nav-column-title\"\n              >{{ subCategory.title }}\n            </a>\n          </ng-container>\n\n          <div\n            *ngFor=\"let subCategoryChild of subCategory.children\"\n            class=\"dropdown-item cx-nav-child-column-item\"\n          >\n            <a\n              role=\"link\"\n              [routerLink]=\"subCategoryChild.url\"\n              class=\"cx-nav-child-link\"\n              >{{ subCategoryChild.title }}\n            </a>\n          </div>\n        </div>\n      </div>\n    </ng-container>\n  </ng-container>\n</div>\n",
+                template: "<div\n  *ngIf=\"flyout && node?.children.length > 1\"\n  class=\"back is-open\"\n  (click)=\"back()\"\n>\n  <h5>\n    <cx-icon [type]=\"iconType.CARET_LEFT\"></cx-icon>\n    {{ 'common.back' | cxTranslate }}\n  </h5>\n</div>\n\n<ng-container *ngFor=\"let child of node?.children\">\n  <ng-container *ngTemplateOutlet=\"nav; context: { node: child }\">\n  </ng-container>\n</ng-container>\n\n<!-- we generate links in a recursive manner -->\n<ng-template #nav let-node=\"node\">\n  <nav tabindex=\"0\" (click)=\"toggleOpen($event)\">\n    <cx-generic-link\n      *ngIf=\"\n        node.url && (!node.children || node.children?.length === 0);\n        else heading\n      \"\n      [url]=\"node.url\"\n    >\n      {{ node.title }}\n      <cx-icon\n        *ngIf=\"flyout && node.children?.length > 0\"\n        [type]=\"iconType.CARET_DOWN\"\n      ></cx-icon>\n    </cx-generic-link>\n\n    <ng-template #heading>\n      <h5 [attr.aria-label]=\"node.title\">\n        {{ node.title }}\n        <cx-icon\n          *ngIf=\"flyout && node.children?.length > 0\"\n          [type]=\"iconType.CARET_DOWN\"\n        ></cx-icon>\n      </h5>\n    </ng-template>\n\n    <!-- we add a wrapper to allow for better layout handling in CSS -->\n    <div class=\"wrapper\" *ngIf=\"node.children?.length > 0\">\n      <cx-generic-link *ngIf=\"node.url\" [url]=\"node.url\" class=\"all\">\n        {{ 'navigation.shopAll' | cxTranslate: { navNode: node.title } }}\n      </cx-generic-link>\n\n      <div class=\"childs\" [attr.depth]=\"getDepth(node)\">\n        <ng-container *ngFor=\"let child of node.children\">\n          <ng-container *ngTemplateOutlet=\"nav; context: { node: child }\">\n          </ng-container>\n        </ng-container>\n      </div>\n    </div>\n  </nav>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
+/** @nocollapse */
+NavigationUIComponent.ctorParameters = () => [
+    { type: Router },
+    { type: Renderer2 }
+];
 NavigationUIComponent.propDecorators = {
-    dropdownMode: [{ type: Input }],
-    node: [{ type: Input }]
+    node: [{ type: Input }],
+    flyout: [{ type: Input }, { type: HostBinding, args: ['class.flyout',] }],
+    isOpen: [{ type: Input }, { type: HostBinding, args: ['class.is-open',] }]
 };
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class NavigationComponent {
+    /**
+     * @param {?} service
+     */
+    constructor(service) {
+        this.service = service;
+        this.node$ = this.service.createNavigation();
+        this.styleClass$ = this.service
+            .getComponentData()
+            .pipe(map(d => d.styleClass));
+    }
+}
+NavigationComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-navigation',
+                template: "<cx-navigation-ui [node]=\"node$ | async\" [ngClass]=\"styleClass$ | async\">\n</cx-navigation-ui>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+NavigationComponent.ctorParameters = () => [
+    { type: NavigationComponentService }
+];
 
 /**
  * @fileoverview added by tsickle
@@ -10402,7 +10524,8 @@ NavigationModule.decorators = [
                 imports: [
                     CommonModule,
                     RouterModule,
-                    NgbDropdownModule,
+                    IconModule,
+                    GenericLinkModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             NavigationComponent: {
@@ -10461,14 +10584,28 @@ CategoryNavigationModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class FooterNavigationComponent extends NavigationComponent {
+class FooterNavigationComponent {
+    /**
+     * @param {?} service
+     */
+    constructor(service) {
+        this.service = service;
+        this.node$ = this.service.getNavigationNode();
+        this.styleClass$ = this.service
+            .getComponentData()
+            .pipe(map(d => d.styleClass));
+    }
 }
 FooterNavigationComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-footer-navigation',
-                template: "<nav *ngIf=\"(node$ | async) as node\">\n  <div class=\"container\">\n    <div class=\"row\">\n      <div\n        class=\"col-xs-12 col-sm-4 col-md-3 navigation-elements\"\n        *ngFor=\"let child of node?.children\"\n      >\n        <h5>{{ child.title }}</h5>\n        <ul>\n          <li *ngFor=\"let link of child.children\">\n            <cx-generic-link\n              [url]=\"link.url\"\n              [target]=\"link.target === true ? 'blank' : 'self'\"\n              >{{ link.title }}</cx-generic-link\n            >\n          </li>\n        </ul>\n      </div>\n    </div>\n  </div>\n</nav>\n<div class=\"notice\" *ngIf=\"(service.getComponentData() | async) as data\">\n  {{ data.notice }}\n</div>\n",
+                template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [flyout]=\"false\"\n  [ngClass]=\"styleClass$ | async\"\n></cx-navigation-ui>\n\n<div class=\"notice\" *ngIf=\"(service.getComponentData() | async) as data\">\n  {{ data.notice }}\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
+];
+/** @nocollapse */
+FooterNavigationComponent.ctorParameters = () => [
+    { type: NavigationComponentService }
 ];
 
 /**
@@ -10482,6 +10619,7 @@ FooterNavigationModule.decorators = [
                 imports: [
                     CommonModule,
                     RouterModule,
+                    NavigationModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             FooterNavigationComponent: {

@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/service-worker'), require('@ng-select/ng-select'), require('@ng-bootstrap/ng-bootstrap'), require('rxjs'), require('@angular/common/http'), require('rxjs/operators'), require('@angular/forms'), require('@angular/platform-browser'), require('@angular/common'), require('@angular/router'), require('@angular/core'), require('@spartacus/core')) :
-    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@angular/service-worker', '@ng-select/ng-select', '@ng-bootstrap/ng-bootstrap', 'rxjs', '@angular/common/http', 'rxjs/operators', '@angular/forms', '@angular/platform-browser', '@angular/common', '@angular/router', '@angular/core', '@spartacus/core'], factory) :
-    (factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}),global.ng['service-worker'],global.ngSelect,global.ngBootstrap,global.rxjs,global.ng.common.http,global.rxjs.operators,global.ng.forms,global.ng.platformBrowser,global.ng.common,global.ng.router,global.ng.core,global.core));
-}(this, (function (exports,serviceWorker,ngSelect,i1,rxjs,http,operators,forms,i1$1,common,i4,i0,i1$2) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@ng-bootstrap/ng-bootstrap'), require('@angular/service-worker'), require('@ng-select/ng-select'), require('rxjs'), require('@angular/common/http'), require('rxjs/operators'), require('@angular/forms'), require('@angular/platform-browser'), require('@angular/common'), require('@angular/router'), require('@angular/core'), require('@spartacus/core')) :
+    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@ng-bootstrap/ng-bootstrap', '@angular/service-worker', '@ng-select/ng-select', 'rxjs', '@angular/common/http', 'rxjs/operators', '@angular/forms', '@angular/platform-browser', '@angular/common', '@angular/router', '@angular/core', '@spartacus/core'], factory) :
+    (factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}),global.ngBootstrap,global.ng['service-worker'],global.ngSelect,global.rxjs,global.ng.common.http,global.rxjs.operators,global.ng.forms,global.ng.platformBrowser,global.ng.common,global.ng.router,global.ng.core,global.core));
+}(this, (function (exports,i1,serviceWorker,ngSelect,rxjs,http,operators,forms,i1$1,common,i4,i0,i1$2) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -329,6 +329,8 @@
         GRID: 'GRID',
         LIST: 'LIST',
         CARET_DOWN: 'CARET_DOWN',
+        CARET_LEFT: 'CARET_LEFT',
+        CARET_RIGHT: 'CARET_RIGHT',
         TIMES: 'TIMES',
         ERROR: 'ERROR',
         WARNING: 'WARNING',
@@ -373,6 +375,8 @@
                 GRID: 'fas fa-th-large',
                 LIST: 'fas fa-bars',
                 CARET_DOWN: 'fas fa-angle-down',
+                CARET_RIGHT: 'fas fa-angle-right',
+                CARET_LEFT: 'fas fa-angle-left',
                 ERROR: 'fas fa-exclamation-circle',
                 WARNING: 'fas fa-exclamation-triangle',
                 SUCCESS: 'fas fa-check-circle',
@@ -12461,6 +12465,48 @@
             this.componentData = componentData;
         }
         /**
+         * @return {?}
+         */
+        NavigationComponentService.prototype.getComponentData = /**
+         * @return {?}
+         */
+            function () {
+                return this.componentData.data$;
+            };
+        /**
+         * @return {?}
+         */
+        NavigationComponentService.prototype.createNavigation = /**
+         * @return {?}
+         */
+            function () {
+                return rxjs.combineLatest(this.getComponentData(), this.getNavigationNode()).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 2), data = _b[0], nav = _b[1];
+                    return {
+                        title: data.name,
+                        children: [nav],
+                    };
+                }));
+            };
+        /**
+         * @return {?}
+         */
+        NavigationComponentService.prototype.getNavigationNode = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                return this.getComponentData().pipe(operators.filter(Boolean), operators.switchMap(function (data) {
+                    /** @type {?} */
+                    var navigation = data.navigationNode ? data.navigationNode : data;
+                    return _this.cmsService.getNavigationEntryItems(navigation.uid).pipe(operators.tap(function (items) {
+                        if (items === undefined) {
+                            _this.getNavigationEntryItems(navigation, true);
+                        }
+                    }), operators.filter(Boolean), operators.map(function (items) { return _this.createNode(navigation, items); }));
+                }));
+            };
+        /**
          * Get all navigation entry items' type and id. Dispatch action to load all these items
          * @param nodeData
          * @param root
@@ -12468,6 +12514,7 @@
          */
         /**
          * Get all navigation entry items' type and id. Dispatch action to load all these items
+         * @private
          * @param {?} nodeData
          * @param {?} root
          * @param {?=} itemsList
@@ -12475,6 +12522,7 @@
          */
         NavigationComponentService.prototype.getNavigationEntryItems = /**
          * Get all navigation entry items' type and id. Dispatch action to load all these items
+         * @private
          * @param {?} nodeData
          * @param {?} root
          * @param {?=} itemsList
@@ -12484,16 +12532,16 @@
                 if (itemsList === void 0) {
                     itemsList = [];
                 }
-                if (nodeData.children && nodeData.children.length > 0) {
-                    this.processChildren(nodeData, itemsList);
-                }
-                else if (nodeData.entries && nodeData.entries.length > 0) {
+                if (nodeData.entries && nodeData.entries.length > 0) {
                     nodeData.entries.forEach(function (entry) {
                         itemsList.push({
                             superType: entry.itemSuperType,
                             id: entry.itemId,
                         });
                     });
+                }
+                if (nodeData.children && nodeData.children.length > 0) {
+                    this.processChildren(nodeData, itemsList);
                 }
                 if (root) {
                     /** @type {?} */
@@ -12542,12 +12590,14 @@
          */
         /**
          * Create a new node tree for display
+         * @private
          * @param {?} nodeData
          * @param {?} items
          * @return {?}
          */
         NavigationComponentService.prototype.createNode = /**
          * Create a new node tree for display
+         * @private
          * @param {?} nodeData
          * @param {?} items
          * @return {?}
@@ -12556,28 +12606,42 @@
                 /** @type {?} */
                 var node = {};
                 node['title'] = nodeData.title;
-                node['url'] = '';
+                if (nodeData.entries && nodeData.entries.length > 0) {
+                    this.addLinkToNode(node, nodeData.entries[0], items);
+                }
                 if (nodeData.children && nodeData.children.length > 0) {
                     /** @type {?} */
                     var children = this.createChildren(nodeData, items);
                     node['children'] = children;
                 }
-                else if (nodeData.entries && nodeData.entries.length > 0) {
-                    /** @type {?} */
-                    var entry = nodeData.entries[0];
-                    /** @type {?} */
-                    var item = items[entry.itemId + "_" + entry.itemSuperType];
-                    // now we only consider CMSLinkComponent
-                    if (entry.itemType === 'CMSLinkComponent' && item !== undefined) {
-                        if (!node['title']) {
-                            node['title'] = item.linkName;
-                        }
-                        node['url'] = item.url;
-                        // if "NEWWINDOW", target is true
-                        node['target'] = item.target;
-                    }
-                }
                 return node;
+            };
+        /**
+         * @private
+         * @param {?} node
+         * @param {?} entry
+         * @param {?} items
+         * @return {?}
+         */
+        NavigationComponentService.prototype.addLinkToNode = /**
+         * @private
+         * @param {?} node
+         * @param {?} entry
+         * @param {?} items
+         * @return {?}
+         */
+            function (node, entry, items) {
+                /** @type {?} */
+                var item = items[entry.itemId + "_" + entry.itemSuperType];
+                // now we only consider CMSLinkComponent
+                if (entry.itemType === 'CMSLinkComponent' && item !== undefined) {
+                    if (!node['title']) {
+                        node['title'] = item.linkName;
+                    }
+                    node['url'] = item.url;
+                    // if "NEWWINDOW", target is true
+                    node['target'] = item.target;
+                }
             };
         /**
          * @private
@@ -12618,35 +12682,6 @@
                 }
                 return children;
             };
-        /**
-         * @return {?}
-         */
-        NavigationComponentService.prototype.getComponentData = /**
-         * @return {?}
-         */
-            function () {
-                return this.componentData.data$;
-            };
-        /**
-         * @return {?}
-         */
-        NavigationComponentService.prototype.getNodes = /**
-         * @return {?}
-         */
-            function () {
-                var _this = this;
-                return this.getComponentData().pipe(operators.switchMap(function (data) {
-                    if (data) {
-                        /** @type {?} */
-                        var navigation_1 = data.navigationNode ? data.navigationNode : data;
-                        return _this.cmsService.getNavigationEntryItems(navigation_1.uid).pipe(operators.tap(function (items) {
-                            if (items === undefined) {
-                                _this.getNavigationEntryItems(navigation_1, true, []);
-                            }
-                        }), operators.filter(function (items) { return items !== undefined; }), operators.map(function (items) { return _this.createNode(navigation_1, items); }));
-                    }
-                }));
-            };
         NavigationComponentService.decorators = [
             { type: i0.Injectable }
         ];
@@ -12664,16 +12699,179 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var CategoryNavigationComponent = /** @class */ (function () {
+        function CategoryNavigationComponent(service) {
+            this.service = service;
+            this.node$ = this.service.getNavigationNode();
+            this.styleClass$ = this.service
+                .getComponentData()
+                .pipe(operators.map(function (d) { return d.styleClass; }));
+        }
+        CategoryNavigationComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-category-navigation',
+                        template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [ngClass]=\"styleClass$ | async\"\n></cx-navigation-ui>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        CategoryNavigationComponent.ctorParameters = function () {
+            return [
+                { type: NavigationComponentService }
+            ];
+        };
+        return CategoryNavigationComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var NavigationUIComponent = /** @class */ (function () {
+        function NavigationUIComponent(router, renderer) {
+            var _this = this;
+            this.router = router;
+            this.renderer = renderer;
+            /**
+             * the icon type that will be used for navigation nodes
+             * with children.
+             */
+            this.iconType = ICON_TYPE;
+            /**
+             * Indicates whether the navigation should support flyout.
+             * If flyout is set to true, the
+             * nested child navitation nodes will only appear on hover or focus.
+             */
+            this.flyout = true;
+            this.isOpen = false;
+            this.openNodes = [];
+            this.router.events
+                .pipe(operators.filter(function (event) { return event instanceof i4.NavigationEnd; }))
+                .subscribe(function () { return _this.clear(); });
+        }
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        NavigationUIComponent.prototype.toggleOpen = /**
+         * @param {?} event
+         * @return {?}
+         */
+            function (event) {
+                if (this.openNodes.includes(( /** @type {?} */(event.currentTarget)))) {
+                    this.openNodes = this.openNodes.filter(function (n) { return n !== event.currentTarget; });
+                    this.renderer.removeClass(( /** @type {?} */(event.currentTarget)), 'is-open');
+                }
+                else {
+                    this.openNodes.push(( /** @type {?} */(event.currentTarget)));
+                }
+                this.updateClasses();
+                event.stopImmediatePropagation();
+                event.stopPropagation();
+            };
+        /**
+         * @return {?}
+         */
+        NavigationUIComponent.prototype.back = /**
+         * @return {?}
+         */
+            function () {
+                this.renderer.removeClass(this.openNodes[this.openNodes.length - 1], 'is-open');
+                this.openNodes.pop();
+                this.updateClasses();
+            };
+        /**
+         * @return {?}
+         */
+        NavigationUIComponent.prototype.clear = /**
+         * @return {?}
+         */
+            function () {
+                this.openNodes = [];
+                this.updateClasses();
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        NavigationUIComponent.prototype.updateClasses = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.openNodes.forEach(function (node, i) {
+                    if (i + 1 < _this.openNodes.length) {
+                        _this.renderer.addClass(node, 'is-opened');
+                        _this.renderer.removeClass(node, 'is-open');
+                    }
+                    else {
+                        _this.renderer.removeClass(node, 'is-opened');
+                        _this.renderer.addClass(node, 'is-open');
+                    }
+                });
+                this.isOpen = this.openNodes.length > 0;
+            };
+        /**
+         * @param {?} node
+         * @param {?=} depth
+         * @return {?}
+         */
+        NavigationUIComponent.prototype.getDepth = /**
+         * @param {?} node
+         * @param {?=} depth
+         * @return {?}
+         */
+            function (node, depth) {
+                var _this = this;
+                if (depth === void 0) {
+                    depth = 0;
+                }
+                if (node.children && node.children.length > 0) {
+                    return Math.max.apply(Math, __spread(node.children.map(function (n) { return _this.getDepth(n, depth + 1); })));
+                }
+                else {
+                    return depth;
+                }
+            };
+        NavigationUIComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'cx-navigation-ui',
+                        template: "<div\n  *ngIf=\"flyout && node?.children.length > 1\"\n  class=\"back is-open\"\n  (click)=\"back()\"\n>\n  <h5>\n    <cx-icon [type]=\"iconType.CARET_LEFT\"></cx-icon>\n    {{ 'common.back' | cxTranslate }}\n  </h5>\n</div>\n\n<ng-container *ngFor=\"let child of node?.children\">\n  <ng-container *ngTemplateOutlet=\"nav; context: { node: child }\">\n  </ng-container>\n</ng-container>\n\n<!-- we generate links in a recursive manner -->\n<ng-template #nav let-node=\"node\">\n  <nav tabindex=\"0\" (click)=\"toggleOpen($event)\">\n    <cx-generic-link\n      *ngIf=\"\n        node.url && (!node.children || node.children?.length === 0);\n        else heading\n      \"\n      [url]=\"node.url\"\n    >\n      {{ node.title }}\n      <cx-icon\n        *ngIf=\"flyout && node.children?.length > 0\"\n        [type]=\"iconType.CARET_DOWN\"\n      ></cx-icon>\n    </cx-generic-link>\n\n    <ng-template #heading>\n      <h5 [attr.aria-label]=\"node.title\">\n        {{ node.title }}\n        <cx-icon\n          *ngIf=\"flyout && node.children?.length > 0\"\n          [type]=\"iconType.CARET_DOWN\"\n        ></cx-icon>\n      </h5>\n    </ng-template>\n\n    <!-- we add a wrapper to allow for better layout handling in CSS -->\n    <div class=\"wrapper\" *ngIf=\"node.children?.length > 0\">\n      <cx-generic-link *ngIf=\"node.url\" [url]=\"node.url\" class=\"all\">\n        {{ 'navigation.shopAll' | cxTranslate: { navNode: node.title } }}\n      </cx-generic-link>\n\n      <div class=\"childs\" [attr.depth]=\"getDepth(node)\">\n        <ng-container *ngFor=\"let child of node.children\">\n          <ng-container *ngTemplateOutlet=\"nav; context: { node: child }\">\n          </ng-container>\n        </ng-container>\n      </div>\n    </div>\n  </nav>\n</ng-template>\n",
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        NavigationUIComponent.ctorParameters = function () {
+            return [
+                { type: i4.Router },
+                { type: i0.Renderer2 }
+            ];
+        };
+        NavigationUIComponent.propDecorators = {
+            node: [{ type: i0.Input }],
+            flyout: [{ type: i0.Input }, { type: i0.HostBinding, args: ['class.flyout',] }],
+            isOpen: [{ type: i0.Input }, { type: i0.HostBinding, args: ['class.is-open',] }]
+        };
+        return NavigationUIComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var NavigationComponent = /** @class */ (function () {
         function NavigationComponent(service) {
             this.service = service;
-            this.dropdownMode = 'list';
-            this.node$ = this.service.getNodes();
+            this.node$ = this.service.createNavigation();
+            this.styleClass$ = this.service
+                .getComponentData()
+                .pipe(operators.map(function (d) { return d.styleClass; }));
         }
         NavigationComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-navigation',
-                        template: "<cx-navigation-ui [node]=\"node$ | async\" [dropdownMode]=\"dropdownMode\">\n</cx-navigation-ui>\n",
+                        template: "<cx-navigation-ui [node]=\"node$ | async\" [ngClass]=\"styleClass$ | async\">\n</cx-navigation-ui>\n",
                         changeDetection: i0.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -12683,52 +12881,7 @@
                 { type: NavigationComponentService }
             ];
         };
-        NavigationComponent.propDecorators = {
-            dropdownMode: [{ type: i0.Input }],
-            node: [{ type: i0.Input }]
-        };
         return NavigationComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CategoryNavigationComponent = /** @class */ (function (_super) {
-        __extends(CategoryNavigationComponent, _super);
-        function CategoryNavigationComponent() {
-            return _super !== null && _super.apply(this, arguments) || this;
-        }
-        CategoryNavigationComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-category-navigation',
-                        template: "<nav *ngIf=\"(node$ | async) as node\">\n  <cx-navigation-ui\n    *ngFor=\"let child of node?.children\"\n    ngbDropdown\n    [node]=\"child\"\n    dropdownMode=\"column\"\n  ></cx-navigation-ui>\n</nav>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        return CategoryNavigationComponent;
-    }(NavigationComponent));
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var NavigationUIComponent = /** @class */ (function () {
-        function NavigationUIComponent() {
-            this.dropdownMode = 'list';
-        }
-        NavigationUIComponent.decorators = [
-            { type: i0.Component, args: [{
-                        selector: 'cx-navigation-ui',
-                        template: "<div *ngIf=\"node\" class=\"cx-nav-item nav-item\" ngbDropdown>\n  <a\n    *ngIf=\"node.children && !node.title; else nodeWithChildren\"\n    ngbDropdownToggle\n    >&nbsp;\n  </a>\n  <ng-template #nodeWithChildren>\n    <span\n      *ngIf=\"node.children; else noChildren\"\n      ngbDropdownToggle\n      class=\"cx-nav-link nav-link\"\n      role=\"link\"\n      id=\"{{ node.title }}\"\n      >{{ node.title }}</span\n    >\n  </ng-template>\n  <ng-template #noChildren>\n    <a\n      [routerLink]=\"node.url\"\n      class=\"cx-nav-link nav-link\"\n      id=\"{{ node.title }}\"\n      >{{ node.title }}\n    </a>\n  </ng-template>\n  <ng-container [ngSwitch]=\"dropdownMode\">\n    <ng-container *ngSwitchCase=\"'list'\">\n      <div\n        ngbDropdownMenu\n        class=\"cx-nav-child-list\"\n        [attr.aria-label]=\"node.title\"\n        role=\"list\"\n      >\n        <div\n          role=\"listitem\"\n          *ngFor=\"let subCategory of node.children\"\n          class=\"dropdown-item cx-nav-child-item\"\n        >\n          <ng-container *ngIf=\"subCategory.url\">\n            <a [routerLink]=\"subCategory.url\" class=\"cx-nav-child-link\"\n              >{{ subCategory.title }}\n            </a>\n          </ng-container>\n          <ng-container *ngIf=\"!subCategory.url\">\n            <a class=\"cx-nav-child-link\">{{ subCategory.title }} </a>\n          </ng-container>\n          <a\n            [routerLink]=\"subCategoryChild.url\"\n            *ngFor=\"let subCategoryChild of subCategory.children\"\n            >{{ subCategoryChild.title }}\n          </a>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-container *ngSwitchCase=\"'column'\">\n      <div\n        ngbDropdownMenu\n        class=\"cx-nav-child-list-columns\"\n        [attr.aria-label]=\"node.title\"\n      >\n        <div\n          class=\"cx-nav-child-column\"\n          *ngFor=\"let subCategory of node.children\"\n        >\n          <ng-container *ngIf=\"subCategory.url\">\n            <a\n              role=\"link\"\n              [routerLink]=\"subCategory.url\"\n              class=\"cx-nav-child-link cx-nav-column-title\"\n              >{{ subCategory.title }}\n            </a>\n          </ng-container>\n          <ng-container *ngIf=\"!subCategory.url\">\n            <a class=\"cx-nav-child-link cx-nav-column-title\"\n              >{{ subCategory.title }}\n            </a>\n          </ng-container>\n\n          <div\n            *ngFor=\"let subCategoryChild of subCategory.children\"\n            class=\"dropdown-item cx-nav-child-column-item\"\n          >\n            <a\n              role=\"link\"\n              [routerLink]=\"subCategoryChild.url\"\n              class=\"cx-nav-child-link\"\n              >{{ subCategoryChild.title }}\n            </a>\n          </div>\n        </div>\n      </div>\n    </ng-container>\n  </ng-container>\n</div>\n",
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }] }
-        ];
-        NavigationUIComponent.propDecorators = {
-            dropdownMode: [{ type: i0.Input }],
-            node: [{ type: i0.Input }]
-        };
-        return NavigationUIComponent;
     }());
 
     /**
@@ -12743,7 +12896,8 @@
                         imports: [
                             common.CommonModule,
                             i4.RouterModule,
-                            i1.NgbDropdownModule,
+                            IconModule,
+                            GenericLinkModule,
                             i1$2.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     NavigationComponent: {
@@ -12807,20 +12961,29 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var FooterNavigationComponent = /** @class */ (function (_super) {
-        __extends(FooterNavigationComponent, _super);
-        function FooterNavigationComponent() {
-            return _super !== null && _super.apply(this, arguments) || this;
+    var FooterNavigationComponent = /** @class */ (function () {
+        function FooterNavigationComponent(service) {
+            this.service = service;
+            this.node$ = this.service.getNavigationNode();
+            this.styleClass$ = this.service
+                .getComponentData()
+                .pipe(operators.map(function (d) { return d.styleClass; }));
         }
         FooterNavigationComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'cx-footer-navigation',
-                        template: "<nav *ngIf=\"(node$ | async) as node\">\n  <div class=\"container\">\n    <div class=\"row\">\n      <div\n        class=\"col-xs-12 col-sm-4 col-md-3 navigation-elements\"\n        *ngFor=\"let child of node?.children\"\n      >\n        <h5>{{ child.title }}</h5>\n        <ul>\n          <li *ngFor=\"let link of child.children\">\n            <cx-generic-link\n              [url]=\"link.url\"\n              [target]=\"link.target === true ? 'blank' : 'self'\"\n              >{{ link.title }}</cx-generic-link\n            >\n          </li>\n        </ul>\n      </div>\n    </div>\n  </div>\n</nav>\n<div class=\"notice\" *ngIf=\"(service.getComponentData() | async) as data\">\n  {{ data.notice }}\n</div>\n",
+                        template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [flyout]=\"false\"\n  [ngClass]=\"styleClass$ | async\"\n></cx-navigation-ui>\n\n<div class=\"notice\" *ngIf=\"(service.getComponentData() | async) as data\">\n  {{ data.notice }}\n</div>\n",
                         changeDetection: i0.ChangeDetectionStrategy.OnPush
                     }] }
         ];
+        /** @nocollapse */
+        FooterNavigationComponent.ctorParameters = function () {
+            return [
+                { type: NavigationComponentService }
+            ];
+        };
         return FooterNavigationComponent;
-    }(NavigationComponent));
+    }());
 
     /**
      * @fileoverview added by tsickle
@@ -12834,6 +12997,7 @@
                         imports: [
                             common.CommonModule,
                             i4.RouterModule,
+                            NavigationModule,
                             i1$2.ConfigModule.withConfig(( /** @type {?} */({
                                 cmsComponents: {
                                     FooterNavigationComponent: {

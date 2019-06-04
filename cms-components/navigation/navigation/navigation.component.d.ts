@@ -3,8 +3,7 @@ import { NavigationNode } from './navigation-node.model';
 import { NavigationComponentService } from './navigation.component.service';
 export declare class NavigationComponent {
     service: NavigationComponentService;
-    dropdownMode: string;
-    node: NavigationNode;
     node$: Observable<NavigationNode>;
+    styleClass$: Observable<string>;
     constructor(service: NavigationComponentService);
 }

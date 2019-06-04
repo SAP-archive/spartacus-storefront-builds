@@ -2,22 +2,37 @@
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-import * as tslib_1 from "tslib";
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NavigationComponent } from '../navigation/navigation.component';
-var CategoryNavigationComponent = /** @class */ (function (_super) {
-    tslib_1.__extends(CategoryNavigationComponent, _super);
-    function CategoryNavigationComponent() {
-        return _super !== null && _super.apply(this, arguments) || this;
+import { map } from 'rxjs/operators';
+import { NavigationComponentService } from '../navigation/navigation.component.service';
+var CategoryNavigationComponent = /** @class */ (function () {
+    function CategoryNavigationComponent(service) {
+        this.service = service;
+        this.node$ = this.service.getNavigationNode();
+        this.styleClass$ = this.service
+            .getComponentData()
+            .pipe(map(function (d) { return d.styleClass; }));
     }
     CategoryNavigationComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-category-navigation',
-                    template: "<nav *ngIf=\"(node$ | async) as node\">\n  <cx-navigation-ui\n    *ngFor=\"let child of node?.children\"\n    ngbDropdown\n    [node]=\"child\"\n    dropdownMode=\"column\"\n  ></cx-navigation-ui>\n</nav>\n",
+                    template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [ngClass]=\"styleClass$ | async\"\n></cx-navigation-ui>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
+    /** @nocollapse */
+    CategoryNavigationComponent.ctorParameters = function () { return [
+        { type: NavigationComponentService }
+    ]; };
     return CategoryNavigationComponent;
-}(NavigationComponent));
+}());
 export { CategoryNavigationComponent };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2F0ZWdvcnktbmF2aWdhdGlvbi5jb21wb25lbnQuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJjbXMtY29tcG9uZW50cy9uYXZpZ2F0aW9uL2NhdGVnb3J5LW5hdmlnYXRpb24vY2F0ZWdvcnktbmF2aWdhdGlvbi5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQSxPQUFPLEVBQUUsdUJBQXVCLEVBQUUsU0FBUyxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBQ25FLE9BQU8sRUFBRSxtQkFBbUIsRUFBRSxNQUFNLG9DQUFvQyxDQUFDO0FBRXpFO0lBS2lELHVEQUFtQjtJQUxwRTs7SUFLc0UsQ0FBQzs7Z0JBTHRFLFNBQVMsU0FBQztvQkFDVCxRQUFRLEVBQUUsd0JBQXdCO29CQUNsQywwTkFBbUQ7b0JBQ25ELGVBQWUsRUFBRSx1QkFBdUIsQ0FBQyxNQUFNO2lCQUNoRDs7SUFDcUUsa0NBQUM7Q0FBQSxBQUx2RSxDQUtpRCxtQkFBbUIsR0FBRztTQUExRCwyQkFBMkIiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDaGFuZ2VEZXRlY3Rpb25TdHJhdGVneSwgQ29tcG9uZW50IH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBOYXZpZ2F0aW9uQ29tcG9uZW50IH0gZnJvbSAnLi4vbmF2aWdhdGlvbi9uYXZpZ2F0aW9uLmNvbXBvbmVudCc7XG5cbkBDb21wb25lbnQoe1xuICBzZWxlY3RvcjogJ2N4LWNhdGVnb3J5LW5hdmlnYXRpb24nLFxuICB0ZW1wbGF0ZVVybDogJy4vY2F0ZWdvcnktbmF2aWdhdGlvbi5jb21wb25lbnQuaHRtbCcsXG4gIGNoYW5nZURldGVjdGlvbjogQ2hhbmdlRGV0ZWN0aW9uU3RyYXRlZ3kuT25QdXNoLFxufSlcbmV4cG9ydCBjbGFzcyBDYXRlZ29yeU5hdmlnYXRpb25Db21wb25lbnQgZXh0ZW5kcyBOYXZpZ2F0aW9uQ29tcG9uZW50IHt9XG4iXX0=
+if (false) {
+    /** @type {?} */
+    CategoryNavigationComponent.prototype.node$;
+    /** @type {?} */
+    CategoryNavigationComponent.prototype.styleClass$;
+    /** @type {?} */
+    CategoryNavigationComponent.prototype.service;
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2F0ZWdvcnktbmF2aWdhdGlvbi5jb21wb25lbnQuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJjbXMtY29tcG9uZW50cy9uYXZpZ2F0aW9uL2NhdGVnb3J5LW5hdmlnYXRpb24vY2F0ZWdvcnktbmF2aWdhdGlvbi5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE9BQU8sRUFBRSx1QkFBdUIsRUFBRSxTQUFTLEVBQUUsTUFBTSxlQUFlLENBQUM7QUFFbkUsT0FBTyxFQUFFLEdBQUcsRUFBRSxNQUFNLGdCQUFnQixDQUFDO0FBRXJDLE9BQU8sRUFBRSwwQkFBMEIsRUFBRSxNQUFNLDRDQUE0QyxDQUFDO0FBRXhGO0lBWUUscUNBQW1CLE9BQW1DO1FBQW5DLFlBQU8sR0FBUCxPQUFPLENBQTRCO1FBTnRELFVBQUssR0FBK0IsSUFBSSxDQUFDLE9BQU8sQ0FBQyxpQkFBaUIsRUFBRSxDQUFDO1FBRXJFLGdCQUFXLEdBQXVCLElBQUksQ0FBQyxPQUFPO2FBQzNDLGdCQUFnQixFQUFFO2FBQ2xCLElBQUksQ0FBQyxHQUFHLENBQUMsVUFBQSxDQUFDLElBQUksT0FBQSxDQUFDLENBQUMsVUFBVSxFQUFaLENBQVksQ0FBQyxDQUFDLENBQUM7SUFFeUIsQ0FBQzs7Z0JBWjNELFNBQVMsU0FBQztvQkFDVCxRQUFRLEVBQUUsd0JBQXdCO29CQUNsQyxzSEFBbUQ7b0JBQ25ELGVBQWUsRUFBRSx1QkFBdUIsQ0FBQyxNQUFNO2lCQUNoRDs7OztnQkFOUSwwQkFBMEI7O0lBZW5DLGtDQUFDO0NBQUEsQUFiRCxJQWFDO1NBUlksMkJBQTJCOzs7SUFDdEMsNENBQXFFOztJQUVyRSxrREFFZ0M7O0lBRXBCLDhDQUEwQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENoYW5nZURldGVjdGlvblN0cmF0ZWd5LCBDb21wb25lbnQgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IE9ic2VydmFibGUgfSBmcm9tICdyeGpzJztcbmltcG9ydCB7IG1hcCB9IGZyb20gJ3J4anMvb3BlcmF0b3JzJztcbmltcG9ydCB7IE5hdmlnYXRpb25Ob2RlIH0gZnJvbSAnLi4vbmF2aWdhdGlvbi9uYXZpZ2F0aW9uLW5vZGUubW9kZWwnO1xuaW1wb3J0IHsgTmF2aWdhdGlvbkNvbXBvbmVudFNlcnZpY2UgfSBmcm9tICcuLi9uYXZpZ2F0aW9uL25hdmlnYXRpb24uY29tcG9uZW50LnNlcnZpY2UnO1xuXG5AQ29tcG9uZW50KHtcbiAgc2VsZWN0b3I6ICdjeC1jYXRlZ29yeS1uYXZpZ2F0aW9uJyxcbiAgdGVtcGxhdGVVcmw6ICcuL2NhdGVnb3J5LW5hdmlnYXRpb24uY29tcG9uZW50Lmh0bWwnLFxuICBjaGFuZ2VEZXRlY3Rpb246IENoYW5nZURldGVjdGlvblN0cmF0ZWd5Lk9uUHVzaCxcbn0pXG5leHBvcnQgY2xhc3MgQ2F0ZWdvcnlOYXZpZ2F0aW9uQ29tcG9uZW50IHtcbiAgbm9kZSQ6IE9ic2VydmFibGU8TmF2aWdhdGlvbk5vZGU+ID0gdGhpcy5zZXJ2aWNlLmdldE5hdmlnYXRpb25Ob2RlKCk7XG5cbiAgc3R5bGVDbGFzcyQ6IE9ic2VydmFibGU8c3RyaW5nPiA9IHRoaXMuc2VydmljZVxuICAgIC5nZXRDb21wb25lbnREYXRhKClcbiAgICAucGlwZShtYXAoZCA9PiBkLnN0eWxlQ2xhc3MpKTtcblxuICBjb25zdHJ1Y3RvcihwdWJsaWMgc2VydmljZTogTmF2aWdhdGlvbkNvbXBvbmVudFNlcnZpY2UpIHt9XG59XG4iXX0=
