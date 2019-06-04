@@ -9,8 +9,8 @@ import { filter, map, switchMap, tap, debounceTime, take, skipWhile, shareReplay
 import { CommonModule, isPlatformServer } from '@angular/common';
 import { RouterModule, Router, NavigationEnd, NavigationStart, ActivatedRoute } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
-import { Injectable, Pipe, ChangeDetectionStrategy, Component, NgModule, APP_INITIALIZER, HostBinding, Input, Renderer2, Injector, Inject, PLATFORM_ID, Output, EventEmitter, Directive, ElementRef, TemplateRef, ViewContainerRef, Optional, ChangeDetectorRef, ViewChild, HostListener, forwardRef, defineInjectable, inject, INJECTOR } from '@angular/core';
-import { ProductService, RoutingService, ServerConfig, RoutingConfigService, ConfigModule, RoutingModule, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductReferenceService, CmsConfig, PageType, I18nModule, provideConfig, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CartService, DynamicAttributeService, CxApiService, ComponentMapperService, CartModule, CheckoutModule, PageRobotsMeta, PageMetaService, UrlModule, CmsPageTitleModule, UserModule, UserService, NotAuthGuard, AuthGuard, AuthService, GlobalMessageModule, AuthRedirectService, OccConfig, ProductModule, CheckoutService, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, ProductSearchService } from '@spartacus/core';
+import { Injectable, Pipe, ChangeDetectionStrategy, Component, NgModule, APP_INITIALIZER, HostBinding, Input, Renderer2, Injector, Inject, PLATFORM_ID, Output, EventEmitter, Directive, ElementRef, TemplateRef, ViewContainerRef, Optional, HostListener, forwardRef, ViewChild, ChangeDetectorRef, defineInjectable, inject, INJECTOR } from '@angular/core';
+import { ProductService, RoutingService, ServerConfig, RoutingConfigService, ConfigModule, RoutingModule, WindowRef, LanguageService, TranslationService, TranslationChunkService, GlobalMessageType, GlobalMessageService, ProductReferenceService, CmsConfig, PageType, I18nModule, provideConfig, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, KymaModule, CmsService, SemanticPathService, Config, defaultCmsModuleConfig, CmsModule, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, CartService, CxApiService, ComponentMapperService, DynamicAttributeService, CartModule, CheckoutModule, PageRobotsMeta, PageMetaService, UrlModule, CmsPageTitleModule, UserModule, UserService, NotAuthGuard, AuthGuard, AuthService, GlobalMessageModule, AuthRedirectService, OccConfig, ProductModule, CheckoutService, ContextServiceMap, SiteContextModule, ProductReviewService, SearchboxService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, TranslatePipe, ProductSearchService } from '@spartacus/core';
 
 /**
  * @fileoverview added by tsickle
@@ -12809,6 +12809,7 @@ StorefrontModule.decorators = [
                     SmartEditModule.forRoot(),
                     PersonalizationModule.forRoot(),
                     I18nModule.forRoot(),
+                    KymaModule,
                     LayoutModule,
                     // pages
                     ProductDetailsPageModule,

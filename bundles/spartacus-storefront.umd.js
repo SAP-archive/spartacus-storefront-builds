@@ -15731,6 +15731,7 @@
                             i1$3.SmartEditModule.forRoot(),
                             i1$3.PersonalizationModule.forRoot(),
                             i1$3.I18nModule.forRoot(),
+                            i1$3.KymaModule,
                             LayoutModule,
                             // pages
                             ProductDetailsPageModule,
