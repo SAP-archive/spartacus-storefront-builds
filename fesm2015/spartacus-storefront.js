@@ -1,4 +1,4 @@
-import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, Renderer2, HostListener, forwardRef, EventEmitter, Output, Optional, Injector, TemplateRef, ViewContainerRef, Inject, PLATFORM_ID, INJECTOR, APP_INITIALIZER, Pipe } from '@angular/core';
+import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, Renderer2, HostListener, forwardRef, EventEmitter, Output, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, Inject, PLATFORM_ID, INJECTOR, APP_INITIALIZER, Pipe } from '@angular/core';
 import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, ServerConfig, OccConfig, I18nModule, GlobalMessageType, GlobalMessageService, GlobalMessageModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UrlModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserService, TranslationService, CheckoutModule, AuthService, AuthRedirectService, defaultCmsModuleConfig, CmsModule as CmsModule$1, CmsConfig, UserModule, NotAuthGuard, CxApiService, ComponentMapperService, CmsService, DynamicAttributeService, PageType, SemanticPathService, TranslationChunkService, PageRobotsMeta, PageMetaService, LanguageService, CmsPageTitleModule, SearchboxService, ProductModule, ProductReferenceService, TranslatePipe, ProductSearchService, ProductReviewService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, RoutingModule as RoutingModule$1, provideConfig, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, KymaModule } from '@spartacus/core';
 import { map, filter, switchMap, tap, debounceTime, take, skipWhile, shareReplay, startWith, distinctUntilChanged, first, endWith, withLatestFrom, delay } from 'rxjs/operators';
 import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -2595,6 +2595,57 @@ CartNotEmptyGuard.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class CartPageLayoutHandler {
+    /**
+     * @param {?} cartService
+     */
+    constructor(cartService) {
+        this.cartService = cartService;
+    }
+    /**
+     * @param {?} slots$
+     * @param {?=} pageTemplate
+     * @param {?=} section
+     * @return {?}
+     */
+    handle(slots$, pageTemplate, section) {
+        if (pageTemplate === 'CartPageTemplate' && !section) {
+            return combineLatest(slots$, this.cartService.getActive()).pipe(map((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            ([slots, cart]) => {
+                if (cart.totalItems) {
+                    return slots.filter((/**
+                     * @param {?} slot
+                     * @return {?}
+                     */
+                    slot => slot !== 'EmptyCartMiddleContent'));
+                }
+                else {
+                    return slots.filter((/**
+                     * @param {?} slot
+                     * @return {?}
+                     */
+                    slot => slot !== 'TopContent' && slot !== 'CenterRightContentSlot'));
+                }
+            })));
+        }
+        return slots$;
+    }
+}
+CartPageLayoutHandler.decorators = [
+    { type: Injectable }
+];
+/** @nocollapse */
+CartPageLayoutHandler.ctorParameters = () => [
+    { type: CartService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -2732,6 +2783,13 @@ MiniCartModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @type {?} */
+const PAGE_LAYOUT_HANDLER = new InjectionToken('PageLayoutHandler');
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class CartComponentModule {
 }
 CartComponentModule.decorators = [
@@ -2749,6 +2807,13 @@ CartComponentModule.decorators = [
                     CartSharedModule,
                     AddToCartModule,
                     MiniCartModule,
+                ],
+                providers: [
+                    {
+                        provide: PAGE_LAYOUT_HANDLER,
+                        useClass: CartPageLayoutHandler,
+                        multi: true,
+                    },
                 ],
             },] }
 ];
@@ -6638,11 +6703,13 @@ class PageLayoutService {
      * @param {?} cms
      * @param {?} config
      * @param {?} breakpointService
+     * @param {?} handlers
      */
-    constructor(cms, config, breakpointService) {
+    constructor(cms, config, breakpointService, handlers) {
         this.cms = cms;
         this.config = config;
         this.breakpointService = breakpointService;
+        this.handlers = handlers;
         // we print warn messages on missing layout configs
         // only once to not polute the console log
         this.warnLogMessages = {};
@@ -6653,29 +6720,50 @@ class PageLayoutService {
      * @return {?}
      */
     getSlots(section) {
-        return this.breakpointService.breakpoint$.pipe(switchMap((/**
-         * @param {?} breakpoint
+        return combineLatest(this.page$, this.breakpointService.breakpoint$).pipe(map((/**
+         * @param {?} __0
          * @return {?}
          */
-        breakpoint => this.page$.pipe(map((/**
-         * @param {?} page
-         * @return {?}
-         */
-        page => {
+        ([page, breakpoint]) => {
             /** @type {?} */
-            const config = this.getSlotConfig(page.template, 'slots', section, breakpoint);
-            if (config && config.slots) {
-                return config.slots;
+            const pageTemplate = page.template;
+            /** @type {?} */
+            const slots = this.resolveSlots(page, section, breakpoint);
+            return { slots, pageTemplate, breakpoint };
+        })), switchMap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ({ slots, pageTemplate, breakpoint }) => {
+            /** @type {?} */
+            let result = of(slots);
+            for (const handler of this.handlers || []) {
+                result = handler.handle(result, pageTemplate, section, breakpoint);
             }
-            else if (!section) {
-                this.logMissingLayoutConfig(page);
-                return Object.keys(page.slots);
-            }
-            else {
-                this.logMissingLayoutConfig(page, section);
-                return [];
-            }
-        }))))), distinctUntilChanged());
+            return result;
+        })), distinctUntilChanged());
+    }
+    /**
+     * @private
+     * @param {?} page
+     * @param {?} section
+     * @param {?} breakpoint
+     * @return {?}
+     */
+    resolveSlots(page, section, breakpoint) {
+        /** @type {?} */
+        const config = this.getSlotConfig(page.template, 'slots', section, breakpoint);
+        if (config && config.slots) {
+            return config.slots;
+        }
+        else if (!section) {
+            this.logMissingLayoutConfig(page);
+            return Object.keys(page.slots);
+        }
+        else {
+            this.logMissingLayoutConfig(page, section);
+            return [];
+        }
     }
     /**
      * @return {?}
@@ -6822,7 +6910,8 @@ PageLayoutService.decorators = [
 PageLayoutService.ctorParameters = () => [
     { type: CmsService },
     { type: LayoutConfig },
-    { type: BreakpointService }
+    { type: BreakpointService },
+    { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [PAGE_LAYOUT_HANDLER,] }] }
 ];
 
 /**
@@ -13421,65 +13510,6 @@ CmsLibModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class CartPageComponent {
-    /**
-     * @param {?} cartService
-     */
-    constructor(cartService) {
-        this.cartService = cartService;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.cart$ = this.cartService.getActive();
-    }
-}
-CartPageComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-cart-page',
-                template: "<cx-page-layout [class.empty]=\"!(cart$ | async).totalItems\"></cx-page-layout>\n"
-            }] }
-];
-/** @nocollapse */
-CartPageComponent.ctorParameters = () => [
-    { type: CartService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-const ɵ0$3 = { cxRoute: 'cart' };
-/** @type {?} */
-const routes = [
-    {
-        path: null,
-        canActivate: [CmsPageGuard],
-        component: CartPageComponent,
-        data: ɵ0$3,
-    },
-];
-class CartPageModule {
-}
-CartPageModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    RouterModule.forChild(routes),
-                    PageLayoutModule,
-                    CartDetailsModule,
-                    OutletRefModule,
-                    CmsModule,
-                ],
-                declarations: [CartPageComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class ProductDetailsPageComponent {
 }
 ProductDetailsPageComponent.decorators = [
@@ -13548,19 +13578,19 @@ function findLastIndex(elements, predicate) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-const ɵ0$4 = { cxRoute: 'product' }, ɵ1 = {
+const ɵ0$3 = { cxRoute: 'product' }, ɵ1 = {
     cxSuffixUrlMatcher: {
         marker: 'p',
         paramName: 'productCode',
     },
 };
 /** @type {?} */
-const routes$1 = [
+const routes = [
     {
         path: null,
         canActivate: [CmsPageGuard],
         component: ProductDetailsPageComponent,
-        data: ɵ0$4,
+        data: ɵ0$3,
     },
     {
         matcher: suffixUrlMatcher,
@@ -13575,7 +13605,7 @@ ProductDetailsPageModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
                     CommonModule,
-                    RouterModule.forChild(routes$1),
+                    RouterModule.forChild(routes),
                     ProductDetailsModule,
                     PageLayoutModule,
                     OutletRefModule,
@@ -13589,7 +13619,7 @@ ProductDetailsPageModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-const ɵ0$5 = { cxRoute: 'category' }, ɵ1$1 = { pageLabel: 'search', cxRoute: 'search' }, ɵ2 = { cxRoute: 'brand' }, ɵ3 = {
+const ɵ0$4 = { cxRoute: 'category' }, ɵ1$1 = { pageLabel: 'search', cxRoute: 'search' }, ɵ2 = { cxRoute: 'brand' }, ɵ3 = {
     cxSuffixUrlMatcher: {
         marker: 'c',
         paramName: 'categoryCode',
@@ -13605,7 +13635,7 @@ ProductListingPageModule.decorators = [
                             path: null,
                             canActivate: [CmsPageGuard],
                             component: PageLayoutComponent,
-                            data: ɵ0$5,
+                            data: ɵ0$4,
                         },
                         {
                             path: null,
@@ -13757,7 +13787,6 @@ StorefrontModule.decorators = [
                     // pages
                     ProductDetailsPageModule,
                     ProductListingPageModule,
-                    CartPageModule,
                 ],
                 exports: [LayoutModule],
                 providers: [...provideConfigFromMetaTags()],
@@ -13775,5 +13804,5 @@ StorefrontModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, BREAKPOINT, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageComponent, CartPageModule, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormComponentsModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationComponentService, NavigationModule, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductDetailOutlets, ProductDetailsComponent, ProductDetailsModule, ProductDetailsPageComponent, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StorefrontComponent, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, defaultCmsContentConfig, defaultLayoutConfig, defaultPWAModuleConfig, fontawesomeIconConfig, initSeoService, provideConfigFromMetaTags, pwaConfigurationFactory, pwaFactory, AutoFocusDirectiveModule as ɵa, defaultCheckoutConfig as ɵb, CheckoutConfigService as ɵc, CardModule as ɵd, CardComponent as ɵe, NavigationUIComponent as ɵf, HighlightPipe as ɵg, ProductDetailsTabModule as ɵh, ProductDetailsTabComponent as ɵi, ProductCarouselService as ɵj, SharedCarouselService as ɵk, ProductReferencesService as ɵl, CmsRoutesService as ɵm, CmsMappingService as ɵn, CmsI18nService as ɵo, CmsGuardsService as ɵp, AddToHomeScreenService as ɵq, ProductImagesModule as ɵr, suffixUrlMatcher as ɵs, defaultCartPageConfig as ɵt, addCmsRoute as ɵu, htmlLangProvider as ɵv, setHtmlLangAttribute as ɵw, RoutingModule as ɵx, defaultStorefrontRoutesConfig as ɵy, defaultRoutingConfig as ɵz };
+export { AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, BREAKPOINT, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormComponentsModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationComponentService, NavigationModule, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductDetailOutlets, ProductDetailsComponent, ProductDetailsModule, ProductDetailsPageComponent, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StorefrontComponent, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, defaultCmsContentConfig, defaultLayoutConfig, defaultPWAModuleConfig, fontawesomeIconConfig, initSeoService, provideConfigFromMetaTags, pwaConfigurationFactory, pwaFactory, AutoFocusDirectiveModule as ɵa, defaultCheckoutConfig as ɵb, CheckoutConfigService as ɵc, CardModule as ɵd, CardComponent as ɵe, NavigationUIComponent as ɵf, HighlightPipe as ɵg, ProductDetailsTabModule as ɵh, ProductDetailsTabComponent as ɵi, ProductCarouselService as ɵj, SharedCarouselService as ɵk, ProductReferencesService as ɵl, CmsRoutesService as ɵm, CmsMappingService as ɵn, CmsI18nService as ɵo, CmsGuardsService as ɵp, AddToHomeScreenService as ɵq, ProductImagesModule as ɵr, suffixUrlMatcher as ɵs, defaultCartPageConfig as ɵt, addCmsRoute as ɵu, htmlLangProvider as ɵv, setHtmlLangAttribute as ɵw, RoutingModule as ɵx, defaultStorefrontRoutesConfig as ɵy, defaultRoutingConfig as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map

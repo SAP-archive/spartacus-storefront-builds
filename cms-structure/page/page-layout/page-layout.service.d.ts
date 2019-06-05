@@ -2,14 +2,17 @@ import { CmsService, Page } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { BreakpointService } from '../../../layout/breakpoint/breakpoint.service';
 import { BREAKPOINT, LayoutConfig, LayoutSlotConfig, SlotConfig } from '../../../layout/config/layout-config';
+import { PageLayoutHandler } from './page-layout-handler';
 export declare class PageLayoutService {
     private cms;
     private config;
     private breakpointService;
-    constructor(cms: CmsService, config: LayoutConfig, breakpointService: BreakpointService);
+    private handlers;
+    constructor(cms: CmsService, config: LayoutConfig, breakpointService: BreakpointService, handlers: PageLayoutHandler[]);
     private warnLogMessages;
     private logSlots;
     getSlots(section?: string): Observable<string[]>;
+    private resolveSlots;
     readonly page$: Observable<Page>;
     readonly templateName$: Observable<string>;
     /**

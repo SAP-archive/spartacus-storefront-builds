@@ -3371,6 +3371,62 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var CartPageLayoutHandler = /** @class */ (function () {
+        function CartPageLayoutHandler(cartService) {
+            this.cartService = cartService;
+        }
+        /**
+         * @param {?} slots$
+         * @param {?=} pageTemplate
+         * @param {?=} section
+         * @return {?}
+         */
+        CartPageLayoutHandler.prototype.handle = /**
+         * @param {?} slots$
+         * @param {?=} pageTemplate
+         * @param {?=} section
+         * @return {?}
+         */
+        function (slots$, pageTemplate, section) {
+            if (pageTemplate === 'CartPageTemplate' && !section) {
+                return rxjs.combineLatest(slots$, this.cartService.getActive()).pipe(operators.map((/**
+                 * @param {?} __0
+                 * @return {?}
+                 */
+                function (_a) {
+                    var _b = __read(_a, 2), slots = _b[0], cart = _b[1];
+                    if (cart.totalItems) {
+                        return slots.filter((/**
+                         * @param {?} slot
+                         * @return {?}
+                         */
+                        function (slot) { return slot !== 'EmptyCartMiddleContent'; }));
+                    }
+                    else {
+                        return slots.filter((/**
+                         * @param {?} slot
+                         * @return {?}
+                         */
+                        function (slot) { return slot !== 'TopContent' && slot !== 'CenterRightContentSlot'; }));
+                    }
+                })));
+            }
+            return slots$;
+        };
+        CartPageLayoutHandler.decorators = [
+            { type: core.Injectable }
+        ];
+        /** @nocollapse */
+        CartPageLayoutHandler.ctorParameters = function () { return [
+            { type: core$1.CartService }
+        ]; };
+        return CartPageLayoutHandler;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
 
     /**
      * @fileoverview added by tsickle
@@ -3513,6 +3569,13 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /** @type {?} */
+    var PAGE_LAYOUT_HANDLER = new core.InjectionToken('PageLayoutHandler');
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var CartComponentModule = /** @class */ (function () {
         function CartComponentModule() {
         }
@@ -3531,6 +3594,13 @@
                             CartSharedModule,
                             AddToCartModule,
                             MiniCartModule,
+                        ],
+                        providers: [
+                            {
+                                provide: PAGE_LAYOUT_HANDLER,
+                                useClass: CartPageLayoutHandler,
+                                multi: true,
+                            },
                         ],
                     },] }
         ];
@@ -7911,10 +7981,11 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var PageLayoutService = /** @class */ (function () {
-        function PageLayoutService(cms, config, breakpointService) {
+        function PageLayoutService(cms, config, breakpointService, handlers) {
             this.cms = cms;
             this.config = config;
             this.breakpointService = breakpointService;
+            this.handlers = handlers;
             // we print warn messages on missing layout configs
             // only once to not polute the console log
             this.warnLogMessages = {};
@@ -7930,31 +8001,70 @@
          */
         function (section) {
             var _this = this;
-            return this.breakpointService.breakpoint$.pipe(operators.switchMap((/**
-             * @param {?} breakpoint
+            return rxjs.combineLatest(this.page$, this.breakpointService.breakpoint$).pipe(operators.map((/**
+             * @param {?} __0
              * @return {?}
              */
-            function (breakpoint) {
-                return _this.page$.pipe(operators.map((/**
-                 * @param {?} page
-                 * @return {?}
-                 */
-                function (page) {
-                    /** @type {?} */
-                    var config = _this.getSlotConfig(page.template, 'slots', section, breakpoint);
-                    if (config && config.slots) {
-                        return config.slots;
+            function (_a) {
+                var _b = __read(_a, 2), page = _b[0], breakpoint = _b[1];
+                /** @type {?} */
+                var pageTemplate = page.template;
+                /** @type {?} */
+                var slots = _this.resolveSlots(page, section, breakpoint);
+                return { slots: slots, pageTemplate: pageTemplate, breakpoint: breakpoint };
+            })), operators.switchMap((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var e_1, _b;
+                var slots = _a.slots, pageTemplate = _a.pageTemplate, breakpoint = _a.breakpoint;
+                /** @type {?} */
+                var result = rxjs.of(slots);
+                try {
+                    for (var _c = __values(_this.handlers || []), _d = _c.next(); !_d.done; _d = _c.next()) {
+                        var handler = _d.value;
+                        result = handler.handle(result, pageTemplate, section, breakpoint);
                     }
-                    else if (!section) {
-                        _this.logMissingLayoutConfig(page);
-                        return Object.keys(page.slots);
+                }
+                catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                finally {
+                    try {
+                        if (_d && !_d.done && (_b = _c.return)) _b.call(_c);
                     }
-                    else {
-                        _this.logMissingLayoutConfig(page, section);
-                        return [];
-                    }
-                })));
+                    finally { if (e_1) throw e_1.error; }
+                }
+                return result;
             })), operators.distinctUntilChanged());
+        };
+        /**
+         * @private
+         * @param {?} page
+         * @param {?} section
+         * @param {?} breakpoint
+         * @return {?}
+         */
+        PageLayoutService.prototype.resolveSlots = /**
+         * @private
+         * @param {?} page
+         * @param {?} section
+         * @param {?} breakpoint
+         * @return {?}
+         */
+        function (page, section, breakpoint) {
+            /** @type {?} */
+            var config = this.getSlotConfig(page.template, 'slots', section, breakpoint);
+            if (config && config.slots) {
+                return config.slots;
+            }
+            else if (!section) {
+                this.logMissingLayoutConfig(page);
+                return Object.keys(page.slots);
+            }
+            else {
+                this.logMissingLayoutConfig(page, section);
+                return [];
+            }
         };
         Object.defineProperty(PageLayoutService.prototype, "page$", {
             get: /**
@@ -8093,7 +8203,7 @@
          * @return {?}
          */
         function (layoutSlotConfig, configAttribute, breakpoint) {
-            var e_1, _a;
+            var e_2, _a;
             /** @type {?} */
             var slotConfig = (/** @type {?} */ (layoutSlotConfig));
             // fallback to default slot config
@@ -8117,12 +8227,12 @@
                     }
                 }
             }
-            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            catch (e_2_1) { e_2 = { error: e_2_1 }; }
             finally {
                 try {
                     if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
                 }
-                finally { if (e_1) throw e_1.error; }
+                finally { if (e_2) throw e_2.error; }
             }
             return slotConfig;
         };
@@ -8176,7 +8286,8 @@
         PageLayoutService.ctorParameters = function () { return [
             { type: core$1.CmsService },
             { type: LayoutConfig },
-            { type: BreakpointService }
+            { type: BreakpointService },
+            { type: Array, decorators: [{ type: core.Optional }, { type: core.Inject, args: [PAGE_LAYOUT_HANDLER,] }] }
         ]; };
         return PageLayoutService;
     }());
@@ -16008,69 +16119,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var CartPageComponent = /** @class */ (function () {
-        function CartPageComponent(cartService) {
-            this.cartService = cartService;
-        }
-        /**
-         * @return {?}
-         */
-        CartPageComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-        function () {
-            this.cart$ = this.cartService.getActive();
-        };
-        CartPageComponent.decorators = [
-            { type: core.Component, args: [{
-                        selector: 'cx-cart-page',
-                        template: "<cx-page-layout [class.empty]=\"!(cart$ | async).totalItems\"></cx-page-layout>\n"
-                    }] }
-        ];
-        /** @nocollapse */
-        CartPageComponent.ctorParameters = function () { return [
-            { type: core$1.CartService }
-        ]; };
-        return CartPageComponent;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ɵ0$3 = { cxRoute: 'cart' };
-    /** @type {?} */
-    var routes = [
-        {
-            path: null,
-            canActivate: [CmsPageGuard],
-            component: CartPageComponent,
-            data: ɵ0$3,
-        },
-    ];
-    var CartPageModule = /** @class */ (function () {
-        function CartPageModule() {
-        }
-        CartPageModule.decorators = [
-            { type: core.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            router.RouterModule.forChild(routes),
-                            PageLayoutModule,
-                            CartDetailsModule,
-                            OutletRefModule,
-                            CmsModule,
-                        ],
-                        declarations: [CartPageComponent],
-                    },] }
-        ];
-        return CartPageModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var ProductDetailsPageComponent = /** @class */ (function () {
         function ProductDetailsPageComponent() {
         }
@@ -16146,19 +16194,19 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var ɵ0$4 = { cxRoute: 'product' }, ɵ1 = {
+    var ɵ0$3 = { cxRoute: 'product' }, ɵ1 = {
         cxSuffixUrlMatcher: {
             marker: 'p',
             paramName: 'productCode',
         },
     };
     /** @type {?} */
-    var routes$1 = [
+    var routes = [
         {
             path: null,
             canActivate: [CmsPageGuard],
             component: ProductDetailsPageComponent,
-            data: ɵ0$4,
+            data: ɵ0$3,
         },
         {
             matcher: suffixUrlMatcher,
@@ -16174,7 +16222,7 @@
             { type: core.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            router.RouterModule.forChild(routes$1),
+                            router.RouterModule.forChild(routes),
                             ProductDetailsModule,
                             PageLayoutModule,
                             OutletRefModule,
@@ -16190,7 +16238,7 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var ɵ0$5 = { cxRoute: 'category' }, ɵ1$1 = { pageLabel: 'search', cxRoute: 'search' }, ɵ2 = { cxRoute: 'brand' }, ɵ3 = {
+    var ɵ0$4 = { cxRoute: 'category' }, ɵ1$1 = { pageLabel: 'search', cxRoute: 'search' }, ɵ2 = { cxRoute: 'brand' }, ɵ3 = {
         cxSuffixUrlMatcher: {
             marker: 'c',
             paramName: 'categoryCode',
@@ -16207,7 +16255,7 @@
                                     path: null,
                                     canActivate: [CmsPageGuard],
                                     component: PageLayoutComponent,
-                                    data: ɵ0$5,
+                                    data: ɵ0$4,
                                 },
                                 {
                                     path: null,
@@ -16369,7 +16417,6 @@
                             // pages
                             ProductDetailsPageModule,
                             ProductListingPageModule,
-                            CartPageModule,
                         ],
                         exports: [LayoutModule],
                         providers: __spread(provideConfigFromMetaTags()),
@@ -16406,8 +16453,7 @@
     exports.CartItemComponent = CartItemComponent;
     exports.CartItemListComponent = CartItemListComponent;
     exports.CartNotEmptyGuard = CartNotEmptyGuard;
-    exports.CartPageComponent = CartPageComponent;
-    exports.CartPageModule = CartPageModule;
+    exports.CartPageLayoutHandler = CartPageLayoutHandler;
     exports.CartSharedModule = CartSharedModule;
     exports.CartTotalsComponent = CartTotalsComponent;
     exports.CartTotalsModule = CartTotalsModule;
@@ -16511,6 +16557,7 @@
     exports.OutletRefDirective = OutletRefDirective;
     exports.OutletRefModule = OutletRefModule;
     exports.OutletService = OutletService;
+    exports.PAGE_LAYOUT_HANDLER = PAGE_LAYOUT_HANDLER;
     exports.PWAModuleConfig = PWAModuleConfig;
     exports.PageComponentModule = PageComponentModule;
     exports.PageLayoutComponent = PageLayoutComponent;
