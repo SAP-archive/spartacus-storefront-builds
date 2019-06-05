@@ -1,11 +1,11 @@
 import { OnDestroy, OnInit } from '@angular/core';
-import { Order, OrderHistoryList, RoutingService, TranslationService, UserService } from '@spartacus/core';
+import { Order, OrderHistoryList, RoutingService, TranslationService, UserOrderService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 export declare class OrderHistoryComponent implements OnInit, OnDestroy {
     private routing;
-    private userService;
+    private userOrderService;
     private translation;
-    constructor(routing: RoutingService, userService: UserService, translation: TranslationService);
+    constructor(routing: RoutingService, userOrderService: UserOrderService, translation: TranslationService);
     orders$: Observable<OrderHistoryList>;
     isLoaded$: Observable<boolean>;
     private PAGE_SIZE;

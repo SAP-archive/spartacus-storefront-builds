@@ -4821,10 +4821,10 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var PaymentFormComponent = /** @class */ (function () {
-        function PaymentFormComponent(checkoutPaymentService, checkoutDeliveryService, userService, globalMessageService, fb, modalService) {
+        function PaymentFormComponent(checkoutPaymentService, checkoutDeliveryService, userPaymentService, globalMessageService, fb, modalService) {
             this.checkoutPaymentService = checkoutPaymentService;
             this.checkoutDeliveryService = checkoutDeliveryService;
-            this.userService = userService;
+            this.userPaymentService = userPaymentService;
             this.globalMessageService = globalMessageService;
             this.fb = fb;
             this.modalService = modalService;
@@ -4867,14 +4867,14 @@
         function () {
             var _this = this;
             this.expMonthAndYear();
-            this.countries$ = this.userService.getAllBillingCountries().pipe(operators.tap((/**
+            this.countries$ = this.userPaymentService.getAllBillingCountries().pipe(operators.tap((/**
              * @param {?} countries
              * @return {?}
              */
             function (countries) {
                 // If the store is empty fetch countries. This is also used when changing language.
                 if (Object.keys(countries).length === 0) {
-                    _this.userService.loadBillingCountries();
+                    _this.userPaymentService.loadBillingCountries();
                 }
             })));
             this.cardTypes$ = this.checkoutPaymentService.getCardTypes().pipe(operators.tap((/**
@@ -5162,7 +5162,7 @@
         PaymentFormComponent.ctorParameters = function () { return [
             { type: core$1.CheckoutPaymentService },
             { type: core$1.CheckoutDeliveryService },
-            { type: core$1.UserService },
+            { type: core$1.UserPaymentService },
             { type: core$1.GlobalMessageService },
             { type: forms.FormBuilder },
             { type: ModalService }
@@ -5207,8 +5207,8 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var PaymentMethodComponent = /** @class */ (function () {
-        function PaymentMethodComponent(userService, checkoutService, checkoutDeliveryService, checkoutPaymentService, globalMessageService, routingConfigService, routingService, checkoutConfigService, activatedRoute, translation) {
-            this.userService = userService;
+        function PaymentMethodComponent(userPaymentService, checkoutService, checkoutDeliveryService, checkoutPaymentService, globalMessageService, routingConfigService, routingService, checkoutConfigService, activatedRoute, translation) {
+            this.userPaymentService = userPaymentService;
             this.checkoutService = checkoutService;
             this.checkoutDeliveryService = checkoutDeliveryService;
             this.checkoutPaymentService = checkoutPaymentService;
@@ -5229,11 +5229,11 @@
          */
         function () {
             var _this = this;
-            this.isLoading$ = this.userService.getPaymentMethodsLoading();
-            this.userService.loadPaymentMethods();
+            this.isLoading$ = this.userPaymentService.getPaymentMethodsLoading();
+            this.userPaymentService.loadPaymentMethods();
             this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
             this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
-            this.existingPaymentMethods$ = this.userService.getPaymentMethods();
+            this.existingPaymentMethods$ = this.userPaymentService.getPaymentMethods();
             this.getPaymentDetailsSub = this.checkoutPaymentService
                 .getPaymentDetails()
                 .pipe(operators.filter((/**
@@ -5468,7 +5468,7 @@
         ];
         /** @nocollapse */
         PaymentMethodComponent.ctorParameters = function () { return [
-            { type: core$1.UserService },
+            { type: core$1.UserPaymentService },
             { type: core$1.CheckoutService },
             { type: core$1.CheckoutDeliveryService },
             { type: core$1.CheckoutPaymentService },
@@ -5689,10 +5689,10 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ReviewSubmitComponent = /** @class */ (function () {
-        function ReviewSubmitComponent(checkoutDeliveryService, checkoutPaymentService, userService, cartService, translation) {
+        function ReviewSubmitComponent(checkoutDeliveryService, checkoutPaymentService, userAddressService, cartService, translation) {
             this.checkoutDeliveryService = checkoutDeliveryService;
             this.checkoutPaymentService = checkoutPaymentService;
-            this.userService = userService;
+            this.userAddressService = userAddressService;
             this.cartService = cartService;
             this.translation = translation;
         }
@@ -5724,14 +5724,14 @@
              * @return {?}
              */
             function (address) {
-                return _this.userService.getCountry(address.country.isocode);
+                return _this.userAddressService.getCountry(address.country.isocode);
             })), operators.tap((/**
              * @param {?} country
              * @return {?}
              */
             function (country) {
                 if (country === null) {
-                    _this.userService.loadDeliveryCountries();
+                    _this.userAddressService.loadDeliveryCountries();
                 }
             })), operators.map((/**
              * @param {?} country
@@ -5842,7 +5842,7 @@
         ReviewSubmitComponent.ctorParameters = function () { return [
             { type: core$1.CheckoutDeliveryService },
             { type: core$1.CheckoutPaymentService },
-            { type: core$1.UserService },
+            { type: core$1.UserAddressService },
             { type: core$1.CartService },
             { type: core$1.TranslationService }
         ]; };
@@ -5891,10 +5891,11 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var AddressFormComponent = /** @class */ (function () {
-        function AddressFormComponent(fb, checkoutDeliveryService, userService, globalMessageService, modalService) {
+        function AddressFormComponent(fb, checkoutDeliveryService, userService, userAddressService, globalMessageService, modalService) {
             this.fb = fb;
             this.checkoutDeliveryService = checkoutDeliveryService;
             this.userService = userService;
+            this.userAddressService = userAddressService;
             this.globalMessageService = globalMessageService;
             this.modalService = modalService;
             this.selectedCountry$ = new rxjs.BehaviorSubject('');
@@ -5928,13 +5929,13 @@
         function () {
             var _this = this;
             // Fetching countries
-            this.countries$ = this.userService.getDeliveryCountries().pipe(operators.tap((/**
+            this.countries$ = this.userAddressService.getDeliveryCountries().pipe(operators.tap((/**
              * @param {?} countries
              * @return {?}
              */
             function (countries) {
                 if (Object.keys(countries).length === 0) {
-                    _this.userService.loadDeliveryCountries();
+                    _this.userAddressService.loadDeliveryCountries();
                 }
             })));
             // Fetching titles
@@ -5960,7 +5961,7 @@
              * @param {?} country
              * @return {?}
              */
-            function (country) { return _this.userService.getRegions(country); })), operators.tap((/**
+            function (country) { return _this.userAddressService.getRegions(country); })), operators.tap((/**
              * @param {?} regions
              * @return {?}
              */
@@ -6146,6 +6147,7 @@
             { type: forms.FormBuilder },
             { type: core$1.CheckoutDeliveryService },
             { type: core$1.UserService },
+            { type: core$1.UserAddressService },
             { type: core$1.GlobalMessageService },
             { type: ModalService }
         ]; };
@@ -6194,8 +6196,8 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ShippingAddressComponent = /** @class */ (function () {
-        function ShippingAddressComponent(userService, cartService, routingService, checkoutDeliveryService, checkoutConfigService, activatedRoute, translation) {
-            this.userService = userService;
+        function ShippingAddressComponent(userAddressService, cartService, routingService, checkoutDeliveryService, checkoutConfigService, activatedRoute, translation) {
+            this.userAddressService = userAddressService;
             this.cartService = cartService;
             this.routingService = routingService;
             this.checkoutDeliveryService = checkoutDeliveryService;
@@ -6217,8 +6219,8 @@
             this.goTo = null;
             this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
             this.checkoutStepUrlPrevious = 'cart';
-            this.isLoading$ = this.userService.getAddressesLoading();
-            this.existingAddresses$ = this.userService.getAddresses();
+            this.isLoading$ = this.userAddressService.getAddressesLoading();
+            this.existingAddresses$ = this.userAddressService.getAddresses();
             this.cards$ = rxjs.combineLatest(this.existingAddresses$, this.selectedAddress$.asObservable(), this.translation.translate('checkoutAddress.defaultShippingAddress'), this.translation.translate('checkoutAddress.shipToThisAddress'), this.translation.translate('addressCard.selected')).pipe(operators.map((/**
              * @param {?} __0
              * @return {?}
@@ -6239,7 +6241,7 @@
                 }));
             })));
             this.cartService.loadDetails();
-            this.userService.loadAddresses();
+            this.userAddressService.loadAddresses();
             this.setAddressSub = this.checkoutDeliveryService
                 .getDeliveryAddress()
                 .subscribe((/**
@@ -6422,7 +6424,7 @@
         ];
         /** @nocollapse */
         ShippingAddressComponent.ctorParameters = function () { return [
-            { type: core$1.UserService },
+            { type: core$1.UserAddressService },
             { type: core$1.CartService },
             { type: core$1.RoutingService },
             { type: core$1.CheckoutDeliveryService },
@@ -10135,8 +10137,8 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var AddressBookComponentService = /** @class */ (function () {
-        function AddressBookComponentService(userService) {
-            this.userService = userService;
+        function AddressBookComponentService(userAddressService) {
+            this.userAddressService = userAddressService;
         }
         /**
          * @return {?}
@@ -10145,7 +10147,7 @@
          * @return {?}
          */
         function () {
-            return this.userService.getAddresses();
+            return this.userAddressService.getAddresses();
         };
         /**
          * @return {?}
@@ -10154,7 +10156,7 @@
          * @return {?}
          */
         function () {
-            return this.userService.getAddressesLoading();
+            return this.userAddressService.getAddressesLoading();
         };
         /**
          * @return {?}
@@ -10163,7 +10165,7 @@
          * @return {?}
          */
         function () {
-            this.userService.loadAddresses();
+            this.userAddressService.loadAddresses();
         };
         /**
          * @param {?} address
@@ -10174,7 +10176,7 @@
          * @return {?}
          */
         function (address) {
-            this.userService.addUserAddress(address);
+            this.userAddressService.addUserAddress(address);
         };
         /**
          * @param {?} addressId
@@ -10187,14 +10189,14 @@
          * @return {?}
          */
         function (addressId, address) {
-            this.userService.updateUserAddress(addressId, address);
+            this.userAddressService.updateUserAddress(addressId, address);
         };
         AddressBookComponentService.decorators = [
             { type: core.Injectable }
         ];
         /** @nocollapse */
         AddressBookComponentService.ctorParameters = function () { return [
-            { type: core$1.UserService }
+            { type: core$1.UserAddressService }
         ]; };
         return AddressBookComponentService;
     }());
@@ -10303,8 +10305,8 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var AddressCardComponent = /** @class */ (function () {
-        function AddressCardComponent(userService) {
-            this.userService = userService;
+        function AddressCardComponent(userAddressService) {
+            this.userAddressService = userAddressService;
             this.editEvent = new core.EventEmitter();
         }
         /**
@@ -10343,7 +10345,7 @@
          * @return {?}
          */
         function (addressId) {
-            this.userService.setAddressAsDefault(addressId);
+            this.userAddressService.setAddressAsDefault(addressId);
         };
         /**
          * @param {?} addressId
@@ -10354,7 +10356,7 @@
          * @return {?}
          */
         function (addressId) {
-            this.userService.deleteUserAddress(addressId);
+            this.userAddressService.deleteUserAddress(addressId);
         };
         AddressCardComponent.decorators = [
             { type: core.Component, args: [{
@@ -10364,7 +10366,7 @@
         ];
         /** @nocollapse */
         AddressCardComponent.ctorParameters = function () { return [
-            { type: core$1.UserService }
+            { type: core$1.UserAddressService }
         ]; };
         AddressCardComponent.propDecorators = {
             address: [{ type: core.Input }],
@@ -10656,8 +10658,8 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ConsentManagementComponent = /** @class */ (function () {
-        function ConsentManagementComponent(userService, routingService, globalMessageService) {
-            this.userService = userService;
+        function ConsentManagementComponent(userConsentService, routingService, globalMessageService) {
+            this.userConsentService = userConsentService;
             this.routingService = routingService;
             this.globalMessageService = globalMessageService;
             this.subscriptions = new rxjs.Subscription();
@@ -10669,7 +10671,7 @@
          * @return {?}
          */
         function () {
-            this.loading$ = rxjs.combineLatest(this.userService.getConsentsResultLoading(), this.userService.getGiveConsentResultLoading(), this.userService.getWithdrawConsentResultLoading()).pipe(operators.map((/**
+            this.loading$ = rxjs.combineLatest(this.userConsentService.getConsentsResultLoading(), this.userConsentService.getGiveConsentResultLoading(), this.userConsentService.getWithdrawConsentResultLoading()).pipe(operators.map((/**
              * @param {?} __0
              * @return {?}
              */
@@ -10691,13 +10693,13 @@
          */
         function () {
             var _this = this;
-            this.templateList$ = this.userService.getConsents().pipe(operators.tap((/**
+            this.templateList$ = this.userConsentService.getConsents().pipe(operators.tap((/**
              * @param {?} templateList
              * @return {?}
              */
             function (templateList) {
                 if (!_this.consentsExists(templateList)) {
-                    _this.userService.loadConsents();
+                    _this.userConsentService.loadConsents();
                 }
             })));
         };
@@ -10711,8 +10713,8 @@
          */
         function () {
             var _this = this;
-            this.userService.resetGiveConsentProcessState();
-            this.subscriptions.add(this.userService
+            this.userConsentService.resetGiveConsentProcessState();
+            this.subscriptions.add(this.userConsentService
                 .getGiveConsentResultSuccess()
                 .subscribe((/**
              * @param {?} success
@@ -10730,10 +10732,10 @@
          */
         function () {
             var _this = this;
-            this.userService.resetWithdrawConsentProcessState();
-            this.subscriptions.add(this.userService
+            this.userConsentService.resetWithdrawConsentProcessState();
+            this.subscriptions.add(this.userConsentService
                 .getWithdrawConsentResultLoading()
-                .pipe(operators.skipWhile(Boolean), operators.withLatestFrom(this.userService.getWithdrawConsentResultSuccess()), operators.map((/**
+                .pipe(operators.skipWhile(Boolean), operators.withLatestFrom(this.userConsentService.getWithdrawConsentResultSuccess()), operators.map((/**
              * @param {?} __0
              * @return {?}
              */
@@ -10746,7 +10748,7 @@
              */
             function (withdrawalSuccess) {
                 if (withdrawalSuccess) {
-                    _this.userService.loadConsents();
+                    _this.userConsentService.loadConsents();
                 }
             })))
                 .subscribe((/**
@@ -10781,10 +10783,10 @@
         function (_a) {
             var given = _a.given, template = _a.template;
             if (given) {
-                this.userService.giveConsent(template.id, template.version);
+                this.userConsentService.giveConsent(template.id, template.version);
             }
             else {
-                this.userService.withdrawConsent(template.currentConsent.code);
+                this.userConsentService.withdrawConsent(template.currentConsent.code);
             }
         };
         /**
@@ -10808,7 +10810,7 @@
          */
         function (success) {
             if (success) {
-                this.userService.resetGiveConsentProcessState();
+                this.userConsentService.resetGiveConsentProcessState();
                 this.globalMessageService.add({ key: 'consentManagementForm.message.success.given' }, core$1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
             }
         };
@@ -10824,7 +10826,7 @@
          */
         function (success) {
             if (success) {
-                this.userService.resetWithdrawConsentProcessState();
+                this.userConsentService.resetWithdrawConsentProcessState();
                 this.globalMessageService.add({ key: 'consentManagementForm.message.success.withdrawn' }, core$1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
             }
         };
@@ -10836,8 +10838,8 @@
          */
         function () {
             this.subscriptions.unsubscribe();
-            this.userService.resetGiveConsentProcessState();
-            this.userService.resetWithdrawConsentProcessState();
+            this.userConsentService.resetGiveConsentProcessState();
+            this.userConsentService.resetWithdrawConsentProcessState();
         };
         ConsentManagementComponent.decorators = [
             { type: core.Component, args: [{
@@ -10847,7 +10849,7 @@
         ];
         /** @nocollapse */
         ConsentManagementComponent.ctorParameters = function () { return [
-            { type: core$1.UserService },
+            { type: core$1.UserConsentService },
             { type: core$1.RoutingService },
             { type: core$1.GlobalMessageService }
         ]; };
@@ -10983,9 +10985,9 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var OrderDetailsService = /** @class */ (function () {
-        function OrderDetailsService(userService, routingService) {
+        function OrderDetailsService(userOrderService, routingService) {
             var _this = this;
-            this.userService = userService;
+            this.userOrderService = userOrderService;
             this.routingService = routingService;
             this.orderCode$ = this.routingService
                 .getRouterState()
@@ -11000,10 +11002,10 @@
              */
             function (orderCode) {
                 if (orderCode) {
-                    _this.userService.loadOrderDetails(orderCode);
+                    _this.userOrderService.loadOrderDetails(orderCode);
                 }
                 else {
-                    _this.userService.clearOrderDetails();
+                    _this.userOrderService.clearOrderDetails();
                 }
             })), operators.shareReplay({ bufferSize: 1, refCount: true }));
         }
@@ -11018,14 +11020,14 @@
             return this.orderLoad$.pipe(operators.switchMap((/**
              * @return {?}
              */
-            function () { return _this.userService.getOrderDetails(); })));
+            function () { return _this.userOrderService.getOrderDetails(); })));
         };
         OrderDetailsService.decorators = [
             { type: core.Injectable }
         ];
         /** @nocollapse */
         OrderDetailsService.ctorParameters = function () { return [
-            { type: core$1.UserService },
+            { type: core$1.UserOrderService },
             { type: core$1.RoutingService }
         ]; };
         return OrderDetailsService;
@@ -11349,9 +11351,9 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var OrderHistoryComponent = /** @class */ (function () {
-        function OrderHistoryComponent(routing, userService, translation) {
+        function OrderHistoryComponent(routing, userOrderService, translation) {
             this.routing = routing;
-            this.userService = userService;
+            this.userOrderService = userOrderService;
             this.translation = translation;
             this.PAGE_SIZE = 5;
         }
@@ -11363,7 +11365,9 @@
          */
         function () {
             var _this = this;
-            this.orders$ = this.userService.getOrderHistoryList(this.PAGE_SIZE).pipe(operators.tap((/**
+            this.orders$ = this.userOrderService
+                .getOrderHistoryList(this.PAGE_SIZE)
+                .pipe(operators.tap((/**
              * @param {?} orders
              * @return {?}
              */
@@ -11372,7 +11376,7 @@
                     _this.sortType = orders.pagination.sort;
                 }
             })));
-            this.isLoaded$ = this.userService.getOrderHistoryListLoaded();
+            this.isLoaded$ = this.userOrderService.getOrderHistoryListLoaded();
         };
         /**
          * @return {?}
@@ -11381,7 +11385,7 @@
          * @return {?}
          */
         function () {
-            this.userService.clearOrderList();
+            this.userOrderService.clearOrderList();
         };
         /**
          * @param {?} sortCode
@@ -11463,7 +11467,7 @@
          * @return {?}
          */
         function (event) {
-            this.userService.loadOrderList(this.PAGE_SIZE, event.currentPage, event.sortCode);
+            this.userOrderService.loadOrderList(this.PAGE_SIZE, event.currentPage, event.sortCode);
         };
         OrderHistoryComponent.decorators = [
             { type: core.Component, args: [{
@@ -11474,7 +11478,7 @@
         /** @nocollapse */
         OrderHistoryComponent.ctorParameters = function () { return [
             { type: core$1.RoutingService },
-            { type: core$1.UserService },
+            { type: core$1.UserOrderService },
             { type: core$1.TranslationService }
         ]; };
         return OrderHistoryComponent;
@@ -11540,8 +11544,8 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var PaymentMethodsComponent = /** @class */ (function () {
-        function PaymentMethodsComponent(userService, translation) {
-            this.userService = userService;
+        function PaymentMethodsComponent(userPaymentService, translation) {
+            this.userPaymentService = userPaymentService;
             this.translation = translation;
         }
         /**
@@ -11552,7 +11556,7 @@
          */
         function () {
             var _this = this;
-            this.paymentMethods$ = this.userService.getPaymentMethods().pipe(operators.tap((/**
+            this.paymentMethods$ = this.userPaymentService.getPaymentMethods().pipe(operators.tap((/**
              * @param {?} paymentDetails
              * @return {?}
              */
@@ -11568,8 +11572,8 @@
                 }
             })));
             this.editCard = null;
-            this.loading$ = this.userService.getPaymentMethodsLoading();
-            this.userService.loadPaymentMethods();
+            this.loading$ = this.userPaymentService.getPaymentMethodsLoading();
+            this.userPaymentService.loadPaymentMethods();
         };
         /**
          * @param {?} __0
@@ -11622,7 +11626,7 @@
          * @return {?}
          */
         function (paymentMethod) {
-            this.userService.deletePaymentMethod(paymentMethod.id);
+            this.userPaymentService.deletePaymentMethod(paymentMethod.id);
             this.editCard = null;
         };
         /**
@@ -11654,7 +11658,7 @@
          * @return {?}
          */
         function (paymentMethod) {
-            this.userService.setPaymentMethodAsDefault(paymentMethod.id);
+            this.userPaymentService.setPaymentMethodAsDefault(paymentMethod.id);
         };
         /**
          * @return {?}
@@ -11675,7 +11679,7 @@
         ];
         /** @nocollapse */
         PaymentMethodsComponent.ctorParameters = function () { return [
-            { type: core$1.UserService },
+            { type: core$1.UserPaymentService },
             { type: core$1.TranslationService }
         ]; };
         return PaymentMethodsComponent;

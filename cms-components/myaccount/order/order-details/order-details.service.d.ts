@@ -1,10 +1,10 @@
-import { Order, RoutingService, UserService } from '@spartacus/core';
+import { Order, RoutingService, UserOrderService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 export declare class OrderDetailsService {
-    private userService;
+    private userOrderService;
     private routingService;
     orderCode$: Observable<string>;
     orderLoad$: Observable<{}>;
-    constructor(userService: UserService, routingService: RoutingService);
+    constructor(userOrderService: UserOrderService, routingService: RoutingService);
     getOrderDetails(): Observable<Order>;
 }

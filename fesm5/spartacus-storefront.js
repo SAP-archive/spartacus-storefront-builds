@@ -1,5 +1,5 @@
 import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, Renderer2, HostListener, forwardRef, Output, EventEmitter, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, Inject, PLATFORM_ID, INJECTOR, APP_INITIALIZER, Pipe } from '@angular/core';
-import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, ServerConfig, OccConfig, I18nModule, GlobalMessageService, GlobalMessageType, GlobalMessageModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UrlModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserService, TranslationService, CheckoutModule, AuthService, AuthRedirectService, defaultCmsModuleConfig, CmsModule as CmsModule$1, CmsConfig, UserModule, NotAuthGuard, CxApiService, ComponentMapperService, CmsService, DynamicAttributeService, PageType, SemanticPathService, TranslationChunkService, PageRobotsMeta, PageMetaService, LanguageService, CmsPageTitleModule, SearchboxService, ProductModule, ProductReferenceService, TranslatePipe, ProductSearchService, ProductReviewService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, RoutingModule as RoutingModule$1, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, KymaModule, provideConfig } from '@spartacus/core';
+import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, ServerConfig, OccConfig, I18nModule, GlobalMessageService, GlobalMessageType, GlobalMessageModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UrlModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserPaymentService, TranslationService, UserService, CheckoutModule, UserAddressService, AuthService, AuthRedirectService, defaultCmsModuleConfig, CmsModule as CmsModule$1, CmsConfig, UserModule, NotAuthGuard, CxApiService, ComponentMapperService, CmsService, DynamicAttributeService, PageType, SemanticPathService, TranslationChunkService, PageRobotsMeta, PageMetaService, LanguageService, UserConsentService, UserOrderService, CmsPageTitleModule, SearchboxService, ProductModule, ProductReferenceService, TranslatePipe, ProductSearchService, ProductReviewService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, RoutingModule as RoutingModule$1, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, KymaModule, provideConfig } from '@spartacus/core';
 import { map, filter, switchMap, tap, debounceTime, take, skipWhile, shareReplay, startWith, distinctUntilChanged, first, endWith, withLatestFrom, delay } from 'rxjs/operators';
 import { __extends, __values, __spread, __read, __awaiter, __generator, __assign } from 'tslib';
 import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -4718,10 +4718,10 @@ var SuggestedAddressDialogComponent = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var PaymentFormComponent = /** @class */ (function () {
-    function PaymentFormComponent(checkoutPaymentService, checkoutDeliveryService, userService, globalMessageService, fb, modalService) {
+    function PaymentFormComponent(checkoutPaymentService, checkoutDeliveryService, userPaymentService, globalMessageService, fb, modalService) {
         this.checkoutPaymentService = checkoutPaymentService;
         this.checkoutDeliveryService = checkoutDeliveryService;
-        this.userService = userService;
+        this.userPaymentService = userPaymentService;
         this.globalMessageService = globalMessageService;
         this.fb = fb;
         this.modalService = modalService;
@@ -4764,14 +4764,14 @@ var PaymentFormComponent = /** @class */ (function () {
     function () {
         var _this = this;
         this.expMonthAndYear();
-        this.countries$ = this.userService.getAllBillingCountries().pipe(tap((/**
+        this.countries$ = this.userPaymentService.getAllBillingCountries().pipe(tap((/**
          * @param {?} countries
          * @return {?}
          */
         function (countries) {
             // If the store is empty fetch countries. This is also used when changing language.
             if (Object.keys(countries).length === 0) {
-                _this.userService.loadBillingCountries();
+                _this.userPaymentService.loadBillingCountries();
             }
         })));
         this.cardTypes$ = this.checkoutPaymentService.getCardTypes().pipe(tap((/**
@@ -5059,7 +5059,7 @@ var PaymentFormComponent = /** @class */ (function () {
     PaymentFormComponent.ctorParameters = function () { return [
         { type: CheckoutPaymentService },
         { type: CheckoutDeliveryService },
-        { type: UserService },
+        { type: UserPaymentService },
         { type: GlobalMessageService },
         { type: FormBuilder },
         { type: ModalService }
@@ -5104,8 +5104,8 @@ var PaymentFormModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var PaymentMethodComponent = /** @class */ (function () {
-    function PaymentMethodComponent(userService, checkoutService, checkoutDeliveryService, checkoutPaymentService, globalMessageService, routingConfigService, routingService, checkoutConfigService, activatedRoute, translation) {
-        this.userService = userService;
+    function PaymentMethodComponent(userPaymentService, checkoutService, checkoutDeliveryService, checkoutPaymentService, globalMessageService, routingConfigService, routingService, checkoutConfigService, activatedRoute, translation) {
+        this.userPaymentService = userPaymentService;
         this.checkoutService = checkoutService;
         this.checkoutDeliveryService = checkoutDeliveryService;
         this.checkoutPaymentService = checkoutPaymentService;
@@ -5126,11 +5126,11 @@ var PaymentMethodComponent = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        this.isLoading$ = this.userService.getPaymentMethodsLoading();
-        this.userService.loadPaymentMethods();
+        this.isLoading$ = this.userPaymentService.getPaymentMethodsLoading();
+        this.userPaymentService.loadPaymentMethods();
         this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
         this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
-        this.existingPaymentMethods$ = this.userService.getPaymentMethods();
+        this.existingPaymentMethods$ = this.userPaymentService.getPaymentMethods();
         this.getPaymentDetailsSub = this.checkoutPaymentService
             .getPaymentDetails()
             .pipe(filter((/**
@@ -5365,7 +5365,7 @@ var PaymentMethodComponent = /** @class */ (function () {
     ];
     /** @nocollapse */
     PaymentMethodComponent.ctorParameters = function () { return [
-        { type: UserService },
+        { type: UserPaymentService },
         { type: CheckoutService },
         { type: CheckoutDeliveryService },
         { type: CheckoutPaymentService },
@@ -5586,10 +5586,10 @@ var PaymentDetailsSetGuard = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var ReviewSubmitComponent = /** @class */ (function () {
-    function ReviewSubmitComponent(checkoutDeliveryService, checkoutPaymentService, userService, cartService, translation) {
+    function ReviewSubmitComponent(checkoutDeliveryService, checkoutPaymentService, userAddressService, cartService, translation) {
         this.checkoutDeliveryService = checkoutDeliveryService;
         this.checkoutPaymentService = checkoutPaymentService;
-        this.userService = userService;
+        this.userAddressService = userAddressService;
         this.cartService = cartService;
         this.translation = translation;
     }
@@ -5621,14 +5621,14 @@ var ReviewSubmitComponent = /** @class */ (function () {
          * @return {?}
          */
         function (address) {
-            return _this.userService.getCountry(address.country.isocode);
+            return _this.userAddressService.getCountry(address.country.isocode);
         })), tap((/**
          * @param {?} country
          * @return {?}
          */
         function (country) {
             if (country === null) {
-                _this.userService.loadDeliveryCountries();
+                _this.userAddressService.loadDeliveryCountries();
             }
         })), map((/**
          * @param {?} country
@@ -5739,7 +5739,7 @@ var ReviewSubmitComponent = /** @class */ (function () {
     ReviewSubmitComponent.ctorParameters = function () { return [
         { type: CheckoutDeliveryService },
         { type: CheckoutPaymentService },
-        { type: UserService },
+        { type: UserAddressService },
         { type: CartService },
         { type: TranslationService }
     ]; };
@@ -5788,10 +5788,11 @@ var ReviewSubmitModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var AddressFormComponent = /** @class */ (function () {
-    function AddressFormComponent(fb, checkoutDeliveryService, userService, globalMessageService, modalService) {
+    function AddressFormComponent(fb, checkoutDeliveryService, userService, userAddressService, globalMessageService, modalService) {
         this.fb = fb;
         this.checkoutDeliveryService = checkoutDeliveryService;
         this.userService = userService;
+        this.userAddressService = userAddressService;
         this.globalMessageService = globalMessageService;
         this.modalService = modalService;
         this.selectedCountry$ = new BehaviorSubject('');
@@ -5825,13 +5826,13 @@ var AddressFormComponent = /** @class */ (function () {
     function () {
         var _this = this;
         // Fetching countries
-        this.countries$ = this.userService.getDeliveryCountries().pipe(tap((/**
+        this.countries$ = this.userAddressService.getDeliveryCountries().pipe(tap((/**
          * @param {?} countries
          * @return {?}
          */
         function (countries) {
             if (Object.keys(countries).length === 0) {
-                _this.userService.loadDeliveryCountries();
+                _this.userAddressService.loadDeliveryCountries();
             }
         })));
         // Fetching titles
@@ -5857,7 +5858,7 @@ var AddressFormComponent = /** @class */ (function () {
          * @param {?} country
          * @return {?}
          */
-        function (country) { return _this.userService.getRegions(country); })), tap((/**
+        function (country) { return _this.userAddressService.getRegions(country); })), tap((/**
          * @param {?} regions
          * @return {?}
          */
@@ -6043,6 +6044,7 @@ var AddressFormComponent = /** @class */ (function () {
         { type: FormBuilder },
         { type: CheckoutDeliveryService },
         { type: UserService },
+        { type: UserAddressService },
         { type: GlobalMessageService },
         { type: ModalService }
     ]; };
@@ -6091,8 +6093,8 @@ var AddressFormModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var ShippingAddressComponent = /** @class */ (function () {
-    function ShippingAddressComponent(userService, cartService, routingService, checkoutDeliveryService, checkoutConfigService, activatedRoute, translation) {
-        this.userService = userService;
+    function ShippingAddressComponent(userAddressService, cartService, routingService, checkoutDeliveryService, checkoutConfigService, activatedRoute, translation) {
+        this.userAddressService = userAddressService;
         this.cartService = cartService;
         this.routingService = routingService;
         this.checkoutDeliveryService = checkoutDeliveryService;
@@ -6114,8 +6116,8 @@ var ShippingAddressComponent = /** @class */ (function () {
         this.goTo = null;
         this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
         this.checkoutStepUrlPrevious = 'cart';
-        this.isLoading$ = this.userService.getAddressesLoading();
-        this.existingAddresses$ = this.userService.getAddresses();
+        this.isLoading$ = this.userAddressService.getAddressesLoading();
+        this.existingAddresses$ = this.userAddressService.getAddresses();
         this.cards$ = combineLatest(this.existingAddresses$, this.selectedAddress$.asObservable(), this.translation.translate('checkoutAddress.defaultShippingAddress'), this.translation.translate('checkoutAddress.shipToThisAddress'), this.translation.translate('addressCard.selected')).pipe(map((/**
          * @param {?} __0
          * @return {?}
@@ -6136,7 +6138,7 @@ var ShippingAddressComponent = /** @class */ (function () {
             }));
         })));
         this.cartService.loadDetails();
-        this.userService.loadAddresses();
+        this.userAddressService.loadAddresses();
         this.setAddressSub = this.checkoutDeliveryService
             .getDeliveryAddress()
             .subscribe((/**
@@ -6319,7 +6321,7 @@ var ShippingAddressComponent = /** @class */ (function () {
     ];
     /** @nocollapse */
     ShippingAddressComponent.ctorParameters = function () { return [
-        { type: UserService },
+        { type: UserAddressService },
         { type: CartService },
         { type: RoutingService },
         { type: CheckoutDeliveryService },
@@ -10032,8 +10034,8 @@ var TabParagraphContainerModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var AddressBookComponentService = /** @class */ (function () {
-    function AddressBookComponentService(userService) {
-        this.userService = userService;
+    function AddressBookComponentService(userAddressService) {
+        this.userAddressService = userAddressService;
     }
     /**
      * @return {?}
@@ -10042,7 +10044,7 @@ var AddressBookComponentService = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        return this.userService.getAddresses();
+        return this.userAddressService.getAddresses();
     };
     /**
      * @return {?}
@@ -10051,7 +10053,7 @@ var AddressBookComponentService = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        return this.userService.getAddressesLoading();
+        return this.userAddressService.getAddressesLoading();
     };
     /**
      * @return {?}
@@ -10060,7 +10062,7 @@ var AddressBookComponentService = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.userService.loadAddresses();
+        this.userAddressService.loadAddresses();
     };
     /**
      * @param {?} address
@@ -10071,7 +10073,7 @@ var AddressBookComponentService = /** @class */ (function () {
      * @return {?}
      */
     function (address) {
-        this.userService.addUserAddress(address);
+        this.userAddressService.addUserAddress(address);
     };
     /**
      * @param {?} addressId
@@ -10084,14 +10086,14 @@ var AddressBookComponentService = /** @class */ (function () {
      * @return {?}
      */
     function (addressId, address) {
-        this.userService.updateUserAddress(addressId, address);
+        this.userAddressService.updateUserAddress(addressId, address);
     };
     AddressBookComponentService.decorators = [
         { type: Injectable }
     ];
     /** @nocollapse */
     AddressBookComponentService.ctorParameters = function () { return [
-        { type: UserService }
+        { type: UserAddressService }
     ]; };
     return AddressBookComponentService;
 }());
@@ -10200,8 +10202,8 @@ var AddressBookComponent = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var AddressCardComponent = /** @class */ (function () {
-    function AddressCardComponent(userService) {
-        this.userService = userService;
+    function AddressCardComponent(userAddressService) {
+        this.userAddressService = userAddressService;
         this.editEvent = new EventEmitter();
     }
     /**
@@ -10240,7 +10242,7 @@ var AddressCardComponent = /** @class */ (function () {
      * @return {?}
      */
     function (addressId) {
-        this.userService.setAddressAsDefault(addressId);
+        this.userAddressService.setAddressAsDefault(addressId);
     };
     /**
      * @param {?} addressId
@@ -10251,7 +10253,7 @@ var AddressCardComponent = /** @class */ (function () {
      * @return {?}
      */
     function (addressId) {
-        this.userService.deleteUserAddress(addressId);
+        this.userAddressService.deleteUserAddress(addressId);
     };
     AddressCardComponent.decorators = [
         { type: Component, args: [{
@@ -10261,7 +10263,7 @@ var AddressCardComponent = /** @class */ (function () {
     ];
     /** @nocollapse */
     AddressCardComponent.ctorParameters = function () { return [
-        { type: UserService }
+        { type: UserAddressService }
     ]; };
     AddressCardComponent.propDecorators = {
         address: [{ type: Input }],
@@ -10553,8 +10555,8 @@ var ConsentManagementFormComponent = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var ConsentManagementComponent = /** @class */ (function () {
-    function ConsentManagementComponent(userService, routingService, globalMessageService) {
-        this.userService = userService;
+    function ConsentManagementComponent(userConsentService, routingService, globalMessageService) {
+        this.userConsentService = userConsentService;
         this.routingService = routingService;
         this.globalMessageService = globalMessageService;
         this.subscriptions = new Subscription();
@@ -10566,7 +10568,7 @@ var ConsentManagementComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.loading$ = combineLatest(this.userService.getConsentsResultLoading(), this.userService.getGiveConsentResultLoading(), this.userService.getWithdrawConsentResultLoading()).pipe(map((/**
+        this.loading$ = combineLatest(this.userConsentService.getConsentsResultLoading(), this.userConsentService.getGiveConsentResultLoading(), this.userConsentService.getWithdrawConsentResultLoading()).pipe(map((/**
          * @param {?} __0
          * @return {?}
          */
@@ -10588,13 +10590,13 @@ var ConsentManagementComponent = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        this.templateList$ = this.userService.getConsents().pipe(tap((/**
+        this.templateList$ = this.userConsentService.getConsents().pipe(tap((/**
          * @param {?} templateList
          * @return {?}
          */
         function (templateList) {
             if (!_this.consentsExists(templateList)) {
-                _this.userService.loadConsents();
+                _this.userConsentService.loadConsents();
             }
         })));
     };
@@ -10608,8 +10610,8 @@ var ConsentManagementComponent = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        this.userService.resetGiveConsentProcessState();
-        this.subscriptions.add(this.userService
+        this.userConsentService.resetGiveConsentProcessState();
+        this.subscriptions.add(this.userConsentService
             .getGiveConsentResultSuccess()
             .subscribe((/**
          * @param {?} success
@@ -10627,10 +10629,10 @@ var ConsentManagementComponent = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        this.userService.resetWithdrawConsentProcessState();
-        this.subscriptions.add(this.userService
+        this.userConsentService.resetWithdrawConsentProcessState();
+        this.subscriptions.add(this.userConsentService
             .getWithdrawConsentResultLoading()
-            .pipe(skipWhile(Boolean), withLatestFrom(this.userService.getWithdrawConsentResultSuccess()), map((/**
+            .pipe(skipWhile(Boolean), withLatestFrom(this.userConsentService.getWithdrawConsentResultSuccess()), map((/**
          * @param {?} __0
          * @return {?}
          */
@@ -10643,7 +10645,7 @@ var ConsentManagementComponent = /** @class */ (function () {
          */
         function (withdrawalSuccess) {
             if (withdrawalSuccess) {
-                _this.userService.loadConsents();
+                _this.userConsentService.loadConsents();
             }
         })))
             .subscribe((/**
@@ -10678,10 +10680,10 @@ var ConsentManagementComponent = /** @class */ (function () {
     function (_a) {
         var given = _a.given, template = _a.template;
         if (given) {
-            this.userService.giveConsent(template.id, template.version);
+            this.userConsentService.giveConsent(template.id, template.version);
         }
         else {
-            this.userService.withdrawConsent(template.currentConsent.code);
+            this.userConsentService.withdrawConsent(template.currentConsent.code);
         }
     };
     /**
@@ -10705,7 +10707,7 @@ var ConsentManagementComponent = /** @class */ (function () {
      */
     function (success) {
         if (success) {
-            this.userService.resetGiveConsentProcessState();
+            this.userConsentService.resetGiveConsentProcessState();
             this.globalMessageService.add({ key: 'consentManagementForm.message.success.given' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
         }
     };
@@ -10721,7 +10723,7 @@ var ConsentManagementComponent = /** @class */ (function () {
      */
     function (success) {
         if (success) {
-            this.userService.resetWithdrawConsentProcessState();
+            this.userConsentService.resetWithdrawConsentProcessState();
             this.globalMessageService.add({ key: 'consentManagementForm.message.success.withdrawn' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
         }
     };
@@ -10733,8 +10735,8 @@ var ConsentManagementComponent = /** @class */ (function () {
      */
     function () {
         this.subscriptions.unsubscribe();
-        this.userService.resetGiveConsentProcessState();
-        this.userService.resetWithdrawConsentProcessState();
+        this.userConsentService.resetGiveConsentProcessState();
+        this.userConsentService.resetWithdrawConsentProcessState();
     };
     ConsentManagementComponent.decorators = [
         { type: Component, args: [{
@@ -10744,7 +10746,7 @@ var ConsentManagementComponent = /** @class */ (function () {
     ];
     /** @nocollapse */
     ConsentManagementComponent.ctorParameters = function () { return [
-        { type: UserService },
+        { type: UserConsentService },
         { type: RoutingService },
         { type: GlobalMessageService }
     ]; };
@@ -10880,9 +10882,9 @@ var ForgotPasswordModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var OrderDetailsService = /** @class */ (function () {
-    function OrderDetailsService(userService, routingService) {
+    function OrderDetailsService(userOrderService, routingService) {
         var _this = this;
-        this.userService = userService;
+        this.userOrderService = userOrderService;
         this.routingService = routingService;
         this.orderCode$ = this.routingService
             .getRouterState()
@@ -10897,10 +10899,10 @@ var OrderDetailsService = /** @class */ (function () {
          */
         function (orderCode) {
             if (orderCode) {
-                _this.userService.loadOrderDetails(orderCode);
+                _this.userOrderService.loadOrderDetails(orderCode);
             }
             else {
-                _this.userService.clearOrderDetails();
+                _this.userOrderService.clearOrderDetails();
             }
         })), shareReplay({ bufferSize: 1, refCount: true }));
     }
@@ -10915,14 +10917,14 @@ var OrderDetailsService = /** @class */ (function () {
         return this.orderLoad$.pipe(switchMap((/**
          * @return {?}
          */
-        function () { return _this.userService.getOrderDetails(); })));
+        function () { return _this.userOrderService.getOrderDetails(); })));
     };
     OrderDetailsService.decorators = [
         { type: Injectable }
     ];
     /** @nocollapse */
     OrderDetailsService.ctorParameters = function () { return [
-        { type: UserService },
+        { type: UserOrderService },
         { type: RoutingService }
     ]; };
     return OrderDetailsService;
@@ -11246,9 +11248,9 @@ var OrderDetailsModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var OrderHistoryComponent = /** @class */ (function () {
-    function OrderHistoryComponent(routing, userService, translation) {
+    function OrderHistoryComponent(routing, userOrderService, translation) {
         this.routing = routing;
-        this.userService = userService;
+        this.userOrderService = userOrderService;
         this.translation = translation;
         this.PAGE_SIZE = 5;
     }
@@ -11260,7 +11262,9 @@ var OrderHistoryComponent = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        this.orders$ = this.userService.getOrderHistoryList(this.PAGE_SIZE).pipe(tap((/**
+        this.orders$ = this.userOrderService
+            .getOrderHistoryList(this.PAGE_SIZE)
+            .pipe(tap((/**
          * @param {?} orders
          * @return {?}
          */
@@ -11269,7 +11273,7 @@ var OrderHistoryComponent = /** @class */ (function () {
                 _this.sortType = orders.pagination.sort;
             }
         })));
-        this.isLoaded$ = this.userService.getOrderHistoryListLoaded();
+        this.isLoaded$ = this.userOrderService.getOrderHistoryListLoaded();
     };
     /**
      * @return {?}
@@ -11278,7 +11282,7 @@ var OrderHistoryComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.userService.clearOrderList();
+        this.userOrderService.clearOrderList();
     };
     /**
      * @param {?} sortCode
@@ -11360,7 +11364,7 @@ var OrderHistoryComponent = /** @class */ (function () {
      * @return {?}
      */
     function (event) {
-        this.userService.loadOrderList(this.PAGE_SIZE, event.currentPage, event.sortCode);
+        this.userOrderService.loadOrderList(this.PAGE_SIZE, event.currentPage, event.sortCode);
     };
     OrderHistoryComponent.decorators = [
         { type: Component, args: [{
@@ -11371,7 +11375,7 @@ var OrderHistoryComponent = /** @class */ (function () {
     /** @nocollapse */
     OrderHistoryComponent.ctorParameters = function () { return [
         { type: RoutingService },
-        { type: UserService },
+        { type: UserOrderService },
         { type: TranslationService }
     ]; };
     return OrderHistoryComponent;
@@ -11437,8 +11441,8 @@ var OrderModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var PaymentMethodsComponent = /** @class */ (function () {
-    function PaymentMethodsComponent(userService, translation) {
-        this.userService = userService;
+    function PaymentMethodsComponent(userPaymentService, translation) {
+        this.userPaymentService = userPaymentService;
         this.translation = translation;
     }
     /**
@@ -11449,7 +11453,7 @@ var PaymentMethodsComponent = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        this.paymentMethods$ = this.userService.getPaymentMethods().pipe(tap((/**
+        this.paymentMethods$ = this.userPaymentService.getPaymentMethods().pipe(tap((/**
          * @param {?} paymentDetails
          * @return {?}
          */
@@ -11465,8 +11469,8 @@ var PaymentMethodsComponent = /** @class */ (function () {
             }
         })));
         this.editCard = null;
-        this.loading$ = this.userService.getPaymentMethodsLoading();
-        this.userService.loadPaymentMethods();
+        this.loading$ = this.userPaymentService.getPaymentMethodsLoading();
+        this.userPaymentService.loadPaymentMethods();
     };
     /**
      * @param {?} __0
@@ -11519,7 +11523,7 @@ var PaymentMethodsComponent = /** @class */ (function () {
      * @return {?}
      */
     function (paymentMethod) {
-        this.userService.deletePaymentMethod(paymentMethod.id);
+        this.userPaymentService.deletePaymentMethod(paymentMethod.id);
         this.editCard = null;
     };
     /**
@@ -11551,7 +11555,7 @@ var PaymentMethodsComponent = /** @class */ (function () {
      * @return {?}
      */
     function (paymentMethod) {
-        this.userService.setPaymentMethodAsDefault(paymentMethod.id);
+        this.userPaymentService.setPaymentMethodAsDefault(paymentMethod.id);
     };
     /**
      * @return {?}
@@ -11572,7 +11576,7 @@ var PaymentMethodsComponent = /** @class */ (function () {
     ];
     /** @nocollapse */
     PaymentMethodsComponent.ctorParameters = function () { return [
-        { type: UserService },
+        { type: UserPaymentService },
         { type: TranslationService }
     ]; };
     return PaymentMethodsComponent;

@@ -1,8 +1,8 @@
-import { Address, UserService } from '@spartacus/core';
+import { Address, UserAddressService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 export declare class AddressBookComponentService {
-    private userService;
-    constructor(userService: UserService);
+    private userAddressService;
+    constructor(userAddressService: UserAddressService);
     getAddresses(): Observable<Address[]>;
     getAddressesStateLoading(): Observable<boolean>;
     loadAddresses(): void;

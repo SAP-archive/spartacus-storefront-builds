@@ -1,5 +1,5 @@
 import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, Renderer2, HostListener, forwardRef, EventEmitter, Output, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, Inject, PLATFORM_ID, INJECTOR, APP_INITIALIZER, Pipe } from '@angular/core';
-import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, ServerConfig, OccConfig, I18nModule, GlobalMessageType, GlobalMessageService, GlobalMessageModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UrlModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserService, TranslationService, CheckoutModule, AuthService, AuthRedirectService, defaultCmsModuleConfig, CmsModule as CmsModule$1, CmsConfig, UserModule, NotAuthGuard, CxApiService, ComponentMapperService, CmsService, DynamicAttributeService, PageType, SemanticPathService, TranslationChunkService, PageRobotsMeta, PageMetaService, LanguageService, CmsPageTitleModule, SearchboxService, ProductModule, ProductReferenceService, TranslatePipe, ProductSearchService, ProductReviewService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, RoutingModule as RoutingModule$1, provideConfig, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, KymaModule } from '@spartacus/core';
+import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, ServerConfig, OccConfig, I18nModule, GlobalMessageType, GlobalMessageService, GlobalMessageModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UrlModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserPaymentService, TranslationService, UserService, CheckoutModule, UserAddressService, AuthService, AuthRedirectService, defaultCmsModuleConfig, CmsModule as CmsModule$1, CmsConfig, UserModule, NotAuthGuard, CxApiService, ComponentMapperService, CmsService, DynamicAttributeService, PageType, SemanticPathService, TranslationChunkService, PageRobotsMeta, PageMetaService, LanguageService, UserConsentService, UserOrderService, CmsPageTitleModule, SearchboxService, ProductModule, ProductReferenceService, TranslatePipe, ProductSearchService, ProductReviewService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, RoutingModule as RoutingModule$1, provideConfig, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, KymaModule } from '@spartacus/core';
 import { map, filter, switchMap, tap, debounceTime, take, skipWhile, shareReplay, startWith, distinctUntilChanged, first, endWith, withLatestFrom, delay } from 'rxjs/operators';
 import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -3902,15 +3902,15 @@ class PaymentFormComponent {
     /**
      * @param {?} checkoutPaymentService
      * @param {?} checkoutDeliveryService
-     * @param {?} userService
+     * @param {?} userPaymentService
      * @param {?} globalMessageService
      * @param {?} fb
      * @param {?} modalService
      */
-    constructor(checkoutPaymentService, checkoutDeliveryService, userService, globalMessageService, fb, modalService) {
+    constructor(checkoutPaymentService, checkoutDeliveryService, userPaymentService, globalMessageService, fb, modalService) {
         this.checkoutPaymentService = checkoutPaymentService;
         this.checkoutDeliveryService = checkoutDeliveryService;
-        this.userService = userService;
+        this.userPaymentService = userPaymentService;
         this.globalMessageService = globalMessageService;
         this.fb = fb;
         this.modalService = modalService;
@@ -3949,14 +3949,14 @@ class PaymentFormComponent {
      */
     ngOnInit() {
         this.expMonthAndYear();
-        this.countries$ = this.userService.getAllBillingCountries().pipe(tap((/**
+        this.countries$ = this.userPaymentService.getAllBillingCountries().pipe(tap((/**
          * @param {?} countries
          * @return {?}
          */
         countries => {
             // If the store is empty fetch countries. This is also used when changing language.
             if (Object.keys(countries).length === 0) {
-                this.userService.loadBillingCountries();
+                this.userPaymentService.loadBillingCountries();
             }
         })));
         this.cardTypes$ = this.checkoutPaymentService.getCardTypes().pipe(tap((/**
@@ -4183,7 +4183,7 @@ PaymentFormComponent.decorators = [
 PaymentFormComponent.ctorParameters = () => [
     { type: CheckoutPaymentService },
     { type: CheckoutDeliveryService },
-    { type: UserService },
+    { type: UserPaymentService },
     { type: GlobalMessageService },
     { type: FormBuilder },
     { type: ModalService }
@@ -4224,7 +4224,7 @@ PaymentFormModule.decorators = [
  */
 class PaymentMethodComponent {
     /**
-     * @param {?} userService
+     * @param {?} userPaymentService
      * @param {?} checkoutService
      * @param {?} checkoutDeliveryService
      * @param {?} checkoutPaymentService
@@ -4235,8 +4235,8 @@ class PaymentMethodComponent {
      * @param {?} activatedRoute
      * @param {?} translation
      */
-    constructor(userService, checkoutService, checkoutDeliveryService, checkoutPaymentService, globalMessageService, routingConfigService, routingService, checkoutConfigService, activatedRoute, translation) {
-        this.userService = userService;
+    constructor(userPaymentService, checkoutService, checkoutDeliveryService, checkoutPaymentService, globalMessageService, routingConfigService, routingService, checkoutConfigService, activatedRoute, translation) {
+        this.userPaymentService = userPaymentService;
         this.checkoutService = checkoutService;
         this.checkoutDeliveryService = checkoutDeliveryService;
         this.checkoutPaymentService = checkoutPaymentService;
@@ -4253,11 +4253,11 @@ class PaymentMethodComponent {
      * @return {?}
      */
     ngOnInit() {
-        this.isLoading$ = this.userService.getPaymentMethodsLoading();
-        this.userService.loadPaymentMethods();
+        this.isLoading$ = this.userPaymentService.getPaymentMethodsLoading();
+        this.userPaymentService.loadPaymentMethods();
         this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
         this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
-        this.existingPaymentMethods$ = this.userService.getPaymentMethods();
+        this.existingPaymentMethods$ = this.userPaymentService.getPaymentMethods();
         this.getPaymentDetailsSub = this.checkoutPaymentService
             .getPaymentDetails()
             .pipe(filter((/**
@@ -4452,7 +4452,7 @@ PaymentMethodComponent.decorators = [
 ];
 /** @nocollapse */
 PaymentMethodComponent.ctorParameters = () => [
-    { type: UserService },
+    { type: UserPaymentService },
     { type: CheckoutService },
     { type: CheckoutDeliveryService },
     { type: CheckoutPaymentService },
@@ -4658,14 +4658,14 @@ class ReviewSubmitComponent {
     /**
      * @param {?} checkoutDeliveryService
      * @param {?} checkoutPaymentService
-     * @param {?} userService
+     * @param {?} userAddressService
      * @param {?} cartService
      * @param {?} translation
      */
-    constructor(checkoutDeliveryService, checkoutPaymentService, userService, cartService, translation) {
+    constructor(checkoutDeliveryService, checkoutPaymentService, userAddressService, cartService, translation) {
         this.checkoutDeliveryService = checkoutDeliveryService;
         this.checkoutPaymentService = checkoutPaymentService;
-        this.userService = userService;
+        this.userAddressService = userAddressService;
         this.cartService = cartService;
         this.translation = translation;
     }
@@ -4692,13 +4692,13 @@ class ReviewSubmitComponent {
          * @param {?} address
          * @return {?}
          */
-        (address) => this.userService.getCountry(address.country.isocode))), tap((/**
+        (address) => this.userAddressService.getCountry(address.country.isocode))), tap((/**
          * @param {?} country
          * @return {?}
          */
         (country) => {
             if (country === null) {
-                this.userService.loadDeliveryCountries();
+                this.userAddressService.loadDeliveryCountries();
             }
         })), map((/**
          * @param {?} country
@@ -4794,7 +4794,7 @@ ReviewSubmitComponent.decorators = [
 ReviewSubmitComponent.ctorParameters = () => [
     { type: CheckoutDeliveryService },
     { type: CheckoutPaymentService },
-    { type: UserService },
+    { type: UserAddressService },
     { type: CartService },
     { type: TranslationService }
 ];
@@ -4842,13 +4842,15 @@ class AddressFormComponent {
      * @param {?} fb
      * @param {?} checkoutDeliveryService
      * @param {?} userService
+     * @param {?} userAddressService
      * @param {?} globalMessageService
      * @param {?} modalService
      */
-    constructor(fb, checkoutDeliveryService, userService, globalMessageService, modalService) {
+    constructor(fb, checkoutDeliveryService, userService, userAddressService, globalMessageService, modalService) {
         this.fb = fb;
         this.checkoutDeliveryService = checkoutDeliveryService;
         this.userService = userService;
+        this.userAddressService = userAddressService;
         this.globalMessageService = globalMessageService;
         this.modalService = modalService;
         this.selectedCountry$ = new BehaviorSubject('');
@@ -4878,13 +4880,13 @@ class AddressFormComponent {
      */
     ngOnInit() {
         // Fetching countries
-        this.countries$ = this.userService.getDeliveryCountries().pipe(tap((/**
+        this.countries$ = this.userAddressService.getDeliveryCountries().pipe(tap((/**
          * @param {?} countries
          * @return {?}
          */
         countries => {
             if (Object.keys(countries).length === 0) {
-                this.userService.loadDeliveryCountries();
+                this.userAddressService.loadDeliveryCountries();
             }
         })));
         // Fetching titles
@@ -4910,7 +4912,7 @@ class AddressFormComponent {
          * @param {?} country
          * @return {?}
          */
-        country => this.userService.getRegions(country))), tap((/**
+        country => this.userAddressService.getRegions(country))), tap((/**
          * @param {?} regions
          * @return {?}
          */
@@ -5068,6 +5070,7 @@ AddressFormComponent.ctorParameters = () => [
     { type: FormBuilder },
     { type: CheckoutDeliveryService },
     { type: UserService },
+    { type: UserAddressService },
     { type: GlobalMessageService },
     { type: ModalService }
 ];
@@ -5112,7 +5115,7 @@ AddressFormModule.decorators = [
  */
 class ShippingAddressComponent {
     /**
-     * @param {?} userService
+     * @param {?} userAddressService
      * @param {?} cartService
      * @param {?} routingService
      * @param {?} checkoutDeliveryService
@@ -5120,8 +5123,8 @@ class ShippingAddressComponent {
      * @param {?} activatedRoute
      * @param {?} translation
      */
-    constructor(userService, cartService, routingService, checkoutDeliveryService, checkoutConfigService, activatedRoute, translation) {
-        this.userService = userService;
+    constructor(userAddressService, cartService, routingService, checkoutDeliveryService, checkoutConfigService, activatedRoute, translation) {
+        this.userAddressService = userAddressService;
         this.cartService = cartService;
         this.routingService = routingService;
         this.checkoutDeliveryService = checkoutDeliveryService;
@@ -5139,8 +5142,8 @@ class ShippingAddressComponent {
         this.goTo = null;
         this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
         this.checkoutStepUrlPrevious = 'cart';
-        this.isLoading$ = this.userService.getAddressesLoading();
-        this.existingAddresses$ = this.userService.getAddresses();
+        this.isLoading$ = this.userAddressService.getAddressesLoading();
+        this.existingAddresses$ = this.userAddressService.getAddresses();
         this.cards$ = combineLatest(this.existingAddresses$, this.selectedAddress$.asObservable(), this.translation.translate('checkoutAddress.defaultShippingAddress'), this.translation.translate('checkoutAddress.shipToThisAddress'), this.translation.translate('addressCard.selected')).pipe(map((/**
          * @param {?} __0
          * @return {?}
@@ -5160,7 +5163,7 @@ class ShippingAddressComponent {
             }));
         })));
         this.cartService.loadDetails();
-        this.userService.loadAddresses();
+        this.userAddressService.loadAddresses();
         this.setAddressSub = this.checkoutDeliveryService
             .getDeliveryAddress()
             .subscribe((/**
@@ -5303,7 +5306,7 @@ ShippingAddressComponent.decorators = [
 ];
 /** @nocollapse */
 ShippingAddressComponent.ctorParameters = () => [
-    { type: UserService },
+    { type: UserAddressService },
     { type: CartService },
     { type: RoutingService },
     { type: CheckoutDeliveryService },
@@ -8511,35 +8514,35 @@ TabParagraphContainerModule.decorators = [
  */
 class AddressBookComponentService {
     /**
-     * @param {?} userService
+     * @param {?} userAddressService
      */
-    constructor(userService) {
-        this.userService = userService;
+    constructor(userAddressService) {
+        this.userAddressService = userAddressService;
     }
     /**
      * @return {?}
      */
     getAddresses() {
-        return this.userService.getAddresses();
+        return this.userAddressService.getAddresses();
     }
     /**
      * @return {?}
      */
     getAddressesStateLoading() {
-        return this.userService.getAddressesLoading();
+        return this.userAddressService.getAddressesLoading();
     }
     /**
      * @return {?}
      */
     loadAddresses() {
-        this.userService.loadAddresses();
+        this.userAddressService.loadAddresses();
     }
     /**
      * @param {?} address
      * @return {?}
      */
     addUserAddress(address) {
-        this.userService.addUserAddress(address);
+        this.userAddressService.addUserAddress(address);
     }
     /**
      * @param {?} addressId
@@ -8547,7 +8550,7 @@ class AddressBookComponentService {
      * @return {?}
      */
     updateUserAddress(addressId, address) {
-        this.userService.updateUserAddress(addressId, address);
+        this.userAddressService.updateUserAddress(addressId, address);
     }
 }
 AddressBookComponentService.decorators = [
@@ -8555,7 +8558,7 @@ AddressBookComponentService.decorators = [
 ];
 /** @nocollapse */
 AddressBookComponentService.ctorParameters = () => [
-    { type: UserService }
+    { type: UserAddressService }
 ];
 
 /**
@@ -8641,10 +8644,10 @@ AddressBookComponent.ctorParameters = () => [
  */
 class AddressCardComponent {
     /**
-     * @param {?} userService
+     * @param {?} userAddressService
      */
-    constructor(userService) {
-        this.userService = userService;
+    constructor(userAddressService) {
+        this.userAddressService = userAddressService;
         this.editEvent = new EventEmitter();
     }
     /**
@@ -8670,14 +8673,14 @@ class AddressCardComponent {
      * @return {?}
      */
     setAddressAsDefault(addressId) {
-        this.userService.setAddressAsDefault(addressId);
+        this.userAddressService.setAddressAsDefault(addressId);
     }
     /**
      * @param {?} addressId
      * @return {?}
      */
     deleteAddress(addressId) {
-        this.userService.deleteUserAddress(addressId);
+        this.userAddressService.deleteUserAddress(addressId);
     }
 }
 AddressCardComponent.decorators = [
@@ -8688,7 +8691,7 @@ AddressCardComponent.decorators = [
 ];
 /** @nocollapse */
 AddressCardComponent.ctorParameters = () => [
-    { type: UserService }
+    { type: UserAddressService }
 ];
 AddressCardComponent.propDecorators = {
     address: [{ type: Input }],
@@ -8953,12 +8956,12 @@ ConsentManagementFormComponent.propDecorators = {
  */
 class ConsentManagementComponent {
     /**
-     * @param {?} userService
+     * @param {?} userConsentService
      * @param {?} routingService
      * @param {?} globalMessageService
      */
-    constructor(userService, routingService, globalMessageService) {
-        this.userService = userService;
+    constructor(userConsentService, routingService, globalMessageService) {
+        this.userConsentService = userConsentService;
         this.routingService = routingService;
         this.globalMessageService = globalMessageService;
         this.subscriptions = new Subscription();
@@ -8967,7 +8970,7 @@ class ConsentManagementComponent {
      * @return {?}
      */
     ngOnInit() {
-        this.loading$ = combineLatest(this.userService.getConsentsResultLoading(), this.userService.getGiveConsentResultLoading(), this.userService.getWithdrawConsentResultLoading()).pipe(map((/**
+        this.loading$ = combineLatest(this.userConsentService.getConsentsResultLoading(), this.userConsentService.getGiveConsentResultLoading(), this.userConsentService.getWithdrawConsentResultLoading()).pipe(map((/**
          * @param {?} __0
          * @return {?}
          */
@@ -8981,13 +8984,13 @@ class ConsentManagementComponent {
      * @return {?}
      */
     consentListInit() {
-        this.templateList$ = this.userService.getConsents().pipe(tap((/**
+        this.templateList$ = this.userConsentService.getConsents().pipe(tap((/**
          * @param {?} templateList
          * @return {?}
          */
         templateList => {
             if (!this.consentsExists(templateList)) {
-                this.userService.loadConsents();
+                this.userConsentService.loadConsents();
             }
         })));
     }
@@ -8996,8 +8999,8 @@ class ConsentManagementComponent {
      * @return {?}
      */
     giveConsentInit() {
-        this.userService.resetGiveConsentProcessState();
-        this.subscriptions.add(this.userService
+        this.userConsentService.resetGiveConsentProcessState();
+        this.subscriptions.add(this.userConsentService
             .getGiveConsentResultSuccess()
             .subscribe((/**
          * @param {?} success
@@ -9010,10 +9013,10 @@ class ConsentManagementComponent {
      * @return {?}
      */
     withdrawConsentInit() {
-        this.userService.resetWithdrawConsentProcessState();
-        this.subscriptions.add(this.userService
+        this.userConsentService.resetWithdrawConsentProcessState();
+        this.subscriptions.add(this.userConsentService
             .getWithdrawConsentResultLoading()
-            .pipe(skipWhile(Boolean), withLatestFrom(this.userService.getWithdrawConsentResultSuccess()), map((/**
+            .pipe(skipWhile(Boolean), withLatestFrom(this.userConsentService.getWithdrawConsentResultSuccess()), map((/**
          * @param {?} __0
          * @return {?}
          */
@@ -9023,7 +9026,7 @@ class ConsentManagementComponent {
          */
         withdrawalSuccess => {
             if (withdrawalSuccess) {
-                this.userService.loadConsents();
+                this.userConsentService.loadConsents();
             }
         })))
             .subscribe((/**
@@ -9046,10 +9049,10 @@ class ConsentManagementComponent {
      */
     onConsentChange({ given, template, }) {
         if (given) {
-            this.userService.giveConsent(template.id, template.version);
+            this.userConsentService.giveConsent(template.id, template.version);
         }
         else {
-            this.userService.withdrawConsent(template.currentConsent.code);
+            this.userConsentService.withdrawConsent(template.currentConsent.code);
         }
     }
     /**
@@ -9065,7 +9068,7 @@ class ConsentManagementComponent {
      */
     onConsentGivenSuccess(success) {
         if (success) {
-            this.userService.resetGiveConsentProcessState();
+            this.userConsentService.resetGiveConsentProcessState();
             this.globalMessageService.add({ key: 'consentManagementForm.message.success.given' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
         }
     }
@@ -9076,7 +9079,7 @@ class ConsentManagementComponent {
      */
     onConsentWithdrawnSuccess(success) {
         if (success) {
-            this.userService.resetWithdrawConsentProcessState();
+            this.userConsentService.resetWithdrawConsentProcessState();
             this.globalMessageService.add({ key: 'consentManagementForm.message.success.withdrawn' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
         }
     }
@@ -9085,8 +9088,8 @@ class ConsentManagementComponent {
      */
     ngOnDestroy() {
         this.subscriptions.unsubscribe();
-        this.userService.resetGiveConsentProcessState();
-        this.userService.resetWithdrawConsentProcessState();
+        this.userConsentService.resetGiveConsentProcessState();
+        this.userConsentService.resetWithdrawConsentProcessState();
     }
 }
 ConsentManagementComponent.decorators = [
@@ -9097,7 +9100,7 @@ ConsentManagementComponent.decorators = [
 ];
 /** @nocollapse */
 ConsentManagementComponent.ctorParameters = () => [
-    { type: UserService },
+    { type: UserConsentService },
     { type: RoutingService },
     { type: GlobalMessageService }
 ];
@@ -9224,11 +9227,11 @@ ForgotPasswordModule.decorators = [
  */
 class OrderDetailsService {
     /**
-     * @param {?} userService
+     * @param {?} userOrderService
      * @param {?} routingService
      */
-    constructor(userService, routingService) {
-        this.userService = userService;
+    constructor(userOrderService, routingService) {
+        this.userOrderService = userOrderService;
         this.routingService = routingService;
         this.orderCode$ = this.routingService
             .getRouterState()
@@ -9243,10 +9246,10 @@ class OrderDetailsService {
          */
         orderCode => {
             if (orderCode) {
-                this.userService.loadOrderDetails(orderCode);
+                this.userOrderService.loadOrderDetails(orderCode);
             }
             else {
-                this.userService.clearOrderDetails();
+                this.userOrderService.clearOrderDetails();
             }
         })), shareReplay({ bufferSize: 1, refCount: true }));
     }
@@ -9257,7 +9260,7 @@ class OrderDetailsService {
         return this.orderLoad$.pipe(switchMap((/**
          * @return {?}
          */
-        () => this.userService.getOrderDetails())));
+        () => this.userOrderService.getOrderDetails())));
     }
 }
 OrderDetailsService.decorators = [
@@ -9265,7 +9268,7 @@ OrderDetailsService.decorators = [
 ];
 /** @nocollapse */
 OrderDetailsService.ctorParameters = () => [
-    { type: UserService },
+    { type: UserOrderService },
     { type: RoutingService }
 ];
 
@@ -9559,12 +9562,12 @@ OrderDetailsModule.decorators = [
 class OrderHistoryComponent {
     /**
      * @param {?} routing
-     * @param {?} userService
+     * @param {?} userOrderService
      * @param {?} translation
      */
-    constructor(routing, userService, translation) {
+    constructor(routing, userOrderService, translation) {
         this.routing = routing;
-        this.userService = userService;
+        this.userOrderService = userOrderService;
         this.translation = translation;
         this.PAGE_SIZE = 5;
     }
@@ -9572,7 +9575,9 @@ class OrderHistoryComponent {
      * @return {?}
      */
     ngOnInit() {
-        this.orders$ = this.userService.getOrderHistoryList(this.PAGE_SIZE).pipe(tap((/**
+        this.orders$ = this.userOrderService
+            .getOrderHistoryList(this.PAGE_SIZE)
+            .pipe(tap((/**
          * @param {?} orders
          * @return {?}
          */
@@ -9581,13 +9586,13 @@ class OrderHistoryComponent {
                 this.sortType = orders.pagination.sort;
             }
         })));
-        this.isLoaded$ = this.userService.getOrderHistoryListLoaded();
+        this.isLoaded$ = this.userOrderService.getOrderHistoryListLoaded();
     }
     /**
      * @return {?}
      */
     ngOnDestroy() {
-        this.userService.clearOrderList();
+        this.userOrderService.clearOrderList();
     }
     /**
      * @param {?} sortCode
@@ -9648,7 +9653,7 @@ class OrderHistoryComponent {
      * @return {?}
      */
     fetchOrders(event) {
-        this.userService.loadOrderList(this.PAGE_SIZE, event.currentPage, event.sortCode);
+        this.userOrderService.loadOrderList(this.PAGE_SIZE, event.currentPage, event.sortCode);
     }
 }
 OrderHistoryComponent.decorators = [
@@ -9660,7 +9665,7 @@ OrderHistoryComponent.decorators = [
 /** @nocollapse */
 OrderHistoryComponent.ctorParameters = () => [
     { type: RoutingService },
-    { type: UserService },
+    { type: UserOrderService },
     { type: TranslationService }
 ];
 
@@ -9719,18 +9724,18 @@ OrderModule.decorators = [
  */
 class PaymentMethodsComponent {
     /**
-     * @param {?} userService
+     * @param {?} userPaymentService
      * @param {?} translation
      */
-    constructor(userService, translation) {
-        this.userService = userService;
+    constructor(userPaymentService, translation) {
+        this.userPaymentService = userPaymentService;
         this.translation = translation;
     }
     /**
      * @return {?}
      */
     ngOnInit() {
-        this.paymentMethods$ = this.userService.getPaymentMethods().pipe(tap((/**
+        this.paymentMethods$ = this.userPaymentService.getPaymentMethods().pipe(tap((/**
          * @param {?} paymentDetails
          * @return {?}
          */
@@ -9746,8 +9751,8 @@ class PaymentMethodsComponent {
             }
         })));
         this.editCard = null;
-        this.loading$ = this.userService.getPaymentMethodsLoading();
-        this.userService.loadPaymentMethods();
+        this.loading$ = this.userPaymentService.getPaymentMethodsLoading();
+        this.userPaymentService.loadPaymentMethods();
     }
     /**
      * @param {?} __0
@@ -9790,7 +9795,7 @@ class PaymentMethodsComponent {
      * @return {?}
      */
     deletePaymentMethod(paymentMethod) {
-        this.userService.deletePaymentMethod(paymentMethod.id);
+        this.userPaymentService.deletePaymentMethod(paymentMethod.id);
         this.editCard = null;
     }
     /**
@@ -9811,7 +9816,7 @@ class PaymentMethodsComponent {
      * @return {?}
      */
     setDefaultPaymentMethod(paymentMethod) {
-        this.userService.setPaymentMethodAsDefault(paymentMethod.id);
+        this.userPaymentService.setPaymentMethodAsDefault(paymentMethod.id);
     }
     /**
      * @return {?}
@@ -9830,7 +9835,7 @@ PaymentMethodsComponent.decorators = [
 ];
 /** @nocollapse */
 PaymentMethodsComponent.ctorParameters = () => [
-    { type: UserService },
+    { type: UserPaymentService },
     { type: TranslationService }
 ];
 

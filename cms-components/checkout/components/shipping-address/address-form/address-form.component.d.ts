@@ -1,12 +1,13 @@
 import { EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, Subscription, BehaviorSubject } from 'rxjs';
-import { Address, AddressValidation, CheckoutDeliveryService, Country, GlobalMessageService, Region, Title, UserService } from '@spartacus/core';
+import { Address, AddressValidation, CheckoutDeliveryService, Country, GlobalMessageService, Region, Title, UserAddressService, UserService } from '@spartacus/core';
 import { ModalRef, ModalService } from '../../../../../shared/components/modal/index';
 export declare class AddressFormComponent implements OnInit, OnDestroy {
     private fb;
     protected checkoutDeliveryService: CheckoutDeliveryService;
     protected userService: UserService;
+    protected userAddressService: UserAddressService;
     protected globalMessageService: GlobalMessageService;
     private modalService;
     countries$: Observable<Country[]>;
@@ -24,7 +25,7 @@ export declare class AddressFormComponent implements OnInit, OnDestroy {
     addressVerifySub: Subscription;
     suggestedAddressModalRef: ModalRef;
     address: FormGroup;
-    constructor(fb: FormBuilder, checkoutDeliveryService: CheckoutDeliveryService, userService: UserService, globalMessageService: GlobalMessageService, modalService: ModalService);
+    constructor(fb: FormBuilder, checkoutDeliveryService: CheckoutDeliveryService, userService: UserService, userAddressService: UserAddressService, globalMessageService: GlobalMessageService, modalService: ModalService);
     ngOnInit(): void;
     titleSelected(title: Title): void;
     countrySelected(country: Country): void;

@@ -1,12 +1,12 @@
 import { EventEmitter } from '@angular/core';
-import { Address, UserService } from '@spartacus/core';
+import { Address, UserAddressService } from '@spartacus/core';
 export declare class AddressCardComponent {
-    private userService;
+    private userAddressService;
     editMode: boolean;
     isDefault: boolean;
     address: Address;
     editEvent: EventEmitter<any>;
-    constructor(userService: UserService);
+    constructor(userAddressService: UserAddressService);
     openEditFormEvent(): void;
     cancelEdit(): void;
     setEditMode(): void;
