@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@spartacus/core'), require('rxjs/operators'), require('@ng-bootstrap/ng-bootstrap'), require('@angular/forms'), require('@angular/common'), require('@angular/router'), require('@ng-select/ng-select'), require('@angular/common/http'), require('rxjs'), require('@angular/service-worker'), require('@angular/platform-browser')) :
-    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@angular/core', '@spartacus/core', 'rxjs/operators', '@ng-bootstrap/ng-bootstrap', '@angular/forms', '@angular/common', '@angular/router', '@ng-select/ng-select', '@angular/common/http', 'rxjs', '@angular/service-worker', '@angular/platform-browser'], factory) :
-    (global = global || self, factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}), global.ng.core, global.core, global.rxjs.operators, global.ngBootstrap, global.ng.forms, global.ng.common, global.ng.router, global.ngSelect, global.ng.common.http, global.rxjs, global.ng['service-worker'], global.ng.platformBrowser));
-}(this, function (exports, core, core$1, operators, ngBootstrap, forms, common, router, ngSelect, http, rxjs, serviceWorker, platformBrowser) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@spartacus/core'), require('rxjs/operators'), require('@ng-bootstrap/ng-bootstrap'), require('@angular/forms'), require('@angular/common'), require('@angular/router'), require('@ng-select/ng-select'), require('rxjs'), require('@angular/common/http'), require('@angular/service-worker'), require('@angular/platform-browser')) :
+    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@angular/core', '@spartacus/core', 'rxjs/operators', '@ng-bootstrap/ng-bootstrap', '@angular/forms', '@angular/common', '@angular/router', '@ng-select/ng-select', 'rxjs', '@angular/common/http', '@angular/service-worker', '@angular/platform-browser'], factory) :
+    (global = global || self, factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}), global.ng.core, global.core, global.rxjs.operators, global.ngBootstrap, global.ng.forms, global.ng.common, global.ng.router, global.ngSelect, global.rxjs, global.ng.common.http, global.ng['service-worker'], global.ng.platformBrowser));
+}(this, function (exports, core, core$1, operators, ngBootstrap, forms, common, router, ngSelect, rxjs, http, serviceWorker, platformBrowser) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -1898,6 +1898,128 @@
         return LayoutConfig;
     }(core$1.ServerConfig));
 
+    var _a;
+    /** @type {?} */
+    var DEFAULT_BREAKPOINTS = (_a = {},
+        _a[BREAKPOINT.xs] = 576,
+        _a[BREAKPOINT.sm] = 768,
+        _a[BREAKPOINT.md] = 992,
+        _a[BREAKPOINT.lg] = 1200,
+        _a);
+    var BreakpointService = /** @class */ (function () {
+        function BreakpointService(winRef, config) {
+            this.winRef = winRef;
+            this.config = config;
+        }
+        /**
+         * @param {?} breakpoint
+         * @return {?}
+         */
+        BreakpointService.prototype.getSize = /**
+         * @param {?} breakpoint
+         * @return {?}
+         */
+        function (breakpoint) {
+            return this.config.breakpoints
+                ? this.config.breakpoints[breakpoint]
+                : DEFAULT_BREAKPOINTS[breakpoint];
+        };
+        Object.defineProperty(BreakpointService.prototype, "breakpoint$", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                var _this = this;
+                if (!this.window) {
+                    return rxjs.of(BREAKPOINT.xs);
+                }
+                return rxjs.fromEvent(this.window, 'resize').pipe(operators.debounceTime(300), operators.startWith({ target: this.window }), operators.map((/**
+                 * @param {?} event
+                 * @return {?}
+                 */
+                function (event) { return _this.getBreakpoint(((/** @type {?} */ (event.target))).innerWidth); })), operators.distinctUntilChanged());
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(BreakpointService.prototype, "breakpoints", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return [
+                    BREAKPOINT.xs,
+                    BREAKPOINT.sm,
+                    BREAKPOINT.md,
+                    BREAKPOINT.lg,
+                    BREAKPOINT.xl,
+                ];
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * @protected
+         * @param {?} windowWidth
+         * @return {?}
+         */
+        BreakpointService.prototype.getBreakpoint = /**
+         * @protected
+         * @param {?} windowWidth
+         * @return {?}
+         */
+        function (windowWidth) {
+            /** @type {?} */
+            var breakpoint = this.getClosest(windowWidth);
+            return BREAKPOINT[breakpoint || BREAKPOINT.lg];
+        };
+        /**
+         * @protected
+         * @param {?=} windowWidth
+         * @return {?}
+         */
+        BreakpointService.prototype.getClosest = /**
+         * @protected
+         * @param {?=} windowWidth
+         * @return {?}
+         */
+        function (windowWidth) {
+            var _this = this;
+            if (!windowWidth) {
+                windowWidth = this.window.innerWidth;
+            }
+            return windowWidth < this.getSize(BREAKPOINT.xs)
+                ? BREAKPOINT.xs
+                : this.breakpoints.reverse().find((/**
+                 * @param {?} br
+                 * @return {?}
+                 */
+                function (br) { return windowWidth >= _this.getSize(br); }));
+        };
+        Object.defineProperty(BreakpointService.prototype, "window", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return this.winRef.nativeWindow;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        BreakpointService.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        BreakpointService.ctorParameters = function () { return [
+            { type: core$1.WindowRef },
+            { type: LayoutConfig }
+        ]; };
+        /** @nocollapse */ BreakpointService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function BreakpointService_Factory() { return new BreakpointService(core.ɵɵinject(core$1.WindowRef), core.ɵɵinject(LayoutConfig)); }, token: BreakpointService, providedIn: "root" });
+        return BreakpointService;
+    }());
+
     /**
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
@@ -1908,22 +2030,10 @@
      */
     var DEFAULT_MEDIA_FORMAT = 'tablet';
     var MediaService = /** @class */ (function () {
-        function MediaService(config, layoutConfig) {
+        function MediaService(config, breakpointService) {
             var _this = this;
             this.config = config;
-            this.layoutConfig = layoutConfig;
-            this.mediaFormats = [
-                { code: 'mobile', threshold: this.layoutConfig.breakpoints[BREAKPOINT.xs] },
-                { code: 'tablet', threshold: this.layoutConfig.breakpoints[BREAKPOINT.sm] },
-                {
-                    code: 'desktop',
-                    threshold: this.layoutConfig.breakpoints[BREAKPOINT.md],
-                },
-                {
-                    code: 'widescreen',
-                    threshold: this.layoutConfig.breakpoints[BREAKPOINT.lg],
-                },
-            ];
+            this.breakpointService = breakpointService;
             this.getImageUrl = (/**
              * @param {?} url
              * @return {?}
@@ -1932,6 +2042,34 @@
                 return url.startsWith('http') ? url : _this.getBaseUrl() + url;
             });
         }
+        Object.defineProperty(MediaService.prototype, "mediaFormats", {
+            get: /**
+             * @private
+             * @return {?}
+             */
+            function () {
+                return [
+                    {
+                        code: 'mobile',
+                        threshold: this.breakpointService.getSize(BREAKPOINT.xs),
+                    },
+                    {
+                        code: 'tablet',
+                        threshold: this.breakpointService.getSize(BREAKPOINT.sm),
+                    },
+                    {
+                        code: 'desktop',
+                        threshold: this.breakpointService.getSize(BREAKPOINT.md),
+                    },
+                    {
+                        code: 'widescreen',
+                        threshold: this.breakpointService.getSize(BREAKPOINT.lg),
+                    },
+                ];
+            },
+            enumerable: true,
+            configurable: true
+        });
         /**
          * @param {?} container
          * @param {?=} format
@@ -2053,9 +2191,9 @@
         /** @nocollapse */
         MediaService.ctorParameters = function () { return [
             { type: core$1.OccConfig },
-            { type: LayoutConfig }
+            { type: BreakpointService }
         ]; };
-        /** @nocollapse */ MediaService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function MediaService_Factory() { return new MediaService(core.ɵɵinject(core$1.OccConfig), core.ɵɵinject(LayoutConfig)); }, token: MediaService, providedIn: "root" });
+        /** @nocollapse */ MediaService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function MediaService_Factory() { return new MediaService(core.ɵɵinject(core$1.OccConfig), core.ɵɵinject(BreakpointService)); }, token: MediaService, providedIn: "root" });
         return MediaService;
     }());
 
@@ -2358,12 +2496,12 @@
         return CmsComponentData;
     }());
 
-    var _a;
+    var _a$1;
     /** @type {?} */
-    var LABELS = (_a = {},
-        _a[core$1.LANGUAGE_CONTEXT_ID] = 'Language',
-        _a[core$1.CURRENCY_CONTEXT_ID] = 'Currency',
-        _a);
+    var LABELS = (_a$1 = {},
+        _a$1[core$1.LANGUAGE_CONTEXT_ID] = 'Language',
+        _a$1[core$1.CURRENCY_CONTEXT_ID] = 'Currency',
+        _a$1);
     var SiteContextComponentService = /** @class */ (function () {
         function SiteContextComponentService(componentData, contextServiceMap, injector) {
             this.componentData = componentData;
@@ -6536,224 +6674,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var BreakpointService = /** @class */ (function () {
-        function BreakpointService(winRef, config) {
-            this.winRef = winRef;
-            this.config = config;
-        }
-        Object.defineProperty(BreakpointService.prototype, "breakpoint$", {
-            get: /**
-             * @return {?}
-             */
-            function () {
-                var _this = this;
-                if (!this.window) {
-                    return rxjs.of(BREAKPOINT.xs);
-                }
-                return rxjs.fromEvent(this.window, 'resize').pipe(operators.debounceTime(300), operators.startWith({ target: this.window }), operators.map((/**
-                 * @param {?} event
-                 * @return {?}
-                 */
-                function (event) { return _this.getBreakpoint(((/** @type {?} */ (event.target))).innerWidth); })), operators.distinctUntilChanged());
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(BreakpointService.prototype, "breakpoints", {
-            get: /**
-             * @return {?}
-             */
-            function () {
-                return [
-                    BREAKPOINT.xs,
-                    BREAKPOINT.sm,
-                    BREAKPOINT.md,
-                    BREAKPOINT.lg,
-                    BREAKPOINT.xl,
-                ];
-            },
-            enumerable: true,
-            configurable: true
-        });
-        /**
-         * @protected
-         * @param {?} windowWidth
-         * @return {?}
-         */
-        BreakpointService.prototype.getBreakpoint = /**
-         * @protected
-         * @param {?} windowWidth
-         * @return {?}
-         */
-        function (windowWidth) {
-            /** @type {?} */
-            var breakpoint = this.getClosest(windowWidth);
-            return BREAKPOINT[breakpoint || BREAKPOINT.lg];
-        };
-        /**
-         * @protected
-         * @param {?=} windowWidth
-         * @return {?}
-         */
-        BreakpointService.prototype.getClosest = /**
-         * @protected
-         * @param {?=} windowWidth
-         * @return {?}
-         */
-        function (windowWidth) {
-            var _this = this;
-            if (!windowWidth) {
-                windowWidth = this.window.innerWidth;
-            }
-            return windowWidth < this.getSize(BREAKPOINT.xs)
-                ? BREAKPOINT.xs
-                : this.breakpoints.reverse().find((/**
-                 * @param {?} br
-                 * @return {?}
-                 */
-                function (br) { return windowWidth >= _this.getSize(br); }));
-        };
-        /**
-         * @protected
-         * @param {?} breakpoint
-         * @return {?}
-         */
-        BreakpointService.prototype.getSize = /**
-         * @protected
-         * @param {?} breakpoint
-         * @return {?}
-         */
-        function (breakpoint) {
-            return this.config.breakpoints ? this.config.breakpoints[breakpoint] : 576;
-        };
-        Object.defineProperty(BreakpointService.prototype, "window", {
-            get: /**
-             * @return {?}
-             */
-            function () {
-                return this.winRef.nativeWindow;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        BreakpointService.decorators = [
-            { type: core.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */
-        BreakpointService.ctorParameters = function () { return [
-            { type: core$1.WindowRef },
-            { type: LayoutConfig }
-        ]; };
-        /** @nocollapse */ BreakpointService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function BreakpointService_Factory() { return new BreakpointService(core.ɵɵinject(core$1.WindowRef), core.ɵɵinject(LayoutConfig)); }, token: BreakpointService, providedIn: "root" });
-        return BreakpointService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @type {?} */
-    var defaultLayoutConfig = {
-        breakpoints: {
-            xs: 576,
-            sm: 768,
-            md: 992,
-            lg: 1200,
-        },
-        layoutSlots: {
-            header: {
-                md: {
-                    slots: [
-                        'PreHeader',
-                        'SiteContext',
-                        'SiteLinks',
-                        'SiteLogo',
-                        'SearchBox',
-                        'SiteLogin',
-                        'MiniCart',
-                        'NavigationBar',
-                    ],
-                },
-                xs: {
-                    slots: ['PreHeader', 'SiteLogo', 'SearchBox', 'MiniCart'],
-                },
-            },
-            navigation: {
-                md: { slots: [] },
-                xs: {
-                    slots: ['SiteLogin', 'NavigationBar', 'SiteContext', 'SiteLinks'],
-                },
-            },
-            footer: {
-                slots: ['Footer'],
-            },
-            LandingPage2Template: {
-                slots: [
-                    'Section1',
-                    'Section2A',
-                    'Section2B',
-                    'Section2C',
-                    'Section3',
-                    'Section4',
-                    'Section5',
-                ],
-            },
-            ContentPage1Template: {
-                slots: ['Section2A', 'Section2B'],
-            },
-            CategoryPageTemplate: {
-                slots: ['Section1', 'Section2', 'Section3'],
-            },
-            ProductListPageTemplate: {
-                slots: ['ProductListSlot', 'ProductLeftRefinements'],
-            },
-            SearchResultsListPageTemplate: {
-                slots: [
-                    'Section2',
-                    'SearchResultsListSlot',
-                    'ProductLeftRefinements',
-                    'Section4',
-                ],
-            },
-            ProductDetailsPageTemplate: {
-                slots: [
-                    'TopHeaderSlot',
-                    'ProductDetails',
-                    'VariantSelectorSlot',
-                    // 'AddToCart', // the add to cart is currently hard coded in the PDP component
-                    'UpSelling',
-                    'CrossSelling',
-                    'Tabs',
-                    'PlaceholderContentSlot',
-                ],
-            },
-            CartPageTemplate: {
-                slots: ['TopContent', 'CenterRightContentSlot', 'EmptyCartMiddleContent'],
-            },
-            AccountPageTemplate: {
-                slots: ['BodyContent', 'SideContent'],
-            },
-            LoginPageTemplate: {
-                slots: ['LeftContentSlot', 'RightContentSlot'],
-            },
-            ErrorPageTemplate: {
-                slots: ['TopContent', 'MiddleContent', 'BottomContent'],
-            },
-            OrderConfirmationPageTemplate: {
-                slots: ['BodyContent', 'SideContent'],
-            },
-            MultiStepCheckoutSummaryPageTemplate: {
-                slots: ['TopContent', 'BodyContent', 'SideContent', 'BottomContent'],
-            },
-        },
-    };
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var HamburgerMenuService = /** @class */ (function () {
         function HamburgerMenuService(router$1) {
             var _this = this;
@@ -7261,26 +7181,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var CmsModule = /** @class */ (function () {
-        function CmsModule() {
-        }
-        CmsModule.decorators = [
-            { type: core.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            core$1.ConfigModule.withConfig(core$1.defaultCmsModuleConfig),
-                            core$1.CmsModule,
-                        ],
-                        providers: [{ provide: core$1.CmsConfig, useExisting: core$1.Config }],
-                    },] }
-        ];
-        return CmsModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var LoginFormModule = /** @class */ (function () {
         function LoginFormModule() {
         }
@@ -7291,7 +7191,6 @@
                             forms.FormsModule,
                             forms.ReactiveFormsModule,
                             router.RouterModule,
-                            CmsModule,
                             core$1.UserModule,
                             core$1.UrlModule,
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
@@ -7669,7 +7568,7 @@
         PageSlotComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-page-slot',
-                        template: "<ng-container *cxOutlet=\"(position$ | async)\">\n  <!-- position: {{ position$ | async }} -->\n  <ng-container *ngFor=\"let component of (components$ | async)\">\n    <!-- flexType: {{ component.flexType }} -->\n    <ng-container\n      *cxOutlet=\"component.flexType\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-container>\n  </ng-container>\n</ng-container>\n",
+                        template: "<ng-container *cxOutlet=\"(position$ | async)\">\n  <ng-container *ngFor=\"let component of (components$ | async)\">\n    <ng-container\n      *cxOutlet=\"component.flexType\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-container>\n  </ng-container>\n</ng-container>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -7797,181 +7696,6 @@
         /** @nocollapse */ LogoutGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(core.ɵɵinject(core$1.AuthService), core.ɵɵinject(core$1.CmsService), core.ɵɵinject(core$1.RoutingService), core.ɵɵinject(core$1.SemanticPathService)); }, token: LogoutGuard, providedIn: "root" });
         return LogoutGuard;
     }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @type {?} */
-    var cartComponents = {
-        emptyCartText: {
-            flexType: 'CMSParagraphComponent',
-            typeCode: 'CMSParagraphComponent',
-            content: "\n      <h2>Your shopping cart is empty</h2>\n      <p>Suggestions</p>\n      <ul>\n          <li>\n          Browse our products by selecting a category above\n          </li>\n      </ul>",
-        },
-    };
-    /** @type {?} */
-    var defaultCartPageConfig = {
-        ignoreBackend: false,
-        pageId: 'cartPage',
-        type: 'ContentPage',
-        template: 'CartPageTemplate',
-        title: 'Cart',
-        slots: {
-            EmptyCartMiddleContent: {
-                componentIds: ['emptyCartText'],
-            },
-        },
-    };
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @type {?} */
-    var headerComponents = {
-        HamburgerMenuComponent: {
-            typeCode: 'HamburgerMenuComponent',
-            flexType: 'HamburgerMenuComponent',
-        },
-        LanguageComponent: {
-            typeCode: 'CMSSiteContextComponent',
-            flexType: 'CMSSiteContextComponent',
-            context: 'LANGUAGE',
-        },
-        CurrencyComponent: {
-            typeCode: 'CMSSiteContextComponent',
-            flexType: 'CMSSiteContextComponent',
-            context: 'CURRENCY',
-        },
-        LanguageCurrencyComponent: {
-            typeCode: 'LanguageCurrencyComponent',
-            flexType: 'LanguageCurrencyComponent',
-        },
-        // TODO:#2811 - uncomment to enable
-        // StoreFinder: {
-        //   typeCode: 'CMSLinkComponent',
-        //   flexType: 'CMSLinkComponent',
-        //   linkName: 'Find a Store',
-        //   url: '/store-finder',
-        // },
-        BreadcrumbComponent: {
-            typeCode: 'BreadcrumbComponent',
-            flexType: 'BreadcrumbComponent',
-        },
-        Logo: {
-            typeCode: 'SimpleBannerComponent',
-            flexType: 'SimpleBannerComponent',
-            uid: 'logo',
-            media: {
-                mime: 'svg/image/svg+xml',
-                url: 'https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg',
-            },
-            urlLink: '/',
-        },
-        SearchBox: {
-            typeCode: 'SearchBoxComponent',
-            flexType: 'SearchBoxComponent',
-            uid: 'SearchBoxComponent',
-        },
-        MiniCart: {
-            typeCode: 'MiniCartComponent',
-            flexType: 'MiniCartComponent',
-            uid: 'MiniCartComponent',
-        },
-        LoginComponent: {
-            typeCode: 'LoginComponent',
-            flexType: 'LoginComponent',
-            uid: 'LoginComponent',
-        },
-        CategoryNavigationComponent: {
-            typeCode: 'CategoryNavigationComponent',
-            flexType: 'CategoryNavigationComponent',
-            uid: 'ElectronicsCategoryNavComponent',
-            navigationNode: {
-                uid: 'ElectronicsCategoryNavNode',
-                children: [
-                    {
-                        uid: 'CameraLensesNavNode',
-                        title: 'Electronic catalog',
-                        entries: [
-                            {
-                                itemId: 'CameraLensesCategoryLink',
-                                itemSuperType: 'AbstractCMSComponent',
-                                itemType: 'CMSLinkComponent',
-                            },
-                        ],
-                    },
-                ],
-            },
-        },
-    };
-    /** @type {?} */
-    var defaultPageHeaderConfig = {
-        PreHeader: {
-            componentIds: ['SkipLinkComponent', 'HamburgerMenuComponent'],
-        },
-        SiteContext: {
-            componentIds: ['LanguageComponent', 'CurrencyComponent'],
-        },
-        SiteLinks: {
-            componentIds: ['StoreFinder'],
-        },
-        SiteLogo: {
-            componentIds: ['Logo'],
-        },
-        SearchBox: {
-            componentIds: ['SearchBox'],
-        },
-        MiniCart: {
-            componentIds: ['MiniCart'],
-        },
-        SiteLogin: {
-            componentIds: ['LoginComponent'],
-        },
-        NavigationBar: {
-            componentIds: ['CategoryNavigationComponent'],
-        },
-        BottomHeaderSlot: {
-            componentIds: ['BreadcrumbComponent'],
-        },
-    };
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @type {?} */
-    var defaultPdpComponents = {
-        CMSProductImages: {
-            typeCode: 'CMSProductImages',
-            flexType: 'CMSProductImages',
-            uid: 'CMSProductImages',
-        },
-    };
-    /** @type {?} */
-    var defaultPdpSlots = {
-        ProductDetails: {
-            componentIds: ['CMSProductImages'],
-        },
-    };
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /**
-     * @return {?}
-     */
-    function defaultCmsContentConfig() {
-        return {
-            cmsStructure: {
-                components: __assign({}, headerComponents, cartComponents, defaultPdpComponents),
-                slots: __assign({}, defaultPageHeaderConfig, defaultPdpSlots),
-                pages: [defaultCartPageConfig],
-            },
-        };
-    }
 
     /**
      * @fileoverview added by tsickle
@@ -8127,6 +7851,9 @@
          * @return {?}
          */
         function (templateUid, configAttribute, section, breakpoint) {
+            if (!this.config.layoutSlots) {
+                return null;
+            }
             /** @type {?} */
             var pageTemplateConfig = this.config.layoutSlots[templateUid];
             if (section) {
@@ -9844,7 +9571,6 @@
                             router.RouterModule,
                             GlobalMessageComponentModule,
                             UserComponentModule,
-                            CmsModule,
                             OutletRefModule,
                             PwaModule,
                             PageLayoutModule,
@@ -9869,11 +9595,7 @@
         }
         LayoutModule.decorators = [
             { type: core.NgModule, args: [{
-                        imports: __spread([
-                            MainModule
-                        ], layoutModules, [
-                            core$1.ConfigModule.withConfig(defaultLayoutConfig),
-                        ]),
+                        imports: __spread([MainModule], layoutModules),
                         providers: [{ provide: LayoutConfig, useExisting: core$1.Config }],
                         exports: __spread([MainModule], layoutModules),
                     },] }
@@ -16284,25 +16006,157 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /** @type {?} */
+    var b2cLayoutConfig = {
+        layoutSlots: {
+            header: {
+                md: {
+                    slots: [
+                        'PreHeader',
+                        'SiteContext',
+                        'SiteLinks',
+                        'SiteLogo',
+                        'SearchBox',
+                        'SiteLogin',
+                        'MiniCart',
+                        'NavigationBar',
+                    ],
+                },
+                xs: {
+                    slots: ['PreHeader', 'SiteLogo', 'SearchBox', 'MiniCart'],
+                },
+            },
+            navigation: {
+                md: { slots: [] },
+                xs: {
+                    slots: ['SiteLogin', 'NavigationBar', 'SiteContext', 'SiteLinks'],
+                },
+            },
+            footer: {
+                slots: ['Footer'],
+            },
+            LandingPage2Template: {
+                slots: [
+                    'Section1',
+                    'Section2A',
+                    'Section2B',
+                    'Section2C',
+                    'Section3',
+                    'Section4',
+                    'Section5',
+                ],
+            },
+            ContentPage1Template: {
+                slots: ['Section2A', 'Section2B'],
+            },
+            CategoryPageTemplate: {
+                slots: ['Section1', 'Section2', 'Section3'],
+            },
+            ProductListPageTemplate: {
+                slots: ['ProductListSlot', 'ProductLeftRefinements'],
+            },
+            SearchResultsListPageTemplate: {
+                slots: [
+                    'Section2',
+                    'SearchResultsListSlot',
+                    'ProductLeftRefinements',
+                    'Section4',
+                ],
+            },
+            ProductDetailsPageTemplate: {
+                slots: [
+                    'TopHeaderSlot',
+                    'ProductDetails',
+                    'VariantSelectorSlot',
+                    // 'AddToCart', // the add to cart is currently hard coded in the PDP component
+                    'UpSelling',
+                    'CrossSelling',
+                    'Tabs',
+                    'PlaceholderContentSlot',
+                ],
+            },
+            CartPageTemplate: {
+                slots: ['TopContent', 'CenterRightContentSlot', 'EmptyCartMiddleContent'],
+            },
+            AccountPageTemplate: {
+                slots: ['BodyContent', 'SideContent'],
+            },
+            LoginPageTemplate: {
+                slots: ['LeftContentSlot', 'RightContentSlot'],
+            },
+            ErrorPageTemplate: {
+                slots: ['TopContent', 'MiddleContent', 'BottomContent'],
+            },
+            OrderConfirmationPageTemplate: {
+                slots: ['BodyContent', 'SideContent'],
+            },
+            MultiStepCheckoutSummaryPageTemplate: {
+                slots: ['TopContent', 'BodyContent', 'SideContent', 'BottomContent'],
+            },
+        },
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var headerComponents = {
+        HamburgerMenuComponent: {
+            typeCode: 'HamburgerMenuComponent',
+            flexType: 'HamburgerMenuComponent',
+        },
+        LoginComponent: {
+            typeCode: 'LoginComponent',
+            flexType: 'LoginComponent',
+            uid: 'LoginComponent',
+        },
+    };
+    /** @type {?} */
+    var defaultPageHeaderConfig = {
+        PreHeader: {
+            componentIds: ['HamburgerMenuComponent'],
+        },
+        SiteLogin: {
+            componentIds: ['LoginComponent'],
+        },
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var defaultPdpComponents = {
+        CMSProductImages: {
+            typeCode: 'CMSProductImages',
+            flexType: 'CMSProductImages',
+            uid: 'CMSProductImages',
+        },
+    };
+    /** @type {?} */
+    var defaultPdpSlots = {
+        ProductDetails: {
+            componentIds: ['CMSProductImages'],
+        },
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     /**
      * @return {?}
      */
-    function provideConfigFromMetaTags() {
-        return [
-            core$1.provideConfigFactory(core$1.occServerConfigFromMetaTagFactory, [platformBrowser.Meta]),
-            core$1.provideConfigFactory(core$1.mediaServerConfigFromMetaTagFactory, [platformBrowser.Meta]),
-        ];
+    function defaultCmsContentConfig() {
+        return {
+            cmsStructure: {
+                components: __assign({}, headerComponents, defaultPdpComponents),
+                slots: __assign({}, defaultPageHeaderConfig, defaultPdpSlots),
+                pages: [],
+            },
+        };
     }
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
 
     /**
      * @fileoverview added by tsickle
@@ -16313,7 +16167,6 @@
         home: { paths: [''] },
         notFound: { paths: ['not-found'] },
         cart: { paths: ['cart'] },
-        search: { paths: ['search/:query'] },
         // semantic links for login related pages
         login: { paths: ['login'] },
         logout: { paths: ['logout'] },
@@ -16325,15 +16178,18 @@
         checkoutPaymentDetails: { paths: ['checkout/payment-details'] },
         checkoutReviewOrder: { paths: ['checkout/review-order'] },
         orderConfirmation: { paths: ['order-confirmation'] },
-        product: {
-            paths: ['product/:productCode'],
-            paramsMapping: { productCode: 'code' },
-        },
+        // plp routes
+        search: { paths: ['search/:query'] },
         category: {
             paths: ['category/:categoryCode'],
             paramsMapping: { categoryCode: 'code' },
         },
         brand: { paths: ['Brands/:brandName/c/:brandCode'] },
+        // pdp routes
+        product: {
+            paths: ['product/:productCode/:name'],
+            paramsMapping: { productCode: 'code' },
+        },
         termsAndConditions: { paths: ['termsAndConditions'] },
         orderDetails: {
             paths: ['my-account/order/:orderCode'],
@@ -16373,6 +16229,30 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var StorefrontFoundationModule = /** @class */ (function () {
+        function StorefrontFoundationModule() {
+        }
+        StorefrontFoundationModule.decorators = [
+            { type: core.NgModule, args: [{
+                        imports: [
+                            core$1.StateModule,
+                            core$1.AuthModule.forRoot(),
+                            core$1.ConfigModule.forRoot(),
+                            RoutingModule,
+                            core$1.I18nModule.forRoot(),
+                            core$1.SiteContextModule.forRoot(),
+                            LayoutModule,
+                        ],
+                        providers: __spread(core$1.provideConfigFromMetaTags()),
+                    },] }
+        ];
+        return StorefrontFoundationModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var StorefrontModule = /** @class */ (function () {
         function StorefrontModule() {
         }
@@ -16387,36 +16267,64 @@
         function (config) {
             return {
                 ngModule: StorefrontModule,
-                providers: __spread([core$1.provideConfig(config)], provideConfigFromMetaTags()),
+                providers: [core$1.provideConfig(config)],
             };
         };
         StorefrontModule.decorators = [
             { type: core.NgModule, args: [{
                         imports: [
-                            core$1.OccModule,
-                            core$1.StateModule,
-                            core$1.AuthModule.forRoot(),
-                            CmsLibModule,
-                            CmsModule,
-                            CmsRouteModule,
-                            core$1.ConfigModule.forRoot(),
-                            RoutingModule,
-                            core$1.CxApiModule,
+                            StorefrontFoundationModule,
                             core$1.SmartEditModule.forRoot(),
                             core$1.PersonalizationModule.forRoot(),
-                            core$1.I18nModule.forRoot(),
-                            core$1.KymaModule,
-                            LayoutModule,
-                            // pages
+                            // opt-in explicitely
+                            core$1.OccModule,
                             ProductDetailsPageModule,
                             ProductListingPageModule,
                         ],
-                        exports: [LayoutModule],
-                        providers: __spread(provideConfigFromMetaTags()),
-                        declarations: [],
                     },] }
         ];
         return StorefrontModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var B2cStorefrontModule = /** @class */ (function () {
+        function B2cStorefrontModule() {
+        }
+        /**
+         * @param {?=} config
+         * @return {?}
+         */
+        B2cStorefrontModule.withConfig = /**
+         * @param {?=} config
+         * @return {?}
+         */
+        function (config) {
+            return {
+                ngModule: B2cStorefrontModule,
+                providers: [core$1.provideConfig(config)],
+            };
+        };
+        B2cStorefrontModule.decorators = [
+            { type: core.NgModule, args: [{
+                        imports: [
+                            StorefrontModule.withConfig((/** @type {?} */ ({
+                                pwa: {
+                                    enabled: true,
+                                    addToHomeScreen: true,
+                                },
+                            }))),
+                            core$1.ConfigModule.withConfig(b2cLayoutConfig),
+                            core$1.ConfigModule.withConfigFactory(defaultCmsContentConfig),
+                            // the cms lib module contains all components that added in the bundle
+                            CmsLibModule,
+                        ],
+                        exports: [LayoutModule],
+                    },] }
+        ];
+        return B2cStorefrontModule;
     }());
 
     exports.AddToCartComponent = AddToCartComponent;
@@ -16432,6 +16340,7 @@
     exports.AddressFormComponent = AddressFormComponent;
     exports.AddressFormModule = AddressFormModule;
     exports.AutoFocusDirective = AutoFocusDirective;
+    exports.B2cStorefrontModule = B2cStorefrontModule;
     exports.BREAKPOINT = BREAKPOINT;
     exports.BannerComponent = BannerComponent;
     exports.BannerModule = BannerModule;
@@ -16472,7 +16381,6 @@
     exports.CloseAccountModule = CloseAccountModule;
     exports.CmsComponentData = CmsComponentData;
     exports.CmsLibModule = CmsLibModule;
-    exports.CmsModule = CmsModule;
     exports.CmsPageGuard = CmsPageGuard;
     exports.CmsParagraphModule = CmsParagraphModule;
     exports.CmsRouteModule = CmsRouteModule;
@@ -16618,6 +16526,7 @@
     exports.StarRatingComponent = StarRatingComponent;
     exports.StarRatingModule = StarRatingModule;
     exports.StorefrontComponent = StorefrontComponent;
+    exports.StorefrontFoundationModule = StorefrontFoundationModule;
     exports.StorefrontModule = StorefrontModule;
     exports.SuggestedAddressDialogComponent = SuggestedAddressDialogComponent;
     exports.TabParagraphContainerComponent = TabParagraphContainerComponent;
@@ -16633,12 +16542,15 @@
     exports.UpdateProfileModule = UpdateProfileModule;
     exports.UserComponentModule = UserComponentModule;
     exports.ViewModes = ViewModes;
+    exports.b2cLayoutConfig = b2cLayoutConfig;
     exports.defaultCmsContentConfig = defaultCmsContentConfig;
-    exports.defaultLayoutConfig = defaultLayoutConfig;
     exports.defaultPWAModuleConfig = defaultPWAModuleConfig;
+    exports.defaultPageHeaderConfig = defaultPageHeaderConfig;
+    exports.defaultPdpComponents = defaultPdpComponents;
+    exports.defaultPdpSlots = defaultPdpSlots;
     exports.fontawesomeIconConfig = fontawesomeIconConfig;
+    exports.headerComponents = headerComponents;
     exports.initSeoService = initSeoService;
-    exports.provideConfigFromMetaTags = provideConfigFromMetaTags;
     exports.pwaConfigurationFactory = pwaConfigurationFactory;
     exports.pwaFactory = pwaFactory;
     exports.ɵa = AutoFocusDirectiveModule;
@@ -16660,13 +16572,12 @@
     exports.ɵq = AddToHomeScreenService;
     exports.ɵr = ProductImagesModule;
     exports.ɵs = suffixUrlMatcher;
-    exports.ɵt = defaultCartPageConfig;
-    exports.ɵu = addCmsRoute;
-    exports.ɵv = htmlLangProvider;
-    exports.ɵw = setHtmlLangAttribute;
-    exports.ɵx = RoutingModule;
-    exports.ɵy = defaultStorefrontRoutesConfig;
-    exports.ɵz = defaultRoutingConfig;
+    exports.ɵt = addCmsRoute;
+    exports.ɵu = htmlLangProvider;
+    exports.ɵv = setHtmlLangAttribute;
+    exports.ɵw = RoutingModule;
+    exports.ɵx = defaultStorefrontRoutesConfig;
+    exports.ɵy = defaultRoutingConfig;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

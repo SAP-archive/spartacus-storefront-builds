@@ -5,10 +5,10 @@ export declare class BreakpointService {
     private winRef;
     private config;
     constructor(winRef: WindowRef, config: LayoutConfig);
+    getSize(breakpoint: BREAKPOINT): number;
     readonly breakpoint$: Observable<BREAKPOINT>;
     readonly breakpoints: BREAKPOINT[];
     protected getBreakpoint(windowWidth: number): BREAKPOINT;
     protected getClosest(windowWidth?: number): BREAKPOINT;
-    protected getSize(breakpoint: BREAKPOINT): number;
     readonly window: Window;
 }

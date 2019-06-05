@@ -1,0 +1,19 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+import { defaultPageHeaderConfig, headerComponents, } from './default-header.config';
+import { defaultPdpComponents, defaultPdpSlots } from './default-pdp-config';
+/**
+ * @return {?}
+ */
+export function defaultCmsContentConfig() {
+    return {
+        cmsStructure: {
+            components: Object.assign({}, headerComponents, defaultPdpComponents),
+            slots: Object.assign({}, defaultPageHeaderConfig, defaultPdpSlots),
+            pages: [],
+        },
+    };
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVmYXVsdC1jbXMtY29udGVudC5jb25maWcuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJyZWNpcGVzL2NvbmZpZy9zdGF0aWMtY21zLXN0cnVjdHVyZS9kZWZhdWx0LWNtcy1jb250ZW50LmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7O0FBQ0EsT0FBTyxFQUNMLHVCQUF1QixFQUN2QixnQkFBZ0IsR0FDakIsTUFBTSx5QkFBeUIsQ0FBQztBQUNqQyxPQUFPLEVBQUUsb0JBQW9CLEVBQUUsZUFBZSxFQUFFLE1BQU0sc0JBQXNCLENBQUM7Ozs7QUFFN0UsTUFBTSxVQUFVLHVCQUF1QjtJQUNyQyxPQUFPO1FBQ0wsWUFBWSxFQUFFO1lBQ1osVUFBVSxvQkFDTCxnQkFBZ0IsRUFDaEIsb0JBQW9CLENBQ3hCO1lBQ0QsS0FBSyxvQkFDQSx1QkFBdUIsRUFDdkIsZUFBZSxDQUNuQjtZQUNELEtBQUssRUFBRSxFQUFFO1NBQ1Y7S0FDRixDQUFDO0FBQ0osQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENtc1N0cnVjdHVyZUNvbmZpZyB9IGZyb20gJ0BzcGFydGFjdXMvY29yZSc7XG5pbXBvcnQge1xuICBkZWZhdWx0UGFnZUhlYWRlckNvbmZpZyxcbiAgaGVhZGVyQ29tcG9uZW50cyxcbn0gZnJvbSAnLi9kZWZhdWx0LWhlYWRlci5jb25maWcnO1xuaW1wb3J0IHsgZGVmYXVsdFBkcENvbXBvbmVudHMsIGRlZmF1bHRQZHBTbG90cyB9IGZyb20gJy4vZGVmYXVsdC1wZHAtY29uZmlnJztcblxuZXhwb3J0IGZ1bmN0aW9uIGRlZmF1bHRDbXNDb250ZW50Q29uZmlnKCk6IENtc1N0cnVjdHVyZUNvbmZpZyB7XG4gIHJldHVybiB7XG4gICAgY21zU3RydWN0dXJlOiB7XG4gICAgICBjb21wb25lbnRzOiB7XG4gICAgICAgIC4uLmhlYWRlckNvbXBvbmVudHMsXG4gICAgICAgIC4uLmRlZmF1bHRQZHBDb21wb25lbnRzLFxuICAgICAgfSxcbiAgICAgIHNsb3RzOiB7XG4gICAgICAgIC4uLmRlZmF1bHRQYWdlSGVhZGVyQ29uZmlnLFxuICAgICAgICAuLi5kZWZhdWx0UGRwU2xvdHMsXG4gICAgICB9LFxuICAgICAgcGFnZXM6IFtdLFxuICAgIH0sXG4gIH07XG59XG4iXX0=

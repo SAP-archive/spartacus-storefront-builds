@@ -12,13 +12,12 @@ export { SharedCarouselService as ɵk } from './cms-components/product/carousel/
 export { ProductImagesModule as ɵr } from './cms-components/product/product-images/product-images.module';
 export { ProductDetailsTabComponent as ɵi } from './cms-components/product/product-tabs/product-details-tab/product-details-tab.component';
 export { ProductDetailsTabModule as ɵh } from './cms-components/product/product-tabs/product-details-tab/product-details-tab.module';
-export { defaultCartPageConfig as ɵt } from './cms-structure/page/config/default-cart-page.config';
 export { AddToHomeScreenService as ɵq } from './cms-structure/pwa/services/add-to-home-screen.service';
-export { addCmsRoute as ɵu } from './cms-structure/routing/cms-route/add-cms-route';
-export { defaultRoutingConfig as ɵz, defaultStorefrontRoutesConfig as ɵy } from './cms-structure/routing/default-routing-config';
-export { RoutingModule as ɵx } from './cms-structure/routing/routing.module';
+export { addCmsRoute as ɵt } from './cms-structure/routing/cms-route/add-cms-route';
+export { defaultRoutingConfig as ɵy, defaultStorefrontRoutesConfig as ɵx } from './cms-structure/routing/default-routing-config';
+export { RoutingModule as ɵw } from './cms-structure/routing/routing.module';
 export { suffixUrlMatcher as ɵs } from './cms-structure/routing/suffix-routes/suffix-url-matcher';
-export { htmlLangProvider as ɵv, setHtmlLangAttribute as ɵw } from './cms-structure/seo/html-lang-provider';
+export { htmlLangProvider as ɵu, setHtmlLangAttribute as ɵv } from './cms-structure/seo/html-lang-provider';
 export { CmsGuardsService as ɵp } from './cms-structure/services/cms-guards.service';
 export { CmsI18nService as ɵo } from './cms-structure/services/cms-i18n.service';
 export { CmsMappingService as ɵn } from './cms-structure/services/cms-mapping.service';

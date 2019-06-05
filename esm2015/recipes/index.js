@@ -1,0 +1,8 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export { B2cStorefrontModule } from './b2c-storefront.module';
+export { b2cLayoutConfig, defaultCmsContentConfig, headerComponents, defaultPageHeaderConfig, defaultPdpComponents, defaultPdpSlots } from './config/index';
+export { StorefrontFoundationModule } from './storefront-foundation.module';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJyZWNpcGVzL2luZGV4LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSxvQ0FBYyx5QkFBeUIsQ0FBQztBQUN4QywySUFBYyxnQkFBZ0IsQ0FBQztBQUMvQiwyQ0FBYyxnQ0FBZ0MsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCAqIGZyb20gJy4vYjJjLXN0b3JlZnJvbnQubW9kdWxlJztcbmV4cG9ydCAqIGZyb20gJy4vY29uZmlnL2luZGV4JztcbmV4cG9ydCAqIGZyb20gJy4vc3RvcmVmcm9udC1mb3VuZGF0aW9uLm1vZHVsZSc7XG4iXX0=
