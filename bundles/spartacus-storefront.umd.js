@@ -10658,9 +10658,8 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ConsentManagementComponent = /** @class */ (function () {
-        function ConsentManagementComponent(userConsentService, routingService, globalMessageService) {
+        function ConsentManagementComponent(userConsentService, globalMessageService) {
             this.userConsentService = userConsentService;
-            this.routingService = routingService;
             this.globalMessageService = globalMessageService;
             this.subscriptions = new rxjs.Subscription();
         }
@@ -10790,15 +10789,6 @@
             }
         };
         /**
-         * @return {?}
-         */
-        ConsentManagementComponent.prototype.onDone = /**
-         * @return {?}
-         */
-        function () {
-            this.routingService.go({ cxRoute: 'home' });
-        };
-        /**
          * @private
          * @param {?} success
          * @return {?}
@@ -10844,13 +10834,12 @@
         ConsentManagementComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-consent-management',
-                        template: "<ng-container>\n  <div *ngIf=\"(loading$ | async); else consentManagementForm\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #consentManagementForm>\n    <div class=\"row d-flex justify-content-center\">\n      <div class=\"col-md-8\">\n        <cx-consent-management-form\n          *ngFor=\"let consentTemplate of (templateList$ | async)\"\n          [consentTemplate]=\"consentTemplate\"\n          (consentChanged)=\"onConsentChange($event)\"\n        ></cx-consent-management-form>\n        <div class=\"cx-checkout-btns row\">\n          <div class=\"col-lg-12\">\n            <button class=\"btn btn-block btn-primary\" (click)=\"onDone()\">\n              {{ 'common.done' | cxTranslate }}\n            </button>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n"
+                        template: "<ng-container>\n  <div *ngIf=\"(loading$ | async); else consentManagementForm\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #consentManagementForm>\n    <div class=\"row d-flex justify-content-center\">\n      <div class=\"col-md-8\">\n        <cx-consent-management-form\n          *ngFor=\"let consentTemplate of (templateList$ | async)\"\n          [consentTemplate]=\"consentTemplate\"\n          (consentChanged)=\"onConsentChange($event)\"\n        ></cx-consent-management-form>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n"
                     }] }
         ];
         /** @nocollapse */
         ConsentManagementComponent.ctorParameters = function () { return [
             { type: core$1.UserConsentService },
-            { type: core$1.RoutingService },
             { type: core$1.GlobalMessageService }
         ]; };
         return ConsentManagementComponent;
