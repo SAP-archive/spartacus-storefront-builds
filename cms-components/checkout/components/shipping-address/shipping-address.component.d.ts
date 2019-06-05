@@ -1,6 +1,6 @@
 import { OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Address, CartService, CheckoutService, RoutingService, TranslationService, UserService } from '@spartacus/core';
+import { Address, CartService, CheckoutDeliveryService, RoutingService, TranslationService, UserService } from '@spartacus/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { Card } from '../../../../shared/components/card/card.component';
 import { CheckoutConfigService } from '../../checkout-config.service';
@@ -13,7 +13,7 @@ export declare class ShippingAddressComponent implements OnInit, OnDestroy {
     protected userService: UserService;
     protected cartService: CartService;
     protected routingService: RoutingService;
-    protected checkoutService: CheckoutService;
+    protected checkoutDeliveryService: CheckoutDeliveryService;
     private checkoutConfigService;
     private activatedRoute;
     private translation;
@@ -30,7 +30,7 @@ export declare class ShippingAddressComponent implements OnInit, OnDestroy {
     cards$: Observable<CardWithAddress[]>;
     checkoutStepUrlNext: string;
     checkoutStepUrlPrevious: string;
-    constructor(userService: UserService, cartService: CartService, routingService: RoutingService, checkoutService: CheckoutService, checkoutConfigService: CheckoutConfigService, activatedRoute: ActivatedRoute, translation: TranslationService);
+    constructor(userService: UserService, cartService: CartService, routingService: RoutingService, checkoutDeliveryService: CheckoutDeliveryService, checkoutConfigService: CheckoutConfigService, activatedRoute: ActivatedRoute, translation: TranslationService);
     ngOnInit(): void;
     getCardContent(address: Address, selected: any, textDefaultShippingAddress: string, textShipToThisAddress: string, textSelected: string): Card;
     addressSelected(address: Address): void;

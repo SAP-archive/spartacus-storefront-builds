@@ -4157,9 +4157,11 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CheckoutDetailsService = /** @class */ (function () {
-        function CheckoutDetailsService(checkoutService, cartService) {
+        function CheckoutDetailsService(checkoutService, checkoutDeliveryService, checkoutPaymentService, cartService) {
             var _this = this;
             this.checkoutService = checkoutService;
+            this.checkoutDeliveryService = checkoutDeliveryService;
+            this.checkoutPaymentService = checkoutPaymentService;
             this.cartService = cartService;
             this.cartId$ = this.cartService.getActive().pipe(operators.map((/**
              * @param {?} cartData
@@ -4194,7 +4196,7 @@
             return this.getCheckoutDetailsLoaded$.pipe(operators.switchMap((/**
              * @return {?}
              */
-            function () { return _this.checkoutService.getDeliveryAddress(); })));
+            function () { return _this.checkoutDeliveryService.getDeliveryAddress(); })));
         };
         /**
          * @return {?}
@@ -4207,7 +4209,9 @@
             return this.getCheckoutDetailsLoaded$.pipe(operators.switchMap((/**
              * @return {?}
              */
-            function () { return _this.checkoutService.getSelectedDeliveryModeCode(); })));
+            function () {
+                return _this.checkoutDeliveryService.getSelectedDeliveryModeCode();
+            })));
         };
         /**
          * @return {?}
@@ -4220,7 +4224,7 @@
             return this.getCheckoutDetailsLoaded$.pipe(operators.switchMap((/**
              * @return {?}
              */
-            function () { return _this.checkoutService.getPaymentDetails(); })));
+            function () { return _this.checkoutPaymentService.getPaymentDetails(); })));
         };
         CheckoutDetailsService.decorators = [
             { type: core.Injectable, args: [{
@@ -4230,9 +4234,11 @@
         /** @nocollapse */
         CheckoutDetailsService.ctorParameters = function () { return [
             { type: core$1.CheckoutService },
+            { type: core$1.CheckoutDeliveryService },
+            { type: core$1.CheckoutPaymentService },
             { type: core$1.CartService }
         ]; };
-        /** @nocollapse */ CheckoutDetailsService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(core.ɵɵinject(core$1.CheckoutService), core.ɵɵinject(core$1.CartService)); }, token: CheckoutDetailsService, providedIn: "root" });
+        /** @nocollapse */ CheckoutDetailsService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(core.ɵɵinject(core$1.CheckoutService), core.ɵɵinject(core$1.CheckoutDeliveryService), core.ɵɵinject(core$1.CheckoutPaymentService), core.ɵɵinject(core$1.CartService)); }, token: CheckoutDetailsService, providedIn: "root" });
         return CheckoutDetailsService;
     }());
 
@@ -4296,9 +4302,9 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var DeliveryModeComponent = /** @class */ (function () {
-        function DeliveryModeComponent(fb, checkoutService, routingService, checkoutConfigService, activatedRoute) {
+        function DeliveryModeComponent(fb, checkoutDeliveryService, routingService, checkoutConfigService, activatedRoute) {
             this.fb = fb;
-            this.checkoutService = checkoutService;
+            this.checkoutDeliveryService = checkoutDeliveryService;
             this.routingService = routingService;
             this.checkoutConfigService = checkoutConfigService;
             this.activatedRoute = activatedRoute;
@@ -4317,9 +4323,9 @@
             this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
             this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
             this.changedOption = false;
-            this.supportedDeliveryModes$ = this.checkoutService.getSupportedDeliveryModes();
-            this.selectedDeliveryMode$ = this.checkoutService.getSelectedDeliveryMode();
-            this.checkoutService.loadSupportedDeliveryModes();
+            this.supportedDeliveryModes$ = this.checkoutDeliveryService.getSupportedDeliveryModes();
+            this.selectedDeliveryMode$ = this.checkoutDeliveryService.getSelectedDeliveryMode();
+            this.checkoutDeliveryService.loadSupportedDeliveryModes();
             this.selectedDeliveryMode$
                 .pipe(operators.map((/**
              * @param {?} deliveryMode
@@ -4362,9 +4368,9 @@
         function () {
             var _this = this;
             if (this.changedOption) {
-                this.checkoutService.setDeliveryMode(this.currentDeliveryModeId);
+                this.checkoutDeliveryService.setDeliveryMode(this.currentDeliveryModeId);
             }
-            this.deliveryModeSub = this.checkoutService
+            this.deliveryModeSub = this.checkoutDeliveryService
                 .getSelectedDeliveryMode()
                 .subscribe((/**
              * @param {?} data
@@ -4416,7 +4422,7 @@
         /** @nocollapse */
         DeliveryModeComponent.ctorParameters = function () { return [
             { type: forms.FormBuilder },
-            { type: core$1.CheckoutService },
+            { type: core$1.CheckoutDeliveryService },
             { type: core$1.RoutingService },
             { type: CheckoutConfigService },
             { type: router.ActivatedRoute }
@@ -4745,8 +4751,9 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var PaymentFormComponent = /** @class */ (function () {
-        function PaymentFormComponent(checkoutService, userService, globalMessageService, fb, modalService) {
-            this.checkoutService = checkoutService;
+        function PaymentFormComponent(checkoutPaymentService, checkoutDeliveryService, userService, globalMessageService, fb, modalService) {
+            this.checkoutPaymentService = checkoutPaymentService;
+            this.checkoutDeliveryService = checkoutDeliveryService;
             this.userService = userService;
             this.globalMessageService = globalMessageService;
             this.fb = fb;
@@ -4800,16 +4807,16 @@
                     _this.userService.loadBillingCountries();
                 }
             })));
-            this.cardTypes$ = this.checkoutService.getCardTypes().pipe(operators.tap((/**
+            this.cardTypes$ = this.checkoutPaymentService.getCardTypes().pipe(operators.tap((/**
              * @param {?} cardTypes
              * @return {?}
              */
             function (cardTypes) {
                 if (Object.keys(cardTypes).length === 0) {
-                    _this.checkoutService.loadSupportedCardTypes();
+                    _this.checkoutPaymentService.loadSupportedCardTypes();
                 }
             })));
-            this.shippingAddress$ = this.checkoutService.getDeliveryAddress();
+            this.shippingAddress$ = this.checkoutDeliveryService.getDeliveryAddress();
             this.checkboxSub = this.showSameAsShippingAddressCheckbox().subscribe((/**
              * @param {?} shouldShowCheckbox
              * @return {?}
@@ -4819,7 +4826,7 @@
                 _this.sameAsShippingAddress = shouldShowCheckbox;
             }));
             // verify the new added address
-            this.addressVerifySub = this.checkoutService
+            this.addressVerifySub = this.checkoutDeliveryService
                 .getAddressVerificationResults()
                 .subscribe((/**
              * @param {?} results
@@ -4827,14 +4834,14 @@
              */
             function (results) {
                 if (results === 'FAIL') {
-                    _this.checkoutService.clearAddressVerificationResults();
+                    _this.checkoutDeliveryService.clearAddressVerificationResults();
                 }
                 else if (results.decision === 'ACCEPT') {
                     _this.next();
                 }
                 else if (results.decision === 'REJECT') {
                     _this.globalMessageService.add({ key: 'addressForm.invalidAddress' }, core$1.GlobalMessageType.MSG_TYPE_ERROR);
-                    _this.checkoutService.clearAddressVerificationResults();
+                    _this.checkoutDeliveryService.clearAddressVerificationResults();
                 }
                 else if (results.decision === 'REVIEW') {
                     _this.openSuggestedAddress(results);
@@ -5001,7 +5008,7 @@
                  * @return {?}
                  */
                 function () {
-                    _this.checkoutService.clearAddressVerificationResults();
+                    _this.checkoutDeliveryService.clearAddressVerificationResults();
                     _this.suggestedAddressModalRef = null;
                 }))
                     .catch((/**
@@ -5009,7 +5016,7 @@
                  */
                 function () {
                     // this  callback is called when modal is closed with Esc key or clicking backdrop
-                    _this.checkoutService.clearAddressVerificationResults();
+                    _this.checkoutDeliveryService.clearAddressVerificationResults();
                     _this.suggestedAddressModalRef = null;
                 }));
             }
@@ -5043,7 +5050,7 @@
                 this.next();
             }
             else {
-                this.checkoutService.verifyAddress(this.billingAddress.value);
+                this.checkoutDeliveryService.verifyAddress(this.billingAddress.value);
             }
         };
         /**
@@ -5083,7 +5090,8 @@
         ];
         /** @nocollapse */
         PaymentFormComponent.ctorParameters = function () { return [
-            { type: core$1.CheckoutService },
+            { type: core$1.CheckoutPaymentService },
+            { type: core$1.CheckoutDeliveryService },
             { type: core$1.UserService },
             { type: core$1.GlobalMessageService },
             { type: forms.FormBuilder },
@@ -5129,9 +5137,11 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var PaymentMethodComponent = /** @class */ (function () {
-        function PaymentMethodComponent(userService, checkoutService, globalMessageService, routingConfigService, routingService, checkoutConfigService, activatedRoute, translation) {
+        function PaymentMethodComponent(userService, checkoutService, checkoutDeliveryService, checkoutPaymentService, globalMessageService, routingConfigService, routingService, checkoutConfigService, activatedRoute, translation) {
             this.userService = userService;
             this.checkoutService = checkoutService;
+            this.checkoutDeliveryService = checkoutDeliveryService;
+            this.checkoutPaymentService = checkoutPaymentService;
             this.globalMessageService = globalMessageService;
             this.routingConfigService = routingConfigService;
             this.routingService = routingService;
@@ -5154,7 +5164,7 @@
             this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
             this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
             this.existingPaymentMethods$ = this.userService.getPaymentMethods();
-            this.getPaymentDetailsSub = this.checkoutService
+            this.getPaymentDetailsSub = this.checkoutPaymentService
                 .getPaymentDetails()
                 .pipe(operators.filter((/**
              * @param {?} paymentInfo
@@ -5284,7 +5294,7 @@
          */
         function (_a) {
             var paymentDetails = _a.paymentDetails, billingAddress = _a.billingAddress;
-            this.getDeliveryAddressSub = this.checkoutService
+            this.getDeliveryAddressSub = this.checkoutDeliveryService
                 .getDeliveryAddress()
                 .subscribe((/**
              * @param {?} address
@@ -5314,15 +5324,15 @@
                 ? billingAddress
                 : this.deliveryAddress;
             if (newPayment) {
-                this.checkoutService.createPaymentDetails(payment);
+                this.checkoutPaymentService.createPaymentDetails(payment);
                 this.checkoutService.clearCheckoutStep(3);
             }
             // if the selected payment is the same as the cart's one
             if (this.selectedPayment && this.selectedPayment.id === payment.id) {
-                this.checkoutService.setPaymentDetails(payment);
+                this.checkoutPaymentService.setPaymentDetails(payment);
                 this.checkoutService.clearCheckoutStep(3);
             }
-            this.getPaymentDetailsSub = this.checkoutService
+            this.getPaymentDetailsSub = this.checkoutPaymentService
                 .getPaymentDetails()
                 .subscribe((/**
              * @param {?} data
@@ -5390,6 +5400,8 @@
         PaymentMethodComponent.ctorParameters = function () { return [
             { type: core$1.UserService },
             { type: core$1.CheckoutService },
+            { type: core$1.CheckoutDeliveryService },
+            { type: core$1.CheckoutPaymentService },
             { type: core$1.GlobalMessageService },
             { type: core$1.RoutingConfigService },
             { type: core$1.RoutingService },
@@ -5607,8 +5619,9 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ReviewSubmitComponent = /** @class */ (function () {
-        function ReviewSubmitComponent(checkoutService, userService, cartService, translation) {
-            this.checkoutService = checkoutService;
+        function ReviewSubmitComponent(checkoutDeliveryService, checkoutPaymentService, userService, cartService, translation) {
+            this.checkoutDeliveryService = checkoutDeliveryService;
+            this.checkoutPaymentService = checkoutPaymentService;
             this.userService = userService;
             this.cartService = cartService;
             this.translation = translation;
@@ -5623,15 +5636,17 @@
             var _this = this;
             this.cart$ = this.cartService.getActive();
             this.entries$ = this.cartService.getEntries();
-            this.deliveryAddress$ = this.checkoutService.getDeliveryAddress();
-            this.paymentDetails$ = this.checkoutService.getPaymentDetails();
-            this.deliveryMode$ = this.checkoutService.getSelectedDeliveryMode().pipe(operators.tap((/**
+            this.deliveryAddress$ = this.checkoutDeliveryService.getDeliveryAddress();
+            this.paymentDetails$ = this.checkoutPaymentService.getPaymentDetails();
+            this.deliveryMode$ = this.checkoutDeliveryService
+                .getSelectedDeliveryMode()
+                .pipe(operators.tap((/**
              * @param {?} selected
              * @return {?}
              */
             function (selected) {
                 if (selected === null) {
-                    _this.checkoutService.loadSupportedDeliveryModes();
+                    _this.checkoutDeliveryService.loadSupportedDeliveryModes();
                 }
             })));
             this.countryName$ = this.deliveryAddress$.pipe(operators.switchMap((/**
@@ -5755,7 +5770,8 @@
         ];
         /** @nocollapse */
         ReviewSubmitComponent.ctorParameters = function () { return [
-            { type: core$1.CheckoutService },
+            { type: core$1.CheckoutDeliveryService },
+            { type: core$1.CheckoutPaymentService },
             { type: core$1.UserService },
             { type: core$1.CartService },
             { type: core$1.TranslationService }
@@ -5805,9 +5821,9 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var AddressFormComponent = /** @class */ (function () {
-        function AddressFormComponent(fb, checkoutService, userService, globalMessageService, modalService) {
+        function AddressFormComponent(fb, checkoutDeliveryService, userService, globalMessageService, modalService) {
             this.fb = fb;
-            this.checkoutService = checkoutService;
+            this.checkoutDeliveryService = checkoutDeliveryService;
             this.userService = userService;
             this.globalMessageService = globalMessageService;
             this.modalService = modalService;
@@ -5889,7 +5905,7 @@
                 }
             })));
             // verify the new added address
-            this.addressVerifySub = this.checkoutService
+            this.addressVerifySub = this.checkoutDeliveryService
                 .getAddressVerificationResults()
                 .subscribe((/**
              * @param {?} results
@@ -5897,7 +5913,7 @@
              */
             function (results) {
                 if (results === 'FAIL') {
-                    _this.checkoutService.clearAddressVerificationResults();
+                    _this.checkoutDeliveryService.clearAddressVerificationResults();
                 }
                 else if (results.decision === 'ACCEPT') {
                     _this.submitAddress.emit(_this.address.value);
@@ -5914,7 +5930,7 @@
                     else {
                         _this.globalMessageService.add({ key: 'addressForm.invalidAddress' }, core$1.GlobalMessageType.MSG_TYPE_ERROR);
                     }
-                    _this.checkoutService.clearAddressVerificationResults();
+                    _this.checkoutDeliveryService.clearAddressVerificationResults();
                 }
                 else if (results.decision === 'REVIEW') {
                     _this.openSuggestedAddress(results);
@@ -5987,7 +6003,7 @@
          * @return {?}
          */
         function () {
-            this.checkoutService.verifyAddress(this.address.value);
+            this.checkoutDeliveryService.verifyAddress(this.address.value);
         };
         /**
          * @param {?} results
@@ -6010,7 +6026,7 @@
                  * @return {?}
                  */
                 function (address) {
-                    _this.checkoutService.clearAddressVerificationResults();
+                    _this.checkoutDeliveryService.clearAddressVerificationResults();
                     if (address) {
                         address = Object.assign({
                             titleCode: _this.address.value.titleCode,
@@ -6026,7 +6042,7 @@
                  */
                 function () {
                     // this  callback is called when modal is closed with Esc key or clicking backdrop
-                    _this.checkoutService.clearAddressVerificationResults();
+                    _this.checkoutDeliveryService.clearAddressVerificationResults();
                     /** @type {?} */
                     var address = Object.assign({
                         selected: true,
@@ -6043,7 +6059,7 @@
          * @return {?}
          */
         function () {
-            this.checkoutService.clearAddressVerificationResults();
+            this.checkoutDeliveryService.clearAddressVerificationResults();
             if (this.addressVerifySub) {
                 this.addressVerifySub.unsubscribe();
             }
@@ -6058,7 +6074,7 @@
         /** @nocollapse */
         AddressFormComponent.ctorParameters = function () { return [
             { type: forms.FormBuilder },
-            { type: core$1.CheckoutService },
+            { type: core$1.CheckoutDeliveryService },
             { type: core$1.UserService },
             { type: core$1.GlobalMessageService },
             { type: ModalService }
@@ -6108,11 +6124,11 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ShippingAddressComponent = /** @class */ (function () {
-        function ShippingAddressComponent(userService, cartService, routingService, checkoutService, checkoutConfigService, activatedRoute, translation) {
+        function ShippingAddressComponent(userService, cartService, routingService, checkoutDeliveryService, checkoutConfigService, activatedRoute, translation) {
             this.userService = userService;
             this.cartService = cartService;
             this.routingService = routingService;
-            this.checkoutService = checkoutService;
+            this.checkoutDeliveryService = checkoutDeliveryService;
             this.checkoutConfigService = checkoutConfigService;
             this.activatedRoute = activatedRoute;
             this.translation = translation;
@@ -6154,7 +6170,7 @@
             })));
             this.cartService.loadDetails();
             this.userService.loadAddresses();
-            this.setAddressSub = this.checkoutService
+            this.setAddressSub = this.checkoutDeliveryService
                 .getDeliveryAddress()
                 .subscribe((/**
              * @param {?} address
@@ -6246,7 +6262,7 @@
         function (_a) {
             var newAddress = _a.newAddress, address = _a.address;
             if (newAddress) {
-                this.checkoutService.createAndSetAddress(address);
+                this.checkoutDeliveryService.createAndSetAddress(address);
                 this.goTo = CheckoutStepType.DELIVERY_MODE;
                 return;
             }
@@ -6257,7 +6273,7 @@
             }
             else {
                 this.goTo = CheckoutStepType.DELIVERY_MODE;
-                this.checkoutService.setDeliveryAddress(address);
+                this.checkoutDeliveryService.setDeliveryAddress(address);
             }
         };
         /**
@@ -6339,7 +6355,7 @@
             { type: core$1.UserService },
             { type: core$1.CartService },
             { type: core$1.RoutingService },
-            { type: core$1.CheckoutService },
+            { type: core$1.CheckoutDeliveryService },
             { type: CheckoutConfigService },
             { type: router.ActivatedRoute },
             { type: core$1.TranslationService }

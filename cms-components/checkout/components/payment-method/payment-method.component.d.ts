@@ -1,6 +1,6 @@
 import { OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Address, CheckoutService, GlobalMessageService, PaymentDetails, RoutingConfigService, RoutingService, TranslationService, UserService } from '@spartacus/core';
+import { Address, CheckoutDeliveryService, CheckoutPaymentService, CheckoutService, GlobalMessageService, PaymentDetails, RoutingConfigService, RoutingService, TranslationService, UserService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { Card } from '../../../../shared/components/card/card.component';
 import { ICON_TYPE } from '../../../misc/icon';
@@ -8,6 +8,8 @@ import { CheckoutConfigService } from '../../checkout-config.service';
 export declare class PaymentMethodComponent implements OnInit, OnDestroy {
     protected userService: UserService;
     protected checkoutService: CheckoutService;
+    protected checkoutDeliveryService: CheckoutDeliveryService;
+    protected checkoutPaymentService: CheckoutPaymentService;
     protected globalMessageService: GlobalMessageService;
     protected routingConfigService: RoutingConfigService;
     private routingService;
@@ -24,7 +26,7 @@ export declare class PaymentMethodComponent implements OnInit, OnDestroy {
     deliveryAddress: Address;
     checkoutStepUrlNext: string;
     checkoutStepUrlPrevious: string;
-    constructor(userService: UserService, checkoutService: CheckoutService, globalMessageService: GlobalMessageService, routingConfigService: RoutingConfigService, routingService: RoutingService, checkoutConfigService: CheckoutConfigService, activatedRoute: ActivatedRoute, translation: TranslationService);
+    constructor(userService: UserService, checkoutService: CheckoutService, checkoutDeliveryService: CheckoutDeliveryService, checkoutPaymentService: CheckoutPaymentService, globalMessageService: GlobalMessageService, routingConfigService: RoutingConfigService, routingService: RoutingService, checkoutConfigService: CheckoutConfigService, activatedRoute: ActivatedRoute, translation: TranslationService);
     ngOnInit(): void;
     getCardContent(payment: PaymentDetails): Observable<Card>;
     paymentMethodSelected(paymentDetails: PaymentDetails): void;

@@ -1,9 +1,10 @@
 import { OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Address, CartService, CheckoutService, DeliveryMode, PaymentDetails, Cart, OrderEntry, UserService, TranslationService } from '@spartacus/core';
+import { Address, Cart, CartService, CheckoutDeliveryService, CheckoutPaymentService, DeliveryMode, OrderEntry, PaymentDetails, TranslationService, UserService } from '@spartacus/core';
 import { Card } from '../../../../shared/components/card/card.component';
 export declare class ReviewSubmitComponent implements OnInit {
-    protected checkoutService: CheckoutService;
+    protected checkoutDeliveryService: CheckoutDeliveryService;
+    protected checkoutPaymentService: CheckoutPaymentService;
     protected userService: UserService;
     protected cartService: CartService;
     private translation;
@@ -13,7 +14,7 @@ export declare class ReviewSubmitComponent implements OnInit {
     countryName$: Observable<string>;
     deliveryAddress$: Observable<Address>;
     paymentDetails$: Observable<PaymentDetails>;
-    constructor(checkoutService: CheckoutService, userService: UserService, cartService: CartService, translation: TranslationService);
+    constructor(checkoutDeliveryService: CheckoutDeliveryService, checkoutPaymentService: CheckoutPaymentService, userService: UserService, cartService: CartService, translation: TranslationService);
     ngOnInit(): void;
     getShippingAddressCard(deliveryAddress: Address, countryName: string): Observable<Card>;
     getDeliveryModeCard(deliveryMode: DeliveryMode): Observable<Card>;

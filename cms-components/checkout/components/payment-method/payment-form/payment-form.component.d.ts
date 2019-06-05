@@ -1,6 +1,6 @@
 import { EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Address, AddressValidation, CardType, CheckoutService, Country, GlobalMessageService, UserService } from '@spartacus/core';
+import { Address, AddressValidation, CardType, CheckoutPaymentService, CheckoutDeliveryService, Country, GlobalMessageService, UserService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { Card } from '../../../../../shared/components/card/card.component';
 import { ModalRef, ModalService } from '../../../../../shared/components/modal/index';
@@ -14,7 +14,8 @@ declare type yearType = {
     name: number;
 };
 export declare class PaymentFormComponent implements OnInit, OnDestroy {
-    protected checkoutService: CheckoutService;
+    protected checkoutPaymentService: CheckoutPaymentService;
+    protected checkoutDeliveryService: CheckoutDeliveryService;
     protected userService: UserService;
     protected globalMessageService: GlobalMessageService;
     private fb;
@@ -35,7 +36,7 @@ export declare class PaymentFormComponent implements OnInit, OnDestroy {
     addPaymentInfo: EventEmitter<any>;
     payment: FormGroup;
     billingAddress: FormGroup;
-    constructor(checkoutService: CheckoutService, userService: UserService, globalMessageService: GlobalMessageService, fb: FormBuilder, modalService: ModalService);
+    constructor(checkoutPaymentService: CheckoutPaymentService, checkoutDeliveryService: CheckoutDeliveryService, userService: UserService, globalMessageService: GlobalMessageService, fb: FormBuilder, modalService: ModalService);
     ngOnInit(): void;
     expMonthAndYear(): void;
     toggleDefaultPaymentMethod(): void;

@@ -1,12 +1,12 @@
 import { OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { DeliveryMode, CheckoutService, RoutingService } from '@spartacus/core';
+import { DeliveryMode, CheckoutDeliveryService, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { CheckoutConfigService } from '../../checkout-config.service';
 export declare class DeliveryModeComponent implements OnInit, OnDestroy {
     private fb;
-    private checkoutService;
+    private checkoutDeliveryService;
     private routingService;
     private checkoutConfigService;
     private activatedRoute;
@@ -18,7 +18,7 @@ export declare class DeliveryModeComponent implements OnInit, OnDestroy {
     changedOption: boolean;
     deliveryModeSub: Subscription;
     mode: FormGroup;
-    constructor(fb: FormBuilder, checkoutService: CheckoutService, routingService: RoutingService, checkoutConfigService: CheckoutConfigService, activatedRoute: ActivatedRoute);
+    constructor(fb: FormBuilder, checkoutDeliveryService: CheckoutDeliveryService, routingService: RoutingService, checkoutConfigService: CheckoutConfigService, activatedRoute: ActivatedRoute);
     ngOnInit(): void;
     changeMode(code: string): void;
     next(): void;

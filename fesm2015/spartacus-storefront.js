@@ -1,5 +1,5 @@
 import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, Renderer2, HostListener, forwardRef, EventEmitter, Output, Optional, Injector, TemplateRef, ViewContainerRef, Inject, PLATFORM_ID, INJECTOR, APP_INITIALIZER, Pipe } from '@angular/core';
-import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, ServerConfig, OccConfig, I18nModule, GlobalMessageType, GlobalMessageService, GlobalMessageModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UrlModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, UserService, TranslationService, CheckoutModule, AuthService, AuthRedirectService, defaultCmsModuleConfig, CmsModule as CmsModule$1, CmsConfig, UserModule, NotAuthGuard, CxApiService, ComponentMapperService, CmsService, DynamicAttributeService, PageType, SemanticPathService, TranslationChunkService, PageRobotsMeta, PageMetaService, LanguageService, CmsPageTitleModule, SearchboxService, ProductModule, ProductReferenceService, TranslatePipe, ProductSearchService, ProductReviewService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, RoutingModule as RoutingModule$1, provideConfig, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, KymaModule } from '@spartacus/core';
+import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, ServerConfig, OccConfig, I18nModule, GlobalMessageType, GlobalMessageService, GlobalMessageModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UrlModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserService, TranslationService, CheckoutModule, AuthService, AuthRedirectService, defaultCmsModuleConfig, CmsModule as CmsModule$1, CmsConfig, UserModule, NotAuthGuard, CxApiService, ComponentMapperService, CmsService, DynamicAttributeService, PageType, SemanticPathService, TranslationChunkService, PageRobotsMeta, PageMetaService, LanguageService, CmsPageTitleModule, SearchboxService, ProductModule, ProductReferenceService, TranslatePipe, ProductSearchService, ProductReviewService, provideConfigFactory, occServerConfigFromMetaTagFactory, mediaServerConfigFromMetaTagFactory, RoutingModule as RoutingModule$1, provideConfig, OccModule, StateModule, AuthModule, CxApiModule, SmartEditModule, PersonalizationModule, KymaModule } from '@spartacus/core';
 import { map, filter, switchMap, tap, debounceTime, take, skipWhile, shareReplay, startWith, distinctUntilChanged, first, endWith, withLatestFrom, delay } from 'rxjs/operators';
 import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -3316,10 +3316,14 @@ CheckoutProgressModule.decorators = [
 class CheckoutDetailsService {
     /**
      * @param {?} checkoutService
+     * @param {?} checkoutDeliveryService
+     * @param {?} checkoutPaymentService
      * @param {?} cartService
      */
-    constructor(checkoutService, cartService) {
+    constructor(checkoutService, checkoutDeliveryService, checkoutPaymentService, cartService) {
         this.checkoutService = checkoutService;
+        this.checkoutDeliveryService = checkoutDeliveryService;
+        this.checkoutPaymentService = checkoutPaymentService;
         this.cartService = cartService;
         this.cartId$ = this.cartService.getActive().pipe(map((/**
          * @param {?} cartData
@@ -3350,7 +3354,7 @@ class CheckoutDetailsService {
         return this.getCheckoutDetailsLoaded$.pipe(switchMap((/**
          * @return {?}
          */
-        () => this.checkoutService.getDeliveryAddress())));
+        () => this.checkoutDeliveryService.getDeliveryAddress())));
     }
     /**
      * @return {?}
@@ -3359,7 +3363,7 @@ class CheckoutDetailsService {
         return this.getCheckoutDetailsLoaded$.pipe(switchMap((/**
          * @return {?}
          */
-        () => this.checkoutService.getSelectedDeliveryModeCode())));
+        () => this.checkoutDeliveryService.getSelectedDeliveryModeCode())));
     }
     /**
      * @return {?}
@@ -3368,7 +3372,7 @@ class CheckoutDetailsService {
         return this.getCheckoutDetailsLoaded$.pipe(switchMap((/**
          * @return {?}
          */
-        () => this.checkoutService.getPaymentDetails())));
+        () => this.checkoutPaymentService.getPaymentDetails())));
     }
 }
 CheckoutDetailsService.decorators = [
@@ -3379,9 +3383,11 @@ CheckoutDetailsService.decorators = [
 /** @nocollapse */
 CheckoutDetailsService.ctorParameters = () => [
     { type: CheckoutService },
+    { type: CheckoutDeliveryService },
+    { type: CheckoutPaymentService },
     { type: CartService }
 ];
-/** @nocollapse */ CheckoutDetailsService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(ɵɵinject(CheckoutService), ɵɵinject(CartService)); }, token: CheckoutDetailsService, providedIn: "root" });
+/** @nocollapse */ CheckoutDetailsService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(ɵɵinject(CheckoutService), ɵɵinject(CheckoutDeliveryService), ɵɵinject(CheckoutPaymentService), ɵɵinject(CartService)); }, token: CheckoutDetailsService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
@@ -3445,14 +3451,14 @@ ShippingAddressSetGuard.ctorParameters = () => [
 class DeliveryModeComponent {
     /**
      * @param {?} fb
-     * @param {?} checkoutService
+     * @param {?} checkoutDeliveryService
      * @param {?} routingService
      * @param {?} checkoutConfigService
      * @param {?} activatedRoute
      */
-    constructor(fb, checkoutService, routingService, checkoutConfigService, activatedRoute) {
+    constructor(fb, checkoutDeliveryService, routingService, checkoutConfigService, activatedRoute) {
         this.fb = fb;
-        this.checkoutService = checkoutService;
+        this.checkoutDeliveryService = checkoutDeliveryService;
         this.routingService = routingService;
         this.checkoutConfigService = checkoutConfigService;
         this.activatedRoute = activatedRoute;
@@ -3467,9 +3473,9 @@ class DeliveryModeComponent {
         this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
         this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
         this.changedOption = false;
-        this.supportedDeliveryModes$ = this.checkoutService.getSupportedDeliveryModes();
-        this.selectedDeliveryMode$ = this.checkoutService.getSelectedDeliveryMode();
-        this.checkoutService.loadSupportedDeliveryModes();
+        this.supportedDeliveryModes$ = this.checkoutDeliveryService.getSupportedDeliveryModes();
+        this.selectedDeliveryMode$ = this.checkoutDeliveryService.getSelectedDeliveryMode();
+        this.checkoutDeliveryService.loadSupportedDeliveryModes();
         this.selectedDeliveryMode$
             .pipe(map((/**
          * @param {?} deliveryMode
@@ -3502,9 +3508,9 @@ class DeliveryModeComponent {
      */
     next() {
         if (this.changedOption) {
-            this.checkoutService.setDeliveryMode(this.currentDeliveryModeId);
+            this.checkoutDeliveryService.setDeliveryMode(this.currentDeliveryModeId);
         }
-        this.deliveryModeSub = this.checkoutService
+        this.deliveryModeSub = this.checkoutDeliveryService
             .getSelectedDeliveryMode()
             .subscribe((/**
          * @param {?} data
@@ -3547,7 +3553,7 @@ DeliveryModeComponent.decorators = [
 /** @nocollapse */
 DeliveryModeComponent.ctorParameters = () => [
     { type: FormBuilder },
-    { type: CheckoutService },
+    { type: CheckoutDeliveryService },
     { type: RoutingService },
     { type: CheckoutConfigService },
     { type: ActivatedRoute }
@@ -3829,14 +3835,16 @@ SuggestedAddressDialogComponent.propDecorators = {
  */
 class PaymentFormComponent {
     /**
-     * @param {?} checkoutService
+     * @param {?} checkoutPaymentService
+     * @param {?} checkoutDeliveryService
      * @param {?} userService
      * @param {?} globalMessageService
      * @param {?} fb
      * @param {?} modalService
      */
-    constructor(checkoutService, userService, globalMessageService, fb, modalService) {
-        this.checkoutService = checkoutService;
+    constructor(checkoutPaymentService, checkoutDeliveryService, userService, globalMessageService, fb, modalService) {
+        this.checkoutPaymentService = checkoutPaymentService;
+        this.checkoutDeliveryService = checkoutDeliveryService;
         this.userService = userService;
         this.globalMessageService = globalMessageService;
         this.fb = fb;
@@ -3886,16 +3894,16 @@ class PaymentFormComponent {
                 this.userService.loadBillingCountries();
             }
         })));
-        this.cardTypes$ = this.checkoutService.getCardTypes().pipe(tap((/**
+        this.cardTypes$ = this.checkoutPaymentService.getCardTypes().pipe(tap((/**
          * @param {?} cardTypes
          * @return {?}
          */
         cardTypes => {
             if (Object.keys(cardTypes).length === 0) {
-                this.checkoutService.loadSupportedCardTypes();
+                this.checkoutPaymentService.loadSupportedCardTypes();
             }
         })));
-        this.shippingAddress$ = this.checkoutService.getDeliveryAddress();
+        this.shippingAddress$ = this.checkoutDeliveryService.getDeliveryAddress();
         this.checkboxSub = this.showSameAsShippingAddressCheckbox().subscribe((/**
          * @param {?} shouldShowCheckbox
          * @return {?}
@@ -3905,7 +3913,7 @@ class PaymentFormComponent {
             this.sameAsShippingAddress = shouldShowCheckbox;
         }));
         // verify the new added address
-        this.addressVerifySub = this.checkoutService
+        this.addressVerifySub = this.checkoutDeliveryService
             .getAddressVerificationResults()
             .subscribe((/**
          * @param {?} results
@@ -3913,14 +3921,14 @@ class PaymentFormComponent {
          */
         (results) => {
             if (results === 'FAIL') {
-                this.checkoutService.clearAddressVerificationResults();
+                this.checkoutDeliveryService.clearAddressVerificationResults();
             }
             else if (results.decision === 'ACCEPT') {
                 this.next();
             }
             else if (results.decision === 'REJECT') {
                 this.globalMessageService.add({ key: 'addressForm.invalidAddress' }, GlobalMessageType.MSG_TYPE_ERROR);
-                this.checkoutService.clearAddressVerificationResults();
+                this.checkoutDeliveryService.clearAddressVerificationResults();
             }
             else if (results.decision === 'REVIEW') {
                 this.openSuggestedAddress(results);
@@ -4040,7 +4048,7 @@ class PaymentFormComponent {
              * @return {?}
              */
             () => {
-                this.checkoutService.clearAddressVerificationResults();
+                this.checkoutDeliveryService.clearAddressVerificationResults();
                 this.suggestedAddressModalRef = null;
             }))
                 .catch((/**
@@ -4048,7 +4056,7 @@ class PaymentFormComponent {
              */
             () => {
                 // this  callback is called when modal is closed with Esc key or clicking backdrop
-                this.checkoutService.clearAddressVerificationResults();
+                this.checkoutDeliveryService.clearAddressVerificationResults();
                 this.suggestedAddressModalRef = null;
             }));
         }
@@ -4073,7 +4081,7 @@ class PaymentFormComponent {
             this.next();
         }
         else {
-            this.checkoutService.verifyAddress(this.billingAddress.value);
+            this.checkoutDeliveryService.verifyAddress(this.billingAddress.value);
         }
     }
     /**
@@ -4108,7 +4116,8 @@ PaymentFormComponent.decorators = [
 ];
 /** @nocollapse */
 PaymentFormComponent.ctorParameters = () => [
-    { type: CheckoutService },
+    { type: CheckoutPaymentService },
+    { type: CheckoutDeliveryService },
     { type: UserService },
     { type: GlobalMessageService },
     { type: FormBuilder },
@@ -4152,6 +4161,8 @@ class PaymentMethodComponent {
     /**
      * @param {?} userService
      * @param {?} checkoutService
+     * @param {?} checkoutDeliveryService
+     * @param {?} checkoutPaymentService
      * @param {?} globalMessageService
      * @param {?} routingConfigService
      * @param {?} routingService
@@ -4159,9 +4170,11 @@ class PaymentMethodComponent {
      * @param {?} activatedRoute
      * @param {?} translation
      */
-    constructor(userService, checkoutService, globalMessageService, routingConfigService, routingService, checkoutConfigService, activatedRoute, translation) {
+    constructor(userService, checkoutService, checkoutDeliveryService, checkoutPaymentService, globalMessageService, routingConfigService, routingService, checkoutConfigService, activatedRoute, translation) {
         this.userService = userService;
         this.checkoutService = checkoutService;
+        this.checkoutDeliveryService = checkoutDeliveryService;
+        this.checkoutPaymentService = checkoutPaymentService;
         this.globalMessageService = globalMessageService;
         this.routingConfigService = routingConfigService;
         this.routingService = routingService;
@@ -4180,7 +4193,7 @@ class PaymentMethodComponent {
         this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
         this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
         this.existingPaymentMethods$ = this.userService.getPaymentMethods();
-        this.getPaymentDetailsSub = this.checkoutService
+        this.getPaymentDetailsSub = this.checkoutPaymentService
             .getPaymentDetails()
             .pipe(filter((/**
          * @param {?} paymentInfo
@@ -4283,7 +4296,7 @@ class PaymentMethodComponent {
      * @return {?}
      */
     addNewPaymentMethod({ paymentDetails, billingAddress, }) {
-        this.getDeliveryAddressSub = this.checkoutService
+        this.getDeliveryAddressSub = this.checkoutDeliveryService
             .getDeliveryAddress()
             .subscribe((/**
          * @param {?} address
@@ -4307,15 +4320,15 @@ class PaymentMethodComponent {
             ? billingAddress
             : this.deliveryAddress;
         if (newPayment) {
-            this.checkoutService.createPaymentDetails(payment);
+            this.checkoutPaymentService.createPaymentDetails(payment);
             this.checkoutService.clearCheckoutStep(3);
         }
         // if the selected payment is the same as the cart's one
         if (this.selectedPayment && this.selectedPayment.id === payment.id) {
-            this.checkoutService.setPaymentDetails(payment);
+            this.checkoutPaymentService.setPaymentDetails(payment);
             this.checkoutService.clearCheckoutStep(3);
         }
-        this.getPaymentDetailsSub = this.checkoutService
+        this.getPaymentDetailsSub = this.checkoutPaymentService
             .getPaymentDetails()
             .subscribe((/**
          * @param {?} data
@@ -4376,6 +4389,8 @@ PaymentMethodComponent.decorators = [
 PaymentMethodComponent.ctorParameters = () => [
     { type: UserService },
     { type: CheckoutService },
+    { type: CheckoutDeliveryService },
+    { type: CheckoutPaymentService },
     { type: GlobalMessageService },
     { type: RoutingConfigService },
     { type: RoutingService },
@@ -4576,13 +4591,15 @@ PaymentDetailsSetGuard.ctorParameters = () => [
  */
 class ReviewSubmitComponent {
     /**
-     * @param {?} checkoutService
+     * @param {?} checkoutDeliveryService
+     * @param {?} checkoutPaymentService
      * @param {?} userService
      * @param {?} cartService
      * @param {?} translation
      */
-    constructor(checkoutService, userService, cartService, translation) {
-        this.checkoutService = checkoutService;
+    constructor(checkoutDeliveryService, checkoutPaymentService, userService, cartService, translation) {
+        this.checkoutDeliveryService = checkoutDeliveryService;
+        this.checkoutPaymentService = checkoutPaymentService;
         this.userService = userService;
         this.cartService = cartService;
         this.translation = translation;
@@ -4593,15 +4610,17 @@ class ReviewSubmitComponent {
     ngOnInit() {
         this.cart$ = this.cartService.getActive();
         this.entries$ = this.cartService.getEntries();
-        this.deliveryAddress$ = this.checkoutService.getDeliveryAddress();
-        this.paymentDetails$ = this.checkoutService.getPaymentDetails();
-        this.deliveryMode$ = this.checkoutService.getSelectedDeliveryMode().pipe(tap((/**
+        this.deliveryAddress$ = this.checkoutDeliveryService.getDeliveryAddress();
+        this.paymentDetails$ = this.checkoutPaymentService.getPaymentDetails();
+        this.deliveryMode$ = this.checkoutDeliveryService
+            .getSelectedDeliveryMode()
+            .pipe(tap((/**
          * @param {?} selected
          * @return {?}
          */
         (selected) => {
             if (selected === null) {
-                this.checkoutService.loadSupportedDeliveryModes();
+                this.checkoutDeliveryService.loadSupportedDeliveryModes();
             }
         })));
         this.countryName$ = this.deliveryAddress$.pipe(switchMap((/**
@@ -4708,7 +4727,8 @@ ReviewSubmitComponent.decorators = [
 ];
 /** @nocollapse */
 ReviewSubmitComponent.ctorParameters = () => [
-    { type: CheckoutService },
+    { type: CheckoutDeliveryService },
+    { type: CheckoutPaymentService },
     { type: UserService },
     { type: CartService },
     { type: TranslationService }
@@ -4755,14 +4775,14 @@ ReviewSubmitModule.decorators = [
 class AddressFormComponent {
     /**
      * @param {?} fb
-     * @param {?} checkoutService
+     * @param {?} checkoutDeliveryService
      * @param {?} userService
      * @param {?} globalMessageService
      * @param {?} modalService
      */
-    constructor(fb, checkoutService, userService, globalMessageService, modalService) {
+    constructor(fb, checkoutDeliveryService, userService, globalMessageService, modalService) {
         this.fb = fb;
-        this.checkoutService = checkoutService;
+        this.checkoutDeliveryService = checkoutDeliveryService;
         this.userService = userService;
         this.globalMessageService = globalMessageService;
         this.modalService = modalService;
@@ -4840,7 +4860,7 @@ class AddressFormComponent {
             }
         })));
         // verify the new added address
-        this.addressVerifySub = this.checkoutService
+        this.addressVerifySub = this.checkoutDeliveryService
             .getAddressVerificationResults()
             .subscribe((/**
          * @param {?} results
@@ -4848,7 +4868,7 @@ class AddressFormComponent {
          */
         (results) => {
             if (results === 'FAIL') {
-                this.checkoutService.clearAddressVerificationResults();
+                this.checkoutDeliveryService.clearAddressVerificationResults();
             }
             else if (results.decision === 'ACCEPT') {
                 this.submitAddress.emit(this.address.value);
@@ -4865,7 +4885,7 @@ class AddressFormComponent {
                 else {
                     this.globalMessageService.add({ key: 'addressForm.invalidAddress' }, GlobalMessageType.MSG_TYPE_ERROR);
                 }
-                this.checkoutService.clearAddressVerificationResults();
+                this.checkoutDeliveryService.clearAddressVerificationResults();
             }
             else if (results.decision === 'REVIEW') {
                 this.openSuggestedAddress(results);
@@ -4917,7 +4937,7 @@ class AddressFormComponent {
      * @return {?}
      */
     verifyAddress() {
-        this.checkoutService.verifyAddress(this.address.value);
+        this.checkoutDeliveryService.verifyAddress(this.address.value);
     }
     /**
      * @param {?} results
@@ -4935,7 +4955,7 @@ class AddressFormComponent {
              * @return {?}
              */
             address => {
-                this.checkoutService.clearAddressVerificationResults();
+                this.checkoutDeliveryService.clearAddressVerificationResults();
                 if (address) {
                     address = Object.assign({
                         titleCode: this.address.value.titleCode,
@@ -4951,7 +4971,7 @@ class AddressFormComponent {
              */
             () => {
                 // this  callback is called when modal is closed with Esc key or clicking backdrop
-                this.checkoutService.clearAddressVerificationResults();
+                this.checkoutDeliveryService.clearAddressVerificationResults();
                 /** @type {?} */
                 const address = Object.assign({
                     selected: true,
@@ -4965,7 +4985,7 @@ class AddressFormComponent {
      * @return {?}
      */
     ngOnDestroy() {
-        this.checkoutService.clearAddressVerificationResults();
+        this.checkoutDeliveryService.clearAddressVerificationResults();
         if (this.addressVerifySub) {
             this.addressVerifySub.unsubscribe();
         }
@@ -4981,7 +5001,7 @@ AddressFormComponent.decorators = [
 /** @nocollapse */
 AddressFormComponent.ctorParameters = () => [
     { type: FormBuilder },
-    { type: CheckoutService },
+    { type: CheckoutDeliveryService },
     { type: UserService },
     { type: GlobalMessageService },
     { type: ModalService }
@@ -5030,16 +5050,16 @@ class ShippingAddressComponent {
      * @param {?} userService
      * @param {?} cartService
      * @param {?} routingService
-     * @param {?} checkoutService
+     * @param {?} checkoutDeliveryService
      * @param {?} checkoutConfigService
      * @param {?} activatedRoute
      * @param {?} translation
      */
-    constructor(userService, cartService, routingService, checkoutService, checkoutConfigService, activatedRoute, translation) {
+    constructor(userService, cartService, routingService, checkoutDeliveryService, checkoutConfigService, activatedRoute, translation) {
         this.userService = userService;
         this.cartService = cartService;
         this.routingService = routingService;
-        this.checkoutService = checkoutService;
+        this.checkoutDeliveryService = checkoutDeliveryService;
         this.checkoutConfigService = checkoutConfigService;
         this.activatedRoute = activatedRoute;
         this.translation = translation;
@@ -5076,7 +5096,7 @@ class ShippingAddressComponent {
         })));
         this.cartService.loadDetails();
         this.userService.loadAddresses();
-        this.setAddressSub = this.checkoutService
+        this.setAddressSub = this.checkoutDeliveryService
             .getDeliveryAddress()
             .subscribe((/**
          * @param {?} address
@@ -5148,7 +5168,7 @@ class ShippingAddressComponent {
      */
     addAddress({ newAddress, address, }) {
         if (newAddress) {
-            this.checkoutService.createAndSetAddress(address);
+            this.checkoutDeliveryService.createAndSetAddress(address);
             this.goTo = CheckoutStepType.DELIVERY_MODE;
             return;
         }
@@ -5159,7 +5179,7 @@ class ShippingAddressComponent {
         }
         else {
             this.goTo = CheckoutStepType.DELIVERY_MODE;
-            this.checkoutService.setDeliveryAddress(address);
+            this.checkoutDeliveryService.setDeliveryAddress(address);
         }
     }
     /**
@@ -5221,7 +5241,7 @@ ShippingAddressComponent.ctorParameters = () => [
     { type: UserService },
     { type: CartService },
     { type: RoutingService },
-    { type: CheckoutService },
+    { type: CheckoutDeliveryService },
     { type: CheckoutConfigService },
     { type: ActivatedRoute },
     { type: TranslationService }
