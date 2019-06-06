@@ -4341,19 +4341,17 @@ class PaymentMethodComponent {
      * @param {?} checkoutDeliveryService
      * @param {?} checkoutPaymentService
      * @param {?} globalMessageService
-     * @param {?} routingConfigService
      * @param {?} routingService
      * @param {?} checkoutConfigService
      * @param {?} activatedRoute
      * @param {?} translation
      */
-    constructor(userPaymentService, checkoutService, checkoutDeliveryService, checkoutPaymentService, globalMessageService, routingConfigService, routingService, checkoutConfigService, activatedRoute, translation) {
+    constructor(userPaymentService, checkoutService, checkoutDeliveryService, checkoutPaymentService, globalMessageService, routingService, checkoutConfigService, activatedRoute, translation) {
         this.userPaymentService = userPaymentService;
         this.checkoutService = checkoutService;
         this.checkoutDeliveryService = checkoutDeliveryService;
         this.checkoutPaymentService = checkoutPaymentService;
         this.globalMessageService = globalMessageService;
-        this.routingConfigService = routingConfigService;
         this.routingService = routingService;
         this.checkoutConfigService = checkoutConfigService;
         this.activatedRoute = activatedRoute;
@@ -4569,7 +4567,6 @@ PaymentMethodComponent.ctorParameters = () => [
     { type: CheckoutDeliveryService },
     { type: CheckoutPaymentService },
     { type: GlobalMessageService },
-    { type: RoutingConfigService },
     { type: RoutingService },
     { type: CheckoutConfigService },
     { type: ActivatedRoute },

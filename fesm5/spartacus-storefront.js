@@ -5242,13 +5242,12 @@ var PaymentFormModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var PaymentMethodComponent = /** @class */ (function () {
-    function PaymentMethodComponent(userPaymentService, checkoutService, checkoutDeliveryService, checkoutPaymentService, globalMessageService, routingConfigService, routingService, checkoutConfigService, activatedRoute, translation) {
+    function PaymentMethodComponent(userPaymentService, checkoutService, checkoutDeliveryService, checkoutPaymentService, globalMessageService, routingService, checkoutConfigService, activatedRoute, translation) {
         this.userPaymentService = userPaymentService;
         this.checkoutService = checkoutService;
         this.checkoutDeliveryService = checkoutDeliveryService;
         this.checkoutPaymentService = checkoutPaymentService;
         this.globalMessageService = globalMessageService;
-        this.routingConfigService = routingConfigService;
         this.routingService = routingService;
         this.checkoutConfigService = checkoutConfigService;
         this.activatedRoute = activatedRoute;
@@ -5508,7 +5507,6 @@ var PaymentMethodComponent = /** @class */ (function () {
         { type: CheckoutDeliveryService },
         { type: CheckoutPaymentService },
         { type: GlobalMessageService },
-        { type: RoutingConfigService },
         { type: RoutingService },
         { type: CheckoutConfigService },
         { type: ActivatedRoute },
