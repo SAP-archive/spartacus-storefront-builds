@@ -1,8 +1,8 @@
-import { Renderer2 } from '@angular/core';
+import { Renderer2, SimpleChanges, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { ICON_TYPE } from '../../misc/icon/index';
 import { NavigationNode } from './navigation-node.model';
-export declare class NavigationUIComponent {
+export declare class NavigationUIComponent implements OnChanges {
     private router;
     private renderer;
     /**
@@ -28,4 +28,6 @@ export declare class NavigationUIComponent {
     clear(): void;
     private updateClasses;
     getDepth(node: NavigationNode, depth?: number): number;
+    breakNodesIntoColumns(node: NavigationNode, columnSize: number): NavigationNode;
+    ngOnChanges(changes: SimpleChanges): void;
 }

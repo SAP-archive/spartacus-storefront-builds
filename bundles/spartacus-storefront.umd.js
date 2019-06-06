@@ -12634,6 +12634,8 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /** @type {?} */
+    var COLUMN_SIZE = 10;
     var NavigationUIComponent = /** @class */ (function () {
         function NavigationUIComponent(router$1, renderer) {
             var _this = this;
@@ -12757,6 +12759,62 @@
             }
             else {
                 return depth;
+            }
+        };
+        // Recursively break nodes with more than COLUMN_SIZE into sub nodes to create columns
+        // Recursively break nodes with more than COLUMN_SIZE into sub nodes to create columns
+        /**
+         * @param {?} node
+         * @param {?} columnSize
+         * @return {?}
+         */
+        NavigationUIComponent.prototype.breakNodesIntoColumns = 
+        // Recursively break nodes with more than COLUMN_SIZE into sub nodes to create columns
+        /**
+         * @param {?} node
+         * @param {?} columnSize
+         * @return {?}
+         */
+        function (node, columnSize) {
+            var _this = this;
+            var _a;
+            if (node.hasOwnProperty('children')) {
+                // Check if too many children for column
+                if (node.children.length > columnSize) {
+                    /** @type {?} */
+                    var clonedNode = __assign({}, node);
+                    node.children = [];
+                    // Break node into subnodes with children length of columnSize
+                    while (clonedNode.children.length > 0) {
+                        /** @type {?} */
+                        var newSubNode = { title: null, children: [] };
+                        (_a = newSubNode.children).push.apply(_a, __spread(clonedNode.children.splice(0, columnSize)));
+                        node.children.push(newSubNode);
+                    }
+                }
+                // Recursively do the same with child nodes
+                node.children.forEach((/**
+                 * @param {?} child
+                 * @return {?}
+                 */
+                function (child) {
+                    child = _this.breakNodesIntoColumns(child, columnSize);
+                }));
+            }
+            return node;
+        };
+        /**
+         * @param {?} changes
+         * @return {?}
+         */
+        NavigationUIComponent.prototype.ngOnChanges = /**
+         * @param {?} changes
+         * @return {?}
+         */
+        function (changes) {
+            // Recursively break into columns once node exists on component
+            if (changes.node.currentValue) {
+                this.node = this.breakNodesIntoColumns(this.node, COLUMN_SIZE);
             }
         };
         NavigationUIComponent.decorators = [

@@ -10582,6 +10582,8 @@ CategoryNavigationComponent.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @type {?} */
+const COLUMN_SIZE = 10;
 class NavigationUIComponent {
     /**
      * @param {?} router
@@ -10686,6 +10688,48 @@ class NavigationUIComponent {
         }
         else {
             return depth;
+        }
+    }
+    // Recursively break nodes with more than COLUMN_SIZE into sub nodes to create columns
+    /**
+     * @param {?} node
+     * @param {?} columnSize
+     * @return {?}
+     */
+    breakNodesIntoColumns(node, columnSize) {
+        if (node.hasOwnProperty('children')) {
+            // Check if too many children for column
+            if (node.children.length > columnSize) {
+                /** @type {?} */
+                const clonedNode = Object.assign({}, node);
+                node.children = [];
+                // Break node into subnodes with children length of columnSize
+                while (clonedNode.children.length > 0) {
+                    /** @type {?} */
+                    const newSubNode = { title: null, children: [] };
+                    newSubNode.children.push(...clonedNode.children.splice(0, columnSize));
+                    node.children.push(newSubNode);
+                }
+            }
+            // Recursively do the same with child nodes
+            node.children.forEach((/**
+             * @param {?} child
+             * @return {?}
+             */
+            child => {
+                child = this.breakNodesIntoColumns(child, columnSize);
+            }));
+        }
+        return node;
+    }
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    ngOnChanges(changes) {
+        // Recursively break into columns once node exists on component
+        if (changes.node.currentValue) {
+            this.node = this.breakNodesIntoColumns(this.node, COLUMN_SIZE);
         }
     }
 }
