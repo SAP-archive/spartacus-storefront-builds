@@ -1,9 +1,9 @@
-import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, Renderer2, HostListener, forwardRef, EventEmitter, Output, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, Inject, PLATFORM_ID, INJECTOR, APP_INITIALIZER, Pipe } from '@angular/core';
-import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, ServerConfig, OccConfig, I18nModule, GlobalMessageType, GlobalMessageService, GlobalMessageModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UrlModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserPaymentService, TranslationService, UserService, CheckoutModule, UserAddressService, AuthService, AuthRedirectService, UserModule, NotAuthGuard, CxApiService, ComponentMapperService, CmsService, DynamicAttributeService, CmsConfig, PageType, SemanticPathService, TranslationChunkService, PageRobotsMeta, PageMetaService, LanguageService, UserConsentService, UserOrderService, CmsPageTitleModule, SearchboxService, ProductModule, ProductReferenceService, TranslatePipe, CmsModule, ProductSearchService, ProductReviewService, RoutingModule as RoutingModule$1, StateModule, AuthModule, provideConfigFromMetaTags, provideConfig, SmartEditModule, PersonalizationModule, OccModule } from '@spartacus/core';
+import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, Renderer2, HostListener, forwardRef, EventEmitter, Output, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, INJECTOR, APP_INITIALIZER, Pipe } from '@angular/core';
+import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, ServerConfig, OccConfig, I18nModule, GlobalMessageType, GlobalMessageService, GlobalMessageModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UrlModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserPaymentService, TranslationService, UserService, CheckoutModule, UserAddressService, AuthService, AuthRedirectService, UserModule, NotAuthGuard, CmsConfig, CxApiService, CmsService, DynamicAttributeService, PageType, SemanticPathService, TranslationChunkService, PageRobotsMeta, PageMetaService, LanguageService, UserConsentService, UserOrderService, CmsPageTitleModule, SearchboxService, ProductModule, ProductReferenceService, TranslatePipe, CmsModule, ProductSearchService, ProductReviewService, RoutingModule as RoutingModule$1, StateModule, AuthModule, provideConfigFromMetaTags, provideConfig, SmartEditModule, PersonalizationModule, OccModule } from '@spartacus/core';
 import { map, filter, switchMap, tap, debounceTime, startWith, distinctUntilChanged, take, skipWhile, shareReplay, first, endWith, withLatestFrom, delay } from 'rxjs/operators';
 import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule, isPlatformServer } from '@angular/common';
+import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { of, fromEvent, combineLatest, BehaviorSubject, concat, isObservable, from, Subscription } from 'rxjs';
@@ -2113,7 +2113,7 @@ SiteContextSelectorModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             CMSSiteContextComponent: {
-                                selector: 'cx-site-context-selector',
+                                component: SiteContextSelectorComponent,
                                 providers: [
                                     {
                                         provide: SiteContextComponentService,
@@ -2123,7 +2123,7 @@ SiteContextSelectorModule.decorators = [
                                 ],
                             },
                             LanguageCurrencyComponent: {
-                                selector: 'cx-language-currency-selector',
+                                component: LanguageCurrencyComponent,
                             },
                         },
                     }))),
@@ -2561,7 +2561,9 @@ AddToCartModule.decorators = [
                     SpinnerModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
-                            ProductAddToCartComponent: { selector: 'cx-add-to-cart' },
+                            ProductAddToCartComponent: {
+                                component: AddToCartComponent,
+                            },
                         },
                     }))),
                     UrlModule,
@@ -2642,7 +2644,7 @@ CartDetailsModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             CartComponent: {
-                                selector: 'cx-cart-details',
+                                component: CartDetailsComponent,
                             },
                         },
                     }))),
@@ -2811,7 +2813,7 @@ CartTotalsModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             CartTotalsComponent: {
-                                selector: 'cx-cart-totals',
+                                component: CartTotalsComponent,
                             },
                         },
                     }))),
@@ -2879,7 +2881,9 @@ MiniCartModule.decorators = [
                     CartModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
-                            MiniCartComponent: { selector: 'cx-mini-cart' },
+                            MiniCartComponent: {
+                                component: MiniCartComponent,
+                            },
                         },
                     }))),
                     UrlModule,
@@ -3168,7 +3172,7 @@ CheckoutOrchestratorModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             CheckoutOrchestrator: {
-                                selector: 'cx-checkout-orchestrator',
+                                component: CheckoutOrchestratorComponent,
                                 guards: [AuthGuard, CartNotEmptyGuard, CheckoutGuard],
                             },
                         },
@@ -3220,7 +3224,7 @@ CheckoutOrderSummaryModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             CheckoutOrderSummary: {
-                                selector: 'cx-checkout-order-summary',
+                                component: CheckoutOrderSummaryComponent,
                             },
                         },
                     }))),
@@ -3302,7 +3306,7 @@ CheckoutProgressMobileBottomModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             CheckoutProgressMobileBottom: {
-                                selector: 'cx-checkout-progress-mobile-bottom',
+                                component: CheckoutProgressMobileBottomComponent,
                                 guards: [AuthGuard, CartNotEmptyGuard],
                             },
                         },
@@ -3389,7 +3393,7 @@ CheckoutProgressMobileTopModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             CheckoutProgressMobileTop: {
-                                selector: 'cx-checkout-progress-mobile-top',
+                                component: CheckoutProgressMobileTopComponent,
                                 guards: [AuthGuard, CartNotEmptyGuard],
                             },
                         },
@@ -3473,7 +3477,7 @@ CheckoutProgressModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             CheckoutProgress: {
-                                selector: 'cx-checkout-progress',
+                                component: CheckoutProgressComponent,
                                 guards: [AuthGuard, CartNotEmptyGuard],
                             },
                         },
@@ -3752,7 +3756,7 @@ DeliveryModeModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             CheckoutDeliveryMode: {
-                                selector: 'cx-delivery-mode',
+                                component: DeliveryModeComponent,
                                 guards: [AuthGuard, CartNotEmptyGuard, ShippingAddressSetGuard],
                             },
                         },
@@ -4591,7 +4595,7 @@ PaymentMethodModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             CheckoutPaymentDetails: {
-                                selector: 'cx-payment-method',
+                                component: PaymentMethodComponent,
                                 guards: [
                                     AuthGuard,
                                     CartNotEmptyGuard,
@@ -4692,7 +4696,7 @@ PlaceOrderModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             CheckoutPlaceOrder: {
-                                selector: 'cx-place-order',
+                                component: PlaceOrderComponent,
                                 guards: [AuthGuard, CartNotEmptyGuard],
                             },
                         },
@@ -4924,7 +4928,7 @@ ReviewSubmitModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             CheckoutReviewOrder: {
-                                selector: 'cx-review-submit',
+                                component: ReviewSubmitComponent,
                                 guards: [
                                     AuthGuard,
                                     CartNotEmptyGuard,
@@ -5444,7 +5448,7 @@ ShippingAddressModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             CheckoutShippingAddress: {
-                                selector: 'cx-shipping-address',
+                                component: ShippingAddressComponent,
                                 guards: [AuthGuard, CartNotEmptyGuard],
                             },
                         },
@@ -5611,7 +5615,9 @@ HamburgerMenuModule.decorators = [
                     CommonModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
-                            HamburgerMenuComponent: { selector: 'cx-hamburger-menu' },
+                            HamburgerMenuComponent: {
+                                component: HamburgerMenuComponent,
+                            },
                         },
                     }))),
                 ],
@@ -5787,26 +5793,11 @@ class OutletDirective {
         if (template || replace) {
             /** @type {?} */
             const ref = this.vcr.createEmbeddedView(template || this.templateRef, {
-                $implicit: this.context,
+                $implicit: this._context,
             });
             nodes.push(...ref.rootNodes);
         }
         return nodes;
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    get context() {
-        // return specific context if provided
-        if (this._context) {
-            return this._context;
-        }
-        /** @type {?} */
-        const ctx = ((/** @type {?} */ (this.vcr.injector))).view.context;
-        // the context might already be given $implicit
-        // by a parent *ngIf or *ngFor
-        return ctx.$implicit || ctx;
     }
 }
 OutletDirective.decorators = [
@@ -5971,7 +5962,7 @@ LoginFormModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             ReturningCustomerLoginComponent: {
-                                selector: 'cx-login-form',
+                                component: LoginFormComponent,
                                 guards: [NotAuthGuard],
                             },
                         },
@@ -6026,6 +6017,145 @@ LoginComponent.ctorParameters = () => [
     { type: AuthService },
     { type: UserService }
 ];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ComponentMapperService {
+    /**
+     * @param {?} componentFactoryResolver
+     * @param {?} config
+     * @param {?} document
+     * @param {?} platform
+     */
+    constructor(componentFactoryResolver, config, document, platform) {
+        this.componentFactoryResolver = componentFactoryResolver;
+        this.config = config;
+        this.document = document;
+        this.platform = platform;
+        this.missingComponents = [];
+        this.loadedWebComponents = {};
+    }
+    /**
+     * @desc
+     * returns a web component for the CMS typecode.
+     *
+     * The mapping of CMS components to web componetns requires a mapping.
+     * This is configurable when the module is loaded.
+     *
+     * For example:
+     *
+     *  {
+     *      'CMSLinkComponent': 'LinkComponent',
+     *      'SimpleResponsiveBannerComponent': 'SimpleResponsiveBannerComponent',
+     *      [etc.]
+     *  }
+     *
+     * The type codes are dynamic since they depend on the implementation.
+     * Customer will add, extend or ingore standard components.
+     *
+     * @protected
+     * @param {?} typeCode the component type
+     * @return {?}
+     */
+    getComponent(typeCode) {
+        /** @type {?} */
+        const componentConfig = this.config.cmsComponents[typeCode];
+        if (!componentConfig) {
+            if (!this.missingComponents.includes(typeCode)) {
+                this.missingComponents.push(typeCode);
+                console.warn(`No component implementation found for the CMS component type '${typeCode}'.\n`, `Make sure you implement a component and register it in the mapper.`);
+            }
+        }
+        return componentConfig ? componentConfig.component : null;
+    }
+    /**
+     * @param {?} typeCode
+     * @return {?}
+     */
+    getComponentFactoryByCode(typeCode) {
+        /** @type {?} */
+        const component = this.getComponent(typeCode);
+        if (!component) {
+            return null;
+        }
+        /** @type {?} */
+        const factory = this.componentFactoryResolver.resolveComponentFactory(component);
+        if (!factory) {
+            console.warn(`No component factory found for the CMS component type '${typeCode}'.\n`, `Make sure you add a component to the 'entryComponents' array in the NgModule.`);
+            return null;
+        }
+        return factory;
+    }
+    /**
+     * @param {?} typeCode
+     * @return {?}
+     */
+    isWebComponent(typeCode) {
+        /** @type {?} */
+        const component = this.getComponent(typeCode);
+        return typeof component === 'string' && (component || '').includes('#');
+    }
+    /**
+     * @param {?} componentType
+     * @param {?} renderer
+     * @return {?}
+     */
+    initWebComponent(componentType, renderer) {
+        return new Promise((/**
+         * @param {?} resolve
+         * @return {?}
+         */
+        resolve => {
+            const [path, selector] = this.getComponent(componentType).split('#');
+            /** @type {?} */
+            let script = this.loadedWebComponents[path];
+            if (!script) {
+                script = renderer.createElement('script');
+                this.loadedWebComponents[path] = script;
+                script.setAttribute('src', path);
+                renderer.appendChild(this.document.body, script);
+                if (isPlatformBrowser(this.platform)) {
+                    script.onload = (/**
+                     * @return {?}
+                     */
+                    () => {
+                        script.onload = null;
+                    });
+                }
+            }
+            if (script.onload) {
+                // If script is still loading (has onload callback defined)
+                // add new callback and chain it with the existing one.
+                // Needed to support loading multiple components from one script
+                /** @type {?} */
+                const chainedOnload = script.onload;
+                script.onload = (/**
+                 * @return {?}
+                 */
+                () => {
+                    chainedOnload();
+                    resolve(selector);
+                });
+            }
+            else {
+                resolve(selector);
+            }
+        }));
+    }
+}
+ComponentMapperService.decorators = [
+    { type: Injectable, args: [{ providedIn: 'root' },] }
+];
+/** @nocollapse */
+ComponentMapperService.ctorParameters = () => [
+    { type: ComponentFactoryResolver },
+    { type: CmsConfig },
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
+    { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
+];
+/** @nocollapse */ ComponentMapperService.ngInjectableDef = ɵɵdefineInjectable({ factory: function ComponentMapperService_Factory() { return new ComponentMapperService(ɵɵinject(ComponentFactoryResolver), ɵɵinject(CmsConfig), ɵɵinject(DOCUMENT), ɵɵinject(PLATFORM_ID)); }, token: ComponentMapperService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
@@ -6291,7 +6421,7 @@ class PageSlotComponent {
 PageSlotComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-page-slot',
-                template: "<ng-container *cxOutlet=\"(position$ | async)\">\n  <ng-container *ngFor=\"let component of (components$ | async)\">\n    <ng-container\n      *cxOutlet=\"component.flexType\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-container>\n  </ng-container>\n</ng-container>\n",
+                template: "<ng-template [cxOutlet]=\"position$ | async\" [cxOutletContext]=\"{}\">\n  <ng-container *ngFor=\"let component of (components$ | async)\">\n    <ng-template\n      [cxOutlet]=\"component.flexType\"\n      [cxOutletContext]=\"{}\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-template>\n  </ng-container>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -6338,7 +6468,7 @@ LoginModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             LoginComponent: {
-                                selector: 'cx-login',
+                                component: LoginComponent,
                             },
                         },
                     }))),
@@ -6691,7 +6821,7 @@ class PageLayoutComponent {
 PageLayoutComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-page-layout',
-                template: "<!-- ???? {{ layoutName$ | async }} -->\n<ng-container *cxOutlet=\"(layoutName$ | async)\">\n  <ng-content></ng-content>\n\n  <!-- {{ slots$ | async }} -->\n  <cx-page-slot\n    *ngFor=\"let slot of (slots$ | async)\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-container>\n",
+                template: "<!-- ???? {{ layoutName$ | async }} -->\n<ng-template [cxOutlet]=\"layoutName$ | async\" [cxOutletContext]=\"{}\">\n  <ng-content></ng-content>\n\n  <!-- {{ slots$ | async }} -->\n  <cx-page-slot\n    *ngFor=\"let slot of (slots$ | async)\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -6895,7 +7025,7 @@ RegisterComponentModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             RegisterCustomerComponent: {
-                                selector: 'cx-register',
+                                component: RegisterComponent,
                                 guards: [NotAuthGuard],
                             },
                         },
@@ -8029,13 +8159,13 @@ BannerModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             SimpleResponsiveBannerComponent: {
-                                selector: 'cx-banner',
+                                component: BannerComponent,
                             },
                             BannerComponent: {
-                                selector: 'cx-banner',
+                                component: BannerComponent,
                             },
                             SimpleBannerComponent: {
-                                selector: 'cx-banner',
+                                component: BannerComponent,
                             },
                         },
                     }))),
@@ -8083,7 +8213,7 @@ LinkModule.decorators = [
                     GenericLinkModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
-                            CMSLinkComponent: { selector: 'cx-link' },
+                            CMSLinkComponent: { component: LinkComponent },
                         },
                     }))),
                 ],
@@ -8129,8 +8259,12 @@ CmsParagraphModule.decorators = [
                     CommonModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
-                            CMSParagraphComponent: { selector: 'cx-paragraph' },
-                            CMSTabParagraphComponent: { selector: 'cx-paragraph' },
+                            CMSParagraphComponent: {
+                                component: ParagraphComponent,
+                            },
+                            CMSTabParagraphComponent: {
+                                component: ParagraphComponent,
+                            },
                         },
                     }))),
                 ],
@@ -8183,7 +8317,7 @@ class TabParagraphContainerComponent {
 TabParagraphContainerComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-tab-paragraph-container',
-                template: "<ng-container *ngFor=\"let component of (components$ | async); let i = index\">\n  <h3 [class.active]=\"i === activeTabNum\" (click)=\"select(i)\">\n    {{ component.title | cxTranslate }}\n  </h3>\n  <div [class.active]=\"i === activeTabNum\">\n    <ng-container\n      *cxOutlet=\"component.flexType\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-container>\n  </div>\n</ng-container>\n",
+                template: "<ng-container *ngFor=\"let component of (components$ | async); let i = index\">\n  <h3 [class.active]=\"i === activeTabNum\" (click)=\"select(i)\">\n    {{ component.title | cxTranslate }}\n  </h3>\n  <div [class.active]=\"i === activeTabNum\">\n    <ng-template\n      [cxOutlet]=\"component.flexType\"\n      [cxOutletContext]=\"{}\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-template>\n  </div>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -8205,7 +8339,9 @@ TabParagraphContainerModule.decorators = [
                     CommonModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
-                            CMSTabParagraphContainer: { selector: 'cx-tab-paragraph-container' },
+                            CMSTabParagraphContainer: {
+                                component: TabParagraphContainerComponent,
+                            },
                         },
                     }))),
                     PageComponentModule,
@@ -8426,7 +8562,7 @@ AddressBookModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             AccountAddressBookComponent: {
-                                selector: 'cx-address-book',
+                                component: AddressBookComponent,
                                 providers: [
                                     {
                                         provide: AddressBookComponentService,
@@ -8603,7 +8739,7 @@ CloseAccountModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             CloseAccountComponent: {
-                                selector: 'cx-close-account',
+                                component: CloseAccountComponent,
                                 guards: [AuthGuard],
                             },
                         },
@@ -8824,7 +8960,7 @@ ConsentManagementModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             ConsentManagementComponent: {
-                                selector: 'cx-consent-management',
+                                component: ConsentManagementComponent,
                                 guards: [AuthGuard],
                             },
                         },
@@ -8914,7 +9050,7 @@ ForgotPasswordModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             ForgotPasswordComponent: {
-                                selector: 'cx-forgot-password',
+                                component: ForgotPasswordComponent,
                                 guards: [NotAuthGuard],
                             },
                         },
@@ -9235,16 +9371,16 @@ OrderDetailsModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             AccountOrderDetailsHeadlineComponent: {
-                                selector: 'cx-order-details-headline',
+                                component: OrderDetailHeadlineComponent,
                             },
                             AccountOrderDetailsItemsComponent: {
-                                selector: 'cx-order-details-items',
+                                component: OrderDetailItemsComponent,
                             },
                             AccountOrderDetailsTotalsComponent: {
-                                selector: 'cx-order-details-totals',
+                                component: OrderDetailTotalsComponent,
                             },
                             AccountOrderDetailsShippingComponent: {
-                                selector: 'cx-order-details-shipping',
+                                component: OrderDetailShippingComponent,
                             },
                         },
                     }))),
@@ -9388,7 +9524,7 @@ OrderHistoryModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             AccountOrderHistoryComponent: {
-                                selector: 'cx-order-history',
+                                component: OrderHistoryComponent,
                                 guards: [AuthGuard],
                             },
                         },
@@ -9560,7 +9696,7 @@ PaymentMethodsModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             AccountPaymentDetailsComponent: {
-                                selector: 'cx-payment-methods',
+                                component: PaymentMethodsComponent,
                                 guards: [AuthGuard],
                             },
                         },
@@ -9676,7 +9812,7 @@ ResetPasswordModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             ResetPasswordComponent: {
-                                selector: 'cx-reset-password-form',
+                                component: ResetPasswordFormComponent,
                                 guards: [NotAuthGuard],
                             },
                         },
@@ -9873,7 +10009,7 @@ UpdateEmailModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             UpdateEmailComponent: {
-                                selector: 'cx-update-email',
+                                component: UpdateEmailComponent,
                                 guards: [AuthGuard],
                             },
                         },
@@ -10076,7 +10212,7 @@ UpdatePasswordModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             UpdatePasswordComponent: {
-                                selector: 'cx-update-password',
+                                component: UpdatePasswordComponent,
                                 guards: [AuthGuard],
                             },
                         },
@@ -10267,7 +10403,7 @@ UpdateProfileModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             UpdateProfileComponent: {
-                                selector: 'cx-update-profile',
+                                component: UpdateProfileComponent,
                                 guards: [AuthGuard],
                             },
                         },
@@ -10365,7 +10501,9 @@ BreadcrumbModule.decorators = [
                     RouterModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
-                            BreadcrumbComponent: { selector: 'cx-breadcrumb' },
+                            BreadcrumbComponent: {
+                                component: BreadcrumbComponent,
+                            },
                         },
                     }))),
                     CmsPageTitleModule,
@@ -10796,7 +10934,7 @@ NavigationModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             NavigationComponent: {
-                                selector: 'cx-navigation',
+                                component: NavigationComponent,
                                 providers: [
                                     {
                                         provide: NavigationComponentService,
@@ -10829,7 +10967,7 @@ CategoryNavigationModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             CategoryNavigationComponent: {
-                                selector: 'cx-category-navigation',
+                                component: CategoryNavigationComponent,
                                 providers: [
                                     {
                                         provide: NavigationComponentService,
@@ -10894,7 +11032,7 @@ FooterNavigationModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             FooterNavigationComponent: {
-                                selector: 'cx-footer-navigation',
+                                component: FooterNavigationComponent,
                                 providers: [
                                     {
                                         provide: NavigationComponentService,
@@ -11358,7 +11496,7 @@ SearchBoxModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             SearchBoxComponent: {
-                                selector: 'cx-searchbox',
+                                component: SearchBoxComponent,
                             },
                         },
                     }))),
@@ -11625,7 +11763,7 @@ ProductCarouselModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             ProductCarouselComponent: {
-                                selector: 'cx-product-carousel',
+                                component: ProductCarouselComponent,
                                 providers: [
                                     {
                                         provide: ProductCarouselService,
@@ -11842,7 +11980,7 @@ ProductReferencesModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             ProductReferencesComponent: {
-                                selector: 'cx-product-references',
+                                component: ProductReferencesComponent,
                                 providers: [
                                     {
                                         provide: ProductReferencesService,
@@ -11998,7 +12136,7 @@ ProductDetailsComponent.outlets = ProductDetailOutlets;
 ProductDetailsComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-product-details',
-                template: "<ng-container *ngIf=\"(product$ | async) as product\">\n  <ng-container *cxOutlet=\"outlets.SUMMARY\">\n    <cx-product-summary [product]=\"product\"> </cx-product-summary>\n  </ng-container>\n</ng-container>\n"
+                template: "<ng-container *ngIf=\"(product$ | async) as product\">\n  <ng-template\n    [cxOutlet]=\"outlets.SUMMARY\"\n    [cxOutletContext]=\"{ product: product }\"\n  >\n    <cx-product-summary [product]=\"product\"> </cx-product-summary>\n  </ng-template>\n</ng-container>\n"
             }] }
 ];
 /** @nocollapse */
@@ -12118,7 +12256,7 @@ ProductSummaryComponent.outlets = ProductDetailOutlets;
 ProductSummaryComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-product-summary',
-                template: "<ng-container *cxOutlet=\"outlets.RATING\">\n  <div class=\"rating\">\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"count\">({{ product?.numberOfReviews }})</div>\n    <a class=\"btn-link\" *ngIf=\"reviewsTabAvailable\" (click)=\"showReviews()\">{{\n      'productSummary.showReviews' | cxTranslate\n    }}</a>\n  </div>\n</ng-container>\n<ng-container *cxOutlet=\"outlets.TITLE\">\n  <!-- <div class=\"name\">{{ product?.name }}</div> -->\n  <div class=\"code\">\n    {{ 'productSummary.id' | cxTranslate }} {{ product?.code }}\n  </div>\n</ng-container>\n\n<ng-container *cxOutlet=\"outlets.PRICE\">\n  <div class=\"price\" aria-label=\"new item price\">\n    {{ product?.price?.formattedValue }}\n  </div>\n</ng-container>\n\n<ng-container *cxOutlet=\"outlets.DESCRIPTION\">\n  <div class=\"description\"><p [innerHTML]=\"product?.summary\"></p></div>\n</ng-container>\n\n<cx-page-slot position=\"AddToCart\"></cx-page-slot>\n\n<!-- @TODO: Temp. Comment out share link while not in use by CMS -->\n<!-- <ng-container *cxOutlet=\"outlets.SHARE\">\n  <div>\n    <a href=\"#\" class=\"share btn-link\">\n      {{ 'productSummary.share' | cxTranslate }}\n    </a>\n  </div>\n</ng-container> -->\n",
+                template: "<ng-template\n  [cxOutlet]=\"outlets.RATING\"\n  [cxOutletContext]=\"{ product: product }\"\n>\n  <div class=\"rating\">\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"count\">({{ product?.numberOfReviews }})</div>\n    <a class=\"btn-link\" *ngIf=\"reviewsTabAvailable\" (click)=\"showReviews()\">{{\n      'productSummary.showReviews' | cxTranslate\n    }}</a>\n  </div>\n</ng-template>\n<ng-template\n  [cxOutlet]=\"outlets.TITLE\"\n  [cxOutletContext]=\"{ product: product }\"\n>\n  <!-- <div class=\"name\">{{ product?.name }}</div> -->\n  <div class=\"code\">\n    {{ 'productSummary.id' | cxTranslate }} {{ product?.code }}\n  </div>\n</ng-template>\n\n<ng-template\n  [cxOutlet]=\"outlets.PRICE\"\n  [cxOutletContext]=\"{ product: product }\"\n>\n  <div class=\"price\" aria-label=\"new item price\">\n    {{ product?.price?.formattedValue }}\n  </div>\n</ng-template>\n\n<ng-template\n  [cxOutlet]=\"outlets.DESCRIPTION\"\n  [cxOutletContext]=\"{ product: product }\"\n>\n  <div class=\"description\"><p [innerHTML]=\"product?.summary\"></p></div>\n</ng-template>\n\n<cx-page-slot position=\"AddToCart\"></cx-page-slot>\n\n<!-- @TODO: Temp. Comment out share link while not in use by CMS -->\n<!-- <ng-template [cxOutlet]=\"outlets.SHARE\" [cxOutletContext]=\"{ product: product }\">\n  <div>\n    <a href=\"#\" class=\"share btn-link\">\n      {{ 'productSummary.share' | cxTranslate }}\n    </a>\n  </div>\n</ng-template> -->\n",
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 providers: [TranslatePipe]
             }] }
@@ -12573,9 +12711,15 @@ ProductListModule.decorators = [
                     CommonModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
-                            CMSProductListComponent: { selector: 'cx-product-list' },
-                            SearchResultsListComponent: { selector: 'cx-product-list' },
-                            ProductRefinementComponent: { selector: 'cx-product-facet-navigation' },
+                            CMSProductListComponent: {
+                                component: ProductListComponent,
+                            },
+                            SearchResultsListComponent: {
+                                component: ProductListComponent,
+                            },
+                            ProductRefinementComponent: {
+                                component: ProductFacetNavigationComponent,
+                            },
                         },
                     }))),
                     RouterModule,
@@ -12823,13 +12967,13 @@ ProductTabsModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             ProductDetailsTabComponent: {
-                                selector: 'cx-product-details-tab',
+                                component: ProductDetailsTabComponent,
                             },
                             ProductSpecsTabComponent: {
-                                selector: 'cx-product-attributes',
+                                component: ProductAttributesComponent,
                             },
                             ProductReviewsTabComponent: {
-                                selector: 'cx-product-reviews',
+                                component: ProductReviewsComponent,
                             },
                         },
                     }))),
@@ -12868,7 +13012,7 @@ ProductImagesModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             CMSProductImages: {
-                                selector: 'cx-product-images',
+                                component: ProductImagesComponent,
                             },
                         },
                     }))),
@@ -13177,19 +13321,19 @@ OrderConfirmationModule.decorators = [
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             OrderConfirmationThankMessageComponent: {
-                                selector: 'cx-order-confirmation-thank-you-message',
+                                component: OrderConfirmationThankYouMessageComponent,
                                 guards: [AuthGuard, OrderConfirmationGuard],
                             },
                             OrderConfirmationItemsComponent: {
-                                selector: 'cx-order-confirmation-items',
+                                component: OrderConfirmationItemsComponent,
                                 guards: [AuthGuard, OrderConfirmationGuard],
                             },
                             OrderConfirmationTotalsComponent: {
-                                selector: 'cx-order-confirmation-totals',
+                                component: OrderConfirmationTotalsComponent,
                                 guards: [AuthGuard, OrderConfirmationGuard],
                             },
                             OrderConfirmationOverviewComponent: {
-                                selector: 'cx-order-confirmation-overview',
+                                component: OrderConfirmationOverviewComponent,
                                 guards: [AuthGuard, OrderConfirmationGuard],
                             },
                         },
@@ -13755,5 +13899,5 @@ B2cStorefrontModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormComponentsModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationComponentService, NavigationModule, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductDetailOutlets, ProductDetailsComponent, ProductDetailsModule, ProductDetailsPageComponent, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPdpComponents, defaultPdpSlots, fontawesomeIconConfig, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, AutoFocusDirectiveModule as ɵa, defaultCheckoutConfig as ɵb, CheckoutConfigService as ɵc, CardModule as ɵd, CardComponent as ɵe, NavigationUIComponent as ɵf, HighlightPipe as ɵg, ProductDetailsTabModule as ɵh, ProductDetailsTabComponent as ɵi, ProductCarouselService as ɵj, SharedCarouselService as ɵk, ProductReferencesService as ɵl, CmsRoutesService as ɵm, CmsMappingService as ɵn, CmsI18nService as ɵo, CmsGuardsService as ɵp, AddToHomeScreenService as ɵq, ProductImagesModule as ɵr, suffixUrlMatcher as ɵs, addCmsRoute as ɵt, htmlLangProvider as ɵu, setHtmlLangAttribute as ɵv, RoutingModule as ɵw, defaultStorefrontRoutesConfig as ɵx, defaultRoutingConfig as ɵy };
+export { AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormComponentsModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationComponentService, NavigationModule, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductDetailOutlets, ProductDetailsComponent, ProductDetailsModule, ProductDetailsPageComponent, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPdpComponents, defaultPdpSlots, fontawesomeIconConfig, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, AutoFocusDirectiveModule as ɵa, defaultCheckoutConfig as ɵb, CheckoutConfigService as ɵc, CardModule as ɵd, CardComponent as ɵe, NavigationUIComponent as ɵf, HighlightPipe as ɵg, ProductDetailsTabModule as ɵh, ProductDetailsTabComponent as ɵi, ComponentMapperService as ɵj, ProductCarouselService as ɵk, SharedCarouselService as ɵl, ProductReferencesService as ɵm, CmsRoutesService as ɵn, CmsMappingService as ɵo, CmsI18nService as ɵp, CmsGuardsService as ɵq, AddToHomeScreenService as ɵr, ProductImagesModule as ɵs, suffixUrlMatcher as ɵt, addCmsRoute as ɵu, htmlLangProvider as ɵv, setHtmlLangAttribute as ɵw, RoutingModule as ɵx, defaultStorefrontRoutesConfig as ɵy, defaultRoutingConfig as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map

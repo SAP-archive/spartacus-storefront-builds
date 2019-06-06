@@ -2775,7 +2775,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     CMSSiteContextComponent: {
-                                        selector: 'cx-site-context-selector',
+                                        component: SiteContextSelectorComponent,
                                         providers: [
                                             {
                                                 provide: SiteContextComponentService,
@@ -2785,7 +2785,7 @@
                                         ],
                                     },
                                     LanguageCurrencyComponent: {
-                                        selector: 'cx-language-currency-selector',
+                                        component: LanguageCurrencyComponent,
                                     },
                                 },
                             }))),
@@ -3352,7 +3352,9 @@
                             SpinnerModule,
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
-                                    ProductAddToCartComponent: { selector: 'cx-add-to-cart' },
+                                    ProductAddToCartComponent: {
+                                        component: AddToCartComponent,
+                                    },
                                 },
                             }))),
                             core$1.UrlModule,
@@ -3441,7 +3443,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     CartComponent: {
-                                        selector: 'cx-cart-details',
+                                        component: CartDetailsComponent,
                                     },
                                 },
                             }))),
@@ -3620,7 +3622,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     CartTotalsComponent: {
-                                        selector: 'cx-cart-totals',
+                                        component: CartTotalsComponent,
                                     },
                                 },
                             }))),
@@ -3689,7 +3691,9 @@
                             core$1.CartModule,
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
-                                    MiniCartComponent: { selector: 'cx-mini-cart' },
+                                    MiniCartComponent: {
+                                        component: MiniCartComponent,
+                                    },
                                 },
                             }))),
                             core$1.UrlModule,
@@ -4031,7 +4035,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     CheckoutOrchestrator: {
-                                        selector: 'cx-checkout-orchestrator',
+                                        component: CheckoutOrchestratorComponent,
                                         guards: [core$1.AuthGuard, CartNotEmptyGuard, CheckoutGuard],
                                     },
                                 },
@@ -4084,7 +4088,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     CheckoutOrderSummary: {
-                                        selector: 'cx-checkout-order-summary',
+                                        component: CheckoutOrderSummaryComponent,
                                     },
                                 },
                             }))),
@@ -4169,7 +4173,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     CheckoutProgressMobileBottom: {
-                                        selector: 'cx-checkout-progress-mobile-bottom',
+                                        component: CheckoutProgressMobileBottomComponent,
                                         guards: [core$1.AuthGuard, CartNotEmptyGuard],
                                     },
                                 },
@@ -4258,7 +4262,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     CheckoutProgressMobileTop: {
-                                        selector: 'cx-checkout-progress-mobile-top',
+                                        component: CheckoutProgressMobileTopComponent,
                                         guards: [core$1.AuthGuard, CartNotEmptyGuard],
                                     },
                                 },
@@ -4345,7 +4349,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     CheckoutProgress: {
-                                        selector: 'cx-checkout-progress',
+                                        component: CheckoutProgressComponent,
                                         guards: [core$1.AuthGuard, CartNotEmptyGuard],
                                     },
                                 },
@@ -4655,7 +4659,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     CheckoutDeliveryMode: {
-                                        selector: 'cx-delivery-mode',
+                                        component: DeliveryModeComponent,
                                         guards: [core$1.AuthGuard, CartNotEmptyGuard, ShippingAddressSetGuard],
                                     },
                                 },
@@ -5637,7 +5641,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     CheckoutPaymentDetails: {
-                                        selector: 'cx-payment-method',
+                                        component: PaymentMethodComponent,
                                         guards: [
                                             core$1.AuthGuard,
                                             CartNotEmptyGuard,
@@ -5751,7 +5755,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     CheckoutPlaceOrder: {
-                                        selector: 'cx-place-order',
+                                        component: PlaceOrderComponent,
                                         guards: [core$1.AuthGuard, CartNotEmptyGuard],
                                     },
                                 },
@@ -6002,7 +6006,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     CheckoutReviewOrder: {
-                                        selector: 'cx-review-submit',
+                                        component: ReviewSubmitComponent,
                                         guards: [
                                             core$1.AuthGuard,
                                             CartNotEmptyGuard,
@@ -6592,7 +6596,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     CheckoutShippingAddress: {
-                                        selector: 'cx-shipping-address',
+                                        component: ShippingAddressComponent,
                                         guards: [core$1.AuthGuard, CartNotEmptyGuard],
                                     },
                                 },
@@ -6777,7 +6781,9 @@
                             common.CommonModule,
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
-                                    HamburgerMenuComponent: { selector: 'cx-hamburger-menu' },
+                                    HamburgerMenuComponent: {
+                                        component: HamburgerMenuComponent,
+                                    },
                                 },
                             }))),
                         ],
@@ -6981,31 +6987,12 @@
             if (template || replace) {
                 /** @type {?} */
                 var ref = this.vcr.createEmbeddedView(template || this.templateRef, {
-                    $implicit: this.context,
+                    $implicit: this._context,
                 });
                 nodes.push.apply(nodes, __spread(ref.rootNodes));
             }
             return nodes;
         };
-        Object.defineProperty(OutletDirective.prototype, "context", {
-            get: /**
-             * @private
-             * @return {?}
-             */
-            function () {
-                // return specific context if provided
-                if (this._context) {
-                    return this._context;
-                }
-                /** @type {?} */
-                var ctx = ((/** @type {?} */ (this.vcr.injector))).view.context;
-                // the context might already be given $implicit
-                // by a parent *ngIf or *ngFor
-                return ctx.$implicit || ctx;
-            },
-            enumerable: true,
-            configurable: true
-        });
         OutletDirective.decorators = [
             { type: core.Directive, args: [{
                         selector: '[cxOutlet]',
@@ -7194,7 +7181,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     ReturningCustomerLoginComponent: {
-                                        selector: 'cx-login-form',
+                                        component: LoginFormComponent,
                                         guards: [core$1.NotAuthGuard],
                                     },
                                 },
@@ -7251,6 +7238,196 @@
             { type: core$1.UserService }
         ]; };
         return LoginComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ComponentMapperService = /** @class */ (function () {
+        function ComponentMapperService(componentFactoryResolver, config, document, platform) {
+            this.componentFactoryResolver = componentFactoryResolver;
+            this.config = config;
+            this.document = document;
+            this.platform = platform;
+            this.missingComponents = [];
+            this.loadedWebComponents = {};
+        }
+        /**
+         * @desc
+         * returns a web component for the CMS typecode.
+         *
+         * The mapping of CMS components to web componetns requires a mapping.
+         * This is configurable when the module is loaded.
+         *
+         * For example:
+         *
+         *  {
+         *      'CMSLinkComponent': 'LinkComponent',
+         *      'SimpleResponsiveBannerComponent': 'SimpleResponsiveBannerComponent',
+         *      [etc.]
+         *  }
+         *
+         * The type codes are dynamic since they depend on the implementation.
+         * Customer will add, extend or ingore standard components.
+         *
+         * @param typeCode the component type
+         */
+        /**
+         * @desc
+         * returns a web component for the CMS typecode.
+         *
+         * The mapping of CMS components to web componetns requires a mapping.
+         * This is configurable when the module is loaded.
+         *
+         * For example:
+         *
+         *  {
+         *      'CMSLinkComponent': 'LinkComponent',
+         *      'SimpleResponsiveBannerComponent': 'SimpleResponsiveBannerComponent',
+         *      [etc.]
+         *  }
+         *
+         * The type codes are dynamic since they depend on the implementation.
+         * Customer will add, extend or ingore standard components.
+         *
+         * @protected
+         * @param {?} typeCode the component type
+         * @return {?}
+         */
+        ComponentMapperService.prototype.getComponent = /**
+         * @desc
+         * returns a web component for the CMS typecode.
+         *
+         * The mapping of CMS components to web componetns requires a mapping.
+         * This is configurable when the module is loaded.
+         *
+         * For example:
+         *
+         *  {
+         *      'CMSLinkComponent': 'LinkComponent',
+         *      'SimpleResponsiveBannerComponent': 'SimpleResponsiveBannerComponent',
+         *      [etc.]
+         *  }
+         *
+         * The type codes are dynamic since they depend on the implementation.
+         * Customer will add, extend or ingore standard components.
+         *
+         * @protected
+         * @param {?} typeCode the component type
+         * @return {?}
+         */
+        function (typeCode) {
+            /** @type {?} */
+            var componentConfig = this.config.cmsComponents[typeCode];
+            if (!componentConfig) {
+                if (!this.missingComponents.includes(typeCode)) {
+                    this.missingComponents.push(typeCode);
+                    console.warn("No component implementation found for the CMS component type '" + typeCode + "'.\n", "Make sure you implement a component and register it in the mapper.");
+                }
+            }
+            return componentConfig ? componentConfig.component : null;
+        };
+        /**
+         * @param {?} typeCode
+         * @return {?}
+         */
+        ComponentMapperService.prototype.getComponentFactoryByCode = /**
+         * @param {?} typeCode
+         * @return {?}
+         */
+        function (typeCode) {
+            /** @type {?} */
+            var component = this.getComponent(typeCode);
+            if (!component) {
+                return null;
+            }
+            /** @type {?} */
+            var factory = this.componentFactoryResolver.resolveComponentFactory(component);
+            if (!factory) {
+                console.warn("No component factory found for the CMS component type '" + typeCode + "'.\n", "Make sure you add a component to the 'entryComponents' array in the NgModule.");
+                return null;
+            }
+            return factory;
+        };
+        /**
+         * @param {?} typeCode
+         * @return {?}
+         */
+        ComponentMapperService.prototype.isWebComponent = /**
+         * @param {?} typeCode
+         * @return {?}
+         */
+        function (typeCode) {
+            /** @type {?} */
+            var component = this.getComponent(typeCode);
+            return typeof component === 'string' && (component || '').includes('#');
+        };
+        /**
+         * @param {?} componentType
+         * @param {?} renderer
+         * @return {?}
+         */
+        ComponentMapperService.prototype.initWebComponent = /**
+         * @param {?} componentType
+         * @param {?} renderer
+         * @return {?}
+         */
+        function (componentType, renderer) {
+            var _this = this;
+            return new Promise((/**
+             * @param {?} resolve
+             * @return {?}
+             */
+            function (resolve) {
+                var _a = __read(_this.getComponent(componentType).split('#'), 2), path = _a[0], selector = _a[1];
+                /** @type {?} */
+                var script = _this.loadedWebComponents[path];
+                if (!script) {
+                    script = renderer.createElement('script');
+                    _this.loadedWebComponents[path] = script;
+                    script.setAttribute('src', path);
+                    renderer.appendChild(_this.document.body, script);
+                    if (common.isPlatformBrowser(_this.platform)) {
+                        script.onload = (/**
+                         * @return {?}
+                         */
+                        function () {
+                            script.onload = null;
+                        });
+                    }
+                }
+                if (script.onload) {
+                    // If script is still loading (has onload callback defined)
+                    // add new callback and chain it with the existing one.
+                    // Needed to support loading multiple components from one script
+                    /** @type {?} */
+                    var chainedOnload_1 = script.onload;
+                    script.onload = (/**
+                     * @return {?}
+                     */
+                    function () {
+                        chainedOnload_1();
+                        resolve(selector);
+                    });
+                }
+                else {
+                    resolve(selector);
+                }
+            }));
+        };
+        ComponentMapperService.decorators = [
+            { type: core.Injectable, args: [{ providedIn: 'root' },] }
+        ];
+        /** @nocollapse */
+        ComponentMapperService.ctorParameters = function () { return [
+            { type: core.ComponentFactoryResolver },
+            { type: core$1.CmsConfig },
+            { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] },
+            { type: undefined, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
+        ]; };
+        /** @nocollapse */ ComponentMapperService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function ComponentMapperService_Factory() { return new ComponentMapperService(core.ɵɵinject(core.ComponentFactoryResolver), core.ɵɵinject(core$1.CmsConfig), core.ɵɵinject(common.DOCUMENT), core.ɵɵinject(core.PLATFORM_ID)); }, token: ComponentMapperService, providedIn: "root" });
+        return ComponentMapperService;
     }());
 
     /**
@@ -7419,7 +7596,7 @@
         /** @nocollapse */
         ComponentWrapperDirective.ctorParameters = function () { return [
             { type: core.ViewContainerRef },
-            { type: core$1.ComponentMapperService },
+            { type: ComponentMapperService },
             { type: core.Injector },
             { type: core$1.CmsService },
             { type: core$1.DynamicAttributeService },
@@ -7566,7 +7743,7 @@
         PageSlotComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-page-slot',
-                        template: "<ng-container *cxOutlet=\"(position$ | async)\">\n  <ng-container *ngFor=\"let component of (components$ | async)\">\n    <ng-container\n      *cxOutlet=\"component.flexType\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-container>\n  </ng-container>\n</ng-container>\n",
+                        template: "<ng-template [cxOutlet]=\"position$ | async\" [cxOutletContext]=\"{}\">\n  <ng-container *ngFor=\"let component of (components$ | async)\">\n    <ng-template\n      [cxOutlet]=\"component.flexType\"\n      [cxOutletContext]=\"{}\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-template>\n  </ng-container>\n</ng-template>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -7619,7 +7796,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     LoginComponent: {
-                                        selector: 'cx-login',
+                                        component: LoginComponent,
                                     },
                                 },
                             }))),
@@ -8078,7 +8255,7 @@
         PageLayoutComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-page-layout',
-                        template: "<!-- ???? {{ layoutName$ | async }} -->\n<ng-container *cxOutlet=\"(layoutName$ | async)\">\n  <ng-content></ng-content>\n\n  <!-- {{ slots$ | async }} -->\n  <cx-page-slot\n    *ngFor=\"let slot of (slots$ | async)\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-container>\n",
+                        template: "<!-- ???? {{ layoutName$ | async }} -->\n<ng-template [cxOutlet]=\"layoutName$ | async\" [cxOutletContext]=\"{}\">\n  <ng-content></ng-content>\n\n  <!-- {{ slots$ | async }} -->\n  <cx-page-slot\n    *ngFor=\"let slot of (slots$ | async)\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-template>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -8301,7 +8478,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     RegisterCustomerComponent: {
-                                        selector: 'cx-register',
+                                        component: RegisterComponent,
                                         guards: [core$1.NotAuthGuard],
                                     },
                                 },
@@ -9645,13 +9822,13 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     SimpleResponsiveBannerComponent: {
-                                        selector: 'cx-banner',
+                                        component: BannerComponent,
                                     },
                                     BannerComponent: {
-                                        selector: 'cx-banner',
+                                        component: BannerComponent,
                                     },
                                     SimpleBannerComponent: {
-                                        selector: 'cx-banner',
+                                        component: BannerComponent,
                                     },
                                 },
                             }))),
@@ -9700,7 +9877,7 @@
                             GenericLinkModule,
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
-                                    CMSLinkComponent: { selector: 'cx-link' },
+                                    CMSLinkComponent: { component: LinkComponent },
                                 },
                             }))),
                         ],
@@ -9747,8 +9924,12 @@
                             common.CommonModule,
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
-                                    CMSParagraphComponent: { selector: 'cx-paragraph' },
-                                    CMSTabParagraphComponent: { selector: 'cx-paragraph' },
+                                    CMSParagraphComponent: {
+                                        component: ParagraphComponent,
+                                    },
+                                    CMSTabParagraphComponent: {
+                                        component: ParagraphComponent,
+                                    },
                                 },
                             }))),
                         ],
@@ -9807,7 +9988,7 @@
         TabParagraphContainerComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-tab-paragraph-container',
-                        template: "<ng-container *ngFor=\"let component of (components$ | async); let i = index\">\n  <h3 [class.active]=\"i === activeTabNum\" (click)=\"select(i)\">\n    {{ component.title | cxTranslate }}\n  </h3>\n  <div [class.active]=\"i === activeTabNum\">\n    <ng-container\n      *cxOutlet=\"component.flexType\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-container>\n  </div>\n</ng-container>\n",
+                        template: "<ng-container *ngFor=\"let component of (components$ | async); let i = index\">\n  <h3 [class.active]=\"i === activeTabNum\" (click)=\"select(i)\">\n    {{ component.title | cxTranslate }}\n  </h3>\n  <div [class.active]=\"i === activeTabNum\">\n    <ng-template\n      [cxOutlet]=\"component.flexType\"\n      [cxOutletContext]=\"{}\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-template>\n  </div>\n</ng-container>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -9832,7 +10013,9 @@
                             common.CommonModule,
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
-                                    CMSTabParagraphContainer: { selector: 'cx-tab-paragraph-container' },
+                                    CMSTabParagraphContainer: {
+                                        component: TabParagraphContainerComponent,
+                                    },
                                 },
                             }))),
                             PageComponentModule,
@@ -10109,7 +10292,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     AccountAddressBookComponent: {
-                                        selector: 'cx-address-book',
+                                        component: AddressBookComponent,
                                         providers: [
                                             {
                                                 provide: AddressBookComponentService,
@@ -10302,7 +10485,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     CloseAccountComponent: {
-                                        selector: 'cx-close-account',
+                                        component: CloseAccountComponent,
                                         guards: [core$1.AuthGuard],
                                     },
                                 },
@@ -10579,7 +10762,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     ConsentManagementComponent: {
-                                        selector: 'cx-consent-management',
+                                        component: ConsentManagementComponent,
                                         guards: [core$1.AuthGuard],
                                     },
                                 },
@@ -10674,7 +10857,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     ForgotPasswordComponent: {
-                                        selector: 'cx-forgot-password',
+                                        component: ForgotPasswordComponent,
                                         guards: [core$1.NotAuthGuard],
                                     },
                                 },
@@ -11027,16 +11210,16 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     AccountOrderDetailsHeadlineComponent: {
-                                        selector: 'cx-order-details-headline',
+                                        component: OrderDetailHeadlineComponent,
                                     },
                                     AccountOrderDetailsItemsComponent: {
-                                        selector: 'cx-order-details-items',
+                                        component: OrderDetailItemsComponent,
                                     },
                                     AccountOrderDetailsTotalsComponent: {
-                                        selector: 'cx-order-details-totals',
+                                        component: OrderDetailTotalsComponent,
                                     },
                                     AccountOrderDetailsShippingComponent: {
-                                        selector: 'cx-order-details-shipping',
+                                        component: OrderDetailShippingComponent,
                                     },
                                 },
                             }))),
@@ -11207,7 +11390,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     AccountOrderHistoryComponent: {
-                                        selector: 'cx-order-history',
+                                        component: OrderHistoryComponent,
                                         guards: [core$1.AuthGuard],
                                     },
                                 },
@@ -11410,7 +11593,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     AccountPaymentDetailsComponent: {
-                                        selector: 'cx-payment-methods',
+                                        component: PaymentMethodsComponent,
                                         guards: [core$1.AuthGuard],
                                     },
                                 },
@@ -11540,7 +11723,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     ResetPasswordComponent: {
-                                        selector: 'cx-reset-password-form',
+                                        component: ResetPasswordFormComponent,
                                         guards: [core$1.NotAuthGuard],
                                     },
                                 },
@@ -11771,7 +11954,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     UpdateEmailComponent: {
-                                        selector: 'cx-update-email',
+                                        component: UpdateEmailComponent,
                                         guards: [core$1.AuthGuard],
                                     },
                                 },
@@ -12011,7 +12194,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     UpdatePasswordComponent: {
-                                        selector: 'cx-update-password',
+                                        component: UpdatePasswordComponent,
                                         guards: [core$1.AuthGuard],
                                     },
                                 },
@@ -12231,7 +12414,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     UpdateProfileComponent: {
-                                        selector: 'cx-update-profile',
+                                        component: UpdateProfileComponent,
                                         guards: [core$1.AuthGuard],
                                     },
                                 },
@@ -12342,7 +12525,9 @@
                             router.RouterModule,
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
-                                    BreadcrumbComponent: { selector: 'cx-breadcrumb' },
+                                    BreadcrumbComponent: {
+                                        component: BreadcrumbComponent,
+                                    },
                                 },
                             }))),
                             core$1.CmsPageTitleModule,
@@ -12882,7 +13067,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     NavigationComponent: {
-                                        selector: 'cx-navigation',
+                                        component: NavigationComponent,
                                         providers: [
                                             {
                                                 provide: NavigationComponentService,
@@ -12918,7 +13103,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     CategoryNavigationComponent: {
-                                        selector: 'cx-category-navigation',
+                                        component: CategoryNavigationComponent,
                                         providers: [
                                             {
                                                 provide: NavigationComponentService,
@@ -12984,7 +13169,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     FooterNavigationComponent: {
-                                        selector: 'cx-footer-navigation',
+                                        component: FooterNavigationComponent,
                                         providers: [
                                             {
                                                 provide: NavigationComponentService,
@@ -13632,7 +13817,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     SearchBoxComponent: {
-                                        selector: 'cx-searchbox',
+                                        component: SearchBoxComponent,
                                     },
                                 },
                             }))),
@@ -13970,7 +14155,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     ProductCarouselComponent: {
-                                        selector: 'cx-product-carousel',
+                                        component: ProductCarouselComponent,
                                         providers: [
                                             {
                                                 provide: ProductCarouselService,
@@ -14216,7 +14401,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     ProductReferencesComponent: {
-                                        selector: 'cx-product-references',
+                                        component: ProductReferencesComponent,
                                         providers: [
                                             {
                                                 provide: ProductReferencesService,
@@ -14400,7 +14585,7 @@
         ProductDetailsComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-product-details',
-                        template: "<ng-container *ngIf=\"(product$ | async) as product\">\n  <ng-container *cxOutlet=\"outlets.SUMMARY\">\n    <cx-product-summary [product]=\"product\"> </cx-product-summary>\n  </ng-container>\n</ng-container>\n"
+                        template: "<ng-container *ngIf=\"(product$ | async) as product\">\n  <ng-template\n    [cxOutlet]=\"outlets.SUMMARY\"\n    [cxOutletContext]=\"{ product: product }\"\n  >\n    <cx-product-summary [product]=\"product\"> </cx-product-summary>\n  </ng-template>\n</ng-container>\n"
                     }] }
         ];
         /** @nocollapse */
@@ -14577,7 +14762,7 @@
         ProductSummaryComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-product-summary',
-                        template: "<ng-container *cxOutlet=\"outlets.RATING\">\n  <div class=\"rating\">\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"count\">({{ product?.numberOfReviews }})</div>\n    <a class=\"btn-link\" *ngIf=\"reviewsTabAvailable\" (click)=\"showReviews()\">{{\n      'productSummary.showReviews' | cxTranslate\n    }}</a>\n  </div>\n</ng-container>\n<ng-container *cxOutlet=\"outlets.TITLE\">\n  <!-- <div class=\"name\">{{ product?.name }}</div> -->\n  <div class=\"code\">\n    {{ 'productSummary.id' | cxTranslate }} {{ product?.code }}\n  </div>\n</ng-container>\n\n<ng-container *cxOutlet=\"outlets.PRICE\">\n  <div class=\"price\" aria-label=\"new item price\">\n    {{ product?.price?.formattedValue }}\n  </div>\n</ng-container>\n\n<ng-container *cxOutlet=\"outlets.DESCRIPTION\">\n  <div class=\"description\"><p [innerHTML]=\"product?.summary\"></p></div>\n</ng-container>\n\n<cx-page-slot position=\"AddToCart\"></cx-page-slot>\n\n<!-- @TODO: Temp. Comment out share link while not in use by CMS -->\n<!-- <ng-container *cxOutlet=\"outlets.SHARE\">\n  <div>\n    <a href=\"#\" class=\"share btn-link\">\n      {{ 'productSummary.share' | cxTranslate }}\n    </a>\n  </div>\n</ng-container> -->\n",
+                        template: "<ng-template\n  [cxOutlet]=\"outlets.RATING\"\n  [cxOutletContext]=\"{ product: product }\"\n>\n  <div class=\"rating\">\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"count\">({{ product?.numberOfReviews }})</div>\n    <a class=\"btn-link\" *ngIf=\"reviewsTabAvailable\" (click)=\"showReviews()\">{{\n      'productSummary.showReviews' | cxTranslate\n    }}</a>\n  </div>\n</ng-template>\n<ng-template\n  [cxOutlet]=\"outlets.TITLE\"\n  [cxOutletContext]=\"{ product: product }\"\n>\n  <!-- <div class=\"name\">{{ product?.name }}</div> -->\n  <div class=\"code\">\n    {{ 'productSummary.id' | cxTranslate }} {{ product?.code }}\n  </div>\n</ng-template>\n\n<ng-template\n  [cxOutlet]=\"outlets.PRICE\"\n  [cxOutletContext]=\"{ product: product }\"\n>\n  <div class=\"price\" aria-label=\"new item price\">\n    {{ product?.price?.formattedValue }}\n  </div>\n</ng-template>\n\n<ng-template\n  [cxOutlet]=\"outlets.DESCRIPTION\"\n  [cxOutletContext]=\"{ product: product }\"\n>\n  <div class=\"description\"><p [innerHTML]=\"product?.summary\"></p></div>\n</ng-template>\n\n<cx-page-slot position=\"AddToCart\"></cx-page-slot>\n\n<!-- @TODO: Temp. Comment out share link while not in use by CMS -->\n<!-- <ng-template [cxOutlet]=\"outlets.SHARE\" [cxOutletContext]=\"{ product: product }\">\n  <div>\n    <a href=\"#\" class=\"share btn-link\">\n      {{ 'productSummary.share' | cxTranslate }}\n    </a>\n  </div>\n</ng-template> -->\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush,
                         providers: [core$1.TranslatePipe]
                     }] }
@@ -15127,9 +15312,15 @@
                             common.CommonModule,
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
-                                    CMSProductListComponent: { selector: 'cx-product-list' },
-                                    SearchResultsListComponent: { selector: 'cx-product-list' },
-                                    ProductRefinementComponent: { selector: 'cx-product-facet-navigation' },
+                                    CMSProductListComponent: {
+                                        component: ProductListComponent,
+                                    },
+                                    SearchResultsListComponent: {
+                                        component: ProductListComponent,
+                                    },
+                                    ProductRefinementComponent: {
+                                        component: ProductFacetNavigationComponent,
+                                    },
                                 },
                             }))),
                             router.RouterModule,
@@ -15403,13 +15594,13 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     ProductDetailsTabComponent: {
-                                        selector: 'cx-product-details-tab',
+                                        component: ProductDetailsTabComponent,
                                     },
                                     ProductSpecsTabComponent: {
-                                        selector: 'cx-product-attributes',
+                                        component: ProductAttributesComponent,
                                     },
                                     ProductReviewsTabComponent: {
-                                        selector: 'cx-product-reviews',
+                                        component: ProductReviewsComponent,
                                     },
                                 },
                             }))),
@@ -15451,7 +15642,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     CMSProductImages: {
-                                        selector: 'cx-product-images',
+                                        component: ProductImagesComponent,
                                     },
                                 },
                             }))),
@@ -15797,19 +15988,19 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     OrderConfirmationThankMessageComponent: {
-                                        selector: 'cx-order-confirmation-thank-you-message',
+                                        component: OrderConfirmationThankYouMessageComponent,
                                         guards: [core$1.AuthGuard, OrderConfirmationGuard],
                                     },
                                     OrderConfirmationItemsComponent: {
-                                        selector: 'cx-order-confirmation-items',
+                                        component: OrderConfirmationItemsComponent,
                                         guards: [core$1.AuthGuard, OrderConfirmationGuard],
                                     },
                                     OrderConfirmationTotalsComponent: {
-                                        selector: 'cx-order-confirmation-totals',
+                                        component: OrderConfirmationTotalsComponent,
                                         guards: [core$1.AuthGuard, OrderConfirmationGuard],
                                     },
                                     OrderConfirmationOverviewComponent: {
-                                        selector: 'cx-order-confirmation-overview',
+                                        component: OrderConfirmationOverviewComponent,
                                         guards: [core$1.AuthGuard, OrderConfirmationGuard],
                                     },
                                 },
@@ -16618,22 +16809,23 @@
     exports.ɵg = HighlightPipe;
     exports.ɵh = ProductDetailsTabModule;
     exports.ɵi = ProductDetailsTabComponent;
-    exports.ɵj = ProductCarouselService;
-    exports.ɵk = SharedCarouselService;
-    exports.ɵl = ProductReferencesService;
-    exports.ɵm = CmsRoutesService;
-    exports.ɵn = CmsMappingService;
-    exports.ɵo = CmsI18nService;
-    exports.ɵp = CmsGuardsService;
-    exports.ɵq = AddToHomeScreenService;
-    exports.ɵr = ProductImagesModule;
-    exports.ɵs = suffixUrlMatcher;
-    exports.ɵt = addCmsRoute;
-    exports.ɵu = htmlLangProvider;
-    exports.ɵv = setHtmlLangAttribute;
-    exports.ɵw = RoutingModule;
-    exports.ɵx = defaultStorefrontRoutesConfig;
-    exports.ɵy = defaultRoutingConfig;
+    exports.ɵj = ComponentMapperService;
+    exports.ɵk = ProductCarouselService;
+    exports.ɵl = SharedCarouselService;
+    exports.ɵm = ProductReferencesService;
+    exports.ɵn = CmsRoutesService;
+    exports.ɵo = CmsMappingService;
+    exports.ɵp = CmsI18nService;
+    exports.ɵq = CmsGuardsService;
+    exports.ɵr = AddToHomeScreenService;
+    exports.ɵs = ProductImagesModule;
+    exports.ɵt = suffixUrlMatcher;
+    exports.ɵu = addCmsRoute;
+    exports.ɵv = htmlLangProvider;
+    exports.ɵw = setHtmlLangAttribute;
+    exports.ɵx = RoutingModule;
+    exports.ɵy = defaultStorefrontRoutesConfig;
+    exports.ɵz = defaultRoutingConfig;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

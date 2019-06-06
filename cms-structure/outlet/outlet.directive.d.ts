@@ -6,9 +6,8 @@ export declare class OutletDirective implements OnInit {
     private outletService;
     cxOutlet: string;
     private _context;
-    cxOutletContext: string;
+    cxOutletContext: any;
     constructor(vcr: ViewContainerRef, templateRef: TemplateRef<any>, outletService: OutletService);
     ngOnInit(): void;
     private renderTemplate;
-    private readonly context;
 }
