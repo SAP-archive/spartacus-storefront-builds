@@ -10013,7 +10013,7 @@ var AddressBookModule = /** @class */ (function () {
                                         {
                                             provide: AddressBookComponentService,
                                             useClass: AddressBookComponentService,
-                                            deps: [UserService],
+                                            deps: [UserAddressService],
                                         },
                                     ],
                                     guards: [AuthGuard],
@@ -10027,7 +10027,7 @@ var AddressBookModule = /** @class */ (function () {
                     ],
                     declarations: [AddressBookComponent, AddressCardComponent],
                     exports: [AddressBookComponent, AddressCardComponent],
-                    providers: [UserService, AddressBookComponentService],
+                    providers: [UserAddressService, AddressBookComponentService],
                     entryComponents: [AddressBookComponent],
                 },] }
     ];

@@ -10116,7 +10116,7 @@
                                             {
                                                 provide: AddressBookComponentService,
                                                 useClass: AddressBookComponentService,
-                                                deps: [core$1.UserService],
+                                                deps: [core$1.UserAddressService],
                                             },
                                         ],
                                         guards: [core$1.AuthGuard],
@@ -10130,7 +10130,7 @@
                         ],
                         declarations: [AddressBookComponent, AddressCardComponent],
                         exports: [AddressBookComponent, AddressCardComponent],
-                        providers: [core$1.UserService, AddressBookComponentService],
+                        providers: [core$1.UserAddressService, AddressBookComponentService],
                         entryComponents: [AddressBookComponent],
                     },] }
         ];

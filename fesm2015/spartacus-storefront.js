@@ -8434,7 +8434,7 @@ AddressBookModule.decorators = [
                                     {
                                         provide: AddressBookComponentService,
                                         useClass: AddressBookComponentService,
-                                        deps: [UserService],
+                                        deps: [UserAddressService],
                                     },
                                 ],
                                 guards: [AuthGuard],
@@ -8448,7 +8448,7 @@ AddressBookModule.decorators = [
                 ],
                 declarations: [AddressBookComponent, AddressCardComponent],
                 exports: [AddressBookComponent, AddressCardComponent],
-                providers: [UserService, AddressBookComponentService],
+                providers: [UserAddressService, AddressBookComponentService],
                 entryComponents: [AddressBookComponent],
             },] }
 ];
