@@ -7640,7 +7640,7 @@ var PageSlotComponent = /** @class */ (function () {
     PageSlotComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-page-slot',
-                    template: "<ng-template [cxOutlet]=\"position$ | async\" [cxOutletContext]=\"{}\">\n  <ng-container *ngFor=\"let component of (components$ | async)\">\n    <ng-template\n      [cxOutlet]=\"component.flexType\"\n      [cxOutletContext]=\"{}\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-template>\n  </ng-container>\n</ng-template>\n",
+                    template: "<ng-template\n  [cxOutlet]=\"position$ | async\"\n  [cxOutletContext]=\"{ components$: components$ }\"\n>\n  <ng-container *ngFor=\"let component of (components$ | async)\">\n    <ng-template\n      [cxOutlet]=\"component.flexType\"\n      [cxOutletContext]=\"{ component: component }\"\n    >\n      <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n    </ng-template>\n  </ng-container>\n</ng-template>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -8104,13 +8104,13 @@ var PageLayoutComponent = /** @class */ (function () {
         this.renderer = renderer;
         this.pageLayoutService = pageLayoutService;
         this.section$ = new BehaviorSubject(undefined);
+        this.templateName$ = this.pageLayoutService
+            .templateName$;
         this.layoutName$ = this.section$.pipe(switchMap((/**
          * @param {?} section
          * @return {?}
          */
-        function (section) {
-            return section ? of(section) : _this.pageLayoutService.templateName$;
-        })), tap((/**
+        function (section) { return (section ? of(section) : _this.templateName$); })), tap((/**
          * @param {?} name
          * @return {?}
          */
@@ -8152,7 +8152,7 @@ var PageLayoutComponent = /** @class */ (function () {
     PageLayoutComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-page-layout',
-                    template: "<!-- ???? {{ layoutName$ | async }} -->\n<ng-template [cxOutlet]=\"layoutName$ | async\" [cxOutletContext]=\"{}\">\n  <ng-content></ng-content>\n\n  <!-- {{ slots$ | async }} -->\n  <cx-page-slot\n    *ngFor=\"let slot of (slots$ | async)\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-template>\n",
+                    template: "<!-- ???? {{ layoutName$ | async }} -->\n<ng-template\n  [cxOutlet]=\"layoutName$ | async\"\n  [cxOutletContext]=\"{\n    templateName$: templateName$,\n    slots$: slots$,\n    section$: section$\n  }\"\n>\n  <ng-content></ng-content>\n\n  <!-- {{ slots$ | async }} -->\n  <cx-page-slot\n    *ngFor=\"let slot of (slots$ | async)\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-template>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];

@@ -7,6 +7,7 @@ export declare class PageLayoutComponent {
     private pageLayoutService;
     section: string;
     readonly section$: BehaviorSubject<string>;
+    readonly templateName$: Observable<string>;
     readonly layoutName$: Observable<string>;
     readonly slots$: Observable<string[]>;
     private currentClass;
