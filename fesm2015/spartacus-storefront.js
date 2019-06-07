@@ -1,6 +1,6 @@
 import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, Renderer2, HostListener, forwardRef, EventEmitter, Output, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, INJECTOR, APP_INITIALIZER, Pipe } from '@angular/core';
 import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, ServerConfig, OccConfig, I18nModule, GlobalMessageType, GlobalMessageService, GlobalMessageModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UrlModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserPaymentService, TranslationService, UserService, CheckoutModule, UserAddressService, AuthService, AuthRedirectService, UserModule, NotAuthGuard, CmsConfig, CxApiService, CmsService, DynamicAttributeService, PageType, SemanticPathService, TranslationChunkService, PageRobotsMeta, PageMetaService, LanguageService, UserConsentService, UserOrderService, CmsPageTitleModule, SearchboxService, ProductModule, ProductReferenceService, CmsModule, ProductSearchService, ProductReviewService, RoutingModule as RoutingModule$1, StateModule, AuthModule, provideConfigFromMetaTags, provideConfig, SmartEditModule, PersonalizationModule, OccModule } from '@spartacus/core';
-import { map, filter, switchMap, tap, debounceTime, startWith, distinctUntilChanged, take, skipWhile, shareReplay, first, endWith, withLatestFrom, delay } from 'rxjs/operators';
+import { map, filter, switchMap, tap, debounceTime, startWith, distinctUntilChanged, take, skipWhile, shareReplay, first, endWith, withLatestFrom } from 'rxjs/operators';
 import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
@@ -176,6 +176,7 @@ const ICON_TYPE = {
     PLUS: 'PLUS',
     MINUS: 'MINUS',
     RESET: 'RESET',
+    CIRCLE: 'CIRCLE',
 };
 /**
  * @abstract
@@ -217,6 +218,7 @@ const fontawesomeIconConfig = {
             MINUS: 'fas fa-minus',
             PLUS: 'fas fa-plus',
             RESET: 'fas fa-times-circle',
+            CIRCLE: 'fas fa-circle',
         },
         resources: [
             {
@@ -11526,187 +11528,89 @@ SearchBoxModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class SharedCarouselService {
-    constructor() {
-        this.MAX_WIDTH = 360;
-        this.MAX_ITEM_SIZE = 4;
-        this.SPEED = 250;
-        this.itemSize$ = of(this.MAX_ITEM_SIZE);
-        this.activeItem$ = of(0);
-        this.activeItemWithDelay$ = of(0);
-    }
-    /**
-     * @return {?}
-     */
-    getActiveItem() {
-        return this.activeItem$;
-    }
-    /**
-     * @return {?}
-     */
-    getActiveItemWithDelay() {
-        return this.activeItemWithDelay$;
-    }
-    /**
-     * @return {?}
-     */
-    getItemSize() {
-        return this.itemSize$;
-    }
-    /**
-     * The number of items shown in the carousel can be calculated
-     * the standard implemenattions uses the element size to calculate
-     * the items that fit in the carousel.
-     * This method is called in `ngOnInit`.
-     * @param {?} window
-     * @param {?} nativeElement
-     * @return {?}
-     */
-    setItemSize(window, nativeElement) {
-        this.itemSize$ = !window
-            ? of(this.MAX_ITEM_SIZE)
-            : fromEvent(window, 'resize').pipe(map((/**
-             * @return {?}
-             */
-            () => ((/** @type {?} */ (nativeElement))).clientWidth)), startWith(((/** @type {?} */ (nativeElement))).clientWidth), 
-            // avoid to much calls
-            debounceTime(100), map((/**
-             * @param {?} innerWidth
-             * @return {?}
-             */
-            (innerWidth) => {
-                /** @type {?} */
-                const itemsPerPage = Math.round(innerWidth / this.MAX_WIDTH);
-                return itemsPerPage > 2 ? this.MAX_ITEM_SIZE : itemsPerPage;
-            })), 
-            // only emit new size when the size changed
-            distinctUntilChanged());
-    }
-    /**
-     * @param {?} newActiveItem
-     * @return {?}
-     */
-    setItemAsActive(newActiveItem) {
-        this.activeItem$ = this.itemSize$.pipe(map((/**
-         * @param {?} itemSize
-         * @return {?}
-         */
-        itemSize => this.setItem(newActiveItem, itemSize))));
-    }
-    /**
-     * @return {?}
-     */
-    setPreviousItemAsActive() {
-        this.activeItem$ = this.activeItem$.pipe(withLatestFrom(this.itemSize$), map((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        ([activeItem, itemSize]) => this.setItem(activeItem - itemSize, itemSize))));
-    }
-    /**
-     * @return {?}
-     */
-    setNextItemAsActive() {
-        this.activeItem$ = this.activeItem$.pipe(withLatestFrom(this.itemSize$), map((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        ([activeItem, itemSize]) => this.setItem(activeItem + itemSize, itemSize))));
-    }
-    /**
-     * @private
-     * @param {?} newActiveItem
-     * @param {?} itemSize
-     * @return {?}
-     */
-    setItem(newActiveItem, itemSize) {
-        this.activeItemWithDelay$ = of(newActiveItem).pipe(delay(this.getDelayValue(itemSize)));
-        return newActiveItem;
-    }
-    /**
-     * @private
-     * @param {?} itemSize
-     * @return {?}
-     */
-    getDelayValue(itemSize) {
-        return (itemSize - 1) * this.SPEED;
-    }
-}
-SharedCarouselService.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-SharedCarouselService.ctorParameters = () => [];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class ProductCarouselService {
     /**
-     * @param {?} component
      * @param {?} productService
+     * @param {?} referenceService
+     * @param {?} semanticPathService
      */
-    constructor(component, productService) {
-        this.component = component;
+    constructor(productService, referenceService, semanticPathService) {
         this.productService = productService;
+        this.referenceService = referenceService;
+        this.semanticPathService = semanticPathService;
     }
     /**
+     * Loads the product data and converts it `CarouselItem`.
+     * @param {?} code
      * @return {?}
      */
-    getTitle() {
-        return this.title$;
-    }
-    /**
-     * @return {?}
-     */
-    fetchTitle() {
-        this.title$ = this.component.data$.pipe(map((/**
-         * @param {?} data
+    loadProduct(code) {
+        return this.productService.get(code).pipe(filter(Boolean), map((/**
+         * @param {?} product
          * @return {?}
          */
-        data => {
-            return data.title;
-        })));
+        product => this.convertProduct(product))));
     }
     /**
+     * @param {?} code
+     * @param {?} referenceType
+     * @param {?} displayTitle
+     * @param {?} displayProductPrices
      * @return {?}
      */
-    getItems() {
-        return this.items$;
+    getProductReferences(code, referenceType, displayTitle, displayProductPrices) {
+        return this.referenceService.get(code, referenceType).pipe(filter(Boolean), map((/**
+         * @param {?} refs
+         * @return {?}
+         */
+        refs => refs.map((/**
+         * @param {?} ref
+         * @return {?}
+         */
+        ref => this.convertProduct(ref.target, displayTitle, displayProductPrices))))));
     }
     /**
-     * Maps the item codes from CMS component to an array of `Product` observables.
+     * Converts the product to a generic CarouselItem
+     * @private
+     * @param {?} source
+     * @param {?=} displayTitle
+     * @param {?=} displayProductPrices
      * @return {?}
      */
-    fetchItems() {
-        this.items$ = this.component.data$.pipe(filter((/**
-         * @param {?} data
-         * @return {?}
-         */
-        data => data && !!data.productCodes)), map((/**
-         * @param {?} data
-         * @return {?}
-         */
-        data => {
-            /** @type {?} */
-            const productCodes = data.productCodes.split(' ');
-            return productCodes.map((/**
-             * @param {?} code
-             * @return {?}
-             */
-            code => this.productService.get(code)));
-        })));
+    convertProduct(source, displayTitle = true, displayProductPrices = true) {
+        /** @type {?} */
+        const item = {};
+        if (displayTitle) {
+            item.title = source.name;
+        }
+        if (displayProductPrices && source.price && source.price.formattedValue) {
+            item.price = source.price.formattedValue;
+        }
+        if (source.images && source.images.PRIMARY) {
+            item.media = {
+                container: source.images.PRIMARY,
+                format: 'product',
+            };
+        }
+        item.route = this.semanticPathService.transform({
+            cxRoute: 'product',
+            params: source,
+        });
+        return item;
     }
 }
 ProductCarouselService.decorators = [
-    { type: Injectable }
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
 ];
 /** @nocollapse */
 ProductCarouselService.ctorParameters = () => [
-    { type: CmsComponentData },
-    { type: ProductService }
+    { type: ProductService },
+    { type: ProductReferenceService },
+    { type: SemanticPathService }
 ];
+/** @nocollapse */ ProductCarouselService.ngInjectableDef = ɵɵdefineInjectable({ factory: function ProductCarouselService_Factory() { return new ProductCarouselService(ɵɵinject(ProductService), ɵɵinject(ProductReferenceService), ɵɵinject(SemanticPathService)); }, token: ProductCarouselService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
@@ -11714,40 +11618,166 @@ ProductCarouselService.ctorParameters = () => [
  */
 class ProductCarouselComponent {
     /**
-     * @param {?} winRef
-     * @param {?} el
-     * @param {?} productCarouselService
-     * @param {?} sharedCarouselService
+     * @param {?} component
+     * @param {?} service
      */
-    constructor(winRef, el, productCarouselService, sharedCarouselService) {
-        this.el = el;
-        this.productCarouselService = productCarouselService;
-        this.sharedCarouselService = sharedCarouselService;
-        this.window = winRef.nativeWindow;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.productCarouselService.fetchTitle();
-        this.sharedCarouselService.setItemSize(this.window, this.el.nativeElement);
-        this.productCarouselService.fetchItems();
-        this.sharedCarouselService.setItemAsActive(0);
+    constructor(component, service) {
+        this.component = component;
+        this.service = service;
+        this.title$ = this.component.data$.pipe(map((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => data.title)));
+        this.items$ = this.component.data$.pipe(filter(Boolean), map((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => data.productCodes.split(' '))), map((/**
+         * @param {?} codes
+         * @return {?}
+         */
+        codes => codes.map((/**
+         * @param {?} code
+         * @return {?}
+         */
+        code => this.service.loadProduct(code))))), switchMap((/**
+         * @param {?} products$
+         * @return {?}
+         */
+        (products$) => combineLatest(products$))));
     }
 }
 ProductCarouselComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-product-carousel',
-                template: "<h3 *ngIf=\"(productCarouselService.getTitle() | async) as title\">\n  {{ title }}\n</h3>\n\n<ng-container\n  *ngIf=\"{\n    maxItemSize: sharedCarouselService.getItemSize() | async,\n    products: productCarouselService.getItems() | async,\n    activeItem: sharedCarouselService.getActiveItemWithDelay() | async,\n    active: sharedCarouselService.getActiveItem() | async\n  } as carousel\"\n>\n  <div class=\"cx-carousel\" [ngClass]=\"'size-' + carousel.maxItemSize\">\n    <button\n      class=\"previous\"\n      (click)=\"sharedCarouselService.setPreviousItemAsActive()\"\n      [disabled]=\"carousel.activeItem === 0\"\n    ></button>\n\n    <div class=\"groups\">\n      <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n        <div class=\"group\" *ngIf=\"i % carousel.maxItemSize === 0\">\n          <ng-container\n            *ngFor=\"\n              let product$ of (carousel.products\n                | slice: i:i + carousel.maxItemSize)\n            \"\n          >\n            <a\n              *ngIf=\"(product$ | async) as product\"\n              class=\"product\"\n              [class.active]=\"i === carousel.activeItem\"\n              [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n            >\n              <cx-media [container]=\"product.images?.PRIMARY\" format=\"product\">\n              </cx-media>\n\n              <h4>{{ product.name }}</h4>\n              <div class=\"price\">{{ product.price?.formattedValue }}</div>\n            </a>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      class=\"next\"\n      (click)=\"sharedCarouselService.setNextItemAsActive()\"\n      [disabled]=\"\n        carousel.activeItem > carousel.products.length - carousel.maxItemSize\n      \"\n    ></button>\n  </div>\n\n  <div class=\"indicators\">\n    <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n      <button\n        *ngIf=\"i % carousel.maxItemSize === 0\"\n        (click)=\"sharedCarouselService.setItemAsActive(i)\"\n        [disabled]=\"i === carousel.activeItem\"\n      ></button>\n    </ng-container></div\n></ng-container>\n",
+                template: "<cx-carousel [items]=\"items$ | async\" [title]=\"title$ | async\"> </cx-carousel>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
 /** @nocollapse */
 ProductCarouselComponent.ctorParameters = () => [
-    { type: WindowRef },
+    { type: CmsComponentData },
+    { type: ProductCarouselService }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CarouselService {
+    /**
+     * @param {?} winRef
+     */
+    constructor(winRef) {
+        this.winRef = winRef;
+    }
+    /**
+     * The number of items shown in the carousel is calculated dividing
+     * the host element width with the minimum item width.
+     * @param {?} nativeElement
+     * @param {?} itemWidth
+     * @return {?}
+     */
+    getSize(nativeElement, itemWidth) {
+        return fromEvent(this.winRef.nativeWindow, 'resize').pipe(map((/**
+         * @param {?} _
+         * @return {?}
+         */
+        _ => ((/** @type {?} */ (nativeElement))).clientWidth)), startWith(((/** @type {?} */ (nativeElement))).clientWidth), debounceTime(100), map((/**
+         * @param {?} totalWidth
+         * @return {?}
+         */
+        (totalWidth) => {
+            return Math.round(totalWidth / itemWidth);
+        })), distinctUntilChanged());
+    }
+}
+CarouselService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+CarouselService.ctorParameters = () => [
+    { type: WindowRef }
+];
+/** @nocollapse */ CarouselService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CarouselService_Factory() { return new CarouselService(ɵɵinject(WindowRef)); }, token: CarouselService, providedIn: "root" });
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CarouselComponent {
+    /**
+     * @param {?} el
+     * @param {?} service
+     */
+    constructor(el, service) {
+        this.el = el;
+        this.service = service;
+        /**
+         * Specifies the min pixel used per product. This value is used
+         * to calculate the amount of items we can fit into the available with
+         * of the host element. The number of items is not related the breakpoints,
+         * which means that a carousel can be placed in different layouts,
+         * regardless of the overall size.
+         */
+        this.minItemPixelSize = 300;
+        this.indicatorIcon = ICON_TYPE.CIRCLE;
+        this.previousIcon = ICON_TYPE.CARET_LEFT;
+        this.nextIcon = ICON_TYPE.CARET_RIGHT;
+        /**
+         * The group with items which is currently active.
+         */
+        this.activeSlide = 0;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.size$ = this.service.getSize(this.el.nativeElement, this.minItemPixelSize);
+    }
+    /**
+     * @param {?} slide
+     * @return {?}
+     */
+    select(slide) {
+        this.activeSlide = slide;
+    }
+}
+CarouselComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-carousel',
+                template: "<ng-container *ngIf=\"items && items.length > 0 && (size$ | async) as size\">\n  <h3 *ngIf=\"title\">\n    {{ title }}\n  </h3>\n\n  <div class=\"cx-carousel\" [ngClass]=\"'size-' + size\">\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"previous\"\n      (click)=\"select(activeSlide - size)\"\n      [disabled]=\"activeSlide === 0\"\n    >\n      <cx-icon [type]=\"previousIcon\"></cx-icon>\n    </button>\n\n    <div class=\"groups\">\n      <ng-container *ngFor=\"let _ of items; let i = index\">\n        <div class=\"group\" *ngIf=\"i % size === 0\">\n          <ng-container *ngFor=\"let item of (items | slice: i:i + size)\">\n            <a\n              *ngIf=\"item\"\n              class=\"product\"\n              [class.active]=\"i === activeSlide\"\n              [routerLink]=\"item.route\"\n            >\n              <cx-media\n                [container]=\"item.media?.container\"\n                [format]=\"item.media?.format\"\n              >\n              </cx-media>\n\n              <h4 *ngIf=\"item.title\">{{ item.title }}</h4>\n              <div *ngIf=\"item.price\" class=\"price\">{{ item.price }}</div>\n            </a>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"next\"\n      (click)=\"select(activeSlide + size)\"\n      [disabled]=\"activeSlide > items.length - size - 1\"\n    >\n      <cx-icon [type]=\"nextIcon\"></cx-icon>\n    </button>\n  </div>\n\n  <div class=\"indicators\" *ngIf=\"size < items.length\">\n    <ng-container *ngFor=\"let _ of items; let i = index\">\n      <button\n        *ngIf=\"i % size === 0\"\n        (click)=\"select(i)\"\n        [disabled]=\"i === activeSlide\"\n      >\n        <cx-icon [type]=\"indicatorIcon\"></cx-icon>\n      </button>\n    </ng-container>\n  </div>\n</ng-container>\n"
+            }] }
+];
+/** @nocollapse */
+CarouselComponent.ctorParameters = () => [
     { type: ElementRef },
-    { type: ProductCarouselService },
-    { type: SharedCarouselService }
+    { type: CarouselService }
+];
+CarouselComponent.propDecorators = {
+    title: [{ type: Input }],
+    items: [{ type: Input }],
+    minItemPixelSize: [{ type: Input }],
+    indicatorIcon: [{ type: Input }],
+    previousIcon: [{ type: Input }],
+    nextIcon: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CarouselModule {
+}
+CarouselModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule, RouterModule, IconModule, MediaModule, UrlModule],
+                declarations: [CarouselComponent],
+                exports: [CarouselComponent],
+            },] }
 ];
 
 /**
@@ -11760,28 +11790,14 @@ ProductCarouselModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
                     CommonModule,
-                    RouterModule,
-                    MediaModule,
+                    CarouselModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             ProductCarouselComponent: {
                                 component: ProductCarouselComponent,
-                                providers: [
-                                    {
-                                        provide: ProductCarouselService,
-                                        useClass: ProductCarouselService,
-                                        deps: [CmsComponentData, ProductService],
-                                    },
-                                    {
-                                        provide: SharedCarouselService,
-                                        useClass: SharedCarouselService,
-                                        deps: [],
-                                    },
-                                ],
                             },
                         },
                     }))),
-                    UrlModule,
                 ],
                 declarations: [ProductCarouselComponent],
                 entryComponents: [ProductCarouselComponent],
@@ -11793,177 +11809,50 @@ ProductCarouselModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class ProductReferencesService {
-    /**
-     * @param {?} component
-     * @param {?} referenceService
-     * @param {?} routerService
-     */
-    constructor(component, referenceService, routerService) {
-        this.component = component;
-        this.referenceService = referenceService;
-        this.routerService = routerService;
-    }
-    /**
-     * @return {?}
-     */
-    getTitle() {
-        return this.title$;
-    }
-    /**
-     * @return {?}
-     */
-    fetchTitle() {
-        this.title$ = this.component.data$.pipe(map((/**
-         * @param {?} data
-         * @return {?}
-         */
-        data => {
-            return data.title;
-        })));
-    }
-    /**
-     * @return {?}
-     */
-    getDisplayProductTitles() {
-        return this.displayProductTitles$.pipe(map((/**
-         * @param {?} data
-         * @return {?}
-         */
-        data => Boolean(JSON.parse(data.toLowerCase())))));
-    }
-    /**
-     * @return {?}
-     */
-    fetchDisplayProductTitles() {
-        this.displayProductTitles$ = this.component.data$.pipe(map((/**
-         * @param {?} data
-         * @return {?}
-         */
-        data => {
-            return data.displayProductTitles;
-        })));
-    }
-    /**
-     * @return {?}
-     */
-    getDisplayProductPrices() {
-        return this.displayProductPrices$.pipe(map((/**
-         * @param {?} data
-         * @return {?}
-         */
-        data => Boolean(JSON.parse(data.toLowerCase())))));
-    }
-    /**
-     * @return {?}
-     */
-    fetchDisplayProductPrices() {
-        this.displayProductPrices$ = this.component.data$.pipe(map((/**
-         * @param {?} data
-         * @return {?}
-         */
-        data => {
-            return data.displayProductPrices;
-        })));
-    }
-    /**
-     * @return {?}
-     */
-    getReferenceType() {
-        return this.component.data$.pipe(map((/**
-         * @param {?} data
-         * @return {?}
-         */
-        data => data.productReferenceTypes)));
-    }
-    /**
-     * @return {?}
-     */
-    getProductCode() {
-        return this.routerService
-            .getRouterState()
-            .pipe(map((/**
-         * @param {?} data
-         * @return {?}
-         */
-        data => data.state.params.productCode)));
-    }
-    /**
-     * @return {?}
-     */
-    getReferenceList() {
-        return this.items$;
-    }
-    /**
-     * @param {?=} pageSize
-     * @return {?}
-     */
-    setReferenceList(pageSize) {
-        this.items$ = combineLatest(this.getProductCode(), this.getReferenceType()).pipe(map((/**
-         * @param {?} data
-         * @return {?}
-         */
-        data => ({ productCode: data[0], referenceType: data[1] }))), switchMap((/**
-         * @param {?} data
-         * @return {?}
-         */
-        data => {
-            return this.referenceService.get(data.productCode, data.referenceType, pageSize);
-        })));
-    }
-}
-ProductReferencesService.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-ProductReferencesService.ctorParameters = () => [
-    { type: CmsComponentData },
-    { type: ProductReferenceService },
-    { type: RoutingService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class ProductReferencesComponent {
     /**
-     * @param {?} winRef
-     * @param {?} el
-     * @param {?} productReferencesService
-     * @param {?} sharedCarouselService
+     * @param {?} component
+     * @param {?} service
+     * @param {?} current
      */
-    constructor(winRef, el, productReferencesService, sharedCarouselService) {
-        this.el = el;
-        this.productReferencesService = productReferencesService;
-        this.sharedCarouselService = sharedCarouselService;
-        this.window = winRef.nativeWindow;
+    constructor(component, service, current) {
+        this.component = component;
+        this.service = service;
+        this.current = current;
+        this.title$ = this.component.data$.pipe(map((/**
+         * @param {?} d
+         * @return {?}
+         */
+        d => d.title)));
+        this.items$ = combineLatest([this.productCode$, this.component.data$]).pipe(switchMap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([code, data]) => this.service.getProductReferences(code, data.productReferenceTypes, Boolean(JSON.parse(data.displayProductTitles)), Boolean(JSON.parse(data.displayProductPrices))))));
     }
     /**
      * @return {?}
      */
-    ngOnInit() {
-        this.productReferencesService.fetchTitle();
-        this.productReferencesService.fetchDisplayProductTitles();
-        this.productReferencesService.fetchDisplayProductPrices();
-        this.sharedCarouselService.setItemSize(this.window, this.el.nativeElement);
-        this.productReferencesService.setReferenceList();
-        this.sharedCarouselService.setItemAsActive(0);
+    get productCode$() {
+        return this.current.getProduct().pipe(filter(Boolean), map((/**
+         * @param {?} p
+         * @return {?}
+         */
+        p => p.code)));
     }
 }
 ProductReferencesComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-product-references',
-                template: "<ng-container\n  *ngIf=\"(productReferencesService.getReferenceList() | async) as productList\"\n>\n  <ng-container *ngIf=\"productList.length !== 0\">\n    <h3\n      *ngIf=\"\n        (productReferencesService.getDisplayProductTitles() | async) &&\n        (productReferencesService.getTitle() | async) as title\n      \"\n    >\n      {{ title }}\n    </h3>\n\n    <ng-container\n      *ngIf=\"{\n        maxItemSize: sharedCarouselService.getItemSize() | async,\n        products: productList,\n        activeItem: sharedCarouselService.getActiveItemWithDelay() | async,\n        active: sharedCarouselService.getActiveItem() | async\n      } as carousel\"\n    >\n      <div class=\"cx-carousel\" [ngClass]=\"'size-' + carousel.maxItemSize\">\n        <button\n          class=\"previous\"\n          (click)=\"sharedCarouselService.setPreviousItemAsActive()\"\n          [disabled]=\"carousel.activeItem === 0\"\n        ></button>\n\n        <div class=\"groups\">\n          <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n            <div class=\"group\" *ngIf=\"i % carousel.maxItemSize === 0\">\n              <ng-container\n                *ngFor=\"\n                  let products of (carousel.products\n                    | slice: i:i + carousel.maxItemSize)\n                \"\n              >\n                <a\n                  *ngIf=\"products.target as product\"\n                  class=\"product\"\n                  [class.active]=\"i === carousel.activeItem\"\n                  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n                >\n                  <cx-media\n                    [container]=\"product.images?.PRIMARY\"\n                    format=\"product\"\n                  >\n                  </cx-media>\n\n                  <h4>{{ product.name }}</h4>\n                  <div\n                    *ngIf=\"\n                      (productReferencesService.getDisplayProductPrices()\n                        | async)\n                    \"\n                    class=\"price\"\n                  >\n                    {{ product.price?.formattedValue }}\n                  </div>\n                </a>\n              </ng-container>\n            </div>\n          </ng-container>\n        </div>\n        <button\n          class=\"next\"\n          (click)=\"sharedCarouselService.setNextItemAsActive()\"\n          [disabled]=\"\n            carousel.activeItem >\n            carousel.products.length - carousel.maxItemSize\n          \"\n        ></button>\n      </div>\n      <div class=\"indicators\">\n        <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n          <button\n            *ngIf=\"i % carousel.maxItemSize === 0\"\n            (click)=\"sharedCarouselService.setItemAsActive(i)\"\n            [disabled]=\"i === carousel.activeItem\"\n          ></button>\n        </ng-container>\n      </div>\n    </ng-container>\n  </ng-container>\n</ng-container>\n",
+                template: "<cx-carousel [title]=\"title$ | async\" [items]=\"items$ | async\"> </cx-carousel>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
 /** @nocollapse */
 ProductReferencesComponent.ctorParameters = () => [
-    { type: WindowRef },
-    { type: ElementRef },
-    { type: ProductReferencesService },
-    { type: SharedCarouselService }
+    { type: CmsComponentData },
+    { type: ProductCarouselService },
+    { type: CurrentProductService }
 ];
 
 /**
@@ -11976,25 +11865,11 @@ ProductReferencesModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
                     CommonModule,
-                    RouterModule,
-                    MediaModule,
-                    UrlModule,
+                    CarouselModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             ProductReferencesComponent: {
                                 component: ProductReferencesComponent,
-                                providers: [
-                                    {
-                                        provide: ProductReferencesService,
-                                        useClass: ProductReferencesService,
-                                        deps: [CmsComponentData, ProductReferenceService, RoutingService],
-                                    },
-                                    {
-                                        provide: SharedCarouselService,
-                                        useClass: SharedCarouselService,
-                                        deps: [],
-                                    },
-                                ],
                             },
                         },
                     }))),
@@ -12004,6 +11879,11 @@ ProductReferencesModule.decorators = [
                 exports: [ProductReferencesComponent],
             },] }
 ];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -13903,5 +13783,5 @@ B2cStorefrontModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormComponentsModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationComponentService, NavigationModule, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductDetailOutlets, ProductDetailsComponent, ProductDetailsModule, ProductDetailsPageComponent, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPdpComponents, defaultPdpSlots, fontawesomeIconConfig, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, AutoFocusDirectiveModule as ɵa, defaultCheckoutConfig as ɵb, CheckoutConfigService as ɵc, CardModule as ɵd, CardComponent as ɵe, NavigationUIComponent as ɵf, HighlightPipe as ɵg, ProductDetailsTabModule as ɵh, ProductDetailsTabComponent as ɵi, ComponentMapperService as ɵj, ProductCarouselService as ɵk, SharedCarouselService as ɵl, ProductReferencesService as ɵm, CmsRoutesService as ɵn, CmsMappingService as ɵo, CmsI18nService as ɵp, CmsGuardsService as ɵq, AddToHomeScreenService as ɵr, ProductImagesModule as ɵs, suffixUrlMatcher as ɵt, addCmsRoute as ɵu, htmlLangProvider as ɵv, setHtmlLangAttribute as ɵw, RoutingModule as ɵx, defaultStorefrontRoutesConfig as ɵy, defaultRoutingConfig as ɵz };
+export { AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormComponentsModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationComponentService, NavigationModule, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsComponent, ProductDetailsModule, ProductDetailsPageComponent, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPdpComponents, defaultPdpSlots, fontawesomeIconConfig, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, AutoFocusDirectiveModule as ɵa, defaultCheckoutConfig as ɵb, CheckoutConfigService as ɵc, CardModule as ɵd, CardComponent as ɵe, NavigationUIComponent as ɵf, HighlightPipe as ɵg, ProductDetailsTabModule as ɵh, ProductDetailsTabComponent as ɵi, ComponentMapperService as ɵj, CarouselModule as ɵk, CarouselComponent as ɵl, CarouselService as ɵm, CmsRoutesService as ɵn, CmsMappingService as ɵo, CmsI18nService as ɵp, CmsGuardsService as ɵq, AddToHomeScreenService as ɵr, ProductImagesModule as ɵs, suffixUrlMatcher as ɵt, addCmsRoute as ɵu, htmlLangProvider as ɵv, setHtmlLangAttribute as ɵw, RoutingModule as ɵx, defaultStorefrontRoutesConfig as ɵy, defaultRoutingConfig as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map

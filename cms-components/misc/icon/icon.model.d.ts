@@ -19,7 +19,8 @@ export declare enum ICON_TYPE {
     CREDIT_CARD = "CREDIT_CARD",
     PLUS = "PLUS",
     MINUS = "MINUS",
-    RESET = "RESET"
+    RESET = "RESET",
+    CIRCLE = "CIRCLE"
 }
 export declare abstract class IconConfig {
     icon?: {

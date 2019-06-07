@@ -1,12 +1,12 @@
-import { ElementRef, OnInit } from '@angular/core';
-import { WindowRef } from '@spartacus/core';
-import { SharedCarouselService } from '../shared-carousel.service';
-import { ProductCarouselService } from './product-carousel.component.service';
-export declare class ProductCarouselComponent implements OnInit {
-    private el;
-    productCarouselService: ProductCarouselService;
-    sharedCarouselService: SharedCarouselService;
-    private window;
-    constructor(winRef: WindowRef, el: ElementRef, productCarouselService: ProductCarouselService, sharedCarouselService: SharedCarouselService);
-    ngOnInit(): void;
+import { CmsProductCarouselComponent } from '@spartacus/core';
+import { Observable } from 'rxjs';
+import { CmsComponentData } from '../../../../cms-structure/page/model/cms-component-data';
+import { CarouselItem } from '../../../../shared/components/carousel/carousel.model';
+import { ProductCarouselService } from '../product-carousel.service';
+export declare class ProductCarouselComponent {
+    protected component: CmsComponentData<CmsProductCarouselComponent>;
+    protected service: ProductCarouselService;
+    title$: Observable<string>;
+    items$: Observable<CarouselItem[]>;
+    constructor(component: CmsComponentData<CmsProductCarouselComponent>, service: ProductCarouselService);
 }

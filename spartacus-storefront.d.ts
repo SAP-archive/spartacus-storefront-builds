@@ -6,9 +6,6 @@ export { CheckoutConfigService as ɵc } from './cms-components/checkout/checkout
 export { defaultCheckoutConfig as ɵb } from './cms-components/checkout/config/default-checkout-config';
 export { NavigationUIComponent as ɵf } from './cms-components/navigation/navigation/navigation-ui.component';
 export { HighlightPipe as ɵg } from './cms-components/navigation/search-box/highlight.pipe';
-export { ProductCarouselService as ɵk } from './cms-components/product/carousel/product-carousel/product-carousel.component.service';
-export { ProductReferencesService as ɵm } from './cms-components/product/carousel/product-references/product-references.component.service';
-export { SharedCarouselService as ɵl } from './cms-components/product/carousel/shared-carousel.service';
 export { ProductImagesModule as ɵs } from './cms-components/product/product-images/product-images.module';
 export { ProductDetailsTabComponent as ɵi } from './cms-components/product/product-tabs/product-details-tab/product-details-tab.component';
 export { ProductDetailsTabModule as ɵh } from './cms-components/product/product-tabs/product-details-tab/product-details-tab.module';
@@ -25,4 +22,7 @@ export { CmsMappingService as ɵo } from './cms-structure/services/cms-mapping.s
 export { CmsRoutesService as ɵn } from './cms-structure/services/cms-routes.service';
 export { CardComponent as ɵe } from './shared/components/card/card.component';
 export { CardModule as ɵd } from './shared/components/card/card.module';
+export { CarouselComponent as ɵl } from './shared/components/carousel/carousel.component';
+export { CarouselModule as ɵk } from './shared/components/carousel/carousel.module';
+export { CarouselService as ɵm } from './shared/components/carousel/carousel.service';
 export { AutoFocusDirectiveModule as ɵa } from './shared/directives/auto-focus/auto-focus.directive.module';

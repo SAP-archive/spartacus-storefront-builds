@@ -2,60 +2,70 @@
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-import { ChangeDetectionStrategy, Component, ElementRef, } from '@angular/core';
-import { WindowRef } from '@spartacus/core';
-import { SharedCarouselService } from '../shared-carousel.service';
-import { ProductCarouselService } from './product-carousel.component.service';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { combineLatest } from 'rxjs';
+import { filter, map, switchMap } from 'rxjs/operators';
+import { CmsComponentData } from '../../../../cms-structure/page/model/cms-component-data';
+import { ProductCarouselService } from '../product-carousel.service';
 var ProductCarouselComponent = /** @class */ (function () {
-    function ProductCarouselComponent(winRef, el, productCarouselService, sharedCarouselService) {
-        this.el = el;
-        this.productCarouselService = productCarouselService;
-        this.sharedCarouselService = sharedCarouselService;
-        this.window = winRef.nativeWindow;
+    function ProductCarouselComponent(component, service) {
+        var _this = this;
+        this.component = component;
+        this.service = service;
+        this.title$ = this.component.data$.pipe(map((/**
+         * @param {?} data
+         * @return {?}
+         */
+        function (data) { return data.title; })));
+        this.items$ = this.component.data$.pipe(filter(Boolean), map((/**
+         * @param {?} data
+         * @return {?}
+         */
+        function (data) { return data.productCodes.split(' '); })), map((/**
+         * @param {?} codes
+         * @return {?}
+         */
+        function (codes) { return codes.map((/**
+         * @param {?} code
+         * @return {?}
+         */
+        function (code) { return _this.service.loadProduct(code); })); })), switchMap((/**
+         * @param {?} products$
+         * @return {?}
+         */
+        function (products$) {
+            return combineLatest(products$);
+        })));
     }
-    /**
-     * @return {?}
-     */
-    ProductCarouselComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        this.productCarouselService.fetchTitle();
-        this.sharedCarouselService.setItemSize(this.window, this.el.nativeElement);
-        this.productCarouselService.fetchItems();
-        this.sharedCarouselService.setItemAsActive(0);
-    };
     ProductCarouselComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-product-carousel',
-                    template: "<h3 *ngIf=\"(productCarouselService.getTitle() | async) as title\">\n  {{ title }}\n</h3>\n\n<ng-container\n  *ngIf=\"{\n    maxItemSize: sharedCarouselService.getItemSize() | async,\n    products: productCarouselService.getItems() | async,\n    activeItem: sharedCarouselService.getActiveItemWithDelay() | async,\n    active: sharedCarouselService.getActiveItem() | async\n  } as carousel\"\n>\n  <div class=\"cx-carousel\" [ngClass]=\"'size-' + carousel.maxItemSize\">\n    <button\n      class=\"previous\"\n      (click)=\"sharedCarouselService.setPreviousItemAsActive()\"\n      [disabled]=\"carousel.activeItem === 0\"\n    ></button>\n\n    <div class=\"groups\">\n      <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n        <div class=\"group\" *ngIf=\"i % carousel.maxItemSize === 0\">\n          <ng-container\n            *ngFor=\"\n              let product$ of (carousel.products\n                | slice: i:i + carousel.maxItemSize)\n            \"\n          >\n            <a\n              *ngIf=\"(product$ | async) as product\"\n              class=\"product\"\n              [class.active]=\"i === carousel.activeItem\"\n              [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n            >\n              <cx-media [container]=\"product.images?.PRIMARY\" format=\"product\">\n              </cx-media>\n\n              <h4>{{ product.name }}</h4>\n              <div class=\"price\">{{ product.price?.formattedValue }}</div>\n            </a>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      class=\"next\"\n      (click)=\"sharedCarouselService.setNextItemAsActive()\"\n      [disabled]=\"\n        carousel.activeItem > carousel.products.length - carousel.maxItemSize\n      \"\n    ></button>\n  </div>\n\n  <div class=\"indicators\">\n    <ng-container *ngFor=\"let unused of carousel.products; let i = index\">\n      <button\n        *ngIf=\"i % carousel.maxItemSize === 0\"\n        (click)=\"sharedCarouselService.setItemAsActive(i)\"\n        [disabled]=\"i === carousel.activeItem\"\n      ></button>\n    </ng-container></div\n></ng-container>\n",
+                    template: "<cx-carousel [items]=\"items$ | async\" [title]=\"title$ | async\"> </cx-carousel>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     /** @nocollapse */
     ProductCarouselComponent.ctorParameters = function () { return [
-        { type: WindowRef },
-        { type: ElementRef },
-        { type: ProductCarouselService },
-        { type: SharedCarouselService }
+        { type: CmsComponentData },
+        { type: ProductCarouselService }
     ]; };
     return ProductCarouselComponent;
 }());
 export { ProductCarouselComponent };
 if (false) {
+    /** @type {?} */
+    ProductCarouselComponent.prototype.title$;
+    /** @type {?} */
+    ProductCarouselComponent.prototype.items$;
     /**
      * @type {?}
-     * @private
+     * @protected
      */
-    ProductCarouselComponent.prototype.window;
+    ProductCarouselComponent.prototype.component;
     /**
      * @type {?}
-     * @private
+     * @protected
      */
-    ProductCarouselComponent.prototype.el;
-    /** @type {?} */
-    ProductCarouselComponent.prototype.productCarouselService;
-    /** @type {?} */
-    ProductCarouselComponent.prototype.sharedCarouselService;
+    ProductCarouselComponent.prototype.service;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvZHVjdC1jYXJvdXNlbC5jb21wb25lbnQuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJjbXMtY29tcG9uZW50cy9wcm9kdWN0L2Nhcm91c2VsL3Byb2R1Y3QtY2Fyb3VzZWwvcHJvZHVjdC1jYXJvdXNlbC5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE9BQU8sRUFDTCx1QkFBdUIsRUFDdkIsU0FBUyxFQUNULFVBQVUsR0FFWCxNQUFNLGVBQWUsQ0FBQztBQUN2QixPQUFPLEVBQUUsU0FBUyxFQUFFLE1BQU0saUJBQWlCLENBQUM7QUFDNUMsT0FBTyxFQUFFLHFCQUFxQixFQUFFLE1BQU0sNEJBQTRCLENBQUM7QUFDbkUsT0FBTyxFQUFFLHNCQUFzQixFQUFFLE1BQU0sc0NBQXNDLENBQUM7QUFFOUU7SUFRRSxrQ0FDRSxNQUFpQixFQUNULEVBQWMsRUFDZixzQkFBOEMsRUFDOUMscUJBQTRDO1FBRjNDLE9BQUUsR0FBRixFQUFFLENBQVk7UUFDZiwyQkFBc0IsR0FBdEIsc0JBQXNCLENBQXdCO1FBQzlDLDBCQUFxQixHQUFyQixxQkFBcUIsQ0FBdUI7UUFFbkQsSUFBSSxDQUFDLE1BQU0sR0FBRyxNQUFNLENBQUMsWUFBWSxDQUFDO0lBQ3BDLENBQUM7Ozs7SUFFRCwyQ0FBUTs7O0lBQVI7UUFDRSxJQUFJLENBQUMsc0JBQXNCLENBQUMsVUFBVSxFQUFFLENBQUM7UUFDekMsSUFBSSxDQUFDLHFCQUFxQixDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsTUFBTSxFQUFFLElBQUksQ0FBQyxFQUFFLENBQUMsYUFBYSxDQUFDLENBQUM7UUFDM0UsSUFBSSxDQUFDLHNCQUFzQixDQUFDLFVBQVUsRUFBRSxDQUFDO1FBQ3pDLElBQUksQ0FBQyxxQkFBcUIsQ0FBQyxlQUFlLENBQUMsQ0FBQyxDQUFDLENBQUM7SUFDaEQsQ0FBQzs7Z0JBdEJGLFNBQVMsU0FBQztvQkFDVCxRQUFRLEVBQUUscUJBQXFCO29CQUMvQixncEVBQWdEO29CQUNoRCxlQUFlLEVBQUUsdUJBQXVCLENBQUMsTUFBTTtpQkFDaEQ7Ozs7Z0JBUlEsU0FBUztnQkFIaEIsVUFBVTtnQkFLSCxzQkFBc0I7Z0JBRHRCLHFCQUFxQjs7SUEwQjlCLCtCQUFDO0NBQUEsQUF2QkQsSUF1QkM7U0FsQlksd0JBQXdCOzs7Ozs7SUFDbkMsMENBQXVCOzs7OztJQUlyQixzQ0FBc0I7O0lBQ3RCLDBEQUFxRDs7SUFDckQseURBQW1EIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHtcbiAgQ2hhbmdlRGV0ZWN0aW9uU3RyYXRlZ3ksXG4gIENvbXBvbmVudCxcbiAgRWxlbWVudFJlZixcbiAgT25Jbml0LFxufSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IFdpbmRvd1JlZiB9IGZyb20gJ0BzcGFydGFjdXMvY29yZSc7XG5pbXBvcnQgeyBTaGFyZWRDYXJvdXNlbFNlcnZpY2UgfSBmcm9tICcuLi9zaGFyZWQtY2Fyb3VzZWwuc2VydmljZSc7XG5pbXBvcnQgeyBQcm9kdWN0Q2Fyb3VzZWxTZXJ2aWNlIH0gZnJvbSAnLi9wcm9kdWN0LWNhcm91c2VsLmNvbXBvbmVudC5zZXJ2aWNlJztcblxuQENvbXBvbmVudCh7XG4gIHNlbGVjdG9yOiAnY3gtcHJvZHVjdC1jYXJvdXNlbCcsXG4gIHRlbXBsYXRlVXJsOiAnLi9wcm9kdWN0LWNhcm91c2VsLmNvbXBvbmVudC5odG1sJyxcbiAgY2hhbmdlRGV0ZWN0aW9uOiBDaGFuZ2VEZXRlY3Rpb25TdHJhdGVneS5PblB1c2gsXG59KVxuZXhwb3J0IGNsYXNzIFByb2R1Y3RDYXJvdXNlbENvbXBvbmVudCBpbXBsZW1lbnRzIE9uSW5pdCB7XG4gIHByaXZhdGUgd2luZG93OiBXaW5kb3c7XG5cbiAgY29uc3RydWN0b3IoXG4gICAgd2luUmVmOiBXaW5kb3dSZWYsXG4gICAgcHJpdmF0ZSBlbDogRWxlbWVudFJlZixcbiAgICBwdWJsaWMgcHJvZHVjdENhcm91c2VsU2VydmljZTogUHJvZHVjdENhcm91c2VsU2VydmljZSxcbiAgICBwdWJsaWMgc2hhcmVkQ2Fyb3VzZWxTZXJ2aWNlOiBTaGFyZWRDYXJvdXNlbFNlcnZpY2VcbiAgKSB7XG4gICAgdGhpcy53aW5kb3cgPSB3aW5SZWYubmF0aXZlV2luZG93O1xuICB9XG5cbiAgbmdPbkluaXQoKSB7XG4gICAgdGhpcy5wcm9kdWN0Q2Fyb3VzZWxTZXJ2aWNlLmZldGNoVGl0bGUoKTtcbiAgICB0aGlzLnNoYXJlZENhcm91c2VsU2VydmljZS5zZXRJdGVtU2l6ZSh0aGlzLndpbmRvdywgdGhpcy5lbC5uYXRpdmVFbGVtZW50KTtcbiAgICB0aGlzLnByb2R1Y3RDYXJvdXNlbFNlcnZpY2UuZmV0Y2hJdGVtcygpO1xuICAgIHRoaXMuc2hhcmVkQ2Fyb3VzZWxTZXJ2aWNlLnNldEl0ZW1Bc0FjdGl2ZSgwKTtcbiAgfVxufVxuIl19
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvZHVjdC1jYXJvdXNlbC5jb21wb25lbnQuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJjbXMtY29tcG9uZW50cy9wcm9kdWN0L2Nhcm91c2VsL3Byb2R1Y3QtY2Fyb3VzZWwvcHJvZHVjdC1jYXJvdXNlbC5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE9BQU8sRUFBRSx1QkFBdUIsRUFBRSxTQUFTLEVBQUUsTUFBTSxlQUFlLENBQUM7QUFFbkUsT0FBTyxFQUFFLGFBQWEsRUFBYyxNQUFNLE1BQU0sQ0FBQztBQUNqRCxPQUFPLEVBQUUsTUFBTSxFQUFFLEdBQUcsRUFBRSxTQUFTLEVBQUUsTUFBTSxnQkFBZ0IsQ0FBQztBQUN4RCxPQUFPLEVBQUUsZ0JBQWdCLEVBQUUsTUFBTSx5REFBeUQsQ0FBQztBQUUzRixPQUFPLEVBQUUsc0JBQXNCLEVBQUUsTUFBTSw2QkFBNkIsQ0FBQztBQUVyRTtJQW1CRSxrQ0FDWSxTQUF3RCxFQUN4RCxPQUErQjtRQUYzQyxpQkFHSTtRQUZRLGNBQVMsR0FBVCxTQUFTLENBQStDO1FBQ3hELFlBQU8sR0FBUCxPQUFPLENBQXdCO1FBZjNDLFdBQU0sR0FBdUIsSUFBSSxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUNwRCxHQUFHOzs7O1FBQUMsVUFBQSxJQUFJLElBQUksT0FBQSxJQUFJLENBQUMsS0FBSyxFQUFWLENBQVUsRUFBQyxDQUN4QixDQUFDO1FBRUYsV0FBTSxHQUErQixJQUFJLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQzVELE1BQU0sQ0FBQyxPQUFPLENBQUMsRUFDZixHQUFHOzs7O1FBQUMsVUFBQSxJQUFJLElBQUksT0FBQSxJQUFJLENBQUMsWUFBWSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsRUFBNUIsQ0FBNEIsRUFBQyxFQUN6QyxHQUFHOzs7O1FBQUMsVUFBQSxLQUFLLElBQUksT0FBQSxLQUFLLENBQUMsR0FBRzs7OztRQUFDLFVBQUEsSUFBSSxJQUFJLE9BQUEsS0FBSSxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLEVBQTlCLENBQThCLEVBQUMsRUFBakQsQ0FBaUQsRUFBQyxFQUMvRCxTQUFTOzs7O1FBQUMsVUFBQyxTQUFxQztZQUM5QyxPQUFBLGFBQWEsQ0FBQyxTQUFTLENBQUM7UUFBeEIsQ0FBd0IsRUFDekIsQ0FDRixDQUFDO0lBS0MsQ0FBQzs7Z0JBdEJMLFNBQVMsU0FBQztvQkFDVCxRQUFRLEVBQUUscUJBQXFCO29CQUMvQixnR0FBZ0Q7b0JBQ2hELGVBQWUsRUFBRSx1QkFBdUIsQ0FBQyxNQUFNO2lCQUNoRDs7OztnQkFSUSxnQkFBZ0I7Z0JBRWhCLHNCQUFzQjs7SUF5Qi9CLCtCQUFDO0NBQUEsQUF2QkQsSUF1QkM7U0FsQlksd0JBQXdCOzs7SUFDbkMsMENBRUU7O0lBRUYsMENBT0U7Ozs7O0lBR0EsNkNBQWtFOzs7OztJQUNsRSwyQ0FBeUMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDaGFuZ2VEZXRlY3Rpb25TdHJhdGVneSwgQ29tcG9uZW50IH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBDbXNQcm9kdWN0Q2Fyb3VzZWxDb21wb25lbnQgfSBmcm9tICdAc3BhcnRhY3VzL2NvcmUnO1xuaW1wb3J0IHsgY29tYmluZUxhdGVzdCwgT2JzZXJ2YWJsZSB9IGZyb20gJ3J4anMnO1xuaW1wb3J0IHsgZmlsdGVyLCBtYXAsIHN3aXRjaE1hcCB9IGZyb20gJ3J4anMvb3BlcmF0b3JzJztcbmltcG9ydCB7IENtc0NvbXBvbmVudERhdGEgfSBmcm9tICcuLi8uLi8uLi8uLi9jbXMtc3RydWN0dXJlL3BhZ2UvbW9kZWwvY21zLWNvbXBvbmVudC1kYXRhJztcbmltcG9ydCB7IENhcm91c2VsSXRlbSB9IGZyb20gJy4uLy4uLy4uLy4uL3NoYXJlZC9jb21wb25lbnRzL2Nhcm91c2VsL2Nhcm91c2VsLm1vZGVsJztcbmltcG9ydCB7IFByb2R1Y3RDYXJvdXNlbFNlcnZpY2UgfSBmcm9tICcuLi9wcm9kdWN0LWNhcm91c2VsLnNlcnZpY2UnO1xuXG5AQ29tcG9uZW50KHtcbiAgc2VsZWN0b3I6ICdjeC1wcm9kdWN0LWNhcm91c2VsJyxcbiAgdGVtcGxhdGVVcmw6ICcuL3Byb2R1Y3QtY2Fyb3VzZWwuY29tcG9uZW50Lmh0bWwnLFxuICBjaGFuZ2VEZXRlY3Rpb246IENoYW5nZURldGVjdGlvblN0cmF0ZWd5Lk9uUHVzaCxcbn0pXG5leHBvcnQgY2xhc3MgUHJvZHVjdENhcm91c2VsQ29tcG9uZW50IHtcbiAgdGl0bGUkOiBPYnNlcnZhYmxlPHN0cmluZz4gPSB0aGlzLmNvbXBvbmVudC5kYXRhJC5waXBlKFxuICAgIG1hcChkYXRhID0+IGRhdGEudGl0bGUpXG4gICk7XG5cbiAgaXRlbXMkOiBPYnNlcnZhYmxlPENhcm91c2VsSXRlbVtdPiA9IHRoaXMuY29tcG9uZW50LmRhdGEkLnBpcGUoXG4gICAgZmlsdGVyKEJvb2xlYW4pLFxuICAgIG1hcChkYXRhID0+IGRhdGEucHJvZHVjdENvZGVzLnNwbGl0KCcgJykpLFxuICAgIG1hcChjb2RlcyA9PiBjb2Rlcy5tYXAoY29kZSA9PiB0aGlzLnNlcnZpY2UubG9hZFByb2R1Y3QoY29kZSkpKSxcbiAgICBzd2l0Y2hNYXAoKHByb2R1Y3RzJDogT2JzZXJ2YWJsZTxDYXJvdXNlbEl0ZW0+W10pID0+XG4gICAgICBjb21iaW5lTGF0ZXN0KHByb2R1Y3RzJClcbiAgICApXG4gICk7XG5cbiAgY29uc3RydWN0b3IoXG4gICAgcHJvdGVjdGVkIGNvbXBvbmVudDogQ21zQ29tcG9uZW50RGF0YTxDbXNQcm9kdWN0Q2Fyb3VzZWxDb21wb25lbnQ+LFxuICAgIHByb3RlY3RlZCBzZXJ2aWNlOiBQcm9kdWN0Q2Fyb3VzZWxTZXJ2aWNlXG4gICkge31cbn1cbiJdfQ==
