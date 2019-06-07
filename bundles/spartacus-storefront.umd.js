@@ -15018,7 +15018,8 @@
          * @return {?}
          */
         function (pageNumber) {
-            this.search(this.query, { currentPage: pageNumber });
+            var queryParams = this.activatedRoute.snapshot.queryParams;
+            this.search(queryParams.query, { currentPage: pageNumber });
         };
         /**
          * @param {?} sortCode
