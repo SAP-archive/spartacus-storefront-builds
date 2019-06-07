@@ -14601,10 +14601,10 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ProductSummaryComponent = /** @class */ (function () {
-        function ProductSummaryComponent(translatePipe, translationService) {
-            this.translatePipe = translatePipe;
+        function ProductSummaryComponent(translationService) {
             this.translationService = translationService;
             this.itemCount = 1;
+            this.reviewsTabAvailable = new rxjs.BehaviorSubject(false);
         }
         Object.defineProperty(ProductSummaryComponent.prototype, "outlets", {
             get: /**
@@ -14731,7 +14731,7 @@
             var _this = this;
             // Use translated label for Reviews tab reference
             this.translationService
-                .translate('productDetails.reviews')
+                .translate('CMSTabParagraphContainer.tabs.ProductReviewsTabComponent')
                 .subscribe((/**
              * @param {?} reviewsTabLabel
              * @return {?}
@@ -14745,31 +14745,33 @@
                 var reviewsComponent = _this.getReviewsComponent();
                 if (reviewsTab && reviewsComponent) {
                     _this.clickTabIfInactive(reviewsTab);
-                    reviewsComponent.scrollIntoView();
+                    setTimeout((/**
+                     * @return {?}
+                     */
+                    function () { return reviewsComponent.scrollIntoView({ behavior: 'smooth' }); }), 0);
                 }
-            }));
+            }))
+                .unsubscribe();
         };
         /**
          * @return {?}
          */
-        ProductSummaryComponent.prototype.ngOnInit = /**
+        ProductSummaryComponent.prototype.ngAfterContentChecked = /**
          * @return {?}
          */
         function () {
-            this.reviewsTabAvailable = !!this.getReviewsComponent();
+            this.reviewsTabAvailable.next(!!this.getReviewsComponent());
         };
         ProductSummaryComponent.outlets = ProductDetailOutlets;
         ProductSummaryComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-product-summary',
-                        template: "<ng-template\n  [cxOutlet]=\"outlets.RATING\"\n  [cxOutletContext]=\"{ product: product }\"\n>\n  <div class=\"rating\">\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"count\">({{ product?.numberOfReviews }})</div>\n    <a class=\"btn-link\" *ngIf=\"reviewsTabAvailable\" (click)=\"showReviews()\">{{\n      'productSummary.showReviews' | cxTranslate\n    }}</a>\n  </div>\n</ng-template>\n<ng-template\n  [cxOutlet]=\"outlets.TITLE\"\n  [cxOutletContext]=\"{ product: product }\"\n>\n  <!-- <div class=\"name\">{{ product?.name }}</div> -->\n  <div class=\"code\">\n    {{ 'productSummary.id' | cxTranslate }} {{ product?.code }}\n  </div>\n</ng-template>\n\n<ng-template\n  [cxOutlet]=\"outlets.PRICE\"\n  [cxOutletContext]=\"{ product: product }\"\n>\n  <div class=\"price\" aria-label=\"new item price\">\n    {{ product?.price?.formattedValue }}\n  </div>\n</ng-template>\n\n<ng-template\n  [cxOutlet]=\"outlets.DESCRIPTION\"\n  [cxOutletContext]=\"{ product: product }\"\n>\n  <div class=\"description\"><p [innerHTML]=\"product?.summary\"></p></div>\n</ng-template>\n\n<cx-page-slot position=\"AddToCart\"></cx-page-slot>\n\n<!-- @TODO: Temp. Comment out share link while not in use by CMS -->\n<!-- <ng-template [cxOutlet]=\"outlets.SHARE\" [cxOutletContext]=\"{ product: product }\">\n  <div>\n    <a href=\"#\" class=\"share btn-link\">\n      {{ 'productSummary.share' | cxTranslate }}\n    </a>\n  </div>\n</ng-template> -->\n",
-                        changeDetection: core.ChangeDetectionStrategy.OnPush,
-                        providers: [core$1.TranslatePipe]
+                        template: "<ng-template\n  [cxOutlet]=\"outlets.RATING\"\n  [cxOutletContext]=\"{ product: product }\"\n>\n  <div class=\"rating\">\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"count\">({{ product?.numberOfReviews }})</div>\n    <a\n      class=\"btn-link\"\n      *ngIf=\"(reviewsTabAvailable | async)\"\n      (click)=\"showReviews()\"\n      >{{ 'productSummary.showReviews' | cxTranslate }}</a\n    >\n  </div>\n</ng-template>\n<ng-template\n  [cxOutlet]=\"outlets.TITLE\"\n  [cxOutletContext]=\"{ product: product }\"\n>\n  <!-- <div class=\"name\">{{ product?.name }}</div> -->\n  <div class=\"code\">\n    {{ 'productSummary.id' | cxTranslate }} {{ product?.code }}\n  </div>\n</ng-template>\n\n<ng-template\n  [cxOutlet]=\"outlets.PRICE\"\n  [cxOutletContext]=\"{ product: product }\"\n>\n  <div class=\"price\" aria-label=\"new item price\">\n    {{ product?.price?.formattedValue }}\n  </div>\n</ng-template>\n\n<ng-template\n  [cxOutlet]=\"outlets.DESCRIPTION\"\n  [cxOutletContext]=\"{ product: product }\"\n>\n  <div class=\"description\"><p [innerHTML]=\"product?.summary\"></p></div>\n</ng-template>\n\n<cx-page-slot position=\"AddToCart\"></cx-page-slot>\n\n<!-- @TODO: Temp. Comment out share link while not in use by CMS -->\n<!-- <ng-template [cxOutlet]=\"outlets.SHARE\" [cxOutletContext]=\"{ product: product }\">\n  <div>\n    <a href=\"#\" class=\"share btn-link\">\n      {{ 'productSummary.share' | cxTranslate }}\n    </a>\n  </div>\n</ng-template> -->\n",
+                        changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
         /** @nocollapse */
         ProductSummaryComponent.ctorParameters = function () { return [
-            { type: core$1.TranslatePipe },
             { type: core$1.TranslationService }
         ]; };
         ProductSummaryComponent.propDecorators = {

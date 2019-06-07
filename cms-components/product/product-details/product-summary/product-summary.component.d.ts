@@ -1,12 +1,12 @@
-import { OnInit } from '@angular/core';
-import { TranslatePipe, TranslationService } from '@spartacus/core';
+import { AfterContentChecked } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { TranslationService } from '@spartacus/core';
 import { ProductDetailOutlets } from '../../product-outlets.model';
-export declare class ProductSummaryComponent implements OnInit {
-    protected translatePipe: TranslatePipe;
+export declare class ProductSummaryComponent implements AfterContentChecked {
     private translationService;
     static outlets: typeof ProductDetailOutlets;
     itemCount: number;
-    reviewsTabAvailable: boolean;
+    reviewsTabAvailable: BehaviorSubject<boolean>;
     product: any;
     readonly outlets: typeof ProductDetailOutlets;
     updateCount(value: any): void;
@@ -15,6 +15,6 @@ export declare class ProductSummaryComponent implements OnInit {
     getTabByLabel(label: string, tabsComponent: Element): HTMLElement;
     clickTabIfInactive(tab: HTMLElement): void;
     showReviews(): void;
-    constructor(translatePipe: TranslatePipe, translationService: TranslationService);
-    ngOnInit(): void;
+    constructor(translationService: TranslationService);
+    ngAfterContentChecked(): void;
 }
