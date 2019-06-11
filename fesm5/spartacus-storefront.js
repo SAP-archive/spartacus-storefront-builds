@@ -1286,16 +1286,8 @@ var BreakpointService = /** @class */ (function () {
 var DEFAULT_MEDIA_FORMAT = 'tablet';
 var MediaService = /** @class */ (function () {
     function MediaService(config, breakpointService) {
-        var _this = this;
         this.config = config;
         this.breakpointService = breakpointService;
-        this.getImageUrl = (/**
-         * @param {?} url
-         * @return {?}
-         */
-        function (url) {
-            return url.startsWith('http') ? url : _this.getBaseUrl() + url;
-        });
     }
     Object.defineProperty(MediaService.prototype, "mediaFormats", {
         get: /**
@@ -1426,6 +1418,22 @@ var MediaService = /** @class */ (function () {
             return set;
         }), '');
         return srcset === '' ? undefined : srcset;
+    };
+    /**
+     * @private
+     * @param {?} url
+     * @return {?}
+     */
+    MediaService.prototype.getImageUrl = /**
+     * @private
+     * @param {?} url
+     * @return {?}
+     */
+    function (url) {
+        if (!url) {
+            return null;
+        }
+        return url.startsWith('http') ? url : this.getBaseUrl() + url;
     };
     /**
      * @private

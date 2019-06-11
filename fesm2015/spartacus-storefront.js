@@ -1061,13 +1061,6 @@ class MediaService {
     constructor(config, breakpointService) {
         this.config = config;
         this.breakpointService = breakpointService;
-        this.getImageUrl = (/**
-         * @param {?} url
-         * @return {?}
-         */
-        (url) => {
-            return url.startsWith('http') ? url : this.getBaseUrl() + url;
-        });
     }
     /**
      * @private
@@ -1166,6 +1159,17 @@ class MediaService {
             return set;
         }), '');
         return srcset === '' ? undefined : srcset;
+    }
+    /**
+     * @private
+     * @param {?} url
+     * @return {?}
+     */
+    getImageUrl(url) {
+        if (!url) {
+            return null;
+        }
+        return url.startsWith('http') ? url : this.getBaseUrl() + url;
     }
     /**
      * @private
