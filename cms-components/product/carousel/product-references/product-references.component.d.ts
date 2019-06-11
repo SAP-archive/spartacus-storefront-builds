@@ -8,7 +8,7 @@ export declare class ProductReferencesComponent {
     protected service: ProductCarouselService;
     protected current: CurrentProductService;
     title$: Observable<string>;
-    items$: Observable<import("../../../../shared/components/carousel/carousel.model").CarouselItem[]>;
+    items$: Observable<import("../../../../shared").CarouselItem[]>;
     constructor(component: CmsComponentData<CmsProductReferencesComponent>, service: ProductCarouselService, current: CurrentProductService);
     readonly productCode$: Observable<string>;
 }

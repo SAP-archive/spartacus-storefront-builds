@@ -1,0 +1,7 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export { FormComponentsModule } from './form-components.module';
+export { ItemCounterComponent } from './item-counter/item-counter.component';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJzaGFyZWQvY29tcG9uZW50cy9mb3JtLWNvbXBvbmVudHMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLHFDQUFjLDBCQUEwQixDQUFDO0FBQ3pDLHFDQUFjLHVDQUF1QyxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0ICogZnJvbSAnLi9mb3JtLWNvbXBvbmVudHMubW9kdWxlJztcbmV4cG9ydCAqIGZyb20gJy4vaXRlbS1jb3VudGVyL2l0ZW0tY291bnRlci5jb21wb25lbnQnO1xuIl19

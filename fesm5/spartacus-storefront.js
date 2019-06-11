@@ -1,13 +1,13 @@
-import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, Renderer2, HostListener, forwardRef, Output, EventEmitter, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, INJECTOR, APP_INITIALIZER, Pipe } from '@angular/core';
-import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, ServerConfig, OccConfig, I18nModule, GlobalMessageService, GlobalMessageType, GlobalMessageModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UrlModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserPaymentService, TranslationService, UserService, CheckoutModule, UserAddressService, AuthService, AuthRedirectService, UserModule, NotAuthGuard, CmsConfig, CxApiService, CmsService, DynamicAttributeService, PageType, SemanticPathService, TranslationChunkService, PageRobotsMeta, PageMetaService, LanguageService, UserConsentService, UserOrderService, CmsPageTitleModule, SearchboxService, ProductModule, ProductReferenceService, ProductSearchService, CmsModule, ProductReviewService, RoutingModule as RoutingModule$1, StateModule, AuthModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, provideConfig } from '@spartacus/core';
-import { map, filter, switchMap, tap, debounceTime, startWith, distinctUntilChanged, take, skipWhile, shareReplay, first, endWith, withLatestFrom } from 'rxjs/operators';
+import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, Output, EventEmitter, Renderer2, HostListener, forwardRef, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, INJECTOR, APP_INITIALIZER, Pipe } from '@angular/core';
+import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, ServerConfig, OccConfig, UrlModule, GlobalMessageService, GlobalMessageType, GlobalMessageModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserPaymentService, TranslationService, UserService, CheckoutModule, UserAddressService, AuthService, AuthRedirectService, UserModule, NotAuthGuard, CmsConfig, CxApiService, CmsService, DynamicAttributeService, PageType, SemanticPathService, TranslationChunkService, PageRobotsMeta, PageMetaService, LanguageService, UserConsentService, UserOrderService, CmsPageTitleModule, SearchboxService, ProductModule, ProductReferenceService, ProductSearchService, CmsModule, ProductReviewService, RoutingModule as RoutingModule$1, StateModule, AuthModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, provideConfig } from '@spartacus/core';
+import { map, filter, switchMap, tap, startWith, debounceTime, distinctUntilChanged, take, skipWhile, shareReplay, first, endWith, withLatestFrom } from 'rxjs/operators';
 import { __extends, __values, __spread, __read, __awaiter, __generator, __assign } from 'tslib';
 import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
+import { fromEvent, of, combineLatest, BehaviorSubject, concat, isObservable, from, Subscription } from 'rxjs';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { of, fromEvent, combineLatest, BehaviorSubject, concat, isObservable, from, Subscription } from 'rxjs';
 import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
 import { ServiceWorkerModule, SwRegistrationOptions } from '@angular/service-worker';
 import { Title, Meta } from '@angular/platform-browser';
@@ -870,6 +870,758 @@ var AutoFocusDirectiveModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var CardComponent = /** @class */ (function () {
+    function CardComponent() {
+        this.iconTypes = ICON_TYPE;
+        this.deleteCard = new EventEmitter();
+        this.setDefaultCard = new EventEmitter();
+        this.sendCard = new EventEmitter();
+        this.editCard = new EventEmitter();
+        this.cancelCard = new EventEmitter();
+        this.border = false;
+        this.editMode = false;
+        this.isDefault = false;
+        this.fitToContainer = false;
+    }
+    // ACTIONS
+    // ACTIONS
+    /**
+     * @return {?}
+     */
+    CardComponent.prototype.setEditMode = 
+    // ACTIONS
+    /**
+     * @return {?}
+     */
+    function () {
+        this.editMode = true;
+    };
+    /**
+     * @return {?}
+     */
+    CardComponent.prototype.cancelEdit = /**
+     * @return {?}
+     */
+    function () {
+        this.editMode = false;
+        this.cancelCard.emit(5);
+    };
+    /**
+     * @return {?}
+     */
+    CardComponent.prototype.delete = /**
+     * @return {?}
+     */
+    function () {
+        this.deleteCard.emit(1);
+    };
+    /**
+     * @return {?}
+     */
+    CardComponent.prototype.setDefault = /**
+     * @return {?}
+     */
+    function () {
+        this.isDefault = true;
+        this.setDefaultCard.emit(2);
+    };
+    /**
+     * @return {?}
+     */
+    CardComponent.prototype.send = /**
+     * @return {?}
+     */
+    function () {
+        this.sendCard.emit(3);
+    };
+    /**
+     * @return {?}
+     */
+    CardComponent.prototype.edit = /**
+     * @return {?}
+     */
+    function () {
+        this.editCard.emit(4);
+    };
+    /**
+     * @return {?}
+     */
+    CardComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () { };
+    CardComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-card',
+                    template: "<div\n  *ngIf=\"content\"\n  class=\"cx-card\"\n  [class.cx-card-border]=\"border\"\n  [class.cx-card-fit-to-container]=\"fitToContainer\"\n>\n  <!-- Card Header -->\n  <div *ngIf=\"content.header && !editMode\" class=\"card-header\">\n    {{ content.header }}\n  </div>\n  <!-- Card Body -->\n  <div class=\"card-body cx-card-body\" [class.cx-card-delete]=\"editMode\">\n    <!-- Edit message -->\n    <div *ngIf=\"editMode\" class=\"cx-card-delete-msg\">\n      {{ content.deleteMsg }}\n    </div>\n    <!-- Card title -->\n    <h4 *ngIf=\"content.title\" class=\"cx-card-title\">\n      {{ content.title }}\n    </h4>\n    <!-- Card Content -->\n    <div class=\"cx-card-container\">\n      <!-- Card Label -->\n      <div class=\"cx-card-label-container\">\n        <div *ngIf=\"content.textBold\" class=\"cx-card-label-bold\">\n          {{ content.textBold }}\n        </div>\n        <div *ngFor=\"let line of content.text\">\n          <div class=\"cx-card-label\">{{ line }}</div>\n        </div>\n      </div>\n      <!-- Image -->\n      <div *ngIf=\"content.img\" class=\"cx-card-img-container\">\n        <cx-icon [type]=\"content.img\"></cx-icon>\n      </div>\n    </div>\n    <!-- Edit Mode Actions -->\n    <div *ngIf=\"editMode\" class=\"row cx-card-body-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-primary\" (click)=\"delete()\">\n          {{ 'common.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <!-- Actions -->\n    <div *ngIf=\"content.actions && !editMode\" class=\"cx-card-actions\">\n      <div *ngFor=\"let action of content.actions\">\n        <div [ngSwitch]=\"action.event\">\n          <a\n            *ngSwitchCase=\"'delete'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"delete()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'default'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"setDefault()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'send'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"send()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'edit'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"edit()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchDefault\n            href=\"{{ action.link }}\"\n            class=\"card-link btn-link\"\n            >{{ action.name }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                    styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-card-border{border-width:var(--cx-border-width,1px);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light))}.cx-card-container{display:var(--cx-display,flex)}.cx-card-label-container{flex-grow:var(--cx-flex-grow,2)}.cx-card-fit-to-container{width:var(--cx-width,100%);height:var(--cx-height,100%);display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column)}.cx-card-body{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column);justify-content:var(--cx-justify-content,space-between)}.cx-card-delete{background-color:var(--cx-background-color,var(--cx-g-color-background))}.cx-card-body-delete{padding:var(--cx-padding,1rem 0 0 0)}.cx-card-delete-msg{color:var(--cx-color,var(--cx-g-color-danger));padding:var(--cx-padding,0 0 1.25rem 0)}.cx-card-actions{display:var(--cx-display,flex);justify-content:var(--cx-justify-content,flex-end);padding:var(--cx-padding,1.25rem 0 0 0)}.cx-card-link{padding:var(--cx-padding,0 0 0 1rem)}"]
+                }] }
+    ];
+    /** @nocollapse */
+    CardComponent.ctorParameters = function () { return []; };
+    CardComponent.propDecorators = {
+        deleteCard: [{ type: Output }],
+        setDefaultCard: [{ type: Output }],
+        sendCard: [{ type: Output }],
+        editCard: [{ type: Output }],
+        cancelCard: [{ type: Output }],
+        border: [{ type: Input }],
+        editMode: [{ type: Input }],
+        isDefault: [{ type: Input }],
+        content: [{ type: Input }],
+        fitToContainer: [{ type: Input }]
+    };
+    return CardComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CardModule = /** @class */ (function () {
+    function CardModule() {
+    }
+    CardModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule, I18nModule, IconModule],
+                    declarations: [CardComponent],
+                    exports: [CardComponent],
+                },] }
+    ];
+    return CardModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CarouselService = /** @class */ (function () {
+    function CarouselService(winRef) {
+        this.winRef = winRef;
+    }
+    /**
+     * The number of items shown in the carousel is calculated dividing
+     * the host element width with the minimum item width.
+     */
+    /**
+     * The number of items shown in the carousel is calculated dividing
+     * the host element width with the minimum item width.
+     * @param {?} nativeElement
+     * @param {?} itemWidth
+     * @return {?}
+     */
+    CarouselService.prototype.getSize = /**
+     * The number of items shown in the carousel is calculated dividing
+     * the host element width with the minimum item width.
+     * @param {?} nativeElement
+     * @param {?} itemWidth
+     * @return {?}
+     */
+    function (nativeElement, itemWidth) {
+        return fromEvent(this.winRef.nativeWindow, 'resize').pipe(map((/**
+         * @param {?} _
+         * @return {?}
+         */
+        function (_) { return ((/** @type {?} */ (nativeElement))).clientWidth; })), startWith(((/** @type {?} */ (nativeElement))).clientWidth), debounceTime(100), map((/**
+         * @param {?} totalWidth
+         * @return {?}
+         */
+        function (totalWidth) {
+            return Math.round(totalWidth / itemWidth);
+        })), distinctUntilChanged());
+    };
+    CarouselService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    CarouselService.ctorParameters = function () { return [
+        { type: WindowRef }
+    ]; };
+    /** @nocollapse */ CarouselService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CarouselService_Factory() { return new CarouselService(ɵɵinject(WindowRef)); }, token: CarouselService, providedIn: "root" });
+    return CarouselService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CarouselComponent = /** @class */ (function () {
+    function CarouselComponent(el, service) {
+        this.el = el;
+        this.service = service;
+        /**
+         * Specifies the min pixel used per product. This value is used
+         * to calculate the amount of items we can fit into the available with
+         * of the host element. The number of items is not related the breakpoints,
+         * which means that a carousel can be placed in different layouts,
+         * regardless of the overall size.
+         */
+        this.minItemPixelSize = 300;
+        this.indicatorIcon = ICON_TYPE.CIRCLE;
+        this.previousIcon = ICON_TYPE.CARET_LEFT;
+        this.nextIcon = ICON_TYPE.CARET_RIGHT;
+        /**
+         * The group with items which is currently active.
+         */
+        this.activeSlide = 0;
+    }
+    /**
+     * @return {?}
+     */
+    CarouselComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.size$ = this.service.getSize(this.el.nativeElement, this.minItemPixelSize);
+    };
+    /**
+     * @param {?} slide
+     * @return {?}
+     */
+    CarouselComponent.prototype.select = /**
+     * @param {?} slide
+     * @return {?}
+     */
+    function (slide) {
+        this.activeSlide = slide;
+    };
+    CarouselComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-carousel',
+                    template: "<ng-container *ngIf=\"items && items.length > 0 && (size$ | async) as size\">\n  <h3 *ngIf=\"title\">\n    {{ title }}\n  </h3>\n\n  <div class=\"cx-carousel\" [ngClass]=\"'size-' + size\">\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"previous\"\n      (click)=\"select(activeSlide - size)\"\n      [disabled]=\"activeSlide === 0\"\n    >\n      <cx-icon [type]=\"previousIcon\"></cx-icon>\n    </button>\n\n    <div class=\"groups\">\n      <ng-container *ngFor=\"let _ of items; let i = index\">\n        <div class=\"group\" *ngIf=\"i % size === 0\">\n          <ng-container *ngFor=\"let item of (items | slice: i:i + size)\">\n            <a\n              *ngIf=\"item\"\n              class=\"product\"\n              [class.active]=\"i === activeSlide\"\n              [routerLink]=\"item.route\"\n            >\n              <cx-media\n                [container]=\"item.media?.container\"\n                [format]=\"item.media?.format\"\n              >\n              </cx-media>\n\n              <h4 *ngIf=\"item.title\">{{ item.title }}</h4>\n              <div *ngIf=\"item.price\" class=\"price\">{{ item.price }}</div>\n            </a>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"next\"\n      (click)=\"select(activeSlide + size)\"\n      [disabled]=\"activeSlide > items.length - size - 1\"\n    >\n      <cx-icon [type]=\"nextIcon\"></cx-icon>\n    </button>\n  </div>\n\n  <div class=\"indicators\" *ngIf=\"size < items.length\">\n    <ng-container *ngFor=\"let _ of items; let i = index\">\n      <button\n        *ngIf=\"i % size === 0\"\n        (click)=\"select(i)\"\n        [disabled]=\"i === activeSlide\"\n      >\n        <cx-icon [type]=\"indicatorIcon\"></cx-icon>\n      </button>\n    </ng-container>\n  </div>\n</ng-container>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    CarouselComponent.ctorParameters = function () { return [
+        { type: ElementRef },
+        { type: CarouselService }
+    ]; };
+    CarouselComponent.propDecorators = {
+        title: [{ type: Input }],
+        items: [{ type: Input }],
+        minItemPixelSize: [{ type: Input }],
+        indicatorIcon: [{ type: Input }],
+        previousIcon: [{ type: Input }],
+        nextIcon: [{ type: Input }]
+    };
+    return CarouselComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @enum {string} */
+var BREAKPOINT = {
+    xs: 'xs',
+    sm: 'sm',
+    md: 'md',
+    lg: 'lg',
+    xl: 'xl',
+};
+/**
+ * The LayoutConfig supports the configuration of page slots by page templates
+ * or page sections, such as headers and footers. The configuration also supports
+ * adaptive design per breadpoint (not per device type), so that the DOM is (re)rendered
+ * por a given breakpoint.
+ * @abstract
+ */
+var  /**
+ * The LayoutConfig supports the configuration of page slots by page templates
+ * or page sections, such as headers and footers. The configuration also supports
+ * adaptive design per breadpoint (not per device type), so that the DOM is (re)rendered
+ * por a given breakpoint.
+ * @abstract
+ */
+LayoutConfig = /** @class */ (function (_super) {
+    __extends(LayoutConfig, _super);
+    function LayoutConfig() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return LayoutConfig;
+}(ServerConfig));
+
+var _a;
+/** @type {?} */
+var DEFAULT_BREAKPOINTS = (_a = {},
+    _a[BREAKPOINT.xs] = 576,
+    _a[BREAKPOINT.sm] = 768,
+    _a[BREAKPOINT.md] = 992,
+    _a[BREAKPOINT.lg] = 1200,
+    _a);
+var BreakpointService = /** @class */ (function () {
+    function BreakpointService(winRef, config) {
+        this.winRef = winRef;
+        this.config = config;
+    }
+    /**
+     * @param {?} breakpoint
+     * @return {?}
+     */
+    BreakpointService.prototype.getSize = /**
+     * @param {?} breakpoint
+     * @return {?}
+     */
+    function (breakpoint) {
+        return this.config.breakpoints
+            ? this.config.breakpoints[breakpoint]
+            : DEFAULT_BREAKPOINTS[breakpoint];
+    };
+    Object.defineProperty(BreakpointService.prototype, "breakpoint$", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            if (!this.window) {
+                return of(BREAKPOINT.xs);
+            }
+            return fromEvent(this.window, 'resize').pipe(debounceTime(300), startWith({ target: this.window }), map((/**
+             * @param {?} event
+             * @return {?}
+             */
+            function (event) { return _this.getBreakpoint(((/** @type {?} */ (event.target))).innerWidth); })), distinctUntilChanged());
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BreakpointService.prototype, "breakpoints", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return [
+                BREAKPOINT.xs,
+                BREAKPOINT.sm,
+                BREAKPOINT.md,
+                BREAKPOINT.lg,
+                BREAKPOINT.xl,
+            ];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @protected
+     * @param {?} windowWidth
+     * @return {?}
+     */
+    BreakpointService.prototype.getBreakpoint = /**
+     * @protected
+     * @param {?} windowWidth
+     * @return {?}
+     */
+    function (windowWidth) {
+        /** @type {?} */
+        var breakpoint = this.getClosest(windowWidth);
+        return BREAKPOINT[breakpoint || BREAKPOINT.lg];
+    };
+    /**
+     * @protected
+     * @param {?=} windowWidth
+     * @return {?}
+     */
+    BreakpointService.prototype.getClosest = /**
+     * @protected
+     * @param {?=} windowWidth
+     * @return {?}
+     */
+    function (windowWidth) {
+        var _this = this;
+        if (!windowWidth) {
+            windowWidth = this.window.innerWidth;
+        }
+        return windowWidth < this.getSize(BREAKPOINT.xs)
+            ? BREAKPOINT.xs
+            : this.breakpoints.reverse().find((/**
+             * @param {?} br
+             * @return {?}
+             */
+            function (br) { return windowWidth >= _this.getSize(br); }));
+    };
+    Object.defineProperty(BreakpointService.prototype, "window", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.winRef.nativeWindow;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    BreakpointService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    BreakpointService.ctorParameters = function () { return [
+        { type: WindowRef },
+        { type: LayoutConfig }
+    ]; };
+    /** @nocollapse */ BreakpointService.ngInjectableDef = ɵɵdefineInjectable({ factory: function BreakpointService_Factory() { return new BreakpointService(ɵɵinject(WindowRef), ɵɵinject(LayoutConfig)); }, token: BreakpointService, providedIn: "root" });
+    return BreakpointService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * the default format is used for browsers that do not support
+ * @type {?}
+ */
+var DEFAULT_MEDIA_FORMAT = 'tablet';
+var MediaService = /** @class */ (function () {
+    function MediaService(config, breakpointService) {
+        var _this = this;
+        this.config = config;
+        this.breakpointService = breakpointService;
+        this.getImageUrl = (/**
+         * @param {?} url
+         * @return {?}
+         */
+        function (url) {
+            return url.startsWith('http') ? url : _this.getBaseUrl() + url;
+        });
+    }
+    Object.defineProperty(MediaService.prototype, "mediaFormats", {
+        get: /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            return [
+                {
+                    code: 'mobile',
+                    threshold: this.breakpointService.getSize(BREAKPOINT.xs),
+                },
+                {
+                    code: 'tablet',
+                    threshold: this.breakpointService.getSize(BREAKPOINT.sm),
+                },
+                {
+                    code: 'desktop',
+                    threshold: this.breakpointService.getSize(BREAKPOINT.md),
+                },
+                {
+                    code: 'widescreen',
+                    threshold: this.breakpointService.getSize(BREAKPOINT.lg),
+                },
+            ];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @param {?} container
+     * @param {?=} format
+     * @param {?=} alt
+     * @return {?}
+     */
+    MediaService.prototype.getMedia = /**
+     * @param {?} container
+     * @param {?=} format
+     * @param {?=} alt
+     * @return {?}
+     */
+    function (container, format, alt) {
+        return {
+            src: this.getMainImage(container, format),
+            srcset: this.getSrcSet(container),
+            alt: alt || this.getAlt(container, format),
+        };
+    };
+    /**
+     * @private
+     * @param {?} media
+     * @param {?=} format
+     * @return {?}
+     */
+    MediaService.prototype.getMainImage = /**
+     * @private
+     * @param {?} media
+     * @param {?=} format
+     * @return {?}
+     */
+    function (media, format) {
+        if (media && media[format || DEFAULT_MEDIA_FORMAT]) {
+            return this.getImageUrl(media[format || DEFAULT_MEDIA_FORMAT].url);
+        }
+        else if (media && media.url) {
+            return this.getImageUrl(media.url);
+        }
+        else {
+            return null;
+        }
+    };
+    /**
+     * @private
+     * @param {?} media
+     * @param {?=} format
+     * @return {?}
+     */
+    MediaService.prototype.getAlt = /**
+     * @private
+     * @param {?} media
+     * @param {?=} format
+     * @return {?}
+     */
+    function (media, format) {
+        if (!media) {
+            return undefined;
+        }
+        else if (media[format || DEFAULT_MEDIA_FORMAT]) {
+            return media[format || DEFAULT_MEDIA_FORMAT].altText;
+        }
+        else if (media.altText) {
+            return media.altText;
+        }
+    };
+    /**
+     * builds a set of images aligned with the breakpoints
+     */
+    /**
+     * builds a set of images aligned with the breakpoints
+     * @private
+     * @param {?} media
+     * @return {?}
+     */
+    MediaService.prototype.getSrcSet = /**
+     * builds a set of images aligned with the breakpoints
+     * @private
+     * @param {?} media
+     * @return {?}
+     */
+    function (media) {
+        var _this = this;
+        if (!media) {
+            return undefined;
+        }
+        /** @type {?} */
+        var srcset = this.mediaFormats.reduce((/**
+         * @param {?} set
+         * @param {?} format
+         * @return {?}
+         */
+        function (set, format) {
+            if (!!media[format.code]) {
+                if (set) {
+                    set += ', ';
+                }
+                set += _this.getImageUrl(media[format.code].url) + " " + format.threshold + "w";
+            }
+            return set;
+        }), '');
+        return srcset === '' ? undefined : srcset;
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    MediaService.prototype.getBaseUrl = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        return (this.config.backend.media.baseUrl || this.config.backend.occ.baseUrl || '');
+    };
+    MediaService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    MediaService.ctorParameters = function () { return [
+        { type: OccConfig },
+        { type: BreakpointService }
+    ]; };
+    /** @nocollapse */ MediaService.ngInjectableDef = ɵɵdefineInjectable({ factory: function MediaService_Factory() { return new MediaService(ɵɵinject(OccConfig), ɵɵinject(BreakpointService)); }, token: MediaService, providedIn: "root" });
+    return MediaService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var MediaComponent = /** @class */ (function () {
+    function MediaComponent(mediaService) {
+        this.mediaService = mediaService;
+        /**
+         * Once the media is loaded, we emit an event.
+         */
+        this.loaded = new EventEmitter();
+        /**
+         * The `cx-media` component has an `is-initialized` class as long as the
+         * media is being initialized.
+         */
+        this.isInitialized = false;
+        /**
+         * The `cx-media` component has a `is-loading` class as long as the
+         * media is loaded. Wehn the media is loaded, the `is-initialized` class
+         * is added.
+         */
+        this.isLoading = true;
+        /**
+         * When there's no media provided for the content, or in case an error
+         * happened during loading, we add the `is-missing` class. Visual effects
+         * can be controlled by CSS.
+         */
+        this.isMissing = false;
+    }
+    /**
+     * @return {?}
+     */
+    MediaComponent.prototype.ngOnChanges = /**
+     * @return {?}
+     */
+    function () {
+        this.create();
+    };
+    /**
+     * Creates the `Media` object
+     */
+    /**
+     * Creates the `Media` object
+     * @private
+     * @return {?}
+     */
+    MediaComponent.prototype.create = /**
+     * Creates the `Media` object
+     * @private
+     * @return {?}
+     */
+    function () {
+        this.media = this.mediaService.getMedia(this.container, this.format, this.alt);
+        if (!this.media.src) {
+            this.handleMissing();
+        }
+    };
+    /**
+     * This handler is called from the UI when the image is loaded.
+     */
+    /**
+     * This handler is called from the UI when the image is loaded.
+     * @return {?}
+     */
+    MediaComponent.prototype.loadHandler = /**
+     * This handler is called from the UI when the image is loaded.
+     * @return {?}
+     */
+    function () {
+        this.isLoading = false;
+        this.isInitialized = true;
+        this.loaded.emit(true);
+    };
+    /**
+     * Whenever an error happens during load, we mark the component
+     * with css classes to have a missing media.
+     */
+    /**
+     * Whenever an error happens during load, we mark the component
+     * with css classes to have a missing media.
+     * @return {?}
+     */
+    MediaComponent.prototype.errorHandler = /**
+     * Whenever an error happens during load, we mark the component
+     * with css classes to have a missing media.
+     * @return {?}
+     */
+    function () {
+        this.handleMissing();
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    MediaComponent.prototype.handleMissing = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        this.isLoading = false;
+        this.isInitialized = true;
+        this.isMissing = true;
+        this.loaded.emit(false);
+    };
+    MediaComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-media',
+                    template: "<img\n  *ngIf=\"media?.src\"\n  [attr.src]=\"media.src\"\n  [attr.srcset]=\"media.srcset\"\n  [attr.alt]=\"media.alt\"\n  (load)=\"loadHandler()\"\n  (error)=\"errorHandler()\"\n/>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    /** @nocollapse */
+    MediaComponent.ctorParameters = function () { return [
+        { type: MediaService }
+    ]; };
+    MediaComponent.propDecorators = {
+        container: [{ type: Input }],
+        format: [{ type: Input }],
+        alt: [{ type: Input }],
+        loaded: [{ type: Output }],
+        isInitialized: [{ type: HostBinding, args: ['class.is-initialized',] }],
+        isLoading: [{ type: HostBinding, args: ['class.is-loading',] }],
+        isMissing: [{ type: HostBinding, args: ['class.is-missing',] }]
+    };
+    return MediaComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var MediaModule = /** @class */ (function () {
+    function MediaModule() {
+    }
+    MediaModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule],
+                    declarations: [MediaComponent],
+                    exports: [MediaComponent],
+                },] }
+    ];
+    return MediaModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CarouselModule = /** @class */ (function () {
+    function CarouselModule() {
+    }
+    CarouselModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule, RouterModule, IconModule, MediaModule, UrlModule],
+                    declarations: [CarouselComponent],
+                    exports: [CarouselComponent],
+                },] }
+    ];
+    return CarouselModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var OnlyNumberDirective = /** @class */ (function () {
     /**
      * Class constructor
@@ -1423,6 +2175,11 @@ var FormComponentsModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 /**
  * This component navigates using [routerLink] attribute when input 'url' is a relative url. Otherwise (when it's absolute), [href] is used.
  */
@@ -1508,6 +2265,11 @@ var GenericLinkModule = /** @class */ (function () {
     ];
     return GenericLinkModule;
 }());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -1767,483 +2529,6 @@ var ListNavigationModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/** @enum {string} */
-var BREAKPOINT = {
-    xs: 'xs',
-    sm: 'sm',
-    md: 'md',
-    lg: 'lg',
-    xl: 'xl',
-};
-/**
- * The LayoutConfig supports the configuration of page slots by page templates
- * or page sections, such as headers and footers. The configuration also supports
- * adaptive design per breadpoint (not per device type), so that the DOM is (re)rendered
- * por a given breakpoint.
- * @abstract
- */
-var  /**
- * The LayoutConfig supports the configuration of page slots by page templates
- * or page sections, such as headers and footers. The configuration also supports
- * adaptive design per breadpoint (not per device type), so that the DOM is (re)rendered
- * por a given breakpoint.
- * @abstract
- */
-LayoutConfig = /** @class */ (function (_super) {
-    __extends(LayoutConfig, _super);
-    function LayoutConfig() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return LayoutConfig;
-}(ServerConfig));
-
-var _a;
-/** @type {?} */
-var DEFAULT_BREAKPOINTS = (_a = {},
-    _a[BREAKPOINT.xs] = 576,
-    _a[BREAKPOINT.sm] = 768,
-    _a[BREAKPOINT.md] = 992,
-    _a[BREAKPOINT.lg] = 1200,
-    _a);
-var BreakpointService = /** @class */ (function () {
-    function BreakpointService(winRef, config) {
-        this.winRef = winRef;
-        this.config = config;
-    }
-    /**
-     * @param {?} breakpoint
-     * @return {?}
-     */
-    BreakpointService.prototype.getSize = /**
-     * @param {?} breakpoint
-     * @return {?}
-     */
-    function (breakpoint) {
-        return this.config.breakpoints
-            ? this.config.breakpoints[breakpoint]
-            : DEFAULT_BREAKPOINTS[breakpoint];
-    };
-    Object.defineProperty(BreakpointService.prototype, "breakpoint$", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            if (!this.window) {
-                return of(BREAKPOINT.xs);
-            }
-            return fromEvent(this.window, 'resize').pipe(debounceTime(300), startWith({ target: this.window }), map((/**
-             * @param {?} event
-             * @return {?}
-             */
-            function (event) { return _this.getBreakpoint(((/** @type {?} */ (event.target))).innerWidth); })), distinctUntilChanged());
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(BreakpointService.prototype, "breakpoints", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return [
-                BREAKPOINT.xs,
-                BREAKPOINT.sm,
-                BREAKPOINT.md,
-                BREAKPOINT.lg,
-                BREAKPOINT.xl,
-            ];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @protected
-     * @param {?} windowWidth
-     * @return {?}
-     */
-    BreakpointService.prototype.getBreakpoint = /**
-     * @protected
-     * @param {?} windowWidth
-     * @return {?}
-     */
-    function (windowWidth) {
-        /** @type {?} */
-        var breakpoint = this.getClosest(windowWidth);
-        return BREAKPOINT[breakpoint || BREAKPOINT.lg];
-    };
-    /**
-     * @protected
-     * @param {?=} windowWidth
-     * @return {?}
-     */
-    BreakpointService.prototype.getClosest = /**
-     * @protected
-     * @param {?=} windowWidth
-     * @return {?}
-     */
-    function (windowWidth) {
-        var _this = this;
-        if (!windowWidth) {
-            windowWidth = this.window.innerWidth;
-        }
-        return windowWidth < this.getSize(BREAKPOINT.xs)
-            ? BREAKPOINT.xs
-            : this.breakpoints.reverse().find((/**
-             * @param {?} br
-             * @return {?}
-             */
-            function (br) { return windowWidth >= _this.getSize(br); }));
-    };
-    Object.defineProperty(BreakpointService.prototype, "window", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this.winRef.nativeWindow;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    BreakpointService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    BreakpointService.ctorParameters = function () { return [
-        { type: WindowRef },
-        { type: LayoutConfig }
-    ]; };
-    /** @nocollapse */ BreakpointService.ngInjectableDef = ɵɵdefineInjectable({ factory: function BreakpointService_Factory() { return new BreakpointService(ɵɵinject(WindowRef), ɵɵinject(LayoutConfig)); }, token: BreakpointService, providedIn: "root" });
-    return BreakpointService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * the default format is used for browsers that do not support
- * @type {?}
- */
-var DEFAULT_MEDIA_FORMAT = 'tablet';
-var MediaService = /** @class */ (function () {
-    function MediaService(config, breakpointService) {
-        var _this = this;
-        this.config = config;
-        this.breakpointService = breakpointService;
-        this.getImageUrl = (/**
-         * @param {?} url
-         * @return {?}
-         */
-        function (url) {
-            return url.startsWith('http') ? url : _this.getBaseUrl() + url;
-        });
-    }
-    Object.defineProperty(MediaService.prototype, "mediaFormats", {
-        get: /**
-         * @private
-         * @return {?}
-         */
-        function () {
-            return [
-                {
-                    code: 'mobile',
-                    threshold: this.breakpointService.getSize(BREAKPOINT.xs),
-                },
-                {
-                    code: 'tablet',
-                    threshold: this.breakpointService.getSize(BREAKPOINT.sm),
-                },
-                {
-                    code: 'desktop',
-                    threshold: this.breakpointService.getSize(BREAKPOINT.md),
-                },
-                {
-                    code: 'widescreen',
-                    threshold: this.breakpointService.getSize(BREAKPOINT.lg),
-                },
-            ];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @param {?} container
-     * @param {?=} format
-     * @param {?=} alt
-     * @return {?}
-     */
-    MediaService.prototype.getMedia = /**
-     * @param {?} container
-     * @param {?=} format
-     * @param {?=} alt
-     * @return {?}
-     */
-    function (container, format, alt) {
-        return {
-            src: this.getMainImage(container, format),
-            srcset: this.getSrcSet(container),
-            alt: alt || this.getAlt(container, format),
-        };
-    };
-    /**
-     * @private
-     * @param {?} media
-     * @param {?=} format
-     * @return {?}
-     */
-    MediaService.prototype.getMainImage = /**
-     * @private
-     * @param {?} media
-     * @param {?=} format
-     * @return {?}
-     */
-    function (media, format) {
-        if (media && media[format || DEFAULT_MEDIA_FORMAT]) {
-            return this.getImageUrl(media[format || DEFAULT_MEDIA_FORMAT].url);
-        }
-        else if (media && media.url) {
-            return this.getImageUrl(media.url);
-        }
-        else {
-            return null;
-        }
-    };
-    /**
-     * @private
-     * @param {?} media
-     * @param {?=} format
-     * @return {?}
-     */
-    MediaService.prototype.getAlt = /**
-     * @private
-     * @param {?} media
-     * @param {?=} format
-     * @return {?}
-     */
-    function (media, format) {
-        if (!media) {
-            return undefined;
-        }
-        else if (media[format || DEFAULT_MEDIA_FORMAT]) {
-            return media[format || DEFAULT_MEDIA_FORMAT].altText;
-        }
-        else if (media.altText) {
-            return media.altText;
-        }
-    };
-    /**
-     * builds a set of images aligned with the breakpoints
-     */
-    /**
-     * builds a set of images aligned with the breakpoints
-     * @private
-     * @param {?} media
-     * @return {?}
-     */
-    MediaService.prototype.getSrcSet = /**
-     * builds a set of images aligned with the breakpoints
-     * @private
-     * @param {?} media
-     * @return {?}
-     */
-    function (media) {
-        var _this = this;
-        if (!media) {
-            return undefined;
-        }
-        /** @type {?} */
-        var srcset = this.mediaFormats.reduce((/**
-         * @param {?} set
-         * @param {?} format
-         * @return {?}
-         */
-        function (set, format) {
-            if (!!media[format.code]) {
-                if (set) {
-                    set += ', ';
-                }
-                set += _this.getImageUrl(media[format.code].url) + " " + format.threshold + "w";
-            }
-            return set;
-        }), '');
-        return srcset === '' ? undefined : srcset;
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    MediaService.prototype.getBaseUrl = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        return (this.config.backend.media.baseUrl || this.config.backend.occ.baseUrl || '');
-    };
-    MediaService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    MediaService.ctorParameters = function () { return [
-        { type: OccConfig },
-        { type: BreakpointService }
-    ]; };
-    /** @nocollapse */ MediaService.ngInjectableDef = ɵɵdefineInjectable({ factory: function MediaService_Factory() { return new MediaService(ɵɵinject(OccConfig), ɵɵinject(BreakpointService)); }, token: MediaService, providedIn: "root" });
-    return MediaService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var MediaComponent = /** @class */ (function () {
-    function MediaComponent(mediaService) {
-        this.mediaService = mediaService;
-        /**
-         * Once the media is loaded, we emit an event.
-         */
-        this.loaded = new EventEmitter();
-        /**
-         * The `cx-media` component has an `is-initialized` class as long as the
-         * media is being initialized.
-         */
-        this.isInitialized = false;
-        /**
-         * The `cx-media` component has a `is-loading` class as long as the
-         * media is loaded. Wehn the media is loaded, the `is-initialized` class
-         * is added.
-         */
-        this.isLoading = true;
-        /**
-         * When there's no media provided for the content, or in case an error
-         * happened during loading, we add the `is-missing` class. Visual effects
-         * can be controlled by CSS.
-         */
-        this.isMissing = false;
-    }
-    /**
-     * @return {?}
-     */
-    MediaComponent.prototype.ngOnChanges = /**
-     * @return {?}
-     */
-    function () {
-        this.create();
-    };
-    /**
-     * Creates the `Media` object
-     */
-    /**
-     * Creates the `Media` object
-     * @private
-     * @return {?}
-     */
-    MediaComponent.prototype.create = /**
-     * Creates the `Media` object
-     * @private
-     * @return {?}
-     */
-    function () {
-        this.media = this.mediaService.getMedia(this.container, this.format, this.alt);
-        if (!this.media.src) {
-            this.handleMissing();
-        }
-    };
-    /**
-     * This handler is called from the UI when the image is loaded.
-     */
-    /**
-     * This handler is called from the UI when the image is loaded.
-     * @return {?}
-     */
-    MediaComponent.prototype.loadHandler = /**
-     * This handler is called from the UI when the image is loaded.
-     * @return {?}
-     */
-    function () {
-        this.isLoading = false;
-        this.isInitialized = true;
-        this.loaded.emit(true);
-    };
-    /**
-     * Whenever an error happens during load, we mark the component
-     * with css classes to have a missing media.
-     */
-    /**
-     * Whenever an error happens during load, we mark the component
-     * with css classes to have a missing media.
-     * @return {?}
-     */
-    MediaComponent.prototype.errorHandler = /**
-     * Whenever an error happens during load, we mark the component
-     * with css classes to have a missing media.
-     * @return {?}
-     */
-    function () {
-        this.handleMissing();
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    MediaComponent.prototype.handleMissing = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        this.isLoading = false;
-        this.isInitialized = true;
-        this.isMissing = true;
-        this.loaded.emit(false);
-    };
-    MediaComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-media',
-                    template: "<img\n  *ngIf=\"media?.src\"\n  [attr.src]=\"media.src\"\n  [attr.srcset]=\"media.srcset\"\n  [attr.alt]=\"media.alt\"\n  (load)=\"loadHandler()\"\n  (error)=\"errorHandler()\"\n/>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                }] }
-    ];
-    /** @nocollapse */
-    MediaComponent.ctorParameters = function () { return [
-        { type: MediaService }
-    ]; };
-    MediaComponent.propDecorators = {
-        container: [{ type: Input }],
-        format: [{ type: Input }],
-        alt: [{ type: Input }],
-        loaded: [{ type: Output }],
-        isInitialized: [{ type: HostBinding, args: ['class.is-initialized',] }],
-        isLoading: [{ type: HostBinding, args: ['class.is-loading',] }],
-        isMissing: [{ type: HostBinding, args: ['class.is-missing',] }]
-    };
-    return MediaComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var MediaModule = /** @class */ (function () {
-    function MediaModule() {
-    }
-    MediaModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [CommonModule],
-                    declarations: [MediaComponent],
-                    exports: [MediaComponent],
-                },] }
-    ];
-    return MediaModule;
-}());
 
 /**
  * @fileoverview added by tsickle
@@ -2285,6 +2570,11 @@ var SpinnerModule = /** @class */ (function () {
     ];
     return SpinnerModule;
 }());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -2803,6 +3093,11 @@ var StarRatingModule = /** @class */ (function () {
     ];
     return StarRatingModule;
 }());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -4570,131 +4865,6 @@ var DeliveryModeModule = /** @class */ (function () {
                 },] }
     ];
     return DeliveryModeModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CardComponent = /** @class */ (function () {
-    function CardComponent() {
-        this.iconTypes = ICON_TYPE;
-        this.deleteCard = new EventEmitter();
-        this.setDefaultCard = new EventEmitter();
-        this.sendCard = new EventEmitter();
-        this.editCard = new EventEmitter();
-        this.cancelCard = new EventEmitter();
-        this.border = false;
-        this.editMode = false;
-        this.isDefault = false;
-        this.fitToContainer = false;
-    }
-    // ACTIONS
-    // ACTIONS
-    /**
-     * @return {?}
-     */
-    CardComponent.prototype.setEditMode = 
-    // ACTIONS
-    /**
-     * @return {?}
-     */
-    function () {
-        this.editMode = true;
-    };
-    /**
-     * @return {?}
-     */
-    CardComponent.prototype.cancelEdit = /**
-     * @return {?}
-     */
-    function () {
-        this.editMode = false;
-        this.cancelCard.emit(5);
-    };
-    /**
-     * @return {?}
-     */
-    CardComponent.prototype.delete = /**
-     * @return {?}
-     */
-    function () {
-        this.deleteCard.emit(1);
-    };
-    /**
-     * @return {?}
-     */
-    CardComponent.prototype.setDefault = /**
-     * @return {?}
-     */
-    function () {
-        this.isDefault = true;
-        this.setDefaultCard.emit(2);
-    };
-    /**
-     * @return {?}
-     */
-    CardComponent.prototype.send = /**
-     * @return {?}
-     */
-    function () {
-        this.sendCard.emit(3);
-    };
-    /**
-     * @return {?}
-     */
-    CardComponent.prototype.edit = /**
-     * @return {?}
-     */
-    function () {
-        this.editCard.emit(4);
-    };
-    /**
-     * @return {?}
-     */
-    CardComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () { };
-    CardComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-card',
-                    template: "<div\n  *ngIf=\"content\"\n  class=\"cx-card\"\n  [class.cx-card-border]=\"border\"\n  [class.cx-card-fit-to-container]=\"fitToContainer\"\n>\n  <!-- Card Header -->\n  <div *ngIf=\"content.header && !editMode\" class=\"card-header\">\n    {{ content.header }}\n  </div>\n  <!-- Card Body -->\n  <div class=\"card-body cx-card-body\" [class.cx-card-delete]=\"editMode\">\n    <!-- Edit message -->\n    <div *ngIf=\"editMode\" class=\"cx-card-delete-msg\">\n      {{ content.deleteMsg }}\n    </div>\n    <!-- Card title -->\n    <h4 *ngIf=\"content.title\" class=\"cx-card-title\">\n      {{ content.title }}\n    </h4>\n    <!-- Card Content -->\n    <div class=\"cx-card-container\">\n      <!-- Card Label -->\n      <div class=\"cx-card-label-container\">\n        <div *ngIf=\"content.textBold\" class=\"cx-card-label-bold\">\n          {{ content.textBold }}\n        </div>\n        <div *ngFor=\"let line of content.text\">\n          <div class=\"cx-card-label\">{{ line }}</div>\n        </div>\n      </div>\n      <!-- Image -->\n      <div *ngIf=\"content.img\" class=\"cx-card-img-container\">\n        <cx-icon [type]=\"content.img\"></cx-icon>\n      </div>\n    </div>\n    <!-- Edit Mode Actions -->\n    <div *ngIf=\"editMode\" class=\"row cx-card-body-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-primary\" (click)=\"delete()\">\n          {{ 'common.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <!-- Actions -->\n    <div *ngIf=\"content.actions && !editMode\" class=\"cx-card-actions\">\n      <div *ngFor=\"let action of content.actions\">\n        <div [ngSwitch]=\"action.event\">\n          <a\n            *ngSwitchCase=\"'delete'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"delete()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'default'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"setDefault()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'send'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"send()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'edit'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"edit()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchDefault\n            href=\"{{ action.link }}\"\n            class=\"card-link btn-link\"\n            >{{ action.name }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
-                    styles: ["/*!\n  SPARTA v0.1\n  This file is for theme configuration. These variables are used in global and component CSS files.\n\n  You can:\n    1) Set new values for Bootstrap variables - https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss\n    2) Set new values for cxbase variables - cxbase/_variables.scss\n    3) Set new values for component variables - app/__/_.scss\n  You cannot:\n    1) Add new variables\n*//*!\n  CXBASE VARIABLES\n  This is NOT a theme.\n\n  This file should include ONLY new variables that Bootstrap does not provide.\n  For example, Bootstrap does not have a variable for semi font weight.\n\n  Same case for directionality.\n\n  Also be aware of items that should be configurable.\n  The Sparta buttons use uppercase type but future themes may want normal case\n  so a variable was created to make this available for other themes.\n\n*/.cx-card-border{border-width:var(--cx-border-width,1px);border-style:var(--cx-border-style,solid);border-color:var(--cx-border-color,var(--cx-g-color-light))}.cx-card-container{display:var(--cx-display,flex)}.cx-card-label-container{flex-grow:var(--cx-flex-grow,2)}.cx-card-fit-to-container{width:var(--cx-width,100%);height:var(--cx-height,100%);display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column)}.cx-card-body{display:var(--cx-display,flex);flex-direction:var(--cx-flex-direction,column);justify-content:var(--cx-justify-content,space-between)}.cx-card-delete{background-color:var(--cx-background-color,var(--cx-g-color-background))}.cx-card-body-delete{padding:var(--cx-padding,1rem 0 0 0)}.cx-card-delete-msg{color:var(--cx-color,var(--cx-g-color-danger));padding:var(--cx-padding,0 0 1.25rem 0)}.cx-card-actions{display:var(--cx-display,flex);justify-content:var(--cx-justify-content,flex-end);padding:var(--cx-padding,1.25rem 0 0 0)}.cx-card-link{padding:var(--cx-padding,0 0 0 1rem)}"]
-                }] }
-    ];
-    /** @nocollapse */
-    CardComponent.ctorParameters = function () { return []; };
-    CardComponent.propDecorators = {
-        deleteCard: [{ type: Output }],
-        setDefaultCard: [{ type: Output }],
-        sendCard: [{ type: Output }],
-        editCard: [{ type: Output }],
-        cancelCard: [{ type: Output }],
-        border: [{ type: Input }],
-        editMode: [{ type: Input }],
-        isDefault: [{ type: Input }],
-        content: [{ type: Input }],
-        fitToContainer: [{ type: Input }]
-    };
-    return CardComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CardModule = /** @class */ (function () {
-    function CardModule() {
-    }
-    CardModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [CommonModule, I18nModule, IconModule],
-                    declarations: [CardComponent],
-                    exports: [CardComponent],
-                },] }
-    ];
-    return CardModule;
 }());
 
 /**
@@ -14283,141 +14453,6 @@ var ProductCarouselComponent = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var CarouselService = /** @class */ (function () {
-    function CarouselService(winRef) {
-        this.winRef = winRef;
-    }
-    /**
-     * The number of items shown in the carousel is calculated dividing
-     * the host element width with the minimum item width.
-     */
-    /**
-     * The number of items shown in the carousel is calculated dividing
-     * the host element width with the minimum item width.
-     * @param {?} nativeElement
-     * @param {?} itemWidth
-     * @return {?}
-     */
-    CarouselService.prototype.getSize = /**
-     * The number of items shown in the carousel is calculated dividing
-     * the host element width with the minimum item width.
-     * @param {?} nativeElement
-     * @param {?} itemWidth
-     * @return {?}
-     */
-    function (nativeElement, itemWidth) {
-        return fromEvent(this.winRef.nativeWindow, 'resize').pipe(map((/**
-         * @param {?} _
-         * @return {?}
-         */
-        function (_) { return ((/** @type {?} */ (nativeElement))).clientWidth; })), startWith(((/** @type {?} */ (nativeElement))).clientWidth), debounceTime(100), map((/**
-         * @param {?} totalWidth
-         * @return {?}
-         */
-        function (totalWidth) {
-            return Math.round(totalWidth / itemWidth);
-        })), distinctUntilChanged());
-    };
-    CarouselService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    CarouselService.ctorParameters = function () { return [
-        { type: WindowRef }
-    ]; };
-    /** @nocollapse */ CarouselService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CarouselService_Factory() { return new CarouselService(ɵɵinject(WindowRef)); }, token: CarouselService, providedIn: "root" });
-    return CarouselService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CarouselComponent = /** @class */ (function () {
-    function CarouselComponent(el, service) {
-        this.el = el;
-        this.service = service;
-        /**
-         * Specifies the min pixel used per product. This value is used
-         * to calculate the amount of items we can fit into the available with
-         * of the host element. The number of items is not related the breakpoints,
-         * which means that a carousel can be placed in different layouts,
-         * regardless of the overall size.
-         */
-        this.minItemPixelSize = 300;
-        this.indicatorIcon = ICON_TYPE.CIRCLE;
-        this.previousIcon = ICON_TYPE.CARET_LEFT;
-        this.nextIcon = ICON_TYPE.CARET_RIGHT;
-        /**
-         * The group with items which is currently active.
-         */
-        this.activeSlide = 0;
-    }
-    /**
-     * @return {?}
-     */
-    CarouselComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        this.size$ = this.service.getSize(this.el.nativeElement, this.minItemPixelSize);
-    };
-    /**
-     * @param {?} slide
-     * @return {?}
-     */
-    CarouselComponent.prototype.select = /**
-     * @param {?} slide
-     * @return {?}
-     */
-    function (slide) {
-        this.activeSlide = slide;
-    };
-    CarouselComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-carousel',
-                    template: "<ng-container *ngIf=\"items && items.length > 0 && (size$ | async) as size\">\n  <h3 *ngIf=\"title\">\n    {{ title }}\n  </h3>\n\n  <div class=\"cx-carousel\" [ngClass]=\"'size-' + size\">\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"previous\"\n      (click)=\"select(activeSlide - size)\"\n      [disabled]=\"activeSlide === 0\"\n    >\n      <cx-icon [type]=\"previousIcon\"></cx-icon>\n    </button>\n\n    <div class=\"groups\">\n      <ng-container *ngFor=\"let _ of items; let i = index\">\n        <div class=\"group\" *ngIf=\"i % size === 0\">\n          <ng-container *ngFor=\"let item of (items | slice: i:i + size)\">\n            <a\n              *ngIf=\"item\"\n              class=\"product\"\n              [class.active]=\"i === activeSlide\"\n              [routerLink]=\"item.route\"\n            >\n              <cx-media\n                [container]=\"item.media?.container\"\n                [format]=\"item.media?.format\"\n              >\n              </cx-media>\n\n              <h4 *ngIf=\"item.title\">{{ item.title }}</h4>\n              <div *ngIf=\"item.price\" class=\"price\">{{ item.price }}</div>\n            </a>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"next\"\n      (click)=\"select(activeSlide + size)\"\n      [disabled]=\"activeSlide > items.length - size - 1\"\n    >\n      <cx-icon [type]=\"nextIcon\"></cx-icon>\n    </button>\n  </div>\n\n  <div class=\"indicators\" *ngIf=\"size < items.length\">\n    <ng-container *ngFor=\"let _ of items; let i = index\">\n      <button\n        *ngIf=\"i % size === 0\"\n        (click)=\"select(i)\"\n        [disabled]=\"i === activeSlide\"\n      >\n        <cx-icon [type]=\"indicatorIcon\"></cx-icon>\n      </button>\n    </ng-container>\n  </div>\n</ng-container>\n"
-                }] }
-    ];
-    /** @nocollapse */
-    CarouselComponent.ctorParameters = function () { return [
-        { type: ElementRef },
-        { type: CarouselService }
-    ]; };
-    CarouselComponent.propDecorators = {
-        title: [{ type: Input }],
-        items: [{ type: Input }],
-        minItemPixelSize: [{ type: Input }],
-        indicatorIcon: [{ type: Input }],
-        previousIcon: [{ type: Input }],
-        nextIcon: [{ type: Input }]
-    };
-    return CarouselComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CarouselModule = /** @class */ (function () {
-    function CarouselModule() {
-    }
-    CarouselModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [CommonModule, RouterModule, IconModule, MediaModule, UrlModule],
-                    declarations: [CarouselComponent],
-                    exports: [CarouselComponent],
-                },] }
-    ];
-    return CarouselModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 var ProductCarouselModule = /** @class */ (function () {
     function ProductCarouselModule() {
     }
@@ -16277,5 +16312,5 @@ var B2cStorefrontModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormComponentsModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationComponentService, NavigationModule, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, AutoFocusDirectiveModule as ɵa, defaultCheckoutConfig as ɵb, defaultRoutingConfig as ɵba, CheckoutConfigService as ɵc, CardModule as ɵd, CardComponent as ɵe, NavigationUIComponent as ɵf, HighlightPipe as ɵg, ProductDetailsTabModule as ɵh, ProductDetailsTabComponent as ɵi, ComponentMapperService as ɵj, CarouselModule as ɵk, CarouselComponent as ɵl, CarouselService as ɵm, CmsRoutesService as ɵn, CmsMappingService as ɵo, CmsI18nService as ɵp, CmsGuardsService as ɵq, AddToHomeScreenService as ɵr, ProductImagesModule as ɵs, ProductImagesComponent as ɵt, suffixUrlMatcher as ɵu, addCmsRoute as ɵv, htmlLangProvider as ɵw, setHtmlLangAttribute as ɵx, RoutingModule as ɵy, defaultStorefrontRoutesConfig as ɵz };
+export { AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormComponentsModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationComponentService, NavigationModule, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, AutoFocusDirectiveModule as ɵa, defaultCheckoutConfig as ɵb, CheckoutConfigService as ɵc, NavigationUIComponent as ɵd, HighlightPipe as ɵe, ProductDetailsTabModule as ɵf, ProductDetailsTabComponent as ɵg, ComponentMapperService as ɵh, CmsRoutesService as ɵi, CmsMappingService as ɵj, CmsI18nService as ɵk, CmsGuardsService as ɵl, AddToHomeScreenService as ɵm, ProductImagesModule as ɵn, ProductImagesComponent as ɵo, suffixUrlMatcher as ɵp, addCmsRoute as ɵq, htmlLangProvider as ɵr, setHtmlLangAttribute as ɵs, RoutingModule as ɵt, defaultStorefrontRoutesConfig as ɵu, defaultRoutingConfig as ɵv };
 //# sourceMappingURL=spartacus-storefront.js.map
