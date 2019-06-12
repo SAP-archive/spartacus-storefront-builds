@@ -1,7 +1,7 @@
 import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, Output, EventEmitter, Renderer2, HostListener, forwardRef, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, INJECTOR, APP_INITIALIZER, Pipe } from '@angular/core';
 import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, ServerConfig, OccConfig, UrlModule, GlobalMessageService, GlobalMessageType, GlobalMessageModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserPaymentService, TranslationService, UserService, CheckoutModule, UserAddressService, AuthService, AuthRedirectService, UserModule, NotAuthGuard, CmsConfig, CxApiService, CmsService, DynamicAttributeService, PageType, SemanticPathService, TranslationChunkService, PageRobotsMeta, PageMetaService, LanguageService, UserConsentService, UserOrderService, CmsPageTitleModule, SearchboxService, ProductModule, ProductReferenceService, ProductSearchService, CmsModule, ProductReviewService, RoutingModule as RoutingModule$1, StateModule, AuthModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, provideConfig } from '@spartacus/core';
 import { map, filter, switchMap, tap, startWith, debounceTime, distinctUntilChanged, take, skipWhile, shareReplay, first, endWith, withLatestFrom } from 'rxjs/operators';
-import { __extends, __values, __spread, __read, __awaiter, __generator, __assign } from 'tslib';
+import { __extends, __values, __assign, __spread, __read, __awaiter, __generator } from 'tslib';
 import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
@@ -2729,14 +2729,23 @@ var SiteContextComponentService = /** @class */ (function () {
              * @return {?}
              */
             function (ctx) {
-                items.forEach((/**
-                 * @param {?} item
-                 * @return {?}
-                 */
-                function (item) {
-                    return (item.label = _this.getOptionLabel(item, ctx));
-                }));
-                return of(items);
+                var e_1, _a;
+                /** @type {?} */
+                var itemsCopy = [];
+                try {
+                    for (var items_1 = __values(items), items_1_1 = items_1.next(); !items_1_1.done; items_1_1 = items_1.next()) {
+                        var item = items_1_1.value;
+                        itemsCopy.push(__assign({}, item, { label: _this.getOptionLabel(item, ctx) }));
+                    }
+                }
+                catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                finally {
+                    try {
+                        if (items_1_1 && !items_1_1.done && (_a = items_1.return)) _a.call(items_1);
+                    }
+                    finally { if (e_1) throw e_1.error; }
+                }
+                return of(itemsCopy);
             })));
         })));
     };
@@ -10044,7 +10053,7 @@ var TabParagraphContainerComponent = /** @class */ (function () {
                  */
                 function (tab) {
                     if (!tab.flexType) {
-                        tab.flexType = tab.typeCode;
+                        tab = __assign({}, tab, { flexType: tab.typeCode });
                     }
                     return __assign({}, tab, { title: "CMSTabParagraphContainer.tabs." + tab.uid });
                 })));

@@ -2832,14 +2832,23 @@
                  * @return {?}
                  */
                 function (ctx) {
-                    items.forEach((/**
-                     * @param {?} item
-                     * @return {?}
-                     */
-                    function (item) {
-                        return (item.label = _this.getOptionLabel(item, ctx));
-                    }));
-                    return rxjs.of(items);
+                    var e_1, _a;
+                    /** @type {?} */
+                    var itemsCopy = [];
+                    try {
+                        for (var items_1 = __values(items), items_1_1 = items_1.next(); !items_1_1.done; items_1_1 = items_1.next()) {
+                            var item = items_1_1.value;
+                            itemsCopy.push(__assign({}, item, { label: _this.getOptionLabel(item, ctx) }));
+                        }
+                    }
+                    catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                    finally {
+                        try {
+                            if (items_1_1 && !items_1_1.done && (_a = items_1.return)) _a.call(items_1);
+                        }
+                        finally { if (e_1) throw e_1.error; }
+                    }
+                    return rxjs.of(itemsCopy);
                 })));
             })));
         };
@@ -10147,7 +10156,7 @@
                      */
                     function (tab) {
                         if (!tab.flexType) {
-                            tab.flexType = tab.typeCode;
+                            tab = __assign({}, tab, { flexType: tab.typeCode });
                         }
                         return __assign({}, tab, { title: "CMSTabParagraphContainer.tabs." + tab.uid });
                     })));

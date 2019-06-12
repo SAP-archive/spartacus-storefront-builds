@@ -2174,14 +2174,12 @@ class SiteContextComponentService {
          * @return {?}
          */
         ctx => {
-            items.forEach((/**
-             * @param {?} item
-             * @return {?}
-             */
-            item => {
-                return (item.label = this.getOptionLabel(item, ctx));
-            }));
-            return of(items);
+            /** @type {?} */
+            const itemsCopy = [];
+            for (const item of items) {
+                itemsCopy.push(Object.assign({}, item, { label: this.getOptionLabel(item, ctx) }));
+            }
+            return of(itemsCopy);
         }))))));
     }
     /**
@@ -8463,7 +8461,7 @@ class TabParagraphContainerComponent {
          */
         tab => {
             if (!tab.flexType) {
-                tab.flexType = tab.typeCode;
+                tab = Object.assign({}, tab, { flexType: tab.typeCode });
             }
             return Object.assign({}, tab, { title: `CMSTabParagraphContainer.tabs.${tab.uid}` });
         })))))))));
