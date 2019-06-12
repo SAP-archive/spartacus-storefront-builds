@@ -12629,28 +12629,21 @@ var BreadcrumbModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var NavigationComponentService = /** @class */ (function () {
-    function NavigationComponentService(cmsService, componentData) {
+var NavigationService = /** @class */ (function () {
+    function NavigationService(cmsService, semanticPathService) {
         this.cmsService = cmsService;
-        this.componentData = componentData;
+        this.semanticPathService = semanticPathService;
     }
     /**
+     * @param {?} data$
      * @return {?}
      */
-    NavigationComponentService.prototype.getComponentData = /**
+    NavigationService.prototype.createNavigation = /**
+     * @param {?} data$
      * @return {?}
      */
-    function () {
-        return this.componentData.data$;
-    };
-    /**
-     * @return {?}
-     */
-    NavigationComponentService.prototype.createNavigation = /**
-     * @return {?}
-     */
-    function () {
-        return combineLatest(this.getComponentData(), this.getNavigationNode()).pipe(map((/**
+    function (data$) {
+        return combineLatest([data$, this.getNavigationNode(data$)]).pipe(map((/**
          * @param {?} __0
          * @return {?}
          */
@@ -12663,14 +12656,19 @@ var NavigationComponentService = /** @class */ (function () {
         })));
     };
     /**
+     * @param {?} data$
      * @return {?}
      */
-    NavigationComponentService.prototype.getNavigationNode = /**
+    NavigationService.prototype.getNavigationNode = /**
+     * @param {?} data$
      * @return {?}
      */
-    function () {
+    function (data$) {
         var _this = this;
-        return this.getComponentData().pipe(filter(Boolean), switchMap((/**
+        if (!data$) {
+            return of();
+        }
+        return data$.pipe(filter(Boolean), switchMap((/**
          * @param {?} data
          * @return {?}
          */
@@ -12706,7 +12704,7 @@ var NavigationComponentService = /** @class */ (function () {
      * @param {?=} itemsList
      * @return {?}
      */
-    NavigationComponentService.prototype.getNavigationEntryItems = /**
+    NavigationService.prototype.getNavigationEntryItems = /**
      * Get all navigation entry items' type and id. Dispatch action to load all these items
      * @private
      * @param {?} nodeData
@@ -12743,7 +12741,7 @@ var NavigationComponentService = /** @class */ (function () {
      * @param {?} itemsList
      * @return {?}
      */
-    NavigationComponentService.prototype.processChildren = /**
+    NavigationService.prototype.processChildren = /**
      * @private
      * @param {?} node
      * @param {?} itemsList
@@ -12777,7 +12775,7 @@ var NavigationComponentService = /** @class */ (function () {
      * @param {?} items
      * @return {?}
      */
-    NavigationComponentService.prototype.createNode = /**
+    NavigationService.prototype.createNode = /**
      * Create a new node tree for display
      * @private
      * @param {?} nodeData
@@ -12787,14 +12785,14 @@ var NavigationComponentService = /** @class */ (function () {
     function (nodeData, items) {
         /** @type {?} */
         var node = {};
-        node['title'] = nodeData.title;
+        node.title = nodeData.title;
         if (nodeData.entries && nodeData.entries.length > 0) {
             this.addLinkToNode(node, nodeData.entries[0], items);
         }
         if (nodeData.children && nodeData.children.length > 0) {
             /** @type {?} */
             var children = this.createChildren(nodeData, items);
-            node['children'] = children;
+            node.children = children;
         }
         return node;
     };
@@ -12805,7 +12803,7 @@ var NavigationComponentService = /** @class */ (function () {
      * @param {?} items
      * @return {?}
      */
-    NavigationComponentService.prototype.addLinkToNode = /**
+    NavigationService.prototype.addLinkToNode = /**
      * @private
      * @param {?} node
      * @param {?} entry
@@ -12817,12 +12815,44 @@ var NavigationComponentService = /** @class */ (function () {
         var item = items[entry.itemId + "_" + entry.itemSuperType];
         // now we only consider CMSLinkComponent
         if (entry.itemType === 'CMSLinkComponent' && item !== undefined) {
-            if (!node['title']) {
-                node['title'] = item.linkName;
+            if (!node.title) {
+                node.title = item.linkName;
             }
-            node['url'] = item.url;
+            node.url = this.getLink(item);
             // if "NEWWINDOW", target is true
-            node['target'] = item.target;
+            node.target = item.target;
+        }
+    };
+    /**
+     *
+     * Gets the URL or link to a related item (category)
+     */
+    /**
+     *
+     * Gets the URL or link to a related item (category)
+     * @private
+     * @param {?} item
+     * @return {?}
+     */
+    NavigationService.prototype.getLink = /**
+     *
+     * Gets the URL or link to a related item (category)
+     * @private
+     * @param {?} item
+     * @return {?}
+     */
+    function (item) {
+        if (item.url) {
+            return item.url;
+        }
+        else if (item.categoryCode) {
+            return this.semanticPathService.transform({
+                cxRoute: 'category',
+                params: {
+                    code: item.categoryCode,
+                    name: item.name,
+                },
+            });
         }
     };
     /**
@@ -12831,7 +12861,7 @@ var NavigationComponentService = /** @class */ (function () {
      * @param {?} items
      * @return {?}
      */
-    NavigationComponentService.prototype.createChildren = /**
+    NavigationService.prototype.createChildren = /**
      * @private
      * @param {?} node
      * @param {?} items
@@ -12858,15 +12888,18 @@ var NavigationComponentService = /** @class */ (function () {
         }
         return children;
     };
-    NavigationComponentService.decorators = [
-        { type: Injectable }
+    NavigationService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
     ];
     /** @nocollapse */
-    NavigationComponentService.ctorParameters = function () { return [
+    NavigationService.ctorParameters = function () { return [
         { type: CmsService },
-        { type: CmsComponentData, decorators: [{ type: Optional }] }
+        { type: SemanticPathService }
     ]; };
-    return NavigationComponentService;
+    /** @nocollapse */ NavigationService.ngInjectableDef = ɵɵdefineInjectable({ factory: function NavigationService_Factory() { return new NavigationService(ɵɵinject(CmsService), ɵɵinject(SemanticPathService)); }, token: NavigationService, providedIn: "root" });
+    return NavigationService;
 }());
 
 /**
@@ -12874,27 +12907,23 @@ var NavigationComponentService = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var CategoryNavigationComponent = /** @class */ (function () {
-    function CategoryNavigationComponent(service) {
+    function CategoryNavigationComponent(componentData, service) {
+        this.componentData = componentData;
         this.service = service;
-        this.node$ = this.service.getNavigationNode();
-        this.styleClass$ = this.service
-            .getComponentData()
-            .pipe(map((/**
-         * @param {?} d
-         * @return {?}
-         */
-        function (d) { return d.styleClass; })));
+        this.node$ = this.service.getNavigationNode(this.componentData.data$);
+        this.data$ = this.componentData.data$;
     }
     CategoryNavigationComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-category-navigation',
-                    template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [ngClass]=\"styleClass$ | async\"\n></cx-navigation-ui>\n",
+                    template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [ngClass]=\"(data$ | async).styleClass\"\n  [wrapAfter]=\"(data$ | async).wrapAfter\"\n></cx-navigation-ui>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     /** @nocollapse */
     CategoryNavigationComponent.ctorParameters = function () { return [
-        { type: NavigationComponentService }
+        { type: CmsComponentData },
+        { type: NavigationService }
     ]; };
     return CategoryNavigationComponent;
 }());
@@ -12903,8 +12932,6 @@ var CategoryNavigationComponent = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/** @type {?} */
-var COLUMN_SIZE = 10;
 var NavigationUIComponent = /** @class */ (function () {
     function NavigationUIComponent(router, renderer) {
         var _this = this;
@@ -13030,66 +13057,10 @@ var NavigationUIComponent = /** @class */ (function () {
             return depth;
         }
     };
-    // Recursively break nodes with more than COLUMN_SIZE into sub nodes to create columns
-    // Recursively break nodes with more than COLUMN_SIZE into sub nodes to create columns
-    /**
-     * @param {?} node
-     * @param {?} columnSize
-     * @return {?}
-     */
-    NavigationUIComponent.prototype.breakNodesIntoColumns = 
-    // Recursively break nodes with more than COLUMN_SIZE into sub nodes to create columns
-    /**
-     * @param {?} node
-     * @param {?} columnSize
-     * @return {?}
-     */
-    function (node, columnSize) {
-        var _this = this;
-        var _a;
-        if (node.hasOwnProperty('children')) {
-            // Check if too many children for column
-            if (node.children.length > columnSize) {
-                /** @type {?} */
-                var clonedNode = __assign({}, node);
-                node.children = [];
-                // Break node into subnodes with children length of columnSize
-                while (clonedNode.children.length > 0) {
-                    /** @type {?} */
-                    var newSubNode = { title: null, children: [] };
-                    (_a = newSubNode.children).push.apply(_a, __spread(clonedNode.children.splice(0, columnSize)));
-                    node.children.push(newSubNode);
-                }
-            }
-            // Recursively do the same with child nodes
-            node.children.forEach((/**
-             * @param {?} child
-             * @return {?}
-             */
-            function (child) {
-                child = _this.breakNodesIntoColumns(child, columnSize);
-            }));
-        }
-        return node;
-    };
-    /**
-     * @param {?} changes
-     * @return {?}
-     */
-    NavigationUIComponent.prototype.ngOnChanges = /**
-     * @param {?} changes
-     * @return {?}
-     */
-    function (changes) {
-        // Recursively break into columns once node exists on component
-        if (changes.node.currentValue) {
-            this.node = this.breakNodesIntoColumns(this.node, COLUMN_SIZE);
-        }
-    };
     NavigationUIComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-navigation-ui',
-                    template: "<div\n  *ngIf=\"flyout && node?.children.length > 1\"\n  class=\"back is-open\"\n  (click)=\"back()\"\n>\n  <h5>\n    <cx-icon [type]=\"iconType.CARET_LEFT\"></cx-icon>\n    {{ 'common.back' | cxTranslate }}\n  </h5>\n</div>\n\n<ng-container *ngFor=\"let child of node?.children\">\n  <ng-container *ngTemplateOutlet=\"nav; context: { node: child }\">\n  </ng-container>\n</ng-container>\n\n<!-- we generate links in a recursive manner -->\n<ng-template #nav let-node=\"node\">\n  <nav tabindex=\"0\" (click)=\"toggleOpen($event)\">\n    <cx-generic-link\n      *ngIf=\"\n        node.url && (!node.children || node.children?.length === 0);\n        else heading\n      \"\n      [url]=\"node.url\"\n    >\n      {{ node.title }}\n      <cx-icon\n        *ngIf=\"flyout && node.children?.length > 0\"\n        [type]=\"iconType.CARET_DOWN\"\n      ></cx-icon>\n    </cx-generic-link>\n\n    <ng-template #heading>\n      <h5 [attr.aria-label]=\"node.title\">\n        {{ node.title }}\n        <cx-icon\n          *ngIf=\"flyout && node.children?.length > 0\"\n          [type]=\"iconType.CARET_DOWN\"\n        ></cx-icon>\n      </h5>\n    </ng-template>\n\n    <!-- we add a wrapper to allow for better layout handling in CSS -->\n    <div class=\"wrapper\" *ngIf=\"node.children?.length > 0\">\n      <cx-generic-link *ngIf=\"node.url\" [url]=\"node.url\" class=\"all\">\n        {{ 'navigation.shopAll' | cxTranslate: { navNode: node.title } }}\n      </cx-generic-link>\n\n      <div class=\"childs\" [attr.depth]=\"getDepth(node)\">\n        <ng-container *ngFor=\"let child of node.children\">\n          <ng-container *ngTemplateOutlet=\"nav; context: { node: child }\">\n          </ng-container>\n        </ng-container>\n      </div>\n    </div>\n  </nav>\n</ng-template>\n",
+                    template: "<div\n  *ngIf=\"flyout && node?.children.length > 1\"\n  class=\"back is-open\"\n  (click)=\"back()\"\n>\n  <h5>\n    <cx-icon [type]=\"iconType.CARET_LEFT\"></cx-icon>\n    {{ 'common.back' | cxTranslate }}\n  </h5>\n</div>\n\n<ng-container *ngFor=\"let child of node?.children\">\n  <ng-container *ngTemplateOutlet=\"nav; context: { node: child }\">\n  </ng-container>\n</ng-container>\n\n<!-- we generate links in a recursive manner -->\n<ng-template #nav let-node=\"node\">\n  <nav tabindex=\"0\" (click)=\"toggleOpen($event)\">\n    <cx-generic-link\n      *ngIf=\"\n        node.url && (!node.children || node.children?.length === 0);\n        else heading\n      \"\n      [url]=\"node.url\"\n    >\n      {{ node.title }}\n      <cx-icon\n        *ngIf=\"flyout && node.children?.length > 0\"\n        [type]=\"iconType.CARET_DOWN\"\n      ></cx-icon>\n    </cx-generic-link>\n\n    <ng-template #heading>\n      <h5 [attr.aria-label]=\"node.title\">\n        {{ node.title }}\n        <cx-icon\n          *ngIf=\"flyout && node.children?.length > 0\"\n          [type]=\"iconType.CARET_DOWN\"\n        ></cx-icon>\n      </h5>\n    </ng-template>\n\n    <!-- we add a wrapper to allow for better layout handling in CSS -->\n    <div class=\"wrapper\" *ngIf=\"node.children?.length > 0\">\n      <cx-generic-link *ngIf=\"node.url\" [url]=\"node.url\" class=\"all\">\n        {{ 'navigation.shopAll' | cxTranslate: { navNode: node.title } }}\n      </cx-generic-link>\n\n      <div\n        class=\"childs\"\n        [attr.depth]=\"getDepth(node)\"\n        [attr.wrap-after]=\"node.children?.length > wrapAfter ? wrapAfter : null\"\n      >\n        <ng-container *ngFor=\"let child of node.children\">\n          <ng-container *ngTemplateOutlet=\"nav; context: { node: child }\">\n          </ng-container>\n        </ng-container>\n      </div>\n    </div>\n  </nav>\n</ng-template>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -13100,6 +13071,7 @@ var NavigationUIComponent = /** @class */ (function () {
     ]; };
     NavigationUIComponent.propDecorators = {
         node: [{ type: Input }],
+        wrapAfter: [{ type: Input }],
         flyout: [{ type: Input }, { type: HostBinding, args: ['class.flyout',] }],
         isOpen: [{ type: Input }, { type: HostBinding, args: ['class.is-open',] }]
     };
@@ -13111,12 +13083,11 @@ var NavigationUIComponent = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var NavigationComponent = /** @class */ (function () {
-    function NavigationComponent(service) {
+    function NavigationComponent(componentData, service) {
+        this.componentData = componentData;
         this.service = service;
-        this.node$ = this.service.createNavigation();
-        this.styleClass$ = this.service
-            .getComponentData()
-            .pipe(map((/**
+        this.node$ = this.service.createNavigation(this.componentData.data$);
+        this.styleClass$ = this.componentData.data$.pipe(map((/**
          * @param {?} d
          * @return {?}
          */
@@ -13131,7 +13102,8 @@ var NavigationComponent = /** @class */ (function () {
     ];
     /** @nocollapse */
     NavigationComponent.ctorParameters = function () { return [
-        { type: NavigationComponentService }
+        { type: CmsComponentData },
+        { type: NavigationService }
     ]; };
     return NavigationComponent;
 }());
@@ -13154,13 +13126,6 @@ var NavigationModule = /** @class */ (function () {
                             cmsComponents: {
                                 NavigationComponent: {
                                     component: NavigationComponent,
-                                    providers: [
-                                        {
-                                            provide: NavigationComponentService,
-                                            useClass: NavigationComponentService,
-                                            deps: [CmsService, CmsComponentData],
-                                        },
-                                    ],
                                 },
                             },
                         }))),
@@ -13190,13 +13155,6 @@ var CategoryNavigationModule = /** @class */ (function () {
                             cmsComponents: {
                                 CategoryNavigationComponent: {
                                     component: CategoryNavigationComponent,
-                                    providers: [
-                                        {
-                                            provide: NavigationComponentService,
-                                            useClass: NavigationComponentService,
-                                            deps: [CmsService, CmsComponentData],
-                                        },
-                                    ],
                                 },
                             },
                         }))),
@@ -13214,27 +13172,28 @@ var CategoryNavigationModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var FooterNavigationComponent = /** @class */ (function () {
-    function FooterNavigationComponent(service) {
+    function FooterNavigationComponent(componentData, service) {
+        this.componentData = componentData;
         this.service = service;
-        this.node$ = this.service.getNavigationNode();
-        this.styleClass$ = this.service
-            .getComponentData()
-            .pipe(map((/**
+        this.node$ = this.service.getNavigationNode(this.componentData.data$);
+        this.styleClass$ = this.componentData.data$.pipe(map((/**
          * @param {?} d
          * @return {?}
          */
         function (d) { return d.styleClass; })));
+        this.data$ = this.componentData.data$;
     }
     FooterNavigationComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-footer-navigation',
-                    template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [flyout]=\"false\"\n  [ngClass]=\"styleClass$ | async\"\n></cx-navigation-ui>\n\n<div class=\"notice\" *ngIf=\"(service.getComponentData() | async) as data\">\n  {{ data.notice }}\n</div>\n",
+                    template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [flyout]=\"false\"\n  [ngClass]=\"styleClass$ | async\"\n></cx-navigation-ui>\n\n<div class=\"notice\" *ngIf=\"(data$ | async) as data\">\n  {{ data.notice }}\n</div>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     /** @nocollapse */
     FooterNavigationComponent.ctorParameters = function () { return [
-        { type: NavigationComponentService }
+        { type: CmsComponentData },
+        { type: NavigationService }
     ]; };
     return FooterNavigationComponent;
 }());
@@ -13256,13 +13215,6 @@ var FooterNavigationModule = /** @class */ (function () {
                             cmsComponents: {
                                 FooterNavigationComponent: {
                                     component: FooterNavigationComponent,
-                                    providers: [
-                                        {
-                                            provide: NavigationComponentService,
-                                            useClass: NavigationComponentService,
-                                            deps: [CmsService, CmsComponentData],
-                                        },
-                                    ],
                                 },
                             },
                         }))),
@@ -13275,6 +13227,11 @@ var FooterNavigationModule = /** @class */ (function () {
     ];
     return FooterNavigationModule;
 }());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -16329,5 +16286,5 @@ var B2cStorefrontModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormComponentsModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationComponentService, NavigationModule, NavigationUIComponent, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, AutoFocusDirectiveModule as ɵa, defaultCheckoutConfig as ɵb, CheckoutConfigService as ɵc, HighlightPipe as ɵd, ProductDetailsTabModule as ɵe, ProductDetailsTabComponent as ɵf, ComponentMapperService as ɵg, CmsRoutesService as ɵh, CmsMappingService as ɵi, CmsI18nService as ɵj, CmsGuardsService as ɵk, AddToHomeScreenService as ɵl, ProductImagesModule as ɵm, ProductImagesComponent as ɵn, suffixUrlMatcher as ɵo, addCmsRoute as ɵp, htmlLangProvider as ɵq, setHtmlLangAttribute as ɵr, RoutingModule as ɵs, defaultStorefrontRoutesConfig as ɵt, defaultRoutingConfig as ɵu };
+export { AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormComponentsModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, AutoFocusDirectiveModule as ɵa, defaultCheckoutConfig as ɵb, CheckoutConfigService as ɵc, HighlightPipe as ɵd, ProductDetailsTabModule as ɵe, ProductDetailsTabComponent as ɵf, ComponentMapperService as ɵg, CmsRoutesService as ɵh, CmsMappingService as ɵi, CmsI18nService as ɵj, CmsGuardsService as ɵk, AddToHomeScreenService as ɵl, ProductImagesModule as ɵm, ProductImagesComponent as ɵn, suffixUrlMatcher as ɵo, addCmsRoute as ɵp, htmlLangProvider as ɵq, setHtmlLangAttribute as ɵr, RoutingModule as ɵs, defaultStorefrontRoutesConfig as ɵt, defaultRoutingConfig as ɵu };
 //# sourceMappingURL=spartacus-storefront.js.map

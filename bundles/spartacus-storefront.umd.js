@@ -12732,28 +12732,21 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var NavigationComponentService = /** @class */ (function () {
-        function NavigationComponentService(cmsService, componentData) {
+    var NavigationService = /** @class */ (function () {
+        function NavigationService(cmsService, semanticPathService) {
             this.cmsService = cmsService;
-            this.componentData = componentData;
+            this.semanticPathService = semanticPathService;
         }
         /**
+         * @param {?} data$
          * @return {?}
          */
-        NavigationComponentService.prototype.getComponentData = /**
+        NavigationService.prototype.createNavigation = /**
+         * @param {?} data$
          * @return {?}
          */
-        function () {
-            return this.componentData.data$;
-        };
-        /**
-         * @return {?}
-         */
-        NavigationComponentService.prototype.createNavigation = /**
-         * @return {?}
-         */
-        function () {
-            return rxjs.combineLatest(this.getComponentData(), this.getNavigationNode()).pipe(operators.map((/**
+        function (data$) {
+            return rxjs.combineLatest([data$, this.getNavigationNode(data$)]).pipe(operators.map((/**
              * @param {?} __0
              * @return {?}
              */
@@ -12766,14 +12759,19 @@
             })));
         };
         /**
+         * @param {?} data$
          * @return {?}
          */
-        NavigationComponentService.prototype.getNavigationNode = /**
+        NavigationService.prototype.getNavigationNode = /**
+         * @param {?} data$
          * @return {?}
          */
-        function () {
+        function (data$) {
             var _this = this;
-            return this.getComponentData().pipe(operators.filter(Boolean), operators.switchMap((/**
+            if (!data$) {
+                return rxjs.of();
+            }
+            return data$.pipe(operators.filter(Boolean), operators.switchMap((/**
              * @param {?} data
              * @return {?}
              */
@@ -12809,7 +12807,7 @@
          * @param {?=} itemsList
          * @return {?}
          */
-        NavigationComponentService.prototype.getNavigationEntryItems = /**
+        NavigationService.prototype.getNavigationEntryItems = /**
          * Get all navigation entry items' type and id. Dispatch action to load all these items
          * @private
          * @param {?} nodeData
@@ -12846,7 +12844,7 @@
          * @param {?} itemsList
          * @return {?}
          */
-        NavigationComponentService.prototype.processChildren = /**
+        NavigationService.prototype.processChildren = /**
          * @private
          * @param {?} node
          * @param {?} itemsList
@@ -12880,7 +12878,7 @@
          * @param {?} items
          * @return {?}
          */
-        NavigationComponentService.prototype.createNode = /**
+        NavigationService.prototype.createNode = /**
          * Create a new node tree for display
          * @private
          * @param {?} nodeData
@@ -12890,14 +12888,14 @@
         function (nodeData, items) {
             /** @type {?} */
             var node = {};
-            node['title'] = nodeData.title;
+            node.title = nodeData.title;
             if (nodeData.entries && nodeData.entries.length > 0) {
                 this.addLinkToNode(node, nodeData.entries[0], items);
             }
             if (nodeData.children && nodeData.children.length > 0) {
                 /** @type {?} */
                 var children = this.createChildren(nodeData, items);
-                node['children'] = children;
+                node.children = children;
             }
             return node;
         };
@@ -12908,7 +12906,7 @@
          * @param {?} items
          * @return {?}
          */
-        NavigationComponentService.prototype.addLinkToNode = /**
+        NavigationService.prototype.addLinkToNode = /**
          * @private
          * @param {?} node
          * @param {?} entry
@@ -12920,12 +12918,44 @@
             var item = items[entry.itemId + "_" + entry.itemSuperType];
             // now we only consider CMSLinkComponent
             if (entry.itemType === 'CMSLinkComponent' && item !== undefined) {
-                if (!node['title']) {
-                    node['title'] = item.linkName;
+                if (!node.title) {
+                    node.title = item.linkName;
                 }
-                node['url'] = item.url;
+                node.url = this.getLink(item);
                 // if "NEWWINDOW", target is true
-                node['target'] = item.target;
+                node.target = item.target;
+            }
+        };
+        /**
+         *
+         * Gets the URL or link to a related item (category)
+         */
+        /**
+         *
+         * Gets the URL or link to a related item (category)
+         * @private
+         * @param {?} item
+         * @return {?}
+         */
+        NavigationService.prototype.getLink = /**
+         *
+         * Gets the URL or link to a related item (category)
+         * @private
+         * @param {?} item
+         * @return {?}
+         */
+        function (item) {
+            if (item.url) {
+                return item.url;
+            }
+            else if (item.categoryCode) {
+                return this.semanticPathService.transform({
+                    cxRoute: 'category',
+                    params: {
+                        code: item.categoryCode,
+                        name: item.name,
+                    },
+                });
             }
         };
         /**
@@ -12934,7 +12964,7 @@
          * @param {?} items
          * @return {?}
          */
-        NavigationComponentService.prototype.createChildren = /**
+        NavigationService.prototype.createChildren = /**
          * @private
          * @param {?} node
          * @param {?} items
@@ -12961,15 +12991,18 @@
             }
             return children;
         };
-        NavigationComponentService.decorators = [
-            { type: core.Injectable }
+        NavigationService.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
         ];
         /** @nocollapse */
-        NavigationComponentService.ctorParameters = function () { return [
+        NavigationService.ctorParameters = function () { return [
             { type: core$1.CmsService },
-            { type: CmsComponentData, decorators: [{ type: core.Optional }] }
+            { type: core$1.SemanticPathService }
         ]; };
-        return NavigationComponentService;
+        /** @nocollapse */ NavigationService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function NavigationService_Factory() { return new NavigationService(core.ɵɵinject(core$1.CmsService), core.ɵɵinject(core$1.SemanticPathService)); }, token: NavigationService, providedIn: "root" });
+        return NavigationService;
     }());
 
     /**
@@ -12977,27 +13010,23 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CategoryNavigationComponent = /** @class */ (function () {
-        function CategoryNavigationComponent(service) {
+        function CategoryNavigationComponent(componentData, service) {
+            this.componentData = componentData;
             this.service = service;
-            this.node$ = this.service.getNavigationNode();
-            this.styleClass$ = this.service
-                .getComponentData()
-                .pipe(operators.map((/**
-             * @param {?} d
-             * @return {?}
-             */
-            function (d) { return d.styleClass; })));
+            this.node$ = this.service.getNavigationNode(this.componentData.data$);
+            this.data$ = this.componentData.data$;
         }
         CategoryNavigationComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-category-navigation',
-                        template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [ngClass]=\"styleClass$ | async\"\n></cx-navigation-ui>\n",
+                        template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [ngClass]=\"(data$ | async).styleClass\"\n  [wrapAfter]=\"(data$ | async).wrapAfter\"\n></cx-navigation-ui>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
         /** @nocollapse */
         CategoryNavigationComponent.ctorParameters = function () { return [
-            { type: NavigationComponentService }
+            { type: CmsComponentData },
+            { type: NavigationService }
         ]; };
         return CategoryNavigationComponent;
     }());
@@ -13006,8 +13035,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    /** @type {?} */
-    var COLUMN_SIZE = 10;
     var NavigationUIComponent = /** @class */ (function () {
         function NavigationUIComponent(router$1, renderer) {
             var _this = this;
@@ -13133,66 +13160,10 @@
                 return depth;
             }
         };
-        // Recursively break nodes with more than COLUMN_SIZE into sub nodes to create columns
-        // Recursively break nodes with more than COLUMN_SIZE into sub nodes to create columns
-        /**
-         * @param {?} node
-         * @param {?} columnSize
-         * @return {?}
-         */
-        NavigationUIComponent.prototype.breakNodesIntoColumns = 
-        // Recursively break nodes with more than COLUMN_SIZE into sub nodes to create columns
-        /**
-         * @param {?} node
-         * @param {?} columnSize
-         * @return {?}
-         */
-        function (node, columnSize) {
-            var _this = this;
-            var _a;
-            if (node.hasOwnProperty('children')) {
-                // Check if too many children for column
-                if (node.children.length > columnSize) {
-                    /** @type {?} */
-                    var clonedNode = __assign({}, node);
-                    node.children = [];
-                    // Break node into subnodes with children length of columnSize
-                    while (clonedNode.children.length > 0) {
-                        /** @type {?} */
-                        var newSubNode = { title: null, children: [] };
-                        (_a = newSubNode.children).push.apply(_a, __spread(clonedNode.children.splice(0, columnSize)));
-                        node.children.push(newSubNode);
-                    }
-                }
-                // Recursively do the same with child nodes
-                node.children.forEach((/**
-                 * @param {?} child
-                 * @return {?}
-                 */
-                function (child) {
-                    child = _this.breakNodesIntoColumns(child, columnSize);
-                }));
-            }
-            return node;
-        };
-        /**
-         * @param {?} changes
-         * @return {?}
-         */
-        NavigationUIComponent.prototype.ngOnChanges = /**
-         * @param {?} changes
-         * @return {?}
-         */
-        function (changes) {
-            // Recursively break into columns once node exists on component
-            if (changes.node.currentValue) {
-                this.node = this.breakNodesIntoColumns(this.node, COLUMN_SIZE);
-            }
-        };
         NavigationUIComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-navigation-ui',
-                        template: "<div\n  *ngIf=\"flyout && node?.children.length > 1\"\n  class=\"back is-open\"\n  (click)=\"back()\"\n>\n  <h5>\n    <cx-icon [type]=\"iconType.CARET_LEFT\"></cx-icon>\n    {{ 'common.back' | cxTranslate }}\n  </h5>\n</div>\n\n<ng-container *ngFor=\"let child of node?.children\">\n  <ng-container *ngTemplateOutlet=\"nav; context: { node: child }\">\n  </ng-container>\n</ng-container>\n\n<!-- we generate links in a recursive manner -->\n<ng-template #nav let-node=\"node\">\n  <nav tabindex=\"0\" (click)=\"toggleOpen($event)\">\n    <cx-generic-link\n      *ngIf=\"\n        node.url && (!node.children || node.children?.length === 0);\n        else heading\n      \"\n      [url]=\"node.url\"\n    >\n      {{ node.title }}\n      <cx-icon\n        *ngIf=\"flyout && node.children?.length > 0\"\n        [type]=\"iconType.CARET_DOWN\"\n      ></cx-icon>\n    </cx-generic-link>\n\n    <ng-template #heading>\n      <h5 [attr.aria-label]=\"node.title\">\n        {{ node.title }}\n        <cx-icon\n          *ngIf=\"flyout && node.children?.length > 0\"\n          [type]=\"iconType.CARET_DOWN\"\n        ></cx-icon>\n      </h5>\n    </ng-template>\n\n    <!-- we add a wrapper to allow for better layout handling in CSS -->\n    <div class=\"wrapper\" *ngIf=\"node.children?.length > 0\">\n      <cx-generic-link *ngIf=\"node.url\" [url]=\"node.url\" class=\"all\">\n        {{ 'navigation.shopAll' | cxTranslate: { navNode: node.title } }}\n      </cx-generic-link>\n\n      <div class=\"childs\" [attr.depth]=\"getDepth(node)\">\n        <ng-container *ngFor=\"let child of node.children\">\n          <ng-container *ngTemplateOutlet=\"nav; context: { node: child }\">\n          </ng-container>\n        </ng-container>\n      </div>\n    </div>\n  </nav>\n</ng-template>\n",
+                        template: "<div\n  *ngIf=\"flyout && node?.children.length > 1\"\n  class=\"back is-open\"\n  (click)=\"back()\"\n>\n  <h5>\n    <cx-icon [type]=\"iconType.CARET_LEFT\"></cx-icon>\n    {{ 'common.back' | cxTranslate }}\n  </h5>\n</div>\n\n<ng-container *ngFor=\"let child of node?.children\">\n  <ng-container *ngTemplateOutlet=\"nav; context: { node: child }\">\n  </ng-container>\n</ng-container>\n\n<!-- we generate links in a recursive manner -->\n<ng-template #nav let-node=\"node\">\n  <nav tabindex=\"0\" (click)=\"toggleOpen($event)\">\n    <cx-generic-link\n      *ngIf=\"\n        node.url && (!node.children || node.children?.length === 0);\n        else heading\n      \"\n      [url]=\"node.url\"\n    >\n      {{ node.title }}\n      <cx-icon\n        *ngIf=\"flyout && node.children?.length > 0\"\n        [type]=\"iconType.CARET_DOWN\"\n      ></cx-icon>\n    </cx-generic-link>\n\n    <ng-template #heading>\n      <h5 [attr.aria-label]=\"node.title\">\n        {{ node.title }}\n        <cx-icon\n          *ngIf=\"flyout && node.children?.length > 0\"\n          [type]=\"iconType.CARET_DOWN\"\n        ></cx-icon>\n      </h5>\n    </ng-template>\n\n    <!-- we add a wrapper to allow for better layout handling in CSS -->\n    <div class=\"wrapper\" *ngIf=\"node.children?.length > 0\">\n      <cx-generic-link *ngIf=\"node.url\" [url]=\"node.url\" class=\"all\">\n        {{ 'navigation.shopAll' | cxTranslate: { navNode: node.title } }}\n      </cx-generic-link>\n\n      <div\n        class=\"childs\"\n        [attr.depth]=\"getDepth(node)\"\n        [attr.wrap-after]=\"node.children?.length > wrapAfter ? wrapAfter : null\"\n      >\n        <ng-container *ngFor=\"let child of node.children\">\n          <ng-container *ngTemplateOutlet=\"nav; context: { node: child }\">\n          </ng-container>\n        </ng-container>\n      </div>\n    </div>\n  </nav>\n</ng-template>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -13203,6 +13174,7 @@
         ]; };
         NavigationUIComponent.propDecorators = {
             node: [{ type: core.Input }],
+            wrapAfter: [{ type: core.Input }],
             flyout: [{ type: core.Input }, { type: core.HostBinding, args: ['class.flyout',] }],
             isOpen: [{ type: core.Input }, { type: core.HostBinding, args: ['class.is-open',] }]
         };
@@ -13214,12 +13186,11 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var NavigationComponent = /** @class */ (function () {
-        function NavigationComponent(service) {
+        function NavigationComponent(componentData, service) {
+            this.componentData = componentData;
             this.service = service;
-            this.node$ = this.service.createNavigation();
-            this.styleClass$ = this.service
-                .getComponentData()
-                .pipe(operators.map((/**
+            this.node$ = this.service.createNavigation(this.componentData.data$);
+            this.styleClass$ = this.componentData.data$.pipe(operators.map((/**
              * @param {?} d
              * @return {?}
              */
@@ -13234,7 +13205,8 @@
         ];
         /** @nocollapse */
         NavigationComponent.ctorParameters = function () { return [
-            { type: NavigationComponentService }
+            { type: CmsComponentData },
+            { type: NavigationService }
         ]; };
         return NavigationComponent;
     }());
@@ -13257,13 +13229,6 @@
                                 cmsComponents: {
                                     NavigationComponent: {
                                         component: NavigationComponent,
-                                        providers: [
-                                            {
-                                                provide: NavigationComponentService,
-                                                useClass: NavigationComponentService,
-                                                deps: [core$1.CmsService, CmsComponentData],
-                                            },
-                                        ],
                                     },
                                 },
                             }))),
@@ -13293,13 +13258,6 @@
                                 cmsComponents: {
                                     CategoryNavigationComponent: {
                                         component: CategoryNavigationComponent,
-                                        providers: [
-                                            {
-                                                provide: NavigationComponentService,
-                                                useClass: NavigationComponentService,
-                                                deps: [core$1.CmsService, CmsComponentData],
-                                            },
-                                        ],
                                     },
                                 },
                             }))),
@@ -13317,27 +13275,28 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var FooterNavigationComponent = /** @class */ (function () {
-        function FooterNavigationComponent(service) {
+        function FooterNavigationComponent(componentData, service) {
+            this.componentData = componentData;
             this.service = service;
-            this.node$ = this.service.getNavigationNode();
-            this.styleClass$ = this.service
-                .getComponentData()
-                .pipe(operators.map((/**
+            this.node$ = this.service.getNavigationNode(this.componentData.data$);
+            this.styleClass$ = this.componentData.data$.pipe(operators.map((/**
              * @param {?} d
              * @return {?}
              */
             function (d) { return d.styleClass; })));
+            this.data$ = this.componentData.data$;
         }
         FooterNavigationComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-footer-navigation',
-                        template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [flyout]=\"false\"\n  [ngClass]=\"styleClass$ | async\"\n></cx-navigation-ui>\n\n<div class=\"notice\" *ngIf=\"(service.getComponentData() | async) as data\">\n  {{ data.notice }}\n</div>\n",
+                        template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [flyout]=\"false\"\n  [ngClass]=\"styleClass$ | async\"\n></cx-navigation-ui>\n\n<div class=\"notice\" *ngIf=\"(data$ | async) as data\">\n  {{ data.notice }}\n</div>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
         /** @nocollapse */
         FooterNavigationComponent.ctorParameters = function () { return [
-            { type: NavigationComponentService }
+            { type: CmsComponentData },
+            { type: NavigationService }
         ]; };
         return FooterNavigationComponent;
     }());
@@ -13359,13 +13318,6 @@
                                 cmsComponents: {
                                     FooterNavigationComponent: {
                                         component: FooterNavigationComponent,
-                                        providers: [
-                                            {
-                                                provide: NavigationComponentService,
-                                                useClass: NavigationComponentService,
-                                                deps: [core$1.CmsService, CmsComponentData],
-                                            },
-                                        ],
                                     },
                                 },
                             }))),
@@ -13378,6 +13330,11 @@
         ];
         return FooterNavigationModule;
     }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
 
     /**
      * @fileoverview added by tsickle
@@ -16513,8 +16470,8 @@
     exports.ModalRef = ModalRef;
     exports.ModalService = ModalService;
     exports.NavigationComponent = NavigationComponent;
-    exports.NavigationComponentService = NavigationComponentService;
     exports.NavigationModule = NavigationModule;
+    exports.NavigationService = NavigationService;
     exports.NavigationUIComponent = NavigationUIComponent;
     exports.OnlyNumberDirective = OnlyNumberDirective;
     exports.OrderConfirmationGuard = OrderConfirmationGuard;
