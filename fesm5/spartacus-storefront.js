@@ -14893,37 +14893,11 @@ var ProductListComponent = /** @class */ (function () {
             if (Object.keys(searchResult).length === 0) {
                 _this.search(_this.query, _this.options);
             }
-            else {
-                _this.getCategoryTitle(searchResult);
-            }
         })), filter((/**
          * @param {?} searchResult
          * @return {?}
          */
         function (searchResult) { return Object.keys(searchResult).length > 0; })));
-    };
-    /**
-     * @protected
-     * @param {?} data
-     * @return {?}
-     */
-    ProductListComponent.prototype.getCategoryTitle = /**
-     * @protected
-     * @param {?} data
-     * @return {?}
-     */
-    function (data) {
-        if (data.breadcrumbs && data.breadcrumbs.length > 0) {
-            this.categoryTitle = data.breadcrumbs[0].facetValueName;
-        }
-        else if (!this.query.includes(':relevance:')) {
-            this.categoryTitle = this.query;
-        }
-        if (this.categoryTitle) {
-            this.categoryTitle =
-                data.pagination.totalResults + ' results for ' + this.categoryTitle;
-        }
-        return this.categoryTitle;
     };
     /**
      * @param {?} pageNumber

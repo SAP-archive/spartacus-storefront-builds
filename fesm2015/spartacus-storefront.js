@@ -12500,32 +12500,11 @@ class ProductListComponent {
             if (Object.keys(searchResult).length === 0) {
                 this.search(this.query, this.options);
             }
-            else {
-                this.getCategoryTitle(searchResult);
-            }
         })), filter((/**
          * @param {?} searchResult
          * @return {?}
          */
         searchResult => Object.keys(searchResult).length > 0)));
-    }
-    /**
-     * @protected
-     * @param {?} data
-     * @return {?}
-     */
-    getCategoryTitle(data) {
-        if (data.breadcrumbs && data.breadcrumbs.length > 0) {
-            this.categoryTitle = data.breadcrumbs[0].facetValueName;
-        }
-        else if (!this.query.includes(':relevance:')) {
-            this.categoryTitle = this.query;
-        }
-        if (this.categoryTitle) {
-            this.categoryTitle =
-                data.pagination.totalResults + ' results for ' + this.categoryTitle;
-        }
-        return this.categoryTitle;
     }
     /**
      * @param {?} pageNumber

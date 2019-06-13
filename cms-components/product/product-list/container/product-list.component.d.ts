@@ -14,7 +14,6 @@ export declare class ProductListComponent implements OnInit {
     itemPerPage: number;
     model$: Observable<ProductSearchPage>;
     searchConfig: SearchConfig;
-    categoryTitle: string;
     options: SearchConfig;
     updateParams$: Observable<Params>;
     gridMode$: BehaviorSubject<ViewModes>;
@@ -22,7 +21,6 @@ export declare class ProductListComponent implements OnInit {
     update(): void;
     createOptionsByUrlParams(): SearchConfig;
     ngOnInit(): void;
-    protected getCategoryTitle(data: ProductSearchPage): string;
     viewPage(pageNumber: number): void;
     sortList(sortCode: string): void;
     setGridMode(mode: ViewModes): void;
