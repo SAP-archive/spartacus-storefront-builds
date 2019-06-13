@@ -12227,10 +12227,12 @@ class ProductIntroComponent {
     /**
      * @param {?} currentProductService
      * @param {?} translationService
+     * @param {?} winRef
      */
-    constructor(currentProductService, translationService) {
+    constructor(currentProductService, translationService, winRef) {
         this.currentProductService = currentProductService;
         this.translationService = translationService;
+        this.winRef = winRef;
         this.reviewsTabAvailable = new BehaviorSubject(false);
         this.product$ = this.currentProductService.getProduct();
     }
@@ -12276,7 +12278,7 @@ class ProductIntroComponent {
      * @return {?}
      */
     getReviewsComponent() {
-        return document.querySelector('cx-product-reviews');
+        return this.winRef.document.querySelector('cx-product-reviews');
     }
     // Get Tabs Component if exists on page
     /**
@@ -12284,7 +12286,7 @@ class ProductIntroComponent {
      * @return {?}
      */
     getTabsComponent() {
-        return document.querySelector('cx-tab-paragraph-container');
+        return this.winRef.document.querySelector('cx-tab-paragraph-container');
     }
     // Click to activate tab if not already active
     /**
@@ -12330,7 +12332,8 @@ ProductIntroComponent.decorators = [
 /** @nocollapse */
 ProductIntroComponent.ctorParameters = () => [
     { type: CurrentProductService },
-    { type: TranslationService }
+    { type: TranslationService },
+    { type: WindowRef }
 ];
 
 /**

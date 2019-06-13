@@ -14543,9 +14543,10 @@ var ProductReferencesModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var ProductIntroComponent = /** @class */ (function () {
-    function ProductIntroComponent(currentProductService, translationService) {
+    function ProductIntroComponent(currentProductService, translationService, winRef) {
         this.currentProductService = currentProductService;
         this.translationService = translationService;
+        this.winRef = winRef;
         this.reviewsTabAvailable = new BehaviorSubject(false);
         this.product$ = this.currentProductService.getProduct();
     }
@@ -14610,7 +14611,7 @@ var ProductIntroComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        return document.querySelector('cx-product-reviews');
+        return this.winRef.document.querySelector('cx-product-reviews');
     };
     // Get Tabs Component if exists on page
     // Get Tabs Component if exists on page
@@ -14625,7 +14626,7 @@ var ProductIntroComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        return document.querySelector('cx-tab-paragraph-container');
+        return this.winRef.document.querySelector('cx-tab-paragraph-container');
     };
     // Click to activate tab if not already active
     // Click to activate tab if not already active
@@ -14698,7 +14699,8 @@ var ProductIntroComponent = /** @class */ (function () {
     /** @nocollapse */
     ProductIntroComponent.ctorParameters = function () { return [
         { type: CurrentProductService },
-        { type: TranslationService }
+        { type: TranslationService },
+        { type: WindowRef }
     ]; };
     return ProductIntroComponent;
 }());
