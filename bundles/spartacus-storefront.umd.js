@@ -253,11 +253,7 @@
              * @param {?} state
              * @return {?}
              */
-            function (state) { return state.state.params['productCode']; })), operators.filter((/**
-             * @param {?} productCode
-             * @return {?}
-             */
-            function (productCode) { return !!productCode; })), operators.switchMap((/**
+            function (state) { return state.state.params['productCode']; })), operators.filter(Boolean), operators.switchMap((/**
              * @param {?} productCode
              * @return {?}
              */
@@ -1167,14 +1163,34 @@
              * regardless of the overall size.
              */
             this.minItemPixelSize = 300;
+            this.hideIndicators = false;
             this.indicatorIcon = ICON_TYPE.CIRCLE;
             this.previousIcon = ICON_TYPE.CARET_LEFT;
             this.nextIcon = ICON_TYPE.CARET_RIGHT;
+            this.open = new core.EventEmitter();
             /**
              * The group with items which is currently active.
              */
             this.activeSlide = 0;
         }
+        Object.defineProperty(CarouselComponent.prototype, "items", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return this._items;
+            },
+            set: /**
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) {
+                this._items = value;
+                this.select();
+            },
+            enumerable: true,
+            configurable: true
+        });
         /**
          * @return {?}
          */
@@ -1182,23 +1198,44 @@
          * @return {?}
          */
         function () {
-            this.size$ = this.service.getSize(this.el.nativeElement, this.minItemPixelSize);
+            var _this = this;
+            this.size$ = this.service
+                .getSize(this.el.nativeElement, this.minItemPixelSize)
+                .pipe(operators.tap((/**
+             * @return {?}
+             */
+            function () { return _this.select(); })));
         };
         /**
-         * @param {?} slide
+         * @param {?=} slide
          * @return {?}
          */
         CarouselComponent.prototype.select = /**
-         * @param {?} slide
+         * @param {?=} slide
          * @return {?}
          */
         function (slide) {
+            if (slide === void 0) { slide = 0; }
             this.activeSlide = slide;
+        };
+        /**
+         * @param {?} groupIndex
+         * @param {?} itemIndex
+         * @return {?}
+         */
+        CarouselComponent.prototype.onOpen = /**
+         * @param {?} groupIndex
+         * @param {?} itemIndex
+         * @return {?}
+         */
+        function (groupIndex, itemIndex) {
+            this.select(groupIndex);
+            this.open.emit(this.items[groupIndex + itemIndex]);
         };
         CarouselComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-carousel',
-                        template: "<ng-container *ngIf=\"items && items.length > 0 && (size$ | async) as size\">\n  <h3 *ngIf=\"title\">\n    {{ title }}\n  </h3>\n\n  <div class=\"carousel-panel\" [ngClass]=\"'size-' + size\">\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"previous\"\n      (click)=\"select(activeSlide - size)\"\n      [disabled]=\"activeSlide === 0\"\n    >\n      <cx-icon [type]=\"previousIcon\"></cx-icon>\n    </button>\n\n    <div class=\"groups\">\n      <ng-container *ngFor=\"let _ of items; let i = index\">\n        <div class=\"group\" *ngIf=\"i % size === 0\">\n          <ng-container *ngFor=\"let item of (items | slice: i:i + size)\">\n            <a\n              *ngIf=\"item\"\n              class=\"product\"\n              [class.active]=\"i === activeSlide\"\n              [routerLink]=\"item.route\"\n            >\n              <cx-media\n                [container]=\"item.media?.container\"\n                [format]=\"item.media?.format\"\n              >\n              </cx-media>\n\n              <h4 *ngIf=\"item.title\">{{ item.title }}</h4>\n              <div *ngIf=\"item.price\" class=\"price\">{{ item.price }}</div>\n            </a>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"next\"\n      (click)=\"select(activeSlide + size)\"\n      [disabled]=\"activeSlide > items.length - size - 1\"\n    >\n      <cx-icon [type]=\"nextIcon\"></cx-icon>\n    </button>\n  </div>\n\n  <div class=\"indicators\" *ngIf=\"size < items.length\">\n    <ng-container *ngFor=\"let _ of items; let i = index\">\n      <button\n        *ngIf=\"i % size === 0\"\n        (click)=\"select(i)\"\n        [disabled]=\"i === activeSlide\"\n      >\n        <cx-icon [type]=\"indicatorIcon\"></cx-icon>\n      </button>\n    </ng-container>\n  </div>\n</ng-container>\n"
+                        template: "<ng-container *ngIf=\"items && items.length > 0 && (size$ | async) as size\">\n  <h3 *ngIf=\"title\">\n    {{ title }}\n  </h3>\n\n  <div class=\"carousel-panel\" [ngClass]=\"'size-' + size\">\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"previous\"\n      (click)=\"select(activeSlide - size)\"\n      [disabled]=\"activeSlide === 0\"\n    >\n      <cx-icon [type]=\"previousIcon\"></cx-icon>\n    </button>\n\n    <div class=\"groups\">\n      <ng-container *ngFor=\"let _ of items; let i = index\">\n        <div class=\"group\" *ngIf=\"i % size === 0\">\n          <ng-container\n            *ngFor=\"let item of (items | slice: i:i + size); let j = index\"\n          >\n            <a\n              *ngIf=\"item && item.route; else noLink\"\n              class=\"item\"\n              [class.active]=\"i === activeSlide\"\n              [class.activeItem]=\"j === activeItem - i\"\n              (focus)=\"onOpen(i, j)\"\n              tabindex=\"0\"\n              [routerLink]=\"item.route\"\n            >\n              <cx-media\n                [container]=\"item.media?.container\"\n                [format]=\"item.media?.format\"\n              >\n              </cx-media>\n\n              <h4 *ngIf=\"item.title\">{{ item.title }}</h4>\n              <div *ngIf=\"item.price\" class=\"price\">{{ item.price }}</div>\n            </a>\n            <ng-template #noLink>\n              <a\n                *ngIf=\"item\"\n                class=\"item\"\n                [class.active]=\"i === activeSlide\"\n                [class.activeItem]=\"j === activeItem - i\"\n                (focus)=\"onOpen(i, j)\"\n                tabindex=\"0\"\n              >\n                <cx-media\n                  [container]=\"item.media?.container\"\n                  [format]=\"item.media?.format\"\n                >\n                </cx-media>\n\n                <h4 *ngIf=\"item.title\">{{ item.title }}</h4>\n                <div *ngIf=\"item.price\" class=\"price\">{{ item.price }}</div>\n              </a>\n            </ng-template>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"next\"\n      (click)=\"select(activeSlide + size)\"\n      [disabled]=\"activeSlide > items.length - size - 1\"\n    >\n      <cx-icon [type]=\"nextIcon\"></cx-icon>\n    </button>\n  </div>\n\n  <div *ngIf=\"!hideIndicators && size < items.length\" class=\"indicators\">\n    <ng-container *ngFor=\"let _ of items; let i = index\">\n      <button\n        *ngIf=\"i % size === 0\"\n        (click)=\"select(i)\"\n        [disabled]=\"i === activeSlide\"\n      >\n        <cx-icon [type]=\"indicatorIcon\"></cx-icon>\n      </button>\n    </ng-container>\n  </div>\n</ng-container>\n"
                     }] }
         ];
         /** @nocollapse */
@@ -1208,11 +1245,14 @@
         ]; };
         CarouselComponent.propDecorators = {
             title: [{ type: core.Input }],
-            items: [{ type: core.Input }],
+            items: [{ type: core.Input, args: ['items',] }],
+            activeItem: [{ type: core.Input }],
             minItemPixelSize: [{ type: core.Input }],
+            hideIndicators: [{ type: core.Input }],
             indicatorIcon: [{ type: core.Input }],
             previousIcon: [{ type: core.Input }],
-            nextIcon: [{ type: core.Input }]
+            nextIcon: [{ type: core.Input }],
+            open: [{ type: core.Output }]
         };
         return CarouselComponent;
     }());
@@ -1634,6 +1674,7 @@
         function () {
             this.isLoading = false;
             this.isInitialized = true;
+            this.isMissing = false;
             this.loaded.emit(true);
         };
         /**
@@ -15692,104 +15733,137 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    /** @type {?} */
-    var WAITING_CLASS = 'is-waiting';
     var ProductImagesComponent = /** @class */ (function () {
         function ProductImagesComponent(currentProductService) {
+            var _this = this;
             this.currentProductService = currentProductService;
-            this.product$ = this.currentProductService
-                .getProduct()
-                .pipe(operators.filter(Boolean));
-            this._imageContainer$ = new rxjs.BehaviorSubject(null);
-            this.imageContainer$ = rxjs.combineLatest(this.product$, this._imageContainer$).pipe(operators.map((/**
+            this.mainMediaContainer = new rxjs.BehaviorSubject(null);
+            this.product$ = this.currentProductService.getProduct().pipe(operators.filter(Boolean), operators.distinctUntilChanged(), operators.tap((/**
+             * @param {?} p
+             * @return {?}
+             */
+            function (p) {
+                return _this.mainMediaContainer.next(p.images ? p.images.PRIMARY : {});
+            })));
+            this.thumbs$ = this.product$.pipe(operators.map((/**
+             * @param {?} product
+             * @return {?}
+             */
+            function (product) { return _this.createCarouselItems(product); })));
+            this.mainImage$ = rxjs.combineLatest([
+                this.product$,
+                this.mainMediaContainer,
+            ]).pipe(operators.map((/**
              * @param {?} __0
              * @return {?}
              */
             function (_a) {
-                var _b = __read(_a, 2), product = _b[0], container = _b[1];
-                return container
-                    ? container
-                    : product.images && product.images.PRIMARY
-                        ? product.images.PRIMARY
-                        : {};
+                var _b = __read(_a, 2), _ = _b[0], container = _b[1];
+                return container;
             })));
         }
         /**
-         * @param {?} event
-         * @param {?} imageContainer
          * @return {?}
          */
-        ProductImagesComponent.prototype.showImage = /**
-         * @param {?} event
-         * @param {?} imageContainer
+        ProductImagesComponent.prototype.getThumbs = /**
          * @return {?}
          */
-        function (event, imageContainer) {
-            this.startWaiting((/** @type {?} */ (event.target)));
-            this._imageContainer$.next(imageContainer);
+        function () {
+            return this.thumbs$;
         };
         /**
-         * @param {?} currentContainer
          * @return {?}
          */
-        ProductImagesComponent.prototype.isMainImageContainer = /**
-         * @param {?} currentContainer
+        ProductImagesComponent.prototype.getMain = /**
          * @return {?}
          */
-        function (currentContainer) {
-            return this.imageContainer$.pipe(operators.map((/**
+        function () {
+            return this.mainImage$;
+        };
+        /**
+         * @param {?} item
+         * @return {?}
+         */
+        ProductImagesComponent.prototype.openImage = /**
+         * @param {?} item
+         * @return {?}
+         */
+        function (item) {
+            this.mainMediaContainer.next(item.media.container);
+        };
+        /** find the index of the main media in the list of media */
+        /**
+         * find the index of the main media in the list of media
+         * @param {?} thumbs
+         * @return {?}
+         */
+        ProductImagesComponent.prototype.getActive = /**
+         * find the index of the main media in the list of media
+         * @param {?} thumbs
+         * @return {?}
+         */
+        function (thumbs) {
+            return this.mainMediaContainer.pipe(operators.filter(Boolean), operators.map((/**
              * @param {?} container
              * @return {?}
              */
             function (container) {
-                return container &&
-                    container.zoom &&
-                    currentContainer.zoom &&
-                    container.zoom.url === currentContainer.zoom.url;
+                /** @type {?} */
+                var current = thumbs.find((/**
+                 * @param {?} t
+                 * @return {?}
+                 */
+                function (t) {
+                    return t.media &&
+                        container.zoom &&
+                        t.media.container &&
+                        t.media.container.zoom &&
+                        t.media.container.zoom.url === container.zoom.url;
+                }));
+                return thumbs.indexOf(current);
             })));
         };
         /**
-         * @return {?}
+         * Return an array of CarouselItems for the product thumbnails.
+         * In case there are less then 2 thumbs, we return null.
          */
-        ProductImagesComponent.prototype.loadHandler = /**
-         * @return {?}
-         */
-        function () {
-            this.clearWaitList();
-        };
         /**
+         * Return an array of CarouselItems for the product thumbnails.
+         * In case there are less then 2 thumbs, we return null.
          * @private
-         * @param {?} el
+         * @param {?} product
          * @return {?}
          */
-        ProductImagesComponent.prototype.startWaiting = /**
+        ProductImagesComponent.prototype.createCarouselItems = /**
+         * Return an array of CarouselItems for the product thumbnails.
+         * In case there are less then 2 thumbs, we return null.
          * @private
-         * @param {?} el
+         * @param {?} product
          * @return {?}
          */
-        function (el) {
-            this.clearWaitList();
-            el.classList.add(WAITING_CLASS);
-            this.waiting = el;
-        };
-        /**
-         * @private
-         * @return {?}
-         */
-        ProductImagesComponent.prototype.clearWaitList = /**
-         * @private
-         * @return {?}
-         */
-        function () {
-            if (this.waiting) {
-                this.waiting.classList.remove(WAITING_CLASS);
-                delete this.waiting;
+        function (product) {
+            if (!product.images ||
+                !product.images.GALLERY ||
+                product.images.GALLERY.length < 2) {
+                return null;
             }
+            return ((/** @type {?} */ (product.images.GALLERY))).map((/**
+             * @param {?} c
+             * @return {?}
+             */
+            function (c) {
+                return {
+                    media: {
+                        container: c,
+                        format: 'thumbnail',
+                    },
+                };
+            }));
         };
         ProductImagesComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-product-images',
-                        template: "<ng-container *ngIf=\"(imageContainer$ | async) as container\">\n  <cx-media [container]=\"container\" format=\"zoom\" (loaded)=\"loadHandler()\">\n  </cx-media>\n\n  <div\n    class=\"thumbs\"\n    *ngIf=\"(product$ | async) as product\"\n    [class.hidden]=\"product.images?.GALLERY?.length === 1\"\n  >\n    <cx-media\n      *ngFor=\"let image of product.images?.GALLERY\"\n      [container]=\"image\"\n      format=\"thumbnail\"\n      (focus)=\"showImage($event, image)\"\n      tabindex=\"0\"\n      [class.active]=\"isMainImageContainer(image) | async\"\n    >\n    </cx-media>\n  </div>\n</ng-container>\n",
+                        template: "<ng-container *ngIf=\"(getMain() | async) as main\">\n  <cx-media [container]=\"main\" format=\"zoom\"> </cx-media>\n</ng-container>\n<ng-container *ngIf=\"(getThumbs() | async) as thumbs\">\n  <cx-carousel\n    class=\"thumbs\"\n    [items]=\"thumbs\"\n    [minItemPixelSize]=\"120\"\n    [hideIndicators]=\"true\"\n    (open)=\"openImage($event)\"\n    [activeItem]=\"getActive(thumbs) | async\"\n  ></cx-carousel>\n</ng-container>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -15821,6 +15895,7 @@
                                     },
                                 },
                             }))),
+                            CarouselModule,
                         ],
                         declarations: [ProductImagesComponent],
                         entryComponents: [ProductImagesComponent],

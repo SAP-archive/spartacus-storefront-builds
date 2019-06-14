@@ -1,16 +1,21 @@
-import { Product } from '@spartacus/core';
 import { Observable } from 'rxjs';
+import { CarouselItem } from '../../../shared/components/carousel/index';
 import { CurrentProductService } from '../current-product.service';
 export declare class ProductImagesComponent {
     private currentProductService;
-    waiting: HTMLElement;
-    product$: Observable<Product>;
-    private _imageContainer$;
-    imageContainer$: Observable<any>;
+    private mainMediaContainer;
+    private product$;
+    private thumbs$;
+    private mainImage$;
     constructor(currentProductService: CurrentProductService);
-    showImage(event: MouseEvent, imageContainer: any): void;
-    isMainImageContainer(currentContainer: any): Observable<boolean>;
-    loadHandler(): void;
-    private startWaiting;
-    private clearWaitList;
+    getThumbs(): Observable<CarouselItem[]>;
+    getMain(): Observable<any>;
+    openImage(item: CarouselItem): void;
+    /** find the index of the main media in the list of media */
+    getActive(thumbs: CarouselItem[]): Observable<number>;
+    /**
+     * Return an array of CarouselItems for the product thumbnails.
+     * In case there are less then 2 thumbs, we return null.
+     */
+    private createCarouselItems;
 }

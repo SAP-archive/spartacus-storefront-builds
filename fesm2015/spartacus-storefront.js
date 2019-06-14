@@ -126,11 +126,7 @@ class CurrentProductService {
          * @param {?} state
          * @return {?}
          */
-        state => state.state.params['productCode'])), filter((/**
-         * @param {?} productCode
-         * @return {?}
-         */
-        productCode => !!productCode)), switchMap((/**
+        state => state.state.params['productCode'])), filter(Boolean), switchMap((/**
          * @param {?} productCode
          * @return {?}
          */
@@ -875,32 +871,62 @@ class CarouselComponent {
          * regardless of the overall size.
          */
         this.minItemPixelSize = 300;
+        this.hideIndicators = false;
         this.indicatorIcon = ICON_TYPE.CIRCLE;
         this.previousIcon = ICON_TYPE.CARET_LEFT;
         this.nextIcon = ICON_TYPE.CARET_RIGHT;
+        this.open = new EventEmitter();
         /**
          * The group with items which is currently active.
          */
         this.activeSlide = 0;
     }
     /**
+     * @param {?} value
+     * @return {?}
+     */
+    set items(value) {
+        this._items = value;
+        this.select();
+    }
+    /**
+     * @return {?}
+     */
+    get items() {
+        return this._items;
+    }
+    /**
      * @return {?}
      */
     ngOnInit() {
-        this.size$ = this.service.getSize(this.el.nativeElement, this.minItemPixelSize);
+        this.size$ = this.service
+            .getSize(this.el.nativeElement, this.minItemPixelSize)
+            .pipe(tap((/**
+         * @return {?}
+         */
+        () => this.select())));
     }
     /**
-     * @param {?} slide
+     * @param {?=} slide
      * @return {?}
      */
-    select(slide) {
+    select(slide = 0) {
         this.activeSlide = slide;
+    }
+    /**
+     * @param {?} groupIndex
+     * @param {?} itemIndex
+     * @return {?}
+     */
+    onOpen(groupIndex, itemIndex) {
+        this.select(groupIndex);
+        this.open.emit(this.items[groupIndex + itemIndex]);
     }
 }
 CarouselComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-carousel',
-                template: "<ng-container *ngIf=\"items && items.length > 0 && (size$ | async) as size\">\n  <h3 *ngIf=\"title\">\n    {{ title }}\n  </h3>\n\n  <div class=\"carousel-panel\" [ngClass]=\"'size-' + size\">\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"previous\"\n      (click)=\"select(activeSlide - size)\"\n      [disabled]=\"activeSlide === 0\"\n    >\n      <cx-icon [type]=\"previousIcon\"></cx-icon>\n    </button>\n\n    <div class=\"groups\">\n      <ng-container *ngFor=\"let _ of items; let i = index\">\n        <div class=\"group\" *ngIf=\"i % size === 0\">\n          <ng-container *ngFor=\"let item of (items | slice: i:i + size)\">\n            <a\n              *ngIf=\"item\"\n              class=\"product\"\n              [class.active]=\"i === activeSlide\"\n              [routerLink]=\"item.route\"\n            >\n              <cx-media\n                [container]=\"item.media?.container\"\n                [format]=\"item.media?.format\"\n              >\n              </cx-media>\n\n              <h4 *ngIf=\"item.title\">{{ item.title }}</h4>\n              <div *ngIf=\"item.price\" class=\"price\">{{ item.price }}</div>\n            </a>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"next\"\n      (click)=\"select(activeSlide + size)\"\n      [disabled]=\"activeSlide > items.length - size - 1\"\n    >\n      <cx-icon [type]=\"nextIcon\"></cx-icon>\n    </button>\n  </div>\n\n  <div class=\"indicators\" *ngIf=\"size < items.length\">\n    <ng-container *ngFor=\"let _ of items; let i = index\">\n      <button\n        *ngIf=\"i % size === 0\"\n        (click)=\"select(i)\"\n        [disabled]=\"i === activeSlide\"\n      >\n        <cx-icon [type]=\"indicatorIcon\"></cx-icon>\n      </button>\n    </ng-container>\n  </div>\n</ng-container>\n"
+                template: "<ng-container *ngIf=\"items && items.length > 0 && (size$ | async) as size\">\n  <h3 *ngIf=\"title\">\n    {{ title }}\n  </h3>\n\n  <div class=\"carousel-panel\" [ngClass]=\"'size-' + size\">\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"previous\"\n      (click)=\"select(activeSlide - size)\"\n      [disabled]=\"activeSlide === 0\"\n    >\n      <cx-icon [type]=\"previousIcon\"></cx-icon>\n    </button>\n\n    <div class=\"groups\">\n      <ng-container *ngFor=\"let _ of items; let i = index\">\n        <div class=\"group\" *ngIf=\"i % size === 0\">\n          <ng-container\n            *ngFor=\"let item of (items | slice: i:i + size); let j = index\"\n          >\n            <a\n              *ngIf=\"item && item.route; else noLink\"\n              class=\"item\"\n              [class.active]=\"i === activeSlide\"\n              [class.activeItem]=\"j === activeItem - i\"\n              (focus)=\"onOpen(i, j)\"\n              tabindex=\"0\"\n              [routerLink]=\"item.route\"\n            >\n              <cx-media\n                [container]=\"item.media?.container\"\n                [format]=\"item.media?.format\"\n              >\n              </cx-media>\n\n              <h4 *ngIf=\"item.title\">{{ item.title }}</h4>\n              <div *ngIf=\"item.price\" class=\"price\">{{ item.price }}</div>\n            </a>\n            <ng-template #noLink>\n              <a\n                *ngIf=\"item\"\n                class=\"item\"\n                [class.active]=\"i === activeSlide\"\n                [class.activeItem]=\"j === activeItem - i\"\n                (focus)=\"onOpen(i, j)\"\n                tabindex=\"0\"\n              >\n                <cx-media\n                  [container]=\"item.media?.container\"\n                  [format]=\"item.media?.format\"\n                >\n                </cx-media>\n\n                <h4 *ngIf=\"item.title\">{{ item.title }}</h4>\n                <div *ngIf=\"item.price\" class=\"price\">{{ item.price }}</div>\n              </a>\n            </ng-template>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"next\"\n      (click)=\"select(activeSlide + size)\"\n      [disabled]=\"activeSlide > items.length - size - 1\"\n    >\n      <cx-icon [type]=\"nextIcon\"></cx-icon>\n    </button>\n  </div>\n\n  <div *ngIf=\"!hideIndicators && size < items.length\" class=\"indicators\">\n    <ng-container *ngFor=\"let _ of items; let i = index\">\n      <button\n        *ngIf=\"i % size === 0\"\n        (click)=\"select(i)\"\n        [disabled]=\"i === activeSlide\"\n      >\n        <cx-icon [type]=\"indicatorIcon\"></cx-icon>\n      </button>\n    </ng-container>\n  </div>\n</ng-container>\n"
             }] }
 ];
 /** @nocollapse */
@@ -910,11 +936,14 @@ CarouselComponent.ctorParameters = () => [
 ];
 CarouselComponent.propDecorators = {
     title: [{ type: Input }],
-    items: [{ type: Input }],
+    items: [{ type: Input, args: ['items',] }],
+    activeItem: [{ type: Input }],
     minItemPixelSize: [{ type: Input }],
+    hideIndicators: [{ type: Input }],
     indicatorIcon: [{ type: Input }],
     previousIcon: [{ type: Input }],
-    nextIcon: [{ type: Input }]
+    nextIcon: [{ type: Input }],
+    open: [{ type: Output }]
 };
 
 /**
@@ -1247,6 +1276,7 @@ class MediaComponent {
     loadHandler() {
         this.isLoading = false;
         this.isInitialized = true;
+        this.isMissing = false;
         this.loaded.emit(true);
     }
     /**
@@ -13103,82 +13133,106 @@ ProductTabsModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/** @type {?} */
-const WAITING_CLASS = 'is-waiting';
 class ProductImagesComponent {
     /**
      * @param {?} currentProductService
      */
     constructor(currentProductService) {
         this.currentProductService = currentProductService;
-        this.product$ = this.currentProductService
-            .getProduct()
-            .pipe(filter(Boolean));
-        this._imageContainer$ = new BehaviorSubject(null);
-        this.imageContainer$ = combineLatest(this.product$, this._imageContainer$).pipe(map((/**
+        this.mainMediaContainer = new BehaviorSubject(null);
+        this.product$ = this.currentProductService.getProduct().pipe(filter(Boolean), distinctUntilChanged(), tap((/**
+         * @param {?} p
+         * @return {?}
+         */
+        (p) => this.mainMediaContainer.next(p.images ? p.images.PRIMARY : {}))));
+        this.thumbs$ = this.product$.pipe(map((/**
+         * @param {?} product
+         * @return {?}
+         */
+        product => this.createCarouselItems(product))));
+        this.mainImage$ = combineLatest([
+            this.product$,
+            this.mainMediaContainer,
+        ]).pipe(map((/**
          * @param {?} __0
          * @return {?}
          */
-        ([product, container]) => container
-            ? container
-            : product.images && product.images.PRIMARY
-                ? product.images.PRIMARY
-                : {})));
+        ([_, container]) => container)));
     }
     /**
-     * @param {?} event
-     * @param {?} imageContainer
      * @return {?}
      */
-    showImage(event, imageContainer) {
-        this.startWaiting((/** @type {?} */ (event.target)));
-        this._imageContainer$.next(imageContainer);
+    getThumbs() {
+        return this.thumbs$;
     }
     /**
-     * @param {?} currentContainer
      * @return {?}
      */
-    isMainImageContainer(currentContainer) {
-        return this.imageContainer$.pipe(map((/**
+    getMain() {
+        return this.mainImage$;
+    }
+    /**
+     * @param {?} item
+     * @return {?}
+     */
+    openImage(item) {
+        this.mainMediaContainer.next(item.media.container);
+    }
+    /**
+     * find the index of the main media in the list of media
+     * @param {?} thumbs
+     * @return {?}
+     */
+    getActive(thumbs) {
+        return this.mainMediaContainer.pipe(filter(Boolean), map((/**
          * @param {?} container
          * @return {?}
          */
-        (container) => container &&
-            container.zoom &&
-            currentContainer.zoom &&
-            container.zoom.url === currentContainer.zoom.url)));
+        (container) => {
+            /** @type {?} */
+            const current = thumbs.find((/**
+             * @param {?} t
+             * @return {?}
+             */
+            t => t.media &&
+                container.zoom &&
+                t.media.container &&
+                t.media.container.zoom &&
+                t.media.container.zoom.url === container.zoom.url));
+            return thumbs.indexOf(current);
+        })));
     }
     /**
-     * @return {?}
-     */
-    loadHandler() {
-        this.clearWaitList();
-    }
-    /**
+     * Return an array of CarouselItems for the product thumbnails.
+     * In case there are less then 2 thumbs, we return null.
      * @private
-     * @param {?} el
+     * @param {?} product
      * @return {?}
      */
-    startWaiting(el) {
-        this.clearWaitList();
-        el.classList.add(WAITING_CLASS);
-        this.waiting = el;
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    clearWaitList() {
-        if (this.waiting) {
-            this.waiting.classList.remove(WAITING_CLASS);
-            delete this.waiting;
+    createCarouselItems(product) {
+        if (!product.images ||
+            !product.images.GALLERY ||
+            product.images.GALLERY.length < 2) {
+            return null;
         }
+        return ((/** @type {?} */ (product.images.GALLERY))).map((/**
+         * @param {?} c
+         * @return {?}
+         */
+        c => {
+            return {
+                media: {
+                    container: c,
+                    format: 'thumbnail',
+                },
+            };
+        }));
     }
 }
 ProductImagesComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-product-images',
-                template: "<ng-container *ngIf=\"(imageContainer$ | async) as container\">\n  <cx-media [container]=\"container\" format=\"zoom\" (loaded)=\"loadHandler()\">\n  </cx-media>\n\n  <div\n    class=\"thumbs\"\n    *ngIf=\"(product$ | async) as product\"\n    [class.hidden]=\"product.images?.GALLERY?.length === 1\"\n  >\n    <cx-media\n      *ngFor=\"let image of product.images?.GALLERY\"\n      [container]=\"image\"\n      format=\"thumbnail\"\n      (focus)=\"showImage($event, image)\"\n      tabindex=\"0\"\n      [class.active]=\"isMainImageContainer(image) | async\"\n    >\n    </cx-media>\n  </div>\n</ng-container>\n",
+                template: "<ng-container *ngIf=\"(getMain() | async) as main\">\n  <cx-media [container]=\"main\" format=\"zoom\"> </cx-media>\n</ng-container>\n<ng-container *ngIf=\"(getThumbs() | async) as thumbs\">\n  <cx-carousel\n    class=\"thumbs\"\n    [items]=\"thumbs\"\n    [minItemPixelSize]=\"120\"\n    [hideIndicators]=\"true\"\n    (open)=\"openImage($event)\"\n    [activeItem]=\"getActive(thumbs) | async\"\n  ></cx-carousel>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -13207,6 +13261,7 @@ ProductImagesModule.decorators = [
                             },
                         },
                     }))),
+                    CarouselModule,
                 ],
                 declarations: [ProductImagesComponent],
                 entryComponents: [ProductImagesComponent],
