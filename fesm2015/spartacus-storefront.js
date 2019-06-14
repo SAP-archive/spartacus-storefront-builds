@@ -12519,7 +12519,8 @@ class ProductListComponent {
      * @return {?}
      */
     sortList(sortCode) {
-        this.search(this.query, { sortCode: sortCode });
+        const { queryParams } = this.activatedRoute.snapshot;
+        this.search(queryParams.query, { sortCode: sortCode });
     }
     /**
      * @param {?} mode

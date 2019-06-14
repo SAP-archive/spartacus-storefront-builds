@@ -14920,7 +14920,8 @@ var ProductListComponent = /** @class */ (function () {
      * @return {?}
      */
     function (sortCode) {
-        this.search(this.query, { sortCode: sortCode });
+        var queryParams = this.activatedRoute.snapshot.queryParams;
+        this.search(queryParams.query, { sortCode: sortCode });
     };
     /**
      * @param {?} mode
