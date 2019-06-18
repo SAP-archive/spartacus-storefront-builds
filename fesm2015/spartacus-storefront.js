@@ -11,6 +11,8 @@ import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
 import { __awaiter } from 'tslib';
 import { ServiceWorkerModule, SwRegistrationOptions } from '@angular/service-worker';
 import { Title, Meta } from '@angular/platform-browser';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
 /**
  * @fileoverview added by tsickle
@@ -13700,6 +13702,14 @@ StorefrontModule.decorators = [
                         scrollPositionRestoration: 'enabled',
                         anchorScrolling: 'enabled',
                     }),
+                    StoreModule.forRoot({}, {
+                        runtimeChecks: {
+                            strictStateImmutability: true,
+                            strictStateSerializability: true,
+                            strictActionImmutability: true,
+                        },
+                    }),
+                    EffectsModule.forRoot([]),
                     StorefrontFoundationModule,
                     SiteContextModule.forRoot(),
                     SmartEditModule.forRoot(),

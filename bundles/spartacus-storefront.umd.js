@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@spartacus/core'), require('rxjs/operators'), require('@ng-bootstrap/ng-bootstrap'), require('@angular/forms'), require('@angular/common'), require('@angular/router'), require('rxjs'), require('@ng-select/ng-select'), require('@angular/common/http'), require('@angular/service-worker'), require('@angular/platform-browser')) :
-    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@angular/core', '@spartacus/core', 'rxjs/operators', '@ng-bootstrap/ng-bootstrap', '@angular/forms', '@angular/common', '@angular/router', 'rxjs', '@ng-select/ng-select', '@angular/common/http', '@angular/service-worker', '@angular/platform-browser'], factory) :
-    (global = global || self, factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}), global.ng.core, global.core, global.rxjs.operators, global.ngBootstrap, global.ng.forms, global.ng.common, global.ng.router, global.rxjs, global.ngSelect, global.ng.common.http, global.ng['service-worker'], global.ng.platformBrowser));
-}(this, function (exports, core, core$1, operators, ngBootstrap, forms, common, router, rxjs, ngSelect, http, serviceWorker, platformBrowser) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@spartacus/core'), require('rxjs/operators'), require('@ng-bootstrap/ng-bootstrap'), require('@angular/forms'), require('@angular/common'), require('@angular/router'), require('rxjs'), require('@ng-select/ng-select'), require('@angular/common/http'), require('@angular/service-worker'), require('@angular/platform-browser'), require('@ngrx/effects'), require('@ngrx/store')) :
+    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@angular/core', '@spartacus/core', 'rxjs/operators', '@ng-bootstrap/ng-bootstrap', '@angular/forms', '@angular/common', '@angular/router', 'rxjs', '@ng-select/ng-select', '@angular/common/http', '@angular/service-worker', '@angular/platform-browser', '@ngrx/effects', '@ngrx/store'], factory) :
+    (global = global || self, factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}), global.ng.core, global.core, global.rxjs.operators, global.ngBootstrap, global.ng.forms, global.ng.common, global.ng.router, global.rxjs, global.ngSelect, global.ng.common.http, global.ng['service-worker'], global.ng.platformBrowser, global.effects, global.store));
+}(this, function (exports, core, core$1, operators, ngBootstrap, forms, common, router, rxjs, ngSelect, http, serviceWorker, platformBrowser, effects, store) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -16360,6 +16360,14 @@
                                 scrollPositionRestoration: 'enabled',
                                 anchorScrolling: 'enabled',
                             }),
+                            store.StoreModule.forRoot({}, {
+                                runtimeChecks: {
+                                    strictStateImmutability: true,
+                                    strictStateSerializability: true,
+                                    strictActionImmutability: true,
+                                },
+                            }),
+                            effects.EffectsModule.forRoot([]),
                             StorefrontFoundationModule,
                             core$1.SiteContextModule.forRoot(),
                             core$1.SmartEditModule.forRoot(),
