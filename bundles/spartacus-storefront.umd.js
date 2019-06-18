@@ -16274,7 +16274,7 @@
             paths: ['product/:productCode/:name'],
             paramsMapping: { productCode: 'code' },
         },
-        termsAndConditions: { paths: ['termsAndConditions'] },
+        termsAndConditions: { paths: ['terms-and-conditions'] },
         orderDetails: {
             paths: ['my-account/order/:orderCode'],
             paramsMapping: { orderCode: 'code' },
