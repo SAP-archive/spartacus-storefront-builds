@@ -16324,7 +16324,6 @@
                             core$1.ConfigModule.forRoot(),
                             RoutingModule,
                             core$1.I18nModule.forRoot(),
-                            core$1.SiteContextModule.forRoot(),
                             LayoutModule,
                         ],
                         providers: __spread(core$1.provideConfigFromMetaTags()),
@@ -16357,7 +16356,12 @@
         StorefrontModule.decorators = [
             { type: core.NgModule, args: [{
                         imports: [
+                            router.RouterModule.forRoot([], {
+                                scrollPositionRestoration: 'enabled',
+                                anchorScrolling: 'enabled',
+                            }),
                             StorefrontFoundationModule,
+                            core$1.SiteContextModule.forRoot(),
                             core$1.SmartEditModule.forRoot(),
                             core$1.PersonalizationModule.forRoot(),
                             // opt-in explicitely

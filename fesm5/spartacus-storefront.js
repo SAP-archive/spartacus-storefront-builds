@@ -16221,7 +16221,6 @@ var StorefrontFoundationModule = /** @class */ (function () {
                         ConfigModule.forRoot(),
                         RoutingModule,
                         I18nModule.forRoot(),
-                        SiteContextModule.forRoot(),
                         LayoutModule,
                     ],
                     providers: __spread(provideConfigFromMetaTags()),
@@ -16254,7 +16253,12 @@ var StorefrontModule = /** @class */ (function () {
     StorefrontModule.decorators = [
         { type: NgModule, args: [{
                     imports: [
+                        RouterModule.forRoot([], {
+                            scrollPositionRestoration: 'enabled',
+                            anchorScrolling: 'enabled',
+                        }),
                         StorefrontFoundationModule,
+                        SiteContextModule.forRoot(),
                         SmartEditModule.forRoot(),
                         PersonalizationModule.forRoot(),
                         // opt-in explicitely
