@@ -1,6 +1,6 @@
 import { EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Address, AddressValidation, CardType, CheckoutPaymentService, CheckoutDeliveryService, Country, GlobalMessageService, UserPaymentService } from '@spartacus/core';
+import { Address, AddressValidation, CardType, CheckoutDeliveryService, CheckoutPaymentService, Country, GlobalMessageService, UserPaymentService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { Card } from '../../../../../shared/components/card/card.component';
 import { ModalRef, ModalService } from '../../../../../shared/components/modal/index';

@@ -5411,7 +5411,7 @@
          * @return {?}
          */
         function () {
-            return rxjs.combineLatest(this.countries$, this.shippingAddress$).pipe(operators.map((/**
+            return rxjs.combineLatest([this.countries$, this.shippingAddress$]).pipe(operators.map((/**
              * @param {?} __0
              * @return {?}
              */
@@ -5625,6 +5625,15 @@
             this.userPaymentService.loadPaymentMethods();
             this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
             this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
+            this.getDeliveryAddressSub = this.checkoutDeliveryService
+                .getDeliveryAddress()
+                .subscribe((/**
+             * @param {?} address
+             * @return {?}
+             */
+            function (address) {
+                _this.deliveryAddress = address;
+            }));
             this.existingPaymentMethods$ = this.userPaymentService.getPaymentMethods();
             this.getPaymentDetailsSub = this.checkoutPaymentService
                 .getPaymentDetails()
@@ -5756,15 +5765,6 @@
          */
         function (_a) {
             var paymentDetails = _a.paymentDetails, billingAddress = _a.billingAddress;
-            this.getDeliveryAddressSub = this.checkoutDeliveryService
-                .getDeliveryAddress()
-                .subscribe((/**
-             * @param {?} address
-             * @return {?}
-             */
-            function (address) {
-                billingAddress = address;
-            }));
             this.addPaymentInfo({
                 payment: paymentDetails,
                 billingAddress: billingAddress,

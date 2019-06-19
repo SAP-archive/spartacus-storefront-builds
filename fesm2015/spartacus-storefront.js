@@ -4389,7 +4389,7 @@ class PaymentFormComponent {
      * @return {?}
      */
     showSameAsShippingAddressCheckbox() {
-        return combineLatest(this.countries$, this.shippingAddress$).pipe(map((/**
+        return combineLatest([this.countries$, this.shippingAddress$]).pipe(map((/**
          * @param {?} __0
          * @return {?}
          */
@@ -4579,6 +4579,15 @@ class PaymentMethodComponent {
         this.userPaymentService.loadPaymentMethods();
         this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
         this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
+        this.getDeliveryAddressSub = this.checkoutDeliveryService
+            .getDeliveryAddress()
+            .subscribe((/**
+         * @param {?} address
+         * @return {?}
+         */
+        (address) => {
+            this.deliveryAddress = address;
+        }));
         this.existingPaymentMethods$ = this.userPaymentService.getPaymentMethods();
         this.getPaymentDetailsSub = this.checkoutPaymentService
             .getPaymentDetails()
@@ -4683,15 +4692,6 @@ class PaymentMethodComponent {
      * @return {?}
      */
     addNewPaymentMethod({ paymentDetails, billingAddress, }) {
-        this.getDeliveryAddressSub = this.checkoutDeliveryService
-            .getDeliveryAddress()
-            .subscribe((/**
-         * @param {?} address
-         * @return {?}
-         */
-        address => {
-            billingAddress = address;
-        }));
         this.addPaymentInfo({
             payment: paymentDetails,
             billingAddress,

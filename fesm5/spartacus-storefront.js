@@ -5310,7 +5310,7 @@ var PaymentFormComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        return combineLatest(this.countries$, this.shippingAddress$).pipe(map((/**
+        return combineLatest([this.countries$, this.shippingAddress$]).pipe(map((/**
          * @param {?} __0
          * @return {?}
          */
@@ -5524,6 +5524,15 @@ var PaymentMethodComponent = /** @class */ (function () {
         this.userPaymentService.loadPaymentMethods();
         this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
         this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
+        this.getDeliveryAddressSub = this.checkoutDeliveryService
+            .getDeliveryAddress()
+            .subscribe((/**
+         * @param {?} address
+         * @return {?}
+         */
+        function (address) {
+            _this.deliveryAddress = address;
+        }));
         this.existingPaymentMethods$ = this.userPaymentService.getPaymentMethods();
         this.getPaymentDetailsSub = this.checkoutPaymentService
             .getPaymentDetails()
@@ -5655,15 +5664,6 @@ var PaymentMethodComponent = /** @class */ (function () {
      */
     function (_a) {
         var paymentDetails = _a.paymentDetails, billingAddress = _a.billingAddress;
-        this.getDeliveryAddressSub = this.checkoutDeliveryService
-            .getDeliveryAddress()
-            .subscribe((/**
-         * @param {?} address
-         * @return {?}
-         */
-        function (address) {
-            billingAddress = address;
-        }));
         this.addPaymentInfo({
             payment: paymentDetails,
             billingAddress: billingAddress,
