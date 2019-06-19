@@ -6115,7 +6115,9 @@ class LoginFormComponent {
      * @return {?}
      */
     login() {
-        this.auth.authorize(this.form.controls.userId.value, this.form.controls.password.value);
+        /** @type {?} */
+        const userId = this.emailToLowerCase();
+        this.auth.authorize(userId, this.form.controls.password.value);
         if (!this.sub) {
             this.sub = this.auth.getUserToken().subscribe((/**
              * @param {?} data
@@ -6128,6 +6130,16 @@ class LoginFormComponent {
                 }
             }));
         }
+    }
+    /*
+       * Change the inputed email to lowercase because
+       * the backend only accepts lowercase emails
+       */
+    /**
+     * @return {?}
+     */
+    emailToLowerCase() {
+        return this.form.controls.userId.value.toLowerCase();
     }
     /**
      * @return {?}
@@ -7138,6 +7150,7 @@ class RegisterComponent {
      * @return {?}
      */
     submit() {
+        this.emailToLowerCase();
         const { firstName, lastName, email, password, titleCode, } = this.userRegistrationForm.value;
         /** @type {?} */
         const userRegisterFormData = {
@@ -7184,14 +7197,6 @@ class RegisterComponent {
         }));
     }
     /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
-    }
-    /**
      * @private
      * @param {?} ac
      * @return {?}
@@ -7199,6 +7204,24 @@ class RegisterComponent {
     matchPassword(ac) {
         if (ac.get('password').value !== ac.get('passwordconf').value) {
             return { NotEqual: true };
+        }
+    }
+    /*
+       * Change the inputed email to lowercase because
+       * the backend only accepts lowercase emails
+       */
+    /**
+     * @return {?}
+     */
+    emailToLowerCase() {
+        this.userRegistrationForm.value.email = this.userRegistrationForm.value.email.toLowerCase();
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
         }
     }
 }

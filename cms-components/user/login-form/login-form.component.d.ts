@@ -12,5 +12,6 @@ export declare class LoginFormComponent implements OnInit, OnDestroy {
     constructor(auth: AuthService, globalMessageService: GlobalMessageService, fb: FormBuilder, authRedirectService: AuthRedirectService);
     ngOnInit(): void;
     login(): void;
+    emailToLowerCase(): any;
     ngOnDestroy(): void;
 }

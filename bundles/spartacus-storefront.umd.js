@@ -7372,7 +7372,9 @@
          */
         function () {
             var _this = this;
-            this.auth.authorize(this.form.controls.userId.value, this.form.controls.password.value);
+            /** @type {?} */
+            var userId = this.emailToLowerCase();
+            this.auth.authorize(userId, this.form.controls.password.value);
             if (!this.sub) {
                 this.sub = this.auth.getUserToken().subscribe((/**
                  * @param {?} data
@@ -7385,6 +7387,27 @@
                     }
                 }));
             }
+        };
+        /*
+         * Change the inputed email to lowercase because
+         * the backend only accepts lowercase emails
+         */
+        /*
+           * Change the inputed email to lowercase because
+           * the backend only accepts lowercase emails
+           */
+        /**
+         * @return {?}
+         */
+        LoginFormComponent.prototype.emailToLowerCase = /*
+           * Change the inputed email to lowercase because
+           * the backend only accepts lowercase emails
+           */
+        /**
+         * @return {?}
+         */
+        function () {
+            return this.form.controls.userId.value.toLowerCase();
         };
         /**
          * @return {?}
@@ -8622,6 +8645,7 @@
          */
         function () {
             var _this = this;
+            this.emailToLowerCase();
             var _a = this.userRegistrationForm.value, firstName = _a.firstName, lastName = _a.lastName, email = _a.email, password = _a.password, titleCode = _a.titleCode;
             /** @type {?} */
             var userRegisterFormData = {
@@ -8668,17 +8692,6 @@
             }));
         };
         /**
-         * @return {?}
-         */
-        RegisterComponent.prototype.ngOnDestroy = /**
-         * @return {?}
-         */
-        function () {
-            if (this.subscription) {
-                this.subscription.unsubscribe();
-            }
-        };
-        /**
          * @private
          * @param {?} ac
          * @return {?}
@@ -8691,6 +8704,38 @@
         function (ac) {
             if (ac.get('password').value !== ac.get('passwordconf').value) {
                 return { NotEqual: true };
+            }
+        };
+        /*
+         * Change the inputed email to lowercase because
+         * the backend only accepts lowercase emails
+         */
+        /*
+           * Change the inputed email to lowercase because
+           * the backend only accepts lowercase emails
+           */
+        /**
+         * @return {?}
+         */
+        RegisterComponent.prototype.emailToLowerCase = /*
+           * Change the inputed email to lowercase because
+           * the backend only accepts lowercase emails
+           */
+        /**
+         * @return {?}
+         */
+        function () {
+            this.userRegistrationForm.value.email = this.userRegistrationForm.value.email.toLowerCase();
+        };
+        /**
+         * @return {?}
+         */
+        RegisterComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
+            if (this.subscription) {
+                this.subscription.unsubscribe();
             }
         };
         RegisterComponent.decorators = [

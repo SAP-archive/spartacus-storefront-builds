@@ -14,6 +14,7 @@ export declare class RegisterComponent implements OnInit, OnDestroy {
     constructor(auth: AuthService, authRedirectService: AuthRedirectService, userService: UserService, globalMessageService: GlobalMessageService, fb: FormBuilder);
     ngOnInit(): void;
     submit(): void;
-    ngOnDestroy(): void;
     private matchPassword;
+    emailToLowerCase(): void;
+    ngOnDestroy(): void;
 }
