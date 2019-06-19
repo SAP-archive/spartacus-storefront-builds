@@ -1,4 +1,4 @@
-import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, EventEmitter, Output, Renderer2, HostListener, forwardRef, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, INJECTOR, APP_INITIALIZER, Pipe } from '@angular/core';
+import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, EventEmitter, Output, forwardRef, Renderer2, HostListener, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, INJECTOR, APP_INITIALIZER, Pipe } from '@angular/core';
 import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, ServerConfig, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, GlobalMessageModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserPaymentService, TranslationService, UserService, CheckoutModule, UserAddressService, AuthService, AuthRedirectService, UserModule, NotAuthGuard, CmsConfig, CxApiService, CmsService, DynamicAttributeService, PageType, SemanticPathService, TranslationChunkService, PageRobotsMeta, PageMetaService, LanguageService, UserConsentService, UserOrderService, CmsPageTitleModule, SearchboxService, ProductModule, ProductReferenceService, ProductSearchService, CmsModule, ProductReviewService, RoutingModule as RoutingModule$1, StateModule, AuthModule, provideConfigFromMetaTags, provideConfig, SmartEditModule, PersonalizationModule, OccModule } from '@spartacus/core';
 import { map, filter, switchMap, tap, startWith, debounceTime, distinctUntilChanged, take, skipWhile, shareReplay, first, endWith, withLatestFrom } from 'rxjs/operators';
 import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -1358,160 +1358,6 @@ CarouselModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class OnlyNumberDirective {
-    /**
-     * Class constructor
-     * @param {?} hostElement
-     * @param {?} renderer
-     */
-    constructor(hostElement, renderer) {
-        this.hostElement = hostElement;
-        this.renderer = renderer;
-        this.previousValue = '';
-        this.integerUnsigned = '^[0-9]*$';
-    }
-    /**
-     * Event handler for host's change event
-     * @return {?}
-     */
-    onChange() {
-        this.validateValue(this.hostElement.nativeElement.value);
-    }
-    /**
-     * Event handler for host's change event
-     * @return {?}
-     */
-    onInput() {
-        this.validateValue(this.hostElement.nativeElement.value);
-    }
-    /**
-     * Event handler for host's paste event
-     * @param {?} e
-     * @return {?}
-     */
-    onPaste(e) {
-        /** @type {?} */
-        const value = e.clipboardData.getData('text/plain');
-        this.validateValue(value);
-        e.preventDefault();
-    }
-    /**
-     * Event handler for host's keyup event
-     * @param {?} e
-     * @return {?}
-     */
-    onKeyUp(e) {
-        /** @type {?} */
-        const value = e.target['value'];
-        this.validateValue(value);
-    }
-    /**
-     * Event handler for host's keydown event
-     * @param {?} e
-     * @return {?}
-     */
-    onKeyDown(e) {
-        /** @type {?} */
-        const originalValue = e.target['value'];
-        /** @type {?} */
-        const key = this.getName(e);
-        /** @type {?} */
-        const controlOrCommand = e.ctrlKey === true || e.metaKey === true;
-        // allowed keys apart from numeric characters
-        /** @type {?} */
-        const allowedKeys = [
-            'Backspace',
-            'ArrowLeft',
-            'ArrowRight',
-            'Escape',
-            'Tab',
-        ];
-        // allow some non-numeric characters
-        if (allowedKeys.includes(key) ||
-            // Allow: Ctrl+A and Command+A
-            (key === 'a' && controlOrCommand) ||
-            // Allow: Ctrl+C and Command+C
-            (key === 'c' && controlOrCommand) ||
-            // Allow: Ctrl+V and Command+V
-            (key === 'v' && controlOrCommand) ||
-            // Allow: Ctrl+X and Command+X
-            (key === 'x' && controlOrCommand)) {
-            // let it happen, don't do anything
-            return;
-        }
-        // save value before keydown event
-        this.previousValue = originalValue;
-        // allow number characters only
-        /** @type {?} */
-        const isNumber = new RegExp(this.integerUnsigned).test(key);
-        if (isNumber) {
-            return;
-        }
-        else {
-            e.preventDefault();
-        }
-    }
-    /**
-     * Test whether value is a valid number or not
-     * @param {?} value
-     * @return {?}
-     */
-    validateValue(value) {
-        value = value.replace(/[^0-9]+/g, '');
-        this.renderer.setProperty(this.hostElement.nativeElement, 'value', value);
-    }
-    /**
-     * Get key's name
-     * @param {?} e
-     * @return {?}
-     */
-    getName(e) {
-        if (e.key) {
-            return e.key;
-        }
-        else {
-            // for old browsers
-            if (e.keyCode && String.fromCharCode) {
-                switch (e.keyCode) {
-                    case 8:
-                        return 'Backspace';
-                    case 9:
-                        return 'Tab';
-                    case 27:
-                        return 'Escape';
-                    case 37:
-                        return 'ArrowLeft';
-                    case 39:
-                        return 'ArrowRight';
-                    default:
-                        return String.fromCharCode(e.keyCode);
-                }
-            }
-        }
-    }
-}
-OnlyNumberDirective.decorators = [
-    { type: Directive, args: [{
-                selector: '[cxOnlyNumber]',
-            },] }
-];
-/** @nocollapse */
-OnlyNumberDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: Renderer2 }
-];
-OnlyNumberDirective.propDecorators = {
-    onChange: [{ type: HostListener, args: ['change',] }],
-    onInput: [{ type: HostListener, args: ['input',] }],
-    onPaste: [{ type: HostListener, args: ['paste', ['$event'],] }],
-    onKeyUp: [{ type: HostListener, args: ['keyup', ['$event'],] }],
-    onKeyDown: [{ type: HostListener, args: ['keydown', ['$event'],] }]
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 /** @type {?} */
 const COUNTER_CONTROL_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -1753,12 +1599,184 @@ ItemCounterComponent.propDecorators = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class FormComponentsModule {
+class OnlyNumberDirective {
+    /**
+     * Class constructor
+     * @param {?} hostElement
+     * @param {?} renderer
+     */
+    constructor(hostElement, renderer) {
+        this.hostElement = hostElement;
+        this.renderer = renderer;
+        this.previousValue = '';
+        this.integerUnsigned = '^[0-9]*$';
+    }
+    /**
+     * Event handler for host's change event
+     * @return {?}
+     */
+    onChange() {
+        this.validateValue(this.hostElement.nativeElement.value);
+    }
+    /**
+     * Event handler for host's change event
+     * @return {?}
+     */
+    onInput() {
+        this.validateValue(this.hostElement.nativeElement.value);
+    }
+    /**
+     * Event handler for host's paste event
+     * @param {?} e
+     * @return {?}
+     */
+    onPaste(e) {
+        /** @type {?} */
+        const value = e.clipboardData.getData('text/plain');
+        this.validateValue(value);
+        e.preventDefault();
+    }
+    /**
+     * Event handler for host's keyup event
+     * @param {?} e
+     * @return {?}
+     */
+    onKeyUp(e) {
+        /** @type {?} */
+        const value = e.target['value'];
+        this.validateValue(value);
+    }
+    /**
+     * Event handler for host's keydown event
+     * @param {?} e
+     * @return {?}
+     */
+    onKeyDown(e) {
+        /** @type {?} */
+        const originalValue = e.target['value'];
+        /** @type {?} */
+        const key = this.getName(e);
+        /** @type {?} */
+        const controlOrCommand = e.ctrlKey === true || e.metaKey === true;
+        // allowed keys apart from numeric characters
+        /** @type {?} */
+        const allowedKeys = [
+            'Backspace',
+            'ArrowLeft',
+            'ArrowRight',
+            'Escape',
+            'Tab',
+        ];
+        // allow some non-numeric characters
+        if (allowedKeys.includes(key) ||
+            // Allow: Ctrl+A and Command+A
+            (key === 'a' && controlOrCommand) ||
+            // Allow: Ctrl+C and Command+C
+            (key === 'c' && controlOrCommand) ||
+            // Allow: Ctrl+V and Command+V
+            (key === 'v' && controlOrCommand) ||
+            // Allow: Ctrl+X and Command+X
+            (key === 'x' && controlOrCommand)) {
+            // let it happen, don't do anything
+            return;
+        }
+        // save value before keydown event
+        this.previousValue = originalValue;
+        // allow number characters only
+        /** @type {?} */
+        const isNumber = new RegExp(this.integerUnsigned).test(key);
+        if (isNumber) {
+            return;
+        }
+        else {
+            e.preventDefault();
+        }
+    }
+    /**
+     * Test whether value is a valid number or not
+     * @param {?} value
+     * @return {?}
+     */
+    validateValue(value) {
+        value = value.replace(/[^0-9]+/g, '');
+        this.renderer.setProperty(this.hostElement.nativeElement, 'value', value);
+    }
+    /**
+     * Get key's name
+     * @param {?} e
+     * @return {?}
+     */
+    getName(e) {
+        if (e.key) {
+            return e.key;
+        }
+        else {
+            // for old browsers
+            if (e.keyCode && String.fromCharCode) {
+                switch (e.keyCode) {
+                    case 8:
+                        return 'Backspace';
+                    case 9:
+                        return 'Tab';
+                    case 27:
+                        return 'Escape';
+                    case 37:
+                        return 'ArrowLeft';
+                    case 39:
+                        return 'ArrowRight';
+                    default:
+                        return String.fromCharCode(e.keyCode);
+                }
+            }
+        }
+    }
 }
-FormComponentsModule.decorators = [
+OnlyNumberDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[cxOnlyNumber]',
+            },] }
+];
+/** @nocollapse */
+OnlyNumberDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 }
+];
+OnlyNumberDirective.propDecorators = {
+    onChange: [{ type: HostListener, args: ['change',] }],
+    onInput: [{ type: HostListener, args: ['input',] }],
+    onPaste: [{ type: HostListener, args: ['paste', ['$event'],] }],
+    onKeyUp: [{ type: HostListener, args: ['keyup', ['$event'],] }],
+    onKeyDown: [{ type: HostListener, args: ['keydown', ['$event'],] }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class OnlyNumberDirectiveModule {
+}
+OnlyNumberDirectiveModule.decorators = [
     { type: NgModule, args: [{
-                imports: [CommonModule, FormsModule, ReactiveFormsModule],
-                declarations: [ItemCounterComponent, OnlyNumberDirective],
+                declarations: [OnlyNumberDirective],
+                exports: [OnlyNumberDirective],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ItemCounterModule {
+}
+ItemCounterModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    FormsModule,
+                    ReactiveFormsModule,
+                    OnlyNumberDirectiveModule,
+                ],
+                declarations: [ItemCounterComponent],
                 exports: [ItemCounterComponent],
             },] }
 ];
@@ -2822,7 +2840,7 @@ CartSharedModule.decorators = [
                     PromotionsModule,
                     I18nModule,
                     MediaModule,
-                    FormComponentsModule,
+                    ItemCounterModule,
                 ],
                 declarations: [
                     CartItemComponent,
@@ -2856,7 +2874,7 @@ AddToCartModule.decorators = [
                     UrlModule,
                     IconModule,
                     I18nModule,
-                    FormComponentsModule,
+                    ItemCounterModule,
                     AutoFocusDirectiveModule,
                 ],
                 declarations: [AddToCartComponent, AddedToCartDialogComponent],
@@ -12795,7 +12813,7 @@ ProductListModule.decorators = [
                     RouterModule,
                     MediaModule,
                     AddToCartModule,
-                    FormComponentsModule,
+                    ItemCounterModule,
                     ListNavigationModule,
                     UrlModule,
                     I18nModule,
@@ -13025,13 +13043,44 @@ ProductReviewsModule.decorators = [
                     CommonModule,
                     ReactiveFormsModule,
                     FormsModule,
-                    FormComponentsModule,
                     I18nModule,
                     StarRatingModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            ProductReviewsTabComponent: {
+                                component: ProductReviewsComponent,
+                            },
+                        },
+                    }))),
                 ],
                 declarations: [ProductReviewsComponent],
                 entryComponents: [ProductReviewsComponent],
                 exports: [ProductReviewsComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ProductAttributesModule {
+}
+ProductAttributesModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    I18nModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            ProductSpecsTabComponent: {
+                                component: ProductAttributesComponent,
+                            },
+                        },
+                    }))),
+                ],
+                declarations: [ProductAttributesComponent],
+                entryComponents: [ProductAttributesComponent],
+                exports: [ProductAttributesComponent],
             },] }
 ];
 
@@ -13073,7 +13122,16 @@ class ProductDetailsTabModule {
 }
 ProductDetailsTabModule.decorators = [
     { type: NgModule, args: [{
-                imports: [CommonModule],
+                imports: [
+                    CommonModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            ProductDetailsTabComponent: {
+                                component: ProductDetailsTabComponent,
+                            },
+                        },
+                    }))),
+                ],
                 declarations: [ProductDetailsTabComponent],
                 entryComponents: [ProductDetailsTabComponent],
                 exports: [ProductDetailsTabComponent],
@@ -13089,35 +13147,10 @@ class ProductTabsModule {
 ProductTabsModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
-                    CommonModule,
-                    RouterModule,
-                    FormsModule,
-                    ReactiveFormsModule,
-                    CartSharedModule,
-                    CmsModule,
-                    OutletModule,
-                    ProductReviewsModule,
+                    ProductAttributesModule,
                     ProductDetailsTabModule,
-                    PageComponentModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            ProductDetailsTabComponent: {
-                                component: ProductDetailsTabComponent,
-                            },
-                            ProductSpecsTabComponent: {
-                                component: ProductAttributesComponent,
-                            },
-                            ProductReviewsTabComponent: {
-                                component: ProductReviewsComponent,
-                            },
-                        },
-                    }))),
-                    I18nModule,
+                    ProductReviewsModule,
                 ],
-                declarations: [ProductAttributesComponent],
-                exports: [ProductAttributesComponent, ProductReviewsComponent],
-                entryComponents: [ProductAttributesComponent],
-                providers: [ProductService, WindowRef, RoutingService],
             },] }
 ];
 
@@ -13786,5 +13819,5 @@ B2cStorefrontModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormComponentsModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, AutoFocusDirectiveModule as ɵa, defaultCheckoutConfig as ɵb, CheckoutConfigService as ɵc, HighlightPipe as ɵd, ProductDetailsTabModule as ɵe, ProductDetailsTabComponent as ɵf, ComponentMapperService as ɵg, CmsRoutesService as ɵh, CmsMappingService as ɵi, CmsI18nService as ɵj, CmsGuardsService as ɵk, AddToHomeScreenService as ɵl, ProductImagesModule as ɵm, ProductImagesComponent as ɵn, suffixUrlMatcher as ɵo, addCmsRoute as ɵp, htmlLangProvider as ɵq, setHtmlLangAttribute as ɵr, RoutingModule as ɵs, defaultStorefrontRoutesConfig as ɵt, defaultRoutingConfig as ɵu };
+export { AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, OnlyNumberDirectiveModule as ɵa, AutoFocusDirectiveModule as ɵb, defaultCheckoutConfig as ɵc, CheckoutConfigService as ɵd, HighlightPipe as ɵe, ProductAttributesModule as ɵf, ProductDetailsTabModule as ɵg, ProductDetailsTabComponent as ɵh, CmsRoutesService as ɵi, CmsMappingService as ɵj, CmsI18nService as ɵk, CmsGuardsService as ɵl, ComponentMapperService as ɵm, AddToHomeScreenService as ɵn, ProductImagesModule as ɵo, ProductImagesComponent as ɵp, suffixUrlMatcher as ɵq, addCmsRoute as ɵr, htmlLangProvider as ɵs, setHtmlLangAttribute as ɵt, RoutingModule as ɵu, defaultStorefrontRoutesConfig as ɵv, defaultRoutingConfig as ɵw };
 //# sourceMappingURL=spartacus-storefront.js.map

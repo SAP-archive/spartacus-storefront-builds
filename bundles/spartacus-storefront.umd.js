@@ -1774,219 +1774,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var OnlyNumberDirective = /** @class */ (function () {
-        /**
-         * Class constructor
-         * @param hostElement
-         */
-        function OnlyNumberDirective(hostElement, renderer) {
-            this.hostElement = hostElement;
-            this.renderer = renderer;
-            this.previousValue = '';
-            this.integerUnsigned = '^[0-9]*$';
-        }
-        /**
-         * Event handler for host's change event
-         */
-        /**
-         * Event handler for host's change event
-         * @return {?}
-         */
-        OnlyNumberDirective.prototype.onChange = /**
-         * Event handler for host's change event
-         * @return {?}
-         */
-        function () {
-            this.validateValue(this.hostElement.nativeElement.value);
-        };
-        /**
-         * Event handler for host's change event
-         */
-        /**
-         * Event handler for host's change event
-         * @return {?}
-         */
-        OnlyNumberDirective.prototype.onInput = /**
-         * Event handler for host's change event
-         * @return {?}
-         */
-        function () {
-            this.validateValue(this.hostElement.nativeElement.value);
-        };
-        /**
-         * Event handler for host's paste event
-         * @param e
-         */
-        /**
-         * Event handler for host's paste event
-         * @param {?} e
-         * @return {?}
-         */
-        OnlyNumberDirective.prototype.onPaste = /**
-         * Event handler for host's paste event
-         * @param {?} e
-         * @return {?}
-         */
-        function (e) {
-            /** @type {?} */
-            var value = e.clipboardData.getData('text/plain');
-            this.validateValue(value);
-            e.preventDefault();
-        };
-        /**
-         * Event handler for host's keyup event
-         * @param e
-         */
-        /**
-         * Event handler for host's keyup event
-         * @param {?} e
-         * @return {?}
-         */
-        OnlyNumberDirective.prototype.onKeyUp = /**
-         * Event handler for host's keyup event
-         * @param {?} e
-         * @return {?}
-         */
-        function (e) {
-            /** @type {?} */
-            var value = e.target['value'];
-            this.validateValue(value);
-        };
-        /**
-         * Event handler for host's keydown event
-         * @param e
-         */
-        /**
-         * Event handler for host's keydown event
-         * @param {?} e
-         * @return {?}
-         */
-        OnlyNumberDirective.prototype.onKeyDown = /**
-         * Event handler for host's keydown event
-         * @param {?} e
-         * @return {?}
-         */
-        function (e) {
-            /** @type {?} */
-            var originalValue = e.target['value'];
-            /** @type {?} */
-            var key = this.getName(e);
-            /** @type {?} */
-            var controlOrCommand = e.ctrlKey === true || e.metaKey === true;
-            // allowed keys apart from numeric characters
-            /** @type {?} */
-            var allowedKeys = [
-                'Backspace',
-                'ArrowLeft',
-                'ArrowRight',
-                'Escape',
-                'Tab',
-            ];
-            // allow some non-numeric characters
-            if (allowedKeys.includes(key) ||
-                // Allow: Ctrl+A and Command+A
-                (key === 'a' && controlOrCommand) ||
-                // Allow: Ctrl+C and Command+C
-                (key === 'c' && controlOrCommand) ||
-                // Allow: Ctrl+V and Command+V
-                (key === 'v' && controlOrCommand) ||
-                // Allow: Ctrl+X and Command+X
-                (key === 'x' && controlOrCommand)) {
-                // let it happen, don't do anything
-                return;
-            }
-            // save value before keydown event
-            this.previousValue = originalValue;
-            // allow number characters only
-            /** @type {?} */
-            var isNumber = new RegExp(this.integerUnsigned).test(key);
-            if (isNumber) {
-                return;
-            }
-            else {
-                e.preventDefault();
-            }
-        };
-        /**
-         * Test whether value is a valid number or not
-         * @param value
-         */
-        /**
-         * Test whether value is a valid number or not
-         * @param {?} value
-         * @return {?}
-         */
-        OnlyNumberDirective.prototype.validateValue = /**
-         * Test whether value is a valid number or not
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            value = value.replace(/[^0-9]+/g, '');
-            this.renderer.setProperty(this.hostElement.nativeElement, 'value', value);
-        };
-        /**
-         * Get key's name
-         * @param e
-         */
-        /**
-         * Get key's name
-         * @param {?} e
-         * @return {?}
-         */
-        OnlyNumberDirective.prototype.getName = /**
-         * Get key's name
-         * @param {?} e
-         * @return {?}
-         */
-        function (e) {
-            if (e.key) {
-                return e.key;
-            }
-            else {
-                // for old browsers
-                if (e.keyCode && String.fromCharCode) {
-                    switch (e.keyCode) {
-                        case 8:
-                            return 'Backspace';
-                        case 9:
-                            return 'Tab';
-                        case 27:
-                            return 'Escape';
-                        case 37:
-                            return 'ArrowLeft';
-                        case 39:
-                            return 'ArrowRight';
-                        default:
-                            return String.fromCharCode(e.keyCode);
-                    }
-                }
-            }
-        };
-        OnlyNumberDirective.decorators = [
-            { type: core.Directive, args: [{
-                        selector: '[cxOnlyNumber]',
-                    },] }
-        ];
-        /** @nocollapse */
-        OnlyNumberDirective.ctorParameters = function () { return [
-            { type: core.ElementRef },
-            { type: core.Renderer2 }
-        ]; };
-        OnlyNumberDirective.propDecorators = {
-            onChange: [{ type: core.HostListener, args: ['change',] }],
-            onInput: [{ type: core.HostListener, args: ['input',] }],
-            onPaste: [{ type: core.HostListener, args: ['paste', ['$event'],] }],
-            onKeyUp: [{ type: core.HostListener, args: ['keyup', ['$event'],] }],
-            onKeyDown: [{ type: core.HostListener, args: ['keydown', ['$event'],] }]
-        };
-        return OnlyNumberDirective;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     /** @type {?} */
     var COUNTER_CONTROL_ACCESSOR = {
         provide: forms.NG_VALUE_ACCESSOR,
@@ -2310,17 +2097,251 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var FormComponentsModule = /** @class */ (function () {
-        function FormComponentsModule() {
+    var OnlyNumberDirective = /** @class */ (function () {
+        /**
+         * Class constructor
+         * @param hostElement
+         */
+        function OnlyNumberDirective(hostElement, renderer) {
+            this.hostElement = hostElement;
+            this.renderer = renderer;
+            this.previousValue = '';
+            this.integerUnsigned = '^[0-9]*$';
         }
-        FormComponentsModule.decorators = [
+        /**
+         * Event handler for host's change event
+         */
+        /**
+         * Event handler for host's change event
+         * @return {?}
+         */
+        OnlyNumberDirective.prototype.onChange = /**
+         * Event handler for host's change event
+         * @return {?}
+         */
+        function () {
+            this.validateValue(this.hostElement.nativeElement.value);
+        };
+        /**
+         * Event handler for host's change event
+         */
+        /**
+         * Event handler for host's change event
+         * @return {?}
+         */
+        OnlyNumberDirective.prototype.onInput = /**
+         * Event handler for host's change event
+         * @return {?}
+         */
+        function () {
+            this.validateValue(this.hostElement.nativeElement.value);
+        };
+        /**
+         * Event handler for host's paste event
+         * @param e
+         */
+        /**
+         * Event handler for host's paste event
+         * @param {?} e
+         * @return {?}
+         */
+        OnlyNumberDirective.prototype.onPaste = /**
+         * Event handler for host's paste event
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) {
+            /** @type {?} */
+            var value = e.clipboardData.getData('text/plain');
+            this.validateValue(value);
+            e.preventDefault();
+        };
+        /**
+         * Event handler for host's keyup event
+         * @param e
+         */
+        /**
+         * Event handler for host's keyup event
+         * @param {?} e
+         * @return {?}
+         */
+        OnlyNumberDirective.prototype.onKeyUp = /**
+         * Event handler for host's keyup event
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) {
+            /** @type {?} */
+            var value = e.target['value'];
+            this.validateValue(value);
+        };
+        /**
+         * Event handler for host's keydown event
+         * @param e
+         */
+        /**
+         * Event handler for host's keydown event
+         * @param {?} e
+         * @return {?}
+         */
+        OnlyNumberDirective.prototype.onKeyDown = /**
+         * Event handler for host's keydown event
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) {
+            /** @type {?} */
+            var originalValue = e.target['value'];
+            /** @type {?} */
+            var key = this.getName(e);
+            /** @type {?} */
+            var controlOrCommand = e.ctrlKey === true || e.metaKey === true;
+            // allowed keys apart from numeric characters
+            /** @type {?} */
+            var allowedKeys = [
+                'Backspace',
+                'ArrowLeft',
+                'ArrowRight',
+                'Escape',
+                'Tab',
+            ];
+            // allow some non-numeric characters
+            if (allowedKeys.includes(key) ||
+                // Allow: Ctrl+A and Command+A
+                (key === 'a' && controlOrCommand) ||
+                // Allow: Ctrl+C and Command+C
+                (key === 'c' && controlOrCommand) ||
+                // Allow: Ctrl+V and Command+V
+                (key === 'v' && controlOrCommand) ||
+                // Allow: Ctrl+X and Command+X
+                (key === 'x' && controlOrCommand)) {
+                // let it happen, don't do anything
+                return;
+            }
+            // save value before keydown event
+            this.previousValue = originalValue;
+            // allow number characters only
+            /** @type {?} */
+            var isNumber = new RegExp(this.integerUnsigned).test(key);
+            if (isNumber) {
+                return;
+            }
+            else {
+                e.preventDefault();
+            }
+        };
+        /**
+         * Test whether value is a valid number or not
+         * @param value
+         */
+        /**
+         * Test whether value is a valid number or not
+         * @param {?} value
+         * @return {?}
+         */
+        OnlyNumberDirective.prototype.validateValue = /**
+         * Test whether value is a valid number or not
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            value = value.replace(/[^0-9]+/g, '');
+            this.renderer.setProperty(this.hostElement.nativeElement, 'value', value);
+        };
+        /**
+         * Get key's name
+         * @param e
+         */
+        /**
+         * Get key's name
+         * @param {?} e
+         * @return {?}
+         */
+        OnlyNumberDirective.prototype.getName = /**
+         * Get key's name
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) {
+            if (e.key) {
+                return e.key;
+            }
+            else {
+                // for old browsers
+                if (e.keyCode && String.fromCharCode) {
+                    switch (e.keyCode) {
+                        case 8:
+                            return 'Backspace';
+                        case 9:
+                            return 'Tab';
+                        case 27:
+                            return 'Escape';
+                        case 37:
+                            return 'ArrowLeft';
+                        case 39:
+                            return 'ArrowRight';
+                        default:
+                            return String.fromCharCode(e.keyCode);
+                    }
+                }
+            }
+        };
+        OnlyNumberDirective.decorators = [
+            { type: core.Directive, args: [{
+                        selector: '[cxOnlyNumber]',
+                    },] }
+        ];
+        /** @nocollapse */
+        OnlyNumberDirective.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: core.Renderer2 }
+        ]; };
+        OnlyNumberDirective.propDecorators = {
+            onChange: [{ type: core.HostListener, args: ['change',] }],
+            onInput: [{ type: core.HostListener, args: ['input',] }],
+            onPaste: [{ type: core.HostListener, args: ['paste', ['$event'],] }],
+            onKeyUp: [{ type: core.HostListener, args: ['keyup', ['$event'],] }],
+            onKeyDown: [{ type: core.HostListener, args: ['keydown', ['$event'],] }]
+        };
+        return OnlyNumberDirective;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var OnlyNumberDirectiveModule = /** @class */ (function () {
+        function OnlyNumberDirectiveModule() {
+        }
+        OnlyNumberDirectiveModule.decorators = [
             { type: core.NgModule, args: [{
-                        imports: [common.CommonModule, forms.FormsModule, forms.ReactiveFormsModule],
-                        declarations: [ItemCounterComponent, OnlyNumberDirective],
+                        declarations: [OnlyNumberDirective],
+                        exports: [OnlyNumberDirective],
+                    },] }
+        ];
+        return OnlyNumberDirectiveModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ItemCounterModule = /** @class */ (function () {
+        function ItemCounterModule() {
+        }
+        ItemCounterModule.decorators = [
+            { type: core.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            forms.FormsModule,
+                            forms.ReactiveFormsModule,
+                            OnlyNumberDirectiveModule,
+                        ],
+                        declarations: [ItemCounterComponent],
                         exports: [ItemCounterComponent],
                     },] }
         ];
-        return FormComponentsModule;
+        return ItemCounterModule;
     }());
 
     /**
@@ -3678,7 +3699,7 @@
                             PromotionsModule,
                             core$1.I18nModule,
                             MediaModule,
-                            FormComponentsModule,
+                            ItemCounterModule,
                         ],
                         declarations: [
                             CartItemComponent,
@@ -3715,7 +3736,7 @@
                             core$1.UrlModule,
                             IconModule,
                             core$1.I18nModule,
-                            FormComponentsModule,
+                            ItemCounterModule,
                             AutoFocusDirectiveModule,
                         ],
                         declarations: [AddToCartComponent, AddedToCartDialogComponent],
@@ -15364,7 +15385,7 @@
                             router.RouterModule,
                             MediaModule,
                             AddToCartModule,
-                            FormComponentsModule,
+                            ItemCounterModule,
                             ListNavigationModule,
                             core$1.UrlModule,
                             core$1.I18nModule,
@@ -15614,9 +15635,15 @@
                             common.CommonModule,
                             forms.ReactiveFormsModule,
                             forms.FormsModule,
-                            FormComponentsModule,
                             core$1.I18nModule,
                             StarRatingModule,
+                            core$1.ConfigModule.withConfig((/** @type {?} */ ({
+                                cmsComponents: {
+                                    ProductReviewsTabComponent: {
+                                        component: ProductReviewsComponent,
+                                    },
+                                },
+                            }))),
                         ],
                         declarations: [ProductReviewsComponent],
                         entryComponents: [ProductReviewsComponent],
@@ -15624,6 +15651,34 @@
                     },] }
         ];
         return ProductReviewsModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductAttributesModule = /** @class */ (function () {
+        function ProductAttributesModule() {
+        }
+        ProductAttributesModule.decorators = [
+            { type: core.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            core$1.I18nModule,
+                            core$1.ConfigModule.withConfig((/** @type {?} */ ({
+                                cmsComponents: {
+                                    ProductSpecsTabComponent: {
+                                        component: ProductAttributesComponent,
+                                    },
+                                },
+                            }))),
+                        ],
+                        declarations: [ProductAttributesComponent],
+                        entryComponents: [ProductAttributesComponent],
+                        exports: [ProductAttributesComponent],
+                    },] }
+        ];
+        return ProductAttributesModule;
     }());
 
     /**
@@ -15666,7 +15721,16 @@
         }
         ProductDetailsTabModule.decorators = [
             { type: core.NgModule, args: [{
-                        imports: [common.CommonModule],
+                        imports: [
+                            common.CommonModule,
+                            core$1.ConfigModule.withConfig((/** @type {?} */ ({
+                                cmsComponents: {
+                                    ProductDetailsTabComponent: {
+                                        component: ProductDetailsTabComponent,
+                                    },
+                                },
+                            }))),
+                        ],
                         declarations: [ProductDetailsTabComponent],
                         entryComponents: [ProductDetailsTabComponent],
                         exports: [ProductDetailsTabComponent],
@@ -15685,35 +15749,10 @@
         ProductTabsModule.decorators = [
             { type: core.NgModule, args: [{
                         imports: [
-                            common.CommonModule,
-                            router.RouterModule,
-                            forms.FormsModule,
-                            forms.ReactiveFormsModule,
-                            CartSharedModule,
-                            core$1.CmsModule,
-                            OutletModule,
-                            ProductReviewsModule,
+                            ProductAttributesModule,
                             ProductDetailsTabModule,
-                            PageComponentModule,
-                            core$1.ConfigModule.withConfig((/** @type {?} */ ({
-                                cmsComponents: {
-                                    ProductDetailsTabComponent: {
-                                        component: ProductDetailsTabComponent,
-                                    },
-                                    ProductSpecsTabComponent: {
-                                        component: ProductAttributesComponent,
-                                    },
-                                    ProductReviewsTabComponent: {
-                                        component: ProductReviewsComponent,
-                                    },
-                                },
-                            }))),
-                            core$1.I18nModule,
+                            ProductReviewsModule,
                         ],
-                        declarations: [ProductAttributesComponent],
-                        exports: [ProductAttributesComponent, ProductReviewsComponent],
-                        entryComponents: [ProductAttributesComponent],
-                        providers: [core$1.ProductService, core$1.WindowRef, core$1.RoutingService],
                     },] }
         ];
         return ProductTabsModule;
@@ -16497,7 +16536,6 @@
     exports.FooterNavigationModule = FooterNavigationModule;
     exports.ForgotPasswordComponent = ForgotPasswordComponent;
     exports.ForgotPasswordModule = ForgotPasswordModule;
-    exports.FormComponentsModule = FormComponentsModule;
     exports.FormUtils = FormUtils;
     exports.GenericLinkComponent = GenericLinkComponent;
     exports.GenericLinkModule = GenericLinkModule;
@@ -16513,6 +16551,7 @@
     exports.IconModule = IconModule;
     exports.IconResourceType = IconResourceType;
     exports.ItemCounterComponent = ItemCounterComponent;
+    exports.ItemCounterModule = ItemCounterModule;
     exports.LanguageCurrencyComponent = LanguageCurrencyComponent;
     exports.LayoutConfig = LayoutConfig;
     exports.LayoutModule = LayoutModule;
@@ -16653,27 +16692,29 @@
     exports.initSeoService = initSeoService;
     exports.pwaConfigurationFactory = pwaConfigurationFactory;
     exports.pwaFactory = pwaFactory;
-    exports.ɵa = AutoFocusDirectiveModule;
-    exports.ɵb = defaultCheckoutConfig;
-    exports.ɵc = CheckoutConfigService;
-    exports.ɵd = HighlightPipe;
-    exports.ɵe = ProductDetailsTabModule;
-    exports.ɵf = ProductDetailsTabComponent;
-    exports.ɵg = ComponentMapperService;
-    exports.ɵh = CmsRoutesService;
-    exports.ɵi = CmsMappingService;
-    exports.ɵj = CmsI18nService;
-    exports.ɵk = CmsGuardsService;
-    exports.ɵl = AddToHomeScreenService;
-    exports.ɵm = ProductImagesModule;
-    exports.ɵn = ProductImagesComponent;
-    exports.ɵo = suffixUrlMatcher;
-    exports.ɵp = addCmsRoute;
-    exports.ɵq = htmlLangProvider;
-    exports.ɵr = setHtmlLangAttribute;
-    exports.ɵs = RoutingModule;
-    exports.ɵt = defaultStorefrontRoutesConfig;
-    exports.ɵu = defaultRoutingConfig;
+    exports.ɵa = OnlyNumberDirectiveModule;
+    exports.ɵb = AutoFocusDirectiveModule;
+    exports.ɵc = defaultCheckoutConfig;
+    exports.ɵd = CheckoutConfigService;
+    exports.ɵe = HighlightPipe;
+    exports.ɵf = ProductAttributesModule;
+    exports.ɵg = ProductDetailsTabModule;
+    exports.ɵh = ProductDetailsTabComponent;
+    exports.ɵi = CmsRoutesService;
+    exports.ɵj = CmsMappingService;
+    exports.ɵk = CmsI18nService;
+    exports.ɵl = CmsGuardsService;
+    exports.ɵm = ComponentMapperService;
+    exports.ɵn = AddToHomeScreenService;
+    exports.ɵo = ProductImagesModule;
+    exports.ɵp = ProductImagesComponent;
+    exports.ɵq = suffixUrlMatcher;
+    exports.ɵr = addCmsRoute;
+    exports.ɵs = htmlLangProvider;
+    exports.ɵt = setHtmlLangAttribute;
+    exports.ɵu = RoutingModule;
+    exports.ɵv = defaultStorefrontRoutesConfig;
+    exports.ɵw = defaultRoutingConfig;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
