@@ -6079,7 +6079,7 @@ class CustomFormValidators {
     static passwordValidator(control) {
         /** @type {?} */
         const password = (/** @type {?} */ (control.value));
-        return password.match('^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^*()_+{};:.,]).{6,}$')
+        return password.match(/^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^*()_\-+{};:.,]).{6,}$/)
             ? null
             : { InvalidPassword: true };
     }

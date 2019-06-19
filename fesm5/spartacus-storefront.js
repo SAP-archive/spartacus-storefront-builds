@@ -7233,7 +7233,7 @@ var CustomFormValidators = /** @class */ (function () {
     function (control) {
         /** @type {?} */
         var password = (/** @type {?} */ (control.value));
-        return password.match('^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^*()_+{};:.,]).{6,}$')
+        return password.match(/^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^*()_\-+{};:.,]).{6,}$/)
             ? null
             : { InvalidPassword: true };
     };
