@@ -6,7 +6,7 @@ import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
-import { fromEvent, of, combineLatest, BehaviorSubject, concat, isObservable, from, Subscription } from 'rxjs';
+import { iif, fromEvent, of, combineLatest, BehaviorSubject, concat, isObservable, from, Subscription } from 'rxjs';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
 import { ServiceWorkerModule, SwRegistrationOptions } from '@angular/service-worker';
@@ -1020,7 +1020,11 @@ var CarouselService = /** @class */ (function () {
      * @return {?}
      */
     function (nativeElement, itemWidth) {
-        return fromEvent(this.winRef.nativeWindow, 'resize').pipe(map((/**
+        var _this = this;
+        return iif((/**
+         * @return {?}
+         */
+        function () { return Boolean(_this.winRef.nativeWindow); }), fromEvent(this.winRef.nativeWindow, 'resize').pipe(map((/**
          * @param {?} _
          * @return {?}
          */
@@ -1028,9 +1032,7 @@ var CarouselService = /** @class */ (function () {
          * @param {?} totalWidth
          * @return {?}
          */
-        function (totalWidth) {
-            return Math.round(totalWidth / itemWidth);
-        })), distinctUntilChanged());
+        function (totalWidth) { return Math.round(totalWidth / itemWidth); })), distinctUntilChanged()), of(3));
     };
     CarouselService.decorators = [
         { type: Injectable, args: [{

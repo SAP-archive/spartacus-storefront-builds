@@ -1121,7 +1121,11 @@
          * @return {?}
          */
         function (nativeElement, itemWidth) {
-            return rxjs.fromEvent(this.winRef.nativeWindow, 'resize').pipe(operators.map((/**
+            var _this = this;
+            return rxjs.iif((/**
+             * @return {?}
+             */
+            function () { return Boolean(_this.winRef.nativeWindow); }), rxjs.fromEvent(this.winRef.nativeWindow, 'resize').pipe(operators.map((/**
              * @param {?} _
              * @return {?}
              */
@@ -1129,9 +1133,7 @@
              * @param {?} totalWidth
              * @return {?}
              */
-            function (totalWidth) {
-                return Math.round(totalWidth / itemWidth);
-            })), operators.distinctUntilChanged());
+            function (totalWidth) { return Math.round(totalWidth / itemWidth); })), operators.distinctUntilChanged()), rxjs.of(3));
         };
         CarouselService.decorators = [
             { type: core.Injectable, args: [{
