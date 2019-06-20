@@ -20,6 +20,7 @@ export declare class PaymentMethodComponent implements OnInit, OnDestroy {
     existingPaymentMethods$: Observable<PaymentDetails[]>;
     isLoading$: Observable<boolean>;
     selectedPayment: PaymentDetails;
+    newPayment: boolean;
     private getPaymentDetailsSub;
     private getDeliveryAddressSub;
     private deliveryAddress;

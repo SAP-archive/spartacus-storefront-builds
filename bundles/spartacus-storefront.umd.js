@@ -5107,8 +5107,37 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var BillingAddressFormComponent = /** @class */ (function () {
-        function BillingAddressFormComponent() {
+        function BillingAddressFormComponent(userAddressService) {
+            this.userAddressService = userAddressService;
+            this.selectedCountry$ = new rxjs.BehaviorSubject('');
         }
+        /**
+         * @return {?}
+         */
+        BillingAddressFormComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this.regions$ = this.selectedCountry$.pipe(operators.switchMap((/**
+             * @param {?} country
+             * @return {?}
+             */
+            function (country) { return _this.userAddressService.getRegions(country); })), operators.tap((/**
+             * @param {?} regions
+             * @return {?}
+             */
+            function (regions) {
+                /** @type {?} */
+                var regionControl = _this.billingAddress.get('region.isocodeShort');
+                if (regions.length > 0) {
+                    regionControl.enable();
+                }
+                else {
+                    regionControl.disable();
+                }
+            })));
+        };
         /**
          * @param {?} country
          * @return {?}
@@ -5119,14 +5148,30 @@
          */
         function (country) {
             this.billingAddress['controls'].country['controls'].isocode.setValue(country.isocode);
+            this.selectedCountry$.next(country.isocode);
+        };
+        /**
+         * @param {?} region
+         * @return {?}
+         */
+        BillingAddressFormComponent.prototype.regionSelected = /**
+         * @param {?} region
+         * @return {?}
+         */
+        function (region) {
+            this.billingAddress['controls'].region['controls'].isocodeShort.setValue(region.isocodeShort);
         };
         BillingAddressFormComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-billing-address-form',
-                        template: "<div [formGroup]=\"billingAddress\">\n  <div class=\"form-group\">\n    <ng-container *ngIf=\"(countries$ | async) as countries\">\n      <div *ngIf=\"countries.length !== 0\">\n        <label aria-required=\"true\">\n          <span class=\"label-content required\">{{\n            'addressForm.country' | cxTranslate\n          }}</span>\n          <ng-select\n            [searchable]=\"false\"\n            [clearable]=\"false\"\n            [items]=\"countries\"\n            bindLabel=\"name\"\n            bindValue=\"isocode\"\n            placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n            (change)=\"countrySelected($event)\"\n          >\n          </ng-select>\n        </label>\n      </div>\n    </ng-container>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.firstName.label' | cxTranslate\n      }}</span>\n      <input\n        class=\"form-control\"\n        type=\"text\"\n        required\n        placeholder=\"{{ 'addressForm.firstName.placeholder' | cxTranslate }}\"\n        formControlName=\"firstName\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.lastName.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        required\n        placeholder=\"{{ 'addressForm.lastName.placeholder' | cxTranslate }}\"\n        formControlName=\"lastName\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.address1' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        required\n        placeholder=\"{{ 'addressForm.streetAddress' | cxTranslate }}\"\n        formControlName=\"line1\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'addressForm.address2' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        placeholder=\"{{ 'addressForm.aptSuite' | cxTranslate }}\"\n        formControlName=\"line2\"\n      />\n    </label>\n  </div>\n  <div class=\"row\">\n    <div class=\"form-group col-md-6\">\n      <label>\n        <span class=\"label-content required\">{{\n          'addressForm.city.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          required\n          placeholder=\"{{ 'addressForm.city.placeholder' | cxTranslate }}\"\n          formControlName=\"town\"\n        />\n      </label>\n    </div>\n    <div class=\"form-group col-md-6\">\n      <label>\n        <span class=\"label-content required\">{{\n          'addressForm.zipCode.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          required\n          placeholder=\"{{ 'addressForm.zipCode.placeholder' | cxTranslate }}\"\n          formControlName=\"postalCode\"\n        />\n      </label>\n    </div>\n  </div>\n</div>\n",
+                        template: "<div [formGroup]=\"billingAddress\">\n  <div class=\"form-group\">\n    <ng-container *ngIf=\"(countries$ | async) as countries\">\n      <div *ngIf=\"countries.length !== 0\">\n        <label aria-required=\"true\">\n          <span class=\"label-content required\">{{\n            'addressForm.country' | cxTranslate\n          }}</span>\n          <ng-select\n            [searchable]=\"false\"\n            [clearable]=\"false\"\n            [items]=\"countries\"\n            bindLabel=\"name\"\n            bindValue=\"isocode\"\n            placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n            (change)=\"countrySelected($event)\"\n          >\n          </ng-select>\n        </label>\n      </div>\n    </ng-container>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.firstName.label' | cxTranslate\n      }}</span>\n      <input\n        class=\"form-control\"\n        type=\"text\"\n        required\n        placeholder=\"{{ 'addressForm.firstName.placeholder' | cxTranslate }}\"\n        formControlName=\"firstName\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.lastName.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        required\n        placeholder=\"{{ 'addressForm.lastName.placeholder' | cxTranslate }}\"\n        formControlName=\"lastName\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.address1' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        required\n        placeholder=\"{{ 'addressForm.streetAddress' | cxTranslate }}\"\n        formControlName=\"line1\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'addressForm.address2' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        placeholder=\"{{ 'addressForm.aptSuite' | cxTranslate }}\"\n        formControlName=\"line2\"\n      />\n    </label>\n  </div>\n  <div class=\"row\">\n    <div class=\"form-group col-md-6\">\n      <label>\n        <span class=\"label-content required\">{{\n          'addressForm.city.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          required\n          placeholder=\"{{ 'addressForm.city.placeholder' | cxTranslate }}\"\n          formControlName=\"town\"\n        />\n      </label>\n    </div>\n    <div class=\"form-group col-md-6\">\n      <ng-container\n        *ngIf=\"(regions$ | async) as regions\"\n        formGroupName=\"region\"\n      >\n        <div *ngIf=\"regions.length !== 0\">\n          <label aria-required=\"true\">\n            <span class=\"label-content required\">{{\n              'addressForm.state' | cxTranslate\n            }}</span>\n            <ng-container *ngIf=\"regions[0].name\">\n              <ng-select\n                class=\"region-select\"\n                formControlName=\"isocodeShort\"\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"regions\"\n                bindLabel=\"name\"\n                bindValue=\"isocodeShort\"\n                placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                (change)=\"regionSelected($event)\"\n              >\n              </ng-select>\n            </ng-container>\n            <ng-container *ngIf=\"!regions[0].name\">\n              <ng-select\n                class=\"region-select\"\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"regions\"\n                bindLabel=\"isocodeShort\"\n                bindValue=\"region\"\n                placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                (change)=\"regionSelected($event)\"\n              >\n              </ng-select>\n            </ng-container>\n          </label>\n        </div>\n      </ng-container>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"form-group col-md-6\">\n      <label>\n        <span class=\"label-content required\">{{\n          'addressForm.zipCode.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          required\n          placeholder=\"{{ 'addressForm.zipCode.placeholder' | cxTranslate }}\"\n          formControlName=\"postalCode\"\n        />\n      </label>\n    </div>\n  </div>\n</div>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
+        /** @nocollapse */
+        BillingAddressFormComponent.ctorParameters = function () { return [
+            { type: core$1.UserAddressService }
+        ]; };
         BillingAddressFormComponent.propDecorators = {
             billingAddress: [{ type: core.Input }],
             countries$: [{ type: core.Input }]
@@ -5243,8 +5288,11 @@
                 line1: ['', forms.Validators.required],
                 line2: [''],
                 town: ['', forms.Validators.required],
+                region: this.fb.group({
+                    isocodeShort: [null, forms.Validators.required],
+                }),
                 country: this.fb.group({
-                    isocode: ['', forms.Validators.required],
+                    isocode: [null, forms.Validators.required],
                 }),
                 postalCode: ['', forms.Validators.required],
             });
@@ -5610,6 +5658,7 @@
             this.translation = translation;
             this.iconTypes = ICON_TYPE;
             this.newPaymentFormManuallyOpened = false;
+            this.newPayment = false;
         }
         /**
          * @return {?}
@@ -5639,7 +5688,15 @@
              * @param {?} paymentInfo
              * @return {?}
              */
-            function (paymentInfo) { return paymentInfo && Object.keys(paymentInfo).length !== 0; })))
+            function (paymentInfo) { return paymentInfo && Object.keys(paymentInfo).length !== 0; })), operators.tap((/**
+             * @param {?} paymentInfo
+             * @return {?}
+             */
+            function (paymentInfo) {
+                if (paymentInfo === _this.selectedPayment || _this.newPayment) {
+                    _this.routingService.go(_this.checkoutStepUrlNext);
+                }
+            })))
                 .subscribe((/**
              * @param {?} paymentInfo
              * @return {?}
@@ -5778,32 +5835,19 @@
          * @return {?}
          */
         function (_a) {
-            var _this = this;
             var newPayment = _a.newPayment, payment = _a.payment, billingAddress = _a.billingAddress;
-            payment.billingAddress = billingAddress
-                ? billingAddress
-                : this.deliveryAddress;
             if (newPayment) {
+                payment.billingAddress = billingAddress
+                    ? billingAddress
+                    : this.deliveryAddress;
                 this.checkoutPaymentService.createPaymentDetails(payment);
                 this.checkoutService.clearCheckoutStep(3);
+                this.newPayment = newPayment;
             }
-            // if the selected payment is the same as the cart's one
-            if (this.selectedPayment && this.selectedPayment.id === payment.id) {
+            else if (this.selectedPayment && this.selectedPayment.id === payment.id) {
                 this.checkoutPaymentService.setPaymentDetails(payment);
                 this.checkoutService.clearCheckoutStep(3);
             }
-            this.getPaymentDetailsSub = this.checkoutPaymentService
-                .getPaymentDetails()
-                .subscribe((/**
-             * @param {?} data
-             * @return {?}
-             */
-            function (data) {
-                if (data.accountHolderName && data.cardNumber) {
-                    _this.routingService.go(_this.checkoutStepUrlNext);
-                    return;
-                }
-            }));
         };
         /**
          * @return {?}

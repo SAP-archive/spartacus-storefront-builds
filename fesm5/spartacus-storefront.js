@@ -1,5 +1,5 @@
 import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, Output, EventEmitter, forwardRef, Renderer2, HostListener, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, INJECTOR, APP_INITIALIZER, Pipe } from '@angular/core';
-import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, ServerConfig, OccConfig, UrlModule, GlobalMessageService, GlobalMessageType, GlobalMessageModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserPaymentService, TranslationService, UserService, CheckoutModule, UserAddressService, AuthService, AuthRedirectService, UserModule, NotAuthGuard, CmsConfig, CxApiService, CmsService, DynamicAttributeService, PageType, SemanticPathService, TranslationChunkService, PageRobotsMeta, PageMetaService, LanguageService, UserConsentService, UserOrderService, CmsPageTitleModule, SearchboxService, ProductModule, ProductReferenceService, ProductSearchService, CmsModule, ProductReviewService, RoutingModule as RoutingModule$1, StateModule, AuthModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, provideConfig } from '@spartacus/core';
+import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, ServerConfig, OccConfig, UrlModule, GlobalMessageService, GlobalMessageType, GlobalMessageModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, CheckoutModule, AuthService, AuthRedirectService, UserModule, NotAuthGuard, CmsConfig, CxApiService, CmsService, DynamicAttributeService, PageType, SemanticPathService, TranslationChunkService, PageRobotsMeta, PageMetaService, LanguageService, UserConsentService, UserOrderService, CmsPageTitleModule, SearchboxService, ProductModule, ProductReferenceService, ProductSearchService, CmsModule, ProductReviewService, RoutingModule as RoutingModule$1, StateModule, AuthModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, provideConfig } from '@spartacus/core';
 import { map, filter, switchMap, tap, startWith, debounceTime, distinctUntilChanged, take, skipWhile, shareReplay, first, endWith, withLatestFrom } from 'rxjs/operators';
 import { __extends, __values, __assign, __spread, __read, __awaiter, __generator } from 'tslib';
 import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -5006,8 +5006,37 @@ var DeliveryModeSetGuard = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var BillingAddressFormComponent = /** @class */ (function () {
-    function BillingAddressFormComponent() {
+    function BillingAddressFormComponent(userAddressService) {
+        this.userAddressService = userAddressService;
+        this.selectedCountry$ = new BehaviorSubject('');
     }
+    /**
+     * @return {?}
+     */
+    BillingAddressFormComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.regions$ = this.selectedCountry$.pipe(switchMap((/**
+         * @param {?} country
+         * @return {?}
+         */
+        function (country) { return _this.userAddressService.getRegions(country); })), tap((/**
+         * @param {?} regions
+         * @return {?}
+         */
+        function (regions) {
+            /** @type {?} */
+            var regionControl = _this.billingAddress.get('region.isocodeShort');
+            if (regions.length > 0) {
+                regionControl.enable();
+            }
+            else {
+                regionControl.disable();
+            }
+        })));
+    };
     /**
      * @param {?} country
      * @return {?}
@@ -5018,14 +5047,30 @@ var BillingAddressFormComponent = /** @class */ (function () {
      */
     function (country) {
         this.billingAddress['controls'].country['controls'].isocode.setValue(country.isocode);
+        this.selectedCountry$.next(country.isocode);
+    };
+    /**
+     * @param {?} region
+     * @return {?}
+     */
+    BillingAddressFormComponent.prototype.regionSelected = /**
+     * @param {?} region
+     * @return {?}
+     */
+    function (region) {
+        this.billingAddress['controls'].region['controls'].isocodeShort.setValue(region.isocodeShort);
     };
     BillingAddressFormComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-billing-address-form',
-                    template: "<div [formGroup]=\"billingAddress\">\n  <div class=\"form-group\">\n    <ng-container *ngIf=\"(countries$ | async) as countries\">\n      <div *ngIf=\"countries.length !== 0\">\n        <label aria-required=\"true\">\n          <span class=\"label-content required\">{{\n            'addressForm.country' | cxTranslate\n          }}</span>\n          <ng-select\n            [searchable]=\"false\"\n            [clearable]=\"false\"\n            [items]=\"countries\"\n            bindLabel=\"name\"\n            bindValue=\"isocode\"\n            placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n            (change)=\"countrySelected($event)\"\n          >\n          </ng-select>\n        </label>\n      </div>\n    </ng-container>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.firstName.label' | cxTranslate\n      }}</span>\n      <input\n        class=\"form-control\"\n        type=\"text\"\n        required\n        placeholder=\"{{ 'addressForm.firstName.placeholder' | cxTranslate }}\"\n        formControlName=\"firstName\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.lastName.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        required\n        placeholder=\"{{ 'addressForm.lastName.placeholder' | cxTranslate }}\"\n        formControlName=\"lastName\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.address1' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        required\n        placeholder=\"{{ 'addressForm.streetAddress' | cxTranslate }}\"\n        formControlName=\"line1\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'addressForm.address2' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        placeholder=\"{{ 'addressForm.aptSuite' | cxTranslate }}\"\n        formControlName=\"line2\"\n      />\n    </label>\n  </div>\n  <div class=\"row\">\n    <div class=\"form-group col-md-6\">\n      <label>\n        <span class=\"label-content required\">{{\n          'addressForm.city.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          required\n          placeholder=\"{{ 'addressForm.city.placeholder' | cxTranslate }}\"\n          formControlName=\"town\"\n        />\n      </label>\n    </div>\n    <div class=\"form-group col-md-6\">\n      <label>\n        <span class=\"label-content required\">{{\n          'addressForm.zipCode.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          required\n          placeholder=\"{{ 'addressForm.zipCode.placeholder' | cxTranslate }}\"\n          formControlName=\"postalCode\"\n        />\n      </label>\n    </div>\n  </div>\n</div>\n",
+                    template: "<div [formGroup]=\"billingAddress\">\n  <div class=\"form-group\">\n    <ng-container *ngIf=\"(countries$ | async) as countries\">\n      <div *ngIf=\"countries.length !== 0\">\n        <label aria-required=\"true\">\n          <span class=\"label-content required\">{{\n            'addressForm.country' | cxTranslate\n          }}</span>\n          <ng-select\n            [searchable]=\"false\"\n            [clearable]=\"false\"\n            [items]=\"countries\"\n            bindLabel=\"name\"\n            bindValue=\"isocode\"\n            placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n            (change)=\"countrySelected($event)\"\n          >\n          </ng-select>\n        </label>\n      </div>\n    </ng-container>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.firstName.label' | cxTranslate\n      }}</span>\n      <input\n        class=\"form-control\"\n        type=\"text\"\n        required\n        placeholder=\"{{ 'addressForm.firstName.placeholder' | cxTranslate }}\"\n        formControlName=\"firstName\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.lastName.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        required\n        placeholder=\"{{ 'addressForm.lastName.placeholder' | cxTranslate }}\"\n        formControlName=\"lastName\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.address1' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        required\n        placeholder=\"{{ 'addressForm.streetAddress' | cxTranslate }}\"\n        formControlName=\"line1\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'addressForm.address2' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        placeholder=\"{{ 'addressForm.aptSuite' | cxTranslate }}\"\n        formControlName=\"line2\"\n      />\n    </label>\n  </div>\n  <div class=\"row\">\n    <div class=\"form-group col-md-6\">\n      <label>\n        <span class=\"label-content required\">{{\n          'addressForm.city.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          required\n          placeholder=\"{{ 'addressForm.city.placeholder' | cxTranslate }}\"\n          formControlName=\"town\"\n        />\n      </label>\n    </div>\n    <div class=\"form-group col-md-6\">\n      <ng-container\n        *ngIf=\"(regions$ | async) as regions\"\n        formGroupName=\"region\"\n      >\n        <div *ngIf=\"regions.length !== 0\">\n          <label aria-required=\"true\">\n            <span class=\"label-content required\">{{\n              'addressForm.state' | cxTranslate\n            }}</span>\n            <ng-container *ngIf=\"regions[0].name\">\n              <ng-select\n                class=\"region-select\"\n                formControlName=\"isocodeShort\"\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"regions\"\n                bindLabel=\"name\"\n                bindValue=\"isocodeShort\"\n                placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                (change)=\"regionSelected($event)\"\n              >\n              </ng-select>\n            </ng-container>\n            <ng-container *ngIf=\"!regions[0].name\">\n              <ng-select\n                class=\"region-select\"\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"regions\"\n                bindLabel=\"isocodeShort\"\n                bindValue=\"region\"\n                placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                (change)=\"regionSelected($event)\"\n              >\n              </ng-select>\n            </ng-container>\n          </label>\n        </div>\n      </ng-container>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"form-group col-md-6\">\n      <label>\n        <span class=\"label-content required\">{{\n          'addressForm.zipCode.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          required\n          placeholder=\"{{ 'addressForm.zipCode.placeholder' | cxTranslate }}\"\n          formControlName=\"postalCode\"\n        />\n      </label>\n    </div>\n  </div>\n</div>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
+    /** @nocollapse */
+    BillingAddressFormComponent.ctorParameters = function () { return [
+        { type: UserAddressService }
+    ]; };
     BillingAddressFormComponent.propDecorators = {
         billingAddress: [{ type: Input }],
         countries$: [{ type: Input }]
@@ -5142,8 +5187,11 @@ var PaymentFormComponent = /** @class */ (function () {
             line1: ['', Validators.required],
             line2: [''],
             town: ['', Validators.required],
+            region: this.fb.group({
+                isocodeShort: [null, Validators.required],
+            }),
             country: this.fb.group({
-                isocode: ['', Validators.required],
+                isocode: [null, Validators.required],
             }),
             postalCode: ['', Validators.required],
         });
@@ -5509,6 +5557,7 @@ var PaymentMethodComponent = /** @class */ (function () {
         this.translation = translation;
         this.iconTypes = ICON_TYPE;
         this.newPaymentFormManuallyOpened = false;
+        this.newPayment = false;
     }
     /**
      * @return {?}
@@ -5538,7 +5587,15 @@ var PaymentMethodComponent = /** @class */ (function () {
          * @param {?} paymentInfo
          * @return {?}
          */
-        function (paymentInfo) { return paymentInfo && Object.keys(paymentInfo).length !== 0; })))
+        function (paymentInfo) { return paymentInfo && Object.keys(paymentInfo).length !== 0; })), tap((/**
+         * @param {?} paymentInfo
+         * @return {?}
+         */
+        function (paymentInfo) {
+            if (paymentInfo === _this.selectedPayment || _this.newPayment) {
+                _this.routingService.go(_this.checkoutStepUrlNext);
+            }
+        })))
             .subscribe((/**
          * @param {?} paymentInfo
          * @return {?}
@@ -5677,32 +5734,19 @@ var PaymentMethodComponent = /** @class */ (function () {
      * @return {?}
      */
     function (_a) {
-        var _this = this;
         var newPayment = _a.newPayment, payment = _a.payment, billingAddress = _a.billingAddress;
-        payment.billingAddress = billingAddress
-            ? billingAddress
-            : this.deliveryAddress;
         if (newPayment) {
+            payment.billingAddress = billingAddress
+                ? billingAddress
+                : this.deliveryAddress;
             this.checkoutPaymentService.createPaymentDetails(payment);
             this.checkoutService.clearCheckoutStep(3);
+            this.newPayment = newPayment;
         }
-        // if the selected payment is the same as the cart's one
-        if (this.selectedPayment && this.selectedPayment.id === payment.id) {
+        else if (this.selectedPayment && this.selectedPayment.id === payment.id) {
             this.checkoutPaymentService.setPaymentDetails(payment);
             this.checkoutService.clearCheckoutStep(3);
         }
-        this.getPaymentDetailsSub = this.checkoutPaymentService
-            .getPaymentDetails()
-            .subscribe((/**
-         * @param {?} data
-         * @return {?}
-         */
-        function (data) {
-            if (data.accountHolderName && data.cardNumber) {
-                _this.routingService.go(_this.checkoutStepUrlNext);
-                return;
-            }
-        }));
     };
     /**
      * @return {?}
