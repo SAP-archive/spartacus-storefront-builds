@@ -5,7 +5,7 @@ import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
-import { iif, fromEvent, of, combineLatest, BehaviorSubject, concat, isObservable, from, Subscription } from 'rxjs';
+import { iif, fromEvent, of, combineLatest, BehaviorSubject, Subscription, concat, isObservable, from } from 'rxjs';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
 import { __awaiter } from 'tslib';
@@ -590,7 +590,7 @@ class AddToCartComponent {
             this.hasStock = true;
         }
         else {
-            this.currentProductService
+            this.subscription = this.currentProductService
                 .getProduct()
                 .pipe(filter(Boolean))
                 .subscribe((/**
@@ -646,6 +646,14 @@ class AddToCartComponent {
         modalInstance.cart$ = this.cartService.getActive();
         modalInstance.loaded$ = this.cartService.getLoaded();
         modalInstance.quantity = this.quantity;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     }
 }
 AddToCartComponent.decorators = [
@@ -1399,7 +1407,9 @@ class ItemCounterComponent {
      */
     ngOnInit() {
         this.writeValue(this.min || 0);
-        this.inputValue.valueChanges.pipe(debounceTime(300)).subscribe((/**
+        this.subscription = this.inputValue.valueChanges
+            .pipe(debounceTime(300))
+            .subscribe((/**
          * @param {?} value
          * @return {?}
          */
@@ -1569,6 +1579,14 @@ class ItemCounterComponent {
      */
     isMaxOrMinValueOrBeyond() {
         return this.value >= this.max || this.value <= this.min;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     }
 }
 ItemCounterComponent.decorators = [
@@ -3959,9 +3977,8 @@ class DeliveryModeComponent {
         this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
         this.changedOption = false;
         this.supportedDeliveryModes$ = this.checkoutDeliveryService.getSupportedDeliveryModes();
-        this.selectedDeliveryMode$ = this.checkoutDeliveryService.getSelectedDeliveryMode();
-        this.checkoutDeliveryService.loadSupportedDeliveryModes();
-        this.selectedDeliveryMode$
+        this.deliveryModeSub = this.checkoutDeliveryService
+            .getSelectedDeliveryMode()
             .pipe(map((/**
          * @param {?} deliveryMode
          * @return {?}
@@ -3972,9 +3989,12 @@ class DeliveryModeComponent {
          * @return {?}
          */
         code => {
+            if (!!code && code === this.currentDeliveryModeId) {
+                this.routingService.go(this.checkoutStepUrlNext);
+            }
+            this.currentDeliveryModeId = code;
             if (code) {
                 this.mode.controls['deliveryModeId'].setValue(code);
-                this.currentDeliveryModeId = code;
             }
         }));
     }
@@ -3995,17 +4015,9 @@ class DeliveryModeComponent {
         if (this.changedOption) {
             this.checkoutDeliveryService.setDeliveryMode(this.currentDeliveryModeId);
         }
-        this.deliveryModeSub = this.checkoutDeliveryService
-            .getSelectedDeliveryMode()
-            .subscribe((/**
-         * @param {?} data
-         * @return {?}
-         */
-        data => {
-            if (data && data.code === this.currentDeliveryModeId) {
-                this.routingService.go(this.checkoutStepUrlNext);
-            }
-        }));
+        else {
+            this.routingService.go(this.checkoutStepUrlNext);
+        }
     }
     /**
      * @return {?}
@@ -5506,7 +5518,13 @@ class ShippingAddressComponent {
         this.checkoutStepUrlPrevious = 'cart';
         this.isLoading$ = this.userAddressService.getAddressesLoading();
         this.existingAddresses$ = this.userAddressService.getAddresses();
-        this.cards$ = combineLatest(this.existingAddresses$, this.selectedAddress$.asObservable(), this.translation.translate('checkoutAddress.defaultShippingAddress'), this.translation.translate('checkoutAddress.shipToThisAddress'), this.translation.translate('addressCard.selected')).pipe(map((/**
+        this.cards$ = combineLatest([
+            this.existingAddresses$,
+            this.selectedAddress$.asObservable(),
+            this.translation.translate('checkoutAddress.defaultShippingAddress'),
+            this.translation.translate('checkoutAddress.shipToThisAddress'),
+            this.translation.translate('addressCard.selected'),
+        ]).pipe(map((/**
          * @param {?} __0
          * @return {?}
          */
@@ -6831,7 +6849,7 @@ class PageLayoutService {
      * @return {?}
      */
     getSlots(section) {
-        return combineLatest(this.page$, this.breakpointService.breakpoint$).pipe(map((/**
+        return combineLatest([this.page$, this.breakpointService.breakpoint$]).pipe(map((/**
          * @param {?} __0
          * @return {?}
          */
@@ -7159,6 +7177,7 @@ class RegisterComponent {
         this.userService = userService;
         this.globalMessageService = globalMessageService;
         this.fb = fb;
+        this.subscription = new Subscription();
         this.userRegistrationForm = this.fb.group({
             titleCode: [''],
             firstName: ['', Validators.required],
@@ -7186,36 +7205,18 @@ class RegisterComponent {
                 this.userService.loadTitles();
             }
         })));
-    }
-    /**
-     * @return {?}
-     */
-    submit() {
-        this.emailToLowerCase();
-        const { firstName, lastName, email, password, titleCode, } = this.userRegistrationForm.value;
-        /** @type {?} */
-        const userRegisterFormData = {
-            firstName,
-            lastName,
-            uid: email,
-            password,
-            titleCode,
-        };
-        this.userService.register(userRegisterFormData);
-        if (!this.subscription) {
-            this.subscription = this.auth.getUserToken().subscribe((/**
-             * @param {?} data
-             * @return {?}
-             */
-            data => {
-                if (data && data.access_token) {
-                    this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
-                    this.authRedirectService.redirect();
-                }
-            }));
-        }
+        this.subscription.add(this.auth.getUserToken().subscribe((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => {
+            if (data && data.access_token) {
+                this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
+                this.authRedirectService.redirect();
+            }
+        })));
         // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
-        this.globalMessageService
+        this.subscription.add(this.globalMessageService
             .get()
             .pipe(filter((/**
          * @param {?} data
@@ -7235,7 +7236,23 @@ class RegisterComponent {
                 this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
                 this.globalMessageService.add({ key: 'register.titleRequired' }, GlobalMessageType.MSG_TYPE_ERROR);
             }
-        }));
+        })));
+    }
+    /**
+     * @return {?}
+     */
+    submit() {
+        this.emailToLowerCase();
+        const { firstName, lastName, email, password, titleCode, } = this.userRegistrationForm.value;
+        /** @type {?} */
+        const userRegisterFormData = {
+            firstName,
+            lastName,
+            uid: email,
+            password,
+            titleCode,
+        };
+        this.userService.register(userRegisterFormData);
     }
     /**
      * @private
@@ -7261,9 +7278,7 @@ class RegisterComponent {
      * @return {?}
      */
     ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
+        this.subscription.unsubscribe();
     }
 }
 RegisterComponent.decorators = [
@@ -9092,7 +9107,11 @@ class ConsentManagementComponent {
      * @return {?}
      */
     ngOnInit() {
-        this.loading$ = combineLatest(this.userConsentService.getConsentsResultLoading(), this.userConsentService.getGiveConsentResultLoading(), this.userConsentService.getWithdrawConsentResultLoading()).pipe(map((/**
+        this.loading$ = combineLatest([
+            this.userConsentService.getConsentsResultLoading(),
+            this.userConsentService.getGiveConsentResultLoading(),
+            this.userConsentService.getWithdrawConsentResultLoading(),
+        ]).pipe(map((/**
          * @param {?} __0
          * @return {?}
          */
@@ -9932,14 +9951,6 @@ class PaymentMethodsComponent {
     setDefaultPaymentMethod(paymentMethod) {
         this.userPaymentService.setPaymentMethodAsDefault(paymentMethod.id);
     }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        if (this.userServiceSub) {
-            this.userServiceSub.unsubscribe();
-        }
-    }
 }
 PaymentMethodsComponent.decorators = [
     { type: Component, args: [{
@@ -10246,9 +10257,7 @@ class UpdateEmailComponent {
      * @return {?}
      */
     ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
+        this.subscription.unsubscribe();
         this.userService.resetUpdateEmailResultState();
     }
 }
@@ -10447,9 +10456,7 @@ class UpdatePasswordComponent {
      * @return {?}
      */
     ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
+        this.subscription.unsubscribe();
         this.userService.resetUpdatePasswordProcessState();
     }
 }
@@ -10638,9 +10645,7 @@ class UpdateProfileComponent {
      * @return {?}
      */
     ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
+        this.subscription.unsubscribe();
         // clean up the state
         this.userService.resetUpdatePersonalDetailsProcessingState();
     }
@@ -11026,7 +11031,7 @@ class NavigationUIComponent {
         this.flyout = true;
         this.isOpen = false;
         this.openNodes = [];
-        this.router.events
+        this.subscription = this.router.events
             .pipe(filter((/**
          * @param {?} event
          * @return {?}
@@ -11109,6 +11114,14 @@ class NavigationUIComponent {
         }
         else {
             return depth;
+        }
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
         }
     }
 }
@@ -11338,7 +11351,11 @@ class SearchBoxComponentService {
      * @return {?}
      */
     getResults(config) {
-        return combineLatest(this.getProductResults(config), this.getProductSuggestions(config), this.getSearchMessage(config)).pipe(map((/**
+        return combineLatest([
+            this.getProductResults(config),
+            this.getProductSuggestions(config),
+            this.getSearchMessage(config),
+        ]).pipe(map((/**
          * @param {?} __0
          * @return {?}
          */
