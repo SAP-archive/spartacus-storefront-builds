@@ -16637,6 +16637,7 @@
                                     strictStateImmutability: true,
                                     strictStateSerializability: true,
                                     strictActionImmutability: true,
+                                    strictActionSerializability: true,
                                 },
                             }),
                             effects.EffectsModule.forRoot([]),

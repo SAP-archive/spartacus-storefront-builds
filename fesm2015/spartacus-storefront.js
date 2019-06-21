@@ -13914,6 +13914,7 @@ StorefrontModule.decorators = [
                             strictStateImmutability: true,
                             strictStateSerializability: true,
                             strictActionImmutability: true,
+                            strictActionSerializability: true,
                         },
                     }),
                     EffectsModule.forRoot([]),

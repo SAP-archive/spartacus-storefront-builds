@@ -16536,6 +16536,7 @@ var StorefrontModule = /** @class */ (function () {
                                 strictStateImmutability: true,
                                 strictStateSerializability: true,
                                 strictActionImmutability: true,
+                                strictActionSerializability: true,
                             },
                         }),
                         EffectsModule.forRoot([]),
