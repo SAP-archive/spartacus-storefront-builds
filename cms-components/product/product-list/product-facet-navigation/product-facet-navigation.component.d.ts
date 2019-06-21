@@ -1,25 +1,26 @@
 import { HttpUrlEncodingCodec } from '@angular/common/http';
-import { OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Facet, ProductSearchPage, ProductSearchService } from '@spartacus/core';
+import { OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Facet, ProductSearchPage } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { ICON_TYPE } from '../../../../cms-components/misc/icon/index';
 import { ModalService } from '../../../../shared/components/modal/index';
-export declare class ProductFacetNavigationComponent implements OnInit {
+import { ProductListComponentService } from '../container/product-list-component.service';
+export declare class ProductFacetNavigationComponent implements OnInit, OnDestroy {
     private modalService;
     private activatedRoute;
-    private productSearchService;
+    private productListComponentService;
+    private sub;
     iconTypes: typeof ICON_TYPE;
     activeFacetValueCode: string;
     searchResult: ProductSearchPage;
     minPerFacet: number;
     showAllPerFacetMap: Map<String, boolean>;
-    queryCodec: HttpUrlEncodingCodec;
+    protected queryCodec: HttpUrlEncodingCodec;
     private collapsedFacets;
     searchResult$: Observable<ProductSearchPage>;
-    updateParams$: Observable<Params>;
-    readonly visibleFacets: Facet[];
-    constructor(modalService: ModalService, activatedRoute: ActivatedRoute, productSearchService: ProductSearchService);
+    visibleFacets$: Observable<Facet[]>;
+    constructor(modalService: ModalService, activatedRoute: ActivatedRoute, productListComponentService: ProductListComponentService);
     ngOnInit(): void;
     openFilterModal(content: any): void;
     toggleValue(query: string): void;
@@ -29,4 +30,5 @@ export declare class ProductFacetNavigationComponent implements OnInit {
     isFacetCollapsed(facetName: string): boolean;
     toggleFacet(facetName: string): void;
     getVisibleFacetValues(facet: any): any;
+    ngOnDestroy(): void;
 }

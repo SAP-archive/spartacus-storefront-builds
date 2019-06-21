@@ -15057,55 +15057,230 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var ProductListComponent = /** @class */ (function () {
-        function ProductListComponent(productSearchService, activatedRoute, pageLayoutService) {
+    var ProductListComponentService = /** @class */ (function () {
+        function ProductListComponentService(productSearchService, routing, activatedRoute, router) {
+            var _this = this;
             this.productSearchService = productSearchService;
+            this.routing = routing;
             this.activatedRoute = activatedRoute;
-            this.pageLayoutService = pageLayoutService;
-            this.searchConfig = {};
-            this.gridMode$ = new rxjs.BehaviorSubject(ViewModes.Grid);
+            this.router = router;
+            this.defaultPageSize = 10;
+            this.RELEVANCE_CATEGORY = ':relevance:category:';
+            this.RELEVANCE_BRAND = ':relevance:brand:';
+            this.searchResults$ = this.productSearchService
+                .getResults()
+                .pipe(operators.filter((/**
+             * @param {?} searchResult
+             * @return {?}
+             */
+            function (searchResult) { return Object.keys(searchResult).length > 0; })));
+            this.searchByRouting$ = this.routing.getRouterState().pipe(operators.distinctUntilChanged((/**
+             * @param {?} x
+             * @param {?} y
+             * @return {?}
+             */
+            function (x, y) {
+                // router emits new value also when the anticipated `nextState` changes
+                // but we want to perform search only when current url changes
+                return x.state.url === y.state.url;
+            })), operators.tap((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var state = _a.state;
+                /** @type {?} */
+                var criteria = _this.getCriteriaFromRoute(state.params, state.queryParams);
+                _this.search(criteria);
+            })));
+            /**
+             * This stream should be used only on the Product Listing Page.
+             *
+             * It not only emits search results, but also performs a search on every change
+             * of the route (i.e. route params or query params).
+             *
+             * When a user leaves the PLP route, the PLP component unsubscribes from this stream
+             * so no longer the search is performed on route change.
+             */
+            this.model$ = rxjs.combineLatest(this.searchResults$, this.searchByRouting$).pipe(operators.map((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 1), searchResults = _b[0];
+                return searchResults;
+            })), operators.shareReplay({ bufferSize: 1, refCount: true }));
         }
         /**
          * @return {?}
          */
-        ProductListComponent.prototype.update = /**
+        ProductListComponentService.prototype.clearSearchResults = /**
          * @return {?}
          */
         function () {
-            var queryParams = this.activatedRoute.snapshot.queryParams;
-            this.options = this.createOptionsByUrlParams();
-            if (this.categoryCode && this.categoryCode !== queryParams.categoryCode) {
-                this.query = ':relevance:category:' + this.categoryCode;
-            }
-            if (this.brandCode && this.brandCode !== queryParams.brandCode) {
-                this.query = ':relevance:brand:' + this.brandCode;
-            }
-            if (!this.query && queryParams.query) {
-                this.query = queryParams.query;
-            }
-            this.search(this.query, this.options);
+            this.productSearchService.clearResults();
         };
         /**
+         * @private
+         * @param {?} routeParams
+         * @param {?} queryParams
          * @return {?}
          */
-        ProductListComponent.prototype.createOptionsByUrlParams = /**
+        ProductListComponentService.prototype.getCriteriaFromRoute = /**
+         * @private
+         * @param {?} routeParams
+         * @param {?} queryParams
          * @return {?}
          */
-        function () {
-            var queryParams = this.activatedRoute.snapshot.queryParams;
-            /** @type {?} */
-            var newConfig = __assign({}, queryParams);
-            delete newConfig.query;
-            /** @type {?} */
-            var options = __assign({}, this.searchConfig, newConfig, { pageSize: this.itemPerPage || 10 });
-            if (this.categoryCode) {
-                options.categoryCode = this.categoryCode;
-            }
-            if (this.brandCode) {
-                options.brandCode = this.brandCode;
-            }
-            return options;
+        function (routeParams, queryParams) {
+            return {
+                query: queryParams.query || this.getQueryFromRouteParams(routeParams),
+                pageSize: queryParams.pageSize || this.defaultPageSize,
+                currentPage: queryParams.currentPage,
+                sortCode: queryParams.sortCode,
+            };
         };
+        /**
+         * @private
+         * @param {?} __0
+         * @return {?}
+         */
+        ProductListComponentService.prototype.getQueryFromRouteParams = /**
+         * @private
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var brandCode = _a.brandCode, categoryCode = _a.categoryCode, query = _a.query;
+            if (query) {
+                return query;
+            }
+            if (categoryCode) {
+                return this.RELEVANCE_CATEGORY + categoryCode;
+            }
+            if (brandCode) {
+                return this.RELEVANCE_BRAND + brandCode;
+            }
+        };
+        /**
+         * @private
+         * @param {?} criteria
+         * @return {?}
+         */
+        ProductListComponentService.prototype.search = /**
+         * @private
+         * @param {?} criteria
+         * @return {?}
+         */
+        function (criteria) {
+            /** @type {?} */
+            var query = criteria.query;
+            /** @type {?} */
+            var searchConfig = this.getSearchConfig(criteria);
+            this.productSearchService.search(query, searchConfig);
+        };
+        /**
+         * @private
+         * @param {?} criteria
+         * @return {?}
+         */
+        ProductListComponentService.prototype.getSearchConfig = /**
+         * @private
+         * @param {?} criteria
+         * @return {?}
+         */
+        function (criteria) {
+            /** @type {?} */
+            var result = {
+                currentPage: criteria.currentPage,
+                pageSize: criteria.pageSize,
+                sortCode: criteria.sortCode,
+            };
+            // drop empty keys
+            Object.keys(result).forEach((/**
+             * @param {?} key
+             * @return {?}
+             */
+            function (key) { return !result[key] && delete result[key]; }));
+            return result;
+        };
+        /**
+         * @param {?} query
+         * @return {?}
+         */
+        ProductListComponentService.prototype.setQuery = /**
+         * @param {?} query
+         * @return {?}
+         */
+        function (query) {
+            this.setQueryParams({ query: query, currentPage: undefined });
+        };
+        /**
+         * @param {?} pageNumber
+         * @return {?}
+         */
+        ProductListComponentService.prototype.viewPage = /**
+         * @param {?} pageNumber
+         * @return {?}
+         */
+        function (pageNumber) {
+            this.setQueryParams({ currentPage: pageNumber });
+        };
+        /**
+         * @param {?} sortCode
+         * @return {?}
+         */
+        ProductListComponentService.prototype.sort = /**
+         * @param {?} sortCode
+         * @return {?}
+         */
+        function (sortCode) {
+            this.setQueryParams({ sortCode: sortCode });
+        };
+        /**
+         * @private
+         * @param {?} queryParams
+         * @return {?}
+         */
+        ProductListComponentService.prototype.setQueryParams = /**
+         * @private
+         * @param {?} queryParams
+         * @return {?}
+         */
+        function (queryParams) {
+            this.router.navigate([], {
+                queryParams: queryParams,
+                queryParamsHandling: 'merge',
+                relativeTo: this.activatedRoute,
+            });
+        };
+        ProductListComponentService.decorators = [
+            { type: core.Injectable, args: [{ providedIn: 'root' },] }
+        ];
+        /** @nocollapse */
+        ProductListComponentService.ctorParameters = function () { return [
+            { type: core$1.ProductSearchService },
+            { type: core$1.RoutingService },
+            { type: router.ActivatedRoute },
+            { type: router.Router }
+        ]; };
+        /** @nocollapse */ ProductListComponentService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function ProductListComponentService_Factory() { return new ProductListComponentService(core.ɵɵinject(core$1.ProductSearchService), core.ɵɵinject(core$1.RoutingService), core.ɵɵinject(router.ActivatedRoute), core.ɵɵinject(router.Router)); }, token: ProductListComponentService, providedIn: "root" });
+        return ProductListComponentService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ProductListComponent = /** @class */ (function () {
+        function ProductListComponent(pageLayoutService, productListComponentService) {
+            this.pageLayoutService = pageLayoutService;
+            this.productListComponentService = productListComponentService;
+            this.model$ = this.productListComponentService
+                .model$;
+            this.viewMode$ = new rxjs.BehaviorSubject(ViewModes.Grid);
+            this.ViewModes = ViewModes;
+        }
         /**
          * @return {?}
          */
@@ -15114,38 +15289,14 @@
          */
         function () {
             var _this = this;
-            this.updateParams$ = this.activatedRoute.params.pipe(operators.tap((/**
-             * @param {?} params
-             * @return {?}
-             */
-            function (params) {
-                _this.categoryCode = params.categoryCode;
-                _this.brandCode = params.brandCode;
-                _this.query = params.query;
-                _this.update();
-            })));
+            this.productListComponentService.clearSearchResults();
             this.pageLayoutService.templateName$.pipe(operators.take(1)).subscribe((/**
              * @param {?} template
              * @return {?}
              */
             function (template) {
-                _this.gridMode$.next(template === 'ProductGridPageTemplate' ? ViewModes.Grid : ViewModes.List);
+                _this.viewMode$.next(template === 'ProductGridPageTemplate' ? ViewModes.Grid : ViewModes.List);
             }));
-            // clean previous search result
-            this.productSearchService.clearResults();
-            this.model$ = this.productSearchService.getResults().pipe(operators.tap((/**
-             * @param {?} searchResult
-             * @return {?}
-             */
-            function (searchResult) {
-                if (Object.keys(searchResult).length === 0) {
-                    _this.search(_this.query, _this.options);
-                }
-            })), operators.filter((/**
-             * @param {?} searchResult
-             * @return {?}
-             */
-            function (searchResult) { return Object.keys(searchResult).length > 0; })));
         };
         /**
          * @param {?} pageNumber
@@ -15156,8 +15307,7 @@
          * @return {?}
          */
         function (pageNumber) {
-            var queryParams = this.activatedRoute.snapshot.queryParams;
-            this.search(queryParams.query, { currentPage: pageNumber });
+            this.productListComponentService.viewPage(pageNumber);
         };
         /**
          * @param {?} sortCode
@@ -15168,52 +15318,29 @@
          * @return {?}
          */
         function (sortCode) {
-            var queryParams = this.activatedRoute.snapshot.queryParams;
-            this.search(queryParams.query, { sortCode: sortCode });
+            this.productListComponentService.sort(sortCode);
         };
         /**
          * @param {?} mode
          * @return {?}
          */
-        ProductListComponent.prototype.setGridMode = /**
+        ProductListComponent.prototype.setViewMode = /**
          * @param {?} mode
          * @return {?}
          */
         function (mode) {
-            this.gridMode$.next(mode);
-        };
-        /**
-         * @protected
-         * @param {?} query
-         * @param {?=} options
-         * @return {?}
-         */
-        ProductListComponent.prototype.search = /**
-         * @protected
-         * @param {?} query
-         * @param {?=} options
-         * @return {?}
-         */
-        function (query, options) {
-            if (this.query) {
-                if (options) {
-                    // Overide default options
-                    this.searchConfig = __assign({}, this.searchConfig, options);
-                }
-                this.productSearchService.search(query, this.searchConfig);
-            }
+            this.viewMode$.next(mode);
         };
         ProductListComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-product-list',
-                        template: "<ng-container *ngIf=\"(updateParams$ | async)\">\n  <div class=\"cx-page\" *ngIf=\"(model$ | async) as model\">\n    <section class=\"cx-page-section\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-12 col-lg-12\" *ngIf=\"(gridMode$ | async) as gridMode\">\n            <div class=\"cx-sorting top\">\n              <div class=\"row\">\n                <div class=\"col-12 col-lg-4 mr-auto\">\n                  <div class=\"form-group cx-sort-dropdown\">\n                    <cx-sorting\n                      [sortOptions]=\"model.sorts\"\n                      (sortListEvent)=\"sortList($event)\"\n                      [selectedOption]=\"model.pagination.sort\"\n                      placeholder=\"{{\n                        'productList.sortByRelevance' | cxTranslate\n                      }}\"\n                    ></cx-sorting>\n                  </div>\n                </div>\n                <div class=\"col-auto\">\n                  <div\n                    class=\"cx-pagination\"\n                    aria-label=\"product search pagination\"\n                  >\n                    <cx-pagination\n                      [pagination]=\"model.pagination\"\n                      (viewPageEvent)=\"viewPage($event)\"\n                    ></cx-pagination>\n                  </div>\n                </div>\n                <div class=\"col-auto ml-auto ml-lg-0\">\n                  <cx-product-view\n                    (modeChange)=\"setGridMode($event)\"\n                    [mode]=\"gridMode\"\n                  ></cx-product-view>\n                </div>\n              </div>\n            </div>\n            <div class=\"cx-product-container\">\n              <ng-container *ngIf=\"gridMode === 'grid'\">\n                <div class=\"row\">\n                  <cx-product-grid-item\n                    *ngFor=\"let product of model?.products\"\n                    [product]=\"product\"\n                    class=\"col-12 col-sm-6 col-md-4\"\n                  ></cx-product-grid-item>\n                </div>\n              </ng-container>\n\n              <ng-container *ngIf=\"gridMode === 'list'\">\n                <cx-product-list-item\n                  *ngFor=\"let product of model?.products\"\n                  [product]=\"product\"\n                  class=\"cx-product-search-list\"\n                ></cx-product-list-item>\n              </ng-container>\n            </div>\n            <div class=\"cx-sorting bottom\">\n              <div class=\"row\">\n                <div class=\"col-12 col-lg-4 mr-auto\">\n                  <div class=\"form-group cx-sort-dropdown\">\n                    <cx-sorting\n                      [sortOptions]=\"model.sorts\"\n                      (sortListEvent)=\"sortList($event)\"\n                      [selectedOption]=\"model.pagination.sort\"\n                      placeholder=\"{{\n                        'productList.sortByRelevance' | cxTranslate\n                      }}\"\n                    ></cx-sorting>\n                  </div>\n                </div>\n                <div class=\"col-auto\" aria-label=\"product search pagination\">\n                  <div class=\"cx-pagination\">\n                    <cx-pagination\n                      [pagination]=\"model.pagination\"\n                      (viewPageEvent)=\"viewPage($event)\"\n                    ></cx-pagination>\n                  </div>\n                </div>\n                <div class=\"col-auto ml-auto ml-lg-0\">\n                  <cx-product-view\n                    (modeChange)=\"setGridMode($event)\"\n                    [mode]=\"gridMode\"\n                  ></cx-product-view>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </section>\n  </div>\n</ng-container>\n"
+                        template: "<div class=\"cx-page\" *ngIf=\"(model$ | async) as model\">\n  <section class=\"cx-page-section\">\n    <div class=\"container\">\n      <div class=\"row\">\n        <div class=\"col-12 col-lg-12\" *ngIf=\"(viewMode$ | async) as viewMode\">\n          <div class=\"cx-sorting top\">\n            <div class=\"row\">\n              <div class=\"col-12 col-lg-4 mr-auto\">\n                <div class=\"form-group cx-sort-dropdown\">\n                  <cx-sorting\n                    [sortOptions]=\"model.sorts\"\n                    (sortListEvent)=\"sortList($event)\"\n                    [selectedOption]=\"model.pagination.sort\"\n                    placeholder=\"{{\n                      'productList.sortByRelevance' | cxTranslate\n                    }}\"\n                  ></cx-sorting>\n                </div>\n              </div>\n              <div class=\"col-auto\">\n                <div\n                  class=\"cx-pagination\"\n                  aria-label=\"product search pagination\"\n                >\n                  <cx-pagination\n                    [pagination]=\"model.pagination\"\n                    (viewPageEvent)=\"viewPage($event)\"\n                  ></cx-pagination>\n                </div>\n              </div>\n              <div class=\"col-auto ml-auto ml-lg-0\">\n                <cx-product-view\n                  (modeChange)=\"setViewMode($event)\"\n                  [mode]=\"viewMode\"\n                ></cx-product-view>\n              </div>\n            </div>\n          </div>\n          <div class=\"cx-product-container\">\n            <ng-container *ngIf=\"viewMode === ViewModes.Grid\">\n              <div class=\"row\">\n                <cx-product-grid-item\n                  *ngFor=\"let product of model?.products\"\n                  [product]=\"product\"\n                  class=\"col-12 col-sm-6 col-md-4\"\n                ></cx-product-grid-item>\n              </div>\n            </ng-container>\n\n            <ng-container *ngIf=\"viewMode === ViewModes.List\">\n              <cx-product-list-item\n                *ngFor=\"let product of model?.products\"\n                [product]=\"product\"\n                class=\"cx-product-search-list\"\n              ></cx-product-list-item>\n            </ng-container>\n          </div>\n          <div class=\"cx-sorting bottom\">\n            <div class=\"row\">\n              <div class=\"col-12 col-lg-4 mr-auto\">\n                <div class=\"form-group cx-sort-dropdown\">\n                  <cx-sorting\n                    [sortOptions]=\"model.sorts\"\n                    (sortListEvent)=\"sortList($event)\"\n                    [selectedOption]=\"model.pagination.sort\"\n                    placeholder=\"{{\n                      'productList.sortByRelevance' | cxTranslate\n                    }}\"\n                  ></cx-sorting>\n                </div>\n              </div>\n              <div class=\"col-auto\" aria-label=\"product search pagination\">\n                <div class=\"cx-pagination\">\n                  <cx-pagination\n                    [pagination]=\"model.pagination\"\n                    (viewPageEvent)=\"viewPage($event)\"\n                  ></cx-pagination>\n                </div>\n              </div>\n              <div class=\"col-auto ml-auto ml-lg-0\">\n                <cx-product-view\n                  (modeChange)=\"setViewMode($event)\"\n                  [mode]=\"viewMode\"\n                ></cx-product-view>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </section>\n</div>\n"
                     }] }
         ];
         /** @nocollapse */
         ProductListComponent.ctorParameters = function () { return [
-            { type: core$1.ProductSearchService },
-            { type: router.ActivatedRoute },
-            { type: PageLayoutService }
+            { type: PageLayoutService },
+            { type: ProductListComponentService }
         ]; };
         return ProductListComponent;
     }());
@@ -15223,33 +15350,16 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ProductFacetNavigationComponent = /** @class */ (function () {
-        function ProductFacetNavigationComponent(modalService, activatedRoute, productSearchService) {
+        function ProductFacetNavigationComponent(modalService, activatedRoute, productListComponentService) {
             this.modalService = modalService;
             this.activatedRoute = activatedRoute;
-            this.productSearchService = productSearchService;
+            this.productListComponentService = productListComponentService;
             this.iconTypes = ICON_TYPE;
             this.minPerFacet = 6;
             this.collapsedFacets = new Set();
             this.showAllPerFacetMap = new Map();
             this.queryCodec = new http.HttpUrlEncodingCodec();
         }
-        Object.defineProperty(ProductFacetNavigationComponent.prototype, "visibleFacets", {
-            get: /**
-             * @return {?}
-             */
-            function () {
-                if (!this.searchResult.facets) {
-                    return [];
-                }
-                return this.searchResult.facets.filter((/**
-                 * @param {?} facet
-                 * @return {?}
-                 */
-                function (facet) { return facet.visible; }));
-            },
-            enumerable: true,
-            configurable: true
-        });
         /**
          * @return {?}
          */
@@ -15258,21 +15368,20 @@
          */
         function () {
             var _this = this;
-            this.updateParams$ = this.activatedRoute.params.pipe(operators.tap((/**
+            this.sub = this.activatedRoute.params.subscribe((/**
              * @param {?} params
              * @return {?}
              */
             function (params) {
                 _this.activeFacetValueCode = params.categoryCode || params.brandCode;
-            })));
-            this.searchResult$ = this.productSearchService.getResults().pipe(operators.tap((/**
+            }));
+            this.searchResult$ = this.productListComponentService.model$.pipe(operators.tap((/**
              * @param {?} searchResult
              * @return {?}
              */
             function (searchResult) {
-                _this.searchResult = searchResult;
-                if (_this.searchResult.facets) {
-                    _this.searchResult.facets.forEach((/**
+                if (searchResult.facets) {
+                    searchResult.facets.forEach((/**
                      * @param {?} el
                      * @return {?}
                      */
@@ -15280,11 +15389,20 @@
                         _this.showAllPerFacetMap.set(el.name, false);
                     }));
                 }
-            })), operators.filter((/**
+            })));
+            this.visibleFacets$ = this.searchResult$.pipe(operators.map((/**
              * @param {?} searchResult
              * @return {?}
              */
-            function (searchResult) { return Object.keys(searchResult).length > 0; })));
+            function (searchResult) {
+                return searchResult.facets
+                    ? searchResult.facets.filter((/**
+                     * @param {?} facet
+                     * @return {?}
+                     */
+                    function (facet) { return facet.visible; }))
+                    : [];
+            })));
         };
         /**
          * @param {?} content
@@ -15306,7 +15424,7 @@
          * @return {?}
          */
         function (query) {
-            this.productSearchService.search(this.queryCodec.decodeValue(query));
+            this.productListComponentService.setQuery(this.queryCodec.decodeValue(query));
         };
         /**
          * @param {?} facetName
@@ -15385,10 +15503,21 @@
                 ? facet.values.length
                 : this.minPerFacet);
         };
+        /**
+         * @return {?}
+         */
+        ProductFacetNavigationComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
+            if (this.sub) {
+                this.sub.unsubscribe();
+            }
+        };
         ProductFacetNavigationComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-product-facet-navigation',
-                        template: "<div class=\"cx-search-facet\" *ngIf=\"(searchResult$ | async) as searchResult\">\n  <ng-container *ngIf=\"searchResult.breadcrumbs?.length\">\n    <h4 class=\"cx-facet-filter-header\">\n      {{ 'productList.filterBy.label' | cxTranslate }}\n    </h4>\n    <div class=\"cx-facet-filter-container\">\n      <div\n        *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n        [hidden]=\"breadcrumb.facetValueCode === activeFacetValueCode\"\n        class=\"cx-facet-filter-pill\"\n        role=\"filter\"\n      >\n        <span class=\"cx-facet-pill-value\">{{ breadcrumb.facetValueName }}</span>\n        <button\n          type=\"button\"\n          class=\"close\"\n          aria-label=\"Close\"\n          (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n        >\n          <span aria-hidden=\"true\">\n            <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n          </span>\n        </button>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-container *ngFor=\"let facet of visibleFacets; let facetId = index\">\n    <div class=\"cx-facet-group\">\n      <div class=\"cx-facet-header\">\n        <a\n          class=\"cx-facet-header-link\"\n          (click)=\"toggleFacet(facet.name)\"\n          [attr.aria-expanded]=\"!isFacetCollapsed(facet.name)\"\n          aria-controls=\"\"\n        >\n          {{ facet.name }}\n          <cx-icon\n            [type]=\"\n              isFacetCollapsed(facet.name)\n                ? iconTypes.EXPAND\n                : iconTypes.COLLAPSE\n            \"\n          ></cx-icon>\n        </a>\n      </div>\n      <ng-container *ngIf=\"!isFacetCollapsed(facet.name)\">\n        <ul class=\"cx-facet-list\">\n          <li\n            *ngFor=\"\n              let value of getVisibleFacetValues(facet);\n              index as facetValueId\n            \"\n          >\n            <div class=\"form-check\">\n              <label class=\"form-checkbox cx-facet-label\">\n                <input\n                  class=\"form-check-input cx-facet-checkbox\"\n                  role=\"checkbox\"\n                  type=\"checkbox\"\n                  aria-checked=\"true\"\n                  [checked]=\"value.selected\"\n                  (change)=\"toggleValue(value.query.query.value)\"\n                />\n                <span class=\"cx-facet-text\"\n                  >{{ value.name }} ({{ value.count }})</span\n                >\n              </label>\n            </div>\n          </li>\n          <li\n            class=\"cx-facet-toggle-btn\"\n            (click)=\"showLess(facet.name)\"\n            *ngIf=\"showAllPerFacetMap.get(facet.name)\"\n          >\n            {{ 'productList.showLess' | cxTranslate }}\n          </li>\n          <li\n            class=\"cx-facet-toggle-btn\"\n            (click)=\"showMore(facet.name)\"\n            *ngIf=\"\n              !showAllPerFacetMap.get(facet.name) &&\n              facet.values.length > minPerFacet\n            \"\n          >\n            {{ 'productList.showMore' | cxTranslate }}\n          </li>\n        </ul>\n      </ng-container>\n    </div>\n  </ng-container>\n</div>\n\n<div class=\"cx-facet-mobile\">\n  <div class=\"container\">\n    <button\n      class=\"btn btn-action btn-block cx-facet-mobile-btn\"\n      (click)=\"openFilterModal(content)\"\n    >\n      {{ 'productList.filterBy.action' | cxTranslate }}\n    </button>\n  </div>\n</div>\n\n<!-- START ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n<ng-container *ngIf=\"(updateParams$ | async) as params\">\n  <div class=\"container\">\n    <div class=\"cx-facet-mobile\" *ngIf=\"searchResult.breadcrumbs?.length\">\n      <div class=\"cx-facet-filter-container\">\n        <h4 class=\"cx-facet-filter-header\">\n          {{ 'productList.appliedFilter' | cxTranslate }}\n        </h4>\n        <div\n          class=\"cx-facet-filter-pill\"\n          role=\"filter\"\n          *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n        >\n          <span class=\"cx-facet-pill-value\">\n            {{ breadcrumb.facetValueName }}\n          </span>\n          <button\n            type=\"button\"\n            class=\"close\"\n            aria-label=\"Close\"\n            (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n          >\n            <span aria-hidden=\"true\">\n              <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n            </span>\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</ng-container>\n<!-- END ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n\n<ng-template #content let-c=\"close\" let-d=\"dismiss\">\n  <div class=\"modal-header\">\n    <h4 class=\"cx-facet-modal-title\" id=\"modal-title\">\n      {{ 'productList.filterBy.label' | cxTranslate }}\n    </h4>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"d('Cross click')\"\n    >\n      <span aria-hidden=\"true\">\n        <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n      </span>\n    </button>\n  </div>\n  <div class=\"modal-body cx-facet-modal-body\">\n    <form>\n      <div\n        class=\"form-group\"\n        *ngFor=\"let facet of searchResult.facets; index as facetId\"\n      >\n        <h4 class=\"cx-facet-modal-label\" for=\"megapixels\">{{ facet.name }}</h4>\n        <div class=\"input-group\">\n          <ul class=\"cx-facet-list\">\n            <li *ngFor=\"let value of facet.values; index as facetValueId\">\n              <div class=\"form-check\">\n                <label class=\"form-checkbox cx-facet-label\">\n                  <input\n                    class=\"form-check-input cx-facet-checkbox\"\n                    role=\"checkbox\"\n                    type=\"checkbox\"\n                    aria-checked=\"true\"\n                    [checked]=\"value.selected\"\n                    (change)=\"toggleValue(value.query.query.value)\"\n                  />\n                  <span class=\"cx-facet-text\"\n                    >{{ value.name }} ({{ value.count }})</span\n                  >\n                </label>\n              </div>\n            </li>\n          </ul>\n        </div>\n      </div>\n    </form>\n  </div>\n</ng-template>\n",
+                        template: "<ng-container *ngIf=\"(searchResult$ | async) as searchResult\">\n  <div class=\"cx-search-facet\">\n    <ng-container *ngIf=\"searchResult.breadcrumbs?.length\">\n      <h4 class=\"cx-facet-filter-header\">\n        {{ 'productList.filterBy.label' | cxTranslate }}\n      </h4>\n      <div class=\"cx-facet-filter-container\">\n        <div\n          *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n          [hidden]=\"breadcrumb.facetValueCode === activeFacetValueCode\"\n          class=\"cx-facet-filter-pill\"\n          role=\"filter\"\n        >\n          <span class=\"cx-facet-pill-value\">{{\n            breadcrumb.facetValueName\n          }}</span>\n          <button\n            type=\"button\"\n            class=\"close\"\n            aria-label=\"Close\"\n            (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n          >\n            <span aria-hidden=\"true\">\n              <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n            </span>\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-container *ngIf=\"(visibleFacets$ | async) as visibleFacets\">\n      <ng-container *ngFor=\"let facet of visibleFacets; let facetId = index\">\n        <div class=\"cx-facet-group\">\n          <div class=\"cx-facet-header\">\n            <a\n              class=\"cx-facet-header-link\"\n              (click)=\"toggleFacet(facet.name)\"\n              [attr.aria-expanded]=\"!isFacetCollapsed(facet.name)\"\n              aria-controls=\"\"\n            >\n              {{ facet.name }}\n              <cx-icon\n                [type]=\"\n                  isFacetCollapsed(facet.name)\n                    ? iconTypes.EXPAND\n                    : iconTypes.COLLAPSE\n                \"\n              ></cx-icon>\n            </a>\n          </div>\n          <ng-container *ngIf=\"!isFacetCollapsed(facet.name)\">\n            <ul class=\"cx-facet-list\">\n              <li\n                *ngFor=\"\n                  let value of getVisibleFacetValues(facet);\n                  index as facetValueId\n                \"\n              >\n                <div class=\"form-check\">\n                  <label class=\"form-checkbox cx-facet-label\">\n                    <input\n                      class=\"form-check-input cx-facet-checkbox\"\n                      role=\"checkbox\"\n                      type=\"checkbox\"\n                      aria-checked=\"true\"\n                      [checked]=\"value.selected\"\n                      (change)=\"toggleValue(value.query.query.value)\"\n                    />\n                    <span class=\"cx-facet-text\"\n                      >{{ value.name }} ({{ value.count }})</span\n                    >\n                  </label>\n                </div>\n              </li>\n              <li\n                class=\"cx-facet-toggle-btn\"\n                (click)=\"showLess(facet.name)\"\n                *ngIf=\"showAllPerFacetMap.get(facet.name)\"\n              >\n                {{ 'productList.showLess' | cxTranslate }}\n              </li>\n              <li\n                class=\"cx-facet-toggle-btn\"\n                (click)=\"showMore(facet.name)\"\n                *ngIf=\"\n                  !showAllPerFacetMap.get(facet.name) &&\n                  facet.values.length > minPerFacet\n                \"\n              >\n                {{ 'productList.showMore' | cxTranslate }}\n              </li>\n            </ul>\n          </ng-container>\n        </div>\n      </ng-container>\n    </ng-container>\n  </div>\n\n  <div class=\"cx-facet-mobile\">\n    <div class=\"container\">\n      <button\n        class=\"btn btn-action btn-block cx-facet-mobile-btn\"\n        (click)=\"openFilterModal(content)\"\n      >\n        {{ 'productList.filterBy.action' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n\n  <!-- START ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n  <div class=\"container\">\n    <div class=\"cx-facet-mobile\" *ngIf=\"searchResult.breadcrumbs?.length\">\n      <div class=\"cx-facet-filter-container\">\n        <h4 class=\"cx-facet-filter-header\">\n          {{ 'productList.appliedFilter' | cxTranslate }}\n        </h4>\n        <div\n          class=\"cx-facet-filter-pill\"\n          role=\"filter\"\n          *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n        >\n          <span class=\"cx-facet-pill-value\">\n            {{ breadcrumb.facetValueName }}\n          </span>\n          <button\n            type=\"button\"\n            class=\"close\"\n            aria-label=\"Close\"\n            (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n          >\n            <span aria-hidden=\"true\">\n              <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n            </span>\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n  <!-- END ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n\n  <ng-template #content let-c=\"close\" let-d=\"dismiss\">\n    <div class=\"modal-header\">\n      <h4 class=\"cx-facet-modal-title\" id=\"modal-title\">\n        {{ 'productList.filterBy.label' | cxTranslate }}\n      </h4>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"d('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <div class=\"modal-body cx-facet-modal-body\">\n      <form>\n        <div\n          class=\"form-group\"\n          *ngFor=\"let facet of searchResult.facets; index as facetId\"\n        >\n          <h4 class=\"cx-facet-modal-label\" for=\"megapixels\">\n            {{ facet.name }}\n          </h4>\n          <div class=\"input-group\">\n            <ul class=\"cx-facet-list\">\n              <li *ngFor=\"let value of facet.values; index as facetValueId\">\n                <div class=\"form-check\">\n                  <label class=\"form-checkbox cx-facet-label\">\n                    <input\n                      class=\"form-check-input cx-facet-checkbox\"\n                      role=\"checkbox\"\n                      type=\"checkbox\"\n                      aria-checked=\"true\"\n                      [checked]=\"value.selected\"\n                      (change)=\"toggleValue(value.query.query.value)\"\n                    />\n                    <span class=\"cx-facet-text\"\n                      >{{ value.name }} ({{ value.count }})</span\n                    >\n                  </label>\n                </div>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </form>\n    </div>\n  </ng-template>\n</ng-container>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -15396,7 +15525,7 @@
         ProductFacetNavigationComponent.ctorParameters = function () { return [
             { type: ModalService },
             { type: router.ActivatedRoute },
-            { type: core$1.ProductSearchService }
+            { type: ProductListComponentService }
         ]; };
         return ProductFacetNavigationComponent;
     }());
@@ -16780,24 +16909,25 @@
     exports.ɵc = defaultCheckoutConfig;
     exports.ɵd = CheckoutConfigService;
     exports.ɵe = HighlightPipe;
-    exports.ɵf = ProductAttributesModule;
-    exports.ɵg = ProductDetailsTabModule;
-    exports.ɵh = ProductDetailsTabComponent;
-    exports.ɵi = CmsRoutesService;
-    exports.ɵj = CmsMappingService;
-    exports.ɵk = CmsI18nService;
-    exports.ɵl = CmsGuardsService;
-    exports.ɵm = ComponentMapperService;
-    exports.ɵn = AddToHomeScreenService;
-    exports.ɵo = ProductImagesModule;
-    exports.ɵp = ProductImagesComponent;
-    exports.ɵq = suffixUrlMatcher;
-    exports.ɵr = addCmsRoute;
-    exports.ɵs = htmlLangProvider;
-    exports.ɵt = setHtmlLangAttribute;
-    exports.ɵu = RoutingModule;
-    exports.ɵv = defaultStorefrontRoutesConfig;
-    exports.ɵw = defaultRoutingConfig;
+    exports.ɵf = ProductListComponentService;
+    exports.ɵg = ProductAttributesModule;
+    exports.ɵh = ProductDetailsTabModule;
+    exports.ɵi = ProductDetailsTabComponent;
+    exports.ɵj = CmsRoutesService;
+    exports.ɵk = CmsMappingService;
+    exports.ɵl = CmsI18nService;
+    exports.ɵm = CmsGuardsService;
+    exports.ɵn = ComponentMapperService;
+    exports.ɵo = AddToHomeScreenService;
+    exports.ɵp = ProductImagesModule;
+    exports.ɵq = ProductImagesComponent;
+    exports.ɵr = suffixUrlMatcher;
+    exports.ɵs = addCmsRoute;
+    exports.ɵt = htmlLangProvider;
+    exports.ɵu = setHtmlLangAttribute;
+    exports.ɵv = RoutingModule;
+    exports.ɵw = defaultStorefrontRoutesConfig;
+    exports.ɵx = defaultRoutingConfig;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
