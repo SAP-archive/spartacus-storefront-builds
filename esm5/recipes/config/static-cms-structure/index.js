@@ -1,0 +1,7 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export { defaultCmsContentConfig } from './default-cms-content.config';
+export { headerComponents, defaultPageHeaderConfig } from './default-header.config';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJyZWNpcGVzL2NvbmZpZy9zdGF0aWMtY21zLXN0cnVjdHVyZS9pbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7O0FBQUEsd0NBQWMsOEJBQThCLENBQUM7QUFDN0MsMERBQWMseUJBQXlCLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgKiBmcm9tICcuL2RlZmF1bHQtY21zLWNvbnRlbnQuY29uZmlnJztcbmV4cG9ydCAqIGZyb20gJy4vZGVmYXVsdC1oZWFkZXIuY29uZmlnJztcbiJdfQ==

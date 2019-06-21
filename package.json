@@ -1,0 +1,51 @@
+{
+  "name": "@spartacus/storefront",
+  "version": "0.1.0-beta.1",
+  "homepage": "https://github.com/SAP/cloud-commerce-spartacus-storefront",
+  "keywords": [
+    "spartacus",
+    "storefront",
+    "angular"
+  ],
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": "https://github.com/SAP/cloud-commerce-spartacus-storefront",
+  "peerDependencies": {
+    "@angular/animations": "~8.0.0",
+    "@angular/common": "~8.0.0",
+    "@angular/compiler": "~8.0.0",
+    "@angular/core": "~8.0.0",
+    "@angular/forms": "~8.0.0",
+    "@angular/platform-browser": "~8.0.0",
+    "@angular/platform-browser-dynamic": "~8.0.0",
+    "@angular/pwa": "^0.800.2",
+    "@angular/router": "~8.0.0",
+    "@angular/service-worker": "~8.0.0",
+    "@ng-bootstrap/ng-bootstrap": "4.1.0",
+    "@ng-select/ng-select": "^2.13.2",
+    "@ngrx/effects": "~8.0.1",
+    "@ngrx/router-store": "~8.0.1",
+    "@ngrx/store": "~8.0.1",
+    "@spartacus/core": "latest",
+    "@spartacus/styles": "latest",
+    "bootstrap": "^4.2.1",
+    "core-js": "^2.5.7",
+    "rxjs": "^6.4.0",
+    "zone.js": "^0.9.1"
+  },
+  "main": "bundles/spartacus-storefront.umd.js",
+  "module": "fesm5/spartacus-storefront.js",
+  "es2015": "fesm2015/spartacus-storefront.js",
+  "esm5": "esm5/spartacus-storefront.js",
+  "esm2015": "esm2015/spartacus-storefront.js",
+  "fesm5": "fesm5/spartacus-storefront.js",
+  "fesm2015": "fesm2015/spartacus-storefront.js",
+  "typings": "spartacus-storefront.d.ts",
+  "metadata": "spartacus-storefront.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^1.9.0"
+  }
+}

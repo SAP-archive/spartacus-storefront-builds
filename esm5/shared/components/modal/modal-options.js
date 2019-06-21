@@ -1,0 +1,16 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Options available for modal instance
+ *
+ * \@todo remove ngb dependency and create our own set of props for this interface
+ * @record
+ */
+export function ModalOptions() { }
+if (false) {
+    /** @type {?|undefined} */
+    ModalOptions.prototype.temp;
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kYWwtb3B0aW9ucy5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BzcGFydGFjdXMvc3RvcmVmcm9udC8iLCJzb3VyY2VzIjpbInNoYXJlZC9jb21wb25lbnRzL21vZGFsL21vZGFsLW9wdGlvbnMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQU9BLGtDQUtDOzs7SUFEQyw0QkFBVyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IE5nYk1vZGFsT3B0aW9ucyB9IGZyb20gJ0BuZy1ib290c3RyYXAvbmctYm9vdHN0cmFwJztcblxuLyoqXG4gKiBPcHRpb25zIGF2YWlsYWJsZSBmb3IgbW9kYWwgaW5zdGFuY2VcbiAqXG4gKiBAdG9kbyByZW1vdmUgbmdiIGRlcGVuZGVuY3kgYW5kIGNyZWF0ZSBvdXIgb3duIHNldCBvZiBwcm9wcyBmb3IgdGhpcyBpbnRlcmZhY2VcbiAqL1xuZXhwb3J0IGludGVyZmFjZSBNb2RhbE9wdGlvbnMgZXh0ZW5kcyBOZ2JNb2RhbE9wdGlvbnMge1xuICAvLyBiZWxvdyBwcm9wIGlzIHRlbXBvcmFyaWx5IGhlcmUgZm9yIGV4dGVuZGluZyBwdXJwb3Nlc1xuICAvLyBub3RlOiB5b3UgY2FuJ3QgZXh0ZW5kIGludGVyZmFjZSB3aXRob3V0IG5ldyBwcm9wc1xuICAvLyBAdG9kbzogZGVsZXRlIGJlbG93IHByb3AgYWZ0ZXIgcmVtb3ZpbmcgTmdiTW9kYWxPcHRpb25zIGRlcGVuZGVuY3lcbiAgdGVtcD86IGFueTtcbn1cbiJdfQ==

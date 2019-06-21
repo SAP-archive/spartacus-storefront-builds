@@ -1,0 +1,7 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export { b2cLayoutConfig } from './b2c-layout-config';
+export { defaultCmsContentConfig, headerComponents, defaultPageHeaderConfig } from './static-cms-structure/index';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJyZWNpcGVzL2NvbmZpZy9pbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7O0FBQUEsZ0NBQWMscUJBQXFCLENBQUM7QUFDcEMsbUZBQWMsOEJBQThCLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgKiBmcm9tICcuL2IyYy1sYXlvdXQtY29uZmlnJztcbmV4cG9ydCAqIGZyb20gJy4vc3RhdGljLWNtcy1zdHJ1Y3R1cmUvaW5kZXgnO1xuIl19

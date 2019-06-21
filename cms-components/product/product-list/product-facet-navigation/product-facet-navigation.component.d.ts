@@ -1,0 +1,34 @@
+import { HttpUrlEncodingCodec } from '@angular/common/http';
+import { OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Facet, ProductSearchPage } from '@spartacus/core';
+import { Observable } from 'rxjs';
+import { ICON_TYPE } from '../../../../cms-components/misc/icon/index';
+import { ModalService } from '../../../../shared/components/modal/index';
+import { ProductListComponentService } from '../container/product-list-component.service';
+export declare class ProductFacetNavigationComponent implements OnInit, OnDestroy {
+    private modalService;
+    private activatedRoute;
+    private productListComponentService;
+    private sub;
+    iconTypes: typeof ICON_TYPE;
+    activeFacetValueCode: string;
+    searchResult: ProductSearchPage;
+    minPerFacet: number;
+    showAllPerFacetMap: Map<String, boolean>;
+    protected queryCodec: HttpUrlEncodingCodec;
+    private collapsedFacets;
+    searchResult$: Observable<ProductSearchPage>;
+    visibleFacets$: Observable<Facet[]>;
+    constructor(modalService: ModalService, activatedRoute: ActivatedRoute, productListComponentService: ProductListComponentService);
+    ngOnInit(): void;
+    openFilterModal(content: any): void;
+    toggleValue(query: string): void;
+    showLess(facetName: String): void;
+    showMore(facetName: String): void;
+    private updateShowAllPerFacetMap;
+    isFacetCollapsed(facetName: string): boolean;
+    toggleFacet(facetName: string): void;
+    getVisibleFacetValues(facet: any): any;
+    ngOnDestroy(): void;
+}
