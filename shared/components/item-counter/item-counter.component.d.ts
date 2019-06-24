@@ -1,6 +1,7 @@
-import { ElementRef, EventEmitter, OnChanges, OnInit, Renderer2 } from '@angular/core';
+import { ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { ControlValueAccessor, FormControl } from '@angular/forms';
-export declare class ItemCounterComponent implements OnInit, ControlValueAccessor, OnChanges {
+import { Subscription } from 'rxjs';
+export declare class ItemCounterComponent implements OnInit, ControlValueAccessor, OnChanges, OnDestroy {
     private renderer;
     input: ElementRef;
     incrementBtn: ElementRef;
@@ -16,6 +17,7 @@ export declare class ItemCounterComponent implements OnInit, ControlValueAccesso
     focus: boolean;
     isValueOutOfRange: boolean;
     inputValue: FormControl;
+    subscription: Subscription;
     ngOnInit(): void;
     ngOnChanges(): void;
     constructor(renderer: Renderer2);
@@ -52,4 +54,5 @@ export declare class ItemCounterComponent implements OnInit, ControlValueAccesso
      */
     setFocus(isIncremented: boolean): void;
     isMaxOrMinValueOrBeyond(): boolean;
+    ngOnDestroy(): void;
 }

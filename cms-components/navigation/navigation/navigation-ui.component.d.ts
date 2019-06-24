@@ -1,8 +1,8 @@
-import { Renderer2 } from '@angular/core';
+import { OnDestroy, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ICON_TYPE } from '../../misc/icon/index';
 import { NavigationNode } from './navigation-node.model';
-export declare class NavigationUIComponent {
+export declare class NavigationUIComponent implements OnDestroy {
     private router;
     private renderer;
     /**
@@ -26,10 +26,12 @@ export declare class NavigationUIComponent {
     flyout: boolean;
     isOpen: boolean;
     private openNodes;
+    private subscription;
     constructor(router: Router, renderer: Renderer2);
     toggleOpen(event: UIEvent): void;
     back(): void;
     clear(): void;
     private updateClasses;
     getDepth(node: NavigationNode, depth?: number): number;
+    ngOnDestroy(): void;
 }

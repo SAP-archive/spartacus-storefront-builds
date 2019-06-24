@@ -831,7 +831,7 @@
                 this.hasStock = true;
             }
             else {
-                this.currentProductService
+                this.subscription = this.currentProductService
                     .getProduct()
                     .pipe(operators.filter(Boolean))
                     .subscribe((/**
@@ -898,6 +898,17 @@
             modalInstance.cart$ = this.cartService.getActive();
             modalInstance.loaded$ = this.cartService.getLoaded();
             modalInstance.quantity = this.quantity;
+        };
+        /**
+         * @return {?}
+         */
+        AddToCartComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
+            if (this.subscription) {
+                this.subscription.unsubscribe();
+            }
         };
         AddToCartComponent.decorators = [
             { type: core.Component, args: [{
@@ -1817,7 +1828,9 @@
         function () {
             var _this = this;
             this.writeValue(this.min || 0);
-            this.inputValue.valueChanges.pipe(operators.debounceTime(300)).subscribe((/**
+            this.subscription = this.inputValue.valueChanges
+                .pipe(operators.debounceTime(300))
+                .subscribe((/**
              * @param {?} value
              * @return {?}
              */
@@ -2067,6 +2080,17 @@
          */
         function () {
             return this.value >= this.max || this.value <= this.min;
+        };
+        /**
+         * @return {?}
+         */
+        ItemCounterComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
+            if (this.subscription) {
+                this.subscription.unsubscribe();
+            }
         };
         ItemCounterComponent.decorators = [
             { type: core.Component, args: [{
@@ -4912,9 +4936,8 @@
             this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
             this.changedOption = false;
             this.supportedDeliveryModes$ = this.checkoutDeliveryService.getSupportedDeliveryModes();
-            this.selectedDeliveryMode$ = this.checkoutDeliveryService.getSelectedDeliveryMode();
-            this.checkoutDeliveryService.loadSupportedDeliveryModes();
-            this.selectedDeliveryMode$
+            this.deliveryModeSub = this.checkoutDeliveryService
+                .getSelectedDeliveryMode()
                 .pipe(operators.map((/**
              * @param {?} deliveryMode
              * @return {?}
@@ -4927,9 +4950,12 @@
              * @return {?}
              */
             function (code) {
+                if (!!code && code === _this.currentDeliveryModeId) {
+                    _this.routingService.go(_this.checkoutStepUrlNext);
+                }
+                _this.currentDeliveryModeId = code;
                 if (code) {
                     _this.mode.controls['deliveryModeId'].setValue(code);
-                    _this.currentDeliveryModeId = code;
                 }
             }));
         };
@@ -4954,21 +4980,12 @@
          * @return {?}
          */
         function () {
-            var _this = this;
             if (this.changedOption) {
                 this.checkoutDeliveryService.setDeliveryMode(this.currentDeliveryModeId);
             }
-            this.deliveryModeSub = this.checkoutDeliveryService
-                .getSelectedDeliveryMode()
-                .subscribe((/**
-             * @param {?} data
-             * @return {?}
-             */
-            function (data) {
-                if (data && data.code === _this.currentDeliveryModeId) {
-                    _this.routingService.go(_this.checkoutStepUrlNext);
-                }
-            }));
+            else {
+                this.routingService.go(this.checkoutStepUrlNext);
+            }
         };
         /**
          * @return {?}
@@ -6656,7 +6673,13 @@
             this.checkoutStepUrlPrevious = 'cart';
             this.isLoading$ = this.userAddressService.getAddressesLoading();
             this.existingAddresses$ = this.userAddressService.getAddresses();
-            this.cards$ = rxjs.combineLatest(this.existingAddresses$, this.selectedAddress$.asObservable(), this.translation.translate('checkoutAddress.defaultShippingAddress'), this.translation.translate('checkoutAddress.shipToThisAddress'), this.translation.translate('addressCard.selected')).pipe(operators.map((/**
+            this.cards$ = rxjs.combineLatest([
+                this.existingAddresses$,
+                this.selectedAddress$.asObservable(),
+                this.translation.translate('checkoutAddress.defaultShippingAddress'),
+                this.translation.translate('checkoutAddress.shipToThisAddress'),
+                this.translation.translate('addressCard.selected'),
+            ]).pipe(operators.map((/**
              * @param {?} __0
              * @return {?}
              */
@@ -8220,7 +8243,7 @@
          */
         function (section) {
             var _this = this;
-            return rxjs.combineLatest(this.page$, this.breakpointService.breakpoint$).pipe(operators.map((/**
+            return rxjs.combineLatest([this.page$, this.breakpointService.breakpoint$]).pipe(operators.map((/**
              * @param {?} __0
              * @return {?}
              */
@@ -8649,6 +8672,7 @@
             this.userService = userService;
             this.globalMessageService = globalMessageService;
             this.fb = fb;
+            this.subscription = new rxjs.Subscription();
             this.userRegistrationForm = this.fb.group({
                 titleCode: [''],
                 firstName: ['', forms.Validators.required],
@@ -8680,40 +8704,18 @@
                     _this.userService.loadTitles();
                 }
             })));
-        };
-        /**
-         * @return {?}
-         */
-        RegisterComponent.prototype.submit = /**
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            this.emailToLowerCase();
-            var _a = this.userRegistrationForm.value, firstName = _a.firstName, lastName = _a.lastName, email = _a.email, password = _a.password, titleCode = _a.titleCode;
-            /** @type {?} */
-            var userRegisterFormData = {
-                firstName: firstName,
-                lastName: lastName,
-                uid: email,
-                password: password,
-                titleCode: titleCode,
-            };
-            this.userService.register(userRegisterFormData);
-            if (!this.subscription) {
-                this.subscription = this.auth.getUserToken().subscribe((/**
-                 * @param {?} data
-                 * @return {?}
-                 */
-                function (data) {
-                    if (data && data.access_token) {
-                        _this.globalMessageService.remove(core$1.GlobalMessageType.MSG_TYPE_ERROR);
-                        _this.authRedirectService.redirect();
-                    }
-                }));
-            }
+            this.subscription.add(this.auth.getUserToken().subscribe((/**
+             * @param {?} data
+             * @return {?}
+             */
+            function (data) {
+                if (data && data.access_token) {
+                    _this.globalMessageService.remove(core$1.GlobalMessageType.MSG_TYPE_ERROR);
+                    _this.authRedirectService.redirect();
+                }
+            })));
             // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
-            this.globalMessageService
+            this.subscription.add(this.globalMessageService
                 .get()
                 .pipe(operators.filter((/**
              * @param {?} data
@@ -8733,7 +8735,26 @@
                     _this.globalMessageService.remove(core$1.GlobalMessageType.MSG_TYPE_ERROR);
                     _this.globalMessageService.add({ key: 'register.titleRequired' }, core$1.GlobalMessageType.MSG_TYPE_ERROR);
                 }
-            }));
+            })));
+        };
+        /**
+         * @return {?}
+         */
+        RegisterComponent.prototype.submit = /**
+         * @return {?}
+         */
+        function () {
+            this.emailToLowerCase();
+            var _a = this.userRegistrationForm.value, firstName = _a.firstName, lastName = _a.lastName, email = _a.email, password = _a.password, titleCode = _a.titleCode;
+            /** @type {?} */
+            var userRegisterFormData = {
+                firstName: firstName,
+                lastName: lastName,
+                uid: email,
+                password: password,
+                titleCode: titleCode,
+            };
+            this.userService.register(userRegisterFormData);
         };
         /**
          * @private
@@ -8778,9 +8799,7 @@
          * @return {?}
          */
         function () {
-            if (this.subscription) {
-                this.subscription.unsubscribe();
-            }
+            this.subscription.unsubscribe();
         };
         RegisterComponent.decorators = [
             { type: core.Component, args: [{
@@ -10912,7 +10931,11 @@
          * @return {?}
          */
         function () {
-            this.loading$ = rxjs.combineLatest(this.userConsentService.getConsentsResultLoading(), this.userConsentService.getGiveConsentResultLoading(), this.userConsentService.getWithdrawConsentResultLoading()).pipe(operators.map((/**
+            this.loading$ = rxjs.combineLatest([
+                this.userConsentService.getConsentsResultLoading(),
+                this.userConsentService.getGiveConsentResultLoading(),
+                this.userConsentService.getWithdrawConsentResultLoading(),
+            ]).pipe(operators.map((/**
              * @param {?} __0
              * @return {?}
              */
@@ -11890,17 +11913,6 @@
         function (paymentMethod) {
             this.userPaymentService.setPaymentMethodAsDefault(paymentMethod.id);
         };
-        /**
-         * @return {?}
-         */
-        PaymentMethodsComponent.prototype.ngOnDestroy = /**
-         * @return {?}
-         */
-        function () {
-            if (this.userServiceSub) {
-                this.userServiceSub.unsubscribe();
-            }
-        };
         PaymentMethodsComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-payment-methods',
@@ -12255,9 +12267,7 @@
          * @return {?}
          */
         function () {
-            if (this.subscription) {
-                this.subscription.unsubscribe();
-            }
+            this.subscription.unsubscribe();
             this.userService.resetUpdateEmailResultState();
         };
         UpdateEmailComponent.decorators = [
@@ -12493,9 +12503,7 @@
          * @return {?}
          */
         function () {
-            if (this.subscription) {
-                this.subscription.unsubscribe();
-            }
+            this.subscription.unsubscribe();
             this.userService.resetUpdatePasswordProcessState();
         };
         UpdatePasswordComponent.decorators = [
@@ -12713,9 +12721,7 @@
          * @return {?}
          */
         function () {
-            if (this.subscription) {
-                this.subscription.unsubscribe();
-            }
+            this.subscription.unsubscribe();
             // clean up the state
             this.userService.resetUpdatePersonalDetailsProcessingState();
         };
@@ -13198,7 +13204,7 @@
             this.flyout = true;
             this.isOpen = false;
             this.openNodes = [];
-            this.router.events
+            this.subscription = this.router.events
                 .pipe(operators.filter((/**
              * @param {?} event
              * @return {?}
@@ -13303,6 +13309,17 @@
             }
             else {
                 return depth;
+            }
+        };
+        /**
+         * @return {?}
+         */
+        NavigationUIComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
+            if (this.subscription) {
+                this.subscription.unsubscribe();
             }
         };
         NavigationUIComponent.decorators = [
@@ -13556,7 +13573,11 @@
          */
         function (config) {
             var _this = this;
-            return rxjs.combineLatest(this.getProductResults(config), this.getProductSuggestions(config), this.getSearchMessage(config)).pipe(operators.map((/**
+            return rxjs.combineLatest([
+                this.getProductResults(config),
+                this.getProductSuggestions(config),
+                this.getSearchMessage(config),
+            ]).pipe(operators.map((/**
              * @param {?} __0
              * @return {?}
              */
@@ -16716,6 +16737,7 @@
                                     strictStateImmutability: true,
                                     strictStateSerializability: true,
                                     strictActionImmutability: true,
+                                    strictActionSerializability: true,
                                 },
                             }),
                             effects.EffectsModule.forRoot([]),

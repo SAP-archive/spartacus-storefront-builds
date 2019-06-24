@@ -6,7 +6,7 @@ import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
-import { iif, fromEvent, of, combineLatest, BehaviorSubject, concat, isObservable, from, Subscription } from 'rxjs';
+import { iif, fromEvent, of, combineLatest, BehaviorSubject, Subscription, concat, isObservable, from } from 'rxjs';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
 import { ServiceWorkerModule, SwRegistrationOptions } from '@angular/service-worker';
@@ -730,7 +730,7 @@ var AddToCartComponent = /** @class */ (function () {
             this.hasStock = true;
         }
         else {
-            this.currentProductService
+            this.subscription = this.currentProductService
                 .getProduct()
                 .pipe(filter(Boolean))
                 .subscribe((/**
@@ -797,6 +797,17 @@ var AddToCartComponent = /** @class */ (function () {
         modalInstance.cart$ = this.cartService.getActive();
         modalInstance.loaded$ = this.cartService.getLoaded();
         modalInstance.quantity = this.quantity;
+    };
+    /**
+     * @return {?}
+     */
+    AddToCartComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     };
     AddToCartComponent.decorators = [
         { type: Component, args: [{
@@ -1716,7 +1727,9 @@ var ItemCounterComponent = /** @class */ (function () {
     function () {
         var _this = this;
         this.writeValue(this.min || 0);
-        this.inputValue.valueChanges.pipe(debounceTime(300)).subscribe((/**
+        this.subscription = this.inputValue.valueChanges
+            .pipe(debounceTime(300))
+            .subscribe((/**
          * @param {?} value
          * @return {?}
          */
@@ -1966,6 +1979,17 @@ var ItemCounterComponent = /** @class */ (function () {
      */
     function () {
         return this.value >= this.max || this.value <= this.min;
+    };
+    /**
+     * @return {?}
+     */
+    ItemCounterComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     };
     ItemCounterComponent.decorators = [
         { type: Component, args: [{
@@ -4811,9 +4835,8 @@ var DeliveryModeComponent = /** @class */ (function () {
         this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
         this.changedOption = false;
         this.supportedDeliveryModes$ = this.checkoutDeliveryService.getSupportedDeliveryModes();
-        this.selectedDeliveryMode$ = this.checkoutDeliveryService.getSelectedDeliveryMode();
-        this.checkoutDeliveryService.loadSupportedDeliveryModes();
-        this.selectedDeliveryMode$
+        this.deliveryModeSub = this.checkoutDeliveryService
+            .getSelectedDeliveryMode()
             .pipe(map((/**
          * @param {?} deliveryMode
          * @return {?}
@@ -4826,9 +4849,12 @@ var DeliveryModeComponent = /** @class */ (function () {
          * @return {?}
          */
         function (code) {
+            if (!!code && code === _this.currentDeliveryModeId) {
+                _this.routingService.go(_this.checkoutStepUrlNext);
+            }
+            _this.currentDeliveryModeId = code;
             if (code) {
                 _this.mode.controls['deliveryModeId'].setValue(code);
-                _this.currentDeliveryModeId = code;
             }
         }));
     };
@@ -4853,21 +4879,12 @@ var DeliveryModeComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        var _this = this;
         if (this.changedOption) {
             this.checkoutDeliveryService.setDeliveryMode(this.currentDeliveryModeId);
         }
-        this.deliveryModeSub = this.checkoutDeliveryService
-            .getSelectedDeliveryMode()
-            .subscribe((/**
-         * @param {?} data
-         * @return {?}
-         */
-        function (data) {
-            if (data && data.code === _this.currentDeliveryModeId) {
-                _this.routingService.go(_this.checkoutStepUrlNext);
-            }
-        }));
+        else {
+            this.routingService.go(this.checkoutStepUrlNext);
+        }
     };
     /**
      * @return {?}
@@ -6555,7 +6572,13 @@ var ShippingAddressComponent = /** @class */ (function () {
         this.checkoutStepUrlPrevious = 'cart';
         this.isLoading$ = this.userAddressService.getAddressesLoading();
         this.existingAddresses$ = this.userAddressService.getAddresses();
-        this.cards$ = combineLatest(this.existingAddresses$, this.selectedAddress$.asObservable(), this.translation.translate('checkoutAddress.defaultShippingAddress'), this.translation.translate('checkoutAddress.shipToThisAddress'), this.translation.translate('addressCard.selected')).pipe(map((/**
+        this.cards$ = combineLatest([
+            this.existingAddresses$,
+            this.selectedAddress$.asObservable(),
+            this.translation.translate('checkoutAddress.defaultShippingAddress'),
+            this.translation.translate('checkoutAddress.shipToThisAddress'),
+            this.translation.translate('addressCard.selected'),
+        ]).pipe(map((/**
          * @param {?} __0
          * @return {?}
          */
@@ -8119,7 +8142,7 @@ var PageLayoutService = /** @class */ (function () {
      */
     function (section) {
         var _this = this;
-        return combineLatest(this.page$, this.breakpointService.breakpoint$).pipe(map((/**
+        return combineLatest([this.page$, this.breakpointService.breakpoint$]).pipe(map((/**
          * @param {?} __0
          * @return {?}
          */
@@ -8548,6 +8571,7 @@ var RegisterComponent = /** @class */ (function () {
         this.userService = userService;
         this.globalMessageService = globalMessageService;
         this.fb = fb;
+        this.subscription = new Subscription();
         this.userRegistrationForm = this.fb.group({
             titleCode: [''],
             firstName: ['', Validators.required],
@@ -8579,40 +8603,18 @@ var RegisterComponent = /** @class */ (function () {
                 _this.userService.loadTitles();
             }
         })));
-    };
-    /**
-     * @return {?}
-     */
-    RegisterComponent.prototype.submit = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this.emailToLowerCase();
-        var _a = this.userRegistrationForm.value, firstName = _a.firstName, lastName = _a.lastName, email = _a.email, password = _a.password, titleCode = _a.titleCode;
-        /** @type {?} */
-        var userRegisterFormData = {
-            firstName: firstName,
-            lastName: lastName,
-            uid: email,
-            password: password,
-            titleCode: titleCode,
-        };
-        this.userService.register(userRegisterFormData);
-        if (!this.subscription) {
-            this.subscription = this.auth.getUserToken().subscribe((/**
-             * @param {?} data
-             * @return {?}
-             */
-            function (data) {
-                if (data && data.access_token) {
-                    _this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
-                    _this.authRedirectService.redirect();
-                }
-            }));
-        }
+        this.subscription.add(this.auth.getUserToken().subscribe((/**
+         * @param {?} data
+         * @return {?}
+         */
+        function (data) {
+            if (data && data.access_token) {
+                _this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
+                _this.authRedirectService.redirect();
+            }
+        })));
         // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
-        this.globalMessageService
+        this.subscription.add(this.globalMessageService
             .get()
             .pipe(filter((/**
          * @param {?} data
@@ -8632,7 +8634,26 @@ var RegisterComponent = /** @class */ (function () {
                 _this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
                 _this.globalMessageService.add({ key: 'register.titleRequired' }, GlobalMessageType.MSG_TYPE_ERROR);
             }
-        }));
+        })));
+    };
+    /**
+     * @return {?}
+     */
+    RegisterComponent.prototype.submit = /**
+     * @return {?}
+     */
+    function () {
+        this.emailToLowerCase();
+        var _a = this.userRegistrationForm.value, firstName = _a.firstName, lastName = _a.lastName, email = _a.email, password = _a.password, titleCode = _a.titleCode;
+        /** @type {?} */
+        var userRegisterFormData = {
+            firstName: firstName,
+            lastName: lastName,
+            uid: email,
+            password: password,
+            titleCode: titleCode,
+        };
+        this.userService.register(userRegisterFormData);
     };
     /**
      * @private
@@ -8677,9 +8698,7 @@ var RegisterComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
+        this.subscription.unsubscribe();
     };
     RegisterComponent.decorators = [
         { type: Component, args: [{
@@ -10811,7 +10830,11 @@ var ConsentManagementComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.loading$ = combineLatest(this.userConsentService.getConsentsResultLoading(), this.userConsentService.getGiveConsentResultLoading(), this.userConsentService.getWithdrawConsentResultLoading()).pipe(map((/**
+        this.loading$ = combineLatest([
+            this.userConsentService.getConsentsResultLoading(),
+            this.userConsentService.getGiveConsentResultLoading(),
+            this.userConsentService.getWithdrawConsentResultLoading(),
+        ]).pipe(map((/**
          * @param {?} __0
          * @return {?}
          */
@@ -11789,17 +11812,6 @@ var PaymentMethodsComponent = /** @class */ (function () {
     function (paymentMethod) {
         this.userPaymentService.setPaymentMethodAsDefault(paymentMethod.id);
     };
-    /**
-     * @return {?}
-     */
-    PaymentMethodsComponent.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
-        if (this.userServiceSub) {
-            this.userServiceSub.unsubscribe();
-        }
-    };
     PaymentMethodsComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-payment-methods',
@@ -12154,9 +12166,7 @@ var UpdateEmailComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
+        this.subscription.unsubscribe();
         this.userService.resetUpdateEmailResultState();
     };
     UpdateEmailComponent.decorators = [
@@ -12392,9 +12402,7 @@ var UpdatePasswordComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
+        this.subscription.unsubscribe();
         this.userService.resetUpdatePasswordProcessState();
     };
     UpdatePasswordComponent.decorators = [
@@ -12612,9 +12620,7 @@ var UpdateProfileComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
+        this.subscription.unsubscribe();
         // clean up the state
         this.userService.resetUpdatePersonalDetailsProcessingState();
     };
@@ -13097,7 +13103,7 @@ var NavigationUIComponent = /** @class */ (function () {
         this.flyout = true;
         this.isOpen = false;
         this.openNodes = [];
-        this.router.events
+        this.subscription = this.router.events
             .pipe(filter((/**
          * @param {?} event
          * @return {?}
@@ -13202,6 +13208,17 @@ var NavigationUIComponent = /** @class */ (function () {
         }
         else {
             return depth;
+        }
+    };
+    /**
+     * @return {?}
+     */
+    NavigationUIComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
         }
     };
     NavigationUIComponent.decorators = [
@@ -13455,7 +13472,11 @@ var SearchBoxComponentService = /** @class */ (function () {
      */
     function (config) {
         var _this = this;
-        return combineLatest(this.getProductResults(config), this.getProductSuggestions(config), this.getSearchMessage(config)).pipe(map((/**
+        return combineLatest([
+            this.getProductResults(config),
+            this.getProductSuggestions(config),
+            this.getSearchMessage(config),
+        ]).pipe(map((/**
          * @param {?} __0
          * @return {?}
          */
@@ -16615,6 +16636,7 @@ var StorefrontModule = /** @class */ (function () {
                                 strictStateImmutability: true,
                                 strictStateSerializability: true,
                                 strictActionImmutability: true,
+                                strictActionSerializability: true,
                             },
                         }),
                         EffectsModule.forRoot([]),
