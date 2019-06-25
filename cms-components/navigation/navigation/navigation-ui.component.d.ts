@@ -1,10 +1,11 @@
-import { OnDestroy, Renderer2 } from '@angular/core';
+import { ElementRef, OnDestroy, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ICON_TYPE } from '../../misc/icon/index';
 import { NavigationNode } from './navigation-node.model';
 export declare class NavigationUIComponent implements OnDestroy {
     private router;
     private renderer;
+    private elemRef;
     /**
      * The navigation node to render.
      */
@@ -26,12 +27,17 @@ export declare class NavigationUIComponent implements OnDestroy {
     flyout: boolean;
     isOpen: boolean;
     private openNodes;
-    private subscription;
-    constructor(router: Router, renderer: Renderer2);
+    private subscriptions;
+    private resize;
+    onResize(): void;
+    constructor(router: Router, renderer: Renderer2, elemRef: ElementRef);
     toggleOpen(event: UIEvent): void;
     back(): void;
     clear(): void;
-    private updateClasses;
+    onMouseEnter(event: UIEvent): void;
     getDepth(node: NavigationNode, depth?: number): number;
     ngOnDestroy(): void;
+    private alignWrapperToRightIfStickOut;
+    private alignWrappersToRightIfStickOut;
+    private updateClasses;
 }

@@ -13203,10 +13203,11 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var NavigationUIComponent = /** @class */ (function () {
-        function NavigationUIComponent(router$1, renderer) {
+        function NavigationUIComponent(router$1, renderer, elemRef) {
             var _this = this;
             this.router = router$1;
             this.renderer = renderer;
+            this.elemRef = elemRef;
             /**
              * the icon type that will be used for navigation nodes
              * with children.
@@ -13220,7 +13221,9 @@
             this.flyout = true;
             this.isOpen = false;
             this.openNodes = [];
-            this.subscription = this.router.events
+            this.subscriptions = new rxjs.Subscription();
+            this.resize = new core.EventEmitter();
+            this.subscriptions.add(this.router.events
                 .pipe(operators.filter((/**
              * @param {?} event
              * @return {?}
@@ -13229,8 +13232,23 @@
                 .subscribe((/**
              * @return {?}
              */
-            function () { return _this.clear(); }));
+            function () { return _this.clear(); })));
+            this.subscriptions.add(this.resize.pipe(operators.debounceTime(50)).subscribe((/**
+             * @return {?}
+             */
+            function () {
+                _this.alignWrappersToRightIfStickOut();
+            })));
         }
+        /**
+         * @return {?}
+         */
+        NavigationUIComponent.prototype.onResize = /**
+         * @return {?}
+         */
+        function () {
+            this.resize.next();
+        };
         /**
          * @param {?} event
          * @return {?}
@@ -13240,16 +13258,18 @@
          * @return {?}
          */
         function (event) {
-            if (this.openNodes.includes((/** @type {?} */ (event.currentTarget)))) {
+            /** @type {?} */
+            var node = (/** @type {?} */ (event.currentTarget));
+            if (this.openNodes.includes(node)) {
                 this.openNodes = this.openNodes.filter((/**
                  * @param {?} n
                  * @return {?}
                  */
-                function (n) { return n !== event.currentTarget; }));
-                this.renderer.removeClass((/** @type {?} */ (event.currentTarget)), 'is-open');
+                function (n) { return n !== node; }));
+                this.renderer.removeClass(node, 'is-open');
             }
             else {
-                this.openNodes.push((/** @type {?} */ (event.currentTarget)));
+                this.openNodes.push(node);
             }
             this.updateClasses();
             event.stopImmediatePropagation();
@@ -13277,31 +13297,15 @@
             this.updateClasses();
         };
         /**
-         * @private
+         * @param {?} event
          * @return {?}
          */
-        NavigationUIComponent.prototype.updateClasses = /**
-         * @private
+        NavigationUIComponent.prototype.onMouseEnter = /**
+         * @param {?} event
          * @return {?}
          */
-        function () {
-            var _this = this;
-            this.openNodes.forEach((/**
-             * @param {?} node
-             * @param {?} i
-             * @return {?}
-             */
-            function (node, i) {
-                if (i + 1 < _this.openNodes.length) {
-                    _this.renderer.addClass(node, 'is-opened');
-                    _this.renderer.removeClass(node, 'is-open');
-                }
-                else {
-                    _this.renderer.removeClass(node, 'is-opened');
-                    _this.renderer.addClass(node, 'is-open');
-                }
-            }));
-            this.isOpen = this.openNodes.length > 0;
+        function (event) {
+            this.alignWrapperToRightIfStickOut((/** @type {?} */ (event.currentTarget)));
         };
         /**
          * @param {?} node
@@ -13334,27 +13338,103 @@
          * @return {?}
          */
         function () {
-            if (this.subscription) {
-                this.subscription.unsubscribe();
+            if (this.subscriptions) {
+                this.subscriptions.unsubscribe();
             }
+        };
+        /**
+         * @private
+         * @param {?} node
+         * @return {?}
+         */
+        NavigationUIComponent.prototype.alignWrapperToRightIfStickOut = /**
+         * @private
+         * @param {?} node
+         * @return {?}
+         */
+        function (node) {
+            /** @type {?} */
+            var wrapper = (/** @type {?} */ (node.querySelector('.wrapper')));
+            /** @type {?} */
+            var navBar = (/** @type {?} */ (this.elemRef.nativeElement));
+            if (wrapper) {
+                this.renderer.removeStyle(wrapper, 'margin-left');
+                if (wrapper.offsetLeft + wrapper.offsetWidth >
+                    navBar.offsetLeft + navBar.offsetWidth) {
+                    this.renderer.setStyle(wrapper, 'margin-left', node.offsetWidth - wrapper.offsetWidth + "px");
+                }
+            }
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        NavigationUIComponent.prototype.alignWrappersToRightIfStickOut = /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            /** @type {?} */
+            var navs = (/** @type {?} */ (this.elemRef.nativeElement.childNodes));
+            Array.from(navs)
+                .filter((/**
+             * @param {?} node
+             * @return {?}
+             */
+            function (node) { return node.tagName === 'NAV'; }))
+                .forEach((/**
+             * @param {?} nav
+             * @return {?}
+             */
+            function (nav) { return _this.alignWrapperToRightIfStickOut((/** @type {?} */ (nav))); }));
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        NavigationUIComponent.prototype.updateClasses = /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this.openNodes.forEach((/**
+             * @param {?} node
+             * @param {?} i
+             * @return {?}
+             */
+            function (node, i) {
+                if (i + 1 < _this.openNodes.length) {
+                    _this.renderer.addClass(node, 'is-opened');
+                    _this.renderer.removeClass(node, 'is-open');
+                }
+                else {
+                    _this.renderer.removeClass(node, 'is-opened');
+                    _this.renderer.addClass(node, 'is-open');
+                }
+            }));
+            this.isOpen = this.openNodes.length > 0;
         };
         NavigationUIComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-navigation-ui',
-                        template: "<div\n  *ngIf=\"flyout && node?.children.length > 1\"\n  class=\"back is-open\"\n  (click)=\"back()\"\n>\n  <h5>\n    <cx-icon [type]=\"iconType.CARET_LEFT\"></cx-icon>\n    {{ 'common.back' | cxTranslate }}\n  </h5>\n</div>\n\n<ng-container *ngFor=\"let child of node?.children\">\n  <ng-container *ngTemplateOutlet=\"nav; context: { node: child }\">\n  </ng-container>\n</ng-container>\n\n<!-- we generate links in a recursive manner -->\n<ng-template #nav let-node=\"node\">\n  <nav tabindex=\"0\" (click)=\"toggleOpen($event)\">\n    <cx-generic-link\n      *ngIf=\"\n        node.url && (!node.children || node.children?.length === 0);\n        else heading\n      \"\n      [url]=\"node.url\"\n    >\n      {{ node.title }}\n      <cx-icon\n        *ngIf=\"flyout && node.children?.length > 0\"\n        [type]=\"iconType.CARET_DOWN\"\n      ></cx-icon>\n    </cx-generic-link>\n\n    <ng-template #heading>\n      <h5 [attr.aria-label]=\"node.title\">\n        {{ node.title }}\n        <cx-icon\n          *ngIf=\"flyout && node.children?.length > 0\"\n          [type]=\"iconType.CARET_DOWN\"\n        ></cx-icon>\n      </h5>\n    </ng-template>\n\n    <!-- we add a wrapper to allow for better layout handling in CSS -->\n    <div class=\"wrapper\" *ngIf=\"node.children?.length > 0\">\n      <cx-generic-link *ngIf=\"node.url\" [url]=\"node.url\" class=\"all\">\n        {{ 'navigation.shopAll' | cxTranslate: { navNode: node.title } }}\n      </cx-generic-link>\n\n      <div\n        class=\"childs\"\n        [attr.depth]=\"getDepth(node)\"\n        [attr.wrap-after]=\"node.children?.length > wrapAfter ? wrapAfter : null\"\n      >\n        <ng-container *ngFor=\"let child of node.children\">\n          <ng-container *ngTemplateOutlet=\"nav; context: { node: child }\">\n          </ng-container>\n        </ng-container>\n      </div>\n    </div>\n  </nav>\n</ng-template>\n",
+                        template: "<div\n  *ngIf=\"flyout && node?.children.length > 1\"\n  class=\"back is-open\"\n  (click)=\"back()\"\n>\n  <h5>\n    <cx-icon [type]=\"iconType.CARET_LEFT\"></cx-icon>\n    {{ 'common.back' | cxTranslate }}\n  </h5>\n</div>\n\n<ng-container *ngFor=\"let child of node?.children\">\n  <ng-container *ngTemplateOutlet=\"nav; context: { node: child }\">\n  </ng-container>\n</ng-container>\n\n<!-- we generate links in a recursive manner -->\n<ng-template #nav let-node=\"node\">\n  <nav\n    tabindex=\"0\"\n    (click)=\"toggleOpen($event)\"\n    (mouseenter)=\"onMouseEnter($event)\"\n  >\n    <cx-generic-link\n      *ngIf=\"\n        node.url && (!node.children || node.children?.length === 0);\n        else heading\n      \"\n      [url]=\"node.url\"\n    >\n      {{ node.title }}\n      <cx-icon\n        *ngIf=\"flyout && node.children?.length > 0\"\n        [type]=\"iconType.CARET_DOWN\"\n      ></cx-icon>\n    </cx-generic-link>\n\n    <ng-template #heading>\n      <h5 [attr.aria-label]=\"node.title\">\n        {{ node.title }}\n        <cx-icon\n          *ngIf=\"flyout && node.children?.length > 0\"\n          [type]=\"iconType.CARET_DOWN\"\n        ></cx-icon>\n      </h5>\n    </ng-template>\n\n    <!-- we add a wrapper to allow for better layout handling in CSS -->\n    <div class=\"wrapper\" *ngIf=\"node.children?.length > 0\">\n      <cx-generic-link *ngIf=\"node.url\" [url]=\"node.url\" class=\"all\">\n        {{ 'navigation.shopAll' | cxTranslate: { navNode: node.title } }}\n      </cx-generic-link>\n      <div\n        class=\"childs\"\n        [attr.depth]=\"getDepth(node)\"\n        [attr.wrap-after]=\"node.children?.length > wrapAfter ? wrapAfter : null\"\n      >\n        <ng-container *ngFor=\"let child of node.children\">\n          <ng-container *ngTemplateOutlet=\"nav; context: { node: child }\">\n          </ng-container>\n        </ng-container>\n      </div>\n    </div>\n  </nav>\n</ng-template>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
         /** @nocollapse */
         NavigationUIComponent.ctorParameters = function () { return [
             { type: router.Router },
-            { type: core.Renderer2 }
+            { type: core.Renderer2 },
+            { type: core.ElementRef }
         ]; };
         NavigationUIComponent.propDecorators = {
             node: [{ type: core.Input }],
             wrapAfter: [{ type: core.Input }],
             flyout: [{ type: core.Input }, { type: core.HostBinding, args: ['class.flyout',] }],
-            isOpen: [{ type: core.Input }, { type: core.HostBinding, args: ['class.is-open',] }]
+            isOpen: [{ type: core.Input }, { type: core.HostBinding, args: ['class.is-open',] }],
+            onResize: [{ type: core.HostListener, args: ['window:resize',] }]
         };
         return NavigationUIComponent;
     }());
