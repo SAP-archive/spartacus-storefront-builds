@@ -2857,7 +2857,7 @@
         LanguageCurrencyComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-language-currency-selector',
-                        template: "\n    <cx-site-context-selector context=\"LANGUAGE\"></cx-site-context-selector>\n    <cx-site-context-selector context=\"CURRENCY\"></cx-site-context-selector>\n  ",
+                        template: "\n    <cx-site-context-selector context=\"language\"></cx-site-context-selector>\n    <cx-site-context-selector context=\"currency\"></cx-site-context-selector>\n  ",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -3028,7 +3028,20 @@
                  * @param {?} data
                  * @return {?}
                  */
-                function (data) { return data.context; })));
+                function (data) { return data.context; })), operators.map((/**
+                 * @param {?} ctx
+                 * @return {?}
+                 */
+                function (ctx) {
+                    switch (ctx) {
+                        case 'LANGUAGE':
+                            return core$1.LANGUAGE_CONTEXT_ID;
+                        case 'CURRENCY':
+                            return core$1.CURRENCY_CONTEXT_ID;
+                        default:
+                            return ctx;
+                    }
+                })));
             }
         };
         /**
