@@ -1,5 +1,4 @@
-import { ServerConfig } from '@spartacus/core';
-export declare abstract class PWAModuleConfig extends ServerConfig {
+export declare abstract class PWAModuleConfig {
     pwa?: {
         enabled?: boolean;
         addToHomeScreen?: boolean;

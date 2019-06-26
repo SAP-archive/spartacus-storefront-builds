@@ -1,5 +1,5 @@
-import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, EventEmitter, Output, forwardRef, Renderer2, HostListener, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, INJECTOR, APP_INITIALIZER, Pipe } from '@angular/core';
-import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, ServerConfig, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, GlobalMessageModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, CheckoutModule, AuthService, AuthRedirectService, UserModule, NotAuthGuard, CmsConfig, CxApiService, CmsService, DynamicAttributeService, PageType, SemanticPathService, TranslationChunkService, PageRobotsMeta, PageMetaService, LanguageService, UserConsentService, UserOrderService, CmsPageTitleModule, SearchboxService, ProductModule, ProductReferenceService, ProductSearchService, CmsModule, ProductReviewService, RoutingModule as RoutingModule$1, StateModule, AuthModule, provideConfigFromMetaTags, provideConfig, SmartEditModule, PersonalizationModule, OccModule } from '@spartacus/core';
+import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, EventEmitter, Output, forwardRef, Renderer2, HostListener, Optional, Injector, InjectionToken, isDevMode, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, INJECTOR, APP_INITIALIZER, Pipe } from '@angular/core';
+import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, GlobalMessageModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, CheckoutModule, AuthService, AuthRedirectService, UserModule, NotAuthGuard, CmsConfig, CxApiService, CmsService, DynamicAttributeService, PageType, SemanticPathService, TranslationChunkService, PageRobotsMeta, PageMetaService, LanguageService, UserConsentService, UserOrderService, CmsPageTitleModule, SearchboxService, ProductModule, ProductReferenceService, ProductSearchService, CmsModule, ProductReviewService, RoutingModule as RoutingModule$1, StateModule, AuthModule, provideConfigFromMetaTags, provideConfig, SmartEditModule, PersonalizationModule, OccModule } from '@spartacus/core';
 import { map, filter, switchMap, tap, startWith, debounceTime, distinctUntilChanged, take, shareReplay, skipWhile, first, endWith, withLatestFrom } from 'rxjs/operators';
 import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -992,7 +992,7 @@ const BREAKPOINT = {
  * por a given breakpoint.
  * @abstract
  */
-class LayoutConfig extends ServerConfig {
+class LayoutConfig {
 }
 
 /**
@@ -3926,14 +3926,12 @@ class ShippingAddressSetGuard {
      * @param {?} checkoutConfigService
      * @param {?} routingConfigService
      * @param {?} router
-     * @param {?} serverConfig
      */
-    constructor(checkoutDetailsService, checkoutConfigService, routingConfigService, router, serverConfig) {
+    constructor(checkoutDetailsService, checkoutConfigService, routingConfigService, router) {
         this.checkoutDetailsService = checkoutDetailsService;
         this.checkoutConfigService = checkoutConfigService;
         this.routingConfigService = routingConfigService;
         this.router = router;
-        this.serverConfig = serverConfig;
     }
     /**
      * @return {?}
@@ -3941,7 +3939,7 @@ class ShippingAddressSetGuard {
     canActivate() {
         /** @type {?} */
         const checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.SHIPPING_ADDRESS);
-        if (!checkoutStep && !this.serverConfig.production) {
+        if (!checkoutStep && isDevMode()) {
             console.warn(`Missing step with type ${CheckoutStepType.SHIPPING_ADDRESS} in checkout configuration.`);
         }
         return this.checkoutDetailsService
@@ -3966,10 +3964,9 @@ ShippingAddressSetGuard.ctorParameters = () => [
     { type: CheckoutDetailsService },
     { type: CheckoutConfigService },
     { type: RoutingConfigService },
-    { type: Router },
-    { type: ServerConfig }
+    { type: Router }
 ];
-/** @nocollapse */ ShippingAddressSetGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function ShippingAddressSetGuard_Factory() { return new ShippingAddressSetGuard(ɵɵinject(CheckoutDetailsService), ɵɵinject(CheckoutConfigService), ɵɵinject(RoutingConfigService), ɵɵinject(Router), ɵɵinject(ServerConfig)); }, token: ShippingAddressSetGuard, providedIn: "root" });
+/** @nocollapse */ ShippingAddressSetGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function ShippingAddressSetGuard_Factory() { return new ShippingAddressSetGuard(ɵɵinject(CheckoutDetailsService), ɵɵinject(CheckoutConfigService), ɵɵinject(RoutingConfigService), ɵɵinject(Router)); }, token: ShippingAddressSetGuard, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
@@ -4118,14 +4115,12 @@ class DeliveryModeSetGuard {
      * @param {?} checkoutConfigService
      * @param {?} routingConfigService
      * @param {?} router
-     * @param {?} serverConfig
      */
-    constructor(checkoutDetailsService, checkoutConfigService, routingConfigService, router, serverConfig) {
+    constructor(checkoutDetailsService, checkoutConfigService, routingConfigService, router) {
         this.checkoutDetailsService = checkoutDetailsService;
         this.checkoutConfigService = checkoutConfigService;
         this.routingConfigService = routingConfigService;
         this.router = router;
-        this.serverConfig = serverConfig;
     }
     /**
      * @return {?}
@@ -4133,7 +4128,7 @@ class DeliveryModeSetGuard {
     canActivate() {
         /** @type {?} */
         const checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.DELIVERY_MODE);
-        if (!checkoutStep && !this.serverConfig.production) {
+        if (!checkoutStep && isDevMode()) {
             console.warn(`Missing step with type ${CheckoutStepType.DELIVERY_MODE} in checkout configuration.`);
         }
         return this.checkoutDetailsService
@@ -4158,10 +4153,9 @@ DeliveryModeSetGuard.ctorParameters = () => [
     { type: CheckoutDetailsService },
     { type: CheckoutConfigService },
     { type: RoutingConfigService },
-    { type: Router },
-    { type: ServerConfig }
+    { type: Router }
 ];
-/** @nocollapse */ DeliveryModeSetGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function DeliveryModeSetGuard_Factory() { return new DeliveryModeSetGuard(ɵɵinject(CheckoutDetailsService), ɵɵinject(CheckoutConfigService), ɵɵinject(RoutingConfigService), ɵɵinject(Router), ɵɵinject(ServerConfig)); }, token: DeliveryModeSetGuard, providedIn: "root" });
+/** @nocollapse */ DeliveryModeSetGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function DeliveryModeSetGuard_Factory() { return new DeliveryModeSetGuard(ɵɵinject(CheckoutDetailsService), ɵɵinject(CheckoutConfigService), ɵɵinject(RoutingConfigService), ɵɵinject(Router)); }, token: DeliveryModeSetGuard, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
@@ -5003,14 +4997,12 @@ class PaymentDetailsSetGuard {
      * @param {?} checkoutConfigService
      * @param {?} routingConfigService
      * @param {?} router
-     * @param {?} serverConfig
      */
-    constructor(checkoutDetailsService, checkoutConfigService, routingConfigService, router, serverConfig) {
+    constructor(checkoutDetailsService, checkoutConfigService, routingConfigService, router) {
         this.checkoutDetailsService = checkoutDetailsService;
         this.checkoutConfigService = checkoutConfigService;
         this.routingConfigService = routingConfigService;
         this.router = router;
-        this.serverConfig = serverConfig;
     }
     /**
      * @return {?}
@@ -5018,7 +5010,7 @@ class PaymentDetailsSetGuard {
     canActivate() {
         /** @type {?} */
         const checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.PAYMENT_DETAILS);
-        if (!checkoutStep && !this.serverConfig.production) {
+        if (!checkoutStep && isDevMode()) {
             console.warn(`Missing step with type ${CheckoutStepType.PAYMENT_DETAILS} in checkout configuration.`);
         }
         return this.checkoutDetailsService
@@ -5043,10 +5035,9 @@ PaymentDetailsSetGuard.ctorParameters = () => [
     { type: CheckoutDetailsService },
     { type: CheckoutConfigService },
     { type: RoutingConfigService },
-    { type: Router },
-    { type: ServerConfig }
+    { type: Router }
 ];
-/** @nocollapse */ PaymentDetailsSetGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function PaymentDetailsSetGuard_Factory() { return new PaymentDetailsSetGuard(ɵɵinject(CheckoutDetailsService), ɵɵinject(CheckoutConfigService), ɵɵinject(RoutingConfigService), ɵɵinject(Router), ɵɵinject(ServerConfig)); }, token: PaymentDetailsSetGuard, providedIn: "root" });
+/** @nocollapse */ PaymentDetailsSetGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function PaymentDetailsSetGuard_Factory() { return new PaymentDetailsSetGuard(ɵɵinject(CheckoutDetailsService), ɵɵinject(CheckoutConfigService), ɵɵinject(RoutingConfigService), ɵɵinject(Router)); }, token: PaymentDetailsSetGuard, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
@@ -7041,7 +7032,7 @@ class PageLayoutService {
      * @return {?}
      */
     logMissingLayoutConfig(page, section) {
-        if (this.config.production) {
+        if (!isDevMode()) {
             return;
         }
         if (!this.logSlots[page.template]) {
@@ -7871,7 +7862,7 @@ CmsPageGuard.ctorParameters = () => [
 /**
  * @abstract
  */
-class PWAModuleConfig extends ServerConfig {
+class PWAModuleConfig {
 }
 /** @type {?} */
 const defaultPWAModuleConfig = {
@@ -8041,7 +8032,7 @@ AddToHomeScreenBtnComponent.ctorParameters = () => [
  * @return {?}
  */
 function pwaConfigurationFactory(pwaConfig) {
-    return { enabled: (pwaConfig.production && pwaConfig.pwa.enabled) || false };
+    return { enabled: (!isDevMode() && pwaConfig.pwa.enabled) || false };
 }
 /**
  * @param {?} addToHomeScreenService

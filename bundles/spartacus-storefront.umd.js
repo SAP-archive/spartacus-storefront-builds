@@ -1313,13 +1313,11 @@
      * por a given breakpoint.
      * @abstract
      */
-    LayoutConfig = /** @class */ (function (_super) {
-        __extends(LayoutConfig, _super);
+    LayoutConfig = /** @class */ (function () {
         function LayoutConfig() {
-            return _super !== null && _super.apply(this, arguments) || this;
         }
         return LayoutConfig;
-    }(core$1.ServerConfig));
+    }());
 
     var _a;
     /** @type {?} */
@@ -4889,12 +4887,11 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ShippingAddressSetGuard = /** @class */ (function () {
-        function ShippingAddressSetGuard(checkoutDetailsService, checkoutConfigService, routingConfigService, router, serverConfig) {
+        function ShippingAddressSetGuard(checkoutDetailsService, checkoutConfigService, routingConfigService, router) {
             this.checkoutDetailsService = checkoutDetailsService;
             this.checkoutConfigService = checkoutConfigService;
             this.routingConfigService = routingConfigService;
             this.router = router;
-            this.serverConfig = serverConfig;
         }
         /**
          * @return {?}
@@ -4906,7 +4903,7 @@
             var _this = this;
             /** @type {?} */
             var checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.SHIPPING_ADDRESS);
-            if (!checkoutStep && !this.serverConfig.production) {
+            if (!checkoutStep && core.isDevMode()) {
                 console.warn("Missing step with type " + CheckoutStepType.SHIPPING_ADDRESS + " in checkout configuration.");
             }
             return this.checkoutDetailsService
@@ -4932,10 +4929,9 @@
             { type: CheckoutDetailsService },
             { type: CheckoutConfigService },
             { type: core$1.RoutingConfigService },
-            { type: router.Router },
-            { type: core$1.ServerConfig }
+            { type: router.Router }
         ]; };
-        /** @nocollapse */ ShippingAddressSetGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function ShippingAddressSetGuard_Factory() { return new ShippingAddressSetGuard(core.ɵɵinject(CheckoutDetailsService), core.ɵɵinject(CheckoutConfigService), core.ɵɵinject(core$1.RoutingConfigService), core.ɵɵinject(router.Router), core.ɵɵinject(core$1.ServerConfig)); }, token: ShippingAddressSetGuard, providedIn: "root" });
+        /** @nocollapse */ ShippingAddressSetGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function ShippingAddressSetGuard_Factory() { return new ShippingAddressSetGuard(core.ɵɵinject(CheckoutDetailsService), core.ɵɵinject(CheckoutConfigService), core.ɵɵinject(core$1.RoutingConfigService), core.ɵɵinject(router.Router)); }, token: ShippingAddressSetGuard, providedIn: "root" });
         return ShippingAddressSetGuard;
     }());
 
@@ -5101,12 +5097,11 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var DeliveryModeSetGuard = /** @class */ (function () {
-        function DeliveryModeSetGuard(checkoutDetailsService, checkoutConfigService, routingConfigService, router, serverConfig) {
+        function DeliveryModeSetGuard(checkoutDetailsService, checkoutConfigService, routingConfigService, router) {
             this.checkoutDetailsService = checkoutDetailsService;
             this.checkoutConfigService = checkoutConfigService;
             this.routingConfigService = routingConfigService;
             this.router = router;
-            this.serverConfig = serverConfig;
         }
         /**
          * @return {?}
@@ -5118,7 +5113,7 @@
             var _this = this;
             /** @type {?} */
             var checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.DELIVERY_MODE);
-            if (!checkoutStep && !this.serverConfig.production) {
+            if (!checkoutStep && core.isDevMode()) {
                 console.warn("Missing step with type " + CheckoutStepType.DELIVERY_MODE + " in checkout configuration.");
             }
             return this.checkoutDetailsService
@@ -5144,10 +5139,9 @@
             { type: CheckoutDetailsService },
             { type: CheckoutConfigService },
             { type: core$1.RoutingConfigService },
-            { type: router.Router },
-            { type: core$1.ServerConfig }
+            { type: router.Router }
         ]; };
-        /** @nocollapse */ DeliveryModeSetGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function DeliveryModeSetGuard_Factory() { return new DeliveryModeSetGuard(core.ɵɵinject(CheckoutDetailsService), core.ɵɵinject(CheckoutConfigService), core.ɵɵinject(core$1.RoutingConfigService), core.ɵɵinject(router.Router), core.ɵɵinject(core$1.ServerConfig)); }, token: DeliveryModeSetGuard, providedIn: "root" });
+        /** @nocollapse */ DeliveryModeSetGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function DeliveryModeSetGuard_Factory() { return new DeliveryModeSetGuard(core.ɵɵinject(CheckoutDetailsService), core.ɵɵinject(CheckoutConfigService), core.ɵɵinject(core$1.RoutingConfigService), core.ɵɵinject(router.Router)); }, token: DeliveryModeSetGuard, providedIn: "root" });
         return DeliveryModeSetGuard;
     }());
 
@@ -6116,12 +6110,11 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var PaymentDetailsSetGuard = /** @class */ (function () {
-        function PaymentDetailsSetGuard(checkoutDetailsService, checkoutConfigService, routingConfigService, router, serverConfig) {
+        function PaymentDetailsSetGuard(checkoutDetailsService, checkoutConfigService, routingConfigService, router) {
             this.checkoutDetailsService = checkoutDetailsService;
             this.checkoutConfigService = checkoutConfigService;
             this.routingConfigService = routingConfigService;
             this.router = router;
-            this.serverConfig = serverConfig;
         }
         /**
          * @return {?}
@@ -6133,7 +6126,7 @@
             var _this = this;
             /** @type {?} */
             var checkoutStep = this.checkoutConfigService.getCheckoutStep(CheckoutStepType.PAYMENT_DETAILS);
-            if (!checkoutStep && !this.serverConfig.production) {
+            if (!checkoutStep && core.isDevMode()) {
                 console.warn("Missing step with type " + CheckoutStepType.PAYMENT_DETAILS + " in checkout configuration.");
             }
             return this.checkoutDetailsService
@@ -6159,10 +6152,9 @@
             { type: CheckoutDetailsService },
             { type: CheckoutConfigService },
             { type: core$1.RoutingConfigService },
-            { type: router.Router },
-            { type: core$1.ServerConfig }
+            { type: router.Router }
         ]; };
-        /** @nocollapse */ PaymentDetailsSetGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function PaymentDetailsSetGuard_Factory() { return new PaymentDetailsSetGuard(core.ɵɵinject(CheckoutDetailsService), core.ɵɵinject(CheckoutConfigService), core.ɵɵinject(core$1.RoutingConfigService), core.ɵɵinject(router.Router), core.ɵɵinject(core$1.ServerConfig)); }, token: PaymentDetailsSetGuard, providedIn: "root" });
+        /** @nocollapse */ PaymentDetailsSetGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function PaymentDetailsSetGuard_Factory() { return new PaymentDetailsSetGuard(core.ɵɵinject(CheckoutDetailsService), core.ɵɵinject(CheckoutConfigService), core.ɵɵinject(core$1.RoutingConfigService), core.ɵɵinject(router.Router)); }, token: PaymentDetailsSetGuard, providedIn: "root" });
         return PaymentDetailsSetGuard;
     }());
 
@@ -8537,7 +8529,7 @@
          * @return {?}
          */
         function (page, section) {
-            if (this.config.production) {
+            if (!core.isDevMode()) {
                 return;
             }
             if (!this.logSlots[page.template]) {
@@ -9543,13 +9535,11 @@
     var   /**
      * @abstract
      */
-    PWAModuleConfig = /** @class */ (function (_super) {
-        __extends(PWAModuleConfig, _super);
+    PWAModuleConfig = /** @class */ (function () {
         function PWAModuleConfig() {
-            return _super !== null && _super.apply(this, arguments) || this;
         }
         return PWAModuleConfig;
-    }(core$1.ServerConfig));
+    }());
     /** @type {?} */
     var defaultPWAModuleConfig = {
         pwa: {
@@ -9734,7 +9724,7 @@
      * @return {?}
      */
     function pwaConfigurationFactory(pwaConfig) {
-        return { enabled: (pwaConfig.production && pwaConfig.pwa.enabled) || false };
+        return { enabled: (!core.isDevMode() && pwaConfig.pwa.enabled) || false };
     }
     /**
      * @param {?} addToHomeScreenService
