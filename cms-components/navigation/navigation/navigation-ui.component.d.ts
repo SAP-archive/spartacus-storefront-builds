@@ -14,6 +14,7 @@ export declare class NavigationUIComponent implements OnDestroy {
      * The number of child nodes that must be wrapped.
      */
     wrapAfter: number;
+    allowAlignToRight: boolean;
     /**
      * the icon type that will be used for navigation nodes
      * with children.

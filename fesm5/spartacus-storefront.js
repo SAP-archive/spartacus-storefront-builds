@@ -13085,7 +13085,7 @@ var CategoryNavigationComponent = /** @class */ (function () {
     CategoryNavigationComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-category-navigation',
-                    template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [ngClass]=\"(data$ | async).styleClass\"\n  [wrapAfter]=\"(data$ | async).wrapAfter\"\n></cx-navigation-ui>\n",
+                    template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [ngClass]=\"(data$ | async).styleClass\"\n  [wrapAfter]=\"(data$ | async).wrapAfter\"\n  [allowAlignToRight]=\"true\"\n></cx-navigation-ui>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -13107,6 +13107,7 @@ var NavigationUIComponent = /** @class */ (function () {
         this.router = router;
         this.renderer = renderer;
         this.elemRef = elemRef;
+        this.allowAlignToRight = false;
         /**
          * the icon type that will be used for navigation nodes
          * with children.
@@ -13252,15 +13253,17 @@ var NavigationUIComponent = /** @class */ (function () {
      * @return {?}
      */
     function (node) {
-        /** @type {?} */
-        var wrapper = (/** @type {?} */ (node.querySelector('.wrapper')));
-        /** @type {?} */
-        var navBar = (/** @type {?} */ (this.elemRef.nativeElement));
-        if (wrapper) {
-            this.renderer.removeStyle(wrapper, 'margin-left');
-            if (wrapper.offsetLeft + wrapper.offsetWidth >
-                navBar.offsetLeft + navBar.offsetWidth) {
-                this.renderer.setStyle(wrapper, 'margin-left', node.offsetWidth - wrapper.offsetWidth + "px");
+        if (this.allowAlignToRight) {
+            /** @type {?} */
+            var wrapper = (/** @type {?} */ (node.querySelector('.wrapper')));
+            /** @type {?} */
+            var navBar = (/** @type {?} */ (this.elemRef.nativeElement));
+            if (wrapper) {
+                this.renderer.removeStyle(wrapper, 'margin-left');
+                if (wrapper.offsetLeft + wrapper.offsetWidth >
+                    navBar.offsetLeft + navBar.offsetWidth) {
+                    this.renderer.setStyle(wrapper, 'margin-left', node.offsetWidth - wrapper.offsetWidth + "px");
+                }
             }
         }
     };
@@ -13331,6 +13334,7 @@ var NavigationUIComponent = /** @class */ (function () {
     NavigationUIComponent.propDecorators = {
         node: [{ type: Input }],
         wrapAfter: [{ type: Input }],
+        allowAlignToRight: [{ type: Input }],
         flyout: [{ type: Input }, { type: HostBinding, args: ['class.flyout',] }],
         isOpen: [{ type: Input }, { type: HostBinding, args: ['class.is-open',] }],
         onResize: [{ type: HostListener, args: ['window:resize',] }]

@@ -13186,7 +13186,7 @@
         CategoryNavigationComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-category-navigation',
-                        template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [ngClass]=\"(data$ | async).styleClass\"\n  [wrapAfter]=\"(data$ | async).wrapAfter\"\n></cx-navigation-ui>\n",
+                        template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [ngClass]=\"(data$ | async).styleClass\"\n  [wrapAfter]=\"(data$ | async).wrapAfter\"\n  [allowAlignToRight]=\"true\"\n></cx-navigation-ui>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -13208,6 +13208,7 @@
             this.router = router$1;
             this.renderer = renderer;
             this.elemRef = elemRef;
+            this.allowAlignToRight = false;
             /**
              * the icon type that will be used for navigation nodes
              * with children.
@@ -13353,15 +13354,17 @@
          * @return {?}
          */
         function (node) {
-            /** @type {?} */
-            var wrapper = (/** @type {?} */ (node.querySelector('.wrapper')));
-            /** @type {?} */
-            var navBar = (/** @type {?} */ (this.elemRef.nativeElement));
-            if (wrapper) {
-                this.renderer.removeStyle(wrapper, 'margin-left');
-                if (wrapper.offsetLeft + wrapper.offsetWidth >
-                    navBar.offsetLeft + navBar.offsetWidth) {
-                    this.renderer.setStyle(wrapper, 'margin-left', node.offsetWidth - wrapper.offsetWidth + "px");
+            if (this.allowAlignToRight) {
+                /** @type {?} */
+                var wrapper = (/** @type {?} */ (node.querySelector('.wrapper')));
+                /** @type {?} */
+                var navBar = (/** @type {?} */ (this.elemRef.nativeElement));
+                if (wrapper) {
+                    this.renderer.removeStyle(wrapper, 'margin-left');
+                    if (wrapper.offsetLeft + wrapper.offsetWidth >
+                        navBar.offsetLeft + navBar.offsetWidth) {
+                        this.renderer.setStyle(wrapper, 'margin-left', node.offsetWidth - wrapper.offsetWidth + "px");
+                    }
                 }
             }
         };
@@ -13432,6 +13435,7 @@
         NavigationUIComponent.propDecorators = {
             node: [{ type: core.Input }],
             wrapAfter: [{ type: core.Input }],
+            allowAlignToRight: [{ type: core.Input }],
             flyout: [{ type: core.Input }, { type: core.HostBinding, args: ['class.flyout',] }],
             isOpen: [{ type: core.Input }, { type: core.HostBinding, args: ['class.is-open',] }],
             onResize: [{ type: core.HostListener, args: ['window:resize',] }]
