@@ -12,9 +12,8 @@ export declare class AddedToCartDialogComponent implements OnInit {
     entry$: Observable<OrderEntry>;
     cart$: Observable<Cart>;
     loaded$: Observable<boolean>;
+    increment: boolean;
     quantity: number;
-    firstUpdate: boolean;
-    showItemIncrLabel: boolean;
     dialog: ElementRef;
     form: FormGroup;
     constructor(modalService: ModalService, cartService: CartService, fb: FormBuilder);

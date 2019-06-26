@@ -14,6 +14,7 @@ export declare class AddToCartComponent implements OnInit, OnDestroy {
     modalRef: ModalRef;
     hasStock: boolean;
     quantity: number;
+    increment: boolean;
     cartEntry$: Observable<OrderEntry>;
     subscription: Subscription;
     constructor(cartService: CartService, modalService: ModalService, currentProductService: CurrentProductService, cd: ChangeDetectorRef);
