@@ -33,7 +33,7 @@ export declare class PaymentFormComponent implements OnInit, OnDestroy {
     paymentMethodsCount: number;
     goBack: EventEmitter<any>;
     closeForm: EventEmitter<any>;
-    addPaymentInfo: EventEmitter<any>;
+    setPaymentDetails: EventEmitter<any>;
     payment: FormGroup;
     billingAddress: FormGroup;
     constructor(checkoutPaymentService: CheckoutPaymentService, checkoutDeliveryService: CheckoutDeliveryService, userPaymentService: UserPaymentService, globalMessageService: GlobalMessageService, fb: FormBuilder, modalService: ModalService);

@@ -5313,7 +5313,7 @@
             this.sameAsShippingAddress = true;
             this.goBack = new core.EventEmitter();
             this.closeForm = new core.EventEmitter();
-            this.addPaymentInfo = new core.EventEmitter();
+            this.setPaymentDetails = new core.EventEmitter();
             this.payment = this.fb.group({
                 defaultPayment: [false],
                 accountHolderName: ['', forms.Validators.required],
@@ -5612,7 +5612,7 @@
          * @return {?}
          */
         function () {
-            this.addPaymentInfo.emit({
+            this.setPaymentDetails.emit({
                 paymentDetails: this.payment.value,
                 billingAddress: this.sameAsShippingAddress
                     ? null
@@ -5653,7 +5653,7 @@
             paymentMethodsCount: [{ type: core.Input }],
             goBack: [{ type: core.Output }],
             closeForm: [{ type: core.Output }],
-            addPaymentInfo: [{ type: core.Output }]
+            setPaymentDetails: [{ type: core.Output }]
         };
         return PaymentFormComponent;
     }());
@@ -5701,7 +5701,6 @@
             this.translation = translation;
             this.iconTypes = ICON_TYPE;
             this.newPaymentFormManuallyOpened = false;
-            this.newPayment = false;
         }
         /**
          * @return {?}
@@ -5711,12 +5710,14 @@
          */
         function () {
             var _this = this;
+            this.allowRouting = false;
             this.isLoading$ = this.userPaymentService.getPaymentMethodsLoading();
             this.userPaymentService.loadPaymentMethods();
             this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
             this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
-            this.getDeliveryAddressSub = this.checkoutDeliveryService
+            this.checkoutDeliveryService
                 .getDeliveryAddress()
+                .pipe(operators.take(1))
                 .subscribe((/**
              * @param {?} address
              * @return {?}
@@ -5731,20 +5732,15 @@
              * @param {?} paymentInfo
              * @return {?}
              */
-            function (paymentInfo) { return paymentInfo && Object.keys(paymentInfo).length !== 0; })), operators.tap((/**
-             * @param {?} paymentInfo
-             * @return {?}
-             */
-            function (paymentInfo) {
-                if (paymentInfo === _this.selectedPayment || _this.newPayment) {
-                    _this.routingService.go(_this.checkoutStepUrlNext);
-                }
-            })))
+            function (paymentInfo) { return paymentInfo && !!Object.keys(paymentInfo).length; })))
                 .subscribe((/**
              * @param {?} paymentInfo
              * @return {?}
              */
             function (paymentInfo) {
+                if (_this.allowRouting) {
+                    _this.routingService.go(_this.checkoutStepUrlNext);
+                }
                 if (!paymentInfo['hasError']) {
                     _this.selectedPayment = paymentInfo;
                 }
@@ -5839,9 +5835,9 @@
          * @return {?}
          */
         function () {
-            this.addPaymentInfo({
-                payment: this.selectedPayment,
-                newPayment: false,
+            this.setPaymentDetails({
+                paymentDetails: this.selectedPayment,
+                isNewPayment: false,
             });
         };
         /**
@@ -5857,40 +5853,22 @@
          * @param {?} __0
          * @return {?}
          */
-        PaymentMethodComponent.prototype.addNewPaymentMethod = /**
+        PaymentMethodComponent.prototype.setPaymentDetails = /**
          * @param {?} __0
          * @return {?}
          */
         function (_a) {
-            var paymentDetails = _a.paymentDetails, billingAddress = _a.billingAddress;
-            this.addPaymentInfo({
-                payment: paymentDetails,
-                billingAddress: billingAddress,
-                newPayment: true,
-            });
-        };
-        /**
-         * @param {?} __0
-         * @return {?}
-         */
-        PaymentMethodComponent.prototype.addPaymentInfo = /**
-         * @param {?} __0
-         * @return {?}
-         */
-        function (_a) {
-            var newPayment = _a.newPayment, payment = _a.payment, billingAddress = _a.billingAddress;
-            if (newPayment) {
-                payment.billingAddress = billingAddress
-                    ? billingAddress
-                    : this.deliveryAddress;
-                this.checkoutPaymentService.createPaymentDetails(payment);
-                this.checkoutService.clearCheckoutStep(3);
-                this.newPayment = newPayment;
+            var paymentDetails = _a.paymentDetails, billingAddress = _a.billingAddress, _b = _a.isNewPayment, isNewPayment = _b === void 0 ? true : _b;
+            /** @type {?} */
+            var details = __assign({}, paymentDetails);
+            details.billingAddress = billingAddress || this.deliveryAddress;
+            if (isNewPayment) {
+                this.checkoutPaymentService.createPaymentDetails(details);
             }
-            else if (this.selectedPayment && this.selectedPayment.id === payment.id) {
-                this.checkoutPaymentService.setPaymentDetails(payment);
-                this.checkoutService.clearCheckoutStep(3);
+            else if (this.selectedPayment && this.selectedPayment.id === details.id) {
+                this.checkoutPaymentService.setPaymentDetails(details);
             }
+            this.allowRouting = true;
         };
         /**
          * @return {?}
@@ -5901,9 +5879,6 @@
         function () {
             if (this.getPaymentDetailsSub) {
                 this.getPaymentDetailsSub.unsubscribe();
-            }
-            if (this.getDeliveryAddressSub) {
-                this.getDeliveryAddressSub.unsubscribe();
             }
         };
         /**
@@ -5939,7 +5914,7 @@
         PaymentMethodComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-payment-method',
-                        template: "<ng-container\n  *ngIf=\"(existingPaymentMethods$ | async) as existingPaymentMethods\"\n>\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'paymentForm.payment' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        existingPaymentMethods?.length && !newPaymentFormManuallyOpened;\n        else newPaymentForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'paymentForm.choosePaymentMethod' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewPaymentForm()\"\n          >\n            {{ 'paymentForm.addNewPayment' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-payment-card col-md-12 col-lg-6\"\n          *ngFor=\"let method of existingPaymentMethods; let i = index\"\n        >\n          <div class=\"cx-payment-card-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"getCardContent(method) | async\"\n              (sendCard)=\"paymentMethodSelected(method)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"row cx-checkout-btns\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'common.back' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-primary\"\n            [disabled]=\"!selectedPayment\"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newPaymentForm>\n      <cx-payment-form\n        (addPaymentInfo)=\"addNewPaymentMethod($event)\"\n        (closeForm)=\"hideNewPaymentForm()\"\n        (goBack)=\"back()\"\n        [paymentMethodsCount]=\"existingPaymentMethods?.length || 0\"\n      ></cx-payment-form>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n  </ng-template>\n</ng-container>\n",
+                        template: "<ng-container\n  *ngIf=\"(existingPaymentMethods$ | async) as existingPaymentMethods\"\n>\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'paymentForm.payment' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        existingPaymentMethods?.length && !newPaymentFormManuallyOpened;\n        else newPaymentForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'paymentForm.choosePaymentMethod' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewPaymentForm()\"\n          >\n            {{ 'paymentForm.addNewPayment' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-payment-card col-md-12 col-lg-6\"\n          *ngFor=\"let method of existingPaymentMethods; let i = index\"\n        >\n          <div class=\"cx-payment-card-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"getCardContent(method) | async\"\n              (sendCard)=\"paymentMethodSelected(method)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"row cx-checkout-btns\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'common.back' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-primary\"\n            [disabled]=\"!selectedPayment\"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newPaymentForm>\n      <cx-payment-form\n        (setPaymentDetails)=\"setPaymentDetails($event)\"\n        (closeForm)=\"hideNewPaymentForm()\"\n        (goBack)=\"back()\"\n        [paymentMethodsCount]=\"existingPaymentMethods?.length || 0\"\n      ></cx-payment-form>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n  </ng-template>\n</ng-container>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];

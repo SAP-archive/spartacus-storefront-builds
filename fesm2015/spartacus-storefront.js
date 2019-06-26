@@ -4315,7 +4315,7 @@ class PaymentFormComponent {
         this.sameAsShippingAddress = true;
         this.goBack = new EventEmitter();
         this.closeForm = new EventEmitter();
-        this.addPaymentInfo = new EventEmitter();
+        this.setPaymentDetails = new EventEmitter();
         this.payment = this.fb.group({
             defaultPayment: [false],
             accountHolderName: ['', Validators.required],
@@ -4551,7 +4551,7 @@ class PaymentFormComponent {
      * @return {?}
      */
     next() {
-        this.addPaymentInfo.emit({
+        this.setPaymentDetails.emit({
             paymentDetails: this.payment.value,
             billingAddress: this.sameAsShippingAddress
                 ? null
@@ -4590,7 +4590,7 @@ PaymentFormComponent.propDecorators = {
     paymentMethodsCount: [{ type: Input }],
     goBack: [{ type: Output }],
     closeForm: [{ type: Output }],
-    addPaymentInfo: [{ type: Output }]
+    setPaymentDetails: [{ type: Output }]
 };
 
 /**
@@ -4644,18 +4644,19 @@ class PaymentMethodComponent {
         this.translation = translation;
         this.iconTypes = ICON_TYPE;
         this.newPaymentFormManuallyOpened = false;
-        this.newPayment = false;
     }
     /**
      * @return {?}
      */
     ngOnInit() {
+        this.allowRouting = false;
         this.isLoading$ = this.userPaymentService.getPaymentMethodsLoading();
         this.userPaymentService.loadPaymentMethods();
         this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
         this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
-        this.getDeliveryAddressSub = this.checkoutDeliveryService
+        this.checkoutDeliveryService
             .getDeliveryAddress()
+            .pipe(take(1))
             .subscribe((/**
          * @param {?} address
          * @return {?}
@@ -4670,20 +4671,15 @@ class PaymentMethodComponent {
          * @param {?} paymentInfo
          * @return {?}
          */
-        paymentInfo => paymentInfo && Object.keys(paymentInfo).length !== 0)), tap((/**
-         * @param {?} paymentInfo
-         * @return {?}
-         */
-        paymentInfo => {
-            if (paymentInfo === this.selectedPayment || this.newPayment) {
-                this.routingService.go(this.checkoutStepUrlNext);
-            }
-        })))
+        paymentInfo => paymentInfo && !!Object.keys(paymentInfo).length)))
             .subscribe((/**
          * @param {?} paymentInfo
          * @return {?}
          */
         paymentInfo => {
+            if (this.allowRouting) {
+                this.routingService.go(this.checkoutStepUrlNext);
+            }
             if (!paymentInfo['hasError']) {
                 this.selectedPayment = paymentInfo;
             }
@@ -4759,9 +4755,9 @@ class PaymentMethodComponent {
      * @return {?}
      */
     next() {
-        this.addPaymentInfo({
-            payment: this.selectedPayment,
-            newPayment: false,
+        this.setPaymentDetails({
+            paymentDetails: this.selectedPayment,
+            isNewPayment: false,
         });
     }
     /**
@@ -4774,30 +4770,17 @@ class PaymentMethodComponent {
      * @param {?} __0
      * @return {?}
      */
-    addNewPaymentMethod({ paymentDetails, billingAddress, }) {
-        this.addPaymentInfo({
-            payment: paymentDetails,
-            billingAddress,
-            newPayment: true,
-        });
-    }
-    /**
-     * @param {?} __0
-     * @return {?}
-     */
-    addPaymentInfo({ newPayment, payment, billingAddress, }) {
-        if (newPayment) {
-            payment.billingAddress = billingAddress
-                ? billingAddress
-                : this.deliveryAddress;
-            this.checkoutPaymentService.createPaymentDetails(payment);
-            this.checkoutService.clearCheckoutStep(3);
-            this.newPayment = newPayment;
+    setPaymentDetails({ paymentDetails, billingAddress, isNewPayment = true, }) {
+        /** @type {?} */
+        const details = Object.assign({}, paymentDetails);
+        details.billingAddress = billingAddress || this.deliveryAddress;
+        if (isNewPayment) {
+            this.checkoutPaymentService.createPaymentDetails(details);
         }
-        else if (this.selectedPayment && this.selectedPayment.id === payment.id) {
-            this.checkoutPaymentService.setPaymentDetails(payment);
-            this.checkoutService.clearCheckoutStep(3);
+        else if (this.selectedPayment && this.selectedPayment.id === details.id) {
+            this.checkoutPaymentService.setPaymentDetails(details);
         }
+        this.allowRouting = true;
     }
     /**
      * @return {?}
@@ -4805,9 +4788,6 @@ class PaymentMethodComponent {
     ngOnDestroy() {
         if (this.getPaymentDetailsSub) {
             this.getPaymentDetailsSub.unsubscribe();
-        }
-        if (this.getDeliveryAddressSub) {
-            this.getDeliveryAddressSub.unsubscribe();
         }
     }
     /**
@@ -4839,7 +4819,7 @@ class PaymentMethodComponent {
 PaymentMethodComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-payment-method',
-                template: "<ng-container\n  *ngIf=\"(existingPaymentMethods$ | async) as existingPaymentMethods\"\n>\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'paymentForm.payment' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        existingPaymentMethods?.length && !newPaymentFormManuallyOpened;\n        else newPaymentForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'paymentForm.choosePaymentMethod' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewPaymentForm()\"\n          >\n            {{ 'paymentForm.addNewPayment' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-payment-card col-md-12 col-lg-6\"\n          *ngFor=\"let method of existingPaymentMethods; let i = index\"\n        >\n          <div class=\"cx-payment-card-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"getCardContent(method) | async\"\n              (sendCard)=\"paymentMethodSelected(method)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"row cx-checkout-btns\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'common.back' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-primary\"\n            [disabled]=\"!selectedPayment\"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newPaymentForm>\n      <cx-payment-form\n        (addPaymentInfo)=\"addNewPaymentMethod($event)\"\n        (closeForm)=\"hideNewPaymentForm()\"\n        (goBack)=\"back()\"\n        [paymentMethodsCount]=\"existingPaymentMethods?.length || 0\"\n      ></cx-payment-form>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n  </ng-template>\n</ng-container>\n",
+                template: "<ng-container\n  *ngIf=\"(existingPaymentMethods$ | async) as existingPaymentMethods\"\n>\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'paymentForm.payment' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        existingPaymentMethods?.length && !newPaymentFormManuallyOpened;\n        else newPaymentForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'paymentForm.choosePaymentMethod' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewPaymentForm()\"\n          >\n            {{ 'paymentForm.addNewPayment' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-payment-card col-md-12 col-lg-6\"\n          *ngFor=\"let method of existingPaymentMethods; let i = index\"\n        >\n          <div class=\"cx-payment-card-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"getCardContent(method) | async\"\n              (sendCard)=\"paymentMethodSelected(method)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"row cx-checkout-btns\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'common.back' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-primary\"\n            [disabled]=\"!selectedPayment\"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newPaymentForm>\n      <cx-payment-form\n        (setPaymentDetails)=\"setPaymentDetails($event)\"\n        (closeForm)=\"hideNewPaymentForm()\"\n        (goBack)=\"back()\"\n        [paymentMethodsCount]=\"existingPaymentMethods?.length || 0\"\n      ></cx-payment-form>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n  </ng-template>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];

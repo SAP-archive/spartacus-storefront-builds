@@ -20,9 +20,8 @@ export declare class PaymentMethodComponent implements OnInit, OnDestroy {
     existingPaymentMethods$: Observable<PaymentDetails[]>;
     isLoading$: Observable<boolean>;
     selectedPayment: PaymentDetails;
-    newPayment: boolean;
+    allowRouting: boolean;
     private getPaymentDetailsSub;
-    private getDeliveryAddressSub;
     private deliveryAddress;
     private checkoutStepUrlNext;
     private checkoutStepUrlPrevious;
@@ -34,14 +33,10 @@ export declare class PaymentMethodComponent implements OnInit, OnDestroy {
     hideNewPaymentForm(): void;
     next(): void;
     back(): void;
-    addNewPaymentMethod({ paymentDetails, billingAddress, }: {
+    setPaymentDetails({ paymentDetails, billingAddress, isNewPayment, }: {
         paymentDetails: PaymentDetails;
-        billingAddress: Address;
-    }): void;
-    addPaymentInfo({ newPayment, payment, billingAddress, }: {
-        newPayment: boolean;
-        payment: PaymentDetails;
         billingAddress?: Address;
+        isNewPayment?: boolean;
     }): void;
     ngOnDestroy(): void;
     protected getCardIcon(code: string): string;
