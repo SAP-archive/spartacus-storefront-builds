@@ -1,6 +1,6 @@
-import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, Output, EventEmitter, forwardRef, Renderer2, HostListener, Optional, Injector, InjectionToken, isDevMode, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, INJECTOR, APP_INITIALIZER, Pipe } from '@angular/core';
-import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, OccConfig, UrlModule, GlobalMessageService, GlobalMessageType, GlobalMessageModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, CheckoutModule, AuthService, AuthRedirectService, UserModule, NotAuthGuard, CmsConfig, CmsService, CurrencyService, LanguageService, BaseSiteService, ProductSearchService, ProductReviewService, DynamicAttributeService, PageType, SemanticPathService, TranslationChunkService, PageRobotsMeta, PageMetaService, UserConsentService, UserOrderService, CmsPageTitleModule, SearchboxService, ProductModule, ProductReferenceService, CmsModule, RoutingModule as RoutingModule$1, StateModule, AuthModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, provideConfig } from '@spartacus/core';
-import { map, filter, switchMap, tap, startWith, debounceTime, distinctUntilChanged, take, shareReplay, skipWhile, first, endWith, withLatestFrom, pluck } from 'rxjs/operators';
+import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, Output, EventEmitter, forwardRef, Renderer2, HostListener, Optional, Injector, InjectionToken, isDevMode, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, APP_INITIALIZER, INJECTOR, Pipe } from '@angular/core';
+import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, OccConfig, UrlModule, GlobalMessageService, GlobalMessageType, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, CmsConfig, AuthService, CmsService, CurrencyService, LanguageService, BaseSiteService, ProductSearchService, ProductReviewService, DynamicAttributeService, PageRobotsMeta, PageMetaService, UserConsentService, NotAuthGuard, UserOrderService, TranslationChunkService, PageType, SemanticPathService, CmsPageTitleModule, SearchboxService, ProductReferenceService, AuthRedirectService, RoutingModule as RoutingModule$1, provideConfig, StateModule, AuthModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule } from '@spartacus/core';
+import { map, filter, switchMap, tap, startWith, debounceTime, distinctUntilChanged, take, shareReplay, skipWhile, first, withLatestFrom, endWith, pluck } from 'rxjs/operators';
 import { __extends, __values, __assign, __spread, __read, __awaiter, __generator } from 'tslib';
 import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -2738,13 +2738,7 @@ var GlobalMessageComponentModule = /** @class */ (function () {
     }
     GlobalMessageComponentModule.decorators = [
         { type: NgModule, args: [{
-                    imports: [
-                        CommonModule,
-                        HttpClientModule,
-                        IconModule,
-                        I18nModule,
-                        GlobalMessageModule.forRoot(),
-                    ],
+                    imports: [CommonModule, HttpClientModule, IconModule, I18nModule],
                     declarations: [GlobalMessageComponent],
                     exports: [GlobalMessageComponent],
                 },] }
@@ -3974,6 +3968,13 @@ var CartTotalsModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @type {?} */
+var PAGE_LAYOUT_HANDLER = new InjectionToken('PageLayoutHandler');
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var MiniCartComponent = /** @class */ (function () {
     function MiniCartComponent(cartService) {
         this.cartService = cartService;
@@ -4019,7 +4020,6 @@ var MiniCartModule = /** @class */ (function () {
                     imports: [
                         CommonModule,
                         RouterModule,
-                        CartModule,
                         ConfigModule.withConfig((/** @type {?} */ ({
                             cmsComponents: {
                                 MiniCartComponent: {
@@ -4042,31 +4042,19 @@ var MiniCartModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/** @type {?} */
-var PAGE_LAYOUT_HANDLER = new InjectionToken('PageLayoutHandler');
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 var CartComponentModule = /** @class */ (function () {
     function CartComponentModule() {
     }
     CartComponentModule.decorators = [
         { type: NgModule, args: [{
-                    imports: [
-                        CartModule,
-                        NgbModule,
-                        CartDetailsModule,
-                        CartTotalsModule,
-                        CartSharedModule,
-                    ],
+                    imports: [NgbModule, CartDetailsModule, CartTotalsModule, CartSharedModule],
                     exports: [
                         CartDetailsModule,
                         CartTotalsModule,
                         CartSharedModule,
                         AddToCartModule,
                         MiniCartModule,
+                        CartModule,
                     ],
                     providers: [
                         {
@@ -5962,7 +5950,6 @@ var PlaceOrderModule = /** @class */ (function () {
         { type: NgModule, args: [{
                     imports: [
                         CommonModule,
-                        CheckoutModule,
                         RouterModule,
                         UrlModule,
                         I18nModule,
@@ -6838,8 +6825,6 @@ var CheckoutComponentModule = /** @class */ (function () {
         { type: NgModule, args: [{
                     imports: [
                         CommonModule,
-                        CartComponentModule,
-                        CheckoutModule,
                         CheckoutOrchestratorModule,
                         CheckoutOrderSummaryModule,
                         CheckoutProgressModule,
@@ -7153,6 +7138,25 @@ var OutletRefModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @type {?} */
+var layoutModules = [OutletRefModule];
+var LayoutModule = /** @class */ (function () {
+    function LayoutModule() {
+    }
+    LayoutModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: __spread(layoutModules),
+                    providers: [{ provide: LayoutConfig, useExisting: Config }],
+                    exports: __spread(layoutModules),
+                },] }
+    ];
+    return LayoutModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var OutletDirective = /** @class */ (function () {
     function OutletDirective(vcr, templateRef, outletService) {
         this.vcr = vcr;
@@ -7244,240 +7248,6 @@ var OutletModule = /** @class */ (function () {
                 },] }
     ];
     return OutletModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CustomFormValidators = /** @class */ (function () {
-    function CustomFormValidators() {
-    }
-    /**
-     * @param {?} control
-     * @return {?}
-     */
-    CustomFormValidators.emailDomainValidator = /**
-     * @param {?} control
-     * @return {?}
-     */
-    function (control) {
-        /** @type {?} */
-        var email = (/** @type {?} */ (control.value));
-        return email.match('[.][a-zA-Z]+$') ? null : { InvalidEmail: true };
-    };
-    /**
-     * @param {?} control
-     * @return {?}
-     */
-    CustomFormValidators.emailValidator = /**
-     * @param {?} control
-     * @return {?}
-     */
-    function (control) {
-        /** @type {?} */
-        var email = (/** @type {?} */ (control.value));
-        return email.match(
-        // Email Standard RFC 5322:
-        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ // tslint:disable-line
-        )
-            ? null
-            : { InvalidEmail: true };
-    };
-    /**
-     * @param {?} control
-     * @return {?}
-     */
-    CustomFormValidators.passwordValidator = /**
-     * @param {?} control
-     * @return {?}
-     */
-    function (control) {
-        /** @type {?} */
-        var password = (/** @type {?} */ (control.value));
-        return password.match(/^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^*()_\-+{};:.,]).{6,}$/)
-            ? null
-            : { InvalidPassword: true };
-    };
-    return CustomFormValidators;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var LoginFormComponent = /** @class */ (function () {
-    function LoginFormComponent(auth, globalMessageService, fb, authRedirectService) {
-        this.auth = auth;
-        this.globalMessageService = globalMessageService;
-        this.fb = fb;
-        this.authRedirectService = authRedirectService;
-    }
-    /**
-     * @return {?}
-     */
-    LoginFormComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        this.form = this.fb.group({
-            userId: ['', [Validators.required, CustomFormValidators.emailValidator]],
-            password: ['', Validators.required],
-        });
-    };
-    /**
-     * @return {?}
-     */
-    LoginFormComponent.prototype.login = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        /** @type {?} */
-        var userId = this.emailToLowerCase();
-        this.auth.authorize(userId, this.form.controls.password.value);
-        if (!this.sub) {
-            this.sub = this.auth.getUserToken().subscribe((/**
-             * @param {?} data
-             * @return {?}
-             */
-            function (data) {
-                if (data && data.access_token) {
-                    _this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
-                    _this.authRedirectService.redirect();
-                }
-            }));
-        }
-    };
-    /*
-     * Change the inputed email to lowercase because
-     * the backend only accepts lowercase emails
-     */
-    /*
-       * Change the inputed email to lowercase because
-       * the backend only accepts lowercase emails
-       */
-    /**
-     * @return {?}
-     */
-    LoginFormComponent.prototype.emailToLowerCase = /*
-       * Change the inputed email to lowercase because
-       * the backend only accepts lowercase emails
-       */
-    /**
-     * @return {?}
-     */
-    function () {
-        return this.form.controls.userId.value.toLowerCase();
-    };
-    /**
-     * @return {?}
-     */
-    LoginFormComponent.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
-        if (this.sub) {
-            this.sub.unsubscribe();
-        }
-    };
-    LoginFormComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-login-form',
-                    template: "<form (submit)=\"login()\" [formGroup]=\"form\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.controls['userId'].invalid &&\n          (form.controls['userId'].touched || form.controls['userId'].dirty)\n        \"\n        formControlName=\"userId\"\n        placeholder=\"{{ 'loginForm.emailAddress.placeholder' | cxTranslate }}\"\n      />\n    </label>\n    <div\n      class=\"invalid-feedback\"\n      *ngIf=\"\n        form.controls['userId'].invalid &&\n        (form.controls['userId'].touched || form.controls['userId'].dirty)\n      \"\n    >\n      <span>{{ 'loginForm.wrongEmailFormat' | cxTranslate }}</span>\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.password.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"password\"\n        class=\"form-control\"\n        placeholder=\"{{ 'loginForm.password.placeholder' | cxTranslate }}\"\n        formControlName=\"password\"\n      />\n    </label>\n  </div>\n  <p>\n    <a\n      [routerLink]=\"{ cxRoute: 'forgotPassword' } | cxUrl\"\n      aria-controls=\"reset-password\"\n      class=\"btn-link\"\n      >{{ 'loginForm.forgotPassword' | cxTranslate }}</a\n    >\n  </p>\n\n  <button\n    type=\"submit\"\n    class=\"btn btn-block btn-primary\"\n    [disabled]=\"form.invalid\"\n  >\n    {{ 'loginForm.signIn' | cxTranslate }}\n  </button>\n</form>\n\n<div class=\"register\">\n  <h3 class=\"cx-section-title cx-section-title-alt\">\n    {{ 'loginForm.dontHaveAccount' | cxTranslate }}\n  </h3>\n  <a\n    [routerLink]=\"{ cxRoute: 'register' } | cxUrl\"\n    class=\"btn btn-block btn-secondary\"\n    >{{ 'loginForm.register' | cxTranslate }}</a\n  >\n</div>\n"
-                }] }
-    ];
-    /** @nocollapse */
-    LoginFormComponent.ctorParameters = function () { return [
-        { type: AuthService },
-        { type: GlobalMessageService },
-        { type: FormBuilder },
-        { type: AuthRedirectService }
-    ]; };
-    return LoginFormComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var LoginFormModule = /** @class */ (function () {
-    function LoginFormModule() {
-    }
-    LoginFormModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        CommonModule,
-                        FormsModule,
-                        ReactiveFormsModule,
-                        RouterModule,
-                        UserModule,
-                        UrlModule,
-                        ConfigModule.withConfig((/** @type {?} */ ({
-                            cmsComponents: {
-                                ReturningCustomerLoginComponent: {
-                                    component: LoginFormComponent,
-                                    guards: [NotAuthGuard],
-                                },
-                            },
-                        }))),
-                        I18nModule,
-                    ],
-                    declarations: [LoginFormComponent],
-                    exports: [LoginFormComponent],
-                    entryComponents: [LoginFormComponent],
-                },] }
-    ];
-    return LoginFormModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var LoginComponent = /** @class */ (function () {
-    function LoginComponent(auth, userService) {
-        this.auth = auth;
-        this.userService = userService;
-    }
-    /**
-     * @return {?}
-     */
-    LoginComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this.user$ = this.auth.getUserToken().pipe(switchMap((/**
-         * @param {?} token
-         * @return {?}
-         */
-        function (token) {
-            if (token && !!token.access_token) {
-                return _this.userService.get();
-            }
-            else {
-                return of(undefined);
-            }
-        })));
-    };
-    LoginComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-login',
-                    template: "<ng-container *ngIf=\"(user$ | async) as user; else login\">\n  <div class=\"cx-login-greet\">\n    {{ 'miniLogin.userGreeting' | cxTranslate: { name: user.name } }}\n  </div>\n  <cx-page-slot position=\"HeaderLinks\"></cx-page-slot>\n</ng-container>\n\n<ng-template #login>\n  <a role=\"link\" [routerLink]=\"{ cxRoute: 'login' } | cxUrl\">{{\n    'miniLogin.signInRegister' | cxTranslate\n  }}</a>\n</ng-template>\n"
-                }] }
-    ];
-    /** @nocollapse */
-    LoginComponent.ctorParameters = function () { return [
-        { type: AuthService },
-        { type: UserService }
-    ]; };
-    return LoginComponent;
 }());
 
 /**
@@ -8063,105 +7833,6 @@ var PageSlotModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var LoginModule = /** @class */ (function () {
-    function LoginModule() {
-    }
-    LoginModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        CommonModule,
-                        RouterModule,
-                        UserModule,
-                        UrlModule,
-                        PageSlotModule,
-                        ConfigModule.withConfig((/** @type {?} */ ({
-                            cmsComponents: {
-                                LoginComponent: {
-                                    component: LoginComponent,
-                                },
-                            },
-                        }))),
-                        I18nModule,
-                    ],
-                    declarations: [LoginComponent],
-                    entryComponents: [LoginComponent],
-                    exports: [LoginComponent],
-                },] }
-    ];
-    return LoginModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var LogoutGuard = /** @class */ (function () {
-    function LogoutGuard(auth, cms, routing, semanticPathService) {
-        this.auth = auth;
-        this.cms = cms;
-        this.routing = routing;
-        this.semanticPathService = semanticPathService;
-    }
-    /**
-     * @return {?}
-     */
-    LogoutGuard.prototype.canActivate = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this.logout();
-        return this.cms
-            .hasPage({
-            id: this.semanticPathService.get('logout'),
-            type: PageType.CONTENT_PAGE,
-        })
-            .pipe(tap((/**
-         * @param {?} hasPage
-         * @return {?}
-         */
-        function (hasPage) {
-            if (!hasPage) {
-                _this.routing.go({ cxRoute: 'home' });
-            }
-        })));
-    };
-    /**
-     * @protected
-     * @return {?}
-     */
-    LogoutGuard.prototype.logout = /**
-     * @protected
-     * @return {?}
-     */
-    function () {
-        this.auth.logout();
-    };
-    LogoutGuard.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    LogoutGuard.ctorParameters = function () { return [
-        { type: AuthService },
-        { type: CmsService },
-        { type: RoutingService },
-        { type: SemanticPathService }
-    ]; };
-    /** @nocollapse */ LogoutGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(ɵɵinject(AuthService), ɵɵinject(CmsService), ɵɵinject(RoutingService), ɵɵinject(SemanticPathService)); }, token: LogoutGuard, providedIn: "root" });
-    return LogoutGuard;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 var PageLayoutService = /** @class */ (function () {
     function PageLayoutService(cms, config, breakpointService, handlers) {
         this.cms = cms;
@@ -8574,880 +8245,6 @@ var PageLayoutModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var ɵ0 = { cxRoute: 'logout' };
-var LogoutModule = /** @class */ (function () {
-    function LogoutModule() {
-    }
-    LogoutModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        PageLayoutModule,
-                        RouterModule.forChild([
-                            {
-                                path: null,
-                                canActivate: [LogoutGuard],
-                                component: PageLayoutComponent,
-                                data: ɵ0,
-                            },
-                        ]),
-                    ],
-                },] }
-    ];
-    return LogoutModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var RegisterComponent = /** @class */ (function () {
-    function RegisterComponent(auth, authRedirectService, userService, globalMessageService, fb) {
-        this.auth = auth;
-        this.authRedirectService = authRedirectService;
-        this.userService = userService;
-        this.globalMessageService = globalMessageService;
-        this.fb = fb;
-        this.subscription = new Subscription();
-        this.userRegistrationForm = this.fb.group({
-            titleCode: [''],
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            email: ['', [Validators.required, CustomFormValidators.emailValidator]],
-            password: [
-                '',
-                [Validators.required, CustomFormValidators.passwordValidator],
-            ],
-            passwordconf: ['', Validators.required],
-            newsletter: [false],
-            termsandconditions: [false, Validators.requiredTrue],
-        }, { validator: this.matchPassword });
-    }
-    /**
-     * @return {?}
-     */
-    RegisterComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this.titles$ = this.userService.getTitles().pipe(tap((/**
-         * @param {?} titles
-         * @return {?}
-         */
-        function (titles) {
-            if (Object.keys(titles).length === 0) {
-                _this.userService.loadTitles();
-            }
-        })));
-        this.subscription.add(this.auth.getUserToken().subscribe((/**
-         * @param {?} data
-         * @return {?}
-         */
-        function (data) {
-            if (data && data.access_token) {
-                _this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
-                _this.authRedirectService.redirect();
-            }
-        })));
-        // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
-        this.subscription.add(this.globalMessageService
-            .get()
-            .pipe(filter((/**
-         * @param {?} data
-         * @return {?}
-         */
-        function (data) { return Object.keys(data).length > 0; })))
-            .subscribe((/**
-         * @param {?} globalMessageEntities
-         * @return {?}
-         */
-        function (globalMessageEntities) {
-            if (globalMessageEntities[GlobalMessageType.MSG_TYPE_ERROR].some((/**
-             * @param {?} message
-             * @return {?}
-             */
-            function (message) { return message === 'This field is required.'; }))) {
-                _this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
-                _this.globalMessageService.add({ key: 'register.titleRequired' }, GlobalMessageType.MSG_TYPE_ERROR);
-            }
-        })));
-    };
-    /**
-     * @return {?}
-     */
-    RegisterComponent.prototype.submit = /**
-     * @return {?}
-     */
-    function () {
-        this.emailToLowerCase();
-        var _a = this.userRegistrationForm.value, firstName = _a.firstName, lastName = _a.lastName, email = _a.email, password = _a.password, titleCode = _a.titleCode;
-        /** @type {?} */
-        var userRegisterFormData = {
-            firstName: firstName,
-            lastName: lastName,
-            uid: email,
-            password: password,
-            titleCode: titleCode,
-        };
-        this.userService.register(userRegisterFormData);
-    };
-    /**
-     * @private
-     * @param {?} ac
-     * @return {?}
-     */
-    RegisterComponent.prototype.matchPassword = /**
-     * @private
-     * @param {?} ac
-     * @return {?}
-     */
-    function (ac) {
-        if (ac.get('password').value !== ac.get('passwordconf').value) {
-            return { NotEqual: true };
-        }
-    };
-    /*
-     * Change the inputed email to lowercase because
-     * the backend only accepts lowercase emails
-     */
-    /*
-       * Change the inputed email to lowercase because
-       * the backend only accepts lowercase emails
-       */
-    /**
-     * @return {?}
-     */
-    RegisterComponent.prototype.emailToLowerCase = /*
-       * Change the inputed email to lowercase because
-       * the backend only accepts lowercase emails
-       */
-    /**
-     * @return {?}
-     */
-    function () {
-        this.userRegistrationForm.value.email = this.userRegistrationForm.value.email.toLowerCase();
-    };
-    /**
-     * @return {?}
-     */
-    RegisterComponent.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
-        this.subscription.unsubscribe();
-    };
-    RegisterComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-register',
-                    template: "<section class=\"cx-page-section container\">\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of (titles$ | async)\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  (userRegistrationForm.get('email').errors?.email ||\n                    userRegistrationForm.get('email').errors?.InvalidEmail) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"newsletter\"\n                  class=\"form-check-input\"\n                  formControlName=\"newsletter\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.emailMarketing' | cxTranslate }}\n                </span>\n              </label>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            [disabled]=\"userRegistrationForm.invalid\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n"
-                }] }
-    ];
-    /** @nocollapse */
-    RegisterComponent.ctorParameters = function () { return [
-        { type: AuthService },
-        { type: AuthRedirectService },
-        { type: UserService },
-        { type: GlobalMessageService },
-        { type: FormBuilder }
-    ]; };
-    return RegisterComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var RegisterComponentModule = /** @class */ (function () {
-    function RegisterComponentModule() {
-    }
-    RegisterComponentModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        CommonModule,
-                        LoginModule,
-                        ReactiveFormsModule,
-                        RouterModule,
-                        UserModule,
-                        UrlModule,
-                        ConfigModule.withConfig((/** @type {?} */ ({
-                            cmsComponents: {
-                                RegisterCustomerComponent: {
-                                    component: RegisterComponent,
-                                    guards: [NotAuthGuard],
-                                },
-                            },
-                        }))),
-                        I18nModule,
-                    ],
-                    declarations: [RegisterComponent],
-                    exports: [RegisterComponent],
-                    entryComponents: [RegisterComponent],
-                },] }
-    ];
-    return RegisterComponentModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var UserComponentModule = /** @class */ (function () {
-    function UserComponentModule() {
-    }
-    UserComponentModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        CommonModule,
-                        LoginModule,
-                        LoginFormModule,
-                        LogoutModule,
-                        ReactiveFormsModule,
-                        RouterModule,
-                        UserModule,
-                        UrlModule,
-                        RegisterComponentModule,
-                    ],
-                },] }
-    ];
-    return UserComponentModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CmsMappingService = /** @class */ (function () {
-    function CmsMappingService(config, platformId) {
-        this.config = config;
-        this.platformId = platformId;
-    }
-    /**
-     * @param {?} flexType
-     * @return {?}
-     */
-    CmsMappingService.prototype.isComponentEnabled = /**
-     * @param {?} flexType
-     * @return {?}
-     */
-    function (flexType) {
-        /** @type {?} */
-        var isSSR = isPlatformServer(this.platformId);
-        /** @type {?} */
-        var isComponentDisabledInSSR = (this.config.cmsComponents[flexType] || {})
-            .disableSSR;
-        return !(isSSR && isComponentDisabledInSSR);
-    };
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    CmsMappingService.prototype.getRoutesForComponents = /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    function (componentTypes) {
-        var e_1, _a;
-        /** @type {?} */
-        var routes = [];
-        try {
-            for (var componentTypes_1 = __values(componentTypes), componentTypes_1_1 = componentTypes_1.next(); !componentTypes_1_1.done; componentTypes_1_1 = componentTypes_1.next()) {
-                var componentType = componentTypes_1_1.value;
-                if (this.isComponentEnabled(componentType)) {
-                    routes.push.apply(routes, __spread(this.getRoutesForComponent(componentType)));
-                }
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (componentTypes_1_1 && !componentTypes_1_1.done && (_a = componentTypes_1.return)) _a.call(componentTypes_1);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        return routes;
-    };
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    CmsMappingService.prototype.getGuardsForComponents = /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    function (componentTypes) {
-        var e_2, _a;
-        /** @type {?} */
-        var guards = new Set();
-        try {
-            for (var componentTypes_2 = __values(componentTypes), componentTypes_2_1 = componentTypes_2.next(); !componentTypes_2_1.done; componentTypes_2_1 = componentTypes_2.next()) {
-                var componentType = componentTypes_2_1.value;
-                this.getGuardsForComponent(componentType).forEach((/**
-                 * @param {?} guard
-                 * @return {?}
-                 */
-                function (guard) {
-                    return guards.add(guard);
-                }));
-            }
-        }
-        catch (e_2_1) { e_2 = { error: e_2_1 }; }
-        finally {
-            try {
-                if (componentTypes_2_1 && !componentTypes_2_1.done && (_a = componentTypes_2.return)) _a.call(componentTypes_2);
-            }
-            finally { if (e_2) throw e_2.error; }
-        }
-        return Array.from(guards);
-    };
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    CmsMappingService.prototype.getI18nKeysForComponents = /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    function (componentTypes) {
-        var e_3, _a;
-        /** @type {?} */
-        var i18nKeys = new Set();
-        try {
-            for (var componentTypes_3 = __values(componentTypes), componentTypes_3_1 = componentTypes_3.next(); !componentTypes_3_1.done; componentTypes_3_1 = componentTypes_3.next()) {
-                var componentType = componentTypes_3_1.value;
-                if (this.isComponentEnabled(componentType)) {
-                    this.getI18nKeysForComponent(componentType).forEach((/**
-                     * @param {?} key
-                     * @return {?}
-                     */
-                    function (key) {
-                        return i18nKeys.add(key);
-                    }));
-                }
-            }
-        }
-        catch (e_3_1) { e_3 = { error: e_3_1 }; }
-        finally {
-            try {
-                if (componentTypes_3_1 && !componentTypes_3_1.done && (_a = componentTypes_3.return)) _a.call(componentTypes_3);
-            }
-            finally { if (e_3) throw e_3.error; }
-        }
-        return Array.from(i18nKeys);
-    };
-    /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    CmsMappingService.prototype.getRoutesForComponent = /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    function (componentType) {
-        /** @type {?} */
-        var mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.childRoutes) || [];
-    };
-    /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    CmsMappingService.prototype.getGuardsForComponent = /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    function (componentType) {
-        /** @type {?} */
-        var mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.guards) || [];
-    };
-    /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    CmsMappingService.prototype.getI18nKeysForComponent = /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    function (componentType) {
-        /** @type {?} */
-        var mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.i18nKeys) || [];
-    };
-    CmsMappingService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    CmsMappingService.ctorParameters = function () { return [
-        { type: CmsConfig },
-        { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
-    ]; };
-    /** @nocollapse */ CmsMappingService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(ɵɵinject(CmsConfig), ɵɵinject(PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
-    return CmsMappingService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CmsGuardsService = /** @class */ (function () {
-    function CmsGuardsService(cmsMapping, injector) {
-        this.cmsMapping = cmsMapping;
-        this.injector = injector;
-    }
-    /**
-     * @param {?} componentTypes
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    CmsGuardsService.prototype.cmsPageCanActivate = /**
-     * @param {?} componentTypes
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    function (componentTypes, route, state) {
-        var _this = this;
-        /** @type {?} */
-        var guards = this.cmsMapping.getGuardsForComponents(componentTypes);
-        if (guards.length) {
-            /** @type {?} */
-            var canActivateObservables = guards.map((/**
-             * @param {?} guardClass
-             * @return {?}
-             */
-            function (guardClass) {
-                /** @type {?} */
-                var guard = _this.injector.get(guardClass, null);
-                if (isCanActivate(guard)) {
-                    return wrapIntoObservable(guard.canActivate(route, state)).pipe(first());
-                }
-                else {
-                    throw new Error('Invalid CanActivate guard in cmsMapping');
-                }
-            }));
-            return concat.apply(void 0, __spread(canActivateObservables)).pipe(skipWhile((/**
-             * @param {?} canActivate
-             * @return {?}
-             */
-            function (canActivate) { return canActivate === true; })), endWith(true), first());
-        }
-        else {
-            return of(true);
-        }
-    };
-    CmsGuardsService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    CmsGuardsService.ctorParameters = function () { return [
-        { type: CmsMappingService },
-        { type: Injector }
-    ]; };
-    /** @nocollapse */ CmsGuardsService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsGuardsService_Factory() { return new CmsGuardsService(ɵɵinject(CmsMappingService), ɵɵinject(INJECTOR)); }, token: CmsGuardsService, providedIn: "root" });
-    return CmsGuardsService;
-}());
-/**
- * @template T
- * @param {?} value
- * @return {?}
- */
-function wrapIntoObservable(value) {
-    if (isObservable(value)) {
-        return value;
-    }
-    if (isPromise(value)) {
-        return from(Promise.resolve(value));
-    }
-    return of(value);
-}
-/**
- * @param {?} obj
- * @return {?}
- */
-function isPromise(obj) {
-    return !!obj && typeof obj.then === 'function';
-}
-/**
- * @param {?} guard
- * @return {?}
- */
-function isCanActivate(guard) {
-    return guard && isFunction(guard.canActivate);
-}
-/**
- * @template T
- * @param {?} v
- * @return {?}
- */
-function isFunction(v) {
-    return typeof v === 'function';
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CmsI18nService = /** @class */ (function () {
-    function CmsI18nService(cmsMapping, translation, translationChunk) {
-        this.cmsMapping = cmsMapping;
-        this.translation = translation;
-        this.translationChunk = translationChunk;
-    }
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    CmsI18nService.prototype.loadChunksForComponents = /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    function (componentTypes) {
-        var e_1, _a;
-        /** @type {?} */
-        var i18nKeys = this.cmsMapping.getI18nKeysForComponents(componentTypes);
-        /** @type {?} */
-        var i18nChunks = new Set();
-        try {
-            for (var i18nKeys_1 = __values(i18nKeys), i18nKeys_1_1 = i18nKeys_1.next(); !i18nKeys_1_1.done; i18nKeys_1_1 = i18nKeys_1.next()) {
-                var key = i18nKeys_1_1.value;
-                i18nChunks.add(this.translationChunk.getChunkNameForKey(key));
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (i18nKeys_1_1 && !i18nKeys_1_1.done && (_a = i18nKeys_1.return)) _a.call(i18nKeys_1);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        this.translation.loadChunks(Array.from(i18nChunks));
-    };
-    CmsI18nService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    CmsI18nService.ctorParameters = function () { return [
-        { type: CmsMappingService },
-        { type: TranslationService },
-        { type: TranslationChunkService }
-    ]; };
-    /** @nocollapse */ CmsI18nService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsI18nService_Factory() { return new CmsI18nService(ɵɵinject(CmsMappingService), ɵɵinject(TranslationService), ɵɵinject(TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
-    return CmsI18nService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CmsRoutesService = /** @class */ (function () {
-    function CmsRoutesService(router, cmsMapping) {
-        this.router = router;
-        this.cmsMapping = cmsMapping;
-    }
-    /**
-     * @param {?} url
-     * @return {?}
-     */
-    CmsRoutesService.prototype.cmsRouteExist = /**
-     * @param {?} url
-     * @return {?}
-     */
-    function (url) {
-        /** @type {?} */
-        var isCmsDrivenRoute = url.startsWith('/');
-        if (!isCmsDrivenRoute) {
-            return false;
-        }
-        /** @type {?} */
-        var routePath = url.substr(1);
-        return (isCmsDrivenRoute &&
-            !!this.router.config.find((/**
-             * @param {?} route
-             * @return {?}
-             */
-            function (route) {
-                return route.data && route.data.cxCmsRouteContext && route.path === routePath;
-            })));
-    };
-    /**
-     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
-     *
-     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
-     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
-     *
-     * @param pageContext
-     * @param currentUrl
-     */
-    /**
-     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
-     *
-     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
-     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
-     *
-     * @param {?} pageContext
-     * @param {?} componentTypes
-     * @param {?} currentUrl
-     * @return {?}
-     */
-    CmsRoutesService.prototype.handleCmsRoutesInGuard = /**
-     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
-     *
-     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
-     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
-     *
-     * @param {?} pageContext
-     * @param {?} componentTypes
-     * @param {?} currentUrl
-     * @return {?}
-     */
-    function (pageContext, componentTypes, currentUrl) {
-        /** @type {?} */
-        var componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
-        if (componentRoutes.length) {
-            if (this.updateRouting(pageContext, componentRoutes)) {
-                this.router.navigateByUrl(currentUrl);
-                return false;
-            }
-        }
-        return true;
-    };
-    /**
-     * @private
-     * @param {?} pageContext
-     * @param {?} routes
-     * @return {?}
-     */
-    CmsRoutesService.prototype.updateRouting = /**
-     * @private
-     * @param {?} pageContext
-     * @param {?} routes
-     * @return {?}
-     */
-    function (pageContext, routes) {
-        if (pageContext.type === PageType.CONTENT_PAGE &&
-            pageContext.id.startsWith('/') &&
-            pageContext.id.length > 1) {
-            /** @type {?} */
-            var newRoute = {
-                path: pageContext.id.substr(1),
-                component: PageLayoutComponent,
-                children: routes,
-                data: {
-                    cxCmsRouteContext: pageContext,
-                },
-            };
-            this.router.resetConfig(__spread([newRoute], this.router.config));
-            return true;
-        }
-        return false;
-    };
-    CmsRoutesService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    CmsRoutesService.ctorParameters = function () { return [
-        { type: Router },
-        { type: CmsMappingService }
-    ]; };
-    /** @nocollapse */ CmsRoutesService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(ɵɵinject(Router), ɵɵinject(CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
-    return CmsRoutesService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CmsPageGuard = /** @class */ (function () {
-    function CmsPageGuard(routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService) {
-        this.routingService = routingService;
-        this.cmsService = cmsService;
-        this.cmsRoutes = cmsRoutes;
-        this.cmsI18n = cmsI18n;
-        this.cmsGuards = cmsGuards;
-        this.semanticPathService = semanticPathService;
-    }
-    /**
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    CmsPageGuard.prototype.canActivate = /**
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    function (route, state) {
-        var _this = this;
-        return this.routingService.getNextPageContext().pipe(switchMap((/**
-         * @param {?} pageContext
-         * @return {?}
-         */
-        function (pageContext) {
-            return _this.cmsService.hasPage(pageContext, true).pipe(first(), withLatestFrom(of(pageContext)));
-        })), switchMap((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        function (_a) {
-            var _b = __read(_a, 2), hasPage = _b[0], pageContext = _b[1];
-            return hasPage
-                ? _this.resolveCmsPageLogic(pageContext, route, state)
-                : _this.handleNotFoundPage(pageContext, route, state);
-        })));
-    };
-    /**
-     * @private
-     * @param {?} pageContext
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    CmsPageGuard.prototype.resolveCmsPageLogic = /**
-     * @private
-     * @param {?} pageContext
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    function (pageContext, route, state) {
-        var _this = this;
-        return this.cmsService.getPageComponentTypes(pageContext).pipe(switchMap((/**
-         * @param {?} componentTypes
-         * @return {?}
-         */
-        function (componentTypes) {
-            return _this.cmsGuards
-                .cmsPageCanActivate(componentTypes, route, state)
-                .pipe(withLatestFrom(of(componentTypes)));
-        })), tap((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        function (_a) {
-            var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
-            if (canActivate === true) {
-                _this.cmsI18n.loadChunksForComponents(componentTypes);
-            }
-        })), map((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        function (_a) {
-            var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
-            if (canActivate === true &&
-                !route.data.cxCmsRouteContext &&
-                !_this.cmsRoutes.cmsRouteExist(pageContext.id)) {
-                return _this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url);
-            }
-            return canActivate;
-        })));
-    };
-    /**
-     * @private
-     * @param {?} pageContext
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    CmsPageGuard.prototype.handleNotFoundPage = /**
-     * @private
-     * @param {?} pageContext
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    function (pageContext, route, state) {
-        var _this = this;
-        /** @type {?} */
-        var notFoundCmsPageContext = {
-            type: PageType.CONTENT_PAGE,
-            id: this.semanticPathService.get('notFound'),
-        };
-        return this.cmsService.hasPage(notFoundCmsPageContext).pipe(switchMap((/**
-         * @param {?} hasNotFoundPage
-         * @return {?}
-         */
-        function (hasNotFoundPage) {
-            if (hasNotFoundPage) {
-                return _this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(tap((/**
-                 * @param {?} notFoundIndex
-                 * @return {?}
-                 */
-                function (notFoundIndex) {
-                    _this.cmsService.setPageFailIndex(pageContext, notFoundIndex);
-                })), switchMap((/**
-                 * @param {?} notFoundIndex
-                 * @return {?}
-                 */
-                function (notFoundIndex) {
-                    return _this.cmsService.getPageIndex(pageContext).pipe(
-                    // we have to wait for page index update
-                    filter((/**
-                     * @param {?} index
-                     * @return {?}
-                     */
-                    function (index) { return index === notFoundIndex; })));
-                })), switchMap((/**
-                 * @return {?}
-                 */
-                function () { return _this.resolveCmsPageLogic(pageContext, route, state); })));
-            }
-            return of(false);
-        })));
-    };
-    CmsPageGuard.guardName = 'CmsPageGuard';
-    CmsPageGuard.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    CmsPageGuard.ctorParameters = function () { return [
-        { type: RoutingService },
-        { type: CmsService },
-        { type: CmsRoutesService },
-        { type: CmsI18nService },
-        { type: CmsGuardsService },
-        { type: SemanticPathService }
-    ]; };
-    /** @nocollapse */ CmsPageGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(ɵɵinject(RoutingService), ɵɵinject(CmsService), ɵɵinject(CmsRoutesService), ɵɵinject(CmsI18nService), ɵɵinject(CmsGuardsService), ɵɵinject(SemanticPathService)); }, token: CmsPageGuard, providedIn: "root" });
-    return CmsPageGuard;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 /**
  * @abstract
  */
@@ -9694,71 +8491,6 @@ var PwaModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-var cmsRoute = {
-    path: '**',
-    canActivate: [CmsPageGuard],
-    component: PageLayoutComponent,
-};
-/**
- * @param {?} injector
- * @return {?}
- */
-function addCmsRoute(injector) {
-    /** @type {?} */
-    var result = (/**
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var router = injector.get(Router);
-        router.config.push(cmsRoute);
-    });
-    return result;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var ɵ0$1 = addCmsRoute;
-var CmsRouteModule = /** @class */ (function () {
-    function CmsRouteModule() {
-    }
-    CmsRouteModule.decorators = [
-        { type: NgModule, args: [{
-                    providers: [
-                        {
-                            provide: APP_INITIALIZER,
-                            multi: true,
-                            deps: [Injector],
-                            useFactory: ɵ0$1,
-                        },
-                    ],
-                },] }
-    ];
-    return CmsRouteModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 var SeoMetaService = /** @class */ (function () {
     function SeoMetaService(ngTitle, ngMeta, pageMetaService) {
         this.ngTitle = ngTitle;
@@ -9956,16 +8688,6 @@ var SeoModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 var StorefrontComponent = /** @class */ (function () {
     function StorefrontComponent(hamburgerMenuService, routingService) {
         this.hamburgerMenuService = hamburgerMenuService;
@@ -10042,7 +8764,6 @@ var MainModule = /** @class */ (function () {
                         CommonModule,
                         RouterModule,
                         GlobalMessageComponentModule,
-                        UserComponentModule,
                         OutletRefModule,
                         PwaModule,
                         PageLayoutModule,
@@ -10054,25 +8775,6 @@ var MainModule = /** @class */ (function () {
                 },] }
     ];
     return MainModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-var layoutModules = [OutletRefModule];
-var LayoutModule = /** @class */ (function () {
-    function LayoutModule() {
-    }
-    LayoutModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: __spread([MainModule], layoutModules),
-                    providers: [{ provide: LayoutConfig, useExisting: Config }],
-                    exports: __spread([MainModule], layoutModules),
-                },] }
-    ];
-    return LayoutModule;
 }());
 
 /**
@@ -10237,6 +8939,11 @@ var CmsParagraphModule = /** @class */ (function () {
     ];
     return CmsParagraphModule;
 }());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -11089,6 +9796,62 @@ var ConsentManagementModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var CustomFormValidators = /** @class */ (function () {
+    function CustomFormValidators() {
+    }
+    /**
+     * @param {?} control
+     * @return {?}
+     */
+    CustomFormValidators.emailDomainValidator = /**
+     * @param {?} control
+     * @return {?}
+     */
+    function (control) {
+        /** @type {?} */
+        var email = (/** @type {?} */ (control.value));
+        return email.match('[.][a-zA-Z]+$') ? null : { InvalidEmail: true };
+    };
+    /**
+     * @param {?} control
+     * @return {?}
+     */
+    CustomFormValidators.emailValidator = /**
+     * @param {?} control
+     * @return {?}
+     */
+    function (control) {
+        /** @type {?} */
+        var email = (/** @type {?} */ (control.value));
+        return email.match(
+        // Email Standard RFC 5322:
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ // tslint:disable-line
+        )
+            ? null
+            : { InvalidEmail: true };
+    };
+    /**
+     * @param {?} control
+     * @return {?}
+     */
+    CustomFormValidators.passwordValidator = /**
+     * @param {?} control
+     * @return {?}
+     */
+    function (control) {
+        /** @type {?} */
+        var password = (/** @type {?} */ (control.value));
+        return password.match(/^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^*()_\-+{};:.,]).{6,}$/)
+            ? null
+            : { InvalidPassword: true };
+    };
+    return CustomFormValidators;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var ForgotPasswordComponent = /** @class */ (function () {
     function ForgotPasswordComponent(fb, userService, routingService) {
         this.fb = fb;
@@ -11480,6 +10243,623 @@ var OrderDetailTotalsComponent = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var CmsMappingService = /** @class */ (function () {
+    function CmsMappingService(config, platformId) {
+        this.config = config;
+        this.platformId = platformId;
+    }
+    /**
+     * @param {?} flexType
+     * @return {?}
+     */
+    CmsMappingService.prototype.isComponentEnabled = /**
+     * @param {?} flexType
+     * @return {?}
+     */
+    function (flexType) {
+        /** @type {?} */
+        var isSSR = isPlatformServer(this.platformId);
+        /** @type {?} */
+        var isComponentDisabledInSSR = (this.config.cmsComponents[flexType] || {})
+            .disableSSR;
+        return !(isSSR && isComponentDisabledInSSR);
+    };
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    CmsMappingService.prototype.getRoutesForComponents = /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    function (componentTypes) {
+        var e_1, _a;
+        /** @type {?} */
+        var routes = [];
+        try {
+            for (var componentTypes_1 = __values(componentTypes), componentTypes_1_1 = componentTypes_1.next(); !componentTypes_1_1.done; componentTypes_1_1 = componentTypes_1.next()) {
+                var componentType = componentTypes_1_1.value;
+                if (this.isComponentEnabled(componentType)) {
+                    routes.push.apply(routes, __spread(this.getRoutesForComponent(componentType)));
+                }
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (componentTypes_1_1 && !componentTypes_1_1.done && (_a = componentTypes_1.return)) _a.call(componentTypes_1);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        return routes;
+    };
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    CmsMappingService.prototype.getGuardsForComponents = /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    function (componentTypes) {
+        var e_2, _a;
+        /** @type {?} */
+        var guards = new Set();
+        try {
+            for (var componentTypes_2 = __values(componentTypes), componentTypes_2_1 = componentTypes_2.next(); !componentTypes_2_1.done; componentTypes_2_1 = componentTypes_2.next()) {
+                var componentType = componentTypes_2_1.value;
+                this.getGuardsForComponent(componentType).forEach((/**
+                 * @param {?} guard
+                 * @return {?}
+                 */
+                function (guard) {
+                    return guards.add(guard);
+                }));
+            }
+        }
+        catch (e_2_1) { e_2 = { error: e_2_1 }; }
+        finally {
+            try {
+                if (componentTypes_2_1 && !componentTypes_2_1.done && (_a = componentTypes_2.return)) _a.call(componentTypes_2);
+            }
+            finally { if (e_2) throw e_2.error; }
+        }
+        return Array.from(guards);
+    };
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    CmsMappingService.prototype.getI18nKeysForComponents = /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    function (componentTypes) {
+        var e_3, _a;
+        /** @type {?} */
+        var i18nKeys = new Set();
+        try {
+            for (var componentTypes_3 = __values(componentTypes), componentTypes_3_1 = componentTypes_3.next(); !componentTypes_3_1.done; componentTypes_3_1 = componentTypes_3.next()) {
+                var componentType = componentTypes_3_1.value;
+                if (this.isComponentEnabled(componentType)) {
+                    this.getI18nKeysForComponent(componentType).forEach((/**
+                     * @param {?} key
+                     * @return {?}
+                     */
+                    function (key) {
+                        return i18nKeys.add(key);
+                    }));
+                }
+            }
+        }
+        catch (e_3_1) { e_3 = { error: e_3_1 }; }
+        finally {
+            try {
+                if (componentTypes_3_1 && !componentTypes_3_1.done && (_a = componentTypes_3.return)) _a.call(componentTypes_3);
+            }
+            finally { if (e_3) throw e_3.error; }
+        }
+        return Array.from(i18nKeys);
+    };
+    /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    CmsMappingService.prototype.getRoutesForComponent = /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    function (componentType) {
+        /** @type {?} */
+        var mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.childRoutes) || [];
+    };
+    /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    CmsMappingService.prototype.getGuardsForComponent = /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    function (componentType) {
+        /** @type {?} */
+        var mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.guards) || [];
+    };
+    /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    CmsMappingService.prototype.getI18nKeysForComponent = /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    function (componentType) {
+        /** @type {?} */
+        var mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.i18nKeys) || [];
+    };
+    CmsMappingService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    CmsMappingService.ctorParameters = function () { return [
+        { type: CmsConfig },
+        { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
+    ]; };
+    /** @nocollapse */ CmsMappingService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(ɵɵinject(CmsConfig), ɵɵinject(PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
+    return CmsMappingService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CmsGuardsService = /** @class */ (function () {
+    function CmsGuardsService(cmsMapping, injector) {
+        this.cmsMapping = cmsMapping;
+        this.injector = injector;
+    }
+    /**
+     * @param {?} componentTypes
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    CmsGuardsService.prototype.cmsPageCanActivate = /**
+     * @param {?} componentTypes
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    function (componentTypes, route, state) {
+        var _this = this;
+        /** @type {?} */
+        var guards = this.cmsMapping.getGuardsForComponents(componentTypes);
+        if (guards.length) {
+            /** @type {?} */
+            var canActivateObservables = guards.map((/**
+             * @param {?} guardClass
+             * @return {?}
+             */
+            function (guardClass) {
+                /** @type {?} */
+                var guard = _this.injector.get(guardClass, null);
+                if (isCanActivate(guard)) {
+                    return wrapIntoObservable(guard.canActivate(route, state)).pipe(first());
+                }
+                else {
+                    throw new Error('Invalid CanActivate guard in cmsMapping');
+                }
+            }));
+            return concat.apply(void 0, __spread(canActivateObservables)).pipe(skipWhile((/**
+             * @param {?} canActivate
+             * @return {?}
+             */
+            function (canActivate) { return canActivate === true; })), endWith(true), first());
+        }
+        else {
+            return of(true);
+        }
+    };
+    CmsGuardsService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    CmsGuardsService.ctorParameters = function () { return [
+        { type: CmsMappingService },
+        { type: Injector }
+    ]; };
+    /** @nocollapse */ CmsGuardsService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsGuardsService_Factory() { return new CmsGuardsService(ɵɵinject(CmsMappingService), ɵɵinject(INJECTOR)); }, token: CmsGuardsService, providedIn: "root" });
+    return CmsGuardsService;
+}());
+/**
+ * @template T
+ * @param {?} value
+ * @return {?}
+ */
+function wrapIntoObservable(value) {
+    if (isObservable(value)) {
+        return value;
+    }
+    if (isPromise(value)) {
+        return from(Promise.resolve(value));
+    }
+    return of(value);
+}
+/**
+ * @param {?} obj
+ * @return {?}
+ */
+function isPromise(obj) {
+    return !!obj && typeof obj.then === 'function';
+}
+/**
+ * @param {?} guard
+ * @return {?}
+ */
+function isCanActivate(guard) {
+    return guard && isFunction(guard.canActivate);
+}
+/**
+ * @template T
+ * @param {?} v
+ * @return {?}
+ */
+function isFunction(v) {
+    return typeof v === 'function';
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CmsI18nService = /** @class */ (function () {
+    function CmsI18nService(cmsMapping, translation, translationChunk) {
+        this.cmsMapping = cmsMapping;
+        this.translation = translation;
+        this.translationChunk = translationChunk;
+    }
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    CmsI18nService.prototype.loadChunksForComponents = /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    function (componentTypes) {
+        var e_1, _a;
+        /** @type {?} */
+        var i18nKeys = this.cmsMapping.getI18nKeysForComponents(componentTypes);
+        /** @type {?} */
+        var i18nChunks = new Set();
+        try {
+            for (var i18nKeys_1 = __values(i18nKeys), i18nKeys_1_1 = i18nKeys_1.next(); !i18nKeys_1_1.done; i18nKeys_1_1 = i18nKeys_1.next()) {
+                var key = i18nKeys_1_1.value;
+                i18nChunks.add(this.translationChunk.getChunkNameForKey(key));
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (i18nKeys_1_1 && !i18nKeys_1_1.done && (_a = i18nKeys_1.return)) _a.call(i18nKeys_1);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        this.translation.loadChunks(Array.from(i18nChunks));
+    };
+    CmsI18nService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    CmsI18nService.ctorParameters = function () { return [
+        { type: CmsMappingService },
+        { type: TranslationService },
+        { type: TranslationChunkService }
+    ]; };
+    /** @nocollapse */ CmsI18nService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsI18nService_Factory() { return new CmsI18nService(ɵɵinject(CmsMappingService), ɵɵinject(TranslationService), ɵɵinject(TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
+    return CmsI18nService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CmsRoutesService = /** @class */ (function () {
+    function CmsRoutesService(router, cmsMapping) {
+        this.router = router;
+        this.cmsMapping = cmsMapping;
+    }
+    /**
+     * @param {?} url
+     * @return {?}
+     */
+    CmsRoutesService.prototype.cmsRouteExist = /**
+     * @param {?} url
+     * @return {?}
+     */
+    function (url) {
+        /** @type {?} */
+        var isCmsDrivenRoute = url.startsWith('/');
+        if (!isCmsDrivenRoute) {
+            return false;
+        }
+        /** @type {?} */
+        var routePath = url.substr(1);
+        return (isCmsDrivenRoute &&
+            !!this.router.config.find((/**
+             * @param {?} route
+             * @return {?}
+             */
+            function (route) {
+                return route.data && route.data.cxCmsRouteContext && route.path === routePath;
+            })));
+    };
+    /**
+     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
+     *
+     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
+     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
+     *
+     * @param pageContext
+     * @param currentUrl
+     */
+    /**
+     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
+     *
+     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
+     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
+     *
+     * @param {?} pageContext
+     * @param {?} componentTypes
+     * @param {?} currentUrl
+     * @return {?}
+     */
+    CmsRoutesService.prototype.handleCmsRoutesInGuard = /**
+     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
+     *
+     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
+     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
+     *
+     * @param {?} pageContext
+     * @param {?} componentTypes
+     * @param {?} currentUrl
+     * @return {?}
+     */
+    function (pageContext, componentTypes, currentUrl) {
+        /** @type {?} */
+        var componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
+        if (componentRoutes.length) {
+            if (this.updateRouting(pageContext, componentRoutes)) {
+                this.router.navigateByUrl(currentUrl);
+                return false;
+            }
+        }
+        return true;
+    };
+    /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} routes
+     * @return {?}
+     */
+    CmsRoutesService.prototype.updateRouting = /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} routes
+     * @return {?}
+     */
+    function (pageContext, routes) {
+        if (pageContext.type === PageType.CONTENT_PAGE &&
+            pageContext.id.startsWith('/') &&
+            pageContext.id.length > 1) {
+            /** @type {?} */
+            var newRoute = {
+                path: pageContext.id.substr(1),
+                component: PageLayoutComponent,
+                children: routes,
+                data: {
+                    cxCmsRouteContext: pageContext,
+                },
+            };
+            this.router.resetConfig(__spread([newRoute], this.router.config));
+            return true;
+        }
+        return false;
+    };
+    CmsRoutesService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    CmsRoutesService.ctorParameters = function () { return [
+        { type: Router },
+        { type: CmsMappingService }
+    ]; };
+    /** @nocollapse */ CmsRoutesService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(ɵɵinject(Router), ɵɵinject(CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
+    return CmsRoutesService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CmsPageGuard = /** @class */ (function () {
+    function CmsPageGuard(routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService) {
+        this.routingService = routingService;
+        this.cmsService = cmsService;
+        this.cmsRoutes = cmsRoutes;
+        this.cmsI18n = cmsI18n;
+        this.cmsGuards = cmsGuards;
+        this.semanticPathService = semanticPathService;
+    }
+    /**
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    CmsPageGuard.prototype.canActivate = /**
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    function (route, state) {
+        var _this = this;
+        return this.routingService.getNextPageContext().pipe(switchMap((/**
+         * @param {?} pageContext
+         * @return {?}
+         */
+        function (pageContext) {
+            return _this.cmsService.hasPage(pageContext, true).pipe(first(), withLatestFrom(of(pageContext)));
+        })), switchMap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 2), hasPage = _b[0], pageContext = _b[1];
+            return hasPage
+                ? _this.resolveCmsPageLogic(pageContext, route, state)
+                : _this.handleNotFoundPage(pageContext, route, state);
+        })));
+    };
+    /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    CmsPageGuard.prototype.resolveCmsPageLogic = /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    function (pageContext, route, state) {
+        var _this = this;
+        return this.cmsService.getPageComponentTypes(pageContext).pipe(switchMap((/**
+         * @param {?} componentTypes
+         * @return {?}
+         */
+        function (componentTypes) {
+            return _this.cmsGuards
+                .cmsPageCanActivate(componentTypes, route, state)
+                .pipe(withLatestFrom(of(componentTypes)));
+        })), tap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
+            if (canActivate === true) {
+                _this.cmsI18n.loadChunksForComponents(componentTypes);
+            }
+        })), map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
+            if (canActivate === true &&
+                !route.data.cxCmsRouteContext &&
+                !_this.cmsRoutes.cmsRouteExist(pageContext.id)) {
+                return _this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url);
+            }
+            return canActivate;
+        })));
+    };
+    /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    CmsPageGuard.prototype.handleNotFoundPage = /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    function (pageContext, route, state) {
+        var _this = this;
+        /** @type {?} */
+        var notFoundCmsPageContext = {
+            type: PageType.CONTENT_PAGE,
+            id: this.semanticPathService.get('notFound'),
+        };
+        return this.cmsService.hasPage(notFoundCmsPageContext).pipe(switchMap((/**
+         * @param {?} hasNotFoundPage
+         * @return {?}
+         */
+        function (hasNotFoundPage) {
+            if (hasNotFoundPage) {
+                return _this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(tap((/**
+                 * @param {?} notFoundIndex
+                 * @return {?}
+                 */
+                function (notFoundIndex) {
+                    _this.cmsService.setPageFailIndex(pageContext, notFoundIndex);
+                })), switchMap((/**
+                 * @param {?} notFoundIndex
+                 * @return {?}
+                 */
+                function (notFoundIndex) {
+                    return _this.cmsService.getPageIndex(pageContext).pipe(
+                    // we have to wait for page index update
+                    filter((/**
+                     * @param {?} index
+                     * @return {?}
+                     */
+                    function (index) { return index === notFoundIndex; })));
+                })), switchMap((/**
+                 * @return {?}
+                 */
+                function () { return _this.resolveCmsPageLogic(pageContext, route, state); })));
+            }
+            return of(false);
+        })));
+    };
+    CmsPageGuard.guardName = 'CmsPageGuard';
+    CmsPageGuard.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    CmsPageGuard.ctorParameters = function () { return [
+        { type: RoutingService },
+        { type: CmsService },
+        { type: CmsRoutesService },
+        { type: CmsI18nService },
+        { type: CmsGuardsService },
+        { type: SemanticPathService }
+    ]; };
+    /** @nocollapse */ CmsPageGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(ɵɵinject(RoutingService), ɵɵinject(CmsService), ɵɵinject(CmsRoutesService), ɵɵinject(CmsI18nService), ɵɵinject(CmsGuardsService), ɵɵinject(SemanticPathService)); }, token: CmsPageGuard, providedIn: "root" });
+    return CmsPageGuard;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 /** @type {?} */
 var moduleComponents = [
     OrderDetailHeadlineComponent,
@@ -11487,7 +10867,7 @@ var moduleComponents = [
     OrderDetailTotalsComponent,
     OrderDetailShippingComponent,
 ];
-var ɵ0$2 = { cxRoute: 'orderDetails' };
+var ɵ0 = { cxRoute: 'orderDetails' };
 var OrderDetailsModule = /** @class */ (function () {
     function OrderDetailsModule() {
     }
@@ -11503,7 +10883,7 @@ var OrderDetailsModule = /** @class */ (function () {
                                 path: null,
                                 canActivate: [AuthGuard, CmsPageGuard],
                                 component: PageLayoutComponent,
-                                data: ɵ0$2,
+                                data: ɵ0,
                             },
                         ]),
                         ConfigModule.withConfig((/** @type {?} */ ({
@@ -12770,7 +12150,9 @@ var BreadcrumbComponent = /** @class */ (function () {
          */
         function (_a) {
             var _b = __read(_a, 2), meta = _b[0], textHome = _b[1];
-            return meta.breadcrumbs ? meta.breadcrumbs : [{ label: textHome, link: '/' }];
+            return meta && meta.breadcrumbs
+                ? meta.breadcrumbs
+                : [{ label: textHome, link: '/' }];
         })));
     };
     BreadcrumbComponent.decorators = [
@@ -14147,7 +13529,6 @@ var SearchBoxModule = /** @class */ (function () {
                         CommonModule,
                         RouterModule,
                         MediaModule,
-                        ProductModule,
                         ConfigModule.withConfig((/** @type {?} */ ({
                             cmsComponents: {
                                 SearchBoxComponent: {
@@ -14215,46 +13596,6 @@ var OrderConfirmationItemsComponent = /** @class */ (function () {
         { type: CheckoutService }
     ]; };
     return OrderConfirmationItemsComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var OrderConfirmationThankYouMessageComponent = /** @class */ (function () {
-    function OrderConfirmationThankYouMessageComponent(checkoutService) {
-        this.checkoutService = checkoutService;
-    }
-    /**
-     * @return {?}
-     */
-    OrderConfirmationThankYouMessageComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        this.order$ = this.checkoutService.getOrderDetails();
-    };
-    /**
-     * @return {?}
-     */
-    OrderConfirmationThankYouMessageComponent.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
-        this.checkoutService.clearCheckoutData();
-    };
-    OrderConfirmationThankYouMessageComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-order-confirmation-thank-you-message',
-                    template: "<header class=\"cx-page-header\" *ngIf=\"(order$ | async) as order\">\n  <h1 class=\"cx-page-title\">\n    {{ 'checkoutOrderConfirmation.confirmationOfOrder' | cxTranslate }}\n    {{ order.code }}\n  </h1>\n</header>\n\n<div class=\"cx-order-confirmation-message\">\n  <h2>{{ 'checkoutOrderConfirmation.thankYou' | cxTranslate }}</h2>\n  <p>\n    {{ 'checkoutOrderConfirmation.invoiceHasBeenSentByEmail' | cxTranslate }}\n  </p>\n  <!-- <a href=\"#\" class=\"btn-link\">Print Page</a> -->\n</div>\n\n<cx-add-to-home-screen-banner></cx-add-to-home-screen-banner>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                }] }
-    ];
-    /** @nocollapse */
-    OrderConfirmationThankYouMessageComponent.ctorParameters = function () { return [
-        { type: CheckoutService }
-    ]; };
-    return OrderConfirmationThankYouMessageComponent;
 }());
 
 /**
@@ -14398,6 +13739,46 @@ var OrderConfirmationOverviewComponent = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var OrderConfirmationThankYouMessageComponent = /** @class */ (function () {
+    function OrderConfirmationThankYouMessageComponent(checkoutService) {
+        this.checkoutService = checkoutService;
+    }
+    /**
+     * @return {?}
+     */
+    OrderConfirmationThankYouMessageComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.order$ = this.checkoutService.getOrderDetails();
+    };
+    /**
+     * @return {?}
+     */
+    OrderConfirmationThankYouMessageComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this.checkoutService.clearCheckoutData();
+    };
+    OrderConfirmationThankYouMessageComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-order-confirmation-thank-you-message',
+                    template: "<header class=\"cx-page-header\" *ngIf=\"(order$ | async) as order\">\n  <h1 class=\"cx-page-title\">\n    {{ 'checkoutOrderConfirmation.confirmationOfOrder' | cxTranslate }}\n    {{ order.code }}\n  </h1>\n</header>\n\n<div class=\"cx-order-confirmation-message\">\n  <h2>{{ 'checkoutOrderConfirmation.thankYou' | cxTranslate }}</h2>\n  <p>\n    {{ 'checkoutOrderConfirmation.invoiceHasBeenSentByEmail' | cxTranslate }}\n  </p>\n  <!-- <a href=\"#\" class=\"btn-link\">Print Page</a> -->\n</div>\n\n<cx-add-to-home-screen-banner></cx-add-to-home-screen-banner>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    /** @nocollapse */
+    OrderConfirmationThankYouMessageComponent.ctorParameters = function () { return [
+        { type: CheckoutService }
+    ]; };
+    return OrderConfirmationThankYouMessageComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var OrderConfirmationTotalsComponent = /** @class */ (function () {
     function OrderConfirmationTotalsComponent(checkoutService) {
         this.checkoutService = checkoutService;
@@ -14484,11 +13865,6 @@ var OrderConfirmationGuard = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 /** @type {?} */
 var orderConfirmationComponents = [
     OrderConfirmationItemsComponent,
@@ -14506,7 +13882,6 @@ var OrderConfirmationModule = /** @class */ (function () {
                         CartSharedModule,
                         CardModule,
                         PwaModule,
-                        CheckoutModule,
                         I18nModule,
                         ConfigModule.withConfig((/** @type {?} */ ({
                             cmsComponents: {
@@ -14536,6 +13911,11 @@ var OrderConfirmationModule = /** @class */ (function () {
     ];
     return OrderConfirmationModule;
 }());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -15023,6 +14403,11 @@ var ProductIntroModule = /** @class */ (function () {
     ];
     return ProductIntroModule;
 }());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -15718,7 +15103,6 @@ var ProductSummaryModule = /** @class */ (function () {
         { type: NgModule, args: [{
                     imports: [
                         CommonModule,
-                        CmsModule,
                         OutletModule,
                         I18nModule,
                         ConfigModule.withConfig((/** @type {?} */ ({
@@ -16028,6 +15412,11 @@ var ProductTabsModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var ProductImagesComponent = /** @class */ (function () {
     function ProductImagesComponent(currentProductService) {
         var _this = this;
@@ -16203,6 +15592,511 @@ var ProductImagesModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var LoginFormComponent = /** @class */ (function () {
+    function LoginFormComponent(auth, globalMessageService, fb, authRedirectService) {
+        this.auth = auth;
+        this.globalMessageService = globalMessageService;
+        this.fb = fb;
+        this.authRedirectService = authRedirectService;
+    }
+    /**
+     * @return {?}
+     */
+    LoginFormComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.form = this.fb.group({
+            userId: ['', [Validators.required, CustomFormValidators.emailValidator]],
+            password: ['', Validators.required],
+        });
+    };
+    /**
+     * @return {?}
+     */
+    LoginFormComponent.prototype.login = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        /** @type {?} */
+        var userId = this.emailToLowerCase();
+        this.auth.authorize(userId, this.form.controls.password.value);
+        if (!this.sub) {
+            this.sub = this.auth.getUserToken().subscribe((/**
+             * @param {?} data
+             * @return {?}
+             */
+            function (data) {
+                if (data && data.access_token) {
+                    _this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
+                    _this.authRedirectService.redirect();
+                }
+            }));
+        }
+    };
+    /*
+     * Change the inputed email to lowercase because
+     * the backend only accepts lowercase emails
+     */
+    /*
+       * Change the inputed email to lowercase because
+       * the backend only accepts lowercase emails
+       */
+    /**
+     * @return {?}
+     */
+    LoginFormComponent.prototype.emailToLowerCase = /*
+       * Change the inputed email to lowercase because
+       * the backend only accepts lowercase emails
+       */
+    /**
+     * @return {?}
+     */
+    function () {
+        return this.form.controls.userId.value.toLowerCase();
+    };
+    /**
+     * @return {?}
+     */
+    LoginFormComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        if (this.sub) {
+            this.sub.unsubscribe();
+        }
+    };
+    LoginFormComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-login-form',
+                    template: "<form (submit)=\"login()\" [formGroup]=\"form\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.controls['userId'].invalid &&\n          (form.controls['userId'].touched || form.controls['userId'].dirty)\n        \"\n        formControlName=\"userId\"\n        placeholder=\"{{ 'loginForm.emailAddress.placeholder' | cxTranslate }}\"\n      />\n    </label>\n    <div\n      class=\"invalid-feedback\"\n      *ngIf=\"\n        form.controls['userId'].invalid &&\n        (form.controls['userId'].touched || form.controls['userId'].dirty)\n      \"\n    >\n      <span>{{ 'loginForm.wrongEmailFormat' | cxTranslate }}</span>\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.password.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"password\"\n        class=\"form-control\"\n        placeholder=\"{{ 'loginForm.password.placeholder' | cxTranslate }}\"\n        formControlName=\"password\"\n      />\n    </label>\n  </div>\n  <p>\n    <a\n      [routerLink]=\"{ cxRoute: 'forgotPassword' } | cxUrl\"\n      aria-controls=\"reset-password\"\n      class=\"btn-link\"\n      >{{ 'loginForm.forgotPassword' | cxTranslate }}</a\n    >\n  </p>\n\n  <button\n    type=\"submit\"\n    class=\"btn btn-block btn-primary\"\n    [disabled]=\"form.invalid\"\n  >\n    {{ 'loginForm.signIn' | cxTranslate }}\n  </button>\n</form>\n\n<div class=\"register\">\n  <h3 class=\"cx-section-title cx-section-title-alt\">\n    {{ 'loginForm.dontHaveAccount' | cxTranslate }}\n  </h3>\n  <a\n    [routerLink]=\"{ cxRoute: 'register' } | cxUrl\"\n    class=\"btn btn-block btn-secondary\"\n    >{{ 'loginForm.register' | cxTranslate }}</a\n  >\n</div>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    LoginFormComponent.ctorParameters = function () { return [
+        { type: AuthService },
+        { type: GlobalMessageService },
+        { type: FormBuilder },
+        { type: AuthRedirectService }
+    ]; };
+    return LoginFormComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var LoginFormModule = /** @class */ (function () {
+    function LoginFormModule() {
+    }
+    LoginFormModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        FormsModule,
+                        ReactiveFormsModule,
+                        RouterModule,
+                        UrlModule,
+                        ConfigModule.withConfig((/** @type {?} */ ({
+                            cmsComponents: {
+                                ReturningCustomerLoginComponent: {
+                                    component: LoginFormComponent,
+                                    guards: [NotAuthGuard],
+                                },
+                            },
+                        }))),
+                        I18nModule,
+                    ],
+                    declarations: [LoginFormComponent],
+                    exports: [LoginFormComponent],
+                    entryComponents: [LoginFormComponent],
+                },] }
+    ];
+    return LoginFormModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var LoginComponent = /** @class */ (function () {
+    function LoginComponent(auth, userService) {
+        this.auth = auth;
+        this.userService = userService;
+    }
+    /**
+     * @return {?}
+     */
+    LoginComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.user$ = this.auth.getUserToken().pipe(switchMap((/**
+         * @param {?} token
+         * @return {?}
+         */
+        function (token) {
+            if (token && !!token.access_token) {
+                return _this.userService.get();
+            }
+            else {
+                return of(undefined);
+            }
+        })));
+    };
+    LoginComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-login',
+                    template: "<ng-container *ngIf=\"(user$ | async) as user; else login\">\n  <div class=\"cx-login-greet\">\n    {{ 'miniLogin.userGreeting' | cxTranslate: { name: user.name } }}\n  </div>\n  <cx-page-slot position=\"HeaderLinks\"></cx-page-slot>\n</ng-container>\n\n<ng-template #login>\n  <a role=\"link\" [routerLink]=\"{ cxRoute: 'login' } | cxUrl\">{{\n    'miniLogin.signInRegister' | cxTranslate\n  }}</a>\n</ng-template>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    LoginComponent.ctorParameters = function () { return [
+        { type: AuthService },
+        { type: UserService }
+    ]; };
+    return LoginComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var LoginModule = /** @class */ (function () {
+    function LoginModule() {
+    }
+    LoginModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        RouterModule,
+                        UrlModule,
+                        PageSlotModule,
+                        ConfigModule.withConfig((/** @type {?} */ ({
+                            cmsComponents: {
+                                LoginComponent: {
+                                    component: LoginComponent,
+                                },
+                            },
+                        }))),
+                        I18nModule,
+                    ],
+                    declarations: [LoginComponent],
+                    entryComponents: [LoginComponent],
+                    exports: [LoginComponent],
+                },] }
+    ];
+    return LoginModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var LogoutGuard = /** @class */ (function () {
+    function LogoutGuard(auth, cms, routing, semanticPathService) {
+        this.auth = auth;
+        this.cms = cms;
+        this.routing = routing;
+        this.semanticPathService = semanticPathService;
+    }
+    /**
+     * @return {?}
+     */
+    LogoutGuard.prototype.canActivate = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.logout();
+        return this.cms
+            .hasPage({
+            id: this.semanticPathService.get('logout'),
+            type: PageType.CONTENT_PAGE,
+        })
+            .pipe(tap((/**
+         * @param {?} hasPage
+         * @return {?}
+         */
+        function (hasPage) {
+            if (!hasPage) {
+                _this.routing.go({ cxRoute: 'home' });
+            }
+        })));
+    };
+    /**
+     * @protected
+     * @return {?}
+     */
+    LogoutGuard.prototype.logout = /**
+     * @protected
+     * @return {?}
+     */
+    function () {
+        this.auth.logout();
+    };
+    LogoutGuard.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    LogoutGuard.ctorParameters = function () { return [
+        { type: AuthService },
+        { type: CmsService },
+        { type: RoutingService },
+        { type: SemanticPathService }
+    ]; };
+    /** @nocollapse */ LogoutGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(ɵɵinject(AuthService), ɵɵinject(CmsService), ɵɵinject(RoutingService), ɵɵinject(SemanticPathService)); }, token: LogoutGuard, providedIn: "root" });
+    return LogoutGuard;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ɵ0$1 = { cxRoute: 'logout' };
+var LogoutModule = /** @class */ (function () {
+    function LogoutModule() {
+    }
+    LogoutModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        PageLayoutModule,
+                        RouterModule.forChild([
+                            {
+                                path: null,
+                                canActivate: [LogoutGuard],
+                                component: PageLayoutComponent,
+                                data: ɵ0$1,
+                            },
+                        ]),
+                    ],
+                },] }
+    ];
+    return LogoutModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var RegisterComponent = /** @class */ (function () {
+    function RegisterComponent(auth, authRedirectService, userService, globalMessageService, fb) {
+        this.auth = auth;
+        this.authRedirectService = authRedirectService;
+        this.userService = userService;
+        this.globalMessageService = globalMessageService;
+        this.fb = fb;
+        this.subscription = new Subscription();
+        this.userRegistrationForm = this.fb.group({
+            titleCode: [''],
+            firstName: ['', Validators.required],
+            lastName: ['', Validators.required],
+            email: ['', [Validators.required, CustomFormValidators.emailValidator]],
+            password: [
+                '',
+                [Validators.required, CustomFormValidators.passwordValidator],
+            ],
+            passwordconf: ['', Validators.required],
+            newsletter: [false],
+            termsandconditions: [false, Validators.requiredTrue],
+        }, { validator: this.matchPassword });
+    }
+    /**
+     * @return {?}
+     */
+    RegisterComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.titles$ = this.userService.getTitles().pipe(tap((/**
+         * @param {?} titles
+         * @return {?}
+         */
+        function (titles) {
+            if (Object.keys(titles).length === 0) {
+                _this.userService.loadTitles();
+            }
+        })));
+        this.subscription.add(this.auth.getUserToken().subscribe((/**
+         * @param {?} data
+         * @return {?}
+         */
+        function (data) {
+            if (data && data.access_token) {
+                _this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
+                _this.authRedirectService.redirect();
+            }
+        })));
+        // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
+        this.subscription.add(this.globalMessageService
+            .get()
+            .pipe(filter((/**
+         * @param {?} data
+         * @return {?}
+         */
+        function (data) { return Object.keys(data).length > 0; })))
+            .subscribe((/**
+         * @param {?} globalMessageEntities
+         * @return {?}
+         */
+        function (globalMessageEntities) {
+            if (globalMessageEntities[GlobalMessageType.MSG_TYPE_ERROR].some((/**
+             * @param {?} message
+             * @return {?}
+             */
+            function (message) { return message === 'This field is required.'; }))) {
+                _this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
+                _this.globalMessageService.add({ key: 'register.titleRequired' }, GlobalMessageType.MSG_TYPE_ERROR);
+            }
+        })));
+    };
+    /**
+     * @return {?}
+     */
+    RegisterComponent.prototype.submit = /**
+     * @return {?}
+     */
+    function () {
+        this.emailToLowerCase();
+        var _a = this.userRegistrationForm.value, firstName = _a.firstName, lastName = _a.lastName, email = _a.email, password = _a.password, titleCode = _a.titleCode;
+        /** @type {?} */
+        var userRegisterFormData = {
+            firstName: firstName,
+            lastName: lastName,
+            uid: email,
+            password: password,
+            titleCode: titleCode,
+        };
+        this.userService.register(userRegisterFormData);
+    };
+    /**
+     * @private
+     * @param {?} ac
+     * @return {?}
+     */
+    RegisterComponent.prototype.matchPassword = /**
+     * @private
+     * @param {?} ac
+     * @return {?}
+     */
+    function (ac) {
+        if (ac.get('password').value !== ac.get('passwordconf').value) {
+            return { NotEqual: true };
+        }
+    };
+    /*
+     * Change the inputed email to lowercase because
+     * the backend only accepts lowercase emails
+     */
+    /*
+       * Change the inputed email to lowercase because
+       * the backend only accepts lowercase emails
+       */
+    /**
+     * @return {?}
+     */
+    RegisterComponent.prototype.emailToLowerCase = /*
+       * Change the inputed email to lowercase because
+       * the backend only accepts lowercase emails
+       */
+    /**
+     * @return {?}
+     */
+    function () {
+        this.userRegistrationForm.value.email = this.userRegistrationForm.value.email.toLowerCase();
+    };
+    /**
+     * @return {?}
+     */
+    RegisterComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this.subscription.unsubscribe();
+    };
+    RegisterComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-register',
+                    template: "<section class=\"cx-page-section container\">\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of (titles$ | async)\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  (userRegistrationForm.get('email').errors?.email ||\n                    userRegistrationForm.get('email').errors?.InvalidEmail) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"newsletter\"\n                  class=\"form-check-input\"\n                  formControlName=\"newsletter\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.emailMarketing' | cxTranslate }}\n                </span>\n              </label>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            [disabled]=\"userRegistrationForm.invalid\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    RegisterComponent.ctorParameters = function () { return [
+        { type: AuthService },
+        { type: AuthRedirectService },
+        { type: UserService },
+        { type: GlobalMessageService },
+        { type: FormBuilder }
+    ]; };
+    return RegisterComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var RegisterComponentModule = /** @class */ (function () {
+    function RegisterComponentModule() {
+    }
+    RegisterComponentModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        LoginModule,
+                        ReactiveFormsModule,
+                        RouterModule,
+                        UrlModule,
+                        ConfigModule.withConfig((/** @type {?} */ ({
+                            cmsComponents: {
+                                RegisterCustomerComponent: {
+                                    component: RegisterComponent,
+                                    guards: [NotAuthGuard],
+                                },
+                            },
+                        }))),
+                        I18nModule,
+                    ],
+                    declarations: [RegisterComponent],
+                    exports: [RegisterComponent],
+                    entryComponents: [RegisterComponent],
+                },] }
+    ];
+    return RegisterComponentModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var UserComponentModule = /** @class */ (function () {
+    function UserComponentModule() {
+    }
+    UserComponentModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        LoginModule,
+                        LoginFormModule,
+                        LogoutModule,
+                        ReactiveFormsModule,
+                        RouterModule,
+                        UrlModule,
+                        RegisterComponentModule,
+                    ],
+                },] }
+    ];
+    return UserComponentModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var CmsLibModule = /** @class */ (function () {
     function CmsLibModule() {
     }
@@ -16243,11 +16137,17 @@ var CmsLibModule = /** @class */ (function () {
                         CheckoutComponentModule,
                         ForgotPasswordModule,
                         ResetPasswordModule,
+                        UserComponentModule,
                     ],
                 },] }
     ];
     return CmsLibModule;
 }());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -16317,7 +16217,7 @@ function findLastIndex(elements, predicate) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var ɵ0$3 = { cxRoute: 'product' }, ɵ1 = {
+var ɵ0$2 = { cxRoute: 'product' }, ɵ1 = {
     cxSuffixUrlMatcher: {
         marker: 'p',
         paramName: 'productCode',
@@ -16334,7 +16234,7 @@ var ProductDetailsPageModule = /** @class */ (function () {
                                 path: null,
                                 canActivate: [CmsPageGuard],
                                 component: PageLayoutComponent,
-                                data: ɵ0$3,
+                                data: ɵ0$2,
                             },
                             {
                                 matcher: suffixUrlMatcher,
@@ -16348,6 +16248,86 @@ var ProductDetailsPageModule = /** @class */ (function () {
     ];
     return ProductDetailsPageModule;
 }());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+var cmsRoute = {
+    path: '**',
+    canActivate: [CmsPageGuard],
+    component: PageLayoutComponent,
+};
+/**
+ * @param {?} injector
+ * @return {?}
+ */
+function addCmsRoute(injector) {
+    /** @type {?} */
+    var result = (/**
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var router = injector.get(Router);
+        router.config.push(cmsRoute);
+    });
+    return result;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ɵ0$3 = addCmsRoute;
+var CmsRouteModule = /** @class */ (function () {
+    function CmsRouteModule() {
+    }
+    CmsRouteModule.decorators = [
+        { type: NgModule, args: [{
+                    providers: [
+                        {
+                            provide: APP_INITIALIZER,
+                            multi: true,
+                            deps: [Injector],
+                            useFactory: ɵ0$3,
+                        },
+                    ],
+                },] }
+    ];
+    return CmsRouteModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -16592,13 +16572,21 @@ var defaultRoutingConfig = {
 var RoutingModule = /** @class */ (function () {
     function RoutingModule() {
     }
+    /**
+     * @return {?}
+     */
+    RoutingModule.forRoot = /**
+     * @return {?}
+     */
+    function () {
+        return {
+            ngModule: RoutingModule,
+            providers: [provideConfig(defaultRoutingConfig)],
+        };
+    };
     RoutingModule.decorators = [
         { type: NgModule, args: [{
-                    imports: [
-                        RoutingModule$1,
-                        ConfigModule.withConfig(defaultRoutingConfig),
-                        CmsRouteModule,
-                    ],
+                    imports: [RoutingModule$1.forRoot(), CmsRouteModule],
                 },] }
     ];
     return RoutingModule;
@@ -16614,13 +16602,21 @@ var StorefrontFoundationModule = /** @class */ (function () {
     StorefrontFoundationModule.decorators = [
         { type: NgModule, args: [{
                     imports: [
-                        StateModule,
+                        StateModule.forRoot(),
                         AuthModule.forRoot(),
                         ConfigModule.forRoot(),
-                        RoutingModule,
+                        RoutingModule.forRoot(),
                         I18nModule.forRoot(),
+                        CmsModule.forRoot(),
+                        GlobalMessageModule.forRoot(),
+                        ProcessModule.forRoot(),
+                        CartModule.forRoot(),
+                        CheckoutModule.forRoot(),
+                        UserModule.forRoot(),
+                        ProductModule.forRoot(),
                         LayoutModule,
                     ],
+                    exports: [LayoutModule],
                     providers: __spread(provideConfigFromMetaTags()),
                 },] }
     ];
@@ -16665,14 +16661,16 @@ var StorefrontModule = /** @class */ (function () {
                         }),
                         EffectsModule.forRoot([]),
                         StorefrontFoundationModule,
+                        MainModule,
                         SiteContextModule.forRoot(),
                         SmartEditModule.forRoot(),
                         PersonalizationModule.forRoot(),
                         // opt-in explicitely
-                        OccModule,
+                        OccModule.forRoot(),
                         ProductDetailsPageModule,
                         ProductListingPageModule,
                     ],
+                    exports: [MainModule, StorefrontFoundationModule],
                 },] }
     ];
     return StorefrontModule;
@@ -16713,7 +16711,7 @@ var B2cStorefrontModule = /** @class */ (function () {
                         // the cms lib module contains all components that added in the bundle
                         CmsLibModule,
                     ],
-                    exports: [LayoutModule],
+                    exports: [StorefrontModule],
                 },] }
     ];
     return B2cStorefrontModule;
