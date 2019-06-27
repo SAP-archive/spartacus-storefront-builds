@@ -15202,11 +15202,13 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ProductListComponentService = /** @class */ (function () {
-        function ProductListComponentService(productSearchService, routing, activatedRoute, router) {
+        function ProductListComponentService(productSearchService, routing, activatedRoute, currencyService, languageService, router) {
             var _this = this;
             this.productSearchService = productSearchService;
             this.routing = routing;
             this.activatedRoute = activatedRoute;
+            this.currencyService = currencyService;
+            this.languageService = languageService;
             this.router = router;
             this.defaultPageSize = 10;
             this.RELEVANCE_CATEGORY = ':relevance:category:';
@@ -15218,21 +15220,25 @@
              * @return {?}
              */
             function (searchResult) { return Object.keys(searchResult).length > 0; })));
-            this.searchByRouting$ = this.routing.getRouterState().pipe(operators.distinctUntilChanged((/**
-             * @param {?} x
-             * @param {?} y
+            this.searchByRouting$ = rxjs.combineLatest([
+                this.routing.getRouterState().pipe(operators.distinctUntilChanged((/**
+                 * @param {?} x
+                 * @param {?} y
+                 * @return {?}
+                 */
+                function (x, y) {
+                    // router emits new value also when the anticipated `nextState` changes
+                    // but we want to perform search only when current url changes
+                    return x.state.url === y.state.url;
+                }))),
+                // also trigger search on site context changes
+                this.languageService.getActive(),
+                this.currencyService.getActive(),
+            ]).pipe(operators.pluck(0, 'state'), operators.tap((/**
+             * @param {?} state
              * @return {?}
              */
-            function (x, y) {
-                // router emits new value also when the anticipated `nextState` changes
-                // but we want to perform search only when current url changes
-                return x.state.url === y.state.url;
-            })), operators.tap((/**
-             * @param {?} __0
-             * @return {?}
-             */
-            function (_a) {
-                var state = _a.state;
+            function (state) {
                 /** @type {?} */
                 var criteria = _this.getCriteriaFromRoute(state.params, state.queryParams);
                 _this.search(criteria);
@@ -15246,14 +15252,7 @@
              * When a user leaves the PLP route, the PLP component unsubscribes from this stream
              * so no longer the search is performed on route change.
              */
-            this.model$ = rxjs.combineLatest(this.searchResults$, this.searchByRouting$).pipe(operators.map((/**
-             * @param {?} __0
-             * @return {?}
-             */
-            function (_a) {
-                var _b = __read(_a, 1), searchResults = _b[0];
-                return searchResults;
-            })), operators.shareReplay({ bufferSize: 1, refCount: true }));
+            this.model$ = rxjs.combineLatest(this.searchResults$, this.searchByRouting$).pipe(operators.pluck(0), operators.shareReplay({ bufferSize: 1, refCount: true }));
         }
         /**
          * @return {?}
@@ -15406,9 +15405,11 @@
             { type: core$1.ProductSearchService },
             { type: core$1.RoutingService },
             { type: router.ActivatedRoute },
+            { type: core$1.CurrencyService },
+            { type: core$1.LanguageService },
             { type: router.Router }
         ]; };
-        /** @nocollapse */ ProductListComponentService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function ProductListComponentService_Factory() { return new ProductListComponentService(core.ɵɵinject(core$1.ProductSearchService), core.ɵɵinject(core$1.RoutingService), core.ɵɵinject(router.ActivatedRoute), core.ɵɵinject(router.Router)); }, token: ProductListComponentService, providedIn: "root" });
+        /** @nocollapse */ ProductListComponentService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function ProductListComponentService_Factory() { return new ProductListComponentService(core.ɵɵinject(core$1.ProductSearchService), core.ɵɵinject(core$1.RoutingService), core.ɵɵinject(router.ActivatedRoute), core.ɵɵinject(core$1.CurrencyService), core.ɵɵinject(core$1.LanguageService), core.ɵɵinject(router.Router)); }, token: ProductListComponentService, providedIn: "root" });
         return ProductListComponentService;
     }());
 

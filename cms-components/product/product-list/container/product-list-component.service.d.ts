@@ -1,16 +1,18 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductSearchPage, ProductSearchService, RoutingService } from '@spartacus/core';
+import { CurrencyService, LanguageService, ProductSearchPage, ProductSearchService, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 export declare class ProductListComponentService {
     protected productSearchService: ProductSearchService;
     protected routing: RoutingService;
     protected activatedRoute: ActivatedRoute;
+    protected currencyService: CurrencyService;
+    protected languageService: LanguageService;
     protected router: Router;
     protected defaultPageSize: number;
     protected sub: Subscription;
     protected readonly RELEVANCE_CATEGORY = ":relevance:category:";
     protected readonly RELEVANCE_BRAND = ":relevance:brand:";
-    constructor(productSearchService: ProductSearchService, routing: RoutingService, activatedRoute: ActivatedRoute, router: Router);
+    constructor(productSearchService: ProductSearchService, routing: RoutingService, activatedRoute: ActivatedRoute, currencyService: CurrencyService, languageService: LanguageService, router: Router);
     private searchResults$;
     private searchByRouting$;
     /**

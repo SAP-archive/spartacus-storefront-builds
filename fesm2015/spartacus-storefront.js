@@ -1,6 +1,6 @@
 import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, EventEmitter, Output, forwardRef, Renderer2, HostListener, Optional, Injector, InjectionToken, isDevMode, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, INJECTOR, APP_INITIALIZER, Pipe } from '@angular/core';
 import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, GlobalMessageModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, CheckoutModule, AuthService, AuthRedirectService, UserModule, NotAuthGuard, CmsConfig, CmsService, CurrencyService, LanguageService, BaseSiteService, ProductSearchService, ProductReviewService, DynamicAttributeService, PageType, SemanticPathService, TranslationChunkService, PageRobotsMeta, PageMetaService, UserConsentService, UserOrderService, CmsPageTitleModule, SearchboxService, ProductModule, ProductReferenceService, CmsModule, RoutingModule as RoutingModule$1, StateModule, AuthModule, provideConfigFromMetaTags, provideConfig, SmartEditModule, PersonalizationModule, OccModule } from '@spartacus/core';
-import { map, filter, switchMap, tap, startWith, debounceTime, distinctUntilChanged, take, shareReplay, skipWhile, first, endWith, withLatestFrom } from 'rxjs/operators';
+import { map, filter, switchMap, tap, startWith, debounceTime, distinctUntilChanged, take, shareReplay, skipWhile, first, endWith, withLatestFrom, pluck } from 'rxjs/operators';
 import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
@@ -12670,12 +12670,16 @@ class ProductListComponentService {
      * @param {?} productSearchService
      * @param {?} routing
      * @param {?} activatedRoute
+     * @param {?} currencyService
+     * @param {?} languageService
      * @param {?} router
      */
-    constructor(productSearchService, routing, activatedRoute, router) {
+    constructor(productSearchService, routing, activatedRoute, currencyService, languageService, router) {
         this.productSearchService = productSearchService;
         this.routing = routing;
         this.activatedRoute = activatedRoute;
+        this.currencyService = currencyService;
+        this.languageService = languageService;
         this.router = router;
         this.defaultPageSize = 10;
         this.RELEVANCE_CATEGORY = ':relevance:category:';
@@ -12687,20 +12691,25 @@ class ProductListComponentService {
          * @return {?}
          */
         searchResult => Object.keys(searchResult).length > 0)));
-        this.searchByRouting$ = this.routing.getRouterState().pipe(distinctUntilChanged((/**
-         * @param {?} x
-         * @param {?} y
+        this.searchByRouting$ = combineLatest([
+            this.routing.getRouterState().pipe(distinctUntilChanged((/**
+             * @param {?} x
+             * @param {?} y
+             * @return {?}
+             */
+            (x, y) => {
+                // router emits new value also when the anticipated `nextState` changes
+                // but we want to perform search only when current url changes
+                return x.state.url === y.state.url;
+            }))),
+            // also trigger search on site context changes
+            this.languageService.getActive(),
+            this.currencyService.getActive(),
+        ]).pipe(pluck(0, 'state'), tap((/**
+         * @param {?} state
          * @return {?}
          */
-        (x, y) => {
-            // router emits new value also when the anticipated `nextState` changes
-            // but we want to perform search only when current url changes
-            return x.state.url === y.state.url;
-        })), tap((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        ({ state }) => {
+        (state) => {
             /** @type {?} */
             const criteria = this.getCriteriaFromRoute(state.params, state.queryParams);
             this.search(criteria);
@@ -12714,11 +12723,7 @@ class ProductListComponentService {
          * When a user leaves the PLP route, the PLP component unsubscribes from this stream
          * so no longer the search is performed on route change.
          */
-        this.model$ = combineLatest(this.searchResults$, this.searchByRouting$).pipe(map((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        ([searchResults]) => searchResults)), shareReplay({ bufferSize: 1, refCount: true }));
+        this.model$ = combineLatest(this.searchResults$, this.searchByRouting$).pipe(pluck(0), shareReplay({ bufferSize: 1, refCount: true }));
     }
     /**
      * @return {?}
@@ -12830,9 +12835,11 @@ ProductListComponentService.ctorParameters = () => [
     { type: ProductSearchService },
     { type: RoutingService },
     { type: ActivatedRoute },
+    { type: CurrencyService },
+    { type: LanguageService },
     { type: Router }
 ];
-/** @nocollapse */ ProductListComponentService.ngInjectableDef = ɵɵdefineInjectable({ factory: function ProductListComponentService_Factory() { return new ProductListComponentService(ɵɵinject(ProductSearchService), ɵɵinject(RoutingService), ɵɵinject(ActivatedRoute), ɵɵinject(Router)); }, token: ProductListComponentService, providedIn: "root" });
+/** @nocollapse */ ProductListComponentService.ngInjectableDef = ɵɵdefineInjectable({ factory: function ProductListComponentService_Factory() { return new ProductListComponentService(ɵɵinject(ProductSearchService), ɵɵinject(RoutingService), ɵɵinject(ActivatedRoute), ɵɵinject(CurrencyService), ɵɵinject(LanguageService), ɵɵinject(Router)); }, token: ProductListComponentService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
