@@ -1,7 +1,0 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-export { GlobalMessageComponentModule } from './global-message.module';
-export { GlobalMessageComponent } from './global-message.component';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJsaWIvZ2xvYmFsLW1lc3NhZ2UvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLDZDQUFjLHlCQUF5QixDQUFDO0FBQ3hDLHVDQUFjLDRCQUE0QixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0ICogZnJvbSAnLi9nbG9iYWwtbWVzc2FnZS5tb2R1bGUnO1xuZXhwb3J0ICogZnJvbSAnLi9nbG9iYWwtbWVzc2FnZS5jb21wb25lbnQnO1xuIl19
