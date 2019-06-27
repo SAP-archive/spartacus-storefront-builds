@@ -7775,6 +7775,47 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var CxApiService = /** @class */ (function () {
+        function CxApiService(auth, cms, routing, currency, language, baseSite, product, productSearch, productReview, user, translation) {
+            this.auth = auth;
+            this.cms = cms;
+            this.routing = routing;
+            this.currency = currency;
+            this.language = language;
+            this.baseSite = baseSite;
+            this.product = product;
+            this.productSearch = productSearch;
+            this.productReview = productReview;
+            this.user = user;
+            this.translation = translation;
+        }
+        CxApiService.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        CxApiService.ctorParameters = function () { return [
+            { type: core$1.AuthService, decorators: [{ type: core.Optional }] },
+            { type: core$1.CmsService, decorators: [{ type: core.Optional }] },
+            { type: core$1.RoutingService, decorators: [{ type: core.Optional }] },
+            { type: core$1.CurrencyService, decorators: [{ type: core.Optional }] },
+            { type: core$1.LanguageService, decorators: [{ type: core.Optional }] },
+            { type: core$1.BaseSiteService, decorators: [{ type: core.Optional }] },
+            { type: core$1.ProductService, decorators: [{ type: core.Optional }] },
+            { type: core$1.ProductSearchService, decorators: [{ type: core.Optional }] },
+            { type: core$1.ProductReviewService, decorators: [{ type: core.Optional }] },
+            { type: core$1.UserService, decorators: [{ type: core.Optional }] },
+            { type: core$1.TranslationService, decorators: [{ type: core.Optional }] }
+        ]; };
+        /** @nocollapse */ CxApiService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CxApiService_Factory() { return new CxApiService(core.ɵɵinject(core$1.AuthService, 8), core.ɵɵinject(core$1.CmsService, 8), core.ɵɵinject(core$1.RoutingService, 8), core.ɵɵinject(core$1.CurrencyService, 8), core.ɵɵinject(core$1.LanguageService, 8), core.ɵɵinject(core$1.BaseSiteService, 8), core.ɵɵinject(core$1.ProductService, 8), core.ɵɵinject(core$1.ProductSearchService, 8), core.ɵɵinject(core$1.ProductReviewService, 8), core.ɵɵinject(core$1.UserService, 8), core.ɵɵinject(core$1.TranslationService, 8)); }, token: CxApiService, providedIn: "root" });
+        return CxApiService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var ComponentWrapperDirective = /** @class */ (function () {
         function ComponentWrapperDirective(vcr, componentMapper, injector, cmsService, dynamicAttributeService, renderer, cd, config, platformId) {
             this.vcr = vcr;
@@ -7856,7 +7897,7 @@
                             elementName = _a.sent();
                             if (elementName) {
                                 this.webElement = this.renderer.createElement(elementName);
-                                this.webElement.cxApi = __assign({}, this.injector.get(core$1.CxApiService), { CmsComponentData: this.getCmsDataForComponent() });
+                                this.webElement.cxApi = __assign({}, this.injector.get(CxApiService), { CmsComponentData: this.getCmsDataForComponent() });
                                 this.renderer.appendChild(this.vcr.element.nativeElement.parentElement, this.webElement);
                             }
                             return [2 /*return*/];
