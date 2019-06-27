@@ -3412,7 +3412,7 @@
         PromotionsComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-promotions',
-                        template: "<div class=\"cx-promotions\" *ngIf=\"promotions\">\n  <strong *ngFor=\"let promotion of promotions\">\n    {{ promotion.description }}\n  </strong>\n</div>\n",
+                        template: "<div class=\"cx-promotions\" *ngIf=\"promotions\">\n  <strong *ngFor=\"let promotion of promotions\">\n    <li>{{ promotion.description }}</li>\n  </strong>\n</div>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -3830,9 +3830,13 @@
          */
         function (cart) {
             /** @type {?} */
-            var potentialPromotions = cart.potentialOrderPromotions || [];
+            var potentialPromotions = [];
+            potentialPromotions.push.apply(potentialPromotions, __spread((cart.potentialOrderPromotions || [])));
+            potentialPromotions.push.apply(potentialPromotions, __spread((cart.potentialProductPromotions || [])));
             /** @type {?} */
-            var appliedPromotions = cart.appliedOrderPromotions || [];
+            var appliedPromotions = [];
+            appliedPromotions.push.apply(appliedPromotions, __spread((cart.appliedOrderPromotions || [])));
+            appliedPromotions.push.apply(appliedPromotions, __spread((cart.appliedProductPromotions || [])));
             return __spread(potentialPromotions, appliedPromotions);
         };
         CartDetailsComponent.decorators = [

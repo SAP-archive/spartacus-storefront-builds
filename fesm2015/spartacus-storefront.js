@@ -2631,7 +2631,7 @@ class PromotionsComponent {
 PromotionsComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-promotions',
-                template: "<div class=\"cx-promotions\" *ngIf=\"promotions\">\n  <strong *ngFor=\"let promotion of promotions\">\n    {{ promotion.description }}\n  </strong>\n</div>\n",
+                template: "<div class=\"cx-promotions\" *ngIf=\"promotions\">\n  <strong *ngFor=\"let promotion of promotions\">\n    <li>{{ promotion.description }}</li>\n  </strong>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -2956,9 +2956,13 @@ class CartDetailsComponent {
      */
     getAllPromotionsForCart(cart) {
         /** @type {?} */
-        const potentialPromotions = cart.potentialOrderPromotions || [];
+        const potentialPromotions = [];
+        potentialPromotions.push(...(cart.potentialOrderPromotions || []));
+        potentialPromotions.push(...(cart.potentialProductPromotions || []));
         /** @type {?} */
-        const appliedPromotions = cart.appliedOrderPromotions || [];
+        const appliedPromotions = [];
+        appliedPromotions.push(...(cart.appliedOrderPromotions || []));
+        appliedPromotions.push(...(cart.appliedProductPromotions || []));
         return [...potentialPromotions, ...appliedPromotions];
     }
 }
