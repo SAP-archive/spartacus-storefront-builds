@@ -1,11 +1,11 @@
-import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, EventEmitter, Output, forwardRef, Renderer2, HostListener, Optional, Injector, InjectionToken, isDevMode, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, APP_INITIALIZER, INJECTOR, Pipe } from '@angular/core';
-import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, CmsConfig, AuthService, CmsService, CurrencyService, LanguageService, BaseSiteService, ProductSearchService, ProductReviewService, DynamicAttributeService, PageRobotsMeta, PageMetaService, UserConsentService, NotAuthGuard, UserOrderService, TranslationChunkService, PageType, SemanticPathService, CmsPageTitleModule, SearchboxService, ProductReferenceService, AuthRedirectService, provideConfig, RoutingModule as RoutingModule$1, StateModule, AuthModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule } from '@spartacus/core';
-import { map, filter, switchMap, tap, startWith, debounceTime, distinctUntilChanged, take, shareReplay, skipWhile, first, withLatestFrom, endWith, pluck } from 'rxjs/operators';
+import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, EventEmitter, Output, isDevMode, forwardRef, Renderer2, HostListener, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, APP_INITIALIZER, INJECTOR, Pipe } from '@angular/core';
+import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, CmsConfig, AuthService, CmsService, CurrencyService, LanguageService, BaseSiteService, ProductSearchService, ProductReviewService, DynamicAttributeService, PageRobotsMeta, PageMetaService, TranslationChunkService, PageType, SemanticPathService, UserConsentService, NotAuthGuard, UserOrderService, CmsPageTitleModule, SearchboxService, ProductReferenceService, AuthRedirectService, provideConfig, RoutingModule as RoutingModule$1, StateModule, AuthModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule } from '@spartacus/core';
+import { map, filter, switchMap, tap, debounceTime, startWith, distinctUntilChanged, take, shareReplay, skipWhile, first, endWith, withLatestFrom, pluck } from 'rxjs/operators';
 import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
-import { iif, fromEvent, of, combineLatest, BehaviorSubject, Subscription, concat, isObservable, from } from 'rxjs';
+import { of, fromEvent, combineLatest, BehaviorSubject, concat, isObservable, from, Subscription } from 'rxjs';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
 import { __awaiter } from 'tslib';
@@ -841,25 +841,53 @@ class CarouselService {
         this.winRef = winRef;
     }
     /**
-     * The number of items shown in the carousel is calculated dividing
-     * the host element width with the minimum item width.
+     * The number of items per slide is calculated by the help of
+     * the item width and the available width of the host element.
+     * This appoach makes it possible to place the carousel in different
+     * layouts. Instead of using the page breakpoints, the host size is
+     * taken into account.
+     *
+     * Since there's no element resize API available, we use the
+     * window `resize` event, so that we can adjust the number of items
+     * whenever the window got resized.
      * @param {?} nativeElement
      * @param {?} itemWidth
      * @return {?}
      */
-    getSize(nativeElement, itemWidth) {
-        return iif((/**
+    getItemsPerSlide(nativeElement, itemWidth) {
+        return this.winRef.resize$.pipe(map((/**
          * @return {?}
          */
-        () => Boolean(this.winRef.nativeWindow)), fromEvent(this.winRef.nativeWindow, 'resize').pipe(map((/**
-         * @param {?} _
-         * @return {?}
-         */
-        _ => ((/** @type {?} */ (nativeElement))).clientWidth)), startWith(((/** @type {?} */ (nativeElement))).clientWidth), debounceTime(100), map((/**
+        () => ((/** @type {?} */ (nativeElement))).clientWidth)), map((/**
          * @param {?} totalWidth
          * @return {?}
          */
-        totalWidth => Math.round(totalWidth / itemWidth))), distinctUntilChanged()), of(3));
+        totalWidth => this.calculateItems(totalWidth, itemWidth))));
+    }
+    /**
+     * Calculates the number of items per given hostSize.  calculated based on the given
+     * intended size in pixels or percentages. The
+     *
+     * @private
+     * @param {?} availableWidth The available width in pixels for the carousel items.
+     * @param {?} itemWidth The width per carousel item, in px or percentage.
+     * @return {?}
+     */
+    calculateItems(availableWidth, itemWidth) {
+        /** @type {?} */
+        let calculatedItems = 0;
+        if (itemWidth.endsWith('px')) {
+            /** @type {?} */
+            const num = itemWidth.substring(0, itemWidth.length - 2);
+            calculatedItems = availableWidth / (/** @type {?} */ (((/** @type {?} */ (num)))));
+        }
+        if (itemWidth.endsWith('%')) {
+            /** @type {?} */
+            const perc = itemWidth.substring(0, itemWidth.length - 1);
+            calculatedItems =
+                availableWidth / (availableWidth * ((/** @type {?} */ (((/** @type {?} */ (perc))))) / 100));
+        }
+        return Math.floor(calculatedItems) || 1;
     }
 }
 CarouselService.decorators = [
@@ -877,6 +905,21 @@ CarouselService.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * Generic carousel component that can be used to render any carousel items,
+ * such as products, images, banners, or any component. Carousel items are
+ * rendered in so-called carousel slides, and the previous/next buttons as well as
+ * the indicator-buttons can used to navigate the slides.
+ *
+ * The component uses an array of Observables (`items$`) as an input, to allow
+ * for lazy loading of items.
+ *
+ * The number of items per slide is calculated with the `itemWidth`, which can given
+ * in pixels or percentage.
+ *
+ * To allow for flexible rendering of items, the rendering is delegated to the
+ * given `template`. This allows for maximum flexibility.
+ */
 class CarouselComponent {
     /**
      * @param {?} el
@@ -886,69 +929,42 @@ class CarouselComponent {
         this.el = el;
         this.service = service;
         /**
-         * Specifies the min pixel used per product. This value is used
-         * to calculate the amount of items we can fit into the available with
-         * of the host element. The number of items is not related the breakpoints,
-         * which means that a carousel can be placed in different layouts,
-         * regardless of the overall size.
+         * Specifies the minimum size of the carousel item, either in px or %.
+         * This value is used for the calculation of numbers per carousel, so that
+         * the number of carousel items is dynamic. The calculation uses the `itemWidth`
+         * and the host element `clientWidth`, so that the carousel is reusable in
+         * different layouts (for example in a 50% grid).
          */
-        this.minItemPixelSize = 300;
+        this.itemWidth = '300px';
+        /**
+         * Indicates whether the visual indicators are used.
+         */
         this.hideIndicators = false;
         this.indicatorIcon = ICON_TYPE.CIRCLE;
         this.previousIcon = ICON_TYPE.CARET_LEFT;
         this.nextIcon = ICON_TYPE.CARET_RIGHT;
-        this.open = new EventEmitter();
-        /**
-         * The group with items which is currently active.
-         */
-        this.activeSlide = 0;
-    }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    set items(value) {
-        this._items = value;
-        this.select();
-    }
-    /**
-     * @return {?}
-     */
-    get items() {
-        return this._items;
     }
     /**
      * @return {?}
      */
     ngOnInit() {
+        if (!this.template && isDevMode()) {
+            console.error('No template reference provided to render the carousel items for the `cx-carousel`');
+            return;
+        }
         this.size$ = this.service
-            .getSize(this.el.nativeElement, this.minItemPixelSize)
+            .getItemsPerSlide(this.el.nativeElement, this.itemWidth)
             .pipe(tap((/**
          * @return {?}
          */
-        () => this.select())));
-    }
-    /**
-     * @param {?=} slide
-     * @return {?}
-     */
-    select(slide = 0) {
-        this.activeSlide = slide;
-    }
-    /**
-     * @param {?} groupIndex
-     * @param {?} itemIndex
-     * @return {?}
-     */
-    onOpen(groupIndex, itemIndex) {
-        this.select(groupIndex);
-        this.open.emit(this.items[groupIndex + itemIndex]);
+        () => (this.activeSlide = 0))));
     }
 }
 CarouselComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-carousel',
-                template: "<ng-container *ngIf=\"items && items.length > 0 && (size$ | async) as size\">\n  <h3 *ngIf=\"title\">\n    {{ title }}\n  </h3>\n\n  <div class=\"carousel-panel\" [ngClass]=\"'size-' + size\">\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"previous\"\n      (click)=\"select(activeSlide - size)\"\n      [disabled]=\"activeSlide === 0\"\n    >\n      <cx-icon [type]=\"previousIcon\"></cx-icon>\n    </button>\n\n    <div class=\"groups\">\n      <ng-container *ngFor=\"let _ of items; let i = index\">\n        <div class=\"group\" *ngIf=\"i % size === 0\">\n          <ng-container\n            *ngFor=\"let item of (items | slice: i:i + size); let j = index\"\n          >\n            <a\n              *ngIf=\"item && item.route; else noLink\"\n              class=\"item\"\n              [class.active]=\"i === activeSlide\"\n              [class.activeItem]=\"j === activeItem - i\"\n              (focus)=\"onOpen(i, j)\"\n              tabindex=\"0\"\n              [routerLink]=\"item.route\"\n            >\n              <cx-media\n                [container]=\"item.media?.container\"\n                [format]=\"item.media?.format\"\n              >\n              </cx-media>\n\n              <h4 *ngIf=\"item.title\">{{ item.title }}</h4>\n              <div *ngIf=\"item.price\" class=\"price\">{{ item.price }}</div>\n            </a>\n            <ng-template #noLink>\n              <a\n                *ngIf=\"item\"\n                class=\"item\"\n                [class.active]=\"i === activeSlide\"\n                [class.activeItem]=\"j === activeItem - i\"\n                (focus)=\"onOpen(i, j)\"\n                tabindex=\"0\"\n              >\n                <cx-media\n                  [container]=\"item.media?.container\"\n                  [format]=\"item.media?.format\"\n                >\n                </cx-media>\n\n                <h4 *ngIf=\"item.title\">{{ item.title }}</h4>\n                <div *ngIf=\"item.price\" class=\"price\">{{ item.price }}</div>\n              </a>\n            </ng-template>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"next\"\n      (click)=\"select(activeSlide + size)\"\n      [disabled]=\"activeSlide > items.length - size - 1\"\n    >\n      <cx-icon [type]=\"nextIcon\"></cx-icon>\n    </button>\n  </div>\n\n  <div *ngIf=\"!hideIndicators && size < items.length\" class=\"indicators\">\n    <ng-container *ngFor=\"let _ of items; let i = index\">\n      <button\n        *ngIf=\"i % size === 0\"\n        (click)=\"select(i)\"\n        [disabled]=\"i === activeSlide\"\n      >\n        <cx-icon [type]=\"indicatorIcon\"></cx-icon>\n      </button>\n    </ng-container>\n  </div>\n</ng-container>\n"
+                template: "<ng-container *ngIf=\"items?.length > 0 && (size$ | async) as size\">\n  <h3 *ngIf=\"title\">{{ title }}</h3>\n\n  <div class=\"carousel-panel\" [ngClass]=\"'size-' + size\">\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"previous\"\n      (click)=\"activeSlide = activeSlide - size\"\n      [disabled]=\"activeSlide === 0\"\n    >\n      <cx-icon [type]=\"previousIcon\"></cx-icon>\n    </button>\n\n    <div class=\"slides\">\n      <ng-container *ngFor=\"let _ of items; let i = index\">\n        <div class=\"slide\" *ngIf=\"i % size === 0\">\n          <ng-container\n            *ngFor=\"let item of (items | slice: i:i + size); let j = index\"\n          >\n            <div\n              *ngIf=\"(item | async) as data\"\n              class=\"item\"\n              [class.active]=\"i === activeSlide\"\n            >\n              <ng-container\n                *ngTemplateOutlet=\"template; context: { item: data }\"\n              ></ng-container>\n            </div>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"next\"\n      (click)=\"activeSlide = activeSlide + size\"\n      tabindex=\"0\"\n      [disabled]=\"activeSlide > items.length - size - 1\"\n    >\n      <cx-icon [type]=\"nextIcon\"></cx-icon>\n    </button>\n  </div>\n\n  <div *ngIf=\"!hideIndicators && size < items.length\" class=\"indicators\">\n    <ng-container *ngFor=\"let _ of items; let i = index\">\n      <button\n        *ngIf=\"i % size === 0\"\n        (focus)=\"activeSlide = i\"\n        [disabled]=\"i === activeSlide\"\n        tabindex=\"0\"\n      >\n        <cx-icon [type]=\"indicatorIcon\"></cx-icon>\n      </button>\n    </ng-container>\n  </div>\n</ng-container>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
 /** @nocollapse */
@@ -958,20 +974,14 @@ CarouselComponent.ctorParameters = () => [
 ];
 CarouselComponent.propDecorators = {
     title: [{ type: Input }],
-    items: [{ type: Input, args: ['items',] }],
-    activeItem: [{ type: Input }],
-    minItemPixelSize: [{ type: Input }],
+    items: [{ type: Input }],
+    template: [{ type: Input }],
+    itemWidth: [{ type: Input }],
     hideIndicators: [{ type: Input }],
     indicatorIcon: [{ type: Input }],
     previousIcon: [{ type: Input }],
-    nextIcon: [{ type: Input }],
-    open: [{ type: Output }]
+    nextIcon: [{ type: Input }]
 };
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 
 /**
  * @fileoverview added by tsickle
@@ -6301,18 +6311,16 @@ class ComponentWrapperDirective {
      * @param {?} cmsService
      * @param {?} dynamicAttributeService
      * @param {?} renderer
-     * @param {?} cd
      * @param {?} config
      * @param {?} platformId
      */
-    constructor(vcr, componentMapper, injector, cmsService, dynamicAttributeService, renderer, cd, config, platformId) {
+    constructor(vcr, componentMapper, injector, cmsService, dynamicAttributeService, renderer, config, platformId) {
         this.vcr = vcr;
         this.componentMapper = componentMapper;
         this.injector = injector;
         this.cmsService = cmsService;
         this.dynamicAttributeService = dynamicAttributeService;
         this.renderer = renderer;
-        this.cd = cd;
         this.config = config;
         this.platformId = platformId;
     }
@@ -6350,7 +6358,6 @@ class ComponentWrapperDirective {
         const factory = this.componentMapper.getComponentFactoryByCode(this.cxComponentWrapper.flexType);
         if (factory) {
             this.cmpRef = this.vcr.createComponent(factory, undefined, this.getInjectorForComponent());
-            this.cd.detectChanges();
             if (this.cmsService.isLaunchInSmartEdit()) {
                 this.addSmartEditContract(this.cmpRef.location.nativeElement);
             }
@@ -6434,7 +6441,6 @@ ComponentWrapperDirective.ctorParameters = () => [
     { type: CmsService },
     { type: DynamicAttributeService },
     { type: Renderer2 },
-    { type: ChangeDetectorRef },
     { type: CmsConfig },
     { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
 ];
@@ -6862,7 +6868,7 @@ class PageLayoutComponent {
 PageLayoutComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-page-layout',
-                template: "<!-- ???? {{ layoutName$ | async }} -->\n<ng-template\n  [cxOutlet]=\"layoutName$ | async\"\n  [cxOutletContext]=\"{\n    templateName$: templateName$,\n    slots$: slots$,\n    section$: section$\n  }\"\n>\n  <ng-content></ng-content>\n\n  <!-- {{ slots$ | async }} -->\n  <cx-page-slot\n    *ngFor=\"let slot of (slots$ | async)\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-template>\n",
+                template: "<ng-template\n  [cxOutlet]=\"layoutName$ | async\"\n  [cxOutletContext]=\"{\n    templateName$: templateName$,\n    slots$: slots$,\n    section$: section$\n  }\"\n>\n  <ng-content></ng-content>\n\n  <cx-page-slot\n    *ngFor=\"let slot of (slots$ | async)\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -7373,6 +7379,671 @@ MainModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CmsMappingService {
+    /**
+     * @param {?} config
+     * @param {?} platformId
+     */
+    constructor(config, platformId) {
+        this.config = config;
+        this.platformId = platformId;
+    }
+    /**
+     * @param {?} flexType
+     * @return {?}
+     */
+    isComponentEnabled(flexType) {
+        /** @type {?} */
+        const isSSR = isPlatformServer(this.platformId);
+        /** @type {?} */
+        const isComponentDisabledInSSR = (this.config.cmsComponents[flexType] || {})
+            .disableSSR;
+        return !(isSSR && isComponentDisabledInSSR);
+    }
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    getRoutesForComponents(componentTypes) {
+        /** @type {?} */
+        const routes = [];
+        for (const componentType of componentTypes) {
+            if (this.isComponentEnabled(componentType)) {
+                routes.push(...this.getRoutesForComponent(componentType));
+            }
+        }
+        return routes;
+    }
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    getGuardsForComponents(componentTypes) {
+        /** @type {?} */
+        const guards = new Set();
+        for (const componentType of componentTypes) {
+            this.getGuardsForComponent(componentType).forEach((/**
+             * @param {?} guard
+             * @return {?}
+             */
+            guard => guards.add(guard)));
+        }
+        return Array.from(guards);
+    }
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    getI18nKeysForComponents(componentTypes) {
+        /** @type {?} */
+        const i18nKeys = new Set();
+        for (const componentType of componentTypes) {
+            if (this.isComponentEnabled(componentType)) {
+                this.getI18nKeysForComponent(componentType).forEach((/**
+                 * @param {?} key
+                 * @return {?}
+                 */
+                key => i18nKeys.add(key)));
+            }
+        }
+        return Array.from(i18nKeys);
+    }
+    /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    getRoutesForComponent(componentType) {
+        /** @type {?} */
+        const mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.childRoutes) || [];
+    }
+    /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    getGuardsForComponent(componentType) {
+        /** @type {?} */
+        const mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.guards) || [];
+    }
+    /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    getI18nKeysForComponent(componentType) {
+        /** @type {?} */
+        const mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.i18nKeys) || [];
+    }
+}
+CmsMappingService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+CmsMappingService.ctorParameters = () => [
+    { type: CmsConfig },
+    { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
+];
+/** @nocollapse */ CmsMappingService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(ɵɵinject(CmsConfig), ɵɵinject(PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CmsGuardsService {
+    /**
+     * @param {?} cmsMapping
+     * @param {?} injector
+     */
+    constructor(cmsMapping, injector) {
+        this.cmsMapping = cmsMapping;
+        this.injector = injector;
+    }
+    /**
+     * @param {?} componentTypes
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    cmsPageCanActivate(componentTypes, route, state) {
+        /** @type {?} */
+        const guards = this.cmsMapping.getGuardsForComponents(componentTypes);
+        if (guards.length) {
+            /** @type {?} */
+            const canActivateObservables = guards.map((/**
+             * @param {?} guardClass
+             * @return {?}
+             */
+            guardClass => {
+                /** @type {?} */
+                const guard = this.injector.get(guardClass, null);
+                if (isCanActivate(guard)) {
+                    return wrapIntoObservable(guard.canActivate(route, state)).pipe(first());
+                }
+                else {
+                    throw new Error('Invalid CanActivate guard in cmsMapping');
+                }
+            }));
+            return concat(...canActivateObservables).pipe(skipWhile((/**
+             * @param {?} canActivate
+             * @return {?}
+             */
+            (canActivate) => canActivate === true)), endWith(true), first());
+        }
+        else {
+            return of(true);
+        }
+    }
+}
+CmsGuardsService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+CmsGuardsService.ctorParameters = () => [
+    { type: CmsMappingService },
+    { type: Injector }
+];
+/** @nocollapse */ CmsGuardsService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsGuardsService_Factory() { return new CmsGuardsService(ɵɵinject(CmsMappingService), ɵɵinject(INJECTOR)); }, token: CmsGuardsService, providedIn: "root" });
+/**
+ * @template T
+ * @param {?} value
+ * @return {?}
+ */
+function wrapIntoObservable(value) {
+    if (isObservable(value)) {
+        return value;
+    }
+    if (isPromise(value)) {
+        return from(Promise.resolve(value));
+    }
+    return of(value);
+}
+/**
+ * @param {?} obj
+ * @return {?}
+ */
+function isPromise(obj) {
+    return !!obj && typeof obj.then === 'function';
+}
+/**
+ * @param {?} guard
+ * @return {?}
+ */
+function isCanActivate(guard) {
+    return guard && isFunction(guard.canActivate);
+}
+/**
+ * @template T
+ * @param {?} v
+ * @return {?}
+ */
+function isFunction(v) {
+    return typeof v === 'function';
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CmsI18nService {
+    /**
+     * @param {?} cmsMapping
+     * @param {?} translation
+     * @param {?} translationChunk
+     */
+    constructor(cmsMapping, translation, translationChunk) {
+        this.cmsMapping = cmsMapping;
+        this.translation = translation;
+        this.translationChunk = translationChunk;
+    }
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    loadChunksForComponents(componentTypes) {
+        /** @type {?} */
+        const i18nKeys = this.cmsMapping.getI18nKeysForComponents(componentTypes);
+        /** @type {?} */
+        const i18nChunks = new Set();
+        for (const key of i18nKeys) {
+            i18nChunks.add(this.translationChunk.getChunkNameForKey(key));
+        }
+        this.translation.loadChunks(Array.from(i18nChunks));
+    }
+}
+CmsI18nService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+CmsI18nService.ctorParameters = () => [
+    { type: CmsMappingService },
+    { type: TranslationService },
+    { type: TranslationChunkService }
+];
+/** @nocollapse */ CmsI18nService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsI18nService_Factory() { return new CmsI18nService(ɵɵinject(CmsMappingService), ɵɵinject(TranslationService), ɵɵinject(TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CmsRoutesService {
+    /**
+     * @param {?} router
+     * @param {?} cmsMapping
+     */
+    constructor(router, cmsMapping) {
+        this.router = router;
+        this.cmsMapping = cmsMapping;
+    }
+    /**
+     * @param {?} url
+     * @return {?}
+     */
+    cmsRouteExist(url) {
+        /** @type {?} */
+        const isCmsDrivenRoute = url.startsWith('/');
+        if (!isCmsDrivenRoute) {
+            return false;
+        }
+        /** @type {?} */
+        const routePath = url.substr(1);
+        return (isCmsDrivenRoute &&
+            !!this.router.config.find((/**
+             * @param {?} route
+             * @return {?}
+             */
+            (route) => route.data && route.data.cxCmsRouteContext && route.path === routePath)));
+    }
+    /**
+     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
+     *
+     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
+     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
+     *
+     * @param {?} pageContext
+     * @param {?} componentTypes
+     * @param {?} currentUrl
+     * @return {?}
+     */
+    handleCmsRoutesInGuard(pageContext, componentTypes, currentUrl) {
+        /** @type {?} */
+        const componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
+        if (componentRoutes.length) {
+            if (this.updateRouting(pageContext, componentRoutes)) {
+                this.router.navigateByUrl(currentUrl);
+                return false;
+            }
+        }
+        return true;
+    }
+    /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} routes
+     * @return {?}
+     */
+    updateRouting(pageContext, routes) {
+        if (pageContext.type === PageType.CONTENT_PAGE &&
+            pageContext.id.startsWith('/') &&
+            pageContext.id.length > 1) {
+            /** @type {?} */
+            const newRoute = {
+                path: pageContext.id.substr(1),
+                component: PageLayoutComponent,
+                children: routes,
+                data: {
+                    cxCmsRouteContext: pageContext,
+                },
+            };
+            this.router.resetConfig([newRoute, ...this.router.config]);
+            return true;
+        }
+        return false;
+    }
+}
+CmsRoutesService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+CmsRoutesService.ctorParameters = () => [
+    { type: Router },
+    { type: CmsMappingService }
+];
+/** @nocollapse */ CmsRoutesService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(ɵɵinject(Router), ɵɵinject(CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CmsPageGuard {
+    /**
+     * @param {?} routingService
+     * @param {?} cmsService
+     * @param {?} cmsRoutes
+     * @param {?} cmsI18n
+     * @param {?} cmsGuards
+     * @param {?} semanticPathService
+     */
+    constructor(routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService) {
+        this.routingService = routingService;
+        this.cmsService = cmsService;
+        this.cmsRoutes = cmsRoutes;
+        this.cmsI18n = cmsI18n;
+        this.cmsGuards = cmsGuards;
+        this.semanticPathService = semanticPathService;
+    }
+    /**
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    canActivate(route, state) {
+        return this.routingService.getNextPageContext().pipe(switchMap((/**
+         * @param {?} pageContext
+         * @return {?}
+         */
+        pageContext => this.cmsService.hasPage(pageContext, true).pipe(first(), withLatestFrom(of(pageContext))))), switchMap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([hasPage, pageContext]) => hasPage
+            ? this.resolveCmsPageLogic(pageContext, route, state)
+            : this.handleNotFoundPage(pageContext, route, state))));
+    }
+    /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    resolveCmsPageLogic(pageContext, route, state) {
+        return this.cmsService.getPageComponentTypes(pageContext).pipe(switchMap((/**
+         * @param {?} componentTypes
+         * @return {?}
+         */
+        componentTypes => this.cmsGuards
+            .cmsPageCanActivate(componentTypes, route, state)
+            .pipe(withLatestFrom(of(componentTypes))))), tap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([canActivate, componentTypes]) => {
+            if (canActivate === true) {
+                this.cmsI18n.loadChunksForComponents(componentTypes);
+            }
+        })), map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([canActivate, componentTypes]) => {
+            if (canActivate === true &&
+                !route.data.cxCmsRouteContext &&
+                !this.cmsRoutes.cmsRouteExist(pageContext.id)) {
+                return this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url);
+            }
+            return canActivate;
+        })));
+    }
+    /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    handleNotFoundPage(pageContext, route, state) {
+        /** @type {?} */
+        const notFoundCmsPageContext = {
+            type: PageType.CONTENT_PAGE,
+            id: this.semanticPathService.get('notFound'),
+        };
+        return this.cmsService.hasPage(notFoundCmsPageContext).pipe(switchMap((/**
+         * @param {?} hasNotFoundPage
+         * @return {?}
+         */
+        hasNotFoundPage => {
+            if (hasNotFoundPage) {
+                return this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(tap((/**
+                 * @param {?} notFoundIndex
+                 * @return {?}
+                 */
+                notFoundIndex => {
+                    this.cmsService.setPageFailIndex(pageContext, notFoundIndex);
+                })), switchMap((/**
+                 * @param {?} notFoundIndex
+                 * @return {?}
+                 */
+                notFoundIndex => this.cmsService.getPageIndex(pageContext).pipe(
+                // we have to wait for page index update
+                filter((/**
+                 * @param {?} index
+                 * @return {?}
+                 */
+                index => index === notFoundIndex))))), switchMap((/**
+                 * @return {?}
+                 */
+                () => this.resolveCmsPageLogic(pageContext, route, state))));
+            }
+            return of(false);
+        })));
+    }
+}
+CmsPageGuard.guardName = 'CmsPageGuard';
+CmsPageGuard.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+CmsPageGuard.ctorParameters = () => [
+    { type: RoutingService },
+    { type: CmsService },
+    { type: CmsRoutesService },
+    { type: CmsI18nService },
+    { type: CmsGuardsService },
+    { type: SemanticPathService }
+];
+/** @nocollapse */ CmsPageGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(ɵɵinject(RoutingService), ɵɵinject(CmsService), ɵɵinject(CmsRoutesService), ɵɵinject(CmsI18nService), ɵɵinject(CmsGuardsService), ɵɵinject(SemanticPathService)); }, token: CmsPageGuard, providedIn: "root" });
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const cmsRoute = {
+    path: '**',
+    canActivate: [CmsPageGuard],
+    component: PageLayoutComponent,
+};
+/**
+ * @param {?} injector
+ * @return {?}
+ */
+function addCmsRoute(injector) {
+    /** @type {?} */
+    const result = (/**
+     * @return {?}
+     */
+    () => {
+        /** @type {?} */
+        const router = injector.get(Router);
+        router.config.push(cmsRoute);
+    });
+    return result;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+const ɵ0 = addCmsRoute;
+class CmsRouteModule {
+}
+CmsRouteModule.decorators = [
+    { type: NgModule, args: [{
+                providers: [
+                    {
+                        provide: APP_INITIALIZER,
+                        multi: true,
+                        deps: [Injector],
+                        useFactory: ɵ0,
+                    },
+                ],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Generic carousel that renders CMS Components.
+ */
+class BannerCarouselComponent {
+    /**
+     * @param {?} componentData
+     * @param {?} cmsService
+     */
+    constructor(componentData, cmsService) {
+        this.componentData = componentData;
+        this.cmsService = cmsService;
+        this.componentData$ = this.componentData.data$.pipe(filter(Boolean), tap((/**
+         * @param {?} d
+         * @return {?}
+         */
+        (d) => (this.theme = `${d.effect}-theme`))));
+        this.items$ = this.componentData$.pipe(map((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => data.banners.trim().split(' '))), map((/**
+         * @param {?} codes
+         * @return {?}
+         */
+        codes => codes.map((/**
+         * @param {?} code
+         * @return {?}
+         */
+        code => this.cmsService.getComponentData(code))))));
+        /**
+         * Adds a specific theme for the carousel. The effect can be
+         * used in CSS customisations.
+         */
+        this.theme = '';
+    }
+    /**
+     * Returns an Obervable with an Array of Observables. This is done, so that
+     * the component UI could consider to lazy load the UI components when they're
+     * in the viewpoint.
+     * @return {?}
+     */
+    getItems() {
+        return this.items$;
+    }
+}
+BannerCarouselComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-banner-carousel',
+                template: "<cx-carousel\n  [items]=\"getItems() | async\"\n  [template]=\"template\"\n  itemWidth=\"100%\"\n  class=\"inline-navigation\"\n></cx-carousel>\n\n<ng-template #template let-item=\"item\">\n  <ng-container\n    [cxComponentWrapper]=\"{\n      flexType: item.typeCode,\n      typeCode: item.typeCode,\n      uid: item?.uid\n    }\"\n  >\n  </ng-container>\n</ng-template>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+BannerCarouselComponent.ctorParameters = () => [
+    { type: CmsComponentData },
+    { type: CmsService }
+];
+BannerCarouselComponent.propDecorators = {
+    theme: [{ type: HostBinding, args: ['class',] }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class BannerCarouselModule {
+}
+BannerCarouselModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            RotatingImagesComponent: {
+                                component: BannerCarouselComponent,
+                            },
+                        },
+                    }))),
+                    PageComponentModule,
+                    CarouselModule,
+                    MediaModule,
+                ],
+                declarations: [BannerCarouselComponent],
+                entryComponents: [BannerCarouselComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class BannerComponent {
     /**
      * @param {?} component
@@ -7384,7 +8055,7 @@ class BannerComponent {
 BannerComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-banner',
-                template: "<ng-container *ngIf=\"(component.data$ | async) as data\">\n  <p *ngIf=\"data.headLine\" [innerHTML]=\"data.headLine\"></p>\n  <cx-generic-link\n    [url]=\"data.urlLink\"\n    [target]=\"data.external ? '_blank' : null\"\n    [title]=\"data.media?.altText\"\n  >\n    <cx-media [container]=\"data.media\"></cx-media>\n  </cx-generic-link>\n\n  <p *ngIf=\"data.content\" [innerHTML]=\"data.content\"></p>\n</ng-container>\n",
+                template: "<ng-container *ngIf=\"(component.data$ | async) as data\">\n  <cx-generic-link\n    [url]=\"data.urlLink\"\n    [target]=\"data.external ? '_blank' : null\"\n    [title]=\"data.media?.altText\"\n  >\n    <p *ngIf=\"data.headline\" [innerHTML]=\"data.headline\"></p>\n    <cx-media [container]=\"data.media\"></cx-media>\n    <p *ngIf=\"data.content\" [innerHTML]=\"data.content\"></p>\n  </cx-generic-link>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -7523,11 +8194,6 @@ CmsParagraphModule.decorators = [
                 entryComponents: [ParagraphComponent],
             },] }
 ];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 
 /**
  * @fileoverview added by tsickle
@@ -8641,488 +9307,6 @@ OrderDetailTotalsComponent.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class CmsMappingService {
-    /**
-     * @param {?} config
-     * @param {?} platformId
-     */
-    constructor(config, platformId) {
-        this.config = config;
-        this.platformId = platformId;
-    }
-    /**
-     * @param {?} flexType
-     * @return {?}
-     */
-    isComponentEnabled(flexType) {
-        /** @type {?} */
-        const isSSR = isPlatformServer(this.platformId);
-        /** @type {?} */
-        const isComponentDisabledInSSR = (this.config.cmsComponents[flexType] || {})
-            .disableSSR;
-        return !(isSSR && isComponentDisabledInSSR);
-    }
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    getRoutesForComponents(componentTypes) {
-        /** @type {?} */
-        const routes = [];
-        for (const componentType of componentTypes) {
-            if (this.isComponentEnabled(componentType)) {
-                routes.push(...this.getRoutesForComponent(componentType));
-            }
-        }
-        return routes;
-    }
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    getGuardsForComponents(componentTypes) {
-        /** @type {?} */
-        const guards = new Set();
-        for (const componentType of componentTypes) {
-            this.getGuardsForComponent(componentType).forEach((/**
-             * @param {?} guard
-             * @return {?}
-             */
-            guard => guards.add(guard)));
-        }
-        return Array.from(guards);
-    }
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    getI18nKeysForComponents(componentTypes) {
-        /** @type {?} */
-        const i18nKeys = new Set();
-        for (const componentType of componentTypes) {
-            if (this.isComponentEnabled(componentType)) {
-                this.getI18nKeysForComponent(componentType).forEach((/**
-                 * @param {?} key
-                 * @return {?}
-                 */
-                key => i18nKeys.add(key)));
-            }
-        }
-        return Array.from(i18nKeys);
-    }
-    /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    getRoutesForComponent(componentType) {
-        /** @type {?} */
-        const mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.childRoutes) || [];
-    }
-    /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    getGuardsForComponent(componentType) {
-        /** @type {?} */
-        const mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.guards) || [];
-    }
-    /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    getI18nKeysForComponent(componentType) {
-        /** @type {?} */
-        const mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.i18nKeys) || [];
-    }
-}
-CmsMappingService.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root',
-            },] }
-];
-/** @nocollapse */
-CmsMappingService.ctorParameters = () => [
-    { type: CmsConfig },
-    { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
-];
-/** @nocollapse */ CmsMappingService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(ɵɵinject(CmsConfig), ɵɵinject(PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class CmsGuardsService {
-    /**
-     * @param {?} cmsMapping
-     * @param {?} injector
-     */
-    constructor(cmsMapping, injector) {
-        this.cmsMapping = cmsMapping;
-        this.injector = injector;
-    }
-    /**
-     * @param {?} componentTypes
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    cmsPageCanActivate(componentTypes, route, state) {
-        /** @type {?} */
-        const guards = this.cmsMapping.getGuardsForComponents(componentTypes);
-        if (guards.length) {
-            /** @type {?} */
-            const canActivateObservables = guards.map((/**
-             * @param {?} guardClass
-             * @return {?}
-             */
-            guardClass => {
-                /** @type {?} */
-                const guard = this.injector.get(guardClass, null);
-                if (isCanActivate(guard)) {
-                    return wrapIntoObservable(guard.canActivate(route, state)).pipe(first());
-                }
-                else {
-                    throw new Error('Invalid CanActivate guard in cmsMapping');
-                }
-            }));
-            return concat(...canActivateObservables).pipe(skipWhile((/**
-             * @param {?} canActivate
-             * @return {?}
-             */
-            (canActivate) => canActivate === true)), endWith(true), first());
-        }
-        else {
-            return of(true);
-        }
-    }
-}
-CmsGuardsService.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root',
-            },] }
-];
-/** @nocollapse */
-CmsGuardsService.ctorParameters = () => [
-    { type: CmsMappingService },
-    { type: Injector }
-];
-/** @nocollapse */ CmsGuardsService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsGuardsService_Factory() { return new CmsGuardsService(ɵɵinject(CmsMappingService), ɵɵinject(INJECTOR)); }, token: CmsGuardsService, providedIn: "root" });
-/**
- * @template T
- * @param {?} value
- * @return {?}
- */
-function wrapIntoObservable(value) {
-    if (isObservable(value)) {
-        return value;
-    }
-    if (isPromise(value)) {
-        return from(Promise.resolve(value));
-    }
-    return of(value);
-}
-/**
- * @param {?} obj
- * @return {?}
- */
-function isPromise(obj) {
-    return !!obj && typeof obj.then === 'function';
-}
-/**
- * @param {?} guard
- * @return {?}
- */
-function isCanActivate(guard) {
-    return guard && isFunction(guard.canActivate);
-}
-/**
- * @template T
- * @param {?} v
- * @return {?}
- */
-function isFunction(v) {
-    return typeof v === 'function';
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class CmsI18nService {
-    /**
-     * @param {?} cmsMapping
-     * @param {?} translation
-     * @param {?} translationChunk
-     */
-    constructor(cmsMapping, translation, translationChunk) {
-        this.cmsMapping = cmsMapping;
-        this.translation = translation;
-        this.translationChunk = translationChunk;
-    }
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    loadChunksForComponents(componentTypes) {
-        /** @type {?} */
-        const i18nKeys = this.cmsMapping.getI18nKeysForComponents(componentTypes);
-        /** @type {?} */
-        const i18nChunks = new Set();
-        for (const key of i18nKeys) {
-            i18nChunks.add(this.translationChunk.getChunkNameForKey(key));
-        }
-        this.translation.loadChunks(Array.from(i18nChunks));
-    }
-}
-CmsI18nService.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root',
-            },] }
-];
-/** @nocollapse */
-CmsI18nService.ctorParameters = () => [
-    { type: CmsMappingService },
-    { type: TranslationService },
-    { type: TranslationChunkService }
-];
-/** @nocollapse */ CmsI18nService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsI18nService_Factory() { return new CmsI18nService(ɵɵinject(CmsMappingService), ɵɵinject(TranslationService), ɵɵinject(TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class CmsRoutesService {
-    /**
-     * @param {?} router
-     * @param {?} cmsMapping
-     */
-    constructor(router, cmsMapping) {
-        this.router = router;
-        this.cmsMapping = cmsMapping;
-    }
-    /**
-     * @param {?} url
-     * @return {?}
-     */
-    cmsRouteExist(url) {
-        /** @type {?} */
-        const isCmsDrivenRoute = url.startsWith('/');
-        if (!isCmsDrivenRoute) {
-            return false;
-        }
-        /** @type {?} */
-        const routePath = url.substr(1);
-        return (isCmsDrivenRoute &&
-            !!this.router.config.find((/**
-             * @param {?} route
-             * @return {?}
-             */
-            (route) => route.data && route.data.cxCmsRouteContext && route.path === routePath)));
-    }
-    /**
-     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
-     *
-     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
-     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
-     *
-     * @param {?} pageContext
-     * @param {?} componentTypes
-     * @param {?} currentUrl
-     * @return {?}
-     */
-    handleCmsRoutesInGuard(pageContext, componentTypes, currentUrl) {
-        /** @type {?} */
-        const componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
-        if (componentRoutes.length) {
-            if (this.updateRouting(pageContext, componentRoutes)) {
-                this.router.navigateByUrl(currentUrl);
-                return false;
-            }
-        }
-        return true;
-    }
-    /**
-     * @private
-     * @param {?} pageContext
-     * @param {?} routes
-     * @return {?}
-     */
-    updateRouting(pageContext, routes) {
-        if (pageContext.type === PageType.CONTENT_PAGE &&
-            pageContext.id.startsWith('/') &&
-            pageContext.id.length > 1) {
-            /** @type {?} */
-            const newRoute = {
-                path: pageContext.id.substr(1),
-                component: PageLayoutComponent,
-                children: routes,
-                data: {
-                    cxCmsRouteContext: pageContext,
-                },
-            };
-            this.router.resetConfig([newRoute, ...this.router.config]);
-            return true;
-        }
-        return false;
-    }
-}
-CmsRoutesService.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root',
-            },] }
-];
-/** @nocollapse */
-CmsRoutesService.ctorParameters = () => [
-    { type: Router },
-    { type: CmsMappingService }
-];
-/** @nocollapse */ CmsRoutesService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(ɵɵinject(Router), ɵɵinject(CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class CmsPageGuard {
-    /**
-     * @param {?} routingService
-     * @param {?} cmsService
-     * @param {?} cmsRoutes
-     * @param {?} cmsI18n
-     * @param {?} cmsGuards
-     * @param {?} semanticPathService
-     */
-    constructor(routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService) {
-        this.routingService = routingService;
-        this.cmsService = cmsService;
-        this.cmsRoutes = cmsRoutes;
-        this.cmsI18n = cmsI18n;
-        this.cmsGuards = cmsGuards;
-        this.semanticPathService = semanticPathService;
-    }
-    /**
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    canActivate(route, state) {
-        return this.routingService.getNextPageContext().pipe(switchMap((/**
-         * @param {?} pageContext
-         * @return {?}
-         */
-        pageContext => this.cmsService.hasPage(pageContext, true).pipe(first(), withLatestFrom(of(pageContext))))), switchMap((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        ([hasPage, pageContext]) => hasPage
-            ? this.resolveCmsPageLogic(pageContext, route, state)
-            : this.handleNotFoundPage(pageContext, route, state))));
-    }
-    /**
-     * @private
-     * @param {?} pageContext
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    resolveCmsPageLogic(pageContext, route, state) {
-        return this.cmsService.getPageComponentTypes(pageContext).pipe(switchMap((/**
-         * @param {?} componentTypes
-         * @return {?}
-         */
-        componentTypes => this.cmsGuards
-            .cmsPageCanActivate(componentTypes, route, state)
-            .pipe(withLatestFrom(of(componentTypes))))), tap((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        ([canActivate, componentTypes]) => {
-            if (canActivate === true) {
-                this.cmsI18n.loadChunksForComponents(componentTypes);
-            }
-        })), map((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        ([canActivate, componentTypes]) => {
-            if (canActivate === true &&
-                !route.data.cxCmsRouteContext &&
-                !this.cmsRoutes.cmsRouteExist(pageContext.id)) {
-                return this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url);
-            }
-            return canActivate;
-        })));
-    }
-    /**
-     * @private
-     * @param {?} pageContext
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    handleNotFoundPage(pageContext, route, state) {
-        /** @type {?} */
-        const notFoundCmsPageContext = {
-            type: PageType.CONTENT_PAGE,
-            id: this.semanticPathService.get('notFound'),
-        };
-        return this.cmsService.hasPage(notFoundCmsPageContext).pipe(switchMap((/**
-         * @param {?} hasNotFoundPage
-         * @return {?}
-         */
-        hasNotFoundPage => {
-            if (hasNotFoundPage) {
-                return this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(tap((/**
-                 * @param {?} notFoundIndex
-                 * @return {?}
-                 */
-                notFoundIndex => {
-                    this.cmsService.setPageFailIndex(pageContext, notFoundIndex);
-                })), switchMap((/**
-                 * @param {?} notFoundIndex
-                 * @return {?}
-                 */
-                notFoundIndex => this.cmsService.getPageIndex(pageContext).pipe(
-                // we have to wait for page index update
-                filter((/**
-                 * @param {?} index
-                 * @return {?}
-                 */
-                index => index === notFoundIndex))))), switchMap((/**
-                 * @return {?}
-                 */
-                () => this.resolveCmsPageLogic(pageContext, route, state))));
-            }
-            return of(false);
-        })));
-    }
-}
-CmsPageGuard.guardName = 'CmsPageGuard';
-CmsPageGuard.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root',
-            },] }
-];
-/** @nocollapse */
-CmsPageGuard.ctorParameters = () => [
-    { type: RoutingService },
-    { type: CmsService },
-    { type: CmsRoutesService },
-    { type: CmsI18nService },
-    { type: CmsGuardsService },
-    { type: SemanticPathService }
-];
-/** @nocollapse */ CmsPageGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(ɵɵinject(RoutingService), ɵɵinject(CmsService), ɵɵinject(CmsRoutesService), ɵɵinject(CmsI18nService), ɵɵinject(CmsGuardsService), ɵɵinject(SemanticPathService)); }, token: CmsPageGuard, providedIn: "root" });
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 /** @type {?} */
 const moduleComponents = [
     OrderDetailHeadlineComponent,
@@ -9130,7 +9314,7 @@ const moduleComponents = [
     OrderDetailTotalsComponent,
     OrderDetailShippingComponent,
 ];
-const ɵ0 = { cxRoute: 'orderDetails' };
+const ɵ0$1 = { cxRoute: 'orderDetails' };
 class OrderDetailsModule {
 }
 OrderDetailsModule.decorators = [
@@ -9145,7 +9329,7 @@ OrderDetailsModule.decorators = [
                             path: null,
                             canActivate: [AuthGuard, CmsPageGuard],
                             component: PageLayoutComponent,
-                            data: ɵ0,
+                            data: ɵ0$1,
                         },
                     ]),
                     ConfigModule.withConfig((/** @type {?} */ ({
@@ -11698,7 +11882,7 @@ class ProductCarouselService {
          * @param {?} refs
          * @return {?}
          */
-        refs => refs.map((/**
+        (refs) => refs.map((/**
          * @param {?} ref
          * @return {?}
          */
@@ -11753,22 +11937,31 @@ ProductCarouselService.ctorParameters = () => [
  */
 class ProductCarouselComponent {
     /**
-     * @param {?} component
-     * @param {?} service
+     * @param {?} componentData
+     * @param {?} productService
      */
-    constructor(component, service) {
-        this.component = component;
-        this.service = service;
-        this.title$ = this.component.data$.pipe(map((/**
+    constructor(componentData, productService) {
+        this.componentData = componentData;
+        this.productService = productService;
+        this.componentData$ = this.componentData.data$.pipe(filter(Boolean));
+        /**
+         * returns an Obervable string for the title.
+         */
+        this.title$ = this.componentData$.pipe(map((/**
          * @param {?} data
          * @return {?}
          */
         data => data.title)));
-        this.items$ = this.component.data$.pipe(filter(Boolean), map((/**
+        /**
+         * Obervable that holds an Array of Observables. This is done, so that
+         * the component UI could consider to lazy load the UI components when they're
+         * in the viewpoint.
+         */
+        this.items$ = this.componentData$.pipe(map((/**
          * @param {?} data
          * @return {?}
          */
-        data => data.productCodes.split(' '))), map((/**
+        data => data.productCodes.trim().split(' '))), map((/**
          * @param {?} codes
          * @return {?}
          */
@@ -11776,24 +11969,20 @@ class ProductCarouselComponent {
          * @param {?} code
          * @return {?}
          */
-        code => this.service.loadProduct(code))))), switchMap((/**
-         * @param {?} products$
-         * @return {?}
-         */
-        (products$) => combineLatest(products$))));
+        code => this.productService.get(code))))));
     }
 }
 ProductCarouselComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-product-carousel',
-                template: "<cx-carousel [items]=\"items$ | async\" [title]=\"title$ | async\"> </cx-carousel>\n",
+                template: "<cx-carousel\n  [items]=\"items$ | async\"\n  [title]=\"title$ | async\"\n  [template]=\"carouselItem\"\n  itemWidth=\"285px\"\n>\n</cx-carousel>\n\n<ng-template #carouselItem let-item=\"item\">\n  <a tabindex=\"0\" [routerLink]=\"{ cxRoute: 'product', params: item } | cxUrl\">\n    <cx-media\n      *ngIf=\"item.images?.PRIMARY\"\n      [container]=\"item.images.PRIMARY\"\n      format=\"product\"\n    >\n    </cx-media>\n    <h4>{{ item.name }}</h4>\n    <div class=\"price\">{{ item.price?.formattedValue }}</div>\n  </a>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
 /** @nocollapse */
 ProductCarouselComponent.ctorParameters = () => [
     { type: CmsComponentData },
-    { type: ProductCarouselService }
+    { type: ProductService }
 ];
 
 /**
@@ -11807,6 +11996,9 @@ ProductCarouselModule.decorators = [
                 imports: [
                     CommonModule,
                     CarouselModule,
+                    MediaModule,
+                    RouterModule,
+                    UrlModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             ProductCarouselComponent: {
@@ -11828,47 +12020,70 @@ ProductCarouselModule.decorators = [
 class ProductReferencesComponent {
     /**
      * @param {?} component
-     * @param {?} service
      * @param {?} current
+     * @param {?} referenceService
      */
-    constructor(component, service, current) {
+    constructor(component, current, referenceService) {
         this.component = component;
-        this.service = service;
         this.current = current;
+        this.referenceService = referenceService;
+        /**
+         * returns an Obervable string for the title
+         */
         this.title$ = this.component.data$.pipe(map((/**
          * @param {?} d
          * @return {?}
          */
         d => d.title)));
-        this.items$ = combineLatest([this.productCode$, this.component.data$]).pipe(switchMap((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        ([code, data]) => this.service.getProductReferences(code, data.productReferenceTypes, Boolean(JSON.parse(data.displayProductTitles)), Boolean(JSON.parse(data.displayProductPrices))))));
-    }
-    /**
-     * @return {?}
-     */
-    get productCode$() {
-        return this.current.getProduct().pipe(filter(Boolean), map((/**
+        this.currentProductCode$ = this.current.getProduct().pipe(filter(Boolean), map((/**
          * @param {?} p
          * @return {?}
          */
-        p => p.code)));
+        (p) => p.code)));
+        /**
+         * Obervable with an Array of Observables. This is done, so that
+         * the component UI could consider to lazy load the UI components when they're
+         * in the viewpoint.
+         */
+        this.items$ = combineLatest([
+            this.currentProductCode$,
+            this.component.data$,
+        ]).pipe(switchMap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([code, data]) => this.getProductReferences(code, data.productReferenceTypes))));
+    }
+    /**
+     * @private
+     * @param {?} code
+     * @param {?} referenceType
+     * @return {?}
+     */
+    getProductReferences(code, referenceType) {
+        return this.referenceService.get(code, referenceType).pipe(filter(Boolean), map((/**
+         * @param {?} refs
+         * @return {?}
+         */
+        (refs) => refs.map((/**
+         * @param {?} ref
+         * @return {?}
+         */
+        ref => of(ref.target))))));
     }
 }
 ProductReferencesComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-product-references',
-                template: "<cx-carousel [title]=\"title$ | async\" [items]=\"items$ | async\"> </cx-carousel>\n",
+                template: "<cx-carousel\n  [title]=\"title$ | async\"\n  [items]=\"items$ | async\"\n  [template]=\"carouselItem\"\n>\n</cx-carousel>\n\n<ng-template #carouselItem let-item=\"item\">\n  <a tabindex=\"0\" [routerLink]=\"{ cxRoute: 'product', params: item } | cxUrl\">\n    <cx-media\n      *ngIf=\"item.images?.PRIMARY\"\n      [container]=\"item.images.PRIMARY\"\n      format=\"product\"\n    >\n    </cx-media>\n    <h4>{{ item.name }}</h4>\n    <div class=\"price\">{{ item.price?.formattedValue }}</div>\n  </a>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
 /** @nocollapse */
 ProductReferencesComponent.ctorParameters = () => [
     { type: CmsComponentData },
-    { type: ProductCarouselService },
-    { type: CurrentProductService }
+    { type: CurrentProductService },
+    { type: ProductReferenceService }
 ];
 
 /**
@@ -11882,6 +12097,9 @@ ProductReferencesModule.decorators = [
                 imports: [
                     CommonModule,
                     CarouselModule,
+                    MediaModule,
+                    RouterModule,
+                    UrlModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             ProductReferencesComponent: {
@@ -12042,11 +12260,6 @@ ProductIntroModule.decorators = [
                 entryComponents: [ProductIntroComponent],
             },] }
 ];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 
 /**
  * @fileoverview added by tsickle
@@ -12910,11 +13123,6 @@ ProductTabsModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class ProductImagesComponent {
     /**
      * @param {?} currentProductService
@@ -12931,34 +13139,36 @@ class ProductImagesComponent {
          * @param {?} product
          * @return {?}
          */
-        product => this.createCarouselItems(product))));
-        this.mainImage$ = combineLatest([
-            this.product$,
-            this.mainMediaContainer,
-        ]).pipe(map((/**
+        product => this.createThumbs(product))));
+        this.mainImage$ = combineLatest([this.product$, this.mainMediaContainer]).pipe(map((/**
          * @param {?} __0
          * @return {?}
          */
         ([_, container]) => container)));
     }
     /**
-     * @return {?}
-     */
-    getThumbs() {
-        return this.thumbs$;
-    }
-    /**
-     * @return {?}
-     */
-    getMain() {
-        return this.mainImage$;
-    }
-    /**
      * @param {?} item
      * @return {?}
      */
     openImage(item) {
-        this.mainMediaContainer.next(item.media.container);
+        this.mainMediaContainer.next(item);
+    }
+    /**
+     * @param {?} thumbnail
+     * @return {?}
+     */
+    isActive(thumbnail) {
+        return this.mainMediaContainer.pipe(filter(Boolean), map((/**
+         * @param {?} container
+         * @return {?}
+         */
+        (container) => {
+            return (container.zoom &&
+                container.zoom.url &&
+                thumbnail.zoom &&
+                thumbnail.zoom.url &&
+                container.zoom.url === thumbnail.zoom.url);
+        })));
     }
     /**
      * find the index of the main media in the list of media
@@ -12991,30 +13201,23 @@ class ProductImagesComponent {
      * @param {?} product
      * @return {?}
      */
-    createCarouselItems(product) {
+    createThumbs(product) {
         if (!product.images ||
             !product.images.GALLERY ||
             product.images.GALLERY.length < 2) {
-            return null;
+            return [];
         }
         return ((/** @type {?} */ (product.images.GALLERY))).map((/**
          * @param {?} c
          * @return {?}
          */
-        c => {
-            return {
-                media: {
-                    container: c,
-                    format: 'thumbnail',
-                },
-            };
-        }));
+        c => of({ container: c })));
     }
 }
 ProductImagesComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-product-images',
-                template: "<ng-container *ngIf=\"(getMain() | async) as main\">\n  <cx-media [container]=\"main\" format=\"zoom\"> </cx-media>\n</ng-container>\n<ng-container *ngIf=\"(getThumbs() | async) as thumbs\">\n  <cx-carousel\n    class=\"thumbs\"\n    [items]=\"thumbs\"\n    [minItemPixelSize]=\"120\"\n    [hideIndicators]=\"true\"\n    (open)=\"openImage($event)\"\n    [activeItem]=\"getActive(thumbs) | async\"\n  ></cx-carousel>\n</ng-container>\n",
+                template: "<ng-container *ngIf=\"(mainImage$ | async) as main\">\n  <cx-media [container]=\"main\" format=\"zoom\"> </cx-media>\n</ng-container>\n\n<cx-carousel\n  class=\"thumbs\"\n  [items]=\"thumbs$ | async\"\n  itemWidth=\"120px\"\n  [hideIndicators]=\"false\"\n  [template]=\"thumb\"\n></cx-carousel>\n\n<ng-template #thumb let-item=\"item\">\n  <cx-media\n    [container]=\"item.container\"\n    tabindex=\"0\"\n    format=\"thumbnail\"\n    (focus)=\"openImage(item.container)\"\n    [class.is-active]=\"isActive(item.container) | async\"\n  >\n  </cx-media>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -13047,6 +13250,7 @@ ProductImagesModule.decorators = [
                 ],
                 declarations: [ProductImagesComponent],
                 entryComponents: [ProductImagesComponent],
+                exports: [ProductImagesComponent],
             },] }
 ];
 
@@ -13293,7 +13497,7 @@ LogoutGuard.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-const ɵ0$1 = { cxRoute: 'logout' };
+const ɵ0$2 = { cxRoute: 'logout' };
 class LogoutModule {
 }
 LogoutModule.decorators = [
@@ -13305,7 +13509,7 @@ LogoutModule.decorators = [
                             path: null,
                             canActivate: [LogoutGuard],
                             component: PageLayoutComponent,
-                            data: ɵ0$1,
+                            data: ɵ0$2,
                         },
                     ]),
                 ],
@@ -13543,6 +13747,7 @@ CmsLibModule.decorators = [
                     CheckoutComponentModule,
                     ForgotPasswordModule,
                     ResetPasswordModule,
+                    BannerCarouselModule,
                     UserComponentModule,
                 ],
             },] }
@@ -13617,7 +13822,7 @@ function findLastIndex(elements, predicate) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-const ɵ0$2 = { cxRoute: 'product' }, ɵ1 = {
+const ɵ0$3 = { cxRoute: 'product' }, ɵ1 = {
     cxSuffixUrlMatcher: {
         marker: 'p',
         paramName: 'productCode',
@@ -13633,7 +13838,7 @@ ProductDetailsPageModule.decorators = [
                             path: null,
                             canActivate: [CmsPageGuard],
                             component: PageLayoutComponent,
-                            data: ɵ0$2,
+                            data: ɵ0$3,
                         },
                         {
                             matcher: suffixUrlMatcher,
@@ -13645,83 +13850,6 @@ ProductDetailsPageModule.decorators = [
                 ],
             },] }
 ];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-const cmsRoute = {
-    path: '**',
-    canActivate: [CmsPageGuard],
-    component: PageLayoutComponent,
-};
-/**
- * @param {?} injector
- * @return {?}
- */
-function addCmsRoute(injector) {
-    /** @type {?} */
-    const result = (/**
-     * @return {?}
-     */
-    () => {
-        /** @type {?} */
-        const router = injector.get(Router);
-        router.config.push(cmsRoute);
-    });
-    return result;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-const ɵ0$3 = addCmsRoute;
-class CmsRouteModule {
-}
-CmsRouteModule.decorators = [
-    { type: NgModule, args: [{
-                providers: [
-                    {
-                        provide: APP_INITIALIZER,
-                        multi: true,
-                        deps: [Injector],
-                        useFactory: ɵ0$3,
-                    },
-                ],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 
 /**
  * @fileoverview added by tsickle
@@ -14115,5 +14243,5 @@ B2cStorefrontModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, OnlyNumberDirectiveModule as ɵa, AutoFocusDirectiveModule as ɵb, defaultCheckoutConfig as ɵc, CheckoutConfigService as ɵd, HighlightPipe as ɵe, ProductListComponentService as ɵf, ProductAttributesModule as ɵg, ProductDetailsTabModule as ɵh, ProductDetailsTabComponent as ɵi, CmsRoutesService as ɵj, CmsMappingService as ɵk, CmsI18nService as ɵl, CmsGuardsService as ɵm, ComponentMapperService as ɵn, AddToHomeScreenService as ɵo, ProductImagesModule as ɵp, ProductImagesComponent as ɵq, suffixUrlMatcher as ɵr, addCmsRoute as ɵs, htmlLangProvider as ɵt, setHtmlLangAttribute as ɵu, RoutingModule as ɵv, defaultStorefrontRoutesConfig as ɵw, defaultRoutingConfig as ɵx };
+export { AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, OnlyNumberDirectiveModule as ɵa, AutoFocusDirectiveModule as ɵb, defaultCheckoutConfig as ɵc, CheckoutConfigService as ɵd, HighlightPipe as ɵe, ProductListComponentService as ɵf, ProductAttributesModule as ɵg, ProductDetailsTabModule as ɵh, ProductDetailsTabComponent as ɵi, CmsRoutesService as ɵj, CmsMappingService as ɵk, CmsI18nService as ɵl, CmsGuardsService as ɵm, ComponentMapperService as ɵn, AddToHomeScreenService as ɵo, ProductImagesModule as ɵp, ProductImagesComponent as ɵq, BannerCarouselModule as ɵr, BannerCarouselComponent as ɵs, suffixUrlMatcher as ɵt, addCmsRoute as ɵu, htmlLangProvider as ɵv, setHtmlLangAttribute as ɵw, RoutingModule as ɵx, defaultStorefrontRoutesConfig as ɵy, defaultRoutingConfig as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map

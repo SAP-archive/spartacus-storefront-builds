@@ -1,6 +1,6 @@
 import { ProductReferenceService, ProductService, SemanticPathService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { CarouselItem } from '../../../shared/components/carousel/carousel.model';
+import { ProductCarouselItem } from './product-carousel.model';
 export declare class ProductCarouselService {
     protected productService: ProductService;
     protected referenceService: ProductReferenceService;
@@ -9,8 +9,8 @@ export declare class ProductCarouselService {
     /**
      * Loads the product data and converts it `CarouselItem`.
      */
-    loadProduct(code: string): Observable<CarouselItem>;
-    getProductReferences(code: string, referenceType: string, displayTitle: boolean, displayProductPrices: boolean): Observable<CarouselItem[]>;
+    loadProduct(code: string): Observable<ProductCarouselItem>;
+    getProductReferences(code: string, referenceType: string, displayTitle: boolean, displayProductPrices: boolean): Observable<ProductCarouselItem[]>;
     /**
      * Converts the product to a generic CarouselItem
      */

@@ -1127,37 +1127,95 @@
             this.winRef = winRef;
         }
         /**
-         * The number of items shown in the carousel is calculated dividing
-         * the host element width with the minimum item width.
+         * The number of items per slide is calculated by the help of
+         * the item width and the available width of the host element.
+         * This appoach makes it possible to place the carousel in different
+         * layouts. Instead of using the page breakpoints, the host size is
+         * taken into account.
+         *
+         * Since there's no element resize API available, we use the
+         * window `resize` event, so that we can adjust the number of items
+         * whenever the window got resized.
          */
         /**
-         * The number of items shown in the carousel is calculated dividing
-         * the host element width with the minimum item width.
+         * The number of items per slide is calculated by the help of
+         * the item width and the available width of the host element.
+         * This appoach makes it possible to place the carousel in different
+         * layouts. Instead of using the page breakpoints, the host size is
+         * taken into account.
+         *
+         * Since there's no element resize API available, we use the
+         * window `resize` event, so that we can adjust the number of items
+         * whenever the window got resized.
          * @param {?} nativeElement
          * @param {?} itemWidth
          * @return {?}
          */
-        CarouselService.prototype.getSize = /**
-         * The number of items shown in the carousel is calculated dividing
-         * the host element width with the minimum item width.
+        CarouselService.prototype.getItemsPerSlide = /**
+         * The number of items per slide is calculated by the help of
+         * the item width and the available width of the host element.
+         * This appoach makes it possible to place the carousel in different
+         * layouts. Instead of using the page breakpoints, the host size is
+         * taken into account.
+         *
+         * Since there's no element resize API available, we use the
+         * window `resize` event, so that we can adjust the number of items
+         * whenever the window got resized.
          * @param {?} nativeElement
          * @param {?} itemWidth
          * @return {?}
          */
         function (nativeElement, itemWidth) {
             var _this = this;
-            return rxjs.iif((/**
+            return this.winRef.resize$.pipe(operators.map((/**
              * @return {?}
              */
-            function () { return Boolean(_this.winRef.nativeWindow); }), rxjs.fromEvent(this.winRef.nativeWindow, 'resize').pipe(operators.map((/**
-             * @param {?} _
-             * @return {?}
-             */
-            function (_) { return ((/** @type {?} */ (nativeElement))).clientWidth; })), operators.startWith(((/** @type {?} */ (nativeElement))).clientWidth), operators.debounceTime(100), operators.map((/**
+            function () { return ((/** @type {?} */ (nativeElement))).clientWidth; })), operators.map((/**
              * @param {?} totalWidth
              * @return {?}
              */
-            function (totalWidth) { return Math.round(totalWidth / itemWidth); })), operators.distinctUntilChanged()), rxjs.of(3));
+            function (totalWidth) { return _this.calculateItems(totalWidth, itemWidth); })));
+        };
+        /**
+         * Calculates the number of items per given hostSize.  calculated based on the given
+         * intended size in pixels or percentages. The
+         *
+         * @param availableWidth The available width in pixels for the carousel items.
+         * @param itemWidth The width per carousel item, in px or percentage.
+         */
+        /**
+         * Calculates the number of items per given hostSize.  calculated based on the given
+         * intended size in pixels or percentages. The
+         *
+         * @private
+         * @param {?} availableWidth The available width in pixels for the carousel items.
+         * @param {?} itemWidth The width per carousel item, in px or percentage.
+         * @return {?}
+         */
+        CarouselService.prototype.calculateItems = /**
+         * Calculates the number of items per given hostSize.  calculated based on the given
+         * intended size in pixels or percentages. The
+         *
+         * @private
+         * @param {?} availableWidth The available width in pixels for the carousel items.
+         * @param {?} itemWidth The width per carousel item, in px or percentage.
+         * @return {?}
+         */
+        function (availableWidth, itemWidth) {
+            /** @type {?} */
+            var calculatedItems = 0;
+            if (itemWidth.endsWith('px')) {
+                /** @type {?} */
+                var num = itemWidth.substring(0, itemWidth.length - 2);
+                calculatedItems = availableWidth / (/** @type {?} */ (((/** @type {?} */ (num)))));
+            }
+            if (itemWidth.endsWith('%')) {
+                /** @type {?} */
+                var perc = itemWidth.substring(0, itemWidth.length - 1);
+                calculatedItems =
+                    availableWidth / (availableWidth * ((/** @type {?} */ (((/** @type {?} */ (perc))))) / 100));
+            }
+            return Math.floor(calculatedItems) || 1;
         };
         CarouselService.decorators = [
             { type: core.Injectable, args: [{
@@ -1176,46 +1234,41 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /**
+     * Generic carousel component that can be used to render any carousel items,
+     * such as products, images, banners, or any component. Carousel items are
+     * rendered in so-called carousel slides, and the previous/next buttons as well as
+     * the indicator-buttons can used to navigate the slides.
+     *
+     * The component uses an array of Observables (`items$`) as an input, to allow
+     * for lazy loading of items.
+     *
+     * The number of items per slide is calculated with the `itemWidth`, which can given
+     * in pixels or percentage.
+     *
+     * To allow for flexible rendering of items, the rendering is delegated to the
+     * given `template`. This allows for maximum flexibility.
+     */
     var CarouselComponent = /** @class */ (function () {
         function CarouselComponent(el, service) {
             this.el = el;
             this.service = service;
             /**
-             * Specifies the min pixel used per product. This value is used
-             * to calculate the amount of items we can fit into the available with
-             * of the host element. The number of items is not related the breakpoints,
-             * which means that a carousel can be placed in different layouts,
-             * regardless of the overall size.
+             * Specifies the minimum size of the carousel item, either in px or %.
+             * This value is used for the calculation of numbers per carousel, so that
+             * the number of carousel items is dynamic. The calculation uses the `itemWidth`
+             * and the host element `clientWidth`, so that the carousel is reusable in
+             * different layouts (for example in a 50% grid).
              */
-            this.minItemPixelSize = 300;
+            this.itemWidth = '300px';
+            /**
+             * Indicates whether the visual indicators are used.
+             */
             this.hideIndicators = false;
             this.indicatorIcon = ICON_TYPE.CIRCLE;
             this.previousIcon = ICON_TYPE.CARET_LEFT;
             this.nextIcon = ICON_TYPE.CARET_RIGHT;
-            this.open = new core.EventEmitter();
-            /**
-             * The group with items which is currently active.
-             */
-            this.activeSlide = 0;
         }
-        Object.defineProperty(CarouselComponent.prototype, "items", {
-            get: /**
-             * @return {?}
-             */
-            function () {
-                return this._items;
-            },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
-                this._items = value;
-                this.select();
-            },
-            enumerable: true,
-            configurable: true
-        });
         /**
          * @return {?}
          */
@@ -1224,43 +1277,22 @@
          */
         function () {
             var _this = this;
+            if (!this.template && core.isDevMode()) {
+                console.error('No template reference provided to render the carousel items for the `cx-carousel`');
+                return;
+            }
             this.size$ = this.service
-                .getSize(this.el.nativeElement, this.minItemPixelSize)
+                .getItemsPerSlide(this.el.nativeElement, this.itemWidth)
                 .pipe(operators.tap((/**
              * @return {?}
              */
-            function () { return _this.select(); })));
-        };
-        /**
-         * @param {?=} slide
-         * @return {?}
-         */
-        CarouselComponent.prototype.select = /**
-         * @param {?=} slide
-         * @return {?}
-         */
-        function (slide) {
-            if (slide === void 0) { slide = 0; }
-            this.activeSlide = slide;
-        };
-        /**
-         * @param {?} groupIndex
-         * @param {?} itemIndex
-         * @return {?}
-         */
-        CarouselComponent.prototype.onOpen = /**
-         * @param {?} groupIndex
-         * @param {?} itemIndex
-         * @return {?}
-         */
-        function (groupIndex, itemIndex) {
-            this.select(groupIndex);
-            this.open.emit(this.items[groupIndex + itemIndex]);
+            function () { return (_this.activeSlide = 0); })));
         };
         CarouselComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-carousel',
-                        template: "<ng-container *ngIf=\"items && items.length > 0 && (size$ | async) as size\">\n  <h3 *ngIf=\"title\">\n    {{ title }}\n  </h3>\n\n  <div class=\"carousel-panel\" [ngClass]=\"'size-' + size\">\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"previous\"\n      (click)=\"select(activeSlide - size)\"\n      [disabled]=\"activeSlide === 0\"\n    >\n      <cx-icon [type]=\"previousIcon\"></cx-icon>\n    </button>\n\n    <div class=\"groups\">\n      <ng-container *ngFor=\"let _ of items; let i = index\">\n        <div class=\"group\" *ngIf=\"i % size === 0\">\n          <ng-container\n            *ngFor=\"let item of (items | slice: i:i + size); let j = index\"\n          >\n            <a\n              *ngIf=\"item && item.route; else noLink\"\n              class=\"item\"\n              [class.active]=\"i === activeSlide\"\n              [class.activeItem]=\"j === activeItem - i\"\n              (focus)=\"onOpen(i, j)\"\n              tabindex=\"0\"\n              [routerLink]=\"item.route\"\n            >\n              <cx-media\n                [container]=\"item.media?.container\"\n                [format]=\"item.media?.format\"\n              >\n              </cx-media>\n\n              <h4 *ngIf=\"item.title\">{{ item.title }}</h4>\n              <div *ngIf=\"item.price\" class=\"price\">{{ item.price }}</div>\n            </a>\n            <ng-template #noLink>\n              <a\n                *ngIf=\"item\"\n                class=\"item\"\n                [class.active]=\"i === activeSlide\"\n                [class.activeItem]=\"j === activeItem - i\"\n                (focus)=\"onOpen(i, j)\"\n                tabindex=\"0\"\n              >\n                <cx-media\n                  [container]=\"item.media?.container\"\n                  [format]=\"item.media?.format\"\n                >\n                </cx-media>\n\n                <h4 *ngIf=\"item.title\">{{ item.title }}</h4>\n                <div *ngIf=\"item.price\" class=\"price\">{{ item.price }}</div>\n              </a>\n            </ng-template>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"next\"\n      (click)=\"select(activeSlide + size)\"\n      [disabled]=\"activeSlide > items.length - size - 1\"\n    >\n      <cx-icon [type]=\"nextIcon\"></cx-icon>\n    </button>\n  </div>\n\n  <div *ngIf=\"!hideIndicators && size < items.length\" class=\"indicators\">\n    <ng-container *ngFor=\"let _ of items; let i = index\">\n      <button\n        *ngIf=\"i % size === 0\"\n        (click)=\"select(i)\"\n        [disabled]=\"i === activeSlide\"\n      >\n        <cx-icon [type]=\"indicatorIcon\"></cx-icon>\n      </button>\n    </ng-container>\n  </div>\n</ng-container>\n"
+                        template: "<ng-container *ngIf=\"items?.length > 0 && (size$ | async) as size\">\n  <h3 *ngIf=\"title\">{{ title }}</h3>\n\n  <div class=\"carousel-panel\" [ngClass]=\"'size-' + size\">\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"previous\"\n      (click)=\"activeSlide = activeSlide - size\"\n      [disabled]=\"activeSlide === 0\"\n    >\n      <cx-icon [type]=\"previousIcon\"></cx-icon>\n    </button>\n\n    <div class=\"slides\">\n      <ng-container *ngFor=\"let _ of items; let i = index\">\n        <div class=\"slide\" *ngIf=\"i % size === 0\">\n          <ng-container\n            *ngFor=\"let item of (items | slice: i:i + size); let j = index\"\n          >\n            <div\n              *ngIf=\"(item | async) as data\"\n              class=\"item\"\n              [class.active]=\"i === activeSlide\"\n            >\n              <ng-container\n                *ngTemplateOutlet=\"template; context: { item: data }\"\n              ></ng-container>\n            </div>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"next\"\n      (click)=\"activeSlide = activeSlide + size\"\n      tabindex=\"0\"\n      [disabled]=\"activeSlide > items.length - size - 1\"\n    >\n      <cx-icon [type]=\"nextIcon\"></cx-icon>\n    </button>\n  </div>\n\n  <div *ngIf=\"!hideIndicators && size < items.length\" class=\"indicators\">\n    <ng-container *ngFor=\"let _ of items; let i = index\">\n      <button\n        *ngIf=\"i % size === 0\"\n        (focus)=\"activeSlide = i\"\n        [disabled]=\"i === activeSlide\"\n        tabindex=\"0\"\n      >\n        <cx-icon [type]=\"indicatorIcon\"></cx-icon>\n      </button>\n    </ng-container>\n  </div>\n</ng-container>\n",
+                        changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
         /** @nocollapse */
@@ -1270,22 +1302,16 @@
         ]; };
         CarouselComponent.propDecorators = {
             title: [{ type: core.Input }],
-            items: [{ type: core.Input, args: ['items',] }],
-            activeItem: [{ type: core.Input }],
-            minItemPixelSize: [{ type: core.Input }],
+            items: [{ type: core.Input }],
+            template: [{ type: core.Input }],
+            itemWidth: [{ type: core.Input }],
             hideIndicators: [{ type: core.Input }],
             indicatorIcon: [{ type: core.Input }],
             previousIcon: [{ type: core.Input }],
-            nextIcon: [{ type: core.Input }],
-            open: [{ type: core.Output }]
+            nextIcon: [{ type: core.Input }]
         };
         return CarouselComponent;
     }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
 
     /**
      * @fileoverview added by tsickle
@@ -7587,14 +7613,13 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ComponentWrapperDirective = /** @class */ (function () {
-        function ComponentWrapperDirective(vcr, componentMapper, injector, cmsService, dynamicAttributeService, renderer, cd, config, platformId) {
+        function ComponentWrapperDirective(vcr, componentMapper, injector, cmsService, dynamicAttributeService, renderer, config, platformId) {
             this.vcr = vcr;
             this.componentMapper = componentMapper;
             this.injector = injector;
             this.cmsService = cmsService;
             this.dynamicAttributeService = dynamicAttributeService;
             this.renderer = renderer;
-            this.cd = cd;
             this.config = config;
             this.platformId = platformId;
         }
@@ -7643,7 +7668,6 @@
             var factory = this.componentMapper.getComponentFactoryByCode(this.cxComponentWrapper.flexType);
             if (factory) {
                 this.cmpRef = this.vcr.createComponent(factory, undefined, this.getInjectorForComponent());
-                this.cd.detectChanges();
                 if (this.cmsService.isLaunchInSmartEdit()) {
                     this.addSmartEditContract(this.cmpRef.location.nativeElement);
                 }
@@ -7753,7 +7777,6 @@
             { type: core$1.CmsService },
             { type: core$1.DynamicAttributeService },
             { type: core.Renderer2 },
-            { type: core.ChangeDetectorRef },
             { type: core$1.CmsConfig },
             { type: Object, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
         ]; };
@@ -8308,7 +8331,7 @@
         PageLayoutComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-page-layout',
-                        template: "<!-- ???? {{ layoutName$ | async }} -->\n<ng-template\n  [cxOutlet]=\"layoutName$ | async\"\n  [cxOutletContext]=\"{\n    templateName$: templateName$,\n    slots$: slots$,\n    section$: section$\n  }\"\n>\n  <ng-content></ng-content>\n\n  <!-- {{ slots$ | async }} -->\n  <cx-page-slot\n    *ngFor=\"let slot of (slots$ | async)\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-template>\n",
+                        template: "<ng-template\n  [cxOutlet]=\"layoutName$ | async\"\n  [cxOutletContext]=\"{\n    templateName$: templateName$,\n    slots$: slots$,\n    section$: section$\n  }\"\n>\n  <ng-content></ng-content>\n\n  <cx-page-slot\n    *ngFor=\"let slot of (slots$ | async)\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-template>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -8887,6 +8910,821 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CmsMappingService = /** @class */ (function () {
+        function CmsMappingService(config, platformId) {
+            this.config = config;
+            this.platformId = platformId;
+        }
+        /**
+         * @param {?} flexType
+         * @return {?}
+         */
+        CmsMappingService.prototype.isComponentEnabled = /**
+         * @param {?} flexType
+         * @return {?}
+         */
+        function (flexType) {
+            /** @type {?} */
+            var isSSR = common.isPlatformServer(this.platformId);
+            /** @type {?} */
+            var isComponentDisabledInSSR = (this.config.cmsComponents[flexType] || {})
+                .disableSSR;
+            return !(isSSR && isComponentDisabledInSSR);
+        };
+        /**
+         * @param {?} componentTypes
+         * @return {?}
+         */
+        CmsMappingService.prototype.getRoutesForComponents = /**
+         * @param {?} componentTypes
+         * @return {?}
+         */
+        function (componentTypes) {
+            var e_1, _a;
+            /** @type {?} */
+            var routes = [];
+            try {
+                for (var componentTypes_1 = __values(componentTypes), componentTypes_1_1 = componentTypes_1.next(); !componentTypes_1_1.done; componentTypes_1_1 = componentTypes_1.next()) {
+                    var componentType = componentTypes_1_1.value;
+                    if (this.isComponentEnabled(componentType)) {
+                        routes.push.apply(routes, __spread(this.getRoutesForComponent(componentType)));
+                    }
+                }
+            }
+            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            finally {
+                try {
+                    if (componentTypes_1_1 && !componentTypes_1_1.done && (_a = componentTypes_1.return)) _a.call(componentTypes_1);
+                }
+                finally { if (e_1) throw e_1.error; }
+            }
+            return routes;
+        };
+        /**
+         * @param {?} componentTypes
+         * @return {?}
+         */
+        CmsMappingService.prototype.getGuardsForComponents = /**
+         * @param {?} componentTypes
+         * @return {?}
+         */
+        function (componentTypes) {
+            var e_2, _a;
+            /** @type {?} */
+            var guards = new Set();
+            try {
+                for (var componentTypes_2 = __values(componentTypes), componentTypes_2_1 = componentTypes_2.next(); !componentTypes_2_1.done; componentTypes_2_1 = componentTypes_2.next()) {
+                    var componentType = componentTypes_2_1.value;
+                    this.getGuardsForComponent(componentType).forEach((/**
+                     * @param {?} guard
+                     * @return {?}
+                     */
+                    function (guard) {
+                        return guards.add(guard);
+                    }));
+                }
+            }
+            catch (e_2_1) { e_2 = { error: e_2_1 }; }
+            finally {
+                try {
+                    if (componentTypes_2_1 && !componentTypes_2_1.done && (_a = componentTypes_2.return)) _a.call(componentTypes_2);
+                }
+                finally { if (e_2) throw e_2.error; }
+            }
+            return Array.from(guards);
+        };
+        /**
+         * @param {?} componentTypes
+         * @return {?}
+         */
+        CmsMappingService.prototype.getI18nKeysForComponents = /**
+         * @param {?} componentTypes
+         * @return {?}
+         */
+        function (componentTypes) {
+            var e_3, _a;
+            /** @type {?} */
+            var i18nKeys = new Set();
+            try {
+                for (var componentTypes_3 = __values(componentTypes), componentTypes_3_1 = componentTypes_3.next(); !componentTypes_3_1.done; componentTypes_3_1 = componentTypes_3.next()) {
+                    var componentType = componentTypes_3_1.value;
+                    if (this.isComponentEnabled(componentType)) {
+                        this.getI18nKeysForComponent(componentType).forEach((/**
+                         * @param {?} key
+                         * @return {?}
+                         */
+                        function (key) {
+                            return i18nKeys.add(key);
+                        }));
+                    }
+                }
+            }
+            catch (e_3_1) { e_3 = { error: e_3_1 }; }
+            finally {
+                try {
+                    if (componentTypes_3_1 && !componentTypes_3_1.done && (_a = componentTypes_3.return)) _a.call(componentTypes_3);
+                }
+                finally { if (e_3) throw e_3.error; }
+            }
+            return Array.from(i18nKeys);
+        };
+        /**
+         * @private
+         * @param {?} componentType
+         * @return {?}
+         */
+        CmsMappingService.prototype.getRoutesForComponent = /**
+         * @private
+         * @param {?} componentType
+         * @return {?}
+         */
+        function (componentType) {
+            /** @type {?} */
+            var mappingConfig = this.config.cmsComponents[componentType];
+            return (mappingConfig && mappingConfig.childRoutes) || [];
+        };
+        /**
+         * @private
+         * @param {?} componentType
+         * @return {?}
+         */
+        CmsMappingService.prototype.getGuardsForComponent = /**
+         * @private
+         * @param {?} componentType
+         * @return {?}
+         */
+        function (componentType) {
+            /** @type {?} */
+            var mappingConfig = this.config.cmsComponents[componentType];
+            return (mappingConfig && mappingConfig.guards) || [];
+        };
+        /**
+         * @private
+         * @param {?} componentType
+         * @return {?}
+         */
+        CmsMappingService.prototype.getI18nKeysForComponent = /**
+         * @private
+         * @param {?} componentType
+         * @return {?}
+         */
+        function (componentType) {
+            /** @type {?} */
+            var mappingConfig = this.config.cmsComponents[componentType];
+            return (mappingConfig && mappingConfig.i18nKeys) || [];
+        };
+        CmsMappingService.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        CmsMappingService.ctorParameters = function () { return [
+            { type: core$1.CmsConfig },
+            { type: Object, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
+        ]; };
+        /** @nocollapse */ CmsMappingService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(core.ɵɵinject(core$1.CmsConfig), core.ɵɵinject(core.PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
+        return CmsMappingService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CmsGuardsService = /** @class */ (function () {
+        function CmsGuardsService(cmsMapping, injector) {
+            this.cmsMapping = cmsMapping;
+            this.injector = injector;
+        }
+        /**
+         * @param {?} componentTypes
+         * @param {?} route
+         * @param {?} state
+         * @return {?}
+         */
+        CmsGuardsService.prototype.cmsPageCanActivate = /**
+         * @param {?} componentTypes
+         * @param {?} route
+         * @param {?} state
+         * @return {?}
+         */
+        function (componentTypes, route, state) {
+            var _this = this;
+            /** @type {?} */
+            var guards = this.cmsMapping.getGuardsForComponents(componentTypes);
+            if (guards.length) {
+                /** @type {?} */
+                var canActivateObservables = guards.map((/**
+                 * @param {?} guardClass
+                 * @return {?}
+                 */
+                function (guardClass) {
+                    /** @type {?} */
+                    var guard = _this.injector.get(guardClass, null);
+                    if (isCanActivate(guard)) {
+                        return wrapIntoObservable(guard.canActivate(route, state)).pipe(operators.first());
+                    }
+                    else {
+                        throw new Error('Invalid CanActivate guard in cmsMapping');
+                    }
+                }));
+                return rxjs.concat.apply(void 0, __spread(canActivateObservables)).pipe(operators.skipWhile((/**
+                 * @param {?} canActivate
+                 * @return {?}
+                 */
+                function (canActivate) { return canActivate === true; })), operators.endWith(true), operators.first());
+            }
+            else {
+                return rxjs.of(true);
+            }
+        };
+        CmsGuardsService.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        CmsGuardsService.ctorParameters = function () { return [
+            { type: CmsMappingService },
+            { type: core.Injector }
+        ]; };
+        /** @nocollapse */ CmsGuardsService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CmsGuardsService_Factory() { return new CmsGuardsService(core.ɵɵinject(CmsMappingService), core.ɵɵinject(core.INJECTOR)); }, token: CmsGuardsService, providedIn: "root" });
+        return CmsGuardsService;
+    }());
+    /**
+     * @template T
+     * @param {?} value
+     * @return {?}
+     */
+    function wrapIntoObservable(value) {
+        if (rxjs.isObservable(value)) {
+            return value;
+        }
+        if (isPromise(value)) {
+            return rxjs.from(Promise.resolve(value));
+        }
+        return rxjs.of(value);
+    }
+    /**
+     * @param {?} obj
+     * @return {?}
+     */
+    function isPromise(obj) {
+        return !!obj && typeof obj.then === 'function';
+    }
+    /**
+     * @param {?} guard
+     * @return {?}
+     */
+    function isCanActivate(guard) {
+        return guard && isFunction(guard.canActivate);
+    }
+    /**
+     * @template T
+     * @param {?} v
+     * @return {?}
+     */
+    function isFunction(v) {
+        return typeof v === 'function';
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CmsI18nService = /** @class */ (function () {
+        function CmsI18nService(cmsMapping, translation, translationChunk) {
+            this.cmsMapping = cmsMapping;
+            this.translation = translation;
+            this.translationChunk = translationChunk;
+        }
+        /**
+         * @param {?} componentTypes
+         * @return {?}
+         */
+        CmsI18nService.prototype.loadChunksForComponents = /**
+         * @param {?} componentTypes
+         * @return {?}
+         */
+        function (componentTypes) {
+            var e_1, _a;
+            /** @type {?} */
+            var i18nKeys = this.cmsMapping.getI18nKeysForComponents(componentTypes);
+            /** @type {?} */
+            var i18nChunks = new Set();
+            try {
+                for (var i18nKeys_1 = __values(i18nKeys), i18nKeys_1_1 = i18nKeys_1.next(); !i18nKeys_1_1.done; i18nKeys_1_1 = i18nKeys_1.next()) {
+                    var key = i18nKeys_1_1.value;
+                    i18nChunks.add(this.translationChunk.getChunkNameForKey(key));
+                }
+            }
+            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            finally {
+                try {
+                    if (i18nKeys_1_1 && !i18nKeys_1_1.done && (_a = i18nKeys_1.return)) _a.call(i18nKeys_1);
+                }
+                finally { if (e_1) throw e_1.error; }
+            }
+            this.translation.loadChunks(Array.from(i18nChunks));
+        };
+        CmsI18nService.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        CmsI18nService.ctorParameters = function () { return [
+            { type: CmsMappingService },
+            { type: core$1.TranslationService },
+            { type: core$1.TranslationChunkService }
+        ]; };
+        /** @nocollapse */ CmsI18nService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CmsI18nService_Factory() { return new CmsI18nService(core.ɵɵinject(CmsMappingService), core.ɵɵinject(core$1.TranslationService), core.ɵɵinject(core$1.TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
+        return CmsI18nService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CmsRoutesService = /** @class */ (function () {
+        function CmsRoutesService(router, cmsMapping) {
+            this.router = router;
+            this.cmsMapping = cmsMapping;
+        }
+        /**
+         * @param {?} url
+         * @return {?}
+         */
+        CmsRoutesService.prototype.cmsRouteExist = /**
+         * @param {?} url
+         * @return {?}
+         */
+        function (url) {
+            /** @type {?} */
+            var isCmsDrivenRoute = url.startsWith('/');
+            if (!isCmsDrivenRoute) {
+                return false;
+            }
+            /** @type {?} */
+            var routePath = url.substr(1);
+            return (isCmsDrivenRoute &&
+                !!this.router.config.find((/**
+                 * @param {?} route
+                 * @return {?}
+                 */
+                function (route) {
+                    return route.data && route.data.cxCmsRouteContext && route.path === routePath;
+                })));
+        };
+        /**
+         * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
+         *
+         * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
+         * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
+         *
+         * @param pageContext
+         * @param currentUrl
+         */
+        /**
+         * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
+         *
+         * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
+         * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
+         *
+         * @param {?} pageContext
+         * @param {?} componentTypes
+         * @param {?} currentUrl
+         * @return {?}
+         */
+        CmsRoutesService.prototype.handleCmsRoutesInGuard = /**
+         * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
+         *
+         * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
+         * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
+         *
+         * @param {?} pageContext
+         * @param {?} componentTypes
+         * @param {?} currentUrl
+         * @return {?}
+         */
+        function (pageContext, componentTypes, currentUrl) {
+            /** @type {?} */
+            var componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
+            if (componentRoutes.length) {
+                if (this.updateRouting(pageContext, componentRoutes)) {
+                    this.router.navigateByUrl(currentUrl);
+                    return false;
+                }
+            }
+            return true;
+        };
+        /**
+         * @private
+         * @param {?} pageContext
+         * @param {?} routes
+         * @return {?}
+         */
+        CmsRoutesService.prototype.updateRouting = /**
+         * @private
+         * @param {?} pageContext
+         * @param {?} routes
+         * @return {?}
+         */
+        function (pageContext, routes) {
+            if (pageContext.type === core$1.PageType.CONTENT_PAGE &&
+                pageContext.id.startsWith('/') &&
+                pageContext.id.length > 1) {
+                /** @type {?} */
+                var newRoute = {
+                    path: pageContext.id.substr(1),
+                    component: PageLayoutComponent,
+                    children: routes,
+                    data: {
+                        cxCmsRouteContext: pageContext,
+                    },
+                };
+                this.router.resetConfig(__spread([newRoute], this.router.config));
+                return true;
+            }
+            return false;
+        };
+        CmsRoutesService.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        CmsRoutesService.ctorParameters = function () { return [
+            { type: router.Router },
+            { type: CmsMappingService }
+        ]; };
+        /** @nocollapse */ CmsRoutesService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(core.ɵɵinject(router.Router), core.ɵɵinject(CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
+        return CmsRoutesService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CmsPageGuard = /** @class */ (function () {
+        function CmsPageGuard(routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService) {
+            this.routingService = routingService;
+            this.cmsService = cmsService;
+            this.cmsRoutes = cmsRoutes;
+            this.cmsI18n = cmsI18n;
+            this.cmsGuards = cmsGuards;
+            this.semanticPathService = semanticPathService;
+        }
+        /**
+         * @param {?} route
+         * @param {?} state
+         * @return {?}
+         */
+        CmsPageGuard.prototype.canActivate = /**
+         * @param {?} route
+         * @param {?} state
+         * @return {?}
+         */
+        function (route, state) {
+            var _this = this;
+            return this.routingService.getNextPageContext().pipe(operators.switchMap((/**
+             * @param {?} pageContext
+             * @return {?}
+             */
+            function (pageContext) {
+                return _this.cmsService.hasPage(pageContext, true).pipe(operators.first(), operators.withLatestFrom(rxjs.of(pageContext)));
+            })), operators.switchMap((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 2), hasPage = _b[0], pageContext = _b[1];
+                return hasPage
+                    ? _this.resolveCmsPageLogic(pageContext, route, state)
+                    : _this.handleNotFoundPage(pageContext, route, state);
+            })));
+        };
+        /**
+         * @private
+         * @param {?} pageContext
+         * @param {?} route
+         * @param {?} state
+         * @return {?}
+         */
+        CmsPageGuard.prototype.resolveCmsPageLogic = /**
+         * @private
+         * @param {?} pageContext
+         * @param {?} route
+         * @param {?} state
+         * @return {?}
+         */
+        function (pageContext, route, state) {
+            var _this = this;
+            return this.cmsService.getPageComponentTypes(pageContext).pipe(operators.switchMap((/**
+             * @param {?} componentTypes
+             * @return {?}
+             */
+            function (componentTypes) {
+                return _this.cmsGuards
+                    .cmsPageCanActivate(componentTypes, route, state)
+                    .pipe(operators.withLatestFrom(rxjs.of(componentTypes)));
+            })), operators.tap((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
+                if (canActivate === true) {
+                    _this.cmsI18n.loadChunksForComponents(componentTypes);
+                }
+            })), operators.map((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
+                if (canActivate === true &&
+                    !route.data.cxCmsRouteContext &&
+                    !_this.cmsRoutes.cmsRouteExist(pageContext.id)) {
+                    return _this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url);
+                }
+                return canActivate;
+            })));
+        };
+        /**
+         * @private
+         * @param {?} pageContext
+         * @param {?} route
+         * @param {?} state
+         * @return {?}
+         */
+        CmsPageGuard.prototype.handleNotFoundPage = /**
+         * @private
+         * @param {?} pageContext
+         * @param {?} route
+         * @param {?} state
+         * @return {?}
+         */
+        function (pageContext, route, state) {
+            var _this = this;
+            /** @type {?} */
+            var notFoundCmsPageContext = {
+                type: core$1.PageType.CONTENT_PAGE,
+                id: this.semanticPathService.get('notFound'),
+            };
+            return this.cmsService.hasPage(notFoundCmsPageContext).pipe(operators.switchMap((/**
+             * @param {?} hasNotFoundPage
+             * @return {?}
+             */
+            function (hasNotFoundPage) {
+                if (hasNotFoundPage) {
+                    return _this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(operators.tap((/**
+                     * @param {?} notFoundIndex
+                     * @return {?}
+                     */
+                    function (notFoundIndex) {
+                        _this.cmsService.setPageFailIndex(pageContext, notFoundIndex);
+                    })), operators.switchMap((/**
+                     * @param {?} notFoundIndex
+                     * @return {?}
+                     */
+                    function (notFoundIndex) {
+                        return _this.cmsService.getPageIndex(pageContext).pipe(
+                        // we have to wait for page index update
+                        operators.filter((/**
+                         * @param {?} index
+                         * @return {?}
+                         */
+                        function (index) { return index === notFoundIndex; })));
+                    })), operators.switchMap((/**
+                     * @return {?}
+                     */
+                    function () { return _this.resolveCmsPageLogic(pageContext, route, state); })));
+                }
+                return rxjs.of(false);
+            })));
+        };
+        CmsPageGuard.guardName = 'CmsPageGuard';
+        CmsPageGuard.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        CmsPageGuard.ctorParameters = function () { return [
+            { type: core$1.RoutingService },
+            { type: core$1.CmsService },
+            { type: CmsRoutesService },
+            { type: CmsI18nService },
+            { type: CmsGuardsService },
+            { type: core$1.SemanticPathService }
+        ]; };
+        /** @nocollapse */ CmsPageGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(core.ɵɵinject(core$1.RoutingService), core.ɵɵinject(core$1.CmsService), core.ɵɵinject(CmsRoutesService), core.ɵɵinject(CmsI18nService), core.ɵɵinject(CmsGuardsService), core.ɵɵinject(core$1.SemanticPathService)); }, token: CmsPageGuard, providedIn: "root" });
+        return CmsPageGuard;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var cmsRoute = {
+        path: '**',
+        canActivate: [CmsPageGuard],
+        component: PageLayoutComponent,
+    };
+    /**
+     * @param {?} injector
+     * @return {?}
+     */
+    function addCmsRoute(injector) {
+        /** @type {?} */
+        var result = (/**
+         * @return {?}
+         */
+        function () {
+            /** @type {?} */
+            var router$1 = injector.get(router.Router);
+            router$1.config.push(cmsRoute);
+        });
+        return result;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ɵ0 = addCmsRoute;
+    var CmsRouteModule = /** @class */ (function () {
+        function CmsRouteModule() {
+        }
+        CmsRouteModule.decorators = [
+            { type: core.NgModule, args: [{
+                        providers: [
+                            {
+                                provide: core.APP_INITIALIZER,
+                                multi: true,
+                                deps: [core.Injector],
+                                useFactory: ɵ0,
+                            },
+                        ],
+                    },] }
+        ];
+        return CmsRouteModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Generic carousel that renders CMS Components.
+     */
+    var BannerCarouselComponent = /** @class */ (function () {
+        function BannerCarouselComponent(componentData, cmsService) {
+            var _this = this;
+            this.componentData = componentData;
+            this.cmsService = cmsService;
+            this.componentData$ = this.componentData.data$.pipe(operators.filter(Boolean), operators.tap((/**
+             * @param {?} d
+             * @return {?}
+             */
+            function (d) { return (_this.theme = d.effect + "-theme"); })));
+            this.items$ = this.componentData$.pipe(operators.map((/**
+             * @param {?} data
+             * @return {?}
+             */
+            function (data) { return data.banners.trim().split(' '); })), operators.map((/**
+             * @param {?} codes
+             * @return {?}
+             */
+            function (codes) { return codes.map((/**
+             * @param {?} code
+             * @return {?}
+             */
+            function (code) { return _this.cmsService.getComponentData(code); })); })));
+            /**
+             * Adds a specific theme for the carousel. The effect can be
+             * used in CSS customisations.
+             */
+            this.theme = '';
+        }
+        /**
+         * Returns an Obervable with an Array of Observables. This is done, so that
+         * the component UI could consider to lazy load the UI components when they're
+         * in the viewpoint.
+         */
+        /**
+         * Returns an Obervable with an Array of Observables. This is done, so that
+         * the component UI could consider to lazy load the UI components when they're
+         * in the viewpoint.
+         * @return {?}
+         */
+        BannerCarouselComponent.prototype.getItems = /**
+         * Returns an Obervable with an Array of Observables. This is done, so that
+         * the component UI could consider to lazy load the UI components when they're
+         * in the viewpoint.
+         * @return {?}
+         */
+        function () {
+            return this.items$;
+        };
+        BannerCarouselComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-banner-carousel',
+                        template: "<cx-carousel\n  [items]=\"getItems() | async\"\n  [template]=\"template\"\n  itemWidth=\"100%\"\n  class=\"inline-navigation\"\n></cx-carousel>\n\n<ng-template #template let-item=\"item\">\n  <ng-container\n    [cxComponentWrapper]=\"{\n      flexType: item.typeCode,\n      typeCode: item.typeCode,\n      uid: item?.uid\n    }\"\n  >\n  </ng-container>\n</ng-template>\n",
+                        changeDetection: core.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        BannerCarouselComponent.ctorParameters = function () { return [
+            { type: CmsComponentData },
+            { type: core$1.CmsService }
+        ]; };
+        BannerCarouselComponent.propDecorators = {
+            theme: [{ type: core.HostBinding, args: ['class',] }]
+        };
+        return BannerCarouselComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var BannerCarouselModule = /** @class */ (function () {
+        function BannerCarouselModule() {
+        }
+        BannerCarouselModule.decorators = [
+            { type: core.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            core$1.ConfigModule.withConfig((/** @type {?} */ ({
+                                cmsComponents: {
+                                    RotatingImagesComponent: {
+                                        component: BannerCarouselComponent,
+                                    },
+                                },
+                            }))),
+                            PageComponentModule,
+                            CarouselModule,
+                            MediaModule,
+                        ],
+                        declarations: [BannerCarouselComponent],
+                        entryComponents: [BannerCarouselComponent],
+                    },] }
+        ];
+        return BannerCarouselModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var BannerComponent = /** @class */ (function () {
         function BannerComponent(component) {
             this.component = component;
@@ -8894,7 +9732,7 @@
         BannerComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-banner',
-                        template: "<ng-container *ngIf=\"(component.data$ | async) as data\">\n  <p *ngIf=\"data.headLine\" [innerHTML]=\"data.headLine\"></p>\n  <cx-generic-link\n    [url]=\"data.urlLink\"\n    [target]=\"data.external ? '_blank' : null\"\n    [title]=\"data.media?.altText\"\n  >\n    <cx-media [container]=\"data.media\"></cx-media>\n  </cx-generic-link>\n\n  <p *ngIf=\"data.content\" [innerHTML]=\"data.content\"></p>\n</ng-container>\n",
+                        template: "<ng-container *ngIf=\"(component.data$ | async) as data\">\n  <cx-generic-link\n    [url]=\"data.urlLink\"\n    [target]=\"data.external ? '_blank' : null\"\n    [title]=\"data.media?.altText\"\n  >\n    <p *ngIf=\"data.headline\" [innerHTML]=\"data.headline\"></p>\n    <cx-media [container]=\"data.media\"></cx-media>\n    <p *ngIf=\"data.content\" [innerHTML]=\"data.content\"></p>\n  </cx-generic-link>\n</ng-container>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -9040,11 +9878,6 @@
         ];
         return CmsParagraphModule;
     }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
 
     /**
      * @fileoverview added by tsickle
@@ -10344,623 +11177,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var CmsMappingService = /** @class */ (function () {
-        function CmsMappingService(config, platformId) {
-            this.config = config;
-            this.platformId = platformId;
-        }
-        /**
-         * @param {?} flexType
-         * @return {?}
-         */
-        CmsMappingService.prototype.isComponentEnabled = /**
-         * @param {?} flexType
-         * @return {?}
-         */
-        function (flexType) {
-            /** @type {?} */
-            var isSSR = common.isPlatformServer(this.platformId);
-            /** @type {?} */
-            var isComponentDisabledInSSR = (this.config.cmsComponents[flexType] || {})
-                .disableSSR;
-            return !(isSSR && isComponentDisabledInSSR);
-        };
-        /**
-         * @param {?} componentTypes
-         * @return {?}
-         */
-        CmsMappingService.prototype.getRoutesForComponents = /**
-         * @param {?} componentTypes
-         * @return {?}
-         */
-        function (componentTypes) {
-            var e_1, _a;
-            /** @type {?} */
-            var routes = [];
-            try {
-                for (var componentTypes_1 = __values(componentTypes), componentTypes_1_1 = componentTypes_1.next(); !componentTypes_1_1.done; componentTypes_1_1 = componentTypes_1.next()) {
-                    var componentType = componentTypes_1_1.value;
-                    if (this.isComponentEnabled(componentType)) {
-                        routes.push.apply(routes, __spread(this.getRoutesForComponent(componentType)));
-                    }
-                }
-            }
-            catch (e_1_1) { e_1 = { error: e_1_1 }; }
-            finally {
-                try {
-                    if (componentTypes_1_1 && !componentTypes_1_1.done && (_a = componentTypes_1.return)) _a.call(componentTypes_1);
-                }
-                finally { if (e_1) throw e_1.error; }
-            }
-            return routes;
-        };
-        /**
-         * @param {?} componentTypes
-         * @return {?}
-         */
-        CmsMappingService.prototype.getGuardsForComponents = /**
-         * @param {?} componentTypes
-         * @return {?}
-         */
-        function (componentTypes) {
-            var e_2, _a;
-            /** @type {?} */
-            var guards = new Set();
-            try {
-                for (var componentTypes_2 = __values(componentTypes), componentTypes_2_1 = componentTypes_2.next(); !componentTypes_2_1.done; componentTypes_2_1 = componentTypes_2.next()) {
-                    var componentType = componentTypes_2_1.value;
-                    this.getGuardsForComponent(componentType).forEach((/**
-                     * @param {?} guard
-                     * @return {?}
-                     */
-                    function (guard) {
-                        return guards.add(guard);
-                    }));
-                }
-            }
-            catch (e_2_1) { e_2 = { error: e_2_1 }; }
-            finally {
-                try {
-                    if (componentTypes_2_1 && !componentTypes_2_1.done && (_a = componentTypes_2.return)) _a.call(componentTypes_2);
-                }
-                finally { if (e_2) throw e_2.error; }
-            }
-            return Array.from(guards);
-        };
-        /**
-         * @param {?} componentTypes
-         * @return {?}
-         */
-        CmsMappingService.prototype.getI18nKeysForComponents = /**
-         * @param {?} componentTypes
-         * @return {?}
-         */
-        function (componentTypes) {
-            var e_3, _a;
-            /** @type {?} */
-            var i18nKeys = new Set();
-            try {
-                for (var componentTypes_3 = __values(componentTypes), componentTypes_3_1 = componentTypes_3.next(); !componentTypes_3_1.done; componentTypes_3_1 = componentTypes_3.next()) {
-                    var componentType = componentTypes_3_1.value;
-                    if (this.isComponentEnabled(componentType)) {
-                        this.getI18nKeysForComponent(componentType).forEach((/**
-                         * @param {?} key
-                         * @return {?}
-                         */
-                        function (key) {
-                            return i18nKeys.add(key);
-                        }));
-                    }
-                }
-            }
-            catch (e_3_1) { e_3 = { error: e_3_1 }; }
-            finally {
-                try {
-                    if (componentTypes_3_1 && !componentTypes_3_1.done && (_a = componentTypes_3.return)) _a.call(componentTypes_3);
-                }
-                finally { if (e_3) throw e_3.error; }
-            }
-            return Array.from(i18nKeys);
-        };
-        /**
-         * @private
-         * @param {?} componentType
-         * @return {?}
-         */
-        CmsMappingService.prototype.getRoutesForComponent = /**
-         * @private
-         * @param {?} componentType
-         * @return {?}
-         */
-        function (componentType) {
-            /** @type {?} */
-            var mappingConfig = this.config.cmsComponents[componentType];
-            return (mappingConfig && mappingConfig.childRoutes) || [];
-        };
-        /**
-         * @private
-         * @param {?} componentType
-         * @return {?}
-         */
-        CmsMappingService.prototype.getGuardsForComponent = /**
-         * @private
-         * @param {?} componentType
-         * @return {?}
-         */
-        function (componentType) {
-            /** @type {?} */
-            var mappingConfig = this.config.cmsComponents[componentType];
-            return (mappingConfig && mappingConfig.guards) || [];
-        };
-        /**
-         * @private
-         * @param {?} componentType
-         * @return {?}
-         */
-        CmsMappingService.prototype.getI18nKeysForComponent = /**
-         * @private
-         * @param {?} componentType
-         * @return {?}
-         */
-        function (componentType) {
-            /** @type {?} */
-            var mappingConfig = this.config.cmsComponents[componentType];
-            return (mappingConfig && mappingConfig.i18nKeys) || [];
-        };
-        CmsMappingService.decorators = [
-            { type: core.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */
-        CmsMappingService.ctorParameters = function () { return [
-            { type: core$1.CmsConfig },
-            { type: Object, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
-        ]; };
-        /** @nocollapse */ CmsMappingService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(core.ɵɵinject(core$1.CmsConfig), core.ɵɵinject(core.PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
-        return CmsMappingService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CmsGuardsService = /** @class */ (function () {
-        function CmsGuardsService(cmsMapping, injector) {
-            this.cmsMapping = cmsMapping;
-            this.injector = injector;
-        }
-        /**
-         * @param {?} componentTypes
-         * @param {?} route
-         * @param {?} state
-         * @return {?}
-         */
-        CmsGuardsService.prototype.cmsPageCanActivate = /**
-         * @param {?} componentTypes
-         * @param {?} route
-         * @param {?} state
-         * @return {?}
-         */
-        function (componentTypes, route, state) {
-            var _this = this;
-            /** @type {?} */
-            var guards = this.cmsMapping.getGuardsForComponents(componentTypes);
-            if (guards.length) {
-                /** @type {?} */
-                var canActivateObservables = guards.map((/**
-                 * @param {?} guardClass
-                 * @return {?}
-                 */
-                function (guardClass) {
-                    /** @type {?} */
-                    var guard = _this.injector.get(guardClass, null);
-                    if (isCanActivate(guard)) {
-                        return wrapIntoObservable(guard.canActivate(route, state)).pipe(operators.first());
-                    }
-                    else {
-                        throw new Error('Invalid CanActivate guard in cmsMapping');
-                    }
-                }));
-                return rxjs.concat.apply(void 0, __spread(canActivateObservables)).pipe(operators.skipWhile((/**
-                 * @param {?} canActivate
-                 * @return {?}
-                 */
-                function (canActivate) { return canActivate === true; })), operators.endWith(true), operators.first());
-            }
-            else {
-                return rxjs.of(true);
-            }
-        };
-        CmsGuardsService.decorators = [
-            { type: core.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */
-        CmsGuardsService.ctorParameters = function () { return [
-            { type: CmsMappingService },
-            { type: core.Injector }
-        ]; };
-        /** @nocollapse */ CmsGuardsService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CmsGuardsService_Factory() { return new CmsGuardsService(core.ɵɵinject(CmsMappingService), core.ɵɵinject(core.INJECTOR)); }, token: CmsGuardsService, providedIn: "root" });
-        return CmsGuardsService;
-    }());
-    /**
-     * @template T
-     * @param {?} value
-     * @return {?}
-     */
-    function wrapIntoObservable(value) {
-        if (rxjs.isObservable(value)) {
-            return value;
-        }
-        if (isPromise(value)) {
-            return rxjs.from(Promise.resolve(value));
-        }
-        return rxjs.of(value);
-    }
-    /**
-     * @param {?} obj
-     * @return {?}
-     */
-    function isPromise(obj) {
-        return !!obj && typeof obj.then === 'function';
-    }
-    /**
-     * @param {?} guard
-     * @return {?}
-     */
-    function isCanActivate(guard) {
-        return guard && isFunction(guard.canActivate);
-    }
-    /**
-     * @template T
-     * @param {?} v
-     * @return {?}
-     */
-    function isFunction(v) {
-        return typeof v === 'function';
-    }
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CmsI18nService = /** @class */ (function () {
-        function CmsI18nService(cmsMapping, translation, translationChunk) {
-            this.cmsMapping = cmsMapping;
-            this.translation = translation;
-            this.translationChunk = translationChunk;
-        }
-        /**
-         * @param {?} componentTypes
-         * @return {?}
-         */
-        CmsI18nService.prototype.loadChunksForComponents = /**
-         * @param {?} componentTypes
-         * @return {?}
-         */
-        function (componentTypes) {
-            var e_1, _a;
-            /** @type {?} */
-            var i18nKeys = this.cmsMapping.getI18nKeysForComponents(componentTypes);
-            /** @type {?} */
-            var i18nChunks = new Set();
-            try {
-                for (var i18nKeys_1 = __values(i18nKeys), i18nKeys_1_1 = i18nKeys_1.next(); !i18nKeys_1_1.done; i18nKeys_1_1 = i18nKeys_1.next()) {
-                    var key = i18nKeys_1_1.value;
-                    i18nChunks.add(this.translationChunk.getChunkNameForKey(key));
-                }
-            }
-            catch (e_1_1) { e_1 = { error: e_1_1 }; }
-            finally {
-                try {
-                    if (i18nKeys_1_1 && !i18nKeys_1_1.done && (_a = i18nKeys_1.return)) _a.call(i18nKeys_1);
-                }
-                finally { if (e_1) throw e_1.error; }
-            }
-            this.translation.loadChunks(Array.from(i18nChunks));
-        };
-        CmsI18nService.decorators = [
-            { type: core.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */
-        CmsI18nService.ctorParameters = function () { return [
-            { type: CmsMappingService },
-            { type: core$1.TranslationService },
-            { type: core$1.TranslationChunkService }
-        ]; };
-        /** @nocollapse */ CmsI18nService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CmsI18nService_Factory() { return new CmsI18nService(core.ɵɵinject(CmsMappingService), core.ɵɵinject(core$1.TranslationService), core.ɵɵinject(core$1.TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
-        return CmsI18nService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CmsRoutesService = /** @class */ (function () {
-        function CmsRoutesService(router, cmsMapping) {
-            this.router = router;
-            this.cmsMapping = cmsMapping;
-        }
-        /**
-         * @param {?} url
-         * @return {?}
-         */
-        CmsRoutesService.prototype.cmsRouteExist = /**
-         * @param {?} url
-         * @return {?}
-         */
-        function (url) {
-            /** @type {?} */
-            var isCmsDrivenRoute = url.startsWith('/');
-            if (!isCmsDrivenRoute) {
-                return false;
-            }
-            /** @type {?} */
-            var routePath = url.substr(1);
-            return (isCmsDrivenRoute &&
-                !!this.router.config.find((/**
-                 * @param {?} route
-                 * @return {?}
-                 */
-                function (route) {
-                    return route.data && route.data.cxCmsRouteContext && route.path === routePath;
-                })));
-        };
-        /**
-         * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
-         *
-         * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
-         * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
-         *
-         * @param pageContext
-         * @param currentUrl
-         */
-        /**
-         * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
-         *
-         * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
-         * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
-         *
-         * @param {?} pageContext
-         * @param {?} componentTypes
-         * @param {?} currentUrl
-         * @return {?}
-         */
-        CmsRoutesService.prototype.handleCmsRoutesInGuard = /**
-         * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
-         *
-         * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
-         * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
-         *
-         * @param {?} pageContext
-         * @param {?} componentTypes
-         * @param {?} currentUrl
-         * @return {?}
-         */
-        function (pageContext, componentTypes, currentUrl) {
-            /** @type {?} */
-            var componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
-            if (componentRoutes.length) {
-                if (this.updateRouting(pageContext, componentRoutes)) {
-                    this.router.navigateByUrl(currentUrl);
-                    return false;
-                }
-            }
-            return true;
-        };
-        /**
-         * @private
-         * @param {?} pageContext
-         * @param {?} routes
-         * @return {?}
-         */
-        CmsRoutesService.prototype.updateRouting = /**
-         * @private
-         * @param {?} pageContext
-         * @param {?} routes
-         * @return {?}
-         */
-        function (pageContext, routes) {
-            if (pageContext.type === core$1.PageType.CONTENT_PAGE &&
-                pageContext.id.startsWith('/') &&
-                pageContext.id.length > 1) {
-                /** @type {?} */
-                var newRoute = {
-                    path: pageContext.id.substr(1),
-                    component: PageLayoutComponent,
-                    children: routes,
-                    data: {
-                        cxCmsRouteContext: pageContext,
-                    },
-                };
-                this.router.resetConfig(__spread([newRoute], this.router.config));
-                return true;
-            }
-            return false;
-        };
-        CmsRoutesService.decorators = [
-            { type: core.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */
-        CmsRoutesService.ctorParameters = function () { return [
-            { type: router.Router },
-            { type: CmsMappingService }
-        ]; };
-        /** @nocollapse */ CmsRoutesService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(core.ɵɵinject(router.Router), core.ɵɵinject(CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
-        return CmsRoutesService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CmsPageGuard = /** @class */ (function () {
-        function CmsPageGuard(routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService) {
-            this.routingService = routingService;
-            this.cmsService = cmsService;
-            this.cmsRoutes = cmsRoutes;
-            this.cmsI18n = cmsI18n;
-            this.cmsGuards = cmsGuards;
-            this.semanticPathService = semanticPathService;
-        }
-        /**
-         * @param {?} route
-         * @param {?} state
-         * @return {?}
-         */
-        CmsPageGuard.prototype.canActivate = /**
-         * @param {?} route
-         * @param {?} state
-         * @return {?}
-         */
-        function (route, state) {
-            var _this = this;
-            return this.routingService.getNextPageContext().pipe(operators.switchMap((/**
-             * @param {?} pageContext
-             * @return {?}
-             */
-            function (pageContext) {
-                return _this.cmsService.hasPage(pageContext, true).pipe(operators.first(), operators.withLatestFrom(rxjs.of(pageContext)));
-            })), operators.switchMap((/**
-             * @param {?} __0
-             * @return {?}
-             */
-            function (_a) {
-                var _b = __read(_a, 2), hasPage = _b[0], pageContext = _b[1];
-                return hasPage
-                    ? _this.resolveCmsPageLogic(pageContext, route, state)
-                    : _this.handleNotFoundPage(pageContext, route, state);
-            })));
-        };
-        /**
-         * @private
-         * @param {?} pageContext
-         * @param {?} route
-         * @param {?} state
-         * @return {?}
-         */
-        CmsPageGuard.prototype.resolveCmsPageLogic = /**
-         * @private
-         * @param {?} pageContext
-         * @param {?} route
-         * @param {?} state
-         * @return {?}
-         */
-        function (pageContext, route, state) {
-            var _this = this;
-            return this.cmsService.getPageComponentTypes(pageContext).pipe(operators.switchMap((/**
-             * @param {?} componentTypes
-             * @return {?}
-             */
-            function (componentTypes) {
-                return _this.cmsGuards
-                    .cmsPageCanActivate(componentTypes, route, state)
-                    .pipe(operators.withLatestFrom(rxjs.of(componentTypes)));
-            })), operators.tap((/**
-             * @param {?} __0
-             * @return {?}
-             */
-            function (_a) {
-                var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
-                if (canActivate === true) {
-                    _this.cmsI18n.loadChunksForComponents(componentTypes);
-                }
-            })), operators.map((/**
-             * @param {?} __0
-             * @return {?}
-             */
-            function (_a) {
-                var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
-                if (canActivate === true &&
-                    !route.data.cxCmsRouteContext &&
-                    !_this.cmsRoutes.cmsRouteExist(pageContext.id)) {
-                    return _this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url);
-                }
-                return canActivate;
-            })));
-        };
-        /**
-         * @private
-         * @param {?} pageContext
-         * @param {?} route
-         * @param {?} state
-         * @return {?}
-         */
-        CmsPageGuard.prototype.handleNotFoundPage = /**
-         * @private
-         * @param {?} pageContext
-         * @param {?} route
-         * @param {?} state
-         * @return {?}
-         */
-        function (pageContext, route, state) {
-            var _this = this;
-            /** @type {?} */
-            var notFoundCmsPageContext = {
-                type: core$1.PageType.CONTENT_PAGE,
-                id: this.semanticPathService.get('notFound'),
-            };
-            return this.cmsService.hasPage(notFoundCmsPageContext).pipe(operators.switchMap((/**
-             * @param {?} hasNotFoundPage
-             * @return {?}
-             */
-            function (hasNotFoundPage) {
-                if (hasNotFoundPage) {
-                    return _this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(operators.tap((/**
-                     * @param {?} notFoundIndex
-                     * @return {?}
-                     */
-                    function (notFoundIndex) {
-                        _this.cmsService.setPageFailIndex(pageContext, notFoundIndex);
-                    })), operators.switchMap((/**
-                     * @param {?} notFoundIndex
-                     * @return {?}
-                     */
-                    function (notFoundIndex) {
-                        return _this.cmsService.getPageIndex(pageContext).pipe(
-                        // we have to wait for page index update
-                        operators.filter((/**
-                         * @param {?} index
-                         * @return {?}
-                         */
-                        function (index) { return index === notFoundIndex; })));
-                    })), operators.switchMap((/**
-                     * @return {?}
-                     */
-                    function () { return _this.resolveCmsPageLogic(pageContext, route, state); })));
-                }
-                return rxjs.of(false);
-            })));
-        };
-        CmsPageGuard.guardName = 'CmsPageGuard';
-        CmsPageGuard.decorators = [
-            { type: core.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */
-        CmsPageGuard.ctorParameters = function () { return [
-            { type: core$1.RoutingService },
-            { type: core$1.CmsService },
-            { type: CmsRoutesService },
-            { type: CmsI18nService },
-            { type: CmsGuardsService },
-            { type: core$1.SemanticPathService }
-        ]; };
-        /** @nocollapse */ CmsPageGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(core.ɵɵinject(core$1.RoutingService), core.ɵɵinject(core$1.CmsService), core.ɵɵinject(CmsRoutesService), core.ɵɵinject(CmsI18nService), core.ɵɵinject(CmsGuardsService), core.ɵɵinject(core$1.SemanticPathService)); }, token: CmsPageGuard, providedIn: "root" });
-        return CmsPageGuard;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     /** @type {?} */
     var moduleComponents = [
         OrderDetailHeadlineComponent,
@@ -10968,7 +11184,7 @@
         OrderDetailTotalsComponent,
         OrderDetailShippingComponent,
     ];
-    var ɵ0 = { cxRoute: 'orderDetails' };
+    var ɵ0$1 = { cxRoute: 'orderDetails' };
     var OrderDetailsModule = /** @class */ (function () {
         function OrderDetailsModule() {
         }
@@ -10984,7 +11200,7 @@
                                     path: null,
                                     canActivate: [core$1.AuthGuard, CmsPageGuard],
                                     component: PageLayoutComponent,
-                                    data: ɵ0,
+                                    data: ɵ0$1,
                                 },
                             ]),
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
@@ -14151,20 +14367,29 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ProductCarouselComponent = /** @class */ (function () {
-        function ProductCarouselComponent(component, service) {
+        function ProductCarouselComponent(componentData, productService) {
             var _this = this;
-            this.component = component;
-            this.service = service;
-            this.title$ = this.component.data$.pipe(operators.map((/**
+            this.componentData = componentData;
+            this.productService = productService;
+            this.componentData$ = this.componentData.data$.pipe(operators.filter(Boolean));
+            /**
+             * returns an Obervable string for the title.
+             */
+            this.title$ = this.componentData$.pipe(operators.map((/**
              * @param {?} data
              * @return {?}
              */
             function (data) { return data.title; })));
-            this.items$ = this.component.data$.pipe(operators.filter(Boolean), operators.map((/**
+            /**
+             * Obervable that holds an Array of Observables. This is done, so that
+             * the component UI could consider to lazy load the UI components when they're
+             * in the viewpoint.
+             */
+            this.items$ = this.componentData$.pipe(operators.map((/**
              * @param {?} data
              * @return {?}
              */
-            function (data) { return data.productCodes.split(' '); })), operators.map((/**
+            function (data) { return data.productCodes.trim().split(' '); })), operators.map((/**
              * @param {?} codes
              * @return {?}
              */
@@ -14172,25 +14397,19 @@
              * @param {?} code
              * @return {?}
              */
-            function (code) { return _this.service.loadProduct(code); })); })), operators.switchMap((/**
-             * @param {?} products$
-             * @return {?}
-             */
-            function (products$) {
-                return rxjs.combineLatest(products$);
-            })));
+            function (code) { return _this.productService.get(code); })); })));
         }
         ProductCarouselComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-product-carousel',
-                        template: "<cx-carousel [items]=\"items$ | async\" [title]=\"title$ | async\"> </cx-carousel>\n",
+                        template: "<cx-carousel\n  [items]=\"items$ | async\"\n  [title]=\"title$ | async\"\n  [template]=\"carouselItem\"\n  itemWidth=\"285px\"\n>\n</cx-carousel>\n\n<ng-template #carouselItem let-item=\"item\">\n  <a tabindex=\"0\" [routerLink]=\"{ cxRoute: 'product', params: item } | cxUrl\">\n    <cx-media\n      *ngIf=\"item.images?.PRIMARY\"\n      [container]=\"item.images.PRIMARY\"\n      format=\"product\"\n    >\n    </cx-media>\n    <h4>{{ item.name }}</h4>\n    <div class=\"price\">{{ item.price?.formattedValue }}</div>\n  </a>\n</ng-template>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
         /** @nocollapse */
         ProductCarouselComponent.ctorParameters = function () { return [
             { type: CmsComponentData },
-            { type: ProductCarouselService }
+            { type: core$1.ProductService }
         ]; };
         return ProductCarouselComponent;
     }());
@@ -14207,6 +14426,9 @@
                         imports: [
                             common.CommonModule,
                             CarouselModule,
+                            MediaModule,
+                            router.RouterModule,
+                            core$1.UrlModule,
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     ProductCarouselComponent: {
@@ -14228,51 +14450,76 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ProductReferencesComponent = /** @class */ (function () {
-        function ProductReferencesComponent(component, service, current) {
+        function ProductReferencesComponent(component, current, referenceService) {
             var _this = this;
             this.component = component;
-            this.service = service;
             this.current = current;
+            this.referenceService = referenceService;
+            /**
+             * returns an Obervable string for the title
+             */
             this.title$ = this.component.data$.pipe(operators.map((/**
              * @param {?} d
              * @return {?}
              */
             function (d) { return d.title; })));
-            this.items$ = rxjs.combineLatest([this.productCode$, this.component.data$]).pipe(operators.switchMap((/**
+            this.currentProductCode$ = this.current.getProduct().pipe(operators.filter(Boolean), operators.map((/**
+             * @param {?} p
+             * @return {?}
+             */
+            function (p) { return p.code; })));
+            /**
+             * Obervable with an Array of Observables. This is done, so that
+             * the component UI could consider to lazy load the UI components when they're
+             * in the viewpoint.
+             */
+            this.items$ = rxjs.combineLatest([
+                this.currentProductCode$,
+                this.component.data$,
+            ]).pipe(operators.switchMap((/**
              * @param {?} __0
              * @return {?}
              */
             function (_a) {
                 var _b = __read(_a, 2), code = _b[0], data = _b[1];
-                return _this.service.getProductReferences(code, data.productReferenceTypes, Boolean(JSON.parse(data.displayProductTitles)), Boolean(JSON.parse(data.displayProductPrices)));
+                return _this.getProductReferences(code, data.productReferenceTypes);
             })));
         }
-        Object.defineProperty(ProductReferencesComponent.prototype, "productCode$", {
-            get: /**
+        /**
+         * @private
+         * @param {?} code
+         * @param {?} referenceType
+         * @return {?}
+         */
+        ProductReferencesComponent.prototype.getProductReferences = /**
+         * @private
+         * @param {?} code
+         * @param {?} referenceType
+         * @return {?}
+         */
+        function (code, referenceType) {
+            return this.referenceService.get(code, referenceType).pipe(operators.filter(Boolean), operators.map((/**
+             * @param {?} refs
              * @return {?}
              */
-            function () {
-                return this.current.getProduct().pipe(operators.filter(Boolean), operators.map((/**
-                 * @param {?} p
-                 * @return {?}
-                 */
-                function (p) { return p.code; })));
-            },
-            enumerable: true,
-            configurable: true
-        });
+            function (refs) { return refs.map((/**
+             * @param {?} ref
+             * @return {?}
+             */
+            function (ref) { return rxjs.of(ref.target); })); })));
+        };
         ProductReferencesComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-product-references',
-                        template: "<cx-carousel [title]=\"title$ | async\" [items]=\"items$ | async\"> </cx-carousel>\n",
+                        template: "<cx-carousel\n  [title]=\"title$ | async\"\n  [items]=\"items$ | async\"\n  [template]=\"carouselItem\"\n>\n</cx-carousel>\n\n<ng-template #carouselItem let-item=\"item\">\n  <a tabindex=\"0\" [routerLink]=\"{ cxRoute: 'product', params: item } | cxUrl\">\n    <cx-media\n      *ngIf=\"item.images?.PRIMARY\"\n      [container]=\"item.images.PRIMARY\"\n      format=\"product\"\n    >\n    </cx-media>\n    <h4>{{ item.name }}</h4>\n    <div class=\"price\">{{ item.price?.formattedValue }}</div>\n  </a>\n</ng-template>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
         /** @nocollapse */
         ProductReferencesComponent.ctorParameters = function () { return [
             { type: CmsComponentData },
-            { type: ProductCarouselService },
-            { type: CurrentProductService }
+            { type: CurrentProductService },
+            { type: core$1.ProductReferenceService }
         ]; };
         return ProductReferencesComponent;
     }());
@@ -14289,6 +14536,9 @@
                         imports: [
                             common.CommonModule,
                             CarouselModule,
+                            MediaModule,
+                            router.RouterModule,
+                            core$1.UrlModule,
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     ProductReferencesComponent: {
@@ -14504,11 +14754,6 @@
         ];
         return ProductIntroModule;
     }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
 
     /**
      * @fileoverview added by tsickle
@@ -15513,11 +15758,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var ProductImagesComponent = /** @class */ (function () {
         function ProductImagesComponent(currentProductService) {
             var _this = this;
@@ -15534,11 +15774,8 @@
              * @param {?} product
              * @return {?}
              */
-            function (product) { return _this.createCarouselItems(product); })));
-            this.mainImage$ = rxjs.combineLatest([
-                this.product$,
-                this.mainMediaContainer,
-            ]).pipe(operators.map((/**
+            function (product) { return _this.createThumbs(product); })));
+            this.mainImage$ = rxjs.combineLatest([this.product$, this.mainMediaContainer]).pipe(operators.map((/**
              * @param {?} __0
              * @return {?}
              */
@@ -15548,24 +15785,6 @@
             })));
         }
         /**
-         * @return {?}
-         */
-        ProductImagesComponent.prototype.getThumbs = /**
-         * @return {?}
-         */
-        function () {
-            return this.thumbs$;
-        };
-        /**
-         * @return {?}
-         */
-        ProductImagesComponent.prototype.getMain = /**
-         * @return {?}
-         */
-        function () {
-            return this.mainImage$;
-        };
-        /**
          * @param {?} item
          * @return {?}
          */
@@ -15574,7 +15793,28 @@
          * @return {?}
          */
         function (item) {
-            this.mainMediaContainer.next(item.media.container);
+            this.mainMediaContainer.next(item);
+        };
+        /**
+         * @param {?} thumbnail
+         * @return {?}
+         */
+        ProductImagesComponent.prototype.isActive = /**
+         * @param {?} thumbnail
+         * @return {?}
+         */
+        function (thumbnail) {
+            return this.mainMediaContainer.pipe(operators.filter(Boolean), operators.map((/**
+             * @param {?} container
+             * @return {?}
+             */
+            function (container) {
+                return (container.zoom &&
+                    container.zoom.url &&
+                    thumbnail.zoom &&
+                    thumbnail.zoom.url &&
+                    container.zoom.url === thumbnail.zoom.url);
+            })));
         };
         /** find the index of the main media in the list of media */
         /**
@@ -15619,7 +15859,7 @@
          * @param {?} product
          * @return {?}
          */
-        ProductImagesComponent.prototype.createCarouselItems = /**
+        ProductImagesComponent.prototype.createThumbs = /**
          * Return an array of CarouselItems for the product thumbnails.
          * In case there are less then 2 thumbs, we return null.
          * @private
@@ -15630,25 +15870,18 @@
             if (!product.images ||
                 !product.images.GALLERY ||
                 product.images.GALLERY.length < 2) {
-                return null;
+                return [];
             }
             return ((/** @type {?} */ (product.images.GALLERY))).map((/**
              * @param {?} c
              * @return {?}
              */
-            function (c) {
-                return {
-                    media: {
-                        container: c,
-                        format: 'thumbnail',
-                    },
-                };
-            }));
+            function (c) { return rxjs.of({ container: c }); }));
         };
         ProductImagesComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-product-images',
-                        template: "<ng-container *ngIf=\"(getMain() | async) as main\">\n  <cx-media [container]=\"main\" format=\"zoom\"> </cx-media>\n</ng-container>\n<ng-container *ngIf=\"(getThumbs() | async) as thumbs\">\n  <cx-carousel\n    class=\"thumbs\"\n    [items]=\"thumbs\"\n    [minItemPixelSize]=\"120\"\n    [hideIndicators]=\"true\"\n    (open)=\"openImage($event)\"\n    [activeItem]=\"getActive(thumbs) | async\"\n  ></cx-carousel>\n</ng-container>\n",
+                        template: "<ng-container *ngIf=\"(mainImage$ | async) as main\">\n  <cx-media [container]=\"main\" format=\"zoom\"> </cx-media>\n</ng-container>\n\n<cx-carousel\n  class=\"thumbs\"\n  [items]=\"thumbs$ | async\"\n  itemWidth=\"120px\"\n  [hideIndicators]=\"false\"\n  [template]=\"thumb\"\n></cx-carousel>\n\n<ng-template #thumb let-item=\"item\">\n  <cx-media\n    [container]=\"item.container\"\n    tabindex=\"0\"\n    format=\"thumbnail\"\n    (focus)=\"openImage(item.container)\"\n    [class.is-active]=\"isActive(item.container) | async\"\n  >\n  </cx-media>\n</ng-template>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -15684,6 +15917,7 @@
                         ],
                         declarations: [ProductImagesComponent],
                         entryComponents: [ProductImagesComponent],
+                        exports: [ProductImagesComponent],
                     },] }
         ];
         return ProductImagesModule;
@@ -15958,7 +16192,7 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var ɵ0$1 = { cxRoute: 'logout' };
+    var ɵ0$2 = { cxRoute: 'logout' };
     var LogoutModule = /** @class */ (function () {
         function LogoutModule() {
         }
@@ -15971,7 +16205,7 @@
                                     path: null,
                                     canActivate: [LogoutGuard],
                                     component: PageLayoutComponent,
-                                    data: ɵ0$1,
+                                    data: ɵ0$2,
                                 },
                             ]),
                         ],
@@ -16238,6 +16472,7 @@
                             CheckoutComponentModule,
                             ForgotPasswordModule,
                             ResetPasswordModule,
+                            BannerCarouselModule,
                             UserComponentModule,
                         ],
                     },] }
@@ -16318,7 +16553,7 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var ɵ0$2 = { cxRoute: 'product' }, ɵ1 = {
+    var ɵ0$3 = { cxRoute: 'product' }, ɵ1 = {
         cxSuffixUrlMatcher: {
             marker: 'p',
             paramName: 'productCode',
@@ -16335,7 +16570,7 @@
                                     path: null,
                                     canActivate: [CmsPageGuard],
                                     component: PageLayoutComponent,
-                                    data: ɵ0$2,
+                                    data: ɵ0$3,
                                 },
                                 {
                                     matcher: suffixUrlMatcher,
@@ -16349,86 +16584,6 @@
         ];
         return ProductDetailsPageModule;
     }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @type {?} */
-    var cmsRoute = {
-        path: '**',
-        canActivate: [CmsPageGuard],
-        component: PageLayoutComponent,
-    };
-    /**
-     * @param {?} injector
-     * @return {?}
-     */
-    function addCmsRoute(injector) {
-        /** @type {?} */
-        var result = (/**
-         * @return {?}
-         */
-        function () {
-            /** @type {?} */
-            var router$1 = injector.get(router.Router);
-            router$1.config.push(cmsRoute);
-        });
-        return result;
-    }
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ɵ0$3 = addCmsRoute;
-    var CmsRouteModule = /** @class */ (function () {
-        function CmsRouteModule() {
-        }
-        CmsRouteModule.decorators = [
-            { type: core.NgModule, args: [{
-                        providers: [
-                            {
-                                provide: core.APP_INITIALIZER,
-                                multi: true,
-                                deps: [core.Injector],
-                                useFactory: ɵ0$3,
-                            },
-                        ],
-                    },] }
-        ];
-        return CmsRouteModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
 
     /**
      * @fileoverview added by tsickle
@@ -17065,13 +17220,15 @@
     exports.ɵo = AddToHomeScreenService;
     exports.ɵp = ProductImagesModule;
     exports.ɵq = ProductImagesComponent;
-    exports.ɵr = suffixUrlMatcher;
-    exports.ɵs = addCmsRoute;
-    exports.ɵt = htmlLangProvider;
-    exports.ɵu = setHtmlLangAttribute;
-    exports.ɵv = RoutingModule;
-    exports.ɵw = defaultStorefrontRoutesConfig;
-    exports.ɵx = defaultRoutingConfig;
+    exports.ɵr = BannerCarouselModule;
+    exports.ɵs = BannerCarouselComponent;
+    exports.ɵt = suffixUrlMatcher;
+    exports.ɵu = addCmsRoute;
+    exports.ɵv = htmlLangProvider;
+    exports.ɵw = setHtmlLangAttribute;
+    exports.ɵx = RoutingModule;
+    exports.ɵy = defaultStorefrontRoutesConfig;
+    exports.ɵz = defaultRoutingConfig;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

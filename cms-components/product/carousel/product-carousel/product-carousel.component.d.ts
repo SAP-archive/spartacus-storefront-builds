@@ -1,12 +1,19 @@
-import { CmsProductCarouselComponent } from '@spartacus/core';
+import { CmsProductCarouselComponent as model, Product, ProductService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { CmsComponentData } from '../../../../cms-structure/page/model/cms-component-data';
-import { CarouselItem } from '../../../../shared/components/carousel/carousel.model';
-import { ProductCarouselService } from '../product-carousel.service';
 export declare class ProductCarouselComponent {
-    protected component: CmsComponentData<CmsProductCarouselComponent>;
-    protected service: ProductCarouselService;
+    protected componentData: CmsComponentData<model>;
+    protected productService: ProductService;
+    private componentData$;
+    /**
+     * returns an Obervable string for the title.
+     */
     title$: Observable<string>;
-    items$: Observable<CarouselItem[]>;
-    constructor(component: CmsComponentData<CmsProductCarouselComponent>, service: ProductCarouselService);
+    /**
+     * Obervable that holds an Array of Observables. This is done, so that
+     * the component UI could consider to lazy load the UI components when they're
+     * in the viewpoint.
+     */
+    items$: Observable<Observable<Product>[]>;
+    constructor(componentData: CmsComponentData<model>, productService: ProductService);
 }

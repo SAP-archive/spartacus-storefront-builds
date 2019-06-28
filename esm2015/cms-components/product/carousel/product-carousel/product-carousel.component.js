@@ -3,28 +3,36 @@
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { combineLatest } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { ProductService, } from '@spartacus/core';
+import { filter, map } from 'rxjs/operators';
 import { CmsComponentData } from '../../../../cms-structure/page/model/cms-component-data';
-import { ProductCarouselService } from '../product-carousel.service';
 export class ProductCarouselComponent {
     /**
-     * @param {?} component
-     * @param {?} service
+     * @param {?} componentData
+     * @param {?} productService
      */
-    constructor(component, service) {
-        this.component = component;
-        this.service = service;
-        this.title$ = this.component.data$.pipe(map((/**
+    constructor(componentData, productService) {
+        this.componentData = componentData;
+        this.productService = productService;
+        this.componentData$ = this.componentData.data$.pipe(filter(Boolean));
+        /**
+         * returns an Obervable string for the title.
+         */
+        this.title$ = this.componentData$.pipe(map((/**
          * @param {?} data
          * @return {?}
          */
         data => data.title)));
-        this.items$ = this.component.data$.pipe(filter(Boolean), map((/**
+        /**
+         * Obervable that holds an Array of Observables. This is done, so that
+         * the component UI could consider to lazy load the UI components when they're
+         * in the viewpoint.
+         */
+        this.items$ = this.componentData$.pipe(map((/**
          * @param {?} data
          * @return {?}
          */
-        data => data.productCodes.split(' '))), map((/**
+        data => data.productCodes.trim().split(' '))), map((/**
          * @param {?} codes
          * @return {?}
          */
@@ -32,39 +40,48 @@ export class ProductCarouselComponent {
          * @param {?} code
          * @return {?}
          */
-        code => this.service.loadProduct(code))))), switchMap((/**
-         * @param {?} products$
-         * @return {?}
-         */
-        (products$) => combineLatest(products$))));
+        code => this.productService.get(code))))));
     }
 }
 ProductCarouselComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-product-carousel',
-                template: "<cx-carousel [items]=\"items$ | async\" [title]=\"title$ | async\"> </cx-carousel>\n",
+                template: "<cx-carousel\n  [items]=\"items$ | async\"\n  [title]=\"title$ | async\"\n  [template]=\"carouselItem\"\n  itemWidth=\"285px\"\n>\n</cx-carousel>\n\n<ng-template #carouselItem let-item=\"item\">\n  <a tabindex=\"0\" [routerLink]=\"{ cxRoute: 'product', params: item } | cxUrl\">\n    <cx-media\n      *ngIf=\"item.images?.PRIMARY\"\n      [container]=\"item.images.PRIMARY\"\n      format=\"product\"\n    >\n    </cx-media>\n    <h4>{{ item.name }}</h4>\n    <div class=\"price\">{{ item.price?.formattedValue }}</div>\n  </a>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
 /** @nocollapse */
 ProductCarouselComponent.ctorParameters = () => [
     { type: CmsComponentData },
-    { type: ProductCarouselService }
+    { type: ProductService }
 ];
 if (false) {
-    /** @type {?} */
+    /**
+     * @type {?}
+     * @private
+     */
+    ProductCarouselComponent.prototype.componentData$;
+    /**
+     * returns an Obervable string for the title.
+     * @type {?}
+     */
     ProductCarouselComponent.prototype.title$;
-    /** @type {?} */
+    /**
+     * Obervable that holds an Array of Observables. This is done, so that
+     * the component UI could consider to lazy load the UI components when they're
+     * in the viewpoint.
+     * @type {?}
+     */
     ProductCarouselComponent.prototype.items$;
     /**
      * @type {?}
      * @protected
      */
-    ProductCarouselComponent.prototype.component;
+    ProductCarouselComponent.prototype.componentData;
     /**
      * @type {?}
      * @protected
      */
-    ProductCarouselComponent.prototype.service;
+    ProductCarouselComponent.prototype.productService;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvZHVjdC1jYXJvdXNlbC5jb21wb25lbnQuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJjbXMtY29tcG9uZW50cy9wcm9kdWN0L2Nhcm91c2VsL3Byb2R1Y3QtY2Fyb3VzZWwvcHJvZHVjdC1jYXJvdXNlbC5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE9BQU8sRUFBRSx1QkFBdUIsRUFBRSxTQUFTLEVBQUUsTUFBTSxlQUFlLENBQUM7QUFFbkUsT0FBTyxFQUFFLGFBQWEsRUFBYyxNQUFNLE1BQU0sQ0FBQztBQUNqRCxPQUFPLEVBQUUsTUFBTSxFQUFFLEdBQUcsRUFBRSxTQUFTLEVBQUUsTUFBTSxnQkFBZ0IsQ0FBQztBQUN4RCxPQUFPLEVBQUUsZ0JBQWdCLEVBQUUsTUFBTSx5REFBeUQsQ0FBQztBQUUzRixPQUFPLEVBQUUsc0JBQXNCLEVBQUUsTUFBTSw2QkFBNkIsQ0FBQztBQU9yRSxNQUFNLE9BQU8sd0JBQXdCOzs7OztJQWNuQyxZQUNZLFNBQXdELEVBQ3hELE9BQStCO1FBRC9CLGNBQVMsR0FBVCxTQUFTLENBQStDO1FBQ3hELFlBQU8sR0FBUCxPQUFPLENBQXdCO1FBZjNDLFdBQU0sR0FBdUIsSUFBSSxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUNwRCxHQUFHOzs7O1FBQUMsSUFBSSxDQUFDLEVBQUUsQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFDLENBQ3hCLENBQUM7UUFFRixXQUFNLEdBQStCLElBQUksQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLElBQUksQ0FDNUQsTUFBTSxDQUFDLE9BQU8sQ0FBQyxFQUNmLEdBQUc7Ozs7UUFBQyxJQUFJLENBQUMsRUFBRSxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxFQUFDLEVBQ3pDLEdBQUc7Ozs7UUFBQyxLQUFLLENBQUMsRUFBRSxDQUFDLEtBQUssQ0FBQyxHQUFHOzs7O1FBQUMsSUFBSSxDQUFDLEVBQUUsQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsRUFBQyxFQUFDLEVBQy9ELFNBQVM7Ozs7UUFBQyxDQUFDLFNBQXFDLEVBQUUsRUFBRSxDQUNsRCxhQUFhLENBQUMsU0FBUyxDQUFDLEVBQ3pCLENBQ0YsQ0FBQztJQUtDLENBQUM7OztZQXRCTCxTQUFTLFNBQUM7Z0JBQ1QsUUFBUSxFQUFFLHFCQUFxQjtnQkFDL0IsZ0dBQWdEO2dCQUNoRCxlQUFlLEVBQUUsdUJBQXVCLENBQUMsTUFBTTthQUNoRDs7OztZQVJRLGdCQUFnQjtZQUVoQixzQkFBc0I7Ozs7SUFRN0IsMENBRUU7O0lBRUYsMENBT0U7Ozs7O0lBR0EsNkNBQWtFOzs7OztJQUNsRSwyQ0FBeUMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDaGFuZ2VEZXRlY3Rpb25TdHJhdGVneSwgQ29tcG9uZW50IH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBDbXNQcm9kdWN0Q2Fyb3VzZWxDb21wb25lbnQgfSBmcm9tICdAc3BhcnRhY3VzL2NvcmUnO1xuaW1wb3J0IHsgY29tYmluZUxhdGVzdCwgT2JzZXJ2YWJsZSB9IGZyb20gJ3J4anMnO1xuaW1wb3J0IHsgZmlsdGVyLCBtYXAsIHN3aXRjaE1hcCB9IGZyb20gJ3J4anMvb3BlcmF0b3JzJztcbmltcG9ydCB7IENtc0NvbXBvbmVudERhdGEgfSBmcm9tICcuLi8uLi8uLi8uLi9jbXMtc3RydWN0dXJlL3BhZ2UvbW9kZWwvY21zLWNvbXBvbmVudC1kYXRhJztcbmltcG9ydCB7IENhcm91c2VsSXRlbSB9IGZyb20gJy4uLy4uLy4uLy4uL3NoYXJlZC9jb21wb25lbnRzL2Nhcm91c2VsL2Nhcm91c2VsLm1vZGVsJztcbmltcG9ydCB7IFByb2R1Y3RDYXJvdXNlbFNlcnZpY2UgfSBmcm9tICcuLi9wcm9kdWN0LWNhcm91c2VsLnNlcnZpY2UnO1xuXG5AQ29tcG9uZW50KHtcbiAgc2VsZWN0b3I6ICdjeC1wcm9kdWN0LWNhcm91c2VsJyxcbiAgdGVtcGxhdGVVcmw6ICcuL3Byb2R1Y3QtY2Fyb3VzZWwuY29tcG9uZW50Lmh0bWwnLFxuICBjaGFuZ2VEZXRlY3Rpb246IENoYW5nZURldGVjdGlvblN0cmF0ZWd5Lk9uUHVzaCxcbn0pXG5leHBvcnQgY2xhc3MgUHJvZHVjdENhcm91c2VsQ29tcG9uZW50IHtcbiAgdGl0bGUkOiBPYnNlcnZhYmxlPHN0cmluZz4gPSB0aGlzLmNvbXBvbmVudC5kYXRhJC5waXBlKFxuICAgIG1hcChkYXRhID0+IGRhdGEudGl0bGUpXG4gICk7XG5cbiAgaXRlbXMkOiBPYnNlcnZhYmxlPENhcm91c2VsSXRlbVtdPiA9IHRoaXMuY29tcG9uZW50LmRhdGEkLnBpcGUoXG4gICAgZmlsdGVyKEJvb2xlYW4pLFxuICAgIG1hcChkYXRhID0+IGRhdGEucHJvZHVjdENvZGVzLnNwbGl0KCcgJykpLFxuICAgIG1hcChjb2RlcyA9PiBjb2Rlcy5tYXAoY29kZSA9PiB0aGlzLnNlcnZpY2UubG9hZFByb2R1Y3QoY29kZSkpKSxcbiAgICBzd2l0Y2hNYXAoKHByb2R1Y3RzJDogT2JzZXJ2YWJsZTxDYXJvdXNlbEl0ZW0+W10pID0+XG4gICAgICBjb21iaW5lTGF0ZXN0KHByb2R1Y3RzJClcbiAgICApXG4gICk7XG5cbiAgY29uc3RydWN0b3IoXG4gICAgcHJvdGVjdGVkIGNvbXBvbmVudDogQ21zQ29tcG9uZW50RGF0YTxDbXNQcm9kdWN0Q2Fyb3VzZWxDb21wb25lbnQ+LFxuICAgIHByb3RlY3RlZCBzZXJ2aWNlOiBQcm9kdWN0Q2Fyb3VzZWxTZXJ2aWNlXG4gICkge31cbn1cbiJdfQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvZHVjdC1jYXJvdXNlbC5jb21wb25lbnQuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJjbXMtY29tcG9uZW50cy9wcm9kdWN0L2Nhcm91c2VsL3Byb2R1Y3QtY2Fyb3VzZWwvcHJvZHVjdC1jYXJvdXNlbC5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE9BQU8sRUFBRSx1QkFBdUIsRUFBRSxTQUFTLEVBQUUsTUFBTSxlQUFlLENBQUM7QUFDbkUsT0FBTyxFQUdMLGNBQWMsR0FDZixNQUFNLGlCQUFpQixDQUFDO0FBRXpCLE9BQU8sRUFBRSxNQUFNLEVBQUUsR0FBRyxFQUFFLE1BQU0sZ0JBQWdCLENBQUM7QUFDN0MsT0FBTyxFQUFFLGdCQUFnQixFQUFFLE1BQU0seURBQXlELENBQUM7QUFPM0YsTUFBTSxPQUFPLHdCQUF3Qjs7Ozs7SUFzQm5DLFlBQ1ksYUFBc0MsRUFDdEMsY0FBOEI7UUFEOUIsa0JBQWEsR0FBYixhQUFhLENBQXlCO1FBQ3RDLG1CQUFjLEdBQWQsY0FBYyxDQUFnQjtRQXZCbEMsbUJBQWMsR0FBc0IsSUFBSSxDQUFDLGFBQWEsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUN2RSxNQUFNLENBQUMsT0FBTyxDQUFDLENBQ2hCLENBQUM7Ozs7UUFLRixXQUFNLEdBQXVCLElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUNuRCxHQUFHOzs7O1FBQUMsSUFBSSxDQUFDLEVBQUUsQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFDLENBQ3hCLENBQUM7Ozs7OztRQU9GLFdBQU0sR0FBc0MsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQ2xFLEdBQUc7Ozs7UUFBQyxJQUFJLENBQUMsRUFBRSxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsSUFBSSxFQUFFLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxFQUFDLEVBQ2hELEdBQUc7Ozs7UUFBQyxLQUFLLENBQUMsRUFBRSxDQUFDLEtBQUssQ0FBQyxHQUFHOzs7O1FBQUMsSUFBSSxDQUFDLEVBQUUsQ0FBQyxJQUFJLENBQUMsY0FBYyxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsRUFBQyxFQUFDLENBQy9ELENBQUM7SUFLQyxDQUFDOzs7WUE5QkwsU0FBUyxTQUFDO2dCQUNULFFBQVEsRUFBRSxxQkFBcUI7Z0JBQy9CLDZpQkFBZ0Q7Z0JBQ2hELGVBQWUsRUFBRSx1QkFBdUIsQ0FBQyxNQUFNO2FBQ2hEOzs7O1lBTlEsZ0JBQWdCO1lBSnZCLGNBQWM7Ozs7Ozs7SUFZZCxrREFFRTs7Ozs7SUFLRiwwQ0FFRTs7Ozs7OztJQU9GLDBDQUdFOzs7OztJQUdBLGlEQUFnRDs7Ozs7SUFDaEQsa0RBQXdDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQ2hhbmdlRGV0ZWN0aW9uU3RyYXRlZ3ksIENvbXBvbmVudCB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHtcbiAgQ21zUHJvZHVjdENhcm91c2VsQ29tcG9uZW50IGFzIG1vZGVsLFxuICBQcm9kdWN0LFxuICBQcm9kdWN0U2VydmljZSxcbn0gZnJvbSAnQHNwYXJ0YWN1cy9jb3JlJztcbmltcG9ydCB7IE9ic2VydmFibGUgfSBmcm9tICdyeGpzJztcbmltcG9ydCB7IGZpbHRlciwgbWFwIH0gZnJvbSAncnhqcy9vcGVyYXRvcnMnO1xuaW1wb3J0IHsgQ21zQ29tcG9uZW50RGF0YSB9IGZyb20gJy4uLy4uLy4uLy4uL2Ntcy1zdHJ1Y3R1cmUvcGFnZS9tb2RlbC9jbXMtY29tcG9uZW50LWRhdGEnO1xuXG5AQ29tcG9uZW50KHtcbiAgc2VsZWN0b3I6ICdjeC1wcm9kdWN0LWNhcm91c2VsJyxcbiAgdGVtcGxhdGVVcmw6ICcuL3Byb2R1Y3QtY2Fyb3VzZWwuY29tcG9uZW50Lmh0bWwnLFxuICBjaGFuZ2VEZXRlY3Rpb246IENoYW5nZURldGVjdGlvblN0cmF0ZWd5Lk9uUHVzaCxcbn0pXG5leHBvcnQgY2xhc3MgUHJvZHVjdENhcm91c2VsQ29tcG9uZW50IHtcbiAgcHJpdmF0ZSBjb21wb25lbnREYXRhJDogT2JzZXJ2YWJsZTxtb2RlbD4gPSB0aGlzLmNvbXBvbmVudERhdGEuZGF0YSQucGlwZShcbiAgICBmaWx0ZXIoQm9vbGVhbilcbiAgKTtcblxuICAvKipcbiAgICogcmV0dXJucyBhbiBPYmVydmFibGUgc3RyaW5nIGZvciB0aGUgdGl0bGUuXG4gICAqL1xuICB0aXRsZSQ6IE9ic2VydmFibGU8c3RyaW5nPiA9IHRoaXMuY29tcG9uZW50RGF0YSQucGlwZShcbiAgICBtYXAoZGF0YSA9PiBkYXRhLnRpdGxlKVxuICApO1xuXG4gIC8qKlxuICAgKiBPYmVydmFibGUgdGhhdCBob2xkcyBhbiBBcnJheSBvZiBPYnNlcnZhYmxlcy4gVGhpcyBpcyBkb25lLCBzbyB0aGF0XG4gICAqIHRoZSBjb21wb25lbnQgVUkgY291bGQgY29uc2lkZXIgdG8gbGF6eSBsb2FkIHRoZSBVSSBjb21wb25lbnRzIHdoZW4gdGhleSdyZVxuICAgKiBpbiB0aGUgdmlld3BvaW50LlxuICAgKi9cbiAgaXRlbXMkOiBPYnNlcnZhYmxlPE9ic2VydmFibGU8UHJvZHVjdD5bXT4gPSB0aGlzLmNvbXBvbmVudERhdGEkLnBpcGUoXG4gICAgbWFwKGRhdGEgPT4gZGF0YS5wcm9kdWN0Q29kZXMudHJpbSgpLnNwbGl0KCcgJykpLFxuICAgIG1hcChjb2RlcyA9PiBjb2Rlcy5tYXAoY29kZSA9PiB0aGlzLnByb2R1Y3RTZXJ2aWNlLmdldChjb2RlKSkpXG4gICk7XG5cbiAgY29uc3RydWN0b3IoXG4gICAgcHJvdGVjdGVkIGNvbXBvbmVudERhdGE6IENtc0NvbXBvbmVudERhdGE8bW9kZWw+LFxuICAgIHByb3RlY3RlZCBwcm9kdWN0U2VydmljZTogUHJvZHVjdFNlcnZpY2VcbiAgKSB7fVxufVxuIl19
