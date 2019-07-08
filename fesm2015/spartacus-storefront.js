@@ -10777,6 +10777,7 @@ class NavigationUIComponent {
      */
     onMouseEnter(event) {
         this.alignWrapperToRightIfStickOut((/** @type {?} */ (event.currentTarget)));
+        this.focusAfterPreviousClicked(event);
     }
     /**
      * @param {?} node
@@ -10794,6 +10795,19 @@ class NavigationUIComponent {
         else {
             return depth;
         }
+    }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    focusAfterPreviousClicked(event) {
+        /** @type {?} */
+        const target = (/** @type {?} */ (((event.target || event.relatedTarget))));
+        if (target.ownerDocument.activeElement.matches('nav[tabindex]') &&
+            target.parentElement.matches('.flyout')) {
+            target.focus();
+        }
+        return target.ownerDocument;
     }
     /**
      * @return {?}

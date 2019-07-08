@@ -12928,6 +12928,7 @@
          */
         function (event) {
             this.alignWrapperToRightIfStickOut((/** @type {?} */ (event.currentTarget)));
+            this.focusAfterPreviousClicked(event);
         };
         /**
          * @param {?} node
@@ -12952,6 +12953,23 @@
             else {
                 return depth;
             }
+        };
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        NavigationUIComponent.prototype.focusAfterPreviousClicked = /**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
+            /** @type {?} */
+            var target = (/** @type {?} */ (((event.target || event.relatedTarget))));
+            if (target.ownerDocument.activeElement.matches('nav[tabindex]') &&
+                target.parentElement.matches('.flyout')) {
+                target.focus();
+            }
+            return target.ownerDocument;
         };
         /**
          * @return {?}
