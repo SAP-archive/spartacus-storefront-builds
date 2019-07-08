@@ -11,6 +11,7 @@ export declare class StorefrontComponent implements OnInit, OnDestroy {
     stopNavigating: any;
     constructor(hamburgerMenuService: HamburgerMenuService, routingService: RoutingService);
     ngOnInit(): void;
+    collapseMenuIfClickOutside(event: MouseEvent): void;
     collapseMenu(): void;
     ngOnDestroy(): void;
 }
