@@ -1,6 +1,6 @@
-import { PWAModuleConfig } from '../pwa.module-config';
 import { GlobalMessageService, WindowRef } from '@spartacus/core';
 import { Observable } from 'rxjs';
+import { PWAModuleConfig } from '../pwa.module-config';
 export declare class AddToHomeScreenService {
     private config;
     private globalMessageService;
