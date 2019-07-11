@@ -836,6 +836,7 @@
                  */
                 function (product) {
                     _this.productCode = product.code;
+                    _this.quantity = 1;
                     if (product.stock &&
                         product.stock.stockLevelStatus !== 'outOfStock' &&
                         product.stock.stockLevel > 0) {
@@ -926,7 +927,7 @@
         AddToCartComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-add-to-cart',
-                        template: "<div class=\"quantity\" *ngIf=\"productCode && showQuantity\">\n  <label>{{ 'addToCart.quantity' | cxTranslate }}</label>\n  <cx-item-counter\n    isValueChangeable=\"true\"\n    [min]=\"1\"\n    [max]=\"maxQuantity\"\n    *ngIf=\"hasStock\"\n    (update)=\"updateCount($event)\"\n  ></cx-item-counter>\n  <span class=\"info\">{{\n    hasStock\n      ? ('addToCart.inStock' | cxTranslate)\n      : ('addToCart.outOfStock' | cxTranslate)\n  }}</span>\n</div>\n<button\n  *ngIf=\"hasStock\"\n  class=\"btn btn-primary btn-block\"\n  type=\"button\"\n  [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  (click)=\"addToCart()\"\n>\n  {{ 'addToCart.addToCart' | cxTranslate }}\n</button>\n",
+                        template: "<div class=\"quantity\" *ngIf=\"productCode && showQuantity\">\n  <label>{{ 'addToCart.quantity' | cxTranslate }}</label>\n  <cx-item-counter\n    [value]=\"quantity\"\n    isValueChangeable=\"true\"\n    [min]=\"1\"\n    [max]=\"maxQuantity\"\n    *ngIf=\"hasStock\"\n    (update)=\"updateCount($event)\"\n  ></cx-item-counter>\n  <span class=\"info\">{{\n    hasStock\n      ? ('addToCart.inStock' | cxTranslate)\n      : ('addToCart.outOfStock' | cxTranslate)\n  }}</span>\n</div>\n<button\n  *ngIf=\"hasStock\"\n  class=\"btn btn-primary btn-block\"\n  type=\"button\"\n  [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  (click)=\"addToCart()\"\n>\n  {{ 'addToCart.addToCart' | cxTranslate }}\n</button>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -2144,6 +2145,7 @@
             input: [{ type: core.ViewChild, args: ['itemCounterInput', { static: false },] }],
             incrementBtn: [{ type: core.ViewChild, args: ['incrementBtn', { static: false },] }],
             decrementBtn: [{ type: core.ViewChild, args: ['decrementBtn', { static: false },] }],
+            value: [{ type: core.Input }],
             step: [{ type: core.Input }],
             min: [{ type: core.Input }],
             max: [{ type: core.Input }],

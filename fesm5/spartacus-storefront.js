@@ -735,6 +735,7 @@ var AddToCartComponent = /** @class */ (function () {
              */
             function (product) {
                 _this.productCode = product.code;
+                _this.quantity = 1;
                 if (product.stock &&
                     product.stock.stockLevelStatus !== 'outOfStock' &&
                     product.stock.stockLevel > 0) {
@@ -825,7 +826,7 @@ var AddToCartComponent = /** @class */ (function () {
     AddToCartComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-add-to-cart',
-                    template: "<div class=\"quantity\" *ngIf=\"productCode && showQuantity\">\n  <label>{{ 'addToCart.quantity' | cxTranslate }}</label>\n  <cx-item-counter\n    isValueChangeable=\"true\"\n    [min]=\"1\"\n    [max]=\"maxQuantity\"\n    *ngIf=\"hasStock\"\n    (update)=\"updateCount($event)\"\n  ></cx-item-counter>\n  <span class=\"info\">{{\n    hasStock\n      ? ('addToCart.inStock' | cxTranslate)\n      : ('addToCart.outOfStock' | cxTranslate)\n  }}</span>\n</div>\n<button\n  *ngIf=\"hasStock\"\n  class=\"btn btn-primary btn-block\"\n  type=\"button\"\n  [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  (click)=\"addToCart()\"\n>\n  {{ 'addToCart.addToCart' | cxTranslate }}\n</button>\n",
+                    template: "<div class=\"quantity\" *ngIf=\"productCode && showQuantity\">\n  <label>{{ 'addToCart.quantity' | cxTranslate }}</label>\n  <cx-item-counter\n    [value]=\"quantity\"\n    isValueChangeable=\"true\"\n    [min]=\"1\"\n    [max]=\"maxQuantity\"\n    *ngIf=\"hasStock\"\n    (update)=\"updateCount($event)\"\n  ></cx-item-counter>\n  <span class=\"info\">{{\n    hasStock\n      ? ('addToCart.inStock' | cxTranslate)\n      : ('addToCart.outOfStock' | cxTranslate)\n  }}</span>\n</div>\n<button\n  *ngIf=\"hasStock\"\n  class=\"btn btn-primary btn-block\"\n  type=\"button\"\n  [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  (click)=\"addToCart()\"\n>\n  {{ 'addToCart.addToCart' | cxTranslate }}\n</button>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -2043,6 +2044,7 @@ var ItemCounterComponent = /** @class */ (function () {
         input: [{ type: ViewChild, args: ['itemCounterInput', { static: false },] }],
         incrementBtn: [{ type: ViewChild, args: ['incrementBtn', { static: false },] }],
         decrementBtn: [{ type: ViewChild, args: ['decrementBtn', { static: false },] }],
+        value: [{ type: Input }],
         step: [{ type: Input }],
         min: [{ type: Input }],
         max: [{ type: Input }],
