@@ -5533,6 +5533,17 @@ class ShippingAddressComponent {
          * @return {?}
          */
         ([addresses, selected, textDefaultShippingAddress, textShipToThisAddress, textSelected,]) => {
+            // Select default address if none selected
+            if (!addresses.includes(selected)) {
+                /** @type {?} */
+                const defaultAddress = addresses.find((/**
+                 * @param {?} address
+                 * @return {?}
+                 */
+                address => address.defaultAddress));
+                selected = defaultAddress;
+                this.selectedAddress = defaultAddress;
+            }
             return addresses.map((/**
              * @param {?} address
              * @return {?}
