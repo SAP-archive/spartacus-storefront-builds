@@ -2,6 +2,7 @@ import { EventEmitter } from '@angular/core';
 import { PaginationModel } from '@spartacus/core';
 export declare class PaginationComponent {
     pagination: PaginationModel;
+    hideOnSinglePage: boolean;
     viewPageEvent: EventEmitter<number>;
     private getCurrentPageNumber;
     getPagePrevious(): number;
@@ -17,4 +18,5 @@ export declare class PaginationComponent {
     showDots(index: number): boolean;
     clickPageNo(page: number): number;
     pageChange(page: number): void;
+    showPagination(): boolean;
 }
