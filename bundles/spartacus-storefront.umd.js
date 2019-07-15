@@ -1270,6 +1270,19 @@
             this.previousIcon = ICON_TYPE.CARET_LEFT;
             this.nextIcon = ICON_TYPE.CARET_RIGHT;
         }
+        Object.defineProperty(CarouselComponent.prototype, "setItems", {
+            set: /**
+             * @param {?} inputItems
+             * @return {?}
+             */
+            function (inputItems) {
+                this.items = inputItems;
+                //Reset slider when changing products
+                this.activeSlide = 0;
+            },
+            enumerable: true,
+            configurable: true
+        });
         /**
          * @return {?}
          */
@@ -1303,7 +1316,7 @@
         ]; };
         CarouselComponent.propDecorators = {
             title: [{ type: core.Input }],
-            items: [{ type: core.Input }],
+            setItems: [{ type: core.Input, args: ['items',] }],
             template: [{ type: core.Input }],
             itemWidth: [{ type: core.Input }],
             hideIndicators: [{ type: core.Input }],

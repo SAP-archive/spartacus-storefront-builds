@@ -946,6 +946,15 @@ class CarouselComponent {
         this.nextIcon = ICON_TYPE.CARET_RIGHT;
     }
     /**
+     * @param {?} inputItems
+     * @return {?}
+     */
+    set setItems(inputItems) {
+        this.items = inputItems;
+        //Reset slider when changing products
+        this.activeSlide = 0;
+    }
+    /**
      * @return {?}
      */
     ngOnInit() {
@@ -975,7 +984,7 @@ CarouselComponent.ctorParameters = () => [
 ];
 CarouselComponent.propDecorators = {
     title: [{ type: Input }],
-    items: [{ type: Input }],
+    setItems: [{ type: Input, args: ['items',] }],
     template: [{ type: Input }],
     itemWidth: [{ type: Input }],
     hideIndicators: [{ type: Input }],

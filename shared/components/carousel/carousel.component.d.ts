@@ -29,6 +29,7 @@ export declare class CarouselComponent implements OnInit {
      * observables so that the itesm can be loaded on demand.
      */
     items: Observable<any>[];
+    setItems: Observable<any>[];
     /**
      * The template is rendered for each item, so that the actual
      * view can be given by the compoent that uses the `CarouselComponent`.
