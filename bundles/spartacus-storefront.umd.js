@@ -5824,6 +5824,9 @@
                     img: _this.getCardIcon(payment.cardType.code),
                     actions: [{ name: textUseThisPayment, event: 'send' }],
                 };
+                if (!_this.selectedPayment && payment.defaultPayment) {
+                    _this.selectedPayment = payment;
+                }
                 if (_this.selectedPayment && _this.selectedPayment.id === payment.id) {
                     card.header = textSelected;
                 }
