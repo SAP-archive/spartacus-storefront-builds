@@ -6612,7 +6612,10 @@ var ShippingAddressComponent = /** @class */ (function () {
         function (_a) {
             var _b = __read(_a, 5), addresses = _b[0], selected = _b[1], textDefaultShippingAddress = _b[2], textShipToThisAddress = _b[3], textSelected = _b[4];
             // Select default address if none selected
-            if (!addresses.includes(selected)) {
+            if (selected && Object.keys(selected).length > 0) {
+                _this.selectedAddress = selected;
+            }
+            else {
                 /** @type {?} */
                 var defaultAddress = addresses.find((/**
                  * @param {?} address

@@ -5536,7 +5536,10 @@ class ShippingAddressComponent {
          */
         ([addresses, selected, textDefaultShippingAddress, textShipToThisAddress, textSelected,]) => {
             // Select default address if none selected
-            if (!addresses.includes(selected)) {
+            if (selected && Object.keys(selected).length > 0) {
+                this.selectedAddress = selected;
+            }
+            else {
                 /** @type {?} */
                 const defaultAddress = addresses.find((/**
                  * @param {?} address
