@@ -8,5 +8,5 @@ export declare class CartDetailsComponent implements OnInit {
     cartLoaded$: Observable<boolean>;
     constructor(cartService: CartService);
     ngOnInit(): void;
-    getAllPromotionsForCart(cart: Cart): Cart[];
+    getAllPromotionsForCart(cart: Cart): any[];
 }
