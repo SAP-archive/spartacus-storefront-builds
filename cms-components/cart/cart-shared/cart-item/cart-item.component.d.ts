@@ -5,6 +5,7 @@ export interface Item {
     quantity?: any;
     basePrice?: any;
     totalPrice?: any;
+    updateable?: boolean;
 }
 export declare class CartItemComponent implements OnInit {
     compact: boolean;
