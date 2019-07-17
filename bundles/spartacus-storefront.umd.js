@@ -4246,155 +4246,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var CheckoutConfigService = /** @class */ (function () {
-        function CheckoutConfigService(checkoutConfig, routingConfigService) {
-            this.checkoutConfig = checkoutConfig;
-            this.routingConfigService = routingConfigService;
-            this.steps = this.checkoutConfig.checkout.steps;
-        }
-        /**
-         * @param {?} currentStepType
-         * @return {?}
-         */
-        CheckoutConfigService.prototype.getCheckoutStep = /**
-         * @param {?} currentStepType
-         * @return {?}
-         */
-        function (currentStepType) {
-            return this.steps[this.getCheckoutStepIndex('type', currentStepType)];
-        };
-        /**
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-        CheckoutConfigService.prototype.getNextCheckoutStepUrl = /**
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-        function (activatedRoute) {
-            /** @type {?} */
-            var stepIndex = this.getCurrentStepIndex(activatedRoute);
-            return stepIndex >= 0 && this.steps[stepIndex + 1]
-                ? this.getStepUrlFromStepRoute(this.steps[stepIndex + 1].routeName)
-                : null;
-        };
-        /**
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-        CheckoutConfigService.prototype.getPreviousCheckoutStepUrl = /**
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-        function (activatedRoute) {
-            /** @type {?} */
-            var stepIndex = this.getCurrentStepIndex(activatedRoute);
-            return stepIndex >= 0 && this.steps[stepIndex - 1]
-                ? this.getStepUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
-                : null;
-        };
-        /**
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-        CheckoutConfigService.prototype.getCurrentStepIndex = /**
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-        function (activatedRoute) {
-            var e_1, _a;
-            /** @type {?} */
-            var currentStepUrl = this.getStepUrlFromActivatedRoute(activatedRoute);
-            /** @type {?} */
-            var stepIndex;
-            /** @type {?} */
-            var index = 0;
-            try {
-                for (var _b = __values(this.steps), _c = _b.next(); !_c.done; _c = _b.next()) {
-                    var step = _c.value;
-                    if (currentStepUrl === "/" + this.getStepUrlFromStepRoute(step.routeName)) {
-                        stepIndex = index;
-                    }
-                    else {
-                        index++;
-                    }
-                }
-            }
-            catch (e_1_1) { e_1 = { error: e_1_1 }; }
-            finally {
-                try {
-                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-                }
-                finally { if (e_1) throw e_1.error; }
-            }
-            return stepIndex >= 0 ? stepIndex : null;
-        };
-        /**
-         * @private
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-        CheckoutConfigService.prototype.getStepUrlFromActivatedRoute = /**
-         * @private
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-        function (activatedRoute) {
-            return activatedRoute &&
-                activatedRoute.snapshot &&
-                activatedRoute.snapshot.url
-                ? "/" + activatedRoute.snapshot.url.join('/')
-                : null;
-        };
-        /**
-         * @private
-         * @param {?} stepRoute
-         * @return {?}
-         */
-        CheckoutConfigService.prototype.getStepUrlFromStepRoute = /**
-         * @private
-         * @param {?} stepRoute
-         * @return {?}
-         */
-        function (stepRoute) {
-            return this.routingConfigService.getRouteConfig(stepRoute).paths[0];
-        };
-        /**
-         * @private
-         * @param {?} key
-         * @param {?} value
-         * @return {?}
-         */
-        CheckoutConfigService.prototype.getCheckoutStepIndex = /**
-         * @private
-         * @param {?} key
-         * @param {?} value
-         * @return {?}
-         */
-        function (key, value) {
-            return key && value
-                ? this.steps.findIndex((/**
-                 * @param {?} step
-                 * @return {?}
-                 */
-                function (step) { return step[key].includes(value); }))
-                : null;
-        };
-        CheckoutConfigService.decorators = [
-            { type: core.Injectable }
-        ];
-        /** @nocollapse */
-        CheckoutConfigService.ctorParameters = function () { return [
-            { type: CheckoutConfig },
-            { type: core$1.RoutingConfigService }
-        ]; };
-        return CheckoutConfigService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     /** @enum {string} */
     var CheckoutStepType = {
         SHIPPING_ADDRESS: 'shippingAddress',
@@ -4834,6 +4685,158 @@
                     },] }
         ];
         return CheckoutProgressModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CheckoutConfigService = /** @class */ (function () {
+        function CheckoutConfigService(checkoutConfig, routingConfigService) {
+            this.checkoutConfig = checkoutConfig;
+            this.routingConfigService = routingConfigService;
+            this.steps = this.checkoutConfig.checkout.steps;
+        }
+        /**
+         * @param {?} currentStepType
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getCheckoutStep = /**
+         * @param {?} currentStepType
+         * @return {?}
+         */
+        function (currentStepType) {
+            return this.steps[this.getCheckoutStepIndex('type', currentStepType)];
+        };
+        /**
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getNextCheckoutStepUrl = /**
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+        function (activatedRoute) {
+            /** @type {?} */
+            var stepIndex = this.getCurrentStepIndex(activatedRoute);
+            return stepIndex >= 0 && this.steps[stepIndex + 1]
+                ? this.getStepUrlFromStepRoute(this.steps[stepIndex + 1].routeName)
+                : null;
+        };
+        /**
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getPreviousCheckoutStepUrl = /**
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+        function (activatedRoute) {
+            /** @type {?} */
+            var stepIndex = this.getCurrentStepIndex(activatedRoute);
+            return stepIndex >= 0 && this.steps[stepIndex - 1]
+                ? this.getStepUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
+                : null;
+        };
+        /**
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getCurrentStepIndex = /**
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+        function (activatedRoute) {
+            var e_1, _a;
+            /** @type {?} */
+            var currentStepUrl = this.getStepUrlFromActivatedRoute(activatedRoute);
+            /** @type {?} */
+            var stepIndex;
+            /** @type {?} */
+            var index = 0;
+            try {
+                for (var _b = __values(this.steps), _c = _b.next(); !_c.done; _c = _b.next()) {
+                    var step = _c.value;
+                    if (currentStepUrl === "/" + this.getStepUrlFromStepRoute(step.routeName)) {
+                        stepIndex = index;
+                    }
+                    else {
+                        index++;
+                    }
+                }
+            }
+            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            finally {
+                try {
+                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                }
+                finally { if (e_1) throw e_1.error; }
+            }
+            return stepIndex >= 0 ? stepIndex : null;
+        };
+        /**
+         * @private
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getStepUrlFromActivatedRoute = /**
+         * @private
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+        function (activatedRoute) {
+            return activatedRoute &&
+                activatedRoute.snapshot &&
+                activatedRoute.snapshot.url
+                ? "/" + activatedRoute.snapshot.url.join('/')
+                : null;
+        };
+        /**
+         * @private
+         * @param {?} stepRoute
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getStepUrlFromStepRoute = /**
+         * @private
+         * @param {?} stepRoute
+         * @return {?}
+         */
+        function (stepRoute) {
+            return this.routingConfigService.getRouteConfig(stepRoute).paths[0];
+        };
+        /**
+         * @private
+         * @param {?} key
+         * @param {?} value
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getCheckoutStepIndex = /**
+         * @private
+         * @param {?} key
+         * @param {?} value
+         * @return {?}
+         */
+        function (key, value) {
+            return key && value
+                ? this.steps.findIndex((/**
+                 * @param {?} step
+                 * @return {?}
+                 */
+                function (step) { return step[key].includes(value); }))
+                : null;
+        };
+        CheckoutConfigService.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        CheckoutConfigService.ctorParameters = function () { return [
+            { type: CheckoutConfig },
+            { type: core$1.RoutingConfigService }
+        ]; };
+        /** @nocollapse */ CheckoutConfigService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CheckoutConfigService_Factory() { return new CheckoutConfigService(core.ɵɵinject(CheckoutConfig), core.ɵɵinject(core$1.RoutingConfigService)); }, token: CheckoutConfigService, providedIn: "root" });
+        return CheckoutConfigService;
     }());
 
     /**
@@ -7007,8 +7010,6 @@
                             ReviewSubmitModule,
                             ShippingAddressModule,
                         ],
-                        // @todo: should we keep below provider here?
-                        providers: [CheckoutConfigService],
                     },] }
         ];
         return CheckoutComponentModule;
@@ -17255,6 +17256,7 @@
     exports.CategoryNavigationModule = CategoryNavigationModule;
     exports.CheckoutComponentModule = CheckoutComponentModule;
     exports.CheckoutConfig = CheckoutConfig;
+    exports.CheckoutConfigService = CheckoutConfigService;
     exports.CheckoutDetailsService = CheckoutDetailsService;
     exports.CheckoutGuard = CheckoutGuard;
     exports.CheckoutOrchestratorComponent = CheckoutOrchestratorComponent;
@@ -17447,29 +17449,28 @@
     exports.ɵa = OnlyNumberDirectiveModule;
     exports.ɵb = AutoFocusDirectiveModule;
     exports.ɵc = defaultCheckoutConfig;
-    exports.ɵd = CheckoutConfigService;
-    exports.ɵe = HighlightPipe;
-    exports.ɵf = ProductListComponentService;
-    exports.ɵg = ProductAttributesModule;
-    exports.ɵh = ProductDetailsTabModule;
-    exports.ɵi = ProductDetailsTabComponent;
-    exports.ɵj = CmsRoutesService;
-    exports.ɵk = CmsMappingService;
-    exports.ɵl = CmsI18nService;
-    exports.ɵm = CmsGuardsService;
-    exports.ɵn = ComponentMapperService;
-    exports.ɵo = AddToHomeScreenService;
-    exports.ɵp = ProductImagesModule;
-    exports.ɵq = ProductImagesComponent;
-    exports.ɵr = BannerCarouselModule;
-    exports.ɵs = BannerCarouselComponent;
-    exports.ɵt = suffixUrlMatcher;
-    exports.ɵu = addCmsRoute;
-    exports.ɵv = htmlLangProvider;
-    exports.ɵw = setHtmlLangAttribute;
-    exports.ɵx = RoutingModule;
-    exports.ɵy = defaultStorefrontRoutesConfig;
-    exports.ɵz = defaultRoutingConfig;
+    exports.ɵd = HighlightPipe;
+    exports.ɵe = ProductListComponentService;
+    exports.ɵf = ProductAttributesModule;
+    exports.ɵg = ProductDetailsTabModule;
+    exports.ɵh = ProductDetailsTabComponent;
+    exports.ɵi = CmsRoutesService;
+    exports.ɵj = CmsMappingService;
+    exports.ɵk = CmsI18nService;
+    exports.ɵl = CmsGuardsService;
+    exports.ɵm = ComponentMapperService;
+    exports.ɵn = AddToHomeScreenService;
+    exports.ɵo = ProductImagesModule;
+    exports.ɵp = ProductImagesComponent;
+    exports.ɵq = BannerCarouselModule;
+    exports.ɵr = BannerCarouselComponent;
+    exports.ɵs = suffixUrlMatcher;
+    exports.ɵt = addCmsRoute;
+    exports.ɵu = htmlLangProvider;
+    exports.ɵv = setHtmlLangAttribute;
+    exports.ɵw = RoutingModule;
+    exports.ɵx = defaultStorefrontRoutesConfig;
+    exports.ɵy = defaultRoutingConfig;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

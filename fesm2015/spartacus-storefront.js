@@ -3320,115 +3320,6 @@ class CheckoutConfig {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class CheckoutConfigService {
-    /**
-     * @param {?} checkoutConfig
-     * @param {?} routingConfigService
-     */
-    constructor(checkoutConfig, routingConfigService) {
-        this.checkoutConfig = checkoutConfig;
-        this.routingConfigService = routingConfigService;
-        this.steps = this.checkoutConfig.checkout.steps;
-    }
-    /**
-     * @param {?} currentStepType
-     * @return {?}
-     */
-    getCheckoutStep(currentStepType) {
-        return this.steps[this.getCheckoutStepIndex('type', currentStepType)];
-    }
-    /**
-     * @param {?} activatedRoute
-     * @return {?}
-     */
-    getNextCheckoutStepUrl(activatedRoute) {
-        /** @type {?} */
-        const stepIndex = this.getCurrentStepIndex(activatedRoute);
-        return stepIndex >= 0 && this.steps[stepIndex + 1]
-            ? this.getStepUrlFromStepRoute(this.steps[stepIndex + 1].routeName)
-            : null;
-    }
-    /**
-     * @param {?} activatedRoute
-     * @return {?}
-     */
-    getPreviousCheckoutStepUrl(activatedRoute) {
-        /** @type {?} */
-        const stepIndex = this.getCurrentStepIndex(activatedRoute);
-        return stepIndex >= 0 && this.steps[stepIndex - 1]
-            ? this.getStepUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
-            : null;
-    }
-    /**
-     * @param {?} activatedRoute
-     * @return {?}
-     */
-    getCurrentStepIndex(activatedRoute) {
-        /** @type {?} */
-        const currentStepUrl = this.getStepUrlFromActivatedRoute(activatedRoute);
-        /** @type {?} */
-        let stepIndex;
-        /** @type {?} */
-        let index = 0;
-        for (const step of this.steps) {
-            if (currentStepUrl === `/${this.getStepUrlFromStepRoute(step.routeName)}`) {
-                stepIndex = index;
-            }
-            else {
-                index++;
-            }
-        }
-        return stepIndex >= 0 ? stepIndex : null;
-    }
-    /**
-     * @private
-     * @param {?} activatedRoute
-     * @return {?}
-     */
-    getStepUrlFromActivatedRoute(activatedRoute) {
-        return activatedRoute &&
-            activatedRoute.snapshot &&
-            activatedRoute.snapshot.url
-            ? `/${activatedRoute.snapshot.url.join('/')}`
-            : null;
-    }
-    /**
-     * @private
-     * @param {?} stepRoute
-     * @return {?}
-     */
-    getStepUrlFromStepRoute(stepRoute) {
-        return this.routingConfigService.getRouteConfig(stepRoute).paths[0];
-    }
-    /**
-     * @private
-     * @param {?} key
-     * @param {?} value
-     * @return {?}
-     */
-    getCheckoutStepIndex(key, value) {
-        return key && value
-            ? this.steps.findIndex((/**
-             * @param {?} step
-             * @return {?}
-             */
-            (step) => step[key].includes(value)))
-            : null;
-    }
-}
-CheckoutConfigService.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-CheckoutConfigService.ctorParameters = () => [
-    { type: CheckoutConfig },
-    { type: RoutingConfigService }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 /** @enum {string} */
 const CheckoutStepType = {
     SHIPPING_ADDRESS: 'shippingAddress',
@@ -3856,6 +3747,118 @@ CheckoutProgressModule.decorators = [
                 providers: [{ provide: CheckoutConfig, useExisting: Config }],
             },] }
 ];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CheckoutConfigService {
+    /**
+     * @param {?} checkoutConfig
+     * @param {?} routingConfigService
+     */
+    constructor(checkoutConfig, routingConfigService) {
+        this.checkoutConfig = checkoutConfig;
+        this.routingConfigService = routingConfigService;
+        this.steps = this.checkoutConfig.checkout.steps;
+    }
+    /**
+     * @param {?} currentStepType
+     * @return {?}
+     */
+    getCheckoutStep(currentStepType) {
+        return this.steps[this.getCheckoutStepIndex('type', currentStepType)];
+    }
+    /**
+     * @param {?} activatedRoute
+     * @return {?}
+     */
+    getNextCheckoutStepUrl(activatedRoute) {
+        /** @type {?} */
+        const stepIndex = this.getCurrentStepIndex(activatedRoute);
+        return stepIndex >= 0 && this.steps[stepIndex + 1]
+            ? this.getStepUrlFromStepRoute(this.steps[stepIndex + 1].routeName)
+            : null;
+    }
+    /**
+     * @param {?} activatedRoute
+     * @return {?}
+     */
+    getPreviousCheckoutStepUrl(activatedRoute) {
+        /** @type {?} */
+        const stepIndex = this.getCurrentStepIndex(activatedRoute);
+        return stepIndex >= 0 && this.steps[stepIndex - 1]
+            ? this.getStepUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
+            : null;
+    }
+    /**
+     * @param {?} activatedRoute
+     * @return {?}
+     */
+    getCurrentStepIndex(activatedRoute) {
+        /** @type {?} */
+        const currentStepUrl = this.getStepUrlFromActivatedRoute(activatedRoute);
+        /** @type {?} */
+        let stepIndex;
+        /** @type {?} */
+        let index = 0;
+        for (const step of this.steps) {
+            if (currentStepUrl === `/${this.getStepUrlFromStepRoute(step.routeName)}`) {
+                stepIndex = index;
+            }
+            else {
+                index++;
+            }
+        }
+        return stepIndex >= 0 ? stepIndex : null;
+    }
+    /**
+     * @private
+     * @param {?} activatedRoute
+     * @return {?}
+     */
+    getStepUrlFromActivatedRoute(activatedRoute) {
+        return activatedRoute &&
+            activatedRoute.snapshot &&
+            activatedRoute.snapshot.url
+            ? `/${activatedRoute.snapshot.url.join('/')}`
+            : null;
+    }
+    /**
+     * @private
+     * @param {?} stepRoute
+     * @return {?}
+     */
+    getStepUrlFromStepRoute(stepRoute) {
+        return this.routingConfigService.getRouteConfig(stepRoute).paths[0];
+    }
+    /**
+     * @private
+     * @param {?} key
+     * @param {?} value
+     * @return {?}
+     */
+    getCheckoutStepIndex(key, value) {
+        return key && value
+            ? this.steps.findIndex((/**
+             * @param {?} step
+             * @return {?}
+             */
+            (step) => step[key].includes(value)))
+            : null;
+    }
+}
+CheckoutConfigService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+CheckoutConfigService.ctorParameters = () => [
+    { type: CheckoutConfig },
+    { type: RoutingConfigService }
+];
+/** @nocollapse */ CheckoutConfigService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CheckoutConfigService_Factory() { return new CheckoutConfigService(ɵɵinject(CheckoutConfig), ɵɵinject(RoutingConfigService)); }, token: CheckoutConfigService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
@@ -5780,8 +5783,6 @@ CheckoutComponentModule.decorators = [
                     ReviewSubmitModule,
                     ShippingAddressModule,
                 ],
-                // @todo: should we keep below provider here?
-                providers: [CheckoutConfigService],
             },] }
 ];
 
@@ -14421,5 +14422,5 @@ B2cStorefrontModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, OnlyNumberDirectiveModule as ɵa, AutoFocusDirectiveModule as ɵb, defaultCheckoutConfig as ɵc, CheckoutConfigService as ɵd, HighlightPipe as ɵe, ProductListComponentService as ɵf, ProductAttributesModule as ɵg, ProductDetailsTabModule as ɵh, ProductDetailsTabComponent as ɵi, CmsRoutesService as ɵj, CmsMappingService as ɵk, CmsI18nService as ɵl, CmsGuardsService as ɵm, ComponentMapperService as ɵn, AddToHomeScreenService as ɵo, ProductImagesModule as ɵp, ProductImagesComponent as ɵq, BannerCarouselModule as ɵr, BannerCarouselComponent as ɵs, suffixUrlMatcher as ɵt, addCmsRoute as ɵu, htmlLangProvider as ɵv, setHtmlLangAttribute as ɵw, RoutingModule as ɵx, defaultStorefrontRoutesConfig as ɵy, defaultRoutingConfig as ɵz };
+export { AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, OnlyNumberDirectiveModule as ɵa, AutoFocusDirectiveModule as ɵb, defaultCheckoutConfig as ɵc, HighlightPipe as ɵd, ProductListComponentService as ɵe, ProductAttributesModule as ɵf, ProductDetailsTabModule as ɵg, ProductDetailsTabComponent as ɵh, CmsRoutesService as ɵi, CmsMappingService as ɵj, CmsI18nService as ɵk, CmsGuardsService as ɵl, ComponentMapperService as ɵm, AddToHomeScreenService as ɵn, ProductImagesModule as ɵo, ProductImagesComponent as ɵp, BannerCarouselModule as ɵq, BannerCarouselComponent as ɵr, suffixUrlMatcher as ɵs, addCmsRoute as ɵt, htmlLangProvider as ɵu, setHtmlLangAttribute as ɵv, RoutingModule as ɵw, defaultStorefrontRoutesConfig as ɵx, defaultRoutingConfig as ɵy };
 //# sourceMappingURL=spartacus-storefront.js.map

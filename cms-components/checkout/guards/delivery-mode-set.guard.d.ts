@@ -1,7 +1,7 @@
-import { CanActivate, UrlTree, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { CheckoutConfigService } from '../checkout-config.service';
+import { CanActivate, Router, UrlTree } from '@angular/router';
 import { RoutingConfigService } from '@spartacus/core';
+import { Observable } from 'rxjs';
+import { CheckoutConfigService } from '../services/checkout-config.service';
 import { CheckoutDetailsService } from '../services/checkout-details.service';
 export declare class DeliveryModeSetGuard implements CanActivate {
     private checkoutDetailsService;

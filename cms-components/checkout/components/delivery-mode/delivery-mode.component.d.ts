@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CheckoutDeliveryService, DeliveryMode, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { CheckoutConfigService } from '../../checkout-config.service';
+import { CheckoutConfigService } from '../../services/checkout-config.service';
 export declare class DeliveryModeComponent implements OnInit, OnDestroy {
     private fb;
     private checkoutDeliveryService;

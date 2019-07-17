@@ -1,7 +1,7 @@
-import { CheckoutConfig } from './config/checkout-config';
 import { ActivatedRoute } from '@angular/router';
-import { CheckoutStep, CheckoutStepType } from './model/checkout-step.model';
 import { RoutingConfigService } from '@spartacus/core';
+import { CheckoutConfig } from '../config/checkout-config';
+import { CheckoutStep, CheckoutStepType } from '../model/checkout-step.model';
 export declare class CheckoutConfigService {
     private checkoutConfig;
     private routingConfigService;

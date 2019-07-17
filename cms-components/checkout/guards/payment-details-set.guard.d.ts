@@ -1,8 +1,8 @@
 import { CanActivate, Router, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
 import { RoutingConfigService } from '@spartacus/core';
+import { Observable } from 'rxjs';
+import { CheckoutConfigService } from '../services/checkout-config.service';
 import { CheckoutDetailsService } from '../services/checkout-details.service';
-import { CheckoutConfigService } from '../checkout-config.service';
 export declare class PaymentDetailsSetGuard implements CanActivate {
     private checkoutDetailsService;
     private checkoutConfigService;

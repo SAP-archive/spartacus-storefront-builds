@@ -4,7 +4,7 @@ import { Address, CheckoutDeliveryService, CheckoutPaymentService, CheckoutServi
 import { Observable } from 'rxjs';
 import { Card } from '../../../../shared/components/card/card.component';
 import { ICON_TYPE } from '../../../misc/icon';
-import { CheckoutConfigService } from '../../checkout-config.service';
+import { CheckoutConfigService } from '../../services/checkout-config.service';
 export declare class PaymentMethodComponent implements OnInit, OnDestroy {
     protected userPaymentService: UserPaymentService;
     protected checkoutService: CheckoutService;
