@@ -9,6 +9,7 @@ import { RouterModule, Router, ActivatedRoute, NavigationStart, NavigationEnd } 
 import { of, fromEvent, combineLatest, BehaviorSubject, concat, isObservable, from, Subscription } from 'rxjs';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
+import { OnlyNumberDirectiveModule as OnlyNumberDirectiveModule$1 } from 'projects/storefrontlib/src/shared/directives/only-number/only-number.directive.module';
 import { ServiceWorkerModule, SwRegistrationOptions } from '@angular/service-worker';
 import { Title, Meta } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
@@ -5621,6 +5622,7 @@ var PaymentFormModule = /** @class */ (function () {
                         BillingAddressFormModule,
                         I18nModule,
                         IconModule,
+                        OnlyNumberDirectiveModule$1,
                     ],
                     declarations: [PaymentFormComponent],
                     entryComponents: [PaymentFormComponent],
