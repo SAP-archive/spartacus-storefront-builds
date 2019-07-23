@@ -11950,7 +11950,9 @@
                     params: { newUid: this.newUid },
                 }, core$1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
                 this.authService.logout();
-                this.routingService.go({ cxRoute: 'login' });
+                this.routingService.go({ cxRoute: 'login' }, undefined, {
+                    state: { redirectUrl: '/' },
+                });
             }
         };
         /**
