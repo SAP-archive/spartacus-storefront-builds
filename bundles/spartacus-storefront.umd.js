@@ -2340,28 +2340,7 @@
          * @return {?}
          */
         function (e) {
-            if (e.key) {
-                return e.key;
-            }
-            else {
-                // for old browsers
-                if (e.keyCode && String.fromCharCode) {
-                    switch (e.keyCode) {
-                        case 8:
-                            return 'Backspace';
-                        case 9:
-                            return 'Tab';
-                        case 27:
-                            return 'Escape';
-                        case 37:
-                            return 'ArrowLeft';
-                        case 39:
-                            return 'ArrowRight';
-                        default:
-                            return String.fromCharCode(e.keyCode);
-                    }
-                }
-            }
+            return e.key;
         };
         OnlyNumberDirective.decorators = [
             { type: core.Directive, args: [{
@@ -4009,7 +3988,7 @@
          */
         function (slots$, pageTemplate, section) {
             if (pageTemplate === 'CartPageTemplate' && !section) {
-                return rxjs.combineLatest(slots$, this.cartService.getActive()).pipe(operators.map((/**
+                return rxjs.combineLatest([slots$, this.cartService.getActive()]).pipe(operators.map((/**
                  * @param {?} __0
                  * @return {?}
                  */
@@ -12541,7 +12520,10 @@
          * @return {?}
          */
         function () {
-            this.crumbs$ = rxjs.combineLatest(this.pageMetaService.getMeta(), this.translation.translate('common.home')).pipe(operators.map((/**
+            this.crumbs$ = rxjs.combineLatest([
+                this.pageMetaService.getMeta(),
+                this.translation.translate('common.home'),
+            ]).pipe(operators.map((/**
              * @param {?} __0
              * @return {?}
              */
@@ -13591,7 +13573,10 @@
          */
         function (config) {
             var _this = this;
-            return rxjs.combineLatest(this.getProductResults(config), this.getProductSuggestions(config)).pipe(operators.switchMap((/**
+            return rxjs.combineLatest([
+                this.getProductResults(config),
+                this.getProductSuggestions(config),
+            ]).pipe(operators.switchMap((/**
              * @param {?} __0
              * @return {?}
              */
@@ -15107,7 +15092,10 @@
              * When a user leaves the PLP route, the PLP component unsubscribes from this stream
              * so no longer the search is performed on route change.
              */
-            this.model$ = rxjs.combineLatest(this.searchResults$, this.searchByRouting$).pipe(operators.pluck(0), operators.shareReplay({ bufferSize: 1, refCount: true }));
+            this.model$ = rxjs.combineLatest([
+                this.searchResults$,
+                this.searchByRouting$,
+            ]).pipe(operators.pluck(0), operators.shareReplay({ bufferSize: 1, refCount: true }));
         }
         /**
          * @return {?}

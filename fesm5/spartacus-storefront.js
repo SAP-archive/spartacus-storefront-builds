@@ -2239,28 +2239,7 @@ var OnlyNumberDirective = /** @class */ (function () {
      * @return {?}
      */
     function (e) {
-        if (e.key) {
-            return e.key;
-        }
-        else {
-            // for old browsers
-            if (e.keyCode && String.fromCharCode) {
-                switch (e.keyCode) {
-                    case 8:
-                        return 'Backspace';
-                    case 9:
-                        return 'Tab';
-                    case 27:
-                        return 'Escape';
-                    case 37:
-                        return 'ArrowLeft';
-                    case 39:
-                        return 'ArrowRight';
-                    default:
-                        return String.fromCharCode(e.keyCode);
-                }
-            }
-        }
+        return e.key;
     };
     OnlyNumberDirective.decorators = [
         { type: Directive, args: [{
@@ -3908,7 +3887,7 @@ var CartPageLayoutHandler = /** @class */ (function () {
      */
     function (slots$, pageTemplate, section) {
         if (pageTemplate === 'CartPageTemplate' && !section) {
-            return combineLatest(slots$, this.cartService.getActive()).pipe(map((/**
+            return combineLatest([slots$, this.cartService.getActive()]).pipe(map((/**
              * @param {?} __0
              * @return {?}
              */
@@ -12440,7 +12419,10 @@ var BreadcrumbComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.crumbs$ = combineLatest(this.pageMetaService.getMeta(), this.translation.translate('common.home')).pipe(map((/**
+        this.crumbs$ = combineLatest([
+            this.pageMetaService.getMeta(),
+            this.translation.translate('common.home'),
+        ]).pipe(map((/**
          * @param {?} __0
          * @return {?}
          */
@@ -13490,7 +13472,10 @@ var SearchBoxComponentService = /** @class */ (function () {
      */
     function (config) {
         var _this = this;
-        return combineLatest(this.getProductResults(config), this.getProductSuggestions(config)).pipe(switchMap((/**
+        return combineLatest([
+            this.getProductResults(config),
+            this.getProductSuggestions(config),
+        ]).pipe(switchMap((/**
          * @param {?} __0
          * @return {?}
          */
@@ -15006,7 +14991,10 @@ var ProductListComponentService = /** @class */ (function () {
          * When a user leaves the PLP route, the PLP component unsubscribes from this stream
          * so no longer the search is performed on route change.
          */
-        this.model$ = combineLatest(this.searchResults$, this.searchByRouting$).pipe(pluck(0), shareReplay({ bufferSize: 1, refCount: true }));
+        this.model$ = combineLatest([
+            this.searchResults$,
+            this.searchByRouting$,
+        ]).pipe(pluck(0), shareReplay({ bufferSize: 1, refCount: true }));
     }
     /**
      * @return {?}
