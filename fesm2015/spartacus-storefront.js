@@ -9949,9 +9949,7 @@ class UpdateEmailComponent {
                 params: { newUid: this.newUid },
             }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
             this.authService.logout();
-            this.routingService.go({ cxRoute: 'login' }, undefined, {
-                state: { redirectUrl: '/' },
-            });
+            this.routingService.go({ cxRoute: 'login' });
         }
     }
     /**
