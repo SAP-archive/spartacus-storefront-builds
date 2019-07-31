@@ -1,4 +1,4 @@
-import { CmsSearchBoxComponent, WindowRef } from '@spartacus/core';
+import { CmsSearchBoxComponent } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { ICON_TYPE } from '../../../cms-components/misc/icon/index';
 import { CmsComponentData } from '../../../cms-structure/page/model/cms-component-data';
@@ -7,7 +7,6 @@ import { SearchBoxConfig, SearchResults } from './search-box.model';
 export declare class SearchBoxComponent {
     protected searchBoxComponentService: SearchBoxComponentService;
     protected componentData: CmsComponentData<CmsSearchBoxComponent>;
-    protected winRef: WindowRef;
     config: SearchBoxConfig;
     /**
      * Sets the search box input field
@@ -23,7 +22,7 @@ export declare class SearchBoxComponent {
      * The component data is optional, so that this component
      * can be reused without CMS integration.
      */
-    constructor(searchBoxComponentService: SearchBoxComponentService, componentData: CmsComponentData<CmsSearchBoxComponent>, winRef: WindowRef);
+    constructor(searchBoxComponentService: SearchBoxComponentService, componentData: CmsComponentData<CmsSearchBoxComponent>);
     results$: Observable<SearchResults>;
     /**
      * Returns the backend configuration or default configuration for the searchbox.
@@ -40,18 +39,12 @@ export declare class SearchBoxComponent {
     /**
      * Closes the typehead searchbox.
      */
-    close(event: UIEvent, force?: boolean): void;
-    private isSearchboxFocused;
+    close(event: UIEvent): void;
     /**
      * Especially in mobile we do not want the search icon
      * to focus the input again when it's already open.
      * */
     avoidReopen(event: UIEvent): void;
-    private getResultElements;
-    private getFocusedElement;
-    private getFocusedIndex;
-    focusPreviousChild(event: any): void;
-    focusNextChild(event: any): void;
     /**
      * Opens the PLP with the given query.
      *

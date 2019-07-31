@@ -11347,12 +11347,10 @@ class SearchBoxComponent {
      * can be reused without CMS integration.
      * @param {?} searchBoxComponentService
      * @param {?} componentData
-     * @param {?} winRef
      */
-    constructor(searchBoxComponentService, componentData, winRef) {
+    constructor(searchBoxComponentService, componentData) {
         this.searchBoxComponentService = searchBoxComponentService;
         this.componentData = componentData;
-        this.winRef = winRef;
         this.iconTypes = ICON_TYPE;
         /**
          * In some occasions we need to ignore the close event,
@@ -11423,33 +11421,16 @@ class SearchBoxComponent {
     /**
      * Closes the typehead searchbox.
      * @param {?} event
-     * @param {?=} force
      * @return {?}
      */
-    close(event, force) {
-        // Use timeout to detect changes
-        setTimeout((/**
-         * @return {?}
-         */
-        () => {
-            if ((!this.ignoreCloseEvent && !this.isSearchboxFocused()) || force) {
-                this.searchBoxComponentService.toggleBodyClass('searchbox-is-active', false);
-                if (event && event.target) {
-                    ((/** @type {?} */ (event.target))).blur();
-                }
+    close(event) {
+        if (!this.ignoreCloseEvent) {
+            this.searchBoxComponentService.toggleBodyClass('searchbox-is-active', false);
+            if (event && event.target) {
+                ((/** @type {?} */ (event.target))).blur();
             }
-            this.ignoreCloseEvent = false;
-        }), 0);
-    }
-    // Check if focus is on searchbox or result list elements
-    /**
-     * @private
-     * @return {?}
-     */
-    isSearchboxFocused() {
-        return (this.getResultElements().includes(this.getFocusedElement()) ||
-            this.winRef.document.querySelector('input[aria-label="search"]') ===
-                this.getFocusedElement());
+        }
+        this.ignoreCloseEvent = false;
     }
     /**
      * Especially in mobile we do not want the search icon
@@ -11464,73 +11445,6 @@ class SearchBoxComponent {
             event.preventDefault();
         }
     }
-    // Return result list as HTMLElement array
-    /**
-     * @private
-     * @return {?}
-     */
-    getResultElements() {
-        return Array.from(this.winRef.document.querySelectorAll('.products > a, .suggestions > a'));
-    }
-    // Return focused element as HTMLElement
-    /**
-     * @private
-     * @return {?}
-     */
-    getFocusedElement() {
-        return (/** @type {?} */ (this.winRef.document.activeElement));
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    getFocusedIndex() {
-        return this.getResultElements().indexOf(this.getFocusedElement());
-    }
-    // Focus on previous item in results list
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    focusPreviousChild(event) {
-        event.preventDefault(); // Negate normal keyscroll
-        // Negate normal keyscroll
-        const [results, focusedIndex] = [
-            this.getResultElements(),
-            this.getFocusedIndex(),
-        ];
-        // Focus on last index moving to first
-        if (results.length) {
-            if (focusedIndex < 1) {
-                results[results.length - 1].focus();
-            }
-            else {
-                results[focusedIndex - 1].focus();
-            }
-        }
-    }
-    // Focus on next item in results list
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    focusNextChild(event) {
-        event.preventDefault(); // Negate normal keyscroll
-        // Negate normal keyscroll
-        const [results, focusedIndex] = [
-            this.getResultElements(),
-            this.getFocusedIndex(),
-        ];
-        // Focus on first index moving to last
-        if (results.length) {
-            if (focusedIndex >= results.length - 1) {
-                results[0].focus();
-            }
-            else {
-                results[focusedIndex + 1].focus();
-            }
-        }
-    }
     /**
      * Opens the PLP with the given query.
      *
@@ -11540,7 +11454,7 @@ class SearchBoxComponent {
      * @return {?}
      */
     launchSearchResult(event, query) {
-        this.close(event, true);
+        this.close(event);
         this.searchBoxComponentService.launchSearchPage(query);
     }
     /**
@@ -11564,15 +11478,14 @@ class SearchBoxComponent {
 SearchBoxComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-searchbox',
-                template: "<label class=\"searchbox\" [class.dirty]=\"!!searchInput.value\">\n  <input\n    #searchInput\n    [placeholder]=\"'searchBox.placeholder' | cxTranslate\"\n    aria-label=\"search\"\n    (focus)=\"open()\"\n    (input)=\"search(searchInput.value)\"\n    (blur)=\"close($event)\"\n    (keydown.escape)=\"close($event)\"\n    (keydown.enter)=\"launchSearchResult($event, searchInput.value)\"\n    (keydown.arrowup)=\"focusPreviousChild($event)\"\n    (keydown.arrowdown)=\"focusNextChild($event)\"\n  />\n\n  <cx-icon\n    [type]=\"iconTypes.RESET\"\n    aria-label=\"reset\"\n    (mousedown)=\"clear(searchInput)\"\n    class=\"reset\"\n  ></cx-icon>\n\n  <cx-icon\n    [type]=\"iconTypes.SEARCH\"\n    aria-label=\"search\"\n    class=\"search\"\n    (mousedown)=\"avoidReopen($event)\"\n  ></cx-icon>\n</label>\n\n<div\n  *ngIf=\"(results$ | async) as result\"\n  class=\"results\"\n  (click)=\"close($event, true)\"\n>\n  <div\n    *ngIf=\"result.message\"\n    class=\"message\"\n    [innerHTML]=\"result.message\"\n  ></div>\n\n  <div class=\"suggestions\" (mousedown)=\"disableClose()\">\n    <a\n      *ngFor=\"let suggestion of result.suggestions\"\n      [innerHTML]=\"suggestion | cxHighlight: searchInput.value\"\n      [routerLink]=\"\n        {\n          cxRoute: 'search',\n          params: { query: suggestion }\n        } | cxUrl\n      \"\n      (keydown.arrowup)=\"focusPreviousChild($event)\"\n      (keydown.arrowdown)=\"focusNextChild($event)\"\n      (keydown.enter)=\"close($event, true)\"\n      (blur)=\"close($event)\"\n    >\n    </a>\n  </div>\n\n  <div class=\"products\" (mousedown)=\"disableClose()\" *ngIf=\"result.products\">\n    <a\n      *ngFor=\"let product of result.products\"\n      [routerLink]=\"\n        {\n          cxRoute: 'product',\n          params: product\n        } | cxUrl\n      \"\n      [class.has-media]=\"config.displayProductImages\"\n      (keydown.arrowup)=\"focusPreviousChild($event)\"\n      (keydown.arrowdown)=\"focusNextChild($event)\"\n      (keydown.enter)=\"close($event, true)\"\n      (blur)=\"close($event)\"\n    >\n      <cx-media\n        *ngIf=\"config.displayProductImages\"\n        [container]=\"product.images?.PRIMARY\"\n        format=\"thumbnail\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n      <h4 class=\"name\" [innerHTML]=\"product.nameHtml\"></h4>\n      <span class=\"price\">{{ product.price?.formattedValue }}</span>\n    </a>\n  </div>\n</div>\n",
+                template: "<label class=\"searchbox\" [class.dirty]=\"!!searchInput.value\">\n  <input\n    #searchInput\n    [placeholder]=\"'searchBox.placeholder' | cxTranslate\"\n    aria-label=\"search\"\n    (focus)=\"open()\"\n    (input)=\"search(searchInput.value)\"\n    (blur)=\"close($event)\"\n    (keydown.escape)=\"close($event)\"\n    (keydown.enter)=\"launchSearchResult($event, searchInput.value)\"\n  />\n\n  <cx-icon\n    [type]=\"iconTypes.RESET\"\n    aria-label=\"reset\"\n    (mousedown)=\"clear(searchInput)\"\n    class=\"reset\"\n  ></cx-icon>\n\n  <cx-icon\n    [type]=\"iconTypes.SEARCH\"\n    aria-label=\"search\"\n    class=\"search\"\n    (mousedown)=\"avoidReopen($event)\"\n  ></cx-icon>\n</label>\n\n<div\n  *ngIf=\"(results$ | async) as result\"\n  class=\"results\"\n  (click)=\"close($event)\"\n>\n  <div\n    *ngIf=\"result.message\"\n    class=\"message\"\n    [innerHTML]=\"result.message\"\n  ></div>\n\n  <div class=\"suggestions\" (mousedown)=\"disableClose()\">\n    <a\n      *ngFor=\"let suggestion of result.suggestions\"\n      [innerHTML]=\"suggestion | cxHighlight: searchInput.value\"\n      [routerLink]=\"\n        {\n          cxRoute: 'search',\n          params: { query: suggestion }\n        } | cxUrl\n      \"\n    >\n    </a>\n  </div>\n\n  <div class=\"products\" (mousedown)=\"disableClose()\" *ngIf=\"result.products\">\n    <a\n      *ngFor=\"let product of result.products\"\n      [routerLink]=\"\n        {\n          cxRoute: 'product',\n          params: product\n        } | cxUrl\n      \"\n      [class.has-media]=\"config.displayProductImages\"\n    >\n      <cx-media\n        *ngIf=\"config.displayProductImages\"\n        [container]=\"product.images?.PRIMARY\"\n        format=\"thumbnail\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n      <h4 class=\"name\" [innerHTML]=\"product.nameHtml\"></h4>\n      <span class=\"price\">{{ product.price?.formattedValue }}</span>\n    </a>\n  </div>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
 /** @nocollapse */
 SearchBoxComponent.ctorParameters = () => [
     { type: SearchBoxComponentService },
-    { type: CmsComponentData, decorators: [{ type: Optional }] },
-    { type: WindowRef }
+    { type: CmsComponentData, decorators: [{ type: Optional }] }
 ];
 SearchBoxComponent.propDecorators = {
     queryText: [{ type: Input, args: ['queryText',] }]
