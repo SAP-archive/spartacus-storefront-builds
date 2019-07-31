@@ -17,5 +17,4 @@ export declare class RegisterComponent implements OnInit, OnDestroy {
     private matchPassword;
     emailToLowerCase(): void;
     ngOnDestroy(): void;
-    titleSelected(title: Title): void;
 }

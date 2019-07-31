@@ -16,5 +16,4 @@ export declare class UpdateProfileFormComponent implements OnInit {
     isNotValid(formControlName: string): boolean;
     onSubmit(): void;
     onCancel(): void;
-    titleSelected(title: Title): void;
 }
