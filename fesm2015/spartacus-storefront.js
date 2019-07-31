@@ -2495,11 +2495,14 @@ SiteContextSelectorModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class StarRatingComponent {
+    // tslint:disable-line
     /**
      * @param {?} el
+     * @param {?=} renderer
      */
-    constructor(el) {
+    constructor(el, renderer) {
         this.el = el;
+        this.renderer = renderer;
         /**
          * The rating component can be used in disabled mode,
          * so that the interation is not provided.
@@ -2525,7 +2528,13 @@ class StarRatingComponent {
      */
     setRate(value, force) {
         if (!this.disabled || force) {
-            this.el.nativeElement.style.setProperty('--star-fill', value || this.initialRate);
+            // TODO(issue:#3803) deprecated since 1.0.2
+            if (this.renderer) {
+                this.renderer.setAttribute(this.el.nativeElement, 'style', `--star-fill:${value || this.initialRate};`);
+            }
+            else {
+                this.el.nativeElement.style.setProperty('--star-fill', value || this.initialRate);
+            }
         }
     }
     /**
@@ -2550,7 +2559,8 @@ StarRatingComponent.decorators = [
 ];
 /** @nocollapse */
 StarRatingComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: Renderer2 }
 ];
 StarRatingComponent.propDecorators = {
     disabled: [{ type: Input }, { type: HostBinding, args: ['attr.disabled',] }],

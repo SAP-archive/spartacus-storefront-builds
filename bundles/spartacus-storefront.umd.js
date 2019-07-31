@@ -3259,8 +3259,9 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var StarRatingComponent = /** @class */ (function () {
-        function StarRatingComponent(el) {
+        function StarRatingComponent(el, renderer) {
             this.el = el;
+            this.renderer = renderer;
             /**
              * The rating component can be used in disabled mode,
              * so that the interation is not provided.
@@ -3294,7 +3295,13 @@
          */
         function (value, force) {
             if (!this.disabled || force) {
-                this.el.nativeElement.style.setProperty('--star-fill', value || this.initialRate);
+                // TODO(issue:#3803) deprecated since 1.0.2
+                if (this.renderer) {
+                    this.renderer.setAttribute(this.el.nativeElement, 'style', "--star-fill:" + (value || this.initialRate) + ";");
+                }
+                else {
+                    this.el.nativeElement.style.setProperty('--star-fill', value || this.initialRate);
+                }
             }
         };
         /**
@@ -3322,7 +3329,8 @@
         ];
         /** @nocollapse */
         StarRatingComponent.ctorParameters = function () { return [
-            { type: core.ElementRef }
+            { type: core.ElementRef },
+            { type: core.Renderer2 }
         ]; };
         StarRatingComponent.propDecorators = {
             disabled: [{ type: core.Input }, { type: core.HostBinding, args: ['attr.disabled',] }],
