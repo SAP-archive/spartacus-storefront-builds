@@ -18,6 +18,7 @@ export declare class StarRatingComponent implements OnInit {
     change: EventEmitter<number>;
     private initialRate;
     iconTypes: typeof ICON_TYPE;
+    constructor(el: ElementRef, renderer: Renderer2);
     /**
      * @deprecated since version 1.0.2
      *  Use constructor(el: ElementRef, renderer: Renderer2) instead
@@ -25,7 +26,6 @@ export declare class StarRatingComponent implements OnInit {
      *  TODO(issue:#3803) deprecated since 1.0.2
      */
     constructor(el: ElementRef);
-    constructor(el: ElementRef, renderer: Renderer2);
     ngOnInit(): void;
     setRate(value: number, force?: boolean): void;
     saveRate(rating: number): void;

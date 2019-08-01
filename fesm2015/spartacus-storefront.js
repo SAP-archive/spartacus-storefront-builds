@@ -2495,7 +2495,6 @@ SiteContextSelectorModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class StarRatingComponent {
-    // tslint:disable-line
     /**
      * @param {?} el
      * @param {?=} renderer
