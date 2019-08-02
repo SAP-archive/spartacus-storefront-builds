@@ -6453,7 +6453,7 @@
             function (regions) {
                 /** @type {?} */
                 var regionControl = _this.address.get('region.isocode');
-                if (regions.length > 0) {
+                if (regions && regions.length > 0) {
                     regionControl.enable();
                 }
                 else {
