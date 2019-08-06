@@ -4008,7 +4008,6 @@ class DeliveryModeComponent {
     ngOnInit() {
         this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
         this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
-        this.changedOption = false;
         this.supportedDeliveryModes$ = this.checkoutDeliveryService.getSupportedDeliveryModes();
         this.deliveryModeSub = this.checkoutDeliveryService
             .getSelectedDeliveryMode()
@@ -4037,7 +4036,6 @@ class DeliveryModeComponent {
      */
     changeMode(code) {
         if (code !== this.currentDeliveryModeId) {
-            this.changedOption = true;
             this.currentDeliveryModeId = code;
         }
     }
@@ -4045,12 +4043,10 @@ class DeliveryModeComponent {
      * @return {?}
      */
     next() {
-        if (this.changedOption) {
+        if (this.mode.touched) {
             this.checkoutDeliveryService.setDeliveryMode(this.currentDeliveryModeId);
         }
-        else {
-            this.routingService.go(this.checkoutStepUrlNext);
-        }
+        this.routingService.go(this.checkoutStepUrlNext);
     }
     /**
      * @return {?}

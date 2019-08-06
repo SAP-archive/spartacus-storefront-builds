@@ -4893,7 +4893,6 @@ var DeliveryModeComponent = /** @class */ (function () {
         var _this = this;
         this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
         this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
-        this.changedOption = false;
         this.supportedDeliveryModes$ = this.checkoutDeliveryService.getSupportedDeliveryModes();
         this.deliveryModeSub = this.checkoutDeliveryService
             .getSelectedDeliveryMode()
@@ -4928,7 +4927,6 @@ var DeliveryModeComponent = /** @class */ (function () {
      */
     function (code) {
         if (code !== this.currentDeliveryModeId) {
-            this.changedOption = true;
             this.currentDeliveryModeId = code;
         }
     };
@@ -4939,12 +4937,10 @@ var DeliveryModeComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        if (this.changedOption) {
+        if (this.mode.touched) {
             this.checkoutDeliveryService.setDeliveryMode(this.currentDeliveryModeId);
         }
-        else {
-            this.routingService.go(this.checkoutStepUrlNext);
-        }
+        this.routingService.go(this.checkoutStepUrlNext);
     };
     /**
      * @return {?}
