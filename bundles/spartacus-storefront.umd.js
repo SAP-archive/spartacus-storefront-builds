@@ -16937,6 +16937,7 @@
                             core$1.CheckoutModule.forRoot(),
                             core$1.UserModule.forRoot(),
                             core$1.ProductModule.forRoot(),
+                            core$1.FeaturesConfigModule.forRoot(),
                             LayoutModule,
                         ],
                         exports: [LayoutModule],
