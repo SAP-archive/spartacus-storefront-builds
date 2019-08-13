@@ -7609,7 +7609,7 @@ var ComponentWrapperDirective = /** @class */ (function () {
      */
     function () {
         return __awaiter(this, void 0, void 0, function () {
-            var elementName;
+            var elementName, cmsComponentData;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.componentMapper.initWebComponent(this.cxComponentWrapper.flexType, this.renderer)];
@@ -7617,7 +7617,9 @@ var ComponentWrapperDirective = /** @class */ (function () {
                         elementName = _a.sent();
                         if (elementName) {
                             this.webElement = this.renderer.createElement(elementName);
-                            this.webElement.cxApi = __assign({}, this.injector.get(CxApiService), { CmsComponentData: this.getCmsDataForComponent() });
+                            cmsComponentData = this.getCmsDataForComponent();
+                            this.webElement.cxApi = __assign({}, this.injector.get(CxApiService), { CmsComponentData: cmsComponentData, // TODO: remove / deprecated since 1.0.x
+                                cmsComponentData: cmsComponentData });
                             this.renderer.appendChild(this.vcr.element.nativeElement.parentElement, this.webElement);
                             if (this.cmsService.isLaunchInSmartEdit()) {
                                 this.addSmartEditContract(this.webElement);
