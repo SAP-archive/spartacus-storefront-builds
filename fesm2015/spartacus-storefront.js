@@ -1,5 +1,5 @@
-import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, EventEmitter, Output, isDevMode, forwardRef, Renderer2, HostListener, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, APP_INITIALIZER, INJECTOR, Pipe } from '@angular/core';
-import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, CmsConfig, AuthService, CmsService, CurrencyService, LanguageService, BaseSiteService, ProductSearchService, ProductReviewService, DynamicAttributeService, PageRobotsMeta, PageMetaService, TranslationChunkService, PageType, SemanticPathService, UserConsentService, NotAuthGuard, UserOrderService, CmsPageTitleModule, SearchboxService, ProductReferenceService, AuthRedirectService, provideConfig, RoutingModule as RoutingModule$1, StateModule, AuthModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, FeaturesConfigModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule } from '@spartacus/core';
+import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, EventEmitter, Output, isDevMode, forwardRef, Renderer2, HostListener, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, NgZone, APP_INITIALIZER, INJECTOR, Pipe } from '@angular/core';
+import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, CmsConfig, AuthService, CartDataService, CmsService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, TranslationChunkService, PageType, SemanticPathService, NotAuthGuard, CmsPageTitleModule, AuthRedirectService, provideConfig, RoutingModule as RoutingModule$1, StateModule, AuthModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, FeaturesConfigModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule } from '@spartacus/core';
 import { map, filter, switchMap, tap, debounceTime, startWith, distinctUntilChanged, take, shareReplay, skipWhile, first, endWith, withLatestFrom, pluck } from 'rxjs/operators';
 import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -6274,29 +6274,63 @@ ComponentMapperService.ctorParameters = () => [
 class CxApiService {
     /**
      * @param {?} auth
+     * @param {?} cart
+     * @param {?} cartData
+     * @param {?} checkout
+     * @param {?} checkoutDelivery
+     * @param {?} checkoutPayment
      * @param {?} cms
+     * @param {?} pageMeta
+     * @param {?} featureConfig
+     * @param {?} globalMessage
+     * @param {?} translation
+     * @param {?} kyma
+     * @param {?} occEndpoints
+     * @param {?} product
+     * @param {?} productSearch
+     * @param {?} productReview
+     * @param {?} productReference
+     * @param {?} searchbox
      * @param {?} routing
      * @param {?} currency
      * @param {?} language
      * @param {?} baseSite
-     * @param {?} product
-     * @param {?} productSearch
-     * @param {?} productReview
      * @param {?} user
-     * @param {?} translation
+     * @param {?} userAddress
+     * @param {?} userConsent
+     * @param {?} userOrder
+     * @param {?} userPayment
+     * @param {?} ngZone
      */
-    constructor(auth, cms, routing, currency, language, baseSite, product, productSearch, productReview, user, translation) {
+    constructor(auth, cart, cartData, checkout, checkoutDelivery, checkoutPayment, cms, pageMeta, featureConfig, globalMessage, translation, kyma, occEndpoints, product, productSearch, productReview, productReference, searchbox, routing, currency, language, baseSite, user, userAddress, userConsent, userOrder, userPayment, ngZone) {
         this.auth = auth;
+        this.cart = cart;
+        this.cartData = cartData;
+        this.checkout = checkout;
+        this.checkoutDelivery = checkoutDelivery;
+        this.checkoutPayment = checkoutPayment;
         this.cms = cms;
+        this.pageMeta = pageMeta;
+        this.featureConfig = featureConfig;
+        this.globalMessage = globalMessage;
+        this.translation = translation;
+        this.kyma = kyma;
+        this.occEndpoints = occEndpoints;
+        this.product = product;
+        this.productSearch = productSearch;
+        this.productReview = productReview;
+        this.productReference = productReference;
+        this.searchbox = searchbox;
         this.routing = routing;
         this.currency = currency;
         this.language = language;
         this.baseSite = baseSite;
-        this.product = product;
-        this.productSearch = productSearch;
-        this.productReview = productReview;
         this.user = user;
-        this.translation = translation;
+        this.userAddress = userAddress;
+        this.userConsent = userConsent;
+        this.userOrder = userOrder;
+        this.userPayment = userPayment;
+        this.ngZone = ngZone;
     }
 }
 CxApiService.decorators = [
@@ -6307,18 +6341,35 @@ CxApiService.decorators = [
 /** @nocollapse */
 CxApiService.ctorParameters = () => [
     { type: AuthService, decorators: [{ type: Optional }] },
+    { type: CartService, decorators: [{ type: Optional }] },
+    { type: CartDataService, decorators: [{ type: Optional }] },
+    { type: CheckoutService, decorators: [{ type: Optional }] },
+    { type: CheckoutDeliveryService, decorators: [{ type: Optional }] },
+    { type: CheckoutPaymentService, decorators: [{ type: Optional }] },
     { type: CmsService, decorators: [{ type: Optional }] },
+    { type: PageMetaService, decorators: [{ type: Optional }] },
+    { type: FeatureConfigService, decorators: [{ type: Optional }] },
+    { type: GlobalMessageService, decorators: [{ type: Optional }] },
+    { type: TranslationService, decorators: [{ type: Optional }] },
+    { type: KymaService, decorators: [{ type: Optional }] },
+    { type: OccEndpointsService, decorators: [{ type: Optional }] },
+    { type: ProductService, decorators: [{ type: Optional }] },
+    { type: ProductSearchService, decorators: [{ type: Optional }] },
+    { type: ProductReviewService, decorators: [{ type: Optional }] },
+    { type: ProductReferenceService, decorators: [{ type: Optional }] },
+    { type: SearchboxService, decorators: [{ type: Optional }] },
     { type: RoutingService, decorators: [{ type: Optional }] },
     { type: CurrencyService, decorators: [{ type: Optional }] },
     { type: LanguageService, decorators: [{ type: Optional }] },
     { type: BaseSiteService, decorators: [{ type: Optional }] },
-    { type: ProductService, decorators: [{ type: Optional }] },
-    { type: ProductSearchService, decorators: [{ type: Optional }] },
-    { type: ProductReviewService, decorators: [{ type: Optional }] },
     { type: UserService, decorators: [{ type: Optional }] },
-    { type: TranslationService, decorators: [{ type: Optional }] }
+    { type: UserAddressService, decorators: [{ type: Optional }] },
+    { type: UserConsentService, decorators: [{ type: Optional }] },
+    { type: UserOrderService, decorators: [{ type: Optional }] },
+    { type: UserPaymentService, decorators: [{ type: Optional }] },
+    { type: NgZone }
 ];
-/** @nocollapse */ CxApiService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CxApiService_Factory() { return new CxApiService(ɵɵinject(AuthService, 8), ɵɵinject(CmsService, 8), ɵɵinject(RoutingService, 8), ɵɵinject(CurrencyService, 8), ɵɵinject(LanguageService, 8), ɵɵinject(BaseSiteService, 8), ɵɵinject(ProductService, 8), ɵɵinject(ProductSearchService, 8), ɵɵinject(ProductReviewService, 8), ɵɵinject(UserService, 8), ɵɵinject(TranslationService, 8)); }, token: CxApiService, providedIn: "root" });
+/** @nocollapse */ CxApiService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CxApiService_Factory() { return new CxApiService(ɵɵinject(AuthService, 8), ɵɵinject(CartService, 8), ɵɵinject(CartDataService, 8), ɵɵinject(CheckoutService, 8), ɵɵinject(CheckoutDeliveryService, 8), ɵɵinject(CheckoutPaymentService, 8), ɵɵinject(CmsService, 8), ɵɵinject(PageMetaService, 8), ɵɵinject(FeatureConfigService, 8), ɵɵinject(GlobalMessageService, 8), ɵɵinject(TranslationService, 8), ɵɵinject(KymaService, 8), ɵɵinject(OccEndpointsService, 8), ɵɵinject(ProductService, 8), ɵɵinject(ProductSearchService, 8), ɵɵinject(ProductReviewService, 8), ɵɵinject(ProductReferenceService, 8), ɵɵinject(SearchboxService, 8), ɵɵinject(RoutingService, 8), ɵɵinject(CurrencyService, 8), ɵɵinject(LanguageService, 8), ɵɵinject(BaseSiteService, 8), ɵɵinject(UserService, 8), ɵɵinject(UserAddressService, 8), ɵɵinject(UserConsentService, 8), ɵɵinject(UserOrderService, 8), ɵɵinject(UserPaymentService, 8), ɵɵinject(NgZone)); }, token: CxApiService, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle

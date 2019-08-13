@@ -7599,18 +7599,35 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CxApiService = /** @class */ (function () {
-        function CxApiService(auth, cms, routing, currency, language, baseSite, product, productSearch, productReview, user, translation) {
+        function CxApiService(auth, cart, cartData, checkout, checkoutDelivery, checkoutPayment, cms, pageMeta, featureConfig, globalMessage, translation, kyma, occEndpoints, product, productSearch, productReview, productReference, searchbox, routing, currency, language, baseSite, user, userAddress, userConsent, userOrder, userPayment, ngZone) {
             this.auth = auth;
+            this.cart = cart;
+            this.cartData = cartData;
+            this.checkout = checkout;
+            this.checkoutDelivery = checkoutDelivery;
+            this.checkoutPayment = checkoutPayment;
             this.cms = cms;
+            this.pageMeta = pageMeta;
+            this.featureConfig = featureConfig;
+            this.globalMessage = globalMessage;
+            this.translation = translation;
+            this.kyma = kyma;
+            this.occEndpoints = occEndpoints;
+            this.product = product;
+            this.productSearch = productSearch;
+            this.productReview = productReview;
+            this.productReference = productReference;
+            this.searchbox = searchbox;
             this.routing = routing;
             this.currency = currency;
             this.language = language;
             this.baseSite = baseSite;
-            this.product = product;
-            this.productSearch = productSearch;
-            this.productReview = productReview;
             this.user = user;
-            this.translation = translation;
+            this.userAddress = userAddress;
+            this.userConsent = userConsent;
+            this.userOrder = userOrder;
+            this.userPayment = userPayment;
+            this.ngZone = ngZone;
         }
         CxApiService.decorators = [
             { type: core.Injectable, args: [{
@@ -7620,18 +7637,35 @@
         /** @nocollapse */
         CxApiService.ctorParameters = function () { return [
             { type: core$1.AuthService, decorators: [{ type: core.Optional }] },
+            { type: core$1.CartService, decorators: [{ type: core.Optional }] },
+            { type: core$1.CartDataService, decorators: [{ type: core.Optional }] },
+            { type: core$1.CheckoutService, decorators: [{ type: core.Optional }] },
+            { type: core$1.CheckoutDeliveryService, decorators: [{ type: core.Optional }] },
+            { type: core$1.CheckoutPaymentService, decorators: [{ type: core.Optional }] },
             { type: core$1.CmsService, decorators: [{ type: core.Optional }] },
+            { type: core$1.PageMetaService, decorators: [{ type: core.Optional }] },
+            { type: core$1.FeatureConfigService, decorators: [{ type: core.Optional }] },
+            { type: core$1.GlobalMessageService, decorators: [{ type: core.Optional }] },
+            { type: core$1.TranslationService, decorators: [{ type: core.Optional }] },
+            { type: core$1.KymaService, decorators: [{ type: core.Optional }] },
+            { type: core$1.OccEndpointsService, decorators: [{ type: core.Optional }] },
+            { type: core$1.ProductService, decorators: [{ type: core.Optional }] },
+            { type: core$1.ProductSearchService, decorators: [{ type: core.Optional }] },
+            { type: core$1.ProductReviewService, decorators: [{ type: core.Optional }] },
+            { type: core$1.ProductReferenceService, decorators: [{ type: core.Optional }] },
+            { type: core$1.SearchboxService, decorators: [{ type: core.Optional }] },
             { type: core$1.RoutingService, decorators: [{ type: core.Optional }] },
             { type: core$1.CurrencyService, decorators: [{ type: core.Optional }] },
             { type: core$1.LanguageService, decorators: [{ type: core.Optional }] },
             { type: core$1.BaseSiteService, decorators: [{ type: core.Optional }] },
-            { type: core$1.ProductService, decorators: [{ type: core.Optional }] },
-            { type: core$1.ProductSearchService, decorators: [{ type: core.Optional }] },
-            { type: core$1.ProductReviewService, decorators: [{ type: core.Optional }] },
             { type: core$1.UserService, decorators: [{ type: core.Optional }] },
-            { type: core$1.TranslationService, decorators: [{ type: core.Optional }] }
+            { type: core$1.UserAddressService, decorators: [{ type: core.Optional }] },
+            { type: core$1.UserConsentService, decorators: [{ type: core.Optional }] },
+            { type: core$1.UserOrderService, decorators: [{ type: core.Optional }] },
+            { type: core$1.UserPaymentService, decorators: [{ type: core.Optional }] },
+            { type: core.NgZone }
         ]; };
-        /** @nocollapse */ CxApiService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CxApiService_Factory() { return new CxApiService(core.ɵɵinject(core$1.AuthService, 8), core.ɵɵinject(core$1.CmsService, 8), core.ɵɵinject(core$1.RoutingService, 8), core.ɵɵinject(core$1.CurrencyService, 8), core.ɵɵinject(core$1.LanguageService, 8), core.ɵɵinject(core$1.BaseSiteService, 8), core.ɵɵinject(core$1.ProductService, 8), core.ɵɵinject(core$1.ProductSearchService, 8), core.ɵɵinject(core$1.ProductReviewService, 8), core.ɵɵinject(core$1.UserService, 8), core.ɵɵinject(core$1.TranslationService, 8)); }, token: CxApiService, providedIn: "root" });
+        /** @nocollapse */ CxApiService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CxApiService_Factory() { return new CxApiService(core.ɵɵinject(core$1.AuthService, 8), core.ɵɵinject(core$1.CartService, 8), core.ɵɵinject(core$1.CartDataService, 8), core.ɵɵinject(core$1.CheckoutService, 8), core.ɵɵinject(core$1.CheckoutDeliveryService, 8), core.ɵɵinject(core$1.CheckoutPaymentService, 8), core.ɵɵinject(core$1.CmsService, 8), core.ɵɵinject(core$1.PageMetaService, 8), core.ɵɵinject(core$1.FeatureConfigService, 8), core.ɵɵinject(core$1.GlobalMessageService, 8), core.ɵɵinject(core$1.TranslationService, 8), core.ɵɵinject(core$1.KymaService, 8), core.ɵɵinject(core$1.OccEndpointsService, 8), core.ɵɵinject(core$1.ProductService, 8), core.ɵɵinject(core$1.ProductSearchService, 8), core.ɵɵinject(core$1.ProductReviewService, 8), core.ɵɵinject(core$1.ProductReferenceService, 8), core.ɵɵinject(core$1.SearchboxService, 8), core.ɵɵinject(core$1.RoutingService, 8), core.ɵɵinject(core$1.CurrencyService, 8), core.ɵɵinject(core$1.LanguageService, 8), core.ɵɵinject(core$1.BaseSiteService, 8), core.ɵɵinject(core$1.UserService, 8), core.ɵɵinject(core$1.UserAddressService, 8), core.ɵɵinject(core$1.UserConsentService, 8), core.ɵɵinject(core$1.UserOrderService, 8), core.ɵɵinject(core$1.UserPaymentService, 8), core.ɵɵinject(core.NgZone)); }, token: CxApiService, providedIn: "root" });
         return CxApiService;
     }());
 
