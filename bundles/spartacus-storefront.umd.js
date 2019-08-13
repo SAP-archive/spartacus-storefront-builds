@@ -7720,6 +7720,9 @@
                                 this.webElement = this.renderer.createElement(elementName);
                                 this.webElement.cxApi = __assign({}, this.injector.get(CxApiService), { CmsComponentData: this.getCmsDataForComponent() });
                                 this.renderer.appendChild(this.vcr.element.nativeElement.parentElement, this.webElement);
+                                if (this.cmsService.isLaunchInSmartEdit()) {
+                                    this.addSmartEditContract(this.webElement);
+                                }
                             }
                             return [2 /*return*/];
                     }
@@ -7788,7 +7791,7 @@
                 this.cmpRef.destroy();
             }
             if (this.webElement) {
-                this.renderer.removeChild(this.vcr.element.nativeElement.parentElement, this.webElement);
+                this.webElement.remove();
             }
         };
         ComponentWrapperDirective.decorators = [

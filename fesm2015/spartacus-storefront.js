@@ -6396,6 +6396,9 @@ class ComponentWrapperDirective {
                 this.webElement = this.renderer.createElement(elementName);
                 this.webElement.cxApi = Object.assign({}, this.injector.get(CxApiService), { CmsComponentData: this.getCmsDataForComponent() });
                 this.renderer.appendChild(this.vcr.element.nativeElement.parentElement, this.webElement);
+                if (this.cmsService.isLaunchInSmartEdit()) {
+                    this.addSmartEditContract(this.webElement);
+                }
             }
         });
     }
@@ -6445,7 +6448,7 @@ class ComponentWrapperDirective {
             this.cmpRef.destroy();
         }
         if (this.webElement) {
-            this.renderer.removeChild(this.vcr.element.nativeElement.parentElement, this.webElement);
+            this.webElement.remove();
         }
     }
 }
