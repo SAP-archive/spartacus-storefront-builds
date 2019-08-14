@@ -7450,17 +7450,22 @@ var ComponentMapperService = /** @class */ (function () {
             /** @type {?} */
             var script = _this.loadedWebComponents[path];
             if (!script) {
-                script = renderer.createElement('script');
-                _this.loadedWebComponents[path] = script;
-                script.setAttribute('src', path);
-                renderer.appendChild(_this.document.body, script);
-                if (isPlatformBrowser(_this.platform)) {
-                    script.onload = (/**
-                     * @return {?}
-                     */
-                    function () {
-                        script.onload = null;
-                    });
+                if (path) {
+                    script = renderer.createElement('script');
+                    _this.loadedWebComponents[path] = script;
+                    script.setAttribute('src', path);
+                    renderer.appendChild(_this.document.body, script);
+                    if (isPlatformBrowser(_this.platform)) {
+                        script.onload = (/**
+                         * @return {?}
+                         */
+                        function () {
+                            script.onload = null;
+                        });
+                    }
+                }
+                else {
+                    script = {};
                 }
             }
             if (script.onload) {

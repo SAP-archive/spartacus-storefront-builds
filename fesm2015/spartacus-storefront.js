@@ -6225,17 +6225,22 @@ class ComponentMapperService {
             /** @type {?} */
             let script = this.loadedWebComponents[path];
             if (!script) {
-                script = renderer.createElement('script');
-                this.loadedWebComponents[path] = script;
-                script.setAttribute('src', path);
-                renderer.appendChild(this.document.body, script);
-                if (isPlatformBrowser(this.platform)) {
-                    script.onload = (/**
-                     * @return {?}
-                     */
-                    () => {
-                        script.onload = null;
-                    });
+                if (path) {
+                    script = renderer.createElement('script');
+                    this.loadedWebComponents[path] = script;
+                    script.setAttribute('src', path);
+                    renderer.appendChild(this.document.body, script);
+                    if (isPlatformBrowser(this.platform)) {
+                        script.onload = (/**
+                         * @return {?}
+                         */
+                        () => {
+                            script.onload = null;
+                        });
+                    }
+                }
+                else {
+                    script = {};
                 }
             }
             if (script.onload) {
