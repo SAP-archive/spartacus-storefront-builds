@@ -2477,6 +2477,7 @@ SiteContextSelectorModule.decorators = [
                 providers: [SiteContextComponentService],
                 declarations: [SiteContextSelectorComponent, LanguageCurrencyComponent],
                 entryComponents: [SiteContextSelectorComponent, LanguageCurrencyComponent],
+                exports: [SiteContextSelectorComponent, LanguageCurrencyComponent],
             },] }
 ];
 
@@ -3258,6 +3259,7 @@ MiniCartModule.decorators = [
                     I18nModule,
                 ],
                 declarations: [MiniCartComponent],
+                exports: [MiniCartComponent],
                 entryComponents: [MiniCartComponent],
             },] }
 ];
@@ -5484,7 +5486,7 @@ AddressFormModule.decorators = [
                 ],
                 declarations: [AddressFormComponent, SuggestedAddressDialogComponent],
                 entryComponents: [SuggestedAddressDialogComponent],
-                exports: [AddressFormComponent],
+                exports: [AddressFormComponent, SuggestedAddressDialogComponent],
             },] }
 ];
 
@@ -5903,6 +5905,7 @@ HamburgerMenuModule.decorators = [
                     }))),
                 ],
                 declarations: [HamburgerMenuComponent],
+                exports: [HamburgerMenuComponent],
                 entryComponents: [HamburgerMenuComponent],
             },] }
 ];
@@ -8124,6 +8127,7 @@ BannerCarouselModule.decorators = [
                 ],
                 declarations: [BannerCarouselComponent],
                 entryComponents: [BannerCarouselComponent],
+                exports: [BannerCarouselComponent],
             },] }
 ];
 
@@ -8180,6 +8184,7 @@ BannerModule.decorators = [
                 ],
                 declarations: [BannerComponent],
                 entryComponents: [BannerComponent],
+                exports: [BannerComponent],
             },] }
 ];
 
@@ -8753,7 +8758,7 @@ CloseAccountModule.decorators = [
                     }))),
                 ],
                 declarations: [CloseAccountComponent, CloseAccountModalComponent],
-                exports: [CloseAccountComponent],
+                exports: [CloseAccountComponent, CloseAccountModalComponent],
                 entryComponents: [CloseAccountComponent, CloseAccountModalComponent],
             },] }
 ];
@@ -8982,7 +8987,7 @@ ConsentManagementModule.decorators = [
                     I18nModule,
                 ],
                 declarations: [ConsentManagementComponent, ConsentManagementFormComponent],
-                exports: [ConsentManagementComponent],
+                exports: [ConsentManagementComponent, ConsentManagementFormComponent],
                 entryComponents: [ConsentManagementComponent],
             },] }
 ];
@@ -10059,7 +10064,7 @@ UpdateEmailModule.decorators = [
                     I18nModule,
                 ],
                 declarations: [UpdateEmailFormComponent, UpdateEmailComponent],
-                exports: [UpdateEmailComponent],
+                exports: [UpdateEmailComponent, UpdateEmailFormComponent],
                 entryComponents: [UpdateEmailComponent],
             },] }
 ];
@@ -10257,7 +10262,7 @@ UpdatePasswordModule.decorators = [
                     I18nModule,
                 ],
                 declarations: [UpdatePasswordComponent, UpdatePasswordFormComponent],
-                exports: [UpdatePasswordComponent],
+                exports: [UpdatePasswordComponent, UpdatePasswordFormComponent],
                 entryComponents: [UpdatePasswordComponent],
             },] }
 ];
@@ -10447,7 +10452,7 @@ UpdateProfileModule.decorators = [
                     I18nModule,
                 ],
                 declarations: [UpdateProfileComponent, UpdateProfileFormComponent],
-                exports: [UpdateProfileComponent],
+                exports: [UpdateProfileComponent, UpdateProfileFormComponent],
                 entryComponents: [UpdateProfileComponent],
             },] }
 ];
@@ -10547,6 +10552,7 @@ BreadcrumbModule.decorators = [
                     CmsPageTitleModule,
                 ],
                 declarations: [BreadcrumbComponent],
+                exports: [BreadcrumbComponent],
                 entryComponents: [BreadcrumbComponent],
             },] }
 ];
@@ -12364,6 +12370,7 @@ ProductIntroModule.decorators = [
                     }))),
                 ],
                 declarations: [ProductIntroComponent],
+                exports: [ProductIntroComponent],
                 entryComponents: [ProductIntroComponent],
             },] }
 ];
@@ -12895,8 +12902,10 @@ ProductListModule.decorators = [
                 ],
                 exports: [
                     ProductListComponent,
+                    ProductFacetNavigationComponent,
                     ProductListItemComponent,
                     ProductGridItemComponent,
+                    ProductViewComponent,
                 ],
                 entryComponents: [ProductListComponent, ProductFacetNavigationComponent],
             },] }

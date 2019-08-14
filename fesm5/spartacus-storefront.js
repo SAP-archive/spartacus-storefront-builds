@@ -3138,6 +3138,7 @@ var SiteContextSelectorModule = /** @class */ (function () {
                     providers: [SiteContextComponentService],
                     declarations: [SiteContextSelectorComponent, LanguageCurrencyComponent],
                     entryComponents: [SiteContextSelectorComponent, LanguageCurrencyComponent],
+                    exports: [SiteContextSelectorComponent, LanguageCurrencyComponent],
                 },] }
     ];
     return SiteContextSelectorModule;
@@ -4071,6 +4072,7 @@ var MiniCartModule = /** @class */ (function () {
                         I18nModule,
                     ],
                     declarations: [MiniCartComponent],
+                    exports: [MiniCartComponent],
                     entryComponents: [MiniCartComponent],
                 },] }
     ];
@@ -6565,7 +6567,7 @@ var AddressFormModule = /** @class */ (function () {
                     ],
                     declarations: [AddressFormComponent, SuggestedAddressDialogComponent],
                     entryComponents: [SuggestedAddressDialogComponent],
-                    exports: [AddressFormComponent],
+                    exports: [AddressFormComponent, SuggestedAddressDialogComponent],
                 },] }
     ];
     return AddressFormModule;
@@ -7043,6 +7045,7 @@ var HamburgerMenuModule = /** @class */ (function () {
                         }))),
                     ],
                     declarations: [HamburgerMenuComponent],
+                    exports: [HamburgerMenuComponent],
                     entryComponents: [HamburgerMenuComponent],
                 },] }
     ];
@@ -9694,6 +9697,7 @@ var BannerCarouselModule = /** @class */ (function () {
                     ],
                     declarations: [BannerCarouselComponent],
                     entryComponents: [BannerCarouselComponent],
+                    exports: [BannerCarouselComponent],
                 },] }
     ];
     return BannerCarouselModule;
@@ -9751,6 +9755,7 @@ var BannerModule = /** @class */ (function () {
                     ],
                     declarations: [BannerComponent],
                     entryComponents: [BannerComponent],
+                    exports: [BannerComponent],
                 },] }
     ];
     return BannerModule;
@@ -10407,7 +10412,7 @@ var CloseAccountModule = /** @class */ (function () {
                         }))),
                     ],
                     declarations: [CloseAccountComponent, CloseAccountModalComponent],
-                    exports: [CloseAccountComponent],
+                    exports: [CloseAccountComponent, CloseAccountModalComponent],
                     entryComponents: [CloseAccountComponent, CloseAccountModalComponent],
                 },] }
     ];
@@ -10692,7 +10697,7 @@ var ConsentManagementModule = /** @class */ (function () {
                         I18nModule,
                     ],
                     declarations: [ConsentManagementComponent, ConsentManagementFormComponent],
-                    exports: [ConsentManagementComponent],
+                    exports: [ConsentManagementComponent, ConsentManagementFormComponent],
                     entryComponents: [ConsentManagementComponent],
                 },] }
     ];
@@ -11924,7 +11929,7 @@ var UpdateEmailModule = /** @class */ (function () {
                         I18nModule,
                     ],
                     declarations: [UpdateEmailFormComponent, UpdateEmailComponent],
-                    exports: [UpdateEmailComponent],
+                    exports: [UpdateEmailComponent, UpdateEmailFormComponent],
                     entryComponents: [UpdateEmailComponent],
                 },] }
     ];
@@ -12159,7 +12164,7 @@ var UpdatePasswordModule = /** @class */ (function () {
                         I18nModule,
                     ],
                     declarations: [UpdatePasswordComponent, UpdatePasswordFormComponent],
-                    exports: [UpdatePasswordComponent],
+                    exports: [UpdatePasswordComponent, UpdatePasswordFormComponent],
                     entryComponents: [UpdatePasswordComponent],
                 },] }
     ];
@@ -12378,7 +12383,7 @@ var UpdateProfileModule = /** @class */ (function () {
                         I18nModule,
                     ],
                     declarations: [UpdateProfileComponent, UpdateProfileFormComponent],
-                    exports: [UpdateProfileComponent],
+                    exports: [UpdateProfileComponent, UpdateProfileFormComponent],
                     entryComponents: [UpdateProfileComponent],
                 },] }
     ];
@@ -12491,6 +12496,7 @@ var BreadcrumbModule = /** @class */ (function () {
                         CmsPageTitleModule,
                     ],
                     declarations: [BreadcrumbComponent],
+                    exports: [BreadcrumbComponent],
                     entryComponents: [BreadcrumbComponent],
                 },] }
     ];
@@ -14751,6 +14757,7 @@ var ProductIntroModule = /** @class */ (function () {
                         }))),
                     ],
                     declarations: [ProductIntroComponent],
+                    exports: [ProductIntroComponent],
                     entryComponents: [ProductIntroComponent],
                 },] }
     ];
@@ -15393,8 +15400,10 @@ var ProductListModule = /** @class */ (function () {
                     ],
                     exports: [
                         ProductListComponent,
+                        ProductFacetNavigationComponent,
                         ProductListItemComponent,
                         ProductGridItemComponent,
+                        ProductViewComponent,
                     ],
                     entryComponents: [ProductListComponent, ProductFacetNavigationComponent],
                 },] }

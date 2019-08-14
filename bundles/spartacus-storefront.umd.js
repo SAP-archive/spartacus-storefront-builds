@@ -3239,6 +3239,7 @@
                         providers: [SiteContextComponentService],
                         declarations: [SiteContextSelectorComponent, LanguageCurrencyComponent],
                         entryComponents: [SiteContextSelectorComponent, LanguageCurrencyComponent],
+                        exports: [SiteContextSelectorComponent, LanguageCurrencyComponent],
                     },] }
         ];
         return SiteContextSelectorModule;
@@ -4172,6 +4173,7 @@
                             core$1.I18nModule,
                         ],
                         declarations: [MiniCartComponent],
+                        exports: [MiniCartComponent],
                         entryComponents: [MiniCartComponent],
                     },] }
         ];
@@ -6666,7 +6668,7 @@
                         ],
                         declarations: [AddressFormComponent, SuggestedAddressDialogComponent],
                         entryComponents: [SuggestedAddressDialogComponent],
-                        exports: [AddressFormComponent],
+                        exports: [AddressFormComponent, SuggestedAddressDialogComponent],
                     },] }
         ];
         return AddressFormModule;
@@ -7144,6 +7146,7 @@
                             }))),
                         ],
                         declarations: [HamburgerMenuComponent],
+                        exports: [HamburgerMenuComponent],
                         entryComponents: [HamburgerMenuComponent],
                     },] }
         ];
@@ -9795,6 +9798,7 @@
                         ],
                         declarations: [BannerCarouselComponent],
                         entryComponents: [BannerCarouselComponent],
+                        exports: [BannerCarouselComponent],
                     },] }
         ];
         return BannerCarouselModule;
@@ -9852,6 +9856,7 @@
                         ],
                         declarations: [BannerComponent],
                         entryComponents: [BannerComponent],
+                        exports: [BannerComponent],
                     },] }
         ];
         return BannerModule;
@@ -10508,7 +10513,7 @@
                             }))),
                         ],
                         declarations: [CloseAccountComponent, CloseAccountModalComponent],
-                        exports: [CloseAccountComponent],
+                        exports: [CloseAccountComponent, CloseAccountModalComponent],
                         entryComponents: [CloseAccountComponent, CloseAccountModalComponent],
                     },] }
         ];
@@ -10793,7 +10798,7 @@
                             core$1.I18nModule,
                         ],
                         declarations: [ConsentManagementComponent, ConsentManagementFormComponent],
-                        exports: [ConsentManagementComponent],
+                        exports: [ConsentManagementComponent, ConsentManagementFormComponent],
                         entryComponents: [ConsentManagementComponent],
                     },] }
         ];
@@ -12025,7 +12030,7 @@
                             core$1.I18nModule,
                         ],
                         declarations: [UpdateEmailFormComponent, UpdateEmailComponent],
-                        exports: [UpdateEmailComponent],
+                        exports: [UpdateEmailComponent, UpdateEmailFormComponent],
                         entryComponents: [UpdateEmailComponent],
                     },] }
         ];
@@ -12260,7 +12265,7 @@
                             core$1.I18nModule,
                         ],
                         declarations: [UpdatePasswordComponent, UpdatePasswordFormComponent],
-                        exports: [UpdatePasswordComponent],
+                        exports: [UpdatePasswordComponent, UpdatePasswordFormComponent],
                         entryComponents: [UpdatePasswordComponent],
                     },] }
         ];
@@ -12479,7 +12484,7 @@
                             core$1.I18nModule,
                         ],
                         declarations: [UpdateProfileComponent, UpdateProfileFormComponent],
-                        exports: [UpdateProfileComponent],
+                        exports: [UpdateProfileComponent, UpdateProfileFormComponent],
                         entryComponents: [UpdateProfileComponent],
                     },] }
         ];
@@ -12592,6 +12597,7 @@
                             core$1.CmsPageTitleModule,
                         ],
                         declarations: [BreadcrumbComponent],
+                        exports: [BreadcrumbComponent],
                         entryComponents: [BreadcrumbComponent],
                     },] }
         ];
@@ -14852,6 +14858,7 @@
                             }))),
                         ],
                         declarations: [ProductIntroComponent],
+                        exports: [ProductIntroComponent],
                         entryComponents: [ProductIntroComponent],
                     },] }
         ];
@@ -15494,8 +15501,10 @@
                         ],
                         exports: [
                             ProductListComponent,
+                            ProductFacetNavigationComponent,
                             ProductListItemComponent,
                             ProductGridItemComponent,
+                            ProductViewComponent,
                         ],
                         entryComponents: [ProductListComponent, ProductFacetNavigationComponent],
                     },] }
