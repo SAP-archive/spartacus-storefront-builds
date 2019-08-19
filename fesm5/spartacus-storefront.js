@@ -11883,7 +11883,11 @@ var UpdateEmailComponent = /** @class */ (function () {
                 params: { newUid: this.newUid },
             }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
             this.authService.logout();
-            this.routingService.go({ cxRoute: 'login' });
+            this.routingService.go({ cxRoute: 'login' }, null, {
+                state: {
+                    newUid: this.newUid,
+                },
+            });
         }
     };
     /**
@@ -15950,11 +15954,12 @@ var ProductImagesModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var LoginFormComponent = /** @class */ (function () {
-    function LoginFormComponent(auth, globalMessageService, fb, authRedirectService) {
+    function LoginFormComponent(auth, globalMessageService, fb, authRedirectService, winRef) {
         this.auth = auth;
         this.globalMessageService = globalMessageService;
         this.fb = fb;
         this.authRedirectService = authRedirectService;
+        this.winRef = winRef;
     }
     /**
      * @return {?}
@@ -15967,6 +15972,15 @@ var LoginFormComponent = /** @class */ (function () {
             userId: ['', [Validators.required, CustomFormValidators.emailValidator]],
             password: ['', Validators.required],
         });
+        // TODO(issue:#4055) Deprecated since 1.1.0
+        if (this.winRef && this.winRef.nativeWindow) {
+            /** @type {?} */
+            var routeState = this.winRef.nativeWindow.history &&
+                this.winRef.nativeWindow.history.state;
+            if (routeState && routeState['newUid'] && routeState['newUid'].length) {
+                this.prefillForm('userId', routeState['newUid']);
+            }
+        }
     };
     /**
      * @return {?}
@@ -15976,9 +15990,9 @@ var LoginFormComponent = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        /** @type {?} */
-        var userId = this.emailToLowerCase();
-        this.auth.authorize(userId, this.form.controls.password.value);
+        var _a = this.form.controls, userId = _a.userId, password = _a.password;
+        this.auth.authorize(userId.value.toLowerCase(), // backend accepts lowercase emails only
+        password.value);
         if (!this.sub) {
             this.sub = this.auth.getUserToken().subscribe((/**
              * @param {?} data
@@ -15992,27 +16006,6 @@ var LoginFormComponent = /** @class */ (function () {
             }));
         }
     };
-    /*
-     * Change the inputed email to lowercase because
-     * the backend only accepts lowercase emails
-     */
-    /*
-       * Change the inputed email to lowercase because
-       * the backend only accepts lowercase emails
-       */
-    /**
-     * @return {?}
-     */
-    LoginFormComponent.prototype.emailToLowerCase = /*
-       * Change the inputed email to lowercase because
-       * the backend only accepts lowercase emails
-       */
-    /**
-     * @return {?}
-     */
-    function () {
-        return this.form.controls.userId.value.toLowerCase();
-    };
     /**
      * @return {?}
      */
@@ -16023,6 +16016,25 @@ var LoginFormComponent = /** @class */ (function () {
         if (this.sub) {
             this.sub.unsubscribe();
         }
+    };
+    /**
+     * @private
+     * @param {?} field
+     * @param {?} value
+     * @return {?}
+     */
+    LoginFormComponent.prototype.prefillForm = /**
+     * @private
+     * @param {?} field
+     * @param {?} value
+     * @return {?}
+     */
+    function (field, value) {
+        var _a;
+        this.form.patchValue((_a = {},
+            _a[field] = value,
+            _a));
+        this.form.get(field).markAsTouched(); // this action will check field validity on load
     };
     LoginFormComponent.decorators = [
         { type: Component, args: [{
@@ -16035,7 +16047,8 @@ var LoginFormComponent = /** @class */ (function () {
         { type: AuthService },
         { type: GlobalMessageService },
         { type: FormBuilder },
-        { type: AuthRedirectService }
+        { type: AuthRedirectService },
+        { type: WindowRef }
     ]; };
     return LoginFormComponent;
 }());
