@@ -6725,7 +6725,22 @@ class PageLayoutService {
                 result = handler.handle(result, pageTemplate, section, breakpoint);
             }
             return result;
-        })), distinctUntilChanged());
+        })), distinctUntilChanged((/**
+         * @param {?} a
+         * @param {?} b
+         * @return {?}
+         */
+        (a, b) => {
+            if (a.length !== b.length) {
+                return false;
+            }
+            for (let i = 0; i < a.length; i++) {
+                if (a[i] !== b[i]) {
+                    return false;
+                }
+            }
+            return true;
+        })));
     }
     /**
      * @private
@@ -6738,7 +6753,13 @@ class PageLayoutService {
         /** @type {?} */
         const config = this.getSlotConfig(page.template, 'slots', section, breakpoint);
         if (config && config.slots) {
-            return config.slots;
+            /** @type {?} */
+            const pageSlots = Object.keys(page.slots);
+            return config.slots.filter((/**
+             * @param {?} slot
+             * @return {?}
+             */
+            slot => pageSlots.includes(slot)));
         }
         else if (!section) {
             this.logMissingLayoutConfig(page);

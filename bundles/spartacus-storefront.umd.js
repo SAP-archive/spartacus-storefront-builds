@@ -8089,7 +8089,22 @@
                     finally { if (e_1) throw e_1.error; }
                 }
                 return result;
-            })), operators.distinctUntilChanged());
+            })), operators.distinctUntilChanged((/**
+             * @param {?} a
+             * @param {?} b
+             * @return {?}
+             */
+            function (a, b) {
+                if (a.length !== b.length) {
+                    return false;
+                }
+                for (var i = 0; i < a.length; i++) {
+                    if (a[i] !== b[i]) {
+                        return false;
+                    }
+                }
+                return true;
+            })));
         };
         /**
          * @private
@@ -8109,7 +8124,13 @@
             /** @type {?} */
             var config = this.getSlotConfig(page.template, 'slots', section, breakpoint);
             if (config && config.slots) {
-                return config.slots;
+                /** @type {?} */
+                var pageSlots_1 = Object.keys(page.slots);
+                return config.slots.filter((/**
+                 * @param {?} slot
+                 * @return {?}
+                 */
+                function (slot) { return pageSlots_1.includes(slot); }));
             }
             else if (!section) {
                 this.logMissingLayoutConfig(page);
