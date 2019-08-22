@@ -7898,7 +7898,7 @@ class CmsPageGuard {
      * @return {?}
      */
     resolveCmsPageLogic(pageContext, route, state) {
-        return this.cmsService.getPageComponentTypes(pageContext).pipe(switchMap((/**
+        return this.cmsService.getPageComponentTypes(pageContext).pipe(take(1), switchMap((/**
          * @param {?} componentTypes
          * @return {?}
          */

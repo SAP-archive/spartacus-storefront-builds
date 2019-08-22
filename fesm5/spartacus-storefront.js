@@ -9440,7 +9440,7 @@ var CmsPageGuard = /** @class */ (function () {
      */
     function (pageContext, route, state) {
         var _this = this;
-        return this.cmsService.getPageComponentTypes(pageContext).pipe(switchMap((/**
+        return this.cmsService.getPageComponentTypes(pageContext).pipe(take(1), switchMap((/**
          * @param {?} componentTypes
          * @return {?}
          */

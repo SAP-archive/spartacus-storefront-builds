@@ -9541,7 +9541,7 @@
          */
         function (pageContext, route, state) {
             var _this = this;
-            return this.cmsService.getPageComponentTypes(pageContext).pipe(operators.switchMap((/**
+            return this.cmsService.getPageComponentTypes(pageContext).pipe(operators.take(1), operators.switchMap((/**
              * @param {?} componentTypes
              * @return {?}
              */
