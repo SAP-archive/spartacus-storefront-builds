@@ -17098,7 +17098,7 @@
                             core$1.CheckoutModule.forRoot(),
                             core$1.UserModule.forRoot(),
                             core$1.ProductModule.forRoot(),
-                            core$1.FeaturesConfigModule.forRoot(),
+                            core$1.FeaturesConfigModule.forRoot('1.0'),
                             LayoutModule,
                         ],
                         exports: [LayoutModule],

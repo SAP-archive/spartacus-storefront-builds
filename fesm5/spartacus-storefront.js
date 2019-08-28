@@ -16997,7 +16997,7 @@ var StorefrontFoundationModule = /** @class */ (function () {
                         CheckoutModule.forRoot(),
                         UserModule.forRoot(),
                         ProductModule.forRoot(),
-                        FeaturesConfigModule.forRoot(),
+                        FeaturesConfigModule.forRoot('1.0'),
                         LayoutModule,
                     ],
                     exports: [LayoutModule],
