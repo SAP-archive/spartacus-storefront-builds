@@ -16275,12 +16275,19 @@ var LogoutModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var RegisterComponent = /** @class */ (function () {
-    function RegisterComponent(auth, authRedirectService, userService, globalMessageService, fb) {
+    /**
+     * @deprecated since 1.1.0
+     *
+     * TODO(issue:4237) Register flow
+     */
+    function RegisterComponent(auth, authRedirectService, userService, globalMessageService, fb, router, featureConfig) {
         this.auth = auth;
         this.authRedirectService = authRedirectService;
         this.userService = userService;
         this.globalMessageService = globalMessageService;
         this.fb = fb;
+        this.router = router;
+        this.featureConfig = featureConfig;
         this.subscription = new Subscription();
         this.userRegistrationForm = this.fb.group({
             titleCode: [''],
@@ -16295,6 +16302,8 @@ var RegisterComponent = /** @class */ (function () {
             newsletter: [false],
             termsandconditions: [false, Validators.requiredTrue],
         }, { validator: this.matchPassword });
+        // TODO(issue:4237) Register flow
+        this.isNewRegisterFlowEnabled = this.featureConfig && this.featureConfig.isLevel('1.1');
     }
     /**
      * @return {?}
@@ -16313,34 +16322,59 @@ var RegisterComponent = /** @class */ (function () {
                 _this.userService.loadTitles();
             }
         })));
-        this.subscription.add(this.auth.getUserToken().subscribe((/**
-         * @param {?} data
-         * @return {?}
-         */
-        function (data) {
-            if (data && data.access_token) {
-                _this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
-                _this.authRedirectService.redirect();
+        // TODO(issue:4237) Register flow
+        if (this.isNewRegisterFlowEnabled) {
+            this.loading$ = this.userService.getRegisterUserResultLoading();
+            this.registerUserProcessInit();
+        }
+        else {
+            if (this.auth && this.authRedirectService) {
+                this.subscription.add(this.userService
+                    .getRegisterUserResultSuccess()
+                    .subscribe((/**
+                 * @param {?} success
+                 * @return {?}
+                 */
+                function (success) {
+                    if (success) {
+                        var _a = _this.collectDataFromRegisterForm(_this.userRegistrationForm.value), uid = _a.uid, password = _a.password;
+                        _this.auth.authorize(uid, password);
+                    }
+                })));
+                this.subscription.add(this.auth.getUserToken().subscribe((/**
+                 * @param {?} data
+                 * @return {?}
+                 */
+                function (data) {
+                    if (data && data.access_token) {
+                        _this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
+                        _this.authRedirectService.redirect();
+                    }
+                })));
             }
-        })));
+        }
         // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
         this.subscription.add(this.globalMessageService
             .get()
             .pipe(filter((/**
-         * @param {?} data
+         * @param {?} messages
          * @return {?}
          */
-        function (data) { return Object.keys(data).length > 0; })))
+        function (messages) { return !!Object.keys(messages).length; })))
             .subscribe((/**
          * @param {?} globalMessageEntities
          * @return {?}
          */
         function (globalMessageEntities) {
-            if (globalMessageEntities[GlobalMessageType.MSG_TYPE_ERROR].some((/**
-             * @param {?} message
-             * @return {?}
-             */
-            function (message) { return message === 'This field is required.'; }))) {
+            /** @type {?} */
+            var messages = globalMessageEntities &&
+                globalMessageEntities[GlobalMessageType.MSG_TYPE_ERROR];
+            if (messages &&
+                messages.some((/**
+                 * @param {?} message
+                 * @return {?}
+                 */
+                function (message) { return message === 'This field is required.'; }))) {
                 _this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
                 _this.globalMessageService.add({ key: 'register.titleRequired' }, GlobalMessageType.MSG_TYPE_ERROR);
             }
@@ -16353,17 +16387,71 @@ var RegisterComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.emailToLowerCase();
-        var _a = this.userRegistrationForm.value, firstName = _a.firstName, lastName = _a.lastName, email = _a.email, password = _a.password, titleCode = _a.titleCode;
-        /** @type {?} */
-        var userRegisterFormData = {
+        this.userService.register(this.collectDataFromRegisterForm(this.userRegistrationForm.value));
+    };
+    /**
+     * @param {?} title
+     * @return {?}
+     */
+    RegisterComponent.prototype.titleSelected = /**
+     * @param {?} title
+     * @return {?}
+     */
+    function (title) {
+        this.userRegistrationForm['controls'].titleCode.setValue(title.code);
+    };
+    /**
+     * @param {?} formData
+     * @return {?}
+     */
+    RegisterComponent.prototype.collectDataFromRegisterForm = /**
+     * @param {?} formData
+     * @return {?}
+     */
+    function (formData) {
+        var firstName = formData.firstName, lastName = formData.lastName, email = formData.email, password = formData.password, titleCode = formData.titleCode;
+        return {
             firstName: firstName,
             lastName: lastName,
-            uid: email,
+            uid: email.toLowerCase(),
             password: password,
             titleCode: titleCode,
         };
-        this.userService.register(userRegisterFormData);
+    };
+    /**
+     * @private
+     * @param {?} success
+     * @return {?}
+     */
+    RegisterComponent.prototype.onRegisterUserSuccess = /**
+     * @private
+     * @param {?} success
+     * @return {?}
+     */
+    function (success) {
+        if (this.router && success) {
+            this.router.go('login');
+            this.globalMessageService.add({ key: 'register.postRegisterMessage' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
+        }
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    RegisterComponent.prototype.registerUserProcessInit = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.userService.resetRegisterUserProcessState();
+        this.subscription.add(this.userService.getRegisterUserResultSuccess().subscribe((/**
+         * @param {?} success
+         * @return {?}
+         */
+        function (success) {
+            _this.onRegisterUserSuccess(success);
+        })));
     };
     /**
      * @private
@@ -16380,27 +16468,6 @@ var RegisterComponent = /** @class */ (function () {
             return { NotEqual: true };
         }
     };
-    /*
-     * Change the inputed email to lowercase because
-     * the backend only accepts lowercase emails
-     */
-    /*
-       * Change the inputed email to lowercase because
-       * the backend only accepts lowercase emails
-       */
-    /**
-     * @return {?}
-     */
-    RegisterComponent.prototype.emailToLowerCase = /*
-       * Change the inputed email to lowercase because
-       * the backend only accepts lowercase emails
-       */
-    /**
-     * @return {?}
-     */
-    function () {
-        this.userRegistrationForm.value.email = this.userRegistrationForm.value.email.toLowerCase();
-    };
     /**
      * @return {?}
      */
@@ -16409,11 +16476,12 @@ var RegisterComponent = /** @class */ (function () {
      */
     function () {
         this.subscription.unsubscribe();
+        this.userService.resetRegisterUserProcessState();
     };
     RegisterComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-register',
-                    template: "<section class=\"cx-page-section container\">\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of (titles$ | async)\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  (userRegistrationForm.get('email').errors?.email ||\n                    userRegistrationForm.get('email').errors?.InvalidEmail) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"newsletter\"\n                  class=\"form-check-input\"\n                  formControlName=\"newsletter\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.emailMarketing' | cxTranslate }}\n                </span>\n              </label>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            [disabled]=\"userRegistrationForm.invalid\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n"
+                    template: "<section\n  class=\"cx-page-section container\"\n  *ngIf=\"!(loading$ | async); else loading\"\n>\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of (titles$ | async)\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('email').errors &&\n                  (userRegistrationForm.get('email').errors['email'] ||\n                    userRegistrationForm.get('email').errors['InvalidEmail']) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"newsletter\"\n                  class=\"form-check-input\"\n                  formControlName=\"newsletter\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.emailMarketing' | cxTranslate }}\n                </span>\n              </label>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            [disabled]=\"userRegistrationForm.invalid\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -16422,7 +16490,9 @@ var RegisterComponent = /** @class */ (function () {
         { type: AuthRedirectService },
         { type: UserService },
         { type: GlobalMessageService },
-        { type: FormBuilder }
+        { type: FormBuilder },
+        { type: RoutingService },
+        { type: FeatureConfigService }
     ]; };
     return RegisterComponent;
 }());
@@ -16451,6 +16521,7 @@ var RegisterComponentModule = /** @class */ (function () {
                             },
                         }))),
                         I18nModule,
+                        SpinnerModule,
                     ],
                     declarations: [RegisterComponent],
                     exports: [RegisterComponent],
