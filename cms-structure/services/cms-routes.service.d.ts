@@ -15,6 +15,6 @@ export declare class CmsRoutesService {
      * @param pageContext
      * @param currentUrl
      */
-    handleCmsRoutesInGuard(pageContext: PageContext, componentTypes: string[], currentUrl: string): boolean;
+    handleCmsRoutesInGuard(pageContext: PageContext, componentTypes: string[], currentUrl: string, currentPageLabel: string): boolean;
     private updateRouting;
 }

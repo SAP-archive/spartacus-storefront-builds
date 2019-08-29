@@ -9336,6 +9336,7 @@ var CmsRoutesService = /** @class */ (function () {
      * @param {?} pageContext
      * @param {?} componentTypes
      * @param {?} currentUrl
+     * @param {?} currentPageLabel
      * @return {?}
      */
     CmsRoutesService.prototype.handleCmsRoutesInGuard = /**
@@ -9347,13 +9348,14 @@ var CmsRoutesService = /** @class */ (function () {
      * @param {?} pageContext
      * @param {?} componentTypes
      * @param {?} currentUrl
+     * @param {?} currentPageLabel
      * @return {?}
      */
-    function (pageContext, componentTypes, currentUrl) {
+    function (pageContext, componentTypes, currentUrl, currentPageLabel) {
         /** @type {?} */
         var componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
         if (componentRoutes.length) {
-            if (this.updateRouting(pageContext, componentRoutes)) {
+            if (this.updateRouting(pageContext, currentPageLabel, componentRoutes)) {
                 this.router.navigateByUrl(currentUrl);
                 return false;
             }
@@ -9363,26 +9365,31 @@ var CmsRoutesService = /** @class */ (function () {
     /**
      * @private
      * @param {?} pageContext
+     * @param {?} pageLabel
      * @param {?} routes
      * @return {?}
      */
     CmsRoutesService.prototype.updateRouting = /**
      * @private
      * @param {?} pageContext
+     * @param {?} pageLabel
      * @param {?} routes
      * @return {?}
      */
-    function (pageContext, routes) {
+    function (pageContext, pageLabel, routes) {
         if (pageContext.type === PageType.CONTENT_PAGE &&
-            pageContext.id.startsWith('/') &&
-            pageContext.id.length > 1) {
+            pageLabel.startsWith('/') &&
+            pageLabel.length > 1) {
             /** @type {?} */
             var newRoute = {
-                path: pageContext.id.substr(1),
+                path: pageLabel.substr(1),
                 component: PageLayoutComponent,
                 children: routes,
                 data: {
-                    cxCmsRouteContext: pageContext,
+                    cxCmsRouteContext: {
+                        type: pageContext.type,
+                        id: pageLabel,
+                    },
                 },
             };
             this.router.resetConfig(__spread([newRoute], this.router.config));
@@ -9434,21 +9441,22 @@ var CmsPageGuard = /** @class */ (function () {
          * @return {?}
          */
         function (pageContext) {
-            return _this.cmsService.hasPage(pageContext, true).pipe(first(), withLatestFrom(of(pageContext)));
+            return _this.cmsService.getPage(pageContext, true).pipe(first(), withLatestFrom(of(pageContext)));
         })), switchMap((/**
          * @param {?} __0
          * @return {?}
          */
         function (_a) {
-            var _b = __read(_a, 2), hasPage = _b[0], pageContext = _b[1];
-            return hasPage
-                ? _this.resolveCmsPageLogic(pageContext, route, state)
+            var _b = __read(_a, 2), pageData = _b[0], pageContext = _b[1];
+            return pageData
+                ? _this.resolveCmsPageLogic(pageContext, pageData, route, state)
                 : _this.handleNotFoundPage(pageContext, route, state);
         })));
     };
     /**
      * @private
      * @param {?} pageContext
+     * @param {?} pageData
      * @param {?} route
      * @param {?} state
      * @return {?}
@@ -9456,11 +9464,12 @@ var CmsPageGuard = /** @class */ (function () {
     CmsPageGuard.prototype.resolveCmsPageLogic = /**
      * @private
      * @param {?} pageContext
+     * @param {?} pageData
      * @param {?} route
      * @param {?} state
      * @return {?}
      */
-    function (pageContext, route, state) {
+    function (pageContext, pageData, route, state) {
         var _this = this;
         return this.cmsService.getPageComponentTypes(pageContext).pipe(take(1), switchMap((/**
          * @param {?} componentTypes
@@ -9485,10 +9494,12 @@ var CmsPageGuard = /** @class */ (function () {
          */
         function (_a) {
             var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
+            /** @type {?} */
+            var pageLabel = pageData.label || pageContext.id;
             if (canActivate === true &&
                 !route.data.cxCmsRouteContext &&
-                !_this.cmsRoutes.cmsRouteExist(pageContext.id)) {
-                return _this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url);
+                !_this.cmsRoutes.cmsRouteExist(pageLabel)) {
+                return _this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url, pageLabel);
             }
             return canActivate;
         })));
@@ -9514,12 +9525,12 @@ var CmsPageGuard = /** @class */ (function () {
             type: PageType.CONTENT_PAGE,
             id: this.semanticPathService.get('notFound'),
         };
-        return this.cmsService.hasPage(notFoundCmsPageContext).pipe(switchMap((/**
-         * @param {?} hasNotFoundPage
+        return this.cmsService.getPage(notFoundCmsPageContext).pipe(switchMap((/**
+         * @param {?} notFoundPage
          * @return {?}
          */
-        function (hasNotFoundPage) {
-            if (hasNotFoundPage) {
+        function (notFoundPage) {
+            if (notFoundPage) {
                 return _this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(tap((/**
                  * @param {?} notFoundIndex
                  * @return {?}
@@ -9541,7 +9552,9 @@ var CmsPageGuard = /** @class */ (function () {
                 })), switchMap((/**
                  * @return {?}
                  */
-                function () { return _this.resolveCmsPageLogic(pageContext, route, state); })));
+                function () {
+                    return _this.resolveCmsPageLogic(pageContext, notFoundPage, route, state);
+                })));
             }
             return of(false);
         })));

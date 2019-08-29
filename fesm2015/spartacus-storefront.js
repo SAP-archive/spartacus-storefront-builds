@@ -7820,13 +7820,14 @@ class CmsRoutesService {
      * @param {?} pageContext
      * @param {?} componentTypes
      * @param {?} currentUrl
+     * @param {?} currentPageLabel
      * @return {?}
      */
-    handleCmsRoutesInGuard(pageContext, componentTypes, currentUrl) {
+    handleCmsRoutesInGuard(pageContext, componentTypes, currentUrl, currentPageLabel) {
         /** @type {?} */
         const componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
         if (componentRoutes.length) {
-            if (this.updateRouting(pageContext, componentRoutes)) {
+            if (this.updateRouting(pageContext, currentPageLabel, componentRoutes)) {
                 this.router.navigateByUrl(currentUrl);
                 return false;
             }
@@ -7836,20 +7837,24 @@ class CmsRoutesService {
     /**
      * @private
      * @param {?} pageContext
+     * @param {?} pageLabel
      * @param {?} routes
      * @return {?}
      */
-    updateRouting(pageContext, routes) {
+    updateRouting(pageContext, pageLabel, routes) {
         if (pageContext.type === PageType.CONTENT_PAGE &&
-            pageContext.id.startsWith('/') &&
-            pageContext.id.length > 1) {
+            pageLabel.startsWith('/') &&
+            pageLabel.length > 1) {
             /** @type {?} */
             const newRoute = {
-                path: pageContext.id.substr(1),
+                path: pageLabel.substr(1),
                 component: PageLayoutComponent,
                 children: routes,
                 data: {
-                    cxCmsRouteContext: pageContext,
+                    cxCmsRouteContext: {
+                        type: pageContext.type,
+                        id: pageLabel,
+                    },
                 },
             };
             this.router.resetConfig([newRoute, ...this.router.config]);
@@ -7901,22 +7906,23 @@ class CmsPageGuard {
          * @param {?} pageContext
          * @return {?}
          */
-        pageContext => this.cmsService.hasPage(pageContext, true).pipe(first(), withLatestFrom(of(pageContext))))), switchMap((/**
+        pageContext => this.cmsService.getPage(pageContext, true).pipe(first(), withLatestFrom(of(pageContext))))), switchMap((/**
          * @param {?} __0
          * @return {?}
          */
-        ([hasPage, pageContext]) => hasPage
-            ? this.resolveCmsPageLogic(pageContext, route, state)
+        ([pageData, pageContext]) => pageData
+            ? this.resolveCmsPageLogic(pageContext, pageData, route, state)
             : this.handleNotFoundPage(pageContext, route, state))));
     }
     /**
      * @private
      * @param {?} pageContext
+     * @param {?} pageData
      * @param {?} route
      * @param {?} state
      * @return {?}
      */
-    resolveCmsPageLogic(pageContext, route, state) {
+    resolveCmsPageLogic(pageContext, pageData, route, state) {
         return this.cmsService.getPageComponentTypes(pageContext).pipe(take(1), switchMap((/**
          * @param {?} componentTypes
          * @return {?}
@@ -7936,10 +7942,12 @@ class CmsPageGuard {
          * @return {?}
          */
         ([canActivate, componentTypes]) => {
+            /** @type {?} */
+            const pageLabel = pageData.label || pageContext.id;
             if (canActivate === true &&
                 !route.data.cxCmsRouteContext &&
-                !this.cmsRoutes.cmsRouteExist(pageContext.id)) {
-                return this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url);
+                !this.cmsRoutes.cmsRouteExist(pageLabel)) {
+                return this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url, pageLabel);
             }
             return canActivate;
         })));
@@ -7957,12 +7965,12 @@ class CmsPageGuard {
             type: PageType.CONTENT_PAGE,
             id: this.semanticPathService.get('notFound'),
         };
-        return this.cmsService.hasPage(notFoundCmsPageContext).pipe(switchMap((/**
-         * @param {?} hasNotFoundPage
+        return this.cmsService.getPage(notFoundCmsPageContext).pipe(switchMap((/**
+         * @param {?} notFoundPage
          * @return {?}
          */
-        hasNotFoundPage => {
-            if (hasNotFoundPage) {
+        notFoundPage => {
+            if (notFoundPage) {
                 return this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(tap((/**
                  * @param {?} notFoundIndex
                  * @return {?}
@@ -7982,7 +7990,7 @@ class CmsPageGuard {
                 index => index === notFoundIndex))))), switchMap((/**
                  * @return {?}
                  */
-                () => this.resolveCmsPageLogic(pageContext, route, state))));
+                () => this.resolveCmsPageLogic(pageContext, notFoundPage, route, state))));
             }
             return of(false);
         })));
