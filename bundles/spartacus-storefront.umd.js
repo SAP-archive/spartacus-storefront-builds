@@ -17239,6 +17239,8 @@
     exports.AutoFocusDirective = AutoFocusDirective;
     exports.B2cStorefrontModule = B2cStorefrontModule;
     exports.BREAKPOINT = BREAKPOINT;
+    exports.BannerCarouselComponent = BannerCarouselComponent;
+    exports.BannerCarouselModule = BannerCarouselModule;
     exports.BannerComponent = BannerComponent;
     exports.BannerModule = BannerModule;
     exports.BillingAddressFormComponent = BillingAddressFormComponent;
@@ -17471,15 +17473,13 @@
     exports.ɵn = AddToHomeScreenService;
     exports.ɵo = ProductImagesModule;
     exports.ɵp = ProductImagesComponent;
-    exports.ɵq = BannerCarouselModule;
-    exports.ɵr = BannerCarouselComponent;
-    exports.ɵs = suffixUrlMatcher;
-    exports.ɵt = addCmsRoute;
-    exports.ɵu = htmlLangProvider;
-    exports.ɵv = setHtmlLangAttribute;
-    exports.ɵw = RoutingModule;
-    exports.ɵx = defaultStorefrontRoutesConfig;
-    exports.ɵy = defaultRoutingConfig;
+    exports.ɵq = suffixUrlMatcher;
+    exports.ɵr = addCmsRoute;
+    exports.ɵs = htmlLangProvider;
+    exports.ɵt = setHtmlLangAttribute;
+    exports.ɵu = RoutingModule;
+    exports.ɵv = defaultStorefrontRoutesConfig;
+    exports.ɵw = defaultRoutingConfig;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
