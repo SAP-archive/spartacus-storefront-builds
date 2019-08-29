@@ -8696,6 +8696,13 @@ class CloseAccountModalComponent {
          * @return {?}
          */
         success => this.onSuccess(success))));
+        this.subscription.add(this.userService
+            .getRemoveUserResultError()
+            .subscribe((/**
+         * @param {?} error
+         * @return {?}
+         */
+        error => this.onError(error))));
         this.isLoading$ = this.userService.getRemoveUserResultLoading();
     }
     /**
@@ -8716,6 +8723,25 @@ class CloseAccountModalComponent {
                 this.globalMessageService.add(text, GlobalMessageType.MSG_TYPE_CONFIRMATION);
             }));
             this.routingService.go({ cxRoute: 'home' });
+        }
+    }
+    /**
+     * @param {?} error
+     * @return {?}
+     */
+    onError(error) {
+        if (error) {
+            this.dismissModal();
+            this.translationService
+                .translate('closeAccount.accountClosedFailure')
+                .pipe(first())
+                .subscribe((/**
+             * @param {?} text
+             * @return {?}
+             */
+            text => {
+                this.globalMessageService.add(text, GlobalMessageType.MSG_TYPE_ERROR);
+            }));
         }
     }
     /**

@@ -10340,6 +10340,13 @@ var CloseAccountModalComponent = /** @class */ (function () {
          * @return {?}
          */
         function (success) { return _this.onSuccess(success); })));
+        this.subscription.add(this.userService
+            .getRemoveUserResultError()
+            .subscribe((/**
+         * @param {?} error
+         * @return {?}
+         */
+        function (error) { return _this.onError(error); })));
         this.isLoading$ = this.userService.getRemoveUserResultLoading();
     };
     /**
@@ -10365,6 +10372,30 @@ var CloseAccountModalComponent = /** @class */ (function () {
                 _this.globalMessageService.add(text, GlobalMessageType.MSG_TYPE_CONFIRMATION);
             }));
             this.routingService.go({ cxRoute: 'home' });
+        }
+    };
+    /**
+     * @param {?} error
+     * @return {?}
+     */
+    CloseAccountModalComponent.prototype.onError = /**
+     * @param {?} error
+     * @return {?}
+     */
+    function (error) {
+        var _this = this;
+        if (error) {
+            this.dismissModal();
+            this.translationService
+                .translate('closeAccount.accountClosedFailure')
+                .pipe(first())
+                .subscribe((/**
+             * @param {?} text
+             * @return {?}
+             */
+            function (text) {
+                _this.globalMessageService.add(text, GlobalMessageType.MSG_TYPE_ERROR);
+            }));
         }
     };
     /**

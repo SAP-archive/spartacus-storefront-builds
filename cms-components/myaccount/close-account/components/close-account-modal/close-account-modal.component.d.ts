@@ -17,6 +17,7 @@ export declare class CloseAccountModalComponent implements OnInit, OnDestroy {
     constructor(modalService: ModalService, userService: UserService, authService: AuthService, globalMessageService: GlobalMessageService, routingService: RoutingService, translationService: TranslationService);
     ngOnInit(): void;
     onSuccess(success: boolean): void;
+    onError(error: boolean): void;
     dismissModal(reason?: any): void;
     closeAccount(): void;
     ngOnDestroy(): void;
