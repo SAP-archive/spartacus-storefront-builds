@@ -1,5 +1,5 @@
 import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, EventEmitter, Output, isDevMode, forwardRef, Renderer2, HostListener, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, NgZone, APP_INITIALIZER, INJECTOR, Pipe } from '@angular/core';
-import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, FeaturesConfigModule, CmsConfig, AuthService, CartDataService, CmsService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, TranslationChunkService, PageType, SemanticPathService, NotAuthGuard, CmsPageTitleModule, AuthRedirectService, provideConfig, RoutingModule as RoutingModule$1, StateModule, AuthModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule } from '@spartacus/core';
+import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, FeaturesConfigModule, CmsConfig, AuthService, CartDataService, CmsService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, TranslationChunkService, PageType, SemanticPathService, NotAuthGuard, CmsPageTitleModule, provideConfig, AuthRedirectService, RoutingModule as RoutingModule$1, StateModule, AuthModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule } from '@spartacus/core';
 import { map, filter, switchMap, tap, debounceTime, startWith, distinctUntilChanged, take, shareReplay, skipWhile, first, endWith, withLatestFrom, pluck } from 'rxjs/operators';
 import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -11,6 +11,7 @@ import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
 import { __awaiter } from 'tslib';
 import { ServiceWorkerModule, SwRegistrationOptions } from '@angular/service-worker';
 import { Title, Meta } from '@angular/platform-browser';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
@@ -12667,6 +12668,27 @@ class ProductListComponentService {
         this.setQueryParams({ currentPage: pageNumber });
     }
     /**
+     * Get items from a given page without using navigation
+     * @param {?} pageNumber
+     * @return {?}
+     */
+    getPageItems(pageNumber) {
+        this.routing
+            .getRouterState()
+            .subscribe((/**
+         * @param {?} route
+         * @return {?}
+         */
+        route => {
+            /** @type {?} */
+            const routeCriteria = this.getCriteriaFromRoute(route.state.params, route.state.queryParams);
+            /** @type {?} */
+            const criteria = Object.assign({}, routeCriteria, { currentPage: pageNumber });
+            this.search(criteria);
+        }))
+            .unsubscribe();
+    }
+    /**
      * @param {?} sortCode
      * @return {?}
      */
@@ -12704,14 +12726,27 @@ ProductListComponentService.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * @abstract
+ */
+class ViewConfig {
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class ProductListComponent {
     /**
      * @param {?} pageLayoutService
      * @param {?} productListComponentService
+     * @param {?=} scrollConfig
      */
-    constructor(pageLayoutService, productListComponentService) {
+    constructor(pageLayoutService, productListComponentService, scrollConfig) {
         this.pageLayoutService = pageLayoutService;
         this.productListComponentService = productListComponentService;
+        this.scrollConfig = scrollConfig;
+        this.subscription = new Subscription();
         this.model$ = this.productListComponentService
             .model$;
         this.viewMode$ = new BehaviorSubject(ViewModes.Grid);
@@ -12721,14 +12756,17 @@ class ProductListComponent {
      * @return {?}
      */
     ngOnInit() {
+        this.isInfiniteScroll = this.scrollConfig.view.infiniteScroll.active;
         this.productListComponentService.clearSearchResults();
-        this.pageLayoutService.templateName$.pipe(take(1)).subscribe((/**
+        this.subscription.add(this.pageLayoutService.templateName$.pipe(take(1)).subscribe((/**
          * @param {?} template
          * @return {?}
          */
         template => {
-            this.viewMode$.next(template === 'ProductGridPageTemplate' ? ViewModes.Grid : ViewModes.List);
-        }));
+            this.viewMode$.next(template === 'ProductGridPageTemplate'
+                ? ViewModes.Grid
+                : ViewModes.List);
+        })));
     }
     /**
      * @param {?} pageNumber
@@ -12751,17 +12789,24 @@ class ProductListComponent {
     setViewMode(mode) {
         this.viewMode$.next(mode);
     }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
 }
 ProductListComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-product-list',
-                template: "<div class=\"cx-page\" *ngIf=\"(model$ | async) as model\">\n  <section class=\"cx-page-section\">\n    <div class=\"container\">\n      <div class=\"row\">\n        <div class=\"col-12 col-lg-12\" *ngIf=\"(viewMode$ | async) as viewMode\">\n          <div class=\"cx-sorting top\">\n            <div class=\"row\">\n              <div class=\"col-12 col-lg-4 mr-auto\">\n                <div class=\"form-group cx-sort-dropdown\">\n                  <cx-sorting\n                    [sortOptions]=\"model.sorts\"\n                    (sortListEvent)=\"sortList($event)\"\n                    [selectedOption]=\"model.pagination.sort\"\n                    placeholder=\"{{\n                      'productList.sortByRelevance' | cxTranslate\n                    }}\"\n                  ></cx-sorting>\n                </div>\n              </div>\n              <div class=\"col-auto\">\n                <div\n                  class=\"cx-pagination\"\n                  aria-label=\"product search pagination\"\n                >\n                  <cx-pagination\n                    [pagination]=\"model.pagination\"\n                    (viewPageEvent)=\"viewPage($event)\"\n                  ></cx-pagination>\n                </div>\n              </div>\n              <div class=\"col-auto ml-auto ml-lg-0\">\n                <cx-product-view\n                  (modeChange)=\"setViewMode($event)\"\n                  [mode]=\"viewMode\"\n                ></cx-product-view>\n              </div>\n            </div>\n          </div>\n          <div class=\"cx-product-container\">\n            <ng-container *ngIf=\"viewMode === ViewModes.Grid\">\n              <div class=\"row\">\n                <cx-product-grid-item\n                  *ngFor=\"let product of model?.products\"\n                  [product]=\"product\"\n                  class=\"col-12 col-sm-6 col-md-4\"\n                ></cx-product-grid-item>\n              </div>\n            </ng-container>\n\n            <ng-container *ngIf=\"viewMode === ViewModes.List\">\n              <cx-product-list-item\n                *ngFor=\"let product of model?.products\"\n                [product]=\"product\"\n                class=\"cx-product-search-list\"\n              ></cx-product-list-item>\n            </ng-container>\n          </div>\n          <div class=\"cx-sorting bottom\">\n            <div class=\"row\">\n              <div class=\"col-12 col-lg-4 mr-auto\">\n                <div class=\"form-group cx-sort-dropdown\">\n                  <cx-sorting\n                    [sortOptions]=\"model.sorts\"\n                    (sortListEvent)=\"sortList($event)\"\n                    [selectedOption]=\"model.pagination.sort\"\n                    placeholder=\"{{\n                      'productList.sortByRelevance' | cxTranslate\n                    }}\"\n                  ></cx-sorting>\n                </div>\n              </div>\n              <div class=\"col-auto\" aria-label=\"product search pagination\">\n                <div class=\"cx-pagination\">\n                  <cx-pagination\n                    [pagination]=\"model.pagination\"\n                    (viewPageEvent)=\"viewPage($event)\"\n                  ></cx-pagination>\n                </div>\n              </div>\n              <div class=\"col-auto ml-auto ml-lg-0\">\n                <cx-product-view\n                  (modeChange)=\"setViewMode($event)\"\n                  [mode]=\"viewMode\"\n                ></cx-product-view>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </section>\n</div>\n"
+                template: "<div class=\"cx-page\" *ngIf=\"(model$ | async) as model\">\n  <section class=\"cx-page-section\">\n    <div class=\"container\">\n      <div class=\"row\">\n        <div class=\"col-12 col-lg-12\" *ngIf=\"(viewMode$ | async) as viewMode\">\n          <div class=\"cx-sorting top\">\n            <div class=\"row\">\n              <div class=\"col-12 col-lg-4 mr-auto\">\n                <div class=\"form-group cx-sort-dropdown\">\n                  <cx-sorting\n                    [sortOptions]=\"model.sorts\"\n                    (sortListEvent)=\"sortList($event)\"\n                    [selectedOption]=\"model.pagination.sort\"\n                    placeholder=\"{{\n                      'productList.sortByRelevance' | cxTranslate\n                    }}\"\n                  ></cx-sorting>\n                </div>\n              </div>\n              <div *ngIf=\"!isInfiniteScroll\" class=\"col-auto\">\n                <div\n                  class=\"cx-pagination\"\n                  aria-label=\"product search pagination\"\n                >\n                  <cx-pagination\n                    [pagination]=\"model.pagination\"\n                    (viewPageEvent)=\"viewPage($event)\"\n                  ></cx-pagination>\n                </div>\n              </div>\n              <div class=\"col-auto ml-auto ml-lg-0\">\n                <cx-product-view\n                  (modeChange)=\"setViewMode($event)\"\n                  [mode]=\"viewMode\"\n                ></cx-product-view>\n              </div>\n            </div>\n          </div>\n          <div class=\"cx-product-container\">\n            <!-- Product list when using pagination -->\n            <ng-container *ngIf=\"!isInfiniteScroll; else infiniteScroll\">\n              <ng-container *ngIf=\"viewMode === ViewModes.Grid\">\n                <div class=\"row\">\n                  <cx-product-grid-item\n                    *ngFor=\"let product of model?.products\"\n                    [product]=\"product\"\n                    class=\"col-12 col-sm-6 col-md-4\"\n                  ></cx-product-grid-item>\n                </div>\n              </ng-container>\n\n              <ng-container *ngIf=\"viewMode === ViewModes.List\">\n                <cx-product-list-item\n                  *ngFor=\"let product of model?.products\"\n                  [product]=\"product\"\n                  class=\"cx-product-search-list\"\n                ></cx-product-list-item>\n              </ng-container>\n            </ng-container>\n\n            <!-- Product list when using infinite scroll -->\n            <ng-template #infiniteScroll>\n              <cx-product-scroll\n                [scrollConfig]=\"scrollConfig\"\n                [model]=\"model\"\n                [inputViewMode]=\"viewMode\"\n              ></cx-product-scroll>\n            </ng-template>\n          </div>\n          <div class=\"cx-sorting bottom\">\n            <div class=\"row\">\n              <div class=\"col-12 col-lg-4 mr-auto\">\n                <div class=\"form-group cx-sort-dropdown\">\n                  <cx-sorting\n                    [sortOptions]=\"model.sorts\"\n                    (sortListEvent)=\"sortList($event)\"\n                    [selectedOption]=\"model.pagination.sort\"\n                    placeholder=\"{{\n                      'productList.sortByRelevance' | cxTranslate\n                    }}\"\n                  ></cx-sorting>\n                </div>\n              </div>\n              <div\n                *ngIf=\"!isInfiniteScroll\"\n                class=\"col-auto\"\n                aria-label=\"product search pagination\"\n              >\n                <div class=\"cx-pagination\">\n                  <cx-pagination\n                    [pagination]=\"model.pagination\"\n                    (viewPageEvent)=\"viewPage($event)\"\n                  ></cx-pagination>\n                </div>\n              </div>\n              <div class=\"col-auto ml-auto ml-lg-0\">\n                <cx-product-view\n                  (modeChange)=\"setViewMode($event)\"\n                  [mode]=\"viewMode\"\n                ></cx-product-view>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </section>\n</div>\n"
             }] }
 ];
 /** @nocollapse */
 ProductListComponent.ctorParameters = () => [
     { type: PageLayoutService },
-    { type: ProductListComponentService }
+    { type: ProductListComponentService },
+    { type: ViewConfig }
 ];
 
 /**
@@ -12950,12 +12995,253 @@ ProductListItemComponent.propDecorators = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class ProductScrollComponent {
+    /**
+     * @param {?} productListComponentService
+     * @param {?} ref
+     */
+    constructor(productListComponentService, ref) {
+        this.productListComponentService = productListComponentService;
+        this.ref = ref;
+        this.subscription = new Subscription();
+        this.ViewModes = ViewModes;
+        this.appendProducts = false;
+        this.resetList = false;
+        this.isMaxProducts = false;
+        this.isLastPage = false;
+        this.isEmpty = false;
+    }
+    /**
+     * @param {?} inputConfig
+     * @return {?}
+     */
+    set setConfig(inputConfig) {
+        this.setComponentConfigurations(inputConfig);
+    }
+    /**
+     * @param {?} inputModel
+     * @return {?}
+     */
+    set setModel(inputModel) {
+        this.infiniteScrollOperations(inputModel);
+    }
+    /**
+     * @param {?} inputViewMode
+     * @return {?}
+     */
+    set setViewMode(inputViewMode) {
+        this.inputViewMode = inputViewMode;
+        //If viewMode is already set (meaning it is not the first load)
+        //Reset the product list
+        if (this.viewMode) {
+            this.resetListOnViewModeChange();
+        }
+        else {
+            //If viewMode is not set (meaning it is the first load)
+            //Set the viewMode
+            this.viewMode = inputViewMode;
+        }
+    }
+    /**
+     * @param {?} pageNumber
+     * @return {?}
+     */
+    scrollPage(pageNumber) {
+        this.appendProducts = true;
+        this.ref.markForCheck();
+        this.productListComponentService.getPageItems(pageNumber);
+    }
+    /**
+     * @param {?} pageNumber
+     * @return {?}
+     */
+    loadNextPage(pageNumber) {
+        this.isMaxProducts = false;
+        this.scrollPage(pageNumber);
+    }
+    /**
+     * @return {?}
+     */
+    scrollToTop() {
+        window.scroll(0, 0);
+    }
+    /**
+     * @private
+     * @param {?} scrollConfig
+     * @return {?}
+     */
+    setComponentConfigurations(scrollConfig) {
+        /** @type {?} */
+        const isButton = scrollConfig.view.infiniteScroll.showMoreButton;
+        /** @type {?} */
+        const configProductLimit = scrollConfig.view.infiniteScroll.productLimit;
+        //Display "show more" button every time when button configuration is true
+        //Otherwise, only display "show more" when the configuration product limit is reached
+        this.productLimit = isButton ? 1 : configProductLimit;
+    }
+    /**
+     * @private
+     * @param {?} inputModel
+     * @return {?}
+     */
+    infiniteScrollOperations(inputModel) {
+        if (this.isSamePage(inputModel)) {
+            return;
+        }
+        if (this.appendProducts) {
+            this.model = Object.assign({}, inputModel, { products: this.model.products.concat(inputModel.products) });
+        }
+        else {
+            this.model = inputModel;
+            this.maxProducts = this.productLimit;
+        }
+        this.setConditions();
+        this.ref.markForCheck();
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    resetListOnViewModeChange() {
+        this.scrollToTop();
+        this.resetList = true;
+        this.productListComponentService.getPageItems(0);
+    }
+    //Set booleans after model has been retrieved
+    /**
+     * @private
+     * @return {?}
+     */
+    setConditions() {
+        this.isEmpty = !this.model.products || this.model.products.length === 0;
+        this.isLastPage =
+            this.model.pagination.currentPage ===
+                this.model.pagination.totalPages - 1;
+        this.isMaxProducts =
+            this.productLimit &&
+                this.productLimit !== 0 &&
+                this.model.products.length >= this.maxProducts;
+        //Add the productLimit to the current number of products to determine the next max number of products
+        if (this.isMaxProducts) {
+            this.maxProducts = this.model.products.length + this.productLimit;
+        }
+        //Only change viewMode once the new model is set
+        //This prevents flickering issues
+        if (this.viewMode !== this.inputViewMode) {
+            this.viewMode = this.inputViewMode;
+        }
+        this.resetList = false;
+        this.appendProducts = false;
+    }
+    /**
+     * @deprecated at release 2.0.
+     * If the new list is the same and it is not intended to reset the list then return true
+     * Return false otherwise.
+     * @private
+     * @param {?} inputModel
+     * @return {?}
+     */
+    isSamePage(inputModel) {
+        if (!this.resetList &&
+            this.model &&
+            this.model.breadcrumbs &&
+            inputModel.breadcrumbs &&
+            this.model.breadcrumbs.length > 0 &&
+            inputModel.breadcrumbs.length > 0) {
+            if (this.model.breadcrumbs.length === inputModel.breadcrumbs.length) {
+                for (let i = 0; i < this.model.breadcrumbs.length; i++) {
+                    if (this.model.breadcrumbs[i].facetCode ===
+                        inputModel.breadcrumbs[i].facetCode &&
+                        this.model.breadcrumbs[i].facetValueCode ===
+                            inputModel.breadcrumbs[i].facetValueCode &&
+                        this.model.breadcrumbs[i].removeQuery.query.value ===
+                            inputModel.breadcrumbs[i].removeQuery.query.value &&
+                        this.model.pagination.currentPage ===
+                            inputModel.pagination.currentPage) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
+}
+ProductScrollComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-product-scroll',
+                template: "<ng-container *ngIf=\"viewMode === ViewModes.Grid\">\n  <div\n    infiniteScroll\n    [infiniteScrollDistance]=\"5\"\n    [infiniteScrollThrottle]=\"50\"\n    [infiniteScrollDisabled]=\"isMaxProducts || isLastPage || isEmpty\"\n    (scrolled)=\"scrollPage(model?.pagination?.currentPage + 1)\"\n  >\n    <div class=\"row\">\n      <cx-product-grid-item\n        *ngFor=\"let product of model?.products\"\n        [product]=\"product\"\n        class=\"col-12 col-sm-6 col-md-4\"\n      ></cx-product-grid-item>\n    </div>\n    <div\n      [className]=\"\n        !isLastPage && model?.pagination?.currentPage > 0\n          ? 'cx-double-btn-container grid-btn-padding'\n          : 'cx-single-btn-container grid-btn-padding'\n      \"\n    >\n      <div\n        *ngIf=\"\n          (isMaxProducts || isLastPage) && model?.pagination?.currentPage > 0\n        \"\n        (click)=\"scrollToTop()\"\n        class=\"btn btn-block btn-action\"\n      >\n        {{ 'productList.backToTopBtn' | cxTranslate }}\n      </div>\n      <div\n        *ngIf=\"isMaxProducts && !isLastPage\"\n        (click)=\"loadNextPage(model?.pagination?.currentPage + 1)\"\n        class=\"btn btn-block btn-action align-btn\"\n      >\n        {{ 'productList.showMoreBtn' | cxTranslate }}\n      </div>\n    </div>\n    <div *ngIf=\"appendProducts\" class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n</ng-container>\n\n<ng-container *ngIf=\"viewMode === ViewModes.List\">\n  <div\n    infiniteScroll\n    [infiniteScrollDistance]=\"3\"\n    [infiniteScrollThrottle]=\"50\"\n    [infiniteScrollDisabled]=\"isMaxProducts || isLastPage || isEmpty\"\n    (scrolled)=\"scrollPage(model?.pagination?.currentPage + 1)\"\n  >\n    <cx-product-list-item\n      *ngFor=\"let product of model?.products\"\n      [product]=\"product\"\n      class=\"cx-product-search-list\"\n    ></cx-product-list-item>\n    <div\n      [className]=\"\n        !isLastPage && model?.pagination?.currentPage > 0\n          ? 'cx-double-btn-container'\n          : 'cx-single-btn-container'\n      \"\n    >\n      <div\n        *ngIf=\"\n          (isMaxProducts || isLastPage) && model?.pagination?.currentPage > 0\n        \"\n        (click)=\"scrollToTop()\"\n        class=\"btn btn-block btn-action\"\n      >\n        {{ 'productList.backToTopBtn' | cxTranslate }}\n      </div>\n      <div\n        *ngIf=\"isMaxProducts && !isLastPage\"\n        (click)=\"loadNextPage(model?.pagination?.currentPage + 1)\"\n        class=\"btn btn-block btn-action align-btn\"\n      >\n        {{ 'productList.showMoreBtn' | cxTranslate }}\n      </div>\n    </div>\n    <div *ngIf=\"appendProducts\" class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n</ng-container>\n"
+            }] }
+];
+/** @nocollapse */
+ProductScrollComponent.ctorParameters = () => [
+    { type: ProductListComponentService },
+    { type: ChangeDetectorRef }
+];
+ProductScrollComponent.propDecorators = {
+    setConfig: [{ type: Input, args: ['scrollConfig',] }],
+    setModel: [{ type: Input, args: ['model',] }],
+    setViewMode: [{ type: Input, args: ['inputViewMode',] }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const defaultScrollConfig = {
+    view: {
+        infiniteScroll: {
+            active: false,
+            productLimit: 0,
+            showMoreButton: false,
+        },
+    },
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ViewConfigModule {
+    /**
+     * @return {?}
+     */
+    static forRoot() {
+        return {
+            ngModule: ViewConfigModule,
+            providers: [
+                provideConfig({
+                    view: {},
+                }),
+                {
+                    provide: ViewConfig,
+                    useExisting: Config,
+                },
+            ],
+        };
+    }
+}
+ViewConfigModule.decorators = [
+    { type: NgModule, args: [{},] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class ProductListModule {
 }
 ProductListModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
                     CommonModule,
+                    ConfigModule.withConfig((/** @type {?} */ (defaultScrollConfig))),
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             CMSProductListComponent: {
@@ -12978,6 +13264,9 @@ ProductListModule.decorators = [
                     I18nModule,
                     StarRatingModule,
                     IconModule,
+                    SpinnerModule,
+                    InfiniteScrollModule,
+                    ViewConfigModule,
                 ],
                 declarations: [
                     ProductListComponent,
@@ -12985,6 +13274,7 @@ ProductListModule.decorators = [
                     ProductListItemComponent,
                     ProductGridItemComponent,
                     ProductViewComponent,
+                    ProductScrollComponent,
                 ],
                 exports: [
                     ProductListComponent,
@@ -14409,6 +14699,7 @@ StorefrontFoundationModule.decorators = [
                     CheckoutModule.forRoot(),
                     UserModule.forRoot(),
                     ProductModule.forRoot(),
+                    ViewConfigModule.forRoot(),
                     FeaturesConfigModule.forRoot('1.0'),
                     LayoutModule,
                 ],
@@ -14527,5 +14818,5 @@ B2cStorefrontModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, OnlyNumberDirectiveModule as ɵa, AutoFocusDirectiveModule as ɵb, defaultCheckoutConfig as ɵc, HighlightPipe as ɵd, ProductListComponentService as ɵe, ProductAttributesModule as ɵf, ProductDetailsTabModule as ɵg, ProductDetailsTabComponent as ɵh, CmsRoutesService as ɵi, CmsMappingService as ɵj, CmsI18nService as ɵk, CmsGuardsService as ɵl, ComponentMapperService as ɵm, AddToHomeScreenService as ɵn, ProductImagesModule as ɵo, ProductImagesComponent as ɵp, suffixUrlMatcher as ɵq, addCmsRoute as ɵr, htmlLangProvider as ɵs, setHtmlLangAttribute as ɵt, RoutingModule as ɵu, defaultStorefrontRoutesConfig as ɵv, defaultRoutingConfig as ɵw };
+export { AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, OnlyNumberDirectiveModule as ɵa, AutoFocusDirectiveModule as ɵb, defaultRoutingConfig as ɵba, defaultCheckoutConfig as ɵc, HighlightPipe as ɵd, defaultScrollConfig as ɵe, ProductListComponentService as ɵf, ViewConfig as ɵg, ViewConfigModule as ɵh, ProductScrollComponent as ɵi, ProductAttributesModule as ɵj, ProductDetailsTabModule as ɵk, ProductDetailsTabComponent as ɵl, CmsRoutesService as ɵm, CmsMappingService as ɵn, CmsI18nService as ɵo, CmsGuardsService as ɵp, ComponentMapperService as ɵq, AddToHomeScreenService as ɵr, ProductImagesModule as ɵs, ProductImagesComponent as ɵt, suffixUrlMatcher as ɵu, addCmsRoute as ɵv, htmlLangProvider as ɵw, setHtmlLangAttribute as ɵx, RoutingModule as ɵy, defaultStorefrontRoutesConfig as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map

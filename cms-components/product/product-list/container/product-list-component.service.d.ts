@@ -32,6 +32,10 @@ export declare class ProductListComponentService {
     private getSearchConfig;
     setQuery(query: string): void;
     viewPage(pageNumber: number): void;
+    /**
+     * Get items from a given page without using navigation
+     */
+    getPageItems(pageNumber: number): void;
     sort(sortCode: string): void;
     private setQueryParams;
 }
