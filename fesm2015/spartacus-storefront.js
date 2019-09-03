@@ -1,5 +1,5 @@
 import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, EventEmitter, Output, isDevMode, forwardRef, Renderer2, HostListener, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, NgZone, APP_INITIALIZER, INJECTOR, Pipe } from '@angular/core';
-import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, FeaturesConfigModule, CmsConfig, AuthService, CartDataService, CmsService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, TranslationChunkService, PageType, SemanticPathService, NotAuthGuard, CmsPageTitleModule, provideConfig, AuthRedirectService, RoutingModule as RoutingModule$1, StateModule, AuthModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule } from '@spartacus/core';
+import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, FeaturesConfigModule, CmsConfig, AuthService, CartDataService, CmsService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, TranslationChunkService, PageType, SemanticPathService, NotAuthGuard, CmsPageTitleModule, provideConfig, AuthRedirectService, RoutingModule as RoutingModule$1, StateModule, AuthModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
 import { map, filter, switchMap, tap, debounceTime, startWith, distinctUntilChanged, take, shareReplay, skipWhile, first, endWith, withLatestFrom, pluck } from 'rxjs/operators';
 import { NgbModalRef, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -14745,10 +14745,11 @@ StorefrontModule.decorators = [
                     SiteContextModule.forRoot(),
                     SmartEditModule.forRoot(),
                     PersonalizationModule.forRoot(),
-                    // opt-in explicitely
+                    // opt-in explicitly
                     OccModule.forRoot(),
                     ProductDetailsPageModule,
                     ProductListingPageModule,
+                    ExternalRoutesModule.forRoot(),
                 ],
                 exports: [MainModule, StorefrontFoundationModule],
             },] }

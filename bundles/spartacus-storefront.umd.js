@@ -17586,10 +17586,11 @@
                             core$1.SiteContextModule.forRoot(),
                             core$1.SmartEditModule.forRoot(),
                             core$1.PersonalizationModule.forRoot(),
-                            // opt-in explicitely
+                            // opt-in explicitly
                             core$1.OccModule.forRoot(),
                             ProductDetailsPageModule,
                             ProductListingPageModule,
+                            core$1.ExternalRoutesModule.forRoot(),
                         ],
                         exports: [MainModule, StorefrontFoundationModule],
                     },] }
