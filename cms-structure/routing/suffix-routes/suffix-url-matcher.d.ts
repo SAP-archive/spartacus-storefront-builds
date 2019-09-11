@@ -1,4 +1,4 @@
-import { UrlSegment, UrlMatchResult, Route, UrlSegmentGroup } from '@angular/router';
+import { Route, UrlMatchResult, UrlSegment, UrlSegmentGroup } from '@angular/router';
 export interface SuffixRoute extends Route {
     data: {
         cxSuffixUrlMatcher: {
@@ -9,7 +9,7 @@ export interface SuffixRoute extends Route {
     };
 }
 /**
- * Matches the pattern '[ ** / ] marker / :paramName [ / ** ]'
+ * Matches the pattern '[ ** / ] marker / :paramName'
  *
  * @param marker phrase that indicates the start of the match
  * @param paramName name of the parameter present after the marker

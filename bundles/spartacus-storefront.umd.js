@@ -17158,7 +17158,7 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
-     * Matches the pattern '[ ** / ] marker / :paramName [ / ** ]'
+     * Matches the pattern '[ ** / ] marker / :paramName'
      *
      * @param {?} segments
      * @param {?} _segmentGroup
