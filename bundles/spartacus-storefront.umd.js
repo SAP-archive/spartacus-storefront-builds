@@ -11170,7 +11170,7 @@
         OrderDetailItemsComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-order-details-items',
-                        template: "<ng-container *ngIf=\"(order$ | async) as order\">\n  <div *ngFor=\"let consignment of order.consignments\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">\n        <span *ngIf=\"consignment\">\n          {{\n            'orderDetails.deliveryStatus'\n              | cxTranslate: { context: consignment.status }\n          }}\n        </span>\n      </div>\n      <div *ngIf=\"consignment?.statusDate\" class=\"cx-list-date\">\n        <div>{{ 'orderDetails.shippedOn' | cxTranslate }}&nbsp;</div>\n        <div>{{ consignment?.statusDate | cxDate }}</div>\n      </div>\n    </div>\n    <div class=\"cx-list-item col-12\">\n      <cx-cart-item-list\n        [items]=\"getConsignmentProducts(consignment)\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n\n  <div *ngIf=\"order.unconsignedEntries?.length\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">\n        {{ 'orderDetails.pending' | cxTranslate }}\n      </div>\n    </div>\n    <div class=\"cx-list-item col-12\">\n      <cx-cart-item-list\n        [items]=\"order?.unconsignedEntries\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n</ng-container>\n"
+                        template: "<ng-container *ngIf=\"(order$ | async) as order\">\n  <div *ngFor=\"let consignment of order.consignments\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">\n        <span *ngIf=\"consignment\">\n          {{\n            'orderDetails.deliveryStatus'\n              | cxTranslate: { context: consignment.status }\n          }}\n        </span>\n      </div>\n      <div *ngIf=\"consignment?.statusDate\" class=\"cx-list-date\">\n        <div>{{ 'orderDetails.shippedOn' | cxTranslate }}&nbsp;</div>\n        <div>{{ consignment?.statusDate | cxDate }}</div>\n      </div>\n\n      <cx-consignment-tracking\n        [orderCode]=\"order.code\"\n        [consignment]=\"consignment\"\n        *cxFeature=\"'consignmentTracking'\"\n      >\n      </cx-consignment-tracking>\n    </div>\n    <div class=\"cx-list-item col-12\">\n      <cx-cart-item-list\n        [items]=\"getConsignmentProducts(consignment)\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n\n  <div *ngIf=\"order.unconsignedEntries?.length\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">\n        {{ 'orderDetails.pending' | cxTranslate }}\n      </div>\n    </div>\n    <div class=\"cx-list-item col-12\">\n      <cx-cart-item-list\n        [items]=\"order?.unconsignedEntries\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n</ng-container>\n"
                     }] }
         ];
         /** @nocollapse */
@@ -11356,12 +11356,119 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var TrackingEventsComponent = /** @class */ (function () {
+        function TrackingEventsComponent(activeModal, userOrderService) {
+            this.activeModal = activeModal;
+            this.userOrderService = userOrderService;
+        }
+        /**
+         * @return {?}
+         */
+        TrackingEventsComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
+            this.userOrderService.clearConsignmentTracking();
+        };
+        TrackingEventsComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-tracking-events',
+                        template: "<div class=\"cx-consignment-tracking-dialog\">\n  <!-- Modal Header -->\n  <ng-container\n    *ngIf=\"(tracking$ | async) as consignmentTracking; else loading\"\n  >\n    <div class=\"header modal-header\">\n      <div class=\"title modal-title\">\n        {{ 'orderDetails.consignmentTracking.dialog.header' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"activeModal.dismiss('Cross click')\"\n      >\n        <span aria-hidden=\"true\">&times;</span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <!-- shipment header -->\n    <ng-container\n      *ngIf=\"\n        consignmentTracking?.carrierDetails && consignmentTracking?.trackingID;\n        else noTracking\n      \"\n    >\n      <div class=\"shipment-heading\" data-test=\"head-track\">\n        <div class=\"row\">\n          <div class=\"col-sm-12 col-md-6\">\n            <div class=\"shipment-title \">\n              {{\n                'orderDetails.consignmentTracking.dialog.shipped' | cxTranslate\n              }}\n            </div>\n            <div class=\"shipment-content\">\n              {{ shipDate | cxDate: 'medium' }}\n            </div>\n          </div>\n          <div class=\"col-sm-12 col-md-6\">\n            <div class=\"shipment-title\">\n              {{\n                'orderDetails.consignmentTracking.dialog.estimate' | cxTranslate\n              }}\n            </div>\n            <div class=\"shipment-content\">\n              {{ consignmentTracking?.targetArrivalDate | cxDate: 'medium' }}\n            </div>\n          </div>\n        </div>\n\n        <div class=\"row\">\n          <div class=\"col-sm-12 col-md-6\">\n            <div class=\"shipment-title\">\n              {{\n                'orderDetails.consignmentTracking.dialog.carrier' | cxTranslate\n              }}\n            </div>\n            <div class=\"shipment-content\">\n              {{ consignmentTracking?.carrierDetails?.name }}\n            </div>\n          </div>\n          <div class=\"col-sm-12 col-md-6\">\n            <div class=\"shipment-title\">\n              {{\n                'orderDetails.consignmentTracking.dialog.trackingId'\n                  | cxTranslate\n              }}\n            </div>\n            <div class=\"shipment-content\">\n              <label>\n                {{ consignmentTracking?.trackingID }}\n              </label>\n            </div>\n          </div>\n        </div>\n      </div>\n    </ng-container>\n\n    <!-- tracking events -->\n    <div class=\"events modal-body\">\n      <ng-container\n        *ngFor=\"let consignmentEvent of consignmentTracking.trackingEvents\"\n      >\n        <div class=\"event-body\" data-test=\"body-event\">\n          <div class=\"event-content\">\n            {{ consignmentEvent.eventDate | cxDate: 'medium' }}\n          </div>\n          <div class=\"event-title\">\n            {{ consignmentEvent.referenceCode }}\n          </div>\n          <div class=\"event-content\">{{ consignmentEvent.detail }}</div>\n          <div class=\"event-city\">\n            location: {{ consignmentEvent.location }}\n          </div>\n        </div>\n      </ng-container>\n    </div>\n  </ng-container>\n\n  <ng-template #noTracking>\n    <div class=\"no-tracking-heading\" data-test=\"head-notrack\">\n      <div class=\"shipment-content\">\n        {{ 'orderDetails.consignmentTracking.dialog.noTracking' | cxTranslate }}\n      </div>\n    </div>\n  </ng-template>\n\n  <ng-template #loading>\n    <div class=\"tracking-loading\" data-test=\"loading-track\">\n      <div class=\"header modal-header\">\n        <div class=\"title modal-title\">\n          {{\n            'orderDetails.consignmentTracking.dialog.loadingHeader'\n              | cxTranslate\n          }}\n        </div>\n        <button\n          type=\"button\"\n          class=\"close\"\n          aria-label=\"Close\"\n          data-test=\"btn-dismiss\"\n          (click)=\"activeModal.dismiss('Cross click')\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <!-- Modal Body -->\n      <div class=\"body modal-body\">\n        <div class=\"row\">\n          <div class=\"col-sm-12\">\n            <cx-spinner></cx-spinner>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        TrackingEventsComponent.ctorParameters = function () { return [
+            { type: ngBootstrap.NgbActiveModal },
+            { type: core$1.UserOrderService }
+        ]; };
+        return TrackingEventsComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ConsignmentTrackingComponent = /** @class */ (function () {
+        function ConsignmentTrackingComponent(userOrderService, modalService) {
+            this.userOrderService = userOrderService;
+            this.modalService = modalService;
+            this.consignmentStatus = [
+                'SHIPPED',
+                'IN_TRANSIT',
+                'DELIVERY_COMPLETED',
+                'DELIVERY_REJECTED',
+                'DELIVERING',
+            ];
+        }
+        /**
+         * @return {?}
+         */
+        ConsignmentTrackingComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+        function () {
+            this.consignmentTracking$ = this.userOrderService.getConsignmentTracking();
+        };
+        /**
+         * @param {?} consignment
+         * @return {?}
+         */
+        ConsignmentTrackingComponent.prototype.openTrackingDialog = /**
+         * @param {?} consignment
+         * @return {?}
+         */
+        function (consignment) {
+            this.userOrderService.loadConsignmentTracking(this.orderCode, consignment.code);
+            /** @type {?} */
+            var modalInstance;
+            this.modalRef = this.modalService.open(TrackingEventsComponent, {
+                centered: true,
+                size: 'lg',
+            });
+            modalInstance = this.modalRef.componentInstance;
+            modalInstance.tracking$ = this.consignmentTracking$;
+            modalInstance.shipDate = consignment.statusDate;
+            modalInstance.consignmentCode = consignment.code;
+        };
+        /**
+         * @return {?}
+         */
+        ConsignmentTrackingComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
+            this.userOrderService.clearConsignmentTracking();
+        };
+        ConsignmentTrackingComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-consignment-tracking',
+                        template: "<ng-container *ngIf=\"consignment && consignment.status\">\n  <div *ngIf=\"consignmentStatus.includes(consignment.status)\">\n    <button\n      (click)=\"openTrackingDialog(consignment)\"\n      class=\"btn btn-action\"\n      data-test=\"btn-events\"\n    >\n      {{ 'orderDetails.consignmentTracking.action' | cxTranslate }}\n    </button>\n  </div>\n</ng-container>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        ConsignmentTrackingComponent.ctorParameters = function () { return [
+            { type: core$1.UserOrderService },
+            { type: ModalService }
+        ]; };
+        ConsignmentTrackingComponent.propDecorators = {
+            consignment: [{ type: core.Input }],
+            orderCode: [{ type: core.Input }]
+        };
+        return ConsignmentTrackingComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     /** @type {?} */
     var moduleComponents = [
         OrderDetailHeadlineComponent,
         OrderDetailItemsComponent,
         OrderDetailTotalsComponent,
         OrderDetailShippingComponent,
+        TrackingEventsComponent,
+        ConsignmentTrackingComponent,
     ];
     var ɵ0$1 = { cxRoute: 'orderDetails' };
     var OrderDetailsModule = /** @class */ (function () {
@@ -11374,6 +11481,7 @@
                             CardModule,
                             common.CommonModule,
                             core$1.I18nModule,
+                            core$1.FeaturesConfigModule,
                             router.RouterModule.forChild([
                                 {
                                     path: null,
@@ -11397,7 +11505,11 @@
                                         component: OrderDetailShippingComponent,
                                     },
                                 },
+                                features: {
+                                    consignmentTracking: '1.2',
+                                },
                             }))),
+                            SpinnerModule,
                         ],
                         providers: [OrderDetailsService],
                         declarations: __spread(moduleComponents),
@@ -17874,7 +17986,9 @@
     exports.pwaFactory = pwaFactory;
     exports.ɵa = OnlyNumberDirectiveModule;
     exports.ɵb = AutoFocusDirectiveModule;
-    exports.ɵba = defaultRoutingConfig;
+    exports.ɵba = RoutingModule;
+    exports.ɵbb = defaultStorefrontRoutesConfig;
+    exports.ɵbc = defaultRoutingConfig;
     exports.ɵc = defaultCheckoutConfig;
     exports.ɵd = HighlightPipe;
     exports.ɵe = defaultScrollConfig;
@@ -17889,16 +18003,16 @@
     exports.ɵn = CmsMappingService;
     exports.ɵo = CmsI18nService;
     exports.ɵp = CmsGuardsService;
-    exports.ɵq = ComponentMapperService;
-    exports.ɵr = AddToHomeScreenService;
-    exports.ɵs = ProductImagesModule;
-    exports.ɵt = ProductImagesComponent;
-    exports.ɵu = suffixUrlMatcher;
-    exports.ɵv = addCmsRoute;
-    exports.ɵw = htmlLangProvider;
-    exports.ɵx = setHtmlLangAttribute;
-    exports.ɵy = RoutingModule;
-    exports.ɵz = defaultStorefrontRoutesConfig;
+    exports.ɵq = TrackingEventsComponent;
+    exports.ɵr = ConsignmentTrackingComponent;
+    exports.ɵs = ComponentMapperService;
+    exports.ɵt = AddToHomeScreenService;
+    exports.ɵu = ProductImagesModule;
+    exports.ɵv = ProductImagesComponent;
+    exports.ɵw = suffixUrlMatcher;
+    exports.ɵx = addCmsRoute;
+    exports.ɵy = htmlLangProvider;
+    exports.ɵz = setHtmlLangAttribute;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
