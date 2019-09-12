@@ -4219,6 +4219,12 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /** @enum {string} */
+    var DeliveryModePreferences = {
+        FREE: 'FREE',
+        LEAST_EXPENSIVE: 'LEAST_EXPENSIVE',
+        MOST_EXPENSIVE: 'MOST_EXPENSIVE',
+    };
     /**
      * @abstract
      */
@@ -4276,6 +4282,8 @@
                     type: [CheckoutStepType.REVIEW_ORDER],
                 },
             ],
+            express: false,
+            defaultDeliveryMode: [DeliveryModePreferences.FREE],
         },
     };
 
@@ -4283,11 +4291,681 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var CheckoutConfigService = /** @class */ (function () {
+        function CheckoutConfigService(checkoutConfig, routingConfigService) {
+            this.checkoutConfig = checkoutConfig;
+            this.routingConfigService = routingConfigService;
+            this.steps = this.checkoutConfig.checkout.steps;
+            this.express = this.checkoutConfig.checkout.express;
+            this.defaultDeliveryMode = this.checkoutConfig.checkout.defaultDeliveryMode || [];
+        }
+        /**
+         * @param {?} currentStepType
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getCheckoutStep = /**
+         * @param {?} currentStepType
+         * @return {?}
+         */
+        function (currentStepType) {
+            return this.steps[this.getCheckoutStepIndex('type', currentStepType)];
+        };
+        /**
+         * @param {?} currentStepType
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getCheckoutStepRoute = /**
+         * @param {?} currentStepType
+         * @return {?}
+         */
+        function (currentStepType) {
+            return this.getCheckoutStep(currentStepType).routeName;
+        };
+        /**
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getFirstCheckoutStepRoute = /**
+         * @return {?}
+         */
+        function () {
+            return this.steps[0].routeName;
+        };
+        /**
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getNextCheckoutStepUrl = /**
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+        function (activatedRoute) {
+            /** @type {?} */
+            var stepIndex = this.getCurrentStepIndex(activatedRoute);
+            return stepIndex >= 0 && this.steps[stepIndex + 1]
+                ? this.getStepUrlFromStepRoute(this.steps[stepIndex + 1].routeName)
+                : null;
+        };
+        /**
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getPreviousCheckoutStepUrl = /**
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+        function (activatedRoute) {
+            /** @type {?} */
+            var stepIndex = this.getCurrentStepIndex(activatedRoute);
+            return stepIndex >= 0 && this.steps[stepIndex - 1]
+                ? this.getStepUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
+                : null;
+        };
+        /**
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getCurrentStepIndex = /**
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+        function (activatedRoute) {
+            var e_1, _a;
+            /** @type {?} */
+            var currentStepUrl = this.getStepUrlFromActivatedRoute(activatedRoute);
+            /** @type {?} */
+            var stepIndex;
+            /** @type {?} */
+            var index = 0;
+            try {
+                for (var _b = __values(this.steps), _c = _b.next(); !_c.done; _c = _b.next()) {
+                    var step = _c.value;
+                    if (currentStepUrl === "/" + this.getStepUrlFromStepRoute(step.routeName)) {
+                        stepIndex = index;
+                    }
+                    else {
+                        index++;
+                    }
+                }
+            }
+            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            finally {
+                try {
+                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                }
+                finally { if (e_1) throw e_1.error; }
+            }
+            return stepIndex >= 0 ? stepIndex : null;
+        };
+        /**
+         * @protected
+         * @param {?} deliveryMode1
+         * @param {?} deliveryMode2
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.compareDeliveryCost = /**
+         * @protected
+         * @param {?} deliveryMode1
+         * @param {?} deliveryMode2
+         * @return {?}
+         */
+        function (deliveryMode1, deliveryMode2) {
+            if (deliveryMode1.deliveryCost.value > deliveryMode2.deliveryCost.value) {
+                return 1;
+            }
+            else if (deliveryMode1.deliveryCost.value < deliveryMode2.deliveryCost.value) {
+                return -1;
+            }
+            return 0;
+        };
+        /**
+         * @protected
+         * @param {?} deliveryModes
+         * @param {?=} index
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.findMatchingDeliveryMode = /**
+         * @protected
+         * @param {?} deliveryModes
+         * @param {?=} index
+         * @return {?}
+         */
+        function (deliveryModes, index) {
+            var _this = this;
+            if (index === void 0) { index = 0; }
+            switch (this.defaultDeliveryMode[index]) {
+                case DeliveryModePreferences.FREE:
+                    if (deliveryModes[0].deliveryCost.value === 0) {
+                        return deliveryModes[0].code;
+                    }
+                    break;
+                case DeliveryModePreferences.LEAST_EXPENSIVE:
+                    /** @type {?} */
+                    var leastExpensiveFound = deliveryModes.find((/**
+                     * @param {?} deliveryMode
+                     * @return {?}
+                     */
+                    function (deliveryMode) { return deliveryMode.deliveryCost.value !== 0; }));
+                    if (leastExpensiveFound) {
+                        return leastExpensiveFound.code;
+                    }
+                    break;
+                case DeliveryModePreferences.MOST_EXPENSIVE:
+                    return deliveryModes[deliveryModes.length - 1].code;
+                default:
+                    /** @type {?} */
+                    var codeFound = deliveryModes.find((/**
+                     * @param {?} deliveryMode
+                     * @return {?}
+                     */
+                    function (deliveryMode) { return deliveryMode.code === _this.defaultDeliveryMode[index]; }));
+                    if (codeFound) {
+                        return codeFound.code;
+                    }
+            }
+            /** @type {?} */
+            var lastMode = this.defaultDeliveryMode.length - 1 <= index;
+            return lastMode
+                ? deliveryModes[0].code
+                : this.findMatchingDeliveryMode(deliveryModes, index + 1);
+        };
+        /**
+         * @param {?} deliveryModes
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getPreferredDeliveryMode = /**
+         * @param {?} deliveryModes
+         * @return {?}
+         */
+        function (deliveryModes) {
+            deliveryModes.sort(this.compareDeliveryCost);
+            return this.findMatchingDeliveryMode(deliveryModes);
+        };
+        /**
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.isExpressCheckout = /**
+         * @return {?}
+         */
+        function () {
+            return this.express;
+        };
+        /**
+         * @private
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getStepUrlFromActivatedRoute = /**
+         * @private
+         * @param {?} activatedRoute
+         * @return {?}
+         */
+        function (activatedRoute) {
+            return activatedRoute &&
+                activatedRoute.snapshot &&
+                activatedRoute.snapshot.url
+                ? "/" + activatedRoute.snapshot.url.join('/')
+                : null;
+        };
+        /**
+         * @private
+         * @param {?} stepRoute
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getStepUrlFromStepRoute = /**
+         * @private
+         * @param {?} stepRoute
+         * @return {?}
+         */
+        function (stepRoute) {
+            return this.routingConfigService.getRouteConfig(stepRoute).paths[0];
+        };
+        /**
+         * @private
+         * @param {?} key
+         * @param {?} value
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.getCheckoutStepIndex = /**
+         * @private
+         * @param {?} key
+         * @param {?} value
+         * @return {?}
+         */
+        function (key, value) {
+            return key && value
+                ? this.steps.findIndex((/**
+                 * @param {?} step
+                 * @return {?}
+                 */
+                function (step) { return step[key].includes(value); }))
+                : null;
+        };
+        CheckoutConfigService.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        CheckoutConfigService.ctorParameters = function () { return [
+            { type: CheckoutConfig },
+            { type: core$1.RoutingConfigService }
+        ]; };
+        /** @nocollapse */ CheckoutConfigService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CheckoutConfigService_Factory() { return new CheckoutConfigService(core.ɵɵinject(CheckoutConfig), core.ɵɵinject(core$1.RoutingConfigService)); }, token: CheckoutConfigService, providedIn: "root" });
+        return CheckoutConfigService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CheckoutDetailsService = /** @class */ (function () {
+        function CheckoutDetailsService(checkoutService, checkoutDeliveryService, checkoutPaymentService, cartService) {
+            var _this = this;
+            this.checkoutService = checkoutService;
+            this.checkoutDeliveryService = checkoutDeliveryService;
+            this.checkoutPaymentService = checkoutPaymentService;
+            this.cartService = cartService;
+            this.cartId$ = this.cartService.getActive().pipe(operators.map((/**
+             * @param {?} cartData
+             * @return {?}
+             */
+            function (cartData) { return cartData.code; })), operators.filter((/**
+             * @param {?} cartId
+             * @return {?}
+             */
+            function (cartId) { return !!cartId; })));
+            this.getCheckoutDetailsLoaded$ = this.cartId$.pipe(operators.tap((/**
+             * @param {?} cartId
+             * @return {?}
+             */
+            function (cartId) { return _this.checkoutService.loadCheckoutDetails(cartId); })), operators.shareReplay(1), operators.switchMap((/**
+             * @return {?}
+             */
+            function () { return _this.checkoutService.getCheckoutDetailsLoaded(); })), operators.skipWhile((/**
+             * @param {?} loaded
+             * @return {?}
+             */
+            function (loaded) { return !loaded; })));
+        }
+        /**
+         * @return {?}
+         */
+        CheckoutDetailsService.prototype.getDeliveryAddress = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            return this.getCheckoutDetailsLoaded$.pipe(operators.switchMap((/**
+             * @return {?}
+             */
+            function () { return _this.checkoutDeliveryService.getDeliveryAddress(); })));
+        };
+        /**
+         * @return {?}
+         */
+        CheckoutDetailsService.prototype.getSelectedDeliveryModeCode = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            return this.getCheckoutDetailsLoaded$.pipe(operators.switchMap((/**
+             * @return {?}
+             */
+            function () {
+                return _this.checkoutDeliveryService.getSelectedDeliveryModeCode();
+            })));
+        };
+        /**
+         * @return {?}
+         */
+        CheckoutDetailsService.prototype.getPaymentDetails = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            return this.getCheckoutDetailsLoaded$.pipe(operators.switchMap((/**
+             * @return {?}
+             */
+            function () { return _this.checkoutPaymentService.getPaymentDetails(); })));
+        };
+        CheckoutDetailsService.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        CheckoutDetailsService.ctorParameters = function () { return [
+            { type: core$1.CheckoutService },
+            { type: core$1.CheckoutDeliveryService },
+            { type: core$1.CheckoutPaymentService },
+            { type: core$1.CartService }
+        ]; };
+        /** @nocollapse */ CheckoutDetailsService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(core.ɵɵinject(core$1.CheckoutService), core.ɵɵinject(core$1.CheckoutDeliveryService), core.ɵɵinject(core$1.CheckoutPaymentService), core.ɵɵinject(core$1.CartService)); }, token: CheckoutDetailsService, providedIn: "root" });
+        return CheckoutDetailsService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ExpressCheckoutService = /** @class */ (function () {
+        function ExpressCheckoutService(userAddressService, userPaymentService, checkoutDeliveryService, checkoutPaymentService, checkoutDetailsService, checkoutConfigService) {
+            this.userAddressService = userAddressService;
+            this.userPaymentService = userPaymentService;
+            this.checkoutDeliveryService = checkoutDeliveryService;
+            this.checkoutPaymentService = checkoutPaymentService;
+            this.checkoutDetailsService = checkoutDetailsService;
+            this.checkoutConfigService = checkoutConfigService;
+            this.setShippingAddress();
+            this.setDeliveryMode();
+            this.setPaymentMethod();
+        }
+        /**
+         * @protected
+         * @return {?}
+         */
+        ExpressCheckoutService.prototype.setShippingAddress = /**
+         * @protected
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this.shippingAddressSet$ = rxjs.combineLatest([
+                this.userAddressService.getAddresses(),
+                this.userAddressService.getAddressesLoadedSuccess(),
+                this.checkoutDeliveryService.getSetDeliveryAddressProcess(),
+            ]).pipe(operators.debounceTime(0), operators.tap((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 2), addressesLoadedSuccess = _b[1];
+                if (!addressesLoadedSuccess) {
+                    _this.userAddressService.loadAddresses();
+                }
+            })), operators.filter((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 2), addressesLoadedSuccess = _b[1];
+                return addressesLoadedSuccess;
+            })), operators.switchMap((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 3), addresses = _b[0], setDeliveryAddressProcess = _b[2];
+                /** @type {?} */
+                var defaultAddress = addresses.find((/**
+                 * @param {?} address
+                 * @return {?}
+                 */
+                function (address) { return address.defaultAddress; })) || addresses[0];
+                if (defaultAddress && Object.keys(defaultAddress).length) {
+                    if (!(setDeliveryAddressProcess.success ||
+                        setDeliveryAddressProcess.error ||
+                        setDeliveryAddressProcess.loading)) {
+                        _this.checkoutDeliveryService.setDeliveryAddress(defaultAddress);
+                    }
+                    return rxjs.of(setDeliveryAddressProcess).pipe(operators.filter((/**
+                     * @param {?} setDeliveryAddressProcessState
+                     * @return {?}
+                     */
+                    function (setDeliveryAddressProcessState) {
+                        return ((setDeliveryAddressProcessState.success ||
+                            setDeliveryAddressProcessState.error) &&
+                            !setDeliveryAddressProcessState.loading);
+                    })), operators.switchMap((/**
+                     * @param {?} setDeliveryAddressProcessState
+                     * @return {?}
+                     */
+                    function (setDeliveryAddressProcessState) {
+                        if (setDeliveryAddressProcessState.success) {
+                            return _this.checkoutDetailsService.getDeliveryAddress();
+                        }
+                        return rxjs.of(false);
+                    })), operators.map((/**
+                     * @param {?} data
+                     * @return {?}
+                     */
+                    function (data) { return Boolean(data && Object.keys(data).length); })));
+                }
+                return rxjs.of(false);
+            })));
+        };
+        /**
+         * @protected
+         * @return {?}
+         */
+        ExpressCheckoutService.prototype.setPaymentMethod = /**
+         * @protected
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this.paymentMethodSet$ = rxjs.combineLatest([
+                this.userPaymentService.getPaymentMethods(),
+                this.userPaymentService.getPaymentMethodsLoadedSuccess(),
+                this.checkoutPaymentService.getSetPaymentDetailsResultProcess(),
+            ]).pipe(operators.debounceTime(0), operators.tap((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 2), paymentMethodsLoadedSuccess = _b[1];
+                if (!paymentMethodsLoadedSuccess) {
+                    _this.userPaymentService.loadPaymentMethods();
+                }
+            })), operators.filter((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 2), success = _b[1];
+                return success;
+            })), operators.switchMap((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 3), payments = _b[0], setPaymentDetailsProcess = _b[2];
+                /** @type {?} */
+                var defaultPayment = payments.find((/**
+                 * @param {?} address
+                 * @return {?}
+                 */
+                function (address) { return address.defaultPayment; })) || payments[0];
+                if (defaultPayment && Object.keys(defaultPayment).length) {
+                    if (!(setPaymentDetailsProcess.success ||
+                        setPaymentDetailsProcess.error ||
+                        setPaymentDetailsProcess.loading)) {
+                        _this.checkoutPaymentService.setPaymentDetails(defaultPayment);
+                    }
+                    return rxjs.of(setPaymentDetailsProcess).pipe(operators.filter((/**
+                     * @param {?} setPaymentDetailsProcessState
+                     * @return {?}
+                     */
+                    function (setPaymentDetailsProcessState) {
+                        return ((setPaymentDetailsProcessState.success ||
+                            setPaymentDetailsProcessState.error) &&
+                            !setPaymentDetailsProcessState.loading);
+                    })), operators.switchMap((/**
+                     * @param {?} setPaymentDetailsProcessState
+                     * @return {?}
+                     */
+                    function (setPaymentDetailsProcessState) {
+                        if (setPaymentDetailsProcessState.success) {
+                            return _this.checkoutDetailsService.getPaymentDetails();
+                        }
+                        return rxjs.of(false);
+                    })), operators.map((/**
+                     * @param {?} data
+                     * @return {?}
+                     */
+                    function (data) { return Boolean(data && Object.keys(data).length); })));
+                }
+                return rxjs.of(false);
+            })));
+        };
+        /**
+         * @protected
+         * @return {?}
+         */
+        ExpressCheckoutService.prototype.setDeliveryMode = /**
+         * @protected
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this.deliveryModeSet$ = rxjs.combineLatest([
+                this.shippingAddressSet$,
+                this.checkoutDeliveryService.getSupportedDeliveryModes(),
+                this.checkoutDeliveryService.getSetDeliveryModeProcess(),
+                this.checkoutDeliveryService.getLoadSupportedDeliveryModeProcess(),
+            ]).pipe(operators.debounceTime(0), operators.switchMap((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 4), addressSet = _b[0], supportedDeliveryModes = _b[1], setDeliveryModeStatusFlag = _b[2], loadSupportedDeliveryModeStatus = _b[3];
+                if (addressSet) {
+                    return rxjs.of([
+                        supportedDeliveryModes,
+                        setDeliveryModeStatusFlag,
+                        loadSupportedDeliveryModeStatus,
+                    ]).pipe(operators.filter((/**
+                     * @param {?} __0
+                     * @return {?}
+                     */
+                    function (_a) {
+                        var _b = __read(_a, 3), supportedDeliveryModeStatus = _b[2];
+                        return supportedDeliveryModeStatus.success;
+                    })), operators.switchMap((/**
+                     * @param {?} __0
+                     * @return {?}
+                     */
+                    function (_a) {
+                        var _b = __read(_a, 3), deliveryModes = _b[0], setDeliveryModeStatus = _b[1];
+                        if (Boolean(deliveryModes.length)) {
+                            /** @type {?} */
+                            var preferredDeliveryMode = _this.checkoutConfigService.getPreferredDeliveryMode(deliveryModes);
+                            return rxjs.of([
+                                preferredDeliveryMode,
+                                setDeliveryModeStatus,
+                            ]).pipe(operators.tap((/**
+                             * @param {?} __0
+                             * @return {?}
+                             */
+                            function (_a) {
+                                var _b = __read(_a, 2), deliveryMode = _b[0], deliveryModeLoadingStatus = _b[1];
+                                if (deliveryMode &&
+                                    !(deliveryModeLoadingStatus.success ||
+                                        deliveryModeLoadingStatus.error ||
+                                        deliveryModeLoadingStatus.loading)) {
+                                    _this.checkoutDeliveryService.setDeliveryMode(deliveryMode);
+                                }
+                            })), operators.filter((/**
+                             * @param {?} __0
+                             * @return {?}
+                             */
+                            function (_a) {
+                                var _b = __read(_a, 2), deliveryModeLoadingStatus = _b[1];
+                                return ((deliveryModeLoadingStatus.success ||
+                                    deliveryModeLoadingStatus.error) &&
+                                    !deliveryModeLoadingStatus.loading);
+                            })), operators.switchMap((/**
+                             * @param {?} __0
+                             * @return {?}
+                             */
+                            function (_a) {
+                                var _b = __read(_a, 2), deliveryModeLoadingStatus = _b[1];
+                                if (deliveryModeLoadingStatus.success) {
+                                    return _this.checkoutDetailsService.getSelectedDeliveryModeCode();
+                                }
+                                return rxjs.of(false);
+                            })), operators.map((/**
+                             * @param {?} data
+                             * @return {?}
+                             */
+                            function (data) { return Boolean(data); })));
+                        }
+                        return rxjs.of(false);
+                    })));
+                }
+                else {
+                    return rxjs.of(false);
+                }
+            })));
+        };
+        /**
+         * @protected
+         * @return {?}
+         */
+        ExpressCheckoutService.prototype.resetCheckoutProcesses = /**
+         * @protected
+         * @return {?}
+         */
+        function () {
+            this.checkoutDeliveryService.resetSetDeliveryAddressProcess();
+            this.checkoutPaymentService.resetSetPaymentDetailsProcess();
+            this.checkoutDeliveryService.resetSetDeliveryModeProcess();
+        };
+        /**
+         * @return {?}
+         */
+        ExpressCheckoutService.prototype.trySetDefaultCheckoutDetails = /**
+         * @return {?}
+         */
+        function () {
+            this.resetCheckoutProcesses();
+            return rxjs.combineLatest([this.deliveryModeSet$, this.paymentMethodSet$]).pipe(operators.map((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 2), deliveryModeSet = _b[0], paymentMethodSet = _b[1];
+                return Boolean(deliveryModeSet && paymentMethodSet);
+            })));
+        };
+        ExpressCheckoutService.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        ExpressCheckoutService.ctorParameters = function () { return [
+            { type: core$1.UserAddressService },
+            { type: core$1.UserPaymentService },
+            { type: core$1.CheckoutDeliveryService },
+            { type: core$1.CheckoutPaymentService },
+            { type: CheckoutDetailsService },
+            { type: CheckoutConfigService }
+        ]; };
+        /** @nocollapse */ ExpressCheckoutService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function ExpressCheckoutService_Factory() { return new ExpressCheckoutService(core.ɵɵinject(core$1.UserAddressService), core.ɵɵinject(core$1.UserPaymentService), core.ɵɵinject(core$1.CheckoutDeliveryService), core.ɵɵinject(core$1.CheckoutPaymentService), core.ɵɵinject(CheckoutDetailsService), core.ɵɵinject(CheckoutConfigService)); }, token: ExpressCheckoutService, providedIn: "root" });
+        return ExpressCheckoutService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var CheckoutGuard = /** @class */ (function () {
-        function CheckoutGuard(router, config, routingConfigService) {
+        function CheckoutGuard(router, config, routingConfigService, checkoutConfigService, expressCheckoutService) {
             this.router = router;
             this.config = config;
             this.routingConfigService = routingConfigService;
+            this.checkoutConfigService = checkoutConfigService;
+            this.expressCheckoutService = expressCheckoutService;
+            /**
+             * TODO(issue:#4309) Deprecated since 1.2.0
+             */
+            if (this.checkoutConfigService) {
+                this.firstStep$ = rxjs.of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.checkoutConfigService.getFirstCheckoutStepRoute()).paths[0]));
+            }
+            else {
+                this.firstStep$ = rxjs.of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.config.checkout.steps[0].routeName).paths[0]));
+            }
         }
         /**
          * @return {?}
@@ -4296,7 +4974,24 @@
          * @return {?}
          */
         function () {
-            return rxjs.of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.config.checkout.steps[0].routeName).paths[0]));
+            var _this = this;
+            /**
+             * TODO(issue:#4309) Deprecated since 1.2.0
+             */
+            if (this.checkoutConfigService && this.expressCheckoutService) {
+                if (this.checkoutConfigService.isExpressCheckout()) {
+                    return this.expressCheckoutService.trySetDefaultCheckoutDetails().pipe(operators.switchMap((/**
+                     * @param {?} expressCheckoutPossible
+                     * @return {?}
+                     */
+                    function (expressCheckoutPossible) {
+                        return expressCheckoutPossible
+                            ? rxjs.of(_this.router.parseUrl(_this.routingConfigService.getRouteConfig(_this.checkoutConfigService.getCheckoutStepRoute(CheckoutStepType.REVIEW_ORDER)).paths[0]))
+                            : _this.firstStep$;
+                    })));
+                }
+            }
+            return this.firstStep$;
         };
         CheckoutGuard.decorators = [
             { type: core.Injectable, args: [{
@@ -4307,9 +5002,11 @@
         CheckoutGuard.ctorParameters = function () { return [
             { type: router.Router },
             { type: CheckoutConfig },
-            { type: core$1.RoutingConfigService }
+            { type: core$1.RoutingConfigService },
+            { type: CheckoutConfigService },
+            { type: ExpressCheckoutService }
         ]; };
-        /** @nocollapse */ CheckoutGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(core.ɵɵinject(router.Router), core.ɵɵinject(CheckoutConfig), core.ɵɵinject(core$1.RoutingConfigService)); }, token: CheckoutGuard, providedIn: "root" });
+        /** @nocollapse */ CheckoutGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(core.ɵɵinject(router.Router), core.ɵɵinject(CheckoutConfig), core.ɵɵinject(core$1.RoutingConfigService), core.ɵɵinject(CheckoutConfigService), core.ɵɵinject(ExpressCheckoutService)); }, token: CheckoutGuard, providedIn: "root" });
         return CheckoutGuard;
     }());
 
@@ -4674,248 +5371,6 @@
                     },] }
         ];
         return CheckoutProgressModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CheckoutConfigService = /** @class */ (function () {
-        function CheckoutConfigService(checkoutConfig, routingConfigService) {
-            this.checkoutConfig = checkoutConfig;
-            this.routingConfigService = routingConfigService;
-            this.steps = this.checkoutConfig.checkout.steps;
-        }
-        /**
-         * @param {?} currentStepType
-         * @return {?}
-         */
-        CheckoutConfigService.prototype.getCheckoutStep = /**
-         * @param {?} currentStepType
-         * @return {?}
-         */
-        function (currentStepType) {
-            return this.steps[this.getCheckoutStepIndex('type', currentStepType)];
-        };
-        /**
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-        CheckoutConfigService.prototype.getNextCheckoutStepUrl = /**
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-        function (activatedRoute) {
-            /** @type {?} */
-            var stepIndex = this.getCurrentStepIndex(activatedRoute);
-            return stepIndex >= 0 && this.steps[stepIndex + 1]
-                ? this.getStepUrlFromStepRoute(this.steps[stepIndex + 1].routeName)
-                : null;
-        };
-        /**
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-        CheckoutConfigService.prototype.getPreviousCheckoutStepUrl = /**
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-        function (activatedRoute) {
-            /** @type {?} */
-            var stepIndex = this.getCurrentStepIndex(activatedRoute);
-            return stepIndex >= 0 && this.steps[stepIndex - 1]
-                ? this.getStepUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
-                : null;
-        };
-        /**
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-        CheckoutConfigService.prototype.getCurrentStepIndex = /**
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-        function (activatedRoute) {
-            var e_1, _a;
-            /** @type {?} */
-            var currentStepUrl = this.getStepUrlFromActivatedRoute(activatedRoute);
-            /** @type {?} */
-            var stepIndex;
-            /** @type {?} */
-            var index = 0;
-            try {
-                for (var _b = __values(this.steps), _c = _b.next(); !_c.done; _c = _b.next()) {
-                    var step = _c.value;
-                    if (currentStepUrl === "/" + this.getStepUrlFromStepRoute(step.routeName)) {
-                        stepIndex = index;
-                    }
-                    else {
-                        index++;
-                    }
-                }
-            }
-            catch (e_1_1) { e_1 = { error: e_1_1 }; }
-            finally {
-                try {
-                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-                }
-                finally { if (e_1) throw e_1.error; }
-            }
-            return stepIndex >= 0 ? stepIndex : null;
-        };
-        /**
-         * @private
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-        CheckoutConfigService.prototype.getStepUrlFromActivatedRoute = /**
-         * @private
-         * @param {?} activatedRoute
-         * @return {?}
-         */
-        function (activatedRoute) {
-            return activatedRoute &&
-                activatedRoute.snapshot &&
-                activatedRoute.snapshot.url
-                ? "/" + activatedRoute.snapshot.url.join('/')
-                : null;
-        };
-        /**
-         * @private
-         * @param {?} stepRoute
-         * @return {?}
-         */
-        CheckoutConfigService.prototype.getStepUrlFromStepRoute = /**
-         * @private
-         * @param {?} stepRoute
-         * @return {?}
-         */
-        function (stepRoute) {
-            return this.routingConfigService.getRouteConfig(stepRoute).paths[0];
-        };
-        /**
-         * @private
-         * @param {?} key
-         * @param {?} value
-         * @return {?}
-         */
-        CheckoutConfigService.prototype.getCheckoutStepIndex = /**
-         * @private
-         * @param {?} key
-         * @param {?} value
-         * @return {?}
-         */
-        function (key, value) {
-            return key && value
-                ? this.steps.findIndex((/**
-                 * @param {?} step
-                 * @return {?}
-                 */
-                function (step) { return step[key].includes(value); }))
-                : null;
-        };
-        CheckoutConfigService.decorators = [
-            { type: core.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */
-        CheckoutConfigService.ctorParameters = function () { return [
-            { type: CheckoutConfig },
-            { type: core$1.RoutingConfigService }
-        ]; };
-        /** @nocollapse */ CheckoutConfigService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CheckoutConfigService_Factory() { return new CheckoutConfigService(core.ɵɵinject(CheckoutConfig), core.ɵɵinject(core$1.RoutingConfigService)); }, token: CheckoutConfigService, providedIn: "root" });
-        return CheckoutConfigService;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CheckoutDetailsService = /** @class */ (function () {
-        function CheckoutDetailsService(checkoutService, checkoutDeliveryService, checkoutPaymentService, cartService) {
-            var _this = this;
-            this.checkoutService = checkoutService;
-            this.checkoutDeliveryService = checkoutDeliveryService;
-            this.checkoutPaymentService = checkoutPaymentService;
-            this.cartService = cartService;
-            this.cartId$ = this.cartService.getActive().pipe(operators.map((/**
-             * @param {?} cartData
-             * @return {?}
-             */
-            function (cartData) { return cartData.code; })), operators.filter((/**
-             * @param {?} cartId
-             * @return {?}
-             */
-            function (cartId) { return !!cartId; })));
-            this.getCheckoutDetailsLoaded$ = this.cartId$.pipe(operators.tap((/**
-             * @param {?} cartId
-             * @return {?}
-             */
-            function (cartId) { return _this.checkoutService.loadCheckoutDetails(cartId); })), operators.shareReplay(1), operators.switchMap((/**
-             * @return {?}
-             */
-            function () { return _this.checkoutService.getCheckoutDetailsLoaded(); })), operators.skipWhile((/**
-             * @param {?} loaded
-             * @return {?}
-             */
-            function (loaded) { return !loaded; })));
-        }
-        /**
-         * @return {?}
-         */
-        CheckoutDetailsService.prototype.getDeliveryAddress = /**
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            return this.getCheckoutDetailsLoaded$.pipe(operators.switchMap((/**
-             * @return {?}
-             */
-            function () { return _this.checkoutDeliveryService.getDeliveryAddress(); })));
-        };
-        /**
-         * @return {?}
-         */
-        CheckoutDetailsService.prototype.getSelectedDeliveryModeCode = /**
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            return this.getCheckoutDetailsLoaded$.pipe(operators.switchMap((/**
-             * @return {?}
-             */
-            function () {
-                return _this.checkoutDeliveryService.getSelectedDeliveryModeCode();
-            })));
-        };
-        /**
-         * @return {?}
-         */
-        CheckoutDetailsService.prototype.getPaymentDetails = /**
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            return this.getCheckoutDetailsLoaded$.pipe(operators.switchMap((/**
-             * @return {?}
-             */
-            function () { return _this.checkoutPaymentService.getPaymentDetails(); })));
-        };
-        CheckoutDetailsService.decorators = [
-            { type: core.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */
-        CheckoutDetailsService.ctorParameters = function () { return [
-            { type: core$1.CheckoutService },
-            { type: core$1.CheckoutDeliveryService },
-            { type: core$1.CheckoutPaymentService },
-            { type: core$1.CartService }
-        ]; };
-        /** @nocollapse */ CheckoutDetailsService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(core.ɵɵinject(core$1.CheckoutService), core.ɵɵinject(core$1.CheckoutDeliveryService), core.ɵɵinject(core$1.CheckoutPaymentService), core.ɵɵinject(core$1.CartService)); }, token: CheckoutDetailsService, providedIn: "root" });
-        return CheckoutDetailsService;
     }());
 
     /**
@@ -10126,8 +10581,10 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var AddressBookComponentService = /** @class */ (function () {
-        function AddressBookComponentService(userAddressService) {
+        function AddressBookComponentService(userAddressService, checkoutDeliveryService, featureConfigService) {
             this.userAddressService = userAddressService;
+            this.checkoutDeliveryService = checkoutDeliveryService;
+            this.featureConfigService = featureConfigService;
         }
         /**
          * @return {?}
@@ -10179,13 +10636,23 @@
          */
         function (addressId, address) {
             this.userAddressService.updateUserAddress(addressId, address);
+            /**
+             * TODO(issue:#4309) Deprecated since 1.2.0
+             */
+            if (this.featureConfigService &&
+                this.featureConfigService.isLevel('1.2') &&
+                this.checkoutDeliveryService) {
+                this.checkoutDeliveryService.clearCheckoutDeliveryDetails();
+            }
         };
         AddressBookComponentService.decorators = [
             { type: core.Injectable }
         ];
         /** @nocollapse */
         AddressBookComponentService.ctorParameters = function () { return [
-            { type: core$1.UserAddressService }
+            { type: core$1.UserAddressService },
+            { type: core$1.CheckoutDeliveryService },
+            { type: core$1.FeatureConfigService }
         ]; };
         return AddressBookComponentService;
     }());
@@ -10294,8 +10761,10 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var AddressCardComponent = /** @class */ (function () {
-        function AddressCardComponent(userAddressService) {
+        function AddressCardComponent(userAddressService, checkoutDeliveryService, featureConfigService) {
             this.userAddressService = userAddressService;
+            this.checkoutDeliveryService = checkoutDeliveryService;
+            this.featureConfigService = featureConfigService;
             this.editEvent = new core.EventEmitter();
         }
         /**
@@ -10335,6 +10804,14 @@
          */
         function (addressId) {
             this.userAddressService.setAddressAsDefault(addressId);
+            /**
+             * TODO(issue:#4309) Deprecated since 1.2.0
+             */
+            if (this.featureConfigService &&
+                this.featureConfigService.isLevel('1.2') &&
+                this.checkoutDeliveryService) {
+                this.checkoutDeliveryService.clearCheckoutDeliveryDetails();
+            }
         };
         /**
          * @param {?} addressId
@@ -10346,6 +10823,14 @@
          */
         function (addressId) {
             this.userAddressService.deleteUserAddress(addressId);
+            /**
+             * TODO(issue:#4309) Deprecated since 1.2.0
+             */
+            if (this.featureConfigService &&
+                this.featureConfigService.isLevel('1.2') &&
+                this.checkoutDeliveryService) {
+                this.checkoutDeliveryService.clearCheckoutDeliveryDetails();
+            }
         };
         AddressCardComponent.decorators = [
             { type: core.Component, args: [{
@@ -10355,7 +10840,9 @@
         ];
         /** @nocollapse */
         AddressCardComponent.ctorParameters = function () { return [
-            { type: core$1.UserAddressService }
+            { type: core$1.UserAddressService },
+            { type: core$1.CheckoutDeliveryService },
+            { type: core$1.FeatureConfigService }
         ]; };
         AddressCardComponent.propDecorators = {
             address: [{ type: core.Input }],
@@ -18737,6 +19224,7 @@
     exports.CurrentProductService = CurrentProductService;
     exports.DeliveryModeComponent = DeliveryModeComponent;
     exports.DeliveryModeModule = DeliveryModeModule;
+    exports.DeliveryModePreferences = DeliveryModePreferences;
     exports.DeliveryModeSetGuard = DeliveryModeSetGuard;
     exports.FooterNavigationComponent = FooterNavigationComponent;
     exports.FooterNavigationModule = FooterNavigationModule;
@@ -18914,33 +19402,34 @@
     exports.pwaFactory = pwaFactory;
     exports.ɵa = OnlyNumberDirectiveModule;
     exports.ɵb = AutoFocusDirectiveModule;
-    exports.ɵba = RoutingModule;
-    exports.ɵbb = defaultStorefrontRoutesConfig;
-    exports.ɵbc = defaultRoutingConfig;
+    exports.ɵba = setHtmlLangAttribute;
+    exports.ɵbb = RoutingModule;
+    exports.ɵbc = defaultStorefrontRoutesConfig;
+    exports.ɵbd = defaultRoutingConfig;
     exports.ɵc = defaultCheckoutConfig;
-    exports.ɵd = HighlightPipe;
-    exports.ɵe = defaultScrollConfig;
-    exports.ɵf = ProductListComponentService;
-    exports.ɵg = ViewConfig;
-    exports.ɵh = ViewConfigModule;
-    exports.ɵi = ProductScrollComponent;
-    exports.ɵj = ProductAttributesModule;
-    exports.ɵk = ProductDetailsTabModule;
-    exports.ɵl = ProductDetailsTabComponent;
-    exports.ɵm = CmsRoutesService;
-    exports.ɵn = CmsMappingService;
-    exports.ɵo = CmsI18nService;
-    exports.ɵp = CmsGuardsService;
-    exports.ɵq = TrackingEventsComponent;
-    exports.ɵr = ConsignmentTrackingComponent;
-    exports.ɵs = ComponentMapperService;
-    exports.ɵt = AddToHomeScreenService;
-    exports.ɵu = ProductImagesModule;
-    exports.ɵv = ProductImagesComponent;
-    exports.ɵw = suffixUrlMatcher;
-    exports.ɵx = addCmsRoute;
-    exports.ɵy = htmlLangProvider;
-    exports.ɵz = setHtmlLangAttribute;
+    exports.ɵd = ExpressCheckoutService;
+    exports.ɵe = HighlightPipe;
+    exports.ɵf = defaultScrollConfig;
+    exports.ɵg = ProductListComponentService;
+    exports.ɵh = ViewConfig;
+    exports.ɵi = ViewConfigModule;
+    exports.ɵj = ProductScrollComponent;
+    exports.ɵk = ProductAttributesModule;
+    exports.ɵl = ProductDetailsTabModule;
+    exports.ɵm = ProductDetailsTabComponent;
+    exports.ɵn = CmsRoutesService;
+    exports.ɵo = CmsMappingService;
+    exports.ɵp = CmsI18nService;
+    exports.ɵq = CmsGuardsService;
+    exports.ɵr = TrackingEventsComponent;
+    exports.ɵs = ConsignmentTrackingComponent;
+    exports.ɵt = ComponentMapperService;
+    exports.ɵu = AddToHomeScreenService;
+    exports.ɵv = ProductImagesModule;
+    exports.ɵw = ProductImagesComponent;
+    exports.ɵx = suffixUrlMatcher;
+    exports.ɵy = addCmsRoute;
+    exports.ɵz = htmlLangProvider;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

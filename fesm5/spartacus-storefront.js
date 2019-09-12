@@ -1,5 +1,5 @@
 import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, Output, EventEmitter, isDevMode, forwardRef, Renderer2, HostListener, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, NgZone, APP_INITIALIZER, INJECTOR, Pipe } from '@angular/core';
-import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, OccConfig, UrlModule, GlobalMessageService, GlobalMessageType, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, FeaturesConfigModule, CmsConfig, AuthService, CartDataService, CmsService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, TranslationChunkService, PageType, SemanticPathService, NotAuthGuard, CmsPageTitleModule, provideConfig, AuthRedirectService, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, StateModule, AuthModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
+import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, OccConfig, UrlModule, GlobalMessageService, GlobalMessageType, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, RoutingConfigService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, AuthGuard, TranslationService, UserService, FeaturesConfigModule, CmsConfig, AuthService, CartDataService, CmsService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, TranslationChunkService, PageType, SemanticPathService, NotAuthGuard, CmsPageTitleModule, provideConfig, AuthRedirectService, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, StateModule, AuthModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
 import { map, filter, switchMap, tap, debounceTime, startWith, distinctUntilChanged, take, shareReplay, skipWhile, first, endWith, withLatestFrom, pluck } from 'rxjs/operators';
 import { __extends, __values, __assign, __spread, __read, __awaiter, __generator } from 'tslib';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
@@ -4119,6 +4119,12 @@ var CartComponentModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @enum {string} */
+var DeliveryModePreferences = {
+    FREE: 'FREE',
+    LEAST_EXPENSIVE: 'LEAST_EXPENSIVE',
+    MOST_EXPENSIVE: 'MOST_EXPENSIVE',
+};
 /**
  * @abstract
  */
@@ -4176,6 +4182,8 @@ var defaultCheckoutConfig = {
                 type: [CheckoutStepType.REVIEW_ORDER],
             },
         ],
+        express: false,
+        defaultDeliveryMode: [DeliveryModePreferences.FREE],
     },
 };
 
@@ -4183,11 +4191,681 @@ var defaultCheckoutConfig = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var CheckoutConfigService = /** @class */ (function () {
+    function CheckoutConfigService(checkoutConfig, routingConfigService) {
+        this.checkoutConfig = checkoutConfig;
+        this.routingConfigService = routingConfigService;
+        this.steps = this.checkoutConfig.checkout.steps;
+        this.express = this.checkoutConfig.checkout.express;
+        this.defaultDeliveryMode = this.checkoutConfig.checkout.defaultDeliveryMode || [];
+    }
+    /**
+     * @param {?} currentStepType
+     * @return {?}
+     */
+    CheckoutConfigService.prototype.getCheckoutStep = /**
+     * @param {?} currentStepType
+     * @return {?}
+     */
+    function (currentStepType) {
+        return this.steps[this.getCheckoutStepIndex('type', currentStepType)];
+    };
+    /**
+     * @param {?} currentStepType
+     * @return {?}
+     */
+    CheckoutConfigService.prototype.getCheckoutStepRoute = /**
+     * @param {?} currentStepType
+     * @return {?}
+     */
+    function (currentStepType) {
+        return this.getCheckoutStep(currentStepType).routeName;
+    };
+    /**
+     * @return {?}
+     */
+    CheckoutConfigService.prototype.getFirstCheckoutStepRoute = /**
+     * @return {?}
+     */
+    function () {
+        return this.steps[0].routeName;
+    };
+    /**
+     * @param {?} activatedRoute
+     * @return {?}
+     */
+    CheckoutConfigService.prototype.getNextCheckoutStepUrl = /**
+     * @param {?} activatedRoute
+     * @return {?}
+     */
+    function (activatedRoute) {
+        /** @type {?} */
+        var stepIndex = this.getCurrentStepIndex(activatedRoute);
+        return stepIndex >= 0 && this.steps[stepIndex + 1]
+            ? this.getStepUrlFromStepRoute(this.steps[stepIndex + 1].routeName)
+            : null;
+    };
+    /**
+     * @param {?} activatedRoute
+     * @return {?}
+     */
+    CheckoutConfigService.prototype.getPreviousCheckoutStepUrl = /**
+     * @param {?} activatedRoute
+     * @return {?}
+     */
+    function (activatedRoute) {
+        /** @type {?} */
+        var stepIndex = this.getCurrentStepIndex(activatedRoute);
+        return stepIndex >= 0 && this.steps[stepIndex - 1]
+            ? this.getStepUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
+            : null;
+    };
+    /**
+     * @param {?} activatedRoute
+     * @return {?}
+     */
+    CheckoutConfigService.prototype.getCurrentStepIndex = /**
+     * @param {?} activatedRoute
+     * @return {?}
+     */
+    function (activatedRoute) {
+        var e_1, _a;
+        /** @type {?} */
+        var currentStepUrl = this.getStepUrlFromActivatedRoute(activatedRoute);
+        /** @type {?} */
+        var stepIndex;
+        /** @type {?} */
+        var index = 0;
+        try {
+            for (var _b = __values(this.steps), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var step = _c.value;
+                if (currentStepUrl === "/" + this.getStepUrlFromStepRoute(step.routeName)) {
+                    stepIndex = index;
+                }
+                else {
+                    index++;
+                }
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        return stepIndex >= 0 ? stepIndex : null;
+    };
+    /**
+     * @protected
+     * @param {?} deliveryMode1
+     * @param {?} deliveryMode2
+     * @return {?}
+     */
+    CheckoutConfigService.prototype.compareDeliveryCost = /**
+     * @protected
+     * @param {?} deliveryMode1
+     * @param {?} deliveryMode2
+     * @return {?}
+     */
+    function (deliveryMode1, deliveryMode2) {
+        if (deliveryMode1.deliveryCost.value > deliveryMode2.deliveryCost.value) {
+            return 1;
+        }
+        else if (deliveryMode1.deliveryCost.value < deliveryMode2.deliveryCost.value) {
+            return -1;
+        }
+        return 0;
+    };
+    /**
+     * @protected
+     * @param {?} deliveryModes
+     * @param {?=} index
+     * @return {?}
+     */
+    CheckoutConfigService.prototype.findMatchingDeliveryMode = /**
+     * @protected
+     * @param {?} deliveryModes
+     * @param {?=} index
+     * @return {?}
+     */
+    function (deliveryModes, index) {
+        var _this = this;
+        if (index === void 0) { index = 0; }
+        switch (this.defaultDeliveryMode[index]) {
+            case DeliveryModePreferences.FREE:
+                if (deliveryModes[0].deliveryCost.value === 0) {
+                    return deliveryModes[0].code;
+                }
+                break;
+            case DeliveryModePreferences.LEAST_EXPENSIVE:
+                /** @type {?} */
+                var leastExpensiveFound = deliveryModes.find((/**
+                 * @param {?} deliveryMode
+                 * @return {?}
+                 */
+                function (deliveryMode) { return deliveryMode.deliveryCost.value !== 0; }));
+                if (leastExpensiveFound) {
+                    return leastExpensiveFound.code;
+                }
+                break;
+            case DeliveryModePreferences.MOST_EXPENSIVE:
+                return deliveryModes[deliveryModes.length - 1].code;
+            default:
+                /** @type {?} */
+                var codeFound = deliveryModes.find((/**
+                 * @param {?} deliveryMode
+                 * @return {?}
+                 */
+                function (deliveryMode) { return deliveryMode.code === _this.defaultDeliveryMode[index]; }));
+                if (codeFound) {
+                    return codeFound.code;
+                }
+        }
+        /** @type {?} */
+        var lastMode = this.defaultDeliveryMode.length - 1 <= index;
+        return lastMode
+            ? deliveryModes[0].code
+            : this.findMatchingDeliveryMode(deliveryModes, index + 1);
+    };
+    /**
+     * @param {?} deliveryModes
+     * @return {?}
+     */
+    CheckoutConfigService.prototype.getPreferredDeliveryMode = /**
+     * @param {?} deliveryModes
+     * @return {?}
+     */
+    function (deliveryModes) {
+        deliveryModes.sort(this.compareDeliveryCost);
+        return this.findMatchingDeliveryMode(deliveryModes);
+    };
+    /**
+     * @return {?}
+     */
+    CheckoutConfigService.prototype.isExpressCheckout = /**
+     * @return {?}
+     */
+    function () {
+        return this.express;
+    };
+    /**
+     * @private
+     * @param {?} activatedRoute
+     * @return {?}
+     */
+    CheckoutConfigService.prototype.getStepUrlFromActivatedRoute = /**
+     * @private
+     * @param {?} activatedRoute
+     * @return {?}
+     */
+    function (activatedRoute) {
+        return activatedRoute &&
+            activatedRoute.snapshot &&
+            activatedRoute.snapshot.url
+            ? "/" + activatedRoute.snapshot.url.join('/')
+            : null;
+    };
+    /**
+     * @private
+     * @param {?} stepRoute
+     * @return {?}
+     */
+    CheckoutConfigService.prototype.getStepUrlFromStepRoute = /**
+     * @private
+     * @param {?} stepRoute
+     * @return {?}
+     */
+    function (stepRoute) {
+        return this.routingConfigService.getRouteConfig(stepRoute).paths[0];
+    };
+    /**
+     * @private
+     * @param {?} key
+     * @param {?} value
+     * @return {?}
+     */
+    CheckoutConfigService.prototype.getCheckoutStepIndex = /**
+     * @private
+     * @param {?} key
+     * @param {?} value
+     * @return {?}
+     */
+    function (key, value) {
+        return key && value
+            ? this.steps.findIndex((/**
+             * @param {?} step
+             * @return {?}
+             */
+            function (step) { return step[key].includes(value); }))
+            : null;
+    };
+    CheckoutConfigService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    CheckoutConfigService.ctorParameters = function () { return [
+        { type: CheckoutConfig },
+        { type: RoutingConfigService }
+    ]; };
+    /** @nocollapse */ CheckoutConfigService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CheckoutConfigService_Factory() { return new CheckoutConfigService(ɵɵinject(CheckoutConfig), ɵɵinject(RoutingConfigService)); }, token: CheckoutConfigService, providedIn: "root" });
+    return CheckoutConfigService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CheckoutDetailsService = /** @class */ (function () {
+    function CheckoutDetailsService(checkoutService, checkoutDeliveryService, checkoutPaymentService, cartService) {
+        var _this = this;
+        this.checkoutService = checkoutService;
+        this.checkoutDeliveryService = checkoutDeliveryService;
+        this.checkoutPaymentService = checkoutPaymentService;
+        this.cartService = cartService;
+        this.cartId$ = this.cartService.getActive().pipe(map((/**
+         * @param {?} cartData
+         * @return {?}
+         */
+        function (cartData) { return cartData.code; })), filter((/**
+         * @param {?} cartId
+         * @return {?}
+         */
+        function (cartId) { return !!cartId; })));
+        this.getCheckoutDetailsLoaded$ = this.cartId$.pipe(tap((/**
+         * @param {?} cartId
+         * @return {?}
+         */
+        function (cartId) { return _this.checkoutService.loadCheckoutDetails(cartId); })), shareReplay(1), switchMap((/**
+         * @return {?}
+         */
+        function () { return _this.checkoutService.getCheckoutDetailsLoaded(); })), skipWhile((/**
+         * @param {?} loaded
+         * @return {?}
+         */
+        function (loaded) { return !loaded; })));
+    }
+    /**
+     * @return {?}
+     */
+    CheckoutDetailsService.prototype.getDeliveryAddress = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        return this.getCheckoutDetailsLoaded$.pipe(switchMap((/**
+         * @return {?}
+         */
+        function () { return _this.checkoutDeliveryService.getDeliveryAddress(); })));
+    };
+    /**
+     * @return {?}
+     */
+    CheckoutDetailsService.prototype.getSelectedDeliveryModeCode = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        return this.getCheckoutDetailsLoaded$.pipe(switchMap((/**
+         * @return {?}
+         */
+        function () {
+            return _this.checkoutDeliveryService.getSelectedDeliveryModeCode();
+        })));
+    };
+    /**
+     * @return {?}
+     */
+    CheckoutDetailsService.prototype.getPaymentDetails = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        return this.getCheckoutDetailsLoaded$.pipe(switchMap((/**
+         * @return {?}
+         */
+        function () { return _this.checkoutPaymentService.getPaymentDetails(); })));
+    };
+    CheckoutDetailsService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    CheckoutDetailsService.ctorParameters = function () { return [
+        { type: CheckoutService },
+        { type: CheckoutDeliveryService },
+        { type: CheckoutPaymentService },
+        { type: CartService }
+    ]; };
+    /** @nocollapse */ CheckoutDetailsService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(ɵɵinject(CheckoutService), ɵɵinject(CheckoutDeliveryService), ɵɵinject(CheckoutPaymentService), ɵɵinject(CartService)); }, token: CheckoutDetailsService, providedIn: "root" });
+    return CheckoutDetailsService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ExpressCheckoutService = /** @class */ (function () {
+    function ExpressCheckoutService(userAddressService, userPaymentService, checkoutDeliveryService, checkoutPaymentService, checkoutDetailsService, checkoutConfigService) {
+        this.userAddressService = userAddressService;
+        this.userPaymentService = userPaymentService;
+        this.checkoutDeliveryService = checkoutDeliveryService;
+        this.checkoutPaymentService = checkoutPaymentService;
+        this.checkoutDetailsService = checkoutDetailsService;
+        this.checkoutConfigService = checkoutConfigService;
+        this.setShippingAddress();
+        this.setDeliveryMode();
+        this.setPaymentMethod();
+    }
+    /**
+     * @protected
+     * @return {?}
+     */
+    ExpressCheckoutService.prototype.setShippingAddress = /**
+     * @protected
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.shippingAddressSet$ = combineLatest([
+            this.userAddressService.getAddresses(),
+            this.userAddressService.getAddressesLoadedSuccess(),
+            this.checkoutDeliveryService.getSetDeliveryAddressProcess(),
+        ]).pipe(debounceTime(0), tap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 2), addressesLoadedSuccess = _b[1];
+            if (!addressesLoadedSuccess) {
+                _this.userAddressService.loadAddresses();
+            }
+        })), filter((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 2), addressesLoadedSuccess = _b[1];
+            return addressesLoadedSuccess;
+        })), switchMap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 3), addresses = _b[0], setDeliveryAddressProcess = _b[2];
+            /** @type {?} */
+            var defaultAddress = addresses.find((/**
+             * @param {?} address
+             * @return {?}
+             */
+            function (address) { return address.defaultAddress; })) || addresses[0];
+            if (defaultAddress && Object.keys(defaultAddress).length) {
+                if (!(setDeliveryAddressProcess.success ||
+                    setDeliveryAddressProcess.error ||
+                    setDeliveryAddressProcess.loading)) {
+                    _this.checkoutDeliveryService.setDeliveryAddress(defaultAddress);
+                }
+                return of(setDeliveryAddressProcess).pipe(filter((/**
+                 * @param {?} setDeliveryAddressProcessState
+                 * @return {?}
+                 */
+                function (setDeliveryAddressProcessState) {
+                    return ((setDeliveryAddressProcessState.success ||
+                        setDeliveryAddressProcessState.error) &&
+                        !setDeliveryAddressProcessState.loading);
+                })), switchMap((/**
+                 * @param {?} setDeliveryAddressProcessState
+                 * @return {?}
+                 */
+                function (setDeliveryAddressProcessState) {
+                    if (setDeliveryAddressProcessState.success) {
+                        return _this.checkoutDetailsService.getDeliveryAddress();
+                    }
+                    return of(false);
+                })), map((/**
+                 * @param {?} data
+                 * @return {?}
+                 */
+                function (data) { return Boolean(data && Object.keys(data).length); })));
+            }
+            return of(false);
+        })));
+    };
+    /**
+     * @protected
+     * @return {?}
+     */
+    ExpressCheckoutService.prototype.setPaymentMethod = /**
+     * @protected
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.paymentMethodSet$ = combineLatest([
+            this.userPaymentService.getPaymentMethods(),
+            this.userPaymentService.getPaymentMethodsLoadedSuccess(),
+            this.checkoutPaymentService.getSetPaymentDetailsResultProcess(),
+        ]).pipe(debounceTime(0), tap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 2), paymentMethodsLoadedSuccess = _b[1];
+            if (!paymentMethodsLoadedSuccess) {
+                _this.userPaymentService.loadPaymentMethods();
+            }
+        })), filter((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 2), success = _b[1];
+            return success;
+        })), switchMap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 3), payments = _b[0], setPaymentDetailsProcess = _b[2];
+            /** @type {?} */
+            var defaultPayment = payments.find((/**
+             * @param {?} address
+             * @return {?}
+             */
+            function (address) { return address.defaultPayment; })) || payments[0];
+            if (defaultPayment && Object.keys(defaultPayment).length) {
+                if (!(setPaymentDetailsProcess.success ||
+                    setPaymentDetailsProcess.error ||
+                    setPaymentDetailsProcess.loading)) {
+                    _this.checkoutPaymentService.setPaymentDetails(defaultPayment);
+                }
+                return of(setPaymentDetailsProcess).pipe(filter((/**
+                 * @param {?} setPaymentDetailsProcessState
+                 * @return {?}
+                 */
+                function (setPaymentDetailsProcessState) {
+                    return ((setPaymentDetailsProcessState.success ||
+                        setPaymentDetailsProcessState.error) &&
+                        !setPaymentDetailsProcessState.loading);
+                })), switchMap((/**
+                 * @param {?} setPaymentDetailsProcessState
+                 * @return {?}
+                 */
+                function (setPaymentDetailsProcessState) {
+                    if (setPaymentDetailsProcessState.success) {
+                        return _this.checkoutDetailsService.getPaymentDetails();
+                    }
+                    return of(false);
+                })), map((/**
+                 * @param {?} data
+                 * @return {?}
+                 */
+                function (data) { return Boolean(data && Object.keys(data).length); })));
+            }
+            return of(false);
+        })));
+    };
+    /**
+     * @protected
+     * @return {?}
+     */
+    ExpressCheckoutService.prototype.setDeliveryMode = /**
+     * @protected
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.deliveryModeSet$ = combineLatest([
+            this.shippingAddressSet$,
+            this.checkoutDeliveryService.getSupportedDeliveryModes(),
+            this.checkoutDeliveryService.getSetDeliveryModeProcess(),
+            this.checkoutDeliveryService.getLoadSupportedDeliveryModeProcess(),
+        ]).pipe(debounceTime(0), switchMap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 4), addressSet = _b[0], supportedDeliveryModes = _b[1], setDeliveryModeStatusFlag = _b[2], loadSupportedDeliveryModeStatus = _b[3];
+            if (addressSet) {
+                return of([
+                    supportedDeliveryModes,
+                    setDeliveryModeStatusFlag,
+                    loadSupportedDeliveryModeStatus,
+                ]).pipe(filter((/**
+                 * @param {?} __0
+                 * @return {?}
+                 */
+                function (_a) {
+                    var _b = __read(_a, 3), supportedDeliveryModeStatus = _b[2];
+                    return supportedDeliveryModeStatus.success;
+                })), switchMap((/**
+                 * @param {?} __0
+                 * @return {?}
+                 */
+                function (_a) {
+                    var _b = __read(_a, 3), deliveryModes = _b[0], setDeliveryModeStatus = _b[1];
+                    if (Boolean(deliveryModes.length)) {
+                        /** @type {?} */
+                        var preferredDeliveryMode = _this.checkoutConfigService.getPreferredDeliveryMode(deliveryModes);
+                        return of([
+                            preferredDeliveryMode,
+                            setDeliveryModeStatus,
+                        ]).pipe(tap((/**
+                         * @param {?} __0
+                         * @return {?}
+                         */
+                        function (_a) {
+                            var _b = __read(_a, 2), deliveryMode = _b[0], deliveryModeLoadingStatus = _b[1];
+                            if (deliveryMode &&
+                                !(deliveryModeLoadingStatus.success ||
+                                    deliveryModeLoadingStatus.error ||
+                                    deliveryModeLoadingStatus.loading)) {
+                                _this.checkoutDeliveryService.setDeliveryMode(deliveryMode);
+                            }
+                        })), filter((/**
+                         * @param {?} __0
+                         * @return {?}
+                         */
+                        function (_a) {
+                            var _b = __read(_a, 2), deliveryModeLoadingStatus = _b[1];
+                            return ((deliveryModeLoadingStatus.success ||
+                                deliveryModeLoadingStatus.error) &&
+                                !deliveryModeLoadingStatus.loading);
+                        })), switchMap((/**
+                         * @param {?} __0
+                         * @return {?}
+                         */
+                        function (_a) {
+                            var _b = __read(_a, 2), deliveryModeLoadingStatus = _b[1];
+                            if (deliveryModeLoadingStatus.success) {
+                                return _this.checkoutDetailsService.getSelectedDeliveryModeCode();
+                            }
+                            return of(false);
+                        })), map((/**
+                         * @param {?} data
+                         * @return {?}
+                         */
+                        function (data) { return Boolean(data); })));
+                    }
+                    return of(false);
+                })));
+            }
+            else {
+                return of(false);
+            }
+        })));
+    };
+    /**
+     * @protected
+     * @return {?}
+     */
+    ExpressCheckoutService.prototype.resetCheckoutProcesses = /**
+     * @protected
+     * @return {?}
+     */
+    function () {
+        this.checkoutDeliveryService.resetSetDeliveryAddressProcess();
+        this.checkoutPaymentService.resetSetPaymentDetailsProcess();
+        this.checkoutDeliveryService.resetSetDeliveryModeProcess();
+    };
+    /**
+     * @return {?}
+     */
+    ExpressCheckoutService.prototype.trySetDefaultCheckoutDetails = /**
+     * @return {?}
+     */
+    function () {
+        this.resetCheckoutProcesses();
+        return combineLatest([this.deliveryModeSet$, this.paymentMethodSet$]).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 2), deliveryModeSet = _b[0], paymentMethodSet = _b[1];
+            return Boolean(deliveryModeSet && paymentMethodSet);
+        })));
+    };
+    ExpressCheckoutService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    ExpressCheckoutService.ctorParameters = function () { return [
+        { type: UserAddressService },
+        { type: UserPaymentService },
+        { type: CheckoutDeliveryService },
+        { type: CheckoutPaymentService },
+        { type: CheckoutDetailsService },
+        { type: CheckoutConfigService }
+    ]; };
+    /** @nocollapse */ ExpressCheckoutService.ngInjectableDef = ɵɵdefineInjectable({ factory: function ExpressCheckoutService_Factory() { return new ExpressCheckoutService(ɵɵinject(UserAddressService), ɵɵinject(UserPaymentService), ɵɵinject(CheckoutDeliveryService), ɵɵinject(CheckoutPaymentService), ɵɵinject(CheckoutDetailsService), ɵɵinject(CheckoutConfigService)); }, token: ExpressCheckoutService, providedIn: "root" });
+    return ExpressCheckoutService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var CheckoutGuard = /** @class */ (function () {
-    function CheckoutGuard(router, config, routingConfigService) {
+    function CheckoutGuard(router, config, routingConfigService, checkoutConfigService, expressCheckoutService) {
         this.router = router;
         this.config = config;
         this.routingConfigService = routingConfigService;
+        this.checkoutConfigService = checkoutConfigService;
+        this.expressCheckoutService = expressCheckoutService;
+        /**
+         * TODO(issue:#4309) Deprecated since 1.2.0
+         */
+        if (this.checkoutConfigService) {
+            this.firstStep$ = of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.checkoutConfigService.getFirstCheckoutStepRoute()).paths[0]));
+        }
+        else {
+            this.firstStep$ = of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.config.checkout.steps[0].routeName).paths[0]));
+        }
     }
     /**
      * @return {?}
@@ -4196,7 +4874,24 @@ var CheckoutGuard = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        return of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.config.checkout.steps[0].routeName).paths[0]));
+        var _this = this;
+        /**
+         * TODO(issue:#4309) Deprecated since 1.2.0
+         */
+        if (this.checkoutConfigService && this.expressCheckoutService) {
+            if (this.checkoutConfigService.isExpressCheckout()) {
+                return this.expressCheckoutService.trySetDefaultCheckoutDetails().pipe(switchMap((/**
+                 * @param {?} expressCheckoutPossible
+                 * @return {?}
+                 */
+                function (expressCheckoutPossible) {
+                    return expressCheckoutPossible
+                        ? of(_this.router.parseUrl(_this.routingConfigService.getRouteConfig(_this.checkoutConfigService.getCheckoutStepRoute(CheckoutStepType.REVIEW_ORDER)).paths[0]))
+                        : _this.firstStep$;
+                })));
+            }
+        }
+        return this.firstStep$;
     };
     CheckoutGuard.decorators = [
         { type: Injectable, args: [{
@@ -4207,9 +4902,11 @@ var CheckoutGuard = /** @class */ (function () {
     CheckoutGuard.ctorParameters = function () { return [
         { type: Router },
         { type: CheckoutConfig },
-        { type: RoutingConfigService }
+        { type: RoutingConfigService },
+        { type: CheckoutConfigService },
+        { type: ExpressCheckoutService }
     ]; };
-    /** @nocollapse */ CheckoutGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(ɵɵinject(Router), ɵɵinject(CheckoutConfig), ɵɵinject(RoutingConfigService)); }, token: CheckoutGuard, providedIn: "root" });
+    /** @nocollapse */ CheckoutGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(ɵɵinject(Router), ɵɵinject(CheckoutConfig), ɵɵinject(RoutingConfigService), ɵɵinject(CheckoutConfigService), ɵɵinject(ExpressCheckoutService)); }, token: CheckoutGuard, providedIn: "root" });
     return CheckoutGuard;
 }());
 
@@ -4574,248 +5271,6 @@ var CheckoutProgressModule = /** @class */ (function () {
                 },] }
     ];
     return CheckoutProgressModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CheckoutConfigService = /** @class */ (function () {
-    function CheckoutConfigService(checkoutConfig, routingConfigService) {
-        this.checkoutConfig = checkoutConfig;
-        this.routingConfigService = routingConfigService;
-        this.steps = this.checkoutConfig.checkout.steps;
-    }
-    /**
-     * @param {?} currentStepType
-     * @return {?}
-     */
-    CheckoutConfigService.prototype.getCheckoutStep = /**
-     * @param {?} currentStepType
-     * @return {?}
-     */
-    function (currentStepType) {
-        return this.steps[this.getCheckoutStepIndex('type', currentStepType)];
-    };
-    /**
-     * @param {?} activatedRoute
-     * @return {?}
-     */
-    CheckoutConfigService.prototype.getNextCheckoutStepUrl = /**
-     * @param {?} activatedRoute
-     * @return {?}
-     */
-    function (activatedRoute) {
-        /** @type {?} */
-        var stepIndex = this.getCurrentStepIndex(activatedRoute);
-        return stepIndex >= 0 && this.steps[stepIndex + 1]
-            ? this.getStepUrlFromStepRoute(this.steps[stepIndex + 1].routeName)
-            : null;
-    };
-    /**
-     * @param {?} activatedRoute
-     * @return {?}
-     */
-    CheckoutConfigService.prototype.getPreviousCheckoutStepUrl = /**
-     * @param {?} activatedRoute
-     * @return {?}
-     */
-    function (activatedRoute) {
-        /** @type {?} */
-        var stepIndex = this.getCurrentStepIndex(activatedRoute);
-        return stepIndex >= 0 && this.steps[stepIndex - 1]
-            ? this.getStepUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
-            : null;
-    };
-    /**
-     * @param {?} activatedRoute
-     * @return {?}
-     */
-    CheckoutConfigService.prototype.getCurrentStepIndex = /**
-     * @param {?} activatedRoute
-     * @return {?}
-     */
-    function (activatedRoute) {
-        var e_1, _a;
-        /** @type {?} */
-        var currentStepUrl = this.getStepUrlFromActivatedRoute(activatedRoute);
-        /** @type {?} */
-        var stepIndex;
-        /** @type {?} */
-        var index = 0;
-        try {
-            for (var _b = __values(this.steps), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var step = _c.value;
-                if (currentStepUrl === "/" + this.getStepUrlFromStepRoute(step.routeName)) {
-                    stepIndex = index;
-                }
-                else {
-                    index++;
-                }
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        return stepIndex >= 0 ? stepIndex : null;
-    };
-    /**
-     * @private
-     * @param {?} activatedRoute
-     * @return {?}
-     */
-    CheckoutConfigService.prototype.getStepUrlFromActivatedRoute = /**
-     * @private
-     * @param {?} activatedRoute
-     * @return {?}
-     */
-    function (activatedRoute) {
-        return activatedRoute &&
-            activatedRoute.snapshot &&
-            activatedRoute.snapshot.url
-            ? "/" + activatedRoute.snapshot.url.join('/')
-            : null;
-    };
-    /**
-     * @private
-     * @param {?} stepRoute
-     * @return {?}
-     */
-    CheckoutConfigService.prototype.getStepUrlFromStepRoute = /**
-     * @private
-     * @param {?} stepRoute
-     * @return {?}
-     */
-    function (stepRoute) {
-        return this.routingConfigService.getRouteConfig(stepRoute).paths[0];
-    };
-    /**
-     * @private
-     * @param {?} key
-     * @param {?} value
-     * @return {?}
-     */
-    CheckoutConfigService.prototype.getCheckoutStepIndex = /**
-     * @private
-     * @param {?} key
-     * @param {?} value
-     * @return {?}
-     */
-    function (key, value) {
-        return key && value
-            ? this.steps.findIndex((/**
-             * @param {?} step
-             * @return {?}
-             */
-            function (step) { return step[key].includes(value); }))
-            : null;
-    };
-    CheckoutConfigService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    CheckoutConfigService.ctorParameters = function () { return [
-        { type: CheckoutConfig },
-        { type: RoutingConfigService }
-    ]; };
-    /** @nocollapse */ CheckoutConfigService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CheckoutConfigService_Factory() { return new CheckoutConfigService(ɵɵinject(CheckoutConfig), ɵɵinject(RoutingConfigService)); }, token: CheckoutConfigService, providedIn: "root" });
-    return CheckoutConfigService;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CheckoutDetailsService = /** @class */ (function () {
-    function CheckoutDetailsService(checkoutService, checkoutDeliveryService, checkoutPaymentService, cartService) {
-        var _this = this;
-        this.checkoutService = checkoutService;
-        this.checkoutDeliveryService = checkoutDeliveryService;
-        this.checkoutPaymentService = checkoutPaymentService;
-        this.cartService = cartService;
-        this.cartId$ = this.cartService.getActive().pipe(map((/**
-         * @param {?} cartData
-         * @return {?}
-         */
-        function (cartData) { return cartData.code; })), filter((/**
-         * @param {?} cartId
-         * @return {?}
-         */
-        function (cartId) { return !!cartId; })));
-        this.getCheckoutDetailsLoaded$ = this.cartId$.pipe(tap((/**
-         * @param {?} cartId
-         * @return {?}
-         */
-        function (cartId) { return _this.checkoutService.loadCheckoutDetails(cartId); })), shareReplay(1), switchMap((/**
-         * @return {?}
-         */
-        function () { return _this.checkoutService.getCheckoutDetailsLoaded(); })), skipWhile((/**
-         * @param {?} loaded
-         * @return {?}
-         */
-        function (loaded) { return !loaded; })));
-    }
-    /**
-     * @return {?}
-     */
-    CheckoutDetailsService.prototype.getDeliveryAddress = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        return this.getCheckoutDetailsLoaded$.pipe(switchMap((/**
-         * @return {?}
-         */
-        function () { return _this.checkoutDeliveryService.getDeliveryAddress(); })));
-    };
-    /**
-     * @return {?}
-     */
-    CheckoutDetailsService.prototype.getSelectedDeliveryModeCode = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        return this.getCheckoutDetailsLoaded$.pipe(switchMap((/**
-         * @return {?}
-         */
-        function () {
-            return _this.checkoutDeliveryService.getSelectedDeliveryModeCode();
-        })));
-    };
-    /**
-     * @return {?}
-     */
-    CheckoutDetailsService.prototype.getPaymentDetails = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        return this.getCheckoutDetailsLoaded$.pipe(switchMap((/**
-         * @return {?}
-         */
-        function () { return _this.checkoutPaymentService.getPaymentDetails(); })));
-    };
-    CheckoutDetailsService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    CheckoutDetailsService.ctorParameters = function () { return [
-        { type: CheckoutService },
-        { type: CheckoutDeliveryService },
-        { type: CheckoutPaymentService },
-        { type: CartService }
-    ]; };
-    /** @nocollapse */ CheckoutDetailsService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(ɵɵinject(CheckoutService), ɵɵinject(CheckoutDeliveryService), ɵɵinject(CheckoutPaymentService), ɵɵinject(CartService)); }, token: CheckoutDetailsService, providedIn: "root" });
-    return CheckoutDetailsService;
 }());
 
 /**
@@ -10026,8 +10481,10 @@ var TabParagraphContainerModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var AddressBookComponentService = /** @class */ (function () {
-    function AddressBookComponentService(userAddressService) {
+    function AddressBookComponentService(userAddressService, checkoutDeliveryService, featureConfigService) {
         this.userAddressService = userAddressService;
+        this.checkoutDeliveryService = checkoutDeliveryService;
+        this.featureConfigService = featureConfigService;
     }
     /**
      * @return {?}
@@ -10079,13 +10536,23 @@ var AddressBookComponentService = /** @class */ (function () {
      */
     function (addressId, address) {
         this.userAddressService.updateUserAddress(addressId, address);
+        /**
+         * TODO(issue:#4309) Deprecated since 1.2.0
+         */
+        if (this.featureConfigService &&
+            this.featureConfigService.isLevel('1.2') &&
+            this.checkoutDeliveryService) {
+            this.checkoutDeliveryService.clearCheckoutDeliveryDetails();
+        }
     };
     AddressBookComponentService.decorators = [
         { type: Injectable }
     ];
     /** @nocollapse */
     AddressBookComponentService.ctorParameters = function () { return [
-        { type: UserAddressService }
+        { type: UserAddressService },
+        { type: CheckoutDeliveryService },
+        { type: FeatureConfigService }
     ]; };
     return AddressBookComponentService;
 }());
@@ -10194,8 +10661,10 @@ var AddressBookComponent = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var AddressCardComponent = /** @class */ (function () {
-    function AddressCardComponent(userAddressService) {
+    function AddressCardComponent(userAddressService, checkoutDeliveryService, featureConfigService) {
         this.userAddressService = userAddressService;
+        this.checkoutDeliveryService = checkoutDeliveryService;
+        this.featureConfigService = featureConfigService;
         this.editEvent = new EventEmitter();
     }
     /**
@@ -10235,6 +10704,14 @@ var AddressCardComponent = /** @class */ (function () {
      */
     function (addressId) {
         this.userAddressService.setAddressAsDefault(addressId);
+        /**
+         * TODO(issue:#4309) Deprecated since 1.2.0
+         */
+        if (this.featureConfigService &&
+            this.featureConfigService.isLevel('1.2') &&
+            this.checkoutDeliveryService) {
+            this.checkoutDeliveryService.clearCheckoutDeliveryDetails();
+        }
     };
     /**
      * @param {?} addressId
@@ -10246,6 +10723,14 @@ var AddressCardComponent = /** @class */ (function () {
      */
     function (addressId) {
         this.userAddressService.deleteUserAddress(addressId);
+        /**
+         * TODO(issue:#4309) Deprecated since 1.2.0
+         */
+        if (this.featureConfigService &&
+            this.featureConfigService.isLevel('1.2') &&
+            this.checkoutDeliveryService) {
+            this.checkoutDeliveryService.clearCheckoutDeliveryDetails();
+        }
     };
     AddressCardComponent.decorators = [
         { type: Component, args: [{
@@ -10255,7 +10740,9 @@ var AddressCardComponent = /** @class */ (function () {
     ];
     /** @nocollapse */
     AddressCardComponent.ctorParameters = function () { return [
-        { type: UserAddressService }
+        { type: UserAddressService },
+        { type: CheckoutDeliveryService },
+        { type: FeatureConfigService }
     ]; };
     AddressCardComponent.propDecorators = {
         address: [{ type: Input }],
@@ -18594,5 +19081,5 @@ var B2cStorefrontModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, OnlyNumberDirectiveModule as ɵa, AutoFocusDirectiveModule as ɵb, RoutingModule as ɵba, defaultStorefrontRoutesConfig as ɵbb, defaultRoutingConfig as ɵbc, defaultCheckoutConfig as ɵc, HighlightPipe as ɵd, defaultScrollConfig as ɵe, ProductListComponentService as ɵf, ViewConfig as ɵg, ViewConfigModule as ɵh, ProductScrollComponent as ɵi, ProductAttributesModule as ɵj, ProductDetailsTabModule as ɵk, ProductDetailsTabComponent as ɵl, CmsRoutesService as ɵm, CmsMappingService as ɵn, CmsI18nService as ɵo, CmsGuardsService as ɵp, TrackingEventsComponent as ɵq, ConsignmentTrackingComponent as ɵr, ComponentMapperService as ɵs, AddToHomeScreenService as ɵt, ProductImagesModule as ɵu, ProductImagesComponent as ɵv, suffixUrlMatcher as ɵw, addCmsRoute as ɵx, htmlLangProvider as ɵy, setHtmlLangAttribute as ɵz };
+export { AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, OnlyNumberDirectiveModule as ɵa, AutoFocusDirectiveModule as ɵb, setHtmlLangAttribute as ɵba, RoutingModule as ɵbb, defaultStorefrontRoutesConfig as ɵbc, defaultRoutingConfig as ɵbd, defaultCheckoutConfig as ɵc, ExpressCheckoutService as ɵd, HighlightPipe as ɵe, defaultScrollConfig as ɵf, ProductListComponentService as ɵg, ViewConfig as ɵh, ViewConfigModule as ɵi, ProductScrollComponent as ɵj, ProductAttributesModule as ɵk, ProductDetailsTabModule as ɵl, ProductDetailsTabComponent as ɵm, CmsRoutesService as ɵn, CmsMappingService as ɵo, CmsI18nService as ɵp, CmsGuardsService as ɵq, TrackingEventsComponent as ɵr, ConsignmentTrackingComponent as ɵs, ComponentMapperService as ɵt, AddToHomeScreenService as ɵu, ProductImagesModule as ɵv, ProductImagesComponent as ɵw, suffixUrlMatcher as ɵx, addCmsRoute as ɵy, htmlLangProvider as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map
