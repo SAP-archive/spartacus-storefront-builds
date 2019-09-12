@@ -1,8 +1,8 @@
 import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, Output, EventEmitter, isDevMode, forwardRef, Renderer2, HostListener, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, NgZone, APP_INITIALIZER, INJECTOR, Pipe } from '@angular/core';
-import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, OccConfig, UrlModule, GlobalMessageService, GlobalMessageType, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, FeaturesConfigModule, CmsConfig, AuthService, CartDataService, CmsService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, TranslationChunkService, PageType, SemanticPathService, NotAuthGuard, CmsPageTitleModule, provideConfig, AuthRedirectService, RoutingModule as RoutingModule$1, StateModule, AuthModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
+import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, OccConfig, UrlModule, GlobalMessageService, GlobalMessageType, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, RoutingConfigService, AuthGuard, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, FeaturesConfigModule, CmsConfig, AuthService, CartDataService, CmsService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, TranslationChunkService, PageType, SemanticPathService, NotAuthGuard, CmsPageTitleModule, provideConfig, AuthRedirectService, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, StateModule, AuthModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
 import { map, filter, switchMap, tap, debounceTime, startWith, distinctUntilChanged, take, shareReplay, skipWhile, first, endWith, withLatestFrom, pluck } from 'rxjs/operators';
 import { __extends, __values, __assign, __spread, __read, __awaiter, __generator } from 'tslib';
-import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
@@ -17107,6 +17107,910 @@ var UserComponentModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @type {?} */
+var WEEK_DAYS_NUMBER = 7;
+var ScheduleComponent = /** @class */ (function () {
+    function ScheduleComponent(storeDataService) {
+        this.storeDataService = storeDataService;
+        this.displayDays = null;
+    }
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    ScheduleComponent.prototype.ngOnChanges = /**
+     * @param {?} changes
+     * @return {?}
+     */
+    function (changes) {
+        if (changes.location && this.location) {
+            /** @type {?} */
+            var initialDate = this.getInitialDate();
+            this.displayDays = [];
+            for (var i = 0; i < WEEK_DAYS_NUMBER; i++) {
+                /** @type {?} */
+                var date = new Date(initialDate.valueOf());
+                date.setDate(date.getDate() + i);
+                this.displayDays.push(date);
+            }
+        }
+    };
+    /**
+     * Returns the store's opening time for the given date
+     * @param date date
+     */
+    /**
+     * Returns the store's opening time for the given date
+     * @param {?} date date
+     * @return {?}
+     */
+    ScheduleComponent.prototype.getStoreOpeningTime = /**
+     * Returns the store's opening time for the given date
+     * @param {?} date date
+     * @return {?}
+     */
+    function (date) {
+        return this.storeDataService.getStoreOpeningTime(this.location, date);
+    };
+    /**
+     * Returns the store's closing time for the given date
+     * @param date date
+     */
+    /**
+     * Returns the store's closing time for the given date
+     * @param {?} date date
+     * @return {?}
+     */
+    ScheduleComponent.prototype.getStoreClosingTime = /**
+     * Returns the store's closing time for the given date
+     * @param {?} date date
+     * @return {?}
+     */
+    function (date) {
+        return this.storeDataService.getStoreClosingTime(this.location, date);
+    };
+    /**
+     * return initial (first) date to be displayed in the schedule
+     */
+    /**
+     * return initial (first) date to be displayed in the schedule
+     * @private
+     * @return {?}
+     */
+    ScheduleComponent.prototype.getInitialDate = /**
+     * return initial (first) date to be displayed in the schedule
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var currentDate = new Date();
+        currentDate.setDate(currentDate.getDate() - currentDate.getDay());
+        return currentDate;
+    };
+    ScheduleComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-schedule',
+                    template: "<ng-content></ng-content>\n<div class=\"container cx-store-hours\" *ngIf=\"location.openingHours\">\n  <div *ngFor=\"let day of displayDays\" class=\"row\">\n    <div class=\"cx-days col-4\">{{ day | cxDate: 'EEE' }}</div>\n    <div *ngIf=\"getStoreOpeningTime(day) !== 'closed'\" class=\"cx-hours col-8\">\n      {{ getStoreOpeningTime(day) }} -\n      {{ getStoreClosingTime(day) }}\n    </div>\n    <div\n      *ngIf=\"getStoreOpeningTime(day) === 'closed'\"\n      class=\"cx-hours col-8 closed\"\n    >\n      {{ 'storeFinder.closed' | cxTranslate }}\n    </div>\n  </div>\n</div>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    ScheduleComponent.ctorParameters = function () { return [
+        { type: StoreDataService }
+    ]; };
+    ScheduleComponent.propDecorators = {
+        location: [{ type: Input }]
+    };
+    return ScheduleComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var StoreFinderGridComponent = /** @class */ (function () {
+    function StoreFinderGridComponent(storeFinderService, route, routingService) {
+        this.storeFinderService = storeFinderService;
+        this.route = route;
+        this.routingService = routingService;
+    }
+    /**
+     * @return {?}
+     */
+    StoreFinderGridComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.isLoading$ = this.storeFinderService.getViewAllStoresLoading();
+        this.locations$ = this.storeFinderService.getViewAllStoresEntities();
+        this.defaultLocation = {};
+        if (this.route.snapshot.params.country) {
+            this.storeFinderService.findStoresAction('', {
+                pageSize: -1,
+            }, undefined, this.route.snapshot.params.country);
+        }
+    };
+    /**
+     * @param {?} location
+     * @return {?}
+     */
+    StoreFinderGridComponent.prototype.viewStore = /**
+     * @param {?} location
+     * @return {?}
+     */
+    function (location) {
+        this.routingService.go([this.prepareRouteUrl(location)]);
+    };
+    /**
+     * @param {?} location
+     * @return {?}
+     */
+    StoreFinderGridComponent.prototype.prepareRouteUrl = /**
+     * @param {?} location
+     * @return {?}
+     */
+    function (location) {
+        /** @type {?} */
+        var countryParam = this.route.snapshot.params.country
+            ? "country/" + this.route.snapshot.params.country + "/"
+            : '';
+        /** @type {?} */
+        var regionParam = this.route.snapshot.params.region
+            ? "region/" + this.route.snapshot.params.region + "/"
+            : '';
+        return "store-finder/" + countryParam + regionParam + location.name;
+    };
+    /**
+     * @return {?}
+     */
+    StoreFinderGridComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () { };
+    StoreFinderGridComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-store-finder-grid',
+                    template: "<ng-container\n  *ngIf=\"\n    !(isLoading$ | async) && (locations$ | async) as locations;\n    else loading\n  \"\n>\n  <div class=\"container\">\n    <div class=\"row\">\n      <div\n        class=\"col-sm-4 col-md-4 col-lg-3 item\"\n        *ngFor=\"let location of locations?.stores\"\n        (click)=\"viewStore(location)\"\n      >\n        <cx-store-finder-list-item\n          [location]=\"location\"\n        ></cx-store-finder-list-item>\n      </div>\n    </div>\n  </div>\n</ng-container>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    StoreFinderGridComponent.ctorParameters = function () { return [
+        { type: StoreFinderService },
+        { type: ActivatedRoute },
+        { type: RoutingService }
+    ]; };
+    return StoreFinderGridComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var StoreFinderHeaderComponent = /** @class */ (function () {
+    function StoreFinderHeaderComponent() {
+    }
+    StoreFinderHeaderComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-store-finder-header',
+                    template: "<ng-container>\n  <cx-store-finder-search></cx-store-finder-search>\n</ng-container>\n"
+                }] }
+    ];
+    return StoreFinderHeaderComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var AbstractStoreItemComponent = /** @class */ (function () {
+    function AbstractStoreItemComponent(storeDataService) {
+        this.storeDataService = storeDataService;
+    }
+    /**
+     * @param {?} location
+     * @return {?}
+     */
+    AbstractStoreItemComponent.prototype.getDirections = /**
+     * @param {?} location
+     * @return {?}
+     */
+    function (location) {
+        /** @type {?} */
+        var google_map_url = 'https://www.google.com/maps/dir/Current+Location/';
+        /** @type {?} */
+        var latitude = this.storeDataService.getStoreLatitude(location);
+        /** @type {?} */
+        var longitude = this.storeDataService.getStoreLongitude(location);
+        return google_map_url + latitude + ',' + longitude;
+    };
+    /**
+     * @param {?} addressParts
+     * @return {?}
+     */
+    AbstractStoreItemComponent.prototype.getFormattedStoreAddress = /**
+     * @param {?} addressParts
+     * @return {?}
+     */
+    function (addressParts) {
+        return addressParts.filter(Boolean).join(', ');
+    };
+    AbstractStoreItemComponent.propDecorators = {
+        location: [{ type: Input }]
+    };
+    return AbstractStoreItemComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var StoreFinderListItemComponent = /** @class */ (function (_super) {
+    __extends(StoreFinderListItemComponent, _super);
+    function StoreFinderListItemComponent(storeDataService) {
+        var _this = _super.call(this, storeDataService) || this;
+        _this.storeDataService = storeDataService;
+        _this.locationIndex = null;
+        _this.storeItemClick = new EventEmitter();
+        return _this;
+    }
+    /**
+     * @return {?}
+     */
+    StoreFinderListItemComponent.prototype.handleStoreItemClick = /**
+     * @return {?}
+     */
+    function () {
+        if (this.locationIndex !== null) {
+            this.storeItemClick.emit(this.locationIndex);
+        }
+    };
+    StoreFinderListItemComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-store-finder-list-item',
+                    template: "<ng-container>\n  <div (click)=\"handleStoreItemClick()\">\n    <div class=\"cx-store-list-order\">\n      {{ listOrderLabel }}\n    </div>\n    <div class=\"cx-store-name\">\n      {{ location.displayName || location.name }}\n    </div>\n    <div class=\"cx-store-address\" *ngIf=\"location.address\">\n      <div class=\"cx-store-address-street\">\n        {{ location.address.line1 }} {{ location.address.line2 }}\n      </div>\n      {{\n        getFormattedStoreAddress([\n          location.address.town,\n          location.address.postalCode,\n          location.address.country.isocode\n        ])\n      }}\n      <div\n        class=\"cx-store-distance\"\n        *ngIf=\"location.formattedDistance && displayDistance\"\n      >\n        {{ location.formattedDistance }}\n      </div>\n    </div>\n    <a\n      href=\"{{ getDirections(location) }}\"\n      target=\"_blank\"\n      class=\"btn btn-sm btn-action btn-block cx-button\"\n      (click)=\"$event.stopPropagation()\"\n      >{{ 'storeFinder.getDirections' | cxTranslate }}</a\n    >\n  </div>\n</ng-container>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    StoreFinderListItemComponent.ctorParameters = function () { return [
+        { type: StoreDataService }
+    ]; };
+    StoreFinderListItemComponent.propDecorators = {
+        locationIndex: [{ type: Input }],
+        listOrderLabel: [{ type: Input }],
+        displayDistance: [{ type: Input }],
+        storeItemClick: [{ type: Output }]
+    };
+    return StoreFinderListItemComponent;
+}(AbstractStoreItemComponent));
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var StoreFinderMapComponent = /** @class */ (function () {
+    function StoreFinderMapComponent(googleMapRendererService) {
+        this.googleMapRendererService = googleMapRendererService;
+        this.selectedStoreItem = new EventEmitter();
+    }
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    StoreFinderMapComponent.prototype.ngOnChanges = /**
+     * @param {?} changes
+     * @return {?}
+     */
+    function (changes) {
+        if (changes.locations && this.locations) {
+            this.renderMap();
+        }
+    };
+    /**
+     * Sets the center of the map to the given location
+     * @param latitude latitude of the new center
+     * @param longitude longitude of the new center
+     */
+    /**
+     * Sets the center of the map to the given location
+     * @param {?} latitude latitude of the new center
+     * @param {?} longitude longitude of the new center
+     * @return {?}
+     */
+    StoreFinderMapComponent.prototype.centerMap = /**
+     * Sets the center of the map to the given location
+     * @param {?} latitude latitude of the new center
+     * @param {?} longitude longitude of the new center
+     * @return {?}
+     */
+    function (latitude, longitude) {
+        this.googleMapRendererService.centerMap(latitude, longitude);
+    };
+    /**
+     * @return {?}
+     */
+    StoreFinderMapComponent.prototype.renderMap = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.googleMapRendererService.renderMap(this.mapElement.nativeElement, this.locations, (/**
+         * @param {?} markerIndex
+         * @return {?}
+         */
+        function (markerIndex) {
+            _this.selectStoreItemClickHandle(markerIndex);
+        }));
+    };
+    /**
+     * @private
+     * @param {?} markerIndex
+     * @return {?}
+     */
+    StoreFinderMapComponent.prototype.selectStoreItemClickHandle = /**
+     * @private
+     * @param {?} markerIndex
+     * @return {?}
+     */
+    function (markerIndex) {
+        this.selectedStoreItem.emit(markerIndex);
+    };
+    StoreFinderMapComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-store-finder-map',
+                    template: "<div #mapElement class=\"cx-store-map\"></div>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    StoreFinderMapComponent.ctorParameters = function () { return [
+        { type: GoogleMapRendererService }
+    ]; };
+    StoreFinderMapComponent.propDecorators = {
+        mapElement: [{ type: ViewChild, args: ['mapElement', { static: true },] }],
+        locations: [{ type: Input }],
+        selectedStoreItem: [{ type: Output }]
+    };
+    return StoreFinderMapComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var StoreFinderPaginationDetailsComponent = /** @class */ (function () {
+    function StoreFinderPaginationDetailsComponent() {
+    }
+    /**
+     * @return {?}
+     */
+    StoreFinderPaginationDetailsComponent.prototype.getResultsPerPage = /**
+     * @return {?}
+     */
+    function () {
+        if (this.pagination.totalResults > this.pagination.pageSize) {
+            /** @type {?} */
+            var firstItem = this.pagination.currentPage * this.pagination.pageSize + 1;
+            /** @type {?} */
+            var resultsPerPage = (this.pagination.currentPage + 1) * this.pagination.pageSize;
+            if (resultsPerPage > this.pagination.totalResults) {
+                resultsPerPage = this.pagination.totalResults;
+            }
+            return firstItem + " - " + resultsPerPage;
+        }
+        else {
+            return "1 - " + this.pagination.totalResults;
+        }
+    };
+    StoreFinderPaginationDetailsComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-store-finder-pagination-details',
+                    template: "<span class=\"cx-pagination-details\">\n  {{ getResultsPerPage() }}\n  {{\n    'storeFinder.fromStoresFound'\n      | cxTranslate: { count: pagination.totalResults }\n  }}\n</span>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    StoreFinderPaginationDetailsComponent.ctorParameters = function () { return []; };
+    StoreFinderPaginationDetailsComponent.propDecorators = {
+        pagination: [{ type: Input }]
+    };
+    return StoreFinderPaginationDetailsComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var StoreFinderListComponent = /** @class */ (function () {
+    function StoreFinderListComponent(storeDataService, document) {
+        this.storeDataService = storeDataService;
+        this.document = document;
+        this.iconTypes = ICON_TYPE;
+        this.isDetailsModeVisible = false;
+    }
+    /**
+     * @param {?} index
+     * @param {?} location
+     * @return {?}
+     */
+    StoreFinderListComponent.prototype.centerStoreOnMapByIndex = /**
+     * @param {?} index
+     * @param {?} location
+     * @return {?}
+     */
+    function (index, location) {
+        this.showStoreDetails(location);
+        this.selectedStoreIndex = index;
+        this.selectedStore = location;
+        this.storeMap.centerMap(this.storeDataService.getStoreLatitude(this.locations.stores[index]), this.storeDataService.getStoreLongitude(this.locations.stores[index]));
+    };
+    /**
+     * @param {?} index
+     * @return {?}
+     */
+    StoreFinderListComponent.prototype.selectStoreItemList = /**
+     * @param {?} index
+     * @return {?}
+     */
+    function (index) {
+        this.selectedStoreIndex = index;
+        /** @type {?} */
+        var storeListItem = this.document.getElementById('item-' + index);
+        storeListItem.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+        });
+    };
+    /**
+     * @param {?} location
+     * @return {?}
+     */
+    StoreFinderListComponent.prototype.showStoreDetails = /**
+     * @param {?} location
+     * @return {?}
+     */
+    function (location) {
+        this.isDetailsModeVisible = true;
+        this.storeDetails = location;
+    };
+    /**
+     * @return {?}
+     */
+    StoreFinderListComponent.prototype.hideStoreDetails = /**
+     * @return {?}
+     */
+    function () {
+        this.isDetailsModeVisible = false;
+        this.selectedStoreIndex = undefined;
+        this.selectedStore = undefined;
+        this.storeMap.renderMap();
+    };
+    StoreFinderListComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-store-finder-list',
+                    template: "<ng-container *ngIf=\"locations\">\n  <div class=\"container mb-2\">\n    <div class=\"row\" *ngIf=\"locations?.pagination\">\n      <div class=\"col-md-12\">\n        <cx-store-finder-pagination-details\n          [pagination]=\"locations.pagination\"\n        ></cx-store-finder-pagination-details>\n      </div>\n      <div class=\"col-md-2 text-left cx-back-wrapper\">\n        <button\n          class=\"btn btn-block btn-action\"\n          *ngIf=\"isDetailsModeVisible\"\n          (click)=\"hideStoreDetails()\"\n        >\n          <cx-icon [type]=\"iconTypes.CARET_LEFT\"></cx-icon>\n          {{ 'storeFinder.backToList' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <div *ngIf=\"locations?.stores\" class=\"row cx-columns\">\n      <div class=\"col-md-4 cx-address-col\">\n        <div class=\"cx-store-details\" *ngIf=\"isDetailsModeVisible\">\n          <cx-store-finder-store-description\n            [location]=\"storeDetails\"\n            [disableMap]=\"true\"\n          ></cx-store-finder-store-description>\n        </div>\n        <ol class=\"cx-list\" *ngIf=\"!isDetailsModeVisible\">\n          <li\n            *ngFor=\"let location of locations?.stores; let i = index\"\n            id=\"{{ 'item-' + i }}\"\n            [ngClass]=\"{\n              'cx-selected-item': selectedStoreIndex === i\n            }\"\n            class=\"cx-list-items\"\n          >\n            <cx-store-finder-list-item\n              [location]=\"location\"\n              [locationIndex]=\"i\"\n              [displayDistance]=\"useMylocation\"\n              (storeItemClick)=\"centerStoreOnMapByIndex($event, location)\"\n              [listOrderLabel]=\"\n                i +\n                locations.pagination.currentPage *\n                  locations.pagination.pageSize +\n                1\n              \"\n            ></cx-store-finder-list-item>\n          </li>\n        </ol>\n      </div>\n      <div class=\"col-md-8 cx-map-col\">\n        <cx-store-finder-map\n          #storeMap\n          [locations]=\"locations.stores\"\n          (selectedStoreItem)=\"selectStoreItemList($event)\"\n        ></cx-store-finder-map>\n      </div>\n    </div>\n\n    <!-- mobile tabs for column set only -->\n\n    <div *ngIf=\"locations?.stores\" class=\"cx-columns-mobile\">\n      <ngb-tabset justify=\"center\">\n        <ngb-tab>\n          <ng-template ngbTabTitle>\n            {{ 'storeFinder.listView' | cxTranslate }}\n          </ng-template>\n          <ng-template ngbTabContent>\n            <div class=\"cx-address-col\">\n              <div class=\"cx-store-details\" *ngIf=\"isDetailsModeVisible\">\n                <cx-store-finder-store-description\n                  [location]=\"storeDetails\"\n                  [disableMap]=\"true\"\n                ></cx-store-finder-store-description>\n              </div>\n              <ol class=\"cx-list\" *ngIf=\"!isDetailsModeVisible\">\n                <li\n                  *ngFor=\"let location of locations?.stores; let i = index\"\n                  id=\"{{ 'item-' + i }}\"\n                  [ngClass]=\"{\n                    'cx-selected-item': selectedStoreIndex === i\n                  }\"\n                  class=\"cx-list-items\"\n                >\n                  <cx-store-finder-list-item\n                    [location]=\"location\"\n                    [locationIndex]=\"i\"\n                    [displayDistance]=\"useMylocation\"\n                    (storeItemClick)=\"centerStoreOnMapByIndex($event, location)\"\n                    [listOrderLabel]=\"\n                      i +\n                      locations.pagination.currentPage *\n                        locations.pagination.pageSize +\n                      1\n                    \"\n                  ></cx-store-finder-list-item>\n                </li>\n              </ol>\n            </div>\n          </ng-template>\n        </ngb-tab>\n        <ngb-tab>\n          <ng-template ngbTabTitle>\n            {{ 'storeFinder.mapView' | cxTranslate }}\n          </ng-template>\n          <ng-template ngbTabContent>\n            <div class=\"cx-map-col\">\n              <cx-store-finder-map\n                #storeMap\n                [locations]=\"selectedStore ? [selectedStore] : locations.stores\"\n                (selectedStoreItem)=\"selectStoreItemList($event)\"\n              ></cx-store-finder-map>\n            </div>\n          </ng-template>\n        </ngb-tab>\n      </ngb-tabset>\n    </div>\n\n    <!-- mobile tabs end -->\n\n    <div *ngIf=\"!locations?.stores\" class=\"row\">\n      <div class=\"col-md-12 cx-not-found\">\n        {{ 'storeFinder.noStoreFound' | cxTranslate }}\n      </div>\n    </div>\n  </div>\n</ng-container>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    StoreFinderListComponent.ctorParameters = function () { return [
+        { type: StoreDataService },
+        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
+    ]; };
+    StoreFinderListComponent.propDecorators = {
+        locations: [{ type: Input }],
+        useMylocation: [{ type: Input }],
+        storeMap: [{ type: ViewChild, args: ['storeMap', { static: false },] }]
+    };
+    return StoreFinderListComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var StoreFinderSearchResultComponent = /** @class */ (function () {
+    function StoreFinderSearchResultComponent(storeFinderService, route) {
+        this.storeFinderService = storeFinderService;
+        this.route = route;
+        this.countryCode = null;
+        this.searchConfig = {
+            currentPage: 0,
+        };
+    }
+    /**
+     * @return {?}
+     */
+    StoreFinderSearchResultComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.subscription = this.route.queryParams.subscribe((/**
+         * @param {?} params
+         * @return {?}
+         */
+        function (params) {
+            return _this.initialize(params);
+        }));
+    };
+    /**
+     * @return {?}
+     */
+    StoreFinderSearchResultComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+    };
+    /**
+     * @param {?} pageNumber
+     * @return {?}
+     */
+    StoreFinderSearchResultComponent.prototype.viewPage = /**
+     * @param {?} pageNumber
+     * @return {?}
+     */
+    function (pageNumber) {
+        this.searchConfig = __assign({}, this.searchConfig, { currentPage: pageNumber });
+        this.storeFinderService.findStoresAction(this.searchQuery.queryText, this.searchConfig, this.geolocation, this.countryCode, this.useMyLocation);
+    };
+    /**
+     * @private
+     * @param {?} params
+     * @return {?}
+     */
+    StoreFinderSearchResultComponent.prototype.initialize = /**
+     * @private
+     * @param {?} params
+     * @return {?}
+     */
+    function (params) {
+        this.searchQuery = this.parseParameters(params);
+        this.useMyLocation = params && params.useMyLocation ? true : false;
+        this.searchConfig = __assign({}, this.searchConfig, { currentPage: 0 });
+        this.storeFinderService.findStoresAction(this.searchQuery.queryText, this.searchConfig, this.geolocation, this.countryCode, this.useMyLocation);
+        this.isLoading$ = this.storeFinderService.getStoresLoading();
+        this.locations$ = this.storeFinderService.getFindStoresEntities();
+    };
+    /**
+     * @private
+     * @param {?} queryParams
+     * @return {?}
+     */
+    StoreFinderSearchResultComponent.prototype.parseParameters = /**
+     * @private
+     * @param {?} queryParams
+     * @return {?}
+     */
+    function (queryParams) {
+        /** @type {?} */
+        var searchQuery;
+        if (queryParams.query) {
+            searchQuery = { queryText: queryParams.query };
+        }
+        else {
+            searchQuery = { queryText: '' };
+        }
+        searchQuery.useMyLocation =
+            queryParams.useMyLocation != null &&
+                queryParams.useMyLocation.toUpperCase() === 'TRUE';
+        return searchQuery;
+    };
+    StoreFinderSearchResultComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-store-finder-search-result',
+                    template: "<div\n  *ngIf=\"\n    !(isLoading$ | async) && (locations$ | async) as locations;\n    else loading\n  \"\n>\n  <div *ngIf=\"locations?.stores.length\">\n    <div class=\"cx-pagination\">\n      <cx-pagination\n        [pagination]=\"locations.pagination\"\n        (viewPageEvent)=\"viewPage($event)\"\n      ></cx-pagination>\n    </div>\n  </div>\n  <cx-store-finder-list\n    *ngIf=\"locations?.stores.length\"\n    [locations]=\"locations\"\n    [useMylocation]=\"useMyLocation\"\n  ></cx-store-finder-list>\n  <div class=\"container\" *ngIf=\"!locations?.stores.length\">\n    <div class=\"row\">\n      <span class=\"cx-no-stores\">{{\n        'storeFinder.noStoresMessage' | cxTranslate\n      }}</span>\n    </div>\n  </div>\n</div>\n<ng-template #loading>\n  <div class=\"cx-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    StoreFinderSearchResultComponent.ctorParameters = function () { return [
+        { type: StoreFinderService },
+        { type: ActivatedRoute }
+    ]; };
+    return StoreFinderSearchResultComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var StoreFinderSearchComponent = /** @class */ (function () {
+    function StoreFinderSearchComponent(routingService) {
+        this.routingService = routingService;
+        this.searchBox = new FormControl();
+        this.iconTypes = ICON_TYPE;
+    }
+    /**
+     * @param {?} address
+     * @return {?}
+     */
+    StoreFinderSearchComponent.prototype.findStores = /**
+     * @param {?} address
+     * @return {?}
+     */
+    function (address) {
+        this.routingService.go(['store-finder/find'], { query: address });
+    };
+    /**
+     * @return {?}
+     */
+    StoreFinderSearchComponent.prototype.viewStoresWithMyLoc = /**
+     * @return {?}
+     */
+    function () {
+        this.routingService.go(['store-finder/find'], { useMyLocation: true });
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    StoreFinderSearchComponent.prototype.onKey = /**
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        if (this.searchBox.value &&
+            this.searchBox.value.length &&
+            event.key === 'Enter') {
+            this.findStores(this.searchBox.value);
+        }
+    };
+    StoreFinderSearchComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-store-finder-search',
+                    template: "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-7\">\n      <div class=\"form-group search-wrapper\">\n        <input\n          #queryInput\n          [formControl]=\"searchBox\"\n          (keyup)=\"onKey($event)\"\n          type=\"text\"\n          class=\"form-control\"\n          placeholder=\"{{ 'storeFinder.searchBox' | cxTranslate }}\"\n          required\n        />\n        <cx-icon\n          [type]=\"iconTypes.SEARCH\"\n          aria-label=\"search\"\n          class=\"search\"\n          [routerLink]=\"['/store-finder/find']\"\n          [queryParams]=\"{ query: queryInput.value }\"\n          [ngClass]=\"{\n            'disabled-action': !(queryInput.value && queryInput.value.length)\n          }\"\n        ></cx-icon>\n      </div>\n    </div>\n    <div class=\"col-md-12 col-lg-5\">\n      <div class=\"row cx-search-links mb-3\">\n        <div class=\"col-6\">\n          <button\n            (click)=\"viewStoresWithMyLoc()\"\n            class=\"btn btn-primary btn-block\"\n          >\n            {{ 'storeFinder.useMyLocation' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-6\">\n          <button\n            [routerLink]=\"['/store-finder/view-all']\"\n            class=\"btn btn-primary btn-block\"\n          >\n            {{ 'storeFinder.viewAllStores' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    StoreFinderSearchComponent.ctorParameters = function () { return [
+        { type: RoutingService }
+    ]; };
+    return StoreFinderSearchComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var StoreFinderStoreDescriptionComponent = /** @class */ (function (_super) {
+    __extends(StoreFinderStoreDescriptionComponent, _super);
+    function StoreFinderStoreDescriptionComponent(storeDataService) {
+        var _this = _super.call(this, storeDataService) || this;
+        _this.storeDataService = storeDataService;
+        return _this;
+    }
+    StoreFinderStoreDescriptionComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-store-finder-store-description',
+                    template: "<ng-container *ngIf=\"location\">\n  <div class=\"container\">\n    <div class=\"row\">\n      <article class=\"cx-store col-md-4\">\n        <h2>{{ location.displayName || location.name }}</h2>\n\n        <p *ngIf=\"location.address\" class=\"cx-store-description-address\">\n          {{ location.address.line1 }} {{ location.address.line2 }} <br />\n          {{\n            getFormattedStoreAddress([\n              location.address.town,\n              location.address.postalCode,\n              location.address.country.isocode\n            ])\n          }}\n        </p>\n\n        <section class=\"cx-contact\">\n          <ul class=\"cx-list\">\n            <li class=\"cx-item\">\n              <a\n                class=\"cx-link\"\n                [href]=\"getDirections(location)\"\n                target=\"_blank\"\n                >{{ 'storeFinder.getDirections' | cxTranslate }}</a\n              >\n            </li>\n            <li class=\"cx-item\" *ngIf=\"location.address?.phone\">\n              {{ 'storeFinder.call' | cxTranslate }}\n              {{ location.address?.phone }}\n            </li>\n          </ul>\n        </section>\n        <div class=\"cx-schedule\" *ngIf=\"location.openingHours\">\n          <cx-schedule [location]=\"location\">\n            <h3>{{ 'storeFinder.storeHours' | cxTranslate }}</h3>\n          </cx-schedule>\n        </div>\n\n        <div *ngIf=\"(location.features | json) != '{}'\" class=\"cx-features\">\n          <div class=\"row \">\n            <div class=\"col-lg-12\">\n              <h3 class=\"cx-features-header\">\n                {{ 'storeFinder.storeFeatures' | cxTranslate }}\n              </h3>\n            </div>\n          </div>\n\n          <article class=\"row\">\n            <div\n              class=\"col-lg-12 cx-feature-item\"\n              *ngFor=\"let feature of location.features?.entry\"\n            >\n              <div class=\"cx-feature-value\">{{ feature.value }}</div>\n            </div>\n          </article>\n        </div>\n      </article>\n      <article class=\"cx-storeMap col-lg-8\" *ngIf=\"!disableMap\">\n        <cx-store-finder-map [locations]=\"[location]\"></cx-store-finder-map>\n      </article>\n    </div>\n  </div>\n</ng-container>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    StoreFinderStoreDescriptionComponent.ctorParameters = function () { return [
+        { type: StoreDataService }
+    ]; };
+    StoreFinderStoreDescriptionComponent.propDecorators = {
+        location: [{ type: Input }],
+        disableMap: [{ type: Input }]
+    };
+    return StoreFinderStoreDescriptionComponent;
+}(AbstractStoreItemComponent));
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var StoreFinderStoresCountComponent = /** @class */ (function () {
+    function StoreFinderStoresCountComponent(storeFinderService) {
+        this.storeFinderService = storeFinderService;
+    }
+    /**
+     * @return {?}
+     */
+    StoreFinderStoresCountComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.storeFinderService.viewAllStores();
+        this.locations$ = this.storeFinderService.getViewAllStoresEntities();
+        this.isLoading$ = this.storeFinderService.getViewAllStoresLoading();
+    };
+    StoreFinderStoresCountComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-store-finder-stores-count',
+                    template: "<ng-container\n  *ngIf=\"\n    !(isLoading$ | async) && (locations$ | async) as locations;\n    else loading\n  \"\n>\n  <div class=\"cx-count container\">\n    <div class=\"row\" *ngIf=\"locations?.length\">\n      <div\n        *ngFor=\"let country of locations\"\n        class=\"cx-set col-sm-6 col-md-4 col-lg-4 col-xl-3\"\n      >\n        <a [routerLink]=\"['../country', country.isoCode]\" class=\"btn-link\">\n          <div class=\"cx-title\">\n            <span\n              [ngClass]=\"\n                country?.storeCountDataList\n                  ? 'country-header'\n                  : 'country-header-link'\n              \"\n              class=\"cx-name\"\n              >{{ country.name }}</span\n            >\n            <span\n              [ngClass]=\"\n                country?.storeCountDataList\n                  ? 'country-header'\n                  : 'country-header-link'\n              \"\n              *ngIf=\"!country?.storeCountDataList\"\n              class=\"cx-country-count\"\n              >({{ country.count }})</span\n            >\n          </div>\n        </a>\n      </div>\n    </div>\n    <div class=\"row\" *ngIf=\"!locations?.length\">\n      <span class=\"cx-no-stores\">{{\n        'storeFinder.noStoresMessage' | cxTranslate\n      }}</span>\n    </div>\n  </div>\n</ng-container>\n<ng-template #loading>\n  <div class=\"cx-count-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    StoreFinderStoresCountComponent.ctorParameters = function () { return [
+        { type: StoreFinderService }
+    ]; };
+    return StoreFinderStoresCountComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var StoreFinderComponent = /** @class */ (function () {
+    function StoreFinderComponent() {
+    }
+    StoreFinderComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-store-finder',
+                    template: "<ng-container>\n  <div class=\"cx-store-finder-wrapper\">\n    <cx-store-finder-header></cx-store-finder-header>\n    <router-outlet></router-outlet>\n  </div>\n</ng-container>\n"
+                }] }
+    ];
+    return StoreFinderComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var StoreFinderStoreComponent = /** @class */ (function () {
+    function StoreFinderStoreComponent(storeFinderService, route, routingService) {
+        this.storeFinderService = storeFinderService;
+        this.route = route;
+        this.routingService = routingService;
+        this.iconTypes = ICON_TYPE;
+    }
+    /**
+     * @return {?}
+     */
+    StoreFinderStoreComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        if (!this.location) {
+            this.requestStoresData();
+            this.location$ = this.storeFinderService.getFindStoresEntities();
+            this.isLoading$ = this.storeFinderService.getStoresLoading();
+        }
+    };
+    /**
+     * @return {?}
+     */
+    StoreFinderStoreComponent.prototype.requestStoresData = /**
+     * @return {?}
+     */
+    function () {
+        this.storeFinderService.viewStoreById(this.route.snapshot.params.store);
+    };
+    /**
+     * @return {?}
+     */
+    StoreFinderStoreComponent.prototype.goBack = /**
+     * @return {?}
+     */
+    function () {
+        this.routingService.go([
+            "store-finder/country/" + this.route.snapshot.params.country,
+        ]);
+    };
+    StoreFinderStoreComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-store-finder-store',
+                    template: "<div\n  class=\"container\"\n  *ngIf=\"\n    location || (!(isLoading$ | async) && (location$ | async)) as location;\n    else loading\n  \"\n>\n  <div class=\"row cx-store-actions\">\n    <div class=\"col-md-4 col-sm-6 col-lg-2\">\n      <button class=\"btn btn-block btn-action\" (click)=\"goBack()\">\n        <cx-icon [type]=\"iconTypes.CARET_LEFT\"></cx-icon>\n        {{ 'storeFinder.backToList' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-12 p-0\">\n      <cx-store-finder-store-description\n        [disableMap]=\"disableMap\"\n        [location]=\"location\"\n      ></cx-store-finder-store-description>\n    </div>\n  </div>\n</div>\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    StoreFinderStoreComponent.ctorParameters = function () { return [
+        { type: StoreFinderService },
+        { type: ActivatedRoute },
+        { type: RoutingService }
+    ]; };
+    StoreFinderStoreComponent.propDecorators = {
+        location: [{ type: Input }],
+        disableMap: [{ type: Input }]
+    };
+    return StoreFinderStoreComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var StoreFinderModule = /** @class */ (function () {
+    function StoreFinderModule() {
+    }
+    StoreFinderModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        ReactiveFormsModule,
+                        RouterModule,
+                        ListNavigationModule,
+                        NgbTabsetModule,
+                        SpinnerModule,
+                        UrlModule,
+                        StoreFinderCoreModule,
+                        I18nModule,
+                        IconModule,
+                        ConfigModule.withConfig((/** @type {?} */ ({
+                            cmsComponents: {
+                                StoreFinderComponent: {
+                                    component: StoreFinderComponent,
+                                    childRoutes: [
+                                        {
+                                            path: 'find',
+                                            component: StoreFinderSearchResultComponent,
+                                        },
+                                        {
+                                            path: 'view-all',
+                                            component: StoreFinderStoresCountComponent,
+                                        },
+                                        {
+                                            path: 'country/:country',
+                                            component: StoreFinderGridComponent,
+                                        },
+                                        {
+                                            path: 'country/:country/region/:region',
+                                            component: StoreFinderGridComponent,
+                                        },
+                                        {
+                                            path: 'country/:country/region/:region/:store',
+                                            component: StoreFinderStoreComponent,
+                                        },
+                                        {
+                                            path: 'country/:country/:store',
+                                            component: StoreFinderStoreComponent,
+                                        },
+                                    ],
+                                },
+                            },
+                            layoutSlots: {
+                                StoreFinderPageTemplate: {
+                                    slots: ['MiddleContent', 'SideContent'],
+                                },
+                            },
+                        }))),
+                    ],
+                    declarations: [
+                        StoreFinderSearchComponent,
+                        StoreFinderListComponent,
+                        StoreFinderMapComponent,
+                        StoreFinderListItemComponent,
+                        StoreFinderStoresCountComponent,
+                        StoreFinderGridComponent,
+                        StoreFinderStoreDescriptionComponent,
+                        ScheduleComponent,
+                        StoreFinderHeaderComponent,
+                        StoreFinderSearchResultComponent,
+                        StoreFinderComponent,
+                        StoreFinderPaginationDetailsComponent,
+                        StoreFinderStoreComponent,
+                    ],
+                    exports: [
+                        ScheduleComponent,
+                        StoreFinderComponent,
+                        StoreFinderGridComponent,
+                        StoreFinderHeaderComponent,
+                        StoreFinderListItemComponent,
+                        StoreFinderMapComponent,
+                        StoreFinderPaginationDetailsComponent,
+                        StoreFinderSearchComponent,
+                        StoreFinderSearchResultComponent,
+                        StoreFinderListComponent,
+                        StoreFinderStoreDescriptionComponent,
+                        StoreFinderStoresCountComponent,
+                        StoreFinderStoreComponent,
+                    ],
+                    entryComponents: [
+                        StoreFinderComponent,
+                        StoreFinderSearchResultComponent,
+                        StoreFinderStoresCountComponent,
+                        StoreFinderGridComponent,
+                        StoreFinderStoreComponent,
+                    ],
+                },] }
+    ];
+    return StoreFinderModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var CmsLibModule = /** @class */ (function () {
     function CmsLibModule() {
     }
@@ -17139,8 +18043,7 @@ var CmsLibModule = /** @class */ (function () {
                         CartComponentModule,
                         TabParagraphContainerModule,
                         OrderConfirmationModule,
-                        // TODO:#2811 - uncomment to enable
-                        // StoreFinderModule,
+                        StoreFinderModule,
                         ProductImagesModule,
                         ProductSummaryModule,
                         ProductIntroModule,
@@ -17154,6 +18057,16 @@ var CmsLibModule = /** @class */ (function () {
     ];
     return CmsLibModule;
 }());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -17681,5 +18594,5 @@ var B2cStorefrontModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, OnlyNumberDirectiveModule as ɵa, AutoFocusDirectiveModule as ɵb, RoutingModule as ɵba, defaultStorefrontRoutesConfig as ɵbb, defaultRoutingConfig as ɵbc, defaultCheckoutConfig as ɵc, HighlightPipe as ɵd, defaultScrollConfig as ɵe, ProductListComponentService as ɵf, ViewConfig as ɵg, ViewConfigModule as ɵh, ProductScrollComponent as ɵi, ProductAttributesModule as ɵj, ProductDetailsTabModule as ɵk, ProductDetailsTabComponent as ɵl, CmsRoutesService as ɵm, CmsMappingService as ɵn, CmsI18nService as ɵo, CmsGuardsService as ɵp, TrackingEventsComponent as ɵq, ConsignmentTrackingComponent as ɵr, ComponentMapperService as ɵs, AddToHomeScreenService as ɵt, ProductImagesModule as ɵu, ProductImagesComponent as ɵv, suffixUrlMatcher as ɵw, addCmsRoute as ɵx, htmlLangProvider as ɵy, setHtmlLangAttribute as ɵz };
+export { AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsService, CheckoutGuard, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, DeliveryModeComponent, DeliveryModeModule, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, OnlyNumberDirectiveModule as ɵa, AutoFocusDirectiveModule as ɵb, RoutingModule as ɵba, defaultStorefrontRoutesConfig as ɵbb, defaultRoutingConfig as ɵbc, defaultCheckoutConfig as ɵc, HighlightPipe as ɵd, defaultScrollConfig as ɵe, ProductListComponentService as ɵf, ViewConfig as ɵg, ViewConfigModule as ɵh, ProductScrollComponent as ɵi, ProductAttributesModule as ɵj, ProductDetailsTabModule as ɵk, ProductDetailsTabComponent as ɵl, CmsRoutesService as ɵm, CmsMappingService as ɵn, CmsI18nService as ɵo, CmsGuardsService as ɵp, TrackingEventsComponent as ɵq, ConsignmentTrackingComponent as ɵr, ComponentMapperService as ɵs, AddToHomeScreenService as ɵt, ProductImagesModule as ɵu, ProductImagesComponent as ɵv, suffixUrlMatcher as ɵw, addCmsRoute as ɵx, htmlLangProvider as ɵy, setHtmlLangAttribute as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map
