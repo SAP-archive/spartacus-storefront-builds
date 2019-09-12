@@ -1,6 +1,6 @@
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 import { ComponentFactoryResolver, Inject, Injectable, PLATFORM_ID, } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';

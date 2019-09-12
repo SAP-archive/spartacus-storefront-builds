@@ -1,6 +1,6 @@
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 export { CmsPageGuard } from './guards/index';
 export { OutletRefDirective, OutletRefModule, OutletDirective, OutletPosition, OutletModule, OutletService } from './outlet/index';
