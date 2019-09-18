@@ -13,40 +13,40 @@ FormUtils = /** @class */ (function () {
     }
     /**
      *
-     * Checks is the `formControlName` field valid in the provided `form`.
+     * Validates a field of the given form group
      *
-     * If it's NOT valid, the method returns `true`.
+     * If the field is NOT valid (or invalid), the method returns `true`.
      *
-     * @param form a form whose field to check
-     * @param formControlName a field name
-     * @param submitted is the form submitted
+     * @param form Form with fields to check
+     * @param formControlName Name of the form field to check
+     * @param submitted Has the form been submitted
      */
     /**
      *
-     * Checks is the `formControlName` field valid in the provided `form`.
+     * Validates a field of the given form group
      *
-     * If it's NOT valid, the method returns `true`.
+     * If the field is NOT valid (or invalid), the method returns `true`.
      *
-     * @param {?} form a form whose field to check
-     * @param {?} formControlName a field name
-     * @param {?} submitted is the form submitted
+     * @param {?} form Form with fields to check
+     * @param {?} formControlName Name of the form field to check
+     * @param {?} submitted Has the form been submitted
      * @return {?}
      */
     FormUtils.isNotValidField = /**
      *
-     * Checks is the `formControlName` field valid in the provided `form`.
+     * Validates a field of the given form group
      *
-     * If it's NOT valid, the method returns `true`.
+     * If the field is NOT valid (or invalid), the method returns `true`.
      *
-     * @param {?} form a form whose field to check
-     * @param {?} formControlName a field name
-     * @param {?} submitted is the form submitted
+     * @param {?} form Form with fields to check
+     * @param {?} formControlName Name of the form field to check
+     * @param {?} submitted Has the form been submitted
      * @return {?}
      */
     function (form, formControlName, submitted) {
-        return (form.get(formControlName).invalid &&
-            (submitted ||
-                (form.get(formControlName).touched && form.get(formControlName).dirty)));
+        /** @type {?} */
+        var control = form.get(formControlName);
+        return control.invalid && (submitted || (control.touched && control.dirty));
     };
     return FormUtils;
 }());
@@ -54,4 +54,4 @@ FormUtils = /** @class */ (function () {
  * Utility class when working with forms.
  */
 export { FormUtils };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9ybS11dGlscy5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BzcGFydGFjdXMvc3RvcmVmcm9udC8iLCJzb3VyY2VzIjpbInNoYXJlZC91dGlscy9mb3Jtcy9mb3JtLXV0aWxzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFLQTs7OztJQUFBO0lBc0JBLENBQUM7SUFyQkM7Ozs7Ozs7OztPQVNHOzs7Ozs7Ozs7Ozs7SUFDSSx5QkFBZTs7Ozs7Ozs7Ozs7SUFBdEIsVUFDRSxJQUFlLEVBQ2YsZUFBdUIsRUFDdkIsU0FBa0I7UUFFbEIsT0FBTyxDQUNMLElBQUksQ0FBQyxHQUFHLENBQUMsZUFBZSxDQUFDLENBQUMsT0FBTztZQUNqQyxDQUFDLFNBQVM7Z0JBQ1IsQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLGVBQWUsQ0FBQyxDQUFDLE9BQU8sSUFBSSxJQUFJLENBQUMsR0FBRyxDQUFDLGVBQWUsQ0FBQyxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQzFFLENBQUM7SUFDSixDQUFDO0lBQ0gsZ0JBQUM7QUFBRCxDQUFDLEFBdEJELElBc0JDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgRm9ybUdyb3VwIH0gZnJvbSAnQGFuZ3VsYXIvZm9ybXMnO1xuXG4vKipcbiAqIFV0aWxpdHkgY2xhc3Mgd2hlbiB3b3JraW5nIHdpdGggZm9ybXMuXG4gKi9cbmV4cG9ydCBjbGFzcyBGb3JtVXRpbHMge1xuICAvKipcbiAgICpcbiAgICogQ2hlY2tzIGlzIHRoZSBgZm9ybUNvbnRyb2xOYW1lYCBmaWVsZCB2YWxpZCBpbiB0aGUgcHJvdmlkZWQgYGZvcm1gLlxuICAgKlxuICAgKiBJZiBpdCdzIE5PVCB2YWxpZCwgdGhlIG1ldGhvZCByZXR1cm5zIGB0cnVlYC5cbiAgICpcbiAgICogQHBhcmFtIGZvcm0gYSBmb3JtIHdob3NlIGZpZWxkIHRvIGNoZWNrXG4gICAqIEBwYXJhbSBmb3JtQ29udHJvbE5hbWUgYSBmaWVsZCBuYW1lXG4gICAqIEBwYXJhbSBzdWJtaXR0ZWQgaXMgdGhlIGZvcm0gc3VibWl0dGVkXG4gICAqL1xuICBzdGF0aWMgaXNOb3RWYWxpZEZpZWxkKFxuICAgIGZvcm06IEZvcm1Hcm91cCxcbiAgICBmb3JtQ29udHJvbE5hbWU6IHN0cmluZyxcbiAgICBzdWJtaXR0ZWQ6IGJvb2xlYW5cbiAgKTogYm9vbGVhbiB7XG4gICAgcmV0dXJuIChcbiAgICAgIGZvcm0uZ2V0KGZvcm1Db250cm9sTmFtZSkuaW52YWxpZCAmJlxuICAgICAgKHN1Ym1pdHRlZCB8fFxuICAgICAgICAoZm9ybS5nZXQoZm9ybUNvbnRyb2xOYW1lKS50b3VjaGVkICYmIGZvcm0uZ2V0KGZvcm1Db250cm9sTmFtZSkuZGlydHkpKVxuICAgICk7XG4gIH1cbn1cbiJdfQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9ybS11dGlscy5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BzcGFydGFjdXMvc3RvcmVmcm9udC8iLCJzb3VyY2VzIjpbInNoYXJlZC91dGlscy9mb3Jtcy9mb3JtLXV0aWxzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFLQTs7OztJQUFBO0lBbUJBLENBQUM7SUFsQkM7Ozs7Ozs7OztPQVNHOzs7Ozs7Ozs7Ozs7SUFDSSx5QkFBZTs7Ozs7Ozs7Ozs7SUFBdEIsVUFDRSxJQUFlLEVBQ2YsZUFBdUIsRUFDdkIsU0FBa0I7O1lBRVosT0FBTyxHQUFvQixJQUFJLENBQUMsR0FBRyxDQUFDLGVBQWUsQ0FBQztRQUMxRCxPQUFPLE9BQU8sQ0FBQyxPQUFPLElBQUksQ0FBQyxTQUFTLElBQUksQ0FBQyxPQUFPLENBQUMsT0FBTyxJQUFJLE9BQU8sQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDO0lBQzlFLENBQUM7SUFDSCxnQkFBQztBQUFELENBQUMsQUFuQkQsSUFtQkMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBGb3JtR3JvdXAsIEFic3RyYWN0Q29udHJvbCB9IGZyb20gJ0Bhbmd1bGFyL2Zvcm1zJztcblxuLyoqXG4gKiBVdGlsaXR5IGNsYXNzIHdoZW4gd29ya2luZyB3aXRoIGZvcm1zLlxuICovXG5leHBvcnQgY2xhc3MgRm9ybVV0aWxzIHtcbiAgLyoqXG4gICAqXG4gICAqIFZhbGlkYXRlcyBhIGZpZWxkIG9mIHRoZSBnaXZlbiBmb3JtIGdyb3VwXG4gICAqXG4gICAqIElmIHRoZSBmaWVsZCBpcyBOT1QgdmFsaWQgKG9yIGludmFsaWQpLCB0aGUgbWV0aG9kIHJldHVybnMgYHRydWVgLlxuICAgKlxuICAgKiBAcGFyYW0gZm9ybSBGb3JtIHdpdGggZmllbGRzIHRvIGNoZWNrXG4gICAqIEBwYXJhbSBmb3JtQ29udHJvbE5hbWUgTmFtZSBvZiB0aGUgZm9ybSBmaWVsZCB0byBjaGVja1xuICAgKiBAcGFyYW0gc3VibWl0dGVkIEhhcyB0aGUgZm9ybSBiZWVuIHN1Ym1pdHRlZFxuICAgKi9cbiAgc3RhdGljIGlzTm90VmFsaWRGaWVsZChcbiAgICBmb3JtOiBGb3JtR3JvdXAsXG4gICAgZm9ybUNvbnRyb2xOYW1lOiBzdHJpbmcsXG4gICAgc3VibWl0dGVkOiBib29sZWFuXG4gICk6IGJvb2xlYW4ge1xuICAgIGNvbnN0IGNvbnRyb2w6IEFic3RyYWN0Q29udHJvbCA9IGZvcm0uZ2V0KGZvcm1Db250cm9sTmFtZSk7XG4gICAgcmV0dXJuIGNvbnRyb2wuaW52YWxpZCAmJiAoc3VibWl0dGVkIHx8IChjb250cm9sLnRvdWNoZWQgJiYgY29udHJvbC5kaXJ0eSkpO1xuICB9XG59XG4iXX0=

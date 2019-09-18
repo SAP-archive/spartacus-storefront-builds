@@ -8,19 +8,19 @@
 export class FormUtils {
     /**
      *
-     * Checks is the `formControlName` field valid in the provided `form`.
+     * Validates a field of the given form group
      *
-     * If it's NOT valid, the method returns `true`.
+     * If the field is NOT valid (or invalid), the method returns `true`.
      *
-     * @param {?} form a form whose field to check
-     * @param {?} formControlName a field name
-     * @param {?} submitted is the form submitted
+     * @param {?} form Form with fields to check
+     * @param {?} formControlName Name of the form field to check
+     * @param {?} submitted Has the form been submitted
      * @return {?}
      */
     static isNotValidField(form, formControlName, submitted) {
-        return (form.get(formControlName).invalid &&
-            (submitted ||
-                (form.get(formControlName).touched && form.get(formControlName).dirty)));
+        /** @type {?} */
+        const control = form.get(formControlName);
+        return control.invalid && (submitted || (control.touched && control.dirty));
     }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9ybS11dGlscy5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BzcGFydGFjdXMvc3RvcmVmcm9udC8iLCJzb3VyY2VzIjpbInNoYXJlZC91dGlscy9mb3Jtcy9mb3JtLXV0aWxzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFLQSxNQUFNLE9BQU8sU0FBUzs7Ozs7Ozs7Ozs7O0lBV3BCLE1BQU0sQ0FBQyxlQUFlLENBQ3BCLElBQWUsRUFDZixlQUF1QixFQUN2QixTQUFrQjtRQUVsQixPQUFPLENBQ0wsSUFBSSxDQUFDLEdBQUcsQ0FBQyxlQUFlLENBQUMsQ0FBQyxPQUFPO1lBQ2pDLENBQUMsU0FBUztnQkFDUixDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsZUFBZSxDQUFDLENBQUMsT0FBTyxJQUFJLElBQUksQ0FBQyxHQUFHLENBQUMsZUFBZSxDQUFDLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FDMUUsQ0FBQztJQUNKLENBQUM7Q0FDRiIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEZvcm1Hcm91cCB9IGZyb20gJ0Bhbmd1bGFyL2Zvcm1zJztcblxuLyoqXG4gKiBVdGlsaXR5IGNsYXNzIHdoZW4gd29ya2luZyB3aXRoIGZvcm1zLlxuICovXG5leHBvcnQgY2xhc3MgRm9ybVV0aWxzIHtcbiAgLyoqXG4gICAqXG4gICAqIENoZWNrcyBpcyB0aGUgYGZvcm1Db250cm9sTmFtZWAgZmllbGQgdmFsaWQgaW4gdGhlIHByb3ZpZGVkIGBmb3JtYC5cbiAgICpcbiAgICogSWYgaXQncyBOT1QgdmFsaWQsIHRoZSBtZXRob2QgcmV0dXJucyBgdHJ1ZWAuXG4gICAqXG4gICAqIEBwYXJhbSBmb3JtIGEgZm9ybSB3aG9zZSBmaWVsZCB0byBjaGVja1xuICAgKiBAcGFyYW0gZm9ybUNvbnRyb2xOYW1lIGEgZmllbGQgbmFtZVxuICAgKiBAcGFyYW0gc3VibWl0dGVkIGlzIHRoZSBmb3JtIHN1Ym1pdHRlZFxuICAgKi9cbiAgc3RhdGljIGlzTm90VmFsaWRGaWVsZChcbiAgICBmb3JtOiBGb3JtR3JvdXAsXG4gICAgZm9ybUNvbnRyb2xOYW1lOiBzdHJpbmcsXG4gICAgc3VibWl0dGVkOiBib29sZWFuXG4gICk6IGJvb2xlYW4ge1xuICAgIHJldHVybiAoXG4gICAgICBmb3JtLmdldChmb3JtQ29udHJvbE5hbWUpLmludmFsaWQgJiZcbiAgICAgIChzdWJtaXR0ZWQgfHxcbiAgICAgICAgKGZvcm0uZ2V0KGZvcm1Db250cm9sTmFtZSkudG91Y2hlZCAmJiBmb3JtLmdldChmb3JtQ29udHJvbE5hbWUpLmRpcnR5KSlcbiAgICApO1xuICB9XG59XG4iXX0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9ybS11dGlscy5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BzcGFydGFjdXMvc3RvcmVmcm9udC8iLCJzb3VyY2VzIjpbInNoYXJlZC91dGlscy9mb3Jtcy9mb3JtLXV0aWxzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFLQSxNQUFNLE9BQU8sU0FBUzs7Ozs7Ozs7Ozs7O0lBV3BCLE1BQU0sQ0FBQyxlQUFlLENBQ3BCLElBQWUsRUFDZixlQUF1QixFQUN2QixTQUFrQjs7Y0FFWixPQUFPLEdBQW9CLElBQUksQ0FBQyxHQUFHLENBQUMsZUFBZSxDQUFDO1FBQzFELE9BQU8sT0FBTyxDQUFDLE9BQU8sSUFBSSxDQUFDLFNBQVMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxPQUFPLElBQUksT0FBTyxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUM7SUFDOUUsQ0FBQztDQUNGIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgRm9ybUdyb3VwLCBBYnN0cmFjdENvbnRyb2wgfSBmcm9tICdAYW5ndWxhci9mb3Jtcyc7XG5cbi8qKlxuICogVXRpbGl0eSBjbGFzcyB3aGVuIHdvcmtpbmcgd2l0aCBmb3Jtcy5cbiAqL1xuZXhwb3J0IGNsYXNzIEZvcm1VdGlscyB7XG4gIC8qKlxuICAgKlxuICAgKiBWYWxpZGF0ZXMgYSBmaWVsZCBvZiB0aGUgZ2l2ZW4gZm9ybSBncm91cFxuICAgKlxuICAgKiBJZiB0aGUgZmllbGQgaXMgTk9UIHZhbGlkIChvciBpbnZhbGlkKSwgdGhlIG1ldGhvZCByZXR1cm5zIGB0cnVlYC5cbiAgICpcbiAgICogQHBhcmFtIGZvcm0gRm9ybSB3aXRoIGZpZWxkcyB0byBjaGVja1xuICAgKiBAcGFyYW0gZm9ybUNvbnRyb2xOYW1lIE5hbWUgb2YgdGhlIGZvcm0gZmllbGQgdG8gY2hlY2tcbiAgICogQHBhcmFtIHN1Ym1pdHRlZCBIYXMgdGhlIGZvcm0gYmVlbiBzdWJtaXR0ZWRcbiAgICovXG4gIHN0YXRpYyBpc05vdFZhbGlkRmllbGQoXG4gICAgZm9ybTogRm9ybUdyb3VwLFxuICAgIGZvcm1Db250cm9sTmFtZTogc3RyaW5nLFxuICAgIHN1Ym1pdHRlZDogYm9vbGVhblxuICApOiBib29sZWFuIHtcbiAgICBjb25zdCBjb250cm9sOiBBYnN0cmFjdENvbnRyb2wgPSBmb3JtLmdldChmb3JtQ29udHJvbE5hbWUpO1xuICAgIHJldHVybiBjb250cm9sLmludmFsaWQgJiYgKHN1Ym1pdHRlZCB8fCAoY29udHJvbC50b3VjaGVkICYmIGNvbnRyb2wuZGlydHkpKTtcbiAgfVxufVxuIl19

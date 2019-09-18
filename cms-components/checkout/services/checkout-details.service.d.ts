@@ -1,4 +1,4 @@
-import { Address, CartService, CheckoutService, PaymentDetails, CheckoutDeliveryService, CheckoutPaymentService } from '@spartacus/core';
+import { Address, CartService, CheckoutDeliveryService, CheckoutPaymentService, CheckoutService, PaymentDetails } from '@spartacus/core';
 import { Observable } from 'rxjs';
 export declare class CheckoutDetailsService {
     private checkoutService;

@@ -5,13 +5,13 @@ import { FormGroup } from '@angular/forms';
 export declare class FormUtils {
     /**
      *
-     * Checks is the `formControlName` field valid in the provided `form`.
+     * Validates a field of the given form group
      *
-     * If it's NOT valid, the method returns `true`.
+     * If the field is NOT valid (or invalid), the method returns `true`.
      *
-     * @param form a form whose field to check
-     * @param formControlName a field name
-     * @param submitted is the form submitted
+     * @param form Form with fields to check
+     * @param formControlName Name of the form field to check
+     * @param submitted Has the form been submitted
      */
     static isNotValidField(form: FormGroup, formControlName: string, submitted: boolean): boolean;
 }

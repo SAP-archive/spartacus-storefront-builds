@@ -30,6 +30,7 @@ export declare class PaymentFormComponent implements OnInit, OnDestroy {
     shippingAddress$: Observable<Address>;
     countries$: Observable<Country[]>;
     sameAsShippingAddress: boolean;
+    setAsDefaultField: boolean;
     paymentMethodsCount: number;
     goBack: EventEmitter<any>;
     closeForm: EventEmitter<any>;

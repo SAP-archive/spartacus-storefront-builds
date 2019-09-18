@@ -1,6 +1,6 @@
 import { OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { GlobalMessageService, RoutingService, Title, UserService, UserSignUp, FeatureConfigService, AuthService, AuthRedirectService } from '@spartacus/core';
+import { AuthRedirectService, AuthService, FeatureConfigService, GlobalMessageService, RoutingService, Title, UserService, UserSignUp } from '@spartacus/core';
 import { Observable } from 'rxjs';
 export declare class RegisterComponent implements OnInit, OnDestroy {
     protected auth: AuthService;
@@ -27,6 +27,5 @@ export declare class RegisterComponent implements OnInit, OnDestroy {
     collectDataFromRegisterForm(formData: any): UserSignUp;
     private onRegisterUserSuccess;
     private registerUserProcessInit;
-    private matchPassword;
     ngOnDestroy(): void;
 }
