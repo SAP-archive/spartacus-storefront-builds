@@ -15334,7 +15334,11 @@ class OrderConfirmationOverviewComponent {
      * @return {?}
      */
     getAddressCardContent(deliveryAddress) {
-        return this.translation.translate('addressCard.shipTo').pipe(map((/**
+        return this.translation.translate('addressCard.shipTo').pipe(filter((/**
+         * @param {?} _
+         * @return {?}
+         */
+        _ => Boolean(deliveryAddress))), map((/**
          * @param {?} textTitle
          * @return {?}
          */
@@ -15354,7 +15358,11 @@ class OrderConfirmationOverviewComponent {
      * @return {?}
      */
     getDeliveryModeCardContent(deliveryMode) {
-        return this.translation.translate('checkoutShipping.shippingMethod').pipe(map((/**
+        return this.translation.translate('checkoutShipping.shippingMethod').pipe(filter((/**
+         * @param {?} _
+         * @return {?}
+         */
+        _ => Boolean(deliveryMode))), map((/**
          * @param {?} textTitle
          * @return {?}
          */
@@ -15369,7 +15377,11 @@ class OrderConfirmationOverviewComponent {
      * @return {?}
      */
     getBillingAddressCardContent(billingAddress) {
-        return this.translation.translate('addressCard.billTo').pipe(map((/**
+        return this.translation.translate('addressCard.billTo').pipe(filter((/**
+         * @param {?} _
+         * @return {?}
+         */
+        _ => Boolean(billingAddress))), map((/**
          * @param {?} textTitle
          * @return {?}
          */
@@ -15392,10 +15404,14 @@ class OrderConfirmationOverviewComponent {
         return combineLatest([
             this.translation.translate('paymentForm.payment'),
             this.translation.translate('paymentCard.expires', {
-                month: payment.expiryMonth,
-                year: payment.expiryYear,
+                month: Boolean(payment) ? payment.expiryMonth : '',
+                year: Boolean(payment) ? payment.expiryYear : '',
             }),
-        ]).pipe(map((/**
+        ]).pipe(filter((/**
+         * @param {?} _
+         * @return {?}
+         */
+        _ => Boolean(payment))), map((/**
          * @param {?} __0
          * @return {?}
          */

@@ -17881,7 +17881,11 @@
          * @return {?}
          */
         function (deliveryAddress) {
-            return this.translation.translate('addressCard.shipTo').pipe(operators.map((/**
+            return this.translation.translate('addressCard.shipTo').pipe(operators.filter((/**
+             * @param {?} _
+             * @return {?}
+             */
+            function (_) { return Boolean(deliveryAddress); })), operators.map((/**
              * @param {?} textTitle
              * @return {?}
              */
@@ -17905,7 +17909,11 @@
          * @return {?}
          */
         function (deliveryMode) {
-            return this.translation.translate('checkoutShipping.shippingMethod').pipe(operators.map((/**
+            return this.translation.translate('checkoutShipping.shippingMethod').pipe(operators.filter((/**
+             * @param {?} _
+             * @return {?}
+             */
+            function (_) { return Boolean(deliveryMode); })), operators.map((/**
              * @param {?} textTitle
              * @return {?}
              */
@@ -17924,7 +17932,11 @@
          * @return {?}
          */
         function (billingAddress) {
-            return this.translation.translate('addressCard.billTo').pipe(operators.map((/**
+            return this.translation.translate('addressCard.billTo').pipe(operators.filter((/**
+             * @param {?} _
+             * @return {?}
+             */
+            function (_) { return Boolean(billingAddress); })), operators.map((/**
              * @param {?} textTitle
              * @return {?}
              */
@@ -17951,10 +17963,14 @@
             return rxjs.combineLatest([
                 this.translation.translate('paymentForm.payment'),
                 this.translation.translate('paymentCard.expires', {
-                    month: payment.expiryMonth,
-                    year: payment.expiryYear,
+                    month: Boolean(payment) ? payment.expiryMonth : '',
+                    year: Boolean(payment) ? payment.expiryYear : '',
                 }),
-            ]).pipe(operators.map((/**
+            ]).pipe(operators.filter((/**
+             * @param {?} _
+             * @return {?}
+             */
+            function (_) { return Boolean(payment); })), operators.map((/**
              * @param {?} __0
              * @return {?}
              */
