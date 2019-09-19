@@ -12240,13 +12240,14 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CmsPageGuard = /** @class */ (function () {
-        function CmsPageGuard(routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService) {
+        function CmsPageGuard(routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService, protectedRoutesGuard) {
             this.routingService = routingService;
             this.cmsService = cmsService;
             this.cmsRoutes = cmsRoutes;
             this.cmsI18n = cmsI18n;
             this.cmsGuards = cmsGuards;
             this.semanticPathService = semanticPathService;
+            this.protectedRoutesGuard = protectedRoutesGuard;
         }
         /**
          * @param {?} route
@@ -12254,6 +12255,35 @@
          * @return {?}
          */
         CmsPageGuard.prototype.canActivate = /**
+         * @param {?} route
+         * @param {?} state
+         * @return {?}
+         */
+        function (route, state) {
+            var _this = this;
+            /**
+             * TODO(issue:4646) Expect that `ProtectedRoutesGuard` dependency is required (remove `if` logic)
+             */
+            return this.protectedRoutesGuard
+                ? this.protectedRoutesGuard
+                    .canActivate(route)
+                    .pipe(operators.switchMap((/**
+                 * @param {?} result
+                 * @return {?}
+                 */
+                function (result) {
+                    return result ? _this.getCmsPage(route, state) : rxjs.of(result);
+                })))
+                : this.getCmsPage(route, state);
+        };
+        /**
+         * @private
+         * @param {?} route
+         * @param {?} state
+         * @return {?}
+         */
+        CmsPageGuard.prototype.getCmsPage = /**
+         * @private
          * @param {?} route
          * @param {?} state
          * @return {?}
@@ -12396,9 +12426,10 @@
             { type: CmsRoutesService },
             { type: CmsI18nService },
             { type: CmsGuardsService },
-            { type: core$1.SemanticPathService }
+            { type: core$1.SemanticPathService },
+            { type: core$1.ProtectedRoutesGuard }
         ]; };
-        /** @nocollapse */ CmsPageGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(core.ɵɵinject(core$1.RoutingService), core.ɵɵinject(core$1.CmsService), core.ɵɵinject(CmsRoutesService), core.ɵɵinject(CmsI18nService), core.ɵɵinject(CmsGuardsService), core.ɵɵinject(core$1.SemanticPathService)); }, token: CmsPageGuard, providedIn: "root" });
+        /** @nocollapse */ CmsPageGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(core.ɵɵinject(core$1.RoutingService), core.ɵɵinject(core$1.CmsService), core.ɵɵinject(CmsRoutesService), core.ɵɵinject(CmsI18nService), core.ɵɵinject(CmsGuardsService), core.ɵɵinject(core$1.SemanticPathService), core.ɵɵinject(core$1.ProtectedRoutesGuard)); }, token: CmsPageGuard, providedIn: "root" });
         return CmsPageGuard;
     }());
     if (false) {
@@ -12406,12 +12437,12 @@
         CmsPageGuard.guardName;
         /**
          * @type {?}
-         * @private
+         * @protected
          */
         CmsPageGuard.prototype.routingService;
         /**
          * @type {?}
-         * @private
+         * @protected
          */
         CmsPageGuard.prototype.cmsService;
         /**
@@ -12431,9 +12462,14 @@
         CmsPageGuard.prototype.cmsGuards;
         /**
          * @type {?}
-         * @private
+         * @protected
          */
         CmsPageGuard.prototype.semanticPathService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        CmsPageGuard.prototype.protectedRoutesGuard;
     }
 
     /**
@@ -23121,11 +23157,12 @@
         notFound: { paths: ['not-found'] },
         cart: { paths: ['cart'] },
         // semantic links for login related pages
-        login: { paths: ['login'] },
+        login: { paths: ['login'], protected: false },
+        register: { paths: ['login/register'], protected: false },
+        forgotPassword: { paths: ['login/forgot-password'], protected: false },
+        resetPassword: { paths: ['login/pw/change'], protected: false },
         logout: { paths: ['logout'] },
-        register: { paths: ['login/register'] },
         checkoutLogin: { paths: ['checkout-login'] },
-        forgotPassword: { paths: ['login/forgot-password'] },
         checkout: { paths: ['checkout'] },
         checkoutShippingAddress: { paths: ['checkout/shipping-address'] },
         checkoutDeliveryMode: { paths: ['checkout/delivery-mode'] },

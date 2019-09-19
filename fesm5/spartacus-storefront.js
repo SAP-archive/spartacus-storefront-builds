@@ -1,5 +1,5 @@
 import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, EventEmitter, Output, isDevMode, forwardRef, Renderer2, HostListener, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, NgZone, APP_INITIALIZER, INJECTOR, Pipe } from '@angular/core';
-import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, AuthService, AuthRedirectService, FeatureConfigService, RoutingConfigService, OCC_USER_ID_ANONYMOUS, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, FeaturesConfigModule, CmsConfig, CartDataService, CmsService, PageMetaService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, TranslationChunkService, PageType, SemanticPathService, AuthGuard, EMAIL_PATTERN, PASSWORD_PATTERN, NotAuthGuard, CmsPageTitleModule, provideConfig, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, StateModule, AuthModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
+import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, CartModule, AuthService, AuthRedirectService, FeatureConfigService, RoutingConfigService, OCC_USER_ID_ANONYMOUS, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, FeaturesConfigModule, CmsConfig, CartDataService, CmsService, PageMetaService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, AuthGuard, EMAIL_PATTERN, PASSWORD_PATTERN, NotAuthGuard, CmsPageTitleModule, provideConfig, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, StateModule, AuthModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
 import { map, filter, switchMap, tap, debounceTime, startWith, distinctUntilChanged, take, shareReplay, skipWhile, first, endWith, withLatestFrom, pluck } from 'rxjs/operators';
 import { __extends, __values, __assign, __spread, __read, __awaiter, __generator } from 'tslib';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
@@ -12054,13 +12054,14 @@ if (false) {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var CmsPageGuard = /** @class */ (function () {
-    function CmsPageGuard(routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService) {
+    function CmsPageGuard(routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService, protectedRoutesGuard) {
         this.routingService = routingService;
         this.cmsService = cmsService;
         this.cmsRoutes = cmsRoutes;
         this.cmsI18n = cmsI18n;
         this.cmsGuards = cmsGuards;
         this.semanticPathService = semanticPathService;
+        this.protectedRoutesGuard = protectedRoutesGuard;
     }
     /**
      * @param {?} route
@@ -12068,6 +12069,35 @@ var CmsPageGuard = /** @class */ (function () {
      * @return {?}
      */
     CmsPageGuard.prototype.canActivate = /**
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    function (route, state) {
+        var _this = this;
+        /**
+         * TODO(issue:4646) Expect that `ProtectedRoutesGuard` dependency is required (remove `if` logic)
+         */
+        return this.protectedRoutesGuard
+            ? this.protectedRoutesGuard
+                .canActivate(route)
+                .pipe(switchMap((/**
+             * @param {?} result
+             * @return {?}
+             */
+            function (result) {
+                return result ? _this.getCmsPage(route, state) : of(result);
+            })))
+            : this.getCmsPage(route, state);
+    };
+    /**
+     * @private
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    CmsPageGuard.prototype.getCmsPage = /**
+     * @private
      * @param {?} route
      * @param {?} state
      * @return {?}
@@ -12210,9 +12240,10 @@ var CmsPageGuard = /** @class */ (function () {
         { type: CmsRoutesService },
         { type: CmsI18nService },
         { type: CmsGuardsService },
-        { type: SemanticPathService }
+        { type: SemanticPathService },
+        { type: ProtectedRoutesGuard }
     ]; };
-    /** @nocollapse */ CmsPageGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(ɵɵinject(RoutingService), ɵɵinject(CmsService), ɵɵinject(CmsRoutesService), ɵɵinject(CmsI18nService), ɵɵinject(CmsGuardsService), ɵɵinject(SemanticPathService)); }, token: CmsPageGuard, providedIn: "root" });
+    /** @nocollapse */ CmsPageGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(ɵɵinject(RoutingService), ɵɵinject(CmsService), ɵɵinject(CmsRoutesService), ɵɵinject(CmsI18nService), ɵɵinject(CmsGuardsService), ɵɵinject(SemanticPathService), ɵɵinject(ProtectedRoutesGuard)); }, token: CmsPageGuard, providedIn: "root" });
     return CmsPageGuard;
 }());
 if (false) {
@@ -12220,12 +12251,12 @@ if (false) {
     CmsPageGuard.guardName;
     /**
      * @type {?}
-     * @private
+     * @protected
      */
     CmsPageGuard.prototype.routingService;
     /**
      * @type {?}
-     * @private
+     * @protected
      */
     CmsPageGuard.prototype.cmsService;
     /**
@@ -12245,9 +12276,14 @@ if (false) {
     CmsPageGuard.prototype.cmsGuards;
     /**
      * @type {?}
-     * @private
+     * @protected
      */
     CmsPageGuard.prototype.semanticPathService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CmsPageGuard.prototype.protectedRoutesGuard;
 }
 
 /**
@@ -22935,11 +22971,12 @@ var defaultStorefrontRoutesConfig = {
     notFound: { paths: ['not-found'] },
     cart: { paths: ['cart'] },
     // semantic links for login related pages
-    login: { paths: ['login'] },
+    login: { paths: ['login'], protected: false },
+    register: { paths: ['login/register'], protected: false },
+    forgotPassword: { paths: ['login/forgot-password'], protected: false },
+    resetPassword: { paths: ['login/pw/change'], protected: false },
     logout: { paths: ['logout'] },
-    register: { paths: ['login/register'] },
     checkoutLogin: { paths: ['checkout-login'] },
-    forgotPassword: { paths: ['login/forgot-password'] },
     checkout: { paths: ['checkout'] },
     checkoutShippingAddress: { paths: ['checkout/shipping-address'] },
     checkoutDeliveryMode: { paths: ['checkout/delivery-mode'] },
