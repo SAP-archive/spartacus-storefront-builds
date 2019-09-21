@@ -12094,12 +12094,10 @@ class OrderDetailsService {
     /**
      * @param {?} userOrderService
      * @param {?} routingService
-     * @param {?=} cartDataService
      */
-    constructor(userOrderService, routingService, cartDataService) {
+    constructor(userOrderService, routingService) {
         this.userOrderService = userOrderService;
         this.routingService = routingService;
-        this.cartDataService = cartDataService;
         this.orderCode$ = this.routingService
             .getRouterState()
             .pipe(map((/**
@@ -12113,12 +12111,7 @@ class OrderDetailsService {
          */
         orderCode => {
             if (orderCode) {
-                if (this.cartDataService.userId === OCC_USER_ID_ANONYMOUS) {
-                    this.userOrderService.loadOrderDetails(orderCode, OCC_USER_ID_ANONYMOUS);
-                }
-                else {
-                    this.userOrderService.loadOrderDetails(orderCode);
-                }
+                this.userOrderService.loadOrderDetails(orderCode);
             }
             else {
                 this.userOrderService.clearOrderDetails();
@@ -12141,8 +12134,7 @@ OrderDetailsService.decorators = [
 /** @nocollapse */
 OrderDetailsService.ctorParameters = () => [
     { type: UserOrderService },
-    { type: RoutingService },
-    { type: CartDataService }
+    { type: RoutingService }
 ];
 if (false) {
     /** @type {?} */
@@ -12159,11 +12151,6 @@ if (false) {
      * @private
      */
     OrderDetailsService.prototype.routingService;
-    /**
-     * @type {?}
-     * @private
-     */
-    OrderDetailsService.prototype.cartDataService;
 }
 
 /**

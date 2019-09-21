@@ -14095,11 +14095,10 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var OrderDetailsService = /** @class */ (function () {
-        function OrderDetailsService(userOrderService, routingService, cartDataService) {
+        function OrderDetailsService(userOrderService, routingService) {
             var _this = this;
             this.userOrderService = userOrderService;
             this.routingService = routingService;
-            this.cartDataService = cartDataService;
             this.orderCode$ = this.routingService
                 .getRouterState()
                 .pipe(operators.map((/**
@@ -14113,12 +14112,7 @@
              */
             function (orderCode) {
                 if (orderCode) {
-                    if (_this.cartDataService.userId === core$1.OCC_USER_ID_ANONYMOUS) {
-                        _this.userOrderService.loadOrderDetails(orderCode, core$1.OCC_USER_ID_ANONYMOUS);
-                    }
-                    else {
-                        _this.userOrderService.loadOrderDetails(orderCode);
-                    }
+                    _this.userOrderService.loadOrderDetails(orderCode);
                 }
                 else {
                     _this.userOrderService.clearOrderDetails();
@@ -14144,8 +14138,7 @@
         /** @nocollapse */
         OrderDetailsService.ctorParameters = function () { return [
             { type: core$1.UserOrderService },
-            { type: core$1.RoutingService },
-            { type: core$1.CartDataService }
+            { type: core$1.RoutingService }
         ]; };
         return OrderDetailsService;
     }());
@@ -14164,11 +14157,6 @@
          * @private
          */
         OrderDetailsService.prototype.routingService;
-        /**
-         * @type {?}
-         * @private
-         */
-        OrderDetailsService.prototype.cartDataService;
     }
 
     /**

@@ -13909,11 +13909,10 @@ var ForgotPasswordModule = /** @class */ (function () {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var OrderDetailsService = /** @class */ (function () {
-    function OrderDetailsService(userOrderService, routingService, cartDataService) {
+    function OrderDetailsService(userOrderService, routingService) {
         var _this = this;
         this.userOrderService = userOrderService;
         this.routingService = routingService;
-        this.cartDataService = cartDataService;
         this.orderCode$ = this.routingService
             .getRouterState()
             .pipe(map((/**
@@ -13927,12 +13926,7 @@ var OrderDetailsService = /** @class */ (function () {
          */
         function (orderCode) {
             if (orderCode) {
-                if (_this.cartDataService.userId === OCC_USER_ID_ANONYMOUS) {
-                    _this.userOrderService.loadOrderDetails(orderCode, OCC_USER_ID_ANONYMOUS);
-                }
-                else {
-                    _this.userOrderService.loadOrderDetails(orderCode);
-                }
+                _this.userOrderService.loadOrderDetails(orderCode);
             }
             else {
                 _this.userOrderService.clearOrderDetails();
@@ -13958,8 +13952,7 @@ var OrderDetailsService = /** @class */ (function () {
     /** @nocollapse */
     OrderDetailsService.ctorParameters = function () { return [
         { type: UserOrderService },
-        { type: RoutingService },
-        { type: CartDataService }
+        { type: RoutingService }
     ]; };
     return OrderDetailsService;
 }());
@@ -13978,11 +13971,6 @@ if (false) {
      * @private
      */
     OrderDetailsService.prototype.routingService;
-    /**
-     * @type {?}
-     * @private
-     */
-    OrderDetailsService.prototype.cartDataService;
 }
 
 /**
