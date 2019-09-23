@@ -7,7 +7,7 @@ export declare enum DeliveryModePreferences {
 export declare abstract class CheckoutConfig {
     checkout?: {
         /**
-         * Set checkout steps as ordered array of pages
+         * Set checkout steps as ordered array of pages.
          */
         steps?: Array<CheckoutStep>;
         /**
@@ -18,5 +18,9 @@ export declare abstract class CheckoutConfig {
          * Default delivery mode for i.a. express checkout. Set preferences in order with general preferences (eg. DeliveryModePreferences.LEAST_EXPENSIVE) or specific delivery codes.
          */
         defaultDeliveryMode?: Array<DeliveryModePreferences | string>;
+        /**
+         * Allow for guest checkout.
+         */
+        guest?: boolean;
     };
 }

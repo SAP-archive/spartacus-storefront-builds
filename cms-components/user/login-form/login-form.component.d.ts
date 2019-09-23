@@ -1,8 +1,9 @@
 import { OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { AuthRedirectService, AuthService, GlobalMessageService, WindowRef, FeatureConfigService } from '@spartacus/core';
+import { AuthRedirectService, AuthService, GlobalMessageService, WindowRef } from '@spartacus/core';
 import { Subscription } from 'rxjs';
+import { CheckoutConfigService } from '../../checkout/services/checkout-config.service';
 export declare class LoginFormComponent implements OnInit, OnDestroy {
     private auth;
     private globalMessageService;
@@ -10,15 +11,22 @@ export declare class LoginFormComponent implements OnInit, OnDestroy {
     private authRedirectService;
     private winRef?;
     private activatedRoute?;
-    private featureConfig?;
+    private checkoutConfigService?;
     sub: Subscription;
     form: FormGroup;
     loginAsGuest: boolean;
     constructor(auth: AuthService, globalMessageService: GlobalMessageService, fb: FormBuilder, authRedirectService: AuthRedirectService, winRef: WindowRef, // tslint:disable-line,
-    activatedRoute: ActivatedRoute, featureConfig: FeatureConfigService);
+    activatedRoute: ActivatedRoute, checkoutConfigService: CheckoutConfigService);
     /**
      * @deprecated since 1.1.0
-     * NOTE: check issue:#4055 for more info
+     * Use constructor(
+     * auth: AuthService,
+     * globalMessageService: GlobalMessageService,
+     * fb: FormBuilder,
+     * authRedirectService: AuthRedirectService,
+     *  winRef: WindowRef,
+     * activatedRoute: ActivatedRoute,
+     * checkoutConfigService: CheckoutConfigService) instead
      *
      * TODO(issue:#4055) Deprecated since 1.1.0
      */

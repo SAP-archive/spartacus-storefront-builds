@@ -5130,96 +5130,9 @@
             ],
             express: false,
             defaultDeliveryMode: [DeliveryModePreferences.FREE],
+            guest: false,
         },
     };
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CheckoutAuthGuard = /** @class */ (function () {
-        function CheckoutAuthGuard(routingService, authService, authRedirectService, cartService, featureConfigService) {
-            this.routingService = routingService;
-            this.authService = authService;
-            this.authRedirectService = authRedirectService;
-            this.cartService = cartService;
-            this.featureConfigService = featureConfigService;
-        }
-        /**
-         * @return {?}
-         */
-        CheckoutAuthGuard.prototype.canActivate = /**
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            return rxjs.combineLatest([
-                this.authService.getUserToken(),
-                this.cartService.getAssignedUser(),
-            ]).pipe(operators.map((/**
-             * @param {?} __0
-             * @return {?}
-             */
-            function (_a) {
-                var _b = __read(_a, 2), token = _b[0], user = _b[1];
-                if (!token.access_token) {
-                    if (_this.cartService.isGuestCart()) {
-                        return Boolean(user);
-                    }
-                    if (_this.featureConfigService.isEnabled('guestCheckout')) {
-                        _this.routingService.go({ cxRoute: 'login' }, { forced: true });
-                    }
-                    else {
-                        _this.routingService.go({ cxRoute: 'login' });
-                    }
-                    _this.authRedirectService.reportAuthGuard();
-                }
-                return !!token.access_token;
-            })));
-        };
-        CheckoutAuthGuard.decorators = [
-            { type: core.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */
-        CheckoutAuthGuard.ctorParameters = function () { return [
-            { type: core$1.RoutingService },
-            { type: core$1.AuthService },
-            { type: core$1.AuthRedirectService },
-            { type: core$1.CartService },
-            { type: core$1.FeatureConfigService }
-        ]; };
-        /** @nocollapse */ CheckoutAuthGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CheckoutAuthGuard_Factory() { return new CheckoutAuthGuard(core.ɵɵinject(core$1.RoutingService), core.ɵɵinject(core$1.AuthService), core.ɵɵinject(core$1.AuthRedirectService), core.ɵɵinject(core$1.CartService), core.ɵɵinject(core$1.FeatureConfigService)); }, token: CheckoutAuthGuard, providedIn: "root" });
-        return CheckoutAuthGuard;
-    }());
-    if (false) {
-        /**
-         * @type {?}
-         * @private
-         */
-        CheckoutAuthGuard.prototype.routingService;
-        /**
-         * @type {?}
-         * @private
-         */
-        CheckoutAuthGuard.prototype.authService;
-        /**
-         * @type {?}
-         * @private
-         */
-        CheckoutAuthGuard.prototype.authRedirectService;
-        /**
-         * @type {?}
-         * @private
-         */
-        CheckoutAuthGuard.prototype.cartService;
-        /**
-         * @type {?}
-         * @private
-         */
-        CheckoutAuthGuard.prototype.featureConfigService;
-    }
 
     /**
      * @fileoverview added by tsickle
@@ -5231,6 +5144,7 @@
             this.routingConfigService = routingConfigService;
             this.steps = this.checkoutConfig.checkout.steps;
             this.express = this.checkoutConfig.checkout.express;
+            this.guest = this.checkoutConfig.checkout.guest;
             this.defaultDeliveryMode = this.checkoutConfig.checkout.defaultDeliveryMode || [];
         }
         /**
@@ -5424,6 +5338,15 @@
             return this.express;
         };
         /**
+         * @return {?}
+         */
+        CheckoutConfigService.prototype.isGuestCheckout = /**
+         * @return {?}
+         */
+        function () {
+            return this.guest;
+        };
+        /**
          * @private
          * @param {?} activatedRoute
          * @return {?}
@@ -5499,6 +5422,11 @@
          * @type {?}
          * @private
          */
+        CheckoutConfigService.prototype.guest;
+        /**
+         * @type {?}
+         * @private
+         */
         CheckoutConfigService.prototype.defaultDeliveryMode;
         /**
          * @type {?}
@@ -5510,6 +5438,94 @@
          * @private
          */
         CheckoutConfigService.prototype.routingConfigService;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CheckoutAuthGuard = /** @class */ (function () {
+        function CheckoutAuthGuard(routingService, authService, authRedirectService, cartService, checkoutConfigService) {
+            this.routingService = routingService;
+            this.authService = authService;
+            this.authRedirectService = authRedirectService;
+            this.cartService = cartService;
+            this.checkoutConfigService = checkoutConfigService;
+        }
+        /**
+         * @return {?}
+         */
+        CheckoutAuthGuard.prototype.canActivate = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            return rxjs.combineLatest([
+                this.authService.getUserToken(),
+                this.cartService.getAssignedUser(),
+            ]).pipe(operators.map((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 2), token = _b[0], user = _b[1];
+                if (!token.access_token) {
+                    if (_this.cartService.isGuestCart()) {
+                        return Boolean(user);
+                    }
+                    if (_this.checkoutConfigService.isGuestCheckout()) {
+                        _this.routingService.go({ cxRoute: 'login' }, { forced: true });
+                    }
+                    else {
+                        _this.routingService.go({ cxRoute: 'login' });
+                    }
+                    _this.authRedirectService.reportAuthGuard();
+                }
+                return !!token.access_token;
+            })));
+        };
+        CheckoutAuthGuard.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        CheckoutAuthGuard.ctorParameters = function () { return [
+            { type: core$1.RoutingService },
+            { type: core$1.AuthService },
+            { type: core$1.AuthRedirectService },
+            { type: core$1.CartService },
+            { type: CheckoutConfigService }
+        ]; };
+        /** @nocollapse */ CheckoutAuthGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CheckoutAuthGuard_Factory() { return new CheckoutAuthGuard(core.ɵɵinject(core$1.RoutingService), core.ɵɵinject(core$1.AuthService), core.ɵɵinject(core$1.AuthRedirectService), core.ɵɵinject(core$1.CartService), core.ɵɵinject(CheckoutConfigService)); }, token: CheckoutAuthGuard, providedIn: "root" });
+        return CheckoutAuthGuard;
+    }());
+    if (false) {
+        /**
+         * @type {?}
+         * @private
+         */
+        CheckoutAuthGuard.prototype.routingService;
+        /**
+         * @type {?}
+         * @private
+         */
+        CheckoutAuthGuard.prototype.authService;
+        /**
+         * @type {?}
+         * @private
+         */
+        CheckoutAuthGuard.prototype.authRedirectService;
+        /**
+         * @type {?}
+         * @private
+         */
+        CheckoutAuthGuard.prototype.cartService;
+        /**
+         * @type {?}
+         * @private
+         */
+        CheckoutAuthGuard.prototype.checkoutConfigService;
     }
 
     /**
@@ -5988,12 +6004,13 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CheckoutGuard = /** @class */ (function () {
-        function CheckoutGuard(router, config, routingConfigService, checkoutConfigService, expressCheckoutService) {
+        function CheckoutGuard(router, config, routingConfigService, checkoutConfigService, expressCheckoutService, cartService) {
             this.router = router;
             this.config = config;
             this.routingConfigService = routingConfigService;
             this.checkoutConfigService = checkoutConfigService;
             this.expressCheckoutService = expressCheckoutService;
+            this.cartService = cartService;
             /**
              * TODO(issue:#4309) Deprecated since 1.2.0
              */
@@ -6015,8 +6032,11 @@
             /**
              * TODO(issue:#4309) Deprecated since 1.2.0
              */
-            if (this.checkoutConfigService && this.expressCheckoutService) {
-                if (this.checkoutConfigService.isExpressCheckout()) {
+            if (this.checkoutConfigService &&
+                this.expressCheckoutService &&
+                this.cartService) {
+                if (this.checkoutConfigService.isExpressCheckout() &&
+                    !this.cartService.isGuestCart()) {
                     return this.expressCheckoutService.trySetDefaultCheckoutDetails().pipe(operators.switchMap((/**
                      * @param {?} expressCheckoutPossible
                      * @return {?}
@@ -6041,9 +6061,10 @@
             { type: CheckoutConfig },
             { type: core$1.RoutingConfigService },
             { type: CheckoutConfigService },
-            { type: ExpressCheckoutService }
+            { type: ExpressCheckoutService },
+            { type: core$1.CartService }
         ]; };
-        /** @nocollapse */ CheckoutGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(core.ɵɵinject(router.Router), core.ɵɵinject(CheckoutConfig), core.ɵɵinject(core$1.RoutingConfigService), core.ɵɵinject(CheckoutConfigService), core.ɵɵinject(ExpressCheckoutService)); }, token: CheckoutGuard, providedIn: "root" });
+        /** @nocollapse */ CheckoutGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(core.ɵɵinject(router.Router), core.ɵɵinject(CheckoutConfig), core.ɵɵinject(core$1.RoutingConfigService), core.ɵɵinject(CheckoutConfigService), core.ɵɵinject(ExpressCheckoutService), core.ɵɵinject(core$1.CartService)); }, token: CheckoutGuard, providedIn: "root" });
         return CheckoutGuard;
     }());
     if (false) {
@@ -6077,6 +6098,11 @@
          * @protected
          */
         CheckoutGuard.prototype.expressCheckoutService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        CheckoutGuard.prototype.cartService;
     }
 
     /**
@@ -20991,14 +21017,14 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var LoginFormComponent = /** @class */ (function () {
-        function LoginFormComponent(auth, globalMessageService, fb, authRedirectService, winRef, activatedRoute, featureConfig) {
+        function LoginFormComponent(auth, globalMessageService, fb, authRedirectService, winRef, activatedRoute, checkoutConfigService) {
             this.auth = auth;
             this.globalMessageService = globalMessageService;
             this.fb = fb;
             this.authRedirectService = authRedirectService;
             this.winRef = winRef;
             this.activatedRoute = activatedRoute;
-            this.featureConfig = featureConfig;
+            this.checkoutConfigService = checkoutConfigService;
             this.loginAsGuest = false;
         }
         /**
@@ -21012,7 +21038,8 @@
                 userId: ['', [forms.Validators.required, CustomFormValidators.emailValidator]],
                 password: ['', forms.Validators.required],
             });
-            if (this.featureConfig.isEnabled('guestCheckout')) {
+            if (this.checkoutConfigService &&
+                this.checkoutConfigService.isGuestCheckout()) {
                 this.loginAsGuest = this.activatedRoute.snapshot.queryParams['forced'];
             }
             // TODO(issue:#4055) Deprecated since 1.1.0
@@ -21093,7 +21120,7 @@
             { type: core$1.AuthRedirectService },
             { type: core$1.WindowRef },
             { type: router.ActivatedRoute },
-            { type: core$1.FeatureConfigService }
+            { type: CheckoutConfigService }
         ]; };
         return LoginFormComponent;
     }());
@@ -21138,7 +21165,7 @@
          * @type {?}
          * @private
          */
-        LoginFormComponent.prototype.featureConfig;
+        LoginFormComponent.prototype.checkoutConfigService;
     }
 
     /**

@@ -7,6 +7,7 @@ export declare class CheckoutConfigService {
     private routingConfigService;
     steps: CheckoutStep[];
     private express;
+    private guest;
     private defaultDeliveryMode;
     constructor(checkoutConfig: CheckoutConfig, routingConfigService: RoutingConfigService);
     getCheckoutStep(currentStepType: CheckoutStepType): CheckoutStep;
@@ -19,6 +20,7 @@ export declare class CheckoutConfigService {
     protected findMatchingDeliveryMode(deliveryModes: DeliveryMode[], index?: number): string;
     getPreferredDeliveryMode(deliveryModes: DeliveryMode[]): string;
     isExpressCheckout(): boolean;
+    isGuestCheckout(): boolean;
     private getStepUrlFromActivatedRoute;
     private getStepUrlFromStepRoute;
     private getCheckoutStepIndex;
