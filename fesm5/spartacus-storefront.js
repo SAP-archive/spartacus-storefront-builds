@@ -6433,6 +6433,7 @@ var DeliveryModeComponent = /** @class */ (function () {
         this.routingService = routingService;
         this.checkoutConfigService = checkoutConfigService;
         this.activatedRoute = activatedRoute;
+        this.allowRedirect = false;
         this.mode = this.fb.group({
             deliveryModeId: ['', Validators.required],
         });
@@ -6462,7 +6463,9 @@ var DeliveryModeComponent = /** @class */ (function () {
          * @return {?}
          */
         function (code) {
-            if (!!code && code === _this.currentDeliveryModeId) {
+            if (_this.allowRedirect &&
+                !!code &&
+                code === _this.currentDeliveryModeId) {
                 _this.routingService.go(_this.checkoutStepUrlNext);
             }
             _this.currentDeliveryModeId = code;
@@ -6491,6 +6494,7 @@ var DeliveryModeComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
+        this.allowRedirect = true;
         if (this.mode.valid && this.mode.value) {
             if (!this.currentDeliveryModeId) {
                 this.currentDeliveryModeId = this.mode.value.deliveryModeId;
@@ -6557,6 +6561,11 @@ if (false) {
     DeliveryModeComponent.prototype.checkoutStepUrlNext;
     /** @type {?} */
     DeliveryModeComponent.prototype.checkoutStepUrlPrevious;
+    /**
+     * @type {?}
+     * @private
+     */
+    DeliveryModeComponent.prototype.allowRedirect;
     /** @type {?} */
     DeliveryModeComponent.prototype.deliveryModeSub;
     /** @type {?} */

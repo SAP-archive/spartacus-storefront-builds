@@ -15,6 +15,7 @@ export declare class DeliveryModeComponent implements OnInit, OnDestroy {
     currentDeliveryModeId: string;
     checkoutStepUrlNext: string;
     checkoutStepUrlPrevious: string;
+    private allowRedirect;
     deliveryModeSub: Subscription;
     mode: FormGroup;
     constructor(fb: FormBuilder, checkoutDeliveryService: CheckoutDeliveryService, routingService: RoutingService, checkoutConfigService: CheckoutConfigService, activatedRoute: ActivatedRoute);
