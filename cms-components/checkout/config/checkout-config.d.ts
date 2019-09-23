@@ -6,7 +6,10 @@ export declare enum DeliveryModePreferences {
 }
 export declare abstract class CheckoutConfig {
     checkout?: {
-        steps: Array<CheckoutStep>;
+        /**
+         * Set checkout steps as ordered array of pages
+         */
+        steps?: Array<CheckoutStep>;
         /**
          * Allow for express checkout when default shipping method and payment method are available.
          */
