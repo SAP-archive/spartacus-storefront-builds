@@ -21020,12 +21020,9 @@ var LoginFormModule = /** @class */ (function () {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(auth, userService, routingService, routingConfigService) {
+    function LoginComponent(auth, userService) {
         this.auth = auth;
         this.userService = userService;
-        this.routingService = routingService;
-        this.routingConfigService = routingConfigService;
-        this.hidden = new BehaviorSubject(false);
     }
     /**
      * @return {?}
@@ -21047,57 +21044,23 @@ var LoginComponent = /** @class */ (function () {
                 return of(undefined);
             }
         })));
-        /** @type {?} */
-        var checkoutPath = '/' + this.routingConfigService.getRouteConfig('checkout').paths[0] + '/';
-        this.subscription = this.routingService
-            .getRouterState()
-            .subscribe((/**
-         * @param {?} routerState
-         * @return {?}
-         */
-        function (routerState) {
-            if (routerState.state.context.id.includes(checkoutPath)) {
-                _this.hidden.next(true);
-            }
-            else {
-                _this.hidden.next(false);
-            }
-        }));
-    };
-    /**
-     * @return {?}
-     */
-    LoginComponent.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
     };
     LoginComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-login',
-                    template: "<ng-container *ngIf=\"!(hidden | async)\">\n  <ng-container *ngIf=\"user$ | async as user; else login\">\n    <div class=\"cx-login-greet\">\n      {{ 'miniLogin.userGreeting' | cxTranslate: { name: user.name } }}\n    </div>\n    <cx-page-slot position=\"HeaderLinks\"></cx-page-slot>\n  </ng-container>\n\n  <ng-template #login>\n    <a role=\"link\" [routerLink]=\"{ cxRoute: 'login' } | cxUrl\">{{\n      'miniLogin.signInRegister' | cxTranslate\n    }}</a>\n  </ng-template>\n</ng-container>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush
+                    template: "<ng-container *ngIf=\"user$ | async as user; else login\">\n  <div class=\"cx-login-greet\">\n    {{ 'miniLogin.userGreeting' | cxTranslate: { name: user.name } }}\n  </div>\n  <cx-page-slot position=\"HeaderLinks\"></cx-page-slot>\n</ng-container>\n\n<ng-template #login>\n  <a role=\"link\" [routerLink]=\"{ cxRoute: 'login' } | cxUrl\">{{\n    'miniLogin.signInRegister' | cxTranslate\n  }}</a>\n</ng-template>\n"
                 }] }
     ];
     /** @nocollapse */
     LoginComponent.ctorParameters = function () { return [
         { type: AuthService },
-        { type: UserService },
-        { type: RoutingService },
-        { type: RoutingConfigService }
+        { type: UserService }
     ]; };
     return LoginComponent;
 }());
 if (false) {
     /** @type {?} */
     LoginComponent.prototype.user$;
-    /** @type {?} */
-    LoginComponent.prototype.hidden;
-    /** @type {?} */
-    LoginComponent.prototype.subscription;
     /**
      * @type {?}
      * @private
@@ -21108,16 +21071,6 @@ if (false) {
      * @private
      */
     LoginComponent.prototype.userService;
-    /**
-     * @type {?}
-     * @private
-     */
-    LoginComponent.prototype.routingService;
-    /**
-     * @type {?}
-     * @private
-     */
-    LoginComponent.prototype.routingConfigService;
 }
 
 /**
