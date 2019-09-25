@@ -4120,6 +4120,69 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var CustomFormValidators = /** @class */ (function () {
+        function CustomFormValidators() {
+        }
+        /**
+         * @param {?} control
+         * @return {?}
+         */
+        CustomFormValidators.emailDomainValidator = /**
+         * @param {?} control
+         * @return {?}
+         */
+        function (control) {
+            /** @type {?} */
+            var email = (/** @type {?} */ (control.value));
+            return email.match('[.][a-zA-Z]+$') ? null : { InvalidEmail: true };
+        };
+        /**
+         * @param {?} control
+         * @return {?}
+         */
+        CustomFormValidators.emailValidator = /**
+         * @param {?} control
+         * @return {?}
+         */
+        function (control) {
+            /** @type {?} */
+            var email = (/** @type {?} */ (control.value));
+            return email.match(core$1.EMAIL_PATTERN) ? null : { InvalidEmail: true };
+        };
+        /**
+         * @param {?} control
+         * @return {?}
+         */
+        CustomFormValidators.passwordValidator = /**
+         * @param {?} control
+         * @return {?}
+         */
+        function (control) {
+            /** @type {?} */
+            var password = (/** @type {?} */ (control.value));
+            return password.match(core$1.PASSWORD_PATTERN) ? null : { InvalidPassword: true };
+        };
+        /**
+         * @param {?} control
+         * @return {?}
+         */
+        CustomFormValidators.matchPassword = /**
+         * @param {?} control
+         * @return {?}
+         */
+        function (control) {
+            if (control.get('password').value !== control.get('passwordconf').value) {
+                return { NotEqual: true };
+            }
+            return null;
+        };
+        return CustomFormValidators;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
 
     /**
      * @fileoverview added by tsickle
@@ -13959,69 +14022,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var CustomFormValidators = /** @class */ (function () {
-        function CustomFormValidators() {
-        }
-        /**
-         * @param {?} control
-         * @return {?}
-         */
-        CustomFormValidators.emailDomainValidator = /**
-         * @param {?} control
-         * @return {?}
-         */
-        function (control) {
-            /** @type {?} */
-            var email = (/** @type {?} */ (control.value));
-            return email.match('[.][a-zA-Z]+$') ? null : { InvalidEmail: true };
-        };
-        /**
-         * @param {?} control
-         * @return {?}
-         */
-        CustomFormValidators.emailValidator = /**
-         * @param {?} control
-         * @return {?}
-         */
-        function (control) {
-            /** @type {?} */
-            var email = (/** @type {?} */ (control.value));
-            return email.match(core$1.EMAIL_PATTERN) ? null : { InvalidEmail: true };
-        };
-        /**
-         * @param {?} control
-         * @return {?}
-         */
-        CustomFormValidators.passwordValidator = /**
-         * @param {?} control
-         * @return {?}
-         */
-        function (control) {
-            /** @type {?} */
-            var password = (/** @type {?} */ (control.value));
-            return password.match(core$1.PASSWORD_PATTERN) ? null : { InvalidPassword: true };
-        };
-        /**
-         * @param {?} control
-         * @return {?}
-         */
-        CustomFormValidators.matchPassword = /**
-         * @param {?} control
-         * @return {?}
-         */
-        function (control) {
-            if (control.get('password').value !== control.get('passwordconf').value) {
-                return { NotEqual: true };
-            }
-            return null;
-        };
-        return CustomFormValidators;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var ForgotPasswordComponent = /** @class */ (function () {
         function ForgotPasswordComponent(fb, userService, routingService) {
             this.fb = fb;
@@ -23466,6 +23466,7 @@
     exports.ConsentManagementFormComponent = ConsentManagementFormComponent;
     exports.ConsentManagementModule = ConsentManagementModule;
     exports.CurrentProductService = CurrentProductService;
+    exports.CustomFormValidators = CustomFormValidators;
     exports.DeliveryModeComponent = DeliveryModeComponent;
     exports.DeliveryModeModule = DeliveryModeModule;
     exports.DeliveryModePreferences = DeliveryModePreferences;
