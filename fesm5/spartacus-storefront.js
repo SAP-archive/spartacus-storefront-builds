@@ -20496,7 +20496,7 @@ var ProductImagesComponent = /** @class */ (function () {
          * @return {?}
          */
         function (_a) {
-            var _b = __read(_a, 2), _ = _b[0], container = _b[1];
+            var _b = __read(_a, 2), container = _b[1];
             return container;
         })));
     }

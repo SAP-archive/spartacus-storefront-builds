@@ -17787,7 +17787,7 @@ class ProductImagesComponent {
          * @param {?} __0
          * @return {?}
          */
-        ([_, container]) => container)));
+        ([, container]) => container)));
     }
     /**
      * @param {?} item
