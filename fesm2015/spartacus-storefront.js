@@ -6145,11 +6145,13 @@ class PaymentFormComponent {
          * @return {?}
          */
         ([countries, address]) => {
-            return !!countries.filter((/**
-             * @param {?} country
-             * @return {?}
-             */
-            (country) => country.isocode === address.country.isocode)).length;
+            return (address !== undefined &&
+                address.country !== undefined &&
+                !!countries.filter((/**
+                 * @param {?} country
+                 * @return {?}
+                 */
+                (country) => country.isocode === address.country.isocode)).length);
         })));
     }
     /**

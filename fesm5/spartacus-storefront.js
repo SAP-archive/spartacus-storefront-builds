@@ -7187,13 +7187,15 @@ var PaymentFormComponent = /** @class */ (function () {
          */
         function (_a) {
             var _b = __read(_a, 2), countries = _b[0], address = _b[1];
-            return !!countries.filter((/**
-             * @param {?} country
-             * @return {?}
-             */
-            function (country) {
-                return country.isocode === address.country.isocode;
-            })).length;
+            return (address !== undefined &&
+                address.country !== undefined &&
+                !!countries.filter((/**
+                 * @param {?} country
+                 * @return {?}
+                 */
+                function (country) {
+                    return country.isocode === address.country.isocode;
+                })).length);
         })));
     };
     /**
