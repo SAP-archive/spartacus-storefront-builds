@@ -6732,12 +6732,16 @@
              */
             function (deliveryMode) {
                 return deliveryMode && deliveryMode.code ? deliveryMode.code : null;
-            })))
+            })), operators.withLatestFrom(this.supportedDeliveryModes$))
                 .subscribe((/**
-             * @param {?} code
+             * @param {?} __0
              * @return {?}
              */
-            function (code) {
+            function (_a) {
+                var _b = __read(_a, 2), code = _b[0], deliveryModes = _b[1];
+                if (!code) {
+                    code = _this.checkoutConfigService.getPreferredDeliveryMode(deliveryModes);
+                }
                 if (_this.allowRedirect &&
                     !!code &&
                     code === _this.currentDeliveryModeId) {
