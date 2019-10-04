@@ -11747,7 +11747,7 @@
         StorefrontComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-storefront',
-                        template: "<header\n  [class.is-expanded]=\"isExpanded$ | async\"\n  (keydown.escape)=\"collapseMenu()\"\n  (click)=\"collapseMenuIfClickOutside($event)\"\n>\n  <cx-page-layout section=\"header\"></cx-page-layout>\n  <cx-page-layout section=\"navigation\"></cx-page-layout>\n</header>\n\n<cx-page-slot position=\"BottomHeaderSlot\"></cx-page-slot>\n\n<cx-global-message></cx-global-message>\n\n<router-outlet></router-outlet>\n\n<footer>\n  <cx-page-layout section=\"footer\"></cx-page-layout>\n</footer>\n"
+                        template: "<cx-page-slot position=\"TopHeaderSlot\"></cx-page-slot>\n<header\n  [class.is-expanded]=\"isExpanded$ | async\"\n  (keydown.escape)=\"collapseMenu()\"\n  (click)=\"collapseMenuIfClickOutside($event)\"\n>\n  <cx-page-layout section=\"header\"></cx-page-layout>\n  <cx-page-layout section=\"navigation\"></cx-page-layout>\n</header>\n\n<cx-page-slot position=\"BottomHeaderSlot\"></cx-page-slot>\n\n<cx-global-message></cx-global-message>\n\n<router-outlet></router-outlet>\n\n<footer>\n  <cx-page-layout section=\"footer\"></cx-page-layout>\n</footer>\n"
                     }] }
         ];
         /** @nocollapse */
@@ -11800,6 +11800,7 @@
                             PageLayoutModule,
                             SeoModule,
                             PageSlotModule,
+                            core$1.FeaturesConfigModule,
                         ],
                         declarations: [StorefrontComponent],
                         exports: [StorefrontComponent],
@@ -11812,6 +11813,527 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var AsmMainUiComponent = /** @class */ (function () {
+        function AsmMainUiComponent(authService, userService, asmService, globalMessageService, routing) {
+            this.authService = authService;
+            this.userService = userService;
+            this.asmService = asmService;
+            this.globalMessageService = globalMessageService;
+            this.routing = routing;
+            this.startingCustomerSession = false;
+        }
+        /**
+         * @return {?}
+         */
+        AsmMainUiComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this.csAgentToken$ = this.authService.getCustomerSupportAgentToken();
+            this.csAgentTokenLoading$ = this.authService.getCustomerSupportAgentTokenLoading();
+            this.searchResultsLoading$ = this.asmService.getCustomerSearchResultsLoading();
+            this.customer$ = this.authService.getUserToken().pipe(operators.switchMap((/**
+             * @param {?} token
+             * @return {?}
+             */
+            function (token) {
+                if (token && !!token.access_token) {
+                    _this.handleCustomerSessionStartRedirection(token);
+                    return _this.userService.get();
+                }
+                else {
+                    return rxjs.of(undefined);
+                }
+            })));
+        };
+        /**
+         * @private
+         * @param {?} token
+         * @return {?}
+         */
+        AsmMainUiComponent.prototype.handleCustomerSessionStartRedirection = /**
+         * @private
+         * @param {?} token
+         * @return {?}
+         */
+        function (token) {
+            if (this.startingCustomerSession &&
+                this.authService.isCustomerEmulationToken(token)) {
+                this.startingCustomerSession = false;
+                this.globalMessageService.remove(core$1.GlobalMessageType.MSG_TYPE_ERROR);
+                this.routing.go('/');
+            }
+        };
+        /**
+         * @param {?} __0
+         * @return {?}
+         */
+        AsmMainUiComponent.prototype.loginCustomerSupportAgent = /**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var userId = _a.userId, password = _a.password;
+            this.authService.authorizeCustomerSupporAgent(userId, password);
+        };
+        /**
+         * @return {?}
+         */
+        AsmMainUiComponent.prototype.logoutCustomerSupportAgent = /**
+         * @return {?}
+         */
+        function () {
+            this.authService.logoutCustomerSupportAgent();
+        };
+        /**
+         * @param {?} __0
+         * @return {?}
+         */
+        AsmMainUiComponent.prototype.startCustomerEmulationSession = /**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _this = this;
+            var customerId = _a.customerId;
+            this.authService
+                .getCustomerSupportAgentToken()
+                .pipe(operators.take(1))
+                .subscribe((/**
+             * @param {?} customerSupportAgentToken
+             * @return {?}
+             */
+            function (customerSupportAgentToken) {
+                return _this.authService.startCustomerEmulationSession(customerSupportAgentToken, customerId);
+            }))
+                .unsubscribe();
+            this.startingCustomerSession = true;
+        };
+        /**
+         * @return {?}
+         */
+        AsmMainUiComponent.prototype.hideUi = /**
+         * @return {?}
+         */
+        function () {
+            this.asmService.updateAsmUiState({ visible: false });
+        };
+        AsmMainUiComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-asm-main-ui',
+                        template: "<div class=\"fd-shellbar\">\n  <div class=\"fd-shellbar__group fd-shellbar__group--start\">\n    <a href=\"#\" class=\"fd-shellbar__logo\"\n      ><img\n        src=\"data:image/png;base64,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\"\n        width=\"48\"\n        height=\"24\"\n        alt=\"{{ 'asm.mainLogoLabel' | cxTranslate }}\"\n    /></a>\n    <div class=\"fd-shellbar__product\">\n      <span class=\"fd-shellbar__title\">{{\n        'asm.mainTitle' | cxTranslate\n      }}</span>\n    </div>\n  </div>\n  <div class=\"fd-shellbar__group fd-shellbar__group--end\">\n    <div class=\"fd-shellbar__actions\">\n      <div class=\"fd-shellbar__action fd-shellbar__action--show-always\">\n        <div class=\"sap-icon--decline\">\n          <a\n            title=\"{{ 'asm.hideUi' | cxTranslate }}\"\n            *ngIf=\"\n              !(csAgentToken$ | async)?.access_token &&\n              !(csAgentTokenLoading$ | async)\n            \"\n            (click)=\"hideUi()\"\n          >\n            <svg\n              xmlns=\"http://www.w3.org/2000/svg\"\n              width=\"15\"\n              height=\"15\"\n              viewBox=\"0 0 18 18\"\n            >\n              <path\n                d=\"M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z\"\n              />\n            </svg>\n          </a>\n        </div>\n        <div class=\"sap-icon--log\">\n          <a\n            title=\"{{ 'asm.logout' | cxTranslate }}\"\n            *ngIf=\"\n              (csAgentToken$ | async)?.access_token &&\n              !(customer$ | async) &&\n              !(searchResultsLoading$ | async)\n            \"\n            (click)=\"logoutCustomerSupportAgent()\"\n          >\n            <img\n              src=\"data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOCIgaGVpZ2h0PSIyOCIgdmlld0JveD0iMCAwIDI4IDI4Ij48cGF0aCBmaWxsPSIjZDFlM2ZmIiBkPSJNMTYuOTk5IDguNDRjMS4xODcuNTY1IDIuMTg3IDEuNDUzIDIuODkxIDIuNTYgMS4yNTMgMS45NDcgMS40NjQgNC4zODguNTYyIDYuNTItLjM0Mi44MTYtLjgzNSAxLjU1OS0xLjQ1MSAyLjE5LS42NDIuNjM3LTEuMzk3IDEuMTQ2LTIuMjI5IDEuNS0uODYyLjM1OS0xLjc4Ny41NDQtMi43Mi41NC0uOTM4LjAwOC0xLjg2Ny0uMTc1LTIuNzMtLjU0LS44MjgtLjM1NC0xLjU4MS0uODY1LTIuMjItMS41LS42MzgtLjYzOC0xLjE0Ny0xLjM5MS0xLjUtMi4yMi0uOTEtMi4xMTYtLjcxOS00LjU0Mi41MDgtNi40OS43MDQtMS4xMDcgMS43MDUtMS45OTUgMi44OS0yLjU2djEuMTNjLS44OTYuNTE1LTEuNjQzIDEuMjUyLTIuMTcgMi4xNC0uNTQ4LjkwNC0uODM1IDEuOTQzLS44MyAzLS4wMTQgMS42MDUuNjE2IDMuMTUxIDEuNzUgNC4yOS41NDUuNTUgMS4xOTUuOTg1IDEuOTEgMS4yOCAxLjQ5OC42MjUgMy4xODMuNjI1IDQuNjgxIDAgLjcxNS0uMjk1IDEuMzY0LS43MyAxLjkwOC0xLjI4IDEuMTI1LTEuMTI3IDEuNzU2LTIuNjU2IDEuNzUxLTQuMjQ5LjAwNS0xLjA1OS0uMjgxLTIuMDk3LS44My0zLjAwMS0uNTIxLS45MDItMS4yNy0xLjY1NC0yLjE3MS0yLjE4di0xLjEzem0tMi45OTkgNi4zMTFjLS4yNjguMDA1LS41MjctLjA5Ni0uNzItLjI4MS0uMTg3LS4xOTMtLjI4Ny0uNDUyLS4yODEtLjcydi03Yy0uMDAxLS4yNjEuMDk5LS41MTIuMjgxLS42OTkuMzgzLS4zOTggMS4wMTYtLjQxIDEuNDE0LS4wMjYuMTk2LjE4OS4zMDguNDUxLjMwNi43MjV2Ny4wMDFjLjAwOS4yNzItLjEwMS41MzQtLjMuNzItLjE4OC4xNzktLjQzOS4yOC0uNy4yOHoiLz48L3N2Zz4=\"\n            />\n          </a>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n\n<ng-container *ngIf=\"(csAgentToken$ | async)?.access_token; else showLoginForm\">\n  <ng-container\n    *ngIf=\"customer$ | async as customer; else showCustomerSelection\"\n  >\n    <div class=\"cx-customer-emulation\">\n      <div class=\"fd-container\">\n        <div class=\"fd-col--6\">\n          <label>\n            <input\n              class=\"form-control ng-untouched ng-pristine ng-invalid\"\n              formcontrolname=\"customer\"\n              type=\"text\"\n              disabled=\"true\"\n              placeholder=\"{{ customer?.name }}, {{ customer?.uid }}\"\n            />\n          </label>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n  <ng-template #showCustomerSelection>\n    <cx-customer-selection\n      (submitEvent)=\"startCustomerEmulationSession($event)\"\n    ></cx-customer-selection>\n  </ng-template>\n</ng-container>\n\n<ng-template #showLoginForm>\n  <cx-csagent-login-form\n    (submitEvent)=\"loginCustomerSupportAgent($event)\"\n    [csAgentTokenLoading]=\"csAgentTokenLoading$ | async\"\n  ></cx-csagent-login-form>\n</ng-template>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        AsmMainUiComponent.ctorParameters = function () { return [
+            { type: core$1.AuthService },
+            { type: core$1.UserService },
+            { type: core$1.AsmService },
+            { type: core$1.GlobalMessageService },
+            { type: core$1.RoutingService }
+        ]; };
+        return AsmMainUiComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        AsmMainUiComponent.prototype.csAgentToken$;
+        /** @type {?} */
+        AsmMainUiComponent.prototype.csAgentTokenLoading$;
+        /** @type {?} */
+        AsmMainUiComponent.prototype.customer$;
+        /** @type {?} */
+        AsmMainUiComponent.prototype.searchResultsLoading$;
+        /**
+         * @type {?}
+         * @private
+         */
+        AsmMainUiComponent.prototype.startingCustomerSession;
+        /**
+         * @type {?}
+         * @protected
+         */
+        AsmMainUiComponent.prototype.authService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        AsmMainUiComponent.prototype.userService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        AsmMainUiComponent.prototype.asmService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        AsmMainUiComponent.prototype.globalMessageService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        AsmMainUiComponent.prototype.routing;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var AsmRootComponent = /** @class */ (function () {
+        function AsmRootComponent(asmService, activatedRoute) {
+            this.asmService = asmService;
+            this.activatedRoute = activatedRoute;
+            this.subscription = new rxjs.Subscription();
+        }
+        /**
+         * @return {?}
+         */
+        AsmRootComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this.asmUi$ = this.asmService.getAsmUiState();
+            this.subscription.add(this.activatedRoute.queryParamMap.subscribe((/**
+             * @param {?} queryParams
+             * @return {?}
+             */
+            function (queryParams) {
+                if (queryParams.get('asm') === 'true') {
+                    _this.showUi();
+                }
+            })));
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        AsmRootComponent.prototype.showUi = /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            this.asmService.updateAsmUiState({ visible: true });
+        };
+        /**
+         * @return {?}
+         */
+        AsmRootComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
+            this.subscription.unsubscribe();
+        };
+        AsmRootComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-asm',
+                        template: "<cx-asm-main-ui *ngIf=\"(asmUi$ | async)?.visible\"></cx-asm-main-ui>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        AsmRootComponent.ctorParameters = function () { return [
+            { type: core$1.AsmService },
+            { type: router.ActivatedRoute }
+        ]; };
+        return AsmRootComponent;
+    }());
+    if (false) {
+        /**
+         * @type {?}
+         * @private
+         */
+        AsmRootComponent.prototype.subscription;
+        /** @type {?} */
+        AsmRootComponent.prototype.asmUi$;
+        /**
+         * @type {?}
+         * @protected
+         */
+        AsmRootComponent.prototype.asmService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        AsmRootComponent.prototype.activatedRoute;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CSAgentLoginFormComponent = /** @class */ (function () {
+        function CSAgentLoginFormComponent(fb) {
+            this.fb = fb;
+            this.submitClicked = false;
+            this.csAgentTokenLoading = false;
+            this.submitEvent = new core.EventEmitter();
+        }
+        /**
+         * @return {?}
+         */
+        CSAgentLoginFormComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+        function () {
+            this.form = this.fb.group({
+                userId: ['', [forms.Validators.required]],
+                password: ['', [forms.Validators.required]],
+            });
+        };
+        /**
+         * @return {?}
+         */
+        CSAgentLoginFormComponent.prototype.onSubmit = /**
+         * @return {?}
+         */
+        function () {
+            this.submitClicked = true;
+            if (this.form.invalid) {
+                return;
+            }
+            this.submitEvent.emit({
+                userId: this.form.controls.userId.value,
+                password: this.form.controls.password.value,
+            });
+        };
+        /**
+         * @param {?} formControlName
+         * @return {?}
+         */
+        CSAgentLoginFormComponent.prototype.isNotValid = /**
+         * @param {?} formControlName
+         * @return {?}
+         */
+        function (formControlName) {
+            return FormUtils.isNotValidField(this.form, formControlName, this.submitClicked);
+        };
+        CSAgentLoginFormComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-csagent-login-form',
+                        template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\" *ngIf=\"!csAgentTokenLoading\">\n  <div class=\"fd-container\">\n    <div class=\"fd-col--3\">\n      <label>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('userId')\"\n          formControlName=\"userId\"\n          placeholder=\"{{ 'asm.loginForm.userId.label' | cxTranslate }}\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('userId')\">\n          <span>{{ 'asm.loginForm.userId.required' | cxTranslate }}</span>\n        </div>\n      </label>\n    </div>\n    <div class=\"fd-col--3\">\n      <label>\n        <input\n          type=\"password\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('password')\"\n          placeholder=\"{{ 'asm.loginForm.password.label' | cxTranslate }}\"\n          formControlName=\"password\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('password')\">\n          <span>{{ 'asm.loginForm.password.required' | cxTranslate }}</span>\n        </div>\n      </label>\n    </div>\n    <div class=\"fd-col--3\">\n      <button type=\"submit\" class=\"fd-button--emphasized\">\n        {{ 'asm.loginForm.submit' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n\n<div class=\"sap-spinner\" *ngIf=\"csAgentTokenLoading\">\n  <div class=\"fd-loading-dots\" aria-hidden=\"false\" aria-label=\"Loading\">\n    <div></div>\n    <div></div>\n    <div></div>\n  </div>\n</div>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        CSAgentLoginFormComponent.ctorParameters = function () { return [
+            { type: forms.FormBuilder }
+        ]; };
+        CSAgentLoginFormComponent.propDecorators = {
+            csAgentTokenLoading: [{ type: core.Input }],
+            submitEvent: [{ type: core.Output }]
+        };
+        return CSAgentLoginFormComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        CSAgentLoginFormComponent.prototype.form;
+        /**
+         * @type {?}
+         * @private
+         */
+        CSAgentLoginFormComponent.prototype.submitClicked;
+        /** @type {?} */
+        CSAgentLoginFormComponent.prototype.csAgentTokenLoading;
+        /** @type {?} */
+        CSAgentLoginFormComponent.prototype.submitEvent;
+        /**
+         * @type {?}
+         * @private
+         */
+        CSAgentLoginFormComponent.prototype.fb;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CustomerSelectionComponent = /** @class */ (function () {
+        function CustomerSelectionComponent(fb, asmService, globalMessageService) {
+            this.fb = fb;
+            this.asmService = asmService;
+            this.globalMessageService = globalMessageService;
+            this.submitClicked = false;
+            this.subscription = new rxjs.Subscription();
+            this.submitEvent = new core.EventEmitter();
+        }
+        /**
+         * @return {?}
+         */
+        CustomerSelectionComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this.form = this.fb.group({
+                searchTerm: ['', [forms.Validators.required]],
+            });
+            this.searchResultsLoading$ = this.asmService.getCustomerSearchResultsLoading();
+            this.asmService.customerSearchReset();
+            this.subscription.add(this.asmService.getCustomerSearchResults().subscribe((/**
+             * @param {?} results
+             * @return {?}
+             */
+            function (results) {
+                _this.handleSearchResults(results);
+            })));
+        };
+        /**
+         * @private
+         * @param {?} results
+         * @return {?}
+         */
+        CustomerSelectionComponent.prototype.handleSearchResults = /**
+         * @private
+         * @param {?} results
+         * @return {?}
+         */
+        function (results) {
+            var _this = this;
+            if (!!results && results.entries) {
+                /** @type {?} */
+                var customerHit = results.entries.find((/**
+                 * @param {?} element
+                 * @return {?}
+                 */
+                function (element) {
+                    return element.uid.toLowerCase() ===
+                        _this.form.controls.searchTerm.value.toLowerCase();
+                }));
+                if (customerHit) {
+                    this.submitEvent.emit({ customerId: customerHit.customerId });
+                }
+                else {
+                    this.globalMessageService.add({
+                        key: 'asm.customerSearch.noMatch',
+                        params: { uid: this.form.controls.searchTerm.value },
+                    }, core$1.GlobalMessageType.MSG_TYPE_ERROR);
+                }
+            }
+        };
+        /**
+         * @return {?}
+         */
+        CustomerSelectionComponent.prototype.onSubmit = /**
+         * @return {?}
+         */
+        function () {
+            this.submitClicked = true;
+            if (this.form.invalid) {
+                return;
+            }
+            this.asmService.customerSearch({
+                query: this.form.controls.searchTerm.value,
+            });
+        };
+        /**
+         * @param {?} formControlName
+         * @return {?}
+         */
+        CustomerSelectionComponent.prototype.isNotValid = /**
+         * @param {?} formControlName
+         * @return {?}
+         */
+        function (formControlName) {
+            return FormUtils.isNotValidField(this.form, formControlName, this.submitClicked);
+        };
+        /**
+         * @return {?}
+         */
+        CustomerSelectionComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
+            this.subscription.unsubscribe();
+        };
+        CustomerSelectionComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-customer-selection',
+                        template: "<ng-container *ngIf=\"!(searchResultsLoading$ | async); else spinner\">\n  <form (submit)=\"onSubmit()\" [formGroup]=\"form\">\n    <div class=\"fd-container\">\n      <div class=\"fd-col--6\">\n        <label>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            [class.is-invalid]=\"isNotValid('searchTerm')\"\n            formControlName=\"searchTerm\"\n            placeholder=\"{{\n              'asm.customerSearch.searchTerm.label' | cxTranslate\n            }}\"\n          />\n          <div class=\"invalid-feedback\" *ngIf=\"isNotValid('searchTerm')\">\n            <span>{{\n              'asm.customerSearch.searchTerm.required' | cxTranslate\n            }}</span>\n          </div>\n        </label>\n      </div>\n\n      <div class=\"fd-col--3\">\n        <button\n          type=\"submit\"\n          class=\"fd-button--emphasized fd-button--positive sap-icon--media-play\"\n        >\n          {{ 'asm.customerSearch.submit' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </form>\n</ng-container>\n<ng-template #spinner>\n  <div class=\"sap-spinner\">\n    <div class=\"fd-loading-dots\" aria-hidden=\"false\" aria-label=\"Loading\">\n      <div></div>\n      <div></div>\n      <div></div>\n    </div>\n  </div>\n</ng-template>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        CustomerSelectionComponent.ctorParameters = function () { return [
+            { type: forms.FormBuilder },
+            { type: core$1.AsmService },
+            { type: core$1.GlobalMessageService }
+        ]; };
+        CustomerSelectionComponent.propDecorators = {
+            submitEvent: [{ type: core.Output }]
+        };
+        return CustomerSelectionComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        CustomerSelectionComponent.prototype.form;
+        /**
+         * @type {?}
+         * @private
+         */
+        CustomerSelectionComponent.prototype.submitClicked;
+        /**
+         * @type {?}
+         * @private
+         */
+        CustomerSelectionComponent.prototype.subscription;
+        /** @type {?} */
+        CustomerSelectionComponent.prototype.searchResultsLoading$;
+        /** @type {?} */
+        CustomerSelectionComponent.prototype.submitEvent;
+        /**
+         * @type {?}
+         * @private
+         */
+        CustomerSelectionComponent.prototype.fb;
+        /**
+         * @type {?}
+         * @private
+         */
+        CustomerSelectionComponent.prototype.asmService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        CustomerSelectionComponent.prototype.globalMessageService;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var AssistedServiceModule = /** @class */ (function () {
+        function AssistedServiceModule() {
+        }
+        AssistedServiceModule.decorators = [
+            { type: core.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            forms.ReactiveFormsModule,
+                            core$1.I18nModule,
+                            core$1.ConfigModule.withConfig((/** @type {?} */ ({
+                                cmsComponents: {
+                                    AssistedServiceComponent: {
+                                        component: AsmRootComponent,
+                                    },
+                                },
+                            }))),
+                        ],
+                        declarations: [
+                            AsmMainUiComponent,
+                            CSAgentLoginFormComponent,
+                            CustomerSelectionComponent,
+                            AsmRootComponent,
+                        ],
+                        exports: [AsmRootComponent],
+                        entryComponents: [AsmRootComponent],
+                    },] }
+        ];
+        return AssistedServiceModule;
+    }());
 
     /**
      * @fileoverview added by tsickle
@@ -20872,881 +21394,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var CheckoutLoginComponent = /** @class */ (function () {
-        function CheckoutLoginComponent(formBuilder, cartService, authRedirectService) {
-            this.formBuilder = formBuilder;
-            this.cartService = cartService;
-            this.authRedirectService = authRedirectService;
-            this.form = this.formBuilder.group({
-                email: ['', [forms.Validators.required, CustomFormValidators.emailValidator]],
-                emailConfirmation: ['', [forms.Validators.required]],
-            }, { validator: this.emailsMatch });
-            this.submitClicked = false;
-        }
-        /**
-         * @param {?} formControlName
-         * @return {?}
-         */
-        CheckoutLoginComponent.prototype.isNotValid = /**
-         * @param {?} formControlName
-         * @return {?}
-         */
-        function (formControlName) {
-            return FormUtils.isNotValidField(this.form, formControlName, this.submitClicked);
-        };
-        /**
-         * @return {?}
-         */
-        CheckoutLoginComponent.prototype.isEmailConfirmInvalid = /**
-         * @return {?}
-         */
-        function () {
-            return (this.form.hasError('NotEqual') &&
-                (this.submitClicked ||
-                    (this.form.get('emailConfirmation').touched &&
-                        this.form.get('emailConfirmation').dirty)));
-        };
-        /**
-         * @return {?}
-         */
-        CheckoutLoginComponent.prototype.onSubmit = /**
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            this.submitClicked = true;
-            if (this.form.invalid) {
-                return;
-            }
-            /** @type {?} */
-            var email = this.form.value.email;
-            this.cartService.addEmail(email);
-            if (!this.sub) {
-                this.sub = this.cartService.getAssignedUser().subscribe((/**
-                 * @param {?} _
-                 * @return {?}
-                 */
-                function (_) {
-                    if (_this.cartService.isGuestCart()) {
-                        _this.authRedirectService.redirect();
-                    }
-                }));
-            }
-        };
-        /**
-         * @return {?}
-         */
-        CheckoutLoginComponent.prototype.ngOnDestroy = /**
-         * @return {?}
-         */
-        function () {
-            if (this.sub) {
-                this.sub.unsubscribe();
-            }
-        };
-        /**
-         * @private
-         * @param {?} abstractControl
-         * @return {?}
-         */
-        CheckoutLoginComponent.prototype.emailsMatch = /**
-         * @private
-         * @param {?} abstractControl
-         * @return {?}
-         */
-        function (abstractControl) {
-            return abstractControl.get('email').value !==
-                abstractControl.get('emailConfirmation').value
-                ? { NotEqual: true }
-                : null;
-        };
-        CheckoutLoginComponent.decorators = [
-            { type: core.Component, args: [{
-                        selector: 'cx-checkout-login',
-                        template: "<form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'checkoutLogin.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        name=\"email\"\n        class=\"form-control\"\n        formControlName=\"email\"\n        placeholder=\"{{\n          'checkoutLogin.emailAddress.placeholder' | cxTranslate\n        }}\"\n        [class.is-invalid]=\"isNotValid('email')\"\n      />\n      <div class=\"invalid-feedback\" *ngIf=\"isNotValid('email')\">\n        <span>{{ 'checkoutLogin.emailIsRequired' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'checkoutLogin.confirmEmail.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        name=\"emailConfirmation\"\n        class=\"form-control\"\n        formControlName=\"emailConfirmation\"\n        placeholder=\"{{\n          'checkoutLogin.confirmEmail.placeholder' | cxTranslate\n        }}\"\n        [class.is-invalid]=\"isEmailConfirmInvalid()\"\n      />\n      <div class=\"invalid-feedback\" *ngIf=\"isEmailConfirmInvalid()\">\n        <span>{{ 'checkoutLogin.emailsMustMatch' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <button type=\"submit\" class=\"btn btn-block btn-primary\">\n    {{ 'checkoutLogin.continue' | cxTranslate }}\n  </button>\n</form>\n"
-                    }] }
-        ];
-        /** @nocollapse */
-        CheckoutLoginComponent.ctorParameters = function () { return [
-            { type: forms.FormBuilder },
-            { type: core$1.CartService },
-            { type: core$1.AuthRedirectService }
-        ]; };
-        return CheckoutLoginComponent;
-    }());
-    if (false) {
-        /** @type {?} */
-        CheckoutLoginComponent.prototype.form;
-        /** @type {?} */
-        CheckoutLoginComponent.prototype.sub;
-        /**
-         * @type {?}
-         * @private
-         */
-        CheckoutLoginComponent.prototype.submitClicked;
-        /**
-         * @type {?}
-         * @private
-         */
-        CheckoutLoginComponent.prototype.formBuilder;
-        /**
-         * @type {?}
-         * @private
-         */
-        CheckoutLoginComponent.prototype.cartService;
-        /**
-         * @type {?}
-         * @private
-         */
-        CheckoutLoginComponent.prototype.authRedirectService;
-    }
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var CheckoutLoginModule = /** @class */ (function () {
-        function CheckoutLoginModule() {
-        }
-        CheckoutLoginModule.decorators = [
-            { type: core.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            core$1.I18nModule,
-                            forms.FormsModule,
-                            forms.ReactiveFormsModule,
-                            core$1.ConfigModule.withConfig((/** @type {?} */ ({
-                                cmsComponents: {
-                                    GuestCheckoutLoginComponent: {
-                                        component: CheckoutLoginComponent,
-                                        guards: [NotCheckoutAuthGuard],
-                                    },
-                                },
-                            }))),
-                            forms.FormsModule,
-                            forms.ReactiveFormsModule,
-                        ],
-                        declarations: [CheckoutLoginComponent],
-                        exports: [CheckoutLoginComponent],
-                        entryComponents: [CheckoutLoginComponent],
-                    },] }
-        ];
-        return CheckoutLoginModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var LoginFormComponent = /** @class */ (function () {
-        function LoginFormComponent(auth, globalMessageService, fb, authRedirectService, winRef, activatedRoute, checkoutConfigService) {
-            this.auth = auth;
-            this.globalMessageService = globalMessageService;
-            this.fb = fb;
-            this.authRedirectService = authRedirectService;
-            this.winRef = winRef;
-            this.activatedRoute = activatedRoute;
-            this.checkoutConfigService = checkoutConfigService;
-            this.loginAsGuest = false;
-        }
-        /**
-         * @return {?}
-         */
-        LoginFormComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-        function () {
-            this.form = this.fb.group({
-                userId: ['', [forms.Validators.required, CustomFormValidators.emailValidator]],
-                password: ['', forms.Validators.required],
-            });
-            if (this.checkoutConfigService &&
-                this.checkoutConfigService.isGuestCheckout()) {
-                this.loginAsGuest = this.activatedRoute.snapshot.queryParams['forced'];
-            }
-            // TODO(issue:#4055) Deprecated since 1.1.0
-            if (this.winRef && this.winRef.nativeWindow) {
-                /** @type {?} */
-                var routeState = this.winRef.nativeWindow.history &&
-                    this.winRef.nativeWindow.history.state;
-                if (routeState && routeState['newUid'] && routeState['newUid'].length) {
-                    this.prefillForm('userId', routeState['newUid']);
-                }
-            }
-        };
-        /**
-         * @return {?}
-         */
-        LoginFormComponent.prototype.login = /**
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            var _a = this.form.controls, userId = _a.userId, password = _a.password;
-            this.auth.authorize(userId.value.toLowerCase(), // backend accepts lowercase emails only
-            password.value);
-            if (!this.sub) {
-                this.sub = this.auth.getUserToken().subscribe((/**
-                 * @param {?} data
-                 * @return {?}
-                 */
-                function (data) {
-                    if (data && data.access_token) {
-                        _this.globalMessageService.remove(core$1.GlobalMessageType.MSG_TYPE_ERROR);
-                        _this.authRedirectService.redirect();
-                    }
-                }));
-            }
-        };
-        /**
-         * @return {?}
-         */
-        LoginFormComponent.prototype.ngOnDestroy = /**
-         * @return {?}
-         */
-        function () {
-            if (this.sub) {
-                this.sub.unsubscribe();
-            }
-        };
-        /**
-         * @private
-         * @param {?} field
-         * @param {?} value
-         * @return {?}
-         */
-        LoginFormComponent.prototype.prefillForm = /**
-         * @private
-         * @param {?} field
-         * @param {?} value
-         * @return {?}
-         */
-        function (field, value) {
-            var _a;
-            this.form.patchValue((_a = {},
-                _a[field] = value,
-                _a));
-            this.form.get(field).markAsTouched(); // this action will check field validity on load
-        };
-        LoginFormComponent.decorators = [
-            { type: core.Component, args: [{
-                        selector: 'cx-login-form',
-                        template: "<form (submit)=\"login()\" [formGroup]=\"form\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.controls['userId'].invalid &&\n          (form.controls['userId'].touched || form.controls['userId'].dirty)\n        \"\n        formControlName=\"userId\"\n        placeholder=\"{{ 'loginForm.emailAddress.placeholder' | cxTranslate }}\"\n      />\n    </label>\n    <div\n      class=\"invalid-feedback\"\n      *ngIf=\"\n        form.controls['userId'].invalid &&\n        (form.controls['userId'].touched || form.controls['userId'].dirty)\n      \"\n    >\n      <span>{{ 'loginForm.wrongEmailFormat' | cxTranslate }}</span>\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.password.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"password\"\n        class=\"form-control\"\n        placeholder=\"{{ 'loginForm.password.placeholder' | cxTranslate }}\"\n        formControlName=\"password\"\n      />\n    </label>\n  </div>\n  <p>\n    <a\n      [routerLink]=\"{ cxRoute: 'forgotPassword' } | cxUrl\"\n      aria-controls=\"reset-password\"\n      class=\"btn-link\"\n      >{{ 'loginForm.forgotPassword' | cxTranslate }}</a\n    >\n  </p>\n\n  <button\n    type=\"submit\"\n    class=\"btn btn-block btn-primary\"\n    [disabled]=\"form.invalid\"\n  >\n    {{ 'loginForm.signIn' | cxTranslate }}\n  </button>\n</form>\n\n<div class=\"register\">\n  <h3 class=\"cx-section-title cx-section-title-alt\">\n    {{ 'loginForm.dontHaveAccount' | cxTranslate }}\n  </h3>\n\n  <ng-container *ngIf=\"!loginAsGuest\">\n    <a\n      [routerLink]=\"{ cxRoute: 'register' } | cxUrl\"\n      class=\"btn btn-block btn-secondary btn-register\"\n      >{{ 'loginForm.register' | cxTranslate }}</a\n    >\n  </ng-container>\n\n  <ng-container *ngIf=\"loginAsGuest\">\n    <a\n      [routerLink]=\"{ cxRoute: 'checkoutLogin' } | cxUrl\"\n      class=\"btn btn-block btn-secondary btn-guest\"\n      >{{ 'loginForm.guestCheckout' | cxTranslate }}</a\n    >\n  </ng-container>\n</div>\n"
-                    }] }
-        ];
-        /** @nocollapse */
-        LoginFormComponent.ctorParameters = function () { return [
-            { type: core$1.AuthService },
-            { type: core$1.GlobalMessageService },
-            { type: forms.FormBuilder },
-            { type: core$1.AuthRedirectService },
-            { type: core$1.WindowRef },
-            { type: router.ActivatedRoute },
-            { type: CheckoutConfigService }
-        ]; };
-        return LoginFormComponent;
-    }());
-    if (false) {
-        /** @type {?} */
-        LoginFormComponent.prototype.sub;
-        /** @type {?} */
-        LoginFormComponent.prototype.form;
-        /** @type {?} */
-        LoginFormComponent.prototype.loginAsGuest;
-        /**
-         * @type {?}
-         * @private
-         */
-        LoginFormComponent.prototype.auth;
-        /**
-         * @type {?}
-         * @private
-         */
-        LoginFormComponent.prototype.globalMessageService;
-        /**
-         * @type {?}
-         * @private
-         */
-        LoginFormComponent.prototype.fb;
-        /**
-         * @type {?}
-         * @private
-         */
-        LoginFormComponent.prototype.authRedirectService;
-        /**
-         * @type {?}
-         * @private
-         */
-        LoginFormComponent.prototype.winRef;
-        /**
-         * @type {?}
-         * @private
-         */
-        LoginFormComponent.prototype.activatedRoute;
-        /**
-         * @type {?}
-         * @private
-         */
-        LoginFormComponent.prototype.checkoutConfigService;
-    }
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var LoginFormModule = /** @class */ (function () {
-        function LoginFormModule() {
-        }
-        LoginFormModule.decorators = [
-            { type: core.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            forms.FormsModule,
-                            forms.ReactiveFormsModule,
-                            router.RouterModule,
-                            core$1.UrlModule,
-                            core$1.ConfigModule.withConfig((/** @type {?} */ ({
-                                cmsComponents: {
-                                    ReturningCustomerLoginComponent: {
-                                        component: LoginFormComponent,
-                                        guards: [core$1.NotAuthGuard],
-                                    },
-                                },
-                            }))),
-                            core$1.I18nModule,
-                        ],
-                        declarations: [LoginFormComponent],
-                        exports: [LoginFormComponent],
-                        entryComponents: [LoginFormComponent],
-                    },] }
-        ];
-        return LoginFormModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var LoginComponent = /** @class */ (function () {
-        function LoginComponent(auth, userService) {
-            this.auth = auth;
-            this.userService = userService;
-        }
-        /**
-         * @return {?}
-         */
-        LoginComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            this.user$ = this.auth.getUserToken().pipe(operators.switchMap((/**
-             * @param {?} token
-             * @return {?}
-             */
-            function (token) {
-                if (token && !!token.access_token) {
-                    return _this.userService.get();
-                }
-                else {
-                    return rxjs.of(undefined);
-                }
-            })));
-        };
-        LoginComponent.decorators = [
-            { type: core.Component, args: [{
-                        selector: 'cx-login',
-                        template: "<ng-container *ngIf=\"user$ | async as user; else login\">\n  <div class=\"cx-login-greet\">\n    {{ 'miniLogin.userGreeting' | cxTranslate: { name: user.name } }}\n  </div>\n  <cx-page-slot position=\"HeaderLinks\"></cx-page-slot>\n</ng-container>\n\n<ng-template #login>\n  <a role=\"link\" [routerLink]=\"{ cxRoute: 'login' } | cxUrl\">{{\n    'miniLogin.signInRegister' | cxTranslate\n  }}</a>\n</ng-template>\n"
-                    }] }
-        ];
-        /** @nocollapse */
-        LoginComponent.ctorParameters = function () { return [
-            { type: core$1.AuthService },
-            { type: core$1.UserService }
-        ]; };
-        return LoginComponent;
-    }());
-    if (false) {
-        /** @type {?} */
-        LoginComponent.prototype.user$;
-        /**
-         * @type {?}
-         * @private
-         */
-        LoginComponent.prototype.auth;
-        /**
-         * @type {?}
-         * @private
-         */
-        LoginComponent.prototype.userService;
-    }
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var LoginModule = /** @class */ (function () {
-        function LoginModule() {
-        }
-        LoginModule.decorators = [
-            { type: core.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            router.RouterModule,
-                            core$1.UrlModule,
-                            PageSlotModule,
-                            core$1.ConfigModule.withConfig((/** @type {?} */ ({
-                                cmsComponents: {
-                                    LoginComponent: {
-                                        component: LoginComponent,
-                                    },
-                                },
-                            }))),
-                            core$1.I18nModule,
-                        ],
-                        declarations: [LoginComponent],
-                        entryComponents: [LoginComponent],
-                        exports: [LoginComponent],
-                    },] }
-        ];
-        return LoginModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var LogoutGuard = /** @class */ (function () {
-        function LogoutGuard(auth, cms, routing, semanticPathService) {
-            this.auth = auth;
-            this.cms = cms;
-            this.routing = routing;
-            this.semanticPathService = semanticPathService;
-        }
-        /**
-         * @return {?}
-         */
-        LogoutGuard.prototype.canActivate = /**
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            this.logout();
-            return this.cms
-                .hasPage({
-                id: this.semanticPathService.get('logout'),
-                type: core$1.PageType.CONTENT_PAGE,
-            })
-                .pipe(operators.tap((/**
-             * @param {?} hasPage
-             * @return {?}
-             */
-            function (hasPage) {
-                if (!hasPage) {
-                    _this.routing.go({ cxRoute: 'home' });
-                }
-            })));
-        };
-        /**
-         * @protected
-         * @return {?}
-         */
-        LogoutGuard.prototype.logout = /**
-         * @protected
-         * @return {?}
-         */
-        function () {
-            this.auth.logout();
-        };
-        LogoutGuard.decorators = [
-            { type: core.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
-        ];
-        /** @nocollapse */
-        LogoutGuard.ctorParameters = function () { return [
-            { type: core$1.AuthService },
-            { type: core$1.CmsService },
-            { type: core$1.RoutingService },
-            { type: core$1.SemanticPathService }
-        ]; };
-        /** @nocollapse */ LogoutGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(core.ɵɵinject(core$1.AuthService), core.ɵɵinject(core$1.CmsService), core.ɵɵinject(core$1.RoutingService), core.ɵɵinject(core$1.SemanticPathService)); }, token: LogoutGuard, providedIn: "root" });
-        return LogoutGuard;
-    }());
-    if (false) {
-        /**
-         * @type {?}
-         * @protected
-         */
-        LogoutGuard.prototype.auth;
-        /**
-         * @type {?}
-         * @protected
-         */
-        LogoutGuard.prototype.cms;
-        /**
-         * @type {?}
-         * @protected
-         */
-        LogoutGuard.prototype.routing;
-        /**
-         * @type {?}
-         * @protected
-         */
-        LogoutGuard.prototype.semanticPathService;
-    }
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ɵ0$2 = { cxRoute: 'logout' };
-    var LogoutModule = /** @class */ (function () {
-        function LogoutModule() {
-        }
-        LogoutModule.decorators = [
-            { type: core.NgModule, args: [{
-                        imports: [
-                            PageLayoutModule,
-                            router.RouterModule.forChild([
-                                {
-                                    path: null,
-                                    canActivate: [LogoutGuard],
-                                    component: PageLayoutComponent,
-                                    data: ɵ0$2,
-                                },
-                            ]),
-                        ],
-                    },] }
-        ];
-        return LogoutModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var RegisterComponent = /** @class */ (function () {
-        /**
-         * @deprecated since 1.1.0
-         *
-         * TODO(issue:4237) Register flow
-         */
-        function RegisterComponent(auth, authRedirectService, userService, globalMessageService, fb, router, featureConfig) {
-            this.auth = auth;
-            this.authRedirectService = authRedirectService;
-            this.userService = userService;
-            this.globalMessageService = globalMessageService;
-            this.fb = fb;
-            this.router = router;
-            this.featureConfig = featureConfig;
-            this.subscription = new rxjs.Subscription();
-            this.userRegistrationForm = this.fb.group({
-                titleCode: [''],
-                firstName: ['', forms.Validators.required],
-                lastName: ['', forms.Validators.required],
-                email: ['', [forms.Validators.required, CustomFormValidators.emailValidator]],
-                password: [
-                    '',
-                    [forms.Validators.required, CustomFormValidators.passwordValidator],
-                ],
-                passwordconf: ['', forms.Validators.required],
-                newsletter: [false],
-                termsandconditions: [false, forms.Validators.requiredTrue],
-            }, { validator: CustomFormValidators.matchPassword });
-            // TODO(issue:4237) Register flow
-            this.isNewRegisterFlowEnabled = this.featureConfig && this.featureConfig.isLevel('1.1');
-        }
-        /**
-         * @return {?}
-         */
-        RegisterComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            this.titles$ = this.userService.getTitles().pipe(operators.tap((/**
-             * @param {?} titles
-             * @return {?}
-             */
-            function (titles) {
-                if (Object.keys(titles).length === 0) {
-                    _this.userService.loadTitles();
-                }
-            })));
-            // TODO(issue:4237) Register flow
-            if (this.isNewRegisterFlowEnabled) {
-                this.loading$ = this.userService.getRegisterUserResultLoading();
-                this.registerUserProcessInit();
-            }
-            else {
-                if (this.auth && this.authRedirectService) {
-                    this.subscription.add(this.userService
-                        .getRegisterUserResultSuccess()
-                        .subscribe((/**
-                     * @param {?} success
-                     * @return {?}
-                     */
-                    function (success) {
-                        if (success) {
-                            var _a = _this.collectDataFromRegisterForm(_this.userRegistrationForm.value), uid = _a.uid, password = _a.password;
-                            _this.auth.authorize(uid, password);
-                        }
-                    })));
-                    this.subscription.add(this.auth.getUserToken().subscribe((/**
-                     * @param {?} data
-                     * @return {?}
-                     */
-                    function (data) {
-                        if (data && data.access_token) {
-                            _this.globalMessageService.remove(core$1.GlobalMessageType.MSG_TYPE_ERROR);
-                            _this.authRedirectService.redirect();
-                        }
-                    })));
-                }
-            }
-            // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
-            this.subscription.add(this.globalMessageService
-                .get()
-                .pipe(operators.filter((/**
-             * @param {?} messages
-             * @return {?}
-             */
-            function (messages) { return !!Object.keys(messages).length; })))
-                .subscribe((/**
-             * @param {?} globalMessageEntities
-             * @return {?}
-             */
-            function (globalMessageEntities) {
-                /** @type {?} */
-                var messages = globalMessageEntities &&
-                    globalMessageEntities[core$1.GlobalMessageType.MSG_TYPE_ERROR];
-                if (messages &&
-                    messages.some((/**
-                     * @param {?} message
-                     * @return {?}
-                     */
-                    function (message) { return message === 'This field is required.'; }))) {
-                    _this.globalMessageService.remove(core$1.GlobalMessageType.MSG_TYPE_ERROR);
-                    _this.globalMessageService.add({ key: 'register.titleRequired' }, core$1.GlobalMessageType.MSG_TYPE_ERROR);
-                }
-            })));
-        };
-        /**
-         * @return {?}
-         */
-        RegisterComponent.prototype.submit = /**
-         * @return {?}
-         */
-        function () {
-            this.userService.register(this.collectDataFromRegisterForm(this.userRegistrationForm.value));
-        };
-        /**
-         * @param {?} title
-         * @return {?}
-         */
-        RegisterComponent.prototype.titleSelected = /**
-         * @param {?} title
-         * @return {?}
-         */
-        function (title) {
-            this.userRegistrationForm['controls'].titleCode.setValue(title.code);
-        };
-        /**
-         * @param {?} formData
-         * @return {?}
-         */
-        RegisterComponent.prototype.collectDataFromRegisterForm = /**
-         * @param {?} formData
-         * @return {?}
-         */
-        function (formData) {
-            var firstName = formData.firstName, lastName = formData.lastName, email = formData.email, password = formData.password, titleCode = formData.titleCode;
-            return {
-                firstName: firstName,
-                lastName: lastName,
-                uid: email.toLowerCase(),
-                password: password,
-                titleCode: titleCode,
-            };
-        };
-        /**
-         * @private
-         * @param {?} success
-         * @return {?}
-         */
-        RegisterComponent.prototype.onRegisterUserSuccess = /**
-         * @private
-         * @param {?} success
-         * @return {?}
-         */
-        function (success) {
-            if (this.router && success) {
-                this.router.go('login');
-                this.globalMessageService.add({ key: 'register.postRegisterMessage' }, core$1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
-            }
-        };
-        /**
-         * @private
-         * @return {?}
-         */
-        RegisterComponent.prototype.registerUserProcessInit = /**
-         * @private
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            this.userService.resetRegisterUserProcessState();
-            this.subscription.add(this.userService.getRegisterUserResultSuccess().subscribe((/**
-             * @param {?} success
-             * @return {?}
-             */
-            function (success) {
-                _this.onRegisterUserSuccess(success);
-            })));
-        };
-        /**
-         * @return {?}
-         */
-        RegisterComponent.prototype.ngOnDestroy = /**
-         * @return {?}
-         */
-        function () {
-            this.subscription.unsubscribe();
-            this.userService.resetRegisterUserProcessState();
-        };
-        RegisterComponent.decorators = [
-            { type: core.Component, args: [{
-                        selector: 'cx-register',
-                        template: "<section\n  class=\"cx-page-section container\"\n  *ngIf=\"!(loading$ | async); else loading\"\n>\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of titles$ | async\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('email').errors &&\n                  (userRegistrationForm.get('email').errors['email'] ||\n                    userRegistrationForm.get('email').errors['InvalidEmail']) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"newsletter\"\n                  class=\"form-check-input\"\n                  formControlName=\"newsletter\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.emailMarketing' | cxTranslate }}\n                </span>\n              </label>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            [disabled]=\"userRegistrationForm.invalid\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
-                    }] }
-        ];
-        /** @nocollapse */
-        RegisterComponent.ctorParameters = function () { return [
-            { type: core$1.AuthService },
-            { type: core$1.AuthRedirectService },
-            { type: core$1.UserService },
-            { type: core$1.GlobalMessageService },
-            { type: forms.FormBuilder },
-            { type: core$1.RoutingService },
-            { type: core$1.FeatureConfigService }
-        ]; };
-        return RegisterComponent;
-    }());
-    if (false) {
-        /** @type {?} */
-        RegisterComponent.prototype.titles$;
-        /** @type {?} */
-        RegisterComponent.prototype.loading$;
-        /**
-         * @type {?}
-         * @private
-         */
-        RegisterComponent.prototype.subscription;
-        /** @type {?} */
-        RegisterComponent.prototype.userRegistrationForm;
-        /** @type {?} */
-        RegisterComponent.prototype.isNewRegisterFlowEnabled;
-        /**
-         * @type {?}
-         * @protected
-         */
-        RegisterComponent.prototype.auth;
-        /**
-         * @type {?}
-         * @protected
-         */
-        RegisterComponent.prototype.authRedirectService;
-        /**
-         * @type {?}
-         * @protected
-         */
-        RegisterComponent.prototype.userService;
-        /**
-         * @type {?}
-         * @protected
-         */
-        RegisterComponent.prototype.globalMessageService;
-        /**
-         * @type {?}
-         * @protected
-         */
-        RegisterComponent.prototype.fb;
-        /**
-         * @type {?}
-         * @protected
-         */
-        RegisterComponent.prototype.router;
-        /**
-         * @type {?}
-         * @protected
-         */
-        RegisterComponent.prototype.featureConfig;
-    }
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var RegisterComponentModule = /** @class */ (function () {
-        function RegisterComponentModule() {
-        }
-        RegisterComponentModule.decorators = [
-            { type: core.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            LoginModule,
-                            forms.ReactiveFormsModule,
-                            router.RouterModule,
-                            core$1.UrlModule,
-                            core$1.ConfigModule.withConfig((/** @type {?} */ ({
-                                cmsComponents: {
-                                    RegisterCustomerComponent: {
-                                        component: RegisterComponent,
-                                        guards: [core$1.NotAuthGuard],
-                                    },
-                                },
-                            }))),
-                            core$1.I18nModule,
-                            SpinnerModule,
-                        ],
-                        declarations: [RegisterComponent],
-                        exports: [RegisterComponent],
-                        entryComponents: [RegisterComponent],
-                    },] }
-        ];
-        return RegisterComponentModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var UserComponentModule = /** @class */ (function () {
-        function UserComponentModule() {
-        }
-        UserComponentModule.decorators = [
-            { type: core.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            LoginModule,
-                            LoginFormModule,
-                            LogoutModule,
-                            CheckoutLoginModule,
-                            forms.ReactiveFormsModule,
-                            router.RouterModule,
-                            core$1.UrlModule,
-                            RegisterComponentModule,
-                        ],
-                    },] }
-        ];
-        return UserComponentModule;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     /** @type {?} */
     var WEEK_DAYS_NUMBER = 7;
     var ScheduleComponent = /** @class */ (function () {
@@ -22848,12 +22495,888 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var CheckoutLoginComponent = /** @class */ (function () {
+        function CheckoutLoginComponent(formBuilder, cartService, authRedirectService) {
+            this.formBuilder = formBuilder;
+            this.cartService = cartService;
+            this.authRedirectService = authRedirectService;
+            this.form = this.formBuilder.group({
+                email: ['', [forms.Validators.required, CustomFormValidators.emailValidator]],
+                emailConfirmation: ['', [forms.Validators.required]],
+            }, { validator: this.emailsMatch });
+            this.submitClicked = false;
+        }
+        /**
+         * @param {?} formControlName
+         * @return {?}
+         */
+        CheckoutLoginComponent.prototype.isNotValid = /**
+         * @param {?} formControlName
+         * @return {?}
+         */
+        function (formControlName) {
+            return FormUtils.isNotValidField(this.form, formControlName, this.submitClicked);
+        };
+        /**
+         * @return {?}
+         */
+        CheckoutLoginComponent.prototype.isEmailConfirmInvalid = /**
+         * @return {?}
+         */
+        function () {
+            return (this.form.hasError('NotEqual') &&
+                (this.submitClicked ||
+                    (this.form.get('emailConfirmation').touched &&
+                        this.form.get('emailConfirmation').dirty)));
+        };
+        /**
+         * @return {?}
+         */
+        CheckoutLoginComponent.prototype.onSubmit = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this.submitClicked = true;
+            if (this.form.invalid) {
+                return;
+            }
+            /** @type {?} */
+            var email = this.form.value.email;
+            this.cartService.addEmail(email);
+            if (!this.sub) {
+                this.sub = this.cartService.getAssignedUser().subscribe((/**
+                 * @param {?} _
+                 * @return {?}
+                 */
+                function (_) {
+                    if (_this.cartService.isGuestCart()) {
+                        _this.authRedirectService.redirect();
+                    }
+                }));
+            }
+        };
+        /**
+         * @return {?}
+         */
+        CheckoutLoginComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
+            if (this.sub) {
+                this.sub.unsubscribe();
+            }
+        };
+        /**
+         * @private
+         * @param {?} abstractControl
+         * @return {?}
+         */
+        CheckoutLoginComponent.prototype.emailsMatch = /**
+         * @private
+         * @param {?} abstractControl
+         * @return {?}
+         */
+        function (abstractControl) {
+            return abstractControl.get('email').value !==
+                abstractControl.get('emailConfirmation').value
+                ? { NotEqual: true }
+                : null;
+        };
+        CheckoutLoginComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-checkout-login',
+                        template: "<form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'checkoutLogin.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        name=\"email\"\n        class=\"form-control\"\n        formControlName=\"email\"\n        placeholder=\"{{\n          'checkoutLogin.emailAddress.placeholder' | cxTranslate\n        }}\"\n        [class.is-invalid]=\"isNotValid('email')\"\n      />\n      <div class=\"invalid-feedback\" *ngIf=\"isNotValid('email')\">\n        <span>{{ 'checkoutLogin.emailIsRequired' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'checkoutLogin.confirmEmail.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        name=\"emailConfirmation\"\n        class=\"form-control\"\n        formControlName=\"emailConfirmation\"\n        placeholder=\"{{\n          'checkoutLogin.confirmEmail.placeholder' | cxTranslate\n        }}\"\n        [class.is-invalid]=\"isEmailConfirmInvalid()\"\n      />\n      <div class=\"invalid-feedback\" *ngIf=\"isEmailConfirmInvalid()\">\n        <span>{{ 'checkoutLogin.emailsMustMatch' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <button type=\"submit\" class=\"btn btn-block btn-primary\">\n    {{ 'checkoutLogin.continue' | cxTranslate }}\n  </button>\n</form>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        CheckoutLoginComponent.ctorParameters = function () { return [
+            { type: forms.FormBuilder },
+            { type: core$1.CartService },
+            { type: core$1.AuthRedirectService }
+        ]; };
+        return CheckoutLoginComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        CheckoutLoginComponent.prototype.form;
+        /** @type {?} */
+        CheckoutLoginComponent.prototype.sub;
+        /**
+         * @type {?}
+         * @private
+         */
+        CheckoutLoginComponent.prototype.submitClicked;
+        /**
+         * @type {?}
+         * @private
+         */
+        CheckoutLoginComponent.prototype.formBuilder;
+        /**
+         * @type {?}
+         * @private
+         */
+        CheckoutLoginComponent.prototype.cartService;
+        /**
+         * @type {?}
+         * @private
+         */
+        CheckoutLoginComponent.prototype.authRedirectService;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CheckoutLoginModule = /** @class */ (function () {
+        function CheckoutLoginModule() {
+        }
+        CheckoutLoginModule.decorators = [
+            { type: core.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            core$1.I18nModule,
+                            forms.FormsModule,
+                            forms.ReactiveFormsModule,
+                            core$1.ConfigModule.withConfig((/** @type {?} */ ({
+                                cmsComponents: {
+                                    GuestCheckoutLoginComponent: {
+                                        component: CheckoutLoginComponent,
+                                        guards: [NotCheckoutAuthGuard],
+                                    },
+                                },
+                            }))),
+                            forms.FormsModule,
+                            forms.ReactiveFormsModule,
+                        ],
+                        declarations: [CheckoutLoginComponent],
+                        exports: [CheckoutLoginComponent],
+                        entryComponents: [CheckoutLoginComponent],
+                    },] }
+        ];
+        return CheckoutLoginModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var LoginFormComponent = /** @class */ (function () {
+        function LoginFormComponent(auth, globalMessageService, fb, authRedirectService, winRef, activatedRoute, checkoutConfigService) {
+            this.auth = auth;
+            this.globalMessageService = globalMessageService;
+            this.fb = fb;
+            this.authRedirectService = authRedirectService;
+            this.winRef = winRef;
+            this.activatedRoute = activatedRoute;
+            this.checkoutConfigService = checkoutConfigService;
+            this.loginAsGuest = false;
+        }
+        /**
+         * @return {?}
+         */
+        LoginFormComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+        function () {
+            this.form = this.fb.group({
+                userId: ['', [forms.Validators.required, CustomFormValidators.emailValidator]],
+                password: ['', forms.Validators.required],
+            });
+            if (this.checkoutConfigService &&
+                this.checkoutConfigService.isGuestCheckout()) {
+                this.loginAsGuest = this.activatedRoute.snapshot.queryParams['forced'];
+            }
+            // TODO(issue:#4055) Deprecated since 1.1.0
+            if (this.winRef && this.winRef.nativeWindow) {
+                /** @type {?} */
+                var routeState = this.winRef.nativeWindow.history &&
+                    this.winRef.nativeWindow.history.state;
+                if (routeState && routeState['newUid'] && routeState['newUid'].length) {
+                    this.prefillForm('userId', routeState['newUid']);
+                }
+            }
+        };
+        /**
+         * @return {?}
+         */
+        LoginFormComponent.prototype.login = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            var _a = this.form.controls, userId = _a.userId, password = _a.password;
+            this.auth.authorize(userId.value.toLowerCase(), // backend accepts lowercase emails only
+            password.value);
+            if (!this.sub) {
+                this.sub = this.auth.getUserToken().subscribe((/**
+                 * @param {?} data
+                 * @return {?}
+                 */
+                function (data) {
+                    if (data && data.access_token) {
+                        _this.globalMessageService.remove(core$1.GlobalMessageType.MSG_TYPE_ERROR);
+                        _this.authRedirectService.redirect();
+                    }
+                }));
+            }
+        };
+        /**
+         * @return {?}
+         */
+        LoginFormComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
+            if (this.sub) {
+                this.sub.unsubscribe();
+            }
+        };
+        /**
+         * @private
+         * @param {?} field
+         * @param {?} value
+         * @return {?}
+         */
+        LoginFormComponent.prototype.prefillForm = /**
+         * @private
+         * @param {?} field
+         * @param {?} value
+         * @return {?}
+         */
+        function (field, value) {
+            var _a;
+            this.form.patchValue((_a = {},
+                _a[field] = value,
+                _a));
+            this.form.get(field).markAsTouched(); // this action will check field validity on load
+        };
+        LoginFormComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-login-form',
+                        template: "<form (submit)=\"login()\" [formGroup]=\"form\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.controls['userId'].invalid &&\n          (form.controls['userId'].touched || form.controls['userId'].dirty)\n        \"\n        formControlName=\"userId\"\n        placeholder=\"{{ 'loginForm.emailAddress.placeholder' | cxTranslate }}\"\n      />\n    </label>\n    <div\n      class=\"invalid-feedback\"\n      *ngIf=\"\n        form.controls['userId'].invalid &&\n        (form.controls['userId'].touched || form.controls['userId'].dirty)\n      \"\n    >\n      <span>{{ 'loginForm.wrongEmailFormat' | cxTranslate }}</span>\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.password.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"password\"\n        class=\"form-control\"\n        placeholder=\"{{ 'loginForm.password.placeholder' | cxTranslate }}\"\n        formControlName=\"password\"\n      />\n    </label>\n  </div>\n  <p>\n    <a\n      [routerLink]=\"{ cxRoute: 'forgotPassword' } | cxUrl\"\n      aria-controls=\"reset-password\"\n      class=\"btn-link\"\n      >{{ 'loginForm.forgotPassword' | cxTranslate }}</a\n    >\n  </p>\n\n  <button\n    type=\"submit\"\n    class=\"btn btn-block btn-primary\"\n    [disabled]=\"form.invalid\"\n  >\n    {{ 'loginForm.signIn' | cxTranslate }}\n  </button>\n</form>\n\n<div class=\"register\">\n  <h3 class=\"cx-section-title cx-section-title-alt\">\n    {{ 'loginForm.dontHaveAccount' | cxTranslate }}\n  </h3>\n\n  <ng-container *ngIf=\"!loginAsGuest\">\n    <a\n      [routerLink]=\"{ cxRoute: 'register' } | cxUrl\"\n      class=\"btn btn-block btn-secondary btn-register\"\n      >{{ 'loginForm.register' | cxTranslate }}</a\n    >\n  </ng-container>\n\n  <ng-container *ngIf=\"loginAsGuest\">\n    <a\n      [routerLink]=\"{ cxRoute: 'checkoutLogin' } | cxUrl\"\n      class=\"btn btn-block btn-secondary btn-guest\"\n      >{{ 'loginForm.guestCheckout' | cxTranslate }}</a\n    >\n  </ng-container>\n</div>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        LoginFormComponent.ctorParameters = function () { return [
+            { type: core$1.AuthService },
+            { type: core$1.GlobalMessageService },
+            { type: forms.FormBuilder },
+            { type: core$1.AuthRedirectService },
+            { type: core$1.WindowRef },
+            { type: router.ActivatedRoute },
+            { type: CheckoutConfigService }
+        ]; };
+        return LoginFormComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        LoginFormComponent.prototype.sub;
+        /** @type {?} */
+        LoginFormComponent.prototype.form;
+        /** @type {?} */
+        LoginFormComponent.prototype.loginAsGuest;
+        /**
+         * @type {?}
+         * @private
+         */
+        LoginFormComponent.prototype.auth;
+        /**
+         * @type {?}
+         * @private
+         */
+        LoginFormComponent.prototype.globalMessageService;
+        /**
+         * @type {?}
+         * @private
+         */
+        LoginFormComponent.prototype.fb;
+        /**
+         * @type {?}
+         * @private
+         */
+        LoginFormComponent.prototype.authRedirectService;
+        /**
+         * @type {?}
+         * @private
+         */
+        LoginFormComponent.prototype.winRef;
+        /**
+         * @type {?}
+         * @private
+         */
+        LoginFormComponent.prototype.activatedRoute;
+        /**
+         * @type {?}
+         * @private
+         */
+        LoginFormComponent.prototype.checkoutConfigService;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var LoginFormModule = /** @class */ (function () {
+        function LoginFormModule() {
+        }
+        LoginFormModule.decorators = [
+            { type: core.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            forms.FormsModule,
+                            forms.ReactiveFormsModule,
+                            router.RouterModule,
+                            core$1.UrlModule,
+                            core$1.ConfigModule.withConfig((/** @type {?} */ ({
+                                cmsComponents: {
+                                    ReturningCustomerLoginComponent: {
+                                        component: LoginFormComponent,
+                                        guards: [core$1.NotAuthGuard],
+                                    },
+                                },
+                            }))),
+                            core$1.I18nModule,
+                        ],
+                        declarations: [LoginFormComponent],
+                        exports: [LoginFormComponent],
+                        entryComponents: [LoginFormComponent],
+                    },] }
+        ];
+        return LoginFormModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var LoginComponent = /** @class */ (function () {
+        function LoginComponent(auth, userService) {
+            this.auth = auth;
+            this.userService = userService;
+        }
+        /**
+         * @return {?}
+         */
+        LoginComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this.user$ = this.auth.getUserToken().pipe(operators.switchMap((/**
+             * @param {?} token
+             * @return {?}
+             */
+            function (token) {
+                if (token && !!token.access_token) {
+                    return _this.userService.get();
+                }
+                else {
+                    return rxjs.of(undefined);
+                }
+            })));
+        };
+        LoginComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-login',
+                        template: "<ng-container *ngIf=\"user$ | async as user; else login\">\n  <div class=\"cx-login-greet\">\n    {{ 'miniLogin.userGreeting' | cxTranslate: { name: user.name } }}\n  </div>\n  <cx-page-slot position=\"HeaderLinks\"></cx-page-slot>\n</ng-container>\n\n<ng-template #login>\n  <a role=\"link\" [routerLink]=\"{ cxRoute: 'login' } | cxUrl\">{{\n    'miniLogin.signInRegister' | cxTranslate\n  }}</a>\n</ng-template>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        LoginComponent.ctorParameters = function () { return [
+            { type: core$1.AuthService },
+            { type: core$1.UserService }
+        ]; };
+        return LoginComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        LoginComponent.prototype.user$;
+        /**
+         * @type {?}
+         * @private
+         */
+        LoginComponent.prototype.auth;
+        /**
+         * @type {?}
+         * @private
+         */
+        LoginComponent.prototype.userService;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var LoginModule = /** @class */ (function () {
+        function LoginModule() {
+        }
+        LoginModule.decorators = [
+            { type: core.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            router.RouterModule,
+                            core$1.UrlModule,
+                            PageSlotModule,
+                            core$1.ConfigModule.withConfig((/** @type {?} */ ({
+                                cmsComponents: {
+                                    LoginComponent: {
+                                        component: LoginComponent,
+                                    },
+                                },
+                            }))),
+                            core$1.I18nModule,
+                        ],
+                        declarations: [LoginComponent],
+                        entryComponents: [LoginComponent],
+                        exports: [LoginComponent],
+                    },] }
+        ];
+        return LoginModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var LogoutGuard = /** @class */ (function () {
+        function LogoutGuard(auth, cms, routing, semanticPathService) {
+            this.auth = auth;
+            this.cms = cms;
+            this.routing = routing;
+            this.semanticPathService = semanticPathService;
+        }
+        /**
+         * @return {?}
+         */
+        LogoutGuard.prototype.canActivate = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this.logout();
+            return this.cms
+                .hasPage({
+                id: this.semanticPathService.get('logout'),
+                type: core$1.PageType.CONTENT_PAGE,
+            })
+                .pipe(operators.tap((/**
+             * @param {?} hasPage
+             * @return {?}
+             */
+            function (hasPage) {
+                if (!hasPage) {
+                    _this.routing.go({ cxRoute: 'home' });
+                }
+            })));
+        };
+        /**
+         * @protected
+         * @return {?}
+         */
+        LogoutGuard.prototype.logout = /**
+         * @protected
+         * @return {?}
+         */
+        function () {
+            this.auth.logout();
+        };
+        LogoutGuard.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        LogoutGuard.ctorParameters = function () { return [
+            { type: core$1.AuthService },
+            { type: core$1.CmsService },
+            { type: core$1.RoutingService },
+            { type: core$1.SemanticPathService }
+        ]; };
+        /** @nocollapse */ LogoutGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(core.ɵɵinject(core$1.AuthService), core.ɵɵinject(core$1.CmsService), core.ɵɵinject(core$1.RoutingService), core.ɵɵinject(core$1.SemanticPathService)); }, token: LogoutGuard, providedIn: "root" });
+        return LogoutGuard;
+    }());
+    if (false) {
+        /**
+         * @type {?}
+         * @protected
+         */
+        LogoutGuard.prototype.auth;
+        /**
+         * @type {?}
+         * @protected
+         */
+        LogoutGuard.prototype.cms;
+        /**
+         * @type {?}
+         * @protected
+         */
+        LogoutGuard.prototype.routing;
+        /**
+         * @type {?}
+         * @protected
+         */
+        LogoutGuard.prototype.semanticPathService;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ɵ0$2 = { cxRoute: 'logout' };
+    var LogoutModule = /** @class */ (function () {
+        function LogoutModule() {
+        }
+        LogoutModule.decorators = [
+            { type: core.NgModule, args: [{
+                        imports: [
+                            PageLayoutModule,
+                            router.RouterModule.forChild([
+                                {
+                                    path: null,
+                                    canActivate: [LogoutGuard],
+                                    component: PageLayoutComponent,
+                                    data: ɵ0$2,
+                                },
+                            ]),
+                        ],
+                    },] }
+        ];
+        return LogoutModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var RegisterComponent = /** @class */ (function () {
+        /**
+         * @deprecated since 1.1.0
+         *
+         * TODO(issue:4237) Register flow
+         */
+        function RegisterComponent(auth, authRedirectService, userService, globalMessageService, fb, router, featureConfig) {
+            this.auth = auth;
+            this.authRedirectService = authRedirectService;
+            this.userService = userService;
+            this.globalMessageService = globalMessageService;
+            this.fb = fb;
+            this.router = router;
+            this.featureConfig = featureConfig;
+            this.subscription = new rxjs.Subscription();
+            this.userRegistrationForm = this.fb.group({
+                titleCode: [''],
+                firstName: ['', forms.Validators.required],
+                lastName: ['', forms.Validators.required],
+                email: ['', [forms.Validators.required, CustomFormValidators.emailValidator]],
+                password: [
+                    '',
+                    [forms.Validators.required, CustomFormValidators.passwordValidator],
+                ],
+                passwordconf: ['', forms.Validators.required],
+                newsletter: [false],
+                termsandconditions: [false, forms.Validators.requiredTrue],
+            }, { validator: CustomFormValidators.matchPassword });
+            // TODO(issue:4237) Register flow
+            this.isNewRegisterFlowEnabled = this.featureConfig && this.featureConfig.isLevel('1.1');
+        }
+        /**
+         * @return {?}
+         */
+        RegisterComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this.titles$ = this.userService.getTitles().pipe(operators.tap((/**
+             * @param {?} titles
+             * @return {?}
+             */
+            function (titles) {
+                if (Object.keys(titles).length === 0) {
+                    _this.userService.loadTitles();
+                }
+            })));
+            // TODO(issue:4237) Register flow
+            if (this.isNewRegisterFlowEnabled) {
+                this.loading$ = this.userService.getRegisterUserResultLoading();
+                this.registerUserProcessInit();
+            }
+            else {
+                if (this.auth && this.authRedirectService) {
+                    this.subscription.add(this.userService
+                        .getRegisterUserResultSuccess()
+                        .subscribe((/**
+                     * @param {?} success
+                     * @return {?}
+                     */
+                    function (success) {
+                        if (success) {
+                            var _a = _this.collectDataFromRegisterForm(_this.userRegistrationForm.value), uid = _a.uid, password = _a.password;
+                            _this.auth.authorize(uid, password);
+                        }
+                    })));
+                    this.subscription.add(this.auth.getUserToken().subscribe((/**
+                     * @param {?} data
+                     * @return {?}
+                     */
+                    function (data) {
+                        if (data && data.access_token) {
+                            _this.globalMessageService.remove(core$1.GlobalMessageType.MSG_TYPE_ERROR);
+                            _this.authRedirectService.redirect();
+                        }
+                    })));
+                }
+            }
+            // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
+            this.subscription.add(this.globalMessageService
+                .get()
+                .pipe(operators.filter((/**
+             * @param {?} messages
+             * @return {?}
+             */
+            function (messages) { return !!Object.keys(messages).length; })))
+                .subscribe((/**
+             * @param {?} globalMessageEntities
+             * @return {?}
+             */
+            function (globalMessageEntities) {
+                /** @type {?} */
+                var messages = globalMessageEntities &&
+                    globalMessageEntities[core$1.GlobalMessageType.MSG_TYPE_ERROR];
+                if (messages &&
+                    messages.some((/**
+                     * @param {?} message
+                     * @return {?}
+                     */
+                    function (message) { return message === 'This field is required.'; }))) {
+                    _this.globalMessageService.remove(core$1.GlobalMessageType.MSG_TYPE_ERROR);
+                    _this.globalMessageService.add({ key: 'register.titleRequired' }, core$1.GlobalMessageType.MSG_TYPE_ERROR);
+                }
+            })));
+        };
+        /**
+         * @return {?}
+         */
+        RegisterComponent.prototype.submit = /**
+         * @return {?}
+         */
+        function () {
+            this.userService.register(this.collectDataFromRegisterForm(this.userRegistrationForm.value));
+        };
+        /**
+         * @param {?} title
+         * @return {?}
+         */
+        RegisterComponent.prototype.titleSelected = /**
+         * @param {?} title
+         * @return {?}
+         */
+        function (title) {
+            this.userRegistrationForm['controls'].titleCode.setValue(title.code);
+        };
+        /**
+         * @param {?} formData
+         * @return {?}
+         */
+        RegisterComponent.prototype.collectDataFromRegisterForm = /**
+         * @param {?} formData
+         * @return {?}
+         */
+        function (formData) {
+            var firstName = formData.firstName, lastName = formData.lastName, email = formData.email, password = formData.password, titleCode = formData.titleCode;
+            return {
+                firstName: firstName,
+                lastName: lastName,
+                uid: email.toLowerCase(),
+                password: password,
+                titleCode: titleCode,
+            };
+        };
+        /**
+         * @private
+         * @param {?} success
+         * @return {?}
+         */
+        RegisterComponent.prototype.onRegisterUserSuccess = /**
+         * @private
+         * @param {?} success
+         * @return {?}
+         */
+        function (success) {
+            if (this.router && success) {
+                this.router.go('login');
+                this.globalMessageService.add({ key: 'register.postRegisterMessage' }, core$1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
+            }
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        RegisterComponent.prototype.registerUserProcessInit = /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this.userService.resetRegisterUserProcessState();
+            this.subscription.add(this.userService.getRegisterUserResultSuccess().subscribe((/**
+             * @param {?} success
+             * @return {?}
+             */
+            function (success) {
+                _this.onRegisterUserSuccess(success);
+            })));
+        };
+        /**
+         * @return {?}
+         */
+        RegisterComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
+            this.subscription.unsubscribe();
+            this.userService.resetRegisterUserProcessState();
+        };
+        RegisterComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-register',
+                        template: "<section\n  class=\"cx-page-section container\"\n  *ngIf=\"!(loading$ | async); else loading\"\n>\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of titles$ | async\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('email').errors &&\n                  (userRegistrationForm.get('email').errors['email'] ||\n                    userRegistrationForm.get('email').errors['InvalidEmail']) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"newsletter\"\n                  class=\"form-check-input\"\n                  formControlName=\"newsletter\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.emailMarketing' | cxTranslate }}\n                </span>\n              </label>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            [disabled]=\"userRegistrationForm.invalid\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        RegisterComponent.ctorParameters = function () { return [
+            { type: core$1.AuthService },
+            { type: core$1.AuthRedirectService },
+            { type: core$1.UserService },
+            { type: core$1.GlobalMessageService },
+            { type: forms.FormBuilder },
+            { type: core$1.RoutingService },
+            { type: core$1.FeatureConfigService }
+        ]; };
+        return RegisterComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        RegisterComponent.prototype.titles$;
+        /** @type {?} */
+        RegisterComponent.prototype.loading$;
+        /**
+         * @type {?}
+         * @private
+         */
+        RegisterComponent.prototype.subscription;
+        /** @type {?} */
+        RegisterComponent.prototype.userRegistrationForm;
+        /** @type {?} */
+        RegisterComponent.prototype.isNewRegisterFlowEnabled;
+        /**
+         * @type {?}
+         * @protected
+         */
+        RegisterComponent.prototype.auth;
+        /**
+         * @type {?}
+         * @protected
+         */
+        RegisterComponent.prototype.authRedirectService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        RegisterComponent.prototype.userService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        RegisterComponent.prototype.globalMessageService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        RegisterComponent.prototype.fb;
+        /**
+         * @type {?}
+         * @protected
+         */
+        RegisterComponent.prototype.router;
+        /**
+         * @type {?}
+         * @protected
+         */
+        RegisterComponent.prototype.featureConfig;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var RegisterComponentModule = /** @class */ (function () {
+        function RegisterComponentModule() {
+        }
+        RegisterComponentModule.decorators = [
+            { type: core.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            LoginModule,
+                            forms.ReactiveFormsModule,
+                            router.RouterModule,
+                            core$1.UrlModule,
+                            core$1.ConfigModule.withConfig((/** @type {?} */ ({
+                                cmsComponents: {
+                                    RegisterCustomerComponent: {
+                                        component: RegisterComponent,
+                                        guards: [core$1.NotAuthGuard],
+                                    },
+                                },
+                            }))),
+                            core$1.I18nModule,
+                            SpinnerModule,
+                        ],
+                        declarations: [RegisterComponent],
+                        exports: [RegisterComponent],
+                        entryComponents: [RegisterComponent],
+                    },] }
+        ];
+        return RegisterComponentModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var UserComponentModule = /** @class */ (function () {
+        function UserComponentModule() {
+        }
+        UserComponentModule.decorators = [
+            { type: core.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            LoginModule,
+                            LoginFormModule,
+                            LogoutModule,
+                            CheckoutLoginModule,
+                            forms.ReactiveFormsModule,
+                            router.RouterModule,
+                            core$1.UrlModule,
+                            RegisterComponentModule,
+                        ],
+                    },] }
+        ];
+        return UserComponentModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var CmsLibModule = /** @class */ (function () {
         function CmsLibModule() {
         }
         CmsLibModule.decorators = [
             { type: core.NgModule, args: [{
                         imports: [
+                            AssistedServiceModule,
                             HamburgerMenuModule,
                             CmsParagraphModule,
                             LinkModule,
@@ -23134,7 +23657,6 @@
             },
             ProductDetailsPageTemplate: {
                 slots: [
-                    'TopHeaderSlot',
                     'Summary',
                     'UpSelling',
                     'CrossSelling',
@@ -23296,6 +23818,7 @@
         StorefrontFoundationModule.decorators = [
             { type: core.NgModule, args: [{
                         imports: [
+                            core$1.AsmModule.forRoot(),
                             core$1.StateModule.forRoot(),
                             core$1.AuthModule.forRoot(),
                             core$1.ConfigModule.forRoot(),
@@ -23671,35 +24194,40 @@
     exports.pwaFactory = pwaFactory;
     exports.ɵa = OnlyNumberDirectiveModule;
     exports.ɵb = AutoFocusDirectiveModule;
-    exports.ɵba = htmlLangProvider;
-    exports.ɵbb = setHtmlLangAttribute;
-    exports.ɵbc = RoutingModule;
-    exports.ɵbd = defaultStorefrontRoutesConfig;
-    exports.ɵbe = defaultRoutingConfig;
+    exports.ɵba = ProductImagesModule;
+    exports.ɵbb = ProductImagesComponent;
+    exports.ɵbc = CheckoutLoginComponent;
+    exports.ɵbd = suffixUrlMatcher;
+    exports.ɵbe = addCmsRoute;
+    exports.ɵbf = htmlLangProvider;
+    exports.ɵbg = setHtmlLangAttribute;
+    exports.ɵbh = RoutingModule;
+    exports.ɵbi = defaultStorefrontRoutesConfig;
+    exports.ɵbj = defaultRoutingConfig;
     exports.ɵc = defaultCheckoutConfig;
     exports.ɵd = ExpressCheckoutService;
-    exports.ɵe = HighlightPipe;
-    exports.ɵf = defaultScrollConfig;
-    exports.ɵg = ViewConfig;
-    exports.ɵh = ViewConfigModule;
-    exports.ɵi = ProductScrollComponent;
-    exports.ɵj = ProductAttributesModule;
-    exports.ɵk = ProductDetailsTabModule;
-    exports.ɵl = ProductDetailsTabComponent;
-    exports.ɵm = CmsRoutesService;
-    exports.ɵn = CmsMappingService;
-    exports.ɵo = CmsI18nService;
-    exports.ɵp = CmsGuardsService;
-    exports.ɵq = TrackingEventsComponent;
-    exports.ɵr = ConsignmentTrackingComponent;
-    exports.ɵs = ComponentMapperService;
-    exports.ɵt = AddToHomeScreenService;
-    exports.ɵu = GuestRegisterFormComponent;
-    exports.ɵv = ProductImagesModule;
-    exports.ɵw = ProductImagesComponent;
-    exports.ɵx = CheckoutLoginComponent;
-    exports.ɵy = suffixUrlMatcher;
-    exports.ɵz = addCmsRoute;
+    exports.ɵe = AssistedServiceModule;
+    exports.ɵf = AsmRootComponent;
+    exports.ɵg = AsmMainUiComponent;
+    exports.ɵh = CSAgentLoginFormComponent;
+    exports.ɵi = CustomerSelectionComponent;
+    exports.ɵj = HighlightPipe;
+    exports.ɵk = defaultScrollConfig;
+    exports.ɵl = ViewConfig;
+    exports.ɵm = ViewConfigModule;
+    exports.ɵn = ProductScrollComponent;
+    exports.ɵo = ProductAttributesModule;
+    exports.ɵp = ProductDetailsTabModule;
+    exports.ɵq = ProductDetailsTabComponent;
+    exports.ɵr = CmsRoutesService;
+    exports.ɵs = CmsMappingService;
+    exports.ɵt = CmsI18nService;
+    exports.ɵu = CmsGuardsService;
+    exports.ɵv = TrackingEventsComponent;
+    exports.ɵw = ConsignmentTrackingComponent;
+    exports.ɵx = ComponentMapperService;
+    exports.ɵy = AddToHomeScreenService;
+    exports.ɵz = GuestRegisterFormComponent;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
