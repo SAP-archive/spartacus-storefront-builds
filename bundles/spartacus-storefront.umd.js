@@ -11827,6 +11827,10 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /**
+     * Please don't put that service in public API.
+     *
+     */
     var CmsMappingService = /** @class */ (function () {
         function CmsMappingService(config, platformId) {
             this.config = config;
@@ -12020,6 +12024,10 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /**
+     * Please don't put that service in public API.
+     *
+     */
     var CmsGuardsService = /** @class */ (function () {
         function CmsGuardsService(cmsMapping, injector) {
             this.cmsMapping = cmsMapping;
@@ -12133,6 +12141,10 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /**
+     * Please don't put that service in public API.
+     *
+     */
     var CmsI18nService = /** @class */ (function () {
         function CmsI18nService(cmsMapping, translation, translationChunk) {
             this.cmsMapping = cmsMapping;
@@ -12203,6 +12215,10 @@
     /**
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Please don't put that service in public API.
+     *
      */
     var CmsRoutesService = /** @class */ (function () {
         function CmsRoutesService(router, cmsMapping) {

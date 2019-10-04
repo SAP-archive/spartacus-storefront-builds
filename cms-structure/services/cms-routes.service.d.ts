@@ -1,6 +1,9 @@
 import { Router } from '@angular/router';
 import { PageContext } from '@spartacus/core';
 import { CmsMappingService } from './cms-mapping.service';
+/**
+ * Please don't put that service in public API.
+ * */
 export declare class CmsRoutesService {
     private router;
     private cmsMapping;

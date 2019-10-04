@@ -10129,6 +10129,10 @@ MainModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * Please don't put that service in public API.
+ *
+ */
 class CmsMappingService {
     /**
      * @param {?} config
@@ -10257,6 +10261,10 @@ if (false) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * Please don't put that service in public API.
+ *
+ */
 class CmsGuardsService {
     /**
      * @param {?} cmsMapping
@@ -10366,6 +10374,10 @@ function isFunction(v) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * Please don't put that service in public API.
+ *
+ */
 class CmsI18nService {
     /**
      * @param {?} cmsMapping
@@ -10425,6 +10437,10 @@ if (false) {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Please don't put that service in public API.
+ *
  */
 class CmsRoutesService {
     /**

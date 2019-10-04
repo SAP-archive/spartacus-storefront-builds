@@ -1,5 +1,8 @@
 import { CmsConfig } from '@spartacus/core';
 import { Route } from '@angular/router';
+/**
+ * Please don't put that service in public API.
+ * */
 export declare class CmsMappingService {
     private config;
     private platformId;

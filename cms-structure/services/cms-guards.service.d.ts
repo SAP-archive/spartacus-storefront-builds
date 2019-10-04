@@ -3,6 +3,9 @@ import { Observable } from 'rxjs';
 import { RouterStateSnapshot, UrlTree } from '@angular/router';
 import { CmsActivatedRouteSnapshot } from '@spartacus/core';
 import { CmsMappingService } from './cms-mapping.service';
+/**
+ * Please don't put that service in public API.
+ * */
 export declare class CmsGuardsService {
     private cmsMapping;
     private injector;
