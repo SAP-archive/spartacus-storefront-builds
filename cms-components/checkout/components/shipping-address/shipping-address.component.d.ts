@@ -31,6 +31,7 @@ export declare class ShippingAddressComponent implements OnInit, OnDestroy {
     checkoutStepUrlNext: string;
     checkoutStepUrlPrevious: string;
     isGuestCheckout: boolean;
+    forceLoader: boolean;
     constructor(userAddressService: UserAddressService, cartService: CartService, routingService: RoutingService, checkoutDeliveryService: CheckoutDeliveryService, checkoutConfigService: CheckoutConfigService, activatedRoute: ActivatedRoute, translation: TranslationService);
     ngOnInit(): void;
     getCardContent(address: Address, selected: any, textDefaultShippingAddress: string, textShipToThisAddress: string, textSelected: string): Card;
