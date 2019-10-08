@@ -4183,6 +4183,33 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /** @type {?} */
+    var titleScores = {
+        mr: 1,
+        mrs: 2,
+        miss: 3,
+        ms: 4,
+        dr: 5,
+        rev: 6,
+    };
+    /**
+     * @param {?} title1
+     * @param {?} title2
+     * @return {?}
+     */
+    function sortTitles(title1, title2) {
+        if (!titleScores[title1.code] || !titleScores[title2.code]) {
+            return 1;
+        }
+        else {
+            return titleScores[title1.code] - titleScores[title2.code];
+        }
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
 
     /**
      * @fileoverview added by tsickle
@@ -8560,8 +8587,10 @@
              */
             function (titles) {
                 /** @type {?} */
+                var sortedTitles = titles.sort(sortTitles);
+                /** @type {?} */
                 var noneTitle = { code: '', name: 'Title' };
-                return __spread([noneTitle], titles);
+                return __spread([noneTitle], sortedTitles);
             })));
             // Fetching regions
             this.regions$ = this.selectedCountry$.pipe(operators.switchMap((/**
@@ -23231,6 +23260,14 @@
                 if (Object.keys(titles).length === 0) {
                     _this.userService.loadTitles();
                 }
+            })), operators.map((/**
+             * @param {?} titles
+             * @return {?}
+             */
+            function (titles) {
+                /** @type {?} */
+                var sortedTitles = titles.sort(sortTitles);
+                return sortedTitles;
             })));
             // TODO(issue:4237) Register flow
             if (this.isNewRegisterFlowEnabled) {
@@ -24327,6 +24364,8 @@
     exports.initSeoService = initSeoService;
     exports.pwaConfigurationFactory = pwaConfigurationFactory;
     exports.pwaFactory = pwaFactory;
+    exports.sortTitles = sortTitles;
+    exports.titleScores = titleScores;
     exports.ɵa = OnlyNumberDirectiveModule;
     exports.ɵb = AutoFocusDirectiveModule;
     exports.ɵba = ProductImagesModule;
