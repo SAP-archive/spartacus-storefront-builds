@@ -10678,7 +10678,7 @@ AssistedServiceModule.decorators = [
                     I18nModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
-                            AssistedServiceComponent: {
+                            AsmComponent: {
                                 component: AsmRootComponent,
                             },
                         },

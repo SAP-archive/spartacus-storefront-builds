@@ -12480,7 +12480,7 @@
                             core$1.I18nModule,
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
-                                    AssistedServiceComponent: {
+                                    AsmComponent: {
                                         component: AsmRootComponent,
                                     },
                                 },

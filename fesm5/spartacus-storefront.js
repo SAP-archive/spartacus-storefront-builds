@@ -12294,7 +12294,7 @@ var AssistedServiceModule = /** @class */ (function () {
                         I18nModule,
                         ConfigModule.withConfig((/** @type {?} */ ({
                             cmsComponents: {
-                                AssistedServiceComponent: {
+                                AsmComponent: {
                                     component: AsmRootComponent,
                                 },
                             },
