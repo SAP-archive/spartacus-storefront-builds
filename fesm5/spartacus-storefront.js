@@ -6553,7 +6553,7 @@ var DeliveryModeComponent = /** @class */ (function () {
          */
         function (_a) {
             var _b = __read(_a, 2), code = _b[0], deliveryModes = _b[1];
-            if (!code) {
+            if (!code && deliveryModes && deliveryModes.length) {
                 code = _this.checkoutConfigService.getPreferredDeliveryMode(deliveryModes);
             }
             if (_this.allowRedirect &&
