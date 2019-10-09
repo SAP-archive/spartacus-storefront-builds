@@ -8796,34 +8796,10 @@ var ShippingAddressComponent = /** @class */ (function () {
         this.activatedRoute = activatedRoute;
         this.translation = translation;
         this.newAddressFormManuallyOpened = false;
-        this.selectedAddress$ = this.checkoutDeliveryService.getDeliveryAddress();
-        this.forceLoader = false; // this helps with smoother steps transition
-        // this helps with smoother steps transition
-        /**
-         * @deprecated since version 1.3
-         * This variable will no longer be in use. Use cards$ observable instead.
-         * TODO(issue:#3921) deprecated since 1.3
-         */
         this.cards = [];
-        /**
-         * @deprecated since version 1.3
-         * This variable will no longer be in use. Avoid using it.
-         * TODO(issue:#3921) deprecated since 1.3
-         */
-        this.goTo = null;
-        /**
-         * @deprecated since version 1.3
-         * This variable will no longer be in use. Use CheckoutConfigService.getNextCheckoutStepUrl(this.activatedRoute) instead.
-         * TODO(issue:#3921) deprecated since 1.3
-         */
-        this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
-        /**
-         * @deprecated since version 1.3
-         * This variable will no longer be in use. Use CheckoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute) instead.
-         * TODO(issue:#3921) deprecated since 1.3
-         */
-        this.checkoutStepUrlPrevious = 'cart';
+        this.selectedAddress$ = new BehaviorSubject(null);
         this.isGuestCheckout = false;
+        this.forceLoader = false; // this helps with smoother steps transition
     }
     /**
      * @return {?}
@@ -8840,7 +8816,7 @@ var ShippingAddressComponent = /** @class */ (function () {
         this.existingAddresses$ = this.userAddressService.getAddresses();
         this.cards$ = combineLatest([
             this.existingAddresses$,
-            this.selectedAddress$,
+            this.selectedAddress$.asObservable(),
             this.translation.translate('checkoutAddress.defaultShippingAddress'),
             this.translation.translate('checkoutAddress.shipToThisAddress'),
             this.translation.translate('addressCard.selected'),
@@ -8851,10 +8827,10 @@ var ShippingAddressComponent = /** @class */ (function () {
         function (_a) {
             var _b = __read(_a, 5), addresses = _b[0], selected = _b[1], textDefaultShippingAddress = _b[2], textShipToThisAddress = _b[3], textSelected = _b[4];
             // Select default address if none selected
-            if (addresses.length &&
-                (!selected ||
-                    Object.keys(selected).length === 0 ||
-                    !_this.selectedAddress)) {
+            if (selected && Object.keys(selected).length > 0) {
+                _this.selectedAddress = selected;
+            }
+            else {
                 /** @type {?} */
                 var defaultAddress = addresses.find((/**
                  * @param {?} address
@@ -8862,7 +8838,7 @@ var ShippingAddressComponent = /** @class */ (function () {
                  */
                 function (address) { return address.defaultAddress; }));
                 selected = defaultAddress;
-                _this.selectAddress(defaultAddress);
+                _this.selectedAddress = defaultAddress;
             }
             return addresses.map((/**
              * @param {?} address
@@ -8883,6 +8859,27 @@ var ShippingAddressComponent = /** @class */ (function () {
         else {
             this.isGuestCheckout = true;
         }
+        this.setAddressSub = this.checkoutDeliveryService
+            .getDeliveryAddress()
+            .subscribe((/**
+         * @param {?} address
+         * @return {?}
+         */
+        function (address) {
+            _this.setAddress = address;
+            _this.selectedAddress$.next(address);
+            if (_this.goTo) {
+                _this.goNext();
+                _this.goTo = null;
+            }
+        }));
+        this.selectedAddressSub = this.selectedAddress$.subscribe((/**
+         * @param {?} address
+         * @return {?}
+         */
+        function (address) {
+            _this.selectedAddress = address;
+        }));
     };
     /**
      * @param {?} address
@@ -8906,7 +8903,8 @@ var ShippingAddressComponent = /** @class */ (function () {
         if (address.region && address.region.isocode) {
             region = address.region.isocode + ', ';
         }
-        return {
+        /** @type {?} */
+        var card = {
             title: address.defaultAddress ? textDefaultShippingAddress : '',
             textBold: address.firstName + ' ' + address.lastName,
             text: [
@@ -8919,63 +8917,69 @@ var ShippingAddressComponent = /** @class */ (function () {
             actions: [{ name: textShipToThisAddress, event: 'send' }],
             header: selected && selected.id === address.id ? textSelected : '',
         };
+        this.cards.push(card);
+        return card;
     };
     /**
      * @param {?} address
      * @return {?}
      */
-    ShippingAddressComponent.prototype.selectAddress = /**
+    ShippingAddressComponent.prototype.addressSelected = /**
      * @param {?} address
      * @return {?}
      */
     function (address) {
-        this.selectedAddress = address;
-        this.checkoutDeliveryService.setDeliveryAddress(address);
+        this.selectedAddress$.next(address);
     };
     /**
-     * @param {?} address
+     * @return {?}
+     */
+    ShippingAddressComponent.prototype.next = /**
+     * @return {?}
+     */
+    function () {
+        this.addAddress({ address: this.selectedAddress, newAddress: false });
+    };
+    /**
+     * @param {?} __0
      * @return {?}
      */
     ShippingAddressComponent.prototype.addAddress = /**
+     * @param {?} __0
+     * @return {?}
+     */
+    function (_a) {
+        var newAddress = _a.newAddress, address = _a.address;
+        this.forceLoader = true;
+        if (newAddress) {
+            this.checkoutDeliveryService.createAndSetAddress(address);
+            this.goTo = CheckoutStepType.DELIVERY_MODE;
+            return;
+        }
+        if (this.setAddress &&
+            this.selectedAddress &&
+            this.setAddress.id === this.selectedAddress.id) {
+            this.goNext();
+        }
+        else {
+            this.goTo = CheckoutStepType.DELIVERY_MODE;
+            this.checkoutDeliveryService.setDeliveryAddress(address);
+        }
+    };
+    /**
+     * @param {?} address
+     * @return {?}
+     */
+    ShippingAddressComponent.prototype.addNewAddress = /**
      * @param {?} address
      * @return {?}
      */
     function (address) {
-        var _this = this;
-        // TODO(issue:#3921) deprecated since 1.3 - Remove temp address
-        /** @type {?} */
-        var tempAddress = address['address']
-            ? address['address']
-            : address;
-        /** @type {?} */
-        var selectedSub = this.selectedAddress$.subscribe((/**
-         * @param {?} selected
-         * @return {?}
-         */
-        function (selected) {
-            if (selected && selected.shippingAddress) {
-                _this.goNext();
-                selectedSub.unsubscribe();
-            }
-        }));
-        this.forceLoader = true;
-        // TODO(issue:#3921) deprecated since 1.3 - Remove this condition
-        if (address['address'] || address['newAddress']) {
-            address['newAddress']
-                ? this.checkoutDeliveryService.createAndSetAddress(tempAddress)
-                : this.selectAddress(tempAddress);
+        if (address) {
+            this.addAddress({ address: address, newAddress: true });
         }
         else {
-            // TODO(issue:#3921) deprecated since 1.3 - Use instead of condition
-            this.existingAddresses$.pipe(take(1)).subscribe((/**
-             * @param {?} addresses
-             * @return {?}
-             */
-            function (addresses) {
-                addresses.includes(tempAddress)
-                    ? _this.selectAddress(tempAddress)
-                    : _this.checkoutDeliveryService.createAndSetAddress(tempAddress);
-            }));
+            this.goNext();
         }
     };
     /**
@@ -8988,18 +8992,18 @@ var ShippingAddressComponent = /** @class */ (function () {
         this.newAddressFormManuallyOpened = true;
     };
     /**
-     * @param {?=} goPrevious
+     * @param {?=} goBack
      * @return {?}
      */
     ShippingAddressComponent.prototype.hideNewAddressForm = /**
-     * @param {?=} goPrevious
+     * @param {?=} goBack
      * @return {?}
      */
-    function (goPrevious) {
-        if (goPrevious === void 0) { goPrevious = false; }
+    function (goBack) {
+        if (goBack === void 0) { goBack = false; }
         this.newAddressFormManuallyOpened = false;
-        if (goPrevious) {
-            this.goPrevious();
+        if (goBack) {
+            this.back();
         }
     };
     /**
@@ -9009,116 +9013,21 @@ var ShippingAddressComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.routingService.go(this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute));
+        this.routingService.go(this.checkoutStepUrlNext);
     };
     /**
-     * @return {?}
-     */
-    ShippingAddressComponent.prototype.goPrevious = /**
-     * @return {?}
-     */
-    function () {
-        this.routingService.go(this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute) || 'cart');
-    };
-    /**
-     * @deprecated since version 1.3
-     * This variable will no longer be in use. Use selectAddress(address: Address) instead.
-     * TODO(issue:#3921) deprecated since 1.3
-     */
-    /**
-     * @deprecated since version 1.3
-     * This variable will no longer be in use. Use selectAddress(address: Address) instead.
-     * TODO(issue:#3921) deprecated since 1.3
-     * @param {?} address
-     * @return {?}
-     */
-    ShippingAddressComponent.prototype.addressSelected = /**
-     * @deprecated since version 1.3
-     * This variable will no longer be in use. Use selectAddress(address: Address) instead.
-     * TODO(issue:#3921) deprecated since 1.3
-     * @param {?} address
-     * @return {?}
-     */
-    function (address) {
-        this.selectAddress(address);
-    };
-    /**
-     * @deprecated since version 1.3
-     * This method will no longer be in use. Use goPrevious() instead.
-     * TODO(issue:#3921) deprecated since 1.3
-     */
-    /**
-     * @deprecated since version 1.3
-     * This method will no longer be in use. Use goPrevious() instead.
-     * TODO(issue:#3921) deprecated since 1.3
      * @return {?}
      */
     ShippingAddressComponent.prototype.back = /**
-     * @deprecated since version 1.3
-     * This method will no longer be in use. Use goPrevious() instead.
-     * TODO(issue:#3921) deprecated since 1.3
      * @return {?}
      */
     function () {
-        this.goPrevious();
+        this.routingService.go(this.checkoutStepUrlPrevious);
     };
     /**
-     * @deprecated since version 1.3
-     * This method will no longer be in use. Use goNext() instead.
-     * TODO(issue:#3921) deprecated since 1.3
-     */
-    /**
-     * @deprecated since version 1.3
-     * This method will no longer be in use. Use goNext() instead.
-     * TODO(issue:#3921) deprecated since 1.3
-     * @return {?}
-     */
-    ShippingAddressComponent.prototype.next = /**
-     * @deprecated since version 1.3
-     * This method will no longer be in use. Use goNext() instead.
-     * TODO(issue:#3921) deprecated since 1.3
-     * @return {?}
-     */
-    function () {
-        this.goNext();
-    };
-    /**
-     * @deprecated since version 1.3
-     * This method will no longer be in use. Use addAddress(address: Address) instead.
-     * TODO(issue:#3921) deprecated since 1.3
-     */
-    /**
-     * @deprecated since version 1.3
-     * This method will no longer be in use. Use addAddress(address: Address) instead.
-     * TODO(issue:#3921) deprecated since 1.3
-     * @param {?} address
-     * @return {?}
-     */
-    ShippingAddressComponent.prototype.addNewAddress = /**
-     * @deprecated since version 1.3
-     * This method will no longer be in use. Use addAddress(address: Address) instead.
-     * TODO(issue:#3921) deprecated since 1.3
-     * @param {?} address
-     * @return {?}
-     */
-    function (address) {
-        this.addAddress(address);
-    };
-    /**
-     * @deprecated since version 1.3
-     * This method will no longer be in use. Remove.
-     * TODO(issue:#3921) deprecated since 1.3
-     */
-    /**
-     * @deprecated since version 1.3
-     * This method will no longer be in use. Remove.
-     * TODO(issue:#3921) deprecated since 1.3
      * @return {?}
      */
     ShippingAddressComponent.prototype.ngOnDestroy = /**
-     * @deprecated since version 1.3
-     * This method will no longer be in use. Remove.
-     * TODO(issue:#3921) deprecated since 1.3
      * @return {?}
      */
     function () {
@@ -9132,7 +9041,7 @@ var ShippingAddressComponent = /** @class */ (function () {
     ShippingAddressComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-shipping-address',
-                    template: "<ng-container *ngIf=\"cards$ | async as cards\">\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutAddress.shippingAddress' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!forceLoader && !(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        cards?.length && !newAddressFormManuallyOpened;\n        else newAddressForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'checkoutAddress.selectYourShippingAddress' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-sm-12 col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewAddressForm()\"\n          >\n            {{ 'checkoutAddress.addNewAddress' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-shipping-address-card col-md-12 col-lg-6\"\n          *ngFor=\"let card of cards; let i = index\"\n        >\n          <div\n            class=\"cx-shipping-address-card-inner\"\n            (click)=\"addressSelected(card.address)\"\n          >\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"card.card\"\n              (sendCard)=\"addressSelected(card.address)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"cx-btn btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'checkout.backToCart' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"cx-btn btn btn-block btn-primary\"\n            [disabled]=\"\n              (!selectedAddress || !selectedAddress.id) &&\n              !(selectedAddress$ | async)?.shippingAddress\n            \"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newAddressForm>\n      <ng-container *ngIf=\"cards.length; else initialAddressForm\">\n        <cx-address-form\n          [showTitleCode]=\"true\"\n          (backToAddress)=\"hideNewAddressForm(false)\"\n          (submitAddress)=\"addAddress($event)\"\n        ></cx-address-form>\n      </ng-container>\n      <ng-template #initialAddressForm>\n        <cx-address-form\n          [showTitleCode]=\"true\"\n          [setAsDefaultField]=\"!isGuestCheckout\"\n          [addressData]=\"setAddress\"\n          cancelBtnLabel=\"{{ 'checkout.backToCart' | cxTranslate }}\"\n          (backToAddress)=\"hideNewAddressForm(true)\"\n          (submitAddress)=\"addAddress($event)\"\n        ></cx-address-form>\n      </ng-template>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </ng-template>\n</ng-container>\n",
+                    template: "<ng-container *ngIf=\"cards$ | async as cards\">\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutAddress.shippingAddress' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!forceLoader && !(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        cards?.length && !newAddressFormManuallyOpened;\n        else newAddressForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'checkoutAddress.selectYourShippingAddress' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-sm-12 col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewAddressForm()\"\n          >\n            {{ 'checkoutAddress.addNewAddress' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-shipping-address-card col-md-12 col-lg-6\"\n          *ngFor=\"let card of cards; let i = index\"\n        >\n          <div\n            class=\"cx-shipping-address-card-inner\"\n            (click)=\"addressSelected(card.address)\"\n          >\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"card.card\"\n              (sendCard)=\"addressSelected(card.address)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"cx-btn btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'checkout.backToCart' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"cx-btn btn btn-block btn-primary\"\n            [disabled]=\"!selectedAddress || !selectedAddress.id\"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newAddressForm>\n      <ng-container *ngIf=\"cards.length; else initialAddressForm\">\n        <cx-address-form\n          [showTitleCode]=\"true\"\n          (backToAddress)=\"hideNewAddressForm(false)\"\n          (submitAddress)=\"addNewAddress($event)\"\n        ></cx-address-form>\n      </ng-container>\n      <ng-template #initialAddressForm>\n        <cx-address-form\n          [showTitleCode]=\"true\"\n          [setAsDefaultField]=\"!isGuestCheckout\"\n          [addressData]=\"setAddress\"\n          cancelBtnLabel=\"{{ 'checkout.backToCart' | cxTranslate }}\"\n          (backToAddress)=\"hideNewAddressForm(true)\"\n          (submitAddress)=\"addNewAddress($event)\"\n        ></cx-address-form>\n      </ng-template>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </ng-template>\n</ng-container>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -9154,71 +9063,31 @@ if (false) {
     /** @type {?} */
     ShippingAddressComponent.prototype.newAddressFormManuallyOpened;
     /** @type {?} */
+    ShippingAddressComponent.prototype.cards;
+    /** @type {?} */
     ShippingAddressComponent.prototype.isLoading$;
     /** @type {?} */
-    ShippingAddressComponent.prototype.cards$;
+    ShippingAddressComponent.prototype.selectedAddress;
+    /** @type {?} */
+    ShippingAddressComponent.prototype.goTo;
+    /** @type {?} */
+    ShippingAddressComponent.prototype.setAddress;
+    /** @type {?} */
+    ShippingAddressComponent.prototype.setAddressSub;
+    /** @type {?} */
+    ShippingAddressComponent.prototype.selectedAddressSub;
     /** @type {?} */
     ShippingAddressComponent.prototype.selectedAddress$;
     /** @type {?} */
-    ShippingAddressComponent.prototype.forceLoader;
-    /**
-     * @deprecated since version 1.3
-     * This variable will no longer be in use. Use cards$ observable instead.
-     * TODO(issue:#3921) deprecated since 1.3
-     * @type {?}
-     */
-    ShippingAddressComponent.prototype.cards;
-    /**
-     * @deprecated since version 1.3
-     * This variable will no longer be in use. Avoid using it.
-     * TODO(issue:#3921) deprecated since 1.3
-     * @type {?}
-     */
-    ShippingAddressComponent.prototype.goTo;
-    /**
-     * @deprecated since version 1.3
-     * This variable will no longer be in use. Use selectAddress(address: Address) instead.
-     * TODO(issue:#3921) deprecated since 1.3
-     * @type {?}
-     */
-    ShippingAddressComponent.prototype.setAddress;
-    /**
-     * @deprecated since version 1.3
-     * This variable will no longer be in use. Avoid using it.
-     * TODO(issue:#3921) deprecated since 1.3
-     * @type {?}
-     */
-    ShippingAddressComponent.prototype.setAddressSub;
-    /**
-     * @deprecated since version 1.3
-     * This variable will no longer be in use. Use selectedAddress$ observable instead.
-     * TODO(issue:#3921) deprecated since 1.3
-     * @type {?}
-     */
-    ShippingAddressComponent.prototype.selectedAddressSub;
-    /**
-     * @deprecated since version 1.3
-     * This variable will no longer be in use. Use CheckoutConfigService.getNextCheckoutStepUrl(this.activatedRoute) instead.
-     * TODO(issue:#3921) deprecated since 1.3
-     * @type {?}
-     */
+    ShippingAddressComponent.prototype.cards$;
+    /** @type {?} */
     ShippingAddressComponent.prototype.checkoutStepUrlNext;
-    /**
-     * @deprecated since version 1.3
-     * This variable will no longer be in use. Use CheckoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute) instead.
-     * TODO(issue:#3921) deprecated since 1.3
-     * @type {?}
-     */
+    /** @type {?} */
     ShippingAddressComponent.prototype.checkoutStepUrlPrevious;
     /** @type {?} */
     ShippingAddressComponent.prototype.isGuestCheckout;
-    /**
-     * @deprecated since version 1.3
-     * This variable will no longer be in use. Use selectedAddress$ observable instead.
-     * TODO(issue:#3921) deprecated since 1.3
-     * @type {?}
-     */
-    ShippingAddressComponent.prototype.selectedAddress;
+    /** @type {?} */
+    ShippingAddressComponent.prototype.forceLoader;
     /**
      * @type {?}
      * @protected
