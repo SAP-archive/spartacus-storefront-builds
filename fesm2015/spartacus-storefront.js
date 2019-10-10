@@ -1,4 +1,4 @@
-import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, EventEmitter, Output, isDevMode, forwardRef, Renderer2, HostListener, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, NgZone, APP_INITIALIZER, INJECTOR, Pipe } from '@angular/core';
+import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, EventEmitter, Output, isDevMode, forwardRef, Renderer2, HostListener, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, NgZone, APP_INITIALIZER, RendererFactory2, INJECTOR, Pipe } from '@angular/core';
 import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, CartModule, RoutingConfigService, AuthService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, FeaturesConfigModule, CmsConfig, CartDataService, CmsService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, AsmService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, AuthGuard, NotAuthGuard, CmsPageTitleModule, provideConfig, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, AsmModule, StateModule, AuthModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
 import { map, filter, switchMap, tap, debounceTime, startWith, distinctUntilChanged, take, shareReplay, skipWhile, withLatestFrom, first, endWith, pluck } from 'rxjs/operators';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
@@ -10,7 +10,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
 import { __awaiter } from 'tslib';
 import { ServiceWorkerModule, SwRegistrationOptions } from '@angular/service-worker';
-import { Title, Meta } from '@angular/platform-browser';
+import { Title, Meta, DomSanitizer } from '@angular/platform-browser';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -9850,6 +9850,40 @@ PwaModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @type {?} */
+const htmlLangProvider = {
+    provide: APP_INITIALIZER,
+    multi: true,
+    useFactory: setHtmlLangAttribute,
+    deps: [WindowRef, LanguageService],
+};
+/**
+ * Sets active language in <html lang="">
+ * @param {?} winRef
+ * @param {?} languageService
+ * @return {?}
+ */
+function setHtmlLangAttribute(winRef, languageService) {
+    /** @type {?} */
+    const result = (/**
+     * @return {?}
+     */
+    () => {
+        languageService.getActive().subscribe((/**
+         * @param {?} lang
+         * @return {?}
+         */
+        lang => {
+            winRef.document.documentElement.lang = lang;
+        }));
+    });
+    return result;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class SeoMetaService {
     /**
      * @param {?} ngTitle
@@ -9966,35 +10000,275 @@ if (false) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/** @type {?} */
-const htmlLangProvider = {
-    provide: APP_INITIALIZER,
-    multi: true,
-    useFactory: setHtmlLangAttribute,
-    deps: [WindowRef, LanguageService],
-};
+class JsonLdScriptFactory {
+    /**
+     * @param {?} platformId
+     * @param {?} winRef
+     * @param {?} rendererFactory
+     */
+    constructor(platformId, winRef, rendererFactory) {
+        this.platformId = platformId;
+        this.winRef = winRef;
+        this.rendererFactory = rendererFactory;
+    }
+    /**
+     * @param {?} schema
+     * @return {?}
+     */
+    build(schema) {
+        if (schema && this.isJsonLdRequired()) {
+            this.createJsonLdScriptElement().innerHTML = JSON.stringify(schema);
+        }
+    }
+    /**
+     * Only return schema data in case of SSR or development mode,
+     * to not waste memory unnecessary.
+     * @return {?}
+     */
+    isJsonLdRequired() {
+        return !isPlatformBrowser(this.platformId) || isDevMode();
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    createJsonLdScriptElement() {
+        /** @type {?} */
+        const id = 'json-ld';
+        /** @type {?} */
+        let scriptElement = (/** @type {?} */ ((this.winRef.document.getElementById(id))));
+        if (!scriptElement) {
+            /** @type {?} */
+            const renderer = this.rendererFactory.createRenderer(null, null);
+            /** @type {?} */
+            const script = renderer.createElement('script');
+            script.id = id;
+            script.type = 'application/ld+json';
+            renderer.appendChild(this.winRef.document.body, script);
+            scriptElement = script;
+        }
+        return scriptElement;
+    }
+}
+JsonLdScriptFactory.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+JsonLdScriptFactory.ctorParameters = () => [
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: WindowRef },
+    { type: RendererFactory2 }
+];
+/** @nocollapse */ JsonLdScriptFactory.ngInjectableDef = ɵɵdefineInjectable({ factory: function JsonLdScriptFactory_Factory() { return new JsonLdScriptFactory(ɵɵinject(PLATFORM_ID), ɵɵinject(WindowRef), ɵɵinject(RendererFactory2)); }, token: JsonLdScriptFactory, providedIn: "root" });
+if (false) {
+    /**
+     * @type {?}
+     * @protected
+     */
+    JsonLdScriptFactory.prototype.platformId;
+    /**
+     * @type {?}
+     * @protected
+     */
+    JsonLdScriptFactory.prototype.winRef;
+    /**
+     * @type {?}
+     * @protected
+     */
+    JsonLdScriptFactory.prototype.rendererFactory;
+}
+
 /**
- * Sets active language in <html lang="">
- * @param {?} winRef
- * @param {?} languageService
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Low level directive that adds a json-ld script tag to the component.
+ * This code bypasses the strict XSS security, as otherwise we're not able
+ * to append a script tag with JS inside.
+ */
+class JsonLdDirective {
+    /**
+     * @param {?} jsonLdScriptFactory
+     * @param {?} sanitizer
+     */
+    constructor(jsonLdScriptFactory, sanitizer) {
+        this.jsonLdScriptFactory = jsonLdScriptFactory;
+        this.sanitizer = sanitizer;
+    }
+    /**
+     * @param {?} schema
+     * @return {?}
+     */
+    set cxJsonLd(schema) {
+        this.writeJsonLd(schema);
+    }
+    /**
+     * @private
+     * @param {?} schema
+     * @return {?}
+     */
+    writeJsonLd(schema) {
+        if (schema && this.jsonLdScriptFactory.isJsonLdRequired()) {
+            /** @type {?} */
+            const html = `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+            this.jsonLD = this.sanitizer.bypassSecurityTrustHtml(html);
+        }
+    }
+}
+JsonLdDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[cxJsonLd]',
+            },] }
+];
+/** @nocollapse */
+JsonLdDirective.ctorParameters = () => [
+    { type: JsonLdScriptFactory },
+    { type: DomSanitizer }
+];
+JsonLdDirective.propDecorators = {
+    cxJsonLd: [{ type: Input }],
+    jsonLD: [{ type: HostBinding, args: ['innerHTML',] }]
+};
+if (false) {
+    /** @type {?} */
+    JsonLdDirective.prototype.jsonLD;
+    /**
+     * @type {?}
+     * @protected
+     */
+    JsonLdDirective.prototype.jsonLdScriptFactory;
+    /**
+     * @type {?}
+     * @protected
+     */
+    JsonLdDirective.prototype.sanitizer;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Injection token to extend schema builders for adding structural data (json-ld).
+ *
+ * Some builders (i.e. `JSONLD_PRODUCT_BUILDER`) might have additional
+ * lowever level builder to further extend the schema.
+ * @type {?}
+ */
+const SCHEMA_BUILDER = new InjectionToken('SchemaBuilderToken');
+/**
+ * Injection token to add specific json-ld builders for product related schema's.
+ * See see https://schema.org/product for more information.
+ * @type {?}
+ */
+const JSONLD_PRODUCT_BUILDER = new InjectionToken('JsonLdProductBuilderToken');
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class StructuredDataFactory {
+    /**
+     * @param {?} scriptBuilder
+     * @param {?} builders
+     */
+    constructor(scriptBuilder, builders) {
+        this.scriptBuilder = scriptBuilder;
+        this.builders = builders;
+    }
+    /**
+     * @return {?}
+     */
+    build() {
+        this.collectSchemas().subscribe((/**
+         * @param {?} schema
+         * @return {?}
+         */
+        (schema) => {
+            this.scriptBuilder.build(schema);
+        }));
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    collectSchemas() {
+        if (!this.scriptBuilder.isJsonLdRequired() || !this.builders) {
+            return of();
+        }
+        return combineLatest(this.builders.map((/**
+         * @param {?} builder
+         * @return {?}
+         */
+        builder => builder.build()))).pipe();
+    }
+}
+StructuredDataFactory.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+StructuredDataFactory.ctorParameters = () => [
+    { type: JsonLdScriptFactory },
+    { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [SCHEMA_BUILDER,] }] }
+];
+/** @nocollapse */ StructuredDataFactory.ngInjectableDef = ɵɵdefineInjectable({ factory: function StructuredDataFactory_Factory() { return new StructuredDataFactory(ɵɵinject(JsonLdScriptFactory), ɵɵinject(SCHEMA_BUILDER, 8)); }, token: StructuredDataFactory, providedIn: "root" });
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    StructuredDataFactory.prototype.scriptBuilder;
+    /**
+     * @type {?}
+     * @private
+     */
+    StructuredDataFactory.prototype.builders;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Factory to build the structure data
+ * without any interaction with the UI.
+ * @param {?} injector
  * @return {?}
  */
-function setHtmlLangAttribute(winRef, languageService) {
+function getStructuredDataFactory(injector) {
     /** @type {?} */
     const result = (/**
      * @return {?}
      */
     () => {
-        languageService.getActive().subscribe((/**
-         * @param {?} lang
-         * @return {?}
-         */
-        lang => {
-            winRef.document.documentElement.lang = lang;
-        }));
+        /** @type {?} */
+        const factory = injector.get(StructuredDataFactory);
+        factory.build();
     });
     return result;
 }
+class StructuredDataModule {
+}
+StructuredDataModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule],
+                declarations: [JsonLdDirective],
+                exports: [JsonLdDirective],
+                providers: [
+                    {
+                        provide: APP_INITIALIZER,
+                        useFactory: getStructuredDataFactory,
+                        deps: [Injector],
+                        multi: true,
+                    },
+                ],
+            },] }
+];
 
 /**
  * @fileoverview added by tsickle
@@ -10020,6 +10294,7 @@ class SeoModule {
 }
 SeoModule.decorators = [
     { type: NgModule, args: [{
+                imports: [StructuredDataModule],
                 providers: [
                     {
                         provide: APP_INITIALIZER,
@@ -11304,6 +11579,489 @@ CmsRouteModule.decorators = [
                 ],
             },] }
 ];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class BreadcrumbSchemaBuilder {
+    /**
+     * @param {?} pageMetaService
+     */
+    constructor(pageMetaService) {
+        this.pageMetaService = pageMetaService;
+    }
+    /**
+     * @return {?}
+     */
+    build() {
+        return this.pageMetaService
+            .getMeta()
+            .pipe(map((/**
+         * @param {?} pageMeta
+         * @return {?}
+         */
+        (pageMeta) => this.collect(pageMeta))));
+    }
+    /**
+     * @protected
+     * @param {?} pageMeta
+     * @return {?}
+     */
+    collect(pageMeta) {
+        if (!pageMeta.breadcrumbs) {
+            return;
+        }
+        /** @type {?} */
+        const crumbs = pageMeta.breadcrumbs.map((/**
+         * @param {?} crumb
+         * @param {?} index
+         * @return {?}
+         */
+        (crumb, index) => {
+            return {
+                '@type': 'ListItem',
+                position: index + 1,
+                item: {
+                    '@id': crumb.link,
+                    name: crumb.label,
+                },
+            };
+        }));
+        if (pageMeta.title) {
+            crumbs.push({
+                '@type': 'ListItem',
+                position: crumbs.length + 1,
+                item: {
+                    '@id': pageMeta.title,
+                    name: pageMeta.title,
+                },
+            });
+        }
+        return {
+            '@context': 'http://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: crumbs,
+        };
+    }
+}
+BreadcrumbSchemaBuilder.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+BreadcrumbSchemaBuilder.ctorParameters = () => [
+    { type: PageMetaService }
+];
+/** @nocollapse */ BreadcrumbSchemaBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function BreadcrumbSchemaBuilder_Factory() { return new BreadcrumbSchemaBuilder(ɵɵinject(PageMetaService)); }, token: BreadcrumbSchemaBuilder, providedIn: "root" });
+if (false) {
+    /**
+     * @type {?}
+     * @protected
+     */
+    BreadcrumbSchemaBuilder.prototype.pageMetaService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Builds the basic structured data for the product, see https://schema.org/product.
+ * This builder includes data for sku number, name, description, brand and main image.
+ */
+class JsonLdBaseProductBuilder {
+    /**
+     * @param {?} product
+     * @return {?}
+     */
+    build(product) {
+        return of(Object.assign({}, this.getProductBase(product), this.getProductBrand(product), this.getProductImage(product)));
+    }
+    /**
+     * @private
+     * @param {?} product
+     * @return {?}
+     */
+    getProductBase(product) {
+        /** @type {?} */
+        const result = { sku: product.code };
+        if (product.name) {
+            result.name = product.name;
+        }
+        if (product.summary) {
+            result.description = product.summary;
+        }
+        return result;
+    }
+    /**
+     * @private
+     * @param {?} product
+     * @return {?}
+     */
+    getProductImage(product) {
+        return product.images &&
+            product.images.PRIMARY &&
+            product.images.PRIMARY['zoom'] &&
+            product.images.PRIMARY['zoom'].url
+            ? {
+                image: product.images.PRIMARY['zoom'].url,
+            }
+            : {};
+    }
+    /**
+     * @private
+     * @param {?} product
+     * @return {?}
+     */
+    getProductBrand(product) {
+        return product['manufacturer']
+            ? {
+                brand: product['manufacturer'],
+            }
+            : null;
+    }
+}
+JsonLdBaseProductBuilder.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */ JsonLdBaseProductBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function JsonLdBaseProductBuilder_Factory() { return new JsonLdBaseProductBuilder(); }, token: JsonLdBaseProductBuilder, providedIn: "root" });
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Builds the structured data for the product offer, see https://schema.org/offers.
+ * The data includes the price, currency and availability level.
+ */
+class JsonLdProductOfferBuilder {
+    /**
+     * @param {?} product
+     * @return {?}
+     */
+    build(product) {
+        /** @type {?} */
+        const schema = { '@type': 'Offer' };
+        if (product.price) {
+            if (product.price.value) {
+                schema.price = product.price.value;
+            }
+            if (product.price.currencyIso) {
+                schema.priceCurrency = product.price.currencyIso;
+            }
+        }
+        if (product.stock && product.stock.stockLevelStatus) {
+            schema.availability =
+                product.stock.stockLevelStatus === 'inStock' ? 'InStock' : 'OutOfStock';
+        }
+        return of({
+            offers: schema,
+        });
+    }
+}
+JsonLdProductOfferBuilder.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */ JsonLdProductOfferBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function JsonLdProductOfferBuilder_Factory() { return new JsonLdProductOfferBuilder(); }, token: JsonLdProductOfferBuilder, providedIn: "root" });
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Builds the structured data for the product reviews, see https://schema.org/Review.
+ * The data includes the aggregated product rating and the individual reviews.
+ */
+class JsonLdProductReviewBuilder {
+    /**
+     * @param {?} reviewService
+     */
+    constructor(reviewService) {
+        this.reviewService = reviewService;
+    }
+    /**
+     * @param {?} product
+     * @return {?}
+     */
+    build(product) {
+        return this.reviewService.getByProductCode(product.code).pipe(filter(Boolean), map((/**
+         * @param {?} reviews
+         * @return {?}
+         */
+        (reviews) => {
+            return {
+                aggregateRating: this.buildAggregatedReviews(product, reviews),
+                review: reviews.map((/**
+                 * @param {?} review
+                 * @return {?}
+                 */
+                review => this.buildReviews(review))),
+            };
+        })));
+    }
+    /**
+     * @private
+     * @param {?} product
+     * @param {?} reviews
+     * @return {?}
+     */
+    buildAggregatedReviews(product, reviews) {
+        /** @type {?} */
+        const aggregated = {
+            '@type': 'AggregateRating',
+        };
+        if (product.averageRating) {
+            aggregated.ratingValue = product.averageRating;
+        }
+        if (reviews) {
+            aggregated.ratingCount = reviews.filter((/**
+             * @param {?} rev
+             * @return {?}
+             */
+            rev => !!rev.rating)).length;
+            aggregated.reviewCount = reviews.filter((/**
+             * @param {?} rev
+             * @return {?}
+             */
+            rev => !!rev.comment)).length;
+        }
+        return aggregated;
+    }
+    /**
+     * @private
+     * @param {?} review
+     * @return {?}
+     */
+    buildReviews(review) {
+        /** @type {?} */
+        const reviewSchema = {
+            '@type': 'review',
+        };
+        if (review.principal && review.principal.name) {
+            reviewSchema.author = review.principal.name;
+        }
+        if (review.date) {
+            /** @type {?} */
+            const date = new Date(review.date);
+            reviewSchema.datePublished = `${date.getFullYear()}-${date.getMonth() +
+                1}-${date.getDate()}`;
+        }
+        if (review.headline) {
+            reviewSchema.name = review.headline;
+        }
+        if (review.comment) {
+            reviewSchema.description = review.comment;
+        }
+        if (review.rating) {
+            reviewSchema.reviewRating = {
+                '@type': 'Rating',
+                ratingValue: review.rating.toString(),
+            };
+        }
+        return reviewSchema;
+    }
+}
+JsonLdProductReviewBuilder.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+JsonLdProductReviewBuilder.ctorParameters = () => [
+    { type: ProductReviewService }
+];
+/** @nocollapse */ JsonLdProductReviewBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function JsonLdProductReviewBuilder_Factory() { return new JsonLdProductReviewBuilder(ɵɵinject(ProductReviewService)); }, token: JsonLdProductReviewBuilder, providedIn: "root" });
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    JsonLdProductReviewBuilder.prototype.reviewService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Adds the minimal structured data for the product, see https://schema.org/product.
+ * The actual data collection is delegated to `JsonLdBuilder`s, which can be injected
+ * using the `JSONLD_PRODUCT_BUILDER` token.
+ */
+class ProductSchemaBuilder {
+    /**
+     * @param {?} currentProduct
+     * @param {?} builders
+     */
+    constructor(currentProduct, builders) {
+        this.currentProduct = currentProduct;
+        this.builders = builders;
+    }
+    /**
+     * @return {?}
+     */
+    build() {
+        return this.currentProduct.getProduct().pipe(startWith((/** @type {?} */ (null))), switchMap((/**
+         * @param {?} product
+         * @return {?}
+         */
+        (product) => {
+            if (product) {
+                return combineLatest(this.collect(product)).pipe(map((/**
+                 * @param {?} res
+                 * @return {?}
+                 */
+                (res) => Object.assign({}, ...res))));
+            }
+            return of({});
+        })));
+    }
+    /**
+     * @protected
+     * @param {?} product
+     * @return {?}
+     */
+    collect(product) {
+        if (!product || !product.code) {
+            return [];
+        }
+        /** @type {?} */
+        const builders = this.builders
+            ? this.builders.map((/**
+             * @param {?} builder
+             * @return {?}
+             */
+            builder => builder.build(product)))
+            : [];
+        return [
+            of({
+                '@context': 'http://schema.org',
+                '@type': 'Product',
+            }),
+            ...builders,
+        ];
+    }
+}
+ProductSchemaBuilder.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+ProductSchemaBuilder.ctorParameters = () => [
+    { type: CurrentProductService },
+    { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [JSONLD_PRODUCT_BUILDER,] }] }
+];
+/** @nocollapse */ ProductSchemaBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function ProductSchemaBuilder_Factory() { return new ProductSchemaBuilder(ɵɵinject(CurrentProductService), ɵɵinject(JSONLD_PRODUCT_BUILDER, 8)); }, token: ProductSchemaBuilder, providedIn: "root" });
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    ProductSchemaBuilder.prototype.currentProduct;
+    /**
+     * @type {?}
+     * @protected
+     */
+    ProductSchemaBuilder.prototype.builders;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Provides several standard json-ld builders that contribute
+ * to colleting and building json-ld data.
+ */
+class JsonLdBuilderModule {
+}
+JsonLdBuilderModule.decorators = [
+    { type: NgModule, args: [{
+                providers: [
+                    {
+                        provide: SCHEMA_BUILDER,
+                        useExisting: ProductSchemaBuilder,
+                        multi: true,
+                    },
+                    {
+                        provide: SCHEMA_BUILDER,
+                        useExisting: BreadcrumbSchemaBuilder,
+                        multi: true,
+                    },
+                    // lower level json-ld builder classes offering fine-graiend control
+                    // for product related schema's
+                    {
+                        provide: JSONLD_PRODUCT_BUILDER,
+                        useExisting: JsonLdBaseProductBuilder,
+                        multi: true,
+                    },
+                    {
+                        provide: JSONLD_PRODUCT_BUILDER,
+                        useExisting: JsonLdProductOfferBuilder,
+                        multi: true,
+                    },
+                    {
+                        provide: JSONLD_PRODUCT_BUILDER,
+                        useExisting: JsonLdProductReviewBuilder,
+                        multi: true,
+                    },
+                ],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+function SchemaBuilder() { }
+if (false) {
+    /**
+     * @return {?}
+     */
+    SchemaBuilder.prototype.build = function () { };
+}
+/**
+ * @record
+ * @template T
+ */
+function JsonLdBuilder() { }
+if (false) {
+    /**
+     * @param {?} data
+     * @return {?}
+     */
+    JsonLdBuilder.prototype.build = function (data) { };
+}
 
 /**
  * @fileoverview added by tsickle
@@ -20786,5 +21544,5 @@ B2cStorefrontModule.decorators = [
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, OnlyNumberDirectiveModule as ɵa, AutoFocusDirectiveModule as ɵb, ProductImagesComponent as ɵba, CheckoutLoginComponent as ɵbb, suffixUrlMatcher as ɵbc, addCmsRoute as ɵbd, htmlLangProvider as ɵbe, setHtmlLangAttribute as ɵbf, RoutingModule as ɵbg, defaultStorefrontRoutesConfig as ɵbh, defaultRoutingConfig as ɵbi, defaultCheckoutConfig as ɵc, ExpressCheckoutService as ɵd, AssistedServiceModule as ɵe, AsmRootComponent as ɵf, AsmMainUiComponent as ɵg, CSAgentLoginFormComponent as ɵh, CustomerSelectionComponent as ɵi, defaultScrollConfig as ɵj, ViewConfig as ɵk, ViewConfigModule as ɵl, ProductScrollComponent as ɵm, ProductAttributesModule as ɵn, ProductDetailsTabModule as ɵo, ProductDetailsTabComponent as ɵp, CmsRoutesService as ɵq, CmsMappingService as ɵr, CmsI18nService as ɵs, CmsGuardsService as ɵt, TrackingEventsComponent as ɵu, ConsignmentTrackingComponent as ɵv, ComponentMapperService as ɵw, AddToHomeScreenService as ɵx, GuestRegisterFormComponent as ɵy, ProductImagesModule as ɵz };
+export { AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, OnlyNumberDirectiveModule as ɵa, AutoFocusDirectiveModule as ɵb, ProductImagesComponent as ɵba, CheckoutLoginComponent as ɵbb, suffixUrlMatcher as ɵbc, addCmsRoute as ɵbd, htmlLangProvider as ɵbe, setHtmlLangAttribute as ɵbf, RoutingModule as ɵbg, defaultStorefrontRoutesConfig as ɵbh, defaultRoutingConfig as ɵbi, defaultCheckoutConfig as ɵc, ExpressCheckoutService as ɵd, AssistedServiceModule as ɵe, AsmRootComponent as ɵf, AsmMainUiComponent as ɵg, CSAgentLoginFormComponent as ɵh, CustomerSelectionComponent as ɵi, defaultScrollConfig as ɵj, ViewConfig as ɵk, ViewConfigModule as ɵl, ProductScrollComponent as ɵm, ProductAttributesModule as ɵn, ProductDetailsTabModule as ɵo, ProductDetailsTabComponent as ɵp, CmsRoutesService as ɵq, CmsMappingService as ɵr, CmsI18nService as ɵs, CmsGuardsService as ɵt, TrackingEventsComponent as ɵu, ConsignmentTrackingComponent as ɵv, ComponentMapperService as ɵw, AddToHomeScreenService as ɵx, GuestRegisterFormComponent as ɵy, ProductImagesModule as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map

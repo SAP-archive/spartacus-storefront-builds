@@ -1,0 +1,9 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export { BreadcrumbSchemaBuilder, JsonLdBuilderModule, JsonLdBaseProductBuilder, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, ProductSchemaBuilder, SCHEMA_BUILDER, JSONLD_PRODUCT_BUILDER } from './builders/index';
+export { JsonLdScriptFactory } from './json-ld-script.factory';
+export { JsonLdDirective } from './json-ld.directive';
+export { getStructuredDataFactory, StructuredDataModule } from './structured-data.module';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJjbXMtc3RydWN0dXJlL3Nlby9zdHJ1Y3R1cmVkLWRhdGEvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLDRNQUFjLGtCQUFrQixDQUFDO0FBQ2pDLG9DQUFjLDBCQUEwQixDQUFDO0FBQ3pDLGdDQUFjLHFCQUFxQixDQUFDO0FBQ3BDLCtEQUFjLDBCQUEwQixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0ICogZnJvbSAnLi9idWlsZGVycy9pbmRleCc7XG5leHBvcnQgKiBmcm9tICcuL2pzb24tbGQtc2NyaXB0LmZhY3RvcnknO1xuZXhwb3J0ICogZnJvbSAnLi9qc29uLWxkLmRpcmVjdGl2ZSc7XG5leHBvcnQgKiBmcm9tICcuL3N0cnVjdHVyZWQtZGF0YS5tb2R1bGUnO1xuIl19

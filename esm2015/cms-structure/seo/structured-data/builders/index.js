@@ -1,0 +1,10 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export { BreadcrumbSchemaBuilder } from './breadcrumb/index';
+export { JsonLdBuilderModule } from './json-ld-builder.module';
+export { JsonLdBaseProductBuilder, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, ProductSchemaBuilder } from './product/index';
+export {} from './schema.interface';
+export { SCHEMA_BUILDER, JSONLD_PRODUCT_BUILDER } from './tokens';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJjbXMtc3RydWN0dXJlL3Nlby9zdHJ1Y3R1cmVkLWRhdGEvYnVpbGRlcnMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLHdDQUFjLG9CQUFvQixDQUFDO0FBQ25DLG9DQUFjLDBCQUEwQixDQUFDO0FBQ3pDLHNIQUFjLGlCQUFpQixDQUFDO0FBQ2hDLGVBQWMsb0JBQW9CLENBQUM7QUFDbkMsdURBQWMsVUFBVSxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0ICogZnJvbSAnLi9icmVhZGNydW1iL2luZGV4JztcbmV4cG9ydCAqIGZyb20gJy4vanNvbi1sZC1idWlsZGVyLm1vZHVsZSc7XG5leHBvcnQgKiBmcm9tICcuL3Byb2R1Y3QvaW5kZXgnO1xuZXhwb3J0ICogZnJvbSAnLi9zY2hlbWEuaW50ZXJmYWNlJztcbmV4cG9ydCAqIGZyb20gJy4vdG9rZW5zJztcbiJdfQ==

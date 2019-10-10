@@ -11505,6 +11505,40 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /** @type {?} */
+    var htmlLangProvider = {
+        provide: core.APP_INITIALIZER,
+        multi: true,
+        useFactory: setHtmlLangAttribute,
+        deps: [core$1.WindowRef, core$1.LanguageService],
+    };
+    /**
+     * Sets active language in <html lang="">
+     * @param {?} winRef
+     * @param {?} languageService
+     * @return {?}
+     */
+    function setHtmlLangAttribute(winRef, languageService) {
+        /** @type {?} */
+        var result = (/**
+         * @return {?}
+         */
+        function () {
+            languageService.getActive().subscribe((/**
+             * @param {?} lang
+             * @return {?}
+             */
+            function (lang) {
+                winRef.document.documentElement.lang = lang;
+            }));
+        });
+        return result;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var SeoMetaService = /** @class */ (function () {
         function SeoMetaService(ngTitle, ngMeta, pageMetaService) {
             this.ngTitle = ngTitle;
@@ -11646,35 +11680,302 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    /** @type {?} */
-    var htmlLangProvider = {
-        provide: core.APP_INITIALIZER,
-        multi: true,
-        useFactory: setHtmlLangAttribute,
-        deps: [core$1.WindowRef, core$1.LanguageService],
-    };
+    var JsonLdScriptFactory = /** @class */ (function () {
+        function JsonLdScriptFactory(platformId, winRef, rendererFactory) {
+            this.platformId = platformId;
+            this.winRef = winRef;
+            this.rendererFactory = rendererFactory;
+        }
+        /**
+         * @param {?} schema
+         * @return {?}
+         */
+        JsonLdScriptFactory.prototype.build = /**
+         * @param {?} schema
+         * @return {?}
+         */
+        function (schema) {
+            if (schema && this.isJsonLdRequired()) {
+                this.createJsonLdScriptElement().innerHTML = JSON.stringify(schema);
+            }
+        };
+        /**
+         * Only return schema data in case of SSR or development mode,
+         * to not waste memory unnecessary.
+         */
+        /**
+         * Only return schema data in case of SSR or development mode,
+         * to not waste memory unnecessary.
+         * @return {?}
+         */
+        JsonLdScriptFactory.prototype.isJsonLdRequired = /**
+         * Only return schema data in case of SSR or development mode,
+         * to not waste memory unnecessary.
+         * @return {?}
+         */
+        function () {
+            return !common.isPlatformBrowser(this.platformId) || core.isDevMode();
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        JsonLdScriptFactory.prototype.createJsonLdScriptElement = /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            /** @type {?} */
+            var id = 'json-ld';
+            /** @type {?} */
+            var scriptElement = (/** @type {?} */ ((this.winRef.document.getElementById(id))));
+            if (!scriptElement) {
+                /** @type {?} */
+                var renderer = this.rendererFactory.createRenderer(null, null);
+                /** @type {?} */
+                var script = renderer.createElement('script');
+                script.id = id;
+                script.type = 'application/ld+json';
+                renderer.appendChild(this.winRef.document.body, script);
+                scriptElement = script;
+            }
+            return scriptElement;
+        };
+        JsonLdScriptFactory.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        JsonLdScriptFactory.ctorParameters = function () { return [
+            { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] },
+            { type: core$1.WindowRef },
+            { type: core.RendererFactory2 }
+        ]; };
+        /** @nocollapse */ JsonLdScriptFactory.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function JsonLdScriptFactory_Factory() { return new JsonLdScriptFactory(core.ɵɵinject(core.PLATFORM_ID), core.ɵɵinject(core$1.WindowRef), core.ɵɵinject(core.RendererFactory2)); }, token: JsonLdScriptFactory, providedIn: "root" });
+        return JsonLdScriptFactory;
+    }());
+    if (false) {
+        /**
+         * @type {?}
+         * @protected
+         */
+        JsonLdScriptFactory.prototype.platformId;
+        /**
+         * @type {?}
+         * @protected
+         */
+        JsonLdScriptFactory.prototype.winRef;
+        /**
+         * @type {?}
+         * @protected
+         */
+        JsonLdScriptFactory.prototype.rendererFactory;
+    }
+
     /**
-     * Sets active language in <html lang="">
-     * @param {?} winRef
-     * @param {?} languageService
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Low level directive that adds a json-ld script tag to the component.
+     * This code bypasses the strict XSS security, as otherwise we're not able
+     * to append a script tag with JS inside.
+     */
+    var JsonLdDirective = /** @class */ (function () {
+        function JsonLdDirective(jsonLdScriptFactory, sanitizer) {
+            this.jsonLdScriptFactory = jsonLdScriptFactory;
+            this.sanitizer = sanitizer;
+        }
+        Object.defineProperty(JsonLdDirective.prototype, "cxJsonLd", {
+            set: /**
+             * @param {?} schema
+             * @return {?}
+             */
+            function (schema) {
+                this.writeJsonLd(schema);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * @private
+         * @param {?} schema
+         * @return {?}
+         */
+        JsonLdDirective.prototype.writeJsonLd = /**
+         * @private
+         * @param {?} schema
+         * @return {?}
+         */
+        function (schema) {
+            if (schema && this.jsonLdScriptFactory.isJsonLdRequired()) {
+                /** @type {?} */
+                var html = "<script type=\"application/ld+json\">" + JSON.stringify(schema) + "</script>";
+                this.jsonLD = this.sanitizer.bypassSecurityTrustHtml(html);
+            }
+        };
+        JsonLdDirective.decorators = [
+            { type: core.Directive, args: [{
+                        selector: '[cxJsonLd]',
+                    },] }
+        ];
+        /** @nocollapse */
+        JsonLdDirective.ctorParameters = function () { return [
+            { type: JsonLdScriptFactory },
+            { type: platformBrowser.DomSanitizer }
+        ]; };
+        JsonLdDirective.propDecorators = {
+            cxJsonLd: [{ type: core.Input }],
+            jsonLD: [{ type: core.HostBinding, args: ['innerHTML',] }]
+        };
+        return JsonLdDirective;
+    }());
+    if (false) {
+        /** @type {?} */
+        JsonLdDirective.prototype.jsonLD;
+        /**
+         * @type {?}
+         * @protected
+         */
+        JsonLdDirective.prototype.jsonLdScriptFactory;
+        /**
+         * @type {?}
+         * @protected
+         */
+        JsonLdDirective.prototype.sanitizer;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Injection token to extend schema builders for adding structural data (json-ld).
+     *
+     * Some builders (i.e. `JSONLD_PRODUCT_BUILDER`) might have additional
+     * lowever level builder to further extend the schema.
+     * @type {?}
+     */
+    var SCHEMA_BUILDER = new core.InjectionToken('SchemaBuilderToken');
+    /**
+     * Injection token to add specific json-ld builders for product related schema's.
+     * See see https://schema.org/product for more information.
+     * @type {?}
+     */
+    var JSONLD_PRODUCT_BUILDER = new core.InjectionToken('JsonLdProductBuilderToken');
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var StructuredDataFactory = /** @class */ (function () {
+        function StructuredDataFactory(scriptBuilder, builders) {
+            this.scriptBuilder = scriptBuilder;
+            this.builders = builders;
+        }
+        /**
+         * @return {?}
+         */
+        StructuredDataFactory.prototype.build = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this.collectSchemas().subscribe((/**
+             * @param {?} schema
+             * @return {?}
+             */
+            function (schema) {
+                _this.scriptBuilder.build(schema);
+            }));
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        StructuredDataFactory.prototype.collectSchemas = /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            if (!this.scriptBuilder.isJsonLdRequired() || !this.builders) {
+                return rxjs.of();
+            }
+            return rxjs.combineLatest(this.builders.map((/**
+             * @param {?} builder
+             * @return {?}
+             */
+            function (builder) { return builder.build(); }))).pipe();
+        };
+        StructuredDataFactory.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        StructuredDataFactory.ctorParameters = function () { return [
+            { type: JsonLdScriptFactory },
+            { type: Array, decorators: [{ type: core.Optional }, { type: core.Inject, args: [SCHEMA_BUILDER,] }] }
+        ]; };
+        /** @nocollapse */ StructuredDataFactory.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function StructuredDataFactory_Factory() { return new StructuredDataFactory(core.ɵɵinject(JsonLdScriptFactory), core.ɵɵinject(SCHEMA_BUILDER, 8)); }, token: StructuredDataFactory, providedIn: "root" });
+        return StructuredDataFactory;
+    }());
+    if (false) {
+        /**
+         * @type {?}
+         * @private
+         */
+        StructuredDataFactory.prototype.scriptBuilder;
+        /**
+         * @type {?}
+         * @private
+         */
+        StructuredDataFactory.prototype.builders;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Factory to build the structure data
+     * without any interaction with the UI.
+     * @param {?} injector
      * @return {?}
      */
-    function setHtmlLangAttribute(winRef, languageService) {
+    function getStructuredDataFactory(injector) {
         /** @type {?} */
         var result = (/**
          * @return {?}
          */
         function () {
-            languageService.getActive().subscribe((/**
-             * @param {?} lang
-             * @return {?}
-             */
-            function (lang) {
-                winRef.document.documentElement.lang = lang;
-            }));
+            /** @type {?} */
+            var factory = injector.get(StructuredDataFactory);
+            factory.build();
         });
         return result;
     }
+    var StructuredDataModule = /** @class */ (function () {
+        function StructuredDataModule() {
+        }
+        StructuredDataModule.decorators = [
+            { type: core.NgModule, args: [{
+                        imports: [common.CommonModule],
+                        declarations: [JsonLdDirective],
+                        exports: [JsonLdDirective],
+                        providers: [
+                            {
+                                provide: core.APP_INITIALIZER,
+                                useFactory: getStructuredDataFactory,
+                                deps: [core.Injector],
+                                multi: true,
+                            },
+                        ],
+                    },] }
+        ];
+        return StructuredDataModule;
+    }());
 
     /**
      * @fileoverview added by tsickle
@@ -11701,6 +12002,7 @@
         }
         SeoModule.decorators = [
             { type: core.NgModule, args: [{
+                        imports: [StructuredDataModule],
                         providers: [
                             {
                                 provide: core.APP_INITIALIZER,
@@ -13211,6 +13513,547 @@
         ];
         return CmsRouteModule;
     }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var BreadcrumbSchemaBuilder = /** @class */ (function () {
+        function BreadcrumbSchemaBuilder(pageMetaService) {
+            this.pageMetaService = pageMetaService;
+        }
+        /**
+         * @return {?}
+         */
+        BreadcrumbSchemaBuilder.prototype.build = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            return this.pageMetaService
+                .getMeta()
+                .pipe(operators.map((/**
+             * @param {?} pageMeta
+             * @return {?}
+             */
+            function (pageMeta) { return _this.collect(pageMeta); })));
+        };
+        /**
+         * @protected
+         * @param {?} pageMeta
+         * @return {?}
+         */
+        BreadcrumbSchemaBuilder.prototype.collect = /**
+         * @protected
+         * @param {?} pageMeta
+         * @return {?}
+         */
+        function (pageMeta) {
+            if (!pageMeta.breadcrumbs) {
+                return;
+            }
+            /** @type {?} */
+            var crumbs = pageMeta.breadcrumbs.map((/**
+             * @param {?} crumb
+             * @param {?} index
+             * @return {?}
+             */
+            function (crumb, index) {
+                return {
+                    '@type': 'ListItem',
+                    position: index + 1,
+                    item: {
+                        '@id': crumb.link,
+                        name: crumb.label,
+                    },
+                };
+            }));
+            if (pageMeta.title) {
+                crumbs.push({
+                    '@type': 'ListItem',
+                    position: crumbs.length + 1,
+                    item: {
+                        '@id': pageMeta.title,
+                        name: pageMeta.title,
+                    },
+                });
+            }
+            return {
+                '@context': 'http://schema.org',
+                '@type': 'BreadcrumbList',
+                itemListElement: crumbs,
+            };
+        };
+        BreadcrumbSchemaBuilder.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        BreadcrumbSchemaBuilder.ctorParameters = function () { return [
+            { type: core$1.PageMetaService }
+        ]; };
+        /** @nocollapse */ BreadcrumbSchemaBuilder.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function BreadcrumbSchemaBuilder_Factory() { return new BreadcrumbSchemaBuilder(core.ɵɵinject(core$1.PageMetaService)); }, token: BreadcrumbSchemaBuilder, providedIn: "root" });
+        return BreadcrumbSchemaBuilder;
+    }());
+    if (false) {
+        /**
+         * @type {?}
+         * @protected
+         */
+        BreadcrumbSchemaBuilder.prototype.pageMetaService;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Builds the basic structured data for the product, see https://schema.org/product.
+     * This builder includes data for sku number, name, description, brand and main image.
+     */
+    var JsonLdBaseProductBuilder = /** @class */ (function () {
+        function JsonLdBaseProductBuilder() {
+        }
+        /**
+         * @param {?} product
+         * @return {?}
+         */
+        JsonLdBaseProductBuilder.prototype.build = /**
+         * @param {?} product
+         * @return {?}
+         */
+        function (product) {
+            return rxjs.of(__assign({}, this.getProductBase(product), this.getProductBrand(product), this.getProductImage(product)));
+        };
+        /**
+         * @private
+         * @param {?} product
+         * @return {?}
+         */
+        JsonLdBaseProductBuilder.prototype.getProductBase = /**
+         * @private
+         * @param {?} product
+         * @return {?}
+         */
+        function (product) {
+            /** @type {?} */
+            var result = { sku: product.code };
+            if (product.name) {
+                result.name = product.name;
+            }
+            if (product.summary) {
+                result.description = product.summary;
+            }
+            return result;
+        };
+        /**
+         * @private
+         * @param {?} product
+         * @return {?}
+         */
+        JsonLdBaseProductBuilder.prototype.getProductImage = /**
+         * @private
+         * @param {?} product
+         * @return {?}
+         */
+        function (product) {
+            return product.images &&
+                product.images.PRIMARY &&
+                product.images.PRIMARY['zoom'] &&
+                product.images.PRIMARY['zoom'].url
+                ? {
+                    image: product.images.PRIMARY['zoom'].url,
+                }
+                : {};
+        };
+        /**
+         * @private
+         * @param {?} product
+         * @return {?}
+         */
+        JsonLdBaseProductBuilder.prototype.getProductBrand = /**
+         * @private
+         * @param {?} product
+         * @return {?}
+         */
+        function (product) {
+            return product['manufacturer']
+                ? {
+                    brand: product['manufacturer'],
+                }
+                : null;
+        };
+        JsonLdBaseProductBuilder.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */ JsonLdBaseProductBuilder.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function JsonLdBaseProductBuilder_Factory() { return new JsonLdBaseProductBuilder(); }, token: JsonLdBaseProductBuilder, providedIn: "root" });
+        return JsonLdBaseProductBuilder;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Builds the structured data for the product offer, see https://schema.org/offers.
+     * The data includes the price, currency and availability level.
+     */
+    var JsonLdProductOfferBuilder = /** @class */ (function () {
+        function JsonLdProductOfferBuilder() {
+        }
+        /**
+         * @param {?} product
+         * @return {?}
+         */
+        JsonLdProductOfferBuilder.prototype.build = /**
+         * @param {?} product
+         * @return {?}
+         */
+        function (product) {
+            /** @type {?} */
+            var schema = { '@type': 'Offer' };
+            if (product.price) {
+                if (product.price.value) {
+                    schema.price = product.price.value;
+                }
+                if (product.price.currencyIso) {
+                    schema.priceCurrency = product.price.currencyIso;
+                }
+            }
+            if (product.stock && product.stock.stockLevelStatus) {
+                schema.availability =
+                    product.stock.stockLevelStatus === 'inStock' ? 'InStock' : 'OutOfStock';
+            }
+            return rxjs.of({
+                offers: schema,
+            });
+        };
+        JsonLdProductOfferBuilder.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */ JsonLdProductOfferBuilder.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function JsonLdProductOfferBuilder_Factory() { return new JsonLdProductOfferBuilder(); }, token: JsonLdProductOfferBuilder, providedIn: "root" });
+        return JsonLdProductOfferBuilder;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Builds the structured data for the product reviews, see https://schema.org/Review.
+     * The data includes the aggregated product rating and the individual reviews.
+     */
+    var JsonLdProductReviewBuilder = /** @class */ (function () {
+        function JsonLdProductReviewBuilder(reviewService) {
+            this.reviewService = reviewService;
+        }
+        /**
+         * @param {?} product
+         * @return {?}
+         */
+        JsonLdProductReviewBuilder.prototype.build = /**
+         * @param {?} product
+         * @return {?}
+         */
+        function (product) {
+            var _this = this;
+            return this.reviewService.getByProductCode(product.code).pipe(operators.filter(Boolean), operators.map((/**
+             * @param {?} reviews
+             * @return {?}
+             */
+            function (reviews) {
+                return {
+                    aggregateRating: _this.buildAggregatedReviews(product, reviews),
+                    review: reviews.map((/**
+                     * @param {?} review
+                     * @return {?}
+                     */
+                    function (review) { return _this.buildReviews(review); })),
+                };
+            })));
+        };
+        /**
+         * @private
+         * @param {?} product
+         * @param {?} reviews
+         * @return {?}
+         */
+        JsonLdProductReviewBuilder.prototype.buildAggregatedReviews = /**
+         * @private
+         * @param {?} product
+         * @param {?} reviews
+         * @return {?}
+         */
+        function (product, reviews) {
+            /** @type {?} */
+            var aggregated = {
+                '@type': 'AggregateRating',
+            };
+            if (product.averageRating) {
+                aggregated.ratingValue = product.averageRating;
+            }
+            if (reviews) {
+                aggregated.ratingCount = reviews.filter((/**
+                 * @param {?} rev
+                 * @return {?}
+                 */
+                function (rev) { return !!rev.rating; })).length;
+                aggregated.reviewCount = reviews.filter((/**
+                 * @param {?} rev
+                 * @return {?}
+                 */
+                function (rev) { return !!rev.comment; })).length;
+            }
+            return aggregated;
+        };
+        /**
+         * @private
+         * @param {?} review
+         * @return {?}
+         */
+        JsonLdProductReviewBuilder.prototype.buildReviews = /**
+         * @private
+         * @param {?} review
+         * @return {?}
+         */
+        function (review) {
+            /** @type {?} */
+            var reviewSchema = {
+                '@type': 'review',
+            };
+            if (review.principal && review.principal.name) {
+                reviewSchema.author = review.principal.name;
+            }
+            if (review.date) {
+                /** @type {?} */
+                var date = new Date(review.date);
+                reviewSchema.datePublished = date.getFullYear() + "-" + (date.getMonth() +
+                    1) + "-" + date.getDate();
+            }
+            if (review.headline) {
+                reviewSchema.name = review.headline;
+            }
+            if (review.comment) {
+                reviewSchema.description = review.comment;
+            }
+            if (review.rating) {
+                reviewSchema.reviewRating = {
+                    '@type': 'Rating',
+                    ratingValue: review.rating.toString(),
+                };
+            }
+            return reviewSchema;
+        };
+        JsonLdProductReviewBuilder.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        JsonLdProductReviewBuilder.ctorParameters = function () { return [
+            { type: core$1.ProductReviewService }
+        ]; };
+        /** @nocollapse */ JsonLdProductReviewBuilder.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function JsonLdProductReviewBuilder_Factory() { return new JsonLdProductReviewBuilder(core.ɵɵinject(core$1.ProductReviewService)); }, token: JsonLdProductReviewBuilder, providedIn: "root" });
+        return JsonLdProductReviewBuilder;
+    }());
+    if (false) {
+        /**
+         * @type {?}
+         * @private
+         */
+        JsonLdProductReviewBuilder.prototype.reviewService;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Adds the minimal structured data for the product, see https://schema.org/product.
+     * The actual data collection is delegated to `JsonLdBuilder`s, which can be injected
+     * using the `JSONLD_PRODUCT_BUILDER` token.
+     */
+    var ProductSchemaBuilder = /** @class */ (function () {
+        function ProductSchemaBuilder(currentProduct, builders) {
+            this.currentProduct = currentProduct;
+            this.builders = builders;
+        }
+        /**
+         * @return {?}
+         */
+        ProductSchemaBuilder.prototype.build = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            return this.currentProduct.getProduct().pipe(operators.startWith((/** @type {?} */ (null))), operators.switchMap((/**
+             * @param {?} product
+             * @return {?}
+             */
+            function (product) {
+                if (product) {
+                    return rxjs.combineLatest(_this.collect(product)).pipe(operators.map((/**
+                     * @param {?} res
+                     * @return {?}
+                     */
+                    function (res) { return Object.assign.apply(Object, __spread([{}], res)); })));
+                }
+                return rxjs.of({});
+            })));
+        };
+        /**
+         * @protected
+         * @param {?} product
+         * @return {?}
+         */
+        ProductSchemaBuilder.prototype.collect = /**
+         * @protected
+         * @param {?} product
+         * @return {?}
+         */
+        function (product) {
+            if (!product || !product.code) {
+                return [];
+            }
+            /** @type {?} */
+            var builders = this.builders
+                ? this.builders.map((/**
+                 * @param {?} builder
+                 * @return {?}
+                 */
+                function (builder) { return builder.build(product); }))
+                : [];
+            return __spread([
+                rxjs.of({
+                    '@context': 'http://schema.org',
+                    '@type': 'Product',
+                })
+            ], builders);
+        };
+        ProductSchemaBuilder.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        ProductSchemaBuilder.ctorParameters = function () { return [
+            { type: CurrentProductService },
+            { type: Array, decorators: [{ type: core.Optional }, { type: core.Inject, args: [JSONLD_PRODUCT_BUILDER,] }] }
+        ]; };
+        /** @nocollapse */ ProductSchemaBuilder.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function ProductSchemaBuilder_Factory() { return new ProductSchemaBuilder(core.ɵɵinject(CurrentProductService), core.ɵɵinject(JSONLD_PRODUCT_BUILDER, 8)); }, token: ProductSchemaBuilder, providedIn: "root" });
+        return ProductSchemaBuilder;
+    }());
+    if (false) {
+        /**
+         * @type {?}
+         * @private
+         */
+        ProductSchemaBuilder.prototype.currentProduct;
+        /**
+         * @type {?}
+         * @protected
+         */
+        ProductSchemaBuilder.prototype.builders;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * Provides several standard json-ld builders that contribute
+     * to colleting and building json-ld data.
+     */
+    var JsonLdBuilderModule = /** @class */ (function () {
+        function JsonLdBuilderModule() {
+        }
+        JsonLdBuilderModule.decorators = [
+            { type: core.NgModule, args: [{
+                        providers: [
+                            {
+                                provide: SCHEMA_BUILDER,
+                                useExisting: ProductSchemaBuilder,
+                                multi: true,
+                            },
+                            {
+                                provide: SCHEMA_BUILDER,
+                                useExisting: BreadcrumbSchemaBuilder,
+                                multi: true,
+                            },
+                            // lower level json-ld builder classes offering fine-graiend control
+                            // for product related schema's
+                            {
+                                provide: JSONLD_PRODUCT_BUILDER,
+                                useExisting: JsonLdBaseProductBuilder,
+                                multi: true,
+                            },
+                            {
+                                provide: JSONLD_PRODUCT_BUILDER,
+                                useExisting: JsonLdProductOfferBuilder,
+                                multi: true,
+                            },
+                            {
+                                provide: JSONLD_PRODUCT_BUILDER,
+                                useExisting: JsonLdProductReviewBuilder,
+                                multi: true,
+                            },
+                        ],
+                    },] }
+        ];
+        return JsonLdBuilderModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * @record
+     */
+    function SchemaBuilder() { }
+    if (false) {
+        /**
+         * @return {?}
+         */
+        SchemaBuilder.prototype.build = function () { };
+    }
+    /**
+     * @record
+     * @template T
+     */
+    function JsonLdBuilder() { }
+    if (false) {
+        /**
+         * @param {?} data
+         * @return {?}
+         */
+        JsonLdBuilder.prototype.build = function (data) { };
+    }
 
     /**
      * @fileoverview added by tsickle
@@ -24002,6 +24845,7 @@
     exports.BillingAddressFormModule = BillingAddressFormModule;
     exports.BreadcrumbComponent = BreadcrumbComponent;
     exports.BreadcrumbModule = BreadcrumbModule;
+    exports.BreadcrumbSchemaBuilder = BreadcrumbSchemaBuilder;
     exports.BreakpointService = BreakpointService;
     exports.CardComponent = CardComponent;
     exports.CardModule = CardModule;
@@ -24078,6 +24922,13 @@
     exports.IconResourceType = IconResourceType;
     exports.ItemCounterComponent = ItemCounterComponent;
     exports.ItemCounterModule = ItemCounterModule;
+    exports.JSONLD_PRODUCT_BUILDER = JSONLD_PRODUCT_BUILDER;
+    exports.JsonLdBaseProductBuilder = JsonLdBaseProductBuilder;
+    exports.JsonLdBuilderModule = JsonLdBuilderModule;
+    exports.JsonLdDirective = JsonLdDirective;
+    exports.JsonLdProductOfferBuilder = JsonLdProductOfferBuilder;
+    exports.JsonLdProductReviewBuilder = JsonLdProductReviewBuilder;
+    exports.JsonLdScriptFactory = JsonLdScriptFactory;
     exports.LanguageCurrencyComponent = LanguageCurrencyComponent;
     exports.LayoutConfig = LayoutConfig;
     exports.LayoutModule = LayoutModule;
@@ -24164,6 +25015,7 @@
     exports.ProductReferencesModule = ProductReferencesModule;
     exports.ProductReviewsComponent = ProductReviewsComponent;
     exports.ProductReviewsModule = ProductReviewsModule;
+    exports.ProductSchemaBuilder = ProductSchemaBuilder;
     exports.ProductSummaryComponent = ProductSummaryComponent;
     exports.ProductSummaryModule = ProductSummaryModule;
     exports.ProductTabsModule = ProductTabsModule;
@@ -24177,6 +25029,7 @@
     exports.ResetPasswordModule = ResetPasswordModule;
     exports.ReviewSubmitComponent = ReviewSubmitComponent;
     exports.ReviewSubmitModule = ReviewSubmitModule;
+    exports.SCHEMA_BUILDER = SCHEMA_BUILDER;
     exports.ScheduleComponent = ScheduleComponent;
     exports.SearchBoxComponent = SearchBoxComponent;
     exports.SearchBoxComponentService = SearchBoxComponentService;
@@ -24211,6 +25064,7 @@
     exports.StorefrontComponent = StorefrontComponent;
     exports.StorefrontFoundationModule = StorefrontFoundationModule;
     exports.StorefrontModule = StorefrontModule;
+    exports.StructuredDataModule = StructuredDataModule;
     exports.SuggestedAddressDialogComponent = SuggestedAddressDialogComponent;
     exports.TabParagraphContainerComponent = TabParagraphContainerComponent;
     exports.TabParagraphContainerModule = TabParagraphContainerModule;
@@ -24230,6 +25084,7 @@
     exports.defaultPWAModuleConfig = defaultPWAModuleConfig;
     exports.defaultPageHeaderConfig = defaultPageHeaderConfig;
     exports.fontawesomeIconConfig = fontawesomeIconConfig;
+    exports.getStructuredDataFactory = getStructuredDataFactory;
     exports.headerComponents = headerComponents;
     exports.initSeoService = initSeoService;
     exports.pwaConfigurationFactory = pwaConfigurationFactory;
