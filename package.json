@@ -31,7 +31,8 @@
     "@spartacus/styles": "^1.0.0",
     "bootstrap": "^4.2.1",
     "rxjs": "^6.4.0",
-    "zone.js": "^0.9.1"
+    "zone.js": "^0.9.1",
+    "ngx-infinite-scroll": "^8.0.0"
   },
   "main": "bundles/spartacus-storefront.umd.js",
   "module": "fesm5/spartacus-storefront.js",
