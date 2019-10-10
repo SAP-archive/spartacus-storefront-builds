@@ -6565,7 +6565,8 @@ var DeliveryModeComponent = /** @class */ (function () {
         this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
         this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
         this.supportedDeliveryModes$ = this.checkoutDeliveryService.getSupportedDeliveryModes();
-        this.deliveryModeSub = this.checkoutDeliveryService
+        this.deliveryModeSub = this.supportedDeliveryModes$
+            .pipe(withLatestFrom(this.checkoutDeliveryService
             .getSelectedDeliveryMode()
             .pipe(map((/**
          * @param {?} deliveryMode
@@ -6573,13 +6574,13 @@ var DeliveryModeComponent = /** @class */ (function () {
          */
         function (deliveryMode) {
             return deliveryMode && deliveryMode.code ? deliveryMode.code : null;
-        })), withLatestFrom(this.supportedDeliveryModes$))
+        })))))
             .subscribe((/**
          * @param {?} __0
          * @return {?}
          */
         function (_a) {
-            var _b = __read(_a, 2), code = _b[0], deliveryModes = _b[1];
+            var _b = __read(_a, 2), deliveryModes = _b[0], code = _b[1];
             if (!code && deliveryModes && deliveryModes.length) {
                 code = _this.checkoutConfigService.getPreferredDeliveryMode(deliveryModes);
             }

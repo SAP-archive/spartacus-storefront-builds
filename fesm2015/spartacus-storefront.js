@@ -5597,18 +5597,19 @@ class DeliveryModeComponent {
         this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
         this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
         this.supportedDeliveryModes$ = this.checkoutDeliveryService.getSupportedDeliveryModes();
-        this.deliveryModeSub = this.checkoutDeliveryService
+        this.deliveryModeSub = this.supportedDeliveryModes$
+            .pipe(withLatestFrom(this.checkoutDeliveryService
             .getSelectedDeliveryMode()
             .pipe(map((/**
          * @param {?} deliveryMode
          * @return {?}
          */
-        (deliveryMode) => deliveryMode && deliveryMode.code ? deliveryMode.code : null)), withLatestFrom(this.supportedDeliveryModes$))
+        (deliveryMode) => deliveryMode && deliveryMode.code ? deliveryMode.code : null)))))
             .subscribe((/**
          * @param {?} __0
          * @return {?}
          */
-        ([code, deliveryModes]) => {
+        ([deliveryModes, code]) => {
             if (!code && deliveryModes && deliveryModes.length) {
                 code = this.checkoutConfigService.getPreferredDeliveryMode(deliveryModes);
             }
