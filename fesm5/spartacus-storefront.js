@@ -20012,7 +20012,10 @@ var ProductReferencesComponent = /** @class */ (function () {
          * @param {?} p
          * @return {?}
          */
-        function (p) { return p.code; })));
+        function (p) { return p.code; })), distinctUntilChanged(), tap((/**
+         * @return {?}
+         */
+        function () { return _this.referenceService.cleanReferences(); })));
         /**
          * Obervable with an Array of Observables. This is done, so that
          * the component UI could consider to lazy load the UI components when they're

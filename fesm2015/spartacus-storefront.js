@@ -17399,7 +17399,10 @@ class ProductReferencesComponent {
          * @param {?} p
          * @return {?}
          */
-        (p) => p.code)));
+        (p) => p.code)), distinctUntilChanged(), tap((/**
+         * @return {?}
+         */
+        () => this.referenceService.cleanReferences())));
         /**
          * Obervable with an Array of Observables. This is done, so that
          * the component UI could consider to lazy load the UI components when they're
