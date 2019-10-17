@@ -1,5 +1,5 @@
-import { Title, Meta, MetaDefinition } from '@angular/platform-browser';
-import { PageMetaService, PageMeta, PageRobotsMeta } from '@spartacus/core';
+import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
+import { PageMeta, PageMetaService, PageRobotsMeta } from '@spartacus/core';
 export declare class SeoMetaService {
     protected ngTitle: Title;
     protected ngMeta: Meta;
