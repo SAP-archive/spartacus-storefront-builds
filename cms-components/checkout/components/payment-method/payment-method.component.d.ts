@@ -37,11 +37,9 @@ export declare class PaymentMethodComponent implements OnInit, OnDestroy {
     constructor(userPaymentService: UserPaymentService, checkoutService: CheckoutService, checkoutDeliveryService: CheckoutDeliveryService, checkoutPaymentService: CheckoutPaymentService, globalMessageService: GlobalMessageService, routingService: RoutingService, checkoutConfigService: CheckoutConfigService, activatedRoute: ActivatedRoute, translation: TranslationService);
     ngOnInit(): void;
     getCardContent(payment: PaymentDetails): Observable<Card>;
-    paymentMethodSelected(paymentDetails: PaymentDetails): void;
+    selectPaymentMethod(paymentDetails: PaymentDetails): void;
     showNewPaymentForm(): void;
     hideNewPaymentForm(): void;
-    next(): void;
-    back(): void;
     setPaymentDetails({ paymentDetails, billingAddress, isNewPayment, }: {
         paymentDetails: PaymentDetails;
         billingAddress?: Address;
@@ -49,4 +47,36 @@ export declare class PaymentMethodComponent implements OnInit, OnDestroy {
     }): void;
     ngOnDestroy(): void;
     protected getCardIcon(code: string): string;
+    protected sendPaymentMethodFailGlobalMessage(msg: string): void;
+    protected createCard(paymentDetails: any, cardLabels: any): {
+        title: any;
+        textBold: any;
+        text: any[];
+        img: string;
+        actions: {
+            name: any;
+            event: string;
+        }[];
+        header: any;
+    };
+    goNext(): void;
+    goPrevious(): void;
+    /**
+     * @deprecated since version 1.3
+     * This method will no longer be in use. Use goNext() instead.
+     * TODO(issue:#4992) deprecated since 1.3
+     */
+    next(): void;
+    /**
+     * @deprecated since version 1.3
+     * This method will no longer be in use. Use goPrevious() instead.
+     * TODO(issue:#4992) deprecated since 1.3
+     */
+    back(): void;
+    /**
+     * @deprecated since version 1.3
+     * This method will no longer be in use. Use selectPaymentMethod() instead.
+     * TODO(issue:#4992) deprecated since 1.3
+     */
+    paymentMethodSelected(paymentDetails: PaymentDetails): void;
 }

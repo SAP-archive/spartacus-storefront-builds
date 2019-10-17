@@ -6481,10 +6481,7 @@ class PaymentMethodComponent {
                  */
                 key => {
                     if (key.startsWith('InvalidField')) {
-                        this.globalMessageService.add({
-                            key: 'paymentMethods.invalidField',
-                            params: { field: paymentInfo[key] },
-                        }, GlobalMessageType.MSG_TYPE_ERROR);
+                        this.sendPaymentMethodFailGlobalMessage(paymentInfo[key]);
                     }
                 }));
                 this.checkoutService.clearCheckoutStep(3);
@@ -6496,6 +6493,9 @@ class PaymentMethodComponent {
      * @return {?}
      */
     getCardContent(payment) {
+        if (!this.selectedPayment && payment.defaultPayment) {
+            this.selectedPayment = payment;
+        }
         return combineLatest([
             this.translation.translate('paymentCard.expires', {
                 month: payment.expiryMonth,
@@ -6509,28 +6509,19 @@ class PaymentMethodComponent {
          * @return {?}
          */
         ([textExpires, textUseThisPayment, textDefaultPaymentMethod, textSelected,]) => {
-            /** @type {?} */
-            const card = {
-                title: payment.defaultPayment ? textDefaultPaymentMethod : '',
-                textBold: payment.accountHolderName,
-                text: [payment.cardNumber, textExpires],
-                img: this.getCardIcon(payment.cardType.code),
-                actions: [{ name: textUseThisPayment, event: 'send' }],
-            };
-            if (!this.selectedPayment && payment.defaultPayment) {
-                this.selectedPayment = payment;
-            }
-            if (this.selectedPayment && this.selectedPayment.id === payment.id) {
-                card.header = textSelected;
-            }
-            return card;
+            return this.createCard(payment, {
+                textExpires,
+                textUseThisPayment,
+                textDefaultPaymentMethod,
+                textSelected,
+            });
         })));
     }
     /**
      * @param {?} paymentDetails
      * @return {?}
      */
-    paymentMethodSelected(paymentDetails) {
+    selectPaymentMethod(paymentDetails) {
         this.selectedPayment = paymentDetails;
     }
     /**
@@ -6544,21 +6535,6 @@ class PaymentMethodComponent {
      */
     hideNewPaymentForm() {
         this.newPaymentFormManuallyOpened = false;
-    }
-    /**
-     * @return {?}
-     */
-    next() {
-        this.setPaymentDetails({
-            paymentDetails: this.selectedPayment,
-            isNewPayment: false,
-        });
-    }
-    /**
-     * @return {?}
-     */
-    back() {
-        this.routingService.go(this.checkoutStepUrlPrevious);
     }
     /**
      * @param {?} __0
@@ -6609,11 +6585,85 @@ class PaymentMethodComponent {
         }
         return ccIcon;
     }
+    /**
+     * @protected
+     * @param {?} msg
+     * @return {?}
+     */
+    sendPaymentMethodFailGlobalMessage(msg) {
+        this.globalMessageService.add({
+            key: 'paymentMethods.invalidField',
+            params: { field: msg },
+        }, GlobalMessageType.MSG_TYPE_ERROR);
+    }
+    /**
+     * @protected
+     * @param {?} paymentDetails
+     * @param {?} cardLabels
+     * @return {?}
+     */
+    createCard(paymentDetails, cardLabels) {
+        return {
+            title: paymentDetails.defaultPayment
+                ? cardLabels.textDefaultPaymentMethod
+                : '',
+            textBold: paymentDetails.accountHolderName,
+            text: [paymentDetails.cardNumber, cardLabels.textExpires],
+            img: this.getCardIcon(paymentDetails.cardType.code),
+            actions: [{ name: cardLabels.textUseThisPayment, event: 'send' }],
+            header: this.selectedPayment && this.selectedPayment.id === paymentDetails.id
+                ? cardLabels.textSelected
+                : undefined,
+        };
+    }
+    /**
+     * @return {?}
+     */
+    goNext() {
+        this.setPaymentDetails({
+            paymentDetails: this.selectedPayment,
+            isNewPayment: false,
+        });
+    }
+    /**
+     * @return {?}
+     */
+    goPrevious() {
+        this.routingService.go(this.checkoutStepUrlPrevious);
+    }
+    /**
+     * @deprecated since version 1.3
+     * This method will no longer be in use. Use goNext() instead.
+     * TODO(issue:#4992) deprecated since 1.3
+     * @return {?}
+     */
+    next() {
+        this.goNext();
+    }
+    /**
+     * @deprecated since version 1.3
+     * This method will no longer be in use. Use goPrevious() instead.
+     * TODO(issue:#4992) deprecated since 1.3
+     * @return {?}
+     */
+    back() {
+        this.goPrevious();
+    }
+    /**
+     * @deprecated since version 1.3
+     * This method will no longer be in use. Use selectPaymentMethod() instead.
+     * TODO(issue:#4992) deprecated since 1.3
+     * @param {?} paymentDetails
+     * @return {?}
+     */
+    paymentMethodSelected(paymentDetails) {
+        this.selectPaymentMethod(paymentDetails);
+    }
 }
 PaymentMethodComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-payment-method',
-                template: "<ng-container *ngIf=\"existingPaymentMethods$ | async as existingPaymentMethods\">\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'paymentForm.payment' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        existingPaymentMethods?.length && !newPaymentFormManuallyOpened;\n        else newPaymentForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'paymentForm.choosePaymentMethod' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewPaymentForm()\"\n          >\n            {{ 'paymentForm.addNewPayment' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-payment-card col-md-12 col-lg-6\"\n          *ngFor=\"let method of existingPaymentMethods; let i = index\"\n        >\n          <div class=\"cx-payment-card-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"getCardContent(method) | async\"\n              (sendCard)=\"paymentMethodSelected(method)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"row cx-checkout-btns\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'common.back' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-primary\"\n            [disabled]=\"!selectedPayment\"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newPaymentForm>\n      <cx-payment-form\n        (setPaymentDetails)=\"setPaymentDetails($event)\"\n        (closeForm)=\"hideNewPaymentForm()\"\n        (goBack)=\"back()\"\n        [paymentMethodsCount]=\"existingPaymentMethods?.length || 0\"\n        [setAsDefaultField]=\"!isGuestCheckout\"\n      ></cx-payment-form>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n  </ng-template>\n</ng-container>\n",
+                template: "<ng-container *ngIf=\"existingPaymentMethods$ | async as existingPaymentMethods\">\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'paymentForm.payment' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        (existingPaymentMethods$ | async).length &&\n          !newPaymentFormManuallyOpened;\n        else newPaymentForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'paymentForm.choosePaymentMethod' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewPaymentForm()\"\n          >\n            {{ 'paymentForm.addNewPayment' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-payment-card col-md-12 col-lg-6\"\n          *ngFor=\"let method of existingPaymentMethods; let i = index\"\n        >\n          <div class=\"cx-payment-card-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"getCardContent(method) | async\"\n              (sendCard)=\"paymentMethodSelected(method)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"row cx-checkout-btns\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'common.back' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-primary\"\n            [disabled]=\"!selectedPayment\"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newPaymentForm>\n      <cx-payment-form\n        (setPaymentDetails)=\"setPaymentDetails($event)\"\n        (closeForm)=\"hideNewPaymentForm()\"\n        (goBack)=\"back()\"\n        [paymentMethodsCount]=\"existingPaymentMethods?.length || 0\"\n        [setAsDefaultField]=\"!isGuestCheckout\"\n      ></cx-payment-form>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n  </ng-template>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
