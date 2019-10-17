@@ -1,11 +1,11 @@
 import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, EventEmitter, Output, isDevMode, forwardRef, Renderer2, HostListener, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, NgZone, APP_INITIALIZER, RendererFactory2, INJECTOR, Pipe } from '@angular/core';
-import { RoutingService, ProductService, WindowRef, ConfigModule, Config, CartService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, CartModule, RoutingConfigService, AuthService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, FeaturesConfigModule, CmsConfig, CartDataService, CmsService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, AsmService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, AuthGuard, NotAuthGuard, CmsPageTitleModule, provideConfig, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, AsmModule, StateModule, AuthModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
-import { map, filter, switchMap, tap, debounceTime, startWith, distinctUntilChanged, take, shareReplay, skipWhile, withLatestFrom, first, endWith, pluck } from 'rxjs/operators';
+import { WindowRef, ConfigModule, Config, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, RoutingService, ProductService, CartService, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, CartModule, RoutingConfigService, AuthService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, CmsConfig, CartDataService, CmsService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AsmService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, AuthGuard, isFeatureLevel, NotAuthGuard, CmsPageTitleModule, provideConfig, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, AsmModule, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
+import { Subscription, combineLatest, of, fromEvent, BehaviorSubject, concat, isObservable, from, iif } from 'rxjs';
+import { take, distinctUntilChanged, tap, map, filter, switchMap, debounceTime, startWith, shareReplay, skipWhile, withLatestFrom, first, endWith, scan, pluck } from 'rxjs/operators';
+import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
-import { of, fromEvent, combineLatest, BehaviorSubject, Subscription, concat, isObservable, from } from 'rxjs';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
 import { __awaiter } from 'tslib';
@@ -14,174 +14,6 @@ import { Title, Meta, DomSanitizer } from '@angular/platform-browser';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Options available for modal instance
- *
- * \@todo remove ngb dependency and create our own set of props for this interface
- * @record
- */
-function ModalOptions() { }
-if (false) {
-    /** @type {?|undefined} */
-    ModalOptions.prototype.temp;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * A reference to a newly opened modal
- *
- * \@todo remove ngb dependency and create our own implementation of ModalRef
- */
-class ModalRef extends NgbModalRef {
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * A service to handle modal
- */
-class ModalService {
-    /**
-     * @param {?} ngbModalService
-     */
-    constructor(ngbModalService) {
-        this.ngbModalService = ngbModalService;
-        this.modals = [];
-    }
-    /**
-     * @param {?} content
-     * @param {?=} options
-     * @return {?}
-     */
-    open(content, options) {
-        /** @type {?} */
-        let activeModal;
-        activeModal = this.ngbModalService.open(content, options);
-        this.modals.push(activeModal);
-        return activeModal;
-    }
-    /**
-     * @return {?}
-     */
-    getActiveModal() {
-        /** @type {?} */
-        const modal = this.modals[this.modals.length - 1];
-        return modal ? modal : null;
-    }
-    /**
-     * @param {?=} reason
-     * @return {?}
-     */
-    dismissActiveModal(reason) {
-        /** @type {?} */
-        const modal = this.getActiveModal();
-        if (modal) {
-            modal.dismiss(reason);
-            this.modals.pop();
-        }
-    }
-    /**
-     * @param {?=} reason
-     * @return {?}
-     */
-    closeActiveModal(reason) {
-        /** @type {?} */
-        const modal = this.getActiveModal();
-        if (modal) {
-            modal.close(reason);
-            this.modals.pop();
-        }
-    }
-}
-ModalService.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root',
-            },] }
-];
-/** @nocollapse */
-ModalService.ctorParameters = () => [
-    { type: NgbModal }
-];
-/** @nocollapse */ ModalService.ngInjectableDef = ɵɵdefineInjectable({ factory: function ModalService_Factory() { return new ModalService(ɵɵinject(NgbModal)); }, token: ModalService, providedIn: "root" });
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    ModalService.prototype.modals;
-    /**
-     * @type {?}
-     * @private
-     */
-    ModalService.prototype.ngbModalService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class CurrentProductService {
-    /**
-     * @param {?} routingService
-     * @param {?} productService
-     */
-    constructor(routingService, productService) {
-        this.routingService = routingService;
-        this.productService = productService;
-    }
-    /**
-     * @return {?}
-     */
-    getProduct() {
-        return this.routingService.getRouterState().pipe(map((/**
-         * @param {?} state
-         * @return {?}
-         */
-        state => state.state.params['productCode'])), filter(Boolean), switchMap((/**
-         * @param {?} productCode
-         * @return {?}
-         */
-        (productCode) => this.productService.get(productCode))));
-    }
-}
-CurrentProductService.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root',
-            },] }
-];
-/** @nocollapse */
-CurrentProductService.ctorParameters = () => [
-    { type: RoutingService },
-    { type: ProductService }
-];
-/** @nocollapse */ CurrentProductService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(ɵɵinject(RoutingService), ɵɵinject(ProductService)); }, token: CurrentProductService, providedIn: "root" });
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    CurrentProductService.prototype.routingService;
-    /**
-     * @type {?}
-     * @private
-     */
-    CurrentProductService.prototype.productService;
-}
 
 /**
  * @fileoverview added by tsickle
@@ -563,6 +395,484 @@ IconModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Options available for modal instance
+ *
+ * \@todo remove ngb dependency and create our own set of props for this interface
+ * @record
+ */
+function ModalOptions() { }
+if (false) {
+    /** @type {?|undefined} */
+    ModalOptions.prototype.temp;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * A reference to a newly opened modal
+ *
+ * \@todo remove ngb dependency and create our own implementation of ModalRef
+ */
+class ModalRef extends NgbModalRef {
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * A service to handle modal
+ */
+class ModalService {
+    /**
+     * @param {?} ngbModalService
+     */
+    constructor(ngbModalService) {
+        this.ngbModalService = ngbModalService;
+        this.modals = [];
+    }
+    /**
+     * @param {?} content
+     * @param {?=} options
+     * @return {?}
+     */
+    open(content, options) {
+        /** @type {?} */
+        let activeModal;
+        activeModal = this.ngbModalService.open(content, options);
+        this.modals.push(activeModal);
+        return activeModal;
+    }
+    /**
+     * @return {?}
+     */
+    getActiveModal() {
+        /** @type {?} */
+        const modal = this.modals[this.modals.length - 1];
+        return modal ? modal : null;
+    }
+    /**
+     * @param {?=} reason
+     * @return {?}
+     */
+    dismissActiveModal(reason) {
+        /** @type {?} */
+        const modal = this.getActiveModal();
+        if (modal) {
+            modal.dismiss(reason);
+            this.modals.pop();
+        }
+    }
+    /**
+     * @param {?=} reason
+     * @return {?}
+     */
+    closeActiveModal(reason) {
+        /** @type {?} */
+        const modal = this.getActiveModal();
+        if (modal) {
+            modal.close(reason);
+            this.modals.pop();
+        }
+    }
+}
+ModalService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+ModalService.ctorParameters = () => [
+    { type: NgbModal }
+];
+/** @nocollapse */ ModalService.ngInjectableDef = ɵɵdefineInjectable({ factory: function ModalService_Factory() { return new ModalService(ɵɵinject(NgbModal)); }, token: ModalService, providedIn: "root" });
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    ModalService.prototype.modals;
+    /**
+     * @type {?}
+     * @private
+     */
+    ModalService.prototype.ngbModalService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class AnonymousConsentsDialogComponent {
+    /**
+     * @param {?} config
+     * @param {?} modalService
+     * @param {?} anonymousConsentsService
+     */
+    constructor(config, modalService, anonymousConsentsService) {
+        this.config = config;
+        this.modalService = modalService;
+        this.anonymousConsentsService = anonymousConsentsService;
+        this.subscriptions = new Subscription();
+        this.showLegalDescription = true;
+        this.iconTypes = ICON_TYPE;
+        this.requiredConsents = [];
+        if (Boolean(this.config.anonymousConsents)) {
+            this.showLegalDescription = this.config.anonymousConsents.showLegalDescriptionInDialog;
+            if (Boolean(this.config.anonymousConsents.requiredConsents)) {
+                this.requiredConsents = this.config.anonymousConsents.requiredConsents;
+            }
+        }
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.templates$ = this.anonymousConsentsService.getTemplates();
+        this.consents$ = this.anonymousConsentsService.getConsents();
+    }
+    /**
+     * @param {?=} reason
+     * @return {?}
+     */
+    closeModal(reason) {
+        this.modalService.closeActiveModal(reason);
+    }
+    /**
+     * @return {?}
+     */
+    rejectAll() {
+        this.subscriptions.add(combineLatest([this.templates$, this.consents$])
+            .pipe(take(1), distinctUntilChanged(), tap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([templates, consents]) => templates.forEach((/**
+         * @param {?} template
+         * @return {?}
+         */
+        template => {
+            /** @type {?} */
+            const consent = this.getCorrespondingConsent(template, consents);
+            if (this.anonymousConsentsService.isConsentGiven(consent)) {
+                if (this.isRequiredConsent(template)) {
+                    return;
+                }
+                this.anonymousConsentsService.withdrawConsent(template.id);
+            }
+        })))))
+            .subscribe());
+        this.closeModal('rejectAll');
+    }
+    /**
+     * @return {?}
+     */
+    allowAll() {
+        this.subscriptions.add(combineLatest([this.templates$, this.consents$])
+            .pipe(take(1), distinctUntilChanged(), tap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([templates, consents]) => templates.forEach((/**
+         * @param {?} template
+         * @return {?}
+         */
+        template => {
+            /** @type {?} */
+            const consent = this.getCorrespondingConsent(template, consents);
+            if (consent.consentState == null ||
+                this.anonymousConsentsService.isConsentWithdrawn(consent)) {
+                if (this.isRequiredConsent(template)) {
+                    return;
+                }
+                this.anonymousConsentsService.giveConsent(template.id);
+            }
+        })))))
+            .subscribe());
+        this.closeModal('allowAll');
+    }
+    /**
+     * @private
+     * @param {?} template
+     * @return {?}
+     */
+    isRequiredConsent(template) {
+        return (Boolean(this.config.anonymousConsents) &&
+            Boolean(this.config.anonymousConsents.requiredConsents) &&
+            this.config.anonymousConsents.requiredConsents.includes(template.id));
+    }
+    /**
+     * @param {?} __0
+     * @return {?}
+     */
+    onConsentChange({ given, template, }) {
+        if (given) {
+            this.anonymousConsentsService.giveConsent(template.id);
+        }
+        else {
+            this.anonymousConsentsService.withdrawConsent(template.id);
+        }
+    }
+    /**
+     * @param {?} template
+     * @param {?=} consents
+     * @return {?}
+     */
+    getCorrespondingConsent(template, consents = []) {
+        for (const consent of consents) {
+            if (template.id === consent.templateCode) {
+                return consent;
+            }
+        }
+        return null;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        this.subscriptions.unsubscribe();
+    }
+}
+AnonymousConsentsDialogComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-anonymous-consents-dialog',
+                template: "<div #dialog>\n  <!-- Modal Header -->\n  <div class=\"cx-dialog-header modal-header\">\n    <div class=\"cx-dialog-title modal-title\">\n      {{ 'anonymousConsents.dialog.title' | cxTranslate }}\n    </div>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"closeModal('Cross click')\"\n    >\n      <span aria-hidden=\"true\">\n        <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n      </span>\n    </button>\n  </div>\n  <!-- Separator -->\n  <div\n    class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n  ></div>\n  <div class=\"cx-dialog-description\" *ngIf=\"showLegalDescription\">\n    {{ 'anonymousConsents.dialog.legalDescription' | cxTranslate }}\n    <div\n      class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n    ></div>\n  </div>\n  <!-- Actions -->\n  <div class=\"cx-dialog-buttons\">\n    <a tabindex=\"0\" class=\"btn-link cx-action-link\" (click)=\"rejectAll()\">{{\n      'anonymousConsents.dialog.rejectAll' | cxTranslate\n    }}</a>\n    <span class=\"cx-links-separator\">|</span>\n    <a tabindex=\"0\" class=\"btn-link cx-action-link\" (click)=\"allowAll()\">{{\n      'anonymousConsents.dialog.allowAll' | cxTranslate\n    }}</a>\n  </div>\n  <!-- Modal Body -->\n  <div\n    class=\"cx-dialog-body modal-body\"\n    *ngIf=\"templates$ | async as templates\"\n  >\n    <div *ngIf=\"consents$ | async as consents\">\n      <div\n        class=\"cx-dialog-row col-sm-12 col-md-6\"\n        *ngFor=\"let template of templates\"\n      >\n        <cx-anonymous-consent-form\n          [template]=\"template\"\n          [consent]=\"getCorrespondingConsent(template, consents)\"\n          (consentChanged)=\"onConsentChange($event)\"\n          [requiredConsents]=\"requiredConsents\"\n        ></cx-anonymous-consent-form>\n      </div>\n    </div>\n  </div>\n</div>\n"
+            }] }
+];
+/** @nocollapse */
+AnonymousConsentsDialogComponent.ctorParameters = () => [
+    { type: AnonymousConsentsConfig },
+    { type: ModalService },
+    { type: AnonymousConsentsService }
+];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    AnonymousConsentsDialogComponent.prototype.subscriptions;
+    /** @type {?} */
+    AnonymousConsentsDialogComponent.prototype.showLegalDescription;
+    /** @type {?} */
+    AnonymousConsentsDialogComponent.prototype.iconTypes;
+    /** @type {?} */
+    AnonymousConsentsDialogComponent.prototype.requiredConsents;
+    /** @type {?} */
+    AnonymousConsentsDialogComponent.prototype.templates$;
+    /** @type {?} */
+    AnonymousConsentsDialogComponent.prototype.consents$;
+    /**
+     * @type {?}
+     * @private
+     */
+    AnonymousConsentsDialogComponent.prototype.config;
+    /**
+     * @type {?}
+     * @private
+     */
+    AnonymousConsentsDialogComponent.prototype.modalService;
+    /**
+     * @type {?}
+     * @private
+     */
+    AnonymousConsentsDialogComponent.prototype.anonymousConsentsService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class AnonymousConsentManagementBannerComponent {
+    /**
+     * @param {?} modalService
+     * @param {?} anonymousConsentsService
+     */
+    constructor(modalService, anonymousConsentsService) {
+        this.modalService = modalService;
+        this.anonymousConsentsService = anonymousConsentsService;
+        this.subscriptions = new Subscription();
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.templatesUpdated$ = this.anonymousConsentsService
+            .getTemplatesUpdated()
+            .pipe(tap((/**
+         * @param {?} updated
+         * @return {?}
+         */
+        updated => {
+            if (updated) {
+                this.anonymousConsentsService.toggleAnonymousConsentsBannerVisibility(true);
+            }
+        })));
+        this.bannerVisible$ = this.anonymousConsentsService.isAnonymousConsentsBannerVisible();
+    }
+    /**
+     * @return {?}
+     */
+    viewDetails() {
+        this.hideBanner();
+        this.modalService.open(AnonymousConsentsDialogComponent, {
+            centered: true,
+            size: 'lg',
+        });
+    }
+    /**
+     * @return {?}
+     */
+    allowAll() {
+        this.subscriptions.add(this.anonymousConsentsService
+            .giveAllConsents()
+            .pipe(tap((/**
+         * @param {?} _
+         * @return {?}
+         */
+        _ => this.hideBanner())))
+            .subscribe());
+    }
+    /**
+     * @return {?}
+     */
+    hideBanner() {
+        this.anonymousConsentsService.toggleAnonymousConsentsBannerVisibility(false);
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        this.subscriptions.unsubscribe();
+    }
+}
+AnonymousConsentManagementBannerComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-anonymous-consent-management-banner',
+                template: "<!-- TODO(issue:4989) Anonymous consents -->\n<ng-container *cxFeatureLevel=\"'1.3'\">\n  <ng-container *ngIf=\"templatesUpdated$ | async\"></ng-container>\n  <ng-container *ngIf=\"bannerVisible$ | async as bannerVisible\">\n    <div\n      [ngClass]=\"{ 'anonymous-consent-banner-hidden': !bannerVisible }\"\n      class=\"anonymous-consent-banner\"\n    >\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-lg-8 col-xs-12\">\n            <div class=\"cx-banner-title\">\n              {{ 'anonymousConsents.banner.title' | cxTranslate }}\n            </div>\n            <div class=\"cx-banner-description\">\n              {{ 'anonymousConsents.banner.description' | cxTranslate }}\n            </div>\n          </div>\n\n          <div class=\"col-lg-4 col-xs-12 cx-banner-buttons\">\n            <button class=\"btn btn-action\" (click)=\"viewDetails()\">\n              {{ 'anonymousConsents.banner.viewDetails' | cxTranslate }}\n            </button>\n            <button class=\"btn btn-primary\" (click)=\"allowAll()\">\n              {{ 'anonymousConsents.banner.allowAll' | cxTranslate }}\n            </button>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n</ng-container>\n"
+            }] }
+];
+/** @nocollapse */
+AnonymousConsentManagementBannerComponent.ctorParameters = () => [
+    { type: ModalService },
+    { type: AnonymousConsentsService }
+];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    AnonymousConsentManagementBannerComponent.prototype.subscriptions;
+    /** @type {?} */
+    AnonymousConsentManagementBannerComponent.prototype.bannerVisible$;
+    /** @type {?} */
+    AnonymousConsentManagementBannerComponent.prototype.templatesUpdated$;
+    /**
+     * @type {?}
+     * @private
+     */
+    AnonymousConsentManagementBannerComponent.prototype.modalService;
+    /**
+     * @type {?}
+     * @private
+     */
+    AnonymousConsentManagementBannerComponent.prototype.anonymousConsentsService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class AnonymousConsentManagementBannerModule {
+}
+AnonymousConsentManagementBannerModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    I18nModule,
+                    FeaturesConfigModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            AnonymousConsentManagementBannerComponent: {
+                                component: AnonymousConsentManagementBannerComponent,
+                            },
+                        },
+                    }))),
+                ],
+                declarations: [AnonymousConsentManagementBannerComponent],
+                exports: [AnonymousConsentManagementBannerComponent],
+                entryComponents: [AnonymousConsentManagementBannerComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CurrentProductService {
+    /**
+     * @param {?} routingService
+     * @param {?} productService
+     */
+    constructor(routingService, productService) {
+        this.routingService = routingService;
+        this.productService = productService;
+    }
+    /**
+     * @return {?}
+     */
+    getProduct() {
+        return this.routingService.getRouterState().pipe(map((/**
+         * @param {?} state
+         * @return {?}
+         */
+        state => state.state.params['productCode'])), filter(Boolean), switchMap((/**
+         * @param {?} productCode
+         * @return {?}
+         */
+        (productCode) => this.productService.get(productCode))));
+    }
+}
+CurrentProductService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+CurrentProductService.ctorParameters = () => [
+    { type: RoutingService },
+    { type: ProductService }
+];
+/** @nocollapse */ CurrentProductService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(ɵɵinject(RoutingService), ɵɵinject(ProductService)); }, token: CurrentProductService, providedIn: "root" });
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    CurrentProductService.prototype.routingService;
+    /**
+     * @type {?}
+     * @private
+     */
+    CurrentProductService.prototype.productService;
+}
 
 /**
  * @fileoverview added by tsickle
@@ -10445,6 +10755,129 @@ SeoModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class AnonymousConsentFormComponent {
+    constructor() {
+        this.iconTypes = ICON_TYPE;
+        this.consentGiven$ = new BehaviorSubject(false);
+        this.accordionExpanded = false;
+        this.accordionHeight = '0px';
+        this.requiredConsents = [];
+        this.consentChanged = new EventEmitter();
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        if (this.consent) {
+            this.consentGiven$.next(this.consent.consentState === ANONYMOUS_CONSENT_STATUS.GIVEN);
+        }
+        this.consentGivenTranslation$ = this.consentGiven$.pipe(map((/**
+         * @param {?} given
+         * @return {?}
+         */
+        given => given ? 'anonymousConsents.dialog.on' : 'anonymousConsents.dialog.off')));
+    }
+    /**
+     * @return {?}
+     */
+    onConsentChange() {
+        this.consentGiven$.next(!this.consentGiven$.value);
+        this.consentChanged.emit({
+            given: this.consentGiven$.value,
+            template: this.template,
+        });
+    }
+    /**
+     * @param {?=} keyEvent
+     * @return {?}
+     */
+    toggleAccordion(keyEvent) {
+        /** @type {?} */
+        let expand = true;
+        if (keyEvent && keyEvent.key !== ' ' && keyEvent.key !== 'Enter') {
+            expand = false;
+        }
+        if (expand) {
+            this.accordionExpanded = !this.accordionExpanded;
+            this.accordionHeight = this.accordionExpanded
+                ? `${this.accordionContent.nativeElement.clientHeight}px`
+                : '0px';
+        }
+    }
+    /**
+     * @param {?} templateId
+     * @return {?}
+     */
+    isRequired(templateId) {
+        return this.requiredConsents.includes(templateId);
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        this.consentGiven$.unsubscribe();
+    }
+}
+AnonymousConsentFormComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-anonymous-consent-form',
+                template: "<div\n  class=\"form-check cx-accordion\"\n  role=\"tablist\"\n  aria-live=\"polite\"\n  data-behavior=\"accordion\"\n>\n  <div class=\"cx-accordion-item\">\n    <div\n      [id]=\"'tab' + template?.id\"\n      tabindex=\"0\"\n      class=\"cx-accordion-tab\"\n      [attr.aria-controls]=\"'panel' + template?.id\"\n      role=\"tab\"\n      [attr.aria-selected]=\"accordionExpanded\"\n      [attr.aria-expanded]=\"accordionExpanded\"\n      (click)=\"toggleAccordion()\"\n      (keydown)=\"toggleAccordion($event)\"\n    >\n      <cx-icon [type]=\"iconTypes.CARET_DOWN\"></cx-icon>\n      <span class=\"cx-accordion-title\" tabindex=\"-1\"\n        >{{ template?.name }}\n      </span>\n    </div>\n\n    <div\n      [id]=\"'panel' + template?.id\"\n      class=\"cx-accordion-tabpanel\"\n      role=\"tabpanel\"\n      [attr.aria-hidden]=\"!accordionExpanded\"\n      [attr.aria-labelledby]=\"'tab' + template?.id\"\n      [style.height]=\"accordionHeight\"\n    >\n      <div class=\"cx-accordion-content\" #accordionContent>\n        <p>{{ template?.description }}</p>\n      </div>\n    </div>\n\n    <div class=\"cx-toggle-button\">\n      <input\n        [id]=\"template?.id\"\n        type=\"checkbox\"\n        [checked]=\"consentGiven$ | async\"\n        (change)=\"onConsentChange()\"\n        [disabled]=\"isRequired(template?.id)\"\n      />\n\n      <label [for]=\"template?.id\">\n        <div class=\"cx-toggle-switch\"></div>\n        <div class=\"cx-toggle-text\">\n          {{ consentGivenTranslation$ | async | cxTranslate }}\n        </div>\n      </label>\n    </div>\n  </div>\n</div>\n"
+            }] }
+];
+/** @nocollapse */
+AnonymousConsentFormComponent.ctorParameters = () => [];
+AnonymousConsentFormComponent.propDecorators = {
+    accordionContent: [{ type: ViewChild, args: ['accordionContent', { static: false },] }],
+    template: [{ type: Input }],
+    consent: [{ type: Input }],
+    requiredConsents: [{ type: Input }],
+    consentChanged: [{ type: Output }]
+};
+if (false) {
+    /** @type {?} */
+    AnonymousConsentFormComponent.prototype.iconTypes;
+    /** @type {?} */
+    AnonymousConsentFormComponent.prototype.consentGiven$;
+    /** @type {?} */
+    AnonymousConsentFormComponent.prototype.consentGivenTranslation$;
+    /** @type {?} */
+    AnonymousConsentFormComponent.prototype.accordionExpanded;
+    /** @type {?} */
+    AnonymousConsentFormComponent.prototype.accordionHeight;
+    /** @type {?} */
+    AnonymousConsentFormComponent.prototype.accordionContent;
+    /** @type {?} */
+    AnonymousConsentFormComponent.prototype.template;
+    /** @type {?} */
+    AnonymousConsentFormComponent.prototype.consent;
+    /** @type {?} */
+    AnonymousConsentFormComponent.prototype.requiredConsents;
+    /** @type {?} */
+    AnonymousConsentFormComponent.prototype.consentChanged;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class AnonymousConsentsModule {
+}
+AnonymousConsentsModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule, I18nModule, IconModule],
+                declarations: [
+                    AnonymousConsentsDialogComponent,
+                    AnonymousConsentFormComponent,
+                ],
+                entryComponents: [AnonymousConsentsDialogComponent],
+                exports: [AnonymousConsentsDialogComponent, AnonymousConsentFormComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class StorefrontComponent {
     /**
      * @param {?} hamburgerMenuService
@@ -10547,6 +10980,7 @@ MainModule.decorators = [
                     PageLayoutModule,
                     SeoModule,
                     PageSlotModule,
+                    AnonymousConsentsModule,
                     FeaturesConfigModule,
                 ],
                 declarations: [StorefrontComponent],
@@ -13175,8 +13609,15 @@ CloseAccountModule.decorators = [
  */
 class ConsentManagementFormComponent {
     constructor() {
-        this.consentChanged = new EventEmitter();
+        this.iconTypes = ICON_TYPE;
+        this.consentGivenTranslation$ = new BehaviorSubject('consentManagementForm.off');
+        this.accordionExpanded = false;
+        this.accordionHeight = '0px';
         this.consentGiven = false;
+        this.requiredConsents = [];
+        // TODO(issue:4989) Anonymous consents - remove
+        this.isAnonymousConsentsEnabled = false;
+        this.consentChanged = new EventEmitter();
     }
     /**
      * @return {?}
@@ -13185,9 +13626,11 @@ class ConsentManagementFormComponent {
         if (this.consentTemplate && this.consentTemplate.currentConsent) {
             if (this.consentTemplate.currentConsent.consentWithdrawnDate) {
                 this.consentGiven = false;
+                this.consentGivenTranslation$.next('consentManagementForm.off');
             }
             else if (this.consentTemplate.currentConsent.consentGivenDate) {
                 this.consentGiven = true;
+                this.consentGivenTranslation$.next('consentManagementForm.on');
             }
         }
     }
@@ -13195,31 +13638,82 @@ class ConsentManagementFormComponent {
      * @return {?}
      */
     onConsentChange() {
+        this.consentGiven = !this.consentGiven;
+        if (this.consentGiven) {
+            this.consentGivenTranslation$.next('consentManagementForm.on');
+        }
+        else {
+            this.consentGivenTranslation$.next('consentManagementForm.off');
+        }
         this.consentChanged.emit({
-            given: !this.consentGiven,
+            given: this.consentGiven,
             template: this.consentTemplate,
         });
+    }
+    /**
+     * @param {?=} keyEvent
+     * @return {?}
+     */
+    toggleAccordion(keyEvent) {
+        /** @type {?} */
+        let expand = true;
+        if (keyEvent && keyEvent.key !== ' ' && keyEvent.key !== 'Enter') {
+            expand = false;
+        }
+        if (expand) {
+            this.accordionExpanded = !this.accordionExpanded;
+            this.accordionHeight = this.accordionExpanded
+                ? `${this.accordionContent.nativeElement.clientHeight}px`
+                : '0px';
+        }
+    }
+    /**
+     * @param {?} templateId
+     * @return {?}
+     */
+    isRequired(templateId) {
+        // TODO(issue:4989) Anonymous consents - remove this.isAnonymousConsentsEnabled check
+        return this.isAnonymousConsentsEnabled
+            ? this.requiredConsents.includes(templateId)
+            : false;
     }
 }
 ConsentManagementFormComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-consent-management-form',
-                template: "<div class=\"form-check\">\n  <label>\n    <input\n      type=\"checkbox\"\n      class=\"form-check-input\"\n      [checked]=\"consentGiven\"\n      (change)=\"onConsentChange()\"\n    />\n    <span class=\"form-check-label\">\n      {{ consentTemplate?.description }}\n    </span>\n  </label>\n</div>\n"
+                template: "<!-- TODO(issue:4989) Anonymous consents - remove the wrapping `<ng-container *ngIf=\"isAnonymousConsentsEnabled; else legacyConsentManagementForm\">` -->\n<ng-container\n  *ngIf=\"isAnonymousConsentsEnabled; else legacyConsentManagementForm\"\n>\n  <div\n    class=\"form-check cx-accordion\"\n    role=\"tablist\"\n    aria-live=\"polite\"\n    data-behavior=\"accordion\"\n  >\n    <div class=\"cx-accordion-item\">\n      <div\n        [id]=\"'tab' + consentTemplate?.id\"\n        tabindex=\"0\"\n        class=\"cx-accordion-tab\"\n        [attr.aria-controls]=\"'panel' + consentTemplate?.id\"\n        role=\"tab\"\n        [attr.aria-selected]=\"accordionExpanded\"\n        [attr.aria-expanded]=\"accordionExpanded\"\n        (click)=\"toggleAccordion()\"\n        (keydown)=\"toggleAccordion($event)\"\n      >\n        <cx-icon [type]=\"iconTypes.CARET_DOWN\"></cx-icon>\n        <span class=\"cx-accordion-title\" tabindex=\"-1\"\n          >{{ consentTemplate?.name }}\n        </span>\n      </div>\n\n      <div\n        [id]=\"'panel' + consentTemplate?.id\"\n        class=\"cx-accordion-tabpanel\"\n        role=\"tabpanel\"\n        [attr.aria-hidden]=\"!accordionExpanded\"\n        [attr.aria-labelledby]=\"'tab' + consentTemplate?.id\"\n        [style.height]=\"accordionHeight\"\n      >\n        <div class=\"cx-accordion-content\" #accordionContent>\n          <p>{{ consentTemplate?.description }}</p>\n        </div>\n      </div>\n\n      <div class=\"cx-toggle-button\">\n        <input\n          type=\"checkbox\"\n          [id]=\"consentTemplate?.id\"\n          [checked]=\"consentGiven\"\n          [disabled]=\"isRequired(consentTemplate?.id)\"\n          (change)=\"onConsentChange()\"\n        />\n\n        <label [for]=\"consentTemplate?.id\">\n          <div class=\"cx-toggle-switch\"></div>\n          <div class=\"cx-toggle-text\">\n            {{ consentGivenTranslation$ | async | cxTranslate }}\n          </div>\n        </label>\n      </div>\n    </div>\n  </div>\n</ng-container>\n\n<!-- TODO(issue:4989) Anonymous consents - remove the whole `<ng-template #legacyConsentManagementForm>...</ng-template>` block -->\n<ng-template #legacyConsentManagementForm>\n  <div class=\"form-check\">\n    <label>\n      <input\n        type=\"checkbox\"\n        class=\"form-check-input\"\n        (change)=\"onConsentChange()\"\n        [checked]=\"consentGiven\"\n      />\n      <span class=\"form-check-label\">\n        {{ consentTemplate?.description }}\n      </span>\n    </label>\n  </div>\n</ng-template>\n"
             }] }
 ];
 /** @nocollapse */
 ConsentManagementFormComponent.ctorParameters = () => [];
 ConsentManagementFormComponent.propDecorators = {
+    accordionContent: [{ type: ViewChild, args: ['accordionContent', { static: false },] }],
     consentTemplate: [{ type: Input }],
+    requiredConsents: [{ type: Input }],
+    isAnonymousConsentsEnabled: [{ type: Input }],
     consentChanged: [{ type: Output }]
 };
 if (false) {
     /** @type {?} */
-    ConsentManagementFormComponent.prototype.consentTemplate;
+    ConsentManagementFormComponent.prototype.iconTypes;
     /** @type {?} */
-    ConsentManagementFormComponent.prototype.consentChanged;
+    ConsentManagementFormComponent.prototype.consentGivenTranslation$;
+    /** @type {?} */
+    ConsentManagementFormComponent.prototype.accordionExpanded;
+    /** @type {?} */
+    ConsentManagementFormComponent.prototype.accordionHeight;
     /** @type {?} */
     ConsentManagementFormComponent.prototype.consentGiven;
+    /** @type {?} */
+    ConsentManagementFormComponent.prototype.accordionContent;
+    /** @type {?} */
+    ConsentManagementFormComponent.prototype.consentTemplate;
+    /** @type {?} */
+    ConsentManagementFormComponent.prototype.requiredConsents;
+    /** @type {?} */
+    ConsentManagementFormComponent.prototype.isAnonymousConsentsEnabled;
+    /** @type {?} */
+    ConsentManagementFormComponent.prototype.consentChanged;
 }
 
 /**
@@ -13230,11 +13724,21 @@ class ConsentManagementComponent {
     /**
      * @param {?} userConsentService
      * @param {?} globalMessageService
+     * @param {?=} anonymousConsentsConfig
+     * @param {?=} anonymousConsentsService
+     * @param {?=} authService
      */
-    constructor(userConsentService, globalMessageService) {
+    constructor(userConsentService, globalMessageService, anonymousConsentsConfig, anonymousConsentsService, authService) {
         this.userConsentService = userConsentService;
         this.globalMessageService = globalMessageService;
+        this.anonymousConsentsConfig = anonymousConsentsConfig;
+        this.anonymousConsentsService = anonymousConsentsService;
+        this.authService = authService;
         this.subscriptions = new Subscription();
+        this.allConsentsLoading = new BehaviorSubject(false);
+        this.requiredConsents = [];
+        // TODO(issue:4989) Anonymous consents - remove
+        this.isAnonymousConsentsEnabled = isFeatureLevel(this.anonymousConsentsConfig, '1.3');
     }
     /**
      * @return {?}
@@ -13244,11 +13748,17 @@ class ConsentManagementComponent {
             this.userConsentService.getConsentsResultLoading(),
             this.userConsentService.getGiveConsentResultLoading(),
             this.userConsentService.getWithdrawConsentResultLoading(),
+            this.authService.isUserLoggedIn(),
+            this.allConsentsLoading,
         ]).pipe(map((/**
          * @param {?} __0
          * @return {?}
          */
-        ([consentLoading, giveConsentLoading, withdrawConsentLoading]) => consentLoading || giveConsentLoading || withdrawConsentLoading)));
+        ([consentLoading, giveConsentLoading, withdrawConsentLoading, isUserLoggedIn, allConsentsLoading,]) => consentLoading ||
+            giveConsentLoading ||
+            withdrawConsentLoading ||
+            !isUserLoggedIn ||
+            allConsentsLoading)));
         this.consentListInit();
         this.giveConsentInit();
         this.withdrawConsentInit();
@@ -13258,15 +13768,64 @@ class ConsentManagementComponent {
      * @return {?}
      */
     consentListInit() {
-        this.templateList$ = this.userConsentService.getConsents().pipe(tap((/**
-         * @param {?} templateList
+        this.templateList$ = this.userConsentService.getConsents().pipe(withLatestFrom(this.anonymousConsentsService.getTemplates(), this.authService.isUserLoggedIn()), filter((/**
+         * @param {?} __0
          * @return {?}
          */
-        templateList => {
+        ([_templateList, _anonymousTemplates, isUserLoggedIn]) => isUserLoggedIn)), tap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([templateList, _anonymousTemplates]) => {
             if (!this.consentsExists(templateList)) {
                 this.userConsentService.loadConsents();
             }
+        })), map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([templateList, anonymousTemplates]) => {
+            if (!this.isAnonymousConsentsEnabled) {
+                return templateList;
+            }
+            if (Boolean(this.anonymousConsentsConfig.anonymousConsents)) {
+                if (Boolean(this.anonymousConsentsConfig.anonymousConsents.requiredConsents)) {
+                    this.requiredConsents = this.anonymousConsentsConfig.anonymousConsents.requiredConsents;
+                }
+                if (Boolean(this.anonymousConsentsConfig.anonymousConsents
+                    .consentManagementPage)) {
+                    return this.hideAnonymousConsents(templateList, anonymousTemplates);
+                }
+            }
+            return templateList;
         })));
+    }
+    /**
+     * @private
+     * @param {?} templateList
+     * @param {?=} anonymousTemplates
+     * @return {?}
+     */
+    hideAnonymousConsents(templateList, anonymousTemplates = []) {
+        /** @type {?} */
+        let hideTemplateIds = [];
+        if (!this.anonymousConsentsConfig.anonymousConsents.consentManagementPage
+            .showAnonymousConsents) {
+            hideTemplateIds = anonymousTemplates.map((/**
+             * @param {?} template
+             * @return {?}
+             */
+            template => template.id));
+            return this.userConsentService.filterConsentTemplates(templateList, hideTemplateIds);
+        }
+        if (Boolean(this.anonymousConsentsConfig.anonymousConsents.consentManagementPage
+            .hideConsents) &&
+            this.anonymousConsentsConfig.anonymousConsents.consentManagementPage
+                .hideConsents.length > 0) {
+            hideTemplateIds = this.anonymousConsentsConfig.anonymousConsents
+                .consentManagementPage.hideConsents;
+        }
+        return this.userConsentService.filterConsentTemplates(templateList, hideTemplateIds);
     }
     /**
      * @private
@@ -13352,10 +13911,172 @@ class ConsentManagementComponent {
         }
     }
     /**
+     * @param {?=} templates
+     * @return {?}
+     */
+    rejectAll(templates = []) {
+        /** @type {?} */
+        const consentsToWithdraw = [];
+        templates.forEach((/**
+         * @param {?} template
+         * @return {?}
+         */
+        template => {
+            if (this.isConsentGiven(template)) {
+                if (this.isRequiredConsent(template)) {
+                    return;
+                }
+                consentsToWithdraw.push(template);
+            }
+        }));
+        this.allConsentsLoading.next(true);
+        this.subscriptions.add(this.setupWithdrawalStream(consentsToWithdraw)
+            .pipe(tap((/**
+         * @param {?} _timesLoaded
+         * @return {?}
+         */
+        _timesLoaded => this.allConsentsLoading.next(false))))
+            .subscribe());
+    }
+    /**
+     * @private
+     * @param {?=} consentsToWithdraw
+     * @return {?}
+     */
+    setupWithdrawalStream(consentsToWithdraw = []) {
+        /** @type {?} */
+        const loading$ = concat(this.userConsentService.getWithdrawConsentResultLoading()).pipe(distinctUntilChanged(), filter((/**
+         * @param {?} loading
+         * @return {?}
+         */
+        loading => !loading)));
+        /** @type {?} */
+        const count$ = loading$.pipe(scan((/**
+         * @param {?} acc
+         * @param {?} _value
+         * @return {?}
+         */
+        (acc, _value) => acc + 1), -1));
+        /** @type {?} */
+        const withdraw$ = count$.pipe(tap((/**
+         * @param {?} i
+         * @return {?}
+         */
+        i => {
+            if (i < consentsToWithdraw.length) {
+                this.userConsentService.withdrawConsent(consentsToWithdraw[i].currentConsent.code);
+            }
+        })));
+        /** @type {?} */
+        const checkTimesLoaded$ = withdraw$.pipe(filter((/**
+         * @param {?} timesLoaded
+         * @return {?}
+         */
+        timesLoaded => timesLoaded === consentsToWithdraw.length)));
+        return checkTimesLoaded$;
+    }
+    /**
+     * @private
+     * @param {?} consentTemplate
+     * @return {?}
+     */
+    isConsentGiven(consentTemplate) {
+        return (Boolean(consentTemplate.currentConsent) &&
+            Boolean(consentTemplate.currentConsent.consentGivenDate) &&
+            !Boolean(consentTemplate.currentConsent.consentWithdrawnDate));
+    }
+    /**
+     * @param {?=} templates
+     * @return {?}
+     */
+    allowAll(templates = []) {
+        /** @type {?} */
+        const consentsToGive = [];
+        templates.forEach((/**
+         * @param {?} template
+         * @return {?}
+         */
+        template => {
+            if (this.isConsentWithdrawn(template)) {
+                if (this.isRequiredConsent(template)) {
+                    return;
+                }
+                consentsToGive.push(template);
+            }
+        }));
+        this.allConsentsLoading.next(true);
+        this.subscriptions.add(this.setupGiveStream(consentsToGive)
+            .pipe(tap((/**
+         * @param {?} _timesLoaded
+         * @return {?}
+         */
+        _timesLoaded => this.allConsentsLoading.next(false))))
+            .subscribe());
+    }
+    /**
+     * @private
+     * @param {?=} consentsToGive
+     * @return {?}
+     */
+    setupGiveStream(consentsToGive = []) {
+        /** @type {?} */
+        const loading$ = concat(this.userConsentService.getGiveConsentResultLoading()).pipe(distinctUntilChanged(), filter((/**
+         * @param {?} loading
+         * @return {?}
+         */
+        loading => !loading)));
+        /** @type {?} */
+        const count$ = loading$.pipe(scan((/**
+         * @param {?} acc
+         * @param {?} _value
+         * @return {?}
+         */
+        (acc, _value) => acc + 1), -1));
+        /** @type {?} */
+        const giveConsent$ = count$.pipe(tap((/**
+         * @param {?} i
+         * @return {?}
+         */
+        i => {
+            if (i < consentsToGive.length) {
+                this.userConsentService.giveConsent(consentsToGive[i].id, consentsToGive[i].version);
+            }
+        })));
+        /** @type {?} */
+        const checkTimesLoaded$ = giveConsent$.pipe(filter((/**
+         * @param {?} timesLoaded
+         * @return {?}
+         */
+        timesLoaded => timesLoaded === consentsToGive.length)));
+        return checkTimesLoaded$;
+    }
+    /**
+     * @private
+     * @param {?} consentTemplate
+     * @return {?}
+     */
+    isConsentWithdrawn(consentTemplate) {
+        if (Boolean(consentTemplate.currentConsent)) {
+            return Boolean(consentTemplate.currentConsent.consentWithdrawnDate);
+        }
+        return true;
+    }
+    /**
+     * @private
+     * @param {?} template
+     * @return {?}
+     */
+    isRequiredConsent(template) {
+        return (Boolean(this.anonymousConsentsConfig.anonymousConsents) &&
+            Boolean(this.anonymousConsentsConfig.anonymousConsents.requiredConsents) &&
+            this.anonymousConsentsConfig.anonymousConsents.requiredConsents.includes(template.id));
+    }
+    /**
      * @return {?}
      */
     ngOnDestroy() {
         this.subscriptions.unsubscribe();
+        this.allConsentsLoading.unsubscribe();
         this.userConsentService.resetGiveConsentProcessState();
         this.userConsentService.resetWithdrawConsentProcessState();
     }
@@ -13363,13 +14084,16 @@ class ConsentManagementComponent {
 ConsentManagementComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-consent-management',
-                template: "<ng-container>\n  <div *ngIf=\"loading$ | async; else consentManagementForm\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #consentManagementForm>\n    <div class=\"row d-flex justify-content-center\">\n      <div class=\"col-md-8\">\n        <cx-consent-management-form\n          *ngFor=\"let consentTemplate of templateList$ | async\"\n          [consentTemplate]=\"consentTemplate\"\n          (consentChanged)=\"onConsentChange($event)\"\n        ></cx-consent-management-form>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n"
+                template: "<!-- TODO(issue:4989) Anonymous consents - remove the wrapping `<ng-container *ngIf=\"isAnonymousConsentsEnabled; else legacyConsentManagementPage\">` -->\n<ng-container\n  *ngIf=\"isAnonymousConsentsEnabled; else legacyConsentManagementPage\"\n>\n  <div *ngIf=\"loading$ | async; else consentManagementForm\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #consentManagementForm>\n    <ng-container *ngIf=\"templateList$ | async as templateList\">\n      <div class=\"cx-consent-action-links\">\n        <div class=\"col-sm-12 col-md-8 col-lg-6\">\n          <a\n            tabindex=\"0\"\n            class=\"btn-link cx-action-link\"\n            (click)=\"rejectAll(templateList)\"\n            >{{ 'consentManagementForm.rejectAll' | cxTranslate }}</a\n          >\n          <span class=\"cx-links-separator\">|</span>\n          <a\n            tabindex=\"0\"\n            class=\"btn-link cx-action-link\"\n            (click)=\"allowAll(templateList)\"\n            >{{ 'consentManagementForm.allowAll' | cxTranslate }}</a\n          >\n        </div>\n      </div>\n\n      <div class=\"cx-consent-toggles\">\n        <div class=\"col-sm-12 col-md-8 col-lg-6\">\n          <!-- TODO(issue:4989) Anonymous consents - remove `[isAnonymousConsentsEnabled]=\"isAnonymousConsentsEnabled\"` -->\n          <cx-consent-management-form\n            *ngFor=\"let consentTemplate of templateList\"\n            [consentTemplate]=\"consentTemplate\"\n            [requiredConsents]=\"requiredConsents\"\n            [isAnonymousConsentsEnabled]=\"isAnonymousConsentsEnabled\"\n            (consentChanged)=\"onConsentChange($event)\"\n          ></cx-consent-management-form>\n        </div>\n      </div>\n    </ng-container>\n  </ng-template>\n</ng-container>\n\n<!-- TODO(issue:4989) Anonymous consents - remove this whole `<ng-template>` -->\n<ng-template #legacyConsentManagementPage>\n  <div *ngIf=\"loading$ | async; else consentManagementForm\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #consentManagementForm>\n    <div class=\"row d-flex justify-content-center\">\n      <div class=\"col-md-8\">\n        <cx-consent-management-form\n          *ngFor=\"let consentTemplate of templateList$ | async\"\n          [consentTemplate]=\"consentTemplate\"\n          (consentChanged)=\"onConsentChange($event)\"\n        ></cx-consent-management-form>\n      </div>\n    </div>\n  </ng-template>\n</ng-template>\n"
             }] }
 ];
 /** @nocollapse */
 ConsentManagementComponent.ctorParameters = () => [
     { type: UserConsentService },
-    { type: GlobalMessageService }
+    { type: GlobalMessageService },
+    { type: AnonymousConsentsConfig },
+    { type: AnonymousConsentsService },
+    { type: AuthService }
 ];
 if (false) {
     /**
@@ -13377,10 +14101,19 @@ if (false) {
      * @private
      */
     ConsentManagementComponent.prototype.subscriptions;
+    /**
+     * @type {?}
+     * @private
+     */
+    ConsentManagementComponent.prototype.allConsentsLoading;
     /** @type {?} */
     ConsentManagementComponent.prototype.templateList$;
     /** @type {?} */
     ConsentManagementComponent.prototype.loading$;
+    /** @type {?} */
+    ConsentManagementComponent.prototype.requiredConsents;
+    /** @type {?} */
+    ConsentManagementComponent.prototype.isAnonymousConsentsEnabled;
     /**
      * @type {?}
      * @private
@@ -13391,6 +14124,21 @@ if (false) {
      * @private
      */
     ConsentManagementComponent.prototype.globalMessageService;
+    /**
+     * @type {?}
+     * @private
+     */
+    ConsentManagementComponent.prototype.anonymousConsentsConfig;
+    /**
+     * @type {?}
+     * @private
+     */
+    ConsentManagementComponent.prototype.anonymousConsentsService;
+    /**
+     * @type {?}
+     * @private
+     */
+    ConsentManagementComponent.prototype.authService;
 }
 
 /**
@@ -13403,6 +14151,11 @@ ConsentManagementModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
                     CommonModule,
+                    FormsModule,
+                    ReactiveFormsModule,
+                    SpinnerModule,
+                    I18nModule,
+                    IconModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             ConsentManagementComponent: {
@@ -13411,10 +14164,6 @@ ConsentManagementModule.decorators = [
                             },
                         },
                     }))),
-                    FormsModule,
-                    ReactiveFormsModule,
-                    SpinnerModule,
-                    I18nModule,
                 ],
                 declarations: [ConsentManagementComponent, ConsentManagementFormComponent],
                 exports: [ConsentManagementComponent, ConsentManagementFormComponent],
@@ -16047,10 +16796,16 @@ class FooterNavigationComponent {
     /**
      * @param {?} componentData
      * @param {?} service
+     * @param {?=} anonymousConsentsConfig
+     * @param {?=} authService
+     * @param {?=} modalService
      */
-    constructor(componentData, service) {
+    constructor(componentData, service, anonymousConsentsConfig, authService, modalService) {
         this.componentData = componentData;
         this.service = service;
+        this.anonymousConsentsConfig = anonymousConsentsConfig;
+        this.authService = authService;
+        this.modalService = modalService;
         this.node$ = this.service.getNavigationNode(this.componentData.data$);
         this.styleClass$ = this.componentData.data$.pipe(map((/**
          * @param {?} d
@@ -16059,18 +16814,53 @@ class FooterNavigationComponent {
         d => d.styleClass)));
         this.data$ = this.componentData.data$;
     }
+    /**
+     * @return {?}
+     */
+    get showConsentPreferences() {
+        // TODO(issue:4989) Anonymous consents - remove the `iif` operator and just return the `trueResult` parameter
+        return iif((/**
+         * @return {?}
+         */
+        () => Boolean(this.anonymousConsentsConfig) &&
+            isFeatureLevel(this.anonymousConsentsConfig, '1.3')), this.authService
+            .isUserLoggedIn()
+            .pipe(map((/**
+         * @param {?} isUserLoggedIn
+         * @return {?}
+         */
+        isUserLoggedIn => !isUserLoggedIn &&
+            Boolean(this.anonymousConsentsConfig.anonymousConsents) &&
+            this.anonymousConsentsConfig.anonymousConsents.footerLink))), of(false));
+    }
+    /**
+     * @return {?}
+     */
+    openDialog() {
+        if (Boolean(this.anonymousConsentsConfig) &&
+            // TODO(issue:4989) Anonymous consents - remove `isFeatureLevel(this.anonymousConsentsConfig, '1.3')` check
+            isFeatureLevel(this.anonymousConsentsConfig, '1.3')) {
+            this.modalService.open(AnonymousConsentsDialogComponent, {
+                centered: true,
+                size: 'lg',
+            });
+        }
+    }
 }
 FooterNavigationComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-footer-navigation',
-                template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [flyout]=\"false\"\n  [ngClass]=\"styleClass$ | async\"\n></cx-navigation-ui>\n\n<div class=\"notice\" *ngIf=\"data$ | async as data\">\n  {{ data.notice }}\n</div>\n",
+                template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [flyout]=\"false\"\n  [ngClass]=\"styleClass$ | async\"\n></cx-navigation-ui>\n\n<div *ngIf=\"showConsentPreferences | async\" class=\"anonymous-consents\">\n  <a role=\"link\" (click)=\"openDialog()\">{{\n    'anonymousConsents.preferences' | cxTranslate\n  }}</a>\n</div>\n\n<div class=\"notice\" *ngIf=\"data$ | async as data\">\n  {{ data.notice }}\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
 /** @nocollapse */
 FooterNavigationComponent.ctorParameters = () => [
     { type: CmsComponentData },
-    { type: NavigationService }
+    { type: NavigationService },
+    { type: AnonymousConsentsConfig },
+    { type: AuthService },
+    { type: ModalService }
 ];
 if (false) {
     /** @type {?} */
@@ -16089,6 +16879,21 @@ if (false) {
      * @protected
      */
     FooterNavigationComponent.prototype.service;
+    /**
+     * @type {?}
+     * @protected
+     */
+    FooterNavigationComponent.prototype.anonymousConsentsConfig;
+    /**
+     * @type {?}
+     * @protected
+     */
+    FooterNavigationComponent.prototype.authService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    FooterNavigationComponent.prototype.modalService;
 }
 
 /**
@@ -16103,6 +16908,8 @@ FooterNavigationModule.decorators = [
                     CommonModule,
                     RouterModule,
                     NavigationModule,
+                    GenericLinkModule,
+                    I18nModule,
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
                             FooterNavigationComponent: {
@@ -16110,8 +16917,8 @@ FooterNavigationModule.decorators = [
                             },
                         },
                     }))),
-                    GenericLinkModule,
                 ],
+                providers: [{ provide: AnonymousConsentsConfig, useExisting: Config }],
                 declarations: [FooterNavigationComponent],
                 entryComponents: [FooterNavigationComponent],
                 exports: [FooterNavigationComponent],
@@ -20646,12 +21453,12 @@ class LoginComponent {
      * @return {?}
      */
     ngOnInit() {
-        this.user$ = this.auth.getUserToken().pipe(switchMap((/**
-         * @param {?} token
+        this.user$ = this.auth.isUserLoggedIn().pipe(switchMap((/**
+         * @param {?} isUserLoggedIn
          * @return {?}
          */
-        token => {
-            if (token && !!token.access_token) {
+        isUserLoggedIn => {
+            if (isUserLoggedIn) {
                 return this.userService.get();
             }
             else {
@@ -20824,9 +21631,6 @@ LogoutModule.decorators = [
  */
 class RegisterComponent {
     /**
-     * @deprecated since 1.1.0
-     *
-     * TODO(issue:4237) Register flow
      * @param {?} auth
      * @param {?} authRedirectService
      * @param {?} userService
@@ -20834,8 +21638,10 @@ class RegisterComponent {
      * @param {?} fb
      * @param {?=} router
      * @param {?=} featureConfig
+     * @param {?=} anonymousConsentsService
+     * @param {?=} anonymousConsentsConfig
      */
-    constructor(auth, authRedirectService, userService, globalMessageService, fb, router, featureConfig) {
+    constructor(auth, authRedirectService, userService, globalMessageService, fb, router, featureConfig, anonymousConsentsService, anonymousConsentsConfig) {
         this.auth = auth;
         this.authRedirectService = authRedirectService;
         this.userService = userService;
@@ -20843,7 +21649,13 @@ class RegisterComponent {
         this.fb = fb;
         this.router = router;
         this.featureConfig = featureConfig;
+        this.anonymousConsentsService = anonymousConsentsService;
+        this.anonymousConsentsConfig = anonymousConsentsConfig;
         this.subscription = new Subscription();
+        // TODO(issue:4237) Register flow
+        this.isNewRegisterFlowEnabled = this.featureConfig && this.featureConfig.isLevel('1.1');
+        // TODO(issue:4989) Anonymous consents - remove
+        this.isAnonymousConsentEnabled = this.featureConfig && this.featureConfig.isLevel('1.3');
         this.userRegistrationForm = this.fb.group({
             titleCode: [''],
             firstName: ['', Validators.required],
@@ -20854,11 +21666,14 @@ class RegisterComponent {
                 [Validators.required, CustomFormValidators.passwordValidator],
             ],
             passwordconf: ['', Validators.required],
-            newsletter: [false],
+            newsletter: new FormControl({
+                value: false,
+                disabled: this.isAnonymousConsentEnabled
+                    ? this.isConsentRequired()
+                    : false,
+            }),
             termsandconditions: [false, Validators.requiredTrue],
         }, { validator: CustomFormValidators.matchPassword });
-        // TODO(issue:4237) Register flow
-        this.isNewRegisterFlowEnabled = this.featureConfig && this.featureConfig.isLevel('1.1');
     }
     /**
      * @return {?}
@@ -20938,6 +21753,24 @@ class RegisterComponent {
                 this.globalMessageService.add({ key: 'register.titleRequired' }, GlobalMessageType.MSG_TYPE_ERROR);
             }
         })));
+        if (this.isAnonymousConsentEnabled &&
+            Boolean(this.anonymousConsentsConfig) &&
+            Boolean(this.anonymousConsentsConfig.anonymousConsents) &&
+            Boolean(this.anonymousConsentsConfig.anonymousConsents.registerConsent)) {
+            this.anonymousConsent$ = combineLatest([
+                this.anonymousConsentsService.getConsent(this.anonymousConsentsConfig.anonymousConsents.registerConsent),
+                this.anonymousConsentsService.getTemplate(this.anonymousConsentsConfig.anonymousConsents.registerConsent),
+            ]).pipe(map((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            ([consent, template]) => {
+                return {
+                    consent,
+                    template: template.description,
+                };
+            })));
+        }
     }
     /**
      * @return {?}
@@ -20967,6 +21800,25 @@ class RegisterComponent {
         };
     }
     /**
+     * @param {?} consent
+     * @return {?}
+     */
+    isConsentGiven(consent) {
+        return this.anonymousConsentsService.isConsentGiven(consent);
+    }
+    /**
+     * @return {?}
+     */
+    isConsentRequired() {
+        if (Boolean(this.anonymousConsentsService) &&
+            Boolean(this.anonymousConsentsConfig.anonymousConsents) &&
+            Boolean(this.anonymousConsentsConfig.anonymousConsents.registerConsent) &&
+            Boolean(this.anonymousConsentsConfig.anonymousConsents.requiredConsents)) {
+            return this.anonymousConsentsConfig.anonymousConsents.requiredConsents.includes(this.anonymousConsentsConfig.anonymousConsents.registerConsent);
+        }
+        return false;
+    }
+    /**
      * @private
      * @param {?} success
      * @return {?}
@@ -20975,6 +21827,10 @@ class RegisterComponent {
         if (this.router && success) {
             this.router.go('login');
             this.globalMessageService.add({ key: 'register.postRegisterMessage' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
+            if (this.isAnonymousConsentEnabled &&
+                Boolean(this.userRegistrationForm.get('newsletter').value)) {
+                this.anonymousConsentsService.giveConsent(this.anonymousConsentsConfig.anonymousConsents.registerConsent);
+            }
         }
     }
     /**
@@ -21002,7 +21858,7 @@ class RegisterComponent {
 RegisterComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-register',
-                template: "<section\n  class=\"cx-page-section container\"\n  *ngIf=\"!(loading$ | async); else loading\"\n>\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of titles$ | async\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('email').errors &&\n                  (userRegistrationForm.get('email').errors['email'] ||\n                    userRegistrationForm.get('email').errors['InvalidEmail']) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"newsletter\"\n                  class=\"form-check-input\"\n                  formControlName=\"newsletter\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.emailMarketing' | cxTranslate }}\n                </span>\n              </label>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            [disabled]=\"userRegistrationForm.invalid\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
+                template: "<section\n  class=\"cx-page-section container\"\n  *ngIf=\"!(loading$ | async); else loading\"\n>\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of titles$ | async\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('email').errors &&\n                  (userRegistrationForm.get('email').errors['email'] ||\n                    userRegistrationForm.get('email').errors['InvalidEmail']) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <ng-container\n                *ngIf=\"isAnonymousConsentEnabled; else deprecatedNewsletter\"\n              >\n                <label *ngIf=\"anonymousConsent$ | async as anonymousConsent\">\n                  <input\n                    type=\"checkbox\"\n                    name=\"newsletter\"\n                    class=\"form-check-input\"\n                    formControlName=\"newsletter\"\n                    [checked]=\"isConsentGiven(anonymousConsent.consent)\"\n                  />\n                  <span class=\"form-check-label\">\n                    {{ anonymousConsent.template }}\n                  </span>\n                </label>\n              </ng-container>\n              <ng-template #deprecatedNewsletter\n                ><label>\n                  <input\n                    type=\"checkbox\"\n                    name=\"newsletter\"\n                    class=\"form-check-input\"\n                    formControlName=\"newsletter\"\n                  />\n                  <span class=\"form-check-label\">\n                    {{ 'register.emailMarketing' | cxTranslate }}\n                  </span>\n                </label>\n              </ng-template>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            [disabled]=\"userRegistrationForm.invalid\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
             }] }
 ];
 /** @nocollapse */
@@ -21013,7 +21869,9 @@ RegisterComponent.ctorParameters = () => [
     { type: GlobalMessageService },
     { type: FormBuilder },
     { type: RoutingService },
-    { type: FeatureConfigService }
+    { type: FeatureConfigService },
+    { type: AnonymousConsentsService },
+    { type: AnonymousConsentsConfig }
 ];
 if (false) {
     /** @type {?} */
@@ -21026,9 +21884,13 @@ if (false) {
      */
     RegisterComponent.prototype.subscription;
     /** @type {?} */
-    RegisterComponent.prototype.userRegistrationForm;
+    RegisterComponent.prototype.anonymousConsent$;
     /** @type {?} */
     RegisterComponent.prototype.isNewRegisterFlowEnabled;
+    /** @type {?} */
+    RegisterComponent.prototype.isAnonymousConsentEnabled;
+    /** @type {?} */
+    RegisterComponent.prototype.userRegistrationForm;
     /**
      * @type {?}
      * @protected
@@ -21064,6 +21926,16 @@ if (false) {
      * @protected
      */
     RegisterComponent.prototype.featureConfig;
+    /**
+     * @type {?}
+     * @protected
+     */
+    RegisterComponent.prototype.anonymousConsentsService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    RegisterComponent.prototype.anonymousConsentsConfig;
 }
 
 /**
@@ -21128,6 +22000,7 @@ class CmsLibModule {
 CmsLibModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
+                    AnonymousConsentManagementBannerModule,
                     AssistedServiceModule,
                     HamburgerMenuModule,
                     CmsParagraphModule,
@@ -21554,6 +22427,7 @@ StorefrontFoundationModule.decorators = [
                     AsmModule.forRoot(),
                     StateModule.forRoot(),
                     AuthModule.forRoot(),
+                    AnonymousConsentsModule$1.forRoot(),
                     ConfigModule.forRoot(),
                     RoutingModule.forRoot(),
                     I18nModule.forRoot(),
@@ -21684,5 +22558,5 @@ B2cStorefrontModule.decorators = [
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, OnlyNumberDirectiveModule as ɵa, AutoFocusDirectiveModule as ɵb, ProductImagesComponent as ɵba, CheckoutLoginComponent as ɵbb, suffixUrlMatcher as ɵbc, addCmsRoute as ɵbd, htmlLangProvider as ɵbe, setHtmlLangAttribute as ɵbf, RoutingModule as ɵbg, defaultStorefrontRoutesConfig as ɵbh, defaultRoutingConfig as ɵbi, defaultCheckoutConfig as ɵc, ExpressCheckoutService as ɵd, AssistedServiceModule as ɵe, AsmRootComponent as ɵf, AsmMainUiComponent as ɵg, CSAgentLoginFormComponent as ɵh, CustomerSelectionComponent as ɵi, defaultScrollConfig as ɵj, ViewConfig as ɵk, ViewConfigModule as ɵl, ProductScrollComponent as ɵm, ProductAttributesModule as ɵn, ProductDetailsTabModule as ɵo, ProductDetailsTabComponent as ɵp, CmsRoutesService as ɵq, CmsMappingService as ɵr, CmsI18nService as ɵs, CmsGuardsService as ɵt, TrackingEventsComponent as ɵu, ConsignmentTrackingComponent as ɵv, ComponentMapperService as ɵw, AddToHomeScreenService as ɵx, GuestRegisterFormComponent as ɵy, ProductImagesModule as ɵz };
+export { AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, OnlyNumberDirectiveModule as ɵa, AutoFocusDirectiveModule as ɵb, ProductImagesComponent as ɵba, CheckoutLoginComponent as ɵbb, suffixUrlMatcher as ɵbc, addCmsRoute as ɵbd, htmlLangProvider as ɵbe, setHtmlLangAttribute as ɵbf, AnonymousConsentsModule as ɵbg, AnonymousConsentsDialogComponent as ɵbh, AnonymousConsentFormComponent as ɵbi, RoutingModule as ɵbj, defaultStorefrontRoutesConfig as ɵbk, defaultRoutingConfig as ɵbl, defaultCheckoutConfig as ɵc, ExpressCheckoutService as ɵd, AssistedServiceModule as ɵe, AsmRootComponent as ɵf, AsmMainUiComponent as ɵg, CSAgentLoginFormComponent as ɵh, CustomerSelectionComponent as ɵi, defaultScrollConfig as ɵj, ViewConfig as ɵk, ViewConfigModule as ɵl, ProductScrollComponent as ɵm, ProductAttributesModule as ɵn, ProductDetailsTabModule as ɵo, ProductDetailsTabComponent as ɵp, CmsRoutesService as ɵq, CmsMappingService as ɵr, CmsI18nService as ɵs, CmsGuardsService as ɵt, TrackingEventsComponent as ɵu, ConsignmentTrackingComponent as ɵv, ComponentMapperService as ɵw, AddToHomeScreenService as ɵx, GuestRegisterFormComponent as ɵy, ProductImagesModule as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map
