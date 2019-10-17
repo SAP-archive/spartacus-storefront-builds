@@ -19263,12 +19263,12 @@
         /**
          * Opens the PLP with the given query.
          *
-         * TODO: if there's a singe product match, we could open the PDP.
+         * TODO: if there's a single product match, we could open the PDP.
          */
         /**
          * Opens the PLP with the given query.
          *
-         * TODO: if there's a singe product match, we could open the PDP.
+         * TODO: if there's a single product match, we could open the PDP.
          * @param {?} event
          * @param {?} query
          * @return {?}
@@ -19276,12 +19276,15 @@
         SearchBoxComponent.prototype.launchSearchResult = /**
          * Opens the PLP with the given query.
          *
-         * TODO: if there's a singe product match, we could open the PDP.
+         * TODO: if there's a single product match, we could open the PDP.
          * @param {?} event
          * @param {?} query
          * @return {?}
          */
         function (event, query) {
+            if (!query || query.trim().length === 0) {
+                return;
+            }
             this.close(event);
             this.searchBoxComponentService.launchSearchPage(query);
         };
