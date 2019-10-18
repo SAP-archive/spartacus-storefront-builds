@@ -1396,11 +1396,12 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var AddToCartComponent = /** @class */ (function () {
-        function AddToCartComponent(cartService, modalService, currentProductService, cd) {
+        function AddToCartComponent(cartService, modalService, currentProductService, cd, productService) {
             this.cartService = cartService;
             this.modalService = modalService;
             this.currentProductService = currentProductService;
             this.cd = cd;
+            this.productService = productService;
             this.showQuantity = true;
             this.hasStock = false;
             this.quantity = 1;
@@ -1416,7 +1417,21 @@
             var _this = this;
             if (this.productCode) {
                 this.cartEntry$ = this.cartService.getEntry(this.productCode);
-                this.hasStock = true;
+                this.subscription = this.productService
+                    .get(this.productCode)
+                    .pipe(operators.filter((/**
+                 * @param {?} p
+                 * @return {?}
+                 */
+                function (p) { return !!p; })))
+                    .subscribe((/**
+                 * @param {?} product
+                 * @return {?}
+                 */
+                function (product) {
+                    _this.setStockInfo(product);
+                    _this.cd.markForCheck();
+                }));
             }
             else {
                 this.subscription = this.currentProductService
@@ -1428,19 +1443,30 @@
                  */
                 function (product) {
                     _this.productCode = product.code;
-                    _this.quantity = 1;
-                    if (product.stock &&
-                        product.stock.stockLevelStatus !== 'outOfStock' &&
-                        product.stock.stockLevel > 0) {
-                        _this.maxQuantity = product.stock.stockLevel;
-                        _this.hasStock = true;
-                    }
-                    else {
-                        _this.hasStock = false;
-                    }
+                    _this.setStockInfo(product);
                     _this.cartEntry$ = _this.cartService.getEntry(_this.productCode);
                     _this.cd.markForCheck();
                 }));
+            }
+        };
+        /**
+         * @private
+         * @param {?} product
+         * @return {?}
+         */
+        AddToCartComponent.prototype.setStockInfo = /**
+         * @private
+         * @param {?} product
+         * @return {?}
+         */
+        function (product) {
+            this.quantity = 1;
+            this.hasStock =
+                product.stock &&
+                    product.stock.stockLevelStatus !== 'outOfStock' &&
+                    product.stock.stockLevel > 0;
+            if (this.hasStock) {
+                this.maxQuantity = product.stock.stockLevel;
             }
         };
         /**
@@ -1528,7 +1554,8 @@
             { type: core$1.CartService },
             { type: ModalService },
             { type: CurrentProductService },
-            { type: core.ChangeDetectorRef }
+            { type: core.ChangeDetectorRef },
+            { type: core$1.ProductService, decorators: [{ type: core.Optional }] }
         ]; };
         AddToCartComponent.propDecorators = {
             productCode: [{ type: core.Input }],
@@ -1575,6 +1602,11 @@
          * @private
          */
         AddToCartComponent.prototype.cd;
+        /**
+         * @type {?}
+         * @private
+         */
+        AddToCartComponent.prototype.productService;
     }
 
     /**

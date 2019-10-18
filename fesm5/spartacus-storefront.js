@@ -1,4 +1,4 @@
-import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Directive, EventEmitter, Output, isDevMode, forwardRef, Renderer2, HostListener, Optional, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, NgZone, APP_INITIALIZER, RendererFactory2, INJECTOR, Pipe } from '@angular/core';
+import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Optional, Directive, EventEmitter, Output, isDevMode, forwardRef, Renderer2, HostListener, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, NgZone, APP_INITIALIZER, RendererFactory2, INJECTOR, Pipe } from '@angular/core';
 import { WindowRef, ConfigModule, Config, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, RoutingService, ProductService, CartService, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, CartModule, RoutingConfigService, AuthService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, CmsConfig, CartDataService, CmsService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AsmService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, AuthGuard, isFeatureLevel, NotAuthGuard, CmsPageTitleModule, provideConfig, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, AsmModule, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
 import { Subscription, combineLatest, of, fromEvent, BehaviorSubject, concat, isObservable, from, iif } from 'rxjs';
 import { take, distinctUntilChanged, tap, map, filter, switchMap, debounceTime, startWith, shareReplay, skipWhile, withLatestFrom, first, endWith, scan, pluck } from 'rxjs/operators';
@@ -1210,11 +1210,12 @@ if (false) {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var AddToCartComponent = /** @class */ (function () {
-    function AddToCartComponent(cartService, modalService, currentProductService, cd) {
+    function AddToCartComponent(cartService, modalService, currentProductService, cd, productService) {
         this.cartService = cartService;
         this.modalService = modalService;
         this.currentProductService = currentProductService;
         this.cd = cd;
+        this.productService = productService;
         this.showQuantity = true;
         this.hasStock = false;
         this.quantity = 1;
@@ -1230,7 +1231,21 @@ var AddToCartComponent = /** @class */ (function () {
         var _this = this;
         if (this.productCode) {
             this.cartEntry$ = this.cartService.getEntry(this.productCode);
-            this.hasStock = true;
+            this.subscription = this.productService
+                .get(this.productCode)
+                .pipe(filter((/**
+             * @param {?} p
+             * @return {?}
+             */
+            function (p) { return !!p; })))
+                .subscribe((/**
+             * @param {?} product
+             * @return {?}
+             */
+            function (product) {
+                _this.setStockInfo(product);
+                _this.cd.markForCheck();
+            }));
         }
         else {
             this.subscription = this.currentProductService
@@ -1242,19 +1257,30 @@ var AddToCartComponent = /** @class */ (function () {
              */
             function (product) {
                 _this.productCode = product.code;
-                _this.quantity = 1;
-                if (product.stock &&
-                    product.stock.stockLevelStatus !== 'outOfStock' &&
-                    product.stock.stockLevel > 0) {
-                    _this.maxQuantity = product.stock.stockLevel;
-                    _this.hasStock = true;
-                }
-                else {
-                    _this.hasStock = false;
-                }
+                _this.setStockInfo(product);
                 _this.cartEntry$ = _this.cartService.getEntry(_this.productCode);
                 _this.cd.markForCheck();
             }));
+        }
+    };
+    /**
+     * @private
+     * @param {?} product
+     * @return {?}
+     */
+    AddToCartComponent.prototype.setStockInfo = /**
+     * @private
+     * @param {?} product
+     * @return {?}
+     */
+    function (product) {
+        this.quantity = 1;
+        this.hasStock =
+            product.stock &&
+                product.stock.stockLevelStatus !== 'outOfStock' &&
+                product.stock.stockLevel > 0;
+        if (this.hasStock) {
+            this.maxQuantity = product.stock.stockLevel;
         }
     };
     /**
@@ -1342,7 +1368,8 @@ var AddToCartComponent = /** @class */ (function () {
         { type: CartService },
         { type: ModalService },
         { type: CurrentProductService },
-        { type: ChangeDetectorRef }
+        { type: ChangeDetectorRef },
+        { type: ProductService, decorators: [{ type: Optional }] }
     ]; };
     AddToCartComponent.propDecorators = {
         productCode: [{ type: Input }],
@@ -1389,6 +1416,11 @@ if (false) {
      * @private
      */
     AddToCartComponent.prototype.cd;
+    /**
+     * @type {?}
+     * @private
+     */
+    AddToCartComponent.prototype.productService;
 }
 
 /**
