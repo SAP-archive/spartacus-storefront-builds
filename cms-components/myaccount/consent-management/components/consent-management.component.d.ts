@@ -13,6 +13,7 @@ export declare class ConsentManagementComponent implements OnInit, OnDestroy {
     loading$: Observable<boolean>;
     requiredConsents: string[];
     isAnonymousConsentsEnabled: boolean;
+    isLevel13: boolean;
     constructor(userConsentService: UserConsentService, globalMessageService: GlobalMessageService, anonymousConsentsConfig: AnonymousConsentsConfig, anonymousConsentsService: AnonymousConsentsService, authService: AuthService);
     /**
      * @deprecated since version 1.3
