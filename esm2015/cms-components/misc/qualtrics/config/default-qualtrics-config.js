@@ -1,0 +1,9 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+export const defaultQualtricsConfig = {
+    qualtrics: {},
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVmYXVsdC1xdWFsdHJpY3MtY29uZmlnLmpzIiwic291cmNlUm9vdCI6Im5nOi8vQHNwYXJ0YWN1cy9zdG9yZWZyb250LyIsInNvdXJjZXMiOlsiY21zLWNvbXBvbmVudHMvbWlzYy9xdWFsdHJpY3MvY29uZmlnL2RlZmF1bHQtcXVhbHRyaWNzLWNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7OztBQUVBLE1BQU0sT0FBTyxzQkFBc0IsR0FBb0I7SUFDckQsU0FBUyxFQUFFLEVBQUU7Q0FDZCIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IFF1YWx0cmljc0NvbmZpZyB9IGZyb20gJy4vcXVhbHRyaWNzLWNvbmZpZyc7XG5cbmV4cG9ydCBjb25zdCBkZWZhdWx0UXVhbHRyaWNzQ29uZmlnOiBRdWFsdHJpY3NDb25maWcgPSB7XG4gIHF1YWx0cmljczoge30sXG59O1xuIl19

@@ -3907,6 +3907,256 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /**
+     * @abstract
+     */
+    var   /**
+     * @abstract
+     */
+    QualtricsConfig = /** @class */ (function () {
+        function QualtricsConfig() {
+        }
+        return QualtricsConfig;
+    }());
+    if (false) {
+        /** @type {?} */
+        QualtricsConfig.prototype.qualtrics;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var QualtricsLoaderService = /** @class */ (function () {
+        function QualtricsLoaderService(winRef, config) {
+            this.winRef = winRef;
+            this.config = config;
+            this.qualtricsLoaded$ = new rxjs.BehaviorSubject(false);
+            if (Boolean(this.winRef.nativeWindow) &&
+                Boolean(this.winRef.document) &&
+                this.isQualtricsConfigured()) {
+                this.initialize();
+                this.setup();
+            }
+        }
+        /**
+         * @private
+         * @return {?}
+         */
+        QualtricsLoaderService.prototype.initialize = /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            rxjs.fromEvent(this.winRef.nativeWindow, 'qsi_js_loaded').subscribe((/**
+             * @param {?} _
+             * @return {?}
+             */
+            function (_) {
+                return _this.qualtricsLoaded$.next(true);
+            }));
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        QualtricsLoaderService.prototype.setup = /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            /** @type {?} */
+            var qualtricsScript = this.winRef.document.createElement('script');
+            qualtricsScript.type = 'text/javascript';
+            qualtricsScript.defer = true;
+            qualtricsScript.src = 'assets/qualtricsIntegration.js';
+            /** @type {?} */
+            var idScript = this.winRef.document.createElement('div');
+            idScript.id = this.config.qualtrics.projectId;
+            this.winRef.document
+                .getElementsByTagName('head')[0]
+                .appendChild(qualtricsScript);
+            this.winRef.document.getElementsByTagName('head')[0].appendChild(idScript);
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        QualtricsLoaderService.prototype.isQualtricsConfigured = /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            return (Boolean(this.config.qualtrics) && Boolean(this.config.qualtrics.projectId));
+        };
+        /**
+         * @return {?}
+         */
+        QualtricsLoaderService.prototype.load = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            return this.qualtricsLoaded$.pipe(operators.filter((/**
+             * @param {?} loaded
+             * @return {?}
+             */
+            function (loaded) { return loaded; })), operators.switchMap((/**
+             * @param {?} _
+             * @return {?}
+             */
+            function (_) {
+                /** @type {?} */
+                var qsi = _this.winRef.nativeWindow['QSI'];
+                return _this.isDataLoaded().pipe(operators.distinctUntilChanged(), operators.tap((/**
+                 * @param {?} dataLoaded
+                 * @return {?}
+                 */
+                function (dataLoaded) {
+                    if (dataLoaded) {
+                        qsi.API.unload();
+                        qsi.API.load().done(qsi.API.run());
+                    }
+                })));
+            })));
+        };
+        /**
+         * This logic exist in order to let the client(s) add their own logic to wait for any kind of page data
+         * If client(s) does not extend this service to override this implementation, it returns true
+         * Return false otherwise.
+         */
+        /**
+         * This logic exist in order to let the client(s) add their own logic to wait for any kind of page data
+         * If client(s) does not extend this service to override this implementation, it returns true
+         * Return false otherwise.
+         * @protected
+         * @return {?}
+         */
+        QualtricsLoaderService.prototype.isDataLoaded = /**
+         * This logic exist in order to let the client(s) add their own logic to wait for any kind of page data
+         * If client(s) does not extend this service to override this implementation, it returns true
+         * Return false otherwise.
+         * @protected
+         * @return {?}
+         */
+        function () {
+            return rxjs.of(true);
+        };
+        QualtricsLoaderService.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        QualtricsLoaderService.ctorParameters = function () { return [
+            { type: core$1.WindowRef },
+            { type: QualtricsConfig }
+        ]; };
+        /** @nocollapse */ QualtricsLoaderService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function QualtricsLoaderService_Factory() { return new QualtricsLoaderService(core.ɵɵinject(core$1.WindowRef), core.ɵɵinject(QualtricsConfig)); }, token: QualtricsLoaderService, providedIn: "root" });
+        return QualtricsLoaderService;
+    }());
+    if (false) {
+        /**
+         * @type {?}
+         * @private
+         */
+        QualtricsLoaderService.prototype.qualtricsLoaded$;
+        /**
+         * @type {?}
+         * @private
+         */
+        QualtricsLoaderService.prototype.winRef;
+        /**
+         * @type {?}
+         * @private
+         */
+        QualtricsLoaderService.prototype.config;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var QualtricsComponent = /** @class */ (function () {
+        function QualtricsComponent(qualtricsLoader) {
+            this.qualtricsLoader = qualtricsLoader;
+            this.qualtricsEnabled$ = this.qualtricsLoader.load();
+        }
+        QualtricsComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-qualtrics',
+                        template: "\n    <ng-container *ngIf=\"qualtricsEnabled$ | async\"></ng-container>\n  "
+                    }] }
+        ];
+        /** @nocollapse */
+        QualtricsComponent.ctorParameters = function () { return [
+            { type: QualtricsLoaderService }
+        ]; };
+        return QualtricsComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        QualtricsComponent.prototype.qualtricsEnabled$;
+        /**
+         * @type {?}
+         * @private
+         */
+        QualtricsComponent.prototype.qualtricsLoader;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var defaultQualtricsConfig = {
+        qualtrics: {},
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var QualtricsModule = /** @class */ (function () {
+        function QualtricsModule() {
+        }
+        QualtricsModule.decorators = [
+            { type: core.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            http.HttpClientModule,
+                            core$1.ConfigModule.withConfig((/** @type {?} */ ({
+                                cmsComponents: {
+                                    QualtricsComponent: {
+                                        component: QualtricsComponent,
+                                    },
+                                },
+                            }))),
+                            core$1.ConfigModule.withConfig(defaultQualtricsConfig),
+                        ],
+                        declarations: [QualtricsComponent],
+                        entryComponents: [QualtricsComponent],
+                        providers: [
+                            {
+                                provide: QualtricsConfig,
+                                useExisting: core$1.Config,
+                            },
+                        ],
+                    },] }
+        ];
+        return QualtricsModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var LanguageCurrencyComponent = /** @class */ (function () {
         function LanguageCurrencyComponent() {
         }
@@ -22496,6 +22746,54 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var ViewConfigModule = /** @class */ (function () {
+        function ViewConfigModule() {
+        }
+        /**
+         * @return {?}
+         */
+        ViewConfigModule.forRoot = /**
+         * @return {?}
+         */
+        function () {
+            return {
+                ngModule: ViewConfigModule,
+                providers: [
+                    core$1.provideConfig({
+                        view: {},
+                    }),
+                    {
+                        provide: ViewConfig,
+                        useExisting: core$1.Config,
+                    },
+                ],
+            };
+        };
+        ViewConfigModule.decorators = [
+            { type: core.NgModule, args: [{},] }
+        ];
+        return ViewConfigModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var defaultScrollConfig = {
+        view: {
+            infiniteScroll: {
+                active: false,
+                productLimit: 0,
+                showMoreButton: false,
+            },
+        },
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var ProductScrollComponent = /** @class */ (function () {
         function ProductScrollComponent(productListComponentService, ref) {
             this.productListComponentService = productListComponentService;
@@ -22785,54 +23083,6 @@
          */
         ProductScrollComponent.prototype.ref;
     }
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @type {?} */
-    var defaultScrollConfig = {
-        view: {
-            infiniteScroll: {
-                active: false,
-                productLimit: 0,
-                showMoreButton: false,
-            },
-        },
-    };
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ViewConfigModule = /** @class */ (function () {
-        function ViewConfigModule() {
-        }
-        /**
-         * @return {?}
-         */
-        ViewConfigModule.forRoot = /**
-         * @return {?}
-         */
-        function () {
-            return {
-                ngModule: ViewConfigModule,
-                providers: [
-                    core$1.provideConfig({
-                        view: {},
-                    }),
-                    {
-                        provide: ViewConfig,
-                        useExisting: core$1.Config,
-                    },
-                ],
-            };
-        };
-        ViewConfigModule.decorators = [
-            { type: core.NgModule, args: [{},] }
-        ];
-        return ViewConfigModule;
-    }());
 
     /**
      * @fileoverview added by tsickle
@@ -25579,6 +25829,7 @@
                             BreadcrumbModule,
                             SearchBoxModule,
                             SiteContextSelectorModule,
+                            QualtricsModule,
                             AddressBookModule,
                             OrderHistoryModule,
                             ProductListModule,
@@ -26334,6 +26585,10 @@
     exports.PromotionsComponent = PromotionsComponent;
     exports.PromotionsModule = PromotionsModule;
     exports.PwaModule = PwaModule;
+    exports.QualtricsComponent = QualtricsComponent;
+    exports.QualtricsConfig = QualtricsConfig;
+    exports.QualtricsLoaderService = QualtricsLoaderService;
+    exports.QualtricsModule = QualtricsModule;
     exports.RegisterComponent = RegisterComponent;
     exports.RegisterComponentModule = RegisterComponentModule;
     exports.ResetPasswordFormComponent = ResetPasswordFormComponent;
@@ -26404,18 +26659,19 @@
     exports.titleScores = titleScores;
     exports.ɵa = OnlyNumberDirectiveModule;
     exports.ɵb = AutoFocusDirectiveModule;
-    exports.ɵba = ProductImagesComponent;
-    exports.ɵbb = CheckoutLoginComponent;
-    exports.ɵbc = suffixUrlMatcher;
-    exports.ɵbd = addCmsRoute;
-    exports.ɵbe = htmlLangProvider;
-    exports.ɵbf = setHtmlLangAttribute;
-    exports.ɵbg = AnonymousConsentsModule;
-    exports.ɵbh = AnonymousConsentsDialogComponent;
-    exports.ɵbi = AnonymousConsentFormComponent;
-    exports.ɵbj = RoutingModule;
-    exports.ɵbk = defaultStorefrontRoutesConfig;
-    exports.ɵbl = defaultRoutingConfig;
+    exports.ɵba = ProductImagesModule;
+    exports.ɵbb = ProductImagesComponent;
+    exports.ɵbc = CheckoutLoginComponent;
+    exports.ɵbd = suffixUrlMatcher;
+    exports.ɵbe = addCmsRoute;
+    exports.ɵbf = htmlLangProvider;
+    exports.ɵbg = setHtmlLangAttribute;
+    exports.ɵbh = AnonymousConsentsModule;
+    exports.ɵbi = AnonymousConsentsDialogComponent;
+    exports.ɵbj = AnonymousConsentFormComponent;
+    exports.ɵbk = RoutingModule;
+    exports.ɵbl = defaultStorefrontRoutesConfig;
+    exports.ɵbm = defaultRoutingConfig;
     exports.ɵc = defaultCheckoutConfig;
     exports.ɵd = ExpressCheckoutService;
     exports.ɵe = AssistedServiceModule;
@@ -26423,23 +26679,23 @@
     exports.ɵg = AsmMainUiComponent;
     exports.ɵh = CSAgentLoginFormComponent;
     exports.ɵi = CustomerSelectionComponent;
-    exports.ɵj = defaultScrollConfig;
-    exports.ɵk = ViewConfig;
-    exports.ɵl = ViewConfigModule;
-    exports.ɵm = ProductScrollComponent;
-    exports.ɵn = ProductAttributesModule;
-    exports.ɵo = ProductDetailsTabModule;
-    exports.ɵp = ProductDetailsTabComponent;
-    exports.ɵq = CmsRoutesService;
-    exports.ɵr = CmsMappingService;
-    exports.ɵs = CmsI18nService;
-    exports.ɵt = CmsGuardsService;
-    exports.ɵu = TrackingEventsComponent;
-    exports.ɵv = ConsignmentTrackingComponent;
-    exports.ɵw = ComponentMapperService;
-    exports.ɵx = AddToHomeScreenService;
-    exports.ɵy = GuestRegisterFormComponent;
-    exports.ɵz = ProductImagesModule;
+    exports.ɵj = defaultQualtricsConfig;
+    exports.ɵk = defaultScrollConfig;
+    exports.ɵl = ViewConfig;
+    exports.ɵm = ViewConfigModule;
+    exports.ɵn = ProductScrollComponent;
+    exports.ɵo = ProductAttributesModule;
+    exports.ɵp = ProductDetailsTabModule;
+    exports.ɵq = ProductDetailsTabComponent;
+    exports.ɵr = CmsRoutesService;
+    exports.ɵs = CmsMappingService;
+    exports.ɵt = CmsI18nService;
+    exports.ɵu = CmsGuardsService;
+    exports.ɵv = TrackingEventsComponent;
+    exports.ɵw = ConsignmentTrackingComponent;
+    exports.ɵx = ComponentMapperService;
+    exports.ɵy = AddToHomeScreenService;
+    exports.ɵz = GuestRegisterFormComponent;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
