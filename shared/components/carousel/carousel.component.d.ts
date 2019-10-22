@@ -26,7 +26,7 @@ export declare class CarouselComponent implements OnInit {
     title: string;
     /**
      * The items$ represent the carousel items. The items$ are
-     * observables so that the itesm can be loaded on demand.
+     * observables so that the items can be loaded on demand.
      */
     items: Observable<any>[];
     setItems: Observable<any>[];

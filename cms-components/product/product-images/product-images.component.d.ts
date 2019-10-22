@@ -4,6 +4,7 @@ export declare class ProductImagesComponent {
     private currentProductService;
     private mainMediaContainer;
     private product$;
+    isThumbsEmpty: boolean;
     thumbs$: Observable<any[]>;
     mainImage$: Observable<any>;
     constructor(currentProductService: CurrentProductService);

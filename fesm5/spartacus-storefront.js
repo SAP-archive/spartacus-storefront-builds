@@ -1893,7 +1893,7 @@ if (false) {
     CarouselComponent.prototype.title;
     /**
      * The items$ represent the carousel items. The items$ are
-     * observables so that the itesm can be loaded on demand.
+     * observables so that the items can be loaded on demand.
      * @type {?}
      */
     CarouselComponent.prototype.items;
@@ -23396,7 +23396,13 @@ var ProductImagesComponent = /** @class */ (function () {
          * @param {?} product
          * @return {?}
          */
-        function (product) { return _this.createThumbs(product); })));
+        function (product) { return _this.createThumbs(product); })), tap((/**
+         * @param {?} thumbs
+         * @return {?}
+         */
+        function (thumbs) {
+            _this.isThumbsEmpty = thumbs.length === 0;
+        })));
         this.mainImage$ = combineLatest([this.product$, this.mainMediaContainer]).pipe(map((/**
          * @param {?} __0
          * @return {?}
@@ -23503,7 +23509,7 @@ var ProductImagesComponent = /** @class */ (function () {
     ProductImagesComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-product-images',
-                    template: "<ng-container *ngIf=\"mainImage$ | async as main\">\n  <cx-media [container]=\"main\" format=\"zoom\"> </cx-media>\n</ng-container>\n\n<cx-carousel\n  class=\"thumbs\"\n  [items]=\"thumbs$ | async\"\n  itemWidth=\"120px\"\n  [hideIndicators]=\"false\"\n  [template]=\"thumb\"\n></cx-carousel>\n\n<ng-template #thumb let-item=\"item\">\n  <cx-media\n    [container]=\"item.container\"\n    tabindex=\"0\"\n    format=\"thumbnail\"\n    (focus)=\"openImage(item.container)\"\n    [class.is-active]=\"isActive(item.container) | async\"\n  >\n  </cx-media>\n</ng-template>\n",
+                    template: "<ng-container *ngIf=\"mainImage$ | async as main\">\n  <cx-media [container]=\"main\" format=\"zoom\"> </cx-media>\n</ng-container>\n\n<cx-carousel\n  *ngIf=\"!isThumbsEmpty\"\n  class=\"thumbs\"\n  [items]=\"thumbs$ | async\"\n  itemWidth=\"120px\"\n  [hideIndicators]=\"false\"\n  [template]=\"thumb\"\n></cx-carousel>\n\n<ng-template #thumb let-item=\"item\">\n  <cx-media\n    [container]=\"item.container\"\n    tabindex=\"0\"\n    format=\"thumbnail\"\n    (focus)=\"openImage(item.container)\"\n    [class.is-active]=\"isActive(item.container) | async\"\n  >\n  </cx-media>\n</ng-template>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -23524,6 +23530,8 @@ if (false) {
      * @private
      */
     ProductImagesComponent.prototype.product$;
+    /** @type {?} */
+    ProductImagesComponent.prototype.isThumbsEmpty;
     /** @type {?} */
     ProductImagesComponent.prototype.thumbs$;
     /** @type {?} */
