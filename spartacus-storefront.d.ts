@@ -24,8 +24,8 @@ export { CheckoutLoginComponent as ɵbc } from './cms-components/user/checkout-l
 export { ComponentMapperService as ɵx } from './cms-structure/page/component/component-mapper.service';
 export { AddToHomeScreenService as ɵy } from './cms-structure/pwa/services/add-to-home-screen.service';
 export { addCmsRoute as ɵbe } from './cms-structure/routing/cms-route/add-cms-route';
-export { defaultRoutingConfig as ɵbm, defaultStorefrontRoutesConfig as ɵbl } from './cms-structure/routing/default-routing-config';
-export { RoutingModule as ɵbk } from './cms-structure/routing/routing.module';
+export { defaultRoutingConfig as ɵbl, defaultStorefrontRoutesConfig as ɵbk } from './cms-structure/routing/default-routing-config';
+export { RoutingModule as ɵbj } from './cms-structure/routing/routing.module';
 export { suffixUrlMatcher as ɵbd } from './cms-structure/routing/suffix-routes/suffix-url-matcher';
 export { htmlLangProvider as ɵbf, setHtmlLangAttribute as ɵbg } from './cms-structure/seo/html-lang-provider';
 export { CmsGuardsService as ɵu } from './cms-structure/services/cms-guards.service';
@@ -34,7 +34,6 @@ export { CmsMappingService as ɵs } from './cms-structure/services/cms-mapping.s
 export { CmsRoutesService as ɵr } from './cms-structure/services/cms-routes.service';
 export { AnonymousConsentsModule as ɵbh } from './shared/components/anonymous-consents/anonymous-consents.module';
 export { AnonymousConsentsDialogComponent as ɵbi } from './shared/components/anonymous-consents/dialog/anonymous-consents-dialog.component';
-export { AnonymousConsentFormComponent as ɵbj } from './shared/components/anonymous-consents/dialog/form/anonymous-consent-form.component';
 export { ViewConfig as ɵl } from './shared/config/view-config';
 export { ViewConfigModule as ɵm } from './shared/config/view-config.module';
 export { AutoFocusDirectiveModule as ɵb } from './shared/directives/auto-focus/auto-focus.directive.module';

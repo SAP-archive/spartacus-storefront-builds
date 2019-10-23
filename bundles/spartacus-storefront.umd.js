@@ -1003,7 +1003,7 @@
         AnonymousConsentsDialogComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-anonymous-consents-dialog',
-                        template: "<div #dialog>\n  <!-- Modal Header -->\n  <div class=\"cx-dialog-header modal-header\">\n    <div class=\"cx-dialog-title modal-title\">\n      {{ 'anonymousConsents.dialog.title' | cxTranslate }}\n    </div>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"closeModal('Cross click')\"\n    >\n      <span aria-hidden=\"true\">\n        <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n      </span>\n    </button>\n  </div>\n  <!-- Separator -->\n  <div\n    class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n  ></div>\n  <div class=\"cx-dialog-description\" *ngIf=\"showLegalDescription\">\n    {{ 'anonymousConsents.dialog.legalDescription' | cxTranslate }}\n    <div\n      class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n    ></div>\n  </div>\n  <!-- Actions -->\n  <div class=\"cx-dialog-buttons\">\n    <a tabindex=\"0\" class=\"btn-link cx-action-link\" (click)=\"rejectAll()\">{{\n      'anonymousConsents.dialog.rejectAll' | cxTranslate\n    }}</a>\n    <span class=\"cx-links-separator\">|</span>\n    <a tabindex=\"0\" class=\"btn-link cx-action-link\" (click)=\"allowAll()\">{{\n      'anonymousConsents.dialog.allowAll' | cxTranslate\n    }}</a>\n  </div>\n  <!-- Modal Body -->\n  <div\n    class=\"cx-dialog-body modal-body\"\n    *ngIf=\"templates$ | async as templates\"\n  >\n    <div *ngIf=\"consents$ | async as consents\">\n      <div\n        class=\"cx-dialog-row col-sm-12 col-md-6\"\n        *ngFor=\"let template of templates\"\n      >\n        <cx-anonymous-consent-form\n          [template]=\"template\"\n          [consent]=\"getCorrespondingConsent(template, consents)\"\n          (consentChanged)=\"onConsentChange($event)\"\n          [requiredConsents]=\"requiredConsents\"\n        ></cx-anonymous-consent-form>\n      </div>\n    </div>\n  </div>\n</div>\n"
+                        template: "<div #dialog>\n  <!-- Modal Header -->\n  <div class=\"cx-dialog-header modal-header\">\n    <div class=\"cx-dialog-title modal-title\">\n      {{ 'anonymousConsents.dialog.title' | cxTranslate }}\n    </div>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"closeModal('Cross click')\"\n    >\n      <span aria-hidden=\"true\">\n        <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n      </span>\n    </button>\n  </div>\n  <!-- Separator -->\n  <div\n    class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n  ></div>\n  <div class=\"cx-dialog-description\" *ngIf=\"showLegalDescription\">\n    {{ 'anonymousConsents.dialog.legalDescription' | cxTranslate }}\n    <div\n      class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n    ></div>\n  </div>\n  <!-- Actions -->\n  <div class=\"cx-dialog-buttons\">\n    <a tabindex=\"0\" class=\"btn-link cx-action-link\" (click)=\"rejectAll()\">{{\n      'anonymousConsents.dialog.clearAll' | cxTranslate\n    }}</a>\n    <a tabindex=\"0\" class=\"btn-link cx-action-link\" (click)=\"allowAll()\">{{\n      'anonymousConsents.dialog.selectAll' | cxTranslate\n    }}</a>\n  </div>\n  <!-- Modal Body -->\n  <div\n    class=\"cx-dialog-body modal-body\"\n    *ngIf=\"templates$ | async as templates\"\n  >\n    <div *ngIf=\"consents$ | async as consents\">\n      <div\n        class=\"cx-dialog-row col-sm-12 col-md-6\"\n        *ngFor=\"let template of templates\"\n      >\n        <cx-consent-management-form\n          [consentTemplate]=\"template\"\n          [requiredConsents]=\"requiredConsents\"\n          [consent]=\"getCorrespondingConsent(template, consents)\"\n          [isAnonymousConsentsEnabled]=\"true\"\n          (consentChanged)=\"onConsentChange($event)\"\n        ></cx-consent-management-form>\n      </div>\n    </div>\n  </div>\n</div>\n"
                     }] }
         ];
         /** @nocollapse */
@@ -12907,126 +12907,651 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var AnonymousConsentFormComponent = /** @class */ (function () {
-        function AnonymousConsentFormComponent() {
-            this.iconTypes = ICON_TYPE;
-            this.consentGiven$ = new rxjs.BehaviorSubject(false);
-            this.accordionExpanded = false;
-            this.accordionHeight = '0px';
+    var ConsentManagementFormComponent = /** @class */ (function () {
+        function ConsentManagementFormComponent() {
+            this.consentGiven = false;
             this.requiredConsents = [];
+            this.isAnonymousConsentsEnabled = false;
             this.consentChanged = new core.EventEmitter();
         }
         /**
          * @return {?}
          */
-        AnonymousConsentFormComponent.prototype.ngOnInit = /**
+        ConsentManagementFormComponent.prototype.ngOnInit = /**
          * @return {?}
          */
         function () {
-            if (this.consent) {
-                this.consentGiven$.next(this.consent.consentState === core$1.ANONYMOUS_CONSENT_STATUS.GIVEN);
+            if (this.isAnonymousConsentsEnabled && this.consent) {
+                this.consentGiven = Boolean(this.consent.consentState === core$1.ANONYMOUS_CONSENT_STATUS.GIVEN);
             }
-            this.consentGivenTranslation$ = this.consentGiven$.pipe(operators.map((/**
-             * @param {?} given
-             * @return {?}
-             */
-            function (given) {
-                return given ? 'anonymousConsents.dialog.on' : 'anonymousConsents.dialog.off';
-            })));
+            else {
+                if (this.consentTemplate && this.consentTemplate.currentConsent) {
+                    if (this.consentTemplate.currentConsent.consentWithdrawnDate) {
+                        this.consentGiven = false;
+                    }
+                    else if (this.consentTemplate.currentConsent.consentGivenDate) {
+                        this.consentGiven = true;
+                    }
+                }
+            }
         };
         /**
          * @return {?}
          */
-        AnonymousConsentFormComponent.prototype.onConsentChange = /**
+        ConsentManagementFormComponent.prototype.onConsentChange = /**
          * @return {?}
          */
         function () {
-            this.consentGiven$.next(!this.consentGiven$.value);
+            this.consentGiven = !this.consentGiven;
             this.consentChanged.emit({
-                given: this.consentGiven$.value,
-                template: this.template,
+                given: this.consentGiven,
+                template: this.consentTemplate,
             });
-        };
-        /**
-         * @param {?=} keyEvent
-         * @return {?}
-         */
-        AnonymousConsentFormComponent.prototype.toggleAccordion = /**
-         * @param {?=} keyEvent
-         * @return {?}
-         */
-        function (keyEvent) {
-            /** @type {?} */
-            var expand = true;
-            if (keyEvent && keyEvent.key !== ' ' && keyEvent.key !== 'Enter') {
-                expand = false;
-            }
-            if (expand) {
-                this.accordionExpanded = !this.accordionExpanded;
-                this.accordionHeight = this.accordionExpanded
-                    ? this.accordionContent.nativeElement.clientHeight + "px"
-                    : '0px';
-            }
         };
         /**
          * @param {?} templateId
          * @return {?}
          */
-        AnonymousConsentFormComponent.prototype.isRequired = /**
+        ConsentManagementFormComponent.prototype.isRequired = /**
          * @param {?} templateId
          * @return {?}
          */
         function (templateId) {
-            return this.requiredConsents.includes(templateId);
+            return this.isAnonymousConsentsEnabled
+                ? this.requiredConsents.includes(templateId)
+                : false;
+        };
+        ConsentManagementFormComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-consent-management-form',
+                        template: "<div class=\"form-check\">\n  <label>\n    <input\n      type=\"checkbox\"\n      class=\"form-check-input\"\n      (change)=\"onConsentChange()\"\n      [checked]=\"consentGiven\"\n      [disabled]=\"isRequired(consentTemplate?.id)\"\n    />\n    <span class=\"form-check-label\">\n      {{ consentTemplate?.description }}\n    </span>\n  </label>\n</div>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        ConsentManagementFormComponent.ctorParameters = function () { return []; };
+        ConsentManagementFormComponent.propDecorators = {
+            consentTemplate: [{ type: core.Input }],
+            requiredConsents: [{ type: core.Input }],
+            isAnonymousConsentsEnabled: [{ type: core.Input }],
+            consent: [{ type: core.Input }],
+            consentChanged: [{ type: core.Output }]
+        };
+        return ConsentManagementFormComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        ConsentManagementFormComponent.prototype.consentGiven;
+        /** @type {?} */
+        ConsentManagementFormComponent.prototype.consentTemplate;
+        /** @type {?} */
+        ConsentManagementFormComponent.prototype.requiredConsents;
+        /** @type {?} */
+        ConsentManagementFormComponent.prototype.isAnonymousConsentsEnabled;
+        /** @type {?} */
+        ConsentManagementFormComponent.prototype.consent;
+        /** @type {?} */
+        ConsentManagementFormComponent.prototype.consentChanged;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ConsentManagementComponent = /** @class */ (function () {
+        function ConsentManagementComponent(userConsentService, globalMessageService, anonymousConsentsConfig, anonymousConsentsService, authService) {
+            this.userConsentService = userConsentService;
+            this.globalMessageService = globalMessageService;
+            this.anonymousConsentsConfig = anonymousConsentsConfig;
+            this.anonymousConsentsService = anonymousConsentsService;
+            this.authService = authService;
+            this.subscriptions = new rxjs.Subscription();
+            this.allConsentsLoading = new rxjs.BehaviorSubject(false);
+            this.requiredConsents = [];
+            this.isAnonymousConsentsEnabled = core$1.isFeatureEnabled(this.anonymousConsentsConfig, core$1.ANONYMOUS_CONSENTS_FEATURE);
+            // TODO(issue:4989) Anonymous consents - remove
+            this.isLevel13 = core$1.isFeatureLevel(this.anonymousConsentsConfig, '1.3');
+        }
+        /**
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+        function () {
+            this.loading$ = rxjs.combineLatest([
+                this.userConsentService.getConsentsResultLoading(),
+                this.userConsentService.getGiveConsentResultLoading(),
+                this.userConsentService.getWithdrawConsentResultLoading(),
+                this.authService.isUserLoggedIn(),
+                this.allConsentsLoading,
+            ]).pipe(operators.map((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 5), consentLoading = _b[0], giveConsentLoading = _b[1], withdrawConsentLoading = _b[2], isUserLoggedIn = _b[3], allConsentsLoading = _b[4];
+                return consentLoading ||
+                    giveConsentLoading ||
+                    withdrawConsentLoading ||
+                    !isUserLoggedIn ||
+                    allConsentsLoading;
+            })));
+            this.consentListInit();
+            this.giveConsentInit();
+            this.withdrawConsentInit();
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.consentListInit = /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this.templateList$ = this.userConsentService.getConsents().pipe(operators.withLatestFrom(this.anonymousConsentsService.getTemplates(), this.authService.isUserLoggedIn()), operators.filter((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 3), _templateList = _b[0], _anonymousTemplates = _b[1], isUserLoggedIn = _b[2];
+                return isUserLoggedIn;
+            })), operators.tap((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 2), templateList = _b[0], _anonymousTemplates = _b[1];
+                if (!_this.consentsExists(templateList)) {
+                    _this.userConsentService.loadConsents();
+                }
+            })), operators.map((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 2), templateList = _b[0], anonymousTemplates = _b[1];
+                if (!_this.isAnonymousConsentsEnabled) {
+                    return templateList;
+                }
+                if (Boolean(_this.anonymousConsentsConfig.anonymousConsents)) {
+                    if (Boolean(_this.anonymousConsentsConfig.anonymousConsents.requiredConsents)) {
+                        _this.requiredConsents = _this.anonymousConsentsConfig.anonymousConsents.requiredConsents;
+                    }
+                    if (Boolean(_this.anonymousConsentsConfig.anonymousConsents
+                        .consentManagementPage)) {
+                        return _this.hideAnonymousConsents(templateList, anonymousTemplates);
+                    }
+                }
+                return templateList;
+            })));
+        };
+        /**
+         * @private
+         * @param {?} templateList
+         * @param {?=} anonymousTemplates
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.hideAnonymousConsents = /**
+         * @private
+         * @param {?} templateList
+         * @param {?=} anonymousTemplates
+         * @return {?}
+         */
+        function (templateList, anonymousTemplates) {
+            if (anonymousTemplates === void 0) { anonymousTemplates = []; }
+            /** @type {?} */
+            var hideTemplateIds = [];
+            if (!this.anonymousConsentsConfig.anonymousConsents.consentManagementPage
+                .showAnonymousConsents) {
+                hideTemplateIds = anonymousTemplates.map((/**
+                 * @param {?} template
+                 * @return {?}
+                 */
+                function (template) { return template.id; }));
+                return this.userConsentService.filterConsentTemplates(templateList, hideTemplateIds);
+            }
+            if (Boolean(this.anonymousConsentsConfig.anonymousConsents.consentManagementPage
+                .hideConsents) &&
+                this.anonymousConsentsConfig.anonymousConsents.consentManagementPage
+                    .hideConsents.length > 0) {
+                hideTemplateIds = this.anonymousConsentsConfig.anonymousConsents
+                    .consentManagementPage.hideConsents;
+            }
+            return this.userConsentService.filterConsentTemplates(templateList, hideTemplateIds);
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.giveConsentInit = /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this.userConsentService.resetGiveConsentProcessState();
+            this.subscriptions.add(this.userConsentService
+                .getGiveConsentResultSuccess()
+                .subscribe((/**
+             * @param {?} success
+             * @return {?}
+             */
+            function (success) { return _this.onConsentGivenSuccess(success); })));
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.withdrawConsentInit = /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this.userConsentService.resetWithdrawConsentProcessState();
+            this.subscriptions.add(this.userConsentService
+                .getWithdrawConsentResultLoading()
+                .pipe(operators.skipWhile(Boolean), operators.withLatestFrom(this.userConsentService.getWithdrawConsentResultSuccess()), operators.map((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 2), withdrawalSuccess = _b[1];
+                return withdrawalSuccess;
+            })), operators.tap((/**
+             * @param {?} withdrawalSuccess
+             * @return {?}
+             */
+            function (withdrawalSuccess) {
+                if (withdrawalSuccess) {
+                    _this.userConsentService.loadConsents();
+                }
+            })))
+                .subscribe((/**
+             * @param {?} withdrawalSuccess
+             * @return {?}
+             */
+            function (withdrawalSuccess) {
+                return _this.onConsentWithdrawnSuccess(withdrawalSuccess);
+            })));
+        };
+        /**
+         * @private
+         * @param {?} templateList
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.consentsExists = /**
+         * @private
+         * @param {?} templateList
+         * @return {?}
+         */
+        function (templateList) {
+            return Boolean(templateList) && templateList.length > 0;
+        };
+        /**
+         * @param {?} __0
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.onConsentChange = /**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var given = _a.given, template = _a.template;
+            if (given) {
+                this.userConsentService.giveConsent(template.id, template.version);
+            }
+            else {
+                this.userConsentService.withdrawConsent(template.currentConsent.code);
+            }
+        };
+        /**
+         * @private
+         * @param {?} success
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.onConsentGivenSuccess = /**
+         * @private
+         * @param {?} success
+         * @return {?}
+         */
+        function (success) {
+            if (success) {
+                this.userConsentService.resetGiveConsentProcessState();
+                this.globalMessageService.add({ key: 'consentManagementForm.message.success.given' }, core$1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
+            }
+        };
+        /**
+         * @private
+         * @param {?} success
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.onConsentWithdrawnSuccess = /**
+         * @private
+         * @param {?} success
+         * @return {?}
+         */
+        function (success) {
+            if (success) {
+                this.userConsentService.resetWithdrawConsentProcessState();
+                this.globalMessageService.add({ key: 'consentManagementForm.message.success.withdrawn' }, core$1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
+            }
+        };
+        /**
+         * @param {?=} templates
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.rejectAll = /**
+         * @param {?=} templates
+         * @return {?}
+         */
+        function (templates) {
+            var _this = this;
+            if (templates === void 0) { templates = []; }
+            /** @type {?} */
+            var consentsToWithdraw = [];
+            templates.forEach((/**
+             * @param {?} template
+             * @return {?}
+             */
+            function (template) {
+                if (_this.isConsentGiven(template)) {
+                    if (_this.isRequiredConsent(template)) {
+                        return;
+                    }
+                    consentsToWithdraw.push(template);
+                }
+            }));
+            this.allConsentsLoading.next(true);
+            this.subscriptions.add(this.setupWithdrawalStream(consentsToWithdraw)
+                .pipe(operators.tap((/**
+             * @param {?} _timesLoaded
+             * @return {?}
+             */
+            function (_timesLoaded) { return _this.allConsentsLoading.next(false); })))
+                .subscribe());
+        };
+        /**
+         * @private
+         * @param {?=} consentsToWithdraw
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.setupWithdrawalStream = /**
+         * @private
+         * @param {?=} consentsToWithdraw
+         * @return {?}
+         */
+        function (consentsToWithdraw) {
+            var _this = this;
+            if (consentsToWithdraw === void 0) { consentsToWithdraw = []; }
+            /** @type {?} */
+            var loading$ = rxjs.concat(this.userConsentService.getWithdrawConsentResultLoading()).pipe(operators.distinctUntilChanged(), operators.filter((/**
+             * @param {?} loading
+             * @return {?}
+             */
+            function (loading) { return !loading; })));
+            /** @type {?} */
+            var count$ = loading$.pipe(operators.scan((/**
+             * @param {?} acc
+             * @param {?} _value
+             * @return {?}
+             */
+            function (acc, _value) { return acc + 1; }), -1));
+            /** @type {?} */
+            var withdraw$ = count$.pipe(operators.tap((/**
+             * @param {?} i
+             * @return {?}
+             */
+            function (i) {
+                if (i < consentsToWithdraw.length) {
+                    _this.userConsentService.withdrawConsent(consentsToWithdraw[i].currentConsent.code);
+                }
+            })));
+            /** @type {?} */
+            var checkTimesLoaded$ = withdraw$.pipe(operators.filter((/**
+             * @param {?} timesLoaded
+             * @return {?}
+             */
+            function (timesLoaded) { return timesLoaded === consentsToWithdraw.length; })));
+            return checkTimesLoaded$;
+        };
+        /**
+         * @private
+         * @param {?} consentTemplate
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.isConsentGiven = /**
+         * @private
+         * @param {?} consentTemplate
+         * @return {?}
+         */
+        function (consentTemplate) {
+            return (Boolean(consentTemplate.currentConsent) &&
+                Boolean(consentTemplate.currentConsent.consentGivenDate) &&
+                !Boolean(consentTemplate.currentConsent.consentWithdrawnDate));
+        };
+        /**
+         * @param {?=} templates
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.allowAll = /**
+         * @param {?=} templates
+         * @return {?}
+         */
+        function (templates) {
+            var _this = this;
+            if (templates === void 0) { templates = []; }
+            /** @type {?} */
+            var consentsToGive = [];
+            templates.forEach((/**
+             * @param {?} template
+             * @return {?}
+             */
+            function (template) {
+                if (_this.isConsentWithdrawn(template)) {
+                    if (_this.isRequiredConsent(template)) {
+                        return;
+                    }
+                    consentsToGive.push(template);
+                }
+            }));
+            this.allConsentsLoading.next(true);
+            this.subscriptions.add(this.setupGiveStream(consentsToGive)
+                .pipe(operators.tap((/**
+             * @param {?} _timesLoaded
+             * @return {?}
+             */
+            function (_timesLoaded) { return _this.allConsentsLoading.next(false); })))
+                .subscribe());
+        };
+        /**
+         * @private
+         * @param {?=} consentsToGive
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.setupGiveStream = /**
+         * @private
+         * @param {?=} consentsToGive
+         * @return {?}
+         */
+        function (consentsToGive) {
+            var _this = this;
+            if (consentsToGive === void 0) { consentsToGive = []; }
+            /** @type {?} */
+            var loading$ = rxjs.concat(this.userConsentService.getGiveConsentResultLoading()).pipe(operators.distinctUntilChanged(), operators.filter((/**
+             * @param {?} loading
+             * @return {?}
+             */
+            function (loading) { return !loading; })));
+            /** @type {?} */
+            var count$ = loading$.pipe(operators.scan((/**
+             * @param {?} acc
+             * @param {?} _value
+             * @return {?}
+             */
+            function (acc, _value) { return acc + 1; }), -1));
+            /** @type {?} */
+            var giveConsent$ = count$.pipe(operators.tap((/**
+             * @param {?} i
+             * @return {?}
+             */
+            function (i) {
+                if (i < consentsToGive.length) {
+                    _this.userConsentService.giveConsent(consentsToGive[i].id, consentsToGive[i].version);
+                }
+            })));
+            /** @type {?} */
+            var checkTimesLoaded$ = giveConsent$.pipe(operators.filter((/**
+             * @param {?} timesLoaded
+             * @return {?}
+             */
+            function (timesLoaded) { return timesLoaded === consentsToGive.length; })));
+            return checkTimesLoaded$;
+        };
+        /**
+         * @private
+         * @param {?} consentTemplate
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.isConsentWithdrawn = /**
+         * @private
+         * @param {?} consentTemplate
+         * @return {?}
+         */
+        function (consentTemplate) {
+            if (Boolean(consentTemplate.currentConsent)) {
+                return Boolean(consentTemplate.currentConsent.consentWithdrawnDate);
+            }
+            return true;
+        };
+        /**
+         * @private
+         * @param {?} template
+         * @return {?}
+         */
+        ConsentManagementComponent.prototype.isRequiredConsent = /**
+         * @private
+         * @param {?} template
+         * @return {?}
+         */
+        function (template) {
+            if (!this.isAnonymousConsentsEnabled) {
+                return false;
+            }
+            return (Boolean(this.anonymousConsentsConfig.anonymousConsents) &&
+                Boolean(this.anonymousConsentsConfig.anonymousConsents.requiredConsents) &&
+                this.anonymousConsentsConfig.anonymousConsents.requiredConsents.includes(template.id));
         };
         /**
          * @return {?}
          */
-        AnonymousConsentFormComponent.prototype.ngOnDestroy = /**
+        ConsentManagementComponent.prototype.ngOnDestroy = /**
          * @return {?}
          */
         function () {
-            this.consentGiven$.unsubscribe();
+            this.subscriptions.unsubscribe();
+            this.allConsentsLoading.unsubscribe();
+            this.userConsentService.resetGiveConsentProcessState();
+            this.userConsentService.resetWithdrawConsentProcessState();
         };
-        AnonymousConsentFormComponent.decorators = [
+        ConsentManagementComponent.decorators = [
             { type: core.Component, args: [{
-                        selector: 'cx-anonymous-consent-form',
-                        template: "<div\n  class=\"form-check cx-accordion\"\n  role=\"tablist\"\n  aria-live=\"polite\"\n  data-behavior=\"accordion\"\n>\n  <div class=\"cx-accordion-item\">\n    <div\n      [id]=\"'tab' + template?.id\"\n      tabindex=\"0\"\n      class=\"cx-accordion-tab\"\n      [attr.aria-controls]=\"'panel' + template?.id\"\n      role=\"tab\"\n      [attr.aria-selected]=\"accordionExpanded\"\n      [attr.aria-expanded]=\"accordionExpanded\"\n      (click)=\"toggleAccordion()\"\n      (keydown)=\"toggleAccordion($event)\"\n    >\n      <cx-icon [type]=\"iconTypes.CARET_DOWN\"></cx-icon>\n      <span class=\"cx-accordion-title\" tabindex=\"-1\"\n        >{{ template?.name }}\n      </span>\n    </div>\n\n    <div\n      [id]=\"'panel' + template?.id\"\n      class=\"cx-accordion-tabpanel\"\n      role=\"tabpanel\"\n      [attr.aria-hidden]=\"!accordionExpanded\"\n      [attr.aria-labelledby]=\"'tab' + template?.id\"\n      [style.height]=\"accordionHeight\"\n    >\n      <div class=\"cx-accordion-content\" #accordionContent>\n        <p>{{ template?.description }}</p>\n      </div>\n    </div>\n\n    <div class=\"cx-toggle-button\">\n      <input\n        [id]=\"template?.id\"\n        type=\"checkbox\"\n        [checked]=\"consentGiven$ | async\"\n        (change)=\"onConsentChange()\"\n        [disabled]=\"isRequired(template?.id)\"\n      />\n\n      <label [for]=\"template?.id\">\n        <div class=\"cx-toggle-switch\"></div>\n        <div class=\"cx-toggle-text\">\n          {{ consentGivenTranslation$ | async | cxTranslate }}\n        </div>\n      </label>\n    </div>\n  </div>\n</div>\n"
+                        selector: 'cx-consent-management',
+                        template: "<!-- TODO(issue:4989) Anonymous consents - remove the wrapping `<ng-container *ngIf=\"isLevel13; else legacyConsentManagementPage\">` -->\n<ng-container *ngIf=\"isLevel13; else legacyConsentManagementPage\">\n  <div *ngIf=\"loading$ | async; else consentManagementForm\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #consentManagementForm>\n    <ng-container *ngIf=\"templateList$ | async as templateList\">\n      <div class=\"cx-consent-action-links\">\n        <div class=\"col-sm-12 col-md-8 col-lg-6\">\n          <a\n            tabindex=\"0\"\n            class=\"btn-link cx-action-link\"\n            (click)=\"rejectAll(templateList)\"\n            >{{ 'consentManagementForm.clearAll' | cxTranslate }}</a\n          >\n          <a\n            tabindex=\"0\"\n            class=\"btn-link cx-action-link\"\n            (click)=\"allowAll(templateList)\"\n            >{{ 'consentManagementForm.selectAll' | cxTranslate }}</a\n          >\n        </div>\n      </div>\n\n      <div class=\"cx-consent-toggles\">\n        <div class=\"col-sm-12 col-md-8 col-lg-6\">\n          <cx-consent-management-form\n            *ngFor=\"let consentTemplate of templateList\"\n            [consentTemplate]=\"consentTemplate\"\n            [requiredConsents]=\"requiredConsents\"\n            [isAnonymousConsentsEnabled]=\"isAnonymousConsentsEnabled\"\n            (consentChanged)=\"onConsentChange($event)\"\n          ></cx-consent-management-form>\n        </div>\n      </div>\n    </ng-container>\n  </ng-template>\n</ng-container>\n\n<!-- TODO(issue:4989) Anonymous consents - remove this whole `<ng-template>` -->\n<ng-template #legacyConsentManagementPage>\n  <div *ngIf=\"loading$ | async; else consentManagementForm\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #consentManagementForm>\n    <div class=\"row d-flex justify-content-center\">\n      <div class=\"col-md-8\">\n        <cx-consent-management-form\n          *ngFor=\"let consentTemplate of templateList$ | async\"\n          [consentTemplate]=\"consentTemplate\"\n          (consentChanged)=\"onConsentChange($event)\"\n        ></cx-consent-management-form>\n      </div>\n    </div>\n  </ng-template>\n</ng-template>\n"
                     }] }
         ];
         /** @nocollapse */
-        AnonymousConsentFormComponent.ctorParameters = function () { return []; };
-        AnonymousConsentFormComponent.propDecorators = {
-            accordionContent: [{ type: core.ViewChild, args: ['accordionContent', { static: false },] }],
-            template: [{ type: core.Input }],
-            consent: [{ type: core.Input }],
-            requiredConsents: [{ type: core.Input }],
-            consentChanged: [{ type: core.Output }]
-        };
-        return AnonymousConsentFormComponent;
+        ConsentManagementComponent.ctorParameters = function () { return [
+            { type: core$1.UserConsentService },
+            { type: core$1.GlobalMessageService },
+            { type: core$1.AnonymousConsentsConfig },
+            { type: core$1.AnonymousConsentsService },
+            { type: core$1.AuthService }
+        ]; };
+        return ConsentManagementComponent;
     }());
     if (false) {
+        /**
+         * @type {?}
+         * @private
+         */
+        ConsentManagementComponent.prototype.subscriptions;
+        /**
+         * @type {?}
+         * @private
+         */
+        ConsentManagementComponent.prototype.allConsentsLoading;
         /** @type {?} */
-        AnonymousConsentFormComponent.prototype.iconTypes;
+        ConsentManagementComponent.prototype.templateList$;
         /** @type {?} */
-        AnonymousConsentFormComponent.prototype.consentGiven$;
+        ConsentManagementComponent.prototype.loading$;
         /** @type {?} */
-        AnonymousConsentFormComponent.prototype.consentGivenTranslation$;
+        ConsentManagementComponent.prototype.requiredConsents;
         /** @type {?} */
-        AnonymousConsentFormComponent.prototype.accordionExpanded;
+        ConsentManagementComponent.prototype.isAnonymousConsentsEnabled;
         /** @type {?} */
-        AnonymousConsentFormComponent.prototype.accordionHeight;
-        /** @type {?} */
-        AnonymousConsentFormComponent.prototype.accordionContent;
-        /** @type {?} */
-        AnonymousConsentFormComponent.prototype.template;
-        /** @type {?} */
-        AnonymousConsentFormComponent.prototype.consent;
-        /** @type {?} */
-        AnonymousConsentFormComponent.prototype.requiredConsents;
-        /** @type {?} */
-        AnonymousConsentFormComponent.prototype.consentChanged;
+        ConsentManagementComponent.prototype.isLevel13;
+        /**
+         * @type {?}
+         * @private
+         */
+        ConsentManagementComponent.prototype.userConsentService;
+        /**
+         * @type {?}
+         * @private
+         */
+        ConsentManagementComponent.prototype.globalMessageService;
+        /**
+         * @type {?}
+         * @private
+         */
+        ConsentManagementComponent.prototype.anonymousConsentsConfig;
+        /**
+         * @type {?}
+         * @private
+         */
+        ConsentManagementComponent.prototype.anonymousConsentsService;
+        /**
+         * @type {?}
+         * @private
+         */
+        ConsentManagementComponent.prototype.authService;
     }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ConsentManagementModule = /** @class */ (function () {
+        function ConsentManagementModule() {
+        }
+        ConsentManagementModule.decorators = [
+            { type: core.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            forms.FormsModule,
+                            forms.ReactiveFormsModule,
+                            SpinnerModule,
+                            core$1.I18nModule,
+                            IconModule,
+                            core$1.ConfigModule.withConfig((/** @type {?} */ ({
+                                cmsComponents: {
+                                    ConsentManagementComponent: {
+                                        component: ConsentManagementComponent,
+                                        guards: [core$1.AuthGuard],
+                                    },
+                                },
+                            }))),
+                        ],
+                        declarations: [ConsentManagementComponent, ConsentManagementFormComponent],
+                        exports: [ConsentManagementComponent, ConsentManagementFormComponent],
+                        entryComponents: [ConsentManagementComponent],
+                    },] }
+        ];
+        return ConsentManagementModule;
+    }());
 
     /**
      * @fileoverview added by tsickle
@@ -13037,13 +13562,10 @@
         }
         AnonymousConsentsModule.decorators = [
             { type: core.NgModule, args: [{
-                        imports: [common.CommonModule, core$1.I18nModule, IconModule],
-                        declarations: [
-                            AnonymousConsentsDialogComponent,
-                            AnonymousConsentFormComponent,
-                        ],
+                        imports: [common.CommonModule, core$1.I18nModule, IconModule, ConsentManagementModule],
+                        declarations: [AnonymousConsentsDialogComponent],
                         entryComponents: [AnonymousConsentsDialogComponent],
-                        exports: [AnonymousConsentsDialogComponent, AnonymousConsentFormComponent],
+                        exports: [AnonymousConsentsDialogComponent],
                     },] }
         ];
         return AnonymousConsentsModule;
@@ -16156,697 +16678,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ConsentManagementFormComponent = /** @class */ (function () {
-        function ConsentManagementFormComponent() {
-            this.iconTypes = ICON_TYPE;
-            this.consentGivenTranslation$ = new rxjs.BehaviorSubject('consentManagementForm.off');
-            this.accordionExpanded = false;
-            this.accordionHeight = '0px';
-            this.consentGiven = false;
-            this.requiredConsents = [];
-            this.isAnonymousConsentsEnabled = false;
-            // TODO(issue:4989) Anonymous consents - remove
-            this.isLevel13 = false;
-            this.consentChanged = new core.EventEmitter();
-        }
-        /**
-         * @return {?}
-         */
-        ConsentManagementFormComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-        function () {
-            if (this.consentTemplate && this.consentTemplate.currentConsent) {
-                if (this.consentTemplate.currentConsent.consentWithdrawnDate) {
-                    this.consentGiven = false;
-                    this.consentGivenTranslation$.next('consentManagementForm.off');
-                }
-                else if (this.consentTemplate.currentConsent.consentGivenDate) {
-                    this.consentGiven = true;
-                    this.consentGivenTranslation$.next('consentManagementForm.on');
-                }
-            }
-        };
-        /**
-         * @return {?}
-         */
-        ConsentManagementFormComponent.prototype.onConsentChange = /**
-         * @return {?}
-         */
-        function () {
-            this.consentGiven = !this.consentGiven;
-            if (this.consentGiven) {
-                this.consentGivenTranslation$.next('consentManagementForm.on');
-            }
-            else {
-                this.consentGivenTranslation$.next('consentManagementForm.off');
-            }
-            this.consentChanged.emit({
-                given: this.consentGiven,
-                template: this.consentTemplate,
-            });
-        };
-        /**
-         * @param {?=} keyEvent
-         * @return {?}
-         */
-        ConsentManagementFormComponent.prototype.toggleAccordion = /**
-         * @param {?=} keyEvent
-         * @return {?}
-         */
-        function (keyEvent) {
-            /** @type {?} */
-            var expand = true;
-            if (keyEvent && keyEvent.key !== ' ' && keyEvent.key !== 'Enter') {
-                expand = false;
-            }
-            if (expand) {
-                this.accordionExpanded = !this.accordionExpanded;
-                this.accordionHeight = this.accordionExpanded
-                    ? this.accordionContent.nativeElement.clientHeight + "px"
-                    : '0px';
-            }
-        };
-        /**
-         * @param {?} templateId
-         * @return {?}
-         */
-        ConsentManagementFormComponent.prototype.isRequired = /**
-         * @param {?} templateId
-         * @return {?}
-         */
-        function (templateId) {
-            return this.isAnonymousConsentsEnabled
-                ? this.requiredConsents.includes(templateId)
-                : false;
-        };
-        ConsentManagementFormComponent.decorators = [
-            { type: core.Component, args: [{
-                        selector: 'cx-consent-management-form',
-                        template: "<!-- TODO(issue:4989) Anonymous consents - remove the wrapping `<ng-container *ngIf=\"isLevel13; else legacyConsentManagementForm\">` -->\n<ng-container *ngIf=\"isLevel13; else legacyConsentManagementForm\">\n  <div\n    class=\"form-check cx-accordion\"\n    role=\"tablist\"\n    aria-live=\"polite\"\n    data-behavior=\"accordion\"\n  >\n    <div class=\"cx-accordion-item\">\n      <div\n        [id]=\"'tab' + consentTemplate?.id\"\n        tabindex=\"0\"\n        class=\"cx-accordion-tab\"\n        [attr.aria-controls]=\"'panel' + consentTemplate?.id\"\n        role=\"tab\"\n        [attr.aria-selected]=\"accordionExpanded\"\n        [attr.aria-expanded]=\"accordionExpanded\"\n        (click)=\"toggleAccordion()\"\n        (keydown)=\"toggleAccordion($event)\"\n      >\n        <cx-icon [type]=\"iconTypes.CARET_DOWN\"></cx-icon>\n        <span class=\"cx-accordion-title\" tabindex=\"-1\"\n          >{{ consentTemplate?.name }}\n        </span>\n      </div>\n\n      <div\n        [id]=\"'panel' + consentTemplate?.id\"\n        class=\"cx-accordion-tabpanel\"\n        role=\"tabpanel\"\n        [attr.aria-hidden]=\"!accordionExpanded\"\n        [attr.aria-labelledby]=\"'tab' + consentTemplate?.id\"\n        [style.height]=\"accordionHeight\"\n      >\n        <div class=\"cx-accordion-content\" #accordionContent>\n          <p>{{ consentTemplate?.description }}</p>\n        </div>\n      </div>\n\n      <div class=\"cx-toggle-button\">\n        <input\n          type=\"checkbox\"\n          [id]=\"consentTemplate?.id\"\n          [checked]=\"consentGiven\"\n          [disabled]=\"isRequired(consentTemplate?.id)\"\n          (change)=\"onConsentChange()\"\n        />\n\n        <label [for]=\"consentTemplate?.id\">\n          <div class=\"cx-toggle-switch\"></div>\n          <div class=\"cx-toggle-text\">\n            {{ consentGivenTranslation$ | async | cxTranslate }}\n          </div>\n        </label>\n      </div>\n    </div>\n  </div>\n</ng-container>\n\n<!-- TODO(issue:4989) Anonymous consents - remove the whole `<ng-template #legacyConsentManagementForm>...</ng-template>` block -->\n<ng-template #legacyConsentManagementForm>\n  <div class=\"form-check\">\n    <label>\n      <input\n        type=\"checkbox\"\n        class=\"form-check-input\"\n        (change)=\"onConsentChange()\"\n        [checked]=\"consentGiven\"\n      />\n      <span class=\"form-check-label\">\n        {{ consentTemplate?.description }}\n      </span>\n    </label>\n  </div>\n</ng-template>\n"
-                    }] }
-        ];
-        /** @nocollapse */
-        ConsentManagementFormComponent.ctorParameters = function () { return []; };
-        ConsentManagementFormComponent.propDecorators = {
-            accordionContent: [{ type: core.ViewChild, args: ['accordionContent', { static: false },] }],
-            consentTemplate: [{ type: core.Input }],
-            requiredConsents: [{ type: core.Input }],
-            isAnonymousConsentsEnabled: [{ type: core.Input }],
-            isLevel13: [{ type: core.Input }],
-            consentChanged: [{ type: core.Output }]
-        };
-        return ConsentManagementFormComponent;
-    }());
-    if (false) {
-        /** @type {?} */
-        ConsentManagementFormComponent.prototype.iconTypes;
-        /** @type {?} */
-        ConsentManagementFormComponent.prototype.consentGivenTranslation$;
-        /** @type {?} */
-        ConsentManagementFormComponent.prototype.accordionExpanded;
-        /** @type {?} */
-        ConsentManagementFormComponent.prototype.accordionHeight;
-        /** @type {?} */
-        ConsentManagementFormComponent.prototype.consentGiven;
-        /** @type {?} */
-        ConsentManagementFormComponent.prototype.accordionContent;
-        /** @type {?} */
-        ConsentManagementFormComponent.prototype.consentTemplate;
-        /** @type {?} */
-        ConsentManagementFormComponent.prototype.requiredConsents;
-        /** @type {?} */
-        ConsentManagementFormComponent.prototype.isAnonymousConsentsEnabled;
-        /** @type {?} */
-        ConsentManagementFormComponent.prototype.isLevel13;
-        /** @type {?} */
-        ConsentManagementFormComponent.prototype.consentChanged;
-    }
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ConsentManagementComponent = /** @class */ (function () {
-        function ConsentManagementComponent(userConsentService, globalMessageService, anonymousConsentsConfig, anonymousConsentsService, authService) {
-            this.userConsentService = userConsentService;
-            this.globalMessageService = globalMessageService;
-            this.anonymousConsentsConfig = anonymousConsentsConfig;
-            this.anonymousConsentsService = anonymousConsentsService;
-            this.authService = authService;
-            this.subscriptions = new rxjs.Subscription();
-            this.allConsentsLoading = new rxjs.BehaviorSubject(false);
-            this.requiredConsents = [];
-            this.isAnonymousConsentsEnabled = core$1.isFeatureEnabled(this.anonymousConsentsConfig, core$1.ANONYMOUS_CONSENTS_FEATURE);
-            // TODO(issue:4989) Anonymous consents - remove
-            this.isLevel13 = core$1.isFeatureLevel(this.anonymousConsentsConfig, '1.3');
-        }
-        /**
-         * @return {?}
-         */
-        ConsentManagementComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-        function () {
-            this.loading$ = rxjs.combineLatest([
-                this.userConsentService.getConsentsResultLoading(),
-                this.userConsentService.getGiveConsentResultLoading(),
-                this.userConsentService.getWithdrawConsentResultLoading(),
-                this.authService.isUserLoggedIn(),
-                this.allConsentsLoading,
-            ]).pipe(operators.map((/**
-             * @param {?} __0
-             * @return {?}
-             */
-            function (_a) {
-                var _b = __read(_a, 5), consentLoading = _b[0], giveConsentLoading = _b[1], withdrawConsentLoading = _b[2], isUserLoggedIn = _b[3], allConsentsLoading = _b[4];
-                return consentLoading ||
-                    giveConsentLoading ||
-                    withdrawConsentLoading ||
-                    !isUserLoggedIn ||
-                    allConsentsLoading;
-            })));
-            this.consentListInit();
-            this.giveConsentInit();
-            this.withdrawConsentInit();
-        };
-        /**
-         * @private
-         * @return {?}
-         */
-        ConsentManagementComponent.prototype.consentListInit = /**
-         * @private
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            this.templateList$ = this.userConsentService.getConsents().pipe(operators.withLatestFrom(this.anonymousConsentsService.getTemplates(), this.authService.isUserLoggedIn()), operators.filter((/**
-             * @param {?} __0
-             * @return {?}
-             */
-            function (_a) {
-                var _b = __read(_a, 3), _templateList = _b[0], _anonymousTemplates = _b[1], isUserLoggedIn = _b[2];
-                return isUserLoggedIn;
-            })), operators.tap((/**
-             * @param {?} __0
-             * @return {?}
-             */
-            function (_a) {
-                var _b = __read(_a, 2), templateList = _b[0], _anonymousTemplates = _b[1];
-                if (!_this.consentsExists(templateList)) {
-                    _this.userConsentService.loadConsents();
-                }
-            })), operators.map((/**
-             * @param {?} __0
-             * @return {?}
-             */
-            function (_a) {
-                var _b = __read(_a, 2), templateList = _b[0], anonymousTemplates = _b[1];
-                if (!_this.isAnonymousConsentsEnabled) {
-                    return templateList;
-                }
-                if (Boolean(_this.anonymousConsentsConfig.anonymousConsents)) {
-                    if (Boolean(_this.anonymousConsentsConfig.anonymousConsents.requiredConsents)) {
-                        _this.requiredConsents = _this.anonymousConsentsConfig.anonymousConsents.requiredConsents;
-                    }
-                    if (Boolean(_this.anonymousConsentsConfig.anonymousConsents
-                        .consentManagementPage)) {
-                        return _this.hideAnonymousConsents(templateList, anonymousTemplates);
-                    }
-                }
-                return templateList;
-            })));
-        };
-        /**
-         * @private
-         * @param {?} templateList
-         * @param {?=} anonymousTemplates
-         * @return {?}
-         */
-        ConsentManagementComponent.prototype.hideAnonymousConsents = /**
-         * @private
-         * @param {?} templateList
-         * @param {?=} anonymousTemplates
-         * @return {?}
-         */
-        function (templateList, anonymousTemplates) {
-            if (anonymousTemplates === void 0) { anonymousTemplates = []; }
-            /** @type {?} */
-            var hideTemplateIds = [];
-            if (!this.anonymousConsentsConfig.anonymousConsents.consentManagementPage
-                .showAnonymousConsents) {
-                hideTemplateIds = anonymousTemplates.map((/**
-                 * @param {?} template
-                 * @return {?}
-                 */
-                function (template) { return template.id; }));
-                return this.userConsentService.filterConsentTemplates(templateList, hideTemplateIds);
-            }
-            if (Boolean(this.anonymousConsentsConfig.anonymousConsents.consentManagementPage
-                .hideConsents) &&
-                this.anonymousConsentsConfig.anonymousConsents.consentManagementPage
-                    .hideConsents.length > 0) {
-                hideTemplateIds = this.anonymousConsentsConfig.anonymousConsents
-                    .consentManagementPage.hideConsents;
-            }
-            return this.userConsentService.filterConsentTemplates(templateList, hideTemplateIds);
-        };
-        /**
-         * @private
-         * @return {?}
-         */
-        ConsentManagementComponent.prototype.giveConsentInit = /**
-         * @private
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            this.userConsentService.resetGiveConsentProcessState();
-            this.subscriptions.add(this.userConsentService
-                .getGiveConsentResultSuccess()
-                .subscribe((/**
-             * @param {?} success
-             * @return {?}
-             */
-            function (success) { return _this.onConsentGivenSuccess(success); })));
-        };
-        /**
-         * @private
-         * @return {?}
-         */
-        ConsentManagementComponent.prototype.withdrawConsentInit = /**
-         * @private
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            this.userConsentService.resetWithdrawConsentProcessState();
-            this.subscriptions.add(this.userConsentService
-                .getWithdrawConsentResultLoading()
-                .pipe(operators.skipWhile(Boolean), operators.withLatestFrom(this.userConsentService.getWithdrawConsentResultSuccess()), operators.map((/**
-             * @param {?} __0
-             * @return {?}
-             */
-            function (_a) {
-                var _b = __read(_a, 2), withdrawalSuccess = _b[1];
-                return withdrawalSuccess;
-            })), operators.tap((/**
-             * @param {?} withdrawalSuccess
-             * @return {?}
-             */
-            function (withdrawalSuccess) {
-                if (withdrawalSuccess) {
-                    _this.userConsentService.loadConsents();
-                }
-            })))
-                .subscribe((/**
-             * @param {?} withdrawalSuccess
-             * @return {?}
-             */
-            function (withdrawalSuccess) {
-                return _this.onConsentWithdrawnSuccess(withdrawalSuccess);
-            })));
-        };
-        /**
-         * @private
-         * @param {?} templateList
-         * @return {?}
-         */
-        ConsentManagementComponent.prototype.consentsExists = /**
-         * @private
-         * @param {?} templateList
-         * @return {?}
-         */
-        function (templateList) {
-            return Boolean(templateList) && templateList.length > 0;
-        };
-        /**
-         * @param {?} __0
-         * @return {?}
-         */
-        ConsentManagementComponent.prototype.onConsentChange = /**
-         * @param {?} __0
-         * @return {?}
-         */
-        function (_a) {
-            var given = _a.given, template = _a.template;
-            if (given) {
-                this.userConsentService.giveConsent(template.id, template.version);
-            }
-            else {
-                this.userConsentService.withdrawConsent(template.currentConsent.code);
-            }
-        };
-        /**
-         * @private
-         * @param {?} success
-         * @return {?}
-         */
-        ConsentManagementComponent.prototype.onConsentGivenSuccess = /**
-         * @private
-         * @param {?} success
-         * @return {?}
-         */
-        function (success) {
-            if (success) {
-                this.userConsentService.resetGiveConsentProcessState();
-                this.globalMessageService.add({ key: 'consentManagementForm.message.success.given' }, core$1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
-            }
-        };
-        /**
-         * @private
-         * @param {?} success
-         * @return {?}
-         */
-        ConsentManagementComponent.prototype.onConsentWithdrawnSuccess = /**
-         * @private
-         * @param {?} success
-         * @return {?}
-         */
-        function (success) {
-            if (success) {
-                this.userConsentService.resetWithdrawConsentProcessState();
-                this.globalMessageService.add({ key: 'consentManagementForm.message.success.withdrawn' }, core$1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
-            }
-        };
-        /**
-         * @param {?=} templates
-         * @return {?}
-         */
-        ConsentManagementComponent.prototype.rejectAll = /**
-         * @param {?=} templates
-         * @return {?}
-         */
-        function (templates) {
-            var _this = this;
-            if (templates === void 0) { templates = []; }
-            /** @type {?} */
-            var consentsToWithdraw = [];
-            templates.forEach((/**
-             * @param {?} template
-             * @return {?}
-             */
-            function (template) {
-                if (_this.isConsentGiven(template)) {
-                    if (_this.isRequiredConsent(template)) {
-                        return;
-                    }
-                    consentsToWithdraw.push(template);
-                }
-            }));
-            this.allConsentsLoading.next(true);
-            this.subscriptions.add(this.setupWithdrawalStream(consentsToWithdraw)
-                .pipe(operators.tap((/**
-             * @param {?} _timesLoaded
-             * @return {?}
-             */
-            function (_timesLoaded) { return _this.allConsentsLoading.next(false); })))
-                .subscribe());
-        };
-        /**
-         * @private
-         * @param {?=} consentsToWithdraw
-         * @return {?}
-         */
-        ConsentManagementComponent.prototype.setupWithdrawalStream = /**
-         * @private
-         * @param {?=} consentsToWithdraw
-         * @return {?}
-         */
-        function (consentsToWithdraw) {
-            var _this = this;
-            if (consentsToWithdraw === void 0) { consentsToWithdraw = []; }
-            /** @type {?} */
-            var loading$ = rxjs.concat(this.userConsentService.getWithdrawConsentResultLoading()).pipe(operators.distinctUntilChanged(), operators.filter((/**
-             * @param {?} loading
-             * @return {?}
-             */
-            function (loading) { return !loading; })));
-            /** @type {?} */
-            var count$ = loading$.pipe(operators.scan((/**
-             * @param {?} acc
-             * @param {?} _value
-             * @return {?}
-             */
-            function (acc, _value) { return acc + 1; }), -1));
-            /** @type {?} */
-            var withdraw$ = count$.pipe(operators.tap((/**
-             * @param {?} i
-             * @return {?}
-             */
-            function (i) {
-                if (i < consentsToWithdraw.length) {
-                    _this.userConsentService.withdrawConsent(consentsToWithdraw[i].currentConsent.code);
-                }
-            })));
-            /** @type {?} */
-            var checkTimesLoaded$ = withdraw$.pipe(operators.filter((/**
-             * @param {?} timesLoaded
-             * @return {?}
-             */
-            function (timesLoaded) { return timesLoaded === consentsToWithdraw.length; })));
-            return checkTimesLoaded$;
-        };
-        /**
-         * @private
-         * @param {?} consentTemplate
-         * @return {?}
-         */
-        ConsentManagementComponent.prototype.isConsentGiven = /**
-         * @private
-         * @param {?} consentTemplate
-         * @return {?}
-         */
-        function (consentTemplate) {
-            return (Boolean(consentTemplate.currentConsent) &&
-                Boolean(consentTemplate.currentConsent.consentGivenDate) &&
-                !Boolean(consentTemplate.currentConsent.consentWithdrawnDate));
-        };
-        /**
-         * @param {?=} templates
-         * @return {?}
-         */
-        ConsentManagementComponent.prototype.allowAll = /**
-         * @param {?=} templates
-         * @return {?}
-         */
-        function (templates) {
-            var _this = this;
-            if (templates === void 0) { templates = []; }
-            /** @type {?} */
-            var consentsToGive = [];
-            templates.forEach((/**
-             * @param {?} template
-             * @return {?}
-             */
-            function (template) {
-                if (_this.isConsentWithdrawn(template)) {
-                    if (_this.isRequiredConsent(template)) {
-                        return;
-                    }
-                    consentsToGive.push(template);
-                }
-            }));
-            this.allConsentsLoading.next(true);
-            this.subscriptions.add(this.setupGiveStream(consentsToGive)
-                .pipe(operators.tap((/**
-             * @param {?} _timesLoaded
-             * @return {?}
-             */
-            function (_timesLoaded) { return _this.allConsentsLoading.next(false); })))
-                .subscribe());
-        };
-        /**
-         * @private
-         * @param {?=} consentsToGive
-         * @return {?}
-         */
-        ConsentManagementComponent.prototype.setupGiveStream = /**
-         * @private
-         * @param {?=} consentsToGive
-         * @return {?}
-         */
-        function (consentsToGive) {
-            var _this = this;
-            if (consentsToGive === void 0) { consentsToGive = []; }
-            /** @type {?} */
-            var loading$ = rxjs.concat(this.userConsentService.getGiveConsentResultLoading()).pipe(operators.distinctUntilChanged(), operators.filter((/**
-             * @param {?} loading
-             * @return {?}
-             */
-            function (loading) { return !loading; })));
-            /** @type {?} */
-            var count$ = loading$.pipe(operators.scan((/**
-             * @param {?} acc
-             * @param {?} _value
-             * @return {?}
-             */
-            function (acc, _value) { return acc + 1; }), -1));
-            /** @type {?} */
-            var giveConsent$ = count$.pipe(operators.tap((/**
-             * @param {?} i
-             * @return {?}
-             */
-            function (i) {
-                if (i < consentsToGive.length) {
-                    _this.userConsentService.giveConsent(consentsToGive[i].id, consentsToGive[i].version);
-                }
-            })));
-            /** @type {?} */
-            var checkTimesLoaded$ = giveConsent$.pipe(operators.filter((/**
-             * @param {?} timesLoaded
-             * @return {?}
-             */
-            function (timesLoaded) { return timesLoaded === consentsToGive.length; })));
-            return checkTimesLoaded$;
-        };
-        /**
-         * @private
-         * @param {?} consentTemplate
-         * @return {?}
-         */
-        ConsentManagementComponent.prototype.isConsentWithdrawn = /**
-         * @private
-         * @param {?} consentTemplate
-         * @return {?}
-         */
-        function (consentTemplate) {
-            if (Boolean(consentTemplate.currentConsent)) {
-                return Boolean(consentTemplate.currentConsent.consentWithdrawnDate);
-            }
-            return true;
-        };
-        /**
-         * @private
-         * @param {?} template
-         * @return {?}
-         */
-        ConsentManagementComponent.prototype.isRequiredConsent = /**
-         * @private
-         * @param {?} template
-         * @return {?}
-         */
-        function (template) {
-            if (!this.isAnonymousConsentsEnabled) {
-                return false;
-            }
-            return (Boolean(this.anonymousConsentsConfig.anonymousConsents) &&
-                Boolean(this.anonymousConsentsConfig.anonymousConsents.requiredConsents) &&
-                this.anonymousConsentsConfig.anonymousConsents.requiredConsents.includes(template.id));
-        };
-        /**
-         * @return {?}
-         */
-        ConsentManagementComponent.prototype.ngOnDestroy = /**
-         * @return {?}
-         */
-        function () {
-            this.subscriptions.unsubscribe();
-            this.allConsentsLoading.unsubscribe();
-            this.userConsentService.resetGiveConsentProcessState();
-            this.userConsentService.resetWithdrawConsentProcessState();
-        };
-        ConsentManagementComponent.decorators = [
-            { type: core.Component, args: [{
-                        selector: 'cx-consent-management',
-                        template: "<!-- TODO(issue:4989) Anonymous consents - remove the wrapping `<ng-container *ngIf=\"isLevel13; else legacyConsentManagementPage\">` -->\n<ng-container *ngIf=\"isLevel13; else legacyConsentManagementPage\">\n  <div *ngIf=\"loading$ | async; else consentManagementForm\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #consentManagementForm>\n    <ng-container *ngIf=\"templateList$ | async as templateList\">\n      <div class=\"cx-consent-action-links\">\n        <div class=\"col-sm-12 col-md-8 col-lg-6\">\n          <a\n            tabindex=\"0\"\n            class=\"btn-link cx-action-link\"\n            (click)=\"rejectAll(templateList)\"\n            >{{ 'consentManagementForm.rejectAll' | cxTranslate }}</a\n          >\n          <span class=\"cx-links-separator\">|</span>\n          <a\n            tabindex=\"0\"\n            class=\"btn-link cx-action-link\"\n            (click)=\"allowAll(templateList)\"\n            >{{ 'consentManagementForm.allowAll' | cxTranslate }}</a\n          >\n        </div>\n      </div>\n\n      <div class=\"cx-consent-toggles\">\n        <div class=\"col-sm-12 col-md-8 col-lg-6\">\n          <!-- TODO(issue:4989) Anonymous consents - remove `[isLevel13]=\"isLevel13\"` -->\n          <cx-consent-management-form\n            *ngFor=\"let consentTemplate of templateList\"\n            [consentTemplate]=\"consentTemplate\"\n            [requiredConsents]=\"requiredConsents\"\n            [isAnonymousConsentsEnabled]=\"isAnonymousConsentsEnabled\"\n            [isLevel13]=\"isLevel13\"\n            (consentChanged)=\"onConsentChange($event)\"\n          ></cx-consent-management-form>\n        </div>\n      </div>\n    </ng-container>\n  </ng-template>\n</ng-container>\n\n<!-- TODO(issue:4989) Anonymous consents - remove this whole `<ng-template>` -->\n<ng-template #legacyConsentManagementPage>\n  <div *ngIf=\"loading$ | async; else consentManagementForm\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #consentManagementForm>\n    <div class=\"row d-flex justify-content-center\">\n      <div class=\"col-md-8\">\n        <cx-consent-management-form\n          *ngFor=\"let consentTemplate of templateList$ | async\"\n          [consentTemplate]=\"consentTemplate\"\n          (consentChanged)=\"onConsentChange($event)\"\n        ></cx-consent-management-form>\n      </div>\n    </div>\n  </ng-template>\n</ng-template>\n"
-                    }] }
-        ];
-        /** @nocollapse */
-        ConsentManagementComponent.ctorParameters = function () { return [
-            { type: core$1.UserConsentService },
-            { type: core$1.GlobalMessageService },
-            { type: core$1.AnonymousConsentsConfig },
-            { type: core$1.AnonymousConsentsService },
-            { type: core$1.AuthService }
-        ]; };
-        return ConsentManagementComponent;
-    }());
-    if (false) {
-        /**
-         * @type {?}
-         * @private
-         */
-        ConsentManagementComponent.prototype.subscriptions;
-        /**
-         * @type {?}
-         * @private
-         */
-        ConsentManagementComponent.prototype.allConsentsLoading;
-        /** @type {?} */
-        ConsentManagementComponent.prototype.templateList$;
-        /** @type {?} */
-        ConsentManagementComponent.prototype.loading$;
-        /** @type {?} */
-        ConsentManagementComponent.prototype.requiredConsents;
-        /** @type {?} */
-        ConsentManagementComponent.prototype.isAnonymousConsentsEnabled;
-        /** @type {?} */
-        ConsentManagementComponent.prototype.isLevel13;
-        /**
-         * @type {?}
-         * @private
-         */
-        ConsentManagementComponent.prototype.userConsentService;
-        /**
-         * @type {?}
-         * @private
-         */
-        ConsentManagementComponent.prototype.globalMessageService;
-        /**
-         * @type {?}
-         * @private
-         */
-        ConsentManagementComponent.prototype.anonymousConsentsConfig;
-        /**
-         * @type {?}
-         * @private
-         */
-        ConsentManagementComponent.prototype.anonymousConsentsService;
-        /**
-         * @type {?}
-         * @private
-         */
-        ConsentManagementComponent.prototype.authService;
-    }
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ConsentManagementModule = /** @class */ (function () {
-        function ConsentManagementModule() {
-        }
-        ConsentManagementModule.decorators = [
-            { type: core.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            forms.FormsModule,
-                            forms.ReactiveFormsModule,
-                            SpinnerModule,
-                            core$1.I18nModule,
-                            IconModule,
-                            core$1.ConfigModule.withConfig((/** @type {?} */ ({
-                                cmsComponents: {
-                                    ConsentManagementComponent: {
-                                        component: ConsentManagementComponent,
-                                        guards: [core$1.AuthGuard],
-                                    },
-                                },
-                            }))),
-                        ],
-                        declarations: [ConsentManagementComponent, ConsentManagementFormComponent],
-                        exports: [ConsentManagementComponent, ConsentManagementFormComponent],
-                        entryComponents: [ConsentManagementComponent],
-                    },] }
-        ];
-        return ConsentManagementModule;
-    }());
 
     /**
      * @fileoverview added by tsickle
@@ -26676,10 +26507,9 @@
     exports.ɵbg = setHtmlLangAttribute;
     exports.ɵbh = AnonymousConsentsModule;
     exports.ɵbi = AnonymousConsentsDialogComponent;
-    exports.ɵbj = AnonymousConsentFormComponent;
-    exports.ɵbk = RoutingModule;
-    exports.ɵbl = defaultStorefrontRoutesConfig;
-    exports.ɵbm = defaultRoutingConfig;
+    exports.ɵbj = RoutingModule;
+    exports.ɵbk = defaultStorefrontRoutesConfig;
+    exports.ɵbl = defaultRoutingConfig;
     exports.ɵc = defaultCheckoutConfig;
     exports.ɵd = ExpressCheckoutService;
     exports.ɵe = AssistedServiceModule;
