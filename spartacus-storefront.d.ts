@@ -34,7 +34,7 @@ export { CmsI18nService as ɵu } from './cms-structure/services/cms-i18n.service
 export { CmsMappingService as ɵt } from './cms-structure/services/cms-mapping.service';
 export { CmsRoutesService as ɵs } from './cms-structure/services/cms-routes.service';
 export { AnonymousConsentsModule as ɵbi } from './shared/components/anonymous-consents/anonymous-consents.module';
-export { AnonymousConsentsDialogComponent as ɵbj } from './shared/components/anonymous-consents/dialog/anonymous-consents-dialog.component';
+export { AnonymousConsentDialogComponent as ɵbj } from './shared/components/anonymous-consents/dialog/anonymous-consent-dialog.component';
 export { ViewConfig as ɵm } from './shared/config/view-config';
 export { ViewConfigModule as ɵn } from './shared/config/view-config.module';
 export { AutoFocusDirectiveModule as ɵc } from './shared/directives/auto-focus/auto-focus.directive.module';

@@ -1,12 +1,12 @@
-import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, Optional, Directive, EventEmitter, Output, isDevMode, forwardRef, Renderer2, HostListener, Injector, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, NgZone, APP_INITIALIZER, RendererFactory2, INJECTOR, Pipe } from '@angular/core';
-import { WindowRef, ConfigModule, Config, AnonymousConsentsConfig, AnonymousConsentsService, ANONYMOUS_CONSENTS_FEATURE, I18nModule, FeaturesConfigModule, RoutingService, ProductService, CartService, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, CartVoucherService, CartModule, RoutingConfigService, AuthService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, CmsConfig, CartDataService, CmsService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, isFeatureLevel, AuthGuard, AsmService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, NotAuthGuard, CmsPageTitleModule, provideConfig, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, AsmModule, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
-import { Subscription, combineLatest, of, fromEvent, BehaviorSubject, concat, isObservable, from, iif } from 'rxjs';
-import { take, distinctUntilChanged, tap, map, filter, switchMap, debounceTime, startWith, shareReplay, skipWhile, withLatestFrom, scan, first, endWith, pluck } from 'rxjs/operators';
-import { __extends, __read, __values, __assign, __spread, __awaiter, __generator } from 'tslib';
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
+import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, EventEmitter, Output, isDevMode, ChangeDetectionStrategy, forwardRef, Renderer2, ViewChild, Directive, HostListener, Optional, Injector, ChangeDetectorRef, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, NgZone, APP_INITIALIZER, RendererFactory2, INJECTOR, Pipe } from '@angular/core';
+import { WindowRef, ConfigModule, Config, AnonymousConsentsConfig, AnonymousConsentsService, ANONYMOUS_CONSENTS_FEATURE, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, FeaturesConfigModule, RoutingService, ProductService, CartService, CartVoucherService, CartModule, RoutingConfigService, AuthService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, CmsConfig, CartDataService, CmsService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, isFeatureLevel, AuthGuard, AsmService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, NotAuthGuard, CmsPageTitleModule, provideConfig, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, AsmModule, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
+import { Subscription, combineLatest, of, fromEvent, BehaviorSubject, concat, isObservable, from } from 'rxjs';
+import { take, distinctUntilChanged, tap, map, debounceTime, startWith, filter, switchMap, shareReplay, skipWhile, withLatestFrom, scan, first, endWith, pluck } from 'rxjs/operators';
+import { __extends, __read, __values, __assign, __spread, __awaiter, __generator } from 'tslib';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
+import { NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
 import { Subscription as Subscription$1 } from 'rxjs/internal/Subscription';
@@ -640,8 +640,8 @@ if (false) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var AnonymousConsentsDialogComponent = /** @class */ (function () {
-    function AnonymousConsentsDialogComponent(config, modalService, anonymousConsentsService) {
+var AnonymousConsentDialogComponent = /** @class */ (function () {
+    function AnonymousConsentDialogComponent(config, modalService, anonymousConsentsService) {
         this.config = config;
         this.modalService = modalService;
         this.anonymousConsentsService = anonymousConsentsService;
@@ -659,7 +659,7 @@ var AnonymousConsentsDialogComponent = /** @class */ (function () {
     /**
      * @return {?}
      */
-    AnonymousConsentsDialogComponent.prototype.ngOnInit = /**
+    AnonymousConsentDialogComponent.prototype.ngOnInit = /**
      * @return {?}
      */
     function () {
@@ -670,7 +670,7 @@ var AnonymousConsentsDialogComponent = /** @class */ (function () {
      * @param {?=} reason
      * @return {?}
      */
-    AnonymousConsentsDialogComponent.prototype.closeModal = /**
+    AnonymousConsentDialogComponent.prototype.closeModal = /**
      * @param {?=} reason
      * @return {?}
      */
@@ -680,7 +680,7 @@ var AnonymousConsentsDialogComponent = /** @class */ (function () {
     /**
      * @return {?}
      */
-    AnonymousConsentsDialogComponent.prototype.rejectAll = /**
+    AnonymousConsentDialogComponent.prototype.rejectAll = /**
      * @return {?}
      */
     function () {
@@ -713,7 +713,7 @@ var AnonymousConsentsDialogComponent = /** @class */ (function () {
     /**
      * @return {?}
      */
-    AnonymousConsentsDialogComponent.prototype.allowAll = /**
+    AnonymousConsentDialogComponent.prototype.allowAll = /**
      * @return {?}
      */
     function () {
@@ -749,7 +749,7 @@ var AnonymousConsentsDialogComponent = /** @class */ (function () {
      * @param {?} template
      * @return {?}
      */
-    AnonymousConsentsDialogComponent.prototype.isRequiredConsent = /**
+    AnonymousConsentDialogComponent.prototype.isRequiredConsent = /**
      * @private
      * @param {?} template
      * @return {?}
@@ -763,7 +763,7 @@ var AnonymousConsentsDialogComponent = /** @class */ (function () {
      * @param {?} __0
      * @return {?}
      */
-    AnonymousConsentsDialogComponent.prototype.onConsentChange = /**
+    AnonymousConsentDialogComponent.prototype.onConsentChange = /**
      * @param {?} __0
      * @return {?}
      */
@@ -781,7 +781,7 @@ var AnonymousConsentsDialogComponent = /** @class */ (function () {
      * @param {?=} consents
      * @return {?}
      */
-    AnonymousConsentsDialogComponent.prototype.getCorrespondingConsent = /**
+    AnonymousConsentDialogComponent.prototype.getCorrespondingConsent = /**
      * @param {?} template
      * @param {?=} consents
      * @return {?}
@@ -809,57 +809,57 @@ var AnonymousConsentsDialogComponent = /** @class */ (function () {
     /**
      * @return {?}
      */
-    AnonymousConsentsDialogComponent.prototype.ngOnDestroy = /**
+    AnonymousConsentDialogComponent.prototype.ngOnDestroy = /**
      * @return {?}
      */
     function () {
         this.subscriptions.unsubscribe();
     };
-    AnonymousConsentsDialogComponent.decorators = [
+    AnonymousConsentDialogComponent.decorators = [
         { type: Component, args: [{
-                    selector: 'cx-anonymous-consents-dialog',
+                    selector: 'cx-anonymous-consent-dialog',
                     template: "<div #dialog>\n  <!-- Modal Header -->\n  <div class=\"cx-dialog-header modal-header\">\n    <div class=\"cx-dialog-title modal-title\">\n      {{ 'anonymousConsents.dialog.title' | cxTranslate }}\n    </div>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"closeModal('Cross click')\"\n    >\n      <span aria-hidden=\"true\">\n        <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n      </span>\n    </button>\n  </div>\n  <!-- Separator -->\n  <div\n    class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n  ></div>\n  <div class=\"cx-dialog-description\" *ngIf=\"showLegalDescription\">\n    {{ 'anonymousConsents.dialog.legalDescription' | cxTranslate }}\n    <div\n      class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n    ></div>\n  </div>\n  <!-- Actions -->\n  <div class=\"cx-dialog-buttons\">\n    <a tabindex=\"0\" class=\"btn-link cx-action-link\" (click)=\"rejectAll()\">{{\n      'anonymousConsents.dialog.clearAll' | cxTranslate\n    }}</a>\n    <a tabindex=\"0\" class=\"btn-link cx-action-link\" (click)=\"allowAll()\">{{\n      'anonymousConsents.dialog.selectAll' | cxTranslate\n    }}</a>\n  </div>\n  <!-- Modal Body -->\n  <div\n    class=\"cx-dialog-body modal-body\"\n    *ngIf=\"templates$ | async as templates\"\n  >\n    <div *ngIf=\"consents$ | async as consents\">\n      <div\n        class=\"cx-dialog-row col-sm-12 col-md-6\"\n        *ngFor=\"let template of templates\"\n      >\n        <cx-consent-management-form\n          [consentTemplate]=\"template\"\n          [requiredConsents]=\"requiredConsents\"\n          [consent]=\"getCorrespondingConsent(template, consents)\"\n          [isAnonymousConsentsEnabled]=\"true\"\n          (consentChanged)=\"onConsentChange($event)\"\n        ></cx-consent-management-form>\n      </div>\n    </div>\n  </div>\n</div>\n"
                 }] }
     ];
     /** @nocollapse */
-    AnonymousConsentsDialogComponent.ctorParameters = function () { return [
+    AnonymousConsentDialogComponent.ctorParameters = function () { return [
         { type: AnonymousConsentsConfig },
         { type: ModalService },
         { type: AnonymousConsentsService }
     ]; };
-    return AnonymousConsentsDialogComponent;
+    return AnonymousConsentDialogComponent;
 }());
 if (false) {
     /**
      * @type {?}
      * @private
      */
-    AnonymousConsentsDialogComponent.prototype.subscriptions;
+    AnonymousConsentDialogComponent.prototype.subscriptions;
     /** @type {?} */
-    AnonymousConsentsDialogComponent.prototype.showLegalDescription;
+    AnonymousConsentDialogComponent.prototype.showLegalDescription;
     /** @type {?} */
-    AnonymousConsentsDialogComponent.prototype.iconTypes;
+    AnonymousConsentDialogComponent.prototype.iconTypes;
     /** @type {?} */
-    AnonymousConsentsDialogComponent.prototype.requiredConsents;
+    AnonymousConsentDialogComponent.prototype.requiredConsents;
     /** @type {?} */
-    AnonymousConsentsDialogComponent.prototype.templates$;
+    AnonymousConsentDialogComponent.prototype.templates$;
     /** @type {?} */
-    AnonymousConsentsDialogComponent.prototype.consents$;
+    AnonymousConsentDialogComponent.prototype.consents$;
     /**
      * @type {?}
      * @private
      */
-    AnonymousConsentsDialogComponent.prototype.config;
+    AnonymousConsentDialogComponent.prototype.config;
     /**
      * @type {?}
      * @private
      */
-    AnonymousConsentsDialogComponent.prototype.modalService;
+    AnonymousConsentDialogComponent.prototype.modalService;
     /**
      * @type {?}
      * @private
      */
-    AnonymousConsentsDialogComponent.prototype.anonymousConsentsService;
+    AnonymousConsentDialogComponent.prototype.anonymousConsentsService;
 }
 
 /**
@@ -902,7 +902,7 @@ var AnonymousConsentManagementBannerComponent = /** @class */ (function () {
      */
     function () {
         this.hideBanner();
-        this.modalService.open(AnonymousConsentsDialogComponent, {
+        this.modalService.open(AnonymousConsentDialogComponent, {
             centered: true,
             size: 'lg',
         });
@@ -945,7 +945,7 @@ var AnonymousConsentManagementBannerComponent = /** @class */ (function () {
     AnonymousConsentManagementBannerComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-anonymous-consent-management-banner',
-                    template: "<ng-container *cxFeature=\"anonymousConsentsFeature\">\n  <ng-container *ngIf=\"templatesUpdated$ | async\"></ng-container>\n  <ng-container *ngIf=\"bannerVisible$ | async as bannerVisible\">\n    <div\n      [ngClass]=\"{ 'anonymous-consent-banner-hidden': !bannerVisible }\"\n      class=\"anonymous-consent-banner\"\n    >\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-lg-8 col-xs-12\">\n            <div class=\"cx-banner-title\">\n              {{ 'anonymousConsents.banner.title' | cxTranslate }}\n            </div>\n            <div class=\"cx-banner-description\">\n              {{ 'anonymousConsents.banner.description' | cxTranslate }}\n            </div>\n          </div>\n\n          <div class=\"col-lg-4 col-xs-12 cx-banner-buttons\">\n            <button class=\"btn btn-action\" (click)=\"viewDetails()\">\n              {{ 'anonymousConsents.banner.viewDetails' | cxTranslate }}\n            </button>\n            <button class=\"btn btn-primary\" (click)=\"allowAll()\">\n              {{ 'anonymousConsents.banner.allowAll' | cxTranslate }}\n            </button>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n</ng-container>\n"
+                    template: "<ng-container *ngIf=\"templatesUpdated$ | async\"></ng-container>\n<ng-container *ngIf=\"bannerVisible$ | async as bannerVisible\">\n  <div\n    [ngClass]=\"{ 'anonymous-consent-banner-hidden': !bannerVisible }\"\n    class=\"anonymous-consent-banner\"\n  >\n    <div class=\"container\">\n      <div class=\"row\">\n        <div class=\"col-lg-8 col-xs-12\">\n          <div class=\"cx-banner-title\">\n            {{ 'anonymousConsents.banner.title' | cxTranslate }}\n          </div>\n          <div class=\"cx-banner-description\">\n            {{ 'anonymousConsents.banner.description' | cxTranslate }}\n          </div>\n        </div>\n\n        <div class=\"col-lg-4 col-xs-12 cx-banner-buttons\">\n          <button class=\"btn btn-action\" (click)=\"viewDetails()\">\n            {{ 'anonymousConsents.banner.viewDetails' | cxTranslate }}\n          </button>\n          <button class=\"btn btn-primary\" (click)=\"allowAll()\">\n            {{ 'anonymousConsents.banner.allowAll' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</ng-container>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -978,506 +978,6 @@ if (false) {
      */
     AnonymousConsentManagementBannerComponent.prototype.anonymousConsentsService;
 }
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var AnonymousConsentManagementBannerModule = /** @class */ (function () {
-    function AnonymousConsentManagementBannerModule() {
-    }
-    AnonymousConsentManagementBannerModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        CommonModule,
-                        I18nModule,
-                        FeaturesConfigModule,
-                        ConfigModule.withConfig((/** @type {?} */ ({
-                            cmsComponents: {
-                                AnonymousConsentManagementBannerComponent: {
-                                    component: AnonymousConsentManagementBannerComponent,
-                                },
-                            },
-                        }))),
-                    ],
-                    declarations: [AnonymousConsentManagementBannerComponent],
-                    exports: [AnonymousConsentManagementBannerComponent],
-                    entryComponents: [AnonymousConsentManagementBannerComponent],
-                },] }
-    ];
-    return AnonymousConsentManagementBannerModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CurrentProductService = /** @class */ (function () {
-    function CurrentProductService(routingService, productService) {
-        this.routingService = routingService;
-        this.productService = productService;
-    }
-    /**
-     * @return {?}
-     */
-    CurrentProductService.prototype.getProduct = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        return this.routingService.getRouterState().pipe(map((/**
-         * @param {?} state
-         * @return {?}
-         */
-        function (state) { return state.state.params['productCode']; })), filter(Boolean), switchMap((/**
-         * @param {?} productCode
-         * @return {?}
-         */
-        function (productCode) { return _this.productService.get(productCode); })));
-    };
-    CurrentProductService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    CurrentProductService.ctorParameters = function () { return [
-        { type: RoutingService },
-        { type: ProductService }
-    ]; };
-    /** @nocollapse */ CurrentProductService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(ɵɵinject(RoutingService), ɵɵinject(ProductService)); }, token: CurrentProductService, providedIn: "root" });
-    return CurrentProductService;
-}());
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    CurrentProductService.prototype.routingService;
-    /**
-     * @type {?}
-     * @private
-     */
-    CurrentProductService.prototype.productService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var AddedToCartDialogComponent = /** @class */ (function () {
-    function AddedToCartDialogComponent(modalService, cartService, fb) {
-        this.modalService = modalService;
-        this.cartService = cartService;
-        this.fb = fb;
-        this.iconTypes = ICON_TYPE;
-        this.quantity = 0;
-        this.form = this.fb.group({});
-    }
-    /**
-     * @return {?}
-     */
-    AddedToCartDialogComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this.entry$ = this.entry$.pipe(tap((/**
-         * @param {?} entry
-         * @return {?}
-         */
-        function (entry) {
-            if (entry) {
-                var code = entry.product.code;
-                if (!_this.form.controls[code]) {
-                    _this.form.setControl(code, _this.createEntryFormGroup(entry));
-                }
-                else {
-                    /** @type {?} */
-                    var entryForm = (/** @type {?} */ (_this.form.controls[code]));
-                    entryForm.controls.quantity.setValue(entry.quantity);
-                }
-                _this.form.markAsPristine();
-            }
-        })));
-    };
-    /**
-     * @param {?=} reason
-     * @return {?}
-     */
-    AddedToCartDialogComponent.prototype.dismissModal = /**
-     * @param {?=} reason
-     * @return {?}
-     */
-    function (reason) {
-        this.modalService.dismissActiveModal(reason);
-    };
-    /**
-     * @param {?} item
-     * @return {?}
-     */
-    AddedToCartDialogComponent.prototype.removeEntry = /**
-     * @param {?} item
-     * @return {?}
-     */
-    function (item) {
-        this.cartService.removeEntry(item);
-        delete this.form.controls[item.product.code];
-        this.dismissModal('Removed');
-    };
-    /**
-     * @param {?} __0
-     * @return {?}
-     */
-    AddedToCartDialogComponent.prototype.updateEntry = /**
-     * @param {?} __0
-     * @return {?}
-     */
-    function (_a) {
-        var item = _a.item, updatedQuantity = _a.updatedQuantity;
-        this.cartService.updateEntry(item.entryNumber, updatedQuantity);
-    };
-    /**
-     * @private
-     * @param {?} entry
-     * @return {?}
-     */
-    AddedToCartDialogComponent.prototype.createEntryFormGroup = /**
-     * @private
-     * @param {?} entry
-     * @return {?}
-     */
-    function (entry) {
-        return this.fb.group({
-            entryNumber: entry.entryNumber,
-            quantity: entry.quantity,
-        });
-    };
-    AddedToCartDialogComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-added-to-cart-dialog',
-                    template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"loaded$ | async as loaded; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart') | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [isReadOnly]=\"false\"\n            [parent]=\"form.controls[entry.product.code]\"\n            [cartIsLoading]=\"!loaded\"\n            (remove)=\"removeEntry($event)\"\n            (update)=\"updateEntry($event)\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n            <div>{{ cart.totalPrice?.formattedValue }}</div>\n          </div>\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              cxAutoFocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
-                }] }
-    ];
-    /** @nocollapse */
-    AddedToCartDialogComponent.ctorParameters = function () { return [
-        { type: ModalService },
-        { type: CartService },
-        { type: FormBuilder }
-    ]; };
-    AddedToCartDialogComponent.propDecorators = {
-        dialog: [{ type: ViewChild, args: ['dialog', { static: false, read: ElementRef },] }]
-    };
-    return AddedToCartDialogComponent;
-}());
-if (false) {
-    /** @type {?} */
-    AddedToCartDialogComponent.prototype.iconTypes;
-    /** @type {?} */
-    AddedToCartDialogComponent.prototype.entry$;
-    /** @type {?} */
-    AddedToCartDialogComponent.prototype.cart$;
-    /** @type {?} */
-    AddedToCartDialogComponent.prototype.loaded$;
-    /** @type {?} */
-    AddedToCartDialogComponent.prototype.increment;
-    /** @type {?} */
-    AddedToCartDialogComponent.prototype.quantity;
-    /** @type {?} */
-    AddedToCartDialogComponent.prototype.dialog;
-    /** @type {?} */
-    AddedToCartDialogComponent.prototype.form;
-    /**
-     * @type {?}
-     * @protected
-     */
-    AddedToCartDialogComponent.prototype.modalService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    AddedToCartDialogComponent.prototype.cartService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    AddedToCartDialogComponent.prototype.fb;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var AddToCartComponent = /** @class */ (function () {
-    function AddToCartComponent(cartService, modalService, currentProductService, cd, productService) {
-        this.cartService = cartService;
-        this.modalService = modalService;
-        this.currentProductService = currentProductService;
-        this.cd = cd;
-        this.productService = productService;
-        this.showQuantity = true;
-        this.hasStock = false;
-        this.quantity = 1;
-        this.increment = false;
-    }
-    /**
-     * @return {?}
-     */
-    AddToCartComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        if (this.productCode) {
-            this.cartEntry$ = this.cartService.getEntry(this.productCode);
-            this.subscription = this.productService
-                .get(this.productCode)
-                .pipe(filter((/**
-             * @param {?} p
-             * @return {?}
-             */
-            function (p) { return !!p; })))
-                .subscribe((/**
-             * @param {?} product
-             * @return {?}
-             */
-            function (product) {
-                _this.setStockInfo(product);
-                _this.cd.markForCheck();
-            }));
-        }
-        else {
-            this.subscription = this.currentProductService
-                .getProduct()
-                .pipe(filter(Boolean))
-                .subscribe((/**
-             * @param {?} product
-             * @return {?}
-             */
-            function (product) {
-                _this.productCode = product.code;
-                _this.setStockInfo(product);
-                _this.cartEntry$ = _this.cartService.getEntry(_this.productCode);
-                _this.cd.markForCheck();
-            }));
-        }
-    };
-    /**
-     * @private
-     * @param {?} product
-     * @return {?}
-     */
-    AddToCartComponent.prototype.setStockInfo = /**
-     * @private
-     * @param {?} product
-     * @return {?}
-     */
-    function (product) {
-        this.quantity = 1;
-        this.hasStock =
-            product.stock &&
-                product.stock.stockLevelStatus !== 'outOfStock' &&
-                product.stock.stockLevel > 0;
-        if (this.hasStock) {
-            this.maxQuantity = product.stock.stockLevel;
-        }
-    };
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    AddToCartComponent.prototype.updateCount = /**
-     * @param {?} value
-     * @return {?}
-     */
-    function (value) {
-        this.quantity = value;
-    };
-    /**
-     * @return {?}
-     */
-    AddToCartComponent.prototype.addToCart = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        if (!this.productCode || this.quantity <= 0) {
-            return;
-        }
-        // check item is already present in the cart
-        // so modal will have proper header text displayed
-        this.cartService
-            .getEntry(this.productCode)
-            .subscribe((/**
-         * @param {?} entry
-         * @return {?}
-         */
-        function (entry) {
-            if (entry) {
-                _this.increment = true;
-            }
-            _this.openModal();
-            _this.cartService.addEntry(_this.productCode, _this.quantity);
-            _this.increment = false;
-        }))
-            .unsubscribe();
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    AddToCartComponent.prototype.openModal = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var modalInstance;
-        this.modalRef = this.modalService.open(AddedToCartDialogComponent, {
-            centered: true,
-            size: 'lg',
-        });
-        modalInstance = this.modalRef.componentInstance;
-        modalInstance.entry$ = this.cartEntry$;
-        modalInstance.cart$ = this.cartService.getActive();
-        modalInstance.loaded$ = this.cartService.getLoaded();
-        modalInstance.quantity = this.quantity;
-        modalInstance.increment = this.increment;
-    };
-    /**
-     * @return {?}
-     */
-    AddToCartComponent.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
-    };
-    AddToCartComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-add-to-cart',
-                    template: "<div class=\"quantity\" *ngIf=\"productCode && showQuantity\">\n  <label>{{ 'addToCart.quantity' | cxTranslate }}</label>\n  <cx-item-counter\n    [value]=\"quantity\"\n    isValueChangeable=\"true\"\n    [min]=\"1\"\n    [max]=\"maxQuantity\"\n    *ngIf=\"hasStock\"\n    (update)=\"updateCount($event)\"\n  ></cx-item-counter>\n  <span class=\"info\">{{\n    hasStock\n      ? ('addToCart.inStock' | cxTranslate)\n      : ('addToCart.outOfStock' | cxTranslate)\n  }}</span>\n</div>\n<button\n  *ngIf=\"hasStock\"\n  class=\"btn btn-primary btn-block\"\n  type=\"button\"\n  [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  (click)=\"addToCart()\"\n>\n  {{ 'addToCart.addToCart' | cxTranslate }}\n</button>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                }] }
-    ];
-    /** @nocollapse */
-    AddToCartComponent.ctorParameters = function () { return [
-        { type: CartService },
-        { type: ModalService },
-        { type: CurrentProductService },
-        { type: ChangeDetectorRef },
-        { type: ProductService, decorators: [{ type: Optional }] }
-    ]; };
-    AddToCartComponent.propDecorators = {
-        productCode: [{ type: Input }],
-        showQuantity: [{ type: Input }]
-    };
-    return AddToCartComponent;
-}());
-if (false) {
-    /** @type {?} */
-    AddToCartComponent.prototype.productCode;
-    /** @type {?} */
-    AddToCartComponent.prototype.showQuantity;
-    /** @type {?} */
-    AddToCartComponent.prototype.maxQuantity;
-    /** @type {?} */
-    AddToCartComponent.prototype.modalRef;
-    /** @type {?} */
-    AddToCartComponent.prototype.hasStock;
-    /** @type {?} */
-    AddToCartComponent.prototype.quantity;
-    /** @type {?} */
-    AddToCartComponent.prototype.increment;
-    /** @type {?} */
-    AddToCartComponent.prototype.cartEntry$;
-    /** @type {?} */
-    AddToCartComponent.prototype.subscription;
-    /**
-     * @type {?}
-     * @protected
-     */
-    AddToCartComponent.prototype.cartService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    AddToCartComponent.prototype.modalService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    AddToCartComponent.prototype.currentProductService;
-    /**
-     * @type {?}
-     * @private
-     */
-    AddToCartComponent.prototype.cd;
-    /**
-     * @type {?}
-     * @private
-     */
-    AddToCartComponent.prototype.productService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var AutoFocusDirective = /** @class */ (function () {
-    function AutoFocusDirective(hostElement) {
-        this.hostElement = hostElement;
-    }
-    /**
-     * @return {?}
-     */
-    AutoFocusDirective.prototype.ngAfterViewInit = /**
-     * @return {?}
-     */
-    function () {
-        this.hostElement.nativeElement.focus();
-    };
-    AutoFocusDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: '[cxAutoFocus]',
-                },] }
-    ];
-    /** @nocollapse */
-    AutoFocusDirective.ctorParameters = function () { return [
-        { type: ElementRef }
-    ]; };
-    return AutoFocusDirective;
-}());
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    AutoFocusDirective.prototype.hostElement;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var AutoFocusDirectiveModule = /** @class */ (function () {
-    function AutoFocusDirectiveModule() {
-    }
-    AutoFocusDirectiveModule.decorators = [
-        { type: NgModule, args: [{
-                    declarations: [AutoFocusDirective],
-                    exports: [AutoFocusDirective],
-                },] }
-    ];
-    return AutoFocusDirectiveModule;
-}());
 
 /**
  * @fileoverview added by tsickle
@@ -4536,6 +4036,42 @@ var StarRatingModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var AutoFocusDirective = /** @class */ (function () {
+    function AutoFocusDirective(hostElement) {
+        this.hostElement = hostElement;
+    }
+    /**
+     * @return {?}
+     */
+    AutoFocusDirective.prototype.ngAfterViewInit = /**
+     * @return {?}
+     */
+    function () {
+        this.hostElement.nativeElement.focus();
+    };
+    AutoFocusDirective.decorators = [
+        { type: Directive, args: [{
+                    selector: '[cxAutoFocus]',
+                },] }
+    ];
+    /** @nocollapse */
+    AutoFocusDirective.ctorParameters = function () { return [
+        { type: ElementRef }
+    ]; };
+    return AutoFocusDirective;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    AutoFocusDirective.prototype.hostElement;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -4689,6 +4225,522 @@ function sortTitles(title1, title2) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var AnonymousConsentOpenDialogComponent = /** @class */ (function () {
+    function AnonymousConsentOpenDialogComponent(modalService) {
+        this.modalService = modalService;
+    }
+    /**
+     * @return {?}
+     */
+    AnonymousConsentOpenDialogComponent.prototype.openDialog = /**
+     * @return {?}
+     */
+    function () {
+        this.modalService.open(AnonymousConsentDialogComponent, {
+            centered: true,
+            size: 'lg',
+        });
+    };
+    AnonymousConsentOpenDialogComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-anonymous-consent-open-dialog',
+                    template: "<div class=\"anonymous-consents\">\n  <button class=\"btn btn-link\" (click)=\"openDialog()\">\n    {{ 'anonymousConsents.preferences' | cxTranslate }}\n  </button>\n</div>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    AnonymousConsentOpenDialogComponent.ctorParameters = function () { return [
+        { type: ModalService }
+    ]; };
+    return AnonymousConsentOpenDialogComponent;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @protected
+     */
+    AnonymousConsentOpenDialogComponent.prototype.modalService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var AnonymousConsentManagementBannerModule = /** @class */ (function () {
+    function AnonymousConsentManagementBannerModule() {
+    }
+    AnonymousConsentManagementBannerModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        I18nModule,
+                        FeaturesConfigModule,
+                        ConfigModule.withConfig((/** @type {?} */ ({
+                            cmsComponents: {
+                                AnonymousConsentManagementBannerComponent: {
+                                    component: AnonymousConsentManagementBannerComponent,
+                                },
+                                AnonymousConsentOpenDialogComponent: {
+                                    component: AnonymousConsentOpenDialogComponent,
+                                },
+                            },
+                        }))),
+                    ],
+                    declarations: [
+                        AnonymousConsentManagementBannerComponent,
+                        AnonymousConsentOpenDialogComponent,
+                    ],
+                    exports: [
+                        AnonymousConsentManagementBannerComponent,
+                        AnonymousConsentOpenDialogComponent,
+                    ],
+                    entryComponents: [
+                        AnonymousConsentManagementBannerComponent,
+                        AnonymousConsentOpenDialogComponent,
+                    ],
+                },] }
+    ];
+    return AnonymousConsentManagementBannerModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CurrentProductService = /** @class */ (function () {
+    function CurrentProductService(routingService, productService) {
+        this.routingService = routingService;
+        this.productService = productService;
+    }
+    /**
+     * @return {?}
+     */
+    CurrentProductService.prototype.getProduct = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        return this.routingService.getRouterState().pipe(map((/**
+         * @param {?} state
+         * @return {?}
+         */
+        function (state) { return state.state.params['productCode']; })), filter(Boolean), switchMap((/**
+         * @param {?} productCode
+         * @return {?}
+         */
+        function (productCode) { return _this.productService.get(productCode); })));
+    };
+    CurrentProductService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    CurrentProductService.ctorParameters = function () { return [
+        { type: RoutingService },
+        { type: ProductService }
+    ]; };
+    /** @nocollapse */ CurrentProductService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(ɵɵinject(RoutingService), ɵɵinject(ProductService)); }, token: CurrentProductService, providedIn: "root" });
+    return CurrentProductService;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    CurrentProductService.prototype.routingService;
+    /**
+     * @type {?}
+     * @private
+     */
+    CurrentProductService.prototype.productService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var AddedToCartDialogComponent = /** @class */ (function () {
+    function AddedToCartDialogComponent(modalService, cartService, fb) {
+        this.modalService = modalService;
+        this.cartService = cartService;
+        this.fb = fb;
+        this.iconTypes = ICON_TYPE;
+        this.quantity = 0;
+        this.form = this.fb.group({});
+    }
+    /**
+     * @return {?}
+     */
+    AddedToCartDialogComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.entry$ = this.entry$.pipe(tap((/**
+         * @param {?} entry
+         * @return {?}
+         */
+        function (entry) {
+            if (entry) {
+                var code = entry.product.code;
+                if (!_this.form.controls[code]) {
+                    _this.form.setControl(code, _this.createEntryFormGroup(entry));
+                }
+                else {
+                    /** @type {?} */
+                    var entryForm = (/** @type {?} */ (_this.form.controls[code]));
+                    entryForm.controls.quantity.setValue(entry.quantity);
+                }
+                _this.form.markAsPristine();
+            }
+        })));
+    };
+    /**
+     * @param {?=} reason
+     * @return {?}
+     */
+    AddedToCartDialogComponent.prototype.dismissModal = /**
+     * @param {?=} reason
+     * @return {?}
+     */
+    function (reason) {
+        this.modalService.dismissActiveModal(reason);
+    };
+    /**
+     * @param {?} item
+     * @return {?}
+     */
+    AddedToCartDialogComponent.prototype.removeEntry = /**
+     * @param {?} item
+     * @return {?}
+     */
+    function (item) {
+        this.cartService.removeEntry(item);
+        delete this.form.controls[item.product.code];
+        this.dismissModal('Removed');
+    };
+    /**
+     * @param {?} __0
+     * @return {?}
+     */
+    AddedToCartDialogComponent.prototype.updateEntry = /**
+     * @param {?} __0
+     * @return {?}
+     */
+    function (_a) {
+        var item = _a.item, updatedQuantity = _a.updatedQuantity;
+        this.cartService.updateEntry(item.entryNumber, updatedQuantity);
+    };
+    /**
+     * @private
+     * @param {?} entry
+     * @return {?}
+     */
+    AddedToCartDialogComponent.prototype.createEntryFormGroup = /**
+     * @private
+     * @param {?} entry
+     * @return {?}
+     */
+    function (entry) {
+        return this.fb.group({
+            entryNumber: entry.entryNumber,
+            quantity: entry.quantity,
+        });
+    };
+    AddedToCartDialogComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-added-to-cart-dialog',
+                    template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"loaded$ | async as loaded; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart') | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [isReadOnly]=\"false\"\n            [parent]=\"form.controls[entry.product.code]\"\n            [cartIsLoading]=\"!loaded\"\n            (remove)=\"removeEntry($event)\"\n            (update)=\"updateEntry($event)\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n            <div>{{ cart.totalPrice?.formattedValue }}</div>\n          </div>\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              cxAutoFocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    AddedToCartDialogComponent.ctorParameters = function () { return [
+        { type: ModalService },
+        { type: CartService },
+        { type: FormBuilder }
+    ]; };
+    AddedToCartDialogComponent.propDecorators = {
+        dialog: [{ type: ViewChild, args: ['dialog', { static: false, read: ElementRef },] }]
+    };
+    return AddedToCartDialogComponent;
+}());
+if (false) {
+    /** @type {?} */
+    AddedToCartDialogComponent.prototype.iconTypes;
+    /** @type {?} */
+    AddedToCartDialogComponent.prototype.entry$;
+    /** @type {?} */
+    AddedToCartDialogComponent.prototype.cart$;
+    /** @type {?} */
+    AddedToCartDialogComponent.prototype.loaded$;
+    /** @type {?} */
+    AddedToCartDialogComponent.prototype.increment;
+    /** @type {?} */
+    AddedToCartDialogComponent.prototype.quantity;
+    /** @type {?} */
+    AddedToCartDialogComponent.prototype.dialog;
+    /** @type {?} */
+    AddedToCartDialogComponent.prototype.form;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AddedToCartDialogComponent.prototype.modalService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AddedToCartDialogComponent.prototype.cartService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AddedToCartDialogComponent.prototype.fb;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var AddToCartComponent = /** @class */ (function () {
+    function AddToCartComponent(cartService, modalService, currentProductService, cd, productService) {
+        this.cartService = cartService;
+        this.modalService = modalService;
+        this.currentProductService = currentProductService;
+        this.cd = cd;
+        this.productService = productService;
+        this.showQuantity = true;
+        this.hasStock = false;
+        this.quantity = 1;
+        this.increment = false;
+    }
+    /**
+     * @return {?}
+     */
+    AddToCartComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        if (this.productCode) {
+            this.cartEntry$ = this.cartService.getEntry(this.productCode);
+            this.subscription = this.productService
+                .get(this.productCode)
+                .pipe(filter((/**
+             * @param {?} p
+             * @return {?}
+             */
+            function (p) { return !!p; })))
+                .subscribe((/**
+             * @param {?} product
+             * @return {?}
+             */
+            function (product) {
+                _this.setStockInfo(product);
+                _this.cd.markForCheck();
+            }));
+        }
+        else {
+            this.subscription = this.currentProductService
+                .getProduct()
+                .pipe(filter(Boolean))
+                .subscribe((/**
+             * @param {?} product
+             * @return {?}
+             */
+            function (product) {
+                _this.productCode = product.code;
+                _this.setStockInfo(product);
+                _this.cartEntry$ = _this.cartService.getEntry(_this.productCode);
+                _this.cd.markForCheck();
+            }));
+        }
+    };
+    /**
+     * @private
+     * @param {?} product
+     * @return {?}
+     */
+    AddToCartComponent.prototype.setStockInfo = /**
+     * @private
+     * @param {?} product
+     * @return {?}
+     */
+    function (product) {
+        this.quantity = 1;
+        this.hasStock =
+            product.stock &&
+                product.stock.stockLevelStatus !== 'outOfStock' &&
+                product.stock.stockLevel > 0;
+        if (this.hasStock) {
+            this.maxQuantity = product.stock.stockLevel;
+        }
+    };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    AddToCartComponent.prototype.updateCount = /**
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) {
+        this.quantity = value;
+    };
+    /**
+     * @return {?}
+     */
+    AddToCartComponent.prototype.addToCart = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        if (!this.productCode || this.quantity <= 0) {
+            return;
+        }
+        // check item is already present in the cart
+        // so modal will have proper header text displayed
+        this.cartService
+            .getEntry(this.productCode)
+            .subscribe((/**
+         * @param {?} entry
+         * @return {?}
+         */
+        function (entry) {
+            if (entry) {
+                _this.increment = true;
+            }
+            _this.openModal();
+            _this.cartService.addEntry(_this.productCode, _this.quantity);
+            _this.increment = false;
+        }))
+            .unsubscribe();
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    AddToCartComponent.prototype.openModal = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var modalInstance;
+        this.modalRef = this.modalService.open(AddedToCartDialogComponent, {
+            centered: true,
+            size: 'lg',
+        });
+        modalInstance = this.modalRef.componentInstance;
+        modalInstance.entry$ = this.cartEntry$;
+        modalInstance.cart$ = this.cartService.getActive();
+        modalInstance.loaded$ = this.cartService.getLoaded();
+        modalInstance.quantity = this.quantity;
+        modalInstance.increment = this.increment;
+    };
+    /**
+     * @return {?}
+     */
+    AddToCartComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+    };
+    AddToCartComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-add-to-cart',
+                    template: "<div class=\"quantity\" *ngIf=\"productCode && showQuantity\">\n  <label>{{ 'addToCart.quantity' | cxTranslate }}</label>\n  <cx-item-counter\n    [value]=\"quantity\"\n    isValueChangeable=\"true\"\n    [min]=\"1\"\n    [max]=\"maxQuantity\"\n    *ngIf=\"hasStock\"\n    (update)=\"updateCount($event)\"\n  ></cx-item-counter>\n  <span class=\"info\">{{\n    hasStock\n      ? ('addToCart.inStock' | cxTranslate)\n      : ('addToCart.outOfStock' | cxTranslate)\n  }}</span>\n</div>\n<button\n  *ngIf=\"hasStock\"\n  class=\"btn btn-primary btn-block\"\n  type=\"button\"\n  [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  (click)=\"addToCart()\"\n>\n  {{ 'addToCart.addToCart' | cxTranslate }}\n</button>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    /** @nocollapse */
+    AddToCartComponent.ctorParameters = function () { return [
+        { type: CartService },
+        { type: ModalService },
+        { type: CurrentProductService },
+        { type: ChangeDetectorRef },
+        { type: ProductService, decorators: [{ type: Optional }] }
+    ]; };
+    AddToCartComponent.propDecorators = {
+        productCode: [{ type: Input }],
+        showQuantity: [{ type: Input }]
+    };
+    return AddToCartComponent;
+}());
+if (false) {
+    /** @type {?} */
+    AddToCartComponent.prototype.productCode;
+    /** @type {?} */
+    AddToCartComponent.prototype.showQuantity;
+    /** @type {?} */
+    AddToCartComponent.prototype.maxQuantity;
+    /** @type {?} */
+    AddToCartComponent.prototype.modalRef;
+    /** @type {?} */
+    AddToCartComponent.prototype.hasStock;
+    /** @type {?} */
+    AddToCartComponent.prototype.quantity;
+    /** @type {?} */
+    AddToCartComponent.prototype.increment;
+    /** @type {?} */
+    AddToCartComponent.prototype.cartEntry$;
+    /** @type {?} */
+    AddToCartComponent.prototype.subscription;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AddToCartComponent.prototype.cartService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AddToCartComponent.prototype.modalService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AddToCartComponent.prototype.currentProductService;
+    /**
+     * @type {?}
+     * @private
+     */
+    AddToCartComponent.prototype.cd;
+    /**
+     * @type {?}
+     * @private
+     */
+    AddToCartComponent.prototype.productService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var AutoFocusDirectiveModule = /** @class */ (function () {
+    function AutoFocusDirectiveModule() {
+    }
+    AutoFocusDirectiveModule.decorators = [
+        { type: NgModule, args: [{
+                    declarations: [AutoFocusDirective],
+                    exports: [AutoFocusDirective],
+                },] }
+    ];
+    return AutoFocusDirectiveModule;
+}());
 
 /**
  * @fileoverview added by tsickle
@@ -13631,9 +13683,9 @@ var AnonymousConsentsModule = /** @class */ (function () {
     AnonymousConsentsModule.decorators = [
         { type: NgModule, args: [{
                     imports: [CommonModule, I18nModule, IconModule, ConsentManagementModule],
-                    declarations: [AnonymousConsentsDialogComponent],
-                    entryComponents: [AnonymousConsentsDialogComponent],
-                    exports: [AnonymousConsentsDialogComponent],
+                    declarations: [AnonymousConsentDialogComponent],
+                    entryComponents: [AnonymousConsentDialogComponent],
+                    exports: [AnonymousConsentDialogComponent],
                 },] }
     ];
     return AnonymousConsentsModule;
@@ -19724,66 +19776,30 @@ var CategoryNavigationModule = /** @class */ (function () {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var FooterNavigationComponent = /** @class */ (function () {
-    function FooterNavigationComponent(componentData, service, anonymousConsentsConfig, authService, modalService) {
+    function FooterNavigationComponent(componentData, service, anonymousConsentsConfig) {
+        var _this = this;
         this.componentData = componentData;
         this.service = service;
         this.anonymousConsentsConfig = anonymousConsentsConfig;
-        this.authService = authService;
-        this.modalService = modalService;
         this.node$ = this.service.getNavigationNode(this.componentData.data$);
         this.styleClass$ = this.componentData.data$.pipe(map((/**
          * @param {?} d
          * @return {?}
          */
         function (d) { return d.styleClass; })));
-        this.data$ = this.componentData.data$;
-    }
-    Object.defineProperty(FooterNavigationComponent.prototype, "showConsentPreferences", {
-        get: /**
+        // in order to preserve the backwards compatibility, this should render only if anonymous consents feature is disabled
+        this.data$ = this.componentData.data$.pipe(filter((/**
+         * @param {?} _
          * @return {?}
          */
-        function () {
-            var _this = this;
-            return iif((/**
-             * @return {?}
-             */
-            function () {
-                return Boolean(_this.anonymousConsentsConfig) &&
-                    isFeatureEnabled(_this.anonymousConsentsConfig, ANONYMOUS_CONSENTS_FEATURE);
-            }), this.authService
-                .isUserLoggedIn()
-                .pipe(map((/**
-             * @param {?} isUserLoggedIn
-             * @return {?}
-             */
-            function (isUserLoggedIn) {
-                return !isUserLoggedIn &&
-                    Boolean(_this.anonymousConsentsConfig.anonymousConsents) &&
-                    _this.anonymousConsentsConfig.anonymousConsents.footerLink;
-            }))), of(false));
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @return {?}
-     */
-    FooterNavigationComponent.prototype.openDialog = /**
-     * @return {?}
-     */
-    function () {
-        if (Boolean(this.anonymousConsentsConfig) &&
-            isFeatureEnabled(this.anonymousConsentsConfig, ANONYMOUS_CONSENTS_FEATURE)) {
-            this.modalService.open(AnonymousConsentsDialogComponent, {
-                centered: true,
-                size: 'lg',
-            });
-        }
-    };
+        function (_) {
+            return !isFeatureEnabled(_this.anonymousConsentsConfig, ANONYMOUS_CONSENTS_FEATURE);
+        })));
+    }
     FooterNavigationComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-footer-navigation',
-                    template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [flyout]=\"false\"\n  [ngClass]=\"styleClass$ | async\"\n></cx-navigation-ui>\n\n<div *ngIf=\"showConsentPreferences | async\" class=\"anonymous-consents\">\n  <a role=\"link\" (click)=\"openDialog()\">{{\n    'anonymousConsents.preferences' | cxTranslate\n  }}</a>\n</div>\n\n<div class=\"notice\" *ngIf=\"data$ | async as data\">\n  {{ data.notice }}\n</div>\n",
+                    template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [flyout]=\"false\"\n  [ngClass]=\"styleClass$ | async\"\n></cx-navigation-ui>\n\n<div class=\"notice\" *ngIf=\"data$ | async as data\">\n  {{ data.notice }}\n</div>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -19791,9 +19807,7 @@ var FooterNavigationComponent = /** @class */ (function () {
     FooterNavigationComponent.ctorParameters = function () { return [
         { type: CmsComponentData },
         { type: NavigationService },
-        { type: AnonymousConsentsConfig },
-        { type: AuthService },
-        { type: ModalService }
+        { type: AnonymousConsentsConfig }
     ]; };
     return FooterNavigationComponent;
 }());
@@ -19819,16 +19833,6 @@ if (false) {
      * @protected
      */
     FooterNavigationComponent.prototype.anonymousConsentsConfig;
-    /**
-     * @type {?}
-     * @protected
-     */
-    FooterNavigationComponent.prototype.authService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    FooterNavigationComponent.prototype.modalService;
 }
 
 /**
@@ -19854,7 +19858,6 @@ var FooterNavigationModule = /** @class */ (function () {
                             },
                         }))),
                     ],
-                    providers: [{ provide: AnonymousConsentsConfig, useExisting: Config }],
                     declarations: [FooterNavigationComponent],
                     entryComponents: [FooterNavigationComponent],
                     exports: [FooterNavigationComponent],
@@ -26318,5 +26321,5 @@ var B2cStorefrontModule = /** @class */ (function () {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, AppliedCouponsComponent as ɵa, OnlyNumberDirectiveModule as ɵb, GuestRegisterFormComponent as ɵba, ProductImagesModule as ɵbb, ProductImagesComponent as ɵbc, CheckoutLoginComponent as ɵbd, suffixUrlMatcher as ɵbe, addCmsRoute as ɵbf, htmlLangProvider as ɵbg, setHtmlLangAttribute as ɵbh, AnonymousConsentsModule as ɵbi, AnonymousConsentsDialogComponent as ɵbj, RoutingModule as ɵbk, defaultStorefrontRoutesConfig as ɵbl, defaultRoutingConfig as ɵbm, AutoFocusDirectiveModule as ɵc, defaultCheckoutConfig as ɵd, ExpressCheckoutService as ɵe, AssistedServiceModule as ɵf, AsmRootComponent as ɵg, AsmMainUiComponent as ɵh, CSAgentLoginFormComponent as ɵi, CustomerSelectionComponent as ɵj, defaultQualtricsConfig as ɵk, defaultScrollConfig as ɵl, ViewConfig as ɵm, ViewConfigModule as ɵn, ProductScrollComponent as ɵo, ProductAttributesModule as ɵp, ProductDetailsTabModule as ɵq, ProductDetailsTabComponent as ɵr, CmsRoutesService as ɵs, CmsMappingService as ɵt, CmsI18nService as ɵu, CmsGuardsService as ɵv, TrackingEventsComponent as ɵw, ConsignmentTrackingComponent as ɵx, ComponentMapperService as ɵy, AddToHomeScreenService as ɵz };
+export { AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, AppliedCouponsComponent as ɵa, OnlyNumberDirectiveModule as ɵb, GuestRegisterFormComponent as ɵba, ProductImagesModule as ɵbb, ProductImagesComponent as ɵbc, CheckoutLoginComponent as ɵbd, suffixUrlMatcher as ɵbe, addCmsRoute as ɵbf, htmlLangProvider as ɵbg, setHtmlLangAttribute as ɵbh, AnonymousConsentsModule as ɵbi, AnonymousConsentDialogComponent as ɵbj, RoutingModule as ɵbk, defaultStorefrontRoutesConfig as ɵbl, defaultRoutingConfig as ɵbm, AutoFocusDirectiveModule as ɵc, defaultCheckoutConfig as ɵd, ExpressCheckoutService as ɵe, AssistedServiceModule as ɵf, AsmRootComponent as ɵg, AsmMainUiComponent as ɵh, CSAgentLoginFormComponent as ɵi, CustomerSelectionComponent as ɵj, defaultQualtricsConfig as ɵk, defaultScrollConfig as ɵl, ViewConfig as ɵm, ViewConfigModule as ɵn, ProductScrollComponent as ɵo, ProductAttributesModule as ɵp, ProductDetailsTabModule as ɵq, ProductDetailsTabComponent as ɵr, CmsRoutesService as ɵs, CmsMappingService as ɵt, CmsI18nService as ɵu, CmsGuardsService as ɵv, TrackingEventsComponent as ɵw, ConsignmentTrackingComponent as ɵx, ComponentMapperService as ɵy, AddToHomeScreenService as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map

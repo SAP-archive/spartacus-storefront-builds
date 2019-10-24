@@ -1,7 +1,7 @@
 import { OnDestroy, OnInit } from '@angular/core';
 import { AnonymousConsentsService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { ModalService } from '../../shared/components/modal/index';
+import { ModalService } from '../../../shared/components/modal/index';
 export declare class AnonymousConsentManagementBannerComponent implements OnInit, OnDestroy {
     private modalService;
     private anonymousConsentsService;
