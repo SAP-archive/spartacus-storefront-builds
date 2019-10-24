@@ -1,6 +1,6 @@
 import { OnInit } from '@angular/core';
+import { Cart, CartService, OrderEntry } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { Cart, OrderEntry, CartService } from '@spartacus/core';
 export declare class CartTotalsComponent implements OnInit {
     protected cartService: CartService;
     cart$: Observable<Cart>;

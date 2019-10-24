@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@spartacus/core'), require('rxjs'), require('rxjs/operators'), require('@angular/common'), require('@ng-bootstrap/ng-bootstrap'), require('@angular/forms'), require('@angular/router'), require('@ng-select/ng-select'), require('@angular/common/http'), require('@angular/service-worker'), require('@angular/platform-browser'), require('ngx-infinite-scroll'), require('@ngrx/effects'), require('@ngrx/store')) :
-    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@angular/core', '@spartacus/core', 'rxjs', 'rxjs/operators', '@angular/common', '@ng-bootstrap/ng-bootstrap', '@angular/forms', '@angular/router', '@ng-select/ng-select', '@angular/common/http', '@angular/service-worker', '@angular/platform-browser', 'ngx-infinite-scroll', '@ngrx/effects', '@ngrx/store'], factory) :
-    (global = global || self, factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}), global.ng.core, global.core, global.rxjs, global.rxjs.operators, global.ng.common, global.ngBootstrap, global.ng.forms, global.ng.router, global.ngSelect, global.ng.common.http, global.ng['service-worker'], global.ng.platformBrowser, global.ngxInfiniteScroll, global.effects, global.store));
-}(this, function (exports, core, core$1, rxjs, operators, common, ngBootstrap, forms, router, ngSelect, http, serviceWorker, platformBrowser, ngxInfiniteScroll, effects, store) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@spartacus/core'), require('rxjs'), require('rxjs/operators'), require('@angular/common'), require('@ng-bootstrap/ng-bootstrap'), require('@angular/forms'), require('@angular/router'), require('@ng-select/ng-select'), require('@angular/common/http'), require('rxjs/internal/Subscription'), require('@angular/service-worker'), require('@angular/platform-browser'), require('ngx-infinite-scroll'), require('@ngrx/effects'), require('@ngrx/store')) :
+    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@angular/core', '@spartacus/core', 'rxjs', 'rxjs/operators', '@angular/common', '@ng-bootstrap/ng-bootstrap', '@angular/forms', '@angular/router', '@ng-select/ng-select', '@angular/common/http', 'rxjs/internal/Subscription', '@angular/service-worker', '@angular/platform-browser', 'ngx-infinite-scroll', '@ngrx/effects', '@ngrx/store'], factory) :
+    (global = global || self, factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}), global.ng.core, global.core, global.rxjs, global.rxjs.operators, global.ng.common, global.ngBootstrap, global.ng.forms, global.ng.router, global.ngSelect, global.ng.common.http, global.rxjs['internal/Subscription'], global.ng['service-worker'], global.ng.platformBrowser, global.ngxInfiniteScroll, global.effects, global.store));
+}(this, function (exports, core, core$1, rxjs, operators, common, ngBootstrap, forms, router, ngSelect, http, Subscription, serviceWorker, platformBrowser, ngxInfiniteScroll, effects, store) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -4922,6 +4922,255 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var AppliedCouponsComponent = /** @class */ (function () {
+        function AppliedCouponsComponent(cartVoucherService) {
+            this.cartVoucherService = cartVoucherService;
+            this.cartIsLoading = false;
+            this.isReadOnly = false;
+            this.iconTypes = ICON_TYPE;
+        }
+        Object.defineProperty(AppliedCouponsComponent.prototype, "sortedVouchers", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                this.vouchers = this.vouchers || [];
+                return this.vouchers.slice().sort((/**
+                 * @param {?} a
+                 * @param {?} b
+                 * @return {?}
+                 */
+                function (a, b) {
+                    return a.code.localeCompare(b.code);
+                }));
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * @param {?} voucherId
+         * @return {?}
+         */
+        AppliedCouponsComponent.prototype.removeVoucher = /**
+         * @param {?} voucherId
+         * @return {?}
+         */
+        function (voucherId) {
+            this.cartVoucherService.removeVoucher(voucherId);
+        };
+        AppliedCouponsComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-applied-coupons',
+                        template: "<div *ngIf=\"isReadOnly; else editableCoupons\">\r\n  <div *ngIf=\"sortedVouchers.length > 0\">\r\n    <div class=\"cx-applied-coupon-title\">\r\n      {{ 'voucher.coupon' | cxTranslate: { count: sortedVouchers.length } }}\r\n    </div>\r\n  </div>\r\n  <div\r\n    *ngFor=\"let voucher of sortedVouchers\"\r\n    class=\"coupon-summary cx-coupon-card textonly\"\r\n    role=\"filter\"\r\n  >\r\n    <span class=\"cx-applied-coupon-code\">{{ voucher.voucherCode }}</span>\r\n  </div>\r\n</div>\r\n\r\n<ng-template #editableCoupons>\r\n  <div class=\"row\">\r\n    <div\r\n      *ngFor=\"let voucher of sortedVouchers\"\r\n      class=\"col-sm-12 col-md-6 col-lg-12 cx-coupon-card-grid\"\r\n      role=\"filter\"\r\n    >\r\n      <div class=\"cx-coupon-apply cx-coupon-card cx-coupon-list-wrap\">\r\n        <span class=\"cx-cart-coupon-code\">{{ voucher.voucherCode }}</span>\r\n        <button\r\n          type=\"button\"\r\n          class=\"close\"\r\n          aria-label=\"Close\"\r\n          (click)=\"removeVoucher(voucher.voucherCode)\"\r\n          [disabled]=\"cartIsLoading\"\r\n          [class.disabled]=\"cartIsLoading\"\r\n        >\r\n          <span aria-hidden=\"true\">\r\n            <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\r\n          </span>\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ng-template>\r\n",
+                        changeDetection: core.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        AppliedCouponsComponent.ctorParameters = function () { return [
+            { type: core$1.CartVoucherService }
+        ]; };
+        AppliedCouponsComponent.propDecorators = {
+            vouchers: [{ type: core.Input }],
+            cartIsLoading: [{ type: core.Input }],
+            isReadOnly: [{ type: core.Input }]
+        };
+        return AppliedCouponsComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        AppliedCouponsComponent.prototype.vouchers;
+        /** @type {?} */
+        AppliedCouponsComponent.prototype.cartIsLoading;
+        /** @type {?} */
+        AppliedCouponsComponent.prototype.isReadOnly;
+        /** @type {?} */
+        AppliedCouponsComponent.prototype.iconTypes;
+        /**
+         * @type {?}
+         * @private
+         */
+        AppliedCouponsComponent.prototype.cartVoucherService;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CartCouponComponent = /** @class */ (function () {
+        function CartCouponComponent(cartService, cartVoucherService, formBuilder) {
+            this.cartService = cartService;
+            this.cartVoucherService = cartVoucherService;
+            this.formBuilder = formBuilder;
+            this.subscription = new Subscription.Subscription();
+        }
+        /**
+         * @return {?}
+         */
+        CartCouponComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this.cart$ = this.cartService
+                .getActive()
+                .pipe(operators.tap((/**
+             * @param {?} cart
+             * @return {?}
+             */
+            function (cart) { return (_this.cartId = cart.code); })));
+            this.cartIsLoading$ = this.cartService
+                .getLoaded()
+                .pipe(operators.map((/**
+             * @param {?} loaded
+             * @return {?}
+             */
+            function (loaded) { return !loaded; })));
+            this.cartVoucherService.resetAddVoucherProcessingState();
+            this.form = this.formBuilder.group({
+                couponCode: ['', [forms.Validators.required]],
+            });
+            this.submitDisabled$ = rxjs.combineLatest([
+                this.cartIsLoading$,
+                this.form.valueChanges.pipe(operators.startWith(true), operators.map((/**
+                 * @return {?}
+                 */
+                function () { return _this.form.valid; }))),
+                this.cartVoucherService.getAddVoucherResultLoading(),
+            ]).pipe(operators.map((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 3), cartIsLoading = _b[0], btnEnabled = _b[1], addVoucherIsLoading = _b[2];
+                return cartIsLoading || !btnEnabled || addVoucherIsLoading;
+            })));
+            this.subscription.add(this.cartVoucherService
+                .getAddVoucherResultSuccess()
+                .subscribe((/**
+             * @param {?} success
+             * @return {?}
+             */
+            function (success) {
+                _this.onSuccess(success);
+            })));
+        };
+        /**
+         * @param {?} success
+         * @return {?}
+         */
+        CartCouponComponent.prototype.onSuccess = /**
+         * @param {?} success
+         * @return {?}
+         */
+        function (success) {
+            if (success) {
+                this.form.reset();
+                this.cartVoucherService.resetAddVoucherProcessingState();
+            }
+        };
+        /**
+         * @return {?}
+         */
+        CartCouponComponent.prototype.applyVoucher = /**
+         * @return {?}
+         */
+        function () {
+            this.cartVoucherService.addVoucher(this.form.value.couponCode, this.cartId);
+        };
+        /**
+         * @return {?}
+         */
+        CartCouponComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
+            if (this.subscription) {
+                this.subscription.unsubscribe();
+            }
+            this.cartVoucherService.resetAddVoucherProcessingState();
+        };
+        CartCouponComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-cart-coupon',
+                        template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <div class=\"cx-cart-coupon-title\">\n    {{ 'voucher.coupon' | cxTranslate }}\n  </div>\n  <div class=\"form-group \">\n    <form (submit)=\"applyVoucher()\" [formGroup]=\"form\">\n      <div class=\"row\">\n        <div class=\"col-md-8\">\n          <input\n            type=\"text\"\n            class=\"form-control input-coupon-code\"\n            id=\"applyVoucher\"\n            formControlName=\"couponCode\"\n            placeholder=\"{{ 'voucher.placeholder' | cxTranslate }}\"\n          />\n        </div>\n        <div class=\"col-md-4\">\n          <button\n            class=\"btn btn-block btn-action apply-coupon-button\"\n            type=\"submit\"\n            [disabled]=\"submitDisabled$ | async\"\n            [class.disabled]=\"submitDisabled$ | async\"\n          >\n            {{ 'voucher.apply' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </form>\n  </div>\n\n  <cx-applied-coupons\n    [vouchers]=\"cart.appliedVouchers\"\n    [cartIsLoading]=\"cartIsLoading$ | async\"\n    [isReadOnly]=\"false\"\n  >\n  </cx-applied-coupons>\n</ng-container>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        CartCouponComponent.ctorParameters = function () { return [
+            { type: core$1.CartService },
+            { type: core$1.CartVoucherService },
+            { type: forms.FormBuilder }
+        ]; };
+        return CartCouponComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        CartCouponComponent.prototype.form;
+        /** @type {?} */
+        CartCouponComponent.prototype.cartIsLoading$;
+        /** @type {?} */
+        CartCouponComponent.prototype.submitDisabled$;
+        /** @type {?} */
+        CartCouponComponent.prototype.cart$;
+        /** @type {?} */
+        CartCouponComponent.prototype.cartId;
+        /**
+         * @type {?}
+         * @private
+         */
+        CartCouponComponent.prototype.subscription;
+        /**
+         * @type {?}
+         * @private
+         */
+        CartCouponComponent.prototype.cartService;
+        /**
+         * @type {?}
+         * @private
+         */
+        CartCouponComponent.prototype.cartVoucherService;
+        /**
+         * @type {?}
+         * @private
+         */
+        CartCouponComponent.prototype.formBuilder;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CartCouponModule = /** @class */ (function () {
+        function CartCouponModule() {
+        }
+        CartCouponModule.decorators = [
+            { type: core.NgModule, args: [{
+                        declarations: [CartCouponComponent, AppliedCouponsComponent],
+                        exports: [CartCouponComponent, AppliedCouponsComponent],
+                        imports: [
+                            common.CommonModule,
+                            forms.FormsModule,
+                            forms.ReactiveFormsModule,
+                            core$1.I18nModule,
+                            IconModule,
+                            core$1.ConfigModule.withConfig((/** @type {?} */ ({
+                                cmsComponents: {
+                                    CartApplyCouponComponent: {
+                                        component: CartCouponComponent,
+                                    },
+                                },
+                            }))),
+                        ],
+                        entryComponents: [CartCouponComponent],
+                    },] }
+        ];
+        return CartCouponModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var CartItemListComponent = /** @class */ (function () {
         function CartItemListComponent(cartService, fb) {
             this.cartService = cartService;
@@ -5282,6 +5531,7 @@
                         imports: [
                             common.CommonModule,
                             router.RouterModule,
+                            CartCouponModule,
                             forms.ReactiveFormsModule,
                             core$1.UrlModule,
                             ngBootstrap.NgbModule,
@@ -5383,7 +5633,7 @@
         CartDetailsComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-cart-details',
-                        template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <ng-container *ngIf=\"entries$ | async as entries\">\n    <div class=\"cart-details-wrapper\">\n      <div class=\"cx-total\">\n        {{ 'cartDetails.cartName' | cxTranslate: { code: cart.code } }}\n      </div>\n      <cx-promotions\n        [promotions]=\"getAllPromotionsForCart(cart)\"\n      ></cx-promotions>\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n        [cartIsLoading]=\"!(cartLoaded$ | async)\"\n      ></cx-cart-item-list>\n      <!-- NOT FOR MVP  <cx-cart-coupon></cx-cart-coupon> -->\n    </div>\n  </ng-container>\n</ng-container>\n",
+                        template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <ng-container *ngIf=\"entries$ | async as entries\">\n    <div class=\"cart-details-wrapper\">\n      <div class=\"cx-total\">\n        {{ 'cartDetails.cartName' | cxTranslate: { code: cart.code } }}\n      </div>\n      <cx-promotions\n        [promotions]=\"getAllPromotionsForCart(cart)\"\n      ></cx-promotions>\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n        [cartIsLoading]=\"!(cartLoaded$ | async)\"\n      ></cx-cart-item-list>\n    </div>\n  </ng-container>\n</ng-container>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -5419,6 +5669,7 @@
                         imports: [
                             CartSharedModule,
                             common.CommonModule,
+                            CartCouponModule,
                             router.RouterModule,
                             core$1.UrlModule,
                             PromotionsModule,
@@ -5646,6 +5897,7 @@
                             }))),
                             CartSharedModule,
                             core$1.I18nModule,
+                            CartCouponModule,
                         ],
                         declarations: [CartTotalsComponent],
                         exports: [CartTotalsComponent],
@@ -5775,6 +6027,7 @@
                             MiniCartModule,
                             core$1.CartModule,
                         ],
+                        declarations: [],
                         providers: [
                             {
                                 provide: PAGE_LAYOUT_HANDLER,
@@ -26254,6 +26507,8 @@
     exports.CarouselModule = CarouselModule;
     exports.CarouselService = CarouselService;
     exports.CartComponentModule = CartComponentModule;
+    exports.CartCouponComponent = CartCouponComponent;
+    exports.CartCouponModule = CartCouponModule;
     exports.CartDetailsComponent = CartDetailsComponent;
     exports.CartDetailsModule = CartDetailsModule;
     exports.CartItemComponent = CartItemComponent;
@@ -26496,44 +26751,45 @@
     exports.pwaFactory = pwaFactory;
     exports.sortTitles = sortTitles;
     exports.titleScores = titleScores;
-    exports.ɵa = OnlyNumberDirectiveModule;
-    exports.ɵb = AutoFocusDirectiveModule;
-    exports.ɵba = ProductImagesModule;
-    exports.ɵbb = ProductImagesComponent;
-    exports.ɵbc = CheckoutLoginComponent;
-    exports.ɵbd = suffixUrlMatcher;
-    exports.ɵbe = addCmsRoute;
-    exports.ɵbf = htmlLangProvider;
-    exports.ɵbg = setHtmlLangAttribute;
-    exports.ɵbh = AnonymousConsentsModule;
-    exports.ɵbi = AnonymousConsentsDialogComponent;
-    exports.ɵbj = RoutingModule;
-    exports.ɵbk = defaultStorefrontRoutesConfig;
-    exports.ɵbl = defaultRoutingConfig;
-    exports.ɵc = defaultCheckoutConfig;
-    exports.ɵd = ExpressCheckoutService;
-    exports.ɵe = AssistedServiceModule;
-    exports.ɵf = AsmRootComponent;
-    exports.ɵg = AsmMainUiComponent;
-    exports.ɵh = CSAgentLoginFormComponent;
-    exports.ɵi = CustomerSelectionComponent;
-    exports.ɵj = defaultQualtricsConfig;
-    exports.ɵk = defaultScrollConfig;
-    exports.ɵl = ViewConfig;
-    exports.ɵm = ViewConfigModule;
-    exports.ɵn = ProductScrollComponent;
-    exports.ɵo = ProductAttributesModule;
-    exports.ɵp = ProductDetailsTabModule;
-    exports.ɵq = ProductDetailsTabComponent;
-    exports.ɵr = CmsRoutesService;
-    exports.ɵs = CmsMappingService;
-    exports.ɵt = CmsI18nService;
-    exports.ɵu = CmsGuardsService;
-    exports.ɵv = TrackingEventsComponent;
-    exports.ɵw = ConsignmentTrackingComponent;
-    exports.ɵx = ComponentMapperService;
-    exports.ɵy = AddToHomeScreenService;
-    exports.ɵz = GuestRegisterFormComponent;
+    exports.ɵa = AppliedCouponsComponent;
+    exports.ɵb = OnlyNumberDirectiveModule;
+    exports.ɵba = GuestRegisterFormComponent;
+    exports.ɵbb = ProductImagesModule;
+    exports.ɵbc = ProductImagesComponent;
+    exports.ɵbd = CheckoutLoginComponent;
+    exports.ɵbe = suffixUrlMatcher;
+    exports.ɵbf = addCmsRoute;
+    exports.ɵbg = htmlLangProvider;
+    exports.ɵbh = setHtmlLangAttribute;
+    exports.ɵbi = AnonymousConsentsModule;
+    exports.ɵbj = AnonymousConsentsDialogComponent;
+    exports.ɵbk = RoutingModule;
+    exports.ɵbl = defaultStorefrontRoutesConfig;
+    exports.ɵbm = defaultRoutingConfig;
+    exports.ɵc = AutoFocusDirectiveModule;
+    exports.ɵd = defaultCheckoutConfig;
+    exports.ɵe = ExpressCheckoutService;
+    exports.ɵf = AssistedServiceModule;
+    exports.ɵg = AsmRootComponent;
+    exports.ɵh = AsmMainUiComponent;
+    exports.ɵi = CSAgentLoginFormComponent;
+    exports.ɵj = CustomerSelectionComponent;
+    exports.ɵk = defaultQualtricsConfig;
+    exports.ɵl = defaultScrollConfig;
+    exports.ɵm = ViewConfig;
+    exports.ɵn = ViewConfigModule;
+    exports.ɵo = ProductScrollComponent;
+    exports.ɵp = ProductAttributesModule;
+    exports.ɵq = ProductDetailsTabModule;
+    exports.ɵr = ProductDetailsTabComponent;
+    exports.ɵs = CmsRoutesService;
+    exports.ɵt = CmsMappingService;
+    exports.ɵu = CmsI18nService;
+    exports.ɵv = CmsGuardsService;
+    exports.ɵw = TrackingEventsComponent;
+    exports.ɵx = ConsignmentTrackingComponent;
+    exports.ɵy = ComponentMapperService;
+    exports.ɵz = AddToHomeScreenService;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
