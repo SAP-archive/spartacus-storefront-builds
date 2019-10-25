@@ -48,6 +48,7 @@ export declare class RegisterComponent implements OnInit, OnDestroy {
     isConsentGiven(consent: AnonymousConsent): boolean;
     private isConsentRequired;
     private onRegisterUserSuccess;
+    toggleAnonymousConsent(): void;
     private registerUserProcessInit;
     ngOnDestroy(): void;
 }

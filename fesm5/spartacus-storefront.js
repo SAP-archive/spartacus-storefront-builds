@@ -25456,6 +25456,15 @@ var RegisterComponent = /** @class */ (function () {
                     template: template.description,
                 };
             })));
+            this.subscription.add(this.userRegistrationForm
+                .get('newsletter')
+                .valueChanges.subscribe((/**
+             * @param {?} _
+             * @return {?}
+             */
+            function (_) {
+                _this.toggleAnonymousConsent();
+            })));
         }
     };
     /**
@@ -25538,10 +25547,20 @@ var RegisterComponent = /** @class */ (function () {
         if (this.router && success) {
             this.router.go('login');
             this.globalMessageService.add({ key: 'register.postRegisterMessage' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
-            if (this.isAnonymousConsentEnabled &&
-                Boolean(this.userRegistrationForm.get('newsletter').value)) {
-                this.anonymousConsentsService.giveConsent(this.anonymousConsentsConfig.anonymousConsents.registerConsent);
-            }
+        }
+    };
+    /**
+     * @return {?}
+     */
+    RegisterComponent.prototype.toggleAnonymousConsent = /**
+     * @return {?}
+     */
+    function () {
+        if (Boolean(this.userRegistrationForm.get('newsletter').value)) {
+            this.anonymousConsentsService.giveConsent(this.anonymousConsentsConfig.anonymousConsents.registerConsent);
+        }
+        else {
+            this.anonymousConsentsService.withdrawConsent(this.anonymousConsentsConfig.anonymousConsents.registerConsent);
         }
     };
     /**
