@@ -889,10 +889,10 @@ var AnonymousConsentManagementBannerComponent = /** @class */ (function () {
          */
         function (updated) {
             if (updated) {
-                _this.anonymousConsentsService.toggleAnonymousConsentsBannerVisibility(true);
+                _this.anonymousConsentsService.toggleBannerVisibility(true);
             }
         })));
-        this.bannerVisible$ = this.anonymousConsentsService.isAnonymousConsentsBannerVisible();
+        this.bannerVisible$ = this.anonymousConsentsService.isBannerVisible();
     };
     /**
      * @return {?}
@@ -931,7 +931,7 @@ var AnonymousConsentManagementBannerComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.anonymousConsentsService.toggleAnonymousConsentsBannerVisibility(false);
+        this.anonymousConsentsService.toggleBannerVisibility(false);
     };
     /**
      * @return {?}

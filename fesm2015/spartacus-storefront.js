@@ -719,10 +719,10 @@ class AnonymousConsentManagementBannerComponent {
          */
         updated => {
             if (updated) {
-                this.anonymousConsentsService.toggleAnonymousConsentsBannerVisibility(true);
+                this.anonymousConsentsService.toggleBannerVisibility(true);
             }
         })));
-        this.bannerVisible$ = this.anonymousConsentsService.isAnonymousConsentsBannerVisible();
+        this.bannerVisible$ = this.anonymousConsentsService.isBannerVisible();
     }
     /**
      * @return {?}
@@ -751,7 +751,7 @@ class AnonymousConsentManagementBannerComponent {
      * @return {?}
      */
     hideBanner() {
-        this.anonymousConsentsService.toggleAnonymousConsentsBannerVisibility(false);
+        this.anonymousConsentsService.toggleBannerVisibility(false);
     }
     /**
      * @return {?}
