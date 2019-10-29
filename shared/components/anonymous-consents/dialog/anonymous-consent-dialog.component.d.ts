@@ -13,6 +13,7 @@ export declare class AnonymousConsentDialogComponent implements OnInit, OnDestro
     requiredConsents: string[];
     templates$: Observable<ConsentTemplate[]>;
     consents$: Observable<AnonymousConsent[]>;
+    isLevel13: boolean;
     constructor(config: AnonymousConsentsConfig, modalService: ModalService, anonymousConsentsService: AnonymousConsentsService);
     ngOnInit(): void;
     closeModal(reason?: any): void;

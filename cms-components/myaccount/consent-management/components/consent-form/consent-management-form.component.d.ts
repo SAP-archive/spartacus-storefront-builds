@@ -6,6 +6,7 @@ export declare class ConsentManagementFormComponent implements OnInit {
     requiredConsents: string[];
     isAnonymousConsentsEnabled: boolean;
     consent: AnonymousConsent;
+    isLevel13: boolean;
     consentChanged: EventEmitter<{
         given: boolean;
         template: ConsentTemplate;
