@@ -24,4 +24,5 @@ export declare class AsmMainUiComponent implements OnInit {
         customerId: string;
     }): void;
     hideUi(): void;
+    endSession(): void;
 }
