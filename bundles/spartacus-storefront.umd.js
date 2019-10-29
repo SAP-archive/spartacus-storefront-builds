@@ -4221,6 +4221,64 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /**
+     * @abstract
+     */
+    var   /**
+     * @abstract
+     */
+    ViewConfig = /** @class */ (function () {
+        function ViewConfig() {
+        }
+        return ViewConfig;
+    }());
+    if (false) {
+        /** @type {?} */
+        ViewConfig.prototype.view;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ViewConfigModule = /** @class */ (function () {
+        function ViewConfigModule() {
+        }
+        /**
+         * @return {?}
+         */
+        ViewConfigModule.forRoot = /**
+         * @return {?}
+         */
+        function () {
+            return {
+                ngModule: ViewConfigModule,
+                providers: [
+                    core$1.provideConfig({
+                        view: {},
+                    }),
+                    {
+                        provide: ViewConfig,
+                        useExisting: core$1.Config,
+                    },
+                ],
+            };
+        };
+        ViewConfigModule.decorators = [
+            { type: core.NgModule, args: [{},] }
+        ];
+        return ViewConfigModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var AutoFocusDirective = /** @class */ (function () {
         function AutoFocusDirective(hostElement) {
             this.hostElement = hostElement;
@@ -22408,26 +22466,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    /**
-     * @abstract
-     */
-    var   /**
-     * @abstract
-     */
-    ViewConfig = /** @class */ (function () {
-        function ViewConfig() {
-        }
-        return ViewConfig;
-    }());
-    if (false) {
-        /** @type {?} */
-        ViewConfig.prototype.view;
-    }
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var ProductListComponent = /** @class */ (function () {
         function ProductListComponent(pageLayoutService, productListComponentService, scrollConfig) {
             this.pageLayoutService = pageLayoutService;
@@ -22821,39 +22859,6 @@
         /** @type {?} */
         ProductListItemComponent.prototype.product;
     }
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ViewConfigModule = /** @class */ (function () {
-        function ViewConfigModule() {
-        }
-        /**
-         * @return {?}
-         */
-        ViewConfigModule.forRoot = /**
-         * @return {?}
-         */
-        function () {
-            return {
-                ngModule: ViewConfigModule,
-                providers: [
-                    core$1.provideConfig({
-                        view: {},
-                    }),
-                    {
-                        provide: ViewConfig,
-                        useExisting: core$1.Config,
-                    },
-                ],
-            };
-        };
-        ViewConfigModule.decorators = [
-            { type: core.NgModule, args: [{},] }
-        ];
-        return ViewConfigModule;
-    }());
 
     /**
      * @fileoverview added by tsickle
@@ -26754,6 +26759,8 @@
     exports.UpdateProfileFormComponent = UpdateProfileFormComponent;
     exports.UpdateProfileModule = UpdateProfileModule;
     exports.UserComponentModule = UserComponentModule;
+    exports.ViewConfig = ViewConfig;
+    exports.ViewConfigModule = ViewConfigModule;
     exports.ViewModes = ViewModes;
     exports.b2cLayoutConfig = b2cLayoutConfig;
     exports.defaultCmsContentConfig = defaultCmsContentConfig;
@@ -26769,19 +26776,17 @@
     exports.titleScores = titleScores;
     exports.ɵa = AppliedCouponsComponent;
     exports.ɵb = OnlyNumberDirectiveModule;
-    exports.ɵba = GuestRegisterFormComponent;
-    exports.ɵbb = ProductImagesModule;
-    exports.ɵbc = ProductImagesComponent;
-    exports.ɵbd = CheckoutLoginComponent;
-    exports.ɵbe = suffixUrlMatcher;
-    exports.ɵbf = addCmsRoute;
-    exports.ɵbg = htmlLangProvider;
-    exports.ɵbh = setHtmlLangAttribute;
-    exports.ɵbi = AnonymousConsentsModule;
-    exports.ɵbj = AnonymousConsentDialogComponent;
-    exports.ɵbk = RoutingModule;
-    exports.ɵbl = defaultStorefrontRoutesConfig;
-    exports.ɵbm = defaultRoutingConfig;
+    exports.ɵba = ProductImagesComponent;
+    exports.ɵbb = CheckoutLoginComponent;
+    exports.ɵbc = suffixUrlMatcher;
+    exports.ɵbd = addCmsRoute;
+    exports.ɵbe = htmlLangProvider;
+    exports.ɵbf = setHtmlLangAttribute;
+    exports.ɵbg = AnonymousConsentsModule;
+    exports.ɵbh = AnonymousConsentDialogComponent;
+    exports.ɵbi = RoutingModule;
+    exports.ɵbj = defaultStorefrontRoutesConfig;
+    exports.ɵbk = defaultRoutingConfig;
     exports.ɵc = AutoFocusDirectiveModule;
     exports.ɵd = defaultCheckoutConfig;
     exports.ɵe = ExpressCheckoutService;
@@ -26792,20 +26797,20 @@
     exports.ɵj = CustomerSelectionComponent;
     exports.ɵk = defaultQualtricsConfig;
     exports.ɵl = defaultScrollConfig;
-    exports.ɵm = ViewConfig;
-    exports.ɵn = ViewConfigModule;
-    exports.ɵo = ProductScrollComponent;
-    exports.ɵp = ProductAttributesModule;
-    exports.ɵq = ProductDetailsTabModule;
-    exports.ɵr = ProductDetailsTabComponent;
-    exports.ɵs = CmsRoutesService;
-    exports.ɵt = CmsMappingService;
-    exports.ɵu = CmsI18nService;
-    exports.ɵv = CmsGuardsService;
-    exports.ɵw = TrackingEventsComponent;
-    exports.ɵx = ConsignmentTrackingComponent;
-    exports.ɵy = ComponentMapperService;
-    exports.ɵz = AddToHomeScreenService;
+    exports.ɵm = ProductScrollComponent;
+    exports.ɵn = ProductAttributesModule;
+    exports.ɵo = ProductDetailsTabModule;
+    exports.ɵp = ProductDetailsTabComponent;
+    exports.ɵq = CmsRoutesService;
+    exports.ɵr = CmsMappingService;
+    exports.ɵs = CmsI18nService;
+    exports.ɵt = CmsGuardsService;
+    exports.ɵu = TrackingEventsComponent;
+    exports.ɵv = ConsignmentTrackingComponent;
+    exports.ɵw = ComponentMapperService;
+    exports.ɵx = AddToHomeScreenService;
+    exports.ɵy = GuestRegisterFormComponent;
+    exports.ɵz = ProductImagesModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
