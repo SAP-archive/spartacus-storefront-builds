@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
-import { CartService, OrderEntry, ProductService } from '@spartacus/core';
+import { CartService, OrderEntry, Product } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { ModalRef, ModalService } from '../../../shared/components/modal/index';
 import { CurrentProductService } from '../../product/current-product.service';
@@ -8,9 +8,13 @@ export declare class AddToCartComponent implements OnInit, OnDestroy {
     protected modalService: ModalService;
     protected currentProductService: CurrentProductService;
     private cd;
-    private productService?;
     productCode: string;
     showQuantity: boolean;
+    /**
+     * As long as we do not support #5026, we require product input, as we need
+     *  a reference to the product model to fetch the stock data.
+     */
+    product: Product;
     maxQuantity: number;
     modalRef: ModalRef;
     hasStock: boolean;
@@ -18,12 +22,6 @@ export declare class AddToCartComponent implements OnInit, OnDestroy {
     increment: boolean;
     cartEntry$: Observable<OrderEntry>;
     subscription: Subscription;
-    constructor(cartService: CartService, modalService: ModalService, currentProductService: CurrentProductService, cd: ChangeDetectorRef, productService: ProductService);
-    /**
-     * @deprecated since version 1.4
-     *  Use constructor(store: Store<StateWithUser | StateWithProcess<void>>,
-     *  authService: AuthService) instead
-     */
     constructor(cartService: CartService, modalService: ModalService, currentProductService: CurrentProductService, cd: ChangeDetectorRef);
     ngOnInit(): void;
     private setStockInfo;

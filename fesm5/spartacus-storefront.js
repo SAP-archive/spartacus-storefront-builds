@@ -4513,12 +4513,11 @@ if (false) {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var AddToCartComponent = /** @class */ (function () {
-    function AddToCartComponent(cartService, modalService, currentProductService, cd, productService) {
+    function AddToCartComponent(cartService, modalService, currentProductService, cd) {
         this.cartService = cartService;
         this.modalService = modalService;
         this.currentProductService = currentProductService;
         this.cd = cd;
-        this.productService = productService;
         this.showQuantity = true;
         this.hasStock = false;
         this.quantity = 1;
@@ -4532,23 +4531,18 @@ var AddToCartComponent = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        if (this.productCode) {
+        if (this.product) {
+            this.productCode = this.product.code;
             this.cartEntry$ = this.cartService.getEntry(this.productCode);
-            this.subscription = this.productService
-                .get(this.productCode)
-                .pipe(filter((/**
-             * @param {?} p
-             * @return {?}
-             */
-            function (p) { return !!p; })))
-                .subscribe((/**
-             * @param {?} product
-             * @return {?}
-             */
-            function (product) {
-                _this.setStockInfo(product);
-                _this.cd.markForCheck();
-            }));
+            this.setStockInfo(this.product);
+            this.cd.markForCheck();
+        }
+        else if (this.productCode) {
+            this.cartEntry$ = this.cartService.getEntry(this.productCode);
+            // force hasStock and quanity for the time being, as we do not have more info:
+            this.quantity = 1;
+            this.hasStock = true;
+            this.cd.markForCheck();
         }
         else {
             this.subscription = this.currentProductService
@@ -4579,10 +4573,8 @@ var AddToCartComponent = /** @class */ (function () {
     function (product) {
         this.quantity = 1;
         this.hasStock =
-            product.stock &&
-                product.stock.stockLevelStatus !== 'outOfStock' &&
-                product.stock.stockLevel > 0;
-        if (this.hasStock) {
+            product.stock && product.stock.stockLevelStatus !== 'outOfStock';
+        if (this.hasStock && product.stock.stockLevel) {
             this.maxQuantity = product.stock.stockLevel;
         }
     };
@@ -4662,7 +4654,7 @@ var AddToCartComponent = /** @class */ (function () {
     AddToCartComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-add-to-cart',
-                    template: "<div class=\"quantity\" *ngIf=\"productCode && showQuantity\">\n  <label>{{ 'addToCart.quantity' | cxTranslate }}</label>\n  <cx-item-counter\n    [value]=\"quantity\"\n    isValueChangeable=\"true\"\n    [min]=\"1\"\n    [max]=\"maxQuantity\"\n    *ngIf=\"hasStock\"\n    (update)=\"updateCount($event)\"\n  ></cx-item-counter>\n  <span class=\"info\">{{\n    hasStock\n      ? ('addToCart.inStock' | cxTranslate)\n      : ('addToCart.outOfStock' | cxTranslate)\n  }}</span>\n</div>\n<button\n  *ngIf=\"hasStock\"\n  class=\"btn btn-primary btn-block\"\n  type=\"button\"\n  [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  (click)=\"addToCart()\"\n>\n  {{ 'addToCart.addToCart' | cxTranslate }}\n</button>\n",
+                    template: "<div class=\"quantity\" *ngIf=\"productCode && showQuantity\">\n  <label>{{ 'addToCart.quantity' | cxTranslate }}</label>\n  <cx-item-counter\n    [value]=\"quantity\"\n    isValueChangeable=\"true\"\n    [min]=\"1\"\n    [max]=\"maxQuantity || null\"\n    *ngIf=\"hasStock\"\n    (update)=\"updateCount($event)\"\n  ></cx-item-counter>\n  <span class=\"info\">{{\n    hasStock\n      ? ('addToCart.inStock' | cxTranslate)\n      : ('addToCart.outOfStock' | cxTranslate)\n  }}</span>\n</div>\n<button\n  *ngIf=\"hasStock\"\n  class=\"btn btn-primary btn-block\"\n  type=\"button\"\n  [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  (click)=\"addToCart()\"\n>\n  {{ 'addToCart.addToCart' | cxTranslate }}\n</button>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -4671,12 +4663,12 @@ var AddToCartComponent = /** @class */ (function () {
         { type: CartService },
         { type: ModalService },
         { type: CurrentProductService },
-        { type: ChangeDetectorRef },
-        { type: ProductService, decorators: [{ type: Optional }] }
+        { type: ChangeDetectorRef }
     ]; };
     AddToCartComponent.propDecorators = {
         productCode: [{ type: Input }],
-        showQuantity: [{ type: Input }]
+        showQuantity: [{ type: Input }],
+        product: [{ type: Input }]
     };
     return AddToCartComponent;
 }());
@@ -4685,6 +4677,12 @@ if (false) {
     AddToCartComponent.prototype.productCode;
     /** @type {?} */
     AddToCartComponent.prototype.showQuantity;
+    /**
+     * As long as we do not support #5026, we require product input, as we need
+     *  a reference to the product model to fetch the stock data.
+     * @type {?}
+     */
+    AddToCartComponent.prototype.product;
     /** @type {?} */
     AddToCartComponent.prototype.maxQuantity;
     /** @type {?} */
@@ -4719,11 +4717,6 @@ if (false) {
      * @private
      */
     AddToCartComponent.prototype.cd;
-    /**
-     * @type {?}
-     * @private
-     */
-    AddToCartComponent.prototype.productService;
 }
 
 /**
@@ -22606,7 +22599,7 @@ var ProductGridItemComponent = /** @class */ (function () {
     ProductGridItemComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-product-grid-item',
-                    template: "<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-image-container\"\n>\n  <cx-media\n    class=\"cx-product-image\"\n    [container]=\"product.images?.PRIMARY\"\n    format=\"product\"\n    [alt]=\"product.summary\"\n  ></cx-media>\n</a>\n<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-name\"\n  [innerHTML]=\"product.nameHtml\"\n></a>\n\n<div class=\"cx-product-rating\">\n  <cx-star-rating\n    [rating]=\"product?.averageRating\"\n    [disabled]=\"true\"\n  ></cx-star-rating>\n</div>\n<div class=\"cx-product-price-container\">\n  <div class=\"cx-product-price\" aria-label=\"Product price\">\n    {{ product.price?.formattedValue }}\n  </div>\n</div>\n\n<cx-add-to-cart\n  *ngIf=\"product.stock.stockLevelStatus !== 'outOfStock'\"\n  [showQuantity]=\"false\"\n  [productCode]=\"product.code\"\n></cx-add-to-cart>\n",
+                    template: "<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-image-container\"\n>\n  <cx-media\n    class=\"cx-product-image\"\n    [container]=\"product.images?.PRIMARY\"\n    format=\"product\"\n    [alt]=\"product.summary\"\n  ></cx-media>\n</a>\n<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-name\"\n  [innerHTML]=\"product.nameHtml\"\n></a>\n\n<div class=\"cx-product-rating\">\n  <cx-star-rating\n    [rating]=\"product?.averageRating\"\n    [disabled]=\"true\"\n  ></cx-star-rating>\n</div>\n<div class=\"cx-product-price-container\">\n  <div class=\"cx-product-price\" aria-label=\"Product price\">\n    {{ product.price?.formattedValue }}\n  </div>\n</div>\n\n<cx-add-to-cart\n  *ngIf=\"product.stock.stockLevelStatus !== 'outOfStock'\"\n  [showQuantity]=\"false\"\n  [product]=\"product\"\n></cx-add-to-cart>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -22630,7 +22623,7 @@ var ProductListItemComponent = /** @class */ (function () {
     ProductListItemComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-product-list-item',
-                    template: "<div class=\"row\">\n  <div class=\"col-12 col-md-4\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-image-container\"\n    >\n      <cx-media\n        class=\"cx-product-image\"\n        [container]=\"product.images?.PRIMARY\"\n        format=\"product\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n    </a>\n  </div>\n  <div class=\"col-12 col-md-8\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-name\"\n      [innerHtml]=\"product.nameHtml\"\n    ></a>\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"cx-product-price\" aria-label=\"Product price\">\n      {{ product.price?.formattedValue }}\n    </div>\n    <div class=\"row\">\n      <div class=\"col-12 col-md-8\">\n        <p class=\"cx-product-summary\" [innerHtml]=\"product.summary\">\n          {{ product.summary }}\n        </p>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <cx-add-to-cart\n          *ngIf=\"product.stock.stockLevelStatus !== 'outOfStock'\"\n          [showQuantity]=\"false\"\n          [productCode]=\"product.code\"\n        ></cx-add-to-cart>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                    template: "<div class=\"row\">\n  <div class=\"col-12 col-md-4\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-image-container\"\n    >\n      <cx-media\n        class=\"cx-product-image\"\n        [container]=\"product.images?.PRIMARY\"\n        format=\"product\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n    </a>\n  </div>\n  <div class=\"col-12 col-md-8\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-name\"\n      [innerHtml]=\"product.nameHtml\"\n    ></a>\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"cx-product-price\" aria-label=\"Product price\">\n      {{ product.price?.formattedValue }}\n    </div>\n    <div class=\"row\">\n      <div class=\"col-12 col-md-8\">\n        <p class=\"cx-product-summary\" [innerHtml]=\"product.summary\">\n          {{ product.summary }}\n        </p>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <cx-add-to-cart\n          *ngIf=\"product.stock.stockLevelStatus !== 'outOfStock'\"\n          [showQuantity]=\"false\"\n          [product]=\"product\"\n        ></cx-add-to-cart>\n      </div>\n    </div>\n  </div>\n</div>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
