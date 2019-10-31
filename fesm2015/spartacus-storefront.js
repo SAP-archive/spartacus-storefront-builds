@@ -710,22 +710,6 @@ class AnonymousConsentManagementBannerComponent {
         this.anonymousConsentsService = anonymousConsentsService;
         this.subscriptions = new Subscription();
         this.anonymousConsentsFeature = ANONYMOUS_CONSENTS_FEATURE;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.templatesUpdated$ = this.anonymousConsentsService
-            .getTemplatesUpdated()
-            .pipe(tap((/**
-         * @param {?} updated
-         * @return {?}
-         */
-        updated => {
-            if (updated) {
-                this.anonymousConsentsService.toggleBannerVisibility(true);
-            }
-        })));
         this.bannerVisible$ = this.anonymousConsentsService.isBannerVisible();
     }
     /**
@@ -755,7 +739,7 @@ class AnonymousConsentManagementBannerComponent {
      * @return {?}
      */
     hideBanner() {
-        this.anonymousConsentsService.toggleBannerVisibility(false);
+        this.anonymousConsentsService.toggleBannerDismissed(true);
     }
     /**
      * @return {?}
@@ -767,7 +751,7 @@ class AnonymousConsentManagementBannerComponent {
 AnonymousConsentManagementBannerComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-anonymous-consent-management-banner',
-                template: "<ng-container *ngIf=\"templatesUpdated$ | async\"></ng-container>\n<ng-container *ngIf=\"bannerVisible$ | async as bannerVisible\">\n  <div\n    [ngClass]=\"{ 'anonymous-consent-banner-hidden': !bannerVisible }\"\n    class=\"anonymous-consent-banner\"\n  >\n    <div class=\"container\">\n      <div class=\"row\">\n        <div class=\"col-lg-8 col-xs-12\">\n          <div class=\"cx-banner-title\">\n            {{ 'anonymousConsents.banner.title' | cxTranslate }}\n          </div>\n          <div class=\"cx-banner-description\">\n            {{ 'anonymousConsents.banner.description' | cxTranslate }}\n          </div>\n        </div>\n\n        <div class=\"col-lg-4 col-xs-12 cx-banner-buttons\">\n          <button class=\"btn btn-action\" (click)=\"viewDetails()\">\n            {{ 'anonymousConsents.banner.viewDetails' | cxTranslate }}\n          </button>\n          <button class=\"btn btn-primary\" (click)=\"allowAll()\">\n            {{ 'anonymousConsents.banner.allowAll' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</ng-container>\n"
+                template: "<ng-container *ngIf=\"bannerVisible$ | async as bannerVisible\">\n  <div\n    [ngClass]=\"{ 'anonymous-consent-banner-hidden': !bannerVisible }\"\n    class=\"anonymous-consent-banner\"\n  >\n    <div class=\"container\">\n      <div class=\"row\">\n        <div class=\"col-lg-8 col-xs-12\">\n          <div class=\"cx-banner-title\">\n            {{ 'anonymousConsents.banner.title' | cxTranslate }}\n          </div>\n          <div class=\"cx-banner-description\">\n            {{ 'anonymousConsents.banner.description' | cxTranslate }}\n          </div>\n        </div>\n\n        <div class=\"col-lg-4 col-xs-12 cx-banner-buttons\">\n          <button class=\"btn btn-action\" (click)=\"viewDetails()\">\n            {{ 'anonymousConsents.banner.viewDetails' | cxTranslate }}\n          </button>\n          <button class=\"btn btn-primary\" (click)=\"allowAll()\">\n            {{ 'anonymousConsents.banner.allowAll' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</ng-container>\n"
             }] }
 ];
 /** @nocollapse */
@@ -785,8 +769,6 @@ if (false) {
     AnonymousConsentManagementBannerComponent.prototype.anonymousConsentsFeature;
     /** @type {?} */
     AnonymousConsentManagementBannerComponent.prototype.bannerVisible$;
-    /** @type {?} */
-    AnonymousConsentManagementBannerComponent.prototype.templatesUpdated$;
     /**
      * @type {?}
      * @private
