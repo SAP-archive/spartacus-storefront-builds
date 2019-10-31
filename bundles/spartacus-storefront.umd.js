@@ -5104,8 +5104,9 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CartCouponComponent = /** @class */ (function () {
-        function CartCouponComponent(cartService, cartVoucherService, formBuilder) {
+        function CartCouponComponent(cartService, authService, cartVoucherService, formBuilder) {
             this.cartService = cartService;
+            this.authService = authService;
             this.cartVoucherService = cartVoucherService;
             this.formBuilder = formBuilder;
             this.subscription = new Subscription.Subscription();
@@ -5118,13 +5119,25 @@
          */
         function () {
             var _this = this;
-            this.cart$ = this.cartService
-                .getActive()
-                .pipe(operators.tap((/**
-             * @param {?} cart
+            this.cart$ = rxjs.combineLatest([
+                this.cartService.getActive(),
+                this.authService.getOccUserId(),
+            ]).pipe(operators.tap((/**
+             * @param {?} __0
              * @return {?}
              */
-            function (cart) { return (_this.cartId = cart.code); })));
+            function (_a) {
+                var _b = __read(_a, 2), cart = _b[0], userId = _b[1];
+                return (_this.cartId =
+                    userId === core$1.OCC_USER_ID_ANONYMOUS ? cart.guid : cart.code);
+            })), operators.map((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 1), cart = _b[0];
+                return cart;
+            })));
             this.cartIsLoading$ = this.cartService
                 .getLoaded()
                 .pipe(operators.map((/**
@@ -5205,6 +5218,7 @@
         /** @nocollapse */
         CartCouponComponent.ctorParameters = function () { return [
             { type: core$1.CartService },
+            { type: core$1.AuthService },
             { type: core$1.CartVoucherService },
             { type: forms.FormBuilder }
         ]; };
@@ -5231,6 +5245,11 @@
          * @private
          */
         CartCouponComponent.prototype.cartService;
+        /**
+         * @type {?}
+         * @private
+         */
+        CartCouponComponent.prototype.authService;
         /**
          * @type {?}
          * @private

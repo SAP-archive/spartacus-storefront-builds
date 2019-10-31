@@ -1,6 +1,6 @@
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
 import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, EventEmitter, Output, isDevMode, ChangeDetectionStrategy, forwardRef, Renderer2, ViewChild, Directive, HostListener, Optional, Injector, ChangeDetectorRef, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, NgZone, APP_INITIALIZER, RendererFactory2, INJECTOR, Pipe } from '@angular/core';
-import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, ANONYMOUS_CONSENTS_FEATURE, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, FeaturesConfigModule, RoutingService, ProductService, CartService, CartVoucherService, CartModule, RoutingConfigService, AuthService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, CmsConfig, CartDataService, CmsService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, AuthGuard, AsmService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, NotAuthGuard, CmsPageTitleModule, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, AsmModule, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
+import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, ANONYMOUS_CONSENTS_FEATURE, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, FeaturesConfigModule, RoutingService, ProductService, CartService, CartVoucherService, OCC_USER_ID_ANONYMOUS, AuthService, CartModule, RoutingConfigService, AuthRedirectService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, CmsConfig, CartDataService, CmsService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, AuthGuard, AsmService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, NotAuthGuard, CmsPageTitleModule, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, AsmModule, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
 import { Subscription, combineLatest, of, fromEvent, BehaviorSubject, concat, isObservable, from } from 'rxjs';
 import { take, distinctUntilChanged, tap, map, debounceTime, startWith, filter, switchMap, shareReplay, skipWhile, withLatestFrom, scan, first, endWith, pluck } from 'rxjs/operators';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
@@ -4074,11 +4074,13 @@ if (false) {
 class CartCouponComponent {
     /**
      * @param {?} cartService
+     * @param {?} authService
      * @param {?} cartVoucherService
      * @param {?} formBuilder
      */
-    constructor(cartService, cartVoucherService, formBuilder) {
+    constructor(cartService, authService, cartVoucherService, formBuilder) {
         this.cartService = cartService;
+        this.authService = authService;
         this.cartVoucherService = cartVoucherService;
         this.formBuilder = formBuilder;
         this.subscription = new Subscription$1();
@@ -4087,13 +4089,19 @@ class CartCouponComponent {
      * @return {?}
      */
     ngOnInit() {
-        this.cart$ = this.cartService
-            .getActive()
-            .pipe(tap((/**
-         * @param {?} cart
+        this.cart$ = combineLatest([
+            this.cartService.getActive(),
+            this.authService.getOccUserId(),
+        ]).pipe(tap((/**
+         * @param {?} __0
          * @return {?}
          */
-        cart => (this.cartId = cart.code))));
+        ([cart, userId]) => (this.cartId =
+            userId === OCC_USER_ID_ANONYMOUS ? cart.guid : cart.code))), map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([cart]) => cart)));
         this.cartIsLoading$ = this.cartService
             .getLoaded()
             .pipe(map((/**
@@ -4162,6 +4170,7 @@ CartCouponComponent.decorators = [
 /** @nocollapse */
 CartCouponComponent.ctorParameters = () => [
     { type: CartService },
+    { type: AuthService },
     { type: CartVoucherService },
     { type: FormBuilder }
 ];
@@ -4186,6 +4195,11 @@ if (false) {
      * @private
      */
     CartCouponComponent.prototype.cartService;
+    /**
+     * @type {?}
+     * @private
+     */
+    CartCouponComponent.prototype.authService;
     /**
      * @type {?}
      * @private
