@@ -4760,12 +4760,15 @@ class CartPageLayoutHandler {
     }
 }
 CartPageLayoutHandler.decorators = [
-    { type: Injectable }
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
 ];
 /** @nocollapse */
 CartPageLayoutHandler.ctorParameters = () => [
     { type: CartService }
 ];
+/** @nocollapse */ CartPageLayoutHandler.ngInjectableDef = ɵɵdefineInjectable({ factory: function CartPageLayoutHandler_Factory() { return new CartPageLayoutHandler(ɵɵinject(CartService)); }, token: CartPageLayoutHandler, providedIn: "root" });
 if (false) {
     /**
      * @type {?}
@@ -4978,7 +4981,7 @@ CartComponentModule.decorators = [
                 providers: [
                     {
                         provide: PAGE_LAYOUT_HANDLER,
-                        useClass: CartPageLayoutHandler,
+                        useExisting: CartPageLayoutHandler,
                         multi: true,
                     },
                 ],

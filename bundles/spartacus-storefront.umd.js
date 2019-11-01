@@ -5910,12 +5910,15 @@
             return slots$;
         };
         CartPageLayoutHandler.decorators = [
-            { type: core.Injectable }
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
         ];
         /** @nocollapse */
         CartPageLayoutHandler.ctorParameters = function () { return [
             { type: core$1.CartService }
         ]; };
+        /** @nocollapse */ CartPageLayoutHandler.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CartPageLayoutHandler_Factory() { return new CartPageLayoutHandler(core.ɵɵinject(core$1.CartService)); }, token: CartPageLayoutHandler, providedIn: "root" });
         return CartPageLayoutHandler;
     }());
     if (false) {
@@ -6136,7 +6139,7 @@
                         providers: [
                             {
                                 provide: PAGE_LAYOUT_HANDLER,
-                                useClass: CartPageLayoutHandler,
+                                useExisting: CartPageLayoutHandler,
                                 multi: true,
                             },
                         ],
