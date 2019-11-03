@@ -6,13 +6,13 @@ export declare class AsmMainUiComponent implements OnInit {
     protected userService: UserService;
     protected asmService: AsmService;
     protected globalMessageService: GlobalMessageService;
-    protected routing: RoutingService;
+    protected routingService: RoutingService;
     csAgentToken$: Observable<UserToken>;
     csAgentTokenLoading$: Observable<boolean>;
     customer$: Observable<User>;
     searchResultsLoading$: Observable<boolean>;
     private startingCustomerSession;
-    constructor(authService: AuthService, userService: UserService, asmService: AsmService, globalMessageService: GlobalMessageService, routing: RoutingService);
+    constructor(authService: AuthService, userService: UserService, asmService: AsmService, globalMessageService: GlobalMessageService, routingService: RoutingService);
     ngOnInit(): void;
     private handleCustomerSessionStartRedirection;
     loginCustomerSupportAgent({ userId, password, }: {
@@ -24,5 +24,4 @@ export declare class AsmMainUiComponent implements OnInit {
         customerId: string;
     }): void;
     hideUi(): void;
-    endSession(): void;
 }
