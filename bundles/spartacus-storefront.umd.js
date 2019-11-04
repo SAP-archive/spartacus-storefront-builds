@@ -26472,6 +26472,7 @@
                             core$1.AuthModule.forRoot(),
                             core$1.AnonymousConsentsModule.forRoot(),
                             core$1.ConfigModule.forRoot(),
+                            core$1.ConfigInitializerModule.forRoot(),
                             RoutingModule.forRoot(),
                             core$1.I18nModule.forRoot(),
                             core$1.CmsModule.forRoot(),
