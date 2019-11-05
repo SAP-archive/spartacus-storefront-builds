@@ -1,22 +1,27 @@
-import { EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { ElementRef, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AsmService, GlobalMessageService } from '@spartacus/core';
+import { AsmConfig, AsmService, CustomerSearchPage, User } from '@spartacus/core';
 import { Observable } from 'rxjs';
 export declare class CustomerSelectionComponent implements OnInit, OnDestroy {
     private fb;
     private asmService;
-    protected globalMessageService: GlobalMessageService;
+    private config;
     form: FormGroup;
-    private submitClicked;
     private subscription;
     searchResultsLoading$: Observable<boolean>;
+    searchResults: Observable<CustomerSearchPage>;
+    selectedCustomer: User;
     submitEvent: EventEmitter<{
         customerId: string;
     }>;
-    constructor(fb: FormBuilder, asmService: AsmService, globalMessageService: GlobalMessageService);
+    resultList: ElementRef;
+    searchTerm: ElementRef;
+    constructor(fb: FormBuilder, asmService: AsmService, config: AsmConfig);
     ngOnInit(): void;
-    private handleSearchResults;
+    private handleSearchTerm;
+    selectCustomerFromList(customer: User): void;
     onSubmit(): void;
-    isNotValid(formControlName: string): boolean;
+    onDocumentClick(event: any): void;
+    closeResults(): void;
     ngOnDestroy(): void;
 }

@@ -1,6 +1,6 @@
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
 import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, EventEmitter, Output, isDevMode, ChangeDetectionStrategy, forwardRef, Renderer2, ViewChild, Directive, HostListener, Optional, Injector, ChangeDetectorRef, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, NgZone, APP_INITIALIZER, RendererFactory2, INJECTOR, Pipe } from '@angular/core';
-import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, ANONYMOUS_CONSENTS_FEATURE, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, FeaturesConfigModule, RoutingService, ProductService, CartService, CartVoucherService, OCC_USER_ID_ANONYMOUS, AuthService, CartModule, RoutingConfigService, AuthRedirectService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, CmsConfig, CartDataService, CmsService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, AuthGuard, AsmService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, NotAuthGuard, CmsPageTitleModule, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, AsmModule, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
+import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, ANONYMOUS_CONSENTS_FEATURE, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, FeaturesConfigModule, RoutingService, ProductService, CartService, CartVoucherService, OCC_USER_ID_ANONYMOUS, AuthService, CartModule, RoutingConfigService, AuthRedirectService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, CmsConfig, CartDataService, CmsService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, AuthGuard, AsmService, AsmConfig, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, NotAuthGuard, CmsPageTitleModule, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, AsmModule, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
 import { Subscription, combineLatest, of, fromEvent, BehaviorSubject, concat, isObservable, from } from 'rxjs';
 import { take, distinctUntilChanged, tap, map, debounceTime, startWith, filter, switchMap, shareReplay, skipWhile, withLatestFrom, scan, first, endWith, pluck } from 'rxjs/operators';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
@@ -12307,13 +12307,12 @@ class CustomerSelectionComponent {
     /**
      * @param {?} fb
      * @param {?} asmService
-     * @param {?} globalMessageService
+     * @param {?} config
      */
-    constructor(fb, asmService, globalMessageService) {
+    constructor(fb, asmService, config) {
         this.fb = fb;
         this.asmService = asmService;
-        this.globalMessageService = globalMessageService;
-        this.submitClicked = false;
+        this.config = config;
         this.subscription = new Subscription();
         this.submitEvent = new EventEmitter();
     }
@@ -12322,61 +12321,79 @@ class CustomerSelectionComponent {
      */
     ngOnInit() {
         this.form = this.fb.group({
-            searchTerm: ['', [Validators.required]],
+            searchTerm: [''],
         });
-        this.searchResultsLoading$ = this.asmService.getCustomerSearchResultsLoading();
         this.asmService.customerSearchReset();
-        this.subscription.add(this.asmService.getCustomerSearchResults().subscribe((/**
-         * @param {?} results
+        this.searchResultsLoading$ = this.asmService.getCustomerSearchResultsLoading();
+        this.searchResults = this.asmService.getCustomerSearchResults();
+        this.subscription.add(this.form.controls.searchTerm.valueChanges
+            .pipe(debounceTime(300))
+            .subscribe((/**
+         * @param {?} searchTermValue
          * @return {?}
          */
-        results => {
-            this.handleSearchResults(results);
+        searchTermValue => {
+            this.handleSearchTerm(searchTermValue);
         })));
     }
     /**
      * @private
-     * @param {?} results
+     * @param {?} searchTermValue
      * @return {?}
      */
-    handleSearchResults(results) {
-        if (!!results && results.entries) {
-            /** @type {?} */
-            const customerHit = results.entries.find((/**
-             * @param {?} element
-             * @return {?}
-             */
-            element => element.uid.toLowerCase() ===
-                this.form.controls.searchTerm.value.toLowerCase()));
-            if (customerHit) {
-                this.submitEvent.emit({ customerId: customerHit.customerId });
-            }
-            else {
-                this.globalMessageService.add({
-                    key: 'asm.customerSearch.noMatch',
-                    params: { uid: this.form.controls.searchTerm.value },
-                }, GlobalMessageType.MSG_TYPE_ERROR);
-            }
+    handleSearchTerm(searchTermValue) {
+        if (Boolean(this.selectedCustomer) &&
+            searchTermValue !== this.selectedCustomer.name) {
+            this.selectedCustomer = undefined;
         }
+        if (Boolean(this.selectedCustomer)) {
+            return;
+        }
+        this.asmService.customerSearchReset();
+        if (searchTermValue.trim().length >= 3) {
+            this.asmService.customerSearch({
+                query: searchTermValue,
+                pageSize: this.config.asm.customeSearch.maxResults,
+            });
+        }
+    }
+    /**
+     * @param {?} customer
+     * @return {?}
+     */
+    selectCustomerFromList(customer) {
+        this.selectedCustomer = customer;
+        this.form.controls.searchTerm.setValue(this.selectedCustomer.name);
+        this.asmService.customerSearchReset();
     }
     /**
      * @return {?}
      */
     onSubmit() {
-        this.submitClicked = true;
-        if (this.form.invalid) {
-            return;
+        if (Boolean(this.selectedCustomer)) {
+            this.submitEvent.emit({ customerId: this.selectedCustomer.customerId });
         }
-        this.asmService.customerSearch({
-            query: this.form.controls.searchTerm.value,
-        });
     }
     /**
-     * @param {?} formControlName
+     * @param {?} event
      * @return {?}
      */
-    isNotValid(formControlName) {
-        return FormUtils.isNotValidField(this.form, formControlName, this.submitClicked);
+    onDocumentClick(event) {
+        if (Boolean(this.resultList)) {
+            if (this.resultList.nativeElement.contains(event.target) ||
+                this.searchTerm.nativeElement.contains(event.target)) {
+                return;
+            }
+            else {
+                this.asmService.customerSearchReset();
+            }
+        }
+    }
+    /**
+     * @return {?}
+     */
+    closeResults() {
+        this.asmService.customerSearchReset();
     }
     /**
      * @return {?}
@@ -12388,17 +12405,22 @@ class CustomerSelectionComponent {
 CustomerSelectionComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-customer-selection',
-                template: "<ng-container *ngIf=\"!(searchResultsLoading$ | async); else spinner\">\n  <form (submit)=\"onSubmit()\" [formGroup]=\"form\">\n    <div class=\"fd-container\">\n      <div class=\"fd-col--6\">\n        <label>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            [class.is-invalid]=\"isNotValid('searchTerm')\"\n            formControlName=\"searchTerm\"\n            placeholder=\"{{\n              'asm.customerSearch.searchTerm.label' | cxTranslate\n            }}\"\n          />\n          <div class=\"invalid-feedback\" *ngIf=\"isNotValid('searchTerm')\">\n            <span>{{\n              'asm.customerSearch.searchTerm.required' | cxTranslate\n            }}</span>\n          </div>\n        </label>\n      </div>\n\n      <div class=\"fd-col--3\">\n        <button\n          type=\"submit\"\n          class=\"fd-button--emphasized fd-button--positive sap-icon--media-play\"\n        >\n          {{ 'asm.customerSearch.submit' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </form>\n</ng-container>\n<ng-template #spinner>\n  <div class=\"sap-spinner\">\n    <div class=\"fd-loading-dots\" aria-hidden=\"false\" aria-label=\"Loading\">\n      <div></div>\n      <div></div>\n      <div></div>\n    </div>\n  </div>\n</ng-template>\n"
+                template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\">\n  <div class=\"fd-container\">\n    <div class=\"fd-col--6\">\n      <label>\n        <input\n          #searchTerm\n          type=\"text\"\n          class=\"form-control\"\n          formControlName=\"searchTerm\"\n          placeholder=\"{{\n            'asm.customerSearch.searchTerm.label' | cxTranslate\n          }}\"\n        />\n      </label>\n    </div>\n\n    <div class=\"fd-col--3\">\n      <button\n        type=\"submit\"\n        [disabled]=\"!selectedCustomer\"\n        class=\"fd-button--emphasized fd-button--positive sap-icon--media-play\"\n      >\n        {{ 'asm.customerSearch.submit' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n\n<div\n  *ngIf=\"searchResults | async as results\"\n  class=\"results fd-popover__body\"\n  #resultList\n>\n  <div>\n    <a\n      *ngFor=\"let result of results.entries\"\n      (click)=\"selectCustomerFromList(result)\"\n      ><span class=\"result-name\">{{ result.name }}</span>\n      <span class=\"result-id\">{{ result.uid }}</span></a\n    >\n    <a\n      (click)=\"closeResults()\"\n      *ngIf=\"\n        !(searchResultsLoading$ | async) &&\n        searchTerm.value.length >= 3 &&\n        (!!results.entries && results.entries.length <= 0)\n      \"\n      >{{ 'asm.customerSearch.noMatch' | cxTranslate }}</a\n    >\n  </div>\n</div>\n<div *ngIf=\"searchResultsLoading$ | async\" class=\"results fd-popover__body\">\n  <div>\n    <a>\n      <div class=\"sap-spinner\">\n        <div class=\"fd-loading-dots\" aria-hidden=\"false\" aria-label=\"Loading\">\n          <div></div>\n          <div></div>\n          <div></div>\n        </div>\n      </div>\n    </a>\n  </div>\n</div>\n",
+                host: {
+                    '(document:click)': 'onDocumentClick($event)',
+                }
             }] }
 ];
 /** @nocollapse */
 CustomerSelectionComponent.ctorParameters = () => [
     { type: FormBuilder },
     { type: AsmService },
-    { type: GlobalMessageService }
+    { type: AsmConfig }
 ];
 CustomerSelectionComponent.propDecorators = {
-    submitEvent: [{ type: Output }]
+    submitEvent: [{ type: Output }],
+    resultList: [{ type: ViewChild, args: ['resultList', { static: false },] }],
+    searchTerm: [{ type: ViewChild, args: ['searchTerm', { static: false },] }]
 };
 if (false) {
     /** @type {?} */
@@ -12407,16 +12429,19 @@ if (false) {
      * @type {?}
      * @private
      */
-    CustomerSelectionComponent.prototype.submitClicked;
-    /**
-     * @type {?}
-     * @private
-     */
     CustomerSelectionComponent.prototype.subscription;
     /** @type {?} */
     CustomerSelectionComponent.prototype.searchResultsLoading$;
     /** @type {?} */
+    CustomerSelectionComponent.prototype.searchResults;
+    /** @type {?} */
+    CustomerSelectionComponent.prototype.selectedCustomer;
+    /** @type {?} */
     CustomerSelectionComponent.prototype.submitEvent;
+    /** @type {?} */
+    CustomerSelectionComponent.prototype.resultList;
+    /** @type {?} */
+    CustomerSelectionComponent.prototype.searchTerm;
     /**
      * @type {?}
      * @private
@@ -12429,9 +12454,9 @@ if (false) {
     CustomerSelectionComponent.prototype.asmService;
     /**
      * @type {?}
-     * @protected
+     * @private
      */
-    CustomerSelectionComponent.prototype.globalMessageService;
+    CustomerSelectionComponent.prototype.config;
 }
 
 /**

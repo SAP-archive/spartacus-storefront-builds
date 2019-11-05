@@ -14409,11 +14409,10 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CustomerSelectionComponent = /** @class */ (function () {
-        function CustomerSelectionComponent(fb, asmService, globalMessageService) {
+        function CustomerSelectionComponent(fb, asmService, config) {
             this.fb = fb;
             this.asmService = asmService;
-            this.globalMessageService = globalMessageService;
-            this.submitClicked = false;
+            this.config = config;
             this.subscription = new rxjs.Subscription();
             this.submitEvent = new core.EventEmitter();
         }
@@ -14426,50 +14425,59 @@
         function () {
             var _this = this;
             this.form = this.fb.group({
-                searchTerm: ['', [forms.Validators.required]],
+                searchTerm: [''],
             });
-            this.searchResultsLoading$ = this.asmService.getCustomerSearchResultsLoading();
             this.asmService.customerSearchReset();
-            this.subscription.add(this.asmService.getCustomerSearchResults().subscribe((/**
-             * @param {?} results
+            this.searchResultsLoading$ = this.asmService.getCustomerSearchResultsLoading();
+            this.searchResults = this.asmService.getCustomerSearchResults();
+            this.subscription.add(this.form.controls.searchTerm.valueChanges
+                .pipe(operators.debounceTime(300))
+                .subscribe((/**
+             * @param {?} searchTermValue
              * @return {?}
              */
-            function (results) {
-                _this.handleSearchResults(results);
+            function (searchTermValue) {
+                _this.handleSearchTerm(searchTermValue);
             })));
         };
         /**
          * @private
-         * @param {?} results
+         * @param {?} searchTermValue
          * @return {?}
          */
-        CustomerSelectionComponent.prototype.handleSearchResults = /**
+        CustomerSelectionComponent.prototype.handleSearchTerm = /**
          * @private
-         * @param {?} results
+         * @param {?} searchTermValue
          * @return {?}
          */
-        function (results) {
-            var _this = this;
-            if (!!results && results.entries) {
-                /** @type {?} */
-                var customerHit = results.entries.find((/**
-                 * @param {?} element
-                 * @return {?}
-                 */
-                function (element) {
-                    return element.uid.toLowerCase() ===
-                        _this.form.controls.searchTerm.value.toLowerCase();
-                }));
-                if (customerHit) {
-                    this.submitEvent.emit({ customerId: customerHit.customerId });
-                }
-                else {
-                    this.globalMessageService.add({
-                        key: 'asm.customerSearch.noMatch',
-                        params: { uid: this.form.controls.searchTerm.value },
-                    }, core$1.GlobalMessageType.MSG_TYPE_ERROR);
-                }
+        function (searchTermValue) {
+            if (Boolean(this.selectedCustomer) &&
+                searchTermValue !== this.selectedCustomer.name) {
+                this.selectedCustomer = undefined;
             }
+            if (Boolean(this.selectedCustomer)) {
+                return;
+            }
+            this.asmService.customerSearchReset();
+            if (searchTermValue.trim().length >= 3) {
+                this.asmService.customerSearch({
+                    query: searchTermValue,
+                    pageSize: this.config.asm.customeSearch.maxResults,
+                });
+            }
+        };
+        /**
+         * @param {?} customer
+         * @return {?}
+         */
+        CustomerSelectionComponent.prototype.selectCustomerFromList = /**
+         * @param {?} customer
+         * @return {?}
+         */
+        function (customer) {
+            this.selectedCustomer = customer;
+            this.form.controls.searchTerm.setValue(this.selectedCustomer.name);
+            this.asmService.customerSearchReset();
         };
         /**
          * @return {?}
@@ -14478,24 +14486,37 @@
          * @return {?}
          */
         function () {
-            this.submitClicked = true;
-            if (this.form.invalid) {
-                return;
+            if (Boolean(this.selectedCustomer)) {
+                this.submitEvent.emit({ customerId: this.selectedCustomer.customerId });
             }
-            this.asmService.customerSearch({
-                query: this.form.controls.searchTerm.value,
-            });
         };
         /**
-         * @param {?} formControlName
+         * @param {?} event
          * @return {?}
          */
-        CustomerSelectionComponent.prototype.isNotValid = /**
-         * @param {?} formControlName
+        CustomerSelectionComponent.prototype.onDocumentClick = /**
+         * @param {?} event
          * @return {?}
          */
-        function (formControlName) {
-            return FormUtils.isNotValidField(this.form, formControlName, this.submitClicked);
+        function (event) {
+            if (Boolean(this.resultList)) {
+                if (this.resultList.nativeElement.contains(event.target) ||
+                    this.searchTerm.nativeElement.contains(event.target)) {
+                    return;
+                }
+                else {
+                    this.asmService.customerSearchReset();
+                }
+            }
+        };
+        /**
+         * @return {?}
+         */
+        CustomerSelectionComponent.prototype.closeResults = /**
+         * @return {?}
+         */
+        function () {
+            this.asmService.customerSearchReset();
         };
         /**
          * @return {?}
@@ -14509,17 +14530,22 @@
         CustomerSelectionComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-customer-selection',
-                        template: "<ng-container *ngIf=\"!(searchResultsLoading$ | async); else spinner\">\n  <form (submit)=\"onSubmit()\" [formGroup]=\"form\">\n    <div class=\"fd-container\">\n      <div class=\"fd-col--6\">\n        <label>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            [class.is-invalid]=\"isNotValid('searchTerm')\"\n            formControlName=\"searchTerm\"\n            placeholder=\"{{\n              'asm.customerSearch.searchTerm.label' | cxTranslate\n            }}\"\n          />\n          <div class=\"invalid-feedback\" *ngIf=\"isNotValid('searchTerm')\">\n            <span>{{\n              'asm.customerSearch.searchTerm.required' | cxTranslate\n            }}</span>\n          </div>\n        </label>\n      </div>\n\n      <div class=\"fd-col--3\">\n        <button\n          type=\"submit\"\n          class=\"fd-button--emphasized fd-button--positive sap-icon--media-play\"\n        >\n          {{ 'asm.customerSearch.submit' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </form>\n</ng-container>\n<ng-template #spinner>\n  <div class=\"sap-spinner\">\n    <div class=\"fd-loading-dots\" aria-hidden=\"false\" aria-label=\"Loading\">\n      <div></div>\n      <div></div>\n      <div></div>\n    </div>\n  </div>\n</ng-template>\n"
+                        template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\">\n  <div class=\"fd-container\">\n    <div class=\"fd-col--6\">\n      <label>\n        <input\n          #searchTerm\n          type=\"text\"\n          class=\"form-control\"\n          formControlName=\"searchTerm\"\n          placeholder=\"{{\n            'asm.customerSearch.searchTerm.label' | cxTranslate\n          }}\"\n        />\n      </label>\n    </div>\n\n    <div class=\"fd-col--3\">\n      <button\n        type=\"submit\"\n        [disabled]=\"!selectedCustomer\"\n        class=\"fd-button--emphasized fd-button--positive sap-icon--media-play\"\n      >\n        {{ 'asm.customerSearch.submit' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n\n<div\n  *ngIf=\"searchResults | async as results\"\n  class=\"results fd-popover__body\"\n  #resultList\n>\n  <div>\n    <a\n      *ngFor=\"let result of results.entries\"\n      (click)=\"selectCustomerFromList(result)\"\n      ><span class=\"result-name\">{{ result.name }}</span>\n      <span class=\"result-id\">{{ result.uid }}</span></a\n    >\n    <a\n      (click)=\"closeResults()\"\n      *ngIf=\"\n        !(searchResultsLoading$ | async) &&\n        searchTerm.value.length >= 3 &&\n        (!!results.entries && results.entries.length <= 0)\n      \"\n      >{{ 'asm.customerSearch.noMatch' | cxTranslate }}</a\n    >\n  </div>\n</div>\n<div *ngIf=\"searchResultsLoading$ | async\" class=\"results fd-popover__body\">\n  <div>\n    <a>\n      <div class=\"sap-spinner\">\n        <div class=\"fd-loading-dots\" aria-hidden=\"false\" aria-label=\"Loading\">\n          <div></div>\n          <div></div>\n          <div></div>\n        </div>\n      </div>\n    </a>\n  </div>\n</div>\n",
+                        host: {
+                            '(document:click)': 'onDocumentClick($event)',
+                        }
                     }] }
         ];
         /** @nocollapse */
         CustomerSelectionComponent.ctorParameters = function () { return [
             { type: forms.FormBuilder },
             { type: core$1.AsmService },
-            { type: core$1.GlobalMessageService }
+            { type: core$1.AsmConfig }
         ]; };
         CustomerSelectionComponent.propDecorators = {
-            submitEvent: [{ type: core.Output }]
+            submitEvent: [{ type: core.Output }],
+            resultList: [{ type: core.ViewChild, args: ['resultList', { static: false },] }],
+            searchTerm: [{ type: core.ViewChild, args: ['searchTerm', { static: false },] }]
         };
         return CustomerSelectionComponent;
     }());
@@ -14530,16 +14556,19 @@
          * @type {?}
          * @private
          */
-        CustomerSelectionComponent.prototype.submitClicked;
-        /**
-         * @type {?}
-         * @private
-         */
         CustomerSelectionComponent.prototype.subscription;
         /** @type {?} */
         CustomerSelectionComponent.prototype.searchResultsLoading$;
         /** @type {?} */
+        CustomerSelectionComponent.prototype.searchResults;
+        /** @type {?} */
+        CustomerSelectionComponent.prototype.selectedCustomer;
+        /** @type {?} */
         CustomerSelectionComponent.prototype.submitEvent;
+        /** @type {?} */
+        CustomerSelectionComponent.prototype.resultList;
+        /** @type {?} */
+        CustomerSelectionComponent.prototype.searchTerm;
         /**
          * @type {?}
          * @private
@@ -14552,9 +14581,9 @@
         CustomerSelectionComponent.prototype.asmService;
         /**
          * @type {?}
-         * @protected
+         * @private
          */
-        CustomerSelectionComponent.prototype.globalMessageService;
+        CustomerSelectionComponent.prototype.config;
     }
 
     /**
