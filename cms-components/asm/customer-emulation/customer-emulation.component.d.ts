@@ -1,13 +1,13 @@
 import { OnDestroy, OnInit } from '@angular/core';
-import { AuthService, RoutingService, User, UserService } from '@spartacus/core';
+import { User, UserService } from '@spartacus/core';
+import { AsmComponentService } from '../asm-component.service';
 export declare class CustomerEmulationComponent implements OnInit, OnDestroy {
-    protected authService: AuthService;
+    protected asmComponentService: AsmComponentService;
     protected userService: UserService;
-    protected routingService: RoutingService;
     customer: User;
     private subscription;
-    constructor(authService: AuthService, userService: UserService, routingService: RoutingService);
+    constructor(asmComponentService: AsmComponentService, userService: UserService);
     ngOnInit(): void;
-    endSession(): void;
+    logoutCustomer(): void;
     ngOnDestroy(): void;
 }
