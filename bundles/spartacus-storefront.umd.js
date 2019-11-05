@@ -1060,7 +1060,6 @@
             this.modalService = modalService;
             this.anonymousConsentsService = anonymousConsentsService;
             this.subscriptions = new rxjs.Subscription();
-            this.anonymousConsentsFeature = core$1.ANONYMOUS_CONSENTS_FEATURE;
             this.bannerVisible$ = this.anonymousConsentsService.isBannerVisible();
         }
         /**
@@ -1130,8 +1129,6 @@
          * @private
          */
         AnonymousConsentManagementBannerComponent.prototype.subscriptions;
-        /** @type {?} */
-        AnonymousConsentManagementBannerComponent.prototype.anonymousConsentsFeature;
         /** @type {?} */
         AnonymousConsentManagementBannerComponent.prototype.bannerVisible$;
         /**
