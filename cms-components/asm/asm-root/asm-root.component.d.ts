@@ -9,6 +9,8 @@ export declare class AsmRootComponent implements OnInit, OnDestroy {
     asmUi$: Observable<AsmUi>;
     constructor(asmService: AsmService, activatedRoute: ActivatedRoute);
     ngOnInit(): void;
+    expandUi(): void;
+    collapseUi(): void;
     private showUi;
     ngOnDestroy(): void;
 }
