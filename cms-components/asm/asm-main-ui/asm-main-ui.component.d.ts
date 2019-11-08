@@ -1,7 +1,7 @@
 import { OnInit } from '@angular/core';
 import { AsmService, AuthService, GlobalMessageService, RoutingService, User, UserService, UserToken } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { AsmComponentService } from '../asm-component.service';
+import { AsmComponentService } from '../services/asm-component.service';
 export declare class AsmMainUiComponent implements OnInit {
     protected authService: AuthService;
     protected userService: UserService;

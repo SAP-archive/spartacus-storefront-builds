@@ -2,7 +2,6 @@
  * Generated bundle index. Do not edit.
  */
 export * from './public_api';
-export { AsmComponentService as ɵi } from './cms-components/asm/asm-component.service';
 export { AsmMainUiComponent as ɵh } from './cms-components/asm/asm-main-ui/asm-main-ui.component';
 export { AsmRootComponent as ɵg } from './cms-components/asm/asm-root/asm-root.component';
 export { AsmSessionTimerComponent as ɵl } from './cms-components/asm/asm-session-timer/asm-session-timer.component';
@@ -11,6 +10,7 @@ export { AsmModule as ɵf } from './cms-components/asm/asm.module';
 export { CSAgentLoginFormComponent as ɵj } from './cms-components/asm/csagent-login-form/csagent-login-form.component';
 export { CustomerEmulationComponent as ɵn } from './cms-components/asm/customer-emulation/customer-emulation.component';
 export { CustomerSelectionComponent as ɵk } from './cms-components/asm/customer-selection/customer-selection.component';
+export { AsmComponentService as ɵi } from './cms-components/asm/services/asm-component.service';
 export { AppliedCouponsComponent as ɵa } from './cms-components/cart/cart-coupon/applied-coupons/applied-coupons.component';
 export { defaultCheckoutConfig as ɵd } from './cms-components/checkout/config/default-checkout-config';
 export { ExpressCheckoutService as ɵe } from './cms-components/checkout/services/express-checkout.service';

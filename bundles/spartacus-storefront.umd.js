@@ -14092,7 +14092,7 @@
              * @return {?}
              */
             function (token) {
-                if (Boolean(token) && token.access_token) {
+                if (_this.authService.isCustomerEmulationToken(token)) {
                     _this.logoutCustomer();
                 }
                 _this.authService.logoutCustomerSupportAgent();
@@ -14107,6 +14107,24 @@
         function () {
             this.authService.logout();
             this.routingService.go({ cxRoute: 'home' });
+        };
+        /**
+         * @return {?}
+         */
+        AsmComponentService.prototype.isCustomerEmulationSessionInProgress = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            return this.authService
+                .getUserToken()
+                .pipe(operators.mergeMap((/**
+             * @param {?} userToken
+             * @return {?}
+             */
+            function (userToken) {
+                return rxjs.of(_this.authService.isCustomerEmulationToken(userToken));
+            })));
         };
         AsmComponentService.decorators = [
             { type: core.Injectable, args: [{
@@ -14879,6 +14897,7 @@
              * @return {?}
              */
             function (user) { return (_this.customer = user); })));
+            this.isCustomerEmulationSessionInProgress$ = this.asmComponentService.isCustomerEmulationSessionInProgress();
         };
         /**
          * @return {?}
@@ -14901,7 +14920,7 @@
         CustomerEmulationComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-customer-emulation',
-                        template: "<div class=\"fd-container\">\n  <div class=\"fd-col--6\">\n    <label>\n      <input\n        class=\"form-control ng-untouched ng-pristine ng-invalid\"\n        formcontrolname=\"customer\"\n        type=\"text\"\n        disabled=\"true\"\n        placeholder=\"{{ customer?.name }}, {{ customer?.uid }}\"\n      />\n    </label>\n  </div>\n\n  <div class=\"fd-col--3\">\n    <button class=\"fd-button--negative\" (click)=\"logoutCustomer()\">\n      <svg\n        height=\"14\"\n        width=\"14\"\n        aria-hidden=\"true\"\n        data-icon=\"stop-circle\"\n        data-prefix=\"far\"\n        focusable=\"false\"\n        role=\"img\"\n        viewBox=\"0 0 512 512\"\n        xmlns=\"http://www.w3.org/2000/svg\"\n      >\n        <path\n          d=\"M504 256C504 119 393 8 256 8S8 119 8 256s111 248 248 248 248-111 248-248zm-448 0c0-110.5 89.5-200 200-200s200 89.5 200 200-89.5 200-200 200S56 366.5 56 256zm296-80v160c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h160c8.8 0 16 7.2 16 16z\"\n        />\n      </svg>\n      <span>\n        {{ 'asm.endSession' | cxTranslate }}\n      </span>\n    </button>\n  </div>\n</div>\n"
+                        template: "<ng-container\n  *ngIf=\"\n    isCustomerEmulationSessionInProgress$ | async;\n    else realCustomerSession\n  \"\n>\n  <div class=\"fd-container\">\n    <div class=\"fd-col--6\">\n      <label>\n        <input\n          class=\"form-control ng-untouched ng-pristine ng-invalid\"\n          formcontrolname=\"customer\"\n          type=\"text\"\n          disabled=\"true\"\n          placeholder=\"{{ customer?.name }}, {{ customer?.uid }}\"\n        />\n      </label>\n    </div>\n\n    <div class=\"fd-col--3\">\n      <button class=\"fd-button--negative\" (click)=\"logoutCustomer()\">\n        <svg\n          height=\"14\"\n          width=\"14\"\n          aria-hidden=\"true\"\n          data-icon=\"stop-circle\"\n          data-prefix=\"far\"\n          focusable=\"false\"\n          role=\"img\"\n          viewBox=\"0 0 512 512\"\n          xmlns=\"http://www.w3.org/2000/svg\"\n        >\n          <path\n            d=\"M504 256C504 119 393 8 256 8S8 119 8 256s111 248 248 248 248-111 248-248zm-448 0c0-110.5 89.5-200 200-200s200 89.5 200 200-89.5 200-200 200S56 366.5 56 256zm296-80v160c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h160c8.8 0 16 7.2 16 16z\"\n          />\n        </svg>\n        <span>\n          {{ 'asm.endSession' | cxTranslate }}\n        </span>\n      </button>\n    </div>\n  </div>\n</ng-container>\n\n<ng-template #realCustomerSession>\n  <div class=\"fd-alert\" role=\"alert\">\n    {{ 'asm.standardSessionInProgress' | cxTranslate }}\n  </div>\n</ng-template>\n"
                     }] }
         ];
         /** @nocollapse */
@@ -14914,6 +14933,8 @@
     if (false) {
         /** @type {?} */
         CustomerEmulationComponent.prototype.customer;
+        /** @type {?} */
+        CustomerEmulationComponent.prototype.isCustomerEmulationSessionInProgress$;
         /**
          * @type {?}
          * @private

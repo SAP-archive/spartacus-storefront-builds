@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
 import { AsmConfig, RoutingService } from '@spartacus/core';
-import { AsmComponentService } from '../asm-component.service';
+import { AsmComponentService } from '../services/asm-component.service';
 export declare class AsmSessionTimerComponent implements OnInit, OnDestroy {
     private config;
     private asmComponentService;
