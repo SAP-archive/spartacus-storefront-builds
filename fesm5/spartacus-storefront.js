@@ -14381,7 +14381,7 @@ var CustomerSelectionComponent = /** @class */ (function () {
         if (searchTermValue.trim().length >= 3) {
             this.asmService.customerSearch({
                 query: searchTermValue,
-                pageSize: this.config.asm.customeSearch.maxResults,
+                pageSize: this.config.asm.customerSearch.maxResults,
             });
         }
     };
