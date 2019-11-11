@@ -1,8 +1,8 @@
-import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
-import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, EventEmitter, Output, isDevMode, ChangeDetectionStrategy, forwardRef, Renderer2, ViewChild, Directive, HostListener, Optional, Injector, ChangeDetectorRef, InjectionToken, TemplateRef, ComponentFactory, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, NgZone, APP_INITIALIZER, RendererFactory2, Pipe, INJECTOR } from '@angular/core';
-import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, FeaturesConfigModule, RoutingService, ProductService, CartService, CartVoucherService, OCC_USER_ID_ANONYMOUS, AuthService, CartModule, RoutingConfigService, AuthRedirectService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, CmsConfig, CartDataService, CmsService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, AsmService, AsmConfig, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, NotAuthGuard, CmsPageTitleModule, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, AsmModule as AsmModule$1, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
+import { CommonModule, isPlatformServer, isPlatformBrowser, DOCUMENT } from '@angular/common';
+import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, EventEmitter, Output, isDevMode, ChangeDetectionStrategy, forwardRef, Renderer2, ViewChild, Directive, HostListener, Optional, Injector, ChangeDetectorRef, InjectionToken, TemplateRef, Inject, PLATFORM_ID, INJECTOR, ComponentFactory, ViewContainerRef, ComponentFactoryResolver, NgZone, APP_INITIALIZER, RendererFactory2, Pipe } from '@angular/core';
+import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, FeaturesConfigModule, RoutingService, ProductService, CartService, CartVoucherService, OCC_USER_ID_ANONYMOUS, AuthService, CartModule, RoutingConfigService, AuthRedirectService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, CmsConfig, TranslationChunkService, CmsService, PageType, SemanticPathService, ProtectedRoutesGuard, CartDataService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, AsmService, AsmConfig, NotAuthGuard, CmsPageTitleModule, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, AsmModule as AsmModule$1, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
 import { Subscription, combineLatest, of, fromEvent, BehaviorSubject, concat, isObservable, from } from 'rxjs';
-import { take, distinctUntilChanged, tap, map, debounceTime, startWith, filter, switchMap, shareReplay, skipWhile, withLatestFrom, scan, mergeMap, first, endWith, pluck } from 'rxjs/operators';
+import { take, distinctUntilChanged, tap, map, debounceTime, startWith, filter, switchMap, shareReplay, skipWhile, withLatestFrom, first, endWith, scan, mergeMap, pluck } from 'rxjs/operators';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
 import { NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
@@ -9367,6 +9367,1012 @@ LayoutModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * Please don't put that service in public API.
+ *
+ */
+class CmsMappingService {
+    /**
+     * @param {?} config
+     * @param {?} platformId
+     */
+    constructor(config, platformId) {
+        this.config = config;
+        this.platformId = platformId;
+    }
+    /**
+     * @param {?} flexType
+     * @return {?}
+     */
+    isComponentEnabled(flexType) {
+        /** @type {?} */
+        const isSSR = isPlatformServer(this.platformId);
+        /** @type {?} */
+        const isComponentDisabledInSSR = (this.config.cmsComponents[flexType] || {})
+            .disableSSR;
+        return !(isSSR && isComponentDisabledInSSR);
+    }
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    getRoutesForComponents(componentTypes) {
+        /** @type {?} */
+        const routes = [];
+        for (const componentType of componentTypes) {
+            if (this.isComponentEnabled(componentType)) {
+                routes.push(...this.getRoutesForComponent(componentType));
+            }
+        }
+        return routes;
+    }
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    getGuardsForComponents(componentTypes) {
+        /** @type {?} */
+        const guards = new Set();
+        for (const componentType of componentTypes) {
+            this.getGuardsForComponent(componentType).forEach((/**
+             * @param {?} guard
+             * @return {?}
+             */
+            guard => guards.add(guard)));
+        }
+        return Array.from(guards);
+    }
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    getI18nKeysForComponents(componentTypes) {
+        /** @type {?} */
+        const i18nKeys = new Set();
+        for (const componentType of componentTypes) {
+            if (this.isComponentEnabled(componentType)) {
+                this.getI18nKeysForComponent(componentType).forEach((/**
+                 * @param {?} key
+                 * @return {?}
+                 */
+                key => i18nKeys.add(key)));
+            }
+        }
+        return Array.from(i18nKeys);
+    }
+    /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    getRoutesForComponent(componentType) {
+        /** @type {?} */
+        const mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.childRoutes) || [];
+    }
+    /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    getGuardsForComponent(componentType) {
+        /** @type {?} */
+        const mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.guards) || [];
+    }
+    /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    getI18nKeysForComponent(componentType) {
+        /** @type {?} */
+        const mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.i18nKeys) || [];
+    }
+}
+CmsMappingService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+CmsMappingService.ctorParameters = () => [
+    { type: CmsConfig },
+    { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
+];
+/** @nocollapse */ CmsMappingService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(ɵɵinject(CmsConfig), ɵɵinject(PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsMappingService.prototype.config;
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsMappingService.prototype.platformId;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Please don't put that service in public API.
+ *
+ */
+class CmsGuardsService {
+    /**
+     * @param {?} cmsMapping
+     * @param {?} injector
+     */
+    constructor(cmsMapping, injector) {
+        this.cmsMapping = cmsMapping;
+        this.injector = injector;
+    }
+    /**
+     * @param {?} componentTypes
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    cmsPageCanActivate(componentTypes, route, state) {
+        /** @type {?} */
+        const guards = this.cmsMapping.getGuardsForComponents(componentTypes);
+        if (guards.length) {
+            /** @type {?} */
+            const canActivateObservables = guards.map((/**
+             * @param {?} guardClass
+             * @return {?}
+             */
+            guardClass => {
+                /** @type {?} */
+                const guard = this.injector.get(guardClass, null);
+                if (isCanActivate(guard)) {
+                    return wrapIntoObservable(guard.canActivate(route, state)).pipe(first());
+                }
+                else {
+                    throw new Error('Invalid CanActivate guard in cmsMapping');
+                }
+            }));
+            return concat(...canActivateObservables).pipe(skipWhile((/**
+             * @param {?} canActivate
+             * @return {?}
+             */
+            (canActivate) => canActivate === true)), endWith(true), first());
+        }
+        else {
+            return of(true);
+        }
+    }
+}
+CmsGuardsService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+CmsGuardsService.ctorParameters = () => [
+    { type: CmsMappingService },
+    { type: Injector }
+];
+/** @nocollapse */ CmsGuardsService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsGuardsService_Factory() { return new CmsGuardsService(ɵɵinject(CmsMappingService), ɵɵinject(INJECTOR)); }, token: CmsGuardsService, providedIn: "root" });
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsGuardsService.prototype.cmsMapping;
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsGuardsService.prototype.injector;
+}
+/**
+ * @template T
+ * @param {?} value
+ * @return {?}
+ */
+function wrapIntoObservable(value) {
+    if (isObservable(value)) {
+        return value;
+    }
+    if (isPromise(value)) {
+        return from(Promise.resolve(value));
+    }
+    return of(value);
+}
+/**
+ * @param {?} obj
+ * @return {?}
+ */
+function isPromise(obj) {
+    return !!obj && typeof obj.then === 'function';
+}
+/**
+ * @param {?} guard
+ * @return {?}
+ */
+function isCanActivate(guard) {
+    return guard && isFunction(guard.canActivate);
+}
+/**
+ * @template T
+ * @param {?} v
+ * @return {?}
+ */
+function isFunction(v) {
+    return typeof v === 'function';
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Please don't put that service in public API.
+ *
+ */
+class CmsI18nService {
+    /**
+     * @param {?} cmsMapping
+     * @param {?} translation
+     * @param {?} translationChunk
+     */
+    constructor(cmsMapping, translation, translationChunk) {
+        this.cmsMapping = cmsMapping;
+        this.translation = translation;
+        this.translationChunk = translationChunk;
+    }
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    loadChunksForComponents(componentTypes) {
+        /** @type {?} */
+        const i18nKeys = this.cmsMapping.getI18nKeysForComponents(componentTypes);
+        /** @type {?} */
+        const i18nChunks = new Set();
+        for (const key of i18nKeys) {
+            i18nChunks.add(this.translationChunk.getChunkNameForKey(key));
+        }
+        this.translation.loadChunks(Array.from(i18nChunks));
+    }
+}
+CmsI18nService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+CmsI18nService.ctorParameters = () => [
+    { type: CmsMappingService },
+    { type: TranslationService },
+    { type: TranslationChunkService }
+];
+/** @nocollapse */ CmsI18nService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsI18nService_Factory() { return new CmsI18nService(ɵɵinject(CmsMappingService), ɵɵinject(TranslationService), ɵɵinject(TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsI18nService.prototype.cmsMapping;
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsI18nService.prototype.translation;
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsI18nService.prototype.translationChunk;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class PageLayoutService {
+    /**
+     * @param {?} cms
+     * @param {?} config
+     * @param {?} breakpointService
+     * @param {?} handlers
+     */
+    constructor(cms, config, breakpointService, handlers) {
+        this.cms = cms;
+        this.config = config;
+        this.breakpointService = breakpointService;
+        this.handlers = handlers;
+        // we print warn messages on missing layout configs
+        // only once to not polute the console log
+        this.warnLogMessages = {};
+        this.logSlots = {};
+    }
+    /**
+     * @param {?=} section
+     * @return {?}
+     */
+    getSlots(section) {
+        return combineLatest([this.page$, this.breakpointService.breakpoint$]).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([page, breakpoint]) => {
+            /** @type {?} */
+            const pageTemplate = page.template;
+            /** @type {?} */
+            const slots = this.resolveSlots(page, section, breakpoint);
+            return { slots, pageTemplate, breakpoint };
+        })), switchMap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ({ slots, pageTemplate, breakpoint }) => {
+            /** @type {?} */
+            let result = of(slots);
+            for (const handler of this.handlers || []) {
+                result = handler.handle(result, pageTemplate, section, breakpoint);
+            }
+            return result;
+        })), distinctUntilChanged((/**
+         * @param {?} a
+         * @param {?} b
+         * @return {?}
+         */
+        (a, b) => {
+            if (a.length !== b.length) {
+                return false;
+            }
+            for (let i = 0; i < a.length; i++) {
+                if (a[i] !== b[i]) {
+                    return false;
+                }
+            }
+            return true;
+        })));
+    }
+    /**
+     * @private
+     * @param {?} page
+     * @param {?} section
+     * @param {?} breakpoint
+     * @return {?}
+     */
+    resolveSlots(page, section, breakpoint) {
+        /** @type {?} */
+        const config = this.getSlotConfig(page.template, 'slots', section, breakpoint);
+        if (config && config.slots) {
+            /** @type {?} */
+            const pageSlots = Object.keys(page.slots);
+            return config.slots.filter((/**
+             * @param {?} slot
+             * @return {?}
+             */
+            slot => pageSlots.includes(slot)));
+        }
+        else if (!section) {
+            this.logMissingLayoutConfig(page);
+            return Object.keys(page.slots);
+        }
+        else {
+            this.logMissingLayoutConfig(page, section);
+            return [];
+        }
+    }
+    /**
+     * @return {?}
+     */
+    get page$() {
+        return this.cms.getCurrentPage().pipe(filter((/**
+         * @param {?} page
+         * @return {?}
+         */
+        page => !!page)));
+    }
+    /**
+     * @return {?}
+     */
+    get templateName$() {
+        return this.page$.pipe(filter((/**
+         * @param {?} page
+         * @return {?}
+         */
+        page => !!page.template)), map((/**
+         * @param {?} page
+         * @return {?}
+         */
+        (page) => page.template)));
+    }
+    /**
+     * load slots from the layout configuration. The breakpoint is used
+     * to load a specific configuration for the given breakpoint. If there's
+     * no configuration available for the given breakpoint the default slot
+     * configuration is returned.
+     * @protected
+     * @param {?} templateUid
+     * @param {?} configAttribute
+     * @param {?=} section
+     * @param {?=} breakpoint
+     * @return {?}
+     */
+    getSlotConfig(templateUid, configAttribute, section, breakpoint) {
+        if (!this.config.layoutSlots) {
+            return null;
+        }
+        /** @type {?} */
+        const pageTemplateConfig = this.config.layoutSlots[templateUid];
+        if (section) {
+            return this.getSlotConfigForSection(templateUid, configAttribute, section, breakpoint);
+        }
+        if (pageTemplateConfig) {
+            return this.getResponsiveSlotConfig((/** @type {?} */ (pageTemplateConfig)), configAttribute, breakpoint);
+        }
+    }
+    /**
+     * @protected
+     * @param {?} templateUid
+     * @param {?} configAttribute
+     * @param {?=} section
+     * @param {?=} breakpoint
+     * @return {?}
+     */
+    getSlotConfigForSection(templateUid, configAttribute, section, breakpoint) {
+        /** @type {?} */
+        const pageTemplateConfig = this.config.layoutSlots[templateUid];
+        if (!pageTemplateConfig) {
+            return null;
+        }
+        // if there's no section config on the page layout
+        // we fall back to the global section config
+        /** @type {?} */
+        const sectionConfig = pageTemplateConfig[section]
+            ? pageTemplateConfig[section]
+            : this.config.layoutSlots[section];
+        if (!sectionConfig) {
+            return null;
+        }
+        /** @type {?} */
+        const responsiveConfig = this.getResponsiveSlotConfig((/** @type {?} */ (sectionConfig)), configAttribute, breakpoint);
+        if (responsiveConfig.hasOwnProperty(configAttribute)) {
+            return responsiveConfig;
+        }
+        else if (pageTemplateConfig[section].hasOwnProperty(configAttribute)) {
+            return pageTemplateConfig[section];
+        }
+        else if (this.config.layoutSlots[section]) {
+            return (/** @type {?} */ (this.config.layoutSlots[section]));
+        }
+    }
+    /**
+     * Returns a list of slots for a breakpoint specific configuratoin
+     * If there's no specific configuration for the breakpoint,
+     * the closest available configuration will be returned.
+     * @protected
+     * @param {?} layoutSlotConfig
+     * @param {?} configAttribute
+     * @param {?=} breakpoint
+     * @return {?}
+     */
+    getResponsiveSlotConfig(layoutSlotConfig, configAttribute, breakpoint) {
+        /** @type {?} */
+        let slotConfig = (/** @type {?} */ (layoutSlotConfig));
+        // fallback to default slot config
+        if (!breakpoint) {
+            return slotConfig;
+        }
+        // we have a config for the specific breakpoint
+        if (layoutSlotConfig[breakpoint] &&
+            layoutSlotConfig[breakpoint].hasOwnProperty(configAttribute)) {
+            return (/** @type {?} */ (layoutSlotConfig[breakpoint]));
+        }
+        // find closest config
+        /** @type {?} */
+        const all = this.breakpointService.breakpoints;
+        for (const br of all.splice(0, all.indexOf(breakpoint))) {
+            if (layoutSlotConfig[br] &&
+                layoutSlotConfig[br].hasOwnProperty(configAttribute)) {
+                slotConfig = (/** @type {?} */ (layoutSlotConfig[br]));
+            }
+        }
+        return slotConfig;
+    }
+    /**
+     * In order to help developers, we print some detailed log information in
+     * case there's no layout configuration available for the given page template
+     * or section. Additionally, the slot positions are printed in the console
+     * in a format that can be copied / paste to the configuration.
+     * @private
+     * @param {?} page
+     * @param {?=} section
+     * @return {?}
+     */
+    logMissingLayoutConfig(page, section) {
+        if (!isDevMode()) {
+            return;
+        }
+        if (!this.logSlots[page.template]) {
+            // the info log is not printed in production
+            // tslint:disable-next-line: no-console
+            console.info(`Available CMS page slots: '${Object.keys(page.slots).join(`','`)}'`);
+            this.logSlots[page.template] = true;
+        }
+        /** @type {?} */
+        const cacheKey = section || page.template;
+        if (!this.warnLogMessages[cacheKey]) {
+            console.warn(`No layout config found for ${cacheKey}, you can configure a 'LayoutConfig' to control the rendering of page slots.`);
+            this.warnLogMessages[cacheKey] = true;
+        }
+    }
+}
+PageLayoutService.decorators = [
+    { type: Injectable }
+];
+/** @nocollapse */
+PageLayoutService.ctorParameters = () => [
+    { type: CmsService },
+    { type: LayoutConfig },
+    { type: BreakpointService },
+    { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [PAGE_LAYOUT_HANDLER,] }] }
+];
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    PageLayoutService.prototype.warnLogMessages;
+    /**
+     * @type {?}
+     * @private
+     */
+    PageLayoutService.prototype.logSlots;
+    /**
+     * @type {?}
+     * @private
+     */
+    PageLayoutService.prototype.cms;
+    /**
+     * @type {?}
+     * @private
+     */
+    PageLayoutService.prototype.config;
+    /**
+     * @type {?}
+     * @private
+     */
+    PageLayoutService.prototype.breakpointService;
+    /**
+     * @type {?}
+     * @private
+     */
+    PageLayoutService.prototype.handlers;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class PageLayoutComponent {
+    /**
+     * @param {?} el
+     * @param {?} renderer
+     * @param {?} pageLayoutService
+     */
+    constructor(el, renderer, pageLayoutService) {
+        this.el = el;
+        this.renderer = renderer;
+        this.pageLayoutService = pageLayoutService;
+        this.section$ = new BehaviorSubject(undefined);
+        this.templateName$ = this.pageLayoutService
+            .templateName$;
+        this.layoutName$ = this.section$.pipe(switchMap((/**
+         * @param {?} section
+         * @return {?}
+         */
+        section => (section ? of(section) : this.templateName$))), tap((/**
+         * @param {?} name
+         * @return {?}
+         */
+        name => {
+            this.styleClass = name;
+        })));
+        this.slots$ = this.section$.pipe(switchMap((/**
+         * @param {?} section
+         * @return {?}
+         */
+        section => this.pageLayoutService.getSlots(section))));
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set section(value) {
+        this.section$.next(value);
+    }
+    /**
+     * @param {?} cls
+     * @return {?}
+     */
+    set styleClass(cls) {
+        if (this.currentClass) {
+            this.renderer.removeClass(this.el.nativeElement, this.currentClass);
+        }
+        this.renderer.addClass(this.el.nativeElement, cls);
+        this.currentClass = cls;
+    }
+}
+PageLayoutComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-page-layout',
+                template: "<ng-template\n  [cxOutlet]=\"layoutName$ | async\"\n  [cxOutletContext]=\"{\n    templateName$: templateName$,\n    slots$: slots$,\n    section$: section$\n  }\"\n>\n  <ng-content></ng-content>\n\n  <cx-page-slot\n    *ngFor=\"let slot of slots$ | async\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-template>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+PageLayoutComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 },
+    { type: PageLayoutService }
+];
+PageLayoutComponent.propDecorators = {
+    section: [{ type: Input }]
+};
+if (false) {
+    /** @type {?} */
+    PageLayoutComponent.prototype.section$;
+    /** @type {?} */
+    PageLayoutComponent.prototype.templateName$;
+    /** @type {?} */
+    PageLayoutComponent.prototype.layoutName$;
+    /** @type {?} */
+    PageLayoutComponent.prototype.slots$;
+    /**
+     * @type {?}
+     * @private
+     */
+    PageLayoutComponent.prototype.currentClass;
+    /**
+     * @type {?}
+     * @private
+     */
+    PageLayoutComponent.prototype.el;
+    /**
+     * @type {?}
+     * @private
+     */
+    PageLayoutComponent.prototype.renderer;
+    /**
+     * @type {?}
+     * @private
+     */
+    PageLayoutComponent.prototype.pageLayoutService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Please don't put that service in public API.
+ *
+ */
+class CmsRoutesService {
+    /**
+     * @param {?} router
+     * @param {?} cmsMapping
+     */
+    constructor(router, cmsMapping) {
+        this.router = router;
+        this.cmsMapping = cmsMapping;
+    }
+    /**
+     * @param {?} url
+     * @return {?}
+     */
+    cmsRouteExist(url) {
+        /** @type {?} */
+        const isCmsDrivenRoute = url.startsWith('/');
+        if (!isCmsDrivenRoute) {
+            return false;
+        }
+        /** @type {?} */
+        const routePath = url.substr(1);
+        return (isCmsDrivenRoute &&
+            !!this.router.config.find((/**
+             * @param {?} route
+             * @return {?}
+             */
+            (route) => route.data && route.data.cxCmsRouteContext && route.path === routePath)));
+    }
+    /**
+     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
+     *
+     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
+     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
+     *
+     * @param {?} pageContext
+     * @param {?} componentTypes
+     * @param {?} currentUrl
+     * @param {?} currentPageLabel
+     * @return {?}
+     */
+    handleCmsRoutesInGuard(pageContext, componentTypes, currentUrl, currentPageLabel) {
+        /** @type {?} */
+        const componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
+        if (componentRoutes.length) {
+            if (this.updateRouting(pageContext, currentPageLabel, componentRoutes)) {
+                this.router.navigateByUrl(currentUrl);
+                return false;
+            }
+        }
+        return true;
+    }
+    /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} pageLabel
+     * @param {?} routes
+     * @return {?}
+     */
+    updateRouting(pageContext, pageLabel, routes) {
+        if (pageContext.type === PageType.CONTENT_PAGE &&
+            pageLabel.startsWith('/') &&
+            pageLabel.length > 1) {
+            /** @type {?} */
+            const newRoute = {
+                path: pageLabel.substr(1),
+                component: PageLayoutComponent,
+                children: routes,
+                data: {
+                    cxCmsRouteContext: {
+                        type: pageContext.type,
+                        id: pageLabel,
+                    },
+                },
+            };
+            this.router.resetConfig([newRoute, ...this.router.config]);
+            return true;
+        }
+        return false;
+    }
+}
+CmsRoutesService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+CmsRoutesService.ctorParameters = () => [
+    { type: Router },
+    { type: CmsMappingService }
+];
+/** @nocollapse */ CmsRoutesService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(ɵɵinject(Router), ɵɵinject(CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsRoutesService.prototype.router;
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsRoutesService.prototype.cmsMapping;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CmsPageGuard {
+    /**
+     * @param {?} routingService
+     * @param {?} cmsService
+     * @param {?} cmsRoutes
+     * @param {?} cmsI18n
+     * @param {?} cmsGuards
+     * @param {?} semanticPathService
+     * @param {?=} protectedRoutesGuard
+     */
+    constructor(routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService, protectedRoutesGuard) {
+        this.routingService = routingService;
+        this.cmsService = cmsService;
+        this.cmsRoutes = cmsRoutes;
+        this.cmsI18n = cmsI18n;
+        this.cmsGuards = cmsGuards;
+        this.semanticPathService = semanticPathService;
+        this.protectedRoutesGuard = protectedRoutesGuard;
+    }
+    /**
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    canActivate(route, state) {
+        /**
+         * TODO(issue:4646) Expect that `ProtectedRoutesGuard` dependency is required (remove `if` logic)
+         */
+        return this.protectedRoutesGuard
+            ? this.protectedRoutesGuard
+                .canActivate(route)
+                .pipe(switchMap((/**
+             * @param {?} result
+             * @return {?}
+             */
+            result => result ? this.getCmsPage(route, state) : of(result))))
+            : this.getCmsPage(route, state);
+    }
+    /**
+     * @private
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    getCmsPage(route, state) {
+        return this.routingService.getNextPageContext().pipe(switchMap((/**
+         * @param {?} pageContext
+         * @return {?}
+         */
+        pageContext => this.cmsService.getPage(pageContext, true).pipe(first(), withLatestFrom(of(pageContext))))), switchMap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([pageData, pageContext]) => pageData
+            ? this.resolveCmsPageLogic(pageContext, pageData, route, state)
+            : this.handleNotFoundPage(pageContext, route, state))));
+    }
+    /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} pageData
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    resolveCmsPageLogic(pageContext, pageData, route, state) {
+        return this.cmsService.getPageComponentTypes(pageContext).pipe(take(1), switchMap((/**
+         * @param {?} componentTypes
+         * @return {?}
+         */
+        componentTypes => this.cmsGuards
+            .cmsPageCanActivate(componentTypes, route, state)
+            .pipe(withLatestFrom(of(componentTypes))))), tap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([canActivate, componentTypes]) => {
+            if (canActivate === true) {
+                this.cmsI18n.loadChunksForComponents(componentTypes);
+            }
+        })), map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([canActivate, componentTypes]) => {
+            /** @type {?} */
+            const pageLabel = pageData.label || pageContext.id;
+            if (canActivate === true &&
+                !route.data.cxCmsRouteContext &&
+                !this.cmsRoutes.cmsRouteExist(pageLabel)) {
+                return this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url, pageLabel);
+            }
+            return canActivate;
+        })));
+    }
+    /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    handleNotFoundPage(pageContext, route, state) {
+        /** @type {?} */
+        const notFoundCmsPageContext = {
+            type: PageType.CONTENT_PAGE,
+            id: this.semanticPathService.get('notFound'),
+        };
+        return this.cmsService.getPage(notFoundCmsPageContext).pipe(switchMap((/**
+         * @param {?} notFoundPage
+         * @return {?}
+         */
+        notFoundPage => {
+            if (notFoundPage) {
+                return this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(tap((/**
+                 * @param {?} notFoundIndex
+                 * @return {?}
+                 */
+                notFoundIndex => {
+                    this.cmsService.setPageFailIndex(pageContext, notFoundIndex);
+                })), switchMap((/**
+                 * @param {?} notFoundIndex
+                 * @return {?}
+                 */
+                notFoundIndex => this.cmsService.getPageIndex(pageContext).pipe(
+                // we have to wait for page index update
+                filter((/**
+                 * @param {?} index
+                 * @return {?}
+                 */
+                index => index === notFoundIndex))))), switchMap((/**
+                 * @return {?}
+                 */
+                () => this.resolveCmsPageLogic(pageContext, notFoundPage, route, state))));
+            }
+            return of(false);
+        })));
+    }
+}
+CmsPageGuard.guardName = 'CmsPageGuard';
+CmsPageGuard.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+CmsPageGuard.ctorParameters = () => [
+    { type: RoutingService },
+    { type: CmsService },
+    { type: CmsRoutesService },
+    { type: CmsI18nService },
+    { type: CmsGuardsService },
+    { type: SemanticPathService },
+    { type: ProtectedRoutesGuard }
+];
+/** @nocollapse */ CmsPageGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(ɵɵinject(RoutingService), ɵɵinject(CmsService), ɵɵinject(CmsRoutesService), ɵɵinject(CmsI18nService), ɵɵinject(CmsGuardsService), ɵɵinject(SemanticPathService), ɵɵinject(ProtectedRoutesGuard)); }, token: CmsPageGuard, providedIn: "root" });
+if (false) {
+    /** @type {?} */
+    CmsPageGuard.guardName;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CmsPageGuard.prototype.routingService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CmsPageGuard.prototype.cmsService;
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsPageGuard.prototype.cmsRoutes;
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsPageGuard.prototype.cmsI18n;
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsPageGuard.prototype.cmsGuards;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CmsPageGuard.prototype.semanticPathService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CmsPageGuard.prototype.protectedRoutesGuard;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class OutletDirective {
     /**
      * @param {?} vcr
@@ -9466,6 +10472,11 @@ OutletModule.decorators = [
                 exports: [OutletDirective],
             },] }
 ];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -10026,6 +11037,11 @@ PageComponentModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class PageSlotComponent {
     /**
      * @param {?} cmsService
@@ -10187,386 +11203,6 @@ PageSlotModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class PageLayoutService {
-    /**
-     * @param {?} cms
-     * @param {?} config
-     * @param {?} breakpointService
-     * @param {?} handlers
-     */
-    constructor(cms, config, breakpointService, handlers) {
-        this.cms = cms;
-        this.config = config;
-        this.breakpointService = breakpointService;
-        this.handlers = handlers;
-        // we print warn messages on missing layout configs
-        // only once to not polute the console log
-        this.warnLogMessages = {};
-        this.logSlots = {};
-    }
-    /**
-     * @param {?=} section
-     * @return {?}
-     */
-    getSlots(section) {
-        return combineLatest([this.page$, this.breakpointService.breakpoint$]).pipe(map((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        ([page, breakpoint]) => {
-            /** @type {?} */
-            const pageTemplate = page.template;
-            /** @type {?} */
-            const slots = this.resolveSlots(page, section, breakpoint);
-            return { slots, pageTemplate, breakpoint };
-        })), switchMap((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        ({ slots, pageTemplate, breakpoint }) => {
-            /** @type {?} */
-            let result = of(slots);
-            for (const handler of this.handlers || []) {
-                result = handler.handle(result, pageTemplate, section, breakpoint);
-            }
-            return result;
-        })), distinctUntilChanged((/**
-         * @param {?} a
-         * @param {?} b
-         * @return {?}
-         */
-        (a, b) => {
-            if (a.length !== b.length) {
-                return false;
-            }
-            for (let i = 0; i < a.length; i++) {
-                if (a[i] !== b[i]) {
-                    return false;
-                }
-            }
-            return true;
-        })));
-    }
-    /**
-     * @private
-     * @param {?} page
-     * @param {?} section
-     * @param {?} breakpoint
-     * @return {?}
-     */
-    resolveSlots(page, section, breakpoint) {
-        /** @type {?} */
-        const config = this.getSlotConfig(page.template, 'slots', section, breakpoint);
-        if (config && config.slots) {
-            /** @type {?} */
-            const pageSlots = Object.keys(page.slots);
-            return config.slots.filter((/**
-             * @param {?} slot
-             * @return {?}
-             */
-            slot => pageSlots.includes(slot)));
-        }
-        else if (!section) {
-            this.logMissingLayoutConfig(page);
-            return Object.keys(page.slots);
-        }
-        else {
-            this.logMissingLayoutConfig(page, section);
-            return [];
-        }
-    }
-    /**
-     * @return {?}
-     */
-    get page$() {
-        return this.cms.getCurrentPage().pipe(filter((/**
-         * @param {?} page
-         * @return {?}
-         */
-        page => !!page)));
-    }
-    /**
-     * @return {?}
-     */
-    get templateName$() {
-        return this.page$.pipe(filter((/**
-         * @param {?} page
-         * @return {?}
-         */
-        page => !!page.template)), map((/**
-         * @param {?} page
-         * @return {?}
-         */
-        (page) => page.template)));
-    }
-    /**
-     * load slots from the layout configuration. The breakpoint is used
-     * to load a specific configuration for the given breakpoint. If there's
-     * no configuration available for the given breakpoint the default slot
-     * configuration is returned.
-     * @protected
-     * @param {?} templateUid
-     * @param {?} configAttribute
-     * @param {?=} section
-     * @param {?=} breakpoint
-     * @return {?}
-     */
-    getSlotConfig(templateUid, configAttribute, section, breakpoint) {
-        if (!this.config.layoutSlots) {
-            return null;
-        }
-        /** @type {?} */
-        const pageTemplateConfig = this.config.layoutSlots[templateUid];
-        if (section) {
-            return this.getSlotConfigForSection(templateUid, configAttribute, section, breakpoint);
-        }
-        if (pageTemplateConfig) {
-            return this.getResponsiveSlotConfig((/** @type {?} */ (pageTemplateConfig)), configAttribute, breakpoint);
-        }
-    }
-    /**
-     * @protected
-     * @param {?} templateUid
-     * @param {?} configAttribute
-     * @param {?=} section
-     * @param {?=} breakpoint
-     * @return {?}
-     */
-    getSlotConfigForSection(templateUid, configAttribute, section, breakpoint) {
-        /** @type {?} */
-        const pageTemplateConfig = this.config.layoutSlots[templateUid];
-        if (!pageTemplateConfig) {
-            return null;
-        }
-        // if there's no section config on the page layout
-        // we fall back to the global section config
-        /** @type {?} */
-        const sectionConfig = pageTemplateConfig[section]
-            ? pageTemplateConfig[section]
-            : this.config.layoutSlots[section];
-        if (!sectionConfig) {
-            return null;
-        }
-        /** @type {?} */
-        const responsiveConfig = this.getResponsiveSlotConfig((/** @type {?} */ (sectionConfig)), configAttribute, breakpoint);
-        if (responsiveConfig.hasOwnProperty(configAttribute)) {
-            return responsiveConfig;
-        }
-        else if (pageTemplateConfig[section].hasOwnProperty(configAttribute)) {
-            return pageTemplateConfig[section];
-        }
-        else if (this.config.layoutSlots[section]) {
-            return (/** @type {?} */ (this.config.layoutSlots[section]));
-        }
-    }
-    /**
-     * Returns a list of slots for a breakpoint specific configuratoin
-     * If there's no specific configuration for the breakpoint,
-     * the closest available configuration will be returned.
-     * @protected
-     * @param {?} layoutSlotConfig
-     * @param {?} configAttribute
-     * @param {?=} breakpoint
-     * @return {?}
-     */
-    getResponsiveSlotConfig(layoutSlotConfig, configAttribute, breakpoint) {
-        /** @type {?} */
-        let slotConfig = (/** @type {?} */ (layoutSlotConfig));
-        // fallback to default slot config
-        if (!breakpoint) {
-            return slotConfig;
-        }
-        // we have a config for the specific breakpoint
-        if (layoutSlotConfig[breakpoint] &&
-            layoutSlotConfig[breakpoint].hasOwnProperty(configAttribute)) {
-            return (/** @type {?} */ (layoutSlotConfig[breakpoint]));
-        }
-        // find closest config
-        /** @type {?} */
-        const all = this.breakpointService.breakpoints;
-        for (const br of all.splice(0, all.indexOf(breakpoint))) {
-            if (layoutSlotConfig[br] &&
-                layoutSlotConfig[br].hasOwnProperty(configAttribute)) {
-                slotConfig = (/** @type {?} */ (layoutSlotConfig[br]));
-            }
-        }
-        return slotConfig;
-    }
-    /**
-     * In order to help developers, we print some detailed log information in
-     * case there's no layout configuration available for the given page template
-     * or section. Additionally, the slot positions are printed in the console
-     * in a format that can be copied / paste to the configuration.
-     * @private
-     * @param {?} page
-     * @param {?=} section
-     * @return {?}
-     */
-    logMissingLayoutConfig(page, section) {
-        if (!isDevMode()) {
-            return;
-        }
-        if (!this.logSlots[page.template]) {
-            // the info log is not printed in production
-            // tslint:disable-next-line: no-console
-            console.info(`Available CMS page slots: '${Object.keys(page.slots).join(`','`)}'`);
-            this.logSlots[page.template] = true;
-        }
-        /** @type {?} */
-        const cacheKey = section || page.template;
-        if (!this.warnLogMessages[cacheKey]) {
-            console.warn(`No layout config found for ${cacheKey}, you can configure a 'LayoutConfig' to control the rendering of page slots.`);
-            this.warnLogMessages[cacheKey] = true;
-        }
-    }
-}
-PageLayoutService.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-PageLayoutService.ctorParameters = () => [
-    { type: CmsService },
-    { type: LayoutConfig },
-    { type: BreakpointService },
-    { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [PAGE_LAYOUT_HANDLER,] }] }
-];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    PageLayoutService.prototype.warnLogMessages;
-    /**
-     * @type {?}
-     * @private
-     */
-    PageLayoutService.prototype.logSlots;
-    /**
-     * @type {?}
-     * @private
-     */
-    PageLayoutService.prototype.cms;
-    /**
-     * @type {?}
-     * @private
-     */
-    PageLayoutService.prototype.config;
-    /**
-     * @type {?}
-     * @private
-     */
-    PageLayoutService.prototype.breakpointService;
-    /**
-     * @type {?}
-     * @private
-     */
-    PageLayoutService.prototype.handlers;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class PageLayoutComponent {
-    /**
-     * @param {?} el
-     * @param {?} renderer
-     * @param {?} pageLayoutService
-     */
-    constructor(el, renderer, pageLayoutService) {
-        this.el = el;
-        this.renderer = renderer;
-        this.pageLayoutService = pageLayoutService;
-        this.section$ = new BehaviorSubject(undefined);
-        this.templateName$ = this.pageLayoutService
-            .templateName$;
-        this.layoutName$ = this.section$.pipe(switchMap((/**
-         * @param {?} section
-         * @return {?}
-         */
-        section => (section ? of(section) : this.templateName$))), tap((/**
-         * @param {?} name
-         * @return {?}
-         */
-        name => {
-            this.styleClass = name;
-        })));
-        this.slots$ = this.section$.pipe(switchMap((/**
-         * @param {?} section
-         * @return {?}
-         */
-        section => this.pageLayoutService.getSlots(section))));
-    }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    set section(value) {
-        this.section$.next(value);
-    }
-    /**
-     * @param {?} cls
-     * @return {?}
-     */
-    set styleClass(cls) {
-        if (this.currentClass) {
-            this.renderer.removeClass(this.el.nativeElement, this.currentClass);
-        }
-        this.renderer.addClass(this.el.nativeElement, cls);
-        this.currentClass = cls;
-    }
-}
-PageLayoutComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-page-layout',
-                template: "<ng-template\n  [cxOutlet]=\"layoutName$ | async\"\n  [cxOutletContext]=\"{\n    templateName$: templateName$,\n    slots$: slots$,\n    section$: section$\n  }\"\n>\n  <ng-content></ng-content>\n\n  <cx-page-slot\n    *ngFor=\"let slot of slots$ | async\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-template>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-/** @nocollapse */
-PageLayoutComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: Renderer2 },
-    { type: PageLayoutService }
-];
-PageLayoutComponent.propDecorators = {
-    section: [{ type: Input }]
-};
-if (false) {
-    /** @type {?} */
-    PageLayoutComponent.prototype.section$;
-    /** @type {?} */
-    PageLayoutComponent.prototype.templateName$;
-    /** @type {?} */
-    PageLayoutComponent.prototype.layoutName$;
-    /** @type {?} */
-    PageLayoutComponent.prototype.slots$;
-    /**
-     * @type {?}
-     * @private
-     */
-    PageLayoutComponent.prototype.currentClass;
-    /**
-     * @type {?}
-     * @private
-     */
-    PageLayoutComponent.prototype.el;
-    /**
-     * @type {?}
-     * @private
-     */
-    PageLayoutComponent.prototype.renderer;
-    /**
-     * @type {?}
-     * @private
-     */
-    PageLayoutComponent.prototype.pageLayoutService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class PageLayoutModule {
 }
 PageLayoutModule.decorators = [
@@ -10577,6 +11213,11 @@ PageLayoutModule.decorators = [
                 exports: [PageLayoutComponent],
             },] }
 ];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -10859,35 +11500,63 @@ PwaModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 /** @type {?} */
-const htmlLangProvider = {
-    provide: APP_INITIALIZER,
-    multi: true,
-    useFactory: setHtmlLangAttribute,
-    deps: [WindowRef, LanguageService],
+const cmsRoute = {
+    path: '**',
+    canActivate: [CmsPageGuard],
+    component: PageLayoutComponent,
 };
 /**
- * Sets active language in <html lang="">
- * @param {?} winRef
- * @param {?} languageService
+ * @param {?} injector
  * @return {?}
  */
-function setHtmlLangAttribute(winRef, languageService) {
+function addCmsRoute(injector) {
     /** @type {?} */
     const result = (/**
      * @return {?}
      */
     () => {
-        languageService.getActive().subscribe((/**
-         * @param {?} lang
-         * @return {?}
-         */
-        lang => {
-            winRef.document.documentElement.lang = lang;
-        }));
+        /** @type {?} */
+        const router = injector.get(Router);
+        router.config.push(cmsRoute);
     });
     return result;
 }
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+const ɵ0 = addCmsRoute;
+class CmsRouteModule {
+}
+CmsRouteModule.decorators = [
+    { type: NgModule, args: [{
+                providers: [
+                    {
+                        provide: APP_INITIALIZER,
+                        multi: true,
+                        deps: [Injector],
+                        useFactory: ɵ0,
+                    },
+                ],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -11003,6 +11672,40 @@ if (false) {
      * @protected
      */
     SeoMetaService.prototype.pageMetaService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const htmlLangProvider = {
+    provide: APP_INITIALIZER,
+    multi: true,
+    useFactory: setHtmlLangAttribute,
+    deps: [WindowRef, LanguageService],
+};
+/**
+ * Sets active language in <html lang="">
+ * @param {?} winRef
+ * @param {?} languageService
+ * @return {?}
+ */
+function setHtmlLangAttribute(winRef, languageService) {
+    /** @type {?} */
+    const result = (/**
+     * @return {?}
+     */
+    () => {
+        languageService.getActive().subscribe((/**
+         * @param {?} lang
+         * @return {?}
+         */
+        lang => {
+            winRef.document.documentElement.lang = lang;
+        }));
+    });
+    return result;
 }
 
 /**
@@ -11315,6 +12018,499 @@ SeoModule.decorators = [
                 ],
             },] }
 ];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class BreadcrumbSchemaBuilder {
+    /**
+     * @param {?} pageMetaService
+     */
+    constructor(pageMetaService) {
+        this.pageMetaService = pageMetaService;
+    }
+    /**
+     * @return {?}
+     */
+    build() {
+        return this.pageMetaService
+            .getMeta()
+            .pipe(map((/**
+         * @param {?} pageMeta
+         * @return {?}
+         */
+        (pageMeta) => this.collect(pageMeta))));
+    }
+    /**
+     * @protected
+     * @param {?} pageMeta
+     * @return {?}
+     */
+    collect(pageMeta) {
+        if (!pageMeta.breadcrumbs) {
+            return;
+        }
+        /** @type {?} */
+        const crumbs = pageMeta.breadcrumbs.map((/**
+         * @param {?} crumb
+         * @param {?} index
+         * @return {?}
+         */
+        (crumb, index) => {
+            return {
+                '@type': 'ListItem',
+                position: index + 1,
+                item: {
+                    '@id': crumb.link,
+                    name: crumb.label,
+                },
+            };
+        }));
+        if (pageMeta.title) {
+            crumbs.push({
+                '@type': 'ListItem',
+                position: crumbs.length + 1,
+                item: {
+                    '@id': pageMeta.title,
+                    name: pageMeta.title,
+                },
+            });
+        }
+        return {
+            '@context': 'http://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: crumbs,
+        };
+    }
+}
+BreadcrumbSchemaBuilder.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+BreadcrumbSchemaBuilder.ctorParameters = () => [
+    { type: PageMetaService }
+];
+/** @nocollapse */ BreadcrumbSchemaBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function BreadcrumbSchemaBuilder_Factory() { return new BreadcrumbSchemaBuilder(ɵɵinject(PageMetaService)); }, token: BreadcrumbSchemaBuilder, providedIn: "root" });
+if (false) {
+    /**
+     * @type {?}
+     * @protected
+     */
+    BreadcrumbSchemaBuilder.prototype.pageMetaService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Builds the basic structured data for the product, see https://schema.org/product.
+ * This builder includes data for sku number, name, description, brand and main image.
+ */
+class JsonLdBaseProductBuilder {
+    /**
+     * @param {?} product
+     * @return {?}
+     */
+    build(product) {
+        return of(Object.assign({}, this.getProductBase(product), this.getProductBrand(product), this.getProductImage(product)));
+    }
+    /**
+     * @private
+     * @param {?} product
+     * @return {?}
+     */
+    getProductBase(product) {
+        /** @type {?} */
+        const result = { sku: product.code };
+        if (product.name) {
+            result.name = product.name;
+        }
+        if (product.summary) {
+            result.description = product.summary;
+        }
+        return result;
+    }
+    /**
+     * @private
+     * @param {?} product
+     * @return {?}
+     */
+    getProductImage(product) {
+        return product.images &&
+            product.images.PRIMARY &&
+            product.images.PRIMARY['zoom'] &&
+            product.images.PRIMARY['zoom'].url
+            ? {
+                image: product.images.PRIMARY['zoom'].url,
+            }
+            : {};
+    }
+    /**
+     * @private
+     * @param {?} product
+     * @return {?}
+     */
+    getProductBrand(product) {
+        return product['manufacturer']
+            ? {
+                brand: product['manufacturer'],
+            }
+            : null;
+    }
+}
+JsonLdBaseProductBuilder.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */ JsonLdBaseProductBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function JsonLdBaseProductBuilder_Factory() { return new JsonLdBaseProductBuilder(); }, token: JsonLdBaseProductBuilder, providedIn: "root" });
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Builds the structured data for the product offer, see https://schema.org/offers.
+ * The data includes the price, currency and availability level.
+ */
+class JsonLdProductOfferBuilder {
+    /**
+     * @param {?} product
+     * @return {?}
+     */
+    build(product) {
+        /** @type {?} */
+        const schema = { '@type': 'Offer' };
+        if (product.price) {
+            if (product.price.value) {
+                schema.price = product.price.value;
+            }
+            if (product.price.currencyIso) {
+                schema.priceCurrency = product.price.currencyIso;
+            }
+        }
+        if (product.stock && product.stock.stockLevelStatus) {
+            schema.availability =
+                product.stock.stockLevelStatus === 'inStock' ? 'InStock' : 'OutOfStock';
+        }
+        return of({
+            offers: schema,
+        });
+    }
+}
+JsonLdProductOfferBuilder.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */ JsonLdProductOfferBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function JsonLdProductOfferBuilder_Factory() { return new JsonLdProductOfferBuilder(); }, token: JsonLdProductOfferBuilder, providedIn: "root" });
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Builds the structured data for the product reviews, see https://schema.org/Review.
+ * The data includes the aggregated product rating and the individual reviews.
+ */
+class JsonLdProductReviewBuilder {
+    /**
+     * @param {?} reviewService
+     */
+    constructor(reviewService) {
+        this.reviewService = reviewService;
+    }
+    /**
+     * @param {?} product
+     * @return {?}
+     */
+    build(product) {
+        return this.reviewService.getByProductCode(product.code).pipe(filter(Boolean), map((/**
+         * @param {?} reviews
+         * @return {?}
+         */
+        (reviews) => {
+            return {
+                aggregateRating: this.buildAggregatedReviews(product, reviews),
+                review: reviews.map((/**
+                 * @param {?} review
+                 * @return {?}
+                 */
+                review => this.buildReviews(review))),
+            };
+        })));
+    }
+    /**
+     * @private
+     * @param {?} product
+     * @param {?} reviews
+     * @return {?}
+     */
+    buildAggregatedReviews(product, reviews) {
+        /** @type {?} */
+        const aggregated = {
+            '@type': 'AggregateRating',
+        };
+        if (product.averageRating) {
+            aggregated.ratingValue = product.averageRating;
+        }
+        if (reviews) {
+            aggregated.ratingCount = reviews.filter((/**
+             * @param {?} rev
+             * @return {?}
+             */
+            rev => !!rev.rating)).length;
+            aggregated.reviewCount = reviews.filter((/**
+             * @param {?} rev
+             * @return {?}
+             */
+            rev => !!rev.comment)).length;
+        }
+        return aggregated;
+    }
+    /**
+     * @private
+     * @param {?} review
+     * @return {?}
+     */
+    buildReviews(review) {
+        /** @type {?} */
+        const reviewSchema = {
+            '@type': 'review',
+        };
+        if (review.principal && review.principal.name) {
+            reviewSchema.author = review.principal.name;
+        }
+        if (review.date) {
+            /** @type {?} */
+            const date = new Date(review.date);
+            reviewSchema.datePublished = `${date.getFullYear()}-${date.getMonth() +
+                1}-${date.getDate()}`;
+        }
+        if (review.headline) {
+            reviewSchema.name = review.headline;
+        }
+        if (review.comment) {
+            reviewSchema.description = review.comment;
+        }
+        if (review.rating) {
+            reviewSchema.reviewRating = {
+                '@type': 'Rating',
+                ratingValue: review.rating.toString(),
+            };
+        }
+        return reviewSchema;
+    }
+}
+JsonLdProductReviewBuilder.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+JsonLdProductReviewBuilder.ctorParameters = () => [
+    { type: ProductReviewService }
+];
+/** @nocollapse */ JsonLdProductReviewBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function JsonLdProductReviewBuilder_Factory() { return new JsonLdProductReviewBuilder(ɵɵinject(ProductReviewService)); }, token: JsonLdProductReviewBuilder, providedIn: "root" });
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    JsonLdProductReviewBuilder.prototype.reviewService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Adds the minimal structured data for the product, see https://schema.org/product.
+ * The actual data collection is delegated to `JsonLdBuilder`s, which can be injected
+ * using the `JSONLD_PRODUCT_BUILDER` token.
+ */
+class ProductSchemaBuilder {
+    /**
+     * @param {?} currentProduct
+     * @param {?} builders
+     */
+    constructor(currentProduct, builders) {
+        this.currentProduct = currentProduct;
+        this.builders = builders;
+    }
+    /**
+     * @return {?}
+     */
+    build() {
+        return this.currentProduct.getProduct().pipe(startWith((/** @type {?} */ (null))), switchMap((/**
+         * @param {?} product
+         * @return {?}
+         */
+        (product) => {
+            if (product) {
+                return combineLatest(this.collect(product)).pipe(map((/**
+                 * @param {?} res
+                 * @return {?}
+                 */
+                (res) => Object.assign({}, ...res))));
+            }
+            return of({});
+        })));
+    }
+    /**
+     * @protected
+     * @param {?} product
+     * @return {?}
+     */
+    collect(product) {
+        if (!product || !product.code) {
+            return [];
+        }
+        /** @type {?} */
+        const builders = this.builders
+            ? this.builders.map((/**
+             * @param {?} builder
+             * @return {?}
+             */
+            builder => builder.build(product)))
+            : [];
+        return [
+            of({
+                '@context': 'http://schema.org',
+                '@type': 'Product',
+            }),
+            ...builders,
+        ];
+    }
+}
+ProductSchemaBuilder.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+ProductSchemaBuilder.ctorParameters = () => [
+    { type: CurrentProductService },
+    { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [JSONLD_PRODUCT_BUILDER,] }] }
+];
+/** @nocollapse */ ProductSchemaBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function ProductSchemaBuilder_Factory() { return new ProductSchemaBuilder(ɵɵinject(CurrentProductService), ɵɵinject(JSONLD_PRODUCT_BUILDER, 8)); }, token: ProductSchemaBuilder, providedIn: "root" });
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    ProductSchemaBuilder.prototype.currentProduct;
+    /**
+     * @type {?}
+     * @protected
+     */
+    ProductSchemaBuilder.prototype.builders;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Provides several standard json-ld builders that contribute
+ * to colleting and building json-ld data.
+ */
+class JsonLdBuilderModule {
+}
+JsonLdBuilderModule.decorators = [
+    { type: NgModule, args: [{
+                providers: [
+                    {
+                        provide: SCHEMA_BUILDER,
+                        useExisting: ProductSchemaBuilder,
+                        multi: true,
+                    },
+                    {
+                        provide: SCHEMA_BUILDER,
+                        useExisting: BreadcrumbSchemaBuilder,
+                        multi: true,
+                    },
+                    // lower level json-ld builder classes offering fine-graiend control
+                    // for product related schema's
+                    {
+                        provide: JSONLD_PRODUCT_BUILDER,
+                        useExisting: JsonLdBaseProductBuilder,
+                        multi: true,
+                    },
+                    {
+                        provide: JSONLD_PRODUCT_BUILDER,
+                        useExisting: JsonLdProductOfferBuilder,
+                        multi: true,
+                    },
+                    {
+                        provide: JSONLD_PRODUCT_BUILDER,
+                        useExisting: JsonLdProductReviewBuilder,
+                        multi: true,
+                    },
+                ],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+function SchemaBuilder() { }
+if (false) {
+    /**
+     * @return {?}
+     */
+    SchemaBuilder.prototype.build = function () { };
+}
+/**
+ * @record
+ * @template T
+ */
+function JsonLdBuilder() { }
+if (false) {
+    /**
+     * @param {?} data
+     * @return {?}
+     */
+    JsonLdBuilder.prototype.build = function (data) { };
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -11932,7 +13128,7 @@ class StorefrontComponent {
 StorefrontComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-storefront',
-                template: "<cx-page-slot position=\"TopHeaderSlot\"></cx-page-slot>\n<header\n  [class.is-expanded]=\"isExpanded$ | async\"\n  (keydown.escape)=\"collapseMenu()\"\n  (click)=\"collapseMenuIfClickOutside($event)\"\n>\n  <cx-page-layout section=\"header\"></cx-page-layout>\n  <cx-page-layout section=\"navigation\"></cx-page-layout>\n</header>\n\n<cx-page-slot position=\"BottomHeaderSlot\"></cx-page-slot>\n\n<cx-global-message></cx-global-message>\n\n<router-outlet></router-outlet>\n\n<footer>\n  <cx-page-layout section=\"footer\"></cx-page-layout>\n</footer>\n"
+                template: "<ng-template cxOutlet=\"cx-storefront\">\n  <ng-template cxOutlet=\"cx-header\">\n    <cx-page-slot position=\"TopHeaderSlot\"></cx-page-slot>\n    <header\n      [class.is-expanded]=\"isExpanded$ | async\"\n      (keydown.escape)=\"collapseMenu()\"\n      (click)=\"collapseMenuIfClickOutside($event)\"\n    >\n      <cx-page-layout section=\"header\"></cx-page-layout>\n      <cx-page-layout section=\"navigation\"></cx-page-layout>\n    </header>\n    <cx-page-slot position=\"BottomHeaderSlot\"></cx-page-slot>\n    <cx-global-message></cx-global-message>\n  </ng-template>\n\n  <router-outlet></router-outlet>\n\n  <ng-template cxOutlet=\"cx-footer\">\n    <footer>\n      <cx-page-layout section=\"footer\"></cx-page-layout>\n    </footer>\n  </ng-template>\n</ng-template>\n"
             }] }
 ];
 /** @nocollapse */
@@ -11977,6 +13173,7 @@ MainModule.decorators = [
                     CommonModule,
                     RouterModule,
                     GlobalMessageComponentModule,
+                    OutletModule,
                     OutletRefModule,
                     PwaModule,
                     PageLayoutModule,
@@ -12815,1202 +14012,6 @@ AsmModule.decorators = [
                 entryComponents: [AsmRootComponent],
             },] }
 ];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Please don't put that service in public API.
- *
- */
-class CmsMappingService {
-    /**
-     * @param {?} config
-     * @param {?} platformId
-     */
-    constructor(config, platformId) {
-        this.config = config;
-        this.platformId = platformId;
-    }
-    /**
-     * @param {?} flexType
-     * @return {?}
-     */
-    isComponentEnabled(flexType) {
-        /** @type {?} */
-        const isSSR = isPlatformServer(this.platformId);
-        /** @type {?} */
-        const isComponentDisabledInSSR = (this.config.cmsComponents[flexType] || {})
-            .disableSSR;
-        return !(isSSR && isComponentDisabledInSSR);
-    }
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    getRoutesForComponents(componentTypes) {
-        /** @type {?} */
-        const routes = [];
-        for (const componentType of componentTypes) {
-            if (this.isComponentEnabled(componentType)) {
-                routes.push(...this.getRoutesForComponent(componentType));
-            }
-        }
-        return routes;
-    }
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    getGuardsForComponents(componentTypes) {
-        /** @type {?} */
-        const guards = new Set();
-        for (const componentType of componentTypes) {
-            this.getGuardsForComponent(componentType).forEach((/**
-             * @param {?} guard
-             * @return {?}
-             */
-            guard => guards.add(guard)));
-        }
-        return Array.from(guards);
-    }
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    getI18nKeysForComponents(componentTypes) {
-        /** @type {?} */
-        const i18nKeys = new Set();
-        for (const componentType of componentTypes) {
-            if (this.isComponentEnabled(componentType)) {
-                this.getI18nKeysForComponent(componentType).forEach((/**
-                 * @param {?} key
-                 * @return {?}
-                 */
-                key => i18nKeys.add(key)));
-            }
-        }
-        return Array.from(i18nKeys);
-    }
-    /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    getRoutesForComponent(componentType) {
-        /** @type {?} */
-        const mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.childRoutes) || [];
-    }
-    /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    getGuardsForComponent(componentType) {
-        /** @type {?} */
-        const mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.guards) || [];
-    }
-    /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    getI18nKeysForComponent(componentType) {
-        /** @type {?} */
-        const mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.i18nKeys) || [];
-    }
-}
-CmsMappingService.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root',
-            },] }
-];
-/** @nocollapse */
-CmsMappingService.ctorParameters = () => [
-    { type: CmsConfig },
-    { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
-];
-/** @nocollapse */ CmsMappingService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(ɵɵinject(CmsConfig), ɵɵinject(PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsMappingService.prototype.config;
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsMappingService.prototype.platformId;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Please don't put that service in public API.
- *
- */
-class CmsGuardsService {
-    /**
-     * @param {?} cmsMapping
-     * @param {?} injector
-     */
-    constructor(cmsMapping, injector) {
-        this.cmsMapping = cmsMapping;
-        this.injector = injector;
-    }
-    /**
-     * @param {?} componentTypes
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    cmsPageCanActivate(componentTypes, route, state) {
-        /** @type {?} */
-        const guards = this.cmsMapping.getGuardsForComponents(componentTypes);
-        if (guards.length) {
-            /** @type {?} */
-            const canActivateObservables = guards.map((/**
-             * @param {?} guardClass
-             * @return {?}
-             */
-            guardClass => {
-                /** @type {?} */
-                const guard = this.injector.get(guardClass, null);
-                if (isCanActivate(guard)) {
-                    return wrapIntoObservable(guard.canActivate(route, state)).pipe(first());
-                }
-                else {
-                    throw new Error('Invalid CanActivate guard in cmsMapping');
-                }
-            }));
-            return concat(...canActivateObservables).pipe(skipWhile((/**
-             * @param {?} canActivate
-             * @return {?}
-             */
-            (canActivate) => canActivate === true)), endWith(true), first());
-        }
-        else {
-            return of(true);
-        }
-    }
-}
-CmsGuardsService.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root',
-            },] }
-];
-/** @nocollapse */
-CmsGuardsService.ctorParameters = () => [
-    { type: CmsMappingService },
-    { type: Injector }
-];
-/** @nocollapse */ CmsGuardsService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsGuardsService_Factory() { return new CmsGuardsService(ɵɵinject(CmsMappingService), ɵɵinject(INJECTOR)); }, token: CmsGuardsService, providedIn: "root" });
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsGuardsService.prototype.cmsMapping;
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsGuardsService.prototype.injector;
-}
-/**
- * @template T
- * @param {?} value
- * @return {?}
- */
-function wrapIntoObservable(value) {
-    if (isObservable(value)) {
-        return value;
-    }
-    if (isPromise(value)) {
-        return from(Promise.resolve(value));
-    }
-    return of(value);
-}
-/**
- * @param {?} obj
- * @return {?}
- */
-function isPromise(obj) {
-    return !!obj && typeof obj.then === 'function';
-}
-/**
- * @param {?} guard
- * @return {?}
- */
-function isCanActivate(guard) {
-    return guard && isFunction(guard.canActivate);
-}
-/**
- * @template T
- * @param {?} v
- * @return {?}
- */
-function isFunction(v) {
-    return typeof v === 'function';
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Please don't put that service in public API.
- *
- */
-class CmsI18nService {
-    /**
-     * @param {?} cmsMapping
-     * @param {?} translation
-     * @param {?} translationChunk
-     */
-    constructor(cmsMapping, translation, translationChunk) {
-        this.cmsMapping = cmsMapping;
-        this.translation = translation;
-        this.translationChunk = translationChunk;
-    }
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    loadChunksForComponents(componentTypes) {
-        /** @type {?} */
-        const i18nKeys = this.cmsMapping.getI18nKeysForComponents(componentTypes);
-        /** @type {?} */
-        const i18nChunks = new Set();
-        for (const key of i18nKeys) {
-            i18nChunks.add(this.translationChunk.getChunkNameForKey(key));
-        }
-        this.translation.loadChunks(Array.from(i18nChunks));
-    }
-}
-CmsI18nService.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root',
-            },] }
-];
-/** @nocollapse */
-CmsI18nService.ctorParameters = () => [
-    { type: CmsMappingService },
-    { type: TranslationService },
-    { type: TranslationChunkService }
-];
-/** @nocollapse */ CmsI18nService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsI18nService_Factory() { return new CmsI18nService(ɵɵinject(CmsMappingService), ɵɵinject(TranslationService), ɵɵinject(TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsI18nService.prototype.cmsMapping;
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsI18nService.prototype.translation;
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsI18nService.prototype.translationChunk;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Please don't put that service in public API.
- *
- */
-class CmsRoutesService {
-    /**
-     * @param {?} router
-     * @param {?} cmsMapping
-     */
-    constructor(router, cmsMapping) {
-        this.router = router;
-        this.cmsMapping = cmsMapping;
-    }
-    /**
-     * @param {?} url
-     * @return {?}
-     */
-    cmsRouteExist(url) {
-        /** @type {?} */
-        const isCmsDrivenRoute = url.startsWith('/');
-        if (!isCmsDrivenRoute) {
-            return false;
-        }
-        /** @type {?} */
-        const routePath = url.substr(1);
-        return (isCmsDrivenRoute &&
-            !!this.router.config.find((/**
-             * @param {?} route
-             * @return {?}
-             */
-            (route) => route.data && route.data.cxCmsRouteContext && route.path === routePath)));
-    }
-    /**
-     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
-     *
-     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
-     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
-     *
-     * @param {?} pageContext
-     * @param {?} componentTypes
-     * @param {?} currentUrl
-     * @param {?} currentPageLabel
-     * @return {?}
-     */
-    handleCmsRoutesInGuard(pageContext, componentTypes, currentUrl, currentPageLabel) {
-        /** @type {?} */
-        const componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
-        if (componentRoutes.length) {
-            if (this.updateRouting(pageContext, currentPageLabel, componentRoutes)) {
-                this.router.navigateByUrl(currentUrl);
-                return false;
-            }
-        }
-        return true;
-    }
-    /**
-     * @private
-     * @param {?} pageContext
-     * @param {?} pageLabel
-     * @param {?} routes
-     * @return {?}
-     */
-    updateRouting(pageContext, pageLabel, routes) {
-        if (pageContext.type === PageType.CONTENT_PAGE &&
-            pageLabel.startsWith('/') &&
-            pageLabel.length > 1) {
-            /** @type {?} */
-            const newRoute = {
-                path: pageLabel.substr(1),
-                component: PageLayoutComponent,
-                children: routes,
-                data: {
-                    cxCmsRouteContext: {
-                        type: pageContext.type,
-                        id: pageLabel,
-                    },
-                },
-            };
-            this.router.resetConfig([newRoute, ...this.router.config]);
-            return true;
-        }
-        return false;
-    }
-}
-CmsRoutesService.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root',
-            },] }
-];
-/** @nocollapse */
-CmsRoutesService.ctorParameters = () => [
-    { type: Router },
-    { type: CmsMappingService }
-];
-/** @nocollapse */ CmsRoutesService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(ɵɵinject(Router), ɵɵinject(CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsRoutesService.prototype.router;
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsRoutesService.prototype.cmsMapping;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class CmsPageGuard {
-    /**
-     * @param {?} routingService
-     * @param {?} cmsService
-     * @param {?} cmsRoutes
-     * @param {?} cmsI18n
-     * @param {?} cmsGuards
-     * @param {?} semanticPathService
-     * @param {?=} protectedRoutesGuard
-     */
-    constructor(routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService, protectedRoutesGuard) {
-        this.routingService = routingService;
-        this.cmsService = cmsService;
-        this.cmsRoutes = cmsRoutes;
-        this.cmsI18n = cmsI18n;
-        this.cmsGuards = cmsGuards;
-        this.semanticPathService = semanticPathService;
-        this.protectedRoutesGuard = protectedRoutesGuard;
-    }
-    /**
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    canActivate(route, state) {
-        /**
-         * TODO(issue:4646) Expect that `ProtectedRoutesGuard` dependency is required (remove `if` logic)
-         */
-        return this.protectedRoutesGuard
-            ? this.protectedRoutesGuard
-                .canActivate(route)
-                .pipe(switchMap((/**
-             * @param {?} result
-             * @return {?}
-             */
-            result => result ? this.getCmsPage(route, state) : of(result))))
-            : this.getCmsPage(route, state);
-    }
-    /**
-     * @private
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    getCmsPage(route, state) {
-        return this.routingService.getNextPageContext().pipe(switchMap((/**
-         * @param {?} pageContext
-         * @return {?}
-         */
-        pageContext => this.cmsService.getPage(pageContext, true).pipe(first(), withLatestFrom(of(pageContext))))), switchMap((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        ([pageData, pageContext]) => pageData
-            ? this.resolveCmsPageLogic(pageContext, pageData, route, state)
-            : this.handleNotFoundPage(pageContext, route, state))));
-    }
-    /**
-     * @private
-     * @param {?} pageContext
-     * @param {?} pageData
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    resolveCmsPageLogic(pageContext, pageData, route, state) {
-        return this.cmsService.getPageComponentTypes(pageContext).pipe(take(1), switchMap((/**
-         * @param {?} componentTypes
-         * @return {?}
-         */
-        componentTypes => this.cmsGuards
-            .cmsPageCanActivate(componentTypes, route, state)
-            .pipe(withLatestFrom(of(componentTypes))))), tap((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        ([canActivate, componentTypes]) => {
-            if (canActivate === true) {
-                this.cmsI18n.loadChunksForComponents(componentTypes);
-            }
-        })), map((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        ([canActivate, componentTypes]) => {
-            /** @type {?} */
-            const pageLabel = pageData.label || pageContext.id;
-            if (canActivate === true &&
-                !route.data.cxCmsRouteContext &&
-                !this.cmsRoutes.cmsRouteExist(pageLabel)) {
-                return this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url, pageLabel);
-            }
-            return canActivate;
-        })));
-    }
-    /**
-     * @private
-     * @param {?} pageContext
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    handleNotFoundPage(pageContext, route, state) {
-        /** @type {?} */
-        const notFoundCmsPageContext = {
-            type: PageType.CONTENT_PAGE,
-            id: this.semanticPathService.get('notFound'),
-        };
-        return this.cmsService.getPage(notFoundCmsPageContext).pipe(switchMap((/**
-         * @param {?} notFoundPage
-         * @return {?}
-         */
-        notFoundPage => {
-            if (notFoundPage) {
-                return this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(tap((/**
-                 * @param {?} notFoundIndex
-                 * @return {?}
-                 */
-                notFoundIndex => {
-                    this.cmsService.setPageFailIndex(pageContext, notFoundIndex);
-                })), switchMap((/**
-                 * @param {?} notFoundIndex
-                 * @return {?}
-                 */
-                notFoundIndex => this.cmsService.getPageIndex(pageContext).pipe(
-                // we have to wait for page index update
-                filter((/**
-                 * @param {?} index
-                 * @return {?}
-                 */
-                index => index === notFoundIndex))))), switchMap((/**
-                 * @return {?}
-                 */
-                () => this.resolveCmsPageLogic(pageContext, notFoundPage, route, state))));
-            }
-            return of(false);
-        })));
-    }
-}
-CmsPageGuard.guardName = 'CmsPageGuard';
-CmsPageGuard.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root',
-            },] }
-];
-/** @nocollapse */
-CmsPageGuard.ctorParameters = () => [
-    { type: RoutingService },
-    { type: CmsService },
-    { type: CmsRoutesService },
-    { type: CmsI18nService },
-    { type: CmsGuardsService },
-    { type: SemanticPathService },
-    { type: ProtectedRoutesGuard }
-];
-/** @nocollapse */ CmsPageGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(ɵɵinject(RoutingService), ɵɵinject(CmsService), ɵɵinject(CmsRoutesService), ɵɵinject(CmsI18nService), ɵɵinject(CmsGuardsService), ɵɵinject(SemanticPathService), ɵɵinject(ProtectedRoutesGuard)); }, token: CmsPageGuard, providedIn: "root" });
-if (false) {
-    /** @type {?} */
-    CmsPageGuard.guardName;
-    /**
-     * @type {?}
-     * @protected
-     */
-    CmsPageGuard.prototype.routingService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    CmsPageGuard.prototype.cmsService;
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsPageGuard.prototype.cmsRoutes;
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsPageGuard.prototype.cmsI18n;
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsPageGuard.prototype.cmsGuards;
-    /**
-     * @type {?}
-     * @protected
-     */
-    CmsPageGuard.prototype.semanticPathService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    CmsPageGuard.prototype.protectedRoutesGuard;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-const cmsRoute = {
-    path: '**',
-    canActivate: [CmsPageGuard],
-    component: PageLayoutComponent,
-};
-/**
- * @param {?} injector
- * @return {?}
- */
-function addCmsRoute(injector) {
-    /** @type {?} */
-    const result = (/**
-     * @return {?}
-     */
-    () => {
-        /** @type {?} */
-        const router = injector.get(Router);
-        router.config.push(cmsRoute);
-    });
-    return result;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-const ɵ0 = addCmsRoute;
-class CmsRouteModule {
-}
-CmsRouteModule.decorators = [
-    { type: NgModule, args: [{
-                providers: [
-                    {
-                        provide: APP_INITIALIZER,
-                        multi: true,
-                        deps: [Injector],
-                        useFactory: ɵ0,
-                    },
-                ],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class BreadcrumbSchemaBuilder {
-    /**
-     * @param {?} pageMetaService
-     */
-    constructor(pageMetaService) {
-        this.pageMetaService = pageMetaService;
-    }
-    /**
-     * @return {?}
-     */
-    build() {
-        return this.pageMetaService
-            .getMeta()
-            .pipe(map((/**
-         * @param {?} pageMeta
-         * @return {?}
-         */
-        (pageMeta) => this.collect(pageMeta))));
-    }
-    /**
-     * @protected
-     * @param {?} pageMeta
-     * @return {?}
-     */
-    collect(pageMeta) {
-        if (!pageMeta.breadcrumbs) {
-            return;
-        }
-        /** @type {?} */
-        const crumbs = pageMeta.breadcrumbs.map((/**
-         * @param {?} crumb
-         * @param {?} index
-         * @return {?}
-         */
-        (crumb, index) => {
-            return {
-                '@type': 'ListItem',
-                position: index + 1,
-                item: {
-                    '@id': crumb.link,
-                    name: crumb.label,
-                },
-            };
-        }));
-        if (pageMeta.title) {
-            crumbs.push({
-                '@type': 'ListItem',
-                position: crumbs.length + 1,
-                item: {
-                    '@id': pageMeta.title,
-                    name: pageMeta.title,
-                },
-            });
-        }
-        return {
-            '@context': 'http://schema.org',
-            '@type': 'BreadcrumbList',
-            itemListElement: crumbs,
-        };
-    }
-}
-BreadcrumbSchemaBuilder.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root',
-            },] }
-];
-/** @nocollapse */
-BreadcrumbSchemaBuilder.ctorParameters = () => [
-    { type: PageMetaService }
-];
-/** @nocollapse */ BreadcrumbSchemaBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function BreadcrumbSchemaBuilder_Factory() { return new BreadcrumbSchemaBuilder(ɵɵinject(PageMetaService)); }, token: BreadcrumbSchemaBuilder, providedIn: "root" });
-if (false) {
-    /**
-     * @type {?}
-     * @protected
-     */
-    BreadcrumbSchemaBuilder.prototype.pageMetaService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Builds the basic structured data for the product, see https://schema.org/product.
- * This builder includes data for sku number, name, description, brand and main image.
- */
-class JsonLdBaseProductBuilder {
-    /**
-     * @param {?} product
-     * @return {?}
-     */
-    build(product) {
-        return of(Object.assign({}, this.getProductBase(product), this.getProductBrand(product), this.getProductImage(product)));
-    }
-    /**
-     * @private
-     * @param {?} product
-     * @return {?}
-     */
-    getProductBase(product) {
-        /** @type {?} */
-        const result = { sku: product.code };
-        if (product.name) {
-            result.name = product.name;
-        }
-        if (product.summary) {
-            result.description = product.summary;
-        }
-        return result;
-    }
-    /**
-     * @private
-     * @param {?} product
-     * @return {?}
-     */
-    getProductImage(product) {
-        return product.images &&
-            product.images.PRIMARY &&
-            product.images.PRIMARY['zoom'] &&
-            product.images.PRIMARY['zoom'].url
-            ? {
-                image: product.images.PRIMARY['zoom'].url,
-            }
-            : {};
-    }
-    /**
-     * @private
-     * @param {?} product
-     * @return {?}
-     */
-    getProductBrand(product) {
-        return product['manufacturer']
-            ? {
-                brand: product['manufacturer'],
-            }
-            : null;
-    }
-}
-JsonLdBaseProductBuilder.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root',
-            },] }
-];
-/** @nocollapse */ JsonLdBaseProductBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function JsonLdBaseProductBuilder_Factory() { return new JsonLdBaseProductBuilder(); }, token: JsonLdBaseProductBuilder, providedIn: "root" });
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Builds the structured data for the product offer, see https://schema.org/offers.
- * The data includes the price, currency and availability level.
- */
-class JsonLdProductOfferBuilder {
-    /**
-     * @param {?} product
-     * @return {?}
-     */
-    build(product) {
-        /** @type {?} */
-        const schema = { '@type': 'Offer' };
-        if (product.price) {
-            if (product.price.value) {
-                schema.price = product.price.value;
-            }
-            if (product.price.currencyIso) {
-                schema.priceCurrency = product.price.currencyIso;
-            }
-        }
-        if (product.stock && product.stock.stockLevelStatus) {
-            schema.availability =
-                product.stock.stockLevelStatus === 'inStock' ? 'InStock' : 'OutOfStock';
-        }
-        return of({
-            offers: schema,
-        });
-    }
-}
-JsonLdProductOfferBuilder.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root',
-            },] }
-];
-/** @nocollapse */ JsonLdProductOfferBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function JsonLdProductOfferBuilder_Factory() { return new JsonLdProductOfferBuilder(); }, token: JsonLdProductOfferBuilder, providedIn: "root" });
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Builds the structured data for the product reviews, see https://schema.org/Review.
- * The data includes the aggregated product rating and the individual reviews.
- */
-class JsonLdProductReviewBuilder {
-    /**
-     * @param {?} reviewService
-     */
-    constructor(reviewService) {
-        this.reviewService = reviewService;
-    }
-    /**
-     * @param {?} product
-     * @return {?}
-     */
-    build(product) {
-        return this.reviewService.getByProductCode(product.code).pipe(filter(Boolean), map((/**
-         * @param {?} reviews
-         * @return {?}
-         */
-        (reviews) => {
-            return {
-                aggregateRating: this.buildAggregatedReviews(product, reviews),
-                review: reviews.map((/**
-                 * @param {?} review
-                 * @return {?}
-                 */
-                review => this.buildReviews(review))),
-            };
-        })));
-    }
-    /**
-     * @private
-     * @param {?} product
-     * @param {?} reviews
-     * @return {?}
-     */
-    buildAggregatedReviews(product, reviews) {
-        /** @type {?} */
-        const aggregated = {
-            '@type': 'AggregateRating',
-        };
-        if (product.averageRating) {
-            aggregated.ratingValue = product.averageRating;
-        }
-        if (reviews) {
-            aggregated.ratingCount = reviews.filter((/**
-             * @param {?} rev
-             * @return {?}
-             */
-            rev => !!rev.rating)).length;
-            aggregated.reviewCount = reviews.filter((/**
-             * @param {?} rev
-             * @return {?}
-             */
-            rev => !!rev.comment)).length;
-        }
-        return aggregated;
-    }
-    /**
-     * @private
-     * @param {?} review
-     * @return {?}
-     */
-    buildReviews(review) {
-        /** @type {?} */
-        const reviewSchema = {
-            '@type': 'review',
-        };
-        if (review.principal && review.principal.name) {
-            reviewSchema.author = review.principal.name;
-        }
-        if (review.date) {
-            /** @type {?} */
-            const date = new Date(review.date);
-            reviewSchema.datePublished = `${date.getFullYear()}-${date.getMonth() +
-                1}-${date.getDate()}`;
-        }
-        if (review.headline) {
-            reviewSchema.name = review.headline;
-        }
-        if (review.comment) {
-            reviewSchema.description = review.comment;
-        }
-        if (review.rating) {
-            reviewSchema.reviewRating = {
-                '@type': 'Rating',
-                ratingValue: review.rating.toString(),
-            };
-        }
-        return reviewSchema;
-    }
-}
-JsonLdProductReviewBuilder.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root',
-            },] }
-];
-/** @nocollapse */
-JsonLdProductReviewBuilder.ctorParameters = () => [
-    { type: ProductReviewService }
-];
-/** @nocollapse */ JsonLdProductReviewBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function JsonLdProductReviewBuilder_Factory() { return new JsonLdProductReviewBuilder(ɵɵinject(ProductReviewService)); }, token: JsonLdProductReviewBuilder, providedIn: "root" });
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    JsonLdProductReviewBuilder.prototype.reviewService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Adds the minimal structured data for the product, see https://schema.org/product.
- * The actual data collection is delegated to `JsonLdBuilder`s, which can be injected
- * using the `JSONLD_PRODUCT_BUILDER` token.
- */
-class ProductSchemaBuilder {
-    /**
-     * @param {?} currentProduct
-     * @param {?} builders
-     */
-    constructor(currentProduct, builders) {
-        this.currentProduct = currentProduct;
-        this.builders = builders;
-    }
-    /**
-     * @return {?}
-     */
-    build() {
-        return this.currentProduct.getProduct().pipe(startWith((/** @type {?} */ (null))), switchMap((/**
-         * @param {?} product
-         * @return {?}
-         */
-        (product) => {
-            if (product) {
-                return combineLatest(this.collect(product)).pipe(map((/**
-                 * @param {?} res
-                 * @return {?}
-                 */
-                (res) => Object.assign({}, ...res))));
-            }
-            return of({});
-        })));
-    }
-    /**
-     * @protected
-     * @param {?} product
-     * @return {?}
-     */
-    collect(product) {
-        if (!product || !product.code) {
-            return [];
-        }
-        /** @type {?} */
-        const builders = this.builders
-            ? this.builders.map((/**
-             * @param {?} builder
-             * @return {?}
-             */
-            builder => builder.build(product)))
-            : [];
-        return [
-            of({
-                '@context': 'http://schema.org',
-                '@type': 'Product',
-            }),
-            ...builders,
-        ];
-    }
-}
-ProductSchemaBuilder.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root',
-            },] }
-];
-/** @nocollapse */
-ProductSchemaBuilder.ctorParameters = () => [
-    { type: CurrentProductService },
-    { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [JSONLD_PRODUCT_BUILDER,] }] }
-];
-/** @nocollapse */ ProductSchemaBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function ProductSchemaBuilder_Factory() { return new ProductSchemaBuilder(ɵɵinject(CurrentProductService), ɵɵinject(JSONLD_PRODUCT_BUILDER, 8)); }, token: ProductSchemaBuilder, providedIn: "root" });
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    ProductSchemaBuilder.prototype.currentProduct;
-    /**
-     * @type {?}
-     * @protected
-     */
-    ProductSchemaBuilder.prototype.builders;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Provides several standard json-ld builders that contribute
- * to colleting and building json-ld data.
- */
-class JsonLdBuilderModule {
-}
-JsonLdBuilderModule.decorators = [
-    { type: NgModule, args: [{
-                providers: [
-                    {
-                        provide: SCHEMA_BUILDER,
-                        useExisting: ProductSchemaBuilder,
-                        multi: true,
-                    },
-                    {
-                        provide: SCHEMA_BUILDER,
-                        useExisting: BreadcrumbSchemaBuilder,
-                        multi: true,
-                    },
-                    // lower level json-ld builder classes offering fine-graiend control
-                    // for product related schema's
-                    {
-                        provide: JSONLD_PRODUCT_BUILDER,
-                        useExisting: JsonLdBaseProductBuilder,
-                        multi: true,
-                    },
-                    {
-                        provide: JSONLD_PRODUCT_BUILDER,
-                        useExisting: JsonLdProductOfferBuilder,
-                        multi: true,
-                    },
-                    {
-                        provide: JSONLD_PRODUCT_BUILDER,
-                        useExisting: JsonLdProductReviewBuilder,
-                        multi: true,
-                    },
-                ],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @record
- */
-function SchemaBuilder() { }
-if (false) {
-    /**
-     * @return {?}
-     */
-    SchemaBuilder.prototype.build = function () { };
-}
-/**
- * @record
- * @template T
- */
-function JsonLdBuilder() { }
-if (false) {
-    /**
-     * @param {?} data
-     * @return {?}
-     */
-    JsonLdBuilder.prototype.build = function (data) { };
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 
 /**
  * @fileoverview added by tsickle
