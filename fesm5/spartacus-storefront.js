@@ -1,5 +1,5 @@
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
-import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, EventEmitter, Output, isDevMode, ChangeDetectionStrategy, forwardRef, Renderer2, ViewChild, Directive, HostListener, Optional, Injector, ChangeDetectorRef, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, NgZone, APP_INITIALIZER, RendererFactory2, Pipe, INJECTOR } from '@angular/core';
+import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, EventEmitter, Output, isDevMode, ChangeDetectionStrategy, forwardRef, Renderer2, ViewChild, Directive, HostListener, Optional, Injector, ChangeDetectorRef, InjectionToken, TemplateRef, ComponentFactory, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, NgZone, APP_INITIALIZER, RendererFactory2, Pipe, INJECTOR } from '@angular/core';
 import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, FeaturesConfigModule, RoutingService, ProductService, CartService, CartVoucherService, OCC_USER_ID_ANONYMOUS, AuthService, CartModule, RoutingConfigService, AuthRedirectService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, CmsConfig, CartDataService, CmsService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, AsmService, AsmConfig, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, NotAuthGuard, CmsPageTitleModule, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, AsmModule as AsmModule$1, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
 import { Subscription, combineLatest, of, fromEvent, BehaviorSubject, concat, isObservable, from } from 'rxjs';
 import { take, distinctUntilChanged, tap, map, debounceTime, startWith, filter, switchMap, shareReplay, skipWhile, withLatestFrom, scan, mergeMap, first, endWith, pluck } from 'rxjs/operators';
@@ -10678,32 +10678,35 @@ var OutletPosition = {
  */
 var OutletService = /** @class */ (function () {
     function OutletService() {
-        this.templatesRefs = {};
-        this.templatesRefsBefore = {};
-        this.templatesRefsAfter = {};
+        this.templatesRefs = new Map();
+        this.templatesRefsBefore = new Map();
+        this.templatesRefsAfter = new Map();
     }
     /**
+     * @param templateOrFactory A `ComponentFactory` that inserts a component dynamically.
+     */
+    /**
      * @param {?} outlet
-     * @param {?} template
+     * @param {?} templateOrFactory A `ComponentFactory` that inserts a component dynamically.
      * @param {?=} position
      * @return {?}
      */
     OutletService.prototype.add = /**
      * @param {?} outlet
-     * @param {?} template
+     * @param {?} templateOrFactory A `ComponentFactory` that inserts a component dynamically.
      * @param {?=} position
      * @return {?}
      */
-    function (outlet, template, position) {
+    function (outlet, templateOrFactory, position) {
         if (position === void 0) { position = OutletPosition.REPLACE; }
         if (position === OutletPosition.BEFORE) {
-            this.templatesRefsBefore[outlet] = template;
+            this.templatesRefsBefore.set(outlet, templateOrFactory);
         }
         if (position === OutletPosition.REPLACE) {
-            this.templatesRefs[outlet] = template;
+            this.templatesRefs.set(outlet, templateOrFactory);
         }
         if (position === OutletPosition.AFTER) {
-            this.templatesRefsAfter[outlet] = template;
+            this.templatesRefsAfter.set(outlet, templateOrFactory);
         }
     };
     /**
@@ -10722,16 +10725,15 @@ var OutletService = /** @class */ (function () {
         var templateRef;
         switch (position) {
             case OutletPosition.BEFORE:
-                templateRef = this.templatesRefsBefore[outlet];
+                templateRef = this.templatesRefsBefore.get(outlet);
                 break;
             case OutletPosition.AFTER:
-                templateRef = this.templatesRefsAfter[outlet];
+                templateRef = this.templatesRefsAfter.get(outlet);
                 break;
             default:
-                templateRef = this.templatesRefs[outlet];
+                templateRef = this.templatesRefs.get(outlet);
         }
         return templateRef;
-        // return this.templatesRefs[outlet] ? this.templatesRefs[outlet] : null;
     };
     OutletService.decorators = [
         { type: Injectable, args: [{
@@ -10874,11 +10876,9 @@ var OutletDirective = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        /** @type {?} */
-        var nodes = [];
-        nodes.push.apply(nodes, __spread(this.renderTemplate(OutletPosition.BEFORE)));
-        nodes.push.apply(nodes, __spread(this.renderTemplate(OutletPosition.REPLACE, true)));
-        nodes.push.apply(nodes, __spread(this.renderTemplate(OutletPosition.AFTER)));
+        this.renderTemplate(OutletPosition.BEFORE);
+        this.renderTemplate(OutletPosition.REPLACE, true);
+        this.renderTemplate(OutletPosition.AFTER);
     };
     /**
      * @private
@@ -10895,17 +10895,15 @@ var OutletDirective = /** @class */ (function () {
     function (position, replace) {
         if (replace === void 0) { replace = false; }
         /** @type {?} */
-        var nodes = [];
-        /** @type {?} */
         var template = this.outletService.get(this.cxOutlet, position);
-        if (template || replace) {
-            /** @type {?} */
-            var ref = this.vcr.createEmbeddedView(template || this.templateRef, {
+        if (template && template instanceof ComponentFactory) {
+            this.vcr.createComponent(template);
+        }
+        else if ((template && template instanceof TemplateRef) || replace) {
+            this.vcr.createEmbeddedView((/** @type {?} */ (template)) || this.templateRef, {
                 $implicit: this._context,
             });
-            nodes.push.apply(nodes, __spread(ref.rootNodes));
         }
-        return nodes;
     };
     OutletDirective.decorators = [
         { type: Directive, args: [{

@@ -10863,32 +10863,35 @@
      */
     var OutletService = /** @class */ (function () {
         function OutletService() {
-            this.templatesRefs = {};
-            this.templatesRefsBefore = {};
-            this.templatesRefsAfter = {};
+            this.templatesRefs = new Map();
+            this.templatesRefsBefore = new Map();
+            this.templatesRefsAfter = new Map();
         }
         /**
+         * @param templateOrFactory A `ComponentFactory` that inserts a component dynamically.
+         */
+        /**
          * @param {?} outlet
-         * @param {?} template
+         * @param {?} templateOrFactory A `ComponentFactory` that inserts a component dynamically.
          * @param {?=} position
          * @return {?}
          */
         OutletService.prototype.add = /**
          * @param {?} outlet
-         * @param {?} template
+         * @param {?} templateOrFactory A `ComponentFactory` that inserts a component dynamically.
          * @param {?=} position
          * @return {?}
          */
-        function (outlet, template, position) {
+        function (outlet, templateOrFactory, position) {
             if (position === void 0) { position = OutletPosition.REPLACE; }
             if (position === OutletPosition.BEFORE) {
-                this.templatesRefsBefore[outlet] = template;
+                this.templatesRefsBefore.set(outlet, templateOrFactory);
             }
             if (position === OutletPosition.REPLACE) {
-                this.templatesRefs[outlet] = template;
+                this.templatesRefs.set(outlet, templateOrFactory);
             }
             if (position === OutletPosition.AFTER) {
-                this.templatesRefsAfter[outlet] = template;
+                this.templatesRefsAfter.set(outlet, templateOrFactory);
             }
         };
         /**
@@ -10907,16 +10910,15 @@
             var templateRef;
             switch (position) {
                 case OutletPosition.BEFORE:
-                    templateRef = this.templatesRefsBefore[outlet];
+                    templateRef = this.templatesRefsBefore.get(outlet);
                     break;
                 case OutletPosition.AFTER:
-                    templateRef = this.templatesRefsAfter[outlet];
+                    templateRef = this.templatesRefsAfter.get(outlet);
                     break;
                 default:
-                    templateRef = this.templatesRefs[outlet];
+                    templateRef = this.templatesRefs.get(outlet);
             }
             return templateRef;
-            // return this.templatesRefs[outlet] ? this.templatesRefs[outlet] : null;
         };
         OutletService.decorators = [
             { type: core.Injectable, args: [{
@@ -11059,11 +11061,9 @@
          * @return {?}
          */
         function () {
-            /** @type {?} */
-            var nodes = [];
-            nodes.push.apply(nodes, __spread(this.renderTemplate(OutletPosition.BEFORE)));
-            nodes.push.apply(nodes, __spread(this.renderTemplate(OutletPosition.REPLACE, true)));
-            nodes.push.apply(nodes, __spread(this.renderTemplate(OutletPosition.AFTER)));
+            this.renderTemplate(OutletPosition.BEFORE);
+            this.renderTemplate(OutletPosition.REPLACE, true);
+            this.renderTemplate(OutletPosition.AFTER);
         };
         /**
          * @private
@@ -11080,17 +11080,15 @@
         function (position, replace) {
             if (replace === void 0) { replace = false; }
             /** @type {?} */
-            var nodes = [];
-            /** @type {?} */
             var template = this.outletService.get(this.cxOutlet, position);
-            if (template || replace) {
-                /** @type {?} */
-                var ref = this.vcr.createEmbeddedView(template || this.templateRef, {
+            if (template && template instanceof core.ComponentFactory) {
+                this.vcr.createComponent(template);
+            }
+            else if ((template && template instanceof core.TemplateRef) || replace) {
+                this.vcr.createEmbeddedView((/** @type {?} */ (template)) || this.templateRef, {
                     $implicit: this._context,
                 });
-                nodes.push.apply(nodes, __spread(ref.rootNodes));
             }
-            return nodes;
         };
         OutletDirective.decorators = [
             { type: core.Directive, args: [{
