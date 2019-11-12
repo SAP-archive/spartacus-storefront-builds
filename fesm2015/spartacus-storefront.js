@@ -13765,12 +13765,14 @@ class AsmSessionTimerComponent {
     /**
      * @param {?} config
      * @param {?} asmComponentService
+     * @param {?} authService
      * @param {?} routingService
      * @param {?} changeDetectorRef
      */
-    constructor(config, asmComponentService, routingService, changeDetectorRef) {
+    constructor(config, asmComponentService, authService, routingService, changeDetectorRef) {
         this.config = config;
         this.asmComponentService = asmComponentService;
+        this.authService = authService;
         this.routingService = routingService;
         this.changeDetectorRef = changeDetectorRef;
         this.subscriptions = new Subscription();
@@ -13794,6 +13796,14 @@ class AsmSessionTimerComponent {
             }
             this.changeDetectorRef.markForCheck();
         }), 1000);
+        this.resetOnNavigate();
+        this.resetOnCustomerSessionChange();
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    resetOnNavigate() {
         this.subscriptions.add(this.routingService.isNavigating().subscribe((/**
          * @param {?} isNavigating
          * @return {?}
@@ -13803,6 +13813,20 @@ class AsmSessionTimerComponent {
                 this.resetTimer();
             }
         })));
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    resetOnCustomerSessionChange() {
+        this.subscriptions.add(this.authService
+            .getOccUserId()
+            .pipe(distinctUntilChanged())
+            .subscribe((/**
+         * @param {?} _
+         * @return {?}
+         */
+        _ => this.resetTimer())));
     }
     /**
      * @return {?}
@@ -13845,6 +13869,7 @@ AsmSessionTimerComponent.decorators = [
 AsmSessionTimerComponent.ctorParameters = () => [
     { type: AsmConfig },
     { type: AsmComponentService },
+    { type: AuthService },
     { type: RoutingService },
     { type: ChangeDetectorRef }
 ];
@@ -13876,6 +13901,11 @@ if (false) {
      * @private
      */
     AsmSessionTimerComponent.prototype.asmComponentService;
+    /**
+     * @type {?}
+     * @private
+     */
+    AsmSessionTimerComponent.prototype.authService;
     /**
      * @type {?}
      * @private

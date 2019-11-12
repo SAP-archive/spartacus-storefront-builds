@@ -15938,9 +15938,10 @@ if (false) {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var AsmSessionTimerComponent = /** @class */ (function () {
-    function AsmSessionTimerComponent(config, asmComponentService, routingService, changeDetectorRef) {
+    function AsmSessionTimerComponent(config, asmComponentService, authService, routingService, changeDetectorRef) {
         this.config = config;
         this.asmComponentService = asmComponentService;
+        this.authService = authService;
         this.routingService = routingService;
         this.changeDetectorRef = changeDetectorRef;
         this.subscriptions = new Subscription();
@@ -15968,6 +15969,19 @@ var AsmSessionTimerComponent = /** @class */ (function () {
             }
             _this.changeDetectorRef.markForCheck();
         }), 1000);
+        this.resetOnNavigate();
+        this.resetOnCustomerSessionChange();
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    AsmSessionTimerComponent.prototype.resetOnNavigate = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
         this.subscriptions.add(this.routingService.isNavigating().subscribe((/**
          * @param {?} isNavigating
          * @return {?}
@@ -15977,6 +15991,25 @@ var AsmSessionTimerComponent = /** @class */ (function () {
                 _this.resetTimer();
             }
         })));
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    AsmSessionTimerComponent.prototype.resetOnCustomerSessionChange = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.subscriptions.add(this.authService
+            .getOccUserId()
+            .pipe(distinctUntilChanged())
+            .subscribe((/**
+         * @param {?} _
+         * @return {?}
+         */
+        function (_) { return _this.resetTimer(); })));
     };
     /**
      * @return {?}
@@ -16028,6 +16061,7 @@ var AsmSessionTimerComponent = /** @class */ (function () {
     AsmSessionTimerComponent.ctorParameters = function () { return [
         { type: AsmConfig },
         { type: AsmComponentService },
+        { type: AuthService },
         { type: RoutingService },
         { type: ChangeDetectorRef }
     ]; };
@@ -16061,6 +16095,11 @@ if (false) {
      * @private
      */
     AsmSessionTimerComponent.prototype.asmComponentService;
+    /**
+     * @type {?}
+     * @private
+     */
+    AsmSessionTimerComponent.prototype.authService;
     /**
      * @type {?}
      * @private
