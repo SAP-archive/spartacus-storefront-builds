@@ -5278,35 +5278,55 @@
             this.fb = fb;
             this.isReadOnly = false;
             this.hasHeader = true;
-            this.items = [];
             this.potentialProductPromotions = [];
             this.cartIsLoading = false;
             this.form = this.fb.group({});
+            this._items = [];
         }
+        Object.defineProperty(CartItemListComponent.prototype, "items", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return this._items;
+            },
+            set: /**
+             * @param {?} _items
+             * @return {?}
+             */
+            function (_items) {
+                var _this = this;
+                this._items = _items;
+                this.items.forEach((/**
+                 * @param {?} item
+                 * @return {?}
+                 */
+                function (item) {
+                    var code = item.product.code;
+                    if (!_this.form.controls[code]) {
+                        _this.form.setControl(code, _this.createEntryFormGroup(item));
+                    }
+                    else {
+                        /** @type {?} */
+                        var entryForm = (/** @type {?} */ (_this.form.controls[code]));
+                        entryForm.controls.quantity.setValue(item.quantity);
+                    }
+                }));
+            },
+            enumerable: true,
+            configurable: true
+        });
+        // TODO remove for 2.0 - left to keep backward compatibility
+        // TODO remove for 2.0 - left to keep backward compatibility
         /**
          * @return {?}
          */
-        CartItemListComponent.prototype.ngOnInit = /**
+        CartItemListComponent.prototype.ngOnInit = 
+        // TODO remove for 2.0 - left to keep backward compatibility
+        /**
          * @return {?}
          */
-        function () {
-            var _this = this;
-            this.items.forEach((/**
-             * @param {?} item
-             * @return {?}
-             */
-            function (item) {
-                var code = item.product.code;
-                if (!_this.form.controls[code]) {
-                    _this.form.setControl(code, _this.createEntryFormGroup(item));
-                }
-                else {
-                    /** @type {?} */
-                    var entryForm = (/** @type {?} */ (_this.form.controls[code]));
-                    entryForm.controls.quantity.setValue(item.quantity);
-                }
-            }));
-        };
+        function () { };
         /**
          * @param {?} item
          * @return {?}
@@ -5410,12 +5430,12 @@
         function (consumedEntry, entry) {
             var e_3, _a;
             /** @type {?} */
-            var consumendEntryNumber = consumedEntry.orderEntryNumber;
+            var consumedEntryNumber = consumedEntry.orderEntryNumber;
             if (entry.entries && entry.entries.length > 0) {
                 try {
                     for (var _b = __values(entry.entries), _c = _b.next(); !_c.done; _c = _b.next()) {
                         var subEntry = _c.value;
-                        if (subEntry.entryNumber === consumendEntryNumber) {
+                        if (subEntry.entryNumber === consumedEntryNumber) {
                             return true;
                         }
                     }
@@ -5430,7 +5450,7 @@
                 return false;
             }
             else {
-                return consumendEntryNumber === entry.entryNumber;
+                return consumedEntryNumber === entry.entryNumber;
             }
         };
         CartItemListComponent.decorators = [
@@ -5459,13 +5479,16 @@
         /** @type {?} */
         CartItemListComponent.prototype.hasHeader;
         /** @type {?} */
-        CartItemListComponent.prototype.items;
-        /** @type {?} */
         CartItemListComponent.prototype.potentialProductPromotions;
         /** @type {?} */
         CartItemListComponent.prototype.cartIsLoading;
         /** @type {?} */
         CartItemListComponent.prototype.form;
+        /**
+         * @type {?}
+         * @private
+         */
+        CartItemListComponent.prototype._items;
         /**
          * @type {?}
          * @protected

@@ -4233,15 +4233,17 @@ class CartItemListComponent {
         this.fb = fb;
         this.isReadOnly = false;
         this.hasHeader = true;
-        this.items = [];
         this.potentialProductPromotions = [];
         this.cartIsLoading = false;
         this.form = this.fb.group({});
+        this._items = [];
     }
     /**
+     * @param {?} _items
      * @return {?}
      */
-    ngOnInit() {
+    set items(_items) {
+        this._items = _items;
         this.items.forEach((/**
          * @param {?} item
          * @return {?}
@@ -4258,6 +4260,17 @@ class CartItemListComponent {
             }
         }));
     }
+    /**
+     * @return {?}
+     */
+    get items() {
+        return this._items;
+    }
+    // TODO remove for 2.0 - left to keep backward compatibility
+    /**
+     * @return {?}
+     */
+    ngOnInit() { }
     /**
      * @param {?} item
      * @return {?}
@@ -4315,17 +4328,17 @@ class CartItemListComponent {
      */
     isConsumedByEntry(consumedEntry, entry) {
         /** @type {?} */
-        const consumendEntryNumber = consumedEntry.orderEntryNumber;
+        const consumedEntryNumber = consumedEntry.orderEntryNumber;
         if (entry.entries && entry.entries.length > 0) {
             for (const subEntry of entry.entries) {
-                if (subEntry.entryNumber === consumendEntryNumber) {
+                if (subEntry.entryNumber === consumedEntryNumber) {
                     return true;
                 }
             }
             return false;
         }
         else {
-            return consumendEntryNumber === entry.entryNumber;
+            return consumedEntryNumber === entry.entryNumber;
         }
     }
 }
@@ -4353,13 +4366,16 @@ if (false) {
     /** @type {?} */
     CartItemListComponent.prototype.hasHeader;
     /** @type {?} */
-    CartItemListComponent.prototype.items;
-    /** @type {?} */
     CartItemListComponent.prototype.potentialProductPromotions;
     /** @type {?} */
     CartItemListComponent.prototype.cartIsLoading;
     /** @type {?} */
     CartItemListComponent.prototype.form;
+    /**
+     * @type {?}
+     * @private
+     */
+    CartItemListComponent.prototype._items;
     /**
      * @type {?}
      * @protected
