@@ -1,0 +1,7 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+export var ASM_ENABLED_LOCAL_STORAGE_KEY = 'asm_enabled';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXNtLWNvbnN0YW50cy5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BzcGFydGFjdXMvc3RvcmVmcm9udC8iLCJzb3VyY2VzIjpbImNtcy1jb21wb25lbnRzL2FzbS9hc20tY29uc3RhbnRzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsTUFBTSxLQUFPLDZCQUE2QixHQUFHLGFBQWEiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgY29uc3QgQVNNX0VOQUJMRURfTE9DQUxfU1RPUkFHRV9LRVkgPSAnYXNtX2VuYWJsZWQnO1xuIl19
