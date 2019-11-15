@@ -12822,7 +12822,7 @@ class ConsentManagementComponent {
          * @return {?}
          */
         template => {
-            if (this.isConsentGiven(template)) {
+            if (this.userConsentService.isConsentGiven(template.currentConsent)) {
                 if (this.isRequiredConsent(template)) {
                     return;
                 }
@@ -12876,16 +12876,6 @@ class ConsentManagementComponent {
         return checkTimesLoaded$;
     }
     /**
-     * @private
-     * @param {?} consentTemplate
-     * @return {?}
-     */
-    isConsentGiven(consentTemplate) {
-        return (Boolean(consentTemplate.currentConsent) &&
-            Boolean(consentTemplate.currentConsent.consentGivenDate) &&
-            !Boolean(consentTemplate.currentConsent.consentWithdrawnDate));
-    }
-    /**
      * @param {?=} templates
      * @return {?}
      */
@@ -12897,7 +12887,7 @@ class ConsentManagementComponent {
          * @return {?}
          */
         template => {
-            if (this.isConsentWithdrawn(template)) {
+            if (this.userConsentService.isConsentWithdrawn(template.currentConsent)) {
                 if (this.isRequiredConsent(template)) {
                     return;
                 }
@@ -12949,17 +12939,6 @@ class ConsentManagementComponent {
          */
         timesLoaded => timesLoaded === consentsToGive.length)));
         return checkTimesLoaded$;
-    }
-    /**
-     * @private
-     * @param {?} consentTemplate
-     * @return {?}
-     */
-    isConsentWithdrawn(consentTemplate) {
-        if (Boolean(consentTemplate.currentConsent)) {
-            return Boolean(consentTemplate.currentConsent.consentWithdrawnDate);
-        }
-        return true;
     }
     /**
      * @private

@@ -43,10 +43,8 @@ export declare class ConsentManagementComponent implements OnInit, OnDestroy {
     private onConsentWithdrawnSuccess;
     rejectAll(templates?: ConsentTemplate[]): void;
     private setupWithdrawalStream;
-    private isConsentGiven;
     allowAll(templates?: ConsentTemplate[]): void;
     private setupGiveStream;
-    private isConsentWithdrawn;
     private isRequiredConsent;
     ngOnDestroy(): void;
 }

@@ -15049,7 +15049,7 @@
              * @return {?}
              */
             function (template) {
-                if (_this.isConsentGiven(template)) {
+                if (_this.userConsentService.isConsentGiven(template.currentConsent)) {
                     if (_this.isRequiredConsent(template)) {
                         return;
                     }
@@ -15110,21 +15110,6 @@
             return checkTimesLoaded$;
         };
         /**
-         * @private
-         * @param {?} consentTemplate
-         * @return {?}
-         */
-        ConsentManagementComponent.prototype.isConsentGiven = /**
-         * @private
-         * @param {?} consentTemplate
-         * @return {?}
-         */
-        function (consentTemplate) {
-            return (Boolean(consentTemplate.currentConsent) &&
-                Boolean(consentTemplate.currentConsent.consentGivenDate) &&
-                !Boolean(consentTemplate.currentConsent.consentWithdrawnDate));
-        };
-        /**
          * @param {?=} templates
          * @return {?}
          */
@@ -15142,7 +15127,7 @@
              * @return {?}
              */
             function (template) {
-                if (_this.isConsentWithdrawn(template)) {
+                if (_this.userConsentService.isConsentWithdrawn(template.currentConsent)) {
                     if (_this.isRequiredConsent(template)) {
                         return;
                     }
@@ -15201,22 +15186,6 @@
              */
             function (timesLoaded) { return timesLoaded === consentsToGive.length; })));
             return checkTimesLoaded$;
-        };
-        /**
-         * @private
-         * @param {?} consentTemplate
-         * @return {?}
-         */
-        ConsentManagementComponent.prototype.isConsentWithdrawn = /**
-         * @private
-         * @param {?} consentTemplate
-         * @return {?}
-         */
-        function (consentTemplate) {
-            if (Boolean(consentTemplate.currentConsent)) {
-                return Boolean(consentTemplate.currentConsent.consentWithdrawnDate);
-            }
-            return true;
         };
         /**
          * @private
