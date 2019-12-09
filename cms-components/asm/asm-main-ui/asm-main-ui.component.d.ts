@@ -1,26 +1,25 @@
 import { OnInit } from '@angular/core';
-import { AuthService, GlobalMessageService, RoutingService, User, UserService, UserToken } from '@spartacus/core';
+import { AsmService, AuthService, GlobalMessageService, RoutingService, User, UserService, UserToken } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { AsmComponentService } from '../services/asm-component.service';
 export declare class AsmMainUiComponent implements OnInit {
     protected authService: AuthService;
     protected userService: UserService;
-    protected asmComponentService: AsmComponentService;
+    protected asmService: AsmService;
     protected globalMessageService: GlobalMessageService;
     protected routingService: RoutingService;
     csAgentToken$: Observable<UserToken>;
     csAgentTokenLoading$: Observable<boolean>;
     customer$: Observable<User>;
-    disabled: boolean;
+    searchResultsLoading$: Observable<boolean>;
     private startingCustomerSession;
-    constructor(authService: AuthService, userService: UserService, asmComponentService: AsmComponentService, globalMessageService: GlobalMessageService, routingService: RoutingService);
+    constructor(authService: AuthService, userService: UserService, asmService: AsmService, globalMessageService: GlobalMessageService, routingService: RoutingService);
     ngOnInit(): void;
     private handleCustomerSessionStartRedirection;
     loginCustomerSupportAgent({ userId, password, }: {
         userId: string;
         password: string;
     }): void;
-    logout(): void;
+    logoutCustomerSupportAgent(): void;
     startCustomerEmulationSession({ customerId }: {
         customerId: string;
     }): void;

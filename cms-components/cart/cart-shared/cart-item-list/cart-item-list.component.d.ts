@@ -11,7 +11,6 @@ export declare class CartItemListComponent implements OnInit {
     potentialProductPromotions: PromotionResult[];
     cartIsLoading: boolean;
     form: FormGroup;
-    private _items;
     constructor(cartService: CartService, fb: FormBuilder);
     ngOnInit(): void;
     removeEntry(item: Item): void;

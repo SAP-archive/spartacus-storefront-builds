@@ -11,7 +11,6 @@ export declare class AnonymousConsentDialogComponent implements OnInit, OnDestro
     showLegalDescription: boolean;
     iconTypes: typeof ICON_TYPE;
     requiredConsents: string[];
-    loading$: Observable<boolean>;
     templates$: Observable<ConsentTemplate[]>;
     consents$: Observable<AnonymousConsent[]>;
     isLevel13: boolean;

@@ -20,7 +20,8 @@ export declare enum ICON_TYPE {
     EXPAND = "EXPAND",
     COLLAPSE = "COLLAPSE",
     RESET = "RESET",
-    CIRCLE = "CIRCLE"
+    CIRCLE = "CIRCLE",
+    HEART = "HEART"
 }
 export declare abstract class IconConfig {
     icon?: {
