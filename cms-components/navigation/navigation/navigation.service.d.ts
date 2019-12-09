@@ -6,26 +6,32 @@ export declare class NavigationService {
     protected semanticPathService: SemanticPathService;
     constructor(cmsService: CmsService, semanticPathService: SemanticPathService);
     createNavigation(data$: Observable<CmsNavigationComponent>): Observable<NavigationNode>;
+    /**
+     * returns an observable with the `NavigationNode` for the given `CmsNavigationComponent`.
+     * This function will load the navigation underlying entries and childs if they haven't been
+     * loaded so far.
+     */
     getNavigationNode(data$: Observable<CmsNavigationComponent>): Observable<NavigationNode>;
     /**
-     * Get all navigation entry items' type and id. Dispatch action to load all these items
+     * Loads all navigation entry items' type and id. Dispatch action to load all these items
      * @param nodeData
      * @param root
      * @param itemsList
      */
-    private getNavigationEntryItems;
-    private processChildren;
+    private loadNavigationEntryItems;
     /**
-     * Create a new node tree for display
+     * Create a new node tree for the view
      * @param nodeData
      * @param items
      */
-    private createNode;
-    private addLinkToNode;
+    private populateNavigationNode;
+    /**
+     * The node link is driven by the first entry.
+     */
+    private populateLink;
     /**
      *
      * Gets the URL or link to a related item (category)
      */
     private getLink;
-    private createChildren;
 }

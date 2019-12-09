@@ -1,4 +1,4 @@
-import { OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { ComponentFactory, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { OutletService } from './outlet.service';
 export declare class OutletDirective implements OnInit {
     private vcr;
@@ -7,7 +7,8 @@ export declare class OutletDirective implements OnInit {
     cxOutlet: string;
     private _context;
     cxOutletContext: any;
-    constructor(vcr: ViewContainerRef, templateRef: TemplateRef<any>, outletService: OutletService);
+    constructor(vcr: ViewContainerRef, templateRef: TemplateRef<any>, outletService: OutletService<TemplateRef<any> | ComponentFactory<any>>);
     ngOnInit(): void;
-    private renderTemplate;
+    private renderOutlet;
+    private create;
 }

@@ -1,17 +1,17 @@
-import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
-import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, EventEmitter, Output, isDevMode, ChangeDetectionStrategy, forwardRef, Renderer2, ViewChild, Directive, HostListener, Optional, Injector, ChangeDetectorRef, InjectionToken, TemplateRef, ViewContainerRef, ComponentFactoryResolver, Inject, PLATFORM_ID, NgZone, APP_INITIALIZER, RendererFactory2, INJECTOR, Pipe } from '@angular/core';
-import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, ANONYMOUS_CONSENTS_FEATURE, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, FeaturesConfigModule, RoutingService, ProductService, CartService, CartVoucherService, OCC_USER_ID_ANONYMOUS, AuthService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, UserService, CmsConfig, CartDataService, CmsService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserConsentService, UserOrderService, DynamicAttributeService, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, AuthGuard, AsmService, AsmConfig, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, NotAuthGuard, CmsPageTitleModule, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, AsmModule, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
+import { CommonModule, isPlatformServer, isPlatformBrowser, DOCUMENT, Location } from '@angular/common';
+import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, EventEmitter, Output, isDevMode, ChangeDetectionStrategy, forwardRef, Renderer2, ViewChild, Directive, HostListener, Optional, Injector, Inject, PLATFORM_ID, INJECTOR, InjectionToken, TemplateRef, ComponentFactory, ViewContainerRef, ComponentFactoryResolver, NgZone, APP_INITIALIZER, RendererFactory2, ViewEncapsulation, ChangeDetectorRef, Pipe } from '@angular/core';
+import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, FeaturesConfigModule, CmsConfig, TranslationService, TranslationChunkService, CmsService, PageType, RoutingService, SemanticPathService, ProtectedRoutesGuard, AuthService, CartService, CartDataService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, DynamicAttributeService, PageRobotsMeta, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, CartVoucherService, OCC_USER_ID_ANONYMOUS, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, CmsPageTitleModule, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
 import { Subscription, combineLatest, of, fromEvent, BehaviorSubject, concat, isObservable, from } from 'rxjs';
-import { take, distinctUntilChanged, tap, map, debounceTime, startWith, filter, switchMap, shareReplay, skipWhile, withLatestFrom, scan, first, endWith, pluck } from 'rxjs/operators';
+import { take, distinctUntilChanged, tap, map, debounceTime, startWith, filter, switchMap, first, skipWhile, endWith, withLatestFrom, mergeMap, shareReplay, scan, pluck } from 'rxjs/operators';
 import { __extends, __read, __values, __assign, __spread, __awaiter, __generator } from 'tslib';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
-import { NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
-import { Subscription as Subscription$1 } from 'rxjs/internal/Subscription';
 import { ServiceWorkerModule, SwRegistrationOptions } from '@angular/service-worker';
 import { Title, Meta, DomSanitizer } from '@angular/platform-browser';
+import { Subscription as Subscription$1 } from 'rxjs/internal/Subscription';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -44,7 +44,6 @@ var ICON_TYPE = {
     COLLAPSE: 'COLLAPSE',
     RESET: 'RESET',
     CIRCLE: 'CIRCLE',
-    HEART: 'HEART',
 };
 /**
  * @abstract
@@ -109,7 +108,6 @@ var fontawesomeIconConfig = {
             EXPAND: 'fas fa-plus',
             RESET: 'fas fa-times-circle',
             CIRCLE: 'fas fa-circle',
-            HEART: 'fas fa-heart',
         },
         resources: [
             {
@@ -669,6 +667,7 @@ var AnonymousConsentDialogComponent = /** @class */ (function () {
     function () {
         this.templates$ = this.anonymousConsentsService.getTemplates();
         this.consents$ = this.anonymousConsentsService.getConsents();
+        this.loading$ = this.anonymousConsentsService.getLoadTemplatesLoading();
     };
     /**
      * @param {?=} reason
@@ -822,7 +821,7 @@ var AnonymousConsentDialogComponent = /** @class */ (function () {
     AnonymousConsentDialogComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-anonymous-consent-dialog',
-                    template: "<div #dialog>\n  <!-- Modal Header -->\n  <div class=\"cx-dialog-header modal-header\">\n    <div class=\"cx-dialog-title modal-title\">\n      {{ 'anonymousConsents.dialog.title' | cxTranslate }}\n    </div>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"closeModal('Cross click')\"\n    >\n      <span aria-hidden=\"true\">\n        <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n      </span>\n    </button>\n  </div>\n  <!-- Separator -->\n  <div\n    class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n  ></div>\n  <div class=\"cx-dialog-description\" *ngIf=\"showLegalDescription\">\n    {{ 'anonymousConsents.dialog.legalDescription' | cxTranslate }}\n    <div\n      class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n    ></div>\n  </div>\n  <!-- Actions -->\n  <div class=\"cx-dialog-buttons\">\n    <a tabindex=\"0\" class=\"btn-link cx-action-link\" (click)=\"rejectAll()\">{{\n      'anonymousConsents.dialog.clearAll' | cxTranslate\n    }}</a>\n    <a tabindex=\"0\" class=\"btn-link cx-action-link\" (click)=\"allowAll()\">{{\n      'anonymousConsents.dialog.selectAll' | cxTranslate\n    }}</a>\n  </div>\n  <!-- Modal Body -->\n  <div\n    class=\"cx-dialog-body modal-body\"\n    *ngIf=\"templates$ | async as templates\"\n  >\n    <div *ngIf=\"consents$ | async as consents\">\n      <div\n        class=\"cx-dialog-row col-sm-12 col-md-6\"\n        *ngFor=\"let template of templates\"\n      >\n        <cx-consent-management-form\n          [consentTemplate]=\"template\"\n          [requiredConsents]=\"requiredConsents\"\n          [consent]=\"getCorrespondingConsent(template, consents)\"\n          [isAnonymousConsentsEnabled]=\"true\"\n          [isLevel13]=\"isLevel13\"\n          (consentChanged)=\"onConsentChange($event)\"\n        ></cx-consent-management-form>\n      </div>\n    </div>\n  </div>\n</div>\n"
+                    template: "<div #dialog>\n  <div *ngIf=\"loading$ | async; else dialogBody\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <!-- Modal Header -->\n  <ng-template #dialogBody>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'anonymousConsents.dialog.title' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"closeModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Separator -->\n    <div\n      class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n    ></div>\n    <div class=\"cx-dialog-description\" *ngIf=\"showLegalDescription\">\n      {{ 'anonymousConsents.dialog.legalDescription' | cxTranslate }}\n      <div\n        class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n      ></div>\n    </div>\n    <!-- Actions -->\n    <div class=\"cx-dialog-buttons\">\n      <a tabindex=\"0\" class=\"btn-link cx-action-link\" (click)=\"rejectAll()\">{{\n        'anonymousConsents.dialog.clearAll' | cxTranslate\n      }}</a>\n      <a tabindex=\"0\" class=\"btn-link cx-action-link\" (click)=\"allowAll()\">{{\n        'anonymousConsents.dialog.selectAll' | cxTranslate\n      }}</a>\n    </div>\n    <!-- Modal Body -->\n    <div\n      class=\"cx-dialog-body modal-body\"\n      *ngIf=\"templates$ | async as templates\"\n    >\n      <div *ngIf=\"consents$ | async as consents\">\n        <div\n          class=\"cx-dialog-row col-sm-12 col-md-6\"\n          *ngFor=\"let template of templates\"\n        >\n          <cx-consent-management-form\n            [consentTemplate]=\"template\"\n            [requiredConsents]=\"requiredConsents\"\n            [consent]=\"getCorrespondingConsent(template, consents)\"\n            [isAnonymousConsentsEnabled]=\"true\"\n            [isLevel13]=\"isLevel13\"\n            (consentChanged)=\"onConsentChange($event)\"\n          ></cx-consent-management-form>\n        </div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -845,6 +844,8 @@ if (false) {
     AnonymousConsentDialogComponent.prototype.iconTypes;
     /** @type {?} */
     AnonymousConsentDialogComponent.prototype.requiredConsents;
+    /** @type {?} */
+    AnonymousConsentDialogComponent.prototype.loading$;
     /** @type {?} */
     AnonymousConsentDialogComponent.prototype.templates$;
     /** @type {?} */
@@ -877,7 +878,6 @@ var AnonymousConsentManagementBannerComponent = /** @class */ (function () {
         this.modalService = modalService;
         this.anonymousConsentsService = anonymousConsentsService;
         this.subscriptions = new Subscription();
-        this.anonymousConsentsFeature = ANONYMOUS_CONSENTS_FEATURE;
         this.bannerVisible$ = this.anonymousConsentsService.isBannerVisible();
     }
     /**
@@ -947,8 +947,6 @@ if (false) {
      * @private
      */
     AnonymousConsentManagementBannerComponent.prototype.subscriptions;
-    /** @type {?} */
-    AnonymousConsentManagementBannerComponent.prototype.anonymousConsentsFeature;
     /** @type {?} */
     AnonymousConsentManagementBannerComponent.prototype.bannerVisible$;
     /**
@@ -4078,6 +4076,11 @@ var ViewConfigModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var AutoFocusDirective = /** @class */ (function () {
     function AutoFocusDirective(hostElement) {
         this.hostElement = hostElement;
@@ -4109,6 +4112,27 @@ if (false) {
      */
     AutoFocusDirective.prototype.hostElement;
 }
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var AutoFocusDirectiveModule = /** @class */ (function () {
+    function AutoFocusDirectiveModule() {
+    }
+    AutoFocusDirectiveModule.decorators = [
+        { type: NgModule, args: [{
+                    declarations: [AutoFocusDirective],
+                    exports: [AutoFocusDirective],
+                },] }
+    ];
+    return AutoFocusDirectiveModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -4358,10 +4382,3725 @@ var AnonymousConsentManagementBannerModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * Please don't put that service in public API.
+ *
+ */
+var CmsMappingService = /** @class */ (function () {
+    function CmsMappingService(config, platformId) {
+        this.config = config;
+        this.platformId = platformId;
+    }
+    /**
+     * @param {?} flexType
+     * @return {?}
+     */
+    CmsMappingService.prototype.isComponentEnabled = /**
+     * @param {?} flexType
+     * @return {?}
+     */
+    function (flexType) {
+        /** @type {?} */
+        var isSSR = isPlatformServer(this.platformId);
+        /** @type {?} */
+        var isComponentDisabledInSSR = (this.config.cmsComponents[flexType] || {})
+            .disableSSR;
+        return !(isSSR && isComponentDisabledInSSR);
+    };
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    CmsMappingService.prototype.getRoutesForComponents = /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    function (componentTypes) {
+        var e_1, _a;
+        /** @type {?} */
+        var routes = [];
+        try {
+            for (var componentTypes_1 = __values(componentTypes), componentTypes_1_1 = componentTypes_1.next(); !componentTypes_1_1.done; componentTypes_1_1 = componentTypes_1.next()) {
+                var componentType = componentTypes_1_1.value;
+                if (this.isComponentEnabled(componentType)) {
+                    routes.push.apply(routes, __spread(this.getRoutesForComponent(componentType)));
+                }
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (componentTypes_1_1 && !componentTypes_1_1.done && (_a = componentTypes_1.return)) _a.call(componentTypes_1);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        return routes;
+    };
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    CmsMappingService.prototype.getGuardsForComponents = /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    function (componentTypes) {
+        var e_2, _a;
+        /** @type {?} */
+        var guards = new Set();
+        try {
+            for (var componentTypes_2 = __values(componentTypes), componentTypes_2_1 = componentTypes_2.next(); !componentTypes_2_1.done; componentTypes_2_1 = componentTypes_2.next()) {
+                var componentType = componentTypes_2_1.value;
+                this.getGuardsForComponent(componentType).forEach((/**
+                 * @param {?} guard
+                 * @return {?}
+                 */
+                function (guard) {
+                    return guards.add(guard);
+                }));
+            }
+        }
+        catch (e_2_1) { e_2 = { error: e_2_1 }; }
+        finally {
+            try {
+                if (componentTypes_2_1 && !componentTypes_2_1.done && (_a = componentTypes_2.return)) _a.call(componentTypes_2);
+            }
+            finally { if (e_2) throw e_2.error; }
+        }
+        return Array.from(guards);
+    };
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    CmsMappingService.prototype.getI18nKeysForComponents = /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    function (componentTypes) {
+        var e_3, _a;
+        /** @type {?} */
+        var i18nKeys = new Set();
+        try {
+            for (var componentTypes_3 = __values(componentTypes), componentTypes_3_1 = componentTypes_3.next(); !componentTypes_3_1.done; componentTypes_3_1 = componentTypes_3.next()) {
+                var componentType = componentTypes_3_1.value;
+                if (this.isComponentEnabled(componentType)) {
+                    this.getI18nKeysForComponent(componentType).forEach((/**
+                     * @param {?} key
+                     * @return {?}
+                     */
+                    function (key) {
+                        return i18nKeys.add(key);
+                    }));
+                }
+            }
+        }
+        catch (e_3_1) { e_3 = { error: e_3_1 }; }
+        finally {
+            try {
+                if (componentTypes_3_1 && !componentTypes_3_1.done && (_a = componentTypes_3.return)) _a.call(componentTypes_3);
+            }
+            finally { if (e_3) throw e_3.error; }
+        }
+        return Array.from(i18nKeys);
+    };
+    /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    CmsMappingService.prototype.getRoutesForComponent = /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    function (componentType) {
+        /** @type {?} */
+        var mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.childRoutes) || [];
+    };
+    /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    CmsMappingService.prototype.getGuardsForComponent = /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    function (componentType) {
+        /** @type {?} */
+        var mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.guards) || [];
+    };
+    /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    CmsMappingService.prototype.getI18nKeysForComponent = /**
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    function (componentType) {
+        /** @type {?} */
+        var mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.i18nKeys) || [];
+    };
+    CmsMappingService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    CmsMappingService.ctorParameters = function () { return [
+        { type: CmsConfig },
+        { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
+    ]; };
+    /** @nocollapse */ CmsMappingService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(ɵɵinject(CmsConfig), ɵɵinject(PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
+    return CmsMappingService;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsMappingService.prototype.config;
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsMappingService.prototype.platformId;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Please don't put that service in public API.
+ *
+ */
+var CmsGuardsService = /** @class */ (function () {
+    function CmsGuardsService(cmsMapping, injector) {
+        this.cmsMapping = cmsMapping;
+        this.injector = injector;
+    }
+    /**
+     * @param {?} componentTypes
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    CmsGuardsService.prototype.cmsPageCanActivate = /**
+     * @param {?} componentTypes
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    function (componentTypes, route, state) {
+        var _this = this;
+        /** @type {?} */
+        var guards = this.cmsMapping.getGuardsForComponents(componentTypes);
+        if (guards.length) {
+            /** @type {?} */
+            var canActivateObservables = guards.map((/**
+             * @param {?} guardClass
+             * @return {?}
+             */
+            function (guardClass) {
+                /** @type {?} */
+                var guard = _this.injector.get(guardClass, null);
+                if (isCanActivate(guard)) {
+                    return wrapIntoObservable(guard.canActivate(route, state)).pipe(first());
+                }
+                else {
+                    throw new Error('Invalid CanActivate guard in cmsMapping');
+                }
+            }));
+            return concat.apply(void 0, __spread(canActivateObservables)).pipe(skipWhile((/**
+             * @param {?} canActivate
+             * @return {?}
+             */
+            function (canActivate) { return canActivate === true; })), endWith(true), first());
+        }
+        else {
+            return of(true);
+        }
+    };
+    CmsGuardsService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    CmsGuardsService.ctorParameters = function () { return [
+        { type: CmsMappingService },
+        { type: Injector }
+    ]; };
+    /** @nocollapse */ CmsGuardsService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsGuardsService_Factory() { return new CmsGuardsService(ɵɵinject(CmsMappingService), ɵɵinject(INJECTOR)); }, token: CmsGuardsService, providedIn: "root" });
+    return CmsGuardsService;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsGuardsService.prototype.cmsMapping;
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsGuardsService.prototype.injector;
+}
+/**
+ * @template T
+ * @param {?} value
+ * @return {?}
+ */
+function wrapIntoObservable(value) {
+    if (isObservable(value)) {
+        return value;
+    }
+    if (isPromise(value)) {
+        return from(Promise.resolve(value));
+    }
+    return of(value);
+}
+/**
+ * @param {?} obj
+ * @return {?}
+ */
+function isPromise(obj) {
+    return !!obj && typeof obj.then === 'function';
+}
+/**
+ * @param {?} guard
+ * @return {?}
+ */
+function isCanActivate(guard) {
+    return guard && isFunction(guard.canActivate);
+}
+/**
+ * @template T
+ * @param {?} v
+ * @return {?}
+ */
+function isFunction(v) {
+    return typeof v === 'function';
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Please don't put that service in public API.
+ *
+ */
+var CmsI18nService = /** @class */ (function () {
+    function CmsI18nService(cmsMapping, translation, translationChunk) {
+        this.cmsMapping = cmsMapping;
+        this.translation = translation;
+        this.translationChunk = translationChunk;
+    }
+    /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    CmsI18nService.prototype.loadChunksForComponents = /**
+     * @param {?} componentTypes
+     * @return {?}
+     */
+    function (componentTypes) {
+        var e_1, _a;
+        /** @type {?} */
+        var i18nKeys = this.cmsMapping.getI18nKeysForComponents(componentTypes);
+        /** @type {?} */
+        var i18nChunks = new Set();
+        try {
+            for (var i18nKeys_1 = __values(i18nKeys), i18nKeys_1_1 = i18nKeys_1.next(); !i18nKeys_1_1.done; i18nKeys_1_1 = i18nKeys_1.next()) {
+                var key = i18nKeys_1_1.value;
+                i18nChunks.add(this.translationChunk.getChunkNameForKey(key));
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (i18nKeys_1_1 && !i18nKeys_1_1.done && (_a = i18nKeys_1.return)) _a.call(i18nKeys_1);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        this.translation.loadChunks(Array.from(i18nChunks));
+    };
+    CmsI18nService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    CmsI18nService.ctorParameters = function () { return [
+        { type: CmsMappingService },
+        { type: TranslationService },
+        { type: TranslationChunkService }
+    ]; };
+    /** @nocollapse */ CmsI18nService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsI18nService_Factory() { return new CmsI18nService(ɵɵinject(CmsMappingService), ɵɵinject(TranslationService), ɵɵinject(TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
+    return CmsI18nService;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsI18nService.prototype.cmsMapping;
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsI18nService.prototype.translation;
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsI18nService.prototype.translationChunk;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+var PAGE_LAYOUT_HANDLER = new InjectionToken('PageLayoutHandler');
+/**
+ * @record
+ */
+function PageLayoutHandler() { }
+if (false) {
+    /**
+     * @param {?} slots
+     * @param {?=} pageTemplate
+     * @param {?=} section
+     * @param {?=} breakpoint
+     * @return {?}
+     */
+    PageLayoutHandler.prototype.handle = function (slots, pageTemplate, section, breakpoint) { };
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var PageLayoutService = /** @class */ (function () {
+    function PageLayoutService(cms, config, breakpointService, handlers) {
+        this.cms = cms;
+        this.config = config;
+        this.breakpointService = breakpointService;
+        this.handlers = handlers;
+        // we print warn messages on missing layout configs
+        // only once to not polute the console log
+        this.warnLogMessages = {};
+        this.logSlots = {};
+    }
+    /**
+     * @param {?=} section
+     * @return {?}
+     */
+    PageLayoutService.prototype.getSlots = /**
+     * @param {?=} section
+     * @return {?}
+     */
+    function (section) {
+        var _this = this;
+        return combineLatest([this.page$, this.breakpointService.breakpoint$]).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 2), page = _b[0], breakpoint = _b[1];
+            /** @type {?} */
+            var pageTemplate = page.template;
+            /** @type {?} */
+            var slots = _this.resolveSlots(page, section, breakpoint);
+            return { slots: slots, pageTemplate: pageTemplate, breakpoint: breakpoint };
+        })), switchMap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var e_1, _b;
+            var slots = _a.slots, pageTemplate = _a.pageTemplate, breakpoint = _a.breakpoint;
+            /** @type {?} */
+            var result = of(slots);
+            try {
+                for (var _c = __values(_this.handlers || []), _d = _c.next(); !_d.done; _d = _c.next()) {
+                    var handler = _d.value;
+                    result = handler.handle(result, pageTemplate, section, breakpoint);
+                }
+            }
+            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            finally {
+                try {
+                    if (_d && !_d.done && (_b = _c.return)) _b.call(_c);
+                }
+                finally { if (e_1) throw e_1.error; }
+            }
+            return result;
+        })), distinctUntilChanged((/**
+         * @param {?} a
+         * @param {?} b
+         * @return {?}
+         */
+        function (a, b) {
+            if (a.length !== b.length) {
+                return false;
+            }
+            for (var i = 0; i < a.length; i++) {
+                if (a[i] !== b[i]) {
+                    return false;
+                }
+            }
+            return true;
+        })));
+    };
+    /**
+     * @private
+     * @param {?} page
+     * @param {?} section
+     * @param {?} breakpoint
+     * @return {?}
+     */
+    PageLayoutService.prototype.resolveSlots = /**
+     * @private
+     * @param {?} page
+     * @param {?} section
+     * @param {?} breakpoint
+     * @return {?}
+     */
+    function (page, section, breakpoint) {
+        /** @type {?} */
+        var config = this.getSlotConfig(page.template, 'slots', section, breakpoint);
+        if (config && config.slots) {
+            /** @type {?} */
+            var pageSlots_1 = Object.keys(page.slots);
+            return config.slots.filter((/**
+             * @param {?} slot
+             * @return {?}
+             */
+            function (slot) { return pageSlots_1.includes(slot); }));
+        }
+        else if (!section) {
+            this.logMissingLayoutConfig(page);
+            return Object.keys(page.slots);
+        }
+        else {
+            this.logMissingLayoutConfig(page, section);
+            return [];
+        }
+    };
+    Object.defineProperty(PageLayoutService.prototype, "page$", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.cms.getCurrentPage().pipe(filter((/**
+             * @param {?} page
+             * @return {?}
+             */
+            function (page) { return !!page; })));
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageLayoutService.prototype, "templateName$", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.page$.pipe(filter((/**
+             * @param {?} page
+             * @return {?}
+             */
+            function (page) { return !!page.template; })), map((/**
+             * @param {?} page
+             * @return {?}
+             */
+            function (page) { return page.template; })));
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * load slots from the layout configuration. The breakpoint is used
+     * to load a specific configuration for the given breakpoint. If there's
+     * no configuration available for the given breakpoint the default slot
+     * configuration is returned.
+     */
+    /**
+     * load slots from the layout configuration. The breakpoint is used
+     * to load a specific configuration for the given breakpoint. If there's
+     * no configuration available for the given breakpoint the default slot
+     * configuration is returned.
+     * @protected
+     * @param {?} templateUid
+     * @param {?} configAttribute
+     * @param {?=} section
+     * @param {?=} breakpoint
+     * @return {?}
+     */
+    PageLayoutService.prototype.getSlotConfig = /**
+     * load slots from the layout configuration. The breakpoint is used
+     * to load a specific configuration for the given breakpoint. If there's
+     * no configuration available for the given breakpoint the default slot
+     * configuration is returned.
+     * @protected
+     * @param {?} templateUid
+     * @param {?} configAttribute
+     * @param {?=} section
+     * @param {?=} breakpoint
+     * @return {?}
+     */
+    function (templateUid, configAttribute, section, breakpoint) {
+        if (!this.config.layoutSlots) {
+            return null;
+        }
+        /** @type {?} */
+        var pageTemplateConfig = this.config.layoutSlots[templateUid];
+        if (section) {
+            return this.getSlotConfigForSection(templateUid, configAttribute, section, breakpoint);
+        }
+        if (pageTemplateConfig) {
+            return this.getResponsiveSlotConfig((/** @type {?} */ (pageTemplateConfig)), configAttribute, breakpoint);
+        }
+    };
+    /**
+     * @protected
+     * @param {?} templateUid
+     * @param {?} configAttribute
+     * @param {?=} section
+     * @param {?=} breakpoint
+     * @return {?}
+     */
+    PageLayoutService.prototype.getSlotConfigForSection = /**
+     * @protected
+     * @param {?} templateUid
+     * @param {?} configAttribute
+     * @param {?=} section
+     * @param {?=} breakpoint
+     * @return {?}
+     */
+    function (templateUid, configAttribute, section, breakpoint) {
+        /** @type {?} */
+        var pageTemplateConfig = this.config.layoutSlots[templateUid];
+        if (!pageTemplateConfig) {
+            return null;
+        }
+        // if there's no section config on the page layout
+        // we fall back to the global section config
+        /** @type {?} */
+        var sectionConfig = pageTemplateConfig[section]
+            ? pageTemplateConfig[section]
+            : this.config.layoutSlots[section];
+        if (!sectionConfig) {
+            return null;
+        }
+        /** @type {?} */
+        var responsiveConfig = this.getResponsiveSlotConfig((/** @type {?} */ (sectionConfig)), configAttribute, breakpoint);
+        if (responsiveConfig.hasOwnProperty(configAttribute)) {
+            return responsiveConfig;
+        }
+        else if (pageTemplateConfig[section].hasOwnProperty(configAttribute)) {
+            return pageTemplateConfig[section];
+        }
+        else if (this.config.layoutSlots[section]) {
+            return (/** @type {?} */ (this.config.layoutSlots[section]));
+        }
+    };
+    /**
+     * Returns a list of slots for a breakpoint specific configuratoin
+     * If there's no specific configuration for the breakpoint,
+     * the closest available configuration will be returned.
+     */
+    /**
+     * Returns a list of slots for a breakpoint specific configuratoin
+     * If there's no specific configuration for the breakpoint,
+     * the closest available configuration will be returned.
+     * @protected
+     * @param {?} layoutSlotConfig
+     * @param {?} configAttribute
+     * @param {?=} breakpoint
+     * @return {?}
+     */
+    PageLayoutService.prototype.getResponsiveSlotConfig = /**
+     * Returns a list of slots for a breakpoint specific configuratoin
+     * If there's no specific configuration for the breakpoint,
+     * the closest available configuration will be returned.
+     * @protected
+     * @param {?} layoutSlotConfig
+     * @param {?} configAttribute
+     * @param {?=} breakpoint
+     * @return {?}
+     */
+    function (layoutSlotConfig, configAttribute, breakpoint) {
+        var e_2, _a;
+        /** @type {?} */
+        var slotConfig = (/** @type {?} */ (layoutSlotConfig));
+        // fallback to default slot config
+        if (!breakpoint) {
+            return slotConfig;
+        }
+        // we have a config for the specific breakpoint
+        if (layoutSlotConfig[breakpoint] &&
+            layoutSlotConfig[breakpoint].hasOwnProperty(configAttribute)) {
+            return (/** @type {?} */ (layoutSlotConfig[breakpoint]));
+        }
+        // find closest config
+        /** @type {?} */
+        var all = this.breakpointService.breakpoints;
+        try {
+            for (var _b = __values(all.splice(0, all.indexOf(breakpoint))), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var br = _c.value;
+                if (layoutSlotConfig[br] &&
+                    layoutSlotConfig[br].hasOwnProperty(configAttribute)) {
+                    slotConfig = (/** @type {?} */ (layoutSlotConfig[br]));
+                }
+            }
+        }
+        catch (e_2_1) { e_2 = { error: e_2_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_2) throw e_2.error; }
+        }
+        return slotConfig;
+    };
+    /**
+     * In order to help developers, we print some detailed log information in
+     * case there's no layout configuration available for the given page template
+     * or section. Additionally, the slot positions are printed in the console
+     * in a format that can be copied / paste to the configuration.
+     */
+    /**
+     * In order to help developers, we print some detailed log information in
+     * case there's no layout configuration available for the given page template
+     * or section. Additionally, the slot positions are printed in the console
+     * in a format that can be copied / paste to the configuration.
+     * @private
+     * @param {?} page
+     * @param {?=} section
+     * @return {?}
+     */
+    PageLayoutService.prototype.logMissingLayoutConfig = /**
+     * In order to help developers, we print some detailed log information in
+     * case there's no layout configuration available for the given page template
+     * or section. Additionally, the slot positions are printed in the console
+     * in a format that can be copied / paste to the configuration.
+     * @private
+     * @param {?} page
+     * @param {?=} section
+     * @return {?}
+     */
+    function (page, section) {
+        if (!isDevMode()) {
+            return;
+        }
+        if (!this.logSlots[page.template]) {
+            // the info log is not printed in production
+            // tslint:disable-next-line: no-console
+            console.info("Available CMS page slots: '" + Object.keys(page.slots).join("','") + "'");
+            this.logSlots[page.template] = true;
+        }
+        /** @type {?} */
+        var cacheKey = section || page.template;
+        if (!this.warnLogMessages[cacheKey]) {
+            console.warn("No layout config found for " + cacheKey + ", you can configure a 'LayoutConfig' to control the rendering of page slots.");
+            this.warnLogMessages[cacheKey] = true;
+        }
+    };
+    PageLayoutService.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    PageLayoutService.ctorParameters = function () { return [
+        { type: CmsService },
+        { type: LayoutConfig },
+        { type: BreakpointService },
+        { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [PAGE_LAYOUT_HANDLER,] }] }
+    ]; };
+    return PageLayoutService;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    PageLayoutService.prototype.warnLogMessages;
+    /**
+     * @type {?}
+     * @private
+     */
+    PageLayoutService.prototype.logSlots;
+    /**
+     * @type {?}
+     * @private
+     */
+    PageLayoutService.prototype.cms;
+    /**
+     * @type {?}
+     * @private
+     */
+    PageLayoutService.prototype.config;
+    /**
+     * @type {?}
+     * @private
+     */
+    PageLayoutService.prototype.breakpointService;
+    /**
+     * @type {?}
+     * @private
+     */
+    PageLayoutService.prototype.handlers;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var PageLayoutComponent = /** @class */ (function () {
+    function PageLayoutComponent(el, renderer, pageLayoutService) {
+        var _this = this;
+        this.el = el;
+        this.renderer = renderer;
+        this.pageLayoutService = pageLayoutService;
+        this.section$ = new BehaviorSubject(undefined);
+        this.templateName$ = this.pageLayoutService
+            .templateName$;
+        this.layoutName$ = this.section$.pipe(switchMap((/**
+         * @param {?} section
+         * @return {?}
+         */
+        function (section) { return (section ? of(section) : _this.templateName$); })), tap((/**
+         * @param {?} name
+         * @return {?}
+         */
+        function (name) {
+            _this.styleClass = name;
+        })));
+        this.slots$ = this.section$.pipe(switchMap((/**
+         * @param {?} section
+         * @return {?}
+         */
+        function (section) { return _this.pageLayoutService.getSlots(section); })));
+    }
+    Object.defineProperty(PageLayoutComponent.prototype, "section", {
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this.section$.next(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageLayoutComponent.prototype, "styleClass", {
+        set: /**
+         * @param {?} cls
+         * @return {?}
+         */
+        function (cls) {
+            if (this.currentClass) {
+                this.renderer.removeClass(this.el.nativeElement, this.currentClass);
+            }
+            this.renderer.addClass(this.el.nativeElement, cls);
+            this.currentClass = cls;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    PageLayoutComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-page-layout',
+                    template: "<ng-template\n  [cxOutlet]=\"layoutName$ | async\"\n  [cxOutletContext]=\"{\n    templateName$: templateName$,\n    slots$: slots$,\n    section$: section$\n  }\"\n>\n  <ng-content></ng-content>\n\n  <cx-page-slot\n    *ngFor=\"let slot of slots$ | async\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-template>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    /** @nocollapse */
+    PageLayoutComponent.ctorParameters = function () { return [
+        { type: ElementRef },
+        { type: Renderer2 },
+        { type: PageLayoutService }
+    ]; };
+    PageLayoutComponent.propDecorators = {
+        section: [{ type: Input }]
+    };
+    return PageLayoutComponent;
+}());
+if (false) {
+    /** @type {?} */
+    PageLayoutComponent.prototype.section$;
+    /** @type {?} */
+    PageLayoutComponent.prototype.templateName$;
+    /** @type {?} */
+    PageLayoutComponent.prototype.layoutName$;
+    /** @type {?} */
+    PageLayoutComponent.prototype.slots$;
+    /**
+     * @type {?}
+     * @private
+     */
+    PageLayoutComponent.prototype.currentClass;
+    /**
+     * @type {?}
+     * @private
+     */
+    PageLayoutComponent.prototype.el;
+    /**
+     * @type {?}
+     * @private
+     */
+    PageLayoutComponent.prototype.renderer;
+    /**
+     * @type {?}
+     * @private
+     */
+    PageLayoutComponent.prototype.pageLayoutService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Please don't put that service in public API.
+ *
+ */
+var CmsRoutesService = /** @class */ (function () {
+    function CmsRoutesService(router, cmsMapping) {
+        this.router = router;
+        this.cmsMapping = cmsMapping;
+    }
+    /**
+     * @param {?} url
+     * @return {?}
+     */
+    CmsRoutesService.prototype.cmsRouteExist = /**
+     * @param {?} url
+     * @return {?}
+     */
+    function (url) {
+        /** @type {?} */
+        var isCmsDrivenRoute = url.startsWith('/');
+        if (!isCmsDrivenRoute) {
+            return false;
+        }
+        /** @type {?} */
+        var routePath = url.substr(1);
+        return (isCmsDrivenRoute &&
+            !!this.router.config.find((/**
+             * @param {?} route
+             * @return {?}
+             */
+            function (route) {
+                return route.data && route.data.cxCmsRouteContext && route.path === routePath;
+            })));
+    };
+    /**
+     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
+     *
+     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
+     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
+     *
+     * @param pageContext
+     * @param currentUrl
+     */
+    /**
+     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
+     *
+     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
+     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
+     *
+     * @param {?} pageContext
+     * @param {?} componentTypes
+     * @param {?} currentUrl
+     * @param {?} currentPageLabel
+     * @return {?}
+     */
+    CmsRoutesService.prototype.handleCmsRoutesInGuard = /**
+     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
+     *
+     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
+     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
+     *
+     * @param {?} pageContext
+     * @param {?} componentTypes
+     * @param {?} currentUrl
+     * @param {?} currentPageLabel
+     * @return {?}
+     */
+    function (pageContext, componentTypes, currentUrl, currentPageLabel) {
+        /** @type {?} */
+        var componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
+        if (componentRoutes.length) {
+            if (this.updateRouting(pageContext, currentPageLabel, componentRoutes)) {
+                this.router.navigateByUrl(currentUrl);
+                return false;
+            }
+        }
+        return true;
+    };
+    /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} pageLabel
+     * @param {?} routes
+     * @return {?}
+     */
+    CmsRoutesService.prototype.updateRouting = /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} pageLabel
+     * @param {?} routes
+     * @return {?}
+     */
+    function (pageContext, pageLabel, routes) {
+        if (pageContext.type === PageType.CONTENT_PAGE &&
+            pageLabel.startsWith('/') &&
+            pageLabel.length > 1) {
+            /** @type {?} */
+            var newRoute = {
+                path: pageLabel.substr(1),
+                component: PageLayoutComponent,
+                children: routes,
+                data: {
+                    cxCmsRouteContext: {
+                        type: pageContext.type,
+                        id: pageLabel,
+                    },
+                },
+            };
+            this.router.resetConfig(__spread([newRoute], this.router.config));
+            return true;
+        }
+        return false;
+    };
+    CmsRoutesService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    CmsRoutesService.ctorParameters = function () { return [
+        { type: Router },
+        { type: CmsMappingService }
+    ]; };
+    /** @nocollapse */ CmsRoutesService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(ɵɵinject(Router), ɵɵinject(CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
+    return CmsRoutesService;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsRoutesService.prototype.router;
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsRoutesService.prototype.cmsMapping;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CmsPageGuard = /** @class */ (function () {
+    function CmsPageGuard(routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService, protectedRoutesGuard) {
+        this.routingService = routingService;
+        this.cmsService = cmsService;
+        this.cmsRoutes = cmsRoutes;
+        this.cmsI18n = cmsI18n;
+        this.cmsGuards = cmsGuards;
+        this.semanticPathService = semanticPathService;
+        this.protectedRoutesGuard = protectedRoutesGuard;
+    }
+    /**
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    CmsPageGuard.prototype.canActivate = /**
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    function (route, state) {
+        var _this = this;
+        /**
+         * TODO(issue:4646) Expect that `ProtectedRoutesGuard` dependency is required (remove `if` logic)
+         */
+        return this.protectedRoutesGuard
+            ? this.protectedRoutesGuard
+                .canActivate(route)
+                .pipe(switchMap((/**
+             * @param {?} result
+             * @return {?}
+             */
+            function (result) {
+                return result ? _this.getCmsPage(route, state) : of(result);
+            })))
+            : this.getCmsPage(route, state);
+    };
+    /**
+     * @private
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    CmsPageGuard.prototype.getCmsPage = /**
+     * @private
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    function (route, state) {
+        var _this = this;
+        return this.routingService.getNextPageContext().pipe(switchMap((/**
+         * @param {?} pageContext
+         * @return {?}
+         */
+        function (pageContext) {
+            return _this.cmsService.getPage(pageContext, true).pipe(first(), withLatestFrom(of(pageContext)));
+        })), switchMap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 2), pageData = _b[0], pageContext = _b[1];
+            return pageData
+                ? _this.resolveCmsPageLogic(pageContext, pageData, route, state)
+                : _this.handleNotFoundPage(pageContext, route, state);
+        })));
+    };
+    /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} pageData
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    CmsPageGuard.prototype.resolveCmsPageLogic = /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} pageData
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    function (pageContext, pageData, route, state) {
+        var _this = this;
+        return this.cmsService.getPageComponentTypes(pageContext).pipe(take(1), switchMap((/**
+         * @param {?} componentTypes
+         * @return {?}
+         */
+        function (componentTypes) {
+            return _this.cmsGuards
+                .cmsPageCanActivate(componentTypes, route, state)
+                .pipe(withLatestFrom(of(componentTypes)));
+        })), tap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
+            if (canActivate === true) {
+                _this.cmsI18n.loadChunksForComponents(componentTypes);
+            }
+        })), map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
+            /** @type {?} */
+            var pageLabel = pageData.label || pageContext.id;
+            if (canActivate === true &&
+                !route.data.cxCmsRouteContext &&
+                !_this.cmsRoutes.cmsRouteExist(pageLabel)) {
+                return _this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url, pageLabel);
+            }
+            return canActivate;
+        })));
+    };
+    /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    CmsPageGuard.prototype.handleNotFoundPage = /**
+     * @private
+     * @param {?} pageContext
+     * @param {?} route
+     * @param {?} state
+     * @return {?}
+     */
+    function (pageContext, route, state) {
+        var _this = this;
+        /** @type {?} */
+        var notFoundCmsPageContext = {
+            type: PageType.CONTENT_PAGE,
+            id: this.semanticPathService.get('notFound'),
+        };
+        return this.cmsService.getPage(notFoundCmsPageContext).pipe(switchMap((/**
+         * @param {?} notFoundPage
+         * @return {?}
+         */
+        function (notFoundPage) {
+            if (notFoundPage) {
+                return _this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(tap((/**
+                 * @param {?} notFoundIndex
+                 * @return {?}
+                 */
+                function (notFoundIndex) {
+                    _this.cmsService.setPageFailIndex(pageContext, notFoundIndex);
+                })), switchMap((/**
+                 * @param {?} notFoundIndex
+                 * @return {?}
+                 */
+                function (notFoundIndex) {
+                    return _this.cmsService.getPageIndex(pageContext).pipe(
+                    // we have to wait for page index update
+                    filter((/**
+                     * @param {?} index
+                     * @return {?}
+                     */
+                    function (index) { return index === notFoundIndex; })));
+                })), switchMap((/**
+                 * @return {?}
+                 */
+                function () {
+                    return _this.resolveCmsPageLogic(pageContext, notFoundPage, route, state);
+                })));
+            }
+            return of(false);
+        })));
+    };
+    CmsPageGuard.guardName = 'CmsPageGuard';
+    CmsPageGuard.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    CmsPageGuard.ctorParameters = function () { return [
+        { type: RoutingService },
+        { type: CmsService },
+        { type: CmsRoutesService },
+        { type: CmsI18nService },
+        { type: CmsGuardsService },
+        { type: SemanticPathService },
+        { type: ProtectedRoutesGuard }
+    ]; };
+    /** @nocollapse */ CmsPageGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(ɵɵinject(RoutingService), ɵɵinject(CmsService), ɵɵinject(CmsRoutesService), ɵɵinject(CmsI18nService), ɵɵinject(CmsGuardsService), ɵɵinject(SemanticPathService), ɵɵinject(ProtectedRoutesGuard)); }, token: CmsPageGuard, providedIn: "root" });
+    return CmsPageGuard;
+}());
+if (false) {
+    /** @type {?} */
+    CmsPageGuard.guardName;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CmsPageGuard.prototype.routingService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CmsPageGuard.prototype.cmsService;
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsPageGuard.prototype.cmsRoutes;
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsPageGuard.prototype.cmsI18n;
+    /**
+     * @type {?}
+     * @private
+     */
+    CmsPageGuard.prototype.cmsGuards;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CmsPageGuard.prototype.semanticPathService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CmsPageGuard.prototype.protectedRoutesGuard;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @enum {string} */
+var OutletPosition = {
+    REPLACE: 'replace',
+    BEFORE: 'before',
+    AFTER: 'after',
+};
+/** @type {?} */
+var AVOID_STACKED_OUTLETS = false;
+/** @type {?} */
+var USE_STACKED_OUTLETS = true;
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @template T
+ */
+var OutletService = /** @class */ (function () {
+    function OutletService() {
+        this.templatesRefs = new Map();
+        this.templatesRefsBefore = new Map();
+        this.templatesRefsAfter = new Map();
+    }
+    /**
+     * @param templateOrFactory A `ComponentFactory` that inserts a component dynamically.
+     */
+    /**
+     * @param {?} outlet
+     * @param {?} templateOrFactory A `ComponentFactory` that inserts a component dynamically.
+     * @param {?=} position
+     * @return {?}
+     */
+    OutletService.prototype.add = /**
+     * @param {?} outlet
+     * @param {?} templateOrFactory A `ComponentFactory` that inserts a component dynamically.
+     * @param {?=} position
+     * @return {?}
+     */
+    function (outlet, templateOrFactory, position) {
+        if (position === void 0) { position = OutletPosition.REPLACE; }
+        if (position === OutletPosition.BEFORE) {
+            this.store(this.templatesRefsBefore, outlet, templateOrFactory);
+        }
+        if (position === OutletPosition.REPLACE) {
+            this.store(this.templatesRefs, outlet, templateOrFactory);
+        }
+        if (position === OutletPosition.AFTER) {
+            this.store(this.templatesRefsAfter, outlet, templateOrFactory);
+        }
+    };
+    /**
+     *
+     * Returns a single object or multiple objects for the given outlet reference,
+     * depending on the `stacked` argument.
+     *
+     * @param outlet The outlet reference
+     * @param position the outlet position, `OutletPosition.before`, `OutletPosition.AFTER` or `OutletPosition.REPLACE`
+     * @param stacked Indicates whether an array of outlet components is returned
+     */
+    /**
+     *
+     * Returns a single object or multiple objects for the given outlet reference,
+     * depending on the `stacked` argument.
+     *
+     * @param {?} outlet The outlet reference
+     * @param {?=} position the outlet position, `OutletPosition.before`, `OutletPosition.AFTER` or `OutletPosition.REPLACE`
+     * @param {?=} stacked Indicates whether an array of outlet components is returned
+     * @return {?}
+     */
+    OutletService.prototype.get = /**
+     *
+     * Returns a single object or multiple objects for the given outlet reference,
+     * depending on the `stacked` argument.
+     *
+     * @param {?} outlet The outlet reference
+     * @param {?=} position the outlet position, `OutletPosition.before`, `OutletPosition.AFTER` or `OutletPosition.REPLACE`
+     * @param {?=} stacked Indicates whether an array of outlet components is returned
+     * @return {?}
+     */
+    function (outlet, position, stacked) {
+        if (position === void 0) { position = OutletPosition.REPLACE; }
+        if (stacked === void 0) { stacked = AVOID_STACKED_OUTLETS; }
+        /** @type {?} */
+        var templateRef;
+        switch (position) {
+            case OutletPosition.BEFORE:
+                templateRef = this.templatesRefsBefore.get(outlet);
+                break;
+            case OutletPosition.AFTER:
+                templateRef = this.templatesRefsAfter.get(outlet);
+                break;
+            default:
+                templateRef = this.templatesRefs.get(outlet);
+        }
+        if (templateRef && !stacked) {
+            return templateRef[0];
+        }
+        return templateRef;
+    };
+    /**
+     * @private
+     * @param {?} store
+     * @param {?} outlet
+     * @param {?} value
+     * @return {?}
+     */
+    OutletService.prototype.store = /**
+     * @private
+     * @param {?} store
+     * @param {?} outlet
+     * @param {?} value
+     * @return {?}
+     */
+    function (store, outlet, value) {
+        /** @type {?} */
+        var existing = store.get(outlet) || [];
+        /** @type {?} */
+        var newValue = existing.concat([value]);
+        store.set(outlet, newValue);
+    };
+    OutletService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */ OutletService.ngInjectableDef = ɵɵdefineInjectable({ factory: function OutletService_Factory() { return new OutletService(); }, token: OutletService, providedIn: "root" });
+    return OutletService;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    OutletService.prototype.templatesRefs;
+    /**
+     * @type {?}
+     * @private
+     */
+    OutletService.prototype.templatesRefsBefore;
+    /**
+     * @type {?}
+     * @private
+     */
+    OutletService.prototype.templatesRefsAfter;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var OutletRefDirective = /** @class */ (function () {
+    function OutletRefDirective(tpl, outletService) {
+        this.tpl = tpl;
+        this.outletService = outletService;
+    }
+    /**
+     * @return {?}
+     */
+    OutletRefDirective.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.outletService.add(this.cxOutletRef, this.tpl, this.cxOutletPos);
+    };
+    OutletRefDirective.decorators = [
+        { type: Directive, args: [{
+                    selector: '[cxOutletRef]',
+                },] }
+    ];
+    /** @nocollapse */
+    OutletRefDirective.ctorParameters = function () { return [
+        { type: TemplateRef },
+        { type: OutletService }
+    ]; };
+    OutletRefDirective.propDecorators = {
+        cxOutletRef: [{ type: Input }],
+        cxOutletPos: [{ type: Input }]
+    };
+    return OutletRefDirective;
+}());
+if (false) {
+    /** @type {?} */
+    OutletRefDirective.prototype.cxOutletRef;
+    /** @type {?} */
+    OutletRefDirective.prototype.cxOutletPos;
+    /**
+     * @type {?}
+     * @private
+     */
+    OutletRefDirective.prototype.tpl;
+    /**
+     * @type {?}
+     * @private
+     */
+    OutletRefDirective.prototype.outletService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var OutletRefModule = /** @class */ (function () {
+    function OutletRefModule() {
+    }
+    OutletRefModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule],
+                    declarations: [OutletRefDirective],
+                    exports: [OutletRefDirective],
+                },] }
+    ];
+    return OutletRefModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var OutletDirective = /** @class */ (function () {
+    function OutletDirective(vcr, templateRef, outletService) {
+        this.vcr = vcr;
+        this.templateRef = templateRef;
+        this.outletService = outletService;
+    }
+    Object.defineProperty(OutletDirective.prototype, "cxOutletContext", {
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._context = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    OutletDirective.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.renderOutlet(OutletPosition.BEFORE);
+        this.renderOutlet(OutletPosition.REPLACE);
+        this.renderOutlet(OutletPosition.AFTER);
+    };
+    /**
+     * @private
+     * @param {?} position
+     * @return {?}
+     */
+    OutletDirective.prototype.renderOutlet = /**
+     * @private
+     * @param {?} position
+     * @return {?}
+     */
+    function (position) {
+        var _this = this;
+        /** @type {?} */
+        var templates = (/** @type {?} */ ((this.outletService.get(this.cxOutlet, position, USE_STACKED_OUTLETS))));
+        if (!templates && position === OutletPosition.REPLACE) {
+            templates = [this.templateRef];
+        }
+        // Just in case someone extended the `OutletService` and
+        // returns a singular object.
+        if (!Array.isArray(templates)) {
+            templates = [templates];
+        }
+        templates.forEach((/**
+         * @param {?} obj
+         * @return {?}
+         */
+        function (obj) {
+            _this.create(obj);
+        }));
+    };
+    /**
+     * @private
+     * @param {?} tmplOrFactory
+     * @return {?}
+     */
+    OutletDirective.prototype.create = /**
+     * @private
+     * @param {?} tmplOrFactory
+     * @return {?}
+     */
+    function (tmplOrFactory) {
+        if (tmplOrFactory instanceof ComponentFactory) {
+            this.vcr.createComponent(tmplOrFactory);
+        }
+        else if (tmplOrFactory instanceof TemplateRef) {
+            this.vcr.createEmbeddedView((/** @type {?} */ (tmplOrFactory)), {
+                $implicit: this._context,
+            });
+        }
+    };
+    OutletDirective.decorators = [
+        { type: Directive, args: [{
+                    selector: '[cxOutlet]',
+                },] }
+    ];
+    /** @nocollapse */
+    OutletDirective.ctorParameters = function () { return [
+        { type: ViewContainerRef },
+        { type: TemplateRef },
+        { type: OutletService }
+    ]; };
+    OutletDirective.propDecorators = {
+        cxOutlet: [{ type: Input }],
+        cxOutletContext: [{ type: Input }]
+    };
+    return OutletDirective;
+}());
+if (false) {
+    /** @type {?} */
+    OutletDirective.prototype.cxOutlet;
+    /**
+     * @type {?}
+     * @private
+     */
+    OutletDirective.prototype._context;
+    /**
+     * @type {?}
+     * @private
+     */
+    OutletDirective.prototype.vcr;
+    /**
+     * @type {?}
+     * @private
+     */
+    OutletDirective.prototype.templateRef;
+    /**
+     * @type {?}
+     * @private
+     */
+    OutletDirective.prototype.outletService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var OutletModule = /** @class */ (function () {
+    function OutletModule() {
+    }
+    OutletModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule],
+                    declarations: [OutletDirective],
+                    providers: [OutletService],
+                    exports: [OutletDirective],
+                },] }
+    ];
+    return OutletModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ComponentMapperService = /** @class */ (function () {
+    function ComponentMapperService(componentFactoryResolver, config, document, platform) {
+        this.componentFactoryResolver = componentFactoryResolver;
+        this.config = config;
+        this.document = document;
+        this.platform = platform;
+        this.missingComponents = [];
+        this.loadedWebComponents = {};
+    }
+    /**
+     * @desc
+     * returns a web component for the CMS typecode.
+     *
+     * The mapping of CMS components to web componetns requires a mapping.
+     * This is configurable when the module is loaded.
+     *
+     * For example:
+     *
+     *  {
+     *      'CMSLinkComponent': 'LinkComponent',
+     *      'SimpleResponsiveBannerComponent': 'SimpleResponsiveBannerComponent',
+     *      [etc.]
+     *  }
+     *
+     * The type codes are dynamic since they depend on the implementation.
+     * Customer will add, extend or ingore standard components.
+     *
+     * @param typeCode the component type
+     */
+    /**
+     * @desc
+     * returns a web component for the CMS typecode.
+     *
+     * The mapping of CMS components to web componetns requires a mapping.
+     * This is configurable when the module is loaded.
+     *
+     * For example:
+     *
+     *  {
+     *      'CMSLinkComponent': 'LinkComponent',
+     *      'SimpleResponsiveBannerComponent': 'SimpleResponsiveBannerComponent',
+     *      [etc.]
+     *  }
+     *
+     * The type codes are dynamic since they depend on the implementation.
+     * Customer will add, extend or ingore standard components.
+     *
+     * @protected
+     * @param {?} typeCode the component type
+     * @return {?}
+     */
+    ComponentMapperService.prototype.getComponent = /**
+     * @desc
+     * returns a web component for the CMS typecode.
+     *
+     * The mapping of CMS components to web componetns requires a mapping.
+     * This is configurable when the module is loaded.
+     *
+     * For example:
+     *
+     *  {
+     *      'CMSLinkComponent': 'LinkComponent',
+     *      'SimpleResponsiveBannerComponent': 'SimpleResponsiveBannerComponent',
+     *      [etc.]
+     *  }
+     *
+     * The type codes are dynamic since they depend on the implementation.
+     * Customer will add, extend or ingore standard components.
+     *
+     * @protected
+     * @param {?} typeCode the component type
+     * @return {?}
+     */
+    function (typeCode) {
+        /** @type {?} */
+        var componentConfig = this.config.cmsComponents[typeCode];
+        if (!componentConfig) {
+            if (!this.missingComponents.includes(typeCode)) {
+                this.missingComponents.push(typeCode);
+                console.warn("No component implementation found for the CMS component type '" + typeCode + "'.\n", "Make sure you implement a component and register it in the mapper.");
+            }
+        }
+        return componentConfig ? componentConfig.component : null;
+    };
+    /**
+     * @param {?} typeCode
+     * @return {?}
+     */
+    ComponentMapperService.prototype.getComponentFactoryByCode = /**
+     * @param {?} typeCode
+     * @return {?}
+     */
+    function (typeCode) {
+        /** @type {?} */
+        var component = this.getComponent(typeCode);
+        if (!component) {
+            return null;
+        }
+        /** @type {?} */
+        var factory = this.componentFactoryResolver.resolveComponentFactory(component);
+        if (!factory) {
+            console.warn("No component factory found for the CMS component type '" + typeCode + "'.\n", "Make sure you add a component to the 'entryComponents' array in the NgModule.");
+            return null;
+        }
+        return factory;
+    };
+    /**
+     * @param {?} typeCode
+     * @return {?}
+     */
+    ComponentMapperService.prototype.isWebComponent = /**
+     * @param {?} typeCode
+     * @return {?}
+     */
+    function (typeCode) {
+        /** @type {?} */
+        var component = this.getComponent(typeCode);
+        return typeof component === 'string' && (component || '').includes('#');
+    };
+    /**
+     * @param {?} componentType
+     * @param {?} renderer
+     * @return {?}
+     */
+    ComponentMapperService.prototype.initWebComponent = /**
+     * @param {?} componentType
+     * @param {?} renderer
+     * @return {?}
+     */
+    function (componentType, renderer) {
+        var _this = this;
+        return new Promise((/**
+         * @param {?} resolve
+         * @return {?}
+         */
+        function (resolve) {
+            var _a = __read(_this.getComponent(componentType).split('#'), 2), path = _a[0], selector = _a[1];
+            /** @type {?} */
+            var script = _this.loadedWebComponents[path];
+            if (!script) {
+                if (path) {
+                    script = renderer.createElement('script');
+                    _this.loadedWebComponents[path] = script;
+                    script.setAttribute('src', path);
+                    renderer.appendChild(_this.document.body, script);
+                    if (isPlatformBrowser(_this.platform)) {
+                        script.onload = (/**
+                         * @return {?}
+                         */
+                        function () {
+                            script.onload = null;
+                        });
+                    }
+                }
+                else {
+                    script = {};
+                }
+            }
+            if (script.onload) {
+                // If script is still loading (has onload callback defined)
+                // add new callback and chain it with the existing one.
+                // Needed to support loading multiple components from one script
+                /** @type {?} */
+                var chainedOnload_1 = script.onload;
+                script.onload = (/**
+                 * @return {?}
+                 */
+                function () {
+                    chainedOnload_1();
+                    resolve(selector);
+                });
+            }
+            else {
+                resolve(selector);
+            }
+        }));
+    };
+    ComponentMapperService.decorators = [
+        { type: Injectable, args: [{ providedIn: 'root' },] }
+    ];
+    /** @nocollapse */
+    ComponentMapperService.ctorParameters = function () { return [
+        { type: ComponentFactoryResolver },
+        { type: CmsConfig },
+        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
+        { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
+    ]; };
+    /** @nocollapse */ ComponentMapperService.ngInjectableDef = ɵɵdefineInjectable({ factory: function ComponentMapperService_Factory() { return new ComponentMapperService(ɵɵinject(ComponentFactoryResolver), ɵɵinject(CmsConfig), ɵɵinject(DOCUMENT), ɵɵinject(PLATFORM_ID)); }, token: ComponentMapperService, providedIn: "root" });
+    return ComponentMapperService;
+}());
+if (false) {
+    /** @type {?} */
+    ComponentMapperService.prototype.missingComponents;
+    /**
+     * @type {?}
+     * @private
+     */
+    ComponentMapperService.prototype.loadedWebComponents;
+    /**
+     * @type {?}
+     * @protected
+     */
+    ComponentMapperService.prototype.componentFactoryResolver;
+    /**
+     * @type {?}
+     * @protected
+     */
+    ComponentMapperService.prototype.config;
+    /**
+     * @type {?}
+     * @protected
+     */
+    ComponentMapperService.prototype.document;
+    /**
+     * @type {?}
+     * @protected
+     */
+    ComponentMapperService.prototype.platform;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CxApiService = /** @class */ (function () {
+    function CxApiService(auth, cart, cartData, checkout, checkoutDelivery, checkoutPayment, cms, pageMeta, featureConfig, globalMessage, translation, kyma, occEndpoints, product, productSearch, productReview, productReference, searchbox, routing, currency, language, baseSite, user, userAddress, userConsent, userOrder, userPayment, userNotificationPreferenceService, userInterestsService, ngZone) {
+        this.auth = auth;
+        this.cart = cart;
+        this.cartData = cartData;
+        this.checkout = checkout;
+        this.checkoutDelivery = checkoutDelivery;
+        this.checkoutPayment = checkoutPayment;
+        this.cms = cms;
+        this.pageMeta = pageMeta;
+        this.featureConfig = featureConfig;
+        this.globalMessage = globalMessage;
+        this.translation = translation;
+        this.kyma = kyma;
+        this.occEndpoints = occEndpoints;
+        this.product = product;
+        this.productSearch = productSearch;
+        this.productReview = productReview;
+        this.productReference = productReference;
+        this.searchbox = searchbox;
+        this.routing = routing;
+        this.currency = currency;
+        this.language = language;
+        this.baseSite = baseSite;
+        this.user = user;
+        this.userAddress = userAddress;
+        this.userConsent = userConsent;
+        this.userOrder = userOrder;
+        this.userPayment = userPayment;
+        this.userNotificationPreferenceService = userNotificationPreferenceService;
+        this.userInterestsService = userInterestsService;
+        this.ngZone = ngZone;
+    }
+    CxApiService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    CxApiService.ctorParameters = function () { return [
+        { type: AuthService, decorators: [{ type: Optional }] },
+        { type: CartService, decorators: [{ type: Optional }] },
+        { type: CartDataService, decorators: [{ type: Optional }] },
+        { type: CheckoutService, decorators: [{ type: Optional }] },
+        { type: CheckoutDeliveryService, decorators: [{ type: Optional }] },
+        { type: CheckoutPaymentService, decorators: [{ type: Optional }] },
+        { type: CmsService, decorators: [{ type: Optional }] },
+        { type: PageMetaService, decorators: [{ type: Optional }] },
+        { type: FeatureConfigService, decorators: [{ type: Optional }] },
+        { type: GlobalMessageService, decorators: [{ type: Optional }] },
+        { type: TranslationService, decorators: [{ type: Optional }] },
+        { type: KymaService, decorators: [{ type: Optional }] },
+        { type: OccEndpointsService, decorators: [{ type: Optional }] },
+        { type: ProductService, decorators: [{ type: Optional }] },
+        { type: ProductSearchService, decorators: [{ type: Optional }] },
+        { type: ProductReviewService, decorators: [{ type: Optional }] },
+        { type: ProductReferenceService, decorators: [{ type: Optional }] },
+        { type: SearchboxService, decorators: [{ type: Optional }] },
+        { type: RoutingService, decorators: [{ type: Optional }] },
+        { type: CurrencyService, decorators: [{ type: Optional }] },
+        { type: LanguageService, decorators: [{ type: Optional }] },
+        { type: BaseSiteService, decorators: [{ type: Optional }] },
+        { type: UserService, decorators: [{ type: Optional }] },
+        { type: UserAddressService, decorators: [{ type: Optional }] },
+        { type: UserConsentService, decorators: [{ type: Optional }] },
+        { type: UserOrderService, decorators: [{ type: Optional }] },
+        { type: UserPaymentService, decorators: [{ type: Optional }] },
+        { type: UserNotificationPreferenceService, decorators: [{ type: Optional }] },
+        { type: UserInterestsService, decorators: [{ type: Optional }] },
+        { type: NgZone }
+    ]; };
+    /** @nocollapse */ CxApiService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CxApiService_Factory() { return new CxApiService(ɵɵinject(AuthService, 8), ɵɵinject(CartService, 8), ɵɵinject(CartDataService, 8), ɵɵinject(CheckoutService, 8), ɵɵinject(CheckoutDeliveryService, 8), ɵɵinject(CheckoutPaymentService, 8), ɵɵinject(CmsService, 8), ɵɵinject(PageMetaService, 8), ɵɵinject(FeatureConfigService, 8), ɵɵinject(GlobalMessageService, 8), ɵɵinject(TranslationService, 8), ɵɵinject(KymaService, 8), ɵɵinject(OccEndpointsService, 8), ɵɵinject(ProductService, 8), ɵɵinject(ProductSearchService, 8), ɵɵinject(ProductReviewService, 8), ɵɵinject(ProductReferenceService, 8), ɵɵinject(SearchboxService, 8), ɵɵinject(RoutingService, 8), ɵɵinject(CurrencyService, 8), ɵɵinject(LanguageService, 8), ɵɵinject(BaseSiteService, 8), ɵɵinject(UserService, 8), ɵɵinject(UserAddressService, 8), ɵɵinject(UserConsentService, 8), ɵɵinject(UserOrderService, 8), ɵɵinject(UserPaymentService, 8), ɵɵinject(UserNotificationPreferenceService, 8), ɵɵinject(UserInterestsService, 8), ɵɵinject(NgZone)); }, token: CxApiService, providedIn: "root" });
+    return CxApiService;
+}());
+if (false) {
+    /** @type {?} */
+    CxApiService.prototype.cmsComponentData;
+    /** @type {?} */
+    CxApiService.prototype.auth;
+    /** @type {?} */
+    CxApiService.prototype.cart;
+    /** @type {?} */
+    CxApiService.prototype.cartData;
+    /** @type {?} */
+    CxApiService.prototype.checkout;
+    /** @type {?} */
+    CxApiService.prototype.checkoutDelivery;
+    /** @type {?} */
+    CxApiService.prototype.checkoutPayment;
+    /** @type {?} */
+    CxApiService.prototype.cms;
+    /** @type {?} */
+    CxApiService.prototype.pageMeta;
+    /** @type {?} */
+    CxApiService.prototype.featureConfig;
+    /** @type {?} */
+    CxApiService.prototype.globalMessage;
+    /** @type {?} */
+    CxApiService.prototype.translation;
+    /** @type {?} */
+    CxApiService.prototype.kyma;
+    /** @type {?} */
+    CxApiService.prototype.occEndpoints;
+    /** @type {?} */
+    CxApiService.prototype.product;
+    /** @type {?} */
+    CxApiService.prototype.productSearch;
+    /** @type {?} */
+    CxApiService.prototype.productReview;
+    /** @type {?} */
+    CxApiService.prototype.productReference;
+    /** @type {?} */
+    CxApiService.prototype.searchbox;
+    /** @type {?} */
+    CxApiService.prototype.routing;
+    /** @type {?} */
+    CxApiService.prototype.currency;
+    /** @type {?} */
+    CxApiService.prototype.language;
+    /** @type {?} */
+    CxApiService.prototype.baseSite;
+    /** @type {?} */
+    CxApiService.prototype.user;
+    /** @type {?} */
+    CxApiService.prototype.userAddress;
+    /** @type {?} */
+    CxApiService.prototype.userConsent;
+    /** @type {?} */
+    CxApiService.prototype.userOrder;
+    /** @type {?} */
+    CxApiService.prototype.userPayment;
+    /** @type {?} */
+    CxApiService.prototype.userNotificationPreferenceService;
+    /** @type {?} */
+    CxApiService.prototype.userInterestsService;
+    /** @type {?} */
+    CxApiService.prototype.ngZone;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ComponentWrapperDirective = /** @class */ (function () {
+    function ComponentWrapperDirective(vcr, componentMapper, injector, cmsService, dynamicAttributeService, renderer, config, platformId) {
+        this.vcr = vcr;
+        this.componentMapper = componentMapper;
+        this.injector = injector;
+        this.cmsService = cmsService;
+        this.dynamicAttributeService = dynamicAttributeService;
+        this.renderer = renderer;
+        this.config = config;
+        this.platformId = platformId;
+    }
+    /**
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        if (!this.shouldRenderComponent()) {
+            return;
+        }
+        if (this.componentMapper.isWebComponent(this.cxComponentWrapper.flexType)) {
+            this.launchWebComponent();
+        }
+        else {
+            this.launchComponent();
+        }
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.shouldRenderComponent = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var isSSR = isPlatformServer(this.platformId);
+        /** @type {?} */
+        var isComponentDisabledInSSR = (this.config.cmsComponents[this.cxComponentWrapper.flexType] || {}).disableSSR;
+        return !(isSSR && isComponentDisabledInSSR);
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.launchComponent = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var factory = this.componentMapper.getComponentFactoryByCode(this.cxComponentWrapper.flexType);
+        if (factory) {
+            this.cmpRef = this.vcr.createComponent(factory, undefined, this.getInjectorForComponent());
+            if (this.cmsService.isLaunchInSmartEdit()) {
+                this.addSmartEditContract(this.cmpRef.location.nativeElement);
+            }
+        }
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.launchWebComponent = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var elementName, cmsComponentData;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.componentMapper.initWebComponent(this.cxComponentWrapper.flexType, this.renderer)];
+                    case 1:
+                        elementName = _a.sent();
+                        if (elementName) {
+                            this.webElement = this.renderer.createElement(elementName);
+                            cmsComponentData = this.getCmsDataForComponent();
+                            this.webElement.cxApi = __assign({}, this.injector.get(CxApiService), { CmsComponentData: cmsComponentData, // TODO: remove / deprecated since 1.0.x
+                                cmsComponentData: cmsComponentData });
+                            this.renderer.appendChild(this.vcr.element.nativeElement.parentElement, this.webElement);
+                            if (this.cmsService.isLaunchInSmartEdit()) {
+                                this.addSmartEditContract(this.webElement);
+                            }
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    /**
+     * @private
+     * @template T
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.getCmsDataForComponent = /**
+     * @private
+     * @template T
+     * @return {?}
+     */
+    function () {
+        return {
+            uid: this.cxComponentWrapper.uid,
+            data$: this.cmsService.getComponentData(this.cxComponentWrapper.uid),
+        };
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.getInjectorForComponent = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var configProviders = (this.config.cmsComponents[this.cxComponentWrapper.flexType] || {})
+            .providers || [];
+        return Injector.create({
+            providers: __spread([
+                {
+                    provide: CmsComponentData,
+                    useValue: this.getCmsDataForComponent(),
+                }
+            ], configProviders),
+            parent: this.injector,
+        });
+    };
+    /**
+     * @private
+     * @param {?} element
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.addSmartEditContract = /**
+     * @private
+     * @param {?} element
+     * @return {?}
+     */
+    function (element) {
+        this.dynamicAttributeService.addDynamicAttributes(this.cxComponentWrapper.properties, element, this.renderer);
+    };
+    /**
+     * @return {?}
+     */
+    ComponentWrapperDirective.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        if (this.cmpRef) {
+            this.cmpRef.destroy();
+        }
+        if (this.webElement) {
+            this.webElement.remove();
+        }
+    };
+    ComponentWrapperDirective.decorators = [
+        { type: Directive, args: [{
+                    selector: '[cxComponentWrapper]',
+                },] }
+    ];
+    /** @nocollapse */
+    ComponentWrapperDirective.ctorParameters = function () { return [
+        { type: ViewContainerRef },
+        { type: ComponentMapperService },
+        { type: Injector },
+        { type: CmsService },
+        { type: DynamicAttributeService },
+        { type: Renderer2 },
+        { type: CmsConfig },
+        { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
+    ]; };
+    ComponentWrapperDirective.propDecorators = {
+        cxComponentWrapper: [{ type: Input }]
+    };
+    return ComponentWrapperDirective;
+}());
+if (false) {
+    /** @type {?} */
+    ComponentWrapperDirective.prototype.cxComponentWrapper;
+    /** @type {?} */
+    ComponentWrapperDirective.prototype.cmpRef;
+    /** @type {?} */
+    ComponentWrapperDirective.prototype.webElement;
+    /**
+     * @type {?}
+     * @private
+     */
+    ComponentWrapperDirective.prototype.vcr;
+    /**
+     * @type {?}
+     * @private
+     */
+    ComponentWrapperDirective.prototype.componentMapper;
+    /**
+     * @type {?}
+     * @private
+     */
+    ComponentWrapperDirective.prototype.injector;
+    /**
+     * @type {?}
+     * @private
+     */
+    ComponentWrapperDirective.prototype.cmsService;
+    /**
+     * @type {?}
+     * @private
+     */
+    ComponentWrapperDirective.prototype.dynamicAttributeService;
+    /**
+     * @type {?}
+     * @private
+     */
+    ComponentWrapperDirective.prototype.renderer;
+    /**
+     * @type {?}
+     * @private
+     */
+    ComponentWrapperDirective.prototype.config;
+    /**
+     * @type {?}
+     * @private
+     */
+    ComponentWrapperDirective.prototype.platformId;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var PageComponentModule = /** @class */ (function () {
+    function PageComponentModule() {
+    }
+    PageComponentModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule],
+                    providers: [],
+                    declarations: [ComponentWrapperDirective],
+                    exports: [ComponentWrapperDirective],
+                },] }
+    ];
+    return PageComponentModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var PageSlotComponent = /** @class */ (function () {
+    function PageSlotComponent(cmsService, dynamicAttributeService, renderer, hostElement) {
+        var _this = this;
+        this.cmsService = cmsService;
+        this.dynamicAttributeService = dynamicAttributeService;
+        this.renderer = renderer;
+        this.hostElement = hostElement;
+        this.position$ = new BehaviorSubject(undefined);
+        /**
+         * observable with `ContentSlotData` for the current position
+         */
+        this.slot$ = this.position$.pipe(switchMap((/**
+         * @param {?} position
+         * @return {?}
+         */
+        function (position) { return _this.cmsService.getContentSlot(position); })), tap((/**
+         * @param {?} slot
+         * @return {?}
+         */
+        function (slot) { return _this.addSmartEditSlotClass(slot); })));
+        /**
+         * observable with components (`ContentSlotComponentData[]`)
+         * for the current slot
+         */
+        this.components$ = this.slot$.pipe(map((/**
+         * @param {?} slot
+         * @return {?}
+         */
+        function (slot) { return (slot && slot.components ? slot.components : []); })), distinctUntilChanged((/**
+         * @param {?} a
+         * @param {?} b
+         * @return {?}
+         */
+        function (a, b) {
+            return a.length === b.length && !a.find((/**
+             * @param {?} el
+             * @param {?} index
+             * @return {?}
+             */
+            function (el, index) { return el.uid !== b[index].uid; }));
+        })), tap((/**
+         * @param {?} components
+         * @return {?}
+         */
+        function (components) { return _this.addComponentClass(components); })));
+    }
+    Object.defineProperty(PageSlotComponent.prototype, "position", {
+        set: /**
+         * @param {?} position
+         * @return {?}
+         */
+        function (position) {
+            this.position$.next(position);
+            // add the position name as a css class so that
+            // layout can be applied to it, using the position based class.
+            this.renderer.addClass(this.hostElement.nativeElement, position);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    // add a class to indicate whether the class is empty or not
+    // add a class to indicate whether the class is empty or not
+    /**
+     * @private
+     * @param {?} components
+     * @return {?}
+     */
+    PageSlotComponent.prototype.addComponentClass = 
+    // add a class to indicate whether the class is empty or not
+    /**
+     * @private
+     * @param {?} components
+     * @return {?}
+     */
+    function (components) {
+        if (components && components.length > 0) {
+            this.renderer.addClass(this.hostElement.nativeElement, 'has-components');
+        }
+    };
+    /**
+     * @private
+     * @param {?} slot
+     * @return {?}
+     */
+    PageSlotComponent.prototype.addSmartEditSlotClass = /**
+     * @private
+     * @param {?} slot
+     * @return {?}
+     */
+    function (slot) {
+        if (slot && this.cmsService.isLaunchInSmartEdit()) {
+            this.addSmartEditContract(slot);
+        }
+    };
+    /**
+     * @private
+     * @param {?} slot
+     * @return {?}
+     */
+    PageSlotComponent.prototype.addSmartEditContract = /**
+     * @private
+     * @param {?} slot
+     * @return {?}
+     */
+    function (slot) {
+        this.dynamicAttributeService.addDynamicAttributes(slot.properties, this.hostElement.nativeElement, this.renderer);
+    };
+    PageSlotComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-page-slot',
+                    template: "<ng-template\n  [cxOutlet]=\"position$ | async\"\n  [cxOutletContext]=\"{ components$: components$ }\"\n>\n  <ng-container *ngFor=\"let component of components$ | async\">\n    <ng-template\n      [cxOutlet]=\"component.flexType\"\n      [cxOutletContext]=\"{ component: component }\"\n    >\n      <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n    </ng-template>\n  </ng-container>\n</ng-template>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    /** @nocollapse */
+    PageSlotComponent.ctorParameters = function () { return [
+        { type: CmsService },
+        { type: DynamicAttributeService },
+        { type: Renderer2 },
+        { type: ElementRef }
+    ]; };
+    PageSlotComponent.propDecorators = {
+        position: [{ type: Input }]
+    };
+    return PageSlotComponent;
+}());
+if (false) {
+    /** @type {?} */
+    PageSlotComponent.prototype.position$;
+    /**
+     * observable with `ContentSlotData` for the current position
+     * @type {?}
+     */
+    PageSlotComponent.prototype.slot$;
+    /**
+     * observable with components (`ContentSlotComponentData[]`)
+     * for the current slot
+     * @type {?}
+     */
+    PageSlotComponent.prototype.components$;
+    /**
+     * @type {?}
+     * @protected
+     */
+    PageSlotComponent.prototype.cmsService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    PageSlotComponent.prototype.dynamicAttributeService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    PageSlotComponent.prototype.renderer;
+    /**
+     * @type {?}
+     * @protected
+     */
+    PageSlotComponent.prototype.hostElement;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var PageSlotModule = /** @class */ (function () {
+    function PageSlotModule() {
+    }
+    PageSlotModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule, OutletModule, PageComponentModule],
+                    providers: [],
+                    declarations: [PageSlotComponent],
+                    exports: [PageSlotComponent],
+                },] }
+    ];
+    return PageSlotModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var PageLayoutModule = /** @class */ (function () {
+    function PageLayoutModule() {
+    }
+    PageLayoutModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule, OutletModule, PageSlotModule],
+                    declarations: [PageLayoutComponent],
+                    providers: [PageLayoutService],
+                    exports: [PageLayoutComponent],
+                },] }
+    ];
+    return PageLayoutModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @abstract
+ */
+var  /**
+ * @abstract
+ */
+PWAModuleConfig = /** @class */ (function () {
+    function PWAModuleConfig() {
+    }
+    return PWAModuleConfig;
+}());
+if (false) {
+    /** @type {?} */
+    PWAModuleConfig.prototype.pwa;
+}
+/** @type {?} */
+var defaultPWAModuleConfig = {
+    pwa: {
+        enabled: false,
+        addToHomeScreen: false,
+    },
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var AddToHomeScreenService = /** @class */ (function () {
+    function AddToHomeScreenService(config, globalMessageService, winRef) {
+        this.config = config;
+        this.globalMessageService = globalMessageService;
+        this.winRef = winRef;
+        this.canPrompt = new BehaviorSubject(false);
+        this.canPrompt$ = this.canPrompt.asObservable();
+        if (this.config.pwa.addToHomeScreen) {
+            this.init();
+        }
+    }
+    /**
+     * @return {?}
+     */
+    AddToHomeScreenService.prototype.init = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        if (this.winRef.nativeWindow) {
+            this.winRef.nativeWindow.addEventListener('beforeinstallprompt', (/**
+             * @param {?} event
+             * @return {?}
+             */
+            function (event) {
+                event.preventDefault();
+                _this.deferredEvent = event;
+                _this.enableAddToHomeScreen();
+            }));
+            this.winRef.nativeWindow.addEventListener('appinstalled', (/**
+             * @return {?}
+             */
+            function () {
+                _this.globalMessageService.add({ key: 'pwa.addedToHomeScreen' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
+                _this.disableAddToHomeScreen();
+                _this.deferredEvent = null;
+            }));
+        }
+    };
+    /**
+     * @return {?}
+     */
+    AddToHomeScreenService.prototype.enableAddToHomeScreen = /**
+     * @return {?}
+     */
+    function () {
+        this.canPrompt.next(true);
+    };
+    /**
+     * @return {?}
+     */
+    AddToHomeScreenService.prototype.disableAddToHomeScreen = /**
+     * @return {?}
+     */
+    function () {
+        this.canPrompt.next(false);
+    };
+    /**
+     * @return {?}
+     */
+    AddToHomeScreenService.prototype.firePrompt = /**
+     * @return {?}
+     */
+    function () {
+        if (this.deferredEvent) {
+            this.deferredEvent.prompt();
+        }
+    };
+    AddToHomeScreenService.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    AddToHomeScreenService.ctorParameters = function () { return [
+        { type: PWAModuleConfig },
+        { type: GlobalMessageService },
+        { type: WindowRef }
+    ]; };
+    return AddToHomeScreenService;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    AddToHomeScreenService.prototype.deferredEvent;
+    /**
+     * @type {?}
+     * @private
+     */
+    AddToHomeScreenService.prototype.canPrompt;
+    /** @type {?} */
+    AddToHomeScreenService.prototype.canPrompt$;
+    /**
+     * @type {?}
+     * @private
+     */
+    AddToHomeScreenService.prototype.config;
+    /**
+     * @type {?}
+     * @private
+     */
+    AddToHomeScreenService.prototype.globalMessageService;
+    /**
+     * @type {?}
+     * @private
+     */
+    AddToHomeScreenService.prototype.winRef;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @abstract
+ */
+var  /**
+ * @abstract
+ */
+AddToHomeScreenComponent = /** @class */ (function () {
+    function AddToHomeScreenComponent(addToHomeScreenService) {
+        this.addToHomeScreenService = addToHomeScreenService;
+    }
+    /**
+     * @return {?}
+     */
+    AddToHomeScreenComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.canPrompt$ = this.addToHomeScreenService.canPrompt$;
+    };
+    /**
+     * @return {?}
+     */
+    AddToHomeScreenComponent.prototype.prompt = /**
+     * @return {?}
+     */
+    function () {
+        this.addToHomeScreenService.firePrompt();
+    };
+    return AddToHomeScreenComponent;
+}());
+if (false) {
+    /** @type {?} */
+    AddToHomeScreenComponent.prototype.canPrompt$;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AddToHomeScreenComponent.prototype.addToHomeScreenService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var AddToHomeScreenBannerComponent = /** @class */ (function (_super) {
+    __extends(AddToHomeScreenBannerComponent, _super);
+    function AddToHomeScreenBannerComponent(addToHomeScreenService) {
+        var _this = _super.call(this, addToHomeScreenService) || this;
+        _this.addToHomeScreenService = addToHomeScreenService;
+        return _this;
+    }
+    AddToHomeScreenBannerComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-add-to-home-screen-banner',
+                    template: "<div *ngIf=\"canPrompt$ | async\">\n  <div class=\"cx-add-to-home-screen-banner\">\n    <div class=\"cx-add-to-home-screen-banner-inner\">\n      <p>\n        {{ 'pwa.addToHomeScreenDescription' | cxTranslate }}\n      </p>\n      <ul>\n        <li>{{ 'pwa.noInstallationNeeded' | cxTranslate }}</li>\n        <li>{{ 'pwa.fastAccessToApplication' | cxTranslate }}</li>\n      </ul>\n      <button (click)=\"prompt()\" class=\"btn btn-primary\">\n        {{ 'pwa.addToHomeScreen' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    AddToHomeScreenBannerComponent.ctorParameters = function () { return [
+        { type: AddToHomeScreenService }
+    ]; };
+    return AddToHomeScreenBannerComponent;
+}(AddToHomeScreenComponent));
+if (false) {
+    /**
+     * @type {?}
+     * @protected
+     */
+    AddToHomeScreenBannerComponent.prototype.addToHomeScreenService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var AddToHomeScreenBtnComponent = /** @class */ (function (_super) {
+    __extends(AddToHomeScreenBtnComponent, _super);
+    function AddToHomeScreenBtnComponent(addToHomeScreenService) {
+        var _this = _super.call(this, addToHomeScreenService) || this;
+        _this.addToHomeScreenService = addToHomeScreenService;
+        return _this;
+    }
+    AddToHomeScreenBtnComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-add-to-home-screen-btn',
+                    template: "<span (click)=\"prompt()\">\n  <ng-content *ngIf=\"canPrompt$ | async\"></ng-content>\n</span>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    AddToHomeScreenBtnComponent.ctorParameters = function () { return [
+        { type: AddToHomeScreenService }
+    ]; };
+    return AddToHomeScreenBtnComponent;
+}(AddToHomeScreenComponent));
+if (false) {
+    /**
+     * @type {?}
+     * @protected
+     */
+    AddToHomeScreenBtnComponent.prototype.addToHomeScreenService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @param {?} pwaConfig
+ * @return {?}
+ */
+function pwaConfigurationFactory(pwaConfig) {
+    return { enabled: (!isDevMode() && pwaConfig.pwa.enabled) || false };
+}
+/**
+ * @param {?} addToHomeScreenService
+ * @return {?}
+ */
+function pwaFactory(addToHomeScreenService) {
+    /** @type {?} */
+    var result = (/**
+     * @return {?}
+     */
+    function () { return addToHomeScreenService; });
+    return result;
+}
+var PwaModule = /** @class */ (function () {
+    function PwaModule() {
+    }
+    PwaModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        ConfigModule.withConfig(defaultPWAModuleConfig),
+                        ServiceWorkerModule.register('/ngsw-worker.js'),
+                        I18nModule,
+                    ],
+                    providers: [
+                        { provide: PWAModuleConfig, useExisting: Config },
+                        {
+                            provide: SwRegistrationOptions,
+                            useFactory: pwaConfigurationFactory,
+                            deps: [Config],
+                        },
+                        {
+                            provide: APP_INITIALIZER,
+                            useFactory: pwaFactory,
+                            deps: [AddToHomeScreenService],
+                            multi: true,
+                        },
+                        AddToHomeScreenService,
+                    ],
+                    declarations: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
+                    exports: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
+                },] }
+    ];
+    return PwaModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+var cmsRoute = {
+    path: '**',
+    canActivate: [CmsPageGuard],
+    component: PageLayoutComponent,
+};
+/**
+ * @param {?} injector
+ * @return {?}
+ */
+function addCmsRoute(injector) {
+    /** @type {?} */
+    var result = (/**
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var router = injector.get(Router);
+        router.config.push(cmsRoute);
+    });
+    return result;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ɵ0 = addCmsRoute;
+var CmsRouteModule = /** @class */ (function () {
+    function CmsRouteModule() {
+    }
+    CmsRouteModule.decorators = [
+        { type: NgModule, args: [{
+                    providers: [
+                        {
+                            provide: APP_INITIALIZER,
+                            multi: true,
+                            deps: [Injector],
+                            useFactory: ɵ0,
+                        },
+                    ],
+                },] }
+    ];
+    return CmsRouteModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var SeoMetaService = /** @class */ (function () {
+    function SeoMetaService(ngTitle, ngMeta, pageMetaService) {
+        this.ngTitle = ngTitle;
+        this.ngMeta = ngMeta;
+        this.pageMetaService = pageMetaService;
+    }
+    /**
+     * @return {?}
+     */
+    SeoMetaService.prototype.init = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.pageMetaService
+            .getMeta()
+            .pipe(filter(Boolean))
+            .subscribe((/**
+         * @param {?} meta
+         * @return {?}
+         */
+        function (meta) { return (_this.meta = meta); }));
+    };
+    Object.defineProperty(SeoMetaService.prototype, "meta", {
+        set: /**
+         * @protected
+         * @param {?} meta
+         * @return {?}
+         */
+        function (meta) {
+            this.title = meta.title;
+            this.description = meta.description;
+            this.image = meta.image;
+            this.robots = meta.robots || [PageRobotsMeta.INDEX, PageRobotsMeta.FOLLOW];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SeoMetaService.prototype, "title", {
+        set: /**
+         * @protected
+         * @param {?} title
+         * @return {?}
+         */
+        function (title) {
+            this.ngTitle.setTitle(title || '');
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SeoMetaService.prototype, "description", {
+        set: /**
+         * @protected
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this.addTag({ name: 'description', content: value });
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SeoMetaService.prototype, "image", {
+        set: /**
+         * @protected
+         * @param {?} imageUrl
+         * @return {?}
+         */
+        function (imageUrl) {
+            if (imageUrl) {
+                this.addTag({ name: 'og:image', content: imageUrl });
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SeoMetaService.prototype, "robots", {
+        set: /**
+         * @protected
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            if (value) {
+                this.addTag({ name: 'robots', content: value.join(', ') });
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @protected
+     * @param {?} meta
+     * @return {?}
+     */
+    SeoMetaService.prototype.addTag = /**
+     * @protected
+     * @param {?} meta
+     * @return {?}
+     */
+    function (meta) {
+        if (meta.content) {
+            this.ngMeta.updateTag(meta);
+        }
+    };
+    SeoMetaService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    SeoMetaService.ctorParameters = function () { return [
+        { type: Title },
+        { type: Meta },
+        { type: PageMetaService }
+    ]; };
+    /** @nocollapse */ SeoMetaService.ngInjectableDef = ɵɵdefineInjectable({ factory: function SeoMetaService_Factory() { return new SeoMetaService(ɵɵinject(Title), ɵɵinject(Meta), ɵɵinject(PageMetaService)); }, token: SeoMetaService, providedIn: "root" });
+    return SeoMetaService;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @protected
+     */
+    SeoMetaService.prototype.ngTitle;
+    /**
+     * @type {?}
+     * @protected
+     */
+    SeoMetaService.prototype.ngMeta;
+    /**
+     * @type {?}
+     * @protected
+     */
+    SeoMetaService.prototype.pageMetaService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+var htmlLangProvider = {
+    provide: APP_INITIALIZER,
+    multi: true,
+    useFactory: setHtmlLangAttribute,
+    deps: [WindowRef, LanguageService],
+};
+/**
+ * Sets active language in <html lang="">
+ * @param {?} winRef
+ * @param {?} languageService
+ * @return {?}
+ */
+function setHtmlLangAttribute(winRef, languageService) {
+    /** @type {?} */
+    var result = (/**
+     * @return {?}
+     */
+    function () {
+        languageService.getActive().subscribe((/**
+         * @param {?} lang
+         * @return {?}
+         */
+        function (lang) {
+            winRef.document.documentElement.lang = lang;
+        }));
+    });
+    return result;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var JsonLdScriptFactory = /** @class */ (function () {
+    function JsonLdScriptFactory(platformId, winRef, rendererFactory) {
+        this.platformId = platformId;
+        this.winRef = winRef;
+        this.rendererFactory = rendererFactory;
+    }
+    /**
+     * @param {?} schema
+     * @return {?}
+     */
+    JsonLdScriptFactory.prototype.build = /**
+     * @param {?} schema
+     * @return {?}
+     */
+    function (schema) {
+        if (schema && this.isJsonLdRequired()) {
+            this.createJsonLdScriptElement().innerHTML = JSON.stringify(schema);
+        }
+    };
+    /**
+     * Only return schema data in case of SSR or development mode,
+     * to not waste memory unnecessary.
+     */
+    /**
+     * Only return schema data in case of SSR or development mode,
+     * to not waste memory unnecessary.
+     * @return {?}
+     */
+    JsonLdScriptFactory.prototype.isJsonLdRequired = /**
+     * Only return schema data in case of SSR or development mode,
+     * to not waste memory unnecessary.
+     * @return {?}
+     */
+    function () {
+        return !isPlatformBrowser(this.platformId) || isDevMode();
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    JsonLdScriptFactory.prototype.createJsonLdScriptElement = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var id = 'json-ld';
+        /** @type {?} */
+        var scriptElement = (/** @type {?} */ ((this.winRef.document.getElementById(id))));
+        if (!scriptElement) {
+            /** @type {?} */
+            var renderer = this.rendererFactory.createRenderer(null, null);
+            /** @type {?} */
+            var script = renderer.createElement('script');
+            script.id = id;
+            script.type = 'application/ld+json';
+            renderer.appendChild(this.winRef.document.body, script);
+            scriptElement = script;
+        }
+        return scriptElement;
+    };
+    JsonLdScriptFactory.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    JsonLdScriptFactory.ctorParameters = function () { return [
+        { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+        { type: WindowRef },
+        { type: RendererFactory2 }
+    ]; };
+    /** @nocollapse */ JsonLdScriptFactory.ngInjectableDef = ɵɵdefineInjectable({ factory: function JsonLdScriptFactory_Factory() { return new JsonLdScriptFactory(ɵɵinject(PLATFORM_ID), ɵɵinject(WindowRef), ɵɵinject(RendererFactory2)); }, token: JsonLdScriptFactory, providedIn: "root" });
+    return JsonLdScriptFactory;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @protected
+     */
+    JsonLdScriptFactory.prototype.platformId;
+    /**
+     * @type {?}
+     * @protected
+     */
+    JsonLdScriptFactory.prototype.winRef;
+    /**
+     * @type {?}
+     * @protected
+     */
+    JsonLdScriptFactory.prototype.rendererFactory;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Low level directive that adds a json-ld script tag to the component.
+ * This code bypasses the strict XSS security, as otherwise we're not able
+ * to append a script tag with JS inside.
+ */
+var JsonLdDirective = /** @class */ (function () {
+    function JsonLdDirective(jsonLdScriptFactory, sanitizer) {
+        this.jsonLdScriptFactory = jsonLdScriptFactory;
+        this.sanitizer = sanitizer;
+    }
+    Object.defineProperty(JsonLdDirective.prototype, "cxJsonLd", {
+        set: /**
+         * @param {?} schema
+         * @return {?}
+         */
+        function (schema) {
+            this.writeJsonLd(schema);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @private
+     * @param {?} schema
+     * @return {?}
+     */
+    JsonLdDirective.prototype.writeJsonLd = /**
+     * @private
+     * @param {?} schema
+     * @return {?}
+     */
+    function (schema) {
+        if (schema && this.jsonLdScriptFactory.isJsonLdRequired()) {
+            /** @type {?} */
+            var html = "<script type=\"application/ld+json\">" + JSON.stringify(schema) + "</script>";
+            this.jsonLD = this.sanitizer.bypassSecurityTrustHtml(html);
+        }
+    };
+    JsonLdDirective.decorators = [
+        { type: Directive, args: [{
+                    selector: '[cxJsonLd]',
+                },] }
+    ];
+    /** @nocollapse */
+    JsonLdDirective.ctorParameters = function () { return [
+        { type: JsonLdScriptFactory },
+        { type: DomSanitizer }
+    ]; };
+    JsonLdDirective.propDecorators = {
+        cxJsonLd: [{ type: Input }],
+        jsonLD: [{ type: HostBinding, args: ['innerHTML',] }]
+    };
+    return JsonLdDirective;
+}());
+if (false) {
+    /** @type {?} */
+    JsonLdDirective.prototype.jsonLD;
+    /**
+     * @type {?}
+     * @protected
+     */
+    JsonLdDirective.prototype.jsonLdScriptFactory;
+    /**
+     * @type {?}
+     * @protected
+     */
+    JsonLdDirective.prototype.sanitizer;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Injection token to extend schema builders for adding structural data (json-ld).
+ *
+ * Some builders (i.e. `JSONLD_PRODUCT_BUILDER`) might have additional
+ * lowever level builder to further extend the schema.
+ * @type {?}
+ */
+var SCHEMA_BUILDER = new InjectionToken('SchemaBuilderToken');
+/**
+ * Injection token to add specific json-ld builders for product related schema's.
+ * See see https://schema.org/product for more information.
+ * @type {?}
+ */
+var JSONLD_PRODUCT_BUILDER = new InjectionToken('JsonLdProductBuilderToken');
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var StructuredDataFactory = /** @class */ (function () {
+    function StructuredDataFactory(scriptBuilder, builders) {
+        this.scriptBuilder = scriptBuilder;
+        this.builders = builders;
+    }
+    /**
+     * @return {?}
+     */
+    StructuredDataFactory.prototype.build = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.collectSchemas().subscribe((/**
+         * @param {?} schema
+         * @return {?}
+         */
+        function (schema) {
+            _this.scriptBuilder.build(schema);
+        }));
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    StructuredDataFactory.prototype.collectSchemas = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        if (!this.scriptBuilder.isJsonLdRequired() || !this.builders) {
+            return of();
+        }
+        return combineLatest(this.builders.map((/**
+         * @param {?} builder
+         * @return {?}
+         */
+        function (builder) { return builder.build(); }))).pipe();
+    };
+    StructuredDataFactory.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    StructuredDataFactory.ctorParameters = function () { return [
+        { type: JsonLdScriptFactory },
+        { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [SCHEMA_BUILDER,] }] }
+    ]; };
+    /** @nocollapse */ StructuredDataFactory.ngInjectableDef = ɵɵdefineInjectable({ factory: function StructuredDataFactory_Factory() { return new StructuredDataFactory(ɵɵinject(JsonLdScriptFactory), ɵɵinject(SCHEMA_BUILDER, 8)); }, token: StructuredDataFactory, providedIn: "root" });
+    return StructuredDataFactory;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    StructuredDataFactory.prototype.scriptBuilder;
+    /**
+     * @type {?}
+     * @private
+     */
+    StructuredDataFactory.prototype.builders;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Factory to build the structure data
+ * without any interaction with the UI.
+ * @param {?} injector
+ * @return {?}
+ */
+function getStructuredDataFactory(injector) {
+    /** @type {?} */
+    var result = (/**
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var factory = injector.get(StructuredDataFactory);
+        factory.build();
+    });
+    return result;
+}
+var StructuredDataModule = /** @class */ (function () {
+    function StructuredDataModule() {
+    }
+    StructuredDataModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule],
+                    declarations: [JsonLdDirective],
+                    exports: [JsonLdDirective],
+                    providers: [
+                        {
+                            provide: APP_INITIALIZER,
+                            useFactory: getStructuredDataFactory,
+                            deps: [Injector],
+                            multi: true,
+                        },
+                    ],
+                },] }
+    ];
+    return StructuredDataModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @param {?} injector
+ * @return {?}
+ */
+function initSeoService(injector) {
+    /** @type {?} */
+    var result = (/**
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var service = injector.get(SeoMetaService);
+        service.init();
+    });
+    return result;
+}
+var SeoModule = /** @class */ (function () {
+    function SeoModule() {
+    }
+    SeoModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [StructuredDataModule],
+                    providers: [
+                        {
+                            provide: APP_INITIALIZER,
+                            useFactory: initSeoService,
+                            deps: [Injector],
+                            multi: true,
+                        },
+                        htmlLangProvider,
+                    ],
+                },] }
+    ];
+    return SeoModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var BreadcrumbSchemaBuilder = /** @class */ (function () {
+    function BreadcrumbSchemaBuilder(pageMetaService) {
+        this.pageMetaService = pageMetaService;
+    }
+    /**
+     * @return {?}
+     */
+    BreadcrumbSchemaBuilder.prototype.build = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        return this.pageMetaService
+            .getMeta()
+            .pipe(map((/**
+         * @param {?} pageMeta
+         * @return {?}
+         */
+        function (pageMeta) { return _this.collect(pageMeta); })));
+    };
+    /**
+     * @protected
+     * @param {?} pageMeta
+     * @return {?}
+     */
+    BreadcrumbSchemaBuilder.prototype.collect = /**
+     * @protected
+     * @param {?} pageMeta
+     * @return {?}
+     */
+    function (pageMeta) {
+        if (!pageMeta.breadcrumbs) {
+            return;
+        }
+        /** @type {?} */
+        var crumbs = pageMeta.breadcrumbs.map((/**
+         * @param {?} crumb
+         * @param {?} index
+         * @return {?}
+         */
+        function (crumb, index) {
+            return {
+                '@type': 'ListItem',
+                position: index + 1,
+                item: {
+                    '@id': crumb.link,
+                    name: crumb.label,
+                },
+            };
+        }));
+        if (pageMeta.title) {
+            crumbs.push({
+                '@type': 'ListItem',
+                position: crumbs.length + 1,
+                item: {
+                    '@id': pageMeta.title,
+                    name: pageMeta.title,
+                },
+            });
+        }
+        return {
+            '@context': 'http://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: crumbs,
+        };
+    };
+    BreadcrumbSchemaBuilder.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    BreadcrumbSchemaBuilder.ctorParameters = function () { return [
+        { type: PageMetaService }
+    ]; };
+    /** @nocollapse */ BreadcrumbSchemaBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function BreadcrumbSchemaBuilder_Factory() { return new BreadcrumbSchemaBuilder(ɵɵinject(PageMetaService)); }, token: BreadcrumbSchemaBuilder, providedIn: "root" });
+    return BreadcrumbSchemaBuilder;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @protected
+     */
+    BreadcrumbSchemaBuilder.prototype.pageMetaService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Builds the basic structured data for the product, see https://schema.org/product.
+ * This builder includes data for sku number, name, description, brand and main image.
+ */
+var JsonLdBaseProductBuilder = /** @class */ (function () {
+    function JsonLdBaseProductBuilder() {
+    }
+    /**
+     * @param {?} product
+     * @return {?}
+     */
+    JsonLdBaseProductBuilder.prototype.build = /**
+     * @param {?} product
+     * @return {?}
+     */
+    function (product) {
+        return of(__assign({}, this.getProductBase(product), this.getProductBrand(product), this.getProductImage(product)));
+    };
+    /**
+     * @private
+     * @param {?} product
+     * @return {?}
+     */
+    JsonLdBaseProductBuilder.prototype.getProductBase = /**
+     * @private
+     * @param {?} product
+     * @return {?}
+     */
+    function (product) {
+        /** @type {?} */
+        var result = { sku: product.code };
+        if (product.name) {
+            result.name = product.name;
+        }
+        if (product.summary) {
+            result.description = product.summary;
+        }
+        return result;
+    };
+    /**
+     * @private
+     * @param {?} product
+     * @return {?}
+     */
+    JsonLdBaseProductBuilder.prototype.getProductImage = /**
+     * @private
+     * @param {?} product
+     * @return {?}
+     */
+    function (product) {
+        return product.images &&
+            product.images.PRIMARY &&
+            product.images.PRIMARY['zoom'] &&
+            product.images.PRIMARY['zoom'].url
+            ? {
+                image: product.images.PRIMARY['zoom'].url,
+            }
+            : {};
+    };
+    /**
+     * @private
+     * @param {?} product
+     * @return {?}
+     */
+    JsonLdBaseProductBuilder.prototype.getProductBrand = /**
+     * @private
+     * @param {?} product
+     * @return {?}
+     */
+    function (product) {
+        return product['manufacturer']
+            ? {
+                brand: product['manufacturer'],
+            }
+            : null;
+    };
+    JsonLdBaseProductBuilder.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */ JsonLdBaseProductBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function JsonLdBaseProductBuilder_Factory() { return new JsonLdBaseProductBuilder(); }, token: JsonLdBaseProductBuilder, providedIn: "root" });
+    return JsonLdBaseProductBuilder;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Builds the structured data for the product offer, see https://schema.org/offers.
+ * The data includes the price, currency and availability level.
+ */
+var JsonLdProductOfferBuilder = /** @class */ (function () {
+    function JsonLdProductOfferBuilder() {
+    }
+    /**
+     * @param {?} product
+     * @return {?}
+     */
+    JsonLdProductOfferBuilder.prototype.build = /**
+     * @param {?} product
+     * @return {?}
+     */
+    function (product) {
+        /** @type {?} */
+        var schema = { '@type': 'Offer' };
+        if (product.price) {
+            if (product.price.value) {
+                schema.price = product.price.value;
+            }
+            if (product.price.currencyIso) {
+                schema.priceCurrency = product.price.currencyIso;
+            }
+        }
+        if (product.stock && product.stock.stockLevelStatus) {
+            schema.availability =
+                product.stock.stockLevelStatus === 'inStock' ? 'InStock' : 'OutOfStock';
+        }
+        return of({
+            offers: schema,
+        });
+    };
+    JsonLdProductOfferBuilder.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */ JsonLdProductOfferBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function JsonLdProductOfferBuilder_Factory() { return new JsonLdProductOfferBuilder(); }, token: JsonLdProductOfferBuilder, providedIn: "root" });
+    return JsonLdProductOfferBuilder;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Builds the structured data for the product reviews, see https://schema.org/Review.
+ * The data includes the aggregated product rating and the individual reviews.
+ */
+var JsonLdProductReviewBuilder = /** @class */ (function () {
+    function JsonLdProductReviewBuilder(reviewService) {
+        this.reviewService = reviewService;
+    }
+    /**
+     * @param {?} product
+     * @return {?}
+     */
+    JsonLdProductReviewBuilder.prototype.build = /**
+     * @param {?} product
+     * @return {?}
+     */
+    function (product) {
+        var _this = this;
+        return this.reviewService.getByProductCode(product.code).pipe(filter(Boolean), map((/**
+         * @param {?} reviews
+         * @return {?}
+         */
+        function (reviews) {
+            return {
+                aggregateRating: _this.buildAggregatedReviews(product, reviews),
+                review: reviews.map((/**
+                 * @param {?} review
+                 * @return {?}
+                 */
+                function (review) { return _this.buildReviews(review); })),
+            };
+        })));
+    };
+    /**
+     * @private
+     * @param {?} product
+     * @param {?} reviews
+     * @return {?}
+     */
+    JsonLdProductReviewBuilder.prototype.buildAggregatedReviews = /**
+     * @private
+     * @param {?} product
+     * @param {?} reviews
+     * @return {?}
+     */
+    function (product, reviews) {
+        /** @type {?} */
+        var aggregated = {
+            '@type': 'AggregateRating',
+        };
+        if (product.averageRating) {
+            aggregated.ratingValue = product.averageRating;
+        }
+        if (reviews) {
+            aggregated.ratingCount = reviews.filter((/**
+             * @param {?} rev
+             * @return {?}
+             */
+            function (rev) { return !!rev.rating; })).length;
+            aggregated.reviewCount = reviews.filter((/**
+             * @param {?} rev
+             * @return {?}
+             */
+            function (rev) { return !!rev.comment; })).length;
+        }
+        return aggregated;
+    };
+    /**
+     * @private
+     * @param {?} review
+     * @return {?}
+     */
+    JsonLdProductReviewBuilder.prototype.buildReviews = /**
+     * @private
+     * @param {?} review
+     * @return {?}
+     */
+    function (review) {
+        /** @type {?} */
+        var reviewSchema = {
+            '@type': 'review',
+        };
+        if (review.principal && review.principal.name) {
+            reviewSchema.author = review.principal.name;
+        }
+        if (review.date) {
+            /** @type {?} */
+            var date = new Date(review.date);
+            reviewSchema.datePublished = date.getFullYear() + "-" + (date.getMonth() +
+                1) + "-" + date.getDate();
+        }
+        if (review.headline) {
+            reviewSchema.name = review.headline;
+        }
+        if (review.comment) {
+            reviewSchema.description = review.comment;
+        }
+        if (review.rating) {
+            reviewSchema.reviewRating = {
+                '@type': 'Rating',
+                ratingValue: review.rating.toString(),
+            };
+        }
+        return reviewSchema;
+    };
+    JsonLdProductReviewBuilder.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    JsonLdProductReviewBuilder.ctorParameters = function () { return [
+        { type: ProductReviewService }
+    ]; };
+    /** @nocollapse */ JsonLdProductReviewBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function JsonLdProductReviewBuilder_Factory() { return new JsonLdProductReviewBuilder(ɵɵinject(ProductReviewService)); }, token: JsonLdProductReviewBuilder, providedIn: "root" });
+    return JsonLdProductReviewBuilder;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    JsonLdProductReviewBuilder.prototype.reviewService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var CurrentProductService = /** @class */ (function () {
-    function CurrentProductService(routingService, productService) {
+    function CurrentProductService(routingService, productService, features) {
         this.routingService = routingService;
         this.productService = productService;
+        this.features = features;
+        this.PRODUCT_SCOPE = this.features && this.features.isLevel('1.4') ? ['details'] : '';
     }
     /**
      * @return {?}
@@ -4379,7 +8118,9 @@ var CurrentProductService = /** @class */ (function () {
          * @param {?} productCode
          * @return {?}
          */
-        function (productCode) { return _this.productService.get(productCode); })));
+        function (productCode) {
+            return _this.productService.get(productCode, _this.PRODUCT_SCOPE);
+        })));
     };
     CurrentProductService.decorators = [
         { type: Injectable, args: [{
@@ -4389,12 +8130,18 @@ var CurrentProductService = /** @class */ (function () {
     /** @nocollapse */
     CurrentProductService.ctorParameters = function () { return [
         { type: RoutingService },
-        { type: ProductService }
+        { type: ProductService },
+        { type: FeatureConfigService }
     ]; };
-    /** @nocollapse */ CurrentProductService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(ɵɵinject(RoutingService), ɵɵinject(ProductService)); }, token: CurrentProductService, providedIn: "root" });
+    /** @nocollapse */ CurrentProductService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(ɵɵinject(RoutingService), ɵɵinject(ProductService), ɵɵinject(FeatureConfigService)); }, token: CurrentProductService, providedIn: "root" });
     return CurrentProductService;
 }());
 if (false) {
+    /**
+     * @type {?}
+     * @protected
+     */
+    CurrentProductService.prototype.PRODUCT_SCOPE;
     /**
      * @type {?}
      * @private
@@ -4405,7 +8152,1332 @@ if (false) {
      * @private
      */
     CurrentProductService.prototype.productService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CurrentProductService.prototype.features;
 }
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Adds the minimal structured data for the product, see https://schema.org/product.
+ * The actual data collection is delegated to `JsonLdBuilder`s, which can be injected
+ * using the `JSONLD_PRODUCT_BUILDER` token.
+ */
+var ProductSchemaBuilder = /** @class */ (function () {
+    function ProductSchemaBuilder(currentProduct, builders) {
+        this.currentProduct = currentProduct;
+        this.builders = builders;
+    }
+    /**
+     * @return {?}
+     */
+    ProductSchemaBuilder.prototype.build = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        return this.currentProduct.getProduct().pipe(startWith((/** @type {?} */ (null))), switchMap((/**
+         * @param {?} product
+         * @return {?}
+         */
+        function (product) {
+            if (product) {
+                return combineLatest(_this.collect(product)).pipe(map((/**
+                 * @param {?} res
+                 * @return {?}
+                 */
+                function (res) { return Object.assign.apply(Object, __spread([{}], res)); })));
+            }
+            return of({});
+        })));
+    };
+    /**
+     * @protected
+     * @param {?} product
+     * @return {?}
+     */
+    ProductSchemaBuilder.prototype.collect = /**
+     * @protected
+     * @param {?} product
+     * @return {?}
+     */
+    function (product) {
+        if (!product || !product.code) {
+            return [];
+        }
+        /** @type {?} */
+        var builders = this.builders
+            ? this.builders.map((/**
+             * @param {?} builder
+             * @return {?}
+             */
+            function (builder) { return builder.build(product); }))
+            : [];
+        return __spread([
+            of({
+                '@context': 'http://schema.org',
+                '@type': 'Product',
+            })
+        ], builders);
+    };
+    ProductSchemaBuilder.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    ProductSchemaBuilder.ctorParameters = function () { return [
+        { type: CurrentProductService },
+        { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [JSONLD_PRODUCT_BUILDER,] }] }
+    ]; };
+    /** @nocollapse */ ProductSchemaBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function ProductSchemaBuilder_Factory() { return new ProductSchemaBuilder(ɵɵinject(CurrentProductService), ɵɵinject(JSONLD_PRODUCT_BUILDER, 8)); }, token: ProductSchemaBuilder, providedIn: "root" });
+    return ProductSchemaBuilder;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    ProductSchemaBuilder.prototype.currentProduct;
+    /**
+     * @type {?}
+     * @protected
+     */
+    ProductSchemaBuilder.prototype.builders;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Provides several standard json-ld builders that contribute
+ * to colleting and building json-ld data.
+ */
+var JsonLdBuilderModule = /** @class */ (function () {
+    function JsonLdBuilderModule() {
+    }
+    JsonLdBuilderModule.decorators = [
+        { type: NgModule, args: [{
+                    providers: [
+                        {
+                            provide: SCHEMA_BUILDER,
+                            useExisting: ProductSchemaBuilder,
+                            multi: true,
+                        },
+                        {
+                            provide: SCHEMA_BUILDER,
+                            useExisting: BreadcrumbSchemaBuilder,
+                            multi: true,
+                        },
+                        // lower level json-ld builder classes offering fine-graiend control
+                        // for product related schema's
+                        {
+                            provide: JSONLD_PRODUCT_BUILDER,
+                            useExisting: JsonLdBaseProductBuilder,
+                            multi: true,
+                        },
+                        {
+                            provide: JSONLD_PRODUCT_BUILDER,
+                            useExisting: JsonLdProductOfferBuilder,
+                            multi: true,
+                        },
+                        {
+                            provide: JSONLD_PRODUCT_BUILDER,
+                            useExisting: JsonLdProductReviewBuilder,
+                            multi: true,
+                        },
+                    ],
+                },] }
+    ];
+    return JsonLdBuilderModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+function SchemaBuilder() { }
+if (false) {
+    /**
+     * @return {?}
+     */
+    SchemaBuilder.prototype.build = function () { };
+}
+/**
+ * @record
+ * @template T
+ */
+function JsonLdBuilder() { }
+if (false) {
+    /**
+     * @param {?} data
+     * @return {?}
+     */
+    JsonLdBuilder.prototype.build = function (data) { };
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+var ASM_ENABLED_LOCAL_STORAGE_KEY = 'asm_enabled';
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var AsmComponentService = /** @class */ (function () {
+    function AsmComponentService(authService, asmAuthService, routingService, winRef) {
+        this.authService = authService;
+        this.asmAuthService = asmAuthService;
+        this.routingService = routingService;
+        this.winRef = winRef;
+    }
+    /**
+     * @return {?}
+     */
+    AsmComponentService.prototype.logoutCustomerSupportAgentAndCustomer = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.authService
+            .getUserToken()
+            .pipe(take(1))
+            .subscribe((/**
+         * @param {?} token
+         * @return {?}
+         */
+        function (token) {
+            if (_this.asmAuthService.isCustomerEmulationToken(token)) {
+                _this.logoutCustomer();
+            }
+            _this.asmAuthService.logoutCustomerSupportAgent();
+        }));
+    };
+    /**
+     * @return {?}
+     */
+    AsmComponentService.prototype.logoutCustomer = /**
+     * @return {?}
+     */
+    function () {
+        this.authService.logout();
+        this.routingService.go({ cxRoute: 'home' });
+    };
+    /**
+     * @return {?}
+     */
+    AsmComponentService.prototype.isCustomerEmulationSessionInProgress = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        return this.authService
+            .getUserToken()
+            .pipe(mergeMap((/**
+         * @param {?} userToken
+         * @return {?}
+         */
+        function (userToken) {
+            return of(_this.asmAuthService.isCustomerEmulationToken(userToken));
+        })));
+    };
+    /**
+     * We're currently only removing the persisted storage in the browser
+     * to ensure the ASM experience isn't loaded on the next visit. There are a few
+     * optimsiations we could think of:
+     * - drop the `asm` parameter from the URL, in case it's still there
+     * - remove the generated UI from the DOM (outlets currently do not support this)
+     */
+    /**
+     * We're currently only removing the persisted storage in the browser
+     * to ensure the ASM experience isn't loaded on the next visit. There are a few
+     * optimsiations we could think of:
+     * - drop the `asm` parameter from the URL, in case it's still there
+     * - remove the generated UI from the DOM (outlets currently do not support this)
+     * @return {?}
+     */
+    AsmComponentService.prototype.unload = /**
+     * We're currently only removing the persisted storage in the browser
+     * to ensure the ASM experience isn't loaded on the next visit. There are a few
+     * optimsiations we could think of:
+     * - drop the `asm` parameter from the URL, in case it's still there
+     * - remove the generated UI from the DOM (outlets currently do not support this)
+     * @return {?}
+     */
+    function () {
+        if (this.winRef.localStorage) {
+            this.winRef.localStorage.removeItem(ASM_ENABLED_LOCAL_STORAGE_KEY);
+        }
+    };
+    AsmComponentService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    AsmComponentService.ctorParameters = function () { return [
+        { type: AuthService },
+        { type: AsmAuthService },
+        { type: RoutingService },
+        { type: WindowRef }
+    ]; };
+    /** @nocollapse */ AsmComponentService.ngInjectableDef = ɵɵdefineInjectable({ factory: function AsmComponentService_Factory() { return new AsmComponentService(ɵɵinject(AuthService), ɵɵinject(AsmAuthService), ɵɵinject(RoutingService), ɵɵinject(WindowRef)); }, token: AsmComponentService, providedIn: "root" });
+    return AsmComponentService;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @protected
+     */
+    AsmComponentService.prototype.authService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AsmComponentService.prototype.asmAuthService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AsmComponentService.prototype.routingService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AsmComponentService.prototype.winRef;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var AsmMainUiComponent = /** @class */ (function () {
+    function AsmMainUiComponent(authService, asmAuthService, userService, asmComponentService, globalMessageService, routingService) {
+        this.authService = authService;
+        this.asmAuthService = asmAuthService;
+        this.userService = userService;
+        this.asmComponentService = asmComponentService;
+        this.globalMessageService = globalMessageService;
+        this.routingService = routingService;
+        this.disabled = false;
+        this.startingCustomerSession = false;
+    }
+    /**
+     * @return {?}
+     */
+    AsmMainUiComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.csAgentToken$ = this.asmAuthService.getCustomerSupportAgentToken();
+        this.csAgentTokenLoading$ = this.asmAuthService.getCustomerSupportAgentTokenLoading();
+        this.customer$ = this.authService.getUserToken().pipe(switchMap((/**
+         * @param {?} token
+         * @return {?}
+         */
+        function (token) {
+            if (token && !!token.access_token) {
+                _this.handleCustomerSessionStartRedirection(token);
+                return _this.userService.get();
+            }
+            else {
+                return of(undefined);
+            }
+        })));
+    };
+    /**
+     * @private
+     * @param {?} token
+     * @return {?}
+     */
+    AsmMainUiComponent.prototype.handleCustomerSessionStartRedirection = /**
+     * @private
+     * @param {?} token
+     * @return {?}
+     */
+    function (token) {
+        if (this.startingCustomerSession &&
+            this.asmAuthService.isCustomerEmulationToken(token)) {
+            this.startingCustomerSession = false;
+            this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
+            this.routingService.go('/');
+        }
+    };
+    /**
+     * @param {?} __0
+     * @return {?}
+     */
+    AsmMainUiComponent.prototype.loginCustomerSupportAgent = /**
+     * @param {?} __0
+     * @return {?}
+     */
+    function (_a) {
+        var userId = _a.userId, password = _a.password;
+        this.asmAuthService.authorizeCustomerSupportAgent(userId, password);
+    };
+    /**
+     * @return {?}
+     */
+    AsmMainUiComponent.prototype.logout = /**
+     * @return {?}
+     */
+    function () {
+        this.asmComponentService.logoutCustomerSupportAgentAndCustomer();
+    };
+    /**
+     * @param {?} __0
+     * @return {?}
+     */
+    AsmMainUiComponent.prototype.startCustomerEmulationSession = /**
+     * @param {?} __0
+     * @return {?}
+     */
+    function (_a) {
+        var _this = this;
+        var customerId = _a.customerId;
+        this.asmAuthService
+            .getCustomerSupportAgentToken()
+            .pipe(take(1))
+            .subscribe((/**
+         * @param {?} customerSupportAgentToken
+         * @return {?}
+         */
+        function (customerSupportAgentToken) {
+            return _this.asmAuthService.startCustomerEmulationSession(customerSupportAgentToken, customerId);
+        }))
+            .unsubscribe();
+        this.startingCustomerSession = true;
+    };
+    /**
+     * @return {?}
+     */
+    AsmMainUiComponent.prototype.hideUi = /**
+     * @return {?}
+     */
+    function () {
+        this.disabled = true;
+        this.asmComponentService.unload();
+    };
+    AsmMainUiComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-asm-main-ui',
+                    template: "<div class=\"asm-bar\">\n  <div class=\"asm-bar-branding\">\n    <img\n      class=\"logo\"\n      src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAAAwCAYAAADuFn/PAAAAAXNSR0IArs4c6QAAD7RJREFUeAHtW3twVGcVP7t795V30rwJBBJeASq01NJgnZa2otTW2nHAqrRak+rUKfgYZ/xDW5lRR2e0/mGtAadqq6WjUAdNa4udqVZaEdtCKQ2FQEh5JSQh5Lnvp7/ft9lkd9l7swkhwMiZ3N27937fd8533ufcG9P1L/VE5SpMOwdMmk0iocDzWjAUnnbk/9cITSYx2xwS9Xs3Wzs7NmqhcOT/mh/Tunkw32SzScjr2Vy2v3XDa5tWhbRI5KoHmi4hmGx2ifi8mz8UmvHI9k2VyvVokasWMC38N8HtRHyezUejex5pXbdu1O9r5qsCuLgCUD4fmu/1bq5sbd9wdNMY84lYM10VwMUTAJlvtUnU491c0XZc+fxUZFo0Mn4QjiJMMFREcKJG4xxrC/7ETCQ854+JAtbBny5Mak3d1ab3BsKtCrhhuJ2K9lNpmU+KYAHpWRAFa4K4x7t5NouU5WhS4rRIvt0idotJ3MGIDPgj0usNSZ8vLMOBiIQhJQukoZkpHGOJcGXLiPD0WBNStOmvQ8ETAjp7iN0d++RelBLhBFsAnVQe/fXHZk7wDEuarXaJBrxNFe2nNzLb0VsBMWA0HoyO8WNDDnDxIzOy5ONzcuX6MqdU5VhxLZlYWoUvFJEud0iODQZkb5dXHa19PnEFw2LDBi0QRqqac14BBPnz2yul0GEZxZt68vzhQXm6pS+Gl9xLANL4uUWFsm5hPmiIjiPu2EQqSY8nJCeHAnK4zy+tOLrdQXXTClqVLFLwJKDM7BSLmMD8iN/btCRn3obtm+adz+CElTTlW0YuEDe1qR6M//oNJXJDRVbC0PNPqYFZVrPUFNjU8bHqHGUF3NxLx4ZkZ/uQdLnOF34Acad+To6srDRe/7ML8+T5Q/3KEpNFD5lijVKnWa4tdpxPWIZXeiGM/3S65Y/vD8hbnR6lLBdkEdR8DZrv9zUtyT+wYfu6+YbMJ5mjQZjMZ1H20HXF8s0VZWKjjU4C6IIWgyk8PlqVLY0vnhDGkMTVNJjA3bV5464+t9AhS4vtsqfDBWuiKY0Bk4dIhq5nbFbyWXGWJnfPzZc1NRT0gDy+p1uG/WHlmpJHZvALG6TmR/2epoOFBzccTEg1jWabTXBBpkhYgoGQNCy9Rr6zsnzSzE9ERKZvazknAX9IzFhf4QGuMFofNXmarKjMThye9pwWtqYmV6Jwc2R4fI3Rb/qyKQDGgvsWF8ovVlcJSEOPJsaTUTzkkdGBRMZstorA7SwqXLRBMmQ+STczC/IHwnA3TvlGfdkUbCe2xBsnhmVna79YTQi3YB7x8AhA0LfPzpNsW7JG6yG+BWOLHWYJgwHxNUa/KeUphPqZOfKt+nKlJIk0j+Ib2UPyb8QfMD/q8zYV9/Ru3L7ONK7bSSTZHIUZm6FJDdeXIrsZnynMdBh4jfbuR1B8YnenhBCIVZZFV4GDuLLh2j4xLz+RBsPzylyrspYAlIRrJB1TZAGJBHxmUZFcV5YFRUmDLxU/fpP5aC80Fff1GWY7iTgSzzWa26wCu6yA9I3g7VPDsu1Ar3zQ75MAGEwNLnBoUgtfv2JmriybkSM5SFcJO1p65Z3Tw2JnPgqtiUMIgluGsXUlzviljL7vnF8gLx86h7UShnNdIy3A0NeODcrrHwwqn56LrKv2GtA6K0+K4Pv1wAoF+STw7T05lBy4kibQ8lhkMdvxNZUMD06K+VxSC0NLawtto8xLwjPyYx+Y2bCtVVwjAYrpGvdOBXzlcFSeguVUF9rlzroiuXlOgfzmv2fEwgFwG4kQhitag80xUE8EbgLTZsISOgb9Y3MhzPEE8NapIdmyu0McyNRIDjOcmVC2x1ZXy621BbokLK/KEZQ8CPLJ9I9OwDpm9POR7fzqYPXyjTJBtzO6Dk4QH8MosPQ1goND4DSDNFCKDT4dHk99O8xRRSjKaTnR65Ff7jolX37ufTnT78UYBE1oafygT2Uhd9vcwkT8GZ3noVa4tSY/5tIS1jQBrxFYIWdkqurIAkMdoL2jzyvf/1u7dA8HdKdW5FmlCHEnFozH9qASAfDCYtLYz2+qe7P9gphPAhADEBipTQZwIzTwJ3fVSmm2VTy+kARgNeyiqkDFbzDFooQioh7w4PfovZFxDL7U5Mp8W1pMrLppYXqwBtbFuJ2MF2ptAFEwK4kO0MWkoGPAK/s7hnVnMhZmw30m4eI+aEZgPtzOr+pqTmzYvj25saa7oMENiDIq3UN+gyGxW5+6tkRurM6XHe/2yIstZ6XtrEcJTgOxTOPoluIVbypb+JvK+slF1+jiae/1yuvH+qVx5Yy0Y66tzJX5xVnScsYlrFpZA5AfRkCGcVwEljoKoDOMaz5UxXqgIQ7Aa6lxo1Mxj3l+OOD73eEFKze2rKvX1xa9hdNcx1aicqjLJb0ufZOMzyvPs8nDH62SPzculWceWAJmVUkNAlsAgdwFywhCS0LQstTDz0BfZJebEB/0YM8HA7Jjf7eqpNONYWF4x4JC8QVDav0g8LCvYwS8z3GJ9NDaEY9lfql+Fc4kg/sJJ8wNm20S9nu3+sKBr12Iz0+l10wtOQ2fTa3OFBjUbpqdL9/9xBz5y1eXyVNfWCy0EA0bc6Pw4oZJfPzwwWXdPr9IcrhzHdjV1icHod20LD1YXVes1qCgufZ4AmDKTOFTQUgDafPg+PwNFbIAqaYeuOEKe90B5XIUHgseIwa9W/3RYOPxTat8evMmc121o+m/m/51QlaBSdVFE0sRnVaLmse5LZ0ueeK14/IShKk6nbQvCDiLqd3iYl36uuAC950cFK8/KK9DEAvK0lfJc0uyZHlVrvzzyLmY+xnHAvIg8CpYrQM0ZiGAVF+TJXdDUe6+ttSwC9ra7ZJ+eASVraG3A5+/1VLqbmjfeOf4vlp3l+lvQAAoxHDvNLKDh7e+J1vWf0hmogczGVhSmSNbPr9EnvnPafnB344iINP8o3Lj7AJZDB+uB3va+6V70KcC+T9bz0nDyplpny8wzty1pFRePXQ2IwE8WD9DPgdtN2EiBWBFvMoEXnm/V/xwddnOLHY1n9OGfQ1tP5x65pMW1PgIRjiYYew/MSj3bdkrfz/YkwmdumO+WF8lP753IVLQqEod74LWscDRg1cP9ap+jxWMOgBL6BjQt/JVC4qkIgfv1JBurG8E1PyCLKvkI83OlPknoYgvvtslDjzDDQe8W8H8L7c9cXGYT9qRa2ETPJAZ2OEyTvS65StPvysP//6AvH18wGh/hvfWLq+QtcvLhW5g9aIS3bH96Mf/tw09IygAApL0DvlkdxuqXh0oy7PLzaglmNbGzEBn4CQuM2b86IUjctYFrxD0bTU5LI0Xk/kk0RxhMEs4GCbplnbs7ZC1T74lX9jytvzpzQ45Y6CVentdf1OVrIHLmGkQV/a098mpc24xgfmKDmj2Ky3GFnjX0jIIi3pjbAF6dKW7zjrksR2Hpfm9PtEi/q3RLG3KA246vBrdRCrQWTjgL1kJ/gPM4FGe75Dl8OV3LC6VW5CNVBSMHycWVuTKN1fXpi6f9Jsuh81Atq0JVIAPetwyhEedeToV+sraIvSgnOhank+7WmSCH0eRhv8Ymr8TzwSQ7zxr7rc9dPzxqc129Egy1Xz9paRd8Eeqt+Y1lVNjwzwvRz/l08tnyCNgbhH88YUAU8O2brd0IhX24zlzCVzMbGQ7FLDR06nvbTsodvitR++tmxT6QU9QDqEafuGdTmned0b6fSaxg/mRwa6Hjj/9oH4QmhQ2/UnnWQALFWYbDFpxQfCb+QMrRAqgH02xJ3celdOIF5sbl+NhRHykPiK9O9l2TZbOyleH3ph019fADe05qh8rOOeNw72y+0gv6I7thSnxOaSXp895YGUelfmxTnA4nGKPBrfCrTW2P/3glKea6eiPX9Ms8P9xYMq4/iOzlAvY09qrLttIfDr+QiLtnUMqflM40w3LqgtQNxh3A954v0cebz4szpE2OWnkXpiWMsdnC8XuQLaDgBs1WxoudsBNxyNYQEwAZP6c0hx5dO0SVUTthGlu//cJOXC8X4bx8JouSAkCJsAZOXgW8NAdtcoq0i18sa9lA//NC/WLO+Jnzygbb3Kkvs2haIMgzKhwI0g1oxbrJWE+6dAs9CmAIPzvA7fORsESaxfcc2OVfOrDVXKsa1gOnhyQDrSbB1Ce0y+XoVBbsaBEFs3M/MlWDMvUfjoSNDvdyrRM7i++x8QxJjI/6Hs2rFkveqqZiDf1XFkAU7B55Tny6fpZSfep8XORyfC4IoEtWFp4BBsZAb4wpv45Iuh/1uvvY8CdVp8fpyP+rbH4iSIQrV81B2kfnuxPA/AlgJ9tf0/KUR8sqi6U8kInyn6rCvpMAs6hGDuJVHQ/CrL7bquRuZXjv8KSjmy0/tWTOfV0bmSAcjsh/7OewMC0Zjvp6OM1ja+J1MGVrL1ljt6YKb/ehuD93KvHVJfSjnaB06aJNvLWHRXWj86lF+mpF4IqRTo6WQHwAQULPB4EExtrYL7X6Wg8/utLq/lxpppZUfrQ+37tnTNq4/Ebk/lmoH793TOKeUbzd2EM35jIBvMZcfxgthvxhYfXizYwqmEnnkjxIf+/W7rQqoox0GjNdPdoASw0eZjRzxf4fG+H45L6/FQ6zVS8M2dd8u0nd8v9P/yH/H7nETnd40odZ/ib7NmHfPurP90lbx7uESdyeyPYtb8TjwbBHAiMLpDtcAoifvAa7/Hd0kNoVUyUnjhu9b4n10fANQX8f3BndTa2vXzxGmtxvBP5Nl33pW1KvUCnejWR2laEarQOvnnZvGKpm10olXgUWJhrFxs0lsCxLk9AulG9toBBb0Cj6a/d3qCsva1W5lTQZ6tl1fjEj0Fo+XOvHAUuMHksNiYOSTpnS/tOJAcLZvFhfvo1kyYk/Njd0i1vHxlAbAltc3VlP3C5MZ+kmq574E/n7YquhO+JsuPLgsWJjiaDZLylywk+uI1hMJzpKythK1wGGcrfRi6DYyjIDHgfYyUGBrDmZP6XzWZHO0NCzR6LfX3rb+/Rfwofw3RJPrV4gErErlwBKmDlE3AjDAYMBn1J3V8ykk+9NPaRCTQL/KmXeg16/6Nj1UkGH1iT/48AZBkMHhvCt5Qj4UCzW3NctswntRr5lgmo/DmVBzGeZzJ9WseQ+eFgoNkz5Frf2vzZy1Lz4wxBDM5QAvEZl/m32cJUE8y3kfkNlzXzyUr1XtBlztOMyVNuJ+Rvdg571u+7Apg/IoCM93dZD+S7mnA7f/W4PPdfKcwfEcCV74KU26HPd3vvvxLcTqImX4pWfiL+Cz7nf6ZEI8G/ut3eK8Lnp254pAOTevnK+G0yI4RFQvtzQ9r6vc0NEyvfL5Mt/g8XIbTVhsig+gAAAABJRU5ErkJggg==\"\n      width=\"48\"\n      height=\"24\"\n      alt=\"{{ 'asm.mainLogoLabel' | cxTranslate }}\"\n    />\n\n    <div class=\"asm-title\">\n      {{ 'asm.mainTitle' | cxTranslate }}\n    </div>\n  </div>\n  <div class=\"asm-bar-actions\">\n    <cx-asm-session-timer\n      *ngIf=\"(csAgentToken$ | async)?.access_token\"\n    ></cx-asm-session-timer>\n\n    <a\n      class=\"close\"\n      title=\"{{ 'asm.hideUi' | cxTranslate }}\"\n      *ngIf=\"\n        !(csAgentToken$ | async)?.access_token &&\n        !(csAgentTokenLoading$ | async)\n      \"\n      (click)=\"hideUi()\"\n    ></a>\n\n    <a\n      class=\"logout\"\n      title=\"{{ 'asm.logout' | cxTranslate }}\"\n      *ngIf=\"(csAgentToken$ | async)?.access_token\"\n      (click)=\"logout()\"\n    >\n    </a>\n  </div>\n</div>\n\n<ng-container *ngIf=\"(csAgentToken$ | async)?.access_token; else showLoginForm\">\n  <cx-customer-emulation\n    *ngIf=\"customer$ | async as customer; else showCustomerSelection\"\n  ></cx-customer-emulation>\n  <ng-template #showCustomerSelection>\n    <cx-customer-selection\n      (submitEvent)=\"startCustomerEmulationSession($event)\"\n    ></cx-customer-selection>\n  </ng-template>\n</ng-container>\n\n<ng-template #showLoginForm>\n  <cx-csagent-login-form\n    (submitEvent)=\"loginCustomerSupportAgent($event)\"\n    [csAgentTokenLoading]=\"csAgentTokenLoading$ | async\"\n  ></cx-csagent-login-form>\n</ng-template>\n",
+                    encapsulation: ViewEncapsulation.None,
+                    styles: ["cx-asm-main-ui{font-family:Arial,sans-serif;font-size:14px;width:100%;display:flex;flex-direction:column}cx-asm-main-ui .close,cx-asm-main-ui .logout{cursor:pointer;width:16px;height:16px}cx-asm-main-ui .close{background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z'/%3E%3C/svg%3E\")}cx-asm-main-ui .logout{background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23d1e3ff' d='M11,2.7c1.2,0.6,2.2,1.5,2.9,2.6c1.3,1.9,1.5,4.4,0.6,6.5c-0.3,0.8-0.8,1.6-1.5,2.2c-0.6,0.6-1.4,1.1-2.2,1.5 C9.9,15.8,9,16,8,16c-0.9,0-1.9-0.2-2.7-0.5c-0.8-0.4-1.6-0.9-2.2-1.5c-0.6-0.6-1.1-1.4-1.5-2.2C0.7,9.6,0.9,7.2,2.1,5.3 c0.7-1.1,1.7-2,2.9-2.6v1.1C4.1,4.3,3.3,5.1,2.8,6C2.3,6.9,2,7.9,2,9c0,1.6,0.6,3.2,1.8,4.3c0.5,0.5,1.2,1,1.9,1.3 c1.5,0.6,3.2,0.6,4.7,0c0.7-0.3,1.4-0.7,1.9-1.3C13.4,12.1,14,10.6,14,9c0-1.1-0.3-2.1-0.8-3c-0.5-0.9-1.3-1.7-2.2-2.2 C11,3.8,11,2.7,11,2.7z M8,9C7.7,9,7.5,8.9,7.3,8.7C7.1,8.5,7,8.3,7,8V1c0-0.3,0.1-0.5,0.3-0.7c0.4-0.4,1-0.4,1.4,0 C8.9,0.5,9,0.7,9,1v7c0,0.3-0.1,0.5-0.3,0.7C8.5,8.9,8.2,9,8,9z'/%3E%3C/svg%3E%0A\")}cx-asm-main-ui button{padding:0 12px;white-space:nowrap;border-radius:4px;height:36px;font-weight:400;border-style:solid;border-width:1px}cx-asm-main-ui button:disabled{opacity:.4;cursor:not-allowed}cx-asm-main-ui .spinner{display:flex;justify-content:center;width:100%;color:#0a6ed1}cx-asm-main-ui .spinner>div{width:8px;height:8px;margin:6px;border-radius:100%;background-color:currentColor;-webkit-animation:1s infinite spinner-dots-pulse;animation:1s infinite spinner-dots-pulse}cx-asm-main-ui .spinner>div:nth-child(1){-webkit-animation-delay:-.2s;animation-delay:-.2s}@-webkit-keyframes spinner-dots-pulse{0%,100%,60%{-webkit-transform:scale(1);transform:scale(1)}30%{-webkit-transform:scale(2);transform:scale(2)}}@keyframes spinner-dots-pulse{0%,100%,60%{-webkit-transform:scale(1);transform:scale(1)}30%{-webkit-transform:scale(2);transform:scale(2)}}cx-asm-main-ui.hidden{display:none}cx-asm-main-ui .asm-bar{color:#fff;background-color:#354a5f;height:48px;display:flex;padding:0 32px;justify-content:space-between;z-index:1}cx-asm-main-ui .asm-bar-branding{display:flex;align-items:center}cx-asm-main-ui .asm-bar-branding .logo{-webkit-margin-end:8px;margin-inline-end:8px}cx-asm-main-ui .asm-bar-branding .asm-title{font-size:16px;font-weight:700}cx-asm-main-ui .asm-bar-actions{display:flex;justify-content:flex-end;align-items:center}cx-asm-main-ui>:nth-child(2){margin:32px;display:flex;width:calc(100vw - 4rem)}@media (min-width:767px){cx-asm-main-ui>:nth-child(2){width:50vw}}cx-asm-main-ui input{outline:0;border:1px solid #89919a;color:#32363a;background-color:#fff;border-radius:4px;padding:0 12px;height:36px}cx-asm-main-ui input:focus{box-shadow:0 0 0 1px #fafafa}cx-asm-main-ui input:hover{border-color:#085caf}cx-asm-main-ui input::-webkit-input-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input::-moz-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input:-ms-input-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input::-ms-input-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input::placeholder{color:#74777a;font-style:italic}@media (max-width:575px){cx-asm-main-ui .asm-bar-branding .asm-title{display:none}cx-asm-main-ui .asm-alert{margin-top:30px}}"]
+                }] }
+    ];
+    /** @nocollapse */
+    AsmMainUiComponent.ctorParameters = function () { return [
+        { type: AuthService },
+        { type: AsmAuthService },
+        { type: UserService },
+        { type: AsmComponentService },
+        { type: GlobalMessageService },
+        { type: RoutingService }
+    ]; };
+    AsmMainUiComponent.propDecorators = {
+        disabled: [{ type: HostBinding, args: ['class.hidden',] }]
+    };
+    return AsmMainUiComponent;
+}());
+if (false) {
+    /** @type {?} */
+    AsmMainUiComponent.prototype.csAgentToken$;
+    /** @type {?} */
+    AsmMainUiComponent.prototype.csAgentTokenLoading$;
+    /** @type {?} */
+    AsmMainUiComponent.prototype.customer$;
+    /** @type {?} */
+    AsmMainUiComponent.prototype.disabled;
+    /**
+     * @type {?}
+     * @private
+     */
+    AsmMainUiComponent.prototype.startingCustomerSession;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AsmMainUiComponent.prototype.authService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AsmMainUiComponent.prototype.asmAuthService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AsmMainUiComponent.prototype.userService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AsmMainUiComponent.prototype.asmComponentService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AsmMainUiComponent.prototype.globalMessageService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AsmMainUiComponent.prototype.routingService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * The AsmEnablerService is used to enable ASM for those scenario's
+ * where it's actually used. This service is added to avoid any polution
+ * of the UI and runtime performance for the ordinary production user.
+ */
+var AsmEnablerService = /** @class */ (function () {
+    function AsmEnablerService(location, winRef, componentFactoryResolver, outletService) {
+        this.location = location;
+        this.winRef = winRef;
+        this.componentFactoryResolver = componentFactoryResolver;
+        this.outletService = outletService;
+        /**
+         * indicates whether the ASM UI has been added already
+         */
+        this.isUiAdded = false;
+    }
+    /**
+     * Loads the ASM UI if needed. The ASM UI will be added based on the
+     * existence of a URL parameter or previous usage given by local storage.
+     */
+    /**
+     * Loads the ASM UI if needed. The ASM UI will be added based on the
+     * existence of a URL parameter or previous usage given by local storage.
+     * @return {?}
+     */
+    AsmEnablerService.prototype.load = /**
+     * Loads the ASM UI if needed. The ASM UI will be added based on the
+     * existence of a URL parameter or previous usage given by local storage.
+     * @return {?}
+     */
+    function () {
+        if (this.isEnabled()) {
+            this.addUi();
+        }
+    };
+    /**
+     * Indicates whether the ASM module is enabled.
+     */
+    /**
+     * Indicates whether the ASM module is enabled.
+     * @private
+     * @return {?}
+     */
+    AsmEnablerService.prototype.isEnabled = /**
+     * Indicates whether the ASM module is enabled.
+     * @private
+     * @return {?}
+     */
+    function () {
+        if (this.isLaunched() && !this.isUsedBefore()) {
+            if (this.winRef.localStorage) {
+                this.winRef.localStorage.setItem(ASM_ENABLED_LOCAL_STORAGE_KEY, 'true');
+            }
+        }
+        return this.isLaunched() || this.isUsedBefore();
+    };
+    /**
+     * Indicates whether ASM is launched through the URL,
+     * using the asm flag in the URL.
+     */
+    /**
+     * Indicates whether ASM is launched through the URL,
+     * using the asm flag in the URL.
+     * @private
+     * @return {?}
+     */
+    AsmEnablerService.prototype.isLaunched = /**
+     * Indicates whether ASM is launched through the URL,
+     * using the asm flag in the URL.
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var params = this.location.path().split('?')[1];
+        return params && params.split('&').includes('asm=true');
+    };
+    /**
+     * Evaluates local storage where we persist the usage of ASM.
+     */
+    /**
+     * Evaluates local storage where we persist the usage of ASM.
+     * @private
+     * @return {?}
+     */
+    AsmEnablerService.prototype.isUsedBefore = /**
+     * Evaluates local storage where we persist the usage of ASM.
+     * @private
+     * @return {?}
+     */
+    function () {
+        return (this.winRef.localStorage &&
+            this.winRef.localStorage.getItem(ASM_ENABLED_LOCAL_STORAGE_KEY) === 'true');
+    };
+    /**
+     * Adds the ASM UI by using the `cx-storefront` outlet.
+     */
+    /**
+     * Adds the ASM UI by using the `cx-storefront` outlet.
+     * @private
+     * @return {?}
+     */
+    AsmEnablerService.prototype.addUi = /**
+     * Adds the ASM UI by using the `cx-storefront` outlet.
+     * @private
+     * @return {?}
+     */
+    function () {
+        if (this.isUiAdded) {
+            return;
+        }
+        /** @type {?} */
+        var factory = this.componentFactoryResolver.resolveComponentFactory(AsmMainUiComponent);
+        this.outletService.add('cx-storefront', factory, OutletPosition.BEFORE);
+        this.isUiAdded = true;
+    };
+    AsmEnablerService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    AsmEnablerService.ctorParameters = function () { return [
+        { type: Location },
+        { type: WindowRef },
+        { type: ComponentFactoryResolver },
+        { type: OutletService }
+    ]; };
+    /** @nocollapse */ AsmEnablerService.ngInjectableDef = ɵɵdefineInjectable({ factory: function AsmEnablerService_Factory() { return new AsmEnablerService(ɵɵinject(Location), ɵɵinject(WindowRef), ɵɵinject(ComponentFactoryResolver), ɵɵinject(OutletService)); }, token: AsmEnablerService, providedIn: "root" });
+    return AsmEnablerService;
+}());
+if (false) {
+    /**
+     * indicates whether the ASM UI has been added already
+     * @type {?}
+     * @private
+     */
+    AsmEnablerService.prototype.isUiAdded;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AsmEnablerService.prototype.location;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AsmEnablerService.prototype.winRef;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AsmEnablerService.prototype.componentFactoryResolver;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AsmEnablerService.prototype.outletService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * The ASM loader module takes care of loading the ASM UI
+ * only in case there's a reason to do so.
+ */
+var AsmLoaderModule = /** @class */ (function () {
+    function AsmLoaderModule() {
+    }
+    AsmLoaderModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule, PageComponentModule],
+                    providers: [
+                        {
+                            provide: APP_INITIALIZER,
+                            useFactory: asmFactory,
+                            deps: [AsmEnablerService],
+                            multi: true,
+                        },
+                    ],
+                },] }
+    ];
+    return AsmLoaderModule;
+}());
+/**
+ *
+ * We do not like to block the UI, which is why we delgate loading of ASM
+ * to a real component; the router and state aren't available in an optimized
+ * way during the APP_INITIALIZER.
+ * @param {?} asmEnablerService
+ * @return {?}
+ */
+function asmFactory(asmEnablerService) {
+    /** @type {?} */
+    var isReady = (/**
+     * @return {?}
+     */
+    function () {
+        asmEnablerService.load();
+    });
+    return isReady;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var AsmSessionTimerComponent = /** @class */ (function () {
+    function AsmSessionTimerComponent(config, asmComponentService, authService, routingService, changeDetectorRef) {
+        this.config = config;
+        this.asmComponentService = asmComponentService;
+        this.authService = authService;
+        this.routingService = routingService;
+        this.changeDetectorRef = changeDetectorRef;
+        this.subscriptions = new Subscription();
+        this.maxStartDelayInSeconds = 60000;
+    }
+    /**
+     * @return {?}
+     */
+    AsmSessionTimerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.timeLeft = this.getTimerStartDelayInSeconds();
+        this.interval = setInterval((/**
+         * @return {?}
+         */
+        function () {
+            if (_this.timeLeft > 0) {
+                _this.timeLeft--;
+            }
+            else {
+                clearInterval(_this.interval);
+                _this.asmComponentService.logoutCustomerSupportAgentAndCustomer();
+            }
+            _this.changeDetectorRef.markForCheck();
+        }), 1000);
+        this.resetOnNavigate();
+        this.resetOnCustomerSessionChange();
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    AsmSessionTimerComponent.prototype.resetOnNavigate = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.subscriptions.add(this.routingService.isNavigating().subscribe((/**
+         * @param {?} isNavigating
+         * @return {?}
+         */
+        function (isNavigating) {
+            if (isNavigating) {
+                _this.resetTimer();
+            }
+        })));
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    AsmSessionTimerComponent.prototype.resetOnCustomerSessionChange = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.subscriptions.add(this.authService
+            .getOccUserId()
+            .pipe(distinctUntilChanged())
+            .subscribe((/**
+         * @param {?} _
+         * @return {?}
+         */
+        function (_) { return _this.resetTimer(); })));
+    };
+    /**
+     * @return {?}
+     */
+    AsmSessionTimerComponent.prototype.resetTimer = /**
+     * @return {?}
+     */
+    function () {
+        if (this.timeLeft > 0) {
+            this.timeLeft = this.getTimerStartDelayInSeconds();
+        }
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    AsmSessionTimerComponent.prototype.getTimerStartDelayInSeconds = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        if (this.config.asm.agentSessionTimer.startingDelayInSeconds >
+            this.maxStartDelayInSeconds) {
+            return this.maxStartDelayInSeconds;
+        }
+        else {
+            return this.config.asm.agentSessionTimer.startingDelayInSeconds;
+        }
+    };
+    /**
+     * @return {?}
+     */
+    AsmSessionTimerComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this.subscriptions.unsubscribe();
+        if (this.interval) {
+            clearInterval(this.interval);
+        }
+    };
+    AsmSessionTimerComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-asm-session-timer',
+                    template: "<span class=\"label\">{{ 'asm.agentSessionTimer.label' | cxTranslate }}:</span>\n<span class=\"time\"\n  >{{ timeLeft | formatTimer }}\n  {{ 'asm.agentSessionTimer.minutes' | cxTranslate }}</span\n>\n<a\n  class=\"reset\"\n  title=\"{{ 'asm.agentSessionTimer.reset' | cxTranslate }}\"\n  (click)=\"resetTimer()\"\n>\n</a>\n",
+                    encapsulation: ViewEncapsulation.None,
+                    styles: ["cx-asm-session-timer{display:flex;align-items:center;height:16px;margin:0 15px}cx-asm-session-timer .label{margin:0 6px}@media (max-width:575px){cx-asm-session-timer .label{display:none}}cx-asm-session-timer .time{font-weight:600}cx-asm-session-timer .reset{margin:0 15px;cursor:pointer;width:16px;height:16px;background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23d1e3ff' d='M14.9,7.5l-1,0.2c0.2,0.9,0.1,1.7-0.1,2.5c-0.3,1-0.8,2-1.5,2.7c-1.1,1.1-2.7,1.8-4.2,1.8 c-0.8,0-1.5-0.1-2.3-0.4c-1.5-0.6-2.7-1.8-3.3-3.3C2.1,10.2,2,9.5,2,8.7c0-1.6,0.7-3.1,1.8-4.3c0.7-0.8,1.7-1.3,2.7-1.5 c1-0.3,2-0.2,3,0l0,0v-1c-1-0.2-2.1-0.2-3.1,0C4.2,2.4,2.4,4,1.5,6.1C1.2,6.9,1,7.8,1,8.7c0,0.9,0.2,1.8,0.5,2.6 c0.4,0.9,0.9,1.7,1.5,2.3c0.7,0.7,1.4,1.2,2.3,1.5c0.8,0.3,1.7,0.5,2.6,0.5c0.9,0,1.8-0.2,2.6-0.5c2.1-0.9,3.7-2.7,4.2-5 C15,9.3,15,8.4,14.9,7.5z'/%3E%3Cpolygon fill='%23d1e3ff' points='11.5,2.8 9.2,4.5 9.7,0.5 '/%3E%3C/svg%3E%0A\") center center no-repeat}"]
+                }] }
+    ];
+    /** @nocollapse */
+    AsmSessionTimerComponent.ctorParameters = function () { return [
+        { type: AsmConfig },
+        { type: AsmComponentService },
+        { type: AuthService },
+        { type: RoutingService },
+        { type: ChangeDetectorRef }
+    ]; };
+    return AsmSessionTimerComponent;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    AsmSessionTimerComponent.prototype.subscriptions;
+    /**
+     * @type {?}
+     * @private
+     */
+    AsmSessionTimerComponent.prototype.interval;
+    /**
+     * @type {?}
+     * @private
+     */
+    AsmSessionTimerComponent.prototype.maxStartDelayInSeconds;
+    /** @type {?} */
+    AsmSessionTimerComponent.prototype.timeLeft;
+    /**
+     * @type {?}
+     * @private
+     */
+    AsmSessionTimerComponent.prototype.config;
+    /**
+     * @type {?}
+     * @private
+     */
+    AsmSessionTimerComponent.prototype.asmComponentService;
+    /**
+     * @type {?}
+     * @private
+     */
+    AsmSessionTimerComponent.prototype.authService;
+    /**
+     * @type {?}
+     * @private
+     */
+    AsmSessionTimerComponent.prototype.routingService;
+    /**
+     * @type {?}
+     * @private
+     */
+    AsmSessionTimerComponent.prototype.changeDetectorRef;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var FormatTimerPipe = /** @class */ (function () {
+    function FormatTimerPipe() {
+    }
+    /**
+     * @param {?} totalSeconds
+     * @return {?}
+     */
+    FormatTimerPipe.prototype.transform = /**
+     * @param {?} totalSeconds
+     * @return {?}
+     */
+    function (totalSeconds) {
+        if (totalSeconds < 0) {
+            totalSeconds = 0;
+        }
+        /** @type {?} */
+        var minutes = Math.floor(totalSeconds / 60);
+        /** @type {?} */
+        var seconds = totalSeconds % 60;
+        /** @type {?} */
+        var zeroPaddedMinutes;
+        if (minutes < 10) {
+            zeroPaddedMinutes = ('00' + minutes).slice(-2);
+        }
+        else {
+            zeroPaddedMinutes = minutes + '';
+        }
+        /** @type {?} */
+        var zeroPaddedSeconds = ('00' + seconds).slice(-2);
+        return zeroPaddedMinutes + ":" + zeroPaddedSeconds;
+    };
+    FormatTimerPipe.decorators = [
+        { type: Pipe, args: [{
+                    name: 'formatTimer',
+                },] }
+    ];
+    return FormatTimerPipe;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CSAgentLoginFormComponent = /** @class */ (function () {
+    function CSAgentLoginFormComponent(fb) {
+        this.fb = fb;
+        this.submitClicked = false;
+        this.csAgentTokenLoading = false;
+        this.submitEvent = new EventEmitter();
+    }
+    /**
+     * @return {?}
+     */
+    CSAgentLoginFormComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.form = this.fb.group({
+            userId: ['', [Validators.required]],
+            password: ['', [Validators.required]],
+        });
+    };
+    /**
+     * @return {?}
+     */
+    CSAgentLoginFormComponent.prototype.onSubmit = /**
+     * @return {?}
+     */
+    function () {
+        this.submitClicked = true;
+        if (this.form.invalid) {
+            return;
+        }
+        this.submitEvent.emit({
+            userId: this.form.controls.userId.value,
+            password: this.form.controls.password.value,
+        });
+    };
+    /**
+     * @param {?} formControlName
+     * @return {?}
+     */
+    CSAgentLoginFormComponent.prototype.isNotValid = /**
+     * @param {?} formControlName
+     * @return {?}
+     */
+    function (formControlName) {
+        return FormUtils.isNotValidField(this.form, formControlName, this.submitClicked);
+    };
+    CSAgentLoginFormComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-csagent-login-form',
+                    template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\" *ngIf=\"!csAgentTokenLoading\">\n  <label>\n    <input\n      type=\"text\"\n      [class.is-invalid]=\"isNotValid('userId')\"\n      formControlName=\"userId\"\n      placeholder=\"{{ 'asm.loginForm.userId.label' | cxTranslate }}\"\n    />\n    <div class=\"invalid-feedback\" *ngIf=\"isNotValid('userId')\">\n      <span>{{ 'asm.loginForm.userId.required' | cxTranslate }}</span>\n    </div>\n  </label>\n\n  <label>\n    <input\n      type=\"password\"\n      [class.is-invalid]=\"isNotValid('password')\"\n      placeholder=\"{{ 'asm.loginForm.password.label' | cxTranslate }}\"\n      formControlName=\"password\"\n    />\n    <div class=\"invalid-feedback\" *ngIf=\"isNotValid('password')\">\n      <span>{{ 'asm.loginForm.password.required' | cxTranslate }}</span>\n    </div>\n  </label>\n  <button type=\"submit\">\n    {{ 'asm.loginForm.submit' | cxTranslate }}\n  </button>\n</form>\n\n<div\n  *ngIf=\"csAgentTokenLoading\"\n  class=\"spinner\"\n  aria-hidden=\"false\"\n  aria-label=\"Loading\"\n>\n  <div></div>\n  <div></div>\n  <div></div>\n</div>\n",
+                    encapsulation: ViewEncapsulation.None,
+                    styles: ["cx-csagent-login-form form{display:flex;width:100%}@media (max-width:575px){cx-csagent-login-form form{flex-direction:column}cx-csagent-login-form form>*{margin-bottom:12px}}cx-csagent-login-form form label input{width:100%}cx-csagent-login-form button[type=submit]{color:#fff;border-color:#0a6ed1;background-color:#0a6ed1}cx-csagent-login-form button[type=submit]:hover{background-color:#085caf}@media (min-width:575px){cx-csagent-login-form label:nth-child(2){margin:0 8px}}"]
+                }] }
+    ];
+    /** @nocollapse */
+    CSAgentLoginFormComponent.ctorParameters = function () { return [
+        { type: FormBuilder }
+    ]; };
+    CSAgentLoginFormComponent.propDecorators = {
+        csAgentTokenLoading: [{ type: Input }],
+        submitEvent: [{ type: Output }]
+    };
+    return CSAgentLoginFormComponent;
+}());
+if (false) {
+    /** @type {?} */
+    CSAgentLoginFormComponent.prototype.form;
+    /**
+     * @type {?}
+     * @private
+     */
+    CSAgentLoginFormComponent.prototype.submitClicked;
+    /** @type {?} */
+    CSAgentLoginFormComponent.prototype.csAgentTokenLoading;
+    /** @type {?} */
+    CSAgentLoginFormComponent.prototype.submitEvent;
+    /**
+     * @type {?}
+     * @private
+     */
+    CSAgentLoginFormComponent.prototype.fb;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CustomerEmulationComponent = /** @class */ (function () {
+    function CustomerEmulationComponent(asmComponentService, userService) {
+        this.asmComponentService = asmComponentService;
+        this.userService = userService;
+        this.subscription = new Subscription();
+    }
+    /**
+     * @return {?}
+     */
+    CustomerEmulationComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.subscription.add(this.userService.get().subscribe((/**
+         * @param {?} user
+         * @return {?}
+         */
+        function (user) { return (_this.customer = user); })));
+        this.isCustomerEmulationSessionInProgress$ = this.asmComponentService.isCustomerEmulationSessionInProgress();
+    };
+    /**
+     * @return {?}
+     */
+    CustomerEmulationComponent.prototype.logoutCustomer = /**
+     * @return {?}
+     */
+    function () {
+        this.asmComponentService.logoutCustomer();
+    };
+    /**
+     * @return {?}
+     */
+    CustomerEmulationComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this.subscription.unsubscribe();
+    };
+    CustomerEmulationComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-customer-emulation',
+                    template: "<ng-container\n  *ngIf=\"\n    isCustomerEmulationSessionInProgress$ | async;\n    else realCustomerSession\n  \"\n>\n  <input\n    formcontrolname=\"customer\"\n    type=\"text\"\n    disabled=\"true\"\n    placeholder=\"{{ customer?.name }}, {{ customer?.uid }}\"\n  />\n  <button (click)=\"logoutCustomer()\">\n    {{ 'asm.endSession' | cxTranslate }}\n  </button>\n</ng-container>\n\n<ng-template #realCustomerSession>\n  <div class=\"asm-alert\" role=\"alert\">\n    {{ 'asm.standardSessionInProgress' | cxTranslate }}\n  </div>\n</ng-template>\n",
+                    encapsulation: ViewEncapsulation.None,
+                    styles: ["cx-customer-emulation{display:flex}@media (max-width:575px){cx-customer-emulation{flex-direction:column}cx-customer-emulation>*{margin-bottom:12px}}cx-customer-emulation button{padding-left:35px;color:#b00;border-color:#b00;background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23bb0000' d='M14.8,8c0-3.7-3-6.8-6.8-6.8S1.3,4.2,1.3,8s3,6.8,6.8,6.8S14.8,11.7,14.8,8z M2.6,8c0-3,2.4-5.5,5.5-5.5S13.5,5,13.5,8 s-2.4,5.5-5.5,5.5S2.6,11,2.6,8z M10.7,5.8v4.4c0,0.2-0.2,0.4-0.4,0.4H5.9c-0.2,0-0.4-0.2-0.4-0.4V5.8c0-0.2,0.2-0.4,0.4-0.4h4.4 C10.5,5.4,10.7,5.6,10.7,5.8z'/%3E%3C/svg%3E%0A\") 10px center no-repeat}@media (min-width:575px){cx-customer-emulation input{flex:1}cx-customer-emulation button{-webkit-margin-start:8px;margin-inline-start:8px}}cx-customer-emulation button:hover{background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='white' d='M14.8,8c0-3.7-3-6.8-6.8-6.8S1.3,4.2,1.3,8s3,6.8,6.8,6.8S14.8,11.7,14.8,8z M2.6,8c0-3,2.4-5.5,5.5-5.5S13.5,5,13.5,8 s-2.4,5.5-5.5,5.5S2.6,11,2.6,8z M10.7,5.8v4.4c0,0.2-0.2,0.4-0.4,0.4H5.9c-0.2,0-0.4-0.2-0.4-0.4V5.8c0-0.2,0.2-0.4,0.4-0.4h4.4 C10.5,5.4,10.7,5.6,10.7,5.8z'/%3E%3C/svg%3E%0A\") 10px center no-repeat #b00;color:#fff;fill:#fff}.asm-alert{padding:9px 12px;border-radius:4px;border:1px solid #89919a;background-color:#f4f4f4;color:#32363a;text-align:center;flex:1}"]
+                }] }
+    ];
+    /** @nocollapse */
+    CustomerEmulationComponent.ctorParameters = function () { return [
+        { type: AsmComponentService },
+        { type: UserService }
+    ]; };
+    return CustomerEmulationComponent;
+}());
+if (false) {
+    /** @type {?} */
+    CustomerEmulationComponent.prototype.customer;
+    /** @type {?} */
+    CustomerEmulationComponent.prototype.isCustomerEmulationSessionInProgress$;
+    /**
+     * @type {?}
+     * @private
+     */
+    CustomerEmulationComponent.prototype.subscription;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CustomerEmulationComponent.prototype.asmComponentService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CustomerEmulationComponent.prototype.userService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CustomerSelectionComponent = /** @class */ (function () {
+    function CustomerSelectionComponent(fb, asmService, config) {
+        this.fb = fb;
+        this.asmService = asmService;
+        this.config = config;
+        this.subscription = new Subscription();
+        this.submitEvent = new EventEmitter();
+    }
+    /**
+     * @return {?}
+     */
+    CustomerSelectionComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.form = this.fb.group({
+            searchTerm: [''],
+        });
+        this.asmService.customerSearchReset();
+        this.searchResultsLoading$ = this.asmService.getCustomerSearchResultsLoading();
+        this.searchResults = this.asmService.getCustomerSearchResults();
+        this.subscription.add(this.form.controls.searchTerm.valueChanges
+            .pipe(debounceTime(300))
+            .subscribe((/**
+         * @param {?} searchTermValue
+         * @return {?}
+         */
+        function (searchTermValue) {
+            _this.handleSearchTerm(searchTermValue);
+        })));
+    };
+    /**
+     * @private
+     * @param {?} searchTermValue
+     * @return {?}
+     */
+    CustomerSelectionComponent.prototype.handleSearchTerm = /**
+     * @private
+     * @param {?} searchTermValue
+     * @return {?}
+     */
+    function (searchTermValue) {
+        if (Boolean(this.selectedCustomer) &&
+            searchTermValue !== this.selectedCustomer.name) {
+            this.selectedCustomer = undefined;
+        }
+        if (Boolean(this.selectedCustomer)) {
+            return;
+        }
+        this.asmService.customerSearchReset();
+        if (searchTermValue.trim().length >= 3) {
+            this.asmService.customerSearch({
+                query: searchTermValue,
+                pageSize: this.config.asm.customerSearch.maxResults,
+            });
+        }
+    };
+    /**
+     * @param {?} customer
+     * @return {?}
+     */
+    CustomerSelectionComponent.prototype.selectCustomerFromList = /**
+     * @param {?} customer
+     * @return {?}
+     */
+    function (customer) {
+        this.selectedCustomer = customer;
+        this.form.controls.searchTerm.setValue(this.selectedCustomer.name);
+        this.asmService.customerSearchReset();
+    };
+    /**
+     * @return {?}
+     */
+    CustomerSelectionComponent.prototype.onSubmit = /**
+     * @return {?}
+     */
+    function () {
+        if (Boolean(this.selectedCustomer)) {
+            this.submitEvent.emit({ customerId: this.selectedCustomer.customerId });
+        }
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    CustomerSelectionComponent.prototype.onDocumentClick = /**
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        if (Boolean(this.resultList)) {
+            if (this.resultList.nativeElement.contains(event.target) ||
+                this.searchTerm.nativeElement.contains(event.target)) {
+                return;
+            }
+            else {
+                this.asmService.customerSearchReset();
+            }
+        }
+    };
+    /**
+     * @return {?}
+     */
+    CustomerSelectionComponent.prototype.closeResults = /**
+     * @return {?}
+     */
+    function () {
+        this.asmService.customerSearchReset();
+    };
+    /**
+     * @return {?}
+     */
+    CustomerSelectionComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this.subscription.unsubscribe();
+        this.asmService.customerSearchReset();
+    };
+    CustomerSelectionComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-customer-selection',
+                    template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\">\n  <input\n    #searchTerm\n    type=\"text\"\n    formControlName=\"searchTerm\"\n    placeholder=\"{{ 'asm.customerSearch.searchTerm.label' | cxTranslate }}\"\n  />\n  <button type=\"submit\" [disabled]=\"!selectedCustomer\">\n    {{ 'asm.customerSearch.submit' | cxTranslate }}\n  </button>\n</form>\n\n<div *ngIf=\"searchResults | async as results\" class=\"asm-results\" #resultList>\n  <a\n    *ngFor=\"let result of results.entries\"\n    (click)=\"selectCustomerFromList(result)\"\n    ><span class=\"result-name\">{{ result.name }}</span>\n    <span class=\"result-id\">{{ result.uid }}</span></a\n  >\n  <a\n    (click)=\"closeResults()\"\n    *ngIf=\"\n      !(searchResultsLoading$ | async) &&\n      searchTerm.value.length >= 3 &&\n      (!!results.entries && results.entries.length <= 0)\n    \"\n    >{{ 'asm.customerSearch.noMatch' | cxTranslate }}</a\n  >\n</div>\n\n<div class=\"asm-results\" *ngIf=\"searchResultsLoading$ | async\">\n  <div class=\"spinner\" aria-hidden=\"false\" aria-label=\"Loading\">\n    <div></div>\n    <div></div>\n    <div></div>\n  </div>\n</div>\n",
+                    encapsulation: ViewEncapsulation.None,
+                    host: {
+                        '(document:click)': 'onDocumentClick($event)',
+                    },
+                    styles: ["cx-customer-selection button[type=submit]{border-color:#0a7e3e;color:#fff;padding-left:35px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAKtmlDQ1BEaXNwbGF5AABIx62Wd1BT+RbHf/fe9EILICAl9N6lSwk9dOkgKiEJJJQYEoKIDZHFFVwLKiKgrugiRcFGkbUgFiwsgg2sC7IoqOtiwYbKu8Aj7L6Z98ebeWfm3N9nzpzf+Z1z7/3NfAGgApZQmA7LAZAhyBKF+3nSY+Pi6fghAAEYEIE+cGaxxUJGWFgQQG12/ad9uIdmo3bbfKoW+N9MnsMVswGAwlBO4ojZGSifQv0ZWyjKAgCpROO6K7KEU9yOsqIIbRDlO1OcMsMjU5w0w1+ncyLDvQDAoFMRKCyWKAUAijoap2ezU9A6lIUoWwk4fAHKU/26sXksDspHUDbLyFg+xf0oGyX9rU7KP2omSWuyWClSnpll2gjefLEwnbUS/L8tI10ye4YB6hSeyD8cXWXQd9aftjxQyoKkkNBZ5nOm86eZJ/GPmmW22Ct+ljks70Dp3vSQoFlO5vsypXWymJGzzBX7RMyyaHm49KxkkRdjllmiuXMlaVHSOI/LlNbP5UXGzHI2PzpklsVpEYFzOV7SuEgSLu2fK/DznDvXVzp7hvhv8/KZ0r1ZvEh/6eysuf65AsZcTXGstDcO19tnLidKmi/M8pSeJUwPk+Zz0/2kcXF2hHRvFvpDzu0Nk77DVFZA2CwDfxAG6MAGWIEcwAcgi5uTNTWE13LhShE/hZdFZ6C3i0tnCtgWZnQbK2snAKbu6syv8K5/+g5CyoS5WGY+AE7ofUCC52JLFwNwvAEAhdC5mMFn9Mqg3+DsdrZElD0Tw0w9sIAEZIEiUAWaQBcYAXO0O3vgAjyADwgAoSASxIGlgA14IAOIwAqwGqwHhaAYbAO7QDnYDw6CGnAUnAAt4Ay4AK6AG6AH3AUPwQAYBi/BGPgAJiAIwkNUiAapQlqQPmQK2UCOkBvkAwVB4VAclAilQAJIAq2GNkDFUAlUDh2AaqHj0GnoAnQN6oXuQ4PQKPQW+gIjMAVWhDVgA9gSdoQZcCAcCS+BU+BMOBcugLfAZXAVfARuhi/AN+C78AD8Eh5HAEJGlBFtxBxxRLyQUCQeSUZEyFqkCClFqpAGpA3pRG4jA8gr5DMGh6Fh6BhzjAvGHxOFYWMyMWsxmzHlmBpMM+YS5jZmEDOG+Y6lYtWxplhnLBMbi03BrsAWYkux1dgm7GXsXeww9gMOh1PGGeIccP64OFwqbhVuM24vrhHXjuvFDeHG8Xi8Kt4U74oPxbPwWfhC/B78Efx5/C38MP4TgUzQItgQfAnxBAEhn1BKqCOcI9wiPCdMEOWI+kRnYiiRQ1xJ3Eo8RGwj3iQOEydI8iRDkispkpRKWk8qIzWQLpMekd6RyWQdshN5EZlPziOXkY+Rr5IHyZ8pChQTihclgSKhbKEcprRT7lPeUalUA6oHNZ6aRd1CraVepD6hfpKhyVjIMGU4MutkKmSaZW7JvJYlyurLMmSXyubKlsqelL0p+0qOKGcg5yXHklsrVyF3Wq5PblyeJm8tHyqfIb9Zvk7+mvyIAl7BQMFHgaNQoHBQ4aLCEA2h6dK8aGzaBtoh2mXasCJO0VCRqZiqWKx4VLFbcUxJQWmBUrRSjlKF0lmlAWVE2UCZqZyuvFX5hPI95S/zNOYx5nHnbZrXMO/WvI8q81U8VLgqRSqNKndVvqjSVX1U01S3q7aoPlbDqJmoLVJbobZP7bLaq/mK813ms+cXzT8x/4E6rG6iHq6+Sv2gepf6uIamhp+GUGOPxkWNV5rKmh6aqZo7Nc9pjmrRtNy0+Fo7tc5rvaAr0Rn0dHoZ/RJ9TFtd219bon1Au1t7QsdQJ0onX6dR57EuSddRN1l3p26H7piell6w3mq9er0H+kR9R32e/m79Tv2PBoYGMQYbDVoMRgxVDJmGuYb1ho+MqEbuRplGVUZ3jHHGjsZpxnuNe0xgEzsTnkmFyU1T2NTelG+617TXDGvmZCYwqzLrM6eYM8yzzevNBy2ULYIs8i1aLF5b6lnGW2637LT8bmVnlW51yOqhtYJ1gHW+dZv1WxsTG7ZNhc0dW6qtr+0621bbNwtMF3AX7FvQb0ezC7bbaNdh983ewV5k32A/6qDnkOhQ6dDnqOgY5rjZ8aoT1snTaZ3TGafPzvbOWc4nnP9yMXdJc6lzGVlouJC78NDCIVcdV5brAdcBN7pbotvPbgPu2u4s9yr3px66HhyPao/nDGNGKuMI47WnlafIs8nzo5ez1xqvdm/E28+7yLvbR8Enyqfc54mvjm+Kb73vmJ+d3yq/dn+sf6D/dv8+pgaTzaxljgU4BKwJuBRICYwILA98GmQSJApqC4aDA4J3BD8K0Q8RhLSEglBm6I7Qx2GGYZlhvy7CLQpbVLHoWbh1+OrwzghaxLKIuogPkZ6RWyMfRhlFSaI6omWjE6Jroz/GeMeUxAzEWsauib0RpxbHj2uNx8dHx1fHjy/2Wbxr8XCCXUJhwr0lhktyllxbqrY0fenZZbLLWMtOJmITYxLrEr+yQllVrPEkZlJl0hjbi72b/ZLjwdnJGeW6cku4z5Ndk0uSR1JcU3akjPLceaW8V3wvfjn/Tap/6v7Uj2mhaYfTJtNj0hszCBmJGacFCoI0waXlmstzlvcKTYWFwoFM58xdmWOiQFG1GBIvEbdmKaKiqEtiJPlBMpjtll2R/WlF9IqTOfI5gpyulSYrN618nuub+8sqzCr2qo7V2qvXrx5cw1hzYC20NmltxzrddQXrhvP88mrWk9anrf8t3yq/JP/9hpgNbQUaBXkFQz/4/VBfKFMoKuzb6LJx/4+YH/k/dm+y3bRn0/ciTtH1Yqvi0uKvm9mbr/9k/VPZT5Nbkrd0b7Xfum8bbptg273t7ttrSuRLckuGdgTvaN5J31m08/2uZbuulS4o3b+btFuye6AsqKx1j96ebXu+lvPK71Z4VjRWqlduqvy4l7P31j6PfQ37NfYX7//yM//n/gN+B5qrDKpKD+IOZh98dij6UOcvjr/UVqtVF1d/Oyw4PFATXnOp1qG2tk69bms9XC+pHz2ScKTnqPfR1gbzhgONyo3Fx8AxybEXxxOP3zsReKLjpOPJhlP6pyqbaE1FzVDzyuaxFl7LQGtca+/pgNMdbS5tTb9a/Hr4jPaZirNKZ7eeI50rODd5Pvf8eLuw/dWFlAtDHcs6Hl6MvXjn0qJL3ZcDL1+94nvlYiej8/xV16tnrjlfO33d8XrLDfsbzV12XU2/2f3W1G3f3XzT4WZrj1NPW+/C3nO33G9duO19+8od5p0bd0Pu9t6Lutffl9A30M/pH7mffv/Ng+wHEw/zHmEfFT2We1z6RP1J1e/GvzcO2A+cHfQe7Hoa8fThEHvo5R/iP74OFzyjPit9rvW8dsRm5Myo72jPi8Uvhl8KX068KvxT/s/K10avT/3l8VfXWOzY8BvRm8m3m9+pvjv8fsH7jvGw8ScfMj5MfCz6pPqp5rPj584vMV+eT6z4iv9a9s34W9v3wO+PJjMmJ4UsEWtaCiCow8nJALw9DAA1DgBaDwCkxTNaetqgGf0/TeC/8YzenjZ7AA55ABCJ6vkQdN2HukEeqklQD5uKewDY1lbq/zZxsq3NTC1yCypNSicn36GaBW8MwLe+ycmJlsnJb9Vosw8AaP8wo+GnTGcMlfreU9SdM5H3n1r6X/dYEDmGJmdAAAAACXBIWXMAAAsTAAALEwEAmpwYAAAGL2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDUgNzkuMTYzNDk5LCAyMDE4LzA4LzEzLTE2OjQwOjIyICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczpleGlmPSJodHRwOi8vbnMuYWRvYmUuY29tL2V4aWYvMS4wLyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIGV4aWY6UGl4ZWxYRGltZW5zaW9uPSIyNSIgZXhpZjpQaXhlbFlEaW1lbnNpb249IjI3IiB4bXA6Q3JlYXRlRGF0ZT0iMjAxOS0wOS0yNVQxMjoyODo1MS0wNDowMCIgeG1wOk1vZGlmeURhdGU9IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiBwaG90b3Nob3A6SUNDUHJvZmlsZT0iRGlzcGxheSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowZTIyOTVhMC0yYWY0LTQ2Y2UtOThlNy0zZTU2YTM0YjFkZjUiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDozYmMzNWI0YS0wNjkxLTRmNDEtODk5OC1lYWFmOTI2NGQ2NmMiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpjZWE4Y2FhMC0yMGU1LTQzN2ItYmQ5YS03YjlmMGZiNmYyZTYiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDpjZWE4Y2FhMC0yMGU1LTQzN2ItYmQ5YS03YjlmMGZiNmYyZTYiIHN0RXZ0OndoZW49IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDowZTIyOTVhMC0yYWY0LTQ2Y2UtOThlNy0zZTU2YTM0YjFkZjUiIHN0RXZ0OndoZW49IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuzZx/kAAAEoSURBVDjLY/z//z8DNQATA5UAhkGNe+f8f/757f+09e2kORXkNWR86P75/zCw7cax/6o9If/R1WDDOA368/cvmH7/7dP/tHXt/8k2KGlNy/8dN4/DXbf95rH/anhch9Mgz/kFYE3p6zv+f/j+GSwGokF8sgwCYZBLQC6CAZBL0V1HlEEwnLquDRxmMNfFrmyAqyEpHd1+85jh5Zd3YDYfOzeDlrgi4ehHdpFYi8f/KcdW///7DxKTQAP/e8zLJ81rfgtL/j949wws9vvvn/+9h5f9F212/090YEetqP2/+Nx2eABfeHbrv/WMNNKj/8fvX2D6+++f/+t3z/ov2Ojyn6wECQJHHlz8bzgplrws0rBn9v9XX97/L9zS/5+vwYkoQ0CYcdCVRwBmUrSjUTYI3gAAAABJRU5ErkJggg==) 10px center no-repeat #0a7e3e}cx-customer-selection form{display:flex;width:100%}@media (min-width:575px){cx-customer-selection button[type=submit]{-webkit-margin-start:8px;margin-inline-start:8px}cx-customer-selection form input{flex:1}}@media (max-width:575px){cx-customer-selection form{flex-direction:column}cx-customer-selection form>*{margin-bottom:12px}}cx-customer-selection .spinner{height:42px;align-items:center}cx-customer-selection .asm-results{width:calc(100vw - 4rem);border:1px solid #89919a;position:absolute;z-index:11;margin-top:40px;box-shadow:0 5px 20px 0 #d9d9d9,0 2px 8px 0 #ededed;background-color:#fff;border-radius:4px;min-height:50px}cx-customer-selection .asm-results a{color:#51555a;display:flex;flex-direction:column;cursor:pointer;padding:10px}@media (min-width:767px){cx-customer-selection .asm-results,cx-customer-selection form{width:50vw}cx-customer-selection .asm-results a{flex-direction:row}}cx-customer-selection .asm-results a *{flex:1}cx-customer-selection .asm-results a:hover{color:#32363a;background-color:#fafafa}"]
+                }] }
+    ];
+    /** @nocollapse */
+    CustomerSelectionComponent.ctorParameters = function () { return [
+        { type: FormBuilder },
+        { type: AsmService },
+        { type: AsmConfig }
+    ]; };
+    CustomerSelectionComponent.propDecorators = {
+        submitEvent: [{ type: Output }],
+        resultList: [{ type: ViewChild, args: ['resultList', { static: false },] }],
+        searchTerm: [{ type: ViewChild, args: ['searchTerm', { static: false },] }]
+    };
+    return CustomerSelectionComponent;
+}());
+if (false) {
+    /** @type {?} */
+    CustomerSelectionComponent.prototype.form;
+    /**
+     * @type {?}
+     * @private
+     */
+    CustomerSelectionComponent.prototype.subscription;
+    /** @type {?} */
+    CustomerSelectionComponent.prototype.searchResultsLoading$;
+    /** @type {?} */
+    CustomerSelectionComponent.prototype.searchResults;
+    /** @type {?} */
+    CustomerSelectionComponent.prototype.selectedCustomer;
+    /** @type {?} */
+    CustomerSelectionComponent.prototype.submitEvent;
+    /** @type {?} */
+    CustomerSelectionComponent.prototype.resultList;
+    /** @type {?} */
+    CustomerSelectionComponent.prototype.searchTerm;
+    /**
+     * @type {?}
+     * @private
+     */
+    CustomerSelectionComponent.prototype.fb;
+    /**
+     * @type {?}
+     * @private
+     */
+    CustomerSelectionComponent.prototype.asmService;
+    /**
+     * @type {?}
+     * @private
+     */
+    CustomerSelectionComponent.prototype.config;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var AsmModule = /** @class */ (function () {
+    function AsmModule() {
+    }
+    AsmModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        ReactiveFormsModule,
+                        I18nModule,
+                        AsmModule$1.forRoot(),
+                        AsmLoaderModule,
+                    ],
+                    declarations: [
+                        AsmMainUiComponent,
+                        CSAgentLoginFormComponent,
+                        CustomerSelectionComponent,
+                        AsmSessionTimerComponent,
+                        FormatTimerPipe,
+                        CustomerEmulationComponent,
+                    ],
+                    entryComponents: [AsmMainUiComponent],
+                },] }
+    ];
+    return AsmModule;
+}());
 
 /**
  * @fileoverview added by tsickle
@@ -4581,7 +9653,7 @@ var AddToCartComponent = /** @class */ (function () {
         }
         else if (this.productCode) {
             this.cartEntry$ = this.cartService.getEntry(this.productCode);
-            // force hasStock and quanity for the time being, as we do not have more info:
+            // force hasStock and quantity for the time being, as we do not have more info:
             this.quantity = 1;
             this.hasStock = true;
             this.cd.markForCheck();
@@ -4678,7 +9750,7 @@ var AddToCartComponent = /** @class */ (function () {
         modalInstance = this.modalRef.componentInstance;
         modalInstance.entry$ = this.cartEntry$;
         modalInstance.cart$ = this.cartService.getActive();
-        modalInstance.loaded$ = this.cartService.getAddEntryLoaded();
+        modalInstance.loaded$ = this.cartService.getLoaded();
         modalInstance.quantity = this.quantity;
         modalInstance.increment = this.increment;
     };
@@ -4760,22 +9832,6 @@ if (false) {
      */
     AddToCartComponent.prototype.cd;
 }
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var AutoFocusDirectiveModule = /** @class */ (function () {
-    function AutoFocusDirectiveModule() {
-    }
-    AutoFocusDirectiveModule.decorators = [
-        { type: NgModule, args: [{
-                    declarations: [AutoFocusDirective],
-                    exports: [AutoFocusDirective],
-                },] }
-    ];
-    return AutoFocusDirectiveModule;
-}());
 
 /**
  * @fileoverview added by tsickle
@@ -5098,35 +10154,55 @@ var CartItemListComponent = /** @class */ (function () {
         this.fb = fb;
         this.isReadOnly = false;
         this.hasHeader = true;
-        this.items = [];
         this.potentialProductPromotions = [];
         this.cartIsLoading = false;
         this.form = this.fb.group({});
+        this._items = [];
     }
+    Object.defineProperty(CartItemListComponent.prototype, "items", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._items;
+        },
+        set: /**
+         * @param {?} _items
+         * @return {?}
+         */
+        function (_items) {
+            var _this = this;
+            this._items = _items;
+            this.items.forEach((/**
+             * @param {?} item
+             * @return {?}
+             */
+            function (item) {
+                var code = item.product.code;
+                if (!_this.form.controls[code]) {
+                    _this.form.setControl(code, _this.createEntryFormGroup(item));
+                }
+                else {
+                    /** @type {?} */
+                    var entryForm = (/** @type {?} */ (_this.form.controls[code]));
+                    entryForm.controls.quantity.setValue(item.quantity);
+                }
+            }));
+        },
+        enumerable: true,
+        configurable: true
+    });
+    // TODO remove for 2.0 - left to keep backward compatibility
+    // TODO remove for 2.0 - left to keep backward compatibility
     /**
      * @return {?}
      */
-    CartItemListComponent.prototype.ngOnInit = /**
+    CartItemListComponent.prototype.ngOnInit = 
+    // TODO remove for 2.0 - left to keep backward compatibility
+    /**
      * @return {?}
      */
-    function () {
-        var _this = this;
-        this.items.forEach((/**
-         * @param {?} item
-         * @return {?}
-         */
-        function (item) {
-            var code = item.product.code;
-            if (!_this.form.controls[code]) {
-                _this.form.setControl(code, _this.createEntryFormGroup(item));
-            }
-            else {
-                /** @type {?} */
-                var entryForm = (/** @type {?} */ (_this.form.controls[code]));
-                entryForm.controls.quantity.setValue(item.quantity);
-            }
-        }));
-    };
+    function () { };
     /**
      * @param {?} item
      * @return {?}
@@ -5230,12 +10306,12 @@ var CartItemListComponent = /** @class */ (function () {
     function (consumedEntry, entry) {
         var e_3, _a;
         /** @type {?} */
-        var consumendEntryNumber = consumedEntry.orderEntryNumber;
+        var consumedEntryNumber = consumedEntry.orderEntryNumber;
         if (entry.entries && entry.entries.length > 0) {
             try {
                 for (var _b = __values(entry.entries), _c = _b.next(); !_c.done; _c = _b.next()) {
                     var subEntry = _c.value;
-                    if (subEntry.entryNumber === consumendEntryNumber) {
+                    if (subEntry.entryNumber === consumedEntryNumber) {
                         return true;
                     }
                 }
@@ -5250,7 +10326,7 @@ var CartItemListComponent = /** @class */ (function () {
             return false;
         }
         else {
-            return consumendEntryNumber === entry.entryNumber;
+            return consumedEntryNumber === entry.entryNumber;
         }
     };
     CartItemListComponent.decorators = [
@@ -5279,13 +10355,16 @@ if (false) {
     /** @type {?} */
     CartItemListComponent.prototype.hasHeader;
     /** @type {?} */
-    CartItemListComponent.prototype.items;
-    /** @type {?} */
     CartItemListComponent.prototype.potentialProductPromotions;
     /** @type {?} */
     CartItemListComponent.prototype.cartIsLoading;
     /** @type {?} */
     CartItemListComponent.prototype.form;
+    /**
+     * @type {?}
+     * @private
+     */
+    CartItemListComponent.prototype._items;
     /**
      * @type {?}
      * @protected
@@ -5427,7 +10506,7 @@ var OrderSummaryComponent = /** @class */ (function () {
     OrderSummaryComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-order-summary',
-                    template: "<h4>{{ 'orderCost.orderSummary' | cxTranslate }}</h4>\n\n<div class=\"cx-summary-partials\" *ngIf=\"cart\">\n  <div class=\"cx-summary-row\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.subtotal' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.subTotal?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.estimatedShipping' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{\n        cart.deliveryCost?.formattedValue\n          ? cart.deliveryCost.formattedValue\n          : 'TBD'\n      }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row\" *ngIf=\"cart.net\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.salesTax' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.totalTax?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row cx-summary-total\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.total' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.totalPriceWithTax?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row\" *ngIf=\"cart.totalDiscounts?.value > 0\">\n    {{ 'orderCost.discount' | cxTranslate }}\n    {{ cart.totalDiscounts?.formattedValue }}\n  </div>\n  <div class=\"cx-summary-row\" *ngIf=\"!cart.net\">\n    {{ 'orderCost.grossTax' | cxTranslate }}\n    {{ cart.totalTax?.formattedValue }}.\n  </div>\n</div>\n\n<!--\n<cx-promotions\n  *ngIf=\"cart\"\n  [promotions]=\"cart.appliedOrderPromotions\"\n></cx-promotions>\n-->\n<cx-applied-coupons\n  [vouchers]=\"cart.appliedVouchers\"\n  [isReadOnly]=\"true\"\n></cx-applied-coupons>\n"
+                    template: "<h4>{{ 'orderCost.orderSummary' | cxTranslate }}</h4>\n\n<div class=\"cx-summary-partials\" *ngIf=\"cart\">\n  <div class=\"cx-summary-row\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.subtotal' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.subTotal?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.estimatedShipping' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{\n        cart.deliveryCost?.formattedValue\n          ? cart.deliveryCost.formattedValue\n          : 'TBD'\n      }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row\" *ngIf=\"cart.net\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.salesTax' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.totalTax?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row cx-summary-total\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.total' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.totalPriceWithTax?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row\" *ngIf=\"cart.totalDiscounts?.value > 0\">\n    {{ 'orderCost.discount' | cxTranslate }}\n    {{ cart.totalDiscounts?.formattedValue }}\n  </div>\n  <div class=\"cx-summary-row\" *ngIf=\"!cart.net\">\n    {{ 'orderCost.grossTax' | cxTranslate }}\n    {{ cart.totalTax?.formattedValue }}.\n  </div>\n</div>\n\n<!--\n<cx-promotions\n  *ngIf=\"cart\"\n  [promotions]=\"cart.appliedOrderPromotions\"\n></cx-promotions>\n-->\n\n<div *cxFeatureLevel=\"'1.3'\">\n  <cx-applied-coupons\n    [vouchers]=\"cart.appliedVouchers\"\n    [isReadOnly]=\"true\"\n  ></cx-applied-coupons>\n</div>\n"
                 }] }
     ];
     OrderSummaryComponent.propDecorators = {
@@ -5629,11 +10708,22 @@ var CartNotEmptyGuard = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        return this.cartService.getActive().pipe(map((/**
-         * @param {?} cart
+        return combineLatest([
+            this.cartService.getActive(),
+            this.cartService.getLoaded(),
+        ]).pipe(filter((/**
+         * @param {?} __0
          * @return {?}
          */
-        function (cart) {
+        function (_a) {
+            var _b = __read(_a, 2), _ = _b[0], loaded = _b[1];
+            return loaded;
+        })), map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 1), cart = _b[0];
             if (_this.isEmpty(cart)) {
                 _this.routingService.go({ cxRoute: 'home' });
                 return false;
@@ -5836,27 +10926,6 @@ var CartTotalsModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/** @type {?} */
-var PAGE_LAYOUT_HANDLER = new InjectionToken('PageLayoutHandler');
-/**
- * @record
- */
-function PageLayoutHandler() { }
-if (false) {
-    /**
-     * @param {?} slots
-     * @param {?=} pageTemplate
-     * @param {?=} section
-     * @param {?=} breakpoint
-     * @return {?}
-     */
-    PageLayoutHandler.prototype.handle = function (slots, pageTemplate, section, breakpoint) { };
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 var MiniCartComponent = /** @class */ (function () {
     function MiniCartComponent(cartService) {
         this.cartService = cartService;
@@ -5938,168 +11007,6 @@ var MiniCartModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var AddToWishListComponent = /** @class */ (function () {
-    function AddToWishListComponent(wishListService, currentProductService, authService) {
-        var _this = this;
-        this.wishListService = wishListService;
-        this.currentProductService = currentProductService;
-        this.authService = authService;
-        this.product$ = this.currentProductService.getProduct().pipe(filter((/**
-         * @param {?} product
-         * @return {?}
-         */
-        function (product) { return Boolean(product); })), tap((/**
-         * @param {?} product
-         * @return {?}
-         */
-        function (product) { return _this.setStockInfo(product); })));
-        this.wishListEntries$ = this.wishListService.getWishList().pipe(filter((/**
-         * @param {?} wishlist
-         * @return {?}
-         */
-        function (wishlist) { return Boolean(wishlist); })), map((/**
-         * @param {?} wishList
-         * @return {?}
-         */
-        function (wishList) { return wishList.entries; })));
-        this.userLoggedIn$ = this.authService.isUserLoggedIn();
-        this.loading$ = this.wishListService.getWishListLoading();
-        this.hasStock = false;
-        this.iconTypes = ICON_TYPE;
-    }
-    /**
-     * @param {?} product
-     * @return {?}
-     */
-    AddToWishListComponent.prototype.add = /**
-     * @param {?} product
-     * @return {?}
-     */
-    function (product) {
-        this.wishListService.addEntry(product.code);
-    };
-    /**
-     * @param {?} entry
-     * @return {?}
-     */
-    AddToWishListComponent.prototype.remove = /**
-     * @param {?} entry
-     * @return {?}
-     */
-    function (entry) {
-        this.wishListService.removeEntry(entry);
-    };
-    /**
-     * @param {?} product
-     * @param {?} entries
-     * @return {?}
-     */
-    AddToWishListComponent.prototype.getProductInWishList = /**
-     * @param {?} product
-     * @param {?} entries
-     * @return {?}
-     */
-    function (product, entries) {
-        /** @type {?} */
-        var item = entries.find((/**
-         * @param {?} entry
-         * @return {?}
-         */
-        function (entry) { return entry.product.code === product.code; }));
-        return item;
-    };
-    /**
-     * @private
-     * @param {?} product
-     * @return {?}
-     */
-    AddToWishListComponent.prototype.setStockInfo = /**
-     * @private
-     * @param {?} product
-     * @return {?}
-     */
-    function (product) {
-        this.hasStock =
-            product.stock && product.stock.stockLevelStatus !== 'outOfStock';
-    };
-    AddToWishListComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-add-to-wishlist',
-                    template: "<ng-container *ngIf=\"userLoggedIn$ | async\">\n  <ng-container *ngIf=\"product$ | async as product\">\n    <ng-container *ngIf=\"wishListEntries$ | async as entries\">\n      <ng-container *ngIf=\"hasStock\">\n        <div\n          *ngIf=\"getProductInWishList(product, entries) as entry; else addItem\"\n        >\n          <span\n            >{{ 'addToWishList.inWishList' | cxTranslate }} (<button\n              class=\"btn btn-link button-remove\"\n              (click)=\"remove(entry)\"\n              [disabled]=\"loading$ | async\"\n            >\n              {{ 'addToWishList.remove' | cxTranslate }}</button\n            >)</span\n          >\n        </div>\n        <ng-template #addItem>\n          <button\n            class=\"btn btn-link button-add\"\n            (click)=\"add(product)\"\n            [disabled]=\"loading$ | async\"\n          >\n            <cx-icon [type]=\"iconTypes.HEART\"></cx-icon>\n            {{ 'addToWishList.add' | cxTranslate }}\n          </button>\n        </ng-template>\n      </ng-container>\n    </ng-container>\n  </ng-container>\n</ng-container>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                }] }
-    ];
-    /** @nocollapse */
-    AddToWishListComponent.ctorParameters = function () { return [
-        { type: WishListService },
-        { type: CurrentProductService },
-        { type: AuthService }
-    ]; };
-    return AddToWishListComponent;
-}());
-if (false) {
-    /** @type {?} */
-    AddToWishListComponent.prototype.product$;
-    /** @type {?} */
-    AddToWishListComponent.prototype.wishListEntries$;
-    /** @type {?} */
-    AddToWishListComponent.prototype.userLoggedIn$;
-    /** @type {?} */
-    AddToWishListComponent.prototype.loading$;
-    /** @type {?} */
-    AddToWishListComponent.prototype.hasStock;
-    /** @type {?} */
-    AddToWishListComponent.prototype.iconTypes;
-    /**
-     * @type {?}
-     * @protected
-     */
-    AddToWishListComponent.prototype.wishListService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    AddToWishListComponent.prototype.currentProductService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    AddToWishListComponent.prototype.authService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var AddToWishListModule = /** @class */ (function () {
-    function AddToWishListModule() {
-    }
-    AddToWishListModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        CommonModule,
-                        ConfigModule.withConfig((/** @type {?} */ ({
-                            cmsComponents: {
-                                AddToWishListComponent: {
-                                    component: AddToWishListComponent,
-                                },
-                            },
-                        }))),
-                        I18nModule,
-                        IconModule,
-                    ],
-                    declarations: [AddToWishListComponent],
-                    entryComponents: [AddToWishListComponent],
-                    exports: [AddToWishListComponent],
-                },] }
-    ];
-    return AddToWishListModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 var CartComponentModule = /** @class */ (function () {
     function CartComponentModule() {
     }
@@ -6107,7 +11014,6 @@ var CartComponentModule = /** @class */ (function () {
         { type: NgModule, args: [{
                     imports: [NgbModule, CartDetailsModule, CartTotalsModule, CartSharedModule],
                     exports: [
-                        AddToWishListModule,
                         CartDetailsModule,
                         CartTotalsModule,
                         CartSharedModule,
@@ -9682,11 +14588,10 @@ var AddressFormComponent = /** @class */ (function () {
          * @return {?}
          */
         function (titles) {
-            /** @type {?} */
-            var sortedTitles = titles.sort(sortTitles);
+            titles.sort(sortTitles);
             /** @type {?} */
             var noneTitle = { code: '', name: 'Title' };
-            return __spread([noneTitle], sortedTitles);
+            return __spread([noneTitle], titles);
         })));
         // Fetching regions
         this.regions$ = this.selectedCountry$.pipe(switchMap((/**
@@ -10833,172 +15738,6 @@ var HamburgerMenuModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/** @enum {string} */
-var OutletPosition = {
-    REPLACE: 'replace',
-    BEFORE: 'before',
-    AFTER: 'after',
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var OutletService = /** @class */ (function () {
-    function OutletService() {
-        this.templatesRefs = {};
-        this.templatesRefsBefore = {};
-        this.templatesRefsAfter = {};
-    }
-    /**
-     * @param {?} outlet
-     * @param {?} template
-     * @param {?=} position
-     * @return {?}
-     */
-    OutletService.prototype.add = /**
-     * @param {?} outlet
-     * @param {?} template
-     * @param {?=} position
-     * @return {?}
-     */
-    function (outlet, template, position) {
-        if (position === void 0) { position = OutletPosition.REPLACE; }
-        if (position === OutletPosition.BEFORE) {
-            this.templatesRefsBefore[outlet] = template;
-        }
-        if (position === OutletPosition.REPLACE) {
-            this.templatesRefs[outlet] = template;
-        }
-        if (position === OutletPosition.AFTER) {
-            this.templatesRefsAfter[outlet] = template;
-        }
-    };
-    /**
-     * @param {?} outlet
-     * @param {?=} position
-     * @return {?}
-     */
-    OutletService.prototype.get = /**
-     * @param {?} outlet
-     * @param {?=} position
-     * @return {?}
-     */
-    function (outlet, position) {
-        if (position === void 0) { position = OutletPosition.REPLACE; }
-        /** @type {?} */
-        var templateRef;
-        switch (position) {
-            case OutletPosition.BEFORE:
-                templateRef = this.templatesRefsBefore[outlet];
-                break;
-            case OutletPosition.AFTER:
-                templateRef = this.templatesRefsAfter[outlet];
-                break;
-            default:
-                templateRef = this.templatesRefs[outlet];
-        }
-        return templateRef;
-        // return this.templatesRefs[outlet] ? this.templatesRefs[outlet] : null;
-    };
-    OutletService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */ OutletService.ngInjectableDef = ɵɵdefineInjectable({ factory: function OutletService_Factory() { return new OutletService(); }, token: OutletService, providedIn: "root" });
-    return OutletService;
-}());
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    OutletService.prototype.templatesRefs;
-    /**
-     * @type {?}
-     * @private
-     */
-    OutletService.prototype.templatesRefsBefore;
-    /**
-     * @type {?}
-     * @private
-     */
-    OutletService.prototype.templatesRefsAfter;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var OutletRefDirective = /** @class */ (function () {
-    function OutletRefDirective(tpl, outletService) {
-        this.tpl = tpl;
-        this.outletService = outletService;
-    }
-    /**
-     * @return {?}
-     */
-    OutletRefDirective.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        this.outletService.add(this.cxOutletRef, this.tpl, this.cxOutletPos);
-    };
-    OutletRefDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: '[cxOutletRef]',
-                },] }
-    ];
-    /** @nocollapse */
-    OutletRefDirective.ctorParameters = function () { return [
-        { type: TemplateRef },
-        { type: OutletService }
-    ]; };
-    OutletRefDirective.propDecorators = {
-        cxOutletRef: [{ type: Input }],
-        cxOutletPos: [{ type: Input }]
-    };
-    return OutletRefDirective;
-}());
-if (false) {
-    /** @type {?} */
-    OutletRefDirective.prototype.cxOutletRef;
-    /** @type {?} */
-    OutletRefDirective.prototype.cxOutletPos;
-    /**
-     * @type {?}
-     * @private
-     */
-    OutletRefDirective.prototype.tpl;
-    /**
-     * @type {?}
-     * @private
-     */
-    OutletRefDirective.prototype.outletService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var OutletRefModule = /** @class */ (function () {
-    function OutletRefModule() {
-    }
-    OutletRefModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [CommonModule],
-                    declarations: [OutletRefDirective],
-                    exports: [OutletRefDirective],
-                },] }
-    ];
-    return OutletRefModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 /** @type {?} */
 var layoutModules = [OutletRefModule];
 var LayoutModule = /** @class */ (function () {
@@ -11012,2236 +15751,6 @@ var LayoutModule = /** @class */ (function () {
                 },] }
     ];
     return LayoutModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var OutletDirective = /** @class */ (function () {
-    function OutletDirective(vcr, templateRef, outletService) {
-        this.vcr = vcr;
-        this.templateRef = templateRef;
-        this.outletService = outletService;
-    }
-    Object.defineProperty(OutletDirective.prototype, "cxOutletContext", {
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            this._context = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @return {?}
-     */
-    OutletDirective.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var nodes = [];
-        nodes.push.apply(nodes, __spread(this.renderTemplate(OutletPosition.BEFORE)));
-        nodes.push.apply(nodes, __spread(this.renderTemplate(OutletPosition.REPLACE, true)));
-        nodes.push.apply(nodes, __spread(this.renderTemplate(OutletPosition.AFTER)));
-    };
-    /**
-     * @private
-     * @param {?} position
-     * @param {?=} replace
-     * @return {?}
-     */
-    OutletDirective.prototype.renderTemplate = /**
-     * @private
-     * @param {?} position
-     * @param {?=} replace
-     * @return {?}
-     */
-    function (position, replace) {
-        if (replace === void 0) { replace = false; }
-        /** @type {?} */
-        var nodes = [];
-        /** @type {?} */
-        var template = this.outletService.get(this.cxOutlet, position);
-        if (template || replace) {
-            /** @type {?} */
-            var ref = this.vcr.createEmbeddedView(template || this.templateRef, {
-                $implicit: this._context,
-            });
-            nodes.push.apply(nodes, __spread(ref.rootNodes));
-        }
-        return nodes;
-    };
-    OutletDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: '[cxOutlet]',
-                },] }
-    ];
-    /** @nocollapse */
-    OutletDirective.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: TemplateRef },
-        { type: OutletService }
-    ]; };
-    OutletDirective.propDecorators = {
-        cxOutlet: [{ type: Input }],
-        cxOutletContext: [{ type: Input }]
-    };
-    return OutletDirective;
-}());
-if (false) {
-    /** @type {?} */
-    OutletDirective.prototype.cxOutlet;
-    /**
-     * @type {?}
-     * @private
-     */
-    OutletDirective.prototype._context;
-    /**
-     * @type {?}
-     * @private
-     */
-    OutletDirective.prototype.vcr;
-    /**
-     * @type {?}
-     * @private
-     */
-    OutletDirective.prototype.templateRef;
-    /**
-     * @type {?}
-     * @private
-     */
-    OutletDirective.prototype.outletService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var OutletModule = /** @class */ (function () {
-    function OutletModule() {
-    }
-    OutletModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [CommonModule],
-                    declarations: [OutletDirective],
-                    providers: [OutletService],
-                    exports: [OutletDirective],
-                },] }
-    ];
-    return OutletModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var ComponentMapperService = /** @class */ (function () {
-    function ComponentMapperService(componentFactoryResolver, config, document, platform) {
-        this.componentFactoryResolver = componentFactoryResolver;
-        this.config = config;
-        this.document = document;
-        this.platform = platform;
-        this.missingComponents = [];
-        this.loadedWebComponents = {};
-    }
-    /**
-     * @desc
-     * returns a web component for the CMS typecode.
-     *
-     * The mapping of CMS components to web componetns requires a mapping.
-     * This is configurable when the module is loaded.
-     *
-     * For example:
-     *
-     *  {
-     *      'CMSLinkComponent': 'LinkComponent',
-     *      'SimpleResponsiveBannerComponent': 'SimpleResponsiveBannerComponent',
-     *      [etc.]
-     *  }
-     *
-     * The type codes are dynamic since they depend on the implementation.
-     * Customer will add, extend or ingore standard components.
-     *
-     * @param typeCode the component type
-     */
-    /**
-     * @desc
-     * returns a web component for the CMS typecode.
-     *
-     * The mapping of CMS components to web componetns requires a mapping.
-     * This is configurable when the module is loaded.
-     *
-     * For example:
-     *
-     *  {
-     *      'CMSLinkComponent': 'LinkComponent',
-     *      'SimpleResponsiveBannerComponent': 'SimpleResponsiveBannerComponent',
-     *      [etc.]
-     *  }
-     *
-     * The type codes are dynamic since they depend on the implementation.
-     * Customer will add, extend or ingore standard components.
-     *
-     * @protected
-     * @param {?} typeCode the component type
-     * @return {?}
-     */
-    ComponentMapperService.prototype.getComponent = /**
-     * @desc
-     * returns a web component for the CMS typecode.
-     *
-     * The mapping of CMS components to web componetns requires a mapping.
-     * This is configurable when the module is loaded.
-     *
-     * For example:
-     *
-     *  {
-     *      'CMSLinkComponent': 'LinkComponent',
-     *      'SimpleResponsiveBannerComponent': 'SimpleResponsiveBannerComponent',
-     *      [etc.]
-     *  }
-     *
-     * The type codes are dynamic since they depend on the implementation.
-     * Customer will add, extend or ingore standard components.
-     *
-     * @protected
-     * @param {?} typeCode the component type
-     * @return {?}
-     */
-    function (typeCode) {
-        /** @type {?} */
-        var componentConfig = this.config.cmsComponents[typeCode];
-        if (!componentConfig) {
-            if (!this.missingComponents.includes(typeCode)) {
-                this.missingComponents.push(typeCode);
-                console.warn("No component implementation found for the CMS component type '" + typeCode + "'.\n", "Make sure you implement a component and register it in the mapper.");
-            }
-        }
-        return componentConfig ? componentConfig.component : null;
-    };
-    /**
-     * @param {?} typeCode
-     * @return {?}
-     */
-    ComponentMapperService.prototype.getComponentFactoryByCode = /**
-     * @param {?} typeCode
-     * @return {?}
-     */
-    function (typeCode) {
-        /** @type {?} */
-        var component = this.getComponent(typeCode);
-        if (!component) {
-            return null;
-        }
-        /** @type {?} */
-        var factory = this.componentFactoryResolver.resolveComponentFactory(component);
-        if (!factory) {
-            console.warn("No component factory found for the CMS component type '" + typeCode + "'.\n", "Make sure you add a component to the 'entryComponents' array in the NgModule.");
-            return null;
-        }
-        return factory;
-    };
-    /**
-     * @param {?} typeCode
-     * @return {?}
-     */
-    ComponentMapperService.prototype.isWebComponent = /**
-     * @param {?} typeCode
-     * @return {?}
-     */
-    function (typeCode) {
-        /** @type {?} */
-        var component = this.getComponent(typeCode);
-        return typeof component === 'string' && (component || '').includes('#');
-    };
-    /**
-     * @param {?} componentType
-     * @param {?} renderer
-     * @return {?}
-     */
-    ComponentMapperService.prototype.initWebComponent = /**
-     * @param {?} componentType
-     * @param {?} renderer
-     * @return {?}
-     */
-    function (componentType, renderer) {
-        var _this = this;
-        return new Promise((/**
-         * @param {?} resolve
-         * @return {?}
-         */
-        function (resolve) {
-            var _a = __read(_this.getComponent(componentType).split('#'), 2), path = _a[0], selector = _a[1];
-            /** @type {?} */
-            var script = _this.loadedWebComponents[path];
-            if (!script) {
-                if (path) {
-                    script = renderer.createElement('script');
-                    _this.loadedWebComponents[path] = script;
-                    script.setAttribute('src', path);
-                    renderer.appendChild(_this.document.body, script);
-                    if (isPlatformBrowser(_this.platform)) {
-                        script.onload = (/**
-                         * @return {?}
-                         */
-                        function () {
-                            script.onload = null;
-                        });
-                    }
-                }
-                else {
-                    script = {};
-                }
-            }
-            if (script.onload) {
-                // If script is still loading (has onload callback defined)
-                // add new callback and chain it with the existing one.
-                // Needed to support loading multiple components from one script
-                /** @type {?} */
-                var chainedOnload_1 = script.onload;
-                script.onload = (/**
-                 * @return {?}
-                 */
-                function () {
-                    chainedOnload_1();
-                    resolve(selector);
-                });
-            }
-            else {
-                resolve(selector);
-            }
-        }));
-    };
-    ComponentMapperService.decorators = [
-        { type: Injectable, args: [{ providedIn: 'root' },] }
-    ];
-    /** @nocollapse */
-    ComponentMapperService.ctorParameters = function () { return [
-        { type: ComponentFactoryResolver },
-        { type: CmsConfig },
-        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
-        { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
-    ]; };
-    /** @nocollapse */ ComponentMapperService.ngInjectableDef = ɵɵdefineInjectable({ factory: function ComponentMapperService_Factory() { return new ComponentMapperService(ɵɵinject(ComponentFactoryResolver), ɵɵinject(CmsConfig), ɵɵinject(DOCUMENT), ɵɵinject(PLATFORM_ID)); }, token: ComponentMapperService, providedIn: "root" });
-    return ComponentMapperService;
-}());
-if (false) {
-    /** @type {?} */
-    ComponentMapperService.prototype.missingComponents;
-    /**
-     * @type {?}
-     * @private
-     */
-    ComponentMapperService.prototype.loadedWebComponents;
-    /**
-     * @type {?}
-     * @protected
-     */
-    ComponentMapperService.prototype.componentFactoryResolver;
-    /**
-     * @type {?}
-     * @protected
-     */
-    ComponentMapperService.prototype.config;
-    /**
-     * @type {?}
-     * @protected
-     */
-    ComponentMapperService.prototype.document;
-    /**
-     * @type {?}
-     * @protected
-     */
-    ComponentMapperService.prototype.platform;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CxApiService = /** @class */ (function () {
-    function CxApiService(auth, cart, cartData, checkout, checkoutDelivery, checkoutPayment, cms, pageMeta, featureConfig, globalMessage, translation, kyma, occEndpoints, product, productSearch, productReview, productReference, searchbox, routing, currency, language, baseSite, user, userAddress, userConsent, userOrder, userPayment, ngZone) {
-        this.auth = auth;
-        this.cart = cart;
-        this.cartData = cartData;
-        this.checkout = checkout;
-        this.checkoutDelivery = checkoutDelivery;
-        this.checkoutPayment = checkoutPayment;
-        this.cms = cms;
-        this.pageMeta = pageMeta;
-        this.featureConfig = featureConfig;
-        this.globalMessage = globalMessage;
-        this.translation = translation;
-        this.kyma = kyma;
-        this.occEndpoints = occEndpoints;
-        this.product = product;
-        this.productSearch = productSearch;
-        this.productReview = productReview;
-        this.productReference = productReference;
-        this.searchbox = searchbox;
-        this.routing = routing;
-        this.currency = currency;
-        this.language = language;
-        this.baseSite = baseSite;
-        this.user = user;
-        this.userAddress = userAddress;
-        this.userConsent = userConsent;
-        this.userOrder = userOrder;
-        this.userPayment = userPayment;
-        this.ngZone = ngZone;
-    }
-    CxApiService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    CxApiService.ctorParameters = function () { return [
-        { type: AuthService, decorators: [{ type: Optional }] },
-        { type: CartService, decorators: [{ type: Optional }] },
-        { type: CartDataService, decorators: [{ type: Optional }] },
-        { type: CheckoutService, decorators: [{ type: Optional }] },
-        { type: CheckoutDeliveryService, decorators: [{ type: Optional }] },
-        { type: CheckoutPaymentService, decorators: [{ type: Optional }] },
-        { type: CmsService, decorators: [{ type: Optional }] },
-        { type: PageMetaService, decorators: [{ type: Optional }] },
-        { type: FeatureConfigService, decorators: [{ type: Optional }] },
-        { type: GlobalMessageService, decorators: [{ type: Optional }] },
-        { type: TranslationService, decorators: [{ type: Optional }] },
-        { type: KymaService, decorators: [{ type: Optional }] },
-        { type: OccEndpointsService, decorators: [{ type: Optional }] },
-        { type: ProductService, decorators: [{ type: Optional }] },
-        { type: ProductSearchService, decorators: [{ type: Optional }] },
-        { type: ProductReviewService, decorators: [{ type: Optional }] },
-        { type: ProductReferenceService, decorators: [{ type: Optional }] },
-        { type: SearchboxService, decorators: [{ type: Optional }] },
-        { type: RoutingService, decorators: [{ type: Optional }] },
-        { type: CurrencyService, decorators: [{ type: Optional }] },
-        { type: LanguageService, decorators: [{ type: Optional }] },
-        { type: BaseSiteService, decorators: [{ type: Optional }] },
-        { type: UserService, decorators: [{ type: Optional }] },
-        { type: UserAddressService, decorators: [{ type: Optional }] },
-        { type: UserConsentService, decorators: [{ type: Optional }] },
-        { type: UserOrderService, decorators: [{ type: Optional }] },
-        { type: UserPaymentService, decorators: [{ type: Optional }] },
-        { type: NgZone }
-    ]; };
-    /** @nocollapse */ CxApiService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CxApiService_Factory() { return new CxApiService(ɵɵinject(AuthService, 8), ɵɵinject(CartService, 8), ɵɵinject(CartDataService, 8), ɵɵinject(CheckoutService, 8), ɵɵinject(CheckoutDeliveryService, 8), ɵɵinject(CheckoutPaymentService, 8), ɵɵinject(CmsService, 8), ɵɵinject(PageMetaService, 8), ɵɵinject(FeatureConfigService, 8), ɵɵinject(GlobalMessageService, 8), ɵɵinject(TranslationService, 8), ɵɵinject(KymaService, 8), ɵɵinject(OccEndpointsService, 8), ɵɵinject(ProductService, 8), ɵɵinject(ProductSearchService, 8), ɵɵinject(ProductReviewService, 8), ɵɵinject(ProductReferenceService, 8), ɵɵinject(SearchboxService, 8), ɵɵinject(RoutingService, 8), ɵɵinject(CurrencyService, 8), ɵɵinject(LanguageService, 8), ɵɵinject(BaseSiteService, 8), ɵɵinject(UserService, 8), ɵɵinject(UserAddressService, 8), ɵɵinject(UserConsentService, 8), ɵɵinject(UserOrderService, 8), ɵɵinject(UserPaymentService, 8), ɵɵinject(NgZone)); }, token: CxApiService, providedIn: "root" });
-    return CxApiService;
-}());
-if (false) {
-    /** @type {?} */
-    CxApiService.prototype.cmsComponentData;
-    /** @type {?} */
-    CxApiService.prototype.auth;
-    /** @type {?} */
-    CxApiService.prototype.cart;
-    /** @type {?} */
-    CxApiService.prototype.cartData;
-    /** @type {?} */
-    CxApiService.prototype.checkout;
-    /** @type {?} */
-    CxApiService.prototype.checkoutDelivery;
-    /** @type {?} */
-    CxApiService.prototype.checkoutPayment;
-    /** @type {?} */
-    CxApiService.prototype.cms;
-    /** @type {?} */
-    CxApiService.prototype.pageMeta;
-    /** @type {?} */
-    CxApiService.prototype.featureConfig;
-    /** @type {?} */
-    CxApiService.prototype.globalMessage;
-    /** @type {?} */
-    CxApiService.prototype.translation;
-    /** @type {?} */
-    CxApiService.prototype.kyma;
-    /** @type {?} */
-    CxApiService.prototype.occEndpoints;
-    /** @type {?} */
-    CxApiService.prototype.product;
-    /** @type {?} */
-    CxApiService.prototype.productSearch;
-    /** @type {?} */
-    CxApiService.prototype.productReview;
-    /** @type {?} */
-    CxApiService.prototype.productReference;
-    /** @type {?} */
-    CxApiService.prototype.searchbox;
-    /** @type {?} */
-    CxApiService.prototype.routing;
-    /** @type {?} */
-    CxApiService.prototype.currency;
-    /** @type {?} */
-    CxApiService.prototype.language;
-    /** @type {?} */
-    CxApiService.prototype.baseSite;
-    /** @type {?} */
-    CxApiService.prototype.user;
-    /** @type {?} */
-    CxApiService.prototype.userAddress;
-    /** @type {?} */
-    CxApiService.prototype.userConsent;
-    /** @type {?} */
-    CxApiService.prototype.userOrder;
-    /** @type {?} */
-    CxApiService.prototype.userPayment;
-    /** @type {?} */
-    CxApiService.prototype.ngZone;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var ComponentWrapperDirective = /** @class */ (function () {
-    function ComponentWrapperDirective(vcr, componentMapper, injector, cmsService, dynamicAttributeService, renderer, config, platformId) {
-        this.vcr = vcr;
-        this.componentMapper = componentMapper;
-        this.injector = injector;
-        this.cmsService = cmsService;
-        this.dynamicAttributeService = dynamicAttributeService;
-        this.renderer = renderer;
-        this.config = config;
-        this.platformId = platformId;
-    }
-    /**
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        if (!this.shouldRenderComponent()) {
-            return;
-        }
-        if (this.componentMapper.isWebComponent(this.cxComponentWrapper.flexType)) {
-            this.launchWebComponent();
-        }
-        else {
-            this.launchComponent();
-        }
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.shouldRenderComponent = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var isSSR = isPlatformServer(this.platformId);
-        /** @type {?} */
-        var isComponentDisabledInSSR = (this.config.cmsComponents[this.cxComponentWrapper.flexType] || {}).disableSSR;
-        return !(isSSR && isComponentDisabledInSSR);
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.launchComponent = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var factory = this.componentMapper.getComponentFactoryByCode(this.cxComponentWrapper.flexType);
-        if (factory) {
-            this.cmpRef = this.vcr.createComponent(factory, undefined, this.getInjectorForComponent());
-            if (this.cmsService.isLaunchInSmartEdit()) {
-                this.addSmartEditContract(this.cmpRef.location.nativeElement);
-            }
-        }
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.launchWebComponent = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var elementName, cmsComponentData;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.componentMapper.initWebComponent(this.cxComponentWrapper.flexType, this.renderer)];
-                    case 1:
-                        elementName = _a.sent();
-                        if (elementName) {
-                            this.webElement = this.renderer.createElement(elementName);
-                            cmsComponentData = this.getCmsDataForComponent();
-                            this.webElement.cxApi = __assign({}, this.injector.get(CxApiService), { CmsComponentData: cmsComponentData, // TODO: remove / deprecated since 1.0.x
-                                cmsComponentData: cmsComponentData });
-                            this.renderer.appendChild(this.vcr.element.nativeElement.parentElement, this.webElement);
-                            if (this.cmsService.isLaunchInSmartEdit()) {
-                                this.addSmartEditContract(this.webElement);
-                            }
-                        }
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    /**
-     * @private
-     * @template T
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.getCmsDataForComponent = /**
-     * @private
-     * @template T
-     * @return {?}
-     */
-    function () {
-        return {
-            uid: this.cxComponentWrapper.uid,
-            data$: this.cmsService.getComponentData(this.cxComponentWrapper.uid),
-        };
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.getInjectorForComponent = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var configProviders = (this.config.cmsComponents[this.cxComponentWrapper.flexType] || {})
-            .providers || [];
-        return Injector.create({
-            providers: __spread([
-                {
-                    provide: CmsComponentData,
-                    useValue: this.getCmsDataForComponent(),
-                }
-            ], configProviders),
-            parent: this.injector,
-        });
-    };
-    /**
-     * @private
-     * @param {?} element
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.addSmartEditContract = /**
-     * @private
-     * @param {?} element
-     * @return {?}
-     */
-    function (element) {
-        this.dynamicAttributeService.addDynamicAttributes(this.cxComponentWrapper.properties, element, this.renderer);
-    };
-    /**
-     * @return {?}
-     */
-    ComponentWrapperDirective.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
-        if (this.cmpRef) {
-            this.cmpRef.destroy();
-        }
-        if (this.webElement) {
-            this.webElement.remove();
-        }
-    };
-    ComponentWrapperDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: '[cxComponentWrapper]',
-                },] }
-    ];
-    /** @nocollapse */
-    ComponentWrapperDirective.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentMapperService },
-        { type: Injector },
-        { type: CmsService },
-        { type: DynamicAttributeService },
-        { type: Renderer2 },
-        { type: CmsConfig },
-        { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
-    ]; };
-    ComponentWrapperDirective.propDecorators = {
-        cxComponentWrapper: [{ type: Input }]
-    };
-    return ComponentWrapperDirective;
-}());
-if (false) {
-    /** @type {?} */
-    ComponentWrapperDirective.prototype.cxComponentWrapper;
-    /** @type {?} */
-    ComponentWrapperDirective.prototype.cmpRef;
-    /** @type {?} */
-    ComponentWrapperDirective.prototype.webElement;
-    /**
-     * @type {?}
-     * @private
-     */
-    ComponentWrapperDirective.prototype.vcr;
-    /**
-     * @type {?}
-     * @private
-     */
-    ComponentWrapperDirective.prototype.componentMapper;
-    /**
-     * @type {?}
-     * @private
-     */
-    ComponentWrapperDirective.prototype.injector;
-    /**
-     * @type {?}
-     * @private
-     */
-    ComponentWrapperDirective.prototype.cmsService;
-    /**
-     * @type {?}
-     * @private
-     */
-    ComponentWrapperDirective.prototype.dynamicAttributeService;
-    /**
-     * @type {?}
-     * @private
-     */
-    ComponentWrapperDirective.prototype.renderer;
-    /**
-     * @type {?}
-     * @private
-     */
-    ComponentWrapperDirective.prototype.config;
-    /**
-     * @type {?}
-     * @private
-     */
-    ComponentWrapperDirective.prototype.platformId;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var PageComponentModule = /** @class */ (function () {
-    function PageComponentModule() {
-    }
-    PageComponentModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [CommonModule],
-                    providers: [],
-                    declarations: [ComponentWrapperDirective],
-                    exports: [ComponentWrapperDirective],
-                },] }
-    ];
-    return PageComponentModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var PageSlotComponent = /** @class */ (function () {
-    function PageSlotComponent(cmsService, dynamicAttributeService, renderer, hostElement) {
-        var _this = this;
-        this.cmsService = cmsService;
-        this.dynamicAttributeService = dynamicAttributeService;
-        this.renderer = renderer;
-        this.hostElement = hostElement;
-        this.position$ = new BehaviorSubject(undefined);
-        /**
-         * observable with `ContentSlotData` for the current position
-         */
-        this.slot$ = this.position$.pipe(switchMap((/**
-         * @param {?} position
-         * @return {?}
-         */
-        function (position) { return _this.cmsService.getContentSlot(position); })), tap((/**
-         * @param {?} slot
-         * @return {?}
-         */
-        function (slot) { return _this.addSmartEditSlotClass(slot); })));
-        /**
-         * observable with components (`ContentSlotComponentData[]`)
-         * for the current slot
-         */
-        this.components$ = this.slot$.pipe(map((/**
-         * @param {?} slot
-         * @return {?}
-         */
-        function (slot) { return (slot && slot.components ? slot.components : []); })), distinctUntilChanged((/**
-         * @param {?} a
-         * @param {?} b
-         * @return {?}
-         */
-        function (a, b) {
-            return a.length === b.length && !a.find((/**
-             * @param {?} el
-             * @param {?} index
-             * @return {?}
-             */
-            function (el, index) { return el.uid !== b[index].uid; }));
-        })), tap((/**
-         * @param {?} components
-         * @return {?}
-         */
-        function (components) { return _this.addComponentClass(components); })));
-    }
-    Object.defineProperty(PageSlotComponent.prototype, "position", {
-        set: /**
-         * @param {?} position
-         * @return {?}
-         */
-        function (position) {
-            this.position$.next(position);
-            // add the position name as a css class so that
-            // layout can be applied to it, using the position based class.
-            this.renderer.addClass(this.hostElement.nativeElement, position);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    // add a class to indicate whether the class is empty or not
-    // add a class to indicate whether the class is empty or not
-    /**
-     * @private
-     * @param {?} components
-     * @return {?}
-     */
-    PageSlotComponent.prototype.addComponentClass = 
-    // add a class to indicate whether the class is empty or not
-    /**
-     * @private
-     * @param {?} components
-     * @return {?}
-     */
-    function (components) {
-        if (components && components.length > 0) {
-            this.renderer.addClass(this.hostElement.nativeElement, 'has-components');
-        }
-    };
-    /**
-     * @private
-     * @param {?} slot
-     * @return {?}
-     */
-    PageSlotComponent.prototype.addSmartEditSlotClass = /**
-     * @private
-     * @param {?} slot
-     * @return {?}
-     */
-    function (slot) {
-        if (slot && this.cmsService.isLaunchInSmartEdit()) {
-            this.addSmartEditContract(slot);
-        }
-    };
-    /**
-     * @private
-     * @param {?} slot
-     * @return {?}
-     */
-    PageSlotComponent.prototype.addSmartEditContract = /**
-     * @private
-     * @param {?} slot
-     * @return {?}
-     */
-    function (slot) {
-        this.dynamicAttributeService.addDynamicAttributes(slot.properties, this.hostElement.nativeElement, this.renderer);
-    };
-    PageSlotComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-page-slot',
-                    template: "<ng-template\n  [cxOutlet]=\"position$ | async\"\n  [cxOutletContext]=\"{ components$: components$ }\"\n>\n  <ng-container *ngFor=\"let component of components$ | async\">\n    <ng-template\n      [cxOutlet]=\"component.flexType\"\n      [cxOutletContext]=\"{ component: component }\"\n    >\n      <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n    </ng-template>\n  </ng-container>\n</ng-template>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                }] }
-    ];
-    /** @nocollapse */
-    PageSlotComponent.ctorParameters = function () { return [
-        { type: CmsService },
-        { type: DynamicAttributeService },
-        { type: Renderer2 },
-        { type: ElementRef }
-    ]; };
-    PageSlotComponent.propDecorators = {
-        position: [{ type: Input }]
-    };
-    return PageSlotComponent;
-}());
-if (false) {
-    /** @type {?} */
-    PageSlotComponent.prototype.position$;
-    /**
-     * observable with `ContentSlotData` for the current position
-     * @type {?}
-     */
-    PageSlotComponent.prototype.slot$;
-    /**
-     * observable with components (`ContentSlotComponentData[]`)
-     * for the current slot
-     * @type {?}
-     */
-    PageSlotComponent.prototype.components$;
-    /**
-     * @type {?}
-     * @protected
-     */
-    PageSlotComponent.prototype.cmsService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    PageSlotComponent.prototype.dynamicAttributeService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    PageSlotComponent.prototype.renderer;
-    /**
-     * @type {?}
-     * @protected
-     */
-    PageSlotComponent.prototype.hostElement;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var PageSlotModule = /** @class */ (function () {
-    function PageSlotModule() {
-    }
-    PageSlotModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [CommonModule, OutletModule, PageComponentModule],
-                    providers: [],
-                    declarations: [PageSlotComponent],
-                    exports: [PageSlotComponent],
-                },] }
-    ];
-    return PageSlotModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var PageLayoutService = /** @class */ (function () {
-    function PageLayoutService(cms, config, breakpointService, handlers) {
-        this.cms = cms;
-        this.config = config;
-        this.breakpointService = breakpointService;
-        this.handlers = handlers;
-        // we print warn messages on missing layout configs
-        // only once to not polute the console log
-        this.warnLogMessages = {};
-        this.logSlots = {};
-    }
-    /**
-     * @param {?=} section
-     * @return {?}
-     */
-    PageLayoutService.prototype.getSlots = /**
-     * @param {?=} section
-     * @return {?}
-     */
-    function (section) {
-        var _this = this;
-        return combineLatest([this.page$, this.breakpointService.breakpoint$]).pipe(map((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        function (_a) {
-            var _b = __read(_a, 2), page = _b[0], breakpoint = _b[1];
-            /** @type {?} */
-            var pageTemplate = page.template;
-            /** @type {?} */
-            var slots = _this.resolveSlots(page, section, breakpoint);
-            return { slots: slots, pageTemplate: pageTemplate, breakpoint: breakpoint };
-        })), switchMap((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        function (_a) {
-            var e_1, _b;
-            var slots = _a.slots, pageTemplate = _a.pageTemplate, breakpoint = _a.breakpoint;
-            /** @type {?} */
-            var result = of(slots);
-            try {
-                for (var _c = __values(_this.handlers || []), _d = _c.next(); !_d.done; _d = _c.next()) {
-                    var handler = _d.value;
-                    result = handler.handle(result, pageTemplate, section, breakpoint);
-                }
-            }
-            catch (e_1_1) { e_1 = { error: e_1_1 }; }
-            finally {
-                try {
-                    if (_d && !_d.done && (_b = _c.return)) _b.call(_c);
-                }
-                finally { if (e_1) throw e_1.error; }
-            }
-            return result;
-        })), distinctUntilChanged((/**
-         * @param {?} a
-         * @param {?} b
-         * @return {?}
-         */
-        function (a, b) {
-            if (a.length !== b.length) {
-                return false;
-            }
-            for (var i = 0; i < a.length; i++) {
-                if (a[i] !== b[i]) {
-                    return false;
-                }
-            }
-            return true;
-        })));
-    };
-    /**
-     * @private
-     * @param {?} page
-     * @param {?} section
-     * @param {?} breakpoint
-     * @return {?}
-     */
-    PageLayoutService.prototype.resolveSlots = /**
-     * @private
-     * @param {?} page
-     * @param {?} section
-     * @param {?} breakpoint
-     * @return {?}
-     */
-    function (page, section, breakpoint) {
-        /** @type {?} */
-        var config = this.getSlotConfig(page.template, 'slots', section, breakpoint);
-        if (config && config.slots) {
-            /** @type {?} */
-            var pageSlots_1 = Object.keys(page.slots);
-            return config.slots.filter((/**
-             * @param {?} slot
-             * @return {?}
-             */
-            function (slot) { return pageSlots_1.includes(slot); }));
-        }
-        else if (!section) {
-            this.logMissingLayoutConfig(page);
-            return Object.keys(page.slots);
-        }
-        else {
-            this.logMissingLayoutConfig(page, section);
-            return [];
-        }
-    };
-    Object.defineProperty(PageLayoutService.prototype, "page$", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this.cms.getCurrentPage().pipe(filter((/**
-             * @param {?} page
-             * @return {?}
-             */
-            function (page) { return !!page; })));
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PageLayoutService.prototype, "templateName$", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this.page$.pipe(filter((/**
-             * @param {?} page
-             * @return {?}
-             */
-            function (page) { return !!page.template; })), map((/**
-             * @param {?} page
-             * @return {?}
-             */
-            function (page) { return page.template; })));
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * load slots from the layout configuration. The breakpoint is used
-     * to load a specific configuration for the given breakpoint. If there's
-     * no configuration available for the given breakpoint the default slot
-     * configuration is returned.
-     */
-    /**
-     * load slots from the layout configuration. The breakpoint is used
-     * to load a specific configuration for the given breakpoint. If there's
-     * no configuration available for the given breakpoint the default slot
-     * configuration is returned.
-     * @protected
-     * @param {?} templateUid
-     * @param {?} configAttribute
-     * @param {?=} section
-     * @param {?=} breakpoint
-     * @return {?}
-     */
-    PageLayoutService.prototype.getSlotConfig = /**
-     * load slots from the layout configuration. The breakpoint is used
-     * to load a specific configuration for the given breakpoint. If there's
-     * no configuration available for the given breakpoint the default slot
-     * configuration is returned.
-     * @protected
-     * @param {?} templateUid
-     * @param {?} configAttribute
-     * @param {?=} section
-     * @param {?=} breakpoint
-     * @return {?}
-     */
-    function (templateUid, configAttribute, section, breakpoint) {
-        if (!this.config.layoutSlots) {
-            return null;
-        }
-        /** @type {?} */
-        var pageTemplateConfig = this.config.layoutSlots[templateUid];
-        if (section) {
-            return this.getSlotConfigForSection(templateUid, configAttribute, section, breakpoint);
-        }
-        if (pageTemplateConfig) {
-            return this.getResponsiveSlotConfig((/** @type {?} */ (pageTemplateConfig)), configAttribute, breakpoint);
-        }
-    };
-    /**
-     * @protected
-     * @param {?} templateUid
-     * @param {?} configAttribute
-     * @param {?=} section
-     * @param {?=} breakpoint
-     * @return {?}
-     */
-    PageLayoutService.prototype.getSlotConfigForSection = /**
-     * @protected
-     * @param {?} templateUid
-     * @param {?} configAttribute
-     * @param {?=} section
-     * @param {?=} breakpoint
-     * @return {?}
-     */
-    function (templateUid, configAttribute, section, breakpoint) {
-        /** @type {?} */
-        var pageTemplateConfig = this.config.layoutSlots[templateUid];
-        if (!pageTemplateConfig) {
-            return null;
-        }
-        // if there's no section config on the page layout
-        // we fall back to the global section config
-        /** @type {?} */
-        var sectionConfig = pageTemplateConfig[section]
-            ? pageTemplateConfig[section]
-            : this.config.layoutSlots[section];
-        if (!sectionConfig) {
-            return null;
-        }
-        /** @type {?} */
-        var responsiveConfig = this.getResponsiveSlotConfig((/** @type {?} */ (sectionConfig)), configAttribute, breakpoint);
-        if (responsiveConfig.hasOwnProperty(configAttribute)) {
-            return responsiveConfig;
-        }
-        else if (pageTemplateConfig[section].hasOwnProperty(configAttribute)) {
-            return pageTemplateConfig[section];
-        }
-        else if (this.config.layoutSlots[section]) {
-            return (/** @type {?} */ (this.config.layoutSlots[section]));
-        }
-    };
-    /**
-     * Returns a list of slots for a breakpoint specific configuratoin
-     * If there's no specific configuration for the breakpoint,
-     * the closest available configuration will be returned.
-     */
-    /**
-     * Returns a list of slots for a breakpoint specific configuratoin
-     * If there's no specific configuration for the breakpoint,
-     * the closest available configuration will be returned.
-     * @protected
-     * @param {?} layoutSlotConfig
-     * @param {?} configAttribute
-     * @param {?=} breakpoint
-     * @return {?}
-     */
-    PageLayoutService.prototype.getResponsiveSlotConfig = /**
-     * Returns a list of slots for a breakpoint specific configuratoin
-     * If there's no specific configuration for the breakpoint,
-     * the closest available configuration will be returned.
-     * @protected
-     * @param {?} layoutSlotConfig
-     * @param {?} configAttribute
-     * @param {?=} breakpoint
-     * @return {?}
-     */
-    function (layoutSlotConfig, configAttribute, breakpoint) {
-        var e_2, _a;
-        /** @type {?} */
-        var slotConfig = (/** @type {?} */ (layoutSlotConfig));
-        // fallback to default slot config
-        if (!breakpoint) {
-            return slotConfig;
-        }
-        // we have a config for the specific breakpoint
-        if (layoutSlotConfig[breakpoint] &&
-            layoutSlotConfig[breakpoint].hasOwnProperty(configAttribute)) {
-            return (/** @type {?} */ (layoutSlotConfig[breakpoint]));
-        }
-        // find closest config
-        /** @type {?} */
-        var all = this.breakpointService.breakpoints;
-        try {
-            for (var _b = __values(all.splice(0, all.indexOf(breakpoint))), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var br = _c.value;
-                if (layoutSlotConfig[br] &&
-                    layoutSlotConfig[br].hasOwnProperty(configAttribute)) {
-                    slotConfig = (/** @type {?} */ (layoutSlotConfig[br]));
-                }
-            }
-        }
-        catch (e_2_1) { e_2 = { error: e_2_1 }; }
-        finally {
-            try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-            }
-            finally { if (e_2) throw e_2.error; }
-        }
-        return slotConfig;
-    };
-    /**
-     * In order to help developers, we print some detailed log information in
-     * case there's no layout configuration available for the given page template
-     * or section. Additionally, the slot positions are printed in the console
-     * in a format that can be copied / paste to the configuration.
-     */
-    /**
-     * In order to help developers, we print some detailed log information in
-     * case there's no layout configuration available for the given page template
-     * or section. Additionally, the slot positions are printed in the console
-     * in a format that can be copied / paste to the configuration.
-     * @private
-     * @param {?} page
-     * @param {?=} section
-     * @return {?}
-     */
-    PageLayoutService.prototype.logMissingLayoutConfig = /**
-     * In order to help developers, we print some detailed log information in
-     * case there's no layout configuration available for the given page template
-     * or section. Additionally, the slot positions are printed in the console
-     * in a format that can be copied / paste to the configuration.
-     * @private
-     * @param {?} page
-     * @param {?=} section
-     * @return {?}
-     */
-    function (page, section) {
-        if (!isDevMode()) {
-            return;
-        }
-        if (!this.logSlots[page.template]) {
-            // the info log is not printed in production
-            // tslint:disable-next-line: no-console
-            console.info("Available CMS page slots: '" + Object.keys(page.slots).join("','") + "'");
-            this.logSlots[page.template] = true;
-        }
-        /** @type {?} */
-        var cacheKey = section || page.template;
-        if (!this.warnLogMessages[cacheKey]) {
-            console.warn("No layout config found for " + cacheKey + ", you can configure a 'LayoutConfig' to control the rendering of page slots.");
-            this.warnLogMessages[cacheKey] = true;
-        }
-    };
-    PageLayoutService.decorators = [
-        { type: Injectable }
-    ];
-    /** @nocollapse */
-    PageLayoutService.ctorParameters = function () { return [
-        { type: CmsService },
-        { type: LayoutConfig },
-        { type: BreakpointService },
-        { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [PAGE_LAYOUT_HANDLER,] }] }
-    ]; };
-    return PageLayoutService;
-}());
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    PageLayoutService.prototype.warnLogMessages;
-    /**
-     * @type {?}
-     * @private
-     */
-    PageLayoutService.prototype.logSlots;
-    /**
-     * @type {?}
-     * @private
-     */
-    PageLayoutService.prototype.cms;
-    /**
-     * @type {?}
-     * @private
-     */
-    PageLayoutService.prototype.config;
-    /**
-     * @type {?}
-     * @private
-     */
-    PageLayoutService.prototype.breakpointService;
-    /**
-     * @type {?}
-     * @private
-     */
-    PageLayoutService.prototype.handlers;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var PageLayoutComponent = /** @class */ (function () {
-    function PageLayoutComponent(el, renderer, pageLayoutService) {
-        var _this = this;
-        this.el = el;
-        this.renderer = renderer;
-        this.pageLayoutService = pageLayoutService;
-        this.section$ = new BehaviorSubject(undefined);
-        this.templateName$ = this.pageLayoutService
-            .templateName$;
-        this.layoutName$ = this.section$.pipe(switchMap((/**
-         * @param {?} section
-         * @return {?}
-         */
-        function (section) { return (section ? of(section) : _this.templateName$); })), tap((/**
-         * @param {?} name
-         * @return {?}
-         */
-        function (name) {
-            _this.styleClass = name;
-        })));
-        this.slots$ = this.section$.pipe(switchMap((/**
-         * @param {?} section
-         * @return {?}
-         */
-        function (section) { return _this.pageLayoutService.getSlots(section); })));
-    }
-    Object.defineProperty(PageLayoutComponent.prototype, "section", {
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            this.section$.next(value);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PageLayoutComponent.prototype, "styleClass", {
-        set: /**
-         * @param {?} cls
-         * @return {?}
-         */
-        function (cls) {
-            if (this.currentClass) {
-                this.renderer.removeClass(this.el.nativeElement, this.currentClass);
-            }
-            this.renderer.addClass(this.el.nativeElement, cls);
-            this.currentClass = cls;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    PageLayoutComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-page-layout',
-                    template: "<ng-template\n  [cxOutlet]=\"layoutName$ | async\"\n  [cxOutletContext]=\"{\n    templateName$: templateName$,\n    slots$: slots$,\n    section$: section$\n  }\"\n>\n  <ng-content></ng-content>\n\n  <cx-page-slot\n    *ngFor=\"let slot of slots$ | async\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-template>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                }] }
-    ];
-    /** @nocollapse */
-    PageLayoutComponent.ctorParameters = function () { return [
-        { type: ElementRef },
-        { type: Renderer2 },
-        { type: PageLayoutService }
-    ]; };
-    PageLayoutComponent.propDecorators = {
-        section: [{ type: Input }]
-    };
-    return PageLayoutComponent;
-}());
-if (false) {
-    /** @type {?} */
-    PageLayoutComponent.prototype.section$;
-    /** @type {?} */
-    PageLayoutComponent.prototype.templateName$;
-    /** @type {?} */
-    PageLayoutComponent.prototype.layoutName$;
-    /** @type {?} */
-    PageLayoutComponent.prototype.slots$;
-    /**
-     * @type {?}
-     * @private
-     */
-    PageLayoutComponent.prototype.currentClass;
-    /**
-     * @type {?}
-     * @private
-     */
-    PageLayoutComponent.prototype.el;
-    /**
-     * @type {?}
-     * @private
-     */
-    PageLayoutComponent.prototype.renderer;
-    /**
-     * @type {?}
-     * @private
-     */
-    PageLayoutComponent.prototype.pageLayoutService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var PageLayoutModule = /** @class */ (function () {
-    function PageLayoutModule() {
-    }
-    PageLayoutModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [CommonModule, OutletModule, PageSlotModule],
-                    declarations: [PageLayoutComponent],
-                    providers: [PageLayoutService],
-                    exports: [PageLayoutComponent],
-                },] }
-    ];
-    return PageLayoutModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @abstract
- */
-var  /**
- * @abstract
- */
-PWAModuleConfig = /** @class */ (function () {
-    function PWAModuleConfig() {
-    }
-    return PWAModuleConfig;
-}());
-if (false) {
-    /** @type {?} */
-    PWAModuleConfig.prototype.pwa;
-}
-/** @type {?} */
-var defaultPWAModuleConfig = {
-    pwa: {
-        enabled: false,
-        addToHomeScreen: false,
-    },
-};
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var AddToHomeScreenService = /** @class */ (function () {
-    function AddToHomeScreenService(config, globalMessageService, winRef) {
-        this.config = config;
-        this.globalMessageService = globalMessageService;
-        this.winRef = winRef;
-        this.canPrompt = new BehaviorSubject(false);
-        this.canPrompt$ = this.canPrompt.asObservable();
-        if (this.config.pwa.addToHomeScreen) {
-            this.init();
-        }
-    }
-    /**
-     * @return {?}
-     */
-    AddToHomeScreenService.prototype.init = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        if (this.winRef.nativeWindow) {
-            this.winRef.nativeWindow.addEventListener('beforeinstallprompt', (/**
-             * @param {?} event
-             * @return {?}
-             */
-            function (event) {
-                event.preventDefault();
-                _this.deferredEvent = event;
-                _this.enableAddToHomeScreen();
-            }));
-            this.winRef.nativeWindow.addEventListener('appinstalled', (/**
-             * @return {?}
-             */
-            function () {
-                _this.globalMessageService.add({ key: 'pwa.addedToHomeScreen' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
-                _this.disableAddToHomeScreen();
-                _this.deferredEvent = null;
-            }));
-        }
-    };
-    /**
-     * @return {?}
-     */
-    AddToHomeScreenService.prototype.enableAddToHomeScreen = /**
-     * @return {?}
-     */
-    function () {
-        this.canPrompt.next(true);
-    };
-    /**
-     * @return {?}
-     */
-    AddToHomeScreenService.prototype.disableAddToHomeScreen = /**
-     * @return {?}
-     */
-    function () {
-        this.canPrompt.next(false);
-    };
-    /**
-     * @return {?}
-     */
-    AddToHomeScreenService.prototype.firePrompt = /**
-     * @return {?}
-     */
-    function () {
-        if (this.deferredEvent) {
-            this.deferredEvent.prompt();
-        }
-    };
-    AddToHomeScreenService.decorators = [
-        { type: Injectable }
-    ];
-    /** @nocollapse */
-    AddToHomeScreenService.ctorParameters = function () { return [
-        { type: PWAModuleConfig },
-        { type: GlobalMessageService },
-        { type: WindowRef }
-    ]; };
-    return AddToHomeScreenService;
-}());
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    AddToHomeScreenService.prototype.deferredEvent;
-    /**
-     * @type {?}
-     * @private
-     */
-    AddToHomeScreenService.prototype.canPrompt;
-    /** @type {?} */
-    AddToHomeScreenService.prototype.canPrompt$;
-    /**
-     * @type {?}
-     * @private
-     */
-    AddToHomeScreenService.prototype.config;
-    /**
-     * @type {?}
-     * @private
-     */
-    AddToHomeScreenService.prototype.globalMessageService;
-    /**
-     * @type {?}
-     * @private
-     */
-    AddToHomeScreenService.prototype.winRef;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @abstract
- */
-var  /**
- * @abstract
- */
-AddToHomeScreenComponent = /** @class */ (function () {
-    function AddToHomeScreenComponent(addToHomeScreenService) {
-        this.addToHomeScreenService = addToHomeScreenService;
-    }
-    /**
-     * @return {?}
-     */
-    AddToHomeScreenComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        this.canPrompt$ = this.addToHomeScreenService.canPrompt$;
-    };
-    /**
-     * @return {?}
-     */
-    AddToHomeScreenComponent.prototype.prompt = /**
-     * @return {?}
-     */
-    function () {
-        this.addToHomeScreenService.firePrompt();
-    };
-    return AddToHomeScreenComponent;
-}());
-if (false) {
-    /** @type {?} */
-    AddToHomeScreenComponent.prototype.canPrompt$;
-    /**
-     * @type {?}
-     * @protected
-     */
-    AddToHomeScreenComponent.prototype.addToHomeScreenService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var AddToHomeScreenBannerComponent = /** @class */ (function (_super) {
-    __extends(AddToHomeScreenBannerComponent, _super);
-    function AddToHomeScreenBannerComponent(addToHomeScreenService) {
-        var _this = _super.call(this, addToHomeScreenService) || this;
-        _this.addToHomeScreenService = addToHomeScreenService;
-        return _this;
-    }
-    AddToHomeScreenBannerComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-add-to-home-screen-banner',
-                    template: "<div *ngIf=\"canPrompt$ | async\">\n  <div class=\"cx-add-to-home-screen-banner\">\n    <div class=\"cx-add-to-home-screen-banner-inner\">\n      <p>\n        {{ 'pwa.addToHomeScreenDescription' | cxTranslate }}\n      </p>\n      <ul>\n        <li>{{ 'pwa.noInstallationNeeded' | cxTranslate }}</li>\n        <li>{{ 'pwa.fastAccessToApplication' | cxTranslate }}</li>\n      </ul>\n      <button (click)=\"prompt()\" class=\"btn btn-primary\">\n        {{ 'pwa.addToHomeScreen' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n"
-                }] }
-    ];
-    /** @nocollapse */
-    AddToHomeScreenBannerComponent.ctorParameters = function () { return [
-        { type: AddToHomeScreenService }
-    ]; };
-    return AddToHomeScreenBannerComponent;
-}(AddToHomeScreenComponent));
-if (false) {
-    /**
-     * @type {?}
-     * @protected
-     */
-    AddToHomeScreenBannerComponent.prototype.addToHomeScreenService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var AddToHomeScreenBtnComponent = /** @class */ (function (_super) {
-    __extends(AddToHomeScreenBtnComponent, _super);
-    function AddToHomeScreenBtnComponent(addToHomeScreenService) {
-        var _this = _super.call(this, addToHomeScreenService) || this;
-        _this.addToHomeScreenService = addToHomeScreenService;
-        return _this;
-    }
-    AddToHomeScreenBtnComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-add-to-home-screen-btn',
-                    template: "<span (click)=\"prompt()\">\n  <ng-content *ngIf=\"canPrompt$ | async\"></ng-content>\n</span>\n"
-                }] }
-    ];
-    /** @nocollapse */
-    AddToHomeScreenBtnComponent.ctorParameters = function () { return [
-        { type: AddToHomeScreenService }
-    ]; };
-    return AddToHomeScreenBtnComponent;
-}(AddToHomeScreenComponent));
-if (false) {
-    /**
-     * @type {?}
-     * @protected
-     */
-    AddToHomeScreenBtnComponent.prototype.addToHomeScreenService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @param {?} pwaConfig
- * @return {?}
- */
-function pwaConfigurationFactory(pwaConfig) {
-    return { enabled: (!isDevMode() && pwaConfig.pwa.enabled) || false };
-}
-/**
- * @param {?} addToHomeScreenService
- * @return {?}
- */
-function pwaFactory(addToHomeScreenService) {
-    /** @type {?} */
-    var result = (/**
-     * @return {?}
-     */
-    function () { return addToHomeScreenService; });
-    return result;
-}
-var PwaModule = /** @class */ (function () {
-    function PwaModule() {
-    }
-    PwaModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        CommonModule,
-                        ConfigModule.withConfig(defaultPWAModuleConfig),
-                        ServiceWorkerModule.register('/ngsw-worker.js'),
-                        I18nModule,
-                    ],
-                    providers: [
-                        { provide: PWAModuleConfig, useExisting: Config },
-                        {
-                            provide: SwRegistrationOptions,
-                            useFactory: pwaConfigurationFactory,
-                            deps: [Config],
-                        },
-                        {
-                            provide: APP_INITIALIZER,
-                            useFactory: pwaFactory,
-                            deps: [AddToHomeScreenService],
-                            multi: true,
-                        },
-                        AddToHomeScreenService,
-                    ],
-                    declarations: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
-                    exports: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
-                },] }
-    ];
-    return PwaModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-var htmlLangProvider = {
-    provide: APP_INITIALIZER,
-    multi: true,
-    useFactory: setHtmlLangAttribute,
-    deps: [WindowRef, LanguageService],
-};
-/**
- * Sets active language in <html lang="">
- * @param {?} winRef
- * @param {?} languageService
- * @return {?}
- */
-function setHtmlLangAttribute(winRef, languageService) {
-    /** @type {?} */
-    var result = (/**
-     * @return {?}
-     */
-    function () {
-        languageService.getActive().subscribe((/**
-         * @param {?} lang
-         * @return {?}
-         */
-        function (lang) {
-            winRef.document.documentElement.lang = lang;
-        }));
-    });
-    return result;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var SeoMetaService = /** @class */ (function () {
-    function SeoMetaService(ngTitle, ngMeta, pageMetaService) {
-        this.ngTitle = ngTitle;
-        this.ngMeta = ngMeta;
-        this.pageMetaService = pageMetaService;
-    }
-    /**
-     * @return {?}
-     */
-    SeoMetaService.prototype.init = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this.pageMetaService
-            .getMeta()
-            .pipe(filter(Boolean))
-            .subscribe((/**
-         * @param {?} meta
-         * @return {?}
-         */
-        function (meta) { return (_this.meta = meta); }));
-    };
-    Object.defineProperty(SeoMetaService.prototype, "meta", {
-        set: /**
-         * @protected
-         * @param {?} meta
-         * @return {?}
-         */
-        function (meta) {
-            this.title = meta.title;
-            this.description = meta.description;
-            this.image = meta.image;
-            this.robots = meta.robots || [PageRobotsMeta.INDEX, PageRobotsMeta.FOLLOW];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SeoMetaService.prototype, "title", {
-        set: /**
-         * @protected
-         * @param {?} title
-         * @return {?}
-         */
-        function (title) {
-            this.ngTitle.setTitle(title || '');
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SeoMetaService.prototype, "description", {
-        set: /**
-         * @protected
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            this.addTag({ name: 'description', content: value });
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SeoMetaService.prototype, "image", {
-        set: /**
-         * @protected
-         * @param {?} imageUrl
-         * @return {?}
-         */
-        function (imageUrl) {
-            if (imageUrl) {
-                this.addTag({ name: 'og:image', content: imageUrl });
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SeoMetaService.prototype, "robots", {
-        set: /**
-         * @protected
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            if (value) {
-                this.addTag({ name: 'robots', content: value.join(', ') });
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @protected
-     * @param {?} meta
-     * @return {?}
-     */
-    SeoMetaService.prototype.addTag = /**
-     * @protected
-     * @param {?} meta
-     * @return {?}
-     */
-    function (meta) {
-        if (meta.content) {
-            this.ngMeta.updateTag(meta);
-        }
-    };
-    SeoMetaService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    SeoMetaService.ctorParameters = function () { return [
-        { type: Title },
-        { type: Meta },
-        { type: PageMetaService }
-    ]; };
-    /** @nocollapse */ SeoMetaService.ngInjectableDef = ɵɵdefineInjectable({ factory: function SeoMetaService_Factory() { return new SeoMetaService(ɵɵinject(Title), ɵɵinject(Meta), ɵɵinject(PageMetaService)); }, token: SeoMetaService, providedIn: "root" });
-    return SeoMetaService;
-}());
-if (false) {
-    /**
-     * @type {?}
-     * @protected
-     */
-    SeoMetaService.prototype.ngTitle;
-    /**
-     * @type {?}
-     * @protected
-     */
-    SeoMetaService.prototype.ngMeta;
-    /**
-     * @type {?}
-     * @protected
-     */
-    SeoMetaService.prototype.pageMetaService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var JsonLdScriptFactory = /** @class */ (function () {
-    function JsonLdScriptFactory(platformId, winRef, rendererFactory) {
-        this.platformId = platformId;
-        this.winRef = winRef;
-        this.rendererFactory = rendererFactory;
-    }
-    /**
-     * @param {?} schema
-     * @return {?}
-     */
-    JsonLdScriptFactory.prototype.build = /**
-     * @param {?} schema
-     * @return {?}
-     */
-    function (schema) {
-        if (schema && this.isJsonLdRequired()) {
-            this.createJsonLdScriptElement().innerHTML = JSON.stringify(schema);
-        }
-    };
-    /**
-     * Only return schema data in case of SSR or development mode,
-     * to not waste memory unnecessary.
-     */
-    /**
-     * Only return schema data in case of SSR or development mode,
-     * to not waste memory unnecessary.
-     * @return {?}
-     */
-    JsonLdScriptFactory.prototype.isJsonLdRequired = /**
-     * Only return schema data in case of SSR or development mode,
-     * to not waste memory unnecessary.
-     * @return {?}
-     */
-    function () {
-        return !isPlatformBrowser(this.platformId) || isDevMode();
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    JsonLdScriptFactory.prototype.createJsonLdScriptElement = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var id = 'json-ld';
-        /** @type {?} */
-        var scriptElement = (/** @type {?} */ ((this.winRef.document.getElementById(id))));
-        if (!scriptElement) {
-            /** @type {?} */
-            var renderer = this.rendererFactory.createRenderer(null, null);
-            /** @type {?} */
-            var script = renderer.createElement('script');
-            script.id = id;
-            script.type = 'application/ld+json';
-            renderer.appendChild(this.winRef.document.body, script);
-            scriptElement = script;
-        }
-        return scriptElement;
-    };
-    JsonLdScriptFactory.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    JsonLdScriptFactory.ctorParameters = function () { return [
-        { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
-        { type: WindowRef },
-        { type: RendererFactory2 }
-    ]; };
-    /** @nocollapse */ JsonLdScriptFactory.ngInjectableDef = ɵɵdefineInjectable({ factory: function JsonLdScriptFactory_Factory() { return new JsonLdScriptFactory(ɵɵinject(PLATFORM_ID), ɵɵinject(WindowRef), ɵɵinject(RendererFactory2)); }, token: JsonLdScriptFactory, providedIn: "root" });
-    return JsonLdScriptFactory;
-}());
-if (false) {
-    /**
-     * @type {?}
-     * @protected
-     */
-    JsonLdScriptFactory.prototype.platformId;
-    /**
-     * @type {?}
-     * @protected
-     */
-    JsonLdScriptFactory.prototype.winRef;
-    /**
-     * @type {?}
-     * @protected
-     */
-    JsonLdScriptFactory.prototype.rendererFactory;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Low level directive that adds a json-ld script tag to the component.
- * This code bypasses the strict XSS security, as otherwise we're not able
- * to append a script tag with JS inside.
- */
-var JsonLdDirective = /** @class */ (function () {
-    function JsonLdDirective(jsonLdScriptFactory, sanitizer) {
-        this.jsonLdScriptFactory = jsonLdScriptFactory;
-        this.sanitizer = sanitizer;
-    }
-    Object.defineProperty(JsonLdDirective.prototype, "cxJsonLd", {
-        set: /**
-         * @param {?} schema
-         * @return {?}
-         */
-        function (schema) {
-            this.writeJsonLd(schema);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @private
-     * @param {?} schema
-     * @return {?}
-     */
-    JsonLdDirective.prototype.writeJsonLd = /**
-     * @private
-     * @param {?} schema
-     * @return {?}
-     */
-    function (schema) {
-        if (schema && this.jsonLdScriptFactory.isJsonLdRequired()) {
-            /** @type {?} */
-            var html = "<script type=\"application/ld+json\">" + JSON.stringify(schema) + "</script>";
-            this.jsonLD = this.sanitizer.bypassSecurityTrustHtml(html);
-        }
-    };
-    JsonLdDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: '[cxJsonLd]',
-                },] }
-    ];
-    /** @nocollapse */
-    JsonLdDirective.ctorParameters = function () { return [
-        { type: JsonLdScriptFactory },
-        { type: DomSanitizer }
-    ]; };
-    JsonLdDirective.propDecorators = {
-        cxJsonLd: [{ type: Input }],
-        jsonLD: [{ type: HostBinding, args: ['innerHTML',] }]
-    };
-    return JsonLdDirective;
-}());
-if (false) {
-    /** @type {?} */
-    JsonLdDirective.prototype.jsonLD;
-    /**
-     * @type {?}
-     * @protected
-     */
-    JsonLdDirective.prototype.jsonLdScriptFactory;
-    /**
-     * @type {?}
-     * @protected
-     */
-    JsonLdDirective.prototype.sanitizer;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Injection token to extend schema builders for adding structural data (json-ld).
- *
- * Some builders (i.e. `JSONLD_PRODUCT_BUILDER`) might have additional
- * lowever level builder to further extend the schema.
- * @type {?}
- */
-var SCHEMA_BUILDER = new InjectionToken('SchemaBuilderToken');
-/**
- * Injection token to add specific json-ld builders for product related schema's.
- * See see https://schema.org/product for more information.
- * @type {?}
- */
-var JSONLD_PRODUCT_BUILDER = new InjectionToken('JsonLdProductBuilderToken');
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var StructuredDataFactory = /** @class */ (function () {
-    function StructuredDataFactory(scriptBuilder, builders) {
-        this.scriptBuilder = scriptBuilder;
-        this.builders = builders;
-    }
-    /**
-     * @return {?}
-     */
-    StructuredDataFactory.prototype.build = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this.collectSchemas().subscribe((/**
-         * @param {?} schema
-         * @return {?}
-         */
-        function (schema) {
-            _this.scriptBuilder.build(schema);
-        }));
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    StructuredDataFactory.prototype.collectSchemas = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        if (!this.scriptBuilder.isJsonLdRequired() || !this.builders) {
-            return of();
-        }
-        return combineLatest(this.builders.map((/**
-         * @param {?} builder
-         * @return {?}
-         */
-        function (builder) { return builder.build(); }))).pipe();
-    };
-    StructuredDataFactory.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    StructuredDataFactory.ctorParameters = function () { return [
-        { type: JsonLdScriptFactory },
-        { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [SCHEMA_BUILDER,] }] }
-    ]; };
-    /** @nocollapse */ StructuredDataFactory.ngInjectableDef = ɵɵdefineInjectable({ factory: function StructuredDataFactory_Factory() { return new StructuredDataFactory(ɵɵinject(JsonLdScriptFactory), ɵɵinject(SCHEMA_BUILDER, 8)); }, token: StructuredDataFactory, providedIn: "root" });
-    return StructuredDataFactory;
-}());
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    StructuredDataFactory.prototype.scriptBuilder;
-    /**
-     * @type {?}
-     * @private
-     */
-    StructuredDataFactory.prototype.builders;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Factory to build the structure data
- * without any interaction with the UI.
- * @param {?} injector
- * @return {?}
- */
-function getStructuredDataFactory(injector) {
-    /** @type {?} */
-    var result = (/**
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var factory = injector.get(StructuredDataFactory);
-        factory.build();
-    });
-    return result;
-}
-var StructuredDataModule = /** @class */ (function () {
-    function StructuredDataModule() {
-    }
-    StructuredDataModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [CommonModule],
-                    declarations: [JsonLdDirective],
-                    exports: [JsonLdDirective],
-                    providers: [
-                        {
-                            provide: APP_INITIALIZER,
-                            useFactory: getStructuredDataFactory,
-                            deps: [Injector],
-                            multi: true,
-                        },
-                    ],
-                },] }
-    ];
-    return StructuredDataModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @param {?} injector
- * @return {?}
- */
-function initSeoService(injector) {
-    /** @type {?} */
-    var result = (/**
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var service = injector.get(SeoMetaService);
-        service.init();
-    });
-    return result;
-}
-var SeoModule = /** @class */ (function () {
-    function SeoModule() {
-    }
-    SeoModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [StructuredDataModule],
-                    providers: [
-                        {
-                            provide: APP_INITIALIZER,
-                            useFactory: initSeoService,
-                            deps: [Injector],
-                            multi: true,
-                        },
-                        htmlLangProvider,
-                    ],
-                },] }
-    ];
-    return SeoModule;
 }());
 
 /**
@@ -13603,7 +16112,7 @@ var ConsentManagementComponent = /** @class */ (function () {
          * @return {?}
          */
         function (template) {
-            if (_this.isConsentGiven(template)) {
+            if (_this.userConsentService.isConsentGiven(template.currentConsent)) {
                 if (_this.isRequiredConsent(template)) {
                     return;
                 }
@@ -13664,21 +16173,6 @@ var ConsentManagementComponent = /** @class */ (function () {
         return checkTimesLoaded$;
     };
     /**
-     * @private
-     * @param {?} consentTemplate
-     * @return {?}
-     */
-    ConsentManagementComponent.prototype.isConsentGiven = /**
-     * @private
-     * @param {?} consentTemplate
-     * @return {?}
-     */
-    function (consentTemplate) {
-        return (Boolean(consentTemplate.currentConsent) &&
-            Boolean(consentTemplate.currentConsent.consentGivenDate) &&
-            !Boolean(consentTemplate.currentConsent.consentWithdrawnDate));
-    };
-    /**
      * @param {?=} templates
      * @return {?}
      */
@@ -13696,7 +16190,7 @@ var ConsentManagementComponent = /** @class */ (function () {
          * @return {?}
          */
         function (template) {
-            if (_this.isConsentWithdrawn(template)) {
+            if (_this.userConsentService.isConsentWithdrawn(template.currentConsent)) {
                 if (_this.isRequiredConsent(template)) {
                     return;
                 }
@@ -13755,22 +16249,6 @@ var ConsentManagementComponent = /** @class */ (function () {
          */
         function (timesLoaded) { return timesLoaded === consentsToGive.length; })));
         return checkTimesLoaded$;
-    };
-    /**
-     * @private
-     * @param {?} consentTemplate
-     * @return {?}
-     */
-    ConsentManagementComponent.prototype.isConsentWithdrawn = /**
-     * @private
-     * @param {?} consentTemplate
-     * @return {?}
-     */
-    function (consentTemplate) {
-        if (Boolean(consentTemplate.currentConsent)) {
-            return Boolean(consentTemplate.currentConsent.consentWithdrawnDate);
-        }
-        return true;
     };
     /**
      * @private
@@ -13908,7 +16386,13 @@ var AnonymousConsentsModule = /** @class */ (function () {
     }
     AnonymousConsentsModule.decorators = [
         { type: NgModule, args: [{
-                    imports: [CommonModule, I18nModule, IconModule, ConsentManagementModule],
+                    imports: [
+                        CommonModule,
+                        I18nModule,
+                        IconModule,
+                        SpinnerModule,
+                        ConsentManagementModule,
+                    ],
                     declarations: [AnonymousConsentDialogComponent],
                     entryComponents: [AnonymousConsentDialogComponent],
                     exports: [AnonymousConsentDialogComponent],
@@ -13982,7 +16466,7 @@ var StorefrontComponent = /** @class */ (function () {
     StorefrontComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-storefront',
-                    template: "<cx-page-slot position=\"TopHeaderSlot\"></cx-page-slot>\n<header\n  [class.is-expanded]=\"isExpanded$ | async\"\n  (keydown.escape)=\"collapseMenu()\"\n  (click)=\"collapseMenuIfClickOutside($event)\"\n>\n  <cx-page-layout section=\"header\"></cx-page-layout>\n  <cx-page-layout section=\"navigation\"></cx-page-layout>\n</header>\n\n<cx-page-slot position=\"BottomHeaderSlot\"></cx-page-slot>\n\n<cx-global-message></cx-global-message>\n\n<router-outlet></router-outlet>\n\n<footer>\n  <cx-page-layout section=\"footer\"></cx-page-layout>\n</footer>\n"
+                    template: "<ng-template cxOutlet=\"cx-storefront\">\n  <ng-template cxOutlet=\"cx-header\">\n    <header\n      [class.is-expanded]=\"isExpanded$ | async\"\n      (keydown.escape)=\"collapseMenu()\"\n      (click)=\"collapseMenuIfClickOutside($event)\"\n    >\n      <cx-page-layout section=\"header\"></cx-page-layout>\n      <cx-page-layout section=\"navigation\"></cx-page-layout>\n    </header>\n    <cx-page-slot position=\"BottomHeaderSlot\"></cx-page-slot>\n    <cx-global-message></cx-global-message>\n  </ng-template>\n\n  <router-outlet></router-outlet>\n\n  <ng-template cxOutlet=\"cx-footer\">\n    <footer>\n      <cx-page-layout section=\"footer\"></cx-page-layout>\n    </footer>\n  </ng-template>\n</ng-template>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -14030,6 +16514,7 @@ var MainModule = /** @class */ (function () {
                         CommonModule,
                         RouterModule,
                         GlobalMessageComponentModule,
+                        OutletModule,
                         OutletRefModule,
                         PwaModule,
                         PageLayoutModule,
@@ -14044,2045 +16529,6 @@ var MainModule = /** @class */ (function () {
     ];
     return MainModule;
 }());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var AsmMainUiComponent = /** @class */ (function () {
-    function AsmMainUiComponent(authService, userService, asmService, globalMessageService, routingService) {
-        this.authService = authService;
-        this.userService = userService;
-        this.asmService = asmService;
-        this.globalMessageService = globalMessageService;
-        this.routingService = routingService;
-        this.startingCustomerSession = false;
-    }
-    /**
-     * @return {?}
-     */
-    AsmMainUiComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this.csAgentToken$ = this.authService.getCustomerSupportAgentToken();
-        this.csAgentTokenLoading$ = this.authService.getCustomerSupportAgentTokenLoading();
-        this.searchResultsLoading$ = this.asmService.getCustomerSearchResultsLoading();
-        this.customer$ = this.authService.getUserToken().pipe(switchMap((/**
-         * @param {?} token
-         * @return {?}
-         */
-        function (token) {
-            if (token && !!token.access_token) {
-                _this.handleCustomerSessionStartRedirection(token);
-                return _this.userService.get();
-            }
-            else {
-                return of(undefined);
-            }
-        })));
-    };
-    /**
-     * @private
-     * @param {?} token
-     * @return {?}
-     */
-    AsmMainUiComponent.prototype.handleCustomerSessionStartRedirection = /**
-     * @private
-     * @param {?} token
-     * @return {?}
-     */
-    function (token) {
-        if (this.startingCustomerSession &&
-            this.authService.isCustomerEmulationToken(token)) {
-            this.startingCustomerSession = false;
-            this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
-            this.routingService.go('/');
-        }
-    };
-    /**
-     * @param {?} __0
-     * @return {?}
-     */
-    AsmMainUiComponent.prototype.loginCustomerSupportAgent = /**
-     * @param {?} __0
-     * @return {?}
-     */
-    function (_a) {
-        var userId = _a.userId, password = _a.password;
-        this.authService.authorizeCustomerSupporAgent(userId, password);
-    };
-    /**
-     * @return {?}
-     */
-    AsmMainUiComponent.prototype.logoutCustomerSupportAgent = /**
-     * @return {?}
-     */
-    function () {
-        this.authService.logoutCustomerSupportAgent();
-    };
-    /**
-     * @param {?} __0
-     * @return {?}
-     */
-    AsmMainUiComponent.prototype.startCustomerEmulationSession = /**
-     * @param {?} __0
-     * @return {?}
-     */
-    function (_a) {
-        var _this = this;
-        var customerId = _a.customerId;
-        this.authService
-            .getCustomerSupportAgentToken()
-            .pipe(take(1))
-            .subscribe((/**
-         * @param {?} customerSupportAgentToken
-         * @return {?}
-         */
-        function (customerSupportAgentToken) {
-            return _this.authService.startCustomerEmulationSession(customerSupportAgentToken, customerId);
-        }))
-            .unsubscribe();
-        this.startingCustomerSession = true;
-    };
-    /**
-     * @return {?}
-     */
-    AsmMainUiComponent.prototype.hideUi = /**
-     * @return {?}
-     */
-    function () {
-        this.asmService.updateAsmUiState({ visible: false });
-    };
-    AsmMainUiComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-asm-main-ui',
-                    template: "<div class=\"fd-shellbar\">\n  <div class=\"fd-shellbar__group fd-shellbar__group--start\">\n    <a href=\"#\" class=\"fd-shellbar__logo\"\n      ><img\n        src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAAAwCAYAAADuFn/PAAAAAXNSR0IArs4c6QAAD7RJREFUeAHtW3twVGcVP7t795V30rwJBBJeASq01NJgnZa2otTW2nHAqrRak+rUKfgYZ/xDW5lRR2e0/mGtAadqq6WjUAdNa4udqVZaEdtCKQ2FQEh5JSQh5Lnvp7/ft9lkd9l7swkhwMiZ3N27937fd8533ufcG9P1L/VE5SpMOwdMmk0iocDzWjAUnnbk/9cITSYx2xwS9Xs3Wzs7NmqhcOT/mh/Tunkw32SzScjr2Vy2v3XDa5tWhbRI5KoHmi4hmGx2ifi8mz8UmvHI9k2VyvVokasWMC38N8HtRHyezUejex5pXbdu1O9r5qsCuLgCUD4fmu/1bq5sbd9wdNMY84lYM10VwMUTAJlvtUnU491c0XZc+fxUZFo0Mn4QjiJMMFREcKJG4xxrC/7ETCQ854+JAtbBny5Mak3d1ab3BsKtCrhhuJ2K9lNpmU+KYAHpWRAFa4K4x7t5NouU5WhS4rRIvt0idotJ3MGIDPgj0usNSZ8vLMOBiIQhJQukoZkpHGOJcGXLiPD0WBNStOmvQ8ETAjp7iN0d++RelBLhBFsAnVQe/fXHZk7wDEuarXaJBrxNFe2nNzLb0VsBMWA0HoyO8WNDDnDxIzOy5ONzcuX6MqdU5VhxLZlYWoUvFJEud0iODQZkb5dXHa19PnEFw2LDBi0QRqqac14BBPnz2yul0GEZxZt68vzhQXm6pS+Gl9xLANL4uUWFsm5hPmiIjiPu2EQqSY8nJCeHAnK4zy+tOLrdQXXTClqVLFLwJKDM7BSLmMD8iN/btCRn3obtm+adz+CElTTlW0YuEDe1qR6M//oNJXJDRVbC0PNPqYFZVrPUFNjU8bHqHGUF3NxLx4ZkZ/uQdLnOF34Acad+To6srDRe/7ML8+T5Q/3KEpNFD5lijVKnWa4tdpxPWIZXeiGM/3S65Y/vD8hbnR6lLBdkEdR8DZrv9zUtyT+wYfu6+YbMJ5mjQZjMZ1H20HXF8s0VZWKjjU4C6IIWgyk8PlqVLY0vnhDGkMTVNJjA3bV5464+t9AhS4vtsqfDBWuiKY0Bk4dIhq5nbFbyWXGWJnfPzZc1NRT0gDy+p1uG/WHlmpJHZvALG6TmR/2epoOFBzccTEg1jWabTXBBpkhYgoGQNCy9Rr6zsnzSzE9ERKZvazknAX9IzFhf4QGuMFofNXmarKjMThye9pwWtqYmV6Jwc2R4fI3Rb/qyKQDGgvsWF8ovVlcJSEOPJsaTUTzkkdGBRMZstorA7SwqXLRBMmQ+STczC/IHwnA3TvlGfdkUbCe2xBsnhmVna79YTQi3YB7x8AhA0LfPzpNsW7JG6yG+BWOLHWYJgwHxNUa/KeUphPqZOfKt+nKlJIk0j+Ib2UPyb8QfMD/q8zYV9/Ru3L7ONK7bSSTZHIUZm6FJDdeXIrsZnynMdBh4jfbuR1B8YnenhBCIVZZFV4GDuLLh2j4xLz+RBsPzylyrspYAlIRrJB1TZAGJBHxmUZFcV5YFRUmDLxU/fpP5aC80Fff1GWY7iTgSzzWa26wCu6yA9I3g7VPDsu1Ar3zQ75MAGEwNLnBoUgtfv2JmriybkSM5SFcJO1p65Z3Tw2JnPgqtiUMIgluGsXUlzviljL7vnF8gLx86h7UShnNdIy3A0NeODcrrHwwqn56LrKv2GtA6K0+K4Pv1wAoF+STw7T05lBy4kibQ8lhkMdvxNZUMD06K+VxSC0NLawtto8xLwjPyYx+Y2bCtVVwjAYrpGvdOBXzlcFSeguVUF9rlzroiuXlOgfzmv2fEwgFwG4kQhitag80xUE8EbgLTZsISOgb9Y3MhzPEE8NapIdmyu0McyNRIDjOcmVC2x1ZXy621BbokLK/KEZQ8CPLJ9I9OwDpm9POR7fzqYPXyjTJBtzO6Dk4QH8MosPQ1goND4DSDNFCKDT4dHk99O8xRRSjKaTnR65Ff7jolX37ufTnT78UYBE1oafygT2Uhd9vcwkT8GZ3noVa4tSY/5tIS1jQBrxFYIWdkqurIAkMdoL2jzyvf/1u7dA8HdKdW5FmlCHEnFozH9qASAfDCYtLYz2+qe7P9gphPAhADEBipTQZwIzTwJ3fVSmm2VTy+kARgNeyiqkDFbzDFooQioh7w4PfovZFxDL7U5Mp8W1pMrLppYXqwBtbFuJ2MF2ptAFEwK4kO0MWkoGPAK/s7hnVnMhZmw30m4eI+aEZgPtzOr+pqTmzYvj25saa7oMENiDIq3UN+gyGxW5+6tkRurM6XHe/2yIstZ6XtrEcJTgOxTOPoluIVbypb+JvK+slF1+jiae/1yuvH+qVx5Yy0Y66tzJX5xVnScsYlrFpZA5AfRkCGcVwEljoKoDOMaz5UxXqgIQ7Aa6lxo1Mxj3l+OOD73eEFKze2rKvX1xa9hdNcx1aicqjLJb0ufZOMzyvPs8nDH62SPzculWceWAJmVUkNAlsAgdwFywhCS0LQstTDz0BfZJebEB/0YM8HA7Jjf7eqpNONYWF4x4JC8QVDav0g8LCvYwS8z3GJ9NDaEY9lfql+Fc4kg/sJJ8wNm20S9nu3+sKBr12Iz0+l10wtOQ2fTa3OFBjUbpqdL9/9xBz5y1eXyVNfWCy0EA0bc6Pw4oZJfPzwwWXdPr9IcrhzHdjV1icHod20LD1YXVes1qCgufZ4AmDKTOFTQUgDafPg+PwNFbIAqaYeuOEKe90B5XIUHgseIwa9W/3RYOPxTat8evMmc121o+m/m/51QlaBSdVFE0sRnVaLmse5LZ0ueeK14/IShKk6nbQvCDiLqd3iYl36uuAC950cFK8/KK9DEAvK0lfJc0uyZHlVrvzzyLmY+xnHAvIg8CpYrQM0ZiGAVF+TJXdDUe6+ttSwC9ra7ZJ+eASVraG3A5+/1VLqbmjfeOf4vlp3l+lvQAAoxHDvNLKDh7e+J1vWf0hmogczGVhSmSNbPr9EnvnPafnB344iINP8o3Lj7AJZDB+uB3va+6V70KcC+T9bz0nDyplpny8wzty1pFRePXQ2IwE8WD9DPgdtN2EiBWBFvMoEXnm/V/xwddnOLHY1n9OGfQ1tP5x65pMW1PgIRjiYYew/MSj3bdkrfz/YkwmdumO+WF8lP753IVLQqEod74LWscDRg1cP9ap+jxWMOgBL6BjQt/JVC4qkIgfv1JBurG8E1PyCLKvkI83OlPknoYgvvtslDjzDDQe8W8H8L7c9cXGYT9qRa2ETPJAZ2OEyTvS65StPvysP//6AvH18wGh/hvfWLq+QtcvLhW5g9aIS3bH96Mf/tw09IygAApL0DvlkdxuqXh0oy7PLzaglmNbGzEBn4CQuM2b86IUjctYFrxD0bTU5LI0Xk/kk0RxhMEs4GCbplnbs7ZC1T74lX9jytvzpzQ45Y6CVentdf1OVrIHLmGkQV/a098mpc24xgfmKDmj2Ky3GFnjX0jIIi3pjbAF6dKW7zjrksR2Hpfm9PtEi/q3RLG3KA246vBrdRCrQWTjgL1kJ/gPM4FGe75Dl8OV3LC6VW5CNVBSMHycWVuTKN1fXpi6f9Jsuh81Atq0JVIAPetwyhEedeToV+sraIvSgnOhank+7WmSCH0eRhv8Ymr8TzwSQ7zxr7rc9dPzxqc129Egy1Xz9paRd8Eeqt+Y1lVNjwzwvRz/l08tnyCNgbhH88YUAU8O2brd0IhX24zlzCVzMbGQ7FLDR06nvbTsodvitR++tmxT6QU9QDqEafuGdTmned0b6fSaxg/mRwa6Hjj/9oH4QmhQ2/UnnWQALFWYbDFpxQfCb+QMrRAqgH02xJ3celdOIF5sbl+NhRHykPiK9O9l2TZbOyleH3ph019fADe05qh8rOOeNw72y+0gv6I7thSnxOaSXp895YGUelfmxTnA4nGKPBrfCrTW2P/3glKea6eiPX9Ms8P9xYMq4/iOzlAvY09qrLttIfDr+QiLtnUMqflM40w3LqgtQNxh3A954v0cebz4szpE2OWnkXpiWMsdnC8XuQLaDgBs1WxoudsBNxyNYQEwAZP6c0hx5dO0SVUTthGlu//cJOXC8X4bx8JouSAkCJsAZOXgW8NAdtcoq0i18sa9lA//NC/WLO+Jnzygbb3Kkvs2haIMgzKhwI0g1oxbrJWE+6dAs9CmAIPzvA7fORsESaxfcc2OVfOrDVXKsa1gOnhyQDrSbB1Ce0y+XoVBbsaBEFs3M/MlWDMvUfjoSNDvdyrRM7i++x8QxJjI/6Hs2rFkveqqZiDf1XFkAU7B55Tny6fpZSfep8XORyfC4IoEtWFp4BBsZAb4wpv45Iuh/1uvvY8CdVp8fpyP+rbH4iSIQrV81B2kfnuxPA/AlgJ9tf0/KUR8sqi6U8kInyn6rCvpMAs6hGDuJVHQ/CrL7bquRuZXjv8KSjmy0/tWTOfV0bmSAcjsh/7OewMC0Zjvp6OM1ja+J1MGVrL1ljt6YKb/ehuD93KvHVJfSjnaB06aJNvLWHRXWj86lF+mpF4IqRTo6WQHwAQULPB4EExtrYL7X6Wg8/utLq/lxpppZUfrQ+37tnTNq4/Ebk/lmoH793TOKeUbzd2EM35jIBvMZcfxgthvxhYfXizYwqmEnnkjxIf+/W7rQqoox0GjNdPdoASw0eZjRzxf4fG+H45L6/FQ6zVS8M2dd8u0nd8v9P/yH/H7nETnd40odZ/ib7NmHfPurP90lbx7uESdyeyPYtb8TjwbBHAiMLpDtcAoifvAa7/Hd0kNoVUyUnjhu9b4n10fANQX8f3BndTa2vXzxGmtxvBP5Nl33pW1KvUCnejWR2laEarQOvnnZvGKpm10olXgUWJhrFxs0lsCxLk9AulG9toBBb0Cj6a/d3qCsva1W5lTQZ6tl1fjEj0Fo+XOvHAUuMHksNiYOSTpnS/tOJAcLZvFhfvo1kyYk/Njd0i1vHxlAbAltc3VlP3C5MZ+kmq574E/n7YquhO+JsuPLgsWJjiaDZLylywk+uI1hMJzpKythK1wGGcrfRi6DYyjIDHgfYyUGBrDmZP6XzWZHO0NCzR6LfX3rb+/Rfwofw3RJPrV4gErErlwBKmDlE3AjDAYMBn1J3V8ykk+9NPaRCTQL/KmXeg16/6Nj1UkGH1iT/48AZBkMHhvCt5Qj4UCzW3NctswntRr5lgmo/DmVBzGeZzJ9WseQ+eFgoNkz5Frf2vzZy1Lz4wxBDM5QAvEZl/m32cJUE8y3kfkNlzXzyUr1XtBlztOMyVNuJ+Rvdg571u+7Apg/IoCM93dZD+S7mnA7f/W4PPdfKcwfEcCV74KU26HPd3vvvxLcTqImX4pWfiL+Cz7nf6ZEI8G/ut3eK8Lnp254pAOTevnK+G0yI4RFQvtzQ9r6vc0NEyvfL5Mt/g8XIbTVhsig+gAAAABJRU5ErkJggg==\"\n        width=\"48\"\n        height=\"24\"\n        alt=\"{{ 'asm.mainLogoLabel' | cxTranslate }}\"\n    /></a>\n    <div class=\"fd-shellbar__product\">\n      <span class=\"fd-shellbar__title\">{{\n        'asm.mainTitle' | cxTranslate\n      }}</span>\n    </div>\n  </div>\n  <div class=\"fd-shellbar__group fd-shellbar__group--end\">\n    <div class=\"fd-shellbar__actions\">\n      <div class=\"fd-shellbar__action fd-shellbar__action--show-always\">\n        <div class=\"sap-icon--decline\">\n          <a\n            title=\"{{ 'asm.hideUi' | cxTranslate }}\"\n            *ngIf=\"\n              !(csAgentToken$ | async)?.access_token &&\n              !(csAgentTokenLoading$ | async)\n            \"\n            (click)=\"hideUi()\"\n          >\n            <svg\n              xmlns=\"http://www.w3.org/2000/svg\"\n              width=\"15\"\n              height=\"15\"\n              viewBox=\"0 0 18 18\"\n            >\n              <path\n                d=\"M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z\"\n              />\n            </svg>\n          </a>\n        </div>\n        <div class=\"sap-icon--log\">\n          <a\n            title=\"{{ 'asm.logout' | cxTranslate }}\"\n            *ngIf=\"\n              (csAgentToken$ | async)?.access_token &&\n              !(customer$ | async) &&\n              !(searchResultsLoading$ | async)\n            \"\n            (click)=\"logoutCustomerSupportAgent()\"\n          >\n            <img\n              src=\"data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOCIgaGVpZ2h0PSIyOCIgdmlld0JveD0iMCAwIDI4IDI4Ij48cGF0aCBmaWxsPSIjZDFlM2ZmIiBkPSJNMTYuOTk5IDguNDRjMS4xODcuNTY1IDIuMTg3IDEuNDUzIDIuODkxIDIuNTYgMS4yNTMgMS45NDcgMS40NjQgNC4zODguNTYyIDYuNTItLjM0Mi44MTYtLjgzNSAxLjU1OS0xLjQ1MSAyLjE5LS42NDIuNjM3LTEuMzk3IDEuMTQ2LTIuMjI5IDEuNS0uODYyLjM1OS0xLjc4Ny41NDQtMi43Mi41NC0uOTM4LjAwOC0xLjg2Ny0uMTc1LTIuNzMtLjU0LS44MjgtLjM1NC0xLjU4MS0uODY1LTIuMjItMS41LS42MzgtLjYzOC0xLjE0Ny0xLjM5MS0xLjUtMi4yMi0uOTEtMi4xMTYtLjcxOS00LjU0Mi41MDgtNi40OS43MDQtMS4xMDcgMS43MDUtMS45OTUgMi44OS0yLjU2djEuMTNjLS44OTYuNTE1LTEuNjQzIDEuMjUyLTIuMTcgMi4xNC0uNTQ4LjkwNC0uODM1IDEuOTQzLS44MyAzLS4wMTQgMS42MDUuNjE2IDMuMTUxIDEuNzUgNC4yOS41NDUuNTUgMS4xOTUuOTg1IDEuOTEgMS4yOCAxLjQ5OC42MjUgMy4xODMuNjI1IDQuNjgxIDAgLjcxNS0uMjk1IDEuMzY0LS43MyAxLjkwOC0xLjI4IDEuMTI1LTEuMTI3IDEuNzU2LTIuNjU2IDEuNzUxLTQuMjQ5LjAwNS0xLjA1OS0uMjgxLTIuMDk3LS44My0zLjAwMS0uNTIxLS45MDItMS4yNy0xLjY1NC0yLjE3MS0yLjE4di0xLjEzem0tMi45OTkgNi4zMTFjLS4yNjguMDA1LS41MjctLjA5Ni0uNzItLjI4MS0uMTg3LS4xOTMtLjI4Ny0uNDUyLS4yODEtLjcydi03Yy0uMDAxLS4yNjEuMDk5LS41MTIuMjgxLS42OTkuMzgzLS4zOTggMS4wMTYtLjQxIDEuNDE0LS4wMjYuMTk2LjE4OS4zMDguNDUxLjMwNi43MjV2Ny4wMDFjLjAwOS4yNzItLjEwMS41MzQtLjMuNzItLjE4OC4xNzktLjQzOS4yOC0uNy4yOHoiLz48L3N2Zz4=\"\n            />\n          </a>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n\n<ng-container *ngIf=\"(csAgentToken$ | async)?.access_token; else showLoginForm\">\n  <cx-customer-emulation\n    *ngIf=\"customer$ | async as customer; else showCustomerSelection\"\n  ></cx-customer-emulation>\n  <ng-template #showCustomerSelection>\n    <cx-customer-selection\n      (submitEvent)=\"startCustomerEmulationSession($event)\"\n    ></cx-customer-selection>\n  </ng-template>\n</ng-container>\n\n<ng-template #showLoginForm>\n  <cx-csagent-login-form\n    (submitEvent)=\"loginCustomerSupportAgent($event)\"\n    [csAgentTokenLoading]=\"csAgentTokenLoading$ | async\"\n  ></cx-csagent-login-form>\n</ng-template>\n"
-                }] }
-    ];
-    /** @nocollapse */
-    AsmMainUiComponent.ctorParameters = function () { return [
-        { type: AuthService },
-        { type: UserService },
-        { type: AsmService },
-        { type: GlobalMessageService },
-        { type: RoutingService }
-    ]; };
-    return AsmMainUiComponent;
-}());
-if (false) {
-    /** @type {?} */
-    AsmMainUiComponent.prototype.csAgentToken$;
-    /** @type {?} */
-    AsmMainUiComponent.prototype.csAgentTokenLoading$;
-    /** @type {?} */
-    AsmMainUiComponent.prototype.customer$;
-    /** @type {?} */
-    AsmMainUiComponent.prototype.searchResultsLoading$;
-    /**
-     * @type {?}
-     * @private
-     */
-    AsmMainUiComponent.prototype.startingCustomerSession;
-    /**
-     * @type {?}
-     * @protected
-     */
-    AsmMainUiComponent.prototype.authService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    AsmMainUiComponent.prototype.userService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    AsmMainUiComponent.prototype.asmService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    AsmMainUiComponent.prototype.globalMessageService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    AsmMainUiComponent.prototype.routingService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var AsmRootComponent = /** @class */ (function () {
-    function AsmRootComponent(asmService, activatedRoute) {
-        this.asmService = asmService;
-        this.activatedRoute = activatedRoute;
-        this.subscription = new Subscription();
-    }
-    /**
-     * @return {?}
-     */
-    AsmRootComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this.asmUi$ = this.asmService.getAsmUiState();
-        this.subscription.add(this.activatedRoute.queryParamMap.subscribe((/**
-         * @param {?} queryParams
-         * @return {?}
-         */
-        function (queryParams) {
-            if (queryParams.get('asm') === 'true') {
-                _this.showUi();
-            }
-        })));
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    AsmRootComponent.prototype.showUi = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        this.asmService.updateAsmUiState({ visible: true });
-    };
-    /**
-     * @return {?}
-     */
-    AsmRootComponent.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
-        this.subscription.unsubscribe();
-    };
-    AsmRootComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-asm',
-                    template: "<cx-asm-main-ui *ngIf=\"(asmUi$ | async)?.visible\"></cx-asm-main-ui>\n"
-                }] }
-    ];
-    /** @nocollapse */
-    AsmRootComponent.ctorParameters = function () { return [
-        { type: AsmService },
-        { type: ActivatedRoute }
-    ]; };
-    return AsmRootComponent;
-}());
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    AsmRootComponent.prototype.subscription;
-    /** @type {?} */
-    AsmRootComponent.prototype.asmUi$;
-    /**
-     * @type {?}
-     * @protected
-     */
-    AsmRootComponent.prototype.asmService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    AsmRootComponent.prototype.activatedRoute;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CSAgentLoginFormComponent = /** @class */ (function () {
-    function CSAgentLoginFormComponent(fb) {
-        this.fb = fb;
-        this.submitClicked = false;
-        this.csAgentTokenLoading = false;
-        this.submitEvent = new EventEmitter();
-    }
-    /**
-     * @return {?}
-     */
-    CSAgentLoginFormComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        this.form = this.fb.group({
-            userId: ['', [Validators.required]],
-            password: ['', [Validators.required]],
-        });
-    };
-    /**
-     * @return {?}
-     */
-    CSAgentLoginFormComponent.prototype.onSubmit = /**
-     * @return {?}
-     */
-    function () {
-        this.submitClicked = true;
-        if (this.form.invalid) {
-            return;
-        }
-        this.submitEvent.emit({
-            userId: this.form.controls.userId.value,
-            password: this.form.controls.password.value,
-        });
-    };
-    /**
-     * @param {?} formControlName
-     * @return {?}
-     */
-    CSAgentLoginFormComponent.prototype.isNotValid = /**
-     * @param {?} formControlName
-     * @return {?}
-     */
-    function (formControlName) {
-        return FormUtils.isNotValidField(this.form, formControlName, this.submitClicked);
-    };
-    CSAgentLoginFormComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-csagent-login-form',
-                    template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\" *ngIf=\"!csAgentTokenLoading\">\n  <div class=\"fd-container\">\n    <div class=\"fd-col--3\">\n      <label>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('userId')\"\n          formControlName=\"userId\"\n          placeholder=\"{{ 'asm.loginForm.userId.label' | cxTranslate }}\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('userId')\">\n          <span>{{ 'asm.loginForm.userId.required' | cxTranslate }}</span>\n        </div>\n      </label>\n    </div>\n    <div class=\"fd-col--3\">\n      <label>\n        <input\n          type=\"password\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('password')\"\n          placeholder=\"{{ 'asm.loginForm.password.label' | cxTranslate }}\"\n          formControlName=\"password\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('password')\">\n          <span>{{ 'asm.loginForm.password.required' | cxTranslate }}</span>\n        </div>\n      </label>\n    </div>\n    <div class=\"fd-col--3\">\n      <button type=\"submit\" class=\"fd-button--emphasized\">\n        {{ 'asm.loginForm.submit' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n\n<div class=\"sap-spinner\" *ngIf=\"csAgentTokenLoading\">\n  <div class=\"fd-loading-dots\" aria-hidden=\"false\" aria-label=\"Loading\">\n    <div></div>\n    <div></div>\n    <div></div>\n  </div>\n</div>\n"
-                }] }
-    ];
-    /** @nocollapse */
-    CSAgentLoginFormComponent.ctorParameters = function () { return [
-        { type: FormBuilder }
-    ]; };
-    CSAgentLoginFormComponent.propDecorators = {
-        csAgentTokenLoading: [{ type: Input }],
-        submitEvent: [{ type: Output }]
-    };
-    return CSAgentLoginFormComponent;
-}());
-if (false) {
-    /** @type {?} */
-    CSAgentLoginFormComponent.prototype.form;
-    /**
-     * @type {?}
-     * @private
-     */
-    CSAgentLoginFormComponent.prototype.submitClicked;
-    /** @type {?} */
-    CSAgentLoginFormComponent.prototype.csAgentTokenLoading;
-    /** @type {?} */
-    CSAgentLoginFormComponent.prototype.submitEvent;
-    /**
-     * @type {?}
-     * @private
-     */
-    CSAgentLoginFormComponent.prototype.fb;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CustomerSelectionComponent = /** @class */ (function () {
-    function CustomerSelectionComponent(fb, asmService, config) {
-        this.fb = fb;
-        this.asmService = asmService;
-        this.config = config;
-        this.subscription = new Subscription();
-        this.submitEvent = new EventEmitter();
-    }
-    /**
-     * @return {?}
-     */
-    CustomerSelectionComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this.form = this.fb.group({
-            searchTerm: [''],
-        });
-        this.asmService.customerSearchReset();
-        this.searchResultsLoading$ = this.asmService.getCustomerSearchResultsLoading();
-        this.searchResults = this.asmService.getCustomerSearchResults();
-        this.subscription.add(this.form.controls.searchTerm.valueChanges
-            .pipe(debounceTime(300))
-            .subscribe((/**
-         * @param {?} searchTermValue
-         * @return {?}
-         */
-        function (searchTermValue) {
-            _this.handleSearchTerm(searchTermValue);
-        })));
-    };
-    /**
-     * @private
-     * @param {?} searchTermValue
-     * @return {?}
-     */
-    CustomerSelectionComponent.prototype.handleSearchTerm = /**
-     * @private
-     * @param {?} searchTermValue
-     * @return {?}
-     */
-    function (searchTermValue) {
-        if (Boolean(this.selectedCustomer) &&
-            searchTermValue !== this.selectedCustomer.name) {
-            this.selectedCustomer = undefined;
-        }
-        if (Boolean(this.selectedCustomer)) {
-            return;
-        }
-        this.asmService.customerSearchReset();
-        if (searchTermValue.trim().length >= 3) {
-            this.asmService.customerSearch({
-                query: searchTermValue,
-                pageSize: this.config.asm.customeSearch.maxResults,
-            });
-        }
-    };
-    /**
-     * @param {?} customer
-     * @return {?}
-     */
-    CustomerSelectionComponent.prototype.selectCustomerFromList = /**
-     * @param {?} customer
-     * @return {?}
-     */
-    function (customer) {
-        this.selectedCustomer = customer;
-        this.form.controls.searchTerm.setValue(this.selectedCustomer.name);
-        this.asmService.customerSearchReset();
-    };
-    /**
-     * @return {?}
-     */
-    CustomerSelectionComponent.prototype.onSubmit = /**
-     * @return {?}
-     */
-    function () {
-        if (Boolean(this.selectedCustomer)) {
-            this.submitEvent.emit({ customerId: this.selectedCustomer.customerId });
-        }
-    };
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    CustomerSelectionComponent.prototype.onDocumentClick = /**
-     * @param {?} event
-     * @return {?}
-     */
-    function (event) {
-        if (Boolean(this.resultList)) {
-            if (this.resultList.nativeElement.contains(event.target) ||
-                this.searchTerm.nativeElement.contains(event.target)) {
-                return;
-            }
-            else {
-                this.asmService.customerSearchReset();
-            }
-        }
-    };
-    /**
-     * @return {?}
-     */
-    CustomerSelectionComponent.prototype.closeResults = /**
-     * @return {?}
-     */
-    function () {
-        this.asmService.customerSearchReset();
-    };
-    /**
-     * @return {?}
-     */
-    CustomerSelectionComponent.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
-        this.subscription.unsubscribe();
-    };
-    CustomerSelectionComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-customer-selection',
-                    template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\">\n  <div class=\"fd-container\">\n    <div class=\"fd-col--6\">\n      <label>\n        <input\n          #searchTerm\n          type=\"text\"\n          class=\"form-control\"\n          formControlName=\"searchTerm\"\n          placeholder=\"{{\n            'asm.customerSearch.searchTerm.label' | cxTranslate\n          }}\"\n        />\n      </label>\n    </div>\n\n    <div class=\"fd-col--3\">\n      <button\n        type=\"submit\"\n        [disabled]=\"!selectedCustomer\"\n        class=\"fd-button--emphasized fd-button--positive sap-icon--media-play\"\n      >\n        {{ 'asm.customerSearch.submit' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n\n<div\n  *ngIf=\"searchResults | async as results\"\n  class=\"results fd-popover__body\"\n  #resultList\n>\n  <div>\n    <a\n      *ngFor=\"let result of results.entries\"\n      (click)=\"selectCustomerFromList(result)\"\n      ><span class=\"result-name\">{{ result.name }}</span>\n      <span class=\"result-id\">{{ result.uid }}</span></a\n    >\n    <a\n      (click)=\"closeResults()\"\n      *ngIf=\"\n        !(searchResultsLoading$ | async) &&\n        searchTerm.value.length >= 3 &&\n        (!!results.entries && results.entries.length <= 0)\n      \"\n      >{{ 'asm.customerSearch.noMatch' | cxTranslate }}</a\n    >\n  </div>\n</div>\n<div *ngIf=\"searchResultsLoading$ | async\" class=\"results fd-popover__body\">\n  <div>\n    <a>\n      <div class=\"sap-spinner\">\n        <div class=\"fd-loading-dots\" aria-hidden=\"false\" aria-label=\"Loading\">\n          <div></div>\n          <div></div>\n          <div></div>\n        </div>\n      </div>\n    </a>\n  </div>\n</div>\n",
-                    host: {
-                        '(document:click)': 'onDocumentClick($event)',
-                    }
-                }] }
-    ];
-    /** @nocollapse */
-    CustomerSelectionComponent.ctorParameters = function () { return [
-        { type: FormBuilder },
-        { type: AsmService },
-        { type: AsmConfig }
-    ]; };
-    CustomerSelectionComponent.propDecorators = {
-        submitEvent: [{ type: Output }],
-        resultList: [{ type: ViewChild, args: ['resultList', { static: false },] }],
-        searchTerm: [{ type: ViewChild, args: ['searchTerm', { static: false },] }]
-    };
-    return CustomerSelectionComponent;
-}());
-if (false) {
-    /** @type {?} */
-    CustomerSelectionComponent.prototype.form;
-    /**
-     * @type {?}
-     * @private
-     */
-    CustomerSelectionComponent.prototype.subscription;
-    /** @type {?} */
-    CustomerSelectionComponent.prototype.searchResultsLoading$;
-    /** @type {?} */
-    CustomerSelectionComponent.prototype.searchResults;
-    /** @type {?} */
-    CustomerSelectionComponent.prototype.selectedCustomer;
-    /** @type {?} */
-    CustomerSelectionComponent.prototype.submitEvent;
-    /** @type {?} */
-    CustomerSelectionComponent.prototype.resultList;
-    /** @type {?} */
-    CustomerSelectionComponent.prototype.searchTerm;
-    /**
-     * @type {?}
-     * @private
-     */
-    CustomerSelectionComponent.prototype.fb;
-    /**
-     * @type {?}
-     * @private
-     */
-    CustomerSelectionComponent.prototype.asmService;
-    /**
-     * @type {?}
-     * @private
-     */
-    CustomerSelectionComponent.prototype.config;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CustomerEmulationComponent = /** @class */ (function () {
-    function CustomerEmulationComponent(authService, userService, routingService) {
-        this.authService = authService;
-        this.userService = userService;
-        this.routingService = routingService;
-        this.subscription = new Subscription();
-    }
-    /**
-     * @return {?}
-     */
-    CustomerEmulationComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this.subscription.add(this.userService.get().subscribe((/**
-         * @param {?} user
-         * @return {?}
-         */
-        function (user) { return (_this.customer = user); })));
-    };
-    /**
-     * @return {?}
-     */
-    CustomerEmulationComponent.prototype.endSession = /**
-     * @return {?}
-     */
-    function () {
-        this.authService.logout();
-        this.routingService.go({ cxRoute: 'home' });
-    };
-    /**
-     * @return {?}
-     */
-    CustomerEmulationComponent.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
-        this.subscription.unsubscribe();
-    };
-    CustomerEmulationComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-customer-emulation',
-                    template: "<div class=\"fd-container\">\n  <div class=\"fd-col--6\">\n    <label>\n      <input\n        class=\"form-control ng-untouched ng-pristine ng-invalid\"\n        formcontrolname=\"customer\"\n        type=\"text\"\n        disabled=\"true\"\n        placeholder=\"{{ customer?.name }}, {{ customer?.uid }}\"\n      />\n    </label>\n  </div>\n\n  <div class=\"fd-col--3\">\n    <button class=\"fd-button--negative\" (click)=\"endSession()\">\n      <svg\n        height=\"14\"\n        width=\"14\"\n        aria-hidden=\"true\"\n        data-icon=\"stop-circle\"\n        data-prefix=\"far\"\n        focusable=\"false\"\n        role=\"img\"\n        viewBox=\"0 0 512 512\"\n        xmlns=\"http://www.w3.org/2000/svg\"\n      >\n        <path\n          d=\"M504 256C504 119 393 8 256 8S8 119 8 256s111 248 248 248 248-111 248-248zm-448 0c0-110.5 89.5-200 200-200s200 89.5 200 200-89.5 200-200 200S56 366.5 56 256zm296-80v160c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h160c8.8 0 16 7.2 16 16z\"\n        />\n      </svg>\n      <span>\n        {{ 'asm.endSession' | cxTranslate }}\n      </span>\n    </button>\n  </div>\n</div>\n"
-                }] }
-    ];
-    /** @nocollapse */
-    CustomerEmulationComponent.ctorParameters = function () { return [
-        { type: AuthService },
-        { type: UserService },
-        { type: RoutingService }
-    ]; };
-    return CustomerEmulationComponent;
-}());
-if (false) {
-    /** @type {?} */
-    CustomerEmulationComponent.prototype.customer;
-    /**
-     * @type {?}
-     * @private
-     */
-    CustomerEmulationComponent.prototype.subscription;
-    /**
-     * @type {?}
-     * @protected
-     */
-    CustomerEmulationComponent.prototype.authService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    CustomerEmulationComponent.prototype.userService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    CustomerEmulationComponent.prototype.routingService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var AssistedServiceModule = /** @class */ (function () {
-    function AssistedServiceModule() {
-    }
-    AssistedServiceModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        CommonModule,
-                        ReactiveFormsModule,
-                        I18nModule,
-                        ConfigModule.withConfig((/** @type {?} */ ({
-                            cmsComponents: {
-                                AsmComponent: {
-                                    component: AsmRootComponent,
-                                },
-                            },
-                        }))),
-                    ],
-                    declarations: [
-                        AsmMainUiComponent,
-                        CSAgentLoginFormComponent,
-                        CustomerSelectionComponent,
-                        AsmRootComponent,
-                        CustomerEmulationComponent,
-                    ],
-                    exports: [AsmRootComponent],
-                    entryComponents: [AsmRootComponent],
-                },] }
-    ];
-    return AssistedServiceModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Please don't put that service in public API.
- *
- */
-var CmsMappingService = /** @class */ (function () {
-    function CmsMappingService(config, platformId) {
-        this.config = config;
-        this.platformId = platformId;
-    }
-    /**
-     * @param {?} flexType
-     * @return {?}
-     */
-    CmsMappingService.prototype.isComponentEnabled = /**
-     * @param {?} flexType
-     * @return {?}
-     */
-    function (flexType) {
-        /** @type {?} */
-        var isSSR = isPlatformServer(this.platformId);
-        /** @type {?} */
-        var isComponentDisabledInSSR = (this.config.cmsComponents[flexType] || {})
-            .disableSSR;
-        return !(isSSR && isComponentDisabledInSSR);
-    };
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    CmsMappingService.prototype.getRoutesForComponents = /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    function (componentTypes) {
-        var e_1, _a;
-        /** @type {?} */
-        var routes = [];
-        try {
-            for (var componentTypes_1 = __values(componentTypes), componentTypes_1_1 = componentTypes_1.next(); !componentTypes_1_1.done; componentTypes_1_1 = componentTypes_1.next()) {
-                var componentType = componentTypes_1_1.value;
-                if (this.isComponentEnabled(componentType)) {
-                    routes.push.apply(routes, __spread(this.getRoutesForComponent(componentType)));
-                }
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (componentTypes_1_1 && !componentTypes_1_1.done && (_a = componentTypes_1.return)) _a.call(componentTypes_1);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        return routes;
-    };
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    CmsMappingService.prototype.getGuardsForComponents = /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    function (componentTypes) {
-        var e_2, _a;
-        /** @type {?} */
-        var guards = new Set();
-        try {
-            for (var componentTypes_2 = __values(componentTypes), componentTypes_2_1 = componentTypes_2.next(); !componentTypes_2_1.done; componentTypes_2_1 = componentTypes_2.next()) {
-                var componentType = componentTypes_2_1.value;
-                this.getGuardsForComponent(componentType).forEach((/**
-                 * @param {?} guard
-                 * @return {?}
-                 */
-                function (guard) {
-                    return guards.add(guard);
-                }));
-            }
-        }
-        catch (e_2_1) { e_2 = { error: e_2_1 }; }
-        finally {
-            try {
-                if (componentTypes_2_1 && !componentTypes_2_1.done && (_a = componentTypes_2.return)) _a.call(componentTypes_2);
-            }
-            finally { if (e_2) throw e_2.error; }
-        }
-        return Array.from(guards);
-    };
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    CmsMappingService.prototype.getI18nKeysForComponents = /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    function (componentTypes) {
-        var e_3, _a;
-        /** @type {?} */
-        var i18nKeys = new Set();
-        try {
-            for (var componentTypes_3 = __values(componentTypes), componentTypes_3_1 = componentTypes_3.next(); !componentTypes_3_1.done; componentTypes_3_1 = componentTypes_3.next()) {
-                var componentType = componentTypes_3_1.value;
-                if (this.isComponentEnabled(componentType)) {
-                    this.getI18nKeysForComponent(componentType).forEach((/**
-                     * @param {?} key
-                     * @return {?}
-                     */
-                    function (key) {
-                        return i18nKeys.add(key);
-                    }));
-                }
-            }
-        }
-        catch (e_3_1) { e_3 = { error: e_3_1 }; }
-        finally {
-            try {
-                if (componentTypes_3_1 && !componentTypes_3_1.done && (_a = componentTypes_3.return)) _a.call(componentTypes_3);
-            }
-            finally { if (e_3) throw e_3.error; }
-        }
-        return Array.from(i18nKeys);
-    };
-    /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    CmsMappingService.prototype.getRoutesForComponent = /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    function (componentType) {
-        /** @type {?} */
-        var mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.childRoutes) || [];
-    };
-    /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    CmsMappingService.prototype.getGuardsForComponent = /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    function (componentType) {
-        /** @type {?} */
-        var mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.guards) || [];
-    };
-    /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    CmsMappingService.prototype.getI18nKeysForComponent = /**
-     * @private
-     * @param {?} componentType
-     * @return {?}
-     */
-    function (componentType) {
-        /** @type {?} */
-        var mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.i18nKeys) || [];
-    };
-    CmsMappingService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    CmsMappingService.ctorParameters = function () { return [
-        { type: CmsConfig },
-        { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
-    ]; };
-    /** @nocollapse */ CmsMappingService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(ɵɵinject(CmsConfig), ɵɵinject(PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
-    return CmsMappingService;
-}());
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsMappingService.prototype.config;
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsMappingService.prototype.platformId;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Please don't put that service in public API.
- *
- */
-var CmsGuardsService = /** @class */ (function () {
-    function CmsGuardsService(cmsMapping, injector) {
-        this.cmsMapping = cmsMapping;
-        this.injector = injector;
-    }
-    /**
-     * @param {?} componentTypes
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    CmsGuardsService.prototype.cmsPageCanActivate = /**
-     * @param {?} componentTypes
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    function (componentTypes, route, state) {
-        var _this = this;
-        /** @type {?} */
-        var guards = this.cmsMapping.getGuardsForComponents(componentTypes);
-        if (guards.length) {
-            /** @type {?} */
-            var canActivateObservables = guards.map((/**
-             * @param {?} guardClass
-             * @return {?}
-             */
-            function (guardClass) {
-                /** @type {?} */
-                var guard = _this.injector.get(guardClass, null);
-                if (isCanActivate(guard)) {
-                    return wrapIntoObservable(guard.canActivate(route, state)).pipe(first());
-                }
-                else {
-                    throw new Error('Invalid CanActivate guard in cmsMapping');
-                }
-            }));
-            return concat.apply(void 0, __spread(canActivateObservables)).pipe(skipWhile((/**
-             * @param {?} canActivate
-             * @return {?}
-             */
-            function (canActivate) { return canActivate === true; })), endWith(true), first());
-        }
-        else {
-            return of(true);
-        }
-    };
-    CmsGuardsService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    CmsGuardsService.ctorParameters = function () { return [
-        { type: CmsMappingService },
-        { type: Injector }
-    ]; };
-    /** @nocollapse */ CmsGuardsService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsGuardsService_Factory() { return new CmsGuardsService(ɵɵinject(CmsMappingService), ɵɵinject(INJECTOR)); }, token: CmsGuardsService, providedIn: "root" });
-    return CmsGuardsService;
-}());
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsGuardsService.prototype.cmsMapping;
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsGuardsService.prototype.injector;
-}
-/**
- * @template T
- * @param {?} value
- * @return {?}
- */
-function wrapIntoObservable(value) {
-    if (isObservable(value)) {
-        return value;
-    }
-    if (isPromise(value)) {
-        return from(Promise.resolve(value));
-    }
-    return of(value);
-}
-/**
- * @param {?} obj
- * @return {?}
- */
-function isPromise(obj) {
-    return !!obj && typeof obj.then === 'function';
-}
-/**
- * @param {?} guard
- * @return {?}
- */
-function isCanActivate(guard) {
-    return guard && isFunction(guard.canActivate);
-}
-/**
- * @template T
- * @param {?} v
- * @return {?}
- */
-function isFunction(v) {
-    return typeof v === 'function';
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Please don't put that service in public API.
- *
- */
-var CmsI18nService = /** @class */ (function () {
-    function CmsI18nService(cmsMapping, translation, translationChunk) {
-        this.cmsMapping = cmsMapping;
-        this.translation = translation;
-        this.translationChunk = translationChunk;
-    }
-    /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    CmsI18nService.prototype.loadChunksForComponents = /**
-     * @param {?} componentTypes
-     * @return {?}
-     */
-    function (componentTypes) {
-        var e_1, _a;
-        /** @type {?} */
-        var i18nKeys = this.cmsMapping.getI18nKeysForComponents(componentTypes);
-        /** @type {?} */
-        var i18nChunks = new Set();
-        try {
-            for (var i18nKeys_1 = __values(i18nKeys), i18nKeys_1_1 = i18nKeys_1.next(); !i18nKeys_1_1.done; i18nKeys_1_1 = i18nKeys_1.next()) {
-                var key = i18nKeys_1_1.value;
-                i18nChunks.add(this.translationChunk.getChunkNameForKey(key));
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (i18nKeys_1_1 && !i18nKeys_1_1.done && (_a = i18nKeys_1.return)) _a.call(i18nKeys_1);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        this.translation.loadChunks(Array.from(i18nChunks));
-    };
-    CmsI18nService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    CmsI18nService.ctorParameters = function () { return [
-        { type: CmsMappingService },
-        { type: TranslationService },
-        { type: TranslationChunkService }
-    ]; };
-    /** @nocollapse */ CmsI18nService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsI18nService_Factory() { return new CmsI18nService(ɵɵinject(CmsMappingService), ɵɵinject(TranslationService), ɵɵinject(TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
-    return CmsI18nService;
-}());
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsI18nService.prototype.cmsMapping;
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsI18nService.prototype.translation;
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsI18nService.prototype.translationChunk;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Please don't put that service in public API.
- *
- */
-var CmsRoutesService = /** @class */ (function () {
-    function CmsRoutesService(router, cmsMapping) {
-        this.router = router;
-        this.cmsMapping = cmsMapping;
-    }
-    /**
-     * @param {?} url
-     * @return {?}
-     */
-    CmsRoutesService.prototype.cmsRouteExist = /**
-     * @param {?} url
-     * @return {?}
-     */
-    function (url) {
-        /** @type {?} */
-        var isCmsDrivenRoute = url.startsWith('/');
-        if (!isCmsDrivenRoute) {
-            return false;
-        }
-        /** @type {?} */
-        var routePath = url.substr(1);
-        return (isCmsDrivenRoute &&
-            !!this.router.config.find((/**
-             * @param {?} route
-             * @return {?}
-             */
-            function (route) {
-                return route.data && route.data.cxCmsRouteContext && route.path === routePath;
-            })));
-    };
-    /**
-     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
-     *
-     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
-     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
-     *
-     * @param pageContext
-     * @param currentUrl
-     */
-    /**
-     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
-     *
-     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
-     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
-     *
-     * @param {?} pageContext
-     * @param {?} componentTypes
-     * @param {?} currentUrl
-     * @param {?} currentPageLabel
-     * @return {?}
-     */
-    CmsRoutesService.prototype.handleCmsRoutesInGuard = /**
-     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
-     *
-     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
-     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
-     *
-     * @param {?} pageContext
-     * @param {?} componentTypes
-     * @param {?} currentUrl
-     * @param {?} currentPageLabel
-     * @return {?}
-     */
-    function (pageContext, componentTypes, currentUrl, currentPageLabel) {
-        /** @type {?} */
-        var componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
-        if (componentRoutes.length) {
-            if (this.updateRouting(pageContext, currentPageLabel, componentRoutes)) {
-                this.router.navigateByUrl(currentUrl);
-                return false;
-            }
-        }
-        return true;
-    };
-    /**
-     * @private
-     * @param {?} pageContext
-     * @param {?} pageLabel
-     * @param {?} routes
-     * @return {?}
-     */
-    CmsRoutesService.prototype.updateRouting = /**
-     * @private
-     * @param {?} pageContext
-     * @param {?} pageLabel
-     * @param {?} routes
-     * @return {?}
-     */
-    function (pageContext, pageLabel, routes) {
-        if (pageContext.type === PageType.CONTENT_PAGE &&
-            pageLabel.startsWith('/') &&
-            pageLabel.length > 1) {
-            /** @type {?} */
-            var newRoute = {
-                path: pageLabel.substr(1),
-                component: PageLayoutComponent,
-                children: routes,
-                data: {
-                    cxCmsRouteContext: {
-                        type: pageContext.type,
-                        id: pageLabel,
-                    },
-                },
-            };
-            this.router.resetConfig(__spread([newRoute], this.router.config));
-            return true;
-        }
-        return false;
-    };
-    CmsRoutesService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    CmsRoutesService.ctorParameters = function () { return [
-        { type: Router },
-        { type: CmsMappingService }
-    ]; };
-    /** @nocollapse */ CmsRoutesService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(ɵɵinject(Router), ɵɵinject(CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
-    return CmsRoutesService;
-}());
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsRoutesService.prototype.router;
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsRoutesService.prototype.cmsMapping;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var CmsPageGuard = /** @class */ (function () {
-    function CmsPageGuard(routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService, protectedRoutesGuard) {
-        this.routingService = routingService;
-        this.cmsService = cmsService;
-        this.cmsRoutes = cmsRoutes;
-        this.cmsI18n = cmsI18n;
-        this.cmsGuards = cmsGuards;
-        this.semanticPathService = semanticPathService;
-        this.protectedRoutesGuard = protectedRoutesGuard;
-    }
-    /**
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    CmsPageGuard.prototype.canActivate = /**
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    function (route, state) {
-        var _this = this;
-        /**
-         * TODO(issue:4646) Expect that `ProtectedRoutesGuard` dependency is required (remove `if` logic)
-         */
-        return this.protectedRoutesGuard
-            ? this.protectedRoutesGuard
-                .canActivate(route)
-                .pipe(switchMap((/**
-             * @param {?} result
-             * @return {?}
-             */
-            function (result) {
-                return result ? _this.getCmsPage(route, state) : of(result);
-            })))
-            : this.getCmsPage(route, state);
-    };
-    /**
-     * @private
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    CmsPageGuard.prototype.getCmsPage = /**
-     * @private
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    function (route, state) {
-        var _this = this;
-        return this.routingService.getNextPageContext().pipe(switchMap((/**
-         * @param {?} pageContext
-         * @return {?}
-         */
-        function (pageContext) {
-            return _this.cmsService.getPage(pageContext, true).pipe(first(), withLatestFrom(of(pageContext)));
-        })), switchMap((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        function (_a) {
-            var _b = __read(_a, 2), pageData = _b[0], pageContext = _b[1];
-            return pageData
-                ? _this.resolveCmsPageLogic(pageContext, pageData, route, state)
-                : _this.handleNotFoundPage(pageContext, route, state);
-        })));
-    };
-    /**
-     * @private
-     * @param {?} pageContext
-     * @param {?} pageData
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    CmsPageGuard.prototype.resolveCmsPageLogic = /**
-     * @private
-     * @param {?} pageContext
-     * @param {?} pageData
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    function (pageContext, pageData, route, state) {
-        var _this = this;
-        return this.cmsService.getPageComponentTypes(pageContext).pipe(take(1), switchMap((/**
-         * @param {?} componentTypes
-         * @return {?}
-         */
-        function (componentTypes) {
-            return _this.cmsGuards
-                .cmsPageCanActivate(componentTypes, route, state)
-                .pipe(withLatestFrom(of(componentTypes)));
-        })), tap((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        function (_a) {
-            var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
-            if (canActivate === true) {
-                _this.cmsI18n.loadChunksForComponents(componentTypes);
-            }
-        })), map((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        function (_a) {
-            var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
-            /** @type {?} */
-            var pageLabel = pageData.label || pageContext.id;
-            if (canActivate === true &&
-                !route.data.cxCmsRouteContext &&
-                !_this.cmsRoutes.cmsRouteExist(pageLabel)) {
-                return _this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url, pageLabel);
-            }
-            return canActivate;
-        })));
-    };
-    /**
-     * @private
-     * @param {?} pageContext
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    CmsPageGuard.prototype.handleNotFoundPage = /**
-     * @private
-     * @param {?} pageContext
-     * @param {?} route
-     * @param {?} state
-     * @return {?}
-     */
-    function (pageContext, route, state) {
-        var _this = this;
-        /** @type {?} */
-        var notFoundCmsPageContext = {
-            type: PageType.CONTENT_PAGE,
-            id: this.semanticPathService.get('notFound'),
-        };
-        return this.cmsService.getPage(notFoundCmsPageContext).pipe(switchMap((/**
-         * @param {?} notFoundPage
-         * @return {?}
-         */
-        function (notFoundPage) {
-            if (notFoundPage) {
-                return _this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(tap((/**
-                 * @param {?} notFoundIndex
-                 * @return {?}
-                 */
-                function (notFoundIndex) {
-                    _this.cmsService.setPageFailIndex(pageContext, notFoundIndex);
-                })), switchMap((/**
-                 * @param {?} notFoundIndex
-                 * @return {?}
-                 */
-                function (notFoundIndex) {
-                    return _this.cmsService.getPageIndex(pageContext).pipe(
-                    // we have to wait for page index update
-                    filter((/**
-                     * @param {?} index
-                     * @return {?}
-                     */
-                    function (index) { return index === notFoundIndex; })));
-                })), switchMap((/**
-                 * @return {?}
-                 */
-                function () {
-                    return _this.resolveCmsPageLogic(pageContext, notFoundPage, route, state);
-                })));
-            }
-            return of(false);
-        })));
-    };
-    CmsPageGuard.guardName = 'CmsPageGuard';
-    CmsPageGuard.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    CmsPageGuard.ctorParameters = function () { return [
-        { type: RoutingService },
-        { type: CmsService },
-        { type: CmsRoutesService },
-        { type: CmsI18nService },
-        { type: CmsGuardsService },
-        { type: SemanticPathService },
-        { type: ProtectedRoutesGuard }
-    ]; };
-    /** @nocollapse */ CmsPageGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(ɵɵinject(RoutingService), ɵɵinject(CmsService), ɵɵinject(CmsRoutesService), ɵɵinject(CmsI18nService), ɵɵinject(CmsGuardsService), ɵɵinject(SemanticPathService), ɵɵinject(ProtectedRoutesGuard)); }, token: CmsPageGuard, providedIn: "root" });
-    return CmsPageGuard;
-}());
-if (false) {
-    /** @type {?} */
-    CmsPageGuard.guardName;
-    /**
-     * @type {?}
-     * @protected
-     */
-    CmsPageGuard.prototype.routingService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    CmsPageGuard.prototype.cmsService;
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsPageGuard.prototype.cmsRoutes;
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsPageGuard.prototype.cmsI18n;
-    /**
-     * @type {?}
-     * @private
-     */
-    CmsPageGuard.prototype.cmsGuards;
-    /**
-     * @type {?}
-     * @protected
-     */
-    CmsPageGuard.prototype.semanticPathService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    CmsPageGuard.prototype.protectedRoutesGuard;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-var cmsRoute = {
-    path: '**',
-    canActivate: [CmsPageGuard],
-    component: PageLayoutComponent,
-};
-/**
- * @param {?} injector
- * @return {?}
- */
-function addCmsRoute(injector) {
-    /** @type {?} */
-    var result = (/**
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var router = injector.get(Router);
-        router.config.push(cmsRoute);
-    });
-    return result;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var ɵ0 = addCmsRoute;
-var CmsRouteModule = /** @class */ (function () {
-    function CmsRouteModule() {
-    }
-    CmsRouteModule.decorators = [
-        { type: NgModule, args: [{
-                    providers: [
-                        {
-                            provide: APP_INITIALIZER,
-                            multi: true,
-                            deps: [Injector],
-                            useFactory: ɵ0,
-                        },
-                    ],
-                },] }
-    ];
-    return CmsRouteModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var BreadcrumbSchemaBuilder = /** @class */ (function () {
-    function BreadcrumbSchemaBuilder(pageMetaService) {
-        this.pageMetaService = pageMetaService;
-    }
-    /**
-     * @return {?}
-     */
-    BreadcrumbSchemaBuilder.prototype.build = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        return this.pageMetaService
-            .getMeta()
-            .pipe(map((/**
-         * @param {?} pageMeta
-         * @return {?}
-         */
-        function (pageMeta) { return _this.collect(pageMeta); })));
-    };
-    /**
-     * @protected
-     * @param {?} pageMeta
-     * @return {?}
-     */
-    BreadcrumbSchemaBuilder.prototype.collect = /**
-     * @protected
-     * @param {?} pageMeta
-     * @return {?}
-     */
-    function (pageMeta) {
-        if (!pageMeta.breadcrumbs) {
-            return;
-        }
-        /** @type {?} */
-        var crumbs = pageMeta.breadcrumbs.map((/**
-         * @param {?} crumb
-         * @param {?} index
-         * @return {?}
-         */
-        function (crumb, index) {
-            return {
-                '@type': 'ListItem',
-                position: index + 1,
-                item: {
-                    '@id': crumb.link,
-                    name: crumb.label,
-                },
-            };
-        }));
-        if (pageMeta.title) {
-            crumbs.push({
-                '@type': 'ListItem',
-                position: crumbs.length + 1,
-                item: {
-                    '@id': pageMeta.title,
-                    name: pageMeta.title,
-                },
-            });
-        }
-        return {
-            '@context': 'http://schema.org',
-            '@type': 'BreadcrumbList',
-            itemListElement: crumbs,
-        };
-    };
-    BreadcrumbSchemaBuilder.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    BreadcrumbSchemaBuilder.ctorParameters = function () { return [
-        { type: PageMetaService }
-    ]; };
-    /** @nocollapse */ BreadcrumbSchemaBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function BreadcrumbSchemaBuilder_Factory() { return new BreadcrumbSchemaBuilder(ɵɵinject(PageMetaService)); }, token: BreadcrumbSchemaBuilder, providedIn: "root" });
-    return BreadcrumbSchemaBuilder;
-}());
-if (false) {
-    /**
-     * @type {?}
-     * @protected
-     */
-    BreadcrumbSchemaBuilder.prototype.pageMetaService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Builds the basic structured data for the product, see https://schema.org/product.
- * This builder includes data for sku number, name, description, brand and main image.
- */
-var JsonLdBaseProductBuilder = /** @class */ (function () {
-    function JsonLdBaseProductBuilder() {
-    }
-    /**
-     * @param {?} product
-     * @return {?}
-     */
-    JsonLdBaseProductBuilder.prototype.build = /**
-     * @param {?} product
-     * @return {?}
-     */
-    function (product) {
-        return of(__assign({}, this.getProductBase(product), this.getProductBrand(product), this.getProductImage(product)));
-    };
-    /**
-     * @private
-     * @param {?} product
-     * @return {?}
-     */
-    JsonLdBaseProductBuilder.prototype.getProductBase = /**
-     * @private
-     * @param {?} product
-     * @return {?}
-     */
-    function (product) {
-        /** @type {?} */
-        var result = { sku: product.code };
-        if (product.name) {
-            result.name = product.name;
-        }
-        if (product.summary) {
-            result.description = product.summary;
-        }
-        return result;
-    };
-    /**
-     * @private
-     * @param {?} product
-     * @return {?}
-     */
-    JsonLdBaseProductBuilder.prototype.getProductImage = /**
-     * @private
-     * @param {?} product
-     * @return {?}
-     */
-    function (product) {
-        return product.images &&
-            product.images.PRIMARY &&
-            product.images.PRIMARY['zoom'] &&
-            product.images.PRIMARY['zoom'].url
-            ? {
-                image: product.images.PRIMARY['zoom'].url,
-            }
-            : {};
-    };
-    /**
-     * @private
-     * @param {?} product
-     * @return {?}
-     */
-    JsonLdBaseProductBuilder.prototype.getProductBrand = /**
-     * @private
-     * @param {?} product
-     * @return {?}
-     */
-    function (product) {
-        return product['manufacturer']
-            ? {
-                brand: product['manufacturer'],
-            }
-            : null;
-    };
-    JsonLdBaseProductBuilder.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */ JsonLdBaseProductBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function JsonLdBaseProductBuilder_Factory() { return new JsonLdBaseProductBuilder(); }, token: JsonLdBaseProductBuilder, providedIn: "root" });
-    return JsonLdBaseProductBuilder;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Builds the structured data for the product offer, see https://schema.org/offers.
- * The data includes the price, currency and availability level.
- */
-var JsonLdProductOfferBuilder = /** @class */ (function () {
-    function JsonLdProductOfferBuilder() {
-    }
-    /**
-     * @param {?} product
-     * @return {?}
-     */
-    JsonLdProductOfferBuilder.prototype.build = /**
-     * @param {?} product
-     * @return {?}
-     */
-    function (product) {
-        /** @type {?} */
-        var schema = { '@type': 'Offer' };
-        if (product.price) {
-            if (product.price.value) {
-                schema.price = product.price.value;
-            }
-            if (product.price.currencyIso) {
-                schema.priceCurrency = product.price.currencyIso;
-            }
-        }
-        if (product.stock && product.stock.stockLevelStatus) {
-            schema.availability =
-                product.stock.stockLevelStatus === 'inStock' ? 'InStock' : 'OutOfStock';
-        }
-        return of({
-            offers: schema,
-        });
-    };
-    JsonLdProductOfferBuilder.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */ JsonLdProductOfferBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function JsonLdProductOfferBuilder_Factory() { return new JsonLdProductOfferBuilder(); }, token: JsonLdProductOfferBuilder, providedIn: "root" });
-    return JsonLdProductOfferBuilder;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Builds the structured data for the product reviews, see https://schema.org/Review.
- * The data includes the aggregated product rating and the individual reviews.
- */
-var JsonLdProductReviewBuilder = /** @class */ (function () {
-    function JsonLdProductReviewBuilder(reviewService) {
-        this.reviewService = reviewService;
-    }
-    /**
-     * @param {?} product
-     * @return {?}
-     */
-    JsonLdProductReviewBuilder.prototype.build = /**
-     * @param {?} product
-     * @return {?}
-     */
-    function (product) {
-        var _this = this;
-        return this.reviewService.getByProductCode(product.code).pipe(filter(Boolean), map((/**
-         * @param {?} reviews
-         * @return {?}
-         */
-        function (reviews) {
-            return {
-                aggregateRating: _this.buildAggregatedReviews(product, reviews),
-                review: reviews.map((/**
-                 * @param {?} review
-                 * @return {?}
-                 */
-                function (review) { return _this.buildReviews(review); })),
-            };
-        })));
-    };
-    /**
-     * @private
-     * @param {?} product
-     * @param {?} reviews
-     * @return {?}
-     */
-    JsonLdProductReviewBuilder.prototype.buildAggregatedReviews = /**
-     * @private
-     * @param {?} product
-     * @param {?} reviews
-     * @return {?}
-     */
-    function (product, reviews) {
-        /** @type {?} */
-        var aggregated = {
-            '@type': 'AggregateRating',
-        };
-        if (product.averageRating) {
-            aggregated.ratingValue = product.averageRating;
-        }
-        if (reviews) {
-            aggregated.ratingCount = reviews.filter((/**
-             * @param {?} rev
-             * @return {?}
-             */
-            function (rev) { return !!rev.rating; })).length;
-            aggregated.reviewCount = reviews.filter((/**
-             * @param {?} rev
-             * @return {?}
-             */
-            function (rev) { return !!rev.comment; })).length;
-        }
-        return aggregated;
-    };
-    /**
-     * @private
-     * @param {?} review
-     * @return {?}
-     */
-    JsonLdProductReviewBuilder.prototype.buildReviews = /**
-     * @private
-     * @param {?} review
-     * @return {?}
-     */
-    function (review) {
-        /** @type {?} */
-        var reviewSchema = {
-            '@type': 'review',
-        };
-        if (review.principal && review.principal.name) {
-            reviewSchema.author = review.principal.name;
-        }
-        if (review.date) {
-            /** @type {?} */
-            var date = new Date(review.date);
-            reviewSchema.datePublished = date.getFullYear() + "-" + (date.getMonth() +
-                1) + "-" + date.getDate();
-        }
-        if (review.headline) {
-            reviewSchema.name = review.headline;
-        }
-        if (review.comment) {
-            reviewSchema.description = review.comment;
-        }
-        if (review.rating) {
-            reviewSchema.reviewRating = {
-                '@type': 'Rating',
-                ratingValue: review.rating.toString(),
-            };
-        }
-        return reviewSchema;
-    };
-    JsonLdProductReviewBuilder.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    JsonLdProductReviewBuilder.ctorParameters = function () { return [
-        { type: ProductReviewService }
-    ]; };
-    /** @nocollapse */ JsonLdProductReviewBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function JsonLdProductReviewBuilder_Factory() { return new JsonLdProductReviewBuilder(ɵɵinject(ProductReviewService)); }, token: JsonLdProductReviewBuilder, providedIn: "root" });
-    return JsonLdProductReviewBuilder;
-}());
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    JsonLdProductReviewBuilder.prototype.reviewService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Adds the minimal structured data for the product, see https://schema.org/product.
- * The actual data collection is delegated to `JsonLdBuilder`s, which can be injected
- * using the `JSONLD_PRODUCT_BUILDER` token.
- */
-var ProductSchemaBuilder = /** @class */ (function () {
-    function ProductSchemaBuilder(currentProduct, builders) {
-        this.currentProduct = currentProduct;
-        this.builders = builders;
-    }
-    /**
-     * @return {?}
-     */
-    ProductSchemaBuilder.prototype.build = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        return this.currentProduct.getProduct().pipe(startWith((/** @type {?} */ (null))), switchMap((/**
-         * @param {?} product
-         * @return {?}
-         */
-        function (product) {
-            if (product) {
-                return combineLatest(_this.collect(product)).pipe(map((/**
-                 * @param {?} res
-                 * @return {?}
-                 */
-                function (res) { return Object.assign.apply(Object, __spread([{}], res)); })));
-            }
-            return of({});
-        })));
-    };
-    /**
-     * @protected
-     * @param {?} product
-     * @return {?}
-     */
-    ProductSchemaBuilder.prototype.collect = /**
-     * @protected
-     * @param {?} product
-     * @return {?}
-     */
-    function (product) {
-        if (!product || !product.code) {
-            return [];
-        }
-        /** @type {?} */
-        var builders = this.builders
-            ? this.builders.map((/**
-             * @param {?} builder
-             * @return {?}
-             */
-            function (builder) { return builder.build(product); }))
-            : [];
-        return __spread([
-            of({
-                '@context': 'http://schema.org',
-                '@type': 'Product',
-            })
-        ], builders);
-    };
-    ProductSchemaBuilder.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    /** @nocollapse */
-    ProductSchemaBuilder.ctorParameters = function () { return [
-        { type: CurrentProductService },
-        { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [JSONLD_PRODUCT_BUILDER,] }] }
-    ]; };
-    /** @nocollapse */ ProductSchemaBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function ProductSchemaBuilder_Factory() { return new ProductSchemaBuilder(ɵɵinject(CurrentProductService), ɵɵinject(JSONLD_PRODUCT_BUILDER, 8)); }, token: ProductSchemaBuilder, providedIn: "root" });
-    return ProductSchemaBuilder;
-}());
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    ProductSchemaBuilder.prototype.currentProduct;
-    /**
-     * @type {?}
-     * @protected
-     */
-    ProductSchemaBuilder.prototype.builders;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * Provides several standard json-ld builders that contribute
- * to colleting and building json-ld data.
- */
-var JsonLdBuilderModule = /** @class */ (function () {
-    function JsonLdBuilderModule() {
-    }
-    JsonLdBuilderModule.decorators = [
-        { type: NgModule, args: [{
-                    providers: [
-                        {
-                            provide: SCHEMA_BUILDER,
-                            useExisting: ProductSchemaBuilder,
-                            multi: true,
-                        },
-                        {
-                            provide: SCHEMA_BUILDER,
-                            useExisting: BreadcrumbSchemaBuilder,
-                            multi: true,
-                        },
-                        // lower level json-ld builder classes offering fine-graiend control
-                        // for product related schema's
-                        {
-                            provide: JSONLD_PRODUCT_BUILDER,
-                            useExisting: JsonLdBaseProductBuilder,
-                            multi: true,
-                        },
-                        {
-                            provide: JSONLD_PRODUCT_BUILDER,
-                            useExisting: JsonLdProductOfferBuilder,
-                            multi: true,
-                        },
-                        {
-                            provide: JSONLD_PRODUCT_BUILDER,
-                            useExisting: JsonLdProductReviewBuilder,
-                            multi: true,
-                        },
-                    ],
-                },] }
-    ];
-    return JsonLdBuilderModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @record
- */
-function SchemaBuilder() { }
-if (false) {
-    /**
-     * @return {?}
-     */
-    SchemaBuilder.prototype.build = function () { };
-}
-/**
- * @record
- * @template T
- */
-function JsonLdBuilder() { }
-if (false) {
-    /**
-     * @param {?} data
-     * @return {?}
-     */
-    JsonLdBuilder.prototype.build = function (data) { };
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 
 /**
  * @fileoverview added by tsickle
@@ -19226,6 +19672,391 @@ var UpdateProfileModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var NotificationPreferenceComponent = /** @class */ (function () {
+    function NotificationPreferenceComponent(notificationPreferenceService) {
+        this.notificationPreferenceService = notificationPreferenceService;
+        this.preferences = [];
+    }
+    /**
+     * @return {?}
+     */
+    NotificationPreferenceComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.notificationPreferenceService.resetNotificationPreferences();
+        this.preferences$ = this.notificationPreferenceService
+            .getPreferences()
+            .pipe(tap((/**
+         * @param {?} preferences
+         * @return {?}
+         */
+        function (preferences) { return (_this.preferences = preferences); })));
+        this.notificationPreferenceService.loadPreferences();
+        this.isLoading$ = combineLatest([
+            this.notificationPreferenceService.getPreferencesLoading(),
+            this.notificationPreferenceService.getUpdatePreferencesResultLoading(),
+        ]).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 2), prefsLoading = _b[0], updateLoading = _b[1];
+            return prefsLoading || updateLoading;
+        })));
+    };
+    /**
+     * @param {?} preference
+     * @return {?}
+     */
+    NotificationPreferenceComponent.prototype.updatePreference = /**
+     * @param {?} preference
+     * @return {?}
+     */
+    function (preference) {
+        /** @type {?} */
+        var updatedPreferences = [];
+        this.preferences.forEach((/**
+         * @param {?} p
+         * @return {?}
+         */
+        function (p) {
+            if (p.channel === preference.channel) {
+                updatedPreferences.push(__assign({}, p, { enabled: !p.enabled }));
+            }
+            else {
+                updatedPreferences.push(p);
+            }
+        }));
+        this.notificationPreferenceService.updatePreferences(updatedPreferences);
+    };
+    NotificationPreferenceComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-notification-preference',
+                    template: "<ng-container *ngIf=\"preferences$ | async as preferences\">\n  <div *ngIf=\"preferences.length > 0; else loading\">\n    <div class=\"row d-flex justify-content-center\">\n      <div class=\"col-md-8\">\n        <div class=\"pref-header\">\n          {{ 'notificationPreference.message' | cxTranslate }}\n        </div>\n        <div class=\"form-check cx-notification-channels\">\n          <ng-container *ngFor=\"let preference of preferences\">\n            <label *ngIf=\"preference.visible\" class=\"pref-channel\">\n              <input\n                class=\"form-check-input cx-np-checkbox\"\n                role=\"checkbox\"\n                type=\"checkbox\"\n                [checked]=\"preference.enabled\"\n                (change)=\"updatePreference(preference)\"\n                [disabled]=\"isLoading$ | async\"\n              />\n              <span class=\"form-check-label\">\n                {{\n                  'notificationPreference.' + preference.channel | cxTranslate\n                }}\n                {{ preference.value }}\n              </span>\n            </label>\n          </ng-container>\n        </div>\n        <label class=\"pref-note\"\n          ><strong>{{ 'notificationPreference.note' | cxTranslate }}</strong\n          >{{ 'notificationPreference.noteMessage' | cxTranslate }}\n        </label>\n      </div>\n    </div>\n  </div>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </ng-template>\n</ng-container>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    /** @nocollapse */
+    NotificationPreferenceComponent.ctorParameters = function () { return [
+        { type: UserNotificationPreferenceService }
+    ]; };
+    return NotificationPreferenceComponent;
+}());
+if (false) {
+    /** @type {?} */
+    NotificationPreferenceComponent.prototype.preferences$;
+    /** @type {?} */
+    NotificationPreferenceComponent.prototype.isLoading$;
+    /**
+     * @type {?}
+     * @protected
+     */
+    NotificationPreferenceComponent.prototype.preferences;
+    /**
+     * @type {?}
+     * @private
+     */
+    NotificationPreferenceComponent.prototype.notificationPreferenceService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var NotificationPreferenceModule = /** @class */ (function () {
+    function NotificationPreferenceModule() {
+    }
+    NotificationPreferenceModule.decorators = [
+        { type: NgModule, args: [{
+                    declarations: [NotificationPreferenceComponent],
+                    imports: [
+                        CommonModule,
+                        SpinnerModule,
+                        I18nModule,
+                        ConfigModule.withConfig((/** @type {?} */ ({
+                            cmsComponents: {
+                                NotificationPreferenceComponent: {
+                                    component: NotificationPreferenceComponent,
+                                    guards: [AuthGuard],
+                                },
+                            },
+                        }))),
+                    ],
+                    exports: [NotificationPreferenceComponent],
+                    entryComponents: [NotificationPreferenceComponent],
+                },] }
+    ];
+    return NotificationPreferenceModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+function ProductInterestSearchResultUI() { }
+if (false) {
+    /** @type {?|undefined} */
+    ProductInterestSearchResultUI.prototype.results;
+}
+var MyInterestsComponent = /** @class */ (function () {
+    function MyInterestsComponent(productInterestService, translationService, productService) {
+        this.productInterestService = productInterestService;
+        this.translationService = translationService;
+        this.productService = productService;
+        this.DEFAULT_PAGE_SIZE = 10;
+        this.sortMapping = {
+            byNameAsc: 'name:asc',
+            byNameDesc: 'name:desc',
+        };
+        this.sort = 'byNameAsc';
+        this.sortOptions = [
+            {
+                code: 'byNameAsc',
+                selected: false,
+            },
+            {
+                code: 'byNameDesc',
+                selected: false,
+            },
+        ];
+    }
+    /**
+     * @return {?}
+     */
+    MyInterestsComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.interests$ = this.productInterestService
+            .getAndLoadProductInterests(this.DEFAULT_PAGE_SIZE)
+            .pipe(tap((/**
+         * @param {?} interests
+         * @return {?}
+         */
+        function (interests) {
+            return (_this.pagination = {
+                currentPage: interests.pagination.page,
+                pageSize: interests.pagination.count,
+                totalPages: interests.pagination.totalPages,
+                totalResults: interests.pagination.totalCount,
+                sort: 'byNameAsc',
+            });
+        })), map((/**
+         * @param {?} interest
+         * @return {?}
+         */
+        function (interest) { return (__assign({}, interest, { results: interest.results
+                ? interest.results.map((/**
+                 * @param {?} result
+                 * @return {?}
+                 */
+                function (result) { return (__assign({}, result, { product$: _this.getProduct(result) })); }))
+                : interest.results })); })));
+        this.getInterestsloading$ = this.productInterestService.getProdutInterestsLoading();
+        this.isRemoveDisabled$ = combineLatest([
+            this.getInterestsloading$,
+            this.productInterestService.getRemoveProdutInterestLoading(),
+        ]).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 2), getLoading = _b[0], removeLoading = _b[1];
+            return getLoading || removeLoading;
+        })));
+        this.sortLabels = this.getSortLabels();
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    MyInterestsComponent.prototype.getSortLabels = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        return combineLatest([
+            this.translationService.translate('myInterests.sorting.byNameAsc'),
+            this.translationService.translate('myInterests.sorting.byNameDesc'),
+        ]).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 2), asc = _b[0], desc = _b[1];
+            return {
+                byNameAsc: asc,
+                byNameDesc: desc,
+            };
+        })));
+    };
+    /**
+     * @private
+     * @param {?} interest
+     * @return {?}
+     */
+    MyInterestsComponent.prototype.getProduct = /**
+     * @private
+     * @param {?} interest
+     * @return {?}
+     */
+    function (interest) {
+        return this.productService.get(interest.product.code, 'details');
+    };
+    /**
+     * @param {?} relation
+     * @return {?}
+     */
+    MyInterestsComponent.prototype.removeInterest = /**
+     * @param {?} relation
+     * @return {?}
+     */
+    function (relation) {
+        this.productInterestService.removeProdutInterest({
+            product: relation.product,
+            productInterestEntry: relation.productInterestEntry,
+        });
+    };
+    /**
+     * @param {?} sort
+     * @return {?}
+     */
+    MyInterestsComponent.prototype.sortChange = /**
+     * @param {?} sort
+     * @return {?}
+     */
+    function (sort) {
+        this.sort = sort;
+        this.productInterestService.loadProductInterests(this.DEFAULT_PAGE_SIZE, 0, this.sortMapping[sort]);
+    };
+    /**
+     * @param {?} page
+     * @return {?}
+     */
+    MyInterestsComponent.prototype.pageChange = /**
+     * @param {?} page
+     * @return {?}
+     */
+    function (page) {
+        this.productInterestService.loadProductInterests(this.DEFAULT_PAGE_SIZE, page, this.sortMapping[this.sort]);
+    };
+    /**
+     * @return {?}
+     */
+    MyInterestsComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this.productInterestService.clearProductInterests();
+        this.productInterestService.resetRemoveInterestState();
+    };
+    MyInterestsComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-my-interests',
+                    template: "<div *ngIf=\"interests$ | async as interests\" class=\"container\">\n  <div class=\"cx-product-interests-title h3\">\n    <h3>{{ 'myInterests.header' | cxTranslate }}</h3>\n  </div>\n  <div\n    class=\"cx-product-interests-body\"\n    *ngIf=\"!(getInterestsloading$ | async); else loading\"\n  >\n    <ng-container *ngIf=\"interests.pagination.totalCount > 0; else noInterest\">\n      <div class=\"cx-product-interests-sort top row\">\n        <div\n          class=\"cx-product-interests-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n        >\n          <cx-sorting\n            [sortOptions]=\"sortOptions\"\n            [sortLabels]=\"sortLabels | async\"\n            (sortListEvent)=\"sortChange($event)\"\n            [selectedOption]=\"sort\"\n            placeholder=\"{{ 'myInterests.sortByMostRecent' | cxTranslate }}\"\n          >\n          </cx-sorting>\n        </div>\n        <div\n          class=\"cx-product-interests-pagination cx-product-interests-thead-mobile\"\n        >\n          <cx-pagination\n            [pagination]=\"pagination\"\n            (viewPageEvent)=\"pageChange($event)\"\n          ></cx-pagination>\n        </div>\n      </div>\n      <table class=\"table cx-product-interests-table\">\n        <thead class=\"cx-product-interests-thead-mobile\">\n          <th scope=\"col\">\n            {{ 'myInterests.item' | cxTranslate }}\n          </th>\n          <th scope=\"col\"></th>\n          <th scope=\"col\">\n            {{ 'myInterests.price' | cxTranslate }}\n          </th>\n          <th scope=\"col\">\n            {{ 'myInterests.notifications' | cxTranslate }}\n          </th>\n          <th scope=\"col\"></th>\n        </thead>\n        <tbody>\n          <tr\n            *ngFor=\"let interest of interests.results\"\n            class=\"cx-product-interests-product-item\"\n          >\n            <ng-container *ngIf=\"interest.product$ | async as product\">\n              <td>\n                <div class=\"cx-product-interests-label\">\n                  <a\n                    class=\"cx-product-interests-product-image-link\"\n                    [routerLink]=\"\n                      { cxRoute: 'product', params: product } | cxUrl\n                    \"\n                  >\n                    <cx-media\n                      [container]=\"product.images?.PRIMARY\"\n                      format=\"thumbnail\"\n                    ></cx-media>\n                  </a>\n                </div>\n              </td>\n              <td>\n                <div class=\"cx-info col-10\">\n                  <div class=\"cx-info-container row \">\n                    <div>\n                      <div *ngIf=\"product.name\" class=\"cx-name\">\n                        <a\n                          class=\"cx-link cx-product-interests-product-code-link\"\n                          [routerLink]=\"\n                            { cxRoute: 'product', params: product } | cxUrl\n                          \"\n                        >\n                          {{ product.name }}\n                        </a>\n                      </div>\n                      <div *ngIf=\"product.code\" class=\"cx-code\">\n                        <span>{{\n                          'myInterests.productId'\n                            | cxTranslate: { code: product.code }\n                        }}</span>\n                      </div>\n\n                      <ng-container\n                        *ngFor=\"let baseOptions of product.baseOptions\"\n                      >\n                        <div\n                          *ngFor=\"\n                            let variant of baseOptions.selected\n                              ?.variantOptionQualifiers\n                          \"\n                          class=\"cx-property\"\n                        >\n                          <div\n                            class=\"cx-label cx-product-interests-variant-name\"\n                          >\n                            {{ variant.name }}\n                          </div>\n                          <div\n                            class=\"cx-value cx-product-interests-variant-value\"\n                          >\n                            {{ variant.value }}\n                          </div>\n                        </div>\n                      </ng-container>\n                      <div\n                        class=\"cx-property\"\n                        *ngIf=\"product.stock.stockLevelStatus === 'outOfStock'\"\n                      >\n                        <div\n                          class=\"cx-label cx-product-interests-product-stock\"\n                        >\n                          {{ 'myInterests.outOfStock' | cxTranslate }}\n                        </div>\n                      </div>\n                    </div>\n                  </div>\n                </div>\n              </td>\n              <td>\n                <div class=\"cx-product-interests-product-price\">\n                  <div class=\"d-md-none cx-product-interests-label\">\n                    {{ 'myInterests.price' | cxTranslate }}\n                  </div>\n                  <span>{{ product.price.formattedValue }}</span>\n                </div>\n              </td>\n              <td>\n                <div class=\"cx-product-interests-subscriptions\">\n                  <div class=\"d-md-none cx-product-interests-label\">\n                    {{ 'myInterests.notifications' | cxTranslate }}\n                  </div>\n                  <div\n                    class=\"cx-product-interests-notification\"\n                    *ngFor=\"let interestEntry of interest.productInterestEntry\"\n                  >\n                    <span class=\"cx-product-interests-type\">\n                      {{\n                        'myInterests.' + interestEntry.interestType\n                          | cxTranslate\n                      }}\n                    </span>\n                    <span class=\"cx-product-interests-expiration-date\">\n                      {{\n                        'myInterests.expirationDate'\n                          | cxTranslate\n                            : {\n                                expirationDate:\n                                  interestEntry.expirationDate | date\n                              }\n                      }}\n                    </span>\n                  </div>\n                </div>\n              </td>\n              <td>\n                <div class=\"cx-actions cx-product-interests-remove-button\">\n                  <button\n                    type=\"button\"\n                    class=\"link cx-product-interests-remove-btn\"\n                    [disabled]=\"isRemoveDisabled$ | async\"\n                    (click)=\"removeInterest(interest)\"\n                  >\n                    {{ 'myInterests.remove' | cxTranslate }}\n                  </button>\n                </div>\n              </td>\n            </ng-container>\n          </tr>\n        </tbody>\n      </table>\n      <div class=\"cx-product-interests-sort bottom row\">\n        <div\n          class=\"cx-product-interests-form-group cx-product-interests-thead-mobile form-group col-sm-12 col-md-4 col-lg-4\"\n        >\n          <cx-sorting\n            [sortOptions]=\"sortOptions\"\n            [sortLabels]=\"sortLabels | async\"\n            (sortListEvent)=\"sortChange($event)\"\n            [selectedOption]=\"sort\"\n            placeholder=\"{{ 'myInterests.sortByMostRecent' | cxTranslate }}\"\n          >\n          </cx-sorting>\n        </div>\n        <div class=\"cx-product-interests-pagination\">\n          <cx-pagination\n            [pagination]=\"pagination\"\n            (viewPageEvent)=\"pageChange($event)\"\n          ></cx-pagination>\n        </div>\n      </div>\n    </ng-container>\n  </div>\n</div>\n<ng-template #noInterest>\n  <div class=\"cx-product-interests-message\">\n    {{ 'myInterests.noInterests' | cxTranslate }}\n  </div>\n</ng-template>\n<ng-template #loading>\n  <div class=\"cx-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    /** @nocollapse */
+    MyInterestsComponent.ctorParameters = function () { return [
+        { type: UserInterestsService },
+        { type: TranslationService },
+        { type: ProductService }
+    ]; };
+    return MyInterestsComponent;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    MyInterestsComponent.prototype.DEFAULT_PAGE_SIZE;
+    /**
+     * @type {?}
+     * @private
+     */
+    MyInterestsComponent.prototype.sortMapping;
+    /** @type {?} */
+    MyInterestsComponent.prototype.sort;
+    /** @type {?} */
+    MyInterestsComponent.prototype.sortOptions;
+    /** @type {?} */
+    MyInterestsComponent.prototype.pagination;
+    /** @type {?} */
+    MyInterestsComponent.prototype.interests$;
+    /** @type {?} */
+    MyInterestsComponent.prototype.isRemoveDisabled$;
+    /** @type {?} */
+    MyInterestsComponent.prototype.getInterestsloading$;
+    /** @type {?} */
+    MyInterestsComponent.prototype.sortLabels;
+    /**
+     * @type {?}
+     * @private
+     */
+    MyInterestsComponent.prototype.productInterestService;
+    /**
+     * @type {?}
+     * @private
+     */
+    MyInterestsComponent.prototype.translationService;
+    /**
+     * @type {?}
+     * @private
+     */
+    MyInterestsComponent.prototype.productService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var MyInterestsModule = /** @class */ (function () {
+    function MyInterestsModule() {
+    }
+    MyInterestsModule.decorators = [
+        { type: NgModule, args: [{
+                    declarations: [MyInterestsComponent],
+                    imports: [
+                        CommonModule,
+                        I18nModule,
+                        ConfigModule.withConfig((/** @type {?} */ ({
+                            cmsComponents: {
+                                MyInterestsComponent: {
+                                    component: MyInterestsComponent,
+                                    guards: [AuthGuard],
+                                },
+                            },
+                        }))),
+                        RouterModule,
+                        ListNavigationModule,
+                        I18nModule,
+                        UrlModule,
+                        MediaModule,
+                        SpinnerModule,
+                    ],
+                    exports: [MyInterestsComponent],
+                    entryComponents: [MyInterestsComponent],
+                },] }
+    ];
+    return MyInterestsModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -19379,10 +20210,21 @@ var NavigationService = /** @class */ (function () {
         })));
     };
     /**
+     * returns an observable with the `NavigationNode` for the given `CmsNavigationComponent`.
+     * This function will load the navigation underlying entries and childs if they haven't been
+     * loaded so far.
+     */
+    /**
+     * returns an observable with the `NavigationNode` for the given `CmsNavigationComponent`.
+     * This function will load the navigation underlying entries and childs if they haven't been
+     * loaded so far.
      * @param {?} data$
      * @return {?}
      */
     NavigationService.prototype.getNavigationNode = /**
+     * returns an observable with the `NavigationNode` for the given `CmsNavigationComponent`.
+     * This function will load the navigation underlying entries and childs if they haven't been
+     * loaded so far.
      * @param {?} data$
      * @return {?}
      */
@@ -19408,31 +20250,31 @@ var NavigationService = /** @class */ (function () {
              */
             function (items) {
                 if (items === undefined) {
-                    _this.getNavigationEntryItems(navigation, true);
+                    _this.loadNavigationEntryItems(navigation, true);
                 }
             })), filter(Boolean), map((/**
              * @param {?} items
              * @return {?}
              */
-            function (items) { return _this.createNode(navigation, items); })));
+            function (items) { return _this.populateNavigationNode(navigation, items); })));
         })));
     };
     /**
-     * Get all navigation entry items' type and id. Dispatch action to load all these items
+     * Loads all navigation entry items' type and id. Dispatch action to load all these items
      * @param nodeData
      * @param root
      * @param itemsList
      */
     /**
-     * Get all navigation entry items' type and id. Dispatch action to load all these items
+     * Loads all navigation entry items' type and id. Dispatch action to load all these items
      * @private
      * @param {?} nodeData
      * @param {?} root
      * @param {?=} itemsList
      * @return {?}
      */
-    NavigationService.prototype.getNavigationEntryItems = /**
-     * Get all navigation entry items' type and id. Dispatch action to load all these items
+    NavigationService.prototype.loadNavigationEntryItems = /**
+     * Loads all navigation entry items' type and id. Dispatch action to load all these items
      * @private
      * @param {?} nodeData
      * @param {?} root
@@ -19440,6 +20282,7 @@ var NavigationService = /** @class */ (function () {
      * @return {?}
      */
     function (nodeData, root, itemsList) {
+        var _this = this;
         if (itemsList === void 0) { itemsList = []; }
         if (nodeData.entries && nodeData.entries.length > 0) {
             nodeData.entries.forEach((/**
@@ -19454,83 +20297,78 @@ var NavigationService = /** @class */ (function () {
             }));
         }
         if (nodeData.children && nodeData.children.length > 0) {
-            this.processChildren(nodeData, itemsList);
+            nodeData.children.forEach((/**
+             * @param {?} child
+             * @return {?}
+             */
+            function (child) {
+                return _this.loadNavigationEntryItems(child, false, itemsList);
+            }));
         }
         if (root) {
-            /** @type {?} */
-            var rootUid = nodeData.uid;
-            this.cmsService.loadNavigationItems(rootUid, itemsList);
+            this.cmsService.loadNavigationItems(nodeData.uid, itemsList);
         }
     };
     /**
-     * @private
-     * @param {?} node
-     * @param {?} itemsList
-     * @return {?}
-     */
-    NavigationService.prototype.processChildren = /**
-     * @private
-     * @param {?} node
-     * @param {?} itemsList
-     * @return {?}
-     */
-    function (node, itemsList) {
-        var e_1, _a;
-        try {
-            for (var _b = __values(node.children), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var child = _c.value;
-                this.getNavigationEntryItems(child, false, itemsList);
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-    };
-    /**
-     * Create a new node tree for display
+     * Create a new node tree for the view
      * @param nodeData
      * @param items
      */
     /**
-     * Create a new node tree for display
+     * Create a new node tree for the view
      * @private
      * @param {?} nodeData
      * @param {?} items
      * @return {?}
      */
-    NavigationService.prototype.createNode = /**
-     * Create a new node tree for display
+    NavigationService.prototype.populateNavigationNode = /**
+     * Create a new node tree for the view
      * @private
      * @param {?} nodeData
      * @param {?} items
      * @return {?}
      */
     function (nodeData, items) {
+        var _this = this;
         /** @type {?} */
         var node = {};
-        node.title = nodeData.title;
+        if (nodeData.title) {
+            // the node title will be populated by the first entry (if any)
+            // if there's no nodeData.title available
+            node.title = nodeData.title;
+        }
         if (nodeData.entries && nodeData.entries.length > 0) {
-            this.addLinkToNode(node, nodeData.entries[0], items);
+            this.populateLink(node, nodeData.entries[0], items);
         }
         if (nodeData.children && nodeData.children.length > 0) {
             /** @type {?} */
-            var children = this.createChildren(nodeData, items);
-            node.children = children;
+            var children = nodeData.children
+                .map((/**
+             * @param {?} child
+             * @return {?}
+             */
+            function (child) { return _this.populateNavigationNode(child, items); }))
+                .filter(Boolean);
+            if (children.length > 0) {
+                node.children = children;
+            }
         }
-        return node;
+        // return null in case there are no children
+        return Object.keys(node).length === 0 ? null : node;
     };
     /**
+     * The node link is driven by the first entry.
+     */
+    /**
+     * The node link is driven by the first entry.
      * @private
      * @param {?} node
      * @param {?} entry
      * @param {?} items
      * @return {?}
      */
-    NavigationService.prototype.addLinkToNode = /**
+    NavigationService.prototype.populateLink = /**
+     * The node link is driven by the first entry.
      * @private
      * @param {?} node
      * @param {?} entry
@@ -19541,13 +20379,16 @@ var NavigationService = /** @class */ (function () {
         /** @type {?} */
         var item = items[entry.itemId + "_" + entry.itemSuperType];
         // now we only consider CMSLinkComponent
-        if (entry.itemType === 'CMSLinkComponent' && item !== undefined) {
+        if (item && entry.itemType === 'CMSLinkComponent') {
             if (!node.title) {
                 node.title = item.linkName;
             }
-            node.url = this.getLink(item);
-            // if "NEWWINDOW", target is true
-            node.target = item.target;
+            // only populate the node link if we have a visible node
+            if (node.title) {
+                node.url = this.getLink(item);
+                // if "NEWWINDOW", target is true
+                node.target = item.target;
+            }
         }
     };
     /**
@@ -19581,39 +20422,6 @@ var NavigationService = /** @class */ (function () {
                 },
             });
         }
-    };
-    /**
-     * @private
-     * @param {?} node
-     * @param {?} items
-     * @return {?}
-     */
-    NavigationService.prototype.createChildren = /**
-     * @private
-     * @param {?} node
-     * @param {?} items
-     * @return {?}
-     */
-    function (node, items) {
-        var e_2, _a;
-        /** @type {?} */
-        var children = [];
-        try {
-            for (var _b = __values(node.children), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var child = _c.value;
-                /** @type {?} */
-                var childNode = this.createNode(child, items);
-                children.push(childNode);
-            }
-        }
-        catch (e_2_1) { e_2 = { error: e_2_1 }; }
-        finally {
-            try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-            }
-            finally { if (e_2) throw e_2.error; }
-        }
-        return children;
     };
     NavigationService.decorators = [
         { type: Injectable, args: [{
@@ -21525,6 +22333,25 @@ var OrderConfirmationModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * @record
+ */
+function ProductCarouselItem() { }
+if (false) {
+    /** @type {?|undefined} */
+    ProductCarouselItem.prototype.title;
+    /** @type {?|undefined} */
+    ProductCarouselItem.prototype.media;
+    /** @type {?|undefined} */
+    ProductCarouselItem.prototype.price;
+    /** @type {?|undefined} */
+    ProductCarouselItem.prototype.route;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var ProductCarouselService = /** @class */ (function () {
     function ProductCarouselService(productService, referenceService, semanticPathService) {
         this.productService = productService;
@@ -21661,10 +22488,12 @@ if (false) {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var ProductCarouselComponent = /** @class */ (function () {
-    function ProductCarouselComponent(componentData, productService) {
+    function ProductCarouselComponent(componentData, productService, features) {
         var _this = this;
         this.componentData = componentData;
         this.productService = productService;
+        this.features = features;
+        this.PRODUCT_SCOPE = this.features && this.features.isLevel('1.4') ? 'list' : '';
         this.componentData$ = this.componentData.data$.pipe(filter(Boolean));
         /**
          * returns an Obervable string for the title.
@@ -21687,11 +22516,13 @@ var ProductCarouselComponent = /** @class */ (function () {
          * @param {?} codes
          * @return {?}
          */
-        function (codes) { return codes.map((/**
-         * @param {?} code
-         * @return {?}
-         */
-        function (code) { return _this.productService.get(code); })); })));
+        function (codes) {
+            return codes.map((/**
+             * @param {?} code
+             * @return {?}
+             */
+            function (code) { return _this.productService.get(code, _this.PRODUCT_SCOPE); }));
+        })));
     }
     ProductCarouselComponent.decorators = [
         { type: Component, args: [{
@@ -21703,11 +22534,17 @@ var ProductCarouselComponent = /** @class */ (function () {
     /** @nocollapse */
     ProductCarouselComponent.ctorParameters = function () { return [
         { type: CmsComponentData },
-        { type: ProductService }
+        { type: ProductService },
+        { type: FeatureConfigService }
     ]; };
     return ProductCarouselComponent;
 }());
 if (false) {
+    /**
+     * @type {?}
+     * @protected
+     */
+    ProductCarouselComponent.prototype.PRODUCT_SCOPE;
     /**
      * @type {?}
      * @private
@@ -21735,6 +22572,11 @@ if (false) {
      * @protected
      */
     ProductCarouselComponent.prototype.productService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    ProductCarouselComponent.prototype.features;
 }
 
 /**
@@ -21924,6 +22766,219 @@ var ProductReferencesModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @type {?} */
+var defaultScrollConfig = {
+    view: {
+        infiniteScroll: {
+            active: false,
+            productLimit: 0,
+            showMoreButton: false,
+        },
+    },
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ProductImagesComponent = /** @class */ (function () {
+    function ProductImagesComponent(currentProductService) {
+        var _this = this;
+        this.currentProductService = currentProductService;
+        this.mainMediaContainer = new BehaviorSubject(null);
+        this.product$ = this.currentProductService.getProduct().pipe(filter(Boolean), distinctUntilChanged(), tap((/**
+         * @param {?} p
+         * @return {?}
+         */
+        function (p) {
+            return _this.mainMediaContainer.next(p.images ? p.images.PRIMARY : {});
+        })));
+        this.thumbs$ = this.product$.pipe(map((/**
+         * @param {?} product
+         * @return {?}
+         */
+        function (product) { return _this.createThumbs(product); })), tap((/**
+         * @param {?} thumbs
+         * @return {?}
+         */
+        function (thumbs) {
+            _this.isThumbsEmpty = thumbs.length === 0;
+        })));
+        this.mainImage$ = combineLatest([this.product$, this.mainMediaContainer]).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 2), container = _b[1];
+            return container;
+        })));
+    }
+    /**
+     * @param {?} item
+     * @return {?}
+     */
+    ProductImagesComponent.prototype.openImage = /**
+     * @param {?} item
+     * @return {?}
+     */
+    function (item) {
+        this.mainMediaContainer.next(item);
+    };
+    /**
+     * @param {?} thumbnail
+     * @return {?}
+     */
+    ProductImagesComponent.prototype.isActive = /**
+     * @param {?} thumbnail
+     * @return {?}
+     */
+    function (thumbnail) {
+        return this.mainMediaContainer.pipe(filter(Boolean), map((/**
+         * @param {?} container
+         * @return {?}
+         */
+        function (container) {
+            return (container.zoom &&
+                container.zoom.url &&
+                thumbnail.zoom &&
+                thumbnail.zoom.url &&
+                container.zoom.url === thumbnail.zoom.url);
+        })));
+    };
+    /** find the index of the main media in the list of media */
+    /**
+     * find the index of the main media in the list of media
+     * @param {?} thumbs
+     * @return {?}
+     */
+    ProductImagesComponent.prototype.getActive = /**
+     * find the index of the main media in the list of media
+     * @param {?} thumbs
+     * @return {?}
+     */
+    function (thumbs) {
+        return this.mainMediaContainer.pipe(filter(Boolean), map((/**
+         * @param {?} container
+         * @return {?}
+         */
+        function (container) {
+            /** @type {?} */
+            var current = thumbs.find((/**
+             * @param {?} t
+             * @return {?}
+             */
+            function (t) {
+                return t.media &&
+                    container.zoom &&
+                    t.media.container &&
+                    t.media.container.zoom &&
+                    t.media.container.zoom.url === container.zoom.url;
+            }));
+            return thumbs.indexOf(current);
+        })));
+    };
+    /**
+     * Return an array of CarouselItems for the product thumbnails.
+     * In case there are less then 2 thumbs, we return null.
+     */
+    /**
+     * Return an array of CarouselItems for the product thumbnails.
+     * In case there are less then 2 thumbs, we return null.
+     * @private
+     * @param {?} product
+     * @return {?}
+     */
+    ProductImagesComponent.prototype.createThumbs = /**
+     * Return an array of CarouselItems for the product thumbnails.
+     * In case there are less then 2 thumbs, we return null.
+     * @private
+     * @param {?} product
+     * @return {?}
+     */
+    function (product) {
+        if (!product.images ||
+            !product.images.GALLERY ||
+            product.images.GALLERY.length < 2) {
+            return [];
+        }
+        return ((/** @type {?} */ (product.images.GALLERY))).map((/**
+         * @param {?} c
+         * @return {?}
+         */
+        function (c) { return of({ container: c }); }));
+    };
+    ProductImagesComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-product-images',
+                    template: "<ng-container *ngIf=\"mainImage$ | async as main\">\n  <cx-media [container]=\"main\" format=\"zoom\"> </cx-media>\n</ng-container>\n\n<cx-carousel\n  *ngIf=\"!isThumbsEmpty\"\n  class=\"thumbs\"\n  [items]=\"thumbs$ | async\"\n  itemWidth=\"120px\"\n  [hideIndicators]=\"false\"\n  [template]=\"thumb\"\n></cx-carousel>\n\n<ng-template #thumb let-item=\"item\">\n  <cx-media\n    [container]=\"item.container\"\n    tabindex=\"0\"\n    format=\"thumbnail\"\n    (focus)=\"openImage(item.container)\"\n    [class.is-active]=\"isActive(item.container) | async\"\n  >\n  </cx-media>\n</ng-template>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    /** @nocollapse */
+    ProductImagesComponent.ctorParameters = function () { return [
+        { type: CurrentProductService }
+    ]; };
+    return ProductImagesComponent;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    ProductImagesComponent.prototype.mainMediaContainer;
+    /**
+     * @type {?}
+     * @private
+     */
+    ProductImagesComponent.prototype.product$;
+    /** @type {?} */
+    ProductImagesComponent.prototype.isThumbsEmpty;
+    /** @type {?} */
+    ProductImagesComponent.prototype.thumbs$;
+    /** @type {?} */
+    ProductImagesComponent.prototype.mainImage$;
+    /**
+     * @type {?}
+     * @private
+     */
+    ProductImagesComponent.prototype.currentProductService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ProductImagesModule = /** @class */ (function () {
+    function ProductImagesModule() {
+    }
+    ProductImagesModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        RouterModule,
+                        MediaModule,
+                        OutletModule,
+                        ConfigModule.withConfig((/** @type {?} */ ({
+                            cmsComponents: {
+                                ProductImagesComponent: {
+                                    component: ProductImagesComponent,
+                                },
+                            },
+                        }))),
+                        CarouselModule,
+                    ],
+                    declarations: [ProductImagesComponent],
+                    entryComponents: [ProductImagesComponent],
+                    exports: [ProductImagesComponent],
+                },] }
+    ];
+    return ProductImagesModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var ProductIntroComponent = /** @class */ (function () {
     function ProductIntroComponent(currentProductService, translationService, winRef) {
         this.currentProductService = currentProductService;
@@ -22074,7 +23129,7 @@ var ProductIntroComponent = /** @class */ (function () {
     ProductIntroComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-product-intro',
-                    template: "<ng-container *ngIf=\"product$ | async as product\">\n  <div class=\"rating\">\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"count\">({{ product?.numberOfReviews }})</div>\n    <a\n      class=\"btn-link\"\n      *ngIf=\"reviewsTabAvailable | async\"\n      (click)=\"showReviews()\"\n      >{{ 'productSummary.showReviews' | cxTranslate }}</a\n    >\n  </div>\n  <div class=\"code\">\n    {{ 'productSummary.id' | cxTranslate }} {{ product?.code }}\n  </div>\n</ng-container>\n",
+                    template: "<ng-container *ngIf=\"product$ | async as product\">\n  <div class=\"rating\" *ngIf=\"product.averageRating\">\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"count\">({{ product?.numberOfReviews }})</div>\n    <a\n      class=\"btn-link\"\n      *ngIf=\"reviewsTabAvailable | async\"\n      (click)=\"showReviews()\"\n      >{{ 'productSummary.showReviews' | cxTranslate }}</a\n    >\n  </div>\n  <div class=\"rating\" *ngIf=\"!product.averageRating\">\n    {{ 'productDetails.noReviews' | cxTranslate }}\n  </div>\n  <div class=\"code\">\n    {{ 'productSummary.id' | cxTranslate }} {{ product?.code }}\n  </div>\n</ng-container>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -22136,86 +23191,6 @@ var ProductIntroModule = /** @class */ (function () {
     ];
     return ProductIntroModule;
 }());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @enum {string} */
-var ViewModes = {
-    Grid: 'grid',
-    List: 'list',
-};
-var ProductViewComponent = /** @class */ (function () {
-    function ProductViewComponent() {
-        this.iconTypes = ICON_TYPE;
-        this.modeChange = new EventEmitter();
-    }
-    Object.defineProperty(ProductViewComponent.prototype, "buttonClass", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            /** @type {?} */
-            var viewName = this.viewMode.toLowerCase();
-            return "cx-product-" + viewName;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ProductViewComponent.prototype, "viewMode", {
-        /**
-         *   Display icons inversely to allow users
-         *   to see the view they will navigate to
-         */
-        get: /**
-         *   Display icons inversely to allow users
-         *   to see the view they will navigate to
-         * @return {?}
-         */
-        function () {
-            if (this.mode === 'list') {
-                return this.iconTypes.GRID;
-            }
-            else if (this.mode === 'grid') {
-                return this.iconTypes.LIST;
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @return {?}
-     */
-    ProductViewComponent.prototype.changeMode = /**
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var newMode = this.mode === ViewModes.Grid ? ViewModes.List : ViewModes.Grid;
-        this.modeChange.emit(newMode);
-    };
-    ProductViewComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-product-view',
-                    template: "<div class=\"cx-product-layout\" (click)=\"changeMode()\">\n  <div [ngClass]=\"buttonClass\">\n    <cx-icon\n      *ngIf=\"viewMode === iconTypes.GRID\"\n      [type]=\"iconTypes.GRID\"\n    ></cx-icon>\n    <cx-icon\n      *ngIf=\"viewMode === iconTypes.LIST\"\n      [type]=\"iconTypes.LIST\"\n    ></cx-icon>\n  </div>\n</div>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                }] }
-    ];
-    ProductViewComponent.propDecorators = {
-        mode: [{ type: Input }],
-        modeChange: [{ type: Output }]
-    };
-    return ProductViewComponent;
-}());
-if (false) {
-    /** @type {?} */
-    ProductViewComponent.prototype.iconTypes;
-    /** @type {?} */
-    ProductViewComponent.prototype.mode;
-    /** @type {?} */
-    ProductViewComponent.prototype.modeChange;
-}
 
 /**
  * @fileoverview added by tsickle
@@ -22569,6 +23544,86 @@ if (false) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @enum {string} */
+var ViewModes = {
+    Grid: 'grid',
+    List: 'list',
+};
+var ProductViewComponent = /** @class */ (function () {
+    function ProductViewComponent() {
+        this.iconTypes = ICON_TYPE;
+        this.modeChange = new EventEmitter();
+    }
+    Object.defineProperty(ProductViewComponent.prototype, "buttonClass", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            /** @type {?} */
+            var viewName = this.viewMode.toLowerCase();
+            return "cx-product-" + viewName;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProductViewComponent.prototype, "viewMode", {
+        /**
+         *   Display icons inversely to allow users
+         *   to see the view they will navigate to
+         */
+        get: /**
+         *   Display icons inversely to allow users
+         *   to see the view they will navigate to
+         * @return {?}
+         */
+        function () {
+            if (this.mode === 'list') {
+                return this.iconTypes.GRID;
+            }
+            else if (this.mode === 'grid') {
+                return this.iconTypes.LIST;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    ProductViewComponent.prototype.changeMode = /**
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var newMode = this.mode === ViewModes.Grid ? ViewModes.List : ViewModes.Grid;
+        this.modeChange.emit(newMode);
+    };
+    ProductViewComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-product-view',
+                    template: "<div class=\"cx-product-layout\" (click)=\"changeMode()\">\n  <div [ngClass]=\"buttonClass\">\n    <cx-icon\n      *ngIf=\"viewMode === iconTypes.GRID\"\n      [type]=\"iconTypes.GRID\"\n    ></cx-icon>\n    <cx-icon\n      *ngIf=\"viewMode === iconTypes.LIST\"\n      [type]=\"iconTypes.LIST\"\n    ></cx-icon>\n  </div>\n</div>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    ProductViewComponent.propDecorators = {
+        mode: [{ type: Input }],
+        modeChange: [{ type: Output }]
+    };
+    return ProductViewComponent;
+}());
+if (false) {
+    /** @type {?} */
+    ProductViewComponent.prototype.iconTypes;
+    /** @type {?} */
+    ProductViewComponent.prototype.mode;
+    /** @type {?} */
+    ProductViewComponent.prototype.modeChange;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var ProductListComponent = /** @class */ (function () {
     function ProductListComponent(pageLayoutService, productListComponentService, scrollConfig) {
         this.pageLayoutService = pageLayoutService;
@@ -22683,300 +23738,6 @@ if (false) {
     /** @type {?} */
     ProductListComponent.prototype.scrollConfig;
 }
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var ProductFacetNavigationComponent = /** @class */ (function () {
-    function ProductFacetNavigationComponent(modalService, activatedRoute, productListComponentService) {
-        this.modalService = modalService;
-        this.activatedRoute = activatedRoute;
-        this.productListComponentService = productListComponentService;
-        this.iconTypes = ICON_TYPE;
-        this.minPerFacet = 6;
-        this.collapsedFacets = new Set();
-        this.showAllPerFacetMap = new Map();
-        this.queryCodec = new HttpUrlEncodingCodec();
-    }
-    /**
-     * @return {?}
-     */
-    ProductFacetNavigationComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this.sub = this.activatedRoute.params.subscribe((/**
-         * @param {?} params
-         * @return {?}
-         */
-        function (params) {
-            _this.activeFacetValueCode = params.categoryCode || params.brandCode;
-        }));
-        this.searchResult$ = this.productListComponentService.model$.pipe(tap((/**
-         * @param {?} searchResult
-         * @return {?}
-         */
-        function (searchResult) {
-            if (searchResult.facets) {
-                searchResult.facets.forEach((/**
-                 * @param {?} el
-                 * @return {?}
-                 */
-                function (el) {
-                    _this.showAllPerFacetMap.set(el.name, false);
-                }));
-            }
-        })));
-        this.visibleFacets$ = this.searchResult$.pipe(map((/**
-         * @param {?} searchResult
-         * @return {?}
-         */
-        function (searchResult) {
-            return searchResult.facets
-                ? searchResult.facets.filter((/**
-                 * @param {?} facet
-                 * @return {?}
-                 */
-                function (facet) { return facet.visible; }))
-                : [];
-        })));
-    };
-    /**
-     * @param {?} content
-     * @return {?}
-     */
-    ProductFacetNavigationComponent.prototype.openFilterModal = /**
-     * @param {?} content
-     * @return {?}
-     */
-    function (content) {
-        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
-    };
-    /**
-     * @param {?} query
-     * @return {?}
-     */
-    ProductFacetNavigationComponent.prototype.toggleValue = /**
-     * @param {?} query
-     * @return {?}
-     */
-    function (query) {
-        this.productListComponentService.setQuery(this.queryCodec.decodeValue(query));
-    };
-    /**
-     * @param {?} facetName
-     * @return {?}
-     */
-    ProductFacetNavigationComponent.prototype.showLess = /**
-     * @param {?} facetName
-     * @return {?}
-     */
-    function (facetName) {
-        this.updateShowAllPerFacetMap(facetName, false);
-    };
-    /**
-     * @param {?} facetName
-     * @return {?}
-     */
-    ProductFacetNavigationComponent.prototype.showMore = /**
-     * @param {?} facetName
-     * @return {?}
-     */
-    function (facetName) {
-        this.updateShowAllPerFacetMap(facetName, true);
-    };
-    /**
-     * @private
-     * @param {?} facetName
-     * @param {?} showAll
-     * @return {?}
-     */
-    ProductFacetNavigationComponent.prototype.updateShowAllPerFacetMap = /**
-     * @private
-     * @param {?} facetName
-     * @param {?} showAll
-     * @return {?}
-     */
-    function (facetName, showAll) {
-        this.showAllPerFacetMap.set(facetName, showAll);
-    };
-    /**
-     * @param {?} facetName
-     * @return {?}
-     */
-    ProductFacetNavigationComponent.prototype.isFacetCollapsed = /**
-     * @param {?} facetName
-     * @return {?}
-     */
-    function (facetName) {
-        return this.collapsedFacets.has(facetName);
-    };
-    /**
-     * @param {?} facetName
-     * @return {?}
-     */
-    ProductFacetNavigationComponent.prototype.toggleFacet = /**
-     * @param {?} facetName
-     * @return {?}
-     */
-    function (facetName) {
-        if (this.collapsedFacets.has(facetName)) {
-            this.collapsedFacets.delete(facetName);
-        }
-        else {
-            this.collapsedFacets.add(facetName);
-        }
-    };
-    /**
-     * @param {?} facet
-     * @return {?}
-     */
-    ProductFacetNavigationComponent.prototype.getVisibleFacetValues = /**
-     * @param {?} facet
-     * @return {?}
-     */
-    function (facet) {
-        return facet.values.slice(0, this.showAllPerFacetMap.get(facet.name)
-            ? facet.values.length
-            : this.minPerFacet);
-    };
-    /**
-     * @return {?}
-     */
-    ProductFacetNavigationComponent.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
-        if (this.sub) {
-            this.sub.unsubscribe();
-        }
-    };
-    ProductFacetNavigationComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-product-facet-navigation',
-                    template: "<ng-container *ngIf=\"searchResult$ | async as searchResult\">\n  <div class=\"cx-search-facet\">\n    <ng-container *ngIf=\"searchResult.breadcrumbs?.length\">\n      <h4 class=\"cx-facet-filter-header\">\n        {{ 'productList.filterBy.label' | cxTranslate }}\n      </h4>\n      <div class=\"cx-facet-filter-container\">\n        <div\n          *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n          [hidden]=\"breadcrumb.facetValueCode === activeFacetValueCode\"\n          class=\"cx-facet-filter-pill\"\n          role=\"filter\"\n        >\n          <span class=\"cx-facet-pill-value\">{{\n            breadcrumb.facetValueName\n          }}</span>\n          <button\n            type=\"button\"\n            class=\"close\"\n            aria-label=\"Close\"\n            (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n          >\n            <span aria-hidden=\"true\">\n              <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n            </span>\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-container *ngIf=\"visibleFacets$ | async as visibleFacets\">\n      <ng-container *ngFor=\"let facet of visibleFacets; let facetId = index\">\n        <div class=\"cx-facet-group\">\n          <div class=\"cx-facet-header\">\n            <a\n              class=\"cx-facet-header-link\"\n              (click)=\"toggleFacet(facet.name)\"\n              [attr.aria-expanded]=\"!isFacetCollapsed(facet.name)\"\n              aria-controls=\"\"\n            >\n              {{ facet.name }}\n              <cx-icon\n                [type]=\"\n                  isFacetCollapsed(facet.name)\n                    ? iconTypes.EXPAND\n                    : iconTypes.COLLAPSE\n                \"\n              ></cx-icon>\n            </a>\n          </div>\n          <ng-container *ngIf=\"!isFacetCollapsed(facet.name)\">\n            <ul class=\"cx-facet-list\">\n              <li\n                *ngFor=\"\n                  let value of getVisibleFacetValues(facet);\n                  index as facetValueId\n                \"\n              >\n                <div class=\"form-check\">\n                  <label class=\"form-checkbox cx-facet-label\">\n                    <input\n                      class=\"form-check-input cx-facet-checkbox\"\n                      role=\"checkbox\"\n                      type=\"checkbox\"\n                      aria-checked=\"true\"\n                      [checked]=\"value.selected\"\n                      (change)=\"toggleValue(value.query.query.value)\"\n                    />\n                    <span class=\"cx-facet-text\"\n                      >{{ value.name }} ({{ value.count }})</span\n                    >\n                  </label>\n                </div>\n              </li>\n              <li\n                class=\"cx-facet-toggle-btn\"\n                (click)=\"showLess(facet.name)\"\n                *ngIf=\"showAllPerFacetMap.get(facet.name)\"\n              >\n                {{ 'productList.showLess' | cxTranslate }}\n              </li>\n              <li\n                class=\"cx-facet-toggle-btn\"\n                (click)=\"showMore(facet.name)\"\n                *ngIf=\"\n                  !showAllPerFacetMap.get(facet.name) &&\n                  facet.values.length > minPerFacet\n                \"\n              >\n                {{ 'productList.showMore' | cxTranslate }}\n              </li>\n            </ul>\n          </ng-container>\n        </div>\n      </ng-container>\n    </ng-container>\n  </div>\n\n  <div class=\"cx-facet-mobile\">\n    <div class=\"container\">\n      <button\n        class=\"btn btn-action btn-block cx-facet-mobile-btn\"\n        (click)=\"openFilterModal(content)\"\n      >\n        {{ 'productList.filterBy.action' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n\n  <!-- START ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n  <div class=\"container\">\n    <div class=\"cx-facet-mobile\" *ngIf=\"searchResult.breadcrumbs?.length\">\n      <div class=\"cx-facet-filter-container\">\n        <h4 class=\"cx-facet-filter-header\">\n          {{ 'productList.appliedFilter' | cxTranslate }}\n        </h4>\n        <div\n          class=\"cx-facet-filter-pill\"\n          role=\"filter\"\n          *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n        >\n          <span class=\"cx-facet-pill-value\">\n            {{ breadcrumb.facetValueName }}\n          </span>\n          <button\n            type=\"button\"\n            class=\"close\"\n            aria-label=\"Close\"\n            (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n          >\n            <span aria-hidden=\"true\">\n              <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n            </span>\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n  <!-- END ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n\n  <ng-template #content let-c=\"close\" let-d=\"dismiss\">\n    <div class=\"modal-header\">\n      <h4 class=\"cx-facet-modal-title\" id=\"modal-title\">\n        {{ 'productList.filterBy.label' | cxTranslate }}\n      </h4>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"d('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <div class=\"modal-body cx-facet-modal-body\">\n      <form>\n        <div\n          class=\"form-group\"\n          *ngFor=\"let facet of searchResult.facets; index as facetId\"\n        >\n          <h4 class=\"cx-facet-modal-label\" for=\"megapixels\">\n            {{ facet.name }}\n          </h4>\n          <div class=\"input-group\">\n            <ul class=\"cx-facet-list\">\n              <li *ngFor=\"let value of facet.values; index as facetValueId\">\n                <div class=\"form-check\">\n                  <label class=\"form-checkbox cx-facet-label\">\n                    <input\n                      class=\"form-check-input cx-facet-checkbox\"\n                      role=\"checkbox\"\n                      type=\"checkbox\"\n                      aria-checked=\"true\"\n                      [checked]=\"value.selected\"\n                      (change)=\"toggleValue(value.query.query.value)\"\n                    />\n                    <span class=\"cx-facet-text\"\n                      >{{ value.name }} ({{ value.count }})</span\n                    >\n                  </label>\n                </div>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </form>\n    </div>\n  </ng-template>\n</ng-container>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                }] }
-    ];
-    /** @nocollapse */
-    ProductFacetNavigationComponent.ctorParameters = function () { return [
-        { type: ModalService },
-        { type: ActivatedRoute },
-        { type: ProductListComponentService }
-    ]; };
-    return ProductFacetNavigationComponent;
-}());
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    ProductFacetNavigationComponent.prototype.sub;
-    /** @type {?} */
-    ProductFacetNavigationComponent.prototype.iconTypes;
-    /** @type {?} */
-    ProductFacetNavigationComponent.prototype.activeFacetValueCode;
-    /** @type {?} */
-    ProductFacetNavigationComponent.prototype.searchResult;
-    /** @type {?} */
-    ProductFacetNavigationComponent.prototype.minPerFacet;
-    /** @type {?} */
-    ProductFacetNavigationComponent.prototype.showAllPerFacetMap;
-    /**
-     * @type {?}
-     * @protected
-     */
-    ProductFacetNavigationComponent.prototype.queryCodec;
-    /**
-     * @type {?}
-     * @private
-     */
-    ProductFacetNavigationComponent.prototype.collapsedFacets;
-    /** @type {?} */
-    ProductFacetNavigationComponent.prototype.searchResult$;
-    /** @type {?} */
-    ProductFacetNavigationComponent.prototype.visibleFacets$;
-    /**
-     * @type {?}
-     * @private
-     */
-    ProductFacetNavigationComponent.prototype.modalService;
-    /**
-     * @type {?}
-     * @private
-     */
-    ProductFacetNavigationComponent.prototype.activatedRoute;
-    /**
-     * @type {?}
-     * @private
-     */
-    ProductFacetNavigationComponent.prototype.productListComponentService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var ProductGridItemComponent = /** @class */ (function () {
-    function ProductGridItemComponent() {
-    }
-    ProductGridItemComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-product-grid-item',
-                    template: "<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-image-container\"\n>\n  <cx-media\n    class=\"cx-product-image\"\n    [container]=\"product.images?.PRIMARY\"\n    format=\"product\"\n    [alt]=\"product.summary\"\n  ></cx-media>\n</a>\n<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-name\"\n  [innerHTML]=\"product.nameHtml\"\n></a>\n\n<div class=\"cx-product-rating\">\n  <cx-star-rating\n    [rating]=\"product?.averageRating\"\n    [disabled]=\"true\"\n  ></cx-star-rating>\n</div>\n<div class=\"cx-product-price-container\">\n  <div class=\"cx-product-price\" aria-label=\"Product price\">\n    {{ product.price?.formattedValue }}\n  </div>\n</div>\n\n<cx-add-to-cart\n  *ngIf=\"product.stock.stockLevelStatus !== 'outOfStock'\"\n  [showQuantity]=\"false\"\n  [product]=\"product\"\n></cx-add-to-cart>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                }] }
-    ];
-    ProductGridItemComponent.propDecorators = {
-        product: [{ type: Input }]
-    };
-    return ProductGridItemComponent;
-}());
-if (false) {
-    /** @type {?} */
-    ProductGridItemComponent.prototype.product;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var ProductListItemComponent = /** @class */ (function () {
-    function ProductListItemComponent() {
-    }
-    ProductListItemComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-product-list-item',
-                    template: "<div class=\"row\">\n  <div class=\"col-12 col-md-4\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-image-container\"\n    >\n      <cx-media\n        class=\"cx-product-image\"\n        [container]=\"product.images?.PRIMARY\"\n        format=\"product\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n    </a>\n  </div>\n  <div class=\"col-12 col-md-8\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-name\"\n      [innerHtml]=\"product.nameHtml\"\n    ></a>\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"cx-product-price\" aria-label=\"Product price\">\n      {{ product.price?.formattedValue }}\n    </div>\n    <div class=\"row\">\n      <div class=\"col-12 col-md-8\">\n        <p class=\"cx-product-summary\" [innerHtml]=\"product.summary\">\n          {{ product.summary }}\n        </p>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <cx-add-to-cart\n          *ngIf=\"product.stock.stockLevelStatus !== 'outOfStock'\"\n          [showQuantity]=\"false\"\n          [product]=\"product\"\n        ></cx-add-to-cart>\n      </div>\n    </div>\n  </div>\n</div>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                }] }
-    ];
-    ProductListItemComponent.propDecorators = {
-        product: [{ type: Input }]
-    };
-    return ProductListItemComponent;
-}());
-if (false) {
-    /** @type {?} */
-    ProductListItemComponent.prototype.product;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-var defaultScrollConfig = {
-    view: {
-        infiniteScroll: {
-            active: false,
-            productLimit: 0,
-            showMoreButton: false,
-        },
-    },
-};
 
 /**
  * @fileoverview added by tsickle
@@ -23276,6 +24037,285 @@ if (false) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var ProductFacetNavigationComponent = /** @class */ (function () {
+    function ProductFacetNavigationComponent(modalService, activatedRoute, productListComponentService) {
+        this.modalService = modalService;
+        this.activatedRoute = activatedRoute;
+        this.productListComponentService = productListComponentService;
+        this.iconTypes = ICON_TYPE;
+        this.minPerFacet = 6;
+        this.collapsedFacets = new Set();
+        this.showAllPerFacetMap = new Map();
+        this.queryCodec = new HttpUrlEncodingCodec();
+    }
+    /**
+     * @return {?}
+     */
+    ProductFacetNavigationComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.sub = this.activatedRoute.params.subscribe((/**
+         * @param {?} params
+         * @return {?}
+         */
+        function (params) {
+            _this.activeFacetValueCode = params.categoryCode || params.brandCode;
+        }));
+        this.searchResult$ = this.productListComponentService.model$.pipe(tap((/**
+         * @param {?} searchResult
+         * @return {?}
+         */
+        function (searchResult) {
+            if (searchResult.facets) {
+                searchResult.facets.forEach((/**
+                 * @param {?} el
+                 * @return {?}
+                 */
+                function (el) {
+                    _this.showAllPerFacetMap.set(el.name, false);
+                }));
+            }
+        })));
+        this.visibleFacets$ = this.searchResult$.pipe(map((/**
+         * @param {?} searchResult
+         * @return {?}
+         */
+        function (searchResult) {
+            return searchResult.facets
+                ? searchResult.facets.filter((/**
+                 * @param {?} facet
+                 * @return {?}
+                 */
+                function (facet) { return facet.visible; }))
+                : [];
+        })));
+    };
+    /**
+     * @param {?} content
+     * @return {?}
+     */
+    ProductFacetNavigationComponent.prototype.openFilterModal = /**
+     * @param {?} content
+     * @return {?}
+     */
+    function (content) {
+        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+    };
+    /**
+     * @param {?} query
+     * @return {?}
+     */
+    ProductFacetNavigationComponent.prototype.toggleValue = /**
+     * @param {?} query
+     * @return {?}
+     */
+    function (query) {
+        this.productListComponentService.setQuery(this.queryCodec.decodeValue(query));
+    };
+    /**
+     * @param {?} facetName
+     * @return {?}
+     */
+    ProductFacetNavigationComponent.prototype.showLess = /**
+     * @param {?} facetName
+     * @return {?}
+     */
+    function (facetName) {
+        this.updateShowAllPerFacetMap(facetName, false);
+    };
+    /**
+     * @param {?} facetName
+     * @return {?}
+     */
+    ProductFacetNavigationComponent.prototype.showMore = /**
+     * @param {?} facetName
+     * @return {?}
+     */
+    function (facetName) {
+        this.updateShowAllPerFacetMap(facetName, true);
+    };
+    /**
+     * @private
+     * @param {?} facetName
+     * @param {?} showAll
+     * @return {?}
+     */
+    ProductFacetNavigationComponent.prototype.updateShowAllPerFacetMap = /**
+     * @private
+     * @param {?} facetName
+     * @param {?} showAll
+     * @return {?}
+     */
+    function (facetName, showAll) {
+        this.showAllPerFacetMap.set(facetName, showAll);
+    };
+    /**
+     * @param {?} facetName
+     * @return {?}
+     */
+    ProductFacetNavigationComponent.prototype.isFacetCollapsed = /**
+     * @param {?} facetName
+     * @return {?}
+     */
+    function (facetName) {
+        return this.collapsedFacets.has(facetName);
+    };
+    /**
+     * @param {?} facetName
+     * @return {?}
+     */
+    ProductFacetNavigationComponent.prototype.toggleFacet = /**
+     * @param {?} facetName
+     * @return {?}
+     */
+    function (facetName) {
+        if (this.collapsedFacets.has(facetName)) {
+            this.collapsedFacets.delete(facetName);
+        }
+        else {
+            this.collapsedFacets.add(facetName);
+        }
+    };
+    /**
+     * @param {?} facet
+     * @return {?}
+     */
+    ProductFacetNavigationComponent.prototype.getVisibleFacetValues = /**
+     * @param {?} facet
+     * @return {?}
+     */
+    function (facet) {
+        return facet.values.slice(0, this.showAllPerFacetMap.get(facet.name)
+            ? facet.values.length
+            : this.minPerFacet);
+    };
+    /**
+     * @return {?}
+     */
+    ProductFacetNavigationComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        if (this.sub) {
+            this.sub.unsubscribe();
+        }
+    };
+    ProductFacetNavigationComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-product-facet-navigation',
+                    template: "<ng-container *ngIf=\"searchResult$ | async as searchResult\">\n  <div class=\"cx-search-facet\">\n    <ng-container *ngIf=\"searchResult.breadcrumbs?.length\">\n      <h4 class=\"cx-facet-filter-header\">\n        {{ 'productList.filterBy.label' | cxTranslate }}\n      </h4>\n      <div class=\"cx-facet-filter-container\">\n        <div\n          *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n          [hidden]=\"breadcrumb.facetValueCode === activeFacetValueCode\"\n          class=\"cx-facet-filter-pill\"\n          role=\"filter\"\n        >\n          <span class=\"cx-facet-pill-value\">{{\n            breadcrumb.facetValueName\n          }}</span>\n          <button\n            type=\"button\"\n            class=\"close\"\n            aria-label=\"Close\"\n            (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n          >\n            <span aria-hidden=\"true\">\n              <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n            </span>\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-container *ngIf=\"visibleFacets$ | async as visibleFacets\">\n      <ng-container *ngFor=\"let facet of visibleFacets; let facetId = index\">\n        <div class=\"cx-facet-group\">\n          <div class=\"cx-facet-header\">\n            <a\n              class=\"cx-facet-header-link\"\n              (click)=\"toggleFacet(facet.name)\"\n              [attr.aria-expanded]=\"!isFacetCollapsed(facet.name)\"\n              aria-controls=\"\"\n            >\n              {{ facet.name }}\n              <cx-icon\n                [type]=\"\n                  isFacetCollapsed(facet.name)\n                    ? iconTypes.EXPAND\n                    : iconTypes.COLLAPSE\n                \"\n              ></cx-icon>\n            </a>\n          </div>\n          <ng-container *ngIf=\"!isFacetCollapsed(facet.name)\">\n            <ul class=\"cx-facet-list\">\n              <li\n                *ngFor=\"\n                  let value of getVisibleFacetValues(facet);\n                  index as facetValueId\n                \"\n              >\n                <div class=\"form-check\">\n                  <label class=\"form-checkbox cx-facet-label\">\n                    <input\n                      class=\"form-check-input cx-facet-checkbox\"\n                      role=\"checkbox\"\n                      type=\"checkbox\"\n                      aria-checked=\"true\"\n                      [checked]=\"value.selected\"\n                      (change)=\"toggleValue(value.query.query.value)\"\n                    />\n                    <span class=\"cx-facet-text\"\n                      >{{ value.name }} ({{ value.count }})</span\n                    >\n                  </label>\n                </div>\n              </li>\n              <li\n                class=\"cx-facet-toggle-btn\"\n                (click)=\"showLess(facet.name)\"\n                *ngIf=\"showAllPerFacetMap.get(facet.name)\"\n              >\n                {{ 'productList.showLess' | cxTranslate }}\n              </li>\n              <li\n                class=\"cx-facet-toggle-btn\"\n                (click)=\"showMore(facet.name)\"\n                *ngIf=\"\n                  !showAllPerFacetMap.get(facet.name) &&\n                  facet.values.length > minPerFacet\n                \"\n              >\n                {{ 'productList.showMore' | cxTranslate }}\n              </li>\n            </ul>\n          </ng-container>\n        </div>\n      </ng-container>\n    </ng-container>\n  </div>\n\n  <div class=\"cx-facet-mobile\">\n    <div class=\"container\">\n      <button\n        class=\"btn btn-action btn-block cx-facet-mobile-btn\"\n        (click)=\"openFilterModal(content)\"\n      >\n        {{ 'productList.filterBy.action' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n\n  <!-- START ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n  <div class=\"container\">\n    <div class=\"cx-facet-mobile\" *ngIf=\"searchResult.breadcrumbs?.length\">\n      <div class=\"cx-facet-filter-container\">\n        <h4 class=\"cx-facet-filter-header\">\n          {{ 'productList.appliedFilter' | cxTranslate }}\n        </h4>\n        <div\n          class=\"cx-facet-filter-pill\"\n          role=\"filter\"\n          *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n        >\n          <span class=\"cx-facet-pill-value\">\n            {{ breadcrumb.facetValueName }}\n          </span>\n          <button\n            type=\"button\"\n            class=\"close\"\n            aria-label=\"Close\"\n            (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n          >\n            <span aria-hidden=\"true\">\n              <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n            </span>\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n  <!-- END ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n\n  <ng-template #content let-c=\"close\" let-d=\"dismiss\">\n    <div class=\"modal-header\">\n      <h4 class=\"cx-facet-modal-title\" id=\"modal-title\">\n        {{ 'productList.filterBy.label' | cxTranslate }}\n      </h4>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"d('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <div class=\"modal-body cx-facet-modal-body\">\n      <form>\n        <div\n          class=\"form-group\"\n          *ngFor=\"let facet of searchResult.facets; index as facetId\"\n        >\n          <h4 class=\"cx-facet-modal-label\" for=\"megapixels\">\n            {{ facet.name }}\n          </h4>\n          <div class=\"input-group\">\n            <ul class=\"cx-facet-list\">\n              <li *ngFor=\"let value of facet.values; index as facetValueId\">\n                <div class=\"form-check\">\n                  <label class=\"form-checkbox cx-facet-label\">\n                    <input\n                      class=\"form-check-input cx-facet-checkbox\"\n                      role=\"checkbox\"\n                      type=\"checkbox\"\n                      aria-checked=\"true\"\n                      [checked]=\"value.selected\"\n                      (change)=\"toggleValue(value.query.query.value)\"\n                    />\n                    <span class=\"cx-facet-text\"\n                      >{{ value.name }} ({{ value.count }})</span\n                    >\n                  </label>\n                </div>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </form>\n    </div>\n  </ng-template>\n</ng-container>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    /** @nocollapse */
+    ProductFacetNavigationComponent.ctorParameters = function () { return [
+        { type: ModalService },
+        { type: ActivatedRoute },
+        { type: ProductListComponentService }
+    ]; };
+    return ProductFacetNavigationComponent;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    ProductFacetNavigationComponent.prototype.sub;
+    /** @type {?} */
+    ProductFacetNavigationComponent.prototype.iconTypes;
+    /** @type {?} */
+    ProductFacetNavigationComponent.prototype.activeFacetValueCode;
+    /** @type {?} */
+    ProductFacetNavigationComponent.prototype.searchResult;
+    /** @type {?} */
+    ProductFacetNavigationComponent.prototype.minPerFacet;
+    /** @type {?} */
+    ProductFacetNavigationComponent.prototype.showAllPerFacetMap;
+    /**
+     * @type {?}
+     * @protected
+     */
+    ProductFacetNavigationComponent.prototype.queryCodec;
+    /**
+     * @type {?}
+     * @private
+     */
+    ProductFacetNavigationComponent.prototype.collapsedFacets;
+    /** @type {?} */
+    ProductFacetNavigationComponent.prototype.searchResult$;
+    /** @type {?} */
+    ProductFacetNavigationComponent.prototype.visibleFacets$;
+    /**
+     * @type {?}
+     * @private
+     */
+    ProductFacetNavigationComponent.prototype.modalService;
+    /**
+     * @type {?}
+     * @private
+     */
+    ProductFacetNavigationComponent.prototype.activatedRoute;
+    /**
+     * @type {?}
+     * @private
+     */
+    ProductFacetNavigationComponent.prototype.productListComponentService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ProductGridItemComponent = /** @class */ (function () {
+    function ProductGridItemComponent() {
+    }
+    ProductGridItemComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-product-grid-item',
+                    template: "<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-image-container\"\n>\n  <cx-media\n    class=\"cx-product-image\"\n    [container]=\"product.images?.PRIMARY\"\n    format=\"product\"\n    [alt]=\"product.summary\"\n  ></cx-media>\n</a>\n<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-name\"\n  [innerHTML]=\"product.nameHtml\"\n></a>\n\n<div class=\"cx-product-rating\">\n  <cx-star-rating\n    *ngIf=\"product.averageRating\"\n    [rating]=\"product?.averageRating\"\n    [disabled]=\"true\"\n  ></cx-star-rating>\n  <div *ngIf=\"!product.averageRating\">\n    {{ 'productDetails.noReviews' | cxTranslate }}\n  </div>\n</div>\n<div class=\"cx-product-price-container\">\n  <div class=\"cx-product-price\" aria-label=\"Product price\">\n    {{ product.price?.formattedValue }}\n  </div>\n</div>\n\n<cx-add-to-cart\n  *ngIf=\"product.stock?.stockLevelStatus !== 'outOfStock'\"\n  [showQuantity]=\"false\"\n  [product]=\"product\"\n></cx-add-to-cart>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    ProductGridItemComponent.propDecorators = {
+        product: [{ type: Input }]
+    };
+    return ProductGridItemComponent;
+}());
+if (false) {
+    /** @type {?} */
+    ProductGridItemComponent.prototype.product;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ProductListItemComponent = /** @class */ (function () {
+    function ProductListItemComponent() {
+    }
+    ProductListItemComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-product-list-item',
+                    template: "<div class=\"row\">\n  <div class=\"col-12 col-md-4\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-image-container\"\n    >\n      <cx-media\n        class=\"cx-product-image\"\n        [container]=\"product.images?.PRIMARY\"\n        format=\"product\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n    </a>\n  </div>\n  <div class=\"col-12 col-md-8\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-name\"\n      [innerHtml]=\"product.nameHtml\"\n    ></a>\n    <cx-star-rating\n      *ngIf=\"product.averageRating\"\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div *ngIf=\"!product.averageRating\">\n      {{ 'productDetails.noReviews' | cxTranslate }}\n    </div>\n    <div class=\"cx-product-price\" aria-label=\"Product price\">\n      {{ product.price?.formattedValue }}\n    </div>\n    <div class=\"row\">\n      <div class=\"col-12 col-md-8\">\n        <p class=\"cx-product-summary\" [innerHtml]=\"product.summary\">\n          {{ product.summary }}\n        </p>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <cx-add-to-cart\n          *ngIf=\"product.stock?.stockLevelStatus !== 'outOfStock'\"\n          [showQuantity]=\"false\"\n          [product]=\"product\"\n        ></cx-add-to-cart>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    ProductListItemComponent.propDecorators = {
+        product: [{ type: Input }]
+    };
+    return ProductListItemComponent;
+}());
+if (false) {
+    /** @type {?} */
+    ProductListItemComponent.prototype.product;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var ProductListModule = /** @class */ (function () {
     function ProductListModule() {
     }
@@ -23324,6 +24364,7 @@ var ProductListModule = /** @class */ (function () {
                         ProductListItemComponent,
                         ProductGridItemComponent,
                         ProductViewComponent,
+                        ProductScrollComponent,
                     ],
                     entryComponents: [ProductListComponent, ProductFacetNavigationComponent],
                 },] }
@@ -23456,180 +24497,6 @@ if (false) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var ProductReviewsComponent = /** @class */ (function () {
-    function ProductReviewsComponent(reviewService, currentProductService, fb) {
-        var _this = this;
-        this.reviewService = reviewService;
-        this.currentProductService = currentProductService;
-        this.fb = fb;
-        this.isWritingReview = false;
-        // TODO: configurable
-        this.initialMaxListItems = 5;
-        this.product$ = this.currentProductService.getProduct();
-        this.reviews$ = this.product$.pipe(filter((/**
-         * @param {?} p
-         * @return {?}
-         */
-        function (p) { return !!p; })), switchMap((/**
-         * @param {?} product
-         * @return {?}
-         */
-        function (product) { return _this.reviewService.getByProductCode(product.code); })), tap((/**
-         * @return {?}
-         */
-        function () {
-            _this.resetReviewForm();
-            _this.maxListItems = _this.initialMaxListItems;
-        })));
-    }
-    /**
-     * @return {?}
-     */
-    ProductReviewsComponent.prototype.initiateWriteReview = /**
-     * @return {?}
-     */
-    function () {
-        this.isWritingReview = true;
-    };
-    /**
-     * @return {?}
-     */
-    ProductReviewsComponent.prototype.cancelWriteReview = /**
-     * @return {?}
-     */
-    function () {
-        this.isWritingReview = false;
-        this.resetReviewForm();
-    };
-    /**
-     * @param {?} rating
-     * @return {?}
-     */
-    ProductReviewsComponent.prototype.setRating = /**
-     * @param {?} rating
-     * @return {?}
-     */
-    function (rating) {
-        this.reviewForm.controls.rating.setValue(rating);
-    };
-    /**
-     * @param {?} product
-     * @return {?}
-     */
-    ProductReviewsComponent.prototype.submitReview = /**
-     * @param {?} product
-     * @return {?}
-     */
-    function (product) {
-        /** @type {?} */
-        var reviewFormControls = this.reviewForm.controls;
-        /** @type {?} */
-        var review = {
-            headline: reviewFormControls.title.value,
-            comment: reviewFormControls.comment.value,
-            rating: reviewFormControls.rating.value,
-            alias: reviewFormControls.reviewerName.value,
-        };
-        this.reviewService.add(product.code, review);
-        this.isWritingReview = false;
-        this.resetReviewForm();
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    ProductReviewsComponent.prototype.resetReviewForm = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        this.reviewForm = this.fb.group({
-            title: ['', Validators.required],
-            comment: ['', Validators.required],
-            rating: [0, [Validators.min(1), Validators.max(5)]],
-            reviewerName: '',
-        });
-    };
-    ProductReviewsComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-product-reviews',
-                    template: "<div class=\"container\" *ngIf=\"product$ | async as product\">\n  <h2>\n    {{ 'productDetails.reviews' | cxTranslate }} ({{ product.numberOfReviews }})\n  </h2>\n  <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n    <div class=\"header\">\n      <h3>{{ 'productReview.overallRating' | cxTranslate }}</h3>\n      <button class=\"btn btn-primary\" (click)=\"initiateWriteReview()\">\n        {{ 'productReview.writeReview' | cxTranslate }}\n      </button>\n      <cx-star-rating\n        class=\"rating\"\n        [rating]=\"product.averageRating\"\n        [disabled]=\"true\"\n      ></cx-star-rating>\n    </div>\n\n    <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n      <ng-container *ngIf=\"reviews$ | async as reviews\">\n        <div\n          class=\"review\"\n          tabindex=\"0\"\n          *ngFor=\"let review of reviews | slice: 0:maxListItems\"\n        >\n          <div class=\"title\">{{ review.headline }}</div>\n          <cx-star-rating\n            [rating]=\"review.rating\"\n            [disabled]=\"true\"\n          ></cx-star-rating>\n          <div class=\"name\">\n            {{ review.alias ? review.alias : review.principal?.name }}\n          </div>\n          <div class=\"date\">{{ review.date | cxDate }}</div>\n          <div class=\"text\">{{ review.comment }}</div>\n        </div>\n        <div *ngIf=\"reviews.length > initialMaxListItems\">\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"maxListItems = reviews.length\"\n            *ngIf=\"maxListItems === initialMaxListItems\"\n          >\n            {{ 'productReview.more' | cxTranslate }}\n          </button>\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"maxListItems = initialMaxListItems\"\n            *ngIf=\"maxListItems !== initialMaxListItems\"\n          >\n            {{ 'productReview.less' | cxTranslate }}\n          </button>\n        </div>\n      </ng-container>\n    </ng-container>\n  </ng-container>\n\n  <ng-template #writeReview>\n    <form [formGroup]=\"reviewForm\" (ngSubmit)=\"submitReview(product)\">\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.reviewTitle' | cxTranslate\n          }}</span>\n          <input type=\"text\" class=\"form-control\" formControlName=\"title\" />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.writeYourComments' | cxTranslate\n          }}</span>\n          <textarea\n            class=\"form-control\"\n            rows=\"3\"\n            formControlName=\"comment\"\n          ></textarea>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.rating' | cxTranslate\n          }}</span>\n          <cx-star-rating (change)=\"setRating($event)\"></cx-star-rating>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.reviewerName' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            formControlName=\"reviewerName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group row\">\n        <div class=\"col-12 col-md-4\">\n          <button\n            type=\"submit\"\n            class=\"btn btn-block btn-secondary\"\n            (click)=\"cancelWriteReview()\"\n          >\n            {{ 'common.cancel' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-12 col-md-4\">\n          <button\n            type=\"submit\"\n            class=\"btn btn-block btn-primary\"\n            [ngClass]=\"{ 'submit-btn': reviewForm.valid }\"\n            [disabled]=\"!reviewForm.valid\"\n          >\n            {{ 'common.submit' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </form>\n  </ng-template>\n</div>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                }] }
-    ];
-    /** @nocollapse */
-    ProductReviewsComponent.ctorParameters = function () { return [
-        { type: ProductReviewService },
-        { type: CurrentProductService },
-        { type: FormBuilder }
-    ]; };
-    return ProductReviewsComponent;
-}());
-if (false) {
-    /** @type {?} */
-    ProductReviewsComponent.prototype.isWritingReview;
-    /** @type {?} */
-    ProductReviewsComponent.prototype.initialMaxListItems;
-    /** @type {?} */
-    ProductReviewsComponent.prototype.maxListItems;
-    /** @type {?} */
-    ProductReviewsComponent.prototype.reviewForm;
-    /** @type {?} */
-    ProductReviewsComponent.prototype.product$;
-    /** @type {?} */
-    ProductReviewsComponent.prototype.reviews$;
-    /**
-     * @type {?}
-     * @protected
-     */
-    ProductReviewsComponent.prototype.reviewService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    ProductReviewsComponent.prototype.currentProductService;
-    /**
-     * @type {?}
-     * @private
-     */
-    ProductReviewsComponent.prototype.fb;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var ProductReviewsModule = /** @class */ (function () {
-    function ProductReviewsModule() {
-    }
-    ProductReviewsModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        CommonModule,
-                        ReactiveFormsModule,
-                        FormsModule,
-                        I18nModule,
-                        StarRatingModule,
-                        ConfigModule.withConfig((/** @type {?} */ ({
-                            cmsComponents: {
-                                ProductReviewsTabComponent: {
-                                    component: ProductReviewsComponent,
-                                },
-                            },
-                        }))),
-                    ],
-                    declarations: [ProductReviewsComponent],
-                    entryComponents: [ProductReviewsComponent],
-                    exports: [ProductReviewsComponent],
-                },] }
-    ];
-    return ProductReviewsModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 var ProductAttributesModule = /** @class */ (function () {
     function ProductAttributesModule() {
     }
@@ -23725,6 +24592,184 @@ var ProductDetailsTabModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var ProductReviewsComponent = /** @class */ (function () {
+    function ProductReviewsComponent(reviewService, currentProductService, fb) {
+        var _this = this;
+        this.reviewService = reviewService;
+        this.currentProductService = currentProductService;
+        this.fb = fb;
+        this.isWritingReview = false;
+        // TODO: configurable
+        this.initialMaxListItems = 5;
+        this.product$ = this.currentProductService.getProduct();
+        this.reviews$ = this.product$.pipe(filter((/**
+         * @param {?} p
+         * @return {?}
+         */
+        function (p) { return !!p; })), map((/**
+         * @param {?} p
+         * @return {?}
+         */
+        function (p) { return p.code; })), distinctUntilChanged(), switchMap((/**
+         * @param {?} productCode
+         * @return {?}
+         */
+        function (productCode) { return _this.reviewService.getByProductCode(productCode); })), tap((/**
+         * @return {?}
+         */
+        function () {
+            _this.resetReviewForm();
+            _this.maxListItems = _this.initialMaxListItems;
+        })));
+    }
+    /**
+     * @return {?}
+     */
+    ProductReviewsComponent.prototype.initiateWriteReview = /**
+     * @return {?}
+     */
+    function () {
+        this.isWritingReview = true;
+    };
+    /**
+     * @return {?}
+     */
+    ProductReviewsComponent.prototype.cancelWriteReview = /**
+     * @return {?}
+     */
+    function () {
+        this.isWritingReview = false;
+        this.resetReviewForm();
+    };
+    /**
+     * @param {?} rating
+     * @return {?}
+     */
+    ProductReviewsComponent.prototype.setRating = /**
+     * @param {?} rating
+     * @return {?}
+     */
+    function (rating) {
+        this.reviewForm.controls.rating.setValue(rating);
+    };
+    /**
+     * @param {?} product
+     * @return {?}
+     */
+    ProductReviewsComponent.prototype.submitReview = /**
+     * @param {?} product
+     * @return {?}
+     */
+    function (product) {
+        /** @type {?} */
+        var reviewFormControls = this.reviewForm.controls;
+        /** @type {?} */
+        var review = {
+            headline: reviewFormControls.title.value,
+            comment: reviewFormControls.comment.value,
+            rating: reviewFormControls.rating.value,
+            alias: reviewFormControls.reviewerName.value,
+        };
+        this.reviewService.add(product.code, review);
+        this.isWritingReview = false;
+        this.resetReviewForm();
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    ProductReviewsComponent.prototype.resetReviewForm = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        this.reviewForm = this.fb.group({
+            title: ['', Validators.required],
+            comment: ['', Validators.required],
+            rating: [0, [Validators.min(1), Validators.max(5)]],
+            reviewerName: '',
+        });
+    };
+    ProductReviewsComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-product-reviews',
+                    template: "<div class=\"container\" *ngIf=\"product$ | async as product\">\n  <h2>\n    {{ 'productDetails.reviews' | cxTranslate }} ({{ product.numberOfReviews }})\n  </h2>\n  <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n    <div class=\"header\">\n      <h3>{{ 'productReview.overallRating' | cxTranslate }}</h3>\n      <button class=\"btn btn-primary\" (click)=\"initiateWriteReview()\">\n        {{ 'productReview.writeReview' | cxTranslate }}\n      </button>\n      <cx-star-rating\n        *ngIf=\"product.averageRating\"\n        class=\"rating\"\n        [rating]=\"product.averageRating\"\n        [disabled]=\"true\"\n      ></cx-star-rating>\n      <div class=\"rating\" *ngIf=\"!product.averageRating\">\n        {{ 'productDetails.noReviews' | cxTranslate }}\n      </div>\n    </div>\n\n    <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n      <ng-container *ngIf=\"reviews$ | async as reviews\">\n        <div\n          class=\"review\"\n          tabindex=\"0\"\n          *ngFor=\"let review of reviews | slice: 0:maxListItems\"\n        >\n          <div class=\"title\">{{ review.headline }}</div>\n          <cx-star-rating\n            [rating]=\"review.rating\"\n            [disabled]=\"true\"\n          ></cx-star-rating>\n          <div class=\"name\">\n            {{ review.alias ? review.alias : review.principal?.name }}\n          </div>\n          <div class=\"date\">{{ review.date | cxDate }}</div>\n          <div class=\"text\">{{ review.comment }}</div>\n        </div>\n        <div *ngIf=\"reviews.length > initialMaxListItems\">\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"maxListItems = reviews.length\"\n            *ngIf=\"maxListItems === initialMaxListItems\"\n          >\n            {{ 'productReview.more' | cxTranslate }}\n          </button>\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"maxListItems = initialMaxListItems\"\n            *ngIf=\"maxListItems !== initialMaxListItems\"\n          >\n            {{ 'productReview.less' | cxTranslate }}\n          </button>\n        </div>\n      </ng-container>\n    </ng-container>\n  </ng-container>\n\n  <ng-template #writeReview>\n    <form [formGroup]=\"reviewForm\" (ngSubmit)=\"submitReview(product)\">\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.reviewTitle' | cxTranslate\n          }}</span>\n          <input type=\"text\" class=\"form-control\" formControlName=\"title\" />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.writeYourComments' | cxTranslate\n          }}</span>\n          <textarea\n            class=\"form-control\"\n            rows=\"3\"\n            formControlName=\"comment\"\n          ></textarea>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.rating' | cxTranslate\n          }}</span>\n          <cx-star-rating (change)=\"setRating($event)\"></cx-star-rating>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.reviewerName' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            formControlName=\"reviewerName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group row\">\n        <div class=\"col-12 col-md-4\">\n          <button\n            type=\"submit\"\n            class=\"btn btn-block btn-secondary\"\n            (click)=\"cancelWriteReview()\"\n          >\n            {{ 'common.cancel' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-12 col-md-4\">\n          <button\n            type=\"submit\"\n            class=\"btn btn-block btn-primary\"\n            [ngClass]=\"{ 'submit-btn': reviewForm.valid }\"\n            [disabled]=\"!reviewForm.valid\"\n          >\n            {{ 'common.submit' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </form>\n  </ng-template>\n</div>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    /** @nocollapse */
+    ProductReviewsComponent.ctorParameters = function () { return [
+        { type: ProductReviewService },
+        { type: CurrentProductService },
+        { type: FormBuilder }
+    ]; };
+    return ProductReviewsComponent;
+}());
+if (false) {
+    /** @type {?} */
+    ProductReviewsComponent.prototype.isWritingReview;
+    /** @type {?} */
+    ProductReviewsComponent.prototype.initialMaxListItems;
+    /** @type {?} */
+    ProductReviewsComponent.prototype.maxListItems;
+    /** @type {?} */
+    ProductReviewsComponent.prototype.reviewForm;
+    /** @type {?} */
+    ProductReviewsComponent.prototype.product$;
+    /** @type {?} */
+    ProductReviewsComponent.prototype.reviews$;
+    /**
+     * @type {?}
+     * @protected
+     */
+    ProductReviewsComponent.prototype.reviewService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    ProductReviewsComponent.prototype.currentProductService;
+    /**
+     * @type {?}
+     * @private
+     */
+    ProductReviewsComponent.prototype.fb;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ProductReviewsModule = /** @class */ (function () {
+    function ProductReviewsModule() {
+    }
+    ProductReviewsModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        ReactiveFormsModule,
+                        FormsModule,
+                        I18nModule,
+                        StarRatingModule,
+                        ConfigModule.withConfig((/** @type {?} */ ({
+                            cmsComponents: {
+                                ProductReviewsTabComponent: {
+                                    component: ProductReviewsComponent,
+                                },
+                            },
+                        }))),
+                    ],
+                    declarations: [ProductReviewsComponent],
+                    entryComponents: [ProductReviewsComponent],
+                    exports: [ProductReviewsComponent],
+                },] }
+    ];
+    return ProductReviewsModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var ProductTabsModule = /** @class */ (function () {
     function ProductTabsModule() {
     }
@@ -23749,204 +24794,377 @@ var ProductTabsModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var ProductImagesComponent = /** @class */ (function () {
-    function ProductImagesComponent(currentProductService) {
-        var _this = this;
-        this.currentProductService = currentProductService;
-        this.mainMediaContainer = new BehaviorSubject(null);
-        this.product$ = this.currentProductService.getProduct().pipe(filter(Boolean), distinctUntilChanged(), tap((/**
-         * @param {?} p
-         * @return {?}
-         */
-        function (p) {
-            return _this.mainMediaContainer.next(p.images ? p.images.PRIMARY : {});
-        })));
-        this.thumbs$ = this.product$.pipe(map((/**
-         * @param {?} product
-         * @return {?}
-         */
-        function (product) { return _this.createThumbs(product); })), tap((/**
-         * @param {?} thumbs
-         * @return {?}
-         */
-        function (thumbs) {
-            _this.isThumbsEmpty = thumbs.length === 0;
-        })));
-        this.mainImage$ = combineLatest([this.product$, this.mainMediaContainer]).pipe(map((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        function (_a) {
-            var _b = __read(_a, 2), container = _b[1];
-            return container;
-        })));
+var StockNotificationDialogComponent = /** @class */ (function () {
+    function StockNotificationDialogComponent(modalService, interestsService) {
+        this.modalService = modalService;
+        this.interestsService = interestsService;
+        this.enabledPrefs = [];
     }
     /**
-     * @param {?} item
      * @return {?}
      */
-    ProductImagesComponent.prototype.openImage = /**
-     * @param {?} item
+    StockNotificationDialogComponent.prototype.close = /**
      * @return {?}
      */
-    function (item) {
-        this.mainMediaContainer.next(item);
+    function () {
+        this.modalService.dismissActiveModal();
     };
     /**
-     * @param {?} thumbnail
      * @return {?}
      */
-    ProductImagesComponent.prototype.isActive = /**
-     * @param {?} thumbnail
+    StockNotificationDialogComponent.prototype.ngOnDestroy = /**
      * @return {?}
      */
-    function (thumbnail) {
-        return this.mainMediaContainer.pipe(filter(Boolean), map((/**
-         * @param {?} container
-         * @return {?}
-         */
-        function (container) {
-            return (container.zoom &&
-                container.zoom.url &&
-                thumbnail.zoom &&
-                thumbnail.zoom.url &&
-                container.zoom.url === thumbnail.zoom.url);
-        })));
-    };
-    /** find the index of the main media in the list of media */
-    /**
-     * find the index of the main media in the list of media
-     * @param {?} thumbs
-     * @return {?}
-     */
-    ProductImagesComponent.prototype.getActive = /**
-     * find the index of the main media in the list of media
-     * @param {?} thumbs
-     * @return {?}
-     */
-    function (thumbs) {
-        return this.mainMediaContainer.pipe(filter(Boolean), map((/**
-         * @param {?} container
-         * @return {?}
-         */
-        function (container) {
-            /** @type {?} */
-            var current = thumbs.find((/**
-             * @param {?} t
+    function () {
+        var _this = this;
+        if (this.subscribeSuccess$) {
+            this.subscribeSuccess$
+                .subscribe((/**
+             * @param {?} success
              * @return {?}
              */
-            function (t) {
-                return t.media &&
-                    container.zoom &&
-                    t.media.container &&
-                    t.media.container.zoom &&
-                    t.media.container.zoom.url === container.zoom.url;
-            }));
-            return thumbs.indexOf(current);
-        })));
-    };
-    /**
-     * Return an array of CarouselItems for the product thumbnails.
-     * In case there are less then 2 thumbs, we return null.
-     */
-    /**
-     * Return an array of CarouselItems for the product thumbnails.
-     * In case there are less then 2 thumbs, we return null.
-     * @private
-     * @param {?} product
-     * @return {?}
-     */
-    ProductImagesComponent.prototype.createThumbs = /**
-     * Return an array of CarouselItems for the product thumbnails.
-     * In case there are less then 2 thumbs, we return null.
-     * @private
-     * @param {?} product
-     * @return {?}
-     */
-    function (product) {
-        if (!product.images ||
-            !product.images.GALLERY ||
-            product.images.GALLERY.length < 2) {
-            return [];
+            function (success) {
+                if (success) {
+                    _this.interestsService.resetAddInterestState();
+                }
+            }))
+                .unsubscribe();
         }
-        return ((/** @type {?} */ (product.images.GALLERY))).map((/**
-         * @param {?} c
-         * @return {?}
-         */
-        function (c) { return of({ container: c }); }));
     };
-    ProductImagesComponent.decorators = [
+    StockNotificationDialogComponent.decorators = [
         { type: Component, args: [{
-                    selector: 'cx-product-images',
-                    template: "<ng-container *ngIf=\"mainImage$ | async as main\">\n  <cx-media [container]=\"main\" format=\"zoom\"> </cx-media>\n</ng-container>\n\n<cx-carousel\n  *ngIf=\"!isThumbsEmpty\"\n  class=\"thumbs\"\n  [items]=\"thumbs$ | async\"\n  itemWidth=\"120px\"\n  [hideIndicators]=\"false\"\n  [template]=\"thumb\"\n></cx-carousel>\n\n<ng-template #thumb let-item=\"item\">\n  <cx-media\n    [container]=\"item.container\"\n    tabindex=\"0\"\n    format=\"thumbnail\"\n    (focus)=\"openImage(item.container)\"\n    [class.is-active]=\"isActive(item.container) | async\"\n  >\n  </cx-media>\n</ng-template>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush
+                    selector: 'cx-stock-notification-dialog',
+                    template: "<div class=\"cx-dialog-header modal-header\">\n  <div class=\"cx-dialog-title modal-title\">\n    {{ 'stockNotification.subscriptionDialog.header' | cxTranslate }}\n  </div>\n  <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"close()\">\n    <span aria-hidden=\"true\">&times;</span>\n  </button>\n</div>\n\n<ng-container *ngIf=\"subscribeSuccess$ | async; else loading\">\n  <div class=\"cx-dialog-body modal-body\">\n    <div class=\"container\">\n      <p>\n        {{\n          'stockNotification.subscriptionDialog.notifiedPrefix' | cxTranslate\n        }}\n      </p>\n      <p *ngFor=\"let preference of enabledPrefs\" class=\"channels\">\n        <span>{{ preference.channel }}</span\n        ><span *ngIf=\"preference.value\">{{ ': ' + preference.value }}</span>\n      </p>\n      <p>\n        {{\n          'stockNotification.subscriptionDialog.notifiedSuffix' | cxTranslate\n        }}\n      </p>\n      <p>\n        {{\n          'stockNotification.subscriptionDialog.manageChannelsPrefix'\n            | cxTranslate\n        }}\n        <a\n          (click)=\"close()\"\n          [routerLink]=\"['/my-account/notification-preference']\"\n          class=\"link-prefs\"\n        >\n          {{\n            'stockNotification.subscriptionDialog.manageChannelsLink'\n              | cxTranslate\n          }}</a\n        >\n        {{\n          'stockNotification.subscriptionDialog.manageChannelsSuffix'\n            | cxTranslate\n        }}\n      </p>\n\n      <p>\n        {{\n          'stockNotification.subscriptionDialog.manageSubscriptionsPrefix'\n            | cxTranslate\n        }}\n        <a\n          (click)=\"close()\"\n          [routerLink]=\"['/my-account/my-interests']\"\n          class=\"link-interests\"\n        >\n          {{\n            'stockNotification.subscriptionDialog.manageSubscriptionsLink'\n              | cxTranslate\n          }}</a\n        >\n        {{\n          'stockNotification.subscriptionDialog.manageSubscriptionsSuffix'\n            | cxTranslate\n        }}\n      </p>\n      <div class=\"row\">\n        <div class=\"cx-dialog-actions col-sm-12 col-md-3 offset-md-9\">\n          <button\n            class=\"btn btn-primary btn-block btn-ok\"\n            type=\"button\"\n            (click)=\"close()\"\n          >\n            {{ 'stockNotification.subscriptionDialog.okBtn' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</ng-container>\n\n<ng-template #loading>\n  <div class=\"cx-dialog-body modal-body\">\n    <p>\n      {{ 'stockNotification.subscriptionDialog.subscribing' | cxTranslate }}\n    </p>\n    <div class=\"cx-dialog-row\">\n      <div class=\"col-sm-12\">\n        <cx-spinner></cx-spinner>\n      </div>\n    </div>\n  </div>\n</ng-template>\n"
                 }] }
     ];
     /** @nocollapse */
-    ProductImagesComponent.ctorParameters = function () { return [
-        { type: CurrentProductService }
+    StockNotificationDialogComponent.ctorParameters = function () { return [
+        { type: ModalService },
+        { type: UserInterestsService }
     ]; };
-    return ProductImagesComponent;
+    return StockNotificationDialogComponent;
 }());
 if (false) {
+    /** @type {?} */
+    StockNotificationDialogComponent.prototype.subscribeSuccess$;
+    /** @type {?} */
+    StockNotificationDialogComponent.prototype.enabledPrefs;
     /**
      * @type {?}
      * @private
      */
-    ProductImagesComponent.prototype.mainMediaContainer;
+    StockNotificationDialogComponent.prototype.modalService;
     /**
      * @type {?}
      * @private
      */
-    ProductImagesComponent.prototype.product$;
-    /** @type {?} */
-    ProductImagesComponent.prototype.isThumbsEmpty;
-    /** @type {?} */
-    ProductImagesComponent.prototype.thumbs$;
-    /** @type {?} */
-    ProductImagesComponent.prototype.mainImage$;
-    /**
-     * @type {?}
-     * @private
-     */
-    ProductImagesComponent.prototype.currentProductService;
+    StockNotificationDialogComponent.prototype.interestsService;
 }
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var ProductImagesModule = /** @class */ (function () {
-    function ProductImagesModule() {
+var StockNotificationComponent = /** @class */ (function () {
+    function StockNotificationComponent(authService, currentProductService, globalMessageService, translationService, interestsService, modalService, notificationPrefService) {
+        this.authService = authService;
+        this.currentProductService = currentProductService;
+        this.globalMessageService = globalMessageService;
+        this.translationService = translationService;
+        this.interestsService = interestsService;
+        this.modalService = modalService;
+        this.notificationPrefService = notificationPrefService;
+        this.anonymous = true;
+        this.enabledPrefs = [];
+        this.subscriptions = new Subscription();
     }
-    ProductImagesModule.decorators = [
+    /**
+     * @return {?}
+     */
+    StockNotificationComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.outOfStock$ = combineLatest([
+            this.currentProductService.getProduct().pipe(filter(Boolean)),
+            this.authService.getOccUserId(),
+        ]).pipe(tap((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 2), product = _b[0], userId = _b[1];
+            _this.productCode = product.code;
+            if (userId !== OCC_USER_ID_ANONYMOUS) {
+                _this.anonymous = false;
+                _this.notificationPrefService.loadPreferences();
+                _this.interestsService.loadProductInterests(null, null, null, product.code, NotificationType.BACK_IN_STOCK);
+            }
+        })), map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 1), product = _b[0];
+            return !!product.stock && product.stock.stockLevelStatus === 'outOfStock';
+        })));
+        this.hasProductInterests$ = this.interestsService
+            .getProductInterests()
+            .pipe(map((/**
+         * @param {?} interests
+         * @return {?}
+         */
+        function (interests) { return !!interests.results && interests.results.length === 1; })));
+        this.subscribeSuccess$ = this.interestsService.getAddProductInterestSuccess();
+        this.isRemoveInterestLoading$ = this.interestsService.getRemoveProdutInterestLoading();
+        this.prefsEnabled$ = this.notificationPrefService
+            .getEnabledPreferences()
+            .pipe(tap((/**
+         * @param {?} prefs
+         * @return {?}
+         */
+        function (prefs) { return (_this.enabledPrefs = prefs); })), map((/**
+         * @param {?} prefs
+         * @return {?}
+         */
+        function (prefs) { return prefs.length > 0; })));
+        this.subscriptions.add(this.interestsService.getAddProductInterestError().subscribe((/**
+         * @param {?} error
+         * @return {?}
+         */
+        function (error) {
+            if (error) {
+                _this.onInterestAddingError();
+            }
+        })));
+        this.subscriptions.add(this.interestsService
+            .getRemoveProdutInterestSuccess()
+            .subscribe((/**
+         * @param {?} success
+         * @return {?}
+         */
+        function (success) {
+            if (success) {
+                _this.onInterestRemovingSuccess();
+            }
+        })));
+    };
+    /**
+     * @return {?}
+     */
+    StockNotificationComponent.prototype.subscribe = /**
+     * @return {?}
+     */
+    function () {
+        this.openDialog();
+        this.interestsService.addProductInterest(this.productCode, NotificationType.BACK_IN_STOCK);
+    };
+    /**
+     * @return {?}
+     */
+    StockNotificationComponent.prototype.unsubscribe = /**
+     * @return {?}
+     */
+    function () {
+        this.interestsService.removeProdutInterest({
+            product: {
+                code: this.productCode,
+            },
+            productInterestEntry: [
+                {
+                    interestType: NotificationType.BACK_IN_STOCK,
+                },
+            ],
+        }, true);
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    StockNotificationComponent.prototype.onInterestRemovingSuccess = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.subscriptions.add(this.translationService
+            .translate('stockNotification.unsubscribeSuccess')
+            .pipe(first())
+            .subscribe((/**
+         * @param {?} text
+         * @return {?}
+         */
+        function (text) {
+            return _this.globalMessageService.add(text, GlobalMessageType.MSG_TYPE_INFO);
+        })));
+        this.interestsService.resetRemoveInterestState();
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    StockNotificationComponent.prototype.onInterestAddingError = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        this.modalService.dismissActiveModal();
+        this.interestsService.resetAddInterestState();
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    StockNotificationComponent.prototype.openDialog = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var modalInstance = this.modalService.open(StockNotificationDialogComponent, {
+            centered: true,
+            size: 'lg',
+        }).componentInstance;
+        modalInstance.subscribeSuccess$ = this.subscribeSuccess$;
+        modalInstance.enabledPrefs = this.enabledPrefs;
+    };
+    /**
+     * @return {?}
+     */
+    StockNotificationComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this.subscriptions.unsubscribe();
+        this.interestsService.clearProductInterests();
+        this.notificationPrefService.clearPreferences();
+    };
+    StockNotificationComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-stock-notification',
+                    template: "<ng-container *ngIf=\"outOfStock$ | async\">\n  <ng-container *ngIf=\"!(hasProductInterests$ | async); else stopNotify\">\n    <ng-container *ngIf=\"prefsEnabled$ | async; else disableNotify\">\n      <div class=\"stock-notification-notes\">\n        <label>{{ 'stockNotification.getNotified' | cxTranslate }}</label>\n      </div>\n      <button\n        class=\"btn btn-primary btn-block btn-notify\"\n        type=\"button\"\n        (click)=\"subscribe()\"\n      >\n        {{ 'stockNotification.notifyMe' | cxTranslate }}\n      </button>\n    </ng-container>\n  </ng-container>\n</ng-container>\n\n<ng-template #disableNotify>\n  <div class=\"stock-notification-notes\">\n    <label>\n      <ng-container *ngIf=\"anonymous; else loggedIn\">\n        <a [routerLink]=\"{ cxRoute: 'login' } | cxUrl\">\n          {{ 'miniLogin.signInRegister' | cxTranslate }}</a\n        >\n        {{ 'stockNotification.getNotifySuffix' | cxTranslate }}<br />\n      </ng-container>\n      <ng-template #loggedIn>\n        {{ 'stockNotification.getNotify' | cxTranslate }}<br />\n        {{ 'stockNotification.activateChannelsPrefix' | cxTranslate\n        }}<a [routerLink]=\"['/my-account/notification-preference']\">{{\n          'stockNotification.channelsLink' | cxTranslate\n        }}</a\n        >{{ 'stockNotification.activateChannelsSuffix' | cxTranslate }}\n      </ng-template>\n    </label>\n  </div>\n  <button\n    class=\"btn btn-primary btn-block btn-notify\"\n    type=\"button\"\n    disabled=\"true\"\n  >\n    {{ 'stockNotification.notifyMe' | cxTranslate }}\n  </button>\n</ng-template>\n\n<ng-template #stopNotify>\n  <ng-container *ngIf=\"!(isRemoveInterestLoading$ | async); else loading\">\n    <div class=\"stock-notification-notes\">\n      <label>{{ 'stockNotification.notified' | cxTranslate }}</label>\n    </div>\n    <button\n      class=\"btn btn-primary btn-block btn-stop-notify\"\n      type=\"button\"\n      (click)=\"unsubscribe()\"\n    >\n      {{ 'stockNotification.stopNotify' | cxTranslate }}\n    </button>\n  </ng-container>\n</ng-template>\n\n<ng-template #loading>\n  <div class=\"cx-dialog-body modal-body\">\n    <div class=\"cx-dialog-row\">\n      <div class=\"col-sm-12\">\n        <cx-spinner></cx-spinner>\n      </div>\n    </div>\n  </div>\n</ng-template>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    /** @nocollapse */
+    StockNotificationComponent.ctorParameters = function () { return [
+        { type: AuthService },
+        { type: CurrentProductService },
+        { type: GlobalMessageService },
+        { type: TranslationService },
+        { type: UserInterestsService },
+        { type: ModalService },
+        { type: UserNotificationPreferenceService }
+    ]; };
+    return StockNotificationComponent;
+}());
+if (false) {
+    /** @type {?} */
+    StockNotificationComponent.prototype.hasProductInterests$;
+    /** @type {?} */
+    StockNotificationComponent.prototype.prefsEnabled$;
+    /** @type {?} */
+    StockNotificationComponent.prototype.outOfStock$;
+    /** @type {?} */
+    StockNotificationComponent.prototype.isRemoveInterestLoading$;
+    /** @type {?} */
+    StockNotificationComponent.prototype.anonymous;
+    /**
+     * @type {?}
+     * @private
+     */
+    StockNotificationComponent.prototype.enabledPrefs;
+    /**
+     * @type {?}
+     * @private
+     */
+    StockNotificationComponent.prototype.productCode;
+    /**
+     * @type {?}
+     * @private
+     */
+    StockNotificationComponent.prototype.subscribeSuccess$;
+    /**
+     * @type {?}
+     * @private
+     */
+    StockNotificationComponent.prototype.subscriptions;
+    /**
+     * @type {?}
+     * @private
+     */
+    StockNotificationComponent.prototype.authService;
+    /**
+     * @type {?}
+     * @private
+     */
+    StockNotificationComponent.prototype.currentProductService;
+    /**
+     * @type {?}
+     * @private
+     */
+    StockNotificationComponent.prototype.globalMessageService;
+    /**
+     * @type {?}
+     * @private
+     */
+    StockNotificationComponent.prototype.translationService;
+    /**
+     * @type {?}
+     * @private
+     */
+    StockNotificationComponent.prototype.interestsService;
+    /**
+     * @type {?}
+     * @private
+     */
+    StockNotificationComponent.prototype.modalService;
+    /**
+     * @type {?}
+     * @private
+     */
+    StockNotificationComponent.prototype.notificationPrefService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var StockNotificationModule = /** @class */ (function () {
+    function StockNotificationModule() {
+    }
+    StockNotificationModule.decorators = [
         { type: NgModule, args: [{
+                    declarations: [StockNotificationComponent, StockNotificationDialogComponent],
                     imports: [
                         CommonModule,
-                        RouterModule,
-                        MediaModule,
-                        OutletModule,
                         ConfigModule.withConfig((/** @type {?} */ ({
                             cmsComponents: {
-                                ProductImagesComponent: {
-                                    component: ProductImagesComponent,
+                                StockNotificationComponent: {
+                                    component: StockNotificationComponent,
                                 },
                             },
                         }))),
-                        CarouselModule,
+                        RouterModule,
+                        I18nModule,
+                        SpinnerModule,
+                        UrlModule,
                     ],
-                    declarations: [ProductImagesComponent],
-                    entryComponents: [ProductImagesComponent],
-                    exports: [ProductImagesComponent],
+                    entryComponents: [
+                        StockNotificationComponent,
+                        StockNotificationDialogComponent,
+                    ],
+                    exports: [StockNotificationComponent, StockNotificationDialogComponent],
                 },] }
     ];
-    return ProductImagesModule;
+    return StockNotificationModule;
 }());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -25663,9 +26881,7 @@ var RegisterComponent = /** @class */ (function () {
          * @return {?}
          */
         function (titles) {
-            /** @type {?} */
-            var sortedTitles = titles.sort(sortTitles);
-            return sortedTitles;
+            return titles.sort(sortTitles);
         })));
         // TODO(issue:4237) Register flow
         if (this.isNewRegisterFlowEnabled) {
@@ -26026,128 +27242,6 @@ var UserComponentModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var WishListComponent = /** @class */ (function () {
-    function WishListComponent(wishListService, authService) {
-        this.wishListService = wishListService;
-        this.authService = authService;
-        this.wishList$ = this.wishListService.getWishList();
-        this.userLoggedIn$ = this.authService.isUserLoggedIn();
-        this.loading$ = this.wishListService.getWishListLoading();
-    }
-    WishListComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-wish-list',
-                    template: "<ng-container *ngIf=\"userLoggedIn$ | async\">\n  <div class=\"cx-page\" *ngIf=\"wishList$ | async as model\">\n    <ng-container *ngFor=\"let entry of model?.entries\">\n      <cx-wish-list-item\n        [cartEntry]=\"entry\"\n        class=\"cx-wish-list-item\"\n      ></cx-wish-list-item>\n    </ng-container>\n  </div>\n</ng-container>\n"
-                }] }
-    ];
-    /** @nocollapse */
-    WishListComponent.ctorParameters = function () { return [
-        { type: WishListService },
-        { type: AuthService }
-    ]; };
-    return WishListComponent;
-}());
-if (false) {
-    /** @type {?} */
-    WishListComponent.prototype.wishList$;
-    /** @type {?} */
-    WishListComponent.prototype.userLoggedIn$;
-    /** @type {?} */
-    WishListComponent.prototype.loading$;
-    /**
-     * @type {?}
-     * @protected
-     */
-    WishListComponent.prototype.wishListService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    WishListComponent.prototype.authService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var WishListItemComponent = /** @class */ (function () {
-    function WishListItemComponent(wishListService) {
-        this.wishListService = wishListService;
-    }
-    /**
-     * @param {?} entry
-     * @return {?}
-     */
-    WishListItemComponent.prototype.remove = /**
-     * @param {?} entry
-     * @return {?}
-     */
-    function (entry) {
-        this.wishListService.removeEntry(entry);
-    };
-    WishListItemComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-wish-list-item',
-                    template: "<div class=\"row\">\n  <div class=\"col-12 col-md-4\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: cartEntry.product } | cxUrl\"\n      class=\"cx-product-image-container\"\n    >\n      <cx-media\n        class=\"cx-product-image\"\n        [container]=\"cartEntry.product.images?.PRIMARY\"\n        format=\"product\"\n        [alt]=\"cartEntry.product.summary\"\n      ></cx-media>\n    </a>\n  </div>\n  <div class=\"col-12 col-md-8\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: cartEntry.product } | cxUrl\"\n      class=\"cx-product-name\"\n      [innerHtml]=\"cartEntry.product.name\"\n    ></a>\n    <cx-star-rating\n      [rating]=\"cartEntry.product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"cx-product-price\" aria-label=\"Product price\">\n      {{ cartEntry.basePrice?.formattedValue }}\n    </div>\n    <div class=\"row\">\n      <div class=\"col-12 col-md-8\"></div>\n      <div class=\"col-12 col-md-4\">\n        <cx-add-to-cart\n          *ngIf=\"cartEntry.product.stock.stockLevelStatus !== 'outOfStock'\"\n          [showQuantity]=\"false\"\n          [product]=\"cartEntry.product\"\n        ></cx-add-to-cart>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-12 col-md-8\"></div>\n      <div class=\"col-12 col-md-4\">\n        <button class=\"btn btn-link\" (click)=\"remove(cartEntry)\">\n          {{ 'wishList.remove' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                }] }
-    ];
-    /** @nocollapse */
-    WishListItemComponent.ctorParameters = function () { return [
-        { type: WishListService }
-    ]; };
-    WishListItemComponent.propDecorators = {
-        cartEntry: [{ type: Input }]
-    };
-    return WishListItemComponent;
-}());
-if (false) {
-    /** @type {?} */
-    WishListItemComponent.prototype.cartEntry;
-    /**
-     * @type {?}
-     * @protected
-     */
-    WishListItemComponent.prototype.wishListService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var WishListModule = /** @class */ (function () {
-    function WishListModule() {
-    }
-    WishListModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        AddToCartModule,
-                        CommonModule,
-                        ConfigModule.withConfig((/** @type {?} */ ({
-                            cmsComponents: {
-                                WishListComponent: {
-                                    component: WishListComponent,
-                                },
-                            },
-                        }))),
-                        I18nModule,
-                        MediaModule,
-                        RouterModule,
-                        StarRatingModule,
-                        UrlModule,
-                    ],
-                    declarations: [WishListComponent, WishListItemComponent],
-                    entryComponents: [WishListComponent],
-                    exports: [WishListComponent, WishListItemComponent],
-                },] }
-    ];
-    return WishListModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 var CmsLibModule = /** @class */ (function () {
     function CmsLibModule() {
     }
@@ -26155,7 +27249,7 @@ var CmsLibModule = /** @class */ (function () {
         { type: NgModule, args: [{
                     imports: [
                         AnonymousConsentManagementBannerModule,
-                        AssistedServiceModule,
+                        AsmModule,
                         HamburgerMenuModule,
                         CmsParagraphModule,
                         LinkModule,
@@ -26192,17 +27286,14 @@ var CmsLibModule = /** @class */ (function () {
                         ResetPasswordModule,
                         BannerCarouselModule,
                         UserComponentModule,
-                        WishListModule,
+                        NotificationPreferenceModule,
+                        MyInterestsModule,
+                        StockNotificationModule,
                     ],
                 },] }
     ];
     return CmsLibModule;
 }());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 
 /**
  * @fileoverview added by tsickle
@@ -26604,7 +27695,6 @@ var StorefrontFoundationModule = /** @class */ (function () {
     StorefrontFoundationModule.decorators = [
         { type: NgModule, args: [{
                     imports: [
-                        AsmModule.forRoot(),
                         StateModule.forRoot(),
                         AuthModule.forRoot(),
                         AnonymousConsentsModule$1.forRoot(),
@@ -26667,6 +27757,9 @@ var StorefrontModule = /** @class */ (function () {
                             },
                         }),
                         EffectsModule.forRoot([]),
+                        // ASM module must be imported before the `AuthModule (which is imported in `StorefrontFoundationModule`)
+                        // since we might have conflicting interceptor logic. See #5461.
+                        AsmModule,
                         StorefrontFoundationModule,
                         MainModule,
                         SiteContextModule.forRoot(),
@@ -26755,5 +27848,5 @@ var B2cStorefrontModule = /** @class */ (function () {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, OnlyNumberDirective, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, AppliedCouponsComponent as ɵa, OnlyNumberDirectiveModule as ɵb, AddToHomeScreenService as ɵba, GuestRegisterFormComponent as ɵbb, ProductImagesModule as ɵbc, ProductImagesComponent as ɵbd, CheckoutLoginComponent as ɵbe, suffixUrlMatcher as ɵbf, addCmsRoute as ɵbg, htmlLangProvider as ɵbh, setHtmlLangAttribute as ɵbi, AnonymousConsentsModule as ɵbj, AnonymousConsentDialogComponent as ɵbk, RoutingModule as ɵbl, defaultStorefrontRoutesConfig as ɵbm, defaultRoutingConfig as ɵbn, AutoFocusDirectiveModule as ɵc, AddToWishListModule as ɵd, AddToWishListComponent as ɵe, defaultCheckoutConfig as ɵf, ExpressCheckoutService as ɵg, AssistedServiceModule as ɵh, AsmRootComponent as ɵi, AsmMainUiComponent as ɵj, CSAgentLoginFormComponent as ɵk, CustomerSelectionComponent as ɵl, CustomerEmulationComponent as ɵm, defaultQualtricsConfig as ɵn, defaultScrollConfig as ɵo, ProductScrollComponent as ɵp, ProductAttributesModule as ɵq, ProductDetailsTabModule as ɵr, ProductDetailsTabComponent as ɵs, CmsRoutesService as ɵt, CmsMappingService as ɵu, CmsI18nService as ɵv, CmsGuardsService as ɵw, TrackingEventsComponent as ɵx, ConsignmentTrackingComponent as ɵy, ComponentMapperService as ɵz };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AsmModule, AutoFocusDirective, AutoFocusDirectiveModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OnlyNumberDirective, OnlyNumberDirectiveModule, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewConfig, ViewConfigModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultScrollConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, AsmLoaderModule as ɵa, asmFactory as ɵb, htmlLangProvider as ɵba, setHtmlLangAttribute as ɵbb, AnonymousConsentsModule as ɵbc, AnonymousConsentDialogComponent as ɵbd, RoutingModule as ɵbe, defaultStorefrontRoutesConfig as ɵbf, defaultRoutingConfig as ɵbg, ComponentMapperService as ɵc, AsmEnablerService as ɵd, AsmMainUiComponent as ɵe, AsmComponentService as ɵf, CSAgentLoginFormComponent as ɵg, CustomerSelectionComponent as ɵh, AsmSessionTimerComponent as ɵi, FormatTimerPipe as ɵj, CustomerEmulationComponent as ɵk, AppliedCouponsComponent as ɵl, defaultCheckoutConfig as ɵm, ExpressCheckoutService as ɵn, defaultQualtricsConfig as ɵo, CmsRoutesService as ɵp, CmsMappingService as ɵq, CmsI18nService as ɵr, CmsGuardsService as ɵs, TrackingEventsComponent as ɵt, ConsignmentTrackingComponent as ɵu, AddToHomeScreenService as ɵv, GuestRegisterFormComponent as ɵw, CheckoutLoginComponent as ɵx, suffixUrlMatcher as ɵy, addCmsRoute as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map

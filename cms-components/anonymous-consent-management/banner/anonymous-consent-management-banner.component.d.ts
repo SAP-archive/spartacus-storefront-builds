@@ -6,7 +6,6 @@ export declare class AnonymousConsentManagementBannerComponent implements OnDest
     private modalService;
     private anonymousConsentsService;
     private subscriptions;
-    anonymousConsentsFeature: string;
     bannerVisible$: Observable<boolean>;
     constructor(modalService: ModalService, anonymousConsentsService: AnonymousConsentsService);
     viewDetails(): void;

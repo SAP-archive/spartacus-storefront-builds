@@ -1,0 +1,7 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export { NotificationPreferenceComponent } from './notification-preference.component';
+export { NotificationPreferenceModule } from './notification-preference.module';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJjbXMtY29tcG9uZW50cy9teWFjY291bnQvbm90aWZpY2F0aW9uLXByZWZlcmVuY2UvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLGdEQUFjLHFDQUFxQyxDQUFDO0FBQ3BELDZDQUFjLGtDQUFrQyxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0ICogZnJvbSAnLi9ub3RpZmljYXRpb24tcHJlZmVyZW5jZS5jb21wb25lbnQnO1xuZXhwb3J0ICogZnJvbSAnLi9ub3RpZmljYXRpb24tcHJlZmVyZW5jZS5tb2R1bGUnO1xuIl19

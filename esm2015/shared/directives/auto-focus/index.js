@@ -1,0 +1,7 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export { AutoFocusDirectiveModule } from './auto-focus.directive.module';
+export { AutoFocusDirective } from './auto-focus.directive';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJzaGFyZWQvZGlyZWN0aXZlcy9hdXRvLWZvY3VzL2luZGV4LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSx5Q0FBYywrQkFBK0IsQ0FBQztBQUM5QyxtQ0FBYyx3QkFBd0IsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCAqIGZyb20gJy4vYXV0by1mb2N1cy5kaXJlY3RpdmUubW9kdWxlJztcbmV4cG9ydCAqIGZyb20gJy4vYXV0by1mb2N1cy5kaXJlY3RpdmUnO1xuIl19

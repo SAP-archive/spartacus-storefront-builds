@@ -1,9 +1,11 @@
-import { CmsProductCarouselComponent as model, Product, ProductService } from '@spartacus/core';
+import { CmsProductCarouselComponent as model, FeatureConfigService, Product, ProductService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { CmsComponentData } from '../../../../cms-structure/page/model/cms-component-data';
 export declare class ProductCarouselComponent {
     protected componentData: CmsComponentData<model>;
     protected productService: ProductService;
+    protected features?: FeatureConfigService;
+    protected readonly PRODUCT_SCOPE: string;
     private componentData$;
     /**
      * returns an Obervable string for the title.
@@ -15,5 +17,5 @@ export declare class ProductCarouselComponent {
      * in the viewpoint.
      */
     items$: Observable<Observable<Product>[]>;
-    constructor(componentData: CmsComponentData<model>, productService: ProductService);
+    constructor(componentData: CmsComponentData<model>, productService: ProductService, features?: FeatureConfigService);
 }
