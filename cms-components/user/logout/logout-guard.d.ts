@@ -1,6 +1,6 @@
 import { CanActivate } from '@angular/router';
-import { Observable } from 'rxjs';
 import { AuthService, CmsService, RoutingService, SemanticPathService } from '@spartacus/core';
+import { Observable } from 'rxjs';
 export declare class LogoutGuard implements CanActivate {
     protected auth: AuthService;
     protected cms: CmsService;
