@@ -1,6 +1,6 @@
 import { CommonModule, isPlatformServer, isPlatformBrowser, DOCUMENT, Location } from '@angular/common';
 import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, EventEmitter, Output, isDevMode, ChangeDetectionStrategy, forwardRef, Renderer2, ViewChild, Directive, HostListener, Optional, Injector, Inject, PLATFORM_ID, INJECTOR, InjectionToken, TemplateRef, ComponentFactory, ViewContainerRef, ComponentFactoryResolver, NgZone, APP_INITIALIZER, RendererFactory2, ViewEncapsulation, ChangeDetectorRef, Pipe } from '@angular/core';
-import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, FeaturesConfigModule, CmsConfig, TranslationService, TranslationChunkService, CmsService, PageType, RoutingService, SemanticPathService, ProtectedRoutesGuard, AuthService, CartService, CartDataService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, DynamicAttributeService, PageRobotsMeta, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, CartVoucherService, OCC_USER_ID_ANONYMOUS, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, CmsPageTitleModule, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
+import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, FeaturesConfigModule, CmsConfig, TranslationService, TranslationChunkService, CmsService, PageType, RoutingService, SemanticPathService, ProtectedRoutesGuard, AuthService, CartService, CartDataService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, DynamicAttributeService, PageRobotsMeta, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, CartVoucherService, OCC_USER_ID_ANONYMOUS, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, CmsPageTitleModule, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
 import { Subscription, combineLatest, of, fromEvent, BehaviorSubject, concat, isObservable, from } from 'rxjs';
 import { take, distinctUntilChanged, tap, map, debounceTime, startWith, filter, switchMap, first, skipWhile, endWith, withLatestFrom, mergeMap, shareReplay, scan, pluck } from 'rxjs/operators';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
@@ -44,6 +44,8 @@ const ICON_TYPE = {
     COLLAPSE: 'COLLAPSE',
     RESET: 'RESET',
     CIRCLE: 'CIRCLE',
+    HEART: 'HEART',
+    EMPTY_HEART: 'EMPTY_HEART',
 };
 /**
  * @abstract
@@ -102,6 +104,8 @@ const fontawesomeIconConfig = {
             EXPAND: 'fas fa-plus',
             RESET: 'fas fa-times-circle',
             CIRCLE: 'fas fa-circle',
+            HEART: 'fas fa-heart',
+            EMPTY_HEART: 'far fa-heart',
         },
         resources: [
             {
@@ -9347,12 +9351,159 @@ MiniCartModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class AddToWishListComponent {
+    /**
+     * @param {?} wishListService
+     * @param {?} currentProductService
+     * @param {?} authService
+     */
+    constructor(wishListService, currentProductService, authService) {
+        this.wishListService = wishListService;
+        this.currentProductService = currentProductService;
+        this.authService = authService;
+        this.product$ = this.currentProductService.getProduct().pipe(filter((/**
+         * @param {?} product
+         * @return {?}
+         */
+        product => Boolean(product))), tap((/**
+         * @param {?} product
+         * @return {?}
+         */
+        product => this.setStockInfo(product))));
+        this.wishListEntries$ = this.wishListService.getWishList().pipe(filter((/**
+         * @param {?} wishlist
+         * @return {?}
+         */
+        wishlist => Boolean(wishlist))), map((/**
+         * @param {?} wishList
+         * @return {?}
+         */
+        wishList => wishList.entries)));
+        this.userLoggedIn$ = this.authService.isUserLoggedIn();
+        this.loading$ = this.wishListService.getWishListLoading();
+        this.hasStock = false;
+        this.iconTypes = ICON_TYPE;
+    }
+    /**
+     * @param {?} product
+     * @return {?}
+     */
+    add(product) {
+        this.wishListService.addEntry(product.code);
+    }
+    /**
+     * @param {?} entry
+     * @return {?}
+     */
+    remove(entry) {
+        this.wishListService.removeEntry(entry);
+    }
+    /**
+     * @param {?} product
+     * @param {?} entries
+     * @return {?}
+     */
+    getProductInWishList(product, entries) {
+        /** @type {?} */
+        const item = entries.find((/**
+         * @param {?} entry
+         * @return {?}
+         */
+        entry => entry.product.code === product.code));
+        return item;
+    }
+    /**
+     * @private
+     * @param {?} product
+     * @return {?}
+     */
+    setStockInfo(product) {
+        this.hasStock =
+            product.stock && product.stock.stockLevelStatus !== 'outOfStock';
+    }
+}
+AddToWishListComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-add-to-wishlist',
+                template: "<ng-container *ngIf=\"product$ | async as product\">\n  <ng-container *ngIf=\"userLoggedIn$ | async; else loginPrompt\">\n    <ng-container *ngIf=\"wishListEntries$ | async as entries\">\n      <ng-container *ngIf=\"hasStock\">\n        <div\n          *ngIf=\"getProductInWishList(product, entries) as entry; else addItem\"\n        >\n          <button\n            class=\"btn btn-link button-remove\"\n            (click)=\"remove(entry)\"\n            [disabled]=\"loading$ | async\"\n          >\n            <cx-icon [type]=\"iconTypes.HEART\"></cx-icon>\n            <span class=\"button-text\">{{\n              'addToWishList.remove' | cxTranslate\n            }}</span>\n          </button>\n        </div>\n        <ng-template #addItem>\n          <button\n            class=\"btn btn-link button-add\"\n            (click)=\"add(product)\"\n            [disabled]=\"loading$ | async\"\n          >\n            <cx-icon [type]=\"iconTypes.EMPTY_HEART\"></cx-icon>\n            <span class=\"button-text\">{{\n              'addToWishList.add' | cxTranslate\n            }}</span>\n          </button>\n        </ng-template>\n      </ng-container>\n    </ng-container>\n  </ng-container>\n</ng-container>\n\n<ng-template #loginPrompt>\n  <ng-container *ngIf=\"hasStock\">\n    <a\n      class=\"btn btn-link button-add-link\"\n      [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n    >\n      <cx-icon [type]=\"iconTypes.EMPTY_HEART\"></cx-icon>\n      <span class=\"button-text\">{{\n        'addToWishList.anonymous' | cxTranslate\n      }}</span>\n    </a>\n  </ng-container>\n</ng-template>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+AddToWishListComponent.ctorParameters = () => [
+    { type: WishListService },
+    { type: CurrentProductService },
+    { type: AuthService }
+];
+if (false) {
+    /** @type {?} */
+    AddToWishListComponent.prototype.product$;
+    /** @type {?} */
+    AddToWishListComponent.prototype.wishListEntries$;
+    /** @type {?} */
+    AddToWishListComponent.prototype.userLoggedIn$;
+    /** @type {?} */
+    AddToWishListComponent.prototype.loading$;
+    /** @type {?} */
+    AddToWishListComponent.prototype.hasStock;
+    /** @type {?} */
+    AddToWishListComponent.prototype.iconTypes;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AddToWishListComponent.prototype.wishListService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AddToWishListComponent.prototype.currentProductService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    AddToWishListComponent.prototype.authService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class AddToWishListModule {
+}
+AddToWishListModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            AddToWishListComponent: {
+                                component: AddToWishListComponent,
+                            },
+                        },
+                    }))),
+                    I18nModule,
+                    IconModule,
+                    RouterModule,
+                    UrlModule,
+                ],
+                declarations: [AddToWishListComponent],
+                entryComponents: [AddToWishListComponent],
+                exports: [AddToWishListComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class CartComponentModule {
 }
 CartComponentModule.decorators = [
     { type: NgModule, args: [{
                 imports: [NgbModule, CartDetailsModule, CartTotalsModule, CartSharedModule],
                 exports: [
+                    AddToWishListModule,
                     CartDetailsModule,
                     CartTotalsModule,
                     CartSharedModule,
@@ -23695,6 +23846,119 @@ UserComponentModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class WishListItemComponent {
+    constructor() {
+        this.isLoading = false;
+        this.remove = new EventEmitter();
+    }
+    /**
+     * @param {?} item
+     * @return {?}
+     */
+    removeEntry(item) {
+        this.remove.emit(item);
+    }
+}
+WishListItemComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-wish-list-item',
+                template: "<div class=\"row\">\n  <!-- Item Image -->\n  <div class=\"cx-image-container col-2\">\n    <a [routerLink]=\"{ cxRoute: 'product', params: cartEntry.product } | cxUrl\">\n      <cx-media\n        [container]=\"cartEntry.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div class=\"col-md-5 col-lg-5 col-xl-5\">\n        <div *ngIf=\"cartEntry.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"\n              { cxRoute: 'product', params: cartEntry.product } | cxUrl\n            \"\n            >{{ cartEntry.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"cartEntry.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ cartEntry.product.code }}\n        </div>\n        <!-- Variants -->\n        <!-- TODO #5593 <div\n          *ngFor=\"let variant of cartEntry.product.variantOptionQualifiers\"\n          class=\"cx-property\"\n        >\n          <div class=\"cx-label\">{{ variant.name }}</div>\n          <div class=\"cx-value\">{{ variant.value }}</div>\n        </div> -->\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"cartEntry.basePrice\"\n        class=\"cx-price col-md-3 col-lg-4 col-xl-4\"\n      >\n        <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"cartEntry.basePrice\" class=\"cx-value\">\n          {{ cartEntry.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <!-- <div *ngIf=\"cartEntry.quantity\" class=\"cx-quantity col-3\">\n        <div\n          class=\"cx-label d-block d-md-none d-lg-none d-xl-none\"\n          placement=\"left\"\n          title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n        <div class=\"cx-value\">{{ cartEntry.quantity }}</div>\n      </div> -->\n      <!-- Total -->\n      <div class=\"col-sm-8 col-md-4 col-lg-3 col-xl-3 cx-add-to-cart\">\n        <cx-add-to-cart\n          *ngIf=\"cartEntry.product.stock.stockLevelStatus !== 'outOfStock'\"\n          [showQuantity]=\"false\"\n          [product]=\"cartEntry.product\"\n        ></cx-add-to-cart>\n      </div>\n    </div>\n    <div class=\"cx-return-button col-12\">\n      <button\n        class=\"btn btn-link\"\n        (click)=\"removeEntry(cartEntry)\"\n        [disabled]=\"isLoading\"\n      >\n        {{ 'common.remove' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+WishListItemComponent.propDecorators = {
+    isLoading: [{ type: Input }],
+    cartEntry: [{ type: Input }],
+    remove: [{ type: Output }]
+};
+if (false) {
+    /** @type {?} */
+    WishListItemComponent.prototype.isLoading;
+    /** @type {?} */
+    WishListItemComponent.prototype.cartEntry;
+    /** @type {?} */
+    WishListItemComponent.prototype.remove;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class WishListComponent {
+    /**
+     * @param {?} wishListService
+     */
+    constructor(wishListService) {
+        this.wishListService = wishListService;
+        this.wishList$ = this.wishListService.getWishList();
+        this.loading$ = this.wishListService.getWishListLoading();
+    }
+    /**
+     * @param {?} item
+     * @return {?}
+     */
+    removeEntry(item) {
+        this.wishListService.removeEntry(item);
+    }
+}
+WishListComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-wish-list',
+                template: "<ng-container *ngIf=\"wishList$ | async as wishList\">\n  <ng-container *ngIf=\"wishList?.entries?.length > 0; else emptyWishList\">\n    <div class=\"d-none d-md-block d-lg-block d-xl-block\">\n      <div class=\"cx-item-list-header row\">\n        <div class=\"cx-item-list-desc col-md-7 col-lg-6 col-xl-6\">\n          {{ 'cartItems.description' | cxTranslate }}\n        </div>\n        <div class=\"cx-item-list-price col-md-3 col-lg-4 col-xl-4\">\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n          {{ 'cartItems.total' | cxTranslate }}\n        </div>\n      </div>\n    </div>\n\n    <div class=\"cx-item-list-row\" *ngFor=\"let entry of wishList?.entries\">\n      <cx-wish-list-item\n        [cartEntry]=\"entry\"\n        [isLoading]=\"loading$ | async\"\n        class=\"cx-wish-list-items\"\n        (remove)=\"removeEntry($event)\"\n      ></cx-wish-list-item>\n    </div>\n  </ng-container>\n</ng-container>\n\n<ng-template #emptyWishList>\n  <h2>{{ 'wishlist.empty' | cxTranslate }}</h2>\n</ng-template>\n"
+            }] }
+];
+/** @nocollapse */
+WishListComponent.ctorParameters = () => [
+    { type: WishListService }
+];
+if (false) {
+    /** @type {?} */
+    WishListComponent.prototype.wishList$;
+    /** @type {?} */
+    WishListComponent.prototype.loading$;
+    /**
+     * @type {?}
+     * @protected
+     */
+    WishListComponent.prototype.wishListService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class WishListModule {
+}
+WishListModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    AddToCartModule,
+                    CommonModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            WishListComponent: {
+                                component: WishListComponent,
+                                guards: [AuthGuard],
+                            },
+                        },
+                    }))),
+                    I18nModule,
+                    MediaModule,
+                    RouterModule,
+                    StarRatingModule,
+                    UrlModule,
+                    ItemCounterModule,
+                ],
+                declarations: [WishListComponent, WishListItemComponent],
+                entryComponents: [WishListComponent],
+                exports: [WishListComponent, WishListItemComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class CmsLibModule {
 }
 CmsLibModule.decorators = [
@@ -23738,12 +24002,18 @@ CmsLibModule.decorators = [
                     ResetPasswordModule,
                     BannerCarouselModule,
                     UserComponentModule,
+                    WishListModule,
                     NotificationPreferenceModule,
                     MyInterestsModule,
                     StockNotificationModule,
                 ],
             },] }
 ];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -24265,5 +24535,5 @@ B2cStorefrontModule.decorators = [
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AsmModule, AutoFocusDirective, AutoFocusDirectiveModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OnlyNumberDirective, OnlyNumberDirectiveModule, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewConfig, ViewConfigModule, ViewModes, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultScrollConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, AsmLoaderModule as ɵa, asmFactory as ɵb, htmlLangProvider as ɵba, setHtmlLangAttribute as ɵbb, AnonymousConsentsModule as ɵbc, AnonymousConsentDialogComponent as ɵbd, RoutingModule as ɵbe, defaultStorefrontRoutesConfig as ɵbf, defaultRoutingConfig as ɵbg, ComponentMapperService as ɵc, AsmEnablerService as ɵd, AsmMainUiComponent as ɵe, AsmComponentService as ɵf, CSAgentLoginFormComponent as ɵg, CustomerSelectionComponent as ɵh, AsmSessionTimerComponent as ɵi, FormatTimerPipe as ɵj, CustomerEmulationComponent as ɵk, AppliedCouponsComponent as ɵl, defaultCheckoutConfig as ɵm, ExpressCheckoutService as ɵn, defaultQualtricsConfig as ɵo, CmsRoutesService as ɵp, CmsMappingService as ɵq, CmsI18nService as ɵr, CmsGuardsService as ɵs, TrackingEventsComponent as ɵt, ConsignmentTrackingComponent as ɵu, AddToHomeScreenService as ɵv, GuestRegisterFormComponent as ɵw, CheckoutLoginComponent as ɵx, suffixUrlMatcher as ɵy, addCmsRoute as ɵz };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AsmModule, AutoFocusDirective, AutoFocusDirectiveModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OnlyNumberDirective, OnlyNumberDirectiveModule, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultScrollConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, AsmLoaderModule as ɵa, asmFactory as ɵb, suffixUrlMatcher as ɵba, addCmsRoute as ɵbb, htmlLangProvider as ɵbc, setHtmlLangAttribute as ɵbd, AnonymousConsentsModule as ɵbe, AnonymousConsentDialogComponent as ɵbf, RoutingModule as ɵbg, defaultStorefrontRoutesConfig as ɵbh, defaultRoutingConfig as ɵbi, ComponentMapperService as ɵc, AsmEnablerService as ɵd, AsmMainUiComponent as ɵe, AsmComponentService as ɵf, CSAgentLoginFormComponent as ɵg, CustomerSelectionComponent as ɵh, AsmSessionTimerComponent as ɵi, FormatTimerPipe as ɵj, CustomerEmulationComponent as ɵk, AppliedCouponsComponent as ɵl, AddToWishListModule as ɵm, AddToWishListComponent as ɵn, defaultCheckoutConfig as ɵo, ExpressCheckoutService as ɵp, defaultQualtricsConfig as ɵq, CmsRoutesService as ɵr, CmsMappingService as ɵs, CmsI18nService as ɵt, CmsGuardsService as ɵu, TrackingEventsComponent as ɵv, ConsignmentTrackingComponent as ɵw, AddToHomeScreenService as ɵx, GuestRegisterFormComponent as ɵy, CheckoutLoginComponent as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map

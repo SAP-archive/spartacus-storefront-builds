@@ -229,6 +229,8 @@
         COLLAPSE: 'COLLAPSE',
         RESET: 'RESET',
         CIRCLE: 'CIRCLE',
+        HEART: 'HEART',
+        EMPTY_HEART: 'EMPTY_HEART',
     };
     /**
      * @abstract
@@ -293,6 +295,8 @@
                 EXPAND: 'fas fa-plus',
                 RESET: 'fas fa-times-circle',
                 CIRCLE: 'fas fa-circle',
+                HEART: 'fas fa-heart',
+                EMPTY_HEART: 'far fa-heart',
             },
             resources: [
                 {
@@ -11192,6 +11196,170 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var AddToWishListComponent = /** @class */ (function () {
+        function AddToWishListComponent(wishListService, currentProductService, authService) {
+            var _this = this;
+            this.wishListService = wishListService;
+            this.currentProductService = currentProductService;
+            this.authService = authService;
+            this.product$ = this.currentProductService.getProduct().pipe(operators.filter((/**
+             * @param {?} product
+             * @return {?}
+             */
+            function (product) { return Boolean(product); })), operators.tap((/**
+             * @param {?} product
+             * @return {?}
+             */
+            function (product) { return _this.setStockInfo(product); })));
+            this.wishListEntries$ = this.wishListService.getWishList().pipe(operators.filter((/**
+             * @param {?} wishlist
+             * @return {?}
+             */
+            function (wishlist) { return Boolean(wishlist); })), operators.map((/**
+             * @param {?} wishList
+             * @return {?}
+             */
+            function (wishList) { return wishList.entries; })));
+            this.userLoggedIn$ = this.authService.isUserLoggedIn();
+            this.loading$ = this.wishListService.getWishListLoading();
+            this.hasStock = false;
+            this.iconTypes = ICON_TYPE;
+        }
+        /**
+         * @param {?} product
+         * @return {?}
+         */
+        AddToWishListComponent.prototype.add = /**
+         * @param {?} product
+         * @return {?}
+         */
+        function (product) {
+            this.wishListService.addEntry(product.code);
+        };
+        /**
+         * @param {?} entry
+         * @return {?}
+         */
+        AddToWishListComponent.prototype.remove = /**
+         * @param {?} entry
+         * @return {?}
+         */
+        function (entry) {
+            this.wishListService.removeEntry(entry);
+        };
+        /**
+         * @param {?} product
+         * @param {?} entries
+         * @return {?}
+         */
+        AddToWishListComponent.prototype.getProductInWishList = /**
+         * @param {?} product
+         * @param {?} entries
+         * @return {?}
+         */
+        function (product, entries) {
+            /** @type {?} */
+            var item = entries.find((/**
+             * @param {?} entry
+             * @return {?}
+             */
+            function (entry) { return entry.product.code === product.code; }));
+            return item;
+        };
+        /**
+         * @private
+         * @param {?} product
+         * @return {?}
+         */
+        AddToWishListComponent.prototype.setStockInfo = /**
+         * @private
+         * @param {?} product
+         * @return {?}
+         */
+        function (product) {
+            this.hasStock =
+                product.stock && product.stock.stockLevelStatus !== 'outOfStock';
+        };
+        AddToWishListComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-add-to-wishlist',
+                        template: "<ng-container *ngIf=\"product$ | async as product\">\n  <ng-container *ngIf=\"userLoggedIn$ | async; else loginPrompt\">\n    <ng-container *ngIf=\"wishListEntries$ | async as entries\">\n      <ng-container *ngIf=\"hasStock\">\n        <div\n          *ngIf=\"getProductInWishList(product, entries) as entry; else addItem\"\n        >\n          <button\n            class=\"btn btn-link button-remove\"\n            (click)=\"remove(entry)\"\n            [disabled]=\"loading$ | async\"\n          >\n            <cx-icon [type]=\"iconTypes.HEART\"></cx-icon>\n            <span class=\"button-text\">{{\n              'addToWishList.remove' | cxTranslate\n            }}</span>\n          </button>\n        </div>\n        <ng-template #addItem>\n          <button\n            class=\"btn btn-link button-add\"\n            (click)=\"add(product)\"\n            [disabled]=\"loading$ | async\"\n          >\n            <cx-icon [type]=\"iconTypes.EMPTY_HEART\"></cx-icon>\n            <span class=\"button-text\">{{\n              'addToWishList.add' | cxTranslate\n            }}</span>\n          </button>\n        </ng-template>\n      </ng-container>\n    </ng-container>\n  </ng-container>\n</ng-container>\n\n<ng-template #loginPrompt>\n  <ng-container *ngIf=\"hasStock\">\n    <a\n      class=\"btn btn-link button-add-link\"\n      [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n    >\n      <cx-icon [type]=\"iconTypes.EMPTY_HEART\"></cx-icon>\n      <span class=\"button-text\">{{\n        'addToWishList.anonymous' | cxTranslate\n      }}</span>\n    </a>\n  </ng-container>\n</ng-template>\n",
+                        changeDetection: core.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        AddToWishListComponent.ctorParameters = function () { return [
+            { type: core$1.WishListService },
+            { type: CurrentProductService },
+            { type: core$1.AuthService }
+        ]; };
+        return AddToWishListComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        AddToWishListComponent.prototype.product$;
+        /** @type {?} */
+        AddToWishListComponent.prototype.wishListEntries$;
+        /** @type {?} */
+        AddToWishListComponent.prototype.userLoggedIn$;
+        /** @type {?} */
+        AddToWishListComponent.prototype.loading$;
+        /** @type {?} */
+        AddToWishListComponent.prototype.hasStock;
+        /** @type {?} */
+        AddToWishListComponent.prototype.iconTypes;
+        /**
+         * @type {?}
+         * @protected
+         */
+        AddToWishListComponent.prototype.wishListService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        AddToWishListComponent.prototype.currentProductService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        AddToWishListComponent.prototype.authService;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var AddToWishListModule = /** @class */ (function () {
+        function AddToWishListModule() {
+        }
+        AddToWishListModule.decorators = [
+            { type: core.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            core$1.ConfigModule.withConfig((/** @type {?} */ ({
+                                cmsComponents: {
+                                    AddToWishListComponent: {
+                                        component: AddToWishListComponent,
+                                    },
+                                },
+                            }))),
+                            core$1.I18nModule,
+                            IconModule,
+                            router.RouterModule,
+                            core$1.UrlModule,
+                        ],
+                        declarations: [AddToWishListComponent],
+                        entryComponents: [AddToWishListComponent],
+                        exports: [AddToWishListComponent],
+                    },] }
+        ];
+        return AddToWishListModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var CartComponentModule = /** @class */ (function () {
         function CartComponentModule() {
         }
@@ -11199,6 +11367,7 @@
             { type: core.NgModule, args: [{
                         imports: [ngBootstrap.NgbModule, CartDetailsModule, CartTotalsModule, CartSharedModule],
                         exports: [
+                            AddToWishListModule,
                             CartDetailsModule,
                             CartTotalsModule,
                             CartSharedModule,
@@ -27430,6 +27599,129 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var WishListItemComponent = /** @class */ (function () {
+        function WishListItemComponent() {
+            this.isLoading = false;
+            this.remove = new core.EventEmitter();
+        }
+        /**
+         * @param {?} item
+         * @return {?}
+         */
+        WishListItemComponent.prototype.removeEntry = /**
+         * @param {?} item
+         * @return {?}
+         */
+        function (item) {
+            this.remove.emit(item);
+        };
+        WishListItemComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-wish-list-item',
+                        template: "<div class=\"row\">\n  <!-- Item Image -->\n  <div class=\"cx-image-container col-2\">\n    <a [routerLink]=\"{ cxRoute: 'product', params: cartEntry.product } | cxUrl\">\n      <cx-media\n        [container]=\"cartEntry.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div class=\"col-md-5 col-lg-5 col-xl-5\">\n        <div *ngIf=\"cartEntry.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"\n              { cxRoute: 'product', params: cartEntry.product } | cxUrl\n            \"\n            >{{ cartEntry.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"cartEntry.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ cartEntry.product.code }}\n        </div>\n        <!-- Variants -->\n        <!-- TODO #5593 <div\n          *ngFor=\"let variant of cartEntry.product.variantOptionQualifiers\"\n          class=\"cx-property\"\n        >\n          <div class=\"cx-label\">{{ variant.name }}</div>\n          <div class=\"cx-value\">{{ variant.value }}</div>\n        </div> -->\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"cartEntry.basePrice\"\n        class=\"cx-price col-md-3 col-lg-4 col-xl-4\"\n      >\n        <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"cartEntry.basePrice\" class=\"cx-value\">\n          {{ cartEntry.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <!-- <div *ngIf=\"cartEntry.quantity\" class=\"cx-quantity col-3\">\n        <div\n          class=\"cx-label d-block d-md-none d-lg-none d-xl-none\"\n          placement=\"left\"\n          title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n        <div class=\"cx-value\">{{ cartEntry.quantity }}</div>\n      </div> -->\n      <!-- Total -->\n      <div class=\"col-sm-8 col-md-4 col-lg-3 col-xl-3 cx-add-to-cart\">\n        <cx-add-to-cart\n          *ngIf=\"cartEntry.product.stock.stockLevelStatus !== 'outOfStock'\"\n          [showQuantity]=\"false\"\n          [product]=\"cartEntry.product\"\n        ></cx-add-to-cart>\n      </div>\n    </div>\n    <div class=\"cx-return-button col-12\">\n      <button\n        class=\"btn btn-link\"\n        (click)=\"removeEntry(cartEntry)\"\n        [disabled]=\"isLoading\"\n      >\n        {{ 'common.remove' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n",
+                        changeDetection: core.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        WishListItemComponent.propDecorators = {
+            isLoading: [{ type: core.Input }],
+            cartEntry: [{ type: core.Input }],
+            remove: [{ type: core.Output }]
+        };
+        return WishListItemComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        WishListItemComponent.prototype.isLoading;
+        /** @type {?} */
+        WishListItemComponent.prototype.cartEntry;
+        /** @type {?} */
+        WishListItemComponent.prototype.remove;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var WishListComponent = /** @class */ (function () {
+        function WishListComponent(wishListService) {
+            this.wishListService = wishListService;
+            this.wishList$ = this.wishListService.getWishList();
+            this.loading$ = this.wishListService.getWishListLoading();
+        }
+        /**
+         * @param {?} item
+         * @return {?}
+         */
+        WishListComponent.prototype.removeEntry = /**
+         * @param {?} item
+         * @return {?}
+         */
+        function (item) {
+            this.wishListService.removeEntry(item);
+        };
+        WishListComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-wish-list',
+                        template: "<ng-container *ngIf=\"wishList$ | async as wishList\">\n  <ng-container *ngIf=\"wishList?.entries?.length > 0; else emptyWishList\">\n    <div class=\"d-none d-md-block d-lg-block d-xl-block\">\n      <div class=\"cx-item-list-header row\">\n        <div class=\"cx-item-list-desc col-md-7 col-lg-6 col-xl-6\">\n          {{ 'cartItems.description' | cxTranslate }}\n        </div>\n        <div class=\"cx-item-list-price col-md-3 col-lg-4 col-xl-4\">\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n          {{ 'cartItems.total' | cxTranslate }}\n        </div>\n      </div>\n    </div>\n\n    <div class=\"cx-item-list-row\" *ngFor=\"let entry of wishList?.entries\">\n      <cx-wish-list-item\n        [cartEntry]=\"entry\"\n        [isLoading]=\"loading$ | async\"\n        class=\"cx-wish-list-items\"\n        (remove)=\"removeEntry($event)\"\n      ></cx-wish-list-item>\n    </div>\n  </ng-container>\n</ng-container>\n\n<ng-template #emptyWishList>\n  <h2>{{ 'wishlist.empty' | cxTranslate }}</h2>\n</ng-template>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        WishListComponent.ctorParameters = function () { return [
+            { type: core$1.WishListService }
+        ]; };
+        return WishListComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        WishListComponent.prototype.wishList$;
+        /** @type {?} */
+        WishListComponent.prototype.loading$;
+        /**
+         * @type {?}
+         * @protected
+         */
+        WishListComponent.prototype.wishListService;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var WishListModule = /** @class */ (function () {
+        function WishListModule() {
+        }
+        WishListModule.decorators = [
+            { type: core.NgModule, args: [{
+                        imports: [
+                            AddToCartModule,
+                            common.CommonModule,
+                            core$1.ConfigModule.withConfig((/** @type {?} */ ({
+                                cmsComponents: {
+                                    WishListComponent: {
+                                        component: WishListComponent,
+                                        guards: [core$1.AuthGuard],
+                                    },
+                                },
+                            }))),
+                            core$1.I18nModule,
+                            MediaModule,
+                            router.RouterModule,
+                            StarRatingModule,
+                            core$1.UrlModule,
+                            ItemCounterModule,
+                        ],
+                        declarations: [WishListComponent, WishListItemComponent],
+                        entryComponents: [WishListComponent],
+                        exports: [WishListComponent, WishListItemComponent],
+                    },] }
+        ];
+        return WishListModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var CmsLibModule = /** @class */ (function () {
         function CmsLibModule() {
         }
@@ -27474,6 +27766,7 @@
                             ResetPasswordModule,
                             BannerCarouselModule,
                             UserComponentModule,
+                            WishListModule,
                             NotificationPreferenceModule,
                             MyInterestsModule,
                             StockNotificationModule,
@@ -27482,6 +27775,11 @@
         ];
         return CmsLibModule;
     }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
 
     /**
      * @fileoverview added by tsickle
@@ -28293,6 +28591,9 @@
     exports.ViewConfig = ViewConfig;
     exports.ViewConfigModule = ViewConfigModule;
     exports.ViewModes = ViewModes;
+    exports.WishListComponent = WishListComponent;
+    exports.WishListItemComponent = WishListItemComponent;
+    exports.WishListModule = WishListModule;
     exports.b2cLayoutConfig = b2cLayoutConfig;
     exports.defaultCmsContentConfig = defaultCmsContentConfig;
     exports.defaultPWAModuleConfig = defaultPWAModuleConfig;
@@ -28308,13 +28609,15 @@
     exports.titleScores = titleScores;
     exports.ɵa = AsmLoaderModule;
     exports.ɵb = asmFactory;
-    exports.ɵba = htmlLangProvider;
-    exports.ɵbb = setHtmlLangAttribute;
-    exports.ɵbc = AnonymousConsentsModule;
-    exports.ɵbd = AnonymousConsentDialogComponent;
-    exports.ɵbe = RoutingModule;
-    exports.ɵbf = defaultStorefrontRoutesConfig;
-    exports.ɵbg = defaultRoutingConfig;
+    exports.ɵba = suffixUrlMatcher;
+    exports.ɵbb = addCmsRoute;
+    exports.ɵbc = htmlLangProvider;
+    exports.ɵbd = setHtmlLangAttribute;
+    exports.ɵbe = AnonymousConsentsModule;
+    exports.ɵbf = AnonymousConsentDialogComponent;
+    exports.ɵbg = RoutingModule;
+    exports.ɵbh = defaultStorefrontRoutesConfig;
+    exports.ɵbi = defaultRoutingConfig;
     exports.ɵc = ComponentMapperService;
     exports.ɵd = AsmEnablerService;
     exports.ɵe = AsmMainUiComponent;
@@ -28325,20 +28628,20 @@
     exports.ɵj = FormatTimerPipe;
     exports.ɵk = CustomerEmulationComponent;
     exports.ɵl = AppliedCouponsComponent;
-    exports.ɵm = defaultCheckoutConfig;
-    exports.ɵn = ExpressCheckoutService;
-    exports.ɵo = defaultQualtricsConfig;
-    exports.ɵp = CmsRoutesService;
-    exports.ɵq = CmsMappingService;
-    exports.ɵr = CmsI18nService;
-    exports.ɵs = CmsGuardsService;
-    exports.ɵt = TrackingEventsComponent;
-    exports.ɵu = ConsignmentTrackingComponent;
-    exports.ɵv = AddToHomeScreenService;
-    exports.ɵw = GuestRegisterFormComponent;
-    exports.ɵx = CheckoutLoginComponent;
-    exports.ɵy = suffixUrlMatcher;
-    exports.ɵz = addCmsRoute;
+    exports.ɵm = AddToWishListModule;
+    exports.ɵn = AddToWishListComponent;
+    exports.ɵo = defaultCheckoutConfig;
+    exports.ɵp = ExpressCheckoutService;
+    exports.ɵq = defaultQualtricsConfig;
+    exports.ɵr = CmsRoutesService;
+    exports.ɵs = CmsMappingService;
+    exports.ɵt = CmsI18nService;
+    exports.ɵu = CmsGuardsService;
+    exports.ɵv = TrackingEventsComponent;
+    exports.ɵw = ConsignmentTrackingComponent;
+    exports.ɵx = AddToHomeScreenService;
+    exports.ɵy = GuestRegisterFormComponent;
+    exports.ɵz = CheckoutLoginComponent;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
