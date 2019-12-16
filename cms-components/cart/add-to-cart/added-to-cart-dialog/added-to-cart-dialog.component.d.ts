@@ -13,6 +13,7 @@ export declare class AddedToCartDialogComponent implements OnInit {
     cart$: Observable<Cart>;
     loaded$: Observable<boolean>;
     increment: boolean;
+    modalIsOpen: boolean;
     quantity: number;
     dialog: ElementRef;
     form: FormGroup;
