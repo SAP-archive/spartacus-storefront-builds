@@ -11508,7 +11508,7 @@ class PaymentFormComponent {
          * @return {?}
          */
         (results) => {
-            if (results === 'FAIL') {
+            if (results.decision === 'FAIL') {
                 this.checkoutDeliveryService.clearAddressVerificationResults();
             }
             else if (results.decision === 'ACCEPT') {
@@ -12764,7 +12764,7 @@ class AddressFormComponent {
          * @return {?}
          */
         (results) => {
-            if (results === 'FAIL') {
+            if (results.decision === 'FAIL') {
                 this.checkoutDeliveryService.clearAddressVerificationResults();
             }
             else if (results.decision === 'ACCEPT') {

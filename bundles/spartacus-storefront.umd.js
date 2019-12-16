@@ -13544,7 +13544,7 @@
              * @return {?}
              */
             function (results) {
-                if (results === 'FAIL') {
+                if (results.decision === 'FAIL') {
                     _this.checkoutDeliveryService.clearAddressVerificationResults();
                 }
                 else if (results.decision === 'ACCEPT') {
@@ -14974,7 +14974,7 @@
              * @return {?}
              */
             function (results) {
-                if (results === 'FAIL') {
+                if (results.decision === 'FAIL') {
                     _this.checkoutDeliveryService.clearAddressVerificationResults();
                 }
                 else if (results.decision === 'ACCEPT') {

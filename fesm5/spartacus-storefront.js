@@ -13359,7 +13359,7 @@ var PaymentFormComponent = /** @class */ (function () {
          * @return {?}
          */
         function (results) {
-            if (results === 'FAIL') {
+            if (results.decision === 'FAIL') {
                 _this.checkoutDeliveryService.clearAddressVerificationResults();
             }
             else if (results.decision === 'ACCEPT') {
@@ -14789,7 +14789,7 @@ var AddressFormComponent = /** @class */ (function () {
          * @return {?}
          */
         function (results) {
-            if (results === 'FAIL') {
+            if (results.decision === 'FAIL') {
                 _this.checkoutDeliveryService.clearAddressVerificationResults();
             }
             else if (results.decision === 'ACCEPT') {
