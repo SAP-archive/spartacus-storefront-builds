@@ -1,6 +1,6 @@
 import { CommonModule, isPlatformServer, isPlatformBrowser, DOCUMENT, Location } from '@angular/common';
 import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, EventEmitter, Output, isDevMode, ChangeDetectionStrategy, forwardRef, Renderer2, ViewChild, Directive, HostListener, Optional, Injector, Inject, PLATFORM_ID, INJECTOR, InjectionToken, TemplateRef, ComponentFactory, ViewContainerRef, ComponentFactoryResolver, NgZone, APP_INITIALIZER, RendererFactory2, ViewEncapsulation, ChangeDetectorRef, Pipe } from '@angular/core';
-import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, FeaturesConfigModule, CmsConfig, TranslationService, TranslationChunkService, CmsService, PageType, RoutingService, SemanticPathService, ProtectedRoutesGuard, AuthService, CartService, CartDataService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, DynamicAttributeService, PageRobotsMeta, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, CartVoucherService, OCC_USER_ID_ANONYMOUS, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, CmsPageTitleModule, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, RoutingModule as RoutingModule$1, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
+import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, FeaturesConfigModule, CmsConfig, TranslationService, TranslationChunkService, CmsService, PageType, RoutingService, SemanticPathService, ProtectedRoutesGuard, AuthService, CartService, CartDataService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, DynamicAttributeService, PageRobotsMeta, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, CartVoucherService, OCC_USER_ID_ANONYMOUS, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, CmsPageTitleModule, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, RoutingModule as RoutingModule$1, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
 import { Subscription, combineLatest, of, fromEvent, BehaviorSubject, concat, isObservable, from } from 'rxjs';
 import { take, distinctUntilChanged, tap, map, debounceTime, startWith, filter, switchMap, first, skipWhile, endWith, withLatestFrom, mergeMap, shareReplay, scan, pluck } from 'rxjs/operators';
 import { __extends, __read, __values, __assign, __spread, __awaiter, __generator } from 'tslib';
@@ -26894,11 +26894,19 @@ var LoginModule = /** @class */ (function () {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var LogoutGuard = /** @class */ (function () {
-    function LogoutGuard(auth, cms, routing, semanticPathService) {
+    /**
+     * @deprecated since 1.4
+     * Check #5666 for more info
+     *
+     * TODO(issue:5666) Deprecated since 1.4
+     */
+    function LogoutGuard(auth, cms, routing, semanticPathService, protectedRoutes, featureConfig) {
         this.auth = auth;
         this.cms = cms;
         this.routing = routing;
         this.semanticPathService = semanticPathService;
+        this.protectedRoutes = protectedRoutes;
+        this.featureConfig = featureConfig;
     }
     /**
      * @return {?}
@@ -26920,9 +26928,27 @@ var LogoutGuard = /** @class */ (function () {
          */
         function (hasPage) {
             if (!hasPage) {
-                _this.routing.go({ cxRoute: 'home' });
+                _this.redirect();
             }
         })));
+    };
+    /**
+     * @protected
+     * @return {?}
+     */
+    LogoutGuard.prototype.redirect = /**
+     * @protected
+     * @return {?}
+     */
+    function () {
+        // TODO(issue:5666) Deprecated since 1.4
+        /** @type {?} */
+        var cxRoute = this.featureConfig.isLevel('1.4') &&
+            this.protectedRoutes &&
+            this.protectedRoutes.shouldProtect
+            ? 'login'
+            : 'home';
+        this.routing.go({ cxRoute: cxRoute });
     };
     /**
      * @protected
@@ -26945,9 +26971,11 @@ var LogoutGuard = /** @class */ (function () {
         { type: AuthService },
         { type: CmsService },
         { type: RoutingService },
-        { type: SemanticPathService }
+        { type: SemanticPathService },
+        { type: ProtectedRoutesService },
+        { type: FeatureConfigService }
     ]; };
-    /** @nocollapse */ LogoutGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(ɵɵinject(AuthService), ɵɵinject(CmsService), ɵɵinject(RoutingService), ɵɵinject(SemanticPathService)); }, token: LogoutGuard, providedIn: "root" });
+    /** @nocollapse */ LogoutGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(ɵɵinject(AuthService), ɵɵinject(CmsService), ɵɵinject(RoutingService), ɵɵinject(SemanticPathService), ɵɵinject(ProtectedRoutesService), ɵɵinject(FeatureConfigService)); }, token: LogoutGuard, providedIn: "root" });
     return LogoutGuard;
 }());
 if (false) {
@@ -26971,6 +26999,16 @@ if (false) {
      * @protected
      */
     LogoutGuard.prototype.semanticPathService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    LogoutGuard.prototype.protectedRoutes;
+    /**
+     * @type {?}
+     * @protected
+     */
+    LogoutGuard.prototype.featureConfig;
 }
 
 /**

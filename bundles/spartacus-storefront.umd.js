@@ -27079,11 +27079,19 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var LogoutGuard = /** @class */ (function () {
-        function LogoutGuard(auth, cms, routing, semanticPathService) {
+        /**
+         * @deprecated since 1.4
+         * Check #5666 for more info
+         *
+         * TODO(issue:5666) Deprecated since 1.4
+         */
+        function LogoutGuard(auth, cms, routing, semanticPathService, protectedRoutes, featureConfig) {
             this.auth = auth;
             this.cms = cms;
             this.routing = routing;
             this.semanticPathService = semanticPathService;
+            this.protectedRoutes = protectedRoutes;
+            this.featureConfig = featureConfig;
         }
         /**
          * @return {?}
@@ -27105,9 +27113,27 @@
              */
             function (hasPage) {
                 if (!hasPage) {
-                    _this.routing.go({ cxRoute: 'home' });
+                    _this.redirect();
                 }
             })));
+        };
+        /**
+         * @protected
+         * @return {?}
+         */
+        LogoutGuard.prototype.redirect = /**
+         * @protected
+         * @return {?}
+         */
+        function () {
+            // TODO(issue:5666) Deprecated since 1.4
+            /** @type {?} */
+            var cxRoute = this.featureConfig.isLevel('1.4') &&
+                this.protectedRoutes &&
+                this.protectedRoutes.shouldProtect
+                ? 'login'
+                : 'home';
+            this.routing.go({ cxRoute: cxRoute });
         };
         /**
          * @protected
@@ -27130,9 +27156,11 @@
             { type: core$1.AuthService },
             { type: core$1.CmsService },
             { type: core$1.RoutingService },
-            { type: core$1.SemanticPathService }
+            { type: core$1.SemanticPathService },
+            { type: core$1.ProtectedRoutesService },
+            { type: core$1.FeatureConfigService }
         ]; };
-        /** @nocollapse */ LogoutGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(core.ɵɵinject(core$1.AuthService), core.ɵɵinject(core$1.CmsService), core.ɵɵinject(core$1.RoutingService), core.ɵɵinject(core$1.SemanticPathService)); }, token: LogoutGuard, providedIn: "root" });
+        /** @nocollapse */ LogoutGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(core.ɵɵinject(core$1.AuthService), core.ɵɵinject(core$1.CmsService), core.ɵɵinject(core$1.RoutingService), core.ɵɵinject(core$1.SemanticPathService), core.ɵɵinject(core$1.ProtectedRoutesService), core.ɵɵinject(core$1.FeatureConfigService)); }, token: LogoutGuard, providedIn: "root" });
         return LogoutGuard;
     }());
     if (false) {
@@ -27156,6 +27184,16 @@
          * @protected
          */
         LogoutGuard.prototype.semanticPathService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        LogoutGuard.prototype.protectedRoutes;
+        /**
+         * @type {?}
+         * @protected
+         */
+        LogoutGuard.prototype.featureConfig;
     }
 
     /**
