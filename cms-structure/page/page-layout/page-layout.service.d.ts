@@ -12,6 +12,13 @@ export declare class PageLayoutService {
     private warnLogMessages;
     private logSlots;
     getSlots(section?: string): Observable<string[]>;
+    /**
+     * Returns an observable with the last page slot above-the-fold
+     * for the given pageTemplate / breakpoint.
+     *
+     * The page fold is configurable in the `LayoutConfig` for each page layout.
+     */
+    getPageFoldSlot(pageTemplate: string): Observable<string>;
     private resolveSlots;
     readonly page$: Observable<Page>;
     readonly templateName$: Observable<string>;

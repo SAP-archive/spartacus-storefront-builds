@@ -1651,6 +1651,13 @@
         LayoutConfig.prototype.breakpoints;
         /** @type {?} */
         LayoutConfig.prototype.layoutSlots;
+        /**
+         * Deferrred loading is a technique to hold of with the loading / creation
+         * of DOM elements which are not not in the initial view port.
+         * This technique wil increase performance.
+         * @type {?}
+         */
+        LayoutConfig.prototype.deferredLoading;
     }
 
     var _a;
@@ -4538,6 +4545,7 @@
                                 cmsComponents: {
                                     AnonymousConsentManagementBannerComponent: {
                                         component: AnonymousConsentManagementBannerComponent,
+                                        deferLoading: core$1.DeferLoadingStrategy.INSTANT,
                                     },
                                     AnonymousConsentOpenDialogComponent: {
                                         component: AnonymousConsentOpenDialogComponent,
@@ -4987,8 +4995,9 @@
             this.config = config;
             this.breakpointService = breakpointService;
             this.handlers = handlers;
-            // we print warn messages on missing layout configs
-            // only once to not polute the console log
+            // Prints warn messages for missing layout configs.
+            // The warnings are only printed once per config
+            // to not pollute the console log.
             this.warnLogMessages = {};
             this.logSlots = {};
         }
@@ -5051,6 +5060,42 @@
                     }
                 }
                 return true;
+            })));
+        };
+        /**
+         * Returns an observable with the last page slot above-the-fold
+         * for the given pageTemplate / breakpoint.
+         *
+         * The page fold is configurable in the `LayoutConfig` for each page layout.
+         */
+        /**
+         * Returns an observable with the last page slot above-the-fold
+         * for the given pageTemplate / breakpoint.
+         *
+         * The page fold is configurable in the `LayoutConfig` for each page layout.
+         * @param {?} pageTemplate
+         * @return {?}
+         */
+        PageLayoutService.prototype.getPageFoldSlot = /**
+         * Returns an observable with the last page slot above-the-fold
+         * for the given pageTemplate / breakpoint.
+         *
+         * The page fold is configurable in the `LayoutConfig` for each page layout.
+         * @param {?} pageTemplate
+         * @return {?}
+         */
+        function (pageTemplate) {
+            var _this = this;
+            return this.breakpointService.breakpoint$.pipe(operators.map((/**
+             * @param {?} breakpoint
+             * @return {?}
+             */
+            function (breakpoint) {
+                /** @type {?} */
+                var pageTemplateConfig = _this.config.layoutSlots[pageTemplate];
+                /** @type {?} */
+                var config = _this.getResponsiveSlotConfig((/** @type {?} */ (pageTemplateConfig)), 'pageFold', breakpoint);
+                return config ? config.pageFold : null;
             })));
         };
         /**
@@ -5236,7 +5281,7 @@
             /** @type {?} */
             var slotConfig = (/** @type {?} */ (layoutSlotConfig));
             // fallback to default slot config
-            if (!breakpoint) {
+            if (!layoutSlotConfig || !breakpoint) {
                 return slotConfig;
             }
             // we have a config for the specific breakpoint
@@ -5382,6 +5427,13 @@
              * @return {?}
              */
             function (section) { return _this.pageLayoutService.getSlots(section); })));
+            this.pageFoldSlot$ = this.templateName$.pipe(operators.switchMap((/**
+             * @param {?} templateName
+             * @return {?}
+             */
+            function (templateName) {
+                return _this.pageLayoutService.getPageFoldSlot(templateName);
+            })), operators.distinctUntilChanged());
         }
         Object.defineProperty(PageLayoutComponent.prototype, "section", {
             set: /**
@@ -5412,7 +5464,7 @@
         PageLayoutComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-page-layout',
-                        template: "<ng-template\n  [cxOutlet]=\"layoutName$ | async\"\n  [cxOutletContext]=\"{\n    templateName$: templateName$,\n    slots$: slots$,\n    section$: section$\n  }\"\n>\n  <ng-content></ng-content>\n\n  <cx-page-slot\n    *ngFor=\"let slot of slots$ | async\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-template>\n",
+                        template: "<ng-template\n  [cxOutlet]=\"layoutName$ | async\"\n  [cxOutletContext]=\"{\n    templateName$: templateName$,\n    slots$: slots$,\n    section$: section$\n  }\"\n>\n  <ng-content></ng-content>\n\n  <cx-page-slot\n    *ngFor=\"let slot of slots$ | async\"\n    [position]=\"slot\"\n    [isPageFold]=\"slot === (pageFoldSlot$ | async)\"\n  ></cx-page-slot>\n</ng-template>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -5436,6 +5488,8 @@
         PageLayoutComponent.prototype.layoutName$;
         /** @type {?} */
         PageLayoutComponent.prototype.slots$;
+        /** @type {?} */
+        PageLayoutComponent.prototype.pageFoldSlot$;
         /**
          * @type {?}
          * @private
@@ -6066,27 +6120,333 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /**
+     * The IntersectionService uses the native IntersectionObserver (v2), which
+     * can be used to implement pre-loading and deferred loading of DOM content.
+     *
+     */
+    var IntersectionService = /** @class */ (function () {
+        function IntersectionService(config) {
+            this.config = config;
+        }
+        /**
+         * Returns an Observable that emits only once a boolean value whenever
+         * the given element has shown in the view port.
+         *
+         * The returned obervable will only emit the first value. The
+         * observable must be cleaned up either way, since the value might never emit; it
+         *  depends on whether the element appears in the view port.
+         */
+        /**
+         * Returns an Observable that emits only once a boolean value whenever
+         * the given element has shown in the view port.
+         *
+         * The returned obervable will only emit the first value. The
+         * observable must be cleaned up either way, since the value might never emit; it
+         *  depends on whether the element appears in the view port.
+         * @param {?} element
+         * @param {?=} options
+         * @return {?}
+         */
+        IntersectionService.prototype.isIntersected = /**
+         * Returns an Observable that emits only once a boolean value whenever
+         * the given element has shown in the view port.
+         *
+         * The returned obervable will only emit the first value. The
+         * observable must be cleaned up either way, since the value might never emit; it
+         *  depends on whether the element appears in the view port.
+         * @param {?} element
+         * @param {?=} options
+         * @return {?}
+         */
+        function (element, options) {
+            return this.intersects(element, options).pipe(operators.first((/**
+             * @param {?} v
+             * @return {?}
+             */
+            function (v) { return v === true; })));
+        };
+        /**
+         * Indicates whenever the element intersects the view port. An optional margin
+         * is used to intersects before the element shows up in the viewport.
+         * A value is emitted each time the element intersects.
+         *
+         * This is private for now, but could be exposed as a public API
+         * to introduce additional (css) render effects to the UI.
+         */
+        /**
+         * Indicates whenever the element intersects the view port. An optional margin
+         * is used to intersects before the element shows up in the viewport.
+         * A value is emitted each time the element intersects.
+         *
+         * This is private for now, but could be exposed as a public API
+         * to introduce additional (css) render effects to the UI.
+         * @private
+         * @param {?} element
+         * @param {?=} options
+         * @return {?}
+         */
+        IntersectionService.prototype.intersects = /**
+         * Indicates whenever the element intersects the view port. An optional margin
+         * is used to intersects before the element shows up in the viewport.
+         * A value is emitted each time the element intersects.
+         *
+         * This is private for now, but could be exposed as a public API
+         * to introduce additional (css) render effects to the UI.
+         * @private
+         * @param {?} element
+         * @param {?=} options
+         * @return {?}
+         */
+        function (element, options) {
+            var _this = this;
+            /** @type {?} */
+            var elementVisible$ = new rxjs.Observable((/**
+             * @param {?} observer
+             * @return {?}
+             */
+            function (observer) {
+                /** @type {?} */
+                var rootMargin = _this.getRootMargin(options);
+                /** @type {?} */
+                var intersectOptions = { rootMargin: rootMargin };
+                /** @type {?} */
+                var intersectionObserver = new IntersectionObserver((/**
+                 * @param {?} entries
+                 * @return {?}
+                 */
+                function (entries) {
+                    observer.next(entries);
+                }), intersectOptions);
+                intersectionObserver.observe(element);
+                return (/**
+                 * @return {?}
+                 */
+                function () {
+                    intersectionObserver.disconnect();
+                });
+            })).pipe(operators.flatMap((/**
+             * @param {?} entries
+             * @return {?}
+             */
+            function (entries) { return entries; })), operators.map((/**
+             * @param {?} entry
+             * @return {?}
+             */
+            function (entry) { return entry.isIntersecting; })), operators.distinctUntilChanged());
+            return elementVisible$;
+        };
+        /**
+         * @private
+         * @param {?=} options
+         * @return {?}
+         */
+        IntersectionService.prototype.getRootMargin = /**
+         * @private
+         * @param {?=} options
+         * @return {?}
+         */
+        function (options) {
+            if (options.rootMargin) {
+                return options.rootMargin;
+            }
+            /** @type {?} */
+            var layoutConfig = (/** @type {?} */ (this.config));
+            if (layoutConfig.deferredLoading &&
+                layoutConfig.deferredLoading.intersectionMargin) {
+                return layoutConfig.deferredLoading.intersectionMargin;
+            }
+        };
+        IntersectionService.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        IntersectionService.ctorParameters = function () { return [
+            { type: LayoutConfig }
+        ]; };
+        /** @nocollapse */ IntersectionService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function IntersectionService_Factory() { return new IntersectionService(core.ɵɵinject(LayoutConfig)); }, token: IntersectionService, providedIn: "root" });
+        return IntersectionService;
+    }());
+    if (false) {
+        /**
+         * @type {?}
+         * @protected
+         */
+        IntersectionService.prototype.config;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * The defer loading serivce is used to defer loading of DOM elements
+     * until the elements are required for the user experience.
+     */
+    var DeferLoaderService = /** @class */ (function () {
+        function DeferLoaderService(platformId, config, intersectionService) {
+            this.platformId = platformId;
+            this.config = config;
+            this.intersectionService = intersectionService;
+            this.globalLoadStrategy = config.deferredLoading
+                ? config.deferredLoading.strategy
+                : core$1.DeferLoadingStrategy.INSTANT;
+        }
+        /**
+         * Defer loading till the element intersects the viewport.
+         *
+         * We evalutes whether we instantly load the element for different reasons:
+         * - we run in SSR mode
+         * - there's no global strategy given
+         * - the global loading strategy is set to INSTANT loading,
+         *   and the loading strategy in the given is not set to DEFER
+         * - the loading strategy in the given options is set to INSTANT
+         */
+        /**
+         * Defer loading till the element intersects the viewport.
+         *
+         * We evalutes whether we instantly load the element for different reasons:
+         * - we run in SSR mode
+         * - there's no global strategy given
+         * - the global loading strategy is set to INSTANT loading,
+         *   and the loading strategy in the given is not set to DEFER
+         * - the loading strategy in the given options is set to INSTANT
+         * @param {?} element
+         * @param {?=} options
+         * @return {?}
+         */
+        DeferLoaderService.prototype.load = /**
+         * Defer loading till the element intersects the viewport.
+         *
+         * We evalutes whether we instantly load the element for different reasons:
+         * - we run in SSR mode
+         * - there's no global strategy given
+         * - the global loading strategy is set to INSTANT loading,
+         *   and the loading strategy in the given is not set to DEFER
+         * - the loading strategy in the given options is set to INSTANT
+         * @param {?} element
+         * @param {?=} options
+         * @return {?}
+         */
+        function (element, options) {
+            if (this.shouldLoadInstantly((options || {}).deferLoading)) {
+                return rxjs.of(true);
+            }
+            else {
+                return this.intersectionService.isIntersected(element, options);
+            }
+        };
+        /**
+         * @private
+         * @param {?} elementLoadingStrategy
+         * @return {?}
+         */
+        DeferLoaderService.prototype.shouldLoadInstantly = /**
+         * @private
+         * @param {?} elementLoadingStrategy
+         * @return {?}
+         */
+        function (elementLoadingStrategy) {
+            return (common.isPlatformServer(this.platformId) ||
+                elementLoadingStrategy === core$1.DeferLoadingStrategy.INSTANT ||
+                (elementLoadingStrategy !== core$1.DeferLoadingStrategy.DEFER &&
+                    this.globalLoadStrategy === core$1.DeferLoadingStrategy.INSTANT));
+        };
+        DeferLoaderService.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        DeferLoaderService.ctorParameters = function () { return [
+            { type: Object, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] },
+            { type: LayoutConfig },
+            { type: IntersectionService }
+        ]; };
+        /** @nocollapse */ DeferLoaderService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function DeferLoaderService_Factory() { return new DeferLoaderService(core.ɵɵinject(core.PLATFORM_ID), core.ɵɵinject(LayoutConfig), core.ɵɵinject(IntersectionService)); }, token: DeferLoaderService, providedIn: "root" });
+        return DeferLoaderService;
+    }());
+    if (false) {
+        /** @type {?} */
+        DeferLoaderService.prototype.globalLoadStrategy;
+        /**
+         * @type {?}
+         * @private
+         */
+        DeferLoaderService.prototype.platformId;
+        /**
+         * @type {?}
+         * @protected
+         */
+        DeferLoaderService.prototype.config;
+        /**
+         * @type {?}
+         * @protected
+         */
+        DeferLoaderService.prototype.intersectionService;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var OutletDirective = /** @class */ (function () {
-        function OutletDirective(vcr, templateRef, outletService) {
+        function OutletDirective(vcr, templateRef, outletService, deferLoaderService) {
             this.vcr = vcr;
             this.templateRef = templateRef;
             this.outletService = outletService;
+            this.deferLoaderService = deferLoaderService;
+            this.loaded = new core.EventEmitter(true);
+            this.subscription = new rxjs.Subscription();
         }
-        Object.defineProperty(OutletDirective.prototype, "cxOutletContext", {
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
-                this._context = value;
-            },
-            enumerable: true,
-            configurable: true
-        });
         /**
          * @return {?}
          */
         OutletDirective.prototype.ngOnInit = /**
+         * @return {?}
+         */
+        function () {
+            if (this.cxOutletDefer) {
+                this.deferLoading();
+            }
+            else {
+                this.render();
+            }
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        OutletDirective.prototype.deferLoading = /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this.loaded.emit(false);
+            /** @type {?} */
+            var hostElement = this.getHostElement(this.vcr.element.nativeElement);
+            // allthought the deferLoaderService might emit only once, as long as the hostElement
+            // isn't being loaded, there's no value being emitted. Therefor we need to clean up
+            // the subscription on destroy.
+            this.subscription.add(this.deferLoaderService
+                .load(hostElement, this.cxOutletDefer)
+                .subscribe((/**
+             * @return {?}
+             */
+            function () {
+                _this.render();
+                _this.loaded.emit(true);
+            })));
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        OutletDirective.prototype.render = /**
+         * @private
          * @return {?}
          */
         function () {
@@ -6139,10 +6499,51 @@
                 this.vcr.createComponent(tmplOrFactory);
             }
             else if (tmplOrFactory instanceof core.TemplateRef) {
-                this.vcr.createEmbeddedView((/** @type {?} */ (tmplOrFactory)), {
-                    $implicit: this._context,
+                /** @type {?} */
+                var view = this.vcr.createEmbeddedView((/** @type {?} */ (tmplOrFactory)), {
+                    $implicit: this.cxOutletContext,
                 });
+                // we do not know if content is created dynamically or not
+                // so we apply change detection anyway
+                view.markForCheck();
             }
+        };
+        /**
+         * Returns the closest `HtmlElement`, by iterating over the
+         * parent elements of the given element.
+         *
+         * @param element
+         */
+        /**
+         * Returns the closest `HtmlElement`, by iterating over the
+         * parent elements of the given element.
+         *
+         * @private
+         * @param {?} element
+         * @return {?}
+         */
+        OutletDirective.prototype.getHostElement = /**
+         * Returns the closest `HtmlElement`, by iterating over the
+         * parent elements of the given element.
+         *
+         * @private
+         * @param {?} element
+         * @return {?}
+         */
+        function (element) {
+            if (element instanceof HTMLElement) {
+                return element;
+            }
+            return this.getHostElement(element.parentElement);
+        };
+        /**
+         * @return {?}
+         */
+        OutletDirective.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
+            this.subscription.unsubscribe();
         };
         OutletDirective.decorators = [
             { type: core.Directive, args: [{
@@ -6153,22 +6554,31 @@
         OutletDirective.ctorParameters = function () { return [
             { type: core.ViewContainerRef },
             { type: core.TemplateRef },
-            { type: OutletService }
+            { type: OutletService },
+            { type: DeferLoaderService }
         ]; };
         OutletDirective.propDecorators = {
             cxOutlet: [{ type: core.Input }],
-            cxOutletContext: [{ type: core.Input }]
+            cxOutletContext: [{ type: core.Input }],
+            cxOutletDefer: [{ type: core.Input }],
+            loaded: [{ type: core.Output }]
         };
         return OutletDirective;
     }());
     if (false) {
         /** @type {?} */
         OutletDirective.prototype.cxOutlet;
+        /** @type {?} */
+        OutletDirective.prototype.cxOutletContext;
         /**
+         * Defers loading options for the the templates of this outlet.
          * @type {?}
-         * @private
          */
-        OutletDirective.prototype._context;
+        OutletDirective.prototype.cxOutletDefer;
+        /** @type {?} */
+        OutletDirective.prototype.loaded;
+        /** @type {?} */
+        OutletDirective.prototype.subscription;
         /**
          * @type {?}
          * @private
@@ -6184,6 +6594,11 @@
          * @private
          */
         OutletDirective.prototype.outletService;
+        /**
+         * @type {?}
+         * @private
+         */
+        OutletDirective.prototype.deferLoaderService;
     }
 
     /**
@@ -6835,82 +7250,154 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var PageSlotComponent = /** @class */ (function () {
-        function PageSlotComponent(cmsService, dynamicAttributeService, renderer, hostElement) {
+        function PageSlotComponent(cmsService, dynamicAttributeService, renderer, hostElement, config) {
             var _this = this;
             this.cmsService = cmsService;
             this.dynamicAttributeService = dynamicAttributeService;
             this.renderer = renderer;
             this.hostElement = hostElement;
+            this.config = config;
+            this.isPending = true;
+            this.hasComponents = false;
+            this.isPageFold = false;
             this.position$ = new rxjs.BehaviorSubject(undefined);
-            /**
-             * observable with `ContentSlotData` for the current position
-             */
-            this.slot$ = this.position$.pipe(operators.switchMap((/**
+            this.components$ = this.position$.pipe(operators.switchMap((/**
              * @param {?} position
              * @return {?}
              */
-            function (position) { return _this.cmsService.getContentSlot(position); })), operators.tap((/**
-             * @param {?} slot
-             * @return {?}
-             */
-            function (slot) { return _this.addSmartEditSlotClass(slot); })));
-            /**
-             * observable with components (`ContentSlotComponentData[]`)
-             * for the current slot
-             */
-            this.components$ = this.slot$.pipe(operators.map((/**
-             * @param {?} slot
-             * @return {?}
-             */
-            function (slot) { return (slot && slot.components ? slot.components : []); })), operators.distinctUntilChanged((/**
-             * @param {?} a
-             * @param {?} b
-             * @return {?}
-             */
-            function (a, b) {
-                return a.length === b.length && !a.find((/**
-                 * @param {?} el
-                 * @param {?} index
+            function (position) {
+                return _this.cmsService.getContentSlot(position).pipe(operators.tap((/**
+                 * @param {?} slot
                  * @return {?}
                  */
-                function (el, index) { return el.uid !== b[index].uid; }));
-            })), operators.tap((/**
-             * @param {?} components
-             * @return {?}
-             */
-            function (components) { return _this.addComponentClass(components); })));
+                function (slot) { return _this.addSmartEditSlotClass(slot); })), operators.map((/**
+                 * @param {?} slot
+                 * @return {?}
+                 */
+                function (slot) { return (slot && slot.components ? slot.components : []); })), operators.distinctUntilChanged((/**
+                 * @param {?} a
+                 * @param {?} b
+                 * @return {?}
+                 */
+                function (a, b) {
+                    return a.length === b.length &&
+                        !a.find((/**
+                         * @param {?} el
+                         * @param {?} index
+                         * @return {?}
+                         */
+                        function (el, index) { return el.uid !== b[index].uid; }));
+                })));
+            })));
+            this.subscription = new rxjs.Subscription();
         }
         Object.defineProperty(PageSlotComponent.prototype, "position", {
-            set: /**
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return this.position$.value;
+            },
+            // need to have this host binding at the top as it will override the entire class
+            set: 
+            // need to have this host binding at the top as it will override the entire class
+            /**
              * @param {?} position
              * @return {?}
              */
             function (position) {
                 this.position$.next(position);
-                // add the position name as a css class so that
-                // layout can be applied to it, using the position based class.
-                this.renderer.addClass(this.hostElement.nativeElement, position);
             },
             enumerable: true,
             configurable: true
         });
-        // add a class to indicate whether the class is empty or not
-        // add a class to indicate whether the class is empty or not
         /**
-         * @private
-         * @param {?} components
          * @return {?}
          */
-        PageSlotComponent.prototype.addComponentClass = 
-        // add a class to indicate whether the class is empty or not
-        /**
-         * @private
-         * @param {?} components
+        PageSlotComponent.prototype.ngOnInit = /**
          * @return {?}
          */
-        function (components) {
-            if (components && components.length > 0) {
-                this.renderer.addClass(this.hostElement.nativeElement, 'has-components');
+        function () {
+            var _this = this;
+            this.subscription.add(this.components$.subscribe((/**
+             * @param {?} components
+             * @return {?}
+             */
+            function (components) {
+                _this.hasComponents = components && components.length > 0;
+                _this.pendingComponentCount = components ? components.length : 0;
+                _this.isPending = _this.pendingComponentCount > 0;
+            })));
+        };
+        /**
+         * @return {?}
+         */
+        PageSlotComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
+            this.subscription.unsubscribe();
+        };
+        /**
+         * Is triggered when a component is added to the view.
+         * We use this information to dropthe `is-pending` class from the page slot
+         * when all nested components have been added.
+         */
+        /**
+         * Is triggered when a component is added to the view.
+         * We use this information to dropthe `is-pending` class from the page slot
+         * when all nested components have been added.
+         * @param {?} loadState
+         * @return {?}
+         */
+        PageSlotComponent.prototype.isLoaded = /**
+         * Is triggered when a component is added to the view.
+         * We use this information to dropthe `is-pending` class from the page slot
+         * when all nested components have been added.
+         * @param {?} loadState
+         * @return {?}
+         */
+        function (loadState) {
+            if (loadState) {
+                this.pendingComponentCount--;
+            }
+            this.isPending = this.pendingComponentCount > 0;
+        };
+        /**
+         * @param {?} componentType
+         * @return {?}
+         */
+        PageSlotComponent.prototype.getComponentDeferOptions = /**
+         * @param {?} componentType
+         * @return {?}
+         */
+        function (componentType) {
+            /** @type {?} */
+            var deferLoading = this.getDeferLoadingStrategy(componentType);
+            return { deferLoading: deferLoading };
+        };
+        /**
+         * The `DeferLoadingStrategy` indicates whether component rendering
+         * should be deferred.
+         */
+        /**
+         * The `DeferLoadingStrategy` indicates whether component rendering
+         * should be deferred.
+         * @private
+         * @param {?} componentType
+         * @return {?}
+         */
+        PageSlotComponent.prototype.getDeferLoadingStrategy = /**
+         * The `DeferLoadingStrategy` indicates whether component rendering
+         * should be deferred.
+         * @private
+         * @param {?} componentType
+         * @return {?}
+         */
+        function (componentType) {
+            if (this.config) {
+                return (((/** @type {?} */ (this.config))).cmsComponents[componentType] || {})
+                    .deferLoading;
             }
         };
         /**
@@ -6944,7 +7431,7 @@
         PageSlotComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-page-slot',
-                        template: "<ng-template\n  [cxOutlet]=\"position$ | async\"\n  [cxOutletContext]=\"{ components$: components$ }\"\n>\n  <ng-container *ngFor=\"let component of components$ | async\">\n    <ng-template\n      [cxOutlet]=\"component.flexType\"\n      [cxOutletContext]=\"{ component: component }\"\n    >\n      <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n    </ng-template>\n  </ng-container>\n</ng-template>\n",
+                        template: "<ng-template\n  [cxOutlet]=\"position\"\n  [cxOutletContext]=\"{ components$: components$ }\"\n>\n  <ng-template\n    *ngFor=\"let component of components$ | async\"\n    [cxOutlet]=\"component.flexType\"\n    [cxOutletContext]=\"{ component: component }\"\n    [cxOutletDefer]=\"getComponentDeferOptions(component.flexType)\"\n    (loaded)=\"isLoaded($event)\"\n  >\n    <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n  </ng-template>\n</ng-template>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -6953,27 +7440,38 @@
             { type: core$1.CmsService },
             { type: core$1.DynamicAttributeService },
             { type: core.Renderer2 },
-            { type: core.ElementRef }
+            { type: core.ElementRef },
+            { type: core$1.CmsConfig }
         ]; };
         PageSlotComponent.propDecorators = {
-            position: [{ type: core.Input }]
+            position: [{ type: core.HostBinding, args: ['class',] }, { type: core.Input }],
+            isPending: [{ type: core.HostBinding, args: ['class.cx-pending',] }],
+            hasComponents: [{ type: core.HostBinding, args: ['class.has-components',] }],
+            isPageFold: [{ type: core.HostBinding, args: ['class.page-fold',] }, { type: core.Input }]
         };
         return PageSlotComponent;
     }());
     if (false) {
         /** @type {?} */
+        PageSlotComponent.prototype.isPending;
+        /** @type {?} */
+        PageSlotComponent.prototype.hasComponents;
+        /** @type {?} */
+        PageSlotComponent.prototype.isPageFold;
+        /**
+         * @type {?}
+         * @private
+         */
+        PageSlotComponent.prototype.pendingComponentCount;
+        /** @type {?} */
         PageSlotComponent.prototype.position$;
-        /**
-         * observable with `ContentSlotData` for the current position
-         * @type {?}
-         */
-        PageSlotComponent.prototype.slot$;
-        /**
-         * observable with components (`ContentSlotComponentData[]`)
-         * for the current slot
-         * @type {?}
-         */
+        /** @type {?} */
         PageSlotComponent.prototype.components$;
+        /**
+         * @type {?}
+         * @private
+         */
+        PageSlotComponent.prototype.subscription;
         /**
          * @type {?}
          * @protected
@@ -6994,6 +7492,11 @@
          * @protected
          */
         PageSlotComponent.prototype.hostElement;
+        /**
+         * @type {?}
+         * @protected
+         */
+        PageSlotComponent.prototype.config;
     }
 
     /**
@@ -16117,6 +16620,11 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var ConsentManagementFormComponent = /** @class */ (function () {
         function ConsentManagementFormComponent() {
             this.consentGiven = false;
@@ -17245,7 +17753,7 @@
         TabParagraphContainerComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-tab-paragraph-container',
-                        template: "<ng-container *ngFor=\"let component of components$ | async; let i = index\">\n  <h3 [class.active]=\"i === activeTabNum\" (click)=\"select(i)\">\n    {{ component.title | cxTranslate }}\n  </h3>\n  <div [class.active]=\"i === activeTabNum\">\n    <ng-template\n      [cxOutlet]=\"component.flexType\"\n      [cxOutletContext]=\"{}\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-template>\n  </div>\n</ng-container>\n",
+                        template: "<ng-container *ngFor=\"let component of components$ | async; let i = index\">\n  <h3 [class.active]=\"i === activeTabNum\" (click)=\"select(i)\">\n    {{ component.title | cxTranslate }}\n  </h3>\n  <div [class.active]=\"i === activeTabNum\">\n    <ng-template [cxOutlet]=\"component.flexType\" [cxOutletContext]=\"{}\">\n      <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n    </ng-template>\n  </div>\n</ng-container>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -28007,6 +28515,10 @@
      */
     /** @type {?} */
     var b2cLayoutConfig = {
+        // deferredLoading: {
+        //   strategy: DeferLoadingStrategy.DEFER,
+        //   intersectionMargin: '50px',
+        // },
         layoutSlots: {
             header: {
                 md: {
@@ -28035,6 +28547,7 @@
                 slots: ['Footer'],
             },
             LandingPage2Template: {
+                pageFold: 'Section2B',
                 slots: [
                     'Section1',
                     'Section2A',
@@ -28049,6 +28562,7 @@
                 slots: ['Section2A', 'Section2B'],
             },
             CategoryPageTemplate: {
+                pageFold: 'Section2',
                 slots: ['Section1', 'Section2', 'Section3'],
             },
             ProductListPageTemplate: {
@@ -28063,6 +28577,12 @@
                 ],
             },
             ProductDetailsPageTemplate: {
+                md: {
+                    pageFold: 'UpSelling',
+                },
+                xs: {
+                    pageFold: 'Summary',
+                },
                 slots: [
                     'Summary',
                     'UpSelling',
@@ -28686,6 +29206,8 @@
     exports.ɵx = AddToHomeScreenService;
     exports.ɵy = GuestRegisterFormComponent;
     exports.ɵz = CheckoutLoginComponent;
+    exports.θDeferLoaderService = DeferLoaderService;
+    exports.θIntersectionService = IntersectionService;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

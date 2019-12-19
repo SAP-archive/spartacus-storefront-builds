@@ -1,8 +1,8 @@
 import { CommonModule, isPlatformServer, isPlatformBrowser, DOCUMENT, Location } from '@angular/common';
 import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, EventEmitter, Output, isDevMode, ChangeDetectionStrategy, forwardRef, Renderer2, ViewChild, Directive, HostListener, Optional, Injector, Inject, PLATFORM_ID, INJECTOR, InjectionToken, TemplateRef, ComponentFactory, ViewContainerRef, ComponentFactoryResolver, NgZone, APP_INITIALIZER, RendererFactory2, ViewEncapsulation, ChangeDetectorRef, Pipe } from '@angular/core';
-import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, FeaturesConfigModule, CmsConfig, TranslationService, TranslationChunkService, CmsService, PageType, RoutingService, SemanticPathService, ProtectedRoutesGuard, AuthService, CartService, CartDataService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, DynamicAttributeService, PageRobotsMeta, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, CartVoucherService, OCC_USER_ID_ANONYMOUS, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, CmsPageTitleModule, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, RoutingModule as RoutingModule$1, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
-import { Subscription, combineLatest, of, fromEvent, BehaviorSubject, concat, isObservable, from } from 'rxjs';
-import { take, distinctUntilChanged, tap, map, debounceTime, startWith, filter, switchMap, first, skipWhile, endWith, withLatestFrom, mergeMap, shareReplay, scan, pluck } from 'rxjs/operators';
+import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, TranslationService, TranslationChunkService, CmsService, PageType, RoutingService, SemanticPathService, ProtectedRoutesGuard, AuthService, CartService, CartDataService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, DynamicAttributeService, PageRobotsMeta, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, CartVoucherService, OCC_USER_ID_ANONYMOUS, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, CmsPageTitleModule, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, RoutingModule as RoutingModule$1, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
+import { Subscription, combineLatest, of, fromEvent, BehaviorSubject, concat, isObservable, from, Observable } from 'rxjs';
+import { take, distinctUntilChanged, tap, map, debounceTime, startWith, filter, switchMap, first, skipWhile, endWith, withLatestFrom, flatMap, mergeMap, shareReplay, scan, pluck } from 'rxjs/operators';
 import { __extends, __read, __values, __assign, __spread, __awaiter, __generator } from 'tslib';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
@@ -1466,6 +1466,13 @@ if (false) {
     LayoutConfig.prototype.breakpoints;
     /** @type {?} */
     LayoutConfig.prototype.layoutSlots;
+    /**
+     * Deferrred loading is a technique to hold of with the loading / creation
+     * of DOM elements which are not not in the initial view port.
+     * This technique wil increase performance.
+     * @type {?}
+     */
+    LayoutConfig.prototype.deferredLoading;
 }
 
 var _a;
@@ -4353,6 +4360,7 @@ var AnonymousConsentManagementBannerModule = /** @class */ (function () {
                             cmsComponents: {
                                 AnonymousConsentManagementBannerComponent: {
                                     component: AnonymousConsentManagementBannerComponent,
+                                    deferLoading: DeferLoadingStrategy.INSTANT,
                                 },
                                 AnonymousConsentOpenDialogComponent: {
                                     component: AnonymousConsentOpenDialogComponent,
@@ -4802,8 +4810,9 @@ var PageLayoutService = /** @class */ (function () {
         this.config = config;
         this.breakpointService = breakpointService;
         this.handlers = handlers;
-        // we print warn messages on missing layout configs
-        // only once to not polute the console log
+        // Prints warn messages for missing layout configs.
+        // The warnings are only printed once per config
+        // to not pollute the console log.
         this.warnLogMessages = {};
         this.logSlots = {};
     }
@@ -4866,6 +4875,42 @@ var PageLayoutService = /** @class */ (function () {
                 }
             }
             return true;
+        })));
+    };
+    /**
+     * Returns an observable with the last page slot above-the-fold
+     * for the given pageTemplate / breakpoint.
+     *
+     * The page fold is configurable in the `LayoutConfig` for each page layout.
+     */
+    /**
+     * Returns an observable with the last page slot above-the-fold
+     * for the given pageTemplate / breakpoint.
+     *
+     * The page fold is configurable in the `LayoutConfig` for each page layout.
+     * @param {?} pageTemplate
+     * @return {?}
+     */
+    PageLayoutService.prototype.getPageFoldSlot = /**
+     * Returns an observable with the last page slot above-the-fold
+     * for the given pageTemplate / breakpoint.
+     *
+     * The page fold is configurable in the `LayoutConfig` for each page layout.
+     * @param {?} pageTemplate
+     * @return {?}
+     */
+    function (pageTemplate) {
+        var _this = this;
+        return this.breakpointService.breakpoint$.pipe(map((/**
+         * @param {?} breakpoint
+         * @return {?}
+         */
+        function (breakpoint) {
+            /** @type {?} */
+            var pageTemplateConfig = _this.config.layoutSlots[pageTemplate];
+            /** @type {?} */
+            var config = _this.getResponsiveSlotConfig((/** @type {?} */ (pageTemplateConfig)), 'pageFold', breakpoint);
+            return config ? config.pageFold : null;
         })));
     };
     /**
@@ -5051,7 +5096,7 @@ var PageLayoutService = /** @class */ (function () {
         /** @type {?} */
         var slotConfig = (/** @type {?} */ (layoutSlotConfig));
         // fallback to default slot config
-        if (!breakpoint) {
+        if (!layoutSlotConfig || !breakpoint) {
             return slotConfig;
         }
         // we have a config for the specific breakpoint
@@ -5197,6 +5242,13 @@ var PageLayoutComponent = /** @class */ (function () {
          * @return {?}
          */
         function (section) { return _this.pageLayoutService.getSlots(section); })));
+        this.pageFoldSlot$ = this.templateName$.pipe(switchMap((/**
+         * @param {?} templateName
+         * @return {?}
+         */
+        function (templateName) {
+            return _this.pageLayoutService.getPageFoldSlot(templateName);
+        })), distinctUntilChanged());
     }
     Object.defineProperty(PageLayoutComponent.prototype, "section", {
         set: /**
@@ -5227,7 +5279,7 @@ var PageLayoutComponent = /** @class */ (function () {
     PageLayoutComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-page-layout',
-                    template: "<ng-template\n  [cxOutlet]=\"layoutName$ | async\"\n  [cxOutletContext]=\"{\n    templateName$: templateName$,\n    slots$: slots$,\n    section$: section$\n  }\"\n>\n  <ng-content></ng-content>\n\n  <cx-page-slot\n    *ngFor=\"let slot of slots$ | async\"\n    [position]=\"slot\"\n  ></cx-page-slot>\n</ng-template>\n",
+                    template: "<ng-template\n  [cxOutlet]=\"layoutName$ | async\"\n  [cxOutletContext]=\"{\n    templateName$: templateName$,\n    slots$: slots$,\n    section$: section$\n  }\"\n>\n  <ng-content></ng-content>\n\n  <cx-page-slot\n    *ngFor=\"let slot of slots$ | async\"\n    [position]=\"slot\"\n    [isPageFold]=\"slot === (pageFoldSlot$ | async)\"\n  ></cx-page-slot>\n</ng-template>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -5251,6 +5303,8 @@ if (false) {
     PageLayoutComponent.prototype.layoutName$;
     /** @type {?} */
     PageLayoutComponent.prototype.slots$;
+    /** @type {?} */
+    PageLayoutComponent.prototype.pageFoldSlot$;
     /**
      * @type {?}
      * @private
@@ -5881,27 +5935,333 @@ var OutletRefModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * The IntersectionService uses the native IntersectionObserver (v2), which
+ * can be used to implement pre-loading and deferred loading of DOM content.
+ *
+ */
+var IntersectionService = /** @class */ (function () {
+    function IntersectionService(config) {
+        this.config = config;
+    }
+    /**
+     * Returns an Observable that emits only once a boolean value whenever
+     * the given element has shown in the view port.
+     *
+     * The returned obervable will only emit the first value. The
+     * observable must be cleaned up either way, since the value might never emit; it
+     *  depends on whether the element appears in the view port.
+     */
+    /**
+     * Returns an Observable that emits only once a boolean value whenever
+     * the given element has shown in the view port.
+     *
+     * The returned obervable will only emit the first value. The
+     * observable must be cleaned up either way, since the value might never emit; it
+     *  depends on whether the element appears in the view port.
+     * @param {?} element
+     * @param {?=} options
+     * @return {?}
+     */
+    IntersectionService.prototype.isIntersected = /**
+     * Returns an Observable that emits only once a boolean value whenever
+     * the given element has shown in the view port.
+     *
+     * The returned obervable will only emit the first value. The
+     * observable must be cleaned up either way, since the value might never emit; it
+     *  depends on whether the element appears in the view port.
+     * @param {?} element
+     * @param {?=} options
+     * @return {?}
+     */
+    function (element, options) {
+        return this.intersects(element, options).pipe(first((/**
+         * @param {?} v
+         * @return {?}
+         */
+        function (v) { return v === true; })));
+    };
+    /**
+     * Indicates whenever the element intersects the view port. An optional margin
+     * is used to intersects before the element shows up in the viewport.
+     * A value is emitted each time the element intersects.
+     *
+     * This is private for now, but could be exposed as a public API
+     * to introduce additional (css) render effects to the UI.
+     */
+    /**
+     * Indicates whenever the element intersects the view port. An optional margin
+     * is used to intersects before the element shows up in the viewport.
+     * A value is emitted each time the element intersects.
+     *
+     * This is private for now, but could be exposed as a public API
+     * to introduce additional (css) render effects to the UI.
+     * @private
+     * @param {?} element
+     * @param {?=} options
+     * @return {?}
+     */
+    IntersectionService.prototype.intersects = /**
+     * Indicates whenever the element intersects the view port. An optional margin
+     * is used to intersects before the element shows up in the viewport.
+     * A value is emitted each time the element intersects.
+     *
+     * This is private for now, but could be exposed as a public API
+     * to introduce additional (css) render effects to the UI.
+     * @private
+     * @param {?} element
+     * @param {?=} options
+     * @return {?}
+     */
+    function (element, options) {
+        var _this = this;
+        /** @type {?} */
+        var elementVisible$ = new Observable((/**
+         * @param {?} observer
+         * @return {?}
+         */
+        function (observer) {
+            /** @type {?} */
+            var rootMargin = _this.getRootMargin(options);
+            /** @type {?} */
+            var intersectOptions = { rootMargin: rootMargin };
+            /** @type {?} */
+            var intersectionObserver = new IntersectionObserver((/**
+             * @param {?} entries
+             * @return {?}
+             */
+            function (entries) {
+                observer.next(entries);
+            }), intersectOptions);
+            intersectionObserver.observe(element);
+            return (/**
+             * @return {?}
+             */
+            function () {
+                intersectionObserver.disconnect();
+            });
+        })).pipe(flatMap((/**
+         * @param {?} entries
+         * @return {?}
+         */
+        function (entries) { return entries; })), map((/**
+         * @param {?} entry
+         * @return {?}
+         */
+        function (entry) { return entry.isIntersecting; })), distinctUntilChanged());
+        return elementVisible$;
+    };
+    /**
+     * @private
+     * @param {?=} options
+     * @return {?}
+     */
+    IntersectionService.prototype.getRootMargin = /**
+     * @private
+     * @param {?=} options
+     * @return {?}
+     */
+    function (options) {
+        if (options.rootMargin) {
+            return options.rootMargin;
+        }
+        /** @type {?} */
+        var layoutConfig = (/** @type {?} */ (this.config));
+        if (layoutConfig.deferredLoading &&
+            layoutConfig.deferredLoading.intersectionMargin) {
+            return layoutConfig.deferredLoading.intersectionMargin;
+        }
+    };
+    IntersectionService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    IntersectionService.ctorParameters = function () { return [
+        { type: LayoutConfig }
+    ]; };
+    /** @nocollapse */ IntersectionService.ngInjectableDef = ɵɵdefineInjectable({ factory: function IntersectionService_Factory() { return new IntersectionService(ɵɵinject(LayoutConfig)); }, token: IntersectionService, providedIn: "root" });
+    return IntersectionService;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @protected
+     */
+    IntersectionService.prototype.config;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * The defer loading serivce is used to defer loading of DOM elements
+ * until the elements are required for the user experience.
+ */
+var DeferLoaderService = /** @class */ (function () {
+    function DeferLoaderService(platformId, config, intersectionService) {
+        this.platformId = platformId;
+        this.config = config;
+        this.intersectionService = intersectionService;
+        this.globalLoadStrategy = config.deferredLoading
+            ? config.deferredLoading.strategy
+            : DeferLoadingStrategy.INSTANT;
+    }
+    /**
+     * Defer loading till the element intersects the viewport.
+     *
+     * We evalutes whether we instantly load the element for different reasons:
+     * - we run in SSR mode
+     * - there's no global strategy given
+     * - the global loading strategy is set to INSTANT loading,
+     *   and the loading strategy in the given is not set to DEFER
+     * - the loading strategy in the given options is set to INSTANT
+     */
+    /**
+     * Defer loading till the element intersects the viewport.
+     *
+     * We evalutes whether we instantly load the element for different reasons:
+     * - we run in SSR mode
+     * - there's no global strategy given
+     * - the global loading strategy is set to INSTANT loading,
+     *   and the loading strategy in the given is not set to DEFER
+     * - the loading strategy in the given options is set to INSTANT
+     * @param {?} element
+     * @param {?=} options
+     * @return {?}
+     */
+    DeferLoaderService.prototype.load = /**
+     * Defer loading till the element intersects the viewport.
+     *
+     * We evalutes whether we instantly load the element for different reasons:
+     * - we run in SSR mode
+     * - there's no global strategy given
+     * - the global loading strategy is set to INSTANT loading,
+     *   and the loading strategy in the given is not set to DEFER
+     * - the loading strategy in the given options is set to INSTANT
+     * @param {?} element
+     * @param {?=} options
+     * @return {?}
+     */
+    function (element, options) {
+        if (this.shouldLoadInstantly((options || {}).deferLoading)) {
+            return of(true);
+        }
+        else {
+            return this.intersectionService.isIntersected(element, options);
+        }
+    };
+    /**
+     * @private
+     * @param {?} elementLoadingStrategy
+     * @return {?}
+     */
+    DeferLoaderService.prototype.shouldLoadInstantly = /**
+     * @private
+     * @param {?} elementLoadingStrategy
+     * @return {?}
+     */
+    function (elementLoadingStrategy) {
+        return (isPlatformServer(this.platformId) ||
+            elementLoadingStrategy === DeferLoadingStrategy.INSTANT ||
+            (elementLoadingStrategy !== DeferLoadingStrategy.DEFER &&
+                this.globalLoadStrategy === DeferLoadingStrategy.INSTANT));
+    };
+    DeferLoaderService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    DeferLoaderService.ctorParameters = function () { return [
+        { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+        { type: LayoutConfig },
+        { type: IntersectionService }
+    ]; };
+    /** @nocollapse */ DeferLoaderService.ngInjectableDef = ɵɵdefineInjectable({ factory: function DeferLoaderService_Factory() { return new DeferLoaderService(ɵɵinject(PLATFORM_ID), ɵɵinject(LayoutConfig), ɵɵinject(IntersectionService)); }, token: DeferLoaderService, providedIn: "root" });
+    return DeferLoaderService;
+}());
+if (false) {
+    /** @type {?} */
+    DeferLoaderService.prototype.globalLoadStrategy;
+    /**
+     * @type {?}
+     * @private
+     */
+    DeferLoaderService.prototype.platformId;
+    /**
+     * @type {?}
+     * @protected
+     */
+    DeferLoaderService.prototype.config;
+    /**
+     * @type {?}
+     * @protected
+     */
+    DeferLoaderService.prototype.intersectionService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var OutletDirective = /** @class */ (function () {
-    function OutletDirective(vcr, templateRef, outletService) {
+    function OutletDirective(vcr, templateRef, outletService, deferLoaderService) {
         this.vcr = vcr;
         this.templateRef = templateRef;
         this.outletService = outletService;
+        this.deferLoaderService = deferLoaderService;
+        this.loaded = new EventEmitter(true);
+        this.subscription = new Subscription();
     }
-    Object.defineProperty(OutletDirective.prototype, "cxOutletContext", {
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            this._context = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
     /**
      * @return {?}
      */
     OutletDirective.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        if (this.cxOutletDefer) {
+            this.deferLoading();
+        }
+        else {
+            this.render();
+        }
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    OutletDirective.prototype.deferLoading = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.loaded.emit(false);
+        /** @type {?} */
+        var hostElement = this.getHostElement(this.vcr.element.nativeElement);
+        // allthought the deferLoaderService might emit only once, as long as the hostElement
+        // isn't being loaded, there's no value being emitted. Therefor we need to clean up
+        // the subscription on destroy.
+        this.subscription.add(this.deferLoaderService
+            .load(hostElement, this.cxOutletDefer)
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
+            _this.render();
+            _this.loaded.emit(true);
+        })));
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    OutletDirective.prototype.render = /**
+     * @private
      * @return {?}
      */
     function () {
@@ -5954,10 +6314,51 @@ var OutletDirective = /** @class */ (function () {
             this.vcr.createComponent(tmplOrFactory);
         }
         else if (tmplOrFactory instanceof TemplateRef) {
-            this.vcr.createEmbeddedView((/** @type {?} */ (tmplOrFactory)), {
-                $implicit: this._context,
+            /** @type {?} */
+            var view = this.vcr.createEmbeddedView((/** @type {?} */ (tmplOrFactory)), {
+                $implicit: this.cxOutletContext,
             });
+            // we do not know if content is created dynamically or not
+            // so we apply change detection anyway
+            view.markForCheck();
         }
+    };
+    /**
+     * Returns the closest `HtmlElement`, by iterating over the
+     * parent elements of the given element.
+     *
+     * @param element
+     */
+    /**
+     * Returns the closest `HtmlElement`, by iterating over the
+     * parent elements of the given element.
+     *
+     * @private
+     * @param {?} element
+     * @return {?}
+     */
+    OutletDirective.prototype.getHostElement = /**
+     * Returns the closest `HtmlElement`, by iterating over the
+     * parent elements of the given element.
+     *
+     * @private
+     * @param {?} element
+     * @return {?}
+     */
+    function (element) {
+        if (element instanceof HTMLElement) {
+            return element;
+        }
+        return this.getHostElement(element.parentElement);
+    };
+    /**
+     * @return {?}
+     */
+    OutletDirective.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this.subscription.unsubscribe();
     };
     OutletDirective.decorators = [
         { type: Directive, args: [{
@@ -5968,22 +6369,31 @@ var OutletDirective = /** @class */ (function () {
     OutletDirective.ctorParameters = function () { return [
         { type: ViewContainerRef },
         { type: TemplateRef },
-        { type: OutletService }
+        { type: OutletService },
+        { type: DeferLoaderService }
     ]; };
     OutletDirective.propDecorators = {
         cxOutlet: [{ type: Input }],
-        cxOutletContext: [{ type: Input }]
+        cxOutletContext: [{ type: Input }],
+        cxOutletDefer: [{ type: Input }],
+        loaded: [{ type: Output }]
     };
     return OutletDirective;
 }());
 if (false) {
     /** @type {?} */
     OutletDirective.prototype.cxOutlet;
+    /** @type {?} */
+    OutletDirective.prototype.cxOutletContext;
     /**
+     * Defers loading options for the the templates of this outlet.
      * @type {?}
-     * @private
      */
-    OutletDirective.prototype._context;
+    OutletDirective.prototype.cxOutletDefer;
+    /** @type {?} */
+    OutletDirective.prototype.loaded;
+    /** @type {?} */
+    OutletDirective.prototype.subscription;
     /**
      * @type {?}
      * @private
@@ -5999,6 +6409,11 @@ if (false) {
      * @private
      */
     OutletDirective.prototype.outletService;
+    /**
+     * @type {?}
+     * @private
+     */
+    OutletDirective.prototype.deferLoaderService;
 }
 
 /**
@@ -6650,82 +7065,154 @@ var PageComponentModule = /** @class */ (function () {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var PageSlotComponent = /** @class */ (function () {
-    function PageSlotComponent(cmsService, dynamicAttributeService, renderer, hostElement) {
+    function PageSlotComponent(cmsService, dynamicAttributeService, renderer, hostElement, config) {
         var _this = this;
         this.cmsService = cmsService;
         this.dynamicAttributeService = dynamicAttributeService;
         this.renderer = renderer;
         this.hostElement = hostElement;
+        this.config = config;
+        this.isPending = true;
+        this.hasComponents = false;
+        this.isPageFold = false;
         this.position$ = new BehaviorSubject(undefined);
-        /**
-         * observable with `ContentSlotData` for the current position
-         */
-        this.slot$ = this.position$.pipe(switchMap((/**
+        this.components$ = this.position$.pipe(switchMap((/**
          * @param {?} position
          * @return {?}
          */
-        function (position) { return _this.cmsService.getContentSlot(position); })), tap((/**
-         * @param {?} slot
-         * @return {?}
-         */
-        function (slot) { return _this.addSmartEditSlotClass(slot); })));
-        /**
-         * observable with components (`ContentSlotComponentData[]`)
-         * for the current slot
-         */
-        this.components$ = this.slot$.pipe(map((/**
-         * @param {?} slot
-         * @return {?}
-         */
-        function (slot) { return (slot && slot.components ? slot.components : []); })), distinctUntilChanged((/**
-         * @param {?} a
-         * @param {?} b
-         * @return {?}
-         */
-        function (a, b) {
-            return a.length === b.length && !a.find((/**
-             * @param {?} el
-             * @param {?} index
+        function (position) {
+            return _this.cmsService.getContentSlot(position).pipe(tap((/**
+             * @param {?} slot
              * @return {?}
              */
-            function (el, index) { return el.uid !== b[index].uid; }));
-        })), tap((/**
-         * @param {?} components
-         * @return {?}
-         */
-        function (components) { return _this.addComponentClass(components); })));
+            function (slot) { return _this.addSmartEditSlotClass(slot); })), map((/**
+             * @param {?} slot
+             * @return {?}
+             */
+            function (slot) { return (slot && slot.components ? slot.components : []); })), distinctUntilChanged((/**
+             * @param {?} a
+             * @param {?} b
+             * @return {?}
+             */
+            function (a, b) {
+                return a.length === b.length &&
+                    !a.find((/**
+                     * @param {?} el
+                     * @param {?} index
+                     * @return {?}
+                     */
+                    function (el, index) { return el.uid !== b[index].uid; }));
+            })));
+        })));
+        this.subscription = new Subscription();
     }
     Object.defineProperty(PageSlotComponent.prototype, "position", {
-        set: /**
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.position$.value;
+        },
+        // need to have this host binding at the top as it will override the entire class
+        set: 
+        // need to have this host binding at the top as it will override the entire class
+        /**
          * @param {?} position
          * @return {?}
          */
         function (position) {
             this.position$.next(position);
-            // add the position name as a css class so that
-            // layout can be applied to it, using the position based class.
-            this.renderer.addClass(this.hostElement.nativeElement, position);
         },
         enumerable: true,
         configurable: true
     });
-    // add a class to indicate whether the class is empty or not
-    // add a class to indicate whether the class is empty or not
     /**
-     * @private
-     * @param {?} components
      * @return {?}
      */
-    PageSlotComponent.prototype.addComponentClass = 
-    // add a class to indicate whether the class is empty or not
-    /**
-     * @private
-     * @param {?} components
+    PageSlotComponent.prototype.ngOnInit = /**
      * @return {?}
      */
-    function (components) {
-        if (components && components.length > 0) {
-            this.renderer.addClass(this.hostElement.nativeElement, 'has-components');
+    function () {
+        var _this = this;
+        this.subscription.add(this.components$.subscribe((/**
+         * @param {?} components
+         * @return {?}
+         */
+        function (components) {
+            _this.hasComponents = components && components.length > 0;
+            _this.pendingComponentCount = components ? components.length : 0;
+            _this.isPending = _this.pendingComponentCount > 0;
+        })));
+    };
+    /**
+     * @return {?}
+     */
+    PageSlotComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this.subscription.unsubscribe();
+    };
+    /**
+     * Is triggered when a component is added to the view.
+     * We use this information to dropthe `is-pending` class from the page slot
+     * when all nested components have been added.
+     */
+    /**
+     * Is triggered when a component is added to the view.
+     * We use this information to dropthe `is-pending` class from the page slot
+     * when all nested components have been added.
+     * @param {?} loadState
+     * @return {?}
+     */
+    PageSlotComponent.prototype.isLoaded = /**
+     * Is triggered when a component is added to the view.
+     * We use this information to dropthe `is-pending` class from the page slot
+     * when all nested components have been added.
+     * @param {?} loadState
+     * @return {?}
+     */
+    function (loadState) {
+        if (loadState) {
+            this.pendingComponentCount--;
+        }
+        this.isPending = this.pendingComponentCount > 0;
+    };
+    /**
+     * @param {?} componentType
+     * @return {?}
+     */
+    PageSlotComponent.prototype.getComponentDeferOptions = /**
+     * @param {?} componentType
+     * @return {?}
+     */
+    function (componentType) {
+        /** @type {?} */
+        var deferLoading = this.getDeferLoadingStrategy(componentType);
+        return { deferLoading: deferLoading };
+    };
+    /**
+     * The `DeferLoadingStrategy` indicates whether component rendering
+     * should be deferred.
+     */
+    /**
+     * The `DeferLoadingStrategy` indicates whether component rendering
+     * should be deferred.
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    PageSlotComponent.prototype.getDeferLoadingStrategy = /**
+     * The `DeferLoadingStrategy` indicates whether component rendering
+     * should be deferred.
+     * @private
+     * @param {?} componentType
+     * @return {?}
+     */
+    function (componentType) {
+        if (this.config) {
+            return (((/** @type {?} */ (this.config))).cmsComponents[componentType] || {})
+                .deferLoading;
         }
     };
     /**
@@ -6759,7 +7246,7 @@ var PageSlotComponent = /** @class */ (function () {
     PageSlotComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-page-slot',
-                    template: "<ng-template\n  [cxOutlet]=\"position$ | async\"\n  [cxOutletContext]=\"{ components$: components$ }\"\n>\n  <ng-container *ngFor=\"let component of components$ | async\">\n    <ng-template\n      [cxOutlet]=\"component.flexType\"\n      [cxOutletContext]=\"{ component: component }\"\n    >\n      <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n    </ng-template>\n  </ng-container>\n</ng-template>\n",
+                    template: "<ng-template\n  [cxOutlet]=\"position\"\n  [cxOutletContext]=\"{ components$: components$ }\"\n>\n  <ng-template\n    *ngFor=\"let component of components$ | async\"\n    [cxOutlet]=\"component.flexType\"\n    [cxOutletContext]=\"{ component: component }\"\n    [cxOutletDefer]=\"getComponentDeferOptions(component.flexType)\"\n    (loaded)=\"isLoaded($event)\"\n  >\n    <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n  </ng-template>\n</ng-template>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -6768,27 +7255,38 @@ var PageSlotComponent = /** @class */ (function () {
         { type: CmsService },
         { type: DynamicAttributeService },
         { type: Renderer2 },
-        { type: ElementRef }
+        { type: ElementRef },
+        { type: CmsConfig }
     ]; };
     PageSlotComponent.propDecorators = {
-        position: [{ type: Input }]
+        position: [{ type: HostBinding, args: ['class',] }, { type: Input }],
+        isPending: [{ type: HostBinding, args: ['class.cx-pending',] }],
+        hasComponents: [{ type: HostBinding, args: ['class.has-components',] }],
+        isPageFold: [{ type: HostBinding, args: ['class.page-fold',] }, { type: Input }]
     };
     return PageSlotComponent;
 }());
 if (false) {
     /** @type {?} */
+    PageSlotComponent.prototype.isPending;
+    /** @type {?} */
+    PageSlotComponent.prototype.hasComponents;
+    /** @type {?} */
+    PageSlotComponent.prototype.isPageFold;
+    /**
+     * @type {?}
+     * @private
+     */
+    PageSlotComponent.prototype.pendingComponentCount;
+    /** @type {?} */
     PageSlotComponent.prototype.position$;
-    /**
-     * observable with `ContentSlotData` for the current position
-     * @type {?}
-     */
-    PageSlotComponent.prototype.slot$;
-    /**
-     * observable with components (`ContentSlotComponentData[]`)
-     * for the current slot
-     * @type {?}
-     */
+    /** @type {?} */
     PageSlotComponent.prototype.components$;
+    /**
+     * @type {?}
+     * @private
+     */
+    PageSlotComponent.prototype.subscription;
     /**
      * @type {?}
      * @protected
@@ -6809,6 +7307,11 @@ if (false) {
      * @protected
      */
     PageSlotComponent.prototype.hostElement;
+    /**
+     * @type {?}
+     * @protected
+     */
+    PageSlotComponent.prototype.config;
 }
 
 /**
@@ -15932,6 +16435,11 @@ var LayoutModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var ConsentManagementFormComponent = /** @class */ (function () {
     function ConsentManagementFormComponent() {
         this.consentGiven = false;
@@ -17060,7 +17568,7 @@ var TabParagraphContainerComponent = /** @class */ (function () {
     TabParagraphContainerComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-tab-paragraph-container',
-                    template: "<ng-container *ngFor=\"let component of components$ | async; let i = index\">\n  <h3 [class.active]=\"i === activeTabNum\" (click)=\"select(i)\">\n    {{ component.title | cxTranslate }}\n  </h3>\n  <div [class.active]=\"i === activeTabNum\">\n    <ng-template\n      [cxOutlet]=\"component.flexType\"\n      [cxOutletContext]=\"{}\"\n      [cxComponentWrapper]=\"component\"\n    >\n    </ng-template>\n  </div>\n</ng-container>\n",
+                    template: "<ng-container *ngFor=\"let component of components$ | async; let i = index\">\n  <h3 [class.active]=\"i === activeTabNum\" (click)=\"select(i)\">\n    {{ component.title | cxTranslate }}\n  </h3>\n  <div [class.active]=\"i === activeTabNum\">\n    <ng-template [cxOutlet]=\"component.flexType\" [cxOutletContext]=\"{}\">\n      <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n    </ng-template>\n  </div>\n</ng-container>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -27822,6 +28330,10 @@ var ProductListingPageModule = /** @class */ (function () {
  */
 /** @type {?} */
 var b2cLayoutConfig = {
+    // deferredLoading: {
+    //   strategy: DeferLoadingStrategy.DEFER,
+    //   intersectionMargin: '50px',
+    // },
     layoutSlots: {
         header: {
             md: {
@@ -27850,6 +28362,7 @@ var b2cLayoutConfig = {
             slots: ['Footer'],
         },
         LandingPage2Template: {
+            pageFold: 'Section2B',
             slots: [
                 'Section1',
                 'Section2A',
@@ -27864,6 +28377,7 @@ var b2cLayoutConfig = {
             slots: ['Section2A', 'Section2B'],
         },
         CategoryPageTemplate: {
+            pageFold: 'Section2',
             slots: ['Section1', 'Section2', 'Section3'],
         },
         ProductListPageTemplate: {
@@ -27878,6 +28392,12 @@ var b2cLayoutConfig = {
             ],
         },
         ProductDetailsPageTemplate: {
+            md: {
+                pageFold: 'UpSelling',
+            },
+            xs: {
+                pageFold: 'Summary',
+            },
             slots: [
                 'Summary',
                 'UpSelling',
@@ -28193,5 +28713,5 @@ var B2cStorefrontModule = /** @class */ (function () {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AsmModule, AutoFocusDirective, AutoFocusDirectiveModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OnlyNumberDirective, OnlyNumberDirectiveModule, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultScrollConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, AsmLoaderModule as ɵa, asmFactory as ɵb, suffixUrlMatcher as ɵba, addCmsRoute as ɵbb, htmlLangProvider as ɵbc, setHtmlLangAttribute as ɵbd, AnonymousConsentsModule as ɵbe, AnonymousConsentDialogComponent as ɵbf, RoutingModule as ɵbg, defaultStorefrontRoutesConfig as ɵbh, defaultRoutingConfig as ɵbi, ComponentMapperService as ɵc, AsmEnablerService as ɵd, AsmMainUiComponent as ɵe, AsmComponentService as ɵf, CSAgentLoginFormComponent as ɵg, CustomerSelectionComponent as ɵh, AsmSessionTimerComponent as ɵi, FormatTimerPipe as ɵj, CustomerEmulationComponent as ɵk, AppliedCouponsComponent as ɵl, AddToWishListModule as ɵm, AddToWishListComponent as ɵn, defaultCheckoutConfig as ɵo, ExpressCheckoutService as ɵp, defaultQualtricsConfig as ɵq, CmsRoutesService as ɵr, CmsMappingService as ɵs, CmsI18nService as ɵt, CmsGuardsService as ɵu, TrackingEventsComponent as ɵv, ConsignmentTrackingComponent as ɵw, AddToHomeScreenService as ɵx, GuestRegisterFormComponent as ɵy, CheckoutLoginComponent as ɵz };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AsmModule, AutoFocusDirective, AutoFocusDirectiveModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OnlyNumberDirective, OnlyNumberDirectiveModule, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultScrollConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, AsmLoaderModule as ɵa, asmFactory as ɵb, suffixUrlMatcher as ɵba, addCmsRoute as ɵbb, htmlLangProvider as ɵbc, setHtmlLangAttribute as ɵbd, AnonymousConsentsModule as ɵbe, AnonymousConsentDialogComponent as ɵbf, RoutingModule as ɵbg, defaultStorefrontRoutesConfig as ɵbh, defaultRoutingConfig as ɵbi, ComponentMapperService as ɵc, AsmEnablerService as ɵd, AsmMainUiComponent as ɵe, AsmComponentService as ɵf, CSAgentLoginFormComponent as ɵg, CustomerSelectionComponent as ɵh, AsmSessionTimerComponent as ɵi, FormatTimerPipe as ɵj, CustomerEmulationComponent as ɵk, AppliedCouponsComponent as ɵl, AddToWishListModule as ɵm, AddToWishListComponent as ɵn, defaultCheckoutConfig as ɵo, ExpressCheckoutService as ɵp, defaultQualtricsConfig as ɵq, CmsRoutesService as ɵr, CmsMappingService as ɵs, CmsI18nService as ɵt, CmsGuardsService as ɵu, TrackingEventsComponent as ɵv, ConsignmentTrackingComponent as ɵw, AddToHomeScreenService as ɵx, GuestRegisterFormComponent as ɵy, CheckoutLoginComponent as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
 //# sourceMappingURL=spartacus-storefront.js.map

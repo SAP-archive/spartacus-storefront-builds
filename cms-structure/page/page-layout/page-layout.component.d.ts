@@ -10,6 +10,7 @@ export declare class PageLayoutComponent {
     readonly templateName$: Observable<string>;
     readonly layoutName$: Observable<string>;
     readonly slots$: Observable<string[]>;
+    readonly pageFoldSlot$: Observable<string>;
     private currentClass;
     constructor(el: ElementRef, renderer: Renderer2, pageLayoutService: PageLayoutService);
     styleClass: string;
