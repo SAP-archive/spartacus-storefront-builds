@@ -4034,6 +4034,10 @@ class PageLayoutService {
          * @return {?}
          */
         breakpoint => {
+            if (!this.config.layoutSlots) {
+                // no layout config available
+                return null;
+            }
             /** @type {?} */
             const pageTemplateConfig = this.config.layoutSlots[pageTemplate];
             /** @type {?} */

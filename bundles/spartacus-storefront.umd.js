@@ -5129,6 +5129,10 @@
              * @return {?}
              */
             function (breakpoint) {
+                if (!_this.config.layoutSlots) {
+                    // no layout config available
+                    return null;
+                }
                 /** @type {?} */
                 var pageTemplateConfig = _this.config.layoutSlots[pageTemplate];
                 /** @type {?} */
