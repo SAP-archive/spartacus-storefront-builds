@@ -8089,10 +8089,11 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var JsonLdScriptFactory = /** @class */ (function () {
-        function JsonLdScriptFactory(platformId, winRef, rendererFactory) {
+        function JsonLdScriptFactory(platformId, winRef, rendererFactory, sanitizer) {
             this.platformId = platformId;
             this.winRef = winRef;
             this.rendererFactory = rendererFactory;
+            this.sanitizer = sanitizer;
         }
         /**
          * @param {?} schema
@@ -8104,7 +8105,7 @@
          */
         function (schema) {
             if (schema && this.isJsonLdRequired()) {
-                this.createJsonLdScriptElement().innerHTML = JSON.stringify(schema);
+                this.createJsonLdScriptElement().innerHTML = this.sanitize(schema);
             }
         };
         /**
@@ -8149,6 +8150,41 @@
             }
             return scriptElement;
         };
+        /**
+         * Sanitizes the given json-ld schema by leveraging the angular HTML sanitizer.
+         *
+         * The given schema is not trusted, as malicious code could be injected (XSS)
+         * into the json-ld script.
+         */
+        /**
+         * Sanitizes the given json-ld schema by leveraging the angular HTML sanitizer.
+         *
+         * The given schema is not trusted, as malicious code could be injected (XSS)
+         * into the json-ld script.
+         * @param {?} schema
+         * @return {?}
+         */
+        JsonLdScriptFactory.prototype.sanitize = /**
+         * Sanitizes the given json-ld schema by leveraging the angular HTML sanitizer.
+         *
+         * The given schema is not trusted, as malicious code could be injected (XSS)
+         * into the json-ld script.
+         * @param {?} schema
+         * @return {?}
+         */
+        function (schema) {
+            var _this = this;
+            return JSON.stringify(schema, (/**
+             * @param {?} _key
+             * @param {?} value
+             * @return {?}
+             */
+            function (_key, value) {
+                return typeof value === 'string'
+                    ? _this.sanitizer.sanitize(core.SecurityContext.HTML, value)
+                    : value;
+            }));
+        };
         JsonLdScriptFactory.decorators = [
             { type: core.Injectable, args: [{
                         providedIn: 'root',
@@ -8158,9 +8194,10 @@
         JsonLdScriptFactory.ctorParameters = function () { return [
             { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] },
             { type: core$1.WindowRef },
-            { type: core.RendererFactory2 }
+            { type: core.RendererFactory2 },
+            { type: platformBrowser.DomSanitizer }
         ]; };
-        /** @nocollapse */ JsonLdScriptFactory.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function JsonLdScriptFactory_Factory() { return new JsonLdScriptFactory(core.ɵɵinject(core.PLATFORM_ID), core.ɵɵinject(core$1.WindowRef), core.ɵɵinject(core.RendererFactory2)); }, token: JsonLdScriptFactory, providedIn: "root" });
+        /** @nocollapse */ JsonLdScriptFactory.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function JsonLdScriptFactory_Factory() { return new JsonLdScriptFactory(core.ɵɵinject(core.PLATFORM_ID), core.ɵɵinject(core$1.WindowRef), core.ɵɵinject(core.RendererFactory2), core.ɵɵinject(platformBrowser.DomSanitizer)); }, token: JsonLdScriptFactory, providedIn: "root" });
         return JsonLdScriptFactory;
     }());
     if (false) {
@@ -8179,6 +8216,11 @@
          * @protected
          */
         JsonLdScriptFactory.prototype.rendererFactory;
+        /**
+         * @type {?}
+         * @protected
+         */
+        JsonLdScriptFactory.prototype.sanitizer;
     }
 
     /**
@@ -8219,7 +8261,9 @@
         function (schema) {
             if (schema && this.jsonLdScriptFactory.isJsonLdRequired()) {
                 /** @type {?} */
-                var html = "<script type=\"application/ld+json\">" + JSON.stringify(schema) + "</script>";
+                var sanitizedSchema = this.jsonLdScriptFactory.sanitize(schema);
+                /** @type {?} */
+                var html = "<script type=\"application/ld+json\">" + sanitizedSchema + "</script>";
                 this.jsonLD = this.sanitizer.bypassSecurityTrustHtml(html);
             }
         };

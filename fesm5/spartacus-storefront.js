@@ -1,5 +1,5 @@
 import { CommonModule, isPlatformServer, isPlatformBrowser, DOCUMENT, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
-import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, EventEmitter, Output, isDevMode, ChangeDetectionStrategy, forwardRef, Renderer2, ViewChild, Directive, HostListener, Optional, Injector, Inject, PLATFORM_ID, INJECTOR, InjectionToken, TemplateRef, ComponentFactory, ViewContainerRef, ComponentFactoryResolver, NgZone, APP_INITIALIZER, RendererFactory2, ViewEncapsulation, ChangeDetectorRef, Pipe, ViewChildren } from '@angular/core';
+import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, EventEmitter, Output, isDevMode, ChangeDetectionStrategy, forwardRef, Renderer2, ViewChild, Directive, HostListener, Optional, Injector, Inject, PLATFORM_ID, INJECTOR, InjectionToken, TemplateRef, ComponentFactory, ViewContainerRef, ComponentFactoryResolver, NgZone, APP_INITIALIZER, SecurityContext, RendererFactory2, ViewEncapsulation, ChangeDetectorRef, Pipe, ViewChildren } from '@angular/core';
 import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, TranslationService, TranslationChunkService, CmsService, PageType, RoutingService, SemanticPathService, ProtectedRoutesGuard, AuthService, CartService, CartDataService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, DynamicAttributeService, PageRobotsMeta, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, CartVoucherService, OCC_USER_ID_ANONYMOUS, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, RoutingModule as RoutingModule$1, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
 import { Subscription, combineLatest, of, fromEvent, BehaviorSubject, concat, isObservable, from, Observable } from 'rxjs';
 import { take, distinctUntilChanged, tap, map, debounceTime, startWith, filter, switchMap, first, skipWhile, endWith, withLatestFrom, flatMap, mergeMap, shareReplay, scan, distinctUntilKeyChanged, pluck } from 'rxjs/operators';
@@ -7904,10 +7904,11 @@ function setHtmlLangAttribute(winRef, languageService) {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var JsonLdScriptFactory = /** @class */ (function () {
-    function JsonLdScriptFactory(platformId, winRef, rendererFactory) {
+    function JsonLdScriptFactory(platformId, winRef, rendererFactory, sanitizer) {
         this.platformId = platformId;
         this.winRef = winRef;
         this.rendererFactory = rendererFactory;
+        this.sanitizer = sanitizer;
     }
     /**
      * @param {?} schema
@@ -7919,7 +7920,7 @@ var JsonLdScriptFactory = /** @class */ (function () {
      */
     function (schema) {
         if (schema && this.isJsonLdRequired()) {
-            this.createJsonLdScriptElement().innerHTML = JSON.stringify(schema);
+            this.createJsonLdScriptElement().innerHTML = this.sanitize(schema);
         }
     };
     /**
@@ -7964,6 +7965,41 @@ var JsonLdScriptFactory = /** @class */ (function () {
         }
         return scriptElement;
     };
+    /**
+     * Sanitizes the given json-ld schema by leveraging the angular HTML sanitizer.
+     *
+     * The given schema is not trusted, as malicious code could be injected (XSS)
+     * into the json-ld script.
+     */
+    /**
+     * Sanitizes the given json-ld schema by leveraging the angular HTML sanitizer.
+     *
+     * The given schema is not trusted, as malicious code could be injected (XSS)
+     * into the json-ld script.
+     * @param {?} schema
+     * @return {?}
+     */
+    JsonLdScriptFactory.prototype.sanitize = /**
+     * Sanitizes the given json-ld schema by leveraging the angular HTML sanitizer.
+     *
+     * The given schema is not trusted, as malicious code could be injected (XSS)
+     * into the json-ld script.
+     * @param {?} schema
+     * @return {?}
+     */
+    function (schema) {
+        var _this = this;
+        return JSON.stringify(schema, (/**
+         * @param {?} _key
+         * @param {?} value
+         * @return {?}
+         */
+        function (_key, value) {
+            return typeof value === 'string'
+                ? _this.sanitizer.sanitize(SecurityContext.HTML, value)
+                : value;
+        }));
+    };
     JsonLdScriptFactory.decorators = [
         { type: Injectable, args: [{
                     providedIn: 'root',
@@ -7973,9 +8009,10 @@ var JsonLdScriptFactory = /** @class */ (function () {
     JsonLdScriptFactory.ctorParameters = function () { return [
         { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
         { type: WindowRef },
-        { type: RendererFactory2 }
+        { type: RendererFactory2 },
+        { type: DomSanitizer }
     ]; };
-    /** @nocollapse */ JsonLdScriptFactory.ngInjectableDef = ɵɵdefineInjectable({ factory: function JsonLdScriptFactory_Factory() { return new JsonLdScriptFactory(ɵɵinject(PLATFORM_ID), ɵɵinject(WindowRef), ɵɵinject(RendererFactory2)); }, token: JsonLdScriptFactory, providedIn: "root" });
+    /** @nocollapse */ JsonLdScriptFactory.ngInjectableDef = ɵɵdefineInjectable({ factory: function JsonLdScriptFactory_Factory() { return new JsonLdScriptFactory(ɵɵinject(PLATFORM_ID), ɵɵinject(WindowRef), ɵɵinject(RendererFactory2), ɵɵinject(DomSanitizer)); }, token: JsonLdScriptFactory, providedIn: "root" });
     return JsonLdScriptFactory;
 }());
 if (false) {
@@ -7994,6 +8031,11 @@ if (false) {
      * @protected
      */
     JsonLdScriptFactory.prototype.rendererFactory;
+    /**
+     * @type {?}
+     * @protected
+     */
+    JsonLdScriptFactory.prototype.sanitizer;
 }
 
 /**
@@ -8034,7 +8076,9 @@ var JsonLdDirective = /** @class */ (function () {
     function (schema) {
         if (schema && this.jsonLdScriptFactory.isJsonLdRequired()) {
             /** @type {?} */
-            var html = "<script type=\"application/ld+json\">" + JSON.stringify(schema) + "</script>";
+            var sanitizedSchema = this.jsonLdScriptFactory.sanitize(schema);
+            /** @type {?} */
+            var html = "<script type=\"application/ld+json\">" + sanitizedSchema + "</script>";
             this.jsonLD = this.sanitizer.bypassSecurityTrustHtml(html);
         }
     };
