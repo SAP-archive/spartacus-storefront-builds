@@ -8,6 +8,10 @@ export declare class MediaService {
     private readonly mediaFormats;
     getMedia(container: any, format?: string, alt?: string): Media;
     private getMainImage;
+    /**
+     * returns highest resolution format name from media formats
+     */
+    private getHighestAvailableFormat;
     private getAlt;
     /**
      * builds a set of images aligned with the breakpoints

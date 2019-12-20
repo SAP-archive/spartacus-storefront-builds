@@ -1874,9 +1874,45 @@
             else if (media && media.url) {
                 return this.getImageUrl(media.url);
             }
+            else if (media) {
+                return this.getImageUrl(media[this.getHighestAvailableFormat(media)].url);
+            }
             else {
                 return null;
             }
+        };
+        /**
+         * returns highest resolution format name from media formats
+         */
+        /**
+         * returns highest resolution format name from media formats
+         * @private
+         * @param {?} media
+         * @return {?}
+         */
+        MediaService.prototype.getHighestAvailableFormat = /**
+         * returns highest resolution format name from media formats
+         * @private
+         * @param {?} media
+         * @return {?}
+         */
+        function (media) {
+            if (media) {
+                /** @type {?} */
+                var mediaFormat_1;
+                this.mediaFormats.forEach((/**
+                 * @param {?} format
+                 * @return {?}
+                 */
+                function (format) {
+                    if (!mediaFormat_1 ||
+                        (mediaFormat_1.threshold < format.threshold && media[format.code])) {
+                        mediaFormat_1 = format;
+                    }
+                }));
+                return mediaFormat_1.code;
+            }
+            return null;
         };
         /**
          * @private

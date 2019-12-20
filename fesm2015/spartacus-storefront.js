@@ -1392,9 +1392,36 @@ class MediaService {
         else if (media && media.url) {
             return this.getImageUrl(media.url);
         }
+        else if (media) {
+            return this.getImageUrl(media[this.getHighestAvailableFormat(media)].url);
+        }
         else {
             return null;
         }
+    }
+    /**
+     * returns highest resolution format name from media formats
+     * @private
+     * @param {?} media
+     * @return {?}
+     */
+    getHighestAvailableFormat(media) {
+        if (media) {
+            /** @type {?} */
+            let mediaFormat;
+            this.mediaFormats.forEach((/**
+             * @param {?} format
+             * @return {?}
+             */
+            format => {
+                if (!mediaFormat ||
+                    (mediaFormat.threshold < format.threshold && media[format.code])) {
+                    mediaFormat = format;
+                }
+            }));
+            return mediaFormat.code;
+        }
+        return null;
     }
     /**
      * @private
