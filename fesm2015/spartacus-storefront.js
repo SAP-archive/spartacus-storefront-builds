@@ -5105,7 +5105,7 @@ class OutletDirective {
         this.loaded.emit(false);
         /** @type {?} */
         const hostElement = this.getHostElement(this.vcr.element.nativeElement);
-        // allthought the deferLoaderService might emit only once, as long as the hostElement
+        // Allthough the deferLoaderService might emit only once, as long as the hostElement
         // isn't being loaded, there's no value being emitted. Therefor we need to clean up
         // the subscription on destroy.
         this.subscription.add(this.deferLoaderService
@@ -5857,15 +5857,22 @@ class PageSlotComponent {
         this.hasComponents = false;
         this.isPageFold = false;
         this.position$ = new BehaviorSubject(undefined);
-        this.components$ = this.position$.pipe(switchMap((/**
+        /**
+         * observable with `ContentSlotData` for the current position
+         *
+         * @deprecated we'll stop supporting this property in 2.0 as
+         * it is not used separately.
+         */
+        this.slot$ = this.position$.pipe(switchMap((/**
          * @param {?} position
          * @return {?}
          */
-        position => this.cmsService.getContentSlot(position).pipe(tap((/**
+        position => this.cmsService.getContentSlot(position))), tap((/**
          * @param {?} slot
          * @return {?}
          */
-        slot => this.addSmartEditSlotClass(slot))), map((/**
+        slot => this.addSmartEditSlotClass(slot))));
+        this.components$ = this.slot$.pipe(map((/**
          * @param {?} slot
          * @return {?}
          */
@@ -5874,13 +5881,12 @@ class PageSlotComponent {
          * @param {?} b
          * @return {?}
          */
-        (a, b) => a.length === b.length &&
-            !a.find((/**
-             * @param {?} el
-             * @param {?} index
-             * @return {?}
-             */
-            (el, index) => el.uid !== b[index].uid))))))));
+        (a, b) => a.length === b.length && !a.find((/**
+         * @param {?} el
+         * @param {?} index
+         * @return {?}
+         */
+        (el, index) => el.uid !== b[index].uid)))));
         this.subscription = new Subscription();
     }
     // need to have this host binding at the top as it will override the entire class
@@ -6006,6 +6012,14 @@ if (false) {
     PageSlotComponent.prototype.pendingComponentCount;
     /** @type {?} */
     PageSlotComponent.prototype.position$;
+    /**
+     * observable with `ContentSlotData` for the current position
+     *
+     * @deprecated we'll stop supporting this property in 2.0 as
+     * it is not used separately.
+     * @type {?}
+     */
+    PageSlotComponent.prototype.slot$;
     /** @type {?} */
     PageSlotComponent.prototype.components$;
     /**

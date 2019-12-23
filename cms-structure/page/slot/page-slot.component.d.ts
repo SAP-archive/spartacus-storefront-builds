@@ -1,5 +1,5 @@
 import { ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { CmsConfig, CmsService, ContentSlotComponentData, DynamicAttributeService } from '@spartacus/core';
+import { CmsConfig, CmsService, ContentSlotComponentData, ContentSlotData, DynamicAttributeService } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IntersectionOptions } from '../../../layout/loading/intersection.model';
 export declare class PageSlotComponent implements OnInit, OnDestroy {
@@ -14,7 +14,14 @@ export declare class PageSlotComponent implements OnInit, OnDestroy {
     isPageFold: boolean;
     private pendingComponentCount;
     readonly position$: BehaviorSubject<string>;
-    components$: Observable<ContentSlotComponentData[]>;
+    /**
+     * observable with `ContentSlotData` for the current position
+     *
+     * @deprecated we'll stop supporting this property in 2.0 as
+     * it is not used separately.
+     */
+    readonly slot$: Observable<ContentSlotData>;
+    readonly components$: Observable<ContentSlotComponentData[]>;
     private subscription;
     constructor(cmsService: CmsService, dynamicAttributeService: DynamicAttributeService, renderer: Renderer2, hostElement: ElementRef, config: CmsConfig);
     /**

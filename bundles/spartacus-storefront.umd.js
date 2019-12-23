@@ -6470,7 +6470,7 @@
             this.loaded.emit(false);
             /** @type {?} */
             var hostElement = this.getHostElement(this.vcr.element.nativeElement);
-            // allthought the deferLoaderService might emit only once, as long as the hostElement
+            // Allthough the deferLoaderService might emit only once, as long as the hostElement
             // isn't being loaded, there's no value being emitted. Therefor we need to clean up
             // the subscription on destroy.
             this.subscription.add(this.deferLoaderService
@@ -7303,33 +7303,37 @@
             this.hasComponents = false;
             this.isPageFold = false;
             this.position$ = new rxjs.BehaviorSubject(undefined);
-            this.components$ = this.position$.pipe(operators.switchMap((/**
+            /**
+             * observable with `ContentSlotData` for the current position
+             *
+             * @deprecated we'll stop supporting this property in 2.0 as
+             * it is not used separately.
+             */
+            this.slot$ = this.position$.pipe(operators.switchMap((/**
              * @param {?} position
              * @return {?}
              */
-            function (position) {
-                return _this.cmsService.getContentSlot(position).pipe(operators.tap((/**
-                 * @param {?} slot
+            function (position) { return _this.cmsService.getContentSlot(position); })), operators.tap((/**
+             * @param {?} slot
+             * @return {?}
+             */
+            function (slot) { return _this.addSmartEditSlotClass(slot); })));
+            this.components$ = this.slot$.pipe(operators.map((/**
+             * @param {?} slot
+             * @return {?}
+             */
+            function (slot) { return (slot && slot.components ? slot.components : []); })), operators.distinctUntilChanged((/**
+             * @param {?} a
+             * @param {?} b
+             * @return {?}
+             */
+            function (a, b) {
+                return a.length === b.length && !a.find((/**
+                 * @param {?} el
+                 * @param {?} index
                  * @return {?}
                  */
-                function (slot) { return _this.addSmartEditSlotClass(slot); })), operators.map((/**
-                 * @param {?} slot
-                 * @return {?}
-                 */
-                function (slot) { return (slot && slot.components ? slot.components : []); })), operators.distinctUntilChanged((/**
-                 * @param {?} a
-                 * @param {?} b
-                 * @return {?}
-                 */
-                function (a, b) {
-                    return a.length === b.length &&
-                        !a.find((/**
-                         * @param {?} el
-                         * @param {?} index
-                         * @return {?}
-                         */
-                        function (el, index) { return el.uid !== b[index].uid; }));
-                })));
+                function (el, index) { return el.uid !== b[index].uid; }));
             })));
             this.subscription = new rxjs.Subscription();
         }
@@ -7507,6 +7511,14 @@
         PageSlotComponent.prototype.pendingComponentCount;
         /** @type {?} */
         PageSlotComponent.prototype.position$;
+        /**
+         * observable with `ContentSlotData` for the current position
+         *
+         * @deprecated we'll stop supporting this property in 2.0 as
+         * it is not used separately.
+         * @type {?}
+         */
+        PageSlotComponent.prototype.slot$;
         /** @type {?} */
         PageSlotComponent.prototype.components$;
         /**
