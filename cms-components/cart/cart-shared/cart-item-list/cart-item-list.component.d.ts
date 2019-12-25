@@ -1,14 +1,15 @@
 import { OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { CartService, PromotionResult } from '@spartacus/core';
+import { CartService, PromotionLocation, PromotionResult } from '@spartacus/core';
 import { Item } from '../cart-item/cart-item.component';
 export declare class CartItemListComponent implements OnInit {
     protected cartService: CartService;
     protected fb: FormBuilder;
     isReadOnly: boolean;
     hasHeader: boolean;
-    items: Item[];
     potentialProductPromotions: PromotionResult[];
+    promotionLocation: PromotionLocation;
+    items: Item[];
     cartIsLoading: boolean;
     form: FormGroup;
     private _items;
@@ -19,7 +20,7 @@ export declare class CartItemListComponent implements OnInit {
         item: any;
         updatedQuantity: number;
     }): void;
-    getPotentialProductPromotionsForItem(item: Item): PromotionResult[];
     private createEntryFormGroup;
+    getPotentialProductPromotionsForItem(item: Item): PromotionResult[];
     private isConsumedByEntry;
 }

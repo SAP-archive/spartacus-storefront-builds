@@ -4525,6 +4525,359 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var OrderDetailsService = /** @class */ (function () {
+        function OrderDetailsService(userOrderService, routingService) {
+            var _this = this;
+            this.userOrderService = userOrderService;
+            this.routingService = routingService;
+            this.orderCode$ = this.routingService
+                .getRouterState()
+                .pipe(operators.map((/**
+             * @param {?} routingData
+             * @return {?}
+             */
+            function (routingData) { return routingData.state.params.orderCode; })));
+            this.orderLoad$ = this.orderCode$.pipe(operators.tap((/**
+             * @param {?} orderCode
+             * @return {?}
+             */
+            function (orderCode) {
+                if (orderCode) {
+                    _this.userOrderService.loadOrderDetails(orderCode);
+                }
+                else {
+                    _this.userOrderService.clearOrderDetails();
+                }
+            })), operators.shareReplay({ bufferSize: 1, refCount: true }));
+        }
+        /**
+         * @return {?}
+         */
+        OrderDetailsService.prototype.getOrderDetails = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            return this.orderLoad$.pipe(operators.switchMap((/**
+             * @return {?}
+             */
+            function () { return _this.userOrderService.getOrderDetails(); })));
+        };
+        OrderDetailsService.decorators = [
+            { type: core.Injectable }
+        ];
+        /** @nocollapse */
+        OrderDetailsService.ctorParameters = function () { return [
+            { type: core$1.UserOrderService },
+            { type: core$1.RoutingService }
+        ]; };
+        return OrderDetailsService;
+    }());
+    if (false) {
+        /** @type {?} */
+        OrderDetailsService.prototype.orderCode$;
+        /** @type {?} */
+        OrderDetailsService.prototype.orderLoad$;
+        /**
+         * @type {?}
+         * @private
+         */
+        OrderDetailsService.prototype.userOrderService;
+        /**
+         * @type {?}
+         * @private
+         */
+        OrderDetailsService.prototype.routingService;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var PromotionService = /** @class */ (function () {
+        function PromotionService(cartService, orderDetailsService, checkoutService) {
+            this.cartService = cartService;
+            this.orderDetailsService = orderDetailsService;
+            this.checkoutService = checkoutService;
+        }
+        /**
+         * @param {?} promotionLocation
+         * @return {?}
+         */
+        PromotionService.prototype.getOrderPromotions = /**
+         * @param {?} promotionLocation
+         * @return {?}
+         */
+        function (promotionLocation) {
+            switch (promotionLocation) {
+                case core$1.PromotionLocation.ActiveCart:
+                    return this.getOrderPromotionsFromCart();
+                case core$1.PromotionLocation.Checkout:
+                    return this.getOrderPromotionsFromCheckout();
+                case core$1.PromotionLocation.Order:
+                    return this.getOrderPromotionsFromOrder();
+                default:
+                    return rxjs.of([]);
+            }
+        };
+        /**
+         * @return {?}
+         */
+        PromotionService.prototype.getOrderPromotionsFromCart = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            return this.cartService
+                .getActive()
+                .pipe(operators.map((/**
+             * @param {?} cart
+             * @return {?}
+             */
+            function (cart) { return _this.getOrderPromotionsFromCartHelper(cart); })));
+        };
+        /**
+         * @private
+         * @param {?} cart
+         * @return {?}
+         */
+        PromotionService.prototype.getOrderPromotionsFromCartHelper = /**
+         * @private
+         * @param {?} cart
+         * @return {?}
+         */
+        function (cart) {
+            /** @type {?} */
+            var potentialPromotions = [];
+            potentialPromotions.push.apply(potentialPromotions, __spread((cart.potentialOrderPromotions || [])));
+            /** @type {?} */
+            var appliedPromotions = [];
+            appliedPromotions.push.apply(appliedPromotions, __spread((cart.appliedOrderPromotions || [])));
+            return __spread(potentialPromotions, appliedPromotions);
+        };
+        /**
+         * @return {?}
+         */
+        PromotionService.prototype.getOrderPromotionsFromCheckout = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            return this.checkoutService
+                .getOrderDetails()
+                .pipe(operators.map((/**
+             * @param {?} order
+             * @return {?}
+             */
+            function (order) { return _this.getOrderPromotionsFromOrderHelper(order); })));
+        };
+        /**
+         * @return {?}
+         */
+        PromotionService.prototype.getOrderPromotionsFromOrder = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            return this.orderDetailsService
+                .getOrderDetails()
+                .pipe(operators.map((/**
+             * @param {?} order
+             * @return {?}
+             */
+            function (order) { return _this.getOrderPromotionsFromOrderHelper(order); })));
+        };
+        /**
+         * @private
+         * @param {?} order
+         * @return {?}
+         */
+        PromotionService.prototype.getOrderPromotionsFromOrderHelper = /**
+         * @private
+         * @param {?} order
+         * @return {?}
+         */
+        function (order) {
+            /** @type {?} */
+            var appliedOrderPromotions = [];
+            appliedOrderPromotions.push.apply(appliedOrderPromotions, __spread((order.appliedOrderPromotions || [])));
+            return appliedOrderPromotions;
+        };
+        /**
+         * @param {?} item
+         * @param {?} promotionLocation
+         * @return {?}
+         */
+        PromotionService.prototype.getProductPromotionForEntry = /**
+         * @param {?} item
+         * @param {?} promotionLocation
+         * @return {?}
+         */
+        function (item, promotionLocation) {
+            var _this = this;
+            switch (promotionLocation) {
+                case core$1.PromotionLocation.ActiveCart:
+                    return this.cartService
+                        .getActive()
+                        .pipe(operators.map((/**
+                     * @param {?} cart
+                     * @return {?}
+                     */
+                    function (cart) {
+                        return _this.getProductPromotion(item, cart.appliedProductPromotions || []);
+                    })));
+                case core$1.PromotionLocation.Checkout:
+                    return this.checkoutService
+                        .getOrderDetails()
+                        .pipe(operators.map((/**
+                     * @param {?} order
+                     * @return {?}
+                     */
+                    function (order) {
+                        return _this.getProductPromotion(item, order.appliedProductPromotions || []);
+                    })));
+                case core$1.PromotionLocation.Order:
+                    return this.orderDetailsService
+                        .getOrderDetails()
+                        .pipe(operators.map((/**
+                     * @param {?} order
+                     * @return {?}
+                     */
+                    function (order) {
+                        return _this.getProductPromotion(item, order.appliedProductPromotions || []);
+                    })));
+            }
+        };
+        /**
+         * @private
+         * @param {?} item
+         * @param {?} promotions
+         * @return {?}
+         */
+        PromotionService.prototype.getProductPromotion = /**
+         * @private
+         * @param {?} item
+         * @param {?} promotions
+         * @return {?}
+         */
+        function (item, promotions) {
+            var e_1, _a, e_2, _b;
+            /** @type {?} */
+            var entryPromotions = [];
+            if (promotions && promotions.length > 0) {
+                try {
+                    for (var promotions_1 = __values(promotions), promotions_1_1 = promotions_1.next(); !promotions_1_1.done; promotions_1_1 = promotions_1.next()) {
+                        var promotion = promotions_1_1.value;
+                        if (promotion.description &&
+                            promotion.consumedEntries &&
+                            promotion.consumedEntries.length > 0) {
+                            try {
+                                for (var _c = (e_2 = void 0, __values(promotion.consumedEntries)), _d = _c.next(); !_d.done; _d = _c.next()) {
+                                    var consumedEntry = _d.value;
+                                    if (this.isConsumedByEntry(consumedEntry, item)) {
+                                        entryPromotions.push(promotion);
+                                    }
+                                }
+                            }
+                            catch (e_2_1) { e_2 = { error: e_2_1 }; }
+                            finally {
+                                try {
+                                    if (_d && !_d.done && (_b = _c.return)) _b.call(_c);
+                                }
+                                finally { if (e_2) throw e_2.error; }
+                            }
+                        }
+                    }
+                }
+                catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                finally {
+                    try {
+                        if (promotions_1_1 && !promotions_1_1.done && (_a = promotions_1.return)) _a.call(promotions_1);
+                    }
+                    finally { if (e_1) throw e_1.error; }
+                }
+            }
+            return entryPromotions;
+        };
+        /**
+         * @private
+         * @param {?} consumedEntry
+         * @param {?} entry
+         * @return {?}
+         */
+        PromotionService.prototype.isConsumedByEntry = /**
+         * @private
+         * @param {?} consumedEntry
+         * @param {?} entry
+         * @return {?}
+         */
+        function (consumedEntry, entry) {
+            var e_3, _a;
+            /** @type {?} */
+            var consumedEntryNumber = consumedEntry.orderEntryNumber;
+            if (entry.entries && entry.entries.length > 0) {
+                try {
+                    for (var _b = __values(entry.entries), _c = _b.next(); !_c.done; _c = _b.next()) {
+                        var subEntry = _c.value;
+                        if (subEntry.entryNumber === consumedEntryNumber) {
+                            return true;
+                        }
+                    }
+                }
+                catch (e_3_1) { e_3 = { error: e_3_1 }; }
+                finally {
+                    try {
+                        if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                    }
+                    finally { if (e_3) throw e_3.error; }
+                }
+                return false;
+            }
+            else {
+                return consumedEntryNumber === entry.entryNumber;
+            }
+        };
+        PromotionService.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        PromotionService.ctorParameters = function () { return [
+            { type: core$1.CartService },
+            { type: OrderDetailsService },
+            { type: core$1.CheckoutService }
+        ]; };
+        /** @nocollapse */ PromotionService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function PromotionService_Factory() { return new PromotionService(core.ɵɵinject(core$1.CartService), core.ɵɵinject(OrderDetailsService), core.ɵɵinject(core$1.CheckoutService)); }, token: PromotionService, providedIn: "root" });
+        return PromotionService;
+    }());
+    if (false) {
+        /**
+         * @type {?}
+         * @protected
+         */
+        PromotionService.prototype.cartService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        PromotionService.prototype.orderDetailsService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        PromotionService.prototype.checkoutService;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
 
     /**
      * @fileoverview added by tsickle
@@ -10274,13 +10627,15 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var AddedToCartDialogComponent = /** @class */ (function () {
-        function AddedToCartDialogComponent(modalService, cartService, fb) {
+        function AddedToCartDialogComponent(modalService, cartService, fb, promotionService) {
             this.modalService = modalService;
             this.cartService = cartService;
             this.fb = fb;
+            this.promotionService = promotionService;
             this.iconTypes = ICON_TYPE;
-            this.modalIsOpen = false;
+            this.promotionLocation = core$1.PromotionLocation.ActiveCart;
             this.quantity = 0;
+            this.modalIsOpen = false;
             this.form = this.fb.group({});
         }
         /**
@@ -10312,6 +10667,7 @@
                     }
                 }
             })));
+            this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
         };
         /**
          * @param {?=} reason
@@ -10368,14 +10724,15 @@
         AddedToCartDialogComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-added-to-cart-dialog',
-                        template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) || modalIsOpen; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart') | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [isReadOnly]=\"false\"\n            [parent]=\"form.controls[entry.product.code]\"\n            [cartIsLoading]=\"form.dirty\"\n            (remove)=\"removeEntry($event)\"\n            (update)=\"updateEntry($event)\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n            <div>{{ cart.totalPrice?.formattedValue }}</div>\n          </div>\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              cxAutoFocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
+                        template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) || modalIsOpen; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart') | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [isReadOnly]=\"false\"\n            [parent]=\"form.controls[entry.product.code]\"\n            [cartIsLoading]=\"form.dirty\"\n            [promotionLocation]=\"promotionLocation\"\n            (remove)=\"removeEntry($event)\"\n            (update)=\"updateEntry($event)\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n\n            <div>{{ cart.totalPrice?.formattedValue }}</div>\n          </div>\n\n          <!-- Promotions -->\n          <ng-container *cxFeatureLevel=\"'1.4'\">\n            <div\n              class=\"cx-dialog-promotions\"\n              *ngIf=\"orderPromotions$ | async as orderPromotions\"\n            >\n              <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n            </div>\n          </ng-container>\n\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              cxAutoFocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
                     }] }
         ];
         /** @nocollapse */
         AddedToCartDialogComponent.ctorParameters = function () { return [
             { type: ModalService },
             { type: core$1.CartService },
-            { type: forms.FormBuilder }
+            { type: forms.FormBuilder },
+            { type: PromotionService }
         ]; };
         AddedToCartDialogComponent.propDecorators = {
             dialog: [{ type: core.ViewChild, args: ['dialog', { static: false, read: core.ElementRef },] }]
@@ -10394,9 +10751,13 @@
         /** @type {?} */
         AddedToCartDialogComponent.prototype.increment;
         /** @type {?} */
-        AddedToCartDialogComponent.prototype.modalIsOpen;
+        AddedToCartDialogComponent.prototype.orderPromotions$;
+        /** @type {?} */
+        AddedToCartDialogComponent.prototype.promotionLocation;
         /** @type {?} */
         AddedToCartDialogComponent.prototype.quantity;
+        /** @type {?} */
+        AddedToCartDialogComponent.prototype.modalIsOpen;
         /** @type {?} */
         AddedToCartDialogComponent.prototype.dialog;
         /** @type {?} */
@@ -10416,6 +10777,11 @@
          * @protected
          */
         AddedToCartDialogComponent.prototype.fb;
+        /**
+         * @type {?}
+         * @protected
+         */
+        AddedToCartDialogComponent.prototype.promotionService;
     }
 
     /**
@@ -10639,7 +11005,7 @@
         PromotionsComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-promotions',
-                        template: "<div class=\"cx-promotions\" *ngIf=\"promotions\">\n  <strong *ngFor=\"let promotion of promotions\">\n    <li>{{ promotion.description }}</li>\n  </strong>\n</div>\n",
+                        template: "<div class=\"cx-promotions\" *ngIf=\"promotions\">\n  <ng-container *cxFeatureLevel=\"'!1.4'\">\n    <strong *ngFor=\"let promotion of promotions\">\n      <li>{{ promotion.description }}</li>\n    </strong>\n  </ng-container>\n\n  <ng-container *cxFeatureLevel=\"'1.4'\">\n    <ul *ngFor=\"let promotion of promotions\">\n      <li>{{ promotion.description }}</li>\n    </ul>\n  </ng-container>\n</div>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -10664,7 +11030,7 @@
         }
         PromotionsModule.decorators = [
             { type: core.NgModule, args: [{
-                        imports: [common.CommonModule],
+                        imports: [common.CommonModule, core$1.FeaturesConfigModule],
                         declarations: [PromotionsComponent],
                         exports: [PromotionsComponent],
                     },] }
@@ -10951,6 +11317,7 @@
             this.isReadOnly = false;
             this.hasHeader = true;
             this.potentialProductPromotions = [];
+            this.promotionLocation = core$1.PromotionLocation.ActiveCart;
             this.cartIsLoading = false;
             this.form = this.fb.group({});
             this._items = [];
@@ -11024,6 +11391,22 @@
             this.cartService.updateEntry(item.entryNumber, updatedQuantity);
         };
         /**
+         * @private
+         * @param {?} entry
+         * @return {?}
+         */
+        CartItemListComponent.prototype.createEntryFormGroup = /**
+         * @private
+         * @param {?} entry
+         * @return {?}
+         */
+        function (entry) {
+            return this.fb.group({
+                entryNumber: entry.entryNumber,
+                quantity: entry.quantity,
+            });
+        };
+        /**
          * @param {?} item
          * @return {?}
          */
@@ -11073,22 +11456,6 @@
         };
         /**
          * @private
-         * @param {?} entry
-         * @return {?}
-         */
-        CartItemListComponent.prototype.createEntryFormGroup = /**
-         * @private
-         * @param {?} entry
-         * @return {?}
-         */
-        function (entry) {
-            return this.fb.group({
-                entryNumber: entry.entryNumber,
-                quantity: entry.quantity,
-            });
-        };
-        /**
-         * @private
          * @param {?} consumedEntry
          * @param {?} entry
          * @return {?}
@@ -11128,7 +11495,7 @@
         CartItemListComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-cart-item-list',
-                        template: "<div *ngIf=\"hasHeader\" class=\"d-none d-md-block d-lg-block d-xl-block\">\n  <div class=\"cx-item-list-header row\">\n    <div class=\"cx-item-list-desc col-md-5 col-lg-5 col-xl-6\">\n      {{ 'cartItems.description' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-price col-md-3 col-lg-2 col-xl-2\">\n      {{ 'cartItems.itemPrice' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-qty col-md-2 col-lg-3 col-xl-2\">\n      {{ 'cartItems.quantity' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n      {{ 'cartItems.total' | cxTranslate }}\n    </div>\n  </div>\n</div>\n\n<div [formGroup]=\"form\">\n  <div class=\"cx-item-list-row\" *ngFor=\"let item of items\">\n    <div class=\"cx-item-list-items\">\n      <cx-cart-item\n        [parent]=\"form.controls[item.product.code]\"\n        [item]=\"item\"\n        [potentialProductPromotions]=\"\n          getPotentialProductPromotionsForItem(item)\n        \"\n        [isReadOnly]=\"isReadOnly\"\n        (remove)=\"removeEntry($event)\"\n        [cartIsLoading]=\"cartIsLoading\"\n        (update)=\"updateEntry($event)\"\n      >\n      </cx-cart-item>\n    </div>\n  </div>\n</div>\n"
+                        template: "<div *ngIf=\"hasHeader\" class=\"d-none d-md-block d-lg-block d-xl-block\">\n  <div class=\"cx-item-list-header row\">\n    <div class=\"cx-item-list-desc col-md-5 col-lg-5 col-xl-6\">\n      {{ 'cartItems.description' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-price col-md-3 col-lg-2 col-xl-2\">\n      {{ 'cartItems.itemPrice' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-qty col-md-2 col-lg-3 col-xl-2\">\n      {{ 'cartItems.quantity' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n      {{ 'cartItems.total' | cxTranslate }}\n    </div>\n  </div>\n</div>\n\n<div [formGroup]=\"form\">\n  <div class=\"cx-item-list-row\" *ngFor=\"let item of items\">\n    <div class=\"cx-item-list-items\">\n      <ng-container *cxFeatureLevel=\"'!1.4'\">\n        <cx-cart-item\n          [parent]=\"form.controls[item.product.code]\"\n          [item]=\"item\"\n          [isReadOnly]=\"isReadOnly\"\n          [potentialProductPromotions]=\"\n            getPotentialProductPromotionsForItem(item)\n          \"\n          [cartIsLoading]=\"cartIsLoading\"\n          (remove)=\"removeEntry($event)\"\n          (update)=\"updateEntry($event)\"\n        >\n        </cx-cart-item>\n      </ng-container>\n\n      <ng-container *cxFeatureLevel=\"'1.4'\">\n        <cx-cart-item\n          [parent]=\"form.controls[item.product.code]\"\n          [item]=\"item\"\n          [isReadOnly]=\"isReadOnly\"\n          [promotionLocation]=\"promotionLocation\"\n          [cartIsLoading]=\"cartIsLoading\"\n          (remove)=\"removeEntry($event)\"\n          (update)=\"updateEntry($event)\"\n        >\n        </cx-cart-item>\n      </ng-container>\n    </div>\n  </div>\n</div>\n"
                     }] }
         ];
         /** @nocollapse */
@@ -11139,8 +11506,9 @@
         CartItemListComponent.propDecorators = {
             isReadOnly: [{ type: core.Input }],
             hasHeader: [{ type: core.Input }],
-            items: [{ type: core.Input }],
             potentialProductPromotions: [{ type: core.Input }],
+            promotionLocation: [{ type: core.Input }],
+            items: [{ type: core.Input }],
             cartIsLoading: [{ type: core.Input }]
         };
         return CartItemListComponent;
@@ -11152,6 +11520,8 @@
         CartItemListComponent.prototype.hasHeader;
         /** @type {?} */
         CartItemListComponent.prototype.potentialProductPromotions;
+        /** @type {?} */
+        CartItemListComponent.prototype.promotionLocation;
         /** @type {?} */
         CartItemListComponent.prototype.cartIsLoading;
         /** @type {?} */
@@ -11194,10 +11564,12 @@
         Item.prototype.updateable;
     }
     var CartItemComponent = /** @class */ (function () {
-        function CartItemComponent() {
+        function CartItemComponent(promotionService) {
+            this.promotionService = promotionService;
             this.compact = false;
             this.isReadOnly = false;
             this.cartIsLoading = false;
+            this.promotionLocation = core$1.PromotionLocation.ActiveCart;
             this.remove = new core.EventEmitter();
             this.update = new core.EventEmitter();
             this.view = new core.EventEmitter();
@@ -11208,7 +11580,9 @@
         CartItemComponent.prototype.ngOnInit = /**
          * @return {?}
          */
-        function () { };
+        function () {
+            this.appliedProductPromotions$ = this.promotionService.getProductPromotionForEntry(this.item, this.promotionLocation);
+        };
         /**
          * @param {?} product
          * @return {?}
@@ -11255,15 +11629,20 @@
         CartItemComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-cart-item',
-                        template: "<div [ngClass]=\"compact ? 'cx-compact row' : 'row'\">\n  <!-- Item Image -->\n  <div class=\"col-2 cx-image-container\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n      (click)=\"viewItem()\"\n    >\n      <cx-media\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-5'\">\n        <div *ngIf=\"item.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n            (click)=\"viewItem()\"\n            >{{ item.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"item.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n        </div>\n        <!-- Variants -->\n        <div\n          *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n          class=\"cx-property\"\n        >\n          <div class=\"cx-label\">{{ variant.name }}</div>\n          <div class=\"cx-value\">{{ variant.value }}</div>\n        </div>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"item.basePrice\"\n        class=\"cx-price\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n          {{ item.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <div class=\"cx-quantity\" [ngClass]=\"compact ? '' : ' col-3'\">\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          placement=\"left\"\n          title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n        <div *ngIf=\"isReadOnly\" class=\"cx-value\">{{ item.quantity }}</div>\n        <div\n          *ngIf=\"!isReadOnly && parent\"\n          class=\"cx-value\"\n          [formGroup]=\"parent\"\n        >\n          <cx-item-counter\n            [isValueChangeable]=\"item.updateable\"\n            [step]=\"1\"\n            [min]=\"1\"\n            [max]=\"item.product.stock?.stockLevel || 1000\"\n            (update)=\"updateItem($event)\"\n            [cartIsLoading]=\"cartIsLoading\"\n            formControlName=\"quantity\"\n          >\n          </cx-item-counter>\n        </div>\n      </div>\n      <!-- Total -->\n      <div\n        *ngIf=\"item.totalPrice\"\n        class=\"cx-total\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.total' | cxTranslate }}\n        </div>\n        <div class=\"cx-value\">{{ item.totalPrice.formattedValue }}</div>\n      </div>\n    </div>\n    <!-- Availability -->\n    <div *ngIf=\"isProductOutOfStock(item)\" class=\"cx-availability col-12\">\n      {{ 'productSummary.outOfStock' | cxTranslate }}\n    </div>\n    <!-- Promotion -->\n    <cx-promotions [promotions]=\"potentialProductPromotions\"></cx-promotions>\n    <!-- Actions -->\n    <div *ngIf=\"!isReadOnly && item.updateable\" class=\"cx-actions col-12\">\n      <button\n        class=\"link\"\n        [class.disabled]=\"cartIsLoading\"\n        [disabled]=\"cartIsLoading\"\n        (click)=\"removeItem()\"\n      >\n        {{ 'common.remove' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n"
+                        template: "<div [ngClass]=\"compact ? 'cx-compact row' : 'row'\">\n  <!-- Item Image -->\n  <div class=\"col-2 cx-image-container\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n      (click)=\"viewItem()\"\n    >\n      <cx-media\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-5'\">\n        <div *ngIf=\"item.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n            (click)=\"viewItem()\"\n            >{{ item.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"item.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n        </div>\n        <!-- Variants -->\n        <div\n          *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n          class=\"cx-property\"\n        >\n          <div class=\"cx-label\">{{ variant.name }}</div>\n          <div class=\"cx-value\">{{ variant.value }}</div>\n        </div>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"item.basePrice\"\n        class=\"cx-price\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n          {{ item.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <div class=\"cx-quantity\" [ngClass]=\"compact ? '' : ' col-3'\">\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          placement=\"left\"\n          title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n        <div *ngIf=\"isReadOnly\" class=\"cx-value\">{{ item.quantity }}</div>\n        <div\n          *ngIf=\"!isReadOnly && parent\"\n          class=\"cx-value\"\n          [formGroup]=\"parent\"\n        >\n          <cx-item-counter\n            [isValueChangeable]=\"item.updateable\"\n            [step]=\"1\"\n            [min]=\"1\"\n            [max]=\"item.product.stock?.stockLevel || 1000\"\n            (update)=\"updateItem($event)\"\n            [cartIsLoading]=\"cartIsLoading\"\n            formControlName=\"quantity\"\n          >\n          </cx-item-counter>\n        </div>\n      </div>\n      <!-- Total -->\n      <div\n        *ngIf=\"item.totalPrice\"\n        class=\"cx-total\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.total' | cxTranslate }}\n        </div>\n        <div class=\"cx-value\">{{ item.totalPrice.formattedValue }}</div>\n      </div>\n    </div>\n    <!-- Availability -->\n    <div *ngIf=\"isProductOutOfStock(item)\" class=\"cx-availability col-12\">\n      {{ 'productSummary.outOfStock' | cxTranslate }}\n    </div>\n    <!-- Promotion -->\n    <ng-container *cxFeatureLevel=\"'!1.4'\">\n      <cx-promotions [promotions]=\"potentialProductPromotions\"></cx-promotions>\n    </ng-container>\n\n    <ng-container *cxFeatureLevel=\"'1.4'\">\n      <ng-container\n        *ngIf=\"appliedProductPromotions$ | async as appliedProductPromotions\"\n      >\n        <cx-promotions [promotions]=\"appliedProductPromotions\"></cx-promotions>\n      </ng-container>\n    </ng-container>\n    <!-- Actions -->\n    <div *ngIf=\"!isReadOnly && item.updateable\" class=\"cx-actions col-12\">\n      <button\n        class=\"link\"\n        [class.disabled]=\"cartIsLoading\"\n        [disabled]=\"cartIsLoading\"\n        (click)=\"removeItem()\"\n      >\n        {{ 'common.remove' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n"
                     }] }
         ];
+        /** @nocollapse */
+        CartItemComponent.ctorParameters = function () { return [
+            { type: PromotionService }
+        ]; };
         CartItemComponent.propDecorators = {
             compact: [{ type: core.Input }],
             item: [{ type: core.Input }],
-            potentialProductPromotions: [{ type: core.Input }],
             isReadOnly: [{ type: core.Input }],
             cartIsLoading: [{ type: core.Input }],
+            promotionLocation: [{ type: core.Input }],
+            potentialProductPromotions: [{ type: core.Input }],
             remove: [{ type: core.Output }],
             update: [{ type: core.Output }],
             view: [{ type: core.Output }],
@@ -11277,11 +11656,13 @@
         /** @type {?} */
         CartItemComponent.prototype.item;
         /** @type {?} */
-        CartItemComponent.prototype.potentialProductPromotions;
-        /** @type {?} */
         CartItemComponent.prototype.isReadOnly;
         /** @type {?} */
         CartItemComponent.prototype.cartIsLoading;
+        /** @type {?} */
+        CartItemComponent.prototype.promotionLocation;
+        /** @type {?} */
+        CartItemComponent.prototype.potentialProductPromotions;
         /** @type {?} */
         CartItemComponent.prototype.remove;
         /** @type {?} */
@@ -11290,6 +11671,13 @@
         CartItemComponent.prototype.view;
         /** @type {?} */
         CartItemComponent.prototype.parent;
+        /** @type {?} */
+        CartItemComponent.prototype.appliedProductPromotions$;
+        /**
+         * @type {?}
+         * @protected
+         */
+        CartItemComponent.prototype.promotionService;
     }
 
     /**
@@ -11302,7 +11690,7 @@
         OrderSummaryComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-order-summary',
-                        template: "<h4>{{ 'orderCost.orderSummary' | cxTranslate }}</h4>\n\n<div class=\"cx-summary-partials\" *ngIf=\"cart\">\n  <div class=\"cx-summary-row\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.subtotal' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.subTotal?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.estimatedShipping' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{\n        cart.deliveryCost?.formattedValue\n          ? cart.deliveryCost.formattedValue\n          : 'TBD'\n      }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row\" *ngIf=\"cart.net\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.salesTax' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.totalTax?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row cx-summary-total\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.total' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.totalPriceWithTax?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row\" *ngIf=\"cart.totalDiscounts?.value > 0\">\n    {{ 'orderCost.discount' | cxTranslate }}\n    {{ cart.totalDiscounts?.formattedValue }}\n  </div>\n  <div class=\"cx-summary-row\" *ngIf=\"!cart.net\">\n    {{ 'orderCost.grossTax' | cxTranslate }}\n    {{ cart.totalTax?.formattedValue }}.\n  </div>\n</div>\n\n<!--\n<cx-promotions\n  *ngIf=\"cart\"\n  [promotions]=\"cart.appliedOrderPromotions\"\n></cx-promotions>\n-->\n\n<div *cxFeatureLevel=\"'1.3'\">\n  <cx-applied-coupons\n    [vouchers]=\"cart.appliedVouchers\"\n    [isReadOnly]=\"true\"\n  ></cx-applied-coupons>\n</div>\n"
+                        template: "<h4>{{ 'orderCost.orderSummary' | cxTranslate }}</h4>\n\n<div class=\"cx-summary-partials\" *ngIf=\"cart\">\n  <div class=\"cx-summary-row\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.subtotal' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.subTotal?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.estimatedShipping' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{\n        cart.deliveryCost?.formattedValue\n          ? cart.deliveryCost.formattedValue\n          : 'TBD'\n      }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row\" *ngIf=\"cart.net\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.salesTax' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.totalTax?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row cx-summary-total\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.total' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.totalPriceWithTax?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row\" *ngIf=\"cart.totalDiscounts?.value > 0\">\n    {{ 'orderCost.discount' | cxTranslate }}\n    {{ cart.totalDiscounts?.formattedValue }}\n  </div>\n  <div class=\"cx-summary-row\" *ngIf=\"!cart.net\">\n    {{ 'orderCost.grossTax' | cxTranslate }}\n    {{ cart.totalTax?.formattedValue }}.\n  </div>\n</div>\n\n<!--\n<cx-promotions\n  *ngIf=\"cart\"\n  [promotions]=\"cart.appliedOrderPromotions\"\n></cx-promotions>\n-->\n\n<ng-container *cxFeatureLevel=\"'1.3'\">\n  <cx-applied-coupons\n    [vouchers]=\"cart.appliedVouchers\"\n    [isReadOnly]=\"true\"\n  ></cx-applied-coupons>\n</ng-container>\n"
                     }] }
         ];
         OrderSummaryComponent.propDecorators = {
@@ -11362,6 +11750,8 @@
                             common.CommonModule,
                             router.RouterModule,
                             SpinnerModule,
+                            PromotionsModule,
+                            core$1.FeaturesConfigModule,
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     ProductAddToCartComponent: {
@@ -11388,8 +11778,10 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CartDetailsComponent = /** @class */ (function () {
-        function CartDetailsComponent(cartService) {
+        function CartDetailsComponent(cartService, promotionService) {
             this.cartService = cartService;
+            this.promotionService = promotionService;
+            this.promotionLocation = core$1.PromotionLocation.ActiveCart;
         }
         /**
          * @return {?}
@@ -11407,12 +11799,24 @@
              */
             function (entries) { return entries.length > 0; })));
             this.cartLoaded$ = this.cartService.getLoaded();
+            this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
         };
         /**
+         * @deprecated Since 1.4
+         * Use promotionService instead of the promotion inputs.
+         * Remove issue: #5670
+         */
+        /**
+         * @deprecated Since 1.4
+         * Use promotionService instead of the promotion inputs.
+         * Remove issue: #5670
          * @param {?} cart
          * @return {?}
          */
         CartDetailsComponent.prototype.getAllPromotionsForCart = /**
+         * @deprecated Since 1.4
+         * Use promotionService instead of the promotion inputs.
+         * Remove issue: #5670
          * @param {?} cart
          * @return {?}
          */
@@ -11430,13 +11834,14 @@
         CartDetailsComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-cart-details',
-                        template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <ng-container *ngIf=\"entries$ | async as entries\">\n    <div class=\"cart-details-wrapper\">\n      <div class=\"cx-total\">\n        {{ 'cartDetails.cartName' | cxTranslate: { code: cart.code } }}\n      </div>\n      <cx-promotions\n        [promotions]=\"getAllPromotionsForCart(cart)\"\n      ></cx-promotions>\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n        [cartIsLoading]=\"!(cartLoaded$ | async)\"\n      ></cx-cart-item-list>\n    </div>\n  </ng-container>\n</ng-container>\n",
+                        template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <ng-container *ngIf=\"entries$ | async as entries\">\n    <div class=\"cart-details-wrapper\">\n      <div class=\"cx-total\">\n        {{ 'cartDetails.cartName' | cxTranslate: { code: cart.code } }}\n      </div>\n\n      <ng-container *cxFeatureLevel=\"'!1.4'\">\n        <cx-promotions\n          [promotions]=\"getAllPromotionsForCart(cart)\"\n        ></cx-promotions>\n\n        <cx-cart-item-list\n          [items]=\"entries\"\n          [cartIsLoading]=\"!(cartLoaded$ | async)\"\n          [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n        ></cx-cart-item-list>\n      </ng-container>\n\n      <ng-container *cxFeatureLevel=\"'1.4'\">\n        <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n          <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n        </ng-container>\n\n        <cx-cart-item-list\n          [items]=\"entries\"\n          [cartIsLoading]=\"!(cartLoaded$ | async)\"\n          [promotionLocation]=\"promotionLocation\"\n        ></cx-cart-item-list>\n      </ng-container>\n    </div>\n  </ng-container>\n</ng-container>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
         /** @nocollapse */
         CartDetailsComponent.ctorParameters = function () { return [
-            { type: core$1.CartService }
+            { type: core$1.CartService },
+            { type: PromotionService }
         ]; };
         return CartDetailsComponent;
     }());
@@ -11447,11 +11852,20 @@
         CartDetailsComponent.prototype.entries$;
         /** @type {?} */
         CartDetailsComponent.prototype.cartLoaded$;
+        /** @type {?} */
+        CartDetailsComponent.prototype.orderPromotions$;
+        /** @type {?} */
+        CartDetailsComponent.prototype.promotionLocation;
         /**
          * @type {?}
          * @protected
          */
         CartDetailsComponent.prototype.cartService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        CartDetailsComponent.prototype.promotionService;
     }
 
     /**
@@ -11470,6 +11884,7 @@
                             router.RouterModule,
                             core$1.UrlModule,
                             PromotionsModule,
+                            core$1.FeaturesConfigModule,
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     CartComponent: {
@@ -15218,14 +15633,16 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ReviewSubmitComponent = /** @class */ (function () {
-        function ReviewSubmitComponent(checkoutDeliveryService, checkoutPaymentService, userAddressService, cartService, translation, checkoutConfigService) {
+        function ReviewSubmitComponent(checkoutDeliveryService, checkoutPaymentService, userAddressService, cartService, translation, checkoutConfigService, promotionService) {
             this.checkoutDeliveryService = checkoutDeliveryService;
             this.checkoutPaymentService = checkoutPaymentService;
             this.userAddressService = userAddressService;
             this.cartService = cartService;
             this.translation = translation;
             this.checkoutConfigService = checkoutConfigService;
+            this.promotionService = promotionService;
             this.checkoutStepType = CheckoutStepType;
+            this.promotionLocation = core$1.PromotionLocation.ActiveCart;
         }
         /**
          * @return {?}
@@ -15239,6 +15656,7 @@
             this.entries$ = this.cartService.getEntries();
             this.deliveryAddress$ = this.checkoutDeliveryService.getDeliveryAddress();
             this.paymentDetails$ = this.checkoutPaymentService.getPaymentDetails();
+            this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
             this.deliveryMode$ = this.checkoutDeliveryService
                 .getSelectedDeliveryMode()
                 .pipe(operators.tap((/**
@@ -15381,7 +15799,7 @@
         ReviewSubmitComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-review-submit',
-                        template: "<div class=\"cx-review\">\n  <!-- TITLE -->\n  <h3 class=\"cx-review-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutReview.review' | cxTranslate }}\n  </h3>\n  <div class=\"cx-review-summary row\">\n    <!-- SHIPPING ADDRESS SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-wrapper\">\n        <div class=\"cx-review-summary-card cx-review-card-address\">\n          <cx-card\n            [content]=\"\n              getShippingAddressCard(\n                deliveryAddress$ | async,\n                countryName$ | async\n              ) | async\n            \"\n          ></cx-card>\n        </div>\n        <div *cxFeatureLevel=\"'1.1'\" class=\"cx-review-summary-edit-step\">\n          <a\n            [routerLink]=\"\n              {\n                cxRoute: getCheckoutStepUrl(checkoutStepType.SHIPPING_ADDRESS)\n              } | cxUrl\n            \"\n            >{{ 'checkoutReview.editShippingAddress' | cxTranslate }}</a\n          >\n        </div>\n      </div>\n    </div>\n\n    <!-- DELIVERY MODE SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-wrapper\">\n        <div class=\"cx-review-summary-card cx-review-card-shipping\">\n          <cx-card\n            *ngIf=\"deliveryMode$ | async as deliveryMode\"\n            [content]=\"getDeliveryModeCard(deliveryMode) | async\"\n          ></cx-card>\n        </div>\n        <div *cxFeatureLevel=\"'1.1'\" class=\"cx-review-summary-edit-step\">\n          <a\n            [routerLink]=\"\n              { cxRoute: getCheckoutStepUrl(checkoutStepType.DELIVERY_MODE) }\n                | cxUrl\n            \"\n            >{{ 'checkoutReview.editShippingMethod' | cxTranslate }}</a\n          >\n        </div>\n      </div>\n    </div>\n\n    <!-- PAYMENT METHOD SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-wrapper\">\n        <div class=\"cx-review-summary-card cx-review-card-payment\">\n          <cx-card\n            [content]=\"getPaymentMethodCard(paymentDetails$ | async) | async\"\n          ></cx-card>\n        </div>\n        <div *cxFeatureLevel=\"'1.1'\" class=\"cx-review-summary-edit-step\">\n          <a\n            [routerLink]=\"\n              { cxRoute: getCheckoutStepUrl(checkoutStepType.PAYMENT_DETAILS) }\n                | cxUrl\n            \"\n            >{{ 'checkoutReview.editPaymentMethod' | cxTranslate }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <!-- CART ITEM SECTION -->\n  <ng-container *ngIf=\"cart$ | async as cart\">\n    <div class=\"cx-review-cart-total d-none d-lg-block d-xl-block\">\n      {{\n        'cartItems.cartTotal'\n          | cxTranslate: { count: cart.deliveryItemsQuantity }\n      }}:\n      {{ cart.totalPrice?.formattedValue }}\n    </div>\n    <h4 class=\"cx-review-cart-heading d-block d-lg-none d-xl-none\">\n      {{ 'checkoutReview.placeOrder' | cxTranslate }}\n    </h4>\n    <div\n      class=\"cx-review-cart-item col-md-12\"\n      *ngIf=\"entries$ | async as entries\"\n    >\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [isReadOnly]=\"true\"\n        [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n      ></cx-cart-item-list>\n    </div>\n  </ng-container>\n</div>\n",
+                        template: "<div class=\"cx-review\">\n  <!-- TITLE -->\n  <h3 class=\"cx-review-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutReview.review' | cxTranslate }}\n  </h3>\n  <div class=\"cx-review-summary row\">\n    <!-- SHIPPING ADDRESS SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-wrapper\">\n        <div class=\"cx-review-summary-card cx-review-card-address\">\n          <cx-card\n            [content]=\"\n              getShippingAddressCard(\n                deliveryAddress$ | async,\n                countryName$ | async\n              ) | async\n            \"\n          ></cx-card>\n        </div>\n        <div *cxFeatureLevel=\"'1.1'\" class=\"cx-review-summary-edit-step\">\n          <a\n            [routerLink]=\"\n              {\n                cxRoute: getCheckoutStepUrl(checkoutStepType.SHIPPING_ADDRESS)\n              } | cxUrl\n            \"\n            >{{ 'checkoutReview.editShippingAddress' | cxTranslate }}</a\n          >\n        </div>\n      </div>\n    </div>\n\n    <!-- DELIVERY MODE SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-wrapper\">\n        <div class=\"cx-review-summary-card cx-review-card-shipping\">\n          <cx-card\n            *ngIf=\"deliveryMode$ | async as deliveryMode\"\n            [content]=\"getDeliveryModeCard(deliveryMode) | async\"\n          ></cx-card>\n        </div>\n        <div *cxFeatureLevel=\"'1.1'\" class=\"cx-review-summary-edit-step\">\n          <a\n            [routerLink]=\"\n              { cxRoute: getCheckoutStepUrl(checkoutStepType.DELIVERY_MODE) }\n                | cxUrl\n            \"\n            >{{ 'checkoutReview.editShippingMethod' | cxTranslate }}</a\n          >\n        </div>\n      </div>\n    </div>\n\n    <!-- PAYMENT METHOD SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-wrapper\">\n        <div class=\"cx-review-summary-card cx-review-card-payment\">\n          <cx-card\n            [content]=\"getPaymentMethodCard(paymentDetails$ | async) | async\"\n          ></cx-card>\n        </div>\n        <div *cxFeatureLevel=\"'1.1'\" class=\"cx-review-summary-edit-step\">\n          <a\n            [routerLink]=\"\n              { cxRoute: getCheckoutStepUrl(checkoutStepType.PAYMENT_DETAILS) }\n                | cxUrl\n            \"\n            >{{ 'checkoutReview.editPaymentMethod' | cxTranslate }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <!-- CART ITEM SECTION -->\n  <ng-container *ngIf=\"cart$ | async as cart\">\n    <div class=\"cx-review-cart-total d-none d-lg-block d-xl-block\">\n      {{\n        'cartItems.cartTotal'\n          | cxTranslate: { count: cart.deliveryItemsQuantity }\n      }}:\n      {{ cart.totalPrice?.formattedValue }}\n    </div>\n    <h4 class=\"cx-review-cart-heading d-block d-lg-none d-xl-none\">\n      {{ 'checkoutReview.placeOrder' | cxTranslate }}\n    </h4>\n    <div\n      class=\"cx-review-cart-item col-md-12\"\n      *ngIf=\"entries$ | async as entries\"\n    >\n      <ng-container *cxFeatureLevel=\"'!1.4'\">\n        <cx-cart-item-list\n          [items]=\"entries\"\n          [isReadOnly]=\"true\"\n          [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n        ></cx-cart-item-list>\n      </ng-container>\n\n      <ng-container *cxFeatureLevel=\"'1.4'\">\n        <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n          <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n        </ng-container>\n\n        <cx-cart-item-list\n          [items]=\"entries\"\n          [isReadOnly]=\"true\"\n          [promotionLocation]=\"promotionLocation\"\n        ></cx-cart-item-list>\n      </ng-container>\n    </div>\n  </ng-container>\n</div>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -15392,7 +15810,8 @@
             { type: core$1.UserAddressService },
             { type: core$1.CartService },
             { type: core$1.TranslationService },
-            { type: CheckoutConfigService }
+            { type: CheckoutConfigService },
+            { type: PromotionService }
         ]; };
         return ReviewSubmitComponent;
     }());
@@ -15411,6 +15830,10 @@
         ReviewSubmitComponent.prototype.deliveryAddress$;
         /** @type {?} */
         ReviewSubmitComponent.prototype.paymentDetails$;
+        /** @type {?} */
+        ReviewSubmitComponent.prototype.orderPromotions$;
+        /** @type {?} */
+        ReviewSubmitComponent.prototype.promotionLocation;
         /**
          * @type {?}
          * @protected
@@ -15441,6 +15864,11 @@
          * @protected
          */
         ReviewSubmitComponent.prototype.checkoutConfigService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        ReviewSubmitComponent.prototype.promotionService;
     }
 
     /**
@@ -15459,6 +15887,7 @@
                             core$1.I18nModule,
                             core$1.UrlModule,
                             router.RouterModule,
+                            PromotionsModule,
                             core$1.FeaturesConfigModule,
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
@@ -18760,75 +19189,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var OrderDetailsService = /** @class */ (function () {
-        function OrderDetailsService(userOrderService, routingService) {
-            var _this = this;
-            this.userOrderService = userOrderService;
-            this.routingService = routingService;
-            this.orderCode$ = this.routingService
-                .getRouterState()
-                .pipe(operators.map((/**
-             * @param {?} routingData
-             * @return {?}
-             */
-            function (routingData) { return routingData.state.params.orderCode; })));
-            this.orderLoad$ = this.orderCode$.pipe(operators.tap((/**
-             * @param {?} orderCode
-             * @return {?}
-             */
-            function (orderCode) {
-                if (orderCode) {
-                    _this.userOrderService.loadOrderDetails(orderCode);
-                }
-                else {
-                    _this.userOrderService.clearOrderDetails();
-                }
-            })), operators.shareReplay({ bufferSize: 1, refCount: true }));
-        }
-        /**
-         * @return {?}
-         */
-        OrderDetailsService.prototype.getOrderDetails = /**
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            return this.orderLoad$.pipe(operators.switchMap((/**
-             * @return {?}
-             */
-            function () { return _this.userOrderService.getOrderDetails(); })));
-        };
-        OrderDetailsService.decorators = [
-            { type: core.Injectable }
-        ];
-        /** @nocollapse */
-        OrderDetailsService.ctorParameters = function () { return [
-            { type: core$1.UserOrderService },
-            { type: core$1.RoutingService }
-        ]; };
-        return OrderDetailsService;
-    }());
-    if (false) {
-        /** @type {?} */
-        OrderDetailsService.prototype.orderCode$;
-        /** @type {?} */
-        OrderDetailsService.prototype.orderLoad$;
-        /**
-         * @type {?}
-         * @private
-         */
-        OrderDetailsService.prototype.userOrderService;
-        /**
-         * @type {?}
-         * @private
-         */
-        OrderDetailsService.prototype.routingService;
-    }
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var OrderDetailHeadlineComponent = /** @class */ (function () {
         function OrderDetailHeadlineComponent(orderDetailsService) {
             this.orderDetailsService = orderDetailsService;
@@ -18869,8 +19229,10 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var OrderDetailItemsComponent = /** @class */ (function () {
-        function OrderDetailItemsComponent(orderDetailsService) {
+        function OrderDetailItemsComponent(orderDetailsService, promotionService) {
             this.orderDetailsService = orderDetailsService;
+            this.promotionService = promotionService;
+            this.promotionLocation = core$1.PromotionLocation.Order;
         }
         /**
          * @return {?}
@@ -18880,6 +19242,7 @@
          */
         function () {
             this.order$ = this.orderDetailsService.getOrderDetails();
+            this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
         };
         /**
          * @param {?} consignment
@@ -18904,23 +19267,33 @@
         OrderDetailItemsComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-order-details-items',
-                        template: "<ng-container *ngIf=\"order$ | async as order\">\n  <div *ngFor=\"let consignment of order.consignments\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">\n        <span *ngIf=\"consignment\">\n          {{\n            'orderDetails.deliveryStatus'\n              | cxTranslate: { context: consignment.status }\n          }}\n        </span>\n      </div>\n      <div *ngIf=\"consignment?.statusDate\" class=\"cx-list-date\">\n        <div>{{ 'orderDetails.shippedOn' | cxTranslate }}&nbsp;</div>\n        <div>{{ consignment?.statusDate | cxDate }}</div>\n      </div>\n\n      <cx-consignment-tracking\n        [orderCode]=\"order.code\"\n        [consignment]=\"consignment\"\n        *cxFeature=\"'consignmentTracking'\"\n      >\n      </cx-consignment-tracking>\n    </div>\n    <div class=\"cx-list-item col-12\">\n      <cx-cart-item-list\n        [items]=\"getConsignmentProducts(consignment)\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n\n  <div *ngIf=\"order.unconsignedEntries?.length\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">\n        {{ 'orderDetails.pending' | cxTranslate }}\n      </div>\n    </div>\n    <div class=\"cx-list-item col-12\">\n      <cx-cart-item-list\n        [items]=\"order?.unconsignedEntries\"\n        [isReadOnly]=\"true\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n</ng-container>\n"
+                        template: "<ng-container *ngIf=\"order$ | async as order\">\n  <div *ngFor=\"let consignment of order.consignments\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">\n        <span *ngIf=\"consignment\">\n          {{\n            'orderDetails.deliveryStatus'\n              | cxTranslate: { context: consignment.status }\n          }}\n        </span>\n      </div>\n      <div *ngIf=\"consignment?.statusDate\" class=\"cx-list-date\">\n        <div>{{ 'orderDetails.shippedOn' | cxTranslate }}&nbsp;</div>\n        <div>{{ consignment?.statusDate | cxDate }}</div>\n      </div>\n\n      <cx-consignment-tracking\n        [orderCode]=\"order.code\"\n        [consignment]=\"consignment\"\n        *cxFeature=\"'consignmentTracking'\"\n      >\n      </cx-consignment-tracking>\n    </div>\n\n    <div class=\"cx-list-item col-12\">\n      <ng-container *cxFeatureLevel=\"'1.4'\">\n        <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n          <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n        </ng-container>\n      </ng-container>\n\n      <cx-cart-item-list\n        [items]=\"getConsignmentProducts(consignment)\"\n        [isReadOnly]=\"true\"\n        [promotionLocation]=\"promotionLocation\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n\n  <div *ngIf=\"order.unconsignedEntries?.length\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">\n        {{ 'orderDetails.pending' | cxTranslate }}\n      </div>\n    </div>\n    <div class=\"cx-list-item col-12\">\n      <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n        <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n      </ng-container>\n\n      <cx-cart-item-list\n        [items]=\"order?.unconsignedEntries\"\n        [isReadOnly]=\"true\"\n        [promotionLocation]=\"promotionLocation\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n</ng-container>\n"
                     }] }
         ];
         /** @nocollapse */
         OrderDetailItemsComponent.ctorParameters = function () { return [
-            { type: OrderDetailsService }
+            { type: OrderDetailsService },
+            { type: PromotionService }
         ]; };
         return OrderDetailItemsComponent;
     }());
     if (false) {
         /** @type {?} */
+        OrderDetailItemsComponent.prototype.promotionLocation;
+        /** @type {?} */
         OrderDetailItemsComponent.prototype.order$;
+        /** @type {?} */
+        OrderDetailItemsComponent.prototype.orderPromotions$;
         /**
          * @type {?}
          * @private
          */
         OrderDetailItemsComponent.prototype.orderDetailsService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        OrderDetailItemsComponent.prototype.promotionService;
     }
 
     /**
@@ -19317,6 +19690,7 @@
                             common.CommonModule,
                             core$1.I18nModule,
                             core$1.FeaturesConfigModule,
+                            PromotionsModule,
                             core$1.UrlModule,
                             router.RouterModule.forChild([
                                 {
@@ -24777,8 +25151,10 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var OrderConfirmationItemsComponent = /** @class */ (function () {
-        function OrderConfirmationItemsComponent(checkoutService) {
+        function OrderConfirmationItemsComponent(checkoutService, promotionService) {
             this.checkoutService = checkoutService;
+            this.promotionService = promotionService;
+            this.promotionLocation = core$1.PromotionLocation.Checkout;
         }
         /**
          * @return {?}
@@ -24788,6 +25164,7 @@
          */
         function () {
             this.order$ = this.checkoutService.getOrderDetails();
+            this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
         };
         /**
          * @return {?}
@@ -24801,24 +25178,34 @@
         OrderConfirmationItemsComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-order-confirmation-items',
-                        template: "<div class=\"cx-order-items container\" *ngIf=\"order$ | async as order\">\n  <h4 class=\"cx-order-items-header\">\n    {{ 'checkoutOrderConfirmation.orderItems' | cxTranslate }}\n  </h4>\n  <cx-cart-item-list\n    [items]=\"order.entries\"\n    [isReadOnly]=\"true\"\n  ></cx-cart-item-list>\n</div>\n",
+                        template: "<div class=\"cx-order-items container\" *ngIf=\"order$ | async as order\">\n  <h4 class=\"cx-order-items-header\">\n    {{ 'checkoutOrderConfirmation.orderItems' | cxTranslate }}\n  </h4>\n\n  <ng-container *cxFeatureLevel=\"'1.4'\">\n    <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n      <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n    </ng-container>\n  </ng-container>\n\n  <cx-cart-item-list\n    [items]=\"order.entries\"\n    [isReadOnly]=\"true\"\n    [promotionLocation]=\"promotionLocation\"\n  >\n  </cx-cart-item-list>\n</div>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
         /** @nocollapse */
         OrderConfirmationItemsComponent.ctorParameters = function () { return [
-            { type: core$1.CheckoutService }
+            { type: core$1.CheckoutService },
+            { type: PromotionService }
         ]; };
         return OrderConfirmationItemsComponent;
     }());
     if (false) {
         /** @type {?} */
+        OrderConfirmationItemsComponent.prototype.promotionLocation;
+        /** @type {?} */
         OrderConfirmationItemsComponent.prototype.order$;
+        /** @type {?} */
+        OrderConfirmationItemsComponent.prototype.orderPromotions$;
         /**
          * @type {?}
          * @protected
          */
         OrderConfirmationItemsComponent.prototype.checkoutService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        OrderConfirmationItemsComponent.prototype.promotionService;
     }
 
     /**
@@ -25284,8 +25671,10 @@
                             CartSharedModule,
                             CardModule,
                             PwaModule,
+                            PromotionsModule,
                             core$1.I18nModule,
                             forms.ReactiveFormsModule,
+                            core$1.FeaturesConfigModule,
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     OrderConfirmationThankMessageComponent: {
@@ -31242,6 +31631,7 @@
     exports.ProductSummaryModule = ProductSummaryModule;
     exports.ProductTabsModule = ProductTabsModule;
     exports.ProductViewComponent = ProductViewComponent;
+    exports.PromotionService = PromotionService;
     exports.PromotionsComponent = PromotionsComponent;
     exports.PromotionsModule = PromotionsModule;
     exports.PwaModule = PwaModule;
