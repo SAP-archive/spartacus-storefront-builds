@@ -26157,7 +26157,7 @@ class RegisterComponent {
             ([consent, template]) => {
                 return {
                     consent,
-                    template: template.description,
+                    template: template ? template.description : '',
                 };
             })));
             this.subscription.add(this.userRegistrationForm

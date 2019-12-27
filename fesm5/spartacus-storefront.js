@@ -30198,7 +30198,7 @@ var RegisterComponent = /** @class */ (function () {
                 var _b = __read(_a, 2), consent = _b[0], template = _b[1];
                 return {
                     consent: consent,
-                    template: template.description,
+                    template: template ? template.description : '',
                 };
             })));
             this.subscription.add(this.userRegistrationForm
