@@ -1,6 +1,6 @@
 import { CommonModule, isPlatformServer, isPlatformBrowser, DOCUMENT, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, EventEmitter, Output, isDevMode, ChangeDetectionStrategy, forwardRef, Renderer2, ViewChild, Directive, HostListener, Optional, Injector, Inject, PLATFORM_ID, INJECTOR, InjectionToken, TemplateRef, ComponentFactory, ViewContainerRef, ComponentFactoryResolver, NgZone, APP_INITIALIZER, SecurityContext, RendererFactory2, ViewEncapsulation, ChangeDetectorRef, Pipe, ViewChildren } from '@angular/core';
-import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, UserOrderService, RoutingService, PromotionLocation, CartService, CheckoutService, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, TranslationService, TranslationChunkService, CmsService, PageType, SemanticPathService, ProtectedRoutesGuard, AuthService, CartDataService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, DynamicAttributeService, PageRobotsMeta, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, CartVoucherService, OCC_USER_ID_ANONYMOUS, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, RoutingModule as RoutingModule$1, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
+import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, UserOrderService, RoutingService, PromotionLocation, CartService, CheckoutService, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, TranslationService, TranslationChunkService, CmsService, PageType, SemanticPathService, ProtectedRoutesGuard, AuthService, CartDataService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, DynamicAttributeService, PageRobotsMeta, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, CartVoucherService, OCC_USER_ID_ANONYMOUS, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, RoutingModule as RoutingModule$1, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
 import { Subscription, combineLatest, of, fromEvent, BehaviorSubject, concat, isObservable, from, Observable } from 'rxjs';
 import { take, distinctUntilChanged, tap, map, debounceTime, startWith, filter, switchMap, shareReplay, first, skipWhile, endWith, withLatestFrom, flatMap, mergeMap, scan, distinctUntilKeyChanged, pluck } from 'rxjs/operators';
 import { __extends, __read, __values, __assign, __spread, __awaiter, __generator } from 'tslib';
@@ -11444,7 +11444,7 @@ var CartItemComponent = /** @class */ (function () {
     CartItemComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-cart-item',
-                    template: "<div [ngClass]=\"compact ? 'cx-compact row' : 'row'\">\n  <!-- Item Image -->\n  <div class=\"col-2 cx-image-container\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n      (click)=\"viewItem()\"\n    >\n      <cx-media\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-5'\">\n        <div *ngIf=\"item.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n            (click)=\"viewItem()\"\n            >{{ item.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"item.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n        </div>\n        <!-- Variants -->\n        <div\n          *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n          class=\"cx-property\"\n        >\n          <div class=\"cx-label\">{{ variant.name }}</div>\n          <div class=\"cx-value\">{{ variant.value }}</div>\n        </div>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"item.basePrice\"\n        class=\"cx-price\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n          {{ item.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <div class=\"cx-quantity\" [ngClass]=\"compact ? '' : ' col-3'\">\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          placement=\"left\"\n          title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n        <div *ngIf=\"isReadOnly\" class=\"cx-value\">{{ item.quantity }}</div>\n        <div\n          *ngIf=\"!isReadOnly && parent\"\n          class=\"cx-value\"\n          [formGroup]=\"parent\"\n        >\n          <cx-item-counter\n            [isValueChangeable]=\"item.updateable\"\n            [step]=\"1\"\n            [min]=\"1\"\n            [max]=\"item.product.stock?.stockLevel || 1000\"\n            (update)=\"updateItem($event)\"\n            [cartIsLoading]=\"cartIsLoading\"\n            formControlName=\"quantity\"\n          >\n          </cx-item-counter>\n        </div>\n      </div>\n      <!-- Total -->\n      <div\n        *ngIf=\"item.totalPrice\"\n        class=\"cx-total\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.total' | cxTranslate }}\n        </div>\n        <div class=\"cx-value\">{{ item.totalPrice.formattedValue }}</div>\n      </div>\n    </div>\n    <!-- Availability -->\n    <div *ngIf=\"isProductOutOfStock(item)\" class=\"cx-availability col-12\">\n      {{ 'productSummary.outOfStock' | cxTranslate }}\n    </div>\n    <!-- Promotion -->\n    <ng-container *cxFeatureLevel=\"'!1.4'\">\n      <cx-promotions [promotions]=\"potentialProductPromotions\"></cx-promotions>\n    </ng-container>\n\n    <ng-container *cxFeatureLevel=\"'1.4'\">\n      <ng-container\n        *ngIf=\"appliedProductPromotions$ | async as appliedProductPromotions\"\n      >\n        <cx-promotions [promotions]=\"appliedProductPromotions\"></cx-promotions>\n      </ng-container>\n    </ng-container>\n    <!-- Actions -->\n    <div *ngIf=\"!isReadOnly && item.updateable\" class=\"cx-actions col-12\">\n      <button\n        class=\"link\"\n        [class.disabled]=\"cartIsLoading\"\n        [disabled]=\"cartIsLoading\"\n        (click)=\"removeItem()\"\n      >\n        {{ 'common.remove' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n"
+                    template: "<div [ngClass]=\"compact ? 'cx-compact row' : 'row'\">\n  <!-- Item Image -->\n  <div class=\"col-2 cx-image-container\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n      (click)=\"viewItem()\"\n    >\n      <cx-media\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-5'\">\n        <div *ngIf=\"item.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n            (click)=\"viewItem()\"\n            >{{ item.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"item.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n        </div>\n        <!-- Variants -->\n        <ng-container *cxFeatureLevel=\"'!1.4'\">\n          <div\n            *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\">{{ variant.name }}</div>\n            <div class=\"cx-value\">{{ variant.value }}</div>\n          </div>\n        </ng-container>\n        <ng-container *cxFeatureLevel=\"'1.4'\">\n          <div\n            *ngFor=\"\n              let variant of item.product.baseOptions[0]?.selected\n                .variantOptionQualifiers\n            \"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\" *ngIf=\"variant.name && variant.value\">\n              {{ variant.name }}: {{ variant.value }}\n            </div>\n          </div>\n        </ng-container>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"item.basePrice\"\n        class=\"cx-price\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n          {{ item.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <div class=\"cx-quantity\" [ngClass]=\"compact ? '' : ' col-3'\">\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          placement=\"left\"\n          title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n        <div *ngIf=\"isReadOnly\" class=\"cx-value\">{{ item.quantity }}</div>\n        <div\n          *ngIf=\"!isReadOnly && parent\"\n          class=\"cx-value\"\n          [formGroup]=\"parent\"\n        >\n          <cx-item-counter\n            [isValueChangeable]=\"item.updateable\"\n            [step]=\"1\"\n            [min]=\"1\"\n            [max]=\"item.product.stock?.stockLevel || 1000\"\n            (update)=\"updateItem($event)\"\n            [cartIsLoading]=\"cartIsLoading\"\n            formControlName=\"quantity\"\n          >\n          </cx-item-counter>\n        </div>\n      </div>\n      <!-- Total -->\n      <div\n        *ngIf=\"item.totalPrice\"\n        class=\"cx-total\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.total' | cxTranslate }}\n        </div>\n        <div class=\"cx-value\">{{ item.totalPrice.formattedValue }}</div>\n      </div>\n    </div>\n    <!-- Availability -->\n    <div *ngIf=\"isProductOutOfStock(item)\" class=\"cx-availability col-12\">\n      {{ 'productSummary.outOfStock' | cxTranslate }}\n    </div>\n    <!-- Promotion -->\n    <ng-container *cxFeatureLevel=\"'!1.4'\">\n      <cx-promotions [promotions]=\"potentialProductPromotions\"></cx-promotions>\n    </ng-container>\n\n    <ng-container *cxFeatureLevel=\"'1.4'\">\n      <ng-container\n        *ngIf=\"appliedProductPromotions$ | async as appliedProductPromotions\"\n      >\n        <cx-promotions [promotions]=\"appliedProductPromotions\"></cx-promotions>\n      </ng-container>\n    </ng-container>\n    <!-- Actions -->\n    <div *ngIf=\"!isReadOnly && item.updateable\" class=\"cx-actions col-12\">\n      <button\n        class=\"link\"\n        [class.disabled]=\"cartIsLoading\"\n        [disabled]=\"cartIsLoading\"\n        (click)=\"removeItem()\"\n      >\n        {{ 'common.remove' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -27479,7 +27479,7 @@ var ProductGridItemComponent = /** @class */ (function () {
     ProductGridItemComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-product-grid-item',
-                    template: "<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-image-container\"\n>\n  <cx-media\n    class=\"cx-product-image\"\n    [container]=\"product.images?.PRIMARY\"\n    format=\"product\"\n    [alt]=\"product.summary\"\n  ></cx-media>\n</a>\n<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-name\"\n  [innerHTML]=\"product.nameHtml\"\n></a>\n\n<div class=\"cx-product-rating\">\n  <cx-star-rating\n    *ngIf=\"product.averageRating\"\n    [rating]=\"product?.averageRating\"\n    [disabled]=\"true\"\n  ></cx-star-rating>\n  <div *ngIf=\"!product.averageRating\">\n    {{ 'productDetails.noReviews' | cxTranslate }}\n  </div>\n</div>\n<div class=\"cx-product-price-container\">\n  <div class=\"cx-product-price\" aria-label=\"Product price\">\n    {{ product.price?.formattedValue }}\n  </div>\n</div>\n\n<cx-add-to-cart\n  *ngIf=\"product.stock?.stockLevelStatus !== 'outOfStock'\"\n  [showQuantity]=\"false\"\n  [product]=\"product\"\n></cx-add-to-cart>\n",
+                    template: "<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-image-container\"\n>\n  <cx-media\n    class=\"cx-product-image\"\n    [container]=\"product.images?.PRIMARY\"\n    format=\"product\"\n    [alt]=\"product.summary\"\n  ></cx-media>\n</a>\n<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-name\"\n  [innerHTML]=\"product.nameHtml\"\n></a>\n\n<div class=\"cx-product-rating\">\n  <cx-star-rating\n    *ngIf=\"product.averageRating\"\n    [rating]=\"product?.averageRating\"\n    [disabled]=\"true\"\n  ></cx-star-rating>\n  <div *ngIf=\"!product.averageRating\">\n    {{ 'productDetails.noReviews' | cxTranslate }}\n  </div>\n</div>\n<div class=\"cx-product-price-container\">\n  <div class=\"cx-product-price\" aria-label=\"Product price\">\n    {{ product.price?.formattedValue }}\n  </div>\n</div>\n\n<ng-container *cxFeatureLevel=\"'1.4'\">\n  <div class=\"cx-style-icons\" *ngIf=\"product.variantOptions\">\n    <cx-style-icons [variants]=\"product.variantOptions\"></cx-style-icons>\n  </div>\n</ng-container>\n\n<cx-add-to-cart\n  *ngIf=\"product.stock?.stockLevelStatus !== 'outOfStock'\"\n  [showQuantity]=\"false\"\n  [product]=\"product\"\n></cx-add-to-cart>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -27503,7 +27503,7 @@ var ProductListItemComponent = /** @class */ (function () {
     ProductListItemComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-product-list-item',
-                    template: "<div class=\"row\">\n  <div class=\"col-12 col-md-4\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-image-container\"\n    >\n      <cx-media\n        class=\"cx-product-image\"\n        [container]=\"product.images?.PRIMARY\"\n        format=\"product\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n    </a>\n  </div>\n  <div class=\"col-12 col-md-8\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-name\"\n      [innerHtml]=\"product.nameHtml\"\n    ></a>\n    <cx-star-rating\n      *ngIf=\"product.averageRating\"\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div *ngIf=\"!product.averageRating\">\n      {{ 'productDetails.noReviews' | cxTranslate }}\n    </div>\n    <div class=\"cx-product-price\" aria-label=\"Product price\">\n      {{ product.price?.formattedValue }}\n    </div>\n    <div class=\"row\">\n      <div class=\"col-12 col-md-8\">\n        <p class=\"cx-product-summary\" [innerHtml]=\"product.summary\">\n          {{ product.summary }}\n        </p>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <cx-add-to-cart\n          *ngIf=\"product.stock?.stockLevelStatus !== 'outOfStock'\"\n          [showQuantity]=\"false\"\n          [product]=\"product\"\n        ></cx-add-to-cart>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                    template: "<div class=\"row\">\n  <div class=\"col-12 col-md-4\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-image-container\"\n    >\n      <cx-media\n        class=\"cx-product-image\"\n        [container]=\"product.images?.PRIMARY\"\n        format=\"product\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n    </a>\n  </div>\n  <div class=\"col-12 col-md-8\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-name\"\n      [innerHtml]=\"product.nameHtml\"\n    ></a>\n    <cx-star-rating\n      *ngIf=\"product.averageRating\"\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div *ngIf=\"!product.averageRating\">\n      {{ 'productDetails.noReviews' | cxTranslate }}\n    </div>\n    <div class=\"cx-product-price\" aria-label=\"Product price\">\n      {{ product.price?.formattedValue }}\n    </div>\n    <div class=\"row\">\n      <div class=\"col-12 col-md-8\">\n        <p class=\"cx-product-summary\" [innerHtml]=\"product.summary\">\n          {{ product.summary }}\n        </p>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <cx-add-to-cart\n          *ngIf=\"product.stock?.stockLevelStatus !== 'outOfStock'\"\n          [showQuantity]=\"false\"\n          [product]=\"product\"\n        ></cx-add-to-cart>\n      </div>\n    </div>\n    <ng-container *cxFeatureLevel=\"'1.4'\">\n      <div class=\"row\" *ngIf=\"product.variantOptions\">\n        <cx-style-icons\n          class=\"list-style-icons\"\n          [variants]=\"product.variantOptions\"\n        ></cx-style-icons>\n      </div>\n    </ng-container>\n  </div>\n</div>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -27521,6 +27521,579 @@ if (false) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var ProductVariantSelectorComponent = /** @class */ (function () {
+    function ProductVariantSelectorComponent(currentProductService) {
+        this.currentProductService = currentProductService;
+        this.variants = [];
+        this.variantType = VariantType;
+    }
+    /**
+     * @return {?}
+     */
+    ProductVariantSelectorComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.product$ = this.currentProductService.getProduct().pipe(filter((/**
+         * @param {?} product
+         * @return {?}
+         */
+        function (product) { return !!(product && product.baseOptions); })), distinctUntilChanged(), tap((/**
+         * @param {?} product
+         * @return {?}
+         */
+        function (product) {
+            product.baseOptions.forEach((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) {
+                if (option && option.variantType) {
+                    _this.variants[option.variantType] = option;
+                }
+            }));
+        })));
+    };
+    ProductVariantSelectorComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-product-variant-selector',
+                    template: "<ng-container *ngIf=\"product$ | async as product\">\n  <div class=\"variant-section\" *ngIf=\"product.baseOptions?.length\">\n    <cx-style-selector\n      *ngIf=\"variants[variantType.STYLE]\"\n      [variants]=\"variants[variantType.STYLE]\"\n    ></cx-style-selector>\n    <cx-size-selector\n      *ngIf=\"variants[variantType.SIZE]\"\n      [product]=\"product\"\n      [variants]=\"variants[variantType.SIZE]\"\n    ></cx-size-selector>\n    <cx-color-selector\n      *ngIf=\"variants[variantType.COLOR]\"\n      [product]=\"product\"\n      [variants]=\"variants[variantType.COLOR]\"\n    ></cx-color-selector>\n  </div>\n</ng-container>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    /** @nocollapse */
+    ProductVariantSelectorComponent.ctorParameters = function () { return [
+        { type: CurrentProductService }
+    ]; };
+    return ProductVariantSelectorComponent;
+}());
+if (false) {
+    /** @type {?} */
+    ProductVariantSelectorComponent.prototype.variants;
+    /** @type {?} */
+    ProductVariantSelectorComponent.prototype.variantType;
+    /** @type {?} */
+    ProductVariantSelectorComponent.prototype.product$;
+    /**
+     * @type {?}
+     * @private
+     */
+    ProductVariantSelectorComponent.prototype.currentProductService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var VariantStyleSelectorComponent = /** @class */ (function () {
+    function VariantStyleSelectorComponent(config) {
+        this.config = config;
+        this.variantQualifier = VariantQualifier;
+    }
+    /**
+     * @param {?} qualifiers
+     * @return {?}
+     */
+    VariantStyleSelectorComponent.prototype.getVariantOptionValue = /**
+     * @param {?} qualifiers
+     * @return {?}
+     */
+    function (qualifiers) {
+        /** @type {?} */
+        var obj = qualifiers.find((/**
+         * @param {?} q
+         * @return {?}
+         */
+        function (q) { return q.qualifier === VariantQualifier.STYLE; }));
+        return obj ? obj.value : '';
+    };
+    /**
+     * @param {?} variantOptionQualifiers
+     * @return {?}
+     */
+    VariantStyleSelectorComponent.prototype.getVariantThumbnailUrl = /**
+     * @param {?} variantOptionQualifiers
+     * @return {?}
+     */
+    function (variantOptionQualifiers) {
+        /** @type {?} */
+        var qualifier = variantOptionQualifiers.find((/**
+         * @param {?} item
+         * @return {?}
+         */
+        function (item) { return item.image; }));
+        return qualifier
+            ? "" + this.config.backend.occ.baseUrl + qualifier.image.url
+            : '';
+    };
+    VariantStyleSelectorComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-style-selector',
+                    template: "<ng-container>\n  <div class=\"variant-selector\">\n    <div *ngIf=\"variants.selected\" class=\"variant-name\">\n      {{ 'variant.style' | cxTranslate }}:\n      <span class=\"style-name\">{{\n        getVariantOptionValue(variants?.selected.variantOptionQualifiers)\n      }}</span>\n    </div>\n    <ul class=\"variant-list\">\n      <li\n        *ngFor=\"let v of variants?.options\"\n        [ngClass]=\"{\n          'selected-variant': v.code === variants?.selected.code\n        }\"\n      >\n        <a\n          [routerLink]=\"\n            { cxRoute: 'product', params: { code: v.code } } | cxUrl\n          \"\n          class=\"colorVariant\"\n        >\n          <img\n            src=\"{{ getVariantThumbnailUrl(v.variantOptionQualifiers) }}\"\n            title=\"{{ getVariantOptionValue(v.variantOptionQualifiers) }}\"\n            alt=\"{{ getVariantOptionValue(v.variantOptionQualifiers) }}\"\n          />\n        </a>\n      </li>\n    </ul>\n  </div>\n</ng-container>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    /** @nocollapse */
+    VariantStyleSelectorComponent.ctorParameters = function () { return [
+        { type: OccConfig }
+    ]; };
+    VariantStyleSelectorComponent.propDecorators = {
+        variants: [{ type: Input }]
+    };
+    return VariantStyleSelectorComponent;
+}());
+if (false) {
+    /** @type {?} */
+    VariantStyleSelectorComponent.prototype.variantQualifier;
+    /** @type {?} */
+    VariantStyleSelectorComponent.prototype.variants;
+    /**
+     * @type {?}
+     * @private
+     */
+    VariantStyleSelectorComponent.prototype.config;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var VariantStyleSelectorModule = /** @class */ (function () {
+    function VariantStyleSelectorModule() {
+    }
+    VariantStyleSelectorModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule, RouterModule, UrlModule, I18nModule],
+                    declarations: [VariantStyleSelectorComponent],
+                    entryComponents: [VariantStyleSelectorComponent],
+                    exports: [VariantStyleSelectorComponent],
+                },] }
+    ];
+    return VariantStyleSelectorModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var VariantSizeSelectorComponent = /** @class */ (function () {
+    function VariantSizeSelectorComponent(routingService) {
+        this.routingService = routingService;
+    }
+    /**
+     * @param {?} code
+     * @return {?}
+     */
+    VariantSizeSelectorComponent.prototype.changeSize = /**
+     * @param {?} code
+     * @return {?}
+     */
+    function (code) {
+        if (code) {
+            this.routingService.go({
+                cxRoute: 'product',
+                params: { code: code },
+            });
+        }
+        return null;
+    };
+    /**
+     * @param {?} qualifiers
+     * @return {?}
+     */
+    VariantSizeSelectorComponent.prototype.getVariantOptionValue = /**
+     * @param {?} qualifiers
+     * @return {?}
+     */
+    function (qualifiers) {
+        /** @type {?} */
+        var obj = qualifiers.find((/**
+         * @param {?} q
+         * @return {?}
+         */
+        function (q) { return q.qualifier === VariantQualifier.SIZE; }));
+        return obj ? obj.value : '';
+    };
+    VariantSizeSelectorComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-size-selector',
+                    template: "<ng-container>\n  <div class=\"variant-selector\">\n    <div class=\"variant-name\">{{ 'variant.size' | cxTranslate }}:</div>\n    <select\n      (change)=\"changeSize($event.target.value)\"\n      class=\"form-control variant-select\"\n    >\n      <option\n        *ngFor=\"let v of variants?.options\"\n        value=\"{{ v.code }}\"\n        [selected]=\"v.code === product?.code\"\n        >{{ getVariantOptionValue(v.variantOptionQualifiers) }}</option\n      >\n    </select>\n    <a\n      href=\"#\"\n      class=\"size-guide\"\n      title=\"{{ 'variant.sizeGuideLabel' | cxTranslate }}\"\n    >\n      {{ 'variant.sizeGuideLabel' | cxTranslate }}\n    </a>\n  </div>\n</ng-container>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    /** @nocollapse */
+    VariantSizeSelectorComponent.ctorParameters = function () { return [
+        { type: RoutingService }
+    ]; };
+    VariantSizeSelectorComponent.propDecorators = {
+        product: [{ type: Input }],
+        variants: [{ type: Input }]
+    };
+    return VariantSizeSelectorComponent;
+}());
+if (false) {
+    /** @type {?} */
+    VariantSizeSelectorComponent.prototype.product;
+    /** @type {?} */
+    VariantSizeSelectorComponent.prototype.variants;
+    /**
+     * @type {?}
+     * @private
+     */
+    VariantSizeSelectorComponent.prototype.routingService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var VariantSizeSelectorModule = /** @class */ (function () {
+    function VariantSizeSelectorModule() {
+    }
+    VariantSizeSelectorModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule, RouterModule, UrlModule, I18nModule],
+                    declarations: [VariantSizeSelectorComponent],
+                    entryComponents: [VariantSizeSelectorComponent],
+                    exports: [VariantSizeSelectorComponent],
+                },] }
+    ];
+    return VariantSizeSelectorModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var VariantColorSelectorComponent = /** @class */ (function () {
+    function VariantColorSelectorComponent(routingService) {
+        this.routingService = routingService;
+    }
+    /**
+     * @param {?} code
+     * @return {?}
+     */
+    VariantColorSelectorComponent.prototype.changeColor = /**
+     * @param {?} code
+     * @return {?}
+     */
+    function (code) {
+        if (code) {
+            this.routingService.go({
+                cxRoute: 'product',
+                params: { code: code },
+            });
+        }
+        return null;
+    };
+    /**
+     * @param {?} qualifiers
+     * @return {?}
+     */
+    VariantColorSelectorComponent.prototype.getVariantOptionValue = /**
+     * @param {?} qualifiers
+     * @return {?}
+     */
+    function (qualifiers) {
+        /** @type {?} */
+        var obj = qualifiers.find((/**
+         * @param {?} q
+         * @return {?}
+         */
+        function (q) { return q.qualifier === VariantQualifier.COLOR; }));
+        return obj ? obj.value : '';
+    };
+    VariantColorSelectorComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-color-selector',
+                    template: "<ng-container>\n  <div class=\"variant-selector\">\n    <div class=\"variant-name\">{{ 'variant.color' | cxTranslate }}:</div>\n    <select\n      (change)=\"changeColor($event.target.value)\"\n      class=\"form-control variant-select\"\n    >\n      <option\n        *ngFor=\"let v of variants?.options\"\n        value=\"{{ v.code }}\"\n        [selected]=\"v.code === product?.code\"\n        >{{ getVariantOptionValue(v.variantOptionQualifiers) }}</option\n      >\n    </select>\n  </div>\n</ng-container>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }] }
+    ];
+    /** @nocollapse */
+    VariantColorSelectorComponent.ctorParameters = function () { return [
+        { type: RoutingService }
+    ]; };
+    VariantColorSelectorComponent.propDecorators = {
+        product: [{ type: Input }],
+        variants: [{ type: Input }]
+    };
+    return VariantColorSelectorComponent;
+}());
+if (false) {
+    /** @type {?} */
+    VariantColorSelectorComponent.prototype.product;
+    /** @type {?} */
+    VariantColorSelectorComponent.prototype.variants;
+    /**
+     * @type {?}
+     * @private
+     */
+    VariantColorSelectorComponent.prototype.routingService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var VariantColorSelectorModule = /** @class */ (function () {
+    function VariantColorSelectorModule() {
+    }
+    VariantColorSelectorModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule, RouterModule, UrlModule, I18nModule],
+                    declarations: [VariantColorSelectorComponent],
+                    entryComponents: [VariantColorSelectorComponent],
+                    exports: [VariantColorSelectorComponent],
+                },] }
+    ];
+    return VariantColorSelectorModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var VariantStyleIconsComponent = /** @class */ (function () {
+    function VariantStyleIconsComponent(config) {
+        this.config = config;
+        this.variantNames = {};
+    }
+    /**
+     * @return {?}
+     */
+    VariantStyleIconsComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.variants.forEach((/**
+         * @param {?} variant
+         * @return {?}
+         */
+        function (variant) {
+            _this.variantNames[variant.code] = _this.getVariantName(variant.variantOptionQualifiers);
+        }));
+    };
+    /**
+     * @param {?} variantOptionQualifiers
+     * @return {?}
+     */
+    VariantStyleIconsComponent.prototype.getVariantThumbnailUrl = /**
+     * @param {?} variantOptionQualifiers
+     * @return {?}
+     */
+    function (variantOptionQualifiers) {
+        /** @type {?} */
+        var thumbnail = variantOptionQualifiers.find((/**
+         * @param {?} item
+         * @return {?}
+         */
+        function (item) { return item.qualifier === VariantQualifier.THUMBNAIL; }));
+        return thumbnail
+            ? "" + this.config.backend.occ.baseUrl + thumbnail.image.url
+            : '';
+    };
+    /**
+     * @private
+     * @param {?} variantOptionQualifiers
+     * @return {?}
+     */
+    VariantStyleIconsComponent.prototype.getVariantName = /**
+     * @private
+     * @param {?} variantOptionQualifiers
+     * @return {?}
+     */
+    function (variantOptionQualifiers) {
+        /** @type {?} */
+        var rollupProperty = variantOptionQualifiers.find((/**
+         * @param {?} item
+         * @return {?}
+         */
+        function (item) { return item.qualifier === VariantQualifier.ROLLUP_PROPERTY; }));
+        /** @type {?} */
+        var property = rollupProperty
+            ? variantOptionQualifiers.find((/**
+             * @param {?} item
+             * @return {?}
+             */
+            function (item) { return item.qualifier === rollupProperty.value; }))
+            : null;
+        return property ? property.value : '';
+    };
+    VariantStyleIconsComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-style-icons',
+                    template: "<ul class=\"variant-list\">\n  <li *ngFor=\"let v of variants\">\n    <img\n      [attr.src]=\"getVariantThumbnailUrl(v.variantOptionQualifiers)\"\n      [attr.title]=\"variantNames[v.code]\"\n      [attr.alt]=\"variantNames[v.code]\"\n    />\n  </li>\n</ul>\n",
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    styles: ["ul{padding:0}ul li{display:inline}ul li img{width:50px}"]
+                }] }
+    ];
+    /** @nocollapse */
+    VariantStyleIconsComponent.ctorParameters = function () { return [
+        { type: OccConfig }
+    ]; };
+    VariantStyleIconsComponent.propDecorators = {
+        variants: [{ type: Input }]
+    };
+    return VariantStyleIconsComponent;
+}());
+if (false) {
+    /** @type {?} */
+    VariantStyleIconsComponent.prototype.variants;
+    /** @type {?} */
+    VariantStyleIconsComponent.prototype.variantNames;
+    /**
+     * @type {?}
+     * @private
+     */
+    VariantStyleIconsComponent.prototype.config;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var VariantStyleIconsModule = /** @class */ (function () {
+    function VariantStyleIconsModule() {
+    }
+    VariantStyleIconsModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule, RouterModule, UrlModule, I18nModule],
+                    declarations: [VariantStyleIconsComponent],
+                    entryComponents: [VariantStyleIconsComponent],
+                    exports: [VariantStyleIconsComponent],
+                },] }
+    ];
+    return VariantStyleIconsModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ProductVariantGuard = /** @class */ (function () {
+    function ProductVariantGuard(productService, routingService) {
+        this.productService = productService;
+        this.routingService = routingService;
+    }
+    /**
+     * @return {?}
+     */
+    ProductVariantGuard.prototype.canActivate = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        return this.routingService.getRouterState().pipe(map((/**
+         * @param {?} state
+         * @return {?}
+         */
+        function (state) { return state.nextState.params.productCode; })), filter(Boolean), switchMap((/**
+         * @param {?} productCode
+         * @return {?}
+         */
+        function (productCode) { return _this.productService.get(productCode); })), filter(Boolean), map((/**
+         * @param {?} product
+         * @return {?}
+         */
+        function (product) {
+            if (!product.purchasable) {
+                /** @type {?} */
+                var variant = _this.findVariant(product.variantOptions);
+                _this.routingService.goByUrl("product/" + variant.code);
+                return false;
+            }
+            else {
+                return true;
+            }
+        })));
+    };
+    /**
+     * @param {?} variants
+     * @return {?}
+     */
+    ProductVariantGuard.prototype.findVariant = /**
+     * @param {?} variants
+     * @return {?}
+     */
+    function (variants) {
+        /** @type {?} */
+        var results = variants.filter((/**
+         * @param {?} variant
+         * @return {?}
+         */
+        function (variant) {
+            return variant.stock && variant.stock.stockLevel ? variant : false;
+        }));
+        return !results.length && variants.length ? variants[0] : results[0];
+    };
+    ProductVariantGuard.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    ProductVariantGuard.ctorParameters = function () { return [
+        { type: ProductService },
+        { type: RoutingService }
+    ]; };
+    /** @nocollapse */ ProductVariantGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function ProductVariantGuard_Factory() { return new ProductVariantGuard(ɵɵinject(ProductService), ɵɵinject(RoutingService)); }, token: ProductVariantGuard, providedIn: "root" });
+    return ProductVariantGuard;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    ProductVariantGuard.prototype.productService;
+    /**
+     * @type {?}
+     * @private
+     */
+    ProductVariantGuard.prototype.routingService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ProductVariantSelectorModule = /** @class */ (function () {
+    function ProductVariantSelectorModule() {
+    }
+    ProductVariantSelectorModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        RouterModule,
+                        UrlModule,
+                        ConfigModule.withConfig((/** @type {?} */ ({
+                            cmsComponents: {
+                                ProductVariantSelectorComponent: {
+                                    component: ProductVariantSelectorComponent,
+                                    guards: [ProductVariantGuard],
+                                },
+                            },
+                        }))),
+                        I18nModule,
+                        VariantStyleSelectorModule,
+                        VariantSizeSelectorModule,
+                        VariantColorSelectorModule,
+                        VariantStyleIconsModule,
+                    ],
+                    declarations: [ProductVariantSelectorComponent],
+                    entryComponents: [ProductVariantSelectorComponent],
+                    exports: [VariantStyleIconsComponent],
+                },] }
+    ];
+    return ProductVariantSelectorModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var ProductListModule = /** @class */ (function () {
     function ProductListModule() {
     }
@@ -27532,6 +28105,9 @@ var ProductListModule = /** @class */ (function () {
                         ConfigModule.withConfig((/** @type {?} */ ({
                             cmsComponents: {
                                 CMSProductListComponent: {
+                                    component: ProductListComponent,
+                                },
+                                ProductGridComponent: {
                                     component: ProductListComponent,
                                 },
                                 SearchResultsListComponent: {
@@ -27554,6 +28130,8 @@ var ProductListModule = /** @class */ (function () {
                         SpinnerModule,
                         InfiniteScrollModule,
                         ViewConfigModule,
+                        ProductVariantSelectorModule,
+                        FeaturesConfigModule,
                     ],
                     declarations: [
                         ProductListComponent,
@@ -27989,6 +28567,11 @@ var ProductTabsModule = /** @class */ (function () {
     ];
     return ProductTabsModule;
 }());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -30649,6 +31232,7 @@ var CmsLibModule = /** @class */ (function () {
                         StoreFinderModule,
                         ProductImagesModule,
                         ProductSummaryModule,
+                        ProductVariantSelectorModule,
                         ProductIntroModule,
                         CheckoutComponentModule,
                         ForgotPasswordModule,
@@ -30905,11 +31489,22 @@ var b2cLayoutConfig = {
         ProductListPageTemplate: {
             slots: ['ProductListSlot', 'ProductLeftRefinements'],
         },
+        ProductGridPageTemplate: {
+            slots: ['ProductGridSlot', 'ProductLeftRefinements'],
+        },
         SearchResultsListPageTemplate: {
             slots: [
                 'Section2',
                 'SearchResultsListSlot',
                 'ProductLeftRefinements',
+                'Section4',
+            ],
+        },
+        SearchResultsGridPageTemplate: {
+            slots: [
+                'Section2',
+                'ProductLeftRefinements',
+                'SearchResultsGridSlot',
                 'Section4',
             ],
         },
@@ -31255,5 +31850,5 @@ var B2cStorefrontModule = /** @class */ (function () {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AsmModule, AutoFocusDirective, AutoFocusDirectiveModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OnlyNumberDirective, OnlyNumberDirectiveModule, OrderCancelOrReturnModule, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnRequestListComponent, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultScrollConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, AsmLoaderModule as ɵa, asmFactory as ɵb, CancelOrderConfirmationComponent as ɵba, CancelOrReturnRequestInputGuard as ɵbb, ReturnOrderComponent as ɵbc, ReturnOrderConfirmationComponent as ɵbd, ReturnRequestService as ɵbe, OrderDetailActionsComponent as ɵbf, TrackingEventsComponent as ɵbg, ConsignmentTrackingComponent as ɵbh, AddToHomeScreenService as ɵbi, GuestRegisterFormComponent as ɵbj, CheckoutLoginComponent as ɵbk, suffixUrlMatcher as ɵbl, addCmsRoute as ɵbm, htmlLangProvider as ɵbn, setHtmlLangAttribute as ɵbo, AnonymousConsentsModule as ɵbp, AnonymousConsentDialogComponent as ɵbq, RoutingModule as ɵbr, defaultStorefrontRoutesConfig as ɵbs, defaultRoutingConfig as ɵbt, ComponentMapperService as ɵc, AsmEnablerService as ɵd, AsmMainUiComponent as ɵe, AsmComponentService as ɵf, CSAgentLoginFormComponent as ɵg, CustomerSelectionComponent as ɵh, AsmSessionTimerComponent as ɵi, FormatTimerPipe as ɵj, CustomerEmulationComponent as ɵk, AppliedCouponsComponent as ɵl, AddToWishListModule as ɵm, AddToWishListComponent as ɵn, defaultCheckoutConfig as ɵo, ExpressCheckoutService as ɵp, defaultQualtricsConfig as ɵq, CmsRoutesService as ɵr, CmsMappingService as ɵs, CmsI18nService as ɵt, CmsGuardsService as ɵu, CancelOrderModule as ɵv, CancelOrderComponent as ɵw, OrderCancelOrReturnService as ɵx, CancelOrReturnItemsComponent as ɵy, CancelOrderConfirmationModule as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AsmModule, AutoFocusDirective, AutoFocusDirectiveModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OnlyNumberDirective, OnlyNumberDirectiveModule, OrderCancelOrReturnModule, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnRequestListComponent, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultScrollConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, AsmLoaderModule as ɵa, asmFactory as ɵb, CancelOrderConfirmationComponent as ɵba, CancelOrReturnRequestInputGuard as ɵbb, ReturnOrderComponent as ɵbc, ReturnOrderConfirmationComponent as ɵbd, ReturnRequestService as ɵbe, ProductVariantSelectorModule as ɵbf, ProductVariantSelectorComponent as ɵbg, VariantStyleSelectorModule as ɵbh, VariantStyleSelectorComponent as ɵbi, VariantSizeSelectorModule as ɵbj, VariantSizeSelectorComponent as ɵbk, VariantColorSelectorModule as ɵbl, VariantColorSelectorComponent as ɵbm, VariantStyleIconsModule as ɵbn, VariantStyleIconsComponent as ɵbo, OrderDetailActionsComponent as ɵbp, TrackingEventsComponent as ɵbq, ConsignmentTrackingComponent as ɵbr, AddToHomeScreenService as ɵbs, GuestRegisterFormComponent as ɵbt, CheckoutLoginComponent as ɵbu, suffixUrlMatcher as ɵbv, addCmsRoute as ɵbw, htmlLangProvider as ɵbx, setHtmlLangAttribute as ɵby, AnonymousConsentsModule as ɵbz, ComponentMapperService as ɵc, AnonymousConsentDialogComponent as ɵca, RoutingModule as ɵcb, defaultStorefrontRoutesConfig as ɵcc, defaultRoutingConfig as ɵcd, AsmEnablerService as ɵd, AsmMainUiComponent as ɵe, AsmComponentService as ɵf, CSAgentLoginFormComponent as ɵg, CustomerSelectionComponent as ɵh, AsmSessionTimerComponent as ɵi, FormatTimerPipe as ɵj, CustomerEmulationComponent as ɵk, AppliedCouponsComponent as ɵl, AddToWishListModule as ɵm, AddToWishListComponent as ɵn, defaultCheckoutConfig as ɵo, ExpressCheckoutService as ɵp, defaultQualtricsConfig as ɵq, CmsRoutesService as ɵr, CmsMappingService as ɵs, CmsI18nService as ɵt, CmsGuardsService as ɵu, CancelOrderModule as ɵv, CancelOrderComponent as ɵw, OrderCancelOrReturnService as ɵx, CancelOrReturnItemsComponent as ɵy, CancelOrderConfirmationModule as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
 //# sourceMappingURL=spartacus-storefront.js.map
