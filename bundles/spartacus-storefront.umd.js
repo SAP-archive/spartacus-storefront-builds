@@ -7830,7 +7830,7 @@
         PageSlotComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-page-slot',
-                        template: "<ng-template\n  [cxOutlet]=\"position\"\n  [cxOutletContext]=\"{ components$: components$ }\"\n>\n  <ng-template\n    *ngFor=\"let component of components$ | async\"\n    [cxOutlet]=\"component.flexType\"\n    [cxOutletContext]=\"{ component: component }\"\n    [cxOutletDefer]=\"getComponentDeferOptions(component.flexType)\"\n    (loaded)=\"isLoaded($event)\"\n  >\n    <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n  </ng-template>\n</ng-template>\n",
+                        template: "<ng-template\n  [cxOutlet]=\"position\"\n  [cxOutletContext]=\"{ components$: components$ }\"\n  [cxSkipLink]=\"position$ | async\"\n>\n  <ng-template\n    *ngFor=\"let component of components$ | async\"\n    [cxOutlet]=\"component.flexType\"\n    [cxOutletContext]=\"{ component: component }\"\n    [cxOutletDefer]=\"getComponentDeferOptions(component.flexType)\"\n    (loaded)=\"isLoaded($event)\"\n  >\n    <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n  </ng-template>\n</ng-template>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -7910,12 +7910,449 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /**
+     * @abstract
+     */
+    var   /**
+     * @abstract
+     */
+    SkipLinkConfig = /** @class */ (function () {
+        function SkipLinkConfig() {
+        }
+        return SkipLinkConfig;
+    }());
+    if (false) {
+        /** @type {?} */
+        SkipLinkConfig.prototype.skipLinks;
+    }
+    /**
+     * @abstract
+     */
+    var /**
+     * @abstract
+     */
+    SkipLink = /** @class */ (function () {
+        function SkipLink() {
+        }
+        return SkipLink;
+    }());
+    if (false) {
+        /** @type {?} */
+        SkipLink.prototype.key;
+        /** @type {?} */
+        SkipLink.prototype.i18nKey;
+        /** @type {?} */
+        SkipLink.prototype.target;
+        /** @type {?} */
+        SkipLink.prototype.position;
+    }
+    /** @enum {string} */
+    var SkipLinkScrollPosition = {
+        BEFORE: 'BEFORE',
+        AFTER: 'AFTER',
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var SkipLinkService = /** @class */ (function () {
+        function SkipLinkService(config) {
+            this.config = config;
+            this.skipLinks$ = new rxjs.BehaviorSubject([]);
+        }
+        /**
+         * @return {?}
+         */
+        SkipLinkService.prototype.getSkipLinks = /**
+         * @return {?}
+         */
+        function () {
+            return this.skipLinks$;
+        };
+        /**
+         * @param {?} key
+         * @param {?} target
+         * @return {?}
+         */
+        SkipLinkService.prototype.add = /**
+         * @param {?} key
+         * @param {?} target
+         * @return {?}
+         */
+        function (key, target) {
+            /** @type {?} */
+            var found = this.config.skipLinks.find((/**
+             * @param {?} skipLink
+             * @return {?}
+             */
+            function (skipLink) { return skipLink.key === key; }));
+            if (found) {
+                /** @type {?} */
+                var existing = this.skipLinks$.value;
+                existing.splice(this.getSkipLinkIndexInArray(key), 0, {
+                    target: target,
+                    i18nKey: found.i18nKey,
+                    position: found.position,
+                    key: key,
+                });
+                this.skipLinks$.next(existing);
+            }
+        };
+        /**
+         * @param {?} key
+         * @return {?}
+         */
+        SkipLinkService.prototype.remove = /**
+         * @param {?} key
+         * @return {?}
+         */
+        function (key) {
+            /** @type {?} */
+            var found = this.config.skipLinks.find((/**
+             * @param {?} skipLink
+             * @return {?}
+             */
+            function (skipLink) { return skipLink.key === key; }));
+            if (found) {
+                /** @type {?} */
+                var existing = this.skipLinks$.value;
+                existing = existing.filter((/**
+                 * @param {?} skipLink
+                 * @return {?}
+                 */
+                function (skipLink) { return skipLink.key !== key; }));
+                this.skipLinks$.next(existing);
+            }
+        };
+        /**
+         * @param {?} target
+         * @param {?} position
+         * @param {?} event
+         * @return {?}
+         */
+        SkipLinkService.prototype.scrollToTarget = /**
+         * @param {?} target
+         * @param {?} position
+         * @param {?} event
+         * @return {?}
+         */
+        function (target, position, event) {
+            target = (/** @type {?} */ (target.parentNode));
+            ((/** @type {?} */ (event.target))).blur();
+            /** @type {?} */
+            var options = position === SkipLinkScrollPosition.AFTER ? { inline: 'end' } : {};
+            target.scrollIntoView(options);
+        };
+        /**
+         * @protected
+         * @param {?} key
+         * @return {?}
+         */
+        SkipLinkService.prototype.getSkipLinkIndexInArray = /**
+         * @protected
+         * @param {?} key
+         * @return {?}
+         */
+        function (key) {
+            /** @type {?} */
+            var index = this.config.skipLinks.findIndex((/**
+             * @param {?} skipLink
+             * @return {?}
+             */
+            function (skipLink) { return skipLink.key === key; }));
+            var _loop_1 = function () {
+                index--;
+                /** @type {?} */
+                var previous = this_1.config.skipLinks[index];
+                if (previous) {
+                    /** @type {?} */
+                    var existing = this_1.skipLinks$.value;
+                    /** @type {?} */
+                    var found = existing.findIndex((/**
+                     * @param {?} skipLink
+                     * @return {?}
+                     */
+                    function (skipLink) { return skipLink.key === previous.key; }));
+                    if (found > -1) {
+                        return { value: found + 1 };
+                    }
+                }
+            };
+            var this_1 = this;
+            while (index > 0) {
+                var state_1 = _loop_1();
+                if (typeof state_1 === "object")
+                    return state_1.value;
+            }
+            return 0;
+        };
+        SkipLinkService.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        SkipLinkService.ctorParameters = function () { return [
+            { type: SkipLinkConfig }
+        ]; };
+        /** @nocollapse */ SkipLinkService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function SkipLinkService_Factory() { return new SkipLinkService(core.ɵɵinject(SkipLinkConfig)); }, token: SkipLinkService, providedIn: "root" });
+        return SkipLinkService;
+    }());
+    if (false) {
+        /**
+         * @type {?}
+         * @private
+         */
+        SkipLinkService.prototype.skipLinks$;
+        /**
+         * @type {?}
+         * @protected
+         */
+        SkipLinkService.prototype.config;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var SkipLinkComponent = /** @class */ (function () {
+        function SkipLinkComponent(skipLinkService) {
+            this.skipLinkService = skipLinkService;
+            this.skipLinks$ = this.skipLinkService.getSkipLinks();
+        }
+        /**
+         * @param {?} skipLink
+         * @param {?} event
+         * @return {?}
+         */
+        SkipLinkComponent.prototype.scrollToTarget = /**
+         * @param {?} skipLink
+         * @param {?} event
+         * @return {?}
+         */
+        function (skipLink, event) {
+            this.skipLinkService.scrollToTarget(skipLink.target, skipLink.position, event);
+        };
+        /**
+         * Hides the skip link by removing the focus.
+         */
+        /**
+         * Hides the skip link by removing the focus.
+         * @param {?} event
+         * @return {?}
+         */
+        SkipLinkComponent.prototype.blur = /**
+         * Hides the skip link by removing the focus.
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
+            ((/** @type {?} */ (event.target))).blur();
+        };
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        SkipLinkComponent.prototype.tabNext = /**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
+            if (this.isElement(((/** @type {?} */ (event.target))).nextSibling)) {
+                ((/** @type {?} */ (((/** @type {?} */ (event.target))).nextSibling))).focus();
+            }
+        };
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        SkipLinkComponent.prototype.tabPrev = /**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
+            if (this.isElement(((/** @type {?} */ (event.target))).previousSibling)) {
+                ((/** @type {?} */ (((/** @type {?} */ (event.target))).previousSibling))).focus();
+            }
+        };
+        /**
+         * @private
+         * @param {?} element
+         * @return {?}
+         */
+        SkipLinkComponent.prototype.isElement = /**
+         * @private
+         * @param {?} element
+         * @return {?}
+         */
+        function (element) {
+            return !!element && element instanceof HTMLElement;
+        };
+        SkipLinkComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-skip-link',
+                        template: "<button\n  *ngFor=\"let skipLink of skipLinks$ | async\"\n  (click)=\"scrollToTarget(skipLink, $event)\"\n  (keydown.esc)=\"blur($event)\"\n  (keydown.arrowright)=\"tabNext($event)\"\n  (keydown.arrowleft)=\"tabPrev($event)\"\n>\n  {{ 'skipLink.skipTo' | cxTranslate }}\n  {{ skipLink.i18nKey | cxTranslate }}\n</button>\n",
+                        changeDetection: core.ChangeDetectionStrategy.OnPush
+                    }] }
+        ];
+        /** @nocollapse */
+        SkipLinkComponent.ctorParameters = function () { return [
+            { type: SkipLinkService }
+        ]; };
+        return SkipLinkComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        SkipLinkComponent.prototype.skipLinks$;
+        /**
+         * @type {?}
+         * @private
+         */
+        SkipLinkComponent.prototype.skipLinkService;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var defaultSkipLinkConfig = {
+        skipLinks: [
+            {
+                key: 'SiteContext',
+                i18nKey: 'skipLink.labels.header',
+            },
+            {
+                key: 'BottomHeaderSlot',
+                position: SkipLinkScrollPosition.AFTER,
+                i18nKey: 'skipLink.labels.main',
+            },
+            {
+                key: 'ProductLeftRefinements',
+                i18nKey: 'skipLink.labels.productFacets',
+            },
+            { key: 'ProductListSlot', i18nKey: 'skipLink.labels.productList' },
+            { key: 'Footer', i18nKey: 'skipLink.labels.footer' },
+        ],
+    };
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var SkipLinkDirective = /** @class */ (function () {
+        function SkipLinkDirective(elRef, skipLinkService) {
+            this.elRef = elRef;
+            this.skipLinkService = skipLinkService;
+        }
+        /**
+         * @return {?}
+         */
+        SkipLinkDirective.prototype.ngOnInit = /**
+         * @return {?}
+         */
+        function () {
+            this.skipLinkService.add(this.cxSkipLink, this.elRef.nativeElement);
+        };
+        /**
+         * @return {?}
+         */
+        SkipLinkDirective.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
+            this.skipLinkService.remove(this.cxSkipLink);
+        };
+        SkipLinkDirective.decorators = [
+            { type: core.Directive, args: [{
+                        selector: '[cxSkipLink]',
+                    },] }
+        ];
+        /** @nocollapse */
+        SkipLinkDirective.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: SkipLinkService }
+        ]; };
+        SkipLinkDirective.propDecorators = {
+            cxSkipLink: [{ type: core.Input }]
+        };
+        return SkipLinkDirective;
+    }());
+    if (false) {
+        /** @type {?} */
+        SkipLinkDirective.prototype.cxSkipLink;
+        /**
+         * @type {?}
+         * @private
+         */
+        SkipLinkDirective.prototype.elRef;
+        /**
+         * @type {?}
+         * @private
+         */
+        SkipLinkDirective.prototype.skipLinkService;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var SkipLinkModule = /** @class */ (function () {
+        function SkipLinkModule() {
+        }
+        SkipLinkModule.decorators = [
+            { type: core.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            core$1.I18nModule,
+                            core$1.ConfigModule.withConfig(defaultSkipLinkConfig),
+                        ],
+                        declarations: [SkipLinkComponent, SkipLinkDirective],
+                        exports: [SkipLinkDirective],
+                        entryComponents: [SkipLinkComponent],
+                        providers: [
+                            { provide: SkipLinkConfig, useExisting: core$1.Config },
+                            {
+                                provide: core.APP_INITIALIZER,
+                                useFactory: skipLinkFactory,
+                                deps: [core.ComponentFactoryResolver, OutletService],
+                                multi: true,
+                            },
+                        ],
+                    },] }
+        ];
+        return SkipLinkModule;
+    }());
+    /**
+     * Adds the skip link component before the cx-storefront.
+     * @param {?} componentFactoryResolver
+     * @param {?} outletService
+     * @return {?}
+     */
+    function skipLinkFactory(componentFactoryResolver, outletService) {
+        /** @type {?} */
+        var isReady = (/**
+         * @return {?}
+         */
+        function () {
+            /** @type {?} */
+            var factory = componentFactoryResolver.resolveComponentFactory(SkipLinkComponent);
+            outletService.add('cx-storefront', (/** @type {?} */ (factory)), OutletPosition.BEFORE);
+        });
+        return isReady;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var PageSlotModule = /** @class */ (function () {
         function PageSlotModule() {
         }
         PageSlotModule.decorators = [
             { type: core.NgModule, args: [{
-                        imports: [common.CommonModule, OutletModule, PageComponentModule],
+                        imports: [common.CommonModule, OutletModule, PageComponentModule, SkipLinkModule],
                         providers: [],
                         declarations: [PageSlotComponent],
                         exports: [PageSlotComponent],
@@ -17128,16 +17565,14 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    /** @type {?} */
-    var layoutModules = [OutletRefModule];
     var LayoutModule = /** @class */ (function () {
         function LayoutModule() {
         }
         LayoutModule.decorators = [
             { type: core.NgModule, args: [{
-                        imports: __spread(layoutModules),
+                        imports: [OutletRefModule],
                         providers: [{ provide: LayoutConfig, useExisting: core$1.Config }],
-                        exports: __spread(layoutModules),
+                        exports: [OutletRefModule],
                     },] }
         ];
         return LayoutModule;
@@ -32342,17 +32777,25 @@
     exports.ɵbr = ConsignmentTrackingComponent;
     exports.ɵbs = AddToHomeScreenService;
     exports.ɵbt = GuestRegisterFormComponent;
-    exports.ɵbu = CheckoutLoginComponent;
-    exports.ɵbv = suffixUrlMatcher;
-    exports.ɵbw = addCmsRoute;
-    exports.ɵbx = htmlLangProvider;
-    exports.ɵby = setHtmlLangAttribute;
-    exports.ɵbz = AnonymousConsentsModule;
+    exports.ɵbu = SkipLinkModule;
+    exports.ɵbv = skipLinkFactory;
+    exports.ɵbw = defaultSkipLinkConfig;
+    exports.ɵbx = SkipLinkConfig;
+    exports.ɵby = SkipLinkScrollPosition;
+    exports.ɵbz = SkipLinkComponent;
     exports.ɵc = ComponentMapperService;
-    exports.ɵca = AnonymousConsentDialogComponent;
-    exports.ɵcb = RoutingModule;
-    exports.ɵcc = defaultStorefrontRoutesConfig;
-    exports.ɵcd = defaultRoutingConfig;
+    exports.ɵca = SkipLinkService;
+    exports.ɵcb = SkipLinkDirective;
+    exports.ɵcc = CheckoutLoginComponent;
+    exports.ɵcd = suffixUrlMatcher;
+    exports.ɵce = addCmsRoute;
+    exports.ɵcf = htmlLangProvider;
+    exports.ɵcg = setHtmlLangAttribute;
+    exports.ɵch = AnonymousConsentsModule;
+    exports.ɵci = AnonymousConsentDialogComponent;
+    exports.ɵcj = RoutingModule;
+    exports.ɵck = defaultStorefrontRoutesConfig;
+    exports.ɵcl = defaultRoutingConfig;
     exports.ɵd = AsmEnablerService;
     exports.ɵe = AsmMainUiComponent;
     exports.ɵf = AsmComponentService;

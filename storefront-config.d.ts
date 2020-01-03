@@ -6,4 +6,5 @@ import { PWAModuleConfig } from './cms-structure/pwa/index';
 import { FeatureToggles } from './feature-toggles';
 import { LayoutConfig } from './layout/config/layout-config';
 import { ViewConfig } from './shared/config/view-config';
-export declare type StorefrontConfig = AnonymousConsentsConfig | AuthConfig | CmsConfig | OccConfig | QualtricsConfig | StateConfig | PWAModuleConfig | SiteContextConfig | LayoutConfig | RoutingConfig | I18nConfig | PersonalizationConfig | IconConfig | CheckoutConfig | KymaConfig | GlobalMessageConfig | ExternalRoutesConfig | ViewConfig | FeatureToggles | AsmConfig;
+import { SkipLinkConfig } from './layout/a11y/skip-link/config/index';
+export declare type StorefrontConfig = AnonymousConsentsConfig | AuthConfig | CmsConfig | OccConfig | QualtricsConfig | StateConfig | PWAModuleConfig | SiteContextConfig | LayoutConfig | RoutingConfig | I18nConfig | PersonalizationConfig | IconConfig | CheckoutConfig | KymaConfig | GlobalMessageConfig | ExternalRoutesConfig | ViewConfig | FeatureToggles | AsmConfig | SkipLinkConfig;
