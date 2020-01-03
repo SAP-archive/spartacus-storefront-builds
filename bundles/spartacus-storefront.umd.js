@@ -9243,7 +9243,7 @@
             this.routingService = routingService;
             this.productService = productService;
             this.features = features;
-            this.PRODUCT_SCOPE = this.features && this.features.isLevel('1.4') ? ['details'] : '';
+            this.PRODUCT_SCOPE = this.features && this.features.isLevel('1.4') ? core$1.ProductScope.DETAILS : '';
         }
         /**
          * @return {?}
@@ -23284,7 +23284,7 @@
          * @return {?}
          */
         function (interest) {
-            return this.productService.get(interest.product.code, 'details');
+            return this.productService.get(interest.product.code, core$1.ProductScope.DETAILS);
         };
         /**
          * @param {?} relation
@@ -25883,7 +25883,7 @@
             this.componentData = componentData;
             this.productService = productService;
             this.features = features;
-            this.PRODUCT_SCOPE = this.features && this.features.isLevel('1.4') ? 'list' : '';
+            this.PRODUCT_SCOPE = this.features && this.features.isLevel('1.4') ? core$1.ProductScope.LIST : '';
             this.componentData$ = this.componentData.data$.pipe(operators.filter(Boolean));
             /**
              * returns an Obervable string for the title.

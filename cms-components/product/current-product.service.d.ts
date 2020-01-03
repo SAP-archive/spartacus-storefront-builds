@@ -5,6 +5,6 @@ export declare class CurrentProductService {
     private productService;
     protected features?: FeatureConfigService;
     constructor(routingService: RoutingService, productService: ProductService, features?: FeatureConfigService);
-    protected readonly PRODUCT_SCOPE: string | string[];
+    protected readonly PRODUCT_SCOPE: string;
     getProduct(): Observable<Product>;
 }
