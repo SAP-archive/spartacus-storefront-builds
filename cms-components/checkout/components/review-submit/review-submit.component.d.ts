@@ -32,7 +32,7 @@ export declare class ReviewSubmitComponent implements OnInit {
      */
     constructor(checkoutDeliveryService: CheckoutDeliveryService, checkoutPaymentService: CheckoutPaymentService, userAddressService: UserAddressService, cartService: CartService, translation: TranslationService);
     /**
-     * @deprecated Since 1.4
+     * @deprecated Since 1.5
      * Use promotionService instead of the promotion inputs.
      * Remove issue: #5670
      */

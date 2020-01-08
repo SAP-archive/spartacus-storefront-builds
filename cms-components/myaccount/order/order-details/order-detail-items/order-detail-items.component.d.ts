@@ -8,7 +8,7 @@ export declare class OrderDetailItemsComponent implements OnInit {
     protected promotionService?: PromotionService;
     constructor(orderDetailsService: OrderDetailsService, promotionService: PromotionService);
     /**
-     * @deprecated Since 1.4
+     * @deprecated Since 1.5
      * Use promotionService instead of the promotion inputs.
      * Remove issue: #5670
      */

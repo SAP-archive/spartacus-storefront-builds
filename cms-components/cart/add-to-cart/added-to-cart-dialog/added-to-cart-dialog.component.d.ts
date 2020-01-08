@@ -23,7 +23,7 @@ export declare class AddedToCartDialogComponent implements OnInit {
     form: FormGroup;
     constructor(modalService: ModalService, cartService: CartService, fb: FormBuilder, promotionService: PromotionService);
     /**
-     * @deprecated Since 1.4
+     * @deprecated Since 1.5
      * Use promotionService instead of the promotion inputs.
      * Remove issue: #5670
      */
