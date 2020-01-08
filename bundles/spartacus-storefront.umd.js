@@ -6797,17 +6797,35 @@
             this.subscription = new rxjs.Subscription();
         }
         /**
+         * @private
          * @return {?}
          */
-        OutletDirective.prototype.ngOnInit = /**
+        OutletDirective.prototype.initializeOutlet = /**
+         * @private
          * @return {?}
          */
         function () {
+            this.vcr.clear();
+            this.subscription.unsubscribe();
+            this.subscription = new rxjs.Subscription();
             if (this.cxOutletDefer) {
                 this.deferLoading();
             }
             else {
                 this.render();
+            }
+        };
+        /**
+         * @param {?} changes
+         * @return {?}
+         */
+        OutletDirective.prototype.ngOnChanges = /**
+         * @param {?} changes
+         * @return {?}
+         */
+        function (changes) {
+            if (changes.cxOutlet) {
+                this.initializeOutlet();
             }
         };
         /**
@@ -6823,7 +6841,7 @@
             this.loaded.emit(false);
             /** @type {?} */
             var hostElement = this.getHostElement(this.vcr.element.nativeElement);
-            // Allthough the deferLoaderService might emit only once, as long as the hostElement
+            // Although the deferLoaderService might emit only once, as long as the hostElement
             // isn't being loaded, there's no value being emitted. Therefor we need to clean up
             // the subscription on destroy.
             this.subscription.add(this.deferLoaderService

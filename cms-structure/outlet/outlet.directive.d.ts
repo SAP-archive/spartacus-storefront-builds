@@ -1,9 +1,9 @@
-import { ComponentFactory, EventEmitter, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { ComponentFactory, EventEmitter, OnChanges, OnDestroy, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DeferLoaderService } from '../../layout/loading/defer-loader.service';
 import { IntersectionOptions } from '../../layout/loading/intersection.model';
 import { OutletService } from './outlet.service';
-export declare class OutletDirective implements OnInit, OnDestroy {
+export declare class OutletDirective implements OnDestroy, OnChanges {
     private vcr;
     private templateRef;
     private outletService;
@@ -22,7 +22,8 @@ export declare class OutletDirective implements OnInit, OnDestroy {
      * Use constructor(vcr: ViewContainerRef, templateRef: TemplateRef<any>, outletService: OutletService<TemplateRef<any> | ComponentFactory<any>>, intersectionService?: IntersectionService) instead
      */
     constructor(vcr: ViewContainerRef, templateRef: TemplateRef<any>, outletService: OutletService<TemplateRef<any> | ComponentFactory<any>>);
-    ngOnInit(): void;
+    private initializeOutlet;
+    ngOnChanges(changes: SimpleChanges): void;
     private deferLoading;
     private render;
     private renderOutlet;

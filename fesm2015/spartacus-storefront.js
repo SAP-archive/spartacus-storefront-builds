@@ -5360,14 +5360,27 @@ class OutletDirective {
         this.subscription = new Subscription();
     }
     /**
+     * @private
      * @return {?}
      */
-    ngOnInit() {
+    initializeOutlet() {
+        this.vcr.clear();
+        this.subscription.unsubscribe();
+        this.subscription = new Subscription();
         if (this.cxOutletDefer) {
             this.deferLoading();
         }
         else {
             this.render();
+        }
+    }
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    ngOnChanges(changes) {
+        if (changes.cxOutlet) {
+            this.initializeOutlet();
         }
     }
     /**
@@ -5378,7 +5391,7 @@ class OutletDirective {
         this.loaded.emit(false);
         /** @type {?} */
         const hostElement = this.getHostElement(this.vcr.element.nativeElement);
-        // Allthough the deferLoaderService might emit only once, as long as the hostElement
+        // Although the deferLoaderService might emit only once, as long as the hostElement
         // isn't being loaded, there's no value being emitted. Therefor we need to clean up
         // the subscription on destroy.
         this.subscription.add(this.deferLoaderService
