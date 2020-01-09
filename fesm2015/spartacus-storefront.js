@@ -17195,7 +17195,7 @@ const moduleComponents = [
     TrackingEventsComponent,
     ConsignmentTrackingComponent,
 ];
-const ɵ0$1 = { pageLabel: 'order' }, ɵ1 = { cxRoute: 'orderDetails' };
+const ɵ0$1 = { pageLabel: 'order', cxRoute: 'orderGuest' }, ɵ1 = { cxRoute: 'orderDetails' };
 class OrderDetailsModule {
 }
 OrderDetailsModule.decorators = [
@@ -17210,7 +17210,7 @@ OrderDetailsModule.decorators = [
                     UrlModule,
                     RouterModule.forChild([
                         {
-                            path: 'guest/order/:orderCode',
+                            path: null,
                             canActivate: [CmsPageGuard],
                             component: PageLayoutComponent,
                             data: ɵ0$1,
@@ -27849,6 +27849,10 @@ const defaultStorefrontRoutesConfig = {
     termsAndConditions: { paths: ['terms-and-conditions'] },
     orderDetails: {
         paths: ['my-account/order/:orderCode'],
+        paramsMapping: { orderCode: 'code' },
+    },
+    orderGuest: {
+        paths: ['guest/order/:orderCode'],
         paramsMapping: { orderCode: 'code' },
     },
     orders: {

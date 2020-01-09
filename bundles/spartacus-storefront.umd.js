@@ -20131,7 +20131,7 @@
         TrackingEventsComponent,
         ConsignmentTrackingComponent,
     ];
-    var ɵ0$1 = { pageLabel: 'order' }, ɵ1 = { cxRoute: 'orderDetails' };
+    var ɵ0$1 = { pageLabel: 'order', cxRoute: 'orderGuest' }, ɵ1 = { cxRoute: 'orderDetails' };
     var OrderDetailsModule = /** @class */ (function () {
         function OrderDetailsModule() {
         }
@@ -20147,7 +20147,7 @@
                             core$1.UrlModule,
                             router.RouterModule.forChild([
                                 {
-                                    path: 'guest/order/:orderCode',
+                                    path: null,
                                     canActivate: [CmsPageGuard],
                                     component: PageLayoutComponent,
                                     data: ɵ0$1,
@@ -32265,6 +32265,10 @@
         termsAndConditions: { paths: ['terms-and-conditions'] },
         orderDetails: {
             paths: ['my-account/order/:orderCode'],
+            paramsMapping: { orderCode: 'code' },
+        },
+        orderGuest: {
+            paths: ['guest/order/:orderCode'],
             paramsMapping: { orderCode: 'code' },
         },
         orders: {
