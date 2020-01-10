@@ -1,0 +1,15 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+import { NgModule } from '@angular/core';
+import { ReturnOrderConfirmationModule } from './return-order-confirmation/return-order-confirmation.module';
+import { ReturnOrderModule } from './return-order/return-order.module';
+export class OrderReturnModule {
+}
+OrderReturnModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [ReturnOrderModule, ReturnOrderConfirmationModule],
+            },] }
+];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib3JkZXItcmV0dXJuLm1vZHVsZS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BzcGFydGFjdXMvc3RvcmVmcm9udC8iLCJzb3VyY2VzIjpbImNtcy1jb21wb25lbnRzL215YWNjb3VudC9vcmRlci9hbWVuZC1vcmRlci9yZXR1cm5zL29yZGVyLXJldHVybi5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE9BQU8sRUFBRSxRQUFRLEVBQUUsTUFBTSxlQUFlLENBQUM7QUFDekMsT0FBTyxFQUFFLDZCQUE2QixFQUFFLE1BQU0sOERBQThELENBQUM7QUFDN0csT0FBTyxFQUFFLGlCQUFpQixFQUFFLE1BQU0sb0NBQW9DLENBQUM7QUFLdkUsTUFBTSxPQUFPLGlCQUFpQjs7O1lBSDdCLFFBQVEsU0FBQztnQkFDUixPQUFPLEVBQUUsQ0FBQyxpQkFBaUIsRUFBRSw2QkFBNkIsQ0FBQzthQUM1RCIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IE5nTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBSZXR1cm5PcmRlckNvbmZpcm1hdGlvbk1vZHVsZSB9IGZyb20gJy4vcmV0dXJuLW9yZGVyLWNvbmZpcm1hdGlvbi9yZXR1cm4tb3JkZXItY29uZmlybWF0aW9uLm1vZHVsZSc7XG5pbXBvcnQgeyBSZXR1cm5PcmRlck1vZHVsZSB9IGZyb20gJy4vcmV0dXJuLW9yZGVyL3JldHVybi1vcmRlci5tb2R1bGUnO1xuXG5ATmdNb2R1bGUoe1xuICBpbXBvcnRzOiBbUmV0dXJuT3JkZXJNb2R1bGUsIFJldHVybk9yZGVyQ29uZmlybWF0aW9uTW9kdWxlXSxcbn0pXG5leHBvcnQgY2xhc3MgT3JkZXJSZXR1cm5Nb2R1bGUge31cbiJdfQ==

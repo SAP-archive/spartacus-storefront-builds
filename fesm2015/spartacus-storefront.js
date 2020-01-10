@@ -5,7 +5,7 @@ import { Subscription, combineLatest, of, fromEvent, BehaviorSubject, concat, is
 import { take, distinctUntilChanged, tap, map, debounceTime, startWith, filter, switchMap, shareReplay, first, skipWhile, endWith, withLatestFrom, flatMap, mergeMap, scan, distinctUntilKeyChanged, pluck } from 'rxjs/operators';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
-import { NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
 import { __awaiter } from 'tslib';
@@ -3580,13 +3580,16 @@ class OrderDetailsService {
     }
 }
 OrderDetailsService.decorators = [
-    { type: Injectable }
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
 ];
 /** @nocollapse */
 OrderDetailsService.ctorParameters = () => [
     { type: UserOrderService },
     { type: RoutingService }
 ];
+/** @nocollapse */ OrderDetailsService.ngInjectableDef = ɵɵdefineInjectable({ factory: function OrderDetailsService_Factory() { return new OrderDetailsService(ɵɵinject(UserOrderService), ɵɵinject(RoutingService)); }, token: OrderDetailsService, providedIn: "root" });
 if (false) {
     /** @type {?} */
     OrderDetailsService.prototype.orderCode$;
@@ -16737,6 +16740,1138 @@ ForgotPasswordModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class AmendOrderActionsComponent {
+    constructor() {
+        this.styles = 'row';
+    }
+}
+AmendOrderActionsComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-amend-order-actions',
+                template: "<div class=\"col-xs-12 col-md-4 col-lg-3\">\n  <a\n    [routerLink]=\"\n      {\n        cxRoute: backRoute,\n        params: { code: orderCode }\n      } | cxUrl\n    \"\n    class=\"btn btn-block btn-action\"\n  >\n    {{ 'common.back' | cxTranslate }}\n  </a>\n</div>\n<div class=\"col-xs-12 col-md-4 col-lg-3\">\n  <a\n    *ngIf=\"forwardRoute\"\n    class=\"btn btn-block btn-primary\"\n    [class.disabled]=\"!isValid\"\n    [routerLink]=\"\n      {\n        cxRoute: forwardRoute,\n        params: { code: orderCode }\n      } | cxUrl\n    \"\n  >\n    {{ 'common.continue' | cxTranslate }}\n  </a>\n\n  <button\n    *ngIf=\"!forwardRoute\"\n    class=\"btn btn-block btn-primary\"\n    type=\"submit\"\n    [disabled]=\"!isValid\"\n  >\n    {{ 'orderDetails.cancellationAndReturn.submit' | cxTranslate }}\n  </button>\n</div>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+AmendOrderActionsComponent.propDecorators = {
+    orderCode: [{ type: Input }],
+    isValid: [{ type: Input }],
+    backRoute: [{ type: Input }],
+    forwardRoute: [{ type: Input }],
+    styles: [{ type: HostBinding, args: ['class',] }]
+};
+if (false) {
+    /** @type {?} */
+    AmendOrderActionsComponent.prototype.orderCode;
+    /** @type {?} */
+    AmendOrderActionsComponent.prototype.isValid;
+    /** @type {?} */
+    AmendOrderActionsComponent.prototype.backRoute;
+    /** @type {?} */
+    AmendOrderActionsComponent.prototype.forwardRoute;
+    /** @type {?} */
+    AmendOrderActionsComponent.prototype.styles;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class AmendOrderActionsModule {
+}
+AmendOrderActionsModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule, RouterModule, UrlModule, I18nModule],
+                declarations: [AmendOrderActionsComponent],
+                exports: [AmendOrderActionsComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @enum {number} */
+const AmendOrderType = {
+    CANCEL: 0,
+    RETURN: 1,
+};
+AmendOrderType[AmendOrderType.CANCEL] = 'CANCEL';
+AmendOrderType[AmendOrderType.RETURN] = 'RETURN';
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @param {?} control
+ * @return {?}
+ */
+function ValidateQuantity(control) {
+    /** @type {?} */
+    let q = 0;
+    Object.keys(control.value).forEach((/**
+     * @param {?} key
+     * @return {?}
+     */
+    key => (q += control.value[key])));
+    return q > 0 ? null : { required: true };
+}
+/**
+ * @abstract
+ */
+class OrderAmendService {
+    /**
+     * @param {?} orderDetailsService
+     */
+    constructor(orderDetailsService) {
+        this.orderDetailsService = orderDetailsService;
+    }
+    /**
+     * Returns entries with an amended quantity.
+     * @return {?}
+     */
+    getAmendedEntries() {
+        return this.getForm().pipe(switchMap((/**
+         * @param {?} form
+         * @return {?}
+         */
+        form => {
+            return this.getEntries().pipe(map((/**
+             * @param {?} entries
+             * @return {?}
+             */
+            entries => entries.filter((/**
+             * @param {?} entry
+             * @return {?}
+             */
+            entry => this.getFormControl(form, entry).value > 0)))));
+        })));
+    }
+    /**
+     * @return {?}
+     */
+    getOrder() {
+        return this.orderDetailsService.getOrderDetails();
+    }
+    /**
+     * returns the form with form data at runtime
+     * @return {?}
+     */
+    getForm() {
+        return this.getOrder().pipe(tap((/**
+         * @param {?} order
+         * @return {?}
+         */
+        order => {
+            if (!this.form || this.form.get('orderCode').value !== order.code) {
+                this.buildForm(order);
+            }
+        })), map((/**
+         * @return {?}
+         */
+        () => this.form)));
+    }
+    /**
+     * @private
+     * @param {?} order
+     * @return {?}
+     */
+    buildForm(order) {
+        this.form = new FormGroup({});
+        this.form.addControl('orderCode', new FormControl(order.code));
+        /** @type {?} */
+        const entryGroup = new FormGroup({}, { validators: [ValidateQuantity] });
+        this.form.addControl('entries', entryGroup);
+        (order.entries || []).forEach((/**
+         * @param {?} entry
+         * @return {?}
+         */
+        entry => {
+            /** @type {?} */
+            const key = entry.entryNumber.toString();
+            entryGroup.addControl(key, new FormControl(0, {
+                validators: [
+                    Validators.min(0),
+                    Validators.max(this.getMaxAmendQuantity(entry)),
+                ],
+            }));
+        }));
+    }
+    /**
+     * @protected
+     * @param {?} form
+     * @param {?} entry
+     * @return {?}
+     */
+    getFormControl(form, entry) {
+        return (/** @type {?} */ (form.get('entries').get(entry.entryNumber.toString())));
+    }
+    /**
+     * As discussed, this calculation is moved to SPA side.
+     * The calculation and validation should be in backend facade layer.
+     * @param {?} entry
+     * @return {?}
+     */
+    getAmendedPrice(entry) {
+        /** @type {?} */
+        const amendedQuantity = this.getFormControl(this.form, entry).value;
+        /** @type {?} */
+        const amendedPrice = Object.assign({}, entry.basePrice);
+        amendedPrice.value =
+            Math.round(entry.basePrice.value * amendedQuantity * 100) / 100;
+        amendedPrice.formattedValue = formatCurrency(amendedPrice.value, 
+        // TODO: user current language
+        'en', getCurrencySymbol(amendedPrice.currencyIso, 'narrow'), amendedPrice.currencyIso);
+        return amendedPrice;
+    }
+    /**
+     * @param {?} entry
+     * @return {?}
+     */
+    getMaxAmendQuantity(entry) {
+        return ((this.isCancellation()
+            ? entry.cancellableQuantity
+            : entry.returnableQuantity) || entry.quantity);
+    }
+    /**
+     * @return {?}
+     */
+    isCancellation() {
+        return this.amendType === AmendOrderType.CANCEL;
+    }
+}
+OrderAmendService.decorators = [
+    { type: Injectable }
+];
+/** @nocollapse */
+OrderAmendService.ctorParameters = () => [
+    { type: OrderDetailsService }
+];
+if (false) {
+    /**
+     * @type {?}
+     * @protected
+     */
+    OrderAmendService.prototype.amendType;
+    /**
+     * @type {?}
+     * @protected
+     */
+    OrderAmendService.prototype.form;
+    /**
+     * @type {?}
+     * @protected
+     */
+    OrderAmendService.prototype.orderDetailsService;
+    /**
+     * Returns entries for the given order.
+     * @abstract
+     * @return {?}
+     */
+    OrderAmendService.prototype.getEntries = function () { };
+    /**
+     * Submits the amended order.
+     * @abstract
+     * @return {?}
+     */
+    OrderAmendService.prototype.save = function () { };
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CancelOrReturnItemsComponent {
+    /**
+     * @param {?} orderAmendService
+     */
+    constructor(orderAmendService) {
+        this.orderAmendService = orderAmendService;
+        this.isConfirmation = false;
+        this.form$ = this.orderAmendService.getForm();
+    }
+    /**
+     * @param {?} form
+     * @param {?} entry
+     * @return {?}
+     */
+    getControl(form, entry) {
+        return (/** @type {?} */ (form.get('entries').get(entry.entryNumber.toString())));
+    }
+    /**
+     * @param {?} form
+     * @return {?}
+     */
+    setAll(form) {
+        this.entries.forEach((/**
+         * @param {?} entry
+         * @return {?}
+         */
+        entry => this.getControl(form, entry).setValue(this.getMaxAmendQuantity(entry))));
+    }
+    /**
+     * @param {?} entry
+     * @return {?}
+     */
+    getItemPrice(entry) {
+        return this.orderAmendService.getAmendedPrice(entry);
+    }
+    /**
+     * @param {?} entry
+     * @return {?}
+     */
+    getMaxAmendQuantity(entry) {
+        return this.orderAmendService.getMaxAmendQuantity(entry);
+    }
+    /**
+     * @return {?}
+     */
+    isCancellation() {
+        return this.orderAmendService.isCancellation();
+    }
+}
+CancelOrReturnItemsComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-amend-order-items',
+                template: "<div *ngIf=\"form$ | async as form\">\n  <button\n    *ngIf=\"!isConfirmation\"\n    class=\"btn btn-link cx-action-link\"\n    (click)=\"setAll(form)\"\n  >\n    {{ 'orderDetails.cancellationAndReturn.setAll' | cxTranslate }}\n  </button>\n\n  <div class=\"d-none d-md-block\">\n    <div class=\"cx-item-list-header row\">\n      <div class=\"cx-item-list-desc col-md-5 col-xl-6\">\n        {{ 'orderDetails.cancellationAndReturn.item' | cxTranslate }}\n      </div>\n      <div class=\"cx-item-list-price col-2\">\n        {{ 'orderDetails.cancellationAndReturn.itemPrice' | cxTranslate }}\n      </div>\n      <div *ngIf=\"!isConfirmation\" class=\"cx-item-list-qty col-md-3 col-xl-2\">\n        {{ 'orderDetails.cancellationAndReturn.quantity' | cxTranslate }}\n      </div>\n      <div class=\"cx-item-list-qty col-2\">\n        {{\n          (isCancellation()\n            ? 'orderDetails.cancellationAndReturn.cancelQty'\n            : 'orderDetails.cancellationAndReturn.returnQty') | cxTranslate\n        }}\n      </div>\n      <div *ngIf=\"isConfirmation\" class=\"cx-item-list-total col-md-3  col-xl-2\">\n        {{ 'orderDetails.cancellationAndReturn.totalPrice' | cxTranslate }}\n      </div>\n    </div>\n  </div>\n\n  <div class=\"cx-item-list-row\" *ngFor=\"let item of entries; let i = index\">\n    <div class=\"row cx-item-list-items\">\n      <!-- Item Image -->\n      <cx-media\n        class=\"col-2 cx-image-container\"\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n\n      <!-- Item Information -->\n      <div class=\"cx-info col-10\">\n        <div class=\"cx-info-container row\">\n          <!-- Item Description -->\n          <div class=\"col-md-3 col-xl-5\">\n            <div *ngIf=\"item.product.name\" class=\"cx-name\">\n              {{ item.product.name }}\n            </div>\n            <div *ngIf=\"item.product.code\" class=\"cx-code\">\n              {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n            </div>\n            <!-- Variants -->\n            <div\n              *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n              class=\"cx-property\"\n            >\n              <div class=\"cx-label\">{{ variant.name }}</div>\n              <div class=\"cx-value\">{{ variant.value }}</div>\n            </div>\n          </div>\n          <!-- Price -->\n          <div\n            *ngIf=\"item.basePrice\"\n            class=\"cx-price col-md-3 col-lg-3 col-xl-2\"\n          >\n            <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n              {{ 'orderDetails.cancellationAndReturn.itemPrice' | cxTranslate }}\n            </div>\n            <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n              {{ item.basePrice?.formattedValue }}\n            </div>\n          </div>\n          <!-- item Quantity -->\n          <div *ngIf=\"!isConfirmation\" class=\"cx-request-qty col-md-3\">\n            <div\n              class=\"cx-label d-block d-md-none d-lg-none d-xl-none\"\n              placement=\"left\"\n              title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n            >\n              {{ 'orderDetails.cancellationAndReturn.quantity' | cxTranslate }}\n            </div>\n            <div class=\"cx-value\">\n              {{ getMaxAmendQuantity(item) }}\n            </div>\n          </div>\n          <!-- Amended Quantity -->\n          <div class=\"cx-quantity col-md-3 col-xl-2\">\n            <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n              {{\n                (isCancellation()\n                  ? 'orderDetails.cancellationAndReturn.cancelQty'\n                  : 'orderDetails.cancellationAndReturn.returnQty')\n                  | cxTranslate\n              }}\n            </div>\n\n            <cx-item-counter\n              [min]=\"0\"\n              [max]=\"getMaxAmendQuantity(item)\"\n              [isValueChangeable]=\"!isConfirmation\"\n              [formControl]=\"getControl(form, item)\"\n            >\n            </cx-item-counter>\n          </div>\n          <!-- Total Price -->\n          <div *ngIf=\"isConfirmation\" class=\"cx-total col-3\">\n            <div class=\"cx-label d-block d-md-none\">\n              {{\n                'orderDetails.cancellationAndReturn.totalPrice' | cxTranslate\n              }}\n            </div>\n            <div class=\"cx-value\">\n              {{ getItemPrice(item)?.formattedValue }}\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+CancelOrReturnItemsComponent.ctorParameters = () => [
+    { type: OrderAmendService }
+];
+CancelOrReturnItemsComponent.propDecorators = {
+    entries: [{ type: Input }],
+    isConfirmation: [{ type: Input }]
+};
+if (false) {
+    /** @type {?} */
+    CancelOrReturnItemsComponent.prototype.entries;
+    /** @type {?} */
+    CancelOrReturnItemsComponent.prototype.isConfirmation;
+    /** @type {?} */
+    CancelOrReturnItemsComponent.prototype.form$;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CancelOrReturnItemsComponent.prototype.orderAmendService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class AmendOrderItemsModule {
+}
+AmendOrderItemsModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    ReactiveFormsModule,
+                    I18nModule,
+                    MediaModule,
+                    ItemCounterModule,
+                ],
+                declarations: [CancelOrReturnItemsComponent],
+                exports: [CancelOrReturnItemsComponent],
+                entryComponents: [CancelOrReturnItemsComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CancelOrderConfirmationComponent {
+    /**
+     * @param {?} orderAmendService
+     */
+    constructor(orderAmendService) {
+        this.orderAmendService = orderAmendService;
+        this.form$ = this.orderAmendService
+            .getForm()
+            .pipe(tap((/**
+         * @param {?} form
+         * @return {?}
+         */
+        form => (this.orderCode = form.value.orderCode))));
+        this.entries$ = this.orderAmendService.getAmendedEntries();
+    }
+    /**
+     * @param {?} form
+     * @return {?}
+     */
+    submit(form) {
+        form.disable();
+        this.orderAmendService.save();
+    }
+}
+CancelOrderConfirmationComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-cancel-order-confirmation',
+                template: "<form\n  *ngIf=\"form$ | async as form\"\n  [formGroup]=\"form\"\n  (ngSubmit)=\"submit(form)\"\n>\n  <ng-container *ngTemplateOutlet=\"actions\"></ng-container>\n\n  <cx-amend-order-items\n    *ngIf=\"entries$ | async as entries\"\n    [entries]=\"entries\"\n    [isConfirmation]=\"true\"\n  >\n  </cx-amend-order-items>\n\n  <ng-container *ngTemplateOutlet=\"actions\"></ng-container>\n\n  <ng-template #actions>\n    <cx-amend-order-actions\n      *ngIf=\"orderCode\"\n      [orderCode]=\"orderCode\"\n      [isValid]=\"form.valid\"\n      backRoute=\"orderCancel\"\n    ></cx-amend-order-actions>\n  </ng-template>\n</form>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+CancelOrderConfirmationComponent.ctorParameters = () => [
+    { type: OrderAmendService }
+];
+if (false) {
+    /** @type {?} */
+    CancelOrderConfirmationComponent.prototype.orderCode;
+    /** @type {?} */
+    CancelOrderConfirmationComponent.prototype.form$;
+    /** @type {?} */
+    CancelOrderConfirmationComponent.prototype.entries$;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CancelOrderConfirmationComponent.prototype.orderAmendService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class OrderCancellationService extends OrderAmendService {
+    /**
+     * @param {?} orderDetailsService
+     * @param {?} userOrderService
+     * @param {?} routing
+     * @param {?} globalMessageService
+     */
+    constructor(orderDetailsService, userOrderService, routing, globalMessageService) {
+        super(orderDetailsService);
+        this.orderDetailsService = orderDetailsService;
+        this.userOrderService = userOrderService;
+        this.routing = routing;
+        this.globalMessageService = globalMessageService;
+        this.amendType = AmendOrderType.CANCEL;
+    }
+    /**
+     * Return cancellable order entries.
+     * @return {?}
+     */
+    getEntries() {
+        return this.getOrder().pipe(filter((/**
+         * @param {?} order
+         * @return {?}
+         */
+        order => Boolean(order))), map((/**
+         * @param {?} order
+         * @return {?}
+         */
+        order => order.entries.filter((/**
+         * @param {?} entry
+         * @return {?}
+         */
+        entry => entry.entryNumber !== -1 && entry.cancellableQuantity > 0)))));
+    }
+    /**
+     * @return {?}
+     */
+    save() {
+        /** @type {?} */
+        const orderCode = this.form.value.orderCode;
+        /** @type {?} */
+        const entries = this.form.value.entries;
+        /** @type {?} */
+        const inputs = Object.keys(entries).map((/**
+         * @param {?} entryNumber
+         * @return {?}
+         */
+        entryNumber => ((/** @type {?} */ ({
+            orderEntryNumber: Number(entryNumber),
+            quantity: (/** @type {?} */ (entries[entryNumber])),
+        })))));
+        this.form.reset();
+        this.userOrderService.cancelOrder(orderCode, {
+            cancellationRequestEntryInputs: inputs,
+        });
+        this.userOrderService
+            .getCancelOrderSuccess()
+            .pipe(first(Boolean))
+            .subscribe((/**
+         * @return {?}
+         */
+        () => this.afterSave(orderCode)));
+    }
+    /**
+     * @private
+     * @param {?} orderCode
+     * @return {?}
+     */
+    afterSave(orderCode) {
+        this.userOrderService.resetCancelOrderProcessState();
+        this.globalMessageService.add({
+            key: 'orderDetails.cancellationAndReturn.cancelSuccess',
+            params: { orderCode },
+        }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
+        this.routing.go({
+            cxRoute: 'orders',
+        });
+    }
+}
+OrderCancellationService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+OrderCancellationService.ctorParameters = () => [
+    { type: OrderDetailsService },
+    { type: UserOrderService },
+    { type: RoutingService },
+    { type: GlobalMessageService }
+];
+/** @nocollapse */ OrderCancellationService.ngInjectableDef = ɵɵdefineInjectable({ factory: function OrderCancellationService_Factory() { return new OrderCancellationService(ɵɵinject(OrderDetailsService), ɵɵinject(UserOrderService), ɵɵinject(RoutingService), ɵɵinject(GlobalMessageService)); }, token: OrderCancellationService, providedIn: "root" });
+if (false) {
+    /** @type {?} */
+    OrderCancellationService.prototype.amendType;
+    /**
+     * @type {?}
+     * @protected
+     */
+    OrderCancellationService.prototype.orderDetailsService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    OrderCancellationService.prototype.userOrderService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    OrderCancellationService.prototype.routing;
+    /**
+     * @type {?}
+     * @protected
+     */
+    OrderCancellationService.prototype.globalMessageService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class OrderCancellationGuard {
+    /**
+     * @param {?} routing
+     * @param {?} orderAmendService
+     */
+    constructor(routing, orderAmendService) {
+        this.routing = routing;
+        this.orderAmendService = orderAmendService;
+    }
+    /**
+     * @return {?}
+     */
+    canActivate() {
+        return this.orderAmendService.getForm().pipe(map((/**
+         * @param {?} form
+         * @return {?}
+         */
+        form => {
+            if (!form.valid) {
+                // the order code is not available in the route
+                // as long as we're inside a guard, hence we redirect
+                // to the common orders page.
+                this.routing.go({ cxRoute: 'orders' });
+                return false;
+            }
+            else {
+                return true;
+            }
+        })));
+    }
+}
+OrderCancellationGuard.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+OrderCancellationGuard.ctorParameters = () => [
+    { type: RoutingService },
+    { type: OrderCancellationService }
+];
+/** @nocollapse */ OrderCancellationGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function OrderCancellationGuard_Factory() { return new OrderCancellationGuard(ɵɵinject(RoutingService), ɵɵinject(OrderCancellationService)); }, token: OrderCancellationGuard, providedIn: "root" });
+if (false) {
+    /**
+     * @type {?}
+     * @protected
+     */
+    OrderCancellationGuard.prototype.routing;
+    /**
+     * @type {?}
+     * @protected
+     */
+    OrderCancellationGuard.prototype.orderAmendService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+const ɵ0$1 = {
+    cxRoute: 'orderCancelConfirmation',
+};
+class CancelOrderConfirmationModule {
+}
+CancelOrderConfirmationModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    RouterModule.forChild([
+                        {
+                            path: null,
+                            canActivate: [CmsPageGuard],
+                            component: PageLayoutComponent,
+                            data: ɵ0$1,
+                        },
+                    ]),
+                    ReactiveFormsModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            CancelOrderConfirmationComponent: {
+                                component: CancelOrderConfirmationComponent,
+                                guards: [AuthGuard, OrderCancellationGuard],
+                                providers: [
+                                    {
+                                        provide: OrderAmendService,
+                                        useExisting: OrderCancellationService,
+                                    },
+                                ],
+                            },
+                        },
+                    }))),
+                    AmendOrderItemsModule,
+                    AmendOrderActionsModule,
+                ],
+                declarations: [CancelOrderConfirmationComponent],
+                exports: [CancelOrderConfirmationComponent],
+                entryComponents: [CancelOrderConfirmationComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CancelOrderComponent {
+    /**
+     * @param {?} orderAmendService
+     */
+    constructor(orderAmendService) {
+        this.orderAmendService = orderAmendService;
+        this.form$ = this.orderAmendService
+            .getForm()
+            .pipe(tap((/**
+         * @param {?} form
+         * @return {?}
+         */
+        form => (this.orderCode = form.value.orderCode))));
+        this.entries$ = this.orderAmendService.getEntries();
+    }
+}
+CancelOrderComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-cancel-order',
+                template: "<ng-container *ngIf=\"form$ | async as form\">\n  <ng-container *ngTemplateOutlet=\"actions\"></ng-container>\n\n  <cx-amend-order-items *ngIf=\"entries$ | async as entries\" [entries]=\"entries\">\n  </cx-amend-order-items>\n\n  <ng-container *ngTemplateOutlet=\"actions\"></ng-container>\n\n  <ng-template #actions>\n    <cx-amend-order-actions\n      *ngIf=\"orderCode\"\n      [orderCode]=\"orderCode\"\n      [isValid]=\"form.valid\"\n      backRoute=\"orderDetails\"\n      forwardRoute=\"orderCancelConfirmation\"\n    ></cx-amend-order-actions>\n  </ng-template>\n</ng-container>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+CancelOrderComponent.ctorParameters = () => [
+    { type: OrderAmendService }
+];
+if (false) {
+    /** @type {?} */
+    CancelOrderComponent.prototype.orderCode;
+    /** @type {?} */
+    CancelOrderComponent.prototype.form$;
+    /** @type {?} */
+    CancelOrderComponent.prototype.entries$;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CancelOrderComponent.prototype.orderAmendService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+const ɵ0$2 = {
+    cxRoute: 'orderCancel',
+};
+class CancelOrderModule {
+}
+CancelOrderModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    RouterModule.forChild([
+                        {
+                            path: null,
+                            canActivate: [CmsPageGuard],
+                            component: PageLayoutComponent,
+                            data: ɵ0$2,
+                        },
+                    ]),
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            CancelOrderComponent: {
+                                component: CancelOrderComponent,
+                                guards: [AuthGuard],
+                                providers: [
+                                    {
+                                        provide: OrderAmendService,
+                                        useExisting: OrderCancellationService,
+                                    },
+                                ],
+                            },
+                        },
+                    }))),
+                    AmendOrderItemsModule,
+                    AmendOrderActionsModule,
+                ],
+                declarations: [CancelOrderComponent],
+                exports: [CancelOrderComponent],
+                entryComponents: [CancelOrderComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class OrderCancellationModule {
+}
+OrderCancellationModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CancelOrderModule, CancelOrderConfirmationModule],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class OrderReturnService extends OrderAmendService {
+    /**
+     * @param {?} orderDetailsService
+     * @param {?} returnRequestService
+     * @param {?} routing
+     * @param {?} globalMessageService
+     */
+    constructor(orderDetailsService, returnRequestService, routing, globalMessageService) {
+        super(orderDetailsService);
+        this.orderDetailsService = orderDetailsService;
+        this.returnRequestService = returnRequestService;
+        this.routing = routing;
+        this.globalMessageService = globalMessageService;
+        this.amendType = AmendOrderType.RETURN;
+    }
+    /**
+     * @return {?}
+     */
+    getEntries() {
+        return this.getOrder().pipe(filter((/**
+         * @param {?} order
+         * @return {?}
+         */
+        order => !!order.entries)), map((/**
+         * @param {?} order
+         * @return {?}
+         */
+        order => order.entries.filter((/**
+         * @param {?} entry
+         * @return {?}
+         */
+        entry => entry.entryNumber !== -1 && entry.returnableQuantity > 0)))));
+    }
+    /**
+     * @return {?}
+     */
+    save() {
+        /** @type {?} */
+        const orderCode = this.form.value.orderCode;
+        /** @type {?} */
+        const entries = this.form.value.entries;
+        /** @type {?} */
+        const inputs = Object.keys(entries).map((/**
+         * @param {?} entryNumber
+         * @return {?}
+         */
+        entryNumber => ((/** @type {?} */ ({
+            orderEntryNumber: Number(entryNumber),
+            quantity: (/** @type {?} */ (entries[entryNumber])),
+        })))));
+        this.form.reset();
+        this.returnRequestService.createOrderReturnRequest({
+            orderCode,
+            returnRequestEntryInputs: inputs,
+        });
+        this.returnRequestService
+            .getReturnRequestSuccess()
+            .pipe(first(Boolean))
+            .subscribe((/**
+         * @return {?}
+         */
+        () => this.afterSave()));
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    afterSave() {
+        this.returnRequestService
+            .getOrderReturnRequest()
+            .pipe(first((/**
+         * @param {?} r
+         * @return {?}
+         */
+        r => !!r)))
+            .subscribe((/**
+         * @param {?} returnRequest
+         * @return {?}
+         */
+        returnRequest => {
+            /** @type {?} */
+            const rma = returnRequest.rma;
+            this.globalMessageService.add({
+                key: 'orderDetails.cancellationAndReturn.returnSuccess',
+                params: { rma },
+            }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
+            this.routing.go({
+                cxRoute: 'returnRequestDetails',
+                params: { rma },
+            });
+        }));
+    }
+}
+OrderReturnService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+OrderReturnService.ctorParameters = () => [
+    { type: OrderDetailsService },
+    { type: OrderReturnRequestService },
+    { type: RoutingService },
+    { type: GlobalMessageService }
+];
+/** @nocollapse */ OrderReturnService.ngInjectableDef = ɵɵdefineInjectable({ factory: function OrderReturnService_Factory() { return new OrderReturnService(ɵɵinject(OrderDetailsService), ɵɵinject(OrderReturnRequestService), ɵɵinject(RoutingService), ɵɵinject(GlobalMessageService)); }, token: OrderReturnService, providedIn: "root" });
+if (false) {
+    /** @type {?} */
+    OrderReturnService.prototype.amendType;
+    /**
+     * @type {?}
+     * @protected
+     */
+    OrderReturnService.prototype.orderDetailsService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    OrderReturnService.prototype.returnRequestService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    OrderReturnService.prototype.routing;
+    /**
+     * @type {?}
+     * @protected
+     */
+    OrderReturnService.prototype.globalMessageService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class OrderReturnGuard {
+    /**
+     * @param {?} routing
+     * @param {?} orderAmendService
+     */
+    constructor(routing, orderAmendService) {
+        this.routing = routing;
+        this.orderAmendService = orderAmendService;
+    }
+    /**
+     * @return {?}
+     */
+    canActivate() {
+        return this.orderAmendService.getForm().pipe(map((/**
+         * @param {?} form
+         * @return {?}
+         */
+        form => {
+            if (!form.valid) {
+                // the order code is not available in the route
+                // as long as we're inside a guard, hence we redirect
+                // to the common orders page.
+                this.routing.go({ cxRoute: 'orders' });
+                return false;
+            }
+            else {
+                return true;
+            }
+        })));
+    }
+}
+OrderReturnGuard.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+OrderReturnGuard.ctorParameters = () => [
+    { type: RoutingService },
+    { type: OrderReturnService }
+];
+/** @nocollapse */ OrderReturnGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function OrderReturnGuard_Factory() { return new OrderReturnGuard(ɵɵinject(RoutingService), ɵɵinject(OrderReturnService)); }, token: OrderReturnGuard, providedIn: "root" });
+if (false) {
+    /**
+     * @type {?}
+     * @protected
+     */
+    OrderReturnGuard.prototype.routing;
+    /**
+     * @type {?}
+     * @protected
+     */
+    OrderReturnGuard.prototype.orderAmendService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ReturnOrderConfirmationComponent {
+    /**
+     * @param {?} orderAmendService
+     */
+    constructor(orderAmendService) {
+        this.orderAmendService = orderAmendService;
+        this.form$ = this.orderAmendService
+            .getForm()
+            .pipe(tap((/**
+         * @param {?} form
+         * @return {?}
+         */
+        form => (this.orderCode = form.value.orderCode))));
+        this.entries$ = this.orderAmendService.getAmendedEntries();
+    }
+    /**
+     * @param {?} form
+     * @return {?}
+     */
+    submit(form) {
+        form.disable();
+        this.orderAmendService.save();
+    }
+}
+ReturnOrderConfirmationComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-return-order-confirmation',
+                template: "<form\n  *ngIf=\"form$ | async as form\"\n  [formGroup]=\"form\"\n  (ngSubmit)=\"submit(form)\"\n>\n  <ng-container *ngTemplateOutlet=\"actions\"></ng-container>\n\n  <cx-amend-order-items\n    *ngIf=\"entries$ | async as entries\"\n    [entries]=\"entries\"\n    [isConfirmation]=\"true\"\n  >\n  </cx-amend-order-items>\n\n  <ng-container *ngTemplateOutlet=\"actions\"></ng-container>\n\n  <ng-template #actions>\n    <cx-amend-order-actions\n      *ngIf=\"orderCode\"\n      [orderCode]=\"orderCode\"\n      [isValid]=\"form.valid\"\n      backRoute=\"orderReturn\"\n    ></cx-amend-order-actions>\n  </ng-template>\n</form>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+ReturnOrderConfirmationComponent.ctorParameters = () => [
+    { type: OrderAmendService }
+];
+if (false) {
+    /** @type {?} */
+    ReturnOrderConfirmationComponent.prototype.orderCode;
+    /** @type {?} */
+    ReturnOrderConfirmationComponent.prototype.form$;
+    /** @type {?} */
+    ReturnOrderConfirmationComponent.prototype.entries$;
+    /**
+     * @type {?}
+     * @protected
+     */
+    ReturnOrderConfirmationComponent.prototype.orderAmendService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+const ɵ0$3 = {
+    cxRoute: 'orderReturnConfirmation',
+};
+class ReturnOrderConfirmationModule {
+}
+ReturnOrderConfirmationModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    RouterModule.forChild([
+                        {
+                            path: null,
+                            canActivate: [CmsPageGuard],
+                            component: PageLayoutComponent,
+                            data: ɵ0$3,
+                        },
+                    ]),
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            ReturnOrderConfirmationComponent: {
+                                component: ReturnOrderConfirmationComponent,
+                                guards: [AuthGuard, OrderReturnGuard],
+                                providers: [
+                                    {
+                                        provide: OrderAmendService,
+                                        useExisting: OrderReturnService,
+                                    },
+                                ],
+                            },
+                        },
+                    }))),
+                    AmendOrderItemsModule,
+                    I18nModule,
+                    ReactiveFormsModule,
+                    AmendOrderActionsModule,
+                ],
+                declarations: [ReturnOrderConfirmationComponent],
+                exports: [ReturnOrderConfirmationComponent],
+                entryComponents: [ReturnOrderConfirmationComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ReturnOrderComponent {
+    /**
+     * @param {?} orderAmendService
+     */
+    constructor(orderAmendService) {
+        this.orderAmendService = orderAmendService;
+        this.form$ = this.orderAmendService
+            .getForm()
+            .pipe(tap((/**
+         * @param {?} form
+         * @return {?}
+         */
+        form => (this.orderCode = form.value.orderCode))));
+        this.entries$ = this.orderAmendService.getEntries();
+    }
+}
+ReturnOrderComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-return-order',
+                template: "<ng-container *ngIf=\"form$ | async as form\">\n  <ng-container *ngTemplateOutlet=\"actions\"></ng-container>\n\n  <cx-amend-order-items *ngIf=\"entries$ | async as entries\" [entries]=\"entries\">\n  </cx-amend-order-items>\n\n  <ng-container *ngTemplateOutlet=\"actions\"></ng-container>\n\n  <ng-template #actions>\n    <cx-amend-order-actions\n      *ngIf=\"orderCode\"\n      [orderCode]=\"orderCode\"\n      [isValid]=\"form.valid\"\n      backRoute=\"orderDetails\"\n      forwardRoute=\"orderReturnConfirmation\"\n    ></cx-amend-order-actions>\n  </ng-template>\n</ng-container>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
+];
+/** @nocollapse */
+ReturnOrderComponent.ctorParameters = () => [
+    { type: OrderAmendService }
+];
+if (false) {
+    /** @type {?} */
+    ReturnOrderComponent.prototype.orderCode;
+    /** @type {?} */
+    ReturnOrderComponent.prototype.form$;
+    /** @type {?} */
+    ReturnOrderComponent.prototype.entries$;
+    /**
+     * @type {?}
+     * @protected
+     */
+    ReturnOrderComponent.prototype.orderAmendService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+const ɵ0$4 = {
+    cxRoute: 'orderReturn',
+};
+class ReturnOrderModule {
+}
+ReturnOrderModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    RouterModule.forChild([
+                        {
+                            path: null,
+                            canActivate: [CmsPageGuard],
+                            component: PageLayoutComponent,
+                            data: ɵ0$4,
+                        },
+                    ]),
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            ReturnOrderComponent: {
+                                component: ReturnOrderComponent,
+                                guards: [AuthGuard],
+                                providers: [
+                                    {
+                                        provide: OrderAmendService,
+                                        useExisting: OrderReturnService,
+                                    },
+                                ],
+                            },
+                        },
+                    }))),
+                    AmendOrderItemsModule,
+                    AmendOrderActionsModule,
+                ],
+                declarations: [ReturnOrderComponent],
+                exports: [ReturnOrderComponent],
+                entryComponents: [ReturnOrderComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class OrderReturnModule {
+}
+OrderReturnModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [ReturnOrderModule, ReturnOrderConfirmationModule],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class OrderDetailHeadlineComponent {
     /**
      * @param {?} orderDetailsService
@@ -17164,7 +18299,7 @@ class OrderDetailActionsComponent {
 OrderDetailActionsComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-order-details-actions',
-                template: "<ng-container *ngIf=\"order$ | async as order\">\n  <div class=\"cx-nav row\">\n    <div class=\"col-xs-12 col-md-4 col-lg-3\">\n      <button\n        [routerLink]=\"{ cxRoute: 'orders' } | cxUrl\"\n        class=\"btn btn-block btn-action\"\n      >\n        {{ 'common.back' | cxTranslate }}\n      </button>\n    </div>\n\n    <div class=\"col-xs-12 col-md-4 col-lg-3\">\n      <button\n        *ngIf=\"order.cancellable\"\n        [routerLink]=\"\n          {\n            cxRoute: 'orderCancel',\n            params: order\n          } | cxUrl\n        \"\n        class=\"btn btn-block btn-action\"\n      >\n        {{ 'orderDetails.cancellationAndReturn.cancelAction' | cxTranslate }}\n      </button>\n\n      <button\n        *ngIf=\"order.returnable\"\n        [routerLink]=\"\n          {\n            cxRoute: 'orderReturn',\n            params: order\n          } | cxUrl\n        \"\n        class=\"btn btn-block btn-action\"\n      >\n        {{ 'orderDetails.cancellationAndReturn.returnAction' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</ng-container>\n"
+                template: "<ng-container *ngIf=\"order$ | async as order\">\n  <div class=\"cx-nav row\">\n    <div class=\"col-xs-12 col-md-4 col-lg-3\">\n      <button\n        [routerLink]=\"{ cxRoute: 'orders' } | cxUrl\"\n        class=\"btn btn-block btn-action\"\n      >\n        {{ 'common.back' | cxTranslate }}\n      </button>\n    </div>\n\n    <div class=\"col-xs-12 col-md-4 col-lg-3\">\n      <a\n        *ngIf=\"order.cancellable\"\n        [routerLink]=\"\n          {\n            cxRoute: 'orderCancel',\n            params: order\n          } | cxUrl\n        \"\n        class=\"btn btn-block btn-action\"\n      >\n        {{ 'orderDetails.cancellationAndReturn.cancelAction' | cxTranslate }}\n      </a>\n\n      <a\n        *ngIf=\"order.returnable\"\n        [routerLink]=\"\n          {\n            cxRoute: 'orderReturn',\n            params: order\n          } | cxUrl\n        \"\n        class=\"btn btn-block btn-action\"\n      >\n        {{ 'orderDetails.cancellationAndReturn.returnAction' | cxTranslate }}\n      </a>\n    </div>\n  </div>\n</ng-container>\n"
             }] }
 ];
 /** @nocollapse */
@@ -17195,7 +18330,7 @@ const moduleComponents = [
     TrackingEventsComponent,
     ConsignmentTrackingComponent,
 ];
-const ɵ0$1 = { pageLabel: 'order', cxRoute: 'orderGuest' }, ɵ1 = { cxRoute: 'orderDetails' };
+const ɵ0$5 = { pageLabel: 'order', cxRoute: 'orderGuest' }, ɵ1 = { cxRoute: 'orderDetails' };
 class OrderDetailsModule {
 }
 OrderDetailsModule.decorators = [
@@ -17213,7 +18348,7 @@ OrderDetailsModule.decorators = [
                             path: null,
                             canActivate: [CmsPageGuard],
                             component: PageLayoutComponent,
-                            data: ɵ0$1,
+                            data: ɵ0$5,
                         },
                         {
                             path: null,
@@ -17417,7 +18552,7 @@ if (false) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-const ɵ0$2 = { cxRoute: 'orders' };
+const ɵ0$6 = { cxRoute: 'orders' };
 class OrderHistoryModule {
 }
 OrderHistoryModule.decorators = [
@@ -17429,7 +18564,7 @@ OrderHistoryModule.decorators = [
                             path: null,
                             canActivate: [AuthGuard, CmsPageGuard],
                             component: PageLayoutComponent,
-                            data: ɵ0$2,
+                            data: ɵ0$6,
                         },
                     ]),
                     ConfigModule.withConfig((/** @type {?} */ ({
@@ -17451,169 +18586,6 @@ OrderHistoryModule.decorators = [
                 exports: [OrderHistoryComponent],
                 providers: [UserService],
                 entryComponents: [OrderHistoryComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class OrderReturnRequestListComponent {
-    /**
-     * @param {?} returnRequestService
-     * @param {?} translation
-     */
-    constructor(returnRequestService, translation) {
-        this.returnRequestService = returnRequestService;
-        this.translation = translation;
-        this.PAGE_SIZE = 5;
-        this.returnRequests$ = this.returnRequestService.getOrderReturnRequestList(this.PAGE_SIZE).pipe(tap((/**
-         * @param {?} requestList
-         * @return {?}
-         */
-        (requestList) => {
-            if (requestList.pagination) {
-                this.sortType = requestList.pagination.sort;
-            }
-        })));
-        /**
-         * When "Order Return" feature is enabled, this component becomes one tab in
-         * TabParagraphContainerComponent. This can be read from TabParagraphContainer.
-         */
-        this.tabTitleParam$ = this.returnRequests$.pipe(map((/**
-         * @param {?} returnRequests
-         * @return {?}
-         */
-        returnRequests => returnRequests.pagination.totalResults)), filter((/**
-         * @param {?} totalResults
-         * @return {?}
-         */
-        totalResults => totalResults !== undefined)), take(1));
-    }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        this.returnRequestService.clearOrderReturnRequestList();
-    }
-    /**
-     * @param {?} sortCode
-     * @return {?}
-     */
-    changeSortCode(sortCode) {
-        /** @type {?} */
-        const event = {
-            sortCode,
-            currentPage: 0,
-        };
-        this.sortType = sortCode;
-        this.fetchReturnRequests(event);
-    }
-    /**
-     * @param {?} page
-     * @return {?}
-     */
-    pageChange(page) {
-        /** @type {?} */
-        const event = {
-            sortCode: this.sortType,
-            currentPage: page,
-        };
-        this.fetchReturnRequests(event);
-    }
-    /**
-     * @return {?}
-     */
-    getSortLabels() {
-        return combineLatest([
-            this.translation.translate('sorting.date'),
-            this.translation.translate('sorting.rma'),
-        ]).pipe(map((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        ([textByDate, textByRma]) => {
-            return {
-                byDate: textByDate,
-                byRMA: textByRma,
-            };
-        })));
-    }
-    /**
-     * @private
-     * @param {?} event
-     * @return {?}
-     */
-    fetchReturnRequests(event) {
-        this.returnRequestService.loadOrderReturnRequestList(this.PAGE_SIZE, event.currentPage, event.sortCode);
-    }
-}
-OrderReturnRequestListComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-order-return-request-list',
-                template: "<ng-container *ngIf=\"returnRequests$ | async as returnRequests\">\n  <div class=\"container\">\n    <!-- BODY -->\n    <div class=\"cx-order-history-body\">\n      <ng-container *ngIf=\"returnRequests.pagination.totalResults > 0\">\n        <!-- Select Form and Pagination Top -->\n        <div class=\"cx-order-history-sort top row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"returnRequests.sorts\"\n              [sortLabels]=\"getSortLabels() | async\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"returnRequests.pagination.sort\"\n              placeholder=\"{{\n                'returnRequestList.sortByMostRecent' | cxTranslate\n              }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"returnRequests.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n        <!-- TABLE -->\n        <table class=\"table cx-order-history-table\">\n          <thead class=\"cx-order-history-thead-mobile\">\n            <th scope=\"col\">\n              {{ 'returnRequestList.returnRequestId' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'returnRequestList.orderId' | cxTranslate }}</th>\n            <th scope=\"col\">\n              {{ 'returnRequestList.date' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'returnRequestList.status' | cxTranslate }}</th>\n          </thead>\n          <tbody>\n            <tr *ngFor=\"let return of returnRequests.returnRequests\">\n              <td class=\"cx-order-history-code\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'returnRequestList.returnRequestId' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'returnRequestDetails',\n                      params: return\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ return?.rma }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-code\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'returnRequestList.orderId' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'orderDetails',\n                      params: return?.order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ return?.order?.code }}</a\n                >\n              </td>\n\n              <td class=\"cx-order-history-placed\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'returnRequestList.date' | cxTranslate }}\n                </div>\n                {{ return?.creationTime | cxDate: 'longDate' }}\n              </td>\n              <td class=\"cx-order-history-status\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'returnRequestList.status' | cxTranslate }}\n                </div>\n                {{\n                  'returnRequestList.statusDisplay'\n                    | cxTranslate: { context: return?.status }\n                }}\n              </td>\n            </tr>\n          </tbody>\n        </table>\n        <!-- Select Form and Pagination Bottom -->\n        <div class=\"cx-order-history-sort bottom row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"returnRequests.sorts\"\n              [sortLabels]=\"getSortLabels() | async\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"returnRequests.pagination.sort\"\n              placeholder=\"{{\n                'returnRequestList.sortByMostRecent' | cxTranslate\n              }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"returnRequests.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n      </ng-container>\n    </div>\n  </div>\n</ng-container>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-/** @nocollapse */
-OrderReturnRequestListComponent.ctorParameters = () => [
-    { type: OrderReturnRequestService },
-    { type: TranslationService }
-];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    OrderReturnRequestListComponent.prototype.PAGE_SIZE;
-    /** @type {?} */
-    OrderReturnRequestListComponent.prototype.sortType;
-    /** @type {?} */
-    OrderReturnRequestListComponent.prototype.returnRequests$;
-    /**
-     * When "Order Return" feature is enabled, this component becomes one tab in
-     * TabParagraphContainerComponent. This can be read from TabParagraphContainer.
-     * @type {?}
-     */
-    OrderReturnRequestListComponent.prototype.tabTitleParam$;
-    /**
-     * @type {?}
-     * @private
-     */
-    OrderReturnRequestListComponent.prototype.returnRequestService;
-    /**
-     * @type {?}
-     * @private
-     */
-    OrderReturnRequestListComponent.prototype.translation;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ReturnRequestListModule {
-}
-ReturnRequestListModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            OrderReturnRequestListComponent: {
-                                component: OrderReturnRequestListComponent,
-                                guards: [AuthGuard],
-                            },
-                        },
-                    }))),
-                    RouterModule,
-                    ListNavigationModule,
-                    UrlModule,
-                    I18nModule,
-                ],
-                declarations: [OrderReturnRequestListComponent],
-                exports: [OrderReturnRequestListComponent],
-                entryComponents: [OrderReturnRequestListComponent],
             },] }
 ];
 
@@ -17915,7 +18887,7 @@ const components = [
     ReturnRequestItemsComponent,
     ReturnRequestTotalsComponent,
 ];
-const ɵ0$3 = { cxRoute: 'returnRequestDetails' };
+const ɵ0$7 = { cxRoute: 'returnRequestDetails' };
 class ReturnRequestDetailModule {
 }
 ReturnRequestDetailModule.decorators = [
@@ -17927,7 +18899,7 @@ ReturnRequestDetailModule.decorators = [
                             path: null,
                             canActivate: [AuthGuard, CmsPageGuard],
                             component: PageLayoutComponent,
-                            data: ɵ0$3,
+                            data: ɵ0$7,
                         },
                     ]),
                     ConfigModule.withConfig((/** @type {?} */ ({
@@ -17958,1114 +18930,164 @@ ReturnRequestDetailModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class OrderCancelOrReturnService {
+class OrderReturnRequestListComponent {
     /**
-     * @param {?} languageService
-     * @param {?} routing
-     * @param {?} globalMessageService
-     * @param {?} userOrderService
      * @param {?} returnRequestService
-     * @param {?} semanticPathService
+     * @param {?} translation
      */
-    constructor(languageService, routing, globalMessageService, userOrderService, returnRequestService, semanticPathService) {
-        this.languageService = languageService;
-        this.routing = routing;
-        this.globalMessageService = globalMessageService;
-        this.userOrderService = userOrderService;
+    constructor(returnRequestService, translation) {
         this.returnRequestService = returnRequestService;
-        this.semanticPathService = semanticPathService;
-        this._cancelOrReturnRequestInputs = [];
-        this.lang = 'en';
-        this.keepRequestInputs = false;
-        this.languageService.getActive().subscribe((/**
-         * @param {?} value
+        this.translation = translation;
+        this.PAGE_SIZE = 5;
+        this.returnRequests$ = this.returnRequestService.getOrderReturnRequestList(this.PAGE_SIZE).pipe(tap((/**
+         * @param {?} requestList
          * @return {?}
          */
-        value => (this.lang = value)));
-        this.routing.getRouterState().subscribe((/**
-         * @param {?} state
-         * @return {?}
-         */
-        state => {
-            /** @type {?} */
-            const current = state.state;
-            /** @type {?} */
-            const next = state.nextState;
-            if (next &&
-                next.params['orderCode'] &&
-                current &&
-                current.params['orderCode']) {
-                /** @type {?} */
-                const orderCode = next.params['orderCode'];
-                if (this.isConfirmationPath(current.url, orderCode) &&
-                    this.isCancelOrReturnPath(next.url, orderCode)) {
-                    this.keepRequestInputs = true;
-                }
+        (requestList) => {
+            if (requestList.pagination) {
+                this.sortType = requestList.pagination.sort;
             }
-        }));
+        })));
+        /**
+         * When "Order Return" feature is enabled, this component becomes one tab in
+         * TabParagraphContainerComponent. This can be read from TabParagraphContainer.
+         */
+        this.tabTitleParam$ = this.returnRequests$.pipe(map((/**
+         * @param {?} returnRequests
+         * @return {?}
+         */
+        returnRequests => returnRequests.pagination.totalResults)), filter((/**
+         * @param {?} totalResults
+         * @return {?}
+         */
+        totalResults => totalResults !== undefined)), take(1));
     }
     /**
      * @return {?}
      */
-    get isCancelling$() {
-        return this.userOrderService.getCancelOrderLoading();
+    ngOnDestroy() {
+        this.returnRequestService.clearOrderReturnRequestList();
+    }
+    /**
+     * @param {?} sortCode
+     * @return {?}
+     */
+    changeSortCode(sortCode) {
+        /** @type {?} */
+        const event = {
+            sortCode,
+            currentPage: 0,
+        };
+        this.sortType = sortCode;
+        this.fetchReturnRequests(event);
+    }
+    /**
+     * @param {?} page
+     * @return {?}
+     */
+    pageChange(page) {
+        /** @type {?} */
+        const event = {
+            sortCode: this.sortType,
+            currentPage: page,
+        };
+        this.fetchReturnRequests(event);
     }
     /**
      * @return {?}
      */
-    get isCancelSuccess$() {
-        return this.userOrderService.getCancelOrderSuccess();
-    }
-    /**
-     * @return {?}
-     */
-    get isReturning$() {
-        return this.returnRequestService.getReturnRequestLoading();
-    }
-    /**
-     * @return {?}
-     */
-    get isReturnSuccess$() {
-        return this.returnRequestService.getReturnRequestSuccess();
+    getSortLabels() {
+        return combineLatest([
+            this.translation.translate('sorting.date'),
+            this.translation.translate('sorting.rma'),
+        ]).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([textByDate, textByRma]) => {
+            return {
+                byDate: textByDate,
+                byRMA: textByRma,
+            };
+        })));
     }
     /**
      * @private
-     * @param {?} url
-     * @param {?} orderCode
+     * @param {?} event
      * @return {?}
      */
-    isConfirmationPath(url, orderCode) {
-        /** @type {?} */
-        const cancelConfirm = this.getPath('orderCancelConfirmation', orderCode);
-        /** @type {?} */
-        const returnConfirm = this.getPath('orderReturnConfirmation', orderCode);
-        return url.endsWith(cancelConfirm) || url.endsWith(returnConfirm);
-    }
-    /**
-     * @private
-     * @param {?} url
-     * @param {?} orderCode
-     * @return {?}
-     */
-    isCancelOrReturnPath(url, orderCode) {
-        /** @type {?} */
-        const orderCancel = this.getPath('orderCancel', orderCode);
-        /** @type {?} */
-        const orderReturn = this.getPath('orderReturn', orderCode);
-        return url.endsWith(orderCancel) || url.endsWith(orderReturn);
-    }
-    /**
-     * @private
-     * @param {?} routeName
-     * @param {?} orderCode
-     * @return {?}
-     */
-    getPath(routeName, orderCode) {
-        return this.semanticPathService
-            .transform({
-            cxRoute: routeName,
-            params: { code: orderCode },
-        })
-            .join('/')
-            .slice(1);
-    }
-    /**
-     * @return {?}
-     */
-    get cancelOrReturnRequestInputs() {
-        return this._cancelOrReturnRequestInputs;
-    }
-    /**
-     * @param {?} values
-     * @return {?}
-     */
-    set cancelOrReturnRequestInputs(values) {
-        this._cancelOrReturnRequestInputs = values;
-    }
-    /**
-     * @return {?}
-     */
-    clearCancelOrReturnRequestInputs() {
-        if (!this.keepRequestInputs) {
-            this._cancelOrReturnRequestInputs = [];
-        }
-        else {
-            this.keepRequestInputs = false;
-        }
-    }
-    /**
-     * As discussed, this calculation is moved to SPA side.
-     * The calculation and validation should be in backend facade layer.
-     * @param {?} entry
-     * @return {?}
-     */
-    getCancelledOrReturnedPrice(entry) {
-        /** @type {?} */
-        const qty = this.getEntryCancelledOrReturnedQty(entry);
-        /** @type {?} */
-        const returnedItemsPriceData = Object.assign({}, entry.basePrice);
-        returnedItemsPriceData.value =
-            Math.round(entry.basePrice.value * qty * 100) / 100;
-        returnedItemsPriceData.formattedValue = formatCurrency(returnedItemsPriceData.value, this.lang, getCurrencySymbol(returnedItemsPriceData.currencyIso, 'narrow'), returnedItemsPriceData.currencyIso);
-        return returnedItemsPriceData;
-    }
-    /**
-     * @param {?} cxRoute
-     * @param {?} orderCode
-     * @return {?}
-     */
-    goToOrderCancelOrReturn(cxRoute, orderCode) {
-        this.routing.go({
-            cxRoute: cxRoute,
-            params: { code: orderCode },
-        });
-    }
-    /**
-     * @param {?} orderCode
-     * @return {?}
-     */
-    backToOrder(orderCode) {
-        this.routing.go({
-            cxRoute: 'orderDetails',
-            params: { code: orderCode },
-        });
-    }
-    /**
-     * @param {?} entry
-     * @return {?}
-     */
-    isEntryCancelledOrReturned(entry) {
-        for (const input of this._cancelOrReturnRequestInputs) {
-            if (input.orderEntryNumber === entry.entryNumber) {
-                return true;
-            }
-        }
-        return false;
-    }
-    /**
-     * @param {?} entry
-     * @return {?}
-     */
-    getEntryCancelledOrReturnedQty(entry) {
-        for (const input of this._cancelOrReturnRequestInputs) {
-            if (input.orderEntryNumber === entry.entryNumber) {
-                return input.quantity;
-            }
-        }
-        return 0;
-    }
-    /**
-     * @param {?} orderCode
-     * @return {?}
-     */
-    cancelOrder(orderCode) {
-        this.userOrderService.cancelOrder(orderCode, {
-            cancellationRequestEntryInputs: this.cancelOrReturnRequestInputs,
-        });
-    }
-    /**
-     * @param {?} orderCode
-     * @return {?}
-     */
-    cancelSuccess(orderCode) {
-        this.clearCancelOrReturnRequestInputs();
-        this.userOrderService.resetCancelOrderProcessState();
-        this.globalMessageService.add({
-            key: 'orderDetails.cancellationAndReturn.cancelSuccess',
-            params: { orderCode },
-        }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
-        this.routing.go({
-            cxRoute: 'orders',
-        });
-    }
-    /**
-     * @param {?} orderCode
-     * @return {?}
-     */
-    returnOrder(orderCode) {
-        this.returnRequestService.createOrderReturnRequest({
-            orderCode,
-            returnRequestEntryInputs: this.cancelOrReturnRequestInputs,
-        });
-    }
-    /**
-     * @return {?}
-     */
-    returnSuccess() {
-        this.clearCancelOrReturnRequestInputs();
-        /** @type {?} */
-        let rma;
-        this.returnRequestService
-            .getOrderReturnRequest()
-            .pipe(take(1))
-            .subscribe((/**
-         * @param {?} returnRequest
-         * @return {?}
-         */
-        returnRequest => (rma = returnRequest.rma)));
-        this.globalMessageService.add({
-            key: 'orderDetails.cancellationAndReturn.returnSuccess',
-            params: { rma },
-        }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
-        this.routing.go({
-            cxRoute: 'returnRequestDetails',
-            params: { rma },
-        });
-    }
-    /**
-     * @return {?}
-     */
-    clearReturnRequest() {
-        this.returnRequestService.clearOrderReturnRequestDetail();
+    fetchReturnRequests(event) {
+        this.returnRequestService.loadOrderReturnRequestList(this.PAGE_SIZE, event.currentPage, event.sortCode);
     }
 }
-OrderCancelOrReturnService.decorators = [
-    { type: Injectable }
+OrderReturnRequestListComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-order-return-request-list',
+                template: "<ng-container *ngIf=\"returnRequests$ | async as returnRequests\">\n  <div class=\"container\">\n    <!-- BODY -->\n    <div class=\"cx-order-history-body\">\n      <ng-container *ngIf=\"returnRequests.pagination.totalResults > 0\">\n        <!-- Select Form and Pagination Top -->\n        <div class=\"cx-order-history-sort top row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"returnRequests.sorts\"\n              [sortLabels]=\"getSortLabels() | async\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"returnRequests.pagination.sort\"\n              placeholder=\"{{\n                'returnRequestList.sortByMostRecent' | cxTranslate\n              }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"returnRequests.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n        <!-- TABLE -->\n        <table class=\"table cx-order-history-table\">\n          <thead class=\"cx-order-history-thead-mobile\">\n            <th scope=\"col\">\n              {{ 'returnRequestList.returnRequestId' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'returnRequestList.orderId' | cxTranslate }}</th>\n            <th scope=\"col\">\n              {{ 'returnRequestList.date' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'returnRequestList.status' | cxTranslate }}</th>\n          </thead>\n          <tbody>\n            <tr *ngFor=\"let return of returnRequests.returnRequests\">\n              <td class=\"cx-order-history-code\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'returnRequestList.returnRequestId' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'returnRequestDetails',\n                      params: return\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ return?.rma }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-code\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'returnRequestList.orderId' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'orderDetails',\n                      params: return?.order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ return?.order?.code }}</a\n                >\n              </td>\n\n              <td class=\"cx-order-history-placed\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'returnRequestList.date' | cxTranslate }}\n                </div>\n                {{ return?.creationTime | cxDate: 'longDate' }}\n              </td>\n              <td class=\"cx-order-history-status\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'returnRequestList.status' | cxTranslate }}\n                </div>\n                {{\n                  'returnRequestList.statusDisplay'\n                    | cxTranslate: { context: return?.status }\n                }}\n              </td>\n            </tr>\n          </tbody>\n        </table>\n        <!-- Select Form and Pagination Bottom -->\n        <div class=\"cx-order-history-sort bottom row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"returnRequests.sorts\"\n              [sortLabels]=\"getSortLabels() | async\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"returnRequests.pagination.sort\"\n              placeholder=\"{{\n                'returnRequestList.sortByMostRecent' | cxTranslate\n              }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"returnRequests.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n      </ng-container>\n    </div>\n  </div>\n</ng-container>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }] }
 ];
 /** @nocollapse */
-OrderCancelOrReturnService.ctorParameters = () => [
-    { type: LanguageService },
-    { type: RoutingService },
-    { type: GlobalMessageService },
-    { type: UserOrderService },
+OrderReturnRequestListComponent.ctorParameters = () => [
     { type: OrderReturnRequestService },
-    { type: SemanticPathService }
+    { type: TranslationService }
 ];
 if (false) {
     /**
      * @type {?}
      * @private
      */
-    OrderCancelOrReturnService.prototype._cancelOrReturnRequestInputs;
+    OrderReturnRequestListComponent.prototype.PAGE_SIZE;
+    /** @type {?} */
+    OrderReturnRequestListComponent.prototype.sortType;
+    /** @type {?} */
+    OrderReturnRequestListComponent.prototype.returnRequests$;
+    /**
+     * When "Order Return" feature is enabled, this component becomes one tab in
+     * TabParagraphContainerComponent. This can be read from TabParagraphContainer.
+     * @type {?}
+     */
+    OrderReturnRequestListComponent.prototype.tabTitleParam$;
     /**
      * @type {?}
      * @private
      */
-    OrderCancelOrReturnService.prototype.lang;
+    OrderReturnRequestListComponent.prototype.returnRequestService;
     /**
      * @type {?}
      * @private
      */
-    OrderCancelOrReturnService.prototype.keepRequestInputs;
-    /**
-     * @type {?}
-     * @protected
-     */
-    OrderCancelOrReturnService.prototype.languageService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    OrderCancelOrReturnService.prototype.routing;
-    /**
-     * @type {?}
-     * @protected
-     */
-    OrderCancelOrReturnService.prototype.globalMessageService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    OrderCancelOrReturnService.prototype.userOrderService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    OrderCancelOrReturnService.prototype.returnRequestService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    OrderCancelOrReturnService.prototype.semanticPathService;
+    OrderReturnRequestListComponent.prototype.translation;
 }
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class CancelOrReturnItemsComponent {
-    /**
-     * @param {?} formBuilder
-     * @param {?} cancelOrReturnService
-     */
-    constructor(formBuilder, cancelOrReturnService) {
-        this.formBuilder = formBuilder;
-        this.cancelOrReturnService = cancelOrReturnService;
-        this.confirmRequest = false;
-        this.cancelOrder = true;
-        this.confirm = new EventEmitter();
-        this.disableConfirmBtn = true;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.form = this.formBuilder.group({
-            entryInput: this.formBuilder.array([]),
-        });
-        this.inputsControl = (/** @type {?} */ (this.form.get('entryInput')));
-        this.entries.forEach((/**
-         * @param {?} entry
-         * @return {?}
-         */
-        entry => {
-            this.inputsControl.push(this.formBuilder.group({
-                orderEntryNumber: entry.entryNumber,
-                quantity: this.cancelOrReturnService.getEntryCancelledOrReturnedQty(entry),
-            }));
-        }));
-        this.disableEnableConfirm();
-    }
-    /**
-     * @return {?}
-     */
-    setAll() {
-        for (let i = 0; i < this.entries.length; i++) {
-            this.inputsControl.at(i).setValue({
-                orderEntryNumber: this.entries[i].entryNumber,
-                quantity: this.cancelOrder
-                    ? this.entries[i].cancellableQuantity
-                    : this.entries[i].returnableQuantity,
-            });
-        }
-        this.disableEnableConfirm();
-    }
-    /**
-     * @return {?}
-     */
-    confirmEntryInputs() {
-        /** @type {?} */
-        const inputs = [];
-        for (const input of this.form.value.entryInput) {
-            if (input.quantity > 0) {
-                inputs.push(input);
-            }
-        }
-        this.confirm.emit(inputs);
-    }
-    /**
-     * @return {?}
-     */
-    updateQty() {
-        this.disableEnableConfirm();
-    }
-    /**
-     * @param {?} entry
-     * @return {?}
-     */
-    getItemPrice(entry) {
-        return this.cancelOrReturnService.getCancelledOrReturnedPrice(entry);
-    }
-    /**
-     * @return {?}
-     */
-    back() {
-        this.cancelOrReturnService.backToOrder(this.orderCode);
-    }
-    /**
-     * @protected
-     * @return {?}
-     */
-    disableEnableConfirm() {
-        for (const input of this.form.value.entryInput) {
-            if (input.quantity > 0) {
-                this.disableConfirmBtn = false;
-                return;
-            }
-        }
-        this.disableConfirmBtn = true;
-    }
+class ReturnRequestListModule {
 }
-CancelOrReturnItemsComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-cancel-or-return-items',
-                template: "<ng-container *ngIf=\"!confirmRequest\">\n  <div class=\"cx-nav row\">\n    <div class=\"col-xs-12 col-md-4 col-lg-3\">\n      <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n        {{ 'common.back' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-xs-12 col-md-4 col-lg-3\">\n      <button\n        class=\"btn btn-block btn-primary\"\n        [disabled]=\"disableConfirmBtn\"\n        (click)=\"confirmEntryInputs()\"\n      >\n        {{ 'common.continue' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n\n  <button class=\"btn btn-link cx-action-link\" (click)=\"setAll()\">\n    {{ 'orderDetails.cancellationAndReturn.setAll' | cxTranslate }}\n  </button>\n</ng-container>\n\n<div class=\"d-none d-md-block d-lg-block d-xl-block\">\n  <div class=\"cx-item-list-header row\">\n    <div class=\"cx-item-list-desc col-md-5 col-lg-5 col-xl-6\">\n      {{ 'orderDetails.cancellationAndReturn.item' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-price col-md-2 col-lg-2 col-xl-2\">\n      {{ 'orderDetails.cancellationAndReturn.itemPrice' | cxTranslate }}\n    </div>\n    <div\n      *ngIf=\"!confirmRequest\"\n      class=\"cx-item-list-qty col-md-3 col-lg-3 col-xl-2\"\n    >\n      {{ 'orderDetails.cancellationAndReturn.quantity' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-qty col-md-2 col-lg-2 col-xl-2\">\n      {{\n        (cancelOrder\n          ? 'orderDetails.cancellationAndReturn.cancelQty'\n          : 'orderDetails.cancellationAndReturn.returnQty') | cxTranslate\n      }}\n    </div>\n    <div\n      *ngIf=\"confirmRequest\"\n      class=\"cx-item-list-total col-md-3 col-lg-3 col-xl-2\"\n    >\n      {{ 'orderDetails.cancellationAndReturn.totalPrice' | cxTranslate }}\n    </div>\n  </div>\n</div>\n\n<div [formGroup]=\"form\">\n  <div formArrayName=\"entryInput\">\n    <div class=\"cx-item-list-row\" *ngFor=\"let item of entries; let i = index\">\n      <div class=\"cx-item-list-items\">\n        <div class=\"row\">\n          <!-- Item Image -->\n          <div class=\"col-2 cx-image-container\">\n            <cx-media\n              [container]=\"item.product.images?.PRIMARY\"\n              format=\"thumbnail\"\n            ></cx-media>\n          </div>\n          <!-- Item Information -->\n          <div class=\"cx-info col-10\">\n            <div class=\"cx-info-container row \">\n              <!-- Item Description -->\n              <div class=\"col-md-3 col-lg-3 col-xl-5\">\n                <div *ngIf=\"item.product.name\" class=\"cx-name\">\n                  {{ item.product.name }}\n                </div>\n                <div *ngIf=\"item.product.code\" class=\"cx-code\">\n                  {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n                </div>\n                <!-- Variants -->\n                <div\n                  *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n                  class=\"cx-property\"\n                >\n                  <div class=\"cx-label\">{{ variant.name }}</div>\n                  <div class=\"cx-value\">{{ variant.value }}</div>\n                </div>\n              </div>\n              <!-- Item Price -->\n              <div\n                *ngIf=\"item.basePrice\"\n                class=\"cx-price col-md-3 col-lg-3 col-xl-2\"\n              >\n                <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n                  {{\n                    'orderDetails.cancellationAndReturn.itemPrice' | cxTranslate\n                  }}\n                </div>\n                <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n                  {{ item.basePrice?.formattedValue }}\n                </div>\n              </div>\n              <!-- item returnable/cancelable Quantity -->\n              <div\n                *ngIf=\"!confirmRequest\"\n                class=\"cx-request-qty col-md-3 col-lg-3 col-xl-3\"\n              >\n                <div\n                  class=\"cx-label d-block d-md-none d-lg-none d-xl-none\"\n                  placement=\"left\"\n                  title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n                >\n                  {{\n                    'orderDetails.cancellationAndReturn.quantity' | cxTranslate\n                  }}\n                </div>\n                <div class=\"cx-value\">\n                  {{\n                    cancelOrder\n                      ? item.cancellableQuantity\n                      : item.returnableQuantity\n                  }}\n                </div>\n              </div>\n              <!-- Cancel/Return Quantity -->\n              <div class=\"cx-quantity col-md-3 col-lg-3 col-xl-2\">\n                <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n                  {{\n                    (cancelOrder\n                      ? 'orderDetails.cancellationAndReturn.cancelQty'\n                      : 'orderDetails.cancellationAndReturn.returnQty')\n                      | cxTranslate\n                  }}\n                </div>\n                <div [formGroupName]=\"i\">\n                  <cx-item-counter\n                    [step]=\"1\"\n                    [min]=\"0\"\n                    [max]=\"\n                      cancelOrder\n                        ? item.cancellableQuantity\n                        : item.returnableQuantity\n                    \"\n                    [isValueChangeable]=\"!confirmRequest\"\n                    (update)=\"updateQty()\"\n                    formControlName=\"quantity\"\n                  >\n                  </cx-item-counter>\n                </div>\n              </div>\n              <!-- Cancel/Return Total Price -->\n              <div\n                *ngIf=\"confirmRequest\"\n                class=\"cx-total col-md-3 col-lg-3 col-xl-3\"\n              >\n                <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n                  {{\n                    'orderDetails.cancellationAndReturn.totalPrice'\n                      | cxTranslate\n                  }}\n                </div>\n                <div class=\"cx-value\">\n                  {{ getItemPrice(item)?.formattedValue }}\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n\n<ng-container *ngIf=\"!confirmRequest\">\n  <div class=\"cx-nav row\">\n    <div class=\"col-xs-12 col-md-4 col-lg-3\">\n      <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n        {{ 'common.back' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-xs-12 col-md-4 col-lg-3\">\n      <button\n        class=\"btn btn-block btn-primary\"\n        [disabled]=\"disableConfirmBtn\"\n        (click)=\"confirmEntryInputs()\"\n      >\n        {{ 'common.continue' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</ng-container>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-/** @nocollapse */
-CancelOrReturnItemsComponent.ctorParameters = () => [
-    { type: FormBuilder },
-    { type: OrderCancelOrReturnService }
-];
-CancelOrReturnItemsComponent.propDecorators = {
-    entries: [{ type: Input }],
-    confirmRequest: [{ type: Input }],
-    cancelOrder: [{ type: Input }],
-    orderCode: [{ type: Input }],
-    confirm: [{ type: Output }]
-};
-if (false) {
-    /** @type {?} */
-    CancelOrReturnItemsComponent.prototype.entries;
-    /** @type {?} */
-    CancelOrReturnItemsComponent.prototype.confirmRequest;
-    /** @type {?} */
-    CancelOrReturnItemsComponent.prototype.cancelOrder;
-    /** @type {?} */
-    CancelOrReturnItemsComponent.prototype.orderCode;
-    /** @type {?} */
-    CancelOrReturnItemsComponent.prototype.confirm;
-    /** @type {?} */
-    CancelOrReturnItemsComponent.prototype.form;
-    /** @type {?} */
-    CancelOrReturnItemsComponent.prototype.inputsControl;
-    /** @type {?} */
-    CancelOrReturnItemsComponent.prototype.disableConfirmBtn;
-    /**
-     * @type {?}
-     * @private
-     */
-    CancelOrReturnItemsComponent.prototype.formBuilder;
-    /**
-     * @type {?}
-     * @private
-     */
-    CancelOrReturnItemsComponent.prototype.cancelOrReturnService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class CancelOrReturnItemsModule {
-}
-CancelOrReturnItemsModule.decorators = [
+ReturnRequestListModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
                     CommonModule,
-                    ReactiveFormsModule,
-                    I18nModule,
-                    MediaModule,
-                    ItemCounterModule,
-                ],
-                declarations: [CancelOrReturnItemsComponent],
-                exports: [CancelOrReturnItemsComponent],
-                entryComponents: [CancelOrReturnItemsComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ReturnOrderComponent {
-    /**
-     * @param {?} cancelOrReturnService
-     * @param {?} orderDetailsService
-     */
-    constructor(cancelOrReturnService, orderDetailsService) {
-        this.cancelOrReturnService = cancelOrReturnService;
-        this.orderDetailsService = orderDetailsService;
-        this.returnableEntries$ = this.orderDetailsService.getOrderDetails().pipe(filter((/**
-         * @param {?} order
-         * @return {?}
-         */
-        order => Boolean(order.entries))), tap((/**
-         * @param {?} order
-         * @return {?}
-         */
-        order => (this.orderCode = order.code))), map((/**
-         * @param {?} order
-         * @return {?}
-         */
-        order => {
-            /** @type {?} */
-            const returnableEntries = [];
-            order.entries.forEach((/**
-             * @param {?} entry
-             * @return {?}
-             */
-            entry => {
-                if (entry.entryNumber !== -1 && entry.returnableQuantity > 0) {
-                    returnableEntries.push(entry);
-                }
-            }));
-            return returnableEntries;
-        })));
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.cancelOrReturnService.clearCancelOrReturnRequestInputs();
-    }
-    /**
-     * @param {?} entryInputs
-     * @return {?}
-     */
-    confirmReturn(entryInputs) {
-        this.cancelOrReturnService.cancelOrReturnRequestInputs = entryInputs;
-        this.cancelOrReturnService.goToOrderCancelOrReturn('orderReturnConfirmation', this.orderCode);
-    }
-}
-ReturnOrderComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-return-order',
-                template: "<ng-container *ngIf=\"returnableEntries$ | async as returnableEntries\">\n  <cx-cancel-or-return-items\n    [entries]=\"returnableEntries\"\n    [cancelOrder]=\"false\"\n    [orderCode]=\"orderCode\"\n    (confirm)=\"confirmReturn($event)\"\n  >\n  </cx-cancel-or-return-items>\n</ng-container>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-/** @nocollapse */
-ReturnOrderComponent.ctorParameters = () => [
-    { type: OrderCancelOrReturnService },
-    { type: OrderDetailsService }
-];
-if (false) {
-    /** @type {?} */
-    ReturnOrderComponent.prototype.orderCode;
-    /** @type {?} */
-    ReturnOrderComponent.prototype.returnableEntries$;
-    /**
-     * @type {?}
-     * @protected
-     */
-    ReturnOrderComponent.prototype.cancelOrReturnService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    ReturnOrderComponent.prototype.orderDetailsService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-const ɵ0$4 = {
-    pageLabel: '/my-account/order/return',
-    cxRoute: 'orderReturn',
-};
-class ReturnOrderModule {
-}
-ReturnOrderModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    RouterModule.forChild([
-                        {
-                            path: null,
-                            canActivate: [CmsPageGuard],
-                            component: PageLayoutComponent,
-                            data: ɵ0$4,
-                        },
-                    ]),
                     ConfigModule.withConfig((/** @type {?} */ ({
                         cmsComponents: {
-                            ReturnOrderComponent: {
-                                component: ReturnOrderComponent,
+                            OrderReturnRequestListComponent: {
+                                component: OrderReturnRequestListComponent,
                                 guards: [AuthGuard],
                             },
                         },
                     }))),
-                    CancelOrReturnItemsModule,
-                ],
-                declarations: [ReturnOrderComponent],
-                exports: [ReturnOrderComponent],
-                entryComponents: [ReturnOrderComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ReturnOrderConfirmationComponent {
-    /**
-     * @param {?} orderDetailsService
-     * @param {?} cancelOrReturnService
-     */
-    constructor(orderDetailsService, cancelOrReturnService) {
-        this.orderDetailsService = orderDetailsService;
-        this.cancelOrReturnService = cancelOrReturnService;
-        this.isReturning$ = this.cancelOrReturnService.isReturning$;
-        this.returnedEntries$ = this.orderDetailsService.getOrderDetails().pipe(filter((/**
-         * @param {?} order
-         * @return {?}
-         */
-        order => Boolean(order.entries))), tap((/**
-         * @param {?} order
-         * @return {?}
-         */
-        order => (this.orderCode = order.code))), map((/**
-         * @param {?} order
-         * @return {?}
-         */
-        order => {
-            /** @type {?} */
-            const returnedEntries = [];
-            order.entries.forEach((/**
-             * @param {?} entry
-             * @return {?}
-             */
-            entry => {
-                if (this.cancelOrReturnService.isEntryCancelledOrReturned(entry)) {
-                    returnedEntries.push(entry);
-                }
-            }));
-            return returnedEntries;
-        })));
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.cancelOrReturnService.clearReturnRequest();
-        this.subscription = this.cancelOrReturnService.isReturnSuccess$.subscribe((/**
-         * @param {?} success
-         * @return {?}
-         */
-        success => {
-            if (success) {
-                this.cancelOrReturnService.returnSuccess();
-            }
-        }));
-    }
-    /**
-     * @return {?}
-     */
-    submit() {
-        this.cancelOrReturnService.returnOrder(this.orderCode);
-    }
-    /**
-     * @return {?}
-     */
-    back() {
-        this.cancelOrReturnService.goToOrderCancelOrReturn('orderReturn', this.orderCode);
-    }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
-    }
-}
-ReturnOrderConfirmationComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-return-order-confirmation',
-                template: "<h4>\n  {{ 'orderDetails.cancellationAndReturn.returnNote' | cxTranslate }}\n</h4>\n<div class=\"cx-nav row\">\n  <div class=\"col-xs-12 col-md-4 col-lg-3\">\n    <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n      {{ 'common.back' | cxTranslate }}\n    </button>\n  </div>\n  <div class=\"ol-xs-12 col-md-4 col-lg-3\">\n    <button\n      class=\"btn btn-block btn-primary\"\n      (click)=\"submit()\"\n      [disabled]=\"isReturning$ | async\"\n    >\n      {{ 'orderDetails.cancellationAndReturn.submit' | cxTranslate }}\n    </button>\n  </div>\n</div>\n\n<ng-container *ngIf=\"returnedEntries$ | async as returnedEntries\">\n  <cx-cancel-or-return-items\n    [entries]=\"returnedEntries\"\n    [cancelOrder]=\"false\"\n    [confirmRequest]=\"true\"\n  >\n  </cx-cancel-or-return-items>\n</ng-container>\n\n<div class=\"cx-nav row\">\n  <div class=\"col-xs-12 col-md-4 col-lg-3\">\n    <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n      {{ 'common.back' | cxTranslate }}\n    </button>\n  </div>\n  <div class=\"col-xs-12 col-md-4 col-lg-3\">\n    <button\n      class=\"btn btn-block btn-primary\"\n      (click)=\"submit()\"\n      [disabled]=\"isReturning$ | async\"\n    >\n      {{ 'orderDetails.cancellationAndReturn.submit' | cxTranslate }}\n    </button>\n  </div>\n</div>\n\n<h4>\n  {{ 'orderDetails.cancellationAndReturn.note' | cxTranslate }}\n</h4>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-/** @nocollapse */
-ReturnOrderConfirmationComponent.ctorParameters = () => [
-    { type: OrderDetailsService },
-    { type: OrderCancelOrReturnService }
-];
-if (false) {
-    /** @type {?} */
-    ReturnOrderConfirmationComponent.prototype.orderCode;
-    /** @type {?} */
-    ReturnOrderConfirmationComponent.prototype.isReturning$;
-    /** @type {?} */
-    ReturnOrderConfirmationComponent.prototype.subscription;
-    /** @type {?} */
-    ReturnOrderConfirmationComponent.prototype.returnedEntries$;
-    /**
-     * @type {?}
-     * @protected
-     */
-    ReturnOrderConfirmationComponent.prototype.orderDetailsService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    ReturnOrderConfirmationComponent.prototype.cancelOrReturnService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class CancelOrReturnRequestInputGuard {
-    /**
-     * @param {?} cancelOrReturnService
-     * @param {?} router
-     */
-    constructor(cancelOrReturnService, router) {
-        this.cancelOrReturnService = cancelOrReturnService;
-        this.router = router;
-    }
-    /**
-     * @param {?} route
-     * @return {?}
-     */
-    canActivate(route) {
-        if (this.cancelOrReturnService.cancelOrReturnRequestInputs.length > 0) {
-            return true;
-        }
-        else {
-            /** @type {?} */
-            const urlSegments = route.url.map((/**
-             * @param {?} seg
-             * @return {?}
-             */
-            seg => seg.path));
-            urlSegments.pop();
-            return this.router.parseUrl(urlSegments.join('/'));
-        }
-    }
-}
-CancelOrReturnRequestInputGuard.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root',
-            },] }
-];
-/** @nocollapse */
-CancelOrReturnRequestInputGuard.ctorParameters = () => [
-    { type: OrderCancelOrReturnService },
-    { type: Router }
-];
-/** @nocollapse */ CancelOrReturnRequestInputGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function CancelOrReturnRequestInputGuard_Factory() { return new CancelOrReturnRequestInputGuard(ɵɵinject(OrderCancelOrReturnService), ɵɵinject(Router)); }, token: CancelOrReturnRequestInputGuard, providedIn: "root" });
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    CancelOrReturnRequestInputGuard.prototype.cancelOrReturnService;
-    /**
-     * @type {?}
-     * @private
-     */
-    CancelOrReturnRequestInputGuard.prototype.router;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-const ɵ0$5 = {
-    pageLabel: '/my-account/order/return/confirmation',
-    cxRoute: 'orderReturnConfirmation',
-};
-class ReturnOrderConfirmationModule {
-}
-ReturnOrderConfirmationModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    RouterModule.forChild([
-                        {
-                            path: null,
-                            canActivate: [CmsPageGuard],
-                            component: PageLayoutComponent,
-                            data: ɵ0$5,
-                        },
-                    ]),
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            ReturnOrderConfirmationComponent: {
-                                component: ReturnOrderConfirmationComponent,
-                                guards: [AuthGuard, CancelOrReturnRequestInputGuard],
-                            },
-                        },
-                    }))),
-                    CancelOrReturnItemsModule,
+                    RouterModule,
+                    ListNavigationModule,
+                    UrlModule,
                     I18nModule,
                 ],
-                declarations: [ReturnOrderConfirmationComponent],
-                exports: [ReturnOrderConfirmationComponent],
-                entryComponents: [ReturnOrderConfirmationComponent],
+                declarations: [OrderReturnRequestListComponent],
+                exports: [OrderReturnRequestListComponent],
+                entryComponents: [OrderReturnRequestListComponent],
             },] }
 ];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class CancelOrderComponent {
-    /**
-     * @param {?} cancelOrReturnService
-     * @param {?} orderDetailsService
-     */
-    constructor(cancelOrReturnService, orderDetailsService) {
-        this.cancelOrReturnService = cancelOrReturnService;
-        this.orderDetailsService = orderDetailsService;
-        this.cancellableEntries$ = this.orderDetailsService.getOrderDetails().pipe(filter((/**
-         * @param {?} order
-         * @return {?}
-         */
-        order => Boolean(order.entries))), tap((/**
-         * @param {?} order
-         * @return {?}
-         */
-        order => (this.orderCode = order.code))), map((/**
-         * @param {?} order
-         * @return {?}
-         */
-        order => {
-            /** @type {?} */
-            const cancellableEntries = [];
-            order.entries.forEach((/**
-             * @param {?} entry
-             * @return {?}
-             */
-            entry => {
-                if (entry.entryNumber !== -1 && entry.cancellableQuantity > 0) {
-                    cancellableEntries.push(entry);
-                }
-            }));
-            return cancellableEntries;
-        })));
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.cancelOrReturnService.clearCancelOrReturnRequestInputs();
-    }
-    /**
-     * @param {?} entryInputs
-     * @return {?}
-     */
-    confirmCancel(entryInputs) {
-        this.cancelOrReturnService.cancelOrReturnRequestInputs = entryInputs;
-        this.cancelOrReturnService.goToOrderCancelOrReturn('orderCancelConfirmation', this.orderCode);
-    }
-}
-CancelOrderComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-cancel-order',
-                template: "<ng-container *ngIf=\"cancellableEntries$ | async as cancellableEntries\">\n  <cx-cancel-or-return-items\n    [entries]=\"cancellableEntries\"\n    [cancelOrder]=\"true\"\n    [orderCode]=\"orderCode\"\n    (confirm)=\"confirmCancel($event)\"\n  >\n  </cx-cancel-or-return-items>\n</ng-container>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-/** @nocollapse */
-CancelOrderComponent.ctorParameters = () => [
-    { type: OrderCancelOrReturnService },
-    { type: OrderDetailsService }
-];
-if (false) {
-    /** @type {?} */
-    CancelOrderComponent.prototype.orderCode;
-    /** @type {?} */
-    CancelOrderComponent.prototype.cancellableEntries$;
-    /**
-     * @type {?}
-     * @protected
-     */
-    CancelOrderComponent.prototype.cancelOrReturnService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    CancelOrderComponent.prototype.orderDetailsService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-const ɵ0$6 = {
-    pageLabel: '/my-account/order/cancel',
-    cxRoute: 'orderCancel',
-};
-class CancelOrderModule {
-}
-CancelOrderModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    RouterModule.forChild([
-                        {
-                            path: null,
-                            canActivate: [CmsPageGuard],
-                            component: PageLayoutComponent,
-                            data: ɵ0$6,
-                        },
-                    ]),
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            CancelOrderComponent: {
-                                component: CancelOrderComponent,
-                                guards: [AuthGuard],
-                            },
-                        },
-                    }))),
-                    CancelOrReturnItemsModule,
-                ],
-                declarations: [CancelOrderComponent],
-                exports: [CancelOrderComponent],
-                entryComponents: [CancelOrderComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class CancelOrderConfirmationComponent {
-    /**
-     * @param {?} orderDetailsService
-     * @param {?} cancelOrReturnService
-     */
-    constructor(orderDetailsService, cancelOrReturnService) {
-        this.orderDetailsService = orderDetailsService;
-        this.cancelOrReturnService = cancelOrReturnService;
-        this.isCancelling$ = this.cancelOrReturnService.isCancelling$;
-        this.cancelledEntries$ = this.orderDetailsService.getOrderDetails().pipe(filter((/**
-         * @param {?} order
-         * @return {?}
-         */
-        order => Boolean(order.entries))), tap((/**
-         * @param {?} order
-         * @return {?}
-         */
-        order => (this.orderCode = order.code))), map((/**
-         * @param {?} order
-         * @return {?}
-         */
-        order => {
-            /** @type {?} */
-            const cancelledEntries = [];
-            order.entries.forEach((/**
-             * @param {?} entry
-             * @return {?}
-             */
-            entry => {
-                if (this.cancelOrReturnService.isEntryCancelledOrReturned(entry)) {
-                    cancelledEntries.push(entry);
-                }
-            }));
-            return cancelledEntries;
-        })));
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.subscription = this.cancelOrReturnService.isCancelSuccess$.subscribe((/**
-         * @param {?} success
-         * @return {?}
-         */
-        success => {
-            if (success) {
-                this.cancelOrReturnService.cancelSuccess(this.orderCode);
-            }
-        }));
-    }
-    /**
-     * @return {?}
-     */
-    submit() {
-        this.cancelOrReturnService.cancelOrder(this.orderCode);
-    }
-    /**
-     * @return {?}
-     */
-    back() {
-        this.cancelOrReturnService.goToOrderCancelOrReturn('orderCancel', this.orderCode);
-    }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
-    }
-}
-CancelOrderConfirmationComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-cancel-order-confirmation',
-                template: "<h4>\n  {{ 'orderDetails.cancellationAndReturn.cancelNote' | cxTranslate }}\n</h4>\n\n<div class=\"cx-nav row\">\n  <div class=\"col-xs-12 col-md-4 col-lg-3\">\n    <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n      {{ 'common.back' | cxTranslate }}\n    </button>\n  </div>\n  <div class=\"col-xs-12 col-md-4 col-lg-3\">\n    <button\n      class=\"btn btn-block btn-primary\"\n      (click)=\"submit()\"\n      [disabled]=\"isCancelling$ | async\"\n    >\n      {{ 'orderDetails.cancellationAndReturn.submit' | cxTranslate }}\n    </button>\n  </div>\n</div>\n\n<ng-container *ngIf=\"cancelledEntries$ | async as cancelledEntries\">\n  <cx-cancel-or-return-items\n    [entries]=\"cancelledEntries\"\n    [cancelOrder]=\"true\"\n    [confirmRequest]=\"true\"\n  >\n  </cx-cancel-or-return-items>\n</ng-container>\n\n<div class=\"cx-nav row\">\n  <div class=\"col-xs-12 col-md-4 col-lg-3\">\n    <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n      {{ 'common.back' | cxTranslate }}\n    </button>\n  </div>\n  <div class=\"col-xs-12 col-md-4 col-lg-3\">\n    <button\n      class=\"btn btn-block btn-primary\"\n      (click)=\"submit()\"\n      [disabled]=\"isCancelling$ | async\"\n    >\n      {{ 'orderDetails.cancellationAndReturn.submit' | cxTranslate }}\n    </button>\n  </div>\n</div>\n\n<h4>\n  {{ 'orderDetails.cancellationAndReturn.note' | cxTranslate }}\n</h4>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }] }
-];
-/** @nocollapse */
-CancelOrderConfirmationComponent.ctorParameters = () => [
-    { type: OrderDetailsService },
-    { type: OrderCancelOrReturnService }
-];
-if (false) {
-    /** @type {?} */
-    CancelOrderConfirmationComponent.prototype.orderCode;
-    /** @type {?} */
-    CancelOrderConfirmationComponent.prototype.isCancelling$;
-    /** @type {?} */
-    CancelOrderConfirmationComponent.prototype.subscription;
-    /** @type {?} */
-    CancelOrderConfirmationComponent.prototype.cancelledEntries$;
-    /**
-     * @type {?}
-     * @protected
-     */
-    CancelOrderConfirmationComponent.prototype.orderDetailsService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    CancelOrderConfirmationComponent.prototype.cancelOrReturnService;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-const ɵ0$7 = {
-    pageLabel: '/my-account/order/cancel/confirmation',
-    cxRoute: 'orderCancelConfirmation',
-};
-class CancelOrderConfirmationModule {
-}
-CancelOrderConfirmationModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    RouterModule.forChild([
-                        {
-                            path: null,
-                            canActivate: [CmsPageGuard],
-                            component: PageLayoutComponent,
-                            data: ɵ0$7,
-                        },
-                    ]),
-                    ConfigModule.withConfig((/** @type {?} */ ({
-                        cmsComponents: {
-                            CancelOrderConfirmationComponent: {
-                                component: CancelOrderConfirmationComponent,
-                                guards: [AuthGuard, CancelOrReturnRequestInputGuard],
-                            },
-                        },
-                    }))),
-                    CancelOrReturnItemsModule,
-                    I18nModule,
-                ],
-                declarations: [CancelOrderConfirmationComponent],
-                exports: [CancelOrderConfirmationComponent],
-                entryComponents: [CancelOrderConfirmationComponent],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class OrderCancelOrReturnModule {
-}
-OrderCancelOrReturnModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CancelOrderModule,
-                    CancelOrderConfirmationModule,
-                    ReturnOrderModule,
-                    ReturnOrderConfirmationModule,
-                ],
-                providers: [OrderCancelOrReturnService],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 
 /**
  * @fileoverview added by tsickle
@@ -19078,12 +19100,18 @@ OrderModule.decorators = [
                 imports: [
                     OrderHistoryModule,
                     OrderDetailsModule,
-                    OrderCancelOrReturnModule,
+                    OrderCancellationModule,
+                    OrderReturnModule,
                     ReturnRequestListModule,
                     ReturnRequestDetailModule,
                 ],
             },] }
 ];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -27446,7 +27474,8 @@ CmsLibModule.decorators = [
                     QualtricsModule,
                     AddressBookModule,
                     OrderHistoryModule,
-                    OrderCancelOrReturnModule,
+                    OrderCancellationModule,
+                    OrderReturnModule,
                     ReturnRequestListModule,
                     ReturnRequestDetailModule,
                     ProductListModule,
@@ -27847,6 +27876,9 @@ const defaultStorefrontRoutesConfig = {
         paramsMapping: { productCode: 'code' },
     },
     termsAndConditions: { paths: ['terms-and-conditions'] },
+    orders: {
+        paths: ['my-account/orders'],
+    },
     orderDetails: {
         paths: ['my-account/order/:orderCode'],
         paramsMapping: { orderCode: 'code' },
@@ -27855,23 +27887,20 @@ const defaultStorefrontRoutesConfig = {
         paths: ['guest/order/:orderCode'],
         paramsMapping: { orderCode: 'code' },
     },
-    orders: {
-        paths: ['my-account/orders'],
-    },
     orderReturn: {
-        paths: ['my-account/order/:orderCode/return'],
+        paths: ['my-account/order/return/:orderCode'],
         paramsMapping: { orderCode: 'code' },
     },
     orderReturnConfirmation: {
-        paths: ['my-account/order/:orderCode/return/confirmation'],
+        paths: ['my-account/order/return/confirmation/:orderCode'],
         paramsMapping: { orderCode: 'code' },
     },
     orderCancel: {
-        paths: ['my-account/order/:orderCode/cancel'],
+        paths: ['my-account/order/cancel/:orderCode'],
         paramsMapping: { orderCode: 'code' },
     },
     orderCancelConfirmation: {
-        paths: ['my-account/order/:orderCode/cancel/confirmation'],
+        paths: ['my-account/order/cancel/confirmation/:orderCode'],
         paramsMapping: { orderCode: 'code' },
     },
     returnRequestDetails: {
@@ -28053,5 +28082,5 @@ B2cStorefrontModule.decorators = [
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AsmModule, AutoFocusDirective, AutoFocusDirectiveModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OnlyNumberDirective, OnlyNumberDirectiveModule, OrderCancelOrReturnModule, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnRequestListComponent, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultScrollConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, AsmLoaderModule as ɵa, asmFactory as ɵb, CancelOrderConfirmationComponent as ɵba, CancelOrReturnRequestInputGuard as ɵbb, ReturnOrderComponent as ɵbc, ReturnOrderConfirmationComponent as ɵbd, ReturnRequestService as ɵbe, ProductVariantSelectorModule as ɵbf, ProductVariantSelectorComponent as ɵbg, VariantStyleSelectorModule as ɵbh, VariantStyleSelectorComponent as ɵbi, VariantSizeSelectorModule as ɵbj, VariantSizeSelectorComponent as ɵbk, VariantColorSelectorModule as ɵbl, VariantColorSelectorComponent as ɵbm, VariantStyleIconsModule as ɵbn, VariantStyleIconsComponent as ɵbo, OrderDetailActionsComponent as ɵbp, TrackingEventsComponent as ɵbq, ConsignmentTrackingComponent as ɵbr, AddToHomeScreenService as ɵbs, GuestRegisterFormComponent as ɵbt, SkipLinkModule as ɵbu, skipLinkFactory as ɵbv, defaultSkipLinkConfig as ɵbw, SkipLinkConfig as ɵbx, SkipLinkScrollPosition as ɵby, SkipLinkComponent as ɵbz, ComponentMapperService as ɵc, SkipLinkService as ɵca, SkipLinkDirective as ɵcb, CheckoutLoginComponent as ɵcc, suffixUrlMatcher as ɵcd, addCmsRoute as ɵce, htmlLangProvider as ɵcf, setHtmlLangAttribute as ɵcg, AnonymousConsentsModule as ɵch, AnonymousConsentDialogComponent as ɵci, RoutingModule as ɵcj, defaultStorefrontRoutesConfig as ɵck, defaultRoutingConfig as ɵcl, AsmEnablerService as ɵd, AsmMainUiComponent as ɵe, AsmComponentService as ɵf, CSAgentLoginFormComponent as ɵg, CustomerSelectionComponent as ɵh, AsmSessionTimerComponent as ɵi, FormatTimerPipe as ɵj, CustomerEmulationComponent as ɵk, AppliedCouponsComponent as ɵl, AddToWishListModule as ɵm, AddToWishListComponent as ɵn, defaultCheckoutConfig as ɵo, ExpressCheckoutService as ɵp, defaultQualtricsConfig as ɵq, CmsRoutesService as ɵr, CmsMappingService as ɵs, CmsI18nService as ɵt, CmsGuardsService as ɵu, CancelOrderModule as ɵv, CancelOrderComponent as ɵw, OrderCancelOrReturnService as ɵx, CancelOrReturnItemsComponent as ɵy, CancelOrderConfirmationModule as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AsmModule, AutoFocusDirective, AutoFocusDirectiveModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OnlyNumberDirective, OnlyNumberDirectiveModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultScrollConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, AsmLoaderModule as ɵa, asmFactory as ɵb, VariantSizeSelectorModule as ɵba, VariantSizeSelectorComponent as ɵbb, VariantColorSelectorModule as ɵbc, VariantColorSelectorComponent as ɵbd, VariantStyleIconsModule as ɵbe, VariantStyleIconsComponent as ɵbf, OrderDetailActionsComponent as ɵbg, TrackingEventsComponent as ɵbh, ConsignmentTrackingComponent as ɵbi, AddToHomeScreenService as ɵbj, GuestRegisterFormComponent as ɵbk, SkipLinkModule as ɵbl, skipLinkFactory as ɵbm, defaultSkipLinkConfig as ɵbn, SkipLinkConfig as ɵbo, SkipLinkScrollPosition as ɵbp, SkipLinkComponent as ɵbq, SkipLinkService as ɵbr, SkipLinkDirective as ɵbs, CheckoutLoginComponent as ɵbt, suffixUrlMatcher as ɵbu, addCmsRoute as ɵbv, htmlLangProvider as ɵbw, setHtmlLangAttribute as ɵbx, AnonymousConsentsModule as ɵby, AnonymousConsentDialogComponent as ɵbz, ComponentMapperService as ɵc, RoutingModule as ɵca, defaultStorefrontRoutesConfig as ɵcb, defaultRoutingConfig as ɵcc, AsmEnablerService as ɵd, AsmMainUiComponent as ɵe, AsmComponentService as ɵf, CSAgentLoginFormComponent as ɵg, CustomerSelectionComponent as ɵh, AsmSessionTimerComponent as ɵi, FormatTimerPipe as ɵj, CustomerEmulationComponent as ɵk, AppliedCouponsComponent as ɵl, AddToWishListModule as ɵm, AddToWishListComponent as ɵn, defaultCheckoutConfig as ɵo, ExpressCheckoutService as ɵp, defaultQualtricsConfig as ɵq, CmsRoutesService as ɵr, CmsMappingService as ɵs, CmsI18nService as ɵt, CmsGuardsService as ɵu, ReturnRequestService as ɵv, ProductVariantSelectorModule as ɵw, ProductVariantSelectorComponent as ɵx, VariantStyleSelectorModule as ɵy, VariantStyleSelectorComponent as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
 //# sourceMappingURL=spartacus-storefront.js.map

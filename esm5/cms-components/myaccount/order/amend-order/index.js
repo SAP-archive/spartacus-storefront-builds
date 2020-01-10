@@ -1,0 +1,13 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export { AmendOrderActionsComponent } from './amend-order-actions/amend-order-actions.component';
+export { AmendOrderActionsModule } from './amend-order-actions/amend-order-actions.module';
+export { CancelOrReturnItemsComponent } from './amend-order-items/amend-order-items.component';
+export { AmendOrderItemsModule } from './amend-order-items/amend-order-items.module';
+export { AmendOrderType } from './amend-order.model';
+export { OrderAmendService } from './amend-order.service';
+export { CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderComponent, CancelOrderModule, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService } from './cancellations/index';
+export { OrderReturnGuard, OrderReturnModule, OrderReturnService, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderComponent, ReturnOrderModule } from './returns/index';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJjbXMtY29tcG9uZW50cy9teWFjY291bnQvb3JkZXIvYW1lbmQtb3JkZXIvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLDJDQUFjLHFEQUFxRCxDQUFDO0FBQ3BFLHdDQUFjLGtEQUFrRCxDQUFDO0FBQ2pFLDZDQUFjLGlEQUFpRCxDQUFDO0FBQ2hFLHNDQUFjLDhDQUE4QyxDQUFDO0FBQzdELCtCQUFjLHFCQUFxQixDQUFDO0FBQ3BDLGtDQUFjLHVCQUF1QixDQUFDO0FBQ3RDLG9NQUFjLHVCQUF1QixDQUFDO0FBQ3RDLGtMQUFjLGlCQUFpQixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0ICogZnJvbSAnLi9hbWVuZC1vcmRlci1hY3Rpb25zL2FtZW5kLW9yZGVyLWFjdGlvbnMuY29tcG9uZW50JztcbmV4cG9ydCAqIGZyb20gJy4vYW1lbmQtb3JkZXItYWN0aW9ucy9hbWVuZC1vcmRlci1hY3Rpb25zLm1vZHVsZSc7XG5leHBvcnQgKiBmcm9tICcuL2FtZW5kLW9yZGVyLWl0ZW1zL2FtZW5kLW9yZGVyLWl0ZW1zLmNvbXBvbmVudCc7XG5leHBvcnQgKiBmcm9tICcuL2FtZW5kLW9yZGVyLWl0ZW1zL2FtZW5kLW9yZGVyLWl0ZW1zLm1vZHVsZSc7XG5leHBvcnQgKiBmcm9tICcuL2FtZW5kLW9yZGVyLm1vZGVsJztcbmV4cG9ydCAqIGZyb20gJy4vYW1lbmQtb3JkZXIuc2VydmljZSc7XG5leHBvcnQgKiBmcm9tICcuL2NhbmNlbGxhdGlvbnMvaW5kZXgnO1xuZXhwb3J0ICogZnJvbSAnLi9yZXR1cm5zL2luZGV4JztcbiJdfQ==
