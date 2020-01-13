@@ -17331,7 +17331,13 @@ class OrderCancellationService extends OrderAmendService {
         /** @type {?} */
         const entries = this.form.value.entries;
         /** @type {?} */
-        const inputs = Object.keys(entries).map((/**
+        const inputs = Object.keys(entries)
+            .filter((/**
+         * @param {?} entryNumber
+         * @return {?}
+         */
+        entryNumber => (/** @type {?} */ (entries[entryNumber])) > 0))
+            .map((/**
          * @param {?} entryNumber
          * @return {?}
          */
@@ -17661,7 +17667,13 @@ class OrderReturnService extends OrderAmendService {
         /** @type {?} */
         const entries = this.form.value.entries;
         /** @type {?} */
-        const inputs = Object.keys(entries).map((/**
+        const inputs = Object.keys(entries)
+            .filter((/**
+         * @param {?} entryNumber
+         * @return {?}
+         */
+        entryNumber => (/** @type {?} */ (entries[entryNumber])) > 0))
+            .map((/**
          * @param {?} entryNumber
          * @return {?}
          */

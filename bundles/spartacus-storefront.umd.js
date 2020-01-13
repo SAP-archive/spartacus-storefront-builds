@@ -20356,7 +20356,13 @@
             /** @type {?} */
             var entries = this.form.value.entries;
             /** @type {?} */
-            var inputs = Object.keys(entries).map((/**
+            var inputs = Object.keys(entries)
+                .filter((/**
+             * @param {?} entryNumber
+             * @return {?}
+             */
+            function (entryNumber) { return (/** @type {?} */ (entries[entryNumber])) > 0; }))
+                .map((/**
              * @param {?} entryNumber
              * @return {?}
              */
@@ -20708,7 +20714,13 @@
             /** @type {?} */
             var entries = this.form.value.entries;
             /** @type {?} */
-            var inputs = Object.keys(entries).map((/**
+            var inputs = Object.keys(entries)
+                .filter((/**
+             * @param {?} entryNumber
+             * @return {?}
+             */
+            function (entryNumber) { return (/** @type {?} */ (entries[entryNumber])) > 0; }))
+                .map((/**
              * @param {?} entryNumber
              * @return {?}
              */
