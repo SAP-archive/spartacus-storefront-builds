@@ -17,6 +17,7 @@ export { AppliedCouponsComponent as ɵl } from './cms-components/cart/cart-coupo
 export { defaultCheckoutConfig as ɵo } from './cms-components/checkout/config/default-checkout-config';
 export { ExpressCheckoutService as ɵp } from './cms-components/checkout/services/express-checkout.service';
 export { defaultQualtricsConfig as ɵq } from './cms-components/misc/qualtrics/config/default-qualtrics-config';
+export { MyCouponsComponentService as ɵbu } from './cms-components/myaccount/my-coupons/my-coupons.component.service';
 export { OrderDetailActionsComponent as ɵbg } from './cms-components/myaccount/order/order-details/order-detail-actions/order-detail-actions.component';
 export { ConsignmentTrackingComponent as ɵbi } from './cms-components/myaccount/order/order-details/order-detail-items/consignment-tracking/consignment-tracking.component';
 export { TrackingEventsComponent as ɵbh } from './cms-components/myaccount/order/order-details/order-detail-items/consignment-tracking/tracking-events/tracking-events.component';
@@ -35,11 +36,11 @@ export { VariantStyleSelectorModule as ɵy } from './cms-components/product/prod
 export { CheckoutLoginComponent as ɵbt } from './cms-components/user/checkout-login/checkout-login.component';
 export { ComponentMapperService as ɵc } from './cms-structure/page/component/component-mapper.service';
 export { AddToHomeScreenService as ɵbj } from './cms-structure/pwa/services/add-to-home-screen.service';
-export { addCmsRoute as ɵbv } from './cms-structure/routing/cms-route/add-cms-route';
-export { defaultRoutingConfig as ɵcc, defaultStorefrontRoutesConfig as ɵcb } from './cms-structure/routing/default-routing-config';
-export { RoutingModule as ɵca } from './cms-structure/routing/routing.module';
-export { suffixUrlMatcher as ɵbu } from './cms-structure/routing/suffix-routes/suffix-url-matcher';
-export { htmlLangProvider as ɵbw, setHtmlLangAttribute as ɵbx } from './cms-structure/seo/html-lang-provider';
+export { addCmsRoute as ɵbw } from './cms-structure/routing/cms-route/add-cms-route';
+export { defaultRoutingConfig as ɵcd, defaultStorefrontRoutesConfig as ɵcc } from './cms-structure/routing/default-routing-config';
+export { RoutingModule as ɵcb } from './cms-structure/routing/routing.module';
+export { suffixUrlMatcher as ɵbv } from './cms-structure/routing/suffix-routes/suffix-url-matcher';
+export { htmlLangProvider as ɵbx, setHtmlLangAttribute as ɵby } from './cms-structure/seo/html-lang-provider';
 export { CmsGuardsService as ɵu } from './cms-structure/services/cms-guards.service';
 export { CmsI18nService as ɵt } from './cms-structure/services/cms-i18n.service';
 export { CmsMappingService as ɵs } from './cms-structure/services/cms-mapping.service';
@@ -50,5 +51,5 @@ export { SkipLinkConfig as ɵbo, SkipLinkScrollPosition as ɵbp } from './layout
 export { SkipLinkDirective as ɵbs } from './layout/a11y/skip-link/directive/skip-link.directive';
 export { SkipLinkService as ɵbr } from './layout/a11y/skip-link/service/skip-link.service';
 export { SkipLinkModule as ɵbl, skipLinkFactory as ɵbm } from './layout/a11y/skip-link/skip-link.module';
-export { AnonymousConsentsModule as ɵby } from './shared/components/anonymous-consents/anonymous-consents.module';
-export { AnonymousConsentDialogComponent as ɵbz } from './shared/components/anonymous-consents/dialog/anonymous-consent-dialog.component';
+export { AnonymousConsentsModule as ɵbz } from './shared/components/anonymous-consents/anonymous-consents.module';
+export { AnonymousConsentDialogComponent as ɵca } from './shared/components/anonymous-consents/dialog/anonymous-consent-dialog.component';

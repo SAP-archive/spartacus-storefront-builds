@@ -11575,12 +11575,17 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CartCouponComponent = /** @class */ (function () {
-        function CartCouponComponent(cartService, authService, cartVoucherService, formBuilder) {
+        function CartCouponComponent(cartService, authService, cartVoucherService, formBuilder, customerCouponService, featureConfig) {
             this.cartService = cartService;
             this.authService = authService;
             this.cartVoucherService = cartVoucherService;
             this.formBuilder = formBuilder;
+            this.customerCouponService = customerCouponService;
+            this.featureConfig = featureConfig;
+            this.MAX_CUSTOMER_COUPON_PAGE = 100;
+            this.ignoreCloseEvent = false;
             this.subscription = new Subscription.Subscription();
+            this.couponBoxIsActive = false;
         }
         /**
          * @return {?}
@@ -11590,25 +11595,55 @@
          */
         function () {
             var _this = this;
-            this.cart$ = rxjs.combineLatest([
-                this.cartService.getActive(),
-                this.authService.getOccUserId(),
-            ]).pipe(operators.tap((/**
-             * @param {?} __0
-             * @return {?}
-             */
-            function (_a) {
-                var _b = __read(_a, 2), cart = _b[0], userId = _b[1];
-                return (_this.cartId =
-                    userId === core$1.OCC_USER_ID_ANONYMOUS ? cart.guid : cart.code);
-            })), operators.map((/**
-             * @param {?} __0
-             * @return {?}
-             */
-            function (_a) {
-                var _b = __read(_a, 1), cart = _b[0];
-                return cart;
-            })));
+            if (this.customerCouponService) {
+                this.customerCouponService.loadCustomerCoupons(this.MAX_CUSTOMER_COUPON_PAGE);
+            }
+            if (this.featureConfig && this.featureConfig.isLevel('1.5')) {
+                this.cart$ = rxjs.combineLatest([
+                    this.cartService.getActive(),
+                    this.authService.getOccUserId(),
+                    this.customerCouponService.getCustomerCoupons(this.MAX_CUSTOMER_COUPON_PAGE),
+                ]).pipe(operators.tap((/**
+                 * @param {?} __0
+                 * @return {?}
+                 */
+                function (_a) {
+                    var _b = __read(_a, 3), cart = _b[0], userId = _b[1], customerCoupons = _b[2];
+                    _this.cartId =
+                        userId === core$1.OCC_USER_ID_ANONYMOUS ? cart.guid : cart.code;
+                    _this.getApplicableCustomerCoupons(cart, customerCoupons.coupons);
+                })), operators.map((/**
+                 * @param {?} __0
+                 * @return {?}
+                 */
+                function (_a) {
+                    var _b = __read(_a, 1), cart = _b[0];
+                    return cart;
+                })));
+            }
+            //TODO(issue:#5971) Deprecated since 1.5
+            else {
+                this.cart$ = rxjs.combineLatest([
+                    this.cartService.getActive(),
+                    this.authService.getOccUserId(),
+                ]).pipe(operators.tap((/**
+                 * @param {?} __0
+                 * @return {?}
+                 */
+                function (_a) {
+                    var _b = __read(_a, 2), cart = _b[0], userId = _b[1];
+                    return (_this.cartId =
+                        userId === core$1.OCC_USER_ID_ANONYMOUS ? cart.guid : cart.code);
+                })), operators.map((/**
+                 * @param {?} __0
+                 * @return {?}
+                 */
+                function (_a) {
+                    var _b = __read(_a, 1), cart = _b[0];
+                    return cart;
+                })));
+            }
+            //TODO(issue:#5971) Deprecated since 1.5
             this.cartIsLoading$ = this.cartService
                 .getLoaded()
                 .pipe(operators.map((/**
@@ -11644,6 +11679,29 @@
             function (success) {
                 _this.onSuccess(success);
             })));
+            this.subscription.add(this.cartVoucherService.getAddVoucherResultError().subscribe((/**
+             * @param {?} error
+             * @return {?}
+             */
+            function (error) {
+                _this.onError(error);
+            })));
+        };
+        /**
+         * @protected
+         * @param {?} error
+         * @return {?}
+         */
+        CartCouponComponent.prototype.onError = /**
+         * @protected
+         * @param {?} error
+         * @return {?}
+         */
+        function (error) {
+            if (error) {
+                this.customerCouponService.loadCustomerCoupons(this.MAX_CUSTOMER_COUPON_PAGE);
+                this.cartVoucherService.resetAddVoucherProcessingState();
+            }
         };
         /**
          * @param {?} success
@@ -11660,6 +11718,36 @@
             }
         };
         /**
+         * @protected
+         * @param {?} cart
+         * @param {?} coupons
+         * @return {?}
+         */
+        CartCouponComponent.prototype.getApplicableCustomerCoupons = /**
+         * @protected
+         * @param {?} cart
+         * @param {?} coupons
+         * @return {?}
+         */
+        function (cart, coupons) {
+            var _this = this;
+            this.applicableCoupons = coupons || [];
+            if (cart.appliedVouchers) {
+                cart.appliedVouchers.forEach((/**
+                 * @param {?} appliedVoucher
+                 * @return {?}
+                 */
+                function (appliedVoucher) {
+                    _this.applicableCoupons = _this.applicableCoupons.filter((/**
+                     * @param {?} coupon
+                     * @return {?}
+                     */
+                    function (coupon) { return coupon.couponId !== appliedVoucher.code; }));
+                }));
+            }
+            this.filteredCoupons = this.applicableCoupons;
+        };
+        /**
          * @return {?}
          */
         CartCouponComponent.prototype.applyVoucher = /**
@@ -11667,6 +11755,73 @@
          */
         function () {
             this.cartVoucherService.addVoucher(this.form.value.couponCode, this.cartId);
+        };
+        /**
+         * @param {?} couponId
+         * @return {?}
+         */
+        CartCouponComponent.prototype.applyCustomerCoupon = /**
+         * @param {?} couponId
+         * @return {?}
+         */
+        function (couponId) {
+            this.cartVoucherService.addVoucher(couponId, this.cartId);
+            this.couponBoxIsActive = false;
+        };
+        /**
+         * @param {?} query
+         * @return {?}
+         */
+        CartCouponComponent.prototype.filter = /**
+         * @param {?} query
+         * @return {?}
+         */
+        function (query) {
+            /** @type {?} */
+            var filterValue = query.toLowerCase();
+            this.filteredCoupons = this.applicableCoupons.filter((/**
+             * @param {?} coupon
+             * @return {?}
+             */
+            function (coupon) { return coupon.couponId.toLowerCase().indexOf(filterValue) > -1; }));
+        };
+        /**
+         * @return {?}
+         */
+        CartCouponComponent.prototype.open = /**
+         * @return {?}
+         */
+        function () {
+            this.filteredCoupons = this.applicableCoupons;
+            if (this.applicableCoupons.length > 0) {
+                this.couponBoxIsActive = true;
+            }
+        };
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        CartCouponComponent.prototype.close = /**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
+            if (!this.ignoreCloseEvent) {
+                this.couponBoxIsActive = false;
+                if (event && event.target) {
+                    ((/** @type {?} */ (event.target))).blur();
+                }
+            }
+            this.ignoreCloseEvent = false;
+        };
+        /**
+         * @return {?}
+         */
+        CartCouponComponent.prototype.disableClose = /**
+         * @return {?}
+         */
+        function () {
+            this.ignoreCloseEvent = true;
         };
         /**
          * @return {?}
@@ -11683,7 +11838,7 @@
         CartCouponComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-cart-coupon',
-                        template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <div class=\"cx-cart-coupon-title\">\n    {{ 'voucher.coupon' | cxTranslate }}\n  </div>\n  <div class=\"form-group \">\n    <form (submit)=\"applyVoucher()\" [formGroup]=\"form\">\n      <div class=\"row\">\n        <div class=\"col-md-8\">\n          <input\n            type=\"text\"\n            class=\"form-control input-coupon-code\"\n            id=\"applyVoucher\"\n            formControlName=\"couponCode\"\n            placeholder=\"{{ 'voucher.placeholder' | cxTranslate }}\"\n          />\n        </div>\n        <div class=\"col-md-4\">\n          <button\n            class=\"btn btn-block btn-action apply-coupon-button\"\n            type=\"submit\"\n            [disabled]=\"submitDisabled$ | async\"\n            [class.disabled]=\"submitDisabled$ | async\"\n          >\n            {{ 'voucher.apply' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </form>\n  </div>\n\n  <cx-applied-coupons\n    [vouchers]=\"cart.appliedVouchers\"\n    [cartIsLoading]=\"cartIsLoading$ | async\"\n    [isReadOnly]=\"false\"\n  >\n  </cx-applied-coupons>\n</ng-container>\n"
+                        template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <div class=\"cx-cart-coupon-title\">\n    {{ 'voucher.coupon' | cxTranslate }}\n  </div>\n  <div class=\"form-group \">\n    <ng-container *cxFeatureLevel=\"'1.5'\">\n      <form (submit)=\"applyVoucher()\" [formGroup]=\"form\" autocomplete=\"off\">\n        <div class=\"row\">\n          <div class=\"col-md-8\">\n            <div class=\"cx-apply-voucher\">\n              <input\n                #couponInput\n                class=\"form-control input-coupon-code\"\n                id=\"applyVoucher\"\n                formControlName=\"couponCode\"\n                [placeholder]=\"'voucher.placeholder' | cxTranslate\"\n                aria-label=\"applyVoucher\"\n                (focus)=\"open()\"\n                (input)=\"filter(couponInput.value)\"\n                (blur)=\"close($event)\"\n                (keydown.escape)=\"close($event)\"\n                autocomplete=\"off\"\n              />\n\n              <div [class.couponbox-is-active]=\"couponBoxIsActive\">\n                <div\n                  *ngIf=\"filteredCoupons && filteredCoupons.length > 0\"\n                  class=\"cx-customer-coupons\"\n                  (click)=\"close($event)\"\n                >\n                  <div class=\"coupons\" (mousedown)=\"disableClose()\">\n                    <a\n                      *ngFor=\"let coupon of filteredCoupons\"\n                      (click)=\"applyCustomerCoupon(coupon.couponId)\"\n                    >\n                      <div class=\"coupon-id\">{{ coupon.couponId }}</div>\n                    </a>\n                  </div>\n                </div>\n              </div>\n            </div>\n          </div>\n\n          <div class=\"col-md-4\">\n            <button\n              class=\"btn btn-block btn-action apply-coupon-button\"\n              type=\"submit\"\n              [disabled]=\"submitDisabled$ | async\"\n              [class.disabled]=\"submitDisabled$ | async\"\n            >\n              {{ 'voucher.apply' | cxTranslate }}\n            </button>\n          </div>\n        </div>\n      </form>\n    </ng-container>\n\n    <ng-container *cxFeatureLevel=\"'!1.5'\">\n      <form (submit)=\"applyVoucher()\" [formGroup]=\"form\">\n        <div class=\"row\">\n          <div class=\"col-md-8\">\n            <input\n              type=\"text\"\n              class=\"form-control input-coupon-code\"\n              id=\"applyVoucher\"\n              formControlName=\"couponCode\"\n              placeholder=\"{{ 'voucher.placeholder' | cxTranslate }}\"\n            />\n          </div>\n          <div class=\"col-md-4\">\n            <button\n              class=\"btn btn-block btn-action apply-coupon-button\"\n              type=\"submit\"\n              [disabled]=\"submitDisabled$ | async\"\n              [class.disabled]=\"submitDisabled$ | async\"\n            >\n              {{ 'voucher.apply' | cxTranslate }}\n            </button>\n          </div>\n        </div>\n      </form>\n    </ng-container>\n  </div>\n\n  <cx-applied-coupons\n    [vouchers]=\"cart.appliedVouchers\"\n    [cartIsLoading]=\"cartIsLoading$ | async\"\n    [isReadOnly]=\"false\"\n  >\n  </cx-applied-coupons>\n</ng-container>\n"
                     }] }
         ];
         /** @nocollapse */
@@ -11691,11 +11846,15 @@
             { type: core$1.CartService },
             { type: core$1.AuthService },
             { type: core$1.CartVoucherService },
-            { type: forms.FormBuilder }
+            { type: forms.FormBuilder },
+            { type: core$1.CustomerCouponService },
+            { type: core$1.FeatureConfigService }
         ]; };
         return CartCouponComponent;
     }());
     if (false) {
+        /** @type {?} */
+        CartCouponComponent.prototype.MAX_CUSTOMER_COUPON_PAGE;
         /** @type {?} */
         CartCouponComponent.prototype.form;
         /** @type {?} */
@@ -11706,11 +11865,22 @@
         CartCouponComponent.prototype.cart$;
         /** @type {?} */
         CartCouponComponent.prototype.cartId;
+        /** @type {?} */
+        CartCouponComponent.prototype.applicableCoupons;
+        /** @type {?} */
+        CartCouponComponent.prototype.filteredCoupons;
+        /**
+         * @type {?}
+         * @private
+         */
+        CartCouponComponent.prototype.ignoreCloseEvent;
         /**
          * @type {?}
          * @private
          */
         CartCouponComponent.prototype.subscription;
+        /** @type {?} */
+        CartCouponComponent.prototype.couponBoxIsActive;
         /**
          * @type {?}
          * @private
@@ -11731,6 +11901,16 @@
          * @private
          */
         CartCouponComponent.prototype.formBuilder;
+        /**
+         * @type {?}
+         * @protected
+         */
+        CartCouponComponent.prototype.customerCouponService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        CartCouponComponent.prototype.featureConfig;
     }
 
     /**
@@ -11745,7 +11925,9 @@
                         declarations: [CartCouponComponent, AppliedCouponsComponent],
                         exports: [CartCouponComponent, AppliedCouponsComponent],
                         imports: [
+                            core$1.FeaturesConfigModule,
                             common.CommonModule,
+                            ngSelect.NgSelectModule,
                             forms.FormsModule,
                             forms.ReactiveFormsModule,
                             core$1.I18nModule,
@@ -23461,6 +23643,615 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var MyCouponsComponentService = /** @class */ (function () {
+        function MyCouponsComponentService(routingService, translation) {
+            this.routingService = routingService;
+            this.translation = translation;
+            this.RELEVANCE = ':relevance';
+            this.CUSTOMER_COUPON_CODE = ':customerCouponCode:';
+        }
+        /**
+         * @param {?} coupon
+         * @return {?}
+         */
+        MyCouponsComponentService.prototype.launchSearchPage = /**
+         * @param {?} coupon
+         * @return {?}
+         */
+        function (coupon) {
+            this.routingService.go({
+                cxRoute: 'search',
+                params: { query: this.buildSearchParam(coupon) },
+            }, { couponcode: coupon.couponId });
+        };
+        /**
+         * @private
+         * @param {?} coupon
+         * @return {?}
+         */
+        MyCouponsComponentService.prototype.buildSearchParam = /**
+         * @private
+         * @param {?} coupon
+         * @return {?}
+         */
+        function (coupon) {
+            return coupon.allProductsApplicable
+                ? this.RELEVANCE
+                : this.RELEVANCE + this.CUSTOMER_COUPON_CODE + coupon.couponId;
+        };
+        /**
+         * @return {?}
+         */
+        MyCouponsComponentService.prototype.getSortLabels = /**
+         * @return {?}
+         */
+        function () {
+            return rxjs.combineLatest([
+                this.translation.translate('myCoupons.startDateAsc'),
+                this.translation.translate('myCoupons.startDateDesc'),
+                this.translation.translate('myCoupons.endDateAsc'),
+                this.translation.translate('myCoupons.endDateDesc'),
+            ]).pipe(operators.map((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 4), textByStartDateAsc = _b[0], textByStartDateDesc = _b[1], textByEndDateAsc = _b[2], textByEndDateDesc = _b[3];
+                return {
+                    byStartDateAsc: textByStartDateAsc,
+                    byStartDateDesc: textByStartDateDesc,
+                    byEndDateAsc: textByEndDateAsc,
+                    byEndDateDesc: textByEndDateDesc,
+                };
+            })));
+        };
+        MyCouponsComponentService.decorators = [
+            { type: core.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        MyCouponsComponentService.ctorParameters = function () { return [
+            { type: core$1.RoutingService },
+            { type: core$1.TranslationService }
+        ]; };
+        /** @nocollapse */ MyCouponsComponentService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function MyCouponsComponentService_Factory() { return new MyCouponsComponentService(core.ɵɵinject(core$1.RoutingService), core.ɵɵinject(core$1.TranslationService)); }, token: MyCouponsComponentService, providedIn: "root" });
+        return MyCouponsComponentService;
+    }());
+    if (false) {
+        /** @type {?} */
+        MyCouponsComponentService.prototype.sortLabels;
+        /**
+         * @type {?}
+         * @protected
+         */
+        MyCouponsComponentService.prototype.RELEVANCE;
+        /**
+         * @type {?}
+         * @protected
+         */
+        MyCouponsComponentService.prototype.CUSTOMER_COUPON_CODE;
+        /**
+         * @type {?}
+         * @protected
+         */
+        MyCouponsComponentService.prototype.routingService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        MyCouponsComponentService.prototype.translation;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var MyCouponsComponent = /** @class */ (function () {
+        function MyCouponsComponent(couponService, myCouponsComponentService) {
+            this.couponService = couponService;
+            this.myCouponsComponentService = myCouponsComponentService;
+            this.iconTypes = ICON_TYPE;
+            this.subscriptions = new rxjs.Subscription();
+            this.PAGE_SIZE = 10;
+            this.sortMapping = {
+                byStartDateAsc: 'startDate:asc',
+                byStartDateDesc: 'startDate:desc',
+                byEndDateAsc: 'endDate:asc',
+                byEndDateDesc: 'endDate:desc',
+            };
+            this.sort = 'byStartDateAsc';
+            this.sortOptions = [
+                {
+                    code: 'byStartDateAsc',
+                    selected: false,
+                },
+                {
+                    code: 'byStartDateDesc',
+                    selected: false,
+                },
+                {
+                    code: 'byEndDateAsc',
+                    selected: false,
+                },
+                {
+                    code: 'byEndDateDesc',
+                    selected: false,
+                },
+            ];
+        }
+        /**
+         * @return {?}
+         */
+        MyCouponsComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this.couponService.loadCustomerCoupons(this.PAGE_SIZE);
+            this.couponResult$ = this.couponService
+                .getCustomerCoupons(this.PAGE_SIZE)
+                .pipe(operators.tap((/**
+             * @param {?} coupons
+             * @return {?}
+             */
+            function (coupons) {
+                return (_this.pagination = {
+                    currentPage: coupons.pagination.page,
+                    pageSize: coupons.pagination.count,
+                    totalPages: coupons.pagination.totalPages,
+                    totalResults: coupons.pagination.totalCount,
+                    sort: _this.sort,
+                });
+            })));
+            this.couponsLoading$ = this.couponService.getCustomerCouponsLoading();
+            this.couponSubscriptionLoading$ = rxjs.combineLatest([
+                this.couponService.getSubscribeCustomerCouponResultLoading(),
+                this.couponService.getUnsubscribeCustomerCouponResultLoading(),
+            ]).pipe(operators.map((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 2), subscribing = _b[0], unsubscribing = _b[1];
+                return subscribing || unsubscribing;
+            })));
+            this.sortLabels = this.myCouponsComponentService.getSortLabels();
+            this.subscriptions
+                .add(this.couponService
+                .getSubscribeCustomerCouponResultError()
+                .subscribe((/**
+             * @param {?} error
+             * @return {?}
+             */
+            function (error) {
+                _this.subscriptionFail(error);
+            })))
+                .add(this.couponService
+                .getUnsubscribeCustomerCouponResultError()
+                .subscribe((/**
+             * @param {?} error
+             * @return {?}
+             */
+            function (error) {
+                _this.subscriptionFail(error);
+            })));
+        };
+        /**
+         * @private
+         * @param {?} error
+         * @return {?}
+         */
+        MyCouponsComponent.prototype.subscriptionFail = /**
+         * @private
+         * @param {?} error
+         * @return {?}
+         */
+        function (error) {
+            if (error) {
+                this.couponService.loadCustomerCoupons(this.PAGE_SIZE);
+            }
+        };
+        /**
+         * @param {?} sort
+         * @return {?}
+         */
+        MyCouponsComponent.prototype.sortChange = /**
+         * @param {?} sort
+         * @return {?}
+         */
+        function (sort) {
+            this.sort = sort;
+            this.couponService.loadCustomerCoupons(this.PAGE_SIZE, this.pagination.currentPage, this.sortMapping[sort]);
+        };
+        /**
+         * @param {?} page
+         * @return {?}
+         */
+        MyCouponsComponent.prototype.pageChange = /**
+         * @param {?} page
+         * @return {?}
+         */
+        function (page) {
+            this.couponService.loadCustomerCoupons(this.PAGE_SIZE, page, this.sortMapping[this.sort]);
+        };
+        /**
+         * @param {?} __0
+         * @return {?}
+         */
+        MyCouponsComponent.prototype.notificationChange = /**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var couponId = _a.couponId, notification = _a.notification;
+            if (notification) {
+                this.couponService.subscribeCustomerCoupon(couponId);
+            }
+            else {
+                this.couponService.unsubscribeCustomerCoupon(couponId);
+            }
+        };
+        /**
+         * @return {?}
+         */
+        MyCouponsComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
+            this.subscriptions.unsubscribe();
+        };
+        MyCouponsComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-my-coupons',
+                        template: "<div class=\"cx-section\">\n  <ng-container *ngIf=\"!(couponsLoading$ | async); else loading\">\n    <ng-container *ngIf=\"couponResult$ | async as couponResult\">\n      <div class=\"cx-my-coupons-header\">\n        <h3>{{ 'myCoupons.myCoupons' | cxTranslate }}</h3>\n      </div>\n\n      <ng-container\n        *ngIf=\"couponResult.pagination.totalCount > 0; else noCoupons\"\n      >\n        <div class=\"cx-my-coupons-sort top row\">\n          <div\n            class=\"cx-my-coupons-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"sortOptions\"\n              [sortLabels]=\"sortLabels | async\"\n              (sortListEvent)=\"sortChange($event)\"\n              [selectedOption]=\"sort\"\n            >\n            </cx-sorting>\n          </div>\n          <div class=\"cx-my-coupons-pagination cx-mycoupon-thead-mobile\">\n            <cx-pagination\n              [pagination]=\"pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n\n        <div class=\"row cx-coupon-deck\">\n          <div\n            *ngFor=\"let coupon of couponResult.coupons\"\n            class=\"col-md-6 cx-coupon-card\"\n          >\n            <cx-coupon-card\n              [coupon]=\"coupon\"\n              [couponSubscriptionLoading$]=\"couponSubscriptionLoading$\"\n              (notificationChanged)=\"notificationChange($event)\"\n            ></cx-coupon-card>\n          </div>\n        </div>\n\n        <div class=\"cx-my-coupons-sort bottom row\">\n          <div\n            class=\"cx-my-coupons-form-group form-group cx-mycoupon-thead-mobile col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"sortOptions\"\n              [sortLabels]=\"sortLabels | async\"\n              (sortListEvent)=\"sortChange($event)\"\n              [selectedOption]=\"sort\"\n              placeholder=\"{{ 'myCoupons.sortByMostRecent' | cxTranslate }}\"\n            >\n            </cx-sorting>\n          </div>\n          <div class=\"cx-my-coupons-pagination\">\n            <cx-pagination\n              [pagination]=\"pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n        <div class=\"cx-my-coupons-notes\">\n          <span>\n            <cx-icon [type]=\"iconTypes.INFO\"></cx-icon>\n            {{ 'myCoupons.notesPreffix' | cxTranslate\n            }}<a [routerLink]=\"['/my-account/notification-preference']\">{{\n              'myCoupons.notesLink' | cxTranslate\n            }}</a\n            >{{ 'myCoupons.notesSuffix' | cxTranslate }}</span\n          >\n        </div>\n      </ng-container>\n    </ng-container>\n\n    <ng-template #noCoupons>\n      <section>\n        <p class=\"cx-section-msg\">\n          {{ 'myCoupons.noCouponsMessage' | cxTranslate }}\n        </p>\n      </section>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"col-md-12 cx-coupon-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </ng-template>\n</div>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        MyCouponsComponent.ctorParameters = function () { return [
+            { type: core$1.CustomerCouponService },
+            { type: MyCouponsComponentService }
+        ]; };
+        return MyCouponsComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        MyCouponsComponent.prototype.couponResult$;
+        /** @type {?} */
+        MyCouponsComponent.prototype.couponsLoading$;
+        /** @type {?} */
+        MyCouponsComponent.prototype.couponSubscriptionLoading$;
+        /** @type {?} */
+        MyCouponsComponent.prototype.iconTypes;
+        /**
+         * @type {?}
+         * @private
+         */
+        MyCouponsComponent.prototype.subscriptions;
+        /**
+         * @type {?}
+         * @private
+         */
+        MyCouponsComponent.prototype.PAGE_SIZE;
+        /**
+         * @type {?}
+         * @private
+         */
+        MyCouponsComponent.prototype.sortMapping;
+        /** @type {?} */
+        MyCouponsComponent.prototype.sort;
+        /** @type {?} */
+        MyCouponsComponent.prototype.sortOptions;
+        /** @type {?} */
+        MyCouponsComponent.prototype.pagination;
+        /** @type {?} */
+        MyCouponsComponent.prototype.sortLabels;
+        /**
+         * @type {?}
+         * @protected
+         */
+        MyCouponsComponent.prototype.couponService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        MyCouponsComponent.prototype.myCouponsComponentService;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CouponDialogComponent = /** @class */ (function () {
+        function CouponDialogComponent(modalService) {
+            this.modalService = modalService;
+            this.iconTypes = ICON_TYPE;
+        }
+        /**
+         * @param {?=} reason
+         * @return {?}
+         */
+        CouponDialogComponent.prototype.dismissModal = /**
+         * @param {?=} reason
+         * @return {?}
+         */
+        function (reason) {
+            this.modalService.dismissActiveModal(reason);
+        };
+        CouponDialogComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-coupon-dialog',
+                        template: "<div #dialog>\n  <!-- Modal Header -->\n\n  <div class=\"cx-dialog-header modal-header\">\n    <div class=\"cx-dialog-title modal-title\">\n      {{ 'myCoupons.dialogTitle' | cxTranslate }}\n    </div>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"dismissModal('Cross click')\"\n    >\n      <span aria-hidden=\"true\">\n        <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n      </span>\n    </button>\n  </div>\n  <!-- Modal Body -->\n  <div class=\"cx-dialog-body modal-body\">\n    <div class=\"cx-dialog-row\">\n      <div class=\"cx-dialog-item col-sm-12 col-md-12\">\n        <div class=\"cx-coupon-card-head\">\n          <span class=\"card-label-bold cx-coupon-card-id\">{{\n            coupon?.couponId\n          }}</span>\n          <span>: {{ coupon?.name }}</span>\n        </div>\n        <div class=\"cx-coupon-description\">{{ coupon?.description }}</div>\n\n        <div class=\"cx-coupon-dialog-date\">\n          <p>{{ 'myCoupons.effectiveTitle' | cxTranslate }}</p>\n          <div class=\"cx-coupon-date\">\n            {{ coupon?.startDate | cxDate: 'medium' }} -\n            {{ coupon?.endDate | cxDate: 'medium' }}\n          </div>\n        </div>\n\n        <div class=\"cx-coupon-dialog-status\">\n          <p>{{ 'myCoupons.status' | cxTranslate }}</p>\n          <div class=\"cx-coupon-status {{ coupon?.status | lowercase }}\">\n            {{ 'myCoupons.' + coupon?.status | cxTranslate }}\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        CouponDialogComponent.ctorParameters = function () { return [
+            { type: ModalService }
+        ]; };
+        CouponDialogComponent.propDecorators = {
+            dialog: [{ type: core.ViewChild, args: ['dialog', { static: false, read: core.ElementRef },] }]
+        };
+        return CouponDialogComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        CouponDialogComponent.prototype.iconTypes;
+        /** @type {?} */
+        CouponDialogComponent.prototype.coupon;
+        /** @type {?} */
+        CouponDialogComponent.prototype.dialog;
+        /**
+         * @type {?}
+         * @protected
+         */
+        CouponDialogComponent.prototype.modalService;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CouponCardComponent = /** @class */ (function () {
+        function CouponCardComponent(modalService, myCouponsComponentService) {
+            this.modalService = modalService;
+            this.myCouponsComponentService = myCouponsComponentService;
+            this.notificationChanged = new core.EventEmitter();
+        }
+        /**
+         * @return {?}
+         */
+        CouponCardComponent.prototype.onSubscriptionChange = /**
+         * @return {?}
+         */
+        function () {
+            this.notificationChanged.emit({
+                couponId: this.coupon.couponId,
+                notification: !this.coupon.notificationOn,
+            });
+        };
+        /**
+         * @return {?}
+         */
+        CouponCardComponent.prototype.readMore = /**
+         * @return {?}
+         */
+        function () {
+            /** @type {?} */
+            var modalInstance;
+            this.modalRef = this.modalService.open(CouponDialogComponent, {
+                centered: true,
+                size: 'lg',
+            });
+            modalInstance = this.modalRef.componentInstance;
+            modalInstance.coupon = this.coupon;
+        };
+        /**
+         * @return {?}
+         */
+        CouponCardComponent.prototype.findProducts = /**
+         * @return {?}
+         */
+        function () {
+            this.myCouponsComponentService.launchSearchPage(this.coupon);
+        };
+        CouponCardComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-coupon-card',
+                        template: "<div class=\"card\">\n  <div class=\"card-body cx-card-body\">\n    <div class=\"cx-coupon-data\">\n      <div class=\"cx-coupon-card-row top\">\n        <div class=\"cx-coupon-card-head\">\n          <span class=\"card-label-bold cx-coupon-card-id\">{{\n            coupon?.couponId\n          }}</span>\n          <span>: {{ coupon?.name }}</span>\n        </div>\n\n        <div class=\"cx-coupon-status {{ coupon?.status | lowercase }}\">\n          {{ 'myCoupons.' + coupon?.status | cxTranslate }}\n        </div>\n      </div>\n\n      <div class=\"cx-coupon-card-date\">\n        <p>{{ 'myCoupons.effectiveTitle' | cxTranslate }}</p>\n        <div class=\"cx-coupon-date\">\n          <div class=\"cx-coupon-date-start\">\n            {{ coupon?.startDate | cxDate: 'medium' }} -&nbsp;\n          </div>\n          <div class=\"cx-coupon-date-end\">\n            {{ coupon?.endDate | cxDate: 'medium' }}\n          </div>\n        </div>\n      </div>\n\n      <a (click)=\"readMore()\" class=\"cx-card-read-more\">{{\n        'myCoupons.readMore' | cxTranslate\n      }}</a>\n\n      <div class=\"cx-coupon-card-row bottom\">\n        <div class=\"cx-coupon-notification form-check\">\n          <label>\n            <input\n              type=\"checkbox\"\n              class=\"form-check-input\"\n              [checked]=\"coupon?.notificationOn\"\n              [class.disabled]=\"couponSubscriptionLoading$ | async\"\n              [disabled]=\"couponSubscriptionLoading$ | async\"\n              (change)=\"onSubscriptionChange()\"\n            />\n            <span class=\"form-check-label\">\n              {{ 'myCoupons.notification' | cxTranslate }}\n            </span>\n          </label>\n        </div>\n\n        <div class=\"cx-coupon-find-product col-lg-6 col-md-12 col-sm-6\">\n          <button class=\"btn btn-block btn-action\" (click)=\"findProducts()\">\n            {{ 'myCoupons.findProducts' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        CouponCardComponent.ctorParameters = function () { return [
+            { type: ModalService },
+            { type: MyCouponsComponentService }
+        ]; };
+        CouponCardComponent.propDecorators = {
+            coupon: [{ type: core.Input }],
+            couponSubscriptionLoading$: [{ type: core.Input }],
+            notificationChanged: [{ type: core.Output }]
+        };
+        return CouponCardComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        CouponCardComponent.prototype.coupon;
+        /** @type {?} */
+        CouponCardComponent.prototype.couponSubscriptionLoading$;
+        /** @type {?} */
+        CouponCardComponent.prototype.modalRef;
+        /** @type {?} */
+        CouponCardComponent.prototype.notificationChanged;
+        /**
+         * @type {?}
+         * @protected
+         */
+        CouponCardComponent.prototype.modalService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        CouponCardComponent.prototype.myCouponsComponentService;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CouponClaimComponent = /** @class */ (function () {
+        function CouponClaimComponent(couponService, routingService, messageService) {
+            this.couponService = couponService;
+            this.routingService = routingService;
+            this.messageService = messageService;
+        }
+        /**
+         * @return {?}
+         */
+        CouponClaimComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this.routingService
+                .getRouterState()
+                .subscribe((/**
+             * @param {?} k
+             * @return {?}
+             */
+            function (k) {
+                /** @type {?} */
+                var couponCode = k.state.params.couponCode;
+                if (couponCode) {
+                    _this.couponService.claimCustomerCoupon(couponCode);
+                    _this.subscription = _this.couponService
+                        .getClaimCustomerCouponResultSuccess()
+                        .subscribe((/**
+                     * @param {?} success
+                     * @return {?}
+                     */
+                    function (success) {
+                        if (success) {
+                            _this.messageService.add({ key: 'myCoupons.claimCustomerCoupon' }, core$1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
+                        }
+                        _this.routingService.go({ cxRoute: 'coupons' });
+                    }));
+                }
+                else {
+                    _this.routingService.go({ cxRoute: 'notFound' });
+                }
+            }))
+                .unsubscribe();
+        };
+        /**
+         * @return {?}
+         */
+        CouponClaimComponent.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
+            if (this.subscription) {
+                this.subscription.unsubscribe();
+            }
+        };
+        CouponClaimComponent.decorators = [
+            { type: core.Component, args: [{
+                        template: "",
+                        selector: 'cx-coupon-claim'
+                    }] }
+        ];
+        /** @nocollapse */
+        CouponClaimComponent.ctorParameters = function () { return [
+            { type: core$1.CustomerCouponService },
+            { type: core$1.RoutingService },
+            { type: core$1.GlobalMessageService }
+        ]; };
+        return CouponClaimComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        CouponClaimComponent.prototype.subscription;
+        /**
+         * @type {?}
+         * @protected
+         */
+        CouponClaimComponent.prototype.couponService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        CouponClaimComponent.prototype.routingService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        CouponClaimComponent.prototype.messageService;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ɵ0$8 = { cxRoute: 'couponClaim' };
+    var MyCouponsModule = /** @class */ (function () {
+        function MyCouponsModule() {
+        }
+        MyCouponsModule.decorators = [
+            { type: core.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            CardModule,
+                            SpinnerModule,
+                            core$1.I18nModule,
+                            router.RouterModule,
+                            core$1.UrlModule,
+                            IconModule,
+                            ListNavigationModule,
+                            core$1.ConfigModule.withConfig((/** @type {?} */ ({
+                                cmsComponents: {
+                                    MyCouponsComponent: {
+                                        component: MyCouponsComponent,
+                                        guards: [core$1.AuthGuard],
+                                    },
+                                    CouponClaimComponent: {
+                                        component: CouponClaimComponent,
+                                        guards: [core$1.AuthGuard],
+                                    },
+                                },
+                            }))),
+                            router.RouterModule.forChild([
+                                {
+                                    path: null,
+                                    canActivate: [core$1.AuthGuard, CmsPageGuard],
+                                    component: PageLayoutComponent,
+                                    data: ɵ0$8,
+                                },
+                            ]),
+                        ],
+                        declarations: [
+                            MyCouponsComponent,
+                            CouponCardComponent,
+                            CouponDialogComponent,
+                            CouponClaimComponent,
+                        ],
+                        exports: [MyCouponsComponent, CouponClaimComponent],
+                        entryComponents: [
+                            MyCouponsComponent,
+                            CouponDialogComponent,
+                            CouponClaimComponent,
+                        ],
+                    },] }
+        ];
+        return MyCouponsModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var NotificationPreferenceComponent = /** @class */ (function () {
         function NotificationPreferenceComponent(notificationPreferenceService) {
             this.notificationPreferenceService = notificationPreferenceService;
@@ -31227,7 +32018,7 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var ɵ0$8 = { cxRoute: 'logout' };
+    var ɵ0$9 = { cxRoute: 'logout' };
     var LogoutModule = /** @class */ (function () {
         function LogoutModule() {
         }
@@ -31240,7 +32031,7 @@
                                     path: null,
                                     canActivate: [LogoutGuard],
                                     component: PageLayoutComponent,
-                                    data: ɵ0$8,
+                                    data: ɵ0$9,
                                 },
                             ]),
                         ],
@@ -31842,6 +32633,7 @@
                             ResetPasswordModule,
                             BannerCarouselModule,
                             UserComponentModule,
+                            MyCouponsModule,
                             WishListModule,
                             NotificationPreferenceModule,
                             MyInterestsModule,
@@ -31948,7 +32740,7 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var ɵ0$9 = { cxRoute: 'product' }, ɵ1$1 = {
+    var ɵ0$a = { cxRoute: 'product' }, ɵ1$1 = {
         cxSuffixUrlMatcher: {
             marker: 'p',
             paramName: 'productCode',
@@ -31965,7 +32757,7 @@
                                     path: null,
                                     canActivate: [CmsPageGuard],
                                     component: PageLayoutComponent,
-                                    data: ɵ0$9,
+                                    data: ɵ0$a,
                                 },
                                 {
                                     matcher: suffixUrlMatcher,
@@ -31984,7 +32776,7 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var ɵ0$a = { cxRoute: 'category' }, ɵ1$2 = { pageLabel: 'search', cxRoute: 'search' }, ɵ2 = { cxRoute: 'brand' }, ɵ3 = {
+    var ɵ0$b = { cxRoute: 'category' }, ɵ1$2 = { pageLabel: 'search', cxRoute: 'search' }, ɵ2 = { cxRoute: 'brand' }, ɵ3 = {
         cxSuffixUrlMatcher: {
             marker: 'c',
             paramName: 'categoryCode',
@@ -32001,7 +32793,7 @@
                                     path: null,
                                     canActivate: [CmsPageGuard],
                                     component: PageLayoutComponent,
-                                    data: ɵ0$a,
+                                    data: ɵ0$b,
                                 },
                                 {
                                     path: null,
@@ -32258,6 +33050,11 @@
         returnRequestDetails: {
             paths: ['my-account/return-request/:returnCode'],
             paramsMapping: { returnCode: 'rma' },
+        },
+        coupons: { paths: ['my-account/coupons'] },
+        couponClaim: {
+            paths: ['my-account/coupon/claim/:couponCode'],
+            paramsMapping: { couponCode: 'code' },
         },
     };
     /** @type {?} */
@@ -32518,6 +33315,9 @@
     exports.ConsentManagementComponent = ConsentManagementComponent;
     exports.ConsentManagementFormComponent = ConsentManagementFormComponent;
     exports.ConsentManagementModule = ConsentManagementModule;
+    exports.CouponCardComponent = CouponCardComponent;
+    exports.CouponClaimComponent = CouponClaimComponent;
+    exports.CouponDialogComponent = CouponDialogComponent;
     exports.CurrentProductService = CurrentProductService;
     exports.CustomFormValidators = CustomFormValidators;
     exports.DeliveryModeComponent = DeliveryModeComponent;
@@ -32572,6 +33372,8 @@
     exports.MiniCartModule = MiniCartModule;
     exports.ModalRef = ModalRef;
     exports.ModalService = ModalService;
+    exports.MyCouponsComponent = MyCouponsComponent;
+    exports.MyCouponsModule = MyCouponsModule;
     exports.MyInterestsComponent = MyInterestsComponent;
     exports.MyInterestsModule = MyInterestsModule;
     exports.NavigationComponent = NavigationComponent;
@@ -32780,16 +33582,17 @@
     exports.ɵbr = SkipLinkService;
     exports.ɵbs = SkipLinkDirective;
     exports.ɵbt = CheckoutLoginComponent;
-    exports.ɵbu = suffixUrlMatcher;
-    exports.ɵbv = addCmsRoute;
-    exports.ɵbw = htmlLangProvider;
-    exports.ɵbx = setHtmlLangAttribute;
-    exports.ɵby = AnonymousConsentsModule;
-    exports.ɵbz = AnonymousConsentDialogComponent;
+    exports.ɵbu = MyCouponsComponentService;
+    exports.ɵbv = suffixUrlMatcher;
+    exports.ɵbw = addCmsRoute;
+    exports.ɵbx = htmlLangProvider;
+    exports.ɵby = setHtmlLangAttribute;
+    exports.ɵbz = AnonymousConsentsModule;
     exports.ɵc = ComponentMapperService;
-    exports.ɵca = RoutingModule;
-    exports.ɵcb = defaultStorefrontRoutesConfig;
-    exports.ɵcc = defaultRoutingConfig;
+    exports.ɵca = AnonymousConsentDialogComponent;
+    exports.ɵcb = RoutingModule;
+    exports.ɵcc = defaultStorefrontRoutesConfig;
+    exports.ɵcd = defaultRoutingConfig;
     exports.ɵd = AsmEnablerService;
     exports.ɵe = AsmMainUiComponent;
     exports.ɵf = AsmComponentService;

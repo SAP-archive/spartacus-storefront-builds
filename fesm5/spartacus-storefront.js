@@ -1,6 +1,6 @@
 import { CommonModule, isPlatformServer, isPlatformBrowser, DOCUMENT, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, EventEmitter, Output, isDevMode, ChangeDetectionStrategy, forwardRef, Renderer2, ViewChild, Directive, HostListener, Optional, Injector, Inject, PLATFORM_ID, INJECTOR, InjectionToken, TemplateRef, ComponentFactory, ViewContainerRef, ComponentFactoryResolver, NgZone, APP_INITIALIZER, SecurityContext, RendererFactory2, ViewEncapsulation, ChangeDetectorRef, Pipe, ViewChildren } from '@angular/core';
-import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, UserOrderService, RoutingService, PromotionLocation, CartService, CheckoutService, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, TranslationService, TranslationChunkService, CmsService, PageType, SemanticPathService, ProtectedRoutesGuard, AuthService, CartDataService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, DynamicAttributeService, PageRobotsMeta, ProductScope, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, CartVoucherService, OCC_USER_ID_ANONYMOUS, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, RoutingModule as RoutingModule$1, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
+import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, UserOrderService, RoutingService, PromotionLocation, CartService, CheckoutService, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, TranslationService, TranslationChunkService, CmsService, PageType, SemanticPathService, ProtectedRoutesGuard, AuthService, CartDataService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, DynamicAttributeService, PageRobotsMeta, ProductScope, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, RoutingModule as RoutingModule$1, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
 import { Subscription, combineLatest, of, fromEvent, BehaviorSubject, concat, isObservable, from, Observable } from 'rxjs';
 import { take, distinctUntilChanged, tap, map, debounceTime, startWith, filter, switchMap, shareReplay, first, skipWhile, endWith, withLatestFrom, flatMap, mergeMap, scan, distinctUntilKeyChanged, pluck } from 'rxjs/operators';
 import { __extends, __read, __values, __assign, __spread, __awaiter, __generator } from 'tslib';
@@ -11390,12 +11390,17 @@ if (false) {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var CartCouponComponent = /** @class */ (function () {
-    function CartCouponComponent(cartService, authService, cartVoucherService, formBuilder) {
+    function CartCouponComponent(cartService, authService, cartVoucherService, formBuilder, customerCouponService, featureConfig) {
         this.cartService = cartService;
         this.authService = authService;
         this.cartVoucherService = cartVoucherService;
         this.formBuilder = formBuilder;
+        this.customerCouponService = customerCouponService;
+        this.featureConfig = featureConfig;
+        this.MAX_CUSTOMER_COUPON_PAGE = 100;
+        this.ignoreCloseEvent = false;
         this.subscription = new Subscription$1();
+        this.couponBoxIsActive = false;
     }
     /**
      * @return {?}
@@ -11405,25 +11410,55 @@ var CartCouponComponent = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        this.cart$ = combineLatest([
-            this.cartService.getActive(),
-            this.authService.getOccUserId(),
-        ]).pipe(tap((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        function (_a) {
-            var _b = __read(_a, 2), cart = _b[0], userId = _b[1];
-            return (_this.cartId =
-                userId === OCC_USER_ID_ANONYMOUS ? cart.guid : cart.code);
-        })), map((/**
-         * @param {?} __0
-         * @return {?}
-         */
-        function (_a) {
-            var _b = __read(_a, 1), cart = _b[0];
-            return cart;
-        })));
+        if (this.customerCouponService) {
+            this.customerCouponService.loadCustomerCoupons(this.MAX_CUSTOMER_COUPON_PAGE);
+        }
+        if (this.featureConfig && this.featureConfig.isLevel('1.5')) {
+            this.cart$ = combineLatest([
+                this.cartService.getActive(),
+                this.authService.getOccUserId(),
+                this.customerCouponService.getCustomerCoupons(this.MAX_CUSTOMER_COUPON_PAGE),
+            ]).pipe(tap((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 3), cart = _b[0], userId = _b[1], customerCoupons = _b[2];
+                _this.cartId =
+                    userId === OCC_USER_ID_ANONYMOUS ? cart.guid : cart.code;
+                _this.getApplicableCustomerCoupons(cart, customerCoupons.coupons);
+            })), map((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 1), cart = _b[0];
+                return cart;
+            })));
+        }
+        //TODO(issue:#5971) Deprecated since 1.5
+        else {
+            this.cart$ = combineLatest([
+                this.cartService.getActive(),
+                this.authService.getOccUserId(),
+            ]).pipe(tap((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 2), cart = _b[0], userId = _b[1];
+                return (_this.cartId =
+                    userId === OCC_USER_ID_ANONYMOUS ? cart.guid : cart.code);
+            })), map((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 1), cart = _b[0];
+                return cart;
+            })));
+        }
+        //TODO(issue:#5971) Deprecated since 1.5
         this.cartIsLoading$ = this.cartService
             .getLoaded()
             .pipe(map((/**
@@ -11459,6 +11494,29 @@ var CartCouponComponent = /** @class */ (function () {
         function (success) {
             _this.onSuccess(success);
         })));
+        this.subscription.add(this.cartVoucherService.getAddVoucherResultError().subscribe((/**
+         * @param {?} error
+         * @return {?}
+         */
+        function (error) {
+            _this.onError(error);
+        })));
+    };
+    /**
+     * @protected
+     * @param {?} error
+     * @return {?}
+     */
+    CartCouponComponent.prototype.onError = /**
+     * @protected
+     * @param {?} error
+     * @return {?}
+     */
+    function (error) {
+        if (error) {
+            this.customerCouponService.loadCustomerCoupons(this.MAX_CUSTOMER_COUPON_PAGE);
+            this.cartVoucherService.resetAddVoucherProcessingState();
+        }
     };
     /**
      * @param {?} success
@@ -11475,6 +11533,36 @@ var CartCouponComponent = /** @class */ (function () {
         }
     };
     /**
+     * @protected
+     * @param {?} cart
+     * @param {?} coupons
+     * @return {?}
+     */
+    CartCouponComponent.prototype.getApplicableCustomerCoupons = /**
+     * @protected
+     * @param {?} cart
+     * @param {?} coupons
+     * @return {?}
+     */
+    function (cart, coupons) {
+        var _this = this;
+        this.applicableCoupons = coupons || [];
+        if (cart.appliedVouchers) {
+            cart.appliedVouchers.forEach((/**
+             * @param {?} appliedVoucher
+             * @return {?}
+             */
+            function (appliedVoucher) {
+                _this.applicableCoupons = _this.applicableCoupons.filter((/**
+                 * @param {?} coupon
+                 * @return {?}
+                 */
+                function (coupon) { return coupon.couponId !== appliedVoucher.code; }));
+            }));
+        }
+        this.filteredCoupons = this.applicableCoupons;
+    };
+    /**
      * @return {?}
      */
     CartCouponComponent.prototype.applyVoucher = /**
@@ -11482,6 +11570,73 @@ var CartCouponComponent = /** @class */ (function () {
      */
     function () {
         this.cartVoucherService.addVoucher(this.form.value.couponCode, this.cartId);
+    };
+    /**
+     * @param {?} couponId
+     * @return {?}
+     */
+    CartCouponComponent.prototype.applyCustomerCoupon = /**
+     * @param {?} couponId
+     * @return {?}
+     */
+    function (couponId) {
+        this.cartVoucherService.addVoucher(couponId, this.cartId);
+        this.couponBoxIsActive = false;
+    };
+    /**
+     * @param {?} query
+     * @return {?}
+     */
+    CartCouponComponent.prototype.filter = /**
+     * @param {?} query
+     * @return {?}
+     */
+    function (query) {
+        /** @type {?} */
+        var filterValue = query.toLowerCase();
+        this.filteredCoupons = this.applicableCoupons.filter((/**
+         * @param {?} coupon
+         * @return {?}
+         */
+        function (coupon) { return coupon.couponId.toLowerCase().indexOf(filterValue) > -1; }));
+    };
+    /**
+     * @return {?}
+     */
+    CartCouponComponent.prototype.open = /**
+     * @return {?}
+     */
+    function () {
+        this.filteredCoupons = this.applicableCoupons;
+        if (this.applicableCoupons.length > 0) {
+            this.couponBoxIsActive = true;
+        }
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    CartCouponComponent.prototype.close = /**
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        if (!this.ignoreCloseEvent) {
+            this.couponBoxIsActive = false;
+            if (event && event.target) {
+                ((/** @type {?} */ (event.target))).blur();
+            }
+        }
+        this.ignoreCloseEvent = false;
+    };
+    /**
+     * @return {?}
+     */
+    CartCouponComponent.prototype.disableClose = /**
+     * @return {?}
+     */
+    function () {
+        this.ignoreCloseEvent = true;
     };
     /**
      * @return {?}
@@ -11498,7 +11653,7 @@ var CartCouponComponent = /** @class */ (function () {
     CartCouponComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-cart-coupon',
-                    template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <div class=\"cx-cart-coupon-title\">\n    {{ 'voucher.coupon' | cxTranslate }}\n  </div>\n  <div class=\"form-group \">\n    <form (submit)=\"applyVoucher()\" [formGroup]=\"form\">\n      <div class=\"row\">\n        <div class=\"col-md-8\">\n          <input\n            type=\"text\"\n            class=\"form-control input-coupon-code\"\n            id=\"applyVoucher\"\n            formControlName=\"couponCode\"\n            placeholder=\"{{ 'voucher.placeholder' | cxTranslate }}\"\n          />\n        </div>\n        <div class=\"col-md-4\">\n          <button\n            class=\"btn btn-block btn-action apply-coupon-button\"\n            type=\"submit\"\n            [disabled]=\"submitDisabled$ | async\"\n            [class.disabled]=\"submitDisabled$ | async\"\n          >\n            {{ 'voucher.apply' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </form>\n  </div>\n\n  <cx-applied-coupons\n    [vouchers]=\"cart.appliedVouchers\"\n    [cartIsLoading]=\"cartIsLoading$ | async\"\n    [isReadOnly]=\"false\"\n  >\n  </cx-applied-coupons>\n</ng-container>\n"
+                    template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <div class=\"cx-cart-coupon-title\">\n    {{ 'voucher.coupon' | cxTranslate }}\n  </div>\n  <div class=\"form-group \">\n    <ng-container *cxFeatureLevel=\"'1.5'\">\n      <form (submit)=\"applyVoucher()\" [formGroup]=\"form\" autocomplete=\"off\">\n        <div class=\"row\">\n          <div class=\"col-md-8\">\n            <div class=\"cx-apply-voucher\">\n              <input\n                #couponInput\n                class=\"form-control input-coupon-code\"\n                id=\"applyVoucher\"\n                formControlName=\"couponCode\"\n                [placeholder]=\"'voucher.placeholder' | cxTranslate\"\n                aria-label=\"applyVoucher\"\n                (focus)=\"open()\"\n                (input)=\"filter(couponInput.value)\"\n                (blur)=\"close($event)\"\n                (keydown.escape)=\"close($event)\"\n                autocomplete=\"off\"\n              />\n\n              <div [class.couponbox-is-active]=\"couponBoxIsActive\">\n                <div\n                  *ngIf=\"filteredCoupons && filteredCoupons.length > 0\"\n                  class=\"cx-customer-coupons\"\n                  (click)=\"close($event)\"\n                >\n                  <div class=\"coupons\" (mousedown)=\"disableClose()\">\n                    <a\n                      *ngFor=\"let coupon of filteredCoupons\"\n                      (click)=\"applyCustomerCoupon(coupon.couponId)\"\n                    >\n                      <div class=\"coupon-id\">{{ coupon.couponId }}</div>\n                    </a>\n                  </div>\n                </div>\n              </div>\n            </div>\n          </div>\n\n          <div class=\"col-md-4\">\n            <button\n              class=\"btn btn-block btn-action apply-coupon-button\"\n              type=\"submit\"\n              [disabled]=\"submitDisabled$ | async\"\n              [class.disabled]=\"submitDisabled$ | async\"\n            >\n              {{ 'voucher.apply' | cxTranslate }}\n            </button>\n          </div>\n        </div>\n      </form>\n    </ng-container>\n\n    <ng-container *cxFeatureLevel=\"'!1.5'\">\n      <form (submit)=\"applyVoucher()\" [formGroup]=\"form\">\n        <div class=\"row\">\n          <div class=\"col-md-8\">\n            <input\n              type=\"text\"\n              class=\"form-control input-coupon-code\"\n              id=\"applyVoucher\"\n              formControlName=\"couponCode\"\n              placeholder=\"{{ 'voucher.placeholder' | cxTranslate }}\"\n            />\n          </div>\n          <div class=\"col-md-4\">\n            <button\n              class=\"btn btn-block btn-action apply-coupon-button\"\n              type=\"submit\"\n              [disabled]=\"submitDisabled$ | async\"\n              [class.disabled]=\"submitDisabled$ | async\"\n            >\n              {{ 'voucher.apply' | cxTranslate }}\n            </button>\n          </div>\n        </div>\n      </form>\n    </ng-container>\n  </div>\n\n  <cx-applied-coupons\n    [vouchers]=\"cart.appliedVouchers\"\n    [cartIsLoading]=\"cartIsLoading$ | async\"\n    [isReadOnly]=\"false\"\n  >\n  </cx-applied-coupons>\n</ng-container>\n"
                 }] }
     ];
     /** @nocollapse */
@@ -11506,11 +11661,15 @@ var CartCouponComponent = /** @class */ (function () {
         { type: CartService },
         { type: AuthService },
         { type: CartVoucherService },
-        { type: FormBuilder }
+        { type: FormBuilder },
+        { type: CustomerCouponService },
+        { type: FeatureConfigService }
     ]; };
     return CartCouponComponent;
 }());
 if (false) {
+    /** @type {?} */
+    CartCouponComponent.prototype.MAX_CUSTOMER_COUPON_PAGE;
     /** @type {?} */
     CartCouponComponent.prototype.form;
     /** @type {?} */
@@ -11521,11 +11680,22 @@ if (false) {
     CartCouponComponent.prototype.cart$;
     /** @type {?} */
     CartCouponComponent.prototype.cartId;
+    /** @type {?} */
+    CartCouponComponent.prototype.applicableCoupons;
+    /** @type {?} */
+    CartCouponComponent.prototype.filteredCoupons;
+    /**
+     * @type {?}
+     * @private
+     */
+    CartCouponComponent.prototype.ignoreCloseEvent;
     /**
      * @type {?}
      * @private
      */
     CartCouponComponent.prototype.subscription;
+    /** @type {?} */
+    CartCouponComponent.prototype.couponBoxIsActive;
     /**
      * @type {?}
      * @private
@@ -11546,6 +11716,16 @@ if (false) {
      * @private
      */
     CartCouponComponent.prototype.formBuilder;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CartCouponComponent.prototype.customerCouponService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CartCouponComponent.prototype.featureConfig;
 }
 
 /**
@@ -11560,7 +11740,9 @@ var CartCouponModule = /** @class */ (function () {
                     declarations: [CartCouponComponent, AppliedCouponsComponent],
                     exports: [CartCouponComponent, AppliedCouponsComponent],
                     imports: [
+                        FeaturesConfigModule,
                         CommonModule,
+                        NgSelectModule,
                         FormsModule,
                         ReactiveFormsModule,
                         I18nModule,
@@ -23276,6 +23458,615 @@ var UpdateProfileModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var MyCouponsComponentService = /** @class */ (function () {
+    function MyCouponsComponentService(routingService, translation) {
+        this.routingService = routingService;
+        this.translation = translation;
+        this.RELEVANCE = ':relevance';
+        this.CUSTOMER_COUPON_CODE = ':customerCouponCode:';
+    }
+    /**
+     * @param {?} coupon
+     * @return {?}
+     */
+    MyCouponsComponentService.prototype.launchSearchPage = /**
+     * @param {?} coupon
+     * @return {?}
+     */
+    function (coupon) {
+        this.routingService.go({
+            cxRoute: 'search',
+            params: { query: this.buildSearchParam(coupon) },
+        }, { couponcode: coupon.couponId });
+    };
+    /**
+     * @private
+     * @param {?} coupon
+     * @return {?}
+     */
+    MyCouponsComponentService.prototype.buildSearchParam = /**
+     * @private
+     * @param {?} coupon
+     * @return {?}
+     */
+    function (coupon) {
+        return coupon.allProductsApplicable
+            ? this.RELEVANCE
+            : this.RELEVANCE + this.CUSTOMER_COUPON_CODE + coupon.couponId;
+    };
+    /**
+     * @return {?}
+     */
+    MyCouponsComponentService.prototype.getSortLabels = /**
+     * @return {?}
+     */
+    function () {
+        return combineLatest([
+            this.translation.translate('myCoupons.startDateAsc'),
+            this.translation.translate('myCoupons.startDateDesc'),
+            this.translation.translate('myCoupons.endDateAsc'),
+            this.translation.translate('myCoupons.endDateDesc'),
+        ]).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 4), textByStartDateAsc = _b[0], textByStartDateDesc = _b[1], textByEndDateAsc = _b[2], textByEndDateDesc = _b[3];
+            return {
+                byStartDateAsc: textByStartDateAsc,
+                byStartDateDesc: textByStartDateDesc,
+                byEndDateAsc: textByEndDateAsc,
+                byEndDateDesc: textByEndDateDesc,
+            };
+        })));
+    };
+    MyCouponsComponentService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    /** @nocollapse */
+    MyCouponsComponentService.ctorParameters = function () { return [
+        { type: RoutingService },
+        { type: TranslationService }
+    ]; };
+    /** @nocollapse */ MyCouponsComponentService.ngInjectableDef = ɵɵdefineInjectable({ factory: function MyCouponsComponentService_Factory() { return new MyCouponsComponentService(ɵɵinject(RoutingService), ɵɵinject(TranslationService)); }, token: MyCouponsComponentService, providedIn: "root" });
+    return MyCouponsComponentService;
+}());
+if (false) {
+    /** @type {?} */
+    MyCouponsComponentService.prototype.sortLabels;
+    /**
+     * @type {?}
+     * @protected
+     */
+    MyCouponsComponentService.prototype.RELEVANCE;
+    /**
+     * @type {?}
+     * @protected
+     */
+    MyCouponsComponentService.prototype.CUSTOMER_COUPON_CODE;
+    /**
+     * @type {?}
+     * @protected
+     */
+    MyCouponsComponentService.prototype.routingService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    MyCouponsComponentService.prototype.translation;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var MyCouponsComponent = /** @class */ (function () {
+    function MyCouponsComponent(couponService, myCouponsComponentService) {
+        this.couponService = couponService;
+        this.myCouponsComponentService = myCouponsComponentService;
+        this.iconTypes = ICON_TYPE;
+        this.subscriptions = new Subscription();
+        this.PAGE_SIZE = 10;
+        this.sortMapping = {
+            byStartDateAsc: 'startDate:asc',
+            byStartDateDesc: 'startDate:desc',
+            byEndDateAsc: 'endDate:asc',
+            byEndDateDesc: 'endDate:desc',
+        };
+        this.sort = 'byStartDateAsc';
+        this.sortOptions = [
+            {
+                code: 'byStartDateAsc',
+                selected: false,
+            },
+            {
+                code: 'byStartDateDesc',
+                selected: false,
+            },
+            {
+                code: 'byEndDateAsc',
+                selected: false,
+            },
+            {
+                code: 'byEndDateDesc',
+                selected: false,
+            },
+        ];
+    }
+    /**
+     * @return {?}
+     */
+    MyCouponsComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.couponService.loadCustomerCoupons(this.PAGE_SIZE);
+        this.couponResult$ = this.couponService
+            .getCustomerCoupons(this.PAGE_SIZE)
+            .pipe(tap((/**
+         * @param {?} coupons
+         * @return {?}
+         */
+        function (coupons) {
+            return (_this.pagination = {
+                currentPage: coupons.pagination.page,
+                pageSize: coupons.pagination.count,
+                totalPages: coupons.pagination.totalPages,
+                totalResults: coupons.pagination.totalCount,
+                sort: _this.sort,
+            });
+        })));
+        this.couponsLoading$ = this.couponService.getCustomerCouponsLoading();
+        this.couponSubscriptionLoading$ = combineLatest([
+            this.couponService.getSubscribeCustomerCouponResultLoading(),
+            this.couponService.getUnsubscribeCustomerCouponResultLoading(),
+        ]).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        function (_a) {
+            var _b = __read(_a, 2), subscribing = _b[0], unsubscribing = _b[1];
+            return subscribing || unsubscribing;
+        })));
+        this.sortLabels = this.myCouponsComponentService.getSortLabels();
+        this.subscriptions
+            .add(this.couponService
+            .getSubscribeCustomerCouponResultError()
+            .subscribe((/**
+         * @param {?} error
+         * @return {?}
+         */
+        function (error) {
+            _this.subscriptionFail(error);
+        })))
+            .add(this.couponService
+            .getUnsubscribeCustomerCouponResultError()
+            .subscribe((/**
+         * @param {?} error
+         * @return {?}
+         */
+        function (error) {
+            _this.subscriptionFail(error);
+        })));
+    };
+    /**
+     * @private
+     * @param {?} error
+     * @return {?}
+     */
+    MyCouponsComponent.prototype.subscriptionFail = /**
+     * @private
+     * @param {?} error
+     * @return {?}
+     */
+    function (error) {
+        if (error) {
+            this.couponService.loadCustomerCoupons(this.PAGE_SIZE);
+        }
+    };
+    /**
+     * @param {?} sort
+     * @return {?}
+     */
+    MyCouponsComponent.prototype.sortChange = /**
+     * @param {?} sort
+     * @return {?}
+     */
+    function (sort) {
+        this.sort = sort;
+        this.couponService.loadCustomerCoupons(this.PAGE_SIZE, this.pagination.currentPage, this.sortMapping[sort]);
+    };
+    /**
+     * @param {?} page
+     * @return {?}
+     */
+    MyCouponsComponent.prototype.pageChange = /**
+     * @param {?} page
+     * @return {?}
+     */
+    function (page) {
+        this.couponService.loadCustomerCoupons(this.PAGE_SIZE, page, this.sortMapping[this.sort]);
+    };
+    /**
+     * @param {?} __0
+     * @return {?}
+     */
+    MyCouponsComponent.prototype.notificationChange = /**
+     * @param {?} __0
+     * @return {?}
+     */
+    function (_a) {
+        var couponId = _a.couponId, notification = _a.notification;
+        if (notification) {
+            this.couponService.subscribeCustomerCoupon(couponId);
+        }
+        else {
+            this.couponService.unsubscribeCustomerCoupon(couponId);
+        }
+    };
+    /**
+     * @return {?}
+     */
+    MyCouponsComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this.subscriptions.unsubscribe();
+    };
+    MyCouponsComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-my-coupons',
+                    template: "<div class=\"cx-section\">\n  <ng-container *ngIf=\"!(couponsLoading$ | async); else loading\">\n    <ng-container *ngIf=\"couponResult$ | async as couponResult\">\n      <div class=\"cx-my-coupons-header\">\n        <h3>{{ 'myCoupons.myCoupons' | cxTranslate }}</h3>\n      </div>\n\n      <ng-container\n        *ngIf=\"couponResult.pagination.totalCount > 0; else noCoupons\"\n      >\n        <div class=\"cx-my-coupons-sort top row\">\n          <div\n            class=\"cx-my-coupons-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"sortOptions\"\n              [sortLabels]=\"sortLabels | async\"\n              (sortListEvent)=\"sortChange($event)\"\n              [selectedOption]=\"sort\"\n            >\n            </cx-sorting>\n          </div>\n          <div class=\"cx-my-coupons-pagination cx-mycoupon-thead-mobile\">\n            <cx-pagination\n              [pagination]=\"pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n\n        <div class=\"row cx-coupon-deck\">\n          <div\n            *ngFor=\"let coupon of couponResult.coupons\"\n            class=\"col-md-6 cx-coupon-card\"\n          >\n            <cx-coupon-card\n              [coupon]=\"coupon\"\n              [couponSubscriptionLoading$]=\"couponSubscriptionLoading$\"\n              (notificationChanged)=\"notificationChange($event)\"\n            ></cx-coupon-card>\n          </div>\n        </div>\n\n        <div class=\"cx-my-coupons-sort bottom row\">\n          <div\n            class=\"cx-my-coupons-form-group form-group cx-mycoupon-thead-mobile col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"sortOptions\"\n              [sortLabels]=\"sortLabels | async\"\n              (sortListEvent)=\"sortChange($event)\"\n              [selectedOption]=\"sort\"\n              placeholder=\"{{ 'myCoupons.sortByMostRecent' | cxTranslate }}\"\n            >\n            </cx-sorting>\n          </div>\n          <div class=\"cx-my-coupons-pagination\">\n            <cx-pagination\n              [pagination]=\"pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n        <div class=\"cx-my-coupons-notes\">\n          <span>\n            <cx-icon [type]=\"iconTypes.INFO\"></cx-icon>\n            {{ 'myCoupons.notesPreffix' | cxTranslate\n            }}<a [routerLink]=\"['/my-account/notification-preference']\">{{\n              'myCoupons.notesLink' | cxTranslate\n            }}</a\n            >{{ 'myCoupons.notesSuffix' | cxTranslate }}</span\n          >\n        </div>\n      </ng-container>\n    </ng-container>\n\n    <ng-template #noCoupons>\n      <section>\n        <p class=\"cx-section-msg\">\n          {{ 'myCoupons.noCouponsMessage' | cxTranslate }}\n        </p>\n      </section>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"col-md-12 cx-coupon-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </ng-template>\n</div>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    MyCouponsComponent.ctorParameters = function () { return [
+        { type: CustomerCouponService },
+        { type: MyCouponsComponentService }
+    ]; };
+    return MyCouponsComponent;
+}());
+if (false) {
+    /** @type {?} */
+    MyCouponsComponent.prototype.couponResult$;
+    /** @type {?} */
+    MyCouponsComponent.prototype.couponsLoading$;
+    /** @type {?} */
+    MyCouponsComponent.prototype.couponSubscriptionLoading$;
+    /** @type {?} */
+    MyCouponsComponent.prototype.iconTypes;
+    /**
+     * @type {?}
+     * @private
+     */
+    MyCouponsComponent.prototype.subscriptions;
+    /**
+     * @type {?}
+     * @private
+     */
+    MyCouponsComponent.prototype.PAGE_SIZE;
+    /**
+     * @type {?}
+     * @private
+     */
+    MyCouponsComponent.prototype.sortMapping;
+    /** @type {?} */
+    MyCouponsComponent.prototype.sort;
+    /** @type {?} */
+    MyCouponsComponent.prototype.sortOptions;
+    /** @type {?} */
+    MyCouponsComponent.prototype.pagination;
+    /** @type {?} */
+    MyCouponsComponent.prototype.sortLabels;
+    /**
+     * @type {?}
+     * @protected
+     */
+    MyCouponsComponent.prototype.couponService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    MyCouponsComponent.prototype.myCouponsComponentService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CouponDialogComponent = /** @class */ (function () {
+    function CouponDialogComponent(modalService) {
+        this.modalService = modalService;
+        this.iconTypes = ICON_TYPE;
+    }
+    /**
+     * @param {?=} reason
+     * @return {?}
+     */
+    CouponDialogComponent.prototype.dismissModal = /**
+     * @param {?=} reason
+     * @return {?}
+     */
+    function (reason) {
+        this.modalService.dismissActiveModal(reason);
+    };
+    CouponDialogComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-coupon-dialog',
+                    template: "<div #dialog>\n  <!-- Modal Header -->\n\n  <div class=\"cx-dialog-header modal-header\">\n    <div class=\"cx-dialog-title modal-title\">\n      {{ 'myCoupons.dialogTitle' | cxTranslate }}\n    </div>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"dismissModal('Cross click')\"\n    >\n      <span aria-hidden=\"true\">\n        <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n      </span>\n    </button>\n  </div>\n  <!-- Modal Body -->\n  <div class=\"cx-dialog-body modal-body\">\n    <div class=\"cx-dialog-row\">\n      <div class=\"cx-dialog-item col-sm-12 col-md-12\">\n        <div class=\"cx-coupon-card-head\">\n          <span class=\"card-label-bold cx-coupon-card-id\">{{\n            coupon?.couponId\n          }}</span>\n          <span>: {{ coupon?.name }}</span>\n        </div>\n        <div class=\"cx-coupon-description\">{{ coupon?.description }}</div>\n\n        <div class=\"cx-coupon-dialog-date\">\n          <p>{{ 'myCoupons.effectiveTitle' | cxTranslate }}</p>\n          <div class=\"cx-coupon-date\">\n            {{ coupon?.startDate | cxDate: 'medium' }} -\n            {{ coupon?.endDate | cxDate: 'medium' }}\n          </div>\n        </div>\n\n        <div class=\"cx-coupon-dialog-status\">\n          <p>{{ 'myCoupons.status' | cxTranslate }}</p>\n          <div class=\"cx-coupon-status {{ coupon?.status | lowercase }}\">\n            {{ 'myCoupons.' + coupon?.status | cxTranslate }}\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    CouponDialogComponent.ctorParameters = function () { return [
+        { type: ModalService }
+    ]; };
+    CouponDialogComponent.propDecorators = {
+        dialog: [{ type: ViewChild, args: ['dialog', { static: false, read: ElementRef },] }]
+    };
+    return CouponDialogComponent;
+}());
+if (false) {
+    /** @type {?} */
+    CouponDialogComponent.prototype.iconTypes;
+    /** @type {?} */
+    CouponDialogComponent.prototype.coupon;
+    /** @type {?} */
+    CouponDialogComponent.prototype.dialog;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CouponDialogComponent.prototype.modalService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CouponCardComponent = /** @class */ (function () {
+    function CouponCardComponent(modalService, myCouponsComponentService) {
+        this.modalService = modalService;
+        this.myCouponsComponentService = myCouponsComponentService;
+        this.notificationChanged = new EventEmitter();
+    }
+    /**
+     * @return {?}
+     */
+    CouponCardComponent.prototype.onSubscriptionChange = /**
+     * @return {?}
+     */
+    function () {
+        this.notificationChanged.emit({
+            couponId: this.coupon.couponId,
+            notification: !this.coupon.notificationOn,
+        });
+    };
+    /**
+     * @return {?}
+     */
+    CouponCardComponent.prototype.readMore = /**
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var modalInstance;
+        this.modalRef = this.modalService.open(CouponDialogComponent, {
+            centered: true,
+            size: 'lg',
+        });
+        modalInstance = this.modalRef.componentInstance;
+        modalInstance.coupon = this.coupon;
+    };
+    /**
+     * @return {?}
+     */
+    CouponCardComponent.prototype.findProducts = /**
+     * @return {?}
+     */
+    function () {
+        this.myCouponsComponentService.launchSearchPage(this.coupon);
+    };
+    CouponCardComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'cx-coupon-card',
+                    template: "<div class=\"card\">\n  <div class=\"card-body cx-card-body\">\n    <div class=\"cx-coupon-data\">\n      <div class=\"cx-coupon-card-row top\">\n        <div class=\"cx-coupon-card-head\">\n          <span class=\"card-label-bold cx-coupon-card-id\">{{\n            coupon?.couponId\n          }}</span>\n          <span>: {{ coupon?.name }}</span>\n        </div>\n\n        <div class=\"cx-coupon-status {{ coupon?.status | lowercase }}\">\n          {{ 'myCoupons.' + coupon?.status | cxTranslate }}\n        </div>\n      </div>\n\n      <div class=\"cx-coupon-card-date\">\n        <p>{{ 'myCoupons.effectiveTitle' | cxTranslate }}</p>\n        <div class=\"cx-coupon-date\">\n          <div class=\"cx-coupon-date-start\">\n            {{ coupon?.startDate | cxDate: 'medium' }} -&nbsp;\n          </div>\n          <div class=\"cx-coupon-date-end\">\n            {{ coupon?.endDate | cxDate: 'medium' }}\n          </div>\n        </div>\n      </div>\n\n      <a (click)=\"readMore()\" class=\"cx-card-read-more\">{{\n        'myCoupons.readMore' | cxTranslate\n      }}</a>\n\n      <div class=\"cx-coupon-card-row bottom\">\n        <div class=\"cx-coupon-notification form-check\">\n          <label>\n            <input\n              type=\"checkbox\"\n              class=\"form-check-input\"\n              [checked]=\"coupon?.notificationOn\"\n              [class.disabled]=\"couponSubscriptionLoading$ | async\"\n              [disabled]=\"couponSubscriptionLoading$ | async\"\n              (change)=\"onSubscriptionChange()\"\n            />\n            <span class=\"form-check-label\">\n              {{ 'myCoupons.notification' | cxTranslate }}\n            </span>\n          </label>\n        </div>\n\n        <div class=\"cx-coupon-find-product col-lg-6 col-md-12 col-sm-6\">\n          <button class=\"btn btn-block btn-action\" (click)=\"findProducts()\">\n            {{ 'myCoupons.findProducts' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+                }] }
+    ];
+    /** @nocollapse */
+    CouponCardComponent.ctorParameters = function () { return [
+        { type: ModalService },
+        { type: MyCouponsComponentService }
+    ]; };
+    CouponCardComponent.propDecorators = {
+        coupon: [{ type: Input }],
+        couponSubscriptionLoading$: [{ type: Input }],
+        notificationChanged: [{ type: Output }]
+    };
+    return CouponCardComponent;
+}());
+if (false) {
+    /** @type {?} */
+    CouponCardComponent.prototype.coupon;
+    /** @type {?} */
+    CouponCardComponent.prototype.couponSubscriptionLoading$;
+    /** @type {?} */
+    CouponCardComponent.prototype.modalRef;
+    /** @type {?} */
+    CouponCardComponent.prototype.notificationChanged;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CouponCardComponent.prototype.modalService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CouponCardComponent.prototype.myCouponsComponentService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CouponClaimComponent = /** @class */ (function () {
+    function CouponClaimComponent(couponService, routingService, messageService) {
+        this.couponService = couponService;
+        this.routingService = routingService;
+        this.messageService = messageService;
+    }
+    /**
+     * @return {?}
+     */
+    CouponClaimComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.routingService
+            .getRouterState()
+            .subscribe((/**
+         * @param {?} k
+         * @return {?}
+         */
+        function (k) {
+            /** @type {?} */
+            var couponCode = k.state.params.couponCode;
+            if (couponCode) {
+                _this.couponService.claimCustomerCoupon(couponCode);
+                _this.subscription = _this.couponService
+                    .getClaimCustomerCouponResultSuccess()
+                    .subscribe((/**
+                 * @param {?} success
+                 * @return {?}
+                 */
+                function (success) {
+                    if (success) {
+                        _this.messageService.add({ key: 'myCoupons.claimCustomerCoupon' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
+                    }
+                    _this.routingService.go({ cxRoute: 'coupons' });
+                }));
+            }
+            else {
+                _this.routingService.go({ cxRoute: 'notFound' });
+            }
+        }))
+            .unsubscribe();
+    };
+    /**
+     * @return {?}
+     */
+    CouponClaimComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+    };
+    CouponClaimComponent.decorators = [
+        { type: Component, args: [{
+                    template: "",
+                    selector: 'cx-coupon-claim'
+                }] }
+    ];
+    /** @nocollapse */
+    CouponClaimComponent.ctorParameters = function () { return [
+        { type: CustomerCouponService },
+        { type: RoutingService },
+        { type: GlobalMessageService }
+    ]; };
+    return CouponClaimComponent;
+}());
+if (false) {
+    /** @type {?} */
+    CouponClaimComponent.prototype.subscription;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CouponClaimComponent.prototype.couponService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CouponClaimComponent.prototype.routingService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CouponClaimComponent.prototype.messageService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ɵ0$8 = { cxRoute: 'couponClaim' };
+var MyCouponsModule = /** @class */ (function () {
+    function MyCouponsModule() {
+    }
+    MyCouponsModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        CommonModule,
+                        CardModule,
+                        SpinnerModule,
+                        I18nModule,
+                        RouterModule,
+                        UrlModule,
+                        IconModule,
+                        ListNavigationModule,
+                        ConfigModule.withConfig((/** @type {?} */ ({
+                            cmsComponents: {
+                                MyCouponsComponent: {
+                                    component: MyCouponsComponent,
+                                    guards: [AuthGuard],
+                                },
+                                CouponClaimComponent: {
+                                    component: CouponClaimComponent,
+                                    guards: [AuthGuard],
+                                },
+                            },
+                        }))),
+                        RouterModule.forChild([
+                            {
+                                path: null,
+                                canActivate: [AuthGuard, CmsPageGuard],
+                                component: PageLayoutComponent,
+                                data: ɵ0$8,
+                            },
+                        ]),
+                    ],
+                    declarations: [
+                        MyCouponsComponent,
+                        CouponCardComponent,
+                        CouponDialogComponent,
+                        CouponClaimComponent,
+                    ],
+                    exports: [MyCouponsComponent, CouponClaimComponent],
+                    entryComponents: [
+                        MyCouponsComponent,
+                        CouponDialogComponent,
+                        CouponClaimComponent,
+                    ],
+                },] }
+    ];
+    return MyCouponsModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var NotificationPreferenceComponent = /** @class */ (function () {
     function NotificationPreferenceComponent(notificationPreferenceService) {
         this.notificationPreferenceService = notificationPreferenceService;
@@ -31042,7 +31833,7 @@ if (false) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var ɵ0$8 = { cxRoute: 'logout' };
+var ɵ0$9 = { cxRoute: 'logout' };
 var LogoutModule = /** @class */ (function () {
     function LogoutModule() {
     }
@@ -31055,7 +31846,7 @@ var LogoutModule = /** @class */ (function () {
                                 path: null,
                                 canActivate: [LogoutGuard],
                                 component: PageLayoutComponent,
-                                data: ɵ0$8,
+                                data: ɵ0$9,
                             },
                         ]),
                     ],
@@ -31657,6 +32448,7 @@ var CmsLibModule = /** @class */ (function () {
                         ResetPasswordModule,
                         BannerCarouselModule,
                         UserComponentModule,
+                        MyCouponsModule,
                         WishListModule,
                         NotificationPreferenceModule,
                         MyInterestsModule,
@@ -31763,7 +32555,7 @@ function findLastIndex(elements, predicate) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var ɵ0$9 = { cxRoute: 'product' }, ɵ1$1 = {
+var ɵ0$a = { cxRoute: 'product' }, ɵ1$1 = {
     cxSuffixUrlMatcher: {
         marker: 'p',
         paramName: 'productCode',
@@ -31780,7 +32572,7 @@ var ProductDetailsPageModule = /** @class */ (function () {
                                 path: null,
                                 canActivate: [CmsPageGuard],
                                 component: PageLayoutComponent,
-                                data: ɵ0$9,
+                                data: ɵ0$a,
                             },
                             {
                                 matcher: suffixUrlMatcher,
@@ -31799,7 +32591,7 @@ var ProductDetailsPageModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var ɵ0$a = { cxRoute: 'category' }, ɵ1$2 = { pageLabel: 'search', cxRoute: 'search' }, ɵ2 = { cxRoute: 'brand' }, ɵ3 = {
+var ɵ0$b = { cxRoute: 'category' }, ɵ1$2 = { pageLabel: 'search', cxRoute: 'search' }, ɵ2 = { cxRoute: 'brand' }, ɵ3 = {
     cxSuffixUrlMatcher: {
         marker: 'c',
         paramName: 'categoryCode',
@@ -31816,7 +32608,7 @@ var ProductListingPageModule = /** @class */ (function () {
                                 path: null,
                                 canActivate: [CmsPageGuard],
                                 component: PageLayoutComponent,
-                                data: ɵ0$a,
+                                data: ɵ0$b,
                             },
                             {
                                 path: null,
@@ -32074,6 +32866,11 @@ var defaultStorefrontRoutesConfig = {
         paths: ['my-account/return-request/:returnCode'],
         paramsMapping: { returnCode: 'rma' },
     },
+    coupons: { paths: ['my-account/coupons'] },
+    couponClaim: {
+        paths: ['my-account/coupon/claim/:couponCode'],
+        paramsMapping: { couponCode: 'code' },
+    },
 };
 /** @type {?} */
 var defaultRoutingConfig = {
@@ -32272,5 +33069,5 @@ var B2cStorefrontModule = /** @class */ (function () {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AsmModule, AutoFocusDirective, AutoFocusDirectiveModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OnlyNumberDirective, OnlyNumberDirectiveModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultScrollConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, AsmLoaderModule as ɵa, asmFactory as ɵb, VariantSizeSelectorModule as ɵba, VariantSizeSelectorComponent as ɵbb, VariantColorSelectorModule as ɵbc, VariantColorSelectorComponent as ɵbd, VariantStyleIconsModule as ɵbe, VariantStyleIconsComponent as ɵbf, OrderDetailActionsComponent as ɵbg, TrackingEventsComponent as ɵbh, ConsignmentTrackingComponent as ɵbi, AddToHomeScreenService as ɵbj, GuestRegisterFormComponent as ɵbk, SkipLinkModule as ɵbl, skipLinkFactory as ɵbm, defaultSkipLinkConfig as ɵbn, SkipLinkConfig as ɵbo, SkipLinkScrollPosition as ɵbp, SkipLinkComponent as ɵbq, SkipLinkService as ɵbr, SkipLinkDirective as ɵbs, CheckoutLoginComponent as ɵbt, suffixUrlMatcher as ɵbu, addCmsRoute as ɵbv, htmlLangProvider as ɵbw, setHtmlLangAttribute as ɵbx, AnonymousConsentsModule as ɵby, AnonymousConsentDialogComponent as ɵbz, ComponentMapperService as ɵc, RoutingModule as ɵca, defaultStorefrontRoutesConfig as ɵcb, defaultRoutingConfig as ɵcc, AsmEnablerService as ɵd, AsmMainUiComponent as ɵe, AsmComponentService as ɵf, CSAgentLoginFormComponent as ɵg, CustomerSelectionComponent as ɵh, AsmSessionTimerComponent as ɵi, FormatTimerPipe as ɵj, CustomerEmulationComponent as ɵk, AppliedCouponsComponent as ɵl, AddToWishListModule as ɵm, AddToWishListComponent as ɵn, defaultCheckoutConfig as ɵo, ExpressCheckoutService as ɵp, defaultQualtricsConfig as ɵq, CmsRoutesService as ɵr, CmsMappingService as ɵs, CmsI18nService as ɵt, CmsGuardsService as ɵu, ReturnRequestService as ɵv, ProductVariantSelectorModule as ɵw, ProductVariantSelectorComponent as ɵx, VariantStyleSelectorModule as ɵy, VariantStyleSelectorComponent as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AsmModule, AutoFocusDirective, AutoFocusDirectiveModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OnlyNumberDirective, OnlyNumberDirectiveModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultScrollConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, AsmLoaderModule as ɵa, asmFactory as ɵb, VariantSizeSelectorModule as ɵba, VariantSizeSelectorComponent as ɵbb, VariantColorSelectorModule as ɵbc, VariantColorSelectorComponent as ɵbd, VariantStyleIconsModule as ɵbe, VariantStyleIconsComponent as ɵbf, OrderDetailActionsComponent as ɵbg, TrackingEventsComponent as ɵbh, ConsignmentTrackingComponent as ɵbi, AddToHomeScreenService as ɵbj, GuestRegisterFormComponent as ɵbk, SkipLinkModule as ɵbl, skipLinkFactory as ɵbm, defaultSkipLinkConfig as ɵbn, SkipLinkConfig as ɵbo, SkipLinkScrollPosition as ɵbp, SkipLinkComponent as ɵbq, SkipLinkService as ɵbr, SkipLinkDirective as ɵbs, CheckoutLoginComponent as ɵbt, MyCouponsComponentService as ɵbu, suffixUrlMatcher as ɵbv, addCmsRoute as ɵbw, htmlLangProvider as ɵbx, setHtmlLangAttribute as ɵby, AnonymousConsentsModule as ɵbz, ComponentMapperService as ɵc, AnonymousConsentDialogComponent as ɵca, RoutingModule as ɵcb, defaultStorefrontRoutesConfig as ɵcc, defaultRoutingConfig as ɵcd, AsmEnablerService as ɵd, AsmMainUiComponent as ɵe, AsmComponentService as ɵf, CSAgentLoginFormComponent as ɵg, CustomerSelectionComponent as ɵh, AsmSessionTimerComponent as ɵi, FormatTimerPipe as ɵj, CustomerEmulationComponent as ɵk, AppliedCouponsComponent as ɵl, AddToWishListModule as ɵm, AddToWishListComponent as ɵn, defaultCheckoutConfig as ɵo, ExpressCheckoutService as ɵp, defaultQualtricsConfig as ɵq, CmsRoutesService as ɵr, CmsMappingService as ɵs, CmsI18nService as ɵt, CmsGuardsService as ɵu, ReturnRequestService as ɵv, ProductVariantSelectorModule as ɵw, ProductVariantSelectorComponent as ɵx, VariantStyleSelectorModule as ɵy, VariantStyleSelectorComponent as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
 //# sourceMappingURL=spartacus-storefront.js.map
