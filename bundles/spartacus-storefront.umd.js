@@ -7269,7 +7269,7 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CxApiService = /** @class */ (function () {
-        function CxApiService(auth, cart, cartData, checkout, checkoutDelivery, checkoutPayment, cms, pageMeta, featureConfig, globalMessage, translation, kyma, occEndpoints, product, productSearch, productReview, productReference, searchbox, routing, currency, language, baseSite, user, userAddress, userConsent, userOrder, userPayment, userNotificationPreferenceService, userInterestsService, ngZone) {
+        function CxApiService(auth, cart, cartData, checkout, checkoutDelivery, checkoutPayment, cms, pageMeta, featureConfig, globalMessage, translation, kyma, occEndpoints, product, productSearch, productReview, productReference, searchbox, routing, currency, language, baseSite, user, userAddress, userConsent, userOrder, userPayment, userNotificationPreferenceService, userInterestsService, selectiveCartService, ngZone) {
             this.auth = auth;
             this.cart = cart;
             this.cartData = cartData;
@@ -7299,6 +7299,7 @@
             this.userPayment = userPayment;
             this.userNotificationPreferenceService = userNotificationPreferenceService;
             this.userInterestsService = userInterestsService;
+            this.selectiveCartService = selectiveCartService;
             this.ngZone = ngZone;
         }
         CxApiService.decorators = [
@@ -7337,9 +7338,10 @@
             { type: core$1.UserPaymentService, decorators: [{ type: core.Optional }] },
             { type: core$1.UserNotificationPreferenceService, decorators: [{ type: core.Optional }] },
             { type: core$1.UserInterestsService, decorators: [{ type: core.Optional }] },
+            { type: core$1.SelectiveCartService, decorators: [{ type: core.Optional }] },
             { type: core.NgZone }
         ]; };
-        /** @nocollapse */ CxApiService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CxApiService_Factory() { return new CxApiService(core.ɵɵinject(core$1.AuthService, 8), core.ɵɵinject(core$1.CartService, 8), core.ɵɵinject(core$1.CartDataService, 8), core.ɵɵinject(core$1.CheckoutService, 8), core.ɵɵinject(core$1.CheckoutDeliveryService, 8), core.ɵɵinject(core$1.CheckoutPaymentService, 8), core.ɵɵinject(core$1.CmsService, 8), core.ɵɵinject(core$1.PageMetaService, 8), core.ɵɵinject(core$1.FeatureConfigService, 8), core.ɵɵinject(core$1.GlobalMessageService, 8), core.ɵɵinject(core$1.TranslationService, 8), core.ɵɵinject(core$1.KymaService, 8), core.ɵɵinject(core$1.OccEndpointsService, 8), core.ɵɵinject(core$1.ProductService, 8), core.ɵɵinject(core$1.ProductSearchService, 8), core.ɵɵinject(core$1.ProductReviewService, 8), core.ɵɵinject(core$1.ProductReferenceService, 8), core.ɵɵinject(core$1.SearchboxService, 8), core.ɵɵinject(core$1.RoutingService, 8), core.ɵɵinject(core$1.CurrencyService, 8), core.ɵɵinject(core$1.LanguageService, 8), core.ɵɵinject(core$1.BaseSiteService, 8), core.ɵɵinject(core$1.UserService, 8), core.ɵɵinject(core$1.UserAddressService, 8), core.ɵɵinject(core$1.UserConsentService, 8), core.ɵɵinject(core$1.UserOrderService, 8), core.ɵɵinject(core$1.UserPaymentService, 8), core.ɵɵinject(core$1.UserNotificationPreferenceService, 8), core.ɵɵinject(core$1.UserInterestsService, 8), core.ɵɵinject(core.NgZone)); }, token: CxApiService, providedIn: "root" });
+        /** @nocollapse */ CxApiService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CxApiService_Factory() { return new CxApiService(core.ɵɵinject(core$1.AuthService, 8), core.ɵɵinject(core$1.CartService, 8), core.ɵɵinject(core$1.CartDataService, 8), core.ɵɵinject(core$1.CheckoutService, 8), core.ɵɵinject(core$1.CheckoutDeliveryService, 8), core.ɵɵinject(core$1.CheckoutPaymentService, 8), core.ɵɵinject(core$1.CmsService, 8), core.ɵɵinject(core$1.PageMetaService, 8), core.ɵɵinject(core$1.FeatureConfigService, 8), core.ɵɵinject(core$1.GlobalMessageService, 8), core.ɵɵinject(core$1.TranslationService, 8), core.ɵɵinject(core$1.KymaService, 8), core.ɵɵinject(core$1.OccEndpointsService, 8), core.ɵɵinject(core$1.ProductService, 8), core.ɵɵinject(core$1.ProductSearchService, 8), core.ɵɵinject(core$1.ProductReviewService, 8), core.ɵɵinject(core$1.ProductReferenceService, 8), core.ɵɵinject(core$1.SearchboxService, 8), core.ɵɵinject(core$1.RoutingService, 8), core.ɵɵinject(core$1.CurrencyService, 8), core.ɵɵinject(core$1.LanguageService, 8), core.ɵɵinject(core$1.BaseSiteService, 8), core.ɵɵinject(core$1.UserService, 8), core.ɵɵinject(core$1.UserAddressService, 8), core.ɵɵinject(core$1.UserConsentService, 8), core.ɵɵinject(core$1.UserOrderService, 8), core.ɵɵinject(core$1.UserPaymentService, 8), core.ɵɵinject(core$1.UserNotificationPreferenceService, 8), core.ɵɵinject(core$1.UserInterestsService, 8), core.ɵɵinject(core$1.SelectiveCartService, 8), core.ɵɵinject(core.NgZone)); }, token: CxApiService, providedIn: "root" });
         return CxApiService;
     }());
     if (false) {
@@ -7403,6 +7405,8 @@
         CxApiService.prototype.userNotificationPreferenceService;
         /** @type {?} */
         CxApiService.prototype.userInterestsService;
+        /** @type {?} */
+        CxApiService.prototype.selectiveCartService;
         /** @type {?} */
         CxApiService.prototype.ngZone;
     }
@@ -11951,11 +11955,17 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CartItemListComponent = /** @class */ (function () {
-        function CartItemListComponent(cartService, fb) {
+        function CartItemListComponent(cartService, fb, selectiveCartService, featureConfig) {
             this.cartService = cartService;
             this.fb = fb;
+            this.selectiveCartService = selectiveCartService;
+            this.featureConfig = featureConfig;
             this.isReadOnly = false;
             this.hasHeader = true;
+            this.options = {
+                isSaveForLater: false,
+                optionalBtn: null,
+            };
             this.potentialProductPromotions = [];
             this.promotionLocation = core$1.PromotionLocation.ActiveCart;
             this.cartIsLoading = false;
@@ -12006,16 +12016,41 @@
          * @return {?}
          */
         function () { };
+        //TODO remove feature flag for #5958
+        //TODO remove feature flag for #5958
+        /**
+         * @return {?}
+         */
+        CartItemListComponent.prototype.isSaveForLaterEnabled = 
+        //TODO remove feature flag for #5958
+        /**
+         * @return {?}
+         */
+        function () {
+            if (this.featureConfig) {
+                return this.featureConfig.isEnabled('saveForLater');
+            }
+            return false;
+        };
+        //TODO remove feature flag for #5958
+        //TODO remove feature flag for #5958
         /**
          * @param {?} item
          * @return {?}
          */
-        CartItemListComponent.prototype.removeEntry = /**
+        CartItemListComponent.prototype.removeEntry = 
+        //TODO remove feature flag for #5958
+        /**
          * @param {?} item
          * @return {?}
          */
         function (item) {
-            this.cartService.removeEntry(item);
+            if (this.selectiveCartService && this.options.isSaveForLater) {
+                this.selectiveCartService.removeEntry(item);
+            }
+            else {
+                this.cartService.removeEntry(item);
+            }
             delete this.form.controls[item.product.code];
         };
         /**
@@ -12058,6 +12093,10 @@
             var e_1, _a, e_2, _b;
             /** @type {?} */
             var entryPromotions = [];
+            //don't show promotions in saveforlater
+            if (this.options.isSaveForLater) {
+                return entryPromotions;
+            }
             if (this.potentialProductPromotions &&
                 this.potentialProductPromotions.length > 0) {
                 try {
@@ -12135,17 +12174,20 @@
         CartItemListComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-cart-item-list',
-                        template: "<div *ngIf=\"hasHeader\" class=\"d-none d-md-block d-lg-block d-xl-block\">\n  <div class=\"cx-item-list-header row\">\n    <div class=\"cx-item-list-desc col-md-5 col-lg-5 col-xl-6\">\n      {{ 'cartItems.description' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-price col-md-3 col-lg-2 col-xl-2\">\n      {{ 'cartItems.itemPrice' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-qty col-md-2 col-lg-3 col-xl-2\">\n      {{ 'cartItems.quantity' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n      {{ 'cartItems.total' | cxTranslate }}\n    </div>\n  </div>\n</div>\n\n<div [formGroup]=\"form\">\n  <div class=\"cx-item-list-row\" *ngFor=\"let item of items\">\n    <div class=\"cx-item-list-items\">\n      <ng-container *cxFeatureLevel=\"'!1.4'\">\n        <cx-cart-item\n          [parent]=\"form.controls[item.product.code]\"\n          [item]=\"item\"\n          [isReadOnly]=\"isReadOnly\"\n          [potentialProductPromotions]=\"\n            getPotentialProductPromotionsForItem(item)\n          \"\n          [cartIsLoading]=\"cartIsLoading\"\n          (remove)=\"removeEntry($event)\"\n          (update)=\"updateEntry($event)\"\n        >\n        </cx-cart-item>\n      </ng-container>\n\n      <ng-container *cxFeatureLevel=\"'1.4'\">\n        <cx-cart-item\n          [parent]=\"form.controls[item.product.code]\"\n          [item]=\"item\"\n          [isReadOnly]=\"isReadOnly\"\n          [promotionLocation]=\"promotionLocation\"\n          [cartIsLoading]=\"cartIsLoading\"\n          (remove)=\"removeEntry($event)\"\n          (update)=\"updateEntry($event)\"\n        >\n        </cx-cart-item>\n      </ng-container>\n    </div>\n  </div>\n</div>\n"
+                        template: "<div *ngIf=\"hasHeader\" class=\"d-none d-md-block d-lg-block d-xl-block\">\n  <div class=\"cx-item-list-header row\">\n    <div class=\"cx-item-list-desc col-md-5 col-lg-5 col-xl-6\">\n      {{ 'cartItems.description' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-price col-md-3 col-lg-2 col-xl-2\">\n      {{ 'cartItems.itemPrice' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-qty col-md-2 col-lg-3 col-xl-2\">\n      {{ 'cartItems.quantity' | cxTranslate }}\n    </div>\n\n    <ng-container\n      *ngIf=\"\n        isSaveForLaterEnabled() && options.isSaveForLater;\n        else totalHeader\n      \"\n    >\n      <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n        {{ 'saveForLaterItems.stock' | cxTranslate }}\n      </div>\n    </ng-container>\n  </div>\n</div>\n\n<div [formGroup]=\"form\">\n  <div class=\"cx-item-list-row\" *ngFor=\"let item of items\">\n    <div class=\"cx-item-list-items\">\n      <ng-container *cxFeatureLevel=\"'!1.5'\">\n        <cx-cart-item\n          [parent]=\"form.controls[item.product.code]\"\n          [item]=\"item\"\n          [isReadOnly]=\"isReadOnly\"\n          [potentialProductPromotions]=\"\n            getPotentialProductPromotionsForItem(item)\n          \"\n          [cartIsLoading]=\"cartIsLoading\"\n          (remove)=\"removeEntry($event)\"\n          (update)=\"updateEntry($event)\"\n        >\n        </cx-cart-item>\n      </ng-container>\n\n      <ng-container *cxFeatureLevel=\"'1.5'\">\n        <cx-cart-item\n          [parent]=\"form.controls[item.product.code]\"\n          [item]=\"item\"\n          [isReadOnly]=\"isReadOnly\"\n          [promotionLocation]=\"promotionLocation\"\n          [cartIsLoading]=\"cartIsLoading\"\n          (remove)=\"removeEntry($event)\"\n          (update)=\"updateEntry($event)\"\n          [options]=\"options\"\n        >\n        </cx-cart-item>\n      </ng-container>\n    </div>\n  </div>\n</div>\n\n<ng-template #totalHeader>\n  <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n    {{ 'cartItems.total' | cxTranslate }}\n  </div>\n</ng-template>\n"
                     }] }
         ];
         /** @nocollapse */
         CartItemListComponent.ctorParameters = function () { return [
             { type: core$1.CartService },
-            { type: forms.FormBuilder }
+            { type: forms.FormBuilder },
+            { type: core$1.SelectiveCartService },
+            { type: core$1.FeatureConfigService }
         ]; };
         CartItemListComponent.propDecorators = {
             isReadOnly: [{ type: core.Input }],
             hasHeader: [{ type: core.Input }],
+            options: [{ type: core.Input }],
             potentialProductPromotions: [{ type: core.Input }],
             promotionLocation: [{ type: core.Input }],
             items: [{ type: core.Input }],
@@ -12158,6 +12200,8 @@
         CartItemListComponent.prototype.isReadOnly;
         /** @type {?} */
         CartItemListComponent.prototype.hasHeader;
+        /** @type {?} */
+        CartItemListComponent.prototype.options;
         /** @type {?} */
         CartItemListComponent.prototype.potentialProductPromotions;
         /** @type {?} */
@@ -12181,6 +12225,16 @@
          * @protected
          */
         CartItemListComponent.prototype.fb;
+        /**
+         * @type {?}
+         * @protected
+         */
+        CartItemListComponent.prototype.selectiveCartService;
+        /**
+         * @type {?}
+         * @private
+         */
+        CartItemListComponent.prototype.featureConfig;
     }
 
     /**
@@ -12203,12 +12257,27 @@
         /** @type {?|undefined} */
         Item.prototype.updateable;
     }
+    /**
+     * @record
+     */
+    function CartItemComponentOptions() { }
+    if (false) {
+        /** @type {?|undefined} */
+        CartItemComponentOptions.prototype.isSaveForLater;
+        /** @type {?|undefined} */
+        CartItemComponentOptions.prototype.optionalBtn;
+    }
     var CartItemComponent = /** @class */ (function () {
-        function CartItemComponent(promotionService) {
+        function CartItemComponent(promotionService, featureConfig) {
             this.promotionService = promotionService;
+            this.featureConfig = featureConfig;
             this.compact = false;
             this.isReadOnly = false;
             this.cartIsLoading = false;
+            this.options = {
+                isSaveForLater: false,
+                optionalBtn: null,
+            };
             this.promotionLocation = core$1.PromotionLocation.ActiveCart;
             this.remove = new core.EventEmitter();
             this.update = new core.EventEmitter();
@@ -12223,11 +12292,31 @@
         function () {
             this.appliedProductPromotions$ = this.promotionService.getProductPromotionForEntry(this.item, this.promotionLocation);
         };
+        //TODO remove feature flag for #5958
+        //TODO remove feature flag for #5958
+        /**
+         * @return {?}
+         */
+        CartItemComponent.prototype.isSaveForLaterEnabled = 
+        //TODO remove feature flag for #5958
+        /**
+         * @return {?}
+         */
+        function () {
+            if (this.featureConfig) {
+                return this.featureConfig.isEnabled('saveForLater');
+            }
+            return false;
+        };
+        //TODO remove feature flag for #5958
+        //TODO remove feature flag for #5958
         /**
          * @param {?} product
          * @return {?}
          */
-        CartItemComponent.prototype.isProductOutOfStock = /**
+        CartItemComponent.prototype.isProductOutOfStock = 
+        //TODO remove feature flag for #5958
+        /**
          * @param {?} product
          * @return {?}
          */
@@ -12269,18 +12358,20 @@
         CartItemComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-cart-item',
-                        template: "<div [ngClass]=\"compact ? 'cx-compact row' : 'row'\">\n  <!-- Item Image -->\n  <div class=\"col-2 cx-image-container\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n      (click)=\"viewItem()\"\n    >\n      <cx-media\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-5'\">\n        <div *ngIf=\"item.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n            (click)=\"viewItem()\"\n            >{{ item.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"item.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n        </div>\n        <!-- Variants -->\n        <ng-container *cxFeatureLevel=\"'!1.5'\">\n          <div\n            *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\">{{ variant.name }}</div>\n            <div class=\"cx-value\">{{ variant.value }}</div>\n          </div>\n        </ng-container>\n        <ng-container *cxFeatureLevel=\"'1.5'\">\n          <div\n            *ngFor=\"\n              let variant of item.product.baseOptions[0]?.selected\n                ?.variantOptionQualifiers\n            \"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\" *ngIf=\"variant.name && variant.value\">\n              {{ variant.name }}: {{ variant.value }}\n            </div>\n          </div>\n        </ng-container>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"item.basePrice\"\n        class=\"cx-price\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n          {{ item.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <div class=\"cx-quantity\" [ngClass]=\"compact ? '' : ' col-3'\">\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          placement=\"left\"\n          title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n        <div *ngIf=\"isReadOnly\" class=\"cx-value\">{{ item.quantity }}</div>\n        <div\n          *ngIf=\"!isReadOnly && parent\"\n          class=\"cx-value\"\n          [formGroup]=\"parent\"\n        >\n          <cx-item-counter\n            [isValueChangeable]=\"item.updateable\"\n            [step]=\"1\"\n            [min]=\"1\"\n            [max]=\"item.product.stock?.stockLevel || 1000\"\n            (update)=\"updateItem($event)\"\n            [cartIsLoading]=\"cartIsLoading\"\n            formControlName=\"quantity\"\n          >\n          </cx-item-counter>\n        </div>\n      </div>\n      <!-- Total -->\n      <div\n        *ngIf=\"item.totalPrice\"\n        class=\"cx-total\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.total' | cxTranslate }}\n        </div>\n        <div class=\"cx-value\">{{ item.totalPrice.formattedValue }}</div>\n      </div>\n    </div>\n    <!-- Availability -->\n    <div *ngIf=\"isProductOutOfStock(item)\" class=\"cx-availability col-12\">\n      {{ 'productSummary.outOfStock' | cxTranslate }}\n    </div>\n    <!-- Promotion -->\n    <ng-container *cxFeatureLevel=\"'!1.4'\">\n      <cx-promotions [promotions]=\"potentialProductPromotions\"></cx-promotions>\n    </ng-container>\n\n    <ng-container *cxFeatureLevel=\"'1.4'\">\n      <ng-container\n        *ngIf=\"appliedProductPromotions$ | async as appliedProductPromotions\"\n      >\n        <cx-promotions [promotions]=\"appliedProductPromotions\"></cx-promotions>\n      </ng-container>\n    </ng-container>\n    <!-- Actions -->\n    <div *ngIf=\"!isReadOnly && item.updateable\" class=\"cx-actions col-12\">\n      <button\n        class=\"link\"\n        [class.disabled]=\"cartIsLoading\"\n        [disabled]=\"cartIsLoading\"\n        (click)=\"removeItem()\"\n      >\n        {{ 'common.remove' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n"
+                        template: "<div [ngClass]=\"compact ? 'cx-compact row' : 'row'\">\n  <!-- Item Image -->\n  <div class=\"col-2 cx-image-container\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n      (click)=\"viewItem()\"\n    >\n      <cx-media\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-5'\">\n        <div *ngIf=\"item.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n            (click)=\"viewItem()\"\n            >{{ item.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"item.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n        </div>\n        <!-- Variants -->\n        <ng-container *cxFeatureLevel=\"'!1.5'\">\n          <div\n            *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\">{{ variant.name }}</div>\n            <div class=\"cx-value\">{{ variant.value }}</div>\n          </div>\n        </ng-container>\n        <ng-container *cxFeatureLevel=\"'1.5'\">\n          <div\n            *ngFor=\"\n              let variant of item.product.baseOptions[0]?.selected\n                ?.variantOptionQualifiers\n            \"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\" *ngIf=\"variant.name && variant.value\">\n              {{ variant.name }}: {{ variant.value }}\n            </div>\n          </div>\n        </ng-container>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"item.basePrice\"\n        class=\"cx-price\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n          {{ item.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <div class=\"cx-quantity\" [ngClass]=\"compact ? '' : ' col-3'\">\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          placement=\"left\"\n          title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n\n        <div *ngIf=\"isReadOnly\" class=\"cx-value\">\n          {{ item.quantity }}\n        </div>\n        <div\n          *ngIf=\"!isReadOnly && parent\"\n          class=\"cx-value\"\n          [formGroup]=\"parent\"\n        >\n          <cx-item-counter\n            [isValueChangeable]=\"item.updateable\"\n            [step]=\"1\"\n            [min]=\"1\"\n            [max]=\"item.product.stock?.stockLevel || 1000\"\n            (update)=\"updateItem($event)\"\n            [cartIsLoading]=\"cartIsLoading\"\n            formControlName=\"quantity\"\n          >\n          </cx-item-counter>\n        </div>\n      </div>\n      <!-- Total -->\n      <ng-container\n        *ngIf=\"isSaveForLaterEnabled() && options.isSaveForLater; else total\"\n      >\n        <div\n          class=\"cx-total\"\n          [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n        >\n          <div\n            class=\"cx-label\"\n            [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          >\n            {{ 'saveForLaterItems.stock' | cxTranslate }}\n          </div>\n          <div\n            *ngIf=\"item.product?.stock?.stockLevel >= 0; else forceInstock\"\n            class=\"cx-value\"\n          >\n            {{ item.product.stock.stockLevel }}\n          </div>\n          <ng-template #forceInstock\n            ><div class=\"cx-value\">\n              {{ 'saveForLaterItems.forceInStock' | cxTranslate }}\n            </div></ng-template\n          >\n        </div>\n      </ng-container>\n    </div>\n    <!-- Availability -->\n    <div\n      *ngIf=\"isProductOutOfStock(item.product)\"\n      class=\"cx-availability col-12\"\n    >\n      {{ 'productSummary.outOfStock' | cxTranslate }}\n    </div>\n    <!-- Promotion -->\n    <ng-container *cxFeatureLevel=\"'!1.5'\">\n      <cx-promotions [promotions]=\"potentialProductPromotions\"></cx-promotions>\n    </ng-container>\n\n    <ng-container *cxFeatureLevel=\"'1.5'\">\n      <ng-container\n        *ngIf=\"appliedProductPromotions$ | async as appliedProductPromotions\"\n      >\n        <cx-promotions [promotions]=\"appliedProductPromotions\"></cx-promotions>\n      </ng-container>\n    </ng-container>\n    <!-- Actions -->\n\n    <div\n      *ngIf=\"(!isReadOnly || options.isSaveForLater) && item.updateable\"\n      class=\"cx-actions col-12\"\n    >\n      <ng-container *ngIf=\"!isProductOutOfStock(item.product)\">\n        <ng-container\n          *ngTemplateOutlet=\"\n            options.optionalBtn;\n            context: { $implicit: { loading: cartIsLoading, item: item } }\n          \"\n        ></ng-container>\n      </ng-container>\n\n      <div class=\"col-md-3 col-lg-3 col-xl-3 cx-remove-btn\">\n        <button class=\"link\" [disabled]=\"cartIsLoading\" (click)=\"removeItem()\">\n          {{ 'common.remove' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n\n<ng-template #total>\n  <div\n    *ngIf=\"item.totalPrice\"\n    class=\"cx-total\"\n    [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n  >\n    <div\n      class=\"cx-label\"\n      [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n    >\n      {{ 'cartItems.total' | cxTranslate }}\n    </div>\n    <div class=\"cx-value\">{{ item.totalPrice.formattedValue }}</div>\n  </div>\n</ng-template>\n"
                     }] }
         ];
         /** @nocollapse */
         CartItemComponent.ctorParameters = function () { return [
-            { type: PromotionService }
+            { type: PromotionService },
+            { type: core$1.FeatureConfigService }
         ]; };
         CartItemComponent.propDecorators = {
             compact: [{ type: core.Input }],
             item: [{ type: core.Input }],
             isReadOnly: [{ type: core.Input }],
             cartIsLoading: [{ type: core.Input }],
+            options: [{ type: core.Input }],
             promotionLocation: [{ type: core.Input }],
             potentialProductPromotions: [{ type: core.Input }],
             remove: [{ type: core.Output }],
@@ -12300,6 +12391,8 @@
         /** @type {?} */
         CartItemComponent.prototype.cartIsLoading;
         /** @type {?} */
+        CartItemComponent.prototype.options;
+        /** @type {?} */
         CartItemComponent.prototype.promotionLocation;
         /** @type {?} */
         CartItemComponent.prototype.potentialProductPromotions;
@@ -12318,6 +12411,11 @@
          * @protected
          */
         CartItemComponent.prototype.promotionService;
+        /**
+         * @type {?}
+         * @private
+         */
+        CartItemComponent.prototype.featureConfig;
     }
 
     /**
@@ -12418,9 +12516,14 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CartDetailsComponent = /** @class */ (function () {
-        function CartDetailsComponent(cartService, promotionService) {
+        function CartDetailsComponent(cartService, promotionService, selectiveCartService, authService, routingService, featureConfig) {
             this.cartService = cartService;
             this.promotionService = promotionService;
+            this.selectiveCartService = selectiveCartService;
+            this.authService = authService;
+            this.routingService = routingService;
+            this.featureConfig = featureConfig;
+            this.loggedIn = false;
             this.promotionLocation = core$1.PromotionLocation.ActiveCart;
         }
         /**
@@ -12430,6 +12533,7 @@
          * @return {?}
          */
         function () {
+            var _this = this;
             this.cart$ = this.cartService.getActive();
             this.entries$ = this.cartService
                 .getEntries()
@@ -12438,14 +12542,59 @@
              * @return {?}
              */
             function (entries) { return entries.length > 0; })));
-            this.cartLoaded$ = this.cartService.getLoaded();
-            this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
+            if (this.isSaveForLaterEnabled()) {
+                this.cartLoaded$ = rxjs.combineLatest([
+                    this.cartService.getLoaded(),
+                    this.selectiveCartService.getLoaded(),
+                    this.authService.isUserLoggedIn(),
+                ]).pipe(operators.tap((/**
+                 * @param {?} __0
+                 * @return {?}
+                 */
+                function (_a) {
+                    var _b = __read(_a, 3), loggedIn = _b[2];
+                    return (_this.loggedIn = loggedIn);
+                })), operators.map((/**
+                 * @param {?} __0
+                 * @return {?}
+                 */
+                function (_a) {
+                    var _b = __read(_a, 3), cartLoaded = _b[0], sflLoaded = _b[1], loggedIn = _b[2];
+                    return loggedIn ? cartLoaded && sflLoaded : cartLoaded;
+                })));
+            }
+            //TODO remove for #5958
+            else {
+                this.cartLoaded$ = this.cartService.getLoaded();
+            }
+            //TODO  remove for #5958 end
+            if (this.promotionService) {
+                this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
+            }
         };
+        //TODO remove feature flag for #5958
+        //TODO remove feature flag for #5958
+        /**
+         * @return {?}
+         */
+        CartDetailsComponent.prototype.isSaveForLaterEnabled = 
+        //TODO remove feature flag for #5958
+        /**
+         * @return {?}
+         */
+        function () {
+            if (this.featureConfig) {
+                return this.featureConfig.isEnabled('saveForLater');
+            }
+            return false;
+        };
+        //TODO remove feature flag for #5958 end
         /**
          * @deprecated Since 1.5
          * Use promotionService instead of the promotion inputs.
          * Remove issue: #5670
          */
+        //TODO remove feature flag for #5958 end
         /**
          * @deprecated Since 1.5
          * Use promotionService instead of the promotion inputs.
@@ -12453,7 +12602,9 @@
          * @param {?} cart
          * @return {?}
          */
-        CartDetailsComponent.prototype.getAllPromotionsForCart = /**
+        CartDetailsComponent.prototype.getAllPromotionsForCart = 
+        //TODO remove feature flag for #5958 end
+        /**
          * @deprecated Since 1.5
          * Use promotionService instead of the promotion inputs.
          * Remove issue: #5670
@@ -12471,17 +12622,38 @@
             appliedPromotions.push.apply(appliedPromotions, __spread((cart.appliedProductPromotions || [])));
             return __spread(potentialPromotions, appliedPromotions);
         };
+        /**
+         * @param {?} item
+         * @return {?}
+         */
+        CartDetailsComponent.prototype.saveForLater = /**
+         * @param {?} item
+         * @return {?}
+         */
+        function (item) {
+            if (this.loggedIn) {
+                this.cartService.removeEntry(item);
+                this.selectiveCartService.addEntry(item.product.code, item.quantity);
+            }
+            else {
+                this.routingService.go({ cxRoute: 'login' });
+            }
+        };
         CartDetailsComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-cart-details',
-                        template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <ng-container *ngIf=\"entries$ | async as entries\">\n    <div class=\"cart-details-wrapper\">\n      <div class=\"cx-total\">\n        {{ 'cartDetails.cartName' | cxTranslate: { code: cart.code } }}\n      </div>\n\n      <ng-container *cxFeatureLevel=\"'!1.5'\">\n        <cx-promotions\n          [promotions]=\"getAllPromotionsForCart(cart)\"\n        ></cx-promotions>\n\n        <cx-cart-item-list\n          [items]=\"entries\"\n          [cartIsLoading]=\"!(cartLoaded$ | async)\"\n          [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n        ></cx-cart-item-list>\n      </ng-container>\n\n      <ng-container *cxFeatureLevel=\"'1.5'\">\n        <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n          <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n        </ng-container>\n\n        <cx-cart-item-list\n          [items]=\"entries\"\n          [cartIsLoading]=\"!(cartLoaded$ | async)\"\n          [promotionLocation]=\"promotionLocation\"\n        ></cx-cart-item-list>\n      </ng-container>\n    </div>\n  </ng-container>\n</ng-container>\n",
+                        template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <ng-container *ngIf=\"entries$ | async as entries\">\n    <div *ngIf=\"cart.totalItems > 0\" class=\"cart-details-wrapper\">\n      <div class=\"cx-total\">\n        {{ 'cartDetails.cartName' | cxTranslate: { code: cart.code } }}\n      </div>\n\n      <ng-container *cxFeatureLevel=\"'!1.5'\">\n        <cx-promotions\n          [promotions]=\"getAllPromotionsForCart(cart)\"\n        ></cx-promotions>\n\n        <cx-cart-item-list\n          [items]=\"entries\"\n          [cartIsLoading]=\"!(cartLoaded$ | async)\"\n          [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n        ></cx-cart-item-list>\n      </ng-container>\n\n      <ng-container *cxFeatureLevel=\"'1.5'\">\n        <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n          <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n        </ng-container>\n\n        <cx-cart-item-list\n          [items]=\"entries\"\n          [cartIsLoading]=\"!(cartLoaded$ | async)\"\n          [promotionLocation]=\"promotionLocation\"\n          [options]=\"{\n            isSaveForLater: false,\n            optionalBtn: isSaveForLaterEnabled() ? saveForLaterBtn : null\n          }\"\n        ></cx-cart-item-list>\n      </ng-container>\n    </div>\n  </ng-container>\n</ng-container>\n\n<ng-template let-ctx #saveForLaterBtn>\n  <div class=\"col-md-3 col-lg-3 col-xl-3 cx-sfl-btn\">\n    <button\n      class=\"link\"\n      [disabled]=\"ctx.loading\"\n      (click)=\"saveForLater(ctx.item)\"\n    >\n      {{ 'saveForLaterItems.saveForLater' | cxTranslate }}\n    </button>\n  </div>\n</ng-template>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
         /** @nocollapse */
         CartDetailsComponent.ctorParameters = function () { return [
             { type: core$1.CartService },
-            { type: PromotionService }
+            { type: PromotionService },
+            { type: core$1.SelectiveCartService },
+            { type: core$1.AuthService },
+            { type: core$1.RoutingService },
+            { type: core$1.FeatureConfigService }
         ]; };
         return CartDetailsComponent;
     }());
@@ -12492,6 +12664,8 @@
         CartDetailsComponent.prototype.entries$;
         /** @type {?} */
         CartDetailsComponent.prototype.cartLoaded$;
+        /** @type {?} */
+        CartDetailsComponent.prototype.loggedIn;
         /** @type {?} */
         CartDetailsComponent.prototype.orderPromotions$;
         /** @type {?} */
@@ -12506,6 +12680,26 @@
          * @protected
          */
         CartDetailsComponent.prototype.promotionService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        CartDetailsComponent.prototype.selectiveCartService;
+        /**
+         * @type {?}
+         * @private
+         */
+        CartDetailsComponent.prototype.authService;
+        /**
+         * @type {?}
+         * @private
+         */
+        CartDetailsComponent.prototype.routingService;
+        /**
+         * @type {?}
+         * @private
+         */
+        CartDetailsComponent.prototype.featureConfig;
     }
 
     /**
@@ -12626,8 +12820,10 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var CartPageLayoutHandler = /** @class */ (function () {
-        function CartPageLayoutHandler(cartService) {
+        function CartPageLayoutHandler(cartService, selectiveCartService, featureConfig) {
             this.cartService = cartService;
+            this.selectiveCartService = selectiveCartService;
+            this.featureConfig = featureConfig;
         }
         /**
          * @param {?} slots$
@@ -12643,6 +12839,46 @@
          */
         function (slots$, pageTemplate, section) {
             if (pageTemplate === 'CartPageTemplate' && !section) {
+                if (this.featureConfig && this.featureConfig.isEnabled('saveForLater')) {
+                    return rxjs.combineLatest([
+                        slots$,
+                        this.cartService.getActive(),
+                        this.selectiveCartService.getCart(),
+                    ]).pipe(operators.map((/**
+                     * @param {?} __0
+                     * @return {?}
+                     */
+                    function (_a) {
+                        var _b = __read(_a, 3), slots = _b[0], cart = _b[1], selectiveCart = _b[2];
+                        if (cart.totalItems) {
+                            return slots.filter((/**
+                             * @param {?} slot
+                             * @return {?}
+                             */
+                            function (slot) { return slot !== 'EmptyCartMiddleContent'; }));
+                        }
+                        else if (selectiveCart.totalItems) {
+                            return slots.filter((/**
+                             * @param {?} slot
+                             * @return {?}
+                             */
+                            function (slot) {
+                                return slot !== 'EmptyCartMiddleContent' &&
+                                    slot !== 'CenterRightContentSlot';
+                            }));
+                        }
+                        else {
+                            return slots.filter((/**
+                             * @param {?} slot
+                             * @return {?}
+                             */
+                            function (slot) {
+                                return slot !== 'TopContent' && slot !== 'CenterRightContentSlot';
+                            }));
+                        }
+                    })));
+                }
+                //TODO remove old code for #5958
                 return rxjs.combineLatest([slots$, this.cartService.getActive()]).pipe(operators.map((/**
                  * @param {?} __0
                  * @return {?}
@@ -12664,6 +12900,7 @@
                         function (slot) { return slot !== 'TopContent' && slot !== 'CenterRightContentSlot'; }));
                     }
                 })));
+                ////TODO remove old code for #5958
             }
             return slots$;
         };
@@ -12674,9 +12911,11 @@
         ];
         /** @nocollapse */
         CartPageLayoutHandler.ctorParameters = function () { return [
-            { type: core$1.CartService }
+            { type: core$1.CartService },
+            { type: core$1.SelectiveCartService },
+            { type: core$1.FeatureConfigService }
         ]; };
-        /** @nocollapse */ CartPageLayoutHandler.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CartPageLayoutHandler_Factory() { return new CartPageLayoutHandler(core.ɵɵinject(core$1.CartService)); }, token: CartPageLayoutHandler, providedIn: "root" });
+        /** @nocollapse */ CartPageLayoutHandler.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function CartPageLayoutHandler_Factory() { return new CartPageLayoutHandler(core.ɵɵinject(core$1.CartService), core.ɵɵinject(core$1.SelectiveCartService), core.ɵɵinject(core$1.FeatureConfigService)); }, token: CartPageLayoutHandler, providedIn: "root" });
         return CartPageLayoutHandler;
     }());
     if (false) {
@@ -12685,6 +12924,16 @@
          * @private
          */
         CartPageLayoutHandler.prototype.cartService;
+        /**
+         * @type {?}
+         * @private
+         */
+        CartPageLayoutHandler.prototype.selectiveCartService;
+        /**
+         * @type {?}
+         * @private
+         */
+        CartPageLayoutHandler.prototype.featureConfig;
     }
 
     /**
@@ -13022,12 +13271,151 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var SaveForLaterComponent = /** @class */ (function () {
+        function SaveForLaterComponent(cmsService, cartService, selectiveCartService) {
+            this.cmsService = cmsService;
+            this.cartService = cartService;
+            this.selectiveCartService = selectiveCartService;
+        }
+        /**
+         * @return {?}
+         */
+        SaveForLaterComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+        function () {
+            this.isCartEmpty$ = this.cartService
+                .getActive()
+                .pipe(operators.map((/**
+             * @param {?} cart
+             * @return {?}
+             */
+            function (cart) { return !(cart && cart.totalItems && cart.totalItems > 0); })));
+            this.saveForLater$ = this.selectiveCartService.getCart();
+            this.entries$ = this.selectiveCartService
+                .getEntries()
+                .pipe(operators.filter((/**
+             * @param {?} entries
+             * @return {?}
+             */
+            function (entries) { return entries.length > 0; })));
+            this.cartLoaded$ = rxjs.combineLatest([
+                this.cartService.getLoaded(),
+                this.selectiveCartService.getLoaded(),
+            ]).pipe(operators.map((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            function (_a) {
+                var _b = __read(_a, 2), cartLoaded = _b[0], sflLoaded = _b[1];
+                return cartLoaded && sflLoaded;
+            })));
+            this.data$ = this.cmsService.getComponentData('EmptyCartParagraphComponent');
+        };
+        /**
+         * @param {?} item
+         * @return {?}
+         */
+        SaveForLaterComponent.prototype.moveToCart = /**
+         * @param {?} item
+         * @return {?}
+         */
+        function (item) {
+            this.selectiveCartService.removeEntry(item);
+            this.cartService.addEntry(item.product.code, item.quantity);
+        };
+        SaveForLaterComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-save-for-later',
+                        template: "<ng-container *ngIf=\"isCartEmpty$ | async\">\n  <p\n    *ngIf=\"data$ | async as data\"\n    [innerHTML]=\"data.content\"\n    class=\"cx-empty-cart-info\"\n  ></p>\n</ng-container>\n\n<ng-container *ngIf=\"saveForLater$ | async as saveForLater\">\n  <ng-container *ngIf=\"entries$ | async as entries\">\n    <div *ngIf=\"saveForLater.totalItems > 0\" class=\"cart-details-wrapper\">\n      <div class=\"cx-total\">\n        {{\n          'saveForLaterItems.itemTotal'\n            | cxTranslate: { count: saveForLater.totalItems }\n        }}\n      </div>\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [isReadOnly]=\"true\"\n        [cartIsLoading]=\"!(cartLoaded$ | async)\"\n        [options]=\"{\n          isSaveForLater: true,\n          optionalBtn: moveToCartBtn\n        }\"\n      ></cx-cart-item-list>\n    </div>\n  </ng-container>\n</ng-container>\n\n<ng-template let-ctx #moveToCartBtn>\n  <div class=\"col-md-3 col-lg-3 col-xl-3 cx-sfl-btn\">\n    <button\n      class=\"link\"\n      [disabled]=\"ctx.loading\"\n      (click)=\"moveToCart(ctx.item)\"\n    >\n      {{ 'saveForLaterItems.moveToCart' | cxTranslate }}\n    </button>\n  </div>\n</ng-template>\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        SaveForLaterComponent.ctorParameters = function () { return [
+            { type: core$1.CmsService },
+            { type: core$1.ActiveCartService },
+            { type: core$1.SelectiveCartService }
+        ]; };
+        return SaveForLaterComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        SaveForLaterComponent.prototype.saveForLater$;
+        /** @type {?} */
+        SaveForLaterComponent.prototype.cart$;
+        /** @type {?} */
+        SaveForLaterComponent.prototype.entries$;
+        /** @type {?} */
+        SaveForLaterComponent.prototype.cartLoaded$;
+        /** @type {?} */
+        SaveForLaterComponent.prototype.data$;
+        /** @type {?} */
+        SaveForLaterComponent.prototype.isCartEmpty$;
+        /**
+         * @type {?}
+         * @protected
+         */
+        SaveForLaterComponent.prototype.cmsService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        SaveForLaterComponent.prototype.cartService;
+        /**
+         * @type {?}
+         * @protected
+         */
+        SaveForLaterComponent.prototype.selectiveCartService;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var SaveForLaterModule = /** @class */ (function () {
+        function SaveForLaterModule() {
+        }
+        SaveForLaterModule.decorators = [
+            { type: core.NgModule, args: [{
+                        imports: [
+                            common.CommonModule,
+                            core$1.ConfigModule.withConfig((/** @type {?} */ ({
+                                cmsComponents: {
+                                    SaveForLaterComponent: {
+                                        component: SaveForLaterComponent,
+                                    },
+                                },
+                                features: {
+                                    saveForLater: '1.5',
+                                },
+                            }))),
+                            core$1.I18nModule,
+                            CartSharedModule,
+                        ],
+                        declarations: [SaveForLaterComponent],
+                        exports: [SaveForLaterComponent],
+                        entryComponents: [SaveForLaterComponent],
+                    },] }
+        ];
+        return SaveForLaterModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var CartComponentModule = /** @class */ (function () {
         function CartComponentModule() {
         }
         CartComponentModule.decorators = [
             { type: core.NgModule, args: [{
-                        imports: [ngBootstrap.NgbModule, CartDetailsModule, CartTotalsModule, CartSharedModule],
+                        imports: [
+                            ngBootstrap.NgbModule,
+                            CartDetailsModule,
+                            CartTotalsModule,
+                            CartSharedModule,
+                            SaveForLaterModule,
+                        ],
                         exports: [
                             AddToWishListModule,
                             CartDetailsModule,
@@ -13036,6 +13424,7 @@
                             AddToCartModule,
                             MiniCartModule,
                             core$1.CartModule,
+                            SaveForLaterModule,
                         ],
                         declarations: [],
                         providers: [
@@ -33501,6 +33890,8 @@
     exports.ReviewSubmitComponent = ReviewSubmitComponent;
     exports.ReviewSubmitModule = ReviewSubmitModule;
     exports.SCHEMA_BUILDER = SCHEMA_BUILDER;
+    exports.SaveForLaterComponent = SaveForLaterComponent;
+    exports.SaveForLaterModule = SaveForLaterModule;
     exports.ScheduleComponent = ScheduleComponent;
     exports.SearchBoxComponent = SearchBoxComponent;
     exports.SearchBoxComponentService = SearchBoxComponentService;

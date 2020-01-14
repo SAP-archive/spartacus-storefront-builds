@@ -1,6 +1,6 @@
 import { CommonModule, isPlatformServer, isPlatformBrowser, DOCUMENT, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, EventEmitter, Output, isDevMode, ChangeDetectionStrategy, forwardRef, Renderer2, ViewChild, Directive, HostListener, Optional, Injector, Inject, PLATFORM_ID, INJECTOR, InjectionToken, TemplateRef, ComponentFactory, ViewContainerRef, ComponentFactoryResolver, NgZone, APP_INITIALIZER, SecurityContext, RendererFactory2, ViewEncapsulation, ChangeDetectorRef, Pipe, ViewChildren } from '@angular/core';
-import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, UserOrderService, RoutingService, PromotionLocation, CartService, CheckoutService, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, TranslationService, TranslationChunkService, CmsService, PageType, SemanticPathService, ProtectedRoutesGuard, AuthService, CartDataService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, DynamicAttributeService, PageRobotsMeta, ProductScope, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, RoutingModule as RoutingModule$1, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
+import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, UserOrderService, RoutingService, PromotionLocation, CartService, CheckoutService, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, TranslationService, TranslationChunkService, CmsService, PageType, SemanticPathService, ProtectedRoutesGuard, AuthService, CartDataService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, DynamicAttributeService, PageRobotsMeta, ProductScope, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, ActiveCartService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, RoutingModule as RoutingModule$1, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
 import { Subscription, combineLatest, of, fromEvent, BehaviorSubject, concat, isObservable, from, Observable } from 'rxjs';
 import { take, distinctUntilChanged, tap, map, debounceTime, startWith, filter, switchMap, shareReplay, first, skipWhile, endWith, withLatestFrom, flatMap, mergeMap, scan, distinctUntilKeyChanged, pluck } from 'rxjs/operators';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
@@ -5762,9 +5762,10 @@ class CxApiService {
      * @param {?} userPayment
      * @param {?} userNotificationPreferenceService
      * @param {?} userInterestsService
+     * @param {?} selectiveCartService
      * @param {?} ngZone
      */
-    constructor(auth, cart, cartData, checkout, checkoutDelivery, checkoutPayment, cms, pageMeta, featureConfig, globalMessage, translation, kyma, occEndpoints, product, productSearch, productReview, productReference, searchbox, routing, currency, language, baseSite, user, userAddress, userConsent, userOrder, userPayment, userNotificationPreferenceService, userInterestsService, ngZone) {
+    constructor(auth, cart, cartData, checkout, checkoutDelivery, checkoutPayment, cms, pageMeta, featureConfig, globalMessage, translation, kyma, occEndpoints, product, productSearch, productReview, productReference, searchbox, routing, currency, language, baseSite, user, userAddress, userConsent, userOrder, userPayment, userNotificationPreferenceService, userInterestsService, selectiveCartService, ngZone) {
         this.auth = auth;
         this.cart = cart;
         this.cartData = cartData;
@@ -5794,6 +5795,7 @@ class CxApiService {
         this.userPayment = userPayment;
         this.userNotificationPreferenceService = userNotificationPreferenceService;
         this.userInterestsService = userInterestsService;
+        this.selectiveCartService = selectiveCartService;
         this.ngZone = ngZone;
     }
 }
@@ -5833,9 +5835,10 @@ CxApiService.ctorParameters = () => [
     { type: UserPaymentService, decorators: [{ type: Optional }] },
     { type: UserNotificationPreferenceService, decorators: [{ type: Optional }] },
     { type: UserInterestsService, decorators: [{ type: Optional }] },
+    { type: SelectiveCartService, decorators: [{ type: Optional }] },
     { type: NgZone }
 ];
-/** @nocollapse */ CxApiService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CxApiService_Factory() { return new CxApiService(ɵɵinject(AuthService, 8), ɵɵinject(CartService, 8), ɵɵinject(CartDataService, 8), ɵɵinject(CheckoutService, 8), ɵɵinject(CheckoutDeliveryService, 8), ɵɵinject(CheckoutPaymentService, 8), ɵɵinject(CmsService, 8), ɵɵinject(PageMetaService, 8), ɵɵinject(FeatureConfigService, 8), ɵɵinject(GlobalMessageService, 8), ɵɵinject(TranslationService, 8), ɵɵinject(KymaService, 8), ɵɵinject(OccEndpointsService, 8), ɵɵinject(ProductService, 8), ɵɵinject(ProductSearchService, 8), ɵɵinject(ProductReviewService, 8), ɵɵinject(ProductReferenceService, 8), ɵɵinject(SearchboxService, 8), ɵɵinject(RoutingService, 8), ɵɵinject(CurrencyService, 8), ɵɵinject(LanguageService, 8), ɵɵinject(BaseSiteService, 8), ɵɵinject(UserService, 8), ɵɵinject(UserAddressService, 8), ɵɵinject(UserConsentService, 8), ɵɵinject(UserOrderService, 8), ɵɵinject(UserPaymentService, 8), ɵɵinject(UserNotificationPreferenceService, 8), ɵɵinject(UserInterestsService, 8), ɵɵinject(NgZone)); }, token: CxApiService, providedIn: "root" });
+/** @nocollapse */ CxApiService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CxApiService_Factory() { return new CxApiService(ɵɵinject(AuthService, 8), ɵɵinject(CartService, 8), ɵɵinject(CartDataService, 8), ɵɵinject(CheckoutService, 8), ɵɵinject(CheckoutDeliveryService, 8), ɵɵinject(CheckoutPaymentService, 8), ɵɵinject(CmsService, 8), ɵɵinject(PageMetaService, 8), ɵɵinject(FeatureConfigService, 8), ɵɵinject(GlobalMessageService, 8), ɵɵinject(TranslationService, 8), ɵɵinject(KymaService, 8), ɵɵinject(OccEndpointsService, 8), ɵɵinject(ProductService, 8), ɵɵinject(ProductSearchService, 8), ɵɵinject(ProductReviewService, 8), ɵɵinject(ProductReferenceService, 8), ɵɵinject(SearchboxService, 8), ɵɵinject(RoutingService, 8), ɵɵinject(CurrencyService, 8), ɵɵinject(LanguageService, 8), ɵɵinject(BaseSiteService, 8), ɵɵinject(UserService, 8), ɵɵinject(UserAddressService, 8), ɵɵinject(UserConsentService, 8), ɵɵinject(UserOrderService, 8), ɵɵinject(UserPaymentService, 8), ɵɵinject(UserNotificationPreferenceService, 8), ɵɵinject(UserInterestsService, 8), ɵɵinject(SelectiveCartService, 8), ɵɵinject(NgZone)); }, token: CxApiService, providedIn: "root" });
 if (false) {
     /** @type {?} */
     CxApiService.prototype.cmsComponentData;
@@ -5897,6 +5900,8 @@ if (false) {
     CxApiService.prototype.userNotificationPreferenceService;
     /** @type {?} */
     CxApiService.prototype.userInterestsService;
+    /** @type {?} */
+    CxApiService.prototype.selectiveCartService;
     /** @type {?} */
     CxApiService.prototype.ngZone;
 }
@@ -9886,12 +9891,20 @@ class CartItemListComponent {
     /**
      * @param {?} cartService
      * @param {?} fb
+     * @param {?=} selectiveCartService
+     * @param {?=} featureConfig
      */
-    constructor(cartService, fb) {
+    constructor(cartService, fb, selectiveCartService, featureConfig) {
         this.cartService = cartService;
         this.fb = fb;
+        this.selectiveCartService = selectiveCartService;
+        this.featureConfig = featureConfig;
         this.isReadOnly = false;
         this.hasHeader = true;
+        this.options = {
+            isSaveForLater: false,
+            optionalBtn: null,
+        };
         this.potentialProductPromotions = [];
         this.promotionLocation = PromotionLocation.ActiveCart;
         this.cartIsLoading = false;
@@ -9931,12 +9944,28 @@ class CartItemListComponent {
      * @return {?}
      */
     ngOnInit() { }
+    //TODO remove feature flag for #5958
+    /**
+     * @return {?}
+     */
+    isSaveForLaterEnabled() {
+        if (this.featureConfig) {
+            return this.featureConfig.isEnabled('saveForLater');
+        }
+        return false;
+    }
+    //TODO remove feature flag for #5958
     /**
      * @param {?} item
      * @return {?}
      */
     removeEntry(item) {
-        this.cartService.removeEntry(item);
+        if (this.selectiveCartService && this.options.isSaveForLater) {
+            this.selectiveCartService.removeEntry(item);
+        }
+        else {
+            this.cartService.removeEntry(item);
+        }
         delete this.form.controls[item.product.code];
     }
     /**
@@ -9964,6 +9993,10 @@ class CartItemListComponent {
     getPotentialProductPromotionsForItem(item) {
         /** @type {?} */
         const entryPromotions = [];
+        //don't show promotions in saveforlater
+        if (this.options.isSaveForLater) {
+            return entryPromotions;
+        }
         if (this.potentialProductPromotions &&
             this.potentialProductPromotions.length > 0) {
             for (const promotion of this.potentialProductPromotions) {
@@ -10005,17 +10038,20 @@ class CartItemListComponent {
 CartItemListComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-cart-item-list',
-                template: "<div *ngIf=\"hasHeader\" class=\"d-none d-md-block d-lg-block d-xl-block\">\n  <div class=\"cx-item-list-header row\">\n    <div class=\"cx-item-list-desc col-md-5 col-lg-5 col-xl-6\">\n      {{ 'cartItems.description' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-price col-md-3 col-lg-2 col-xl-2\">\n      {{ 'cartItems.itemPrice' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-qty col-md-2 col-lg-3 col-xl-2\">\n      {{ 'cartItems.quantity' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n      {{ 'cartItems.total' | cxTranslate }}\n    </div>\n  </div>\n</div>\n\n<div [formGroup]=\"form\">\n  <div class=\"cx-item-list-row\" *ngFor=\"let item of items\">\n    <div class=\"cx-item-list-items\">\n      <ng-container *cxFeatureLevel=\"'!1.4'\">\n        <cx-cart-item\n          [parent]=\"form.controls[item.product.code]\"\n          [item]=\"item\"\n          [isReadOnly]=\"isReadOnly\"\n          [potentialProductPromotions]=\"\n            getPotentialProductPromotionsForItem(item)\n          \"\n          [cartIsLoading]=\"cartIsLoading\"\n          (remove)=\"removeEntry($event)\"\n          (update)=\"updateEntry($event)\"\n        >\n        </cx-cart-item>\n      </ng-container>\n\n      <ng-container *cxFeatureLevel=\"'1.4'\">\n        <cx-cart-item\n          [parent]=\"form.controls[item.product.code]\"\n          [item]=\"item\"\n          [isReadOnly]=\"isReadOnly\"\n          [promotionLocation]=\"promotionLocation\"\n          [cartIsLoading]=\"cartIsLoading\"\n          (remove)=\"removeEntry($event)\"\n          (update)=\"updateEntry($event)\"\n        >\n        </cx-cart-item>\n      </ng-container>\n    </div>\n  </div>\n</div>\n"
+                template: "<div *ngIf=\"hasHeader\" class=\"d-none d-md-block d-lg-block d-xl-block\">\n  <div class=\"cx-item-list-header row\">\n    <div class=\"cx-item-list-desc col-md-5 col-lg-5 col-xl-6\">\n      {{ 'cartItems.description' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-price col-md-3 col-lg-2 col-xl-2\">\n      {{ 'cartItems.itemPrice' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-qty col-md-2 col-lg-3 col-xl-2\">\n      {{ 'cartItems.quantity' | cxTranslate }}\n    </div>\n\n    <ng-container\n      *ngIf=\"\n        isSaveForLaterEnabled() && options.isSaveForLater;\n        else totalHeader\n      \"\n    >\n      <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n        {{ 'saveForLaterItems.stock' | cxTranslate }}\n      </div>\n    </ng-container>\n  </div>\n</div>\n\n<div [formGroup]=\"form\">\n  <div class=\"cx-item-list-row\" *ngFor=\"let item of items\">\n    <div class=\"cx-item-list-items\">\n      <ng-container *cxFeatureLevel=\"'!1.5'\">\n        <cx-cart-item\n          [parent]=\"form.controls[item.product.code]\"\n          [item]=\"item\"\n          [isReadOnly]=\"isReadOnly\"\n          [potentialProductPromotions]=\"\n            getPotentialProductPromotionsForItem(item)\n          \"\n          [cartIsLoading]=\"cartIsLoading\"\n          (remove)=\"removeEntry($event)\"\n          (update)=\"updateEntry($event)\"\n        >\n        </cx-cart-item>\n      </ng-container>\n\n      <ng-container *cxFeatureLevel=\"'1.5'\">\n        <cx-cart-item\n          [parent]=\"form.controls[item.product.code]\"\n          [item]=\"item\"\n          [isReadOnly]=\"isReadOnly\"\n          [promotionLocation]=\"promotionLocation\"\n          [cartIsLoading]=\"cartIsLoading\"\n          (remove)=\"removeEntry($event)\"\n          (update)=\"updateEntry($event)\"\n          [options]=\"options\"\n        >\n        </cx-cart-item>\n      </ng-container>\n    </div>\n  </div>\n</div>\n\n<ng-template #totalHeader>\n  <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n    {{ 'cartItems.total' | cxTranslate }}\n  </div>\n</ng-template>\n"
             }] }
 ];
 /** @nocollapse */
 CartItemListComponent.ctorParameters = () => [
     { type: CartService },
-    { type: FormBuilder }
+    { type: FormBuilder },
+    { type: SelectiveCartService },
+    { type: FeatureConfigService }
 ];
 CartItemListComponent.propDecorators = {
     isReadOnly: [{ type: Input }],
     hasHeader: [{ type: Input }],
+    options: [{ type: Input }],
     potentialProductPromotions: [{ type: Input }],
     promotionLocation: [{ type: Input }],
     items: [{ type: Input }],
@@ -10026,6 +10062,8 @@ if (false) {
     CartItemListComponent.prototype.isReadOnly;
     /** @type {?} */
     CartItemListComponent.prototype.hasHeader;
+    /** @type {?} */
+    CartItemListComponent.prototype.options;
     /** @type {?} */
     CartItemListComponent.prototype.potentialProductPromotions;
     /** @type {?} */
@@ -10049,6 +10087,16 @@ if (false) {
      * @protected
      */
     CartItemListComponent.prototype.fb;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CartItemListComponent.prototype.selectiveCartService;
+    /**
+     * @type {?}
+     * @private
+     */
+    CartItemListComponent.prototype.featureConfig;
 }
 
 /**
@@ -10071,15 +10119,31 @@ if (false) {
     /** @type {?|undefined} */
     Item.prototype.updateable;
 }
+/**
+ * @record
+ */
+function CartItemComponentOptions() { }
+if (false) {
+    /** @type {?|undefined} */
+    CartItemComponentOptions.prototype.isSaveForLater;
+    /** @type {?|undefined} */
+    CartItemComponentOptions.prototype.optionalBtn;
+}
 class CartItemComponent {
     /**
      * @param {?} promotionService
+     * @param {?=} featureConfig
      */
-    constructor(promotionService) {
+    constructor(promotionService, featureConfig) {
         this.promotionService = promotionService;
+        this.featureConfig = featureConfig;
         this.compact = false;
         this.isReadOnly = false;
         this.cartIsLoading = false;
+        this.options = {
+            isSaveForLater: false,
+            optionalBtn: null,
+        };
         this.promotionLocation = PromotionLocation.ActiveCart;
         this.remove = new EventEmitter();
         this.update = new EventEmitter();
@@ -10091,6 +10155,17 @@ class CartItemComponent {
     ngOnInit() {
         this.appliedProductPromotions$ = this.promotionService.getProductPromotionForEntry(this.item, this.promotionLocation);
     }
+    //TODO remove feature flag for #5958
+    /**
+     * @return {?}
+     */
+    isSaveForLaterEnabled() {
+        if (this.featureConfig) {
+            return this.featureConfig.isEnabled('saveForLater');
+        }
+        return false;
+    }
+    //TODO remove feature flag for #5958
     /**
      * @param {?} product
      * @return {?}
@@ -10124,18 +10199,20 @@ class CartItemComponent {
 CartItemComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-cart-item',
-                template: "<div [ngClass]=\"compact ? 'cx-compact row' : 'row'\">\n  <!-- Item Image -->\n  <div class=\"col-2 cx-image-container\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n      (click)=\"viewItem()\"\n    >\n      <cx-media\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-5'\">\n        <div *ngIf=\"item.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n            (click)=\"viewItem()\"\n            >{{ item.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"item.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n        </div>\n        <!-- Variants -->\n        <ng-container *cxFeatureLevel=\"'!1.5'\">\n          <div\n            *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\">{{ variant.name }}</div>\n            <div class=\"cx-value\">{{ variant.value }}</div>\n          </div>\n        </ng-container>\n        <ng-container *cxFeatureLevel=\"'1.5'\">\n          <div\n            *ngFor=\"\n              let variant of item.product.baseOptions[0]?.selected\n                ?.variantOptionQualifiers\n            \"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\" *ngIf=\"variant.name && variant.value\">\n              {{ variant.name }}: {{ variant.value }}\n            </div>\n          </div>\n        </ng-container>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"item.basePrice\"\n        class=\"cx-price\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n          {{ item.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <div class=\"cx-quantity\" [ngClass]=\"compact ? '' : ' col-3'\">\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          placement=\"left\"\n          title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n        <div *ngIf=\"isReadOnly\" class=\"cx-value\">{{ item.quantity }}</div>\n        <div\n          *ngIf=\"!isReadOnly && parent\"\n          class=\"cx-value\"\n          [formGroup]=\"parent\"\n        >\n          <cx-item-counter\n            [isValueChangeable]=\"item.updateable\"\n            [step]=\"1\"\n            [min]=\"1\"\n            [max]=\"item.product.stock?.stockLevel || 1000\"\n            (update)=\"updateItem($event)\"\n            [cartIsLoading]=\"cartIsLoading\"\n            formControlName=\"quantity\"\n          >\n          </cx-item-counter>\n        </div>\n      </div>\n      <!-- Total -->\n      <div\n        *ngIf=\"item.totalPrice\"\n        class=\"cx-total\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.total' | cxTranslate }}\n        </div>\n        <div class=\"cx-value\">{{ item.totalPrice.formattedValue }}</div>\n      </div>\n    </div>\n    <!-- Availability -->\n    <div *ngIf=\"isProductOutOfStock(item)\" class=\"cx-availability col-12\">\n      {{ 'productSummary.outOfStock' | cxTranslate }}\n    </div>\n    <!-- Promotion -->\n    <ng-container *cxFeatureLevel=\"'!1.4'\">\n      <cx-promotions [promotions]=\"potentialProductPromotions\"></cx-promotions>\n    </ng-container>\n\n    <ng-container *cxFeatureLevel=\"'1.4'\">\n      <ng-container\n        *ngIf=\"appliedProductPromotions$ | async as appliedProductPromotions\"\n      >\n        <cx-promotions [promotions]=\"appliedProductPromotions\"></cx-promotions>\n      </ng-container>\n    </ng-container>\n    <!-- Actions -->\n    <div *ngIf=\"!isReadOnly && item.updateable\" class=\"cx-actions col-12\">\n      <button\n        class=\"link\"\n        [class.disabled]=\"cartIsLoading\"\n        [disabled]=\"cartIsLoading\"\n        (click)=\"removeItem()\"\n      >\n        {{ 'common.remove' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n"
+                template: "<div [ngClass]=\"compact ? 'cx-compact row' : 'row'\">\n  <!-- Item Image -->\n  <div class=\"col-2 cx-image-container\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n      (click)=\"viewItem()\"\n    >\n      <cx-media\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-5'\">\n        <div *ngIf=\"item.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n            (click)=\"viewItem()\"\n            >{{ item.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"item.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n        </div>\n        <!-- Variants -->\n        <ng-container *cxFeatureLevel=\"'!1.5'\">\n          <div\n            *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\">{{ variant.name }}</div>\n            <div class=\"cx-value\">{{ variant.value }}</div>\n          </div>\n        </ng-container>\n        <ng-container *cxFeatureLevel=\"'1.5'\">\n          <div\n            *ngFor=\"\n              let variant of item.product.baseOptions[0]?.selected\n                ?.variantOptionQualifiers\n            \"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\" *ngIf=\"variant.name && variant.value\">\n              {{ variant.name }}: {{ variant.value }}\n            </div>\n          </div>\n        </ng-container>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"item.basePrice\"\n        class=\"cx-price\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n          {{ item.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <div class=\"cx-quantity\" [ngClass]=\"compact ? '' : ' col-3'\">\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          placement=\"left\"\n          title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n\n        <div *ngIf=\"isReadOnly\" class=\"cx-value\">\n          {{ item.quantity }}\n        </div>\n        <div\n          *ngIf=\"!isReadOnly && parent\"\n          class=\"cx-value\"\n          [formGroup]=\"parent\"\n        >\n          <cx-item-counter\n            [isValueChangeable]=\"item.updateable\"\n            [step]=\"1\"\n            [min]=\"1\"\n            [max]=\"item.product.stock?.stockLevel || 1000\"\n            (update)=\"updateItem($event)\"\n            [cartIsLoading]=\"cartIsLoading\"\n            formControlName=\"quantity\"\n          >\n          </cx-item-counter>\n        </div>\n      </div>\n      <!-- Total -->\n      <ng-container\n        *ngIf=\"isSaveForLaterEnabled() && options.isSaveForLater; else total\"\n      >\n        <div\n          class=\"cx-total\"\n          [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n        >\n          <div\n            class=\"cx-label\"\n            [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          >\n            {{ 'saveForLaterItems.stock' | cxTranslate }}\n          </div>\n          <div\n            *ngIf=\"item.product?.stock?.stockLevel >= 0; else forceInstock\"\n            class=\"cx-value\"\n          >\n            {{ item.product.stock.stockLevel }}\n          </div>\n          <ng-template #forceInstock\n            ><div class=\"cx-value\">\n              {{ 'saveForLaterItems.forceInStock' | cxTranslate }}\n            </div></ng-template\n          >\n        </div>\n      </ng-container>\n    </div>\n    <!-- Availability -->\n    <div\n      *ngIf=\"isProductOutOfStock(item.product)\"\n      class=\"cx-availability col-12\"\n    >\n      {{ 'productSummary.outOfStock' | cxTranslate }}\n    </div>\n    <!-- Promotion -->\n    <ng-container *cxFeatureLevel=\"'!1.5'\">\n      <cx-promotions [promotions]=\"potentialProductPromotions\"></cx-promotions>\n    </ng-container>\n\n    <ng-container *cxFeatureLevel=\"'1.5'\">\n      <ng-container\n        *ngIf=\"appliedProductPromotions$ | async as appliedProductPromotions\"\n      >\n        <cx-promotions [promotions]=\"appliedProductPromotions\"></cx-promotions>\n      </ng-container>\n    </ng-container>\n    <!-- Actions -->\n\n    <div\n      *ngIf=\"(!isReadOnly || options.isSaveForLater) && item.updateable\"\n      class=\"cx-actions col-12\"\n    >\n      <ng-container *ngIf=\"!isProductOutOfStock(item.product)\">\n        <ng-container\n          *ngTemplateOutlet=\"\n            options.optionalBtn;\n            context: { $implicit: { loading: cartIsLoading, item: item } }\n          \"\n        ></ng-container>\n      </ng-container>\n\n      <div class=\"col-md-3 col-lg-3 col-xl-3 cx-remove-btn\">\n        <button class=\"link\" [disabled]=\"cartIsLoading\" (click)=\"removeItem()\">\n          {{ 'common.remove' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n\n<ng-template #total>\n  <div\n    *ngIf=\"item.totalPrice\"\n    class=\"cx-total\"\n    [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n  >\n    <div\n      class=\"cx-label\"\n      [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n    >\n      {{ 'cartItems.total' | cxTranslate }}\n    </div>\n    <div class=\"cx-value\">{{ item.totalPrice.formattedValue }}</div>\n  </div>\n</ng-template>\n"
             }] }
 ];
 /** @nocollapse */
 CartItemComponent.ctorParameters = () => [
-    { type: PromotionService }
+    { type: PromotionService },
+    { type: FeatureConfigService }
 ];
 CartItemComponent.propDecorators = {
     compact: [{ type: Input }],
     item: [{ type: Input }],
     isReadOnly: [{ type: Input }],
     cartIsLoading: [{ type: Input }],
+    options: [{ type: Input }],
     promotionLocation: [{ type: Input }],
     potentialProductPromotions: [{ type: Input }],
     remove: [{ type: Output }],
@@ -10152,6 +10229,8 @@ if (false) {
     CartItemComponent.prototype.isReadOnly;
     /** @type {?} */
     CartItemComponent.prototype.cartIsLoading;
+    /** @type {?} */
+    CartItemComponent.prototype.options;
     /** @type {?} */
     CartItemComponent.prototype.promotionLocation;
     /** @type {?} */
@@ -10171,6 +10250,11 @@ if (false) {
      * @protected
      */
     CartItemComponent.prototype.promotionService;
+    /**
+     * @type {?}
+     * @private
+     */
+    CartItemComponent.prototype.featureConfig;
 }
 
 /**
@@ -10265,10 +10349,19 @@ class CartDetailsComponent {
     /**
      * @param {?} cartService
      * @param {?=} promotionService
+     * @param {?=} selectiveCartService
+     * @param {?=} authService
+     * @param {?=} routingService
+     * @param {?=} featureConfig
      */
-    constructor(cartService, promotionService) {
+    constructor(cartService, promotionService, selectiveCartService, authService, routingService, featureConfig) {
         this.cartService = cartService;
         this.promotionService = promotionService;
+        this.selectiveCartService = selectiveCartService;
+        this.authService = authService;
+        this.routingService = routingService;
+        this.featureConfig = featureConfig;
+        this.loggedIn = false;
         this.promotionLocation = PromotionLocation.ActiveCart;
     }
     /**
@@ -10283,9 +10376,41 @@ class CartDetailsComponent {
          * @return {?}
          */
         entries => entries.length > 0)));
-        this.cartLoaded$ = this.cartService.getLoaded();
-        this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
+        if (this.isSaveForLaterEnabled()) {
+            this.cartLoaded$ = combineLatest([
+                this.cartService.getLoaded(),
+                this.selectiveCartService.getLoaded(),
+                this.authService.isUserLoggedIn(),
+            ]).pipe(tap((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            ([, , loggedIn]) => (this.loggedIn = loggedIn))), map((/**
+             * @param {?} __0
+             * @return {?}
+             */
+            ([cartLoaded, sflLoaded, loggedIn]) => loggedIn ? cartLoaded && sflLoaded : cartLoaded)));
+        }
+        //TODO remove for #5958
+        else {
+            this.cartLoaded$ = this.cartService.getLoaded();
+        }
+        //TODO  remove for #5958 end
+        if (this.promotionService) {
+            this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
+        }
     }
+    //TODO remove feature flag for #5958
+    /**
+     * @return {?}
+     */
+    isSaveForLaterEnabled() {
+        if (this.featureConfig) {
+            return this.featureConfig.isEnabled('saveForLater');
+        }
+        return false;
+    }
+    //TODO remove feature flag for #5958 end
     /**
      * @deprecated Since 1.5
      * Use promotionService instead of the promotion inputs.
@@ -10304,18 +10429,35 @@ class CartDetailsComponent {
         appliedPromotions.push(...(cart.appliedProductPromotions || []));
         return [...potentialPromotions, ...appliedPromotions];
     }
+    /**
+     * @param {?} item
+     * @return {?}
+     */
+    saveForLater(item) {
+        if (this.loggedIn) {
+            this.cartService.removeEntry(item);
+            this.selectiveCartService.addEntry(item.product.code, item.quantity);
+        }
+        else {
+            this.routingService.go({ cxRoute: 'login' });
+        }
+    }
 }
 CartDetailsComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-cart-details',
-                template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <ng-container *ngIf=\"entries$ | async as entries\">\n    <div class=\"cart-details-wrapper\">\n      <div class=\"cx-total\">\n        {{ 'cartDetails.cartName' | cxTranslate: { code: cart.code } }}\n      </div>\n\n      <ng-container *cxFeatureLevel=\"'!1.5'\">\n        <cx-promotions\n          [promotions]=\"getAllPromotionsForCart(cart)\"\n        ></cx-promotions>\n\n        <cx-cart-item-list\n          [items]=\"entries\"\n          [cartIsLoading]=\"!(cartLoaded$ | async)\"\n          [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n        ></cx-cart-item-list>\n      </ng-container>\n\n      <ng-container *cxFeatureLevel=\"'1.5'\">\n        <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n          <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n        </ng-container>\n\n        <cx-cart-item-list\n          [items]=\"entries\"\n          [cartIsLoading]=\"!(cartLoaded$ | async)\"\n          [promotionLocation]=\"promotionLocation\"\n        ></cx-cart-item-list>\n      </ng-container>\n    </div>\n  </ng-container>\n</ng-container>\n",
+                template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <ng-container *ngIf=\"entries$ | async as entries\">\n    <div *ngIf=\"cart.totalItems > 0\" class=\"cart-details-wrapper\">\n      <div class=\"cx-total\">\n        {{ 'cartDetails.cartName' | cxTranslate: { code: cart.code } }}\n      </div>\n\n      <ng-container *cxFeatureLevel=\"'!1.5'\">\n        <cx-promotions\n          [promotions]=\"getAllPromotionsForCart(cart)\"\n        ></cx-promotions>\n\n        <cx-cart-item-list\n          [items]=\"entries\"\n          [cartIsLoading]=\"!(cartLoaded$ | async)\"\n          [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n        ></cx-cart-item-list>\n      </ng-container>\n\n      <ng-container *cxFeatureLevel=\"'1.5'\">\n        <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n          <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n        </ng-container>\n\n        <cx-cart-item-list\n          [items]=\"entries\"\n          [cartIsLoading]=\"!(cartLoaded$ | async)\"\n          [promotionLocation]=\"promotionLocation\"\n          [options]=\"{\n            isSaveForLater: false,\n            optionalBtn: isSaveForLaterEnabled() ? saveForLaterBtn : null\n          }\"\n        ></cx-cart-item-list>\n      </ng-container>\n    </div>\n  </ng-container>\n</ng-container>\n\n<ng-template let-ctx #saveForLaterBtn>\n  <div class=\"col-md-3 col-lg-3 col-xl-3 cx-sfl-btn\">\n    <button\n      class=\"link\"\n      [disabled]=\"ctx.loading\"\n      (click)=\"saveForLater(ctx.item)\"\n    >\n      {{ 'saveForLaterItems.saveForLater' | cxTranslate }}\n    </button>\n  </div>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
 /** @nocollapse */
 CartDetailsComponent.ctorParameters = () => [
     { type: CartService },
-    { type: PromotionService }
+    { type: PromotionService },
+    { type: SelectiveCartService },
+    { type: AuthService },
+    { type: RoutingService },
+    { type: FeatureConfigService }
 ];
 if (false) {
     /** @type {?} */
@@ -10324,6 +10466,8 @@ if (false) {
     CartDetailsComponent.prototype.entries$;
     /** @type {?} */
     CartDetailsComponent.prototype.cartLoaded$;
+    /** @type {?} */
+    CartDetailsComponent.prototype.loggedIn;
     /** @type {?} */
     CartDetailsComponent.prototype.orderPromotions$;
     /** @type {?} */
@@ -10338,6 +10482,26 @@ if (false) {
      * @protected
      */
     CartDetailsComponent.prototype.promotionService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    CartDetailsComponent.prototype.selectiveCartService;
+    /**
+     * @type {?}
+     * @private
+     */
+    CartDetailsComponent.prototype.authService;
+    /**
+     * @type {?}
+     * @private
+     */
+    CartDetailsComponent.prototype.routingService;
+    /**
+     * @type {?}
+     * @private
+     */
+    CartDetailsComponent.prototype.featureConfig;
 }
 
 /**
@@ -10447,9 +10611,13 @@ if (false) {
 class CartPageLayoutHandler {
     /**
      * @param {?} cartService
+     * @param {?=} selectiveCartService
+     * @param {?=} featureConfig
      */
-    constructor(cartService) {
+    constructor(cartService, selectiveCartService, featureConfig) {
         this.cartService = cartService;
+        this.selectiveCartService = selectiveCartService;
+        this.featureConfig = featureConfig;
     }
     /**
      * @param {?} slots$
@@ -10459,6 +10627,41 @@ class CartPageLayoutHandler {
      */
     handle(slots$, pageTemplate, section) {
         if (pageTemplate === 'CartPageTemplate' && !section) {
+            if (this.featureConfig && this.featureConfig.isEnabled('saveForLater')) {
+                return combineLatest([
+                    slots$,
+                    this.cartService.getActive(),
+                    this.selectiveCartService.getCart(),
+                ]).pipe(map((/**
+                 * @param {?} __0
+                 * @return {?}
+                 */
+                ([slots, cart, selectiveCart]) => {
+                    if (cart.totalItems) {
+                        return slots.filter((/**
+                         * @param {?} slot
+                         * @return {?}
+                         */
+                        slot => slot !== 'EmptyCartMiddleContent'));
+                    }
+                    else if (selectiveCart.totalItems) {
+                        return slots.filter((/**
+                         * @param {?} slot
+                         * @return {?}
+                         */
+                        slot => slot !== 'EmptyCartMiddleContent' &&
+                            slot !== 'CenterRightContentSlot'));
+                    }
+                    else {
+                        return slots.filter((/**
+                         * @param {?} slot
+                         * @return {?}
+                         */
+                        slot => slot !== 'TopContent' && slot !== 'CenterRightContentSlot'));
+                    }
+                })));
+            }
+            //TODO remove old code for #5958
             return combineLatest([slots$, this.cartService.getActive()]).pipe(map((/**
              * @param {?} __0
              * @return {?}
@@ -10479,6 +10682,7 @@ class CartPageLayoutHandler {
                     slot => slot !== 'TopContent' && slot !== 'CenterRightContentSlot'));
                 }
             })));
+            ////TODO remove old code for #5958
         }
         return slots$;
     }
@@ -10490,15 +10694,27 @@ CartPageLayoutHandler.decorators = [
 ];
 /** @nocollapse */
 CartPageLayoutHandler.ctorParameters = () => [
-    { type: CartService }
+    { type: CartService },
+    { type: SelectiveCartService },
+    { type: FeatureConfigService }
 ];
-/** @nocollapse */ CartPageLayoutHandler.ngInjectableDef = ɵɵdefineInjectable({ factory: function CartPageLayoutHandler_Factory() { return new CartPageLayoutHandler(ɵɵinject(CartService)); }, token: CartPageLayoutHandler, providedIn: "root" });
+/** @nocollapse */ CartPageLayoutHandler.ngInjectableDef = ɵɵdefineInjectable({ factory: function CartPageLayoutHandler_Factory() { return new CartPageLayoutHandler(ɵɵinject(CartService), ɵɵinject(SelectiveCartService), ɵɵinject(FeatureConfigService)); }, token: CartPageLayoutHandler, providedIn: "root" });
 if (false) {
     /**
      * @type {?}
      * @private
      */
     CartPageLayoutHandler.prototype.cartService;
+    /**
+     * @type {?}
+     * @private
+     */
+    CartPageLayoutHandler.prototype.selectiveCartService;
+    /**
+     * @type {?}
+     * @private
+     */
+    CartPageLayoutHandler.prototype.featureConfig;
 }
 
 /**
@@ -10813,11 +11029,141 @@ AddToWishListModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class SaveForLaterComponent {
+    /**
+     * @param {?} cmsService
+     * @param {?} cartService
+     * @param {?} selectiveCartService
+     */
+    constructor(cmsService, cartService, selectiveCartService) {
+        this.cmsService = cmsService;
+        this.cartService = cartService;
+        this.selectiveCartService = selectiveCartService;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.isCartEmpty$ = this.cartService
+            .getActive()
+            .pipe(map((/**
+         * @param {?} cart
+         * @return {?}
+         */
+        cart => !(cart && cart.totalItems && cart.totalItems > 0))));
+        this.saveForLater$ = this.selectiveCartService.getCart();
+        this.entries$ = this.selectiveCartService
+            .getEntries()
+            .pipe(filter((/**
+         * @param {?} entries
+         * @return {?}
+         */
+        entries => entries.length > 0)));
+        this.cartLoaded$ = combineLatest([
+            this.cartService.getLoaded(),
+            this.selectiveCartService.getLoaded(),
+        ]).pipe(map((/**
+         * @param {?} __0
+         * @return {?}
+         */
+        ([cartLoaded, sflLoaded]) => cartLoaded && sflLoaded)));
+        this.data$ = this.cmsService.getComponentData('EmptyCartParagraphComponent');
+    }
+    /**
+     * @param {?} item
+     * @return {?}
+     */
+    moveToCart(item) {
+        this.selectiveCartService.removeEntry(item);
+        this.cartService.addEntry(item.product.code, item.quantity);
+    }
+}
+SaveForLaterComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-save-for-later',
+                template: "<ng-container *ngIf=\"isCartEmpty$ | async\">\n  <p\n    *ngIf=\"data$ | async as data\"\n    [innerHTML]=\"data.content\"\n    class=\"cx-empty-cart-info\"\n  ></p>\n</ng-container>\n\n<ng-container *ngIf=\"saveForLater$ | async as saveForLater\">\n  <ng-container *ngIf=\"entries$ | async as entries\">\n    <div *ngIf=\"saveForLater.totalItems > 0\" class=\"cart-details-wrapper\">\n      <div class=\"cx-total\">\n        {{\n          'saveForLaterItems.itemTotal'\n            | cxTranslate: { count: saveForLater.totalItems }\n        }}\n      </div>\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [isReadOnly]=\"true\"\n        [cartIsLoading]=\"!(cartLoaded$ | async)\"\n        [options]=\"{\n          isSaveForLater: true,\n          optionalBtn: moveToCartBtn\n        }\"\n      ></cx-cart-item-list>\n    </div>\n  </ng-container>\n</ng-container>\n\n<ng-template let-ctx #moveToCartBtn>\n  <div class=\"col-md-3 col-lg-3 col-xl-3 cx-sfl-btn\">\n    <button\n      class=\"link\"\n      [disabled]=\"ctx.loading\"\n      (click)=\"moveToCart(ctx.item)\"\n    >\n      {{ 'saveForLaterItems.moveToCart' | cxTranslate }}\n    </button>\n  </div>\n</ng-template>\n"
+            }] }
+];
+/** @nocollapse */
+SaveForLaterComponent.ctorParameters = () => [
+    { type: CmsService },
+    { type: ActiveCartService },
+    { type: SelectiveCartService }
+];
+if (false) {
+    /** @type {?} */
+    SaveForLaterComponent.prototype.saveForLater$;
+    /** @type {?} */
+    SaveForLaterComponent.prototype.cart$;
+    /** @type {?} */
+    SaveForLaterComponent.prototype.entries$;
+    /** @type {?} */
+    SaveForLaterComponent.prototype.cartLoaded$;
+    /** @type {?} */
+    SaveForLaterComponent.prototype.data$;
+    /** @type {?} */
+    SaveForLaterComponent.prototype.isCartEmpty$;
+    /**
+     * @type {?}
+     * @protected
+     */
+    SaveForLaterComponent.prototype.cmsService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    SaveForLaterComponent.prototype.cartService;
+    /**
+     * @type {?}
+     * @protected
+     */
+    SaveForLaterComponent.prototype.selectiveCartService;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class SaveForLaterModule {
+}
+SaveForLaterModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    ConfigModule.withConfig((/** @type {?} */ ({
+                        cmsComponents: {
+                            SaveForLaterComponent: {
+                                component: SaveForLaterComponent,
+                            },
+                        },
+                        features: {
+                            saveForLater: '1.5',
+                        },
+                    }))),
+                    I18nModule,
+                    CartSharedModule,
+                ],
+                declarations: [SaveForLaterComponent],
+                exports: [SaveForLaterComponent],
+                entryComponents: [SaveForLaterComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class CartComponentModule {
 }
 CartComponentModule.decorators = [
     { type: NgModule, args: [{
-                imports: [NgbModule, CartDetailsModule, CartTotalsModule, CartSharedModule],
+                imports: [
+                    NgbModule,
+                    CartDetailsModule,
+                    CartTotalsModule,
+                    CartSharedModule,
+                    SaveForLaterModule,
+                ],
                 exports: [
                     AddToWishListModule,
                     CartDetailsModule,
@@ -10826,6 +11172,7 @@ CartComponentModule.decorators = [
                     AddToCartModule,
                     MiniCartModule,
                     CartModule,
+                    SaveForLaterModule,
                 ],
                 declarations: [],
                 providers: [
@@ -28810,5 +29157,5 @@ B2cStorefrontModule.decorators = [
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AsmModule, AutoFocusDirective, AutoFocusDirectiveModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OnlyNumberDirective, OnlyNumberDirectiveModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultScrollConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, AsmLoaderModule as ɵa, asmFactory as ɵb, VariantSizeSelectorModule as ɵba, VariantSizeSelectorComponent as ɵbb, VariantColorSelectorModule as ɵbc, VariantColorSelectorComponent as ɵbd, VariantStyleIconsModule as ɵbe, VariantStyleIconsComponent as ɵbf, OrderDetailActionsComponent as ɵbg, TrackingEventsComponent as ɵbh, ConsignmentTrackingComponent as ɵbi, AddToHomeScreenService as ɵbj, GuestRegisterFormComponent as ɵbk, SkipLinkModule as ɵbl, skipLinkFactory as ɵbm, defaultSkipLinkConfig as ɵbn, SkipLinkConfig as ɵbo, SkipLinkScrollPosition as ɵbp, SkipLinkComponent as ɵbq, SkipLinkService as ɵbr, SkipLinkDirective as ɵbs, CheckoutLoginComponent as ɵbt, MyCouponsComponentService as ɵbu, suffixUrlMatcher as ɵbv, addCmsRoute as ɵbw, htmlLangProvider as ɵbx, setHtmlLangAttribute as ɵby, AnonymousConsentsModule as ɵbz, ComponentMapperService as ɵc, AnonymousConsentDialogComponent as ɵca, RoutingModule as ɵcb, defaultStorefrontRoutesConfig as ɵcc, defaultRoutingConfig as ɵcd, AsmEnablerService as ɵd, AsmMainUiComponent as ɵe, AsmComponentService as ɵf, CSAgentLoginFormComponent as ɵg, CustomerSelectionComponent as ɵh, AsmSessionTimerComponent as ɵi, FormatTimerPipe as ɵj, CustomerEmulationComponent as ɵk, AppliedCouponsComponent as ɵl, AddToWishListModule as ɵm, AddToWishListComponent as ɵn, defaultCheckoutConfig as ɵo, ExpressCheckoutService as ɵp, defaultQualtricsConfig as ɵq, CmsRoutesService as ɵr, CmsMappingService as ɵs, CmsI18nService as ɵt, CmsGuardsService as ɵu, ReturnRequestService as ɵv, ProductVariantSelectorModule as ɵw, ProductVariantSelectorComponent as ɵx, VariantStyleSelectorModule as ɵy, VariantStyleSelectorComponent as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AsmModule, AutoFocusDirective, AutoFocusDirectiveModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OnlyNumberDirective, OnlyNumberDirectiveModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultScrollConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, AsmLoaderModule as ɵa, asmFactory as ɵb, VariantSizeSelectorModule as ɵba, VariantSizeSelectorComponent as ɵbb, VariantColorSelectorModule as ɵbc, VariantColorSelectorComponent as ɵbd, VariantStyleIconsModule as ɵbe, VariantStyleIconsComponent as ɵbf, OrderDetailActionsComponent as ɵbg, TrackingEventsComponent as ɵbh, ConsignmentTrackingComponent as ɵbi, AddToHomeScreenService as ɵbj, GuestRegisterFormComponent as ɵbk, SkipLinkModule as ɵbl, skipLinkFactory as ɵbm, defaultSkipLinkConfig as ɵbn, SkipLinkConfig as ɵbo, SkipLinkScrollPosition as ɵbp, SkipLinkComponent as ɵbq, SkipLinkService as ɵbr, SkipLinkDirective as ɵbs, CheckoutLoginComponent as ɵbt, MyCouponsComponentService as ɵbu, suffixUrlMatcher as ɵbv, addCmsRoute as ɵbw, htmlLangProvider as ɵbx, setHtmlLangAttribute as ɵby, AnonymousConsentsModule as ɵbz, ComponentMapperService as ɵc, AnonymousConsentDialogComponent as ɵca, RoutingModule as ɵcb, defaultStorefrontRoutesConfig as ɵcc, defaultRoutingConfig as ɵcd, AsmEnablerService as ɵd, AsmMainUiComponent as ɵe, AsmComponentService as ɵf, CSAgentLoginFormComponent as ɵg, CustomerSelectionComponent as ɵh, AsmSessionTimerComponent as ɵi, FormatTimerPipe as ɵj, CustomerEmulationComponent as ɵk, AppliedCouponsComponent as ɵl, AddToWishListModule as ɵm, AddToWishListComponent as ɵn, defaultCheckoutConfig as ɵo, ExpressCheckoutService as ɵp, defaultQualtricsConfig as ɵq, CmsRoutesService as ɵr, CmsMappingService as ɵs, CmsI18nService as ɵt, CmsGuardsService as ɵu, ReturnRequestService as ɵv, ProductVariantSelectorModule as ɵw, ProductVariantSelectorComponent as ɵx, VariantStyleSelectorModule as ɵy, VariantStyleSelectorComponent as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
 //# sourceMappingURL=spartacus-storefront.js.map
