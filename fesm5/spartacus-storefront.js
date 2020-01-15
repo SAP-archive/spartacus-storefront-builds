@@ -29536,7 +29536,7 @@ var VariantStyleIconsComponent = /** @class */ (function () {
                     selector: 'cx-style-icons',
                     template: "<ul class=\"variant-list\">\n  <li *ngFor=\"let v of variants\">\n    <img\n      [attr.src]=\"getVariantThumbnailUrl(v.variantOptionQualifiers)\"\n      [attr.title]=\"variantNames[v.code]\"\n      [attr.alt]=\"variantNames[v.code]\"\n    />\n  </li>\n</ul>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: ["ul{padding:0}ul li{display:inline}ul li img{width:50px}"]
+                    styles: ["ul{padding:0;white-space:nowrap;overflow:hidden}ul li{display:inline}ul li img{width:50px}"]
                 }] }
     ];
     /** @nocollapse */
