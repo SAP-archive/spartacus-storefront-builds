@@ -1,8 +1,8 @@
 import { OnInit } from '@angular/core';
-import { Cart, CartService, OrderEntry, SelectiveCartService, AuthService, RoutingService, FeatureConfigService, PromotionResult, PromotionLocation } from '@spartacus/core';
+import { AuthService, Cart, CartService, FeatureConfigService, OrderEntry, PromotionLocation, PromotionResult, RoutingService, SelectiveCartService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { Item } from '../cart-shared/cart-item/cart-item.component';
 import { PromotionService } from '../../../shared/services/promotion/promotion.service';
+import { Item } from '../cart-shared/cart-item/cart-item.component';
 export declare class CartDetailsComponent implements OnInit {
     protected cartService: CartService;
     protected promotionService?: PromotionService;
@@ -16,6 +16,7 @@ export declare class CartDetailsComponent implements OnInit {
     loggedIn: boolean;
     orderPromotions$: Observable<PromotionResult[]>;
     promotionLocation: PromotionLocation;
+    promotions$: Observable<PromotionResult[]>;
     constructor(cartService: CartService, promotionService: PromotionService, selectiveCartService: SelectiveCartService, authService: AuthService, routingService: RoutingService, featureConfig: FeatureConfigService);
     /**
      * @deprecated Since 1.5
