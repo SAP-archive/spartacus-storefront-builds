@@ -9705,15 +9705,17 @@
             this.routingService = routingService;
             this.productService = productService;
             this.features = features;
-            this.PRODUCT_SCOPE = this.features && this.features.isLevel('1.4') ? core$1.ProductScope.DETAILS : '';
+            this.DEFAULT_PRODUCT_SCOPE = this.features && this.features.isLevel('1.4') ? core$1.ProductScope.DETAILS : '';
         }
         /**
+         * @param {?=} scopes
          * @return {?}
          */
         CurrentProductService.prototype.getProduct = /**
+         * @param {?=} scopes
          * @return {?}
          */
-        function () {
+        function (scopes) {
             var _this = this;
             return this.routingService.getRouterState().pipe(operators.map((/**
              * @param {?} state
@@ -9724,7 +9726,7 @@
              * @return {?}
              */
             function (productCode) {
-                return _this.productService.get(productCode, _this.PRODUCT_SCOPE);
+                return _this.productService.get(productCode, scopes || _this.DEFAULT_PRODUCT_SCOPE);
             })));
         };
         CurrentProductService.decorators = [
@@ -9746,7 +9748,7 @@
          * @type {?}
          * @protected
          */
-        CurrentProductService.prototype.PRODUCT_SCOPE;
+        CurrentProductService.prototype.DEFAULT_PRODUCT_SCOPE;
         /**
          * @type {?}
          * @private
@@ -30046,16 +30048,19 @@
     var ProductAttributesComponent = /** @class */ (function () {
         function ProductAttributesComponent(currentProductService) {
             this.currentProductService = currentProductService;
+            this.product$ = this.currentProductService.getProduct(core$1.ProductScope.ATTRIBUTES);
         }
+        // TODO deprecated since 1.4, remove
+        // TODO deprecated since 1.4, remove
         /**
          * @return {?}
          */
-        ProductAttributesComponent.prototype.ngOnInit = /**
+        ProductAttributesComponent.prototype.ngOnInit = 
+        // TODO deprecated since 1.4, remove
+        /**
          * @return {?}
          */
-        function () {
-            this.product$ = this.currentProductService.getProduct();
-        };
+        function () { };
         ProductAttributesComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-product-attributes',

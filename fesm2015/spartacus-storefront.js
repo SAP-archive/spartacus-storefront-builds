@@ -7903,12 +7903,13 @@ class CurrentProductService {
         this.routingService = routingService;
         this.productService = productService;
         this.features = features;
-        this.PRODUCT_SCOPE = this.features && this.features.isLevel('1.4') ? ProductScope.DETAILS : '';
+        this.DEFAULT_PRODUCT_SCOPE = this.features && this.features.isLevel('1.4') ? ProductScope.DETAILS : '';
     }
     /**
+     * @param {?=} scopes
      * @return {?}
      */
-    getProduct() {
+    getProduct(scopes) {
         return this.routingService.getRouterState().pipe(map((/**
          * @param {?} state
          * @return {?}
@@ -7917,7 +7918,7 @@ class CurrentProductService {
          * @param {?} productCode
          * @return {?}
          */
-        (productCode) => this.productService.get(productCode, this.PRODUCT_SCOPE))));
+        (productCode) => this.productService.get(productCode, scopes || this.DEFAULT_PRODUCT_SCOPE))));
     }
 }
 CurrentProductService.decorators = [
@@ -7937,7 +7938,7 @@ if (false) {
      * @type {?}
      * @protected
      */
-    CurrentProductService.prototype.PRODUCT_SCOPE;
+    CurrentProductService.prototype.DEFAULT_PRODUCT_SCOPE;
     /**
      * @type {?}
      * @private
@@ -25868,13 +25869,13 @@ class ProductAttributesComponent {
      */
     constructor(currentProductService) {
         this.currentProductService = currentProductService;
+        this.product$ = this.currentProductService.getProduct(ProductScope.ATTRIBUTES);
     }
+    // TODO deprecated since 1.4, remove
     /**
      * @return {?}
      */
-    ngOnInit() {
-        this.product$ = this.currentProductService.getProduct();
-    }
+    ngOnInit() { }
 }
 ProductAttributesComponent.decorators = [
     { type: Component, args: [{

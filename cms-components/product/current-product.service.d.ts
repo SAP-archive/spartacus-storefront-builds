@@ -1,10 +1,10 @@
-import { FeatureConfigService, Product, ProductService, RoutingService } from '@spartacus/core';
+import { FeatureConfigService, Product, ProductScope, ProductService, RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 export declare class CurrentProductService {
     private routingService;
     private productService;
     protected features?: FeatureConfigService;
     constructor(routingService: RoutingService, productService: ProductService, features?: FeatureConfigService);
-    protected readonly PRODUCT_SCOPE: string;
-    getProduct(): Observable<Product>;
+    protected readonly DEFAULT_PRODUCT_SCOPE: string;
+    getProduct(scopes?: (ProductScope | string)[] | ProductScope | string): Observable<Product>;
 }

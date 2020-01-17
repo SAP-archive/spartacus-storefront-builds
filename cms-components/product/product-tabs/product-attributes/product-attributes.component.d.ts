@@ -1,7 +1,7 @@
 import { OnInit } from '@angular/core';
 import { Product } from '@spartacus/core';
-import { CurrentProductService } from '../../current-product.service';
 import { Observable } from 'rxjs';
+import { CurrentProductService } from '../../current-product.service';
 export declare class ProductAttributesComponent implements OnInit {
     protected currentProductService: CurrentProductService;
     product$: Observable<Product>;
