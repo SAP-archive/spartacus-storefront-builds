@@ -19651,6 +19651,7 @@ class PaymentMethodsComponent {
     constructor(userPaymentService, translation) {
         this.userPaymentService = userPaymentService;
         this.translation = translation;
+        this.iconTypes = ICON_TYPE;
     }
     /**
      * @return {?}
@@ -19679,7 +19680,7 @@ class PaymentMethodsComponent {
      * @param {?} __0
      * @return {?}
      */
-    getCardContent({ defaultPayment, accountHolderName, expiryMonth, expiryYear, cardNumber, }) {
+    getCardContent({ defaultPayment, accountHolderName, expiryMonth, expiryYear, cardNumber, cardType, }) {
         return combineLatest([
             this.translation.translate('paymentCard.setAsDefault'),
             this.translation.translate('common.delete'),
@@ -19707,6 +19708,7 @@ class PaymentMethodsComponent {
                 text: [cardNumber, textExpires],
                 actions,
                 deleteMsg: textDeleteConfirmation,
+                img: this.getCardIcon(cardType.code),
             };
             return card;
         })));
@@ -19739,6 +19741,30 @@ class PaymentMethodsComponent {
     setDefaultPaymentMethod(paymentMethod) {
         this.userPaymentService.setPaymentMethodAsDefault(paymentMethod.id);
     }
+    /**
+     * @param {?} code
+     * @return {?}
+     */
+    getCardIcon(code) {
+        /** @type {?} */
+        let ccIcon;
+        if (code === 'visa') {
+            ccIcon = this.iconTypes.VISA;
+        }
+        else if (code === 'master' || code === 'mastercard_eurocard') {
+            ccIcon = this.iconTypes.MASTER_CARD;
+        }
+        else if (code === 'diners') {
+            ccIcon = this.iconTypes.DINERS_CLUB;
+        }
+        else if (code === 'amex') {
+            ccIcon = this.iconTypes.AMEX;
+        }
+        else {
+            ccIcon = this.iconTypes.CREDIT_CARD;
+        }
+        return ccIcon;
+    }
 }
 PaymentMethodsComponent.decorators = [
     { type: Component, args: [{
@@ -19756,6 +19782,8 @@ if (false) {
     PaymentMethodsComponent.prototype.paymentMethods$;
     /** @type {?} */
     PaymentMethodsComponent.prototype.editCard;
+    /** @type {?} */
+    PaymentMethodsComponent.prototype.iconTypes;
     /** @type {?} */
     PaymentMethodsComponent.prototype.loading$;
     /**

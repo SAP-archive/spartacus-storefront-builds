@@ -22701,6 +22701,7 @@ var PaymentMethodsComponent = /** @class */ (function () {
     function PaymentMethodsComponent(userPaymentService, translation) {
         this.userPaymentService = userPaymentService;
         this.translation = translation;
+        this.iconTypes = ICON_TYPE;
     }
     /**
      * @return {?}
@@ -22738,7 +22739,8 @@ var PaymentMethodsComponent = /** @class */ (function () {
      * @return {?}
      */
     function (_a) {
-        var defaultPayment = _a.defaultPayment, accountHolderName = _a.accountHolderName, expiryMonth = _a.expiryMonth, expiryYear = _a.expiryYear, cardNumber = _a.cardNumber;
+        var _this = this;
+        var defaultPayment = _a.defaultPayment, accountHolderName = _a.accountHolderName, expiryMonth = _a.expiryMonth, expiryYear = _a.expiryYear, cardNumber = _a.cardNumber, cardType = _a.cardType;
         return combineLatest([
             this.translation.translate('paymentCard.setAsDefault'),
             this.translation.translate('common.delete'),
@@ -22767,6 +22769,7 @@ var PaymentMethodsComponent = /** @class */ (function () {
                 text: [cardNumber, textExpires],
                 actions: actions,
                 deleteMsg: textDeleteConfirmation,
+                img: _this.getCardIcon(cardType.code),
             };
             return card;
         })));
@@ -22814,6 +22817,34 @@ var PaymentMethodsComponent = /** @class */ (function () {
     function (paymentMethod) {
         this.userPaymentService.setPaymentMethodAsDefault(paymentMethod.id);
     };
+    /**
+     * @param {?} code
+     * @return {?}
+     */
+    PaymentMethodsComponent.prototype.getCardIcon = /**
+     * @param {?} code
+     * @return {?}
+     */
+    function (code) {
+        /** @type {?} */
+        var ccIcon;
+        if (code === 'visa') {
+            ccIcon = this.iconTypes.VISA;
+        }
+        else if (code === 'master' || code === 'mastercard_eurocard') {
+            ccIcon = this.iconTypes.MASTER_CARD;
+        }
+        else if (code === 'diners') {
+            ccIcon = this.iconTypes.DINERS_CLUB;
+        }
+        else if (code === 'amex') {
+            ccIcon = this.iconTypes.AMEX;
+        }
+        else {
+            ccIcon = this.iconTypes.CREDIT_CARD;
+        }
+        return ccIcon;
+    };
     PaymentMethodsComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-payment-methods',
@@ -22832,6 +22863,8 @@ if (false) {
     PaymentMethodsComponent.prototype.paymentMethods$;
     /** @type {?} */
     PaymentMethodsComponent.prototype.editCard;
+    /** @type {?} */
+    PaymentMethodsComponent.prototype.iconTypes;
     /** @type {?} */
     PaymentMethodsComponent.prototype.loading$;
     /**
