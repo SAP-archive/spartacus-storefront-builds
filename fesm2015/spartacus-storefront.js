@@ -9917,22 +9917,40 @@ class CartItemListComponent {
      * @return {?}
      */
     set items(_items) {
-        this._items = _items;
-        this.items.forEach((/**
+        if (_items.every((/**
          * @param {?} item
          * @return {?}
          */
-        item => {
-            const { code } = item.product;
-            if (!this.form.controls[code]) {
-                this.form.setControl(code, this.createEntryFormGroup(item));
-            }
-            else {
+        item => item.hasOwnProperty('orderEntry')))) {
+            this._items = _items.map((/**
+             * @param {?} consignmentEntry
+             * @return {?}
+             */
+            consignmentEntry => {
                 /** @type {?} */
-                const entryForm = (/** @type {?} */ (this.form.controls[code]));
-                entryForm.controls.quantity.setValue(item.quantity);
-            }
-        }));
+                const entry = Object.assign({}, ((/** @type {?} */ (consignmentEntry))).orderEntry);
+                entry.quantity = consignmentEntry.quantity;
+                return entry;
+            }));
+        }
+        else {
+            this._items = _items;
+            this.items.forEach((/**
+             * @param {?} item
+             * @return {?}
+             */
+            item => {
+                const { code } = item.product;
+                if (!this.form.controls[code]) {
+                    this.form.setControl(code, this.createEntryFormGroup(item));
+                }
+                else {
+                    /** @type {?} */
+                    const entryForm = (/** @type {?} */ (this.form.controls[code]));
+                    entryForm.controls.quantity.setValue(item.quantity);
+                }
+            }));
+        }
     }
     /**
      * @return {?}
@@ -18448,6 +18466,8 @@ class OrderDetailItemsComponent {
         this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
     }
     /**
+     * @deprecated
+     * NOTE: This function will be removed in version 2.0
      * @param {?} consignment
      * @return {?}
      */
@@ -18467,7 +18487,7 @@ class OrderDetailItemsComponent {
 OrderDetailItemsComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-order-details-items',
-                template: "<ng-container *ngIf=\"order$ | async as order\">\n  <div *ngFor=\"let consignment of order.consignments\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">\n        <span *ngIf=\"consignment\">\n          {{\n            'orderDetails.deliveryStatus'\n              | cxTranslate: { context: consignment.status }\n          }}\n        </span>\n      </div>\n      <div *ngIf=\"consignment?.statusDate\" class=\"cx-list-date\">\n        <div>{{ 'orderDetails.shippedOn' | cxTranslate }}&nbsp;</div>\n        <div>{{ consignment?.statusDate | cxDate }}</div>\n      </div>\n\n      <cx-consignment-tracking\n        [orderCode]=\"order.code\"\n        [consignment]=\"consignment\"\n        *cxFeature=\"'consignmentTracking'\"\n      >\n      </cx-consignment-tracking>\n    </div>\n\n    <div class=\"cx-list-item col-12\">\n      <ng-container *cxFeatureLevel=\"'1.5'\">\n        <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n          <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n        </ng-container>\n      </ng-container>\n\n      <cx-cart-item-list\n        [items]=\"getConsignmentProducts(consignment)\"\n        [isReadOnly]=\"true\"\n        [promotionLocation]=\"promotionLocation\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n\n  <div *ngIf=\"order.unconsignedEntries?.length\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">\n        {{ 'orderDetails.pending' | cxTranslate }}\n      </div>\n    </div>\n    <div class=\"cx-list-item col-12\">\n      <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n        <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n      </ng-container>\n\n      <cx-cart-item-list\n        [items]=\"order?.unconsignedEntries\"\n        [isReadOnly]=\"true\"\n        [promotionLocation]=\"promotionLocation\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n</ng-container>\n"
+                template: "<ng-container *ngIf=\"order$ | async as order\">\n  <div *ngFor=\"let consignment of order.consignments\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">\n        <span *ngIf=\"consignment\">\n          {{\n            'orderDetails.deliveryStatus'\n              | cxTranslate: { context: consignment.status }\n          }}\n        </span>\n      </div>\n      <div *ngIf=\"consignment?.statusDate\" class=\"cx-list-date\">\n        <div>{{ 'orderDetails.shippedOn' | cxTranslate }}&nbsp;</div>\n        <div>{{ consignment?.statusDate | cxDate }}</div>\n      </div>\n\n      <cx-consignment-tracking\n        [orderCode]=\"order.code\"\n        [consignment]=\"consignment\"\n        *cxFeature=\"'consignmentTracking'\"\n      >\n      </cx-consignment-tracking>\n    </div>\n\n    <div class=\"cx-list-item col-12\">\n      <ng-container *cxFeatureLevel=\"'1.5'\">\n        <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n          <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n        </ng-container>\n      </ng-container>\n\n      <cx-cart-item-list\n        [items]=\"consignment.entries\"\n        [isReadOnly]=\"true\"\n        [promotionLocation]=\"promotionLocation\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n\n  <div *ngIf=\"order.unconsignedEntries?.length\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">\n        {{ 'orderDetails.pending' | cxTranslate }}\n      </div>\n    </div>\n    <div class=\"cx-list-item col-12\">\n      <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n        <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n      </ng-container>\n\n      <cx-cart-item-list\n        [items]=\"order?.unconsignedEntries\"\n        [isReadOnly]=\"true\"\n        [promotionLocation]=\"promotionLocation\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n</ng-container>\n"
             }] }
 ];
 /** @nocollapse */

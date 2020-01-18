@@ -17,5 +17,9 @@ export declare class OrderDetailItemsComponent implements OnInit {
     order$: Observable<Order>;
     orderPromotions$: Observable<PromotionResult[]>;
     ngOnInit(): void;
+    /**
+     * @deprecated
+     * NOTE: This function will be removed in version 2.0
+     */
     getConsignmentProducts(consignment: Consignment): OrderEntry[];
 }
