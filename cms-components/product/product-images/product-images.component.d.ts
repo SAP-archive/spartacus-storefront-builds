@@ -4,6 +4,11 @@ export declare class ProductImagesComponent {
     private currentProductService;
     private mainMediaContainer;
     private product$;
+    /**
+     * @deprecated since version 1.5
+     * This variable will no longer be in use. Use thumbs$ observable instead.
+     * TODO(issue:#6166).
+     */
     isThumbsEmpty: boolean;
     thumbs$: Observable<any[]>;
     mainImage$: Observable<any>;

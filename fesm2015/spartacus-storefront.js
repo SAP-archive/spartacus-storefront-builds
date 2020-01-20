@@ -1392,7 +1392,7 @@ class MediaService {
         else if (media && media.url) {
             return this.getImageUrl(media.url);
         }
-        else if (media) {
+        else if (media && media[this.getHighestAvailableFormat(media)]) {
             return this.getImageUrl(media[this.getHighestAvailableFormat(media)].url);
         }
         else {
@@ -23991,7 +23991,9 @@ class ProductImagesComponent {
          * @param {?} product
          * @return {?}
          */
-        product => this.createThumbs(product))), tap((/**
+        product => this.createThumbs(product))), 
+        // TODO: deprecated, remove the below tap (issue:#6166)
+        tap((/**
          * @param {?} thumbs
          * @return {?}
          */
@@ -24075,7 +24077,7 @@ class ProductImagesComponent {
 ProductImagesComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-product-images',
-                template: "<ng-container *ngIf=\"mainImage$ | async as main\">\n  <cx-media [container]=\"main\" format=\"zoom\"> </cx-media>\n</ng-container>\n\n<cx-carousel\n  *ngIf=\"!isThumbsEmpty\"\n  class=\"thumbs\"\n  [items]=\"thumbs$ | async\"\n  itemWidth=\"120px\"\n  [hideIndicators]=\"false\"\n  [template]=\"thumb\"\n></cx-carousel>\n\n<ng-template #thumb let-item=\"item\">\n  <cx-media\n    [container]=\"item.container\"\n    tabindex=\"0\"\n    format=\"thumbnail\"\n    (focus)=\"openImage(item.container)\"\n    [class.is-active]=\"isActive(item.container) | async\"\n  >\n  </cx-media>\n</ng-template>\n",
+                template: "<ng-container *ngIf=\"mainImage$ | async as main\">\n  <cx-media [container]=\"main\" format=\"zoom\"> </cx-media>\n</ng-container>\n\n<ng-container *ngIf=\"thumbs$ | async as thumbs\">\n  <cx-carousel\n    *ngIf=\"thumbs.length\"\n    class=\"thumbs\"\n    [items]=\"thumbs\"\n    itemWidth=\"120px\"\n    [hideIndicators]=\"false\"\n    [template]=\"thumb\"\n  ></cx-carousel>\n</ng-container>\n\n<ng-template #thumb let-item=\"item\">\n  <cx-media\n    [container]=\"item.container\"\n    tabindex=\"0\"\n    format=\"thumbnail\"\n    (focus)=\"openImage(item.container)\"\n    [class.is-active]=\"isActive(item.container) | async\"\n  >\n  </cx-media>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -24094,7 +24096,12 @@ if (false) {
      * @private
      */
     ProductImagesComponent.prototype.product$;
-    /** @type {?} */
+    /**
+     * @deprecated since version 1.5
+     * This variable will no longer be in use. Use thumbs$ observable instead.
+     * TODO(issue:#6166).
+     * @type {?}
+     */
     ProductImagesComponent.prototype.isThumbsEmpty;
     /** @type {?} */
     ProductImagesComponent.prototype.thumbs$;
@@ -25677,7 +25684,7 @@ class ProductVariantGuard {
          * @param {?} productCode
          * @return {?}
          */
-        (productCode) => this.productService.get(productCode))), filter(Boolean), map((/**
+        (productCode) => this.productService.get(productCode, ProductScope.VARIANTS))), filter(Boolean), map((/**
          * @param {?} product
          * @return {?}
          */
