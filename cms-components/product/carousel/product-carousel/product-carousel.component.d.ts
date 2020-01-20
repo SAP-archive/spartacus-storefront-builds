@@ -18,4 +18,8 @@ export declare class ProductCarouselComponent {
      */
     items$: Observable<Observable<Product>[]>;
     constructor(componentData: CmsComponentData<model>, productService: ProductService, features?: FeatureConfigService);
+    /**
+     * @deprecated since 1.4
+     */
+    constructor(componentData: CmsComponentData<model>, productService: ProductService);
 }

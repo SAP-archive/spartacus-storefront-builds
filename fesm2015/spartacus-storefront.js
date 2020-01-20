@@ -7918,7 +7918,13 @@ class CurrentProductService {
          * @param {?} productCode
          * @return {?}
          */
-        (productCode) => this.productService.get(productCode, scopes || this.DEFAULT_PRODUCT_SCOPE))));
+        (productCode) => this.productService.get(productCode, 
+        // TODO deprecated since 1.4 - should be replaced with 'scopes || this.DEFAULT_PRODUCT_SCOPE'
+        this.features && this.features.isLevel('1.4')
+            ? scopes || this.DEFAULT_PRODUCT_SCOPE
+            : undefined
+        // deprecated END
+        ))));
     }
 }
 CurrentProductService.decorators = [

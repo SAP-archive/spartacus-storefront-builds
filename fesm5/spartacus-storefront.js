@@ -9541,7 +9541,13 @@ var CurrentProductService = /** @class */ (function () {
          * @return {?}
          */
         function (productCode) {
-            return _this.productService.get(productCode, scopes || _this.DEFAULT_PRODUCT_SCOPE);
+            return _this.productService.get(productCode, 
+            // TODO deprecated since 1.4 - should be replaced with 'scopes || this.DEFAULT_PRODUCT_SCOPE'
+            _this.features && _this.features.isLevel('1.4')
+                ? scopes || _this.DEFAULT_PRODUCT_SCOPE
+                : undefined
+            // deprecated END
+            );
         })));
     };
     CurrentProductService.decorators = [
