@@ -21565,11 +21565,21 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /** @type {?} */
+    var completedValues = ['DELIVERY_COMPLETED', 'PICKUP_COMPLETE'];
+    /** @type {?} */
+    var cancelledValues = ['CANCELLED'];
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var OrderDetailItemsComponent = /** @class */ (function () {
         function OrderDetailItemsComponent(orderDetailsService, promotionService) {
             this.orderDetailsService = orderDetailsService;
             this.promotionService = promotionService;
             this.promotionLocation = core$1.PromotionLocation.Order;
+            this.order$ = this.orderDetailsService.getOrderDetails();
         }
         /**
          * @return {?}
@@ -21578,8 +21588,66 @@
          * @return {?}
          */
         function () {
-            this.order$ = this.orderDetailsService.getOrderDetails();
             this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
+            this.others$ = this.getOtherStatus.apply(this, __spread(completedValues, cancelledValues));
+            this.completed$ = this.getExactStatus(completedValues);
+            this.cancel$ = this.getExactStatus(cancelledValues);
+        };
+        /**
+         * @private
+         * @param {?} consignmentStatus
+         * @return {?}
+         */
+        OrderDetailItemsComponent.prototype.getExactStatus = /**
+         * @private
+         * @param {?} consignmentStatus
+         * @return {?}
+         */
+        function (consignmentStatus) {
+            return this.order$.pipe(operators.map((/**
+             * @param {?} order
+             * @return {?}
+             */
+            function (order) {
+                if (Boolean(order.consignments)) {
+                    return order.consignments.filter((/**
+                     * @param {?} consignment
+                     * @return {?}
+                     */
+                    function (consignment) {
+                        return consignmentStatus.includes(consignment.status);
+                    }));
+                }
+            })));
+        };
+        /**
+         * @private
+         * @param {...?} consignmentStatus
+         * @return {?}
+         */
+        OrderDetailItemsComponent.prototype.getOtherStatus = /**
+         * @private
+         * @param {...?} consignmentStatus
+         * @return {?}
+         */
+        function () {
+            var consignmentStatus = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                consignmentStatus[_i] = arguments[_i];
+            }
+            return this.order$.pipe(operators.map((/**
+             * @param {?} order
+             * @return {?}
+             */
+            function (order) {
+                if (Boolean(order.consignments)) {
+                    return order.consignments.filter((/**
+                     * @param {?} consignment
+                     * @return {?}
+                     */
+                    function (consignment) { return !consignmentStatus.includes(consignment.status); }));
+                }
+            })));
         };
         /**
          * @deprecated
@@ -21612,7 +21680,7 @@
         OrderDetailItemsComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-order-details-items',
-                        template: "<ng-container *ngIf=\"order$ | async as order\">\n  <div *ngFor=\"let consignment of order.consignments\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">\n        <span *ngIf=\"consignment\">\n          {{\n            'orderDetails.deliveryStatus'\n              | cxTranslate: { context: consignment.status }\n          }}\n        </span>\n      </div>\n      <div *ngIf=\"consignment?.statusDate\" class=\"cx-list-date\">\n        <div>{{ 'orderDetails.shippedOn' | cxTranslate }}&nbsp;</div>\n        <div>{{ consignment?.statusDate | cxDate }}</div>\n      </div>\n\n      <cx-consignment-tracking\n        [orderCode]=\"order.code\"\n        [consignment]=\"consignment\"\n        *cxFeature=\"'consignmentTracking'\"\n      >\n      </cx-consignment-tracking>\n    </div>\n\n    <div class=\"cx-list-item col-12\">\n      <ng-container *cxFeatureLevel=\"'1.5'\">\n        <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n          <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n        </ng-container>\n      </ng-container>\n\n      <cx-cart-item-list\n        [items]=\"consignment.entries\"\n        [isReadOnly]=\"true\"\n        [promotionLocation]=\"promotionLocation\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n\n  <div *ngIf=\"order.unconsignedEntries?.length\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">\n        {{ 'orderDetails.pending' | cxTranslate }}\n      </div>\n    </div>\n    <div class=\"cx-list-item col-12\">\n      <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n        <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n      </ng-container>\n\n      <cx-cart-item-list\n        [items]=\"order?.unconsignedEntries\"\n        [isReadOnly]=\"true\"\n        [promotionLocation]=\"promotionLocation\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n</ng-container>\n"
+                        template: "<ng-container *ngIf=\"order$ | async as order\">\n  <!-- consigned entries -->\n  <div *cxFeatureLevel=\"'1.4'\">\n    <cx-order-consigned-entries\n      *ngIf=\"others$ | async as others\"\n      [order]=\"order\"\n      [consignments]=\"others\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"completed$ | async as completed\"\n      [order]=\"order\"\n      [consignments]=\"completed\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"cancel$ | async as cancel\"\n      [order]=\"order\"\n      [consignments]=\"cancel\"\n    ></cx-order-consigned-entries>\n  </div>\n\n  <div *cxFeatureLevel=\"'!1.4'\">\n    <div *ngFor=\"let consignment of order.consignments\" class=\"cx-list row\">\n      <div class=\"cx-list-header col-12\">\n        <div class=\"cx-list-status\">\n          <span *ngIf=\"consignment\">\n            {{\n              'orderDetails.deliveryStatus'\n                | cxTranslate: { context: consignment.status }\n            }}\n          </span>\n        </div>\n        <div *ngIf=\"consignment?.statusDate\" class=\"cx-list-date\">\n          <div>{{ 'orderDetails.shippedOn' | cxTranslate }}&nbsp;</div>\n          <div>{{ consignment?.statusDate | cxDate }}</div>\n        </div>\n\n        <cx-consignment-tracking\n          [orderCode]=\"order.code\"\n          [consignment]=\"consignment\"\n          *cxFeature=\"'consignmentTracking'\"\n        >\n        </cx-consignment-tracking>\n      </div>\n      <div class=\"cx-list-item col-12\">\n        <ng-container *cxFeatureLevel=\"'1.5'\">\n          <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n            <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n          </ng-container>\n        </ng-container>\n\n        <cx-cart-item-list\n          [items]=\"consignment.entries\"\n          [isReadOnly]=\"true\"\n          [promotionLocation]=\"promotionLocation\"\n        ></cx-cart-item-list>\n      </div>\n    </div>\n  </div>\n  <!-- unconsigned entries -->\n  <div *ngIf=\"order.unconsignedEntries?.length\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">\n        {{ 'orderDetails.pending' | cxTranslate }}\n      </div>\n    </div>\n    <div class=\"cx-list-item col-12\">\n      <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n        <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n      </ng-container>\n\n      <cx-cart-item-list\n        [items]=\"order?.unconsignedEntries\"\n        [isReadOnly]=\"true\"\n        [promotionLocation]=\"promotionLocation\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n</ng-container>\n"
                     }] }
         ];
         /** @nocollapse */
@@ -21629,6 +21697,12 @@
         OrderDetailItemsComponent.prototype.order$;
         /** @type {?} */
         OrderDetailItemsComponent.prototype.orderPromotions$;
+        /** @type {?} */
+        OrderDetailItemsComponent.prototype.others$;
+        /** @type {?} */
+        OrderDetailItemsComponent.prototype.completed$;
+        /** @type {?} */
+        OrderDetailItemsComponent.prototype.cancel$;
         /**
          * @type {?}
          * @private
@@ -22013,6 +22087,52 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var OrderConsignedEntriesComponent = /** @class */ (function () {
+        function OrderConsignedEntriesComponent() {
+        }
+        /**
+         * @param {?} consignment
+         * @return {?}
+         */
+        OrderConsignedEntriesComponent.prototype.getConsignmentProducts = /**
+         * @param {?} consignment
+         * @return {?}
+         */
+        function (consignment) {
+            /** @type {?} */
+            var products = [];
+            consignment.entries.forEach((/**
+             * @param {?} element
+             * @return {?}
+             */
+            function (element) {
+                products.push(element.orderEntry);
+            }));
+            return products;
+        };
+        OrderConsignedEntriesComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'cx-order-consigned-entries',
+                        template: "<div *ngFor=\"let consignment of consignments\" class=\"cx-list row\">\n  <div class=\"cx-list-header col-12\">\n    <div class=\"cx-list-status\">\n      <span *ngIf=\"consignment\">\n        {{\n          'orderDetails.deliveryStatus'\n            | cxTranslate: { context: consignment.status }\n        }}\n      </span>\n    </div>\n    <div *ngIf=\"consignment?.statusDate\" class=\"cx-list-date\">\n      <div>{{ consignment?.statusDate | cxDate }}</div>\n    </div>\n\n    <cx-consignment-tracking\n      [orderCode]=\"order.code\"\n      [consignment]=\"consignment\"\n      *cxFeature=\"'consignmentTracking'\"\n    >\n    </cx-consignment-tracking>\n  </div>\n  <div class=\"cx-list-item col-12\">\n    <cx-cart-item-list\n      [items]=\"consignment.entries\"\n      [isReadOnly]=\"true\"\n    ></cx-cart-item-list>\n  </div>\n</div>\n"
+                    }] }
+        ];
+        OrderConsignedEntriesComponent.propDecorators = {
+            consignments: [{ type: core.Input }],
+            order: [{ type: core.Input }]
+        };
+        return OrderConsignedEntriesComponent;
+    }());
+    if (false) {
+        /** @type {?} */
+        OrderConsignedEntriesComponent.prototype.consignments;
+        /** @type {?} */
+        OrderConsignedEntriesComponent.prototype.order;
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     /** @type {?} */
     var moduleComponents = [
         OrderDetailActionsComponent,
@@ -22022,6 +22142,7 @@
         OrderDetailShippingComponent,
         TrackingEventsComponent,
         ConsignmentTrackingComponent,
+        OrderConsignedEntriesComponent,
     ];
     var ɵ0$5 = { pageLabel: 'order', cxRoute: 'orderGuest' }, ɵ1 = { cxRoute: 'orderDetails' };
     var OrderDetailsModule = /** @class */ (function () {
@@ -34062,28 +34183,29 @@
     exports.ɵbg = OrderDetailActionsComponent;
     exports.ɵbh = TrackingEventsComponent;
     exports.ɵbi = ConsignmentTrackingComponent;
-    exports.ɵbj = AddToHomeScreenService;
-    exports.ɵbk = GuestRegisterFormComponent;
-    exports.ɵbl = SkipLinkModule;
-    exports.ɵbm = skipLinkFactory;
-    exports.ɵbn = defaultSkipLinkConfig;
-    exports.ɵbo = SkipLinkConfig;
-    exports.ɵbp = SkipLinkScrollPosition;
-    exports.ɵbq = SkipLinkComponent;
-    exports.ɵbr = SkipLinkService;
-    exports.ɵbs = SkipLinkDirective;
-    exports.ɵbt = CheckoutLoginComponent;
-    exports.ɵbu = MyCouponsComponentService;
-    exports.ɵbv = suffixUrlMatcher;
-    exports.ɵbw = addCmsRoute;
-    exports.ɵbx = htmlLangProvider;
-    exports.ɵby = setHtmlLangAttribute;
-    exports.ɵbz = AnonymousConsentsModule;
+    exports.ɵbj = OrderConsignedEntriesComponent;
+    exports.ɵbk = AddToHomeScreenService;
+    exports.ɵbl = GuestRegisterFormComponent;
+    exports.ɵbm = SkipLinkModule;
+    exports.ɵbn = skipLinkFactory;
+    exports.ɵbo = defaultSkipLinkConfig;
+    exports.ɵbp = SkipLinkConfig;
+    exports.ɵbq = SkipLinkScrollPosition;
+    exports.ɵbr = SkipLinkComponent;
+    exports.ɵbs = SkipLinkService;
+    exports.ɵbt = SkipLinkDirective;
+    exports.ɵbu = CheckoutLoginComponent;
+    exports.ɵbv = MyCouponsComponentService;
+    exports.ɵbw = suffixUrlMatcher;
+    exports.ɵbx = addCmsRoute;
+    exports.ɵby = htmlLangProvider;
+    exports.ɵbz = setHtmlLangAttribute;
     exports.ɵc = ComponentMapperService;
-    exports.ɵca = AnonymousConsentDialogComponent;
-    exports.ɵcb = RoutingModule;
-    exports.ɵcc = defaultStorefrontRoutesConfig;
-    exports.ɵcd = defaultRoutingConfig;
+    exports.ɵca = AnonymousConsentsModule;
+    exports.ɵcb = AnonymousConsentDialogComponent;
+    exports.ɵcc = RoutingModule;
+    exports.ɵcd = defaultStorefrontRoutesConfig;
+    exports.ɵce = defaultRoutingConfig;
     exports.ɵd = AsmEnablerService;
     exports.ɵe = AsmMainUiComponent;
     exports.ɵf = AsmComponentService;

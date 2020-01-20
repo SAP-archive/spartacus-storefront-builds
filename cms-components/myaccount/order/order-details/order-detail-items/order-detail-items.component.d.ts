@@ -1,8 +1,8 @@
 import { OnInit } from '@angular/core';
+import { Consignment, Order, OrderEntry, PromotionLocation, PromotionResult } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { Order, Consignment, OrderEntry, PromotionResult, PromotionLocation } from '@spartacus/core';
-import { OrderDetailsService } from '../order-details.service';
 import { PromotionService } from '../../../../../shared/services/promotion/promotion.service';
+import { OrderDetailsService } from '../order-details.service';
 export declare class OrderDetailItemsComponent implements OnInit {
     private orderDetailsService;
     protected promotionService?: PromotionService;
@@ -16,7 +16,12 @@ export declare class OrderDetailItemsComponent implements OnInit {
     promotionLocation: PromotionLocation;
     order$: Observable<Order>;
     orderPromotions$: Observable<PromotionResult[]>;
+    others$: Observable<Consignment[]>;
+    completed$: Observable<Consignment[]>;
+    cancel$: Observable<Consignment[]>;
     ngOnInit(): void;
+    private getExactStatus;
+    private getOtherStatus;
     /**
      * @deprecated
      * NOTE: This function will be removed in version 2.0
