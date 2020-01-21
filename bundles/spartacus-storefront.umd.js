@@ -29477,7 +29477,7 @@
         ProductGridItemComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-product-grid-item',
-                        template: "<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-image-container\"\n>\n  <cx-media\n    class=\"cx-product-image\"\n    [container]=\"product.images?.PRIMARY\"\n    format=\"product\"\n    [alt]=\"product.summary\"\n  ></cx-media>\n</a>\n<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-name\"\n  [innerHTML]=\"product.nameHtml\"\n></a>\n\n<div class=\"cx-product-rating\">\n  <cx-star-rating\n    *ngIf=\"product.averageRating\"\n    [rating]=\"product?.averageRating\"\n    [disabled]=\"true\"\n  ></cx-star-rating>\n  <div *ngIf=\"!product.averageRating\">\n    {{ 'productDetails.noReviews' | cxTranslate }}\n  </div>\n</div>\n<div class=\"cx-product-price-container\">\n  <div class=\"cx-product-price\" aria-label=\"Product price\">\n    {{ product.price?.formattedValue }}\n  </div>\n</div>\n\n<ng-container *cxFeatureLevel=\"'1.5'\">\n  <div class=\"cx-style-icons\" *ngIf=\"product.variantOptions\">\n    <cx-style-icons [variants]=\"product.variantOptions\"></cx-style-icons>\n  </div>\n</ng-container>\n\n<cx-add-to-cart\n  *ngIf=\"product.stock?.stockLevelStatus !== 'outOfStock'\"\n  [showQuantity]=\"false\"\n  [product]=\"product\"\n></cx-add-to-cart>\n",
+                        template: "<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-image-container\"\n>\n  <cx-media\n    class=\"cx-product-image\"\n    [container]=\"product.images?.PRIMARY\"\n    format=\"product\"\n    [alt]=\"product.summary\"\n  ></cx-media>\n</a>\n<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-name\"\n  [innerHTML]=\"product.nameHtml\"\n></a>\n\n<div class=\"cx-product-rating\">\n  <cx-star-rating\n    *ngIf=\"product.averageRating\"\n    [rating]=\"product?.averageRating\"\n    [disabled]=\"true\"\n  ></cx-star-rating>\n  <div *ngIf=\"!product.averageRating\">\n    {{ 'productDetails.noReviews' | cxTranslate }}\n  </div>\n</div>\n<div class=\"cx-product-price-container\">\n  <div class=\"cx-product-price\" aria-label=\"Product price\">\n    {{ product.price?.formattedValue }}\n  </div>\n</div>\n\n<ng-container *cxFeatureLevel=\"'1.5'\">\n  <div class=\"cx-variant-style-icons\" *ngIf=\"product.variantOptions\">\n    <cx-variant-style-icons\n      [variants]=\"product.variantOptions\"\n    ></cx-variant-style-icons>\n  </div>\n</ng-container>\n\n<cx-add-to-cart\n  *ngIf=\"product.stock?.stockLevelStatus !== 'outOfStock'\"\n  [showQuantity]=\"false\"\n  [product]=\"product\"\n></cx-add-to-cart>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -29501,7 +29501,7 @@
         ProductListItemComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'cx-product-list-item',
-                        template: "<div class=\"row\">\n  <div class=\"col-12 col-md-4\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-image-container\"\n    >\n      <cx-media\n        class=\"cx-product-image\"\n        [container]=\"product.images?.PRIMARY\"\n        format=\"product\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n    </a>\n  </div>\n  <div class=\"col-12 col-md-8\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-name\"\n      [innerHtml]=\"product.nameHtml\"\n    ></a>\n    <cx-star-rating\n      *ngIf=\"product.averageRating\"\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div *ngIf=\"!product.averageRating\">\n      {{ 'productDetails.noReviews' | cxTranslate }}\n    </div>\n    <div class=\"cx-product-price\" aria-label=\"Product price\">\n      {{ product.price?.formattedValue }}\n    </div>\n    <div class=\"row\">\n      <div class=\"col-12 col-md-8\">\n        <p class=\"cx-product-summary\" [innerHtml]=\"product.summary\">\n          {{ product.summary }}\n        </p>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <cx-add-to-cart\n          *ngIf=\"product.stock?.stockLevelStatus !== 'outOfStock'\"\n          [showQuantity]=\"false\"\n          [product]=\"product\"\n        ></cx-add-to-cart>\n      </div>\n    </div>\n    <ng-container *cxFeatureLevel=\"'1.5'\">\n      <div class=\"row\" *ngIf=\"product.variantOptions\">\n        <cx-style-icons\n          class=\"list-style-icons\"\n          [variants]=\"product.variantOptions\"\n        ></cx-style-icons>\n      </div>\n    </ng-container>\n  </div>\n</div>\n",
+                        template: "<div class=\"row\">\n  <div class=\"col-12 col-md-4\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-image-container\"\n    >\n      <cx-media\n        class=\"cx-product-image\"\n        [container]=\"product.images?.PRIMARY\"\n        format=\"product\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n    </a>\n  </div>\n  <div class=\"col-12 col-md-8\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-name\"\n      [innerHtml]=\"product.nameHtml\"\n    ></a>\n    <cx-star-rating\n      *ngIf=\"product.averageRating\"\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div *ngIf=\"!product.averageRating\">\n      {{ 'productDetails.noReviews' | cxTranslate }}\n    </div>\n    <div class=\"cx-product-price\" aria-label=\"Product price\">\n      {{ product.price?.formattedValue }}\n    </div>\n    <div class=\"row\">\n      <div class=\"col-12 col-md-8\">\n        <p class=\"cx-product-summary\" [innerHtml]=\"product.summary\">\n          {{ product.summary }}\n        </p>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <cx-add-to-cart\n          *ngIf=\"product.stock?.stockLevelStatus !== 'outOfStock'\"\n          [showQuantity]=\"false\"\n          [product]=\"product\"\n        ></cx-add-to-cart>\n      </div>\n    </div>\n    <ng-container *cxFeatureLevel=\"'1.5'\">\n      <div class=\"row\" *ngIf=\"product.variantOptions\">\n        <cx-variant-style-icons\n          class=\"list-style-icons\"\n          [variants]=\"product.variantOptions\"\n        ></cx-variant-style-icons>\n      </div>\n    </ng-container>\n  </div>\n</div>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
@@ -29519,8 +29519,8 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var ProductVariantSelectorComponent = /** @class */ (function () {
-        function ProductVariantSelectorComponent(currentProductService) {
+    var ProductVariantsComponent = /** @class */ (function () {
+        function ProductVariantsComponent(currentProductService) {
             this.currentProductService = currentProductService;
             this.variants = [];
             this.variantType = core$1.VariantType;
@@ -29528,7 +29528,7 @@
         /**
          * @return {?}
          */
-        ProductVariantSelectorComponent.prototype.ngOnInit = /**
+        ProductVariantsComponent.prototype.ngOnInit = /**
          * @return {?}
          */
         function () {
@@ -29553,31 +29553,31 @@
                 }));
             })));
         };
-        ProductVariantSelectorComponent.decorators = [
+        ProductVariantsComponent.decorators = [
             { type: core.Component, args: [{
-                        selector: 'cx-product-variant-selector',
-                        template: "<ng-container *ngIf=\"product$ | async as product\">\n  <div class=\"variant-section\" *ngIf=\"product.baseOptions?.length\">\n    <cx-style-selector\n      *ngIf=\"variants[variantType.STYLE]\"\n      [variants]=\"variants[variantType.STYLE]\"\n    ></cx-style-selector>\n    <cx-size-selector\n      *ngIf=\"variants[variantType.SIZE]\"\n      [product]=\"product\"\n      [variants]=\"variants[variantType.SIZE]\"\n    ></cx-size-selector>\n    <cx-color-selector\n      *ngIf=\"variants[variantType.COLOR]\"\n      [product]=\"product\"\n      [variants]=\"variants[variantType.COLOR]\"\n    ></cx-color-selector>\n  </div>\n</ng-container>\n",
+                        selector: 'cx-product-variants',
+                        template: "<ng-container *ngIf=\"product$ | async as product\">\n  <div class=\"variant-section\" *ngIf=\"product.baseOptions?.length\">\n    <cx-variant-style-selector\n      *ngIf=\"variants[variantType.STYLE]\"\n      [variants]=\"variants[variantType.STYLE]\"\n    ></cx-variant-style-selector>\n    <cx-variant-size-selector\n      *ngIf=\"variants[variantType.SIZE]\"\n      [product]=\"product\"\n      [variants]=\"variants[variantType.SIZE]\"\n    ></cx-variant-size-selector>\n    <cx-variant-color-selector\n      *ngIf=\"variants[variantType.COLOR]\"\n      [product]=\"product\"\n      [variants]=\"variants[variantType.COLOR]\"\n    ></cx-variant-color-selector>\n  </div>\n</ng-container>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
         ];
         /** @nocollapse */
-        ProductVariantSelectorComponent.ctorParameters = function () { return [
+        ProductVariantsComponent.ctorParameters = function () { return [
             { type: CurrentProductService }
         ]; };
-        return ProductVariantSelectorComponent;
+        return ProductVariantsComponent;
     }());
     if (false) {
         /** @type {?} */
-        ProductVariantSelectorComponent.prototype.variants;
+        ProductVariantsComponent.prototype.variants;
         /** @type {?} */
-        ProductVariantSelectorComponent.prototype.variantType;
+        ProductVariantsComponent.prototype.variantType;
         /** @type {?} */
-        ProductVariantSelectorComponent.prototype.product$;
+        ProductVariantsComponent.prototype.product$;
         /**
          * @type {?}
          * @private
          */
-        ProductVariantSelectorComponent.prototype.currentProductService;
+        ProductVariantsComponent.prototype.currentProductService;
     }
 
     /**
@@ -29627,7 +29627,7 @@
         };
         VariantStyleSelectorComponent.decorators = [
             { type: core.Component, args: [{
-                        selector: 'cx-style-selector',
+                        selector: 'cx-variant-style-selector',
                         template: "<ng-container>\n  <div class=\"variant-selector\">\n    <div *ngIf=\"variants.selected\" class=\"variant-name\">\n      {{ 'variant.style' | cxTranslate }}:\n      <span class=\"style-name\">{{\n        getVariantOptionValue(variants?.selected.variantOptionQualifiers)\n      }}</span>\n    </div>\n    <ul class=\"variant-list\">\n      <li\n        *ngFor=\"let v of variants?.options\"\n        [ngClass]=\"{\n          'selected-variant': v.code === variants?.selected.code\n        }\"\n      >\n        <a\n          [routerLink]=\"\n            { cxRoute: 'product', params: { code: v.code } } | cxUrl\n          \"\n          class=\"colorVariant\"\n        >\n          <img\n            src=\"{{ getVariantThumbnailUrl(v.variantOptionQualifiers) }}\"\n            title=\"{{ getVariantOptionValue(v.variantOptionQualifiers) }}\"\n            alt=\"{{ getVariantOptionValue(v.variantOptionQualifiers) }}\"\n          />\n        </a>\n      </li>\n    </ul>\n  </div>\n</ng-container>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
@@ -29715,7 +29715,7 @@
         };
         VariantSizeSelectorComponent.decorators = [
             { type: core.Component, args: [{
-                        selector: 'cx-size-selector',
+                        selector: 'cx-variant-size-selector',
                         template: "<ng-container>\n  <div class=\"variant-selector\">\n    <div class=\"variant-name\">{{ 'variant.size' | cxTranslate }}:</div>\n    <select\n      (change)=\"changeSize($event.target.value)\"\n      class=\"form-control variant-select\"\n    >\n      <option\n        *ngFor=\"let v of variants?.options\"\n        value=\"{{ v.code }}\"\n        [selected]=\"v.code === product?.code\"\n        >{{ getVariantOptionValue(v.variantOptionQualifiers) }}</option\n      >\n    </select>\n    <a\n      href=\"#\"\n      class=\"size-guide\"\n      title=\"{{ 'variant.sizeGuideLabel' | cxTranslate }}\"\n    >\n      {{ 'variant.sizeGuideLabel' | cxTranslate }}\n    </a>\n  </div>\n</ng-container>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
@@ -29804,7 +29804,7 @@
         };
         VariantColorSelectorComponent.decorators = [
             { type: core.Component, args: [{
-                        selector: 'cx-color-selector',
+                        selector: 'cx-variant-color-selector',
                         template: "<ng-container>\n  <div class=\"variant-selector\">\n    <div class=\"variant-name\">{{ 'variant.color' | cxTranslate }}:</div>\n    <select\n      (change)=\"changeColor($event.target.value)\"\n      class=\"form-control variant-select\"\n    >\n      <option\n        *ngFor=\"let v of variants?.options\"\n        value=\"{{ v.code }}\"\n        [selected]=\"v.code === product?.code\"\n        >{{ getVariantOptionValue(v.variantOptionQualifiers) }}</option\n      >\n    </select>\n  </div>\n</ng-container>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
@@ -29922,7 +29922,7 @@
         };
         VariantStyleIconsComponent.decorators = [
             { type: core.Component, args: [{
-                        selector: 'cx-style-icons',
+                        selector: 'cx-variant-style-icons',
                         template: "<ul class=\"variant-list\">\n  <li *ngFor=\"let v of variants\">\n    <img\n      [attr.src]=\"getVariantThumbnailUrl(v.variantOptionQualifiers)\"\n      [attr.title]=\"variantNames[v.code]\"\n      [attr.alt]=\"variantNames[v.code]\"\n    />\n  </li>\n</ul>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush,
                         styles: ["ul{padding:0;white-space:nowrap;overflow:hidden}ul li{display:inline}ul li img{width:50px}"]
@@ -30059,10 +30059,10 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var ProductVariantSelectorModule = /** @class */ (function () {
-        function ProductVariantSelectorModule() {
+    var ProductVariantsModule = /** @class */ (function () {
+        function ProductVariantsModule() {
         }
-        ProductVariantSelectorModule.decorators = [
+        ProductVariantsModule.decorators = [
             { type: core.NgModule, args: [{
                         imports: [
                             common.CommonModule,
@@ -30071,7 +30071,7 @@
                             core$1.ConfigModule.withConfig((/** @type {?} */ ({
                                 cmsComponents: {
                                     ProductVariantSelectorComponent: {
-                                        component: ProductVariantSelectorComponent,
+                                        component: ProductVariantsComponent,
                                         guards: [ProductVariantGuard],
                                     },
                                 },
@@ -30082,12 +30082,12 @@
                             VariantColorSelectorModule,
                             VariantStyleIconsModule,
                         ],
-                        declarations: [ProductVariantSelectorComponent],
-                        entryComponents: [ProductVariantSelectorComponent],
+                        declarations: [ProductVariantsComponent],
+                        entryComponents: [ProductVariantsComponent],
                         exports: [VariantStyleIconsComponent],
                     },] }
         ];
-        return ProductVariantSelectorModule;
+        return ProductVariantsModule;
     }());
 
     /**
@@ -30130,7 +30130,7 @@
                             SpinnerModule,
                             ngxInfiniteScroll.InfiniteScrollModule,
                             ViewConfigModule,
-                            ProductVariantSelectorModule,
+                            ProductVariantsModule,
                             core$1.FeaturesConfigModule,
                         ],
                         declarations: [
@@ -33236,7 +33236,7 @@
                             StoreFinderModule,
                             ProductImagesModule,
                             ProductSummaryModule,
-                            ProductVariantSelectorModule,
+                            ProductVariantsModule,
                             ProductIntroModule,
                             CheckoutComponentModule,
                             ForgotPasswordModule,
@@ -34225,8 +34225,8 @@
     exports.ɵt = CmsI18nService;
     exports.ɵu = CmsGuardsService;
     exports.ɵv = ReturnRequestService;
-    exports.ɵw = ProductVariantSelectorModule;
-    exports.ɵx = ProductVariantSelectorComponent;
+    exports.ɵw = ProductVariantsModule;
+    exports.ɵx = ProductVariantsComponent;
     exports.ɵy = VariantStyleSelectorModule;
     exports.ɵz = VariantStyleSelectorComponent;
     exports.θDeferLoaderService = DeferLoaderService;
