@@ -1,9 +1,9 @@
 import { OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Address, Cart, CartService, CheckoutDeliveryService, CheckoutPaymentService, DeliveryMode, OrderEntry, PaymentDetails, TranslationService, UserAddressService, PromotionResult, PromotionLocation } from '@spartacus/core';
+import { Observable } from 'rxjs';
 import { Card } from '../../../../shared/components/card/card.component';
-import { CheckoutConfigService } from '../../services/index';
 import { CheckoutStepType } from '../../model/index';
+import { CheckoutConfigService } from '../../services/index';
 import { PromotionService } from '../../../../shared/services/promotion/promotion.service';
 export declare class ReviewSubmitComponent implements OnInit {
     protected checkoutDeliveryService: CheckoutDeliveryService;
