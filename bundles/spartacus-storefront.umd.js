@@ -8144,7 +8144,9 @@
     var SkipLinkComponent = /** @class */ (function () {
         function SkipLinkComponent(skipLinkService) {
             this.skipLinkService = skipLinkService;
-            this.skipLinks$ = this.skipLinkService.getSkipLinks();
+            this.skipLinks$ = this.skipLinkService
+                .getSkipLinks()
+                .pipe(operators.observeOn(rxjs.asyncScheduler)); // delay view's update to avoid ExpressionChangedAfterItHasBeenCheckedError
         }
         /**
          * @param {?} skipLink
