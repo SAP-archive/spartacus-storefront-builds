@@ -4,6 +4,6 @@ export declare class VariantSizeSelectorComponent {
     constructor(routingService: RoutingService);
     product: Product;
     variants: BaseOption;
-    changeSize(code: string): void;
+    changeSize(code: string, name: string): void;
     getVariantOptionValue(qualifiers: VariantOptionQualifier[]): string;
 }
