@@ -7537,15 +7537,21 @@ var PageSlotComponent = /** @class */ (function () {
         function () {
             return this.position$.value;
         },
-        // need to have this host binding at the top as it will override the entire class
-        set: 
-        // need to have this host binding at the top as it will override the entire class
         /**
+         * The position is used to find the CMS page slot (and optional outlet)
+         * that is rendered in the PageSlotComponent. Furthermore, the position
+         * is added as a CSS class name to the host element.
+         */
+        set: /**
+         * The position is used to find the CMS page slot (and optional outlet)
+         * that is rendered in the PageSlotComponent. Furthermore, the position
+         * is added as a CSS class name to the host element.
          * @param {?} position
          * @return {?}
          */
         function (position) {
             this.position$.next(position);
+            this.renderer.addClass(this.hostElement.nativeElement, position);
         },
         enumerable: true,
         configurable: true
@@ -7669,8 +7675,8 @@ var PageSlotComponent = /** @class */ (function () {
     };
     PageSlotComponent.decorators = [
         { type: Component, args: [{
-                    selector: 'cx-page-slot',
-                    template: "<ng-template\n  [cxOutlet]=\"position\"\n  [cxOutletContext]=\"{ components$: components$ }\"\n  [cxSkipLink]=\"position$ | async\"\n>\n  <ng-template\n    *ngFor=\"let component of components$ | async\"\n    [cxOutlet]=\"component.flexType\"\n    [cxOutletContext]=\"{ component: component }\"\n    [cxOutletDefer]=\"getComponentDeferOptions(component.flexType)\"\n    (loaded)=\"isLoaded($event)\"\n  >\n    <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n  </ng-template>\n</ng-template>\n",
+                    selector: 'cx-page-slot,[cx-page-slot]',
+                    template: "<ng-template\n  [cxOutlet]=\"position\"\n  [cxOutletContext]=\"{ components$: components$ }\"\n  [cxSkipLink]=\"position\"\n>\n  <ng-template\n    *ngFor=\"let component of components$ | async\"\n    [cxOutlet]=\"component.flexType\"\n    [cxOutletContext]=\"{ component: component }\"\n    [cxOutletDefer]=\"getComponentDeferOptions(component.flexType)\"\n    (loaded)=\"isLoaded($event)\"\n  >\n    <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n  </ng-template>\n</ng-template>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -7683,7 +7689,7 @@ var PageSlotComponent = /** @class */ (function () {
         { type: CmsConfig }
     ]; };
     PageSlotComponent.propDecorators = {
-        position: [{ type: HostBinding, args: ['class',] }, { type: Input }],
+        position: [{ type: Input }],
         isPending: [{ type: HostBinding, args: ['class.cx-pending',] }],
         hasComponents: [{ type: HostBinding, args: ['class.has-components',] }],
         isPageFold: [{ type: HostBinding, args: ['class.page-fold',] }, { type: Input }]

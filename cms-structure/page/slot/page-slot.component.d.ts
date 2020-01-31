@@ -8,6 +8,11 @@ export declare class PageSlotComponent implements OnInit, OnDestroy {
     protected renderer: Renderer2;
     protected hostElement: ElementRef;
     protected config?: CmsConfig;
+    /**
+     * The position is used to find the CMS page slot (and optional outlet)
+     * that is rendered in the PageSlotComponent. Furthermore, the position
+     * is added as a CSS class name to the host element.
+     */
     position: string;
     isPending: boolean;
     hasComponents: boolean;
