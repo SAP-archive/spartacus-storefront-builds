@@ -29384,7 +29384,7 @@ var ProductVariantsComponent = /** @class */ (function () {
     ProductVariantsComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-product-variants',
-                    template: "<ng-container *ngIf=\"product$ | async as product\">\n  <div class=\"variant-section\" *ngIf=\"product.baseOptions?.length\">\n    <cx-variant-style-selector\n      *ngIf=\"variants[variantType.STYLE]\"\n      [product]=\"product\"\n      [variants]=\"variants[variantType.STYLE]\"\n    ></cx-variant-style-selector>\n    <cx-variant-size-selector\n      *ngIf=\"variants[variantType.SIZE]\"\n      [product]=\"product\"\n      [variants]=\"variants[variantType.SIZE]\"\n    ></cx-variant-size-selector>\n    <cx-variant-color-selector\n      *ngIf=\"variants[variantType.COLOR]\"\n      [product]=\"product\"\n      [variants]=\"variants[variantType.COLOR]\"\n    ></cx-variant-color-selector>\n  </div>\n</ng-container>\n",
+                    template: "<ng-container *ngIf=\"product$ | async as product\">\n  <div class=\"variant-section\" *ngIf=\"product.baseOptions?.length\">\n    <cx-variant-style-selector\n      *ngIf=\"variants[variantType.STYLE]\"\n      [variants]=\"variants[variantType.STYLE]\"\n    ></cx-variant-style-selector>\n    <cx-variant-size-selector\n      *ngIf=\"variants[variantType.SIZE]\"\n      [product]=\"product\"\n      [variants]=\"variants[variantType.SIZE]\"\n    ></cx-variant-size-selector>\n    <cx-variant-color-selector\n      *ngIf=\"variants[variantType.COLOR]\"\n      [product]=\"product\"\n      [variants]=\"variants[variantType.COLOR]\"\n    ></cx-variant-color-selector>\n  </div>\n</ng-container>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
@@ -29413,8 +29413,10 @@ if (false) {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var VariantStyleSelectorComponent = /** @class */ (function () {
-    function VariantStyleSelectorComponent(config) {
+    function VariantStyleSelectorComponent(config, productService, routingService) {
         this.config = config;
+        this.productService = productService;
+        this.routingService = routingService;
         this.variantQualifier = VariantQualifier;
     }
     /**
@@ -29453,19 +29455,50 @@ var VariantStyleSelectorComponent = /** @class */ (function () {
             ? "" + this.config.backend.occ.baseUrl + qualifier.image.url
             : '';
     };
+    /**
+     * @param {?} code
+     * @return {?}
+     */
+    VariantStyleSelectorComponent.prototype.changeStyle = /**
+     * @param {?} code
+     * @return {?}
+     */
+    function (code) {
+        var _this = this;
+        if (code) {
+            this.productService
+                .get(code, ProductScope.LIST)
+                .pipe(
+            // below call might looks redundant but in fact this data is going to be loaded anyways
+            // we're just calling it earlier and storing
+            filter(Boolean), take(1))
+                .subscribe((/**
+             * @param {?} product
+             * @return {?}
+             */
+            function (product) {
+                _this.routingService.go({
+                    cxRoute: 'product',
+                    params: product,
+                });
+            }));
+        }
+        return null;
+    };
     VariantStyleSelectorComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-variant-style-selector',
-                    template: "<ng-container>\n  <div class=\"variant-selector\">\n    <div *ngIf=\"variants.selected\" class=\"variant-name\">\n      {{ 'variant.style' | cxTranslate }}:\n      <span class=\"style-name\">{{\n        getVariantOptionValue(variants?.selected.variantOptionQualifiers)\n      }}</span>\n    </div>\n    <ul class=\"variant-list\">\n      <li\n        *ngFor=\"let v of variants?.options\"\n        [ngClass]=\"{\n          'selected-variant': v.code === variants?.selected.code\n        }\"\n      >\n        <a\n          [routerLink]=\"\n            {\n              cxRoute: 'product',\n              params: { code: v.code, name: product.name }\n            } | cxUrl\n          \"\n          class=\"colorVariant\"\n        >\n          <img\n            src=\"{{ getVariantThumbnailUrl(v.variantOptionQualifiers) }}\"\n            title=\"{{ getVariantOptionValue(v.variantOptionQualifiers) }}\"\n            alt=\"{{ getVariantOptionValue(v.variantOptionQualifiers) }}\"\n          />\n        </a>\n      </li>\n    </ul>\n  </div>\n</ng-container>\n",
+                    template: "<ng-container>\n  <div class=\"variant-selector\">\n    <div *ngIf=\"variants.selected\" class=\"variant-name\">\n      {{ 'variant.style' | cxTranslate }}:\n      <span class=\"style-name\">{{\n        getVariantOptionValue(variants?.selected.variantOptionQualifiers)\n      }}</span>\n    </div>\n    <ul class=\"variant-list\">\n      <li\n        *ngFor=\"let v of variants?.options\"\n        [ngClass]=\"{\n          'selected-variant': v.code === variants?.selected.code\n        }\"\n      >\n        <img\n          (click)=\"changeStyle(v.code)\"\n          src=\"{{ getVariantThumbnailUrl(v.variantOptionQualifiers) }}\"\n          title=\"{{ getVariantOptionValue(v.variantOptionQualifiers) }}\"\n          alt=\"{{ getVariantOptionValue(v.variantOptionQualifiers) }}\"\n        />\n      </li>\n    </ul>\n  </div>\n</ng-container>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     /** @nocollapse */
     VariantStyleSelectorComponent.ctorParameters = function () { return [
-        { type: OccConfig }
+        { type: OccConfig },
+        { type: ProductService },
+        { type: RoutingService }
     ]; };
     VariantStyleSelectorComponent.propDecorators = {
-        product: [{ type: Input }],
         variants: [{ type: Input }]
     };
     return VariantStyleSelectorComponent;
@@ -29474,14 +29507,22 @@ if (false) {
     /** @type {?} */
     VariantStyleSelectorComponent.prototype.variantQualifier;
     /** @type {?} */
-    VariantStyleSelectorComponent.prototype.product;
-    /** @type {?} */
     VariantStyleSelectorComponent.prototype.variants;
     /**
      * @type {?}
      * @private
      */
     VariantStyleSelectorComponent.prototype.config;
+    /**
+     * @type {?}
+     * @private
+     */
+    VariantStyleSelectorComponent.prototype.productService;
+    /**
+     * @type {?}
+     * @private
+     */
+    VariantStyleSelectorComponent.prototype.routingService;
 }
 
 /**
@@ -29507,25 +29548,37 @@ var VariantStyleSelectorModule = /** @class */ (function () {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var VariantSizeSelectorComponent = /** @class */ (function () {
-    function VariantSizeSelectorComponent(routingService) {
+    function VariantSizeSelectorComponent(productService, routingService) {
+        this.productService = productService;
         this.routingService = routingService;
     }
     /**
      * @param {?} code
-     * @param {?} name
      * @return {?}
      */
     VariantSizeSelectorComponent.prototype.changeSize = /**
      * @param {?} code
-     * @param {?} name
      * @return {?}
      */
-    function (code, name) {
+    function (code) {
+        var _this = this;
         if (code) {
-            this.routingService.go({
-                cxRoute: 'product',
-                params: { code: code, name: name },
-            });
+            this.productService
+                .get(code, ProductScope.LIST)
+                .pipe(
+            // below call might looks redundant but in fact this data is going to be loaded anyways
+            // we're just calling it earlier and storing
+            filter(Boolean), take(1))
+                .subscribe((/**
+             * @param {?} product
+             * @return {?}
+             */
+            function (product) {
+                _this.routingService.go({
+                    cxRoute: 'product',
+                    params: product,
+                });
+            }));
         }
         return null;
     };
@@ -29549,12 +29602,13 @@ var VariantSizeSelectorComponent = /** @class */ (function () {
     VariantSizeSelectorComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-variant-size-selector',
-                    template: "<ng-container>\n  <div class=\"variant-selector\">\n    <div class=\"variant-name\">{{ 'variant.size' | cxTranslate }}:</div>\n    <select\n      (change)=\"changeSize($event.target.value, product?.name)\"\n      class=\"form-control variant-select\"\n    >\n      <option\n        *ngFor=\"let v of variants?.options\"\n        value=\"{{ v.code }}\"\n        [selected]=\"v.code === product?.code\"\n        >{{ getVariantOptionValue(v.variantOptionQualifiers) }}</option\n      >\n    </select>\n    <a\n      href=\"#\"\n      class=\"size-guide\"\n      title=\"{{ 'variant.sizeGuideLabel' | cxTranslate }}\"\n    >\n      {{ 'variant.sizeGuideLabel' | cxTranslate }}\n    </a>\n  </div>\n</ng-container>\n",
+                    template: "<ng-container>\n  <div class=\"variant-selector\">\n    <div class=\"variant-name\">{{ 'variant.size' | cxTranslate }}:</div>\n    <select\n      (change)=\"changeSize($event.target.value)\"\n      class=\"form-control variant-select\"\n    >\n      <option\n        *ngFor=\"let v of variants?.options\"\n        value=\"{{ v.code }}\"\n        [selected]=\"v.code === product?.code\"\n        >{{ getVariantOptionValue(v.variantOptionQualifiers) }}</option\n      >\n    </select>\n    <a\n      href=\"#\"\n      class=\"size-guide\"\n      title=\"{{ 'variant.sizeGuideLabel' | cxTranslate }}\"\n    >\n      {{ 'variant.sizeGuideLabel' | cxTranslate }}\n    </a>\n  </div>\n</ng-container>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
     /** @nocollapse */
     VariantSizeSelectorComponent.ctorParameters = function () { return [
+        { type: ProductService },
         { type: RoutingService }
     ]; };
     VariantSizeSelectorComponent.propDecorators = {
@@ -29568,6 +29622,11 @@ if (false) {
     VariantSizeSelectorComponent.prototype.product;
     /** @type {?} */
     VariantSizeSelectorComponent.prototype.variants;
+    /**
+     * @type {?}
+     * @private
+     */
+    VariantSizeSelectorComponent.prototype.productService;
     /**
      * @type {?}
      * @private
@@ -29837,10 +29896,21 @@ var ProductVariantGuard = /** @class */ (function () {
             if (!product.purchasable) {
                 /** @type {?} */
                 var variant = _this.findVariant(product.variantOptions);
-                _this.routingService.go({
-                    cxRoute: 'product',
-                    params: { code: variant.code, name: product.name },
-                });
+                // below call might looks redundant but in fact this data is going to be loaded anyways
+                // we're just calling it earlier and storing
+                _this.productService
+                    .get(variant.code, ProductScope.LIST)
+                    .pipe(filter(Boolean), take(1))
+                    .subscribe((/**
+                 * @param {?} _product
+                 * @return {?}
+                 */
+                function (_product) {
+                    _this.routingService.go({
+                        cxRoute: 'product',
+                        params: _product,
+                    });
+                }));
                 return false;
             }
             else {
