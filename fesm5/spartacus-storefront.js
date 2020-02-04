@@ -25472,7 +25472,7 @@ var CategoryNavigationComponent = /** @class */ (function () {
     CategoryNavigationComponent.decorators = [
         { type: Component, args: [{
                     selector: 'cx-category-navigation',
-                    template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [ngClass]=\"(data$ | async).styleClass\"\n  [wrapAfter]=\"(data$ | async).wrapAfter\"\n  [allowAlignToRight]=\"true\"\n></cx-navigation-ui>\n",
+                    template: "<cx-navigation-ui\n  *ngIf=\"data$ | async as data\"\n  [node]=\"node$ | async\"\n  [ngClass]=\"data.styleClass\"\n  [wrapAfter]=\"data.wrapAfter\"\n  [allowAlignToRight]=\"true\"\n></cx-navigation-ui>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
     ];
