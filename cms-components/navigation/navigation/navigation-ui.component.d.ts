@@ -37,6 +37,7 @@ export declare class NavigationUIComponent implements OnDestroy {
     clear(): void;
     onMouseEnter(event: MouseEvent): void;
     getDepth(node: NavigationNode, depth?: number): number;
+    getColumnCount(length: number): number;
     focusAfterPreviousClicked(event: MouseEvent): Document;
     ngOnDestroy(): void;
     private alignWrapperToRightIfStickOut;
