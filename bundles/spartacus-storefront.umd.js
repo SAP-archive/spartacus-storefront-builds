@@ -30078,18 +30078,23 @@
              * @param {?} state
              * @return {?}
              */
-            function (state) { return state.nextState.params.productCode; })), operators.filter(Boolean), operators.switchMap((/**
+            function (state) { return state.nextState.params.productCode; })), operators.switchMap((/**
              * @param {?} productCode
              * @return {?}
              */
             function (productCode) {
-                return _this.productService.get(productCode, core$1.ProductScope.VARIANTS);
-            })), operators.filter(Boolean), operators.map((/**
+                if (Boolean(productCode)) {
+                    return _this.productService.get(productCode, core$1.ProductScope.VARIANTS);
+                }
+                else {
+                    return rxjs.of(undefined);
+                }
+            })), operators.map((/**
              * @param {?} product
              * @return {?}
              */
             function (product) {
-                if (!product.purchasable) {
+                if (Boolean(product) && !product.purchasable) {
                     /** @type {?} */
                     var variant = _this.findVariant(product.variantOptions);
                     // below call might looks redundant but in fact this data is going to be loaded anyways

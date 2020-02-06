@@ -29893,18 +29893,23 @@ var ProductVariantGuard = /** @class */ (function () {
          * @param {?} state
          * @return {?}
          */
-        function (state) { return state.nextState.params.productCode; })), filter(Boolean), switchMap((/**
+        function (state) { return state.nextState.params.productCode; })), switchMap((/**
          * @param {?} productCode
          * @return {?}
          */
         function (productCode) {
-            return _this.productService.get(productCode, ProductScope.VARIANTS);
-        })), filter(Boolean), map((/**
+            if (Boolean(productCode)) {
+                return _this.productService.get(productCode, ProductScope.VARIANTS);
+            }
+            else {
+                return of(undefined);
+            }
+        })), map((/**
          * @param {?} product
          * @return {?}
          */
         function (product) {
-            if (!product.purchasable) {
+            if (Boolean(product) && !product.purchasable) {
                 /** @type {?} */
                 var variant = _this.findVariant(product.variantOptions);
                 // below call might looks redundant but in fact this data is going to be loaded anyways

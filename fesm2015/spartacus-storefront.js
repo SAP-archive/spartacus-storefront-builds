@@ -25864,16 +25864,23 @@ class ProductVariantGuard {
          * @param {?} state
          * @return {?}
          */
-        state => state.nextState.params.productCode)), filter(Boolean), switchMap((/**
+        state => state.nextState.params.productCode)), switchMap((/**
          * @param {?} productCode
          * @return {?}
          */
-        (productCode) => this.productService.get(productCode, ProductScope.VARIANTS))), filter(Boolean), map((/**
+        (productCode) => {
+            if (Boolean(productCode)) {
+                return this.productService.get(productCode, ProductScope.VARIANTS);
+            }
+            else {
+                return of(undefined);
+            }
+        })), map((/**
          * @param {?} product
          * @return {?}
          */
         (product) => {
-            if (!product.purchasable) {
+            if (Boolean(product) && !product.purchasable) {
                 /** @type {?} */
                 const variant = this.findVariant(product.variantOptions);
                 // below call might looks redundant but in fact this data is going to be loaded anyways
