@@ -25261,6 +25261,27 @@ var NavigationService = /** @class */ (function () {
                 if (items === undefined) {
                     _this.loadNavigationEntryItems(navigation, true);
                 }
+                else {
+                    // we should check whether the existing node items are what expected
+                    /** @type {?} */
+                    var expectedItems = [];
+                    _this.loadNavigationEntryItems(navigation, false, expectedItems);
+                    /** @type {?} */
+                    var existingItems_1 = Object.keys(items).map((/**
+                     * @param {?} key
+                     * @return {?}
+                     */
+                    function (key) { return items[key].uid; }));
+                    /** @type {?} */
+                    var missingItems = expectedItems.filter((/**
+                     * @param {?} it
+                     * @return {?}
+                     */
+                    function (it) { return !existingItems_1.includes(it.id); }));
+                    if (missingItems.length > 0) {
+                        _this.cmsService.loadNavigationItems(navigation.uid, missingItems);
+                    }
+                }
             })), filter(Boolean), map((/**
              * @param {?} items
              * @return {?}

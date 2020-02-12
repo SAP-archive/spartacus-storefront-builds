@@ -21911,6 +21911,27 @@ class NavigationService {
                 if (items === undefined) {
                     this.loadNavigationEntryItems(navigation, true);
                 }
+                else {
+                    // we should check whether the existing node items are what expected
+                    /** @type {?} */
+                    const expectedItems = [];
+                    this.loadNavigationEntryItems(navigation, false, expectedItems);
+                    /** @type {?} */
+                    const existingItems = Object.keys(items).map((/**
+                     * @param {?} key
+                     * @return {?}
+                     */
+                    key => items[key].uid));
+                    /** @type {?} */
+                    const missingItems = expectedItems.filter((/**
+                     * @param {?} it
+                     * @return {?}
+                     */
+                    it => !existingItems.includes(it.id)));
+                    if (missingItems.length > 0) {
+                        this.cmsService.loadNavigationItems(navigation.uid, missingItems);
+                    }
+                }
             })), filter(Boolean), map((/**
              * @param {?} items
              * @return {?}
