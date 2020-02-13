@@ -30724,6 +30724,11 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var StockNotificationDialogComponent = /** @class */ (function () {
         function StockNotificationDialogComponent(modalService, interestsService) {
             this.modalService = modalService;
@@ -34213,6 +34218,8 @@
     exports.ProductSummaryModule = ProductSummaryModule;
     exports.ProductTabsModule = ProductTabsModule;
     exports.ProductVariantGuard = ProductVariantGuard;
+    exports.ProductVariantsComponent = ProductVariantsComponent;
+    exports.ProductVariantsModule = ProductVariantsModule;
     exports.ProductViewComponent = ProductViewComponent;
     exports.PromotionService = PromotionService;
     exports.PromotionsComponent = PromotionsComponent;
@@ -34292,6 +34299,14 @@
     exports.UpdateProfileFormComponent = UpdateProfileFormComponent;
     exports.UpdateProfileModule = UpdateProfileModule;
     exports.UserComponentModule = UserComponentModule;
+    exports.VariantColorSelectorComponent = VariantColorSelectorComponent;
+    exports.VariantColorSelectorModule = VariantColorSelectorModule;
+    exports.VariantSizeSelectorComponent = VariantSizeSelectorComponent;
+    exports.VariantSizeSelectorModule = VariantSizeSelectorModule;
+    exports.VariantStyleIconsComponent = VariantStyleIconsComponent;
+    exports.VariantStyleIconsModule = VariantStyleIconsModule;
+    exports.VariantStyleSelectorComponent = VariantStyleSelectorComponent;
+    exports.VariantStyleSelectorModule = VariantStyleSelectorModule;
     exports.ViewConfig = ViewConfig;
     exports.ViewConfigModule = ViewConfigModule;
     exports.ViewModes = ViewModes;
@@ -34313,38 +34328,28 @@
     exports.titleScores = titleScores;
     exports.ɵa = AsmLoaderModule;
     exports.ɵb = asmFactory;
-    exports.ɵba = VariantSizeSelectorModule;
-    exports.ɵbb = VariantSizeSelectorComponent;
-    exports.ɵbc = VariantColorSelectorModule;
-    exports.ɵbd = VariantColorSelectorComponent;
-    exports.ɵbe = VariantStyleIconsModule;
-    exports.ɵbf = VariantStyleIconsComponent;
-    exports.ɵbg = OrderDetailActionsComponent;
-    exports.ɵbh = TrackingEventsComponent;
-    exports.ɵbi = ConsignmentTrackingComponent;
-    exports.ɵbj = OrderConsignedEntriesComponent;
-    exports.ɵbk = AddToHomeScreenService;
-    exports.ɵbl = GuestRegisterFormComponent;
-    exports.ɵbm = SkipLinkModule;
-    exports.ɵbn = skipLinkFactory;
-    exports.ɵbo = defaultSkipLinkConfig;
-    exports.ɵbp = SkipLinkConfig;
-    exports.ɵbq = SkipLinkScrollPosition;
-    exports.ɵbr = SkipLinkComponent;
-    exports.ɵbs = SkipLinkService;
-    exports.ɵbt = SkipLinkDirective;
-    exports.ɵbu = CheckoutLoginComponent;
-    exports.ɵbv = MyCouponsComponentService;
-    exports.ɵbw = suffixUrlMatcher;
-    exports.ɵbx = addCmsRoute;
-    exports.ɵby = htmlLangProvider;
-    exports.ɵbz = setHtmlLangAttribute;
+    exports.ɵba = AddToHomeScreenService;
+    exports.ɵbb = GuestRegisterFormComponent;
+    exports.ɵbc = SkipLinkModule;
+    exports.ɵbd = skipLinkFactory;
+    exports.ɵbe = defaultSkipLinkConfig;
+    exports.ɵbf = SkipLinkConfig;
+    exports.ɵbg = SkipLinkScrollPosition;
+    exports.ɵbh = SkipLinkComponent;
+    exports.ɵbi = SkipLinkService;
+    exports.ɵbj = SkipLinkDirective;
+    exports.ɵbk = CheckoutLoginComponent;
+    exports.ɵbl = MyCouponsComponentService;
+    exports.ɵbm = suffixUrlMatcher;
+    exports.ɵbn = addCmsRoute;
+    exports.ɵbo = htmlLangProvider;
+    exports.ɵbp = setHtmlLangAttribute;
+    exports.ɵbq = AnonymousConsentsModule;
+    exports.ɵbr = AnonymousConsentDialogComponent;
+    exports.ɵbs = RoutingModule;
+    exports.ɵbt = defaultStorefrontRoutesConfig;
+    exports.ɵbu = defaultRoutingConfig;
     exports.ɵc = ComponentMapperService;
-    exports.ɵca = AnonymousConsentsModule;
-    exports.ɵcb = AnonymousConsentDialogComponent;
-    exports.ɵcc = RoutingModule;
-    exports.ɵcd = defaultStorefrontRoutesConfig;
-    exports.ɵce = defaultRoutingConfig;
     exports.ɵd = AsmEnablerService;
     exports.ɵe = AsmMainUiComponent;
     exports.ɵf = AsmComponentService;
@@ -34364,10 +34369,10 @@
     exports.ɵt = CmsI18nService;
     exports.ɵu = CmsGuardsService;
     exports.ɵv = ReturnRequestService;
-    exports.ɵw = ProductVariantsModule;
-    exports.ɵx = ProductVariantsComponent;
-    exports.ɵy = VariantStyleSelectorModule;
-    exports.ɵz = VariantStyleSelectorComponent;
+    exports.ɵw = OrderDetailActionsComponent;
+    exports.ɵx = TrackingEventsComponent;
+    exports.ɵy = ConsignmentTrackingComponent;
+    exports.ɵz = OrderConsignedEntriesComponent;
     exports.θDeferLoaderService = DeferLoaderService;
     exports.θIntersectionService = IntersectionService;
 
