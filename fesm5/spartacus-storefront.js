@@ -29901,9 +29901,10 @@ var VariantStyleIconsModule = /** @class */ (function () {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var ProductVariantGuard = /** @class */ (function () {
-    function ProductVariantGuard(productService, routingService) {
+    function ProductVariantGuard(productService, routingService, cmsService) {
         this.productService = productService;
         this.routingService = routingService;
+        this.cmsService = cmsService;
     }
     /**
      * @return {?}
@@ -29922,40 +29923,39 @@ var ProductVariantGuard = /** @class */ (function () {
          * @return {?}
          */
         function (productCode) {
-            if (Boolean(productCode)) {
-                return _this.productService.get(productCode, ProductScope.VARIANTS);
+            // if open pdp from smartedit
+            if (_this.cmsService.isLaunchInSmartEdit() && !productCode) {
+                return of(true);
             }
-            else {
-                return of(undefined);
-            }
-        })), map((/**
-         * @param {?} product
-         * @return {?}
-         */
-        function (product) {
-            if (Boolean(product) && !product.purchasable) {
-                /** @type {?} */
-                var variant = _this.findVariant(product.variantOptions);
-                // below call might looks redundant but in fact this data is going to be loaded anyways
-                // we're just calling it earlier and storing
-                _this.productService
-                    .get(variant.code, ProductScope.LIST)
-                    .pipe(filter(Boolean), take(1))
-                    .subscribe((/**
-                 * @param {?} _product
-                 * @return {?}
-                 */
-                function (_product) {
-                    _this.routingService.go({
-                        cxRoute: 'product',
-                        params: _product,
-                    });
-                }));
-                return false;
-            }
-            else {
-                return true;
-            }
+            return _this.productService.get(productCode, ProductScope.VARIANTS).pipe(filter(Boolean), map((/**
+             * @param {?} product
+             * @return {?}
+             */
+            function (product) {
+                if (!product.purchasable) {
+                    /** @type {?} */
+                    var variant = _this.findVariant(product.variantOptions);
+                    // below call might looks redundant but in fact this data is going to be loaded anyways
+                    // we're just calling it earlier and storing
+                    _this.productService
+                        .get(variant.code, ProductScope.LIST)
+                        .pipe(filter(Boolean), take(1))
+                        .subscribe((/**
+                     * @param {?} _product
+                     * @return {?}
+                     */
+                    function (_product) {
+                        _this.routingService.go({
+                            cxRoute: 'product',
+                            params: _product,
+                        });
+                    }));
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            })));
         })));
     };
     /**
@@ -29985,9 +29985,10 @@ var ProductVariantGuard = /** @class */ (function () {
     /** @nocollapse */
     ProductVariantGuard.ctorParameters = function () { return [
         { type: ProductService },
-        { type: RoutingService }
+        { type: RoutingService },
+        { type: CmsService }
     ]; };
-    /** @nocollapse */ ProductVariantGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function ProductVariantGuard_Factory() { return new ProductVariantGuard(ɵɵinject(ProductService), ɵɵinject(RoutingService)); }, token: ProductVariantGuard, providedIn: "root" });
+    /** @nocollapse */ ProductVariantGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function ProductVariantGuard_Factory() { return new ProductVariantGuard(ɵɵinject(ProductService), ɵɵinject(RoutingService), ɵɵinject(CmsService)); }, token: ProductVariantGuard, providedIn: "root" });
     return ProductVariantGuard;
 }());
 if (false) {
@@ -30001,6 +30002,11 @@ if (false) {
      * @private
      */
     ProductVariantGuard.prototype.routingService;
+    /**
+     * @type {?}
+     * @private
+     */
+    ProductVariantGuard.prototype.cmsService;
 }
 
 /**
