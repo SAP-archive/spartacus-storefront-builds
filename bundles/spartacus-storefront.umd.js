@@ -30086,10 +30086,9 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ProductVariantGuard = /** @class */ (function () {
-        function ProductVariantGuard(productService, routingService, cmsService) {
+        function ProductVariantGuard(productService, routingService) {
             this.productService = productService;
             this.routingService = routingService;
-            this.cmsService = cmsService;
         }
         /**
          * @return {?}
@@ -30109,7 +30108,7 @@
              */
             function (productCode) {
                 // if open pdp from smartedit
-                if (_this.cmsService.isLaunchInSmartEdit() && !productCode) {
+                if (!productCode) {
                     return rxjs.of(true);
                 }
                 return _this.productService.get(productCode, core$1.ProductScope.VARIANTS).pipe(operators.filter(Boolean), operators.map((/**
@@ -30170,10 +30169,9 @@
         /** @nocollapse */
         ProductVariantGuard.ctorParameters = function () { return [
             { type: core$1.ProductService },
-            { type: core$1.RoutingService },
-            { type: core$1.CmsService }
+            { type: core$1.RoutingService }
         ]; };
-        /** @nocollapse */ ProductVariantGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function ProductVariantGuard_Factory() { return new ProductVariantGuard(core.ɵɵinject(core$1.ProductService), core.ɵɵinject(core$1.RoutingService), core.ɵɵinject(core$1.CmsService)); }, token: ProductVariantGuard, providedIn: "root" });
+        /** @nocollapse */ ProductVariantGuard.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function ProductVariantGuard_Factory() { return new ProductVariantGuard(core.ɵɵinject(core$1.ProductService), core.ɵɵinject(core$1.RoutingService)); }, token: ProductVariantGuard, providedIn: "root" });
         return ProductVariantGuard;
     }());
     if (false) {
@@ -30187,11 +30185,6 @@
          * @private
          */
         ProductVariantGuard.prototype.routingService;
-        /**
-         * @type {?}
-         * @private
-         */
-        ProductVariantGuard.prototype.cmsService;
     }
 
     /**

@@ -29901,10 +29901,9 @@ var VariantStyleIconsModule = /** @class */ (function () {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var ProductVariantGuard = /** @class */ (function () {
-    function ProductVariantGuard(productService, routingService, cmsService) {
+    function ProductVariantGuard(productService, routingService) {
         this.productService = productService;
         this.routingService = routingService;
-        this.cmsService = cmsService;
     }
     /**
      * @return {?}
@@ -29924,7 +29923,7 @@ var ProductVariantGuard = /** @class */ (function () {
          */
         function (productCode) {
             // if open pdp from smartedit
-            if (_this.cmsService.isLaunchInSmartEdit() && !productCode) {
+            if (!productCode) {
                 return of(true);
             }
             return _this.productService.get(productCode, ProductScope.VARIANTS).pipe(filter(Boolean), map((/**
@@ -29985,10 +29984,9 @@ var ProductVariantGuard = /** @class */ (function () {
     /** @nocollapse */
     ProductVariantGuard.ctorParameters = function () { return [
         { type: ProductService },
-        { type: RoutingService },
-        { type: CmsService }
+        { type: RoutingService }
     ]; };
-    /** @nocollapse */ ProductVariantGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function ProductVariantGuard_Factory() { return new ProductVariantGuard(ɵɵinject(ProductService), ɵɵinject(RoutingService), ɵɵinject(CmsService)); }, token: ProductVariantGuard, providedIn: "root" });
+    /** @nocollapse */ ProductVariantGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function ProductVariantGuard_Factory() { return new ProductVariantGuard(ɵɵinject(ProductService), ɵɵinject(RoutingService)); }, token: ProductVariantGuard, providedIn: "root" });
     return ProductVariantGuard;
 }());
 if (false) {
@@ -30002,11 +30000,6 @@ if (false) {
      * @private
      */
     ProductVariantGuard.prototype.routingService;
-    /**
-     * @type {?}
-     * @private
-     */
-    ProductVariantGuard.prototype.cmsService;
 }
 
 /**

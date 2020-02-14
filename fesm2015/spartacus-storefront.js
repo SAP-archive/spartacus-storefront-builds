@@ -25877,12 +25877,10 @@ class ProductVariantGuard {
     /**
      * @param {?} productService
      * @param {?} routingService
-     * @param {?} cmsService
      */
-    constructor(productService, routingService, cmsService) {
+    constructor(productService, routingService) {
         this.productService = productService;
         this.routingService = routingService;
-        this.cmsService = cmsService;
     }
     /**
      * @return {?}
@@ -25898,7 +25896,7 @@ class ProductVariantGuard {
          */
         (productCode) => {
             // if open pdp from smartedit
-            if (this.cmsService.isLaunchInSmartEdit() && !productCode) {
+            if (!productCode) {
                 return of(true);
             }
             return this.productService.get(productCode, ProductScope.VARIANTS).pipe(filter(Boolean), map((/**
@@ -25956,10 +25954,9 @@ ProductVariantGuard.decorators = [
 /** @nocollapse */
 ProductVariantGuard.ctorParameters = () => [
     { type: ProductService },
-    { type: RoutingService },
-    { type: CmsService }
+    { type: RoutingService }
 ];
-/** @nocollapse */ ProductVariantGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function ProductVariantGuard_Factory() { return new ProductVariantGuard(ɵɵinject(ProductService), ɵɵinject(RoutingService), ɵɵinject(CmsService)); }, token: ProductVariantGuard, providedIn: "root" });
+/** @nocollapse */ ProductVariantGuard.ngInjectableDef = ɵɵdefineInjectable({ factory: function ProductVariantGuard_Factory() { return new ProductVariantGuard(ɵɵinject(ProductService), ɵɵinject(RoutingService)); }, token: ProductVariantGuard, providedIn: "root" });
 if (false) {
     /**
      * @type {?}
@@ -25971,11 +25968,6 @@ if (false) {
      * @private
      */
     ProductVariantGuard.prototype.routingService;
-    /**
-     * @type {?}
-     * @private
-     */
-    ProductVariantGuard.prototype.cmsService;
 }
 
 /**
