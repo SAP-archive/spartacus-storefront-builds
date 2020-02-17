@@ -1,58 +1,60 @@
-import { ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { ControlValueAccessor, FormControl } from '@angular/forms';
-import { Subscription } from 'rxjs';
-export declare class ItemCounterComponent implements OnInit, ControlValueAccessor, OnChanges, OnDestroy {
-    private renderer;
-    input: ElementRef;
-    incrementBtn: ElementRef;
-    decrementBtn: ElementRef;
-    value: number;
-    step: number;
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+/**
+ * Provides a UI to manage the count of the quantity, typically by using
+ * increase and decrease functinality. The item counter expects an input `FormControl`
+ * so that the state of the control can be managed outside of this component.
+ */
+export declare class ItemCounterComponent {
+    /**
+     * Holds the value of the counter, the state of the `FormControl`
+     * can be managed outside of the item counter.
+     */
+    control: FormControl;
+    /**
+     * This can be used in case an item has a minmum order quantity.
+     * @default 1
+     */
     min: number;
+    /**
+     * This can be used in case an item has a maximum order quantity.
+     */
     max: number;
-    async: boolean;
-    cartIsLoading: boolean;
-    isValueChangeable: boolean;
-    update: EventEmitter<number>;
-    focus: boolean;
-    isValueOutOfRange: boolean;
-    inputValue: FormControl;
-    subscription: Subscription;
-    ngOnInit(): void;
-    ngOnChanges(): void;
-    constructor(renderer: Renderer2);
-    onTouch: Function;
-    onModelChange: Function;
     /**
-     * If value is too small it will be set to min, if is too big it will be set to max.
+     * The step is used to increment the count. It is supposed to be a
+     * positive inteteger or float.
+     * @default 1
      */
-    adjustValueInRange(incomingValue: number): number;
+    step: number;
     /**
-     * Update model value and refresh input
+     * Inidicates that the input can be manually set to zero,
+     * despite the fact that the input controls will be limited to
+     * the minimum. The zero value can be used to remove an item.
      */
-    manualChange(newValue: number): void;
-    onKeyDown(event: KeyboardEvent): void;
-    onBlur(event: FocusEvent): void;
-    onFocus(event: FocusEvent): void;
+    allowZero: boolean;
+    private _control$;
     /**
-     * Verify value that it can be incremented, if yes it does that.
+     * In readonly mode the item counter will only be shown as a label,
+     * the form controls are not rendered.
+     * Please not that readonly is different from the `disabled` form state.
+     * @default false
      */
+    readonly: boolean;
+    private input;
+    handleClick(): void;
     increment(): void;
-    /**
-     * Verify value that it can be decremented, if yes it does that.
-     */
     decrement(): void;
-    registerOnTouched(fn: Function): void;
-    registerOnChange(fn: Function): void;
-    writeValue(value: number): void;
     /**
-     * Set up new value for input and emit event outside
+     * Returns an observable with the control. The value changes of the
+     * control are intercepted in order to suppress invalid values.
      */
-    updateValue(updatedQuantity: number): void;
+    getControl(): Observable<FormControl>;
     /**
-     * Determines which HTML element should have focus at a given time
+     * Validate that the given value is in between
+     * the `min` and `max` value. If the value is out
+     * of  the min/max range, it will be altered.
+     * If `allowZero` is set to true, the 0 value is ignored.
+     *
      */
-    setFocus(isIncremented: boolean): void;
-    isMaxOrMinValueOrBeyond(): boolean;
-    ngOnDestroy(): void;
+    private getValidCount;
 }

@@ -1,11 +1,11 @@
 import { CommonModule, isPlatformServer, isPlatformBrowser, DOCUMENT, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
-import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, EventEmitter, Output, isDevMode, ChangeDetectionStrategy, forwardRef, Renderer2, ViewChild, Directive, HostListener, Optional, Injector, Inject, PLATFORM_ID, INJECTOR, InjectionToken, TemplateRef, ComponentFactory, ViewContainerRef, ComponentFactoryResolver, NgZone, APP_INITIALIZER, SecurityContext, RendererFactory2, ViewEncapsulation, ChangeDetectorRef, Pipe, ViewChildren } from '@angular/core';
-import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, OccConfig, UrlModule, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, provideConfig, EMAIL_PATTERN, PASSWORD_PATTERN, UserOrderService, RoutingService, PromotionLocation, CartService, CheckoutService, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, TranslationService, TranslationChunkService, CmsService, PageType, SemanticPathService, ProtectedRoutesGuard, AuthService, CartDataService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, DynamicAttributeService, PageRobotsMeta, ProductScope, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, ActiveCartService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, RoutingModule as RoutingModule$1, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
+import { Injectable, ɵɵdefineInjectable, ɵɵinject, Component, ElementRef, Input, HostBinding, NgModule, EventEmitter, Output, isDevMode, ChangeDetectionStrategy, ViewChild, HostListener, Optional, Injector, Renderer2, Directive, Inject, PLATFORM_ID, INJECTOR, InjectionToken, TemplateRef, ComponentFactory, ViewContainerRef, ComponentFactoryResolver, NgZone, APP_INITIALIZER, SecurityContext, RendererFactory2, ViewEncapsulation, ChangeDetectorRef, Pipe, ViewChildren } from '@angular/core';
+import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, OccConfig, UrlModule, provideConfig, GlobalMessageType, GlobalMessageService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, UserOrderService, RoutingService, PromotionLocation, CartService, CheckoutService, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, TranslationService, TranslationChunkService, CmsService, PageType, SemanticPathService, ProtectedRoutesGuard, AuthService, CartDataService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, DynamicAttributeService, PageRobotsMeta, ProductScope, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, ActiveCartService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, RoutingModule as RoutingModule$1, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
 import { Subscription, combineLatest, of, fromEvent, BehaviorSubject, concat, isObservable, from, Observable, asyncScheduler } from 'rxjs';
 import { take, distinctUntilChanged, tap, map, debounceTime, startWith, filter, switchMap, shareReplay, first, skipWhile, endWith, withLatestFrom, flatMap, observeOn, mergeMap, scan, distinctUntilKeyChanged, pluck } from 'rxjs/operators';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
-import { RouterModule, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
-import { NG_VALUE_ACCESSOR, FormControl, FormsModule, ReactiveFormsModule, Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { RouterModule, ActivatedRoute, Router, NavigationStart, NavigationEnd } from '@angular/router';
+import { ReactiveFormsModule, FormsModule, Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
 import { __awaiter } from 'tslib';
@@ -1703,458 +1703,165 @@ CarouselModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/** @type {?} */
-const COUNTER_CONTROL_ACCESSOR = {
-    provide: NG_VALUE_ACCESSOR,
-    /* tslint:disable-next-line */
-    useExisting: forwardRef((/**
-     * @return {?}
-     */
-    () => ItemCounterComponent)),
-    multi: true,
-};
+/**
+ * Provides a UI to manage the count of the quantity, typically by using
+ * increase and decrease functinality. The item counter expects an input `FormControl`
+ * so that the state of the control can be managed outside of this component.
+ */
 class ItemCounterComponent {
-    /**
-     * @param {?} renderer
-     */
-    constructor(renderer) {
-        this.renderer = renderer;
-        this.value = 0;
+    constructor() {
+        /**
+         * This can be used in case an item has a minmum order quantity.
+         * \@default 1
+         */
+        this.min = 1;
+        /**
+         * The step is used to increment the count. It is supposed to be a
+         * positive inteteger or float.
+         * \@default 1
+         */
         this.step = 1;
-        this.async = false;
-        this.cartIsLoading = false;
-        this.isValueChangeable = false;
-        this.update = new EventEmitter();
-        this.isValueOutOfRange = false;
-        this.inputValue = new FormControl({
-            disabled: this.isValueChangeable,
-        });
-        this.onTouch = (/**
-         * @return {?}
+        /**
+         * Inidicates that the input can be manually set to zero,
+         * despite the fact that the input controls will be limited to
+         * the minimum. The zero value can be used to remove an item.
          */
-        () => { });
-        this.onModelChange = (/**
-         * @param {?} _rating
-         * @return {?}
+        this.allowZero = false;
+        /**
+         * In readonly mode the item counter will only be shown as a label,
+         * the form controls are not rendered.
+         * Please not that readonly is different from the `disabled` form state.
+         * \@default false
          */
-        (_rating) => { });
+        this.readonly = false;
     }
     /**
      * @return {?}
      */
-    ngOnInit() {
-        this.writeValue(this.min || 0);
-        this.subscription = this.inputValue.valueChanges
-            .pipe(debounceTime(300))
-            .subscribe((/**
-         * @param {?} value
-         * @return {?}
-         */
-        value => {
-            if (value) {
-                this.manualChange(Number(value));
-            }
-        }));
+    handleClick() {
+        this.input.nativeElement.focus();
     }
     /**
-     * @return {?}
-     */
-    ngOnChanges() {
-        if (this.cartIsLoading) {
-            this.inputValue.disable({
-                onlySelf: true,
-                emitEvent: false,
-            });
-        }
-        else {
-            this.inputValue.enable({
-                onlySelf: true,
-                emitEvent: false,
-            });
-        }
-    }
-    /**
-     * If value is too small it will be set to min, if is too big it will be set to max.
-     * @param {?} incomingValue
-     * @return {?}
-     */
-    adjustValueInRange(incomingValue) {
-        return this.min !== undefined && incomingValue < this.min
-            ? this.min
-            : this.max !== undefined && incomingValue > this.max
-                ? this.max
-                : incomingValue;
-    }
-    /**
-     * Update model value and refresh input
-     * @param {?} newValue
-     * @return {?}
-     */
-    manualChange(newValue) {
-        newValue = this.adjustValueInRange(newValue);
-        this.updateValue(newValue);
-        /* We use the value from the input, however, this value
-          is not the correct value that should be displayed. The correct value to display
-          is this.value, which the parent updates if the async call succeed. If the call
-          fails, then the input will need to display this.value, and not what the user
-          recently typed in */
-        this.renderer.setProperty(this.input.nativeElement, 'value', newValue);
-    }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    onKeyDown(event) {
-        /** @type {?} */
-        const handlers = {
-            ArrowDown: (/**
-             * @return {?}
-             */
-            () => this.decrement()),
-            ArrowUp: (/**
-             * @return {?}
-             */
-            () => this.increment()),
-        };
-        if (handlers[event.code]) {
-            handlers[event.code]();
-            event.preventDefault();
-            event.stopPropagation();
-        }
-    }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    onBlur(event) {
-        this.focus = false;
-        event.preventDefault();
-        event.stopPropagation();
-        this.onTouch();
-    }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    onFocus(event) {
-        this.focus = true;
-        event.preventDefault();
-        event.stopPropagation();
-        this.onTouch();
-    }
-    /**
-     * Verify value that it can be incremented, if yes it does that.
      * @return {?}
      */
     increment() {
-        this.manualChange(this.value + this.step);
-        this.setFocus(true);
+        // it's too early to use the `stepUp` and `stepDown` API...
+        // let's wait for FF: https://caniuse.com/#search=stepUp
+        this.control.setValue(this.control.value + this.step);
+        this.control.markAsDirty();
     }
     /**
-     * Verify value that it can be decremented, if yes it does that.
      * @return {?}
      */
     decrement() {
-        this.manualChange(this.value - this.step);
-        this.setFocus(false);
+        this.control.setValue(this.control.value - this.step);
+        this.control.markAsDirty();
     }
-    // ControlValueAccessor interface
     /**
-     * @param {?} fn
+     * Returns an observable with the control. The value changes of the
+     * control are intercepted in order to suppress invalid values.
      * @return {?}
      */
-    registerOnTouched(fn) {
-        this.onTouch = fn;
+    getControl() {
+        if (!this._control$) {
+            this._control$ = this.control.valueChanges.pipe(startWith(this.control.value), tap((/**
+             * @param {?} value
+             * @return {?}
+             */
+            value => this.control.setValue(this.getValidCount(value), { emitEvent: false }))), map((/**
+             * @return {?}
+             */
+            () => this.control)));
+        }
+        return this._control$;
     }
     /**
-     * @param {?} fn
-     * @return {?}
-     */
-    registerOnChange(fn) {
-        this.onModelChange = fn;
-    }
-    /**
+     * Validate that the given value is in between
+     * the `min` and `max` value. If the value is out
+     * of  the min/max range, it will be altered.
+     * If `allowZero` is set to true, the 0 value is ignored.
+     *
+     * @private
      * @param {?} value
      * @return {?}
      */
-    writeValue(value) {
-        this.value = value || this.min || 0;
-        this.onModelChange(this.value);
-    }
-    /**
-     * Set up new value for input and emit event outside
-     * @param {?} updatedQuantity
-     * @return {?}
-     */
-    updateValue(updatedQuantity) {
-        if (!this.async) {
-            // If the async flag is true, then the parent component is responsible for updating the form
-            this.writeValue(updatedQuantity);
+    getValidCount(value) {
+        if (value < this.min && !(value === 0 && this.allowZero)) {
+            value = this.min;
         }
-        // Additionally, we emit a change event, so that users may optionally do something on change
-        this.update.emit(updatedQuantity);
-        this.onTouch();
-    }
-    /**
-     * Determines which HTML element should have focus at a given time
-     * @param {?} isIncremented
-     * @return {?}
-     */
-    setFocus(isIncremented) {
-        if (this.isMaxOrMinValueOrBeyond()) {
-            this.input.nativeElement.focus();
+        if (this.max && value > this.max) {
+            value = this.max;
         }
-        else if (isIncremented) {
-            this.incrementBtn.nativeElement.focus();
-        }
-        else {
-            this.decrementBtn.nativeElement.focus();
-        }
-    }
-    /**
-     * @return {?}
-     */
-    isMaxOrMinValueOrBeyond() {
-        return this.value >= this.max || this.value <= this.min;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
+        return value;
     }
 }
 ItemCounterComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-item-counter',
-                template: "<div class=\"cx-counter-wrapper\">\n  <div\n    class=\"cx-counter btn-group\"\n    role=\"group\"\n    tabindex=\"0\"\n    aria-label=\"Add more items\"\n    [class.focused]=\"focus\"\n    (keydown)=\"onKeyDown($event)\"\n    (blur)=\"onBlur($event)\"\n    (focus)=\"onFocus($event)\"\n  >\n    <button\n      #decrementBtn\n      type=\"button\"\n      class=\"cx-counter-action\"\n      (click)=\"decrement()\"\n      [disabled]=\"cartIsLoading || value <= min\"\n      *ngIf=\"isValueChangeable\"\n    >\n      -\n    </button>\n\n    <input\n      #itemCounterInput\n      class=\"cx-counter-value\"\n      type=\"text\"\n      name=\"value\"\n      cxOnlyNumber\n      [formControl]=\"inputValue\"\n      [value]=\"value\"\n      *ngIf=\"isValueChangeable\"\n    />\n    <div class=\"cx-counter-value\" *ngIf=\"!isValueChangeable\">\n      {{ value }}\n    </div>\n    <button\n      #incrementBtn\n      type=\"button\"\n      class=\"cx-counter-action\"\n      (click)=\"increment()\"\n      [disabled]=\"cartIsLoading || value >= max\"\n      *ngIf=\"isValueChangeable\"\n    >\n      +\n    </button>\n  </div>\n</div>\n",
-                providers: [COUNTER_CONTROL_ACCESSOR]
+                template: "<button\n  type=\"button\"\n  (click)=\"decrement()\"\n  [disabled]=\"qty.disabled || qty?.value <= min\"\n  tabindex=\"-1\"\n>\n  -\n</button>\n\n<input\n  #qty\n  type=\"number\"\n  [min]=\"min\"\n  [max]=\"max\"\n  [step]=\"step\"\n  [formControl]=\"getControl() | async\"\n/>\n\n<button\n  type=\"button\"\n  (click)=\"increment()\"\n  [disabled]=\"qty.disabled || qty?.value >= max\"\n  tabindex=\"-1\"\n>\n  +\n</button>\n"
             }] }
 ];
-/** @nocollapse */
-ItemCounterComponent.ctorParameters = () => [
-    { type: Renderer2 }
-];
 ItemCounterComponent.propDecorators = {
-    input: [{ type: ViewChild, args: ['itemCounterInput', { static: false },] }],
-    incrementBtn: [{ type: ViewChild, args: ['incrementBtn', { static: false },] }],
-    decrementBtn: [{ type: ViewChild, args: ['decrementBtn', { static: false },] }],
-    value: [{ type: Input }],
-    step: [{ type: Input }],
+    control: [{ type: Input }],
     min: [{ type: Input }],
     max: [{ type: Input }],
-    async: [{ type: Input }],
-    cartIsLoading: [{ type: Input }],
-    isValueChangeable: [{ type: Input }],
-    update: [{ type: Output }]
+    step: [{ type: Input }],
+    allowZero: [{ type: Input }],
+    readonly: [{ type: HostBinding, args: ['class.readonly',] }, { type: Input }],
+    input: [{ type: ViewChild, args: ['qty', { static: false },] }],
+    handleClick: [{ type: HostListener, args: ['click',] }]
 };
 if (false) {
-    /** @type {?} */
-    ItemCounterComponent.prototype.input;
-    /** @type {?} */
-    ItemCounterComponent.prototype.incrementBtn;
-    /** @type {?} */
-    ItemCounterComponent.prototype.decrementBtn;
-    /** @type {?} */
-    ItemCounterComponent.prototype.value;
-    /** @type {?} */
-    ItemCounterComponent.prototype.step;
-    /** @type {?} */
+    /**
+     * Holds the value of the counter, the state of the `FormControl`
+     * can be managed outside of the item counter.
+     * @type {?}
+     */
+    ItemCounterComponent.prototype.control;
+    /**
+     * This can be used in case an item has a minmum order quantity.
+     * \@default 1
+     * @type {?}
+     */
     ItemCounterComponent.prototype.min;
-    /** @type {?} */
+    /**
+     * This can be used in case an item has a maximum order quantity.
+     * @type {?}
+     */
     ItemCounterComponent.prototype.max;
-    /** @type {?} */
-    ItemCounterComponent.prototype.async;
-    /** @type {?} */
-    ItemCounterComponent.prototype.cartIsLoading;
-    /** @type {?} */
-    ItemCounterComponent.prototype.isValueChangeable;
-    /** @type {?} */
-    ItemCounterComponent.prototype.update;
-    /** @type {?} */
-    ItemCounterComponent.prototype.focus;
-    /** @type {?} */
-    ItemCounterComponent.prototype.isValueOutOfRange;
-    /** @type {?} */
-    ItemCounterComponent.prototype.inputValue;
-    /** @type {?} */
-    ItemCounterComponent.prototype.subscription;
-    /** @type {?} */
-    ItemCounterComponent.prototype.onTouch;
-    /** @type {?} */
-    ItemCounterComponent.prototype.onModelChange;
+    /**
+     * The step is used to increment the count. It is supposed to be a
+     * positive inteteger or float.
+     * \@default 1
+     * @type {?}
+     */
+    ItemCounterComponent.prototype.step;
+    /**
+     * Inidicates that the input can be manually set to zero,
+     * despite the fact that the input controls will be limited to
+     * the minimum. The zero value can be used to remove an item.
+     * @type {?}
+     */
+    ItemCounterComponent.prototype.allowZero;
     /**
      * @type {?}
      * @private
      */
-    ItemCounterComponent.prototype.renderer;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class OnlyNumberDirective {
+    ItemCounterComponent.prototype._control$;
     /**
-     * Class constructor
-     * @param {?} hostElement
-     * @param {?} renderer
+     * In readonly mode the item counter will only be shown as a label,
+     * the form controls are not rendered.
+     * Please not that readonly is different from the `disabled` form state.
+     * \@default false
+     * @type {?}
      */
-    constructor(hostElement, renderer) {
-        this.hostElement = hostElement;
-        this.renderer = renderer;
-        this.previousValue = '';
-        this.integerUnsigned = '^[0-9]*$';
-    }
-    /**
-     * Event handler for host's change event
-     * @return {?}
-     */
-    onChange() {
-        this.validateValue(this.hostElement.nativeElement.value);
-    }
-    /**
-     * Event handler for host's change event
-     * @return {?}
-     */
-    onInput() {
-        this.validateValue(this.hostElement.nativeElement.value);
-    }
-    /**
-     * Event handler for host's paste event
-     * @param {?} e
-     * @return {?}
-     */
-    onPaste(e) {
-        /** @type {?} */
-        const value = e.clipboardData.getData('text/plain');
-        this.validateValue(value);
-        e.preventDefault();
-    }
-    /**
-     * Event handler for host's keyup event
-     * @param {?} e
-     * @return {?}
-     */
-    onKeyUp(e) {
-        /** @type {?} */
-        const value = e.target['value'];
-        this.validateValue(value);
-    }
-    /**
-     * Event handler for host's keydown event
-     * @param {?} e
-     * @return {?}
-     */
-    onKeyDown(e) {
-        /** @type {?} */
-        const originalValue = e.target['value'];
-        /** @type {?} */
-        const key = this.getName(e);
-        /** @type {?} */
-        const controlOrCommand = e.ctrlKey === true || e.metaKey === true;
-        // allowed keys apart from numeric characters
-        /** @type {?} */
-        const allowedKeys = [
-            'Backspace',
-            'ArrowLeft',
-            'ArrowRight',
-            'Escape',
-            'Tab',
-        ];
-        // allow some non-numeric characters
-        if (allowedKeys.includes(key) ||
-            // Allow: Ctrl+A and Command+A
-            (key === 'a' && controlOrCommand) ||
-            // Allow: Ctrl+C and Command+C
-            (key === 'c' && controlOrCommand) ||
-            // Allow: Ctrl+V and Command+V
-            (key === 'v' && controlOrCommand) ||
-            // Allow: Ctrl+X and Command+X
-            (key === 'x' && controlOrCommand)) {
-            // let it happen, don't do anything
-            return;
-        }
-        // save value before keydown event
-        this.previousValue = originalValue;
-        // allow number characters only
-        /** @type {?} */
-        const isNumber = new RegExp(this.integerUnsigned).test(key);
-        if (isNumber) {
-            return;
-        }
-        else {
-            e.preventDefault();
-        }
-    }
-    /**
-     * Test whether value is a valid number or not
-     * @param {?} value
-     * @return {?}
-     */
-    validateValue(value) {
-        if (value) {
-            value = value.replace(/[^0-9]+/g, '');
-            this.renderer.setProperty(this.hostElement.nativeElement, 'value', value);
-        }
-    }
-    /**
-     * Get key's name
-     * @param {?} e
-     * @return {?}
-     */
-    getName(e) {
-        return e.key;
-    }
-}
-OnlyNumberDirective.decorators = [
-    { type: Directive, args: [{
-                selector: '[cxOnlyNumber]',
-            },] }
-];
-/** @nocollapse */
-OnlyNumberDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: Renderer2 }
-];
-OnlyNumberDirective.propDecorators = {
-    onChange: [{ type: HostListener, args: ['change',] }],
-    onInput: [{ type: HostListener, args: ['input',] }],
-    onPaste: [{ type: HostListener, args: ['paste', ['$event'],] }],
-    onKeyUp: [{ type: HostListener, args: ['keyup', ['$event'],] }],
-    onKeyDown: [{ type: HostListener, args: ['keydown', ['$event'],] }]
-};
-if (false) {
-    /** @type {?} */
-    OnlyNumberDirective.prototype.previousValue;
-    /** @type {?} */
-    OnlyNumberDirective.prototype.integerUnsigned;
+    ItemCounterComponent.prototype.readonly;
     /**
      * @type {?}
      * @private
      */
-    OnlyNumberDirective.prototype.hostElement;
-    /**
-     * @type {?}
-     * @private
-     */
-    OnlyNumberDirective.prototype.renderer;
+    ItemCounterComponent.prototype.input;
 }
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class OnlyNumberDirectiveModule {
-}
-OnlyNumberDirectiveModule.decorators = [
-    { type: NgModule, args: [{
-                declarations: [OnlyNumberDirective],
-                exports: [OnlyNumberDirective],
-            },] }
-];
 
 /**
  * @fileoverview added by tsickle
@@ -2164,12 +1871,7 @@ class ItemCounterModule {
 }
 ItemCounterModule.decorators = [
     { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    FormsModule,
-                    ReactiveFormsModule,
-                    OnlyNumberDirectiveModule,
-                ],
+                imports: [CommonModule, ReactiveFormsModule],
                 declarations: [ItemCounterComponent],
                 exports: [ItemCounterComponent],
             },] }
@@ -2279,150 +1981,709 @@ GenericLinkModule.decorators = [
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-const PAGE_FIRST = 1;
+const defaultPaginationConfig = {
+    pagination: {
+        addStart: true,
+        addEnd: true,
+    },
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @abstract
+ */
+class PaginationConfig {
+}
+if (false) {
+    /** @type {?} */
+    PaginationConfig.prototype.pagination;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Represents a page item for a pagination system. This is used
+ * to store the model of each page.
+ * @record
+ */
+function PaginationItem() { }
+if (false) {
+    /** @type {?|undefined} */
+    PaginationItem.prototype.label;
+    /** @type {?|undefined} */
+    PaginationItem.prototype.type;
+    /**
+     * The number is used when the type is {\@link PaginationItemType.PAGE}
+     * @type {?|undefined}
+     */
+    PaginationItem.prototype.number;
+}
+/** @enum {string} */
+const PaginationItemType = {
+    GAP: 'gap',
+    FIRST: 'first',
+    LAST: 'last',
+    PREVIOUS: 'previous',
+    NEXT: 'next',
+    START: 'start',
+    END: 'end',
+    PAGE: 'page',
+};
+/**
+ * @record
+ */
+function PaginationOptions() { }
+if (false) {
+    /**
+     * The range of direct accessible pages in the pagination.
+     *
+     * `« 4 (5) 6 »`
+     *
+     * Defaults to 3.
+     * @type {?|undefined}
+     */
+    PaginationOptions.prototype.rangeCount;
+    /**
+     * Adds a link to skip to the start of the pages, defaults to false.
+     * @type {?|undefined}
+     */
+    PaginationOptions.prototype.addStart;
+    /**
+     * A link to skip to the end of the pages, defaults to false.
+     * @type {?|undefined}
+     */
+    PaginationOptions.prototype.addEnd;
+    /**
+     * A link to the previous page, defaults to false.
+     * @type {?|undefined}
+     */
+    PaginationOptions.prototype.addPrevious;
+    /**
+     * A link to the previous page, defaults to false.
+     * @type {?|undefined}
+     */
+    PaginationOptions.prototype.addNext;
+    /** @type {?|undefined} */
+    PaginationOptions.prototype.navigationPosition;
+    /**
+     * A link to the first page can be added in case it is not included already, defaults to false.
+     * @type {?|undefined}
+     */
+    PaginationOptions.prototype.addFirst;
+    /**
+     * A link to the last page can be added in case it is not included already, defaults to false.
+     * @type {?|undefined}
+     */
+    PaginationOptions.prototype.addLast;
+    /**
+     * Adds a gap before and after the pages. to visualize hidden pages. Defaults to false.
+     *
+     * `1 ...  4 (5) 6 ... 18`
+     *
+     * Defaults to false.
+     * @type {?|undefined}
+     */
+    PaginationOptions.prototype.addDots;
+    /**
+     * If the page dots only represents a single page, we rather add the page
+     * as this would take the same amount of space. Some UX might want to use
+     * the dots for consistency reasons, which why this option is configurable.
+     *
+     * This typically happens on the 4th page (in case the range is 3):
+     * Instead of having:
+     *
+     *  `1 ...  3 (4) 5`
+     *
+     * we'd have
+     *
+     * `1 2 3 (4) 5`.
+     *
+     * Defaults to false.
+     * @type {?|undefined}
+     */
+    PaginationOptions.prototype.substituteDotsForSingularPage;
+    /**
+     * Custom label for the start link, defaults to `«`.
+     * @type {?|undefined}
+     */
+    PaginationOptions.prototype.startLabel;
+    /**
+     * Custom label for the previous link, defaults to `‹`.
+     * @type {?|undefined}
+     */
+    PaginationOptions.prototype.previousLabel;
+    /**
+     * Custom label for the next link, defaults to `›`.
+     * @type {?|undefined}
+     */
+    PaginationOptions.prototype.nextLabel;
+    /**
+     * Custom label for the end link, defaults to `»`.
+     * @type {?|undefined}
+     */
+    PaginationOptions.prototype.endLabel;
+    /**
+     * Custom label for the dots, defaults to `...`.
+     * @type {?|undefined}
+     */
+    PaginationOptions.prototype.dotsLabel;
+}
+/** @enum {string} */
+const PaginationNavigationPosition = {
+    ASIDE: 'aside',
+    BEFORE: 'before',
+    AFTER: 'after',
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 /** @type {?} */
-const PAGE_WINDOW_SIZE = 3;
-class PaginationComponent {
-    constructor() {
-        this.hideOnSinglePage = false;
-        this.viewPageEvent = new EventEmitter();
+const FALLBACK_PAGINATION_OPTIONS = {
+    rangeCount: 3,
+    dotsLabel: '...',
+    startLabel: '«',
+    previousLabel: '‹',
+    nextLabel: '›',
+    endLabel: '»',
+};
+/**
+ * Builds a pagination structures based on a pageCount and current page number.
+ * There are various {\@link PaginationConfig} options which can be used to configure
+ * the behaviour of the build. Alternatively, CSS can be used to further customise
+ * the pagination.
+ *
+ * Examples:
+ * The full blown pagination items contain the follow elements:
+ *
+ * `« ‹ 1 ... 4 (5) 6 ... 9 › »`
+ *
+ * This includes pagination items to the following pages:
+ * - start page
+ * - previous page
+ * - first page
+ * - page range
+ * - last page
+ * - next page
+ * - end page
+ *
+ * All of those links are configurable, including the size of the page range.
+ * The current page will always be centered in the page range to provide direct access
+ * to the previous and next page.
+ */
+class PaginationBuilder {
+    /**
+     * @param {?} paginationConfig
+     */
+    constructor(paginationConfig) {
+        this.paginationConfig = paginationConfig;
     }
-    // Because pagination model uses indexes starting from 0,
-    // add 1 to get current page number
+    /**
+     * Builds a list of `PaginationItem`. The give pageCount and current are used
+     * to build out the full pagination. There are various {\@link PaginationConfig} options
+     * which can be used to configure the behaviour of the build. Alternatively, CSS
+     * can be used to further specialize visibility of the pagination.
+     *
+     * @param {?} pageCount The total number of pages
+     * @param {?} current The current page number, 0-index based
+     * @return {?} An array of `PaginationItem`
+     */
+    paginate(pageCount, current) {
+        /** @type {?} */
+        const pages = [];
+        if (pageCount < 2) {
+            return pages;
+        }
+        this.addPages(pages, pageCount, current);
+        this.addDots(pages, pageCount);
+        this.addFirstLast(pages, pageCount);
+        this.addNavigation(pages, pageCount, current);
+        return pages;
+    }
+    /**
+     * Returns the current page with surrounding pages (based on the `config.rangeCount`).
+     * The current page is always centered to provide direct access to the previous and next page.
+     *
+     * @protected
+     * @param {?} pages The list of page items that is used to amend
+     * @param {?} pageCount The total number of pages
+     * @param {?} current The current page number, 0-index based
+     * @return {?}
+     */
+    addPages(pages, pageCount, current) {
+        /** @type {?} */
+        const start = this.getStartOfRange(pageCount, current);
+        /** @type {?} */
+        const max = Math.min(this.config.rangeCount, pageCount);
+        Array.from(Array(max)).forEach((/**
+         * @param {?} _
+         * @param {?} i
+         * @return {?}
+         */
+        (_, i) => {
+            pages.push({
+                number: i + start,
+                label: String(i + start + 1),
+                type: PaginationItemType.PAGE,
+            });
+        }));
+    }
+    /**
+     * Adds dots before and after the given pages, if configured (defaults to true).
+     * If the dots only represent a single page, the page number is added instead of
+     * the dots, unless the configuration requires dots always.
+     *
+     * @protected
+     * @param {?} pages The list of page items that is used to amend
+     * @param {?} pageCount The total number of pages
+     * @return {?}
+     */
+    addDots(pages, pageCount) {
+        if (!this.config.addDots) {
+            return;
+        }
+        /** @type {?} */
+        const addFirstGap = (/**
+         * @return {?}
+         */
+        () => {
+            /** @type {?} */
+            const firstItemNumber = pages[0].number;
+            /** @type {?} */
+            const gapNumber = this.config.addFirst ? 1 : 0;
+            if (firstItemNumber > gapNumber) {
+                /** @type {?} */
+                const isGap = !this.config.substituteDotsForSingularPage ||
+                    firstItemNumber !== gapNumber + 1;
+                /** @type {?} */
+                const isSubstitued = this.config.addFirst &&
+                    this.config.substituteDotsForSingularPage &&
+                    gapNumber === 0;
+                /** @type {?} */
+                const type = isGap
+                    ? PaginationItemType.GAP
+                    : isSubstitued
+                        ? PaginationItemType.FIRST
+                        : PaginationItemType.PAGE;
+                return [
+                    Object.assign({
+                        label: isGap ? this.config.dotsLabel : String(gapNumber + 1),
+                        type,
+                    }, isGap ? null : { number: gapNumber }),
+                ];
+            }
+            else
+                return [];
+        });
+        /** @type {?} */
+        const addLastGap = (/**
+         * @return {?}
+         */
+        () => {
+            /** @type {?} */
+            const nextPageNumber = pages[pages.length - 1].number + 1;
+            /** @type {?} */
+            const last = pageCount - (this.config.addLast ? 2 : 1);
+            if (nextPageNumber <= last) {
+                /** @type {?} */
+                const isSubstitued = this.config.addLast &&
+                    this.config.substituteDotsForSingularPage &&
+                    nextPageNumber === last;
+                /** @type {?} */
+                const isGap = nextPageNumber <
+                    pageCount -
+                        (this.config.substituteDotsForSingularPage ? 1 : 0) -
+                        (this.config.addLast ? 1 : 0);
+                /** @type {?} */
+                const type = isGap
+                    ? PaginationItemType.GAP
+                    : isSubstitued
+                        ? PaginationItemType.LAST
+                        : PaginationItemType.PAGE;
+                return [
+                    Object.assign({
+                        label: isGap ? this.config.dotsLabel : String(nextPageNumber + 1),
+                        type,
+                    }, isGap ? null : { number: nextPageNumber }),
+                ];
+            }
+            else
+                return [];
+        });
+        pages.unshift(...addFirstGap());
+        pages.push(...addLastGap());
+    }
+    /**
+     * Add links to the first and last page, if configured to do so.
+     *
+     * @protected
+     * @param {?} pages The list of page items that is used to amend
+     * @param {?} pageCount The total number of pages
+     *
+     * @return {?}
+     */
+    addFirstLast(pages, pageCount) {
+        if (this.config.addFirst && pages[0].number !== 0) {
+            pages.unshift({
+                number: 0,
+                label: '1',
+                type: PaginationItemType.FIRST,
+            });
+        }
+        if (this.config.addLast &&
+            pages[pages.length - 1].number !== pageCount - 1) {
+            pages.push({
+                number: pageCount - 1,
+                label: String(pageCount),
+                type: PaginationItemType.LAST,
+            });
+        }
+    }
+    /**
+     * Add links to the start, previous, next and last page, if configured to do so.
+     * The order of the links can be configured by using the {\@link PaginationConfig},
+     * using the `PaginationNavigationPosition` (`BEFORE` or `AFTER`).
+     * The `PaginationNavigationPosition` allows for 3 flavours:
+     *
+     * - by default the pagination starts with start and previous and ends with the next and end links
+     * - BEFORE – all navigation links are added in the front of the pagination list
+     * - AFTER – all navigation links are pushed to the end of the pagination list
+     *
+     * @protected
+     * @param {?} pages The list of page items that is used to amend
+     * @param {?} pageCount The total number of pages
+     * @param {?} current The current page number, 0-index based
+     *
+     * @return {?}
+     */
+    addNavigation(pages, pageCount, current) {
+        /** @type {?} */
+        const before = this.getBeforeLinks(current);
+        /** @type {?} */
+        const after = this.getAfter(pageCount, current);
+        /** @type {?} */
+        const pos = this.config.navigationPosition;
+        if (!pos || pos === PaginationNavigationPosition.ASIDE) {
+            pages.unshift(...before);
+            pages.push(...after);
+        }
+        else {
+            if (pos === PaginationNavigationPosition.BEFORE) {
+                pages.unshift(...before, ...after);
+            }
+            if (pos === PaginationNavigationPosition.AFTER) {
+                pages.push(...before, ...after);
+            }
+        }
+    }
+    /**
+     * Returns the start and previous links, if applicable.
+     * @private
+     * @param {?} current
+     * @return {?}
+     */
+    getBeforeLinks(current) {
+        /** @type {?} */
+        const list = [];
+        if (this.config.addStart) {
+            /** @type {?} */
+            const start = (/**
+             * @return {?}
+             */
+            () => {
+                return Object.assign({
+                    label: this.config.startLabel,
+                    type: PaginationItemType.START,
+                }, current > 0 ? { number: 0 } : null);
+            });
+            list.push(start());
+        }
+        if (this.config.addPrevious) {
+            /** @type {?} */
+            const previous = (/**
+             * @return {?}
+             */
+            () => {
+                return Object.assign({
+                    label: this.config.previousLabel,
+                    type: PaginationItemType.PREVIOUS,
+                }, current > 0 ? { number: current - 1 } : null);
+            });
+            list.push(previous());
+        }
+        return list;
+    }
+    /**
+     * Returns the next and end links, if applicable.
+     * @private
+     * @param {?} pageCount
+     * @param {?} current
+     * @return {?}
+     */
+    getAfter(pageCount, current) {
+        /** @type {?} */
+        const list = [];
+        if (this.config.addNext) {
+            /** @type {?} */
+            const next = (/**
+             * @return {?}
+             */
+            () => {
+                return Object.assign({
+                    label: this.config.nextLabel,
+                    type: PaginationItemType.NEXT,
+                }, current < pageCount - 1 ? { number: current + 1 } : null);
+            });
+            list.push(next());
+        }
+        if (this.config.addEnd) {
+            /** @type {?} */
+            const end = (/**
+             * @return {?}
+             */
+            () => {
+                return Object.assign({
+                    label: this.config.endLabel,
+                    type: PaginationItemType.END,
+                }, current < pageCount - 1 ? { number: pageCount - 1 } : null);
+            });
+            list.push(end());
+        }
+        return list;
+    }
+    /**
+     * Resolves the first page of the range we need to build.
+     * This is the page that is leading up to the range of the
+     * current page.
+     *
+     * @private
+     * @param {?} pageCount The total number of pages.
+     * @param {?} current The current page number, 0-index based.
+     * @return {?}
+     */
+    getStartOfRange(pageCount, current) {
+        /** @type {?} */
+        const count = this.config.rangeCount - 1;
+        // the least number of pages before and after the current
+        /** @type {?} */
+        const delta = Math.round(count / 2);
+        // ensure that we start with at least the first page
+        /** @type {?} */
+        const minStart = Math.max(0, current - delta);
+        // ensures that we start with at least 1 and do not pass the last range
+        /** @type {?} */
+        const maxStart = Math.max(0, pageCount - count - 1);
+        // ensure that we get at least a full range at the end
+        return Math.min(maxStart, minStart);
+    }
     /**
      * @private
      * @return {?}
      */
-    getCurrentPageNumber() {
-        return this.pagination.currentPage + 1;
+    get config() {
+        return Object.assign(FALLBACK_PAGINATION_OPTIONS, this.paginationConfig.pagination);
+    }
+}
+PaginationBuilder.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+PaginationBuilder.ctorParameters = () => [
+    { type: PaginationConfig }
+];
+/** @nocollapse */ PaginationBuilder.ngInjectableDef = ɵɵdefineInjectable({ factory: function PaginationBuilder_Factory() { return new PaginationBuilder(ɵɵinject(PaginationConfig)); }, token: PaginationBuilder, providedIn: "root" });
+if (false) {
+    /**
+     * @type {?}
+     * @protected
+     */
+    PaginationBuilder.prototype.paginationConfig;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * The `PaginationComponent` is a generic component that is used for
+ * all lists in Spartacus that require pagination. The component supports
+ * all common features, which can be configured or hidden by CSS.
+ */
+class PaginationComponent {
+    /**
+     * @param {?} paginationBuilder
+     * @param {?} activatedRoute
+     */
+    constructor(paginationBuilder, activatedRoute) {
+        this.paginationBuilder = paginationBuilder;
+        this.activatedRoute = activatedRoute;
+        this.viewPageEvent = new EventEmitter();
+        this.pages = [];
     }
     /**
      * @return {?}
      */
-    getPagePrevious() {
-        return this.getCurrentPageNumber() - 1;
+    get pagination() {
+        return this._pagination;
     }
     /**
+     * @param {?} value
      * @return {?}
      */
-    getPageNext() {
-        return this.getCurrentPageNumber() + 1;
+    set pagination(value) {
+        this._pagination = value;
+        this.render(value);
     }
     /**
+     * @private
+     * @param {?} pagination
      * @return {?}
      */
-    getPageIndicies() {
-        return Array(this.pagination.totalPages);
-    }
-    // Gets the minimum index of page numbers that can be shown by being within the page window range
-    /**
-     * @return {?}
-     */
-    getPageWindowMinIndex() {
-        return (Math.floor(this.pagination.currentPage / PAGE_WINDOW_SIZE) *
-            PAGE_WINDOW_SIZE);
-    }
-    // Gets the maximum index of page numbers that can be shown by being within the page window range
-    /**
-     * @return {?}
-     */
-    getPageWindowMaxIndex() {
-        return (Math.floor(this.pagination.currentPage / PAGE_WINDOW_SIZE) *
-            PAGE_WINDOW_SIZE +
-            2);
+    render(pagination) {
+        this.pages = this.paginationBuilder.paginate(pagination.totalPages, pagination.currentPage);
     }
     /**
-     * @return {?}
+     * Inidicates whether the given item is the current item.
+     *
+     * @param {?} item PaginationItem
+     * @return {?} boolean
      */
-    hasPages() {
-        return this.pagination.totalPages > 0;
+    isCurrent(item) {
+        return (item.type === PaginationItemType.PAGE &&
+            item.number === this.pagination.currentPage);
     }
     /**
-     * @return {?}
+     * Indicates whether the pagination item is inactive. This is used
+     * to disabled a link or set the tabindex to `-1`.
+     *
+     * Defaults to true
+     *
+     * @param {?} item PaginationItem
+     * @return {?} returns -1 in case of a disabled
      */
-    onFirstPage() {
-        return this.pagination.currentPage === 0;
+    isInactive(item) {
+        return (!item.hasOwnProperty('number') ||
+            item.number === this.pagination.currentPage);
     }
     /**
+     * @param {?} item
      * @return {?}
      */
-    onLastPage() {
-        return this.pagination.currentPage === this.pagination.totalPages - 1;
-    }
-    /**
-     * @param {?} index
-     * @return {?}
-     */
-    onPageIndex(index) {
-        return this.pagination.currentPage === index;
-    }
-    /**
-     * @param {?} index
-     * @return {?}
-     */
-    hidePageIndex(index) {
-        return ((this.getPageWindowMinIndex() > index ||
-            this.getPageWindowMaxIndex() < index) &&
-            (index > 0 && index < this.pagination.totalPages - 1));
-    }
-    /**
-     * @param {?} index
-     * @return {?}
-     */
-    showDots(index) {
-        return (this.hidePageIndex(index) &&
-            (index === this.getPageWindowMaxIndex() + 1 ||
-                index === this.getPageWindowMinIndex() - 1));
-    }
-    /**
-     * @param {?} page
-     * @return {?}
-     */
-    clickPageNo(page) {
-        // Change page on valid index
-        if (page >= PAGE_FIRST &&
-            page <= this.pagination.totalPages &&
-            page !== this.getCurrentPageNumber()) {
-            this.pageChange(page);
-            return page;
+    getQueryParams(item) {
+        /** @type {?} */
+        const queryParams = Object.assign({}, this.activatedRoute.snapshot.queryParams);
+        if (this.queryParam &&
+            item.number < this.pagination.totalPages &&
+            !this.isCurrent(item)) {
+            queryParams[this.queryParam] = item.number;
         }
-        // Page stays the same on invalid index
-        return this.pagination.currentPage;
+        // omit the page number from the query parameters in case it's the default
+        // to clean up the experience and avoid unnecessary polluting of the URL
+        if (queryParams[this.queryParam] === this.defaultPage) {
+            delete queryParams[this.queryParam];
+        }
+        return queryParams;
     }
     /**
      * @param {?} page
      * @return {?}
      */
     pageChange(page) {
-        this.viewPageEvent.emit(page - 1);
-    }
-    /**
-     * @return {?}
-     */
-    showPagination() {
-        return !(this.hideOnSinglePage && this.pagination.totalPages <= 1);
+        this.viewPageEvent.emit(page.number);
     }
 }
 PaginationComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-pagination',
-                template: "<ul class=\"pagination\" *ngIf=\"showPagination()\">\n  <!-- Previous -->\n  <li class=\"page-item\" [ngClass]=\"{ disabled: onFirstPage() || !hasPages() }\">\n    <a class=\"page-link\" (click)=\"clickPageNo(getPagePrevious())\">\u00AB</a>\n  </li>\n\n  <!-- Page Index -->\n  <li\n    class=\"page-item\"\n    *ngFor=\"let page of getPageIndicies(); let i = index\"\n    [ngClass]=\"{ active: onPageIndex(i), disabled: showDots(i) }\"\n  >\n    <a class=\"page-link\" *ngIf=\"showDots(i)\">...</a>\n    <a\n      class=\"page-link\"\n      *ngIf=\"!hidePageIndex(i)\"\n      (click)=\"clickPageNo(i + 1)\"\n      >{{ i + 1 }}</a\n    >\n  </li>\n\n  <!-- Next -->\n  <li class=\"page-item\" [ngClass]=\"{ disabled: onLastPage() || !hasPages() }\">\n    <a class=\"page-link\" (click)=\"clickPageNo(getPageNext())\">\u00BB</a>\n  </li>\n</ul>\n",
+                template: "<a\n  *ngFor=\"let item of pages\"\n  [class]=\"item.type\"\n  [class.disabled]=\"isInactive(item)\"\n  [class.current]=\"isCurrent(item)\"\n  [routerLink]=\"pageRoute\"\n  [queryParams]=\"getQueryParams(item)\"\n  [tabIndex]=\"isInactive(item) ? -1 : 0\"\n  (click)=\"pageChange(item)\"\n>\n  {{ item.label }}\n</a>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
+/** @nocollapse */
+PaginationComponent.ctorParameters = () => [
+    { type: PaginationBuilder },
+    { type: ActivatedRoute }
+];
 PaginationComponent.propDecorators = {
+    pageRoute: [{ type: Input }],
+    queryParam: [{ type: Input }],
+    defaultPage: [{ type: Input }],
     pagination: [{ type: Input }],
-    hideOnSinglePage: [{ type: Input }],
     viewPageEvent: [{ type: Output }]
 };
 if (false) {
-    /** @type {?} */
-    PaginationComponent.prototype.pagination;
-    /** @type {?} */
-    PaginationComponent.prototype.hideOnSinglePage;
+    /**
+     * The (optional) pageRoute used for the anchor links created in the pagination
+     * @type {?}
+     */
+    PaginationComponent.prototype.pageRoute;
+    /**
+     * The (optional) query parameter which is added to the page route.
+     * @type {?}
+     */
+    PaginationComponent.prototype.queryParam;
+    /**
+     * Whenever there's a default page specified, the routing logic
+     * will omit the page number in routeLink or parameters.
+     * @type {?}
+     */
+    PaginationComponent.prototype.defaultPage;
+    /**
+     * @type {?}
+     * @private
+     */
+    PaginationComponent.prototype._pagination;
     /** @type {?} */
     PaginationComponent.prototype.viewPageEvent;
+    /** @type {?} */
+    PaginationComponent.prototype.pages;
+    /**
+     * @type {?}
+     * @private
+     */
+    PaginationComponent.prototype.paginationBuilder;
+    /**
+     * @type {?}
+     * @private
+     */
+    PaginationComponent.prototype.activatedRoute;
 }
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class PaginationModule {
+}
+PaginationModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule, RouterModule],
+                providers: [
+                    provideConfig(defaultPaginationConfig),
+                    { provide: PaginationConfig, useExisting: Config },
+                ],
+                declarations: [PaginationComponent],
+                exports: [PaginationComponent],
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -2477,9 +2738,9 @@ class ListNavigationModule {
 }
 ListNavigationModule.decorators = [
     { type: NgModule, args: [{
-                imports: [CommonModule, NgSelectModule, FormsModule],
-                declarations: [PaginationComponent, SortingComponent],
-                exports: [PaginationComponent, SortingComponent],
+                imports: [CommonModule, NgSelectModule, FormsModule, PaginationModule],
+                declarations: [SortingComponent],
+                exports: [SortingComponent, PaginationComponent],
             },] }
 ];
 
@@ -2587,7 +2848,7 @@ class GlobalMessageComponent {
 GlobalMessageComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-global-message',
-                template: "<div *ngIf=\"messages$ | async as messages\">\n  <div\n    class=\"alert alert-success\"\n    *ngFor=\"\n      let confMsg of messages[messageType.MSG_TYPE_CONFIRMATION];\n      let i = index\n    \"\n  >\n    <span class=\"alert-icon\">\n      <cx-icon [type]=\"iconTypes.SUCCESS\"></cx-icon>\n    </span>\n    <span>{{ confMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_CONFIRMATION, i)\"\n    >\n      <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n    </button>\n  </div>\n  <div\n    class=\"alert alert-warning\"\n    *ngFor=\"let infoMsg of messages[messageType.MSG_TYPE_INFO]; let i = index\"\n  >\n    <span class=\"alert-icon\">\n      <cx-icon [type]=\"iconTypes.WARNING\"></cx-icon>\n    </span>\n    <span>{{ infoMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_INFO, i)\"\n    >\n      <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n    </button>\n  </div>\n  <div\n    class=\"alert alert-danger\"\n    *ngFor=\"let errorMsg of messages[messageType.MSG_TYPE_ERROR]; let i = index\"\n  >\n    <span class=\"alert-icon\">\n      <cx-icon [type]=\"iconTypes.ERROR\"></cx-icon>\n    </span>\n    <span>{{ errorMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_ERROR, i)\"\n    >\n      <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n    </button>\n  </div>\n</div>\n"
+                template: "<div *ngIf=\"messages$ | async as messages\">\n  <div\n    class=\"alert alert-success\"\n    *ngFor=\"\n      let confMsg of messages[messageType.MSG_TYPE_CONFIRMATION];\n      let i = index\n    \"\n  >\n    <span class=\"alert-icon\">\n      <cx-icon [type]=\"iconTypes.SUCCESS\"></cx-icon>\n    </span>\n    <span>{{ confMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_CONFIRMATION, i)\"\n    >\n      <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n    </button>\n  </div>\n  <div\n    class=\"alert alert-info\"\n    *ngFor=\"let infoMsg of messages[messageType.MSG_TYPE_INFO]; let i = index\"\n  >\n    <span class=\"alert-icon\">\n      <cx-icon [type]=\"iconTypes.INFO\"></cx-icon>\n    </span>\n    <span>{{ infoMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_INFO, i)\"\n    >\n      <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n    </button>\n  </div>\n  <div\n    class=\"alert alert-warning\"\n    *ngFor=\"\n      let infoMsg of messages[messageType.MSG_TYPE_WARNING];\n      let i = index\n    \"\n  >\n    <span class=\"alert-icon\">\n      <cx-icon [type]=\"iconTypes.WARNING\"></cx-icon>\n    </span>\n    <span>{{ infoMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_INFO, i)\"\n    >\n      <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n    </button>\n  </div>\n  <div\n    class=\"alert alert-danger\"\n    *ngFor=\"let errorMsg of messages[messageType.MSG_TYPE_ERROR]; let i = index\"\n  >\n    <span class=\"alert-icon\">\n      <cx-icon [type]=\"iconTypes.ERROR\"></cx-icon>\n    </span>\n    <span>{{ errorMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_ERROR, i)\"\n    >\n      <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n    </button>\n  </div>\n</div>\n"
             }] }
 ];
 /** @nocollapse */
@@ -3376,11 +3637,6 @@ ViewConfigModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class AutoFocusDirective {
     /**
      * @param {?} hostElement
@@ -3411,24 +3667,6 @@ if (false) {
      */
     AutoFocusDirective.prototype.hostElement;
 }
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class AutoFocusDirectiveModule {
-}
-AutoFocusDirectiveModule.decorators = [
-    { type: NgModule, args: [{
-                declarations: [AutoFocusDirective],
-                exports: [AutoFocusDirective],
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 
 /**
  * @fileoverview added by tsickle
@@ -9138,46 +9376,81 @@ class AddedToCartDialogComponent {
     /**
      * @param {?} modalService
      * @param {?} cartService
-     * @param {?} fb
      * @param {?=} promotionService
      */
-    constructor(modalService, cartService, fb, promotionService) {
+    constructor(modalService, cartService, promotionService) {
         this.modalService = modalService;
         this.cartService = cartService;
-        this.fb = fb;
         this.promotionService = promotionService;
         this.iconTypes = ICON_TYPE;
         this.promotionLocation = PromotionLocation.ActiveCart;
         this.quantity = 0;
         this.modalIsOpen = false;
-        this.form = this.fb.group({});
+        this.form = new FormGroup({});
+    }
+    /**
+     * Returns an observable formControl with the quantity of the cartEntry,
+     * but also updates the entry in case of a changed value.
+     * The quantity can be set to zero in order to remove the entry.
+     * @return {?}
+     */
+    getQuantityControl() {
+        if (!this.quantityControl$) {
+            this.quantityControl$ = this.entry$.pipe(filter((/**
+             * @param {?} e
+             * @return {?}
+             */
+            e => !!e)), map((/**
+             * @param {?} entry
+             * @return {?}
+             */
+            entry => this.getFormControl(entry))), switchMap((/**
+             * @return {?}
+             */
+            () => this.form.valueChanges.pipe(
+            // tslint:disable-next-line:deprecation
+            startWith(null), tap((/**
+             * @param {?} valueChange
+             * @return {?}
+             */
+            valueChange => {
+                if (valueChange) {
+                    this.cartService.updateEntry(valueChange.entryNumber, valueChange.quantity);
+                    if (valueChange.quantity === 0) {
+                        this.dismissModal('Removed');
+                    }
+                }
+                else {
+                    this.form.markAsPristine();
+                }
+            }))))), map((/**
+             * @return {?}
+             */
+            () => (/** @type {?} */ (this.form.get('quantity'))))));
+        }
+        return this.quantityControl$;
     }
     /**
      * @return {?}
      */
     ngOnInit() {
-        this.entry$ = this.entry$.pipe(tap((/**
-         * @param {?} entry
-         * @return {?}
-         */
-        entry => {
-            if (entry) {
-                const { code } = entry.product;
-                if (!this.form.controls[code]) {
-                    this.form.setControl(code, this.createEntryFormGroup(entry));
-                }
-                else {
-                    /** @type {?} */
-                    const entryForm = (/** @type {?} */ (this.form.controls[code]));
-                    entryForm.controls.quantity.setValue(entry.quantity);
-                }
-                this.form.markAsPristine();
-                if (!this.modalIsOpen) {
-                    this.modalIsOpen = true;
-                }
-            }
-        })));
         this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
+    }
+    /**
+     * @private
+     * @param {?} entry
+     * @return {?}
+     */
+    getFormControl(entry) {
+        if (!this.form.get('quantity')) {
+            /** @type {?} */
+            const quantity = new FormControl(entry.quantity, { updateOn: 'blur' });
+            this.form.addControl('quantity', quantity);
+            /** @type {?} */
+            const entryNumber = new FormControl(entry.entryNumber);
+            this.form.addControl('entryNumber', entryNumber);
+        }
+        return (/** @type {?} */ (this.form.get('quantity')));
     }
     /**
      * @param {?=} reason
@@ -9186,45 +9459,17 @@ class AddedToCartDialogComponent {
     dismissModal(reason) {
         this.modalService.dismissActiveModal(reason);
     }
-    /**
-     * @param {?} item
-     * @return {?}
-     */
-    removeEntry(item) {
-        this.cartService.removeEntry(item);
-        delete this.form.controls[item.product.code];
-        this.dismissModal('Removed');
-    }
-    /**
-     * @param {?} __0
-     * @return {?}
-     */
-    updateEntry({ item, updatedQuantity }) {
-        this.cartService.updateEntry(item.entryNumber, updatedQuantity);
-    }
-    /**
-     * @private
-     * @param {?} entry
-     * @return {?}
-     */
-    createEntryFormGroup(entry) {
-        return this.fb.group({
-            entryNumber: entry.entryNumber,
-            quantity: entry.quantity,
-        });
-    }
 }
 AddedToCartDialogComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-added-to-cart-dialog',
-                template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) || modalIsOpen; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart') | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [isReadOnly]=\"false\"\n            [parent]=\"form.controls[entry.product.code]\"\n            [cartIsLoading]=\"form.dirty\"\n            [promotionLocation]=\"promotionLocation\"\n            (remove)=\"removeEntry($event)\"\n            (update)=\"updateEntry($event)\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n\n            <div>{{ cart.subTotal?.formattedValue }}</div>\n          </div>\n\n          <!-- Promotions -->\n          <ng-container *cxFeatureLevel=\"'1.5'\">\n            <div\n              class=\"cx-dialog-promotions\"\n              *ngIf=\"orderPromotions$ | async as orderPromotions\"\n            >\n              <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n            </div>\n          </ng-container>\n\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              cxAutoFocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
+                template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) || modalIsOpen; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart') | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [quantityControl]=\"getQuantityControl() | async\"\n            [promotionLocation]=\"promotionLocation\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n\n            <div>{{ cart.subTotal?.formattedValue }}</div>\n          </div>\n\n          <!-- Promotions -->\n          <ng-container *cxFeatureLevel=\"'1.5'\">\n            <div\n              class=\"cx-dialog-promotions\"\n              *ngIf=\"orderPromotions$ | async as orderPromotions\"\n            >\n              <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n            </div>\n          </ng-container>\n\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              cxAutoFocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
             }] }
 ];
 /** @nocollapse */
 AddedToCartDialogComponent.ctorParameters = () => [
     { type: ModalService },
     { type: CartService },
-    { type: FormBuilder },
     { type: PromotionService }
 ];
 AddedToCartDialogComponent.propDecorators = {
@@ -9255,6 +9500,11 @@ if (false) {
     AddedToCartDialogComponent.prototype.form;
     /**
      * @type {?}
+     * @private
+     */
+    AddedToCartDialogComponent.prototype.quantityControl$;
+    /**
+     * @type {?}
      * @protected
      */
     AddedToCartDialogComponent.prototype.modalService;
@@ -9263,11 +9513,6 @@ if (false) {
      * @protected
      */
     AddedToCartDialogComponent.prototype.cartService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    AddedToCartDialogComponent.prototype.fb;
     /**
      * @type {?}
      * @protected
@@ -9295,6 +9540,9 @@ class AddToCartComponent {
         this.hasStock = false;
         this.quantity = 1;
         this.increment = false;
+        this.addToCartForm = new FormGroup({
+            quantity: new FormControl(1),
+        });
     }
     /**
      * @return {?}
@@ -9353,7 +9601,9 @@ class AddToCartComponent {
      * @return {?}
      */
     addToCart() {
-        if (!this.productCode || this.quantity <= 0) {
+        /** @type {?} */
+        const quantity = this.addToCartForm.get('quantity').value;
+        if (!this.productCode || quantity <= 0) {
             return;
         }
         // check item is already present in the cart
@@ -9369,7 +9619,7 @@ class AddToCartComponent {
                 this.increment = true;
             }
             this.openModal();
-            this.cartService.addEntry(this.productCode, this.quantity);
+            this.cartService.addEntry(this.productCode, quantity);
             this.increment = false;
         }))
             .unsubscribe();
@@ -9404,7 +9654,7 @@ class AddToCartComponent {
 AddToCartComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-add-to-cart',
-                template: "<div class=\"quantity\" *ngIf=\"productCode && showQuantity\">\n  <label>{{ 'addToCart.quantity' | cxTranslate }}</label>\n  <cx-item-counter\n    [value]=\"quantity\"\n    isValueChangeable=\"true\"\n    [min]=\"1\"\n    [max]=\"maxQuantity || null\"\n    *ngIf=\"hasStock\"\n    (update)=\"updateCount($event)\"\n  ></cx-item-counter>\n  <span class=\"info\">{{\n    hasStock\n      ? ('addToCart.inStock' | cxTranslate)\n      : ('addToCart.outOfStock' | cxTranslate)\n  }}</span>\n</div>\n<button\n  *ngIf=\"hasStock\"\n  class=\"btn btn-primary btn-block\"\n  type=\"button\"\n  [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  (click)=\"addToCart()\"\n>\n  {{ 'addToCart.addToCart' | cxTranslate }}\n</button>\n",
+                template: "<form *ngIf=\"productCode\" [formGroup]=\"addToCartForm\" (submit)=\"addToCart()\">\n  <div class=\"quantity\" *ngIf=\"showQuantity\">\n    <label>{{ 'addToCart.quantity' | cxTranslate }}</label>\n    <cx-item-counter\n      *ngIf=\"hasStock\"\n      [max]=\"maxQuantity\"\n      [control]=\"addToCartForm.get('quantity')\"\n    ></cx-item-counter>\n    <span class=\"info\">{{\n      hasStock\n        ? ('addToCart.inStock' | cxTranslate)\n        : ('addToCart.outOfStock' | cxTranslate)\n    }}</span>\n  </div>\n\n  <button\n    *ngIf=\"hasStock\"\n    class=\"btn btn-primary btn-block\"\n    type=\"submit\"\n    [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  >\n    {{ 'addToCart.addToCart' | cxTranslate }}\n  </button>\n</form>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -9445,6 +9695,8 @@ if (false) {
     AddToCartComponent.prototype.cartEntry$;
     /** @type {?} */
     AddToCartComponent.prototype.subscription;
+    /** @type {?} */
+    AddToCartComponent.prototype.addToCartForm;
     /**
      * @type {?}
      * @protected
@@ -9466,6 +9718,19 @@ if (false) {
      */
     AddToCartComponent.prototype.cd;
 }
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class AutoFocusDirectiveModule {
+}
+AutoFocusDirectiveModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [AutoFocusDirective],
+                exports: [AutoFocusDirective],
+            },] }
+];
 
 /**
  * @fileoverview added by tsickle
@@ -9903,66 +10168,30 @@ CartCouponModule.decorators = [
 class CartItemListComponent {
     /**
      * @param {?} cartService
-     * @param {?} fb
      * @param {?=} selectiveCartService
      * @param {?=} featureConfig
      */
-    constructor(cartService, fb, selectiveCartService, featureConfig) {
+    constructor(cartService, selectiveCartService, featureConfig) {
         this.cartService = cartService;
-        this.fb = fb;
         this.selectiveCartService = selectiveCartService;
         this.featureConfig = featureConfig;
-        this.isReadOnly = false;
+        this.readonly = false;
         this.hasHeader = true;
         this.options = {
             isSaveForLater: false,
             optionalBtn: null,
         };
+        this._items = [];
         this.potentialProductPromotions = [];
         this.promotionLocation = PromotionLocation.ActiveCart;
-        this.cartIsLoading = false;
-        this.form = this.fb.group({});
-        this._items = [];
     }
     /**
-     * @param {?} _items
+     * @param {?} items
      * @return {?}
      */
-    set items(_items) {
-        if (_items.every((/**
-         * @param {?} item
-         * @return {?}
-         */
-        item => item.hasOwnProperty('orderEntry')))) {
-            this._items = _items.map((/**
-             * @param {?} consignmentEntry
-             * @return {?}
-             */
-            consignmentEntry => {
-                /** @type {?} */
-                const entry = Object.assign({}, ((/** @type {?} */ (consignmentEntry))).orderEntry);
-                entry.quantity = consignmentEntry.quantity;
-                return entry;
-            }));
-        }
-        else {
-            this._items = _items;
-            this.items.forEach((/**
-             * @param {?} item
-             * @return {?}
-             */
-            item => {
-                const { code } = item.product;
-                if (!this.form.controls[code]) {
-                    this.form.setControl(code, this.createEntryFormGroup(item));
-                }
-                else {
-                    /** @type {?} */
-                    const entryForm = (/** @type {?} */ (this.form.controls[code]));
-                    entryForm.controls.quantity.setValue(item.quantity);
-                }
-            }));
-        }
+    set items(items) {
+        this.resolveItems(items);
+        this.createForm();
     }
     /**
      * @return {?}
@@ -9970,11 +10199,19 @@ class CartItemListComponent {
     get items() {
         return this._items;
     }
-    // TODO remove for 2.0 - left to keep backward compatibility
     /**
+     * @param {?} value
      * @return {?}
      */
-    ngOnInit() { }
+    set setLoading(value) {
+        if (!this.readonly) {
+            // Whenver the cart is loading, we disable the complete form
+            // to avoid any user interaction with the cart.
+            value
+                ? this.form.disable({ emitEvent: false })
+                : this.form.enable({ emitEvent: false });
+        }
+    }
     //TODO remove feature flag for #5958
     /**
      * @return {?}
@@ -9986,6 +10223,57 @@ class CartItemListComponent {
         return false;
     }
     //TODO remove feature flag for #5958
+    /**
+     * The items we're getting form the input do not have a consistent model.
+     * In case of a `consignmentEntry`, we need to normalize the data from the orderEntry.
+     * @private
+     * @param {?} items
+     * @return {?}
+     */
+    resolveItems(items) {
+        if (items.every((/**
+         * @param {?} item
+         * @return {?}
+         */
+        item => item.hasOwnProperty('orderEntry')))) {
+            this._items = items.map((/**
+             * @param {?} consignmentEntry
+             * @return {?}
+             */
+            consignmentEntry => {
+                /** @type {?} */
+                const entry = Object.assign({}, ((/** @type {?} */ (consignmentEntry))).orderEntry);
+                entry.quantity = consignmentEntry.quantity;
+                return entry;
+            }));
+        }
+        else {
+            this._items = items;
+        }
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    createForm() {
+        this.form = new FormGroup({});
+        this._items.forEach((/**
+         * @param {?} item
+         * @return {?}
+         */
+        item => {
+            const { code } = item.product;
+            /** @type {?} */
+            const group = new FormGroup({
+                entryNumber: new FormControl(((/** @type {?} */ (item))).entryNumber),
+                quantity: new FormControl(item.quantity, { updateOn: 'blur' }),
+            });
+            if (!item.updateable || this.readonly) {
+                group.disable();
+            }
+            this.form.addControl(code, group);
+        }));
+    }
     /**
      * @param {?} item
      * @return {?}
@@ -10000,22 +10288,24 @@ class CartItemListComponent {
         delete this.form.controls[item.product.code];
     }
     /**
-     * @param {?} __0
+     * @param {?} item
      * @return {?}
      */
-    updateEntry({ item, updatedQuantity, }) {
-        this.cartService.updateEntry(item.entryNumber, updatedQuantity);
-    }
-    /**
-     * @private
-     * @param {?} entry
-     * @return {?}
-     */
-    createEntryFormGroup(entry) {
-        return this.fb.group({
-            entryNumber: entry.entryNumber,
-            quantity: entry.quantity,
-        });
+    getControl(item) {
+        return this.form.get(item.product.code).valueChanges.pipe(
+        // tslint:disable-next-line:deprecation
+        startWith(null), map((/**
+         * @param {?} value
+         * @return {?}
+         */
+        value => {
+            if (value) {
+                this.cartService.updateEntry(value.entryNumber, value.quantity);
+            }
+        })), map((/**
+         * @return {?}
+         */
+        () => (/** @type {?} */ (this.form.get(item.product.code))))));
     }
     /**
      * @param {?} item
@@ -10069,55 +10359,48 @@ class CartItemListComponent {
 CartItemListComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-cart-item-list',
-                template: "<div *ngIf=\"hasHeader\" class=\"d-none d-md-block d-lg-block d-xl-block\">\n  <div class=\"cx-item-list-header row\">\n    <div class=\"cx-item-list-desc col-md-5 col-lg-5 col-xl-6\">\n      {{ 'cartItems.description' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-price col-md-3 col-lg-2 col-xl-2\">\n      {{ 'cartItems.itemPrice' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-qty col-md-2 col-lg-3 col-xl-2\">\n      {{ 'cartItems.quantity' | cxTranslate }}\n    </div>\n\n    <ng-container\n      *ngIf=\"\n        isSaveForLaterEnabled() && options.isSaveForLater;\n        else totalHeader\n      \"\n    >\n      <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n        {{ 'saveForLaterItems.stock' | cxTranslate }}\n      </div>\n    </ng-container>\n  </div>\n</div>\n\n<div [formGroup]=\"form\">\n  <div class=\"cx-item-list-row\" *ngFor=\"let item of items\">\n    <div class=\"cx-item-list-items\">\n      <ng-container *cxFeatureLevel=\"'!1.5'\">\n        <cx-cart-item\n          [parent]=\"form.controls[item.product.code]\"\n          [item]=\"item\"\n          [isReadOnly]=\"isReadOnly\"\n          [potentialProductPromotions]=\"\n            getPotentialProductPromotionsForItem(item)\n          \"\n          [cartIsLoading]=\"cartIsLoading\"\n          (remove)=\"removeEntry($event)\"\n          (update)=\"updateEntry($event)\"\n        >\n        </cx-cart-item>\n      </ng-container>\n\n      <ng-container *cxFeatureLevel=\"'1.5'\">\n        <cx-cart-item\n          [parent]=\"form.controls[item.product.code]\"\n          [item]=\"item\"\n          [isReadOnly]=\"isReadOnly\"\n          [promotionLocation]=\"promotionLocation\"\n          [cartIsLoading]=\"cartIsLoading\"\n          (remove)=\"removeEntry($event)\"\n          (update)=\"updateEntry($event)\"\n          [options]=\"options\"\n        >\n        </cx-cart-item>\n      </ng-container>\n    </div>\n  </div>\n</div>\n\n<ng-template #totalHeader>\n  <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n    {{ 'cartItems.total' | cxTranslate }}\n  </div>\n</ng-template>\n"
+                template: "<div *ngIf=\"hasHeader\" class=\"d-none d-md-block d-lg-block d-xl-block\">\n  <div class=\"cx-item-list-header row\">\n    <div class=\"cx-item-list-desc col-md-5 col-lg-5 col-xl-6\">\n      {{ 'cartItems.description' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-price col-md-3 col-lg-2 col-xl-2\">\n      {{ 'cartItems.itemPrice' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-qty col-md-2 col-lg-3 col-xl-2\">\n      {{ 'cartItems.quantity' | cxTranslate }}\n    </div>\n\n    <ng-container\n      *ngIf=\"\n        isSaveForLaterEnabled() && options.isSaveForLater;\n        else totalHeader\n      \"\n    >\n      <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n        {{ 'saveForLaterItems.stock' | cxTranslate }}\n      </div>\n    </ng-container>\n  </div>\n</div>\n\n<div class=\"cx-item-list-row\" *ngFor=\"let item of items; let i = index\">\n  <div\n    class=\"cx-item-list-items\"\n    *ngIf=\"getControl(item) | async as control\"\n    [class.is-changed]=\"control.get('quantity').dirty\"\n  >\n    <cx-cart-item\n      [item]=\"item\"\n      [quantityControl]=\"control.get('quantity')\"\n      [readonly]=\"readonly\"\n      [potentialProductPromotions]=\"getPotentialProductPromotionsForItem(item)\"\n      [promotionLocation]=\"promotionLocation\"\n      [options]=\"options\"\n    >\n    </cx-cart-item>\n  </div>\n</div>\n\n<ng-template #totalHeader>\n  <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n    {{ 'cartItems.total' | cxTranslate }}\n  </div>\n</ng-template>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
 /** @nocollapse */
 CartItemListComponent.ctorParameters = () => [
     { type: CartService },
-    { type: FormBuilder },
     { type: SelectiveCartService },
     { type: FeatureConfigService }
 ];
 CartItemListComponent.propDecorators = {
-    isReadOnly: [{ type: Input }],
+    readonly: [{ type: Input }],
     hasHeader: [{ type: Input }],
     options: [{ type: Input }],
+    items: [{ type: Input, args: ['items',] }],
     potentialProductPromotions: [{ type: Input }],
     promotionLocation: [{ type: Input }],
-    items: [{ type: Input }],
-    cartIsLoading: [{ type: Input }]
+    setLoading: [{ type: Input, args: ['cartIsLoading',] }]
 };
 if (false) {
     /** @type {?} */
-    CartItemListComponent.prototype.isReadOnly;
+    CartItemListComponent.prototype.readonly;
     /** @type {?} */
     CartItemListComponent.prototype.hasHeader;
     /** @type {?} */
     CartItemListComponent.prototype.options;
-    /** @type {?} */
-    CartItemListComponent.prototype.potentialProductPromotions;
-    /** @type {?} */
-    CartItemListComponent.prototype.promotionLocation;
-    /** @type {?} */
-    CartItemListComponent.prototype.cartIsLoading;
-    /** @type {?} */
-    CartItemListComponent.prototype.form;
     /**
      * @type {?}
      * @private
      */
     CartItemListComponent.prototype._items;
+    /** @type {?} */
+    CartItemListComponent.prototype.form;
+    /** @type {?} */
+    CartItemListComponent.prototype.potentialProductPromotions;
+    /** @type {?} */
+    CartItemListComponent.prototype.promotionLocation;
     /**
      * @type {?}
      * @protected
      */
     CartItemListComponent.prototype.cartService;
-    /**
-     * @type {?}
-     * @protected
-     */
-    CartItemListComponent.prototype.fb;
     /**
      * @type {?}
      * @protected
@@ -10169,16 +10452,14 @@ class CartItemComponent {
         this.promotionService = promotionService;
         this.featureConfig = featureConfig;
         this.compact = false;
-        this.isReadOnly = false;
-        this.cartIsLoading = false;
+        this.readonly = false;
+        this.view = new EventEmitter();
+        this.promotionLocation = PromotionLocation.ActiveCart;
+        // TODO: evaluate whether this is generic enough
         this.options = {
             isSaveForLater: false,
             optionalBtn: null,
         };
-        this.promotionLocation = PromotionLocation.ActiveCart;
-        this.remove = new EventEmitter();
-        this.update = new EventEmitter();
-        this.view = new EventEmitter();
     }
     /**
      * @return {?}
@@ -10208,17 +10489,11 @@ class CartItemComponent {
             product.stock.stockLevelStatus === 'outOfStock');
     }
     /**
-     * @param {?} updatedQuantity
-     * @return {?}
-     */
-    updateItem(updatedQuantity) {
-        this.update.emit({ item: this.item, updatedQuantity });
-    }
-    /**
      * @return {?}
      */
     removeItem() {
-        this.remove.emit(this.item);
+        this.quantityControl.setValue(0);
+        this.quantityControl.markAsDirty();
     }
     /**
      * @return {?}
@@ -10230,7 +10505,7 @@ class CartItemComponent {
 CartItemComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-cart-item',
-                template: "<div [ngClass]=\"compact ? 'cx-compact row' : 'row'\">\n  <!-- Item Image -->\n  <div class=\"col-2 cx-image-container\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n      (click)=\"viewItem()\"\n    >\n      <cx-media\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-5'\">\n        <div *ngIf=\"item.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n            (click)=\"viewItem()\"\n            >{{ item.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"item.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n        </div>\n        <!-- Variants -->\n        <ng-container *cxFeatureLevel=\"'!1.5'\">\n          <div\n            *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\">{{ variant.name }}</div>\n            <div class=\"cx-value\">{{ variant.value }}</div>\n          </div>\n        </ng-container>\n        <ng-container *cxFeatureLevel=\"'1.5'\">\n          <ng-container *ngIf=\"item.product.baseOptions?.length\">\n            <div\n              *ngFor=\"\n                let variant of item.product.baseOptions[0]?.selected\n                  ?.variantOptionQualifiers\n              \"\n              class=\"cx-property\"\n            >\n              <div class=\"cx-label\" *ngIf=\"variant.name && variant.value\">\n                {{ variant.name }}: {{ variant.value }}\n              </div>\n            </div>\n          </ng-container>\n        </ng-container>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"item.basePrice\"\n        class=\"cx-price\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n          {{ item.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <div class=\"cx-quantity\" [ngClass]=\"compact ? '' : ' col-3'\">\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          placement=\"left\"\n          title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n\n        <div *ngIf=\"isReadOnly\" class=\"cx-value\">\n          {{ item.quantity }}\n        </div>\n        <div\n          *ngIf=\"!isReadOnly && parent\"\n          class=\"cx-value\"\n          [formGroup]=\"parent\"\n        >\n          <cx-item-counter\n            [isValueChangeable]=\"item.updateable\"\n            [step]=\"1\"\n            [min]=\"1\"\n            [max]=\"item.product.stock?.stockLevel || 1000\"\n            (update)=\"updateItem($event)\"\n            [cartIsLoading]=\"cartIsLoading\"\n            formControlName=\"quantity\"\n          >\n          </cx-item-counter>\n        </div>\n      </div>\n      <!-- Total -->\n      <ng-container\n        *ngIf=\"isSaveForLaterEnabled() && options.isSaveForLater; else total\"\n      >\n        <div\n          class=\"cx-total\"\n          [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n        >\n          <div\n            class=\"cx-label\"\n            [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          >\n            {{ 'saveForLaterItems.stock' | cxTranslate }}\n          </div>\n          <div\n            *ngIf=\"item.product?.stock?.stockLevel >= 0; else forceInstock\"\n            class=\"cx-value\"\n          >\n            {{ item.product.stock.stockLevel }}\n          </div>\n          <ng-template #forceInstock\n            ><div class=\"cx-value\">\n              {{ 'saveForLaterItems.forceInStock' | cxTranslate }}\n            </div></ng-template\n          >\n        </div>\n      </ng-container>\n    </div>\n    <!-- Availability -->\n    <div\n      *ngIf=\"isProductOutOfStock(item.product)\"\n      class=\"cx-availability col-12\"\n    >\n      {{ 'productSummary.outOfStock' | cxTranslate }}\n    </div>\n    <!-- Promotion -->\n    <ng-container *cxFeatureLevel=\"'!1.5'\">\n      <cx-promotions [promotions]=\"potentialProductPromotions\"></cx-promotions>\n    </ng-container>\n\n    <ng-container *cxFeatureLevel=\"'1.5'\">\n      <ng-container\n        *ngIf=\"appliedProductPromotions$ | async as appliedProductPromotions\"\n      >\n        <cx-promotions [promotions]=\"appliedProductPromotions\"></cx-promotions>\n      </ng-container>\n    </ng-container>\n    <!-- Actions -->\n\n    <div\n      *ngIf=\"(!isReadOnly || options.isSaveForLater) && item.updateable\"\n      class=\"cx-actions col-12\"\n    >\n      <ng-container *ngIf=\"!isProductOutOfStock(item.product)\">\n        <ng-container\n          *ngTemplateOutlet=\"\n            options.optionalBtn;\n            context: { $implicit: { loading: cartIsLoading, item: item } }\n          \"\n        ></ng-container>\n      </ng-container>\n\n      <div class=\"col-md-3 col-lg-3 col-xl-3 cx-remove-btn\">\n        <button class=\"link\" [disabled]=\"cartIsLoading\" (click)=\"removeItem()\">\n          {{ 'common.remove' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n\n<ng-template #total>\n  <div\n    *ngIf=\"item.totalPrice\"\n    class=\"cx-total\"\n    [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n  >\n    <div\n      class=\"cx-label\"\n      [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n    >\n      {{ 'cartItems.total' | cxTranslate }}\n    </div>\n    <div class=\"cx-value\">{{ item.totalPrice.formattedValue }}</div>\n  </div>\n</ng-template>\n"
+                template: "<div [ngClass]=\"compact ? 'cx-compact row' : 'row'\">\n  <!-- Item Image -->\n  <div class=\"col-2 cx-image-container\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n      (click)=\"viewItem()\"\n    >\n      <cx-media\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-5'\">\n        <div *ngIf=\"item.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n            (click)=\"viewItem()\"\n            >{{ item.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"item.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n        </div>\n        <!-- Variants -->\n        <ng-container *cxFeatureLevel=\"'!1.5'\">\n          <div\n            *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\">{{ variant.name }}</div>\n            <div class=\"cx-value\">{{ variant.value }}</div>\n          </div>\n        </ng-container>\n        <ng-container *cxFeatureLevel=\"'1.5'\">\n          <ng-container *ngIf=\"item.product.baseOptions?.length\">\n            <div\n              *ngFor=\"\n                let variant of item.product.baseOptions[0]?.selected\n                  ?.variantOptionQualifiers\n              \"\n              class=\"cx-property\"\n            >\n              <div class=\"cx-label\" *ngIf=\"variant.name && variant.value\">\n                {{ variant.name }}: {{ variant.value }}\n              </div>\n            </div>\n          </ng-container>\n        </ng-container>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"item.basePrice\"\n        class=\"cx-price\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n          {{ item.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <div class=\"cx-quantity\" [ngClass]=\"compact ? '' : ' col-3'\">\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          placement=\"left\"\n          title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n        <div class=\"cx-value\">\n          <cx-item-counter\n            [control]=\"quantityControl\"\n            [readonly]=\"!item.updateable || readonly\"\n            [max]=\"item.product.stock?.stockLevel || 1000\"\n            [allowZero]=\"true\"\n          >\n          </cx-item-counter>\n        </div>\n      </div>\n      <!-- Total -->\n      <ng-container\n        *ngIf=\"isSaveForLaterEnabled() && options.isSaveForLater; else total\"\n      >\n        <div\n          class=\"cx-total\"\n          [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n        >\n          <div\n            class=\"cx-label\"\n            [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          >\n            {{ 'saveForLaterItems.stock' | cxTranslate }}\n          </div>\n          <div\n            *ngIf=\"item.product?.stock?.stockLevel >= 0; else forceInstock\"\n            class=\"cx-value\"\n          >\n            {{ item.product.stock.stockLevel }}\n          </div>\n          <ng-template #forceInstock\n            ><div class=\"cx-value\">\n              {{ 'saveForLaterItems.forceInStock' | cxTranslate }}\n            </div></ng-template\n          >\n        </div>\n      </ng-container>\n    </div>\n    <!-- Availability -->\n    <div\n      *ngIf=\"isProductOutOfStock(item.product)\"\n      class=\"cx-availability col-12\"\n    >\n      {{ 'productSummary.outOfStock' | cxTranslate }}\n    </div>\n    <!-- Promotion -->\n    <ng-container *cxFeatureLevel=\"'!1.5'\">\n      <cx-promotions [promotions]=\"potentialProductPromotions\"></cx-promotions>\n    </ng-container>\n\n    <ng-container *cxFeatureLevel=\"'1.5'\">\n      <ng-container\n        *ngIf=\"appliedProductPromotions$ | async as appliedProductPromotions\"\n      >\n        <cx-promotions [promotions]=\"appliedProductPromotions\"></cx-promotions>\n      </ng-container>\n    </ng-container>\n\n    <!-- Actions -->\n    <div\n      *ngIf=\"(!readonly || options.isSaveForLater) && item.updateable\"\n      class=\"cx-actions col-12\"\n    >\n      <ng-container *ngIf=\"!isProductOutOfStock(item.product)\">\n        <ng-container\n          *ngTemplateOutlet=\"\n            options.optionalBtn;\n            context: {\n              $implicit: { loading: quantityControl.disabled, item: item }\n            }\n          \"\n        ></ng-container>\n      </ng-container>\n\n      <div class=\"col-md-3 cx-remove-btn\">\n        <button\n          class=\"link\"\n          [disabled]=\"quantityControl.disabled\"\n          (click)=\"removeItem()\"\n        >\n          {{ 'common.remove' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n\n<ng-template #total>\n  <div\n    *ngIf=\"item.totalPrice\"\n    class=\"cx-total\"\n    [ngClass]=\"compact ? '' : ' col-md-3 col-xl-2'\"\n  >\n    <div\n      class=\"cx-label\"\n      [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n    >\n      {{ 'cartItems.total' | cxTranslate }}\n    </div>\n    <div class=\"cx-value\">{{ item.totalPrice.formattedValue }}</div>\n  </div>\n</ng-template>\n"
             }] }
 ];
 /** @nocollapse */
@@ -10241,15 +10516,12 @@ CartItemComponent.ctorParameters = () => [
 CartItemComponent.propDecorators = {
     compact: [{ type: Input }],
     item: [{ type: Input }],
-    isReadOnly: [{ type: Input }],
-    cartIsLoading: [{ type: Input }],
-    options: [{ type: Input }],
-    promotionLocation: [{ type: Input }],
     potentialProductPromotions: [{ type: Input }],
-    remove: [{ type: Output }],
-    update: [{ type: Output }],
+    readonly: [{ type: Input }],
+    quantityControl: [{ type: Input }],
     view: [{ type: Output }],
-    parent: [{ type: Input }]
+    promotionLocation: [{ type: Input }],
+    options: [{ type: Input }]
 };
 if (false) {
     /** @type {?} */
@@ -10257,23 +10529,17 @@ if (false) {
     /** @type {?} */
     CartItemComponent.prototype.item;
     /** @type {?} */
-    CartItemComponent.prototype.isReadOnly;
-    /** @type {?} */
-    CartItemComponent.prototype.cartIsLoading;
-    /** @type {?} */
-    CartItemComponent.prototype.options;
-    /** @type {?} */
-    CartItemComponent.prototype.promotionLocation;
-    /** @type {?} */
     CartItemComponent.prototype.potentialProductPromotions;
     /** @type {?} */
-    CartItemComponent.prototype.remove;
+    CartItemComponent.prototype.readonly;
     /** @type {?} */
-    CartItemComponent.prototype.update;
+    CartItemComponent.prototype.quantityControl;
     /** @type {?} */
     CartItemComponent.prototype.view;
     /** @type {?} */
-    CartItemComponent.prototype.parent;
+    CartItemComponent.prototype.promotionLocation;
+    /** @type {?} */
+    CartItemComponent.prototype.options;
     /** @type {?} */
     CartItemComponent.prototype.appliedProductPromotions$;
     /**
@@ -10347,8 +10613,9 @@ class AddToCartModule {
 AddToCartModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
-                    CartSharedModule,
                     CommonModule,
+                    ReactiveFormsModule,
+                    CartSharedModule,
                     RouterModule,
                     SpinnerModule,
                     PromotionsModule,
@@ -11121,7 +11388,7 @@ class SaveForLaterComponent {
 SaveForLaterComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-save-for-later',
-                template: "<ng-container *ngIf=\"isCartEmpty$ | async\">\n  <p\n    *ngIf=\"data$ | async as data\"\n    [innerHTML]=\"data.content\"\n    class=\"cx-empty-cart-info\"\n  ></p>\n</ng-container>\n\n<ng-container *ngIf=\"saveForLater$ | async as saveForLater\">\n  <ng-container *ngIf=\"entries$ | async as entries\">\n    <div *ngIf=\"saveForLater.totalItems > 0\" class=\"cart-details-wrapper\">\n      <div class=\"cx-total\">\n        {{\n          'saveForLaterItems.itemTotal'\n            | cxTranslate: { count: saveForLater.totalItems }\n        }}\n      </div>\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [isReadOnly]=\"true\"\n        [cartIsLoading]=\"!(cartLoaded$ | async)\"\n        [options]=\"{\n          isSaveForLater: true,\n          optionalBtn: moveToCartBtn\n        }\"\n      ></cx-cart-item-list>\n    </div>\n  </ng-container>\n</ng-container>\n\n<ng-template let-ctx #moveToCartBtn>\n  <div class=\"col-md-3 col-lg-3 col-xl-3 cx-sfl-btn\">\n    <button\n      class=\"link\"\n      [disabled]=\"ctx.loading\"\n      (click)=\"moveToCart(ctx.item)\"\n    >\n      {{ 'saveForLaterItems.moveToCart' | cxTranslate }}\n    </button>\n  </div>\n</ng-template>\n"
+                template: "<ng-container *ngIf=\"isCartEmpty$ | async\">\n  <p\n    *ngIf=\"data$ | async as data\"\n    [innerHTML]=\"data.content\"\n    class=\"cx-empty-cart-info\"\n  ></p>\n</ng-container>\n\n<ng-container *ngIf=\"saveForLater$ | async as saveForLater\">\n  <ng-container *ngIf=\"entries$ | async as entries\">\n    <div *ngIf=\"saveForLater.totalItems > 0\" class=\"cart-details-wrapper\">\n      <div class=\"cx-total\">\n        {{\n          'saveForLaterItems.itemTotal'\n            | cxTranslate: { count: saveForLater.totalItems }\n        }}\n      </div>\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [readonly]=\"true\"\n        [cartIsLoading]=\"!(cartLoaded$ | async)\"\n        [options]=\"{\n          isSaveForLater: true,\n          optionalBtn: moveToCartBtn\n        }\"\n      ></cx-cart-item-list>\n    </div>\n  </ng-container>\n</ng-container>\n\n<ng-template let-ctx #moveToCartBtn>\n  <div class=\"col-md-3 col-lg-3 col-xl-3 cx-sfl-btn\">\n    <button\n      class=\"link\"\n      [disabled]=\"ctx.loading\"\n      (click)=\"moveToCart(ctx.item)\"\n    >\n      {{ 'saveForLaterItems.moveToCart' | cxTranslate }}\n    </button>\n  </div>\n</ng-template>\n"
             }] }
 ];
 /** @nocollapse */
@@ -14277,7 +14544,7 @@ class ReviewSubmitComponent {
 ReviewSubmitComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-review-submit',
-                template: "<div class=\"cx-review\">\n  <!-- TITLE -->\n  <h3 class=\"cx-review-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutReview.review' | cxTranslate }}\n  </h3>\n  <div class=\"cx-review-summary row\">\n    <!-- SHIPPING ADDRESS SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-wrapper\">\n        <div class=\"cx-review-summary-card cx-review-card-address\">\n          <cx-card\n            [content]=\"\n              getShippingAddressCard(\n                deliveryAddress$ | async,\n                countryName$ | async\n              ) | async\n            \"\n          ></cx-card>\n        </div>\n        <div *cxFeatureLevel=\"'1.1'\" class=\"cx-review-summary-edit-step\">\n          <a\n            [routerLink]=\"\n              {\n                cxRoute: getCheckoutStepUrl(checkoutStepType.SHIPPING_ADDRESS)\n              } | cxUrl\n            \"\n            >{{ 'checkoutReview.editShippingAddress' | cxTranslate }}</a\n          >\n        </div>\n      </div>\n    </div>\n\n    <!-- DELIVERY MODE SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-wrapper\">\n        <div class=\"cx-review-summary-card cx-review-card-shipping\">\n          <cx-card\n            *ngIf=\"deliveryMode$ | async as deliveryMode\"\n            [content]=\"getDeliveryModeCard(deliveryMode) | async\"\n          ></cx-card>\n        </div>\n        <div *cxFeatureLevel=\"'1.1'\" class=\"cx-review-summary-edit-step\">\n          <a\n            [routerLink]=\"\n              { cxRoute: getCheckoutStepUrl(checkoutStepType.DELIVERY_MODE) }\n                | cxUrl\n            \"\n            >{{ 'checkoutReview.editShippingMethod' | cxTranslate }}</a\n          >\n        </div>\n      </div>\n    </div>\n\n    <!-- PAYMENT METHOD SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-wrapper\">\n        <div class=\"cx-review-summary-card cx-review-card-payment\">\n          <cx-card\n            [content]=\"getPaymentMethodCard(paymentDetails$ | async) | async\"\n          ></cx-card>\n        </div>\n        <div *cxFeatureLevel=\"'1.1'\" class=\"cx-review-summary-edit-step\">\n          <a\n            [routerLink]=\"\n              { cxRoute: getCheckoutStepUrl(checkoutStepType.PAYMENT_DETAILS) }\n                | cxUrl\n            \"\n            >{{ 'checkoutReview.editPaymentMethod' | cxTranslate }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <!-- CART ITEM SECTION -->\n  <ng-container *ngIf=\"cart$ | async as cart\">\n    <div class=\"cx-review-cart-total d-none d-lg-block d-xl-block\">\n      {{\n        'cartItems.cartTotal'\n          | cxTranslate: { count: cart.deliveryItemsQuantity }\n      }}:\n      {{ cart.totalPrice?.formattedValue }}\n    </div>\n    <h4 class=\"cx-review-cart-heading d-block d-lg-none d-xl-none\">\n      {{ 'checkoutReview.placeOrder' | cxTranslate }}\n    </h4>\n    <div\n      class=\"cx-review-cart-item col-md-12\"\n      *ngIf=\"entries$ | async as entries\"\n    >\n      <ng-container *cxFeatureLevel=\"'!1.5'\">\n        <cx-cart-item-list\n          [items]=\"entries\"\n          [isReadOnly]=\"true\"\n          [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n        ></cx-cart-item-list>\n      </ng-container>\n\n      <ng-container *cxFeatureLevel=\"'1.5'\">\n        <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n          <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n        </ng-container>\n\n        <cx-cart-item-list\n          [items]=\"entries\"\n          [isReadOnly]=\"true\"\n          [promotionLocation]=\"promotionLocation\"\n        ></cx-cart-item-list>\n      </ng-container>\n    </div>\n  </ng-container>\n</div>\n",
+                template: "<div class=\"cx-review\">\n  <!-- TITLE -->\n  <h3 class=\"cx-review-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutReview.review' | cxTranslate }}\n  </h3>\n  <div class=\"cx-review-summary row\">\n    <!-- SHIPPING ADDRESS SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-wrapper\">\n        <div class=\"cx-review-summary-card cx-review-card-address\">\n          <cx-card\n            [content]=\"\n              getShippingAddressCard(\n                deliveryAddress$ | async,\n                countryName$ | async\n              ) | async\n            \"\n          ></cx-card>\n        </div>\n        <div *cxFeatureLevel=\"'1.1'\" class=\"cx-review-summary-edit-step\">\n          <a\n            [routerLink]=\"\n              {\n                cxRoute: getCheckoutStepUrl(checkoutStepType.SHIPPING_ADDRESS)\n              } | cxUrl\n            \"\n            >{{ 'checkoutReview.editShippingAddress' | cxTranslate }}</a\n          >\n        </div>\n      </div>\n    </div>\n\n    <!-- DELIVERY MODE SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-wrapper\">\n        <div class=\"cx-review-summary-card cx-review-card-shipping\">\n          <cx-card\n            *ngIf=\"deliveryMode$ | async as deliveryMode\"\n            [content]=\"getDeliveryModeCard(deliveryMode) | async\"\n          ></cx-card>\n        </div>\n        <div *cxFeatureLevel=\"'1.1'\" class=\"cx-review-summary-edit-step\">\n          <a\n            [routerLink]=\"\n              { cxRoute: getCheckoutStepUrl(checkoutStepType.DELIVERY_MODE) }\n                | cxUrl\n            \"\n            >{{ 'checkoutReview.editShippingMethod' | cxTranslate }}</a\n          >\n        </div>\n      </div>\n    </div>\n\n    <!-- PAYMENT METHOD SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-wrapper\">\n        <div class=\"cx-review-summary-card cx-review-card-payment\">\n          <cx-card\n            [content]=\"getPaymentMethodCard(paymentDetails$ | async) | async\"\n          ></cx-card>\n        </div>\n        <div *cxFeatureLevel=\"'1.1'\" class=\"cx-review-summary-edit-step\">\n          <a\n            [routerLink]=\"\n              { cxRoute: getCheckoutStepUrl(checkoutStepType.PAYMENT_DETAILS) }\n                | cxUrl\n            \"\n            >{{ 'checkoutReview.editPaymentMethod' | cxTranslate }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <!-- CART ITEM SECTION -->\n  <ng-container *ngIf=\"cart$ | async as cart\">\n    <div class=\"cx-review-cart-total d-none d-lg-block d-xl-block\">\n      {{\n        'cartItems.cartTotal'\n          | cxTranslate: { count: cart.deliveryItemsQuantity }\n      }}:\n      {{ cart.totalPrice?.formattedValue }}\n    </div>\n    <h4 class=\"cx-review-cart-heading d-block d-lg-none d-xl-none\">\n      {{ 'checkoutReview.placeOrder' | cxTranslate }}\n    </h4>\n    <div\n      class=\"cx-review-cart-item col-md-12\"\n      *ngIf=\"entries$ | async as entries\"\n    >\n      <ng-container *cxFeatureLevel=\"'!1.5'\">\n        <cx-cart-item-list\n          [items]=\"entries\"\n          [readonly]=\"true\"\n          [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n        ></cx-cart-item-list>\n      </ng-container>\n\n      <ng-container *cxFeatureLevel=\"'1.5'\">\n        <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n          <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n        </ng-container>\n\n        <cx-cart-item-list\n          [items]=\"entries\"\n          [readonly]=\"true\"\n          [promotionLocation]=\"promotionLocation\"\n        ></cx-cart-item-list>\n      </ng-container>\n    </div>\n  </ng-container>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -17538,7 +17805,12 @@ class CancelOrReturnItemsComponent {
      * @return {?}
      */
     getControl(form, entry) {
-        return (/** @type {?} */ (form.get('entries').get(entry.entryNumber.toString())));
+        /** @type {?} */
+        const control = (/** @type {?} */ ((form.get('entries').get(entry.entryNumber.toString()))));
+        if (this.isConfirmation) {
+            control.disable();
+        }
+        return control;
     }
     /**
      * @param {?} form
@@ -17575,7 +17847,7 @@ class CancelOrReturnItemsComponent {
 CancelOrReturnItemsComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-amend-order-items',
-                template: "<div *ngIf=\"form$ | async as form\">\n  <button\n    *ngIf=\"!isConfirmation\"\n    class=\"btn btn-link cx-action-link\"\n    (click)=\"setAll(form)\"\n  >\n    {{ 'orderDetails.cancellationAndReturn.setAll' | cxTranslate }}\n  </button>\n\n  <div class=\"d-none d-md-block\">\n    <div class=\"cx-item-list-header row\">\n      <div class=\"cx-item-list-desc col-md-5 col-xl-6\">\n        {{ 'orderDetails.cancellationAndReturn.item' | cxTranslate }}\n      </div>\n      <div class=\"cx-item-list-price col-2\">\n        {{ 'orderDetails.cancellationAndReturn.itemPrice' | cxTranslate }}\n      </div>\n      <div *ngIf=\"!isConfirmation\" class=\"cx-item-list-qty col-md-3 col-xl-2\">\n        {{ 'orderDetails.cancellationAndReturn.quantity' | cxTranslate }}\n      </div>\n      <div class=\"cx-item-list-qty col-2\">\n        {{\n          (isCancellation()\n            ? 'orderDetails.cancellationAndReturn.cancelQty'\n            : 'orderDetails.cancellationAndReturn.returnQty') | cxTranslate\n        }}\n      </div>\n      <div *ngIf=\"isConfirmation\" class=\"cx-item-list-total col-md-3  col-xl-2\">\n        {{ 'orderDetails.cancellationAndReturn.totalPrice' | cxTranslate }}\n      </div>\n    </div>\n  </div>\n\n  <div class=\"cx-item-list-row\" *ngFor=\"let item of entries; let i = index\">\n    <div class=\"row cx-item-list-items\">\n      <!-- Item Image -->\n      <cx-media\n        class=\"col-2 cx-image-container\"\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n\n      <!-- Item Information -->\n      <div class=\"cx-info col-10\">\n        <div class=\"cx-info-container row\">\n          <!-- Item Description -->\n          <div class=\"col-md-3 col-xl-5\">\n            <div *ngIf=\"item.product.name\" class=\"cx-name\">\n              {{ item.product.name }}\n            </div>\n            <div *ngIf=\"item.product.code\" class=\"cx-code\">\n              {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n            </div>\n            <!-- Variants -->\n            <ng-container *cxFeatureLevel=\"'!1.5'\">\n              <div\n                *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n                class=\"cx-property\"\n              >\n                <div class=\"cx-label\">{{ variant.name }}</div>\n                <div class=\"cx-value\">{{ variant.value }}</div>\n              </div>\n            </ng-container>\n            <ng-container *cxFeatureLevel=\"'1.5'\">\n              <ng-container *ngIf=\"item.product.baseOptions?.length\">\n                <div\n                  *ngFor=\"\n                    let variant of item.product.baseOptions[0]?.selected\n                      ?.variantOptionQualifiers\n                  \"\n                  class=\"cx-property\"\n                >\n                  <div class=\"cx-label\" *ngIf=\"variant.name\">\n                    {{ variant.name }}:\n                  </div>\n                  <div class=\"cx-value\" *ngIf=\"variant.value\">\n                    {{ variant.value }}\n                  </div>\n                </div>\n              </ng-container>\n            </ng-container>\n          </div>\n          <!-- Price -->\n          <div\n            *ngIf=\"item.basePrice\"\n            class=\"cx-price col-md-3 col-lg-3 col-xl-2\"\n          >\n            <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n              {{ 'orderDetails.cancellationAndReturn.itemPrice' | cxTranslate }}\n            </div>\n            <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n              {{ item.basePrice?.formattedValue }}\n            </div>\n          </div>\n          <!-- item Quantity -->\n          <div *ngIf=\"!isConfirmation\" class=\"cx-request-qty col-md-3\">\n            <div\n              class=\"cx-label d-block d-md-none d-lg-none d-xl-none\"\n              placement=\"left\"\n              title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n            >\n              {{ 'orderDetails.cancellationAndReturn.quantity' | cxTranslate }}\n            </div>\n            <div class=\"cx-value\">\n              {{ getMaxAmendQuantity(item) }}\n            </div>\n          </div>\n          <!-- Amended Quantity -->\n          <div class=\"cx-quantity col-md-3 col-xl-2\">\n            <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n              {{\n                (isCancellation()\n                  ? 'orderDetails.cancellationAndReturn.cancelQty'\n                  : 'orderDetails.cancellationAndReturn.returnQty')\n                  | cxTranslate\n              }}\n            </div>\n\n            <cx-item-counter\n              [min]=\"0\"\n              [max]=\"getMaxAmendQuantity(item)\"\n              [isValueChangeable]=\"!isConfirmation\"\n              [formControl]=\"getControl(form, item)\"\n            >\n            </cx-item-counter>\n          </div>\n          <!-- Total Price -->\n          <div *ngIf=\"isConfirmation\" class=\"cx-total col-3\">\n            <div class=\"cx-label d-block d-md-none\">\n              {{\n                'orderDetails.cancellationAndReturn.totalPrice' | cxTranslate\n              }}\n            </div>\n            <div class=\"cx-value\">\n              {{ getItemPrice(item)?.formattedValue }}\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                template: "<div *ngIf=\"form$ | async as form\">\n  <button\n    *ngIf=\"!isConfirmation\"\n    class=\"btn btn-link cx-action-link\"\n    (click)=\"setAll(form)\"\n  >\n    {{ 'orderDetails.cancellationAndReturn.setAll' | cxTranslate }}\n  </button>\n\n  <div class=\"d-none d-md-block\">\n    <div class=\"cx-item-list-header row\">\n      <div class=\"cx-item-list-desc col-md-5 col-xl-6\">\n        {{ 'orderDetails.cancellationAndReturn.item' | cxTranslate }}\n      </div>\n      <div class=\"cx-item-list-price col-2\">\n        {{ 'orderDetails.cancellationAndReturn.itemPrice' | cxTranslate }}\n      </div>\n      <div *ngIf=\"!isConfirmation\" class=\"cx-item-list-qty col-md-3 col-xl-2\">\n        {{ 'orderDetails.cancellationAndReturn.quantity' | cxTranslate }}\n      </div>\n      <div class=\"cx-item-list-qty col-2\">\n        {{\n          (isCancellation()\n            ? 'orderDetails.cancellationAndReturn.cancelQty'\n            : 'orderDetails.cancellationAndReturn.returnQty') | cxTranslate\n        }}\n      </div>\n      <div *ngIf=\"isConfirmation\" class=\"cx-item-list-total col-md-3  col-xl-2\">\n        {{ 'orderDetails.cancellationAndReturn.totalPrice' | cxTranslate }}\n      </div>\n    </div>\n  </div>\n\n  <div class=\"cx-item-list-row\" *ngFor=\"let item of entries; let i = index\">\n    <div class=\"row cx-item-list-items\">\n      <!-- Item Image -->\n      <cx-media\n        class=\"col-2 cx-image-container\"\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n\n      <!-- Item Information -->\n      <div class=\"cx-info col-10\">\n        <div class=\"cx-info-container row\">\n          <!-- Item Description -->\n          <div class=\"col-md-3 col-xl-5\">\n            <div *ngIf=\"item.product.name\" class=\"cx-name\">\n              {{ item.product.name }}\n            </div>\n            <div *ngIf=\"item.product.code\" class=\"cx-code\">\n              {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n            </div>\n            <!-- Variants -->\n            <ng-container *cxFeatureLevel=\"'!1.5'\">\n              <div\n                *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n                class=\"cx-property\"\n              >\n                <div class=\"cx-label\">{{ variant.name }}</div>\n                <div class=\"cx-value\">{{ variant.value }}</div>\n              </div>\n            </ng-container>\n            <ng-container *cxFeatureLevel=\"'1.5'\">\n              <ng-container *ngIf=\"item.product.baseOptions?.length\">\n                <div\n                  *ngFor=\"\n                    let variant of item.product.baseOptions[0]?.selected\n                      ?.variantOptionQualifiers\n                  \"\n                  class=\"cx-property\"\n                >\n                  <div class=\"cx-label\" *ngIf=\"variant.name\">\n                    {{ variant.name }}:\n                  </div>\n                  <div class=\"cx-value\" *ngIf=\"variant.value\">\n                    {{ variant.value }}\n                  </div>\n                </div>\n              </ng-container>\n            </ng-container>\n          </div>\n          <!-- Price -->\n          <div\n            *ngIf=\"item.basePrice\"\n            class=\"cx-price col-md-3 col-lg-3 col-xl-2\"\n          >\n            <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n              {{ 'orderDetails.cancellationAndReturn.itemPrice' | cxTranslate }}\n            </div>\n            <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n              {{ item.basePrice?.formattedValue }}\n            </div>\n          </div>\n          <!-- item Quantity -->\n          <div *ngIf=\"!isConfirmation\" class=\"cx-request-qty col-md-3\">\n            <div\n              class=\"cx-label d-block d-md-none d-lg-none d-xl-none\"\n              placement=\"left\"\n              title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n            >\n              {{ 'orderDetails.cancellationAndReturn.quantity' | cxTranslate }}\n            </div>\n            <div class=\"cx-value\">\n              {{ getMaxAmendQuantity(item) }}\n            </div>\n          </div>\n          <!-- Amended Quantity -->\n          <div class=\"cx-quantity col-md-3 col-xl-2\">\n            <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n              {{\n                (isCancellation()\n                  ? 'orderDetails.cancellationAndReturn.cancelQty'\n                  : 'orderDetails.cancellationAndReturn.returnQty')\n                  | cxTranslate\n              }}\n            </div>\n\n            <cx-item-counter\n              [min]=\"0\"\n              [max]=\"getMaxAmendQuantity(item)\"\n              [control]=\"getControl(form, item)\"\n              [readonly]=\"isConfirmation\"\n            >\n            </cx-item-counter>\n          </div>\n          <!-- Total Price -->\n          <div *ngIf=\"isConfirmation\" class=\"cx-total col-3\">\n            <div class=\"cx-label d-block d-md-none\">\n              {{\n                'orderDetails.cancellationAndReturn.totalPrice' | cxTranslate\n              }}\n            </div>\n            <div class=\"cx-value\">\n              {{ getItemPrice(item)?.formattedValue }}\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -18556,7 +18828,7 @@ class OrderDetailItemsComponent {
 OrderDetailItemsComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-order-details-items',
-                template: "<ng-container *ngIf=\"order$ | async as order\">\n  <!-- consigned entries -->\n  <div *cxFeatureLevel=\"'1.4'\">\n    <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n      <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n    </ng-container>\n\n    <cx-order-consigned-entries\n      *ngIf=\"others$ | async as others\"\n      [order]=\"order\"\n      [consignments]=\"others\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"completed$ | async as completed\"\n      [order]=\"order\"\n      [consignments]=\"completed\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"cancel$ | async as cancel\"\n      [order]=\"order\"\n      [consignments]=\"cancel\"\n    ></cx-order-consigned-entries>\n  </div>\n\n  <div *cxFeatureLevel=\"'!1.4'\">\n    <div *ngFor=\"let consignment of order.consignments\" class=\"cx-list row\">\n      <div class=\"cx-list-header col-12\">\n        <div class=\"cx-list-status\">\n          <span *ngIf=\"consignment\">\n            {{\n              'orderDetails.deliveryStatus'\n                | cxTranslate: { context: consignment.status }\n            }}\n          </span>\n        </div>\n        <div *ngIf=\"consignment?.statusDate\" class=\"cx-list-date\">\n          <div>{{ 'orderDetails.shippedOn' | cxTranslate }}&nbsp;</div>\n          <div>{{ consignment?.statusDate | cxDate }}</div>\n        </div>\n\n        <cx-consignment-tracking\n          [orderCode]=\"order.code\"\n          [consignment]=\"consignment\"\n          *cxFeature=\"'consignmentTracking'\"\n        >\n        </cx-consignment-tracking>\n      </div>\n      <div class=\"cx-list-item col-12\">\n        <ng-container *cxFeatureLevel=\"'1.5'\">\n          <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n            <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n          </ng-container>\n        </ng-container>\n\n        <cx-cart-item-list\n          [items]=\"consignment.entries\"\n          [isReadOnly]=\"true\"\n          [promotionLocation]=\"promotionLocation\"\n        ></cx-cart-item-list>\n      </div>\n    </div>\n  </div>\n  <!-- unconsigned entries -->\n  <div *ngIf=\"order.unconsignedEntries?.length\" class=\"cx-list row\">\n    <div class=\"cx-list-header col-12\">\n      <div class=\"cx-list-status\">\n        {{ 'orderDetails.pending' | cxTranslate }}\n      </div>\n    </div>\n    <div class=\"cx-list-item col-12\">\n      <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n        <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n      </ng-container>\n\n      <cx-cart-item-list\n        [items]=\"order?.unconsignedEntries\"\n        [isReadOnly]=\"true\"\n        [promotionLocation]=\"promotionLocation\"\n      ></cx-cart-item-list>\n    </div>\n  </div>\n</ng-container>\n"
+                template: "<ng-container *ngIf=\"order$ | async as order\">\n  <!-- consigned entries -->\n  <div *cxFeatureLevel=\"'1.4'\">\n    <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n      <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n    </ng-container>\n\n    <cx-order-consigned-entries\n      *ngIf=\"others$ | async as others\"\n      [order]=\"order\"\n      [consignments]=\"others\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"completed$ | async as completed\"\n      [order]=\"order\"\n      [consignments]=\"completed\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"cancel$ | async as cancel\"\n      [order]=\"order\"\n      [consignments]=\"cancel\"\n    ></cx-order-consigned-entries>\n  </div>\n\n  <div *cxFeatureLevel=\"'!1.4'\">\n    <div *ngFor=\"let consignment of order.consignments\" class=\"cx-list row\">\n      <div class=\"cx-list-header col-12\">\n        <div class=\"cx-list-status\">\n          <span *ngIf=\"consignment\">\n            {{\n              'orderDetails.deliveryStatus'\n                | cxTranslate: { context: consignment.status }\n            }}\n          </span>\n        </div>\n        <div *ngIf=\"consignment?.statusDate\" class=\"cx-list-date\">\n          <div>{{ 'orderDetails.shippedOn' | cxTranslate }}&nbsp;</div>\n          <div>{{ consignment?.statusDate | cxDate }}</div>\n        </div>\n\n        <cx-consignment-tracking\n          [orderCode]=\"order.code\"\n          [consignment]=\"consignment\"\n          *cxFeature=\"'consignmentTracking'\"\n        >\n        </cx-consignment-tracking>\n      </div>\n      <div class=\"cx-list-item col-12\">\n        <ng-container *cxFeatureLevel=\"'1.5'\">\n          <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n            <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n          </ng-container>\n        </ng-container>\n\n        <cx-cart-item-list\n          [items]=\"getConsignmentProducts(consignment)\"\n          [readonly]=\"true\"\n          [promotionLocation]=\"promotionLocation\"\n        ></cx-cart-item-list>\n      </div>\n    </div>\n    <!-- unconsigned entries -->\n    <div *ngIf=\"order.unconsignedEntries?.length\" class=\"cx-list row\">\n      <div class=\"cx-list-header col-12\">\n        <div class=\"cx-list-status\">\n          {{ 'orderDetails.pending' | cxTranslate }}\n        </div>\n      </div>\n      <div class=\"cx-list-item col-12\">\n        <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n          <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n        </ng-container>\n\n        <cx-cart-item-list\n          [items]=\"order?.unconsignedEntries\"\n          [readonly]=\"true\"\n          [promotionLocation]=\"promotionLocation\"\n        ></cx-cart-item-list>\n      </div>\n    </div>\n  </div>\n</ng-container>\n"
             }] }
 ];
 /** @nocollapse */
@@ -18959,7 +19231,7 @@ class OrderConsignedEntriesComponent {
 OrderConsignedEntriesComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-order-consigned-entries',
-                template: "<div *ngFor=\"let consignment of consignments\" class=\"cx-list row\">\n  <div class=\"cx-list-header col-12\">\n    <div class=\"cx-list-status\">\n      <span *ngIf=\"consignment\">\n        {{\n          'orderDetails.deliveryStatus'\n            | cxTranslate: { context: consignment.status }\n        }}\n      </span>\n    </div>\n    <div *ngIf=\"consignment?.statusDate\" class=\"cx-list-date\">\n      <div>{{ consignment?.statusDate | cxDate }}</div>\n    </div>\n\n    <cx-consignment-tracking\n      [orderCode]=\"order.code\"\n      [consignment]=\"consignment\"\n      *cxFeature=\"'consignmentTracking'\"\n    >\n    </cx-consignment-tracking>\n  </div>\n  <div class=\"cx-list-item col-12\">\n    <cx-cart-item-list\n      [items]=\"consignment.entries\"\n      [isReadOnly]=\"true\"\n      [promotionLocation]=\"promotionLocation\"\n    ></cx-cart-item-list>\n  </div>\n</div>\n"
+                template: "<div *ngFor=\"let consignment of consignments\" class=\"cx-list row\">\n  <div class=\"cx-list-header col-12\">\n    <div class=\"cx-list-status\">\n      <span *ngIf=\"consignment\">\n        {{\n          'orderDetails.deliveryStatus'\n            | cxTranslate: { context: consignment.status }\n        }}\n      </span>\n    </div>\n    <div *ngIf=\"consignment?.statusDate\" class=\"cx-list-date\">\n      <div>{{ consignment?.statusDate | cxDate }}</div>\n    </div>\n\n    <cx-consignment-tracking\n      [orderCode]=\"order.code\"\n      [consignment]=\"consignment\"\n      *cxFeature=\"'consignmentTracking'\"\n    >\n    </cx-consignment-tracking>\n  </div>\n  <div class=\"cx-list-item col-12\">\n    <cx-cart-item-list\n      [items]=\"consignment.entries\"\n      [readonly]=\"true\"\n      [promotionLocation]=\"promotionLocation\"\n    ></cx-cart-item-list>\n  </div>\n</div>\n"
             }] }
 ];
 OrderConsignedEntriesComponent.propDecorators = {
@@ -23209,7 +23481,7 @@ class OrderConfirmationItemsComponent {
 OrderConfirmationItemsComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-order-confirmation-items',
-                template: "<div class=\"cx-order-items container\" *ngIf=\"order$ | async as order\">\n  <h4 class=\"cx-order-items-header\">\n    {{ 'checkoutOrderConfirmation.orderItems' | cxTranslate }}\n  </h4>\n\n  <ng-container *cxFeatureLevel=\"'1.5'\">\n    <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n      <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n    </ng-container>\n  </ng-container>\n\n  <cx-cart-item-list\n    [items]=\"order.entries\"\n    [isReadOnly]=\"true\"\n    [promotionLocation]=\"promotionLocation\"\n  >\n  </cx-cart-item-list>\n</div>\n",
+                template: "<div class=\"cx-order-items container\" *ngIf=\"order$ | async as order\">\n  <h4 class=\"cx-order-items-header\">\n    {{ 'checkoutOrderConfirmation.orderItems' | cxTranslate }}\n  </h4>\n\n  <ng-container *cxFeatureLevel=\"'1.5'\">\n    <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n      <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n    </ng-container>\n  </ng-container>\n\n  <cx-cart-item-list\n    [items]=\"order.entries\"\n    [readonly]=\"true\"\n    [promotionLocation]=\"promotionLocation\"\n  ></cx-cart-item-list>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -23417,7 +23689,7 @@ class OrderConfirmationThankYouMessageComponent {
 OrderConfirmationThankYouMessageComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-order-confirmation-thank-you-message',
-                template: "<ng-container *ngIf=\"order$ | async as order\">\n  <header class=\"cx-page-header\">\n    <h1 class=\"cx-page-title\">\n      {{ 'checkoutOrderConfirmation.confirmationOfOrder' | cxTranslate }}\n      {{ order.code }}\n    </h1>\n  </header>\n\n  <div class=\"cx-order-confirmation-message\">\n    <h2>{{ 'checkoutOrderConfirmation.thankYou' | cxTranslate }}</h2>\n    <p>\n      {{ 'checkoutOrderConfirmation.invoiceHasBeenSentByEmail' | cxTranslate }}\n    </p>\n    <!-- <a href=\"#\" class=\"btn-link\">Print Page</a> -->\n  </div>\n\n  <div *ngIf=\"isGuestCustomer\">\n    <cx-guest-register-form\n      [guid]=\"orderGuid\"\n      [email]=\"order.paymentInfo.billingAddress.email\"\n    ></cx-guest-register-form>\n  </div>\n\n  <cx-add-to-home-screen-banner></cx-add-to-home-screen-banner>\n</ng-container>\n",
+                template: "<ng-container *ngIf=\"order$ | async as order\">\n  <div class=\"cx-page-header\">\n    <h1 class=\"cx-page-title\">\n      {{ 'checkoutOrderConfirmation.confirmationOfOrder' | cxTranslate }}\n      {{ order.code }}\n    </h1>\n  </div>\n\n  <div class=\"cx-order-confirmation-message\">\n    <h2>{{ 'checkoutOrderConfirmation.thankYou' | cxTranslate }}</h2>\n    <p>\n      {{ 'checkoutOrderConfirmation.invoiceHasBeenSentByEmail' | cxTranslate }}\n    </p>\n    <!-- <a href=\"#\" class=\"btn-link\">Print Page</a> -->\n  </div>\n\n  <div *ngIf=\"isGuestCustomer\">\n    <cx-guest-register-form\n      [guid]=\"orderGuid\"\n      [email]=\"order.paymentInfo.billingAddress.email\"\n    ></cx-guest-register-form>\n  </div>\n\n  <cx-add-to-home-screen-banner></cx-add-to-home-screen-banner>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }] }
 ];
@@ -24500,9 +24772,9 @@ class ProductListComponentService {
         this.currencyService = currencyService;
         this.languageService = languageService;
         this.router = router;
+        // TODO: make it configurable
         this.defaultPageSize = 10;
-        this.RELEVANCE_CATEGORY = ':relevance:category:';
-        this.RELEVANCE_BRAND = ':relevance:brand:';
+        this.RELEVANCE_ALLCATEGORIES = ':relevance:allCategories:';
         this.searchResults$ = this.productSearchService
             .getResults()
             .pipe(filter((/**
@@ -24577,10 +24849,10 @@ class ProductListComponentService {
             return query;
         }
         if (categoryCode) {
-            return this.RELEVANCE_CATEGORY + categoryCode;
+            return this.RELEVANCE_ALLCATEGORIES + categoryCode;
         }
         if (brandCode) {
-            return this.RELEVANCE_BRAND + brandCode;
+            return this.RELEVANCE_ALLCATEGORIES + brandCode;
         }
     }
     /**
@@ -24698,12 +24970,7 @@ if (false) {
      * @type {?}
      * @protected
      */
-    ProductListComponentService.prototype.RELEVANCE_CATEGORY;
-    /**
-     * @type {?}
-     * @protected
-     */
-    ProductListComponentService.prototype.RELEVANCE_BRAND;
+    ProductListComponentService.prototype.RELEVANCE_ALLCATEGORIES;
     /**
      * @type {?}
      * @private
@@ -24858,13 +25125,6 @@ class ProductListComponent {
         })));
     }
     /**
-     * @param {?} pageNumber
-     * @return {?}
-     */
-    viewPage(pageNumber) {
-        this.productListComponentService.viewPage(pageNumber);
-    }
-    /**
      * @param {?} sortCode
      * @return {?}
      */
@@ -24888,7 +25148,7 @@ class ProductListComponent {
 ProductListComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-product-list',
-                template: "<div class=\"cx-page\" *ngIf=\"model$ | async as model\">\n  <section class=\"cx-page-section\">\n    <div class=\"container\">\n      <div class=\"row\">\n        <div class=\"col-12 col-lg-12\" *ngIf=\"viewMode$ | async as viewMode\">\n          <div class=\"cx-sorting top\">\n            <div class=\"row\">\n              <div class=\"col-12 col-lg-4 mr-auto\">\n                <div class=\"form-group cx-sort-dropdown\">\n                  <cx-sorting\n                    [sortOptions]=\"model.sorts\"\n                    (sortListEvent)=\"sortList($event)\"\n                    [selectedOption]=\"model.pagination.sort\"\n                    placeholder=\"{{\n                      'productList.sortByRelevance' | cxTranslate\n                    }}\"\n                  ></cx-sorting>\n                </div>\n              </div>\n              <div *ngIf=\"!isInfiniteScroll\" class=\"col-auto\">\n                <div\n                  class=\"cx-pagination\"\n                  aria-label=\"product search pagination\"\n                >\n                  <cx-pagination\n                    [pagination]=\"model.pagination\"\n                    (viewPageEvent)=\"viewPage($event)\"\n                  ></cx-pagination>\n                </div>\n              </div>\n              <div class=\"col-auto ml-auto ml-lg-0\">\n                <cx-product-view\n                  (modeChange)=\"setViewMode($event)\"\n                  [mode]=\"viewMode\"\n                ></cx-product-view>\n              </div>\n            </div>\n          </div>\n          <div class=\"cx-product-container\">\n            <!-- Product list when using pagination -->\n            <ng-container *ngIf=\"!isInfiniteScroll; else infiniteScroll\">\n              <ng-container *ngIf=\"viewMode === ViewModes.Grid\">\n                <div class=\"row\">\n                  <cx-product-grid-item\n                    *ngFor=\"let product of model?.products\"\n                    [product]=\"product\"\n                    class=\"col-12 col-sm-6 col-md-4\"\n                  ></cx-product-grid-item>\n                </div>\n              </ng-container>\n\n              <ng-container *ngIf=\"viewMode === ViewModes.List\">\n                <cx-product-list-item\n                  *ngFor=\"let product of model?.products\"\n                  [product]=\"product\"\n                  class=\"cx-product-search-list\"\n                ></cx-product-list-item>\n              </ng-container>\n            </ng-container>\n\n            <!-- Product list when using infinite scroll -->\n            <ng-template #infiniteScroll>\n              <cx-product-scroll\n                [scrollConfig]=\"scrollConfig\"\n                [model]=\"model\"\n                [inputViewMode]=\"viewMode\"\n              ></cx-product-scroll>\n            </ng-template>\n          </div>\n          <div class=\"cx-sorting bottom\">\n            <div class=\"row\">\n              <div class=\"col-12 col-lg-4 mr-auto\">\n                <div class=\"form-group cx-sort-dropdown\">\n                  <cx-sorting\n                    [sortOptions]=\"model.sorts\"\n                    (sortListEvent)=\"sortList($event)\"\n                    [selectedOption]=\"model.pagination.sort\"\n                    placeholder=\"{{\n                      'productList.sortByRelevance' | cxTranslate\n                    }}\"\n                  ></cx-sorting>\n                </div>\n              </div>\n              <div\n                *ngIf=\"!isInfiniteScroll\"\n                class=\"col-auto\"\n                aria-label=\"product search pagination\"\n              >\n                <div class=\"cx-pagination\">\n                  <cx-pagination\n                    [pagination]=\"model.pagination\"\n                    (viewPageEvent)=\"viewPage($event)\"\n                  ></cx-pagination>\n                </div>\n              </div>\n              <div class=\"col-auto ml-auto ml-lg-0\">\n                <cx-product-view\n                  (modeChange)=\"setViewMode($event)\"\n                  [mode]=\"viewMode\"\n                ></cx-product-view>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </section>\n</div>\n"
+                template: "<div class=\"cx-page\" *ngIf=\"model$ | async as model\">\n  <section class=\"cx-page-section\">\n    <div class=\"container\">\n      <div class=\"row\">\n        <div class=\"col-12 col-lg-12\" *ngIf=\"viewMode$ | async as viewMode\">\n          <div class=\"cx-sorting top\">\n            <div class=\"row\">\n              <div class=\"col-12 col-lg-4 mr-auto\">\n                <div class=\"form-group cx-sort-dropdown\">\n                  <cx-sorting\n                    [sortOptions]=\"model.sorts\"\n                    (sortListEvent)=\"sortList($event)\"\n                    [selectedOption]=\"model.pagination.sort\"\n                    placeholder=\"{{\n                      'productList.sortByRelevance' | cxTranslate\n                    }}\"\n                  ></cx-sorting>\n                </div>\n              </div>\n              <div *ngIf=\"!isInfiniteScroll\" class=\"col-auto\">\n                <div\n                  class=\"cx-pagination\"\n                  aria-label=\"product search pagination\"\n                >\n                  <cx-pagination\n                    [pagination]=\"model.pagination\"\n                    queryParam=\"currentPage\"\n                    [defaultPage]=\"0\"\n                  ></cx-pagination>\n                </div>\n              </div>\n              <div class=\"col-auto ml-auto ml-lg-0\">\n                <cx-product-view\n                  (modeChange)=\"setViewMode($event)\"\n                  [mode]=\"viewMode\"\n                ></cx-product-view>\n              </div>\n            </div>\n          </div>\n          <div class=\"cx-product-container\">\n            <!-- Product list when using pagination -->\n            <ng-container *ngIf=\"!isInfiniteScroll; else infiniteScroll\">\n              <ng-container *ngIf=\"viewMode === ViewModes.Grid\">\n                <div class=\"row\">\n                  <cx-product-grid-item\n                    *ngFor=\"let product of model?.products\"\n                    [product]=\"product\"\n                    class=\"col-12 col-sm-6 col-md-4\"\n                  ></cx-product-grid-item>\n                </div>\n              </ng-container>\n\n              <ng-container *ngIf=\"viewMode === ViewModes.List\">\n                <cx-product-list-item\n                  *ngFor=\"let product of model?.products\"\n                  [product]=\"product\"\n                  class=\"cx-product-search-list\"\n                ></cx-product-list-item>\n              </ng-container>\n            </ng-container>\n\n            <!-- Product list when using infinite scroll -->\n            <ng-template #infiniteScroll>\n              <cx-product-scroll\n                [scrollConfig]=\"scrollConfig\"\n                [model]=\"model\"\n                [inputViewMode]=\"viewMode\"\n              ></cx-product-scroll>\n            </ng-template>\n          </div>\n          <div class=\"cx-sorting bottom\">\n            <div class=\"row\">\n              <div class=\"col-12 col-lg-4 mr-auto\">\n                <div class=\"form-group cx-sort-dropdown\">\n                  <cx-sorting\n                    [sortOptions]=\"model.sorts\"\n                    (sortListEvent)=\"sortList($event)\"\n                    [selectedOption]=\"model.pagination.sort\"\n                    placeholder=\"{{\n                      'productList.sortByRelevance' | cxTranslate\n                    }}\"\n                  ></cx-sorting>\n                </div>\n              </div>\n              <div\n                *ngIf=\"!isInfiniteScroll\"\n                class=\"col-auto\"\n                aria-label=\"product search pagination\"\n              >\n                <div class=\"cx-pagination\">\n                  <cx-pagination\n                    [pagination]=\"model.pagination\"\n                    queryParam=\"currentPage\"\n                    [defaultPage]=\"0\"\n                  ></cx-pagination>\n                </div>\n              </div>\n              <div class=\"col-auto ml-auto ml-lg-0\">\n                <cx-product-view\n                  (modeChange)=\"setViewMode($event)\"\n                  [mode]=\"viewMode\"\n                ></cx-product-view>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </section>\n</div>\n"
             }] }
 ];
 /** @nocollapse */
@@ -29457,5 +29717,5 @@ B2cStorefrontModule.decorators = [
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AsmModule, AutoFocusDirective, AutoFocusDirectiveModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OnlyNumberDirective, OnlyNumberDirectiveModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationComponent, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultScrollConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, AsmLoaderModule as ɵa, asmFactory as ɵb, AddToHomeScreenService as ɵba, GuestRegisterFormComponent as ɵbb, SkipLinkModule as ɵbc, skipLinkFactory as ɵbd, defaultSkipLinkConfig as ɵbe, SkipLinkConfig as ɵbf, SkipLinkScrollPosition as ɵbg, SkipLinkComponent as ɵbh, SkipLinkService as ɵbi, SkipLinkDirective as ɵbj, CheckoutLoginComponent as ɵbk, MyCouponsComponentService as ɵbl, suffixUrlMatcher as ɵbm, addCmsRoute as ɵbn, htmlLangProvider as ɵbo, setHtmlLangAttribute as ɵbp, AnonymousConsentsModule as ɵbq, AnonymousConsentDialogComponent as ɵbr, RoutingModule as ɵbs, defaultStorefrontRoutesConfig as ɵbt, defaultRoutingConfig as ɵbu, ComponentMapperService as ɵc, AsmEnablerService as ɵd, AsmMainUiComponent as ɵe, AsmComponentService as ɵf, CSAgentLoginFormComponent as ɵg, CustomerSelectionComponent as ɵh, AsmSessionTimerComponent as ɵi, FormatTimerPipe as ɵj, CustomerEmulationComponent as ɵk, AppliedCouponsComponent as ɵl, AddToWishListModule as ɵm, AddToWishListComponent as ɵn, defaultCheckoutConfig as ɵo, ExpressCheckoutService as ɵp, defaultQualtricsConfig as ɵq, CmsRoutesService as ɵr, CmsMappingService as ɵs, CmsI18nService as ɵt, CmsGuardsService as ɵu, ReturnRequestService as ɵv, OrderDetailActionsComponent as ɵw, TrackingEventsComponent as ɵx, ConsignmentTrackingComponent as ɵy, OrderConsignedEntriesComponent as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AsmModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, AsmLoaderModule as ɵa, asmFactory as ɵb, OrderConsignedEntriesComponent as ɵba, AddToHomeScreenService as ɵbb, GuestRegisterFormComponent as ɵbc, SkipLinkModule as ɵbd, skipLinkFactory as ɵbe, defaultSkipLinkConfig as ɵbf, SkipLinkConfig as ɵbg, SkipLinkScrollPosition as ɵbh, SkipLinkComponent as ɵbi, SkipLinkService as ɵbj, SkipLinkDirective as ɵbk, CheckoutLoginComponent as ɵbl, MyCouponsComponentService as ɵbm, suffixUrlMatcher as ɵbn, addCmsRoute as ɵbo, htmlLangProvider as ɵbp, setHtmlLangAttribute as ɵbq, AnonymousConsentsModule as ɵbr, AnonymousConsentDialogComponent as ɵbs, RoutingModule as ɵbt, defaultStorefrontRoutesConfig as ɵbu, defaultRoutingConfig as ɵbv, ComponentMapperService as ɵc, AsmEnablerService as ɵd, AsmMainUiComponent as ɵe, AsmComponentService as ɵf, CSAgentLoginFormComponent as ɵg, CustomerSelectionComponent as ɵh, AsmSessionTimerComponent as ɵi, FormatTimerPipe as ɵj, CustomerEmulationComponent as ɵk, AppliedCouponsComponent as ɵl, AutoFocusDirectiveModule as ɵm, AddToWishListModule as ɵn, AddToWishListComponent as ɵo, defaultCheckoutConfig as ɵp, ExpressCheckoutService as ɵq, defaultQualtricsConfig as ɵr, CmsRoutesService as ɵs, CmsMappingService as ɵt, CmsI18nService as ɵu, CmsGuardsService as ɵv, ReturnRequestService as ɵw, OrderDetailActionsComponent as ɵx, TrackingEventsComponent as ɵy, ConsignmentTrackingComponent as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
 //# sourceMappingURL=spartacus-storefront.js.map

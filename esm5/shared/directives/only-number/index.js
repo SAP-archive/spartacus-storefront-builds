@@ -1,7 +1,0 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-export { OnlyNumberDirectiveModule } from './only-number.directive.module';
-export { OnlyNumberDirective } from './only-number.directive';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJzaGFyZWQvZGlyZWN0aXZlcy9vbmx5LW51bWJlci9pbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7O0FBQUEsMENBQWMsZ0NBQWdDLENBQUM7QUFDL0Msb0NBQWMseUJBQXlCLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgKiBmcm9tICcuL29ubHktbnVtYmVyLmRpcmVjdGl2ZS5tb2R1bGUnO1xuZXhwb3J0ICogZnJvbSAnLi9vbmx5LW51bWJlci5kaXJlY3RpdmUnO1xuIl19

@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { CartService, OrderEntry, Product } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { ModalRef, ModalService } from '../../../shared/components/modal/index';
@@ -22,6 +23,7 @@ export declare class AddToCartComponent implements OnInit, OnDestroy {
     increment: boolean;
     cartEntry$: Observable<OrderEntry>;
     subscription: Subscription;
+    addToCartForm: FormGroup;
     constructor(cartService: CartService, modalService: ModalService, currentProductService: CurrentProductService, cd: ChangeDetectorRef);
     ngOnInit(): void;
     private setStockInfo;

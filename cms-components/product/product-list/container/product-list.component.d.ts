@@ -2,9 +2,9 @@ import { OnDestroy, OnInit } from '@angular/core';
 import { ProductSearchPage } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { PageLayoutService } from '../../../../cms-structure/page/index';
+import { ViewConfig } from '../../../../shared/config/view-config';
 import { ViewModes } from '../product-view/product-view.component';
 import { ProductListComponentService } from './product-list-component.service';
-import { ViewConfig } from '../../../../shared/config/view-config';
 export declare class ProductListComponent implements OnInit, OnDestroy {
     private pageLayoutService;
     private productListComponentService;
@@ -24,7 +24,6 @@ export declare class ProductListComponent implements OnInit, OnDestroy {
      */
     constructor(pageLayoutService: PageLayoutService, productListComponentService: ProductListComponentService);
     ngOnInit(): void;
-    viewPage(pageNumber: number): void;
     sortList(sortCode: string): void;
     setViewMode(mode: ViewModes): void;
     ngOnDestroy(): void;

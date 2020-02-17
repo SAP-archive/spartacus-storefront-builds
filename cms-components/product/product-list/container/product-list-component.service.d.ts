@@ -10,8 +10,7 @@ export declare class ProductListComponentService {
     protected router: Router;
     protected defaultPageSize: number;
     protected sub: Subscription;
-    protected readonly RELEVANCE_CATEGORY = ":relevance:category:";
-    protected readonly RELEVANCE_BRAND = ":relevance:brand:";
+    protected readonly RELEVANCE_ALLCATEGORIES = ":relevance:allCategories:";
     constructor(productSearchService: ProductSearchService, routing: RoutingService, activatedRoute: ActivatedRoute, currencyService: CurrencyService, languageService: LanguageService, router: Router);
     private searchResults$;
     private searchByRouting$;

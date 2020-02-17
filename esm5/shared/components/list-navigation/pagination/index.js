@@ -1,0 +1,10 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export { defaultPaginationConfig, PaginationConfig } from './config/index';
+export { PaginationBuilder } from './pagination.builder';
+export { PaginationComponent } from './pagination.component';
+export { PaginationItemType, PaginationNavigationPosition } from './pagination.model';
+export { PaginationModule } from './pagination.module';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJzaGFyZWQvY29tcG9uZW50cy9saXN0LW5hdmlnYXRpb24vcGFnaW5hdGlvbi9pbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7O0FBQUEsMERBQWMsZ0JBQWdCLENBQUM7QUFDL0Isa0NBQWMsc0JBQXNCLENBQUM7QUFDckMsb0NBQWMsd0JBQXdCLENBQUM7QUFDdkMsaUVBQWMsb0JBQW9CLENBQUM7QUFDbkMsaUNBQWMscUJBQXFCLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgKiBmcm9tICcuL2NvbmZpZy9pbmRleCc7XG5leHBvcnQgKiBmcm9tICcuL3BhZ2luYXRpb24uYnVpbGRlcic7XG5leHBvcnQgKiBmcm9tICcuL3BhZ2luYXRpb24uY29tcG9uZW50JztcbmV4cG9ydCAqIGZyb20gJy4vcGFnaW5hdGlvbi5tb2RlbCc7XG5leHBvcnQgKiBmcm9tICcuL3BhZ2luYXRpb24ubW9kdWxlJztcbiJdfQ==

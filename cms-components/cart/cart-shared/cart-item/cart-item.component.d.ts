@@ -1,7 +1,6 @@
 import { EventEmitter, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { FeatureConfigService } from '@spartacus/core';
-import { PromotionResult, PromotionLocation } from '@spartacus/core';
+import { FormControl } from '@angular/forms';
+import { FeatureConfigService, PromotionLocation, PromotionResult } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { PromotionService } from '../../../../shared/services/promotion/promotion.service';
 export interface Item {
@@ -20,15 +19,12 @@ export declare class CartItemComponent implements OnInit {
     private featureConfig?;
     compact: boolean;
     item: Item;
-    isReadOnly: boolean;
-    cartIsLoading: boolean;
-    options: CartItemComponentOptions;
-    promotionLocation: PromotionLocation;
     potentialProductPromotions: any[];
-    remove: EventEmitter<any>;
-    update: EventEmitter<any>;
+    readonly: boolean;
+    quantityControl: FormControl;
     view: EventEmitter<any>;
-    parent: FormGroup;
+    promotionLocation: PromotionLocation;
+    options: CartItemComponentOptions;
     appliedProductPromotions$: Observable<PromotionResult[]>;
     constructor(promotionService: PromotionService, featureConfig: FeatureConfigService);
     /**
@@ -40,7 +36,6 @@ export declare class CartItemComponent implements OnInit {
     ngOnInit(): void;
     isSaveForLaterEnabled(): boolean;
     isProductOutOfStock(product: any): boolean;
-    updateItem(updatedQuantity: number): void;
     removeItem(): void;
     viewItem(): void;
 }
