@@ -14,7 +14,6 @@ export declare class ProductFacetNavigationComponent implements OnInit, OnDestro
     iconTypes: typeof ICON_TYPE;
     activeFacetValueCode: string;
     searchResult: ProductSearchPage;
-    minPerFacet: number;
     showAllPerFacetMap: Map<String, boolean>;
     protected queryCodec: HttpUrlEncodingCodec;
     private collapsedFacets;
@@ -29,6 +28,6 @@ export declare class ProductFacetNavigationComponent implements OnInit, OnDestro
     private updateShowAllPerFacetMap;
     isFacetCollapsed(facetName: string): boolean;
     toggleFacet(facetName: string): void;
-    getVisibleFacetValues(facet: any): any;
+    getVisibleFacetValues(facet: Facet): Facet[];
     ngOnDestroy(): void;
 }
