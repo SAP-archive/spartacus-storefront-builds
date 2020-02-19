@@ -33920,16 +33920,16 @@
                 slots: ['Section1', 'Section2', 'Section3'],
             },
             ProductListPageTemplate: {
-                slots: ['ProductListSlot', 'ProductLeftRefinements'],
+                slots: ['ProductLeftRefinements', 'ProductListSlot'],
             },
             ProductGridPageTemplate: {
-                slots: ['ProductGridSlot', 'ProductLeftRefinements'],
+                slots: ['ProductLeftRefinements', 'ProductGridSlot'],
             },
             SearchResultsListPageTemplate: {
                 slots: [
                     'Section2',
-                    'SearchResultsListSlot',
                     'ProductLeftRefinements',
+                    'SearchResultsListSlot',
                     'Section4',
                 ],
             },
