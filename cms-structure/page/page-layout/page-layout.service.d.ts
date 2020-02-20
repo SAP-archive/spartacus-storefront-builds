@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { BreakpointService } from '../../../layout/breakpoint/breakpoint.service';
 import { BREAKPOINT, LayoutConfig, LayoutSlotConfig, SlotConfig } from '../../../layout/config/layout-config';
 import { PageLayoutHandler } from './page-layout-handler';
+import * as ɵngcc0 from '@angular/core';
 export declare class PageLayoutService {
     private cms;
     private config;
@@ -20,8 +21,8 @@ export declare class PageLayoutService {
      */
     getPageFoldSlot(pageTemplate: string): Observable<string>;
     private resolveSlots;
-    readonly page$: Observable<Page>;
-    readonly templateName$: Observable<string>;
+    get page$(): Observable<Page>;
+    get templateName$(): Observable<string>;
     /**
      * load slots from the layout configuration. The breakpoint is used
      * to load a specific configuration for the given breakpoint. If there's
@@ -43,4 +44,8 @@ export declare class PageLayoutService {
      * in a format that can be copied / paste to the configuration.
      */
     private logMissingLayoutConfig;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<PageLayoutService>;
+    static ɵprov: ɵngcc0.ɵɵInjectableDef<PageLayoutService>;
 }
+
+//# sourceMappingURL=page-layout.service.d.ts.map

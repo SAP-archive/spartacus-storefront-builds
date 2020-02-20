@@ -2,8 +2,10 @@ import { ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CartService, OrderEntry, Product } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { ModalRef, ModalService } from '../../../shared/components/modal/index';
+import { ModalService } from '../../../shared/components/modal/modal.service';
+import { ModalRef } from '../../../shared/components/modal/modal-ref';
 import { CurrentProductService } from '../../product/current-product.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class AddToCartComponent implements OnInit, OnDestroy {
     protected cartService: CartService;
     protected modalService: ModalService;
@@ -31,4 +33,12 @@ export declare class AddToCartComponent implements OnInit, OnDestroy {
     addToCart(): void;
     private openModal;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<AddToCartComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<AddToCartComponent, "cx-add-to-cart", never, {
+    "showQuantity": "showQuantity";
+    "productCode": "productCode";
+    "product": "product";
+}, {}, never>;
 }
+
+//# sourceMappingURL=add-to-cart.component.d.ts.map

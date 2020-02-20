@@ -1,13 +1,8 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @enum {string} */
-var ProductDetailOutlets = {
-    INTRO: 'PDP.INTRO',
-    PRICE: 'PDP.PRICE',
-    SHARE: 'PDP.SHARE',
-    SUMMARY: 'PDP.SUMMARY',
-};
-export { ProductDetailOutlets };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvZHVjdC1vdXRsZXRzLm1vZGVsLmpzIiwic291cmNlUm9vdCI6Im5nOi8vQHNwYXJ0YWN1cy9zdG9yZWZyb250LyIsInNvdXJjZXMiOlsiY21zLWNvbXBvbmVudHMvcHJvZHVjdC9wcm9kdWN0LW91dGxldHMubW9kZWwudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7O0lBQ0UsT0FBUSxXQUFXO0lBQ25CLE9BQVEsV0FBVztJQUNuQixPQUFRLFdBQVc7SUFDbkIsU0FBVSxhQUFhIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGVudW0gUHJvZHVjdERldGFpbE91dGxldHMge1xuICBJTlRSTyA9ICdQRFAuSU5UUk8nLFxuICBQUklDRSA9ICdQRFAuUFJJQ0UnLFxuICBTSEFSRSA9ICdQRFAuU0hBUkUnLFxuICBTVU1NQVJZID0gJ1BEUC5TVU1NQVJZJyxcbn1cbiJdfQ==
+export var ProductDetailOutlets;
+(function (ProductDetailOutlets) {
+    ProductDetailOutlets["INTRO"] = "PDP.INTRO";
+    ProductDetailOutlets["PRICE"] = "PDP.PRICE";
+    ProductDetailOutlets["SHARE"] = "PDP.SHARE";
+    ProductDetailOutlets["SUMMARY"] = "PDP.SUMMARY";
+})(ProductDetailOutlets || (ProductDetailOutlets = {}));
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvZHVjdC1vdXRsZXRzLm1vZGVsLmpzIiwic291cmNlUm9vdCI6Im5nOi8vQHNwYXJ0YWN1cy9zdG9yZWZyb250LyIsInNvdXJjZXMiOlsiY21zLWNvbXBvbmVudHMvcHJvZHVjdC9wcm9kdWN0LW91dGxldHMubW9kZWwudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsTUFBTSxDQUFOLElBQVksb0JBS1g7QUFMRCxXQUFZLG9CQUFvQjtJQUM5QiwyQ0FBbUIsQ0FBQTtJQUNuQiwyQ0FBbUIsQ0FBQTtJQUNuQiwyQ0FBbUIsQ0FBQTtJQUNuQiwrQ0FBdUIsQ0FBQTtBQUN6QixDQUFDLEVBTFcsb0JBQW9CLEtBQXBCLG9CQUFvQixRQUsvQiIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBlbnVtIFByb2R1Y3REZXRhaWxPdXRsZXRzIHtcbiAgSU5UUk8gPSAnUERQLklOVFJPJyxcbiAgUFJJQ0UgPSAnUERQLlBSSUNFJyxcbiAgU0hBUkUgPSAnUERQLlNIQVJFJyxcbiAgU1VNTUFSWSA9ICdQRFAuU1VNTUFSWScsXG59XG4iXX0=

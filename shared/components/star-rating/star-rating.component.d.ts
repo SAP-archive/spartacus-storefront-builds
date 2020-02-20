@@ -1,5 +1,6 @@
 import { ElementRef, EventEmitter, OnInit, Renderer2 } from '@angular/core';
 import { ICON_TYPE } from '../../../cms-components/misc/index';
+import * as ɵngcc0 from '@angular/core';
 export declare class StarRatingComponent implements OnInit {
     protected el: ElementRef;
     protected renderer?: Renderer2;
@@ -29,4 +30,13 @@ export declare class StarRatingComponent implements OnInit {
     ngOnInit(): void;
     setRate(value: number, force?: boolean): void;
     saveRate(rating: number): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<StarRatingComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<StarRatingComponent, "cx-star-rating", never, {
+    "disabled": "disabled";
+    "rating": "rating";
+}, {
+    "change": "change";
+}, never>;
 }
+
+//# sourceMappingURL=star-rating.component.d.ts.map

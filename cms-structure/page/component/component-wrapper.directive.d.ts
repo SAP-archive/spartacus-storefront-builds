@@ -1,6 +1,7 @@
 import { ComponentRef, Injector, OnDestroy, OnInit, Renderer2, ViewContainerRef } from '@angular/core';
 import { CmsConfig, CmsService, ContentSlotComponentData, DynamicAttributeService } from '@spartacus/core';
 import { ComponentMapperService } from './component-mapper.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class ComponentWrapperDirective implements OnInit, OnDestroy {
     private vcr;
     private componentMapper;
@@ -22,4 +23,10 @@ export declare class ComponentWrapperDirective implements OnInit, OnDestroy {
     private getInjectorForComponent;
     private addSmartEditContract;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<ComponentWrapperDirective>;
+    static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<ComponentWrapperDirective, "[cxComponentWrapper]", never, {
+    "cxComponentWrapper": "cxComponentWrapper";
+}, {}, never>;
 }
+
+//# sourceMappingURL=component-wrapper.directive.d.ts.map

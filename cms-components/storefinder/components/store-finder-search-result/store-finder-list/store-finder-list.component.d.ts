@@ -1,6 +1,7 @@
 import { StoreDataService, PointOfService } from '@spartacus/core';
 import { StoreFinderMapComponent } from '../../store-finder-map/store-finder-map.component';
 import { ICON_TYPE } from './../../../../misc/icon/icon.model';
+import * as ɵngcc0 from '@angular/core';
 export declare class StoreFinderListComponent {
     private storeDataService;
     private document;
@@ -17,4 +18,11 @@ export declare class StoreFinderListComponent {
     selectStoreItemList(index: number): void;
     showStoreDetails(location: PointOfService): void;
     hideStoreDetails(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<StoreFinderListComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<StoreFinderListComponent, "cx-store-finder-list", never, {
+    "locations": "locations";
+    "useMylocation": "useMylocation";
+}, {}, never>;
 }
+
+//# sourceMappingURL=store-finder-list.component.d.ts.map

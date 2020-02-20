@@ -1,0 +1,1 @@
+{"version":3,"file":"register.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/user/register/register.module.d.ts"],"sourcesContent":["export declare class RegisterComponentModule {\n}\n"],"names":[],"mappings":";;;;;;;;AAAA;;;AACA;"}

@@ -1,6 +1,7 @@
 import { WindowRef } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { QualtricsConfig } from './config/qualtrics-config';
+import * as ɵngcc0 from '@angular/core';
 export declare class QualtricsLoaderService {
     private winRef;
     private config;
@@ -16,4 +17,7 @@ export declare class QualtricsLoaderService {
      * Return false otherwise.
      */
     protected isDataLoaded(): Observable<boolean>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<QualtricsLoaderService>;
 }
+
+//# sourceMappingURL=qualtrics-loader.service.d.ts.map

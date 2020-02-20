@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs';
 import { SkipLink, SkipLinkConfig, SkipLinkScrollPosition } from '../config/skip-link.config';
+import * as ɵngcc0 from '@angular/core';
 export declare class SkipLinkService {
     protected config: SkipLinkConfig;
     private skipLinks$;
@@ -9,4 +10,7 @@ export declare class SkipLinkService {
     remove(key: string): void;
     scrollToTarget(target: HTMLElement, position: SkipLinkScrollPosition, event: MouseEvent): void;
     protected getSkipLinkIndexInArray(key: string): number;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<SkipLinkService>;
 }
+
+//# sourceMappingURL=skip-link.service.d.ts.map

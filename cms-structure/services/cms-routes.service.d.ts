@@ -4,6 +4,7 @@ import { CmsMappingService } from './cms-mapping.service';
 /**
  * Please don't put that service in public API.
  * */
+import * as ɵngcc0 from '@angular/core';
 export declare class CmsRoutesService {
     private router;
     private cmsMapping;
@@ -20,4 +21,7 @@ export declare class CmsRoutesService {
      */
     handleCmsRoutesInGuard(pageContext: PageContext, componentTypes: string[], currentUrl: string, currentPageLabel: string): boolean;
     private updateRouting;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CmsRoutesService>;
 }
+
+//# sourceMappingURL=cms-routes.service.d.ts.map

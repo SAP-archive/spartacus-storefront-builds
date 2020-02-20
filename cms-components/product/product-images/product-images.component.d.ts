@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs';
 import { CurrentProductService } from '../current-product.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class ProductImagesComponent {
     private currentProductService;
     private mainMediaContainer;
@@ -22,4 +23,8 @@ export declare class ProductImagesComponent {
      * In case there are less then 2 thumbs, we return null.
      */
     private createThumbs;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<ProductImagesComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<ProductImagesComponent, "cx-product-images", never, {}, {}, never>;
 }
+
+//# sourceMappingURL=product-images.component.d.ts.map

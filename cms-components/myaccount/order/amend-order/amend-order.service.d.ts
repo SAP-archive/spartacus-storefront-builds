@@ -3,6 +3,7 @@ import { Order, OrderEntry, Price } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { OrderDetailsService } from '../order-details/order-details.service';
 import { AmendOrderType } from './amend-order.model';
+import * as ɵngcc0 from '@angular/core';
 export declare abstract class OrderAmendService {
     protected orderDetailsService: OrderDetailsService;
     protected amendType: AmendOrderType;
@@ -34,4 +35,8 @@ export declare abstract class OrderAmendService {
     getAmendedPrice(entry: OrderEntry): Price;
     getMaxAmendQuantity(entry: OrderEntry): number;
     isCancellation(): boolean;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<OrderAmendService>;
+    static ɵprov: ɵngcc0.ɵɵInjectableDef<OrderAmendService>;
 }
+
+//# sourceMappingURL=amend-order.service.d.ts.map

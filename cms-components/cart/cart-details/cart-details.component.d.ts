@@ -3,6 +3,7 @@ import { AuthService, Cart, CartService, FeatureConfigService, OrderEntry, Promo
 import { Observable } from 'rxjs';
 import { PromotionService } from '../../../shared/services/promotion/promotion.service';
 import { Item } from '../cart-shared/cart-item/cart-item.component';
+import * as ɵngcc0 from '@angular/core';
 export declare class CartDetailsComponent implements OnInit {
     protected cartService: CartService;
     protected promotionService?: PromotionService;
@@ -33,4 +34,8 @@ export declare class CartDetailsComponent implements OnInit {
      */
     getAllPromotionsForCart(cart: Cart): any[];
     saveForLater(item: Item): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CartDetailsComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<CartDetailsComponent, "cx-cart-details", never, {}, {}, never>;
 }
+
+//# sourceMappingURL=cart-details.component.d.ts.map

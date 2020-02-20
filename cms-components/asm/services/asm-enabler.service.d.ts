@@ -7,6 +7,7 @@ import { OutletService } from '../../../cms-structure/index';
  * where it's actually used. This service is added to avoid any polution
  * of the UI and runtime performance for the ordinary production user.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class AsmEnablerService {
     protected location: Location;
     protected winRef: WindowRef;
@@ -37,4 +38,7 @@ export declare class AsmEnablerService {
      * Adds the ASM UI by using the `cx-storefront` outlet.
      */
     private addUi;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<AsmEnablerService>;
 }
+
+//# sourceMappingURL=asm-enabler.service.d.ts.map

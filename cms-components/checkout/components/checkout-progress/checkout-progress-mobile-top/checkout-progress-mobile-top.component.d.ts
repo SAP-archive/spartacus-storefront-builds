@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { RoutingService, CartService, Cart, RoutingConfigService } from '@spartacus/core';
 import { CheckoutConfig } from '../../../config/checkout-config';
 import { CheckoutStep } from '../../../model/checkout-step.model';
+import * as ɵngcc0 from '@angular/core';
 export declare class CheckoutProgressMobileTopComponent implements OnInit {
     protected config: CheckoutConfig;
     protected routingService: RoutingService;
@@ -15,4 +16,8 @@ export declare class CheckoutProgressMobileTopComponent implements OnInit {
     activeStepIndex: number;
     activeStepUrl: string;
     ngOnInit(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CheckoutProgressMobileTopComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<CheckoutProgressMobileTopComponent, "cx-checkout-progress-mobile-top", never, {}, {}, never>;
 }
+
+//# sourceMappingURL=checkout-progress-mobile-top.component.d.ts.map

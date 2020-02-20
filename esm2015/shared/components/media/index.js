@@ -1,9 +1,4 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-export { MediaComponent } from './media.component';
-export {} from './media.model';
-export { MediaModule } from './media.module';
-export { MediaService } from './media.service';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJzaGFyZWQvY29tcG9uZW50cy9tZWRpYS9pbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7O0FBQUEsK0JBQWMsbUJBQW1CLENBQUM7QUFDbEMsZUFBYyxlQUFlLENBQUM7QUFDOUIsNEJBQWMsZ0JBQWdCLENBQUM7QUFDL0IsNkJBQWMsaUJBQWlCLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgKiBmcm9tICcuL21lZGlhLmNvbXBvbmVudCc7XG5leHBvcnQgKiBmcm9tICcuL21lZGlhLm1vZGVsJztcbmV4cG9ydCAqIGZyb20gJy4vbWVkaWEubW9kdWxlJztcbmV4cG9ydCAqIGZyb20gJy4vbWVkaWEuc2VydmljZSc7XG4iXX0=
+export * from './media.component';
+export * from './media.module';
+export * from './media.service';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJzaGFyZWQvY29tcG9uZW50cy9tZWRpYS9pbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjLG1CQUFtQixDQUFDO0FBRWxDLGNBQWMsZ0JBQWdCLENBQUM7QUFDL0IsY0FBYyxpQkFBaUIsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCAqIGZyb20gJy4vbWVkaWEuY29tcG9uZW50JztcbmV4cG9ydCAqIGZyb20gJy4vbWVkaWEubW9kZWwnO1xuZXhwb3J0ICogZnJvbSAnLi9tZWRpYS5tb2R1bGUnO1xuZXhwb3J0ICogZnJvbSAnLi9tZWRpYS5zZXJ2aWNlJztcbiJdfQ==

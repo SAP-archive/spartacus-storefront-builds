@@ -1,140 +1,22 @@
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * The item type is used to add semantic structure to the
+ * PaginationItem, so that the UI understands the usage.
  */
-/**
- * Represents a page item for a pagination system. This is used
- * to store the model of each page.
- * @record
- */
-export function PaginationItem() { }
-if (false) {
-    /** @type {?|undefined} */
-    PaginationItem.prototype.label;
-    /** @type {?|undefined} */
-    PaginationItem.prototype.type;
-    /**
-     * The number is used when the type is {\@link PaginationItemType.PAGE}
-     * @type {?|undefined}
-     */
-    PaginationItem.prototype.number;
-}
-/** @enum {string} */
-var PaginationItemType = {
-    GAP: 'gap',
-    FIRST: 'first',
-    LAST: 'last',
-    PREVIOUS: 'previous',
-    NEXT: 'next',
-    START: 'start',
-    END: 'end',
-    PAGE: 'page',
-};
-export { PaginationItemType };
-/**
- * @record
- */
-export function PaginationOptions() { }
-if (false) {
-    /**
-     * The range of direct accessible pages in the pagination.
-     *
-     * `« 4 (5) 6 »`
-     *
-     * Defaults to 3.
-     * @type {?|undefined}
-     */
-    PaginationOptions.prototype.rangeCount;
-    /**
-     * Adds a link to skip to the start of the pages, defaults to false.
-     * @type {?|undefined}
-     */
-    PaginationOptions.prototype.addStart;
-    /**
-     * A link to skip to the end of the pages, defaults to false.
-     * @type {?|undefined}
-     */
-    PaginationOptions.prototype.addEnd;
-    /**
-     * A link to the previous page, defaults to false.
-     * @type {?|undefined}
-     */
-    PaginationOptions.prototype.addPrevious;
-    /**
-     * A link to the previous page, defaults to false.
-     * @type {?|undefined}
-     */
-    PaginationOptions.prototype.addNext;
-    /** @type {?|undefined} */
-    PaginationOptions.prototype.navigationPosition;
-    /**
-     * A link to the first page can be added in case it is not included already, defaults to false.
-     * @type {?|undefined}
-     */
-    PaginationOptions.prototype.addFirst;
-    /**
-     * A link to the last page can be added in case it is not included already, defaults to false.
-     * @type {?|undefined}
-     */
-    PaginationOptions.prototype.addLast;
-    /**
-     * Adds a gap before and after the pages. to visualize hidden pages. Defaults to false.
-     *
-     * `1 ...  4 (5) 6 ... 18`
-     *
-     * Defaults to false.
-     * @type {?|undefined}
-     */
-    PaginationOptions.prototype.addDots;
-    /**
-     * If the page dots only represents a single page, we rather add the page
-     * as this would take the same amount of space. Some UX might want to use
-     * the dots for consistency reasons, which why this option is configurable.
-     *
-     * This typically happens on the 4th page (in case the range is 3):
-     * Instead of having:
-     *
-     *  `1 ...  3 (4) 5`
-     *
-     * we'd have
-     *
-     * `1 2 3 (4) 5`.
-     *
-     * Defaults to false.
-     * @type {?|undefined}
-     */
-    PaginationOptions.prototype.substituteDotsForSingularPage;
-    /**
-     * Custom label for the start link, defaults to `«`.
-     * @type {?|undefined}
-     */
-    PaginationOptions.prototype.startLabel;
-    /**
-     * Custom label for the previous link, defaults to `‹`.
-     * @type {?|undefined}
-     */
-    PaginationOptions.prototype.previousLabel;
-    /**
-     * Custom label for the next link, defaults to `›`.
-     * @type {?|undefined}
-     */
-    PaginationOptions.prototype.nextLabel;
-    /**
-     * Custom label for the end link, defaults to `»`.
-     * @type {?|undefined}
-     */
-    PaginationOptions.prototype.endLabel;
-    /**
-     * Custom label for the dots, defaults to `...`.
-     * @type {?|undefined}
-     */
-    PaginationOptions.prototype.dotsLabel;
-}
-/** @enum {string} */
-var PaginationNavigationPosition = {
-    ASIDE: 'aside',
-    BEFORE: 'before',
-    AFTER: 'after',
-};
-export { PaginationNavigationPosition };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFnaW5hdGlvbi5tb2RlbC5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BzcGFydGFjdXMvc3RvcmVmcm9udC8iLCJzb3VyY2VzIjpbInNoYXJlZC9jb21wb25lbnRzL2xpc3QtbmF2aWdhdGlvbi9wYWdpbmF0aW9uL3BhZ2luYXRpb24ubW9kZWwudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBSUEsb0NBS0M7OztJQUpDLCtCQUFlOztJQUNmLDhCQUEwQjs7Ozs7SUFFMUIsZ0NBQWdCOzs7O0lBUWhCLEtBQU0sS0FBSztJQUNYLE9BQVEsT0FBTztJQUNmLE1BQU8sTUFBTTtJQUNiLFVBQVcsVUFBVTtJQUNyQixNQUFPLE1BQU07SUFDYixPQUFRLE9BQU87SUFDZixLQUFNLEtBQUs7SUFDWCxNQUFPLE1BQU07Ozs7OztBQUdmLHVDQStEQzs7Ozs7Ozs7OztJQXZEQyx1Q0FBb0I7Ozs7O0lBR3BCLHFDQUFtQjs7Ozs7SUFFbkIsbUNBQWlCOzs7OztJQUVqQix3Q0FBc0I7Ozs7O0lBRXRCLG9DQUFrQjs7SUFFbEIsK0NBQWtEOzs7OztJQUdsRCxxQ0FBbUI7Ozs7O0lBRW5CLG9DQUFrQjs7Ozs7Ozs7O0lBU2xCLG9DQUFrQjs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBa0JsQiwwREFBd0M7Ozs7O0lBR3hDLHVDQUFvQjs7Ozs7SUFFcEIsMENBQXVCOzs7OztJQUV2QixzQ0FBbUI7Ozs7O0lBRW5CLHFDQUFrQjs7Ozs7SUFFbEIsc0NBQW1COzs7O0lBSW5CLE9BQVEsT0FBTztJQUNmLFFBQVMsUUFBUTtJQUNqQixPQUFRLE9BQU8iLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIFJlcHJlc2VudHMgYSBwYWdlIGl0ZW0gZm9yIGEgcGFnaW5hdGlvbiBzeXN0ZW0uIFRoaXMgaXMgdXNlZFxuICogdG8gc3RvcmUgdGhlIG1vZGVsIG9mIGVhY2ggcGFnZS5cbiAqL1xuZXhwb3J0IGludGVyZmFjZSBQYWdpbmF0aW9uSXRlbSB7XG4gIGxhYmVsPzogc3RyaW5nO1xuICB0eXBlPzogUGFnaW5hdGlvbkl0ZW1UeXBlO1xuICAvKiogVGhlIG51bWJlciBpcyB1c2VkIHdoZW4gdGhlIHR5cGUgaXMge0BsaW5rIFBhZ2luYXRpb25JdGVtVHlwZS5QQUdFfSAqL1xuICBudW1iZXI/OiBudW1iZXI7XG59XG5cbi8qKlxuICogVGhlIGl0ZW0gdHlwZSBpcyB1c2VkIHRvIGFkZCBzZW1hbnRpYyBzdHJ1Y3R1cmUgdG8gdGhlXG4gKiBQYWdpbmF0aW9uSXRlbSwgc28gdGhhdCB0aGUgVUkgdW5kZXJzdGFuZHMgdGhlIHVzYWdlLlxuICovXG5leHBvcnQgZW51bSBQYWdpbmF0aW9uSXRlbVR5cGUge1xuICBHQVAgPSAnZ2FwJyxcbiAgRklSU1QgPSAnZmlyc3QnLFxuICBMQVNUID0gJ2xhc3QnLFxuICBQUkVWSU9VUyA9ICdwcmV2aW91cycsXG4gIE5FWFQgPSAnbmV4dCcsXG4gIFNUQVJUID0gJ3N0YXJ0JyxcbiAgRU5EID0gJ2VuZCcsXG4gIFBBR0UgPSAncGFnZScsXG59XG5cbmV4cG9ydCBpbnRlcmZhY2UgUGFnaW5hdGlvbk9wdGlvbnMge1xuICAvKipcbiAgICogVGhlIHJhbmdlIG9mIGRpcmVjdCBhY2Nlc3NpYmxlIHBhZ2VzIGluIHRoZSBwYWdpbmF0aW9uLlxuICAgKlxuICAgKiBgwqsgNCAoNSkgNiDCu2BcbiAgICpcbiAgICogRGVmYXVsdHMgdG8gMy5cbiAgICovXG4gIHJhbmdlQ291bnQ/OiBudW1iZXI7XG5cbiAgLyoqIEFkZHMgYSBsaW5rIHRvIHNraXAgdG8gdGhlIHN0YXJ0IG9mIHRoZSBwYWdlcywgZGVmYXVsdHMgdG8gZmFsc2UuICovXG4gIGFkZFN0YXJ0PzogYm9vbGVhbjtcbiAgLyoqIEEgbGluayB0byBza2lwIHRvIHRoZSBlbmQgb2YgdGhlIHBhZ2VzLCBkZWZhdWx0cyB0byBmYWxzZS4gKi9cbiAgYWRkRW5kPzogYm9vbGVhbjtcbiAgLyoqIEEgbGluayB0byB0aGUgcHJldmlvdXMgcGFnZSwgZGVmYXVsdHMgdG8gZmFsc2UuICovXG4gIGFkZFByZXZpb3VzPzogYm9vbGVhbjtcbiAgLyoqIEEgbGluayB0byB0aGUgcHJldmlvdXMgcGFnZSwgZGVmYXVsdHMgdG8gZmFsc2UuICovXG4gIGFkZE5leHQ/OiBib29sZWFuO1xuXG4gIG5hdmlnYXRpb25Qb3NpdGlvbj86IFBhZ2luYXRpb25OYXZpZ2F0aW9uUG9zaXRpb247XG5cbiAgLyoqIEEgbGluayB0byB0aGUgZmlyc3QgcGFnZSBjYW4gYmUgYWRkZWQgaW4gY2FzZSBpdCBpcyBub3QgaW5jbHVkZWQgYWxyZWFkeSwgZGVmYXVsdHMgdG8gZmFsc2UuICovXG4gIGFkZEZpcnN0PzogYm9vbGVhbjtcbiAgLyoqIEEgbGluayB0byB0aGUgbGFzdCBwYWdlIGNhbiBiZSBhZGRlZCBpbiBjYXNlIGl0IGlzIG5vdCBpbmNsdWRlZCBhbHJlYWR5LCBkZWZhdWx0cyB0byBmYWxzZS4gKi9cbiAgYWRkTGFzdD86IGJvb2xlYW47XG5cbiAgLyoqXG4gICAqIEFkZHMgYSBnYXAgYmVmb3JlIGFuZCBhZnRlciB0aGUgcGFnZXMuIHRvIHZpc3VhbGl6ZSBoaWRkZW4gcGFnZXMuIERlZmF1bHRzIHRvIGZhbHNlLlxuICAgKlxuICAgKiBgMSAuLi4gIDQgKDUpIDYgLi4uIDE4YFxuICAgKlxuICAgKiBEZWZhdWx0cyB0byBmYWxzZS5cbiAgICovXG4gIGFkZERvdHM/OiBib29sZWFuO1xuXG4gIC8qKlxuICAgKiBJZiB0aGUgcGFnZSBkb3RzIG9ubHkgcmVwcmVzZW50cyBhIHNpbmdsZSBwYWdlLCB3ZSByYXRoZXIgYWRkIHRoZSBwYWdlXG4gICAqIGFzIHRoaXMgd291bGQgdGFrZSB0aGUgc2FtZSBhbW91bnQgb2Ygc3BhY2UuIFNvbWUgVVggbWlnaHQgd2FudCB0byB1c2VcbiAgICogdGhlIGRvdHMgZm9yIGNvbnNpc3RlbmN5IHJlYXNvbnMsIHdoaWNoIHdoeSB0aGlzIG9wdGlvbiBpcyBjb25maWd1cmFibGUuXG4gICAqXG4gICAqIFRoaXMgdHlwaWNhbGx5IGhhcHBlbnMgb24gdGhlIDR0aCBwYWdlIChpbiBjYXNlIHRoZSByYW5nZSBpcyAzKTpcbiAgICogSW5zdGVhZCBvZiBoYXZpbmc6XG4gICAqXG4gICAqICBgMSAuLi4gIDMgKDQpIDVgXG4gICAqXG4gICAqIHdlJ2QgaGF2ZVxuICAgKlxuICAgKiBgMSAyIDMgKDQpIDVgLlxuICAgKlxuICAgKiBEZWZhdWx0cyB0byBmYWxzZS5cbiAgICovXG4gIHN1YnN0aXR1dGVEb3RzRm9yU2luZ3VsYXJQYWdlPzogYm9vbGVhbjtcblxuICAvKiogQ3VzdG9tIGxhYmVsIGZvciB0aGUgc3RhcnQgbGluaywgZGVmYXVsdHMgdG8gYMKrYC4gKi9cbiAgc3RhcnRMYWJlbD86IHN0cmluZztcbiAgLyoqIEN1c3RvbSBsYWJlbCBmb3IgdGhlIHByZXZpb3VzIGxpbmssIGRlZmF1bHRzIHRvIGDigLlgLiAqL1xuICBwcmV2aW91c0xhYmVsPzogc3RyaW5nO1xuICAvKiogQ3VzdG9tIGxhYmVsIGZvciB0aGUgbmV4dCBsaW5rLCBkZWZhdWx0cyB0byBg4oC6YC4gKi9cbiAgbmV4dExhYmVsPzogc3RyaW5nO1xuICAvKiogQ3VzdG9tIGxhYmVsIGZvciB0aGUgZW5kIGxpbmssIGRlZmF1bHRzIHRvIGDCu2AuICovXG4gIGVuZExhYmVsPzogc3RyaW5nO1xuICAvKiogQ3VzdG9tIGxhYmVsIGZvciB0aGUgZG90cywgZGVmYXVsdHMgdG8gYC4uLmAuICovXG4gIGRvdHNMYWJlbD86IHN0cmluZztcbn1cblxuZXhwb3J0IGVudW0gUGFnaW5hdGlvbk5hdmlnYXRpb25Qb3NpdGlvbiB7XG4gIEFTSURFID0gJ2FzaWRlJyxcbiAgQkVGT1JFID0gJ2JlZm9yZScsXG4gIEFGVEVSID0gJ2FmdGVyJyxcbn1cbiJdfQ==
+export var PaginationItemType;
+(function (PaginationItemType) {
+    PaginationItemType["GAP"] = "gap";
+    PaginationItemType["FIRST"] = "first";
+    PaginationItemType["LAST"] = "last";
+    PaginationItemType["PREVIOUS"] = "previous";
+    PaginationItemType["NEXT"] = "next";
+    PaginationItemType["START"] = "start";
+    PaginationItemType["END"] = "end";
+    PaginationItemType["PAGE"] = "page";
+})(PaginationItemType || (PaginationItemType = {}));
+export var PaginationNavigationPosition;
+(function (PaginationNavigationPosition) {
+    PaginationNavigationPosition["ASIDE"] = "aside";
+    PaginationNavigationPosition["BEFORE"] = "before";
+    PaginationNavigationPosition["AFTER"] = "after";
+})(PaginationNavigationPosition || (PaginationNavigationPosition = {}));
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFnaW5hdGlvbi5tb2RlbC5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BzcGFydGFjdXMvc3RvcmVmcm9udC8iLCJzb3VyY2VzIjpbInNoYXJlZC9jb21wb25lbnRzL2xpc3QtbmF2aWdhdGlvbi9wYWdpbmF0aW9uL3BhZ2luYXRpb24ubW9kZWwudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBV0E7OztHQUdHO0FBQ0gsTUFBTSxDQUFOLElBQVksa0JBU1g7QUFURCxXQUFZLGtCQUFrQjtJQUM1QixpQ0FBVyxDQUFBO0lBQ1gscUNBQWUsQ0FBQTtJQUNmLG1DQUFhLENBQUE7SUFDYiwyQ0FBcUIsQ0FBQTtJQUNyQixtQ0FBYSxDQUFBO0lBQ2IscUNBQWUsQ0FBQTtJQUNmLGlDQUFXLENBQUE7SUFDWCxtQ0FBYSxDQUFBO0FBQ2YsQ0FBQyxFQVRXLGtCQUFrQixLQUFsQixrQkFBa0IsUUFTN0I7QUFtRUQsTUFBTSxDQUFOLElBQVksNEJBSVg7QUFKRCxXQUFZLDRCQUE0QjtJQUN0QywrQ0FBZSxDQUFBO0lBQ2YsaURBQWlCLENBQUE7SUFDakIsK0NBQWUsQ0FBQTtBQUNqQixDQUFDLEVBSlcsNEJBQTRCLEtBQTVCLDRCQUE0QixRQUl2QyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogUmVwcmVzZW50cyBhIHBhZ2UgaXRlbSBmb3IgYSBwYWdpbmF0aW9uIHN5c3RlbS4gVGhpcyBpcyB1c2VkXG4gKiB0byBzdG9yZSB0aGUgbW9kZWwgb2YgZWFjaCBwYWdlLlxuICovXG5leHBvcnQgaW50ZXJmYWNlIFBhZ2luYXRpb25JdGVtIHtcbiAgbGFiZWw/OiBzdHJpbmc7XG4gIHR5cGU/OiBQYWdpbmF0aW9uSXRlbVR5cGU7XG4gIC8qKiBUaGUgbnVtYmVyIGlzIHVzZWQgd2hlbiB0aGUgdHlwZSBpcyB7QGxpbmsgUGFnaW5hdGlvbkl0ZW1UeXBlLlBBR0V9ICovXG4gIG51bWJlcj86IG51bWJlcjtcbn1cblxuLyoqXG4gKiBUaGUgaXRlbSB0eXBlIGlzIHVzZWQgdG8gYWRkIHNlbWFudGljIHN0cnVjdHVyZSB0byB0aGVcbiAqIFBhZ2luYXRpb25JdGVtLCBzbyB0aGF0IHRoZSBVSSB1bmRlcnN0YW5kcyB0aGUgdXNhZ2UuXG4gKi9cbmV4cG9ydCBlbnVtIFBhZ2luYXRpb25JdGVtVHlwZSB7XG4gIEdBUCA9ICdnYXAnLFxuICBGSVJTVCA9ICdmaXJzdCcsXG4gIExBU1QgPSAnbGFzdCcsXG4gIFBSRVZJT1VTID0gJ3ByZXZpb3VzJyxcbiAgTkVYVCA9ICduZXh0JyxcbiAgU1RBUlQgPSAnc3RhcnQnLFxuICBFTkQgPSAnZW5kJyxcbiAgUEFHRSA9ICdwYWdlJyxcbn1cblxuZXhwb3J0IGludGVyZmFjZSBQYWdpbmF0aW9uT3B0aW9ucyB7XG4gIC8qKlxuICAgKiBUaGUgcmFuZ2Ugb2YgZGlyZWN0IGFjY2Vzc2libGUgcGFnZXMgaW4gdGhlIHBhZ2luYXRpb24uXG4gICAqXG4gICAqIGDCqyA0ICg1KSA2IMK7YFxuICAgKlxuICAgKiBEZWZhdWx0cyB0byAzLlxuICAgKi9cbiAgcmFuZ2VDb3VudD86IG51bWJlcjtcblxuICAvKiogQWRkcyBhIGxpbmsgdG8gc2tpcCB0byB0aGUgc3RhcnQgb2YgdGhlIHBhZ2VzLCBkZWZhdWx0cyB0byBmYWxzZS4gKi9cbiAgYWRkU3RhcnQ/OiBib29sZWFuO1xuICAvKiogQSBsaW5rIHRvIHNraXAgdG8gdGhlIGVuZCBvZiB0aGUgcGFnZXMsIGRlZmF1bHRzIHRvIGZhbHNlLiAqL1xuICBhZGRFbmQ/OiBib29sZWFuO1xuICAvKiogQSBsaW5rIHRvIHRoZSBwcmV2aW91cyBwYWdlLCBkZWZhdWx0cyB0byBmYWxzZS4gKi9cbiAgYWRkUHJldmlvdXM/OiBib29sZWFuO1xuICAvKiogQSBsaW5rIHRvIHRoZSBwcmV2aW91cyBwYWdlLCBkZWZhdWx0cyB0byBmYWxzZS4gKi9cbiAgYWRkTmV4dD86IGJvb2xlYW47XG5cbiAgbmF2aWdhdGlvblBvc2l0aW9uPzogUGFnaW5hdGlvbk5hdmlnYXRpb25Qb3NpdGlvbjtcblxuICAvKiogQSBsaW5rIHRvIHRoZSBmaXJzdCBwYWdlIGNhbiBiZSBhZGRlZCBpbiBjYXNlIGl0IGlzIG5vdCBpbmNsdWRlZCBhbHJlYWR5LCBkZWZhdWx0cyB0byBmYWxzZS4gKi9cbiAgYWRkRmlyc3Q/OiBib29sZWFuO1xuICAvKiogQSBsaW5rIHRvIHRoZSBsYXN0IHBhZ2UgY2FuIGJlIGFkZGVkIGluIGNhc2UgaXQgaXMgbm90IGluY2x1ZGVkIGFscmVhZHksIGRlZmF1bHRzIHRvIGZhbHNlLiAqL1xuICBhZGRMYXN0PzogYm9vbGVhbjtcblxuICAvKipcbiAgICogQWRkcyBhIGdhcCBiZWZvcmUgYW5kIGFmdGVyIHRoZSBwYWdlcy4gdG8gdmlzdWFsaXplIGhpZGRlbiBwYWdlcy4gRGVmYXVsdHMgdG8gZmFsc2UuXG4gICAqXG4gICAqIGAxIC4uLiAgNCAoNSkgNiAuLi4gMThgXG4gICAqXG4gICAqIERlZmF1bHRzIHRvIGZhbHNlLlxuICAgKi9cbiAgYWRkRG90cz86IGJvb2xlYW47XG5cbiAgLyoqXG4gICAqIElmIHRoZSBwYWdlIGRvdHMgb25seSByZXByZXNlbnRzIGEgc2luZ2xlIHBhZ2UsIHdlIHJhdGhlciBhZGQgdGhlIHBhZ2VcbiAgICogYXMgdGhpcyB3b3VsZCB0YWtlIHRoZSBzYW1lIGFtb3VudCBvZiBzcGFjZS4gU29tZSBVWCBtaWdodCB3YW50IHRvIHVzZVxuICAgKiB0aGUgZG90cyBmb3IgY29uc2lzdGVuY3kgcmVhc29ucywgd2hpY2ggd2h5IHRoaXMgb3B0aW9uIGlzIGNvbmZpZ3VyYWJsZS5cbiAgICpcbiAgICogVGhpcyB0eXBpY2FsbHkgaGFwcGVucyBvbiB0aGUgNHRoIHBhZ2UgKGluIGNhc2UgdGhlIHJhbmdlIGlzIDMpOlxuICAgKiBJbnN0ZWFkIG9mIGhhdmluZzpcbiAgICpcbiAgICogIGAxIC4uLiAgMyAoNCkgNWBcbiAgICpcbiAgICogd2UnZCBoYXZlXG4gICAqXG4gICAqIGAxIDIgMyAoNCkgNWAuXG4gICAqXG4gICAqIERlZmF1bHRzIHRvIGZhbHNlLlxuICAgKi9cbiAgc3Vic3RpdHV0ZURvdHNGb3JTaW5ndWxhclBhZ2U/OiBib29sZWFuO1xuXG4gIC8qKiBDdXN0b20gbGFiZWwgZm9yIHRoZSBzdGFydCBsaW5rLCBkZWZhdWx0cyB0byBgwqtgLiAqL1xuICBzdGFydExhYmVsPzogc3RyaW5nO1xuICAvKiogQ3VzdG9tIGxhYmVsIGZvciB0aGUgcHJldmlvdXMgbGluaywgZGVmYXVsdHMgdG8gYOKAuWAuICovXG4gIHByZXZpb3VzTGFiZWw/OiBzdHJpbmc7XG4gIC8qKiBDdXN0b20gbGFiZWwgZm9yIHRoZSBuZXh0IGxpbmssIGRlZmF1bHRzIHRvIGDigLpgLiAqL1xuICBuZXh0TGFiZWw/OiBzdHJpbmc7XG4gIC8qKiBDdXN0b20gbGFiZWwgZm9yIHRoZSBlbmQgbGluaywgZGVmYXVsdHMgdG8gYMK7YC4gKi9cbiAgZW5kTGFiZWw/OiBzdHJpbmc7XG4gIC8qKiBDdXN0b20gbGFiZWwgZm9yIHRoZSBkb3RzLCBkZWZhdWx0cyB0byBgLi4uYC4gKi9cbiAgZG90c0xhYmVsPzogc3RyaW5nO1xufVxuXG5leHBvcnQgZW51bSBQYWdpbmF0aW9uTmF2aWdhdGlvblBvc2l0aW9uIHtcbiAgQVNJREUgPSAnYXNpZGUnLFxuICBCRUZPUkUgPSAnYmVmb3JlJyxcbiAgQUZURVIgPSAnYWZ0ZXInLFxufVxuIl19

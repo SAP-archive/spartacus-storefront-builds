@@ -3,6 +3,7 @@ import { RoutingConfigService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { CheckoutConfigService } from '../services/checkout-config.service';
 import { CheckoutDetailsService } from '../services/checkout-details.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class PaymentDetailsSetGuard implements CanActivate {
     private checkoutDetailsService;
     private checkoutConfigService;
@@ -10,4 +11,7 @@ export declare class PaymentDetailsSetGuard implements CanActivate {
     private router;
     constructor(checkoutDetailsService: CheckoutDetailsService, checkoutConfigService: CheckoutConfigService, routingConfigService: RoutingConfigService, router: Router);
     canActivate(): Observable<boolean | UrlTree>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<PaymentDetailsSetGuard>;
 }
+
+//# sourceMappingURL=payment-details-set.guard.d.ts.map

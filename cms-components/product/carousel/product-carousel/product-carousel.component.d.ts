@@ -1,6 +1,7 @@
 import { CmsProductCarouselComponent as model, FeatureConfigService, Product, ProductService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { CmsComponentData } from '../../../../cms-structure/page/model/cms-component-data';
+import * as ɵngcc0 from '@angular/core';
 export declare class ProductCarouselComponent {
     protected componentData: CmsComponentData<model>;
     protected productService: ProductService;
@@ -22,4 +23,8 @@ export declare class ProductCarouselComponent {
      * @deprecated since 1.4
      */
     constructor(componentData: CmsComponentData<model>, productService: ProductService);
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<ProductCarouselComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<ProductCarouselComponent, "cx-product-carousel", never, {}, {}, never>;
 }
+
+//# sourceMappingURL=product-carousel.component.d.ts.map

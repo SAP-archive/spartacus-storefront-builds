@@ -1,6 +1,7 @@
 import { OnDestroy } from '@angular/core';
 import { ReturnRequestList, OrderReturnRequestService, TranslationService } from '@spartacus/core';
 import { Observable } from 'rxjs';
+import * as ɵngcc0 from '@angular/core';
 export declare class OrderReturnRequestListComponent implements OnDestroy {
     private returnRequestService;
     private translation;
@@ -21,4 +22,8 @@ export declare class OrderReturnRequestListComponent implements OnDestroy {
         byRMA: string;
     }>;
     private fetchReturnRequests;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<OrderReturnRequestListComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<OrderReturnRequestListComponent, "cx-order-return-request-list", never, {}, {}, never>;
 }
+
+//# sourceMappingURL=order-return-request-list.component.d.ts.map

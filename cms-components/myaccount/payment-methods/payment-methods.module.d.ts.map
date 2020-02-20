@@ -1,0 +1,1 @@
+{"version":3,"file":"payment-methods.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/myaccount/payment-methods/payment-methods.module.d.ts"],"sourcesContent":["export declare class PaymentMethodsModule {\n}\n"],"names":[],"mappings":";;;;;;AAAA;;;AACA;"}

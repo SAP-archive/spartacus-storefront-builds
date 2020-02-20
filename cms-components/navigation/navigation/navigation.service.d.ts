@@ -1,6 +1,7 @@
 import { CmsNavigationComponent, CmsService, SemanticPathService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { NavigationNode } from './navigation-node.model';
+import * as ɵngcc0 from '@angular/core';
 export declare class NavigationService {
     protected cmsService: CmsService;
     protected semanticPathService: SemanticPathService;
@@ -34,4 +35,7 @@ export declare class NavigationService {
      * Gets the URL or link to a related item (category)
      */
     private getLink;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<NavigationService>;
 }
+
+//# sourceMappingURL=navigation.service.d.ts.map

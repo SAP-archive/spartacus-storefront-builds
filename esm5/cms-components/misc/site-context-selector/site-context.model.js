@@ -1,11 +1,6 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @enum {string} */
-var SiteContextType = {
-    LANGUAGE: 'LANGUAGE',
-    CURRENCY: 'CURRENCY',
-};
-export { SiteContextType };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2l0ZS1jb250ZXh0Lm1vZGVsLmpzIiwic291cmNlUm9vdCI6Im5nOi8vQHNwYXJ0YWN1cy9zdG9yZWZyb250LyIsInNvdXJjZXMiOlsiY21zLWNvbXBvbmVudHMvbWlzYy9zaXRlLWNvbnRleHQtc2VsZWN0b3Ivc2l0ZS1jb250ZXh0Lm1vZGVsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztJQUNFLFVBQVcsVUFBVTtJQUNyQixVQUFXLFVBQVUiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZW51bSBTaXRlQ29udGV4dFR5cGUge1xuICBMQU5HVUFHRSA9ICdMQU5HVUFHRScsXG4gIENVUlJFTkNZID0gJ0NVUlJFTkNZJyxcbn1cbiJdfQ==
+export var SiteContextType;
+(function (SiteContextType) {
+    SiteContextType["LANGUAGE"] = "LANGUAGE";
+    SiteContextType["CURRENCY"] = "CURRENCY";
+})(SiteContextType || (SiteContextType = {}));
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2l0ZS1jb250ZXh0Lm1vZGVsLmpzIiwic291cmNlUm9vdCI6Im5nOi8vQHNwYXJ0YWN1cy9zdG9yZWZyb250LyIsInNvdXJjZXMiOlsiY21zLWNvbXBvbmVudHMvbWlzYy9zaXRlLWNvbnRleHQtc2VsZWN0b3Ivc2l0ZS1jb250ZXh0Lm1vZGVsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBTixJQUFZLGVBR1g7QUFIRCxXQUFZLGVBQWU7SUFDekIsd0NBQXFCLENBQUE7SUFDckIsd0NBQXFCLENBQUE7QUFDdkIsQ0FBQyxFQUhXLGVBQWUsS0FBZixlQUFlLFFBRzFCIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGVudW0gU2l0ZUNvbnRleHRUeXBlIHtcbiAgTEFOR1VBR0UgPSAnTEFOR1VBR0UnLFxuICBDVVJSRU5DWSA9ICdDVVJSRU5DWScsXG59XG4iXX0=

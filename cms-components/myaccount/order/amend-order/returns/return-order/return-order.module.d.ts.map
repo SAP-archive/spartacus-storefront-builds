@@ -1,0 +1,1 @@
+{"version":3,"file":"return-order.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/myaccount/order/amend-order/returns/return-order/return-order.module.d.ts"],"sourcesContent":["export declare class ReturnOrderModule {\n}\n"],"names":[],"mappings":";;;;;;;AAAA;;;AACA;"}

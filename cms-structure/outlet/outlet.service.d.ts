@@ -1,5 +1,6 @@
 import { TemplateRef } from '@angular/core';
 import { OutletPosition } from './outlet.model';
+import * as ɵngcc0 from '@angular/core';
 export declare class OutletService<T = TemplateRef<any>> {
     private templatesRefs;
     private templatesRefsBefore;
@@ -30,4 +31,7 @@ export declare class OutletService<T = TemplateRef<any>> {
      */
     get(outlet: string, position?: OutletPosition, stacked?: boolean): T[] | T;
     private store;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<OutletService<any>>;
 }
+
+//# sourceMappingURL=outlet.service.d.ts.map

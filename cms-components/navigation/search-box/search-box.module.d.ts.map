@@ -1,0 +1,1 @@
+{"version":3,"file":"search-box.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/navigation/search-box/search-box.module.d.ts"],"sourcesContent":["export declare class SearchBoxModule {\n}\n"],"names":[],"mappings":";;;;;;;;AAAA;;;AACA;"}

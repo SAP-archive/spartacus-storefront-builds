@@ -1,0 +1,1 @@
+{"version":3,"file":"cms-route.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-structure/routing/cms-route/cms-route.module.d.ts"],"sourcesContent":["export declare class CmsRouteModule {\n}\n"],"names":[],"mappings":";AAAA;;;AACA;"}

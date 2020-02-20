@@ -1,4 +1,4 @@
-import { PaginationConfig } from './config/index';
+import { PaginationConfig } from './config/pagination.config';
 import { PaginationItem } from './pagination.model';
 /**
  * Builds a pagination structures based on a pageCount and current page number.
@@ -24,6 +24,7 @@ import { PaginationItem } from './pagination.model';
  * The current page will always be centered in the page range to provide direct access
  * to the previous and next page.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class PaginationBuilder {
     protected paginationConfig: PaginationConfig;
     constructor(paginationConfig: PaginationConfig);
@@ -97,5 +98,8 @@ export declare class PaginationBuilder {
      * @param current The current page number, 0-index based.
      */
     private getStartOfRange;
-    private readonly config;
+    private get config();
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<PaginationBuilder>;
 }
+
+//# sourceMappingURL=pagination.builder.d.ts.map

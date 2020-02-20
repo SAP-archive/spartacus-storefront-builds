@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
  * increase and decrease functinality. The item counter expects an input `FormControl`
  * so that the state of the control can be managed outside of this component.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class ItemCounterComponent {
     /**
      * Holds the value of the counter, the state of the `FormControl`
@@ -57,4 +58,15 @@ export declare class ItemCounterComponent {
      *
      */
     private getValidCount;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<ItemCounterComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<ItemCounterComponent, "cx-item-counter", never, {
+    "min": "min";
+    "step": "step";
+    "allowZero": "allowZero";
+    "readonly": "readonly";
+    "control": "control";
+    "max": "max";
+}, {}, never>;
 }
+
+//# sourceMappingURL=item-counter.component.d.ts.map

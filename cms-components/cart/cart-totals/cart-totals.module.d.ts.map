@@ -1,0 +1,1 @@
+{"version":3,"file":"cart-totals.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/cart/cart-totals/cart-totals.module.d.ts"],"sourcesContent":["export declare class CartTotalsModule {\n}\n"],"names":[],"mappings":";;;;;;;AAAA;;;AACA;"}

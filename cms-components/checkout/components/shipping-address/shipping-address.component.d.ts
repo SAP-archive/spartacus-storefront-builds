@@ -5,6 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Card } from '../../../../shared/components/card/card.component';
 import { CheckoutConfigService } from '../../services/checkout-config.service';
 import { CheckoutStepType } from '../..';
+import * as ɵngcc0 from '@angular/core';
 export interface CardWithAddress {
     card: Card;
     address: Address;
@@ -119,4 +120,8 @@ export declare class ShippingAddressComponent implements OnInit, OnDestroy {
      * TODO(issue:#3921) deprecated since 1.3
      */
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<ShippingAddressComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<ShippingAddressComponent, "cx-shipping-address", never, {}, {}, never>;
 }
+
+//# sourceMappingURL=shipping-address.component.d.ts.map

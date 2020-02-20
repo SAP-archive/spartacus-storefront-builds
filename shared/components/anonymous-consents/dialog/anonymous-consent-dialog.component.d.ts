@@ -3,6 +3,7 @@ import { AnonymousConsent, AnonymousConsentsConfig, AnonymousConsentsService, Co
 import { Observable } from 'rxjs';
 import { ICON_TYPE } from '../../../../cms-components/misc/icon/index';
 import { ModalService } from '../../modal/index';
+import * as ɵngcc0 from '@angular/core';
 export declare class AnonymousConsentDialogComponent implements OnInit, OnDestroy {
     private config;
     private modalService;
@@ -27,4 +28,8 @@ export declare class AnonymousConsentDialogComponent implements OnInit, OnDestro
     }): void;
     getCorrespondingConsent(template: ConsentTemplate, consents?: AnonymousConsent[]): AnonymousConsent;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<AnonymousConsentDialogComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<AnonymousConsentDialogComponent, "cx-anonymous-consent-dialog", never, {}, {}, never>;
 }
+
+//# sourceMappingURL=anonymous-consent-dialog.component.d.ts.map

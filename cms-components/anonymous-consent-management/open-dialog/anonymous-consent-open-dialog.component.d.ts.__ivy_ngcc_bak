@@ -1,0 +1,6 @@
+import { ModalService } from '../../../shared/components/modal/modal.service';
+export declare class AnonymousConsentOpenDialogComponent {
+    protected modalService: ModalService;
+    constructor(modalService: ModalService);
+    openDialog(): void;
+}

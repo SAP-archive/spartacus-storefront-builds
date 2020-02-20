@@ -2,9 +2,10 @@ import { ElementRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Cart, CartService, OrderEntry, PromotionLocation, PromotionResult } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { ICON_TYPE } from '../../../../cms-components/misc/icon/index';
-import { ModalService } from '../../../../shared/components/modal/index';
+import { ICON_TYPE } from '../../../../cms-components/misc/icon/icon.model';
+import { ModalService } from '../../../../shared/components/modal/modal.service';
 import { PromotionService } from '../../../../shared/services/promotion/promotion.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class AddedToCartDialogComponent implements OnInit {
     protected modalService: ModalService;
     protected cartService: CartService;
@@ -37,4 +38,8 @@ export declare class AddedToCartDialogComponent implements OnInit {
     ngOnInit(): void;
     private getFormControl;
     dismissModal(reason?: any): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<AddedToCartDialogComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<AddedToCartDialogComponent, "cx-added-to-cart-dialog", never, {}, {}, never>;
 }
+
+//# sourceMappingURL=added-to-cart-dialog.component.d.ts.map

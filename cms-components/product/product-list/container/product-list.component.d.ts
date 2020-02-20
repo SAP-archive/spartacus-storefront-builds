@@ -5,6 +5,7 @@ import { PageLayoutService } from '../../../../cms-structure/page/index';
 import { ViewConfig } from '../../../../shared/config/view-config';
 import { ViewModes } from '../product-view/product-view.component';
 import { ProductListComponentService } from './product-list-component.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class ProductListComponent implements OnInit, OnDestroy {
     private pageLayoutService;
     private productListComponentService;
@@ -27,4 +28,8 @@ export declare class ProductListComponent implements OnInit, OnDestroy {
     sortList(sortCode: string): void;
     setViewMode(mode: ViewModes): void;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<ProductListComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<ProductListComponent, "cx-product-list", never, {}, {}, never>;
 }
+
+//# sourceMappingURL=product-list.component.d.ts.map

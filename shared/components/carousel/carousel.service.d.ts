@@ -1,5 +1,6 @@
 import { WindowRef } from '@spartacus/core';
 import { Observable } from 'rxjs';
+import * as ɵngcc0 from '@angular/core';
 export declare class CarouselService {
     private winRef;
     constructor(winRef: WindowRef);
@@ -23,4 +24,7 @@ export declare class CarouselService {
      * @param itemWidth The width per carousel item, in px or percentage.
      */
     private calculateItems;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CarouselService>;
 }
+
+//# sourceMappingURL=carousel.service.d.ts.map

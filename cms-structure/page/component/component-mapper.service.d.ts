@@ -1,5 +1,6 @@
 import { ComponentFactoryResolver, Renderer2 } from '@angular/core';
 import { CmsConfig } from '@spartacus/core';
+import * as ɵngcc0 from '@angular/core';
 export declare class ComponentMapperService {
     protected componentFactoryResolver: ComponentFactoryResolver;
     protected config: CmsConfig;
@@ -32,4 +33,7 @@ export declare class ComponentMapperService {
     getComponentFactoryByCode(typeCode: string): any;
     isWebComponent(typeCode: string): boolean;
     initWebComponent(componentType: string, renderer: Renderer2): Promise<string>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<ComponentMapperService>;
 }
+
+//# sourceMappingURL=component-mapper.service.d.ts.map

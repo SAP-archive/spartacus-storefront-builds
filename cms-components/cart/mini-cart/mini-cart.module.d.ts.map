@@ -1,0 +1,1 @@
+{"version":3,"file":"mini-cart.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/cart/mini-cart/mini-cart.module.d.ts"],"sourcesContent":["export declare class MiniCartModule {\n}\n"],"names":[],"mappings":";;;;;;AAAA;;;AACA;"}

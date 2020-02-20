@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Card } from '../../../../shared/components/card/card.component';
 import { ICON_TYPE } from '../../../misc/icon';
 import { CheckoutConfigService } from '../../services/checkout-config.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class PaymentMethodComponent implements OnInit, OnDestroy {
     protected userPaymentService: UserPaymentService;
     protected checkoutService: CheckoutService;
@@ -79,4 +80,8 @@ export declare class PaymentMethodComponent implements OnInit, OnDestroy {
      * TODO(issue:#4992) deprecated since 1.3
      */
     paymentMethodSelected(paymentDetails: PaymentDetails): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<PaymentMethodComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<PaymentMethodComponent, "cx-payment-method", never, {}, {}, never>;
 }
+
+//# sourceMappingURL=payment-method.component.d.ts.map

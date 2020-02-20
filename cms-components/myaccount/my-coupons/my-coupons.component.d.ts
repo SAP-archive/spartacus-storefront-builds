@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { CustomerCouponService, CustomerCouponSearchResult, PaginationModel } from '@spartacus/core';
 import { ICON_TYPE } from '../../misc/icon/icon.model';
 import { MyCouponsComponentService } from './my-coupons.component.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class MyCouponsComponent implements OnInit, OnDestroy {
     protected couponService: CustomerCouponService;
     protected myCouponsComponentService: MyCouponsComponentService;
@@ -35,4 +36,8 @@ export declare class MyCouponsComponent implements OnInit, OnDestroy {
         notification: boolean;
     }): void;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<MyCouponsComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<MyCouponsComponent, "cx-my-coupons", never, {}, {}, never>;
 }
+
+//# sourceMappingURL=my-coupons.component.d.ts.map

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { ICON_TYPE } from '../icon/icon.model';
 import { SiteContextComponentService } from './site-context-component.service';
 import { SiteContextType } from './site-context.model';
+import * as ɵngcc0 from '@angular/core';
 export declare class SiteContextSelectorComponent {
     private componentService;
     siteContextService: SiteContext<any>;
@@ -13,8 +14,14 @@ export declare class SiteContextSelectorComponent {
      */
     context: SiteContextType;
     constructor(componentService: SiteContextComponentService);
-    readonly items$: Observable<any>;
-    readonly activeItem$: Observable<string>;
-    active: string;
-    readonly label$: Observable<any>;
+    get items$(): Observable<any>;
+    get activeItem$(): Observable<string>;
+    set active(value: string);
+    get label$(): Observable<any>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<SiteContextSelectorComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<SiteContextSelectorComponent, "cx-site-context-selector", never, {
+    "context": "context";
+}, {}, never>;
 }
+
+//# sourceMappingURL=site-context-selector.component.d.ts.map

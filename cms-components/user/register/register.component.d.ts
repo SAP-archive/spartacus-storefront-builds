@@ -2,6 +2,7 @@ import { OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AnonymousConsent, AnonymousConsentsConfig, AnonymousConsentsService, AuthRedirectService, AuthService, FeatureConfigService, GlobalMessageService, RoutingService, Title, UserService, UserSignUp } from '@spartacus/core';
 import { Observable } from 'rxjs';
+import * as ɵngcc0 from '@angular/core';
 export declare class RegisterComponent implements OnInit, OnDestroy {
     protected auth: AuthService;
     protected authRedirectService: AuthRedirectService;
@@ -51,4 +52,8 @@ export declare class RegisterComponent implements OnInit, OnDestroy {
     toggleAnonymousConsent(): void;
     private registerUserProcessInit;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<RegisterComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<RegisterComponent, "cx-register", never, {}, {}, never>;
 }
+
+//# sourceMappingURL=register.component.d.ts.map

@@ -1,9 +1,6 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+import { __decorate } from "tslib";
 import { Component, Input } from '@angular/core';
-import { StoreFinderService, RoutingService, } from '@spartacus/core';
+import { StoreFinderService, PointOfService, RoutingService, } from '@spartacus/core';
 import { ActivatedRoute } from '@angular/router';
 import { ICON_TYPE } from '../../../misc/icon';
 var StoreFinderStoreComponent = /** @class */ (function () {
@@ -13,83 +10,39 @@ var StoreFinderStoreComponent = /** @class */ (function () {
         this.routingService = routingService;
         this.iconTypes = ICON_TYPE;
     }
-    /**
-     * @return {?}
-     */
-    StoreFinderStoreComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
+    StoreFinderStoreComponent.prototype.ngOnInit = function () {
         if (!this.location) {
             this.requestStoresData();
             this.location$ = this.storeFinderService.getFindStoresEntities();
             this.isLoading$ = this.storeFinderService.getStoresLoading();
         }
     };
-    /**
-     * @return {?}
-     */
-    StoreFinderStoreComponent.prototype.requestStoresData = /**
-     * @return {?}
-     */
-    function () {
+    StoreFinderStoreComponent.prototype.requestStoresData = function () {
         this.storeFinderService.viewStoreById(this.route.snapshot.params.store);
     };
-    /**
-     * @return {?}
-     */
-    StoreFinderStoreComponent.prototype.goBack = /**
-     * @return {?}
-     */
-    function () {
+    StoreFinderStoreComponent.prototype.goBack = function () {
         this.routingService.go([
             "store-finder/country/" + this.route.snapshot.params.country,
         ]);
     };
-    StoreFinderStoreComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'cx-store-finder-store',
-                    template: "<div\n  class=\"container\"\n  *ngIf=\"\n    location || (!(isLoading$ | async) && (location$ | async)) as location;\n    else loading\n  \"\n>\n  <div class=\"row cx-store-actions\">\n    <div class=\"col-md-4 col-sm-6 col-lg-2\">\n      <button class=\"btn btn-block btn-action\" (click)=\"goBack()\">\n        <cx-icon [type]=\"iconTypes.CARET_LEFT\"></cx-icon>\n        {{ 'storeFinder.backToList' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-12 p-0\">\n      <cx-store-finder-store-description\n        [disableMap]=\"disableMap\"\n        [location]=\"location\"\n      ></cx-store-finder-store-description>\n    </div>\n  </div>\n</div>\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
-                }] }
-    ];
-    /** @nocollapse */
     StoreFinderStoreComponent.ctorParameters = function () { return [
         { type: StoreFinderService },
         { type: ActivatedRoute },
         { type: RoutingService }
     ]; };
-    StoreFinderStoreComponent.propDecorators = {
-        location: [{ type: Input }],
-        disableMap: [{ type: Input }]
-    };
+    __decorate([
+        Input()
+    ], StoreFinderStoreComponent.prototype, "location", void 0);
+    __decorate([
+        Input()
+    ], StoreFinderStoreComponent.prototype, "disableMap", void 0);
+    StoreFinderStoreComponent = __decorate([
+        Component({
+            selector: 'cx-store-finder-store',
+            template: "<div\n  class=\"container\"\n  *ngIf=\"\n    location || (!(isLoading$ | async) && (location$ | async)) as location;\n    else loading\n  \"\n>\n  <div class=\"row cx-store-actions\">\n    <div class=\"col-md-4 col-sm-6 col-lg-2\">\n      <button class=\"btn btn-block btn-action\" (click)=\"goBack()\">\n        <cx-icon [type]=\"iconTypes.CARET_LEFT\"></cx-icon>\n        {{ 'storeFinder.backToList' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-12 p-0\">\n      <cx-store-finder-store-description\n        [disableMap]=\"disableMap\"\n        [location]=\"location\"\n      ></cx-store-finder-store-description>\n    </div>\n  </div>\n</div>\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
+        })
+    ], StoreFinderStoreComponent);
     return StoreFinderStoreComponent;
 }());
 export { StoreFinderStoreComponent };
-if (false) {
-    /** @type {?} */
-    StoreFinderStoreComponent.prototype.location$;
-    /** @type {?} */
-    StoreFinderStoreComponent.prototype.isLoading$;
-    /** @type {?} */
-    StoreFinderStoreComponent.prototype.iconTypes;
-    /** @type {?} */
-    StoreFinderStoreComponent.prototype.location;
-    /** @type {?} */
-    StoreFinderStoreComponent.prototype.disableMap;
-    /**
-     * @type {?}
-     * @private
-     */
-    StoreFinderStoreComponent.prototype.storeFinderService;
-    /**
-     * @type {?}
-     * @private
-     */
-    StoreFinderStoreComponent.prototype.route;
-    /**
-     * @type {?}
-     * @private
-     */
-    StoreFinderStoreComponent.prototype.routingService;
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RvcmUtZmluZGVyLXN0b3JlLmNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BzcGFydGFjdXMvc3RvcmVmcm9udC8iLCJzb3VyY2VzIjpbImNtcy1jb21wb25lbnRzL3N0b3JlZmluZGVyL2NvbXBvbmVudHMvc3RvcmUtZmluZGVyLXN0b3JlL3N0b3JlLWZpbmRlci1zdG9yZS5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE9BQU8sRUFBRSxTQUFTLEVBQUUsS0FBSyxFQUFVLE1BQU0sZUFBZSxDQUFDO0FBQ3pELE9BQU8sRUFDTCxrQkFBa0IsRUFFbEIsY0FBYyxHQUNmLE1BQU0saUJBQWlCLENBQUM7QUFFekIsT0FBTyxFQUFFLGNBQWMsRUFBRSxNQUFNLGlCQUFpQixDQUFDO0FBQ2pELE9BQU8sRUFBRSxTQUFTLEVBQUUsTUFBTSxvQkFBb0IsQ0FBQztBQUUvQztJQVlFLG1DQUNVLGtCQUFzQyxFQUN0QyxLQUFxQixFQUNyQixjQUE4QjtRQUY5Qix1QkFBa0IsR0FBbEIsa0JBQWtCLENBQW9CO1FBQ3RDLFVBQUssR0FBTCxLQUFLLENBQWdCO1FBQ3JCLG1CQUFjLEdBQWQsY0FBYyxDQUFnQjtRQVJ4QyxjQUFTLEdBQUcsU0FBUyxDQUFDO0lBU25CLENBQUM7Ozs7SUFFSiw0Q0FBUTs7O0lBQVI7UUFDRSxJQUFJLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTtZQUNsQixJQUFJLENBQUMsaUJBQWlCLEVBQUUsQ0FBQztZQUN6QixJQUFJLENBQUMsU0FBUyxHQUFHLElBQUksQ0FBQyxrQkFBa0IsQ0FBQyxxQkFBcUIsRUFBRSxDQUFDO1lBQ2pFLElBQUksQ0FBQyxVQUFVLEdBQUcsSUFBSSxDQUFDLGtCQUFrQixDQUFDLGdCQUFnQixFQUFFLENBQUM7U0FDOUQ7SUFDSCxDQUFDOzs7O0lBRUQscURBQWlCOzs7SUFBakI7UUFDRSxJQUFJLENBQUMsa0JBQWtCLENBQUMsYUFBYSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUMxRSxDQUFDOzs7O0lBRUQsMENBQU07OztJQUFOO1FBQ0UsSUFBSSxDQUFDLGNBQWMsQ0FBQyxFQUFFLENBQUM7WUFDckIsMEJBQXdCLElBQUksQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLE1BQU0sQ0FBQyxPQUFTO1NBQzdELENBQUMsQ0FBQztJQUNMLENBQUM7O2dCQWxDRixTQUFTLFNBQUM7b0JBQ1QsUUFBUSxFQUFFLHVCQUF1QjtvQkFDakMsOHlCQUFrRDtpQkFDbkQ7Ozs7Z0JBWEMsa0JBQWtCO2dCQUtYLGNBQWM7Z0JBSHJCLGNBQWM7OzsyQkFlYixLQUFLOzZCQUNMLEtBQUs7O0lBeUJSLGdDQUFDO0NBQUEsQUFuQ0QsSUFtQ0M7U0EvQlkseUJBQXlCOzs7SUFDcEMsOENBQTJCOztJQUMzQiwrQ0FBNEI7O0lBQzVCLDhDQUFzQjs7SUFFdEIsNkNBQWtDOztJQUNsQywrQ0FBNkI7Ozs7O0lBRzNCLHVEQUE4Qzs7Ozs7SUFDOUMsMENBQTZCOzs7OztJQUM3QixtREFBc0MiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb21wb25lbnQsIElucHV0LCBPbkluaXQgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7XG4gIFN0b3JlRmluZGVyU2VydmljZSxcbiAgUG9pbnRPZlNlcnZpY2UsXG4gIFJvdXRpbmdTZXJ2aWNlLFxufSBmcm9tICdAc3BhcnRhY3VzL2NvcmUnO1xuaW1wb3J0IHsgT2JzZXJ2YWJsZSB9IGZyb20gJ3J4anMnO1xuaW1wb3J0IHsgQWN0aXZhdGVkUm91dGUgfSBmcm9tICdAYW5ndWxhci9yb3V0ZXInO1xuaW1wb3J0IHsgSUNPTl9UWVBFIH0gZnJvbSAnLi4vLi4vLi4vbWlzYy9pY29uJztcblxuQENvbXBvbmVudCh7XG4gIHNlbGVjdG9yOiAnY3gtc3RvcmUtZmluZGVyLXN0b3JlJyxcbiAgdGVtcGxhdGVVcmw6ICcuL3N0b3JlLWZpbmRlci1zdG9yZS5jb21wb25lbnQuaHRtbCcsXG59KVxuZXhwb3J0IGNsYXNzIFN0b3JlRmluZGVyU3RvcmVDb21wb25lbnQgaW1wbGVtZW50cyBPbkluaXQge1xuICBsb2NhdGlvbiQ6IE9ic2VydmFibGU8YW55PjtcbiAgaXNMb2FkaW5nJDogT2JzZXJ2YWJsZTxhbnk+O1xuICBpY29uVHlwZXMgPSBJQ09OX1RZUEU7XG5cbiAgQElucHV0KCkgbG9jYXRpb246IFBvaW50T2ZTZXJ2aWNlO1xuICBASW5wdXQoKSBkaXNhYmxlTWFwOiBib29sZWFuO1xuXG4gIGNvbnN0cnVjdG9yKFxuICAgIHByaXZhdGUgc3RvcmVGaW5kZXJTZXJ2aWNlOiBTdG9yZUZpbmRlclNlcnZpY2UsXG4gICAgcHJpdmF0ZSByb3V0ZTogQWN0aXZhdGVkUm91dGUsXG4gICAgcHJpdmF0ZSByb3V0aW5nU2VydmljZTogUm91dGluZ1NlcnZpY2VcbiAgKSB7fVxuXG4gIG5nT25Jbml0KCkge1xuICAgIGlmICghdGhpcy5sb2NhdGlvbikge1xuICAgICAgdGhpcy5yZXF1ZXN0U3RvcmVzRGF0YSgpO1xuICAgICAgdGhpcy5sb2NhdGlvbiQgPSB0aGlzLnN0b3JlRmluZGVyU2VydmljZS5nZXRGaW5kU3RvcmVzRW50aXRpZXMoKTtcbiAgICAgIHRoaXMuaXNMb2FkaW5nJCA9IHRoaXMuc3RvcmVGaW5kZXJTZXJ2aWNlLmdldFN0b3Jlc0xvYWRpbmcoKTtcbiAgICB9XG4gIH1cblxuICByZXF1ZXN0U3RvcmVzRGF0YSgpIHtcbiAgICB0aGlzLnN0b3JlRmluZGVyU2VydmljZS52aWV3U3RvcmVCeUlkKHRoaXMucm91dGUuc25hcHNob3QucGFyYW1zLnN0b3JlKTtcbiAgfVxuXG4gIGdvQmFjaygpOiB2b2lkIHtcbiAgICB0aGlzLnJvdXRpbmdTZXJ2aWNlLmdvKFtcbiAgICAgIGBzdG9yZS1maW5kZXIvY291bnRyeS8ke3RoaXMucm91dGUuc25hcHNob3QucGFyYW1zLmNvdW50cnl9YCxcbiAgICBdKTtcbiAgfVxufVxuIl19
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RvcmUtZmluZGVyLXN0b3JlLmNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BzcGFydGFjdXMvc3RvcmVmcm9udC8iLCJzb3VyY2VzIjpbImNtcy1jb21wb25lbnRzL3N0b3JlZmluZGVyL2NvbXBvbmVudHMvc3RvcmUtZmluZGVyLXN0b3JlL3N0b3JlLWZpbmRlci1zdG9yZS5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLE9BQU8sRUFBRSxTQUFTLEVBQUUsS0FBSyxFQUFVLE1BQU0sZUFBZSxDQUFDO0FBQ3pELE9BQU8sRUFDTCxrQkFBa0IsRUFDbEIsY0FBYyxFQUNkLGNBQWMsR0FDZixNQUFNLGlCQUFpQixDQUFDO0FBRXpCLE9BQU8sRUFBRSxjQUFjLEVBQUUsTUFBTSxpQkFBaUIsQ0FBQztBQUNqRCxPQUFPLEVBQUUsU0FBUyxFQUFFLE1BQU0sb0JBQW9CLENBQUM7QUFNL0M7SUFRRSxtQ0FDVSxrQkFBc0MsRUFDdEMsS0FBcUIsRUFDckIsY0FBOEI7UUFGOUIsdUJBQWtCLEdBQWxCLGtCQUFrQixDQUFvQjtRQUN0QyxVQUFLLEdBQUwsS0FBSyxDQUFnQjtRQUNyQixtQkFBYyxHQUFkLGNBQWMsQ0FBZ0I7UUFSeEMsY0FBUyxHQUFHLFNBQVMsQ0FBQztJQVNuQixDQUFDO0lBRUosNENBQVEsR0FBUjtRQUNFLElBQUksQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO1lBQ2xCLElBQUksQ0FBQyxpQkFBaUIsRUFBRSxDQUFDO1lBQ3pCLElBQUksQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDLGtCQUFrQixDQUFDLHFCQUFxQixFQUFFLENBQUM7WUFDakUsSUFBSSxDQUFDLFVBQVUsR0FBRyxJQUFJLENBQUMsa0JBQWtCLENBQUMsZ0JBQWdCLEVBQUUsQ0FBQztTQUM5RDtJQUNILENBQUM7SUFFRCxxREFBaUIsR0FBakI7UUFDRSxJQUFJLENBQUMsa0JBQWtCLENBQUMsYUFBYSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUMxRSxDQUFDO0lBRUQsMENBQU0sR0FBTjtRQUNFLElBQUksQ0FBQyxjQUFjLENBQUMsRUFBRSxDQUFDO1lBQ3JCLDBCQUF3QixJQUFJLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxNQUFNLENBQUMsT0FBUztTQUM3RCxDQUFDLENBQUM7SUFDTCxDQUFDOztnQkFyQjZCLGtCQUFrQjtnQkFDL0IsY0FBYztnQkFDTCxjQUFjOztJQU4vQjtRQUFSLEtBQUssRUFBRTsrREFBMEI7SUFDekI7UUFBUixLQUFLLEVBQUU7aUVBQXFCO0lBTmxCLHlCQUF5QjtRQUpyQyxTQUFTLENBQUM7WUFDVCxRQUFRLEVBQUUsdUJBQXVCO1lBQ2pDLDh5QkFBa0Q7U0FDbkQsQ0FBQztPQUNXLHlCQUF5QixDQStCckM7SUFBRCxnQ0FBQztDQUFBLEFBL0JELElBK0JDO1NBL0JZLHlCQUF5QiIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENvbXBvbmVudCwgSW5wdXQsIE9uSW5pdCB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHtcbiAgU3RvcmVGaW5kZXJTZXJ2aWNlLFxuICBQb2ludE9mU2VydmljZSxcbiAgUm91dGluZ1NlcnZpY2UsXG59IGZyb20gJ0BzcGFydGFjdXMvY29yZSc7XG5pbXBvcnQgeyBPYnNlcnZhYmxlIH0gZnJvbSAncnhqcyc7XG5pbXBvcnQgeyBBY3RpdmF0ZWRSb3V0ZSB9IGZyb20gJ0Bhbmd1bGFyL3JvdXRlcic7XG5pbXBvcnQgeyBJQ09OX1RZUEUgfSBmcm9tICcuLi8uLi8uLi9taXNjL2ljb24nO1xuXG5AQ29tcG9uZW50KHtcbiAgc2VsZWN0b3I6ICdjeC1zdG9yZS1maW5kZXItc3RvcmUnLFxuICB0ZW1wbGF0ZVVybDogJy4vc3RvcmUtZmluZGVyLXN0b3JlLmNvbXBvbmVudC5odG1sJyxcbn0pXG5leHBvcnQgY2xhc3MgU3RvcmVGaW5kZXJTdG9yZUNvbXBvbmVudCBpbXBsZW1lbnRzIE9uSW5pdCB7XG4gIGxvY2F0aW9uJDogT2JzZXJ2YWJsZTxhbnk+O1xuICBpc0xvYWRpbmckOiBPYnNlcnZhYmxlPGFueT47XG4gIGljb25UeXBlcyA9IElDT05fVFlQRTtcblxuICBASW5wdXQoKSBsb2NhdGlvbjogUG9pbnRPZlNlcnZpY2U7XG4gIEBJbnB1dCgpIGRpc2FibGVNYXA6IGJvb2xlYW47XG5cbiAgY29uc3RydWN0b3IoXG4gICAgcHJpdmF0ZSBzdG9yZUZpbmRlclNlcnZpY2U6IFN0b3JlRmluZGVyU2VydmljZSxcbiAgICBwcml2YXRlIHJvdXRlOiBBY3RpdmF0ZWRSb3V0ZSxcbiAgICBwcml2YXRlIHJvdXRpbmdTZXJ2aWNlOiBSb3V0aW5nU2VydmljZVxuICApIHt9XG5cbiAgbmdPbkluaXQoKSB7XG4gICAgaWYgKCF0aGlzLmxvY2F0aW9uKSB7XG4gICAgICB0aGlzLnJlcXVlc3RTdG9yZXNEYXRhKCk7XG4gICAgICB0aGlzLmxvY2F0aW9uJCA9IHRoaXMuc3RvcmVGaW5kZXJTZXJ2aWNlLmdldEZpbmRTdG9yZXNFbnRpdGllcygpO1xuICAgICAgdGhpcy5pc0xvYWRpbmckID0gdGhpcy5zdG9yZUZpbmRlclNlcnZpY2UuZ2V0U3RvcmVzTG9hZGluZygpO1xuICAgIH1cbiAgfVxuXG4gIHJlcXVlc3RTdG9yZXNEYXRhKCkge1xuICAgIHRoaXMuc3RvcmVGaW5kZXJTZXJ2aWNlLnZpZXdTdG9yZUJ5SWQodGhpcy5yb3V0ZS5zbmFwc2hvdC5wYXJhbXMuc3RvcmUpO1xuICB9XG5cbiAgZ29CYWNrKCk6IHZvaWQge1xuICAgIHRoaXMucm91dGluZ1NlcnZpY2UuZ28oW1xuICAgICAgYHN0b3JlLWZpbmRlci9jb3VudHJ5LyR7dGhpcy5yb3V0ZS5zbmFwc2hvdC5wYXJhbXMuY291bnRyeX1gLFxuICAgIF0pO1xuICB9XG59XG4iXX0=

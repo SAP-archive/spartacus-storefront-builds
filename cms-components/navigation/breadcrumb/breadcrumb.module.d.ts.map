@@ -1,0 +1,1 @@
+{"version":3,"file":"breadcrumb.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/navigation/breadcrumb/breadcrumb.module.d.ts"],"sourcesContent":["export declare class BreadcrumbModule {\n}\n"],"names":[],"mappings":";;;;;AAAA;;;AACA;"}

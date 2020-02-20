@@ -8,6 +8,7 @@ import { PaginationItem } from './pagination.model';
  * all lists in Spartacus that require pagination. The component supports
  * all common features, which can be configured or hidden by CSS.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class PaginationComponent {
     private paginationBuilder;
     private activatedRoute;
@@ -21,7 +22,8 @@ export declare class PaginationComponent {
      */
     defaultPage: any;
     private _pagination;
-    pagination: PaginationModel;
+    get pagination(): PaginationModel;
+    set pagination(value: PaginationModel);
     viewPageEvent: EventEmitter<number>;
     pages: PaginationItem[];
     constructor(paginationBuilder: PaginationBuilder, activatedRoute: ActivatedRoute);
@@ -45,4 +47,15 @@ export declare class PaginationComponent {
     isInactive(item: PaginationItem): boolean;
     getQueryParams(item: PaginationItem): Params;
     pageChange(page: PaginationItem): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<PaginationComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<PaginationComponent, "cx-pagination", never, {
+    "pagination": "pagination";
+    "pageRoute": "pageRoute";
+    "queryParam": "queryParam";
+    "defaultPage": "defaultPage";
+}, {
+    "viewPageEvent": "viewPageEvent";
+}, never>;
 }
+
+//# sourceMappingURL=pagination.component.d.ts.map

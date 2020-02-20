@@ -1,6 +1,6 @@
 import { ElementRef, OnInit, TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ICON_TYPE } from '../../../cms-components/misc/icon/index';
+import { ICON_TYPE } from '../../../cms-components/misc/icon/icon.model';
 import { CarouselService } from './carousel.service';
 /**
  * Generic carousel component that can be used to render any carousel items,
@@ -17,6 +17,7 @@ import { CarouselService } from './carousel.service';
  * To allow for flexible rendering of items, the rendering is delegated to the
  * given `template`. This allows for maximum flexibility.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class CarouselComponent implements OnInit {
     protected el: ElementRef;
     protected service: CarouselService;
@@ -29,7 +30,7 @@ export declare class CarouselComponent implements OnInit {
      * observables so that the items can be loaded on demand.
      */
     items: Observable<any>[];
-    setItems: Observable<any>[];
+    set setItems(inputItems: Observable<any>[]);
     /**
      * The template is rendered for each item, so that the actual
      * view can be given by the compoent that uses the `CarouselComponent`.
@@ -54,4 +55,17 @@ export declare class CarouselComponent implements OnInit {
     size$: Observable<number>;
     constructor(el: ElementRef, service: CarouselService);
     ngOnInit(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CarouselComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<CarouselComponent, "cx-carousel", never, {
+    "itemWidth": "itemWidth";
+    "hideIndicators": "hideIndicators";
+    "indicatorIcon": "indicatorIcon";
+    "previousIcon": "previousIcon";
+    "nextIcon": "nextIcon";
+    "setItems": "items";
+    "title": "title";
+    "template": "template";
+}, {}, never>;
 }
+
+//# sourceMappingURL=carousel.component.d.ts.map

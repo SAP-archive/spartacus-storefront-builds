@@ -1,5 +1,6 @@
 import { EventEmitter } from '@angular/core';
 import { Address, CheckoutDeliveryService, FeatureConfigService, UserAddressService } from '@spartacus/core';
+import * as ɵngcc0 from '@angular/core';
 export declare class AddressCardComponent {
     private userAddressService;
     protected checkoutDeliveryService?: CheckoutDeliveryService;
@@ -23,4 +24,12 @@ export declare class AddressCardComponent {
     setEditMode(): void;
     setAddressAsDefault(addressId: string): void;
     deleteAddress(addressId: string): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<AddressCardComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<AddressCardComponent, "cx-address-card", never, {
+    "address": "address";
+}, {
+    "editEvent": "editEvent";
+}, never>;
 }
+
+//# sourceMappingURL=address-card.component.d.ts.map

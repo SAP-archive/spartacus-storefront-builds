@@ -1,0 +1,1 @@
+{"version":3,"file":"variant-style-icons.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/product/product-variants/variant-style-icons/variant-style-icons.module.d.ts"],"sourcesContent":["export declare class VariantStyleIconsModule {\n}\n"],"names":[],"mappings":";;;;;AAAA;;;AACA;"}

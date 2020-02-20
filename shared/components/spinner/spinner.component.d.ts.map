@@ -1,0 +1,1 @@
+{"version":3,"file":"spinner.component.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/shared/components/spinner/spinner.component.d.ts"],"sourcesContent":["export declare class SpinnerComponent {\n    constructor();\n}\n"],"names":[],"mappings":";AAAA;;;;AAEA;"}

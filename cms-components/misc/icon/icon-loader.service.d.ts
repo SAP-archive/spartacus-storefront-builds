@@ -1,5 +1,6 @@
 import { WindowRef } from '@spartacus/core';
 import { IconConfig, ICON_TYPE } from './icon.model';
+import * as ɵngcc0 from '@angular/core';
 export declare class IconLoaderService {
     protected winRef: WindowRef;
     protected config: IconConfig;
@@ -32,4 +33,7 @@ export declare class IconLoaderService {
     addLinkResource(iconType: ICON_TYPE): void;
     private findResource;
     private getSymbol;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<IconLoaderService>;
 }
+
+//# sourceMappingURL=icon-loader.service.d.ts.map

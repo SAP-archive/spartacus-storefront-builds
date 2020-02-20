@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { CheckoutConfig } from '../config/checkout-config';
 import { CheckoutConfigService } from '../services/checkout-config.service';
 import { ExpressCheckoutService } from '../services/express-checkout.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class CheckoutGuard implements CanActivate {
     private router;
     private config;
@@ -26,4 +27,7 @@ export declare class CheckoutGuard implements CanActivate {
      */
     constructor(router: Router, config: CheckoutConfig, routingConfigService: RoutingConfigService);
     canActivate(): Observable<boolean | UrlTree>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CheckoutGuard>;
 }
+
+//# sourceMappingURL=checkout.guard.d.ts.map

@@ -1,6 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { CurrencyService, LanguageService, ProductSearchPage, ProductSearchService, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
+import * as ɵngcc0 from '@angular/core';
 export declare class ProductListComponentService {
     protected productSearchService: ProductSearchService;
     protected routing: RoutingService;
@@ -37,4 +38,7 @@ export declare class ProductListComponentService {
     getPageItems(pageNumber: number): void;
     sort(sortCode: string): void;
     private setQueryParams;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<ProductListComponentService>;
 }
+
+//# sourceMappingURL=product-list-component.service.d.ts.map

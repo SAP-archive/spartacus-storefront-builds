@@ -1,56 +1,29 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-import { Directive, Input, ElementRef } from '@angular/core';
+import { __decorate } from "tslib";
+import { Directive, Input, OnDestroy, OnInit, ElementRef } from '@angular/core';
 import { SkipLinkService } from '../service/skip-link.service';
-export class SkipLinkDirective {
-    /**
-     * @param {?} elRef
-     * @param {?} skipLinkService
-     */
+let SkipLinkDirective = class SkipLinkDirective {
     constructor(elRef, skipLinkService) {
         this.elRef = elRef;
         this.skipLinkService = skipLinkService;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.skipLinkService.add(this.cxSkipLink, this.elRef.nativeElement);
     }
-    /**
-     * @return {?}
-     */
     ngOnDestroy() {
         this.skipLinkService.remove(this.cxSkipLink);
     }
-}
-SkipLinkDirective.decorators = [
-    { type: Directive, args: [{
-                selector: '[cxSkipLink]',
-            },] }
-];
-/** @nocollapse */
+};
 SkipLinkDirective.ctorParameters = () => [
     { type: ElementRef },
     { type: SkipLinkService }
 ];
-SkipLinkDirective.propDecorators = {
-    cxSkipLink: [{ type: Input }]
-};
-if (false) {
-    /** @type {?} */
-    SkipLinkDirective.prototype.cxSkipLink;
-    /**
-     * @type {?}
-     * @private
-     */
-    SkipLinkDirective.prototype.elRef;
-    /**
-     * @type {?}
-     * @private
-     */
-    SkipLinkDirective.prototype.skipLinkService;
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2tpcC1saW5rLmRpcmVjdGl2ZS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BzcGFydGFjdXMvc3RvcmVmcm9udC8iLCJzb3VyY2VzIjpbImxheW91dC9hMTF5L3NraXAtbGluay9kaXJlY3RpdmUvc2tpcC1saW5rLmRpcmVjdGl2ZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7O0FBQUEsT0FBTyxFQUFFLFNBQVMsRUFBRSxLQUFLLEVBQXFCLFVBQVUsRUFBRSxNQUFNLGVBQWUsQ0FBQztBQUNoRixPQUFPLEVBQUUsZUFBZSxFQUFFLE1BQU0sOEJBQThCLENBQUM7QUFLL0QsTUFBTSxPQUFPLGlCQUFpQjs7Ozs7SUFJNUIsWUFDVSxLQUE4QixFQUM5QixlQUFnQztRQURoQyxVQUFLLEdBQUwsS0FBSyxDQUF5QjtRQUM5QixvQkFBZSxHQUFmLGVBQWUsQ0FBaUI7SUFDdkMsQ0FBQzs7OztJQUVKLFFBQVE7UUFDTixJQUFJLENBQUMsZUFBZSxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsVUFBVSxFQUFFLElBQUksQ0FBQyxLQUFLLENBQUMsYUFBYSxDQUFDLENBQUM7SUFDdEUsQ0FBQzs7OztJQUVELFdBQVc7UUFDVCxJQUFJLENBQUMsZUFBZSxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUM7SUFDL0MsQ0FBQzs7O1lBbEJGLFNBQVMsU0FBQztnQkFDVCxRQUFRLEVBQUUsY0FBYzthQUN6Qjs7OztZQUw2QyxVQUFVO1lBQy9DLGVBQWU7Ozt5QkFNckIsS0FBSzs7OztJQUFOLHVDQUNtQjs7Ozs7SUFHakIsa0NBQXNDOzs7OztJQUN0Qyw0Q0FBd0MiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBEaXJlY3RpdmUsIElucHV0LCBPbkRlc3Ryb3ksIE9uSW5pdCwgRWxlbWVudFJlZiB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgU2tpcExpbmtTZXJ2aWNlIH0gZnJvbSAnLi4vc2VydmljZS9za2lwLWxpbmsuc2VydmljZSc7XG5cbkBEaXJlY3RpdmUoe1xuICBzZWxlY3RvcjogJ1tjeFNraXBMaW5rXScsXG59KVxuZXhwb3J0IGNsYXNzIFNraXBMaW5rRGlyZWN0aXZlIGltcGxlbWVudHMgT25Jbml0LCBPbkRlc3Ryb3kge1xuICBASW5wdXQoKVxuICBjeFNraXBMaW5rOiBzdHJpbmc7XG5cbiAgY29uc3RydWN0b3IoXG4gICAgcHJpdmF0ZSBlbFJlZjogRWxlbWVudFJlZjxIVE1MRWxlbWVudD4sXG4gICAgcHJpdmF0ZSBza2lwTGlua1NlcnZpY2U6IFNraXBMaW5rU2VydmljZVxuICApIHt9XG5cbiAgbmdPbkluaXQoKTogdm9pZCB7XG4gICAgdGhpcy5za2lwTGlua1NlcnZpY2UuYWRkKHRoaXMuY3hTa2lwTGluaywgdGhpcy5lbFJlZi5uYXRpdmVFbGVtZW50KTtcbiAgfVxuXG4gIG5nT25EZXN0cm95KCk6IHZvaWQge1xuICAgIHRoaXMuc2tpcExpbmtTZXJ2aWNlLnJlbW92ZSh0aGlzLmN4U2tpcExpbmspO1xuICB9XG59XG4iXX0=
+__decorate([
+    Input()
+], SkipLinkDirective.prototype, "cxSkipLink", void 0);
+SkipLinkDirective = __decorate([
+    Directive({
+        selector: '[cxSkipLink]',
+    })
+], SkipLinkDirective);
+export { SkipLinkDirective };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2tpcC1saW5rLmRpcmVjdGl2ZS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BzcGFydGFjdXMvc3RvcmVmcm9udC8iLCJzb3VyY2VzIjpbImxheW91dC9hMTF5L3NraXAtbGluay9kaXJlY3RpdmUvc2tpcC1saW5rLmRpcmVjdGl2ZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsT0FBTyxFQUFFLFNBQVMsRUFBRSxLQUFLLEVBQUUsU0FBUyxFQUFFLE1BQU0sRUFBRSxVQUFVLEVBQUUsTUFBTSxlQUFlLENBQUM7QUFDaEYsT0FBTyxFQUFFLGVBQWUsRUFBRSxNQUFNLDhCQUE4QixDQUFDO0FBSy9ELElBQWEsaUJBQWlCLEdBQTlCLE1BQWEsaUJBQWlCO0lBSTVCLFlBQ1UsS0FBOEIsRUFDOUIsZUFBZ0M7UUFEaEMsVUFBSyxHQUFMLEtBQUssQ0FBeUI7UUFDOUIsb0JBQWUsR0FBZixlQUFlLENBQWlCO0lBQ3ZDLENBQUM7SUFFSixRQUFRO1FBQ04sSUFBSSxDQUFDLGVBQWUsQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLFVBQVUsRUFBRSxJQUFJLENBQUMsS0FBSyxDQUFDLGFBQWEsQ0FBQyxDQUFDO0lBQ3RFLENBQUM7SUFFRCxXQUFXO1FBQ1QsSUFBSSxDQUFDLGVBQWUsQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDO0lBQy9DLENBQUM7Q0FDRixDQUFBOztZQVhrQixVQUFVO1lBQ0EsZUFBZTs7QUFKMUM7SUFEQyxLQUFLLEVBQUU7cURBQ1c7QUFGUixpQkFBaUI7SUFIN0IsU0FBUyxDQUFDO1FBQ1QsUUFBUSxFQUFFLGNBQWM7S0FDekIsQ0FBQztHQUNXLGlCQUFpQixDQWdCN0I7U0FoQlksaUJBQWlCIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgRGlyZWN0aXZlLCBJbnB1dCwgT25EZXN0cm95LCBPbkluaXQsIEVsZW1lbnRSZWYgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IFNraXBMaW5rU2VydmljZSB9IGZyb20gJy4uL3NlcnZpY2Uvc2tpcC1saW5rLnNlcnZpY2UnO1xuXG5ARGlyZWN0aXZlKHtcbiAgc2VsZWN0b3I6ICdbY3hTa2lwTGlua10nLFxufSlcbmV4cG9ydCBjbGFzcyBTa2lwTGlua0RpcmVjdGl2ZSBpbXBsZW1lbnRzIE9uSW5pdCwgT25EZXN0cm95IHtcbiAgQElucHV0KClcbiAgY3hTa2lwTGluazogc3RyaW5nO1xuXG4gIGNvbnN0cnVjdG9yKFxuICAgIHByaXZhdGUgZWxSZWY6IEVsZW1lbnRSZWY8SFRNTEVsZW1lbnQ+LFxuICAgIHByaXZhdGUgc2tpcExpbmtTZXJ2aWNlOiBTa2lwTGlua1NlcnZpY2VcbiAgKSB7fVxuXG4gIG5nT25Jbml0KCk6IHZvaWQge1xuICAgIHRoaXMuc2tpcExpbmtTZXJ2aWNlLmFkZCh0aGlzLmN4U2tpcExpbmssIHRoaXMuZWxSZWYubmF0aXZlRWxlbWVudCk7XG4gIH1cblxuICBuZ09uRGVzdHJveSgpOiB2b2lkIHtcbiAgICB0aGlzLnNraXBMaW5rU2VydmljZS5yZW1vdmUodGhpcy5jeFNraXBMaW5rKTtcbiAgfVxufVxuIl19

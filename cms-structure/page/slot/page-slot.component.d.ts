@@ -2,6 +2,7 @@ import { ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { CmsConfig, CmsService, ContentSlotComponentData, ContentSlotData, DynamicAttributeService } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IntersectionOptions } from '../../../layout/loading/intersection.model';
+import * as ɵngcc0 from '@angular/core';
 export declare class PageSlotComponent implements OnInit, OnDestroy {
     protected cmsService: CmsService;
     protected dynamicAttributeService: DynamicAttributeService;
@@ -13,7 +14,8 @@ export declare class PageSlotComponent implements OnInit, OnDestroy {
      * that is rendered in the PageSlotComponent. Furthermore, the position
      * is added as a CSS class name to the host element.
      */
-    position: string;
+    set position(position: string);
+    get position(): string;
     isPending: boolean;
     hasComponents: boolean;
     isPageFold: boolean;
@@ -50,4 +52,11 @@ export declare class PageSlotComponent implements OnInit, OnDestroy {
     private getDeferLoadingStrategy;
     private addSmartEditSlotClass;
     private addSmartEditContract;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<PageSlotComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<PageSlotComponent, "cx-page-slot,[cx-page-slot]", never, {
+    "isPageFold": "isPageFold";
+    "position": "position";
+}, {}, never>;
 }
+
+//# sourceMappingURL=page-slot.component.d.ts.map

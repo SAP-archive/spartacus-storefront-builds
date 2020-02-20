@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CheckoutDeliveryService, DeliveryMode, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { CheckoutConfigService } from '../../services/checkout-config.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class DeliveryModeComponent implements OnInit, OnDestroy {
     private fb;
     private checkoutDeliveryService;
@@ -23,6 +24,10 @@ export declare class DeliveryModeComponent implements OnInit, OnDestroy {
     changeMode(code: string): void;
     next(): void;
     back(): void;
-    readonly deliveryModeInvalid: boolean;
+    get deliveryModeInvalid(): boolean;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<DeliveryModeComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<DeliveryModeComponent, "cx-delivery-mode", never, {}, {}, never>;
 }
+
+//# sourceMappingURL=delivery-mode.component.d.ts.map

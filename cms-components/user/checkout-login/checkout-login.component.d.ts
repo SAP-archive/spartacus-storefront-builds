@@ -2,6 +2,7 @@ import { OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthRedirectService, CartService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
+import * as ɵngcc0 from '@angular/core';
 export declare class CheckoutLoginComponent implements OnDestroy {
     private formBuilder;
     private cartService;
@@ -15,4 +16,8 @@ export declare class CheckoutLoginComponent implements OnDestroy {
     onSubmit(): void;
     ngOnDestroy(): void;
     private emailsMatch;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CheckoutLoginComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<CheckoutLoginComponent, "cx-checkout-login", never, {}, {}, never>;
 }
+
+//# sourceMappingURL=checkout-login.component.d.ts.map

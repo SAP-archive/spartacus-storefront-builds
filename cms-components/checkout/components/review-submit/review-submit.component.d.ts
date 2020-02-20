@@ -5,6 +5,7 @@ import { Card } from '../../../../shared/components/card/card.component';
 import { CheckoutStepType } from '../../model/index';
 import { CheckoutConfigService } from '../../services/index';
 import { PromotionService } from '../../../../shared/services/promotion/promotion.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class ReviewSubmitComponent implements OnInit {
     protected checkoutDeliveryService: CheckoutDeliveryService;
     protected checkoutPaymentService: CheckoutPaymentService;
@@ -42,4 +43,8 @@ export declare class ReviewSubmitComponent implements OnInit {
     getDeliveryModeCard(deliveryMode: DeliveryMode): Observable<Card>;
     getPaymentMethodCard(paymentDetails: PaymentDetails): Observable<Card>;
     getCheckoutStepUrl(stepType: CheckoutStepType): string;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<ReviewSubmitComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<ReviewSubmitComponent, "cx-review-submit", never, {}, {}, never>;
 }
+
+//# sourceMappingURL=review-submit.component.d.ts.map

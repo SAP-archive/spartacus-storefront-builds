@@ -1,7 +1,8 @@
 import { OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Cart, CartService, CartVoucherService, AuthService, CustomerCouponService, CustomerCoupon, FeatureConfigService } from '@spartacus/core';
+import { AuthService, Cart, CartService, CartVoucherService, CustomerCoupon, CustomerCouponService, FeatureConfigService } from '@spartacus/core';
 import { Observable } from 'rxjs';
+import * as ɵngcc0 from '@angular/core';
 export declare class CartCouponComponent implements OnInit, OnDestroy {
     private cartService;
     private authService;
@@ -38,4 +39,8 @@ export declare class CartCouponComponent implements OnInit, OnDestroy {
     close(event: UIEvent): void;
     disableClose(): void;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CartCouponComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<CartCouponComponent, "cx-cart-coupon", never, {}, {}, never>;
 }
+
+//# sourceMappingURL=cart-coupon.component.d.ts.map

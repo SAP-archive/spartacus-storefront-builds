@@ -1,6 +1,7 @@
 import { CanActivate } from '@angular/router';
 import { AuthService, CmsService, RoutingService, SemanticPathService, ProtectedRoutesService, FeatureConfigService } from '@spartacus/core';
 import { Observable } from 'rxjs';
+import * as ɵngcc0 from '@angular/core';
 export declare class LogoutGuard implements CanActivate {
     protected auth: AuthService;
     protected cms: CmsService;
@@ -18,4 +19,7 @@ export declare class LogoutGuard implements CanActivate {
     canActivate(): Observable<any>;
     protected redirect(): void;
     protected logout(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<LogoutGuard>;
 }
+
+//# sourceMappingURL=logout-guard.d.ts.map

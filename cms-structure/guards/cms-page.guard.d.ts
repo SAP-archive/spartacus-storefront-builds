@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { CmsGuardsService } from '../services/cms-guards.service';
 import { CmsI18nService } from '../services/cms-i18n.service';
 import { CmsRoutesService } from '../services/cms-routes.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class CmsPageGuard implements CanActivate {
     protected routingService: RoutingService;
     protected cmsService: CmsService;
@@ -25,4 +26,7 @@ export declare class CmsPageGuard implements CanActivate {
     private getCmsPage;
     private resolveCmsPageLogic;
     private handleNotFoundPage;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CmsPageGuard>;
 }
+
+//# sourceMappingURL=cms-page.guard.d.ts.map

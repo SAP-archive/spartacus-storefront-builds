@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthRedirectService, AuthService, GlobalMessageService, WindowRef } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { CheckoutConfigService } from '../../checkout/services/checkout-config.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class LoginFormComponent implements OnInit, OnDestroy {
     private auth;
     private globalMessageService;
@@ -35,4 +36,8 @@ export declare class LoginFormComponent implements OnInit, OnDestroy {
     login(): void;
     ngOnDestroy(): void;
     private prefillForm;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<LoginFormComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<LoginFormComponent, "cx-login-form", never, {}, {}, never>;
 }
+
+//# sourceMappingURL=login-form.component.d.ts.map

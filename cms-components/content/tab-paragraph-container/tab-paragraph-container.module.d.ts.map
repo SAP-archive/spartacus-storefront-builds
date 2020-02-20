@@ -1,0 +1,1 @@
+{"version":3,"file":"tab-paragraph-container.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/content/tab-paragraph-container/tab-paragraph-container.module.d.ts"],"sourcesContent":["export declare class TabParagraphContainerModule {\n}\n"],"names":[],"mappings":";;;;;;AAAA;;;AACA;"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"return-request-detail.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/myaccount/order/return-request-detail/return-request-detail.module.d.ts"],"sourcesContent":["export declare class ReturnRequestDetailModule {\n}\n"],"names":[],"mappings":";;;;;;;;AAAA;;;AACA;"}

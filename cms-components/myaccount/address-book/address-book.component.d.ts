@@ -2,6 +2,7 @@ import { OnInit } from '@angular/core';
 import { Address } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { AddressBookComponentService } from './address-book.component.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class AddressBookComponent implements OnInit {
     service: AddressBookComponentService;
     addresses$: Observable<Address[]>;
@@ -17,4 +18,8 @@ export declare class AddressBookComponent implements OnInit {
     addAddressCancel(): void;
     editAddressSubmit(address: Address): void;
     editAddressCancel(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<AddressBookComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<AddressBookComponent, "cx-address-book", never, {}, {}, never>;
 }
+
+//# sourceMappingURL=address-book.component.d.ts.map

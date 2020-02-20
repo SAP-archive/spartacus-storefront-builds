@@ -1,6 +1,7 @@
 import { OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PaginationModel, Product, ProductInterestEntryRelation, ProductInterestSearchResult, ProductService, TranslationService, UserInterestsService } from '@spartacus/core';
+import * as ɵngcc0 from '@angular/core';
 interface ProductInterestSearchResultUI extends ProductInterestSearchResult {
     results?: (ProductInterestEntryRelation & {
         product$?: Observable<Product>;
@@ -35,5 +36,9 @@ export declare class MyInterestsComponent implements OnInit, OnDestroy {
     sortChange(sort: string): void;
     pageChange(page: number): void;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<MyInterestsComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<MyInterestsComponent, "cx-my-interests", never, {}, {}, never>;
 }
 export {};
+
+//# sourceMappingURL=my-interests.component.d.ts.map

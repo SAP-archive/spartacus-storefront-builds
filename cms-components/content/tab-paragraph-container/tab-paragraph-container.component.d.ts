@@ -3,6 +3,7 @@ import { CmsService, CMSTabParagraphContainer, WindowRef } from '@spartacus/core
 import { Observable, Subscription } from 'rxjs';
 import { ComponentWrapperDirective } from '../../../cms-structure/page/component/component-wrapper.directive';
 import { CmsComponentData } from '../../../cms-structure/page/model/index';
+import * as ɵngcc0 from '@angular/core';
 export declare class TabParagraphContainerComponent implements AfterViewInit, OnInit, OnDestroy {
     componentData: CmsComponentData<CMSTabParagraphContainer>;
     private cmsService;
@@ -24,4 +25,8 @@ export declare class TabParagraphContainerComponent implements AfterViewInit, On
     ngAfterViewInit(): void;
     private getTitleParams;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<TabParagraphContainerComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<TabParagraphContainerComponent, "cx-tab-paragraph-container", never, {}, {}, never>;
 }
+
+//# sourceMappingURL=tab-paragraph-container.component.d.ts.map

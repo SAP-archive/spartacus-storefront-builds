@@ -1,0 +1,1 @@
+{"version":3,"file":"qualtrics.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/misc/qualtrics/qualtrics.module.d.ts"],"sourcesContent":["export declare class QualtricsModule {\n}\n"],"names":[],"mappings":";;;;;AAAA;;;AACA;"}

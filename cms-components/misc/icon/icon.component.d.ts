@@ -1,6 +1,7 @@
 import { ElementRef } from '@angular/core';
 import { IconLoaderService } from './icon-loader.service';
 import { ICON_TYPE } from './icon.model';
+import * as ɵngcc0 from '@angular/core';
 export declare class IconComponent {
     protected iconLoader: IconLoaderService;
     protected elementRef: ElementRef<HTMLElement>;
@@ -9,7 +10,7 @@ export declare class IconComponent {
      * in the svg icon sprite.
      */
     _type: ICON_TYPE;
-    type: ICON_TYPE;
+    set type(type: ICON_TYPE);
     /**
      * Keeps the given style classes so that we can
      * clean them up when the icon changes
@@ -24,15 +25,21 @@ export declare class IconComponent {
     /**
      * Indicates whether the icon is configured to use SVG or not.
      */
-    readonly useSvg: boolean;
+    get useSvg(): boolean;
     /**
      * Returns the path to the svg symbol. The path could include an
      * external URL to an svg (sprite) file, but can also reference
      * an existing SVG symbol in the DOM.
      */
-    readonly svgPath: string;
+    get svgPath(): string;
     /**
      * Adds the style classes and the link resource (if availabe).
      */
     private addStyleClasses;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<IconComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<IconComponent, "cx-icon", never, {
+    "type": "type";
+}, {}, never>;
 }
+
+//# sourceMappingURL=icon.component.d.ts.map

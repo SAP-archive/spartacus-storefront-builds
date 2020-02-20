@@ -4,6 +4,7 @@ import { ICON_TYPE } from '../../../cms-components/misc/icon/index';
 import { CmsComponentData } from '../../../cms-structure/page/model/cms-component-data';
 import { SearchBoxComponentService } from './search-box-component.service';
 import { SearchBoxConfig, SearchResults } from './search-box.model';
+import * as ɵngcc0 from '@angular/core';
 export declare class SearchBoxComponent {
     protected searchBoxComponentService: SearchBoxComponentService;
     protected componentData: CmsComponentData<CmsSearchBoxComponent>;
@@ -11,7 +12,7 @@ export declare class SearchBoxComponent {
     /**
      * Sets the search box input field
      */
-    queryText: string;
+    set queryText(value: string);
     iconTypes: typeof ICON_TYPE;
     /**
      * In some occasions we need to ignore the close event,
@@ -27,7 +28,7 @@ export declare class SearchBoxComponent {
     /**
      * Returns the backend configuration or default configuration for the searchbox.
      */
-    private readonly config$;
+    private get config$();
     /**
      * Closes the searchbox and opens the search result page.
      */
@@ -59,4 +60,10 @@ export declare class SearchBoxComponent {
      * Clears the search box input field
      */
     clear(el: HTMLInputElement): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<SearchBoxComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<SearchBoxComponent, "cx-searchbox", never, {
+    "queryText": "queryText";
+}, {}, never>;
 }
+
+//# sourceMappingURL=search-box.component.d.ts.map

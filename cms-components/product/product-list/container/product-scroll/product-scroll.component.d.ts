@@ -3,15 +3,16 @@ import { ProductSearchPage } from '@spartacus/core';
 import { ViewModes } from '../../product-view/product-view.component';
 import { ProductListComponentService } from '../product-list-component.service';
 import { ViewConfig } from '../../../../../shared/config/view-config';
+import * as ɵngcc0 from '@angular/core';
 export declare class ProductScrollComponent implements OnDestroy {
     private productListComponentService;
     private ref;
     private subscription;
-    setConfig: ViewConfig;
+    set setConfig(inputConfig: ViewConfig);
     model: ProductSearchPage;
-    setModel: ProductSearchPage;
+    set setModel(inputModel: ProductSearchPage);
     inputViewMode: ViewModes;
-    setViewMode: ViewModes;
+    set setViewMode(inputViewMode: ViewModes);
     viewMode: ViewModes;
     productLimit: number;
     maxProducts: number;
@@ -36,4 +37,12 @@ export declare class ProductScrollComponent implements OnDestroy {
      */
     private isSamePage;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<ProductScrollComponent>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<ProductScrollComponent, "cx-product-scroll", never, {
+    "setConfig": "scrollConfig";
+    "setModel": "model";
+    "setViewMode": "inputViewMode";
+}, {}, never>;
 }
+
+//# sourceMappingURL=product-scroll.component.d.ts.map

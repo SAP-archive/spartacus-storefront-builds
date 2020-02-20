@@ -1,0 +1,1 @@
+{"version":3,"file":"review-submit.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/checkout/components/review-submit/review-submit.module.d.ts"],"sourcesContent":["export declare class ReviewSubmitModule {\n}\n"],"names":[],"mappings":";;;;;;;;AAAA;;;AACA;"}
