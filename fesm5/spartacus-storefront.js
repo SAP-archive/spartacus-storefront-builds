@@ -1,14 +1,14 @@
 import { __decorate, __extends, __read, __values, __param, __awaiter, __generator, __assign, __spread } from 'tslib';
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
-import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Input, HostBinding, Component, NgModule, ComponentFactoryResolver, Inject, PLATFORM_ID, Optional, NgZone, Injector, ViewContainerRef, Renderer2, Directive, INJECTOR, InjectionToken, isDevMode, ChangeDetectionStrategy, TemplateRef, EventEmitter, ComponentFactory, Output, APP_INITIALIZER, SecurityContext, RendererFactory2, ViewEncapsulation, ChangeDetectorRef, Pipe, ViewChild, HostListener, ViewChildren } from '@angular/core';
+import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, ComponentFactoryResolver, Inject, PLATFORM_ID, Optional, NgZone, Injector, ViewContainerRef, Directive, INJECTOR, InjectionToken, isDevMode, ChangeDetectionStrategy, TemplateRef, EventEmitter, ComponentFactory, Output, HostBinding, APP_INITIALIZER, SecurityContext, RendererFactory2, ViewEncapsulation, ChangeDetectorRef, Pipe, ViewChild, HostListener, ViewChildren } from '@angular/core';
 import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, AuthService, CartService, CartDataService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, CmsService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, DynamicAttributeService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, GlobalMessageType, PageRobotsMeta, ProductScope, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, PromotionLocation, OccConfig, UrlModule, provideConfig, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, ActiveCartService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, RoutingModule as RoutingModule$1, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
 import { Subscription, combineLatest, concat, of, isObservable, from, fromEvent, BehaviorSubject, Observable, asyncScheduler } from 'rxjs';
 import { take, distinctUntilChanged, tap, first, skipWhile, endWith, debounceTime, startWith, map, switchMap, filter, withLatestFrom, flatMap, observeOn, mergeMap, shareReplay, scan, distinctUntilKeyChanged, pluck } from 'rxjs/operators';
+import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { Validators, FormBuilder, ReactiveFormsModule, FormGroup, FormControl, FormsModule } from '@angular/forms';
 import { Router, RouterModule, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
 import { ServiceWorkerModule, SwRegistrationOptions } from '@angular/service-worker';
-import { Title, Meta, DomSanitizer } from '@angular/platform-browser';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -47,10 +47,26 @@ var IconConfig = /** @class */ (function () {
     }
     return IconConfig;
 }());
+/**
+ * Each ICON type can have an companied resource type, such as SVG, LINK (font) or just TEXT.
+ * The resources will be automitacally loaded in case they're required for the `ICON_TYPE`.
+ */
 var IconResourceType;
 (function (IconResourceType) {
+    /**
+     * An svg based icon requires an SVG resource that must be loaded,
+     * this is typically a sprite svg file.
+     */
     IconResourceType["SVG"] = "svg";
+    /**
+     * A font based ICON might require an additional CSS file to be loaded.
+     */
     IconResourceType["LINK"] = "link";
+    /**
+     * Text based icons will simply add the ICON string to the DOM. Text icons do not need an image
+     * or CSS pseudo class (i.e. :before), as the text itself is the icon (i.e. +)
+     */
+    IconResourceType["TEXT"] = "text";
 })(IconResourceType || (IconResourceType = {}));
 
 var fontawesomeIconConfig = {
@@ -91,30 +107,48 @@ var fontawesomeIconConfig = {
 };
 
 var IconLoaderService = /** @class */ (function () {
-    function IconLoaderService(winRef, config) {
+    function IconLoaderService(winRef, iconConfig, sanitizer) {
         this.winRef = winRef;
-        this.config = config;
+        this.iconConfig = iconConfig;
+        this.sanitizer = sanitizer;
         this.loadedResources = [];
     }
     /**
-     * Indicates whether the given icon type is configured to use SVG.
+     * Returns an html fragment which can be added to the DOM in a safe way.
      */
-    IconLoaderService.prototype.useSvg = function (iconType) {
-        return (this.config.icon.resources &&
-            !!this.config.icon.resources.find(function (res) {
-                return res.types &&
-                    res.type === IconResourceType.SVG &&
-                    res.types.includes(iconType);
+    IconLoaderService.prototype.getHtml = function (type) {
+        if (this.isResourceType(type, IconResourceType.SVG)) {
+            return this.sanitizer.bypassSecurityTrustHtml("<svg><use xlink:href=\"" + this.getSvgPath(type) + "\"></use></svg>");
+        }
+        if (this.isResourceType(type, IconResourceType.TEXT)) {
+            return this.sanitizer.bypassSecurityTrustHtml(this.getSymbol(type));
+        }
+    };
+    /**
+     *
+     * Returns the symbol class(es) for the icon type.
+     */
+    IconLoaderService.prototype.getStyleClasses = function (iconType) {
+        return this.getSymbol(iconType) || '';
+    };
+    /**
+     * Indicates whether the given `ICON_TYPE` is configured for
+     * the given `IconResourceType`.
+     */
+    IconLoaderService.prototype.isResourceType = function (iconType, resourceType) {
+        return (this.config.resources &&
+            !!this.config.resources.find(function (res) {
+                return res.types && res.type === resourceType && res.types.includes(iconType);
             }));
     };
     /**
      * Returns the path to the svg link. The link supports path names
-     * as well, if the config has been setup to support a svg file path.
+     * as well, if the config a[[s been setup to support a svg file path.
      * Additionally, the icon prefix will be taken into account to prefix the
      * icon IDs in the SVG.
      */
     IconLoaderService.prototype.getSvgPath = function (iconType) {
-        var svgResource = this.config.icon.resources.find(function (res) {
+        var svgResource = this.config.resources.find(function (res) {
             return res.type === IconResourceType.SVG &&
                 res.types &&
                 res.types.includes(iconType);
@@ -126,13 +160,6 @@ var IconLoaderService = /** @class */ (function () {
         }
     };
     /**
-     *
-     * Returns the symbol class(es) for the icon type.
-     */
-    IconLoaderService.prototype.getStyleClasses = function (iconType) {
-        return this.getSymbol(iconType) || '';
-    };
-    /**
      * Loads the resource url (if any) for the given icon.
      * The icon will only be loaded once.
      *
@@ -142,43 +169,49 @@ var IconLoaderService = /** @class */ (function () {
      */
     IconLoaderService.prototype.addLinkResource = function (iconType) {
         var resource = this.findResource(iconType, IconResourceType.LINK);
-        if (resource && resource.url) {
-            if (!this.loadedResources.includes(resource.url)) {
-                this.loadedResources.push(resource.url);
-                var head = this.winRef.document.getElementsByTagName('head')[0];
-                var link = this.winRef.document.createElement('link');
-                link.rel = 'stylesheet';
-                link.type = 'text/css';
-                link.href = resource.url;
-                head.appendChild(link);
-            }
+        if (resource &&
+            resource.url &&
+            !this.loadedResources.includes(resource.url)) {
+            this.loadedResources.push(resource.url);
+            var head = this.winRef.document.getElementsByTagName('head')[0];
+            var link = this.winRef.document.createElement('link');
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = resource.url;
+            head.appendChild(link);
         }
     };
     IconLoaderService.prototype.findResource = function (iconType, resourceType) {
-        if (!this.config.icon.resources) {
+        if (!this.config.resources) {
             return;
         }
-        var resource = this.config.icon.resources.find(function (res) {
+        var resource = this.config.resources.find(function (res) {
             return res.type === resourceType && res.types && res.types.includes(iconType);
         });
         // no specific resource found, let's try to find a one-size-fits-all resource
         if (!resource) {
-            resource = this.config.icon.resources.find(function (res) { return (res.type === resourceType && !res.types) || res.types === []; });
+            resource = this.config.resources.find(function (res) { return (res.type === resourceType && !res.types) || res.types === []; });
         }
         return resource;
     };
     IconLoaderService.prototype.getSymbol = function (iconType) {
-        if (this.config.icon &&
-            this.config.icon.symbols &&
-            this.config.icon.symbols[iconType]) {
-            return this.config.icon.symbols[iconType];
+        if (this.config && this.config.symbols && this.config.symbols[iconType]) {
+            return this.config.symbols[iconType];
         }
     };
+    Object.defineProperty(IconLoaderService.prototype, "config", {
+        get: function () {
+            return this.iconConfig.icon;
+        },
+        enumerable: true,
+        configurable: true
+    });
     IconLoaderService.ctorParameters = function () { return [
         { type: WindowRef },
-        { type: IconConfig }
+        { type: IconConfig },
+        { type: DomSanitizer }
     ]; };
-    IconLoaderService.ɵprov = ɵɵdefineInjectable({ factory: function IconLoaderService_Factory() { return new IconLoaderService(ɵɵinject(WindowRef), ɵɵinject(IconConfig)); }, token: IconLoaderService, providedIn: "root" });
+    IconLoaderService.ɵprov = ɵɵdefineInjectable({ factory: function IconLoaderService_Factory() { return new IconLoaderService(ɵɵinject(WindowRef), ɵɵinject(IconConfig), ɵɵinject(DomSanitizer)); }, token: IconLoaderService, providedIn: "root" });
     IconLoaderService = __decorate([
         Injectable({
             providedIn: 'root',
@@ -187,76 +220,91 @@ var IconLoaderService = /** @class */ (function () {
     return IconLoaderService;
 }());
 
+/**
+ *
+ * The icon component can be added in different ways:
+ *
+ * With the component selector:
+ * `<cx-icon type="SEARCH"></cx-icon>`
+ *
+ * With the attribute selector:
+ * `<span cxIcon="STAR"></span>`
+ *
+ * Additionally, content can be projected to the icon:
+ *
+ * `<button cxIcon="HAPPY">happy label</button>`
+ *
+ * The above button would become (based on a TEXT resource type):
+ * `<button>😊happy label</button>`
+ * While the content is projected, the icon itself doesn't require
+ * an additional DOM node which is an advantage over the component selector.
+ */
 var IconComponent = /** @class */ (function () {
-    function IconComponent(iconLoader, elementRef) {
+    function IconComponent(iconLoader, elementRef, renderer) {
         this.iconLoader = iconLoader;
         this.elementRef = elementRef;
-        /**
-         * Keeps the given style classes so that we can
-         * clean them up when the icon changes
-         */
-        this.styleClasses = '';
+        this.renderer = renderer;
     }
-    Object.defineProperty(IconComponent.prototype, "type", {
+    Object.defineProperty(IconComponent.prototype, "cxIcon", {
+        /**
+         * The cxIcon directive is bound to the icon type. You can feed the `ICON_TYPE` to
+         * accomplish a configurable button in the UI.
+         */
         set: function (type) {
-            this._type = type;
-            this.addStyleClasses(type);
+            this.setIcon(type);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(IconComponent.prototype, "useSvg", {
+    Object.defineProperty(IconComponent.prototype, "type", {
         /**
-         * Indicates whether the icon is configured to use SVG or not.
+         * The type input parameter is bound to the icon type. You can feed the `ICON_TYPE` to
+         * accomplish a configurable button in the UI.
          */
-        get: function () {
-            return this.iconLoader.useSvg(this._type);
+        set: function (type) {
+            this.setIcon(type);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(IconComponent.prototype, "svgPath", {
-        /**
-         * Returns the path to the svg symbol. The path could include an
-         * external URL to an svg (sprite) file, but can also reference
-         * an existing SVG symbol in the DOM.
-         */
-        get: function () {
-            return this.iconLoader.getSvgPath(this._type);
-        },
-        enumerable: true,
-        configurable: true
-    });
+    IconComponent.prototype.setIcon = function (type) {
+        if (!type || type === '') {
+            return;
+        }
+        this.icon = this.iconLoader.getHtml(type);
+        this.addStyleClasses(type);
+        this.iconLoader.addLinkResource(type);
+    };
     /**
      * Adds the style classes and the link resource (if availabe).
      */
     IconComponent.prototype.addStyleClasses = function (type) {
-        if (this.useSvg) {
-            return;
-        }
-        if (this.staticStyleClasses === undefined) {
-            this.staticStyleClasses = this.elementRef.nativeElement.classList.value
-                ? this.elementRef.nativeElement.classList.value + ' '
-                : '';
-        }
-        this.styleClasses =
-            this.staticStyleClasses + this.iconLoader.getStyleClasses(type);
-        this.iconLoader.addLinkResource(type);
+        var _this = this;
+        this.renderer.addClass(this.elementRef.nativeElement, 'cx-icon');
+        this.iconLoader
+            .getStyleClasses(type)
+            .split(' ')
+            .forEach(function (cls) {
+            if (cls !== '') {
+                _this.renderer.addClass(_this.elementRef.nativeElement, cls);
+            }
+        });
     };
     IconComponent.ctorParameters = function () { return [
         { type: IconLoaderService },
-        { type: ElementRef }
+        { type: ElementRef },
+        { type: Renderer2 }
     ]; };
     __decorate([
-        Input('type')
-    ], IconComponent.prototype, "type", null);
+        Input()
+    ], IconComponent.prototype, "cxIcon", null);
     __decorate([
-        HostBinding('class')
-    ], IconComponent.prototype, "styleClasses", void 0);
+        Input()
+    ], IconComponent.prototype, "type", null);
     IconComponent = __decorate([
         Component({
-            selector: 'cx-icon',
-            template: "<ng-container *ngIf=\"useSvg\">\n  <svg>\n    <use [attr.xlink:href]=\"svgPath\"></use>\n  </svg>\n</ng-container>\n"
+            selector: 'cx-icon,[cxIcon]',
+            template: "<i [outerHTML]=\"icon\"></i><ng-content></ng-content>\n"
         })
     ], IconComponent);
     return IconComponent;
