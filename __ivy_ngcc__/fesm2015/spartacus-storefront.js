@@ -746,7 +746,7 @@ function CardComponent_div_0_div_10_Template(rf, ctx) { if (rf & 1) {
 function CardComponent_div_0_div_11_div_1_a_2_Template(rf, ctx) { if (rf & 1) {
     const _r132 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 28);
-    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_2_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r132); const ctx_r131 = ɵngcc0.ɵɵnextContext(4); return ctx_r131.delete(); });
+    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_2_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r132); const ctx_r131 = ɵngcc0.ɵɵnextContext(4); return ctx_r131.delete(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_2_Template_a_keydown_enter_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r132); const ctx_r133 = ɵngcc0.ɵɵnextContext(4); return ctx_r133.delete(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
@@ -755,9 +755,9 @@ function CardComponent_div_0_div_11_div_1_a_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate(action_r125.name);
 } }
 function CardComponent_div_0_div_11_div_1_a_3_Template(rf, ctx) { if (rf & 1) {
-    const _r135 = ɵngcc0.ɵɵgetCurrentView();
+    const _r136 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 28);
-    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_3_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r135); const ctx_r134 = ɵngcc0.ɵɵnextContext(4); return ctx_r134.setDefault(); });
+    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_3_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r136); const ctx_r135 = ɵngcc0.ɵɵnextContext(4); return ctx_r135.setDefault(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_3_Template_a_keydown_enter_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r136); const ctx_r137 = ɵngcc0.ɵɵnextContext(4); return ctx_r137.setDefault(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
@@ -766,9 +766,9 @@ function CardComponent_div_0_div_11_div_1_a_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate(action_r125.name);
 } }
 function CardComponent_div_0_div_11_div_1_a_4_Template(rf, ctx) { if (rf & 1) {
-    const _r138 = ɵngcc0.ɵɵgetCurrentView();
+    const _r140 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 28);
-    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_4_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r138); const ctx_r137 = ɵngcc0.ɵɵnextContext(4); return ctx_r137.send(); });
+    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_4_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r140); const ctx_r139 = ɵngcc0.ɵɵnextContext(4); return ctx_r139.send(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_4_Template_a_keydown_enter_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r140); const ctx_r141 = ɵngcc0.ɵɵnextContext(4); return ctx_r141.send(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
@@ -777,9 +777,9 @@ function CardComponent_div_0_div_11_div_1_a_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate(action_r125.name);
 } }
 function CardComponent_div_0_div_11_div_1_a_5_Template(rf, ctx) { if (rf & 1) {
-    const _r141 = ɵngcc0.ɵɵgetCurrentView();
+    const _r144 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 28);
-    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_5_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r141); const ctx_r140 = ɵngcc0.ɵɵnextContext(4); return ctx_r140.edit(); });
+    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_5_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r144); const ctx_r143 = ɵngcc0.ɵɵnextContext(4); return ctx_r143.edit(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_5_Template_a_keydown_enter_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r144); const ctx_r145 = ɵngcc0.ɵɵnextContext(4); return ctx_r145.edit(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
@@ -873,21 +873,21 @@ function CarouselComponent_ng_container_0_h3_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r146 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r150 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r146.title);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r150.title);
 } }
 function CarouselComponent_ng_container_0_button_3_Template(rf, ctx) { if (rf & 1) {
-    const _r152 = ɵngcc0.ɵɵgetCurrentView();
+    const _r156 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 7);
-    ɵngcc0.ɵɵlistener("click", function CarouselComponent_ng_container_0_button_3_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r152); const size_r145 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r151 = ɵngcc0.ɵɵnextContext(); return ctx_r151.activeSlide = ctx_r151.activeSlide - size_r145; });
+    ɵngcc0.ɵɵlistener("click", function CarouselComponent_ng_container_0_button_3_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r156); const size_r149 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r155 = ɵngcc0.ɵɵnextContext(); return ctx_r155.activeSlide = ctx_r155.activeSlide - size_r149; });
     ɵngcc0.ɵɵelement(1, "cx-icon", 8);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r147 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("disabled", ctx_r147.activeSlide === 0);
+    const ctx_r151 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("disabled", ctx_r151.activeSlide === 0);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r147.previousIcon);
+    ɵngcc0.ɵɵproperty("type", ctx_r151.previousIcon);
 } }
 function CarouselComponent_ng_container_0_ng_container_5_div_1_ng_container_1_div_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -898,12 +898,12 @@ function CarouselComponent_ng_container_0_ng_container_5_div_1_ng_container_1_di
     ɵngcc0.ɵɵtemplate(1, CarouselComponent_ng_container_0_ng_container_5_div_1_ng_container_1_div_1_ng_container_1_Template, 1, 0, "ng-container", 13);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const data_r161 = ctx.ngIf;
-    const i_r155 = ɵngcc0.ɵɵnextContext(3).index;
-    const ctx_r160 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵclassProp("active", i_r155 === ctx_r160.activeSlide);
+    const data_r165 = ctx.ngIf;
+    const i_r159 = ɵngcc0.ɵɵnextContext(3).index;
+    const ctx_r164 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵclassProp("active", i_r159 === ctx_r164.activeSlide);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", ctx_r160.template)("ngTemplateOutletContext", ɵngcc0.ɵɵpureFunction1(4, _c11, data_r161));
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", ctx_r164.template)("ngTemplateOutletContext", ɵngcc0.ɵɵpureFunction1(4, _c11, data_r165));
 } }
 function CarouselComponent_ng_container_0_ng_container_5_div_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -911,9 +911,9 @@ function CarouselComponent_ng_container_0_ng_container_5_div_1_ng_container_1_Te
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const item_r158 = ctx.$implicit;
+    const item_r162 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, item_r158));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, item_r162));
 } }
 function CarouselComponent_ng_container_0_ng_container_5_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 10);
@@ -921,66 +921,66 @@ function CarouselComponent_ng_container_0_ng_container_5_div_1_Template(rf, ctx)
     ɵngcc0.ɵɵpipe(2, "slice");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const i_r155 = ɵngcc0.ɵɵnextContext().index;
-    const size_r145 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r156 = ɵngcc0.ɵɵnextContext();
+    const i_r159 = ɵngcc0.ɵɵnextContext().index;
+    const size_r149 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r160 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind3(2, 1, ctx_r156.items, i_r155, i_r155 + size_r145));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind3(2, 1, ctx_r160.items, i_r159, i_r159 + size_r149));
 } }
 function CarouselComponent_ng_container_0_ng_container_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, CarouselComponent_ng_container_0_ng_container_5_div_1_Template, 3, 5, "div", 9);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const i_r155 = ctx.index;
-    const size_r145 = ɵngcc0.ɵɵnextContext().ngIf;
+    const i_r159 = ctx.index;
+    const size_r149 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", i_r155 % size_r145 === 0);
+    ɵngcc0.ɵɵproperty("ngIf", i_r159 % size_r149 === 0);
 } }
 function CarouselComponent_ng_container_0_button_6_Template(rf, ctx) { if (rf & 1) {
-    const _r168 = ɵngcc0.ɵɵgetCurrentView();
+    const _r172 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 14);
-    ɵngcc0.ɵɵlistener("click", function CarouselComponent_ng_container_0_button_6_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r168); const size_r145 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r167 = ɵngcc0.ɵɵnextContext(); return ctx_r167.activeSlide = ctx_r167.activeSlide + size_r145; });
+    ɵngcc0.ɵɵlistener("click", function CarouselComponent_ng_container_0_button_6_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r172); const size_r149 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r171 = ɵngcc0.ɵɵnextContext(); return ctx_r171.activeSlide = ctx_r171.activeSlide + size_r149; });
     ɵngcc0.ɵɵelement(1, "cx-icon", 8);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const size_r145 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r149 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("disabled", ctx_r149.activeSlide > ctx_r149.items.length - size_r145 - 1);
+    const size_r149 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r153 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("disabled", ctx_r153.activeSlide > ctx_r153.items.length - size_r149 - 1);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r149.nextIcon);
+    ɵngcc0.ɵɵproperty("type", ctx_r153.nextIcon);
 } }
 function CarouselComponent_ng_container_0_div_7_ng_container_1_button_1_Template(rf, ctx) { if (rf & 1) {
-    const _r176 = ɵngcc0.ɵɵgetCurrentView();
+    const _r180 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 17);
-    ɵngcc0.ɵɵlistener("focus", function CarouselComponent_ng_container_0_div_7_ng_container_1_button_1_Template_button_focus_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r176); const i_r173 = ɵngcc0.ɵɵnextContext().index; const ctx_r175 = ɵngcc0.ɵɵnextContext(3); return ctx_r175.activeSlide = i_r173; });
+    ɵngcc0.ɵɵlistener("focus", function CarouselComponent_ng_container_0_div_7_ng_container_1_button_1_Template_button_focus_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r180); const i_r177 = ɵngcc0.ɵɵnextContext().index; const ctx_r179 = ɵngcc0.ɵɵnextContext(3); return ctx_r179.activeSlide = i_r177; });
     ɵngcc0.ɵɵelement(1, "cx-icon", 8);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const i_r173 = ɵngcc0.ɵɵnextContext().index;
-    const ctx_r174 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵproperty("disabled", i_r173 === ctx_r174.activeSlide);
+    const i_r177 = ɵngcc0.ɵɵnextContext().index;
+    const ctx_r178 = ɵngcc0.ɵɵnextContext(3);
+    ɵngcc0.ɵɵproperty("disabled", i_r177 === ctx_r178.activeSlide);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r174.indicatorIcon);
+    ɵngcc0.ɵɵproperty("type", ctx_r178.indicatorIcon);
 } }
 function CarouselComponent_ng_container_0_div_7_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, CarouselComponent_ng_container_0_div_7_ng_container_1_button_1_Template, 2, 2, "button", 16);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const i_r173 = ctx.index;
-    const size_r145 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const i_r177 = ctx.index;
+    const size_r149 = ɵngcc0.ɵɵnextContext(2).ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", i_r173 % size_r145 === 0);
+    ɵngcc0.ɵɵproperty("ngIf", i_r177 % size_r149 === 0);
 } }
 function CarouselComponent_ng_container_0_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 15);
     ɵngcc0.ɵɵtemplate(1, CarouselComponent_ng_container_0_div_7_ng_container_1_Template, 2, 1, "ng-container", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r150 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r154 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r150.items);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r154.items);
 } }
 function CarouselComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -995,29 +995,29 @@ function CarouselComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(7, CarouselComponent_ng_container_0_div_7_Template, 2, 1, "div", 6);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const size_r145 = ctx.ngIf;
-    const ctx_r144 = ɵngcc0.ɵɵnextContext();
+    const size_r149 = ctx.ngIf;
+    const ctx_r148 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r144.title);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r148.title);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngClass", "size-" + size_r145);
+    ɵngcc0.ɵɵproperty("ngClass", "size-" + size_r149);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", size_r145 < ctx_r144.items.length);
+    ɵngcc0.ɵɵproperty("ngIf", size_r149 < ctx_r148.items.length);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r144.items);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r148.items);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", size_r145 < ctx_r144.items.length);
+    ɵngcc0.ɵɵproperty("ngIf", size_r149 < ctx_r148.items.length);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r144.hideIndicators && size_r145 < ctx_r144.items.length);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r148.hideIndicators && size_r149 < ctx_r148.items.length);
 } }
 function MediaComponent_img_0_Template(rf, ctx) { if (rf & 1) {
-    const _r182 = ɵngcc0.ɵɵgetCurrentView();
+    const _r186 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "img", 1);
-    ɵngcc0.ɵɵlistener("load", function MediaComponent_img_0_Template_img_load_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r182); const ctx_r181 = ɵngcc0.ɵɵnextContext(); return ctx_r181.loadHandler(); })("error", function MediaComponent_img_0_Template_img_error_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r182); const ctx_r183 = ɵngcc0.ɵɵnextContext(); return ctx_r183.errorHandler(); });
+    ɵngcc0.ɵɵlistener("load", function MediaComponent_img_0_Template_img_load_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r186); const ctx_r185 = ɵngcc0.ɵɵnextContext(); return ctx_r185.loadHandler(); })("error", function MediaComponent_img_0_Template_img_error_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r186); const ctx_r187 = ɵngcc0.ɵɵnextContext(); return ctx_r187.errorHandler(); });
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r180 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵattribute("src", ctx_r180.media.src, ɵngcc0.ɵɵsanitizeUrl)("srcset", ctx_r180.media.srcset, ɵngcc0.ɵɵsanitizeUrl)("alt", ctx_r180.media.alt);
+    const ctx_r184 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵattribute("src", ctx_r184.media.src, ɵngcc0.ɵɵsanitizeUrl)("srcset", ctx_r184.media.srcset, ɵngcc0.ɵɵsanitizeUrl)("alt", ctx_r184.media.alt);
 } }
 const _c12 = ["qty"];
 function GenericLinkComponent_ng_container_0_ng_container_2_Template(rf, ctx) { if (rf & 1) {
@@ -1030,13 +1030,13 @@ function GenericLinkComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r185 = ɵngcc0.ɵɵnextContext();
-    const _r188 = ɵngcc0.ɵɵreference(4);
+    const ctx_r189 = ɵngcc0.ɵɵnextContext();
+    const _r192 = ɵngcc0.ɵɵreference(4);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("href", ctx_r185.url, ɵngcc0.ɵɵsanitizeUrl);
-    ɵngcc0.ɵɵattribute("target", ctx_r185.target)("rel", ctx_r185.rel)("class", ctx_r185.class)("id", ctx_r185.id)("style", ctx_r185.style, ɵngcc0.ɵɵsanitizeStyle)("title", ctx_r185.title);
+    ɵngcc0.ɵɵproperty("href", ctx_r189.url, ɵngcc0.ɵɵsanitizeUrl);
+    ɵngcc0.ɵɵattribute("target", ctx_r189.target)("rel", ctx_r189.rel)("class", ctx_r189.class)("id", ctx_r189.id)("style", ctx_r189.style, ɵngcc0.ɵɵsanitizeStyle)("title", ctx_r189.title);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r188);
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r192);
 } }
 function GenericLinkComponent_ng_template_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -1046,44 +1046,44 @@ function GenericLinkComponent_ng_template_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(1, GenericLinkComponent_ng_template_1_ng_container_1_Template, 1, 0, "ng-container", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r187 = ɵngcc0.ɵɵnextContext();
-    const _r188 = ɵngcc0.ɵɵreference(4);
-    ɵngcc0.ɵɵproperty("routerLink", ctx_r187.routerUrl);
-    ɵngcc0.ɵɵattribute("target", ctx_r187.target)("class", ctx_r187.class)("id", ctx_r187.id)("style", ctx_r187.style, ɵngcc0.ɵɵsanitizeStyle)("title", ctx_r187.title);
+    const ctx_r191 = ɵngcc0.ɵɵnextContext();
+    const _r192 = ɵngcc0.ɵɵreference(4);
+    ɵngcc0.ɵɵproperty("routerLink", ctx_r191.routerUrl);
+    ɵngcc0.ɵɵattribute("target", ctx_r191.target)("class", ctx_r191.class)("id", ctx_r191.id)("style", ctx_r191.style, ɵngcc0.ɵɵsanitizeStyle)("title", ctx_r191.title);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r188);
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r192);
 } }
 function GenericLinkComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵprojection(0);
 } }
 function PaginationComponent_a_0_Template(rf, ctx) { if (rf & 1) {
-    const _r195 = ɵngcc0.ɵɵgetCurrentView();
+    const _r199 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 1);
-    ɵngcc0.ɵɵlistener("click", function PaginationComponent_a_0_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r195); const item_r193 = ctx.$implicit; const ctx_r194 = ɵngcc0.ɵɵnextContext(); return ctx_r194.pageChange(item_r193); });
+    ɵngcc0.ɵɵlistener("click", function PaginationComponent_a_0_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r199); const item_r197 = ctx.$implicit; const ctx_r198 = ɵngcc0.ɵɵnextContext(); return ctx_r198.pageChange(item_r197); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r193 = ctx.$implicit;
-    const ctx_r192 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵclassMap(item_r193.type);
-    ɵngcc0.ɵɵclassProp("disabled", ctx_r192.isInactive(item_r193))("current", ctx_r192.isCurrent(item_r193));
-    ɵngcc0.ɵɵproperty("routerLink", ctx_r192.pageRoute)("queryParams", ctx_r192.getQueryParams(item_r193))("tabIndex", ctx_r192.isInactive(item_r193) ? 0 - 1 : 0);
+    const item_r197 = ctx.$implicit;
+    const ctx_r196 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵclassMap(item_r197.type);
+    ɵngcc0.ɵɵclassProp("disabled", ctx_r196.isInactive(item_r197))("current", ctx_r196.isCurrent(item_r197));
+    ɵngcc0.ɵɵproperty("routerLink", ctx_r196.pageRoute)("queryParams", ctx_r196.getQueryParams(item_r197))("tabIndex", ctx_r196.isInactive(item_r197) ? 0 - 1 : 0);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", item_r193.label, "\n");
+    ɵngcc0.ɵɵtextInterpolate1(" ", item_r197.label, "\n");
 } }
 function SortingComponent_ng_option_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "ng-option", 2);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const sort_r197 = ctx.$implicit;
-    const ctx_r196 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("value", sort_r197.code);
+    const sort_r201 = ctx.$implicit;
+    const ctx_r200 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("value", sort_r201.code);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(sort_r197.name ? sort_r197.name : ctx_r196.sortLabels ? ctx_r196.sortLabels[sort_r197.code] : "");
+    ɵngcc0.ɵɵtextInterpolate(sort_r201.name ? sort_r201.name : ctx_r200.sortLabels ? ctx_r200.sortLabels[sort_r201.code] : "");
 } }
 function GlobalMessageComponent_div_0_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r207 = ɵngcc0.ɵɵgetCurrentView();
+    const _r211 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 5);
     ɵngcc0.ɵɵelementStart(1, "span", 6);
     ɵngcc0.ɵɵelement(2, "cx-icon", 7);
@@ -1093,22 +1093,22 @@ function GlobalMessageComponent_div_0_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_1_Template_button_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r207); const i_r205 = ctx.index; const ctx_r206 = ɵngcc0.ɵɵnextContext(2); return ctx_r206.clear(ctx_r206.messageType.MSG_TYPE_CONFIRMATION, i_r205); });
+    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_1_Template_button_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r211); const i_r209 = ctx.index; const ctx_r210 = ɵngcc0.ɵɵnextContext(2); return ctx_r210.clear(ctx_r210.messageType.MSG_TYPE_CONFIRMATION, i_r209); });
     ɵngcc0.ɵɵelement(7, "cx-icon", 7);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const confMsg_r204 = ctx.$implicit;
-    const ctx_r200 = ɵngcc0.ɵɵnextContext(2);
+    const confMsg_r208 = ctx.$implicit;
+    const ctx_r204 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r200.iconTypes.SUCCESS);
+    ɵngcc0.ɵɵproperty("type", ctx_r204.iconTypes.SUCCESS);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, confMsg_r204));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, confMsg_r208));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r200.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r204.iconTypes.CLOSE);
 } }
 function GlobalMessageComponent_div_0_div_2_Template(rf, ctx) { if (rf & 1) {
-    const _r211 = ɵngcc0.ɵɵgetCurrentView();
+    const _r215 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "span", 6);
     ɵngcc0.ɵɵelement(2, "cx-icon", 7);
@@ -1118,22 +1118,22 @@ function GlobalMessageComponent_div_0_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_2_Template_button_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r211); const i_r209 = ctx.index; const ctx_r210 = ɵngcc0.ɵɵnextContext(2); return ctx_r210.clear(ctx_r210.messageType.MSG_TYPE_INFO, i_r209); });
+    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_2_Template_button_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r215); const i_r213 = ctx.index; const ctx_r214 = ɵngcc0.ɵɵnextContext(2); return ctx_r214.clear(ctx_r214.messageType.MSG_TYPE_INFO, i_r213); });
     ɵngcc0.ɵɵelement(7, "cx-icon", 7);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const infoMsg_r208 = ctx.$implicit;
-    const ctx_r201 = ɵngcc0.ɵɵnextContext(2);
+    const infoMsg_r212 = ctx.$implicit;
+    const ctx_r205 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r201.iconTypes.INFO);
+    ɵngcc0.ɵɵproperty("type", ctx_r205.iconTypes.INFO);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, infoMsg_r208));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, infoMsg_r212));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r201.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r205.iconTypes.CLOSE);
 } }
 function GlobalMessageComponent_div_0_div_3_Template(rf, ctx) { if (rf & 1) {
-    const _r215 = ɵngcc0.ɵɵgetCurrentView();
+    const _r219 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 10);
     ɵngcc0.ɵɵelementStart(1, "span", 6);
     ɵngcc0.ɵɵelement(2, "cx-icon", 7);
@@ -1143,22 +1143,22 @@ function GlobalMessageComponent_div_0_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_3_Template_button_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r215); const i_r213 = ctx.index; const ctx_r214 = ɵngcc0.ɵɵnextContext(2); return ctx_r214.clear(ctx_r214.messageType.MSG_TYPE_INFO, i_r213); });
+    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_3_Template_button_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r219); const i_r217 = ctx.index; const ctx_r218 = ɵngcc0.ɵɵnextContext(2); return ctx_r218.clear(ctx_r218.messageType.MSG_TYPE_INFO, i_r217); });
     ɵngcc0.ɵɵelement(7, "cx-icon", 7);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const infoMsg_r212 = ctx.$implicit;
-    const ctx_r202 = ɵngcc0.ɵɵnextContext(2);
+    const infoMsg_r216 = ctx.$implicit;
+    const ctx_r206 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r202.iconTypes.WARNING);
+    ɵngcc0.ɵɵproperty("type", ctx_r206.iconTypes.WARNING);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, infoMsg_r212));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, infoMsg_r216));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r202.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r206.iconTypes.CLOSE);
 } }
 function GlobalMessageComponent_div_0_div_4_Template(rf, ctx) { if (rf & 1) {
-    const _r219 = ɵngcc0.ɵɵgetCurrentView();
+    const _r223 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 11);
     ɵngcc0.ɵɵelementStart(1, "span", 6);
     ɵngcc0.ɵɵelement(2, "cx-icon", 7);
@@ -1168,19 +1168,19 @@ function GlobalMessageComponent_div_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_4_Template_button_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r219); const i_r217 = ctx.index; const ctx_r218 = ɵngcc0.ɵɵnextContext(2); return ctx_r218.clear(ctx_r218.messageType.MSG_TYPE_ERROR, i_r217); });
+    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_4_Template_button_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r223); const i_r221 = ctx.index; const ctx_r222 = ɵngcc0.ɵɵnextContext(2); return ctx_r222.clear(ctx_r222.messageType.MSG_TYPE_ERROR, i_r221); });
     ɵngcc0.ɵɵelement(7, "cx-icon", 7);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const errorMsg_r216 = ctx.$implicit;
-    const ctx_r203 = ɵngcc0.ɵɵnextContext(2);
+    const errorMsg_r220 = ctx.$implicit;
+    const ctx_r207 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r203.iconTypes.ERROR);
+    ɵngcc0.ɵɵproperty("type", ctx_r207.iconTypes.ERROR);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, errorMsg_r216));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, errorMsg_r220));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r203.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r207.iconTypes.CLOSE);
 } }
 function GlobalMessageComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -1190,16 +1190,16 @@ function GlobalMessageComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(4, GlobalMessageComponent_div_0_div_4_Template, 8, 5, "div", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const messages_r199 = ctx.ngIf;
-    const ctx_r198 = ɵngcc0.ɵɵnextContext();
+    const messages_r203 = ctx.ngIf;
+    const ctx_r202 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", messages_r199[ctx_r198.messageType.MSG_TYPE_CONFIRMATION]);
+    ɵngcc0.ɵɵproperty("ngForOf", messages_r203[ctx_r202.messageType.MSG_TYPE_CONFIRMATION]);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", messages_r199[ctx_r198.messageType.MSG_TYPE_INFO]);
+    ɵngcc0.ɵɵproperty("ngForOf", messages_r203[ctx_r202.messageType.MSG_TYPE_INFO]);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", messages_r199[ctx_r198.messageType.MSG_TYPE_WARNING]);
+    ɵngcc0.ɵɵproperty("ngForOf", messages_r203[ctx_r202.messageType.MSG_TYPE_WARNING]);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", messages_r199[ctx_r198.messageType.MSG_TYPE_ERROR]);
+    ɵngcc0.ɵɵproperty("ngForOf", messages_r203[ctx_r202.messageType.MSG_TYPE_ERROR]);
 } }
 function QualtricsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -1210,44 +1210,45 @@ function SiteContextSelectorComponent_label_0_option_5_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r224 = ctx.$implicit;
-    const ctx_r223 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵpropertyInterpolate("value", item_r224.isocode);
-    ɵngcc0.ɵɵproperty("selected", ɵngcc0.ɵɵpipeBind1(1, 3, ctx_r223.activeItem$) === item_r224.isocode);
+    const item_r228 = ctx.$implicit;
+    const ctx_r227 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵpropertyInterpolate("value", item_r228.isocode);
+    ɵngcc0.ɵɵproperty("selected", ɵngcc0.ɵɵpipeBind1(1, 3, ctx_r227.activeItem$) === item_r228.isocode);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(item_r224.label);
+    ɵngcc0.ɵɵtextInterpolate(item_r228.label);
 } }
 function SiteContextSelectorComponent_label_0_Template(rf, ctx) { if (rf & 1) {
-    const _r226 = ɵngcc0.ɵɵgetCurrentView();
+    const _r230 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "label");
     ɵngcc0.ɵɵelementStart(1, "span");
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "select", 1);
-    ɵngcc0.ɵɵlistener("change", function SiteContextSelectorComponent_label_0_Template_select_change_4_listener($event) { ɵngcc0.ɵɵrestoreView(_r226); const ctx_r225 = ɵngcc0.ɵɵnextContext(); return ctx_r225.active = $event.target.value; });
+    ɵngcc0.ɵɵlistener("change", function SiteContextSelectorComponent_label_0_Template_select_change_4_listener($event) { ɵngcc0.ɵɵrestoreView(_r230); const ctx_r229 = ɵngcc0.ɵɵnextContext(); return ctx_r229.active = $event.target.value; });
     ɵngcc0.ɵɵtemplate(5, SiteContextSelectorComponent_label_0_option_5_Template, 3, 5, "option", 2);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelement(6, "cx-icon", 3);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const items_r222 = ctx.ngIf;
-    const ctx_r221 = ɵngcc0.ɵɵnextContext();
+    const items_r226 = ctx.ngIf;
+    const ctx_r225 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(3, 3, ctx_r221.label$));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(3, 3, ctx_r225.label$));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", items_r222);
+    ɵngcc0.ɵɵproperty("ngForOf", items_r226);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r221.iconTypes.CARET_DOWN);
+    ɵngcc0.ɵɵproperty("type", ctx_r225.iconTypes.CARET_DOWN);
 } }
 function StarRatingComponent_cx_icon_0_Template(rf, ctx) { if (rf & 1) {
-    const _r230 = ɵngcc0.ɵɵgetCurrentView();
+    const _r234 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-icon", 1);
-    ɵngcc0.ɵɵlistener("mouseover", function StarRatingComponent_cx_icon_0_Template_cx_icon_mouseover_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r230); const i_r228 = ctx.$implicit; const ctx_r229 = ɵngcc0.ɵɵnextContext(); return ctx_r229.setRate(i_r228); })("mouseout", function StarRatingComponent_cx_icon_0_Template_cx_icon_mouseout_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r230); const ctx_r231 = ɵngcc0.ɵɵnextContext(); return ctx_r231.setRate(0); })("click", function StarRatingComponent_cx_icon_0_Template_cx_icon_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r230); const i_r228 = ctx.$implicit; const ctx_r232 = ɵngcc0.ɵɵnextContext(); return ctx_r232.saveRate(i_r228); });
+    ɵngcc0.ɵɵlistener("mouseover", function StarRatingComponent_cx_icon_0_Template_cx_icon_mouseover_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r234); const i_r232 = ctx.$implicit; const ctx_r233 = ɵngcc0.ɵɵnextContext(); return ctx_r233.setRate(i_r232); })("mouseout", function StarRatingComponent_cx_icon_0_Template_cx_icon_mouseout_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r234); const ctx_r235 = ɵngcc0.ɵɵnextContext(); return ctx_r235.setRate(0); })("click", function StarRatingComponent_cx_icon_0_Template_cx_icon_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r234); const i_r232 = ctx.$implicit; const ctx_r236 = ɵngcc0.ɵɵnextContext(); return ctx_r236.saveRate(i_r232); });
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r227 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("type", ctx_r227.iconTypes.STAR);
+    const ctx_r231 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("type", ctx_r231.iconTypes.STAR);
+    ɵngcc0.ɵɵattribute("tabindex", ctx_r231.disabled ? null : 0);
 } }
 const _c13 = function () { return [1, 2, 3, 4, 5]; };
 function PromotionsComponent_div_0_ng_container_1_strong_1_Template(rf, ctx) { if (rf & 1) {
@@ -1257,18 +1258,18 @@ function PromotionsComponent_div_0_ng_container_1_strong_1_Template(rf, ctx) { i
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const promotion_r237 = ctx.$implicit;
+    const promotion_r241 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(promotion_r237.description);
+    ɵngcc0.ɵɵtextInterpolate(promotion_r241.description);
 } }
 function PromotionsComponent_div_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, PromotionsComponent_div_0_ng_container_1_strong_1_Template, 3, 1, "strong", 3);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r234 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r238 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r234.promotions);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r238.promotions);
 } }
 function PromotionsComponent_div_0_ng_container_2_ul_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "ul");
@@ -1277,18 +1278,18 @@ function PromotionsComponent_div_0_ng_container_2_ul_1_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const promotion_r239 = ctx.$implicit;
+    const promotion_r243 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(promotion_r239.description);
+    ɵngcc0.ɵɵtextInterpolate(promotion_r243.description);
 } }
 function PromotionsComponent_div_0_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, PromotionsComponent_div_0_ng_container_2_ul_1_Template, 3, 1, "ul", 3);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r235 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r239 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r235.promotions);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r239.promotions);
 } }
 function PromotionsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 1);
@@ -1319,9 +1320,9 @@ function AppliedCouponsComponent_div_0_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const voucher_r245 = ctx.$implicit;
+    const voucher_r249 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(voucher_r245.voucherCode);
+    ɵngcc0.ɵɵtextInterpolate(voucher_r249.voucherCode);
 } }
 function AppliedCouponsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -1329,21 +1330,21 @@ function AppliedCouponsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(2, AppliedCouponsComponent_div_0_div_2_Template, 3, 1, "div", 3);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r240 = ɵngcc0.ɵɵnextContext();
+    const ctx_r244 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r240.sortedVouchers.length > 0);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r244.sortedVouchers.length > 0);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r240.sortedVouchers);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r244.sortedVouchers);
 } }
 function AppliedCouponsComponent_ng_template_1_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r249 = ɵngcc0.ɵɵgetCurrentView();
+    const _r253 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "div", 10);
     ɵngcc0.ɵɵelementStart(2, "span", 11);
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function AppliedCouponsComponent_ng_template_1_div_1_Template_button_click_4_listener($event) { ɵngcc0.ɵɵrestoreView(_r249); const voucher_r247 = ctx.$implicit; const ctx_r248 = ɵngcc0.ɵɵnextContext(2); return ctx_r248.removeVoucher(voucher_r247.voucherCode); });
+    ɵngcc0.ɵɵlistener("click", function AppliedCouponsComponent_ng_template_1_div_1_Template_button_click_4_listener($event) { ɵngcc0.ɵɵrestoreView(_r253); const voucher_r251 = ctx.$implicit; const ctx_r252 = ɵngcc0.ɵɵnextContext(2); return ctx_r252.removeVoucher(voucher_r251.voucherCode); });
     ɵngcc0.ɵɵelementStart(5, "span", 13);
     ɵngcc0.ɵɵelement(6, "cx-icon", 14);
     ɵngcc0.ɵɵelementEnd();
@@ -1351,62 +1352,62 @@ function AppliedCouponsComponent_ng_template_1_div_1_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const voucher_r247 = ctx.$implicit;
-    const ctx_r246 = ɵngcc0.ɵɵnextContext(2);
+    const voucher_r251 = ctx.$implicit;
+    const ctx_r250 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(voucher_r247.voucherCode);
+    ɵngcc0.ɵɵtextInterpolate(voucher_r251.voucherCode);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵclassProp("disabled", ctx_r246.cartIsLoading);
-    ɵngcc0.ɵɵproperty("disabled", ctx_r246.cartIsLoading);
+    ɵngcc0.ɵɵclassProp("disabled", ctx_r250.cartIsLoading);
+    ɵngcc0.ɵɵproperty("disabled", ctx_r250.cartIsLoading);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r246.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r250.iconTypes.CLOSE);
 } }
 function AppliedCouponsComponent_ng_template_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 7);
     ɵngcc0.ɵɵtemplate(1, AppliedCouponsComponent_ng_template_1_div_1_Template, 7, 5, "div", 8);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r242 = ɵngcc0.ɵɵnextContext();
+    const ctx_r246 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r242.sortedVouchers);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r246.sortedVouchers);
 } }
 function CartCouponComponent_ng_container_0_ng_container_5_div_9_a_2_Template(rf, ctx) { if (rf & 1) {
-    const _r259 = ɵngcc0.ɵɵgetCurrentView();
+    const _r263 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 17);
-    ɵngcc0.ɵɵlistener("click", function CartCouponComponent_ng_container_0_ng_container_5_div_9_a_2_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r259); const coupon_r257 = ctx.$implicit; const ctx_r258 = ɵngcc0.ɵɵnextContext(4); return ctx_r258.applyCustomerCoupon(coupon_r257.couponId); });
+    ɵngcc0.ɵɵlistener("click", function CartCouponComponent_ng_container_0_ng_container_5_div_9_a_2_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r263); const coupon_r261 = ctx.$implicit; const ctx_r262 = ɵngcc0.ɵɵnextContext(4); return ctx_r262.applyCustomerCoupon(coupon_r261.couponId); });
     ɵngcc0.ɵɵelementStart(1, "div", 18);
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const coupon_r257 = ctx.$implicit;
+    const coupon_r261 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(coupon_r257.couponId);
+    ɵngcc0.ɵɵtextInterpolate(coupon_r261.couponId);
 } }
 function CartCouponComponent_ng_container_0_ng_container_5_div_9_Template(rf, ctx) { if (rf & 1) {
-    const _r261 = ɵngcc0.ɵɵgetCurrentView();
+    const _r265 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 14);
-    ɵngcc0.ɵɵlistener("click", function CartCouponComponent_ng_container_0_ng_container_5_div_9_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r261); const ctx_r260 = ɵngcc0.ɵɵnextContext(3); return ctx_r260.close($event); });
+    ɵngcc0.ɵɵlistener("click", function CartCouponComponent_ng_container_0_ng_container_5_div_9_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r265); const ctx_r264 = ɵngcc0.ɵɵnextContext(3); return ctx_r264.close($event); });
     ɵngcc0.ɵɵelementStart(1, "div", 15);
-    ɵngcc0.ɵɵlistener("mousedown", function CartCouponComponent_ng_container_0_ng_container_5_div_9_Template_div_mousedown_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r261); const ctx_r262 = ɵngcc0.ɵɵnextContext(3); return ctx_r262.disableClose(); });
+    ɵngcc0.ɵɵlistener("mousedown", function CartCouponComponent_ng_container_0_ng_container_5_div_9_Template_div_mousedown_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r265); const ctx_r266 = ɵngcc0.ɵɵnextContext(3); return ctx_r266.disableClose(); });
     ɵngcc0.ɵɵtemplate(2, CartCouponComponent_ng_container_0_ng_container_5_div_9_a_2_Template, 3, 1, "a", 16);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r255 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r259 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r255.filteredCoupons);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r259.filteredCoupons);
 } }
 function CartCouponComponent_ng_container_0_ng_container_5_Template(rf, ctx) { if (rf & 1) {
-    const _r264 = ɵngcc0.ɵɵgetCurrentView();
+    const _r268 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "form", 5);
-    ɵngcc0.ɵɵlistener("submit", function CartCouponComponent_ng_container_0_ng_container_5_Template_form_submit_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r264); const ctx_r263 = ɵngcc0.ɵɵnextContext(2); return ctx_r263.applyVoucher(); });
+    ɵngcc0.ɵɵlistener("submit", function CartCouponComponent_ng_container_0_ng_container_5_Template_form_submit_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r268); const ctx_r267 = ɵngcc0.ɵɵnextContext(2); return ctx_r267.applyVoucher(); });
     ɵngcc0.ɵɵelementStart(2, "div", 6);
     ɵngcc0.ɵɵelementStart(3, "div", 7);
     ɵngcc0.ɵɵelementStart(4, "div", 8);
     ɵngcc0.ɵɵelementStart(5, "input", 9, 10);
-    ɵngcc0.ɵɵlistener("focus", function CartCouponComponent_ng_container_0_ng_container_5_Template_input_focus_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r264); const ctx_r265 = ɵngcc0.ɵɵnextContext(2); return ctx_r265.open(); })("input", function CartCouponComponent_ng_container_0_ng_container_5_Template_input_input_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r264); const _r254 = ɵngcc0.ɵɵreference(6); const ctx_r266 = ɵngcc0.ɵɵnextContext(2); return ctx_r266.filter(_r254.value); })("blur", function CartCouponComponent_ng_container_0_ng_container_5_Template_input_blur_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r264); const ctx_r267 = ɵngcc0.ɵɵnextContext(2); return ctx_r267.close($event); })("keydown.escape", function CartCouponComponent_ng_container_0_ng_container_5_Template_input_keydown_escape_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r264); const ctx_r268 = ɵngcc0.ɵɵnextContext(2); return ctx_r268.close($event); });
+    ɵngcc0.ɵɵlistener("focus", function CartCouponComponent_ng_container_0_ng_container_5_Template_input_focus_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r268); const ctx_r269 = ɵngcc0.ɵɵnextContext(2); return ctx_r269.open(); })("input", function CartCouponComponent_ng_container_0_ng_container_5_Template_input_input_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r268); const _r258 = ɵngcc0.ɵɵreference(6); const ctx_r270 = ɵngcc0.ɵɵnextContext(2); return ctx_r270.filter(_r258.value); })("blur", function CartCouponComponent_ng_container_0_ng_container_5_Template_input_blur_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r268); const ctx_r271 = ɵngcc0.ɵɵnextContext(2); return ctx_r271.close($event); })("keydown.escape", function CartCouponComponent_ng_container_0_ng_container_5_Template_input_keydown_escape_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r268); const ctx_r272 = ɵngcc0.ɵɵnextContext(2); return ctx_r272.close($event); });
     ɵngcc0.ɵɵpipe(7, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(8, "div");
@@ -1426,26 +1427,26 @@ function CartCouponComponent_ng_container_0_ng_container_5_Template(rf, ctx) { i
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r252 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r256 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("formGroup", ctx_r252.form);
+    ɵngcc0.ɵɵproperty("formGroup", ctx_r256.form);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵproperty("placeholder", ɵngcc0.ɵɵpipeBind1(7, 9, "voucher.placeholder"));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵclassProp("couponbox-is-active", ctx_r252.couponBoxIsActive);
+    ɵngcc0.ɵɵclassProp("couponbox-is-active", ctx_r256.couponBoxIsActive);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r252.filteredCoupons && ctx_r252.filteredCoupons.length > 0);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r256.filteredCoupons && ctx_r256.filteredCoupons.length > 0);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵclassProp("disabled", ɵngcc0.ɵɵpipeBind1(12, 11, ctx_r252.submitDisabled$));
-    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(13, 13, ctx_r252.submitDisabled$));
+    ɵngcc0.ɵɵclassProp("disabled", ɵngcc0.ɵɵpipeBind1(12, 11, ctx_r256.submitDisabled$));
+    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(13, 13, ctx_r256.submitDisabled$));
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(15, 15, "voucher.apply"), " ");
 } }
 function CartCouponComponent_ng_container_0_ng_container_6_Template(rf, ctx) { if (rf & 1) {
-    const _r270 = ɵngcc0.ɵɵgetCurrentView();
+    const _r274 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "form", 19);
-    ɵngcc0.ɵɵlistener("submit", function CartCouponComponent_ng_container_0_ng_container_6_Template_form_submit_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r270); const ctx_r269 = ɵngcc0.ɵɵnextContext(2); return ctx_r269.applyVoucher(); });
+    ɵngcc0.ɵɵlistener("submit", function CartCouponComponent_ng_container_0_ng_container_6_Template_form_submit_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r274); const ctx_r273 = ɵngcc0.ɵɵnextContext(2); return ctx_r273.applyVoucher(); });
     ɵngcc0.ɵɵelementStart(2, "div", 6);
     ɵngcc0.ɵɵelementStart(3, "div", 7);
     ɵngcc0.ɵɵelement(4, "input", 20);
@@ -1463,14 +1464,14 @@ function CartCouponComponent_ng_container_0_ng_container_6_Template(rf, ctx) { i
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r253 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r257 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("formGroup", ctx_r253.form);
+    ɵngcc0.ɵɵproperty("formGroup", ctx_r257.form);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(5, 6, "voucher.placeholder"));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵclassProp("disabled", ɵngcc0.ɵɵpipeBind1(8, 8, ctx_r253.submitDisabled$));
-    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(9, 10, ctx_r253.submitDisabled$));
+    ɵngcc0.ɵɵclassProp("disabled", ɵngcc0.ɵɵpipeBind1(8, 8, ctx_r257.submitDisabled$));
+    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(9, 10, ctx_r257.submitDisabled$));
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(11, 12, "voucher.apply"), " ");
 } }
@@ -1488,8 +1489,8 @@ function CartCouponComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(8, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const cart_r251 = ctx.ngIf;
-    const ctx_r250 = ɵngcc0.ɵɵnextContext();
+    const cart_r255 = ctx.ngIf;
+    const ctx_r254 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 6, "voucher.coupon"), " ");
     ɵngcc0.ɵɵadvance(3);
@@ -1497,7 +1498,7 @@ function CartCouponComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("cxFeatureLevel", "!1.5");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("vouchers", cart_r251.appliedVouchers)("cartIsLoading", ɵngcc0.ɵɵpipeBind1(8, 8, ctx_r250.cartIsLoading$))("isReadOnly", false);
+    ɵngcc0.ɵɵproperty("vouchers", cart_r255.appliedVouchers)("cartIsLoading", ɵngcc0.ɵɵpipeBind1(8, 8, ctx_r254.cartIsLoading$))("isReadOnly", false);
 } }
 function CartItemListComponent_div_0_ng_container_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -1529,8 +1530,8 @@ function CartItemListComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r271 = ɵngcc0.ɵɵnextContext();
-    const _r273 = ɵngcc0.ɵɵreference(3);
+    const ctx_r275 = ɵngcc0.ɵɵnextContext();
+    const _r277 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 5, "cartItems.description"), " ");
     ɵngcc0.ɵɵadvance(3);
@@ -1538,19 +1539,19 @@ function CartItemListComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(10, 9, "cartItems.quantity"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r271.isSaveForLaterEnabled() && ctx_r271.options.isSaveForLater)("ngIfElse", _r273);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r275.isSaveForLaterEnabled() && ctx_r275.options.isSaveForLater)("ngIfElse", _r277);
 } }
 function CartItemListComponent_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 12);
     ɵngcc0.ɵɵelement(1, "cx-cart-item", 13);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const control_r279 = ctx.ngIf;
-    const item_r276 = ɵngcc0.ɵɵnextContext().$implicit;
-    const ctx_r278 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵclassProp("is-changed", control_r279.get("quantity").dirty);
+    const control_r283 = ctx.ngIf;
+    const item_r280 = ɵngcc0.ɵɵnextContext().$implicit;
+    const ctx_r282 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵclassProp("is-changed", control_r283.get("quantity").dirty);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("item", item_r276)("quantityControl", control_r279.get("quantity"))("readonly", ctx_r278.readonly)("potentialProductPromotions", ctx_r278.getPotentialProductPromotionsForItem(item_r276))("promotionLocation", ctx_r278.promotionLocation)("options", ctx_r278.options);
+    ɵngcc0.ɵɵproperty("item", item_r280)("quantityControl", control_r283.get("quantity"))("readonly", ctx_r282.readonly)("potentialProductPromotions", ctx_r282.getPotentialProductPromotionsForItem(item_r280))("promotionLocation", ctx_r282.promotionLocation)("options", ctx_r282.options);
 } }
 function CartItemListComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 10);
@@ -1558,10 +1559,10 @@ function CartItemListComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r276 = ctx.$implicit;
-    const ctx_r272 = ɵngcc0.ɵɵnextContext();
+    const item_r280 = ctx.$implicit;
+    const ctx_r276 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r272.getControl(item_r276)));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r276.getControl(item_r280)));
 } }
 function CartItemListComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 9);
@@ -1574,20 +1575,20 @@ function CartItemListComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
 } }
 const _c14 = function (a1) { return { cxRoute: "product", params: a1 }; };
 function CartItemComponent_div_8_Template(rf, ctx) { if (rf & 1) {
-    const _r294 = ɵngcc0.ɵɵgetCurrentView();
+    const _r298 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 18);
     ɵngcc0.ɵɵelementStart(1, "a", 19);
-    ɵngcc0.ɵɵlistener("click", function CartItemComponent_div_8_Template_a_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r294); const ctx_r293 = ɵngcc0.ɵɵnextContext(); return ctx_r293.viewItem(); });
+    ɵngcc0.ɵɵlistener("click", function CartItemComponent_div_8_Template_a_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r298); const ctx_r297 = ɵngcc0.ɵɵnextContext(); return ctx_r297.viewItem(); });
     ɵngcc0.ɵɵpipe(2, "cxUrl");
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r281 = ɵngcc0.ɵɵnextContext();
+    const ctx_r285 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c14, ctx_r281.item.product)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c14, ctx_r285.item.product)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r281.item.product.name);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r285.item.product.name);
 } }
 function CartItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 20);
@@ -1595,9 +1596,9 @@ function CartItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r282 = ɵngcc0.ɵɵnextContext();
+    const ctx_r286 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", ctx_r282.item.product.code, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", ctx_r286.item.product.code, " ");
 } }
 function CartItemComponent_ng_container_10_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 22);
@@ -1609,65 +1610,65 @@ function CartItemComponent_ng_container_10_div_1_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r296 = ctx.$implicit;
+    const variant_r300 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(variant_r296.name);
+    ɵngcc0.ɵɵtextInterpolate(variant_r300.name);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(variant_r296.value);
+    ɵngcc0.ɵɵtextInterpolate(variant_r300.value);
 } }
 function CartItemComponent_ng_container_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, CartItemComponent_ng_container_10_div_1_Template, 5, 2, "div", 21);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r283 = ɵngcc0.ɵɵnextContext();
+    const ctx_r287 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r283.item.product.variantOptionQualifiers);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r287.item.product.variantOptionQualifiers);
 } }
 function CartItemComponent_ng_container_11_ng_container_1_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 23);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r299 = ɵngcc0.ɵɵnextContext().$implicit;
+    const variant_r303 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", variant_r299.name, ": ", variant_r299.value, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", variant_r303.name, ": ", variant_r303.value, " ");
 } }
 function CartItemComponent_ng_container_11_ng_container_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 22);
     ɵngcc0.ɵɵtemplate(1, CartItemComponent_ng_container_11_ng_container_1_div_1_div_1_Template, 2, 2, "div", 25);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r299 = ctx.$implicit;
+    const variant_r303 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", variant_r299.name && variant_r299.value);
+    ɵngcc0.ɵɵproperty("ngIf", variant_r303.name && variant_r303.value);
 } }
 function CartItemComponent_ng_container_11_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, CartItemComponent_ng_container_11_ng_container_1_div_1_Template, 2, 1, "div", 21);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r297 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r301 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r297.item.product.baseOptions[0] == null ? null : ctx_r297.item.product.baseOptions[0].selected == null ? null : ctx_r297.item.product.baseOptions[0].selected.variantOptionQualifiers);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r301.item.product.baseOptions[0] == null ? null : ctx_r301.item.product.baseOptions[0].selected == null ? null : ctx_r301.item.product.baseOptions[0].selected.variantOptionQualifiers);
 } }
 function CartItemComponent_ng_container_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, CartItemComponent_ng_container_11_ng_container_1_Template, 2, 1, "ng-container", 24);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r284 = ɵngcc0.ɵɵnextContext();
+    const ctx_r288 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r284.item.product.baseOptions == null ? null : ctx_r284.item.product.baseOptions.length);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r288.item.product.baseOptions == null ? null : ctx_r288.item.product.baseOptions.length);
 } }
 function CartItemComponent_div_12_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 12);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r302 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r306 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r302.item.basePrice == null ? null : ctx_r302.item.basePrice.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r306.item.basePrice == null ? null : ctx_r306.item.basePrice.formattedValue, " ");
 } }
 function CartItemComponent_div_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 26);
@@ -1678,23 +1679,23 @@ function CartItemComponent_div_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(4, CartItemComponent_div_12_div_4_Template, 2, 1, "div", 28);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r285 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("ngClass", ctx_r285.compact ? "" : " col-md-3 col-lg-3 col-xl-2");
+    const ctx_r289 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("ngClass", ctx_r289.compact ? "" : " col-md-3 col-lg-3 col-xl-2");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngClass", ctx_r285.compact ? "" : " d-block d-md-none d-lg-none d-xl-none");
+    ɵngcc0.ɵɵproperty("ngClass", ctx_r289.compact ? "" : " d-block d-md-none d-lg-none d-xl-none");
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "cartItems.itemPrice"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r285.item.basePrice);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r289.item.basePrice);
 } }
 function CartItemComponent_ng_container_20_div_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 12);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r303 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r307 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r303.item.product.stock.stockLevel, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r307.item.product.stock.stockLevel, " ");
 } }
 function CartItemComponent_ng_container_20_ng_template_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 12);
@@ -1717,16 +1718,16 @@ function CartItemComponent_ng_container_20_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r304 = ɵngcc0.ɵɵreference(7);
-    const ctx_r286 = ɵngcc0.ɵɵnextContext();
+    const _r308 = ɵngcc0.ɵɵreference(7);
+    const ctx_r290 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngClass", ctx_r286.compact ? "" : " col-md-3 col-lg-3 col-xl-2");
+    ɵngcc0.ɵɵproperty("ngClass", ctx_r290.compact ? "" : " col-md-3 col-lg-3 col-xl-2");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngClass", ctx_r286.compact ? "" : " d-block d-md-none d-lg-none d-xl-none");
+    ɵngcc0.ɵɵproperty("ngClass", ctx_r290.compact ? "" : " d-block d-md-none d-lg-none d-xl-none");
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 5, "saveForLaterItems.stock"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", (ctx_r286.item.product == null ? null : ctx_r286.item.product.stock == null ? null : ctx_r286.item.product.stock.stockLevel) >= 0)("ngIfElse", _r304);
+    ɵngcc0.ɵɵproperty("ngIf", (ctx_r290.item.product == null ? null : ctx_r290.item.product.stock == null ? null : ctx_r290.item.product.stock.stockLevel) >= 0)("ngIfElse", _r308);
 } }
 function CartItemComponent_div_21_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 32);
@@ -1742,18 +1743,18 @@ function CartItemComponent_ng_container_22_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(1, "cx-promotions", 33);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r288 = ɵngcc0.ɵɵnextContext();
+    const ctx_r292 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", ctx_r288.potentialProductPromotions);
+    ɵngcc0.ɵɵproperty("promotions", ctx_r292.potentialProductPromotions);
 } }
 function CartItemComponent_ng_container_23_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelement(1, "cx-promotions", 33);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const appliedProductPromotions_r307 = ctx.ngIf;
+    const appliedProductPromotions_r311 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", appliedProductPromotions_r307);
+    ɵngcc0.ɵɵproperty("promotions", appliedProductPromotions_r311);
 } }
 function CartItemComponent_ng_container_23_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -1761,9 +1762,9 @@ function CartItemComponent_ng_container_23_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r289 = ɵngcc0.ɵɵnextContext();
+    const ctx_r293 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r289.appliedProductPromotions$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r293.appliedProductPromotions$));
 } }
 function CartItemComponent_div_24_ng_container_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -1775,28 +1776,28 @@ function CartItemComponent_div_24_ng_container_1_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵtemplate(1, CartItemComponent_div_24_ng_container_1_ng_container_1_Template, 1, 0, "ng-container", 37);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r308 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r312 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", ctx_r308.options.optionalBtn)("ngTemplateOutletContext", ɵngcc0.ɵɵpureFunction1(5, _c16, ɵngcc0.ɵɵpureFunction2(2, _c15, ctx_r308.quantityControl.disabled, ctx_r308.item)));
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", ctx_r312.options.optionalBtn)("ngTemplateOutletContext", ɵngcc0.ɵɵpureFunction1(5, _c16, ɵngcc0.ɵɵpureFunction2(2, _c15, ctx_r312.quantityControl.disabled, ctx_r312.item)));
 } }
 function CartItemComponent_div_24_Template(rf, ctx) { if (rf & 1) {
-    const _r311 = ɵngcc0.ɵɵgetCurrentView();
+    const _r315 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 34);
     ɵngcc0.ɵɵtemplate(1, CartItemComponent_div_24_ng_container_1_Template, 2, 7, "ng-container", 24);
     ɵngcc0.ɵɵelementStart(2, "div", 35);
     ɵngcc0.ɵɵelementStart(3, "button", 36);
-    ɵngcc0.ɵɵlistener("click", function CartItemComponent_div_24_Template_button_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r311); const ctx_r310 = ɵngcc0.ɵɵnextContext(); return ctx_r310.removeItem(); });
+    ɵngcc0.ɵɵlistener("click", function CartItemComponent_div_24_Template_button_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r315); const ctx_r314 = ɵngcc0.ɵɵnextContext(); return ctx_r314.removeItem(); });
     ɵngcc0.ɵɵtext(4);
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r290 = ɵngcc0.ɵɵnextContext();
+    const ctx_r294 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r290.isProductOutOfStock(ctx_r290.item.product));
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r294.isProductOutOfStock(ctx_r294.item.product));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("disabled", ctx_r290.quantityControl.disabled);
+    ɵngcc0.ɵɵproperty("disabled", ctx_r294.quantityControl.disabled);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 3, "common.remove"), " ");
 } }
@@ -1811,20 +1812,20 @@ function CartItemComponent_ng_template_25_div_0_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r312 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("ngClass", ctx_r312.compact ? "" : " col-md-3 col-xl-2");
+    const ctx_r316 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("ngClass", ctx_r316.compact ? "" : " col-md-3 col-xl-2");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngClass", ctx_r312.compact ? "" : " d-block d-md-none d-lg-none d-xl-none");
+    ɵngcc0.ɵɵproperty("ngClass", ctx_r316.compact ? "" : " d-block d-md-none d-lg-none d-xl-none");
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "cartItems.total"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r312.item.totalPrice.formattedValue);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r316.item.totalPrice.formattedValue);
 } }
 function CartItemComponent_ng_template_25_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, CartItemComponent_ng_template_25_div_0_Template, 6, 6, "div", 38);
 } if (rf & 2) {
-    const ctx_r292 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r292.item.totalPrice);
+    const ctx_r296 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r296.item.totalPrice);
 } }
 function OrderSummaryComponent_div_3_div_13_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -1837,11 +1838,11 @@ function OrderSummaryComponent_div_3_div_13_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r315 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r319 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "orderCost.salesTax"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r315.cart.totalTax == null ? null : ctx_r315.cart.totalTax.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r319.cart.totalTax == null ? null : ctx_r319.cart.totalTax.formattedValue, " ");
 } }
 function OrderSummaryComponent_div_3_div_20_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -1849,9 +1850,9 @@ function OrderSummaryComponent_div_3_div_20_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r316 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r320 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "orderCost.discount"), " ", ctx_r316.cart.totalDiscounts == null ? null : ctx_r316.cart.totalDiscounts.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "orderCost.discount"), " ", ctx_r320.cart.totalDiscounts == null ? null : ctx_r320.cart.totalDiscounts.formattedValue, " ");
 } }
 function OrderSummaryComponent_div_3_div_21_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -1859,9 +1860,9 @@ function OrderSummaryComponent_div_3_div_21_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r317 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r321 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "orderCost.grossTax"), " ", ctx_r317.cart.totalTax == null ? null : ctx_r317.cart.totalTax.formattedValue, ". ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "orderCost.grossTax"), " ", ctx_r321.cart.totalTax == null ? null : ctx_r321.cart.totalTax.formattedValue, ". ");
 } }
 function OrderSummaryComponent_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 2);
@@ -1897,34 +1898,34 @@ function OrderSummaryComponent_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(21, OrderSummaryComponent_div_3_div_21_Template, 3, 4, "div", 6);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r313 = ɵngcc0.ɵɵnextContext();
+    const ctx_r317 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 9, "orderCost.subtotal"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r313.cart.subTotal == null ? null : ctx_r313.cart.subTotal.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r317.cart.subTotal == null ? null : ctx_r317.cart.subTotal.formattedValue, " ");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(10, 11, "orderCost.estimatedShipping"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", (ctx_r313.cart.deliveryCost == null ? null : ctx_r313.cart.deliveryCost.formattedValue) ? ctx_r313.cart.deliveryCost.formattedValue : "TBD", " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", (ctx_r317.cart.deliveryCost == null ? null : ctx_r317.cart.deliveryCost.formattedValue) ? ctx_r317.cart.deliveryCost.formattedValue : "TBD", " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r313.cart.net);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r317.cart.net);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(17, 13, "orderCost.total"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r313.cart.totalPriceWithTax == null ? null : ctx_r313.cart.totalPriceWithTax.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r317.cart.totalPriceWithTax == null ? null : ctx_r317.cart.totalPriceWithTax.formattedValue, " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", (ctx_r313.cart.totalDiscounts == null ? null : ctx_r313.cart.totalDiscounts.value) > 0);
+    ɵngcc0.ɵɵproperty("ngIf", (ctx_r317.cart.totalDiscounts == null ? null : ctx_r317.cart.totalDiscounts.value) > 0);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r313.cart.net);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r317.cart.net);
 } }
 function OrderSummaryComponent_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelement(1, "cx-applied-coupons", 8);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r314 = ɵngcc0.ɵɵnextContext();
+    const ctx_r318 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("vouchers", ctx_r314.cart.appliedVouchers)("isReadOnly", true);
+    ɵngcc0.ɵɵproperty("vouchers", ctx_r318.cart.appliedVouchers)("isReadOnly", true);
 } }
 function CartDetailsComponent_ng_container_0_ng_container_1_div_1_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -1934,22 +1935,22 @@ function CartDetailsComponent_ng_container_0_ng_container_1_div_1_ng_container_4
     ɵngcc0.ɵɵpipe(4, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const entries_r323 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const cart_r321 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r325 = ɵngcc0.ɵɵnextContext();
+    const entries_r327 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const cart_r325 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r329 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r325.promotions$));
+    ɵngcc0.ɵɵproperty("promotions", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r329.promotions$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("items", entries_r323)("cartIsLoading", !ɵngcc0.ɵɵpipeBind1(4, 6, ctx_r325.cartLoaded$))("potentialProductPromotions", cart_r321.potentialProductPromotions);
+    ɵngcc0.ɵɵproperty("items", entries_r327)("cartIsLoading", !ɵngcc0.ɵɵpipeBind1(4, 6, ctx_r329.cartLoaded$))("potentialProductPromotions", cart_r325.potentialProductPromotions);
 } }
 function CartDetailsComponent_ng_container_0_ng_container_1_div_1_ng_container_5_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelement(1, "cx-promotions", 6);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const orderPromotions_r330 = ctx.ngIf;
+    const orderPromotions_r334 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r330);
+    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r334);
 } }
 const _c17 = function (a1) { return { isSaveForLater: false, optionalBtn: a1 }; };
 function CartDetailsComponent_ng_container_0_ng_container_1_div_1_ng_container_5_Template(rf, ctx) { if (rf & 1) {
@@ -1960,13 +1961,13 @@ function CartDetailsComponent_ng_container_0_ng_container_1_div_1_ng_container_5
     ɵngcc0.ɵɵpipe(4, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const entries_r323 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r326 = ɵngcc0.ɵɵnextContext(2);
-    const _r319 = ɵngcc0.ɵɵreference(3);
+    const entries_r327 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r330 = ɵngcc0.ɵɵnextContext(2);
+    const _r323 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 5, ctx_r326.orderPromotions$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 5, ctx_r330.orderPromotions$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("items", entries_r323)("cartIsLoading", !ɵngcc0.ɵɵpipeBind1(4, 7, ctx_r326.cartLoaded$))("promotionLocation", ctx_r326.promotionLocation)("options", ɵngcc0.ɵɵpureFunction1(9, _c17, ctx_r326.isSaveForLaterEnabled() ? _r319 : null));
+    ɵngcc0.ɵɵproperty("items", entries_r327)("cartIsLoading", !ɵngcc0.ɵɵpipeBind1(4, 7, ctx_r330.cartLoaded$))("promotionLocation", ctx_r330.promotionLocation)("options", ɵngcc0.ɵɵpureFunction1(9, _c17, ctx_r330.isSaveForLaterEnabled() ? _r323 : null));
 } }
 const _c18 = function (a0) { return { code: a0 }; };
 function CartDetailsComponent_ng_container_0_ng_container_1_div_1_Template(rf, ctx) { if (rf & 1) {
@@ -1979,9 +1980,9 @@ function CartDetailsComponent_ng_container_0_ng_container_1_div_1_Template(rf, c
     ɵngcc0.ɵɵtemplate(5, CartDetailsComponent_ng_container_0_ng_container_1_div_1_ng_container_5_Template, 5, 11, "ng-container", 5);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const cart_r321 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const cart_r325 = ɵngcc0.ɵɵnextContext(2).ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 3, "cartDetails.cartName", ɵngcc0.ɵɵpureFunction1(6, _c18, cart_r321.code)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 3, "cartDetails.cartName", ɵngcc0.ɵɵpureFunction1(6, _c18, cart_r325.code)), " ");
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵproperty("cxFeatureLevel", "!1.5");
     ɵngcc0.ɵɵadvance(1);
@@ -1992,9 +1993,9 @@ function CartDetailsComponent_ng_container_0_ng_container_1_Template(rf, ctx) { 
     ɵngcc0.ɵɵtemplate(1, CartDetailsComponent_ng_container_0_ng_container_1_div_1_Template, 6, 8, "div", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const cart_r321 = ɵngcc0.ɵɵnextContext().ngIf;
+    const cart_r325 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", cart_r321.totalItems > 0);
+    ɵngcc0.ɵɵproperty("ngIf", cart_r325.totalItems > 0);
 } }
 function CartDetailsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -2002,23 +2003,23 @@ function CartDetailsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r318 = ɵngcc0.ɵɵnextContext();
+    const ctx_r322 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r318.entries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r322.entries$));
 } }
 function CartDetailsComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
-    const _r336 = ɵngcc0.ɵɵgetCurrentView();
+    const _r340 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "button", 10);
-    ɵngcc0.ɵɵlistener("click", function CartDetailsComponent_ng_template_2_Template_button_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r336); const ctx_r334 = ctx.$implicit; const ctx_r335 = ɵngcc0.ɵɵnextContext(); return ctx_r335.saveForLater(ctx_r334.item); });
+    ɵngcc0.ɵɵlistener("click", function CartDetailsComponent_ng_template_2_Template_button_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r340); const ctx_r338 = ctx.$implicit; const ctx_r339 = ɵngcc0.ɵɵnextContext(); return ctx_r339.saveForLater(ctx_r338.item); });
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r334 = ctx.$implicit;
+    const ctx_r338 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("disabled", ctx_r334.loading);
+    ɵngcc0.ɵɵproperty("disabled", ctx_r338.loading);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "saveForLaterItems.saveForLater"), " ");
 } }
@@ -2039,12 +2040,12 @@ function CartTotalsComponent_ng_container_0_ng_container_1_Template(rf, ctx) { i
     ɵngcc0.ɵɵtemplate(2, CartTotalsComponent_ng_container_0_ng_container_1_button_2_Template, 4, 7, "button", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const entries_r340 = ctx.ngIf;
-    const cart_r338 = ɵngcc0.ɵɵnextContext().ngIf;
+    const entries_r344 = ctx.ngIf;
+    const cart_r342 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cart", cart_r338);
+    ɵngcc0.ɵɵproperty("cart", cart_r342);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", entries_r340.length);
+    ɵngcc0.ɵɵproperty("ngIf", entries_r344.length);
 } }
 function CartTotalsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -2052,15 +2053,15 @@ function CartTotalsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r337 = ɵngcc0.ɵɵnextContext();
+    const ctx_r341 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r337.entries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r341.entries$));
 } }
 function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r356 = ɵngcc0.ɵɵgetCurrentView();
+    const _r360 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "button", 4);
-    ɵngcc0.ɵɵlistener("click", function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_div_1_Template_button_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r356); const entry_r354 = ctx.ngIf; const ctx_r355 = ɵngcc0.ɵɵnextContext(5); return ctx_r355.remove(entry_r354); });
+    ɵngcc0.ɵɵlistener("click", function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_div_1_Template_button_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r360); const entry_r358 = ctx.ngIf; const ctx_r359 = ɵngcc0.ɵɵnextContext(5); return ctx_r359.remove(entry_r358); });
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelement(3, "cx-icon", 5);
     ɵngcc0.ɵɵelementStart(4, "span", 6);
@@ -2070,18 +2071,18 @@ function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r351 = ɵngcc0.ɵɵnextContext(5);
+    const ctx_r355 = ɵngcc0.ɵɵnextContext(5);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(2, 3, ctx_r351.loading$));
+    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(2, 3, ctx_r355.loading$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r351.iconTypes.HEART);
+    ɵngcc0.ɵɵproperty("type", ctx_r355.iconTypes.HEART);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(6, 5, "addToWishList.remove"));
 } }
 function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_ng_template_2_Template(rf, ctx) { if (rf & 1) {
-    const _r359 = ɵngcc0.ɵɵgetCurrentView();
+    const _r363 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 7);
-    ɵngcc0.ɵɵlistener("click", function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_ng_template_2_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r359); const product_r346 = ɵngcc0.ɵɵnextContext(4).ngIf; const ctx_r357 = ɵngcc0.ɵɵnextContext(); return ctx_r357.add(product_r346); });
+    ɵngcc0.ɵɵlistener("click", function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_ng_template_2_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r363); const product_r350 = ɵngcc0.ɵɵnextContext(4).ngIf; const ctx_r361 = ɵngcc0.ɵɵnextContext(); return ctx_r361.add(product_r350); });
     ɵngcc0.ɵɵpipe(1, "async");
     ɵngcc0.ɵɵelement(2, "cx-icon", 5);
     ɵngcc0.ɵɵelementStart(3, "span", 6);
@@ -2090,10 +2091,10 @@ function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r353 = ɵngcc0.ɵɵnextContext(5);
-    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(1, 3, ctx_r353.loading$));
+    const ctx_r357 = ɵngcc0.ɵɵnextContext(5);
+    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(1, 3, ctx_r357.loading$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r353.iconTypes.EMPTY_HEART);
+    ɵngcc0.ɵɵproperty("type", ctx_r357.iconTypes.EMPTY_HEART);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 5, "addToWishList.add"));
 } }
@@ -2103,21 +2104,21 @@ function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_
     ɵngcc0.ɵɵtemplate(2, AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_ng_template_2_Template, 6, 7, "ng-template", null, 3, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r352 = ɵngcc0.ɵɵreference(3);
-    const entries_r349 = ɵngcc0.ɵɵnextContext().ngIf;
-    const product_r346 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r350 = ɵngcc0.ɵɵnextContext();
+    const _r356 = ɵngcc0.ɵɵreference(3);
+    const entries_r353 = ɵngcc0.ɵɵnextContext().ngIf;
+    const product_r350 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r354 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r350.getProductInWishList(product_r346, entries_r349))("ngIfElse", _r352);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r354.getProductInWishList(product_r350, entries_r353))("ngIfElse", _r356);
 } }
 function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_Template, 4, 2, "ng-container", 0);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r348 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r352 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r348.hasStock);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r352.hasStock);
 } }
 function AddToWishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -2125,9 +2126,9 @@ function AddToWishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) 
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r347 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r351 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r347.wishListEntries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r351.wishListEntries$));
 } }
 function AddToWishListComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -2135,10 +2136,10 @@ function AddToWishListComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r343 = ɵngcc0.ɵɵnextContext();
-    const _r344 = ɵngcc0.ɵɵreference(3);
+    const ctx_r347 = ɵngcc0.ɵɵnextContext();
+    const _r348 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r343.userLoggedIn$))("ngIfElse", _r344);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r347.userLoggedIn$))("ngIfElse", _r348);
 } }
 const _c19 = function () { return { cxRoute: "login" }; };
 function AddToWishListComponent_ng_template_2_ng_container_0_Template(rf, ctx) { if (rf & 1) {
@@ -2153,25 +2154,25 @@ function AddToWishListComponent_ng_template_2_ng_container_0_Template(rf, ctx) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r362 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r366 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 3, ɵngcc0.ɵɵpureFunction0(7, _c19)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r362.iconTypes.EMPTY_HEART);
+    ɵngcc0.ɵɵproperty("type", ctx_r366.iconTypes.EMPTY_HEART);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(6, 5, "addToWishList.anonymous"));
 } }
 function AddToWishListComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, AddToWishListComponent_ng_template_2_ng_container_0_Template, 7, 8, "ng-container", 0);
 } if (rf & 2) {
-    const ctx_r345 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r345.hasStock);
+    const ctx_r349 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r349.hasStock);
 } }
 function SaveForLaterComponent_ng_container_0_p_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "p", 3);
 } if (rf & 2) {
-    const data_r368 = ctx.ngIf;
-    ɵngcc0.ɵɵproperty("innerHTML", data_r368.content, ɵngcc0.ɵɵsanitizeHtml);
+    const data_r372 = ctx.ngIf;
+    ɵngcc0.ɵɵproperty("innerHTML", data_r372.content, ɵngcc0.ɵɵsanitizeHtml);
 } }
 function SaveForLaterComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -2179,9 +2180,9 @@ function SaveForLaterComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r363 = ɵngcc0.ɵɵnextContext();
+    const ctx_r367 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r363.data$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r367.data$));
 } }
 const _c20 = function (a1) { return { isSaveForLater: true, optionalBtn: a1 }; };
 function SaveForLaterComponent_ng_container_2_ng_container_1_div_1_Template(rf, ctx) { if (rf & 1) {
@@ -2194,23 +2195,23 @@ function SaveForLaterComponent_ng_container_2_ng_container_1_div_1_Template(rf, 
     ɵngcc0.ɵɵpipe(5, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const entries_r371 = ɵngcc0.ɵɵnextContext().ngIf;
-    const saveForLater_r369 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r372 = ɵngcc0.ɵɵnextContext();
-    const _r365 = ɵngcc0.ɵɵreference(5);
+    const entries_r375 = ɵngcc0.ɵɵnextContext().ngIf;
+    const saveForLater_r373 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r376 = ɵngcc0.ɵɵnextContext();
+    const _r369 = ɵngcc0.ɵɵreference(5);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 5, "saveForLaterItems.itemTotal", ɵngcc0.ɵɵpureFunction1(10, _c8, saveForLater_r369.totalItems)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 5, "saveForLaterItems.itemTotal", ɵngcc0.ɵɵpureFunction1(10, _c8, saveForLater_r373.totalItems)), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("items", entries_r371)("readonly", false)("cartIsLoading", !ɵngcc0.ɵɵpipeBind1(5, 8, ctx_r372.cartLoaded$))("options", ɵngcc0.ɵɵpureFunction1(12, _c20, _r365));
+    ɵngcc0.ɵɵproperty("items", entries_r375)("readonly", false)("cartIsLoading", !ɵngcc0.ɵɵpipeBind1(5, 8, ctx_r376.cartLoaded$))("options", ɵngcc0.ɵɵpureFunction1(12, _c20, _r369));
 } }
 function SaveForLaterComponent_ng_container_2_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, SaveForLaterComponent_ng_container_2_ng_container_1_div_1_Template, 6, 14, "div", 4);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const saveForLater_r369 = ɵngcc0.ɵɵnextContext().ngIf;
+    const saveForLater_r373 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", saveForLater_r369.totalItems > 0);
+    ɵngcc0.ɵɵproperty("ngIf", saveForLater_r373.totalItems > 0);
 } }
 function SaveForLaterComponent_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -2218,23 +2219,23 @@ function SaveForLaterComponent_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r364 = ɵngcc0.ɵɵnextContext();
+    const ctx_r368 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r364.entries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r368.entries$));
 } }
 function SaveForLaterComponent_ng_template_4_Template(rf, ctx) { if (rf & 1) {
-    const _r378 = ɵngcc0.ɵɵgetCurrentView();
+    const _r382 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 8);
     ɵngcc0.ɵɵelementStart(1, "button", 9);
-    ɵngcc0.ɵɵlistener("click", function SaveForLaterComponent_ng_template_4_Template_button_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r378); const ctx_r376 = ctx.$implicit; const ctx_r377 = ɵngcc0.ɵɵnextContext(); return ctx_r377.moveToCart(ctx_r376.item); });
+    ɵngcc0.ɵɵlistener("click", function SaveForLaterComponent_ng_template_4_Template_button_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r382); const ctx_r380 = ctx.$implicit; const ctx_r381 = ɵngcc0.ɵɵnextContext(); return ctx_r381.moveToCart(ctx_r380.item); });
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r376 = ctx.$implicit;
+    const ctx_r380 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("disabled", ctx_r376.loading);
+    ɵngcc0.ɵɵproperty("disabled", ctx_r380.loading);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "saveForLaterItems.moveToCart"), " ");
 } }
@@ -2246,21 +2247,21 @@ function CheckoutProgressMobileBottomComponent_div_0_div_2_div_1_Template(rf, ct
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r385 = ɵngcc0.ɵɵnextContext();
-    const i_r383 = ctx_r385.index;
-    const step_r382 = ctx_r385.$implicit;
+    const ctx_r389 = ɵngcc0.ɵɵnextContext();
+    const i_r387 = ctx_r389.index;
+    const step_r386 = ctx_r389.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2("", i_r383 + 1, ". ", ɵngcc0.ɵɵpipeBind1(3, 2, step_r382.name), "");
+    ɵngcc0.ɵɵtextInterpolate2("", i_r387 + 1, ". ", ɵngcc0.ɵɵpipeBind1(3, 2, step_r386.name), "");
 } }
 function CheckoutProgressMobileBottomComponent_div_0_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵtemplate(1, CheckoutProgressMobileBottomComponent_div_0_div_2_div_1_Template, 4, 4, "div", 3);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const i_r383 = ctx.index;
-    const ctx_r381 = ɵngcc0.ɵɵnextContext(2);
+    const i_r387 = ctx.index;
+    const ctx_r385 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", i_r383 > ctx_r381.activeStepIndex);
+    ɵngcc0.ɵɵproperty("ngIf", i_r387 > ctx_r385.activeStepIndex);
 } }
 function CheckoutProgressMobileBottomComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -2269,9 +2270,9 @@ function CheckoutProgressMobileBottomComponent_div_0_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r379 = ɵngcc0.ɵɵnextContext();
+    const ctx_r383 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r379.steps);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r383.steps);
 } }
 function CheckoutProgressMobileTopComponent_div_0_div_1_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 4);
@@ -2279,9 +2280,9 @@ function CheckoutProgressMobileTopComponent_div_0_div_1_div_2_Template(rf, ctx) 
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const cart_r389 = ɵngcc0.ɵɵnextContext().ngIf;
+    const cart_r393 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind2(2, 2, "cartItems.cartTotal", ɵngcc0.ɵɵpureFunction1(5, _c8, cart_r389.totalItems)), ": ", cart_r389.subTotal.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind2(2, 2, "cartItems.cartTotal", ɵngcc0.ɵɵpureFunction1(5, _c8, cart_r393.totalItems)), ": ", cart_r393.subTotal.formattedValue, " ");
 } }
 const _c21 = function (a0) { return { cxRoute: a0 }; };
 function CheckoutProgressMobileTopComponent_div_0_div_1_div_3_div_1_Template(rf, ctx) { if (rf & 1) {
@@ -2297,13 +2298,13 @@ function CheckoutProgressMobileTopComponent_div_0_div_1_div_3_div_1_Template(rf,
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r397 = ɵngcc0.ɵɵnextContext();
-    const i_r394 = ctx_r397.index;
-    const step_r393 = ctx_r397.$implicit;
+    const ctx_r401 = ɵngcc0.ɵɵnextContext();
+    const i_r398 = ctx_r401.index;
+    const step_r397 = ctx_r401.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2("", i_r394 + 1, ". ", ɵngcc0.ɵɵpipeBind1(3, 4, step_r393.name), "");
+    ɵngcc0.ɵɵtextInterpolate2("", i_r398 + 1, ". ", ɵngcc0.ɵɵpipeBind1(3, 4, step_r397.name), "");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(5, 6, ɵngcc0.ɵɵpureFunction1(10, _c21, step_r393.routeName)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(5, 6, ɵngcc0.ɵɵpureFunction1(10, _c21, step_r397.routeName)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(7, 8, "common.edit"), " ");
 } }
@@ -2315,11 +2316,11 @@ function CheckoutProgressMobileTopComponent_div_0_div_1_div_3_div_2_Template(rf,
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r398 = ɵngcc0.ɵɵnextContext();
-    const i_r394 = ctx_r398.index;
-    const step_r393 = ctx_r398.$implicit;
+    const ctx_r402 = ɵngcc0.ɵɵnextContext();
+    const i_r398 = ctx_r402.index;
+    const step_r397 = ctx_r402.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2("", i_r394 + 1, ". ", ɵngcc0.ɵɵpipeBind1(3, 2, step_r393.name), "");
+    ɵngcc0.ɵɵtextInterpolate2("", i_r398 + 1, ". ", ɵngcc0.ɵɵpipeBind1(3, 2, step_r397.name), "");
 } }
 function CheckoutProgressMobileTopComponent_div_0_div_1_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -2327,12 +2328,12 @@ function CheckoutProgressMobileTopComponent_div_0_div_1_div_3_Template(rf, ctx) 
     ɵngcc0.ɵɵtemplate(2, CheckoutProgressMobileTopComponent_div_0_div_1_div_3_div_2_Template, 4, 4, "div", 5);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const i_r394 = ctx.index;
-    const ctx_r391 = ɵngcc0.ɵɵnextContext(3);
+    const i_r398 = ctx.index;
+    const ctx_r395 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", i_r394 < ctx_r391.activeStepIndex);
+    ɵngcc0.ɵɵproperty("ngIf", i_r398 < ctx_r395.activeStepIndex);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", i_r394 === ctx_r391.activeStepIndex);
+    ɵngcc0.ɵɵproperty("ngIf", i_r398 === ctx_r395.activeStepIndex);
 } }
 function CheckoutProgressMobileTopComponent_div_0_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -2342,12 +2343,12 @@ function CheckoutProgressMobileTopComponent_div_0_div_1_Template(rf, ctx) { if (
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const cart_r389 = ctx.ngIf;
-    const ctx_r388 = ɵngcc0.ɵɵnextContext(2);
+    const cart_r393 = ctx.ngIf;
+    const ctx_r392 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", (cart_r389 == null ? null : cart_r389.totalItems) && (cart_r389 == null ? null : cart_r389.subTotal));
+    ɵngcc0.ɵɵproperty("ngIf", (cart_r393 == null ? null : cart_r393.totalItems) && (cart_r393 == null ? null : cart_r393.subTotal));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r388.steps);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r392.steps);
 } }
 function CheckoutProgressMobileTopComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -2355,11 +2356,10 @@ function CheckoutProgressMobileTopComponent_div_0_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r386 = ɵngcc0.ɵɵnextContext();
+    const ctx_r390 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r386.cart$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r390.cart$));
 } }
-const _c22 = function (a0, a1) { return { " is-active": a0, " is-disabled": a1 }; };
 function CheckoutProgressComponent_section_0_li_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "li", 4);
     ɵngcc0.ɵɵelementStart(1, "a", 5);
@@ -2369,32 +2369,33 @@ function CheckoutProgressComponent_section_0_li_3_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const step_r402 = ctx.$implicit;
-    const i_r403 = ctx.index;
-    const ctx_r401 = ɵngcc0.ɵɵnextContext(2);
+    const step_r406 = ctx.$implicit;
+    const i_r407 = ctx.index;
+    const ctx_r405 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 4, ɵngcc0.ɵɵpureFunction1(8, _c21, step_r402.routeName)))("ngClass", ɵngcc0.ɵɵpureFunction2(10, _c22, i_r403 === ctx_r401.activeStepIndex, i_r403 > ctx_r401.activeStepIndex));
+    ɵngcc0.ɵɵclassProp("active", ctx_r405.isActive(i_r407))("disabled", ctx_r405.isDisabled(i_r407));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 8, ɵngcc0.ɵɵpureFunction1(12, _c21, step_r406.routeName)))("tabindex", ctx_r405.getTabIndex(i_r407));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2(" ", i_r403 + 1, ". ", ɵngcc0.ɵɵpipeBind1(4, 6, step_r402.name), " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", i_r407 + 1, ". ", ɵngcc0.ɵɵpipeBind1(4, 10, step_r406.name), " ");
 } }
 function CheckoutProgressComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "section");
     ɵngcc0.ɵɵelementStart(1, "div", 1);
     ɵngcc0.ɵɵelementStart(2, "ul", 2);
-    ɵngcc0.ɵɵtemplate(3, CheckoutProgressComponent_section_0_li_3_Template, 5, 13, "li", 3);
+    ɵngcc0.ɵɵtemplate(3, CheckoutProgressComponent_section_0_li_3_Template, 5, 14, "li", 3);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r399 = ɵngcc0.ɵɵnextContext();
+    const ctx_r403 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r399.steps);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r403.steps);
 } }
 function DeliveryModeComponent_ng_container_6_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r410 = ɵngcc0.ɵɵgetCurrentView();
+    const _r414 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 11);
     ɵngcc0.ɵɵelementStart(1, "input", 12);
-    ɵngcc0.ɵɵlistener("change", function DeliveryModeComponent_ng_container_6_div_1_Template_input_change_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r410); const mode_r408 = ctx.$implicit; const ctx_r409 = ɵngcc0.ɵɵnextContext(2); return ctx_r409.changeMode(mode_r408.code); });
+    ɵngcc0.ɵɵlistener("change", function DeliveryModeComponent_ng_container_6_div_1_Template_input_change_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r414); const mode_r412 = ctx.$implicit; const ctx_r413 = ɵngcc0.ɵɵnextContext(2); return ctx_r413.changeMode(mode_r412.code); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(2, "label", 13);
     ɵngcc0.ɵɵelementStart(3, "div", 14);
@@ -2409,18 +2410,18 @@ function DeliveryModeComponent_ng_container_6_div_1_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const mode_r408 = ctx.$implicit;
+    const mode_r412 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵpropertyInterpolate1("id", "deliveryMode-", mode_r408.code, "");
-    ɵngcc0.ɵɵproperty("value", mode_r408.code);
+    ɵngcc0.ɵɵpropertyInterpolate1("id", "deliveryMode-", mode_r412.code, "");
+    ɵngcc0.ɵɵproperty("value", mode_r412.code);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵpropertyInterpolate1("for", "deliveryMode-", mode_r408.code, "");
+    ɵngcc0.ɵɵpropertyInterpolate1("for", "deliveryMode-", mode_r412.code, "");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(mode_r408.name);
+    ɵngcc0.ɵɵtextInterpolate(mode_r412.name);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", mode_r408.deliveryCost.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", mode_r412.deliveryCost.formattedValue, " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(mode_r408.description);
+    ɵngcc0.ɵɵtextInterpolate(mode_r412.description);
 } }
 function DeliveryModeComponent_ng_container_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -2428,9 +2429,9 @@ function DeliveryModeComponent_ng_container_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r404 = ɵngcc0.ɵɵnextContext();
+    const ctx_r408 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r404.supportedDeliveryModes$));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r408.supportedDeliveryModes$));
 } }
 function DeliveryModeComponent_ng_template_17_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 17);
@@ -2438,7 +2439,7 @@ function DeliveryModeComponent_ng_template_17_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
 } }
 function BillingAddressFormComponent_ng_container_2_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r416 = ɵngcc0.ɵɵgetCurrentView();
+    const _r420 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "label", 14);
     ɵngcc0.ɵɵelementStart(2, "span", 3);
@@ -2446,30 +2447,30 @@ function BillingAddressFormComponent_ng_container_2_div_1_Template(rf, ctx) { if
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "ng-select", 15);
-    ɵngcc0.ɵɵlistener("change", function BillingAddressFormComponent_ng_container_2_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r416); const ctx_r415 = ɵngcc0.ɵɵnextContext(2); return ctx_r415.countrySelected($event); });
+    ɵngcc0.ɵɵlistener("change", function BillingAddressFormComponent_ng_container_2_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r420); const ctx_r419 = ɵngcc0.ɵɵnextContext(2); return ctx_r419.countrySelected($event); });
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const countries_r413 = ɵngcc0.ɵɵnextContext().ngIf;
+    const countries_r417 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 5, "addressForm.country"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 7, "addressForm.selectOne"));
-    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", countries_r413);
+    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", countries_r417);
 } }
 function BillingAddressFormComponent_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, BillingAddressFormComponent_ng_container_2_div_1_Template, 7, 9, "div", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const countries_r413 = ctx.ngIf;
+    const countries_r417 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", countries_r413.length !== 0);
+    ɵngcc0.ɵɵproperty("ngIf", countries_r417.length !== 0);
 } }
 function BillingAddressFormComponent_ng_container_41_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r421 = ɵngcc0.ɵɵgetCurrentView();
+    const _r425 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "label", 14);
     ɵngcc0.ɵɵelementStart(2, "span", 3);
@@ -2477,35 +2478,35 @@ function BillingAddressFormComponent_ng_container_41_div_1_Template(rf, ctx) { i
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "ng-select", 17);
-    ɵngcc0.ɵɵlistener("change", function BillingAddressFormComponent_ng_container_41_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r421); const ctx_r420 = ɵngcc0.ɵɵnextContext(2); return ctx_r420.regionSelected($event); });
+    ɵngcc0.ɵɵlistener("change", function BillingAddressFormComponent_ng_container_41_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r425); const ctx_r424 = ɵngcc0.ɵɵnextContext(2); return ctx_r424.regionSelected($event); });
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const regions_r418 = ɵngcc0.ɵɵnextContext().ngIf;
+    const regions_r422 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 7, "addressForm.state"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵpropertyInterpolate("bindLabel", regions_r418[0].name ? "name" : "isocodeShort");
-    ɵngcc0.ɵɵpropertyInterpolate("bindValue", regions_r418[0].name ? "isocodeShort" : "region");
+    ɵngcc0.ɵɵpropertyInterpolate("bindLabel", regions_r422[0].name ? "name" : "isocodeShort");
+    ɵngcc0.ɵɵpropertyInterpolate("bindValue", regions_r422[0].name ? "isocodeShort" : "region");
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 9, "addressForm.selectOne"));
-    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", regions_r418);
+    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", regions_r422);
 } }
 function BillingAddressFormComponent_ng_container_41_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0, 16);
     ɵngcc0.ɵɵtemplate(1, BillingAddressFormComponent_ng_container_41_div_1_Template, 7, 11, "div", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const regions_r418 = ctx.ngIf;
+    const regions_r422 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", regions_r418.length !== 0);
+    ɵngcc0.ɵɵproperty("ngIf", regions_r422.length !== 0);
 } }
 function SuggestedAddressDialogComponent_div_17_Template(rf, ctx) { if (rf & 1) {
-    const _r427 = ɵngcc0.ɵɵgetCurrentView();
+    const _r431 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 11);
     ɵngcc0.ɵɵelementStart(1, "input", 18);
-    ɵngcc0.ɵɵlistener("ngModelChange", function SuggestedAddressDialogComponent_div_17_Template_input_ngModelChange_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r427); const ctx_r426 = ɵngcc0.ɵɵnextContext(); return ctx_r426.selectedAddress = $event; });
+    ɵngcc0.ɵɵlistener("ngModelChange", function SuggestedAddressDialogComponent_div_17_Template_input_ngModelChange_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r431); const ctx_r430 = ɵngcc0.ɵɵnextContext(); return ctx_r430.selectedAddress = $event; });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(2, "label", 19);
     ɵngcc0.ɵɵtext(3);
@@ -2526,28 +2527,28 @@ function SuggestedAddressDialogComponent_div_17_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const suggestedAddress_r424 = ctx.$implicit;
-    const i_r425 = ctx.index;
-    const ctx_r423 = ɵngcc0.ɵɵnextContext();
+    const suggestedAddress_r428 = ctx.$implicit;
+    const i_r429 = ctx.index;
+    const ctx_r427 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngModel", ctx_r423.selectedAddress)("value", suggestedAddress_r424)("id", "suggested-addresses--suggested-" + i_r425);
+    ɵngcc0.ɵɵproperty("ngModel", ctx_r427.selectedAddress)("value", suggestedAddress_r428)("id", "suggested-addresses--suggested-" + i_r429);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("for", "suggested-addresses--suggested-" + i_r425);
+    ɵngcc0.ɵɵproperty("for", "suggested-addresses--suggested-" + i_r429);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(4, 13, "checkoutAddress.suggestedAddress"), " ", (ctx_r423.suggestedAddresses == null ? null : ctx_r423.suggestedAddresses.length) > 1 ? i_r425 + 1 : null, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(4, 13, "checkoutAddress.suggestedAddress"), " ", (ctx_r427.suggestedAddresses == null ? null : ctx_r427.suggestedAddresses.length) > 1 ? i_r429 + 1 : null, " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate2(" ", suggestedAddress_r424 == null ? null : suggestedAddress_r424.firstName, " ", suggestedAddress_r424 == null ? null : suggestedAddress_r424.lastName, "");
+    ɵngcc0.ɵɵtextInterpolate2(" ", suggestedAddress_r428 == null ? null : suggestedAddress_r428.firstName, " ", suggestedAddress_r428 == null ? null : suggestedAddress_r428.lastName, "");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", suggestedAddress_r424 == null ? null : suggestedAddress_r424.line1, "");
+    ɵngcc0.ɵɵtextInterpolate1(" ", suggestedAddress_r428 == null ? null : suggestedAddress_r428.line1, "");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(suggestedAddress_r424 == null ? null : suggestedAddress_r424.line2);
+    ɵngcc0.ɵɵtextInterpolate(suggestedAddress_r428 == null ? null : suggestedAddress_r428.line2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2(" ", suggestedAddress_r424 == null ? null : suggestedAddress_r424.town, " ", suggestedAddress_r424 == null ? null : suggestedAddress_r424.region == null ? null : suggestedAddress_r424.region.isocode, "");
+    ɵngcc0.ɵɵtextInterpolate2(" ", suggestedAddress_r428 == null ? null : suggestedAddress_r428.town, " ", suggestedAddress_r428 == null ? null : suggestedAddress_r428.region == null ? null : suggestedAddress_r428.region.isocode, "");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", suggestedAddress_r424 == null ? null : suggestedAddress_r424.postalCode, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", suggestedAddress_r428 == null ? null : suggestedAddress_r428.postalCode, " ");
 } }
 function PaymentFormComponent_div_0_ng_container_4_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r442 = ɵngcc0.ɵɵgetCurrentView();
+    const _r446 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "label", 27);
     ɵngcc0.ɵɵelementStart(2, "span", 28);
@@ -2555,35 +2556,35 @@ function PaymentFormComponent_div_0_ng_container_4_div_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "ng-select", 29);
-    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_ng_container_4_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r442); const ctx_r441 = ɵngcc0.ɵɵnextContext(3); return ctx_r441.paymentSelected($event); });
+    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_ng_container_4_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r446); const ctx_r445 = ɵngcc0.ɵɵnextContext(3); return ctx_r445.paymentSelected($event); });
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const cardTypes_r439 = ɵngcc0.ɵɵnextContext().ngIf;
+    const cardTypes_r443 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 5, "paymentForm.paymentType"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 7, "paymentForm.selectOne"));
-    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", cardTypes_r439);
+    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", cardTypes_r443);
 } }
 function PaymentFormComponent_div_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, PaymentFormComponent_div_0_ng_container_4_div_1_Template, 7, 9, "div", 6);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const cardTypes_r439 = ctx.ngIf;
+    const cardTypes_r443 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", cardTypes_r439.length !== 0);
+    ɵngcc0.ɵɵproperty("ngIf", cardTypes_r443.length !== 0);
 } }
 function PaymentFormComponent_div_0_div_40_Template(rf, ctx) { if (rf & 1) {
-    const _r445 = ɵngcc0.ɵɵgetCurrentView();
+    const _r449 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 5);
     ɵngcc0.ɵɵelementStart(1, "div", 30);
     ɵngcc0.ɵɵelementStart(2, "label");
     ɵngcc0.ɵɵelementStart(3, "input", 31);
-    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_div_40_Template_input_change_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r445); const ctx_r444 = ɵngcc0.ɵɵnextContext(2); return ctx_r444.toggleDefaultPaymentMethod(); });
+    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_div_40_Template_input_change_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r449); const ctx_r448 = ɵngcc0.ɵɵnextContext(2); return ctx_r448.toggleDefaultPaymentMethod(); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "span", 32);
     ɵngcc0.ɵɵtext(5);
@@ -2597,13 +2598,13 @@ function PaymentFormComponent_div_0_div_40_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(6, 1, "paymentForm.setAsDefault"));
 } }
 function PaymentFormComponent_div_0_ng_container_45_Template(rf, ctx) { if (rf & 1) {
-    const _r447 = ɵngcc0.ɵɵgetCurrentView();
+    const _r451 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 5);
     ɵngcc0.ɵɵelementStart(2, "div", 30);
     ɵngcc0.ɵɵelementStart(3, "label");
     ɵngcc0.ɵɵelementStart(4, "input", 33);
-    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_ng_container_45_Template_input_change_4_listener($event) { ɵngcc0.ɵɵrestoreView(_r447); const ctx_r446 = ɵngcc0.ɵɵnextContext(2); return ctx_r446.toggleSameAsShippingAddress(); });
+    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_ng_container_45_Template_input_change_4_listener($event) { ɵngcc0.ɵɵrestoreView(_r451); const ctx_r450 = ɵngcc0.ɵɵnextContext(2); return ctx_r450.toggleSameAsShippingAddress(); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "span", 32);
     ɵngcc0.ɵɵtext(6);
@@ -2614,9 +2615,9 @@ function PaymentFormComponent_div_0_ng_container_45_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r433 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r437 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("checked", ctx_r433.sameAsShippingAddress);
+    ɵngcc0.ɵɵproperty("checked", ctx_r437.sameAsShippingAddress);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(7, 2, "paymentForm.sameAsShippingAddress"));
 } }
@@ -2625,21 +2626,21 @@ function PaymentFormComponent_div_0_ng_container_47_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵelement(1, "cx-card", 34);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const shippingAddress_r448 = ctx.ngIf;
-    const ctx_r434 = ɵngcc0.ɵɵnextContext(2);
+    const shippingAddress_r452 = ctx.ngIf;
+    const ctx_r438 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("content", ctx_r434.getAddressCardContent(shippingAddress_r448));
+    ɵngcc0.ɵɵproperty("content", ctx_r438.getAddressCardContent(shippingAddress_r452));
 } }
 function PaymentFormComponent_div_0_ng_template_49_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-billing-address-form", 35);
 } if (rf & 2) {
-    const ctx_r436 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("billingAddress", ctx_r436.billingAddress)("countries$", ctx_r436.countries$);
+    const ctx_r440 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("billingAddress", ctx_r440.billingAddress)("countries$", ctx_r440.countries$);
 } }
 function PaymentFormComponent_div_0_button_53_Template(rf, ctx) { if (rf & 1) {
-    const _r450 = ɵngcc0.ɵɵgetCurrentView();
+    const _r454 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 36);
-    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_button_53_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r450); const ctx_r449 = ɵngcc0.ɵɵnextContext(2); return ctx_r449.back(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_button_53_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r454); const ctx_r453 = ɵngcc0.ɵɵnextContext(2); return ctx_r453.back(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2648,9 +2649,9 @@ function PaymentFormComponent_div_0_button_53_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "common.back"), " ");
 } }
 function PaymentFormComponent_div_0_button_54_Template(rf, ctx) { if (rf & 1) {
-    const _r452 = ɵngcc0.ɵɵgetCurrentView();
+    const _r456 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 36);
-    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_button_54_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r452); const ctx_r451 = ɵngcc0.ɵɵnextContext(2); return ctx_r451.close(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_button_54_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r456); const ctx_r455 = ɵngcc0.ɵɵnextContext(2); return ctx_r455.close(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2659,7 +2660,7 @@ function PaymentFormComponent_div_0_button_54_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "paymentForm.changePayment"), " ");
 } }
 function PaymentFormComponent_div_0_Template(rf, ctx) { if (rf & 1) {
-    const _r454 = ɵngcc0.ɵɵgetCurrentView();
+    const _r458 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 2);
     ɵngcc0.ɵɵelementStart(1, "div", 3);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
@@ -2697,13 +2698,13 @@ function PaymentFormComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(25, "div", 11);
     ɵngcc0.ɵɵelementStart(26, "div", 12);
     ɵngcc0.ɵɵelementStart(27, "ng-select", 13);
-    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_Template_ng_select_change_27_listener($event) { ɵngcc0.ɵɵrestoreView(_r454); const ctx_r453 = ɵngcc0.ɵɵnextContext(); return ctx_r453.monthSelected($event); });
+    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_Template_ng_select_change_27_listener($event) { ɵngcc0.ɵɵrestoreView(_r458); const ctx_r457 = ɵngcc0.ɵɵnextContext(); return ctx_r457.monthSelected($event); });
     ɵngcc0.ɵɵpipe(28, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(29, "div", 14);
     ɵngcc0.ɵɵelementStart(30, "ng-select", 15);
-    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_Template_ng_select_change_30_listener($event) { ɵngcc0.ɵɵrestoreView(_r454); const ctx_r455 = ɵngcc0.ɵɵnextContext(); return ctx_r455.yearSelected($event); });
+    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_Template_ng_select_change_30_listener($event) { ɵngcc0.ɵɵrestoreView(_r458); const ctx_r459 = ɵngcc0.ɵɵnextContext(); return ctx_r459.yearSelected($event); });
     ɵngcc0.ɵɵpipe(31, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -2742,7 +2743,7 @@ function PaymentFormComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(55, "div", 24);
     ɵngcc0.ɵɵelementStart(56, "button", 26);
-    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_Template_button_click_56_listener($event) { ɵngcc0.ɵɵrestoreView(_r454); const ctx_r456 = ɵngcc0.ɵɵnextContext(); return ctx_r456.next(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_Template_button_click_56_listener($event) { ɵngcc0.ɵɵrestoreView(_r458); const ctx_r460 = ɵngcc0.ɵɵnextContext(); return ctx_r460.next(); });
     ɵngcc0.ɵɵtext(57);
     ɵngcc0.ɵɵpipe(58, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2750,68 +2751,66 @@ function PaymentFormComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const _r435 = ɵngcc0.ɵɵreference(50);
-    const ctx_r428 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("formGroup", ctx_r428.payment);
+    const _r439 = ɵngcc0.ɵɵreference(50);
+    const ctx_r432 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("formGroup", ctx_r432.payment);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 26, ctx_r428.cardTypes$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 25, ctx_r432.cardTypes$));
     ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(10, 28, "paymentForm.accountHolderName.label"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(10, 27, "paymentForm.accountHolderName.label"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(12, 30, "paymentForm.accountHolderName.placeholder"));
+    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(12, 29, "paymentForm.accountHolderName.placeholder"));
     ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(17, 32, "paymentForm.cardNumber"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(17, 31, "paymentForm.cardNumber"));
     ɵngcc0.ɵɵadvance(7);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(24, 34, "paymentForm.expirationDate"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(24, 33, "paymentForm.expirationDate"));
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(28, 36, "paymentForm.monthMask"));
-    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", ctx_r428.months);
+    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(28, 35, "paymentForm.monthMask"));
+    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", ctx_r432.months);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(31, 38, "paymentForm.yearMask"));
-    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", ctx_r428.years);
+    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(31, 37, "paymentForm.yearMask"));
+    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", ctx_r432.years);
     ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(36, 40, "paymentForm.securityCode"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(36, 39, "paymentForm.securityCode"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵpropertyInterpolate("title", ɵngcc0.ɵɵpipeBind1(38, 42, "paymentForm.securityCodeTitle"));
-    ɵngcc0.ɵɵproperty("type", ctx_r428.iconTypes.INFO);
+    ɵngcc0.ɵɵpropertyInterpolate("title", ɵngcc0.ɵɵpipeBind1(38, 41, "paymentForm.securityCodeTitle"));
+    ɵngcc0.ɵɵproperty("type", ctx_r432.iconTypes.INFO);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r428.setAsDefaultField);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r432.setAsDefaultField);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(44, 44, "paymentForm.billingAddress"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(44, 43, "paymentForm.billingAddress"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(46, 46, ctx_r428.showSameAsShippingAddressCheckbox()));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(46, 45, ctx_r432.showSameAsShippingAddressCheckbox()));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(48, 48, ctx_r428.sameAsShippingAddress && ctx_r428.shippingAddress$))("ngIfElse", _r435);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(48, 47, ctx_r432.sameAsShippingAddress && ctx_r432.shippingAddress$))("ngIfElse", _r439);
     ɵngcc0.ɵɵadvance(6);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r428.paymentMethodsCount === 0);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r432.paymentMethodsCount === 0);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r428.paymentMethodsCount > 0);
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("disabled", ctx_r428.isContinueButtonDisabled());
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(58, 50, "common.continue"), " ");
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r432.paymentMethodsCount > 0);
+    ɵngcc0.ɵɵadvance(3);
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(58, 49, "common.continue"), " ");
 } }
 function PaymentFormComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-spinner");
 } }
 function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template(rf, ctx) { if (rf & 1) {
-    const _r469 = ɵngcc0.ɵɵgetCurrentView();
+    const _r473 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 13);
     ɵngcc0.ɵɵelementStart(1, "div", 14);
     ɵngcc0.ɵɵelementStart(2, "cx-card", 15);
-    ɵngcc0.ɵɵlistener("sendCard", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_cx_card_sendCard_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r469); const method_r466 = ctx.$implicit; const ctx_r468 = ɵngcc0.ɵɵnextContext(4); return ctx_r468.paymentMethodSelected(method_r466); });
+    ɵngcc0.ɵɵlistener("sendCard", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_cx_card_sendCard_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r473); const method_r470 = ctx.$implicit; const ctx_r472 = ɵngcc0.ɵɵnextContext(4); return ctx_r472.paymentMethodSelected(method_r470); });
     ɵngcc0.ɵɵpipe(3, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const method_r466 = ctx.$implicit;
-    const ctx_r465 = ɵngcc0.ɵɵnextContext(4);
+    const method_r470 = ctx.$implicit;
+    const ctx_r469 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("border", true)("fitToContainer", true)("content", ɵngcc0.ɵɵpipeBind1(3, 3, ctx_r465.getCardContent(method_r466)));
+    ɵngcc0.ɵɵproperty("border", true)("fitToContainer", true)("content", ɵngcc0.ɵɵpipeBind1(3, 3, ctx_r469.getCardContent(method_r470)));
 } }
 function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r471 = ɵngcc0.ɵɵgetCurrentView();
+    const _r475 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "p", 5);
     ɵngcc0.ɵɵtext(2);
@@ -2820,7 +2819,7 @@ function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Tem
     ɵngcc0.ɵɵelementStart(4, "div", 6);
     ɵngcc0.ɵɵelementStart(5, "div", 7);
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r471); const ctx_r470 = ɵngcc0.ɵɵnextContext(3); return ctx_r470.showNewPaymentForm(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r475); const ctx_r474 = ɵngcc0.ɵɵnextContext(3); return ctx_r474.showNewPaymentForm(); });
     ɵngcc0.ɵɵtext(7);
     ɵngcc0.ɵɵpipe(8, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2832,14 +2831,14 @@ function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Tem
     ɵngcc0.ɵɵelementStart(11, "div", 11);
     ɵngcc0.ɵɵelementStart(12, "div", 7);
     ɵngcc0.ɵɵelementStart(13, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_13_listener($event) { ɵngcc0.ɵɵrestoreView(_r471); const ctx_r472 = ɵngcc0.ɵɵnextContext(3); return ctx_r472.back(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_13_listener($event) { ɵngcc0.ɵɵrestoreView(_r475); const ctx_r476 = ɵngcc0.ɵɵnextContext(3); return ctx_r476.back(); });
     ɵngcc0.ɵɵtext(14);
     ɵngcc0.ɵɵpipe(15, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(16, "div", 7);
     ɵngcc0.ɵɵelementStart(17, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_17_listener($event) { ɵngcc0.ɵɵrestoreView(_r471); const ctx_r473 = ɵngcc0.ɵɵnextContext(3); return ctx_r473.next(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_17_listener($event) { ɵngcc0.ɵɵrestoreView(_r475); const ctx_r477 = ɵngcc0.ɵɵnextContext(3); return ctx_r477.next(); });
     ɵngcc0.ɵɵtext(18);
     ɵngcc0.ɵɵpipe(19, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2847,30 +2846,30 @@ function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Tem
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const existingPaymentMethods_r458 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r462 = ɵngcc0.ɵɵnextContext();
+    const existingPaymentMethods_r462 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r466 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 6, "paymentForm.choosePaymentMethod"), " ");
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(8, 8, "paymentForm.addNewPayment"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", existingPaymentMethods_r458);
+    ɵngcc0.ɵɵproperty("ngForOf", existingPaymentMethods_r462);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(15, 10, "common.back"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("disabled", !ctx_r462.selectedPayment);
+    ɵngcc0.ɵɵproperty("disabled", !ctx_r466.selectedPayment);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(19, 12, "common.continue"), " ");
 } }
 function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template(rf, ctx) { if (rf & 1) {
-    const _r476 = ɵngcc0.ɵɵgetCurrentView();
+    const _r480 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-payment-form", 16);
-    ɵngcc0.ɵɵlistener("setPaymentDetails", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_setPaymentDetails_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r476); const ctx_r475 = ɵngcc0.ɵɵnextContext(3); return ctx_r475.setPaymentDetails($event); })("closeForm", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_closeForm_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r476); const ctx_r477 = ɵngcc0.ɵɵnextContext(3); return ctx_r477.hideNewPaymentForm(); })("goBack", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_goBack_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r476); const ctx_r478 = ɵngcc0.ɵɵnextContext(3); return ctx_r478.back(); });
+    ɵngcc0.ɵɵlistener("setPaymentDetails", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_setPaymentDetails_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r480); const ctx_r479 = ɵngcc0.ɵɵnextContext(3); return ctx_r479.setPaymentDetails($event); })("closeForm", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_closeForm_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r480); const ctx_r481 = ɵngcc0.ɵɵnextContext(3); return ctx_r481.hideNewPaymentForm(); })("goBack", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_goBack_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r480); const ctx_r482 = ɵngcc0.ɵɵnextContext(3); return ctx_r482.back(); });
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const existingPaymentMethods_r458 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r464 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("paymentMethodsCount", (existingPaymentMethods_r458 == null ? null : existingPaymentMethods_r458.length) || 0)("setAsDefaultField", !ctx_r464.isGuestCheckout);
+    const existingPaymentMethods_r462 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r468 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("paymentMethodsCount", (existingPaymentMethods_r462 == null ? null : existingPaymentMethods_r462.length) || 0)("setAsDefaultField", !ctx_r468.isGuestCheckout);
 } }
 function PaymentMethodComponent_ng_container_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -2879,10 +2878,10 @@ function PaymentMethodComponent_ng_container_0_ng_container_4_Template(rf, ctx) 
     ɵngcc0.ɵɵtemplate(3, PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template, 1, 2, "ng-template", null, 4, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r463 = ɵngcc0.ɵɵreference(4);
-    const ctx_r459 = ɵngcc0.ɵɵnextContext(2);
+    const _r467 = ɵngcc0.ɵɵreference(4);
+    const ctx_r463 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r459.existingPaymentMethods$).length && !ctx_r459.newPaymentFormManuallyOpened)("ngIfElse", _r463);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r463.existingPaymentMethods$).length && !ctx_r463.newPaymentFormManuallyOpened)("ngIfElse", _r467);
 } }
 function PaymentMethodComponent_ng_container_0_ng_template_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 17);
@@ -2900,14 +2899,14 @@ function PaymentMethodComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(6, PaymentMethodComponent_ng_container_0_ng_template_6_Template, 2, 0, "ng-template", null, 3, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r460 = ɵngcc0.ɵɵreference(7);
-    const ctx_r457 = ɵngcc0.ɵɵnextContext();
+    const _r464 = ɵngcc0.ɵɵreference(7);
+    const ctx_r461 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 3, "paymentForm.payment"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(5, 5, ctx_r457.isLoading$))("ngIfElse", _r460);
+    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(5, 5, ctx_r461.isLoading$))("ngIfElse", _r464);
 } }
-const _c23 = function () { return { cxRoute: "termsAndConditions" }; };
+const _c22 = function () { return { cxRoute: "termsAndConditions" }; };
 function ReviewSubmitComponent_div_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 12);
     ɵngcc0.ɵɵelementStart(1, "a", 13);
@@ -2917,9 +2916,9 @@ function ReviewSubmitComponent_div_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r480 = ɵngcc0.ɵɵnextContext();
+    const ctx_r484 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(6, _c21, ctx_r480.getCheckoutStepUrl(ctx_r480.checkoutStepType.SHIPPING_ADDRESS))));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(6, _c21, ctx_r484.getCheckoutStepUrl(ctx_r484.checkoutStepType.SHIPPING_ADDRESS))));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 4, "checkoutReview.editShippingAddress"));
 } }
@@ -2927,9 +2926,9 @@ function ReviewSubmitComponent_cx_card_16_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-card", 6);
     ɵngcc0.ɵɵpipe(1, "async");
 } if (rf & 2) {
-    const deliveryMode_r485 = ctx.ngIf;
-    const ctx_r481 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(1, 1, ctx_r481.getDeliveryModeCard(deliveryMode_r485)));
+    const deliveryMode_r489 = ctx.ngIf;
+    const ctx_r485 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(1, 1, ctx_r485.getDeliveryModeCard(deliveryMode_r489)));
 } }
 function ReviewSubmitComponent_div_18_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 12);
@@ -2940,9 +2939,9 @@ function ReviewSubmitComponent_div_18_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r482 = ɵngcc0.ɵɵnextContext();
+    const ctx_r486 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(6, _c21, ctx_r482.getCheckoutStepUrl(ctx_r482.checkoutStepType.DELIVERY_MODE))));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(6, _c21, ctx_r486.getCheckoutStepUrl(ctx_r486.checkoutStepType.DELIVERY_MODE))));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 4, "checkoutReview.editShippingMethod"));
 } }
@@ -2955,9 +2954,9 @@ function ReviewSubmitComponent_div_25_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r483 = ɵngcc0.ɵɵnextContext();
+    const ctx_r487 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(6, _c21, ctx_r483.getCheckoutStepUrl(ctx_r483.checkoutStepType.PAYMENT_DETAILS))));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(6, _c21, ctx_r487.getCheckoutStepUrl(ctx_r487.checkoutStepType.PAYMENT_DETAILS))));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 4, "checkoutReview.editPaymentMethod"));
 } }
@@ -2966,19 +2965,19 @@ function ReviewSubmitComponent_ng_container_26_div_7_ng_container_1_Template(rf,
     ɵngcc0.ɵɵelement(1, "cx-cart-item-list", 19);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const entries_r488 = ɵngcc0.ɵɵnextContext().ngIf;
-    const cart_r486 = ɵngcc0.ɵɵnextContext().ngIf;
+    const entries_r492 = ɵngcc0.ɵɵnextContext().ngIf;
+    const cart_r490 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("items", entries_r488)("readonly", true)("potentialProductPromotions", cart_r486.potentialProductPromotions);
+    ɵngcc0.ɵɵproperty("items", entries_r492)("readonly", true)("potentialProductPromotions", cart_r490.potentialProductPromotions);
 } }
 function ReviewSubmitComponent_ng_container_26_div_7_ng_container_2_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelement(1, "cx-promotions", 21);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const orderPromotions_r494 = ctx.ngIf;
+    const orderPromotions_r498 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r494);
+    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r498);
 } }
 function ReviewSubmitComponent_ng_container_26_div_7_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -2987,12 +2986,12 @@ function ReviewSubmitComponent_ng_container_26_div_7_ng_container_2_Template(rf,
     ɵngcc0.ɵɵelement(3, "cx-cart-item-list", 20);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const entries_r488 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r490 = ɵngcc0.ɵɵnextContext(2);
+    const entries_r492 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r494 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r490.orderPromotions$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r494.orderPromotions$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("items", entries_r488)("readonly", true)("promotionLocation", ctx_r490.promotionLocation);
+    ɵngcc0.ɵɵproperty("items", entries_r492)("readonly", true)("promotionLocation", ctx_r494.promotionLocation);
 } }
 function ReviewSubmitComponent_ng_container_26_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 17);
@@ -3019,17 +3018,17 @@ function ReviewSubmitComponent_ng_container_26_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(8, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const cart_r486 = ctx.ngIf;
-    const ctx_r484 = ɵngcc0.ɵɵnextContext();
+    const cart_r490 = ctx.ngIf;
+    const ctx_r488 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind2(3, 4, "cartItems.cartTotal", ɵngcc0.ɵɵpureFunction1(11, _c8, cart_r486.deliveryItemsQuantity)), ": ", cart_r486.totalPrice == null ? null : cart_r486.totalPrice.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind2(3, 4, "cartItems.cartTotal", ɵngcc0.ɵɵpureFunction1(11, _c8, cart_r490.deliveryItemsQuantity)), ": ", cart_r490.totalPrice == null ? null : cart_r490.totalPrice.formattedValue, " ");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(6, 7, "checkoutReview.placeOrder"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 9, ctx_r484.entries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 9, ctx_r488.entries$));
 } }
 function AddressFormComponent_ng_container_4_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r504 = ɵngcc0.ɵɵgetCurrentView();
+    const _r508 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "label", 22);
     ɵngcc0.ɵɵelementStart(2, "span", 7);
@@ -3037,30 +3036,30 @@ function AddressFormComponent_ng_container_4_div_1_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "ng-select", 23);
-    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_ng_container_4_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r504); const ctx_r503 = ɵngcc0.ɵɵnextContext(2); return ctx_r503.countrySelected($event); });
+    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_ng_container_4_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r508); const ctx_r507 = ɵngcc0.ɵɵnextContext(2); return ctx_r507.countrySelected($event); });
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const countries_r501 = ɵngcc0.ɵɵnextContext().ngIf;
+    const countries_r505 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 5, "addressForm.country"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 7, "addressForm.selectOne"));
-    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", countries_r501);
+    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", countries_r505);
 } }
 function AddressFormComponent_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, AddressFormComponent_ng_container_4_div_1_Template, 7, 9, "div", 4);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const countries_r501 = ctx.ngIf;
+    const countries_r505 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", countries_r501.length !== 0);
+    ɵngcc0.ɵɵproperty("ngIf", countries_r505.length !== 0);
 } }
 function AddressFormComponent_div_6_ng_container_1_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r510 = ɵngcc0.ɵɵgetCurrentView();
+    const _r514 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "label", 22);
     ɵngcc0.ɵɵelementStart(2, "span", 7);
@@ -3068,25 +3067,25 @@ function AddressFormComponent_div_6_ng_container_1_div_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "ng-select", 24);
-    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_div_6_ng_container_1_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r510); const ctx_r509 = ɵngcc0.ɵɵnextContext(3); return ctx_r509.titleSelected($event); });
+    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_div_6_ng_container_1_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r514); const ctx_r513 = ɵngcc0.ɵɵnextContext(3); return ctx_r513.titleSelected($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const titles_r507 = ɵngcc0.ɵɵnextContext().ngIf;
+    const titles_r511 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 4, "addressForm.title"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", titles_r507);
+    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", titles_r511);
 } }
 function AddressFormComponent_div_6_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, AddressFormComponent_div_6_ng_container_1_div_1_Template, 6, 6, "div", 4);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const titles_r507 = ctx.ngIf;
+    const titles_r511 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", titles_r507.length !== 0);
+    ɵngcc0.ɵɵproperty("ngIf", titles_r511.length !== 0);
 } }
 function AddressFormComponent_div_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 6);
@@ -3094,12 +3093,12 @@ function AddressFormComponent_div_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r497 = ɵngcc0.ɵɵnextContext();
+    const ctx_r501 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r497.titles$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r501.titles$));
 } }
 function AddressFormComponent_ng_container_44_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r515 = ɵngcc0.ɵɵgetCurrentView();
+    const _r519 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "label", 22);
     ɵngcc0.ɵɵelementStart(2, "span", 7);
@@ -3107,37 +3106,37 @@ function AddressFormComponent_ng_container_44_div_1_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "ng-select", 26);
-    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_ng_container_44_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r515); const ctx_r514 = ɵngcc0.ɵɵnextContext(2); return ctx_r514.regionSelected($event); });
+    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_ng_container_44_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r519); const ctx_r518 = ɵngcc0.ɵɵnextContext(2); return ctx_r518.regionSelected($event); });
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const regions_r512 = ɵngcc0.ɵɵnextContext().ngIf;
+    const regions_r516 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 7, "addressForm.state"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵpropertyInterpolate("bindLabel", regions_r512[0].name ? "name" : "isocode");
-    ɵngcc0.ɵɵpropertyInterpolate("bindValue", regions_r512[0].name ? "isocode" : "region");
+    ɵngcc0.ɵɵpropertyInterpolate("bindLabel", regions_r516[0].name ? "name" : "isocode");
+    ɵngcc0.ɵɵpropertyInterpolate("bindValue", regions_r516[0].name ? "isocode" : "region");
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 9, "addressForm.selectOne"));
-    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", regions_r512);
+    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", regions_r516);
 } }
 function AddressFormComponent_ng_container_44_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0, 25);
     ɵngcc0.ɵɵtemplate(1, AddressFormComponent_ng_container_44_div_1_Template, 7, 11, "div", 4);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const regions_r512 = ctx.ngIf;
+    const regions_r516 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", regions_r512.length !== 0);
+    ɵngcc0.ɵɵproperty("ngIf", regions_r516.length !== 0);
 } }
 function AddressFormComponent_div_60_Template(rf, ctx) { if (rf & 1) {
-    const _r518 = ɵngcc0.ɵɵgetCurrentView();
+    const _r522 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 6);
     ɵngcc0.ɵɵelementStart(1, "div", 27);
     ɵngcc0.ɵɵelementStart(2, "label");
     ɵngcc0.ɵɵelementStart(3, "input", 28);
-    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_div_60_Template_input_change_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r518); const ctx_r517 = ɵngcc0.ɵɵnextContext(); return ctx_r517.toggleDefaultAddress(); });
+    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_div_60_Template_input_change_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r522); const ctx_r521 = ɵngcc0.ɵɵnextContext(); return ctx_r521.toggleDefaultAddress(); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "span", 29);
     ɵngcc0.ɵɵtext(5);
@@ -3151,36 +3150,36 @@ function AddressFormComponent_div_60_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(6, 1, "addressForm.setAsDefault"));
 } }
 function AddressFormComponent_div_62_Template(rf, ctx) { if (rf & 1) {
-    const _r520 = ɵngcc0.ɵɵgetCurrentView();
+    const _r524 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 20);
     ɵngcc0.ɵɵelementStart(1, "button", 30);
-    ɵngcc0.ɵɵlistener("click", function AddressFormComponent_div_62_Template_button_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r520); const ctx_r519 = ɵngcc0.ɵɵnextContext(); return ctx_r519.back(); });
+    ɵngcc0.ɵɵlistener("click", function AddressFormComponent_div_62_Template_button_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r524); const ctx_r523 = ɵngcc0.ɵɵnextContext(); return ctx_r523.back(); });
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r500 = ɵngcc0.ɵɵnextContext();
+    const ctx_r504 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r500.cancelBtnLabel || ɵngcc0.ɵɵpipeBind1(3, 1, "addressForm.chooseAddress"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r504.cancelBtnLabel || ɵngcc0.ɵɵpipeBind1(3, 1, "addressForm.chooseAddress"), " ");
 } }
 function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template(rf, ctx) { if (rf & 1) {
-    const _r533 = ɵngcc0.ɵɵgetCurrentView();
+    const _r537 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 14);
     ɵngcc0.ɵɵelementStart(1, "div", 15);
-    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_div_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r533); const card_r530 = ctx.$implicit; const ctx_r532 = ɵngcc0.ɵɵnextContext(4); return ctx_r532.addressSelected(card_r530.address); });
+    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_div_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r537); const card_r534 = ctx.$implicit; const ctx_r536 = ɵngcc0.ɵɵnextContext(4); return ctx_r536.addressSelected(card_r534.address); });
     ɵngcc0.ɵɵelementStart(2, "cx-card", 16);
-    ɵngcc0.ɵɵlistener("sendCard", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_cx_card_sendCard_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r533); const card_r530 = ctx.$implicit; const ctx_r534 = ɵngcc0.ɵɵnextContext(4); return ctx_r534.addressSelected(card_r530.address); });
+    ɵngcc0.ɵɵlistener("sendCard", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_cx_card_sendCard_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r537); const card_r534 = ctx.$implicit; const ctx_r538 = ɵngcc0.ɵɵnextContext(4); return ctx_r538.addressSelected(card_r534.address); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const card_r530 = ctx.$implicit;
+    const card_r534 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("border", true)("fitToContainer", true)("content", card_r530.card);
+    ɵngcc0.ɵɵproperty("border", true)("fitToContainer", true)("content", card_r534.card);
 } }
 function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r536 = ɵngcc0.ɵɵgetCurrentView();
+    const _r540 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "p", 5);
     ɵngcc0.ɵɵtext(2);
@@ -3189,7 +3188,7 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_T
     ɵngcc0.ɵɵelementStart(4, "div", 6);
     ɵngcc0.ɵɵelementStart(5, "div", 7);
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r536); const ctx_r535 = ɵngcc0.ɵɵnextContext(3); return ctx_r535.showNewAddressForm(); });
+    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r540); const ctx_r539 = ɵngcc0.ɵɵnextContext(3); return ctx_r539.showNewAddressForm(); });
     ɵngcc0.ɵɵtext(7);
     ɵngcc0.ɵɵpipe(8, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -3201,14 +3200,14 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_T
     ɵngcc0.ɵɵelementStart(11, "div", 6);
     ɵngcc0.ɵɵelementStart(12, "div", 11);
     ɵngcc0.ɵɵelementStart(13, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_13_listener($event) { ɵngcc0.ɵɵrestoreView(_r536); const ctx_r537 = ɵngcc0.ɵɵnextContext(3); return ctx_r537.back(); });
+    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_13_listener($event) { ɵngcc0.ɵɵrestoreView(_r540); const ctx_r541 = ɵngcc0.ɵɵnextContext(3); return ctx_r541.back(); });
     ɵngcc0.ɵɵtext(14);
     ɵngcc0.ɵɵpipe(15, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(16, "div", 11);
     ɵngcc0.ɵɵelementStart(17, "button", 13);
-    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_17_listener($event) { ɵngcc0.ɵɵrestoreView(_r536); const ctx_r538 = ɵngcc0.ɵɵnextContext(3); return ctx_r538.next(); });
+    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_17_listener($event) { ɵngcc0.ɵɵrestoreView(_r540); const ctx_r542 = ɵngcc0.ɵɵnextContext(3); return ctx_r542.next(); });
     ɵngcc0.ɵɵpipe(18, "async");
     ɵngcc0.ɵɵtext(19);
     ɵngcc0.ɵɵpipe(20, "cxTranslate");
@@ -3217,16 +3216,16 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_T
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const cards_r522 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r526 = ɵngcc0.ɵɵnextContext();
+    const cards_r526 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r530 = ɵngcc0.ɵɵnextContext();
     var tmp_4_0 = null;
-    const currVal_4 = (!ctx_r526.selectedAddress || !ctx_r526.selectedAddress.id) && !((tmp_4_0 = ɵngcc0.ɵɵpipeBind1(18, 12, ctx_r526.selectedAddress$)) == null ? null : tmp_4_0.shippingAddress);
+    const currVal_4 = (!ctx_r530.selectedAddress || !ctx_r530.selectedAddress.id) && !((tmp_4_0 = ɵngcc0.ɵɵpipeBind1(18, 12, ctx_r530.selectedAddress$)) == null ? null : tmp_4_0.shippingAddress);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 6, "checkoutAddress.selectYourShippingAddress"), " ");
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(8, 8, "checkoutAddress.addNewAddress"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", cards_r522);
+    ɵngcc0.ɵɵproperty("ngForOf", cards_r526);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(15, 10, "checkout.backToCart"), " ");
     ɵngcc0.ɵɵadvance(3);
@@ -3235,10 +3234,10 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_T
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(20, 14, "common.continue"), " ");
 } }
 function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r544 = ɵngcc0.ɵɵgetCurrentView();
+    const _r548 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "cx-address-form", 18);
-    ɵngcc0.ɵɵlistener("backToAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template_cx_address_form_backToAddress_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r544); const ctx_r543 = ɵngcc0.ɵɵnextContext(4); return ctx_r543.hideNewAddressForm(false); })("submitAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template_cx_address_form_submitAddress_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r544); const ctx_r545 = ɵngcc0.ɵɵnextContext(4); return ctx_r545.addAddress($event); });
+    ɵngcc0.ɵɵlistener("backToAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template_cx_address_form_backToAddress_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r548); const ctx_r547 = ɵngcc0.ɵɵnextContext(4); return ctx_r547.hideNewAddressForm(false); })("submitAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template_cx_address_form_submitAddress_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r548); const ctx_r549 = ɵngcc0.ɵɵnextContext(4); return ctx_r549.addAddress($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
@@ -3246,23 +3245,23 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng
     ɵngcc0.ɵɵproperty("showTitleCode", true);
 } }
 function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template(rf, ctx) { if (rf & 1) {
-    const _r547 = ɵngcc0.ɵɵgetCurrentView();
+    const _r551 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-address-form", 19);
-    ɵngcc0.ɵɵlistener("backToAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template_cx_address_form_backToAddress_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r547); const ctx_r546 = ɵngcc0.ɵɵnextContext(4); return ctx_r546.hideNewAddressForm(true); })("submitAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template_cx_address_form_submitAddress_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r547); const ctx_r548 = ɵngcc0.ɵɵnextContext(4); return ctx_r548.addAddress($event); });
+    ɵngcc0.ɵɵlistener("backToAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template_cx_address_form_backToAddress_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r551); const ctx_r550 = ɵngcc0.ɵɵnextContext(4); return ctx_r550.hideNewAddressForm(true); })("submitAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template_cx_address_form_submitAddress_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r551); const ctx_r552 = ɵngcc0.ɵɵnextContext(4); return ctx_r552.addAddress($event); });
     ɵngcc0.ɵɵpipe(1, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r542 = ɵngcc0.ɵɵnextContext(4);
+    const ctx_r546 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵpropertyInterpolate("cancelBtnLabel", ɵngcc0.ɵɵpipeBind1(1, 4, "checkout.backToCart"));
-    ɵngcc0.ɵɵproperty("showTitleCode", true)("setAsDefaultField", !ctx_r542.isGuestCheckout)("addressData", ctx_r542.setAddress);
+    ɵngcc0.ɵɵproperty("showTitleCode", true)("setAsDefaultField", !ctx_r546.isGuestCheckout)("addressData", ctx_r546.setAddress);
 } }
 function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template, 2, 1, "ng-container", 2);
     ɵngcc0.ɵɵtemplate(1, ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template, 2, 6, "ng-template", null, 17, ɵngcc0.ɵɵtemplateRefExtractor);
 } if (rf & 2) {
-    const _r541 = ɵngcc0.ɵɵreference(2);
-    const cards_r522 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    ɵngcc0.ɵɵproperty("ngIf", cards_r522.length)("ngIfElse", _r541);
+    const _r545 = ɵngcc0.ɵɵreference(2);
+    const cards_r526 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    ɵngcc0.ɵɵproperty("ngIf", cards_r526.length)("ngIfElse", _r545);
 } }
 function ShippingAddressComponent_ng_container_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -3270,11 +3269,11 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_Template(rf, ctx
     ɵngcc0.ɵɵtemplate(2, ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_Template, 3, 2, "ng-template", null, 4, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r527 = ɵngcc0.ɵɵreference(3);
-    const cards_r522 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r523 = ɵngcc0.ɵɵnextContext();
+    const _r531 = ɵngcc0.ɵɵreference(3);
+    const cards_r526 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r527 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", (cards_r522 == null ? null : cards_r522.length) && !ctx_r523.newAddressFormManuallyOpened)("ngIfElse", _r527);
+    ɵngcc0.ɵɵproperty("ngIf", (cards_r526 == null ? null : cards_r526.length) && !ctx_r527.newAddressFormManuallyOpened)("ngIfElse", _r531);
 } }
 function ShippingAddressComponent_ng_container_0_ng_template_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 20);
@@ -3292,21 +3291,21 @@ function ShippingAddressComponent_ng_container_0_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵtemplate(6, ShippingAddressComponent_ng_container_0_ng_template_6_Template, 2, 0, "ng-template", null, 3, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r524 = ɵngcc0.ɵɵreference(7);
-    const ctx_r521 = ɵngcc0.ɵɵnextContext();
+    const _r528 = ɵngcc0.ɵɵreference(7);
+    const ctx_r525 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 3, "checkoutAddress.shippingAddress"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r521.forceLoader && !ɵngcc0.ɵɵpipeBind1(5, 5, ctx_r521.isLoading$))("ngIfElse", _r524);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r525.forceLoader && !ɵngcc0.ɵɵpipeBind1(5, 5, ctx_r525.isLoading$))("ngIfElse", _r528);
 } }
 function ConsentManagementFormComponent_span_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "span", 5);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r551 = ɵngcc0.ɵɵnextContext();
+    const ctx_r555 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r551.consentTemplate == null ? null : ctx_r551.consentTemplate.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r555.consentTemplate == null ? null : ctx_r555.consentTemplate.name, " ");
 } }
 function ConsentManagementFormComponent_br_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "br");
@@ -3319,27 +3318,27 @@ function ConsentManagementComponent_ng_container_0_div_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵelementEnd();
 } }
 function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_cx_consent_management_form_11_Template(rf, ctx) { if (rf & 1) {
-    const _r564 = ɵngcc0.ɵɵgetCurrentView();
+    const _r568 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-consent-management-form", 10);
-    ɵngcc0.ɵɵlistener("consentChanged", function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_cx_consent_management_form_11_Template_cx_consent_management_form_consentChanged_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r564); const ctx_r563 = ɵngcc0.ɵɵnextContext(4); return ctx_r563.onConsentChange($event); });
+    ɵngcc0.ɵɵlistener("consentChanged", function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_cx_consent_management_form_11_Template_cx_consent_management_form_consentChanged_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r568); const ctx_r567 = ɵngcc0.ɵɵnextContext(4); return ctx_r567.onConsentChange($event); });
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const consentTemplate_r562 = ctx.$implicit;
-    const ctx_r561 = ɵngcc0.ɵɵnextContext(4);
-    ɵngcc0.ɵɵproperty("consentTemplate", consentTemplate_r562)("requiredConsents", ctx_r561.requiredConsents)("isAnonymousConsentsEnabled", ctx_r561.isAnonymousConsentsEnabled)("isLevel13", ctx_r561.isLevel13);
+    const consentTemplate_r566 = ctx.$implicit;
+    const ctx_r565 = ɵngcc0.ɵɵnextContext(4);
+    ɵngcc0.ɵɵproperty("consentTemplate", consentTemplate_r566)("requiredConsents", ctx_r565.requiredConsents)("isAnonymousConsentsEnabled", ctx_r565.isAnonymousConsentsEnabled)("isLevel13", ctx_r565.isLevel13);
 } }
 function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r566 = ɵngcc0.ɵɵgetCurrentView();
+    const _r570 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 5);
     ɵngcc0.ɵɵelementStart(2, "div", 6);
     ɵngcc0.ɵɵelementStart(3, "a", 7);
-    ɵngcc0.ɵɵlistener("click", function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_Template_a_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r566); const templateList_r560 = ctx.ngIf; const ctx_r565 = ɵngcc0.ɵɵnextContext(3); return ctx_r565.rejectAll(templateList_r560); });
+    ɵngcc0.ɵɵlistener("click", function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_Template_a_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r570); const templateList_r564 = ctx.ngIf; const ctx_r569 = ɵngcc0.ɵɵnextContext(3); return ctx_r569.rejectAll(templateList_r564); });
     ɵngcc0.ɵɵtext(4);
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "a", 7);
-    ɵngcc0.ɵɵlistener("click", function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_Template_a_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r566); const templateList_r560 = ctx.ngIf; const ctx_r567 = ɵngcc0.ɵɵnextContext(3); return ctx_r567.allowAll(templateList_r560); });
+    ɵngcc0.ɵɵlistener("click", function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_Template_a_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r570); const templateList_r564 = ctx.ngIf; const ctx_r571 = ɵngcc0.ɵɵnextContext(3); return ctx_r571.allowAll(templateList_r564); });
     ɵngcc0.ɵɵtext(7);
     ɵngcc0.ɵɵpipe(8, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -3352,20 +3351,20 @@ function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const templateList_r560 = ctx.ngIf;
+    const templateList_r564 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, "consentManagementForm.clearAll"));
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(8, 5, "consentManagementForm.selectAll"));
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("ngForOf", templateList_r560);
+    ɵngcc0.ɵɵproperty("ngForOf", templateList_r564);
 } }
 function ConsentManagementComponent_ng_container_0_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_Template, 12, 7, "ng-container", 4);
     ɵngcc0.ɵɵpipe(1, "async");
 } if (rf & 2) {
-    const ctx_r558 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx_r558.templateList$));
+    const ctx_r562 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx_r562.templateList$));
 } }
 function ConsentManagementComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -3374,10 +3373,10 @@ function ConsentManagementComponent_ng_container_0_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵtemplate(3, ConsentManagementComponent_ng_container_0_ng_template_3_Template, 2, 3, "ng-template", null, 2, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r557 = ɵngcc0.ɵɵreference(4);
-    const ctx_r553 = ɵngcc0.ɵɵnextContext();
+    const _r561 = ɵngcc0.ɵɵreference(4);
+    const ctx_r557 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r553.loading$))("ngIfElse", _r557);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r557.loading$))("ngIfElse", _r561);
 } }
 function ConsentManagementComponent_ng_template_1_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -3387,13 +3386,13 @@ function ConsentManagementComponent_ng_template_1_div_0_Template(rf, ctx) { if (
     ɵngcc0.ɵɵelementEnd();
 } }
 function ConsentManagementComponent_ng_template_1_ng_template_2_cx_consent_management_form_2_Template(rf, ctx) { if (rf & 1) {
-    const _r574 = ɵngcc0.ɵɵgetCurrentView();
+    const _r578 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-consent-management-form", 14);
-    ɵngcc0.ɵɵlistener("consentChanged", function ConsentManagementComponent_ng_template_1_ng_template_2_cx_consent_management_form_2_Template_cx_consent_management_form_consentChanged_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r574); const ctx_r573 = ɵngcc0.ɵɵnextContext(3); return ctx_r573.onConsentChange($event); });
+    ɵngcc0.ɵɵlistener("consentChanged", function ConsentManagementComponent_ng_template_1_ng_template_2_cx_consent_management_form_2_Template_cx_consent_management_form_consentChanged_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r578); const ctx_r577 = ɵngcc0.ɵɵnextContext(3); return ctx_r577.onConsentChange($event); });
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const consentTemplate_r572 = ctx.$implicit;
-    ɵngcc0.ɵɵproperty("consentTemplate", consentTemplate_r572);
+    const consentTemplate_r576 = ctx.$implicit;
+    ɵngcc0.ɵɵproperty("consentTemplate", consentTemplate_r576);
 } }
 function ConsentManagementComponent_ng_template_1_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 11);
@@ -3403,23 +3402,23 @@ function ConsentManagementComponent_ng_template_1_ng_template_2_Template(rf, ctx
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r570 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r574 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(3, 1, ctx_r570.templateList$));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(3, 1, ctx_r574.templateList$));
 } }
 function ConsentManagementComponent_ng_template_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, ConsentManagementComponent_ng_template_1_div_0_Template, 3, 0, "div", 0);
     ɵngcc0.ɵɵpipe(1, "async");
     ɵngcc0.ɵɵtemplate(2, ConsentManagementComponent_ng_template_1_ng_template_2_Template, 4, 3, "ng-template", null, 2, ɵngcc0.ɵɵtemplateRefExtractor);
 } if (rf & 2) {
-    const _r569 = ɵngcc0.ɵɵreference(3);
-    const ctx_r555 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r555.loading$))("ngIfElse", _r569);
+    const _r573 = ɵngcc0.ɵɵreference(3);
+    const ctx_r559 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r559.loading$))("ngIfElse", _r573);
 } }
 function StorefrontComponent_ng_template_0_ng_template_0_Template(rf, ctx) { if (rf & 1) {
-    const _r579 = ɵngcc0.ɵɵgetCurrentView();
+    const _r583 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "header", 3);
-    ɵngcc0.ɵɵlistener("keydown.escape", function StorefrontComponent_ng_template_0_ng_template_0_Template_header_keydown_escape_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r579); const ctx_r578 = ɵngcc0.ɵɵnextContext(2); return ctx_r578.collapseMenu(); })("click", function StorefrontComponent_ng_template_0_ng_template_0_Template_header_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r579); const ctx_r580 = ɵngcc0.ɵɵnextContext(2); return ctx_r580.collapseMenuIfClickOutside($event); });
+    ɵngcc0.ɵɵlistener("keydown.escape", function StorefrontComponent_ng_template_0_ng_template_0_Template_header_keydown_escape_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r583); const ctx_r582 = ɵngcc0.ɵɵnextContext(2); return ctx_r582.collapseMenu(); })("click", function StorefrontComponent_ng_template_0_ng_template_0_Template_header_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r583); const ctx_r584 = ɵngcc0.ɵɵnextContext(2); return ctx_r584.collapseMenuIfClickOutside($event); });
     ɵngcc0.ɵɵpipe(1, "async");
     ɵngcc0.ɵɵelement(2, "cx-page-layout", 4);
     ɵngcc0.ɵɵelement(3, "cx-page-layout", 5);
@@ -3427,8 +3426,8 @@ function StorefrontComponent_ng_template_0_ng_template_0_Template(rf, ctx) { if 
     ɵngcc0.ɵɵelement(4, "cx-page-slot", 6);
     ɵngcc0.ɵɵelement(5, "cx-global-message");
 } if (rf & 2) {
-    const ctx_r576 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵclassProp("is-expanded", ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r576.isExpanded$));
+    const ctx_r580 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵclassProp("is-expanded", ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r580.isExpanded$));
 } }
 function StorefrontComponent_ng_template_0_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "footer");
@@ -3440,24 +3439,24 @@ function StorefrontComponent_ng_template_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(1, "router-outlet");
     ɵngcc0.ɵɵtemplate(2, StorefrontComponent_ng_template_0_ng_template_2_Template, 2, 0, "ng-template", 2);
 } }
-const _c24 = function (a0, a1, a2) { return { flexType: a0, typeCode: a1, uid: a2 }; };
+const _c23 = function (a0, a1, a2) { return { flexType: a0, typeCode: a1, uid: a2 }; };
 function BannerCarouselComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0, 2);
 } if (rf & 2) {
-    const item_r583 = ctx.item;
-    ɵngcc0.ɵɵproperty("cxComponentWrapper", ɵngcc0.ɵɵpureFunction3(1, _c24, item_r583.typeCode, item_r583.typeCode, item_r583 == null ? null : item_r583.uid));
+    const item_r587 = ctx.item;
+    ɵngcc0.ɵɵproperty("cxComponentWrapper", ɵngcc0.ɵɵpureFunction3(1, _c23, item_r587.typeCode, item_r587.typeCode, item_r587 == null ? null : item_r587.uid));
 } }
 function BannerComponent_ng_container_0_p_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "p", 4);
 } if (rf & 2) {
-    const data_r585 = ɵngcc0.ɵɵnextContext().ngIf;
-    ɵngcc0.ɵɵproperty("innerHTML", data_r585.headline, ɵngcc0.ɵɵsanitizeHtml);
+    const data_r589 = ɵngcc0.ɵɵnextContext().ngIf;
+    ɵngcc0.ɵɵproperty("innerHTML", data_r589.headline, ɵngcc0.ɵɵsanitizeHtml);
 } }
 function BannerComponent_ng_container_0_p_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "p", 4);
 } if (rf & 2) {
-    const data_r585 = ɵngcc0.ɵɵnextContext().ngIf;
-    ɵngcc0.ɵɵproperty("innerHTML", data_r585.content, ɵngcc0.ɵɵsanitizeHtml);
+    const data_r589 = ɵngcc0.ɵɵnextContext().ngIf;
+    ɵngcc0.ɵɵproperty("innerHTML", data_r589.content, ɵngcc0.ɵɵsanitizeHtml);
 } }
 function BannerComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -3468,46 +3467,46 @@ function BannerComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const data_r585 = ctx.ngIf;
+    const data_r589 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("url", data_r585.urlLink)("target", data_r585.external ? "_blank" : null)("title", data_r585.media == null ? null : data_r585.media.altText);
+    ɵngcc0.ɵɵproperty("url", data_r589.urlLink)("target", data_r589.external ? "_blank" : null)("title", data_r589.media == null ? null : data_r589.media.altText);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", data_r585.headline);
+    ɵngcc0.ɵɵproperty("ngIf", data_r589.headline);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("container", data_r585.media);
+    ɵngcc0.ɵɵproperty("container", data_r589.media);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", data_r585.content);
+    ɵngcc0.ɵɵproperty("ngIf", data_r589.content);
 } }
 function LinkComponent_cx_generic_link_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "cx-generic-link", 1);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const data_r591 = ctx.ngIf;
-    ɵngcc0.ɵɵstyleMap(data_r591.styleAttributes, ɵngcc0.ɵɵdefaultStyleSanitizer);
-    ɵngcc0.ɵɵproperty("url", data_r591.url);
+    const data_r595 = ctx.ngIf;
+    ɵngcc0.ɵɵstyleMap(data_r595.styleAttributes, ɵngcc0.ɵɵdefaultStyleSanitizer);
+    ɵngcc0.ɵɵproperty("url", data_r595.url);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(data_r591.linkName);
+    ɵngcc0.ɵɵtextInterpolate(data_r595.linkName);
 } }
 function ParagraphComponent_p_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "p", 1);
 } if (rf & 2) {
-    const data_r593 = ctx.ngIf;
-    ɵngcc0.ɵɵproperty("innerHTML", data_r593.content, ɵngcc0.ɵɵsanitizeHtml);
+    const data_r597 = ctx.ngIf;
+    ɵngcc0.ɵɵproperty("innerHTML", data_r597.content, ɵngcc0.ɵɵsanitizeHtml);
 } }
 function TabParagraphContainerComponent_ng_container_0_ng_template_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0, 3);
 } if (rf & 2) {
-    const component_r595 = ɵngcc0.ɵɵnextContext().$implicit;
-    ɵngcc0.ɵɵproperty("cxComponentWrapper", component_r595);
+    const component_r599 = ɵngcc0.ɵɵnextContext().$implicit;
+    ɵngcc0.ɵɵproperty("cxComponentWrapper", component_r599);
 } }
-const _c25 = function (a0) { return { param: a0 }; };
-const _c26 = function () { return {}; };
+const _c24 = function (a0) { return { param: a0 }; };
+const _c25 = function () { return {}; };
 function TabParagraphContainerComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r600 = ɵngcc0.ɵɵgetCurrentView();
+    const _r604 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵelementStart(1, "h3", 1);
-    ɵngcc0.ɵɵlistener("click", function TabParagraphContainerComponent_ng_container_0_Template_h3_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r600); const i_r596 = ctx.index; const ctx_r599 = ɵngcc0.ɵɵnextContext(); return ctx_r599.select(i_r596); });
+    ɵngcc0.ɵɵelementStart(1, "button", 1);
+    ɵngcc0.ɵɵlistener("click", function TabParagraphContainerComponent_ng_container_0_Template_button_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r604); const i_r600 = ctx.index; const ctx_r603 = ɵngcc0.ɵɵnextContext(); return ctx_r603.select(i_r600); });
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵpipe(4, "async");
@@ -3517,47 +3516,49 @@ function TabParagraphContainerComponent_ng_container_0_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const component_r595 = ctx.$implicit;
-    const i_r596 = ctx.index;
-    const ctx_r594 = ɵngcc0.ɵɵnextContext();
+    const component_r599 = ctx.$implicit;
+    const i_r600 = ctx.index;
+    const ctx_r598 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵclassProp("active", i_r596 === ctx_r594.activeTabNum);
+    ɵngcc0.ɵɵclassProp("active", i_r600 === ctx_r598.activeTabNum);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 7, component_r595.title, ɵngcc0.ɵɵpureFunction1(12, _c25, ɵngcc0.ɵɵpipeBind1(4, 10, ctx_r594.tabTitleParams[i_r596]))), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 7, component_r599.title, ɵngcc0.ɵɵpureFunction1(12, _c24, ɵngcc0.ɵɵpipeBind1(4, 10, ctx_r598.tabTitleParams[i_r600]))), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵclassProp("active", i_r596 === ctx_r594.activeTabNum);
+    ɵngcc0.ɵɵclassProp("active", i_r600 === ctx_r598.activeTabNum);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cxOutlet", component_r595.flexType)("cxOutletContext", ɵngcc0.ɵɵpureFunction0(14, _c26));
+    ɵngcc0.ɵɵproperty("cxOutlet", component_r599.flexType)("cxOutletContext", ɵngcc0.ɵɵpureFunction0(14, _c25));
 } }
 function AddressBookComponent_ng_container_1_div_6_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r610 = ɵngcc0.ɵɵgetCurrentView();
+    const _r614 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
-    ɵngcc0.ɵɵelementStart(1, "cx-address-card", 10);
-    ɵngcc0.ɵɵlistener("editEvent", function AddressBookComponent_ng_container_1_div_6_div_1_Template_cx_address_card_editEvent_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r610); const address_r608 = ctx.$implicit; const ctx_r609 = ɵngcc0.ɵɵnextContext(3); return ctx_r609.editAddressButtonHandle(address_r608); });
+    ɵngcc0.ɵɵelementStart(1, "cx-card", 10);
+    ɵngcc0.ɵɵlistener("editCard", function AddressBookComponent_ng_container_1_div_6_div_1_Template_cx_card_editCard_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r614); const address_r612 = ctx.$implicit; const ctx_r613 = ɵngcc0.ɵɵnextContext(3); return ctx_r613.editAddressButtonHandle(address_r612); })("setDefaultCard", function AddressBookComponent_ng_container_1_div_6_div_1_Template_cx_card_setDefaultCard_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r614); const address_r612 = ctx.$implicit; const ctx_r615 = ɵngcc0.ɵɵnextContext(3); return ctx_r615.setAddressAsDefault(address_r612.id); })("deleteCard", function AddressBookComponent_ng_container_1_div_6_div_1_Template_cx_card_deleteCard_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r614); const address_r612 = ctx.$implicit; const ctx_r616 = ɵngcc0.ɵɵnextContext(3); return ctx_r616.setEdit(address_r612.id); })("cancelCard", function AddressBookComponent_ng_container_1_div_6_div_1_Template_cx_card_cancelCard_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r614); const ctx_r617 = ɵngcc0.ɵɵnextContext(3); return ctx_r617.cancelCard(); });
+    ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const address_r608 = ctx.$implicit;
+    const address_r612 = ctx.$implicit;
+    const ctx_r611 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("address", address_r608);
+    ɵngcc0.ɵɵproperty("border", true)("fitToContainer", true)("content", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r611.getCardContent(address_r612)))("editMode", address_r612.id === ctx_r611.editCard);
 } }
 function AddressBookComponent_ng_container_1_div_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 7);
-    ɵngcc0.ɵɵtemplate(1, AddressBookComponent_ng_container_1_div_6_div_1_Template, 2, 1, "div", 8);
+    ɵngcc0.ɵɵtemplate(1, AddressBookComponent_ng_container_1_div_6_div_1_Template, 3, 6, "div", 8);
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r606 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r610 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r606.addresses$));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r610.addresses$));
 } }
 function AddressBookComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r612 = ɵngcc0.ɵɵgetCurrentView();
+    const _r619 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 3);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
     ɵngcc0.ɵɵelementStart(3, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function AddressBookComponent_ng_container_1_Template_button_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r612); const ctx_r611 = ɵngcc0.ɵɵnextContext(); return ctx_r611.addAddressButtonHandle(); });
+    ɵngcc0.ɵɵlistener("click", function AddressBookComponent_ng_container_1_Template_button_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r619); const ctx_r618 = ɵngcc0.ɵɵnextContext(); return ctx_r618.addAddressButtonHandle(); });
     ɵngcc0.ɵɵtext(4);
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -3567,15 +3568,15 @@ function AddressBookComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(7, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r601 = ɵngcc0.ɵɵnextContext();
-    const _r604 = ɵngcc0.ɵɵreference(7);
+    const ctx_r605 = ɵngcc0.ɵɵnextContext();
+    const _r608 = ɵngcc0.ɵɵreference(7);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 3, "addressBook.addNewAddress"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(7, 5, ctx_r601.addressesStateLoading$))("ngIfElse", _r604);
+    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(7, 5, ctx_r605.addressesStateLoading$))("ngIfElse", _r608);
 } }
 function AddressBookComponent_ng_container_3_Template(rf, ctx) { if (rf & 1) {
-    const _r614 = ɵngcc0.ɵɵgetCurrentView();
+    const _r621 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "section");
     ɵngcc0.ɵɵelementStart(2, "p", 11);
@@ -3583,7 +3584,7 @@ function AddressBookComponent_ng_container_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "cx-address-form", 12);
-    ɵngcc0.ɵɵlistener("submitAddress", function AddressBookComponent_ng_container_3_Template_cx_address_form_submitAddress_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r614); const ctx_r613 = ɵngcc0.ɵɵnextContext(); return ctx_r613.addAddressSubmit($event); })("backToAddress", function AddressBookComponent_ng_container_3_Template_cx_address_form_backToAddress_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r614); const ctx_r615 = ɵngcc0.ɵɵnextContext(); return ctx_r615.addAddressCancel(); });
+    ɵngcc0.ɵɵlistener("submitAddress", function AddressBookComponent_ng_container_3_Template_cx_address_form_submitAddress_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r621); const ctx_r620 = ɵngcc0.ɵɵnextContext(); return ctx_r620.addAddressSubmit($event); })("backToAddress", function AddressBookComponent_ng_container_3_Template_cx_address_form_backToAddress_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r621); const ctx_r622 = ɵngcc0.ɵɵnextContext(); return ctx_r622.addAddressCancel(); })("cancelCard", function AddressBookComponent_ng_container_3_Template_cx_address_form_cancelCard_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r621); const ctx_r623 = ɵngcc0.ɵɵnextContext(); return ctx_r623.cancelCard(); });
     ɵngcc0.ɵɵpipe(6, "async");
     ɵngcc0.ɵɵpipe(7, "cxTranslate");
     ɵngcc0.ɵɵpipe(8, "cxTranslate");
@@ -3592,16 +3593,16 @@ function AddressBookComponent_ng_container_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r602 = ɵngcc0.ɵɵnextContext();
+    const ctx_r606 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 5, "addressBook.addNewShippingAddress"), " ");
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("actionBtnLabel", ɵngcc0.ɵɵpipeBind1(7, 9, "addressBook.addAddress"));
     ɵngcc0.ɵɵpropertyInterpolate("cancelBtnLabel", ɵngcc0.ɵɵpipeBind1(8, 11, "addressBook.backToAddressList"));
-    ɵngcc0.ɵɵproperty("showCancelBtn", !(ɵngcc0.ɵɵpipeBind1(6, 7, ctx_r602.addresses$).length === 0))("setAsDefaultField", !(ɵngcc0.ɵɵpipeBind1(9, 13, ctx_r602.addresses$).length === 0));
+    ɵngcc0.ɵɵproperty("showCancelBtn", !(ɵngcc0.ɵɵpipeBind1(6, 7, ctx_r606.addresses$).length === 0))("setAsDefaultField", !(ɵngcc0.ɵɵpipeBind1(9, 13, ctx_r606.addresses$).length === 0));
 } }
 function AddressBookComponent_ng_container_5_Template(rf, ctx) { if (rf & 1) {
-    const _r617 = ɵngcc0.ɵɵgetCurrentView();
+    const _r625 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "section");
     ɵngcc0.ɵɵelementStart(2, "p", 11);
@@ -3609,111 +3610,25 @@ function AddressBookComponent_ng_container_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "cx-address-form", 13);
-    ɵngcc0.ɵɵlistener("submitAddress", function AddressBookComponent_ng_container_5_Template_cx_address_form_submitAddress_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r617); const ctx_r616 = ɵngcc0.ɵɵnextContext(); return ctx_r616.editAddressSubmit($event); })("backToAddress", function AddressBookComponent_ng_container_5_Template_cx_address_form_backToAddress_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r617); const ctx_r618 = ɵngcc0.ɵɵnextContext(); return ctx_r618.editAddressCancel(); });
+    ɵngcc0.ɵɵlistener("submitAddress", function AddressBookComponent_ng_container_5_Template_cx_address_form_submitAddress_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r625); const ctx_r624 = ɵngcc0.ɵɵnextContext(); return ctx_r624.editAddressSubmit($event); })("backToAddress", function AddressBookComponent_ng_container_5_Template_cx_address_form_backToAddress_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r625); const ctx_r626 = ɵngcc0.ɵɵnextContext(); return ctx_r626.editAddressCancel(); });
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
     ɵngcc0.ɵɵpipe(7, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r603 = ɵngcc0.ɵɵnextContext();
+    const ctx_r607 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 4, "addressBook.editShippingAddress"), " ");
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("actionBtnLabel", ɵngcc0.ɵɵpipeBind1(6, 6, "addressBook.updateAddress"));
     ɵngcc0.ɵɵpropertyInterpolate("cancelBtnLabel", ɵngcc0.ɵɵpipeBind1(7, 8, "addressBook.backToAddressList"));
-    ɵngcc0.ɵɵproperty("addressData", ctx_r603.currentAddress);
+    ɵngcc0.ɵɵproperty("addressData", ctx_r607.currentAddress);
 } }
 function AddressBookComponent_ng_template_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 14);
     ɵngcc0.ɵɵelement(1, "cx-spinner");
     ɵngcc0.ɵɵelementEnd();
-} }
-function AddressCardComponent_div_1_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 10);
-    ɵngcc0.ɵɵtext(1);
-    ɵngcc0.ɵɵpipe(2, "cxTranslate");
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" \u2713 ", ɵngcc0.ɵɵpipeBind1(2, 1, "addressCard.default"), " ");
-} }
-function AddressCardComponent_div_3_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 11);
-    ɵngcc0.ɵɵtext(1);
-    ɵngcc0.ɵɵpipe(2, "cxTranslate");
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "addressBook.areYouSureToDeleteAddress"), " ");
-} }
-function AddressCardComponent_span_13_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "span");
-    ɵngcc0.ɵɵtext(1);
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r621 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r621.address == null ? null : ctx_r621.address.country == null ? null : ctx_r621.address.country.isocode);
-} }
-function AddressCardComponent_div_20_Template(rf, ctx) { if (rf & 1) {
-    const _r625 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "div", 12);
-    ɵngcc0.ɵɵelementStart(1, "div", 13);
-    ɵngcc0.ɵɵelementStart(2, "button", 14);
-    ɵngcc0.ɵɵlistener("click", function AddressCardComponent_div_20_Template_button_click_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r625); const ctx_r624 = ɵngcc0.ɵɵnextContext(); return ctx_r624.cancelEdit(); });
-    ɵngcc0.ɵɵtext(3);
-    ɵngcc0.ɵɵpipe(4, "cxTranslate");
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(5, "div", 13);
-    ɵngcc0.ɵɵelementStart(6, "button", 15);
-    ɵngcc0.ɵɵlistener("click", function AddressCardComponent_div_20_Template_button_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r625); const ctx_r626 = ɵngcc0.ɵɵnextContext(); return ctx_r626.deleteAddress(ctx_r626.address.id); });
-    ɵngcc0.ɵɵtext(7);
-    ɵngcc0.ɵɵpipe(8, "cxTranslate");
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 2, "common.cancel"), " ");
-    ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(8, 4, "common.delete"), " ");
-} }
-function AddressCardComponent_div_21_a_1_Template(rf, ctx) { if (rf & 1) {
-    const _r629 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "a", 20);
-    ɵngcc0.ɵɵlistener("click", function AddressCardComponent_div_21_a_1_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r629); const ctx_r628 = ɵngcc0.ɵɵnextContext(2); return ctx_r628.setAddressAsDefault(ctx_r628.address.id); });
-    ɵngcc0.ɵɵtext(1);
-    ɵngcc0.ɵɵpipe(2, "cxTranslate");
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(2, 1, "addressCard.setAsDefault"));
-} }
-function AddressCardComponent_div_21_Template(rf, ctx) { if (rf & 1) {
-    const _r631 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "div", 16);
-    ɵngcc0.ɵɵtemplate(1, AddressCardComponent_div_21_a_1_Template, 3, 3, "a", 17);
-    ɵngcc0.ɵɵelementStart(2, "a", 18);
-    ɵngcc0.ɵɵlistener("click", function AddressCardComponent_div_21_Template_a_click_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r631); const ctx_r630 = ɵngcc0.ɵɵnextContext(); return ctx_r630.openEditFormEvent(); });
-    ɵngcc0.ɵɵtext(3);
-    ɵngcc0.ɵɵpipe(4, "cxTranslate");
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(5, "a", 19);
-    ɵngcc0.ɵɵlistener("click", function AddressCardComponent_div_21_Template_a_click_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r631); const ctx_r632 = ɵngcc0.ɵɵnextContext(); return ctx_r632.setEditMode(); });
-    ɵngcc0.ɵɵtext(6);
-    ɵngcc0.ɵɵpipe(7, "cxTranslate");
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r623 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !(ctx_r623.address == null ? null : ctx_r623.address.defaultAddress));
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 3, "common.edit"));
-    ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(7, 5, "common.delete"));
 } }
 function CloseAccountModalComponent_ng_container_0_div_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -3723,7 +3638,7 @@ function CloseAccountModalComponent_ng_container_0_div_8_Template(rf, ctx) { if 
     ɵngcc0.ɵɵelementEnd();
 } }
 function CloseAccountModalComponent_ng_container_0_ng_template_10_Template(rf, ctx) { if (rf & 1) {
-    const _r639 = ɵngcc0.ɵɵgetCurrentView();
+    const _r633 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "div", 10);
     ɵngcc0.ɵɵelementStart(2, "p", 11);
@@ -3734,12 +3649,12 @@ function CloseAccountModalComponent_ng_container_0_ng_template_10_Template(rf, c
     ɵngcc0.ɵɵelementStart(5, "div", 10);
     ɵngcc0.ɵɵelementStart(6, "div", 12);
     ɵngcc0.ɵɵelementStart(7, "button", 13);
-    ɵngcc0.ɵɵlistener("click", function CloseAccountModalComponent_ng_container_0_ng_template_10_Template_button_click_7_listener($event) { ɵngcc0.ɵɵrestoreView(_r639); const ctx_r638 = ɵngcc0.ɵɵnextContext(2); return ctx_r638.closeAccount(); });
+    ɵngcc0.ɵɵlistener("click", function CloseAccountModalComponent_ng_container_0_ng_template_10_Template_button_click_7_listener($event) { ɵngcc0.ɵɵrestoreView(_r633); const ctx_r632 = ɵngcc0.ɵɵnextContext(2); return ctx_r632.closeAccount(); });
     ɵngcc0.ɵɵtext(8);
     ɵngcc0.ɵɵpipe(9, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(10, "button", 14);
-    ɵngcc0.ɵɵlistener("click", function CloseAccountModalComponent_ng_container_0_ng_template_10_Template_button_click_10_listener($event) { ɵngcc0.ɵɵrestoreView(_r639); const ctx_r640 = ɵngcc0.ɵɵnextContext(2); return ctx_r640.dismissModal(); });
+    ɵngcc0.ɵɵlistener("click", function CloseAccountModalComponent_ng_container_0_ng_template_10_Template_button_click_10_listener($event) { ɵngcc0.ɵɵrestoreView(_r633); const ctx_r634 = ɵngcc0.ɵɵnextContext(2); return ctx_r634.dismissModal(); });
     ɵngcc0.ɵɵtext(11);
     ɵngcc0.ɵɵpipe(12, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -3755,7 +3670,7 @@ function CloseAccountModalComponent_ng_container_0_ng_template_10_Template(rf, c
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(12, 7, "common.cancel"), " ");
 } }
 function CloseAccountModalComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r642 = ɵngcc0.ɵɵgetCurrentView();
+    const _r636 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 1);
     ɵngcc0.ɵɵelementStart(2, "h3", 2);
@@ -3763,7 +3678,7 @@ function CloseAccountModalComponent_ng_container_0_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 3);
-    ɵngcc0.ɵɵlistener("click", function CloseAccountModalComponent_ng_container_0_Template_button_click_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r642); const ctx_r641 = ɵngcc0.ɵɵnextContext(); return ctx_r641.dismissModal(); });
+    ɵngcc0.ɵɵlistener("click", function CloseAccountModalComponent_ng_container_0_Template_button_click_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r636); const ctx_r635 = ɵngcc0.ɵɵnextContext(); return ctx_r635.dismissModal(); });
     ɵngcc0.ɵɵelementStart(6, "span", 4);
     ɵngcc0.ɵɵelement(7, "cx-icon", 5);
     ɵngcc0.ɵɵelementEnd();
@@ -3774,16 +3689,16 @@ function CloseAccountModalComponent_ng_container_0_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵtemplate(10, CloseAccountModalComponent_ng_container_0_ng_template_10_Template, 13, 9, "ng-template", null, 7, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r636 = ɵngcc0.ɵɵreference(11);
-    const ctx_r633 = ɵngcc0.ɵɵnextContext();
+    const _r630 = ɵngcc0.ɵɵreference(11);
+    const ctx_r627 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 4, "closeAccount.confirmAccountClosure"), " ");
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("type", ctx_r633.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r627.iconTypes.CLOSE);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(9, 6, ctx_r633.isLoading$))("ngIfElse", _r636);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(9, 6, ctx_r627.isLoading$))("ngIfElse", _r630);
 } }
-const _c27 = function () { return { cxRoute: "home" }; };
+const _c26 = function () { return { cxRoute: "home" }; };
 function ForgotPasswordComponent_div_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 7);
     ɵngcc0.ɵɵelementStart(1, "span");
@@ -3795,8 +3710,8 @@ function ForgotPasswordComponent_div_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(3, 1, "forgottenPassword.enterValidEmail"));
 } }
-const _c28 = function (a0) { return { "is-invalid": a0 }; };
-const _c29 = function (a0, a1) { return { cxRoute: a0, params: a1 }; };
+const _c27 = function (a0) { return { "is-invalid": a0 }; };
+const _c28 = function (a0, a1) { return { cxRoute: a0, params: a1 }; };
 function AmendOrderActionsComponent_a_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "a", 4);
     ɵngcc0.ɵɵpipe(1, "cxUrl");
@@ -3804,9 +3719,9 @@ function AmendOrderActionsComponent_a_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r644 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵclassProp("disabled", !ctx_r644.isValid);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 4, ɵngcc0.ɵɵpureFunction2(10, _c29, ctx_r644.forwardRoute, ɵngcc0.ɵɵpureFunction1(8, _c18, ctx_r644.orderCode))));
+    const ctx_r638 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵclassProp("disabled", !ctx_r638.isValid);
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 4, ɵngcc0.ɵɵpureFunction2(10, _c28, ctx_r638.forwardRoute, ɵngcc0.ɵɵpureFunction1(8, _c18, ctx_r638.orderCode))));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 6, "common.continue"), " ");
 } }
@@ -3816,15 +3731,15 @@ function AmendOrderActionsComponent_button_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r645 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("disabled", !ctx_r645.isValid);
+    const ctx_r639 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("disabled", !ctx_r639.isValid);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "orderDetails.cancellationAndReturn.submit"), " ");
 } }
 function CancelOrReturnItemsComponent_div_0_button_1_Template(rf, ctx) { if (rf & 1) {
-    const _r654 = ɵngcc0.ɵɵgetCurrentView();
+    const _r648 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 10);
-    ɵngcc0.ɵɵlistener("click", function CancelOrReturnItemsComponent_div_0_button_1_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r654); const form_r647 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r652 = ɵngcc0.ɵɵnextContext(); return ctx_r652.setAll(form_r647); });
+    ɵngcc0.ɵɵlistener("click", function CancelOrReturnItemsComponent_div_0_button_1_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r648); const form_r641 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r646 = ɵngcc0.ɵɵnextContext(); return ctx_r646.setAll(form_r641); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -3855,9 +3770,9 @@ function CancelOrReturnItemsComponent_div_0_div_15_div_6_Template(rf, ctx) { if 
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r655 = ɵngcc0.ɵɵnextContext().$implicit;
+    const item_r649 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", item_r655.product.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", item_r649.product.name, " ");
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 29);
@@ -3865,9 +3780,9 @@ function CancelOrReturnItemsComponent_div_0_div_15_div_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r655 = ɵngcc0.ɵɵnextContext().$implicit;
+    const item_r649 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", item_r655.product.code, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", item_r649.product.code, " ");
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_ng_container_8_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 31);
@@ -3879,38 +3794,38 @@ function CancelOrReturnItemsComponent_div_0_div_15_ng_container_8_div_1_Template
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r667 = ctx.$implicit;
+    const variant_r661 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(variant_r667.name);
+    ɵngcc0.ɵɵtextInterpolate(variant_r661.name);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(variant_r667.value);
+    ɵngcc0.ɵɵtextInterpolate(variant_r661.value);
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_ng_container_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, CancelOrReturnItemsComponent_div_0_div_15_ng_container_8_div_1_Template, 5, 2, "div", 30);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const item_r655 = ɵngcc0.ɵɵnextContext().$implicit;
+    const item_r649 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", item_r655.product.variantOptionQualifiers);
+    ɵngcc0.ɵɵproperty("ngForOf", item_r649.product.variantOptionQualifiers);
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_ng_container_9_ng_container_1_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 32);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r671 = ɵngcc0.ɵɵnextContext().$implicit;
+    const variant_r665 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r671.name, ": ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r665.name, ": ");
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_ng_container_9_ng_container_1_div_1_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 33);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r671 = ɵngcc0.ɵɵnextContext().$implicit;
+    const variant_r665 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r671.value, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r665.value, " ");
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_ng_container_9_ng_container_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 31);
@@ -3918,38 +3833,38 @@ function CancelOrReturnItemsComponent_div_0_div_15_ng_container_9_ng_container_1
     ɵngcc0.ɵɵtemplate(2, CancelOrReturnItemsComponent_div_0_div_15_ng_container_9_ng_container_1_div_1_div_2_Template, 2, 1, "div", 35);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r671 = ctx.$implicit;
+    const variant_r665 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", variant_r671.name);
+    ɵngcc0.ɵɵproperty("ngIf", variant_r665.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", variant_r671.value);
+    ɵngcc0.ɵɵproperty("ngIf", variant_r665.value);
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_ng_container_9_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, CancelOrReturnItemsComponent_div_0_div_15_ng_container_9_ng_container_1_div_1_Template, 3, 2, "div", 30);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const item_r655 = ɵngcc0.ɵɵnextContext(2).$implicit;
+    const item_r649 = ɵngcc0.ɵɵnextContext(2).$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", item_r655.product.baseOptions[0] == null ? null : item_r655.product.baseOptions[0].selected == null ? null : item_r655.product.baseOptions[0].selected.variantOptionQualifiers);
+    ɵngcc0.ɵɵproperty("ngForOf", item_r649.product.baseOptions[0] == null ? null : item_r649.product.baseOptions[0].selected == null ? null : item_r649.product.baseOptions[0].selected.variantOptionQualifiers);
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_ng_container_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, CancelOrReturnItemsComponent_div_0_div_15_ng_container_9_ng_container_1_Template, 2, 1, "ng-container", 0);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const item_r655 = ɵngcc0.ɵɵnextContext().$implicit;
+    const item_r649 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", item_r655.product.baseOptions == null ? null : item_r655.product.baseOptions.length);
+    ɵngcc0.ɵɵproperty("ngIf", item_r649.product.baseOptions == null ? null : item_r649.product.baseOptions.length);
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_div_10_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 33);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r655 = ɵngcc0.ɵɵnextContext(2).$implicit;
+    const item_r649 = ɵngcc0.ɵɵnextContext(2).$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", item_r655.basePrice == null ? null : item_r655.basePrice.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", item_r649.basePrice == null ? null : item_r649.basePrice.formattedValue, " ");
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_div_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 36);
@@ -3960,11 +3875,11 @@ function CancelOrReturnItemsComponent_div_0_div_15_div_10_Template(rf, ctx) { if
     ɵngcc0.ɵɵtemplate(4, CancelOrReturnItemsComponent_div_0_div_15_div_10_div_4_Template, 2, 1, "div", 35);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r655 = ɵngcc0.ɵɵnextContext().$implicit;
+    const item_r649 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "orderDetails.cancellationAndReturn.itemPrice"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", item_r655.basePrice);
+    ɵngcc0.ɵɵproperty("ngIf", item_r649.basePrice);
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 37);
@@ -3978,14 +3893,14 @@ function CancelOrReturnItemsComponent_div_0_div_15_div_11_Template(rf, ctx) { if
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r655 = ɵngcc0.ɵɵnextContext().$implicit;
-    const ctx_r662 = ɵngcc0.ɵɵnextContext(2);
+    const item_r649 = ɵngcc0.ɵɵnextContext().$implicit;
+    const ctx_r656 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵpropertyInterpolate("title", ɵngcc0.ɵɵpipeBind1(2, 3, "cartItems.quantityTitle"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 5, "orderDetails.cancellationAndReturn.quantity"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r662.getMaxAmendQuantity(item_r655), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r656.getMaxAmendQuantity(item_r649), " ");
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_div_17_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 39);
@@ -3998,13 +3913,13 @@ function CancelOrReturnItemsComponent_div_0_div_15_div_17_Template(rf, ctx) { if
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r655 = ɵngcc0.ɵɵnextContext().$implicit;
-    const ctx_r663 = ɵngcc0.ɵɵnextContext(2);
+    const item_r649 = ɵngcc0.ɵɵnextContext().$implicit;
+    const ctx_r657 = ɵngcc0.ɵɵnextContext(2);
     var tmp_1_0 = null;
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "orderDetails.cancellationAndReturn.totalPrice"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", (tmp_1_0 = ctx_r663.getItemPrice(item_r655)) == null ? null : tmp_1_0.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", (tmp_1_0 = ctx_r657.getItemPrice(item_r649)) == null ? null : tmp_1_0.formattedValue, " ");
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 13);
@@ -4033,29 +3948,29 @@ function CancelOrReturnItemsComponent_div_0_div_15_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r655 = ctx.$implicit;
-    const form_r647 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r651 = ɵngcc0.ɵɵnextContext();
+    const item_r649 = ctx.$implicit;
+    const form_r641 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r645 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("container", item_r655.product.images == null ? null : item_r655.product.images.PRIMARY);
+    ɵngcc0.ɵɵproperty("container", item_r649.product.images == null ? null : item_r649.product.images.PRIMARY);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("ngIf", item_r655.product.name);
+    ɵngcc0.ɵɵproperty("ngIf", item_r649.product.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", item_r655.product.code);
+    ɵngcc0.ɵɵproperty("ngIf", item_r649.product.code);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("cxFeatureLevel", "!1.5");
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("cxFeatureLevel", "1.5");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", item_r655.basePrice);
+    ɵngcc0.ɵɵproperty("ngIf", item_r649.basePrice);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r651.isConfirmation);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r645.isConfirmation);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(15, 13, ctx_r651.isCancellation() ? "orderDetails.cancellationAndReturn.cancelQty" : "orderDetails.cancellationAndReturn.returnQty"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(15, 13, ctx_r645.isCancellation() ? "orderDetails.cancellationAndReturn.cancelQty" : "orderDetails.cancellationAndReturn.returnQty"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("min", 0)("max", ctx_r651.getMaxAmendQuantity(item_r655))("control", ctx_r651.getControl(form_r647, item_r655))("readonly", ctx_r651.isConfirmation);
+    ɵngcc0.ɵɵproperty("min", 0)("max", ctx_r645.getMaxAmendQuantity(item_r649))("control", ctx_r645.getControl(form_r641, item_r649))("readonly", ctx_r645.isConfirmation);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r651.isConfirmation);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r645.isConfirmation);
 } }
 function CancelOrReturnItemsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -4081,21 +3996,21 @@ function CancelOrReturnItemsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(15, CancelOrReturnItemsComponent_div_0_div_15_Template, 18, 15, "div", 9);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r646 = ɵngcc0.ɵɵnextContext();
+    const ctx_r640 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r646.isConfirmation);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r640.isConfirmation);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(6, 7, "orderDetails.cancellationAndReturn.item"), " ");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(9, 9, "orderDetails.cancellationAndReturn.itemPrice"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r646.isConfirmation);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r640.isConfirmation);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(13, 11, ctx_r646.isCancellation() ? "orderDetails.cancellationAndReturn.cancelQty" : "orderDetails.cancellationAndReturn.returnQty"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(13, 11, ctx_r640.isCancellation() ? "orderDetails.cancellationAndReturn.cancelQty" : "orderDetails.cancellationAndReturn.returnQty"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r646.isConfirmation);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r640.isConfirmation);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r646.entries);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r640.entries);
 } }
 function CancelOrderConfirmationComponent_form_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -4103,8 +4018,8 @@ function CancelOrderConfirmationComponent_form_0_ng_container_1_Template(rf, ctx
 function CancelOrderConfirmationComponent_form_0_cx_amend_order_items_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-amend-order-items", 5);
 } if (rf & 2) {
-    const entries_r691 = ctx.ngIf;
-    ɵngcc0.ɵɵproperty("entries", entries_r691)("isConfirmation", true);
+    const entries_r685 = ctx.ngIf;
+    ɵngcc0.ɵɵproperty("entries", entries_r685)("isConfirmation", true);
 } }
 function CancelOrderConfirmationComponent_form_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -4112,20 +4027,20 @@ function CancelOrderConfirmationComponent_form_0_ng_container_4_Template(rf, ctx
 function CancelOrderConfirmationComponent_form_0_ng_template_5_cx_amend_order_actions_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-amend-order-actions", 7);
 } if (rf & 2) {
-    const form_r685 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r692 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("orderCode", ctx_r692.orderCode)("isValid", form_r685.valid);
+    const form_r679 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r686 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("orderCode", ctx_r686.orderCode)("isValid", form_r679.valid);
 } }
 function CancelOrderConfirmationComponent_form_0_ng_template_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, CancelOrderConfirmationComponent_form_0_ng_template_5_cx_amend_order_actions_0_Template, 1, 2, "cx-amend-order-actions", 6);
 } if (rf & 2) {
-    const ctx_r690 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r690.orderCode);
+    const ctx_r684 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r684.orderCode);
 } }
 function CancelOrderConfirmationComponent_form_0_Template(rf, ctx) { if (rf & 1) {
-    const _r695 = ɵngcc0.ɵɵgetCurrentView();
+    const _r689 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "form", 1);
-    ɵngcc0.ɵɵlistener("ngSubmit", function CancelOrderConfirmationComponent_form_0_Template_form_ngSubmit_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r695); const form_r685 = ctx.ngIf; const ctx_r694 = ɵngcc0.ɵɵnextContext(); return ctx_r694.submit(form_r685); });
+    ɵngcc0.ɵɵlistener("ngSubmit", function CancelOrderConfirmationComponent_form_0_Template_form_ngSubmit_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r689); const form_r679 = ctx.ngIf; const ctx_r688 = ɵngcc0.ɵɵnextContext(); return ctx_r688.submit(form_r679); });
     ɵngcc0.ɵɵtemplate(1, CancelOrderConfirmationComponent_form_0_ng_container_1_Template, 1, 0, "ng-container", 2);
     ɵngcc0.ɵɵtemplate(2, CancelOrderConfirmationComponent_form_0_cx_amend_order_items_2_Template, 1, 2, "cx-amend-order-items", 3);
     ɵngcc0.ɵɵpipe(3, "async");
@@ -4133,16 +4048,16 @@ function CancelOrderConfirmationComponent_form_0_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵtemplate(5, CancelOrderConfirmationComponent_form_0_ng_template_5_Template, 1, 1, "ng-template", null, 4, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const form_r685 = ctx.ngIf;
-    const _r689 = ɵngcc0.ɵɵreference(6);
-    const ctx_r684 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("formGroup", form_r685);
+    const form_r679 = ctx.ngIf;
+    const _r683 = ɵngcc0.ɵɵreference(6);
+    const ctx_r678 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("formGroup", form_r679);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r689);
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r683);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(3, 4, ctx_r684.entries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(3, 4, ctx_r678.entries$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r689);
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r683);
 } }
 function CancelOrderComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -4150,8 +4065,8 @@ function CancelOrderComponent_ng_container_0_ng_container_1_Template(rf, ctx) { 
 function CancelOrderComponent_ng_container_0_cx_amend_order_items_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-amend-order-items", 4);
 } if (rf & 2) {
-    const entries_r703 = ctx.ngIf;
-    ɵngcc0.ɵɵproperty("entries", entries_r703);
+    const entries_r697 = ctx.ngIf;
+    ɵngcc0.ɵɵproperty("entries", entries_r697);
 } }
 function CancelOrderComponent_ng_container_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -4159,15 +4074,15 @@ function CancelOrderComponent_ng_container_0_ng_container_4_Template(rf, ctx) { 
 function CancelOrderComponent_ng_container_0_ng_template_5_cx_amend_order_actions_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-amend-order-actions", 6);
 } if (rf & 2) {
-    const form_r697 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r704 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("orderCode", ctx_r704.orderCode)("isValid", form_r697.valid);
+    const form_r691 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r698 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("orderCode", ctx_r698.orderCode)("isValid", form_r691.valid);
 } }
 function CancelOrderComponent_ng_container_0_ng_template_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, CancelOrderComponent_ng_container_0_ng_template_5_cx_amend_order_actions_0_Template, 1, 2, "cx-amend-order-actions", 5);
 } if (rf & 2) {
-    const ctx_r702 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r702.orderCode);
+    const ctx_r696 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r696.orderCode);
 } }
 function CancelOrderComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -4178,14 +4093,14 @@ function CancelOrderComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(5, CancelOrderComponent_ng_container_0_ng_template_5_Template, 1, 1, "ng-template", null, 3, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r701 = ɵngcc0.ɵɵreference(6);
-    const ctx_r696 = ɵngcc0.ɵɵnextContext();
+    const _r695 = ɵngcc0.ɵɵreference(6);
+    const ctx_r690 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r701);
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r695);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(3, 3, ctx_r696.entries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(3, 3, ctx_r690.entries$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r701);
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r695);
 } }
 function ReturnOrderConfirmationComponent_form_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -4193,8 +4108,8 @@ function ReturnOrderConfirmationComponent_form_0_ng_container_1_Template(rf, ctx
 function ReturnOrderConfirmationComponent_form_0_cx_amend_order_items_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-amend-order-items", 5);
 } if (rf & 2) {
-    const entries_r713 = ctx.ngIf;
-    ɵngcc0.ɵɵproperty("entries", entries_r713)("isConfirmation", true);
+    const entries_r707 = ctx.ngIf;
+    ɵngcc0.ɵɵproperty("entries", entries_r707)("isConfirmation", true);
 } }
 function ReturnOrderConfirmationComponent_form_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -4202,20 +4117,20 @@ function ReturnOrderConfirmationComponent_form_0_ng_container_4_Template(rf, ctx
 function ReturnOrderConfirmationComponent_form_0_ng_template_5_cx_amend_order_actions_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-amend-order-actions", 7);
 } if (rf & 2) {
-    const form_r707 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r714 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("orderCode", ctx_r714.orderCode)("isValid", form_r707.valid);
+    const form_r701 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r708 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("orderCode", ctx_r708.orderCode)("isValid", form_r701.valid);
 } }
 function ReturnOrderConfirmationComponent_form_0_ng_template_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, ReturnOrderConfirmationComponent_form_0_ng_template_5_cx_amend_order_actions_0_Template, 1, 2, "cx-amend-order-actions", 6);
 } if (rf & 2) {
-    const ctx_r712 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r712.orderCode);
+    const ctx_r706 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r706.orderCode);
 } }
 function ReturnOrderConfirmationComponent_form_0_Template(rf, ctx) { if (rf & 1) {
-    const _r717 = ɵngcc0.ɵɵgetCurrentView();
+    const _r711 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "form", 1);
-    ɵngcc0.ɵɵlistener("ngSubmit", function ReturnOrderConfirmationComponent_form_0_Template_form_ngSubmit_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r717); const form_r707 = ctx.ngIf; const ctx_r716 = ɵngcc0.ɵɵnextContext(); return ctx_r716.submit(form_r707); });
+    ɵngcc0.ɵɵlistener("ngSubmit", function ReturnOrderConfirmationComponent_form_0_Template_form_ngSubmit_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r711); const form_r701 = ctx.ngIf; const ctx_r710 = ɵngcc0.ɵɵnextContext(); return ctx_r710.submit(form_r701); });
     ɵngcc0.ɵɵtemplate(1, ReturnOrderConfirmationComponent_form_0_ng_container_1_Template, 1, 0, "ng-container", 2);
     ɵngcc0.ɵɵtemplate(2, ReturnOrderConfirmationComponent_form_0_cx_amend_order_items_2_Template, 1, 2, "cx-amend-order-items", 3);
     ɵngcc0.ɵɵpipe(3, "async");
@@ -4223,16 +4138,16 @@ function ReturnOrderConfirmationComponent_form_0_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵtemplate(5, ReturnOrderConfirmationComponent_form_0_ng_template_5_Template, 1, 1, "ng-template", null, 4, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const form_r707 = ctx.ngIf;
-    const _r711 = ɵngcc0.ɵɵreference(6);
-    const ctx_r706 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("formGroup", form_r707);
+    const form_r701 = ctx.ngIf;
+    const _r705 = ɵngcc0.ɵɵreference(6);
+    const ctx_r700 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("formGroup", form_r701);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r711);
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r705);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(3, 4, ctx_r706.entries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(3, 4, ctx_r700.entries$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r711);
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r705);
 } }
 function ReturnOrderComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -4240,8 +4155,8 @@ function ReturnOrderComponent_ng_container_0_ng_container_1_Template(rf, ctx) { 
 function ReturnOrderComponent_ng_container_0_cx_amend_order_items_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-amend-order-items", 4);
 } if (rf & 2) {
-    const entries_r725 = ctx.ngIf;
-    ɵngcc0.ɵɵproperty("entries", entries_r725);
+    const entries_r719 = ctx.ngIf;
+    ɵngcc0.ɵɵproperty("entries", entries_r719);
 } }
 function ReturnOrderComponent_ng_container_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -4249,15 +4164,15 @@ function ReturnOrderComponent_ng_container_0_ng_container_4_Template(rf, ctx) { 
 function ReturnOrderComponent_ng_container_0_ng_template_5_cx_amend_order_actions_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-amend-order-actions", 6);
 } if (rf & 2) {
-    const form_r719 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r726 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("orderCode", ctx_r726.orderCode)("isValid", form_r719.valid);
+    const form_r713 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r720 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("orderCode", ctx_r720.orderCode)("isValid", form_r713.valid);
 } }
 function ReturnOrderComponent_ng_container_0_ng_template_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, ReturnOrderComponent_ng_container_0_ng_template_5_cx_amend_order_actions_0_Template, 1, 2, "cx-amend-order-actions", 5);
 } if (rf & 2) {
-    const ctx_r724 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r724.orderCode);
+    const ctx_r718 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r718.orderCode);
 } }
 function ReturnOrderComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -4268,25 +4183,25 @@ function ReturnOrderComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(5, ReturnOrderComponent_ng_container_0_ng_template_5_Template, 1, 1, "ng-template", null, 3, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r723 = ɵngcc0.ɵɵreference(6);
-    const ctx_r718 = ɵngcc0.ɵɵnextContext();
+    const _r717 = ɵngcc0.ɵɵreference(6);
+    const ctx_r712 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r723);
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r717);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(3, 3, ctx_r718.entries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(3, 3, ctx_r712.entries$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r723);
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r717);
 } }
-const _c30 = function (a0) { return { context: a0 }; };
+const _c29 = function (a0) { return { context: a0 }; };
 function OrderDetailHeadlineComponent_ng_container_0_div_19_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 4);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r729 = ɵngcc0.ɵɵnextContext().ngIf;
+    const order_r723 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(2, 1, "orderDetails.statusDisplay", ɵngcc0.ɵɵpureFunction1(4, _c30, order_r729 == null ? null : order_r729.statusDisplay)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(2, 1, "orderDetails.statusDisplay", ɵngcc0.ɵɵpureFunction1(4, _c29, order_r723 == null ? null : order_r723.statusDisplay)), " ");
 } }
 function OrderDetailHeadlineComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -4320,49 +4235,49 @@ function OrderDetailHeadlineComponent_ng_container_0_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const order_r729 = ctx.ngIf;
+    const order_r723 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 6, "orderDetails.orderId"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(order_r729 == null ? null : order_r729.code);
+    ɵngcc0.ɵɵtextInterpolate(order_r723 == null ? null : order_r723.code);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(11, 8, "orderDetails.placed"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(14, 10, order_r729 == null ? null : order_r729.created));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(14, 10, order_r723 == null ? null : order_r723.created));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(18, 12, "orderDetails.status"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", order_r729 == null ? null : order_r729.statusDisplay);
+    ɵngcc0.ɵɵproperty("ngIf", order_r723 == null ? null : order_r723.statusDisplay);
 } }
 function OrderDetailItemsComponent_ng_container_0_div_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelement(1, "cx-promotions", 3);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const orderPromotions_r740 = ctx.ngIf;
+    const orderPromotions_r734 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r740);
+    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r734);
 } }
 function OrderDetailItemsComponent_ng_container_0_div_1_cx_order_consigned_entries_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-order-consigned-entries", 4);
 } if (rf & 2) {
-    const others_r741 = ctx.ngIf;
-    const order_r733 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    ɵngcc0.ɵɵproperty("order", order_r733)("consignments", others_r741);
+    const others_r735 = ctx.ngIf;
+    const order_r727 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    ɵngcc0.ɵɵproperty("order", order_r727)("consignments", others_r735);
 } }
 function OrderDetailItemsComponent_ng_container_0_div_1_cx_order_consigned_entries_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-order-consigned-entries", 4);
 } if (rf & 2) {
-    const completed_r743 = ctx.ngIf;
-    const order_r733 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    ɵngcc0.ɵɵproperty("order", order_r733)("consignments", completed_r743);
+    const completed_r737 = ctx.ngIf;
+    const order_r727 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    ɵngcc0.ɵɵproperty("order", order_r727)("consignments", completed_r737);
 } }
 function OrderDetailItemsComponent_ng_container_0_div_1_cx_order_consigned_entries_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-order-consigned-entries", 4);
 } if (rf & 2) {
-    const cancel_r745 = ctx.ngIf;
-    const order_r733 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    ɵngcc0.ɵɵproperty("order", order_r733)("consignments", cancel_r745);
+    const cancel_r739 = ctx.ngIf;
+    const order_r727 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    ɵngcc0.ɵɵproperty("order", order_r727)("consignments", cancel_r739);
 } }
 function OrderDetailItemsComponent_ng_container_0_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -4376,15 +4291,15 @@ function OrderDetailItemsComponent_ng_container_0_div_1_Template(rf, ctx) { if (
     ɵngcc0.ɵɵpipe(8, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r734 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r728 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r734.orderPromotions$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r728.orderPromotions$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(4, 6, ctx_r734.others$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(4, 6, ctx_r728.others$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(6, 8, ctx_r734.completed$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(6, 8, ctx_r728.completed$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 10, ctx_r734.cancel$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 10, ctx_r728.cancel$));
 } }
 function OrderDetailItemsComponent_ng_container_0_div_2_div_1_span_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "span");
@@ -4392,9 +4307,9 @@ function OrderDetailItemsComponent_ng_container_0_div_2_div_1_span_3_Template(rf
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const consignment_r749 = ɵngcc0.ɵɵnextContext().$implicit;
+    const consignment_r743 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(2, 1, "orderDetails.deliveryStatus", ɵngcc0.ɵɵpureFunction1(4, _c30, consignment_r749.status)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(2, 1, "orderDetails.deliveryStatus", ɵngcc0.ɵɵpureFunction1(4, _c29, consignment_r743.status)), " ");
 } }
 function OrderDetailItemsComponent_ng_container_0_div_2_div_1_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 14);
@@ -4408,27 +4323,27 @@ function OrderDetailItemsComponent_ng_container_0_div_2_div_1_div_4_Template(rf,
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const consignment_r749 = ɵngcc0.ɵɵnextContext().$implicit;
+    const consignment_r743 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1("", ɵngcc0.ɵɵpipeBind1(3, 2, "orderDetails.shippedOn"), "\u00A0");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(6, 4, consignment_r749 == null ? null : consignment_r749.statusDate));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(6, 4, consignment_r743 == null ? null : consignment_r743.statusDate));
 } }
 function OrderDetailItemsComponent_ng_container_0_div_2_div_1_cx_consignment_tracking_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-consignment-tracking", 15);
 } if (rf & 2) {
-    const consignment_r749 = ɵngcc0.ɵɵnextContext().$implicit;
-    const order_r733 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    ɵngcc0.ɵɵproperty("orderCode", order_r733.code)("consignment", consignment_r749);
+    const consignment_r743 = ɵngcc0.ɵɵnextContext().$implicit;
+    const order_r727 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    ɵngcc0.ɵɵproperty("orderCode", order_r727.code)("consignment", consignment_r743);
 } }
 function OrderDetailItemsComponent_ng_container_0_div_2_div_1_ng_container_7_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelement(1, "cx-promotions", 3);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const orderPromotions_r759 = ctx.ngIf;
+    const orderPromotions_r753 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r759);
+    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r753);
 } }
 function OrderDetailItemsComponent_ng_container_0_div_2_div_1_ng_container_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -4436,9 +4351,9 @@ function OrderDetailItemsComponent_ng_container_0_div_2_div_1_ng_container_7_Tem
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r753 = ɵngcc0.ɵɵnextContext(4);
+    const ctx_r747 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r753.orderPromotions$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r747.orderPromotions$));
 } }
 function OrderDetailItemsComponent_ng_container_0_div_2_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 7);
@@ -4455,27 +4370,27 @@ function OrderDetailItemsComponent_ng_container_0_div_2_div_1_Template(rf, ctx) 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const consignment_r749 = ctx.$implicit;
-    const ctx_r747 = ɵngcc0.ɵɵnextContext(3);
+    const consignment_r743 = ctx.$implicit;
+    const ctx_r741 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", consignment_r749);
+    ɵngcc0.ɵɵproperty("ngIf", consignment_r743);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", consignment_r749 == null ? null : consignment_r749.statusDate);
+    ɵngcc0.ɵɵproperty("ngIf", consignment_r743 == null ? null : consignment_r743.statusDate);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("cxFeature", "consignmentTracking");
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵproperty("cxFeatureLevel", "1.5");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("items", ctx_r747.getConsignmentProducts(consignment_r749))("readonly", true)("promotionLocation", ctx_r747.promotionLocation);
+    ɵngcc0.ɵɵproperty("items", ctx_r741.getConsignmentProducts(consignment_r743))("readonly", true)("promotionLocation", ctx_r741.promotionLocation);
 } }
 function OrderDetailItemsComponent_ng_container_0_div_2_div_2_ng_container_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelement(1, "cx-promotions", 3);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const orderPromotions_r761 = ctx.ngIf;
+    const orderPromotions_r755 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r761);
+    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r755);
 } }
 function OrderDetailItemsComponent_ng_container_0_div_2_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 7);
@@ -4492,14 +4407,14 @@ function OrderDetailItemsComponent_ng_container_0_div_2_div_2_Template(rf, ctx) 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r733 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r748 = ɵngcc0.ɵɵnextContext();
+    const order_r727 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r742 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 5, "orderDetails.pending"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(7, 7, ctx_r748.orderPromotions$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(7, 7, ctx_r742.orderPromotions$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("items", order_r733 == null ? null : order_r733.unconsignedEntries)("readonly", true)("promotionLocation", ctx_r748.promotionLocation);
+    ɵngcc0.ɵɵproperty("items", order_r727 == null ? null : order_r727.unconsignedEntries)("readonly", true)("promotionLocation", ctx_r742.promotionLocation);
 } }
 function OrderDetailItemsComponent_ng_container_0_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -4507,11 +4422,11 @@ function OrderDetailItemsComponent_ng_container_0_div_2_Template(rf, ctx) { if (
     ɵngcc0.ɵɵtemplate(2, OrderDetailItemsComponent_ng_container_0_div_2_div_2_Template, 9, 9, "div", 6);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r733 = ɵngcc0.ɵɵnextContext().ngIf;
+    const order_r727 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", order_r733.consignments);
+    ɵngcc0.ɵɵproperty("ngForOf", order_r727.consignments);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", order_r733.unconsignedEntries == null ? null : order_r733.unconsignedEntries.length);
+    ɵngcc0.ɵɵproperty("ngIf", order_r727.unconsignedEntries == null ? null : order_r727.unconsignedEntries.length);
 } }
 function OrderDetailItemsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -4574,24 +4489,24 @@ function TrackingEventsComponent_ng_container_1_ng_container_8_Template(rf, ctx)
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const consignmentTracking_r769 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r770 = ɵngcc0.ɵɵnextContext();
+    const consignmentTracking_r763 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r764 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(6, 8, "orderDetails.consignmentTracking.dialog.shipped"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(9, 10, ctx_r770.shipDate, "medium"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(9, 10, ctx_r764.shipDate, "medium"), " ");
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(13, 13, "orderDetails.consignmentTracking.dialog.estimate"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(16, 15, consignmentTracking_r769 == null ? null : consignmentTracking_r769.targetArrivalDate, "medium"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(16, 15, consignmentTracking_r763 == null ? null : consignmentTracking_r763.targetArrivalDate, "medium"), " ");
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(21, 18, "orderDetails.consignmentTracking.dialog.carrier"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", consignmentTracking_r769 == null ? null : consignmentTracking_r769.carrierDetails == null ? null : consignmentTracking_r769.carrierDetails.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", consignmentTracking_r763 == null ? null : consignmentTracking_r763.carrierDetails == null ? null : consignmentTracking_r763.carrierDetails.name, " ");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(27, 20, "orderDetails.consignmentTracking.dialog.trackingId"), " ");
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵtextInterpolate1(" ", consignmentTracking_r769 == null ? null : consignmentTracking_r769.trackingID, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", consignmentTracking_r763 == null ? null : consignmentTracking_r763.trackingID, " ");
 } }
 function TrackingEventsComponent_ng_container_1_ng_container_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -4612,18 +4527,18 @@ function TrackingEventsComponent_ng_container_1_ng_container_10_Template(rf, ctx
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const consignmentEvent_r773 = ctx.$implicit;
+    const consignmentEvent_r767 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(4, 4, consignmentEvent_r773.eventDate, "medium"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(4, 4, consignmentEvent_r767.eventDate, "medium"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", consignmentEvent_r773.referenceCode, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", consignmentEvent_r767.referenceCode, " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(consignmentEvent_r773.detail);
+    ɵngcc0.ɵɵtextInterpolate(consignmentEvent_r767.detail);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" location: ", consignmentEvent_r773.location, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" location: ", consignmentEvent_r767.location, " ");
 } }
 function TrackingEventsComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r775 = ɵngcc0.ɵɵgetCurrentView();
+    const _r769 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 4);
     ɵngcc0.ɵɵelementStart(2, "div", 5);
@@ -4631,7 +4546,7 @@ function TrackingEventsComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 6);
-    ɵngcc0.ɵɵlistener("click", function TrackingEventsComponent_ng_container_1_Template_button_click_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r775); const ctx_r774 = ɵngcc0.ɵɵnextContext(); return ctx_r774.activeModal.dismiss("Cross click"); });
+    ɵngcc0.ɵɵlistener("click", function TrackingEventsComponent_ng_container_1_Template_button_click_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r769); const ctx_r768 = ɵngcc0.ɵɵnextContext(); return ctx_r768.activeModal.dismiss("Cross click"); });
     ɵngcc0.ɵɵelementStart(6, "span", 7);
     ɵngcc0.ɵɵtext(7, "\u00D7");
     ɵngcc0.ɵɵelementEnd();
@@ -4643,15 +4558,15 @@ function TrackingEventsComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const consignmentTracking_r769 = ctx.ngIf;
+    const consignmentTracking_r763 = ctx.ngIf;
     ɵngcc0.ɵɵnextContext();
-    const _r765 = ɵngcc0.ɵɵreference(4);
+    const _r759 = ɵngcc0.ɵɵreference(4);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 4, "orderDetails.consignmentTracking.dialog.header"), " ");
     ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵproperty("ngIf", (consignmentTracking_r769 == null ? null : consignmentTracking_r769.carrierDetails) && (consignmentTracking_r769 == null ? null : consignmentTracking_r769.trackingID))("ngIfElse", _r765);
+    ɵngcc0.ɵɵproperty("ngIf", (consignmentTracking_r763 == null ? null : consignmentTracking_r763.carrierDetails) && (consignmentTracking_r763 == null ? null : consignmentTracking_r763.trackingID))("ngIfElse", _r759);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", consignmentTracking_r769.trackingEvents);
+    ɵngcc0.ɵɵproperty("ngForOf", consignmentTracking_r763.trackingEvents);
 } }
 function TrackingEventsComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 19);
@@ -4665,7 +4580,7 @@ function TrackingEventsComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 1, "orderDetails.consignmentTracking.dialog.noTracking"), " ");
 } }
 function TrackingEventsComponent_ng_template_5_Template(rf, ctx) { if (rf & 1) {
-    const _r777 = ɵngcc0.ɵɵgetCurrentView();
+    const _r771 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 20);
     ɵngcc0.ɵɵelementStart(1, "div", 4);
     ɵngcc0.ɵɵelementStart(2, "div", 5);
@@ -4673,7 +4588,7 @@ function TrackingEventsComponent_ng_template_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 21);
-    ɵngcc0.ɵɵlistener("click", function TrackingEventsComponent_ng_template_5_Template_button_click_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r777); const ctx_r776 = ɵngcc0.ɵɵnextContext(); return ctx_r776.activeModal.dismiss("Cross click"); });
+    ɵngcc0.ɵɵlistener("click", function TrackingEventsComponent_ng_template_5_Template_button_click_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r771); const ctx_r770 = ɵngcc0.ɵɵnextContext(); return ctx_r770.activeModal.dismiss("Cross click"); });
     ɵngcc0.ɵɵelementStart(6, "span", 7);
     ɵngcc0.ɵɵtext(7, "\u00D7");
     ɵngcc0.ɵɵelementEnd();
@@ -4692,10 +4607,10 @@ function TrackingEventsComponent_ng_template_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 1, "orderDetails.consignmentTracking.dialog.loadingHeader"), " ");
 } }
 function ConsignmentTrackingComponent_ng_container_0_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r781 = ɵngcc0.ɵɵgetCurrentView();
+    const _r775 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "button", 1);
-    ɵngcc0.ɵɵlistener("click", function ConsignmentTrackingComponent_ng_container_0_div_1_Template_button_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r781); const ctx_r780 = ɵngcc0.ɵɵnextContext(2); return ctx_r780.openTrackingDialog(ctx_r780.consignment); });
+    ɵngcc0.ɵɵlistener("click", function ConsignmentTrackingComponent_ng_container_0_div_1_Template_button_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r775); const ctx_r774 = ɵngcc0.ɵɵnextContext(2); return ctx_r774.openTrackingDialog(ctx_r774.consignment); });
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -4709,9 +4624,9 @@ function ConsignmentTrackingComponent_ng_container_0_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵtemplate(1, ConsignmentTrackingComponent_ng_container_0_div_1_Template, 4, 3, "div", 0);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r778 = ɵngcc0.ɵɵnextContext();
+    const ctx_r772 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r778.consignmentStatus.includes(ctx_r778.consignment.status));
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r772.consignmentStatus.includes(ctx_r772.consignment.status));
 } }
 function OrderConsignedEntriesComponent_div_0_span_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "span");
@@ -4719,9 +4634,9 @@ function OrderConsignedEntriesComponent_div_0_span_3_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const consignment_r783 = ɵngcc0.ɵɵnextContext().$implicit;
+    const consignment_r777 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(2, 1, "orderDetails.deliveryStatus", ɵngcc0.ɵɵpureFunction1(4, _c30, consignment_r783.status)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(2, 1, "orderDetails.deliveryStatus", ɵngcc0.ɵɵpureFunction1(4, _c29, consignment_r777.status)), " ");
 } }
 function OrderConsignedEntriesComponent_div_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 9);
@@ -4731,16 +4646,16 @@ function OrderConsignedEntriesComponent_div_0_div_4_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const consignment_r783 = ɵngcc0.ɵɵnextContext().$implicit;
+    const consignment_r777 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(3, 1, consignment_r783 == null ? null : consignment_r783.statusDate));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(3, 1, consignment_r777 == null ? null : consignment_r777.statusDate));
 } }
 function OrderConsignedEntriesComponent_div_0_cx_consignment_tracking_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-consignment-tracking", 10);
 } if (rf & 2) {
-    const consignment_r783 = ɵngcc0.ɵɵnextContext().$implicit;
-    const ctx_r786 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("orderCode", ctx_r786.order.code)("consignment", consignment_r783);
+    const consignment_r777 = ɵngcc0.ɵɵnextContext().$implicit;
+    const ctx_r780 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("orderCode", ctx_r780.order.code)("consignment", consignment_r777);
 } }
 function OrderConsignedEntriesComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 1);
@@ -4756,16 +4671,16 @@ function OrderConsignedEntriesComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const consignment_r783 = ctx.$implicit;
-    const ctx_r782 = ɵngcc0.ɵɵnextContext();
+    const consignment_r777 = ctx.$implicit;
+    const ctx_r776 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", consignment_r783);
+    ɵngcc0.ɵɵproperty("ngIf", consignment_r777);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", consignment_r783 == null ? null : consignment_r783.statusDate);
+    ɵngcc0.ɵɵproperty("ngIf", consignment_r777 == null ? null : consignment_r777.statusDate);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("cxFeature", "consignmentTracking");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("items", consignment_r783.entries)("readonly", true)("promotionLocation", ctx_r782.promotionLocation);
+    ɵngcc0.ɵɵproperty("items", consignment_r777.entries)("readonly", true)("promotionLocation", ctx_r776.promotionLocation);
 } }
 function OrderDetailShippingComponent_ng_container_0_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -4773,10 +4688,10 @@ function OrderDetailShippingComponent_ng_container_0_div_2_Template(rf, ctx) { i
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r791 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r792 = ɵngcc0.ɵɵnextContext();
+    const order_r785 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r786 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r792.getAddressCardContent(order_r791.deliveryAddress)));
+    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r786.getAddressCardContent(order_r785.deliveryAddress)));
 } }
 function OrderDetailShippingComponent_ng_container_0_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -4784,10 +4699,10 @@ function OrderDetailShippingComponent_ng_container_0_div_3_Template(rf, ctx) { i
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r791 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r793 = ɵngcc0.ɵɵnextContext();
+    const order_r785 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r787 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r793.getBillingAddressCardContent(order_r791.paymentInfo.billingAddress)));
+    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r787.getBillingAddressCardContent(order_r785.paymentInfo.billingAddress)));
 } }
 function OrderDetailShippingComponent_ng_container_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -4795,10 +4710,10 @@ function OrderDetailShippingComponent_ng_container_0_div_4_Template(rf, ctx) { i
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r791 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r794 = ɵngcc0.ɵɵnextContext();
+    const order_r785 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r788 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r794.getPaymentCardContent(order_r791.paymentInfo)));
+    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r788.getPaymentCardContent(order_r785.paymentInfo)));
 } }
 function OrderDetailShippingComponent_ng_container_0_div_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -4806,10 +4721,10 @@ function OrderDetailShippingComponent_ng_container_0_div_5_Template(rf, ctx) { i
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r791 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r795 = ɵngcc0.ɵɵnextContext();
+    const order_r785 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r789 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r795.getShippingMethodCardContent(order_r791.deliveryMode)));
+    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r789.getShippingMethodCardContent(order_r785.deliveryMode)));
 } }
 function OrderDetailShippingComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -4821,15 +4736,15 @@ function OrderDetailShippingComponent_ng_container_0_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const order_r791 = ctx.ngIf;
+    const order_r785 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", order_r791.deliveryAddress);
+    ɵngcc0.ɵɵproperty("ngIf", order_r785.deliveryAddress);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", order_r791.paymentInfo == null ? null : order_r791.paymentInfo.billingAddress);
+    ɵngcc0.ɵɵproperty("ngIf", order_r785.paymentInfo == null ? null : order_r785.paymentInfo.billingAddress);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", order_r791.paymentInfo);
+    ɵngcc0.ɵɵproperty("ngIf", order_r785.paymentInfo);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", order_r791.deliveryMode);
+    ɵngcc0.ɵɵproperty("ngIf", order_r785.deliveryMode);
 } }
 function OrderDetailTotalsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -4840,11 +4755,11 @@ function OrderDetailTotalsComponent_ng_container_0_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const order_r801 = ctx.ngIf;
+    const order_r795 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("cart", order_r801);
+    ɵngcc0.ɵɵproperty("cart", order_r795);
 } }
-const _c31 = function (a1) { return { cxRoute: "orderCancel", params: a1 }; };
+const _c30 = function (a1) { return { cxRoute: "orderCancel", params: a1 }; };
 function OrderDetailActionsComponent_ng_container_0_a_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "a", 3);
     ɵngcc0.ɵɵpipe(1, "cxUrl");
@@ -4852,12 +4767,12 @@ function OrderDetailActionsComponent_ng_container_0_a_8_Template(rf, ctx) { if (
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r803 = ɵngcc0.ɵɵnextContext().ngIf;
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 2, ɵngcc0.ɵɵpureFunction1(6, _c31, order_r803)));
+    const order_r797 = ɵngcc0.ɵɵnextContext().ngIf;
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 2, ɵngcc0.ɵɵpureFunction1(6, _c30, order_r797)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "orderDetails.cancellationAndReturn.cancelAction"), " ");
 } }
-const _c32 = function (a1) { return { cxRoute: "orderReturn", params: a1 }; };
+const _c31 = function (a1) { return { cxRoute: "orderReturn", params: a1 }; };
 function OrderDetailActionsComponent_ng_container_0_a_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "a", 3);
     ɵngcc0.ɵɵpipe(1, "cxUrl");
@@ -4865,12 +4780,12 @@ function OrderDetailActionsComponent_ng_container_0_a_9_Template(rf, ctx) { if (
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r803 = ɵngcc0.ɵɵnextContext().ngIf;
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 2, ɵngcc0.ɵɵpureFunction1(6, _c32, order_r803)));
+    const order_r797 = ɵngcc0.ɵɵnextContext().ngIf;
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 2, ɵngcc0.ɵɵpureFunction1(6, _c31, order_r797)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "orderDetails.cancellationAndReturn.returnAction"), " ");
 } }
-const _c33 = function () { return { cxRoute: "orders" }; };
+const _c32 = function () { return { cxRoute: "orders" }; };
 function OrderDetailActionsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 1);
@@ -4888,21 +4803,21 @@ function OrderDetailActionsComponent_ng_container_0_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const order_r803 = ctx.ngIf;
+    const order_r797 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(4, 4, ɵngcc0.ɵɵpureFunction0(8, _c33)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(4, 4, ɵngcc0.ɵɵpureFunction0(8, _c32)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(6, 6, "common.back"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", order_r803.cancellable);
+    ɵngcc0.ɵɵproperty("ngIf", order_r797.cancellable);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", order_r803.returnable);
+    ɵngcc0.ɵɵproperty("ngIf", order_r797.returnable);
 } }
-const _c34 = function (a1) { return { cxRoute: "orderDetails", params: a1 }; };
+const _c33 = function (a1) { return { cxRoute: "orderDetails", params: a1 }; };
 function OrderHistoryComponent_ng_container_0_ng_container_7_tr_23_Template(rf, ctx) { if (rf & 1) {
-    const _r816 = ɵngcc0.ɵɵgetCurrentView();
+    const _r810 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "tr", 16);
-    ɵngcc0.ɵɵlistener("click", function OrderHistoryComponent_ng_container_0_ng_container_7_tr_23_Template_tr_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r816); const order_r814 = ctx.$implicit; const ctx_r815 = ɵngcc0.ɵɵnextContext(3); return ctx_r815.goToOrderDetail(order_r814); });
+    ɵngcc0.ɵɵlistener("click", function OrderHistoryComponent_ng_container_0_ng_container_7_tr_23_Template_tr_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r810); const order_r808 = ctx.$implicit; const ctx_r809 = ɵngcc0.ɵɵnextContext(3); return ctx_r809.goToOrderDetail(order_r808); });
     ɵngcc0.ɵɵelementStart(1, "td", 17);
     ɵngcc0.ɵɵelementStart(2, "div", 18);
     ɵngcc0.ɵɵtext(3);
@@ -4947,46 +4862,46 @@ function OrderHistoryComponent_ng_container_0_ng_container_7_tr_23_Template(rf, 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r814 = ctx.$implicit;
+    const order_r808 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 12, "orderHistory.orderId"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(6, 14, ɵngcc0.ɵɵpureFunction1(34, _c34, order_r814)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(6, 14, ɵngcc0.ɵɵpureFunction1(34, _c33, order_r808)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", order_r814 == null ? null : order_r814.code, "");
+    ɵngcc0.ɵɵtextInterpolate1(" ", order_r808 == null ? null : order_r808.code, "");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(11, 16, "orderHistory.date"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(13, 18, ɵngcc0.ɵɵpureFunction1(36, _c34, order_r814)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(13, 18, ɵngcc0.ɵɵpureFunction1(36, _c33, order_r808)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind2(15, 20, order_r814 == null ? null : order_r814.placed, "longDate"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind2(15, 20, order_r808 == null ? null : order_r808.placed, "longDate"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(19, 23, "orderHistory.status"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(21, 25, ɵngcc0.ɵɵpureFunction1(38, _c34, order_r814)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(21, 25, ɵngcc0.ɵɵpureFunction1(38, _c33, order_r808)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(23, 27, "orderDetails.statusDisplay", ɵngcc0.ɵɵpureFunction1(40, _c30, order_r814 == null ? null : order_r814.statusDisplay)), "");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(23, 27, "orderDetails.statusDisplay", ɵngcc0.ɵɵpureFunction1(40, _c29, order_r808 == null ? null : order_r808.statusDisplay)), "");
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(27, 30, "orderHistory.total"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(29, 32, ɵngcc0.ɵɵpureFunction1(42, _c34, order_r814)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(29, 32, ɵngcc0.ɵɵpureFunction1(42, _c33, order_r808)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", order_r814 == null ? null : order_r814.total.formattedValue, "");
+    ɵngcc0.ɵɵtextInterpolate1(" ", order_r808 == null ? null : order_r808.total.formattedValue, "");
 } }
 function OrderHistoryComponent_ng_container_0_ng_container_7_Template(rf, ctx) { if (rf & 1) {
-    const _r818 = ɵngcc0.ɵɵgetCurrentView();
+    const _r812 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 6);
     ɵngcc0.ɵɵelementStart(2, "div", 7);
     ɵngcc0.ɵɵelementStart(3, "cx-sorting", 8);
-    ɵngcc0.ɵɵlistener("sortListEvent", function OrderHistoryComponent_ng_container_0_ng_container_7_Template_cx_sorting_sortListEvent_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r818); const ctx_r817 = ɵngcc0.ɵɵnextContext(2); return ctx_r817.changeSortCode($event); });
+    ɵngcc0.ɵɵlistener("sortListEvent", function OrderHistoryComponent_ng_container_0_ng_container_7_Template_cx_sorting_sortListEvent_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r812); const ctx_r811 = ɵngcc0.ɵɵnextContext(2); return ctx_r811.changeSortCode($event); });
     ɵngcc0.ɵɵpipe(4, "async");
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "div", 9);
     ɵngcc0.ɵɵelementStart(7, "cx-pagination", 10);
-    ɵngcc0.ɵɵlistener("viewPageEvent", function OrderHistoryComponent_ng_container_0_ng_container_7_Template_cx_pagination_viewPageEvent_7_listener($event) { ɵngcc0.ɵɵrestoreView(_r818); const ctx_r819 = ɵngcc0.ɵɵnextContext(2); return ctx_r819.pageChange($event); });
+    ɵngcc0.ɵɵlistener("viewPageEvent", function OrderHistoryComponent_ng_container_0_ng_container_7_Template_cx_pagination_viewPageEvent_7_listener($event) { ɵngcc0.ɵɵrestoreView(_r812); const ctx_r813 = ɵngcc0.ɵɵnextContext(2); return ctx_r813.pageChange($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -5016,26 +4931,26 @@ function OrderHistoryComponent_ng_container_0_ng_container_7_Template(rf, ctx) {
     ɵngcc0.ɵɵelementStart(24, "div", 15);
     ɵngcc0.ɵɵelementStart(25, "div", 7);
     ɵngcc0.ɵɵelementStart(26, "cx-sorting", 8);
-    ɵngcc0.ɵɵlistener("sortListEvent", function OrderHistoryComponent_ng_container_0_ng_container_7_Template_cx_sorting_sortListEvent_26_listener($event) { ɵngcc0.ɵɵrestoreView(_r818); const ctx_r820 = ɵngcc0.ɵɵnextContext(2); return ctx_r820.changeSortCode($event); });
+    ɵngcc0.ɵɵlistener("sortListEvent", function OrderHistoryComponent_ng_container_0_ng_container_7_Template_cx_sorting_sortListEvent_26_listener($event) { ɵngcc0.ɵɵrestoreView(_r812); const ctx_r814 = ɵngcc0.ɵɵnextContext(2); return ctx_r814.changeSortCode($event); });
     ɵngcc0.ɵɵpipe(27, "async");
     ɵngcc0.ɵɵpipe(28, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(29, "div", 9);
     ɵngcc0.ɵɵelementStart(30, "cx-pagination", 10);
-    ɵngcc0.ɵɵlistener("viewPageEvent", function OrderHistoryComponent_ng_container_0_ng_container_7_Template_cx_pagination_viewPageEvent_30_listener($event) { ɵngcc0.ɵɵrestoreView(_r818); const ctx_r821 = ɵngcc0.ɵɵnextContext(2); return ctx_r821.pageChange($event); });
+    ɵngcc0.ɵɵlistener("viewPageEvent", function OrderHistoryComponent_ng_container_0_ng_container_7_Template_cx_pagination_viewPageEvent_30_listener($event) { ɵngcc0.ɵɵrestoreView(_r812); const ctx_r815 = ɵngcc0.ɵɵnextContext(2); return ctx_r815.pageChange($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const orders_r809 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r810 = ɵngcc0.ɵɵnextContext();
+    const orders_r803 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r804 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(5, 17, "orderHistory.sortByMostRecent"));
-    ɵngcc0.ɵɵproperty("sortOptions", orders_r809.sorts)("sortLabels", ɵngcc0.ɵɵpipeBind1(4, 15, ctx_r810.getSortLabels()))("selectedOption", orders_r809.pagination.sort);
+    ɵngcc0.ɵɵproperty("sortOptions", orders_r803.sorts)("sortLabels", ɵngcc0.ɵɵpipeBind1(4, 15, ctx_r804.getSortLabels()))("selectedOption", orders_r803.pagination.sort);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("pagination", orders_r809.pagination);
+    ɵngcc0.ɵɵproperty("pagination", orders_r803.pagination);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(12, 19, "orderHistory.orderId"), " ");
     ɵngcc0.ɵɵadvance(3);
@@ -5045,12 +4960,12 @@ function OrderHistoryComponent_ng_container_0_ng_container_7_Template(rf, ctx) {
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(21, 25, "orderHistory.total"));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", orders_r809.orders);
+    ɵngcc0.ɵɵproperty("ngForOf", orders_r803.orders);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(28, 29, "orderHistory.sortByMostRecent"));
-    ɵngcc0.ɵɵproperty("sortOptions", orders_r809.sorts)("sortLabels", ɵngcc0.ɵɵpipeBind1(27, 27, ctx_r810.getSortLabels()))("selectedOption", orders_r809.pagination.sort);
+    ɵngcc0.ɵɵproperty("sortOptions", orders_r803.sorts)("sortLabels", ɵngcc0.ɵɵpipeBind1(27, 27, ctx_r804.getSortLabels()))("selectedOption", orders_r803.pagination.sort);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("pagination", orders_r809.pagination);
+    ɵngcc0.ɵɵproperty("pagination", orders_r803.pagination);
 } }
 function OrderHistoryComponent_ng_container_0_ng_template_8_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 24);
@@ -5070,7 +4985,7 @@ function OrderHistoryComponent_ng_container_0_ng_template_8_div_0_Template(rf, c
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 3, "orderHistory.noOrders"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(6, 5, ɵngcc0.ɵɵpureFunction0(9, _c27)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(6, 5, ɵngcc0.ɵɵpureFunction0(9, _c26)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(8, 7, "orderHistory.startShopping"));
 } }
@@ -5078,8 +4993,8 @@ function OrderHistoryComponent_ng_container_0_ng_template_8_Template(rf, ctx) { 
     ɵngcc0.ɵɵtemplate(0, OrderHistoryComponent_ng_container_0_ng_template_8_div_0_Template, 9, 10, "div", 23);
     ɵngcc0.ɵɵpipe(1, "async");
 } if (rf & 2) {
-    const ctx_r812 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx_r812.isLoaded$));
+    const ctx_r806 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx_r806.isLoaded$));
 } }
 function OrderHistoryComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -5097,34 +5012,34 @@ function OrderHistoryComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const orders_r809 = ctx.ngIf;
-    const _r811 = ɵngcc0.ɵɵreference(9);
+    const orders_r803 = ctx.ngIf;
+    const _r805 = ɵngcc0.ɵɵreference(9);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, "orderHistory.orderHistory"));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", orders_r809.pagination.totalResults > 0)("ngIfElse", _r811);
+    ɵngcc0.ɵɵproperty("ngIf", orders_r803.pagination.totalResults > 0)("ngIfElse", _r805);
 } }
 function ReturnRequestOverviewComponent_ng_container_0_button_7_Template(rf, ctx) { if (rf & 1) {
-    const _r829 = ɵngcc0.ɵɵgetCurrentView();
+    const _r823 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 9);
-    ɵngcc0.ɵɵlistener("click", function ReturnRequestOverviewComponent_ng_container_0_button_7_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r829); const returnRequest_r825 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r827 = ɵngcc0.ɵɵnextContext(); return ctx_r827.cancelReturn(returnRequest_r825.rma); });
+    ɵngcc0.ɵɵlistener("click", function ReturnRequestOverviewComponent_ng_container_0_button_7_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r823); const returnRequest_r819 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r821 = ɵngcc0.ɵɵnextContext(); return ctx_r821.cancelReturn(returnRequest_r819.rma); });
     ɵngcc0.ɵɵpipe(1, "async");
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r826 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r826.isCancelling$));
+    const ctx_r820 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r820.isCancelling$));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "returnRequest.cancel"), " ");
 } }
 function ReturnRequestOverviewComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r831 = ɵngcc0.ɵɵgetCurrentView();
+    const _r825 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 1);
     ɵngcc0.ɵɵelementStart(2, "div", 2);
     ɵngcc0.ɵɵelementStart(3, "button", 3);
-    ɵngcc0.ɵɵlistener("click", function ReturnRequestOverviewComponent_ng_container_0_Template_button_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r831); const ctx_r830 = ɵngcc0.ɵɵnextContext(); return ctx_r830.back(); });
+    ɵngcc0.ɵɵlistener("click", function ReturnRequestOverviewComponent_ng_container_0_Template_button_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r825); const ctx_r824 = ɵngcc0.ɵɵnextContext(); return ctx_r824.back(); });
     ɵngcc0.ɵɵtext(4);
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -5165,32 +5080,32 @@ function ReturnRequestOverviewComponent_ng_container_0_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const returnRequest_r825 = ctx.ngIf;
+    const returnRequest_r819 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 8, "common.back"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", returnRequest_r825.cancellable);
+    ɵngcc0.ɵɵproperty("ngIf", returnRequest_r819.cancellable);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(12, 10, "returnRequest.returnRequestId"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(returnRequest_r825.rma);
+    ɵngcc0.ɵɵtextInterpolate(returnRequest_r819.rma);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(18, 12, "returnRequest.orderCode"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(returnRequest_r825.order == null ? null : returnRequest_r825.order.code);
+    ɵngcc0.ɵɵtextInterpolate(returnRequest_r819.order == null ? null : returnRequest_r819.order.code);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(24, 14, "returnRequest.status"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(27, 16, "returnRequestList.statusDisplay", ɵngcc0.ɵɵpureFunction1(19, _c30, returnRequest_r825.status)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(27, 16, "returnRequestList.statusDisplay", ɵngcc0.ɵɵpureFunction1(19, _c29, returnRequest_r819.status)), " ");
 } }
 function ReturnRequestItemsComponent_ng_container_0_div_15_div_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 24);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const returnEntry_r835 = ɵngcc0.ɵɵnextContext().$implicit;
+    const returnEntry_r829 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", returnEntry_r835.orderEntry == null ? null : returnEntry_r835.orderEntry.product.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", returnEntry_r829.orderEntry == null ? null : returnEntry_r829.orderEntry.product.name, " ");
 } }
 function ReturnRequestItemsComponent_ng_container_0_div_15_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 25);
@@ -5198,9 +5113,9 @@ function ReturnRequestItemsComponent_ng_container_0_div_15_div_9_Template(rf, ct
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const returnEntry_r835 = ɵngcc0.ɵɵnextContext().$implicit;
+    const returnEntry_r829 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", returnEntry_r835.orderEntry == null ? null : returnEntry_r835.orderEntry.product.code, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", returnEntry_r829.orderEntry == null ? null : returnEntry_r829.orderEntry.product.code, " ");
 } }
 function ReturnRequestItemsComponent_ng_container_0_div_15_ng_container_10_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 27);
@@ -5212,38 +5127,38 @@ function ReturnRequestItemsComponent_ng_container_0_div_15_ng_container_10_div_1
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r845 = ctx.$implicit;
+    const variant_r839 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(variant_r845.name);
+    ɵngcc0.ɵɵtextInterpolate(variant_r839.name);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(variant_r845.value);
+    ɵngcc0.ɵɵtextInterpolate(variant_r839.value);
 } }
 function ReturnRequestItemsComponent_ng_container_0_div_15_ng_container_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, ReturnRequestItemsComponent_ng_container_0_div_15_ng_container_10_div_1_Template, 5, 2, "div", 26);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const returnEntry_r835 = ɵngcc0.ɵɵnextContext().$implicit;
+    const returnEntry_r829 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", returnEntry_r835.orderEntry == null ? null : returnEntry_r835.orderEntry.product.variantOptionQualifiers);
+    ɵngcc0.ɵɵproperty("ngForOf", returnEntry_r829.orderEntry == null ? null : returnEntry_r829.orderEntry.product.variantOptionQualifiers);
 } }
 function ReturnRequestItemsComponent_ng_container_0_div_15_ng_container_11_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 28);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r848 = ɵngcc0.ɵɵnextContext().$implicit;
+    const variant_r842 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r848.name, ": ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r842.name, ": ");
 } }
 function ReturnRequestItemsComponent_ng_container_0_div_15_ng_container_11_div_1_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 22);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r848 = ɵngcc0.ɵɵnextContext().$implicit;
+    const variant_r842 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r848.value, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r842.value, " ");
 } }
 function ReturnRequestItemsComponent_ng_container_0_div_15_ng_container_11_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 27);
@@ -5251,20 +5166,20 @@ function ReturnRequestItemsComponent_ng_container_0_div_15_ng_container_11_div_1
     ɵngcc0.ɵɵtemplate(2, ReturnRequestItemsComponent_ng_container_0_div_15_ng_container_11_div_1_div_2_Template, 2, 1, "div", 30);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r848 = ctx.$implicit;
+    const variant_r842 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", variant_r848.name);
+    ɵngcc0.ɵɵproperty("ngIf", variant_r842.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", variant_r848.value);
+    ɵngcc0.ɵɵproperty("ngIf", variant_r842.value);
 } }
 function ReturnRequestItemsComponent_ng_container_0_div_15_ng_container_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, ReturnRequestItemsComponent_ng_container_0_div_15_ng_container_11_div_1_Template, 3, 2, "div", 26);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const returnEntry_r835 = ɵngcc0.ɵɵnextContext().$implicit;
+    const returnEntry_r829 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", returnEntry_r835.orderEntry == null ? null : returnEntry_r835.orderEntry.product.baseOptions[0] == null ? null : returnEntry_r835.orderEntry.product.baseOptions[0].selected == null ? null : returnEntry_r835.orderEntry.product.baseOptions[0].selected.variantOptionQualifiers);
+    ɵngcc0.ɵɵproperty("ngForOf", returnEntry_r829.orderEntry == null ? null : returnEntry_r829.orderEntry.product.baseOptions[0] == null ? null : returnEntry_r829.orderEntry.product.baseOptions[0].selected == null ? null : returnEntry_r829.orderEntry.product.baseOptions[0].selected.variantOptionQualifiers);
 } }
 function ReturnRequestItemsComponent_ng_container_0_div_15_div_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 31);
@@ -5277,11 +5192,11 @@ function ReturnRequestItemsComponent_ng_container_0_div_15_div_12_Template(rf, c
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const returnEntry_r835 = ɵngcc0.ɵɵnextContext().$implicit;
+    const returnEntry_r829 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "returnRequest.itemPrice"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", returnEntry_r835.orderEntry == null ? null : returnEntry_r835.orderEntry.basePrice == null ? null : returnEntry_r835.orderEntry.basePrice.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", returnEntry_r829.orderEntry == null ? null : returnEntry_r829.orderEntry.basePrice == null ? null : returnEntry_r829.orderEntry.basePrice.formattedValue, " ");
 } }
 function ReturnRequestItemsComponent_ng_container_0_div_15_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 8);
@@ -5323,27 +5238,27 @@ function ReturnRequestItemsComponent_ng_container_0_div_15_Template(rf, ctx) { i
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const returnEntry_r835 = ctx.$implicit;
+    const returnEntry_r829 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("container", returnEntry_r835.orderEntry == null ? null : returnEntry_r835.orderEntry.product.images == null ? null : returnEntry_r835.orderEntry.product.images.PRIMARY);
+    ɵngcc0.ɵɵproperty("container", returnEntry_r829.orderEntry == null ? null : returnEntry_r829.orderEntry.product.images == null ? null : returnEntry_r829.orderEntry.product.images.PRIMARY);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("ngIf", returnEntry_r835.orderEntry == null ? null : returnEntry_r835.orderEntry.product.name);
+    ɵngcc0.ɵɵproperty("ngIf", returnEntry_r829.orderEntry == null ? null : returnEntry_r829.orderEntry.product.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", returnEntry_r835.orderEntry == null ? null : returnEntry_r835.orderEntry.product.code);
+    ɵngcc0.ɵɵproperty("ngIf", returnEntry_r829.orderEntry == null ? null : returnEntry_r829.orderEntry.product.code);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("cxFeatureLevel", "!1.5");
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("cxFeatureLevel", "1.5");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", returnEntry_r835.orderEntry == null ? null : returnEntry_r835.orderEntry.basePrice);
+    ɵngcc0.ɵɵproperty("ngIf", returnEntry_r829.orderEntry == null ? null : returnEntry_r829.orderEntry.basePrice);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(16, 10, "returnRequest.returnQty"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", returnEntry_r835.expectedQuantity, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", returnEntry_r829.expectedQuantity, " ");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(22, 12, "returnRequest.total"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", returnEntry_r835.refundAmount == null ? null : returnEntry_r835.refundAmount.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", returnEntry_r829.refundAmount == null ? null : returnEntry_r829.refundAmount.formattedValue, " ");
 } }
 function ReturnRequestItemsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -5370,7 +5285,7 @@ function ReturnRequestItemsComponent_ng_container_0_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵtemplate(15, ReturnRequestItemsComponent_ng_container_0_div_15_Template, 25, 14, "div", 7);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const returnRequest_r833 = ctx.ngIf;
+    const returnRequest_r827 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 5, "returnRequest.item"), " ");
     ɵngcc0.ɵɵadvance(3);
@@ -5380,7 +5295,7 @@ function ReturnRequestItemsComponent_ng_container_0_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(14, 11, "returnRequest.total"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", returnRequest_r833.returnEntries);
+    ɵngcc0.ɵɵproperty("ngForOf", returnRequest_r827.returnEntries);
 } }
 function ReturnRequestTotalsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -5425,25 +5340,25 @@ function ReturnRequestTotalsComponent_ng_container_0_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const returnRequest_r856 = ctx.ngIf;
+    const returnRequest_r850 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 8, "returnRequest.summary"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(9, 10, "returnRequest.subtotal"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", returnRequest_r856.subTotal == null ? null : returnRequest_r856.subTotal.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", returnRequest_r850.subTotal == null ? null : returnRequest_r850.subTotal.formattedValue, " ");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(15, 12, "returnRequest.deliveryCode"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", returnRequest_r856.deliveryCost == null ? null : returnRequest_r856.deliveryCost.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", returnRequest_r850.deliveryCost == null ? null : returnRequest_r850.deliveryCost.formattedValue, " ");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(21, 14, "returnRequest.estimatedRefund"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", returnRequest_r856.totalPrice == null ? null : returnRequest_r856.totalPrice.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", returnRequest_r850.totalPrice == null ? null : returnRequest_r850.totalPrice.formattedValue, " ");
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(26, 16, "returnRequest.note"), " ");
 } }
-const _c35 = function (a1) { return { cxRoute: "returnRequestDetails", params: a1 }; };
+const _c34 = function (a1) { return { cxRoute: "returnRequestDetails", params: a1 }; };
 function OrderReturnRequestListComponent_ng_container_0_ng_container_3_tr_23_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "tr");
     ɵngcc0.ɵɵelementStart(1, "td", 13);
@@ -5484,42 +5399,42 @@ function OrderReturnRequestListComponent_ng_container_0_ng_container_3_tr_23_Tem
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const return_r861 = ctx.$implicit;
+    const return_r855 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 10, "returnRequestList.returnRequestId"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(6, 12, ɵngcc0.ɵɵpureFunction1(28, _c35, return_r861)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(6, 12, ɵngcc0.ɵɵpureFunction1(28, _c34, return_r855)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", return_r861 == null ? null : return_r861.rma, "");
+    ɵngcc0.ɵɵtextInterpolate1(" ", return_r855 == null ? null : return_r855.rma, "");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(11, 14, "returnRequestList.orderId"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(13, 16, ɵngcc0.ɵɵpureFunction1(30, _c34, return_r861 == null ? null : return_r861.order)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(13, 16, ɵngcc0.ɵɵpureFunction1(30, _c33, return_r855 == null ? null : return_r855.order)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", return_r861 == null ? null : return_r861.order == null ? null : return_r861.order.code, "");
+    ɵngcc0.ɵɵtextInterpolate1(" ", return_r855 == null ? null : return_r855.order == null ? null : return_r855.order.code, "");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(18, 18, "returnRequestList.date"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(20, 20, return_r861 == null ? null : return_r861.creationTime, "longDate"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(20, 20, return_r855 == null ? null : return_r855.creationTime, "longDate"), " ");
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(24, 23, "returnRequestList.status"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(26, 25, "returnRequestList.statusDisplay", ɵngcc0.ɵɵpureFunction1(32, _c30, return_r861 == null ? null : return_r861.status)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(26, 25, "returnRequestList.statusDisplay", ɵngcc0.ɵɵpureFunction1(32, _c29, return_r855 == null ? null : return_r855.status)), " ");
 } }
 function OrderReturnRequestListComponent_ng_container_0_ng_container_3_Template(rf, ctx) { if (rf & 1) {
-    const _r863 = ɵngcc0.ɵɵgetCurrentView();
+    const _r857 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 3);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
     ɵngcc0.ɵɵelementStart(3, "cx-sorting", 5);
-    ɵngcc0.ɵɵlistener("sortListEvent", function OrderReturnRequestListComponent_ng_container_0_ng_container_3_Template_cx_sorting_sortListEvent_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r863); const ctx_r862 = ɵngcc0.ɵɵnextContext(2); return ctx_r862.changeSortCode($event); });
+    ɵngcc0.ɵɵlistener("sortListEvent", function OrderReturnRequestListComponent_ng_container_0_ng_container_3_Template_cx_sorting_sortListEvent_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r857); const ctx_r856 = ɵngcc0.ɵɵnextContext(2); return ctx_r856.changeSortCode($event); });
     ɵngcc0.ɵɵpipe(4, "async");
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "div", 6);
     ɵngcc0.ɵɵelementStart(7, "cx-pagination", 7);
-    ɵngcc0.ɵɵlistener("viewPageEvent", function OrderReturnRequestListComponent_ng_container_0_ng_container_3_Template_cx_pagination_viewPageEvent_7_listener($event) { ɵngcc0.ɵɵrestoreView(_r863); const ctx_r864 = ɵngcc0.ɵɵnextContext(2); return ctx_r864.pageChange($event); });
+    ɵngcc0.ɵɵlistener("viewPageEvent", function OrderReturnRequestListComponent_ng_container_0_ng_container_3_Template_cx_pagination_viewPageEvent_7_listener($event) { ɵngcc0.ɵɵrestoreView(_r857); const ctx_r858 = ɵngcc0.ɵɵnextContext(2); return ctx_r858.pageChange($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -5549,26 +5464,26 @@ function OrderReturnRequestListComponent_ng_container_0_ng_container_3_Template(
     ɵngcc0.ɵɵelementStart(24, "div", 12);
     ɵngcc0.ɵɵelementStart(25, "div", 4);
     ɵngcc0.ɵɵelementStart(26, "cx-sorting", 5);
-    ɵngcc0.ɵɵlistener("sortListEvent", function OrderReturnRequestListComponent_ng_container_0_ng_container_3_Template_cx_sorting_sortListEvent_26_listener($event) { ɵngcc0.ɵɵrestoreView(_r863); const ctx_r865 = ɵngcc0.ɵɵnextContext(2); return ctx_r865.changeSortCode($event); });
+    ɵngcc0.ɵɵlistener("sortListEvent", function OrderReturnRequestListComponent_ng_container_0_ng_container_3_Template_cx_sorting_sortListEvent_26_listener($event) { ɵngcc0.ɵɵrestoreView(_r857); const ctx_r859 = ɵngcc0.ɵɵnextContext(2); return ctx_r859.changeSortCode($event); });
     ɵngcc0.ɵɵpipe(27, "async");
     ɵngcc0.ɵɵpipe(28, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(29, "div", 6);
     ɵngcc0.ɵɵelementStart(30, "cx-pagination", 7);
-    ɵngcc0.ɵɵlistener("viewPageEvent", function OrderReturnRequestListComponent_ng_container_0_ng_container_3_Template_cx_pagination_viewPageEvent_30_listener($event) { ɵngcc0.ɵɵrestoreView(_r863); const ctx_r866 = ɵngcc0.ɵɵnextContext(2); return ctx_r866.pageChange($event); });
+    ɵngcc0.ɵɵlistener("viewPageEvent", function OrderReturnRequestListComponent_ng_container_0_ng_container_3_Template_cx_pagination_viewPageEvent_30_listener($event) { ɵngcc0.ɵɵrestoreView(_r857); const ctx_r860 = ɵngcc0.ɵɵnextContext(2); return ctx_r860.pageChange($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const returnRequests_r858 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r859 = ɵngcc0.ɵɵnextContext();
+    const returnRequests_r852 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r853 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(5, 17, "returnRequestList.sortByMostRecent"));
-    ɵngcc0.ɵɵproperty("sortOptions", returnRequests_r858.sorts)("sortLabels", ɵngcc0.ɵɵpipeBind1(4, 15, ctx_r859.getSortLabels()))("selectedOption", returnRequests_r858.pagination.sort);
+    ɵngcc0.ɵɵproperty("sortOptions", returnRequests_r852.sorts)("sortLabels", ɵngcc0.ɵɵpipeBind1(4, 15, ctx_r853.getSortLabels()))("selectedOption", returnRequests_r852.pagination.sort);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("pagination", returnRequests_r858.pagination);
+    ɵngcc0.ɵɵproperty("pagination", returnRequests_r852.pagination);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(12, 19, "returnRequestList.returnRequestId"), " ");
     ɵngcc0.ɵɵadvance(3);
@@ -5578,12 +5493,12 @@ function OrderReturnRequestListComponent_ng_container_0_ng_container_3_Template(
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(21, 25, "returnRequestList.status"));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", returnRequests_r858.returnRequests);
+    ɵngcc0.ɵɵproperty("ngForOf", returnRequests_r852.returnRequests);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(28, 29, "returnRequestList.sortByMostRecent"));
-    ɵngcc0.ɵɵproperty("sortOptions", returnRequests_r858.sorts)("sortLabels", ɵngcc0.ɵɵpipeBind1(27, 27, ctx_r859.getSortLabels()))("selectedOption", returnRequests_r858.pagination.sort);
+    ɵngcc0.ɵɵproperty("sortOptions", returnRequests_r852.sorts)("sortLabels", ɵngcc0.ɵɵpipeBind1(27, 27, ctx_r853.getSortLabels()))("selectedOption", returnRequests_r852.pagination.sort);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("pagination", returnRequests_r858.pagination);
+    ɵngcc0.ɵɵproperty("pagination", returnRequests_r852.pagination);
 } }
 function OrderReturnRequestListComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -5594,9 +5509,9 @@ function OrderReturnRequestListComponent_ng_container_0_Template(rf, ctx) { if (
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const returnRequests_r858 = ctx.ngIf;
+    const returnRequests_r852 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", returnRequests_r858.pagination.totalResults > 0);
+    ɵngcc0.ɵɵproperty("ngIf", returnRequests_r852.pagination.totalResults > 0);
 } }
 function PaymentMethodsComponent_ng_container_0_div_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -5604,29 +5519,29 @@ function PaymentMethodsComponent_ng_container_0_div_10_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
 } }
 function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r876 = ɵngcc0.ɵɵgetCurrentView();
+    const _r870 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "div", 10);
     ɵngcc0.ɵɵelementStart(2, "cx-card", 11);
-    ɵngcc0.ɵɵlistener("deleteCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_deleteCard_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r876); const paymentMethod_r874 = ctx.$implicit; const ctx_r875 = ɵngcc0.ɵɵnextContext(3); return ctx_r875.deletePaymentMethod(paymentMethod_r874); })("setDefaultCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_setDefaultCard_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r876); const paymentMethod_r874 = ctx.$implicit; const ctx_r877 = ɵngcc0.ɵɵnextContext(3); return ctx_r877.setDefaultPaymentMethod(paymentMethod_r874); })("editCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_editCard_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r876); const paymentMethod_r874 = ctx.$implicit; const ctx_r878 = ɵngcc0.ɵɵnextContext(3); return ctx_r878.setEdit(paymentMethod_r874); })("cancelCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_cancelCard_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r876); const ctx_r879 = ɵngcc0.ɵɵnextContext(3); return ctx_r879.cancelCard(); });
+    ɵngcc0.ɵɵlistener("deleteCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_deleteCard_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r870); const paymentMethod_r868 = ctx.$implicit; const ctx_r869 = ɵngcc0.ɵɵnextContext(3); return ctx_r869.deletePaymentMethod(paymentMethod_r868); })("setDefaultCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_setDefaultCard_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r870); const paymentMethod_r868 = ctx.$implicit; const ctx_r871 = ɵngcc0.ɵɵnextContext(3); return ctx_r871.setDefaultPaymentMethod(paymentMethod_r868); })("editCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_editCard_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r870); const paymentMethod_r868 = ctx.$implicit; const ctx_r872 = ɵngcc0.ɵɵnextContext(3); return ctx_r872.setEdit(paymentMethod_r868); })("cancelCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_cancelCard_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r870); const ctx_r873 = ɵngcc0.ɵɵnextContext(3); return ctx_r873.cancelCard(); });
     ɵngcc0.ɵɵpipe(3, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const paymentMethod_r874 = ctx.$implicit;
-    const ctx_r873 = ɵngcc0.ɵɵnextContext(3);
+    const paymentMethod_r868 = ctx.$implicit;
+    const ctx_r867 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("border", true)("fitToContainer", true)("content", ɵngcc0.ɵɵpipeBind1(3, 4, ctx_r873.getCardContent(paymentMethod_r874)))("editMode", ctx_r873.editCard === paymentMethod_r874.id);
+    ɵngcc0.ɵɵproperty("border", true)("fitToContainer", true)("content", ɵngcc0.ɵɵpipeBind1(3, 4, ctx_r867.getCardContent(paymentMethod_r868)))("editMode", ctx_r867.editCard === paymentMethod_r868.id);
 } }
 function PaymentMethodsComponent_ng_container_0_ng_template_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 7);
     ɵngcc0.ɵɵtemplate(1, PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template, 4, 6, "div", 8);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const paymentMethods_r869 = ɵngcc0.ɵɵnextContext().ngIf;
+    const paymentMethods_r863 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", paymentMethods_r869);
+    ɵngcc0.ɵɵproperty("ngForOf", paymentMethods_r863);
 } }
 function PaymentMethodsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -5649,14 +5564,14 @@ function PaymentMethodsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r871 = ɵngcc0.ɵɵreference(13);
-    const ctx_r868 = ɵngcc0.ɵɵnextContext();
+    const _r865 = ɵngcc0.ɵɵreference(13);
+    const ctx_r862 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 4, "paymentMethods.paymentMethods"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(9, 6, "paymentMethods.newPaymentMethodsAreAddedDuringCheckout"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(11, 8, ctx_r868.loading$))("ngIfElse", _r871);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(11, 8, ctx_r862.loading$))("ngIfElse", _r865);
 } }
 function ResetPasswordFormComponent_div_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 7);
@@ -5721,11 +5636,11 @@ function UpdateEmailComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
 } }
 function UpdateEmailComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
-    const _r890 = ɵngcc0.ɵɵgetCurrentView();
+    const _r884 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 3);
     ɵngcc0.ɵɵelementStart(1, "div", 4);
     ɵngcc0.ɵɵelementStart(2, "cx-update-email-form", 5);
-    ɵngcc0.ɵɵlistener("saveEmail", function UpdateEmailComponent_ng_template_3_Template_cx_update_email_form_saveEmail_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r890); const ctx_r889 = ɵngcc0.ɵɵnextContext(); return ctx_r889.onSubmit($event); })("cancelEmail", function UpdateEmailComponent_ng_template_3_Template_cx_update_email_form_cancelEmail_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r890); const ctx_r891 = ɵngcc0.ɵɵnextContext(); return ctx_r891.onCancel(); });
+    ɵngcc0.ɵɵlistener("saveEmail", function UpdateEmailComponent_ng_template_3_Template_cx_update_email_form_saveEmail_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r884); const ctx_r883 = ɵngcc0.ɵɵnextContext(); return ctx_r883.onSubmit($event); })("cancelEmail", function UpdateEmailComponent_ng_template_3_Template_cx_update_email_form_cancelEmail_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r884); const ctx_r885 = ɵngcc0.ɵɵnextContext(); return ctx_r885.onCancel(); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -5771,11 +5686,11 @@ function UpdatePasswordComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
 } }
 function UpdatePasswordComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
-    const _r899 = ɵngcc0.ɵɵgetCurrentView();
+    const _r893 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 3);
     ɵngcc0.ɵɵelementStart(1, "div", 4);
     ɵngcc0.ɵɵelementStart(2, "cx-update-password-form", 5);
-    ɵngcc0.ɵɵlistener("cancelled", function UpdatePasswordComponent_ng_template_3_Template_cx_update_password_form_cancelled_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r899); const ctx_r898 = ɵngcc0.ɵɵnextContext(); return ctx_r898.onCancel(); })("submited", function UpdatePasswordComponent_ng_template_3_Template_cx_update_password_form_submited_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r899); const ctx_r900 = ɵngcc0.ɵɵnextContext(); return ctx_r900.onSubmit($event); });
+    ɵngcc0.ɵɵlistener("cancelled", function UpdatePasswordComponent_ng_template_3_Template_cx_update_password_form_cancelled_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r893); const ctx_r892 = ɵngcc0.ɵɵnextContext(); return ctx_r892.onCancel(); })("submited", function UpdatePasswordComponent_ng_template_3_Template_cx_update_password_form_submited_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r893); const ctx_r894 = ɵngcc0.ɵɵnextContext(); return ctx_r894.onSubmit($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -5785,10 +5700,10 @@ function UpdateProfileFormComponent_option_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const title_r904 = ctx.$implicit;
-    ɵngcc0.ɵɵproperty("value", title_r904.code);
+    const title_r898 = ctx.$implicit;
+    ɵngcc0.ɵɵproperty("value", title_r898.code);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(title_r904.name);
+    ɵngcc0.ɵɵtextInterpolate(title_r898.name);
 } }
 function UpdateProfileFormComponent_div_20_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 14);
@@ -5820,15 +5735,15 @@ function UpdateProfileComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
 } }
 function UpdateProfileComponent_ng_template_3_cx_update_profile_form_2_Template(rf, ctx) { if (rf & 1) {
-    const _r910 = ɵngcc0.ɵɵgetCurrentView();
+    const _r904 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-update-profile-form", 6);
-    ɵngcc0.ɵɵlistener("cancelled", function UpdateProfileComponent_ng_template_3_cx_update_profile_form_2_Template_cx_update_profile_form_cancelled_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r910); const ctx_r909 = ɵngcc0.ɵɵnextContext(2); return ctx_r909.onCancel(); })("submited", function UpdateProfileComponent_ng_template_3_cx_update_profile_form_2_Template_cx_update_profile_form_submited_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r910); const ctx_r911 = ɵngcc0.ɵɵnextContext(2); return ctx_r911.onSubmit($event); });
+    ɵngcc0.ɵɵlistener("cancelled", function UpdateProfileComponent_ng_template_3_cx_update_profile_form_2_Template_cx_update_profile_form_cancelled_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r904); const ctx_r903 = ɵngcc0.ɵɵnextContext(2); return ctx_r903.onCancel(); })("submited", function UpdateProfileComponent_ng_template_3_cx_update_profile_form_2_Template_cx_update_profile_form_submited_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r904); const ctx_r905 = ɵngcc0.ɵɵnextContext(2); return ctx_r905.onSubmit($event); });
     ɵngcc0.ɵɵpipe(1, "async");
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r908 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("user", ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r908.user$))("titles", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r908.titles$));
+    const ctx_r902 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("user", ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r902.user$))("titles", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r902.titles$));
 } }
 function UpdateProfileComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -5838,39 +5753,39 @@ function UpdateProfileComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r907 = ɵngcc0.ɵɵnextContext();
+    const ctx_r901 = ɵngcc0.ɵɵnextContext();
     var tmp_0_0 = null;
-    const currVal_0 = (tmp_0_0 = ɵngcc0.ɵɵpipeBind1(3, 1, ctx_r907.user$)) == null ? null : tmp_0_0.uid;
+    const currVal_0 = (tmp_0_0 = ɵngcc0.ɵɵpipeBind1(3, 1, ctx_r901.user$)) == null ? null : tmp_0_0.uid;
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵproperty("ngIf", currVal_0);
 } }
 function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_div_8_Template(rf, ctx) { if (rf & 1) {
-    const _r923 = ɵngcc0.ɵɵgetCurrentView();
+    const _r917 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 20);
     ɵngcc0.ɵɵelementStart(1, "cx-coupon-card", 21);
-    ɵngcc0.ɵɵlistener("notificationChanged", function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_div_8_Template_cx_coupon_card_notificationChanged_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r923); const ctx_r922 = ɵngcc0.ɵɵnextContext(4); return ctx_r922.notificationChange($event); });
+    ɵngcc0.ɵɵlistener("notificationChanged", function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_div_8_Template_cx_coupon_card_notificationChanged_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r917); const ctx_r916 = ɵngcc0.ɵɵnextContext(4); return ctx_r916.notificationChange($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const coupon_r921 = ctx.$implicit;
-    const ctx_r920 = ɵngcc0.ɵɵnextContext(4);
+    const coupon_r915 = ctx.$implicit;
+    const ctx_r914 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("coupon", coupon_r921)("couponSubscriptionLoading$", ctx_r920.couponSubscriptionLoading$);
+    ɵngcc0.ɵɵproperty("coupon", coupon_r915)("couponSubscriptionLoading$", ctx_r914.couponSubscriptionLoading$);
 } }
-const _c36 = function () { return ["/my-account/notification-preference"]; };
+const _c35 = function () { return ["/my-account/notification-preference"]; };
 function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Template(rf, ctx) { if (rf & 1) {
-    const _r925 = ɵngcc0.ɵɵgetCurrentView();
+    const _r919 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 6);
     ɵngcc0.ɵɵelementStart(2, "div", 7);
     ɵngcc0.ɵɵelementStart(3, "cx-sorting", 8);
-    ɵngcc0.ɵɵlistener("sortListEvent", function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Template_cx_sorting_sortListEvent_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r925); const ctx_r924 = ɵngcc0.ɵɵnextContext(3); return ctx_r924.sortChange($event); });
+    ɵngcc0.ɵɵlistener("sortListEvent", function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Template_cx_sorting_sortListEvent_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r919); const ctx_r918 = ɵngcc0.ɵɵnextContext(3); return ctx_r918.sortChange($event); });
     ɵngcc0.ɵɵpipe(4, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "div", 9);
     ɵngcc0.ɵɵelementStart(6, "cx-pagination", 10);
-    ɵngcc0.ɵɵlistener("viewPageEvent", function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Template_cx_pagination_viewPageEvent_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r925); const ctx_r926 = ɵngcc0.ɵɵnextContext(3); return ctx_r926.pageChange($event); });
+    ɵngcc0.ɵɵlistener("viewPageEvent", function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Template_cx_pagination_viewPageEvent_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r919); const ctx_r920 = ɵngcc0.ɵɵnextContext(3); return ctx_r920.pageChange($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -5880,14 +5795,14 @@ function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Templat
     ɵngcc0.ɵɵelementStart(9, "div", 13);
     ɵngcc0.ɵɵelementStart(10, "div", 14);
     ɵngcc0.ɵɵelementStart(11, "cx-sorting", 15);
-    ɵngcc0.ɵɵlistener("sortListEvent", function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Template_cx_sorting_sortListEvent_11_listener($event) { ɵngcc0.ɵɵrestoreView(_r925); const ctx_r927 = ɵngcc0.ɵɵnextContext(3); return ctx_r927.sortChange($event); });
+    ɵngcc0.ɵɵlistener("sortListEvent", function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Template_cx_sorting_sortListEvent_11_listener($event) { ɵngcc0.ɵɵrestoreView(_r919); const ctx_r921 = ɵngcc0.ɵɵnextContext(3); return ctx_r921.sortChange($event); });
     ɵngcc0.ɵɵpipe(12, "async");
     ɵngcc0.ɵɵpipe(13, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(14, "div", 16);
     ɵngcc0.ɵɵelementStart(15, "cx-pagination", 10);
-    ɵngcc0.ɵɵlistener("viewPageEvent", function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Template_cx_pagination_viewPageEvent_15_listener($event) { ɵngcc0.ɵɵrestoreView(_r925); const ctx_r928 = ɵngcc0.ɵɵnextContext(3); return ctx_r928.pageChange($event); });
+    ɵngcc0.ɵɵlistener("viewPageEvent", function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Template_cx_pagination_viewPageEvent_15_listener($event) { ɵngcc0.ɵɵrestoreView(_r919); const ctx_r922 = ɵngcc0.ɵɵnextContext(3); return ctx_r922.pageChange($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -5906,25 +5821,25 @@ function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Templat
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const couponResult_r918 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r919 = ɵngcc0.ɵɵnextContext(2);
+    const couponResult_r912 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r913 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("sortOptions", ctx_r919.sortOptions)("sortLabels", ɵngcc0.ɵɵpipeBind1(4, 15, ctx_r919.sortLabels))("selectedOption", ctx_r919.sort);
+    ɵngcc0.ɵɵproperty("sortOptions", ctx_r913.sortOptions)("sortLabels", ɵngcc0.ɵɵpipeBind1(4, 15, ctx_r913.sortLabels))("selectedOption", ctx_r913.sort);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("pagination", ctx_r919.pagination);
+    ɵngcc0.ɵɵproperty("pagination", ctx_r913.pagination);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", couponResult_r918.coupons);
+    ɵngcc0.ɵɵproperty("ngForOf", couponResult_r912.coupons);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(13, 19, "myCoupons.sortByMostRecent"));
-    ɵngcc0.ɵɵproperty("sortOptions", ctx_r919.sortOptions)("sortLabels", ɵngcc0.ɵɵpipeBind1(12, 17, ctx_r919.sortLabels))("selectedOption", ctx_r919.sort);
+    ɵngcc0.ɵɵproperty("sortOptions", ctx_r913.sortOptions)("sortLabels", ɵngcc0.ɵɵpipeBind1(12, 17, ctx_r913.sortLabels))("selectedOption", ctx_r913.sort);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("pagination", ctx_r919.pagination);
+    ɵngcc0.ɵɵproperty("pagination", ctx_r913.pagination);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r919.iconTypes.INFO);
+    ɵngcc0.ɵɵproperty("type", ctx_r913.iconTypes.INFO);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(20, 21, "myCoupons.notesPreffix"), "");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction0(27, _c36));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction0(27, _c35));
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(23, 23, "myCoupons.notesLink"));
     ɵngcc0.ɵɵadvance(2);
@@ -5941,13 +5856,13 @@ function MyCouponsComponent_ng_container_1_ng_container_1_Template(rf, ctx) { if
     ɵngcc0.ɵɵtemplate(5, MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Template, 26, 28, "ng-container", 1);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const couponResult_r918 = ctx.ngIf;
+    const couponResult_r912 = ctx.ngIf;
     ɵngcc0.ɵɵnextContext();
-    const _r916 = ɵngcc0.ɵɵreference(4);
+    const _r910 = ɵngcc0.ɵɵreference(4);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 3, "myCoupons.myCoupons"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", couponResult_r918.pagination.totalCount > 0)("ngIfElse", _r916);
+    ɵngcc0.ɵɵproperty("ngIf", couponResult_r912.pagination.totalCount > 0)("ngIfElse", _r910);
 } }
 function MyCouponsComponent_ng_container_1_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "section");
@@ -5967,9 +5882,9 @@ function MyCouponsComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(3, MyCouponsComponent_ng_container_1_ng_template_3_Template, 4, 3, "ng-template", null, 4, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r912 = ɵngcc0.ɵɵnextContext();
+    const ctx_r906 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r912.couponResult$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r906.couponResult$));
 } }
 function MyCouponsComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 23);
@@ -5977,10 +5892,10 @@ function MyCouponsComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
 } }
 function NotificationPreferenceComponent_ng_container_0_div_1_ng_container_7_label_1_Template(rf, ctx) { if (rf & 1) {
-    const _r941 = ɵngcc0.ɵɵgetCurrentView();
+    const _r935 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "label", 10);
     ɵngcc0.ɵɵelementStart(1, "input", 11);
-    ɵngcc0.ɵɵlistener("change", function NotificationPreferenceComponent_ng_container_0_div_1_ng_container_7_label_1_Template_input_change_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r941); const preference_r937 = ɵngcc0.ɵɵnextContext().$implicit; const ctx_r939 = ɵngcc0.ɵɵnextContext(3); return ctx_r939.updatePreference(preference_r937); });
+    ɵngcc0.ɵɵlistener("change", function NotificationPreferenceComponent_ng_container_0_div_1_ng_container_7_label_1_Template_input_change_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r935); const preference_r931 = ɵngcc0.ɵɵnextContext().$implicit; const ctx_r933 = ɵngcc0.ɵɵnextContext(3); return ctx_r933.updatePreference(preference_r931); });
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(3, "span", 12);
@@ -5989,21 +5904,21 @@ function NotificationPreferenceComponent_ng_container_0_div_1_ng_container_7_lab
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const preference_r937 = ɵngcc0.ɵɵnextContext().$implicit;
-    const ctx_r938 = ɵngcc0.ɵɵnextContext(3);
+    const preference_r931 = ɵngcc0.ɵɵnextContext().$implicit;
+    const ctx_r932 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("checked", preference_r937.enabled)("disabled", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r938.isLoading$));
+    ɵngcc0.ɵɵproperty("checked", preference_r931.enabled)("disabled", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r932.isLoading$));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(5, 6, "notificationPreference." + preference_r937.channel), " ", preference_r937.value, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(5, 6, "notificationPreference." + preference_r931.channel), " ", preference_r931.value, " ");
 } }
 function NotificationPreferenceComponent_ng_container_0_div_1_ng_container_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, NotificationPreferenceComponent_ng_container_0_div_1_ng_container_7_label_1_Template, 6, 8, "label", 9);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const preference_r937 = ctx.$implicit;
+    const preference_r931 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", preference_r937.visible);
+    ɵngcc0.ɵɵproperty("ngIf", preference_r931.visible);
 } }
 function NotificationPreferenceComponent_ng_container_0_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -6028,11 +5943,11 @@ function NotificationPreferenceComponent_ng_container_0_div_1_Template(rf, ctx) 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const preferences_r932 = ɵngcc0.ɵɵnextContext().ngIf;
+    const preferences_r926 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 4, "notificationPreference.message"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", preferences_r932);
+    ɵngcc0.ɵɵproperty("ngForOf", preferences_r926);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(11, 6, "notificationPreference.note"));
     ɵngcc0.ɵɵadvance(2);
@@ -6049,10 +5964,10 @@ function NotificationPreferenceComponent_ng_container_0_Template(rf, ctx) { if (
     ɵngcc0.ɵɵtemplate(2, NotificationPreferenceComponent_ng_container_0_ng_template_2_Template, 2, 0, "ng-template", null, 2, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const preferences_r932 = ctx.ngIf;
-    const _r934 = ɵngcc0.ɵɵreference(3);
+    const preferences_r926 = ctx.ngIf;
+    const _r928 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", preferences_r932.length > 0)("ngIfElse", _r934);
+    ɵngcc0.ɵɵproperty("ngIf", preferences_r926.length > 0)("ngIfElse", _r928);
 } }
 function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_div_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 37);
@@ -6062,11 +5977,11 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_di
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const product_r955 = ɵngcc0.ɵɵnextContext().ngIf;
+    const product_r949 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c14, product_r955)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c14, product_r949)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", product_r955.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", product_r949.name, " ");
 } }
 function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 39);
@@ -6076,9 +5991,9 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_di
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const product_r955 = ɵngcc0.ɵɵnextContext().ngIf;
+    const product_r949 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind2(3, 1, "myInterests.productId", ɵngcc0.ɵɵpureFunction1(4, _c18, product_r955.code)));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind2(3, 1, "myInterests.productId", ɵngcc0.ɵɵpureFunction1(4, _c18, product_r949.code)));
 } }
 function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_ng_container_12_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 41);
@@ -6090,20 +6005,20 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_ng
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r965 = ctx.$implicit;
+    const variant_r959 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r965.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r959.name, " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r965.value, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r959.value, " ");
 } }
 function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_ng_container_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_ng_container_12_div_1_Template, 5, 2, "div", 40);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const baseOptions_r963 = ctx.$implicit;
+    const baseOptions_r957 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", baseOptions_r963.selected == null ? null : baseOptions_r963.selected.variantOptionQualifiers);
+    ɵngcc0.ɵɵproperty("ngForOf", baseOptions_r957.selected == null ? null : baseOptions_r957.selected.variantOptionQualifiers);
 } }
 function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_div_13_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 41);
@@ -6116,7 +6031,7 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_di
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 1, "myInterests.outOfStock"), " ");
 } }
-const _c37 = function (a0) { return { expirationDate: a0 }; };
+const _c36 = function (a0) { return { expirationDate: a0 }; };
 function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_div_26_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 45);
     ɵngcc0.ɵɵelementStart(1, "span", 46);
@@ -6130,14 +6045,14 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_di
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const interestEntry_r966 = ctx.$implicit;
+    const interestEntry_r960 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "myInterests." + interestEntry_r966.interestType), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "myInterests." + interestEntry_r960.interestType), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(6, 4, "myInterests.expirationDate", ɵngcc0.ɵɵpureFunction1(9, _c37, ɵngcc0.ɵɵpipeBind1(7, 7, interestEntry_r966.expirationDate))), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(6, 4, "myInterests.expirationDate", ɵngcc0.ɵɵpureFunction1(9, _c36, ɵngcc0.ɵɵpipeBind1(7, 7, interestEntry_r960.expirationDate))), " ");
 } }
 function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r969 = ɵngcc0.ɵɵgetCurrentView();
+    const _r963 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "td");
     ɵngcc0.ɵɵelementStart(2, "div", 22);
@@ -6182,7 +6097,7 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_Te
     ɵngcc0.ɵɵelementStart(27, "td");
     ɵngcc0.ɵɵelementStart(28, "div", 35);
     ɵngcc0.ɵɵelementStart(29, "button", 36);
-    ɵngcc0.ɵɵlistener("click", function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_Template_button_click_29_listener($event) { ɵngcc0.ɵɵrestoreView(_r969); const interest_r953 = ɵngcc0.ɵɵnextContext().$implicit; const ctx_r967 = ɵngcc0.ɵɵnextContext(4); return ctx_r967.removeInterest(interest_r953); });
+    ɵngcc0.ɵɵlistener("click", function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_Template_button_click_29_listener($event) { ɵngcc0.ɵɵrestoreView(_r963); const interest_r947 = ɵngcc0.ɵɵnextContext().$implicit; const ctx_r961 = ɵngcc0.ɵɵnextContext(4); return ctx_r961.removeInterest(interest_r947); });
     ɵngcc0.ɵɵpipe(30, "async");
     ɵngcc0.ɵɵtext(31);
     ɵngcc0.ɵɵpipe(32, "cxTranslate");
@@ -6191,31 +6106,31 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_Te
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r955 = ctx.ngIf;
-    const interest_r953 = ɵngcc0.ɵɵnextContext().$implicit;
-    const ctx_r954 = ɵngcc0.ɵɵnextContext(4);
+    const product_r949 = ctx.ngIf;
+    const interest_r947 = ɵngcc0.ɵɵnextContext().$implicit;
+    const ctx_r948 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(4, 12, ɵngcc0.ɵɵpureFunction1(22, _c14, product_r955)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(4, 12, ɵngcc0.ɵɵpureFunction1(22, _c14, product_r949)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("container", product_r955.images == null ? null : product_r955.images.PRIMARY);
+    ɵngcc0.ɵɵproperty("container", product_r949.images == null ? null : product_r949.images.PRIMARY);
     ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵproperty("ngIf", product_r955.name);
+    ɵngcc0.ɵɵproperty("ngIf", product_r949.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", product_r955.code);
+    ɵngcc0.ɵɵproperty("ngIf", product_r949.code);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", product_r955.baseOptions);
+    ɵngcc0.ɵɵproperty("ngForOf", product_r949.baseOptions);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", product_r955.stock.stockLevelStatus === "outOfStock");
+    ɵngcc0.ɵɵproperty("ngIf", product_r949.stock.stockLevelStatus === "outOfStock");
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(18, 14, "myInterests.price"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(product_r955.price.formattedValue);
+    ɵngcc0.ɵɵtextInterpolate(product_r949.price.formattedValue);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(25, 16, "myInterests.notifications"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", interest_r953.productInterestEntry);
+    ɵngcc0.ɵɵproperty("ngForOf", interest_r947.productInterestEntry);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(30, 18, ctx_r954.isRemoveDisabled$));
+    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(30, 18, ctx_r948.isRemoveDisabled$));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(32, 20, "myInterests.remove"), " ");
 } }
@@ -6225,24 +6140,24 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_Template(rf, ctx)
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const interest_r953 = ctx.$implicit;
+    const interest_r947 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, interest_r953.product$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, interest_r947.product$));
 } }
 function MyInterestsComponent_div_0_div_5_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r972 = ɵngcc0.ɵɵgetCurrentView();
+    const _r966 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 8);
     ɵngcc0.ɵɵelementStart(2, "div", 9);
     ɵngcc0.ɵɵelementStart(3, "cx-sorting", 10);
-    ɵngcc0.ɵɵlistener("sortListEvent", function MyInterestsComponent_div_0_div_5_ng_container_1_Template_cx_sorting_sortListEvent_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r972); const ctx_r971 = ɵngcc0.ɵɵnextContext(3); return ctx_r971.sortChange($event); });
+    ɵngcc0.ɵɵlistener("sortListEvent", function MyInterestsComponent_div_0_div_5_ng_container_1_Template_cx_sorting_sortListEvent_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r966); const ctx_r965 = ɵngcc0.ɵɵnextContext(3); return ctx_r965.sortChange($event); });
     ɵngcc0.ɵɵpipe(4, "async");
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "div", 11);
     ɵngcc0.ɵɵelementStart(7, "cx-pagination", 12);
-    ɵngcc0.ɵɵlistener("viewPageEvent", function MyInterestsComponent_div_0_div_5_ng_container_1_Template_cx_pagination_viewPageEvent_7_listener($event) { ɵngcc0.ɵɵrestoreView(_r972); const ctx_r973 = ɵngcc0.ɵɵnextContext(3); return ctx_r973.pageChange($event); });
+    ɵngcc0.ɵɵlistener("viewPageEvent", function MyInterestsComponent_div_0_div_5_ng_container_1_Template_cx_pagination_viewPageEvent_7_listener($event) { ɵngcc0.ɵɵrestoreView(_r966); const ctx_r967 = ɵngcc0.ɵɵnextContext(3); return ctx_r967.pageChange($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -6270,26 +6185,26 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵelementStart(23, "div", 17);
     ɵngcc0.ɵɵelementStart(24, "div", 18);
     ɵngcc0.ɵɵelementStart(25, "cx-sorting", 10);
-    ɵngcc0.ɵɵlistener("sortListEvent", function MyInterestsComponent_div_0_div_5_ng_container_1_Template_cx_sorting_sortListEvent_25_listener($event) { ɵngcc0.ɵɵrestoreView(_r972); const ctx_r974 = ɵngcc0.ɵɵnextContext(3); return ctx_r974.sortChange($event); });
+    ɵngcc0.ɵɵlistener("sortListEvent", function MyInterestsComponent_div_0_div_5_ng_container_1_Template_cx_sorting_sortListEvent_25_listener($event) { ɵngcc0.ɵɵrestoreView(_r966); const ctx_r968 = ɵngcc0.ɵɵnextContext(3); return ctx_r968.sortChange($event); });
     ɵngcc0.ɵɵpipe(26, "async");
     ɵngcc0.ɵɵpipe(27, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(28, "div", 19);
     ɵngcc0.ɵɵelementStart(29, "cx-pagination", 12);
-    ɵngcc0.ɵɵlistener("viewPageEvent", function MyInterestsComponent_div_0_div_5_ng_container_1_Template_cx_pagination_viewPageEvent_29_listener($event) { ɵngcc0.ɵɵrestoreView(_r972); const ctx_r975 = ɵngcc0.ɵɵnextContext(3); return ctx_r975.pageChange($event); });
+    ɵngcc0.ɵɵlistener("viewPageEvent", function MyInterestsComponent_div_0_div_5_ng_container_1_Template_cx_pagination_viewPageEvent_29_listener($event) { ɵngcc0.ɵɵrestoreView(_r966); const ctx_r969 = ɵngcc0.ɵɵnextContext(3); return ctx_r969.pageChange($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const interests_r949 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r951 = ɵngcc0.ɵɵnextContext();
+    const interests_r943 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r945 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(5, 16, "myInterests.sortByMostRecent"));
-    ɵngcc0.ɵɵproperty("sortOptions", ctx_r951.sortOptions)("sortLabels", ɵngcc0.ɵɵpipeBind1(4, 14, ctx_r951.sortLabels))("selectedOption", ctx_r951.sort);
+    ɵngcc0.ɵɵproperty("sortOptions", ctx_r945.sortOptions)("sortLabels", ɵngcc0.ɵɵpipeBind1(4, 14, ctx_r945.sortLabels))("selectedOption", ctx_r945.sort);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("pagination", ctx_r951.pagination);
+    ɵngcc0.ɵɵproperty("pagination", ctx_r945.pagination);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(12, 18, "myInterests.item"), " ");
     ɵngcc0.ɵɵadvance(4);
@@ -6297,23 +6212,23 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(19, 22, "myInterests.notifications"), " ");
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("ngForOf", interests_r949.results);
+    ɵngcc0.ɵɵproperty("ngForOf", interests_r943.results);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(27, 26, "myInterests.sortByMostRecent"));
-    ɵngcc0.ɵɵproperty("sortOptions", ctx_r951.sortOptions)("sortLabels", ɵngcc0.ɵɵpipeBind1(26, 24, ctx_r951.sortLabels))("selectedOption", ctx_r951.sort);
+    ɵngcc0.ɵɵproperty("sortOptions", ctx_r945.sortOptions)("sortLabels", ɵngcc0.ɵɵpipeBind1(26, 24, ctx_r945.sortLabels))("selectedOption", ctx_r945.sort);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("pagination", ctx_r951.pagination);
+    ɵngcc0.ɵɵproperty("pagination", ctx_r945.pagination);
 } }
 function MyInterestsComponent_div_0_div_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 6);
     ɵngcc0.ɵɵtemplate(1, MyInterestsComponent_div_0_div_5_ng_container_1_Template, 30, 28, "ng-container", 7);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const interests_r949 = ɵngcc0.ɵɵnextContext().ngIf;
+    const interests_r943 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵnextContext();
-    const _r945 = ɵngcc0.ɵɵreference(3);
+    const _r939 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", interests_r949.pagination.totalCount > 0)("ngIfElse", _r945);
+    ɵngcc0.ɵɵproperty("ngIf", interests_r943.pagination.totalCount > 0)("ngIfElse", _r939);
 } }
 function MyInterestsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -6327,12 +6242,12 @@ function MyInterestsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(6, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r944 = ɵngcc0.ɵɵnextContext();
-    const _r947 = ɵngcc0.ɵɵreference(5);
+    const ctx_r938 = ɵngcc0.ɵɵnextContext();
+    const _r941 = ɵngcc0.ɵɵreference(5);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 3, "myInterests.header"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(6, 5, ctx_r944.getInterestsloading$))("ngIfElse", _r947);
+    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(6, 5, ctx_r938.getInterestsloading$))("ngIfElse", _r941);
 } }
 function MyInterestsComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 48);
@@ -6353,22 +6268,22 @@ function BreadcrumbComponent_span_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(1, "a", 1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const crumb_r979 = ctx.$implicit;
+    const crumb_r973 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", crumb_r979.link)("innerHTML", crumb_r979.label, ɵngcc0.ɵɵsanitizeHtml);
+    ɵngcc0.ɵɵproperty("routerLink", crumb_r973.link)("innerHTML", crumb_r973.label, ɵngcc0.ɵɵsanitizeHtml);
 } }
 function CategoryNavigationComponent_cx_navigation_ui_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-navigation-ui", 1);
     ɵngcc0.ɵɵpipe(1, "async");
 } if (rf & 2) {
-    const data_r981 = ctx.ngIf;
-    const ctx_r980 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("node", ɵngcc0.ɵɵpipeBind1(1, 4, ctx_r980.node$))("ngClass", data_r981.styleClass)("wrapAfter", data_r981.wrapAfter)("allowAlignToRight", true);
+    const data_r975 = ctx.ngIf;
+    const ctx_r974 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("node", ɵngcc0.ɵɵpipeBind1(1, 4, ctx_r974.node$))("ngClass", data_r975.styleClass)("wrapAfter", data_r975.wrapAfter)("allowAlignToRight", true);
 } }
 function NavigationUIComponent_div_0_Template(rf, ctx) { if (rf & 1) {
-    const _r987 = ɵngcc0.ɵɵgetCurrentView();
+    const _r981 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 3);
-    ɵngcc0.ɵɵlistener("click", function NavigationUIComponent_div_0_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r987); const ctx_r986 = ɵngcc0.ɵɵnextContext(); return ctx_r986.back(); });
+    ɵngcc0.ɵɵlistener("click", function NavigationUIComponent_div_0_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r981); const ctx_r980 = ɵngcc0.ɵɵnextContext(); return ctx_r980.back(); });
     ɵngcc0.ɵɵelementStart(1, "h5");
     ɵngcc0.ɵɵelement(2, "cx-icon", 4);
     ɵngcc0.ɵɵtext(3);
@@ -6376,32 +6291,32 @@ function NavigationUIComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r982 = ɵngcc0.ɵɵnextContext();
+    const ctx_r976 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r982.iconType.CARET_LEFT);
+    ɵngcc0.ɵɵproperty("type", ctx_r976.iconType.CARET_LEFT);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 2, "common.back"), " ");
 } }
 function NavigationUIComponent_ng_container_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
 } }
-const _c38 = function (a0) { return { node: a0 }; };
+const _c37 = function (a0) { return { node: a0 }; };
 function NavigationUIComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, NavigationUIComponent_ng_container_1_ng_container_1_Template, 1, 0, "ng-container", 5);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const child_r988 = ctx.$implicit;
+    const child_r982 = ctx.$implicit;
     ɵngcc0.ɵɵnextContext();
-    const _r984 = ɵngcc0.ɵɵreference(3);
+    const _r978 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r984)("ngTemplateOutletContext", ɵngcc0.ɵɵpureFunction1(2, _c38, child_r988));
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r978)("ngTemplateOutletContext", ɵngcc0.ɵɵpureFunction1(2, _c37, child_r982));
 } }
 function NavigationUIComponent_ng_template_2_cx_generic_link_1_cx_icon_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-icon", 4);
 } if (rf & 2) {
-    const ctx_r995 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r995.iconType.CARET_DOWN);
+    const ctx_r989 = ɵngcc0.ɵɵnextContext(3);
+    ɵngcc0.ɵɵproperty("type", ctx_r989.iconType.CARET_DOWN);
 } }
 function NavigationUIComponent_ng_template_2_cx_generic_link_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "cx-generic-link", 10);
@@ -6409,19 +6324,19 @@ function NavigationUIComponent_ng_template_2_cx_generic_link_1_Template(rf, ctx)
     ɵngcc0.ɵɵtemplate(2, NavigationUIComponent_ng_template_2_cx_generic_link_1_cx_icon_2_Template, 1, 1, "cx-icon", 11);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const node_r990 = ɵngcc0.ɵɵnextContext().node;
-    const ctx_r991 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("url", node_r990.url)("target", node_r990.target);
+    const node_r984 = ɵngcc0.ɵɵnextContext().node;
+    const ctx_r985 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("url", node_r984.url)("target", node_r984.target);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", node_r990.title, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", node_r984.title, " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r991.flyout && (node_r990.children == null ? null : node_r990.children.length) > 0);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r985.flyout && (node_r984.children == null ? null : node_r984.children.length) > 0);
 } }
 function NavigationUIComponent_ng_template_2_ng_template_2_cx_icon_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-icon", 4);
 } if (rf & 2) {
-    const ctx_r997 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r997.iconType.CARET_DOWN);
+    const ctx_r991 = ɵngcc0.ɵɵnextContext(3);
+    ɵngcc0.ɵɵproperty("type", ctx_r991.iconType.CARET_DOWN);
 } }
 function NavigationUIComponent_ng_template_2_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "h5");
@@ -6429,25 +6344,25 @@ function NavigationUIComponent_ng_template_2_ng_template_2_Template(rf, ctx) { i
     ɵngcc0.ɵɵtemplate(2, NavigationUIComponent_ng_template_2_ng_template_2_cx_icon_2_Template, 1, 1, "cx-icon", 11);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const node_r990 = ɵngcc0.ɵɵnextContext().node;
-    const ctx_r993 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵattribute("aria-label", node_r990.title);
+    const node_r984 = ɵngcc0.ɵɵnextContext().node;
+    const ctx_r987 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵattribute("aria-label", node_r984.title)("tabindex", ctx_r987.flyout ? 0 : 0 - 1);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", node_r990.title, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", node_r984.title, " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r993.flyout && (node_r990.children == null ? null : node_r990.children.length) > 0);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r987.flyout && (node_r984.children == null ? null : node_r984.children.length) > 0);
 } }
-const _c39 = function (a0) { return { navNode: a0 }; };
+const _c38 = function (a0) { return { navNode: a0 }; };
 function NavigationUIComponent_ng_template_2_div_4_cx_generic_link_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "cx-generic-link", 15);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const node_r990 = ɵngcc0.ɵɵnextContext(2).node;
-    ɵngcc0.ɵɵproperty("url", node_r990.url)("target", node_r990.target);
+    const node_r984 = ɵngcc0.ɵɵnextContext(2).node;
+    ɵngcc0.ɵɵproperty("url", node_r984.url)("target", node_r984.target);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(2, 3, "navigation.shopAll", ɵngcc0.ɵɵpureFunction1(6, _c39, node_r990.title)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(2, 3, "navigation.shopAll", ɵngcc0.ɵɵpureFunction1(6, _c38, node_r984.title)), " ");
 } }
 function NavigationUIComponent_ng_template_2_div_4_ng_container_3_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -6457,11 +6372,11 @@ function NavigationUIComponent_ng_template_2_div_4_ng_container_3_Template(rf, c
     ɵngcc0.ɵɵtemplate(1, NavigationUIComponent_ng_template_2_div_4_ng_container_3_ng_container_1_Template, 1, 0, "ng-container", 5);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const child_r1002 = ctx.$implicit;
+    const child_r996 = ctx.$implicit;
     ɵngcc0.ɵɵnextContext(3);
-    const _r984 = ɵngcc0.ɵɵreference(3);
+    const _r978 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r984)("ngTemplateOutletContext", ɵngcc0.ɵɵpureFunction1(2, _c38, child_r1002));
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r978)("ngTemplateOutletContext", ɵngcc0.ɵɵpureFunction1(2, _c37, child_r996));
 } }
 function NavigationUIComponent_ng_template_2_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 12);
@@ -6471,66 +6386,71 @@ function NavigationUIComponent_ng_template_2_div_4_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const node_r990 = ɵngcc0.ɵɵnextContext().node;
-    const ctx_r994 = ɵngcc0.ɵɵnextContext();
+    const node_r984 = ɵngcc0.ɵɵnextContext().node;
+    const ctx_r988 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", node_r990.url);
+    ɵngcc0.ɵɵproperty("ngIf", node_r984.url);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵattribute("depth", ctx_r994.getDepth(node_r990))("wrap-after", (node_r990.children == null ? null : node_r990.children.length) > ctx_r994.wrapAfter ? ctx_r994.wrapAfter : null)("columns", ctx_r994.getColumnCount(node_r990.children == null ? null : node_r990.children.length));
+    ɵngcc0.ɵɵattribute("depth", ctx_r988.getDepth(node_r984))("wrap-after", (node_r984.children == null ? null : node_r984.children.length) > ctx_r988.wrapAfter ? ctx_r988.wrapAfter : null)("columns", ctx_r988.getColumnCount(node_r984.children == null ? null : node_r984.children.length));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", node_r990.children);
+    ɵngcc0.ɵɵproperty("ngForOf", node_r984.children);
 } }
 function NavigationUIComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
-    const _r1006 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1000 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "nav", 6);
-    ɵngcc0.ɵɵlistener("click", function NavigationUIComponent_ng_template_2_Template_nav_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1006); const ctx_r1005 = ɵngcc0.ɵɵnextContext(); return ctx_r1005.toggleOpen($event); })("mouseenter", function NavigationUIComponent_ng_template_2_Template_nav_mouseenter_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1006); const ctx_r1007 = ɵngcc0.ɵɵnextContext(); return ctx_r1007.onMouseEnter($event); });
+    ɵngcc0.ɵɵlistener("click", function NavigationUIComponent_ng_template_2_Template_nav_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1000); const ctx_r999 = ɵngcc0.ɵɵnextContext(); return ctx_r999.toggleOpen($event); })("mouseenter", function NavigationUIComponent_ng_template_2_Template_nav_mouseenter_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1000); const ctx_r1001 = ɵngcc0.ɵɵnextContext(); return ctx_r1001.onMouseEnter($event); })("keydown.space", function NavigationUIComponent_ng_template_2_Template_nav_keydown_space_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1000); const ctx_r1002 = ɵngcc0.ɵɵnextContext(); return ctx_r1002.toggleOpen($event); });
     ɵngcc0.ɵɵtemplate(1, NavigationUIComponent_ng_template_2_cx_generic_link_1_Template, 3, 4, "cx-generic-link", 7);
-    ɵngcc0.ɵɵtemplate(2, NavigationUIComponent_ng_template_2_ng_template_2_Template, 3, 3, "ng-template", null, 8, ɵngcc0.ɵɵtemplateRefExtractor);
+    ɵngcc0.ɵɵtemplate(2, NavigationUIComponent_ng_template_2_ng_template_2_Template, 3, 4, "ng-template", null, 8, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵtemplate(4, NavigationUIComponent_ng_template_2_div_4_Template, 4, 5, "div", 9);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const node_r990 = ctx.node;
-    const _r992 = ɵngcc0.ɵɵreference(3);
+    const node_r984 = ctx.node;
+    const _r986 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", node_r990.url && (!node_r990.children || (node_r990.children == null ? null : node_r990.children.length) === 0))("ngIfElse", _r992);
+    ɵngcc0.ɵɵproperty("ngIf", node_r984.url && (!node_r984.children || (node_r984.children == null ? null : node_r984.children.length) === 0))("ngIfElse", _r986);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", (node_r990.children == null ? null : node_r990.children.length) > 0);
+    ɵngcc0.ɵɵproperty("ngIf", (node_r984.children == null ? null : node_r984.children.length) > 0);
 } }
 function FooterNavigationComponent_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 2);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const data_r1009 = ctx.ngIf;
+    const data_r1004 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", data_r1009.notice, "\n");
+    ɵngcc0.ɵɵtextInterpolate1(" ", data_r1004.notice, "\n");
 } }
 function SearchBoxComponent_div_6_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "div", 11);
 } if (rf & 2) {
-    const result_r1012 = ɵngcc0.ɵɵnextContext().ngIf;
-    ɵngcc0.ɵɵproperty("innerHTML", result_r1012.message, ɵngcc0.ɵɵsanitizeHtml);
+    const result_r1007 = ɵngcc0.ɵɵnextContext().ngIf;
+    ɵngcc0.ɵɵproperty("innerHTML", result_r1007.message, ɵngcc0.ɵɵsanitizeHtml);
 } }
-const _c40 = function (a0) { return { query: a0 }; };
-const _c41 = function (a1) { return { cxRoute: "search", params: a1 }; };
+const _c39 = function (a0) { return { query: a0 }; };
+const _c40 = function (a1) { return { cxRoute: "search", params: a1 }; };
 function SearchBoxComponent_div_6_a_3_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelement(0, "a", 12);
+    const _r1014 = ɵngcc0.ɵɵgetCurrentView();
+    ɵngcc0.ɵɵelementStart(0, "a", 12);
+    ɵngcc0.ɵɵlistener("keydown.arrowup", function SearchBoxComponent_div_6_a_3_Template_a_keydown_arrowup_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1014); const ctx_r1013 = ɵngcc0.ɵɵnextContext(2); return ctx_r1013.focusPreviousChild($event); })("keydown.arrowdown", function SearchBoxComponent_div_6_a_3_Template_a_keydown_arrowdown_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1014); const ctx_r1015 = ɵngcc0.ɵɵnextContext(2); return ctx_r1015.focusNextChild($event); })("keydown.enter", function SearchBoxComponent_div_6_a_3_Template_a_keydown_enter_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1014); const ctx_r1016 = ɵngcc0.ɵɵnextContext(2); return ctx_r1016.close($event, true); })("keydown.escape", function SearchBoxComponent_div_6_a_3_Template_a_keydown_escape_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1014); const ctx_r1017 = ɵngcc0.ɵɵnextContext(2); return ctx_r1017.close($event, true); })("blur", function SearchBoxComponent_div_6_a_3_Template_a_blur_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1014); const ctx_r1018 = ɵngcc0.ɵɵnextContext(2); return ctx_r1018.close($event); });
     ɵngcc0.ɵɵpipe(1, "cxHighlight");
     ɵngcc0.ɵɵpipe(2, "cxUrl");
+    ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const suggestion_r1017 = ctx.$implicit;
+    const suggestion_r1012 = ctx.$implicit;
     ɵngcc0.ɵɵnextContext(2);
-    const _r1010 = ɵngcc0.ɵɵreference(2);
-    ɵngcc0.ɵɵproperty("innerHTML", ɵngcc0.ɵɵpipeBind2(1, 2, suggestion_r1017, _r1010.value), ɵngcc0.ɵɵsanitizeHtml)("routerLink", ɵngcc0.ɵɵpipeBind1(2, 5, ɵngcc0.ɵɵpureFunction1(9, _c41, ɵngcc0.ɵɵpureFunction1(7, _c40, suggestion_r1017))));
+    const _r1005 = ɵngcc0.ɵɵreference(2);
+    ɵngcc0.ɵɵproperty("innerHTML", ɵngcc0.ɵɵpipeBind2(1, 2, suggestion_r1012, _r1005.value), ɵngcc0.ɵɵsanitizeHtml)("routerLink", ɵngcc0.ɵɵpipeBind1(2, 5, ɵngcc0.ɵɵpureFunction1(9, _c40, ɵngcc0.ɵɵpureFunction1(7, _c39, suggestion_r1012))));
 } }
 function SearchBoxComponent_div_6_div_4_a_1_cx_media_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-media", 19);
 } if (rf & 2) {
-    const product_r1019 = ɵngcc0.ɵɵnextContext().$implicit;
-    ɵngcc0.ɵɵproperty("container", product_r1019.images == null ? null : product_r1019.images.PRIMARY)("alt", product_r1019.summary);
+    const product_r1020 = ɵngcc0.ɵɵnextContext().$implicit;
+    ɵngcc0.ɵɵproperty("container", product_r1020.images == null ? null : product_r1020.images.PRIMARY)("alt", product_r1020.summary);
 } }
 function SearchBoxComponent_div_6_div_4_a_1_Template(rf, ctx) { if (rf & 1) {
+    const _r1024 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 15);
+    ɵngcc0.ɵɵlistener("keydown.arrowup", function SearchBoxComponent_div_6_div_4_a_1_Template_a_keydown_arrowup_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1024); const ctx_r1023 = ɵngcc0.ɵɵnextContext(3); return ctx_r1023.focusPreviousChild($event); })("keydown.arrowdown", function SearchBoxComponent_div_6_div_4_a_1_Template_a_keydown_arrowdown_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1024); const ctx_r1025 = ɵngcc0.ɵɵnextContext(3); return ctx_r1025.focusNextChild($event); })("keydown.enter", function SearchBoxComponent_div_6_div_4_a_1_Template_a_keydown_enter_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1024); const ctx_r1026 = ɵngcc0.ɵɵnextContext(3); return ctx_r1026.close($event, true); })("keydown.escape", function SearchBoxComponent_div_6_div_4_a_1_Template_a_keydown_escape_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1024); const ctx_r1027 = ɵngcc0.ɵɵnextContext(3); return ctx_r1027.close($event, true); })("blur", function SearchBoxComponent_div_6_div_4_a_1_Template_a_blur_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1024); const ctx_r1028 = ɵngcc0.ɵɵnextContext(3); return ctx_r1028.close($event); });
     ɵngcc0.ɵɵpipe(1, "cxUrl");
     ɵngcc0.ɵɵtemplate(2, SearchBoxComponent_div_6_div_4_a_1_cx_media_2_Template, 1, 2, "cx-media", 16);
     ɵngcc0.ɵɵelement(3, "h4", 17);
@@ -6539,56 +6459,53 @@ function SearchBoxComponent_div_6_div_4_a_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const product_r1019 = ctx.$implicit;
-    const ctx_r1018 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵclassProp("has-media", ctx_r1018.config.displayProductImages);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 6, ɵngcc0.ɵɵpureFunction1(8, _c14, product_r1019)));
+    const product_r1020 = ctx.$implicit;
+    const ctx_r1019 = ɵngcc0.ɵɵnextContext(3);
+    ɵngcc0.ɵɵclassProp("has-media", ctx_r1019.config.displayProductImages);
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 6, ɵngcc0.ɵɵpureFunction1(8, _c14, product_r1020)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1018.config.displayProductImages);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1019.config.displayProductImages);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("innerHTML", product_r1019.nameHtml, ɵngcc0.ɵɵsanitizeHtml);
+    ɵngcc0.ɵɵproperty("innerHTML", product_r1020.nameHtml, ɵngcc0.ɵɵsanitizeHtml);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(product_r1019.price == null ? null : product_r1019.price.formattedValue);
+    ɵngcc0.ɵɵtextInterpolate(product_r1020.price == null ? null : product_r1020.price.formattedValue);
 } }
 function SearchBoxComponent_div_6_div_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1023 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 13);
-    ɵngcc0.ɵɵlistener("mousedown", function SearchBoxComponent_div_6_div_4_Template_div_mousedown_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1023); const ctx_r1022 = ɵngcc0.ɵɵnextContext(2); return ctx_r1022.disableClose(); });
     ɵngcc0.ɵɵtemplate(1, SearchBoxComponent_div_6_div_4_a_1_Template, 6, 10, "a", 14);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const result_r1012 = ɵngcc0.ɵɵnextContext().ngIf;
+    const result_r1007 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", result_r1012.products);
+    ɵngcc0.ɵɵproperty("ngForOf", result_r1007.products);
 } }
 function SearchBoxComponent_div_6_Template(rf, ctx) { if (rf & 1) {
-    const _r1026 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1031 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 6);
-    ɵngcc0.ɵɵlistener("click", function SearchBoxComponent_div_6_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1026); const ctx_r1025 = ɵngcc0.ɵɵnextContext(); return ctx_r1025.close($event); });
+    ɵngcc0.ɵɵlistener("click", function SearchBoxComponent_div_6_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1031); const ctx_r1030 = ɵngcc0.ɵɵnextContext(); return ctx_r1030.close($event, true); });
     ɵngcc0.ɵɵtemplate(1, SearchBoxComponent_div_6_div_1_Template, 1, 1, "div", 7);
     ɵngcc0.ɵɵelementStart(2, "div", 8);
-    ɵngcc0.ɵɵlistener("mousedown", function SearchBoxComponent_div_6_Template_div_mousedown_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r1026); const ctx_r1027 = ɵngcc0.ɵɵnextContext(); return ctx_r1027.disableClose(); });
     ɵngcc0.ɵɵtemplate(3, SearchBoxComponent_div_6_a_3_Template, 3, 11, "a", 9);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵtemplate(4, SearchBoxComponent_div_6_div_4_Template, 2, 1, "div", 10);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const result_r1012 = ctx.ngIf;
+    const result_r1007 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", result_r1012.message);
+    ɵngcc0.ɵɵproperty("ngIf", result_r1007.message);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", result_r1012.suggestions);
+    ɵngcc0.ɵɵproperty("ngForOf", result_r1007.suggestions);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", result_r1012.products);
+    ɵngcc0.ɵɵproperty("ngIf", result_r1007.products);
 } }
 function OrderConfirmationItemsComponent_div_0_ng_container_4_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelement(1, "cx-promotions", 6);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const orderPromotions_r1033 = ctx.ngIf;
+    const orderPromotions_r1037 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r1033);
+    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r1037);
 } }
 function OrderConfirmationItemsComponent_div_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -6596,9 +6513,9 @@ function OrderConfirmationItemsComponent_div_0_ng_container_4_Template(rf, ctx) 
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1031 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1035 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r1031.orderPromotions$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r1035.orderPromotions$));
 } }
 function OrderConfirmationItemsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 1);
@@ -6610,14 +6527,14 @@ function OrderConfirmationItemsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(5, "cx-cart-item-list", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r1030 = ctx.ngIf;
-    const ctx_r1029 = ɵngcc0.ɵɵnextContext();
+    const order_r1034 = ctx.ngIf;
+    const ctx_r1033 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 5, "checkoutOrderConfirmation.orderItems"), " ");
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵproperty("cxFeatureLevel", "1.5");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("items", order_r1030.entries)("readonly", true)("promotionLocation", ctx_r1029.promotionLocation);
+    ɵngcc0.ɵɵproperty("items", order_r1034.entries)("readonly", true)("promotionLocation", ctx_r1033.promotionLocation);
 } }
 function OrderConfirmationOverviewComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 1);
@@ -6651,26 +6568,26 @@ function OrderConfirmationOverviewComponent_div_0_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r1035 = ctx.ngIf;
-    const ctx_r1034 = ɵngcc0.ɵɵnextContext();
+    const order_r1039 = ctx.ngIf;
+    const ctx_r1038 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(6, 4, ctx_r1034.getAddressCardContent(order_r1035 == null ? null : order_r1035.deliveryAddress)));
+    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(6, 4, ctx_r1038.getAddressCardContent(order_r1039 == null ? null : order_r1039.deliveryAddress)));
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(10, 6, ctx_r1034.getBillingAddressCardContent(order_r1035 == null ? null : order_r1035.paymentInfo == null ? null : order_r1035.paymentInfo.billingAddress)));
+    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(10, 6, ctx_r1038.getBillingAddressCardContent(order_r1039 == null ? null : order_r1039.paymentInfo == null ? null : order_r1039.paymentInfo.billingAddress)));
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(14, 8, ctx_r1034.getDeliveryModeCardContent(order_r1035 == null ? null : order_r1035.deliveryMode)));
+    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(14, 8, ctx_r1038.getDeliveryModeCardContent(order_r1039 == null ? null : order_r1039.deliveryMode)));
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(18, 10, ctx_r1034.getPaymentInfoCardContent(order_r1035 == null ? null : order_r1035.paymentInfo)));
+    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(18, 10, ctx_r1038.getPaymentInfoCardContent(order_r1039 == null ? null : order_r1039.paymentInfo)));
 } }
 function OrderConfirmationThankYouMessageComponent_ng_container_0_div_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelement(1, "cx-guest-register-form", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r1037 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r1038 = ɵngcc0.ɵɵnextContext();
+    const order_r1041 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r1042 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("guid", ctx_r1038.orderGuid)("email", order_r1037.paymentInfo.billingAddress.email);
+    ɵngcc0.ɵɵproperty("guid", ctx_r1042.orderGuid)("email", order_r1041.paymentInfo.billingAddress.email);
 } }
 function OrderConfirmationThankYouMessageComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -6694,16 +6611,16 @@ function OrderConfirmationThankYouMessageComponent_ng_container_0_Template(rf, c
     ɵngcc0.ɵɵelement(13, "cx-add-to-home-screen-banner");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const order_r1037 = ctx.ngIf;
-    const ctx_r1036 = ɵngcc0.ɵɵnextContext();
+    const order_r1041 = ctx.ngIf;
+    const ctx_r1040 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(4, 5, "checkoutOrderConfirmation.confirmationOfOrder"), " ", order_r1037.code, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(4, 5, "checkoutOrderConfirmation.confirmationOfOrder"), " ", order_r1041.code, " ");
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(8, 7, "checkoutOrderConfirmation.thankYou"));
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(11, 9, "checkoutOrderConfirmation.invoiceHasBeenSentByEmail"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1036.isGuestCustomer);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1040.isGuestCustomer);
 } }
 function OrderConfirmationTotalsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 1);
@@ -6714,9 +6631,9 @@ function OrderConfirmationTotalsComponent_div_0_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r1041 = ctx.ngIf;
+    const order_r1045 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("cart", order_r1041);
+    ɵngcc0.ɵɵproperty("cart", order_r1045);
 } }
 function GuestRegisterFormComponent_div_16_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 9);
@@ -6740,12 +6657,12 @@ function GuestRegisterFormComponent_div_24_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(3, 1, "register.bothPasswordMustMatch"));
 } }
-const _c42 = function (a0) { return { email: a0 }; };
+const _c41 = function (a0) { return { email: a0 }; };
 function ProductCarouselComponent_ng_template_3_cx_media_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-media", 5);
 } if (rf & 2) {
-    const item_r1046 = ɵngcc0.ɵɵnextContext().item;
-    ɵngcc0.ɵɵproperty("container", item_r1046.images.PRIMARY);
+    const item_r1050 = ɵngcc0.ɵɵnextContext().item;
+    ɵngcc0.ɵɵproperty("container", item_r1050.images.PRIMARY);
 } }
 function ProductCarouselComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "a", 2);
@@ -6759,20 +6676,20 @@ function ProductCarouselComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r1046 = ctx.item;
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 4, ɵngcc0.ɵɵpureFunction1(6, _c14, item_r1046)));
+    const item_r1050 = ctx.item;
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 4, ɵngcc0.ɵɵpureFunction1(6, _c14, item_r1050)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", item_r1046.images == null ? null : item_r1046.images.PRIMARY);
+    ɵngcc0.ɵɵproperty("ngIf", item_r1050.images == null ? null : item_r1050.images.PRIMARY);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(item_r1046.name);
+    ɵngcc0.ɵɵtextInterpolate(item_r1050.name);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(item_r1046.price == null ? null : item_r1046.price.formattedValue);
+    ɵngcc0.ɵɵtextInterpolate(item_r1050.price == null ? null : item_r1050.price.formattedValue);
 } }
 function ProductReferencesComponent_ng_template_3_cx_media_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-media", 5);
 } if (rf & 2) {
-    const item_r1051 = ɵngcc0.ɵɵnextContext().item;
-    ɵngcc0.ɵɵproperty("container", item_r1051.images.PRIMARY);
+    const item_r1055 = ɵngcc0.ɵɵnextContext().item;
+    ɵngcc0.ɵɵproperty("container", item_r1055.images.PRIMARY);
 } }
 function ProductReferencesComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "a", 2);
@@ -6786,63 +6703,63 @@ function ProductReferencesComponent_ng_template_3_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r1051 = ctx.item;
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 4, ɵngcc0.ɵɵpureFunction1(6, _c14, item_r1051)));
+    const item_r1055 = ctx.item;
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 4, ɵngcc0.ɵɵpureFunction1(6, _c14, item_r1055)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", item_r1051.images == null ? null : item_r1051.images.PRIMARY);
+    ɵngcc0.ɵɵproperty("ngIf", item_r1055.images == null ? null : item_r1055.images.PRIMARY);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(item_r1051.name);
+    ɵngcc0.ɵɵtextInterpolate(item_r1055.name);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(item_r1051.price == null ? null : item_r1051.price.formattedValue);
+    ɵngcc0.ɵɵtextInterpolate(item_r1055.price == null ? null : item_r1055.price.formattedValue);
 } }
 function ProductImagesComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelement(1, "cx-media", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const main_r1058 = ctx.ngIf;
+    const main_r1062 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("container", main_r1058);
+    ɵngcc0.ɵɵproperty("container", main_r1062);
 } }
 function ProductImagesComponent_ng_container_2_cx_carousel_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-carousel", 4);
 } if (rf & 2) {
-    const thumbs_r1059 = ɵngcc0.ɵɵnextContext().ngIf;
+    const thumbs_r1063 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵnextContext();
-    const _r1056 = ɵngcc0.ɵɵreference(5);
-    ɵngcc0.ɵɵproperty("items", thumbs_r1059)("hideIndicators", false)("template", _r1056);
+    const _r1060 = ɵngcc0.ɵɵreference(5);
+    ɵngcc0.ɵɵproperty("items", thumbs_r1063)("hideIndicators", false)("template", _r1060);
 } }
 function ProductImagesComponent_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, ProductImagesComponent_ng_container_2_cx_carousel_1_Template, 1, 3, "cx-carousel", 3);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const thumbs_r1059 = ctx.ngIf;
+    const thumbs_r1063 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", thumbs_r1059.length);
+    ɵngcc0.ɵɵproperty("ngIf", thumbs_r1063.length);
 } }
 function ProductImagesComponent_ng_template_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1064 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1068 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-media", 5);
-    ɵngcc0.ɵɵlistener("focus", function ProductImagesComponent_ng_template_4_Template_cx_media_focus_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1064); const item_r1062 = ctx.item; const ctx_r1063 = ɵngcc0.ɵɵnextContext(); return ctx_r1063.openImage(item_r1062.container); });
+    ɵngcc0.ɵɵlistener("focus", function ProductImagesComponent_ng_template_4_Template_cx_media_focus_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1068); const item_r1066 = ctx.item; const ctx_r1067 = ɵngcc0.ɵɵnextContext(); return ctx_r1067.openImage(item_r1066.container); });
     ɵngcc0.ɵɵpipe(1, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r1062 = ctx.item;
-    const ctx_r1057 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵclassProp("is-active", ɵngcc0.ɵɵpipeBind1(1, 3, ctx_r1057.isActive(item_r1062.container)));
-    ɵngcc0.ɵɵproperty("container", item_r1062.container);
+    const item_r1066 = ctx.item;
+    const ctx_r1061 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵclassProp("is-active", ɵngcc0.ɵɵpipeBind1(1, 3, ctx_r1061.isActive(item_r1066.container)));
+    ɵngcc0.ɵɵproperty("container", item_r1066.container);
 } }
-function ProductIntroComponent_ng_container_0_div_1_a_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1071 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "a", 7);
-    ɵngcc0.ɵɵlistener("click", function ProductIntroComponent_ng_container_0_div_1_a_4_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1071); const ctx_r1070 = ɵngcc0.ɵɵnextContext(3); return ctx_r1070.showReviews(); });
+function ProductIntroComponent_ng_container_0_div_1_button_4_Template(rf, ctx) { if (rf & 1) {
+    const _r1075 = ɵngcc0.ɵɵgetCurrentView();
+    ɵngcc0.ɵɵelementStart(0, "button", 7);
+    ɵngcc0.ɵɵlistener("click", function ProductIntroComponent_ng_container_0_div_1_button_4_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1075); const ctx_r1074 = ɵngcc0.ɵɵnextContext(3); return ctx_r1074.showReviews(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(2, 1, "productSummary.showReviews"));
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "productSummary.showReviews"), " ");
 } }
 function ProductIntroComponent_ng_container_0_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -6850,18 +6767,18 @@ function ProductIntroComponent_ng_container_0_div_1_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵelementStart(2, "div", 5);
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵtemplate(4, ProductIntroComponent_ng_container_0_div_1_a_4_Template, 3, 3, "a", 6);
+    ɵngcc0.ɵɵtemplate(4, ProductIntroComponent_ng_container_0_div_1_button_4_Template, 3, 3, "button", 6);
     ɵngcc0.ɵɵpipe(5, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const product_r1066 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r1067 = ɵngcc0.ɵɵnextContext();
+    const product_r1070 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r1071 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("rating", product_r1066 == null ? null : product_r1066.averageRating)("disabled", true);
+    ɵngcc0.ɵɵproperty("rating", product_r1070 == null ? null : product_r1070.averageRating)("disabled", true);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1("(", product_r1066 == null ? null : product_r1066.numberOfReviews, ")");
+    ɵngcc0.ɵɵtextInterpolate1("(", product_r1070 == null ? null : product_r1070.numberOfReviews, ")");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 4, ctx_r1067.reviewsTabAvailable));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 4, ctx_r1071.reviewsTabAvailable));
 } }
 function ProductIntroComponent_ng_container_0_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -6882,25 +6799,25 @@ function ProductIntroComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r1066 = ctx.ngIf;
+    const product_r1070 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", product_r1066.averageRating);
+    ɵngcc0.ɵɵproperty("ngIf", product_r1070.averageRating);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !product_r1066.averageRating);
+    ɵngcc0.ɵɵproperty("ngIf", !product_r1070.averageRating);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(5, 4, "productSummary.id"), " ", product_r1066 == null ? null : product_r1066.code, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(5, 4, "productSummary.id"), " ", product_r1070 == null ? null : product_r1070.code, " ");
+} }
+function ProductViewComponent_cx_icon_1_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelement(0, "cx-icon", 2);
+} if (rf & 2) {
+    const ctx_r1077 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("type", ctx_r1077.iconTypes.GRID);
 } }
 function ProductViewComponent_cx_icon_2_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelement(0, "cx-icon", 3);
+    ɵngcc0.ɵɵelement(0, "cx-icon", 2);
 } if (rf & 2) {
-    const ctx_r1073 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("type", ctx_r1073.iconTypes.GRID);
-} }
-function ProductViewComponent_cx_icon_3_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelement(0, "cx-icon", 3);
-} if (rf & 2) {
-    const ctx_r1074 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("type", ctx_r1074.iconTypes.LIST);
+    const ctx_r1078 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("type", ctx_r1078.iconTypes.LIST);
 } }
 function ProductListComponent_div_0_div_4_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 19);
@@ -6909,15 +6826,15 @@ function ProductListComponent_div_0_div_4_div_7_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const model_r1076 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const model_r1080 = ɵngcc0.ɵɵnextContext(2).ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("pagination", model_r1076.pagination)("defaultPage", 0);
+    ɵngcc0.ɵɵproperty("pagination", model_r1080.pagination)("defaultPage", 0);
 } }
 function ProductListComponent_div_0_div_4_ng_container_11_ng_container_1_cx_product_grid_item_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-product-grid-item", 24);
 } if (rf & 2) {
-    const product_r1088 = ctx.$implicit;
-    ɵngcc0.ɵɵproperty("product", product_r1088);
+    const product_r1092 = ctx.$implicit;
+    ɵngcc0.ɵɵproperty("product", product_r1092);
 } }
 function ProductListComponent_div_0_div_4_ng_container_11_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -6926,24 +6843,24 @@ function ProductListComponent_div_0_div_4_ng_container_11_ng_container_1_Templat
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const model_r1076 = ɵngcc0.ɵɵnextContext(3).ngIf;
+    const model_r1080 = ɵngcc0.ɵɵnextContext(3).ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", model_r1076 == null ? null : model_r1076.products);
+    ɵngcc0.ɵɵproperty("ngForOf", model_r1080 == null ? null : model_r1080.products);
 } }
 function ProductListComponent_div_0_div_4_ng_container_11_ng_container_2_cx_product_list_item_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-product-list-item", 26);
 } if (rf & 2) {
-    const product_r1091 = ctx.$implicit;
-    ɵngcc0.ɵɵproperty("product", product_r1091);
+    const product_r1095 = ctx.$implicit;
+    ɵngcc0.ɵɵproperty("product", product_r1095);
 } }
 function ProductListComponent_div_0_div_4_ng_container_11_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, ProductListComponent_div_0_div_4_ng_container_11_ng_container_2_cx_product_list_item_1_Template, 1, 1, "cx-product-list-item", 25);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const model_r1076 = ɵngcc0.ɵɵnextContext(3).ngIf;
+    const model_r1080 = ɵngcc0.ɵɵnextContext(3).ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", model_r1076 == null ? null : model_r1076.products);
+    ɵngcc0.ɵɵproperty("ngForOf", model_r1080 == null ? null : model_r1080.products);
 } }
 function ProductListComponent_div_0_div_4_ng_container_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -6951,20 +6868,20 @@ function ProductListComponent_div_0_div_4_ng_container_11_Template(rf, ctx) { if
     ɵngcc0.ɵɵtemplate(2, ProductListComponent_div_0_div_4_ng_container_11_ng_container_2_Template, 2, 1, "ng-container", 22);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const viewMode_r1078 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r1080 = ɵngcc0.ɵɵnextContext(2);
+    const viewMode_r1082 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r1084 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", viewMode_r1078 === ctx_r1080.ViewModes.Grid);
+    ɵngcc0.ɵɵproperty("ngIf", viewMode_r1082 === ctx_r1084.ViewModes.Grid);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", viewMode_r1078 === ctx_r1080.ViewModes.List);
+    ɵngcc0.ɵɵproperty("ngIf", viewMode_r1082 === ctx_r1084.ViewModes.List);
 } }
 function ProductListComponent_div_0_div_4_ng_template_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-product-scroll", 27);
 } if (rf & 2) {
-    const viewMode_r1078 = ɵngcc0.ɵɵnextContext().ngIf;
-    const model_r1076 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r1082 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("scrollConfig", ctx_r1082.scrollConfig)("model", model_r1076)("inputViewMode", viewMode_r1078);
+    const viewMode_r1082 = ɵngcc0.ɵɵnextContext().ngIf;
+    const model_r1080 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r1086 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("scrollConfig", ctx_r1086.scrollConfig)("model", model_r1080)("inputViewMode", viewMode_r1082);
 } }
 function ProductListComponent_div_0_div_4_div_20_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 28);
@@ -6973,19 +6890,19 @@ function ProductListComponent_div_0_div_4_div_20_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const model_r1076 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const model_r1080 = ɵngcc0.ɵɵnextContext(2).ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("pagination", model_r1076.pagination)("defaultPage", 0);
+    ɵngcc0.ɵɵproperty("pagination", model_r1080.pagination)("defaultPage", 0);
 } }
 function ProductListComponent_div_0_div_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1098 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1102 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 6);
     ɵngcc0.ɵɵelementStart(1, "div", 7);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
     ɵngcc0.ɵɵelementStart(3, "div", 8);
     ɵngcc0.ɵɵelementStart(4, "div", 9);
     ɵngcc0.ɵɵelementStart(5, "cx-sorting", 10);
-    ɵngcc0.ɵɵlistener("sortListEvent", function ProductListComponent_div_0_div_4_Template_cx_sorting_sortListEvent_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1098); const ctx_r1097 = ɵngcc0.ɵɵnextContext(2); return ctx_r1097.sortList($event); });
+    ɵngcc0.ɵɵlistener("sortListEvent", function ProductListComponent_div_0_div_4_Template_cx_sorting_sortListEvent_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1102); const ctx_r1101 = ɵngcc0.ɵɵnextContext(2); return ctx_r1101.sortList($event); });
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -6993,7 +6910,7 @@ function ProductListComponent_div_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(7, ProductListComponent_div_0_div_4_div_7_Template, 3, 2, "div", 11);
     ɵngcc0.ɵɵelementStart(8, "div", 12);
     ɵngcc0.ɵɵelementStart(9, "cx-product-view", 13);
-    ɵngcc0.ɵɵlistener("modeChange", function ProductListComponent_div_0_div_4_Template_cx_product_view_modeChange_9_listener($event) { ɵngcc0.ɵɵrestoreView(_r1098); const ctx_r1099 = ɵngcc0.ɵɵnextContext(2); return ctx_r1099.setViewMode($event); });
+    ɵngcc0.ɵɵlistener("modeChange", function ProductListComponent_div_0_div_4_Template_cx_product_view_modeChange_9_listener($event) { ɵngcc0.ɵɵrestoreView(_r1102); const ctx_r1103 = ɵngcc0.ɵɵnextContext(2); return ctx_r1103.setViewMode($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -7007,7 +6924,7 @@ function ProductListComponent_div_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(16, "div", 8);
     ɵngcc0.ɵɵelementStart(17, "div", 9);
     ɵngcc0.ɵɵelementStart(18, "cx-sorting", 10);
-    ɵngcc0.ɵɵlistener("sortListEvent", function ProductListComponent_div_0_div_4_Template_cx_sorting_sortListEvent_18_listener($event) { ɵngcc0.ɵɵrestoreView(_r1098); const ctx_r1100 = ɵngcc0.ɵɵnextContext(2); return ctx_r1100.sortList($event); });
+    ɵngcc0.ɵɵlistener("sortListEvent", function ProductListComponent_div_0_div_4_Template_cx_sorting_sortListEvent_18_listener($event) { ɵngcc0.ɵɵrestoreView(_r1102); const ctx_r1104 = ɵngcc0.ɵɵnextContext(2); return ctx_r1104.sortList($event); });
     ɵngcc0.ɵɵpipe(19, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -7015,33 +6932,33 @@ function ProductListComponent_div_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(20, ProductListComponent_div_0_div_4_div_20_Template, 3, 2, "div", 18);
     ɵngcc0.ɵɵelementStart(21, "div", 12);
     ɵngcc0.ɵɵelementStart(22, "cx-product-view", 13);
-    ɵngcc0.ɵɵlistener("modeChange", function ProductListComponent_div_0_div_4_Template_cx_product_view_modeChange_22_listener($event) { ɵngcc0.ɵɵrestoreView(_r1098); const ctx_r1101 = ɵngcc0.ɵɵnextContext(2); return ctx_r1101.setViewMode($event); });
+    ɵngcc0.ɵɵlistener("modeChange", function ProductListComponent_div_0_div_4_Template_cx_product_view_modeChange_22_listener($event) { ɵngcc0.ɵɵrestoreView(_r1102); const ctx_r1105 = ɵngcc0.ɵɵnextContext(2); return ctx_r1105.setViewMode($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const viewMode_r1078 = ctx.ngIf;
-    const _r1081 = ɵngcc0.ɵɵreference(13);
-    const model_r1076 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r1077 = ɵngcc0.ɵɵnextContext();
+    const viewMode_r1082 = ctx.ngIf;
+    const _r1085 = ɵngcc0.ɵɵreference(13);
+    const model_r1080 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r1081 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 12, "productList.sortByRelevance"));
-    ɵngcc0.ɵɵproperty("sortOptions", model_r1076.sorts)("selectedOption", model_r1076.pagination.sort);
+    ɵngcc0.ɵɵproperty("sortOptions", model_r1080.sorts)("selectedOption", model_r1080.pagination.sort);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1077.isInfiniteScroll);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1081.isInfiniteScroll);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("mode", viewMode_r1078);
+    ɵngcc0.ɵɵproperty("mode", viewMode_r1082);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1077.isInfiniteScroll)("ngIfElse", _r1081);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1081.isInfiniteScroll)("ngIfElse", _r1085);
     ɵngcc0.ɵɵadvance(7);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(19, 14, "productList.sortByRelevance"));
-    ɵngcc0.ɵɵproperty("sortOptions", model_r1076.sorts)("selectedOption", model_r1076.pagination.sort);
+    ɵngcc0.ɵɵproperty("sortOptions", model_r1080.sorts)("selectedOption", model_r1080.pagination.sort);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1077.isInfiniteScroll);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1081.isInfiniteScroll);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("mode", viewMode_r1078);
+    ɵngcc0.ɵɵproperty("mode", viewMode_r1082);
 } }
 function ProductListComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 1);
@@ -7055,20 +6972,20 @@ function ProductListComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1075 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1079 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 1, ctx_r1075.viewMode$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 1, ctx_r1079.viewMode$));
 } }
 function ProductScrollComponent_ng_container_0_cx_product_grid_item_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-product-grid-item", 7);
 } if (rf & 2) {
-    const product_r1109 = ctx.$implicit;
-    ɵngcc0.ɵɵproperty("product", product_r1109);
+    const product_r1113 = ctx.$implicit;
+    ɵngcc0.ɵɵproperty("product", product_r1113);
 } }
 function ProductScrollComponent_ng_container_0_div_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1111 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1115 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 8);
-    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_0_div_5_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1111); const ctx_r1110 = ɵngcc0.ɵɵnextContext(2); return ctx_r1110.scrollToTop(); });
+    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_0_div_5_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1115); const ctx_r1114 = ɵngcc0.ɵɵnextContext(2); return ctx_r1114.scrollToTop(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7077,9 +6994,9 @@ function ProductScrollComponent_ng_container_0_div_5_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "productList.backToTopBtn"), " ");
 } }
 function ProductScrollComponent_ng_container_0_div_6_Template(rf, ctx) { if (rf & 1) {
-    const _r1113 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1117 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
-    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_0_div_6_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1113); const ctx_r1112 = ɵngcc0.ɵɵnextContext(2); return ctx_r1112.loadNextPage((ctx_r1112.model == null ? null : ctx_r1112.model.pagination == null ? null : ctx_r1112.model.pagination.currentPage) + 1); });
+    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_0_div_6_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1117); const ctx_r1116 = ɵngcc0.ɵɵnextContext(2); return ctx_r1116.loadNextPage((ctx_r1116.model == null ? null : ctx_r1116.model.pagination == null ? null : ctx_r1116.model.pagination.currentPage) + 1); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7093,10 +7010,10 @@ function ProductScrollComponent_ng_container_0_div_7_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
 } }
 function ProductScrollComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1115 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1119 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 1);
-    ɵngcc0.ɵɵlistener("scrolled", function ProductScrollComponent_ng_container_0_Template_div_scrolled_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1115); const ctx_r1114 = ɵngcc0.ɵɵnextContext(); return ctx_r1114.scrollPage((ctx_r1114.model == null ? null : ctx_r1114.model.pagination == null ? null : ctx_r1114.model.pagination.currentPage) + 1); });
+    ɵngcc0.ɵɵlistener("scrolled", function ProductScrollComponent_ng_container_0_Template_div_scrolled_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1119); const ctx_r1118 = ɵngcc0.ɵɵnextContext(); return ctx_r1118.scrollPage((ctx_r1118.model == null ? null : ctx_r1118.model.pagination == null ? null : ctx_r1118.model.pagination.currentPage) + 1); });
     ɵngcc0.ɵɵelementStart(2, "div", 2);
     ɵngcc0.ɵɵtemplate(3, ProductScrollComponent_ng_container_0_cx_product_grid_item_3_Template, 1, 1, "cx-product-grid-item", 3);
     ɵngcc0.ɵɵelementEnd();
@@ -7108,30 +7025,30 @@ function ProductScrollComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1103 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1107 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("infiniteScrollDistance", 5)("infiniteScrollThrottle", 50)("infiniteScrollDisabled", ctx_r1103.isMaxProducts || ctx_r1103.isLastPage || ctx_r1103.isEmpty);
+    ɵngcc0.ɵɵproperty("infiniteScrollDistance", 5)("infiniteScrollThrottle", 50)("infiniteScrollDisabled", ctx_r1107.isMaxProducts || ctx_r1107.isLastPage || ctx_r1107.isEmpty);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1103.model == null ? null : ctx_r1103.model.products);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1107.model == null ? null : ctx_r1107.model.products);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵclassMap(!ctx_r1103.isLastPage && (ctx_r1103.model == null ? null : ctx_r1103.model.pagination == null ? null : ctx_r1103.model.pagination.currentPage) > 0 ? "cx-double-btn-container grid-btn-padding" : "cx-single-btn-container grid-btn-padding");
+    ɵngcc0.ɵɵclassMap(!ctx_r1107.isLastPage && (ctx_r1107.model == null ? null : ctx_r1107.model.pagination == null ? null : ctx_r1107.model.pagination.currentPage) > 0 ? "cx-double-btn-container grid-btn-padding" : "cx-single-btn-container grid-btn-padding");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", (ctx_r1103.isMaxProducts || ctx_r1103.isLastPage) && (ctx_r1103.model == null ? null : ctx_r1103.model.pagination == null ? null : ctx_r1103.model.pagination.currentPage) > 0);
+    ɵngcc0.ɵɵproperty("ngIf", (ctx_r1107.isMaxProducts || ctx_r1107.isLastPage) && (ctx_r1107.model == null ? null : ctx_r1107.model.pagination == null ? null : ctx_r1107.model.pagination.currentPage) > 0);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1103.isMaxProducts && !ctx_r1103.isLastPage);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1107.isMaxProducts && !ctx_r1107.isLastPage);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1103.appendProducts);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1107.appendProducts);
 } }
 function ProductScrollComponent_ng_container_1_cx_product_list_item_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-product-list-item", 12);
 } if (rf & 2) {
-    const product_r1120 = ctx.$implicit;
-    ɵngcc0.ɵɵproperty("product", product_r1120);
+    const product_r1124 = ctx.$implicit;
+    ɵngcc0.ɵɵproperty("product", product_r1124);
 } }
 function ProductScrollComponent_ng_container_1_div_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1122 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1126 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 8);
-    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_1_div_4_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1122); const ctx_r1121 = ɵngcc0.ɵɵnextContext(2); return ctx_r1121.scrollToTop(); });
+    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_1_div_4_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1126); const ctx_r1125 = ɵngcc0.ɵɵnextContext(2); return ctx_r1125.scrollToTop(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7140,9 +7057,9 @@ function ProductScrollComponent_ng_container_1_div_4_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "productList.backToTopBtn"), " ");
 } }
 function ProductScrollComponent_ng_container_1_div_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1124 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1128 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
-    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_1_div_5_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1124); const ctx_r1123 = ɵngcc0.ɵɵnextContext(2); return ctx_r1123.loadNextPage((ctx_r1123.model == null ? null : ctx_r1123.model.pagination == null ? null : ctx_r1123.model.pagination.currentPage) + 1); });
+    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_1_div_5_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1128); const ctx_r1127 = ɵngcc0.ɵɵnextContext(2); return ctx_r1127.loadNextPage((ctx_r1127.model == null ? null : ctx_r1127.model.pagination == null ? null : ctx_r1127.model.pagination.currentPage) + 1); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7156,10 +7073,10 @@ function ProductScrollComponent_ng_container_1_div_6_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
 } }
 function ProductScrollComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1126 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1130 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 1);
-    ɵngcc0.ɵɵlistener("scrolled", function ProductScrollComponent_ng_container_1_Template_div_scrolled_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1126); const ctx_r1125 = ɵngcc0.ɵɵnextContext(); return ctx_r1125.scrollPage((ctx_r1125.model == null ? null : ctx_r1125.model.pagination == null ? null : ctx_r1125.model.pagination.currentPage) + 1); });
+    ɵngcc0.ɵɵlistener("scrolled", function ProductScrollComponent_ng_container_1_Template_div_scrolled_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1130); const ctx_r1129 = ɵngcc0.ɵɵnextContext(); return ctx_r1129.scrollPage((ctx_r1129.model == null ? null : ctx_r1129.model.pagination == null ? null : ctx_r1129.model.pagination.currentPage) + 1); });
     ɵngcc0.ɵɵtemplate(2, ProductScrollComponent_ng_container_1_cx_product_list_item_2_Template, 1, 1, "cx-product-list-item", 11);
     ɵngcc0.ɵɵelementStart(3, "div");
     ɵngcc0.ɵɵtemplate(4, ProductScrollComponent_ng_container_1_div_4_Template, 3, 3, "div", 4);
@@ -7169,41 +7086,41 @@ function ProductScrollComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1104 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1108 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("infiniteScrollDistance", 3)("infiniteScrollThrottle", 50)("infiniteScrollDisabled", ctx_r1104.isMaxProducts || ctx_r1104.isLastPage || ctx_r1104.isEmpty);
+    ɵngcc0.ɵɵproperty("infiniteScrollDistance", 3)("infiniteScrollThrottle", 50)("infiniteScrollDisabled", ctx_r1108.isMaxProducts || ctx_r1108.isLastPage || ctx_r1108.isEmpty);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1104.model == null ? null : ctx_r1104.model.products);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1108.model == null ? null : ctx_r1108.model.products);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵclassMap(!ctx_r1104.isLastPage && (ctx_r1104.model == null ? null : ctx_r1104.model.pagination == null ? null : ctx_r1104.model.pagination.currentPage) > 0 ? "cx-double-btn-container" : "cx-single-btn-container");
+    ɵngcc0.ɵɵclassMap(!ctx_r1108.isLastPage && (ctx_r1108.model == null ? null : ctx_r1108.model.pagination == null ? null : ctx_r1108.model.pagination.currentPage) > 0 ? "cx-double-btn-container" : "cx-single-btn-container");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", (ctx_r1104.isMaxProducts || ctx_r1104.isLastPage) && (ctx_r1104.model == null ? null : ctx_r1104.model.pagination == null ? null : ctx_r1104.model.pagination.currentPage) > 0);
+    ɵngcc0.ɵɵproperty("ngIf", (ctx_r1108.isMaxProducts || ctx_r1108.isLastPage) && (ctx_r1108.model == null ? null : ctx_r1108.model.pagination == null ? null : ctx_r1108.model.pagination.currentPage) > 0);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1104.isMaxProducts && !ctx_r1104.isLastPage);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1108.isMaxProducts && !ctx_r1108.isLastPage);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1104.appendProducts);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1108.appendProducts);
 } }
 function ProductFacetNavigationComponent_ng_container_0_ng_container_2_div_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1137 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1141 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 10);
     ɵngcc0.ɵɵelementStart(1, "span", 11);
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(3, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_2_div_5_Template_button_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r1137); const breadcrumb_r1135 = ctx.$implicit; const ctx_r1136 = ɵngcc0.ɵɵnextContext(3); return ctx_r1136.toggleValue(breadcrumb_r1135.removeQuery.query.value); });
+    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_2_div_5_Template_button_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r1141); const breadcrumb_r1139 = ctx.$implicit; const ctx_r1140 = ɵngcc0.ɵɵnextContext(3); return ctx_r1140.toggleValue(breadcrumb_r1139.removeQuery.query.value); });
     ɵngcc0.ɵɵelementStart(4, "span", 13);
     ɵngcc0.ɵɵelement(5, "cx-icon", 14);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const breadcrumb_r1135 = ctx.$implicit;
-    const ctx_r1134 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵproperty("hidden", breadcrumb_r1135.facetValueCode === ctx_r1134.activeFacetValueCode);
+    const breadcrumb_r1139 = ctx.$implicit;
+    const ctx_r1138 = ɵngcc0.ɵɵnextContext(3);
+    ɵngcc0.ɵɵproperty("hidden", breadcrumb_r1139.facetValueCode === ctx_r1138.activeFacetValueCode);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(breadcrumb_r1135.facetValueName);
+    ɵngcc0.ɵɵtextInterpolate(breadcrumb_r1139.facetValueName);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r1134.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r1138.iconTypes.CLOSE);
 } }
 function ProductFacetNavigationComponent_ng_container_0_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -7216,37 +7133,37 @@ function ProductFacetNavigationComponent_ng_container_0_ng_container_2_Template(
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const searchResult_r1128 = ɵngcc0.ɵɵnextContext().ngIf;
+    const searchResult_r1132 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "productList.filterBy.label"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", searchResult_r1128.breadcrumbs);
+    ɵngcc0.ɵɵproperty("ngForOf", searchResult_r1132.breadcrumbs);
 } }
 function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_2_Template(rf, ctx) { if (rf & 1) {
-    const _r1150 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1154 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li");
-    ɵngcc0.ɵɵelementStart(1, "div", 21);
-    ɵngcc0.ɵɵelementStart(2, "label", 22);
-    ɵngcc0.ɵɵelementStart(3, "input", 23);
-    ɵngcc0.ɵɵlistener("change", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_2_Template_input_change_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r1150); const value_r1147 = ctx.$implicit; const ctx_r1149 = ɵngcc0.ɵɵnextContext(5); return ctx_r1149.toggleValue(value_r1147.query.query.value); });
+    ɵngcc0.ɵɵelementStart(1, "div", 22);
+    ɵngcc0.ɵɵelementStart(2, "label", 23);
+    ɵngcc0.ɵɵelementStart(3, "input", 24);
+    ɵngcc0.ɵɵlistener("change", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_2_Template_input_change_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r1154); const value_r1151 = ctx.$implicit; const ctx_r1153 = ɵngcc0.ɵɵnextContext(5); return ctx_r1153.toggleValue(value_r1151.query.query.value); });
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(4, "span", 24);
+    ɵngcc0.ɵɵelementStart(4, "span", 25);
     ɵngcc0.ɵɵtext(5);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const value_r1147 = ctx.$implicit;
+    const value_r1151 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("checked", value_r1147.selected);
+    ɵngcc0.ɵɵproperty("checked", value_r1151.selected);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2("", value_r1147.name, " (", value_r1147.count, ")");
+    ɵngcc0.ɵɵtextInterpolate2("", value_r1151.name, " (", value_r1151.count, ")");
 } }
 function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_3_Template(rf, ctx) { if (rf & 1) {
-    const _r1153 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "li", 25);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_3_Template_li_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1153); const facet_r1141 = ɵngcc0.ɵɵnextContext(2).$implicit; const ctx_r1151 = ɵngcc0.ɵɵnextContext(3); return ctx_r1151.showLess(facet_r1141.name); });
+    const _r1157 = ɵngcc0.ɵɵgetCurrentView();
+    ɵngcc0.ɵɵelementStart(0, "li", 26);
+    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_3_Template_li_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1157); const facet_r1145 = ɵngcc0.ɵɵnextContext(2).$implicit; const ctx_r1155 = ɵngcc0.ɵɵnextContext(3); return ctx_r1155.showLess(facet_r1145.name); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7255,9 +7172,9 @@ function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_contai
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "productList.showLess"), " ");
 } }
 function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1156 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "li", 25);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_4_Template_li_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1156); const facet_r1141 = ɵngcc0.ɵɵnextContext(2).$implicit; const ctx_r1154 = ɵngcc0.ɵɵnextContext(3); return ctx_r1154.showMore(facet_r1141.name); });
+    const _r1160 = ɵngcc0.ɵɵgetCurrentView();
+    ɵngcc0.ɵɵelementStart(0, "li", 27);
+    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_4_Template_li_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1160); const facet_r1145 = ɵngcc0.ɵɵnextContext(2).$implicit; const ctx_r1158 = ɵngcc0.ɵɵnextContext(3); return ctx_r1158.showMore(facet_r1145.name); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7270,26 +7187,26 @@ function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_contai
     ɵngcc0.ɵɵelementStart(1, "ul", 19);
     ɵngcc0.ɵɵtemplate(2, ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_2_Template, 6, 3, "li", 15);
     ɵngcc0.ɵɵtemplate(3, ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_3_Template, 3, 3, "li", 20);
-    ɵngcc0.ɵɵtemplate(4, ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_4_Template, 3, 3, "li", 20);
+    ɵngcc0.ɵɵtemplate(4, ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_4_Template, 3, 3, "li", 21);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const facet_r1141 = ɵngcc0.ɵɵnextContext().$implicit;
-    const ctx_r1143 = ɵngcc0.ɵɵnextContext(3);
+    const facet_r1145 = ɵngcc0.ɵɵnextContext().$implicit;
+    const ctx_r1147 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1143.getVisibleFacetValues(facet_r1141));
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1147.getVisibleFacetValues(facet_r1145));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1143.showAllPerFacetMap.get(facet_r1141.name));
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1147.showAllPerFacetMap.get(facet_r1145.name));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1143.showAllPerFacetMap.get(facet_r1141.name) && facet_r1141.values.length > facet_r1141.topValueCount);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1147.showAllPerFacetMap.get(facet_r1145.name) && facet_r1145.values.length > facet_r1145.topValueCount);
 } }
 function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1159 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1163 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 16);
     ɵngcc0.ɵɵelementStart(2, "div", 17);
     ɵngcc0.ɵɵelementStart(3, "a", 18);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_Template_a_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r1159); const facet_r1141 = ctx.$implicit; const ctx_r1158 = ɵngcc0.ɵɵnextContext(3); return ctx_r1158.toggleFacet(facet_r1141.name); });
+    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_Template_a_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r1163); const facet_r1145 = ctx.$implicit; const ctx_r1162 = ɵngcc0.ɵɵnextContext(3); return ctx_r1162.toggleFacet(facet_r1145.name); });
     ɵngcc0.ɵɵtext(4);
     ɵngcc0.ɵɵelement(5, "cx-icon", 14);
     ɵngcc0.ɵɵelementEnd();
@@ -7298,46 +7215,46 @@ function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_contai
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const facet_r1141 = ctx.$implicit;
-    const ctx_r1140 = ɵngcc0.ɵɵnextContext(3);
+    const facet_r1145 = ctx.$implicit;
+    const ctx_r1144 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵattribute("aria-expanded", !ctx_r1140.isFacetCollapsed(facet_r1141.name));
+    ɵngcc0.ɵɵattribute("aria-expanded", !ctx_r1144.isFacetCollapsed(facet_r1145.name));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", facet_r1141.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", facet_r1145.name, " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r1140.isFacetCollapsed(facet_r1141.name) ? ctx_r1140.iconTypes.EXPAND : ctx_r1140.iconTypes.COLLAPSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r1144.isFacetCollapsed(facet_r1145.name) ? ctx_r1144.iconTypes.EXPAND : ctx_r1144.iconTypes.COLLAPSE);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1140.isFacetCollapsed(facet_r1141.name));
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1144.isFacetCollapsed(facet_r1145.name));
 } }
 function ProductFacetNavigationComponent_ng_container_0_ng_container_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_Template, 7, 4, "ng-container", 15);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const visibleFacets_r1139 = ctx.ngIf;
+    const visibleFacets_r1143 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", visibleFacets_r1139);
+    ɵngcc0.ɵɵproperty("ngForOf", visibleFacets_r1143);
 } }
 function ProductFacetNavigationComponent_ng_container_0_div_11_div_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1163 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "div", 27);
+    const _r1167 = ɵngcc0.ɵɵgetCurrentView();
+    ɵngcc0.ɵɵelementStart(0, "div", 29);
     ɵngcc0.ɵɵelementStart(1, "span", 11);
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(3, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_div_11_div_5_Template_button_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r1163); const breadcrumb_r1161 = ctx.$implicit; const ctx_r1162 = ɵngcc0.ɵɵnextContext(3); return ctx_r1162.toggleValue(breadcrumb_r1161.removeQuery.query.value); });
+    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_div_11_div_5_Template_button_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r1167); const breadcrumb_r1165 = ctx.$implicit; const ctx_r1166 = ɵngcc0.ɵɵnextContext(3); return ctx_r1166.toggleValue(breadcrumb_r1165.removeQuery.query.value); });
     ɵngcc0.ɵɵelementStart(4, "span", 13);
     ɵngcc0.ɵɵelement(5, "cx-icon", 14);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const breadcrumb_r1161 = ctx.$implicit;
-    const ctx_r1160 = ɵngcc0.ɵɵnextContext(3);
+    const breadcrumb_r1165 = ctx.$implicit;
+    const ctx_r1164 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", breadcrumb_r1161.facetValueName, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", breadcrumb_r1165.facetValueName, " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r1160.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r1164.iconTypes.CLOSE);
 } }
 function ProductFacetNavigationComponent_ng_container_0_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 2);
@@ -7346,85 +7263,85 @@ function ProductFacetNavigationComponent_ng_container_0_div_11_Template(rf, ctx)
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵtemplate(5, ProductFacetNavigationComponent_ng_container_0_div_11_div_5_Template, 6, 2, "div", 26);
+    ɵngcc0.ɵɵtemplate(5, ProductFacetNavigationComponent_ng_container_0_div_11_div_5_Template, 6, 2, "div", 28);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const searchResult_r1128 = ɵngcc0.ɵɵnextContext().ngIf;
+    const searchResult_r1132 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 2, "productList.appliedFilter"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", searchResult_r1128.breadcrumbs);
+    ɵngcc0.ɵɵproperty("ngForOf", searchResult_r1132.breadcrumbs);
 } }
 function ProductFacetNavigationComponent_ng_container_0_ng_template_12_div_9_li_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1174 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1178 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li");
-    ɵngcc0.ɵɵelementStart(1, "div", 21);
-    ɵngcc0.ɵɵelementStart(2, "label", 22);
-    ɵngcc0.ɵɵelementStart(3, "input", 23);
-    ɵngcc0.ɵɵlistener("change", function ProductFacetNavigationComponent_ng_container_0_ng_template_12_div_9_li_5_Template_input_change_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r1174); const value_r1171 = ctx.$implicit; const ctx_r1173 = ɵngcc0.ɵɵnextContext(4); return ctx_r1173.toggleValue(value_r1171.query.query.value); });
+    ɵngcc0.ɵɵelementStart(1, "div", 22);
+    ɵngcc0.ɵɵelementStart(2, "label", 23);
+    ɵngcc0.ɵɵelementStart(3, "input", 24);
+    ɵngcc0.ɵɵlistener("change", function ProductFacetNavigationComponent_ng_container_0_ng_template_12_div_9_li_5_Template_input_change_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r1178); const value_r1175 = ctx.$implicit; const ctx_r1177 = ɵngcc0.ɵɵnextContext(4); return ctx_r1177.toggleValue(value_r1175.query.query.value); });
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(4, "span", 24);
+    ɵngcc0.ɵɵelementStart(4, "span", 25);
     ɵngcc0.ɵɵtext(5);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const value_r1171 = ctx.$implicit;
+    const value_r1175 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("checked", value_r1171.selected);
+    ɵngcc0.ɵɵproperty("checked", value_r1175.selected);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2("", value_r1171.name, " (", value_r1171.count, ")");
+    ɵngcc0.ɵɵtextInterpolate2("", value_r1175.name, " (", value_r1175.count, ")");
 } }
 function ProductFacetNavigationComponent_ng_container_0_ng_template_12_div_9_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 32);
-    ɵngcc0.ɵɵelementStart(1, "h4", 33);
+    ɵngcc0.ɵɵelementStart(0, "div", 34);
+    ɵngcc0.ɵɵelementStart(1, "h4", 35);
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(3, "div", 34);
+    ɵngcc0.ɵɵelementStart(3, "div", 36);
     ɵngcc0.ɵɵelementStart(4, "ul", 19);
     ɵngcc0.ɵɵtemplate(5, ProductFacetNavigationComponent_ng_container_0_ng_template_12_div_9_li_5_Template, 6, 3, "li", 15);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const facet_r1168 = ctx.$implicit;
+    const facet_r1172 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", facet_r1168.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", facet_r1172.name, " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", facet_r1168.values);
+    ɵngcc0.ɵɵproperty("ngForOf", facet_r1172.values);
 } }
 function ProductFacetNavigationComponent_ng_container_0_ng_template_12_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 28);
-    ɵngcc0.ɵɵelementStart(1, "h4", 29);
+    ɵngcc0.ɵɵelementStart(0, "div", 30);
+    ɵngcc0.ɵɵelementStart(1, "h4", 31);
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_template_12_Template_button_click_4_listener($event) { const d_r1166 = ctx.dismiss; return d_r1166("Cross click"); });
+    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_template_12_Template_button_click_4_listener($event) { const d_r1170 = ctx.dismiss; return d_r1170("Cross click"); });
     ɵngcc0.ɵɵelementStart(5, "span", 13);
     ɵngcc0.ɵɵelement(6, "cx-icon", 14);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(7, "div", 30);
+    ɵngcc0.ɵɵelementStart(7, "div", 32);
     ɵngcc0.ɵɵelementStart(8, "form");
-    ɵngcc0.ɵɵtemplate(9, ProductFacetNavigationComponent_ng_container_0_ng_template_12_div_9_Template, 6, 2, "div", 31);
+    ɵngcc0.ɵɵtemplate(9, ProductFacetNavigationComponent_ng_container_0_ng_template_12_div_9_Template, 6, 2, "div", 33);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const searchResult_r1128 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r1133 = ɵngcc0.ɵɵnextContext();
+    const searchResult_r1132 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r1137 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 3, "productList.filterBy.label"), " ");
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("type", ctx_r1133.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r1137.iconTypes.CLOSE);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", searchResult_r1128.facets);
+    ɵngcc0.ɵɵproperty("ngForOf", searchResult_r1132.facets);
 } }
 function ProductFacetNavigationComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1178 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1182 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 1);
     ɵngcc0.ɵɵtemplate(2, ProductFacetNavigationComponent_ng_container_0_ng_container_2_Template, 6, 4, "ng-container", 0);
@@ -7434,7 +7351,7 @@ function ProductFacetNavigationComponent_ng_container_0_Template(rf, ctx) { if (
     ɵngcc0.ɵɵelementStart(5, "div", 2);
     ɵngcc0.ɵɵelementStart(6, "div", 3);
     ɵngcc0.ɵɵelementStart(7, "button", 4);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_Template_button_click_7_listener($event) { ɵngcc0.ɵɵrestoreView(_r1178); const _r1132 = ɵngcc0.ɵɵreference(13); const ctx_r1177 = ɵngcc0.ɵɵnextContext(); return ctx_r1177.openFilterModal(_r1132); });
+    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_Template_button_click_7_listener($event) { ɵngcc0.ɵɵrestoreView(_r1182); const _r1136 = ɵngcc0.ɵɵreference(13); const ctx_r1181 = ɵngcc0.ɵɵnextContext(); return ctx_r1181.openFilterModal(_r1136); });
     ɵngcc0.ɵɵtext(8);
     ɵngcc0.ɵɵpipe(9, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7446,22 +7363,22 @@ function ProductFacetNavigationComponent_ng_container_0_Template(rf, ctx) { if (
     ɵngcc0.ɵɵtemplate(12, ProductFacetNavigationComponent_ng_container_0_ng_template_12_Template, 10, 5, "ng-template", null, 6, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const searchResult_r1128 = ctx.ngIf;
-    const ctx_r1127 = ɵngcc0.ɵɵnextContext();
+    const searchResult_r1132 = ctx.ngIf;
+    const ctx_r1131 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", searchResult_r1128.breadcrumbs == null ? null : searchResult_r1128.breadcrumbs.length);
+    ɵngcc0.ɵɵproperty("ngIf", searchResult_r1132.breadcrumbs == null ? null : searchResult_r1132.breadcrumbs.length);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(4, 4, ctx_r1127.visibleFacets$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(4, 4, ctx_r1131.visibleFacets$));
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(9, 6, "productList.filterBy.action"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", searchResult_r1128.breadcrumbs == null ? null : searchResult_r1128.breadcrumbs.length);
+    ɵngcc0.ɵɵproperty("ngIf", searchResult_r1132.breadcrumbs == null ? null : searchResult_r1132.breadcrumbs.length);
 } }
 function ProductGridItemComponent_cx_star_rating_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-star-rating", 10);
 } if (rf & 2) {
-    const ctx_r1179 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("rating", ctx_r1179.product == null ? null : ctx_r1179.product.averageRating)("disabled", true);
+    const ctx_r1183 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("rating", ctx_r1183.product == null ? null : ctx_r1183.product.averageRating)("disabled", true);
 } }
 function ProductGridItemComponent_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -7477,30 +7394,30 @@ function ProductGridItemComponent_ng_container_11_div_1_Template(rf, ctx) { if (
     ɵngcc0.ɵɵelement(1, "cx-variant-style-icons", 13);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1183 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1187 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("variants", ctx_r1183.product.variantOptions);
+    ɵngcc0.ɵɵproperty("variants", ctx_r1187.product.variantOptions);
 } }
 function ProductGridItemComponent_ng_container_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, ProductGridItemComponent_ng_container_11_div_1_Template, 2, 1, "div", 11);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1181 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1185 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1181.product.variantOptions);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1185.product.variantOptions);
 } }
 function ProductGridItemComponent_cx_add_to_cart_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-add-to-cart", 14);
 } if (rf & 2) {
-    const ctx_r1182 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1182.product);
+    const ctx_r1186 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1186.product);
 } }
 function ProductListItemComponent_cx_star_rating_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-star-rating", 12);
 } if (rf & 2) {
-    const ctx_r1184 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("rating", ctx_r1184.product == null ? null : ctx_r1184.product.averageRating)("disabled", true);
+    const ctx_r1188 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("rating", ctx_r1188.product == null ? null : ctx_r1188.product.averageRating)("disabled", true);
 } }
 function ProductListItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 13);
@@ -7514,43 +7431,43 @@ function ProductListItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
 function ProductListItemComponent_ng_container_12_cx_variant_style_icons_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-variant-style-icons", 15);
 } if (rf & 2) {
-    const ctx_r1188 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("variants", ctx_r1188.product.variantOptions);
+    const ctx_r1192 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("variants", ctx_r1192.product.variantOptions);
 } }
 function ProductListItemComponent_ng_container_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, ProductListItemComponent_ng_container_12_cx_variant_style_icons_1_Template, 1, 1, "cx-variant-style-icons", 14);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1186 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1190 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1186.product.variantOptions);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1190.product.variantOptions);
 } }
 function ProductListItemComponent_cx_add_to_cart_18_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-add-to-cart", 16);
 } if (rf & 2) {
-    const ctx_r1187 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1187.product);
+    const ctx_r1191 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1191.product);
 } }
 function ProductVariantsComponent_ng_container_0_div_1_cx_variant_style_selector_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-variant-style-selector", 5);
 } if (rf & 2) {
-    const ctx_r1192 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵproperty("variants", ctx_r1192.variants[ctx_r1192.variantType.STYLE]);
+    const ctx_r1196 = ɵngcc0.ɵɵnextContext(3);
+    ɵngcc0.ɵɵproperty("variants", ctx_r1196.variants[ctx_r1196.variantType.STYLE]);
 } }
 function ProductVariantsComponent_ng_container_0_div_1_cx_variant_size_selector_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-variant-size-selector", 6);
 } if (rf & 2) {
-    const product_r1190 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r1193 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("product", product_r1190)("variants", ctx_r1193.variants[ctx_r1193.variantType.SIZE]);
+    const product_r1194 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r1197 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("product", product_r1194)("variants", ctx_r1197.variants[ctx_r1197.variantType.SIZE]);
 } }
 function ProductVariantsComponent_ng_container_0_div_1_cx_variant_color_selector_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-variant-color-selector", 6);
 } if (rf & 2) {
-    const product_r1190 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r1194 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("product", product_r1190)("variants", ctx_r1194.variants[ctx_r1194.variantType.COLOR]);
+    const product_r1194 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r1198 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("product", product_r1194)("variants", ctx_r1198.variants[ctx_r1198.variantType.COLOR]);
 } }
 function ProductVariantsComponent_ng_container_0_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 2);
@@ -7559,22 +7476,22 @@ function ProductVariantsComponent_ng_container_0_div_1_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵtemplate(3, ProductVariantsComponent_ng_container_0_div_1_cx_variant_color_selector_3_Template, 1, 2, "cx-variant-color-selector", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1191 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1195 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1191.variants[ctx_r1191.variantType.STYLE]);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1195.variants[ctx_r1195.variantType.STYLE]);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1191.variants[ctx_r1191.variantType.SIZE]);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1195.variants[ctx_r1195.variantType.SIZE]);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1191.variants[ctx_r1191.variantType.COLOR]);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1195.variants[ctx_r1195.variantType.COLOR]);
 } }
 function ProductVariantsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, ProductVariantsComponent_ng_container_0_div_1_Template, 4, 3, "div", 1);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r1190 = ctx.ngIf;
+    const product_r1194 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", product_r1190.baseOptions == null ? null : product_r1190.baseOptions.length);
+    ɵngcc0.ɵɵproperty("ngIf", product_r1194.baseOptions == null ? null : product_r1194.baseOptions.length);
 } }
 function VariantStyleSelectorComponent_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 4);
@@ -7585,100 +7502,100 @@ function VariantStyleSelectorComponent_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1197 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1201 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "variant.style"), ": ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1197.getVariantOptionValue(ctx_r1197.variants == null ? null : ctx_r1197.variants.selected.variantOptionQualifiers));
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1201.getVariantOptionValue(ctx_r1201.variants == null ? null : ctx_r1201.variants.selected.variantOptionQualifiers));
 } }
-const _c43 = function (a0) { return { "selected-variant": a0 }; };
+const _c42 = function (a0) { return { "selected-variant": a0 }; };
 function VariantStyleSelectorComponent_li_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1201 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1205 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li", 6);
     ɵngcc0.ɵɵelementStart(1, "img", 7);
-    ɵngcc0.ɵɵlistener("click", function VariantStyleSelectorComponent_li_4_Template_img_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1201); const v_r1199 = ctx.$implicit; const ctx_r1200 = ɵngcc0.ɵɵnextContext(); return ctx_r1200.changeStyle(v_r1199.code); });
+    ɵngcc0.ɵɵlistener("click", function VariantStyleSelectorComponent_li_4_Template_img_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1205); const v_r1203 = ctx.$implicit; const ctx_r1204 = ɵngcc0.ɵɵnextContext(); return ctx_r1204.changeStyle(v_r1203.code); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const v_r1199 = ctx.$implicit;
-    const ctx_r1198 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(4, _c43, v_r1199.code === (ctx_r1198.variants == null ? null : ctx_r1198.variants.selected.code)));
+    const v_r1203 = ctx.$implicit;
+    const ctx_r1202 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(4, _c42, v_r1203.code === (ctx_r1202.variants == null ? null : ctx_r1202.variants.selected.code)));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵpropertyInterpolate("src", ctx_r1198.getVariantThumbnailUrl(v_r1199.variantOptionQualifiers), ɵngcc0.ɵɵsanitizeUrl);
-    ɵngcc0.ɵɵpropertyInterpolate("title", ctx_r1198.getVariantOptionValue(v_r1199.variantOptionQualifiers));
-    ɵngcc0.ɵɵpropertyInterpolate("alt", ctx_r1198.getVariantOptionValue(v_r1199.variantOptionQualifiers));
+    ɵngcc0.ɵɵpropertyInterpolate("src", ctx_r1202.getVariantThumbnailUrl(v_r1203.variantOptionQualifiers), ɵngcc0.ɵɵsanitizeUrl);
+    ɵngcc0.ɵɵpropertyInterpolate("title", ctx_r1202.getVariantOptionValue(v_r1203.variantOptionQualifiers));
+    ɵngcc0.ɵɵpropertyInterpolate("alt", ctx_r1202.getVariantOptionValue(v_r1203.variantOptionQualifiers));
 } }
 function VariantSizeSelectorComponent_option_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "option", 5);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const v_r1203 = ctx.$implicit;
-    const ctx_r1202 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵpropertyInterpolate("value", v_r1203.code);
-    ɵngcc0.ɵɵproperty("selected", v_r1203.code === (ctx_r1202.product == null ? null : ctx_r1202.product.code));
+    const v_r1207 = ctx.$implicit;
+    const ctx_r1206 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵpropertyInterpolate("value", v_r1207.code);
+    ɵngcc0.ɵɵproperty("selected", v_r1207.code === (ctx_r1206.product == null ? null : ctx_r1206.product.code));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1202.getVariantOptionValue(v_r1203.variantOptionQualifiers));
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1206.getVariantOptionValue(v_r1207.variantOptionQualifiers));
 } }
 function VariantColorSelectorComponent_option_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "option", 4);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const v_r1205 = ctx.$implicit;
-    const ctx_r1204 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵpropertyInterpolate("value", v_r1205.code);
-    ɵngcc0.ɵɵproperty("selected", v_r1205.code === (ctx_r1204.product == null ? null : ctx_r1204.product.code));
+    const v_r1209 = ctx.$implicit;
+    const ctx_r1208 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵpropertyInterpolate("value", v_r1209.code);
+    ɵngcc0.ɵɵproperty("selected", v_r1209.code === (ctx_r1208.product == null ? null : ctx_r1208.product.code));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1204.getVariantOptionValue(v_r1205.variantOptionQualifiers));
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1208.getVariantOptionValue(v_r1209.variantOptionQualifiers));
 } }
 function VariantStyleIconsComponent_li_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "li");
     ɵngcc0.ɵɵelement(1, "img");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const v_r1207 = ctx.$implicit;
-    const ctx_r1206 = ɵngcc0.ɵɵnextContext();
+    const v_r1211 = ctx.$implicit;
+    const ctx_r1210 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵattribute("src", ctx_r1206.getVariantThumbnailUrl(v_r1207.variantOptionQualifiers), ɵngcc0.ɵɵsanitizeUrl)("title", ctx_r1206.variantNames[v_r1207.code])("alt", ctx_r1206.variantNames[v_r1207.code]);
+    ɵngcc0.ɵɵattribute("src", ctx_r1210.getVariantThumbnailUrl(v_r1211.variantOptionQualifiers), ɵngcc0.ɵɵsanitizeUrl)("title", ctx_r1210.variantNames[v_r1211.code])("alt", ctx_r1210.variantNames[v_r1211.code]);
 } }
 function ProductSummaryComponent_ng_container_0_ng_template_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 2);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const product_r1209 = ɵngcc0.ɵɵnextContext().ngIf;
+    const product_r1213 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", product_r1209 == null ? null : product_r1209.price == null ? null : product_r1209.price.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", product_r1213 == null ? null : product_r1213.price == null ? null : product_r1213.price.formattedValue, " ");
 } }
 function ProductSummaryComponent_ng_container_0_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "p", 3);
 } if (rf & 2) {
-    const product_r1209 = ɵngcc0.ɵɵnextContext().ngIf;
-    ɵngcc0.ɵɵproperty("innerHTML", product_r1209 == null ? null : product_r1209.summary, ɵngcc0.ɵɵsanitizeHtml);
+    const product_r1213 = ɵngcc0.ɵɵnextContext().ngIf;
+    ɵngcc0.ɵɵproperty("innerHTML", product_r1213 == null ? null : product_r1213.summary, ɵngcc0.ɵɵsanitizeHtml);
 } }
-const _c44 = function (a0) { return { product: a0 }; };
+const _c43 = function (a0) { return { product: a0 }; };
 function ProductSummaryComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, ProductSummaryComponent_ng_container_0_ng_template_1_Template, 2, 1, "ng-template", 1);
     ɵngcc0.ɵɵtemplate(2, ProductSummaryComponent_ng_container_0_ng_template_2_Template, 1, 1, "ng-template", 1);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r1209 = ctx.ngIf;
-    const ctx_r1208 = ɵngcc0.ɵɵnextContext();
+    const product_r1213 = ctx.ngIf;
+    const ctx_r1212 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cxOutlet", ctx_r1208.outlets.PRICE)("cxOutletContext", ɵngcc0.ɵɵpureFunction1(4, _c44, product_r1209));
+    ɵngcc0.ɵɵproperty("cxOutlet", ctx_r1212.outlets.PRICE)("cxOutletContext", ɵngcc0.ɵɵpureFunction1(4, _c43, product_r1213));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cxOutlet", ctx_r1208.outlets.SUMMARY)("cxOutletContext", ɵngcc0.ɵɵpureFunction1(6, _c44, product_r1209));
+    ɵngcc0.ɵɵproperty("cxOutlet", ctx_r1212.outlets.SUMMARY)("cxOutletContext", ɵngcc0.ɵɵpureFunction1(6, _c43, product_r1213));
 } }
 function ProductAttributesComponent_ng_container_0_table_5_tr_4_li_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "li");
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const featureValue_r1221 = ctx.$implicit;
+    const featureValue_r1225 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", featureValue_r1221 == null ? null : featureValue_r1221.value, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", featureValue_r1225 == null ? null : featureValue_r1225.value, " ");
 } }
 function ProductAttributesComponent_ng_container_0_table_5_tr_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "tr");
@@ -7692,11 +7609,11 @@ function ProductAttributesComponent_ng_container_0_table_5_tr_4_Template(rf, ctx
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const feature_r1219 = ctx.$implicit;
+    const feature_r1223 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(feature_r1219.name);
+    ɵngcc0.ɵɵtextInterpolate(feature_r1223.name);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", feature_r1219 == null ? null : feature_r1219.featureValues);
+    ɵngcc0.ɵɵproperty("ngForOf", feature_r1223 == null ? null : feature_r1223.featureValues);
 } }
 function ProductAttributesComponent_ng_container_0_table_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "table");
@@ -7708,11 +7625,11 @@ function ProductAttributesComponent_ng_container_0_table_5_Template(rf, ctx) { i
     ɵngcc0.ɵɵtemplate(4, ProductAttributesComponent_ng_container_0_table_5_tr_4_Template, 6, 2, "tr", 2);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const class_r1217 = ctx.$implicit;
+    const class_r1221 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(class_r1217.name);
+    ɵngcc0.ɵɵtextInterpolate(class_r1221.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", class_r1217.features);
+    ɵngcc0.ɵɵproperty("ngForOf", class_r1221.features);
 } }
 function ProductAttributesComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -7725,29 +7642,31 @@ function ProductAttributesComponent_ng_container_0_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r1215 = ctx.ngIf;
+    const product_r1219 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 2, "productDetails.specification"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", product_r1215 == null ? null : product_r1215.classifications);
+    ɵngcc0.ɵɵproperty("ngForOf", product_r1219 == null ? null : product_r1219.classifications);
 } }
 function ProductDetailsTabComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelement(1, "div", 1);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r1223 = ctx.ngIf;
+    const product_r1227 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("innerHTML", product_r1223 == null ? null : product_r1223.description, ɵngcc0.ɵɵsanitizeHtml);
+    ɵngcc0.ɵɵproperty("innerHTML", product_r1227 == null ? null : product_r1227.description, ɵngcc0.ɵɵsanitizeHtml);
 } }
-function ProductReviewsComponent_div_0_ng_container_4_cx_star_rating_8_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelement(0, "cx-star-rating", 8);
+const _c44 = ["titleInput"];
+const _c45 = ["writeReviewButton"];
+function ProductReviewsComponent_div_0_ng_container_4_cx_star_rating_9_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelement(0, "cx-star-rating", 9);
 } if (rf & 2) {
-    const product_r1225 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    ɵngcc0.ɵɵproperty("rating", product_r1225.averageRating)("disabled", true);
+    const product_r1229 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    ɵngcc0.ɵɵproperty("rating", product_r1229.averageRating)("disabled", true);
 } }
-function ProductReviewsComponent_div_0_ng_container_4_div_9_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 9);
+function ProductReviewsComponent_div_0_ng_container_4_div_10_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelementStart(0, "div", 10);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7755,40 +7674,40 @@ function ProductReviewsComponent_div_0_ng_container_4_div_9_Template(rf, ctx) { 
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "productDetails.noReviews"), " ");
 } }
-function ProductReviewsComponent_div_0_ng_container_4_ng_container_10_ng_container_1_div_1_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 12);
-    ɵngcc0.ɵɵelementStart(1, "div", 13);
+function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_1_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelementStart(0, "div", 13);
+    ɵngcc0.ɵɵelementStart(1, "div", 14);
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelement(3, "cx-star-rating", 14);
-    ɵngcc0.ɵɵelementStart(4, "div", 15);
+    ɵngcc0.ɵɵelement(3, "cx-star-rating", 15);
+    ɵngcc0.ɵɵelementStart(4, "div", 16);
     ɵngcc0.ɵɵtext(5);
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(6, "div", 16);
+    ɵngcc0.ɵɵelementStart(6, "div", 17);
     ɵngcc0.ɵɵtext(7);
     ɵngcc0.ɵɵpipe(8, "cxDate");
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(9, "div", 17);
+    ɵngcc0.ɵɵelementStart(9, "div", 18);
     ɵngcc0.ɵɵtext(10);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const review_r1237 = ctx.$implicit;
+    const review_r1242 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(review_r1237.headline);
+    ɵngcc0.ɵɵtextInterpolate(review_r1242.headline);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("rating", review_r1237.rating)("disabled", true);
+    ɵngcc0.ɵɵproperty("rating", review_r1242.rating)("disabled", true);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", review_r1237.alias ? review_r1237.alias : review_r1237.principal == null ? null : review_r1237.principal.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", review_r1242.alias ? review_r1242.alias : review_r1242.principal == null ? null : review_r1242.principal.name, " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(8, 6, review_r1237.date));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(8, 6, review_r1242.date));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(review_r1237.comment);
+    ɵngcc0.ɵɵtextInterpolate(review_r1242.comment);
 } }
-function ProductReviewsComponent_div_0_ng_container_4_ng_container_10_ng_container_1_div_3_button_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1241 = ɵngcc0.ɵɵgetCurrentView();
+function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_1_Template(rf, ctx) { if (rf & 1) {
+    const _r1246 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_ng_container_10_ng_container_1_div_3_button_1_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1241); const reviews_r1234 = ɵngcc0.ɵɵnextContext(2).ngIf; const ctx_r1240 = ɵngcc0.ɵɵnextContext(4); return ctx_r1240.maxListItems = reviews_r1234.length; });
+    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_1_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1246); const reviews_r1239 = ɵngcc0.ɵɵnextContext(2).ngIf; const ctx_r1245 = ɵngcc0.ɵɵnextContext(4); return ctx_r1245.maxListItems = reviews_r1239.length; });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7796,10 +7715,10 @@ function ProductReviewsComponent_div_0_ng_container_4_ng_container_10_ng_contain
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "productReview.more"), " ");
 } }
-function ProductReviewsComponent_div_0_ng_container_4_ng_container_10_ng_container_1_div_3_button_2_Template(rf, ctx) { if (rf & 1) {
-    const _r1244 = ɵngcc0.ɵɵgetCurrentView();
+function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_2_Template(rf, ctx) { if (rf & 1) {
+    const _r1249 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_ng_container_10_ng_container_1_div_3_button_2_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1244); const ctx_r1243 = ɵngcc0.ɵɵnextContext(6); return ctx_r1243.maxListItems = ctx_r1243.initialMaxListItems; });
+    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_2_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1249); const ctx_r1248 = ɵngcc0.ɵɵnextContext(6); return ctx_r1248.maxListItems = ctx_r1248.initialMaxListItems; });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7807,151 +7726,155 @@ function ProductReviewsComponent_div_0_ng_container_4_ng_container_10_ng_contain
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "productReview.less"), " ");
 } }
-function ProductReviewsComponent_div_0_ng_container_4_ng_container_10_ng_container_1_div_3_Template(rf, ctx) { if (rf & 1) {
+function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
-    ɵngcc0.ɵɵtemplate(1, ProductReviewsComponent_div_0_ng_container_4_ng_container_10_ng_container_1_div_3_button_1_Template, 3, 3, "button", 18);
-    ɵngcc0.ɵɵtemplate(2, ProductReviewsComponent_div_0_ng_container_4_ng_container_10_ng_container_1_div_3_button_2_Template, 3, 3, "button", 18);
+    ɵngcc0.ɵɵtemplate(1, ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_1_Template, 3, 3, "button", 19);
+    ɵngcc0.ɵɵtemplate(2, ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_2_Template, 3, 3, "button", 19);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1236 = ɵngcc0.ɵɵnextContext(5);
+    const ctx_r1241 = ɵngcc0.ɵɵnextContext(5);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1236.maxListItems === ctx_r1236.initialMaxListItems);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1241.maxListItems === ctx_r1241.initialMaxListItems);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1236.maxListItems !== ctx_r1236.initialMaxListItems);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1241.maxListItems !== ctx_r1241.initialMaxListItems);
 } }
-function ProductReviewsComponent_div_0_ng_container_4_ng_container_10_ng_container_1_Template(rf, ctx) { if (rf & 1) {
+function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵtemplate(1, ProductReviewsComponent_div_0_ng_container_4_ng_container_10_ng_container_1_div_1_Template, 11, 8, "div", 11);
+    ɵngcc0.ɵɵtemplate(1, ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_1_Template, 11, 8, "div", 12);
     ɵngcc0.ɵɵpipe(2, "slice");
-    ɵngcc0.ɵɵtemplate(3, ProductReviewsComponent_div_0_ng_container_4_ng_container_10_ng_container_1_div_3_Template, 3, 2, "div", 10);
+    ɵngcc0.ɵɵtemplate(3, ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_Template, 3, 2, "div", 11);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const reviews_r1234 = ctx.ngIf;
-    const ctx_r1233 = ɵngcc0.ɵɵnextContext(4);
+    const reviews_r1239 = ctx.ngIf;
+    const ctx_r1238 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind3(2, 2, reviews_r1234, 0, ctx_r1233.maxListItems));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind3(2, 2, reviews_r1239, 0, ctx_r1238.maxListItems));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", reviews_r1234.length > ctx_r1233.initialMaxListItems);
+    ɵngcc0.ɵɵproperty("ngIf", reviews_r1239.length > ctx_r1238.initialMaxListItems);
 } }
-function ProductReviewsComponent_div_0_ng_container_4_ng_container_10_Template(rf, ctx) { if (rf & 1) {
+function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵtemplate(1, ProductReviewsComponent_div_0_ng_container_4_ng_container_10_ng_container_1_Template, 4, 6, "ng-container", 10);
+    ɵngcc0.ɵɵtemplate(1, ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_Template, 4, 6, "ng-container", 11);
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1231 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1236 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r1231.reviews$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r1236.reviews$));
 } }
 function ProductReviewsComponent_div_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1246 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1251 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 4);
     ɵngcc0.ɵɵelementStart(2, "h3");
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(5, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_Template_button_click_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1246); const ctx_r1245 = ɵngcc0.ɵɵnextContext(2); return ctx_r1245.initiateWriteReview(); });
-    ɵngcc0.ɵɵtext(6);
-    ɵngcc0.ɵɵpipe(7, "cxTranslate");
+    ɵngcc0.ɵɵelementStart(5, "button", 5, 6);
+    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_Template_button_click_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1251); const ctx_r1250 = ɵngcc0.ɵɵnextContext(2); return ctx_r1250.initiateWriteReview(); });
+    ɵngcc0.ɵɵtext(7);
+    ɵngcc0.ɵɵpipe(8, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵtemplate(8, ProductReviewsComponent_div_0_ng_container_4_cx_star_rating_8_Template, 1, 2, "cx-star-rating", 6);
-    ɵngcc0.ɵɵtemplate(9, ProductReviewsComponent_div_0_ng_container_4_div_9_Template, 3, 3, "div", 7);
+    ɵngcc0.ɵɵtemplate(9, ProductReviewsComponent_div_0_ng_container_4_cx_star_rating_9_Template, 1, 2, "cx-star-rating", 7);
+    ɵngcc0.ɵɵtemplate(10, ProductReviewsComponent_div_0_ng_container_4_div_10_Template, 3, 3, "div", 8);
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵtemplate(10, ProductReviewsComponent_div_0_ng_container_4_ng_container_10_Template, 3, 3, "ng-container", 2);
+    ɵngcc0.ɵɵtemplate(11, ProductReviewsComponent_div_0_ng_container_4_ng_container_11_Template, 3, 3, "ng-container", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r1225 = ɵngcc0.ɵɵnextContext().ngIf;
-    const _r1227 = ɵngcc0.ɵɵreference(6);
-    const ctx_r1226 = ɵngcc0.ɵɵnextContext();
+    const product_r1229 = ɵngcc0.ɵɵnextContext().ngIf;
+    const _r1231 = ɵngcc0.ɵɵreference(6);
+    const ctx_r1230 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 6, "productReview.overallRating"));
-    ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(7, 8, "productReview.writeReview"), " ");
+    ɵngcc0.ɵɵadvance(4);
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(8, 8, "productReview.writeReview"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", product_r1225.averageRating);
+    ɵngcc0.ɵɵproperty("ngIf", product_r1229.averageRating);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !product_r1225.averageRating);
+    ɵngcc0.ɵɵproperty("ngIf", !product_r1229.averageRating);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1226.isWritingReview)("ngIfElse", _r1227);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1230.isWritingReview)("ngIfElse", _r1231);
 } }
-const _c45 = function (a0) { return { "submit-btn": a0 }; };
+const _c46 = function (a0) { return { "submit-btn": a0 }; };
 function ProductReviewsComponent_div_0_ng_template_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1250 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "form", 19);
-    ɵngcc0.ɵɵlistener("ngSubmit", function ProductReviewsComponent_div_0_ng_template_5_Template_form_ngSubmit_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1250); const product_r1225 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r1248 = ɵngcc0.ɵɵnextContext(); return ctx_r1248.submitReview(product_r1225); });
-    ɵngcc0.ɵɵelementStart(1, "div", 20);
+    const _r1256 = ɵngcc0.ɵɵgetCurrentView();
+    ɵngcc0.ɵɵelementStart(0, "form", 20);
+    ɵngcc0.ɵɵlistener("ngSubmit", function ProductReviewsComponent_div_0_ng_template_5_Template_form_ngSubmit_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1256); const product_r1229 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r1254 = ɵngcc0.ɵɵnextContext(); return ctx_r1254.submitReview(product_r1229); });
+    ɵngcc0.ɵɵelementStart(1, "div", 21);
     ɵngcc0.ɵɵelementStart(2, "label");
-    ɵngcc0.ɵɵelementStart(3, "span", 21);
+    ɵngcc0.ɵɵelementStart(3, "span", 22);
     ɵngcc0.ɵɵtext(4);
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelement(6, "input", 22);
+    ɵngcc0.ɵɵelement(6, "input", 23, 24);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(7, "div", 20);
-    ɵngcc0.ɵɵelementStart(8, "label");
-    ɵngcc0.ɵɵelementStart(9, "span", 21);
-    ɵngcc0.ɵɵtext(10);
-    ɵngcc0.ɵɵpipe(11, "cxTranslate");
+    ɵngcc0.ɵɵelementStart(8, "div", 21);
+    ɵngcc0.ɵɵelementStart(9, "label");
+    ɵngcc0.ɵɵelementStart(10, "span", 22);
+    ɵngcc0.ɵɵtext(11);
+    ɵngcc0.ɵɵpipe(12, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelement(12, "textarea", 23);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(13, "div", 20);
-    ɵngcc0.ɵɵelementStart(14, "label");
-    ɵngcc0.ɵɵelementStart(15, "span", 21);
-    ɵngcc0.ɵɵtext(16);
-    ɵngcc0.ɵɵpipe(17, "cxTranslate");
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(18, "cx-star-rating", 24);
-    ɵngcc0.ɵɵlistener("change", function ProductReviewsComponent_div_0_ng_template_5_Template_cx_star_rating_change_18_listener($event) { ɵngcc0.ɵɵrestoreView(_r1250); const ctx_r1251 = ɵngcc0.ɵɵnextContext(2); return ctx_r1251.setRating($event); });
+    ɵngcc0.ɵɵelement(13, "textarea", 25);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelementStart(14, "div", 21);
+    ɵngcc0.ɵɵelementStart(15, "label");
+    ɵngcc0.ɵɵelementStart(16, "span", 22);
+    ɵngcc0.ɵɵtext(17);
+    ɵngcc0.ɵɵpipe(18, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(19, "div", 20);
-    ɵngcc0.ɵɵelementStart(20, "label");
-    ɵngcc0.ɵɵelementStart(21, "span", 21);
-    ɵngcc0.ɵɵtext(22);
-    ɵngcc0.ɵɵpipe(23, "cxTranslate");
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelement(24, "input", 25);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(25, "div", 26);
-    ɵngcc0.ɵɵelementStart(26, "div", 27);
-    ɵngcc0.ɵɵelementStart(27, "button", 28);
-    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_template_5_Template_button_click_27_listener($event) { ɵngcc0.ɵɵrestoreView(_r1250); const ctx_r1252 = ɵngcc0.ɵɵnextContext(2); return ctx_r1252.cancelWriteReview(); });
-    ɵngcc0.ɵɵtext(28);
-    ɵngcc0.ɵɵpipe(29, "cxTranslate");
+    ɵngcc0.ɵɵelementStart(19, "cx-star-rating", 26);
+    ɵngcc0.ɵɵlistener("change", function ProductReviewsComponent_div_0_ng_template_5_Template_cx_star_rating_change_19_listener($event) { ɵngcc0.ɵɵrestoreView(_r1256); const ctx_r1257 = ɵngcc0.ɵɵnextContext(2); return ctx_r1257.setRating($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(30, "div", 27);
-    ɵngcc0.ɵɵelementStart(31, "button", 29);
-    ɵngcc0.ɵɵtext(32);
-    ɵngcc0.ɵɵpipe(33, "cxTranslate");
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelementStart(20, "div", 21);
+    ɵngcc0.ɵɵelementStart(21, "label");
+    ɵngcc0.ɵɵelementStart(22, "span", 22);
+    ɵngcc0.ɵɵtext(23);
+    ɵngcc0.ɵɵpipe(24, "cxTranslate");
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelement(25, "input", 27);
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelementStart(26, "div", 28);
+    ɵngcc0.ɵɵelementStart(27, "div", 29);
+    ɵngcc0.ɵɵelementStart(28, "button", 30);
+    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_template_5_Template_button_click_28_listener($event) { ɵngcc0.ɵɵrestoreView(_r1256); const ctx_r1258 = ɵngcc0.ɵɵnextContext(2); return ctx_r1258.cancelWriteReview(); });
+    ɵngcc0.ɵɵtext(29);
+    ɵngcc0.ɵɵpipe(30, "cxTranslate");
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelementStart(31, "div", 29);
+    ɵngcc0.ɵɵelementStart(32, "button", 31);
+    ɵngcc0.ɵɵtext(33);
+    ɵngcc0.ɵɵpipe(34, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1228 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("formGroup", ctx_r1228.reviewForm);
+    const ctx_r1232 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("formGroup", ctx_r1232.reviewForm);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 9, "productReview.reviewTitle"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 12, "productReview.reviewTitle"));
+    ɵngcc0.ɵɵadvance(2);
+    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1232.reviewForm.controls["title"].invalid && (ctx_r1232.reviewForm.controls["title"].touched || ctx_r1232.reviewForm.controls["title"].dirty));
+    ɵngcc0.ɵɵadvance(5);
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(12, 14, "productReview.writeYourComments"));
+    ɵngcc0.ɵɵadvance(2);
+    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1232.reviewForm.controls["comment"].invalid && (ctx_r1232.reviewForm.controls["comment"].touched || ctx_r1232.reviewForm.controls["comment"].dirty));
+    ɵngcc0.ɵɵadvance(4);
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(18, 16, "productReview.rating"));
     ɵngcc0.ɵɵadvance(6);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(11, 11, "productReview.writeYourComments"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(24, 18, "productReview.reviewerName"));
     ɵngcc0.ɵɵadvance(6);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(17, 13, "productReview.rating"));
-    ɵngcc0.ɵɵadvance(6);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(23, 15, "productReview.reviewerName"));
-    ɵngcc0.ɵɵadvance(6);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(29, 17, "common.cancel"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(30, 20, "common.cancel"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(21, _c45, ctx_r1228.reviewForm.valid))("disabled", !ctx_r1228.reviewForm.valid);
+    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(24, _c46, ctx_r1232.reviewForm.valid));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(33, 19, "common.submit"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(34, 22, "common.submit"), " ");
 } }
 function ProductReviewsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 1);
@@ -7959,26 +7882,26 @@ function ProductReviewsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵtemplate(4, ProductReviewsComponent_div_0_ng_container_4_Template, 11, 10, "ng-container", 2);
-    ɵngcc0.ɵɵtemplate(5, ProductReviewsComponent_div_0_ng_template_5_Template, 34, 23, "ng-template", null, 3, ɵngcc0.ɵɵtemplateRefExtractor);
+    ɵngcc0.ɵɵtemplate(4, ProductReviewsComponent_div_0_ng_container_4_Template, 12, 10, "ng-container", 2);
+    ɵngcc0.ɵɵtemplate(5, ProductReviewsComponent_div_0_ng_template_5_Template, 35, 26, "ng-template", null, 3, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const product_r1225 = ctx.ngIf;
-    const _r1227 = ɵngcc0.ɵɵreference(6);
-    const ctx_r1224 = ɵngcc0.ɵɵnextContext();
+    const product_r1229 = ctx.ngIf;
+    const _r1231 = ɵngcc0.ɵɵreference(6);
+    const ctx_r1228 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "productDetails.reviews"), " (", product_r1225.numberOfReviews, ") ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "productDetails.reviews"), " (", product_r1229.numberOfReviews, ") ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1224.isWritingReview)("ngIfElse", _r1227);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1228.isWritingReview)("ngIfElse", _r1231);
 } }
 function StockNotificationDialogComponent_ng_container_7_p_6_span_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "span");
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const preference_r1257 = ɵngcc0.ɵɵnextContext().$implicit;
+    const preference_r1263 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(": " + preference_r1257.value);
+    ɵngcc0.ɵɵtextInterpolate(": " + preference_r1263.value);
 } }
 function StockNotificationDialogComponent_ng_container_7_p_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "p", 14);
@@ -7988,15 +7911,15 @@ function StockNotificationDialogComponent_ng_container_7_p_6_Template(rf, ctx) {
     ɵngcc0.ɵɵtemplate(3, StockNotificationDialogComponent_ng_container_7_p_6_span_3_Template, 2, 1, "span", 15);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const preference_r1257 = ctx.$implicit;
+    const preference_r1263 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(preference_r1257.channel);
+    ɵngcc0.ɵɵtextInterpolate(preference_r1263.channel);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", preference_r1257.value);
+    ɵngcc0.ɵɵproperty("ngIf", preference_r1263.value);
 } }
-const _c46 = function () { return ["/my-account/my-interests"]; };
+const _c47 = function () { return ["/my-account/my-interests"]; };
 function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if (rf & 1) {
-    const _r1261 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1267 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 6);
     ɵngcc0.ɵɵelementStart(2, "div", 7);
@@ -8013,7 +7936,7 @@ function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵtext(11);
     ɵngcc0.ɵɵpipe(12, "cxTranslate");
     ɵngcc0.ɵɵelementStart(13, "a", 9);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_a_click_13_listener($event) { ɵngcc0.ɵɵrestoreView(_r1261); const ctx_r1260 = ɵngcc0.ɵɵnextContext(); return ctx_r1260.close(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_a_click_13_listener($event) { ɵngcc0.ɵɵrestoreView(_r1267); const ctx_r1266 = ɵngcc0.ɵɵnextContext(); return ctx_r1266.close(); });
     ɵngcc0.ɵɵtext(14);
     ɵngcc0.ɵɵpipe(15, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -8024,7 +7947,7 @@ function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵtext(19);
     ɵngcc0.ɵɵpipe(20, "cxTranslate");
     ɵngcc0.ɵɵelementStart(21, "a", 10);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_a_click_21_listener($event) { ɵngcc0.ɵɵrestoreView(_r1261); const ctx_r1262 = ɵngcc0.ɵɵnextContext(); return ctx_r1262.close(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_a_click_21_listener($event) { ɵngcc0.ɵɵrestoreView(_r1267); const ctx_r1268 = ɵngcc0.ɵɵnextContext(); return ctx_r1268.close(); });
     ɵngcc0.ɵɵtext(22);
     ɵngcc0.ɵɵpipe(23, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -8034,7 +7957,7 @@ function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵelementStart(26, "div", 11);
     ɵngcc0.ɵɵelementStart(27, "div", 12);
     ɵngcc0.ɵɵelementStart(28, "button", 13);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_button_click_28_listener($event) { ɵngcc0.ɵɵrestoreView(_r1261); const ctx_r1263 = ɵngcc0.ɵɵnextContext(); return ctx_r1263.close(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_button_click_28_listener($event) { ɵngcc0.ɵɵrestoreView(_r1267); const ctx_r1269 = ɵngcc0.ɵɵnextContext(); return ctx_r1269.close(); });
     ɵngcc0.ɵɵtext(29);
     ɵngcc0.ɵɵpipe(30, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -8044,17 +7967,17 @@ function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1253 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1259 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 12, "stockNotification.subscriptionDialog.notifiedPrefix"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1253.enabledPrefs);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1259.enabledPrefs);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(9, 14, "stockNotification.subscriptionDialog.notifiedSuffix"), " ");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(12, 16, "stockNotification.subscriptionDialog.manageChannelsPrefix"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction0(30, _c36));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction0(30, _c35));
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(15, 18, "stockNotification.subscriptionDialog.manageChannelsLink"), "");
     ɵngcc0.ɵɵadvance(2);
@@ -8062,7 +7985,7 @@ function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(20, 22, "stockNotification.subscriptionDialog.manageSubscriptionsPrefix"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction0(31, _c46));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction0(31, _c47));
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(23, 24, "stockNotification.subscriptionDialog.manageSubscriptionsLink"), "");
     ɵngcc0.ɵɵadvance(2);
@@ -8087,7 +8010,7 @@ function StockNotificationDialogComponent_ng_template_9_Template(rf, ctx) { if (
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 1, "stockNotification.subscriptionDialog.subscribing"), " ");
 } }
 function StockNotificationComponent_ng_container_0_ng_container_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1274 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1280 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 5);
     ɵngcc0.ɵɵelementStart(2, "label");
@@ -8096,7 +8019,7 @@ function StockNotificationComponent_ng_container_0_ng_container_1_ng_container_1
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 6);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationComponent_ng_container_0_ng_container_1_ng_container_1_Template_button_click_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1274); const ctx_r1273 = ɵngcc0.ɵɵnextContext(3); return ctx_r1273.subscribe(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationComponent_ng_container_0_ng_container_1_ng_container_1_Template_button_click_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1280); const ctx_r1279 = ɵngcc0.ɵɵnextContext(3); return ctx_r1279.subscribe(); });
     ɵngcc0.ɵɵtext(6);
     ɵngcc0.ɵɵpipe(7, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -8113,10 +8036,10 @@ function StockNotificationComponent_ng_container_0_ng_container_1_Template(rf, c
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1271 = ɵngcc0.ɵɵnextContext(2);
-    const _r1265 = ɵngcc0.ɵɵreference(3);
+    const ctx_r1277 = ɵngcc0.ɵɵnextContext(2);
+    const _r1271 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1271.prefsEnabled$))("ngIfElse", _r1265);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1277.prefsEnabled$))("ngIfElse", _r1271);
 } }
 function StockNotificationComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -8124,10 +8047,10 @@ function StockNotificationComponent_ng_container_0_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1264 = ɵngcc0.ɵɵnextContext();
-    const _r1267 = ɵngcc0.ɵɵreference(5);
+    const ctx_r1270 = ɵngcc0.ɵɵnextContext();
+    const _r1273 = ɵngcc0.ɵɵreference(5);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1264.hasProductInterests$))("ngIfElse", _r1267);
+    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1270.hasProductInterests$))("ngIfElse", _r1273);
 } }
 function StockNotificationComponent_ng_template_2_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -8165,7 +8088,7 @@ function StockNotificationComponent_ng_template_2_ng_template_3_Template(rf, ctx
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 7, "stockNotification.activateChannelsPrefix"), "");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction0(13, _c36));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction0(13, _c35));
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(7, 9, "stockNotification.channelsLink"));
     ɵngcc0.ɵɵadvance(2);
@@ -8183,15 +8106,15 @@ function StockNotificationComponent_ng_template_2_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵpipe(7, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const _r1276 = ɵngcc0.ɵɵreference(4);
-    const ctx_r1266 = ɵngcc0.ɵɵnextContext();
+    const _r1282 = ɵngcc0.ɵɵreference(4);
+    const ctx_r1272 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1266.anonymous)("ngIfElse", _r1276);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1272.anonymous)("ngIfElse", _r1282);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(7, 3, "stockNotification.notifyMe"), " ");
 } }
 function StockNotificationComponent_ng_template_4_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1280 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1286 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 5);
     ɵngcc0.ɵɵelementStart(2, "label");
@@ -8200,7 +8123,7 @@ function StockNotificationComponent_ng_template_4_ng_container_0_Template(rf, ct
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 10);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationComponent_ng_template_4_ng_container_0_Template_button_click_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1280); const ctx_r1279 = ɵngcc0.ɵɵnextContext(2); return ctx_r1279.unsubscribe(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationComponent_ng_template_4_ng_container_0_Template_button_click_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1286); const ctx_r1285 = ɵngcc0.ɵɵnextContext(2); return ctx_r1285.unsubscribe(); });
     ɵngcc0.ɵɵtext(6);
     ɵngcc0.ɵɵpipe(7, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -8215,9 +8138,9 @@ function StockNotificationComponent_ng_template_4_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵtemplate(0, StockNotificationComponent_ng_template_4_ng_container_0_Template, 8, 6, "ng-container", 4);
     ɵngcc0.ɵɵpipe(1, "async");
 } if (rf & 2) {
-    const ctx_r1268 = ɵngcc0.ɵɵnextContext();
-    const _r1269 = ɵngcc0.ɵɵreference(7);
-    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r1268.isRemoveInterestLoading$))("ngIfElse", _r1269);
+    const ctx_r1274 = ɵngcc0.ɵɵnextContext();
+    const _r1275 = ɵngcc0.ɵɵreference(7);
+    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r1274.isRemoveInterestLoading$))("ngIfElse", _r1275);
 } }
 function StockNotificationComponent_ng_template_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 11);
@@ -8233,10 +8156,10 @@ function ScheduleComponent_div_1_div_1_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const day_r1283 = ɵngcc0.ɵɵnextContext().$implicit;
-    const ctx_r1284 = ɵngcc0.ɵɵnextContext(2);
+    const day_r1289 = ɵngcc0.ɵɵnextContext().$implicit;
+    const ctx_r1290 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1284.getStoreOpeningTime(day_r1283), " - ", ctx_r1284.getStoreClosingTime(day_r1283), " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1290.getStoreOpeningTime(day_r1289), " - ", ctx_r1290.getStoreClosingTime(day_r1289), " ");
 } }
 function ScheduleComponent_div_1_div_1_div_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 8);
@@ -8257,34 +8180,34 @@ function ScheduleComponent_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(5, ScheduleComponent_div_1_div_1_div_5_Template, 3, 3, "div", 6);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const day_r1283 = ctx.$implicit;
-    const ctx_r1282 = ɵngcc0.ɵɵnextContext(2);
+    const day_r1289 = ctx.$implicit;
+    const ctx_r1288 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind2(3, 3, day_r1283, "EEE"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind2(3, 3, day_r1289, "EEE"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1282.getStoreOpeningTime(day_r1283) !== "closed");
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1288.getStoreOpeningTime(day_r1289) !== "closed");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1282.getStoreOpeningTime(day_r1283) === "closed");
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1288.getStoreOpeningTime(day_r1289) === "closed");
 } }
 function ScheduleComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 1);
     ɵngcc0.ɵɵtemplate(1, ScheduleComponent_div_1_div_1_Template, 6, 6, "div", 2);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1281 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1287 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1281.displayDays);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1287.displayDays);
 } }
 function StoreFinderGridComponent_ng_container_0_div_3_Template(rf, ctx) { if (rf & 1) {
-    const _r1294 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1300 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 5);
-    ɵngcc0.ɵɵlistener("click", function StoreFinderGridComponent_ng_container_0_div_3_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1294); const location_r1292 = ctx.$implicit; const ctx_r1293 = ɵngcc0.ɵɵnextContext(2); return ctx_r1293.viewStore(location_r1292); });
+    ɵngcc0.ɵɵlistener("click", function StoreFinderGridComponent_ng_container_0_div_3_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1300); const location_r1298 = ctx.$implicit; const ctx_r1299 = ɵngcc0.ɵɵnextContext(2); return ctx_r1299.viewStore(location_r1298); });
     ɵngcc0.ɵɵelement(1, "cx-store-finder-list-item", 6);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const location_r1292 = ctx.$implicit;
+    const location_r1298 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", location_r1292);
+    ɵngcc0.ɵɵproperty("location", location_r1298);
 } }
 function StoreFinderGridComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -8295,9 +8218,9 @@ function StoreFinderGridComponent_ng_container_0_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const locations_r1290 = ctx.ngIf;
+    const locations_r1296 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", locations_r1290 == null ? null : locations_r1290.stores);
+    ɵngcc0.ɵɵproperty("ngForOf", locations_r1296 == null ? null : locations_r1296.stores);
 } }
 function StoreFinderGridComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 7);
@@ -8309,11 +8232,11 @@ function StoreFinderListItemComponent_div_6_div_4_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1296 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1302 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1296.location.formattedDistance, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1302.location.formattedDistance, " ");
 } }
-const _c47 = function (a0, a1, a2) { return [a0, a1, a2]; };
+const _c48 = function (a0, a1, a2) { return [a0, a1, a2]; };
 function StoreFinderListItemComponent_div_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 5);
     ɵngcc0.ɵɵelementStart(1, "div", 6);
@@ -8323,28 +8246,28 @@ function StoreFinderListItemComponent_div_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(4, StoreFinderListItemComponent_div_6_div_4_Template, 2, 1, "div", 7);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1295 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1301 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1295.location.address.line1, " ", ctx_r1295.location.address.line2, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1301.location.address.line1, " ", ctx_r1301.location.address.line2, " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1295.getFormattedStoreAddress(ɵngcc0.ɵɵpureFunction3(4, _c47, ctx_r1295.location.address.town, ctx_r1295.location.address.postalCode, ctx_r1295.location.address.country.isocode)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1301.getFormattedStoreAddress(ɵngcc0.ɵɵpureFunction3(4, _c48, ctx_r1301.location.address.town, ctx_r1301.location.address.postalCode, ctx_r1301.location.address.country.isocode)), " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1295.location.formattedDistance && ctx_r1295.displayDistance);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1301.location.formattedDistance && ctx_r1301.displayDistance);
 } }
-const _c48 = ["mapElement"];
-const _c49 = ["storeMap"];
+const _c49 = ["mapElement"];
+const _c50 = ["storeMap"];
 function StoreFinderListComponent_ng_container_0_div_2_button_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1305 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1311 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 10);
-    ɵngcc0.ɵɵlistener("click", function StoreFinderListComponent_ng_container_0_div_2_button_4_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1305); const ctx_r1304 = ɵngcc0.ɵɵnextContext(3); return ctx_r1304.hideStoreDetails(); });
+    ɵngcc0.ɵɵlistener("click", function StoreFinderListComponent_ng_container_0_div_2_button_4_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1311); const ctx_r1310 = ɵngcc0.ɵɵnextContext(3); return ctx_r1310.hideStoreDetails(); });
     ɵngcc0.ɵɵelement(1, "cx-icon", 11);
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1303 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1309 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r1303.iconTypes.CARET_LEFT);
+    ɵngcc0.ɵɵproperty("type", ctx_r1309.iconTypes.CARET_LEFT);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "storeFinder.backToList"), " ");
 } }
@@ -8358,49 +8281,49 @@ function StoreFinderListComponent_ng_container_0_div_2_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1299 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1305 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("pagination", ctx_r1299.locations.pagination);
+    ɵngcc0.ɵɵproperty("pagination", ctx_r1305.locations.pagination);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1299.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1305.isDetailsModeVisible);
 } }
 function StoreFinderListComponent_ng_container_0_div_3_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 19);
     ɵngcc0.ɵɵelement(1, "cx-store-finder-store-description", 20);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1306 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1312 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", ctx_r1306.storeDetails)("disableMap", true);
+    ɵngcc0.ɵɵproperty("location", ctx_r1312.storeDetails)("disableMap", true);
 } }
-const _c50 = function (a0) { return { "cx-selected-item": a0 }; };
+const _c51 = function (a0) { return { "cx-selected-item": a0 }; };
 function StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1313 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1319 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li", 23);
     ɵngcc0.ɵɵelementStart(1, "cx-store-finder-list-item", 24);
-    ɵngcc0.ɵɵlistener("storeItemClick", function StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template_cx_store_finder_list_item_storeItemClick_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1313); const location_r1310 = ctx.$implicit; const ctx_r1312 = ɵngcc0.ɵɵnextContext(4); return ctx_r1312.centerStoreOnMapByIndex($event, location_r1310); });
+    ɵngcc0.ɵɵlistener("storeItemClick", function StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template_cx_store_finder_list_item_storeItemClick_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1319); const location_r1316 = ctx.$implicit; const ctx_r1318 = ɵngcc0.ɵɵnextContext(4); return ctx_r1318.centerStoreOnMapByIndex($event, location_r1316); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const location_r1310 = ctx.$implicit;
-    const i_r1311 = ctx.index;
-    const ctx_r1309 = ɵngcc0.ɵɵnextContext(4);
-    ɵngcc0.ɵɵpropertyInterpolate("id", "item-" + i_r1311);
-    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(6, _c50, ctx_r1309.selectedStoreIndex === i_r1311));
+    const location_r1316 = ctx.$implicit;
+    const i_r1317 = ctx.index;
+    const ctx_r1315 = ɵngcc0.ɵɵnextContext(4);
+    ɵngcc0.ɵɵpropertyInterpolate("id", "item-" + i_r1317);
+    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(6, _c51, ctx_r1315.selectedStoreIndex === i_r1317));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", location_r1310)("locationIndex", i_r1311)("displayDistance", ctx_r1309.useMylocation)("listOrderLabel", i_r1311 + ctx_r1309.locations.pagination.currentPage * ctx_r1309.locations.pagination.pageSize + 1);
+    ɵngcc0.ɵɵproperty("location", location_r1316)("locationIndex", i_r1317)("displayDistance", ctx_r1315.useMylocation)("listOrderLabel", i_r1317 + ctx_r1315.locations.pagination.currentPage * ctx_r1315.locations.pagination.pageSize + 1);
 } }
 function StoreFinderListComponent_ng_container_0_div_3_ol_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "ol", 21);
     ɵngcc0.ɵɵtemplate(1, StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template, 2, 8, "li", 22);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1307 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1313 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1307.locations == null ? null : ctx_r1307.locations.stores);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1313.locations == null ? null : ctx_r1313.locations.stores);
 } }
 function StoreFinderListComponent_ng_container_0_div_3_Template(rf, ctx) { if (rf & 1) {
-    const _r1315 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1321 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 12);
     ɵngcc0.ɵɵelementStart(1, "div", 13);
     ɵngcc0.ɵɵtemplate(2, StoreFinderListComponent_ng_container_0_div_3_div_2_Template, 2, 2, "div", 14);
@@ -8408,18 +8331,18 @@ function StoreFinderListComponent_ng_container_0_div_3_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "div", 16);
     ɵngcc0.ɵɵelementStart(5, "cx-store-finder-map", 17, 18);
-    ɵngcc0.ɵɵlistener("selectedStoreItem", function StoreFinderListComponent_ng_container_0_div_3_Template_cx_store_finder_map_selectedStoreItem_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1315); const ctx_r1314 = ɵngcc0.ɵɵnextContext(2); return ctx_r1314.selectStoreItemList($event); });
+    ɵngcc0.ɵɵlistener("selectedStoreItem", function StoreFinderListComponent_ng_container_0_div_3_Template_cx_store_finder_map_selectedStoreItem_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1321); const ctx_r1320 = ɵngcc0.ɵɵnextContext(2); return ctx_r1320.selectStoreItemList($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1300 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1306 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1300.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1306.isDetailsModeVisible);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1300.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1306.isDetailsModeVisible);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("locations", ctx_r1300.locations.stores);
+    ɵngcc0.ɵɵproperty("locations", ctx_r1306.locations.stores);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(0);
@@ -8432,34 +8355,34 @@ function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_div_1_Templ
     ɵngcc0.ɵɵelement(1, "cx-store-finder-store-description", 20);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1320 = ɵngcc0.ɵɵnextContext(4);
+    const ctx_r1326 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", ctx_r1320.storeDetails)("disableMap", true);
+    ɵngcc0.ɵɵproperty("location", ctx_r1326.storeDetails)("disableMap", true);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_li_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1326 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1332 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li", 23);
     ɵngcc0.ɵɵelementStart(1, "cx-store-finder-list-item", 24);
-    ɵngcc0.ɵɵlistener("storeItemClick", function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_li_1_Template_cx_store_finder_list_item_storeItemClick_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1326); const location_r1323 = ctx.$implicit; const ctx_r1325 = ɵngcc0.ɵɵnextContext(5); return ctx_r1325.centerStoreOnMapByIndex($event, location_r1323); });
+    ɵngcc0.ɵɵlistener("storeItemClick", function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_li_1_Template_cx_store_finder_list_item_storeItemClick_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1332); const location_r1329 = ctx.$implicit; const ctx_r1331 = ɵngcc0.ɵɵnextContext(5); return ctx_r1331.centerStoreOnMapByIndex($event, location_r1329); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const location_r1323 = ctx.$implicit;
-    const i_r1324 = ctx.index;
-    const ctx_r1322 = ɵngcc0.ɵɵnextContext(5);
-    ɵngcc0.ɵɵpropertyInterpolate("id", "item-" + i_r1324);
-    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(6, _c50, ctx_r1322.selectedStoreIndex === i_r1324));
+    const location_r1329 = ctx.$implicit;
+    const i_r1330 = ctx.index;
+    const ctx_r1328 = ɵngcc0.ɵɵnextContext(5);
+    ɵngcc0.ɵɵpropertyInterpolate("id", "item-" + i_r1330);
+    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(6, _c51, ctx_r1328.selectedStoreIndex === i_r1330));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", location_r1323)("locationIndex", i_r1324)("displayDistance", ctx_r1322.useMylocation)("listOrderLabel", i_r1324 + ctx_r1322.locations.pagination.currentPage * ctx_r1322.locations.pagination.pageSize + 1);
+    ɵngcc0.ɵɵproperty("location", location_r1329)("locationIndex", i_r1330)("displayDistance", ctx_r1328.useMylocation)("listOrderLabel", i_r1330 + ctx_r1328.locations.pagination.currentPage * ctx_r1328.locations.pagination.pageSize + 1);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "ol", 21);
     ɵngcc0.ɵɵtemplate(1, StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_li_1_Template, 2, 8, "li", 22);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1321 = ɵngcc0.ɵɵnextContext(4);
+    const ctx_r1327 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1321.locations == null ? null : ctx_r1321.locations.stores);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1327.locations == null ? null : ctx_r1327.locations.stores);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 29);
@@ -8467,11 +8390,11 @@ function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_Template(rf
     ɵngcc0.ɵɵtemplate(2, StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_Template, 2, 1, "ol", 15);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1317 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1323 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1317.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1323.isDetailsModeVisible);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1317.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1323.isDetailsModeVisible);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(0);
@@ -8479,18 +8402,18 @@ function StoreFinderListComponent_ng_container_0_div_4_ng_template_6_Template(rf
 } if (rf & 2) {
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(1, 1, "storeFinder.mapView"), " ");
 } }
-const _c51 = function (a0) { return [a0]; };
+const _c52 = function (a0) { return [a0]; };
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_7_Template(rf, ctx) { if (rf & 1) {
-    const _r1329 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1335 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 30);
     ɵngcc0.ɵɵelementStart(1, "cx-store-finder-map", 17, 18);
-    ɵngcc0.ɵɵlistener("selectedStoreItem", function StoreFinderListComponent_ng_container_0_div_4_ng_template_7_Template_cx_store_finder_map_selectedStoreItem_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1329); const ctx_r1328 = ɵngcc0.ɵɵnextContext(3); return ctx_r1328.selectStoreItemList($event); });
+    ɵngcc0.ɵɵlistener("selectedStoreItem", function StoreFinderListComponent_ng_container_0_div_4_ng_template_7_Template_cx_store_finder_map_selectedStoreItem_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1335); const ctx_r1334 = ɵngcc0.ɵɵnextContext(3); return ctx_r1334.selectStoreItemList($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1319 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1325 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("locations", ctx_r1319.selectedStore ? ɵngcc0.ɵɵpureFunction1(1, _c51, ctx_r1319.selectedStore) : ctx_r1319.locations.stores);
+    ɵngcc0.ɵɵproperty("locations", ctx_r1325.selectedStore ? ɵngcc0.ɵɵpureFunction1(1, _c52, ctx_r1325.selectedStore) : ctx_r1325.locations.stores);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 25);
@@ -8527,36 +8450,36 @@ function StoreFinderListComponent_ng_container_0_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1298 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1304 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1298.locations == null ? null : ctx_r1298.locations.pagination);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1304.locations == null ? null : ctx_r1304.locations.pagination);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1298.locations == null ? null : ctx_r1298.locations.stores);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1304.locations == null ? null : ctx_r1304.locations.stores);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1298.locations == null ? null : ctx_r1298.locations.stores);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1304.locations == null ? null : ctx_r1304.locations.stores);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !(ctx_r1298.locations == null ? null : ctx_r1298.locations.stores));
+    ɵngcc0.ɵɵproperty("ngIf", !(ctx_r1304.locations == null ? null : ctx_r1304.locations.stores));
 } }
 function StoreFinderSearchResultComponent_div_0_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1338 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1344 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "div", 5);
     ɵngcc0.ɵɵelementStart(2, "cx-pagination", 6);
-    ɵngcc0.ɵɵlistener("viewPageEvent", function StoreFinderSearchResultComponent_div_0_div_1_Template_cx_pagination_viewPageEvent_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r1338); const ctx_r1337 = ɵngcc0.ɵɵnextContext(2); return ctx_r1337.viewPage($event); });
+    ɵngcc0.ɵɵlistener("viewPageEvent", function StoreFinderSearchResultComponent_div_0_div_1_Template_cx_pagination_viewPageEvent_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r1344); const ctx_r1343 = ɵngcc0.ɵɵnextContext(2); return ctx_r1343.viewPage($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const locations_r1333 = ɵngcc0.ɵɵnextContext().ngIf;
+    const locations_r1339 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("pagination", locations_r1333.pagination);
+    ɵngcc0.ɵɵproperty("pagination", locations_r1339.pagination);
 } }
 function StoreFinderSearchResultComponent_div_0_cx_store_finder_list_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-store-finder-list", 7);
 } if (rf & 2) {
-    const locations_r1333 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r1335 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("locations", locations_r1333)("useMylocation", ctx_r1335.useMyLocation);
+    const locations_r1339 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r1341 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("locations", locations_r1339)("useMylocation", ctx_r1341.useMyLocation);
 } }
 function StoreFinderSearchResultComponent_div_0_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 8);
@@ -8578,22 +8501,22 @@ function StoreFinderSearchResultComponent_div_0_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵtemplate(3, StoreFinderSearchResultComponent_div_0_div_3_Template, 5, 3, "div", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const locations_r1333 = ctx.ngIf;
+    const locations_r1339 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", locations_r1333 == null ? null : locations_r1333.stores.length);
+    ɵngcc0.ɵɵproperty("ngIf", locations_r1339 == null ? null : locations_r1339.stores.length);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", locations_r1333 == null ? null : locations_r1333.stores.length);
+    ɵngcc0.ɵɵproperty("ngIf", locations_r1339 == null ? null : locations_r1339.stores.length);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !(locations_r1333 == null ? null : locations_r1333.stores.length));
+    ɵngcc0.ɵɵproperty("ngIf", !(locations_r1339 == null ? null : locations_r1339.stores.length));
 } }
 function StoreFinderSearchResultComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 11);
     ɵngcc0.ɵɵelement(1, "cx-spinner");
     ɵngcc0.ɵɵelementEnd();
 } }
-const _c52 = function () { return ["/store-finder/find"]; };
-const _c53 = function (a0) { return { "disabled-action": a0 }; };
-const _c54 = function () { return ["/store-finder/view-all"]; };
+const _c53 = function () { return ["/store-finder/find"]; };
+const _c54 = function (a0) { return { "disabled-action": a0 }; };
+const _c55 = function () { return ["/store-finder/view-all"]; };
 function StoreFinderStoreDescriptionComponent_ng_container_0_p_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "p", 13);
     ɵngcc0.ɵɵtext(1);
@@ -8601,11 +8524,11 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_p_6_Template(rf, ct
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1343 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1349 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1343.location.address.line1, " ", ctx_r1343.location.address.line2, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1349.location.address.line1, " ", ctx_r1349.location.address.line2, " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1343.getFormattedStoreAddress(ɵngcc0.ɵɵpureFunction3(3, _c47, ctx_r1343.location.address.town, ctx_r1343.location.address.postalCode, ctx_r1343.location.address.country.isocode)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1349.getFormattedStoreAddress(ɵngcc0.ɵɵpureFunction3(3, _c48, ctx_r1349.location.address.town, ctx_r1349.location.address.postalCode, ctx_r1349.location.address.country.isocode)), " ");
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_li_13_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "li", 7);
@@ -8613,9 +8536,9 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_li_13_Template(rf, 
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1344 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1350 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "storeFinder.call"), " ", ctx_r1344.location.address == null ? null : ctx_r1344.location.address.phone, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "storeFinder.call"), " ", ctx_r1350.location.address == null ? null : ctx_r1350.location.address.phone, " ");
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_div_14_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 14);
@@ -8627,9 +8550,9 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_div_14_Template(rf,
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1345 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1351 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", ctx_r1345.location);
+    ɵngcc0.ɵɵproperty("location", ctx_r1351.location);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 2, "storeFinder.storeHours"));
 } }
@@ -8640,9 +8563,9 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_div_15_div_7_Templa
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const feature_r1349 = ctx.$implicit;
+    const feature_r1355 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(feature_r1349.value);
+    ɵngcc0.ɵɵtextInterpolate(feature_r1355.value);
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_div_15_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 16);
@@ -8659,20 +8582,20 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_div_15_Template(rf,
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1346 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1352 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 2, "storeFinder.storeFeatures"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1346.location.features == null ? null : ctx_r1346.location.features.entry);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1352.location.features == null ? null : ctx_r1352.location.features.entry);
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_article_17_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "article", 22);
     ɵngcc0.ɵɵelement(1, "cx-store-finder-map", 23);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1347 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1353 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("locations", ɵngcc0.ɵɵpureFunction1(1, _c51, ctx_r1347.location));
+    ɵngcc0.ɵɵproperty("locations", ɵngcc0.ɵɵpureFunction1(1, _c52, ctx_r1353.location));
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -8703,35 +8626,35 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_Template(rf, ctx) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1342 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1348 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1342.location.displayName || ctx_r1342.location.name);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1348.location.displayName || ctx_r1348.location.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1342.location.address);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1348.location.address);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("href", ctx_r1342.getDirections(ctx_r1342.location), ɵngcc0.ɵɵsanitizeUrl);
+    ɵngcc0.ɵɵproperty("href", ctx_r1348.getDirections(ctx_r1348.location), ɵngcc0.ɵɵsanitizeUrl);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(12, 8, "storeFinder.getDirections"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1342.location.address == null ? null : ctx_r1342.location.address.phone);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1348.location.address == null ? null : ctx_r1348.location.address.phone);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1342.location.openingHours);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1348.location.openingHours);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(16, 10, ctx_r1342.location.features) != "{}");
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(16, 10, ctx_r1348.location.features) != "{}");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1342.disableMap);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1348.disableMap);
 } }
 function StoreFinderStoresCountComponent_ng_container_0_div_2_div_1_span_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "span", 11);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const country_r1357 = ɵngcc0.ɵɵnextContext().$implicit;
-    ɵngcc0.ɵɵproperty("ngClass", (country_r1357 == null ? null : country_r1357.storeCountDataList) ? "country-header" : "country-header-link");
+    const country_r1363 = ɵngcc0.ɵɵnextContext().$implicit;
+    ɵngcc0.ɵɵproperty("ngClass", (country_r1363 == null ? null : country_r1363.storeCountDataList) ? "country-header" : "country-header-link");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1("(", country_r1357.count, ")");
+    ɵngcc0.ɵɵtextInterpolate1("(", country_r1363.count, ")");
 } }
-const _c55 = function (a1) { return ["../country", a1]; };
+const _c56 = function (a1) { return ["../country", a1]; };
 function StoreFinderStoresCountComponent_ng_container_0_div_2_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 6);
     ɵngcc0.ɵɵelementStart(1, "a", 7);
@@ -8744,24 +8667,24 @@ function StoreFinderStoresCountComponent_ng_container_0_div_2_div_1_Template(rf,
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const country_r1357 = ctx.$implicit;
+    const country_r1363 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction1(4, _c55, country_r1357.isoCode));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction1(4, _c56, country_r1363.isoCode));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngClass", (country_r1357 == null ? null : country_r1357.storeCountDataList) ? "country-header" : "country-header-link");
+    ɵngcc0.ɵɵproperty("ngClass", (country_r1363 == null ? null : country_r1363.storeCountDataList) ? "country-header" : "country-header-link");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(country_r1357.name);
+    ɵngcc0.ɵɵtextInterpolate(country_r1363.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !(country_r1357 == null ? null : country_r1357.storeCountDataList));
+    ɵngcc0.ɵɵproperty("ngIf", !(country_r1363 == null ? null : country_r1363.storeCountDataList));
 } }
 function StoreFinderStoresCountComponent_ng_container_0_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 4);
     ɵngcc0.ɵɵtemplate(1, StoreFinderStoresCountComponent_ng_container_0_div_2_div_1_Template, 6, 6, "div", 5);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const locations_r1353 = ɵngcc0.ɵɵnextContext().ngIf;
+    const locations_r1359 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", locations_r1353);
+    ɵngcc0.ɵɵproperty("ngForOf", locations_r1359);
 } }
 function StoreFinderStoresCountComponent_ng_container_0_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 4);
@@ -8782,11 +8705,11 @@ function StoreFinderStoresCountComponent_ng_container_0_Template(rf, ctx) { if (
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const locations_r1353 = ctx.ngIf;
+    const locations_r1359 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", locations_r1353 == null ? null : locations_r1353.length);
+    ɵngcc0.ɵɵproperty("ngIf", locations_r1359 == null ? null : locations_r1359.length);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !(locations_r1353 == null ? null : locations_r1353.length));
+    ɵngcc0.ɵɵproperty("ngIf", !(locations_r1359 == null ? null : locations_r1359.length));
 } }
 function StoreFinderStoresCountComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 13);
@@ -8794,12 +8717,12 @@ function StoreFinderStoresCountComponent_ng_template_3_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
 } }
 function StoreFinderStoreComponent_div_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1366 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1372 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 2);
     ɵngcc0.ɵɵelementStart(1, "div", 3);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
     ɵngcc0.ɵɵelementStart(3, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function StoreFinderStoreComponent_div_0_Template_button_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r1366); const ctx_r1365 = ɵngcc0.ɵɵnextContext(); return ctx_r1365.goBack(); });
+    ɵngcc0.ɵɵlistener("click", function StoreFinderStoreComponent_div_0_Template_button_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r1372); const ctx_r1371 = ɵngcc0.ɵɵnextContext(); return ctx_r1371.goBack(); });
     ɵngcc0.ɵɵelement(4, "cx-icon", 6);
     ɵngcc0.ɵɵtext(5);
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
@@ -8813,14 +8736,14 @@ function StoreFinderStoreComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const location_r1364 = ctx.ngIf;
-    const ctx_r1361 = ɵngcc0.ɵɵnextContext();
+    const location_r1370 = ctx.ngIf;
+    const ctx_r1367 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("type", ctx_r1361.iconTypes.CARET_LEFT);
+    ɵngcc0.ɵɵproperty("type", ctx_r1367.iconTypes.CARET_LEFT);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(6, 4, "storeFinder.backToList"), " ");
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("disableMap", ctx_r1361.disableMap)("location", location_r1364);
+    ɵngcc0.ɵɵproperty("disableMap", ctx_r1367.disableMap)("location", location_r1370);
 } }
 function StoreFinderStoreComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 10);
@@ -8860,7 +8783,7 @@ function LoginFormComponent_div_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(3, 1, "loginForm.wrongEmailFormat"));
 } }
-const _c56 = function () { return { cxRoute: "register" }; };
+const _c57 = function () { return { cxRoute: "register" }; };
 function LoginFormComponent_ng_container_28_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "a", 12);
@@ -8871,11 +8794,11 @@ function LoginFormComponent_ng_container_28_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction0(6, _c56)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction0(6, _c57)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 4, "loginForm.register"));
 } }
-const _c57 = function () { return { cxRoute: "checkoutLogin" }; };
+const _c58 = function () { return { cxRoute: "checkoutLogin" }; };
 function LoginFormComponent_ng_container_29_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "a", 13);
@@ -8886,12 +8809,12 @@ function LoginFormComponent_ng_container_29_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction0(6, _c57)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction0(6, _c58)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 4, "loginForm.guestCheckout"));
 } }
-const _c58 = function () { return { cxRoute: "forgotPassword" }; };
-const _c59 = function (a0) { return { name: a0 }; };
+const _c59 = function () { return { cxRoute: "forgotPassword" }; };
+const _c60 = function (a0) { return { name: a0 }; };
 function LoginComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 2);
@@ -8901,9 +8824,9 @@ function LoginComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(4, "cx-page-slot", 3);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const user_r1375 = ctx.ngIf;
+    const user_r1381 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 1, "miniLogin.userGreeting", ɵngcc0.ɵɵpureFunction1(4, _c59, user_r1375.name)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 1, "miniLogin.userGreeting", ɵngcc0.ɵɵpureFunction1(4, _c60, user_r1381.name)), " ");
 } }
 function LoginComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "a", 4);
@@ -8921,10 +8844,10 @@ function RegisterComponent_section_0_option_14_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const title_r1385 = ctx.$implicit;
-    ɵngcc0.ɵɵproperty("value", title_r1385.code);
+    const title_r1391 = ctx.$implicit;
+    ɵngcc0.ɵɵproperty("value", title_r1391.code);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(title_r1385.name);
+    ɵngcc0.ɵɵtextInterpolate(title_r1391.name);
 } }
 function RegisterComponent_section_0_div_44_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 27);
@@ -8956,12 +8879,12 @@ function RegisterComponent_section_0_ng_container_55_label_1_Template(rf, ctx) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const anonymousConsent_r1387 = ctx.ngIf;
-    const ctx_r1386 = ɵngcc0.ɵɵnextContext(3);
+    const anonymousConsent_r1393 = ctx.ngIf;
+    const ctx_r1392 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("checked", ctx_r1386.isConsentGiven(anonymousConsent_r1387.consent));
+    ɵngcc0.ɵɵproperty("checked", ctx_r1392.isConsentGiven(anonymousConsent_r1393.consent));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", anonymousConsent_r1387.template, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", anonymousConsent_r1393.template, " ");
 } }
 function RegisterComponent_section_0_ng_container_55_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -8969,9 +8892,9 @@ function RegisterComponent_section_0_ng_container_55_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1382 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1388 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r1382.anonymousConsent$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r1388.anonymousConsent$));
 } }
 function RegisterComponent_section_0_ng_template_56_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "label");
@@ -8986,7 +8909,7 @@ function RegisterComponent_section_0_ng_template_56_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 1, "register.emailMarketing"), " ");
 } }
 function RegisterComponent_section_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1389 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1395 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "section", 2);
     ɵngcc0.ɵɵelementStart(1, "div", 3);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
@@ -9083,7 +9006,7 @@ function RegisterComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(69, "button", 24);
-    ɵngcc0.ɵɵlistener("click", function RegisterComponent_section_0_Template_button_click_69_listener($event) { ɵngcc0.ɵɵrestoreView(_r1389); const ctx_r1388 = ɵngcc0.ɵɵnextContext(); return ctx_r1388.submit(); });
+    ɵngcc0.ɵɵlistener("click", function RegisterComponent_section_0_Template_button_click_69_listener($event) { ɵngcc0.ɵɵrestoreView(_r1395); const ctx_r1394 = ɵngcc0.ɵɵnextContext(); return ctx_r1394.submit(); });
     ɵngcc0.ɵɵtext(70);
     ɵngcc0.ɵɵpipe(71, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -9098,59 +9021,57 @@ function RegisterComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const _r1383 = ɵngcc0.ɵɵreference(57);
-    const ctx_r1376 = ɵngcc0.ɵɵnextContext();
+    const _r1389 = ɵngcc0.ɵɵreference(57);
+    const ctx_r1382 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("formGroup", ctx_r1376.userRegistrationForm);
+    ɵngcc0.ɵɵproperty("formGroup", ctx_r1382.userRegistrationForm);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(9, 31, "register.title"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(9, 30, "register.title"));
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(13, 33, "register.selectTitle"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(13, 32, "register.selectTitle"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(15, 35, ctx_r1376.titles$));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(15, 34, ctx_r1382.titles$));
     ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(20, 37, "register.firstName.label"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(20, 36, "register.firstName.label"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(22, 39, "register.firstName.placeholder"));
+    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(22, 38, "register.firstName.placeholder"));
     ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(27, 41, "register.lastName.label"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(27, 40, "register.lastName.label"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(29, 43, "register.lastName.placeholder"));
+    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(29, 42, "register.lastName.placeholder"));
     ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(34, 45, "register.emailAddress.label"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(34, 44, "register.emailAddress.label"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1376.userRegistrationForm.get("email").errors && (ctx_r1376.userRegistrationForm.get("email").errors["email"] || ctx_r1376.userRegistrationForm.get("email").errors["InvalidEmail"]) && ctx_r1376.userRegistrationForm.get("email").dirty);
-    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(36, 47, "register.emailAddress.placeholder"));
+    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1382.userRegistrationForm.get("email").errors && (ctx_r1382.userRegistrationForm.get("email").errors["email"] || ctx_r1382.userRegistrationForm.get("email").errors["InvalidEmail"]) && ctx_r1382.userRegistrationForm.get("email").dirty);
+    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(36, 46, "register.emailAddress.placeholder"));
     ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(41, 49, "register.password.label"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(41, 48, "register.password.label"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1376.userRegistrationForm.get("password").invalid && ctx_r1376.userRegistrationForm.get("password").dirty);
-    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(43, 51, "register.password.placeholder"));
+    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1382.userRegistrationForm.get("password").invalid && ctx_r1382.userRegistrationForm.get("password").dirty);
+    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(43, 50, "register.password.placeholder"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1376.userRegistrationForm.get("password").invalid && ctx_r1376.userRegistrationForm.get("password").dirty);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1382.userRegistrationForm.get("password").invalid && ctx_r1382.userRegistrationForm.get("password").dirty);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(49, 53, "register.confirmPassword.label"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(49, 52, "register.confirmPassword.label"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1376.userRegistrationForm.get("password").value !== ctx_r1376.userRegistrationForm.get("passwordconf").value);
-    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(51, 55, "register.confirmPassword.placeholder"));
+    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1382.userRegistrationForm.get("password").value !== ctx_r1382.userRegistrationForm.get("passwordconf").value);
+    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(51, 54, "register.confirmPassword.placeholder"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1376.userRegistrationForm.get("password").value !== ctx_r1376.userRegistrationForm.get("passwordconf").value && ctx_r1376.userRegistrationForm.get("passwordconf").value);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1382.userRegistrationForm.get("password").value !== ctx_r1382.userRegistrationForm.get("passwordconf").value && ctx_r1382.userRegistrationForm.get("passwordconf").value);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1376.isAnonymousConsentEnabled)("ngIfElse", _r1383);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1382.isAnonymousConsentEnabled)("ngIfElse", _r1389);
     ɵngcc0.ɵɵadvance(8);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(64, 57, "register.confirmThatRead"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(64, 56, "register.confirmThatRead"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(66, 59, ɵngcc0.ɵɵpureFunction0(69, _c23)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(66, 58, ɵngcc0.ɵɵpureFunction0(68, _c22)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(68, 61, "register.termsAndConditions"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(68, 60, "register.termsAndConditions"), " ");
+    ɵngcc0.ɵɵadvance(3);
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(71, 62, "register.register"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("disabled", ctx_r1376.userRegistrationForm.invalid);
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(71, 63, "register.register"), " ");
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(73, 64, ɵngcc0.ɵɵpureFunction0(69, _c19)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(73, 65, ɵngcc0.ɵɵpureFunction0(70, _c19)));
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(75, 67, "register.signIn"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(75, 66, "register.signIn"));
 } }
 function RegisterComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 31);
@@ -9165,11 +9086,11 @@ function WishListItemComponent_div_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1390 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1396 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c14, ctx_r1390.cartEntry.product)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c14, ctx_r1396.cartEntry.product)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1390.cartEntry.product.name);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1396.cartEntry.product.name);
 } }
 function WishListItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 18);
@@ -9177,45 +9098,45 @@ function WishListItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1391 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1397 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", ctx_r1391.cartEntry.product.code, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", ctx_r1397.cartEntry.product.code, " ");
 } }
 function WishListItemComponent_ng_container_10_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 22);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r1398 = ɵngcc0.ɵɵnextContext().$implicit;
+    const variant_r1404 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", variant_r1398.name, ": ", variant_r1398.value, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", variant_r1404.name, ": ", variant_r1404.value, " ");
 } }
 function WishListItemComponent_ng_container_10_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 20);
     ɵngcc0.ɵɵtemplate(1, WishListItemComponent_ng_container_10_div_1_div_1_Template, 2, 2, "div", 21);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r1398 = ctx.$implicit;
+    const variant_r1404 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", variant_r1398.name && variant_r1398.value);
+    ɵngcc0.ɵɵproperty("ngIf", variant_r1404.name && variant_r1404.value);
 } }
 function WishListItemComponent_ng_container_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, WishListItemComponent_ng_container_10_div_1_Template, 2, 1, "div", 19);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1392 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1398 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1392.cartEntry.product.baseOptions[0] == null ? null : ctx_r1392.cartEntry.product.baseOptions[0].selected == null ? null : ctx_r1392.cartEntry.product.baseOptions[0].selected.variantOptionQualifiers);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1398.cartEntry.product.baseOptions[0] == null ? null : ctx_r1398.cartEntry.product.baseOptions[0].selected == null ? null : ctx_r1398.cartEntry.product.baseOptions[0].selected.variantOptionQualifiers);
 } }
 function WishListItemComponent_div_11_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 26);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1401 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1407 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1401.cartEntry.basePrice == null ? null : ctx_r1401.cartEntry.basePrice.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1407.cartEntry.basePrice == null ? null : ctx_r1407.cartEntry.basePrice.formattedValue, " ");
 } }
 function WishListItemComponent_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 23);
@@ -9226,17 +9147,17 @@ function WishListItemComponent_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(4, WishListItemComponent_div_11_div_4_Template, 2, 1, "div", 25);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1393 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1399 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "cartItems.itemPrice"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1393.cartEntry.basePrice);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1399.cartEntry.basePrice);
 } }
 function WishListItemComponent_cx_add_to_cart_13_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-add-to-cart", 27);
 } if (rf & 2) {
-    const ctx_r1394 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1394.cartEntry.product);
+    const ctx_r1400 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1400.cartEntry.product);
 } }
 function WishListItemComponent_ng_template_14_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "span", 28);
@@ -9248,18 +9169,18 @@ function WishListItemComponent_ng_template_14_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "addToCart.outOfStock"), " ");
 } }
 function WishListComponent_ng_container_0_ng_container_1_div_12_Template(rf, ctx) { if (rf & 1) {
-    const _r1410 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1416 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "cx-wish-list-item", 10);
-    ɵngcc0.ɵɵlistener("remove", function WishListComponent_ng_container_0_ng_container_1_div_12_Template_cx_wish_list_item_remove_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1410); const ctx_r1409 = ɵngcc0.ɵɵnextContext(3); return ctx_r1409.removeEntry($event); });
+    ɵngcc0.ɵɵlistener("remove", function WishListComponent_ng_container_0_ng_container_1_div_12_Template_cx_wish_list_item_remove_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1416); const ctx_r1415 = ɵngcc0.ɵɵnextContext(3); return ctx_r1415.removeEntry($event); });
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const entry_r1408 = ctx.$implicit;
-    const ctx_r1407 = ɵngcc0.ɵɵnextContext(3);
+    const entry_r1414 = ctx.$implicit;
+    const ctx_r1413 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cartEntry", entry_r1408)("isLoading", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1407.loading$));
+    ɵngcc0.ɵɵproperty("cartEntry", entry_r1414)("isLoading", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1413.loading$));
 } }
 function WishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -9282,7 +9203,7 @@ function WishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵtemplate(12, WishListComponent_ng_container_0_ng_container_1_div_12_Template, 3, 4, "div", 8);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const wishList_r1405 = ɵngcc0.ɵɵnextContext().ngIf;
+    const wishList_r1411 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 4, "cartItems.description"), " ");
     ɵngcc0.ɵɵadvance(3);
@@ -9290,18 +9211,18 @@ function WishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(11, 8, "cartItems.total"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", wishList_r1405 == null ? null : wishList_r1405.entries);
+    ɵngcc0.ɵɵproperty("ngForOf", wishList_r1411 == null ? null : wishList_r1411.entries);
 } }
 function WishListComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, WishListComponent_ng_container_0_ng_container_1_Template, 13, 10, "ng-container", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const wishList_r1405 = ctx.ngIf;
+    const wishList_r1411 = ctx.ngIf;
     ɵngcc0.ɵɵnextContext();
-    const _r1403 = ɵngcc0.ɵɵreference(3);
+    const _r1409 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", (wishList_r1405 == null ? null : wishList_r1405.entries == null ? null : wishList_r1405.entries.length) > 0)("ngIfElse", _r1403);
+    ɵngcc0.ɵɵproperty("ngIf", (wishList_r1411 == null ? null : wishList_r1411.entries == null ? null : wishList_r1411.entries.length) > 0)("ngIfElse", _r1409);
 } }
 function WishListComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "h2");
@@ -12991,7 +12912,7 @@ let CardComponent = class CardComponent {
     ngOnInit() { }
 };
 CardComponent.ɵfac = function CardComponent_Factory(t) { return new (t || CardComponent)(); };
-CardComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CardComponent, selectors: [["cx-card"]], inputs: { border: "border", editMode: "editMode", isDefault: "isDefault", fitToContainer: "fitToContainer", content: "content" }, outputs: { deleteCard: "deleteCard", setDefaultCard: "setDefaultCard", sendCard: "sendCard", editCard: "editCard", cancelCard: "cancelCard" }, decls: 1, vars: 1, consts: [["class", "cx-card", 3, "cx-card-border", "cx-card-fit-to-container", 4, "ngIf"], [1, "cx-card"], ["class", "card-header", 4, "ngIf"], [1, "card-body", "cx-card-body"], ["class", "cx-card-delete-msg", 4, "ngIf"], ["class", "cx-card-title", 4, "ngIf"], [1, "cx-card-container"], [1, "cx-card-label-container"], ["class", "cx-card-label-bold", 4, "ngIf"], [4, "ngFor", "ngForOf"], ["class", "cx-card-img-container", 4, "ngIf"], ["class", "row cx-card-body-delete", 4, "ngIf"], ["class", "cx-card-actions", 4, "ngIf"], [1, "card-header"], [1, "cx-card-delete-msg"], [1, "cx-card-title"], [1, "cx-card-label-bold"], [1, "cx-card-label"], [1, "cx-card-img-container"], [3, "type"], [1, "row", "cx-card-body-delete"], [1, "col-md-6"], [1, "btn", "btn-block", "btn-secondary", 3, "click"], [1, "btn", "btn-block", "btn-primary", 3, "click"], [1, "cx-card-actions"], [3, "ngSwitch"], ["class", "cx-card-link card-link btn-link", 3, "click", 4, "ngSwitchCase"], ["class", "card-link btn-link", 3, "href", 4, "ngSwitchDefault"], [1, "cx-card-link", "card-link", "btn-link", 3, "click"], [1, "card-link", "btn-link", 3, "href"]], template: function CardComponent_Template(rf, ctx) { if (rf & 1) {
+CardComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CardComponent, selectors: [["cx-card"]], inputs: { border: "border", editMode: "editMode", isDefault: "isDefault", fitToContainer: "fitToContainer", content: "content" }, outputs: { deleteCard: "deleteCard", setDefaultCard: "setDefaultCard", sendCard: "sendCard", editCard: "editCard", cancelCard: "cancelCard" }, decls: 1, vars: 1, consts: [["class", "cx-card", 3, "cx-card-border", "cx-card-fit-to-container", 4, "ngIf"], [1, "cx-card"], ["class", "card-header", 4, "ngIf"], [1, "card-body", "cx-card-body"], ["class", "cx-card-delete-msg", 4, "ngIf"], ["class", "cx-card-title", 4, "ngIf"], [1, "cx-card-container"], [1, "cx-card-label-container"], ["class", "cx-card-label-bold", 4, "ngIf"], [4, "ngFor", "ngForOf"], ["class", "cx-card-img-container", 4, "ngIf"], ["class", "row cx-card-body-delete", 4, "ngIf"], ["class", "cx-card-actions", 4, "ngIf"], [1, "card-header"], [1, "cx-card-delete-msg"], [1, "cx-card-title"], [1, "cx-card-label-bold"], [1, "cx-card-label"], [1, "cx-card-img-container"], [3, "type"], [1, "row", "cx-card-body-delete"], [1, "col-md-6"], [1, "btn", "btn-block", "btn-secondary", 3, "click"], [1, "btn", "btn-block", "btn-primary", 3, "click"], [1, "cx-card-actions"], [3, "ngSwitch"], ["class", "cx-card-link card-link btn-link", "tabindex", "0", 3, "click", "keydown.enter", 4, "ngSwitchCase"], ["class", "card-link btn-link", "tabindex", "0", 3, "href", 4, "ngSwitchDefault"], ["tabindex", "0", 1, "cx-card-link", "card-link", "btn-link", 3, "click", "keydown.enter"], ["tabindex", "0", 1, "card-link", "btn-link", 3, "href"]], template: function CardComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, CardComponent_div_0_Template, 12, 14, "div", 0);
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ctx.content);
@@ -13128,7 +13049,7 @@ let CarouselComponent = class CarouselComponent {
     }
 };
 CarouselComponent.ɵfac = function CarouselComponent_Factory(t) { return new (t || CarouselComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(CarouselService)); };
-CarouselComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CarouselComponent, selectors: [["cx-carousel"]], inputs: { itemWidth: "itemWidth", hideIndicators: "hideIndicators", indicatorIcon: "indicatorIcon", previousIcon: "previousIcon", nextIcon: "nextIcon", setItems: ["items", "setItems"], title: "title", template: "template" }, decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "carousel-panel", 3, "ngClass"], ["class", "previous", 3, "disabled", "click", 4, "ngIf"], [1, "slides"], [4, "ngFor", "ngForOf"], ["class", "next", "tabindex", "0", 3, "disabled", "click", 4, "ngIf"], ["class", "indicators", 4, "ngIf"], [1, "previous", 3, "disabled", "click"], [3, "type"], ["class", "slide", 4, "ngIf"], [1, "slide"], ["class", "item", 3, "active", 4, "ngIf"], [1, "item"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], ["tabindex", "0", 1, "next", 3, "disabled", "click"], [1, "indicators"], ["tabindex", "0", 3, "disabled", "focus", 4, "ngIf"], ["tabindex", "0", 3, "disabled", "focus"]], template: function CarouselComponent_Template(rf, ctx) { if (rf & 1) {
+CarouselComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CarouselComponent, selectors: [["cx-carousel"]], inputs: { itemWidth: "itemWidth", hideIndicators: "hideIndicators", indicatorIcon: "indicatorIcon", previousIcon: "previousIcon", nextIcon: "nextIcon", setItems: ["items", "setItems"], title: "title", template: "template" }, decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "carousel-panel", 3, "ngClass"], ["class", "previous", 3, "disabled", "click", 4, "ngIf"], [1, "slides"], [4, "ngFor", "ngForOf"], ["class", "next", "tabindex", "-1", 3, "disabled", "click", 4, "ngIf"], ["class", "indicators", 4, "ngIf"], [1, "previous", 3, "disabled", "click"], [3, "type"], ["class", "slide", 4, "ngIf"], [1, "slide"], ["class", "item", 3, "active", 4, "ngIf"], [1, "item"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], ["tabindex", "-1", 1, "next", 3, "disabled", "click"], [1, "indicators"], ["tabindex", "-1", 3, "disabled", "focus", 4, "ngIf"], ["tabindex", "-1", 3, "disabled", "focus"]], template: function CarouselComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, CarouselComponent_ng_container_0_Template, 8, 6, "ng-container", 0);
         ɵngcc0.ɵɵpipe(1, "async");
     } if (rf & 2) {
@@ -13470,12 +13391,12 @@ ItemCounterComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ItemCounterComp
         ɵngcc0.ɵɵtext(6, " +\n");
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
-        const _r184 = ɵngcc0.ɵɵreference(3);
-        ɵngcc0.ɵɵproperty("disabled", _r184.disabled || (_r184 == null ? null : _r184.value) <= ctx.min);
+        const _r188 = ɵngcc0.ɵɵreference(3);
+        ɵngcc0.ɵɵproperty("disabled", _r188.disabled || (_r188 == null ? null : _r188.value) <= ctx.min);
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("min", ctx.min)("max", ctx.max)("step", ctx.step)("formControl", ɵngcc0.ɵɵpipeBind1(4, 6, ctx.getControl()));
         ɵngcc0.ɵɵadvance(3);
-        ɵngcc0.ɵɵproperty("disabled", _r184.disabled || (_r184 == null ? null : _r184.value) >= ctx.max);
+        ɵngcc0.ɵɵproperty("disabled", _r188.disabled || (_r188 == null ? null : _r188.value) >= ctx.max);
     } }, directives: [ɵngcc7.NumberValueAccessor, ɵngcc7.DefaultValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlDirective], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2 });
 __decorate([
     Input()
@@ -13537,8 +13458,8 @@ GenericLinkComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: GenericLinkComp
         ɵngcc0.ɵɵtemplate(1, GenericLinkComponent_ng_template_1_Template, 2, 7, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
         ɵngcc0.ɵɵtemplate(3, GenericLinkComponent_ng_template_3_Template, 1, 0, "ng-template", null, 2, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r186 = ɵngcc0.ɵɵreference(2);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.isExternalUrl())("ngIfElse", _r186);
+        const _r190 = ɵngcc0.ɵɵreference(2);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.isExternalUrl())("ngIfElse", _r190);
     } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgTemplateOutlet, ɵngcc5.RouterLinkWithHref], encapsulation: 2 });
 __decorate([
     Input()
@@ -14360,7 +14281,7 @@ StarRatingComponent.ɵfac = function StarRatingComponent_Factory(t) { return new
 StarRatingComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StarRatingComponent, selectors: [["cx-star-rating"]], hostVars: 1, hostBindings: function StarRatingComponent_HostBindings(rf, ctx) { if (rf & 2) {
         ɵngcc0.ɵɵattribute("disabled", ctx.disabled);
     } }, inputs: { disabled: "disabled", rating: "rating" }, outputs: { change: "change" }, decls: 1, vars: 2, consts: [["class", "star", 3, "type", "mouseover", "mouseout", "click", 4, "ngFor", "ngForOf"], [1, "star", 3, "type", "mouseover", "mouseout", "click"]], template: function StarRatingComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵtemplate(0, StarRatingComponent_cx_icon_0_Template, 1, 1, "cx-icon", 0);
+        ɵngcc0.ɵɵtemplate(0, StarRatingComponent_cx_icon_0_Template, 1, 2, "cx-icon", 0);
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpureFunction0(1, _c13));
     } }, directives: [ɵngcc4.NgForOf, IconComponent], encapsulation: 2, changeDetection: 0 });
@@ -14484,8 +14405,8 @@ AppliedCouponsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AppliedCoupo
         ɵngcc0.ɵɵtemplate(0, AppliedCouponsComponent_div_0_Template, 3, 2, "div", 0);
         ɵngcc0.ɵɵtemplate(1, AppliedCouponsComponent_ng_template_1_Template, 2, 1, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r241 = ɵngcc0.ɵɵreference(2);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.isReadOnly)("ngIfElse", _r241);
+        const _r245 = ɵngcc0.ɵɵreference(2);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.isReadOnly)("ngIfElse", _r245);
     } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, IconComponent], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
 AppliedCouponsComponent.ctorParameters = () => [
     { type: CartVoucherService }
@@ -14855,7 +14776,7 @@ let CartItemComponent = class CartItemComponent {
     }
 };
 CartItemComponent.ɵfac = function CartItemComponent_Factory(t) { return new (t || CartItemComponent)(ɵngcc0.ɵɵdirectiveInject(PromotionService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.FeatureConfigService)); };
-CartItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartItemComponent, selectors: [["cx-cart-item"]], inputs: { compact: "compact", readonly: "readonly", promotionLocation: "promotionLocation", options: "options", item: "item", potentialProductPromotions: "potentialProductPromotions", quantityControl: "quantityControl" }, outputs: { view: "view" }, decls: 27, vars: 31, consts: [[3, "ngClass"], [1, "col-2", "cx-image-container"], [3, "routerLink", "click"], ["format", "thumbnail", 3, "container"], [1, "cx-info", "col-10"], [1, "cx-info-container", "row"], ["class", "cx-name", 4, "ngIf"], ["class", "cx-code", 4, "ngIf"], [4, "cxFeatureLevel"], ["class", "cx-price", 3, "ngClass", 4, "ngIf"], [1, "cx-quantity", 3, "ngClass"], ["placement", "left", 1, "cx-label", 3, "ngClass", "title"], [1, "cx-value"], [3, "control", "readonly", "max", "allowZero"], [4, "ngIf", "ngIfElse"], ["class", "cx-availability col-12", 4, "ngIf"], ["class", "cx-actions col-12", 4, "ngIf"], ["total", ""], [1, "cx-name"], [1, "cx-link", 3, "routerLink", "click"], [1, "cx-code"], ["class", "cx-property", 4, "ngFor", "ngForOf"], [1, "cx-property"], [1, "cx-label"], [4, "ngIf"], ["class", "cx-label", 4, "ngIf"], [1, "cx-price", 3, "ngClass"], [1, "cx-label", 3, "ngClass"], ["class", "cx-value", 4, "ngIf"], [1, "cx-total", 3, "ngClass"], ["class", "cx-value", 4, "ngIf", "ngIfElse"], ["forceInstock", ""], [1, "cx-availability", "col-12"], [3, "promotions"], [1, "cx-actions", "col-12"], [1, "col-md-3", "cx-remove-btn"], [1, "link", 3, "disabled", "click"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], ["class", "cx-total", 3, "ngClass", 4, "ngIf"]], template: function CartItemComponent_Template(rf, ctx) { if (rf & 1) {
+CartItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartItemComponent, selectors: [["cx-cart-item"]], inputs: { compact: "compact", readonly: "readonly", promotionLocation: "promotionLocation", options: "options", item: "item", potentialProductPromotions: "potentialProductPromotions", quantityControl: "quantityControl" }, outputs: { view: "view" }, decls: 27, vars: 31, consts: [[3, "ngClass"], [1, "col-2", "cx-image-container"], ["tabindex", "-1", 3, "routerLink", "click"], ["format", "thumbnail", 3, "container"], [1, "cx-info", "col-10"], [1, "cx-info-container", "row"], ["class", "cx-name", 4, "ngIf"], ["class", "cx-code", 4, "ngIf"], [4, "cxFeatureLevel"], ["class", "cx-price", 3, "ngClass", 4, "ngIf"], [1, "cx-quantity", 3, "ngClass"], ["placement", "left", 1, "cx-label", 3, "ngClass", "title"], [1, "cx-value"], [3, "control", "readonly", "max", "allowZero"], [4, "ngIf", "ngIfElse"], ["class", "cx-availability col-12", 4, "ngIf"], ["class", "cx-actions col-12", 4, "ngIf"], ["total", ""], [1, "cx-name"], [1, "cx-link", 3, "routerLink", "click"], [1, "cx-code"], ["class", "cx-property", 4, "ngFor", "ngForOf"], [1, "cx-property"], [1, "cx-label"], [4, "ngIf"], ["class", "cx-label", 4, "ngIf"], [1, "cx-price", 3, "ngClass"], [1, "cx-label", 3, "ngClass"], ["class", "cx-value", 4, "ngIf"], [1, "cx-total", 3, "ngClass"], ["class", "cx-value", 4, "ngIf", "ngIfElse"], ["forceInstock", ""], [1, "cx-availability", "col-12"], [3, "promotions"], [1, "cx-actions", "col-12"], [1, "col-md-3", "cx-remove-btn"], [1, "link", 3, "disabled", "click"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], ["class", "cx-total", 3, "ngClass", 4, "ngIf"]], template: function CartItemComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "div", 0);
         ɵngcc0.ɵɵelementStart(1, "div", 1);
         ɵngcc0.ɵɵelementStart(2, "a", 2);
@@ -14893,7 +14814,7 @@ CartItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartItemComponent,
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵtemplate(25, CartItemComponent_ng_template_25_Template, 1, 1, "ng-template", null, 17, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r291 = ɵngcc0.ɵɵreference(26);
+        const _r295 = ɵngcc0.ɵɵreference(26);
         ɵngcc0.ɵɵproperty("ngClass", ctx.compact ? "cx-compact row" : "row");
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(3, 23, ɵngcc0.ɵɵpureFunction1(29, _c14, ctx.item.product)));
@@ -14921,7 +14842,7 @@ CartItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartItemComponent,
         ɵngcc0.ɵɵadvance(3);
         ɵngcc0.ɵɵproperty("control", ctx.quantityControl)("readonly", !ctx.item.updateable || ctx.readonly || ctx.isSaveForLaterEnabled() && ctx.options.isSaveForLater)("max", (ctx.item.product.stock == null ? null : ctx.item.product.stock.stockLevel) || 1000)("allowZero", true);
         ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.isSaveForLaterEnabled() && ctx.options.isSaveForLater)("ngIfElse", _r291);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.isSaveForLaterEnabled() && ctx.options.isSaveForLater)("ngIfElse", _r295);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngIf", ctx.isProductOutOfStock(ctx.item.product));
         ɵngcc0.ɵɵadvance(1);
@@ -16053,14 +15974,23 @@ let CheckoutProgressComponent = class CheckoutProgressComponent {
             });
         }));
     }
+    getTabIndex(stepIndex) {
+        return !this.isActive(stepIndex) && !this.isDisabled(stepIndex) ? 0 : -1;
+    }
+    isActive(index) {
+        return index === this.activeStepIndex;
+    }
+    isDisabled(index) {
+        return index > this.activeStepIndex;
+    }
 };
 CheckoutProgressComponent.ɵfac = function CheckoutProgressComponent_Factory(t) { return new (t || CheckoutProgressComponent)(ɵngcc0.ɵɵdirectiveInject(CheckoutConfig), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingConfigService)); };
-CheckoutProgressComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CheckoutProgressComponent, selectors: [["cx-checkout-progress"]], decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "cx-nav", "d-none", "d-lg-block", "d-xl-block"], [1, "cx-list"], ["class", "cx-item", 4, "ngFor", "ngForOf"], [1, "cx-item"], [1, "cx-link", 3, "routerLink", "ngClass"]], template: function CheckoutProgressComponent_Template(rf, ctx) { if (rf & 1) {
+CheckoutProgressComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CheckoutProgressComponent, selectors: [["cx-checkout-progress"]], decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "cx-nav", "d-none", "d-lg-block", "d-xl-block"], [1, "cx-list"], ["class", "cx-item", 4, "ngFor", "ngForOf"], [1, "cx-item"], [1, "cx-link", 3, "routerLink", "tabindex"]], template: function CheckoutProgressComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, CheckoutProgressComponent_section_0_Template, 4, 1, "section", 0);
         ɵngcc0.ɵɵpipe(1, "async");
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.routerState$));
-    } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc5.RouterLinkWithHref, ɵngcc4.NgClass], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
+    } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc5.RouterLinkWithHref], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
 CheckoutProgressComponent.ctorParameters = () => [
     { type: CheckoutConfig },
     { type: RoutingService },
@@ -16209,14 +16139,14 @@ DeliveryModeComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: DeliveryModeCo
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵtemplate(17, DeliveryModeComponent_ng_template_17_Template, 2, 0, "ng-template", null, 9, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r405 = ɵngcc0.ɵɵreference(18);
+        const _r409 = ɵngcc0.ɵɵreference(18);
         var tmp_2_0 = null;
         const currVal_2 = (tmp_2_0 = ɵngcc0.ɵɵpipeBind1(7, 9, ctx.supportedDeliveryModes$)) == null ? null : tmp_2_0.length;
         ɵngcc0.ɵɵproperty("formGroup", ctx.mode);
         ɵngcc0.ɵɵadvance(4);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 7, "checkoutShipping.shippingMethod"), " ");
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("ngIf", currVal_2)("ngIfElse", _r405);
+        ɵngcc0.ɵɵproperty("ngIf", currVal_2)("ngIfElse", _r409);
         ɵngcc0.ɵɵadvance(5);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(12, 11, "common.back"), " ");
         ɵngcc0.ɵɵadvance(3);
@@ -16664,10 +16594,6 @@ let PaymentFormComponent = class PaymentFormComponent {
     toggleSameAsShippingAddress() {
         this.sameAsShippingAddress = !this.sameAsShippingAddress;
     }
-    isContinueButtonDisabled() {
-        return (this.payment.invalid ||
-            (!this.sameAsShippingAddress && this.billingAddress.invalid));
-    }
     /**
      * Check if the shipping address can also be a billing address
      *
@@ -16746,13 +16672,13 @@ let PaymentFormComponent = class PaymentFormComponent {
     }
 };
 PaymentFormComponent.ɵfac = function PaymentFormComponent_Factory(t) { return new (t || PaymentFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutPaymentService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserPaymentService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.GlobalMessageService), ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ModalService)); };
-PaymentFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: PaymentFormComponent, selectors: [["cx-payment-form"]], inputs: { setAsDefaultField: "setAsDefaultField", paymentMethodsCount: "paymentMethodsCount" }, outputs: { goBack: "goBack", closeForm: "closeForm", setPaymentDetails: "setPaymentDetails" }, decls: 4, vars: 4, consts: [[3, "formGroup", 4, "ngIf", "ngIfElse"], ["spinner", ""], [3, "formGroup"], [1, "row"], [1, "col-md-12", "col-lg-9"], [1, "form-group"], [4, "ngIf"], [1, "label-content"], ["type", "text", "required", "", "formControlName", "accountHolderName", 1, "form-control", 3, "placeholder"], ["type", "text", "required", "", "formControlName", "cardNumber", 1, "form-control"], [1, "form-group", "col-md-6"], [1, "cx-payment-form-exp-date", "row"], [1, "col-sm-6", "col-md-5"], ["bindLabel", "name", "bindValue", "expiryMonth", 3, "searchable", "clearable", "items", "placeholder", "change"], [1, "col-sm-6", "col-md-7"], ["bindLabel", "name", "bindValue", "expiryYear", 3, "searchable", "clearable", "items", "placeholder", "change"], ["placement", "right", "alt", "", 1, "cx-payment-form-tooltip", 3, "type", "title"], ["type", "text", "id", "cVVNumber", "required", "", "formControlName", "cvn", 1, "form-control"], ["class", "form-group", 4, "ngIf"], [1, "cx-payment-form-billing"], [1, "cx-payment-form-billing-address"], [4, "ngIf", "ngIfElse"], ["billingAddressForm", ""], [1, "cx-checkout-btns", "row"], [1, "col-md-12", "col-lg-6"], ["class", "btn btn-block btn-action", 3, "click", 4, "ngIf"], [1, "btn", "btn-block", "btn-primary", 3, "disabled", "click"], ["aria-required", "true"], [1, "label-content", "required"], ["bindLabel", "name", "bindValue", "code", 3, "searchable", "clearable", "items", "placeholder", "change"], [1, "form-check"], ["type", "checkbox", 1, "form-check-input", 3, "change"], [1, "form-check-label"], ["type", "checkbox", 1, "form-check-input", 3, "checked", "change"], [3, "content"], [3, "billingAddress", "countries$"], [1, "btn", "btn-block", "btn-action", 3, "click"]], template: function PaymentFormComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵtemplate(0, PaymentFormComponent_div_0_Template, 59, 52, "div", 0);
+PaymentFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: PaymentFormComponent, selectors: [["cx-payment-form"]], inputs: { setAsDefaultField: "setAsDefaultField", paymentMethodsCount: "paymentMethodsCount" }, outputs: { goBack: "goBack", closeForm: "closeForm", setPaymentDetails: "setPaymentDetails" }, decls: 4, vars: 4, consts: [[3, "formGroup", 4, "ngIf", "ngIfElse"], ["spinner", ""], [3, "formGroup"], [1, "row"], [1, "col-md-12", "col-lg-9"], [1, "form-group"], [4, "ngIf"], [1, "label-content"], ["type", "text", "required", "", "formControlName", "accountHolderName", 1, "form-control", 3, "placeholder"], ["type", "text", "required", "", "formControlName", "cardNumber", 1, "form-control"], [1, "form-group", "col-md-6"], [1, "cx-payment-form-exp-date", "row"], [1, "col-sm-6", "col-md-5"], ["bindLabel", "name", "bindValue", "expiryMonth", 3, "searchable", "clearable", "items", "placeholder", "change"], [1, "col-sm-6", "col-md-7"], ["bindLabel", "name", "bindValue", "expiryYear", 3, "searchable", "clearable", "items", "placeholder", "change"], ["placement", "right", "alt", "", 1, "cx-payment-form-tooltip", 3, "type", "title"], ["type", "text", "id", "cVVNumber", "required", "", "formControlName", "cvn", 1, "form-control"], ["class", "form-group", 4, "ngIf"], [1, "cx-payment-form-billing"], [1, "cx-payment-form-billing-address"], [4, "ngIf", "ngIfElse"], ["billingAddressForm", ""], [1, "cx-checkout-btns", "row"], [1, "col-md-12", "col-lg-6"], ["class", "btn btn-block btn-action", 3, "click", 4, "ngIf"], [1, "btn", "btn-block", "btn-primary", 3, "click"], ["aria-required", "true"], [1, "label-content", "required"], ["bindLabel", "name", "bindValue", "code", 3, "searchable", "clearable", "items", "placeholder", "change"], [1, "form-check"], ["type", "checkbox", 1, "form-check-input", 3, "change"], [1, "form-check-label"], ["type", "checkbox", 1, "form-check-input", 3, "checked", "change"], [3, "content"], [3, "billingAddress", "countries$"], [1, "btn", "btn-block", "btn-action", 3, "click"]], template: function PaymentFormComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵtemplate(0, PaymentFormComponent_div_0_Template, 59, 51, "div", 0);
         ɵngcc0.ɵɵpipe(1, "async");
         ɵngcc0.ɵɵtemplate(2, PaymentFormComponent_ng_template_2_Template, 1, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r429 = ɵngcc0.ɵɵreference(3);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.loading$).loading)("ngIfElse", _r429);
+        const _r433 = ɵngcc0.ɵɵreference(3);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.loading$).loading)("ngIfElse", _r433);
     } }, directives: [ɵngcc4.NgIf, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.DefaultValueAccessor, ɵngcc7.RequiredValidator, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc8.NgSelectComponent, IconComponent,
         CardComponent,
         BillingAddressFormComponent,
@@ -17069,7 +16995,7 @@ PlaceOrderComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: PlaceOrderCompon
         ɵngcc0.ɵɵadvance(4);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 5, "checkoutReview.confirmThatRead"), " ");
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(7, 7, ɵngcc0.ɵɵpureFunction0(13, _c23)));
+        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(7, 7, ɵngcc0.ɵɵpureFunction0(13, _c22)));
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(9, 9, "checkoutReview.termsAndConditions"), " ");
         ɵngcc0.ɵɵadvance(2);
@@ -17481,7 +17407,7 @@ let AddressFormComponent = class AddressFormComponent {
     }
 };
 AddressFormComponent.ɵfac = function AddressFormComponent_Factory(t) { return new (t || AddressFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserAddressService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.GlobalMessageService), ɵngcc0.ɵɵdirectiveInject(ModalService)); };
-AddressFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddressFormComponent, selectors: [["cx-address-form"]], inputs: { showCancelBtn: "showCancelBtn", addressData: "addressData", actionBtnLabel: "actionBtnLabel", cancelBtnLabel: "cancelBtnLabel", setAsDefaultField: "setAsDefaultField", showTitleCode: "showTitleCode" }, outputs: { submitAddress: "submitAddress", backToAddress: "backToAddress" }, decls: 67, vars: 56, consts: [[3, "formGroup"], [1, "row"], [1, "col-md-12", "col-lg-9"], ["formGroupName", "country", 1, "form-group"], [4, "ngIf"], ["class", "form-group", 4, "ngIf"], [1, "form-group"], [1, "label-content", "required"], ["type", "text", "required", "", "formControlName", "firstName", 1, "form-control", 3, "placeholder"], ["type", "text", "required", "", "formControlName", "lastName", 1, "form-control", 3, "placeholder"], ["type", "text", "required", "", "formControlName", "line1", 1, "form-control", 3, "placeholder"], [1, "label-content"], ["type", "text", "formControlName", "line2", 1, "form-control", 3, "placeholder"], [1, "form-group", "col-md-6"], ["type", "text", "required", "", "formControlName", "town", 1, "form-control", 3, "placeholder"], ["formGroupName", "region", 4, "ngIf"], ["type", "text", "required", "", "formControlName", "postalCode", 1, "form-control", 3, "placeholder"], ["type", "text", "formControlName", "phone", 1, "form-control", 3, "placeholder"], [1, "cx-checkout-btns", "row"], ["class", "col-md-12 col-lg-6", 4, "ngIf"], [1, "col-md-12", "col-lg-6"], [1, "btn", "btn-block", "btn-primary", 3, "disabled", "click"], ["aria-required", "true"], ["formControlName", "isocode", "bindLabel", "name", "bindValue", "isocode", 1, "country-select", 3, "searchable", "clearable", "items", "placeholder", "change"], ["formControlName", "titleCode", "bindLabel", "name", "bindValue", "code", 3, "searchable", "clearable", "items", "change"], ["formGroupName", "region"], ["formControlName", "isocode", 1, "region-select", 3, "searchable", "clearable", "items", "bindLabel", "bindValue", "placeholder", "change"], [1, "form-check"], ["type", "checkbox", "formControlName", "defaultAddress", 1, "form-check-input", 3, "change"], [1, "form-check-label"], [1, "btn", "btn-block", "btn-action", 3, "click"]], template: function AddressFormComponent_Template(rf, ctx) { if (rf & 1) {
+AddressFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddressFormComponent, selectors: [["cx-address-form"]], inputs: { showCancelBtn: "showCancelBtn", addressData: "addressData", actionBtnLabel: "actionBtnLabel", cancelBtnLabel: "cancelBtnLabel", setAsDefaultField: "setAsDefaultField", showTitleCode: "showTitleCode" }, outputs: { submitAddress: "submitAddress", backToAddress: "backToAddress" }, decls: 67, vars: 55, consts: [[3, "formGroup"], [1, "row"], [1, "col-md-12", "col-lg-9"], ["formGroupName", "country", 1, "form-group"], [4, "ngIf"], ["class", "form-group", 4, "ngIf"], [1, "form-group"], [1, "label-content", "required"], ["type", "text", "required", "", "formControlName", "firstName", 1, "form-control", 3, "placeholder"], ["type", "text", "required", "", "formControlName", "lastName", 1, "form-control", 3, "placeholder"], ["type", "text", "required", "", "formControlName", "line1", 1, "form-control", 3, "placeholder"], [1, "label-content"], ["type", "text", "formControlName", "line2", 1, "form-control", 3, "placeholder"], [1, "form-group", "col-md-6"], ["type", "text", "required", "", "formControlName", "town", 1, "form-control", 3, "placeholder"], ["formGroupName", "region", 4, "ngIf"], ["type", "text", "required", "", "formControlName", "postalCode", 1, "form-control", 3, "placeholder"], ["type", "text", "formControlName", "phone", 1, "form-control", 3, "placeholder"], [1, "cx-checkout-btns", "row"], ["class", "col-md-12 col-lg-6", 4, "ngIf"], [1, "col-md-12", "col-lg-6"], [1, "btn", "btn-block", "btn-primary", 3, "click"], ["aria-required", "true"], ["formControlName", "isocode", "bindLabel", "name", "bindValue", "isocode", 1, "country-select", 3, "searchable", "clearable", "items", "placeholder", "change"], ["formControlName", "titleCode", "bindLabel", "name", "bindValue", "code", 3, "searchable", "clearable", "items", "change"], ["formGroupName", "region"], ["formControlName", "isocode", 1, "region-select", 3, "searchable", "clearable", "items", "bindLabel", "bindValue", "placeholder", "change"], [1, "form-check"], ["type", "checkbox", "formControlName", "defaultAddress", 1, "form-check-input", 3, "change"], [1, "form-check-label"], [1, "btn", "btn-block", "btn-action", 3, "click"]], template: function AddressFormComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "div", 0);
         ɵngcc0.ɵɵelementStart(1, "div", 1);
         ɵngcc0.ɵɵelementStart(2, "div", 2);
@@ -17583,47 +17509,45 @@ AddressFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddressFormComp
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("formGroup", ctx.address);
         ɵngcc0.ɵɵadvance(4);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 22, ctx.countries$));
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 21, ctx.countries$));
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("ngIf", ctx.showTitleCode);
         ɵngcc0.ɵɵadvance(4);
-        ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(11, 24, "addressForm.firstName.label"));
+        ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(11, 23, "addressForm.firstName.label"));
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(13, 26, "addressForm.firstName.placeholder"));
+        ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(13, 25, "addressForm.firstName.placeholder"));
         ɵngcc0.ɵɵadvance(5);
-        ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(18, 28, "addressForm.lastName.label"));
+        ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(18, 27, "addressForm.lastName.label"));
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(20, 30, "addressForm.lastName.placeholder"));
+        ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(20, 29, "addressForm.lastName.placeholder"));
         ɵngcc0.ɵɵadvance(5);
-        ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(25, 32, "addressForm.address1"));
+        ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(25, 31, "addressForm.address1"));
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(27, 34, "addressForm.streetAddress"));
+        ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(27, 33, "addressForm.streetAddress"));
         ɵngcc0.ɵɵadvance(5);
-        ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(32, 36, "addressForm.address2"));
+        ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(32, 35, "addressForm.address2"));
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(34, 38, "addressForm.aptSuite"));
+        ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(34, 37, "addressForm.aptSuite"));
         ɵngcc0.ɵɵadvance(6);
-        ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(40, 40, "addressForm.city.label"));
+        ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(40, 39, "addressForm.city.label"));
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(42, 42, "addressForm.city.placeholder"));
+        ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(42, 41, "addressForm.city.placeholder"));
         ɵngcc0.ɵɵadvance(3);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(45, 44, ctx.regions$));
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(45, 43, ctx.regions$));
         ɵngcc0.ɵɵadvance(5);
-        ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(50, 46, "addressForm.zipCode.label"));
+        ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(50, 45, "addressForm.zipCode.label"));
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(52, 48, "addressForm.zipCode.placeholder"));
+        ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(52, 47, "addressForm.zipCode.placeholder"));
         ɵngcc0.ɵɵadvance(5);
-        ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(57, 50, "addressForm.phoneNumber.label"));
+        ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(57, 49, "addressForm.phoneNumber.label"));
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(59, 52, "addressForm.phoneNumber.placeholder"));
+        ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(59, 51, "addressForm.phoneNumber.placeholder"));
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("ngIf", ctx.setAsDefaultField);
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("ngIf", ctx.showCancelBtn);
-        ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("disabled", ctx.address.invalid);
-        ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵtextInterpolate1(" ", ctx.actionBtnLabel || ɵngcc0.ɵɵpipeBind1(66, 54, "common.continue"), " ");
+        ɵngcc0.ɵɵadvance(3);
+        ɵngcc0.ɵɵtextInterpolate1(" ", ctx.actionBtnLabel || ɵngcc0.ɵɵpipeBind1(66, 53, "common.continue"), " ");
     } }, directives: [ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.FormGroupName, ɵngcc4.NgIf, ɵngcc7.DefaultValueAccessor, ɵngcc7.RequiredValidator, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc8.NgSelectComponent, ɵngcc7.CheckboxControlValueAccessor], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
 AddressFormComponent.ctorParameters = () => [
     { type: FormBuilder },
@@ -18297,8 +18221,8 @@ ConsentManagementComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ConsentMa
         ɵngcc0.ɵɵtemplate(0, ConsentManagementComponent_ng_container_0_Template, 5, 4, "ng-container", 0);
         ɵngcc0.ɵɵtemplate(1, ConsentManagementComponent_ng_template_1_Template, 4, 4, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r554 = ɵngcc0.ɵɵreference(2);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.isLevel13)("ngIfElse", _r554);
+        const _r558 = ɵngcc0.ɵɵreference(2);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.isLevel13)("ngIfElse", _r558);
     } }, directives: [ɵngcc4.NgIf, SpinnerComponent, ɵngcc4.NgForOf, ConsentManagementFormComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
 ConsentManagementComponent.ctorParameters = () => [
     { type: UserConsentService },
@@ -18435,8 +18359,8 @@ BannerCarouselComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: BannerCarous
         ɵngcc0.ɵɵpipe(1, "async");
         ɵngcc0.ɵɵtemplate(2, BannerCarouselComponent_ng_template_2_Template, 1, 5, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r581 = ɵngcc0.ɵɵreference(3);
-        ɵngcc0.ɵɵproperty("items", ɵngcc0.ɵɵpipeBind1(1, 2, ctx.getItems()))("template", _r581);
+        const _r585 = ɵngcc0.ɵɵreference(3);
+        ɵngcc0.ɵɵproperty("items", ɵngcc0.ɵɵpipeBind1(1, 2, ctx.getItems()))("template", _r585);
     } }, directives: [CarouselComponent,
         ComponentWrapperDirective], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2, changeDetection: 0 });
 BannerCarouselComponent.ctorParameters = () => [
@@ -18699,8 +18623,11 @@ AddressBookComponentService.ctorParameters = () => [
 ];
 
 let AddressBookComponent = class AddressBookComponent {
-    constructor(service) {
+    constructor(service, translation, userAddressService, checkoutDeliveryService) {
         this.service = service;
+        this.translation = translation;
+        this.userAddressService = userAddressService;
+        this.checkoutDeliveryService = checkoutDeliveryService;
         this.showAddAddressForm = false;
         this.showEditAddressForm = false;
     }
@@ -18732,9 +18659,61 @@ let AddressBookComponent = class AddressBookComponent {
     editAddressCancel() {
         this.showEditAddressForm = false;
     }
+    getCardContent(address) {
+        return combineLatest([
+            this.translation.translate('addressCard.default'),
+            this.translation.translate('addressCard.setAsDefault'),
+            this.translation.translate('common.delete'),
+            this.translation.translate('common.edit'),
+            this.translation.translate('addressBook.areYouSureToDeleteAddress'),
+        ]).pipe(map(([defaultText, setAsDefaultText, textDelete, textEdit, textVerifyDeleteMsg,]) => {
+            let region = '';
+            if (address.region && address.region.isocode) {
+                region = address.region.isocode + ', ';
+            }
+            const actions = [];
+            if (!address.defaultAddress) {
+                actions.push({ name: setAsDefaultText, event: 'default' });
+            }
+            actions.push({ name: textEdit, event: 'edit' });
+            actions.push({ name: textDelete, event: 'delete' });
+            return {
+                textBold: address.firstName + ' ' + address.lastName,
+                text: [
+                    address.line1,
+                    address.line2,
+                    address.town + ', ' + region + address.country.isocode,
+                    address.postalCode,
+                    address.phone,
+                ],
+                actions: actions,
+                header: address.defaultAddress ? `✓ ${defaultText}` : '',
+                deleteMsg: textVerifyDeleteMsg,
+            };
+        }));
+    }
+    setAddressAsDefault(addressId) {
+        this.userAddressService.setAddressAsDefault(addressId);
+        this.checkoutDeliveryService.clearCheckoutDeliveryDetails();
+    }
+    deleteAddress(addressId) {
+        this.userAddressService.deleteUserAddress(addressId);
+        this.checkoutDeliveryService.clearCheckoutDeliveryDetails();
+    }
+    setEdit(addressId) {
+        if (this.editCard !== addressId) {
+            this.editCard = addressId;
+        }
+        else {
+            this.deleteAddress(addressId);
+        }
+    }
+    cancelCard() {
+        this.editCard = null;
+    }
 };
-AddressBookComponent.ɵfac = function AddressBookComponent_Factory(t) { return new (t || AddressBookComponent)(ɵngcc0.ɵɵdirectiveInject(AddressBookComponentService)); };
-AddressBookComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddressBookComponent, selectors: [["cx-address-book"]], decls: 8, vars: 7, consts: [[1, "cx-section"], [4, "ngIf"], ["loading", ""], [1, "row"], [1, "col-md-6"], [1, "btn", "btn-block", "btn-action", 3, "click"], ["class", "row cx-address-deck", 4, "ngIf", "ngIfElse"], [1, "row", "cx-address-deck"], ["class", "col-md-6 cx-address-card", 4, "ngFor", "ngForOf"], [1, "col-md-6", "cx-address-card"], [3, "address", "editEvent"], [1, "cx-section-msg"], ["showTitleCode", "true", 1, "cx-form", 3, "showCancelBtn", "actionBtnLabel", "cancelBtnLabel", "setAsDefaultField", "submitAddress", "backToAddress"], ["showTitleCode", "true", 3, "actionBtnLabel", "cancelBtnLabel", "addressData", "submitAddress", "backToAddress"], [1, "col-md-12", "cx-address-spinner"]], template: function AddressBookComponent_Template(rf, ctx) { if (rf & 1) {
+AddressBookComponent.ɵfac = function AddressBookComponent_Factory(t) { return new (t || AddressBookComponent)(ɵngcc0.ɵɵdirectiveInject(AddressBookComponentService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.TranslationService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserAddressService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutDeliveryService)); };
+AddressBookComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddressBookComponent, selectors: [["cx-address-book"]], decls: 8, vars: 7, consts: [[1, "cx-section"], [4, "ngIf"], ["loading", ""], [1, "row"], [1, "col-md-6"], [1, "btn", "btn-block", "btn-action", 3, "click"], ["class", "row cx-address-deck", 4, "ngIf", "ngIfElse"], [1, "row", "cx-address-deck"], ["class", "col-md-6 cx-address-card", 4, "ngFor", "ngForOf"], [1, "col-md-6", "cx-address-card"], [3, "border", "fitToContainer", "content", "editMode", "editCard", "setDefaultCard", "deleteCard", "cancelCard"], [1, "cx-section-msg"], ["showTitleCode", "true", 1, "cx-form", 3, "showCancelBtn", "actionBtnLabel", "cancelBtnLabel", "setAsDefaultField", "submitAddress", "backToAddress", "cancelCard"], ["showTitleCode", "true", 3, "actionBtnLabel", "cancelBtnLabel", "addressData", "submitAddress", "backToAddress"], [1, "col-md-12", "cx-address-spinner"]], template: function AddressBookComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "div", 0);
         ɵngcc0.ɵɵtemplate(1, AddressBookComponent_ng_container_1_Template, 8, 7, "ng-container", 1);
         ɵngcc0.ɵɵpipe(2, "async");
@@ -18750,125 +18729,15 @@ AddressBookComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddressBookComp
         ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(4, 5, ctx.addresses$).length || ctx.showAddAddressForm);
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("ngIf", ctx.showEditAddressForm);
-    } }, directives: function () { return [ɵngcc4.NgIf, ɵngcc4.NgForOf, AddressCardComponent,
+    } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, CardComponent,
         AddressFormComponent,
-        SpinnerComponent]; }, pipes: function () { return [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe]; }, encapsulation: 2 });
+        SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
 AddressBookComponent.ctorParameters = () => [
-    { type: AddressBookComponentService }
-];
-
-let AddressCardComponent = class AddressCardComponent {
-    constructor(userAddressService, checkoutDeliveryService, featureConfigService) {
-        this.userAddressService = userAddressService;
-        this.checkoutDeliveryService = checkoutDeliveryService;
-        this.featureConfigService = featureConfigService;
-        this.editEvent = new EventEmitter();
-    }
-    openEditFormEvent() {
-        this.editEvent.emit();
-    }
-    cancelEdit() {
-        this.editMode = false;
-    }
-    setEditMode() {
-        this.editMode = true;
-    }
-    setAddressAsDefault(addressId) {
-        this.userAddressService.setAddressAsDefault(addressId);
-        /**
-         * TODO(issue:#4309) Deprecated since 1.2.0
-         */
-        if (this.featureConfigService &&
-            this.featureConfigService.isLevel('1.2') &&
-            this.checkoutDeliveryService) {
-            this.checkoutDeliveryService.clearCheckoutDeliveryDetails();
-        }
-    }
-    deleteAddress(addressId) {
-        this.userAddressService.deleteUserAddress(addressId);
-        /**
-         * TODO(issue:#4309) Deprecated since 1.2.0
-         */
-        if (this.featureConfigService &&
-            this.featureConfigService.isLevel('1.2') &&
-            this.checkoutDeliveryService) {
-            this.checkoutDeliveryService.clearCheckoutDeliveryDetails();
-        }
-    }
-};
-AddressCardComponent.ɵfac = function AddressCardComponent_Factory(t) { return new (t || AddressCardComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserAddressService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.FeatureConfigService)); };
-AddressCardComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddressCardComponent, selectors: [["cx-address-card"]], inputs: { address: "address" }, outputs: { editEvent: "editEvent" }, decls: 22, vars: 15, consts: [[1, "card"], ["class", "card-header", 4, "ngIf"], [1, "card-body", "cx-card-body"], ["class", "cx-address-card-delete-msg", 4, "ngIf"], [1, "cx-address-data"], [1, "cx-address-card-label-name"], [1, "cx-address-card-label"], [4, "ngIf"], ["class", "row cx-address-card-delete", 4, "ngIf"], ["class", "card-actions", 4, "ngIf"], [1, "card-header"], [1, "cx-address-card-delete-msg"], [1, "row", "cx-address-card-delete"], [1, "col-md-6"], [1, "btn", "btn-block", "btn-secondary", 3, "click"], [1, "btn", "btn-block", "btn-primary", 3, "click"], [1, "card-actions"], ["class", "card-link btn-link set-default", 3, "click", 4, "ngIf"], [1, "card-link", "btn-link", "edit", 3, "click"], [1, "card-link", "btn-link", "delete", 3, "click"], [1, "card-link", "btn-link", "set-default", 3, "click"]], template: function AddressCardComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵelementStart(0, "div", 0);
-        ɵngcc0.ɵɵtemplate(1, AddressCardComponent_div_1_Template, 3, 3, "div", 1);
-        ɵngcc0.ɵɵelementStart(2, "div", 2);
-        ɵngcc0.ɵɵtemplate(3, AddressCardComponent_div_3_Template, 3, 3, "div", 3);
-        ɵngcc0.ɵɵelementStart(4, "div", 4);
-        ɵngcc0.ɵɵelementStart(5, "div", 5);
-        ɵngcc0.ɵɵtext(6);
-        ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementStart(7, "div", 6);
-        ɵngcc0.ɵɵtext(8);
-        ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementStart(9, "div", 6);
-        ɵngcc0.ɵɵtext(10);
-        ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementStart(11, "div", 6);
-        ɵngcc0.ɵɵtext(12);
-        ɵngcc0.ɵɵtemplate(13, AddressCardComponent_span_13_Template, 2, 1, "span", 7);
-        ɵngcc0.ɵɵelementStart(14, "span");
-        ɵngcc0.ɵɵtext(15);
-        ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementStart(16, "div", 6);
-        ɵngcc0.ɵɵtext(17);
-        ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementStart(18, "div", 6);
-        ɵngcc0.ɵɵtext(19);
-        ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵtemplate(20, AddressCardComponent_div_20_Template, 9, 6, "div", 8);
-        ɵngcc0.ɵɵtemplate(21, AddressCardComponent_div_21_Template, 8, 7, "div", 9);
-        ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementEnd();
-    } if (rf & 2) {
-        ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngIf", (ctx.address == null ? null : ctx.address.defaultAddress) && !ctx.editMode);
-        ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵclassProp("cx-address-card-delete-mode", ctx.editMode);
-        ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.editMode);
-        ɵngcc0.ɵɵadvance(3);
-        ɵngcc0.ɵɵtextInterpolate2(" ", ctx.address == null ? null : ctx.address.firstName, " ", ctx.address == null ? null : ctx.address.lastName, " ");
-        ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵtextInterpolate(ctx.address == null ? null : ctx.address.line1);
-        ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵtextInterpolate(ctx.address == null ? null : ctx.address.line2);
-        ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵtextInterpolate1(" ", ctx.address == null ? null : ctx.address.town, ", ");
-        ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngIf", !(ctx.address == null ? null : ctx.address.region == null ? null : ctx.address.region.isocode));
-        ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵtextInterpolate(ctx.address == null ? null : ctx.address.region == null ? null : ctx.address.region.isocode);
-        ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵtextInterpolate(ctx.address == null ? null : ctx.address.postalCode);
-        ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵtextInterpolate(ctx.address == null ? null : ctx.address.phone);
-        ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.editMode);
-        ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngIf", !ctx.editMode);
-    } }, directives: [ɵngcc4.NgIf], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2 });
-AddressCardComponent.ctorParameters = () => [
+    { type: AddressBookComponentService },
+    { type: TranslationService },
     { type: UserAddressService },
-    { type: CheckoutDeliveryService },
-    { type: FeatureConfigService }
+    { type: CheckoutDeliveryService }
 ];
-__decorate([
-    Input()
-], AddressCardComponent.prototype, "address", void 0);
-__decorate([
-    Output()
-], AddressCardComponent.prototype, "editEvent", void 0);
 
 let AddressBookModule = class AddressBookModule {
 };
@@ -19002,7 +18871,7 @@ CloseAccountComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CloseAccountCo
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
         ɵngcc0.ɵɵadvance(3);
-        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(4, 3, ɵngcc0.ɵɵpureFunction0(9, _c27)));
+        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(4, 3, ɵngcc0.ɵɵpureFunction0(9, _c26)));
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(6, 5, "common.cancel"));
         ɵngcc0.ɵɵadvance(4);
@@ -19087,7 +18956,7 @@ ForgotPasswordComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ForgotPasswo
         ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 8, "forgottenPassword.emailAddress.label"));
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(7, 10, "forgottenPassword.emailAddress.placeholder"));
-        ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(18, _c28, ctx.form.controls["userEmail"].invalid && (ctx.submited || ctx.form.controls["userEmail"].touched && ctx.form.controls["userEmail"].dirty)));
+        ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(18, _c27, ctx.form.controls["userEmail"].invalid && (ctx.submited || ctx.form.controls["userEmail"].touched && ctx.form.controls["userEmail"].dirty)));
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("ngIf", ctx.form.controls["userEmail"].invalid && (ctx.submited || ctx.form.controls["userEmail"].touched && ctx.form.controls["userEmail"].dirty));
         ɵngcc0.ɵɵadvance(2);
@@ -19144,7 +19013,7 @@ AmendOrderActionsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AmendOrde
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
         ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 4, ɵngcc0.ɵɵpureFunction2(10, _c29, ctx.backRoute, ɵngcc0.ɵɵpureFunction1(8, _c18, ctx.orderCode))));
+        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 4, ɵngcc0.ɵɵpureFunction2(10, _c28, ctx.backRoute, ɵngcc0.ɵɵpureFunction1(8, _c18, ctx.orderCode))));
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 6, "common.back"), " ");
         ɵngcc0.ɵɵadvance(3);
@@ -19809,9 +19678,9 @@ TrackingEventsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: TrackingEven
         ɵngcc0.ɵɵtemplate(5, TrackingEventsComponent_ng_template_5_Template, 12, 3, "ng-template", null, 3, ɵngcc0.ɵɵtemplateRefExtractor);
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
-        const _r767 = ɵngcc0.ɵɵreference(6);
+        const _r761 = ɵngcc0.ɵɵreference(6);
         ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx.tracking$))("ngIfElse", _r767);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx.tracking$))("ngIfElse", _r761);
     } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.CxDatePipe], encapsulation: 2 });
 TrackingEventsComponent.ctorParameters = () => [
     { type: NgbActiveModal },
@@ -20852,9 +20721,9 @@ UpdateEmailComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: UpdateEmailComp
         ɵngcc0.ɵɵtemplate(3, UpdateEmailComponent_ng_template_3_Template, 3, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
         ɵngcc0.ɵɵelementContainerEnd();
     } if (rf & 2) {
-        const _r887 = ɵngcc0.ɵɵreference(4);
+        const _r881 = ɵngcc0.ɵɵreference(4);
         ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx.isLoading$))("ngIfElse", _r887);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx.isLoading$))("ngIfElse", _r881);
     } }, directives: [ɵngcc4.NgIf, SpinnerComponent,
         UpdateEmailFormComponent], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2 });
 UpdateEmailComponent.ctorParameters = () => [
@@ -21066,9 +20935,9 @@ UpdatePasswordComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: UpdatePasswo
         ɵngcc0.ɵɵtemplate(3, UpdatePasswordComponent_ng_template_3_Template, 3, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
         ɵngcc0.ɵɵelementContainerEnd();
     } if (rf & 2) {
-        const _r896 = ɵngcc0.ɵɵreference(4);
+        const _r890 = ɵngcc0.ɵɵreference(4);
         ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx.loading$))("ngIfElse", _r896);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx.loading$))("ngIfElse", _r890);
     } }, directives: [ɵngcc4.NgIf, SpinnerComponent,
         UpdatePasswordFormComponent], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2 });
 UpdatePasswordComponent.ctorParameters = () => [
@@ -21282,9 +21151,9 @@ UpdateProfileComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: UpdateProfile
         ɵngcc0.ɵɵtemplate(3, UpdateProfileComponent_ng_template_3_Template, 4, 3, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
         ɵngcc0.ɵɵelementContainerEnd();
     } if (rf & 2) {
-        const _r906 = ɵngcc0.ɵɵreference(4);
+        const _r900 = ɵngcc0.ɵɵreference(4);
         ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx.loading$))("ngIfElse", _r906);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx.loading$))("ngIfElse", _r900);
     } }, directives: [ɵngcc4.NgIf, SpinnerComponent,
         UpdateProfileFormComponent], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2 });
 UpdateProfileComponent.ctorParameters = () => [
@@ -21447,9 +21316,9 @@ MyCouponsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: MyCouponsComponen
         ɵngcc0.ɵɵtemplate(3, MyCouponsComponent_ng_template_3_Template, 2, 0, "ng-template", null, 2, ɵngcc0.ɵɵtemplateRefExtractor);
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
-        const _r913 = ɵngcc0.ɵɵreference(4);
+        const _r907 = ɵngcc0.ɵɵreference(4);
         ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(2, 2, ctx.couponsLoading$))("ngIfElse", _r913);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(2, 2, ctx.couponsLoading$))("ngIfElse", _r907);
     } }, directives: function () { return [ɵngcc4.NgIf, SortingComponent,
         PaginationComponent, ɵngcc4.NgForOf, IconComponent, ɵngcc5.RouterLinkWithHref, CouponCardComponent,
         SpinnerComponent]; }, pipes: function () { return [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe]; }, encapsulation: 2 });
@@ -21894,7 +21763,7 @@ let MyInterestsComponent = class MyInterestsComponent {
     }
 };
 MyInterestsComponent.ɵfac = function MyInterestsComponent_Factory(t) { return new (t || MyInterestsComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserInterestsService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.TranslationService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ProductService)); };
-MyInterestsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: MyInterestsComponent, selectors: [["cx-my-interests"]], decls: 6, vars: 3, consts: [["class", "container", 4, "ngIf"], ["noInterest", ""], ["loading", ""], [1, "container"], [1, "cx-product-interests-title", "h3"], ["class", "cx-product-interests-body", 4, "ngIf", "ngIfElse"], [1, "cx-product-interests-body"], [4, "ngIf", "ngIfElse"], [1, "cx-product-interests-sort", "top", "row"], [1, "cx-product-interests-form-group", "form-group", "col-sm-12", "col-md-4", "col-lg-4"], [3, "sortOptions", "sortLabels", "selectedOption", "placeholder", "sortListEvent"], [1, "cx-product-interests-pagination", "cx-product-interests-thead-mobile"], [3, "pagination", "viewPageEvent"], [1, "table", "cx-product-interests-table"], [1, "cx-product-interests-thead-mobile"], ["scope", "col"], ["class", "cx-product-interests-product-item", 4, "ngFor", "ngForOf"], [1, "cx-product-interests-sort", "bottom", "row"], [1, "cx-product-interests-form-group", "cx-product-interests-thead-mobile", "form-group", "col-sm-12", "col-md-4", "col-lg-4"], [1, "cx-product-interests-pagination"], [1, "cx-product-interests-product-item"], [4, "ngIf"], [1, "cx-product-interests-label"], [1, "cx-product-interests-product-image-link", 3, "routerLink"], ["format", "thumbnail", 3, "container"], [1, "cx-info", "col-10"], [1, "cx-info-container", "row"], ["class", "cx-name", 4, "ngIf"], ["class", "cx-code", 4, "ngIf"], [4, "ngFor", "ngForOf"], ["class", "cx-property", 4, "ngIf"], [1, "cx-product-interests-product-price"], [1, "d-md-none", "cx-product-interests-label"], [1, "cx-product-interests-subscriptions"], ["class", "cx-product-interests-notification", 4, "ngFor", "ngForOf"], [1, "cx-actions", "cx-product-interests-remove-button"], ["type", "button", 1, "link", "cx-product-interests-remove-btn", 3, "disabled", "click"], [1, "cx-name"], [1, "cx-link", "cx-product-interests-product-code-link", 3, "routerLink"], [1, "cx-code"], ["class", "cx-property", 4, "ngFor", "ngForOf"], [1, "cx-property"], [1, "cx-label", "cx-product-interests-variant-name"], [1, "cx-value", "cx-product-interests-variant-value"], [1, "cx-label", "cx-product-interests-product-stock"], [1, "cx-product-interests-notification"], [1, "cx-product-interests-type"], [1, "cx-product-interests-expiration-date"], [1, "cx-product-interests-message"], [1, "cx-spinner"]], template: function MyInterestsComponent_Template(rf, ctx) { if (rf & 1) {
+MyInterestsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: MyInterestsComponent, selectors: [["cx-my-interests"]], decls: 6, vars: 3, consts: [["class", "container", 4, "ngIf"], ["noInterest", ""], ["loading", ""], [1, "container"], [1, "cx-product-interests-title", "h3"], ["class", "cx-product-interests-body", 4, "ngIf", "ngIfElse"], [1, "cx-product-interests-body"], [4, "ngIf", "ngIfElse"], [1, "cx-product-interests-sort", "top", "row"], [1, "cx-product-interests-form-group", "form-group", "col-sm-12", "col-md-4", "col-lg-4"], [3, "sortOptions", "sortLabels", "selectedOption", "placeholder", "sortListEvent"], [1, "cx-product-interests-pagination", "cx-product-interests-thead-mobile"], [3, "pagination", "viewPageEvent"], [1, "table", "cx-product-interests-table"], [1, "cx-product-interests-thead-mobile"], ["scope", "col"], ["class", "cx-product-interests-product-item", 4, "ngFor", "ngForOf"], [1, "cx-product-interests-sort", "bottom", "row"], [1, "cx-product-interests-form-group", "cx-product-interests-thead-mobile", "form-group", "col-sm-12", "col-md-4", "col-lg-4"], [1, "cx-product-interests-pagination"], [1, "cx-product-interests-product-item"], [4, "ngIf"], [1, "cx-product-interests-label"], ["tabindex", "-1", 1, "cx-product-interests-product-image-link", 3, "routerLink"], ["format", "thumbnail", 3, "container"], [1, "cx-info", "col-10"], [1, "cx-info-container", "row"], ["class", "cx-name", 4, "ngIf"], ["class", "cx-code", 4, "ngIf"], [4, "ngFor", "ngForOf"], ["class", "cx-property", 4, "ngIf"], [1, "cx-product-interests-product-price"], [1, "d-md-none", "cx-product-interests-label"], [1, "cx-product-interests-subscriptions"], ["class", "cx-product-interests-notification", 4, "ngFor", "ngForOf"], [1, "cx-actions", "cx-product-interests-remove-button"], ["type", "button", 1, "link", "cx-product-interests-remove-btn", 3, "disabled", "click"], [1, "cx-name"], [1, "cx-link", "cx-product-interests-product-code-link", 3, "routerLink"], [1, "cx-code"], ["class", "cx-property", 4, "ngFor", "ngForOf"], [1, "cx-property"], [1, "cx-label", "cx-product-interests-variant-name"], [1, "cx-value", "cx-product-interests-variant-value"], [1, "cx-label", "cx-product-interests-product-stock"], [1, "cx-product-interests-notification"], [1, "cx-product-interests-type"], [1, "cx-product-interests-expiration-date"], [1, "cx-product-interests-message"], [1, "cx-spinner"]], template: function MyInterestsComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, MyInterestsComponent_div_0_Template, 7, 7, "div", 0);
         ɵngcc0.ɵɵpipe(1, "async");
         ɵngcc0.ɵɵtemplate(2, MyInterestsComponent_ng_template_2_Template, 3, 3, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
@@ -22179,10 +22048,16 @@ let NavigationUIComponent = class NavigationUIComponent {
         this.resize.next();
     }
     toggleOpen(event) {
+        event.preventDefault();
         const node = event.currentTarget;
         if (this.openNodes.includes(node)) {
-            this.openNodes = this.openNodes.filter(n => n !== node);
-            this.renderer.removeClass(node, 'is-open');
+            if (event.type === 'keydown') {
+                this.back();
+            }
+            else {
+                this.openNodes = this.openNodes.filter(n => n !== node);
+                this.renderer.removeClass(node, 'is-open');
+            }
         }
         else {
             this.openNodes.push(node);
@@ -22260,13 +22135,16 @@ let NavigationUIComponent = class NavigationUIComponent {
         });
         this.isOpen = this.openNodes.length > 0;
     }
+    isTabbable(node) {
+        return this.flyout && node.children && node.children.length;
+    }
 };
 NavigationUIComponent.ɵfac = function NavigationUIComponent_Factory(t) { return new (t || NavigationUIComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc5.Router), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.Renderer2), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef)); };
 NavigationUIComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: NavigationUIComponent, selectors: [["cx-navigation-ui"]], hostVars: 4, hostBindings: function NavigationUIComponent_HostBindings(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵlistener("resize", function NavigationUIComponent_resize_HostBindingHandler($event) { return ctx.onResize(); }, false, ɵngcc0.ɵɵresolveWindow);
     } if (rf & 2) {
         ɵngcc0.ɵɵclassProp("flyout", ctx.flyout)("is-open", ctx.isOpen);
-    } }, inputs: { allowAlignToRight: "allowAlignToRight", flyout: "flyout", isOpen: "isOpen", node: "node", wrapAfter: "wrapAfter" }, decls: 4, vars: 2, consts: [["class", "back is-open", 3, "click", 4, "ngIf"], [4, "ngFor", "ngForOf"], ["nav", ""], [1, "back", "is-open", 3, "click"], [3, "type"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], ["tabindex", "0", 3, "click", "mouseenter"], [3, "url", "target", 4, "ngIf", "ngIfElse"], ["heading", ""], ["class", "wrapper", 4, "ngIf"], [3, "url", "target"], [3, "type", 4, "ngIf"], [1, "wrapper"], ["class", "all", 3, "url", "target", 4, "ngIf"], [1, "childs"], [1, "all", 3, "url", "target"]], template: function NavigationUIComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, inputs: { allowAlignToRight: "allowAlignToRight", flyout: "flyout", isOpen: "isOpen", node: "node", wrapAfter: "wrapAfter" }, decls: 4, vars: 2, consts: [["class", "back is-open", 3, "click", 4, "ngIf"], [4, "ngFor", "ngForOf"], ["nav", ""], [1, "back", "is-open", 3, "click"], [3, "type"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], [3, "click", "mouseenter", "keydown.space"], [3, "url", "target", 4, "ngIf", "ngIfElse"], ["heading", ""], ["class", "wrapper", 4, "ngIf"], [3, "url", "target"], [3, "type", 4, "ngIf"], [1, "wrapper"], ["class", "all", 3, "url", "target", 4, "ngIf"], [1, "childs"], [1, "all", 3, "url", "target"]], template: function NavigationUIComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, NavigationUIComponent_div_0_Template, 5, 4, "div", 0);
         ɵngcc0.ɵɵtemplate(1, NavigationUIComponent_ng_container_1_Template, 2, 4, "ng-container", 1);
         ɵngcc0.ɵɵtemplate(2, NavigationUIComponent_ng_template_2_Template, 5, 3, "ng-template", null, 2, ɵngcc0.ɵɵtemplateRefExtractor);
@@ -22568,9 +22446,10 @@ let SearchBoxComponent = class SearchBoxComponent {
      * The component data is optional, so that this component
      * can be reused without CMS integration.
      */
-    constructor(searchBoxComponentService, componentData) {
+    constructor(searchBoxComponentService, componentData, winRef) {
         this.searchBoxComponentService = searchBoxComponentService;
         this.componentData = componentData;
+        this.winRef = winRef;
         this.iconTypes = ICON_TYPE;
         /**
          * In some occasions we need to ignore the close event,
@@ -22622,14 +22501,25 @@ let SearchBoxComponent = class SearchBoxComponent {
     /**
      * Closes the typehead searchbox.
      */
-    close(event) {
-        if (!this.ignoreCloseEvent) {
-            this.searchBoxComponentService.toggleBodyClass('searchbox-is-active', false);
-            if (event && event.target) {
-                event.target.blur();
+    close(event, force) {
+        // Use timeout to detect changes
+        setTimeout(() => {
+            if ((!this.ignoreCloseEvent && !this.isSearchboxFocused()) || force) {
+                this.blurSearchBox(event);
             }
+        });
+    }
+    blurSearchBox(event) {
+        this.searchBoxComponentService.toggleBodyClass('searchbox-is-active', false);
+        if (event && event.target) {
+            event.target.blur();
         }
-        this.ignoreCloseEvent = false;
+    }
+    // Check if focus is on searchbox or result list elements
+    isSearchboxFocused() {
+        return (this.getResultElements().includes(this.getFocusedElement()) ||
+            this.winRef.document.querySelector('input[aria-label="search"]') ===
+                this.getFocusedElement());
     }
     /**
      * Especially in mobile we do not want the search icon
@@ -22639,6 +22529,51 @@ let SearchBoxComponent = class SearchBoxComponent {
         if (this.searchBoxComponentService.hasBodyClass('searchbox-is-active')) {
             this.close(event);
             event.preventDefault();
+        }
+    }
+    // Return result list as HTMLElement array
+    getResultElements() {
+        return Array.from(this.winRef.document.querySelectorAll('.products > a, .suggestions > a'));
+    }
+    // Return focused element as HTMLElement
+    getFocusedElement() {
+        return this.winRef.document.activeElement;
+    }
+    getFocusedIndex() {
+        return this.getResultElements().indexOf(this.getFocusedElement());
+    }
+    // Focus on previous item in results list
+    focusPreviousChild(event) {
+        event.preventDefault(); // Negate normal keyscroll
+        const [results, focusedIndex] = [
+            this.getResultElements(),
+            this.getFocusedIndex(),
+        ];
+        // Focus on last index moving to first
+        if (results.length) {
+            if (focusedIndex < 1) {
+                results[results.length - 1].focus();
+            }
+            else {
+                results[focusedIndex - 1].focus();
+            }
+        }
+    }
+    // Focus on next item in results list
+    focusNextChild(event) {
+        event.preventDefault(); // Negate normal keyscroll
+        const [results, focusedIndex] = [
+            this.getResultElements(),
+            this.getFocusedIndex(),
+        ];
+        // Focus on first index moving to last
+        if (results.length) {
+            if (focusedIndex >= results.length - 1) {
+                results[0].focus();
+            }
+            else {
+                results[focusedIndex + 1].focus();
+            }
         }
     }
     /**
@@ -22668,26 +22603,26 @@ let SearchBoxComponent = class SearchBoxComponent {
         this.searchBoxComponentService.clearResults();
     }
 };
-SearchBoxComponent.ɵfac = function SearchBoxComponent_Factory(t) { return new (t || SearchBoxComponent)(ɵngcc0.ɵɵdirectiveInject(SearchBoxComponentService), ɵngcc0.ɵɵdirectiveInject(CmsComponentData, 8)); };
-SearchBoxComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: SearchBoxComponent, selectors: [["cx-searchbox"]], inputs: { queryText: "queryText" }, decls: 8, vars: 10, consts: [[1, "searchbox"], ["aria-label", "search", 3, "placeholder", "focus", "input", "blur", "keydown.escape", "keydown.enter"], ["searchInput", ""], ["aria-label", "reset", 1, "reset", 3, "type", "mousedown"], ["aria-label", "search", 1, "search", 3, "type", "mousedown"], ["class", "results", 3, "click", 4, "ngIf"], [1, "results", 3, "click"], ["class", "message", 3, "innerHTML", 4, "ngIf"], [1, "suggestions", 3, "mousedown"], [3, "innerHTML", "routerLink", 4, "ngFor", "ngForOf"], ["class", "products", 3, "mousedown", 4, "ngIf"], [1, "message", 3, "innerHTML"], [3, "innerHTML", "routerLink"], [1, "products", 3, "mousedown"], [3, "routerLink", "has-media", 4, "ngFor", "ngForOf"], [3, "routerLink"], ["format", "thumbnail", 3, "container", "alt", 4, "ngIf"], [1, "name", 3, "innerHTML"], [1, "price"], ["format", "thumbnail", 3, "container", "alt"]], template: function SearchBoxComponent_Template(rf, ctx) { if (rf & 1) {
-        const _r1028 = ɵngcc0.ɵɵgetCurrentView();
+SearchBoxComponent.ɵfac = function SearchBoxComponent_Factory(t) { return new (t || SearchBoxComponent)(ɵngcc0.ɵɵdirectiveInject(SearchBoxComponentService), ɵngcc0.ɵɵdirectiveInject(CmsComponentData, 8), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.WindowRef)); };
+SearchBoxComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: SearchBoxComponent, selectors: [["cx-searchbox"]], inputs: { queryText: "queryText" }, decls: 8, vars: 10, consts: [[1, "searchbox"], ["aria-label", "search", 3, "placeholder", "focus", "input", "blur", "keydown.escape", "keydown.enter", "keydown.arrowup", "keydown.arrowdown"], ["searchInput", ""], ["aria-label", "reset", "tabindex", "0", 1, "reset", 3, "type", "mousedown", "keydown.enter"], ["aria-label", "search", "tabindex", "0", 1, "search", 3, "type", "mousedown", "keydown.enter"], ["class", "results", 3, "click", 4, "ngIf"], [1, "results", 3, "click"], ["class", "message", 3, "innerHTML", 4, "ngIf"], [1, "suggestions"], [3, "innerHTML", "routerLink", "keydown.arrowup", "keydown.arrowdown", "keydown.enter", "keydown.escape", "blur", 4, "ngFor", "ngForOf"], ["class", "products", 4, "ngIf"], [1, "message", 3, "innerHTML"], [3, "innerHTML", "routerLink", "keydown.arrowup", "keydown.arrowdown", "keydown.enter", "keydown.escape", "blur"], [1, "products"], [3, "routerLink", "has-media", "keydown.arrowup", "keydown.arrowdown", "keydown.enter", "keydown.escape", "blur", 4, "ngFor", "ngForOf"], [3, "routerLink", "keydown.arrowup", "keydown.arrowdown", "keydown.enter", "keydown.escape", "blur"], ["format", "thumbnail", 3, "container", "alt", 4, "ngIf"], [1, "name", 3, "innerHTML"], [1, "price"], ["format", "thumbnail", 3, "container", "alt"]], template: function SearchBoxComponent_Template(rf, ctx) { if (rf & 1) {
+        const _r1032 = ɵngcc0.ɵɵgetCurrentView();
         ɵngcc0.ɵɵelementStart(0, "label", 0);
         ɵngcc0.ɵɵelementStart(1, "input", 1, 2);
-        ɵngcc0.ɵɵlistener("focus", function SearchBoxComponent_Template_input_focus_1_listener($event) { return ctx.open(); })("input", function SearchBoxComponent_Template_input_input_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1028); const _r1010 = ɵngcc0.ɵɵreference(2); return ctx.search(_r1010.value); })("blur", function SearchBoxComponent_Template_input_blur_1_listener($event) { return ctx.close($event); })("keydown.escape", function SearchBoxComponent_Template_input_keydown_escape_1_listener($event) { return ctx.close($event); })("keydown.enter", function SearchBoxComponent_Template_input_keydown_enter_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1028); const _r1010 = ɵngcc0.ɵɵreference(2); return ctx.launchSearchResult($event, _r1010.value); });
+        ɵngcc0.ɵɵlistener("focus", function SearchBoxComponent_Template_input_focus_1_listener($event) { return ctx.open(); })("input", function SearchBoxComponent_Template_input_input_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1032); const _r1005 = ɵngcc0.ɵɵreference(2); return ctx.search(_r1005.value); })("blur", function SearchBoxComponent_Template_input_blur_1_listener($event) { return ctx.close($event); })("keydown.escape", function SearchBoxComponent_Template_input_keydown_escape_1_listener($event) { return ctx.close($event); })("keydown.enter", function SearchBoxComponent_Template_input_keydown_enter_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1032); const _r1005 = ɵngcc0.ɵɵreference(2); ctx.close($event, true); return ctx.launchSearchResult($event, _r1005.value); })("keydown.arrowup", function SearchBoxComponent_Template_input_keydown_arrowup_1_listener($event) { return ctx.focusPreviousChild($event); })("keydown.arrowdown", function SearchBoxComponent_Template_input_keydown_arrowdown_1_listener($event) { return ctx.focusNextChild($event); });
         ɵngcc0.ɵɵpipe(3, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementStart(4, "cx-icon", 3);
-        ɵngcc0.ɵɵlistener("mousedown", function SearchBoxComponent_Template_cx_icon_mousedown_4_listener($event) { ɵngcc0.ɵɵrestoreView(_r1028); const _r1010 = ɵngcc0.ɵɵreference(2); return ctx.clear(_r1010); });
+        ɵngcc0.ɵɵlistener("mousedown", function SearchBoxComponent_Template_cx_icon_mousedown_4_listener($event) { ɵngcc0.ɵɵrestoreView(_r1032); const _r1005 = ɵngcc0.ɵɵreference(2); return ctx.clear(_r1005); })("keydown.enter", function SearchBoxComponent_Template_cx_icon_keydown_enter_4_listener($event) { ɵngcc0.ɵɵrestoreView(_r1032); const _r1005 = ɵngcc0.ɵɵreference(2); return ctx.clear(_r1005); });
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementStart(5, "cx-icon", 4);
-        ɵngcc0.ɵɵlistener("mousedown", function SearchBoxComponent_Template_cx_icon_mousedown_5_listener($event) { return ctx.avoidReopen($event); });
+        ɵngcc0.ɵɵlistener("mousedown", function SearchBoxComponent_Template_cx_icon_mousedown_5_listener($event) { return ctx.avoidReopen($event); })("keydown.enter", function SearchBoxComponent_Template_cx_icon_keydown_enter_5_listener($event) { return ctx.avoidReopen($event); });
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵtemplate(6, SearchBoxComponent_div_6_Template, 5, 3, "div", 5);
         ɵngcc0.ɵɵpipe(7, "async");
     } if (rf & 2) {
-        const _r1010 = ɵngcc0.ɵɵreference(2);
-        ɵngcc0.ɵɵclassProp("dirty", !!_r1010.value);
+        const _r1005 = ɵngcc0.ɵɵreference(2);
+        ɵngcc0.ɵɵclassProp("dirty", !!_r1005.value);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("placeholder", ɵngcc0.ɵɵpipeBind1(3, 6, "searchBox.placeholder"));
         ɵngcc0.ɵɵadvance(3);
@@ -22699,7 +22634,8 @@ SearchBoxComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: SearchBoxComponen
     } }, directives: function () { return [IconComponent, ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc5.RouterLinkWithHref, MediaComponent]; }, pipes: function () { return [ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe, HighlightPipe, ɵngcc1.UrlPipe]; }, encapsulation: 2, changeDetection: 0 });
 SearchBoxComponent.ctorParameters = () => [
     { type: SearchBoxComponentService },
-    { type: CmsComponentData, decorators: [{ type: Optional }] }
+    { type: CmsComponentData, decorators: [{ type: Optional }] },
+    { type: WindowRef }
 ];
 __decorate([
     Input('queryText')
@@ -22958,7 +22894,7 @@ GuestRegisterFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: GuestRegi
         ɵngcc0.ɵɵadvance(3);
         ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 15, "checkoutOrderConfirmation.createAccount"));
         ɵngcc0.ɵɵadvance(3);
-        ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(7, 17, "checkoutOrderConfirmation.createAccountForNext", ɵngcc0.ɵɵpureFunction1(30, _c42, ctx.email)), " ");
+        ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(7, 17, "checkoutOrderConfirmation.createAccountForNext", ɵngcc0.ɵɵpureFunction1(30, _c41, ctx.email)), " ");
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("formGroup", ctx.guestRegisterForm);
         ɵngcc0.ɵɵadvance(4);
@@ -23132,8 +23068,8 @@ ProductCarouselComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductCaro
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, ProductCarouselComponent_ng_template_3_Template, 7, 8, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1044 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("items", ɵngcc0.ɵɵpipeBind1(1, 3, ctx.items$))("title", ɵngcc0.ɵɵpipeBind1(2, 5, ctx.title$))("template", _r1044);
+        const _r1048 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("items", ɵngcc0.ɵɵpipeBind1(1, 3, ctx.items$))("title", ɵngcc0.ɵɵpipeBind1(2, 5, ctx.title$))("template", _r1048);
     } }, directives: [CarouselComponent, ɵngcc5.RouterLinkWithHref, ɵngcc4.NgIf, MediaComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
 ProductCarouselComponent.ctorParameters = () => [
     { type: CmsComponentData },
@@ -23190,8 +23126,8 @@ ProductReferencesComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductRe
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, ProductReferencesComponent_ng_template_3_Template, 7, 8, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1049 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("title", ɵngcc0.ɵɵpipeBind1(1, 3, ctx.title$))("items", ɵngcc0.ɵɵpipeBind1(2, 5, ctx.items$))("template", _r1049);
+        const _r1053 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("title", ɵngcc0.ɵɵpipeBind1(1, 3, ctx.title$))("items", ɵngcc0.ɵɵpipeBind1(2, 5, ctx.items$))("template", _r1053);
     } }, directives: [CarouselComponent, ɵngcc5.RouterLinkWithHref, ɵngcc4.NgIf, MediaComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
 ProductReferencesComponent.ctorParameters = () => [
     { type: CmsComponentData },
@@ -23356,20 +23292,20 @@ let ProductIntroComponent = class ProductIntroComponent {
     // Get Tab by label if exists on page
     getTabByLabel(label, tabsComponent) {
         if (tabsComponent) {
-            // NOTE: Reads through h3 tags to click on correct tab
+            // NOTE: Reads through button tags to click on correct tab
             // There may be a better way of doing this now/after refactor
-            const h3Elements = tabsComponent.getElementsByTagName('h3');
-            // Look through h3 tab elements until finding tab with label
-            for (const h3Element of Array.from(h3Elements)) {
-                if (h3Element.innerHTML.includes(label)) {
-                    return h3Element;
+            const tabElements = tabsComponent.getElementsByTagName('button');
+            // Look through button tab elements until finding tab with label
+            for (const buttonElement of Array.from(tabElements)) {
+                if (buttonElement.innerHTML.includes(label)) {
+                    return buttonElement;
                 }
             }
         }
     }
 };
 ProductIntroComponent.ɵfac = function ProductIntroComponent_Factory(t) { return new (t || ProductIntroComponent)(ɵngcc0.ɵɵdirectiveInject(CurrentProductService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.TranslationService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.WindowRef)); };
-ProductIntroComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductIntroComponent, selectors: [["cx-product-intro"]], decls: 2, vars: 3, consts: [[4, "ngIf"], ["class", "rating", 4, "ngIf"], [1, "code"], [1, "rating"], [3, "rating", "disabled"], [1, "count"], ["class", "btn-link", 3, "click", 4, "ngIf"], [1, "btn-link", 3, "click"]], template: function ProductIntroComponent_Template(rf, ctx) { if (rf & 1) {
+ProductIntroComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductIntroComponent, selectors: [["cx-product-intro"]], decls: 2, vars: 3, consts: [[4, "ngIf"], ["class", "rating", 4, "ngIf"], [1, "code"], [1, "rating"], [3, "rating", "disabled"], [1, "count"], ["class", "btn btn-link", 3, "click", 4, "ngIf"], [1, "btn", "btn-link", 3, "click"]], template: function ProductIntroComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, ProductIntroComponent_ng_container_0_Template, 6, 6, "ng-container", 0);
         ɵngcc0.ɵɵpipe(1, "async");
     } if (rf & 2) {
@@ -23548,16 +23484,13 @@ let ProductViewComponent = class ProductViewComponent {
     }
 };
 ProductViewComponent.ɵfac = function ProductViewComponent_Factory(t) { return new (t || ProductViewComponent)(); };
-ProductViewComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductViewComponent, selectors: [["cx-product-view"]], inputs: { mode: "mode" }, outputs: { modeChange: "modeChange" }, decls: 4, vars: 3, consts: [[1, "cx-product-layout", 3, "click"], [3, "ngClass"], [3, "type", 4, "ngIf"], [3, "type"]], template: function ProductViewComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵelementStart(0, "div", 0);
-        ɵngcc0.ɵɵlistener("click", function ProductViewComponent_Template_div_click_0_listener($event) { return ctx.changeMode(); });
-        ɵngcc0.ɵɵelementStart(1, "div", 1);
-        ɵngcc0.ɵɵtemplate(2, ProductViewComponent_cx_icon_2_Template, 1, 1, "cx-icon", 2);
-        ɵngcc0.ɵɵtemplate(3, ProductViewComponent_cx_icon_3_Template, 1, 1, "cx-icon", 2);
-        ɵngcc0.ɵɵelementEnd();
+ProductViewComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductViewComponent, selectors: [["cx-product-view"]], inputs: { mode: "mode" }, outputs: { modeChange: "modeChange" }, decls: 3, vars: 3, consts: [[1, "btn", "cx-product-layout", 3, "ngClass", "click"], [3, "type", 4, "ngIf"], [3, "type"]], template: function ProductViewComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵelementStart(0, "button", 0);
+        ɵngcc0.ɵɵlistener("click", function ProductViewComponent_Template_button_click_0_listener($event) { return ctx.changeMode(); });
+        ɵngcc0.ɵɵtemplate(1, ProductViewComponent_cx_icon_1_Template, 1, 1, "cx-icon", 1);
+        ɵngcc0.ɵɵtemplate(2, ProductViewComponent_cx_icon_2_Template, 1, 1, "cx-icon", 1);
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
-        ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngClass", ctx.buttonClass);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngIf", ctx.viewMode === ctx.iconTypes.GRID);
@@ -23832,7 +23765,7 @@ let ProductFacetNavigationComponent = class ProductFacetNavigationComponent {
     }
 };
 ProductFacetNavigationComponent.ɵfac = function ProductFacetNavigationComponent_Factory(t) { return new (t || ProductFacetNavigationComponent)(ɵngcc0.ɵɵdirectiveInject(ModalService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(ProductListComponentService)); };
-ProductFacetNavigationComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductFacetNavigationComponent, selectors: [["cx-product-facet-navigation"]], decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "cx-search-facet"], [1, "cx-facet-mobile"], [1, "container"], [1, "btn", "btn-action", "btn-block", "cx-facet-mobile-btn", 3, "click"], ["class", "cx-facet-mobile", 4, "ngIf"], ["content", ""], [1, "cx-facet-filter-header"], [1, "cx-facet-filter-container"], ["class", "cx-facet-filter-pill", "role", "filter", 3, "hidden", 4, "ngFor", "ngForOf"], ["role", "filter", 1, "cx-facet-filter-pill", 3, "hidden"], [1, "cx-facet-pill-value"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], ["aria-hidden", "true"], [3, "type"], [4, "ngFor", "ngForOf"], [1, "cx-facet-group"], [1, "cx-facet-header"], ["aria-controls", "", 1, "cx-facet-header-link", 3, "click"], [1, "cx-facet-list"], ["class", "cx-facet-toggle-btn", 3, "click", 4, "ngIf"], [1, "form-check"], [1, "form-checkbox", "cx-facet-label"], ["role", "checkbox", "type", "checkbox", "aria-checked", "true", 1, "form-check-input", "cx-facet-checkbox", 3, "checked", "change"], [1, "cx-facet-text"], [1, "cx-facet-toggle-btn", 3, "click"], ["class", "cx-facet-filter-pill", "role", "filter", 4, "ngFor", "ngForOf"], ["role", "filter", 1, "cx-facet-filter-pill"], [1, "modal-header"], ["id", "modal-title", 1, "cx-facet-modal-title"], [1, "modal-body", "cx-facet-modal-body"], ["class", "form-group", 4, "ngFor", "ngForOf"], [1, "form-group"], ["for", "megapixels", 1, "cx-facet-modal-label"], [1, "input-group"]], template: function ProductFacetNavigationComponent_Template(rf, ctx) { if (rf & 1) {
+ProductFacetNavigationComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductFacetNavigationComponent, selectors: [["cx-product-facet-navigation"]], decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "cx-search-facet"], [1, "cx-facet-mobile"], [1, "container"], [1, "btn", "btn-action", "btn-block", "cx-facet-mobile-btn", 3, "click"], ["class", "cx-facet-mobile", 4, "ngIf"], ["content", ""], [1, "cx-facet-filter-header"], [1, "cx-facet-filter-container"], ["class", "cx-facet-filter-pill", "role", "filter", 3, "hidden", 4, "ngFor", "ngForOf"], ["role", "filter", 1, "cx-facet-filter-pill", 3, "hidden"], [1, "cx-facet-pill-value"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], ["aria-hidden", "true"], [3, "type"], [4, "ngFor", "ngForOf"], [1, "cx-facet-group"], [1, "cx-facet-header"], ["aria-controls", "", "tabindex", "0", 1, "cx-facet-header-link", 3, "click"], [1, "cx-facet-list"], ["class", "cx-facet-toggle-btn", 3, "click", 4, "ngIf"], ["class", "cx-facet-toggle-btn", "tabindex", "0", 3, "click", 4, "ngIf"], [1, "form-check"], [1, "form-checkbox", "cx-facet-label"], ["role", "checkbox", "type", "checkbox", "aria-checked", "true", 1, "form-check-input", "cx-facet-checkbox", 3, "checked", "change"], [1, "cx-facet-text"], [1, "cx-facet-toggle-btn", 3, "click"], ["tabindex", "0", 1, "cx-facet-toggle-btn", 3, "click"], ["class", "cx-facet-filter-pill", "role", "filter", 4, "ngFor", "ngForOf"], ["role", "filter", 1, "cx-facet-filter-pill"], [1, "modal-header"], ["id", "modal-title", 1, "cx-facet-modal-title"], [1, "modal-body", "cx-facet-modal-body"], ["class", "form-group", 4, "ngFor", "ngForOf"], [1, "form-group"], ["for", "megapixels", 1, "cx-facet-modal-label"], [1, "input-group"]], template: function ProductFacetNavigationComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, ProductFacetNavigationComponent_ng_container_0_Template, 14, 8, "ng-container", 0);
         ɵngcc0.ɵɵpipe(1, "async");
     } if (rf & 2) {
@@ -23847,7 +23780,7 @@ ProductFacetNavigationComponent.ctorParameters = () => [
 let ProductGridItemComponent = class ProductGridItemComponent {
 };
 ProductGridItemComponent.ɵfac = function ProductGridItemComponent_Factory(t) { return new (t || ProductGridItemComponent)(); };
-ProductGridItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductGridItemComponent, selectors: [["cx-product-grid-item"]], inputs: { product: "product" }, decls: 13, vars: 18, consts: [[1, "cx-product-image-container", 3, "routerLink"], ["format", "product", 1, "cx-product-image", 3, "container", "alt"], [1, "cx-product-name", 3, "routerLink", "innerHTML"], [1, "cx-product-rating"], [3, "rating", "disabled", 4, "ngIf"], [4, "ngIf"], [1, "cx-product-price-container"], ["aria-label", "Product price", 1, "cx-product-price"], [4, "cxFeatureLevel"], [3, "showQuantity", "product", 4, "ngIf"], [3, "rating", "disabled"], ["class", "cx-variant-style-icons", 4, "ngIf"], [1, "cx-variant-style-icons"], [3, "variants"], [3, "showQuantity", "product"]], template: function ProductGridItemComponent_Template(rf, ctx) { if (rf & 1) {
+ProductGridItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductGridItemComponent, selectors: [["cx-product-grid-item"]], inputs: { product: "product" }, decls: 13, vars: 18, consts: [["tabindex", "-1", 1, "cx-product-image-container", 3, "routerLink"], ["format", "product", 1, "cx-product-image", 3, "container", "alt"], [1, "cx-product-name", 3, "routerLink", "innerHTML"], [1, "cx-product-rating"], [3, "rating", "disabled", 4, "ngIf"], [4, "ngIf"], [1, "cx-product-price-container"], ["aria-label", "Product price", 1, "cx-product-price"], [4, "cxFeatureLevel"], [3, "showQuantity", "product", 4, "ngIf"], [3, "rating", "disabled"], ["class", "cx-variant-style-icons", 4, "ngIf"], [1, "cx-variant-style-icons"], [3, "variants"], [3, "showQuantity", "product"]], template: function ProductGridItemComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "a", 0);
         ɵngcc0.ɵɵpipe(1, "cxUrl");
         ɵngcc0.ɵɵelement(2, "cx-media", 1);
@@ -23891,7 +23824,7 @@ __decorate([
 let ProductListItemComponent = class ProductListItemComponent {
 };
 ProductListItemComponent.ɵfac = function ProductListItemComponent_Factory(t) { return new (t || ProductListItemComponent)(); };
-ProductListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductListItemComponent, selectors: [["cx-product-list-item"]], inputs: { product: "product" }, decls: 19, vars: 20, consts: [[1, "row"], [1, "col-12", "col-md-4"], [1, "cx-product-image-container", 3, "routerLink"], ["format", "product", 1, "cx-product-image", 3, "container", "alt"], [1, "col-12", "col-md-8"], [1, "cx-product-name", 3, "routerLink", "innerHtml"], [3, "rating", "disabled", 4, "ngIf"], ["class", "cx-product-no-review", 4, "ngIf"], ["aria-label", "Product price", 1, "cx-product-price"], [4, "cxFeatureLevel"], [1, "cx-product-summary", 3, "innerHtml"], [3, "showQuantity", "product", 4, "ngIf"], [3, "rating", "disabled"], [1, "cx-product-no-review"], [3, "variants", 4, "ngIf"], [3, "variants"], [3, "showQuantity", "product"]], template: function ProductListItemComponent_Template(rf, ctx) { if (rf & 1) {
+ProductListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductListItemComponent, selectors: [["cx-product-list-item"]], inputs: { product: "product" }, decls: 19, vars: 20, consts: [[1, "row"], [1, "col-12", "col-md-4"], ["tabindex", "-1", 1, "cx-product-image-container", 3, "routerLink"], ["format", "product", 1, "cx-product-image", 3, "container", "alt"], [1, "col-12", "col-md-8"], [1, "cx-product-name", 3, "routerLink", "innerHtml"], [3, "rating", "disabled", 4, "ngIf"], ["class", "cx-product-no-review", 4, "ngIf"], ["aria-label", "Product price", 1, "cx-product-price"], [4, "cxFeatureLevel"], [1, "cx-product-summary", 3, "innerHtml"], [3, "showQuantity", "product", 4, "ngIf"], [3, "rating", "disabled"], [1, "cx-product-no-review"], [3, "variants", 4, "ngIf"], [3, "variants"], [3, "showQuantity", "product"]], template: function ProductListItemComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "div", 0);
         ɵngcc0.ɵɵelementStart(1, "div", 1);
         ɵngcc0.ɵɵelementStart(2, "a", 2);
@@ -24429,10 +24362,11 @@ ProductDetailsTabModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function P
         ]] });
 
 let ProductReviewsComponent = class ProductReviewsComponent {
-    constructor(reviewService, currentProductService, fb) {
+    constructor(reviewService, currentProductService, fb, cd) {
         this.reviewService = reviewService;
         this.currentProductService = currentProductService;
         this.fb = fb;
+        this.cd = cd;
         this.isWritingReview = false;
         // TODO: configurable
         this.initialMaxListItems = 5;
@@ -24444,15 +24378,36 @@ let ProductReviewsComponent = class ProductReviewsComponent {
     }
     initiateWriteReview() {
         this.isWritingReview = true;
+        this.cd.detectChanges();
+        if (this.titleInput && this.titleInput.nativeElement) {
+            this.titleInput.nativeElement.focus();
+        }
     }
     cancelWriteReview() {
         this.isWritingReview = false;
         this.resetReviewForm();
+        this.cd.detectChanges();
+        if (this.writeReviewButton && this.writeReviewButton.nativeElement) {
+            this.writeReviewButton.nativeElement.focus();
+        }
     }
     setRating(rating) {
         this.reviewForm.controls.rating.setValue(rating);
     }
+    markFormAsTouched() {
+        Object.keys(this.reviewForm.controls).forEach(key => {
+            this.reviewForm.controls[key].markAsTouched();
+        });
+    }
     submitReview(product) {
+        if (this.reviewForm.valid) {
+            this.addReview(product);
+        }
+        else {
+            this.markFormAsTouched();
+        }
+    }
+    addReview(product) {
         const reviewFormControls = this.reviewForm.controls;
         const review = {
             headline: reviewFormControls.title.value,
@@ -24463,6 +24418,10 @@ let ProductReviewsComponent = class ProductReviewsComponent {
         this.reviewService.add(product.code, review);
         this.isWritingReview = false;
         this.resetReviewForm();
+        this.cd.detectChanges();
+        if (this.writeReviewButton && this.writeReviewButton.nativeElement) {
+            this.writeReviewButton.nativeElement.focus();
+        }
     }
     resetReviewForm() {
         this.reviewForm = this.fb.group({
@@ -24473,8 +24432,15 @@ let ProductReviewsComponent = class ProductReviewsComponent {
         });
     }
 };
-ProductReviewsComponent.ɵfac = function ProductReviewsComponent_Factory(t) { return new (t || ProductReviewsComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ProductReviewService), ɵngcc0.ɵɵdirectiveInject(CurrentProductService), ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder)); };
-ProductReviewsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductReviewsComponent, selectors: [["cx-product-reviews"]], decls: 2, vars: 3, consts: [["class", "container", 4, "ngIf"], [1, "container"], [4, "ngIf", "ngIfElse"], ["writeReview", ""], [1, "header"], [1, "btn", "btn-primary", 3, "click"], ["class", "rating", 3, "rating", "disabled", 4, "ngIf"], ["class", "rating", 4, "ngIf"], [1, "rating", 3, "rating", "disabled"], [1, "rating"], [4, "ngIf"], ["class", "review", "tabindex", "0", 4, "ngFor", "ngForOf"], ["tabindex", "0", 1, "review"], [1, "title"], [3, "rating", "disabled"], [1, "name"], [1, "date"], [1, "text"], ["class", "btn btn-primary", 3, "click", 4, "ngIf"], [3, "formGroup", "ngSubmit"], [1, "form-group"], [1, "label-content"], ["type", "text", "formControlName", "title", 1, "form-control"], ["rows", "3", "formControlName", "comment", 1, "form-control"], [3, "change"], ["type", "text", "formControlName", "reviewerName", 1, "form-control"], [1, "form-group", "row"], [1, "col-12", "col-md-4"], ["type", "submit", 1, "btn", "btn-block", "btn-secondary", 3, "click"], ["type", "submit", 1, "btn", "btn-block", "btn-primary", 3, "ngClass", "disabled"]], template: function ProductReviewsComponent_Template(rf, ctx) { if (rf & 1) {
+ProductReviewsComponent.ɵfac = function ProductReviewsComponent_Factory(t) { return new (t || ProductReviewsComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ProductReviewService), ɵngcc0.ɵɵdirectiveInject(CurrentProductService), ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ChangeDetectorRef)); };
+ProductReviewsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductReviewsComponent, selectors: [["cx-product-reviews"]], viewQuery: function ProductReviewsComponent_Query(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵviewQuery(_c44, true);
+        ɵngcc0.ɵɵviewQuery(_c45, true);
+    } if (rf & 2) {
+        var _t;
+        ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.titleInput = _t.first);
+        ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.writeReviewButton = _t.first);
+    } }, decls: 2, vars: 3, consts: [["class", "container", 4, "ngIf"], [1, "container"], [4, "ngIf", "ngIfElse"], ["writeReview", ""], [1, "header"], [1, "btn", "btn-primary", 3, "click"], ["writeReviewButton", ""], ["class", "rating", 3, "rating", "disabled", 4, "ngIf"], ["class", "rating", 4, "ngIf"], [1, "rating", 3, "rating", "disabled"], [1, "rating"], [4, "ngIf"], ["class", "review", "tabindex", "0", 4, "ngFor", "ngForOf"], ["tabindex", "0", 1, "review"], [1, "title"], [3, "rating", "disabled"], [1, "name"], [1, "date"], [1, "text"], ["class", "btn btn-primary", 3, "click", 4, "ngIf"], [3, "formGroup", "ngSubmit"], [1, "form-group"], [1, "label-content"], ["type", "text", "formControlName", "title", 1, "form-control"], ["titleInput", ""], ["rows", "3", "formControlName", "comment", 1, "form-control"], [3, "change"], ["type", "text", "formControlName", "reviewerName", 1, "form-control"], [1, "form-group", "row"], [1, "col-12", "col-md-4"], ["type", "button", 1, "btn", "btn-block", "btn-secondary", 3, "click"], ["type", "submit", 1, "btn", "btn-block", "btn-primary", 3, "ngClass"]], template: function ProductReviewsComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, ProductReviewsComponent_div_0_Template, 7, 6, "div", 0);
         ɵngcc0.ɵɵpipe(1, "async");
     } if (rf & 2) {
@@ -24483,8 +24449,15 @@ ProductReviewsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductRevie
 ProductReviewsComponent.ctorParameters = () => [
     { type: ProductReviewService },
     { type: CurrentProductService },
-    { type: FormBuilder }
+    { type: FormBuilder },
+    { type: ChangeDetectorRef }
 ];
+__decorate([
+    ViewChild('titleInput', { static: false })
+], ProductReviewsComponent.prototype, "titleInput", void 0);
+__decorate([
+    ViewChild('writeReviewButton', { static: false })
+], ProductReviewsComponent.prototype, "writeReviewButton", void 0);
 
 let ProductReviewsModule = class ProductReviewsModule {
 };
@@ -24552,11 +24525,11 @@ StockNotificationDialogComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Sto
         ɵngcc0.ɵɵpipe(8, "async");
         ɵngcc0.ɵɵtemplate(9, StockNotificationDialogComponent_ng_template_9_Template, 7, 3, "ng-template", null, 5, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1254 = ɵngcc0.ɵɵreference(10);
+        const _r1260 = ɵngcc0.ɵɵreference(10);
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 3, "stockNotification.subscriptionDialog.header"), " ");
         ɵngcc0.ɵɵadvance(5);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 5, ctx.subscribeSuccess$))("ngIfElse", _r1254);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 5, ctx.subscribeSuccess$))("ngIfElse", _r1260);
     } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc5.RouterLinkWithHref, SpinnerComponent], pipes: [ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe], encapsulation: 2 });
 StockNotificationDialogComponent.ctorParameters = () => [
     { type: ModalService },
@@ -24781,8 +24754,8 @@ StoreFinderGridComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinder
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, StoreFinderGridComponent_ng_template_3_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1288 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1288);
+        const _r1294 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1294);
     } }, directives: function () { return [ɵngcc4.NgIf, ɵngcc4.NgForOf, StoreFinderListItemComponent,
         SpinnerComponent]; }, pipes: function () { return [ɵngcc4.AsyncPipe]; }, encapsulation: 2 });
 StoreFinderGridComponent.ctorParameters = () => [
@@ -24913,7 +24886,7 @@ let StoreFinderMapComponent = class StoreFinderMapComponent {
 };
 StoreFinderMapComponent.ɵfac = function StoreFinderMapComponent_Factory(t) { return new (t || StoreFinderMapComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.GoogleMapRendererService)); };
 StoreFinderMapComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinderMapComponent, selectors: [["cx-store-finder-map"]], viewQuery: function StoreFinderMapComponent_Query(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵstaticViewQuery(_c48, true);
+        ɵngcc0.ɵɵstaticViewQuery(_c49, true);
     } if (rf & 2) {
         var _t;
         ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.mapElement = _t.first);
@@ -24997,7 +24970,7 @@ let StoreFinderListComponent = class StoreFinderListComponent {
 };
 StoreFinderListComponent.ɵfac = function StoreFinderListComponent_Factory(t) { return new (t || StoreFinderListComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.StoreDataService), ɵngcc0.ɵɵdirectiveInject(DOCUMENT)); };
 StoreFinderListComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinderListComponent, selectors: [["cx-store-finder-list"]], viewQuery: function StoreFinderListComponent_Query(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵviewQuery(_c49, true);
+        ɵngcc0.ɵɵviewQuery(_c50, true);
     } if (rf & 2) {
         var _t;
         ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.storeMap = _t.first);
@@ -25075,8 +25048,8 @@ StoreFinderSearchResultComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Sto
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, StoreFinderSearchResultComponent_ng_template_3_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1331 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1331);
+        const _r1337 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1337);
     } }, directives: [ɵngcc4.NgIf, PaginationComponent,
         StoreFinderListComponent,
         SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
@@ -25138,16 +25111,16 @@ StoreFinderSearchComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFind
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
-        const _r1341 = ɵngcc0.ɵɵreference(5);
+        const _r1347 = ɵngcc0.ɵɵreference(5);
         ɵngcc0.ɵɵadvance(4);
         ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 9, "storeFinder.searchBox"));
         ɵngcc0.ɵɵproperty("formControl", ctx.searchBox);
         ɵngcc0.ɵɵadvance(3);
-        ɵngcc0.ɵɵproperty("type", ctx.iconTypes.SEARCH)("routerLink", ɵngcc0.ɵɵpureFunction0(15, _c52))("queryParams", ɵngcc0.ɵɵpureFunction1(16, _c40, _r1341.value))("ngClass", ɵngcc0.ɵɵpureFunction1(18, _c53, !(_r1341.value && _r1341.value.length)));
+        ɵngcc0.ɵɵproperty("type", ctx.iconTypes.SEARCH)("routerLink", ɵngcc0.ɵɵpureFunction0(15, _c53))("queryParams", ɵngcc0.ɵɵpureFunction1(16, _c39, _r1347.value))("ngClass", ɵngcc0.ɵɵpureFunction1(18, _c54, !(_r1347.value && _r1347.value.length)));
         ɵngcc0.ɵɵadvance(5);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(13, 11, "storeFinder.useMyLocation"), " ");
         ɵngcc0.ɵɵadvance(3);
-        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction0(20, _c54));
+        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction0(20, _c55));
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(17, 13, "storeFinder.viewAllStores"), " ");
     } }, directives: [ɵngcc7.DefaultValueAccessor, ɵngcc7.RequiredValidator, ɵngcc7.NgControlStatus, ɵngcc7.FormControlDirective, IconComponent, ɵngcc5.RouterLink, ɵngcc4.NgClass], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2 });
@@ -25194,8 +25167,8 @@ StoreFinderStoresCountComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Stor
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, StoreFinderStoresCountComponent_ng_template_3_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1351 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1351);
+        const _r1357 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1357);
     } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc5.RouterLinkWithHref, ɵngcc4.NgClass, SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
 StoreFinderStoresCountComponent.ctorParameters = () => [
     { type: StoreFinderService }
@@ -25243,8 +25216,8 @@ StoreFinderStoreComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinde
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, StoreFinderStoreComponent_ng_template_3_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1362 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.location || !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.location$))("ngIfElse", _r1362);
+        const _r1368 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.location || !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.location$))("ngIfElse", _r1368);
     } }, directives: [ɵngcc4.NgIf, IconComponent,
         StoreFinderStoreDescriptionComponent,
         SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
@@ -25467,6 +25440,14 @@ let LoginFormComponent = class LoginFormComponent {
         }
     }
     login() {
+        if (this.form.valid) {
+            this.submitLogin();
+        }
+        else {
+            this.markFormAsTouched();
+        }
+    }
+    submitLogin() {
         const { userId, password } = this.form.controls;
         this.auth.authorize(userId.value.toLowerCase(), // backend accepts lowercase emails only
         password.value);
@@ -25478,6 +25459,11 @@ let LoginFormComponent = class LoginFormComponent {
                 }
             });
         }
+    }
+    markFormAsTouched() {
+        Object.keys(this.form.controls).forEach(key => {
+            this.form.controls[key].markAsTouched();
+        });
     }
     ngOnDestroy() {
         if (this.sub) {
@@ -25492,7 +25478,7 @@ let LoginFormComponent = class LoginFormComponent {
     }
 };
 LoginFormComponent.ɵfac = function LoginFormComponent_Factory(t) { return new (t || LoginFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.GlobalMessageService), ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthRedirectService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.WindowRef), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(CheckoutConfigService)); };
-LoginFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: LoginFormComponent, selectors: [["cx-login-form"]], decls: 30, vars: 32, consts: [[3, "formGroup", "submit"], [1, "form-group"], [1, "label-content"], ["type", "email", "formControlName", "userId", 1, "form-control", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "password", "formControlName", "password", 1, "form-control", 3, "placeholder"], ["aria-controls", "reset-password", 1, "btn-link", 3, "routerLink"], ["type", "submit", 1, "btn", "btn-block", "btn-primary", 3, "disabled"], [1, "register"], [1, "cx-section-title", "cx-section-title-alt"], [4, "ngIf"], [1, "invalid-feedback"], [1, "btn", "btn-block", "btn-secondary", "btn-register", 3, "routerLink"], [1, "btn", "btn-block", "btn-secondary", "btn-guest", 3, "routerLink"]], template: function LoginFormComponent_Template(rf, ctx) { if (rf & 1) {
+LoginFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: LoginFormComponent, selectors: [["cx-login-form"]], decls: 30, vars: 31, consts: [[3, "formGroup", "submit"], [1, "form-group"], [1, "label-content"], ["type", "email", "formControlName", "userId", 1, "form-control", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "password", "formControlName", "password", 1, "form-control", 3, "placeholder"], ["aria-controls", "reset-password", 1, "btn-link", 3, "routerLink"], ["type", "submit", 1, "btn", "btn-block", "btn-primary"], [1, "register"], [1, "cx-section-title", "cx-section-title-alt"], [4, "ngIf"], [1, "invalid-feedback"], [1, "btn", "btn-block", "btn-secondary", "btn-register", 3, "routerLink"], [1, "btn", "btn-block", "btn-secondary", "btn-guest", 3, "routerLink"]], template: function LoginFormComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "form", 0);
         ɵngcc0.ɵɵlistener("submit", function LoginFormComponent_Template_form_submit_0_listener($event) { return ctx.login(); });
         ɵngcc0.ɵɵelementStart(1, "div", 1);
@@ -25539,26 +25525,24 @@ LoginFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: LoginFormComponen
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("formGroup", ctx.form);
         ɵngcc0.ɵɵadvance(4);
-        ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 15, "loginForm.emailAddress.label"));
+        ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 14, "loginForm.emailAddress.label"));
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵclassProp("is-invalid", ctx.form.controls["userId"].invalid && (ctx.form.controls["userId"].touched || ctx.form.controls["userId"].dirty));
-        ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(7, 17, "loginForm.emailAddress.placeholder"));
+        ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(7, 16, "loginForm.emailAddress.placeholder"));
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("ngIf", ctx.form.controls["userId"].invalid && (ctx.form.controls["userId"].touched || ctx.form.controls["userId"].dirty));
         ɵngcc0.ɵɵadvance(4);
-        ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(13, 19, "loginForm.password.label"));
+        ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(13, 18, "loginForm.password.label"));
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(15, 21, "loginForm.password.placeholder"));
+        ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(15, 20, "loginForm.password.placeholder"));
         ɵngcc0.ɵɵadvance(3);
-        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(18, 23, ɵngcc0.ɵɵpureFunction0(31, _c58)));
+        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(18, 22, ɵngcc0.ɵɵpureFunction0(30, _c59)));
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(20, 25, "loginForm.forgotPassword"));
-        ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("disabled", ctx.form.invalid);
-        ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(23, 27, "loginForm.signIn"), " ");
+        ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(20, 24, "loginForm.forgotPassword"));
+        ɵngcc0.ɵɵadvance(3);
+        ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(23, 26, "loginForm.signIn"), " ");
         ɵngcc0.ɵɵadvance(4);
-        ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(27, 29, "loginForm.dontHaveAccount"), " ");
+        ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(27, 28, "loginForm.dontHaveAccount"), " ");
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("ngIf", !ctx.loginAsGuest);
         ɵngcc0.ɵɵadvance(1);
@@ -25616,8 +25600,8 @@ LoginComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: LoginComponent, selec
         ɵngcc0.ɵɵpipe(1, "async");
         ɵngcc0.ɵɵtemplate(2, LoginComponent_ng_template_2_Template, 4, 7, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1373 = ɵngcc0.ɵɵreference(3);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 2, ctx.user$))("ngIfElse", _r1373);
+        const _r1379 = ɵngcc0.ɵɵreference(3);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 2, ctx.user$))("ngIfElse", _r1379);
     } }, directives: [ɵngcc4.NgIf, PageSlotComponent, ɵngcc5.RouterLinkWithHref], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2 });
 LoginComponent.ctorParameters = () => [
     { type: AuthService },
@@ -25863,13 +25847,13 @@ let RegisterComponent = class RegisterComponent {
     }
 };
 RegisterComponent.ɵfac = function RegisterComponent_Factory(t) { return new (t || RegisterComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthRedirectService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.GlobalMessageService), ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.FeatureConfigService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AnonymousConsentsService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AnonymousConsentsConfig)); };
-RegisterComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: RegisterComponent, selectors: [["cx-register"]], decls: 4, vars: 4, consts: [["class", "cx-page-section container", 4, "ngIf", "ngIfElse"], ["loading", ""], [1, "cx-page-section", "container"], [1, "row", "justify-content-center"], [1, "col-md-6"], [1, "cx-section"], [3, "formGroup"], [1, "form-group"], [1, "label-content"], ["formControlName", "titleCode", 1, "form-control"], ["selected", "", "value", "", "disabled", ""], [3, "value", 4, "ngFor", "ngForOf"], ["type", "text", "name", "firstname", "formControlName", "firstName", 1, "form-control", 3, "placeholder"], ["type", "text", "name", "lastname", "formControlName", "lastName", 1, "form-control", 3, "placeholder"], ["type", "email", "name", "email", "formControlName", "email", 1, "form-control", 3, "placeholder"], ["type", "password", "name", "password", "formControlName", "password", 1, "form-control", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "password", "name", "confirmpassword", "formControlName", "passwordconf", 1, "form-control", 3, "placeholder"], [1, "form-check"], [4, "ngIf", "ngIfElse"], ["hardcodedNewsletter", ""], ["type", "checkbox", "name", "termsandconditions", "formControlName", "termsandconditions"], [1, "form-check-label"], ["target", "_blank", 3, "routerLink"], ["type", "submit", 1, "btn", "btn-block", "btn-primary", 3, "disabled", "click"], [1, "cx-login-link", "btn-link", 3, "routerLink"], [3, "value"], [1, "invalid-feedback"], [4, "ngIf"], ["type", "checkbox", "name", "newsletter", "formControlName", "newsletter", 1, "form-check-input", 3, "checked"], ["type", "checkbox", "name", "newsletter", "formControlName", "newsletter", 1, "form-check-input"], [1, "cx-spinner"]], template: function RegisterComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵtemplate(0, RegisterComponent_section_0_Template, 76, 71, "section", 0);
+RegisterComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: RegisterComponent, selectors: [["cx-register"]], decls: 4, vars: 4, consts: [["class", "cx-page-section container", 4, "ngIf", "ngIfElse"], ["loading", ""], [1, "cx-page-section", "container"], [1, "row", "justify-content-center"], [1, "col-md-6"], [1, "cx-section"], [3, "formGroup"], [1, "form-group"], [1, "label-content"], ["formControlName", "titleCode", 1, "form-control"], ["selected", "", "value", "", "disabled", ""], [3, "value", 4, "ngFor", "ngForOf"], ["type", "text", "name", "firstname", "formControlName", "firstName", 1, "form-control", 3, "placeholder"], ["type", "text", "name", "lastname", "formControlName", "lastName", 1, "form-control", 3, "placeholder"], ["type", "email", "name", "email", "formControlName", "email", 1, "form-control", 3, "placeholder"], ["type", "password", "name", "password", "formControlName", "password", 1, "form-control", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "password", "name", "confirmpassword", "formControlName", "passwordconf", 1, "form-control", 3, "placeholder"], [1, "form-check"], [4, "ngIf", "ngIfElse"], ["hardcodedNewsletter", ""], ["type", "checkbox", "name", "termsandconditions", "formControlName", "termsandconditions"], [1, "form-check-label"], ["target", "_blank", 3, "routerLink"], ["type", "submit", 1, "btn", "btn-block", "btn-primary", 3, "click"], [1, "cx-login-link", "btn-link", 3, "routerLink"], [3, "value"], [1, "invalid-feedback"], [4, "ngIf"], ["type", "checkbox", "name", "newsletter", "formControlName", "newsletter", 1, "form-check-input", 3, "checked"], ["type", "checkbox", "name", "newsletter", "formControlName", "newsletter", 1, "form-check-input"], [1, "cx-spinner"]], template: function RegisterComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵtemplate(0, RegisterComponent_section_0_Template, 76, 70, "section", 0);
         ɵngcc0.ɵɵpipe(1, "async");
         ɵngcc0.ɵɵtemplate(2, RegisterComponent_ng_template_2_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1377 = ɵngcc0.ɵɵreference(3);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.loading$))("ngIfElse", _r1377);
+        const _r1383 = ɵngcc0.ɵɵreference(3);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.loading$))("ngIfElse", _r1383);
     } }, directives: [ɵngcc4.NgIf, ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.SelectControlValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc7.NgSelectOption, ɵngcc7.ɵangular_packages_forms_forms_x, ɵngcc4.NgForOf, ɵngcc7.DefaultValueAccessor, ɵngcc7.CheckboxControlValueAccessor, ɵngcc5.RouterLinkWithHref, SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2 });
 RegisterComponent.ctorParameters = () => [
     { type: AuthService },
@@ -25929,7 +25913,7 @@ let WishListItemComponent = class WishListItemComponent {
     }
 };
 WishListItemComponent.ɵfac = function WishListItemComponent_Factory(t) { return new (t || WishListItemComponent)(); };
-WishListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: WishListItemComponent, selectors: [["cx-wish-list-item"]], inputs: { isLoading: "isLoading", cartEntry: "cartEntry" }, outputs: { remove: "remove" }, decls: 20, vars: 16, consts: [[1, "row"], [1, "cx-image-container", "col-2"], [3, "routerLink"], ["format", "thumbnail", 3, "container"], [1, "cx-info", "col-10"], [1, "cx-info-container", "row"], [1, "col-md-5", "col-lg-5", "col-xl-5"], ["class", "cx-name", 4, "ngIf"], ["class", "cx-code", 4, "ngIf"], [4, "ngIf"], ["class", "cx-price col-md-3 col-lg-4 col-xl-4", 4, "ngIf"], [1, "col-sm-8", "col-md-4", "col-lg-3", "col-xl-3", "cx-add-to-cart"], [3, "showQuantity", "product", 4, "ngIf", "ngIfElse"], ["outOfStock", ""], [1, "cx-return-button", "col-12"], [1, "btn", "btn-link", 3, "disabled", "click"], [1, "cx-name"], [1, "cx-link", 3, "routerLink"], [1, "cx-code"], ["class", "cx-property", 4, "ngFor", "ngForOf"], [1, "cx-property"], ["class", "cx-label", 4, "ngIf"], [1, "cx-label"], [1, "cx-price", "col-md-3", "col-lg-4", "col-xl-4"], [1, "cx-label", "d-block", "d-md-none", "d-lg-none", "d-xl-none"], ["class", "cx-value", 4, "ngIf"], [1, "cx-value"], [3, "showQuantity", "product"], [1, "cx-out-of-stock"]], template: function WishListItemComponent_Template(rf, ctx) { if (rf & 1) {
+WishListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: WishListItemComponent, selectors: [["cx-wish-list-item"]], inputs: { isLoading: "isLoading", cartEntry: "cartEntry" }, outputs: { remove: "remove" }, decls: 20, vars: 16, consts: [[1, "row"], [1, "cx-image-container", "col-2"], ["tabindex", "-1", 3, "routerLink"], ["format", "thumbnail", 3, "container"], [1, "cx-info", "col-10"], [1, "cx-info-container", "row"], [1, "col-md-5", "col-lg-5", "col-xl-5"], ["class", "cx-name", 4, "ngIf"], ["class", "cx-code", 4, "ngIf"], [4, "ngIf"], ["class", "cx-price col-md-3 col-lg-4 col-xl-4", 4, "ngIf"], [1, "col-sm-8", "col-md-4", "col-lg-3", "col-xl-3", "cx-add-to-cart"], [3, "showQuantity", "product", 4, "ngIf", "ngIfElse"], ["outOfStock", ""], [1, "cx-return-button", "col-12"], [1, "btn", "btn-link", 3, "disabled", "click"], [1, "cx-name"], [1, "cx-link", 3, "routerLink"], [1, "cx-code"], ["class", "cx-property", 4, "ngFor", "ngForOf"], [1, "cx-property"], ["class", "cx-label", 4, "ngIf"], [1, "cx-label"], [1, "cx-price", "col-md-3", "col-lg-4", "col-xl-4"], [1, "cx-label", "d-block", "d-md-none", "d-lg-none", "d-xl-none"], ["class", "cx-value", 4, "ngIf"], [1, "cx-value"], [3, "showQuantity", "product"], [1, "cx-out-of-stock"]], template: function WishListItemComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "div", 0);
         ɵngcc0.ɵɵelementStart(1, "div", 1);
         ɵngcc0.ɵɵelementStart(2, "a", 2);
@@ -25960,7 +25944,7 @@ WishListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: WishListItemCo
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
-        const _r1395 = ɵngcc0.ɵɵreference(15);
+        const _r1401 = ɵngcc0.ɵɵreference(15);
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(3, 10, ɵngcc0.ɵɵpureFunction1(14, _c14, ctx.cartEntry.product)));
         ɵngcc0.ɵɵadvance(2);
@@ -25974,7 +25958,7 @@ WishListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: WishListItemCo
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngIf", ctx.cartEntry.basePrice);
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.cartEntry.product.stock.stockLevelStatus !== "outOfStock")("ngIfElse", _r1395);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.cartEntry.product.stock.stockLevelStatus !== "outOfStock")("ngIfElse", _r1401);
         ɵngcc0.ɵɵadvance(4);
         ɵngcc0.ɵɵproperty("disabled", ctx.isLoading);
         ɵngcc0.ɵɵadvance(1);
@@ -27292,7 +27276,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-card',
-                template: "<div\n  *ngIf=\"content\"\n  class=\"cx-card\"\n  [class.cx-card-border]=\"border\"\n  [class.cx-card-fit-to-container]=\"fitToContainer\"\n>\n  <!-- Card Header -->\n  <div *ngIf=\"content.header && !editMode\" class=\"card-header\">\n    {{ content.header }}\n  </div>\n  <!-- Card Body -->\n  <div class=\"card-body cx-card-body\" [class.cx-card-delete]=\"editMode\">\n    <!-- Edit message -->\n    <div *ngIf=\"editMode\" class=\"cx-card-delete-msg\">\n      {{ content.deleteMsg }}\n    </div>\n    <!-- Card title -->\n    <h4 *ngIf=\"content.title\" class=\"cx-card-title\">\n      {{ content.title }}\n    </h4>\n    <!-- Card Content -->\n    <div class=\"cx-card-container\">\n      <!-- Card Label -->\n      <div class=\"cx-card-label-container\">\n        <div *ngIf=\"content.textBold\" class=\"cx-card-label-bold\">\n          {{ content.textBold }}\n        </div>\n        <div *ngFor=\"let line of content.text\">\n          <div class=\"cx-card-label\">{{ line }}</div>\n        </div>\n      </div>\n      <!-- Image -->\n      <div *ngIf=\"content.img\" class=\"cx-card-img-container\">\n        <cx-icon [type]=\"content.img\"></cx-icon>\n      </div>\n    </div>\n    <!-- Edit Mode Actions -->\n    <div *ngIf=\"editMode\" class=\"row cx-card-body-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-primary\" (click)=\"delete()\">\n          {{ 'common.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <!-- Actions -->\n    <div *ngIf=\"content.actions && !editMode\" class=\"cx-card-actions\">\n      <div *ngFor=\"let action of content.actions\">\n        <div [ngSwitch]=\"action.event\">\n          <a\n            *ngSwitchCase=\"'delete'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"delete()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'default'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"setDefault()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'send'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"send()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'edit'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"edit()\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchDefault\n            href=\"{{ action.link }}\"\n            class=\"card-link btn-link\"\n            >{{ action.name }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+                template: "<div\n  *ngIf=\"content\"\n  class=\"cx-card\"\n  [class.cx-card-border]=\"border\"\n  [class.cx-card-fit-to-container]=\"fitToContainer\"\n>\n  <!-- Card Header -->\n  <div *ngIf=\"content.header && !editMode\" class=\"card-header\">\n    {{ content.header }}\n  </div>\n  <!-- Card Body -->\n  <div class=\"card-body cx-card-body\" [class.cx-card-delete]=\"editMode\">\n    <!-- Edit message -->\n    <div *ngIf=\"editMode\" class=\"cx-card-delete-msg\">\n      {{ content.deleteMsg }}\n    </div>\n    <!-- Card title -->\n    <h4 *ngIf=\"content.title\" class=\"cx-card-title\">\n      {{ content.title }}\n    </h4>\n    <!-- Card Content -->\n    <div class=\"cx-card-container\">\n      <!-- Card Label -->\n      <div class=\"cx-card-label-container\">\n        <div *ngIf=\"content.textBold\" class=\"cx-card-label-bold\">\n          {{ content.textBold }}\n        </div>\n        <div *ngFor=\"let line of content.text\">\n          <div class=\"cx-card-label\">{{ line }}</div>\n        </div>\n      </div>\n      <!-- Image -->\n      <div *ngIf=\"content.img\" class=\"cx-card-img-container\">\n        <cx-icon [type]=\"content.img\"></cx-icon>\n      </div>\n    </div>\n    <!-- Edit Mode Actions -->\n    <div *ngIf=\"editMode\" class=\"row cx-card-body-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-primary\" (click)=\"delete()\">\n          {{ 'common.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <!-- Actions -->\n    <div *ngIf=\"content.actions && !editMode\" class=\"cx-card-actions\">\n      <div *ngFor=\"let action of content.actions\">\n        <div [ngSwitch]=\"action.event\">\n          <a\n            *ngSwitchCase=\"'delete'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"delete()\"\n            (keydown.enter)=\"delete()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'default'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"setDefault()\"\n            (keydown.enter)=\"setDefault()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'send'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"send()\"\n            (keydown.enter)=\"send()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'edit'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"edit()\"\n            (keydown.enter)=\"edit()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchDefault\n            href=\"{{ action.link }}\"\n            class=\"card-link btn-link\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
             }]
     }], function () { return []; }, { deleteCard: [{
             type: Output
@@ -27335,7 +27319,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-carousel',
-                template: "<ng-container *ngIf=\"items?.length > 0 && (size$ | async) as size\">\n  <h3 *ngIf=\"title\">{{ title }}</h3>\n\n  <div class=\"carousel-panel\" [ngClass]=\"'size-' + size\">\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"previous\"\n      (click)=\"activeSlide = activeSlide - size\"\n      [disabled]=\"activeSlide === 0\"\n    >\n      <cx-icon [type]=\"previousIcon\"></cx-icon>\n    </button>\n\n    <div class=\"slides\">\n      <ng-container *ngFor=\"let _ of items; let i = index\">\n        <div class=\"slide\" *ngIf=\"i % size === 0\">\n          <ng-container\n            *ngFor=\"let item of items | slice: i:i + size; let j = index\"\n          >\n            <div\n              *ngIf=\"item | async as data\"\n              class=\"item\"\n              [class.active]=\"i === activeSlide\"\n            >\n              <ng-container\n                *ngTemplateOutlet=\"template; context: { item: data }\"\n              ></ng-container>\n            </div>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"next\"\n      (click)=\"activeSlide = activeSlide + size\"\n      tabindex=\"0\"\n      [disabled]=\"activeSlide > items.length - size - 1\"\n    >\n      <cx-icon [type]=\"nextIcon\"></cx-icon>\n    </button>\n  </div>\n\n  <div *ngIf=\"!hideIndicators && size < items.length\" class=\"indicators\">\n    <ng-container *ngFor=\"let _ of items; let i = index\">\n      <button\n        *ngIf=\"i % size === 0\"\n        (focus)=\"activeSlide = i\"\n        [disabled]=\"i === activeSlide\"\n        tabindex=\"0\"\n      >\n        <cx-icon [type]=\"indicatorIcon\"></cx-icon>\n      </button>\n    </ng-container>\n  </div>\n</ng-container>\n",
+                template: "<ng-container *ngIf=\"items?.length > 0 && (size$ | async) as size\">\n  <h3 *ngIf=\"title\">{{ title }}</h3>\n\n  <div class=\"carousel-panel\" [ngClass]=\"'size-' + size\">\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"previous\"\n      (click)=\"activeSlide = activeSlide - size\"\n      [disabled]=\"activeSlide === 0\"\n    >\n      <cx-icon [type]=\"previousIcon\"></cx-icon>\n    </button>\n\n    <div class=\"slides\">\n      <ng-container *ngFor=\"let _ of items; let i = index\">\n        <div class=\"slide\" *ngIf=\"i % size === 0\">\n          <ng-container\n            *ngFor=\"let item of items | slice: i:i + size; let j = index\"\n          >\n            <div\n              *ngIf=\"item | async as data\"\n              class=\"item\"\n              [class.active]=\"i === activeSlide\"\n            >\n              <ng-container\n                *ngTemplateOutlet=\"template; context: { item: data }\"\n              ></ng-container>\n            </div>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"next\"\n      (click)=\"activeSlide = activeSlide + size\"\n      tabindex=\"-1\"\n      [disabled]=\"activeSlide > items.length - size - 1\"\n    >\n      <cx-icon [type]=\"nextIcon\"></cx-icon>\n    </button>\n  </div>\n\n  <div *ngIf=\"!hideIndicators && size < items.length\" class=\"indicators\">\n    <ng-container *ngFor=\"let _ of items; let i = index\">\n      <button\n        *ngIf=\"i % size === 0\"\n        (focus)=\"activeSlide = i\"\n        [disabled]=\"i === activeSlide\"\n        tabindex=\"-1\"\n      >\n        <cx-icon [type]=\"indicatorIcon\"></cx-icon>\n      </button>\n    </ng-container>\n  </div>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: ɵngcc0.ElementRef }, { type: CarouselService }]; }, { itemWidth: [{
@@ -27682,7 +27666,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-star-rating',
-                template: "<cx-icon\n  *ngFor=\"let i of [1, 2, 3, 4, 5]\"\n  [type]=\"iconTypes.STAR\"\n  class=\"star\"\n  (mouseover)=\"setRate(i)\"\n  (mouseout)=\"setRate(0)\"\n  (click)=\"saveRate(i)\"\n></cx-icon>\n",
+                template: "<cx-icon\n  *ngFor=\"let i of [1, 2, 3, 4, 5]\"\n  [type]=\"iconTypes.STAR\"\n  class=\"star\"\n  (mouseover)=\"setRate(i)\"\n  (mouseout)=\"setRate(0)\"\n  (click)=\"saveRate(i)\"\n  [attr.tabindex]=\"disabled ? null : 0\"\n></cx-icon>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: ɵngcc0.ElementRef }, { type: ɵngcc0.Renderer2 }]; }, { disabled: [{
@@ -27810,7 +27794,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-cart-item',
-                template: "<div [ngClass]=\"compact ? 'cx-compact row' : 'row'\">\n  <!-- Item Image -->\n  <div class=\"col-2 cx-image-container\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n      (click)=\"viewItem()\"\n    >\n      <cx-media\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-5'\">\n        <div *ngIf=\"item.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n            (click)=\"viewItem()\"\n            >{{ item.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"item.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n        </div>\n        <!-- Variants -->\n        <ng-container *cxFeatureLevel=\"'!1.5'\">\n          <div\n            *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\">{{ variant.name }}</div>\n            <div class=\"cx-value\">{{ variant.value }}</div>\n          </div>\n        </ng-container>\n        <ng-container *cxFeatureLevel=\"'1.5'\">\n          <ng-container *ngIf=\"item.product.baseOptions?.length\">\n            <div\n              *ngFor=\"\n                let variant of item.product.baseOptions[0]?.selected\n                  ?.variantOptionQualifiers\n              \"\n              class=\"cx-property\"\n            >\n              <div class=\"cx-label\" *ngIf=\"variant.name && variant.value\">\n                {{ variant.name }}: {{ variant.value }}\n              </div>\n            </div>\n          </ng-container>\n        </ng-container>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"item.basePrice\"\n        class=\"cx-price\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n          {{ item.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <div class=\"cx-quantity\" [ngClass]=\"compact ? '' : ' col-3'\">\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          placement=\"left\"\n          title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n        <div class=\"cx-value\">\n          <cx-item-counter\n            [control]=\"quantityControl\"\n            [readonly]=\"\n              !item.updateable ||\n              readonly ||\n              (isSaveForLaterEnabled() && options.isSaveForLater)\n            \"\n            [max]=\"item.product.stock?.stockLevel || 1000\"\n            [allowZero]=\"true\"\n          >\n          </cx-item-counter>\n        </div>\n      </div>\n      <!-- Total -->\n      <ng-container\n        *ngIf=\"isSaveForLaterEnabled() && options.isSaveForLater; else total\"\n      >\n        <div\n          class=\"cx-total\"\n          [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n        >\n          <div\n            class=\"cx-label\"\n            [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          >\n            {{ 'saveForLaterItems.stock' | cxTranslate }}\n          </div>\n          <div\n            *ngIf=\"item.product?.stock?.stockLevel >= 0; else forceInstock\"\n            class=\"cx-value\"\n          >\n            {{ item.product.stock.stockLevel }}\n          </div>\n          <ng-template #forceInstock\n            ><div class=\"cx-value\">\n              {{ 'saveForLaterItems.forceInStock' | cxTranslate }}\n            </div></ng-template\n          >\n        </div>\n      </ng-container>\n    </div>\n    <!-- Availability -->\n    <div\n      *ngIf=\"isProductOutOfStock(item.product)\"\n      class=\"cx-availability col-12\"\n    >\n      {{ 'productSummary.outOfStock' | cxTranslate }}\n    </div>\n    <!-- Promotion -->\n    <ng-container *cxFeatureLevel=\"'!1.5'\">\n      <cx-promotions [promotions]=\"potentialProductPromotions\"></cx-promotions>\n    </ng-container>\n\n    <ng-container *cxFeatureLevel=\"'1.5'\">\n      <ng-container\n        *ngIf=\"appliedProductPromotions$ | async as appliedProductPromotions\"\n      >\n        <cx-promotions [promotions]=\"appliedProductPromotions\"></cx-promotions>\n      </ng-container>\n    </ng-container>\n\n    <!-- Actions -->\n    <div\n      *ngIf=\"(!readonly || options.isSaveForLater) && item.updateable\"\n      class=\"cx-actions col-12\"\n    >\n      <ng-container *ngIf=\"!isProductOutOfStock(item.product)\">\n        <ng-container\n          *ngTemplateOutlet=\"\n            options.optionalBtn;\n            context: {\n              $implicit: { loading: quantityControl.disabled, item: item }\n            }\n          \"\n        ></ng-container>\n      </ng-container>\n\n      <div class=\"col-md-3 cx-remove-btn\">\n        <button\n          class=\"link\"\n          [disabled]=\"quantityControl.disabled\"\n          (click)=\"removeItem()\"\n        >\n          {{ 'common.remove' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n\n<ng-template #total>\n  <div\n    *ngIf=\"item.totalPrice\"\n    class=\"cx-total\"\n    [ngClass]=\"compact ? '' : ' col-md-3 col-xl-2'\"\n  >\n    <div\n      class=\"cx-label\"\n      [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n    >\n      {{ 'cartItems.total' | cxTranslate }}\n    </div>\n    <div class=\"cx-value\">{{ item.totalPrice.formattedValue }}</div>\n  </div>\n</ng-template>\n"
+                template: "<div [ngClass]=\"compact ? 'cx-compact row' : 'row'\">\n  <!-- Item Image -->\n  <div class=\"col-2 cx-image-container\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n      (click)=\"viewItem()\"\n      tabindex=\"-1\"\n    >\n      <cx-media\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-5'\">\n        <div *ngIf=\"item.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n            (click)=\"viewItem()\"\n            >{{ item.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"item.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n        </div>\n        <!-- Variants -->\n        <ng-container *cxFeatureLevel=\"'!1.5'\">\n          <div\n            *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\">{{ variant.name }}</div>\n            <div class=\"cx-value\">{{ variant.value }}</div>\n          </div>\n        </ng-container>\n        <ng-container *cxFeatureLevel=\"'1.5'\">\n          <ng-container *ngIf=\"item.product.baseOptions?.length\">\n            <div\n              *ngFor=\"\n                let variant of item.product.baseOptions[0]?.selected\n                  ?.variantOptionQualifiers\n              \"\n              class=\"cx-property\"\n            >\n              <div class=\"cx-label\" *ngIf=\"variant.name && variant.value\">\n                {{ variant.name }}: {{ variant.value }}\n              </div>\n            </div>\n          </ng-container>\n        </ng-container>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"item.basePrice\"\n        class=\"cx-price\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n          {{ item.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <div class=\"cx-quantity\" [ngClass]=\"compact ? '' : ' col-3'\">\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          placement=\"left\"\n          title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n        <div class=\"cx-value\">\n          <cx-item-counter\n            [control]=\"quantityControl\"\n            [readonly]=\"\n              !item.updateable ||\n              readonly ||\n              (isSaveForLaterEnabled() && options.isSaveForLater)\n            \"\n            [max]=\"item.product.stock?.stockLevel || 1000\"\n            [allowZero]=\"true\"\n          >\n          </cx-item-counter>\n        </div>\n      </div>\n      <!-- Total -->\n      <ng-container\n        *ngIf=\"isSaveForLaterEnabled() && options.isSaveForLater; else total\"\n      >\n        <div\n          class=\"cx-total\"\n          [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n        >\n          <div\n            class=\"cx-label\"\n            [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          >\n            {{ 'saveForLaterItems.stock' | cxTranslate }}\n          </div>\n          <div\n            *ngIf=\"item.product?.stock?.stockLevel >= 0; else forceInstock\"\n            class=\"cx-value\"\n          >\n            {{ item.product.stock.stockLevel }}\n          </div>\n          <ng-template #forceInstock\n            ><div class=\"cx-value\">\n              {{ 'saveForLaterItems.forceInStock' | cxTranslate }}\n            </div></ng-template\n          >\n        </div>\n      </ng-container>\n    </div>\n    <!-- Availability -->\n    <div\n      *ngIf=\"isProductOutOfStock(item.product)\"\n      class=\"cx-availability col-12\"\n    >\n      {{ 'productSummary.outOfStock' | cxTranslate }}\n    </div>\n    <!-- Promotion -->\n    <ng-container *cxFeatureLevel=\"'!1.5'\">\n      <cx-promotions [promotions]=\"potentialProductPromotions\"></cx-promotions>\n    </ng-container>\n\n    <ng-container *cxFeatureLevel=\"'1.5'\">\n      <ng-container\n        *ngIf=\"appliedProductPromotions$ | async as appliedProductPromotions\"\n      >\n        <cx-promotions [promotions]=\"appliedProductPromotions\"></cx-promotions>\n      </ng-container>\n    </ng-container>\n\n    <!-- Actions -->\n    <div\n      *ngIf=\"(!readonly || options.isSaveForLater) && item.updateable\"\n      class=\"cx-actions col-12\"\n    >\n      <ng-container *ngIf=\"!isProductOutOfStock(item.product)\">\n        <ng-container\n          *ngTemplateOutlet=\"\n            options.optionalBtn;\n            context: {\n              $implicit: { loading: quantityControl.disabled, item: item }\n            }\n          \"\n        ></ng-container>\n      </ng-container>\n\n      <div class=\"col-md-3 cx-remove-btn\">\n        <button\n          class=\"link\"\n          [disabled]=\"quantityControl.disabled\"\n          (click)=\"removeItem()\"\n        >\n          {{ 'common.remove' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n\n<ng-template #total>\n  <div\n    *ngIf=\"item.totalPrice\"\n    class=\"cx-total\"\n    [ngClass]=\"compact ? '' : ' col-md-3 col-xl-2'\"\n  >\n    <div\n      class=\"cx-label\"\n      [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n    >\n      {{ 'cartItems.total' | cxTranslate }}\n    </div>\n    <div class=\"cx-value\">{{ item.totalPrice.formattedValue }}</div>\n  </div>\n</ng-template>\n"
             }]
     }], function () { return [{ type: PromotionService }, { type: ɵngcc1.FeatureConfigService }]; }, { compact: [{
             type: Input
@@ -28310,7 +28294,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-checkout-progress',
-                template: "<section *ngIf=\"routerState$ | async as routerState\">\n  <div class=\"cx-nav d-none d-lg-block d-xl-block\">\n    <ul class=\"cx-list\">\n      <li class=\"cx-item\" *ngFor=\"let step of steps; let i = index\">\n        <a\n          [routerLink]=\"{ cxRoute: step.routeName } | cxUrl\"\n          class=\"cx-link\"\n          [ngClass]=\"{\n            ' is-active': i === activeStepIndex,\n            ' is-disabled': i > activeStepIndex\n          }\"\n        >\n          {{ i + 1 }}. {{ step.name | cxTranslate }}\n        </a>\n      </li>\n    </ul>\n  </div>\n</section>\n",
+                template: "<section *ngIf=\"routerState$ | async as routerState\">\n  <div class=\"cx-nav d-none d-lg-block d-xl-block\">\n    <ul class=\"cx-list\">\n      <li class=\"cx-item\" *ngFor=\"let step of steps; let i = index\">\n        <a\n          [routerLink]=\"{ cxRoute: step.routeName } | cxUrl\"\n          class=\"cx-link\"\n          [class.active]=\"isActive(i)\"\n          [class.disabled]=\"isDisabled(i)\"\n          [tabindex]=\"getTabIndex(i)\"\n        >\n          {{ i + 1 }}. {{ step.name | cxTranslate }}\n        </a>\n      </li>\n    </ul>\n  </div>\n</section>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: CheckoutConfig }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.RoutingConfigService }]; }, null); })();
@@ -28441,7 +28425,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-payment-form',
-                template: "<!-- FORM -->\n<div *ngIf=\"!(loading$ | async).loading; else spinner\" [formGroup]=\"payment\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <div class=\"form-group\">\n        <ng-container *ngIf=\"cardTypes$ | async as cardTypes\">\n          <div *ngIf=\"cardTypes.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'paymentForm.paymentType' | cxTranslate\n              }}</span>\n              <ng-select\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"cardTypes\"\n                bindLabel=\"name\"\n                bindValue=\"code\"\n                placeholder=\"{{ 'paymentForm.selectOne' | cxTranslate }}\"\n                (change)=\"paymentSelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'paymentForm.accountHolderName.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            type=\"text\"\n            required\n            placeholder=\"{{\n              'paymentForm.accountHolderName.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"accountHolderName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'paymentForm.cardNumber' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            formControlName=\"cardNumber\"\n          />\n        </label>\n      </div>\n\n      <div class=\"row\">\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content\">{{\n              'paymentForm.expirationDate' | cxTranslate\n            }}</span>\n          </label>\n          <div class=\"cx-payment-form-exp-date row\">\n            <div class=\"col-sm-6 col-md-5\">\n              <ng-select\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"months\"\n                bindLabel=\"name\"\n                bindValue=\"expiryMonth\"\n                placeholder=\"{{ 'paymentForm.monthMask' | cxTranslate }}\"\n                (change)=\"monthSelected($event)\"\n              >\n              </ng-select>\n            </div>\n            <div class=\"col-sm-6 col-md-7\">\n              <ng-select\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"years\"\n                bindLabel=\"name\"\n                bindValue=\"expiryYear\"\n                placeholder=\"{{ 'paymentForm.yearMask' | cxTranslate }}\"\n                (change)=\"yearSelected($event)\"\n              >\n              </ng-select>\n            </div>\n          </div>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content\">\n              {{ 'paymentForm.securityCode' | cxTranslate }}\n              <cx-icon\n                [type]=\"iconTypes.INFO\"\n                class=\"cx-payment-form-tooltip\"\n                placement=\"right\"\n                title=\"{{ 'paymentForm.securityCodeTitle' | cxTranslate }}\"\n                alt=\"\"\n              ></cx-icon>\n            </span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              id=\"cVVNumber\"\n              required\n              formControlName=\"cvn\"\n            />\n          </label>\n        </div>\n      </div>\n\n      <div class=\"form-group\" *ngIf=\"setAsDefaultField\">\n        <div class=\"form-check\">\n          <label>\n            <input\n              type=\"checkbox\"\n              class=\"form-check-input\"\n              (change)=\"toggleDefaultPaymentMethod()\"\n            />\n            <span class=\"form-check-label\">{{\n              'paymentForm.setAsDefault' | cxTranslate\n            }}</span>\n          </label>\n        </div>\n      </div>\n\n      <!-- BILLING -->\n      <div class=\"cx-payment-form-billing\">\n        <div class=\"cx-payment-form-billing-address\">\n          {{ 'paymentForm.billingAddress' | cxTranslate }}\n        </div>\n\n        <!-- SAME AS SHIPPING CHECKBOX -->\n        <ng-container *ngIf=\"showSameAsShippingAddressCheckbox() | async\">\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  class=\"form-check-input\"\n                  [checked]=\"sameAsShippingAddress\"\n                  (change)=\"toggleSameAsShippingAddress()\"\n                />\n                <span class=\"form-check-label\">{{\n                  'paymentForm.sameAsShippingAddress' | cxTranslate\n                }}</span>\n              </label>\n            </div>\n          </div>\n        </ng-container>\n\n        <!-- BILLING INFO COMPONENT -->\n        <ng-container\n          *ngIf=\"\n            sameAsShippingAddress && shippingAddress$\n              | async as shippingAddress;\n            else billingAddressForm\n          \"\n        >\n          <cx-card [content]=\"getAddressCardContent(shippingAddress)\"></cx-card>\n        </ng-container>\n\n        <ng-template #billingAddressForm>\n          <cx-billing-address-form\n            [billingAddress]=\"billingAddress\"\n            [countries$]=\"countries$\"\n          >\n          </cx-billing-address-form>\n        </ng-template>\n      </div>\n    </div>\n  </div>\n\n  <!-- BUTTON SECTION -->\n  <div class=\"cx-checkout-btns row\">\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        *ngIf=\"paymentMethodsCount === 0\"\n        class=\"btn btn-block btn-action\"\n        (click)=\"back()\"\n      >\n        {{ 'common.back' | cxTranslate }}\n      </button>\n      <button\n        *ngIf=\"paymentMethodsCount > 0\"\n        class=\"btn btn-block btn-action\"\n        (click)=\"close()\"\n      >\n        {{ 'paymentForm.changePayment' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        class=\"btn btn-block btn-primary\"\n        [disabled]=\"isContinueButtonDisabled()\"\n        (click)=\"next()\"\n      >\n        {{ 'common.continue' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n\n<ng-template #spinner>\n  <cx-spinner></cx-spinner>\n</ng-template>\n",
+                template: "<!-- FORM -->\n<div *ngIf=\"!(loading$ | async).loading; else spinner\" [formGroup]=\"payment\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <div class=\"form-group\">\n        <ng-container *ngIf=\"cardTypes$ | async as cardTypes\">\n          <div *ngIf=\"cardTypes.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'paymentForm.paymentType' | cxTranslate\n              }}</span>\n              <ng-select\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"cardTypes\"\n                bindLabel=\"name\"\n                bindValue=\"code\"\n                placeholder=\"{{ 'paymentForm.selectOne' | cxTranslate }}\"\n                (change)=\"paymentSelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'paymentForm.accountHolderName.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            type=\"text\"\n            required\n            placeholder=\"{{\n              'paymentForm.accountHolderName.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"accountHolderName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'paymentForm.cardNumber' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            formControlName=\"cardNumber\"\n          />\n        </label>\n      </div>\n\n      <div class=\"row\">\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content\">{{\n              'paymentForm.expirationDate' | cxTranslate\n            }}</span>\n          </label>\n          <div class=\"cx-payment-form-exp-date row\">\n            <div class=\"col-sm-6 col-md-5\">\n              <ng-select\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"months\"\n                bindLabel=\"name\"\n                bindValue=\"expiryMonth\"\n                placeholder=\"{{ 'paymentForm.monthMask' | cxTranslate }}\"\n                (change)=\"monthSelected($event)\"\n              >\n              </ng-select>\n            </div>\n            <div class=\"col-sm-6 col-md-7\">\n              <ng-select\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"years\"\n                bindLabel=\"name\"\n                bindValue=\"expiryYear\"\n                placeholder=\"{{ 'paymentForm.yearMask' | cxTranslate }}\"\n                (change)=\"yearSelected($event)\"\n              >\n              </ng-select>\n            </div>\n          </div>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content\">\n              {{ 'paymentForm.securityCode' | cxTranslate }}\n              <cx-icon\n                [type]=\"iconTypes.INFO\"\n                class=\"cx-payment-form-tooltip\"\n                placement=\"right\"\n                title=\"{{ 'paymentForm.securityCodeTitle' | cxTranslate }}\"\n                alt=\"\"\n              ></cx-icon>\n            </span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              id=\"cVVNumber\"\n              required\n              formControlName=\"cvn\"\n            />\n          </label>\n        </div>\n      </div>\n\n      <div class=\"form-group\" *ngIf=\"setAsDefaultField\">\n        <div class=\"form-check\">\n          <label>\n            <input\n              type=\"checkbox\"\n              class=\"form-check-input\"\n              (change)=\"toggleDefaultPaymentMethod()\"\n            />\n            <span class=\"form-check-label\">{{\n              'paymentForm.setAsDefault' | cxTranslate\n            }}</span>\n          </label>\n        </div>\n      </div>\n\n      <!-- BILLING -->\n      <div class=\"cx-payment-form-billing\">\n        <div class=\"cx-payment-form-billing-address\">\n          {{ 'paymentForm.billingAddress' | cxTranslate }}\n        </div>\n\n        <!-- SAME AS SHIPPING CHECKBOX -->\n        <ng-container *ngIf=\"showSameAsShippingAddressCheckbox() | async\">\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  class=\"form-check-input\"\n                  [checked]=\"sameAsShippingAddress\"\n                  (change)=\"toggleSameAsShippingAddress()\"\n                />\n                <span class=\"form-check-label\">{{\n                  'paymentForm.sameAsShippingAddress' | cxTranslate\n                }}</span>\n              </label>\n            </div>\n          </div>\n        </ng-container>\n\n        <!-- BILLING INFO COMPONENT -->\n        <ng-container\n          *ngIf=\"\n            sameAsShippingAddress && shippingAddress$\n              | async as shippingAddress;\n            else billingAddressForm\n          \"\n        >\n          <cx-card [content]=\"getAddressCardContent(shippingAddress)\"></cx-card>\n        </ng-container>\n\n        <ng-template #billingAddressForm>\n          <cx-billing-address-form\n            [billingAddress]=\"billingAddress\"\n            [countries$]=\"countries$\"\n          >\n          </cx-billing-address-form>\n        </ng-template>\n      </div>\n    </div>\n  </div>\n\n  <!-- BUTTON SECTION -->\n  <div class=\"cx-checkout-btns row\">\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        *ngIf=\"paymentMethodsCount === 0\"\n        class=\"btn btn-block btn-action\"\n        (click)=\"back()\"\n      >\n        {{ 'common.back' | cxTranslate }}\n      </button>\n      <button\n        *ngIf=\"paymentMethodsCount > 0\"\n        class=\"btn btn-block btn-action\"\n        (click)=\"close()\"\n      >\n        {{ 'paymentForm.changePayment' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button class=\"btn btn-block btn-primary\" (click)=\"next()\">\n        {{ 'common.continue' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n\n<ng-template #spinner>\n  <cx-spinner></cx-spinner>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: ɵngcc1.CheckoutPaymentService }, { type: ɵngcc1.CheckoutDeliveryService }, { type: ɵngcc1.UserPaymentService }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc7.FormBuilder }, { type: ModalService }]; }, { goBack: [{
@@ -28617,7 +28601,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-address-form',
-                template: "<div [formGroup]=\"address\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <div class=\"form-group\" formGroupName=\"country\">\n        <ng-container *ngIf=\"countries$ | async as countries\">\n          <div *ngIf=\"countries.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'addressForm.country' | cxTranslate\n              }}</span>\n              <ng-select\n                class=\"country-select\"\n                formControlName=\"isocode\"\n                [searchable]=\"true\"\n                [clearable]=\"false\"\n                [items]=\"countries\"\n                bindLabel=\"name\"\n                bindValue=\"isocode\"\n                placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                (change)=\"countrySelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\" *ngIf=\"showTitleCode\">\n        <ng-container *ngIf=\"titles$ | async as titles\">\n          <div *ngIf=\"titles.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'addressForm.title' | cxTranslate\n              }}</span>\n              <ng-select\n                formControlName=\"titleCode\"\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"titles\"\n                bindLabel=\"name\"\n                bindValue=\"code\"\n                (change)=\"titleSelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.firstName.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            type=\"text\"\n            required\n            placeholder=\"{{\n              'addressForm.firstName.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"firstName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.lastName.label' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            placeholder=\"{{ 'addressForm.lastName.placeholder' | cxTranslate }}\"\n            formControlName=\"lastName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.address1' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            placeholder=\"{{ 'addressForm.streetAddress' | cxTranslate }}\"\n            formControlName=\"line1\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'addressForm.address2' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            placeholder=\"{{ 'addressForm.aptSuite' | cxTranslate }}\"\n            formControlName=\"line2\"\n          />\n        </label>\n      </div>\n      <div class=\"row\">\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content required\">{{\n              'addressForm.city.label' | cxTranslate\n            }}</span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              required\n              placeholder=\"{{ 'addressForm.city.placeholder' | cxTranslate }}\"\n              formControlName=\"town\"\n            />\n          </label>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <ng-container\n            *ngIf=\"regions$ | async as regions\"\n            formGroupName=\"region\"\n          >\n            <div *ngIf=\"regions.length !== 0\">\n              <label aria-required=\"true\">\n                <span class=\"label-content required\">{{\n                  'addressForm.state' | cxTranslate\n                }}</span>\n                <ng-select\n                  class=\"region-select\"\n                  formControlName=\"isocode\"\n                  [searchable]=\"true\"\n                  [clearable]=\"false\"\n                  [items]=\"regions\"\n                  bindLabel=\"{{ regions[0].name ? 'name' : 'isocode' }}\"\n                  bindValue=\"{{ regions[0].name ? 'isocode' : 'region' }}\"\n                  placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                  (change)=\"regionSelected($event)\"\n                >\n                </ng-select>\n              </label>\n            </div>\n          </ng-container>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content required\">{{\n              'addressForm.zipCode.label' | cxTranslate\n            }}</span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              required\n              placeholder=\"{{\n                'addressForm.zipCode.placeholder' | cxTranslate\n              }}\"\n              formControlName=\"postalCode\"\n            />\n          </label>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'addressForm.phoneNumber.label' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            placeholder=\"{{\n              'addressForm.phoneNumber.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"phone\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\" *ngIf=\"setAsDefaultField\">\n        <div class=\"form-check\">\n          <label>\n            <input\n              type=\"checkbox\"\n              class=\"form-check-input\"\n              formControlName=\"defaultAddress\"\n              (change)=\"toggleDefaultAddress()\"\n            />\n            <span class=\"form-check-label\">{{\n              'addressForm.setAsDefault' | cxTranslate\n            }}</span>\n          </label>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"cx-checkout-btns row\">\n    <div class=\"col-md-12 col-lg-6\" *ngIf=\"showCancelBtn\">\n      <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n        {{ cancelBtnLabel || ('addressForm.chooseAddress' | cxTranslate) }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        class=\"btn btn-block btn-primary\"\n        [disabled]=\"address.invalid\"\n        (click)=\"verifyAddress()\"\n      >\n        {{ actionBtnLabel || ('common.continue' | cxTranslate) }}\n      </button>\n    </div>\n  </div>\n</div>\n",
+                template: "<div [formGroup]=\"address\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <div class=\"form-group\" formGroupName=\"country\">\n        <ng-container *ngIf=\"countries$ | async as countries\">\n          <div *ngIf=\"countries.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'addressForm.country' | cxTranslate\n              }}</span>\n              <ng-select\n                class=\"country-select\"\n                formControlName=\"isocode\"\n                [searchable]=\"true\"\n                [clearable]=\"false\"\n                [items]=\"countries\"\n                bindLabel=\"name\"\n                bindValue=\"isocode\"\n                placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                (change)=\"countrySelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\" *ngIf=\"showTitleCode\">\n        <ng-container *ngIf=\"titles$ | async as titles\">\n          <div *ngIf=\"titles.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'addressForm.title' | cxTranslate\n              }}</span>\n              <ng-select\n                formControlName=\"titleCode\"\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"titles\"\n                bindLabel=\"name\"\n                bindValue=\"code\"\n                (change)=\"titleSelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.firstName.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            type=\"text\"\n            required\n            placeholder=\"{{\n              'addressForm.firstName.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"firstName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.lastName.label' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            placeholder=\"{{ 'addressForm.lastName.placeholder' | cxTranslate }}\"\n            formControlName=\"lastName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.address1' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            placeholder=\"{{ 'addressForm.streetAddress' | cxTranslate }}\"\n            formControlName=\"line1\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'addressForm.address2' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            placeholder=\"{{ 'addressForm.aptSuite' | cxTranslate }}\"\n            formControlName=\"line2\"\n          />\n        </label>\n      </div>\n      <div class=\"row\">\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content required\">{{\n              'addressForm.city.label' | cxTranslate\n            }}</span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              required\n              placeholder=\"{{ 'addressForm.city.placeholder' | cxTranslate }}\"\n              formControlName=\"town\"\n            />\n          </label>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <ng-container\n            *ngIf=\"regions$ | async as regions\"\n            formGroupName=\"region\"\n          >\n            <div *ngIf=\"regions.length !== 0\">\n              <label aria-required=\"true\">\n                <span class=\"label-content required\">{{\n                  'addressForm.state' | cxTranslate\n                }}</span>\n                <ng-select\n                  class=\"region-select\"\n                  formControlName=\"isocode\"\n                  [searchable]=\"true\"\n                  [clearable]=\"false\"\n                  [items]=\"regions\"\n                  bindLabel=\"{{ regions[0].name ? 'name' : 'isocode' }}\"\n                  bindValue=\"{{ regions[0].name ? 'isocode' : 'region' }}\"\n                  placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                  (change)=\"regionSelected($event)\"\n                >\n                </ng-select>\n              </label>\n            </div>\n          </ng-container>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content required\">{{\n              'addressForm.zipCode.label' | cxTranslate\n            }}</span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              required\n              placeholder=\"{{\n                'addressForm.zipCode.placeholder' | cxTranslate\n              }}\"\n              formControlName=\"postalCode\"\n            />\n          </label>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'addressForm.phoneNumber.label' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            placeholder=\"{{\n              'addressForm.phoneNumber.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"phone\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\" *ngIf=\"setAsDefaultField\">\n        <div class=\"form-check\">\n          <label>\n            <input\n              type=\"checkbox\"\n              class=\"form-check-input\"\n              formControlName=\"defaultAddress\"\n              (change)=\"toggleDefaultAddress()\"\n            />\n            <span class=\"form-check-label\">{{\n              'addressForm.setAsDefault' | cxTranslate\n            }}</span>\n          </label>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"cx-checkout-btns row\">\n    <div class=\"col-md-12 col-lg-6\" *ngIf=\"showCancelBtn\">\n      <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n        {{ cancelBtnLabel || ('addressForm.chooseAddress' | cxTranslate) }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button class=\"btn btn-block btn-primary\" (click)=\"verifyAddress()\">\n        {{ actionBtnLabel || ('common.continue' | cxTranslate) }}\n      </button>\n    </div>\n  </div>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: ɵngcc7.FormBuilder }, { type: ɵngcc1.CheckoutDeliveryService }, { type: ɵngcc1.UserService }, { type: ɵngcc1.UserAddressService }, { type: ɵngcc1.GlobalMessageService }, { type: ModalService }]; }, { showCancelBtn: [{
@@ -29055,7 +29039,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-tab-paragraph-container',
-                template: "<ng-container *ngFor=\"let component of components$ | async; let i = index\">\n  <h3 [class.active]=\"i === activeTabNum\" (click)=\"select(i)\">\n    {{ component.title | cxTranslate: { param: tabTitleParams[i] | async } }}\n  </h3>\n  <div [class.active]=\"i === activeTabNum\">\n    <ng-template [cxOutlet]=\"component.flexType\" [cxOutletContext]=\"{}\">\n      <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n    </ng-template>\n  </div>\n</ng-container>\n",
+                template: "<ng-container *ngFor=\"let component of components$ | async; let i = index\">\n  <button [class.active]=\"i === activeTabNum\" (click)=\"select(i)\">\n    {{ component.title | cxTranslate: { param: tabTitleParams[i] | async } }}\n  </button>\n  <div [class.active]=\"i === activeTabNum\">\n    <ng-template [cxOutlet]=\"component.flexType\" [cxOutletContext]=\"{}\">\n      <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n    </ng-template>\n  </div>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: CmsComponentData }, { type: ɵngcc1.CmsService }, { type: ɵngcc1.WindowRef }]; }, { children: [{
@@ -29093,26 +29077,13 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-address-book',
-                template: "<div class=\"cx-section\">\n  <ng-container\n    *ngIf=\"\n      (addresses$ | async).length &&\n      !(showAddAddressForm || showEditAddressForm)\n    \"\n  >\n    <div class=\"row\">\n      <div class=\"col-md-6\">\n        <button\n          class=\"btn btn-block btn-action\"\n          (click)=\"addAddressButtonHandle()\"\n        >\n          {{ 'addressBook.addNewAddress' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n\n    <div\n      class=\"row cx-address-deck\"\n      *ngIf=\"!(addressesStateLoading$ | async); else loading\"\n    >\n      <div\n        *ngFor=\"let address of addresses$ | async\"\n        class=\"col-md-6 cx-address-card\"\n      >\n        <cx-address-card\n          (editEvent)=\"editAddressButtonHandle(address)\"\n          [address]=\"address\"\n        ></cx-address-card>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-container *ngIf=\"!(addresses$ | async).length || showAddAddressForm\">\n    <section>\n      <p class=\"cx-section-msg\">\n        {{ 'addressBook.addNewShippingAddress' | cxTranslate }}\n      </p>\n      <cx-address-form\n        class=\"cx-form\"\n        showTitleCode=\"true\"\n        [showCancelBtn]=\"!((addresses$ | async).length === 0)\"\n        actionBtnLabel=\"{{ 'addressBook.addAddress' | cxTranslate }}\"\n        cancelBtnLabel=\"{{ 'addressBook.backToAddressList' | cxTranslate }}\"\n        [setAsDefaultField]=\"!((addresses$ | async).length === 0)\"\n        (submitAddress)=\"addAddressSubmit($event)\"\n        (backToAddress)=\"addAddressCancel()\"\n      ></cx-address-form>\n    </section>\n  </ng-container>\n\n  <ng-container *ngIf=\"showEditAddressForm\">\n    <section>\n      <p class=\"cx-section-msg\">\n        {{ 'addressBook.editShippingAddress' | cxTranslate }}\n      </p>\n      <cx-address-form\n        showTitleCode=\"true\"\n        actionBtnLabel=\"{{ 'addressBook.updateAddress' | cxTranslate }}\"\n        cancelBtnLabel=\"{{ 'addressBook.backToAddressList' | cxTranslate }}\"\n        [addressData]=\"currentAddress\"\n        (submitAddress)=\"editAddressSubmit($event)\"\n        (backToAddress)=\"editAddressCancel()\"\n      ></cx-address-form>\n    </section>\n  </ng-container>\n</div>\n\n<ng-template #loading>\n  <div class=\"col-md-12 cx-address-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n"
+                template: "<div class=\"cx-section\">\n  <ng-container\n    *ngIf=\"\n      (addresses$ | async).length &&\n      !(showAddAddressForm || showEditAddressForm)\n    \"\n  >\n    <div class=\"row\">\n      <div class=\"col-md-6\">\n        <button\n          class=\"btn btn-block btn-action\"\n          (click)=\"addAddressButtonHandle()\"\n        >\n          {{ 'addressBook.addNewAddress' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n\n    <div\n      class=\"row cx-address-deck\"\n      *ngIf=\"!(addressesStateLoading$ | async); else loading\"\n    >\n      <div\n        *ngFor=\"let address of addresses$ | async\"\n        class=\"col-md-6 cx-address-card\"\n      >\n        <cx-card\n          [border]=\"true\"\n          [fitToContainer]=\"true\"\n          [content]=\"getCardContent(address) | async\"\n          (editCard)=\"editAddressButtonHandle(address)\"\n          (setDefaultCard)=\"setAddressAsDefault(address.id)\"\n          (deleteCard)=\"setEdit(address.id)\"\n          [editMode]=\"address.id === editCard\"\n          (cancelCard)=\"cancelCard()\"\n        ></cx-card>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-container *ngIf=\"!(addresses$ | async).length || showAddAddressForm\">\n    <section>\n      <p class=\"cx-section-msg\">\n        {{ 'addressBook.addNewShippingAddress' | cxTranslate }}\n      </p>\n      <cx-address-form\n        class=\"cx-form\"\n        showTitleCode=\"true\"\n        [showCancelBtn]=\"!((addresses$ | async).length === 0)\"\n        actionBtnLabel=\"{{ 'addressBook.addAddress' | cxTranslate }}\"\n        cancelBtnLabel=\"{{ 'addressBook.backToAddressList' | cxTranslate }}\"\n        [setAsDefaultField]=\"!((addresses$ | async).length === 0)\"\n        (submitAddress)=\"addAddressSubmit($event)\"\n        (backToAddress)=\"addAddressCancel()\"\n        (cancelCard)=\"cancelCard()\"\n      ></cx-address-form>\n    </section>\n  </ng-container>\n\n  <ng-container *ngIf=\"showEditAddressForm\">\n    <section>\n      <p class=\"cx-section-msg\">\n        {{ 'addressBook.editShippingAddress' | cxTranslate }}\n      </p>\n      <cx-address-form\n        showTitleCode=\"true\"\n        actionBtnLabel=\"{{ 'addressBook.updateAddress' | cxTranslate }}\"\n        cancelBtnLabel=\"{{ 'addressBook.backToAddressList' | cxTranslate }}\"\n        [addressData]=\"currentAddress\"\n        (submitAddress)=\"editAddressSubmit($event)\"\n        (backToAddress)=\"editAddressCancel()\"\n      ></cx-address-form>\n    </section>\n  </ng-container>\n</div>\n\n<ng-template #loading>\n  <div class=\"col-md-12 cx-address-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n"
             }]
-    }], function () { return [{ type: AddressBookComponentService }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AddressCardComponent, [{
-        type: Component,
-        args: [{
-                selector: 'cx-address-card',
-                template: "<div class=\"card\">\n  <div class=\"card-header\" *ngIf=\"address?.defaultAddress && !editMode\">\n    &#10003; {{ 'addressCard.default' | cxTranslate }}\n  </div>\n  <div\n    class=\"card-body cx-card-body\"\n    [class.cx-address-card-delete-mode]=\"editMode\"\n  >\n    <div *ngIf=\"editMode\" class=\"cx-address-card-delete-msg\">\n      {{ 'addressBook.areYouSureToDeleteAddress' | cxTranslate }}\n    </div>\n    <div class=\"cx-address-data\">\n      <div class=\"cx-address-card-label-name\">\n        {{ address?.firstName }} {{ address?.lastName }}\n      </div>\n      <div class=\"cx-address-card-label\">{{ address?.line1 }}</div>\n      <div class=\"cx-address-card-label\">{{ address?.line2 }}</div>\n      <div class=\"cx-address-card-label\">\n        {{ address?.town }},\n        <span *ngIf=\"!address?.region?.isocode\">{{\n          address?.country?.isocode\n        }}</span\n        ><span>{{ address?.region?.isocode }}</span>\n      </div>\n      <div class=\"cx-address-card-label\">{{ address?.postalCode }}</div>\n      <div class=\"cx-address-card-label\">{{ address?.phone }}</div>\n    </div>\n\n    <div *ngIf=\"editMode\" class=\"row cx-address-card-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button\n          (click)=\"deleteAddress(address.id)\"\n          class=\"btn btn-block btn-primary\"\n        >\n          {{ 'common.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <div *ngIf=\"!editMode\" class=\"card-actions\">\n      <a\n        *ngIf=\"!address?.defaultAddress\"\n        (click)=\"setAddressAsDefault(address.id)\"\n        class=\"card-link btn-link set-default\"\n        >{{ 'addressCard.setAsDefault' | cxTranslate }}</a\n      >\n      <a (click)=\"openEditFormEvent()\" class=\"card-link btn-link edit\">{{\n        'common.edit' | cxTranslate\n      }}</a>\n      <a (click)=\"setEditMode()\" class=\"card-link btn-link delete\">{{\n        'common.delete' | cxTranslate\n      }}</a>\n    </div>\n  </div>\n</div>\n"
-            }]
-    }], function () { return [{ type: ɵngcc1.UserAddressService }, { type: ɵngcc1.CheckoutDeliveryService }, { type: ɵngcc1.FeatureConfigService }]; }, { editEvent: [{
-            type: Output
-        }], address: [{
-            type: Input
-        }] }); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(AddressBookModule, { declarations: function () { return [AddressBookComponent,
-        AddressCardComponent]; }, imports: function () { return [CommonModule, ɵngcc1.ConfigModule, CardModule,
+    }], function () { return [{ type: AddressBookComponentService }, { type: ɵngcc1.TranslationService }, { type: ɵngcc1.UserAddressService }, { type: ɵngcc1.CheckoutDeliveryService }]; }, null); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(AddressBookModule, { declarations: function () { return [AddressBookComponent]; }, imports: function () { return [CommonModule, ɵngcc1.ConfigModule, CardModule,
         AddressFormModule,
         SpinnerModule,
-        I18nModule]; }, exports: function () { return [AddressBookComponent,
-        AddressCardComponent]; } }); })();
+        I18nModule]; }, exports: function () { return [AddressBookComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AddressBookModule, [{
         type: NgModule,
         args: [{
@@ -29138,8 +29109,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     SpinnerModule,
                     I18nModule,
                 ],
-                declarations: [AddressBookComponent, AddressCardComponent],
-                exports: [AddressBookComponent, AddressCardComponent],
+                declarations: [AddressBookComponent],
+                exports: [AddressBookComponent],
                 providers: [UserAddressService, AddressBookComponentService],
                 entryComponents: [AddressBookComponent]
             }]
@@ -30184,7 +30155,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-my-interests',
-                template: "<div *ngIf=\"interests$ | async as interests\" class=\"container\">\n  <div class=\"cx-product-interests-title h3\">\n    <h3>{{ 'myInterests.header' | cxTranslate }}</h3>\n  </div>\n  <div\n    class=\"cx-product-interests-body\"\n    *ngIf=\"!(getInterestsloading$ | async); else loading\"\n  >\n    <ng-container *ngIf=\"interests.pagination.totalCount > 0; else noInterest\">\n      <div class=\"cx-product-interests-sort top row\">\n        <div\n          class=\"cx-product-interests-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n        >\n          <cx-sorting\n            [sortOptions]=\"sortOptions\"\n            [sortLabels]=\"sortLabels | async\"\n            (sortListEvent)=\"sortChange($event)\"\n            [selectedOption]=\"sort\"\n            placeholder=\"{{ 'myInterests.sortByMostRecent' | cxTranslate }}\"\n          >\n          </cx-sorting>\n        </div>\n        <div\n          class=\"cx-product-interests-pagination cx-product-interests-thead-mobile\"\n        >\n          <cx-pagination\n            [pagination]=\"pagination\"\n            (viewPageEvent)=\"pageChange($event)\"\n          ></cx-pagination>\n        </div>\n      </div>\n      <table class=\"table cx-product-interests-table\">\n        <thead class=\"cx-product-interests-thead-mobile\">\n          <th scope=\"col\">\n            {{ 'myInterests.item' | cxTranslate }}\n          </th>\n          <th scope=\"col\"></th>\n          <th scope=\"col\">\n            {{ 'myInterests.price' | cxTranslate }}\n          </th>\n          <th scope=\"col\">\n            {{ 'myInterests.notifications' | cxTranslate }}\n          </th>\n          <th scope=\"col\"></th>\n        </thead>\n        <tbody>\n          <tr\n            *ngFor=\"let interest of interests.results\"\n            class=\"cx-product-interests-product-item\"\n          >\n            <ng-container *ngIf=\"interest.product$ | async as product\">\n              <td>\n                <div class=\"cx-product-interests-label\">\n                  <a\n                    class=\"cx-product-interests-product-image-link\"\n                    [routerLink]=\"\n                      { cxRoute: 'product', params: product } | cxUrl\n                    \"\n                  >\n                    <cx-media\n                      [container]=\"product.images?.PRIMARY\"\n                      format=\"thumbnail\"\n                    ></cx-media>\n                  </a>\n                </div>\n              </td>\n              <td>\n                <div class=\"cx-info col-10\">\n                  <div class=\"cx-info-container row \">\n                    <div>\n                      <div *ngIf=\"product.name\" class=\"cx-name\">\n                        <a\n                          class=\"cx-link cx-product-interests-product-code-link\"\n                          [routerLink]=\"\n                            { cxRoute: 'product', params: product } | cxUrl\n                          \"\n                        >\n                          {{ product.name }}\n                        </a>\n                      </div>\n                      <div *ngIf=\"product.code\" class=\"cx-code\">\n                        <span>{{\n                          'myInterests.productId'\n                            | cxTranslate: { code: product.code }\n                        }}</span>\n                      </div>\n\n                      <ng-container\n                        *ngFor=\"let baseOptions of product.baseOptions\"\n                      >\n                        <div\n                          *ngFor=\"\n                            let variant of baseOptions.selected\n                              ?.variantOptionQualifiers\n                          \"\n                          class=\"cx-property\"\n                        >\n                          <div\n                            class=\"cx-label cx-product-interests-variant-name\"\n                          >\n                            {{ variant.name }}\n                          </div>\n                          <div\n                            class=\"cx-value cx-product-interests-variant-value\"\n                          >\n                            {{ variant.value }}\n                          </div>\n                        </div>\n                      </ng-container>\n                      <div\n                        class=\"cx-property\"\n                        *ngIf=\"product.stock.stockLevelStatus === 'outOfStock'\"\n                      >\n                        <div\n                          class=\"cx-label cx-product-interests-product-stock\"\n                        >\n                          {{ 'myInterests.outOfStock' | cxTranslate }}\n                        </div>\n                      </div>\n                    </div>\n                  </div>\n                </div>\n              </td>\n              <td>\n                <div class=\"cx-product-interests-product-price\">\n                  <div class=\"d-md-none cx-product-interests-label\">\n                    {{ 'myInterests.price' | cxTranslate }}\n                  </div>\n                  <span>{{ product.price.formattedValue }}</span>\n                </div>\n              </td>\n              <td>\n                <div class=\"cx-product-interests-subscriptions\">\n                  <div class=\"d-md-none cx-product-interests-label\">\n                    {{ 'myInterests.notifications' | cxTranslate }}\n                  </div>\n                  <div\n                    class=\"cx-product-interests-notification\"\n                    *ngFor=\"let interestEntry of interest.productInterestEntry\"\n                  >\n                    <span class=\"cx-product-interests-type\">\n                      {{\n                        'myInterests.' + interestEntry.interestType\n                          | cxTranslate\n                      }}\n                    </span>\n                    <span class=\"cx-product-interests-expiration-date\">\n                      {{\n                        'myInterests.expirationDate'\n                          | cxTranslate\n                            : {\n                                expirationDate:\n                                  interestEntry.expirationDate | date\n                              }\n                      }}\n                    </span>\n                  </div>\n                </div>\n              </td>\n              <td>\n                <div class=\"cx-actions cx-product-interests-remove-button\">\n                  <button\n                    type=\"button\"\n                    class=\"link cx-product-interests-remove-btn\"\n                    [disabled]=\"isRemoveDisabled$ | async\"\n                    (click)=\"removeInterest(interest)\"\n                  >\n                    {{ 'myInterests.remove' | cxTranslate }}\n                  </button>\n                </div>\n              </td>\n            </ng-container>\n          </tr>\n        </tbody>\n      </table>\n      <div class=\"cx-product-interests-sort bottom row\">\n        <div\n          class=\"cx-product-interests-form-group cx-product-interests-thead-mobile form-group col-sm-12 col-md-4 col-lg-4\"\n        >\n          <cx-sorting\n            [sortOptions]=\"sortOptions\"\n            [sortLabels]=\"sortLabels | async\"\n            (sortListEvent)=\"sortChange($event)\"\n            [selectedOption]=\"sort\"\n            placeholder=\"{{ 'myInterests.sortByMostRecent' | cxTranslate }}\"\n          >\n          </cx-sorting>\n        </div>\n        <div class=\"cx-product-interests-pagination\">\n          <cx-pagination\n            [pagination]=\"pagination\"\n            (viewPageEvent)=\"pageChange($event)\"\n          ></cx-pagination>\n        </div>\n      </div>\n    </ng-container>\n  </div>\n</div>\n<ng-template #noInterest>\n  <div class=\"cx-product-interests-message\">\n    {{ 'myInterests.noInterests' | cxTranslate }}\n  </div>\n</ng-template>\n<ng-template #loading>\n  <div class=\"cx-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n",
+                template: "<div *ngIf=\"interests$ | async as interests\" class=\"container\">\n  <div class=\"cx-product-interests-title h3\">\n    <h3>{{ 'myInterests.header' | cxTranslate }}</h3>\n  </div>\n  <div\n    class=\"cx-product-interests-body\"\n    *ngIf=\"!(getInterestsloading$ | async); else loading\"\n  >\n    <ng-container *ngIf=\"interests.pagination.totalCount > 0; else noInterest\">\n      <div class=\"cx-product-interests-sort top row\">\n        <div\n          class=\"cx-product-interests-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n        >\n          <cx-sorting\n            [sortOptions]=\"sortOptions\"\n            [sortLabels]=\"sortLabels | async\"\n            (sortListEvent)=\"sortChange($event)\"\n            [selectedOption]=\"sort\"\n            placeholder=\"{{ 'myInterests.sortByMostRecent' | cxTranslate }}\"\n          >\n          </cx-sorting>\n        </div>\n        <div\n          class=\"cx-product-interests-pagination cx-product-interests-thead-mobile\"\n        >\n          <cx-pagination\n            [pagination]=\"pagination\"\n            (viewPageEvent)=\"pageChange($event)\"\n          ></cx-pagination>\n        </div>\n      </div>\n      <table class=\"table cx-product-interests-table\">\n        <thead class=\"cx-product-interests-thead-mobile\">\n          <th scope=\"col\">\n            {{ 'myInterests.item' | cxTranslate }}\n          </th>\n          <th scope=\"col\"></th>\n          <th scope=\"col\">\n            {{ 'myInterests.price' | cxTranslate }}\n          </th>\n          <th scope=\"col\">\n            {{ 'myInterests.notifications' | cxTranslate }}\n          </th>\n          <th scope=\"col\"></th>\n        </thead>\n        <tbody>\n          <tr\n            *ngFor=\"let interest of interests.results\"\n            class=\"cx-product-interests-product-item\"\n          >\n            <ng-container *ngIf=\"interest.product$ | async as product\">\n              <td>\n                <div class=\"cx-product-interests-label\">\n                  <a\n                    class=\"cx-product-interests-product-image-link\"\n                    tabindex=\"-1\"\n                    [routerLink]=\"\n                      { cxRoute: 'product', params: product } | cxUrl\n                    \"\n                  >\n                    <cx-media\n                      [container]=\"product.images?.PRIMARY\"\n                      format=\"thumbnail\"\n                    ></cx-media>\n                  </a>\n                </div>\n              </td>\n              <td>\n                <div class=\"cx-info col-10\">\n                  <div class=\"cx-info-container row \">\n                    <div>\n                      <div *ngIf=\"product.name\" class=\"cx-name\">\n                        <a\n                          class=\"cx-link cx-product-interests-product-code-link\"\n                          [routerLink]=\"\n                            { cxRoute: 'product', params: product } | cxUrl\n                          \"\n                        >\n                          {{ product.name }}\n                        </a>\n                      </div>\n                      <div *ngIf=\"product.code\" class=\"cx-code\">\n                        <span>{{\n                          'myInterests.productId'\n                            | cxTranslate: { code: product.code }\n                        }}</span>\n                      </div>\n\n                      <ng-container\n                        *ngFor=\"let baseOptions of product.baseOptions\"\n                      >\n                        <div\n                          *ngFor=\"\n                            let variant of baseOptions.selected\n                              ?.variantOptionQualifiers\n                          \"\n                          class=\"cx-property\"\n                        >\n                          <div\n                            class=\"cx-label cx-product-interests-variant-name\"\n                          >\n                            {{ variant.name }}\n                          </div>\n                          <div\n                            class=\"cx-value cx-product-interests-variant-value\"\n                          >\n                            {{ variant.value }}\n                          </div>\n                        </div>\n                      </ng-container>\n                      <div\n                        class=\"cx-property\"\n                        *ngIf=\"product.stock.stockLevelStatus === 'outOfStock'\"\n                      >\n                        <div\n                          class=\"cx-label cx-product-interests-product-stock\"\n                        >\n                          {{ 'myInterests.outOfStock' | cxTranslate }}\n                        </div>\n                      </div>\n                    </div>\n                  </div>\n                </div>\n              </td>\n              <td>\n                <div class=\"cx-product-interests-product-price\">\n                  <div class=\"d-md-none cx-product-interests-label\">\n                    {{ 'myInterests.price' | cxTranslate }}\n                  </div>\n                  <span>{{ product.price.formattedValue }}</span>\n                </div>\n              </td>\n              <td>\n                <div class=\"cx-product-interests-subscriptions\">\n                  <div class=\"d-md-none cx-product-interests-label\">\n                    {{ 'myInterests.notifications' | cxTranslate }}\n                  </div>\n                  <div\n                    class=\"cx-product-interests-notification\"\n                    *ngFor=\"let interestEntry of interest.productInterestEntry\"\n                  >\n                    <span class=\"cx-product-interests-type\">\n                      {{\n                        'myInterests.' + interestEntry.interestType\n                          | cxTranslate\n                      }}\n                    </span>\n                    <span class=\"cx-product-interests-expiration-date\">\n                      {{\n                        'myInterests.expirationDate'\n                          | cxTranslate\n                            : {\n                                expirationDate:\n                                  interestEntry.expirationDate | date\n                              }\n                      }}\n                    </span>\n                  </div>\n                </div>\n              </td>\n              <td>\n                <div class=\"cx-actions cx-product-interests-remove-button\">\n                  <button\n                    type=\"button\"\n                    class=\"link cx-product-interests-remove-btn\"\n                    [disabled]=\"isRemoveDisabled$ | async\"\n                    (click)=\"removeInterest(interest)\"\n                  >\n                    {{ 'myInterests.remove' | cxTranslate }}\n                  </button>\n                </div>\n              </td>\n            </ng-container>\n          </tr>\n        </tbody>\n      </table>\n      <div class=\"cx-product-interests-sort bottom row\">\n        <div\n          class=\"cx-product-interests-form-group cx-product-interests-thead-mobile form-group col-sm-12 col-md-4 col-lg-4\"\n        >\n          <cx-sorting\n            [sortOptions]=\"sortOptions\"\n            [sortLabels]=\"sortLabels | async\"\n            (sortListEvent)=\"sortChange($event)\"\n            [selectedOption]=\"sort\"\n            placeholder=\"{{ 'myInterests.sortByMostRecent' | cxTranslate }}\"\n          >\n          </cx-sorting>\n        </div>\n        <div class=\"cx-product-interests-pagination\">\n          <cx-pagination\n            [pagination]=\"pagination\"\n            (viewPageEvent)=\"pageChange($event)\"\n          ></cx-pagination>\n        </div>\n      </div>\n    </ng-container>\n  </div>\n</div>\n<ng-template #noInterest>\n  <div class=\"cx-product-interests-message\">\n    {{ 'myInterests.noInterests' | cxTranslate }}\n  </div>\n</ng-template>\n<ng-template #loading>\n  <div class=\"cx-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: ɵngcc1.UserInterestsService }, { type: ɵngcc1.TranslationService }, { type: ɵngcc1.ProductService }]; }, null); })();
@@ -30269,7 +30240,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-navigation-ui',
-                template: "<div\n  *ngIf=\"flyout && node?.children.length > 1\"\n  class=\"back is-open\"\n  (click)=\"back()\"\n>\n  <h5>\n    <cx-icon [type]=\"iconType.CARET_LEFT\"></cx-icon>\n    {{ 'common.back' | cxTranslate }}\n  </h5>\n</div>\n\n<ng-container *ngFor=\"let child of node?.children\">\n  <ng-container *ngTemplateOutlet=\"nav; context: { node: child }\">\n  </ng-container>\n</ng-container>\n\n<!-- we generate links in a recursive manner -->\n<ng-template #nav let-node=\"node\">\n  <nav\n    tabindex=\"0\"\n    (click)=\"toggleOpen($event)\"\n    (mouseenter)=\"onMouseEnter($event)\"\n  >\n    <cx-generic-link\n      *ngIf=\"\n        node.url && (!node.children || node.children?.length === 0);\n        else heading\n      \"\n      [url]=\"node.url\"\n      [target]=\"node.target\"\n    >\n      {{ node.title }}\n      <cx-icon\n        *ngIf=\"flyout && node.children?.length > 0\"\n        [type]=\"iconType.CARET_DOWN\"\n      ></cx-icon>\n    </cx-generic-link>\n\n    <ng-template #heading>\n      <h5 [attr.aria-label]=\"node.title\">\n        {{ node.title }}\n        <cx-icon\n          *ngIf=\"flyout && node.children?.length > 0\"\n          [type]=\"iconType.CARET_DOWN\"\n        ></cx-icon>\n      </h5>\n    </ng-template>\n\n    <!-- we add a wrapper to allow for better layout handling in CSS -->\n    <div class=\"wrapper\" *ngIf=\"node.children?.length > 0\">\n      <cx-generic-link\n        *ngIf=\"node.url\"\n        [url]=\"node.url\"\n        [target]=\"node.target\"\n        class=\"all\"\n      >\n        {{ 'navigation.shopAll' | cxTranslate: { navNode: node.title } }}\n      </cx-generic-link>\n      <div\n        class=\"childs\"\n        [attr.depth]=\"getDepth(node)\"\n        [attr.wrap-after]=\"node.children?.length > wrapAfter ? wrapAfter : null\"\n        [attr.columns]=\"getColumnCount(node.children?.length)\"\n      >\n        <ng-container *ngFor=\"let child of node.children\">\n          <ng-container *ngTemplateOutlet=\"nav; context: { node: child }\">\n          </ng-container>\n        </ng-container>\n      </div>\n    </div>\n  </nav>\n</ng-template>\n",
+                template: "<div\n  *ngIf=\"flyout && node?.children.length > 1\"\n  class=\"back is-open\"\n  (click)=\"back()\"\n>\n  <h5>\n    <cx-icon [type]=\"iconType.CARET_LEFT\"></cx-icon>\n    {{ 'common.back' | cxTranslate }}\n  </h5>\n</div>\n\n<ng-container *ngFor=\"let child of node?.children\">\n  <ng-container *ngTemplateOutlet=\"nav; context: { node: child }\">\n  </ng-container>\n</ng-container>\n\n<!-- we generate links in a recursive manner -->\n<ng-template #nav let-node=\"node\">\n  <nav\n    (click)=\"toggleOpen($event)\"\n    (mouseenter)=\"onMouseEnter($event)\"\n    (keydown.space)=\"toggleOpen($event)\"\n  >\n    <cx-generic-link\n      *ngIf=\"\n        node.url && (!node.children || node.children?.length === 0);\n        else heading\n      \"\n      [url]=\"node.url\"\n      [target]=\"node.target\"\n    >\n      {{ node.title }}\n      <cx-icon\n        *ngIf=\"flyout && node.children?.length > 0\"\n        [type]=\"iconType.CARET_DOWN\"\n      ></cx-icon>\n    </cx-generic-link>\n\n    <ng-template #heading>\n      <h5 [attr.aria-label]=\"node.title\" [attr.tabindex]=\"flyout ? 0 : -1\">\n        {{ node.title }}\n        <cx-icon\n          *ngIf=\"flyout && node.children?.length > 0\"\n          [type]=\"iconType.CARET_DOWN\"\n        ></cx-icon>\n      </h5>\n    </ng-template>\n\n    <!-- we add a wrapper to allow for better layout handling in CSS -->\n    <div class=\"wrapper\" *ngIf=\"node.children?.length > 0\">\n      <cx-generic-link\n        *ngIf=\"node.url\"\n        [url]=\"node.url\"\n        [target]=\"node.target\"\n        class=\"all\"\n      >\n        {{ 'navigation.shopAll' | cxTranslate: { navNode: node.title } }}\n      </cx-generic-link>\n      <div\n        class=\"childs\"\n        [attr.depth]=\"getDepth(node)\"\n        [attr.wrap-after]=\"node.children?.length > wrapAfter ? wrapAfter : null\"\n        [attr.columns]=\"getColumnCount(node.children?.length)\"\n      >\n        <ng-container *ngFor=\"let child of node.children\">\n          <ng-container *ngTemplateOutlet=\"nav; context: { node: child }\">\n          </ng-container>\n        </ng-container>\n      </div>\n    </div>\n  </nav>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: ɵngcc5.Router }, { type: ɵngcc0.Renderer2 }, { type: ɵngcc0.ElementRef }]; }, { allowAlignToRight: [{
@@ -30394,12 +30365,12 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-searchbox',
-                template: "<label class=\"searchbox\" [class.dirty]=\"!!searchInput.value\">\n  <input\n    #searchInput\n    [placeholder]=\"'searchBox.placeholder' | cxTranslate\"\n    aria-label=\"search\"\n    (focus)=\"open()\"\n    (input)=\"search(searchInput.value)\"\n    (blur)=\"close($event)\"\n    (keydown.escape)=\"close($event)\"\n    (keydown.enter)=\"launchSearchResult($event, searchInput.value)\"\n  />\n\n  <cx-icon\n    [type]=\"iconTypes.RESET\"\n    aria-label=\"reset\"\n    (mousedown)=\"clear(searchInput)\"\n    class=\"reset\"\n  ></cx-icon>\n\n  <cx-icon\n    [type]=\"iconTypes.SEARCH\"\n    aria-label=\"search\"\n    class=\"search\"\n    (mousedown)=\"avoidReopen($event)\"\n  ></cx-icon>\n</label>\n\n<div *ngIf=\"results$ | async as result\" class=\"results\" (click)=\"close($event)\">\n  <div\n    *ngIf=\"result.message\"\n    class=\"message\"\n    [innerHTML]=\"result.message\"\n  ></div>\n\n  <div class=\"suggestions\" (mousedown)=\"disableClose()\">\n    <a\n      *ngFor=\"let suggestion of result.suggestions\"\n      [innerHTML]=\"suggestion | cxHighlight: searchInput.value\"\n      [routerLink]=\"\n        {\n          cxRoute: 'search',\n          params: { query: suggestion }\n        } | cxUrl\n      \"\n    >\n    </a>\n  </div>\n\n  <div class=\"products\" (mousedown)=\"disableClose()\" *ngIf=\"result.products\">\n    <a\n      *ngFor=\"let product of result.products\"\n      [routerLink]=\"\n        {\n          cxRoute: 'product',\n          params: product\n        } | cxUrl\n      \"\n      [class.has-media]=\"config.displayProductImages\"\n    >\n      <cx-media\n        *ngIf=\"config.displayProductImages\"\n        [container]=\"product.images?.PRIMARY\"\n        format=\"thumbnail\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n      <h4 class=\"name\" [innerHTML]=\"product.nameHtml\"></h4>\n      <span class=\"price\">{{ product.price?.formattedValue }}</span>\n    </a>\n  </div>\n</div>\n",
+                template: "<label class=\"searchbox\" [class.dirty]=\"!!searchInput.value\">\n  <input\n    #searchInput\n    [placeholder]=\"'searchBox.placeholder' | cxTranslate\"\n    aria-label=\"search\"\n    (focus)=\"open()\"\n    (input)=\"search(searchInput.value)\"\n    (blur)=\"close($event)\"\n    (keydown.escape)=\"close($event)\"\n    (keydown.enter)=\"\n      close($event, true); launchSearchResult($event, searchInput.value)\n    \"\n    (keydown.arrowup)=\"focusPreviousChild($event)\"\n    (keydown.arrowdown)=\"focusNextChild($event)\"\n  />\n\n  <cx-icon\n    [type]=\"iconTypes.RESET\"\n    aria-label=\"reset\"\n    (mousedown)=\"clear(searchInput)\"\n    (keydown.enter)=\"clear(searchInput)\"\n    class=\"reset\"\n    tabindex=\"0\"\n  ></cx-icon>\n\n  <cx-icon\n    [type]=\"iconTypes.SEARCH\"\n    aria-label=\"search\"\n    class=\"search\"\n    (mousedown)=\"avoidReopen($event)\"\n    (keydown.enter)=\"avoidReopen($event)\"\n    tabindex=\"0\"\n  ></cx-icon>\n</label>\n\n<div\n  *ngIf=\"results$ | async as result\"\n  class=\"results\"\n  (click)=\"close($event, true)\"\n>\n  <div\n    *ngIf=\"result.message\"\n    class=\"message\"\n    [innerHTML]=\"result.message\"\n  ></div>\n\n  <div class=\"suggestions\">\n    <a\n      *ngFor=\"let suggestion of result.suggestions\"\n      [innerHTML]=\"suggestion | cxHighlight: searchInput.value\"\n      [routerLink]=\"\n        {\n          cxRoute: 'search',\n          params: { query: suggestion }\n        } | cxUrl\n      \"\n      (keydown.arrowup)=\"focusPreviousChild($event)\"\n      (keydown.arrowdown)=\"focusNextChild($event)\"\n      (keydown.enter)=\"close($event, true)\"\n      (keydown.escape)=\"close($event, true)\"\n      (blur)=\"close($event)\"\n    >\n    </a>\n  </div>\n\n  <div class=\"products\" *ngIf=\"result.products\">\n    <a\n      *ngFor=\"let product of result.products\"\n      [routerLink]=\"\n        {\n          cxRoute: 'product',\n          params: product\n        } | cxUrl\n      \"\n      [class.has-media]=\"config.displayProductImages\"\n      (keydown.arrowup)=\"focusPreviousChild($event)\"\n      (keydown.arrowdown)=\"focusNextChild($event)\"\n      (keydown.enter)=\"close($event, true)\"\n      (keydown.escape)=\"close($event, true)\"\n      (blur)=\"close($event)\"\n    >\n      <cx-media\n        *ngIf=\"config.displayProductImages\"\n        [container]=\"product.images?.PRIMARY\"\n        format=\"thumbnail\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n      <h4 class=\"name\" [innerHTML]=\"product.nameHtml\"></h4>\n      <span class=\"price\">{{ product.price?.formattedValue }}</span>\n    </a>\n  </div>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: SearchBoxComponentService }, { type: CmsComponentData, decorators: [{
                 type: Optional
-            }] }]; }, { queryText: [{
+            }] }, { type: ɵngcc1.WindowRef }]; }, { queryText: [{
             type: Input,
             args: ['queryText']
         }] }); })();
@@ -30653,7 +30624,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-product-intro',
-                template: "<ng-container *ngIf=\"product$ | async as product\">\n  <div class=\"rating\" *ngIf=\"product.averageRating\">\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div class=\"count\">({{ product?.numberOfReviews }})</div>\n    <a\n      class=\"btn-link\"\n      *ngIf=\"reviewsTabAvailable | async\"\n      (click)=\"showReviews()\"\n      >{{ 'productSummary.showReviews' | cxTranslate }}</a\n    >\n  </div>\n  <div class=\"rating\" *ngIf=\"!product.averageRating\">\n    {{ 'productDetails.noReviews' | cxTranslate }}\n  </div>\n  <div class=\"code\">\n    {{ 'productSummary.id' | cxTranslate }} {{ product?.code }}\n  </div>\n</ng-container>\n",
+                template: "<ng-container *ngIf=\"product$ | async as product\">\n  <div class=\"rating\" *ngIf=\"product.averageRating\">\n    <cx-star-rating\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n\n    <div class=\"count\">({{ product?.numberOfReviews }})</div>\n\n    <button\n      *ngIf=\"reviewsTabAvailable | async\"\n      class=\"btn btn-link\"\n      (click)=\"showReviews()\"\n    >\n      {{ 'productSummary.showReviews' | cxTranslate }}\n    </button>\n  </div>\n  <div class=\"rating\" *ngIf=\"!product.averageRating\">\n    {{ 'productDetails.noReviews' | cxTranslate }}\n  </div>\n  <div class=\"code\">\n    {{ 'productSummary.id' | cxTranslate }} {{ product?.code }}\n  </div>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: CurrentProductService }, { type: ɵngcc1.TranslationService }, { type: ɵngcc1.WindowRef }]; }, null); })();
@@ -30688,7 +30659,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-product-view',
-                template: "<div class=\"cx-product-layout\" (click)=\"changeMode()\">\n  <div [ngClass]=\"buttonClass\">\n    <cx-icon\n      *ngIf=\"viewMode === iconTypes.GRID\"\n      [type]=\"iconTypes.GRID\"\n    ></cx-icon>\n    <cx-icon\n      *ngIf=\"viewMode === iconTypes.LIST\"\n      [type]=\"iconTypes.LIST\"\n    ></cx-icon>\n  </div>\n</div>\n",
+                template: "<button\n  class=\"btn cx-product-layout\"\n  [ngClass]=\"buttonClass\"\n  (click)=\"changeMode()\"\n>\n  <cx-icon\n    *ngIf=\"viewMode === iconTypes.GRID\"\n    [type]=\"iconTypes.GRID\"\n  ></cx-icon>\n  <cx-icon\n    *ngIf=\"viewMode === iconTypes.LIST\"\n    [type]=\"iconTypes.LIST\"\n  ></cx-icon>\n</button>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return []; }, { modeChange: [{
@@ -30723,7 +30694,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-product-facet-navigation',
-                template: "<ng-container *ngIf=\"searchResult$ | async as searchResult\">\n  <div class=\"cx-search-facet\">\n    <ng-container *ngIf=\"searchResult.breadcrumbs?.length\">\n      <h4 class=\"cx-facet-filter-header\">\n        {{ 'productList.filterBy.label' | cxTranslate }}\n      </h4>\n      <div class=\"cx-facet-filter-container\">\n        <div\n          *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n          [hidden]=\"breadcrumb.facetValueCode === activeFacetValueCode\"\n          class=\"cx-facet-filter-pill\"\n          role=\"filter\"\n        >\n          <span class=\"cx-facet-pill-value\">{{\n            breadcrumb.facetValueName\n          }}</span>\n          <button\n            type=\"button\"\n            class=\"close\"\n            aria-label=\"Close\"\n            (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n          >\n            <span aria-hidden=\"true\">\n              <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n            </span>\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-container *ngIf=\"visibleFacets$ | async as visibleFacets\">\n      <ng-container *ngFor=\"let facet of visibleFacets; let facetId = index\">\n        <div class=\"cx-facet-group\">\n          <div class=\"cx-facet-header\">\n            <a\n              class=\"cx-facet-header-link\"\n              (click)=\"toggleFacet(facet.name)\"\n              [attr.aria-expanded]=\"!isFacetCollapsed(facet.name)\"\n              aria-controls=\"\"\n            >\n              {{ facet.name }}\n              <cx-icon\n                [type]=\"\n                  isFacetCollapsed(facet.name)\n                    ? iconTypes.EXPAND\n                    : iconTypes.COLLAPSE\n                \"\n              ></cx-icon>\n            </a>\n          </div>\n          <ng-container *ngIf=\"!isFacetCollapsed(facet.name)\">\n            <ul class=\"cx-facet-list\">\n              <li\n                *ngFor=\"\n                  let value of getVisibleFacetValues(facet);\n                  index as facetValueId\n                \"\n              >\n                <div class=\"form-check\">\n                  <label class=\"form-checkbox cx-facet-label\">\n                    <input\n                      class=\"form-check-input cx-facet-checkbox\"\n                      role=\"checkbox\"\n                      type=\"checkbox\"\n                      aria-checked=\"true\"\n                      [checked]=\"value.selected\"\n                      (change)=\"toggleValue(value.query.query.value)\"\n                    />\n                    <span class=\"cx-facet-text\"\n                      >{{ value.name }} ({{ value.count }})</span\n                    >\n                  </label>\n                </div>\n              </li>\n              <li\n                class=\"cx-facet-toggle-btn\"\n                (click)=\"showLess(facet.name)\"\n                *ngIf=\"showAllPerFacetMap.get(facet.name)\"\n              >\n                {{ 'productList.showLess' | cxTranslate }}\n              </li>\n              <li\n                class=\"cx-facet-toggle-btn\"\n                (click)=\"showMore(facet.name)\"\n                *ngIf=\"\n                  !showAllPerFacetMap.get(facet.name) &&\n                  facet.values.length > facet.topValueCount\n                \"\n              >\n                {{ 'productList.showMore' | cxTranslate }}\n              </li>\n            </ul>\n          </ng-container>\n        </div>\n      </ng-container>\n    </ng-container>\n  </div>\n\n  <div class=\"cx-facet-mobile\">\n    <div class=\"container\">\n      <button\n        class=\"btn btn-action btn-block cx-facet-mobile-btn\"\n        (click)=\"openFilterModal(content)\"\n      >\n        {{ 'productList.filterBy.action' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n\n  <!-- START ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n  <div class=\"container\">\n    <div class=\"cx-facet-mobile\" *ngIf=\"searchResult.breadcrumbs?.length\">\n      <div class=\"cx-facet-filter-container\">\n        <h4 class=\"cx-facet-filter-header\">\n          {{ 'productList.appliedFilter' | cxTranslate }}\n        </h4>\n        <div\n          class=\"cx-facet-filter-pill\"\n          role=\"filter\"\n          *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n        >\n          <span class=\"cx-facet-pill-value\">\n            {{ breadcrumb.facetValueName }}\n          </span>\n          <button\n            type=\"button\"\n            class=\"close\"\n            aria-label=\"Close\"\n            (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n          >\n            <span aria-hidden=\"true\">\n              <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n            </span>\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n  <!-- END ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n\n  <ng-template #content let-c=\"close\" let-d=\"dismiss\">\n    <div class=\"modal-header\">\n      <h4 class=\"cx-facet-modal-title\" id=\"modal-title\">\n        {{ 'productList.filterBy.label' | cxTranslate }}\n      </h4>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"d('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <div class=\"modal-body cx-facet-modal-body\">\n      <form>\n        <div\n          class=\"form-group\"\n          *ngFor=\"let facet of searchResult.facets; index as facetId\"\n        >\n          <h4 class=\"cx-facet-modal-label\" for=\"megapixels\">\n            {{ facet.name }}\n          </h4>\n          <div class=\"input-group\">\n            <ul class=\"cx-facet-list\">\n              <li *ngFor=\"let value of facet.values; index as facetValueId\">\n                <div class=\"form-check\">\n                  <label class=\"form-checkbox cx-facet-label\">\n                    <input\n                      class=\"form-check-input cx-facet-checkbox\"\n                      role=\"checkbox\"\n                      type=\"checkbox\"\n                      aria-checked=\"true\"\n                      [checked]=\"value.selected\"\n                      (change)=\"toggleValue(value.query.query.value)\"\n                    />\n                    <span class=\"cx-facet-text\"\n                      >{{ value.name }} ({{ value.count }})</span\n                    >\n                  </label>\n                </div>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </form>\n    </div>\n  </ng-template>\n</ng-container>\n",
+                template: "<ng-container *ngIf=\"searchResult$ | async as searchResult\">\n  <div class=\"cx-search-facet\">\n    <ng-container *ngIf=\"searchResult.breadcrumbs?.length\">\n      <h4 class=\"cx-facet-filter-header\">\n        {{ 'productList.filterBy.label' | cxTranslate }}\n      </h4>\n      <div class=\"cx-facet-filter-container\">\n        <div\n          *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n          [hidden]=\"breadcrumb.facetValueCode === activeFacetValueCode\"\n          class=\"cx-facet-filter-pill\"\n          role=\"filter\"\n        >\n          <span class=\"cx-facet-pill-value\">{{\n            breadcrumb.facetValueName\n          }}</span>\n          <button\n            type=\"button\"\n            class=\"close\"\n            aria-label=\"Close\"\n            (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n          >\n            <span aria-hidden=\"true\">\n              <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n            </span>\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-container *ngIf=\"visibleFacets$ | async as visibleFacets\">\n      <ng-container *ngFor=\"let facet of visibleFacets; let facetId = index\">\n        <div class=\"cx-facet-group\">\n          <div class=\"cx-facet-header\">\n            <a\n              class=\"cx-facet-header-link\"\n              (click)=\"toggleFacet(facet.name)\"\n              [attr.aria-expanded]=\"!isFacetCollapsed(facet.name)\"\n              aria-controls=\"\"\n              tabindex=\"0\"\n            >\n              {{ facet.name }}\n              <cx-icon\n                [type]=\"\n                  isFacetCollapsed(facet.name)\n                    ? iconTypes.EXPAND\n                    : iconTypes.COLLAPSE\n                \"\n              ></cx-icon>\n            </a>\n          </div>\n          <ng-container *ngIf=\"!isFacetCollapsed(facet.name)\">\n            <ul class=\"cx-facet-list\">\n              <li\n                *ngFor=\"\n                  let value of getVisibleFacetValues(facet);\n                  index as facetValueId\n                \"\n              >\n                <div class=\"form-check\">\n                  <label class=\"form-checkbox cx-facet-label\">\n                    <input\n                      class=\"form-check-input cx-facet-checkbox\"\n                      role=\"checkbox\"\n                      type=\"checkbox\"\n                      aria-checked=\"true\"\n                      [checked]=\"value.selected\"\n                      (change)=\"toggleValue(value.query.query.value)\"\n                    />\n                    <span class=\"cx-facet-text\"\n                      >{{ value.name }} ({{ value.count }})</span\n                    >\n                  </label>\n                </div>\n              </li>\n              <li\n                class=\"cx-facet-toggle-btn\"\n                (click)=\"showLess(facet.name)\"\n                *ngIf=\"showAllPerFacetMap.get(facet.name)\"\n              >\n                {{ 'productList.showLess' | cxTranslate }}\n              </li>\n              <li\n                class=\"cx-facet-toggle-btn\"\n                (click)=\"showMore(facet.name)\"\n                *ngIf=\"\n                  !showAllPerFacetMap.get(facet.name) &&\n                  facet.values.length > facet.topValueCount\n                \"\n                tabindex=\"0\"\n              >\n                {{ 'productList.showMore' | cxTranslate }}\n              </li>\n            </ul>\n          </ng-container>\n        </div>\n      </ng-container>\n    </ng-container>\n  </div>\n\n  <div class=\"cx-facet-mobile\">\n    <div class=\"container\">\n      <button\n        class=\"btn btn-action btn-block cx-facet-mobile-btn\"\n        (click)=\"openFilterModal(content)\"\n      >\n        {{ 'productList.filterBy.action' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n\n  <!-- START ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n  <div class=\"container\">\n    <div class=\"cx-facet-mobile\" *ngIf=\"searchResult.breadcrumbs?.length\">\n      <div class=\"cx-facet-filter-container\">\n        <h4 class=\"cx-facet-filter-header\">\n          {{ 'productList.appliedFilter' | cxTranslate }}\n        </h4>\n        <div\n          class=\"cx-facet-filter-pill\"\n          role=\"filter\"\n          *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n        >\n          <span class=\"cx-facet-pill-value\">\n            {{ breadcrumb.facetValueName }}\n          </span>\n          <button\n            type=\"button\"\n            class=\"close\"\n            aria-label=\"Close\"\n            (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n          >\n            <span aria-hidden=\"true\">\n              <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n            </span>\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n  <!-- END ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n\n  <ng-template #content let-c=\"close\" let-d=\"dismiss\">\n    <div class=\"modal-header\">\n      <h4 class=\"cx-facet-modal-title\" id=\"modal-title\">\n        {{ 'productList.filterBy.label' | cxTranslate }}\n      </h4>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"d('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <div class=\"modal-body cx-facet-modal-body\">\n      <form>\n        <div\n          class=\"form-group\"\n          *ngFor=\"let facet of searchResult.facets; index as facetId\"\n        >\n          <h4 class=\"cx-facet-modal-label\" for=\"megapixels\">\n            {{ facet.name }}\n          </h4>\n          <div class=\"input-group\">\n            <ul class=\"cx-facet-list\">\n              <li *ngFor=\"let value of facet.values; index as facetValueId\">\n                <div class=\"form-check\">\n                  <label class=\"form-checkbox cx-facet-label\">\n                    <input\n                      class=\"form-check-input cx-facet-checkbox\"\n                      role=\"checkbox\"\n                      type=\"checkbox\"\n                      aria-checked=\"true\"\n                      [checked]=\"value.selected\"\n                      (change)=\"toggleValue(value.query.query.value)\"\n                    />\n                    <span class=\"cx-facet-text\"\n                      >{{ value.name }} ({{ value.count }})</span\n                    >\n                  </label>\n                </div>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </form>\n    </div>\n  </ng-template>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: ModalService }, { type: ɵngcc5.ActivatedRoute }, { type: ProductListComponentService }]; }, null); })();
@@ -30731,7 +30702,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-product-grid-item',
-                template: "<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-image-container\"\n>\n  <cx-media\n    class=\"cx-product-image\"\n    [container]=\"product.images?.PRIMARY\"\n    format=\"product\"\n    [alt]=\"product.summary\"\n  ></cx-media>\n</a>\n<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-name\"\n  [innerHTML]=\"product.nameHtml\"\n></a>\n\n<div class=\"cx-product-rating\">\n  <cx-star-rating\n    *ngIf=\"product.averageRating\"\n    [rating]=\"product?.averageRating\"\n    [disabled]=\"true\"\n  ></cx-star-rating>\n  <div *ngIf=\"!product.averageRating\">\n    {{ 'productDetails.noReviews' | cxTranslate }}\n  </div>\n</div>\n<div class=\"cx-product-price-container\">\n  <div class=\"cx-product-price\" aria-label=\"Product price\">\n    {{ product.price?.formattedValue }}\n  </div>\n</div>\n\n<ng-container *cxFeatureLevel=\"'1.5'\">\n  <div class=\"cx-variant-style-icons\" *ngIf=\"product.variantOptions\">\n    <cx-variant-style-icons\n      [variants]=\"product.variantOptions\"\n    ></cx-variant-style-icons>\n  </div>\n</ng-container>\n\n<cx-add-to-cart\n  *ngIf=\"product.stock?.stockLevelStatus !== 'outOfStock'\"\n  [showQuantity]=\"false\"\n  [product]=\"product\"\n></cx-add-to-cart>\n",
+                template: "<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-image-container\"\n  tabindex=\"-1\"\n>\n  <cx-media\n    class=\"cx-product-image\"\n    [container]=\"product.images?.PRIMARY\"\n    format=\"product\"\n    [alt]=\"product.summary\"\n  ></cx-media>\n</a>\n<a\n  [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n  class=\"cx-product-name\"\n  [innerHTML]=\"product.nameHtml\"\n></a>\n\n<div class=\"cx-product-rating\">\n  <cx-star-rating\n    *ngIf=\"product.averageRating\"\n    [rating]=\"product?.averageRating\"\n    [disabled]=\"true\"\n  ></cx-star-rating>\n  <div *ngIf=\"!product.averageRating\">\n    {{ 'productDetails.noReviews' | cxTranslate }}\n  </div>\n</div>\n<div class=\"cx-product-price-container\">\n  <div class=\"cx-product-price\" aria-label=\"Product price\">\n    {{ product.price?.formattedValue }}\n  </div>\n</div>\n\n<ng-container *cxFeatureLevel=\"'1.5'\">\n  <div class=\"cx-variant-style-icons\" *ngIf=\"product.variantOptions\">\n    <cx-variant-style-icons\n      [variants]=\"product.variantOptions\"\n    ></cx-variant-style-icons>\n  </div>\n</ng-container>\n\n<cx-add-to-cart\n  *ngIf=\"product.stock?.stockLevelStatus !== 'outOfStock'\"\n  [showQuantity]=\"false\"\n  [product]=\"product\"\n></cx-add-to-cart>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], null, { product: [{
@@ -30741,7 +30712,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-product-list-item',
-                template: "<div class=\"row\">\n  <div class=\"col-12 col-md-4\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-image-container\"\n    >\n      <cx-media\n        class=\"cx-product-image\"\n        [container]=\"product.images?.PRIMARY\"\n        format=\"product\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n    </a>\n  </div>\n  <div class=\"col-12 col-md-8\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-name\"\n      [innerHtml]=\"product.nameHtml\"\n    ></a>\n    <cx-star-rating\n      *ngIf=\"product.averageRating\"\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div *ngIf=\"!product.averageRating\" class=\"cx-product-no-review\">\n      {{ 'productDetails.noReviews' | cxTranslate }}\n    </div>\n    <div class=\"cx-product-price\" aria-label=\"Product price\">\n      {{ product.price?.formattedValue }}\n    </div>\n\n    <ng-container *cxFeatureLevel=\"'1.5'\">\n      <cx-variant-style-icons\n        *ngIf=\"product.variantOptions\"\n        [variants]=\"product.variantOptions\"\n      ></cx-variant-style-icons>\n    </ng-container>\n\n    <div class=\"row\">\n      <div class=\"col-12 col-md-8\">\n        <p class=\"cx-product-summary\" [innerHtml]=\"product.summary\">\n          {{ product.summary }}\n        </p>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <cx-add-to-cart\n          *ngIf=\"product.stock?.stockLevelStatus !== 'outOfStock'\"\n          [showQuantity]=\"false\"\n          [product]=\"product\"\n        ></cx-add-to-cart>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                template: "<div class=\"row\">\n  <div class=\"col-12 col-md-4\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-image-container\"\n      tabindex=\"-1\"\n    >\n      <cx-media\n        class=\"cx-product-image\"\n        [container]=\"product.images?.PRIMARY\"\n        format=\"product\"\n        [alt]=\"product.summary\"\n      ></cx-media>\n    </a>\n  </div>\n  <div class=\"col-12 col-md-8\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: product } | cxUrl\"\n      class=\"cx-product-name\"\n      [innerHtml]=\"product.nameHtml\"\n    ></a>\n    <cx-star-rating\n      *ngIf=\"product.averageRating\"\n      [rating]=\"product?.averageRating\"\n      [disabled]=\"true\"\n    ></cx-star-rating>\n    <div *ngIf=\"!product.averageRating\" class=\"cx-product-no-review\">\n      {{ 'productDetails.noReviews' | cxTranslate }}\n    </div>\n    <div class=\"cx-product-price\" aria-label=\"Product price\">\n      {{ product.price?.formattedValue }}\n    </div>\n\n    <ng-container *cxFeatureLevel=\"'1.5'\">\n      <cx-variant-style-icons\n        *ngIf=\"product.variantOptions\"\n        [variants]=\"product.variantOptions\"\n      ></cx-variant-style-icons>\n    </ng-container>\n\n    <div class=\"row\">\n      <div class=\"col-12 col-md-8\">\n        <p class=\"cx-product-summary\" [innerHtml]=\"product.summary\">\n          {{ product.summary }}\n        </p>\n      </div>\n      <div class=\"col-12 col-md-4\">\n        <cx-add-to-cart\n          *ngIf=\"product.stock?.stockLevelStatus !== 'outOfStock'\"\n          [showQuantity]=\"false\"\n          [product]=\"product\"\n        ></cx-add-to-cart>\n      </div>\n    </div>\n  </div>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], null, { product: [{
@@ -31050,10 +31021,16 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-product-reviews',
-                template: "<div class=\"container\" *ngIf=\"product$ | async as product\">\n  <h2>\n    {{ 'productDetails.reviews' | cxTranslate }} ({{ product.numberOfReviews }})\n  </h2>\n  <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n    <div class=\"header\">\n      <h3>{{ 'productReview.overallRating' | cxTranslate }}</h3>\n      <button class=\"btn btn-primary\" (click)=\"initiateWriteReview()\">\n        {{ 'productReview.writeReview' | cxTranslate }}\n      </button>\n      <cx-star-rating\n        *ngIf=\"product.averageRating\"\n        class=\"rating\"\n        [rating]=\"product.averageRating\"\n        [disabled]=\"true\"\n      ></cx-star-rating>\n      <div class=\"rating\" *ngIf=\"!product.averageRating\">\n        {{ 'productDetails.noReviews' | cxTranslate }}\n      </div>\n    </div>\n\n    <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n      <ng-container *ngIf=\"reviews$ | async as reviews\">\n        <div\n          class=\"review\"\n          tabindex=\"0\"\n          *ngFor=\"let review of reviews | slice: 0:maxListItems\"\n        >\n          <div class=\"title\">{{ review.headline }}</div>\n          <cx-star-rating\n            [rating]=\"review.rating\"\n            [disabled]=\"true\"\n          ></cx-star-rating>\n          <div class=\"name\">\n            {{ review.alias ? review.alias : review.principal?.name }}\n          </div>\n          <div class=\"date\">{{ review.date | cxDate }}</div>\n          <div class=\"text\">{{ review.comment }}</div>\n        </div>\n        <div *ngIf=\"reviews.length > initialMaxListItems\">\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"maxListItems = reviews.length\"\n            *ngIf=\"maxListItems === initialMaxListItems\"\n          >\n            {{ 'productReview.more' | cxTranslate }}\n          </button>\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"maxListItems = initialMaxListItems\"\n            *ngIf=\"maxListItems !== initialMaxListItems\"\n          >\n            {{ 'productReview.less' | cxTranslate }}\n          </button>\n        </div>\n      </ng-container>\n    </ng-container>\n  </ng-container>\n\n  <ng-template #writeReview>\n    <form [formGroup]=\"reviewForm\" (ngSubmit)=\"submitReview(product)\">\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.reviewTitle' | cxTranslate\n          }}</span>\n          <input type=\"text\" class=\"form-control\" formControlName=\"title\" />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.writeYourComments' | cxTranslate\n          }}</span>\n          <textarea\n            class=\"form-control\"\n            rows=\"3\"\n            formControlName=\"comment\"\n          ></textarea>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.rating' | cxTranslate\n          }}</span>\n          <cx-star-rating (change)=\"setRating($event)\"></cx-star-rating>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.reviewerName' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            formControlName=\"reviewerName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group row\">\n        <div class=\"col-12 col-md-4\">\n          <button\n            type=\"submit\"\n            class=\"btn btn-block btn-secondary\"\n            (click)=\"cancelWriteReview()\"\n          >\n            {{ 'common.cancel' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-12 col-md-4\">\n          <button\n            type=\"submit\"\n            class=\"btn btn-block btn-primary\"\n            [ngClass]=\"{ 'submit-btn': reviewForm.valid }\"\n            [disabled]=\"!reviewForm.valid\"\n          >\n            {{ 'common.submit' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </form>\n  </ng-template>\n</div>\n",
+                template: "<div class=\"container\" *ngIf=\"product$ | async as product\">\n  <h2>\n    {{ 'productDetails.reviews' | cxTranslate }} ({{ product.numberOfReviews }})\n  </h2>\n  <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n    <div class=\"header\">\n      <h3>{{ 'productReview.overallRating' | cxTranslate }}</h3>\n      <button\n        #writeReviewButton\n        class=\"btn btn-primary\"\n        (click)=\"initiateWriteReview()\"\n      >\n        {{ 'productReview.writeReview' | cxTranslate }}\n      </button>\n      <cx-star-rating\n        *ngIf=\"product.averageRating\"\n        class=\"rating\"\n        [rating]=\"product.averageRating\"\n        [disabled]=\"true\"\n      ></cx-star-rating>\n      <div class=\"rating\" *ngIf=\"!product.averageRating\">\n        {{ 'productDetails.noReviews' | cxTranslate }}\n      </div>\n    </div>\n\n    <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n      <ng-container *ngIf=\"reviews$ | async as reviews\">\n        <div\n          class=\"review\"\n          tabindex=\"0\"\n          *ngFor=\"let review of reviews | slice: 0:maxListItems\"\n        >\n          <div class=\"title\">{{ review.headline }}</div>\n          <cx-star-rating\n            [rating]=\"review.rating\"\n            [disabled]=\"true\"\n          ></cx-star-rating>\n          <div class=\"name\">\n            {{ review.alias ? review.alias : review.principal?.name }}\n          </div>\n          <div class=\"date\">{{ review.date | cxDate }}</div>\n          <div class=\"text\">{{ review.comment }}</div>\n        </div>\n        <div *ngIf=\"reviews.length > initialMaxListItems\">\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"maxListItems = reviews.length\"\n            *ngIf=\"maxListItems === initialMaxListItems\"\n          >\n            {{ 'productReview.more' | cxTranslate }}\n          </button>\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"maxListItems = initialMaxListItems\"\n            *ngIf=\"maxListItems !== initialMaxListItems\"\n          >\n            {{ 'productReview.less' | cxTranslate }}\n          </button>\n        </div>\n      </ng-container>\n    </ng-container>\n  </ng-container>\n\n  <ng-template #writeReview>\n    <form [formGroup]=\"reviewForm\" (ngSubmit)=\"submitReview(product)\">\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.reviewTitle' | cxTranslate\n          }}</span>\n          <input\n            #titleInput\n            type=\"text\"\n            class=\"form-control\"\n            formControlName=\"title\"\n            [class.is-invalid]=\"\n              reviewForm.controls['title'].invalid &&\n              (reviewForm.controls['title'].touched ||\n                reviewForm.controls['title'].dirty)\n            \"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.writeYourComments' | cxTranslate\n          }}</span>\n          <textarea\n            class=\"form-control\"\n            rows=\"3\"\n            formControlName=\"comment\"\n            [class.is-invalid]=\"\n              reviewForm.controls['comment'].invalid &&\n              (reviewForm.controls['comment'].touched ||\n                reviewForm.controls['comment'].dirty)\n            \"\n          ></textarea>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.rating' | cxTranslate\n          }}</span>\n          <cx-star-rating (change)=\"setRating($event)\"></cx-star-rating>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.reviewerName' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            formControlName=\"reviewerName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group row\">\n        <div class=\"col-12 col-md-4\">\n          <button\n            type=\"button\"\n            class=\"btn btn-block btn-secondary\"\n            (click)=\"cancelWriteReview()\"\n          >\n            {{ 'common.cancel' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-12 col-md-4\">\n          <button\n            type=\"submit\"\n            class=\"btn btn-block btn-primary\"\n            [ngClass]=\"{ 'submit-btn': reviewForm.valid }\"\n          >\n            {{ 'common.submit' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </form>\n  </ng-template>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ɵngcc1.ProductReviewService }, { type: CurrentProductService }, { type: ɵngcc7.FormBuilder }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.ProductReviewService }, { type: CurrentProductService }, { type: ɵngcc7.FormBuilder }, { type: ɵngcc0.ChangeDetectorRef }]; }, { titleInput: [{
+            type: ViewChild,
+            args: ['titleInput', { static: false }]
+        }], writeReviewButton: [{
+            type: ViewChild,
+            args: ['writeReviewButton', { static: false }]
+        }] }); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductReviewsModule, { declarations: function () { return [ProductReviewsComponent]; }, imports: function () { return [CommonModule,
         ReactiveFormsModule,
         FormsModule,
@@ -31439,7 +31416,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-login-form',
-                template: "<form (submit)=\"login()\" [formGroup]=\"form\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.controls['userId'].invalid &&\n          (form.controls['userId'].touched || form.controls['userId'].dirty)\n        \"\n        formControlName=\"userId\"\n        placeholder=\"{{ 'loginForm.emailAddress.placeholder' | cxTranslate }}\"\n      />\n    </label>\n    <div\n      class=\"invalid-feedback\"\n      *ngIf=\"\n        form.controls['userId'].invalid &&\n        (form.controls['userId'].touched || form.controls['userId'].dirty)\n      \"\n    >\n      <span>{{ 'loginForm.wrongEmailFormat' | cxTranslate }}</span>\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.password.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"password\"\n        class=\"form-control\"\n        placeholder=\"{{ 'loginForm.password.placeholder' | cxTranslate }}\"\n        formControlName=\"password\"\n      />\n    </label>\n  </div>\n  <p>\n    <a\n      [routerLink]=\"{ cxRoute: 'forgotPassword' } | cxUrl\"\n      aria-controls=\"reset-password\"\n      class=\"btn-link\"\n      >{{ 'loginForm.forgotPassword' | cxTranslate }}</a\n    >\n  </p>\n\n  <button\n    type=\"submit\"\n    class=\"btn btn-block btn-primary\"\n    [disabled]=\"form.invalid\"\n  >\n    {{ 'loginForm.signIn' | cxTranslate }}\n  </button>\n</form>\n\n<div class=\"register\">\n  <h3 class=\"cx-section-title cx-section-title-alt\">\n    {{ 'loginForm.dontHaveAccount' | cxTranslate }}\n  </h3>\n\n  <ng-container *ngIf=\"!loginAsGuest\">\n    <a\n      [routerLink]=\"{ cxRoute: 'register' } | cxUrl\"\n      class=\"btn btn-block btn-secondary btn-register\"\n      >{{ 'loginForm.register' | cxTranslate }}</a\n    >\n  </ng-container>\n\n  <ng-container *ngIf=\"loginAsGuest\">\n    <a\n      [routerLink]=\"{ cxRoute: 'checkoutLogin' } | cxUrl\"\n      class=\"btn btn-block btn-secondary btn-guest\"\n      >{{ 'loginForm.guestCheckout' | cxTranslate }}</a\n    >\n  </ng-container>\n</div>\n"
+                template: "<form (submit)=\"login()\" [formGroup]=\"form\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.controls['userId'].invalid &&\n          (form.controls['userId'].touched || form.controls['userId'].dirty)\n        \"\n        formControlName=\"userId\"\n        placeholder=\"{{ 'loginForm.emailAddress.placeholder' | cxTranslate }}\"\n      />\n    </label>\n    <div\n      class=\"invalid-feedback\"\n      *ngIf=\"\n        form.controls['userId'].invalid &&\n        (form.controls['userId'].touched || form.controls['userId'].dirty)\n      \"\n    >\n      <span>{{ 'loginForm.wrongEmailFormat' | cxTranslate }}</span>\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.password.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"password\"\n        class=\"form-control\"\n        placeholder=\"{{ 'loginForm.password.placeholder' | cxTranslate }}\"\n        formControlName=\"password\"\n      />\n    </label>\n  </div>\n  <p>\n    <a\n      [routerLink]=\"{ cxRoute: 'forgotPassword' } | cxUrl\"\n      aria-controls=\"reset-password\"\n      class=\"btn-link\"\n      >{{ 'loginForm.forgotPassword' | cxTranslate }}</a\n    >\n  </p>\n\n  <button type=\"submit\" class=\"btn btn-block btn-primary\">\n    {{ 'loginForm.signIn' | cxTranslate }}\n  </button>\n</form>\n\n<div class=\"register\">\n  <h3 class=\"cx-section-title cx-section-title-alt\">\n    {{ 'loginForm.dontHaveAccount' | cxTranslate }}\n  </h3>\n\n  <ng-container *ngIf=\"!loginAsGuest\">\n    <a\n      [routerLink]=\"{ cxRoute: 'register' } | cxUrl\"\n      class=\"btn btn-block btn-secondary btn-register\"\n      >{{ 'loginForm.register' | cxTranslate }}</a\n    >\n  </ng-container>\n\n  <ng-container *ngIf=\"loginAsGuest\">\n    <a\n      [routerLink]=\"{ cxRoute: 'checkoutLogin' } | cxUrl\"\n      class=\"btn btn-block btn-secondary btn-guest\"\n      >{{ 'loginForm.guestCheckout' | cxTranslate }}</a\n    >\n  </ng-container>\n</div>\n"
             }]
     }], function () { return [{ type: ɵngcc1.AuthService }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc7.FormBuilder }, { type: ɵngcc1.AuthRedirectService }, { type: ɵngcc1.WindowRef }, { type: ɵngcc5.ActivatedRoute }, { type: CheckoutConfigService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(LoginFormModule, { declarations: function () { return [LoginFormComponent]; }, imports: function () { return [CommonModule,
@@ -31531,7 +31508,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-register',
-                template: "<section\n  class=\"cx-page-section container\"\n  *ngIf=\"!(loading$ | async); else loading\"\n>\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of titles$ | async\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('email').errors &&\n                  (userRegistrationForm.get('email').errors['email'] ||\n                    userRegistrationForm.get('email').errors['InvalidEmail']) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <ng-container\n                *ngIf=\"isAnonymousConsentEnabled; else hardcodedNewsletter\"\n              >\n                <label *ngIf=\"anonymousConsent$ | async as anonymousConsent\">\n                  <input\n                    type=\"checkbox\"\n                    name=\"newsletter\"\n                    class=\"form-check-input\"\n                    formControlName=\"newsletter\"\n                    [checked]=\"isConsentGiven(anonymousConsent.consent)\"\n                  />\n                  <span class=\"form-check-label\">\n                    {{ anonymousConsent.template }}\n                  </span>\n                </label>\n              </ng-container>\n              <ng-template #hardcodedNewsletter\n                ><label>\n                  <input\n                    type=\"checkbox\"\n                    name=\"newsletter\"\n                    class=\"form-check-input\"\n                    formControlName=\"newsletter\"\n                  />\n                  <span class=\"form-check-label\">\n                    {{ 'register.emailMarketing' | cxTranslate }}\n                  </span>\n                </label>\n              </ng-template>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            [disabled]=\"userRegistrationForm.invalid\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
+                template: "<section\n  class=\"cx-page-section container\"\n  *ngIf=\"!(loading$ | async); else loading\"\n>\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of titles$ | async\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('email').errors &&\n                  (userRegistrationForm.get('email').errors['email'] ||\n                    userRegistrationForm.get('email').errors['InvalidEmail']) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <ng-container\n                *ngIf=\"isAnonymousConsentEnabled; else hardcodedNewsletter\"\n              >\n                <label *ngIf=\"anonymousConsent$ | async as anonymousConsent\">\n                  <input\n                    type=\"checkbox\"\n                    name=\"newsletter\"\n                    class=\"form-check-input\"\n                    formControlName=\"newsletter\"\n                    [checked]=\"isConsentGiven(anonymousConsent.consent)\"\n                  />\n                  <span class=\"form-check-label\">\n                    {{ anonymousConsent.template }}\n                  </span>\n                </label>\n              </ng-container>\n              <ng-template #hardcodedNewsletter\n                ><label>\n                  <input\n                    type=\"checkbox\"\n                    name=\"newsletter\"\n                    class=\"form-check-input\"\n                    formControlName=\"newsletter\"\n                  />\n                  <span class=\"form-check-label\">\n                    {{ 'register.emailMarketing' | cxTranslate }}\n                  </span>\n                </label>\n              </ng-template>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
             }]
     }], function () { return [{ type: ɵngcc1.AuthService }, { type: ɵngcc1.AuthRedirectService }, { type: ɵngcc1.UserService }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc7.FormBuilder }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.FeatureConfigService }, { type: ɵngcc1.AnonymousConsentsService }, { type: ɵngcc1.AnonymousConsentsConfig }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(RegisterComponentModule, { declarations: function () { return [RegisterComponent]; }, imports: function () { return [CommonModule,
@@ -31594,7 +31571,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-wish-list-item',
-                template: "<div class=\"row\">\n  <!-- Item Image -->\n  <div class=\"cx-image-container col-2\">\n    <a [routerLink]=\"{ cxRoute: 'product', params: cartEntry.product } | cxUrl\">\n      <cx-media\n        [container]=\"cartEntry.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div class=\"col-md-5 col-lg-5 col-xl-5\">\n        <div *ngIf=\"cartEntry.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"\n              { cxRoute: 'product', params: cartEntry.product } | cxUrl\n            \"\n            >{{ cartEntry.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"cartEntry.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ cartEntry.product.code }}\n        </div>\n        <!-- Variants -->\n        <ng-container *ngIf=\"cartEntry.product.baseOptions?.length\">\n          <div\n            *ngFor=\"\n              let variant of cartEntry.product.baseOptions[0]?.selected\n                ?.variantOptionQualifiers\n            \"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\" *ngIf=\"variant.name && variant.value\">\n              {{ variant.name }}: {{ variant.value }}\n            </div>\n          </div>\n        </ng-container>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"cartEntry.basePrice\"\n        class=\"cx-price col-md-3 col-lg-4 col-xl-4\"\n      >\n        <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"cartEntry.basePrice\" class=\"cx-value\">\n          {{ cartEntry.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Total -->\n      <div class=\"col-sm-8 col-md-4 col-lg-3 col-xl-3 cx-add-to-cart\">\n        <cx-add-to-cart\n          *ngIf=\"\n            cartEntry.product.stock.stockLevelStatus !== 'outOfStock';\n            else outOfStock\n          \"\n          [showQuantity]=\"false\"\n          [product]=\"cartEntry.product\"\n        ></cx-add-to-cart>\n        <ng-template #outOfStock>\n          <span class=\"cx-out-of-stock\">\n            {{ 'addToCart.outOfStock' | cxTranslate }}\n          </span>\n        </ng-template>\n      </div>\n    </div>\n    <div class=\"cx-return-button col-12\">\n      <button\n        class=\"btn btn-link\"\n        (click)=\"removeEntry(cartEntry)\"\n        [disabled]=\"isLoading\"\n      >\n        {{ 'common.remove' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n",
+                template: "<div class=\"row\">\n  <!-- Item Image -->\n  <div class=\"cx-image-container col-2\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: cartEntry.product } | cxUrl\"\n      tabindex=\"-1\"\n    >\n      <cx-media\n        [container]=\"cartEntry.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div class=\"col-md-5 col-lg-5 col-xl-5\">\n        <div *ngIf=\"cartEntry.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"\n              { cxRoute: 'product', params: cartEntry.product } | cxUrl\n            \"\n            >{{ cartEntry.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"cartEntry.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ cartEntry.product.code }}\n        </div>\n        <!-- Variants -->\n        <ng-container *ngIf=\"cartEntry.product.baseOptions?.length\">\n          <div\n            *ngFor=\"\n              let variant of cartEntry.product.baseOptions[0]?.selected\n                ?.variantOptionQualifiers\n            \"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\" *ngIf=\"variant.name && variant.value\">\n              {{ variant.name }}: {{ variant.value }}\n            </div>\n          </div>\n        </ng-container>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"cartEntry.basePrice\"\n        class=\"cx-price col-md-3 col-lg-4 col-xl-4\"\n      >\n        <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"cartEntry.basePrice\" class=\"cx-value\">\n          {{ cartEntry.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Total -->\n      <div class=\"col-sm-8 col-md-4 col-lg-3 col-xl-3 cx-add-to-cart\">\n        <cx-add-to-cart\n          *ngIf=\"\n            cartEntry.product.stock.stockLevelStatus !== 'outOfStock';\n            else outOfStock\n          \"\n          [showQuantity]=\"false\"\n          [product]=\"cartEntry.product\"\n        ></cx-add-to-cart>\n        <ng-template #outOfStock>\n          <span class=\"cx-out-of-stock\">\n            {{ 'addToCart.outOfStock' | cxTranslate }}\n          </span>\n        </ng-template>\n      </div>\n    </div>\n    <div class=\"cx-return-button col-12\">\n      <button\n        class=\"btn btn-link\"\n        (click)=\"removeEntry(cartEntry)\"\n        [disabled]=\"isLoading\"\n      >\n        {{ 'common.remove' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return []; }, { isLoading: [{
@@ -31898,6 +31875,18 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
             }]
     }], null, null); })();
 
+/**
+ * @deprecated since 2.0.0
+ * NOTE: delete this file altogether, move below slots to the main default layout config
+ */
+const PLPAccessibilityLayoutConfig = {
+    layoutSlots: {
+        ProductListPageTemplate: {
+            slots: ['ProductLeftRefinements', 'ProductListSlot'],
+        },
+    },
+};
+
 /*
  * Public API Surface of storefrontlib
  */
@@ -31906,6 +31895,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
  * Generated bundle index. Do not edit.
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressCardComponent, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AppliedCouponsComponent, AsmModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, ɵ3, AsmLoaderModule as ɵa, asmFactory as ɵb, SkipLinkComponent as ɵba, SkipLinkService as ɵbb, SkipLinkDirective as ɵbc, MyCouponsComponentService as ɵbd, suffixUrlMatcher as ɵbe, addCmsRoute as ɵbf, htmlLangProvider as ɵbg, setHtmlLangAttribute as ɵbh, AnonymousConsentsModule as ɵbi, AnonymousConsentDialogComponent as ɵbj, RoutingModule as ɵbk, defaultStorefrontRoutesConfig as ɵbl, defaultRoutingConfig as ɵbm, ComponentMapperService as ɵc, AsmEnablerService as ɵd, AsmMainUiComponent as ɵe, AsmComponentService as ɵf, CSAgentLoginFormComponent as ɵg, CustomerSelectionComponent as ɵh, AsmSessionTimerComponent as ɵi, FormatTimerPipe as ɵj, CustomerEmulationComponent as ɵk, AutoFocusDirectiveModule as ɵl, defaultCheckoutConfig as ɵm, ExpressCheckoutService as ɵn, defaultQualtricsConfig as ɵo, CmsRoutesService as ɵp, CmsMappingService as ɵq, CmsI18nService as ɵr, CmsGuardsService as ɵs, ReturnRequestService as ɵt, AddToHomeScreenService as ɵu, SkipLinkModule as ɵv, skipLinkFactory as ɵw, defaultSkipLinkConfig as ɵx, SkipLinkConfig as ɵy, SkipLinkScrollPosition as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AppliedCouponsComponent, AsmModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PLPAccessibilityLayoutConfig, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, fontawesomeIconConfig, getStructuredDataFactory, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, ɵ3, AsmLoaderModule as ɵa, asmFactory as ɵb, SkipLinkComponent as ɵba, SkipLinkService as ɵbb, SkipLinkDirective as ɵbc, MyCouponsComponentService as ɵbd, suffixUrlMatcher as ɵbe, addCmsRoute as ɵbf, htmlLangProvider as ɵbg, setHtmlLangAttribute as ɵbh, AnonymousConsentsModule as ɵbi, AnonymousConsentDialogComponent as ɵbj, RoutingModule as ɵbk, defaultStorefrontRoutesConfig as ɵbl, defaultRoutingConfig as ɵbm, ComponentMapperService as ɵc, AsmEnablerService as ɵd, AsmMainUiComponent as ɵe, AsmComponentService as ɵf, CSAgentLoginFormComponent as ɵg, CustomerSelectionComponent as ɵh, AsmSessionTimerComponent as ɵi, FormatTimerPipe as ɵj, CustomerEmulationComponent as ɵk, AutoFocusDirectiveModule as ɵl, defaultCheckoutConfig as ɵm, ExpressCheckoutService as ɵn, defaultQualtricsConfig as ɵo, CmsRoutesService as ɵp, CmsMappingService as ɵq, CmsI18nService as ɵr, CmsGuardsService as ɵs, ReturnRequestService as ɵt, AddToHomeScreenService as ɵu, SkipLinkModule as ɵv, skipLinkFactory as ɵw, defaultSkipLinkConfig as ɵx, SkipLinkConfig as ɵy, SkipLinkScrollPosition as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
 
 //# sourceMappingURL=spartacus-storefront.js.map

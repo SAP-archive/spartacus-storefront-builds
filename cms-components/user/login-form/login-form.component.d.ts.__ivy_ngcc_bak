@@ -9,30 +9,17 @@ export declare class LoginFormComponent implements OnInit, OnDestroy {
     private globalMessageService;
     private fb;
     private authRedirectService;
-    private winRef?;
-    private activatedRoute?;
-    private checkoutConfigService?;
+    private winRef;
+    private activatedRoute;
+    private checkoutConfigService;
     sub: Subscription;
     form: FormGroup;
     loginAsGuest: boolean;
-    constructor(auth: AuthService, globalMessageService: GlobalMessageService, fb: FormBuilder, authRedirectService: AuthRedirectService, winRef: WindowRef, // tslint:disable-line,
-    activatedRoute: ActivatedRoute, checkoutConfigService: CheckoutConfigService);
-    /**
-     * @deprecated since 1.1.0
-     * Use constructor(
-     * auth: AuthService,
-     * globalMessageService: GlobalMessageService,
-     * fb: FormBuilder,
-     * authRedirectService: AuthRedirectService,
-     *  winRef: WindowRef,
-     * activatedRoute: ActivatedRoute,
-     * checkoutConfigService: CheckoutConfigService) instead
-     *
-     * TODO(issue:#4055) Deprecated since 1.1.0
-     */
-    constructor(auth: AuthService, globalMessageService: GlobalMessageService, fb: FormBuilder, authRedirectService: AuthRedirectService);
+    constructor(auth: AuthService, globalMessageService: GlobalMessageService, fb: FormBuilder, authRedirectService: AuthRedirectService, winRef: WindowRef, activatedRoute: ActivatedRoute, checkoutConfigService: CheckoutConfigService);
     ngOnInit(): void;
     login(): void;
+    private submitLogin;
+    private markFormAsTouched;
     ngOnDestroy(): void;
     private prefillForm;
 }

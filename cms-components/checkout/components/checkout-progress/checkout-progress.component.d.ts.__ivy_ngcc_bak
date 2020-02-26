@@ -13,4 +13,7 @@ export declare class CheckoutProgressComponent implements OnInit {
     activeStepIndex: number;
     activeStepUrl: string;
     ngOnInit(): void;
+    getTabIndex(stepIndex: number): number;
+    isActive(index: number): boolean;
+    isDisabled(index: number): boolean;
 }

@@ -44,6 +44,7 @@ export declare class NavigationUIComponent implements OnDestroy {
     private alignWrapperToRightIfStickOut;
     private alignWrappersToRightIfStickOut;
     private updateClasses;
+    isTabbable(node: any): any;
     static ɵfac: ɵngcc0.ɵɵFactoryDef<NavigationUIComponent>;
     static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<NavigationUIComponent, "cx-navigation-ui", never, {
     "allowAlignToRight": "allowAlignToRight";

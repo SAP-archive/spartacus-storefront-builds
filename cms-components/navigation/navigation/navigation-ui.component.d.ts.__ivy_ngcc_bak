@@ -43,4 +43,5 @@ export declare class NavigationUIComponent implements OnDestroy {
     private alignWrapperToRightIfStickOut;
     private alignWrappersToRightIfStickOut;
     private updateClasses;
+    isTabbable(node: any): any;
 }

@@ -47,7 +47,6 @@ export declare class PaymentFormComponent implements OnInit, OnDestroy {
     monthSelected(month: monthType): void;
     yearSelected(year: yearType): void;
     toggleSameAsShippingAddress(): void;
-    isContinueButtonDisabled(): boolean;
     /**
      * Check if the shipping address can also be a billing address
      *
