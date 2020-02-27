@@ -11667,7 +11667,7 @@ let BreadcrumbSchemaBuilder = class BreadcrumbSchemaBuilder {
             .pipe(map((pageMeta) => this.collect(pageMeta)));
     }
     collect(pageMeta) {
-        if (!pageMeta.breadcrumbs) {
+        if (!pageMeta || !pageMeta.breadcrumbs) {
             return;
         }
         const crumbs = pageMeta.breadcrumbs.map((crumb, index) => {

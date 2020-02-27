@@ -2896,7 +2896,7 @@ var BreadcrumbSchemaBuilder = /** @class */ (function () {
             .pipe(map(function (pageMeta) { return _this.collect(pageMeta); }));
     };
     BreadcrumbSchemaBuilder.prototype.collect = function (pageMeta) {
-        if (!pageMeta.breadcrumbs) {
+        if (!pageMeta || !pageMeta.breadcrumbs) {
             return;
         }
         var crumbs = pageMeta.breadcrumbs.map(function (crumb, index) {
