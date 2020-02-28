@@ -17925,7 +17925,7 @@
                     core$1.UserModule.forRoot(),
                     core$1.ProductModule.forRoot(),
                     ViewConfigModule.forRoot(),
-                    core$1.FeaturesConfigModule.forRoot('1.0'),
+                    core$1.FeaturesConfigModule.forRoot('2.0'),
                     LayoutModule,
                 ],
                 exports: [LayoutModule],

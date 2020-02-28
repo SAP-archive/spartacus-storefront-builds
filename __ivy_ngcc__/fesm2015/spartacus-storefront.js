@@ -26421,7 +26421,7 @@ StorefrontFoundationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: functio
             UserModule.forRoot(),
             ProductModule.forRoot(),
             ViewConfigModule.forRoot(),
-            FeaturesConfigModule.forRoot('1.0'),
+            FeaturesConfigModule.forRoot('2.0'),
             LayoutModule,
         ],
         LayoutModule] });
@@ -31813,7 +31813,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     UserModule.forRoot(),
                     ProductModule.forRoot(),
                     ViewConfigModule.forRoot(),
-                    FeaturesConfigModule.forRoot('1.0'),
+                    FeaturesConfigModule.forRoot('2.0'),
                     LayoutModule,
                 ],
                 exports: [LayoutModule],
