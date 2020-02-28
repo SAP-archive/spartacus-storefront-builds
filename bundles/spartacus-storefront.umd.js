@@ -2772,6 +2772,142 @@
         return CmsRouteModule;
     }());
 
+    var defaultStorefrontRoutesConfig = {
+        home: { paths: [''] },
+        notFound: { paths: ['not-found'] },
+        cart: { paths: ['cart'] },
+        // semantic links for login related pages
+        login: { paths: ['login'], protected: false },
+        register: { paths: ['login/register'], protected: false },
+        forgotPassword: { paths: ['login/forgot-password'], protected: false },
+        resetPassword: { paths: ['login/pw/change'], protected: false },
+        logout: { paths: ['logout'] },
+        checkoutLogin: { paths: ['checkout-login'] },
+        checkout: { paths: ['checkout'] },
+        checkoutShippingAddress: { paths: ['checkout/shipping-address'] },
+        checkoutDeliveryMode: { paths: ['checkout/delivery-mode'] },
+        checkoutPaymentDetails: { paths: ['checkout/payment-details'] },
+        checkoutReviewOrder: { paths: ['checkout/review-order'] },
+        orderConfirmation: { paths: ['order-confirmation'] },
+        // plp routes
+        search: { paths: ['search/:query'] },
+        category: {
+            paths: ['category/:categoryCode'],
+            paramsMapping: { categoryCode: 'code' },
+        },
+        brand: { paths: ['Brands/:brandName/c/:brandCode'] },
+        // pdp routes
+        product: {
+            paths: ['product/:productCode/:name'],
+            paramsMapping: { productCode: 'code' },
+        },
+        termsAndConditions: { paths: ['terms-and-conditions'] },
+        orders: {
+            paths: ['my-account/orders'],
+        },
+        orderDetails: {
+            paths: ['my-account/order/:orderCode'],
+            paramsMapping: { orderCode: 'code' },
+        },
+        orderGuest: {
+            paths: ['guest/order/:orderCode'],
+            paramsMapping: { orderCode: 'code' },
+        },
+        orderReturn: {
+            paths: ['my-account/order/return/:orderCode'],
+            paramsMapping: { orderCode: 'code' },
+        },
+        orderReturnConfirmation: {
+            paths: ['my-account/order/return/confirmation/:orderCode'],
+            paramsMapping: { orderCode: 'code' },
+        },
+        orderCancel: {
+            paths: ['my-account/order/cancel/:orderCode'],
+            paramsMapping: { orderCode: 'code' },
+        },
+        orderCancelConfirmation: {
+            paths: ['my-account/order/cancel/confirmation/:orderCode'],
+            paramsMapping: { orderCode: 'code' },
+        },
+        returnRequestDetails: {
+            paths: ['my-account/return-request/:returnCode'],
+            paramsMapping: { returnCode: 'rma' },
+        },
+        coupons: { paths: ['my-account/coupons'] },
+        couponClaim: {
+            paths: ['my-account/coupon/claim/:couponCode'],
+            paramsMapping: { couponCode: 'code' },
+        },
+    };
+    var defaultRoutingConfig = {
+        routing: {
+            routes: defaultStorefrontRoutesConfig,
+        },
+    };
+
+    var RoutingModule = /** @class */ (function () {
+        function RoutingModule() {
+        }
+        RoutingModule_1 = RoutingModule;
+        RoutingModule.forRoot = function () {
+            return {
+                ngModule: RoutingModule_1,
+                providers: [core$1.provideConfig(defaultRoutingConfig)],
+            };
+        };
+        var RoutingModule_1;
+        RoutingModule = RoutingModule_1 = __decorate([
+            core.NgModule({
+                imports: [core$1.RoutingModule.forRoot(), CmsRouteModule],
+            })
+        ], RoutingModule);
+        return RoutingModule;
+    }());
+
+    /**
+     * Matches the pattern '[ ** / ] marker / :paramName'
+     *
+     * @param marker phrase that indicates the start of the match
+     * @param paramName name of the parameter present after the marker
+     * @param precedingParamName name of the parameter for every preceding url segment
+     *        i.e. `param` will result in `param0`, `param1`, ...
+     */
+    function getSuffixUrlMatcher(_a) {
+        var marker = _a.marker, paramName = _a.paramName, precedingParamName = _a.precedingParamName;
+        precedingParamName = precedingParamName || 'param';
+        var matcher = function suffixUrlMatcher(segments) {
+            var _a;
+            var markerIndex = findLastIndex(segments, function (_a) {
+                var path = _a.path;
+                return path === marker;
+            });
+            var isMarkerLastSegment = markerIndex === segments.length - 1;
+            if (markerIndex === -1 || isMarkerLastSegment) {
+                return null;
+            }
+            var paramIndex = markerIndex + 1;
+            var posParams = (_a = {},
+                _a[paramName] = segments[paramIndex],
+                _a);
+            for (var i = 0; i < markerIndex; i++) {
+                posParams["" + precedingParamName + i] = segments[i];
+            }
+            return { consumed: segments.slice(0, paramIndex + 1), posParams: posParams };
+        };
+        if (core.isDevMode()) {
+            matcher['_suffixRouteConfig'] = { marker: marker, paramName: paramName, precedingParamName: precedingParamName }; // property added for easier debugging of routes
+        }
+        return matcher;
+    }
+    function findLastIndex(elements, predicate) {
+        for (var index = elements.length - 1; index >= 0; index--) {
+            if (predicate(elements[index])) {
+                return index;
+            }
+        }
+        return -1;
+    }
+
     var SeoMetaService = /** @class */ (function () {
         function SeoMetaService(ngTitle, ngMeta, pageMetaService) {
             this.ngTitle = ngTitle;
@@ -17557,51 +17693,36 @@
         return CmsLibModule;
     }());
 
+    function getProductDetailsUrlMatcherFactory(service, defaultMatcherFactory) {
+        var factory = function (route) {
+            var defaultMatcher = defaultMatcherFactory(route);
+            var suffixPDPMatcher = getSuffixUrlMatcher({
+                marker: 'p',
+                paramName: 'productCode',
+            });
+            return service.getCombined([defaultMatcher, suffixPDPMatcher]);
+        };
+        return factory;
+    }
     /**
-     * Matches the pattern '[ ** / ] marker / :paramName'
+     * Injection token with url matcher factory for PDP.
+     * The provided url matcher matches both:
+     * - the configured `paths` from routing config and
+     * - custom pattern  `** / p / :productCode`
      *
-     * @param marker phrase that indicates the start of the match
-     * @param paramName name of the parameter present after the marker
-     * @param precedingParamName name of the parameter for every preceding url segment
-     *        i.e. `param` will result in `param0`, `param1`, ...
+     * If the this matcher doesn't fit the requirements, it can be replaced with the DEFAULT_URL_MATCHER
+     * or additional matchers can be added for a specific route.
+     *
+     * Note: Matchers will "match" a route, but do not contribute to the creation of the route, nor do they guard routes.
      */
-    function suffixUrlMatcher(segments, _segmentGroup, route) {
-        var _a;
-        var config = route.data.cxSuffixUrlMatcher;
-        var marker = config.marker, paramName = config.paramName;
-        var precedingParamName = config.precedingParamName || 'param';
-        var markerIndex = findLastIndex(segments, function (_a) {
-            var path = _a.path;
-            return path === marker;
-        });
-        var isMarkerLastSegment = markerIndex === segments.length - 1;
-        if (markerIndex === -1 || isMarkerLastSegment) {
-            return null;
-        }
-        var paramIndex = markerIndex + 1;
-        var posParams = (_a = {},
-            _a[paramName] = segments[paramIndex],
-            _a);
-        for (var i = 0; i < markerIndex; i++) {
-            posParams["" + precedingParamName + i] = segments[i];
-        }
-        return { consumed: segments.slice(0, paramIndex + 1), posParams: posParams };
-    }
-    function findLastIndex(elements, predicate) {
-        for (var index = elements.length - 1; index >= 0; index--) {
-            if (predicate(elements[index])) {
-                return index;
-            }
-        }
-        return -1;
-    }
-
-    var ɵ0$a = { cxRoute: 'product' }, ɵ1$1 = {
-        cxSuffixUrlMatcher: {
-            marker: 'p',
-            paramName: 'productCode',
+    var PRODUCT_DETAILS_URL_MATCHER = new core.InjectionToken('PRODUCT_DETAILS_URL_MATCHER', {
+        providedIn: 'root',
+        factory: function () {
+            return getProductDetailsUrlMatcherFactory(core.inject(core$1.UrlMatcherService), core.inject(core$1.DEFAULT_URL_MATCHER));
         },
-    };
+    });
+
+    var ɵ0$a = { cxRoute: 'product' };
     var ProductDetailsPageModule = /** @class */ (function () {
         function ProductDetailsPageModule() {
         }
@@ -17615,25 +17736,52 @@
                             component: PageLayoutComponent,
                             data: ɵ0$a,
                         },
-                        {
-                            matcher: suffixUrlMatcher,
-                            canActivate: [CmsPageGuard],
-                            component: PageLayoutComponent,
-                            data: ɵ1$1,
-                        },
                     ]),
+                    core$1.ConfigModule.withConfig({
+                        routing: {
+                            routes: {
+                                product: {
+                                    matchers: [PRODUCT_DETAILS_URL_MATCHER],
+                                },
+                            },
+                        },
+                    }),
                 ],
             })
         ], ProductDetailsPageModule);
         return ProductDetailsPageModule;
     }());
 
-    var ɵ0$b = { cxRoute: 'category' }, ɵ1$2 = { pageLabel: 'search', cxRoute: 'search' }, ɵ2 = { cxRoute: 'brand' }, ɵ3 = {
-        cxSuffixUrlMatcher: {
-            marker: 'c',
-            paramName: 'categoryCode',
+    function getProductListingUrlMatcherFactory(service, defaultMatcherFactory) {
+        var factory = function (route) {
+            var defaultMatcher = defaultMatcherFactory(route);
+            var suffixPLPMatcher = getSuffixUrlMatcher({
+                marker: 'c',
+                paramName: 'categoryCode',
+            });
+            return service.getCombined([defaultMatcher, suffixPLPMatcher]);
+        };
+        return factory;
+    }
+    /**
+     * Injection token with url matcher factory for PLP.
+     * The provided url matcher matches both:
+     * - the configured `paths` from routing config and
+     * - custom pattern  `** / c / :categoryCode`
+     *
+     * If the this matcher doesn't fit the requirements, it can be replaced with the DEFAULT_URL_MATCHER
+     * or additional matchers can be added for a specific route.
+     *
+     * Note: Matchers will "match" a route, but do not contribute to the creation of the route, nor do they guard routes.
+     */
+    var PRODUCT_LISTING_URL_MATCHER = new core.InjectionToken('PRODUCT_LISTING_URL_MATCHER', {
+        providedIn: 'root',
+        factory: function () {
+            return getProductListingUrlMatcherFactory(core.inject(core$1.UrlMatcherService), core.inject(core$1.DEFAULT_URL_MATCHER));
         },
-    };
+    });
+
+    var ɵ0$b = { pageLabel: 'search', cxRoute: 'search' }, ɵ1$1 = { cxRoute: 'brand' }, ɵ2 = { cxRoute: 'category' };
     var ProductListingPageModule = /** @class */ (function () {
         function ProductListingPageModule() {
         }
@@ -17651,21 +17799,26 @@
                             path: null,
                             canActivate: [CmsPageGuard],
                             component: PageLayoutComponent,
-                            data: ɵ1$2,
+                            data: ɵ1$1,
                         },
                         {
+                            // The 'category' route  may include a greedy suffix url matcher '**/c/:categoryCode'
+                            // So not to shadow the specific 'brand' route, the 'category' is the last route in the sequence.
                             path: null,
                             canActivate: [CmsPageGuard],
                             component: PageLayoutComponent,
                             data: ɵ2,
                         },
-                        {
-                            matcher: suffixUrlMatcher,
-                            canActivate: [CmsPageGuard],
-                            component: PageLayoutComponent,
-                            data: ɵ3,
-                        },
                     ]),
+                    core$1.ConfigModule.withConfig({
+                        routing: {
+                            routes: {
+                                category: {
+                                    matchers: [PRODUCT_LISTING_URL_MATCHER],
+                                },
+                            },
+                        },
+                    }),
                 ],
             })
         ], ProductListingPageModule);
@@ -17813,98 +17966,6 @@
             },
         };
     }
-
-    var defaultStorefrontRoutesConfig = {
-        home: { paths: [''] },
-        notFound: { paths: ['not-found'] },
-        cart: { paths: ['cart'] },
-        // semantic links for login related pages
-        login: { paths: ['login'], protected: false },
-        register: { paths: ['login/register'], protected: false },
-        forgotPassword: { paths: ['login/forgot-password'], protected: false },
-        resetPassword: { paths: ['login/pw/change'], protected: false },
-        logout: { paths: ['logout'] },
-        checkoutLogin: { paths: ['checkout-login'] },
-        checkout: { paths: ['checkout'] },
-        checkoutShippingAddress: { paths: ['checkout/shipping-address'] },
-        checkoutDeliveryMode: { paths: ['checkout/delivery-mode'] },
-        checkoutPaymentDetails: { paths: ['checkout/payment-details'] },
-        checkoutReviewOrder: { paths: ['checkout/review-order'] },
-        orderConfirmation: { paths: ['order-confirmation'] },
-        // plp routes
-        search: { paths: ['search/:query'] },
-        category: {
-            paths: ['category/:categoryCode'],
-            paramsMapping: { categoryCode: 'code' },
-        },
-        brand: { paths: ['Brands/:brandName/c/:brandCode'] },
-        // pdp routes
-        product: {
-            paths: ['product/:productCode/:name'],
-            paramsMapping: { productCode: 'code' },
-        },
-        termsAndConditions: { paths: ['terms-and-conditions'] },
-        orders: {
-            paths: ['my-account/orders'],
-        },
-        orderDetails: {
-            paths: ['my-account/order/:orderCode'],
-            paramsMapping: { orderCode: 'code' },
-        },
-        orderGuest: {
-            paths: ['guest/order/:orderCode'],
-            paramsMapping: { orderCode: 'code' },
-        },
-        orderReturn: {
-            paths: ['my-account/order/return/:orderCode'],
-            paramsMapping: { orderCode: 'code' },
-        },
-        orderReturnConfirmation: {
-            paths: ['my-account/order/return/confirmation/:orderCode'],
-            paramsMapping: { orderCode: 'code' },
-        },
-        orderCancel: {
-            paths: ['my-account/order/cancel/:orderCode'],
-            paramsMapping: { orderCode: 'code' },
-        },
-        orderCancelConfirmation: {
-            paths: ['my-account/order/cancel/confirmation/:orderCode'],
-            paramsMapping: { orderCode: 'code' },
-        },
-        returnRequestDetails: {
-            paths: ['my-account/return-request/:returnCode'],
-            paramsMapping: { returnCode: 'rma' },
-        },
-        coupons: { paths: ['my-account/coupons'] },
-        couponClaim: {
-            paths: ['my-account/coupon/claim/:couponCode'],
-            paramsMapping: { couponCode: 'code' },
-        },
-    };
-    var defaultRoutingConfig = {
-        routing: {
-            routes: defaultStorefrontRoutesConfig,
-        },
-    };
-
-    var RoutingModule = /** @class */ (function () {
-        function RoutingModule() {
-        }
-        RoutingModule_1 = RoutingModule;
-        RoutingModule.forRoot = function () {
-            return {
-                ngModule: RoutingModule_1,
-                providers: [core$1.provideConfig(defaultRoutingConfig)],
-            };
-        };
-        var RoutingModule_1;
-        RoutingModule = RoutingModule_1 = __decorate([
-            core.NgModule({
-                imports: [core$1.RoutingModule.forRoot(), CmsRouteModule],
-            })
-        ], RoutingModule);
-        return RoutingModule;
-    }());
 
     var StorefrontFoundationModule = /** @class */ (function () {
         function StorefrontFoundationModule() {
@@ -18217,6 +18278,8 @@
     exports.OutletService = OutletService;
     exports.PAGE_LAYOUT_HANDLER = PAGE_LAYOUT_HANDLER;
     exports.PLPAccessibilityLayoutConfig = PLPAccessibilityLayoutConfig;
+    exports.PRODUCT_DETAILS_URL_MATCHER = PRODUCT_DETAILS_URL_MATCHER;
+    exports.PRODUCT_LISTING_URL_MATCHER = PRODUCT_LISTING_URL_MATCHER;
     exports.PWAModuleConfig = PWAModuleConfig;
     exports.PageComponentModule = PageComponentModule;
     exports.PageLayoutComponent = PageLayoutComponent;
@@ -18293,6 +18356,7 @@
     exports.ReturnRequestTotalsComponent = ReturnRequestTotalsComponent;
     exports.ReviewSubmitComponent = ReviewSubmitComponent;
     exports.ReviewSubmitModule = ReviewSubmitModule;
+    exports.RoutingModule = RoutingModule;
     exports.SCHEMA_BUILDER = SCHEMA_BUILDER;
     exports.SaveForLaterComponent = SaveForLaterComponent;
     exports.SaveForLaterModule = SaveForLaterModule;
@@ -18369,6 +18433,7 @@
     exports.defaultScrollConfig = defaultScrollConfig;
     exports.fontawesomeIconConfig = fontawesomeIconConfig;
     exports.getStructuredDataFactory = getStructuredDataFactory;
+    exports.getSuffixUrlMatcher = getSuffixUrlMatcher;
     exports.headerComponents = headerComponents;
     exports.initSeoService = initSeoService;
     exports.pwaConfigurationFactory = pwaConfigurationFactory;
@@ -18378,22 +18443,19 @@
     exports.ɵ0 = ɵ0$1;
     exports.ɵ1 = ɵ1;
     exports.ɵ2 = ɵ2;
-    exports.ɵ3 = ɵ3;
     exports.ɵa = AsmLoaderModule;
     exports.ɵb = asmFactory;
     exports.ɵba = SkipLinkComponent;
     exports.ɵbb = SkipLinkService;
     exports.ɵbc = SkipLinkDirective;
     exports.ɵbd = MyCouponsComponentService;
-    exports.ɵbe = suffixUrlMatcher;
-    exports.ɵbf = addCmsRoute;
-    exports.ɵbg = htmlLangProvider;
-    exports.ɵbh = setHtmlLangAttribute;
-    exports.ɵbi = AnonymousConsentsModule;
-    exports.ɵbj = AnonymousConsentDialogComponent;
-    exports.ɵbk = RoutingModule;
-    exports.ɵbl = defaultStorefrontRoutesConfig;
-    exports.ɵbm = defaultRoutingConfig;
+    exports.ɵbe = addCmsRoute;
+    exports.ɵbf = defaultStorefrontRoutesConfig;
+    exports.ɵbg = defaultRoutingConfig;
+    exports.ɵbh = htmlLangProvider;
+    exports.ɵbi = setHtmlLangAttribute;
+    exports.ɵbj = AnonymousConsentsModule;
+    exports.ɵbk = AnonymousConsentDialogComponent;
     exports.ɵc = ComponentMapperService;
     exports.ɵd = AsmEnablerService;
     exports.ɵe = AsmMainUiComponent;

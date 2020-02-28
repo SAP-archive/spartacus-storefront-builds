@@ -18,11 +18,9 @@ export { MyCouponsComponentService as ɵbd } from './cms-components/myaccount/my
 export { ReturnRequestService as ɵt } from './cms-components/myaccount/order/return-request-detail/return-request.service';
 export { ComponentMapperService as ɵc } from './cms-structure/page/component/component-mapper.service';
 export { AddToHomeScreenService as ɵu } from './cms-structure/pwa/services/add-to-home-screen.service';
-export { addCmsRoute as ɵbf } from './cms-structure/routing/cms-route/add-cms-route';
-export { defaultRoutingConfig as ɵbm, defaultStorefrontRoutesConfig as ɵbl } from './cms-structure/routing/default-routing-config';
-export { RoutingModule as ɵbk } from './cms-structure/routing/routing.module';
-export { suffixUrlMatcher as ɵbe } from './cms-structure/routing/suffix-routes/suffix-url-matcher';
-export { htmlLangProvider as ɵbg, setHtmlLangAttribute as ɵbh } from './cms-structure/seo/html-lang-provider';
+export { addCmsRoute as ɵbe } from './cms-structure/routing/cms-route/add-cms-route';
+export { defaultRoutingConfig as ɵbg, defaultStorefrontRoutesConfig as ɵbf } from './cms-structure/routing/default-routing-config';
+export { htmlLangProvider as ɵbh, setHtmlLangAttribute as ɵbi } from './cms-structure/seo/html-lang-provider';
 export { CmsGuardsService as ɵs } from './cms-structure/services/cms-guards.service';
 export { CmsI18nService as ɵr } from './cms-structure/services/cms-i18n.service';
 export { CmsMappingService as ɵq } from './cms-structure/services/cms-mapping.service';
@@ -33,6 +31,6 @@ export { SkipLinkConfig as ɵy, SkipLinkScrollPosition as ɵz } from './layout/a
 export { SkipLinkDirective as ɵbc } from './layout/a11y/skip-link/directive/skip-link.directive';
 export { SkipLinkService as ɵbb } from './layout/a11y/skip-link/service/skip-link.service';
 export { SkipLinkModule as ɵv, skipLinkFactory as ɵw } from './layout/a11y/skip-link/skip-link.module';
-export { AnonymousConsentsModule as ɵbi } from './shared/components/anonymous-consents/anonymous-consents.module';
-export { AnonymousConsentDialogComponent as ɵbj } from './shared/components/anonymous-consents/dialog/anonymous-consent-dialog.component';
+export { AnonymousConsentsModule as ɵbj } from './shared/components/anonymous-consents/anonymous-consents.module';
+export { AnonymousConsentDialogComponent as ɵbk } from './shared/components/anonymous-consents/dialog/anonymous-consent-dialog.component';
 export { AutoFocusDirectiveModule as ɵl } from './shared/directives/auto-focus/auto-focus.directive.module';

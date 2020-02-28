@@ -1,13 +1,4 @@
-import { Route, UrlMatchResult, UrlSegment, UrlSegmentGroup } from '@angular/router';
-export interface SuffixRoute extends Route {
-    data: {
-        cxSuffixUrlMatcher: {
-            marker: string;
-            paramName: string;
-            precedingParamName?: string;
-        };
-    };
-}
+import { UrlMatchResult, UrlSegment } from '@angular/router';
 /**
  * Matches the pattern '[ ** / ] marker / :paramName'
  *
@@ -16,5 +7,15 @@ export interface SuffixRoute extends Route {
  * @param precedingParamName name of the parameter for every preceding url segment
  *        i.e. `param` will result in `param0`, `param1`, ...
  */
-export declare function suffixUrlMatcher(segments: UrlSegment[], _segmentGroup: UrlSegmentGroup, route: SuffixRoute): UrlMatchResult | null;
-export declare function findLastIndex<T>(elements: T[], predicate: (el: T) => boolean): number;
+export declare function getSuffixUrlMatcher({ marker, paramName, precedingParamName, }: {
+    marker: string;
+    paramName: string;
+    precedingParamName?: string;
+}): {
+    (segments: UrlSegment[]): UrlMatchResult;
+    '_suffixRouteConfig': {
+        marker: string;
+        paramName: string;
+        precedingParamName: string;
+    };
+};
