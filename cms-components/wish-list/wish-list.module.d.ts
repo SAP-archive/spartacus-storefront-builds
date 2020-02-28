@@ -13,4 +13,4 @@ export declare class WishListModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<WishListModule>;
 }
 
-//# sourceMappingURL=wish-list.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid2lzaC1saXN0Lm1vZHVsZS5kLnRzIiwic291cmNlcyI6WyJ3aXNoLWxpc3QubW9kdWxlLmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBOzs7QUFDQTsiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVjbGFyZSBjbGFzcyBXaXNoTGlzdE1vZHVsZSB7XG59XG4iXX0=

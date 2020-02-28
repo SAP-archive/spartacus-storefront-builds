@@ -8,4 +8,4 @@ export declare class BreadcrumbModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<BreadcrumbModule>;
 }
 
-//# sourceMappingURL=breadcrumb.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYnJlYWRjcnVtYi5tb2R1bGUuZC50cyIsInNvdXJjZXMiOlsiYnJlYWRjcnVtYi5tb2R1bGUuZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7OztBQUFBOzs7QUFDQTsiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVjbGFyZSBjbGFzcyBCcmVhZGNydW1iTW9kdWxlIHtcbn1cbiJdfQ==

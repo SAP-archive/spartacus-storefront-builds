@@ -9,4 +9,4 @@ export declare class AddToWishListModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<AddToWishListModule>;
 }
 
-//# sourceMappingURL=add-to-wish-list.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYWRkLXRvLXdpc2gtbGlzdC5tb2R1bGUuZC50cyIsInNvdXJjZXMiOlsiYWRkLXRvLXdpc2gtbGlzdC5tb2R1bGUuZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7QUFBQTs7O0FBQ0E7Iiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlY2xhcmUgY2xhc3MgQWRkVG9XaXNoTGlzdE1vZHVsZSB7XG59XG4iXX0=

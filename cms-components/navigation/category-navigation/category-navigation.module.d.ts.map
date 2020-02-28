@@ -1,1 +1,0 @@
-{"version":3,"file":"category-navigation.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/navigation/category-navigation/category-navigation.module.d.ts"],"sourcesContent":["export declare class CategoryNavigationModule {\n}\n"],"names":[],"mappings":";;;;;AAAA;;;AACA;"}

@@ -11,4 +11,4 @@ export declare class CartDetailsModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<CartDetailsModule>;
 }
 
-//# sourceMappingURL=cart-details.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2FydC1kZXRhaWxzLm1vZHVsZS5kLnRzIiwic291cmNlcyI6WyJjYXJ0LWRldGFpbHMubW9kdWxlLmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7QUFBQTs7O0FBQ0E7Iiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlY2xhcmUgY2xhc3MgQ2FydERldGFpbHNNb2R1bGUge1xufVxuIl19

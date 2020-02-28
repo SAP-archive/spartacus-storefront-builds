@@ -9,4 +9,4 @@ export declare class ProductReviewsModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<ProductReviewsModule>;
 }
 
-//# sourceMappingURL=product-reviews.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvZHVjdC1yZXZpZXdzLm1vZHVsZS5kLnRzIiwic291cmNlcyI6WyJwcm9kdWN0LXJldmlld3MubW9kdWxlLmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBQUE7OztBQUNBOyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWNsYXJlIGNsYXNzIFByb2R1Y3RSZXZpZXdzTW9kdWxlIHtcbn1cbiJdfQ==

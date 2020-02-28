@@ -1,1 +1,0 @@
-{"version":3,"file":"item-counter.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/shared/components/item-counter/item-counter.module.d.ts"],"sourcesContent":["export declare class ItemCounterModule {\n}\n"],"names":[],"mappings":";;;;AAAA;;;AACA;"}

@@ -5,4 +5,4 @@ export declare class ProductDetailsPageModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<ProductDetailsPageModule>;
 }
 
-//# sourceMappingURL=product-details-page.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvZHVjdC1kZXRhaWxzLXBhZ2UubW9kdWxlLmQudHMiLCJzb3VyY2VzIjpbInByb2R1Y3QtZGV0YWlscy1wYWdlLm1vZHVsZS5kLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUE7OztBQUNBOyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWNsYXJlIGNsYXNzIFByb2R1Y3REZXRhaWxzUGFnZU1vZHVsZSB7XG59XG4iXX0=

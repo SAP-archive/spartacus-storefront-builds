@@ -1,1 +1,0 @@
-{"version":3,"file":"amend-order-actions.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/myaccount/order/amend-order/amend-order-actions/amend-order-actions.module.d.ts"],"sourcesContent":["export declare class AmendOrderActionsModule {\n}\n"],"names":[],"mappings":";;;;;AAAA;;;AACA;"}

@@ -10,4 +10,4 @@ export declare class UpdateEmailModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<UpdateEmailModule>;
 }
 
-//# sourceMappingURL=update-email.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidXBkYXRlLWVtYWlsLm1vZHVsZS5kLnRzIiwic291cmNlcyI6WyJ1cGRhdGUtZW1haWwubW9kdWxlLmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUFBOzs7QUFDQTsiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVjbGFyZSBjbGFzcyBVcGRhdGVFbWFpbE1vZHVsZSB7XG59XG4iXX0=

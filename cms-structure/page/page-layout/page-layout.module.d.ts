@@ -8,4 +8,4 @@ export declare class PageLayoutModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<PageLayoutModule>;
 }
 
-//# sourceMappingURL=page-layout.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFnZS1sYXlvdXQubW9kdWxlLmQudHMiLCJzb3VyY2VzIjpbInBhZ2UtbGF5b3V0Lm1vZHVsZS5kLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUE7OztBQUNBOyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWNsYXJlIGNsYXNzIFBhZ2VMYXlvdXRNb2R1bGUge1xufVxuIl19

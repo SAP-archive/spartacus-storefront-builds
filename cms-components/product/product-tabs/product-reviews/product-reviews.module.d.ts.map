@@ -1,1 +1,0 @@
-{"version":3,"file":"product-reviews.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/product/product-tabs/product-reviews/product-reviews.module.d.ts"],"sourcesContent":["export declare class ProductReviewsModule {\n}\n"],"names":[],"mappings":";;;;;;AAAA;;;AACA;"}

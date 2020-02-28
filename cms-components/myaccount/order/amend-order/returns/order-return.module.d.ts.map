@@ -1,1 +1,0 @@
-{"version":3,"file":"order-return.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/myaccount/order/amend-order/returns/order-return.module.d.ts"],"sourcesContent":["export declare class OrderReturnModule {\n}\n"],"names":[],"mappings":";;;AAAA;;;AACA;"}

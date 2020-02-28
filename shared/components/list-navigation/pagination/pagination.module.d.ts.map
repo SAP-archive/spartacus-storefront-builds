@@ -1,1 +1,0 @@
-{"version":3,"file":"pagination.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/shared/components/list-navigation/pagination/pagination.module.d.ts"],"sourcesContent":["export declare class PaginationModule {\n}\n"],"names":[],"mappings":";;;;AAAA;;;AACA;"}

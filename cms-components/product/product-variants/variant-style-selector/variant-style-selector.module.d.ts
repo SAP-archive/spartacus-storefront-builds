@@ -8,4 +8,4 @@ export declare class VariantStyleSelectorModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<VariantStyleSelectorModule>;
 }
 
-//# sourceMappingURL=variant-style-selector.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidmFyaWFudC1zdHlsZS1zZWxlY3Rvci5tb2R1bGUuZC50cyIsInNvdXJjZXMiOlsidmFyaWFudC1zdHlsZS1zZWxlY3Rvci5tb2R1bGUuZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7OztBQUFBOzs7QUFDQTsiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVjbGFyZSBjbGFzcyBWYXJpYW50U3R5bGVTZWxlY3Rvck1vZHVsZSB7XG59XG4iXX0=

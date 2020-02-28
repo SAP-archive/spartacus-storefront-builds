@@ -10,4 +10,4 @@ export declare class FooterNavigationModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<FooterNavigationModule>;
 }
 
-//# sourceMappingURL=footer-navigation.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9vdGVyLW5hdmlnYXRpb24ubW9kdWxlLmQudHMiLCJzb3VyY2VzIjpbImZvb3Rlci1uYXZpZ2F0aW9uLm1vZHVsZS5kLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFBQTs7O0FBQ0E7Iiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlY2xhcmUgY2xhc3MgRm9vdGVyTmF2aWdhdGlvbk1vZHVsZSB7XG59XG4iXX0=

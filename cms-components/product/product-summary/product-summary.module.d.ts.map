@@ -1,1 +1,0 @@
-{"version":3,"file":"product-summary.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/product/product-summary/product-summary.module.d.ts"],"sourcesContent":["export declare class ProductSummaryModule {\n}\n"],"names":[],"mappings":";;;;;AAAA;;;AACA;"}

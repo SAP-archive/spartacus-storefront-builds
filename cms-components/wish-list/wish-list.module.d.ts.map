@@ -1,1 +1,0 @@
-{"version":3,"file":"wish-list.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/wish-list/wish-list.module.d.ts"],"sourcesContent":["export declare class WishListModule {\n}\n"],"names":[],"mappings":";;;;;;;;;;AAAA;;;AACA;"}

@@ -87,7 +87,7 @@ function AnonymousConsentDialogComponent_ng_template_4_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "button", 6);
-    ɵngcc0.ɵɵlistener("click", function AnonymousConsentDialogComponent_ng_template_4_Template_button_click_4_listener($event) { ɵngcc0.ɵɵrestoreView(_r16); const ctx_r15 = ɵngcc0.ɵɵnextContext(); return ctx_r15.closeModal("Cross click"); });
+    ɵngcc0.ɵɵlistener("click", function AnonymousConsentDialogComponent_ng_template_4_Template_button_click_4_listener() { ɵngcc0.ɵɵrestoreView(_r16); const ctx_r15 = ɵngcc0.ɵɵnextContext(); return ctx_r15.closeModal("Cross click"); });
     ɵngcc0.ɵɵelementStart(5, "span", 7);
     ɵngcc0.ɵɵelement(6, "cx-icon", 8);
     ɵngcc0.ɵɵelementEnd();
@@ -97,12 +97,12 @@ function AnonymousConsentDialogComponent_ng_template_4_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵtemplate(8, AnonymousConsentDialogComponent_ng_template_4_div_8_Template, 4, 3, "div", 10);
     ɵngcc0.ɵɵelementStart(9, "div", 11);
     ɵngcc0.ɵɵelementStart(10, "a", 12);
-    ɵngcc0.ɵɵlistener("click", function AnonymousConsentDialogComponent_ng_template_4_Template_a_click_10_listener($event) { ɵngcc0.ɵɵrestoreView(_r16); const ctx_r17 = ɵngcc0.ɵɵnextContext(); return ctx_r17.rejectAll(); });
+    ɵngcc0.ɵɵlistener("click", function AnonymousConsentDialogComponent_ng_template_4_Template_a_click_10_listener() { ɵngcc0.ɵɵrestoreView(_r16); const ctx_r17 = ɵngcc0.ɵɵnextContext(); return ctx_r17.rejectAll(); });
     ɵngcc0.ɵɵtext(11);
     ɵngcc0.ɵɵpipe(12, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(13, "a", 12);
-    ɵngcc0.ɵɵlistener("click", function AnonymousConsentDialogComponent_ng_template_4_Template_a_click_13_listener($event) { ɵngcc0.ɵɵrestoreView(_r16); const ctx_r18 = ɵngcc0.ɵɵnextContext(); return ctx_r18.allowAll(); });
+    ɵngcc0.ɵɵlistener("click", function AnonymousConsentDialogComponent_ng_template_4_Template_a_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r16); const ctx_r18 = ɵngcc0.ɵɵnextContext(); return ctx_r18.allowAll(); });
     ɵngcc0.ɵɵtext(14);
     ɵngcc0.ɵɵpipe(15, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -143,12 +143,12 @@ function AnonymousConsentManagementBannerComponent_ng_container_0_Template(rf, c
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(11, "div", 7);
     ɵngcc0.ɵɵelementStart(12, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function AnonymousConsentManagementBannerComponent_ng_container_0_Template_button_click_12_listener($event) { ɵngcc0.ɵɵrestoreView(_r22); const ctx_r21 = ɵngcc0.ɵɵnextContext(); return ctx_r21.viewDetails(); });
+    ɵngcc0.ɵɵlistener("click", function AnonymousConsentManagementBannerComponent_ng_container_0_Template_button_click_12_listener() { ɵngcc0.ɵɵrestoreView(_r22); const ctx_r21 = ɵngcc0.ɵɵnextContext(); return ctx_r21.viewDetails(); });
     ɵngcc0.ɵɵtext(13);
     ɵngcc0.ɵɵpipe(14, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(15, "button", 9);
-    ɵngcc0.ɵɵlistener("click", function AnonymousConsentManagementBannerComponent_ng_container_0_Template_button_click_15_listener($event) { ɵngcc0.ɵɵrestoreView(_r22); const ctx_r23 = ɵngcc0.ɵɵnextContext(); return ctx_r23.allowAll(); });
+    ɵngcc0.ɵɵlistener("click", function AnonymousConsentManagementBannerComponent_ng_container_0_Template_button_click_15_listener() { ɵngcc0.ɵɵrestoreView(_r22); const ctx_r23 = ɵngcc0.ɵɵnextContext(); return ctx_r23.allowAll(); });
     ɵngcc0.ɵɵtext(16);
     ɵngcc0.ɵɵpipe(17, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -245,7 +245,7 @@ function AddToHomeScreenBannerComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(13, "button", 3);
-    ɵngcc0.ɵɵlistener("click", function AddToHomeScreenBannerComponent_div_0_Template_button_click_13_listener($event) { ɵngcc0.ɵɵrestoreView(_r43); const ctx_r42 = ɵngcc0.ɵɵnextContext(); return ctx_r42.prompt(); });
+    ɵngcc0.ɵɵlistener("click", function AddToHomeScreenBannerComponent_div_0_Template_button_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r43); const ctx_r42 = ɵngcc0.ɵɵnextContext(); return ctx_r42.prompt(); });
     ɵngcc0.ɵɵtext(14);
     ɵngcc0.ɵɵpipe(15, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -271,7 +271,7 @@ function AsmMainUiComponent_cx_asm_session_timer_8_Template(rf, ctx) { if (rf & 
 function AsmMainUiComponent_a_10_Template(rf, ctx) { if (rf & 1) {
     const _r52 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 10);
-    ɵngcc0.ɵɵlistener("click", function AsmMainUiComponent_a_10_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r52); const ctx_r51 = ɵngcc0.ɵɵnextContext(); return ctx_r51.hideUi(); });
+    ɵngcc0.ɵɵlistener("click", function AsmMainUiComponent_a_10_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r52); const ctx_r51 = ɵngcc0.ɵɵnextContext(); return ctx_r51.hideUi(); });
     ɵngcc0.ɵɵpipe(1, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
@@ -280,7 +280,7 @@ function AsmMainUiComponent_a_10_Template(rf, ctx) { if (rf & 1) {
 function AsmMainUiComponent_a_13_Template(rf, ctx) { if (rf & 1) {
     const _r54 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 11);
-    ɵngcc0.ɵɵlistener("click", function AsmMainUiComponent_a_13_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r54); const ctx_r53 = ɵngcc0.ɵɵnextContext(); return ctx_r53.logout(); });
+    ɵngcc0.ɵɵlistener("click", function AsmMainUiComponent_a_13_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r54); const ctx_r53 = ɵngcc0.ɵɵnextContext(); return ctx_r53.logout(); });
     ɵngcc0.ɵɵpipe(1, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
@@ -342,7 +342,7 @@ function CSAgentLoginFormComponent_form_0_div_8_Template(rf, ctx) { if (rf & 1) 
 function CSAgentLoginFormComponent_form_0_Template(rf, ctx) { if (rf & 1) {
     const _r68 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "form", 2);
-    ɵngcc0.ɵɵlistener("submit", function CSAgentLoginFormComponent_form_0_Template_form_submit_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r68); const ctx_r67 = ɵngcc0.ɵɵnextContext(); return ctx_r67.onSubmit(); });
+    ɵngcc0.ɵɵlistener("submit", function CSAgentLoginFormComponent_form_0_Template_form_submit_0_listener() { ɵngcc0.ɵɵrestoreView(_r68); const ctx_r67 = ɵngcc0.ɵɵnextContext(); return ctx_r67.onSubmit(); });
     ɵngcc0.ɵɵelementStart(1, "label");
     ɵngcc0.ɵɵelement(2, "input", 3);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
@@ -386,7 +386,7 @@ function CustomerEmulationComponent_ng_container_0_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelement(1, "input", 2);
     ɵngcc0.ɵɵelementStart(2, "button", 3);
-    ɵngcc0.ɵɵlistener("click", function CustomerEmulationComponent_ng_container_0_Template_button_click_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r73); const ctx_r72 = ɵngcc0.ɵɵnextContext(); return ctx_r72.logoutCustomer(); });
+    ɵngcc0.ɵɵlistener("click", function CustomerEmulationComponent_ng_container_0_Template_button_click_2_listener() { ɵngcc0.ɵɵrestoreView(_r73); const ctx_r72 = ɵngcc0.ɵɵnextContext(); return ctx_r72.logoutCustomer(); });
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -412,7 +412,7 @@ const _c6 = ["searchTerm"];
 function CustomerSelectionComponent_div_7_a_2_Template(rf, ctx) { if (rf & 1) {
     const _r83 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 9);
-    ɵngcc0.ɵɵlistener("click", function CustomerSelectionComponent_div_7_a_2_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r83); const result_r81 = ctx.$implicit; const ctx_r82 = ɵngcc0.ɵɵnextContext(2); return ctx_r82.selectCustomerFromList(result_r81); });
+    ɵngcc0.ɵɵlistener("click", function CustomerSelectionComponent_div_7_a_2_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r83); const result_r81 = ctx.$implicit; const ctx_r82 = ɵngcc0.ɵɵnextContext(2); return ctx_r82.selectCustomerFromList(result_r81); });
     ɵngcc0.ɵɵelementStart(1, "span", 10);
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵelementEnd();
@@ -430,7 +430,7 @@ function CustomerSelectionComponent_div_7_a_2_Template(rf, ctx) { if (rf & 1) {
 function CustomerSelectionComponent_div_7_a_3_Template(rf, ctx) { if (rf & 1) {
     const _r85 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 9);
-    ɵngcc0.ɵɵlistener("click", function CustomerSelectionComponent_div_7_a_3_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r85); const ctx_r84 = ɵngcc0.ɵɵnextContext(2); return ctx_r84.closeResults(); });
+    ɵngcc0.ɵɵlistener("click", function CustomerSelectionComponent_div_7_a_3_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r85); const ctx_r84 = ɵngcc0.ɵɵnextContext(2); return ctx_r84.closeResults(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -451,7 +451,7 @@ function CustomerSelectionComponent_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵproperty("ngForOf", results_r77.entries);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(4, 2, ctx_r75.searchResultsLoading$) && _r74.value.length >= 3 && (!!results_r77.entries && results_r77.entries.length <= 0));
+    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(4, 2, ctx_r75.searchResultsLoading$) && _r74.value.length >= 3 && !!results_r77.entries && results_r77.entries.length <= 0);
 } }
 function CustomerSelectionComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 5);
@@ -508,7 +508,7 @@ function AddedToCartDialogComponent_ng_container_2_div_8_Template(rf, ctx) { if 
     ɵngcc0.ɵɵelementStart(1, "div", 10);
     ɵngcc0.ɵɵelementStart(2, "div", 11);
     ɵngcc0.ɵɵelementStart(3, "cx-cart-item", 12);
-    ɵngcc0.ɵɵlistener("view", function AddedToCartDialogComponent_ng_container_2_div_8_Template_cx_cart_item_view_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r98); const ctx_r97 = ɵngcc0.ɵɵnextContext(2); return ctx_r97.dismissModal("Product selected"); });
+    ɵngcc0.ɵɵlistener("view", function AddedToCartDialogComponent_ng_container_2_div_8_Template_cx_cart_item_view_3_listener() { ɵngcc0.ɵɵrestoreView(_r98); const ctx_r97 = ɵngcc0.ɵɵnextContext(2); return ctx_r97.dismissModal("Product selected"); });
     ɵngcc0.ɵɵpipe(4, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -519,13 +519,13 @@ function AddedToCartDialogComponent_ng_container_2_div_8_Template(rf, ctx) { if 
     ɵngcc0.ɵɵtemplate(9, AddedToCartDialogComponent_ng_container_2_div_8_ng_container_9_Template, 3, 3, "ng-container", 16);
     ɵngcc0.ɵɵelementStart(10, "div", 17);
     ɵngcc0.ɵɵelementStart(11, "a", 18);
-    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_container_2_div_8_Template_a_click_11_listener($event) { ɵngcc0.ɵɵrestoreView(_r98); const ctx_r99 = ɵngcc0.ɵɵnextContext(2); return !ctx_r99.form.dirty && ctx_r99.dismissModal("View Cart click"); });
+    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_container_2_div_8_Template_a_click_11_listener() { ɵngcc0.ɵɵrestoreView(_r98); const ctx_r99 = ɵngcc0.ɵɵnextContext(2); return !ctx_r99.form.dirty && ctx_r99.dismissModal("View Cart click"); });
     ɵngcc0.ɵɵpipe(12, "cxUrl");
     ɵngcc0.ɵɵtext(13);
     ɵngcc0.ɵɵpipe(14, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(15, "a", 19);
-    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_container_2_div_8_Template_a_click_15_listener($event) { ɵngcc0.ɵɵrestoreView(_r98); const ctx_r100 = ɵngcc0.ɵɵnextContext(2); return !ctx_r100.form.dirty && ctx_r100.dismissModal("Proceed To Checkout click"); });
+    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_container_2_div_8_Template_a_click_15_listener() { ɵngcc0.ɵɵrestoreView(_r98); const ctx_r100 = ɵngcc0.ɵɵnextContext(2); return !ctx_r100.form.dirty && ctx_r100.dismissModal("Proceed To Checkout click"); });
     ɵngcc0.ɵɵpipe(16, "cxUrl");
     ɵngcc0.ɵɵtext(17);
     ɵngcc0.ɵɵpipe(18, "cxTranslate");
@@ -563,7 +563,7 @@ function AddedToCartDialogComponent_ng_container_2_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_container_2_Template_button_click_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r102); const ctx_r101 = ɵngcc0.ɵɵnextContext(); return ctx_r101.dismissModal("Cross click"); });
+    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_container_2_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r102); const ctx_r101 = ɵngcc0.ɵɵnextContext(); return ctx_r101.dismissModal("Cross click"); });
     ɵngcc0.ɵɵelementStart(6, "span", 6);
     ɵngcc0.ɵɵelement(7, "cx-icon", 7);
     ɵngcc0.ɵɵelementEnd();
@@ -589,7 +589,7 @@ function AddedToCartDialogComponent_ng_template_4_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_template_4_Template_button_click_4_listener($event) { ɵngcc0.ɵɵrestoreView(_r104); const ctx_r103 = ɵngcc0.ɵɵnextContext(); return ctx_r103.dismissModal("Cross click"); });
+    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_template_4_Template_button_click_4_listener() { ɵngcc0.ɵɵrestoreView(_r104); const ctx_r103 = ɵngcc0.ɵɵnextContext(); return ctx_r103.dismissModal("Cross click"); });
     ɵngcc0.ɵɵelementStart(5, "span", 6);
     ɵngcc0.ɵɵelement(6, "cx-icon", 7);
     ɵngcc0.ɵɵelementEnd();
@@ -651,7 +651,7 @@ function AddToCartComponent_form_0_button_2_Template(rf, ctx) { if (rf & 1) {
 function AddToCartComponent_form_0_Template(rf, ctx) { if (rf & 1) {
     const _r110 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "form", 1);
-    ɵngcc0.ɵɵlistener("submit", function AddToCartComponent_form_0_Template_form_submit_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r110); const ctx_r109 = ɵngcc0.ɵɵnextContext(); return ctx_r109.addToCart(); });
+    ɵngcc0.ɵɵlistener("submit", function AddToCartComponent_form_0_Template_form_submit_0_listener() { ɵngcc0.ɵɵrestoreView(_r110); const ctx_r109 = ɵngcc0.ɵɵnextContext(); return ctx_r109.addToCart(); });
     ɵngcc0.ɵɵtemplate(1, AddToCartComponent_form_0_div_1_Template, 9, 9, "div", 2);
     ɵngcc0.ɵɵtemplate(2, AddToCartComponent_form_0_button_2_Template, 3, 4, "button", 3);
     ɵngcc0.ɵɵelementEnd();
@@ -724,14 +724,14 @@ function CardComponent_div_0_div_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 20);
     ɵngcc0.ɵɵelementStart(1, "div", 21);
     ɵngcc0.ɵɵelementStart(2, "button", 22);
-    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_10_Template_button_click_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r122); const ctx_r121 = ɵngcc0.ɵɵnextContext(2); return ctx_r121.cancelEdit(); });
+    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_10_Template_button_click_2_listener() { ɵngcc0.ɵɵrestoreView(_r122); const ctx_r121 = ɵngcc0.ɵɵnextContext(2); return ctx_r121.cancelEdit(); });
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "div", 21);
     ɵngcc0.ɵɵelementStart(6, "button", 23);
-    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_10_Template_button_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r122); const ctx_r123 = ɵngcc0.ɵɵnextContext(2); return ctx_r123.delete(); });
+    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_10_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r122); const ctx_r123 = ɵngcc0.ɵɵnextContext(2); return ctx_r123.delete(); });
     ɵngcc0.ɵɵtext(7);
     ɵngcc0.ɵɵpipe(8, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -746,7 +746,7 @@ function CardComponent_div_0_div_10_Template(rf, ctx) { if (rf & 1) {
 function CardComponent_div_0_div_11_div_1_a_2_Template(rf, ctx) { if (rf & 1) {
     const _r132 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 28);
-    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_2_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r132); const ctx_r131 = ɵngcc0.ɵɵnextContext(4); return ctx_r131.delete(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_2_Template_a_keydown_enter_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r132); const ctx_r133 = ɵngcc0.ɵɵnextContext(4); return ctx_r133.delete(); });
+    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_2_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r132); const ctx_r131 = ɵngcc0.ɵɵnextContext(4); return ctx_r131.delete(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_2_Template_a_keydown_enter_0_listener() { ɵngcc0.ɵɵrestoreView(_r132); const ctx_r133 = ɵngcc0.ɵɵnextContext(4); return ctx_r133.delete(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
@@ -757,7 +757,7 @@ function CardComponent_div_0_div_11_div_1_a_2_Template(rf, ctx) { if (rf & 1) {
 function CardComponent_div_0_div_11_div_1_a_3_Template(rf, ctx) { if (rf & 1) {
     const _r136 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 28);
-    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_3_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r136); const ctx_r135 = ɵngcc0.ɵɵnextContext(4); return ctx_r135.setDefault(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_3_Template_a_keydown_enter_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r136); const ctx_r137 = ɵngcc0.ɵɵnextContext(4); return ctx_r137.setDefault(); });
+    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_3_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r136); const ctx_r135 = ɵngcc0.ɵɵnextContext(4); return ctx_r135.setDefault(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_3_Template_a_keydown_enter_0_listener() { ɵngcc0.ɵɵrestoreView(_r136); const ctx_r137 = ɵngcc0.ɵɵnextContext(4); return ctx_r137.setDefault(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
@@ -768,7 +768,7 @@ function CardComponent_div_0_div_11_div_1_a_3_Template(rf, ctx) { if (rf & 1) {
 function CardComponent_div_0_div_11_div_1_a_4_Template(rf, ctx) { if (rf & 1) {
     const _r140 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 28);
-    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_4_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r140); const ctx_r139 = ɵngcc0.ɵɵnextContext(4); return ctx_r139.send(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_4_Template_a_keydown_enter_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r140); const ctx_r141 = ɵngcc0.ɵɵnextContext(4); return ctx_r141.send(); });
+    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_4_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r140); const ctx_r139 = ɵngcc0.ɵɵnextContext(4); return ctx_r139.send(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_4_Template_a_keydown_enter_0_listener() { ɵngcc0.ɵɵrestoreView(_r140); const ctx_r141 = ɵngcc0.ɵɵnextContext(4); return ctx_r141.send(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
@@ -779,7 +779,7 @@ function CardComponent_div_0_div_11_div_1_a_4_Template(rf, ctx) { if (rf & 1) {
 function CardComponent_div_0_div_11_div_1_a_5_Template(rf, ctx) { if (rf & 1) {
     const _r144 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 28);
-    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_5_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r144); const ctx_r143 = ɵngcc0.ɵɵnextContext(4); return ctx_r143.edit(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_5_Template_a_keydown_enter_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r144); const ctx_r145 = ɵngcc0.ɵɵnextContext(4); return ctx_r145.edit(); });
+    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_5_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r144); const ctx_r143 = ɵngcc0.ɵɵnextContext(4); return ctx_r143.edit(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_5_Template_a_keydown_enter_0_listener() { ɵngcc0.ɵɵrestoreView(_r144); const ctx_r145 = ɵngcc0.ɵɵnextContext(4); return ctx_r145.edit(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
@@ -880,7 +880,7 @@ function CarouselComponent_ng_container_0_h3_1_Template(rf, ctx) { if (rf & 1) {
 function CarouselComponent_ng_container_0_button_3_Template(rf, ctx) { if (rf & 1) {
     const _r156 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 7);
-    ɵngcc0.ɵɵlistener("click", function CarouselComponent_ng_container_0_button_3_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r156); const size_r149 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r155 = ɵngcc0.ɵɵnextContext(); return ctx_r155.activeSlide = ctx_r155.activeSlide - size_r149; });
+    ɵngcc0.ɵɵlistener("click", function CarouselComponent_ng_container_0_button_3_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r156); const size_r149 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r155 = ɵngcc0.ɵɵnextContext(); return ctx_r155.activeSlide = ctx_r155.activeSlide - size_r149; });
     ɵngcc0.ɵɵelement(1, "cx-icon", 8);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
@@ -940,7 +940,7 @@ function CarouselComponent_ng_container_0_ng_container_5_Template(rf, ctx) { if 
 function CarouselComponent_ng_container_0_button_6_Template(rf, ctx) { if (rf & 1) {
     const _r172 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 14);
-    ɵngcc0.ɵɵlistener("click", function CarouselComponent_ng_container_0_button_6_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r172); const size_r149 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r171 = ɵngcc0.ɵɵnextContext(); return ctx_r171.activeSlide = ctx_r171.activeSlide + size_r149; });
+    ɵngcc0.ɵɵlistener("click", function CarouselComponent_ng_container_0_button_6_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r172); const size_r149 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r171 = ɵngcc0.ɵɵnextContext(); return ctx_r171.activeSlide = ctx_r171.activeSlide + size_r149; });
     ɵngcc0.ɵɵelement(1, "cx-icon", 8);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
@@ -953,7 +953,7 @@ function CarouselComponent_ng_container_0_button_6_Template(rf, ctx) { if (rf & 
 function CarouselComponent_ng_container_0_div_7_ng_container_1_button_1_Template(rf, ctx) { if (rf & 1) {
     const _r180 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 17);
-    ɵngcc0.ɵɵlistener("focus", function CarouselComponent_ng_container_0_div_7_ng_container_1_button_1_Template_button_focus_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r180); const i_r177 = ɵngcc0.ɵɵnextContext().index; const ctx_r179 = ɵngcc0.ɵɵnextContext(3); return ctx_r179.activeSlide = i_r177; });
+    ɵngcc0.ɵɵlistener("focus", function CarouselComponent_ng_container_0_div_7_ng_container_1_button_1_Template_button_focus_0_listener() { ɵngcc0.ɵɵrestoreView(_r180); const i_r177 = ɵngcc0.ɵɵnextContext().index; const ctx_r179 = ɵngcc0.ɵɵnextContext(3); return ctx_r179.activeSlide = i_r177; });
     ɵngcc0.ɵɵelement(1, "cx-icon", 8);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
@@ -1013,7 +1013,7 @@ function CarouselComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
 function MediaComponent_img_0_Template(rf, ctx) { if (rf & 1) {
     const _r186 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "img", 1);
-    ɵngcc0.ɵɵlistener("load", function MediaComponent_img_0_Template_img_load_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r186); const ctx_r185 = ɵngcc0.ɵɵnextContext(); return ctx_r185.loadHandler(); })("error", function MediaComponent_img_0_Template_img_error_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r186); const ctx_r187 = ɵngcc0.ɵɵnextContext(); return ctx_r187.errorHandler(); });
+    ɵngcc0.ɵɵlistener("load", function MediaComponent_img_0_Template_img_load_0_listener() { ɵngcc0.ɵɵrestoreView(_r186); const ctx_r185 = ɵngcc0.ɵɵnextContext(); return ctx_r185.loadHandler(); })("error", function MediaComponent_img_0_Template_img_error_0_listener() { ɵngcc0.ɵɵrestoreView(_r186); const ctx_r187 = ɵngcc0.ɵɵnextContext(); return ctx_r187.errorHandler(); });
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
     const ctx_r184 = ɵngcc0.ɵɵnextContext();
@@ -1059,7 +1059,7 @@ function GenericLinkComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
 function PaginationComponent_a_0_Template(rf, ctx) { if (rf & 1) {
     const _r199 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 1);
-    ɵngcc0.ɵɵlistener("click", function PaginationComponent_a_0_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r199); const item_r197 = ctx.$implicit; const ctx_r198 = ɵngcc0.ɵɵnextContext(); return ctx_r198.pageChange(item_r197); });
+    ɵngcc0.ɵɵlistener("click", function PaginationComponent_a_0_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r199); const item_r197 = ctx.$implicit; const ctx_r198 = ɵngcc0.ɵɵnextContext(); return ctx_r198.pageChange(item_r197); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
@@ -1093,7 +1093,7 @@ function GlobalMessageComponent_div_0_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_1_Template_button_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r211); const i_r209 = ctx.index; const ctx_r210 = ɵngcc0.ɵɵnextContext(2); return ctx_r210.clear(ctx_r210.messageType.MSG_TYPE_CONFIRMATION, i_r209); });
+    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_1_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r211); const i_r209 = ctx.index; const ctx_r210 = ɵngcc0.ɵɵnextContext(2); return ctx_r210.clear(ctx_r210.messageType.MSG_TYPE_CONFIRMATION, i_r209); });
     ɵngcc0.ɵɵelement(7, "cx-icon", 7);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -1118,7 +1118,7 @@ function GlobalMessageComponent_div_0_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_2_Template_button_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r215); const i_r213 = ctx.index; const ctx_r214 = ɵngcc0.ɵɵnextContext(2); return ctx_r214.clear(ctx_r214.messageType.MSG_TYPE_INFO, i_r213); });
+    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_2_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r215); const i_r213 = ctx.index; const ctx_r214 = ɵngcc0.ɵɵnextContext(2); return ctx_r214.clear(ctx_r214.messageType.MSG_TYPE_INFO, i_r213); });
     ɵngcc0.ɵɵelement(7, "cx-icon", 7);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -1143,7 +1143,7 @@ function GlobalMessageComponent_div_0_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_3_Template_button_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r219); const i_r217 = ctx.index; const ctx_r218 = ɵngcc0.ɵɵnextContext(2); return ctx_r218.clear(ctx_r218.messageType.MSG_TYPE_INFO, i_r217); });
+    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_3_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r219); const i_r217 = ctx.index; const ctx_r218 = ɵngcc0.ɵɵnextContext(2); return ctx_r218.clear(ctx_r218.messageType.MSG_TYPE_INFO, i_r217); });
     ɵngcc0.ɵɵelement(7, "cx-icon", 7);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -1168,7 +1168,7 @@ function GlobalMessageComponent_div_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_4_Template_button_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r223); const i_r221 = ctx.index; const ctx_r222 = ɵngcc0.ɵɵnextContext(2); return ctx_r222.clear(ctx_r222.messageType.MSG_TYPE_ERROR, i_r221); });
+    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_4_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r223); const i_r221 = ctx.index; const ctx_r222 = ɵngcc0.ɵɵnextContext(2); return ctx_r222.clear(ctx_r222.messageType.MSG_TYPE_ERROR, i_r221); });
     ɵngcc0.ɵɵelement(7, "cx-icon", 7);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -1243,7 +1243,7 @@ function SiteContextSelectorComponent_label_0_Template(rf, ctx) { if (rf & 1) {
 function StarRatingComponent_cx_icon_0_Template(rf, ctx) { if (rf & 1) {
     const _r234 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-icon", 1);
-    ɵngcc0.ɵɵlistener("mouseover", function StarRatingComponent_cx_icon_0_Template_cx_icon_mouseover_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r234); const i_r232 = ctx.$implicit; const ctx_r233 = ɵngcc0.ɵɵnextContext(); return ctx_r233.setRate(i_r232); })("mouseout", function StarRatingComponent_cx_icon_0_Template_cx_icon_mouseout_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r234); const ctx_r235 = ɵngcc0.ɵɵnextContext(); return ctx_r235.setRate(0); })("click", function StarRatingComponent_cx_icon_0_Template_cx_icon_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r234); const i_r232 = ctx.$implicit; const ctx_r236 = ɵngcc0.ɵɵnextContext(); return ctx_r236.saveRate(i_r232); });
+    ɵngcc0.ɵɵlistener("mouseover", function StarRatingComponent_cx_icon_0_Template_cx_icon_mouseover_0_listener() { ɵngcc0.ɵɵrestoreView(_r234); const i_r232 = ctx.$implicit; const ctx_r233 = ɵngcc0.ɵɵnextContext(); return ctx_r233.setRate(i_r232); })("mouseout", function StarRatingComponent_cx_icon_0_Template_cx_icon_mouseout_0_listener() { ɵngcc0.ɵɵrestoreView(_r234); const ctx_r235 = ɵngcc0.ɵɵnextContext(); return ctx_r235.setRate(0); })("click", function StarRatingComponent_cx_icon_0_Template_cx_icon_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r234); const i_r232 = ctx.$implicit; const ctx_r236 = ɵngcc0.ɵɵnextContext(); return ctx_r236.saveRate(i_r232); });
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
     const ctx_r231 = ɵngcc0.ɵɵnextContext();
@@ -1344,7 +1344,7 @@ function AppliedCouponsComponent_ng_template_1_div_1_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function AppliedCouponsComponent_ng_template_1_div_1_Template_button_click_4_listener($event) { ɵngcc0.ɵɵrestoreView(_r253); const voucher_r251 = ctx.$implicit; const ctx_r252 = ɵngcc0.ɵɵnextContext(2); return ctx_r252.removeVoucher(voucher_r251.voucherCode); });
+    ɵngcc0.ɵɵlistener("click", function AppliedCouponsComponent_ng_template_1_div_1_Template_button_click_4_listener() { ɵngcc0.ɵɵrestoreView(_r253); const voucher_r251 = ctx.$implicit; const ctx_r252 = ɵngcc0.ɵɵnextContext(2); return ctx_r252.removeVoucher(voucher_r251.voucherCode); });
     ɵngcc0.ɵɵelementStart(5, "span", 13);
     ɵngcc0.ɵɵelement(6, "cx-icon", 14);
     ɵngcc0.ɵɵelementEnd();
@@ -1374,7 +1374,7 @@ function AppliedCouponsComponent_ng_template_1_Template(rf, ctx) { if (rf & 1) {
 function CartCouponComponent_ng_container_0_ng_container_5_div_9_a_2_Template(rf, ctx) { if (rf & 1) {
     const _r263 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 17);
-    ɵngcc0.ɵɵlistener("click", function CartCouponComponent_ng_container_0_ng_container_5_div_9_a_2_Template_a_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r263); const coupon_r261 = ctx.$implicit; const ctx_r262 = ɵngcc0.ɵɵnextContext(4); return ctx_r262.applyCustomerCoupon(coupon_r261.couponId); });
+    ɵngcc0.ɵɵlistener("click", function CartCouponComponent_ng_container_0_ng_container_5_div_9_a_2_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r263); const coupon_r261 = ctx.$implicit; const ctx_r262 = ɵngcc0.ɵɵnextContext(4); return ctx_r262.applyCustomerCoupon(coupon_r261.couponId); });
     ɵngcc0.ɵɵelementStart(1, "div", 18);
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵelementEnd();
@@ -1389,7 +1389,7 @@ function CartCouponComponent_ng_container_0_ng_container_5_div_9_Template(rf, ct
     ɵngcc0.ɵɵelementStart(0, "div", 14);
     ɵngcc0.ɵɵlistener("click", function CartCouponComponent_ng_container_0_ng_container_5_div_9_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r265); const ctx_r264 = ɵngcc0.ɵɵnextContext(3); return ctx_r264.close($event); });
     ɵngcc0.ɵɵelementStart(1, "div", 15);
-    ɵngcc0.ɵɵlistener("mousedown", function CartCouponComponent_ng_container_0_ng_container_5_div_9_Template_div_mousedown_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r265); const ctx_r266 = ɵngcc0.ɵɵnextContext(3); return ctx_r266.disableClose(); });
+    ɵngcc0.ɵɵlistener("mousedown", function CartCouponComponent_ng_container_0_ng_container_5_div_9_Template_div_mousedown_1_listener() { ɵngcc0.ɵɵrestoreView(_r265); const ctx_r266 = ɵngcc0.ɵɵnextContext(3); return ctx_r266.disableClose(); });
     ɵngcc0.ɵɵtemplate(2, CartCouponComponent_ng_container_0_ng_container_5_div_9_a_2_Template, 3, 1, "a", 16);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -1402,12 +1402,12 @@ function CartCouponComponent_ng_container_0_ng_container_5_Template(rf, ctx) { i
     const _r268 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "form", 5);
-    ɵngcc0.ɵɵlistener("submit", function CartCouponComponent_ng_container_0_ng_container_5_Template_form_submit_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r268); const ctx_r267 = ɵngcc0.ɵɵnextContext(2); return ctx_r267.applyVoucher(); });
+    ɵngcc0.ɵɵlistener("submit", function CartCouponComponent_ng_container_0_ng_container_5_Template_form_submit_1_listener() { ɵngcc0.ɵɵrestoreView(_r268); const ctx_r267 = ɵngcc0.ɵɵnextContext(2); return ctx_r267.applyVoucher(); });
     ɵngcc0.ɵɵelementStart(2, "div", 6);
     ɵngcc0.ɵɵelementStart(3, "div", 7);
     ɵngcc0.ɵɵelementStart(4, "div", 8);
     ɵngcc0.ɵɵelementStart(5, "input", 9, 10);
-    ɵngcc0.ɵɵlistener("focus", function CartCouponComponent_ng_container_0_ng_container_5_Template_input_focus_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r268); const ctx_r269 = ɵngcc0.ɵɵnextContext(2); return ctx_r269.open(); })("input", function CartCouponComponent_ng_container_0_ng_container_5_Template_input_input_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r268); const _r258 = ɵngcc0.ɵɵreference(6); const ctx_r270 = ɵngcc0.ɵɵnextContext(2); return ctx_r270.filter(_r258.value); })("blur", function CartCouponComponent_ng_container_0_ng_container_5_Template_input_blur_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r268); const ctx_r271 = ɵngcc0.ɵɵnextContext(2); return ctx_r271.close($event); })("keydown.escape", function CartCouponComponent_ng_container_0_ng_container_5_Template_input_keydown_escape_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r268); const ctx_r272 = ɵngcc0.ɵɵnextContext(2); return ctx_r272.close($event); });
+    ɵngcc0.ɵɵlistener("focus", function CartCouponComponent_ng_container_0_ng_container_5_Template_input_focus_5_listener() { ɵngcc0.ɵɵrestoreView(_r268); const ctx_r269 = ɵngcc0.ɵɵnextContext(2); return ctx_r269.open(); })("input", function CartCouponComponent_ng_container_0_ng_container_5_Template_input_input_5_listener() { ɵngcc0.ɵɵrestoreView(_r268); const _r258 = ɵngcc0.ɵɵreference(6); const ctx_r270 = ɵngcc0.ɵɵnextContext(2); return ctx_r270.filter(_r258.value); })("blur", function CartCouponComponent_ng_container_0_ng_container_5_Template_input_blur_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r268); const ctx_r271 = ɵngcc0.ɵɵnextContext(2); return ctx_r271.close($event); })("keydown.escape", function CartCouponComponent_ng_container_0_ng_container_5_Template_input_keydown_escape_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r268); const ctx_r272 = ɵngcc0.ɵɵnextContext(2); return ctx_r272.close($event); });
     ɵngcc0.ɵɵpipe(7, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(8, "div");
@@ -1446,7 +1446,7 @@ function CartCouponComponent_ng_container_0_ng_container_6_Template(rf, ctx) { i
     const _r274 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "form", 19);
-    ɵngcc0.ɵɵlistener("submit", function CartCouponComponent_ng_container_0_ng_container_6_Template_form_submit_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r274); const ctx_r273 = ɵngcc0.ɵɵnextContext(2); return ctx_r273.applyVoucher(); });
+    ɵngcc0.ɵɵlistener("submit", function CartCouponComponent_ng_container_0_ng_container_6_Template_form_submit_1_listener() { ɵngcc0.ɵɵrestoreView(_r274); const ctx_r273 = ɵngcc0.ɵɵnextContext(2); return ctx_r273.applyVoucher(); });
     ɵngcc0.ɵɵelementStart(2, "div", 6);
     ɵngcc0.ɵɵelementStart(3, "div", 7);
     ɵngcc0.ɵɵelement(4, "input", 20);
@@ -1578,7 +1578,7 @@ function CartItemComponent_div_8_Template(rf, ctx) { if (rf & 1) {
     const _r298 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 18);
     ɵngcc0.ɵɵelementStart(1, "a", 19);
-    ɵngcc0.ɵɵlistener("click", function CartItemComponent_div_8_Template_a_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r298); const ctx_r297 = ɵngcc0.ɵɵnextContext(); return ctx_r297.viewItem(); });
+    ɵngcc0.ɵɵlistener("click", function CartItemComponent_div_8_Template_a_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r298); const ctx_r297 = ɵngcc0.ɵɵnextContext(); return ctx_r297.viewItem(); });
     ɵngcc0.ɵɵpipe(2, "cxUrl");
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵelementEnd();
@@ -1786,7 +1786,7 @@ function CartItemComponent_div_24_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(1, CartItemComponent_div_24_ng_container_1_Template, 2, 7, "ng-container", 24);
     ɵngcc0.ɵɵelementStart(2, "div", 35);
     ɵngcc0.ɵɵelementStart(3, "button", 36);
-    ɵngcc0.ɵɵlistener("click", function CartItemComponent_div_24_Template_button_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r315); const ctx_r314 = ɵngcc0.ɵɵnextContext(); return ctx_r314.removeItem(); });
+    ɵngcc0.ɵɵlistener("click", function CartItemComponent_div_24_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r315); const ctx_r314 = ɵngcc0.ɵɵnextContext(); return ctx_r314.removeItem(); });
     ɵngcc0.ɵɵtext(4);
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2011,7 +2011,7 @@ function CartDetailsComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     const _r340 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "button", 10);
-    ɵngcc0.ɵɵlistener("click", function CartDetailsComponent_ng_template_2_Template_button_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r340); const ctx_r338 = ctx.$implicit; const ctx_r339 = ɵngcc0.ɵɵnextContext(); return ctx_r339.saveForLater(ctx_r338.item); });
+    ɵngcc0.ɵɵlistener("click", function CartDetailsComponent_ng_template_2_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r340); const ctx_r338 = ctx.$implicit; const ctx_r339 = ɵngcc0.ɵɵnextContext(); return ctx_r339.saveForLater(ctx_r338.item); });
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2061,7 +2061,7 @@ function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_
     const _r360 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "button", 4);
-    ɵngcc0.ɵɵlistener("click", function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_div_1_Template_button_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r360); const entry_r358 = ctx.ngIf; const ctx_r359 = ɵngcc0.ɵɵnextContext(5); return ctx_r359.remove(entry_r358); });
+    ɵngcc0.ɵɵlistener("click", function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_div_1_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r360); const entry_r358 = ctx.ngIf; const ctx_r359 = ɵngcc0.ɵɵnextContext(5); return ctx_r359.remove(entry_r358); });
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelement(3, "cx-icon", 5);
     ɵngcc0.ɵɵelementStart(4, "span", 6);
@@ -2082,7 +2082,7 @@ function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_
 function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     const _r363 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 7);
-    ɵngcc0.ɵɵlistener("click", function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_ng_template_2_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r363); const product_r350 = ɵngcc0.ɵɵnextContext(4).ngIf; const ctx_r361 = ɵngcc0.ɵɵnextContext(); return ctx_r361.add(product_r350); });
+    ɵngcc0.ɵɵlistener("click", function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_ng_template_2_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r363); const product_r350 = ɵngcc0.ɵɵnextContext(4).ngIf; const ctx_r361 = ɵngcc0.ɵɵnextContext(); return ctx_r361.add(product_r350); });
     ɵngcc0.ɵɵpipe(1, "async");
     ɵngcc0.ɵɵelement(2, "cx-icon", 5);
     ɵngcc0.ɵɵelementStart(3, "span", 6);
@@ -2227,7 +2227,7 @@ function SaveForLaterComponent_ng_template_4_Template(rf, ctx) { if (rf & 1) {
     const _r382 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 8);
     ɵngcc0.ɵɵelementStart(1, "button", 9);
-    ɵngcc0.ɵɵlistener("click", function SaveForLaterComponent_ng_template_4_Template_button_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r382); const ctx_r380 = ctx.$implicit; const ctx_r381 = ɵngcc0.ɵɵnextContext(); return ctx_r381.moveToCart(ctx_r380.item); });
+    ɵngcc0.ɵɵlistener("click", function SaveForLaterComponent_ng_template_4_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r382); const ctx_r380 = ctx.$implicit; const ctx_r381 = ɵngcc0.ɵɵnextContext(); return ctx_r381.moveToCart(ctx_r380.item); });
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2395,7 +2395,7 @@ function DeliveryModeComponent_ng_container_6_div_1_Template(rf, ctx) { if (rf &
     const _r414 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 11);
     ɵngcc0.ɵɵelementStart(1, "input", 12);
-    ɵngcc0.ɵɵlistener("change", function DeliveryModeComponent_ng_container_6_div_1_Template_input_change_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r414); const mode_r412 = ctx.$implicit; const ctx_r413 = ɵngcc0.ɵɵnextContext(2); return ctx_r413.changeMode(mode_r412.code); });
+    ɵngcc0.ɵɵlistener("change", function DeliveryModeComponent_ng_container_6_div_1_Template_input_change_1_listener() { ɵngcc0.ɵɵrestoreView(_r414); const mode_r412 = ctx.$implicit; const ctx_r413 = ɵngcc0.ɵɵnextContext(2); return ctx_r413.changeMode(mode_r412.code); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(2, "label", 13);
     ɵngcc0.ɵɵelementStart(3, "div", 14);
@@ -2584,7 +2584,7 @@ function PaymentFormComponent_div_0_div_40_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(1, "div", 30);
     ɵngcc0.ɵɵelementStart(2, "label");
     ɵngcc0.ɵɵelementStart(3, "input", 31);
-    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_div_40_Template_input_change_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r449); const ctx_r448 = ɵngcc0.ɵɵnextContext(2); return ctx_r448.toggleDefaultPaymentMethod(); });
+    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_div_40_Template_input_change_3_listener() { ɵngcc0.ɵɵrestoreView(_r449); const ctx_r448 = ɵngcc0.ɵɵnextContext(2); return ctx_r448.toggleDefaultPaymentMethod(); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "span", 32);
     ɵngcc0.ɵɵtext(5);
@@ -2604,7 +2604,7 @@ function PaymentFormComponent_div_0_ng_container_45_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵelementStart(2, "div", 30);
     ɵngcc0.ɵɵelementStart(3, "label");
     ɵngcc0.ɵɵelementStart(4, "input", 33);
-    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_ng_container_45_Template_input_change_4_listener($event) { ɵngcc0.ɵɵrestoreView(_r451); const ctx_r450 = ɵngcc0.ɵɵnextContext(2); return ctx_r450.toggleSameAsShippingAddress(); });
+    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_ng_container_45_Template_input_change_4_listener() { ɵngcc0.ɵɵrestoreView(_r451); const ctx_r450 = ɵngcc0.ɵɵnextContext(2); return ctx_r450.toggleSameAsShippingAddress(); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "span", 32);
     ɵngcc0.ɵɵtext(6);
@@ -2640,7 +2640,7 @@ function PaymentFormComponent_div_0_ng_template_49_Template(rf, ctx) { if (rf & 
 function PaymentFormComponent_div_0_button_53_Template(rf, ctx) { if (rf & 1) {
     const _r454 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 36);
-    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_button_53_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r454); const ctx_r453 = ɵngcc0.ɵɵnextContext(2); return ctx_r453.back(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_button_53_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r454); const ctx_r453 = ɵngcc0.ɵɵnextContext(2); return ctx_r453.back(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2651,7 +2651,7 @@ function PaymentFormComponent_div_0_button_53_Template(rf, ctx) { if (rf & 1) {
 function PaymentFormComponent_div_0_button_54_Template(rf, ctx) { if (rf & 1) {
     const _r456 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 36);
-    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_button_54_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r456); const ctx_r455 = ɵngcc0.ɵɵnextContext(2); return ctx_r455.close(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_button_54_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r456); const ctx_r455 = ɵngcc0.ɵɵnextContext(2); return ctx_r455.close(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2743,7 +2743,7 @@ function PaymentFormComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(55, "div", 24);
     ɵngcc0.ɵɵelementStart(56, "button", 26);
-    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_Template_button_click_56_listener($event) { ɵngcc0.ɵɵrestoreView(_r458); const ctx_r460 = ɵngcc0.ɵɵnextContext(); return ctx_r460.next(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_Template_button_click_56_listener() { ɵngcc0.ɵɵrestoreView(_r458); const ctx_r460 = ɵngcc0.ɵɵnextContext(); return ctx_r460.next(); });
     ɵngcc0.ɵɵtext(57);
     ɵngcc0.ɵɵpipe(58, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2798,7 +2798,7 @@ function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_div
     ɵngcc0.ɵɵelementStart(0, "div", 13);
     ɵngcc0.ɵɵelementStart(1, "div", 14);
     ɵngcc0.ɵɵelementStart(2, "cx-card", 15);
-    ɵngcc0.ɵɵlistener("sendCard", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_cx_card_sendCard_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r473); const method_r470 = ctx.$implicit; const ctx_r472 = ɵngcc0.ɵɵnextContext(4); return ctx_r472.paymentMethodSelected(method_r470); });
+    ɵngcc0.ɵɵlistener("sendCard", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_cx_card_sendCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r473); const method_r470 = ctx.$implicit; const ctx_r472 = ɵngcc0.ɵɵnextContext(4); return ctx_r472.paymentMethodSelected(method_r470); });
     ɵngcc0.ɵɵpipe(3, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -2819,7 +2819,7 @@ function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Tem
     ɵngcc0.ɵɵelementStart(4, "div", 6);
     ɵngcc0.ɵɵelementStart(5, "div", 7);
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r475); const ctx_r474 = ɵngcc0.ɵɵnextContext(3); return ctx_r474.showNewPaymentForm(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r475); const ctx_r474 = ɵngcc0.ɵɵnextContext(3); return ctx_r474.showNewPaymentForm(); });
     ɵngcc0.ɵɵtext(7);
     ɵngcc0.ɵɵpipe(8, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2831,14 +2831,14 @@ function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Tem
     ɵngcc0.ɵɵelementStart(11, "div", 11);
     ɵngcc0.ɵɵelementStart(12, "div", 7);
     ɵngcc0.ɵɵelementStart(13, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_13_listener($event) { ɵngcc0.ɵɵrestoreView(_r475); const ctx_r476 = ɵngcc0.ɵɵnextContext(3); return ctx_r476.back(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r475); const ctx_r476 = ɵngcc0.ɵɵnextContext(3); return ctx_r476.back(); });
     ɵngcc0.ɵɵtext(14);
     ɵngcc0.ɵɵpipe(15, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(16, "div", 7);
     ɵngcc0.ɵɵelementStart(17, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_17_listener($event) { ɵngcc0.ɵɵrestoreView(_r475); const ctx_r477 = ɵngcc0.ɵɵnextContext(3); return ctx_r477.next(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_17_listener() { ɵngcc0.ɵɵrestoreView(_r475); const ctx_r477 = ɵngcc0.ɵɵnextContext(3); return ctx_r477.next(); });
     ɵngcc0.ɵɵtext(18);
     ɵngcc0.ɵɵpipe(19, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2864,7 +2864,7 @@ function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Tem
 function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     const _r480 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-payment-form", 16);
-    ɵngcc0.ɵɵlistener("setPaymentDetails", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_setPaymentDetails_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r480); const ctx_r479 = ɵngcc0.ɵɵnextContext(3); return ctx_r479.setPaymentDetails($event); })("closeForm", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_closeForm_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r480); const ctx_r481 = ɵngcc0.ɵɵnextContext(3); return ctx_r481.hideNewPaymentForm(); })("goBack", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_goBack_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r480); const ctx_r482 = ɵngcc0.ɵɵnextContext(3); return ctx_r482.back(); });
+    ɵngcc0.ɵɵlistener("setPaymentDetails", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_setPaymentDetails_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r480); const ctx_r479 = ɵngcc0.ɵɵnextContext(3); return ctx_r479.setPaymentDetails($event); })("closeForm", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_closeForm_0_listener() { ɵngcc0.ɵɵrestoreView(_r480); const ctx_r481 = ɵngcc0.ɵɵnextContext(3); return ctx_r481.hideNewPaymentForm(); })("goBack", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_goBack_0_listener() { ɵngcc0.ɵɵrestoreView(_r480); const ctx_r482 = ɵngcc0.ɵɵnextContext(3); return ctx_r482.back(); });
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
     const existingPaymentMethods_r462 = ɵngcc0.ɵɵnextContext(2).ngIf;
@@ -3136,7 +3136,7 @@ function AddressFormComponent_div_60_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(1, "div", 27);
     ɵngcc0.ɵɵelementStart(2, "label");
     ɵngcc0.ɵɵelementStart(3, "input", 28);
-    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_div_60_Template_input_change_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r522); const ctx_r521 = ɵngcc0.ɵɵnextContext(); return ctx_r521.toggleDefaultAddress(); });
+    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_div_60_Template_input_change_3_listener() { ɵngcc0.ɵɵrestoreView(_r522); const ctx_r521 = ɵngcc0.ɵɵnextContext(); return ctx_r521.toggleDefaultAddress(); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "span", 29);
     ɵngcc0.ɵɵtext(5);
@@ -3153,7 +3153,7 @@ function AddressFormComponent_div_62_Template(rf, ctx) { if (rf & 1) {
     const _r524 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 20);
     ɵngcc0.ɵɵelementStart(1, "button", 30);
-    ɵngcc0.ɵɵlistener("click", function AddressFormComponent_div_62_Template_button_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r524); const ctx_r523 = ɵngcc0.ɵɵnextContext(); return ctx_r523.back(); });
+    ɵngcc0.ɵɵlistener("click", function AddressFormComponent_div_62_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r524); const ctx_r523 = ɵngcc0.ɵɵnextContext(); return ctx_r523.back(); });
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -3167,9 +3167,9 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_d
     const _r537 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 14);
     ɵngcc0.ɵɵelementStart(1, "div", 15);
-    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_div_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r537); const card_r534 = ctx.$implicit; const ctx_r536 = ɵngcc0.ɵɵnextContext(4); return ctx_r536.addressSelected(card_r534.address); });
+    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_div_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r537); const card_r534 = ctx.$implicit; const ctx_r536 = ɵngcc0.ɵɵnextContext(4); return ctx_r536.addressSelected(card_r534.address); });
     ɵngcc0.ɵɵelementStart(2, "cx-card", 16);
-    ɵngcc0.ɵɵlistener("sendCard", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_cx_card_sendCard_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r537); const card_r534 = ctx.$implicit; const ctx_r538 = ɵngcc0.ɵɵnextContext(4); return ctx_r538.addressSelected(card_r534.address); });
+    ɵngcc0.ɵɵlistener("sendCard", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_cx_card_sendCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r537); const card_r534 = ctx.$implicit; const ctx_r538 = ɵngcc0.ɵɵnextContext(4); return ctx_r538.addressSelected(card_r534.address); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -3188,7 +3188,7 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_T
     ɵngcc0.ɵɵelementStart(4, "div", 6);
     ɵngcc0.ɵɵelementStart(5, "div", 7);
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r540); const ctx_r539 = ɵngcc0.ɵɵnextContext(3); return ctx_r539.showNewAddressForm(); });
+    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r540); const ctx_r539 = ɵngcc0.ɵɵnextContext(3); return ctx_r539.showNewAddressForm(); });
     ɵngcc0.ɵɵtext(7);
     ɵngcc0.ɵɵpipe(8, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -3200,14 +3200,14 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_T
     ɵngcc0.ɵɵelementStart(11, "div", 6);
     ɵngcc0.ɵɵelementStart(12, "div", 11);
     ɵngcc0.ɵɵelementStart(13, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_13_listener($event) { ɵngcc0.ɵɵrestoreView(_r540); const ctx_r541 = ɵngcc0.ɵɵnextContext(3); return ctx_r541.back(); });
+    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r540); const ctx_r541 = ɵngcc0.ɵɵnextContext(3); return ctx_r541.back(); });
     ɵngcc0.ɵɵtext(14);
     ɵngcc0.ɵɵpipe(15, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(16, "div", 11);
     ɵngcc0.ɵɵelementStart(17, "button", 13);
-    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_17_listener($event) { ɵngcc0.ɵɵrestoreView(_r540); const ctx_r542 = ɵngcc0.ɵɵnextContext(3); return ctx_r542.next(); });
+    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_17_listener() { ɵngcc0.ɵɵrestoreView(_r540); const ctx_r542 = ɵngcc0.ɵɵnextContext(3); return ctx_r542.next(); });
     ɵngcc0.ɵɵpipe(18, "async");
     ɵngcc0.ɵɵtext(19);
     ɵngcc0.ɵɵpipe(20, "cxTranslate");
@@ -3237,7 +3237,7 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng
     const _r548 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "cx-address-form", 18);
-    ɵngcc0.ɵɵlistener("backToAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template_cx_address_form_backToAddress_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r548); const ctx_r547 = ɵngcc0.ɵɵnextContext(4); return ctx_r547.hideNewAddressForm(false); })("submitAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template_cx_address_form_submitAddress_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r548); const ctx_r549 = ɵngcc0.ɵɵnextContext(4); return ctx_r549.addAddress($event); });
+    ɵngcc0.ɵɵlistener("backToAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template_cx_address_form_backToAddress_1_listener() { ɵngcc0.ɵɵrestoreView(_r548); const ctx_r547 = ɵngcc0.ɵɵnextContext(4); return ctx_r547.hideNewAddressForm(false); })("submitAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template_cx_address_form_submitAddress_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r548); const ctx_r549 = ɵngcc0.ɵɵnextContext(4); return ctx_r549.addAddress($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
@@ -3247,7 +3247,7 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng
 function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template(rf, ctx) { if (rf & 1) {
     const _r551 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-address-form", 19);
-    ɵngcc0.ɵɵlistener("backToAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template_cx_address_form_backToAddress_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r551); const ctx_r550 = ɵngcc0.ɵɵnextContext(4); return ctx_r550.hideNewAddressForm(true); })("submitAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template_cx_address_form_submitAddress_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r551); const ctx_r552 = ɵngcc0.ɵɵnextContext(4); return ctx_r552.addAddress($event); });
+    ɵngcc0.ɵɵlistener("backToAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template_cx_address_form_backToAddress_0_listener() { ɵngcc0.ɵɵrestoreView(_r551); const ctx_r550 = ɵngcc0.ɵɵnextContext(4); return ctx_r550.hideNewAddressForm(true); })("submitAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template_cx_address_form_submitAddress_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r551); const ctx_r552 = ɵngcc0.ɵɵnextContext(4); return ctx_r552.addAddress($event); });
     ɵngcc0.ɵɵpipe(1, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
@@ -3333,12 +3333,12 @@ function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_
     ɵngcc0.ɵɵelementStart(1, "div", 5);
     ɵngcc0.ɵɵelementStart(2, "div", 6);
     ɵngcc0.ɵɵelementStart(3, "a", 7);
-    ɵngcc0.ɵɵlistener("click", function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_Template_a_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r570); const templateList_r564 = ctx.ngIf; const ctx_r569 = ɵngcc0.ɵɵnextContext(3); return ctx_r569.rejectAll(templateList_r564); });
+    ɵngcc0.ɵɵlistener("click", function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_Template_a_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r570); const templateList_r564 = ctx.ngIf; const ctx_r569 = ɵngcc0.ɵɵnextContext(3); return ctx_r569.rejectAll(templateList_r564); });
     ɵngcc0.ɵɵtext(4);
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "a", 7);
-    ɵngcc0.ɵɵlistener("click", function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_Template_a_click_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r570); const templateList_r564 = ctx.ngIf; const ctx_r571 = ɵngcc0.ɵɵnextContext(3); return ctx_r571.allowAll(templateList_r564); });
+    ɵngcc0.ɵɵlistener("click", function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_Template_a_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r570); const templateList_r564 = ctx.ngIf; const ctx_r571 = ɵngcc0.ɵɵnextContext(3); return ctx_r571.allowAll(templateList_r564); });
     ɵngcc0.ɵɵtext(7);
     ɵngcc0.ɵɵpipe(8, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -3418,7 +3418,7 @@ function ConsentManagementComponent_ng_template_1_Template(rf, ctx) { if (rf & 1
 function StorefrontComponent_ng_template_0_ng_template_0_Template(rf, ctx) { if (rf & 1) {
     const _r583 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "header", 3);
-    ɵngcc0.ɵɵlistener("keydown.escape", function StorefrontComponent_ng_template_0_ng_template_0_Template_header_keydown_escape_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r583); const ctx_r582 = ɵngcc0.ɵɵnextContext(2); return ctx_r582.collapseMenu(); })("click", function StorefrontComponent_ng_template_0_ng_template_0_Template_header_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r583); const ctx_r584 = ɵngcc0.ɵɵnextContext(2); return ctx_r584.collapseMenuIfClickOutside($event); });
+    ɵngcc0.ɵɵlistener("keydown.escape", function StorefrontComponent_ng_template_0_ng_template_0_Template_header_keydown_escape_0_listener() { ɵngcc0.ɵɵrestoreView(_r583); const ctx_r582 = ɵngcc0.ɵɵnextContext(2); return ctx_r582.collapseMenu(); })("click", function StorefrontComponent_ng_template_0_ng_template_0_Template_header_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r583); const ctx_r584 = ɵngcc0.ɵɵnextContext(2); return ctx_r584.collapseMenuIfClickOutside($event); });
     ɵngcc0.ɵɵpipe(1, "async");
     ɵngcc0.ɵɵelement(2, "cx-page-layout", 4);
     ɵngcc0.ɵɵelement(3, "cx-page-layout", 5);
@@ -3483,7 +3483,7 @@ function LinkComponent_cx_generic_link_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
     const data_r595 = ctx.ngIf;
-    ɵngcc0.ɵɵstyleMap(data_r595.styleAttributes, ɵngcc0.ɵɵdefaultStyleSanitizer);
+    ɵngcc0.ɵɵstyleMap(data_r595.styleAttributes);
     ɵngcc0.ɵɵproperty("url", data_r595.url);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate(data_r595.linkName);
@@ -3506,7 +3506,7 @@ function TabParagraphContainerComponent_ng_container_0_Template(rf, ctx) { if (r
     const _r604 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "button", 1);
-    ɵngcc0.ɵɵlistener("click", function TabParagraphContainerComponent_ng_container_0_Template_button_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r604); const i_r600 = ctx.index; const ctx_r603 = ɵngcc0.ɵɵnextContext(); return ctx_r603.select(i_r600); });
+    ɵngcc0.ɵɵlistener("click", function TabParagraphContainerComponent_ng_container_0_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r604); const i_r600 = ctx.index; const ctx_r603 = ɵngcc0.ɵɵnextContext(); return ctx_r603.select(i_r600); });
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵpipe(4, "async");
@@ -3532,7 +3532,7 @@ function AddressBookComponent_ng_container_1_div_6_div_1_Template(rf, ctx) { if 
     const _r614 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "cx-card", 10);
-    ɵngcc0.ɵɵlistener("editCard", function AddressBookComponent_ng_container_1_div_6_div_1_Template_cx_card_editCard_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r614); const address_r612 = ctx.$implicit; const ctx_r613 = ɵngcc0.ɵɵnextContext(3); return ctx_r613.editAddressButtonHandle(address_r612); })("setDefaultCard", function AddressBookComponent_ng_container_1_div_6_div_1_Template_cx_card_setDefaultCard_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r614); const address_r612 = ctx.$implicit; const ctx_r615 = ɵngcc0.ɵɵnextContext(3); return ctx_r615.setAddressAsDefault(address_r612.id); })("deleteCard", function AddressBookComponent_ng_container_1_div_6_div_1_Template_cx_card_deleteCard_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r614); const address_r612 = ctx.$implicit; const ctx_r616 = ɵngcc0.ɵɵnextContext(3); return ctx_r616.setEdit(address_r612.id); })("cancelCard", function AddressBookComponent_ng_container_1_div_6_div_1_Template_cx_card_cancelCard_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r614); const ctx_r617 = ɵngcc0.ɵɵnextContext(3); return ctx_r617.cancelCard(); });
+    ɵngcc0.ɵɵlistener("editCard", function AddressBookComponent_ng_container_1_div_6_div_1_Template_cx_card_editCard_1_listener() { ɵngcc0.ɵɵrestoreView(_r614); const address_r612 = ctx.$implicit; const ctx_r613 = ɵngcc0.ɵɵnextContext(3); return ctx_r613.editAddressButtonHandle(address_r612); })("setDefaultCard", function AddressBookComponent_ng_container_1_div_6_div_1_Template_cx_card_setDefaultCard_1_listener() { ɵngcc0.ɵɵrestoreView(_r614); const address_r612 = ctx.$implicit; const ctx_r615 = ɵngcc0.ɵɵnextContext(3); return ctx_r615.setAddressAsDefault(address_r612.id); })("deleteCard", function AddressBookComponent_ng_container_1_div_6_div_1_Template_cx_card_deleteCard_1_listener() { ɵngcc0.ɵɵrestoreView(_r614); const address_r612 = ctx.$implicit; const ctx_r616 = ɵngcc0.ɵɵnextContext(3); return ctx_r616.setEdit(address_r612.id); })("cancelCard", function AddressBookComponent_ng_container_1_div_6_div_1_Template_cx_card_cancelCard_1_listener() { ɵngcc0.ɵɵrestoreView(_r614); const ctx_r617 = ɵngcc0.ɵɵnextContext(3); return ctx_r617.cancelCard(); });
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -3558,7 +3558,7 @@ function AddressBookComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(1, "div", 3);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
     ɵngcc0.ɵɵelementStart(3, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function AddressBookComponent_ng_container_1_Template_button_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r619); const ctx_r618 = ɵngcc0.ɵɵnextContext(); return ctx_r618.addAddressButtonHandle(); });
+    ɵngcc0.ɵɵlistener("click", function AddressBookComponent_ng_container_1_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r619); const ctx_r618 = ɵngcc0.ɵɵnextContext(); return ctx_r618.addAddressButtonHandle(); });
     ɵngcc0.ɵɵtext(4);
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -3584,7 +3584,7 @@ function AddressBookComponent_ng_container_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "cx-address-form", 12);
-    ɵngcc0.ɵɵlistener("submitAddress", function AddressBookComponent_ng_container_3_Template_cx_address_form_submitAddress_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r621); const ctx_r620 = ɵngcc0.ɵɵnextContext(); return ctx_r620.addAddressSubmit($event); })("backToAddress", function AddressBookComponent_ng_container_3_Template_cx_address_form_backToAddress_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r621); const ctx_r622 = ɵngcc0.ɵɵnextContext(); return ctx_r622.addAddressCancel(); })("cancelCard", function AddressBookComponent_ng_container_3_Template_cx_address_form_cancelCard_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r621); const ctx_r623 = ɵngcc0.ɵɵnextContext(); return ctx_r623.cancelCard(); });
+    ɵngcc0.ɵɵlistener("submitAddress", function AddressBookComponent_ng_container_3_Template_cx_address_form_submitAddress_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r621); const ctx_r620 = ɵngcc0.ɵɵnextContext(); return ctx_r620.addAddressSubmit($event); })("backToAddress", function AddressBookComponent_ng_container_3_Template_cx_address_form_backToAddress_5_listener() { ɵngcc0.ɵɵrestoreView(_r621); const ctx_r622 = ɵngcc0.ɵɵnextContext(); return ctx_r622.addAddressCancel(); })("cancelCard", function AddressBookComponent_ng_container_3_Template_cx_address_form_cancelCard_5_listener() { ɵngcc0.ɵɵrestoreView(_r621); const ctx_r623 = ɵngcc0.ɵɵnextContext(); return ctx_r623.cancelCard(); });
     ɵngcc0.ɵɵpipe(6, "async");
     ɵngcc0.ɵɵpipe(7, "cxTranslate");
     ɵngcc0.ɵɵpipe(8, "cxTranslate");
@@ -3610,7 +3610,7 @@ function AddressBookComponent_ng_container_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "cx-address-form", 13);
-    ɵngcc0.ɵɵlistener("submitAddress", function AddressBookComponent_ng_container_5_Template_cx_address_form_submitAddress_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r625); const ctx_r624 = ɵngcc0.ɵɵnextContext(); return ctx_r624.editAddressSubmit($event); })("backToAddress", function AddressBookComponent_ng_container_5_Template_cx_address_form_backToAddress_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r625); const ctx_r626 = ɵngcc0.ɵɵnextContext(); return ctx_r626.editAddressCancel(); });
+    ɵngcc0.ɵɵlistener("submitAddress", function AddressBookComponent_ng_container_5_Template_cx_address_form_submitAddress_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r625); const ctx_r624 = ɵngcc0.ɵɵnextContext(); return ctx_r624.editAddressSubmit($event); })("backToAddress", function AddressBookComponent_ng_container_5_Template_cx_address_form_backToAddress_5_listener() { ɵngcc0.ɵɵrestoreView(_r625); const ctx_r626 = ɵngcc0.ɵɵnextContext(); return ctx_r626.editAddressCancel(); });
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
     ɵngcc0.ɵɵpipe(7, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -3649,12 +3649,12 @@ function CloseAccountModalComponent_ng_container_0_ng_template_10_Template(rf, c
     ɵngcc0.ɵɵelementStart(5, "div", 10);
     ɵngcc0.ɵɵelementStart(6, "div", 12);
     ɵngcc0.ɵɵelementStart(7, "button", 13);
-    ɵngcc0.ɵɵlistener("click", function CloseAccountModalComponent_ng_container_0_ng_template_10_Template_button_click_7_listener($event) { ɵngcc0.ɵɵrestoreView(_r633); const ctx_r632 = ɵngcc0.ɵɵnextContext(2); return ctx_r632.closeAccount(); });
+    ɵngcc0.ɵɵlistener("click", function CloseAccountModalComponent_ng_container_0_ng_template_10_Template_button_click_7_listener() { ɵngcc0.ɵɵrestoreView(_r633); const ctx_r632 = ɵngcc0.ɵɵnextContext(2); return ctx_r632.closeAccount(); });
     ɵngcc0.ɵɵtext(8);
     ɵngcc0.ɵɵpipe(9, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(10, "button", 14);
-    ɵngcc0.ɵɵlistener("click", function CloseAccountModalComponent_ng_container_0_ng_template_10_Template_button_click_10_listener($event) { ɵngcc0.ɵɵrestoreView(_r633); const ctx_r634 = ɵngcc0.ɵɵnextContext(2); return ctx_r634.dismissModal(); });
+    ɵngcc0.ɵɵlistener("click", function CloseAccountModalComponent_ng_container_0_ng_template_10_Template_button_click_10_listener() { ɵngcc0.ɵɵrestoreView(_r633); const ctx_r634 = ɵngcc0.ɵɵnextContext(2); return ctx_r634.dismissModal(); });
     ɵngcc0.ɵɵtext(11);
     ɵngcc0.ɵɵpipe(12, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -3678,7 +3678,7 @@ function CloseAccountModalComponent_ng_container_0_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 3);
-    ɵngcc0.ɵɵlistener("click", function CloseAccountModalComponent_ng_container_0_Template_button_click_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r636); const ctx_r635 = ɵngcc0.ɵɵnextContext(); return ctx_r635.dismissModal(); });
+    ɵngcc0.ɵɵlistener("click", function CloseAccountModalComponent_ng_container_0_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r636); const ctx_r635 = ɵngcc0.ɵɵnextContext(); return ctx_r635.dismissModal(); });
     ɵngcc0.ɵɵelementStart(6, "span", 4);
     ɵngcc0.ɵɵelement(7, "cx-icon", 5);
     ɵngcc0.ɵɵelementEnd();
@@ -3739,7 +3739,7 @@ function AmendOrderActionsComponent_button_7_Template(rf, ctx) { if (rf & 1) {
 function CancelOrReturnItemsComponent_div_0_button_1_Template(rf, ctx) { if (rf & 1) {
     const _r648 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 10);
-    ɵngcc0.ɵɵlistener("click", function CancelOrReturnItemsComponent_div_0_button_1_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r648); const form_r641 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r646 = ɵngcc0.ɵɵnextContext(); return ctx_r646.setAll(form_r641); });
+    ɵngcc0.ɵɵlistener("click", function CancelOrReturnItemsComponent_div_0_button_1_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r648); const form_r641 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r646 = ɵngcc0.ɵɵnextContext(); return ctx_r646.setAll(form_r641); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -4040,7 +4040,7 @@ function CancelOrderConfirmationComponent_form_0_ng_template_5_Template(rf, ctx)
 function CancelOrderConfirmationComponent_form_0_Template(rf, ctx) { if (rf & 1) {
     const _r689 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "form", 1);
-    ɵngcc0.ɵɵlistener("ngSubmit", function CancelOrderConfirmationComponent_form_0_Template_form_ngSubmit_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r689); const form_r679 = ctx.ngIf; const ctx_r688 = ɵngcc0.ɵɵnextContext(); return ctx_r688.submit(form_r679); });
+    ɵngcc0.ɵɵlistener("ngSubmit", function CancelOrderConfirmationComponent_form_0_Template_form_ngSubmit_0_listener() { ɵngcc0.ɵɵrestoreView(_r689); const form_r679 = ctx.ngIf; const ctx_r688 = ɵngcc0.ɵɵnextContext(); return ctx_r688.submit(form_r679); });
     ɵngcc0.ɵɵtemplate(1, CancelOrderConfirmationComponent_form_0_ng_container_1_Template, 1, 0, "ng-container", 2);
     ɵngcc0.ɵɵtemplate(2, CancelOrderConfirmationComponent_form_0_cx_amend_order_items_2_Template, 1, 2, "cx-amend-order-items", 3);
     ɵngcc0.ɵɵpipe(3, "async");
@@ -4130,7 +4130,7 @@ function ReturnOrderConfirmationComponent_form_0_ng_template_5_Template(rf, ctx)
 function ReturnOrderConfirmationComponent_form_0_Template(rf, ctx) { if (rf & 1) {
     const _r711 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "form", 1);
-    ɵngcc0.ɵɵlistener("ngSubmit", function ReturnOrderConfirmationComponent_form_0_Template_form_ngSubmit_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r711); const form_r701 = ctx.ngIf; const ctx_r710 = ɵngcc0.ɵɵnextContext(); return ctx_r710.submit(form_r701); });
+    ɵngcc0.ɵɵlistener("ngSubmit", function ReturnOrderConfirmationComponent_form_0_Template_form_ngSubmit_0_listener() { ɵngcc0.ɵɵrestoreView(_r711); const form_r701 = ctx.ngIf; const ctx_r710 = ɵngcc0.ɵɵnextContext(); return ctx_r710.submit(form_r701); });
     ɵngcc0.ɵɵtemplate(1, ReturnOrderConfirmationComponent_form_0_ng_container_1_Template, 1, 0, "ng-container", 2);
     ɵngcc0.ɵɵtemplate(2, ReturnOrderConfirmationComponent_form_0_cx_amend_order_items_2_Template, 1, 2, "cx-amend-order-items", 3);
     ɵngcc0.ɵɵpipe(3, "async");
@@ -4546,7 +4546,7 @@ function TrackingEventsComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 6);
-    ɵngcc0.ɵɵlistener("click", function TrackingEventsComponent_ng_container_1_Template_button_click_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r769); const ctx_r768 = ɵngcc0.ɵɵnextContext(); return ctx_r768.activeModal.dismiss("Cross click"); });
+    ɵngcc0.ɵɵlistener("click", function TrackingEventsComponent_ng_container_1_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r769); const ctx_r768 = ɵngcc0.ɵɵnextContext(); return ctx_r768.activeModal.dismiss("Cross click"); });
     ɵngcc0.ɵɵelementStart(6, "span", 7);
     ɵngcc0.ɵɵtext(7, "\u00D7");
     ɵngcc0.ɵɵelementEnd();
@@ -4588,7 +4588,7 @@ function TrackingEventsComponent_ng_template_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 21);
-    ɵngcc0.ɵɵlistener("click", function TrackingEventsComponent_ng_template_5_Template_button_click_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r771); const ctx_r770 = ɵngcc0.ɵɵnextContext(); return ctx_r770.activeModal.dismiss("Cross click"); });
+    ɵngcc0.ɵɵlistener("click", function TrackingEventsComponent_ng_template_5_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r771); const ctx_r770 = ɵngcc0.ɵɵnextContext(); return ctx_r770.activeModal.dismiss("Cross click"); });
     ɵngcc0.ɵɵelementStart(6, "span", 7);
     ɵngcc0.ɵɵtext(7, "\u00D7");
     ɵngcc0.ɵɵelementEnd();
@@ -4610,7 +4610,7 @@ function ConsignmentTrackingComponent_ng_container_0_div_1_Template(rf, ctx) { i
     const _r775 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "button", 1);
-    ɵngcc0.ɵɵlistener("click", function ConsignmentTrackingComponent_ng_container_0_div_1_Template_button_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r775); const ctx_r774 = ɵngcc0.ɵɵnextContext(2); return ctx_r774.openTrackingDialog(ctx_r774.consignment); });
+    ɵngcc0.ɵɵlistener("click", function ConsignmentTrackingComponent_ng_container_0_div_1_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r775); const ctx_r774 = ɵngcc0.ɵɵnextContext(2); return ctx_r774.openTrackingDialog(ctx_r774.consignment); });
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -4817,7 +4817,7 @@ const _c33 = function (a1) { return { cxRoute: "orderDetails", params: a1 }; };
 function OrderHistoryComponent_ng_container_0_ng_container_7_tr_23_Template(rf, ctx) { if (rf & 1) {
     const _r810 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "tr", 16);
-    ɵngcc0.ɵɵlistener("click", function OrderHistoryComponent_ng_container_0_ng_container_7_tr_23_Template_tr_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r810); const order_r808 = ctx.$implicit; const ctx_r809 = ɵngcc0.ɵɵnextContext(3); return ctx_r809.goToOrderDetail(order_r808); });
+    ɵngcc0.ɵɵlistener("click", function OrderHistoryComponent_ng_container_0_ng_container_7_tr_23_Template_tr_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r810); const order_r808 = ctx.$implicit; const ctx_r809 = ɵngcc0.ɵɵnextContext(3); return ctx_r809.goToOrderDetail(order_r808); });
     ɵngcc0.ɵɵelementStart(1, "td", 17);
     ɵngcc0.ɵɵelementStart(2, "div", 18);
     ɵngcc0.ɵɵtext(3);
@@ -5022,7 +5022,7 @@ function OrderHistoryComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
 function ReturnRequestOverviewComponent_ng_container_0_button_7_Template(rf, ctx) { if (rf & 1) {
     const _r823 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 9);
-    ɵngcc0.ɵɵlistener("click", function ReturnRequestOverviewComponent_ng_container_0_button_7_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r823); const returnRequest_r819 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r821 = ɵngcc0.ɵɵnextContext(); return ctx_r821.cancelReturn(returnRequest_r819.rma); });
+    ɵngcc0.ɵɵlistener("click", function ReturnRequestOverviewComponent_ng_container_0_button_7_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r823); const returnRequest_r819 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r821 = ɵngcc0.ɵɵnextContext(); return ctx_r821.cancelReturn(returnRequest_r819.rma); });
     ɵngcc0.ɵɵpipe(1, "async");
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
@@ -5039,7 +5039,7 @@ function ReturnRequestOverviewComponent_ng_container_0_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementStart(1, "div", 1);
     ɵngcc0.ɵɵelementStart(2, "div", 2);
     ɵngcc0.ɵɵelementStart(3, "button", 3);
-    ɵngcc0.ɵɵlistener("click", function ReturnRequestOverviewComponent_ng_container_0_Template_button_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r825); const ctx_r824 = ɵngcc0.ɵɵnextContext(); return ctx_r824.back(); });
+    ɵngcc0.ɵɵlistener("click", function ReturnRequestOverviewComponent_ng_container_0_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r825); const ctx_r824 = ɵngcc0.ɵɵnextContext(); return ctx_r824.back(); });
     ɵngcc0.ɵɵtext(4);
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -5523,7 +5523,7 @@ function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template(rf
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "div", 10);
     ɵngcc0.ɵɵelementStart(2, "cx-card", 11);
-    ɵngcc0.ɵɵlistener("deleteCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_deleteCard_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r870); const paymentMethod_r868 = ctx.$implicit; const ctx_r869 = ɵngcc0.ɵɵnextContext(3); return ctx_r869.deletePaymentMethod(paymentMethod_r868); })("setDefaultCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_setDefaultCard_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r870); const paymentMethod_r868 = ctx.$implicit; const ctx_r871 = ɵngcc0.ɵɵnextContext(3); return ctx_r871.setDefaultPaymentMethod(paymentMethod_r868); })("editCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_editCard_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r870); const paymentMethod_r868 = ctx.$implicit; const ctx_r872 = ɵngcc0.ɵɵnextContext(3); return ctx_r872.setEdit(paymentMethod_r868); })("cancelCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_cancelCard_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r870); const ctx_r873 = ɵngcc0.ɵɵnextContext(3); return ctx_r873.cancelCard(); });
+    ɵngcc0.ɵɵlistener("deleteCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_deleteCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r870); const paymentMethod_r868 = ctx.$implicit; const ctx_r869 = ɵngcc0.ɵɵnextContext(3); return ctx_r869.deletePaymentMethod(paymentMethod_r868); })("setDefaultCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_setDefaultCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r870); const paymentMethod_r868 = ctx.$implicit; const ctx_r871 = ɵngcc0.ɵɵnextContext(3); return ctx_r871.setDefaultPaymentMethod(paymentMethod_r868); })("editCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_editCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r870); const paymentMethod_r868 = ctx.$implicit; const ctx_r872 = ɵngcc0.ɵɵnextContext(3); return ctx_r872.setEdit(paymentMethod_r868); })("cancelCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_cancelCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r870); const ctx_r873 = ɵngcc0.ɵɵnextContext(3); return ctx_r873.cancelCard(); });
     ɵngcc0.ɵɵpipe(3, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -5640,7 +5640,7 @@ function UpdateEmailComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
     ɵngcc0.ɵɵelementStart(1, "div", 4);
     ɵngcc0.ɵɵelementStart(2, "cx-update-email-form", 5);
-    ɵngcc0.ɵɵlistener("saveEmail", function UpdateEmailComponent_ng_template_3_Template_cx_update_email_form_saveEmail_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r884); const ctx_r883 = ɵngcc0.ɵɵnextContext(); return ctx_r883.onSubmit($event); })("cancelEmail", function UpdateEmailComponent_ng_template_3_Template_cx_update_email_form_cancelEmail_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r884); const ctx_r885 = ɵngcc0.ɵɵnextContext(); return ctx_r885.onCancel(); });
+    ɵngcc0.ɵɵlistener("saveEmail", function UpdateEmailComponent_ng_template_3_Template_cx_update_email_form_saveEmail_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r884); const ctx_r883 = ɵngcc0.ɵɵnextContext(); return ctx_r883.onSubmit($event); })("cancelEmail", function UpdateEmailComponent_ng_template_3_Template_cx_update_email_form_cancelEmail_2_listener() { ɵngcc0.ɵɵrestoreView(_r884); const ctx_r885 = ɵngcc0.ɵɵnextContext(); return ctx_r885.onCancel(); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -5690,7 +5690,7 @@ function UpdatePasswordComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
     ɵngcc0.ɵɵelementStart(1, "div", 4);
     ɵngcc0.ɵɵelementStart(2, "cx-update-password-form", 5);
-    ɵngcc0.ɵɵlistener("cancelled", function UpdatePasswordComponent_ng_template_3_Template_cx_update_password_form_cancelled_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r893); const ctx_r892 = ɵngcc0.ɵɵnextContext(); return ctx_r892.onCancel(); })("submited", function UpdatePasswordComponent_ng_template_3_Template_cx_update_password_form_submited_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r893); const ctx_r894 = ɵngcc0.ɵɵnextContext(); return ctx_r894.onSubmit($event); });
+    ɵngcc0.ɵɵlistener("cancelled", function UpdatePasswordComponent_ng_template_3_Template_cx_update_password_form_cancelled_2_listener() { ɵngcc0.ɵɵrestoreView(_r893); const ctx_r892 = ɵngcc0.ɵɵnextContext(); return ctx_r892.onCancel(); })("submited", function UpdatePasswordComponent_ng_template_3_Template_cx_update_password_form_submited_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r893); const ctx_r894 = ɵngcc0.ɵɵnextContext(); return ctx_r894.onSubmit($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -5737,7 +5737,7 @@ function UpdateProfileComponent_div_1_Template(rf, ctx) { if (rf & 1) {
 function UpdateProfileComponent_ng_template_3_cx_update_profile_form_2_Template(rf, ctx) { if (rf & 1) {
     const _r904 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-update-profile-form", 6);
-    ɵngcc0.ɵɵlistener("cancelled", function UpdateProfileComponent_ng_template_3_cx_update_profile_form_2_Template_cx_update_profile_form_cancelled_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r904); const ctx_r903 = ɵngcc0.ɵɵnextContext(2); return ctx_r903.onCancel(); })("submited", function UpdateProfileComponent_ng_template_3_cx_update_profile_form_2_Template_cx_update_profile_form_submited_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r904); const ctx_r905 = ɵngcc0.ɵɵnextContext(2); return ctx_r905.onSubmit($event); });
+    ɵngcc0.ɵɵlistener("cancelled", function UpdateProfileComponent_ng_template_3_cx_update_profile_form_2_Template_cx_update_profile_form_cancelled_0_listener() { ɵngcc0.ɵɵrestoreView(_r904); const ctx_r903 = ɵngcc0.ɵɵnextContext(2); return ctx_r903.onCancel(); })("submited", function UpdateProfileComponent_ng_template_3_cx_update_profile_form_2_Template_cx_update_profile_form_submited_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r904); const ctx_r905 = ɵngcc0.ɵɵnextContext(2); return ctx_r905.onSubmit($event); });
     ɵngcc0.ɵɵpipe(1, "async");
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
@@ -5895,7 +5895,7 @@ function NotificationPreferenceComponent_ng_container_0_div_1_ng_container_7_lab
     const _r935 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "label", 10);
     ɵngcc0.ɵɵelementStart(1, "input", 11);
-    ɵngcc0.ɵɵlistener("change", function NotificationPreferenceComponent_ng_container_0_div_1_ng_container_7_label_1_Template_input_change_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r935); const preference_r931 = ɵngcc0.ɵɵnextContext().$implicit; const ctx_r933 = ɵngcc0.ɵɵnextContext(3); return ctx_r933.updatePreference(preference_r931); });
+    ɵngcc0.ɵɵlistener("change", function NotificationPreferenceComponent_ng_container_0_div_1_ng_container_7_label_1_Template_input_change_1_listener() { ɵngcc0.ɵɵrestoreView(_r935); const preference_r931 = ɵngcc0.ɵɵnextContext().$implicit; const ctx_r933 = ɵngcc0.ɵɵnextContext(3); return ctx_r933.updatePreference(preference_r931); });
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(3, "span", 12);
@@ -6097,7 +6097,7 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_Te
     ɵngcc0.ɵɵelementStart(27, "td");
     ɵngcc0.ɵɵelementStart(28, "div", 35);
     ɵngcc0.ɵɵelementStart(29, "button", 36);
-    ɵngcc0.ɵɵlistener("click", function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_Template_button_click_29_listener($event) { ɵngcc0.ɵɵrestoreView(_r963); const interest_r947 = ɵngcc0.ɵɵnextContext().$implicit; const ctx_r961 = ɵngcc0.ɵɵnextContext(4); return ctx_r961.removeInterest(interest_r947); });
+    ɵngcc0.ɵɵlistener("click", function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_Template_button_click_29_listener() { ɵngcc0.ɵɵrestoreView(_r963); const interest_r947 = ɵngcc0.ɵɵnextContext().$implicit; const ctx_r961 = ɵngcc0.ɵɵnextContext(4); return ctx_r961.removeInterest(interest_r947); });
     ɵngcc0.ɵɵpipe(30, "async");
     ɵngcc0.ɵɵtext(31);
     ɵngcc0.ɵɵpipe(32, "cxTranslate");
@@ -6283,7 +6283,7 @@ function CategoryNavigationComponent_cx_navigation_ui_0_Template(rf, ctx) { if (
 function NavigationUIComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     const _r981 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 3);
-    ɵngcc0.ɵɵlistener("click", function NavigationUIComponent_div_0_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r981); const ctx_r980 = ɵngcc0.ɵɵnextContext(); return ctx_r980.back(); });
+    ɵngcc0.ɵɵlistener("click", function NavigationUIComponent_div_0_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r981); const ctx_r980 = ɵngcc0.ɵɵnextContext(); return ctx_r980.back(); });
     ɵngcc0.ɵɵelementStart(1, "h5");
     ɵngcc0.ɵɵelement(2, "cx-icon", 4);
     ɵngcc0.ɵɵtext(3);
@@ -6741,7 +6741,7 @@ function ProductImagesComponent_ng_container_2_Template(rf, ctx) { if (rf & 1) {
 function ProductImagesComponent_ng_template_4_Template(rf, ctx) { if (rf & 1) {
     const _r1068 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-media", 5);
-    ɵngcc0.ɵɵlistener("focus", function ProductImagesComponent_ng_template_4_Template_cx_media_focus_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1068); const item_r1066 = ctx.item; const ctx_r1067 = ɵngcc0.ɵɵnextContext(); return ctx_r1067.openImage(item_r1066.container); });
+    ɵngcc0.ɵɵlistener("focus", function ProductImagesComponent_ng_template_4_Template_cx_media_focus_0_listener() { ɵngcc0.ɵɵrestoreView(_r1068); const item_r1066 = ctx.item; const ctx_r1067 = ɵngcc0.ɵɵnextContext(); return ctx_r1067.openImage(item_r1066.container); });
     ɵngcc0.ɵɵpipe(1, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
@@ -6753,7 +6753,7 @@ function ProductImagesComponent_ng_template_4_Template(rf, ctx) { if (rf & 1) {
 function ProductIntroComponent_ng_container_0_div_1_button_4_Template(rf, ctx) { if (rf & 1) {
     const _r1075 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 7);
-    ɵngcc0.ɵɵlistener("click", function ProductIntroComponent_ng_container_0_div_1_button_4_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1075); const ctx_r1074 = ɵngcc0.ɵɵnextContext(3); return ctx_r1074.showReviews(); });
+    ɵngcc0.ɵɵlistener("click", function ProductIntroComponent_ng_container_0_div_1_button_4_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1075); const ctx_r1074 = ɵngcc0.ɵɵnextContext(3); return ctx_r1074.showReviews(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -6985,7 +6985,7 @@ function ProductScrollComponent_ng_container_0_cx_product_grid_item_3_Template(r
 function ProductScrollComponent_ng_container_0_div_5_Template(rf, ctx) { if (rf & 1) {
     const _r1115 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 8);
-    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_0_div_5_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1115); const ctx_r1114 = ɵngcc0.ɵɵnextContext(2); return ctx_r1114.scrollToTop(); });
+    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_0_div_5_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1115); const ctx_r1114 = ɵngcc0.ɵɵnextContext(2); return ctx_r1114.scrollToTop(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -6996,7 +6996,7 @@ function ProductScrollComponent_ng_container_0_div_5_Template(rf, ctx) { if (rf 
 function ProductScrollComponent_ng_container_0_div_6_Template(rf, ctx) { if (rf & 1) {
     const _r1117 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
-    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_0_div_6_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1117); const ctx_r1116 = ɵngcc0.ɵɵnextContext(2); return ctx_r1116.loadNextPage((ctx_r1116.model == null ? null : ctx_r1116.model.pagination == null ? null : ctx_r1116.model.pagination.currentPage) + 1); });
+    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_0_div_6_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1117); const ctx_r1116 = ɵngcc0.ɵɵnextContext(2); return ctx_r1116.loadNextPage((ctx_r1116.model == null ? null : ctx_r1116.model.pagination == null ? null : ctx_r1116.model.pagination.currentPage) + 1); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7013,7 +7013,7 @@ function ProductScrollComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     const _r1119 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 1);
-    ɵngcc0.ɵɵlistener("scrolled", function ProductScrollComponent_ng_container_0_Template_div_scrolled_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1119); const ctx_r1118 = ɵngcc0.ɵɵnextContext(); return ctx_r1118.scrollPage((ctx_r1118.model == null ? null : ctx_r1118.model.pagination == null ? null : ctx_r1118.model.pagination.currentPage) + 1); });
+    ɵngcc0.ɵɵlistener("scrolled", function ProductScrollComponent_ng_container_0_Template_div_scrolled_1_listener() { ɵngcc0.ɵɵrestoreView(_r1119); const ctx_r1118 = ɵngcc0.ɵɵnextContext(); return ctx_r1118.scrollPage((ctx_r1118.model == null ? null : ctx_r1118.model.pagination == null ? null : ctx_r1118.model.pagination.currentPage) + 1); });
     ɵngcc0.ɵɵelementStart(2, "div", 2);
     ɵngcc0.ɵɵtemplate(3, ProductScrollComponent_ng_container_0_cx_product_grid_item_3_Template, 1, 1, "cx-product-grid-item", 3);
     ɵngcc0.ɵɵelementEnd();
@@ -7048,7 +7048,7 @@ function ProductScrollComponent_ng_container_1_cx_product_list_item_2_Template(r
 function ProductScrollComponent_ng_container_1_div_4_Template(rf, ctx) { if (rf & 1) {
     const _r1126 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 8);
-    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_1_div_4_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1126); const ctx_r1125 = ɵngcc0.ɵɵnextContext(2); return ctx_r1125.scrollToTop(); });
+    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_1_div_4_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1126); const ctx_r1125 = ɵngcc0.ɵɵnextContext(2); return ctx_r1125.scrollToTop(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7059,7 +7059,7 @@ function ProductScrollComponent_ng_container_1_div_4_Template(rf, ctx) { if (rf 
 function ProductScrollComponent_ng_container_1_div_5_Template(rf, ctx) { if (rf & 1) {
     const _r1128 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
-    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_1_div_5_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1128); const ctx_r1127 = ɵngcc0.ɵɵnextContext(2); return ctx_r1127.loadNextPage((ctx_r1127.model == null ? null : ctx_r1127.model.pagination == null ? null : ctx_r1127.model.pagination.currentPage) + 1); });
+    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_1_div_5_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1128); const ctx_r1127 = ɵngcc0.ɵɵnextContext(2); return ctx_r1127.loadNextPage((ctx_r1127.model == null ? null : ctx_r1127.model.pagination == null ? null : ctx_r1127.model.pagination.currentPage) + 1); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7076,7 +7076,7 @@ function ProductScrollComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     const _r1130 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 1);
-    ɵngcc0.ɵɵlistener("scrolled", function ProductScrollComponent_ng_container_1_Template_div_scrolled_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1130); const ctx_r1129 = ɵngcc0.ɵɵnextContext(); return ctx_r1129.scrollPage((ctx_r1129.model == null ? null : ctx_r1129.model.pagination == null ? null : ctx_r1129.model.pagination.currentPage) + 1); });
+    ɵngcc0.ɵɵlistener("scrolled", function ProductScrollComponent_ng_container_1_Template_div_scrolled_1_listener() { ɵngcc0.ɵɵrestoreView(_r1130); const ctx_r1129 = ɵngcc0.ɵɵnextContext(); return ctx_r1129.scrollPage((ctx_r1129.model == null ? null : ctx_r1129.model.pagination == null ? null : ctx_r1129.model.pagination.currentPage) + 1); });
     ɵngcc0.ɵɵtemplate(2, ProductScrollComponent_ng_container_1_cx_product_list_item_2_Template, 1, 1, "cx-product-list-item", 11);
     ɵngcc0.ɵɵelementStart(3, "div");
     ɵngcc0.ɵɵtemplate(4, ProductScrollComponent_ng_container_1_div_4_Template, 3, 3, "div", 4);
@@ -7107,7 +7107,7 @@ function ProductFacetNavigationComponent_ng_container_0_ng_container_2_div_5_Tem
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(3, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_2_div_5_Template_button_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r1141); const breadcrumb_r1139 = ctx.$implicit; const ctx_r1140 = ɵngcc0.ɵɵnextContext(3); return ctx_r1140.toggleValue(breadcrumb_r1139.removeQuery.query.value); });
+    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_2_div_5_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r1141); const breadcrumb_r1139 = ctx.$implicit; const ctx_r1140 = ɵngcc0.ɵɵnextContext(3); return ctx_r1140.toggleValue(breadcrumb_r1139.removeQuery.query.value); });
     ɵngcc0.ɵɵelementStart(4, "span", 13);
     ɵngcc0.ɵɵelement(5, "cx-icon", 14);
     ɵngcc0.ɵɵelementEnd();
@@ -7145,7 +7145,7 @@ function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_contai
     ɵngcc0.ɵɵelementStart(1, "div", 22);
     ɵngcc0.ɵɵelementStart(2, "label", 23);
     ɵngcc0.ɵɵelementStart(3, "input", 24);
-    ɵngcc0.ɵɵlistener("change", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_2_Template_input_change_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r1154); const value_r1151 = ctx.$implicit; const ctx_r1153 = ɵngcc0.ɵɵnextContext(5); return ctx_r1153.toggleValue(value_r1151.query.query.value); });
+    ɵngcc0.ɵɵlistener("change", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_2_Template_input_change_3_listener() { ɵngcc0.ɵɵrestoreView(_r1154); const value_r1151 = ctx.$implicit; const ctx_r1153 = ɵngcc0.ɵɵnextContext(5); return ctx_r1153.toggleValue(value_r1151.query.query.value); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "span", 25);
     ɵngcc0.ɵɵtext(5);
@@ -7163,7 +7163,7 @@ function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_contai
 function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_3_Template(rf, ctx) { if (rf & 1) {
     const _r1157 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li", 26);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_3_Template_li_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1157); const facet_r1145 = ɵngcc0.ɵɵnextContext(2).$implicit; const ctx_r1155 = ɵngcc0.ɵɵnextContext(3); return ctx_r1155.showLess(facet_r1145.name); });
+    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_3_Template_li_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1157); const facet_r1145 = ɵngcc0.ɵɵnextContext(2).$implicit; const ctx_r1155 = ɵngcc0.ɵɵnextContext(3); return ctx_r1155.showLess(facet_r1145.name); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7174,7 +7174,7 @@ function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_contai
 function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_4_Template(rf, ctx) { if (rf & 1) {
     const _r1160 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li", 27);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_4_Template_li_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1160); const facet_r1145 = ɵngcc0.ɵɵnextContext(2).$implicit; const ctx_r1158 = ɵngcc0.ɵɵnextContext(3); return ctx_r1158.showMore(facet_r1145.name); });
+    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_4_Template_li_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1160); const facet_r1145 = ɵngcc0.ɵɵnextContext(2).$implicit; const ctx_r1158 = ɵngcc0.ɵɵnextContext(3); return ctx_r1158.showMore(facet_r1145.name); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7206,7 +7206,7 @@ function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_contai
     ɵngcc0.ɵɵelementStart(1, "div", 16);
     ɵngcc0.ɵɵelementStart(2, "div", 17);
     ɵngcc0.ɵɵelementStart(3, "a", 18);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_Template_a_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r1163); const facet_r1145 = ctx.$implicit; const ctx_r1162 = ɵngcc0.ɵɵnextContext(3); return ctx_r1162.toggleFacet(facet_r1145.name); });
+    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_Template_a_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r1163); const facet_r1145 = ctx.$implicit; const ctx_r1162 = ɵngcc0.ɵɵnextContext(3); return ctx_r1162.toggleFacet(facet_r1145.name); });
     ɵngcc0.ɵɵtext(4);
     ɵngcc0.ɵɵelement(5, "cx-icon", 14);
     ɵngcc0.ɵɵelementEnd();
@@ -7242,7 +7242,7 @@ function ProductFacetNavigationComponent_ng_container_0_div_11_div_5_Template(rf
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(3, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_div_11_div_5_Template_button_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r1167); const breadcrumb_r1165 = ctx.$implicit; const ctx_r1166 = ɵngcc0.ɵɵnextContext(3); return ctx_r1166.toggleValue(breadcrumb_r1165.removeQuery.query.value); });
+    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_div_11_div_5_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r1167); const breadcrumb_r1165 = ctx.$implicit; const ctx_r1166 = ɵngcc0.ɵɵnextContext(3); return ctx_r1166.toggleValue(breadcrumb_r1165.removeQuery.query.value); });
     ɵngcc0.ɵɵelementStart(4, "span", 13);
     ɵngcc0.ɵɵelement(5, "cx-icon", 14);
     ɵngcc0.ɵɵelementEnd();
@@ -7279,7 +7279,7 @@ function ProductFacetNavigationComponent_ng_container_0_ng_template_12_div_9_li_
     ɵngcc0.ɵɵelementStart(1, "div", 22);
     ɵngcc0.ɵɵelementStart(2, "label", 23);
     ɵngcc0.ɵɵelementStart(3, "input", 24);
-    ɵngcc0.ɵɵlistener("change", function ProductFacetNavigationComponent_ng_container_0_ng_template_12_div_9_li_5_Template_input_change_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r1178); const value_r1175 = ctx.$implicit; const ctx_r1177 = ɵngcc0.ɵɵnextContext(4); return ctx_r1177.toggleValue(value_r1175.query.query.value); });
+    ɵngcc0.ɵɵlistener("change", function ProductFacetNavigationComponent_ng_container_0_ng_template_12_div_9_li_5_Template_input_change_3_listener() { ɵngcc0.ɵɵrestoreView(_r1178); const value_r1175 = ctx.$implicit; const ctx_r1177 = ɵngcc0.ɵɵnextContext(4); return ctx_r1177.toggleValue(value_r1175.query.query.value); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "span", 25);
     ɵngcc0.ɵɵtext(5);
@@ -7319,7 +7319,7 @@ function ProductFacetNavigationComponent_ng_container_0_ng_template_12_Template(
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_template_12_Template_button_click_4_listener($event) { const d_r1170 = ctx.dismiss; return d_r1170("Cross click"); });
+    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_template_12_Template_button_click_4_listener() { const d_r1170 = ctx.dismiss; return d_r1170("Cross click"); });
     ɵngcc0.ɵɵelementStart(5, "span", 13);
     ɵngcc0.ɵɵelement(6, "cx-icon", 14);
     ɵngcc0.ɵɵelementEnd();
@@ -7351,7 +7351,7 @@ function ProductFacetNavigationComponent_ng_container_0_Template(rf, ctx) { if (
     ɵngcc0.ɵɵelementStart(5, "div", 2);
     ɵngcc0.ɵɵelementStart(6, "div", 3);
     ɵngcc0.ɵɵelementStart(7, "button", 4);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_Template_button_click_7_listener($event) { ɵngcc0.ɵɵrestoreView(_r1182); const _r1136 = ɵngcc0.ɵɵreference(13); const ctx_r1181 = ɵngcc0.ɵɵnextContext(); return ctx_r1181.openFilterModal(_r1136); });
+    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_Template_button_click_7_listener() { ɵngcc0.ɵɵrestoreView(_r1182); const _r1136 = ɵngcc0.ɵɵreference(13); const ctx_r1181 = ɵngcc0.ɵɵnextContext(); return ctx_r1181.openFilterModal(_r1136); });
     ɵngcc0.ɵɵtext(8);
     ɵngcc0.ɵɵpipe(9, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7513,7 +7513,7 @@ function VariantStyleSelectorComponent_li_4_Template(rf, ctx) { if (rf & 1) {
     const _r1205 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li", 6);
     ɵngcc0.ɵɵelementStart(1, "img", 7);
-    ɵngcc0.ɵɵlistener("click", function VariantStyleSelectorComponent_li_4_Template_img_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1205); const v_r1203 = ctx.$implicit; const ctx_r1204 = ɵngcc0.ɵɵnextContext(); return ctx_r1204.changeStyle(v_r1203.code); });
+    ɵngcc0.ɵɵlistener("click", function VariantStyleSelectorComponent_li_4_Template_img_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r1205); const v_r1203 = ctx.$implicit; const ctx_r1204 = ɵngcc0.ɵɵnextContext(); return ctx_r1204.changeStyle(v_r1203.code); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
@@ -7707,7 +7707,7 @@ function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_contain
 function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_1_Template(rf, ctx) { if (rf & 1) {
     const _r1246 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_1_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1246); const reviews_r1239 = ɵngcc0.ɵɵnextContext(2).ngIf; const ctx_r1245 = ɵngcc0.ɵɵnextContext(4); return ctx_r1245.maxListItems = reviews_r1239.length; });
+    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_1_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1246); const reviews_r1239 = ɵngcc0.ɵɵnextContext(2).ngIf; const ctx_r1245 = ɵngcc0.ɵɵnextContext(4); return ctx_r1245.maxListItems = reviews_r1239.length; });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7718,7 +7718,7 @@ function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_contain
 function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_2_Template(rf, ctx) { if (rf & 1) {
     const _r1249 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_2_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1249); const ctx_r1248 = ɵngcc0.ɵɵnextContext(6); return ctx_r1248.maxListItems = ctx_r1248.initialMaxListItems; });
+    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_2_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1249); const ctx_r1248 = ɵngcc0.ɵɵnextContext(6); return ctx_r1248.maxListItems = ctx_r1248.initialMaxListItems; });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7771,7 +7771,7 @@ function ProductReviewsComponent_div_0_ng_container_4_Template(rf, ctx) { if (rf
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 5, 6);
-    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_Template_button_click_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1251); const ctx_r1250 = ɵngcc0.ɵɵnextContext(2); return ctx_r1250.initiateWriteReview(); });
+    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r1251); const ctx_r1250 = ɵngcc0.ɵɵnextContext(2); return ctx_r1250.initiateWriteReview(); });
     ɵngcc0.ɵɵtext(7);
     ɵngcc0.ɵɵpipe(8, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7799,7 +7799,7 @@ const _c46 = function (a0) { return { "submit-btn": a0 }; };
 function ProductReviewsComponent_div_0_ng_template_5_Template(rf, ctx) { if (rf & 1) {
     const _r1256 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "form", 20);
-    ɵngcc0.ɵɵlistener("ngSubmit", function ProductReviewsComponent_div_0_ng_template_5_Template_form_ngSubmit_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1256); const product_r1229 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r1254 = ɵngcc0.ɵɵnextContext(); return ctx_r1254.submitReview(product_r1229); });
+    ɵngcc0.ɵɵlistener("ngSubmit", function ProductReviewsComponent_div_0_ng_template_5_Template_form_ngSubmit_0_listener() { ɵngcc0.ɵɵrestoreView(_r1256); const product_r1229 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r1254 = ɵngcc0.ɵɵnextContext(); return ctx_r1254.submitReview(product_r1229); });
     ɵngcc0.ɵɵelementStart(1, "div", 21);
     ɵngcc0.ɵɵelementStart(2, "label");
     ɵngcc0.ɵɵelementStart(3, "span", 22);
@@ -7841,7 +7841,7 @@ function ProductReviewsComponent_div_0_ng_template_5_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementStart(26, "div", 28);
     ɵngcc0.ɵɵelementStart(27, "div", 29);
     ɵngcc0.ɵɵelementStart(28, "button", 30);
-    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_template_5_Template_button_click_28_listener($event) { ɵngcc0.ɵɵrestoreView(_r1256); const ctx_r1258 = ɵngcc0.ɵɵnextContext(2); return ctx_r1258.cancelWriteReview(); });
+    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_template_5_Template_button_click_28_listener() { ɵngcc0.ɵɵrestoreView(_r1256); const ctx_r1258 = ɵngcc0.ɵɵnextContext(2); return ctx_r1258.cancelWriteReview(); });
     ɵngcc0.ɵɵtext(29);
     ɵngcc0.ɵɵpipe(30, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7936,7 +7936,7 @@ function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵtext(11);
     ɵngcc0.ɵɵpipe(12, "cxTranslate");
     ɵngcc0.ɵɵelementStart(13, "a", 9);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_a_click_13_listener($event) { ɵngcc0.ɵɵrestoreView(_r1267); const ctx_r1266 = ɵngcc0.ɵɵnextContext(); return ctx_r1266.close(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_a_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r1267); const ctx_r1266 = ɵngcc0.ɵɵnextContext(); return ctx_r1266.close(); });
     ɵngcc0.ɵɵtext(14);
     ɵngcc0.ɵɵpipe(15, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7947,7 +7947,7 @@ function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵtext(19);
     ɵngcc0.ɵɵpipe(20, "cxTranslate");
     ɵngcc0.ɵɵelementStart(21, "a", 10);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_a_click_21_listener($event) { ɵngcc0.ɵɵrestoreView(_r1267); const ctx_r1268 = ɵngcc0.ɵɵnextContext(); return ctx_r1268.close(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_a_click_21_listener() { ɵngcc0.ɵɵrestoreView(_r1267); const ctx_r1268 = ɵngcc0.ɵɵnextContext(); return ctx_r1268.close(); });
     ɵngcc0.ɵɵtext(22);
     ɵngcc0.ɵɵpipe(23, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7957,7 +7957,7 @@ function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵelementStart(26, "div", 11);
     ɵngcc0.ɵɵelementStart(27, "div", 12);
     ɵngcc0.ɵɵelementStart(28, "button", 13);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_button_click_28_listener($event) { ɵngcc0.ɵɵrestoreView(_r1267); const ctx_r1269 = ɵngcc0.ɵɵnextContext(); return ctx_r1269.close(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_button_click_28_listener() { ɵngcc0.ɵɵrestoreView(_r1267); const ctx_r1269 = ɵngcc0.ɵɵnextContext(); return ctx_r1269.close(); });
     ɵngcc0.ɵɵtext(29);
     ɵngcc0.ɵɵpipe(30, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -8019,7 +8019,7 @@ function StockNotificationComponent_ng_container_0_ng_container_1_ng_container_1
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 6);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationComponent_ng_container_0_ng_container_1_ng_container_1_Template_button_click_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1280); const ctx_r1279 = ɵngcc0.ɵɵnextContext(3); return ctx_r1279.subscribe(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationComponent_ng_container_0_ng_container_1_ng_container_1_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r1280); const ctx_r1279 = ɵngcc0.ɵɵnextContext(3); return ctx_r1279.subscribe(); });
     ɵngcc0.ɵɵtext(6);
     ɵngcc0.ɵɵpipe(7, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -8123,7 +8123,7 @@ function StockNotificationComponent_ng_template_4_ng_container_0_Template(rf, ct
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 10);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationComponent_ng_template_4_ng_container_0_Template_button_click_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1286); const ctx_r1285 = ɵngcc0.ɵɵnextContext(2); return ctx_r1285.unsubscribe(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationComponent_ng_template_4_ng_container_0_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r1286); const ctx_r1285 = ɵngcc0.ɵɵnextContext(2); return ctx_r1285.unsubscribe(); });
     ɵngcc0.ɵɵtext(6);
     ɵngcc0.ɵɵpipe(7, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -8201,7 +8201,7 @@ function ScheduleComponent_div_1_Template(rf, ctx) { if (rf & 1) {
 function StoreFinderGridComponent_ng_container_0_div_3_Template(rf, ctx) { if (rf & 1) {
     const _r1300 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 5);
-    ɵngcc0.ɵɵlistener("click", function StoreFinderGridComponent_ng_container_0_div_3_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1300); const location_r1298 = ctx.$implicit; const ctx_r1299 = ɵngcc0.ɵɵnextContext(2); return ctx_r1299.viewStore(location_r1298); });
+    ɵngcc0.ɵɵlistener("click", function StoreFinderGridComponent_ng_container_0_div_3_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1300); const location_r1298 = ctx.$implicit; const ctx_r1299 = ɵngcc0.ɵɵnextContext(2); return ctx_r1299.viewStore(location_r1298); });
     ɵngcc0.ɵɵelement(1, "cx-store-finder-list-item", 6);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
@@ -8259,7 +8259,7 @@ const _c50 = ["storeMap"];
 function StoreFinderListComponent_ng_container_0_div_2_button_4_Template(rf, ctx) { if (rf & 1) {
     const _r1311 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 10);
-    ɵngcc0.ɵɵlistener("click", function StoreFinderListComponent_ng_container_0_div_2_button_4_Template_button_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1311); const ctx_r1310 = ɵngcc0.ɵɵnextContext(3); return ctx_r1310.hideStoreDetails(); });
+    ɵngcc0.ɵɵlistener("click", function StoreFinderListComponent_ng_container_0_div_2_button_4_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1311); const ctx_r1310 = ɵngcc0.ɵɵnextContext(3); return ctx_r1310.hideStoreDetails(); });
     ɵngcc0.ɵɵelement(1, "cx-icon", 11);
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
@@ -8722,7 +8722,7 @@ function StoreFinderStoreComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(1, "div", 3);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
     ɵngcc0.ɵɵelementStart(3, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function StoreFinderStoreComponent_div_0_Template_button_click_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r1372); const ctx_r1371 = ɵngcc0.ɵɵnextContext(); return ctx_r1371.goBack(); });
+    ɵngcc0.ɵɵlistener("click", function StoreFinderStoreComponent_div_0_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r1372); const ctx_r1371 = ɵngcc0.ɵɵnextContext(); return ctx_r1371.goBack(); });
     ɵngcc0.ɵɵelement(4, "cx-icon", 6);
     ɵngcc0.ɵɵtext(5);
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
@@ -9006,7 +9006,7 @@ function RegisterComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(69, "button", 24);
-    ɵngcc0.ɵɵlistener("click", function RegisterComponent_section_0_Template_button_click_69_listener($event) { ɵngcc0.ɵɵrestoreView(_r1395); const ctx_r1394 = ɵngcc0.ɵɵnextContext(); return ctx_r1394.submit(); });
+    ɵngcc0.ɵɵlistener("click", function RegisterComponent_section_0_Template_button_click_69_listener() { ɵngcc0.ɵɵrestoreView(_r1395); const ctx_r1394 = ɵngcc0.ɵɵnextContext(); return ctx_r1394.submit(); });
     ɵngcc0.ɵɵtext(70);
     ɵngcc0.ɵɵpipe(71, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -9707,7 +9707,7 @@ AnonymousConsentOpenDialogComponent.ɵfac = function AnonymousConsentOpenDialogC
 AnonymousConsentOpenDialogComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AnonymousConsentOpenDialogComponent, selectors: [["cx-anonymous-consent-open-dialog"]], decls: 4, vars: 3, consts: [[1, "anonymous-consents"], [1, "btn", "btn-link", 3, "click"]], template: function AnonymousConsentOpenDialogComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "div", 0);
         ɵngcc0.ɵɵelementStart(1, "button", 1);
-        ɵngcc0.ɵɵlistener("click", function AnonymousConsentOpenDialogComponent_Template_button_click_1_listener($event) { return ctx.openDialog(); });
+        ɵngcc0.ɵɵlistener("click", function AnonymousConsentOpenDialogComponent_Template_button_click_1_listener() { return ctx.openDialog(); });
         ɵngcc0.ɵɵtext(2);
         ɵngcc0.ɵɵpipe(3, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
@@ -10599,7 +10599,9 @@ let CmsPageGuard = class CmsPageGuard {
             : this.getCmsPage(route, state);
     }
     getCmsPage(route, state) {
-        return this.routingService.getNextPageContext().pipe(switchMap(pageContext => this.cmsService.getPage(pageContext, true).pipe(first(), withLatestFrom(of(pageContext)))), switchMap(([pageData, pageContext]) => pageData
+        return this.routingService.getNextPageContext().pipe(switchMap(pageContext => this.cmsService
+            .getPage(pageContext, true)
+            .pipe(first(), withLatestFrom(of(pageContext)))), switchMap(([pageData, pageContext]) => pageData
             ? this.resolveCmsPageLogic(pageContext, pageData, route, state)
             : this.handleNotFoundPage(pageContext, route, state)));
     }
@@ -11348,7 +11350,7 @@ AddToHomeScreenBtnComponent.ɵfac = function AddToHomeScreenBtnComponent_Factory
 AddToHomeScreenBtnComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddToHomeScreenBtnComponent, selectors: [["cx-add-to-home-screen-btn"]], features: [ɵngcc0.ɵɵInheritDefinitionFeature], ngContentSelectors: _c0, decls: 3, vars: 3, consts: [[3, "click"], [4, "ngIf"]], template: function AddToHomeScreenBtnComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵprojectionDef();
         ɵngcc0.ɵɵelementStart(0, "span", 0);
-        ɵngcc0.ɵɵlistener("click", function AddToHomeScreenBtnComponent_Template_span_click_0_listener($event) { return ctx.prompt(); });
+        ɵngcc0.ɵɵlistener("click", function AddToHomeScreenBtnComponent_Template_span_click_0_listener() { return ctx.prompt(); });
         ɵngcc0.ɵɵtemplate(1, AddToHomeScreenBtnComponent_1_Template, 1, 0, undefined, 1);
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵelementEnd();
@@ -11667,7 +11669,8 @@ let BreadcrumbSchemaBuilder = class BreadcrumbSchemaBuilder {
             .pipe(map((pageMeta) => this.collect(pageMeta)));
     }
     collect(pageMeta) {
-        if (!pageMeta || !pageMeta.breadcrumbs) {
+        var _a;
+        if (!((_a = pageMeta) === null || _a === void 0 ? void 0 : _a.breadcrumbs)) {
             return;
         }
         const crumbs = pageMeta.breadcrumbs.map((crumb, index) => {
@@ -12272,7 +12275,7 @@ AsmSessionTimerComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AsmSessionT
         ɵngcc0.ɵɵpipe(6, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementStart(7, "a", 2);
-        ɵngcc0.ɵɵlistener("click", function AsmSessionTimerComponent_Template_a_click_7_listener($event) { return ctx.resetTimer(); });
+        ɵngcc0.ɵɵlistener("click", function AsmSessionTimerComponent_Template_a_click_7_listener() { return ctx.resetTimer(); });
         ɵngcc0.ɵɵpipe(8, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
@@ -12487,7 +12490,7 @@ CustomerSelectionComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CustomerS
         ɵngcc0.ɵɵlistener("click", function CustomerSelectionComponent_click_HostBindingHandler($event) { return ctx.onDocumentClick($event); }, false, ɵngcc0.ɵɵresolveDocument);
     } }, outputs: { submitEvent: "submitEvent" }, decls: 11, vars: 14, consts: [[3, "formGroup", "submit"], ["type", "text", "formControlName", "searchTerm", 3, "placeholder"], ["searchTerm", ""], ["type", "submit", 3, "disabled"], ["class", "asm-results", 4, "ngIf"], [1, "asm-results"], ["resultList", ""], [3, "click", 4, "ngFor", "ngForOf"], [3, "click", 4, "ngIf"], [3, "click"], [1, "result-name"], [1, "result-id"], ["aria-hidden", "false", "aria-label", "Loading", 1, "spinner"]], template: function CustomerSelectionComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "form", 0);
-        ɵngcc0.ɵɵlistener("submit", function CustomerSelectionComponent_Template_form_submit_0_listener($event) { return ctx.onSubmit(); });
+        ɵngcc0.ɵɵlistener("submit", function CustomerSelectionComponent_Template_form_submit_0_listener() { return ctx.onSubmit(); });
         ɵngcc0.ɵɵelement(1, "input", 1, 2);
         ɵngcc0.ɵɵpipe(3, "cxTranslate");
         ɵngcc0.ɵɵelementStart(4, "button", 3);
@@ -13376,18 +13379,18 @@ ItemCounterComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ItemCounterComp
         var _t;
         ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.input = _t.first);
     } }, hostVars: 2, hostBindings: function ItemCounterComponent_HostBindings(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵlistener("click", function ItemCounterComponent_click_HostBindingHandler($event) { return ctx.handleClick(); });
+        ɵngcc0.ɵɵlistener("click", function ItemCounterComponent_click_HostBindingHandler() { return ctx.handleClick(); });
     } if (rf & 2) {
         ɵngcc0.ɵɵclassProp("readonly", ctx.readonly);
     } }, inputs: { min: "min", step: "step", allowZero: "allowZero", readonly: "readonly", control: "control", max: "max" }, decls: 7, vars: 8, consts: [["type", "button", "tabindex", "-1", 3, "disabled", "click"], ["type", "number", 3, "min", "max", "step", "formControl"], ["qty", ""]], template: function ItemCounterComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "button", 0);
-        ɵngcc0.ɵɵlistener("click", function ItemCounterComponent_Template_button_click_0_listener($event) { return ctx.decrement(); });
+        ɵngcc0.ɵɵlistener("click", function ItemCounterComponent_Template_button_click_0_listener() { return ctx.decrement(); });
         ɵngcc0.ɵɵtext(1, " -\n");
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelement(2, "input", 1, 2);
         ɵngcc0.ɵɵpipe(4, "async");
         ɵngcc0.ɵɵelementStart(5, "button", 0);
-        ɵngcc0.ɵɵlistener("click", function ItemCounterComponent_Template_button_click_5_listener($event) { return ctx.increment(); });
+        ɵngcc0.ɵɵlistener("click", function ItemCounterComponent_Template_button_click_5_listener() { return ctx.increment(); });
         ɵngcc0.ɵɵtext(6, " +\n");
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
@@ -14780,7 +14783,7 @@ CartItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartItemComponent,
         ɵngcc0.ɵɵelementStart(0, "div", 0);
         ɵngcc0.ɵɵelementStart(1, "div", 1);
         ɵngcc0.ɵɵelementStart(2, "a", 2);
-        ɵngcc0.ɵɵlistener("click", function CartItemComponent_Template_a_click_2_listener($event) { return ctx.viewItem(); });
+        ɵngcc0.ɵɵlistener("click", function CartItemComponent_Template_a_click_2_listener() { return ctx.viewItem(); });
         ɵngcc0.ɵɵpipe(3, "cxUrl");
         ɵngcc0.ɵɵelement(4, "cx-media", 3);
         ɵngcc0.ɵɵelementEnd();
@@ -16123,14 +16126,14 @@ DeliveryModeComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: DeliveryModeCo
         ɵngcc0.ɵɵelementStart(8, "div", 5);
         ɵngcc0.ɵɵelementStart(9, "div", 6);
         ɵngcc0.ɵɵelementStart(10, "button", 7);
-        ɵngcc0.ɵɵlistener("click", function DeliveryModeComponent_Template_button_click_10_listener($event) { return ctx.back(); });
+        ɵngcc0.ɵɵlistener("click", function DeliveryModeComponent_Template_button_click_10_listener() { return ctx.back(); });
         ɵngcc0.ɵɵtext(11);
         ɵngcc0.ɵɵpipe(12, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementStart(13, "div", 6);
         ɵngcc0.ɵɵelementStart(14, "button", 8);
-        ɵngcc0.ɵɵlistener("click", function DeliveryModeComponent_Template_button_click_14_listener($event) { return ctx.next(); });
+        ɵngcc0.ɵɵlistener("click", function DeliveryModeComponent_Template_button_click_14_listener() { return ctx.next(); });
         ɵngcc0.ɵɵtext(15);
         ɵngcc0.ɵɵpipe(16, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
@@ -16388,7 +16391,7 @@ SuggestedAddressDialogComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Sugg
         ɵngcc0.ɵɵpipe(3, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementStart(4, "button", 2);
-        ɵngcc0.ɵɵlistener("click", function SuggestedAddressDialogComponent_Template_button_click_4_listener($event) { return ctx.closeModal(); });
+        ɵngcc0.ɵɵlistener("click", function SuggestedAddressDialogComponent_Template_button_click_4_listener() { return ctx.closeModal(); });
         ɵngcc0.ɵɵelementStart(5, "span", 3);
         ɵngcc0.ɵɵelement(6, "cx-icon", 4);
         ɵngcc0.ɵɵelementEnd();
@@ -16435,12 +16438,12 @@ SuggestedAddressDialogComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Sugg
         ɵngcc0.ɵɵelementStart(34, "div", 7);
         ɵngcc0.ɵɵelementStart(35, "div", 15);
         ɵngcc0.ɵɵelementStart(36, "button", 16);
-        ɵngcc0.ɵɵlistener("click", function SuggestedAddressDialogComponent_Template_button_click_36_listener($event) { return ctx.closeModal(); });
+        ɵngcc0.ɵɵlistener("click", function SuggestedAddressDialogComponent_Template_button_click_36_listener() { return ctx.closeModal(); });
         ɵngcc0.ɵɵtext(37);
         ɵngcc0.ɵɵpipe(38, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementStart(39, "button", 17);
-        ɵngcc0.ɵɵlistener("click", function SuggestedAddressDialogComponent_Template_button_click_39_listener($event) { return ctx.closeModal(ctx.selectedAddress); });
+        ɵngcc0.ɵɵlistener("click", function SuggestedAddressDialogComponent_Template_button_click_39_listener() { return ctx.closeModal(ctx.selectedAddress); });
         ɵngcc0.ɵɵtext(40);
         ɵngcc0.ɵɵpipe(41, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
@@ -16973,7 +16976,7 @@ PlaceOrderComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: PlaceOrderCompon
         ɵngcc0.ɵɵelementStart(0, "div", 0);
         ɵngcc0.ɵɵelementStart(1, "label");
         ɵngcc0.ɵɵelementStart(2, "input", 1);
-        ɵngcc0.ɵɵlistener("change", function PlaceOrderComponent_Template_input_change_2_listener($event) { return ctx.toggleTAndC(); });
+        ɵngcc0.ɵɵlistener("change", function PlaceOrderComponent_Template_input_change_2_listener() { return ctx.toggleTAndC(); });
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementStart(3, "span", 2);
         ɵngcc0.ɵɵtext(4);
@@ -16987,7 +16990,7 @@ PlaceOrderComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: PlaceOrderCompon
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementStart(10, "button", 4);
-        ɵngcc0.ɵɵlistener("click", function PlaceOrderComponent_Template_button_click_10_listener($event) { return ctx.placeOrder(); });
+        ɵngcc0.ɵɵlistener("click", function PlaceOrderComponent_Template_button_click_10_listener() { return ctx.placeOrder(); });
         ɵngcc0.ɵɵtext(11);
         ɵngcc0.ɵɵpipe(12, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
@@ -17499,7 +17502,7 @@ AddressFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddressFormComp
         ɵngcc0.ɵɵtemplate(62, AddressFormComponent_div_62_Template, 4, 3, "div", 19);
         ɵngcc0.ɵɵelementStart(63, "div", 20);
         ɵngcc0.ɵɵelementStart(64, "button", 21);
-        ɵngcc0.ɵɵlistener("click", function AddressFormComponent_Template_button_click_64_listener($event) { return ctx.verifyAddress(); });
+        ɵngcc0.ɵɵlistener("click", function AddressFormComponent_Template_button_click_64_listener() { return ctx.verifyAddress(); });
         ɵngcc0.ɵɵtext(65);
         ɵngcc0.ɵɵpipe(66, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
@@ -17927,7 +17930,7 @@ let HamburgerMenuComponent = class HamburgerMenuComponent {
 HamburgerMenuComponent.ɵfac = function HamburgerMenuComponent_Factory(t) { return new (t || HamburgerMenuComponent)(ɵngcc0.ɵɵdirectiveInject(HamburgerMenuService)); };
 HamburgerMenuComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: HamburgerMenuComponent, selectors: [["cx-hamburger-menu"]], decls: 5, vars: 7, consts: [["type", "button", "aria-label", "Menu", "aria-controls", "header-account-container, header-categories-container, header-locale-container", 1, "cx-hamburger", 3, "click"], [1, "hamburger-box"], [1, "hamburger-inner"]], template: function HamburgerMenuComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "button", 0);
-        ɵngcc0.ɵɵlistener("click", function HamburgerMenuComponent_Template_button_click_0_listener($event) { return ctx.toggle(); });
+        ɵngcc0.ɵɵlistener("click", function HamburgerMenuComponent_Template_button_click_0_listener() { return ctx.toggle(); });
         ɵngcc0.ɵɵpipe(1, "async");
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵelementStart(3, "span", 1);
@@ -18004,7 +18007,7 @@ ConsentManagementFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Conse
         ɵngcc0.ɵɵelementStart(0, "div", 0);
         ɵngcc0.ɵɵelementStart(1, "label");
         ɵngcc0.ɵɵelementStart(2, "input", 1);
-        ɵngcc0.ɵɵlistener("change", function ConsentManagementFormComponent_Template_input_change_2_listener($event) { return ctx.onConsentChange(); });
+        ɵngcc0.ɵɵlistener("change", function ConsentManagementFormComponent_Template_input_change_2_listener() { return ctx.onConsentChange(); });
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵtemplate(3, ConsentManagementFormComponent_span_3_Template, 2, 1, "span", 2);
         ɵngcc0.ɵɵtemplate(4, ConsentManagementFormComponent_br_4_Template, 1, 0, "br", 3);
@@ -18862,7 +18865,7 @@ CloseAccountComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CloseAccountCo
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementStart(7, "div", 4);
         ɵngcc0.ɵɵelementStart(8, "button", 5);
-        ɵngcc0.ɵɵlistener("click", function CloseAccountComponent_Template_button_click_8_listener($event) { return ctx.openModal(); });
+        ɵngcc0.ɵɵlistener("click", function CloseAccountComponent_Template_button_click_8_listener() { return ctx.openModal(); });
         ɵngcc0.ɵɵtext(9);
         ɵngcc0.ɵɵpipe(10, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
@@ -18928,7 +18931,7 @@ let ForgotPasswordComponent = class ForgotPasswordComponent {
 ForgotPasswordComponent.ɵfac = function ForgotPasswordComponent_Factory(t) { return new (t || ForgotPasswordComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService)); };
 ForgotPasswordComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ForgotPasswordComponent, selectors: [["cx-forgot-password"]], decls: 16, vars: 21, consts: [[3, "formGroup", "submit"], [1, "form-group"], [1, "label-content"], ["type", "email", "formControlName", "userEmail", 1, "form-control", 3, "placeholder", "ngClass"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "submit", 1, "btn", "btn-block", "btn-primary"], [1, "btn", "btn-block", "btn-secondary", 3, "routerLink"], [1, "invalid-feedback"]], template: function ForgotPasswordComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "form", 0);
-        ɵngcc0.ɵɵlistener("submit", function ForgotPasswordComponent_Template_form_submit_0_listener($event) { return ctx.requestForgotPasswordEmail(); });
+        ɵngcc0.ɵɵlistener("submit", function ForgotPasswordComponent_Template_form_submit_0_listener() { return ctx.requestForgotPasswordEmail(); });
         ɵngcc0.ɵɵelementStart(1, "div", 1);
         ɵngcc0.ɵɵelementStart(2, "label");
         ɵngcc0.ɵɵelementStart(3, "span", 2);
@@ -20462,7 +20465,7 @@ let ResetPasswordFormComponent = class ResetPasswordFormComponent {
 ResetPasswordFormComponent.ɵfac = function ResetPasswordFormComponent_Factory(t) { return new (t || ResetPasswordFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserService)); };
 ResetPasswordFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ResetPasswordFormComponent, selectors: [["cx-reset-password-form"]], decls: 21, vars: 22, consts: [[1, "cx-reset-password-form-component", 3, "formGroup", "submit"], [1, "form-group"], [1, "label-content"], ["type", "password", "name", "password", "formControlName", "password", 1, "form-control", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "password", "name", "confirmpassword", "formControlName", "repassword", 1, "form-control", 3, "placeholder"], ["type", "submit", 1, "btn", "btn-block", "btn-primary"], [1, "invalid-feedback"]], template: function ResetPasswordFormComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "form", 0);
-        ɵngcc0.ɵɵlistener("submit", function ResetPasswordFormComponent_Template_form_submit_0_listener($event) { return ctx.resetPassword(); });
+        ɵngcc0.ɵɵlistener("submit", function ResetPasswordFormComponent_Template_form_submit_0_listener() { return ctx.resetPassword(); });
         ɵngcc0.ɵɵelementStart(1, "div", 1);
         ɵngcc0.ɵɵelementStart(2, "label");
         ɵngcc0.ɵɵelementStart(3, "span", 2);
@@ -20578,7 +20581,7 @@ let UpdateEmailFormComponent = class UpdateEmailFormComponent {
 UpdateEmailFormComponent.ɵfac = function UpdateEmailFormComponent_Factory(t) { return new (t || UpdateEmailFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder)); };
 UpdateEmailFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: UpdateEmailFormComponent, selectors: [["cx-update-email-form"]], outputs: { saveEmail: "saveEmail", cancelEmail: "cancelEmail" }, decls: 37, vars: 34, consts: [[3, "formGroup", "ngSubmit"], [1, "form-group", "row"], [1, "col-md-12"], [1, "label-content"], ["type", "email", "name", "email", "formControlName", "email", 1, "form-control", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], [1, "col-sm-12"], ["type", "email", "name", "confirmEmail", "formControlName", "confirmEmail", 1, "form-control", 3, "placeholder"], ["type", "password", "name", "password", "formControlName", "password", "autocomplete", "new-password", 1, "form-control", 3, "placeholder"], [1, "col-lg-6"], ["type", "button", 1, "btn", "btn-block", "btn-secondary", 3, "click"], ["type", "submit", 1, "btn", "btn-block", "btn-primary"], [1, "invalid-feedback"]], template: function UpdateEmailFormComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "form", 0);
-        ɵngcc0.ɵɵlistener("ngSubmit", function UpdateEmailFormComponent_Template_form_ngSubmit_0_listener($event) { return ctx.onSubmit(); });
+        ɵngcc0.ɵɵlistener("ngSubmit", function UpdateEmailFormComponent_Template_form_ngSubmit_0_listener() { return ctx.onSubmit(); });
         ɵngcc0.ɵɵelementStart(1, "div", 1);
         ɵngcc0.ɵɵelementStart(2, "div", 2);
         ɵngcc0.ɵɵelementStart(3, "label");
@@ -20621,7 +20624,7 @@ UpdateEmailFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: UpdateEmail
         ɵngcc0.ɵɵelementStart(28, "div", 1);
         ɵngcc0.ɵɵelementStart(29, "div", 9);
         ɵngcc0.ɵɵelementStart(30, "button", 10);
-        ɵngcc0.ɵɵlistener("click", function UpdateEmailFormComponent_Template_button_click_30_listener($event) { return ctx.onCancel(); });
+        ɵngcc0.ɵɵlistener("click", function UpdateEmailFormComponent_Template_button_click_30_listener() { return ctx.onCancel(); });
         ɵngcc0.ɵɵtext(31);
         ɵngcc0.ɵɵpipe(32, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
@@ -20802,7 +20805,7 @@ let UpdatePasswordFormComponent = class UpdatePasswordFormComponent {
 UpdatePasswordFormComponent.ɵfac = function UpdatePasswordFormComponent_Factory(t) { return new (t || UpdatePasswordFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder)); };
 UpdatePasswordFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: UpdatePasswordFormComponent, selectors: [["cx-update-password-form"]], outputs: { submited: "submited", cancelled: "cancelled" }, decls: 37, vars: 34, consts: [[1, "cx-update-password-component", 3, "formGroup", "ngSubmit"], [1, "form-group", "row"], [1, "col-md-12"], [1, "label-content"], ["type", "password", "name", "oldPassword", "formControlName", "oldPassword", 1, "form-control", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "password", "name", "newPassword", "formControlName", "newPassword", 1, "form-control", 3, "placeholder"], ["type", "password", "name", "newPasswordConfirm", "formControlName", "newPasswordConfirm", 1, "form-control", 3, "placeholder"], [1, "col-lg-6", "col-md-12"], ["type", "button", 1, "btn", "btn-block", "btn-secondary", 3, "click"], ["type", "submit", 1, "btn", "btn-block", "btn-primary"], [1, "invalid-feedback"]], template: function UpdatePasswordFormComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "form", 0);
-        ɵngcc0.ɵɵlistener("ngSubmit", function UpdatePasswordFormComponent_Template_form_ngSubmit_0_listener($event) { return ctx.onSubmit(); });
+        ɵngcc0.ɵɵlistener("ngSubmit", function UpdatePasswordFormComponent_Template_form_ngSubmit_0_listener() { return ctx.onSubmit(); });
         ɵngcc0.ɵɵelementStart(1, "div", 1);
         ɵngcc0.ɵɵelementStart(2, "div", 2);
         ɵngcc0.ɵɵelementStart(3, "label");
@@ -20845,7 +20848,7 @@ UpdatePasswordFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: UpdatePa
         ɵngcc0.ɵɵelementStart(28, "div", 1);
         ɵngcc0.ɵɵelementStart(29, "div", 8);
         ɵngcc0.ɵɵelementStart(30, "button", 9);
-        ɵngcc0.ɵɵlistener("click", function UpdatePasswordFormComponent_Template_button_click_30_listener($event) { return ctx.onCancel(); });
+        ɵngcc0.ɵɵlistener("click", function UpdatePasswordFormComponent_Template_button_click_30_listener() { return ctx.onCancel(); });
         ɵngcc0.ɵɵtext(31);
         ɵngcc0.ɵɵpipe(32, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
@@ -21001,7 +21004,7 @@ let UpdateProfileFormComponent = class UpdateProfileFormComponent {
 UpdateProfileFormComponent.ɵfac = function UpdateProfileFormComponent_Factory(t) { return new (t || UpdateProfileFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder)); };
 UpdateProfileFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: UpdateProfileFormComponent, selectors: [["cx-update-profile-form"]], inputs: { user: "user", titles: "titles" }, outputs: { submited: "submited", cancelled: "cancelled" }, decls: 39, vars: 32, consts: [[3, "formGroup", "ngSubmit"], [1, "form-group", "row"], [1, "col-md-12"], [1, "label-content"], ["formControlName", "titleCode", 1, "form-control"], ["value", ""], [3, "value", 4, "ngFor", "ngForOf"], ["type", "text", "name", "firstName", "formControlName", "firstName", 1, "form-control", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "text", "name", "lastName", "formControlName", "lastName", 1, "form-control", 3, "placeholder"], [1, "col-lg-6", "col-md-12"], ["type", "button", 1, "btn", "btn-block", "btn-secondary", 3, "click"], ["type", "submit", 1, "btn", "btn-block", "btn-primary"], [3, "value"], [1, "invalid-feedback"]], template: function UpdateProfileFormComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "form", 0);
-        ɵngcc0.ɵɵlistener("ngSubmit", function UpdateProfileFormComponent_Template_form_ngSubmit_0_listener($event) { return ctx.onSubmit(); });
+        ɵngcc0.ɵɵlistener("ngSubmit", function UpdateProfileFormComponent_Template_form_ngSubmit_0_listener() { return ctx.onSubmit(); });
         ɵngcc0.ɵɵelementStart(1, "div", 1);
         ɵngcc0.ɵɵelementStart(2, "div", 2);
         ɵngcc0.ɵɵelementStart(3, "label");
@@ -21048,7 +21051,7 @@ UpdateProfileFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: UpdatePro
         ɵngcc0.ɵɵelementStart(30, "div", 1);
         ɵngcc0.ɵɵelementStart(31, "div", 10);
         ɵngcc0.ɵɵelementStart(32, "button", 11);
-        ɵngcc0.ɵɵlistener("click", function UpdateProfileFormComponent_Template_button_click_32_listener($event) { return ctx.onCancel(); });
+        ɵngcc0.ɵɵlistener("click", function UpdateProfileFormComponent_Template_button_click_32_listener() { return ctx.onCancel(); });
         ɵngcc0.ɵɵtext(33);
         ɵngcc0.ɵɵpipe(34, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
@@ -21350,7 +21353,7 @@ CouponDialogComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CouponDialogCo
         ɵngcc0.ɵɵpipe(5, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementStart(6, "button", 3);
-        ɵngcc0.ɵɵlistener("click", function CouponDialogComponent_Template_button_click_6_listener($event) { return ctx.dismissModal("Cross click"); });
+        ɵngcc0.ɵɵlistener("click", function CouponDialogComponent_Template_button_click_6_listener() { return ctx.dismissModal("Cross click"); });
         ɵngcc0.ɵɵelementStart(7, "span", 4);
         ɵngcc0.ɵɵelement(8, "cx-icon", 5);
         ɵngcc0.ɵɵelementEnd();
@@ -21487,7 +21490,7 @@ CouponCardComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CouponCardCompon
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementStart(24, "a", 10);
-        ɵngcc0.ɵɵlistener("click", function CouponCardComponent_Template_a_click_24_listener($event) { return ctx.readMore(); });
+        ɵngcc0.ɵɵlistener("click", function CouponCardComponent_Template_a_click_24_listener() { return ctx.readMore(); });
         ɵngcc0.ɵɵtext(25);
         ɵngcc0.ɵɵpipe(26, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
@@ -21495,7 +21498,7 @@ CouponCardComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CouponCardCompon
         ɵngcc0.ɵɵelementStart(28, "div", 12);
         ɵngcc0.ɵɵelementStart(29, "label");
         ɵngcc0.ɵɵelementStart(30, "input", 13);
-        ɵngcc0.ɵɵlistener("change", function CouponCardComponent_Template_input_change_30_listener($event) { return ctx.onSubscriptionChange(); });
+        ɵngcc0.ɵɵlistener("change", function CouponCardComponent_Template_input_change_30_listener() { return ctx.onSubscriptionChange(); });
         ɵngcc0.ɵɵpipe(31, "async");
         ɵngcc0.ɵɵpipe(32, "async");
         ɵngcc0.ɵɵelementEnd();
@@ -21507,7 +21510,7 @@ CouponCardComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CouponCardCompon
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementStart(36, "div", 15);
         ɵngcc0.ɵɵelementStart(37, "button", 16);
-        ɵngcc0.ɵɵlistener("click", function CouponCardComponent_Template_button_click_37_listener($event) { return ctx.findProducts(); });
+        ɵngcc0.ɵɵlistener("click", function CouponCardComponent_Template_button_click_37_listener() { return ctx.findProducts(); });
         ɵngcc0.ɵɵtext(38);
         ɵngcc0.ɵɵpipe(39, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
@@ -22141,7 +22144,7 @@ let NavigationUIComponent = class NavigationUIComponent {
 };
 NavigationUIComponent.ɵfac = function NavigationUIComponent_Factory(t) { return new (t || NavigationUIComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc5.Router), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.Renderer2), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef)); };
 NavigationUIComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: NavigationUIComponent, selectors: [["cx-navigation-ui"]], hostVars: 4, hostBindings: function NavigationUIComponent_HostBindings(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵlistener("resize", function NavigationUIComponent_resize_HostBindingHandler($event) { return ctx.onResize(); }, false, ɵngcc0.ɵɵresolveWindow);
+        ɵngcc0.ɵɵlistener("resize", function NavigationUIComponent_resize_HostBindingHandler() { return ctx.onResize(); }, false, ɵngcc0.ɵɵresolveWindow);
     } if (rf & 2) {
         ɵngcc0.ɵɵclassProp("flyout", ctx.flyout)("is-open", ctx.isOpen);
     } }, inputs: { allowAlignToRight: "allowAlignToRight", flyout: "flyout", isOpen: "isOpen", node: "node", wrapAfter: "wrapAfter" }, decls: 4, vars: 2, consts: [["class", "back is-open", 3, "click", 4, "ngIf"], [4, "ngFor", "ngForOf"], ["nav", ""], [1, "back", "is-open", 3, "click"], [3, "type"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], [3, "click", "mouseenter", "keydown.space"], [3, "url", "target", 4, "ngIf", "ngIfElse"], ["heading", ""], ["class", "wrapper", 4, "ngIf"], [3, "url", "target"], [3, "type", 4, "ngIf"], [1, "wrapper"], ["class", "all", 3, "url", "target", 4, "ngIf"], [1, "childs"], [1, "all", 3, "url", "target"]], template: function NavigationUIComponent_Template(rf, ctx) { if (rf & 1) {
@@ -22403,7 +22406,8 @@ let SearchBoxComponentService = class SearchBoxComponentService {
             if (productResult &&
                 productResult.products &&
                 productResult.products.length === 0 &&
-                (suggestions && suggestions.length === 0)) {
+                suggestions &&
+                suggestions.length === 0) {
                 return this.fetchTranslation('searchBox.help.noMatch');
             }
             else {
@@ -22608,11 +22612,11 @@ SearchBoxComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: SearchBoxComponen
         const _r1032 = ɵngcc0.ɵɵgetCurrentView();
         ɵngcc0.ɵɵelementStart(0, "label", 0);
         ɵngcc0.ɵɵelementStart(1, "input", 1, 2);
-        ɵngcc0.ɵɵlistener("focus", function SearchBoxComponent_Template_input_focus_1_listener($event) { return ctx.open(); })("input", function SearchBoxComponent_Template_input_input_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1032); const _r1005 = ɵngcc0.ɵɵreference(2); return ctx.search(_r1005.value); })("blur", function SearchBoxComponent_Template_input_blur_1_listener($event) { return ctx.close($event); })("keydown.escape", function SearchBoxComponent_Template_input_keydown_escape_1_listener($event) { return ctx.close($event); })("keydown.enter", function SearchBoxComponent_Template_input_keydown_enter_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1032); const _r1005 = ɵngcc0.ɵɵreference(2); ctx.close($event, true); return ctx.launchSearchResult($event, _r1005.value); })("keydown.arrowup", function SearchBoxComponent_Template_input_keydown_arrowup_1_listener($event) { return ctx.focusPreviousChild($event); })("keydown.arrowdown", function SearchBoxComponent_Template_input_keydown_arrowdown_1_listener($event) { return ctx.focusNextChild($event); });
+        ɵngcc0.ɵɵlistener("focus", function SearchBoxComponent_Template_input_focus_1_listener() { return ctx.open(); })("input", function SearchBoxComponent_Template_input_input_1_listener() { ɵngcc0.ɵɵrestoreView(_r1032); const _r1005 = ɵngcc0.ɵɵreference(2); return ctx.search(_r1005.value); })("blur", function SearchBoxComponent_Template_input_blur_1_listener($event) { return ctx.close($event); })("keydown.escape", function SearchBoxComponent_Template_input_keydown_escape_1_listener($event) { return ctx.close($event); })("keydown.enter", function SearchBoxComponent_Template_input_keydown_enter_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1032); const _r1005 = ɵngcc0.ɵɵreference(2); ctx.close($event, true); return ctx.launchSearchResult($event, _r1005.value); })("keydown.arrowup", function SearchBoxComponent_Template_input_keydown_arrowup_1_listener($event) { return ctx.focusPreviousChild($event); })("keydown.arrowdown", function SearchBoxComponent_Template_input_keydown_arrowdown_1_listener($event) { return ctx.focusNextChild($event); });
         ɵngcc0.ɵɵpipe(3, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementStart(4, "cx-icon", 3);
-        ɵngcc0.ɵɵlistener("mousedown", function SearchBoxComponent_Template_cx_icon_mousedown_4_listener($event) { ɵngcc0.ɵɵrestoreView(_r1032); const _r1005 = ɵngcc0.ɵɵreference(2); return ctx.clear(_r1005); })("keydown.enter", function SearchBoxComponent_Template_cx_icon_keydown_enter_4_listener($event) { ɵngcc0.ɵɵrestoreView(_r1032); const _r1005 = ɵngcc0.ɵɵreference(2); return ctx.clear(_r1005); });
+        ɵngcc0.ɵɵlistener("mousedown", function SearchBoxComponent_Template_cx_icon_mousedown_4_listener() { ɵngcc0.ɵɵrestoreView(_r1032); const _r1005 = ɵngcc0.ɵɵreference(2); return ctx.clear(_r1005); })("keydown.enter", function SearchBoxComponent_Template_cx_icon_keydown_enter_4_listener() { ɵngcc0.ɵɵrestoreView(_r1032); const _r1005 = ɵngcc0.ɵɵreference(2); return ctx.clear(_r1005); });
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementStart(5, "cx-icon", 4);
         ɵngcc0.ɵɵlistener("mousedown", function SearchBoxComponent_Template_cx_icon_mousedown_5_listener($event) { return ctx.avoidReopen($event); })("keydown.enter", function SearchBoxComponent_Template_cx_icon_keydown_enter_5_listener($event) { return ctx.avoidReopen($event); });
@@ -22883,7 +22887,7 @@ GuestRegisterFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: GuestRegi
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementStart(25, "button", 8);
-        ɵngcc0.ɵɵlistener("click", function GuestRegisterFormComponent_Template_button_click_25_listener($event) { return ctx.submit(); });
+        ɵngcc0.ɵɵlistener("click", function GuestRegisterFormComponent_Template_button_click_25_listener() { return ctx.submit(); });
         ɵngcc0.ɵɵtext(26);
         ɵngcc0.ɵɵpipe(27, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
@@ -23486,7 +23490,7 @@ let ProductViewComponent = class ProductViewComponent {
 ProductViewComponent.ɵfac = function ProductViewComponent_Factory(t) { return new (t || ProductViewComponent)(); };
 ProductViewComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductViewComponent, selectors: [["cx-product-view"]], inputs: { mode: "mode" }, outputs: { modeChange: "modeChange" }, decls: 3, vars: 3, consts: [[1, "btn", "cx-product-layout", 3, "ngClass", "click"], [3, "type", 4, "ngIf"], [3, "type"]], template: function ProductViewComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "button", 0);
-        ɵngcc0.ɵɵlistener("click", function ProductViewComponent_Template_button_click_0_listener($event) { return ctx.changeMode(); });
+        ɵngcc0.ɵɵlistener("click", function ProductViewComponent_Template_button_click_0_listener() { return ctx.changeMode(); });
         ɵngcc0.ɵɵtemplate(1, ProductViewComponent_cx_icon_1_Template, 1, 1, "cx-icon", 1);
         ɵngcc0.ɵɵtemplate(2, ProductViewComponent_cx_icon_2_Template, 1, 1, "cx-icon", 1);
         ɵngcc0.ɵɵelementEnd();
@@ -24515,7 +24519,7 @@ StockNotificationDialogComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Sto
         ɵngcc0.ɵɵpipe(3, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementStart(4, "button", 2);
-        ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_Template_button_click_4_listener($event) { return ctx.close(); });
+        ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_Template_button_click_4_listener() { return ctx.close(); });
         ɵngcc0.ɵɵelementStart(5, "span", 3);
         ɵngcc0.ɵɵtext(6, "\u00D7");
         ɵngcc0.ɵɵelementEnd();
@@ -24814,7 +24818,7 @@ StoreFinderListItemComponent.ɵfac = function StoreFinderListItemComponent_Facto
 StoreFinderListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinderListItemComponent, selectors: [["cx-store-finder-list-item"]], inputs: { locationIndex: "locationIndex", listOrderLabel: "listOrderLabel", displayDistance: "displayDistance" }, outputs: { storeItemClick: "storeItemClick" }, features: [ɵngcc0.ɵɵInheritDefinitionFeature], decls: 10, vars: 7, consts: [[3, "click"], [1, "cx-store-list-order"], [1, "cx-store-name"], ["class", "cx-store-address", 4, "ngIf"], ["target", "_blank", 1, "btn", "btn-sm", "btn-action", "btn-block", "cx-button", 3, "href", "click"], [1, "cx-store-address"], [1, "cx-store-address-street"], ["class", "cx-store-distance", 4, "ngIf"], [1, "cx-store-distance"]], template: function StoreFinderListItemComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementContainerStart(0);
         ɵngcc0.ɵɵelementStart(1, "div", 0);
-        ɵngcc0.ɵɵlistener("click", function StoreFinderListItemComponent_Template_div_click_1_listener($event) { return ctx.handleStoreItemClick(); });
+        ɵngcc0.ɵɵlistener("click", function StoreFinderListItemComponent_Template_div_click_1_listener() { return ctx.handleStoreItemClick(); });
         ɵngcc0.ɵɵelementStart(2, "div", 1);
         ɵngcc0.ɵɵtext(3);
         ɵngcc0.ɵɵelementEnd();
@@ -25095,7 +25099,7 @@ StoreFinderSearchComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFind
         ɵngcc0.ɵɵelementStart(9, "div", 8);
         ɵngcc0.ɵɵelementStart(10, "div", 9);
         ɵngcc0.ɵɵelementStart(11, "button", 10);
-        ɵngcc0.ɵɵlistener("click", function StoreFinderSearchComponent_Template_button_click_11_listener($event) { return ctx.viewStoresWithMyLoc(); });
+        ɵngcc0.ɵɵlistener("click", function StoreFinderSearchComponent_Template_button_click_11_listener() { return ctx.viewStoresWithMyLoc(); });
         ɵngcc0.ɵɵtext(12);
         ɵngcc0.ɵɵpipe(13, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
@@ -25337,7 +25341,7 @@ let CheckoutLoginComponent = class CheckoutLoginComponent {
 CheckoutLoginComponent.ɵfac = function CheckoutLoginComponent_Factory(t) { return new (t || CheckoutLoginComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CartService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthRedirectService)); };
 CheckoutLoginComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CheckoutLoginComponent, selectors: [["cx-checkout-login"]], decls: 20, vars: 22, consts: [[3, "formGroup", "ngSubmit"], [1, "form-group"], [1, "label-content"], ["type", "email", "name", "email", "formControlName", "email", 1, "form-control", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "email", "name", "emailConfirmation", "formControlName", "emailConfirmation", 1, "form-control", 3, "placeholder"], ["type", "submit", 1, "btn", "btn-block", "btn-primary"], [1, "invalid-feedback"]], template: function CheckoutLoginComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "form", 0);
-        ɵngcc0.ɵɵlistener("ngSubmit", function CheckoutLoginComponent_Template_form_ngSubmit_0_listener($event) { return ctx.onSubmit(); });
+        ɵngcc0.ɵɵlistener("ngSubmit", function CheckoutLoginComponent_Template_form_ngSubmit_0_listener() { return ctx.onSubmit(); });
         ɵngcc0.ɵɵelementStart(1, "div", 1);
         ɵngcc0.ɵɵelementStart(2, "label");
         ɵngcc0.ɵɵelementStart(3, "span", 2);
@@ -25480,7 +25484,7 @@ let LoginFormComponent = class LoginFormComponent {
 LoginFormComponent.ɵfac = function LoginFormComponent_Factory(t) { return new (t || LoginFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.GlobalMessageService), ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthRedirectService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.WindowRef), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(CheckoutConfigService)); };
 LoginFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: LoginFormComponent, selectors: [["cx-login-form"]], decls: 30, vars: 31, consts: [[3, "formGroup", "submit"], [1, "form-group"], [1, "label-content"], ["type", "email", "formControlName", "userId", 1, "form-control", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "password", "formControlName", "password", 1, "form-control", 3, "placeholder"], ["aria-controls", "reset-password", 1, "btn-link", 3, "routerLink"], ["type", "submit", 1, "btn", "btn-block", "btn-primary"], [1, "register"], [1, "cx-section-title", "cx-section-title-alt"], [4, "ngIf"], [1, "invalid-feedback"], [1, "btn", "btn-block", "btn-secondary", "btn-register", 3, "routerLink"], [1, "btn", "btn-block", "btn-secondary", "btn-guest", 3, "routerLink"]], template: function LoginFormComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "form", 0);
-        ɵngcc0.ɵɵlistener("submit", function LoginFormComponent_Template_form_submit_0_listener($event) { return ctx.login(); });
+        ɵngcc0.ɵɵlistener("submit", function LoginFormComponent_Template_form_submit_0_listener() { return ctx.login(); });
         ɵngcc0.ɵɵelementStart(1, "div", 1);
         ɵngcc0.ɵɵelementStart(2, "label");
         ɵngcc0.ɵɵelementStart(3, "span", 2);
@@ -25936,7 +25940,7 @@ WishListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: WishListItemCo
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementStart(16, "div", 14);
         ɵngcc0.ɵɵelementStart(17, "button", 15);
-        ɵngcc0.ɵɵlistener("click", function WishListItemComponent_Template_button_click_17_listener($event) { return ctx.removeEntry(ctx.cartEntry); });
+        ɵngcc0.ɵɵlistener("click", function WishListItemComponent_Template_button_click_17_listener() { return ctx.removeEntry(ctx.cartEntry); });
         ɵngcc0.ɵɵtext(18);
         ɵngcc0.ɵɵpipe(19, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
@@ -27177,7 +27181,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-customer-selection',
-                template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\">\n  <input\n    #searchTerm\n    type=\"text\"\n    formControlName=\"searchTerm\"\n    placeholder=\"{{ 'asm.customerSearch.searchTerm.label' | cxTranslate }}\"\n  />\n  <button type=\"submit\" [disabled]=\"!selectedCustomer\">\n    {{ 'asm.customerSearch.submit' | cxTranslate }}\n  </button>\n</form>\n\n<div *ngIf=\"searchResults | async as results\" class=\"asm-results\" #resultList>\n  <a\n    *ngFor=\"let result of results.entries\"\n    (click)=\"selectCustomerFromList(result)\"\n    ><span class=\"result-name\">{{ result.name }}</span>\n    <span class=\"result-id\">{{ result.uid }}</span></a\n  >\n  <a\n    (click)=\"closeResults()\"\n    *ngIf=\"\n      !(searchResultsLoading$ | async) &&\n      searchTerm.value.length >= 3 &&\n      (!!results.entries && results.entries.length <= 0)\n    \"\n    >{{ 'asm.customerSearch.noMatch' | cxTranslate }}</a\n  >\n</div>\n\n<div class=\"asm-results\" *ngIf=\"searchResultsLoading$ | async\">\n  <div class=\"spinner\" aria-hidden=\"false\" aria-label=\"Loading\">\n    <div></div>\n    <div></div>\n    <div></div>\n  </div>\n</div>\n",
+                template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\">\n  <input\n    #searchTerm\n    type=\"text\"\n    formControlName=\"searchTerm\"\n    placeholder=\"{{ 'asm.customerSearch.searchTerm.label' | cxTranslate }}\"\n  />\n  <button type=\"submit\" [disabled]=\"!selectedCustomer\">\n    {{ 'asm.customerSearch.submit' | cxTranslate }}\n  </button>\n</form>\n\n<div *ngIf=\"searchResults | async as results\" class=\"asm-results\" #resultList>\n  <a\n    *ngFor=\"let result of results.entries\"\n    (click)=\"selectCustomerFromList(result)\"\n    ><span class=\"result-name\">{{ result.name }}</span>\n    <span class=\"result-id\">{{ result.uid }}</span></a\n  >\n  <a\n    (click)=\"closeResults()\"\n    *ngIf=\"\n      !(searchResultsLoading$ | async) &&\n      searchTerm.value.length >= 3 &&\n      !!results.entries &&\n      results.entries.length <= 0\n    \"\n    >{{ 'asm.customerSearch.noMatch' | cxTranslate }}</a\n  >\n</div>\n\n<div class=\"asm-results\" *ngIf=\"searchResultsLoading$ | async\">\n  <div class=\"spinner\" aria-hidden=\"false\" aria-label=\"Loading\">\n    <div></div>\n    <div></div>\n    <div></div>\n  </div>\n</div>\n",
                 encapsulation: ViewEncapsulation.None,
                 host: {
                     '(document:click)': 'onDocumentClick($event)'
@@ -27238,7 +27242,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-added-to-cart-dialog',
-                template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) || modalIsOpen; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart') | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [quantityControl]=\"getQuantityControl() | async\"\n            [promotionLocation]=\"promotionLocation\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n\n            <div>{{ cart.subTotal?.formattedValue }}</div>\n          </div>\n\n          <!-- Promotions -->\n          <ng-container *cxFeatureLevel=\"'1.5'\">\n            <div\n              class=\"cx-dialog-promotions\"\n              *ngIf=\"orderPromotions$ | async as orderPromotions\"\n            >\n              <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n            </div>\n          </ng-container>\n\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              cxAutoFocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
+                template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) || modalIsOpen; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart'\n          ) | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [quantityControl]=\"getQuantityControl() | async\"\n            [promotionLocation]=\"promotionLocation\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n\n            <div>{{ cart.subTotal?.formattedValue }}</div>\n          </div>\n\n          <!-- Promotions -->\n          <ng-container *cxFeatureLevel=\"'1.5'\">\n            <div\n              class=\"cx-dialog-promotions\"\n              *ngIf=\"orderPromotions$ | async as orderPromotions\"\n            >\n              <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n            </div>\n          </ng-container>\n\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              cxAutoFocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
             }]
     }], function () { return [{ type: ModalService }, { type: ɵngcc1.CartService }, { type: PromotionService }]; }, { dialog: [{
             type: ViewChild,
@@ -29232,7 +29236,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-amend-order-items',
-                template: "<div *ngIf=\"form$ | async as form\">\n  <button\n    *ngIf=\"!isConfirmation\"\n    class=\"btn btn-link cx-action-link\"\n    (click)=\"setAll(form)\"\n  >\n    {{ 'orderDetails.cancellationAndReturn.setAll' | cxTranslate }}\n  </button>\n\n  <div class=\"d-none d-md-block\">\n    <div class=\"cx-item-list-header row\">\n      <div class=\"cx-item-list-desc col-md-5 col-xl-6\">\n        {{ 'orderDetails.cancellationAndReturn.item' | cxTranslate }}\n      </div>\n      <div class=\"cx-item-list-price col-2\">\n        {{ 'orderDetails.cancellationAndReturn.itemPrice' | cxTranslate }}\n      </div>\n      <div *ngIf=\"!isConfirmation\" class=\"cx-item-list-qty col-md-3 col-xl-2\">\n        {{ 'orderDetails.cancellationAndReturn.quantity' | cxTranslate }}\n      </div>\n      <div class=\"cx-item-list-qty col-2\">\n        {{\n          (isCancellation()\n            ? 'orderDetails.cancellationAndReturn.cancelQty'\n            : 'orderDetails.cancellationAndReturn.returnQty') | cxTranslate\n        }}\n      </div>\n      <div *ngIf=\"isConfirmation\" class=\"cx-item-list-total col-md-3  col-xl-2\">\n        {{ 'orderDetails.cancellationAndReturn.totalPrice' | cxTranslate }}\n      </div>\n    </div>\n  </div>\n\n  <div class=\"cx-item-list-row\" *ngFor=\"let item of entries; let i = index\">\n    <div class=\"row cx-item-list-items\">\n      <!-- Item Image -->\n      <cx-media\n        class=\"col-2 cx-image-container\"\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n\n      <!-- Item Information -->\n      <div class=\"cx-info col-10\">\n        <div class=\"cx-info-container row\">\n          <!-- Item Description -->\n          <div class=\"col-md-3 col-xl-5\">\n            <div *ngIf=\"item.product.name\" class=\"cx-name\">\n              {{ item.product.name }}\n            </div>\n            <div *ngIf=\"item.product.code\" class=\"cx-code\">\n              {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n            </div>\n            <!-- Variants -->\n            <ng-container *cxFeatureLevel=\"'!1.5'\">\n              <div\n                *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n                class=\"cx-property\"\n              >\n                <div class=\"cx-label\">{{ variant.name }}</div>\n                <div class=\"cx-value\">{{ variant.value }}</div>\n              </div>\n            </ng-container>\n            <ng-container *cxFeatureLevel=\"'1.5'\">\n              <ng-container *ngIf=\"item.product.baseOptions?.length\">\n                <div\n                  *ngFor=\"\n                    let variant of item.product.baseOptions[0]?.selected\n                      ?.variantOptionQualifiers\n                  \"\n                  class=\"cx-property\"\n                >\n                  <div class=\"cx-label\" *ngIf=\"variant.name\">\n                    {{ variant.name }}:\n                  </div>\n                  <div class=\"cx-value\" *ngIf=\"variant.value\">\n                    {{ variant.value }}\n                  </div>\n                </div>\n              </ng-container>\n            </ng-container>\n          </div>\n          <!-- Price -->\n          <div\n            *ngIf=\"item.basePrice\"\n            class=\"cx-price col-md-3 col-lg-3 col-xl-2\"\n          >\n            <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n              {{ 'orderDetails.cancellationAndReturn.itemPrice' | cxTranslate }}\n            </div>\n            <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n              {{ item.basePrice?.formattedValue }}\n            </div>\n          </div>\n          <!-- item Quantity -->\n          <div *ngIf=\"!isConfirmation\" class=\"cx-request-qty col-md-3\">\n            <div\n              class=\"cx-label d-block d-md-none d-lg-none d-xl-none\"\n              placement=\"left\"\n              title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n            >\n              {{ 'orderDetails.cancellationAndReturn.quantity' | cxTranslate }}\n            </div>\n            <div class=\"cx-value\">\n              {{ getMaxAmendQuantity(item) }}\n            </div>\n          </div>\n          <!-- Amended Quantity -->\n          <div class=\"cx-quantity col-md-3 col-xl-2\">\n            <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n              {{\n                (isCancellation()\n                  ? 'orderDetails.cancellationAndReturn.cancelQty'\n                  : 'orderDetails.cancellationAndReturn.returnQty')\n                  | cxTranslate\n              }}\n            </div>\n\n            <cx-item-counter\n              [min]=\"0\"\n              [max]=\"getMaxAmendQuantity(item)\"\n              [control]=\"getControl(form, item)\"\n              [readonly]=\"isConfirmation\"\n            >\n            </cx-item-counter>\n          </div>\n          <!-- Total Price -->\n          <div *ngIf=\"isConfirmation\" class=\"cx-total col-3\">\n            <div class=\"cx-label d-block d-md-none\">\n              {{\n                'orderDetails.cancellationAndReturn.totalPrice' | cxTranslate\n              }}\n            </div>\n            <div class=\"cx-value\">\n              {{ getItemPrice(item)?.formattedValue }}\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                template: "<div *ngIf=\"form$ | async as form\">\n  <button\n    *ngIf=\"!isConfirmation\"\n    class=\"btn btn-link cx-action-link\"\n    (click)=\"setAll(form)\"\n  >\n    {{ 'orderDetails.cancellationAndReturn.setAll' | cxTranslate }}\n  </button>\n\n  <div class=\"d-none d-md-block\">\n    <div class=\"cx-item-list-header row\">\n      <div class=\"cx-item-list-desc col-md-5 col-xl-6\">\n        {{ 'orderDetails.cancellationAndReturn.item' | cxTranslate }}\n      </div>\n      <div class=\"cx-item-list-price col-2\">\n        {{ 'orderDetails.cancellationAndReturn.itemPrice' | cxTranslate }}\n      </div>\n      <div *ngIf=\"!isConfirmation\" class=\"cx-item-list-qty col-md-3 col-xl-2\">\n        {{ 'orderDetails.cancellationAndReturn.quantity' | cxTranslate }}\n      </div>\n      <div class=\"cx-item-list-qty col-2\">\n        {{\n          (isCancellation()\n            ? 'orderDetails.cancellationAndReturn.cancelQty'\n            : 'orderDetails.cancellationAndReturn.returnQty'\n          ) | cxTranslate\n        }}\n      </div>\n      <div *ngIf=\"isConfirmation\" class=\"cx-item-list-total col-md-3  col-xl-2\">\n        {{ 'orderDetails.cancellationAndReturn.totalPrice' | cxTranslate }}\n      </div>\n    </div>\n  </div>\n\n  <div class=\"cx-item-list-row\" *ngFor=\"let item of entries; let i = index\">\n    <div class=\"row cx-item-list-items\">\n      <!-- Item Image -->\n      <cx-media\n        class=\"col-2 cx-image-container\"\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n\n      <!-- Item Information -->\n      <div class=\"cx-info col-10\">\n        <div class=\"cx-info-container row\">\n          <!-- Item Description -->\n          <div class=\"col-md-3 col-xl-5\">\n            <div *ngIf=\"item.product.name\" class=\"cx-name\">\n              {{ item.product.name }}\n            </div>\n            <div *ngIf=\"item.product.code\" class=\"cx-code\">\n              {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n            </div>\n            <!-- Variants -->\n            <ng-container *cxFeatureLevel=\"'!1.5'\">\n              <div\n                *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n                class=\"cx-property\"\n              >\n                <div class=\"cx-label\">{{ variant.name }}</div>\n                <div class=\"cx-value\">{{ variant.value }}</div>\n              </div>\n            </ng-container>\n            <ng-container *cxFeatureLevel=\"'1.5'\">\n              <ng-container *ngIf=\"item.product.baseOptions?.length\">\n                <div\n                  *ngFor=\"\n                    let variant of item.product.baseOptions[0]?.selected\n                      ?.variantOptionQualifiers\n                  \"\n                  class=\"cx-property\"\n                >\n                  <div class=\"cx-label\" *ngIf=\"variant.name\">\n                    {{ variant.name }}:\n                  </div>\n                  <div class=\"cx-value\" *ngIf=\"variant.value\">\n                    {{ variant.value }}\n                  </div>\n                </div>\n              </ng-container>\n            </ng-container>\n          </div>\n          <!-- Price -->\n          <div\n            *ngIf=\"item.basePrice\"\n            class=\"cx-price col-md-3 col-lg-3 col-xl-2\"\n          >\n            <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n              {{ 'orderDetails.cancellationAndReturn.itemPrice' | cxTranslate }}\n            </div>\n            <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n              {{ item.basePrice?.formattedValue }}\n            </div>\n          </div>\n          <!-- item Quantity -->\n          <div *ngIf=\"!isConfirmation\" class=\"cx-request-qty col-md-3\">\n            <div\n              class=\"cx-label d-block d-md-none d-lg-none d-xl-none\"\n              placement=\"left\"\n              title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n            >\n              {{ 'orderDetails.cancellationAndReturn.quantity' | cxTranslate }}\n            </div>\n            <div class=\"cx-value\">\n              {{ getMaxAmendQuantity(item) }}\n            </div>\n          </div>\n          <!-- Amended Quantity -->\n          <div class=\"cx-quantity col-md-3 col-xl-2\">\n            <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n              {{\n                (isCancellation()\n                  ? 'orderDetails.cancellationAndReturn.cancelQty'\n                  : 'orderDetails.cancellationAndReturn.returnQty'\n                ) | cxTranslate\n              }}\n            </div>\n\n            <cx-item-counter\n              [min]=\"0\"\n              [max]=\"getMaxAmendQuantity(item)\"\n              [control]=\"getControl(form, item)\"\n              [readonly]=\"isConfirmation\"\n            >\n            </cx-item-counter>\n          </div>\n          <!-- Total Price -->\n          <div *ngIf=\"isConfirmation\" class=\"cx-total col-3\">\n            <div class=\"cx-label d-block d-md-none\">\n              {{\n                'orderDetails.cancellationAndReturn.totalPrice' | cxTranslate\n              }}\n            </div>\n            <div class=\"cx-value\">\n              {{ getItemPrice(item)?.formattedValue }}\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: OrderAmendService }]; }, { isConfirmation: [{

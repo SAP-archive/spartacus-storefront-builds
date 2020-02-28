@@ -19,4 +19,4 @@ export declare class OrderDetailsModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<OrderDetailsModule>;
 }
 
-//# sourceMappingURL=order-details.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib3JkZXItZGV0YWlscy5tb2R1bGUuZC50cyIsInNvdXJjZXMiOlsib3JkZXItZGV0YWlscy5tb2R1bGUuZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7O0FBQUE7OztBQUNBOyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWNsYXJlIGNsYXNzIE9yZGVyRGV0YWlsc01vZHVsZSB7XG59XG4iXX0=

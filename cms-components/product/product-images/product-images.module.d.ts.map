@@ -1,1 +1,0 @@
-{"version":3,"file":"product-images.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/product/product-images/product-images.module.d.ts"],"sourcesContent":["export declare class ProductImagesModule {\n}\n"],"names":[],"mappings":";;;;;;;;AAAA;;;AACA;"}

@@ -1,1 +1,0 @@
-{"version":3,"file":"order-cancellation.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/myaccount/order/amend-order/cancellations/order-cancellation.module.d.ts"],"sourcesContent":["export declare class OrderCancellationModule {\n}\n"],"names":[],"mappings":";;;AAAA;;;AACA;"}

@@ -1,1 +1,0 @@
-{"version":3,"file":"product-grid-item.component.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/product/product-list/product-grid-item/product-grid-item.component.d.ts"],"sourcesContent":["export declare class ProductGridItemComponent {\n    product: any;\n}\n"],"names":[],"mappings":";AAAA;;;;;;AAEA;"}

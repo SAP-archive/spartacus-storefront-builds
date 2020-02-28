@@ -1,1 +1,0 @@
-{"version":3,"file":"page-layout.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-structure/page/page-layout/page-layout.module.d.ts"],"sourcesContent":["export declare class PageLayoutModule {\n}\n"],"names":[],"mappings":";;;;;AAAA;;;AACA;"}

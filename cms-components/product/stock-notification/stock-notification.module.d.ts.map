@@ -1,1 +1,0 @@
-{"version":3,"file":"stock-notification.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/product/stock-notification/stock-notification.module.d.ts"],"sourcesContent":["export declare class StockNotificationModule {\n}\n"],"names":[],"mappings":";;;;;;;AAAA;;;AACA;"}

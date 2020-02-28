@@ -11,4 +11,4 @@ export declare class ProductImagesModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<ProductImagesModule>;
 }
 
-//# sourceMappingURL=product-images.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvZHVjdC1pbWFnZXMubW9kdWxlLmQudHMiLCJzb3VyY2VzIjpbInByb2R1Y3QtaW1hZ2VzLm1vZHVsZS5kLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7O0FBQUE7OztBQUNBOyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWNsYXJlIGNsYXNzIFByb2R1Y3RJbWFnZXNNb2R1bGUge1xufVxuIl19

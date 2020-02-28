@@ -1,1 +1,0 @@
-{"version":3,"file":"site-context-selector.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/misc/site-context-selector/site-context-selector.module.d.ts"],"sourcesContent":["export declare class SiteContextSelectorModule {\n}\n"],"names":[],"mappings":";;;;;;;AAAA;;;AACA;"}

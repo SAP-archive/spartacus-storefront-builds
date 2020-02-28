@@ -6,4 +6,4 @@ export declare class LogoutModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<LogoutModule>;
 }
 
-//# sourceMappingURL=logout.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibG9nb3V0Lm1vZHVsZS5kLnRzIiwic291cmNlcyI6WyJsb2dvdXQubW9kdWxlLmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQUE7OztBQUNBOyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWNsYXJlIGNsYXNzIExvZ291dE1vZHVsZSB7XG59XG4iXX0=

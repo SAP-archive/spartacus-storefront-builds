@@ -11,4 +11,4 @@ export declare class NavigationModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<NavigationModule>;
 }
 
-//# sourceMappingURL=navigation.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibmF2aWdhdGlvbi5tb2R1bGUuZC50cyIsInNvdXJjZXMiOlsibmF2aWdhdGlvbi5tb2R1bGUuZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7OztBQUFBOzs7QUFDQTsiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVjbGFyZSBjbGFzcyBOYXZpZ2F0aW9uTW9kdWxlIHtcbn1cbiJdfQ==

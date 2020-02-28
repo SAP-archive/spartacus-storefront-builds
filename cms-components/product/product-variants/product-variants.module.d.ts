@@ -13,4 +13,4 @@ export declare class ProductVariantsModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<ProductVariantsModule>;
 }
 
-//# sourceMappingURL=product-variants.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvZHVjdC12YXJpYW50cy5tb2R1bGUuZC50cyIsInNvdXJjZXMiOlsicHJvZHVjdC12YXJpYW50cy5tb2R1bGUuZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7O0FBQUE7OztBQUNBOyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWNsYXJlIGNsYXNzIFByb2R1Y3RWYXJpYW50c01vZHVsZSB7XG59XG4iXX0=

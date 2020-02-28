@@ -9,4 +9,4 @@ export declare class ForgotPasswordModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<ForgotPasswordModule>;
 }
 
-//# sourceMappingURL=forgot-password.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9yZ290LXBhc3N3b3JkLm1vZHVsZS5kLnRzIiwic291cmNlcyI6WyJmb3Jnb3QtcGFzc3dvcmQubW9kdWxlLmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBQUE7OztBQUNBOyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWNsYXJlIGNsYXNzIEZvcmdvdFBhc3N3b3JkTW9kdWxlIHtcbn1cbiJdfQ==

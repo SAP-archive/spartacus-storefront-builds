@@ -7,4 +7,4 @@ export declare class GenericLinkModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<GenericLinkModule>;
 }
 
-//# sourceMappingURL=generic-link.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2VuZXJpYy1saW5rLm1vZHVsZS5kLnRzIiwic291cmNlcyI6WyJnZW5lcmljLWxpbmsubW9kdWxlLmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBOzs7QUFDQTsiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVjbGFyZSBjbGFzcyBHZW5lcmljTGlua01vZHVsZSB7XG59XG4iXX0=

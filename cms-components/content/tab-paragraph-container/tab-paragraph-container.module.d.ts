@@ -9,4 +9,4 @@ export declare class TabParagraphContainerModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<TabParagraphContainerModule>;
 }
 
-//# sourceMappingURL=tab-paragraph-container.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGFiLXBhcmFncmFwaC1jb250YWluZXIubW9kdWxlLmQudHMiLCJzb3VyY2VzIjpbInRhYi1wYXJhZ3JhcGgtY29udGFpbmVyLm1vZHVsZS5kLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBOzs7QUFDQTsiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVjbGFyZSBjbGFzcyBUYWJQYXJhZ3JhcGhDb250YWluZXJNb2R1bGUge1xufVxuIl19

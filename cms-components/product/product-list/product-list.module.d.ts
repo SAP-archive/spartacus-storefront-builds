@@ -23,4 +23,4 @@ export declare class ProductListModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<ProductListModule>;
 }
 
-//# sourceMappingURL=product-list.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvZHVjdC1saXN0Lm1vZHVsZS5kLnRzIiwic291cmNlcyI6WyJwcm9kdWN0LWxpc3QubW9kdWxlLmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQTs7O0FBQ0E7Iiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlY2xhcmUgY2xhc3MgUHJvZHVjdExpc3RNb2R1bGUge1xufVxuIl19

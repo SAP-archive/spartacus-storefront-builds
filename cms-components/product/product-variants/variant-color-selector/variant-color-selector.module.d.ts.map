@@ -1,1 +1,0 @@
-{"version":3,"file":"variant-color-selector.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/product/product-variants/variant-color-selector/variant-color-selector.module.d.ts"],"sourcesContent":["export declare class VariantColorSelectorModule {\n}\n"],"names":[],"mappings":";;;;;AAAA;;;AACA;"}

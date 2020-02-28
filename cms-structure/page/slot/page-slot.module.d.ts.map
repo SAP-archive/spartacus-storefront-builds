@@ -1,1 +1,0 @@
-{"version":3,"file":"page-slot.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-structure/page/slot/page-slot.module.d.ts"],"sourcesContent":["export declare class PageSlotModule {\n}\n"],"names":[],"mappings":";;;;;;AAAA;;;AACA;"}

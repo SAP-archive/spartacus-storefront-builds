@@ -11,4 +11,4 @@ export declare class SearchBoxModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<SearchBoxModule>;
 }
 
-//# sourceMappingURL=search-box.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2VhcmNoLWJveC5tb2R1bGUuZC50cyIsInNvdXJjZXMiOlsic2VhcmNoLWJveC5tb2R1bGUuZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7OztBQUFBOzs7QUFDQTsiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVjbGFyZSBjbGFzcyBTZWFyY2hCb3hNb2R1bGUge1xufVxuIl19

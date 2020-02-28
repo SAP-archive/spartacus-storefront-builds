@@ -10,4 +10,4 @@ export declare class ProductReferencesModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<ProductReferencesModule>;
 }
 
-//# sourceMappingURL=product-references.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvZHVjdC1yZWZlcmVuY2VzLm1vZHVsZS5kLnRzIiwic291cmNlcyI6WyJwcm9kdWN0LXJlZmVyZW5jZXMubW9kdWxlLmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUFBOzs7QUFDQTsiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVjbGFyZSBjbGFzcyBQcm9kdWN0UmVmZXJlbmNlc01vZHVsZSB7XG59XG4iXX0=

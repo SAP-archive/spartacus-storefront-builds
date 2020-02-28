@@ -1,1 +1,0 @@
-{"version":3,"file":"product-details-tab.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/cms-components/product/product-tabs/product-details-tab/product-details-tab.module.d.ts"],"sourcesContent":["export declare class ProductDetailsTabModule {\n}\n"],"names":[],"mappings":";;;;AAAA;;;AACA;"}

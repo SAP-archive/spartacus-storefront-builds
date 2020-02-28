@@ -7,4 +7,4 @@ export declare class ProductAttributesModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<ProductAttributesModule>;
 }
 
-//# sourceMappingURL=product-attributes.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvZHVjdC1hdHRyaWJ1dGVzLm1vZHVsZS5kLnRzIiwic291cmNlcyI6WyJwcm9kdWN0LWF0dHJpYnV0ZXMubW9kdWxlLmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBOzs7QUFDQTsiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVjbGFyZSBjbGFzcyBQcm9kdWN0QXR0cmlidXRlc01vZHVsZSB7XG59XG4iXX0=

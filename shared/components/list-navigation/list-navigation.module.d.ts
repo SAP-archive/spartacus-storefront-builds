@@ -10,4 +10,4 @@ export declare class ListNavigationModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<ListNavigationModule>;
 }
 
-//# sourceMappingURL=list-navigation.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibGlzdC1uYXZpZ2F0aW9uLm1vZHVsZS5kLnRzIiwic291cmNlcyI6WyJsaXN0LW5hdmlnYXRpb24ubW9kdWxlLmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUFBOzs7QUFDQTsiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVjbGFyZSBjbGFzcyBMaXN0TmF2aWdhdGlvbk1vZHVsZSB7XG59XG4iXX0=

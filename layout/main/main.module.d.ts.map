@@ -1,1 +1,0 @@
-{"version":3,"file":"main.module.d.ts","sources":["/home/travis/build/SAP/cloud-commerce-spartacus-storefront/dist/storefrontlib/layout/main/main.module.d.ts"],"sourcesContent":["export declare class MainModule {\n}\n"],"names":[],"mappings":";;;;;;;;;;;;;AAAA;;;AACA;"}

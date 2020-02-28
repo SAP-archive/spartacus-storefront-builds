@@ -6,4 +6,4 @@ export declare class OutletModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<OutletModule>;
 }
 
-//# sourceMappingURL=outlet.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib3V0bGV0Lm1vZHVsZS5kLnRzIiwic291cmNlcyI6WyJvdXRsZXQubW9kdWxlLmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQUE7OztBQUNBOyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWNsYXJlIGNsYXNzIE91dGxldE1vZHVsZSB7XG59XG4iXX0=

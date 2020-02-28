@@ -10,4 +10,4 @@ export declare class CarouselModule {
     static ɵinj: ɵngcc0.ɵɵInjectorDef<CarouselModule>;
 }
 
-//# sourceMappingURL=carousel.module.d.ts.map
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2Fyb3VzZWwubW9kdWxlLmQudHMiLCJzb3VyY2VzIjpbImNhcm91c2VsLm1vZHVsZS5kLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFBQTs7O0FBQ0E7Iiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlY2xhcmUgY2xhc3MgQ2Fyb3VzZWxNb2R1bGUge1xufVxuIl19
