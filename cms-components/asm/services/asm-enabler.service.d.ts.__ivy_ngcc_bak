@@ -23,7 +23,7 @@ export declare class AsmEnablerService {
     /**
      * Indicates whether the ASM module is enabled.
      */
-    private isEnabled;
+    isEnabled(): boolean;
     /**
      * Indicates whether ASM is launched through the URL,
      * using the asm flag in the URL.
