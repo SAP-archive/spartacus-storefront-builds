@@ -19872,7 +19872,7 @@ let ConsignmentTrackingComponent = class ConsignmentTrackingComponent {
     }
 };
 ConsignmentTrackingComponent.ɵfac = function ConsignmentTrackingComponent_Factory(t) { return new (t || ConsignmentTrackingComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserOrderService), ɵngcc0.ɵɵdirectiveInject(ModalService)); };
-ConsignmentTrackingComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ConsignmentTrackingComponent, selectors: [["cx-consignment-tracking"]], inputs: { consignment: "consignment", orderCode: "orderCode" }, decls: 1, vars: 1, consts: [[4, "ngIf"], [1, "btn", "btn-action", "btn-track", 3, "click"]], template: function ConsignmentTrackingComponent_Template(rf, ctx) { if (rf & 1) {
+ConsignmentTrackingComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ConsignmentTrackingComponent, selectors: [["cx-consignment-tracking"]], inputs: { consignment: "consignment", orderCode: "orderCode" }, decls: 1, vars: 1, consts: [[4, "ngIf"], ["type", "button", 1, "btn", "btn-action", "btn-track", 3, "click"]], template: function ConsignmentTrackingComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, ConsignmentTrackingComponent_ng_container_0_Template, 2, 1, "ng-container", 0);
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ctx.consignment && ctx.consignment.status);
@@ -29608,7 +29608,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-consignment-tracking',
-                template: "<ng-container *ngIf=\"consignment && consignment.status\">\n  <div *ngIf=\"consignmentStatus.includes(consignment.status)\">\n    <button\n      (click)=\"openTrackingDialog(consignment)\"\n      class=\"btn btn-action btn-track\"\n    >\n      {{ 'orderDetails.consignmentTracking.action' | cxTranslate }}\n    </button>\n  </div>\n</ng-container>\n"
+                template: "<ng-container *ngIf=\"consignment && consignment.status\">\n  <div *ngIf=\"consignmentStatus.includes(consignment.status)\">\n    <button\n      (click)=\"openTrackingDialog(consignment)\"\n      class=\"btn btn-action btn-track\"\n      type=\"button\"\n    >\n      {{ 'orderDetails.consignmentTracking.action' | cxTranslate }}\n    </button>\n  </div>\n</ng-container>\n"
             }]
     }], function () { return [{ type: ɵngcc1.UserOrderService }, { type: ModalService }]; }, { consignment: [{
             type: Input
