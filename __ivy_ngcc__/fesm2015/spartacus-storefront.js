@@ -21970,10 +21970,8 @@ let BreadcrumbComponent = class BreadcrumbComponent {
     setCrumbs() {
         this.crumbs$ = combineLatest([
             this.pageMetaService.getMeta(),
-            this.translation.translate('common.home'),
-        ]).pipe(map(([meta, textHome]) => meta && meta.breadcrumbs
-            ? meta.breadcrumbs
-            : [{ label: textHome, link: '/' }]));
+            this.translation.translate('common.home').pipe(observeOn(asyncScheduler)),
+        ]).pipe(map(([meta, textHome]) => { var _a; return ((_a = meta) === null || _a === void 0 ? void 0 : _a.breadcrumbs) ? meta.breadcrumbs : [{ label: textHome, link: '/' }]; }));
     }
 };
 BreadcrumbComponent.ɵfac = function BreadcrumbComponent_Factory(t) { return new (t || BreadcrumbComponent)(ɵngcc0.ɵɵdirectiveInject(CmsComponentData), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.PageMetaService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.TranslationService)); };

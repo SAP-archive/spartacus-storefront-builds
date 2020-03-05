@@ -13260,12 +13260,11 @@ var BreadcrumbComponent = /** @class */ (function () {
     BreadcrumbComponent.prototype.setCrumbs = function () {
         this.crumbs$ = combineLatest([
             this.pageMetaService.getMeta(),
-            this.translation.translate('common.home'),
+            this.translation.translate('common.home').pipe(observeOn(asyncScheduler)),
         ]).pipe(map(function (_a) {
             var _b = __read(_a, 2), meta = _b[0], textHome = _b[1];
-            return meta && meta.breadcrumbs
-                ? meta.breadcrumbs
-                : [{ label: textHome, link: '/' }];
+            var _c;
+            return ((_c = meta) === null || _c === void 0 ? void 0 : _c.breadcrumbs) ? meta.breadcrumbs : [{ label: textHome, link: '/' }];
         }));
     };
     BreadcrumbComponent.ctorParameters = function () { return [
