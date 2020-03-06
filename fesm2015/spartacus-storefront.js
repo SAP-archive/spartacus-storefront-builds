@@ -5320,6 +5320,12 @@ let StarRatingComponent = class StarRatingComponent {
         this.setRate(rating);
         this.change.emit(rating);
     }
+    setRateOnEvent(event, rating) {
+        if (event.code === 'Space') {
+            event.preventDefault();
+            this.setRate(rating);
+        }
+    }
 };
 StarRatingComponent.ctorParameters = () => [
     { type: ElementRef },
@@ -5337,7 +5343,7 @@ __decorate([
 StarRatingComponent = __decorate([
     Component({
         selector: 'cx-star-rating',
-        template: "<cx-icon\n  *ngFor=\"let i of [1, 2, 3, 4, 5]\"\n  [type]=\"iconTypes.STAR\"\n  class=\"star\"\n  (mouseover)=\"setRate(i)\"\n  (mouseout)=\"setRate(0)\"\n  (click)=\"saveRate(i)\"\n  [attr.tabindex]=\"disabled ? null : 0\"\n></cx-icon>\n",
+        template: "<cx-icon\n  *ngFor=\"let i of [1, 2, 3, 4, 5]\"\n  [type]=\"iconTypes.STAR\"\n  class=\"star\"\n  (mouseover)=\"setRate(i)\"\n  (mouseout)=\"setRate(0)\"\n  (keydown)=\"setRateOnEvent($event, i)\"\n  (click)=\"saveRate(i)\"\n  [attr.tabindex]=\"disabled ? null : 0\"\n></cx-icon>\n",
         changeDetection: ChangeDetectionStrategy.OnPush
     })
 ], StarRatingComponent);

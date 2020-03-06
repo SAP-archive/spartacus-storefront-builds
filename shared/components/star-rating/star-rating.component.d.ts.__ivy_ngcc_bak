@@ -29,4 +29,5 @@ export declare class StarRatingComponent implements OnInit {
     ngOnInit(): void;
     setRate(value: number, force?: boolean): void;
     saveRate(rating: number): void;
+    setRateOnEvent(event: any, rating: number): void;
 }
