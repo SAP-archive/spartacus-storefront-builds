@@ -9461,8 +9461,9 @@ IconLoaderService.ɵprov = ɵɵdefineInjectable({ factory: function IconLoaderSe
  *
  * The above button would become (based on a TEXT resource type):
  * `<button>😊happy label</button>`
- * While the content is projected, the icon itself doesn't require
- * an additional DOM node which is an advantage over the component selector.
+ *
+ * While the content is projected, the icon itself doesn't require an
+ * additional DOM node which is an advantage over the component selector.
  */
 let IconComponent = class IconComponent {
     constructor(iconLoader, elementRef, renderer) {
@@ -9493,18 +9494,22 @@ let IconComponent = class IconComponent {
         this.iconLoader.addLinkResource(type);
     }
     /**
-     * Adds the style classes and the link resource (if availabe).
+     * Adds the style classes and the link resource (if available).
      */
     addStyleClasses(type) {
-        this.renderer.addClass(this.elementRef.nativeElement, 'cx-icon');
-        this.iconLoader
-            .getStyleClasses(type)
-            .split(' ')
-            .forEach(cls => {
+        this.renderer.addClass(this.host, 'cx-icon');
+        if (this.styleClasses) {
+            this.styleClasses.forEach(cls => this.renderer.removeClass(this.host, cls));
+        }
+        this.styleClasses = this.iconLoader.getStyleClasses(type).split(' ');
+        this.styleClasses.forEach(cls => {
             if (cls !== '') {
-                this.renderer.addClass(this.elementRef.nativeElement, cls);
+                this.renderer.addClass(this.host, cls);
             }
         });
+    }
+    get host() {
+        return this.elementRef.nativeElement;
     }
 };
 IconComponent.ɵfac = function IconComponent_Factory(t) { return new (t || IconComponent)(ɵngcc0.ɵɵdirectiveInject(IconLoaderService), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.Renderer2)); };

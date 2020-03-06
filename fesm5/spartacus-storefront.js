@@ -236,8 +236,9 @@ var IconLoaderService = /** @class */ (function () {
  *
  * The above button would become (based on a TEXT resource type):
  * `<button>😊happy label</button>`
- * While the content is projected, the icon itself doesn't require
- * an additional DOM node which is an advantage over the component selector.
+ *
+ * While the content is projected, the icon itself doesn't require an
+ * additional DOM node which is an advantage over the component selector.
  */
 var IconComponent = /** @class */ (function () {
     function IconComponent(iconLoader, elementRef, renderer) {
@@ -276,20 +277,30 @@ var IconComponent = /** @class */ (function () {
         this.iconLoader.addLinkResource(type);
     };
     /**
-     * Adds the style classes and the link resource (if availabe).
+     * Adds the style classes and the link resource (if available).
      */
     IconComponent.prototype.addStyleClasses = function (type) {
         var _this = this;
-        this.renderer.addClass(this.elementRef.nativeElement, 'cx-icon');
-        this.iconLoader
-            .getStyleClasses(type)
-            .split(' ')
-            .forEach(function (cls) {
+        this.renderer.addClass(this.host, 'cx-icon');
+        if (this.styleClasses) {
+            this.styleClasses.forEach(function (cls) {
+                return _this.renderer.removeClass(_this.host, cls);
+            });
+        }
+        this.styleClasses = this.iconLoader.getStyleClasses(type).split(' ');
+        this.styleClasses.forEach(function (cls) {
             if (cls !== '') {
-                _this.renderer.addClass(_this.elementRef.nativeElement, cls);
+                _this.renderer.addClass(_this.host, cls);
             }
         });
     };
+    Object.defineProperty(IconComponent.prototype, "host", {
+        get: function () {
+            return this.elementRef.nativeElement;
+        },
+        enumerable: true,
+        configurable: true
+    });
     IconComponent.ctorParameters = function () { return [
         { type: IconLoaderService },
         { type: ElementRef },
