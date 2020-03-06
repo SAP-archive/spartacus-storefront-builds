@@ -8224,9 +8224,7 @@ function ScheduleComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵproperty("ngForOf", ctx_r1292.displayDays);
 } }
 function StoreFinderGridComponent_ng_container_0_div_3_Template(rf, ctx) { if (rf & 1) {
-    const _r1305 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 5);
-    ɵngcc0.ɵɵlistener("click", function StoreFinderGridComponent_ng_container_0_div_3_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1305); const location_r1303 = ctx.$implicit; const ctx_r1304 = ɵngcc0.ɵɵnextContext(2); return ctx_r1304.viewStore(location_r1303); });
     ɵngcc0.ɵɵelement(1, "cx-store-finder-list-item", 6);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
@@ -8252,23 +8250,44 @@ function StoreFinderGridComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵelement(1, "cx-spinner");
     ɵngcc0.ɵɵelementEnd();
 } }
-function StoreFinderListItemComponent_div_6_div_4_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 8);
+function StoreFinderListItemComponent_button_5_Template(rf, ctx) { if (rf & 1) {
+    const _r1308 = ɵngcc0.ɵɵgetCurrentView();
+    ɵngcc0.ɵɵelementStart(0, "button", 6);
+    ɵngcc0.ɵɵlistener("click", function StoreFinderListItemComponent_button_5_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1308); const ctx_r1307 = ɵngcc0.ɵɵnextContext(); return ctx_r1307.handleStoreItemClick(); })("keyup", function StoreFinderListItemComponent_button_5_Template_button_keyup_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1308); const ctx_r1309 = ɵngcc0.ɵɵnextContext(); return ctx_r1309.onKey($event); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1307 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1304 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1307.location.formattedDistance, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1304.location.displayName || ctx_r1304.location.name, " ");
+} }
+function StoreFinderListItemComponent_a_6_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelementStart(0, "a", 7);
+    ɵngcc0.ɵɵtext(1);
+    ɵngcc0.ɵɵelementEnd();
+} if (rf & 2) {
+    const ctx_r1305 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("href", ctx_r1305.prepareRouteUrl(ctx_r1305.location), ɵngcc0.ɵɵsanitizeUrl);
+    ɵngcc0.ɵɵadvance(1);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1305.location.displayName || ctx_r1305.location.name);
+} }
+function StoreFinderListItemComponent_div_7_div_4_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelementStart(0, "div", 11);
+    ɵngcc0.ɵɵtext(1);
+    ɵngcc0.ɵɵelementEnd();
+} if (rf & 2) {
+    const ctx_r1310 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵadvance(1);
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1310.location.formattedDistance, " ");
 } }
 const _c48 = function (a0, a1, a2) { return [a0, a1, a2]; };
-function StoreFinderListItemComponent_div_6_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 5);
-    ɵngcc0.ɵɵelementStart(1, "div", 6);
+function StoreFinderListItemComponent_div_7_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelementStart(0, "div", 8);
+    ɵngcc0.ɵɵelementStart(1, "div", 9);
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵtext(3);
-    ɵngcc0.ɵɵtemplate(4, StoreFinderListItemComponent_div_6_div_4_Template, 2, 1, "div", 7);
+    ɵngcc0.ɵɵtemplate(4, StoreFinderListItemComponent_div_7_div_4_Template, 2, 1, "div", 10);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
     const ctx_r1306 = ɵngcc0.ɵɵnextContext();
@@ -8282,17 +8301,17 @@ function StoreFinderListItemComponent_div_6_Template(rf, ctx) { if (rf & 1) {
 const _c49 = ["mapElement"];
 const _c50 = ["storeMap"];
 function StoreFinderListComponent_ng_container_0_div_2_button_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1316 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1319 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 10);
-    ɵngcc0.ɵɵlistener("click", function StoreFinderListComponent_ng_container_0_div_2_button_4_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1316); const ctx_r1315 = ɵngcc0.ɵɵnextContext(3); return ctx_r1315.hideStoreDetails(); });
+    ɵngcc0.ɵɵlistener("click", function StoreFinderListComponent_ng_container_0_div_2_button_4_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1319); const ctx_r1318 = ɵngcc0.ɵɵnextContext(3); return ctx_r1318.hideStoreDetails(); });
     ɵngcc0.ɵɵelement(1, "cx-icon", 11);
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1314 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1317 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r1314.iconTypes.CARET_LEFT);
+    ɵngcc0.ɵɵproperty("type", ctx_r1317.iconTypes.CARET_LEFT);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "storeFinder.backToList"), " ");
 } }
@@ -8306,49 +8325,49 @@ function StoreFinderListComponent_ng_container_0_div_2_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1310 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1313 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("pagination", ctx_r1310.locations.pagination);
+    ɵngcc0.ɵɵproperty("pagination", ctx_r1313.locations.pagination);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1310.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1313.isDetailsModeVisible);
 } }
 function StoreFinderListComponent_ng_container_0_div_3_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 19);
     ɵngcc0.ɵɵelement(1, "cx-store-finder-store-description", 20);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1317 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1320 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", ctx_r1317.storeDetails)("disableMap", true);
+    ɵngcc0.ɵɵproperty("location", ctx_r1320.storeDetails)("disableMap", true);
 } }
 const _c51 = function (a0) { return { "cx-selected-item": a0 }; };
 function StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1324 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1327 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li", 23);
     ɵngcc0.ɵɵelementStart(1, "cx-store-finder-list-item", 24);
-    ɵngcc0.ɵɵlistener("storeItemClick", function StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template_cx_store_finder_list_item_storeItemClick_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1324); const location_r1321 = ctx.$implicit; const ctx_r1323 = ɵngcc0.ɵɵnextContext(4); return ctx_r1323.centerStoreOnMapByIndex($event, location_r1321); });
+    ɵngcc0.ɵɵlistener("storeItemClick", function StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template_cx_store_finder_list_item_storeItemClick_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1327); const location_r1324 = ctx.$implicit; const ctx_r1326 = ɵngcc0.ɵɵnextContext(4); return ctx_r1326.centerStoreOnMapByIndex($event, location_r1324); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const location_r1321 = ctx.$implicit;
-    const i_r1322 = ctx.index;
-    const ctx_r1320 = ɵngcc0.ɵɵnextContext(4);
-    ɵngcc0.ɵɵpropertyInterpolate("id", "item-" + i_r1322);
-    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(6, _c51, ctx_r1320.selectedStoreIndex === i_r1322));
+    const location_r1324 = ctx.$implicit;
+    const i_r1325 = ctx.index;
+    const ctx_r1323 = ɵngcc0.ɵɵnextContext(4);
+    ɵngcc0.ɵɵpropertyInterpolate("id", "item-" + i_r1325);
+    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(7, _c51, ctx_r1323.selectedStoreIndex === i_r1325));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", location_r1321)("locationIndex", i_r1322)("displayDistance", ctx_r1320.useMylocation)("listOrderLabel", i_r1322 + ctx_r1320.locations.pagination.currentPage * ctx_r1320.locations.pagination.pageSize + 1);
+    ɵngcc0.ɵɵproperty("location", location_r1324)("locationIndex", i_r1325)("displayDistance", ctx_r1323.useMylocation)("useClickEvent", true)("listOrderLabel", i_r1325 + ctx_r1323.locations.pagination.currentPage * ctx_r1323.locations.pagination.pageSize + 1);
 } }
 function StoreFinderListComponent_ng_container_0_div_3_ol_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "ol", 21);
-    ɵngcc0.ɵɵtemplate(1, StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template, 2, 8, "li", 22);
+    ɵngcc0.ɵɵtemplate(1, StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template, 2, 9, "li", 22);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1318 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1321 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1318.locations == null ? null : ctx_r1318.locations.stores);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1321.locations == null ? null : ctx_r1321.locations.stores);
 } }
 function StoreFinderListComponent_ng_container_0_div_3_Template(rf, ctx) { if (rf & 1) {
-    const _r1326 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1329 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 12);
     ɵngcc0.ɵɵelementStart(1, "div", 13);
     ɵngcc0.ɵɵtemplate(2, StoreFinderListComponent_ng_container_0_div_3_div_2_Template, 2, 2, "div", 14);
@@ -8356,18 +8375,18 @@ function StoreFinderListComponent_ng_container_0_div_3_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "div", 16);
     ɵngcc0.ɵɵelementStart(5, "cx-store-finder-map", 17, 18);
-    ɵngcc0.ɵɵlistener("selectedStoreItem", function StoreFinderListComponent_ng_container_0_div_3_Template_cx_store_finder_map_selectedStoreItem_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1326); const ctx_r1325 = ɵngcc0.ɵɵnextContext(2); return ctx_r1325.selectStoreItemList($event); });
+    ɵngcc0.ɵɵlistener("selectedStoreItem", function StoreFinderListComponent_ng_container_0_div_3_Template_cx_store_finder_map_selectedStoreItem_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1329); const ctx_r1328 = ɵngcc0.ɵɵnextContext(2); return ctx_r1328.selectStoreItemList($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1311 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1314 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1311.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1314.isDetailsModeVisible);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1311.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1314.isDetailsModeVisible);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("locations", ctx_r1311.locations.stores);
+    ɵngcc0.ɵɵproperty("locations", ctx_r1314.locations.stores);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(0);
@@ -8380,34 +8399,34 @@ function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_div_1_Templ
     ɵngcc0.ɵɵelement(1, "cx-store-finder-store-description", 20);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1331 = ɵngcc0.ɵɵnextContext(4);
+    const ctx_r1334 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", ctx_r1331.storeDetails)("disableMap", true);
+    ɵngcc0.ɵɵproperty("location", ctx_r1334.storeDetails)("disableMap", true);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_li_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1337 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1340 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li", 23);
     ɵngcc0.ɵɵelementStart(1, "cx-store-finder-list-item", 24);
-    ɵngcc0.ɵɵlistener("storeItemClick", function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_li_1_Template_cx_store_finder_list_item_storeItemClick_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1337); const location_r1334 = ctx.$implicit; const ctx_r1336 = ɵngcc0.ɵɵnextContext(5); return ctx_r1336.centerStoreOnMapByIndex($event, location_r1334); });
+    ɵngcc0.ɵɵlistener("storeItemClick", function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_li_1_Template_cx_store_finder_list_item_storeItemClick_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1340); const location_r1337 = ctx.$implicit; const ctx_r1339 = ɵngcc0.ɵɵnextContext(5); return ctx_r1339.centerStoreOnMapByIndex($event, location_r1337); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const location_r1334 = ctx.$implicit;
-    const i_r1335 = ctx.index;
-    const ctx_r1333 = ɵngcc0.ɵɵnextContext(5);
-    ɵngcc0.ɵɵpropertyInterpolate("id", "item-" + i_r1335);
-    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(6, _c51, ctx_r1333.selectedStoreIndex === i_r1335));
+    const location_r1337 = ctx.$implicit;
+    const i_r1338 = ctx.index;
+    const ctx_r1336 = ɵngcc0.ɵɵnextContext(5);
+    ɵngcc0.ɵɵpropertyInterpolate("id", "item-" + i_r1338);
+    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(7, _c51, ctx_r1336.selectedStoreIndex === i_r1338));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", location_r1334)("locationIndex", i_r1335)("displayDistance", ctx_r1333.useMylocation)("listOrderLabel", i_r1335 + ctx_r1333.locations.pagination.currentPage * ctx_r1333.locations.pagination.pageSize + 1);
+    ɵngcc0.ɵɵproperty("location", location_r1337)("locationIndex", i_r1338)("displayDistance", ctx_r1336.useMylocation)("useClickEvent", true)("listOrderLabel", i_r1338 + ctx_r1336.locations.pagination.currentPage * ctx_r1336.locations.pagination.pageSize + 1);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "ol", 21);
-    ɵngcc0.ɵɵtemplate(1, StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_li_1_Template, 2, 8, "li", 22);
+    ɵngcc0.ɵɵtemplate(1, StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_li_1_Template, 2, 9, "li", 22);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1332 = ɵngcc0.ɵɵnextContext(4);
+    const ctx_r1335 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1332.locations == null ? null : ctx_r1332.locations.stores);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1335.locations == null ? null : ctx_r1335.locations.stores);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 29);
@@ -8415,11 +8434,11 @@ function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_Template(rf
     ɵngcc0.ɵɵtemplate(2, StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_Template, 2, 1, "ol", 15);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1328 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1331 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1328.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1331.isDetailsModeVisible);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1328.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1331.isDetailsModeVisible);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(0);
@@ -8429,16 +8448,16 @@ function StoreFinderListComponent_ng_container_0_div_4_ng_template_6_Template(rf
 } }
 const _c52 = function (a0) { return [a0]; };
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_7_Template(rf, ctx) { if (rf & 1) {
-    const _r1340 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1343 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 30);
     ɵngcc0.ɵɵelementStart(1, "cx-store-finder-map", 17, 18);
-    ɵngcc0.ɵɵlistener("selectedStoreItem", function StoreFinderListComponent_ng_container_0_div_4_ng_template_7_Template_cx_store_finder_map_selectedStoreItem_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1340); const ctx_r1339 = ɵngcc0.ɵɵnextContext(3); return ctx_r1339.selectStoreItemList($event); });
+    ɵngcc0.ɵɵlistener("selectedStoreItem", function StoreFinderListComponent_ng_container_0_div_4_ng_template_7_Template_cx_store_finder_map_selectedStoreItem_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1343); const ctx_r1342 = ɵngcc0.ɵɵnextContext(3); return ctx_r1342.selectStoreItemList($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1330 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1333 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("locations", ctx_r1330.selectedStore ? ɵngcc0.ɵɵpureFunction1(1, _c52, ctx_r1330.selectedStore) : ctx_r1330.locations.stores);
+    ɵngcc0.ɵɵproperty("locations", ctx_r1333.selectedStore ? ɵngcc0.ɵɵpureFunction1(1, _c52, ctx_r1333.selectedStore) : ctx_r1333.locations.stores);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 25);
@@ -8475,36 +8494,36 @@ function StoreFinderListComponent_ng_container_0_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1309 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1312 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1309.locations == null ? null : ctx_r1309.locations.pagination);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1312.locations == null ? null : ctx_r1312.locations.pagination);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1309.locations == null ? null : ctx_r1309.locations.stores);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1312.locations == null ? null : ctx_r1312.locations.stores);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1309.locations == null ? null : ctx_r1309.locations.stores);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1312.locations == null ? null : ctx_r1312.locations.stores);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !(ctx_r1309.locations == null ? null : ctx_r1309.locations.stores));
+    ɵngcc0.ɵɵproperty("ngIf", !(ctx_r1312.locations == null ? null : ctx_r1312.locations.stores));
 } }
 function StoreFinderSearchResultComponent_div_0_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1349 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1352 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "div", 5);
     ɵngcc0.ɵɵelementStart(2, "cx-pagination", 6);
-    ɵngcc0.ɵɵlistener("viewPageEvent", function StoreFinderSearchResultComponent_div_0_div_1_Template_cx_pagination_viewPageEvent_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r1349); const ctx_r1348 = ɵngcc0.ɵɵnextContext(2); return ctx_r1348.viewPage($event); });
+    ɵngcc0.ɵɵlistener("viewPageEvent", function StoreFinderSearchResultComponent_div_0_div_1_Template_cx_pagination_viewPageEvent_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r1352); const ctx_r1351 = ɵngcc0.ɵɵnextContext(2); return ctx_r1351.viewPage($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const locations_r1344 = ɵngcc0.ɵɵnextContext().ngIf;
+    const locations_r1347 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("pagination", locations_r1344.pagination);
+    ɵngcc0.ɵɵproperty("pagination", locations_r1347.pagination);
 } }
 function StoreFinderSearchResultComponent_div_0_cx_store_finder_list_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-store-finder-list", 7);
 } if (rf & 2) {
-    const locations_r1344 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r1346 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("locations", locations_r1344)("useMylocation", ctx_r1346.useMyLocation);
+    const locations_r1347 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r1349 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("locations", locations_r1347)("useMylocation", ctx_r1349.useMyLocation);
 } }
 function StoreFinderSearchResultComponent_div_0_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 8);
@@ -8526,13 +8545,13 @@ function StoreFinderSearchResultComponent_div_0_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵtemplate(3, StoreFinderSearchResultComponent_div_0_div_3_Template, 5, 3, "div", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const locations_r1344 = ctx.ngIf;
+    const locations_r1347 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", locations_r1344 == null ? null : locations_r1344.stores.length);
+    ɵngcc0.ɵɵproperty("ngIf", locations_r1347 == null ? null : locations_r1347.stores.length);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", locations_r1344 == null ? null : locations_r1344.stores.length);
+    ɵngcc0.ɵɵproperty("ngIf", locations_r1347 == null ? null : locations_r1347.stores.length);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !(locations_r1344 == null ? null : locations_r1344.stores.length));
+    ɵngcc0.ɵɵproperty("ngIf", !(locations_r1347 == null ? null : locations_r1347.stores.length));
 } }
 function StoreFinderSearchResultComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 11);
@@ -8549,11 +8568,11 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_p_6_Template(rf, ct
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1354 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1357 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1354.location.address.line1, " ", ctx_r1354.location.address.line2, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1357.location.address.line1, " ", ctx_r1357.location.address.line2, " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1354.getFormattedStoreAddress(ɵngcc0.ɵɵpureFunction3(3, _c48, ctx_r1354.location.address.town, ctx_r1354.location.address.postalCode, ctx_r1354.location.address.country.isocode)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1357.getFormattedStoreAddress(ɵngcc0.ɵɵpureFunction3(3, _c48, ctx_r1357.location.address.town, ctx_r1357.location.address.postalCode, ctx_r1357.location.address.country.isocode)), " ");
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_li_13_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "li", 7);
@@ -8561,9 +8580,9 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_li_13_Template(rf, 
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1355 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1358 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "storeFinder.call"), " ", ctx_r1355.location.address == null ? null : ctx_r1355.location.address.phone, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "storeFinder.call"), " ", ctx_r1358.location.address == null ? null : ctx_r1358.location.address.phone, " ");
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_div_14_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 14);
@@ -8575,9 +8594,9 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_div_14_Template(rf,
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1356 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1359 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", ctx_r1356.location);
+    ɵngcc0.ɵɵproperty("location", ctx_r1359.location);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 2, "storeFinder.storeHours"));
 } }
@@ -8588,9 +8607,9 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_div_15_div_7_Templa
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const feature_r1360 = ctx.$implicit;
+    const feature_r1363 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(feature_r1360.value);
+    ɵngcc0.ɵɵtextInterpolate(feature_r1363.value);
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_div_15_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 16);
@@ -8607,20 +8626,20 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_div_15_Template(rf,
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1357 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1360 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 2, "storeFinder.storeFeatures"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1357.location.features == null ? null : ctx_r1357.location.features.entry);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1360.location.features == null ? null : ctx_r1360.location.features.entry);
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_article_17_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "article", 22);
     ɵngcc0.ɵɵelement(1, "cx-store-finder-map", 23);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1358 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1361 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("locations", ɵngcc0.ɵɵpureFunction1(1, _c52, ctx_r1358.location));
+    ɵngcc0.ɵɵproperty("locations", ɵngcc0.ɵɵpureFunction1(1, _c52, ctx_r1361.location));
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -8651,33 +8670,33 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_Template(rf, ctx) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1353 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1356 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1353.location.displayName || ctx_r1353.location.name);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1356.location.displayName || ctx_r1356.location.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1353.location.address);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1356.location.address);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("href", ctx_r1353.getDirections(ctx_r1353.location), ɵngcc0.ɵɵsanitizeUrl);
+    ɵngcc0.ɵɵproperty("href", ctx_r1356.getDirections(ctx_r1356.location), ɵngcc0.ɵɵsanitizeUrl);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(12, 8, "storeFinder.getDirections"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1353.location.address == null ? null : ctx_r1353.location.address.phone);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1356.location.address == null ? null : ctx_r1356.location.address.phone);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1353.location.openingHours);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1356.location.openingHours);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(16, 10, ctx_r1353.location.features) != "{}");
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(16, 10, ctx_r1356.location.features) != "{}");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1353.disableMap);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1356.disableMap);
 } }
 function StoreFinderStoresCountComponent_ng_container_0_div_2_div_1_span_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "span", 11);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const country_r1368 = ɵngcc0.ɵɵnextContext().$implicit;
-    ɵngcc0.ɵɵproperty("ngClass", (country_r1368 == null ? null : country_r1368.storeCountDataList) ? "country-header" : "country-header-link");
+    const country_r1371 = ɵngcc0.ɵɵnextContext().$implicit;
+    ɵngcc0.ɵɵproperty("ngClass", (country_r1371 == null ? null : country_r1371.storeCountDataList) ? "country-header" : "country-header-link");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1("(", country_r1368.count, ")");
+    ɵngcc0.ɵɵtextInterpolate1("(", country_r1371.count, ")");
 } }
 const _c56 = function (a1) { return ["../country", a1]; };
 function StoreFinderStoresCountComponent_ng_container_0_div_2_div_1_Template(rf, ctx) { if (rf & 1) {
@@ -8692,24 +8711,24 @@ function StoreFinderStoresCountComponent_ng_container_0_div_2_div_1_Template(rf,
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const country_r1368 = ctx.$implicit;
+    const country_r1371 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction1(4, _c56, country_r1368.isoCode));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction1(4, _c56, country_r1371.isoCode));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngClass", (country_r1368 == null ? null : country_r1368.storeCountDataList) ? "country-header" : "country-header-link");
+    ɵngcc0.ɵɵproperty("ngClass", (country_r1371 == null ? null : country_r1371.storeCountDataList) ? "country-header" : "country-header-link");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(country_r1368.name);
+    ɵngcc0.ɵɵtextInterpolate(country_r1371.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !(country_r1368 == null ? null : country_r1368.storeCountDataList));
+    ɵngcc0.ɵɵproperty("ngIf", !(country_r1371 == null ? null : country_r1371.storeCountDataList));
 } }
 function StoreFinderStoresCountComponent_ng_container_0_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 4);
     ɵngcc0.ɵɵtemplate(1, StoreFinderStoresCountComponent_ng_container_0_div_2_div_1_Template, 6, 6, "div", 5);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const locations_r1364 = ɵngcc0.ɵɵnextContext().ngIf;
+    const locations_r1367 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", locations_r1364);
+    ɵngcc0.ɵɵproperty("ngForOf", locations_r1367);
 } }
 function StoreFinderStoresCountComponent_ng_container_0_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 4);
@@ -8730,11 +8749,11 @@ function StoreFinderStoresCountComponent_ng_container_0_Template(rf, ctx) { if (
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const locations_r1364 = ctx.ngIf;
+    const locations_r1367 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", locations_r1364 == null ? null : locations_r1364.length);
+    ɵngcc0.ɵɵproperty("ngIf", locations_r1367 == null ? null : locations_r1367.length);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !(locations_r1364 == null ? null : locations_r1364.length));
+    ɵngcc0.ɵɵproperty("ngIf", !(locations_r1367 == null ? null : locations_r1367.length));
 } }
 function StoreFinderStoresCountComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 13);
@@ -8742,12 +8761,12 @@ function StoreFinderStoresCountComponent_ng_template_3_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
 } }
 function StoreFinderStoreComponent_div_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1377 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1380 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 2);
     ɵngcc0.ɵɵelementStart(1, "div", 3);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
     ɵngcc0.ɵɵelementStart(3, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function StoreFinderStoreComponent_div_0_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r1377); const ctx_r1376 = ɵngcc0.ɵɵnextContext(); return ctx_r1376.goBack(); });
+    ɵngcc0.ɵɵlistener("click", function StoreFinderStoreComponent_div_0_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r1380); const ctx_r1379 = ɵngcc0.ɵɵnextContext(); return ctx_r1379.goBack(); });
     ɵngcc0.ɵɵelement(4, "cx-icon", 6);
     ɵngcc0.ɵɵtext(5);
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
@@ -8761,14 +8780,14 @@ function StoreFinderStoreComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const location_r1375 = ctx.ngIf;
-    const ctx_r1372 = ɵngcc0.ɵɵnextContext();
+    const location_r1378 = ctx.ngIf;
+    const ctx_r1375 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("type", ctx_r1372.iconTypes.CARET_LEFT);
+    ɵngcc0.ɵɵproperty("type", ctx_r1375.iconTypes.CARET_LEFT);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(6, 4, "storeFinder.backToList"), " ");
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("disableMap", ctx_r1372.disableMap)("location", location_r1375);
+    ɵngcc0.ɵɵproperty("disableMap", ctx_r1375.disableMap)("location", location_r1378);
 } }
 function StoreFinderStoreComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 10);
@@ -8849,9 +8868,9 @@ function LoginComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(4, "cx-page-slot", 3);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const user_r1386 = ctx.ngIf;
+    const user_r1389 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 1, "miniLogin.userGreeting", ɵngcc0.ɵɵpureFunction1(4, _c60, user_r1386.name)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 1, "miniLogin.userGreeting", ɵngcc0.ɵɵpureFunction1(4, _c60, user_r1389.name)), " ");
 } }
 function LoginComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "a", 4);
@@ -8869,10 +8888,10 @@ function RegisterComponent_section_0_option_14_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const title_r1396 = ctx.$implicit;
-    ɵngcc0.ɵɵproperty("value", title_r1396.code);
+    const title_r1399 = ctx.$implicit;
+    ɵngcc0.ɵɵproperty("value", title_r1399.code);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(title_r1396.name);
+    ɵngcc0.ɵɵtextInterpolate(title_r1399.name);
 } }
 function RegisterComponent_section_0_div_44_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 27);
@@ -8904,12 +8923,12 @@ function RegisterComponent_section_0_ng_container_55_label_1_Template(rf, ctx) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const anonymousConsent_r1398 = ctx.ngIf;
-    const ctx_r1397 = ɵngcc0.ɵɵnextContext(3);
+    const anonymousConsent_r1401 = ctx.ngIf;
+    const ctx_r1400 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("checked", ctx_r1397.isConsentGiven(anonymousConsent_r1398.consent));
+    ɵngcc0.ɵɵproperty("checked", ctx_r1400.isConsentGiven(anonymousConsent_r1401.consent));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", anonymousConsent_r1398.template, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", anonymousConsent_r1401.template, " ");
 } }
 function RegisterComponent_section_0_ng_container_55_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -8917,9 +8936,9 @@ function RegisterComponent_section_0_ng_container_55_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1393 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1396 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r1393.anonymousConsent$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r1396.anonymousConsent$));
 } }
 function RegisterComponent_section_0_ng_template_56_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "label");
@@ -8934,7 +8953,7 @@ function RegisterComponent_section_0_ng_template_56_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 1, "register.emailMarketing"), " ");
 } }
 function RegisterComponent_section_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1400 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1403 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "section", 2);
     ɵngcc0.ɵɵelementStart(1, "div", 3);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
@@ -9031,7 +9050,7 @@ function RegisterComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(69, "button", 24);
-    ɵngcc0.ɵɵlistener("click", function RegisterComponent_section_0_Template_button_click_69_listener() { ɵngcc0.ɵɵrestoreView(_r1400); const ctx_r1399 = ɵngcc0.ɵɵnextContext(); return ctx_r1399.submit(); });
+    ɵngcc0.ɵɵlistener("click", function RegisterComponent_section_0_Template_button_click_69_listener() { ɵngcc0.ɵɵrestoreView(_r1403); const ctx_r1402 = ɵngcc0.ɵɵnextContext(); return ctx_r1402.submit(); });
     ɵngcc0.ɵɵtext(70);
     ɵngcc0.ɵɵpipe(71, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -9046,16 +9065,16 @@ function RegisterComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const _r1394 = ɵngcc0.ɵɵreference(57);
-    const ctx_r1387 = ɵngcc0.ɵɵnextContext();
+    const _r1397 = ɵngcc0.ɵɵreference(57);
+    const ctx_r1390 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("formGroup", ctx_r1387.userRegistrationForm);
+    ɵngcc0.ɵɵproperty("formGroup", ctx_r1390.userRegistrationForm);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(9, 30, "register.title"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(13, 32, "register.selectTitle"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(15, 34, ctx_r1387.titles$));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(15, 34, ctx_r1390.titles$));
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(20, 36, "register.firstName.label"));
     ɵngcc0.ɵɵadvance(2);
@@ -9067,24 +9086,24 @@ function RegisterComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(34, 44, "register.emailAddress.label"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1387.userRegistrationForm.get("email").errors && (ctx_r1387.userRegistrationForm.get("email").errors["email"] || ctx_r1387.userRegistrationForm.get("email").errors["InvalidEmail"]) && ctx_r1387.userRegistrationForm.get("email").dirty);
+    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1390.userRegistrationForm.get("email").errors && (ctx_r1390.userRegistrationForm.get("email").errors["email"] || ctx_r1390.userRegistrationForm.get("email").errors["InvalidEmail"]) && ctx_r1390.userRegistrationForm.get("email").dirty);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(36, 46, "register.emailAddress.placeholder"));
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(41, 48, "register.password.label"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1387.userRegistrationForm.get("password").invalid && ctx_r1387.userRegistrationForm.get("password").dirty);
+    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1390.userRegistrationForm.get("password").invalid && ctx_r1390.userRegistrationForm.get("password").dirty);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(43, 50, "register.password.placeholder"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1387.userRegistrationForm.get("password").invalid && ctx_r1387.userRegistrationForm.get("password").dirty);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1390.userRegistrationForm.get("password").invalid && ctx_r1390.userRegistrationForm.get("password").dirty);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(49, 52, "register.confirmPassword.label"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1387.userRegistrationForm.get("password").value !== ctx_r1387.userRegistrationForm.get("passwordconf").value);
+    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1390.userRegistrationForm.get("password").value !== ctx_r1390.userRegistrationForm.get("passwordconf").value);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(51, 54, "register.confirmPassword.placeholder"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1387.userRegistrationForm.get("password").value !== ctx_r1387.userRegistrationForm.get("passwordconf").value && ctx_r1387.userRegistrationForm.get("passwordconf").value);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1390.userRegistrationForm.get("password").value !== ctx_r1390.userRegistrationForm.get("passwordconf").value && ctx_r1390.userRegistrationForm.get("passwordconf").value);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1387.isAnonymousConsentEnabled)("ngIfElse", _r1394);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1390.isAnonymousConsentEnabled)("ngIfElse", _r1397);
     ɵngcc0.ɵɵadvance(8);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(64, 56, "register.confirmThatRead"), " ");
     ɵngcc0.ɵɵadvance(2);
@@ -9111,11 +9130,11 @@ function WishListItemComponent_div_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1401 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1404 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c14, ctx_r1401.cartEntry.product)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c14, ctx_r1404.cartEntry.product)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1401.cartEntry.product.name);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1404.cartEntry.product.name);
 } }
 function WishListItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 18);
@@ -9123,45 +9142,45 @@ function WishListItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1402 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1405 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", ctx_r1402.cartEntry.product.code, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", ctx_r1405.cartEntry.product.code, " ");
 } }
 function WishListItemComponent_ng_container_10_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 22);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r1409 = ɵngcc0.ɵɵnextContext().$implicit;
+    const variant_r1412 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", variant_r1409.name, ": ", variant_r1409.value, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", variant_r1412.name, ": ", variant_r1412.value, " ");
 } }
 function WishListItemComponent_ng_container_10_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 20);
     ɵngcc0.ɵɵtemplate(1, WishListItemComponent_ng_container_10_div_1_div_1_Template, 2, 2, "div", 21);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r1409 = ctx.$implicit;
+    const variant_r1412 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", variant_r1409.name && variant_r1409.value);
+    ɵngcc0.ɵɵproperty("ngIf", variant_r1412.name && variant_r1412.value);
 } }
 function WishListItemComponent_ng_container_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, WishListItemComponent_ng_container_10_div_1_Template, 2, 1, "div", 19);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1403 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1406 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1403.cartEntry.product.baseOptions[0] == null ? null : ctx_r1403.cartEntry.product.baseOptions[0].selected == null ? null : ctx_r1403.cartEntry.product.baseOptions[0].selected.variantOptionQualifiers);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1406.cartEntry.product.baseOptions[0] == null ? null : ctx_r1406.cartEntry.product.baseOptions[0].selected == null ? null : ctx_r1406.cartEntry.product.baseOptions[0].selected.variantOptionQualifiers);
 } }
 function WishListItemComponent_div_11_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 26);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1412 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1415 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1412.cartEntry.basePrice == null ? null : ctx_r1412.cartEntry.basePrice.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1415.cartEntry.basePrice == null ? null : ctx_r1415.cartEntry.basePrice.formattedValue, " ");
 } }
 function WishListItemComponent_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 23);
@@ -9172,17 +9191,17 @@ function WishListItemComponent_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(4, WishListItemComponent_div_11_div_4_Template, 2, 1, "div", 25);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1404 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1407 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "cartItems.itemPrice"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1404.cartEntry.basePrice);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1407.cartEntry.basePrice);
 } }
 function WishListItemComponent_cx_add_to_cart_13_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-add-to-cart", 27);
 } if (rf & 2) {
-    const ctx_r1405 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1405.cartEntry.product);
+    const ctx_r1408 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1408.cartEntry.product);
 } }
 function WishListItemComponent_ng_template_14_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "span", 28);
@@ -9194,18 +9213,18 @@ function WishListItemComponent_ng_template_14_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "addToCart.outOfStock"), " ");
 } }
 function WishListComponent_ng_container_0_ng_container_1_div_12_Template(rf, ctx) { if (rf & 1) {
-    const _r1421 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1424 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "cx-wish-list-item", 10);
-    ɵngcc0.ɵɵlistener("remove", function WishListComponent_ng_container_0_ng_container_1_div_12_Template_cx_wish_list_item_remove_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1421); const ctx_r1420 = ɵngcc0.ɵɵnextContext(3); return ctx_r1420.removeEntry($event); });
+    ɵngcc0.ɵɵlistener("remove", function WishListComponent_ng_container_0_ng_container_1_div_12_Template_cx_wish_list_item_remove_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1424); const ctx_r1423 = ɵngcc0.ɵɵnextContext(3); return ctx_r1423.removeEntry($event); });
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const entry_r1419 = ctx.$implicit;
-    const ctx_r1418 = ɵngcc0.ɵɵnextContext(3);
+    const entry_r1422 = ctx.$implicit;
+    const ctx_r1421 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cartEntry", entry_r1419)("isLoading", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1418.loading$));
+    ɵngcc0.ɵɵproperty("cartEntry", entry_r1422)("isLoading", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1421.loading$));
 } }
 function WishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -9228,7 +9247,7 @@ function WishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵtemplate(12, WishListComponent_ng_container_0_ng_container_1_div_12_Template, 3, 4, "div", 8);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const wishList_r1416 = ɵngcc0.ɵɵnextContext().ngIf;
+    const wishList_r1419 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 4, "cartItems.description"), " ");
     ɵngcc0.ɵɵadvance(3);
@@ -9236,18 +9255,18 @@ function WishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(11, 8, "cartItems.total"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", wishList_r1416 == null ? null : wishList_r1416.entries);
+    ɵngcc0.ɵɵproperty("ngForOf", wishList_r1419 == null ? null : wishList_r1419.entries);
 } }
 function WishListComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, WishListComponent_ng_container_0_ng_container_1_Template, 13, 10, "ng-container", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const wishList_r1416 = ctx.ngIf;
+    const wishList_r1419 = ctx.ngIf;
     ɵngcc0.ɵɵnextContext();
-    const _r1414 = ɵngcc0.ɵɵreference(3);
+    const _r1417 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", (wishList_r1416 == null ? null : wishList_r1416.entries == null ? null : wishList_r1416.entries.length) > 0)("ngIfElse", _r1414);
+    ɵngcc0.ɵɵproperty("ngIf", (wishList_r1419 == null ? null : wishList_r1419.entries == null ? null : wishList_r1419.entries.length) > 0)("ngIfElse", _r1417);
 } }
 function WishListComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "h2");
@@ -24877,10 +24896,9 @@ __decorate([
 ], ScheduleComponent.prototype, "location", void 0);
 
 let StoreFinderGridComponent = class StoreFinderGridComponent {
-    constructor(storeFinderService, route, routingService) {
+    constructor(storeFinderService, route) {
         this.storeFinderService = storeFinderService;
         this.route = route;
-        this.routingService = routingService;
     }
     ngOnInit() {
         this.isLoading$ = this.storeFinderService.getViewAllStoresLoading();
@@ -24892,22 +24910,10 @@ let StoreFinderGridComponent = class StoreFinderGridComponent {
             }, undefined, this.route.snapshot.params.country);
         }
     }
-    viewStore(location) {
-        this.routingService.go([this.prepareRouteUrl(location)]);
-    }
-    prepareRouteUrl(location) {
-        const countryParam = this.route.snapshot.params.country
-            ? `country/${this.route.snapshot.params.country}/`
-            : '';
-        const regionParam = this.route.snapshot.params.region
-            ? `region/${this.route.snapshot.params.region}/`
-            : '';
-        return `store-finder/${countryParam}${regionParam}${location.name}`;
-    }
     ngOnDestroy() { }
 };
-StoreFinderGridComponent.ɵfac = function StoreFinderGridComponent_Factory(t) { return new (t || StoreFinderGridComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.StoreFinderService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService)); };
-StoreFinderGridComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinderGridComponent, selectors: [["cx-store-finder-grid"]], decls: 5, vars: 6, consts: [[4, "ngIf", "ngIfElse"], ["loading", ""], [1, "container"], [1, "row"], ["class", "col-sm-4 col-md-4 col-lg-3 item", 3, "click", 4, "ngFor", "ngForOf"], [1, "col-sm-4", "col-md-4", "col-lg-3", "item", 3, "click"], [3, "location"], [1, "cx-spinner"]], template: function StoreFinderGridComponent_Template(rf, ctx) { if (rf & 1) {
+StoreFinderGridComponent.ɵfac = function StoreFinderGridComponent_Factory(t) { return new (t || StoreFinderGridComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.StoreFinderService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.ActivatedRoute)); };
+StoreFinderGridComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinderGridComponent, selectors: [["cx-store-finder-grid"]], decls: 5, vars: 6, consts: [[4, "ngIf", "ngIfElse"], ["loading", ""], [1, "container"], [1, "row"], ["class", "col-sm-4 col-md-4 col-lg-3 item", 4, "ngFor", "ngForOf"], [1, "col-sm-4", "col-md-4", "col-lg-3", "item"], [3, "location"], [1, "cx-spinner"]], template: function StoreFinderGridComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, StoreFinderGridComponent_ng_container_0_Template, 4, 1, "ng-container", 0);
         ɵngcc0.ɵɵpipe(1, "async");
         ɵngcc0.ɵɵpipe(2, "async");
@@ -24919,8 +24925,7 @@ StoreFinderGridComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinder
         SpinnerComponent]; }, pipes: function () { return [ɵngcc4.AsyncPipe]; }, encapsulation: 2 });
 StoreFinderGridComponent.ctorParameters = () => [
     { type: StoreFinderService },
-    { type: ActivatedRoute },
-    { type: RoutingService }
+    { type: ActivatedRoute }
 ];
 
 let StoreFinderHeaderComponent = class StoreFinderHeaderComponent {
@@ -24957,9 +24962,11 @@ __decorate([
 ], AbstractStoreItemComponent.prototype, "location", void 0);
 
 let StoreFinderListItemComponent = class StoreFinderListItemComponent extends AbstractStoreItemComponent {
-    constructor(storeDataService) {
+    constructor(storeDataService, route, routingService) {
         super(storeDataService);
         this.storeDataService = storeDataService;
+        this.route = route;
+        this.routingService = routingService;
         this.locationIndex = null;
         this.storeItemClick = new EventEmitter();
     }
@@ -24968,23 +24975,40 @@ let StoreFinderListItemComponent = class StoreFinderListItemComponent extends Ab
             this.storeItemClick.emit(this.locationIndex);
         }
     }
+    viewStore(location) {
+        this.routingService.go([this.prepareRouteUrl(location)]);
+    }
+    prepareRouteUrl(location) {
+        const countryParam = this.route.snapshot.params.country
+            ? `country/${this.route.snapshot.params.country}/`
+            : '';
+        const regionParam = this.route.snapshot.params.region
+            ? `region/${this.route.snapshot.params.region}/`
+            : '';
+        return `store-finder/${countryParam}${regionParam}${location.name}`;
+    }
+    onKey(event) {
+        if (event.key === 'Enter') {
+            this.handleStoreItemClick();
+        }
+    }
 };
-StoreFinderListItemComponent.ɵfac = function StoreFinderListItemComponent_Factory(t) { return new (t || StoreFinderListItemComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.StoreDataService)); };
-StoreFinderListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinderListItemComponent, selectors: [["cx-store-finder-list-item"]], inputs: { locationIndex: "locationIndex", listOrderLabel: "listOrderLabel", displayDistance: "displayDistance" }, outputs: { storeItemClick: "storeItemClick" }, features: [ɵngcc0.ɵɵInheritDefinitionFeature], decls: 10, vars: 7, consts: [[3, "click"], [1, "cx-store-list-order"], [1, "cx-store-name"], ["class", "cx-store-address", 4, "ngIf"], ["target", "_blank", 1, "btn", "btn-sm", "btn-action", "btn-block", "cx-button", 3, "href", "click"], [1, "cx-store-address"], [1, "cx-store-address-street"], ["class", "cx-store-distance", 4, "ngIf"], [1, "cx-store-distance"]], template: function StoreFinderListItemComponent_Template(rf, ctx) { if (rf & 1) {
+StoreFinderListItemComponent.ɵfac = function StoreFinderListItemComponent_Factory(t) { return new (t || StoreFinderListItemComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.StoreDataService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService)); };
+StoreFinderListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinderListItemComponent, selectors: [["cx-store-finder-list-item"]], inputs: { locationIndex: "locationIndex", listOrderLabel: "listOrderLabel", displayDistance: "displayDistance", useClickEvent: "useClickEvent" }, outputs: { storeItemClick: "storeItemClick" }, features: [ɵngcc0.ɵɵInheritDefinitionFeature], decls: 11, vars: 8, consts: [[1, "cx-store-list-order"], [1, "cx-store-name"], [3, "click", "keyup", 4, "ngIf"], [3, "href", 4, "ngIf"], ["class", "cx-store-address", 4, "ngIf"], ["target", "_blank", 1, "btn", "btn-sm", "btn-action", "btn-block", "cx-button", 3, "href", "click"], [3, "click", "keyup"], [3, "href"], [1, "cx-store-address"], [1, "cx-store-address-street"], ["class", "cx-store-distance", 4, "ngIf"], [1, "cx-store-distance"]], template: function StoreFinderListItemComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementContainerStart(0);
-        ɵngcc0.ɵɵelementStart(1, "div", 0);
-        ɵngcc0.ɵɵlistener("click", function StoreFinderListItemComponent_Template_div_click_1_listener() { return ctx.handleStoreItemClick(); });
-        ɵngcc0.ɵɵelementStart(2, "div", 1);
+        ɵngcc0.ɵɵelementStart(1, "div");
+        ɵngcc0.ɵɵelementStart(2, "div", 0);
         ɵngcc0.ɵɵtext(3);
         ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementStart(4, "div", 2);
-        ɵngcc0.ɵɵtext(5);
+        ɵngcc0.ɵɵelementStart(4, "div", 1);
+        ɵngcc0.ɵɵtemplate(5, StoreFinderListItemComponent_button_5_Template, 2, 1, "button", 2);
+        ɵngcc0.ɵɵtemplate(6, StoreFinderListItemComponent_a_6_Template, 2, 2, "a", 3);
         ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵtemplate(6, StoreFinderListItemComponent_div_6_Template, 5, 8, "div", 3);
-        ɵngcc0.ɵɵelementStart(7, "a", 4);
-        ɵngcc0.ɵɵlistener("click", function StoreFinderListItemComponent_Template_a_click_7_listener($event) { return $event.stopPropagation(); });
-        ɵngcc0.ɵɵtext(8);
-        ɵngcc0.ɵɵpipe(9, "cxTranslate");
+        ɵngcc0.ɵɵtemplate(7, StoreFinderListItemComponent_div_7_Template, 5, 8, "div", 4);
+        ɵngcc0.ɵɵelementStart(8, "a", 5);
+        ɵngcc0.ɵɵlistener("click", function StoreFinderListItemComponent_Template_a_click_8_listener($event) { return $event.stopPropagation(); });
+        ɵngcc0.ɵɵtext(9);
+        ɵngcc0.ɵɵpipe(10, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementContainerEnd();
@@ -24992,16 +25016,20 @@ StoreFinderListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFi
         ɵngcc0.ɵɵadvance(3);
         ɵngcc0.ɵɵtextInterpolate1(" ", ctx.listOrderLabel, " ");
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵtextInterpolate1(" ", ctx.location.displayName || ctx.location.name, " ");
+        ɵngcc0.ɵɵproperty("ngIf", ctx.useClickEvent);
+        ɵngcc0.ɵɵadvance(1);
+        ɵngcc0.ɵɵproperty("ngIf", !ctx.useClickEvent);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngIf", ctx.location.address);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵpropertyInterpolate("href", ctx.getDirections(ctx.location), ɵngcc0.ɵɵsanitizeUrl);
         ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(9, 5, "storeFinder.getDirections"));
+        ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(10, 6, "storeFinder.getDirections"));
     } }, directives: [ɵngcc4.NgIf], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2 });
 StoreFinderListItemComponent.ctorParameters = () => [
-    { type: StoreDataService }
+    { type: StoreDataService },
+    { type: ActivatedRoute },
+    { type: RoutingService }
 ];
 __decorate([
     Input()
@@ -25012,6 +25040,9 @@ __decorate([
 __decorate([
     Input()
 ], StoreFinderListItemComponent.prototype, "displayDistance", void 0);
+__decorate([
+    Input()
+], StoreFinderListItemComponent.prototype, "useClickEvent", void 0);
 __decorate([
     Output()
 ], StoreFinderListItemComponent.prototype, "storeItemClick", void 0);
@@ -25133,7 +25164,7 @@ StoreFinderListComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinder
     } if (rf & 2) {
         var _t;
         ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.storeMap = _t.first);
-    } }, inputs: { locations: "locations", useMylocation: "useMylocation" }, decls: 1, vars: 1, consts: [[4, "ngIf"], [1, "container", "mb-2"], ["class", "row", 4, "ngIf"], ["class", "row cx-columns", 4, "ngIf"], ["class", "cx-columns-mobile", 4, "ngIf"], [1, "row"], [1, "col-md-12"], [3, "pagination"], [1, "col-md-2", "text-left", "cx-back-wrapper"], ["class", "btn btn-block btn-action", 3, "click", 4, "ngIf"], [1, "btn", "btn-block", "btn-action", 3, "click"], [3, "type"], [1, "row", "cx-columns"], [1, "col-md-4", "cx-address-col"], ["class", "cx-store-details", 4, "ngIf"], ["class", "cx-list", 4, "ngIf"], [1, "col-md-8", "cx-map-col"], [3, "locations", "selectedStoreItem"], ["storeMap", ""], [1, "cx-store-details"], [3, "location", "disableMap"], [1, "cx-list"], ["class", "cx-list-items", 3, "id", "ngClass", 4, "ngFor", "ngForOf"], [1, "cx-list-items", 3, "id", "ngClass"], [3, "location", "locationIndex", "displayDistance", "listOrderLabel", "storeItemClick"], [1, "cx-columns-mobile"], ["justify", "center"], ["ngbTabTitle", ""], ["ngbTabContent", ""], [1, "cx-address-col"], [1, "cx-map-col"], [1, "col-md-12", "cx-not-found"]], template: function StoreFinderListComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, inputs: { locations: "locations", useMylocation: "useMylocation" }, decls: 1, vars: 1, consts: [[4, "ngIf"], [1, "container", "mb-2"], ["class", "row", 4, "ngIf"], ["class", "row cx-columns", 4, "ngIf"], ["class", "cx-columns-mobile", 4, "ngIf"], [1, "row"], [1, "col-md-12"], [3, "pagination"], [1, "col-md-2", "text-left", "cx-back-wrapper"], ["class", "btn btn-block btn-action", 3, "click", 4, "ngIf"], [1, "btn", "btn-block", "btn-action", 3, "click"], [3, "type"], [1, "row", "cx-columns"], [1, "col-md-4", "cx-address-col"], ["class", "cx-store-details", 4, "ngIf"], ["class", "cx-list", 4, "ngIf"], [1, "col-md-8", "cx-map-col"], [3, "locations", "selectedStoreItem"], ["storeMap", ""], [1, "cx-store-details"], [3, "location", "disableMap"], [1, "cx-list"], ["class", "cx-list-items", 3, "id", "ngClass", 4, "ngFor", "ngForOf"], [1, "cx-list-items", 3, "id", "ngClass"], [3, "location", "locationIndex", "displayDistance", "useClickEvent", "listOrderLabel", "storeItemClick"], [1, "cx-columns-mobile"], ["justify", "center"], ["ngbTabTitle", ""], ["ngbTabContent", ""], [1, "cx-address-col"], [1, "cx-map-col"], [1, "col-md-12", "cx-not-found"]], template: function StoreFinderListComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, StoreFinderListComponent_ng_container_0_Template, 6, 4, "ng-container", 0);
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ctx.locations);
@@ -25207,8 +25238,8 @@ StoreFinderSearchResultComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Sto
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, StoreFinderSearchResultComponent_ng_template_3_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1342 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1342);
+        const _r1345 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1345);
     } }, directives: [ɵngcc4.NgIf, PaginationComponent,
         StoreFinderListComponent,
         SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
@@ -25238,7 +25269,7 @@ let StoreFinderSearchComponent = class StoreFinderSearchComponent {
     }
 };
 StoreFinderSearchComponent.ɵfac = function StoreFinderSearchComponent_Factory(t) { return new (t || StoreFinderSearchComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService)); };
-StoreFinderSearchComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinderSearchComponent, selectors: [["cx-store-finder-search"]], decls: 18, vars: 21, consts: [[1, "container"], [1, "row"], [1, "col-md-12", "col-lg-7"], [1, "form-group", "search-wrapper"], ["type", "text", "required", "", 1, "form-control", 3, "formControl", "placeholder", "keyup"], ["queryInput", ""], ["aria-label", "search", 1, "search", 3, "type", "routerLink", "queryParams", "ngClass"], [1, "col-md-12", "col-lg-5"], [1, "row", "cx-search-links", "mb-3"], [1, "col-6"], [1, "btn", "btn-primary", "btn-block", 3, "click"], [1, "btn", "btn-primary", "btn-block", 3, "routerLink"]], template: function StoreFinderSearchComponent_Template(rf, ctx) { if (rf & 1) {
+StoreFinderSearchComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinderSearchComponent, selectors: [["cx-store-finder-search"]], decls: 18, vars: 21, consts: [[1, "container"], [1, "row"], [1, "col-md-12", "col-lg-7"], [1, "form-group", "search-wrapper"], ["type", "text", "required", "", 1, "form-control", 3, "formControl", "placeholder", "keyup"], ["queryInput", ""], ["aria-label", "search", 1, "search", 3, "type", "routerLink", "queryParams", "ngClass", "keyup"], [1, "col-md-12", "col-lg-5"], [1, "row", "cx-search-links", "mb-3"], [1, "col-6"], [1, "btn", "btn-primary", "btn-block", 3, "click"], [1, "btn", "btn-primary", "btn-block", 3, "routerLink"]], template: function StoreFinderSearchComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "div", 0);
         ɵngcc0.ɵɵelementStart(1, "div", 1);
         ɵngcc0.ɵɵelementStart(2, "div", 2);
@@ -25247,7 +25278,9 @@ StoreFinderSearchComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFind
         ɵngcc0.ɵɵlistener("keyup", function StoreFinderSearchComponent_Template_input_keyup_4_listener($event) { return ctx.onKey($event); });
         ɵngcc0.ɵɵpipe(6, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelement(7, "cx-icon", 6);
+        ɵngcc0.ɵɵelementStart(7, "cx-icon", 6);
+        ɵngcc0.ɵɵlistener("keyup", function StoreFinderSearchComponent_Template_cx_icon_keyup_7_listener($event) { return ctx.onKey($event); });
+        ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementStart(8, "div", 7);
@@ -25270,12 +25303,12 @@ StoreFinderSearchComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFind
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
-        const _r1352 = ɵngcc0.ɵɵreference(5);
+        const _r1355 = ɵngcc0.ɵɵreference(5);
         ɵngcc0.ɵɵadvance(4);
         ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 9, "storeFinder.searchBox"));
         ɵngcc0.ɵɵproperty("formControl", ctx.searchBox);
         ɵngcc0.ɵɵadvance(3);
-        ɵngcc0.ɵɵproperty("type", ctx.iconTypes.SEARCH)("routerLink", ɵngcc0.ɵɵpureFunction0(15, _c53))("queryParams", ɵngcc0.ɵɵpureFunction1(16, _c39, _r1352.value))("ngClass", ɵngcc0.ɵɵpureFunction1(18, _c54, !(_r1352.value && _r1352.value.length)));
+        ɵngcc0.ɵɵproperty("type", ctx.iconTypes.SEARCH)("routerLink", ɵngcc0.ɵɵpureFunction0(15, _c53))("queryParams", ɵngcc0.ɵɵpureFunction1(16, _c39, _r1355.value))("ngClass", ɵngcc0.ɵɵpureFunction1(18, _c54, !(_r1355.value && _r1355.value.length)));
         ɵngcc0.ɵɵadvance(5);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(13, 11, "storeFinder.useMyLocation"), " ");
         ɵngcc0.ɵɵadvance(3);
@@ -25326,8 +25359,8 @@ StoreFinderStoresCountComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Stor
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, StoreFinderStoresCountComponent_ng_template_3_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1362 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1362);
+        const _r1365 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1365);
     } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc5.RouterLinkWithHref, ɵngcc4.NgClass, SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
 StoreFinderStoresCountComponent.ctorParameters = () => [
     { type: StoreFinderService }
@@ -25375,8 +25408,8 @@ StoreFinderStoreComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinde
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, StoreFinderStoreComponent_ng_template_3_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1373 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.location || !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.location$))("ngIfElse", _r1373);
+        const _r1376 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.location || !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.location$))("ngIfElse", _r1376);
     } }, directives: [ɵngcc4.NgIf, IconComponent,
         StoreFinderStoreDescriptionComponent,
         SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
@@ -25759,8 +25792,8 @@ LoginComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: LoginComponent, selec
         ɵngcc0.ɵɵpipe(1, "async");
         ɵngcc0.ɵɵtemplate(2, LoginComponent_ng_template_2_Template, 4, 7, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1384 = ɵngcc0.ɵɵreference(3);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 2, ctx.user$))("ngIfElse", _r1384);
+        const _r1387 = ɵngcc0.ɵɵreference(3);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 2, ctx.user$))("ngIfElse", _r1387);
     } }, directives: [ɵngcc4.NgIf, PageSlotComponent, ɵngcc5.RouterLinkWithHref], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2 });
 LoginComponent.ctorParameters = () => [
     { type: AuthService },
@@ -26011,8 +26044,8 @@ RegisterComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: RegisterComponent,
         ɵngcc0.ɵɵpipe(1, "async");
         ɵngcc0.ɵɵtemplate(2, RegisterComponent_ng_template_2_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1388 = ɵngcc0.ɵɵreference(3);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.loading$))("ngIfElse", _r1388);
+        const _r1391 = ɵngcc0.ɵɵreference(3);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.loading$))("ngIfElse", _r1391);
     } }, directives: [ɵngcc4.NgIf, ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.SelectControlValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc7.NgSelectOption, ɵngcc7.ɵangular_packages_forms_forms_x, ɵngcc4.NgForOf, ɵngcc7.DefaultValueAccessor, ɵngcc7.CheckboxControlValueAccessor, ɵngcc5.RouterLinkWithHref, SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2 });
 RegisterComponent.ctorParameters = () => [
     { type: AuthService },
@@ -26103,7 +26136,7 @@ WishListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: WishListItemCo
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
-        const _r1406 = ɵngcc0.ɵɵreference(15);
+        const _r1409 = ɵngcc0.ɵɵreference(15);
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(3, 10, ɵngcc0.ɵɵpureFunction1(14, _c14, ctx.cartEntry.product)));
         ɵngcc0.ɵɵadvance(2);
@@ -26117,7 +26150,7 @@ WishListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: WishListItemCo
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngIf", ctx.cartEntry.basePrice);
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.cartEntry.product.stock.stockLevelStatus !== "outOfStock")("ngIfElse", _r1406);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.cartEntry.product.stock.stockLevelStatus !== "outOfStock")("ngIfElse", _r1409);
         ɵngcc0.ɵɵadvance(4);
         ɵngcc0.ɵɵproperty("disabled", ctx.isLoading);
         ɵngcc0.ɵɵadvance(1);
@@ -31229,9 +31262,9 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-store-finder-grid',
-                template: "<ng-container\n  *ngIf=\"\n    !(isLoading$ | async) && (locations$ | async) as locations;\n    else loading\n  \"\n>\n  <div class=\"container\">\n    <div class=\"row\">\n      <div\n        class=\"col-sm-4 col-md-4 col-lg-3 item\"\n        *ngFor=\"let location of locations?.stores\"\n        (click)=\"viewStore(location)\"\n      >\n        <cx-store-finder-list-item\n          [location]=\"location\"\n        ></cx-store-finder-list-item>\n      </div>\n    </div>\n  </div>\n</ng-container>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
+                template: "<ng-container\n  *ngIf=\"\n    !(isLoading$ | async) && (locations$ | async) as locations;\n    else loading\n  \"\n>\n  <div class=\"container\">\n    <div class=\"row\">\n      <div\n        class=\"col-sm-4 col-md-4 col-lg-3 item\"\n        *ngFor=\"let location of locations?.stores\"\n      >\n        <cx-store-finder-list-item\n          [location]=\"location\"\n        ></cx-store-finder-list-item>\n      </div>\n    </div>\n  </div>\n</ng-container>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
             }]
-    }], function () { return [{ type: ɵngcc1.StoreFinderService }, { type: ɵngcc5.ActivatedRoute }, { type: ɵngcc1.RoutingService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.StoreFinderService }, { type: ɵngcc5.ActivatedRoute }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(StoreFinderHeaderComponent, [{
         type: Component,
         args: [{
@@ -31248,15 +31281,17 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-store-finder-list-item',
-                template: "<ng-container>\n  <div (click)=\"handleStoreItemClick()\">\n    <div class=\"cx-store-list-order\">\n      {{ listOrderLabel }}\n    </div>\n    <div class=\"cx-store-name\">\n      {{ location.displayName || location.name }}\n    </div>\n    <div class=\"cx-store-address\" *ngIf=\"location.address\">\n      <div class=\"cx-store-address-street\">\n        {{ location.address.line1 }} {{ location.address.line2 }}\n      </div>\n      {{\n        getFormattedStoreAddress([\n          location.address.town,\n          location.address.postalCode,\n          location.address.country.isocode\n        ])\n      }}\n      <div\n        class=\"cx-store-distance\"\n        *ngIf=\"location.formattedDistance && displayDistance\"\n      >\n        {{ location.formattedDistance }}\n      </div>\n    </div>\n    <a\n      href=\"{{ getDirections(location) }}\"\n      target=\"_blank\"\n      class=\"btn btn-sm btn-action btn-block cx-button\"\n      (click)=\"$event.stopPropagation()\"\n      >{{ 'storeFinder.getDirections' | cxTranslate }}</a\n    >\n  </div>\n</ng-container>\n"
+                template: "<ng-container>\n  <div>\n    <div class=\"cx-store-list-order\">\n      {{ listOrderLabel }}\n    </div>\n    <div class=\"cx-store-name\">\n      <button\n        *ngIf=\"useClickEvent\"\n        (click)=\"handleStoreItemClick()\"\n        (keyup)=\"onKey($event)\"\n      >\n        {{ location.displayName || location.name }}\n      </button>\n      <a *ngIf=\"!useClickEvent\" [href]=\"prepareRouteUrl(location)\">{{\n        location.displayName || location.name\n      }}</a>\n    </div>\n    <div class=\"cx-store-address\" *ngIf=\"location.address\">\n      <div class=\"cx-store-address-street\">\n        {{ location.address.line1 }} {{ location.address.line2 }}\n      </div>\n      {{\n        getFormattedStoreAddress([\n          location.address.town,\n          location.address.postalCode,\n          location.address.country.isocode\n        ])\n      }}\n      <div\n        class=\"cx-store-distance\"\n        *ngIf=\"location.formattedDistance && displayDistance\"\n      >\n        {{ location.formattedDistance }}\n      </div>\n    </div>\n    <a\n      href=\"{{ getDirections(location) }}\"\n      target=\"_blank\"\n      class=\"btn btn-sm btn-action btn-block cx-button\"\n      (click)=\"$event.stopPropagation()\"\n      >{{ 'storeFinder.getDirections' | cxTranslate }}</a\n    >\n  </div>\n</ng-container>\n"
             }]
-    }], function () { return [{ type: ɵngcc1.StoreDataService }]; }, { locationIndex: [{
+    }], function () { return [{ type: ɵngcc1.StoreDataService }, { type: ɵngcc5.ActivatedRoute }, { type: ɵngcc1.RoutingService }]; }, { locationIndex: [{
             type: Input
         }], storeItemClick: [{
             type: Output
         }], listOrderLabel: [{
             type: Input
         }], displayDistance: [{
+            type: Input
+        }], useClickEvent: [{
             type: Input
         }] }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(StoreFinderMapComponent, [{
@@ -31286,7 +31321,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-store-finder-list',
-                template: "<ng-container *ngIf=\"locations\">\n  <div class=\"container mb-2\">\n    <div class=\"row\" *ngIf=\"locations?.pagination\">\n      <div class=\"col-md-12\">\n        <cx-store-finder-pagination-details\n          [pagination]=\"locations.pagination\"\n        ></cx-store-finder-pagination-details>\n      </div>\n      <div class=\"col-md-2 text-left cx-back-wrapper\">\n        <button\n          class=\"btn btn-block btn-action\"\n          *ngIf=\"isDetailsModeVisible\"\n          (click)=\"hideStoreDetails()\"\n        >\n          <cx-icon [type]=\"iconTypes.CARET_LEFT\"></cx-icon>\n          {{ 'storeFinder.backToList' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <div *ngIf=\"locations?.stores\" class=\"row cx-columns\">\n      <div class=\"col-md-4 cx-address-col\">\n        <div class=\"cx-store-details\" *ngIf=\"isDetailsModeVisible\">\n          <cx-store-finder-store-description\n            [location]=\"storeDetails\"\n            [disableMap]=\"true\"\n          ></cx-store-finder-store-description>\n        </div>\n        <ol class=\"cx-list\" *ngIf=\"!isDetailsModeVisible\">\n          <li\n            *ngFor=\"let location of locations?.stores; let i = index\"\n            id=\"{{ 'item-' + i }}\"\n            [ngClass]=\"{\n              'cx-selected-item': selectedStoreIndex === i\n            }\"\n            class=\"cx-list-items\"\n          >\n            <cx-store-finder-list-item\n              [location]=\"location\"\n              [locationIndex]=\"i\"\n              [displayDistance]=\"useMylocation\"\n              (storeItemClick)=\"centerStoreOnMapByIndex($event, location)\"\n              [listOrderLabel]=\"\n                i +\n                locations.pagination.currentPage *\n                  locations.pagination.pageSize +\n                1\n              \"\n            ></cx-store-finder-list-item>\n          </li>\n        </ol>\n      </div>\n      <div class=\"col-md-8 cx-map-col\">\n        <cx-store-finder-map\n          #storeMap\n          [locations]=\"locations.stores\"\n          (selectedStoreItem)=\"selectStoreItemList($event)\"\n        ></cx-store-finder-map>\n      </div>\n    </div>\n\n    <!-- mobile tabs for column set only -->\n\n    <div *ngIf=\"locations?.stores\" class=\"cx-columns-mobile\">\n      <ngb-tabset justify=\"center\">\n        <ngb-tab>\n          <ng-template ngbTabTitle>\n            {{ 'storeFinder.listView' | cxTranslate }}\n          </ng-template>\n          <ng-template ngbTabContent>\n            <div class=\"cx-address-col\">\n              <div class=\"cx-store-details\" *ngIf=\"isDetailsModeVisible\">\n                <cx-store-finder-store-description\n                  [location]=\"storeDetails\"\n                  [disableMap]=\"true\"\n                ></cx-store-finder-store-description>\n              </div>\n              <ol class=\"cx-list\" *ngIf=\"!isDetailsModeVisible\">\n                <li\n                  *ngFor=\"let location of locations?.stores; let i = index\"\n                  id=\"{{ 'item-' + i }}\"\n                  [ngClass]=\"{\n                    'cx-selected-item': selectedStoreIndex === i\n                  }\"\n                  class=\"cx-list-items\"\n                >\n                  <cx-store-finder-list-item\n                    [location]=\"location\"\n                    [locationIndex]=\"i\"\n                    [displayDistance]=\"useMylocation\"\n                    (storeItemClick)=\"centerStoreOnMapByIndex($event, location)\"\n                    [listOrderLabel]=\"\n                      i +\n                      locations.pagination.currentPage *\n                        locations.pagination.pageSize +\n                      1\n                    \"\n                  ></cx-store-finder-list-item>\n                </li>\n              </ol>\n            </div>\n          </ng-template>\n        </ngb-tab>\n        <ngb-tab>\n          <ng-template ngbTabTitle>\n            {{ 'storeFinder.mapView' | cxTranslate }}\n          </ng-template>\n          <ng-template ngbTabContent>\n            <div class=\"cx-map-col\">\n              <cx-store-finder-map\n                #storeMap\n                [locations]=\"selectedStore ? [selectedStore] : locations.stores\"\n                (selectedStoreItem)=\"selectStoreItemList($event)\"\n              ></cx-store-finder-map>\n            </div>\n          </ng-template>\n        </ngb-tab>\n      </ngb-tabset>\n    </div>\n\n    <!-- mobile tabs end -->\n\n    <div *ngIf=\"!locations?.stores\" class=\"row\">\n      <div class=\"col-md-12 cx-not-found\">\n        {{ 'storeFinder.noStoreFound' | cxTranslate }}\n      </div>\n    </div>\n  </div>\n</ng-container>\n"
+                template: "<ng-container *ngIf=\"locations\">\n  <div class=\"container mb-2\">\n    <div class=\"row\" *ngIf=\"locations?.pagination\">\n      <div class=\"col-md-12\">\n        <cx-store-finder-pagination-details\n          [pagination]=\"locations.pagination\"\n        ></cx-store-finder-pagination-details>\n      </div>\n      <div class=\"col-md-2 text-left cx-back-wrapper\">\n        <button\n          class=\"btn btn-block btn-action\"\n          *ngIf=\"isDetailsModeVisible\"\n          (click)=\"hideStoreDetails()\"\n        >\n          <cx-icon [type]=\"iconTypes.CARET_LEFT\"></cx-icon>\n          {{ 'storeFinder.backToList' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <div *ngIf=\"locations?.stores\" class=\"row cx-columns\">\n      <div class=\"col-md-4 cx-address-col\">\n        <div class=\"cx-store-details\" *ngIf=\"isDetailsModeVisible\">\n          <cx-store-finder-store-description\n            [location]=\"storeDetails\"\n            [disableMap]=\"true\"\n          ></cx-store-finder-store-description>\n        </div>\n        <ol class=\"cx-list\" *ngIf=\"!isDetailsModeVisible\">\n          <li\n            *ngFor=\"let location of locations?.stores; let i = index\"\n            id=\"{{ 'item-' + i }}\"\n            [ngClass]=\"{\n              'cx-selected-item': selectedStoreIndex === i\n            }\"\n            class=\"cx-list-items\"\n          >\n            <cx-store-finder-list-item\n              [location]=\"location\"\n              [locationIndex]=\"i\"\n              [displayDistance]=\"useMylocation\"\n              [useClickEvent]=\"true\"\n              (storeItemClick)=\"centerStoreOnMapByIndex($event, location)\"\n              [listOrderLabel]=\"\n                i +\n                locations.pagination.currentPage *\n                  locations.pagination.pageSize +\n                1\n              \"\n            ></cx-store-finder-list-item>\n          </li>\n        </ol>\n      </div>\n      <div class=\"col-md-8 cx-map-col\">\n        <cx-store-finder-map\n          #storeMap\n          [locations]=\"locations.stores\"\n          (selectedStoreItem)=\"selectStoreItemList($event)\"\n        ></cx-store-finder-map>\n      </div>\n    </div>\n\n    <!-- mobile tabs for column set only -->\n\n    <div *ngIf=\"locations?.stores\" class=\"cx-columns-mobile\">\n      <ngb-tabset justify=\"center\">\n        <ngb-tab>\n          <ng-template ngbTabTitle>\n            {{ 'storeFinder.listView' | cxTranslate }}\n          </ng-template>\n          <ng-template ngbTabContent>\n            <div class=\"cx-address-col\">\n              <div class=\"cx-store-details\" *ngIf=\"isDetailsModeVisible\">\n                <cx-store-finder-store-description\n                  [location]=\"storeDetails\"\n                  [disableMap]=\"true\"\n                ></cx-store-finder-store-description>\n              </div>\n              <ol class=\"cx-list\" *ngIf=\"!isDetailsModeVisible\">\n                <li\n                  *ngFor=\"let location of locations?.stores; let i = index\"\n                  id=\"{{ 'item-' + i }}\"\n                  [ngClass]=\"{\n                    'cx-selected-item': selectedStoreIndex === i\n                  }\"\n                  class=\"cx-list-items\"\n                >\n                  <cx-store-finder-list-item\n                    [location]=\"location\"\n                    [locationIndex]=\"i\"\n                    [displayDistance]=\"useMylocation\"\n                    [useClickEvent]=\"true\"\n                    (storeItemClick)=\"centerStoreOnMapByIndex($event, location)\"\n                    [listOrderLabel]=\"\n                      i +\n                      locations.pagination.currentPage *\n                        locations.pagination.pageSize +\n                      1\n                    \"\n                  ></cx-store-finder-list-item>\n                </li>\n              </ol>\n            </div>\n          </ng-template>\n        </ngb-tab>\n        <ngb-tab>\n          <ng-template ngbTabTitle>\n            {{ 'storeFinder.mapView' | cxTranslate }}\n          </ng-template>\n          <ng-template ngbTabContent>\n            <div class=\"cx-map-col\">\n              <cx-store-finder-map\n                #storeMap\n                [locations]=\"selectedStore ? [selectedStore] : locations.stores\"\n                (selectedStoreItem)=\"selectStoreItemList($event)\"\n              ></cx-store-finder-map>\n            </div>\n          </ng-template>\n        </ngb-tab>\n      </ngb-tabset>\n    </div>\n\n    <!-- mobile tabs end -->\n\n    <div *ngIf=\"!locations?.stores\" class=\"row\">\n      <div class=\"col-md-12 cx-not-found\">\n        {{ 'storeFinder.noStoreFound' | cxTranslate }}\n      </div>\n    </div>\n  </div>\n</ng-container>\n"
             }]
     }], function () { return [{ type: ɵngcc1.StoreDataService }, { type: undefined, decorators: [{
                 type: Inject,
@@ -31310,7 +31345,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-store-finder-search',
-                template: "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-7\">\n      <div class=\"form-group search-wrapper\">\n        <input\n          #queryInput\n          [formControl]=\"searchBox\"\n          (keyup)=\"onKey($event)\"\n          type=\"text\"\n          class=\"form-control\"\n          placeholder=\"{{ 'storeFinder.searchBox' | cxTranslate }}\"\n          required\n        />\n        <cx-icon\n          [type]=\"iconTypes.SEARCH\"\n          aria-label=\"search\"\n          class=\"search\"\n          [routerLink]=\"['/store-finder/find']\"\n          [queryParams]=\"{ query: queryInput.value }\"\n          [ngClass]=\"{\n            'disabled-action': !(queryInput.value && queryInput.value.length)\n          }\"\n        ></cx-icon>\n      </div>\n    </div>\n    <div class=\"col-md-12 col-lg-5\">\n      <div class=\"row cx-search-links mb-3\">\n        <div class=\"col-6\">\n          <button\n            (click)=\"viewStoresWithMyLoc()\"\n            class=\"btn btn-primary btn-block\"\n          >\n            {{ 'storeFinder.useMyLocation' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-6\">\n          <button\n            [routerLink]=\"['/store-finder/view-all']\"\n            class=\"btn btn-primary btn-block\"\n          >\n            {{ 'storeFinder.viewAllStores' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+                template: "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-7\">\n      <div class=\"form-group search-wrapper\">\n        <input\n          #queryInput\n          [formControl]=\"searchBox\"\n          (keyup)=\"onKey($event)\"\n          type=\"text\"\n          class=\"form-control\"\n          placeholder=\"{{ 'storeFinder.searchBox' | cxTranslate }}\"\n          required\n        />\n        <cx-icon\n          [type]=\"iconTypes.SEARCH\"\n          aria-label=\"search\"\n          class=\"search\"\n          (keyup)=\"onKey($event)\"\n          [routerLink]=\"['/store-finder/find']\"\n          [queryParams]=\"{ query: queryInput.value }\"\n          [ngClass]=\"{\n            'disabled-action': !(queryInput.value && queryInput.value.length)\n          }\"\n        ></cx-icon>\n      </div>\n    </div>\n    <div class=\"col-md-12 col-lg-5\">\n      <div class=\"row cx-search-links mb-3\">\n        <div class=\"col-6\">\n          <button\n            (click)=\"viewStoresWithMyLoc()\"\n            class=\"btn btn-primary btn-block\"\n          >\n            {{ 'storeFinder.useMyLocation' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-6\">\n          <button\n            [routerLink]=\"['/store-finder/view-all']\"\n            class=\"btn btn-primary btn-block\"\n          >\n            {{ 'storeFinder.viewAllStores' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
             }]
     }], function () { return [{ type: ɵngcc1.RoutingService }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(StoreFinderStoreDescriptionComponent, [{

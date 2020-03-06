@@ -1,12 +1,19 @@
+import { ActivatedRoute } from '@angular/router';
 import { EventEmitter } from '@angular/core';
-import { StoreDataService } from '@spartacus/core';
+import { StoreDataService, RoutingService } from '@spartacus/core';
 import { AbstractStoreItemComponent } from '../abstract-store-item/abstract-store-item.component';
 export declare class StoreFinderListItemComponent extends AbstractStoreItemComponent {
     protected storeDataService: StoreDataService;
+    protected route: ActivatedRoute;
+    protected routingService: RoutingService;
     locationIndex: number;
     listOrderLabel: any;
     displayDistance: boolean;
+    useClickEvent: boolean;
     storeItemClick: EventEmitter<number>;
-    constructor(storeDataService: StoreDataService);
+    constructor(storeDataService: StoreDataService, route: ActivatedRoute, routingService: RoutingService);
     handleStoreItemClick(): void;
+    viewStore(location: any): void;
+    prepareRouteUrl(location: any): string;
+    onKey(event: KeyboardEvent): void;
 }
