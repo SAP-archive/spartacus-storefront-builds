@@ -1,15 +1,15 @@
 import { OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AuthRedirectService, CartService } from '@spartacus/core';
+import { ActiveCartService, AuthRedirectService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 export declare class CheckoutLoginComponent implements OnDestroy {
-    private formBuilder;
-    private cartService;
-    private authRedirectService;
+    protected formBuilder: FormBuilder;
+    protected authRedirectService: AuthRedirectService;
+    protected activeCartService: ActiveCartService;
     form: FormGroup;
     sub: Subscription;
     private submitClicked;
-    constructor(formBuilder: FormBuilder, cartService: CartService, authRedirectService: AuthRedirectService);
+    constructor(formBuilder: FormBuilder, authRedirectService: AuthRedirectService, activeCartService: ActiveCartService);
     isNotValid(formControlName: string): boolean;
     isEmailConfirmInvalid(): boolean;
     onSubmit(): void;

@@ -1,23 +1,23 @@
-import { OnInit, OnDestroy } from '@angular/core';
+import { OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Address, CartService, CheckoutDeliveryService, RoutingService, TranslationService, UserAddressService } from '@spartacus/core';
+import { ActiveCartService, Address, CheckoutDeliveryService, RoutingService, TranslationService, UserAddressService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
+import { CheckoutStepType } from '../..';
 import { Card } from '../../../../shared/components/card/card.component';
 import { CheckoutConfigService } from '../../services/checkout-config.service';
-import { CheckoutStepType } from '../..';
 export interface CardWithAddress {
     card: Card;
     address: Address;
 }
 export declare class ShippingAddressComponent implements OnInit, OnDestroy {
     protected userAddressService: UserAddressService;
-    protected cartService: CartService;
     protected routingService: RoutingService;
     protected checkoutDeliveryService: CheckoutDeliveryService;
-    private checkoutConfigService;
-    private activatedRoute;
-    private translation;
-    constructor(userAddressService: UserAddressService, cartService: CartService, routingService: RoutingService, checkoutDeliveryService: CheckoutDeliveryService, checkoutConfigService: CheckoutConfigService, activatedRoute: ActivatedRoute, translation: TranslationService);
+    protected checkoutConfigService: CheckoutConfigService;
+    protected activatedRoute: ActivatedRoute;
+    protected translation: TranslationService;
+    protected activeCartService: ActiveCartService;
+    constructor(userAddressService: UserAddressService, routingService: RoutingService, checkoutDeliveryService: CheckoutDeliveryService, checkoutConfigService: CheckoutConfigService, activatedRoute: ActivatedRoute, translation: TranslationService, activeCartService: ActiveCartService);
     existingAddresses$: Observable<Address[]>;
     newAddressFormManuallyOpened: boolean;
     isLoading$: Observable<boolean>;

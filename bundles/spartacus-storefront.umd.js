@@ -4154,10 +4154,10 @@
     }());
 
     var PromotionService = /** @class */ (function () {
-        function PromotionService(cartService, orderDetailsService, checkoutService) {
-            this.cartService = cartService;
+        function PromotionService(orderDetailsService, checkoutService, activeCartService) {
             this.orderDetailsService = orderDetailsService;
             this.checkoutService = checkoutService;
+            this.activeCartService = activeCartService;
         }
         PromotionService.prototype.getOrderPromotions = function (promotionLocation) {
             switch (promotionLocation) {
@@ -4173,7 +4173,7 @@
         };
         PromotionService.prototype.getOrderPromotionsFromCart = function () {
             var _this = this;
-            return this.cartService
+            return this.activeCartService
                 .getActive()
                 .pipe(operators.map(function (cart) { return _this.getOrderPromotionsFromCartHelper(cart); }));
         };
@@ -4205,7 +4205,7 @@
             var _this = this;
             switch (promotionLocation) {
                 case core$1.PromotionLocation.ActiveCart:
-                    return this.cartService
+                    return this.activeCartService
                         .getActive()
                         .pipe(operators.map(function (cart) {
                         return _this.getProductPromotion(item, cart.appliedProductPromotions || []);
@@ -4288,11 +4288,11 @@
             }
         };
         PromotionService.ctorParameters = function () { return [
-            { type: core$1.CartService },
             { type: OrderDetailsService },
-            { type: core$1.CheckoutService }
+            { type: core$1.CheckoutService },
+            { type: core$1.ActiveCartService }
         ]; };
-        PromotionService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function PromotionService_Factory() { return new PromotionService(core["ɵɵinject"](core$1.CartService), core["ɵɵinject"](OrderDetailsService), core["ɵɵinject"](core$1.CheckoutService)); }, token: PromotionService, providedIn: "root" });
+        PromotionService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function PromotionService_Factory() { return new PromotionService(core["ɵɵinject"](OrderDetailsService), core["ɵɵinject"](core$1.CheckoutService), core["ɵɵinject"](core$1.ActiveCartService)); }, token: PromotionService, providedIn: "root" });
         PromotionService = __decorate([
             core.Injectable({
                 providedIn: 'root',
@@ -7504,15 +7504,15 @@
     }());
 
     var CheckoutDetailsService = /** @class */ (function () {
-        function CheckoutDetailsService(checkoutService, checkoutDeliveryService, checkoutPaymentService, cartService) {
+        function CheckoutDetailsService(checkoutService, checkoutDeliveryService, checkoutPaymentService, activeCartService) {
             var _this = this;
             this.checkoutService = checkoutService;
             this.checkoutDeliveryService = checkoutDeliveryService;
             this.checkoutPaymentService = checkoutPaymentService;
-            this.cartService = cartService;
-            this.cartId$ = this.cartService.getActive().pipe(operators.map(function (cartData) {
+            this.activeCartService = activeCartService;
+            this.cartId$ = this.activeCartService.getActive().pipe(operators.map(function (cartData) {
                 if ((cartData.user && cartData.user.uid === core$1.OCC_USER_ID_ANONYMOUS) ||
-                    _this.cartService.isGuestCart()) {
+                    _this.activeCartService.isGuestCart()) {
                     return cartData.guid;
                 }
                 return cartData.code;
@@ -7537,9 +7537,9 @@
             { type: core$1.CheckoutService },
             { type: core$1.CheckoutDeliveryService },
             { type: core$1.CheckoutPaymentService },
-            { type: core$1.CartService }
+            { type: core$1.ActiveCartService }
         ]; };
-        CheckoutDetailsService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(core["ɵɵinject"](core$1.CheckoutService), core["ɵɵinject"](core$1.CheckoutDeliveryService), core["ɵɵinject"](core$1.CheckoutPaymentService), core["ɵɵinject"](core$1.CartService)); }, token: CheckoutDetailsService, providedIn: "root" });
+        CheckoutDetailsService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(core["ɵɵinject"](core$1.CheckoutService), core["ɵɵinject"](core$1.CheckoutDeliveryService), core["ɵɵinject"](core$1.CheckoutPaymentService), core["ɵɵinject"](core$1.ActiveCartService)); }, token: CheckoutDetailsService, providedIn: "root" });
         CheckoutDetailsService = __decorate([
             core.Injectable({
                 providedIn: 'root',
@@ -9319,14 +9319,14 @@
     }());
 
     var ShippingAddressComponent = /** @class */ (function () {
-        function ShippingAddressComponent(userAddressService, cartService, routingService, checkoutDeliveryService, checkoutConfigService, activatedRoute, translation) {
+        function ShippingAddressComponent(userAddressService, routingService, checkoutDeliveryService, checkoutConfigService, activatedRoute, translation, activeCartService) {
             this.userAddressService = userAddressService;
-            this.cartService = cartService;
             this.routingService = routingService;
             this.checkoutDeliveryService = checkoutDeliveryService;
             this.checkoutConfigService = checkoutConfigService;
             this.activatedRoute = activatedRoute;
             this.translation = translation;
+            this.activeCartService = activeCartService;
             this.newAddressFormManuallyOpened = false;
             this.forceLoader = false; // this helps with smoother steps transition
             /**
@@ -9388,7 +9388,7 @@
                     };
                 });
             }));
-            if (!this.cartService.isGuestCart()) {
+            if (!this.activeCartService.isGuestCart()) {
                 this.userAddressService.loadAddresses();
             }
             else {
@@ -9509,12 +9509,12 @@
         };
         ShippingAddressComponent.ctorParameters = function () { return [
             { type: core$1.UserAddressService },
-            { type: core$1.CartService },
             { type: core$1.RoutingService },
             { type: core$1.CheckoutDeliveryService },
             { type: CheckoutConfigService },
             { type: router.ActivatedRoute },
-            { type: core$1.TranslationService }
+            { type: core$1.TranslationService },
+            { type: core$1.ActiveCartService }
         ]; };
         ShippingAddressComponent = __decorate([
             core.Component({
@@ -9586,10 +9586,10 @@
     }());
 
     var NotCheckoutAuthGuard = /** @class */ (function () {
-        function NotCheckoutAuthGuard(routingService, authService, cartService) {
+        function NotCheckoutAuthGuard(routingService, authService, activeCartService) {
             this.routingService = routingService;
             this.authService = authService;
-            this.cartService = cartService;
+            this.activeCartService = activeCartService;
         }
         NotCheckoutAuthGuard.prototype.canActivate = function () {
             var _this = this;
@@ -9597,7 +9597,7 @@
                 if (token.access_token) {
                     _this.routingService.go({ cxRoute: 'home' });
                 }
-                else if (_this.cartService.isGuestCart()) {
+                else if (_this.activeCartService.isGuestCart()) {
                     _this.routingService.go({ cxRoute: 'cart' });
                     return false;
                 }
@@ -9607,9 +9607,9 @@
         NotCheckoutAuthGuard.ctorParameters = function () { return [
             { type: core$1.RoutingService },
             { type: core$1.AuthService },
-            { type: core$1.CartService }
+            { type: core$1.ActiveCartService }
         ]; };
-        NotCheckoutAuthGuard.ɵprov = core["ɵɵdefineInjectable"]({ factory: function NotCheckoutAuthGuard_Factory() { return new NotCheckoutAuthGuard(core["ɵɵinject"](core$1.RoutingService), core["ɵɵinject"](core$1.AuthService), core["ɵɵinject"](core$1.CartService)); }, token: NotCheckoutAuthGuard, providedIn: "root" });
+        NotCheckoutAuthGuard.ɵprov = core["ɵɵdefineInjectable"]({ factory: function NotCheckoutAuthGuard_Factory() { return new NotCheckoutAuthGuard(core["ɵɵinject"](core$1.RoutingService), core["ɵɵinject"](core$1.AuthService), core["ɵɵinject"](core$1.ActiveCartService)); }, token: NotCheckoutAuthGuard, providedIn: "root" });
         NotCheckoutAuthGuard = __decorate([
             core.Injectable({
                 providedIn: 'root',
@@ -16999,10 +16999,10 @@
     }());
 
     var CheckoutLoginComponent = /** @class */ (function () {
-        function CheckoutLoginComponent(formBuilder, cartService, authRedirectService) {
+        function CheckoutLoginComponent(formBuilder, authRedirectService, activeCartService) {
             this.formBuilder = formBuilder;
-            this.cartService = cartService;
             this.authRedirectService = authRedirectService;
+            this.activeCartService = activeCartService;
             this.form = this.formBuilder.group({
                 email: ['', [forms.Validators.required, CustomFormValidators.emailValidator]],
                 emailConfirmation: ['', [forms.Validators.required]],
@@ -17025,10 +17025,10 @@
                 return;
             }
             var email = this.form.value.email;
-            this.cartService.addEmail(email);
+            this.activeCartService.addEmail(email);
             if (!this.sub) {
-                this.sub = this.cartService.getAssignedUser().subscribe(function (_) {
-                    if (_this.cartService.isGuestCart()) {
+                this.sub = this.activeCartService.getAssignedUser().subscribe(function (_) {
+                    if (_this.activeCartService.isGuestCart()) {
                         _this.authRedirectService.redirect();
                     }
                 });
@@ -17047,8 +17047,8 @@
         };
         CheckoutLoginComponent.ctorParameters = function () { return [
             { type: forms.FormBuilder },
-            { type: core$1.CartService },
-            { type: core$1.AuthRedirectService }
+            { type: core$1.AuthRedirectService },
+            { type: core$1.ActiveCartService }
         ]; };
         CheckoutLoginComponent = __decorate([
             core.Component({

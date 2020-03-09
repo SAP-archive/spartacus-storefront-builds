@@ -1,7 +1,7 @@
 import { __decorate, __param, __awaiter } from 'tslib';
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, ComponentFactoryResolver, Inject, PLATFORM_ID, Optional, NgZone, Injector, ViewContainerRef, Directive, INJECTOR, InjectionToken, isDevMode, ChangeDetectionStrategy, TemplateRef, EventEmitter, ComponentFactory, Output, HostBinding, APP_INITIALIZER, SecurityContext, RendererFactory2, ViewEncapsulation, ChangeDetectorRef, Pipe, ViewChild, HostListener, ViewChildren, inject } from '@angular/core';
-import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, AuthService, CartService, CartDataService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, CmsService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, DynamicAttributeService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, GlobalMessageType, provideConfig, RoutingModule as RoutingModule$1, PageRobotsMeta, ProductScope, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, PromotionLocation, OccConfig, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, ActiveCartService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
+import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, AuthService, CartService, CartDataService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, CmsService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, DynamicAttributeService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, GlobalMessageType, provideConfig, RoutingModule as RoutingModule$1, PageRobotsMeta, ProductScope, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, PromotionLocation, ActiveCartService, OccConfig, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
 import { Subscription, combineLatest, concat, of, isObservable, from, fromEvent, BehaviorSubject, Observable, asyncScheduler } from 'rxjs';
 import { take, distinctUntilChanged, tap, first, skipWhile, endWith, debounceTime, startWith, map, switchMap, filter, withLatestFrom, flatMap, observeOn, mergeMap, shareReplay, scan, distinctUntilKeyChanged, pluck } from 'rxjs/operators';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
@@ -12706,10 +12706,10 @@ OrderDetailsService.ctorParameters = () => [
 OrderDetailsService.ɵprov = ɵɵdefineInjectable({ factory: function OrderDetailsService_Factory() { return new OrderDetailsService(ɵɵinject(UserOrderService), ɵɵinject(RoutingService)); }, token: OrderDetailsService, providedIn: "root" });
 
 let PromotionService = class PromotionService {
-    constructor(cartService, orderDetailsService, checkoutService) {
-        this.cartService = cartService;
+    constructor(orderDetailsService, checkoutService, activeCartService) {
         this.orderDetailsService = orderDetailsService;
         this.checkoutService = checkoutService;
+        this.activeCartService = activeCartService;
     }
     getOrderPromotions(promotionLocation) {
         switch (promotionLocation) {
@@ -12724,7 +12724,7 @@ let PromotionService = class PromotionService {
         }
     }
     getOrderPromotionsFromCart() {
-        return this.cartService
+        return this.activeCartService
             .getActive()
             .pipe(map(cart => this.getOrderPromotionsFromCartHelper(cart)));
     }
@@ -12753,7 +12753,7 @@ let PromotionService = class PromotionService {
     getProductPromotionForEntry(item, promotionLocation) {
         switch (promotionLocation) {
             case PromotionLocation.ActiveCart:
-                return this.cartService
+                return this.activeCartService
                     .getActive()
                     .pipe(map(cart => this.getProductPromotion(item, cart.appliedProductPromotions || [])));
             case PromotionLocation.Checkout:
@@ -12798,13 +12798,13 @@ let PromotionService = class PromotionService {
         }
     }
 };
-PromotionService.ɵfac = function PromotionService_Factory(t) { return new (t || PromotionService)(ɵngcc0.ɵɵinject(ɵngcc1.CartService), ɵngcc0.ɵɵinject(OrderDetailsService), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutService)); };
+PromotionService.ɵfac = function PromotionService_Factory(t) { return new (t || PromotionService)(ɵngcc0.ɵɵinject(OrderDetailsService), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutService), ɵngcc0.ɵɵinject(ɵngcc1.ActiveCartService)); };
 PromotionService.ctorParameters = () => [
-    { type: CartService },
     { type: OrderDetailsService },
-    { type: CheckoutService }
+    { type: CheckoutService },
+    { type: ActiveCartService }
 ];
-PromotionService.ɵprov = ɵɵdefineInjectable({ factory: function PromotionService_Factory() { return new PromotionService(ɵɵinject(CartService), ɵɵinject(OrderDetailsService), ɵɵinject(CheckoutService)); }, token: PromotionService, providedIn: "root" });
+PromotionService.ɵprov = ɵɵdefineInjectable({ factory: function PromotionService_Factory() { return new PromotionService(ɵɵinject(OrderDetailsService), ɵɵinject(CheckoutService), ɵɵinject(ActiveCartService)); }, token: PromotionService, providedIn: "root" });
 
 let AddedToCartDialogComponent = class AddedToCartDialogComponent {
     constructor(modalService, cartService, promotionService) {
@@ -15712,14 +15712,14 @@ CheckoutAuthGuard.ctorParameters = () => [
 CheckoutAuthGuard.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutAuthGuard_Factory() { return new CheckoutAuthGuard(ɵɵinject(RoutingService), ɵɵinject(AuthService), ɵɵinject(AuthRedirectService), ɵɵinject(CartService), ɵɵinject(CheckoutConfigService)); }, token: CheckoutAuthGuard, providedIn: "root" });
 
 let CheckoutDetailsService = class CheckoutDetailsService {
-    constructor(checkoutService, checkoutDeliveryService, checkoutPaymentService, cartService) {
+    constructor(checkoutService, checkoutDeliveryService, checkoutPaymentService, activeCartService) {
         this.checkoutService = checkoutService;
         this.checkoutDeliveryService = checkoutDeliveryService;
         this.checkoutPaymentService = checkoutPaymentService;
-        this.cartService = cartService;
-        this.cartId$ = this.cartService.getActive().pipe(map(cartData => {
+        this.activeCartService = activeCartService;
+        this.cartId$ = this.activeCartService.getActive().pipe(map(cartData => {
             if ((cartData.user && cartData.user.uid === OCC_USER_ID_ANONYMOUS) ||
-                this.cartService.isGuestCart()) {
+                this.activeCartService.isGuestCart()) {
                 return cartData.guid;
             }
             return cartData.code;
@@ -15736,14 +15736,14 @@ let CheckoutDetailsService = class CheckoutDetailsService {
         return this.getCheckoutDetailsLoaded$.pipe(switchMap(() => this.checkoutPaymentService.getPaymentDetails()));
     }
 };
-CheckoutDetailsService.ɵfac = function CheckoutDetailsService_Factory(t) { return new (t || CheckoutDetailsService)(ɵngcc0.ɵɵinject(ɵngcc1.CheckoutService), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutPaymentService), ɵngcc0.ɵɵinject(ɵngcc1.CartService)); };
+CheckoutDetailsService.ɵfac = function CheckoutDetailsService_Factory(t) { return new (t || CheckoutDetailsService)(ɵngcc0.ɵɵinject(ɵngcc1.CheckoutService), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutPaymentService), ɵngcc0.ɵɵinject(ɵngcc1.ActiveCartService)); };
 CheckoutDetailsService.ctorParameters = () => [
     { type: CheckoutService },
     { type: CheckoutDeliveryService },
     { type: CheckoutPaymentService },
-    { type: CartService }
+    { type: ActiveCartService }
 ];
-CheckoutDetailsService.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(ɵɵinject(CheckoutService), ɵɵinject(CheckoutDeliveryService), ɵɵinject(CheckoutPaymentService), ɵɵinject(CartService)); }, token: CheckoutDetailsService, providedIn: "root" });
+CheckoutDetailsService.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutDetailsService_Factory() { return new CheckoutDetailsService(ɵɵinject(CheckoutService), ɵɵinject(CheckoutDeliveryService), ɵɵinject(CheckoutPaymentService), ɵɵinject(ActiveCartService)); }, token: CheckoutDetailsService, providedIn: "root" });
 
 let ExpressCheckoutService = class ExpressCheckoutService {
     constructor(userAddressService, userPaymentService, checkoutDeliveryService, checkoutPaymentService, checkoutDetailsService, checkoutConfigService) {
@@ -17746,14 +17746,14 @@ CheckoutDetailsLoadedGuard.ctorParameters = () => [
 CheckoutDetailsLoadedGuard.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutDetailsLoadedGuard_Factory() { return new CheckoutDetailsLoadedGuard(ɵɵinject(CheckoutDetailsService)); }, token: CheckoutDetailsLoadedGuard, providedIn: "root" });
 
 let ShippingAddressComponent = class ShippingAddressComponent {
-    constructor(userAddressService, cartService, routingService, checkoutDeliveryService, checkoutConfigService, activatedRoute, translation) {
+    constructor(userAddressService, routingService, checkoutDeliveryService, checkoutConfigService, activatedRoute, translation, activeCartService) {
         this.userAddressService = userAddressService;
-        this.cartService = cartService;
         this.routingService = routingService;
         this.checkoutDeliveryService = checkoutDeliveryService;
         this.checkoutConfigService = checkoutConfigService;
         this.activatedRoute = activatedRoute;
         this.translation = translation;
+        this.activeCartService = activeCartService;
         this.newAddressFormManuallyOpened = false;
         this.forceLoader = false; // this helps with smoother steps transition
         /**
@@ -17813,7 +17813,7 @@ let ShippingAddressComponent = class ShippingAddressComponent {
                 };
             });
         }));
-        if (!this.cartService.isGuestCart()) {
+        if (!this.activeCartService.isGuestCart()) {
             this.userAddressService.loadAddresses();
         }
         else {
@@ -17931,7 +17931,7 @@ let ShippingAddressComponent = class ShippingAddressComponent {
         }
     }
 };
-ShippingAddressComponent.ɵfac = function ShippingAddressComponent_Factory(t) { return new (t || ShippingAddressComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserAddressService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CartService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵdirectiveInject(CheckoutConfigService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.TranslationService)); };
+ShippingAddressComponent.ɵfac = function ShippingAddressComponent_Factory(t) { return new (t || ShippingAddressComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserAddressService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵdirectiveInject(CheckoutConfigService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.TranslationService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService)); };
 ShippingAddressComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ShippingAddressComponent, selectors: [["cx-shipping-address"]], decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "cx-checkout-title", "d-none", "d-lg-block", "d-xl-block"], [4, "ngIf", "ngIfElse"], ["loading", ""], ["newAddressForm", ""], [1, "cx-checkout-text"], [1, "cx-checkout-btns", "row"], [1, "col-sm-12", "col-md-12", "col-lg-6"], [1, "btn", "btn-block", "btn-action", 3, "click"], [1, "cx-checkout-body", "row"], ["class", "cx-shipping-address-card col-md-12 col-lg-6", 4, "ngFor", "ngForOf"], [1, "col-md-12", "col-lg-6"], [1, "cx-btn", "btn", "btn-block", "btn-action", 3, "click"], [1, "cx-btn", "btn", "btn-block", "btn-primary", 3, "disabled", "click"], [1, "cx-shipping-address-card", "col-md-12", "col-lg-6"], [1, "cx-shipping-address-card-inner", 3, "click"], [3, "border", "fitToContainer", "content", "sendCard"], ["initialAddressForm", ""], [3, "showTitleCode", "backToAddress", "submitAddress"], [3, "showTitleCode", "setAsDefaultField", "addressData", "cancelBtnLabel", "backToAddress", "submitAddress"], [1, "cx-spinner"]], template: function ShippingAddressComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, ShippingAddressComponent_ng_container_0_Template, 8, 7, "ng-container", 0);
         ɵngcc0.ɵɵpipe(1, "async");
@@ -17942,12 +17942,12 @@ ShippingAddressComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ShippingAdd
         SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
 ShippingAddressComponent.ctorParameters = () => [
     { type: UserAddressService },
-    { type: CartService },
     { type: RoutingService },
     { type: CheckoutDeliveryService },
     { type: CheckoutConfigService },
     { type: ActivatedRoute },
-    { type: TranslationService }
+    { type: TranslationService },
+    { type: ActiveCartService }
 ];
 
 let ShippingAddressModule = class ShippingAddressModule {
@@ -17995,17 +17995,17 @@ CheckoutComponentModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function C
         ]] });
 
 let NotCheckoutAuthGuard = class NotCheckoutAuthGuard {
-    constructor(routingService, authService, cartService) {
+    constructor(routingService, authService, activeCartService) {
         this.routingService = routingService;
         this.authService = authService;
-        this.cartService = cartService;
+        this.activeCartService = activeCartService;
     }
     canActivate() {
         return this.authService.getUserToken().pipe(map(token => {
             if (token.access_token) {
                 this.routingService.go({ cxRoute: 'home' });
             }
-            else if (this.cartService.isGuestCart()) {
+            else if (this.activeCartService.isGuestCart()) {
                 this.routingService.go({ cxRoute: 'cart' });
                 return false;
             }
@@ -18013,13 +18013,13 @@ let NotCheckoutAuthGuard = class NotCheckoutAuthGuard {
         }));
     }
 };
-NotCheckoutAuthGuard.ɵfac = function NotCheckoutAuthGuard_Factory(t) { return new (t || NotCheckoutAuthGuard)(ɵngcc0.ɵɵinject(ɵngcc1.RoutingService), ɵngcc0.ɵɵinject(ɵngcc1.AuthService), ɵngcc0.ɵɵinject(ɵngcc1.CartService)); };
+NotCheckoutAuthGuard.ɵfac = function NotCheckoutAuthGuard_Factory(t) { return new (t || NotCheckoutAuthGuard)(ɵngcc0.ɵɵinject(ɵngcc1.RoutingService), ɵngcc0.ɵɵinject(ɵngcc1.AuthService), ɵngcc0.ɵɵinject(ɵngcc1.ActiveCartService)); };
 NotCheckoutAuthGuard.ctorParameters = () => [
     { type: RoutingService },
     { type: AuthService },
-    { type: CartService }
+    { type: ActiveCartService }
 ];
-NotCheckoutAuthGuard.ɵprov = ɵɵdefineInjectable({ factory: function NotCheckoutAuthGuard_Factory() { return new NotCheckoutAuthGuard(ɵɵinject(RoutingService), ɵɵinject(AuthService), ɵɵinject(CartService)); }, token: NotCheckoutAuthGuard, providedIn: "root" });
+NotCheckoutAuthGuard.ɵprov = ɵɵdefineInjectable({ factory: function NotCheckoutAuthGuard_Factory() { return new NotCheckoutAuthGuard(ɵɵinject(RoutingService), ɵɵinject(AuthService), ɵɵinject(ActiveCartService)); }, token: NotCheckoutAuthGuard, providedIn: "root" });
 
 let HamburgerMenuService = class HamburgerMenuService {
     constructor(router) {
@@ -25438,10 +25438,10 @@ StoreFinderModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function StoreFi
         ]] });
 
 let CheckoutLoginComponent = class CheckoutLoginComponent {
-    constructor(formBuilder, cartService, authRedirectService) {
+    constructor(formBuilder, authRedirectService, activeCartService) {
         this.formBuilder = formBuilder;
-        this.cartService = cartService;
         this.authRedirectService = authRedirectService;
+        this.activeCartService = activeCartService;
         this.form = this.formBuilder.group({
             email: ['', [Validators.required, CustomFormValidators.emailValidator]],
             emailConfirmation: ['', [Validators.required]],
@@ -25463,10 +25463,10 @@ let CheckoutLoginComponent = class CheckoutLoginComponent {
             return;
         }
         const email = this.form.value.email;
-        this.cartService.addEmail(email);
+        this.activeCartService.addEmail(email);
         if (!this.sub) {
-            this.sub = this.cartService.getAssignedUser().subscribe(_ => {
-                if (this.cartService.isGuestCart()) {
+            this.sub = this.activeCartService.getAssignedUser().subscribe(_ => {
+                if (this.activeCartService.isGuestCart()) {
                     this.authRedirectService.redirect();
                 }
             });
@@ -25484,7 +25484,7 @@ let CheckoutLoginComponent = class CheckoutLoginComponent {
             : null;
     }
 };
-CheckoutLoginComponent.ɵfac = function CheckoutLoginComponent_Factory(t) { return new (t || CheckoutLoginComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CartService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthRedirectService)); };
+CheckoutLoginComponent.ɵfac = function CheckoutLoginComponent_Factory(t) { return new (t || CheckoutLoginComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthRedirectService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService)); };
 CheckoutLoginComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CheckoutLoginComponent, selectors: [["cx-checkout-login"]], decls: 20, vars: 22, consts: [[3, "formGroup", "ngSubmit"], [1, "form-group"], [1, "label-content"], ["type", "email", "name", "email", "formControlName", "email", 1, "form-control", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "email", "name", "emailConfirmation", "formControlName", "emailConfirmation", 1, "form-control", 3, "placeholder"], ["type", "submit", 1, "btn", "btn-block", "btn-primary"], [1, "invalid-feedback"]], template: function CheckoutLoginComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "form", 0);
         ɵngcc0.ɵɵlistener("ngSubmit", function CheckoutLoginComponent_Template_form_ngSubmit_0_listener() { return ctx.onSubmit(); });
@@ -25536,8 +25536,8 @@ CheckoutLoginComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CheckoutLogin
     } }, directives: [ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.DefaultValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc4.NgIf], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2 });
 CheckoutLoginComponent.ctorParameters = () => [
     { type: FormBuilder },
-    { type: CartService },
-    { type: AuthRedirectService }
+    { type: AuthRedirectService },
+    { type: ActiveCartService }
 ];
 
 let CheckoutLoginModule = class CheckoutLoginModule {
@@ -27322,7 +27322,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: ɵngcc1.CartService }, { type: OrderDetailsService }, { type: ɵngcc1.CheckoutService }]; }, null); })();
+    }], function () { return [{ type: OrderDetailsService }, { type: ɵngcc1.CheckoutService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AddedToCartDialogComponent, [{
         type: Component,
         args: [{
@@ -28240,7 +28240,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: ɵngcc1.CheckoutService }, { type: ɵngcc1.CheckoutDeliveryService }, { type: ɵngcc1.CheckoutPaymentService }, { type: ɵngcc1.CartService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.CheckoutService }, { type: ɵngcc1.CheckoutDeliveryService }, { type: ɵngcc1.CheckoutPaymentService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ExpressCheckoutService, [{
         type: Injectable,
         args: [{
@@ -28752,7 +28752,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 template: "<ng-container *ngIf=\"cards$ | async as cards\">\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutAddress.shippingAddress' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!forceLoader && !(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        cards?.length && !newAddressFormManuallyOpened;\n        else newAddressForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'checkoutAddress.selectYourShippingAddress' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-sm-12 col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewAddressForm()\"\n          >\n            {{ 'checkoutAddress.addNewAddress' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-shipping-address-card col-md-12 col-lg-6\"\n          *ngFor=\"let card of cards; let i = index\"\n        >\n          <div\n            class=\"cx-shipping-address-card-inner\"\n            (click)=\"addressSelected(card.address)\"\n          >\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"card.card\"\n              (sendCard)=\"addressSelected(card.address)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"cx-btn btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'checkout.backToCart' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"cx-btn btn btn-block btn-primary\"\n            [disabled]=\"\n              (!selectedAddress || !selectedAddress.id) &&\n              !(selectedAddress$ | async)?.shippingAddress\n            \"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newAddressForm>\n      <ng-container *ngIf=\"cards.length; else initialAddressForm\">\n        <cx-address-form\n          [showTitleCode]=\"true\"\n          (backToAddress)=\"hideNewAddressForm(false)\"\n          (submitAddress)=\"addAddress($event)\"\n        ></cx-address-form>\n      </ng-container>\n      <ng-template #initialAddressForm>\n        <cx-address-form\n          [showTitleCode]=\"true\"\n          [setAsDefaultField]=\"!isGuestCheckout\"\n          [addressData]=\"setAddress\"\n          cancelBtnLabel=\"{{ 'checkout.backToCart' | cxTranslate }}\"\n          (backToAddress)=\"hideNewAddressForm(true)\"\n          (submitAddress)=\"addAddress($event)\"\n        ></cx-address-form>\n      </ng-template>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </ng-template>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ɵngcc1.UserAddressService }, { type: ɵngcc1.CartService }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.CheckoutDeliveryService }, { type: CheckoutConfigService }, { type: ɵngcc5.ActivatedRoute }, { type: ɵngcc1.TranslationService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.UserAddressService }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.CheckoutDeliveryService }, { type: CheckoutConfigService }, { type: ɵngcc5.ActivatedRoute }, { type: ɵngcc1.TranslationService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ShippingAddressModule, { declarations: function () { return [ShippingAddressComponent]; }, imports: function () { return [CommonModule,
         RouterModule,
         AddressFormModule,
@@ -28827,7 +28827,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: ɵngcc1.RoutingService }, { type: ɵngcc1.AuthService }, { type: ɵngcc1.CartService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.RoutingService }, { type: ɵngcc1.AuthService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(HamburgerMenuService, [{
         type: Injectable,
         args: [{
@@ -31474,7 +31474,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 selector: 'cx-checkout-login',
                 template: "<form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'checkoutLogin.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        name=\"email\"\n        class=\"form-control\"\n        formControlName=\"email\"\n        placeholder=\"{{\n          'checkoutLogin.emailAddress.placeholder' | cxTranslate\n        }}\"\n        [class.is-invalid]=\"isNotValid('email')\"\n      />\n      <div class=\"invalid-feedback\" *ngIf=\"isNotValid('email')\">\n        <span>{{ 'checkoutLogin.emailIsRequired' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'checkoutLogin.confirmEmail.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        name=\"emailConfirmation\"\n        class=\"form-control\"\n        formControlName=\"emailConfirmation\"\n        placeholder=\"{{\n          'checkoutLogin.confirmEmail.placeholder' | cxTranslate\n        }}\"\n        [class.is-invalid]=\"isEmailConfirmInvalid()\"\n      />\n      <div class=\"invalid-feedback\" *ngIf=\"isEmailConfirmInvalid()\">\n        <span>{{ 'checkoutLogin.emailsMustMatch' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <button type=\"submit\" class=\"btn btn-block btn-primary\">\n    {{ 'checkoutLogin.continue' | cxTranslate }}\n  </button>\n</form>\n"
             }]
-    }], function () { return [{ type: ɵngcc7.FormBuilder }, { type: ɵngcc1.CartService }, { type: ɵngcc1.AuthRedirectService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc7.FormBuilder }, { type: ɵngcc1.AuthRedirectService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CheckoutLoginModule, { declarations: function () { return [CheckoutLoginComponent]; }, imports: function () { return [CommonModule,
         I18nModule,
         FormsModule,

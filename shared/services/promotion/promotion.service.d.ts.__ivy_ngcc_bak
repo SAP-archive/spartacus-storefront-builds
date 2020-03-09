@@ -1,11 +1,11 @@
-import { OrderEntry, PromotionResult, CartService, CheckoutService, PromotionLocation } from '@spartacus/core';
+import { ActiveCartService, CheckoutService, OrderEntry, PromotionLocation, PromotionResult } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { OrderDetailsService } from '../../../cms-components/myaccount/order/order-details/order-details.service';
 export declare class PromotionService {
-    protected cartService: CartService;
     protected orderDetailsService: OrderDetailsService;
     protected checkoutService: CheckoutService;
-    constructor(cartService: CartService, orderDetailsService: OrderDetailsService, checkoutService: CheckoutService);
+    protected activeCartService: ActiveCartService;
+    constructor(orderDetailsService: OrderDetailsService, checkoutService: CheckoutService, activeCartService: ActiveCartService);
     getOrderPromotions(promotionLocation: PromotionLocation): Observable<PromotionResult[]>;
     getOrderPromotionsFromCart(): Observable<PromotionResult[]>;
     private getOrderPromotionsFromCartHelper;
