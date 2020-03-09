@@ -15885,52 +15885,35 @@ ExpressCheckoutService.ctorParameters = () => [
 ExpressCheckoutService.ɵprov = ɵɵdefineInjectable({ factory: function ExpressCheckoutService_Factory() { return new ExpressCheckoutService(ɵɵinject(UserAddressService), ɵɵinject(UserPaymentService), ɵɵinject(CheckoutDeliveryService), ɵɵinject(CheckoutPaymentService), ɵɵinject(CheckoutDetailsService), ɵɵinject(CheckoutConfigService)); }, token: ExpressCheckoutService, providedIn: "root" });
 
 let CheckoutGuard = class CheckoutGuard {
-    constructor(router, config, routingConfigService, checkoutConfigService, expressCheckoutService, cartService) {
+    constructor(router, routingConfigService, checkoutConfigService, expressCheckoutService, cartService) {
         this.router = router;
-        this.config = config;
         this.routingConfigService = routingConfigService;
         this.checkoutConfigService = checkoutConfigService;
         this.expressCheckoutService = expressCheckoutService;
         this.cartService = cartService;
-        /**
-         * TODO(issue:#4309) Deprecated since 1.2.0
-         */
-        if (this.checkoutConfigService) {
-            this.firstStep$ = of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.checkoutConfigService.getFirstCheckoutStepRoute()).paths[0]));
-        }
-        else {
-            this.firstStep$ = of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.config.checkout.steps[0].routeName).paths[0]));
-        }
+        this.firstStep$ = of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.checkoutConfigService.getFirstCheckoutStepRoute()).paths[0]));
     }
     canActivate() {
-        /**
-         * TODO(issue:#4309) Deprecated since 1.2.0
-         */
-        if (this.checkoutConfigService &&
-            this.expressCheckoutService &&
-            this.cartService) {
-            if (this.checkoutConfigService.isExpressCheckout() &&
-                !this.cartService.isGuestCart()) {
-                return this.expressCheckoutService.trySetDefaultCheckoutDetails().pipe(switchMap((expressCheckoutPossible) => {
-                    return expressCheckoutPossible
-                        ? of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.checkoutConfigService.getCheckoutStepRoute(CheckoutStepType.REVIEW_ORDER)).paths[0]))
-                        : this.firstStep$;
-                }));
-            }
+        if (this.checkoutConfigService.isExpressCheckout() &&
+            !this.cartService.isGuestCart()) {
+            return this.expressCheckoutService.trySetDefaultCheckoutDetails().pipe(switchMap((expressCheckoutPossible) => {
+                return expressCheckoutPossible
+                    ? of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.checkoutConfigService.getCheckoutStepRoute(CheckoutStepType.REVIEW_ORDER)).paths[0]))
+                    : this.firstStep$;
+            }));
         }
         return this.firstStep$;
     }
 };
-CheckoutGuard.ɵfac = function CheckoutGuard_Factory(t) { return new (t || CheckoutGuard)(ɵngcc0.ɵɵinject(ɵngcc5.Router), ɵngcc0.ɵɵinject(CheckoutConfig), ɵngcc0.ɵɵinject(ɵngcc1.RoutingConfigService), ɵngcc0.ɵɵinject(CheckoutConfigService), ɵngcc0.ɵɵinject(ExpressCheckoutService), ɵngcc0.ɵɵinject(ɵngcc1.CartService)); };
+CheckoutGuard.ɵfac = function CheckoutGuard_Factory(t) { return new (t || CheckoutGuard)(ɵngcc0.ɵɵinject(ɵngcc5.Router), ɵngcc0.ɵɵinject(ɵngcc1.RoutingConfigService), ɵngcc0.ɵɵinject(CheckoutConfigService), ɵngcc0.ɵɵinject(ExpressCheckoutService), ɵngcc0.ɵɵinject(ɵngcc1.ActiveCartService)); };
 CheckoutGuard.ctorParameters = () => [
     { type: Router },
-    { type: CheckoutConfig },
     { type: RoutingConfigService },
     { type: CheckoutConfigService },
     { type: ExpressCheckoutService },
-    { type: CartService }
+    { type: ActiveCartService }
 ];
-CheckoutGuard.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(ɵɵinject(Router), ɵɵinject(CheckoutConfig), ɵɵinject(RoutingConfigService), ɵɵinject(CheckoutConfigService), ɵɵinject(ExpressCheckoutService), ɵɵinject(CartService)); }, token: CheckoutGuard, providedIn: "root" });
+CheckoutGuard.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(ɵɵinject(Router), ɵɵinject(RoutingConfigService), ɵɵinject(CheckoutConfigService), ɵɵinject(ExpressCheckoutService), ɵɵinject(ActiveCartService)); }, token: CheckoutGuard, providedIn: "root" });
 
 let CheckoutOrchestratorComponent = class CheckoutOrchestratorComponent {
     constructor() { }
@@ -18720,10 +18703,9 @@ TabParagraphContainerModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: functi
         ]] });
 
 let AddressBookComponentService = class AddressBookComponentService {
-    constructor(userAddressService, checkoutDeliveryService, featureConfigService) {
+    constructor(userAddressService, checkoutDeliveryService) {
         this.userAddressService = userAddressService;
         this.checkoutDeliveryService = checkoutDeliveryService;
-        this.featureConfigService = featureConfigService;
     }
     getAddresses() {
         return this.userAddressService.getAddresses();
@@ -18739,22 +18721,14 @@ let AddressBookComponentService = class AddressBookComponentService {
     }
     updateUserAddress(addressId, address) {
         this.userAddressService.updateUserAddress(addressId, address);
-        /**
-         * TODO(issue:#4309) Deprecated since 1.2.0
-         */
-        if (this.featureConfigService &&
-            this.featureConfigService.isLevel('1.2') &&
-            this.checkoutDeliveryService) {
-            this.checkoutDeliveryService.clearCheckoutDeliveryDetails();
-        }
+        this.checkoutDeliveryService.clearCheckoutDeliveryDetails();
     }
 };
-AddressBookComponentService.ɵfac = function AddressBookComponentService_Factory(t) { return new (t || AddressBookComponentService)(ɵngcc0.ɵɵinject(ɵngcc1.UserAddressService), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵinject(ɵngcc1.FeatureConfigService)); };
+AddressBookComponentService.ɵfac = function AddressBookComponentService_Factory(t) { return new (t || AddressBookComponentService)(ɵngcc0.ɵɵinject(ɵngcc1.UserAddressService), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutDeliveryService)); };
 AddressBookComponentService.ɵprov = ɵngcc0.ɵɵdefineInjectable({ token: AddressBookComponentService, factory: AddressBookComponentService.ɵfac });
 AddressBookComponentService.ctorParameters = () => [
     { type: UserAddressService },
-    { type: CheckoutDeliveryService },
-    { type: FeatureConfigService }
+    { type: CheckoutDeliveryService }
 ];
 
 let AddressBookComponent = class AddressBookComponent {
@@ -28252,7 +28226,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: ɵngcc5.Router }, { type: CheckoutConfig }, { type: ɵngcc1.RoutingConfigService }, { type: CheckoutConfigService }, { type: ExpressCheckoutService }, { type: ɵngcc1.CartService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc5.Router }, { type: ɵngcc1.RoutingConfigService }, { type: CheckoutConfigService }, { type: ExpressCheckoutService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CheckoutOrchestratorComponent, [{
         type: Component,
         args: [{
@@ -29162,7 +29136,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
     }], null, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AddressBookComponentService, [{
         type: Injectable
-    }], function () { return [{ type: ɵngcc1.UserAddressService }, { type: ɵngcc1.CheckoutDeliveryService }, { type: ɵngcc1.FeatureConfigService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.UserAddressService }, { type: ɵngcc1.CheckoutDeliveryService }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AddressBookComponent, [{
         type: Component,
         args: [{

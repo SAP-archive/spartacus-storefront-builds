@@ -7532,51 +7532,34 @@ var ExpressCheckoutService = /** @class */ (function () {
 }());
 
 var CheckoutGuard = /** @class */ (function () {
-    function CheckoutGuard(router, config, routingConfigService, checkoutConfigService, expressCheckoutService, cartService) {
+    function CheckoutGuard(router, routingConfigService, checkoutConfigService, expressCheckoutService, cartService) {
         this.router = router;
-        this.config = config;
         this.routingConfigService = routingConfigService;
         this.checkoutConfigService = checkoutConfigService;
         this.expressCheckoutService = expressCheckoutService;
         this.cartService = cartService;
-        /**
-         * TODO(issue:#4309) Deprecated since 1.2.0
-         */
-        if (this.checkoutConfigService) {
-            this.firstStep$ = of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.checkoutConfigService.getFirstCheckoutStepRoute()).paths[0]));
-        }
-        else {
-            this.firstStep$ = of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.config.checkout.steps[0].routeName).paths[0]));
-        }
+        this.firstStep$ = of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.checkoutConfigService.getFirstCheckoutStepRoute()).paths[0]));
     }
     CheckoutGuard.prototype.canActivate = function () {
         var _this = this;
-        /**
-         * TODO(issue:#4309) Deprecated since 1.2.0
-         */
-        if (this.checkoutConfigService &&
-            this.expressCheckoutService &&
-            this.cartService) {
-            if (this.checkoutConfigService.isExpressCheckout() &&
-                !this.cartService.isGuestCart()) {
-                return this.expressCheckoutService.trySetDefaultCheckoutDetails().pipe(switchMap(function (expressCheckoutPossible) {
-                    return expressCheckoutPossible
-                        ? of(_this.router.parseUrl(_this.routingConfigService.getRouteConfig(_this.checkoutConfigService.getCheckoutStepRoute(CheckoutStepType.REVIEW_ORDER)).paths[0]))
-                        : _this.firstStep$;
-                }));
-            }
+        if (this.checkoutConfigService.isExpressCheckout() &&
+            !this.cartService.isGuestCart()) {
+            return this.expressCheckoutService.trySetDefaultCheckoutDetails().pipe(switchMap(function (expressCheckoutPossible) {
+                return expressCheckoutPossible
+                    ? of(_this.router.parseUrl(_this.routingConfigService.getRouteConfig(_this.checkoutConfigService.getCheckoutStepRoute(CheckoutStepType.REVIEW_ORDER)).paths[0]))
+                    : _this.firstStep$;
+            }));
         }
         return this.firstStep$;
     };
     CheckoutGuard.ctorParameters = function () { return [
         { type: Router },
-        { type: CheckoutConfig },
         { type: RoutingConfigService },
         { type: CheckoutConfigService },
         { type: ExpressCheckoutService },
-        { type: CartService }
+        { type: ActiveCartService }
     ]; };
-    CheckoutGuard.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(ɵɵinject(Router), ɵɵinject(CheckoutConfig), ɵɵinject(RoutingConfigService), ɵɵinject(CheckoutConfigService), ɵɵinject(ExpressCheckoutService), ɵɵinject(CartService)); }, token: CheckoutGuard, providedIn: "root" });
+    CheckoutGuard.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(ɵɵinject(Router), ɵɵinject(RoutingConfigService), ɵɵinject(CheckoutConfigService), ɵɵinject(ExpressCheckoutService), ɵɵinject(ActiveCartService)); }, token: CheckoutGuard, providedIn: "root" });
     CheckoutGuard = __decorate([
         Injectable({
             providedIn: 'root',
@@ -10234,10 +10217,9 @@ var TabParagraphContainerModule = /** @class */ (function () {
 }());
 
 var AddressBookComponentService = /** @class */ (function () {
-    function AddressBookComponentService(userAddressService, checkoutDeliveryService, featureConfigService) {
+    function AddressBookComponentService(userAddressService, checkoutDeliveryService) {
         this.userAddressService = userAddressService;
         this.checkoutDeliveryService = checkoutDeliveryService;
-        this.featureConfigService = featureConfigService;
     }
     AddressBookComponentService.prototype.getAddresses = function () {
         return this.userAddressService.getAddresses();
@@ -10253,19 +10235,11 @@ var AddressBookComponentService = /** @class */ (function () {
     };
     AddressBookComponentService.prototype.updateUserAddress = function (addressId, address) {
         this.userAddressService.updateUserAddress(addressId, address);
-        /**
-         * TODO(issue:#4309) Deprecated since 1.2.0
-         */
-        if (this.featureConfigService &&
-            this.featureConfigService.isLevel('1.2') &&
-            this.checkoutDeliveryService) {
-            this.checkoutDeliveryService.clearCheckoutDeliveryDetails();
-        }
+        this.checkoutDeliveryService.clearCheckoutDeliveryDetails();
     };
     AddressBookComponentService.ctorParameters = function () { return [
         { type: UserAddressService },
-        { type: CheckoutDeliveryService },
-        { type: FeatureConfigService }
+        { type: CheckoutDeliveryService }
     ]; };
     AddressBookComponentService = __decorate([
         Injectable()
