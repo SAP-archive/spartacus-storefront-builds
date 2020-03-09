@@ -3743,11 +3743,11 @@ AddedToCartDialogComponent = __decorate([
 ], AddedToCartDialogComponent);
 
 let AddToCartComponent = class AddToCartComponent {
-    constructor(cartService, modalService, currentProductService, cd) {
-        this.cartService = cartService;
+    constructor(modalService, currentProductService, cd, activeCartService) {
         this.modalService = modalService;
         this.currentProductService = currentProductService;
         this.cd = cd;
+        this.activeCartService = activeCartService;
         this.showQuantity = true;
         this.hasStock = false;
         this.quantity = 1;
@@ -3759,12 +3759,12 @@ let AddToCartComponent = class AddToCartComponent {
     ngOnInit() {
         if (this.product) {
             this.productCode = this.product.code;
-            this.cartEntry$ = this.cartService.getEntry(this.productCode);
+            this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
             this.setStockInfo(this.product);
             this.cd.markForCheck();
         }
         else if (this.productCode) {
-            this.cartEntry$ = this.cartService.getEntry(this.productCode);
+            this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
             // force hasStock and quantity for the time being, as we do not have more info:
             this.quantity = 1;
             this.hasStock = true;
@@ -3777,7 +3777,7 @@ let AddToCartComponent = class AddToCartComponent {
                 .subscribe((product) => {
                 this.productCode = product.code;
                 this.setStockInfo(product);
-                this.cartEntry$ = this.cartService.getEntry(this.productCode);
+                this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
                 this.cd.markForCheck();
             });
         }
@@ -3800,14 +3800,14 @@ let AddToCartComponent = class AddToCartComponent {
         }
         // check item is already present in the cart
         // so modal will have proper header text displayed
-        this.cartService
+        this.activeCartService
             .getEntry(this.productCode)
             .subscribe(entry => {
             if (entry) {
                 this.increment = true;
             }
             this.openModal();
-            this.cartService.addEntry(this.productCode, quantity);
+            this.activeCartService.addEntry(this.productCode, quantity);
             this.increment = false;
         })
             .unsubscribe();
@@ -3820,8 +3820,8 @@ let AddToCartComponent = class AddToCartComponent {
         });
         modalInstance = this.modalRef.componentInstance;
         modalInstance.entry$ = this.cartEntry$;
-        modalInstance.cart$ = this.cartService.getActive();
-        modalInstance.loaded$ = this.cartService.getLoaded();
+        modalInstance.cart$ = this.activeCartService.getActive();
+        modalInstance.loaded$ = this.activeCartService.getLoaded();
         modalInstance.quantity = this.quantity;
         modalInstance.increment = this.increment;
     }
@@ -3832,10 +3832,10 @@ let AddToCartComponent = class AddToCartComponent {
     }
 };
 AddToCartComponent.ctorParameters = () => [
-    { type: CartService },
     { type: ModalService },
     { type: CurrentProductService },
-    { type: ChangeDetectorRef }
+    { type: ChangeDetectorRef },
+    { type: ActiveCartService }
 ];
 __decorate([
     Input()
@@ -6044,14 +6044,14 @@ CartDetailsModule = __decorate([
 ], CartDetailsModule);
 
 let CartNotEmptyGuard = class CartNotEmptyGuard {
-    constructor(cartService, routingService) {
-        this.cartService = cartService;
+    constructor(routingService, activeCartService) {
         this.routingService = routingService;
+        this.activeCartService = activeCartService;
     }
     canActivate() {
         return combineLatest([
-            this.cartService.getActive(),
-            this.cartService.getLoaded(),
+            this.activeCartService.getActive(),
+            this.activeCartService.getLoaded(),
         ]).pipe(filter(([_, loaded]) => loaded), map(([cart]) => {
             if (this.isEmpty(cart)) {
                 this.routingService.go({ cxRoute: 'home' });
@@ -6065,10 +6065,10 @@ let CartNotEmptyGuard = class CartNotEmptyGuard {
     }
 };
 CartNotEmptyGuard.ctorParameters = () => [
-    { type: CartService },
-    { type: RoutingService }
+    { type: RoutingService },
+    { type: ActiveCartService }
 ];
-CartNotEmptyGuard.ɵprov = ɵɵdefineInjectable({ factory: function CartNotEmptyGuard_Factory() { return new CartNotEmptyGuard(ɵɵinject(CartService), ɵɵinject(RoutingService)); }, token: CartNotEmptyGuard, providedIn: "root" });
+CartNotEmptyGuard.ɵprov = ɵɵdefineInjectable({ factory: function CartNotEmptyGuard_Factory() { return new CartNotEmptyGuard(ɵɵinject(RoutingService), ɵɵinject(ActiveCartService)); }, token: CartNotEmptyGuard, providedIn: "root" });
 CartNotEmptyGuard = __decorate([
     Injectable({
         providedIn: 'root',
@@ -6128,18 +6128,18 @@ CartPageLayoutHandler = __decorate([
 ], CartPageLayoutHandler);
 
 let CartTotalsComponent = class CartTotalsComponent {
-    constructor(cartService) {
-        this.cartService = cartService;
+    constructor(activeCartService) {
+        this.activeCartService = activeCartService;
     }
     ngOnInit() {
-        this.cart$ = this.cartService.getActive();
-        this.entries$ = this.cartService
+        this.cart$ = this.activeCartService.getActive();
+        this.entries$ = this.activeCartService
             .getEntries()
             .pipe(filter(entries => entries.length > 0));
     }
 };
 CartTotalsComponent.ctorParameters = () => [
-    { type: CartService }
+    { type: ActiveCartService }
 ];
 CartTotalsComponent = __decorate([
     Component({
@@ -6175,15 +6175,15 @@ CartTotalsModule = __decorate([
 ], CartTotalsModule);
 
 let MiniCartComponent = class MiniCartComponent {
-    constructor(cartService) {
-        this.cartService = cartService;
+    constructor(activeCartService) {
+        this.activeCartService = activeCartService;
         this.iconTypes = ICON_TYPE;
-        this.quantity$ = this.cartService.getActive().pipe(startWith({ deliveryItemsQuantity: 0 }), map(cart => cart.deliveryItemsQuantity || 0));
-        this.total$ = this.cartService.getActive().pipe(filter(cart => !!cart.totalPrice), map(cart => cart.totalPrice.formattedValue));
+        this.quantity$ = this.activeCartService.getActive().pipe(startWith({ deliveryItemsQuantity: 0 }), map(cart => cart.deliveryItemsQuantity || 0));
+        this.total$ = this.activeCartService.getActive().pipe(filter(cart => !!cart.totalPrice), map(cart => cart.totalPrice.formattedValue));
     }
 };
 MiniCartComponent.ctorParameters = () => [
-    { type: CartService }
+    { type: ActiveCartService }
 ];
 MiniCartComponent = __decorate([
     Component({
@@ -6767,17 +6767,17 @@ ExpressCheckoutService = __decorate([
 ], ExpressCheckoutService);
 
 let CheckoutGuard = class CheckoutGuard {
-    constructor(router, routingConfigService, checkoutConfigService, expressCheckoutService, cartService) {
+    constructor(router, routingConfigService, checkoutConfigService, expressCheckoutService, activeCartService) {
         this.router = router;
         this.routingConfigService = routingConfigService;
         this.checkoutConfigService = checkoutConfigService;
         this.expressCheckoutService = expressCheckoutService;
-        this.cartService = cartService;
+        this.activeCartService = activeCartService;
         this.firstStep$ = of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.checkoutConfigService.getFirstCheckoutStepRoute()).paths[0]));
     }
     canActivate() {
         if (this.checkoutConfigService.isExpressCheckout() &&
-            !this.cartService.isGuestCart()) {
+            !this.activeCartService.isGuestCart()) {
             return this.expressCheckoutService.trySetDefaultCheckoutDetails().pipe(switchMap((expressCheckoutPossible) => {
                 return expressCheckoutPossible
                     ? of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.checkoutConfigService.getCheckoutStepRoute(CheckoutStepType.REVIEW_ORDER)).paths[0]))

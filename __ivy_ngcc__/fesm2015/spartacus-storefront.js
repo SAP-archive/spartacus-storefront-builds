@@ -12886,11 +12886,11 @@ __decorate([
 ], AddedToCartDialogComponent.prototype, "dialog", void 0);
 
 let AddToCartComponent = class AddToCartComponent {
-    constructor(cartService, modalService, currentProductService, cd) {
-        this.cartService = cartService;
+    constructor(modalService, currentProductService, cd, activeCartService) {
         this.modalService = modalService;
         this.currentProductService = currentProductService;
         this.cd = cd;
+        this.activeCartService = activeCartService;
         this.showQuantity = true;
         this.hasStock = false;
         this.quantity = 1;
@@ -12902,12 +12902,12 @@ let AddToCartComponent = class AddToCartComponent {
     ngOnInit() {
         if (this.product) {
             this.productCode = this.product.code;
-            this.cartEntry$ = this.cartService.getEntry(this.productCode);
+            this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
             this.setStockInfo(this.product);
             this.cd.markForCheck();
         }
         else if (this.productCode) {
-            this.cartEntry$ = this.cartService.getEntry(this.productCode);
+            this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
             // force hasStock and quantity for the time being, as we do not have more info:
             this.quantity = 1;
             this.hasStock = true;
@@ -12920,7 +12920,7 @@ let AddToCartComponent = class AddToCartComponent {
                 .subscribe((product) => {
                 this.productCode = product.code;
                 this.setStockInfo(product);
-                this.cartEntry$ = this.cartService.getEntry(this.productCode);
+                this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
                 this.cd.markForCheck();
             });
         }
@@ -12943,14 +12943,14 @@ let AddToCartComponent = class AddToCartComponent {
         }
         // check item is already present in the cart
         // so modal will have proper header text displayed
-        this.cartService
+        this.activeCartService
             .getEntry(this.productCode)
             .subscribe(entry => {
             if (entry) {
                 this.increment = true;
             }
             this.openModal();
-            this.cartService.addEntry(this.productCode, quantity);
+            this.activeCartService.addEntry(this.productCode, quantity);
             this.increment = false;
         })
             .unsubscribe();
@@ -12963,8 +12963,8 @@ let AddToCartComponent = class AddToCartComponent {
         });
         modalInstance = this.modalRef.componentInstance;
         modalInstance.entry$ = this.cartEntry$;
-        modalInstance.cart$ = this.cartService.getActive();
-        modalInstance.loaded$ = this.cartService.getLoaded();
+        modalInstance.cart$ = this.activeCartService.getActive();
+        modalInstance.loaded$ = this.activeCartService.getLoaded();
         modalInstance.quantity = this.quantity;
         modalInstance.increment = this.increment;
     }
@@ -12974,17 +12974,17 @@ let AddToCartComponent = class AddToCartComponent {
         }
     }
 };
-AddToCartComponent.ɵfac = function AddToCartComponent_Factory(t) { return new (t || AddToCartComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CartService), ɵngcc0.ɵɵdirectiveInject(ModalService), ɵngcc0.ɵɵdirectiveInject(CurrentProductService), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ChangeDetectorRef)); };
+AddToCartComponent.ɵfac = function AddToCartComponent_Factory(t) { return new (t || AddToCartComponent)(ɵngcc0.ɵɵdirectiveInject(ModalService), ɵngcc0.ɵɵdirectiveInject(CurrentProductService), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ChangeDetectorRef), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService)); };
 AddToCartComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddToCartComponent, selectors: [["cx-add-to-cart"]], inputs: { showQuantity: "showQuantity", productCode: "productCode", product: "product" }, decls: 1, vars: 1, consts: [[3, "formGroup", "submit", 4, "ngIf"], [3, "formGroup", "submit"], ["class", "quantity", 4, "ngIf"], ["class", "btn btn-primary btn-block", "type", "submit", 3, "disabled", 4, "ngIf"], [1, "quantity"], [3, "max", "control", 4, "ngIf"], [1, "info"], [3, "max", "control"], ["type", "submit", 1, "btn", "btn-primary", "btn-block", 3, "disabled"]], template: function AddToCartComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, AddToCartComponent_form_0_Template, 3, 3, "form", 0);
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ctx.productCode);
     } }, directives: function () { return [ɵngcc4.NgIf, ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ItemCounterComponent]; }, pipes: function () { return [ɵngcc1.TranslatePipe]; }, encapsulation: 2, changeDetection: 0 });
 AddToCartComponent.ctorParameters = () => [
-    { type: CartService },
     { type: ModalService },
     { type: CurrentProductService },
-    { type: ChangeDetectorRef }
+    { type: ChangeDetectorRef },
+    { type: ActiveCartService }
 ];
 __decorate([
     Input()
@@ -15191,14 +15191,14 @@ CartDetailsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CartDet
         ]] });
 
 let CartNotEmptyGuard = class CartNotEmptyGuard {
-    constructor(cartService, routingService) {
-        this.cartService = cartService;
+    constructor(routingService, activeCartService) {
         this.routingService = routingService;
+        this.activeCartService = activeCartService;
     }
     canActivate() {
         return combineLatest([
-            this.cartService.getActive(),
-            this.cartService.getLoaded(),
+            this.activeCartService.getActive(),
+            this.activeCartService.getLoaded(),
         ]).pipe(filter(([_, loaded]) => loaded), map(([cart]) => {
             if (this.isEmpty(cart)) {
                 this.routingService.go({ cxRoute: 'home' });
@@ -15211,12 +15211,12 @@ let CartNotEmptyGuard = class CartNotEmptyGuard {
         return cart && !cart.totalItems;
     }
 };
-CartNotEmptyGuard.ɵfac = function CartNotEmptyGuard_Factory(t) { return new (t || CartNotEmptyGuard)(ɵngcc0.ɵɵinject(ɵngcc1.CartService), ɵngcc0.ɵɵinject(ɵngcc1.RoutingService)); };
+CartNotEmptyGuard.ɵfac = function CartNotEmptyGuard_Factory(t) { return new (t || CartNotEmptyGuard)(ɵngcc0.ɵɵinject(ɵngcc1.RoutingService), ɵngcc0.ɵɵinject(ɵngcc1.ActiveCartService)); };
 CartNotEmptyGuard.ctorParameters = () => [
-    { type: CartService },
-    { type: RoutingService }
+    { type: RoutingService },
+    { type: ActiveCartService }
 ];
-CartNotEmptyGuard.ɵprov = ɵɵdefineInjectable({ factory: function CartNotEmptyGuard_Factory() { return new CartNotEmptyGuard(ɵɵinject(CartService), ɵɵinject(RoutingService)); }, token: CartNotEmptyGuard, providedIn: "root" });
+CartNotEmptyGuard.ɵprov = ɵɵdefineInjectable({ factory: function CartNotEmptyGuard_Factory() { return new CartNotEmptyGuard(ɵɵinject(RoutingService), ɵɵinject(ActiveCartService)); }, token: CartNotEmptyGuard, providedIn: "root" });
 
 let CartPageLayoutHandler = class CartPageLayoutHandler {
     constructor(cartService, selectiveCartService, featureConfig) {
@@ -15267,17 +15267,17 @@ CartPageLayoutHandler.ctorParameters = () => [
 CartPageLayoutHandler.ɵprov = ɵɵdefineInjectable({ factory: function CartPageLayoutHandler_Factory() { return new CartPageLayoutHandler(ɵɵinject(CartService), ɵɵinject(SelectiveCartService), ɵɵinject(FeatureConfigService)); }, token: CartPageLayoutHandler, providedIn: "root" });
 
 let CartTotalsComponent = class CartTotalsComponent {
-    constructor(cartService) {
-        this.cartService = cartService;
+    constructor(activeCartService) {
+        this.activeCartService = activeCartService;
     }
     ngOnInit() {
-        this.cart$ = this.cartService.getActive();
-        this.entries$ = this.cartService
+        this.cart$ = this.activeCartService.getActive();
+        this.entries$ = this.activeCartService
             .getEntries()
             .pipe(filter(entries => entries.length > 0));
     }
 };
-CartTotalsComponent.ɵfac = function CartTotalsComponent_Factory(t) { return new (t || CartTotalsComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CartService)); };
+CartTotalsComponent.ɵfac = function CartTotalsComponent_Factory(t) { return new (t || CartTotalsComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService)); };
 CartTotalsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartTotalsComponent, selectors: [["cx-cart-totals"]], decls: 2, vars: 3, consts: [[4, "ngIf"], [3, "cart"], ["class", "btn btn-primary btn-block", "type", "button", 3, "routerLink", 4, "ngIf"], ["type", "button", 1, "btn", "btn-primary", "btn-block", 3, "routerLink"]], template: function CartTotalsComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, CartTotalsComponent_ng_container_0_Template, 3, 3, "ng-container", 0);
         ɵngcc0.ɵɵpipe(1, "async");
@@ -15285,7 +15285,7 @@ CartTotalsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartTotalsCompon
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.cart$));
     } }, directives: [ɵngcc4.NgIf, OrderSummaryComponent, ɵngcc5.RouterLink], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
 CartTotalsComponent.ctorParameters = () => [
-    { type: CartService }
+    { type: ActiveCartService }
 ];
 
 let CartTotalsModule = class CartTotalsModule {
@@ -15308,14 +15308,14 @@ CartTotalsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CartTota
         ]] });
 
 let MiniCartComponent = class MiniCartComponent {
-    constructor(cartService) {
-        this.cartService = cartService;
+    constructor(activeCartService) {
+        this.activeCartService = activeCartService;
         this.iconTypes = ICON_TYPE;
-        this.quantity$ = this.cartService.getActive().pipe(startWith({ deliveryItemsQuantity: 0 }), map(cart => cart.deliveryItemsQuantity || 0));
-        this.total$ = this.cartService.getActive().pipe(filter(cart => !!cart.totalPrice), map(cart => cart.totalPrice.formattedValue));
+        this.quantity$ = this.activeCartService.getActive().pipe(startWith({ deliveryItemsQuantity: 0 }), map(cart => cart.deliveryItemsQuantity || 0));
+        this.total$ = this.activeCartService.getActive().pipe(filter(cart => !!cart.totalPrice), map(cart => cart.totalPrice.formattedValue));
     }
 };
-MiniCartComponent.ɵfac = function MiniCartComponent_Factory(t) { return new (t || MiniCartComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CartService)); };
+MiniCartComponent.ɵfac = function MiniCartComponent_Factory(t) { return new (t || MiniCartComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService)); };
 MiniCartComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: MiniCartComponent, selectors: [["cx-mini-cart"]], decls: 11, vars: 19, consts: [[3, "routerLink"], [3, "type"], [1, "total"], [1, "count"]], template: function MiniCartComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "a", 0);
         ɵngcc0.ɵɵpipe(1, "cxTranslate");
@@ -15342,7 +15342,7 @@ MiniCartComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: MiniCartComponent,
         ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(10, 14, ctx.quantity$));
     } }, directives: [ɵngcc5.RouterLinkWithHref, IconComponent], pipes: [ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
 MiniCartComponent.ctorParameters = () => [
-    { type: CartService }
+    { type: ActiveCartService }
 ];
 
 let MiniCartModule = class MiniCartModule {
@@ -15885,17 +15885,17 @@ ExpressCheckoutService.ctorParameters = () => [
 ExpressCheckoutService.ɵprov = ɵɵdefineInjectable({ factory: function ExpressCheckoutService_Factory() { return new ExpressCheckoutService(ɵɵinject(UserAddressService), ɵɵinject(UserPaymentService), ɵɵinject(CheckoutDeliveryService), ɵɵinject(CheckoutPaymentService), ɵɵinject(CheckoutDetailsService), ɵɵinject(CheckoutConfigService)); }, token: ExpressCheckoutService, providedIn: "root" });
 
 let CheckoutGuard = class CheckoutGuard {
-    constructor(router, routingConfigService, checkoutConfigService, expressCheckoutService, cartService) {
+    constructor(router, routingConfigService, checkoutConfigService, expressCheckoutService, activeCartService) {
         this.router = router;
         this.routingConfigService = routingConfigService;
         this.checkoutConfigService = checkoutConfigService;
         this.expressCheckoutService = expressCheckoutService;
-        this.cartService = cartService;
+        this.activeCartService = activeCartService;
         this.firstStep$ = of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.checkoutConfigService.getFirstCheckoutStepRoute()).paths[0]));
     }
     canActivate() {
         if (this.checkoutConfigService.isExpressCheckout() &&
-            !this.cartService.isGuestCart()) {
+            !this.activeCartService.isGuestCart()) {
             return this.expressCheckoutService.trySetDefaultCheckoutDetails().pipe(switchMap((expressCheckoutPossible) => {
                 return expressCheckoutPossible
                     ? of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.checkoutConfigService.getCheckoutStepRoute(CheckoutStepType.REVIEW_ORDER)).paths[0]))
@@ -27314,7 +27314,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 template: "<form *ngIf=\"productCode\" [formGroup]=\"addToCartForm\" (submit)=\"addToCart()\">\n  <div class=\"quantity\" *ngIf=\"showQuantity\">\n    <label>{{ 'addToCart.quantity' | cxTranslate }}</label>\n    <cx-item-counter\n      *ngIf=\"hasStock\"\n      [max]=\"maxQuantity\"\n      [control]=\"addToCartForm.get('quantity')\"\n    ></cx-item-counter>\n    <span class=\"info\">{{\n      hasStock\n        ? ('addToCart.inStock' | cxTranslate)\n        : ('addToCart.outOfStock' | cxTranslate)\n    }}</span>\n  </div>\n\n  <button\n    *ngIf=\"hasStock\"\n    class=\"btn btn-primary btn-block\"\n    type=\"submit\"\n    [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  >\n    {{ 'addToCart.addToCart' | cxTranslate }}\n  </button>\n</form>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ɵngcc1.CartService }, { type: ModalService }, { type: CurrentProductService }, { type: ɵngcc0.ChangeDetectorRef }]; }, { showQuantity: [{
+    }], function () { return [{ type: ModalService }, { type: CurrentProductService }, { type: ɵngcc0.ChangeDetectorRef }, { type: ɵngcc1.ActiveCartService }]; }, { showQuantity: [{
             type: Input
         }], productCode: [{
             type: Input
@@ -28012,7 +28012,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: ɵngcc1.CartService }, { type: ɵngcc1.RoutingService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.RoutingService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CartPageLayoutHandler, [{
         type: Injectable,
         args: [{
@@ -28026,7 +28026,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <ng-container *ngIf=\"entries$ | async as entries\">\n    <cx-order-summary [cart]=\"cart\"></cx-order-summary>\n    <button\n      [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n      *ngIf=\"entries.length\"\n      class=\"btn btn-primary btn-block\"\n      type=\"button\"\n    >\n      {{ 'cartDetails.proceedToCheckout' | cxTranslate }}\n    </button>\n  </ng-container>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ɵngcc1.CartService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.ActiveCartService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CartTotalsModule, { declarations: function () { return [CartTotalsComponent]; }, imports: function () { return [CommonModule,
         RouterModule,
         UrlModule, ɵngcc1.ConfigModule, CartSharedModule,
@@ -28062,7 +28062,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 template: "<a\n  [attr.aria-label]=\"\n    'miniCart.item' | cxTranslate: { count: quantity$ | async }\n  \"\n  [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n>\n  <cx-icon [type]=\"iconTypes.CART\"></cx-icon>\n\n  <span class=\"total\">{{ total$ | async }}</span>\n  <span class=\"count\">{{ quantity$ | async }}</span>\n</a>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ɵngcc1.CartService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.ActiveCartService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(MiniCartModule, { declarations: function () { return [MiniCartComponent]; }, imports: function () { return [CommonModule,
         RouterModule, ɵngcc1.ConfigModule, UrlModule,
         IconModule,

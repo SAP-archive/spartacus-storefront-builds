@@ -1,7 +1,7 @@
 import { Address, CheckoutDeliveryService, UserAddressService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 export declare class AddressBookComponentService {
-    private userAddressService;
+    protected userAddressService: UserAddressService;
     protected checkoutDeliveryService: CheckoutDeliveryService;
     constructor(userAddressService: UserAddressService, checkoutDeliveryService: CheckoutDeliveryService);
     getAddresses(): Observable<Address[]>;

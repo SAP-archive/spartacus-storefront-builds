@@ -4186,11 +4186,11 @@ var AddedToCartDialogComponent = /** @class */ (function () {
 }());
 
 var AddToCartComponent = /** @class */ (function () {
-    function AddToCartComponent(cartService, modalService, currentProductService, cd) {
-        this.cartService = cartService;
+    function AddToCartComponent(modalService, currentProductService, cd, activeCartService) {
         this.modalService = modalService;
         this.currentProductService = currentProductService;
         this.cd = cd;
+        this.activeCartService = activeCartService;
         this.showQuantity = true;
         this.hasStock = false;
         this.quantity = 1;
@@ -4203,12 +4203,12 @@ var AddToCartComponent = /** @class */ (function () {
         var _this = this;
         if (this.product) {
             this.productCode = this.product.code;
-            this.cartEntry$ = this.cartService.getEntry(this.productCode);
+            this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
             this.setStockInfo(this.product);
             this.cd.markForCheck();
         }
         else if (this.productCode) {
-            this.cartEntry$ = this.cartService.getEntry(this.productCode);
+            this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
             // force hasStock and quantity for the time being, as we do not have more info:
             this.quantity = 1;
             this.hasStock = true;
@@ -4221,7 +4221,7 @@ var AddToCartComponent = /** @class */ (function () {
                 .subscribe(function (product) {
                 _this.productCode = product.code;
                 _this.setStockInfo(product);
-                _this.cartEntry$ = _this.cartService.getEntry(_this.productCode);
+                _this.cartEntry$ = _this.activeCartService.getEntry(_this.productCode);
                 _this.cd.markForCheck();
             });
         }
@@ -4245,14 +4245,14 @@ var AddToCartComponent = /** @class */ (function () {
         }
         // check item is already present in the cart
         // so modal will have proper header text displayed
-        this.cartService
+        this.activeCartService
             .getEntry(this.productCode)
             .subscribe(function (entry) {
             if (entry) {
                 _this.increment = true;
             }
             _this.openModal();
-            _this.cartService.addEntry(_this.productCode, quantity);
+            _this.activeCartService.addEntry(_this.productCode, quantity);
             _this.increment = false;
         })
             .unsubscribe();
@@ -4265,8 +4265,8 @@ var AddToCartComponent = /** @class */ (function () {
         });
         modalInstance = this.modalRef.componentInstance;
         modalInstance.entry$ = this.cartEntry$;
-        modalInstance.cart$ = this.cartService.getActive();
-        modalInstance.loaded$ = this.cartService.getLoaded();
+        modalInstance.cart$ = this.activeCartService.getActive();
+        modalInstance.loaded$ = this.activeCartService.getLoaded();
         modalInstance.quantity = this.quantity;
         modalInstance.increment = this.increment;
     };
@@ -4276,10 +4276,10 @@ var AddToCartComponent = /** @class */ (function () {
         }
     };
     AddToCartComponent.ctorParameters = function () { return [
-        { type: CartService },
         { type: ModalService },
         { type: CurrentProductService },
-        { type: ChangeDetectorRef }
+        { type: ChangeDetectorRef },
+        { type: ActiveCartService }
     ]; };
     __decorate([
         Input()
@@ -6721,15 +6721,15 @@ var CartDetailsModule = /** @class */ (function () {
 }());
 
 var CartNotEmptyGuard = /** @class */ (function () {
-    function CartNotEmptyGuard(cartService, routingService) {
-        this.cartService = cartService;
+    function CartNotEmptyGuard(routingService, activeCartService) {
         this.routingService = routingService;
+        this.activeCartService = activeCartService;
     }
     CartNotEmptyGuard.prototype.canActivate = function () {
         var _this = this;
         return combineLatest([
-            this.cartService.getActive(),
-            this.cartService.getLoaded(),
+            this.activeCartService.getActive(),
+            this.activeCartService.getLoaded(),
         ]).pipe(filter(function (_a) {
             var _b = __read(_a, 2), _ = _b[0], loaded = _b[1];
             return loaded;
@@ -6746,10 +6746,10 @@ var CartNotEmptyGuard = /** @class */ (function () {
         return cart && !cart.totalItems;
     };
     CartNotEmptyGuard.ctorParameters = function () { return [
-        { type: CartService },
-        { type: RoutingService }
+        { type: RoutingService },
+        { type: ActiveCartService }
     ]; };
-    CartNotEmptyGuard.ɵprov = ɵɵdefineInjectable({ factory: function CartNotEmptyGuard_Factory() { return new CartNotEmptyGuard(ɵɵinject(CartService), ɵɵinject(RoutingService)); }, token: CartNotEmptyGuard, providedIn: "root" });
+    CartNotEmptyGuard.ɵprov = ɵɵdefineInjectable({ factory: function CartNotEmptyGuard_Factory() { return new CartNotEmptyGuard(ɵɵinject(RoutingService), ɵɵinject(ActiveCartService)); }, token: CartNotEmptyGuard, providedIn: "root" });
     CartNotEmptyGuard = __decorate([
         Injectable({
             providedIn: 'root',
@@ -6818,17 +6818,17 @@ var CartPageLayoutHandler = /** @class */ (function () {
 }());
 
 var CartTotalsComponent = /** @class */ (function () {
-    function CartTotalsComponent(cartService) {
-        this.cartService = cartService;
+    function CartTotalsComponent(activeCartService) {
+        this.activeCartService = activeCartService;
     }
     CartTotalsComponent.prototype.ngOnInit = function () {
-        this.cart$ = this.cartService.getActive();
-        this.entries$ = this.cartService
+        this.cart$ = this.activeCartService.getActive();
+        this.entries$ = this.activeCartService
             .getEntries()
             .pipe(filter(function (entries) { return entries.length > 0; }));
     };
     CartTotalsComponent.ctorParameters = function () { return [
-        { type: CartService }
+        { type: ActiveCartService }
     ]; };
     CartTotalsComponent = __decorate([
         Component({
@@ -6869,14 +6869,14 @@ var CartTotalsModule = /** @class */ (function () {
 }());
 
 var MiniCartComponent = /** @class */ (function () {
-    function MiniCartComponent(cartService) {
-        this.cartService = cartService;
+    function MiniCartComponent(activeCartService) {
+        this.activeCartService = activeCartService;
         this.iconTypes = ICON_TYPE;
-        this.quantity$ = this.cartService.getActive().pipe(startWith({ deliveryItemsQuantity: 0 }), map(function (cart) { return cart.deliveryItemsQuantity || 0; }));
-        this.total$ = this.cartService.getActive().pipe(filter(function (cart) { return !!cart.totalPrice; }), map(function (cart) { return cart.totalPrice.formattedValue; }));
+        this.quantity$ = this.activeCartService.getActive().pipe(startWith({ deliveryItemsQuantity: 0 }), map(function (cart) { return cart.deliveryItemsQuantity || 0; }));
+        this.total$ = this.activeCartService.getActive().pipe(filter(function (cart) { return !!cart.totalPrice; }), map(function (cart) { return cart.totalPrice.formattedValue; }));
     }
     MiniCartComponent.ctorParameters = function () { return [
-        { type: CartService }
+        { type: ActiveCartService }
     ]; };
     MiniCartComponent = __decorate([
         Component({
@@ -7532,18 +7532,18 @@ var ExpressCheckoutService = /** @class */ (function () {
 }());
 
 var CheckoutGuard = /** @class */ (function () {
-    function CheckoutGuard(router, routingConfigService, checkoutConfigService, expressCheckoutService, cartService) {
+    function CheckoutGuard(router, routingConfigService, checkoutConfigService, expressCheckoutService, activeCartService) {
         this.router = router;
         this.routingConfigService = routingConfigService;
         this.checkoutConfigService = checkoutConfigService;
         this.expressCheckoutService = expressCheckoutService;
-        this.cartService = cartService;
+        this.activeCartService = activeCartService;
         this.firstStep$ = of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.checkoutConfigService.getFirstCheckoutStepRoute()).paths[0]));
     }
     CheckoutGuard.prototype.canActivate = function () {
         var _this = this;
         if (this.checkoutConfigService.isExpressCheckout() &&
-            !this.cartService.isGuestCart()) {
+            !this.activeCartService.isGuestCart()) {
             return this.expressCheckoutService.trySetDefaultCheckoutDetails().pipe(switchMap(function (expressCheckoutPossible) {
                 return expressCheckoutPossible
                     ? of(_this.router.parseUrl(_this.routingConfigService.getRouteConfig(_this.checkoutConfigService.getCheckoutStepRoute(CheckoutStepType.REVIEW_ORDER)).paths[0]))

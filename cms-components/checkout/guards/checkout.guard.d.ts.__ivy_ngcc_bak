@@ -4,12 +4,12 @@ import { Observable } from 'rxjs';
 import { CheckoutConfigService } from '../services/checkout-config.service';
 import { ExpressCheckoutService } from '../services/express-checkout.service';
 export declare class CheckoutGuard implements CanActivate {
-    private router;
-    private routingConfigService;
+    protected router: Router;
+    protected routingConfigService: RoutingConfigService;
     protected checkoutConfigService: CheckoutConfigService;
     protected expressCheckoutService: ExpressCheckoutService;
-    protected cartService: ActiveCartService;
+    protected activeCartService: ActiveCartService;
     private readonly firstStep$;
-    constructor(router: Router, routingConfigService: RoutingConfigService, checkoutConfigService: CheckoutConfigService, expressCheckoutService: ExpressCheckoutService, cartService: ActiveCartService);
+    constructor(router: Router, routingConfigService: RoutingConfigService, checkoutConfigService: CheckoutConfigService, expressCheckoutService: ExpressCheckoutService, activeCartService: ActiveCartService);
     canActivate(): Observable<boolean | UrlTree>;
 }
