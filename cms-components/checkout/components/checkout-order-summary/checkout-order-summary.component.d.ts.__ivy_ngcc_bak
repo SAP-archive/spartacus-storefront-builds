@@ -1,7 +1,7 @@
+import { ActiveCartService, Cart } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { CartService, Cart } from '@spartacus/core';
 export declare class CheckoutOrderSummaryComponent {
-    protected cartService: CartService;
+    protected activeCartService: ActiveCartService;
     cart$: Observable<Cart>;
-    constructor(cartService: CartService);
+    constructor(activeCartService: ActiveCartService);
 }

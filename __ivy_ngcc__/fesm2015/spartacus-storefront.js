@@ -15219,52 +15219,38 @@ CartNotEmptyGuard.ctorParameters = () => [
 CartNotEmptyGuard.ɵprov = ɵɵdefineInjectable({ factory: function CartNotEmptyGuard_Factory() { return new CartNotEmptyGuard(ɵɵinject(RoutingService), ɵɵinject(ActiveCartService)); }, token: CartNotEmptyGuard, providedIn: "root" });
 
 let CartPageLayoutHandler = class CartPageLayoutHandler {
-    constructor(cartService, selectiveCartService, featureConfig) {
-        this.cartService = cartService;
+    constructor(activeCartService, selectiveCartService) {
+        this.activeCartService = activeCartService;
         this.selectiveCartService = selectiveCartService;
-        this.featureConfig = featureConfig;
     }
     handle(slots$, pageTemplate, section) {
         if (pageTemplate === 'CartPageTemplate' && !section) {
-            if (this.featureConfig && this.featureConfig.isEnabled('saveForLater')) {
-                return combineLatest([
-                    slots$,
-                    this.cartService.getActive(),
-                    this.selectiveCartService.getCart(),
-                ]).pipe(map(([slots, cart, selectiveCart]) => {
-                    if (cart.totalItems) {
-                        return slots.filter(slot => slot !== 'EmptyCartMiddleContent');
-                    }
-                    else if (selectiveCart.totalItems) {
-                        return slots.filter(slot => slot !== 'EmptyCartMiddleContent' &&
-                            slot !== 'CenterRightContentSlot');
-                    }
-                    else {
-                        return slots.filter(slot => slot !== 'TopContent' && slot !== 'CenterRightContentSlot');
-                    }
-                }));
-            }
-            //TODO remove old code for #5958
-            return combineLatest([slots$, this.cartService.getActive()]).pipe(map(([slots, cart]) => {
+            return combineLatest([
+                slots$,
+                this.activeCartService.getActive(),
+                this.selectiveCartService.getCart(),
+            ]).pipe(map(([slots, cart, selectiveCart]) => {
                 if (cart.totalItems) {
                     return slots.filter(slot => slot !== 'EmptyCartMiddleContent');
+                }
+                else if (selectiveCart.totalItems) {
+                    return slots.filter(slot => slot !== 'EmptyCartMiddleContent' &&
+                        slot !== 'CenterRightContentSlot');
                 }
                 else {
                     return slots.filter(slot => slot !== 'TopContent' && slot !== 'CenterRightContentSlot');
                 }
             }));
-            ////TODO remove old code for #5958
         }
         return slots$;
     }
 };
-CartPageLayoutHandler.ɵfac = function CartPageLayoutHandler_Factory(t) { return new (t || CartPageLayoutHandler)(ɵngcc0.ɵɵinject(ɵngcc1.CartService), ɵngcc0.ɵɵinject(ɵngcc1.SelectiveCartService), ɵngcc0.ɵɵinject(ɵngcc1.FeatureConfigService)); };
+CartPageLayoutHandler.ɵfac = function CartPageLayoutHandler_Factory(t) { return new (t || CartPageLayoutHandler)(ɵngcc0.ɵɵinject(ɵngcc1.ActiveCartService), ɵngcc0.ɵɵinject(ɵngcc1.SelectiveCartService)); };
 CartPageLayoutHandler.ctorParameters = () => [
-    { type: CartService },
-    { type: SelectiveCartService },
-    { type: FeatureConfigService }
+    { type: ActiveCartService },
+    { type: SelectiveCartService }
 ];
-CartPageLayoutHandler.ɵprov = ɵɵdefineInjectable({ factory: function CartPageLayoutHandler_Factory() { return new CartPageLayoutHandler(ɵɵinject(CartService), ɵɵinject(SelectiveCartService), ɵɵinject(FeatureConfigService)); }, token: CartPageLayoutHandler, providedIn: "root" });
+CartPageLayoutHandler.ɵprov = ɵɵdefineInjectable({ factory: function CartPageLayoutHandler_Factory() { return new CartPageLayoutHandler(ɵɵinject(ActiveCartService), ɵɵinject(SelectiveCartService)); }, token: CartPageLayoutHandler, providedIn: "root" });
 
 let CartTotalsComponent = class CartTotalsComponent {
     constructor(activeCartService) {
@@ -15673,20 +15659,20 @@ CheckoutConfigService.ctorParameters = () => [
 CheckoutConfigService.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutConfigService_Factory() { return new CheckoutConfigService(ɵɵinject(CheckoutConfig), ɵɵinject(RoutingConfigService)); }, token: CheckoutConfigService, providedIn: "root" });
 
 let CheckoutAuthGuard = class CheckoutAuthGuard {
-    constructor(routingService, authService, authRedirectService, cartService, checkoutConfigService) {
+    constructor(routingService, authService, authRedirectService, checkoutConfigService, activeCartService) {
         this.routingService = routingService;
         this.authService = authService;
         this.authRedirectService = authRedirectService;
-        this.cartService = cartService;
         this.checkoutConfigService = checkoutConfigService;
+        this.activeCartService = activeCartService;
     }
     canActivate() {
         return combineLatest([
             this.authService.getUserToken(),
-            this.cartService.getAssignedUser(),
+            this.activeCartService.getAssignedUser(),
         ]).pipe(map(([token, user]) => {
             if (!token.access_token) {
-                if (this.cartService.isGuestCart()) {
+                if (this.activeCartService.isGuestCart()) {
                     return Boolean(user);
                 }
                 if (this.checkoutConfigService.isGuestCheckout()) {
@@ -15701,15 +15687,15 @@ let CheckoutAuthGuard = class CheckoutAuthGuard {
         }));
     }
 };
-CheckoutAuthGuard.ɵfac = function CheckoutAuthGuard_Factory(t) { return new (t || CheckoutAuthGuard)(ɵngcc0.ɵɵinject(ɵngcc1.RoutingService), ɵngcc0.ɵɵinject(ɵngcc1.AuthService), ɵngcc0.ɵɵinject(ɵngcc1.AuthRedirectService), ɵngcc0.ɵɵinject(ɵngcc1.CartService), ɵngcc0.ɵɵinject(CheckoutConfigService)); };
+CheckoutAuthGuard.ɵfac = function CheckoutAuthGuard_Factory(t) { return new (t || CheckoutAuthGuard)(ɵngcc0.ɵɵinject(ɵngcc1.RoutingService), ɵngcc0.ɵɵinject(ɵngcc1.AuthService), ɵngcc0.ɵɵinject(ɵngcc1.AuthRedirectService), ɵngcc0.ɵɵinject(CheckoutConfigService), ɵngcc0.ɵɵinject(ɵngcc1.ActiveCartService)); };
 CheckoutAuthGuard.ctorParameters = () => [
     { type: RoutingService },
     { type: AuthService },
     { type: AuthRedirectService },
-    { type: CartService },
-    { type: CheckoutConfigService }
+    { type: CheckoutConfigService },
+    { type: ActiveCartService }
 ];
-CheckoutAuthGuard.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutAuthGuard_Factory() { return new CheckoutAuthGuard(ɵɵinject(RoutingService), ɵɵinject(AuthService), ɵɵinject(AuthRedirectService), ɵɵinject(CartService), ɵɵinject(CheckoutConfigService)); }, token: CheckoutAuthGuard, providedIn: "root" });
+CheckoutAuthGuard.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutAuthGuard_Factory() { return new CheckoutAuthGuard(ɵɵinject(RoutingService), ɵɵinject(AuthService), ɵɵinject(AuthRedirectService), ɵɵinject(CheckoutConfigService), ɵɵinject(ActiveCartService)); }, token: CheckoutAuthGuard, providedIn: "root" });
 
 let CheckoutDetailsService = class CheckoutDetailsService {
     constructor(checkoutService, checkoutDeliveryService, checkoutPaymentService, activeCartService) {
@@ -15938,12 +15924,12 @@ CheckoutOrchestratorModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: functio
         ]] });
 
 let CheckoutOrderSummaryComponent = class CheckoutOrderSummaryComponent {
-    constructor(cartService) {
-        this.cartService = cartService;
-        this.cart$ = this.cartService.getActive();
+    constructor(activeCartService) {
+        this.activeCartService = activeCartService;
+        this.cart$ = this.activeCartService.getActive();
     }
 };
-CheckoutOrderSummaryComponent.ɵfac = function CheckoutOrderSummaryComponent_Factory(t) { return new (t || CheckoutOrderSummaryComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CartService)); };
+CheckoutOrderSummaryComponent.ɵfac = function CheckoutOrderSummaryComponent_Factory(t) { return new (t || CheckoutOrderSummaryComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService)); };
 CheckoutOrderSummaryComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CheckoutOrderSummaryComponent, selectors: [["cx-checkout-order-summary"]], decls: 2, vars: 3, consts: [[3, "cart"]], template: function CheckoutOrderSummaryComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelement(0, "cx-order-summary", 0);
         ɵngcc0.ɵɵpipe(1, "async");
@@ -15951,7 +15937,7 @@ CheckoutOrderSummaryComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Checko
         ɵngcc0.ɵɵproperty("cart", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.cart$));
     } }, directives: [OrderSummaryComponent], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2, changeDetection: 0 });
 CheckoutOrderSummaryComponent.ctorParameters = () => [
-    { type: CartService }
+    { type: ActiveCartService }
 ];
 
 let CheckoutOrderSummaryModule = class CheckoutOrderSummaryModule {
@@ -16021,15 +16007,15 @@ CheckoutProgressMobileBottomModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory:
         ]] });
 
 let CheckoutProgressMobileTopComponent = class CheckoutProgressMobileTopComponent {
-    constructor(config, routingService, cartService, routingConfigService) {
+    constructor(config, routingService, routingConfigService, activeCartService) {
         this.config = config;
         this.routingService = routingService;
-        this.cartService = cartService;
         this.routingConfigService = routingConfigService;
+        this.activeCartService = activeCartService;
     }
     ngOnInit() {
         this.steps = this.config.checkout.steps;
-        this.cart$ = this.cartService.getActive();
+        this.cart$ = this.activeCartService.getActive();
         this.routerState$ = this.routingService.getRouterState().pipe(tap(router => {
             this.activeStepUrl = router.state.context.id;
             this.steps.forEach((step, index) => {
@@ -16041,7 +16027,7 @@ let CheckoutProgressMobileTopComponent = class CheckoutProgressMobileTopComponen
         }));
     }
 };
-CheckoutProgressMobileTopComponent.ɵfac = function CheckoutProgressMobileTopComponent_Factory(t) { return new (t || CheckoutProgressMobileTopComponent)(ɵngcc0.ɵɵdirectiveInject(CheckoutConfig), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CartService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingConfigService)); };
+CheckoutProgressMobileTopComponent.ɵfac = function CheckoutProgressMobileTopComponent_Factory(t) { return new (t || CheckoutProgressMobileTopComponent)(ɵngcc0.ɵɵdirectiveInject(CheckoutConfig), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingConfigService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService)); };
 CheckoutProgressMobileTopComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CheckoutProgressMobileTopComponent, selectors: [["cx-checkout-progress-mobile-top"]], decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "cx-media"], ["class", "cx-list-media", 4, "ngIf"], [4, "ngFor", "ngForOf"], [1, "cx-list-media"], ["class", "cx-list-media is-active", 4, "ngIf"], [1, "btn", "btn-link", 3, "routerLink"], [1, "cx-list-media", "is-active"]], template: function CheckoutProgressMobileTopComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, CheckoutProgressMobileTopComponent_div_0_Template, 3, 3, "div", 0);
         ɵngcc0.ɵɵpipe(1, "async");
@@ -16051,8 +16037,8 @@ CheckoutProgressMobileTopComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: C
 CheckoutProgressMobileTopComponent.ctorParameters = () => [
     { type: CheckoutConfig },
     { type: RoutingService },
-    { type: CartService },
-    { type: RoutingConfigService }
+    { type: RoutingConfigService },
+    { type: ActiveCartService }
 ];
 
 let CheckoutProgressMobileTopModule = class CheckoutProgressMobileTopModule {
@@ -16840,7 +16826,7 @@ PaymentFormModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function Payment
         ]] });
 
 let PaymentMethodComponent = class PaymentMethodComponent {
-    constructor(userPaymentService, checkoutService, checkoutDeliveryService, checkoutPaymentService, globalMessageService, routingService, checkoutConfigService, activatedRoute, translation, cartService) {
+    constructor(userPaymentService, checkoutService, checkoutDeliveryService, checkoutPaymentService, globalMessageService, routingService, checkoutConfigService, activatedRoute, translation, activeCartService) {
         this.userPaymentService = userPaymentService;
         this.checkoutService = checkoutService;
         this.checkoutDeliveryService = checkoutDeliveryService;
@@ -16850,7 +16836,7 @@ let PaymentMethodComponent = class PaymentMethodComponent {
         this.checkoutConfigService = checkoutConfigService;
         this.activatedRoute = activatedRoute;
         this.translation = translation;
-        this.cartService = cartService;
+        this.activeCartService = activeCartService;
         this.iconTypes = ICON_TYPE;
         this.newPaymentFormManuallyOpened = false;
         this.isGuestCheckout = false;
@@ -16858,7 +16844,7 @@ let PaymentMethodComponent = class PaymentMethodComponent {
     ngOnInit() {
         this.allowRouting = false;
         this.isLoading$ = this.userPaymentService.getPaymentMethodsLoading();
-        if (!this.cartService.isGuestCart()) {
+        if (!this.activeCartService.isGuestCart()) {
             this.userPaymentService.loadPaymentMethods();
         }
         else {
@@ -17013,7 +16999,7 @@ let PaymentMethodComponent = class PaymentMethodComponent {
         this.selectPaymentMethod(paymentDetails);
     }
 };
-PaymentMethodComponent.ɵfac = function PaymentMethodComponent_Factory(t) { return new (t || PaymentMethodComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserPaymentService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutPaymentService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.GlobalMessageService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(CheckoutConfigService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.TranslationService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CartService)); };
+PaymentMethodComponent.ɵfac = function PaymentMethodComponent_Factory(t) { return new (t || PaymentMethodComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserPaymentService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutPaymentService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.GlobalMessageService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(CheckoutConfigService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.TranslationService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService)); };
 PaymentMethodComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: PaymentMethodComponent, selectors: [["cx-payment-method"]], decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "cx-checkout-title", "d-none", "d-lg-block", "d-xl-block"], [4, "ngIf", "ngIfElse"], ["loading", ""], ["newPaymentForm", ""], [1, "cx-checkout-text"], [1, "cx-checkout-btns", "row"], [1, "col-md-12", "col-lg-6"], [1, "btn", "btn-block", "btn-action", 3, "click"], [1, "cx-checkout-body", "row"], ["class", "cx-payment-card col-md-12 col-lg-6", 4, "ngFor", "ngForOf"], [1, "row", "cx-checkout-btns"], [1, "btn", "btn-block", "btn-primary", 3, "disabled", "click"], [1, "cx-payment-card", "col-md-12", "col-lg-6"], [1, "cx-payment-card-inner"], [3, "border", "fitToContainer", "content", "sendCard"], [3, "paymentMethodsCount", "setAsDefaultField", "setPaymentDetails", "closeForm", "goBack"], [1, "cx-spinner"]], template: function PaymentMethodComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, PaymentMethodComponent_ng_container_0_Template, 8, 7, "ng-container", 0);
         ɵngcc0.ɵɵpipe(1, "async");
@@ -17032,7 +17018,7 @@ PaymentMethodComponent.ctorParameters = () => [
     { type: CheckoutConfigService },
     { type: ActivatedRoute },
     { type: TranslationService },
-    { type: CartService }
+    { type: ActiveCartService }
 ];
 
 let PaymentMethodModule = class PaymentMethodModule {
@@ -28018,7 +28004,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: ɵngcc1.CartService }, { type: ɵngcc1.SelectiveCartService }, { type: ɵngcc1.FeatureConfigService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.ActiveCartService }, { type: ɵngcc1.SelectiveCartService }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CartTotalsComponent, [{
         type: Component,
         args: [{
@@ -28208,7 +28194,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: ɵngcc1.RoutingService }, { type: ɵngcc1.AuthService }, { type: ɵngcc1.AuthRedirectService }, { type: ɵngcc1.CartService }, { type: CheckoutConfigService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.RoutingService }, { type: ɵngcc1.AuthService }, { type: ɵngcc1.AuthRedirectService }, { type: CheckoutConfigService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CheckoutDetailsService, [{
         type: Injectable,
         args: [{
@@ -28264,7 +28250,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 template: "<cx-order-summary [cart]=\"cart$ | async\"></cx-order-summary>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ɵngcc1.CartService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.ActiveCartService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CheckoutOrderSummaryModule, { declarations: function () { return [CheckoutOrderSummaryComponent]; }, imports: function () { return [CommonModule,
         CartSharedModule, ɵngcc1.ConfigModule]; }, exports: function () { return [CheckoutOrderSummaryComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CheckoutOrderSummaryModule, [{
@@ -28326,7 +28312,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 selector: 'cx-checkout-progress-mobile-top',
                 template: "<div *ngIf=\"routerState$ | async as routerState\">\n  <div *ngIf=\"cart$ | async as cart\">\n    <div class=\"cx-media\">\n      <div class=\"cx-list-media\" *ngIf=\"cart?.totalItems && cart?.subTotal\">\n        {{ 'cartItems.cartTotal' | cxTranslate: { count: cart.totalItems } }}:\n        {{ cart.subTotal.formattedValue }}\n      </div>\n      <div *ngFor=\"let step of steps; let i = index\">\n        <div class=\"cx-list-media\" *ngIf=\"i < activeStepIndex\">\n          <div>{{ i + 1 }}. {{ step.name | cxTranslate }}</div>\n          <button\n            class=\"btn btn-link\"\n            [routerLink]=\"{ cxRoute: step.routeName } | cxUrl\"\n          >\n            {{ 'common.edit' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"cx-list-media is-active\" *ngIf=\"i === activeStepIndex\">\n          <div>{{ i + 1 }}. {{ step.name | cxTranslate }}</div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
             }]
-    }], function () { return [{ type: CheckoutConfig }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.CartService }, { type: ɵngcc1.RoutingConfigService }]; }, null); })();
+    }], function () { return [{ type: CheckoutConfig }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.RoutingConfigService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CheckoutProgressMobileTopModule, { declarations: function () { return [CheckoutProgressMobileTopComponent]; }, imports: function () { return [CommonModule,
         UrlModule,
         I18nModule,
@@ -28536,7 +28522,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 template: "<ng-container *ngIf=\"existingPaymentMethods$ | async as existingPaymentMethods\">\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'paymentForm.payment' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        (existingPaymentMethods$ | async).length &&\n          !newPaymentFormManuallyOpened;\n        else newPaymentForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'paymentForm.choosePaymentMethod' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewPaymentForm()\"\n          >\n            {{ 'paymentForm.addNewPayment' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-payment-card col-md-12 col-lg-6\"\n          *ngFor=\"let method of existingPaymentMethods; let i = index\"\n        >\n          <div class=\"cx-payment-card-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"getCardContent(method) | async\"\n              (sendCard)=\"paymentMethodSelected(method)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"row cx-checkout-btns\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'common.back' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-primary\"\n            [disabled]=\"!selectedPayment\"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newPaymentForm>\n      <cx-payment-form\n        (setPaymentDetails)=\"setPaymentDetails($event)\"\n        (closeForm)=\"hideNewPaymentForm()\"\n        (goBack)=\"back()\"\n        [paymentMethodsCount]=\"existingPaymentMethods?.length || 0\"\n        [setAsDefaultField]=\"!isGuestCheckout\"\n      ></cx-payment-form>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n  </ng-template>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ɵngcc1.UserPaymentService }, { type: ɵngcc1.CheckoutService }, { type: ɵngcc1.CheckoutDeliveryService }, { type: ɵngcc1.CheckoutPaymentService }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc1.RoutingService }, { type: CheckoutConfigService }, { type: ɵngcc5.ActivatedRoute }, { type: ɵngcc1.TranslationService }, { type: ɵngcc1.CartService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.UserPaymentService }, { type: ɵngcc1.CheckoutService }, { type: ɵngcc1.CheckoutDeliveryService }, { type: ɵngcc1.CheckoutPaymentService }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc1.RoutingService }, { type: CheckoutConfigService }, { type: ɵngcc5.ActivatedRoute }, { type: ɵngcc1.TranslationService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(PaymentMethodModule, { declarations: function () { return [PaymentMethodComponent]; }, imports: function () { return [CommonModule,
         RouterModule,
         PaymentFormModule,

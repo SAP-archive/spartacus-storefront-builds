@@ -6759,56 +6759,39 @@ var CartNotEmptyGuard = /** @class */ (function () {
 }());
 
 var CartPageLayoutHandler = /** @class */ (function () {
-    function CartPageLayoutHandler(cartService, selectiveCartService, featureConfig) {
-        this.cartService = cartService;
+    function CartPageLayoutHandler(activeCartService, selectiveCartService) {
+        this.activeCartService = activeCartService;
         this.selectiveCartService = selectiveCartService;
-        this.featureConfig = featureConfig;
     }
     CartPageLayoutHandler.prototype.handle = function (slots$, pageTemplate, section) {
         if (pageTemplate === 'CartPageTemplate' && !section) {
-            if (this.featureConfig && this.featureConfig.isEnabled('saveForLater')) {
-                return combineLatest([
-                    slots$,
-                    this.cartService.getActive(),
-                    this.selectiveCartService.getCart(),
-                ]).pipe(map(function (_a) {
-                    var _b = __read(_a, 3), slots = _b[0], cart = _b[1], selectiveCart = _b[2];
-                    if (cart.totalItems) {
-                        return slots.filter(function (slot) { return slot !== 'EmptyCartMiddleContent'; });
-                    }
-                    else if (selectiveCart.totalItems) {
-                        return slots.filter(function (slot) {
-                            return slot !== 'EmptyCartMiddleContent' &&
-                                slot !== 'CenterRightContentSlot';
-                        });
-                    }
-                    else {
-                        return slots.filter(function (slot) {
-                            return slot !== 'TopContent' && slot !== 'CenterRightContentSlot';
-                        });
-                    }
-                }));
-            }
-            //TODO remove old code for #5958
-            return combineLatest([slots$, this.cartService.getActive()]).pipe(map(function (_a) {
-                var _b = __read(_a, 2), slots = _b[0], cart = _b[1];
+            return combineLatest([
+                slots$,
+                this.activeCartService.getActive(),
+                this.selectiveCartService.getCart(),
+            ]).pipe(map(function (_a) {
+                var _b = __read(_a, 3), slots = _b[0], cart = _b[1], selectiveCart = _b[2];
                 if (cart.totalItems) {
                     return slots.filter(function (slot) { return slot !== 'EmptyCartMiddleContent'; });
+                }
+                else if (selectiveCart.totalItems) {
+                    return slots.filter(function (slot) {
+                        return slot !== 'EmptyCartMiddleContent' &&
+                            slot !== 'CenterRightContentSlot';
+                    });
                 }
                 else {
                     return slots.filter(function (slot) { return slot !== 'TopContent' && slot !== 'CenterRightContentSlot'; });
                 }
             }));
-            ////TODO remove old code for #5958
         }
         return slots$;
     };
     CartPageLayoutHandler.ctorParameters = function () { return [
-        { type: CartService },
-        { type: SelectiveCartService },
-        { type: FeatureConfigService }
+        { type: ActiveCartService },
+        { type: SelectiveCartService }
     ]; };
-    CartPageLayoutHandler.ɵprov = ɵɵdefineInjectable({ factory: function CartPageLayoutHandler_Factory() { return new CartPageLayoutHandler(ɵɵinject(CartService), ɵɵinject(SelectiveCartService), ɵɵinject(FeatureConfigService)); }, token: CartPageLayoutHandler, providedIn: "root" });
+    CartPageLayoutHandler.ɵprov = ɵɵdefineInjectable({ factory: function CartPageLayoutHandler_Factory() { return new CartPageLayoutHandler(ɵɵinject(ActiveCartService), ɵɵinject(SelectiveCartService)); }, token: CartPageLayoutHandler, providedIn: "root" });
     CartPageLayoutHandler = __decorate([
         Injectable({
             providedIn: 'root',
@@ -7273,22 +7256,22 @@ var CheckoutConfigService = /** @class */ (function () {
 }());
 
 var CheckoutAuthGuard = /** @class */ (function () {
-    function CheckoutAuthGuard(routingService, authService, authRedirectService, cartService, checkoutConfigService) {
+    function CheckoutAuthGuard(routingService, authService, authRedirectService, checkoutConfigService, activeCartService) {
         this.routingService = routingService;
         this.authService = authService;
         this.authRedirectService = authRedirectService;
-        this.cartService = cartService;
         this.checkoutConfigService = checkoutConfigService;
+        this.activeCartService = activeCartService;
     }
     CheckoutAuthGuard.prototype.canActivate = function () {
         var _this = this;
         return combineLatest([
             this.authService.getUserToken(),
-            this.cartService.getAssignedUser(),
+            this.activeCartService.getAssignedUser(),
         ]).pipe(map(function (_a) {
             var _b = __read(_a, 2), token = _b[0], user = _b[1];
             if (!token.access_token) {
-                if (_this.cartService.isGuestCart()) {
+                if (_this.activeCartService.isGuestCart()) {
                     return Boolean(user);
                 }
                 if (_this.checkoutConfigService.isGuestCheckout()) {
@@ -7306,10 +7289,10 @@ var CheckoutAuthGuard = /** @class */ (function () {
         { type: RoutingService },
         { type: AuthService },
         { type: AuthRedirectService },
-        { type: CartService },
-        { type: CheckoutConfigService }
+        { type: CheckoutConfigService },
+        { type: ActiveCartService }
     ]; };
-    CheckoutAuthGuard.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutAuthGuard_Factory() { return new CheckoutAuthGuard(ɵɵinject(RoutingService), ɵɵinject(AuthService), ɵɵinject(AuthRedirectService), ɵɵinject(CartService), ɵɵinject(CheckoutConfigService)); }, token: CheckoutAuthGuard, providedIn: "root" });
+    CheckoutAuthGuard.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutAuthGuard_Factory() { return new CheckoutAuthGuard(ɵɵinject(RoutingService), ɵɵinject(AuthService), ɵɵinject(AuthRedirectService), ɵɵinject(CheckoutConfigService), ɵɵinject(ActiveCartService)); }, token: CheckoutAuthGuard, providedIn: "root" });
     CheckoutAuthGuard = __decorate([
         Injectable({
             providedIn: 'root',
@@ -7608,12 +7591,12 @@ var CheckoutOrchestratorModule = /** @class */ (function () {
 }());
 
 var CheckoutOrderSummaryComponent = /** @class */ (function () {
-    function CheckoutOrderSummaryComponent(cartService) {
-        this.cartService = cartService;
-        this.cart$ = this.cartService.getActive();
+    function CheckoutOrderSummaryComponent(activeCartService) {
+        this.activeCartService = activeCartService;
+        this.cart$ = this.activeCartService.getActive();
     }
     CheckoutOrderSummaryComponent.ctorParameters = function () { return [
-        { type: CartService }
+        { type: ActiveCartService }
     ]; };
     CheckoutOrderSummaryComponent = __decorate([
         Component({
@@ -7711,16 +7694,16 @@ var CheckoutProgressMobileBottomModule = /** @class */ (function () {
 }());
 
 var CheckoutProgressMobileTopComponent = /** @class */ (function () {
-    function CheckoutProgressMobileTopComponent(config, routingService, cartService, routingConfigService) {
+    function CheckoutProgressMobileTopComponent(config, routingService, routingConfigService, activeCartService) {
         this.config = config;
         this.routingService = routingService;
-        this.cartService = cartService;
         this.routingConfigService = routingConfigService;
+        this.activeCartService = activeCartService;
     }
     CheckoutProgressMobileTopComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.steps = this.config.checkout.steps;
-        this.cart$ = this.cartService.getActive();
+        this.cart$ = this.activeCartService.getActive();
         this.routerState$ = this.routingService.getRouterState().pipe(tap(function (router) {
             _this.activeStepUrl = router.state.context.id;
             _this.steps.forEach(function (step, index) {
@@ -7734,8 +7717,8 @@ var CheckoutProgressMobileTopComponent = /** @class */ (function () {
     CheckoutProgressMobileTopComponent.ctorParameters = function () { return [
         { type: CheckoutConfig },
         { type: RoutingService },
-        { type: CartService },
-        { type: RoutingConfigService }
+        { type: RoutingConfigService },
+        { type: ActiveCartService }
     ]; };
     CheckoutProgressMobileTopComponent = __decorate([
         Component({
@@ -8378,7 +8361,7 @@ var PaymentFormModule = /** @class */ (function () {
 }());
 
 var PaymentMethodComponent = /** @class */ (function () {
-    function PaymentMethodComponent(userPaymentService, checkoutService, checkoutDeliveryService, checkoutPaymentService, globalMessageService, routingService, checkoutConfigService, activatedRoute, translation, cartService) {
+    function PaymentMethodComponent(userPaymentService, checkoutService, checkoutDeliveryService, checkoutPaymentService, globalMessageService, routingService, checkoutConfigService, activatedRoute, translation, activeCartService) {
         this.userPaymentService = userPaymentService;
         this.checkoutService = checkoutService;
         this.checkoutDeliveryService = checkoutDeliveryService;
@@ -8388,7 +8371,7 @@ var PaymentMethodComponent = /** @class */ (function () {
         this.checkoutConfigService = checkoutConfigService;
         this.activatedRoute = activatedRoute;
         this.translation = translation;
-        this.cartService = cartService;
+        this.activeCartService = activeCartService;
         this.iconTypes = ICON_TYPE;
         this.newPaymentFormManuallyOpened = false;
         this.isGuestCheckout = false;
@@ -8397,7 +8380,7 @@ var PaymentMethodComponent = /** @class */ (function () {
         var _this = this;
         this.allowRouting = false;
         this.isLoading$ = this.userPaymentService.getPaymentMethodsLoading();
-        if (!this.cartService.isGuestCart()) {
+        if (!this.activeCartService.isGuestCart()) {
             this.userPaymentService.loadPaymentMethods();
         }
         else {
@@ -8564,7 +8547,7 @@ var PaymentMethodComponent = /** @class */ (function () {
         { type: CheckoutConfigService },
         { type: ActivatedRoute },
         { type: TranslationService },
-        { type: CartService }
+        { type: ActiveCartService }
     ]; };
     PaymentMethodComponent = __decorate([
         Component({

@@ -6944,56 +6944,39 @@
     }());
 
     var CartPageLayoutHandler = /** @class */ (function () {
-        function CartPageLayoutHandler(cartService, selectiveCartService, featureConfig) {
-            this.cartService = cartService;
+        function CartPageLayoutHandler(activeCartService, selectiveCartService) {
+            this.activeCartService = activeCartService;
             this.selectiveCartService = selectiveCartService;
-            this.featureConfig = featureConfig;
         }
         CartPageLayoutHandler.prototype.handle = function (slots$, pageTemplate, section) {
             if (pageTemplate === 'CartPageTemplate' && !section) {
-                if (this.featureConfig && this.featureConfig.isEnabled('saveForLater')) {
-                    return rxjs.combineLatest([
-                        slots$,
-                        this.cartService.getActive(),
-                        this.selectiveCartService.getCart(),
-                    ]).pipe(operators.map(function (_a) {
-                        var _b = __read(_a, 3), slots = _b[0], cart = _b[1], selectiveCart = _b[2];
-                        if (cart.totalItems) {
-                            return slots.filter(function (slot) { return slot !== 'EmptyCartMiddleContent'; });
-                        }
-                        else if (selectiveCart.totalItems) {
-                            return slots.filter(function (slot) {
-                                return slot !== 'EmptyCartMiddleContent' &&
-                                    slot !== 'CenterRightContentSlot';
-                            });
-                        }
-                        else {
-                            return slots.filter(function (slot) {
-                                return slot !== 'TopContent' && slot !== 'CenterRightContentSlot';
-                            });
-                        }
-                    }));
-                }
-                //TODO remove old code for #5958
-                return rxjs.combineLatest([slots$, this.cartService.getActive()]).pipe(operators.map(function (_a) {
-                    var _b = __read(_a, 2), slots = _b[0], cart = _b[1];
+                return rxjs.combineLatest([
+                    slots$,
+                    this.activeCartService.getActive(),
+                    this.selectiveCartService.getCart(),
+                ]).pipe(operators.map(function (_a) {
+                    var _b = __read(_a, 3), slots = _b[0], cart = _b[1], selectiveCart = _b[2];
                     if (cart.totalItems) {
                         return slots.filter(function (slot) { return slot !== 'EmptyCartMiddleContent'; });
+                    }
+                    else if (selectiveCart.totalItems) {
+                        return slots.filter(function (slot) {
+                            return slot !== 'EmptyCartMiddleContent' &&
+                                slot !== 'CenterRightContentSlot';
+                        });
                     }
                     else {
                         return slots.filter(function (slot) { return slot !== 'TopContent' && slot !== 'CenterRightContentSlot'; });
                     }
                 }));
-                ////TODO remove old code for #5958
             }
             return slots$;
         };
         CartPageLayoutHandler.ctorParameters = function () { return [
-            { type: core$1.CartService },
-            { type: core$1.SelectiveCartService },
-            { type: core$1.FeatureConfigService }
+            { type: core$1.ActiveCartService },
+            { type: core$1.SelectiveCartService }
         ]; };
-        CartPageLayoutHandler.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CartPageLayoutHandler_Factory() { return new CartPageLayoutHandler(core["ɵɵinject"](core$1.CartService), core["ɵɵinject"](core$1.SelectiveCartService), core["ɵɵinject"](core$1.FeatureConfigService)); }, token: CartPageLayoutHandler, providedIn: "root" });
+        CartPageLayoutHandler.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CartPageLayoutHandler_Factory() { return new CartPageLayoutHandler(core["ɵɵinject"](core$1.ActiveCartService), core["ɵɵinject"](core$1.SelectiveCartService)); }, token: CartPageLayoutHandler, providedIn: "root" });
         CartPageLayoutHandler = __decorate([
             core.Injectable({
                 providedIn: 'root',
@@ -7458,22 +7441,22 @@
     }());
 
     var CheckoutAuthGuard = /** @class */ (function () {
-        function CheckoutAuthGuard(routingService, authService, authRedirectService, cartService, checkoutConfigService) {
+        function CheckoutAuthGuard(routingService, authService, authRedirectService, checkoutConfigService, activeCartService) {
             this.routingService = routingService;
             this.authService = authService;
             this.authRedirectService = authRedirectService;
-            this.cartService = cartService;
             this.checkoutConfigService = checkoutConfigService;
+            this.activeCartService = activeCartService;
         }
         CheckoutAuthGuard.prototype.canActivate = function () {
             var _this = this;
             return rxjs.combineLatest([
                 this.authService.getUserToken(),
-                this.cartService.getAssignedUser(),
+                this.activeCartService.getAssignedUser(),
             ]).pipe(operators.map(function (_a) {
                 var _b = __read(_a, 2), token = _b[0], user = _b[1];
                 if (!token.access_token) {
-                    if (_this.cartService.isGuestCart()) {
+                    if (_this.activeCartService.isGuestCart()) {
                         return Boolean(user);
                     }
                     if (_this.checkoutConfigService.isGuestCheckout()) {
@@ -7491,10 +7474,10 @@
             { type: core$1.RoutingService },
             { type: core$1.AuthService },
             { type: core$1.AuthRedirectService },
-            { type: core$1.CartService },
-            { type: CheckoutConfigService }
+            { type: CheckoutConfigService },
+            { type: core$1.ActiveCartService }
         ]; };
-        CheckoutAuthGuard.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CheckoutAuthGuard_Factory() { return new CheckoutAuthGuard(core["ɵɵinject"](core$1.RoutingService), core["ɵɵinject"](core$1.AuthService), core["ɵɵinject"](core$1.AuthRedirectService), core["ɵɵinject"](core$1.CartService), core["ɵɵinject"](CheckoutConfigService)); }, token: CheckoutAuthGuard, providedIn: "root" });
+        CheckoutAuthGuard.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CheckoutAuthGuard_Factory() { return new CheckoutAuthGuard(core["ɵɵinject"](core$1.RoutingService), core["ɵɵinject"](core$1.AuthService), core["ɵɵinject"](core$1.AuthRedirectService), core["ɵɵinject"](CheckoutConfigService), core["ɵɵinject"](core$1.ActiveCartService)); }, token: CheckoutAuthGuard, providedIn: "root" });
         CheckoutAuthGuard = __decorate([
             core.Injectable({
                 providedIn: 'root',
@@ -7793,12 +7776,12 @@
     }());
 
     var CheckoutOrderSummaryComponent = /** @class */ (function () {
-        function CheckoutOrderSummaryComponent(cartService) {
-            this.cartService = cartService;
-            this.cart$ = this.cartService.getActive();
+        function CheckoutOrderSummaryComponent(activeCartService) {
+            this.activeCartService = activeCartService;
+            this.cart$ = this.activeCartService.getActive();
         }
         CheckoutOrderSummaryComponent.ctorParameters = function () { return [
-            { type: core$1.CartService }
+            { type: core$1.ActiveCartService }
         ]; };
         CheckoutOrderSummaryComponent = __decorate([
             core.Component({
@@ -7896,16 +7879,16 @@
     }());
 
     var CheckoutProgressMobileTopComponent = /** @class */ (function () {
-        function CheckoutProgressMobileTopComponent(config, routingService, cartService, routingConfigService) {
+        function CheckoutProgressMobileTopComponent(config, routingService, routingConfigService, activeCartService) {
             this.config = config;
             this.routingService = routingService;
-            this.cartService = cartService;
             this.routingConfigService = routingConfigService;
+            this.activeCartService = activeCartService;
         }
         CheckoutProgressMobileTopComponent.prototype.ngOnInit = function () {
             var _this = this;
             this.steps = this.config.checkout.steps;
-            this.cart$ = this.cartService.getActive();
+            this.cart$ = this.activeCartService.getActive();
             this.routerState$ = this.routingService.getRouterState().pipe(operators.tap(function (router) {
                 _this.activeStepUrl = router.state.context.id;
                 _this.steps.forEach(function (step, index) {
@@ -7919,8 +7902,8 @@
         CheckoutProgressMobileTopComponent.ctorParameters = function () { return [
             { type: CheckoutConfig },
             { type: core$1.RoutingService },
-            { type: core$1.CartService },
-            { type: core$1.RoutingConfigService }
+            { type: core$1.RoutingConfigService },
+            { type: core$1.ActiveCartService }
         ]; };
         CheckoutProgressMobileTopComponent = __decorate([
             core.Component({
@@ -8563,7 +8546,7 @@
     }());
 
     var PaymentMethodComponent = /** @class */ (function () {
-        function PaymentMethodComponent(userPaymentService, checkoutService, checkoutDeliveryService, checkoutPaymentService, globalMessageService, routingService, checkoutConfigService, activatedRoute, translation, cartService) {
+        function PaymentMethodComponent(userPaymentService, checkoutService, checkoutDeliveryService, checkoutPaymentService, globalMessageService, routingService, checkoutConfigService, activatedRoute, translation, activeCartService) {
             this.userPaymentService = userPaymentService;
             this.checkoutService = checkoutService;
             this.checkoutDeliveryService = checkoutDeliveryService;
@@ -8573,7 +8556,7 @@
             this.checkoutConfigService = checkoutConfigService;
             this.activatedRoute = activatedRoute;
             this.translation = translation;
-            this.cartService = cartService;
+            this.activeCartService = activeCartService;
             this.iconTypes = exports.ICON_TYPE;
             this.newPaymentFormManuallyOpened = false;
             this.isGuestCheckout = false;
@@ -8582,7 +8565,7 @@
             var _this = this;
             this.allowRouting = false;
             this.isLoading$ = this.userPaymentService.getPaymentMethodsLoading();
-            if (!this.cartService.isGuestCart()) {
+            if (!this.activeCartService.isGuestCart()) {
                 this.userPaymentService.loadPaymentMethods();
             }
             else {
@@ -8749,7 +8732,7 @@
             { type: CheckoutConfigService },
             { type: router.ActivatedRoute },
             { type: core$1.TranslationService },
-            { type: core$1.CartService }
+            { type: core$1.ActiveCartService }
         ]; };
         PaymentMethodComponent = __decorate([
             core.Component({
