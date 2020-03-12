@@ -6966,14 +6966,14 @@ function ProductListComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 1, ctx_r1073.viewMode$));
 } }
 function ProductScrollComponent_ng_container_0_cx_product_grid_item_3_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelement(0, "cx-product-grid-item", 7);
+    ɵngcc0.ɵɵelement(0, "cx-product-grid-item", 8);
 } if (rf & 2) {
     const product_r1107 = ctx.$implicit;
     ɵngcc0.ɵɵproperty("product", product_r1107);
 } }
 function ProductScrollComponent_ng_container_0_div_5_Template(rf, ctx) { if (rf & 1) {
     const _r1109 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "div", 8);
+    ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_0_div_5_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1109); const ctx_r1108 = ɵngcc0.ɵɵnextContext(2); return ctx_r1108.scrollToTop(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
@@ -6984,7 +6984,7 @@ function ProductScrollComponent_ng_container_0_div_5_Template(rf, ctx) { if (rf 
 } }
 function ProductScrollComponent_ng_container_0_div_6_Template(rf, ctx) { if (rf & 1) {
     const _r1111 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "div", 9);
+    ɵngcc0.ɵɵelementStart(0, "div", 10);
     ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_0_div_6_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1111); const ctx_r1110 = ɵngcc0.ɵɵnextContext(2); return ctx_r1110.loadNextPage((ctx_r1110.model == null ? null : ctx_r1110.model.pagination == null ? null : ctx_r1110.model.pagination.currentPage) + 1); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
@@ -6994,7 +6994,7 @@ function ProductScrollComponent_ng_container_0_div_6_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "productList.showMoreBtn"), " ");
 } }
 function ProductScrollComponent_ng_container_0_div_7_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 10);
+    ɵngcc0.ɵɵelementStart(0, "div", 11);
     ɵngcc0.ɵɵelement(1, "cx-spinner");
     ɵngcc0.ɵɵelementEnd();
 } }
@@ -7006,11 +7006,11 @@ function ProductScrollComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(2, "div", 2);
     ɵngcc0.ɵɵtemplate(3, ProductScrollComponent_ng_container_0_cx_product_grid_item_3_Template, 1, 1, "cx-product-grid-item", 3);
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(4, "div");
-    ɵngcc0.ɵɵtemplate(5, ProductScrollComponent_ng_container_0_div_5_Template, 3, 3, "div", 4);
-    ɵngcc0.ɵɵtemplate(6, ProductScrollComponent_ng_container_0_div_6_Template, 3, 3, "div", 5);
+    ɵngcc0.ɵɵelementStart(4, "div", 4);
+    ɵngcc0.ɵɵtemplate(5, ProductScrollComponent_ng_container_0_div_5_Template, 3, 3, "div", 5);
+    ɵngcc0.ɵɵtemplate(6, ProductScrollComponent_ng_container_0_div_6_Template, 3, 3, "div", 6);
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵtemplate(7, ProductScrollComponent_ng_container_0_div_7_Template, 2, 0, "div", 6);
+    ɵngcc0.ɵɵtemplate(7, ProductScrollComponent_ng_container_0_div_7_Template, 2, 0, "div", 7);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
@@ -7020,7 +7020,7 @@ function ProductScrollComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵproperty("ngForOf", ctx_r1101.model == null ? null : ctx_r1101.model.products);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵclassMap(!ctx_r1101.isLastPage && (ctx_r1101.model == null ? null : ctx_r1101.model.pagination == null ? null : ctx_r1101.model.pagination.currentPage) > 0 ? "cx-double-btn-container grid-btn-padding" : "cx-single-btn-container grid-btn-padding");
+    ɵngcc0.ɵɵproperty("className", !ctx_r1101.isLastPage && (ctx_r1101.model == null ? null : ctx_r1101.model.pagination == null ? null : ctx_r1101.model.pagination.currentPage) > 0 ? "cx-double-btn-container grid-btn-padding" : "cx-single-btn-container grid-btn-padding");
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("ngIf", (ctx_r1101.isMaxProducts || ctx_r1101.isLastPage) && (ctx_r1101.model == null ? null : ctx_r1101.model.pagination == null ? null : ctx_r1101.model.pagination.currentPage) > 0);
     ɵngcc0.ɵɵadvance(1);
@@ -7029,14 +7029,14 @@ function ProductScrollComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵproperty("ngIf", ctx_r1101.appendProducts);
 } }
 function ProductScrollComponent_ng_container_1_cx_product_list_item_2_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelement(0, "cx-product-list-item", 12);
+    ɵngcc0.ɵɵelement(0, "cx-product-list-item", 13);
 } if (rf & 2) {
     const product_r1118 = ctx.$implicit;
     ɵngcc0.ɵɵproperty("product", product_r1118);
 } }
 function ProductScrollComponent_ng_container_1_div_4_Template(rf, ctx) { if (rf & 1) {
     const _r1120 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "div", 8);
+    ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_1_div_4_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1120); const ctx_r1119 = ɵngcc0.ɵɵnextContext(2); return ctx_r1119.scrollToTop(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
@@ -7047,7 +7047,7 @@ function ProductScrollComponent_ng_container_1_div_4_Template(rf, ctx) { if (rf 
 } }
 function ProductScrollComponent_ng_container_1_div_5_Template(rf, ctx) { if (rf & 1) {
     const _r1122 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "div", 9);
+    ɵngcc0.ɵɵelementStart(0, "div", 10);
     ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_1_div_5_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1122); const ctx_r1121 = ɵngcc0.ɵɵnextContext(2); return ctx_r1121.loadNextPage((ctx_r1121.model == null ? null : ctx_r1121.model.pagination == null ? null : ctx_r1121.model.pagination.currentPage) + 1); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
@@ -7057,7 +7057,7 @@ function ProductScrollComponent_ng_container_1_div_5_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "productList.showMoreBtn"), " ");
 } }
 function ProductScrollComponent_ng_container_1_div_6_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 10);
+    ɵngcc0.ɵɵelementStart(0, "div", 11);
     ɵngcc0.ɵɵelement(1, "cx-spinner");
     ɵngcc0.ɵɵelementEnd();
 } }
@@ -7066,12 +7066,12 @@ function ProductScrollComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 1);
     ɵngcc0.ɵɵlistener("scrolled", function ProductScrollComponent_ng_container_1_Template_div_scrolled_1_listener() { ɵngcc0.ɵɵrestoreView(_r1124); const ctx_r1123 = ɵngcc0.ɵɵnextContext(); return ctx_r1123.scrollPage((ctx_r1123.model == null ? null : ctx_r1123.model.pagination == null ? null : ctx_r1123.model.pagination.currentPage) + 1); });
-    ɵngcc0.ɵɵtemplate(2, ProductScrollComponent_ng_container_1_cx_product_list_item_2_Template, 1, 1, "cx-product-list-item", 11);
-    ɵngcc0.ɵɵelementStart(3, "div");
-    ɵngcc0.ɵɵtemplate(4, ProductScrollComponent_ng_container_1_div_4_Template, 3, 3, "div", 4);
-    ɵngcc0.ɵɵtemplate(5, ProductScrollComponent_ng_container_1_div_5_Template, 3, 3, "div", 5);
+    ɵngcc0.ɵɵtemplate(2, ProductScrollComponent_ng_container_1_cx_product_list_item_2_Template, 1, 1, "cx-product-list-item", 12);
+    ɵngcc0.ɵɵelementStart(3, "div", 4);
+    ɵngcc0.ɵɵtemplate(4, ProductScrollComponent_ng_container_1_div_4_Template, 3, 3, "div", 5);
+    ɵngcc0.ɵɵtemplate(5, ProductScrollComponent_ng_container_1_div_5_Template, 3, 3, "div", 6);
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵtemplate(6, ProductScrollComponent_ng_container_1_div_6_Template, 2, 0, "div", 6);
+    ɵngcc0.ɵɵtemplate(6, ProductScrollComponent_ng_container_1_div_6_Template, 2, 0, "div", 7);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
@@ -7081,7 +7081,7 @@ function ProductScrollComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("ngForOf", ctx_r1102.model == null ? null : ctx_r1102.model.products);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵclassMap(!ctx_r1102.isLastPage && (ctx_r1102.model == null ? null : ctx_r1102.model.pagination == null ? null : ctx_r1102.model.pagination.currentPage) > 0 ? "cx-double-btn-container" : "cx-single-btn-container");
+    ɵngcc0.ɵɵproperty("className", !ctx_r1102.isLastPage && (ctx_r1102.model == null ? null : ctx_r1102.model.pagination == null ? null : ctx_r1102.model.pagination.currentPage) > 0 ? "cx-double-btn-container" : "cx-single-btn-container");
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("ngIf", (ctx_r1102.isMaxProducts || ctx_r1102.isLastPage) && (ctx_r1102.model == null ? null : ctx_r1102.model.pagination == null ? null : ctx_r1102.model.pagination.currentPage) > 0);
     ɵngcc0.ɵɵadvance(1);
@@ -10950,7 +10950,7 @@ let OutletDirective = class OutletDirective {
     }
 };
 OutletDirective.ɵfac = function OutletDirective_Factory(t) { return new (t || OutletDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ViewContainerRef), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.TemplateRef), ɵngcc0.ɵɵdirectiveInject(OutletService), ɵngcc0.ɵɵdirectiveInject(DeferLoaderService)); };
-OutletDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: OutletDirective, selectors: [["", "cxOutlet", ""]], inputs: { cxOutlet: "cxOutlet", cxOutletContext: "cxOutletContext", cxOutletDefer: "cxOutletDefer" }, outputs: { loaded: "loaded" }, features: [ɵngcc0.ɵɵNgOnChangesFeature()] });
+OutletDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: OutletDirective, selectors: [["", "cxOutlet", ""]], inputs: { cxOutlet: "cxOutlet", cxOutletContext: "cxOutletContext", cxOutletDefer: "cxOutletDefer" }, outputs: { loaded: "loaded" }, features: [ɵngcc0.ɵɵNgOnChangesFeature] });
 OutletDirective.ctorParameters = () => [
     { type: ViewContainerRef },
     { type: TemplateRef },
@@ -13398,7 +13398,7 @@ let MediaComponent = class MediaComponent {
 MediaComponent.ɵfac = function MediaComponent_Factory(t) { return new (t || MediaComponent)(ɵngcc0.ɵɵdirectiveInject(MediaService)); };
 MediaComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: MediaComponent, selectors: [["cx-media"]], hostVars: 6, hostBindings: function MediaComponent_HostBindings(rf, ctx) { if (rf & 2) {
         ɵngcc0.ɵɵclassProp("is-initialized", ctx.isInitialized)("is-loading", ctx.isLoading)("is-missing", ctx.isMissing);
-    } }, inputs: { container: "container", format: "format", alt: "alt" }, outputs: { loaded: "loaded" }, features: [ɵngcc0.ɵɵNgOnChangesFeature()], decls: 1, vars: 1, consts: [[3, "load", "error", 4, "ngIf"], [3, "load", "error"]], template: function MediaComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, inputs: { container: "container", format: "format", alt: "alt" }, outputs: { loaded: "loaded" }, features: [ɵngcc0.ɵɵNgOnChangesFeature], decls: 1, vars: 1, consts: [[3, "load", "error", 4, "ngIf"], [3, "load", "error"]], template: function MediaComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, MediaComponent_img_0_Template, 1, 3, "img", 0);
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ctx.media == null ? null : ctx.media.src);
@@ -23772,9 +23772,9 @@ let ProductScrollComponent = class ProductScrollComponent {
     }
 };
 ProductScrollComponent.ɵfac = function ProductScrollComponent_Factory(t) { return new (t || ProductScrollComponent)(ɵngcc0.ɵɵdirectiveInject(ProductListComponentService), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ChangeDetectorRef)); };
-ProductScrollComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductScrollComponent, selectors: [["cx-product-scroll"]], inputs: { setConfig: ["scrollConfig", "setConfig"], setModel: ["model", "setModel"], setViewMode: ["inputViewMode", "setViewMode"] }, decls: 2, vars: 2, consts: [[4, "ngIf"], ["infiniteScroll", "", 3, "infiniteScrollDistance", "infiniteScrollThrottle", "infiniteScrollDisabled", "scrolled"], [1, "row"], ["class", "col-12 col-sm-6 col-md-4", 3, "product", 4, "ngFor", "ngForOf"], ["class", "btn btn-block btn-action", 3, "click", 4, "ngIf"], ["class", "btn btn-block btn-action align-btn", 3, "click", 4, "ngIf"], ["class", "cx-spinner", 4, "ngIf"], [1, "col-12", "col-sm-6", "col-md-4", 3, "product"], [1, "btn", "btn-block", "btn-action", 3, "click"], [1, "btn", "btn-block", "btn-action", "align-btn", 3, "click"], [1, "cx-spinner"], ["class", "cx-product-search-list", 3, "product", 4, "ngFor", "ngForOf"], [1, "cx-product-search-list", 3, "product"]], template: function ProductScrollComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵtemplate(0, ProductScrollComponent_ng_container_0_Template, 8, 9, "ng-container", 0);
-        ɵngcc0.ɵɵtemplate(1, ProductScrollComponent_ng_container_1_Template, 7, 9, "ng-container", 0);
+ProductScrollComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductScrollComponent, selectors: [["cx-product-scroll"]], inputs: { setConfig: ["scrollConfig", "setConfig"], setModel: ["model", "setModel"], setViewMode: ["inputViewMode", "setViewMode"] }, decls: 2, vars: 2, consts: [[4, "ngIf"], ["infiniteScroll", "", 3, "infiniteScrollDistance", "infiniteScrollThrottle", "infiniteScrollDisabled", "scrolled"], [1, "row"], ["class", "col-12 col-sm-6 col-md-4", 3, "product", 4, "ngFor", "ngForOf"], [3, "className"], ["class", "btn btn-block btn-action", 3, "click", 4, "ngIf"], ["class", "btn btn-block btn-action align-btn", 3, "click", 4, "ngIf"], ["class", "cx-spinner", 4, "ngIf"], [1, "col-12", "col-sm-6", "col-md-4", 3, "product"], [1, "btn", "btn-block", "btn-action", 3, "click"], [1, "btn", "btn-block", "btn-action", "align-btn", 3, "click"], [1, "cx-spinner"], ["class", "cx-product-search-list", 3, "product", 4, "ngFor", "ngForOf"], [1, "cx-product-search-list", 3, "product"]], template: function ProductScrollComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵtemplate(0, ProductScrollComponent_ng_container_0_Template, 8, 8, "ng-container", 0);
+        ɵngcc0.ɵɵtemplate(1, ProductScrollComponent_ng_container_1_Template, 7, 8, "ng-container", 0);
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ctx.viewMode === ctx.ViewModes.Grid);
         ɵngcc0.ɵɵadvance(1);
@@ -24798,7 +24798,7 @@ let ScheduleComponent = class ScheduleComponent {
     }
 };
 ScheduleComponent.ɵfac = function ScheduleComponent_Factory(t) { return new (t || ScheduleComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.StoreDataService)); };
-ScheduleComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ScheduleComponent, selectors: [["cx-schedule"]], inputs: { location: "location" }, features: [ɵngcc0.ɵɵNgOnChangesFeature()], ngContentSelectors: _c0, decls: 2, vars: 1, consts: [["class", "container cx-store-hours", 4, "ngIf"], [1, "container", "cx-store-hours"], ["class", "row", 4, "ngFor", "ngForOf"], [1, "row"], [1, "cx-days", "col-4"], ["class", "cx-hours col-8", 4, "ngIf"], ["class", "cx-hours col-8 closed", 4, "ngIf"], [1, "cx-hours", "col-8"], [1, "cx-hours", "col-8", "closed"]], template: function ScheduleComponent_Template(rf, ctx) { if (rf & 1) {
+ScheduleComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ScheduleComponent, selectors: [["cx-schedule"]], inputs: { location: "location" }, features: [ɵngcc0.ɵɵNgOnChangesFeature], ngContentSelectors: _c0, decls: 2, vars: 1, consts: [["class", "container cx-store-hours", 4, "ngIf"], [1, "container", "cx-store-hours"], ["class", "row", 4, "ngFor", "ngForOf"], [1, "row"], [1, "cx-days", "col-4"], ["class", "cx-hours col-8", 4, "ngIf"], ["class", "cx-hours col-8 closed", 4, "ngIf"], [1, "cx-hours", "col-8"], [1, "cx-hours", "col-8", "closed"]], template: function ScheduleComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵprojectionDef();
         ɵngcc0.ɵɵprojection(0);
         ɵngcc0.ɵɵtemplate(1, ScheduleComponent_div_1_Template, 2, 1, "div", 0);
@@ -24998,7 +24998,7 @@ StoreFinderMapComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinderM
     } if (rf & 2) {
         var _t;
         ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.mapElement = _t.first);
-    } }, inputs: { locations: "locations" }, outputs: { selectedStoreItem: "selectedStoreItem" }, features: [ɵngcc0.ɵɵNgOnChangesFeature()], decls: 2, vars: 0, consts: [[1, "cx-store-map"], ["mapElement", ""]], template: function StoreFinderMapComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, inputs: { locations: "locations" }, outputs: { selectedStoreItem: "selectedStoreItem" }, features: [ɵngcc0.ɵɵNgOnChangesFeature], decls: 2, vars: 0, consts: [[1, "cx-store-map"], ["mapElement", ""]], template: function StoreFinderMapComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelement(0, "div", 0, 1);
     } }, encapsulation: 2 });
 StoreFinderMapComponent.ctorParameters = () => [
@@ -26480,14 +26480,7 @@ StorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function Storefro
                 scrollPositionRestoration: 'enabled',
                 anchorScrolling: 'enabled'
             }),
-            StoreModule.forRoot({}, {
-                runtimeChecks: {
-                    strictStateImmutability: true,
-                    strictStateSerializability: true,
-                    strictActionImmutability: true,
-                    strictActionSerializability: true
-                }
-            }),
+            StoreModule.forRoot({}),
             EffectsModule.forRoot([]),
             // ASM module must be imported before the `AuthModule (which is imported in `StorefrontFoundationModule`)
             // since we might have conflicting interceptor logic. See #5461.
@@ -31871,7 +31864,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 providers: [...provideConfigFromMetaTags()]
             }]
     }], null, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(StorefrontModule, { imports: [ɵngcc5.RouterModule, ɵngcc10.StoreRootModule, ɵngcc11.ɵngrx_modules_effects_effects_b, AsmModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(StorefrontModule, { imports: [ɵngcc5.RouterModule, ɵngcc10.StoreRootModule, ɵngcc11.EffectsRootModule, AsmModule,
         StorefrontFoundationModule,
         MainModule, ɵngcc1.SiteContextModule, ɵngcc1.SmartEditModule, ɵngcc1.PersonalizationModule, ɵngcc1.OccModule, ProductDetailsPageModule,
         ProductListingPageModule, ɵngcc1.ExternalRoutesModule], exports: [MainModule,
@@ -31884,14 +31877,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                         scrollPositionRestoration: 'enabled',
                         anchorScrolling: 'enabled'
                     }),
-                    StoreModule.forRoot({}, {
-                        runtimeChecks: {
-                            strictStateImmutability: true,
-                            strictStateSerializability: true,
-                            strictActionImmutability: true,
-                            strictActionSerializability: true
-                        }
-                    }),
+                    StoreModule.forRoot({}),
                     EffectsModule.forRoot([]),
                     // ASM module must be imported before the `AuthModule (which is imported in `StorefrontFoundationModule`)
                     // since we might have conflicting interceptor logic. See #5461.

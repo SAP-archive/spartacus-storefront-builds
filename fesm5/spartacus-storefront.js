@@ -17800,14 +17800,7 @@ var StorefrontModule = /** @class */ (function () {
                     scrollPositionRestoration: 'enabled',
                     anchorScrolling: 'enabled',
                 }),
-                StoreModule.forRoot({}, {
-                    runtimeChecks: {
-                        strictStateImmutability: true,
-                        strictStateSerializability: true,
-                        strictActionImmutability: true,
-                        strictActionSerializability: true,
-                    },
-                }),
+                StoreModule.forRoot({}),
                 EffectsModule.forRoot([]),
                 // ASM module must be imported before the `AuthModule (which is imported in `StorefrontFoundationModule`)
                 // since we might have conflicting interceptor logic. See #5461.
