@@ -11210,12 +11210,12 @@ const defaultSkipLinkConfig = {
 };
 
 let SkipLinkDirective = class SkipLinkDirective {
-    constructor(elRef, skipLinkService) {
-        this.elRef = elRef;
+    constructor(elementRef, skipLinkService) {
+        this.elementRef = elementRef;
         this.skipLinkService = skipLinkService;
     }
     ngOnInit() {
-        this.skipLinkService.add(this.cxSkipLink, this.elRef.nativeElement);
+        this.skipLinkService.add(this.cxSkipLink, this.elementRef.nativeElement);
     }
     ngOnDestroy() {
         this.skipLinkService.remove(this.cxSkipLink);

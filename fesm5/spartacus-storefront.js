@@ -2325,12 +2325,12 @@ var defaultSkipLinkConfig = {
 };
 
 var SkipLinkDirective = /** @class */ (function () {
-    function SkipLinkDirective(elRef, skipLinkService) {
-        this.elRef = elRef;
+    function SkipLinkDirective(elementRef, skipLinkService) {
+        this.elementRef = elementRef;
         this.skipLinkService = skipLinkService;
     }
     SkipLinkDirective.prototype.ngOnInit = function () {
-        this.skipLinkService.add(this.cxSkipLink, this.elRef.nativeElement);
+        this.skipLinkService.add(this.cxSkipLink, this.elementRef.nativeElement);
     };
     SkipLinkDirective.prototype.ngOnDestroy = function () {
         this.skipLinkService.remove(this.cxSkipLink);

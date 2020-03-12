@@ -1,10 +1,10 @@
-import { OnDestroy, OnInit, ElementRef } from '@angular/core';
+import { ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { SkipLinkService } from '../service/skip-link.service';
 export declare class SkipLinkDirective implements OnInit, OnDestroy {
-    private elRef;
-    private skipLinkService;
+    protected elementRef: ElementRef<HTMLElement>;
+    protected skipLinkService: SkipLinkService;
     cxSkipLink: string;
-    constructor(elRef: ElementRef<HTMLElement>, skipLinkService: SkipLinkService);
+    constructor(elementRef: ElementRef<HTMLElement>, skipLinkService: SkipLinkService);
     ngOnInit(): void;
     ngOnDestroy(): void;
 }
